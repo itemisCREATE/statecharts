@@ -40,4 +40,5 @@ TEST_F(LocalReactionsTest, LocalReactionsTest) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 1l);
 	
+	
 }

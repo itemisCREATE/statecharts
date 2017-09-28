@@ -92,4 +92,5 @@ TEST_F(AssignmentAsExpressionTest, simpleAssignment) {
 	
 	statechart->exit();
 	
+	
 }

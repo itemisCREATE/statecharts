@@ -79,4 +79,5 @@ TEST_F(EventDrivenTriggeredByTimeEventTest, timeEventTriggersRunCycle) {
 	
 	statechart->exit();
 	
+	
 }

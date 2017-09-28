@@ -66,4 +66,5 @@ TEST_F(HistoryWithExitPointTest, historyEntryAfterExit) {
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithExitPoint::mr_A_r_X2));
 	
+	
 }

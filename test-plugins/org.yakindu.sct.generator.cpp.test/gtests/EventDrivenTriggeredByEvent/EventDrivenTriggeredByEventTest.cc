@@ -51,6 +51,7 @@ TEST_F(EventDrivenTriggeredByEventTest, internalEventTriggersRunCycle) {
 	
 	statechart->exit();
 	
+	
 }
 TEST_F(EventDrivenTriggeredByEventTest, proceedTimeDoesNotTriggerRunCycle) {
 	
@@ -63,5 +64,6 @@ TEST_F(EventDrivenTriggeredByEventTest, proceedTimeDoesNotTriggerRunCycle) {
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
 	
 	statechart->exit();
+	
 	
 }

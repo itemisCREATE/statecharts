@@ -954,4 +954,5 @@ TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_valueof));
 	
+	
 }

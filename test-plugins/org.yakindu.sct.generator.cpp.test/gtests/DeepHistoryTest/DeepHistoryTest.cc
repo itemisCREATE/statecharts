@@ -70,4 +70,5 @@ TEST_F(DeepHistoryTest, deepHistoryTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(DeepHistory::mainRegion_State2__region0_State4__region0_State7__region0_State9));
 	
+	
 }

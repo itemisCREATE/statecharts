@@ -72,4 +72,5 @@ TEST_F(SyncForkTest, syncForkTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncFork::main_region_B_r2_D1));
 	
+	
 }

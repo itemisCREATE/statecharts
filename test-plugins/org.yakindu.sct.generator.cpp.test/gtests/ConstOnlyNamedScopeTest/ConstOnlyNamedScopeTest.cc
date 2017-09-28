@@ -36,6 +36,7 @@ TEST_F(ConstOnlyNamedScopeTest, statechartEntry) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ConstOnlyNamedScope::ConstOnlyNamedScope_main_region_A));
 	
+	
 }
 TEST_F(ConstOnlyNamedScopeTest, stateTransition) {
 	
@@ -46,5 +47,6 @@ TEST_F(ConstOnlyNamedScopeTest, stateTransition) {
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(ConstOnlyNamedScope::ConstOnlyNamedScope_main_region_B));
+	
 	
 }

@@ -34,4 +34,5 @@ TEST_F(DeclarationsTest, declarationsTest) {
 	
 	statechart->enter();
 	
+	
 }

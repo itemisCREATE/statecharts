@@ -58,4 +58,5 @@ TEST_F(BitExpressionsTest, BitExpressions) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_bitwiseXor()== 2l);
 	
+	
 }

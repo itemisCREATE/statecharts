@@ -40,4 +40,5 @@ TEST_F(NullCheckTest, SimpleNullCheckTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(NullCheck::main_region_B));
 	
+	
 }

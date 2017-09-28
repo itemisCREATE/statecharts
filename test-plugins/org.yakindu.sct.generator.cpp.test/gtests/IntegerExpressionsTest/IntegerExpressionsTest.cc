@@ -78,4 +78,5 @@ TEST_F(IntegerExpressionsTest, integerExpressions) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_moduloAssign()== 0l);
 	
+	
 }

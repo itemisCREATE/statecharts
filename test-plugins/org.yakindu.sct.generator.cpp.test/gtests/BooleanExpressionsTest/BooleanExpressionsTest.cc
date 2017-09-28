@@ -56,4 +56,5 @@ TEST_F(BooleanExpressionsTest, booleanExpressions) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_notequal()== true);
 	
+	
 }

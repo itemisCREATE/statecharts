@@ -48,4 +48,5 @@ TEST_F(SimpleEventTest, simpleEventTest) {
 	
 	EXPECT_TRUE(!statechart->isStateActive(SimpleEvent::main_region_B));
 	
+	
 }

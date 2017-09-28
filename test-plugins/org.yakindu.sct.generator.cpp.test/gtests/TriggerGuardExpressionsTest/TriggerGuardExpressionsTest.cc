@@ -66,6 +66,7 @@ TEST_F(TriggerGuardExpressionsTest, trueGuard) {
 	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_B));
 	
+	
 }
 TEST_F(TriggerGuardExpressionsTest, falseGuard) {
 	
@@ -94,5 +95,6 @@ TEST_F(TriggerGuardExpressionsTest, falseGuard) {
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
+	
 	
 }

@@ -48,4 +48,5 @@ TEST_F(CastExpressionsTest, CastExpressionTest) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_realValue()== 757l);
 	
+	
 }

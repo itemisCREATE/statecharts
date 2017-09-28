@@ -66,4 +66,5 @@ TEST_F(InternalEventLifeCycleTest, InternalEventLifeCycleTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(InternalEventLifeCycle::r2_C));
 	
+	
 }

@@ -37,6 +37,7 @@ void assertNoLocalReaction(){
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_aaa_local());
 	
+	
 }
 
 TEST_F(ParentFirstExecutionHierarchyTest, childShouldTakeTransition) {
@@ -67,6 +68,7 @@ TEST_F(ParentFirstExecutionHierarchyTest, childShouldTakeTransition) {
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_aaa_local());
 	
+	
 }
 TEST_F(ParentFirstExecutionHierarchyTest, parentShouldTakeTransition) {
 	
@@ -94,6 +96,7 @@ TEST_F(ParentFirstExecutionHierarchyTest, parentShouldTakeTransition) {
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_aaa_local());
 	
+	
 }
 TEST_F(ParentFirstExecutionHierarchyTest, grandparentShouldTakeTransition) {
 	
@@ -115,6 +118,7 @@ TEST_F(ParentFirstExecutionHierarchyTest, grandparentShouldTakeTransition) {
 	
 	assertNoLocalReaction();
 	
+	
 }
 TEST_F(ParentFirstExecutionHierarchyTest, expectLocalReactrionsExecuteWithNoTransition) {
 	
@@ -131,5 +135,6 @@ TEST_F(ParentFirstExecutionHierarchyTest, expectLocalReactrionsExecuteWithNoTran
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local());
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local());
+	
 	
 }

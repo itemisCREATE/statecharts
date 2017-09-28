@@ -50,4 +50,5 @@ TEST_F(NamedInterfaceAccessTest, SafeOpenSuccess) {
 	
 	EXPECT_TRUE(statechart->getSCI_Safe()->isRaised_open());
 	
+	
 }

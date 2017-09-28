@@ -38,4 +38,5 @@ TEST_F(LogicalOrTests, operandEvaluationOrder) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 4l && statechart->getDefaultSCI()->get_b()) << "logical or expression was executed in wrong order..." ;
 	
+	
 }

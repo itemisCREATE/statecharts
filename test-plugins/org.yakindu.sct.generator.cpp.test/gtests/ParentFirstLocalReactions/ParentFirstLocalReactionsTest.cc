@@ -49,6 +49,7 @@ TEST_F(ParentFirstLocalReactionsTest, expectBottomUpLocalReactionOrder) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 4l);
 	
+	
 }
 TEST_F(ParentFirstLocalReactionsTest, expectParentLocalReactionOnChildLocalTransition) {
 	
@@ -74,6 +75,7 @@ TEST_F(ParentFirstLocalReactionsTest, expectParentLocalReactionOnChildLocalTrans
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 0l);
 	
+	
 }
 TEST_F(ParentFirstLocalReactionsTest, expectGrandparentLocalReactionOnParentLocalTransition) {
 	
@@ -96,6 +98,7 @@ TEST_F(ParentFirstLocalReactionsTest, expectGrandparentLocalReactionOnParentLoca
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 0l);
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 0l);
+	
 	
 }
 TEST_F(ParentFirstLocalReactionsTest, expectNoLocalReactionOnGrandparentTransition) {
@@ -121,5 +124,6 @@ TEST_F(ParentFirstLocalReactionsTest, expectNoLocalReactionOnGrandparentTransiti
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 0l);
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 0l);
+	
 	
 }

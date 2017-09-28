@@ -54,4 +54,5 @@ TEST_F(TypeAliasTest, TypeAliasTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(TypeAlias::main_region_End));
 	
+	
 }

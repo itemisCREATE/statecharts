@@ -64,4 +64,5 @@ TEST_F(ValuedEventsTest, valuedEventsTest) {
 	
 	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), "tool") == 0);
 	
+	
 }

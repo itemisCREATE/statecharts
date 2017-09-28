@@ -42,6 +42,7 @@ TEST_F(PriorityValuesTest, transitionPriority) {
 	
 	EXPECT_TRUE(statechart->isStateActive(PriorityValues::main_region_C));
 	
+	
 }
 TEST_F(PriorityValuesTest, regionPriority) {
 	
@@ -56,5 +57,6 @@ TEST_F(PriorityValuesTest, regionPriority) {
 	EXPECT_TRUE(statechart->isStateActive(PriorityValues::someRegion_B));
 	
 	EXPECT_TRUE(!statechart->isStateActive(PriorityValues::main_region_E));
+	
 	
 }

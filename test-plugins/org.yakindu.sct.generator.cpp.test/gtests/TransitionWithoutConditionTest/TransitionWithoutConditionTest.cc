@@ -40,4 +40,5 @@ TEST_F(TransitionWithoutConditionTest, TransitionWithoutConditionTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(TransitionWithoutCondition::main_region_B));
 	
+	
 }

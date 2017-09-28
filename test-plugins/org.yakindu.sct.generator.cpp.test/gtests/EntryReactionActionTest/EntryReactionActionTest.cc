@@ -49,6 +49,7 @@ void init(){
 	
 	statechart->getDefaultSCI()->set_enteredBother(false);
 	
+	
 }
 
 TEST_F(EntryReactionActionTest, entryTransitionActionOnStatechartEnter) {
@@ -62,6 +63,7 @@ TEST_F(EntryReactionActionTest, entryTransitionActionOnStatechartEnter) {
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_enteredBdefault());
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredBother());
+	
 	
 }
 TEST_F(EntryReactionActionTest, entryOnRTS) {
@@ -80,6 +82,7 @@ TEST_F(EntryReactionActionTest, entryOnRTS) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_enteredBother());
 	
+	
 }
 TEST_F(EntryReactionActionTest, noEntryTransitionActionOnHistory) {
 	
@@ -96,5 +99,6 @@ TEST_F(EntryReactionActionTest, noEntryTransitionActionOnHistory) {
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredBdefault());
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredBother());
+	
 	
 }

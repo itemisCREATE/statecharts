@@ -56,4 +56,5 @@ TEST_F(ExitOnSelfTransitionTest, ExitOnSelfTransitionTest) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 2l);
 	
+	
 }

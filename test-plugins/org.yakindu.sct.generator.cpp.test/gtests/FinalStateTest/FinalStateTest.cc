@@ -38,4 +38,5 @@ TEST_F(FinalStateTest, StatechartNameTest) {
 	
 	EXPECT_TRUE(statechart->isFinal());
 	
+	
 }

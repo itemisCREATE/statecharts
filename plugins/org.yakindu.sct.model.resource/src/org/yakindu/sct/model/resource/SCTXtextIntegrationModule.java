@@ -55,7 +55,6 @@ public class SCTXtextIntegrationModule implements Module {
 		binder.bind(MarkerTypeProvider.class).to(SCTMarkerTypeProvider.class);
 		binder.bind(IDiagnosticConverter.class).to(SCTDiagnosticConverterImpl.class);
 		binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class).to(SCTFileEditorOpener.class);
-		
 		binder.bind(IMarkerContributor.class).to(TaskMarkerContributor.class);
 		binder.bind(ITaskFinder.class).to(DomainSpecificTaskFinder.class);
 	}

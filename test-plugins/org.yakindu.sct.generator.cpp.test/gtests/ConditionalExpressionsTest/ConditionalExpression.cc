@@ -46,4 +46,5 @@ TEST_F(ConditionalExpression, ConditionalExpressionTest) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_condition()== 2l);
 	
+	
 }

@@ -48,4 +48,5 @@ TEST_F(SimpleHierachyTest, simpleHierachyTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SimpleHierachy::main_region_B_subregion1_B1));
 	
+	
 }

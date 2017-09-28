@@ -66,4 +66,5 @@ TEST_F(GuardTest, guardTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(Guard::main_region_A));
 	
+	
 }

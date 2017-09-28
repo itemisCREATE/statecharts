@@ -64,4 +64,5 @@ TEST_F(ConstantsTests, constantDefinition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(Constants::main_region_A));
 	
+	
 }
