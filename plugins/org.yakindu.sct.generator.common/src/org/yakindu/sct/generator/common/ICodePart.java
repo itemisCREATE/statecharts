@@ -15,5 +15,27 @@ package org.yakindu.sct.generator.common;
  *
  */
 public interface ICodePart extends CharSequence {
-
+	/* (non-Javadoc)
+	 * @see java.lang.CharSequence#charAt(int)
+	 */
+	@Override
+	public default char charAt(int index) {
+		return toString().charAt(index);
+	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.CharSequence#length()
+	 */
+	@Override
+	default int length() {
+		return toString().length();
+	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.CharSequence#subSequence(int, int)
+	 */
+	@Override
+	default CharSequence subSequence(int start, int end) {
+		return toString().subSequence(start, end);
+	}
 }

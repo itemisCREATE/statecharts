@@ -8,25 +8,26 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.common
+package org.yakindu.sct.generator.c.language;
 
-import org.yakindu.sct.generator.common.ICodePart
+import org.yakindu.sct.generator.common.IModifier;
 
 /**
  * @author rbeckmann
  *
  */
-abstract class CodePart implements ICodePart {
+public enum Modifier implements IModifier {
+	STATIC ("static"),
+	EXTERN ("extern")
+	;
 	
-	override charAt(int index) {
-		return toString.charAt(index)
+	protected final String s;
+	Modifier(String s) {
+		this.s = s;
 	}
 	
-	override length() {
-		return toString.length
+	public String toString() {
+		return s;
 	}
-	
-	override subSequence(int beginIndex, int endIndex) {
-		return toString.subSequence(beginIndex, endIndex);
-	}
+
 }

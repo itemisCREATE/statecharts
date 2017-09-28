@@ -10,10 +10,26 @@
  */
 package org.yakindu.sct.generator.c.language
 
+import org.yakindu.sct.generator.common.ICodeBlock
+
 /**
  * @author rbeckmann
  *
  */
-class CodeBlock implements ICodeBlock {
+abstract class CodeBlock extends org.yakindu.sct.generator.common.CodeBlock implements ICodeBlock {
+	protected static final CharSequence BLOCKOPEN = '''
+	{
+	'''
 	
+	protected static final CharSequence BLOCKCLOSE = '''
+	}
+	'''
+	
+	override getBlockClose() {
+		return BLOCKCLOSE
+	}
+	
+	override getBlockOpen() {
+		return BLOCKOPEN
+	}
 }

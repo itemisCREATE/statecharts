@@ -18,6 +18,6 @@ public interface ICodeBlock extends ICodePart {
 	public CharSequence getBlockOpen();
 	public CharSequence getBlockClose();
 	
-	public ICodePart getBlockContent();
-	public void setBlockContent(ICodePart content);
+	public CharSequence getBlockContent();
+	public void setBlockContent(CharSequence content);
 }
