@@ -96,8 +96,12 @@ public class AbstractExecutionFlowSimulationEngine extends AbstractSimulationEng
 	}
 
 	public void suspend() {
-		suspended = true;
-		timeTaskScheduler.suspend();
+		try {
+			suspended = true;
+			timeTaskScheduler.suspend();
+		} catch (Exception ex) {
+			handleException(ex);
+		}
 	}
 
 	public void resume() {
@@ -111,8 +115,12 @@ public class AbstractExecutionFlowSimulationEngine extends AbstractSimulationEng
 	}
 
 	public void terminate() {
-		terminated = true;
-		timeTaskScheduler.terminate();
+		try {
+			terminated = true;
+			timeTaskScheduler.terminate();
+		} catch (Exception ex) {
+			handleException(ex);
+		}
 	}
 
 	public void stepForward() {

@@ -54,7 +54,13 @@ public class CycleBasedSimulationEngine extends AbstractExecutionFlowSimulationE
 					SRuntimeFactory.eINSTANCE.createExecutionContext());
 		}
 
-		TimeTask cycleTask = new TimeTask("$cycle", () -> interpreter.runCycle(), Priority.LOW);
+		TimeTask cycleTask = new TimeTask("$cycle", () -> {
+			try {
+				interpreter.runCycle();
+			} catch (Exception e) {
+				handleException(e);
+			}
+		}, Priority.LOW);
 		timeTaskScheduler.scheduleTimeTask(cycleTask, true, cyclePeriod);
 	}
 }
