@@ -16,7 +16,7 @@
         <toc file="help/user-guide/generating_code-toc.xml" primary="false"/>
         <toc file="help/user-guide/generating_code_headless-toc.xml" primary="false"/>
         <toc file="help/user-guide/sctunit-toc.xml" primary="false"/>
-        <toc file="help/installation/installation-toc.xml" primary="false"/>
+        <toc file="help/user-guide/installation-toc.xml" primary="false"/>
     </extension>
 
     <extension point="org.eclipse.help.contexts">

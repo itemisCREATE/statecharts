@@ -1,29 +1,29 @@
 
-h1(#installation-guide). Installation Guide
+h1(#inst_installing_yakindu_statechart_tools). Installing YAKINDU Statechart Tools
 
 In order to start working with YAKINDU Statechart Tools, you have to install the software on your computer. We are assuming you have downloaded the software package and stored it somewhere on your machine.
 
 The installation process boils down to
-# checking the "system requirements":#system-requirements,
+# checking the "system requirements":#inst_system-requirements,
 # unpacking the downloaded ZIP file containing YAKINDU Statechart Tools, and
 # executing the _SCT_ application.
 
-This is explained in more detail in section "&quot;Platform overview&quot;":#platform-overview and the following sections.
+This is explained in more detail in section "&quot;Platform overview&quot;":#inst_platform-overview and the following sections.
 
-Java developers might want to read section "JRE not found":#jre-not-found, in case they encounter a certain problem.
+Java developers might want to read section "JRE not found":#inst_jre-not-found, in case they encounter a certain problem.
 
 
 
-h2(#system-requirements). System requirements
+h2(#inst_system-requirements). System requirements
 
-h3(#java). Java
+h3(#inst_java). Java
 
 YAKINDU Statechart Tools is based on the Java programming language and requires *Java 8* or higher. A Java Runtime Environment (JRE) must be installed on your computer.
 
 Installation of Java is beyond the scope of this document. You can find more information on Java and download it for free from Oracle Corporation at "https://www.java.com/":https://www.java.com/. Before downloading Java, make sure you are picking the variant with the correct bit size, i.&nbsp;e. either 32 or 64 bit, whichever is appropriate for your computer.
 
 
-h3(#eclipse). Eclipse
+h3(#inst_eclipse). Eclipse
 
 Internally, YAKINDU Statechart Tools are based on *"Eclipse":http://www.eclipse.org/*, an integrated development environment (IDE). YAKINDU Statechart Tools are running inside the Eclipse environment. When you are installing YAKINDU Statechart Tools, a full-fledged Eclipse instance will be put on your computer. Currently (winter 2016) it is the *Neon* release.
 
@@ -35,26 +35,26 @@ If you are an experienced Eclipse user, you can install YAKINDU Statechart Tools
 
 
 
-h2(#platform-overview). Platform overview
+h2(#inst_platform-overview). Platform overview
 
 You can install YAKINDU Statechart Tools as a stand-alone software package under the following operating systems:
 
-* "Installing YAKINDU Statechart Tools on Windows":#installing-on-windows
-* "Installing YAKINDU Statechart Tools on Mac  OS X":#installing-on-macosx
-* "Installing YAKINDU Statechart Tools on Linux":#installing-on-linux
+* "Installing YAKINDU Statechart Tools on Windows":#inst_installing-on-windows
+* "Installing YAKINDU Statechart Tools on Mac  OS X":#inst_installing-on-macosx
+* "Installing YAKINDU Statechart Tools on Linux":#inst_installing-on-linux
 
 Alternatively you can install YAKINDU Statechart Tools into an existing Eclipse instance.
 
-* "Installing YAKINDU Statechart Tools to an existing Eclipse instance":#installing-to-an-existing-eclipse-instance
+* "Installing YAKINDU Statechart Tools to an existing Eclipse instance":#inst_installing-to-an-existing-eclipse-instance
 
 
 
-h2(#installing-on-windows). Installing on Windows
+h2(#inst_installing-on-windows). Installing on Windows
 
 This chapter describes how to install YAKINDU Statechart Tools on a Windows 7 machine.
 
 
-h3(#unpacking-the-downloaded-file). Unpacking the downloaded file
+h3(#inst_unpacking-the-downloaded-file). Unpacking the downloaded file
 
 Unpack the software distribution file. Use the file explorer to open the directory you downloaded the software distribution file to, right-click on the latter, and select _Extract All..._ in the context menu.
 
@@ -87,7 +87,7 @@ p=. Contents of the extracted _yakindu-sct_ folder
 There you are: You have installed YAKINDU Statechart Tools. Now you should start it.
 
 
-h3(#starting-yakindu-statechart-tools). Starting YAKINDU Statechart Tools
+h3(#inst_starting-yakindu-statechart-tools). Starting YAKINDU Statechart Tools
 
 Start YAKINDU Statechart Tools by running the _SCT.exe_ executable.
 
@@ -135,12 +135,12 @@ You can "proceed":../tutorials/tutorials.html now to create your first YAKINDU S
 
 
 
-h2(#installing-on-macosx). Installing on Mac OS X
+h2(#inst_installing-on-macosx). Installing on Mac OS X
 
 This chapter describes how to install YAKINDU Statechart Tools on a Mac computer under Mac OS X.
 
 
-h3(#unpacking-the-downloaded-file-1). Unpacking the downloaded file
+h3(#inst_unpacking-the-downloaded-file-1). Unpacking the downloaded file
 
 When downloading the ZIP file containing the software distribution in a browser to your local disk, the _Archive Utility_ automatically unpacks it by default. Upon success, the ZIP file is removed. Alternatively you can unpack the ZIP file manually by double-clicking it.
 
@@ -155,7 +155,7 @@ p=. The YAKINDU Statecharts Tools application in the _Applications_ directory
 There you are: You have installed YAKINDU Statechart Tools. Now you should start it.
 
 
-h3(#starting-yakindu-statechart-tools-1). Starting YAKINDU Statechart Tools
+h3(#inst_starting-yakindu-statechart-tools-1). Starting YAKINDU Statechart Tools
 
 Start YAKINDU Statechart Tools by running the _YAKINDU SCT_ application.
 
@@ -203,7 +203,7 @@ You can "proceed":../tutorials/tutorials.html now to create your first YAKINDU S
 
 
 
-h2(#installing-on-linux). Installing on Linux
+h2(#inst_installing-on-linux). Installing on Linux
 
 This chapter describes how to install YAKINDU Statechart Tools on a Linux machine using a command-line tool.
 
@@ -260,7 +260,7 @@ bc.
 sudo apt-get install default-jre
 
 
-h3(#unpacking-the-downloaded-file-2). Unpacking the downloaded file
+h3(#inst_unpacking-the-downloaded-file-2). Unpacking the downloaded file
 
 Choose a directory for YAKINDU Statechart Tools. The commands below assume you want to install the software in the _/my/software_ directory. Please modify the commands appropriately to install somewhere else!
 
@@ -289,7 +289,7 @@ p=. Contents of the extracted _yakindu-sct_ folder
 There you are: You have installed YAKINDU Statechart Tools. Now you should start it.
 
 
-h3(#starting-yakindu-statechart-tools-2). Starting YAKINDU Statechart Tools
+h3(#inst_starting-yakindu-statechart-tools-2). Starting YAKINDU Statechart Tools
 
 Start YAKINDU Statechart Tools by running the _SCT_ executable.
 
@@ -341,7 +341,7 @@ You can "proceed":../tutorials/tutorials.html now to create your first YAKINDU S
 
 
 
-h2(#installing-to-an-existing-eclipse-instance). Installing to an existing Eclipse instance
+h2(#inst_installing-to-an-existing-eclipse-instance). Installing to an existing Eclipse instance
 
 This chapter describes the steps that are needed to install YAKINDU Statechart Tools to an existing Eclipse instance. Let's assume you already have Eclipse up and running and now you want to install YAKINDU Statechart Tools as an additional software item (plugin).
 
@@ -425,7 +425,7 @@ p=. Eclipse presenting the _Welcome_ window
 
 
 
-h2(#updating-yakindu-statechart-tools). Updating YAKINDU Statechart Tools
+h2(#inst_updating-yakindu-statechart-tools). Updating YAKINDU Statechart Tools
 
 To check whether a new YAKINDU Statechart Tools release is available and to install it, please select the _Help → Check for Updates_ menu item.
 
@@ -447,7 +447,7 @@ p=. Configuring automatic update
 
 
 
-h2(#jre-not-found). JRE not found
+h2(#inst_jre-not-found). JRE not found
 
 If you want to develop Java source code, you need a Java Runtime Environment (JRE) or Java Development Kit (JDK) in your workspace.
 
