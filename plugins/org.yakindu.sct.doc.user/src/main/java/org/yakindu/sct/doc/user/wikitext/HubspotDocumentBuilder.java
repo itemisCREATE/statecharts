@@ -8,6 +8,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 
 import org.eclipse.mylyn.wikitext.parser.Attributes;
 import org.eclipse.mylyn.wikitext.parser.builder.HtmlDocumentBuilder;
@@ -123,17 +124,19 @@ public class HubspotDocumentBuilder extends HtmlDocumentBuilder {
 	 * Constructor. Reads all the required static files and template files.
 	 * </p>
 	 * 
+	 * @param properties
+	 * 
 	 * @param pass1Headings
 	 */
 	public HubspotDocumentBuilder(final Reader p1Reader, final Reader contentsTemplateReader, final Reader p2Reader,
-			final Reader tocTemplateReader, final Reader p3Reader, final List<Heading> pass1Headings,
-			final Writer writer) {
+			final Reader tocTemplateReader, final Reader p3Reader, final Map<String, String> properties,
+			final List<Heading> pass1Headings, final Writer writer) {
 		super(writer, true);
 		this.pass1Headings = pass1Headings;
 		try {
-			this.p1 = readContents(p1Reader, false);
-			this.p2 = readContents(p2Reader, false);
-			this.p3 = readContents(p3Reader, false);
+			this.p1 = resolveProperties(readContents(p1Reader, false), properties);
+			this.p2 = resolveProperties(readContents(p2Reader, false), properties);
+			this.p3 = resolveProperties(readContents(p3Reader, false), properties);
 		} catch (IOException e) {
 			throw new RuntimeException("Reading one the p files failed.", e);
 		}
@@ -151,6 +154,29 @@ public class HubspotDocumentBuilder extends HtmlDocumentBuilder {
 			w = (PrintWriter) writer;
 		else
 			w = new PrintWriter(writer);
+	}
+
+	/**
+	 * <p>
+	 * Replaces all occurrences of the <var>properties</var> map's "key" entries
+	 * in a string by the corresponding "value" entries. Replacement starts at
+	 * the beginning of the string and proceeds to the end. However, the
+	 * processing order of the properties is undefined.
+	 * </p>
+	 * 
+	 * @param s
+	 *            the string to do the replacements in
+	 * @param properties
+	 *            the properties map
+	 * @return the resulting string with all replacements done
+	 */
+	private String resolveProperties(final String s, final Map<String, String> properties) {
+		String result = s;
+		for (final String key : properties.keySet()) {
+			System.out.println("Replacing \"" + key + "\" by \"" + properties.get(key) + "\"");
+			result = result.replace(key, properties.get(key));
+		}
+		return result;
 	}
 
 	/**
