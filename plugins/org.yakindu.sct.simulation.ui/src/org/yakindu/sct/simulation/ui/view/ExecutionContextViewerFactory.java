@@ -42,6 +42,7 @@ public class ExecutionContextViewerFactory {
 
 	public static TreeViewer createViewer(Composite parent, boolean readOnly, ITypeSystemProvider provider,
 			IMemento memento) {
+
 		final TreeViewer viewer = new TreeViewer(parent,
 				SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
 		viewer.getTree().setHeaderVisible(true);
@@ -49,6 +50,7 @@ public class ExecutionContextViewerFactory {
 		final ExecutionContextContentProvider contentProvider = new ExecutionContextContentProvider();
 		viewer.setContentProvider(contentProvider);
 		viewer.setFilters(new ViewerFilter[]{new TimeEventViewerFilter()});
+
 		TreeViewerColumn nameColumn = new TreeViewerColumn(viewer, SWT.FILL);
 		nameColumn.getColumn().setText("Name");
 		nameColumn.getColumn().setResizable(true);

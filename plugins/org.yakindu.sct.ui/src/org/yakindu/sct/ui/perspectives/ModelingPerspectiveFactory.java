@@ -35,15 +35,15 @@ public class ModelingPerspectiveFactory implements IPerspectiveFactory {
 		// Included to get rid of a warning issued by the workbench
 		left.addPlaceholder("org.eclipse.jdt.ui.PackageExplorer");
 
-		IFolderLayout right = layout.createFolder("right", IPageLayout.RIGHT,
-				0.84f, editorArea);
-		right.addView(IPageLayout.ID_OUTLINE);
+		IFolderLayout bottomLeft = layout.createFolder("bottomLeft", IPageLayout.BOTTOM,
+				0.68f, "left");
+		bottomLeft.addView(IPageLayout.ID_OUTLINE);
 
-		IFolderLayout bottom = layout.createFolder("bottom",
-				IPageLayout.BOTTOM, 0.65f, editorArea);
-		bottom.addView(IPageLayout.ID_PROP_SHEET);
-		bottom.addView(IPageLayout.ID_PROBLEM_VIEW);
-		bottom.addView(IPageLayout.ID_TASK_LIST);
+		IFolderLayout bottomRight = layout.createFolder("bottom",
+				IPageLayout.BOTTOM, 0.68f, editorArea);
+		bottomRight.addView(IPageLayout.ID_PROP_SHEET);
+		bottomRight.addView(IPageLayout.ID_PROBLEM_VIEW);
+		bottomRight.addView(IPageLayout.ID_TASK_LIST);
 	}
 
 	private void defineActions(IPageLayout layout) {

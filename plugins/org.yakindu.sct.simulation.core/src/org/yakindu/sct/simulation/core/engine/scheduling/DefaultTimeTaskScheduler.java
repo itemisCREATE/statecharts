@@ -6,7 +6,7 @@
  * 	Andreas Muelder - itemis AG
  * 
  */
-package org.yakindu.sct.simulation.core.sexec.scheduling;
+package org.yakindu.sct.simulation.core.engine.scheduling;
 
 import java.util.Optional;
 import java.util.PriorityQueue;
@@ -203,5 +203,10 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 	@Override
 	public void step() {
 		work();
+	}
+	
+	@Override
+	public long getCurrentTime() {
+		return this.currentTime;
 	}
 }

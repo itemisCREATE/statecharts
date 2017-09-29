@@ -26,8 +26,10 @@ import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchListener;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.internal.ui.DebugUIPlugin;
+import org.eclipse.debug.internal.ui.IInternalDebugUIConstants;
 import org.eclipse.debug.internal.ui.launchConfigurations.PerspectiveManager;
 import org.eclipse.debug.internal.ui.viewers.AsynchronousSchedulingRuleFactory;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.progress.UIJob;
@@ -48,8 +50,17 @@ import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 public class SCTPerspectiveManager extends PerspectiveManager implements ILaunchListener, IDebugEventSetListener {
 
 	private static final String DEBUG_VIEW_ID = "org.eclipse.debug.ui.DebugView";
+	private static final String SIMULATION_VIEW_ID = "org.yakindu.sct.simulation.ui.simulationview"; //$NON-NLS-1$
 	private static final String LAUNCH_TYPE = "org.yakindu.sct.simulation.core.launch.statechart";
 
+	/**
+	 * 
+	 */
+	public SCTPerspectiveManager() {
+		DebugUIPlugin.getDefault().getPreferenceStore().setValue(IInternalDebugUIConstants.PREF_ACTIVATE_DEBUG_VIEW,
+				false);
+
+	}
 	public void launchAdded(ILaunch launch) {
 		try {
 			ILaunchConfigurationType type = launch.getLaunchConfiguration().getType();
@@ -62,7 +73,7 @@ public class SCTPerspectiveManager extends PerspectiveManager implements ILaunch
 		}
 	}
 
-	public void handleDebugEvents(DebugEvent[] events) {
+	public final void handleDebugEvents(DebugEvent[] events) {
 		for (DebugEvent debugEvent : events) {
 			if ((debugEvent.getSource() instanceof SCTDebugTarget))
 				switch (debugEvent.getKind()) {
@@ -96,10 +107,13 @@ public class SCTPerspectiveManager extends PerspectiveManager implements ILaunch
 				if (window != null && !(isCurrentPerspective(window, perspectiveID))) {
 					switchToPerspective(window, perspectiveID);
 				}
-				// Force the debug view to open
+				// Force the simulation view to open
 				if (window != null) {
 					try {
-						window.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(DEBUG_VIEW_ID);
+						// FIXME this is hacky
+						window.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(DEBUG_VIEW_ID, null,
+								IWorkbenchPage.VIEW_CREATE);
+						window.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(SIMULATION_VIEW_ID);
 					} catch (PartInitException e) {
 						e.printStackTrace();
 					}
