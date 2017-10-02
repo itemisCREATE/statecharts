@@ -14,14 +14,17 @@ import com.google.inject.Inject
 import java.util.List
 import java.util.Map
 import org.yakindu.sct.generator.c.language.CForLoopFactory
+import org.yakindu.sct.generator.c.language.CustomType
 import org.yakindu.sct.generator.c.language.Function
 import org.yakindu.sct.generator.c.language.Modifier
 import org.yakindu.sct.generator.c.language.Preprocessor.Header
 import org.yakindu.sct.generator.c.language.Preprocessor.LocalHeader
 import org.yakindu.sct.generator.c.language.Preprocessor.SystemHeader
 import org.yakindu.sct.generator.c.language.Type
+import org.yakindu.sct.generator.c.language.TypeQualifier
 import org.yakindu.sct.generator.common.Comment
 import org.yakindu.sct.generator.common.IFunction
+import org.yakindu.sct.generator.common.Parameter
 import org.yakindu.sct.generator.common.factory.FunctionFactory
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Check
@@ -51,7 +54,12 @@ class StatemachineSource implements IContentTemplate {
 	
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) { 
 		initializeNamingService
-		setDefaultParameter(scHandleDecl)
+		setDefaultParameter({
+			val p = new Parameter()
+			p.type = new CustomType(flow.type + "*")
+			p.name = scHandle
+			p
+		})
 		buildInternalFunctions(it)
 		val List<Header> includes = newArrayList
 		includes.add(new SystemHeader("stdlib.h"))
@@ -213,18 +221,24 @@ class StatemachineSource implements IContentTemplate {
 			''')
 	}
 	
-	def raiseTimeEventFunction(ExecutionFlow it) '''
-		«IF timed»
-			void «raiseTimeEventFctID»(const «type»* handle, sc_eventid evid)
-			{
-				if ( ((sc_intptr_t)evid) >= ((sc_intptr_t)&(«scHandle»->timeEvents))
-					&&  ((sc_intptr_t)evid) < ((sc_intptr_t)&(«scHandle»->timeEvents)) + sizeof(«timeEventScope.type»))
-					{
-					*(sc_boolean*)evid = bool_true;
-				}		
-			}
-		«ENDIF»
-	'''
+	def raiseTimeEventFunction(ExecutionFlow it) {
+		if(timed) {
+			val func = function(raiseTimeEventFctID,
+			'''
+			if ( ((sc_intptr_t)evid) >= ((sc_intptr_t)&(«scHandle»->timeEvents))
+				&&  ((sc_intptr_t)evid) < ((sc_intptr_t)&(«scHandle»->timeEvents)) + sizeof(«timeEventScope.type»))
+				{
+				*(sc_boolean*)evid = bool_true;
+			}	
+			''',
+			#["sc_eventid evid"]
+			)
+			(func.parameters.get(0) as Parameter).typeQualifier = TypeQualifier.CONST
+			func
+		} else {
+			""
+		}
+	}
 	
 	def isStateActiveFunction(ExecutionFlow it){
 		val func = function(stateActiveFctID, 
@@ -246,8 +260,8 @@ class StatemachineSource implements IContentTemplate {
 			return result;
 			'''
 		)
-		func.parameters.clear();
-		func.parameters += #['''const «scHandleDecl»''', '''«statesEnumType» state''']
+		func.parameters += '''«statesEnumType» state'''
+		(func.parameters.get(0) as Parameter).typeQualifier = TypeQualifier.CONST
 		func.type = Type.BOOL
 		func
 	}
@@ -265,7 +279,7 @@ class StatemachineSource implements IContentTemplate {
 			
 			return result;
 			''')
-		func.parameters.set(0, "const " + func.parameters.get(0))
+		(func.parameters.get(0) as Parameter).typeQualifier = TypeQualifier.CONST
 		func.type = Type.BOOL
 		func
 	}
@@ -311,8 +325,8 @@ class StatemachineSource implements IContentTemplate {
 	
 	def interfaceOutgoingEventGetter(ExecutionFlow it, EventDefinition event) {
 		val f = function(event.asRaised, '''return «event.access»;''')
+		(f.parameters.get(0) as Parameter).typeQualifier = TypeQualifier.CONST
 		f.type = Type.BOOL
-		f.parameters.set(0, "const " + f.parameters.get(0))
 		f
 	}
 	
@@ -378,7 +392,7 @@ class StatemachineSource implements IContentTemplate {
 		val func = function(shortName)
 		switch (it) {
 			Check: {
-				func.parameters.set(0, "const " + func.parameters.get(0))
+				(func.parameters.get(0) as Parameter).typeQualifier = TypeQualifier.CONST
 				func.content = '''return «code»;'''
 				func.type = Type.BOOL
 			}

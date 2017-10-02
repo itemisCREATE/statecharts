@@ -8,30 +8,25 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.common
+package org.yakindu.sct.generator.c.language
 
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.yakindu.sct.generator.common.CodePart
+import org.yakindu.sct.generator.common.IType
+import org.yakindu.sct.generator.common.INameOwner
 
 /**
  * @author rbeckmann
  *
  */
-class Parameter extends CodePart implements IParameter {
-	@Accessors protected IType type;
-	@Accessors protected ITypeQualifier typeQualifier;
+class CustomType extends CodePart implements IType, INameOwner {
 	@Accessors protected CharSequence name;
 	
-	new(IParameter other) {
-		this.type = other.type
-		this.typeQualifier = other.typeQualifier
-		this.name = other.name
-	}
-	
-	new() {
-		
+	new(CharSequence name) {
+		this.name = name
 	}
 	
 	override toString() {
-		new CharSequenceList(#[typeQualifier, type, name]).toString
+		name.toString
 	}
 }

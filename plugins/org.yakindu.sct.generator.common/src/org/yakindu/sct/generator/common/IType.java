@@ -15,5 +15,4 @@ package org.yakindu.sct.generator.common;
  *
  */
 public interface IType extends ICodePart {
-
 }

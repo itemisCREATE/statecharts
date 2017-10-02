@@ -14,6 +14,8 @@ import java.util.List;
 
 import org.yakindu.sct.generator.common.IFunction;
 import org.yakindu.sct.generator.common.IModifier;
+import org.yakindu.sct.generator.common.IParameter;
+import org.yakindu.sct.generator.common.Parameter;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -24,12 +26,12 @@ import com.google.inject.Injector;
  */
 public class FunctionFactory {
 	@Inject protected Injector injector;
-	protected CharSequence defaultParameter;
+	protected IParameter defaultParameter;
 	
 	public IFunction function() {
 		IFunction func = injector.getInstance(IFunction.class);
 		if(defaultParameter != null) {
-			func.getParameters().add(defaultParameter);
+			func.getParameters().add(new Parameter(defaultParameter));
 		}
 		return func;
 	}
@@ -72,7 +74,7 @@ public class FunctionFactory {
 		return func;
 	}
 	
-	public void setDefaultParameter(CharSequence parameter) {
+	public void setDefaultParameter(IParameter parameter) {
 		this.defaultParameter = parameter;
 	}
 }

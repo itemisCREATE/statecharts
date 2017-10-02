@@ -14,5 +14,6 @@ package org.yakindu.sct.generator.common;
  * @author rbeckmann
  *
  */
-public interface IParameter extends ITypeOwner, ITypeQualifierOwner, INameOwner {
+public interface ITypeQualifier extends ICodePart {
+	
 }
