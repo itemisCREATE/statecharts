@@ -12,9 +12,17 @@ package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
 import java.util.List
-import org.eclipse.xtext.util.Strings
+import java.util.Map
+import org.yakindu.sct.generator.c.language.CForLoopFactory
 import org.yakindu.sct.generator.c.language.Function
+import org.yakindu.sct.generator.c.language.Modifier
+import org.yakindu.sct.generator.c.language.Preprocessor.Header
+import org.yakindu.sct.generator.c.language.Preprocessor.LocalHeader
+import org.yakindu.sct.generator.c.language.Preprocessor.SystemHeader
 import org.yakindu.sct.generator.c.language.Type
+import org.yakindu.sct.generator.common.Comment
+import org.yakindu.sct.generator.common.IFunction
+import org.yakindu.sct.generator.common.factory.FunctionFactory
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -36,19 +44,28 @@ class StatemachineSource implements IContentTemplate {
 	@Inject protected extension FlowCode
 	@Inject protected extension ConstantInitializationResolver
 	@Inject protected extension StateVectorExtensions
+	@Inject protected extension FunctionFactory
+	@Inject protected extension CForLoopFactory
+	
+	protected Map<String, List<IFunction>> internalFunctions
 	
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) { 
 		initializeNamingService
+		setDefaultParameter(scHandleDecl)
+		buildInternalFunctions(it)
+		val List<Header> includes = newArrayList
+		includes.add(new SystemHeader("stdlib.h"))
+		includes.add(new SystemHeader("string.h"))
+		includes.add(new LocalHeader((typesModule.h).relativeTo(module.c)))
+		includes.add(new LocalHeader((module.h).relativeTo(module.c)))
+		if(timed || !operations.empty) {
+			includes.add(new LocalHeader((module.client.h).relativeTo(module.c)))
+		}
 	'''
 		«entry.licenseText»
-		
-		#include <stdlib.h>
-		#include <string.h>
-		#include "«(typesModule.h).relativeTo(module.c)»"
-		#include "«(module.h).relativeTo(module.c)»"
-		«IF timed || !it.operations.empty»
-			#include "«(module.client.h).relativeTo(module.c)»"
-		«ENDIF»
+		«FOR include : includes»
+		«include»
+		«ENDFOR»
 		/*! \file Implementation of the state machine '«name»'
 		*/
 		
@@ -60,22 +77,29 @@ class StatemachineSource implements IContentTemplate {
 	'''
 	}
 	
+	def buildInternalFunctions(ExecutionFlow it) {
+		internalFunctions = newLinkedHashMap()
+		internalFunctions.put("Check functions", checkFunctions.map[internalFunction])
+		internalFunctions.put("Effect functions", effectFunctions.map[internalFunction])
+		internalFunctions.put("Entry action functions", entryActionFunctions.map[internalFunction])
+		internalFunctions.put("Exit action functions", exitActionFunctions.map[internalFunction])
+		internalFunctions.put("Enter sequence functions", enterSequenceFunctions.map[internalFunction])
+		internalFunctions.put("Exit sequence functions", exitSequenceFunctions.map[internalFunction])
+		internalFunctions.put("React functions", reactFunctions.map[internalFunction])
+		internalFunctions.put("Clear in events", #[clearInEventsFunction])
+		internalFunctions.put("Clear out events", #[clearOutEventsFunction])
+	}
+
 	def functions(ExecutionFlow it) '''
 		«initFunction»
 		
 		«enterFunction»
 
-		«enterFunction2»
-		
 		«exitFunction»
 		
 		«activeFunction»
 		
 		«finalFunction»
-		
-		«clearInEventsFunction»
-		
-		«clearOutEventsFunction»
 		
 		«runCycleFunction»
 		
@@ -88,65 +112,44 @@ class StatemachineSource implements IContentTemplate {
 		«functionImplementations»
 	'''
 	
-	def initFunction(ExecutionFlow it) '''
-		void «functionPrefix»init(«scHandleDecl»)
-		{
-			«initFunctionBody(it)»
-		}
-	'''
+	def initFunction(ExecutionFlow it) {
+		function(initFunctionID, initFunctionBody);	
+	}
 	
 	protected def CharSequence initFunctionBody(ExecutionFlow it) {
 		'''
-		sc_integer i;
-	
-		for (i = 0; i < «type.toUpperCase»_MAX_ORTHOGONAL_STATES; ++i)
-		{
-			«scHandle»->stateConfVector[i] = «null_state»;
-		}
+		«Type.INT» i;
 		
+		«forloop("i = 0", '''i < «maxOrthogonalStates»''', "++i",
+			'''«scHandle»->stateConfVector[i] = «null_state»;'''
+		)»
 		«IF hasHistory»
-		for (i = 0; i < «type.toUpperCase»_MAX_HISTORY_STATES; ++i)
-		{
-			«scHandle»->historyVector[i] = «null_state»;
-		}
+		
+		«forloop("i = 0", '''i < «maxHistoryStates»''', "++i",
+			'''«scHandle»->historyVector[i] = «null_state»;'''
+		)»
 		«ENDIF»
 		
 		«scHandle»->stateConfVectorPosition = 0;
-	
+
 		«clearInEventsFctID»(handle);
 		«clearOutEventsFctID»(handle);
-	
+
 		«initSequence.code»
 		'''
 	}
 	
-	
-	def enterFunction(ExecutionFlow it) '''
-		void «functionPrefix»enter(«scHandleDecl»)
-		{
-			«enterSequences.defaultSequence.code»
-		}
-	'''
-	
-	def enterFunction2(ExecutionFlow it) {
-		val func = new Function()
-		func.name = '''«type.toFirstLower»enter'''
-		func.parameters += scHandleDecl
-		func.type = Type.VOID
-		func.content = enterSequences.defaultSequence.code
-		return func 
+	def enterFunction(ExecutionFlow it) {
+		function(enterFunctionID, enterSequences.defaultSequence.code)
 	}
 	
-	def exitFunction(ExecutionFlow it) '''
-		void «type.toFirstLower»_exit(«scHandleDecl»)
-		{
-			«exitSequence.code»
-		}
-	'''
+	def exitFunction(ExecutionFlow it) {
+		function(exitFunctionID, exitSequence.code)
+	}
 	
-	def clearInEventsFunction(ExecutionFlow it) '''
-		static void «clearInEventsFctID»(«scHandleDecl»)
-		{
+	def clearInEventsFunction(ExecutionFlow it) {
+		function(clearInEventsFctID,
+			'''
 			«FOR scope : it.scopes»
 				«FOR event : scope.incomingEvents»
 				«event.access» = bool_false;
@@ -162,37 +165,37 @@ class StatemachineSource implements IContentTemplate {
 				«event.access» = bool_false;
 				«ENDFOR»
 			«ENDIF»
-		}
-	'''
+			''',
+			#[],
+			#[Modifier.STATIC]
+		)
+	}
 	
-	def clearOutEventsFunction(ExecutionFlow it) '''
-		static void «clearOutEventsFctID»(«scHandleDecl»)
-		{
+	def clearOutEventsFunction(ExecutionFlow it) {
+		function(clearOutEventsFctID, 
+			'''
 			«FOR scope : it.scopes»
 				«FOR event : scope.outgoingEvents»
 				«event.access» = bool_false;
 				«ENDFOR»
 			«ENDFOR»
-		}
-	'''
+			''', #[], #[Modifier.STATIC])	
+	}
 	
-	def runCycleFunction(ExecutionFlow it) '''
-		void «functionPrefix»runCycle(«scHandleDecl»)
-		{
-			
+	def runCycleFunction(ExecutionFlow it) {
+		function(runCycleFunctionID, 
+			'''
 			«clearOutEventsFctID»(«scHandle»);
+			
 			«runCycleForLoop(it)»
 			«clearInEventsFctID»(«scHandle»);
-		}
-	'''
+			''')
+	}
 	
-	protected def CharSequence runCycleForLoop(ExecutionFlow it)
-		'''
-		for («scHandle»->stateConfVectorPosition = 0;
-			«scHandle»->stateConfVectorPosition < «type.toUpperCase»_MAX_ORTHOGONAL_STATES;
-			«scHandle»->stateConfVectorPosition++)
-			{
-				
+	protected def CharSequence runCycleForLoop(ExecutionFlow it) {
+		val counter = scHandle + "->stateConfVectorPosition"
+		forloop(counter, maxOrthogonalStates, 
+			'''
 			switch («scHandle»->stateConfVector[handle->stateConfVectorPosition])
 			{
 			«FOR state : states»
@@ -207,10 +210,8 @@ class StatemachineSource implements IContentTemplate {
 			default:
 				break;
 			}
-		}
-		
-		'''
-	
+			''')
+	}
 	
 	def raiseTimeEventFunction(ExecutionFlow it) '''
 		«IF timed»
@@ -225,9 +226,9 @@ class StatemachineSource implements IContentTemplate {
 		«ENDIF»
 	'''
 	
-	def isStateActiveFunction(ExecutionFlow it) '''
-		sc_boolean «stateActiveFctID»(const «scHandleDecl», «statesEnumType» state)
-		{
+	def isStateActiveFunction(ExecutionFlow it){
+		val func = function(stateActiveFctID, 
+			'''
 			sc_boolean result = bool_false;
 			switch (state)
 			{
@@ -243,12 +244,17 @@ class StatemachineSource implements IContentTemplate {
 					break;
 			}
 			return result;
-		}
-	'''
-	
-	def isActiveFunction(ExecutionFlow it) '''
-		sc_boolean «isActiveFctID»(const «scHandleDecl»)
-		{
+			'''
+		)
+		func.parameters.clear();
+		func.parameters += #['''const «scHandleDecl»''', '''«statesEnumType» state''']
+		func.type = Type.BOOL
+		func
+	}
+
+	def isActiveFunction(ExecutionFlow it) {
+		val func = function(isActiveFctID, 
+			'''
 			sc_boolean result = bool_false;
 			int i;
 			
@@ -258,26 +264,31 @@ class StatemachineSource implements IContentTemplate {
 			}
 			
 			return result;
-		}
-	'''
+			''')
+		func.parameters.set(0, "const " + func.parameters.get(0))
+		func.type = Type.BOOL
+		func
+	}
 	
 	def protected isFinalFunction(ExecutionFlow it) {
 		val finalStateImpactVector = flow.finalStateImpactVector
-
-		'''
-			«IF !finalStateImpactVector.isCompletelyCovered»
-			/* 
-			 * Always returns 'false' since this state machine can never become final.
-			 */
-			«ENDIF»
-			sc_boolean «isFinalFctID»(const «scHandleDecl»)
-			{
-		''' +
-		// only if the impact vector is completely covered by final states the state machine
-		// can become final
-		{if (finalStateImpactVector.isCompletelyCovered) {'''	return «FOR i : 0 ..<finalStateImpactVector.size SEPARATOR ' && '»(«FOR fs : finalStateImpactVector.get(i) SEPARATOR ' || '»«scHandle»->stateConfVector[«i»] == «IF fs.stateVector.offset == i»«fs.shortName»«ELSE»«null_state»«ENDIF»«ENDFOR»)«ENDFOR»;
-		'''} else {'''   return bool_false;'''} }		
-		+ Strings.newLine + '''}'''
+		
+		val func = function(isFinalFctID)
+		func.parameters.set(0, "const " + func.parameters.get(0))
+		func.type = Type.BOOL
+		func.content = {
+			if (finalStateImpactVector.isCompletelyCovered) {
+				'''return «FOR i : 0 ..<finalStateImpactVector.size SEPARATOR ' && '»(«FOR fs : finalStateImpactVector.get(i) SEPARATOR ' || '»«scHandle»->stateConfVector[«i»] == «IF fs.stateVector.offset == i»«fs.shortName»«ELSE»«null_state»«ENDIF»«ENDFOR»)«ENDFOR»;
+				'''
+			} 
+			else {
+				'''return bool_false;'''
+			} 
+		}
+		if(!finalStateImpactVector.isCompletelyCovered) {
+			func.documentation = new Comment("Always returns 'false' since this state machine can never become final.")
+		}
+		func
 	}
 	
 	
@@ -286,22 +297,24 @@ class StatemachineSource implements IContentTemplate {
 	 * Implementation of interface element accessor functions
 	 */
 	
-	def interfaceIncomingEventRaiser(ExecutionFlow it, EventDefinition event) '''
-		void «event.asRaiser»(«scHandleDecl»«event.valueParams»)
-		{
+	def interfaceIncomingEventRaiser(ExecutionFlow it, EventDefinition event) {
+		function(event.asRaiser, 
+			'''
 			«IF event.hasValue»
 			«event.valueAccess» = value;
 			«ENDIF»
 			«event.access» = bool_true;
-		}
-	'''
+			''',
+			#[{if(event.hasValue) {event.typeSpecifier.targetLanguageName + ' value'}}]
+		)
+	}
 	
-	def interfaceOutgoingEventGetter(ExecutionFlow it, EventDefinition event) '''
-		sc_boolean «event.asRaised»(const «scHandleDecl»)
-		{
-			return «event.access»;
-		}
-	'''
+	def interfaceOutgoingEventGetter(ExecutionFlow it, EventDefinition event) {
+		val f = function(event.asRaised, '''return «event.access»;''')
+		f.type = Type.BOOL
+		f.parameters.set(0, "const " + f.parameters.get(0))
+		f
+	}
 	
 	def interfaceOutgoingEventValueGetter(ExecutionFlow it, EventDefinition event) '''
 		«event.typeSpecifier.targetLanguageName» «event.asGetter»(const «scHandleDecl»)
@@ -342,18 +355,15 @@ class StatemachineSource implements IContentTemplate {
 	 * Handling decralartion of function prototypes
 	 */
 	 
-	/** */
 	def functionPrototypes(ExecutionFlow it) '''
-		/* prototypes of all internal functions */
-		«checkFunctions.toPrototypes»
-		«effectFunctions.toPrototypes»
-		«entryActionFunctions.toPrototypes»
-		«exitActionFunctions.toPrototypes»
-		«enterSequenceFunctions.toPrototypes»
-		«exitSequenceFunctions.toPrototypes»
-		«reactFunctions.toPrototypes»
-		static void «clearInEventsFctID»(«scHandleDecl»);
-		static void «clearOutEventsFctID»(«scHandleDecl»);
+		«new Comment("prototypes of all internal functions")»
+		«FOR key : internalFunctions.keySet»
+		«new Comment(key)»
+		«FOR func : internalFunctions.get(key)»
+		«(func as Function).declare»
+		«ENDFOR»
+		
+		«ENDFOR»
 	'''
 	
 	def constantDefinitions(ExecutionFlow it) '''
@@ -363,21 +373,22 @@ class StatemachineSource implements IContentTemplate {
 			«ENDFOR»
 		«ENDFOR»
 	'''
-	
-	def toPrototypes(List<Step> steps) '''
-		«FOR s : steps»
-			«s.functionPrototype»
-		«ENDFOR»
-	'''
-	
-	def dispatch functionPrototype(Check it) '''
-		static sc_boolean «shortName»(const «scHandleDecl»);
-	'''
-	
-	def dispatch functionPrototype(Step it) '''
-		static void «shortName»(«scHandleDecl»);
-	'''	
-	
+
+	def internalFunction(Step it) {
+		val func = function(shortName)
+		switch (it) {
+			Check: {
+				func.parameters.set(0, "const " + func.parameters.get(0))
+				func.content = '''return «code»;'''
+				func.type = Type.BOOL
+			}
+			Step: {
+				func.content = code
+			}
+		}
+		func.modifiers += Modifier.STATIC
+		func
+	}
 	
 	
 	/* ===================================================================================
@@ -386,41 +397,13 @@ class StatemachineSource implements IContentTemplate {
 	 
 	/** */
 	def functionImplementations(ExecutionFlow it) '''
-		/* implementations of all internal functions */
-		
-		«checkFunctions.toImplementation»
-		«effectFunctions.toImplementation»
-		«entryActionFunctions.toImplementation»
-		«exitActionFunctions.toImplementation»
-		«enterSequenceFunctions.toImplementation»
-		«exitSequenceFunctions.toImplementation»
-		«reactFunctions.toImplementation»
-		
-	'''
-	 
-	def toImplementation(List<Step> steps) '''
-		«FOR s : steps»
-			«s.functionImplementation»
+		«new Comment("implementations of all internal functions")»
+		«FOR key : internalFunctions.keySet»
+		«new Comment(key)»
+		«FOR func : internalFunctions.get(key)»
+		«func»
 		«ENDFOR»
-	'''
-	
-	def dispatch functionImplementation(Check it) '''
-		«stepComment»
-		static sc_boolean «shortName»(const «scHandleDecl»)
-		{
-			return «code»;
-		}
 		
-	'''
-	
-	def dispatch functionImplementation(Step it) '''
-		«stepComment»
-		static void «shortName»(«scHandleDecl»)
-		{
-			«code»
-		}
-		
-	'''
-	
-	
+		«ENDFOR»
+	'''	
 }

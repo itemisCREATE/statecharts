@@ -9,5 +9,7 @@ Require-Bundle: com.google.guava,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend.lib,
  org.eclipse.xtend.lib.macro
-Export-Package: org.yakindu.sct.generator.common
+Export-Package: org.yakindu.sct.generator.common,
+ org.yakindu.sct.generator.common.factory
+Import-Package: com.google.inject
 

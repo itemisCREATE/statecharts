@@ -197,6 +197,14 @@ class Naming {
 	def isFinalFctID(ExecutionFlow it) {
 		functionPrefix + "isFinal"
 	}
+	
+	def initFunctionID(ExecutionFlow it) '''«functionPrefix»init'''
+	
+	def enterFunctionID(ExecutionFlow it) '''«functionPrefix»enter'''
+	
+	def exitFunctionID(ExecutionFlow it) '''«functionPrefix»exit'''
+	
+	def runCycleFunctionID(ExecutionFlow it) '''«functionPrefix»runCycle'''
 
 	def asRaiser(EventDefinition it) {
 		scope.functionPrefix + separator + 'raise' + separator + name.asIdentifier.toFirstLower

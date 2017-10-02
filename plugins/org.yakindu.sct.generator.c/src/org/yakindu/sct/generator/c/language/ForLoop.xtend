@@ -21,7 +21,7 @@ class ForLoop extends CodeBlock implements ILoop {
 	@Accessors protected CharSequence initializer;
 	@Accessors protected CharSequence endCondition;
 	@Accessors protected CharSequence iteration;
-	
+
 	override getBlockOpen() {
 		'''for(«loopHead») «super.blockOpen»'''
 	}

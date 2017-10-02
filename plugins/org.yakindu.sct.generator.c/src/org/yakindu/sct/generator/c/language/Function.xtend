@@ -26,6 +26,7 @@ class Function extends CodeBlock implements IFunction {
 	@Accessors protected List<CharSequence> parameters;
 	@Accessors protected List<IModifier> modifiers;
 	@Accessors protected IType type;
+	@Accessors protected CharSequence documentation;
 	
 	new() {
 		this.parameters = new CharSequenceList(", ")
@@ -33,6 +34,26 @@ class Function extends CodeBlock implements IFunction {
 	}
 	
 	override getBlockOpen() {
-		'''«modifiers» «type» «name»(«parameters») «super.blockOpen»'''
+		val prefix = new CharSequenceList(#[modifiers.toString, type, name])
+		'''«prefix»(«parameters») «super.blockOpen»'''
+	}
+	
+	def declare() {
+		'''«prefix»(«parameters»);'''
+	}
+	
+	def prefix() {
+		new CharSequenceList(#[modifiers.toString, type, name])
+	}
+	
+	override toString() {
+		if(documentation !== null) {
+			'''
+			«documentation»
+			«super.toString»
+			'''
+		} else {
+			super.toString
+		}
 	}
 }

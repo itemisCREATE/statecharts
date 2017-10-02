@@ -22,6 +22,7 @@ class CharSequenceList<T extends CharSequence> extends ArrayList<CharSequence> i
 	@Accessors protected CharSequence separator
 	
 	new(CharSequence separator) {
+		this()
 		this.separator = separator
 	}
 	
@@ -29,8 +30,13 @@ class CharSequenceList<T extends CharSequence> extends ArrayList<CharSequence> i
 		super()
 	}
 	
-	new(Collection<CharSequence> elements) {
+	new(Collection<CharSequence> elements, CharSequence separator) {
 		super(elements)
+		this.separator = separator
+	}
+	
+	new(Collection<CharSequence> elements) {
+		this(elements, " ")
 	}
 	
 	/* (non-Javadoc)
@@ -55,6 +61,13 @@ class CharSequenceList<T extends CharSequence> extends ArrayList<CharSequence> i
 	}
 	
 	override toString() {
-		return this.join(separator)
+		if(this.nullOrEmpty || this.filter[!nullOrEmpty].nullOrEmpty) {
+			return ""
+		}
+		return this.filter[isNotNullOrEmptyString].join(separator)
+	}
+	
+	def boolean isNotNullOrEmptyString(CharSequence s) {
+		return s !== null && s.toString !== ""
 	}
 }

@@ -22,7 +22,11 @@ import org.yakindu.base.types.Annotation;
 import org.yakindu.sct.generator.c.eventdriven.EventDrivenExpressionCode;
 import org.yakindu.sct.generator.c.eventdriven.EventDrivenStatemachineHeader;
 import org.yakindu.sct.generator.c.eventdriven.EventDrivenStatemachineSource;
+import org.yakindu.sct.generator.c.language.CFunctionFactory;
+import org.yakindu.sct.generator.c.language.Function;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
+import org.yakindu.sct.generator.common.IFunction;
+import org.yakindu.sct.generator.common.factory.FunctionFactory;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
@@ -46,9 +50,19 @@ public class CCodeGeneratorModule implements IGeneratorModule {
 		binder.bind(IExecutionFlowGenerator.class).to(CGenerator.class);
 		binder.bind(INamingService.class).to(CNamingService.class);
 		binder.bind(ICodegenTypeSystemAccess.class).to(CTypeSystemAccess.class);
+		bindLanguageModule(entry, binder);
 		bindIGenArtifactConfigurations(entry, binder);
 		bindTracingProperty(entry, binder);
 		configureEventDriven(entry, binder);
+	}
+
+	/**
+	 * @param entry
+	 * @param binder
+	 */
+	protected void bindLanguageModule(GeneratorEntry entry, Binder binder) {
+		binder.bind(IFunction.class).to(Function.class);
+		binder.bind(FunctionFactory.class).to(CFunctionFactory.class);
 	}
 
 	protected void bindTracingProperty(GeneratorEntry entry, Binder binder) {

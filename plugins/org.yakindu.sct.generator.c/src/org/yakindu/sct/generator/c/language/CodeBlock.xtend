@@ -17,9 +17,7 @@ import org.yakindu.sct.generator.common.ICodeBlock
  *
  */
 abstract class CodeBlock extends org.yakindu.sct.generator.common.CodeBlock implements ICodeBlock {
-	protected static final CharSequence BLOCKOPEN = '''
-	{
-	'''
+	protected static final CharSequence BLOCKOPEN = "\n{"
 	
 	protected static final CharSequence BLOCKCLOSE = '''
 	}

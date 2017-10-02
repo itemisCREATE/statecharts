@@ -17,7 +17,10 @@ import org.yakindu.sct.generator.common.IType;
  *
  */
 public enum Type implements IType {
-	VOID ("void");
+	VOID (CKeywords.VOID),
+	INT ("sc_integer"),
+	BOOL ("sc_boolean")
+	;
 	
 	protected String s;
 	Type(String s) {
