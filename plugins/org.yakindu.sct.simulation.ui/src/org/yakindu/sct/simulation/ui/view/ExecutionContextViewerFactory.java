@@ -10,11 +10,13 @@
  */
 package org.yakindu.sct.simulation.ui.view;
 
+import org.eclipse.jface.viewers.CellLabelProvider;
 import org.eclipse.jface.viewers.ColumnViewerEditorActivationEvent;
 import org.eclipse.jface.viewers.ColumnViewerEditorActivationListener;
 import org.eclipse.jface.viewers.ColumnViewerEditorDeactivationEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
+import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ControlAdapter;
@@ -22,6 +24,9 @@ import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.ScrollBar;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.IMemento;
@@ -98,7 +103,16 @@ public class ExecutionContextViewerFactory {
 
 		parent.addControlListener(treeViewerColumnResizer);
 		viewer.getTree().addControlListener(treeViewerColumnResizer);
-		treeViewerColumnResizer.resizeViewerColumns();
+		nameColumn.getColumn().addListener(SWT.Resize, new Listener() {
+
+			@Override
+			public void handleEvent(Event event) {
+				Display.getDefault().asyncExec(() -> {
+					treeViewerColumnResizer.resizeViewerColumns();
+					treeViewerColumnResizer.rememberOrRestoreColumnWidths();
+				});
+			}
+		});
 		return viewer;
 	}
 
@@ -111,7 +125,7 @@ public class ExecutionContextViewerFactory {
 
 		public static final int VALUE_COL_VIEW_WIDTH_PERCENTAGE = 3; // 33%
 		public static final int VALUE_COL_MIN_WIDTH = 80;
-		public static final int NAME_COL_MIN_WIDTH = 100;
+		public static final int NAME_COL_MIN_WIDTH = 120;
 
 		private final TreeViewer viewer;
 		private final TreeViewerColumn nameColumn;
@@ -128,13 +142,6 @@ public class ExecutionContextViewerFactory {
 		@Override
 		public void controlResized(ControlEvent e) {
 			resizeViewerColumns();
-			rememberOrRestoreColumnWidths();
-		}
-
-		@Override
-		public void controlMoved(ControlEvent e) {
-			resizeViewerColumns();
-			rememberOrRestoreColumnWidths();
 		}
 
 		protected void resizeViewerColumns() {
@@ -142,7 +149,7 @@ public class ExecutionContextViewerFactory {
 			Rectangle area = tree.getParent().getParent().getClientArea();
 			Point size = tree.computeSize(SWT.DEFAULT, SWT.DEFAULT);
 			ScrollBar vBar = tree.getVerticalBar();
-			int width = area.width - tree.computeTrim(0, 0, 0, 0).width + vBar.getSize().x;
+			int width = area.width - tree.computeTrim(0, 0, 0, 0).width + vBar.getSize().x - 10;
 			if (size.y > area.height + tree.getHeaderHeight()) {
 				width -= vBar.getSize().x;
 			}
@@ -151,11 +158,14 @@ public class ExecutionContextViewerFactory {
 				setColumnWidths(vBar, width);
 				tree.setSize(area.width, area.height);
 			} else {
-				tree.setSize(area.width, area.height);
 				setColumnWidths(vBar, width);
 			}
 		}
 		protected void setColumnWidths(ScrollBar vBar, int width) {
+			int preferredNameColumnWidth = getPreferredNameColumnWidth(vBar, width);
+			if (memento != null && (memento.getInteger("NAME_COL_WIDTH") == null)) {
+				nameColumn.getColumn().setWidth(Math.max(preferredNameColumnWidth, NAME_COL_MIN_WIDTH));
+			}
 			int preferredValueColumnWidth = getPreferredValueColumnWidth(vBar, width);
 			if (memento != null && (memento.getInteger("VALUE_COL_WIDTH") == null)) {
 				valueColumn.getColumn().setWidth(Math.max(preferredValueColumnWidth, VALUE_COL_MIN_WIDTH));
@@ -165,21 +175,15 @@ public class ExecutionContextViewerFactory {
 							.setWidth(Math.max(width - nameColumn.getColumn().getWidth(), VALUE_COL_MIN_WIDTH));
 				}
 			}
-			int preferredNameColumnWidth = getPreferredNameColumnWidth(vBar, width);
-			if (memento != null && (memento.getInteger("NAME_COL_WIDTH") == null)) {
-				nameColumn.getColumn().setWidth(Math.max(preferredNameColumnWidth, NAME_COL_MIN_WIDTH));
-			}
-
-			valueColumn.getColumn().setWidth(Math.max(width - nameColumn.getColumn().getWidth(),
-					Math.max(valueColumn.getColumn().getWidth(), VALUE_COL_MIN_WIDTH)));
+			
 		}
 
 		private int getPreferredNameColumnWidth(ScrollBar vBar, int width) {
-			return width - (vBar.isVisible() ? vBar.getSize().x : 0) - valueColumn.getColumn().getWidth();
+			return width - valueColumn.getColumn().getWidth();
 		}
 
 		private int getPreferredValueColumnWidth(ScrollBar vBar, int width) {
-			return (width - (vBar.isVisible() ? vBar.getSize().x : 0)) / VALUE_COL_VIEW_WIDTH_PERCENTAGE;
+			return width / VALUE_COL_VIEW_WIDTH_PERCENTAGE;
 		}
 
 		protected void rememberOrRestoreColumnWidths() {

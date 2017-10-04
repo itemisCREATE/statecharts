@@ -15,7 +15,6 @@ import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.swt.widgets.Display;
 import org.yakindu.sct.model.sruntime.CompositeSlot;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.ui.SimulationActivator;
@@ -28,47 +27,12 @@ import org.yakindu.sct.simulation.ui.view.actions.HideTimeEventsAction;
  */
 public class ExecutionContextContentProvider implements ITreeContentProvider, IPropertyChangeListener {
 
-	protected class ViewerRefresher implements Runnable {
-
-		private static final int UPDATE_INTERVAL = 500;
-
-		private boolean cancel = false;
-
-		@Override
-		public void run() {
-			while (!cancel && viewer.getInput() != null) {
-				try {
-					Thread.sleep(UPDATE_INTERVAL);
-					Display.getDefault().asyncExec(new Runnable() {
-						public void run() {
-							if (viewer != null && !viewer.getControl().isDisposed() && shouldUpdate)
-								viewer.refresh();
-						}
-					});
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-		public boolean isCancel() {
-			return cancel;
-		}
-
-		public void setCancel(boolean cancel) {
-			this.cancel = cancel;
-		}
-
-	}
-
 	private boolean shouldUpdate = true;
-	private ViewerRefresher refresher;
+
 	private Viewer viewer;
 
 	public void dispose() {
 		getStore().removePropertyChangeListener(this);
-		if (refresher != null)
-			refresher.cancel = true;
 	}
 
 	public ExecutionContextContentProvider() {
@@ -77,25 +41,16 @@ public class ExecutionContextContentProvider implements ITreeContentProvider, IP
 
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		this.viewer = viewer;
-		if (refresher != null) {
-			refresher.cancel = true;
-		}
-		refresher = new ViewerRefresher();
-		if (newInput != null) {
-			new Thread(refresher).start();
-		} else {
-			refresher.cancel = true;
-		}
 	}
 
 	public Object[] getElements(Object inputElement) {
 		if (inputElement == null) {
-			return new Object[] {};
+			return new Object[]{};
 		}
 		if (inputElement instanceof ExecutionContext) {
 			return ((ExecutionContext) inputElement).getSlots().toArray();
 		}
-		return new Object[] {};
+		return new Object[]{};
 
 	}
 
@@ -103,7 +58,7 @@ public class ExecutionContextContentProvider implements ITreeContentProvider, IP
 		if (parentElement instanceof CompositeSlot) {
 			return ((CompositeSlot) parentElement).getSlots().toArray();
 		}
-		return new Object[] {};
+		return new Object[]{};
 	}
 
 	public Object getParent(Object element) {

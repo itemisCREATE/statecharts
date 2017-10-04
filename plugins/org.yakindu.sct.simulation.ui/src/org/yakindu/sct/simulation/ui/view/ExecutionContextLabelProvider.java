@@ -203,9 +203,9 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 			Button button = new Button(comp, SWT.CHECK);
 			button.setLayoutData(new GridData(SWT.BEGINNING, SWT.FILL, false, true));
 			Label label = new Label(comp, SWT.BOLD);
-			label.setEnabled(false);
-			label.setLayoutData(new GridData(SWT.LEFT, SWT.FILL, true, true));
+			label.setForeground(ColorConstants.gray);
 			label.setText(((ExecutionSlot) element).getValue().toString());
+			label.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 			button.addSelectionListener(new SelectionListener() {
 
 				@Override

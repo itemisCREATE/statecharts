@@ -207,6 +207,11 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 			}
 		}
 		sessionDropdown.setInput(targets);
+		if (!targets.isEmpty()) {
+			IDebugTarget dt = targets.iterator().next();
+			sessionDropdown.setSelection(new StructuredSelection(dt), true);
+			activeTargetChanged(dt);
+		}
 
 		return this.sessionDropdown;
 	}
