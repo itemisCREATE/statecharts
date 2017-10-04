@@ -56,11 +56,6 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 		return getContext + "operationCallback." + name.asEscapedIdentifier;
 	}
 
-
-//	override dispatch String code(ParenthesizedExpression e) {
-//		"(" + e.expression.code + ")";
-//	}
-
 	/* Assignment */
 	override dispatch String code(AssignmentExpression it) {
 		if (varRef.definition instanceof Property) {
@@ -90,18 +85,6 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 		}
 		return cmd
 	}
-
-	/* Literals */
-
-//	override dispatch String code(StringLiteral expression) {
-//		"\"" + expression.value.toString().escaped + "\""
-//	}
-
-
-
-//	override dispatch String code(ConditionalExpression expression) {
-//		expression.condition.code + ' ? ' + expression.trueCase.code + ' : ' + expression.falseCase.code
-//	}
 
 	override dispatch String code(LogicalRelationExpression expression) {
 		if (isSame(expression.leftOperand.infer.type, getType(GenericTypeSystem.STRING))) {
@@ -179,7 +162,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 		}
 		return ""
 	}
-	
+
 	def dispatch String getStaticContext(Property it) {
 		if (it.const) {
 			if (scope != null) {

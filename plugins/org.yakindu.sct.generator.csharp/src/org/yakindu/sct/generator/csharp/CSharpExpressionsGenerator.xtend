@@ -1,3 +1,13 @@
+/** 
+ * Copyright (c) 2015 committers of YAKINDU and others. 
+ * All rights reserved. This program and the accompanying materials 
+ * are made available under the terms of the Eclipse Public License v1.0 
+ * which accompanies this distribution, and is available at 
+ * http://www.eclipse.org/legal/epl-v10.html 
+ * Contributors:
+ * committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.generator.csharp
 
 import com.google.inject.Inject
@@ -28,7 +38,7 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 	@Inject extension Navigation
 	@Inject extension ITypeSystem
 	@Inject extension ITypeSystemInferrer
-	
+
 	private var List<TimeEvent> timeEvents;
 
 	def private getTimeEvents(TimeEvent it) {
@@ -42,27 +52,10 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 		return context + "operationCallback." + name.asEscapedIdentifier;
 	}
 
-
-//	override dispatch CharSequence code(ParenthesizedExpression e) {
-//		"(" + e.expression.code.toString.trim + ")";
-//	}
-
 	/* Assignment */
 	override dispatch CharSequence code(AssignmentExpression it) {
-		varRef.code.toString.trim  + " " +  operator.literal + " " + expression.code.toString.trim
+		varRef.code.toString.trim + " " + operator.literal + " " + expression.code.toString.trim
 	}
-
-	/* Literals */
-
-
-//	override dispatch CharSequence code(StringLiteral expression) {
-//		"\"" + expression.value.toString().escaped + "\""
-//	}
-
-
-//	override dispatch CharSequence code(ConditionalExpression expression) {
-//		expression.condition.code.toString.trim + ' ? ' + expression.trueCase.code + ' : ' + expression.falseCase.code
-//	}
 
 	override dispatch CharSequence code(LogicalRelationExpression expression) {
 		if (isSame(expression.leftOperand.infer.type, getType(GenericTypeSystem.STRING))) {
@@ -114,7 +107,7 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch CharSequence code(Declaration it) {
 		context + name.asEscapedIdentifier
-		}
+	}
 
 	def dispatch CharSequence code(TimeEvent it) {
 		"timeEvents[" + getTimeEvents.indexOf(it) + "]"
@@ -126,14 +119,14 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 		}
 		if (scope != null) {
 			return scope.interfaceName.asEscapedIdentifier + "."
-			}
-		return ""
 		}
-	
-	def getConstContext(Property it){
+		return ""
+	}
+
+	def getConstContext(Property it) {
 		if (scope != null) {
 			return scope.interfaceName + "."
-		}else{
+		} else {
 			return it.flow.statemachineInterfaceName + "."
 		}
 	}
