@@ -311,11 +311,11 @@ GeneratorModel for yakindu::java {
     }
 }
 
-p. The syntax rules for expressions in generator models are the same as for statechart language expressions, see section "&quot;Expressions&quot;":../user-guide/statechart_language#sclang_expressions. However, expressions are constrained to a subset that semantically makes sense in the context of a generator model. That means that, for example, while you can use the @+@ operator to concatenate strings, you cannot use statechart-related constructs like the _after_ keyword or the _active()_ built-in function.
+p. The syntax rules for expressions in generator models are the same as for statechart language expressions, see section "&quot;Expressions&quot;":../user-guide/statechart_language.html#sclang_expressions. However, expressions are constrained to a subset that semantically makes sense in the context of a generator model. That means that, for example, while you can use the @+@ operator to concatenate strings, you cannot use statechart-related constructs like the _after_ keyword or the _active()_ built-in function.
 
 In the properties definition section near the top of a generator model, a value assigned to a property must be given as a _literal_. More complex expressions are not supported there.
 
-The values assigned to properties are _default_ values only. That means, you can override them by different values when actually executing a generation model by way of running the "headless code generator":../user-guide/generating_code#hdls_headless_code_generation.
+The values assigned to properties are _default_ values only. That means, you can override them by different values when actually executing a generation model by way of running the "headless code generator":../user-guide/generating_code_headless.html#hdls_headless_code_generation.
 
 For example, the command to call the headless generator might look like this:
 

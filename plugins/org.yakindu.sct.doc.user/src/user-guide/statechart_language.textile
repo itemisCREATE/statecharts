@@ -703,7 +703,7 @@ Annotations are metadata that you can add to the definition section of your stat
 
 h4(#sclang_cyclebased). @CycleBased
 
-The <code>@CycleBased</code> annotation specifies that the "_cycle-based execution scheme_":../user-guide/generating_code#codegen_execution_schemes is to be used.
+The <code>@CycleBased</code> annotation specifies that the "_cycle-based execution scheme_":../user-guide/generating_code.html#codegen_execution_schemes is to be used.
 
 Synopsis: <code>@CycleBased(</code>_period_<code>)</code>
 

@@ -65,7 +65,8 @@ elif [ "${target}" == "web" ]
 then
     checklink --broken --dir-redirects \
 	--recursive --depth 1 \
-	--exclude https://github.com/Yakindu/.* \
+	--exclude 'https://github.com/Yakindu/.*' \
+	--exclude 'http://groups.google.com/.*' \
 	https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide/ \
         2>&1 | tee log.txt
 else
