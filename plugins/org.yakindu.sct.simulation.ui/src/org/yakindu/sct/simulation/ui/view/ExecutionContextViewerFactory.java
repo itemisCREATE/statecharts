@@ -10,13 +10,11 @@
  */
 package org.yakindu.sct.simulation.ui.view;
 
-import org.eclipse.jface.viewers.CellLabelProvider;
 import org.eclipse.jface.viewers.ColumnViewerEditorActivationEvent;
 import org.eclipse.jface.viewers.ColumnViewerEditorActivationListener;
 import org.eclipse.jface.viewers.ColumnViewerEditorDeactivationEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
-import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ControlAdapter;
@@ -64,7 +62,6 @@ public class ExecutionContextViewerFactory {
 		valueColumn.getColumn().setText("Value");
 		valueColumn.getColumn().setResizable(false);
 		valueColumn.setLabelProvider(new ExecutionContextLabelProvider(1));
-
 		if (!readOnly)
 			valueColumn.setEditingSupport(new MultiEditingSupport(viewer,
 					/*
@@ -162,10 +159,7 @@ public class ExecutionContextViewerFactory {
 			}
 		}
 		protected void setColumnWidths(ScrollBar vBar, int width) {
-			int preferredNameColumnWidth = getPreferredNameColumnWidth(vBar, width);
-			if (memento != null && (memento.getInteger("NAME_COL_WIDTH") == null)) {
-				nameColumn.getColumn().setWidth(Math.max(preferredNameColumnWidth, NAME_COL_MIN_WIDTH));
-			}
+
 			int preferredValueColumnWidth = getPreferredValueColumnWidth(vBar, width);
 			if (memento != null && (memento.getInteger("VALUE_COL_WIDTH") == null)) {
 				valueColumn.getColumn().setWidth(Math.max(preferredValueColumnWidth, VALUE_COL_MIN_WIDTH));
@@ -175,7 +169,11 @@ public class ExecutionContextViewerFactory {
 							.setWidth(Math.max(width - nameColumn.getColumn().getWidth(), VALUE_COL_MIN_WIDTH));
 				}
 			}
-			
+			int preferredNameColumnWidth = getPreferredNameColumnWidth(vBar, width);
+			if (memento != null && (memento.getInteger("NAME_COL_WIDTH") == null)) {
+				nameColumn.getColumn().setWidth(Math.max(preferredNameColumnWidth, NAME_COL_MIN_WIDTH));
+			}
+
 		}
 
 		private int getPreferredNameColumnWidth(ScrollBar vBar, int width) {
@@ -197,7 +195,7 @@ public class ExecutionContextViewerFactory {
 					}
 				}
 				if (memento.getInteger("NAME_COL_WIDTH") == null) {
-					memento.putInteger("NAME_COL_WIDTH", valueColumn.getColumn().getWidth());
+					memento.putInteger("NAME_COL_WIDTH", nameColumn.getColumn().getWidth());
 				} else {
 					if (nameColumn.getColumn().getWidth() != memento.getInteger("NAME_COL_WIDTH")) {
 						memento.putInteger("NAME_COL_WIDTH", nameColumn.getColumn().getWidth());

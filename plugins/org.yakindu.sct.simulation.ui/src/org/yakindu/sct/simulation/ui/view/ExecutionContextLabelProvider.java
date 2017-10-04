@@ -210,7 +210,7 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 
 				@Override
 				public void widgetSelected(SelectionEvent e) {
-					((ExecutionSlot) element).setValue(!(Boolean)((ExecutionSlot) element).getValue());
+					((ExecutionSlot) element).setValue(!(Boolean) ((ExecutionSlot) element).getValue());
 					label.setText(((ExecutionSlot) element).getValue().toString());
 				}
 

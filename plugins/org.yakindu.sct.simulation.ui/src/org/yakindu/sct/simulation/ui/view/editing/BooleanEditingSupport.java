@@ -13,7 +13,6 @@ package org.yakindu.sct.simulation.ui.view.editing;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.CheckboxCellEditor;
 import org.eclipse.jface.viewers.ColumnViewer;
-import org.eclipse.jface.viewers.ComboBoxCellEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.yakindu.base.types.Type;
@@ -34,8 +33,7 @@ public class BooleanEditingSupport extends ScopeSlotEditingSupport {
 
 	@Override
 	public CellEditor getCellEditor(Object element) {
-		return new CheckboxCellEditor((Composite) getViewer().getControl(), 
-				SWT.CHECK);
+		return new CheckboxCellEditor((Composite) getViewer().getControl(), SWT.CHECK);
 	}
 
 	@Override
@@ -56,7 +54,8 @@ public class BooleanEditingSupport extends ScopeSlotEditingSupport {
 		if (value != null && value instanceof Integer) {
 			return ((Integer) value).intValue() == 0 ? true : false;
 		}
-		if(value != null && value instanceof Boolean) return value;
+		if (value != null && value instanceof Boolean)
+			return value;
 		return null;
 	}
 
