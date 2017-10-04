@@ -29,7 +29,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 
 	@Inject protected extension Naming
 	@Inject protected extension Navigation
-	
+
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ITypeSystemInferrer
 	@Inject protected extension INamingService
@@ -40,22 +40,15 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		it.code(it.definition)
 	}
 
-	def dispatch CharSequence code(FeatureCall it) {
-		it.code(it.definition)
-	}
-	
-	override dispatch CharSequence code(NullLiteral it) '''«Naming::NULL_STRING»'''
-	
+	/* Expressions */
 	def dispatch CharSequence code(Expression it, Event target) '''«target.access»'''
 
 	def dispatch CharSequence code(Expression it, VariableDefinition target) '''«target.access»'''
-	
+
 	/* TODO: check if event is active */
 	def dispatch CharSequence code(EventValueReferenceExpression it) '''«value.definition.event.valueAccess»'''
 
 	def dispatch CharSequence code(ElementReferenceExpression it, VariableDefinition target) '''«target.access»'''
-
-	def dispatch CharSequence code(FeatureCall it, VariableDefinition target) '''«target.access»'''
 
 	def dispatch CharSequence code(ElementReferenceExpression it,
 		OperationDefinition target) '''«target.access»(«scHandle»«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.
@@ -65,6 +58,22 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		Operation target) '''«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.code»«ENDFOR»)'''
 
 	def dispatch CharSequence code(ElementReferenceExpression it, Property target) '''«target.access»'''
+
+	def dispatch CharSequence code(EventRaisingExpression it) '''
+	«IF value != null»
+		«event.definition.event.valueAccess» = «value.code»;
+	«ENDIF»
+	«event.definition.event.access» = bool_true'''
+
+	def dispatch CharSequence code(
+		ActiveStateReferenceExpression it) '''«flow.stateActiveFctID»(«scHandle», «value.shortName»)'''
+
+	/* Feature call */
+	def dispatch CharSequence code(FeatureCall it) {
+		it.code(it.definition)
+	}
+
+	def dispatch CharSequence code(FeatureCall it, VariableDefinition target) '''«target.access»'''
 
 	def dispatch CharSequence code(FeatureCall it,
 		OperationDefinition target) '''«target.access»(«scHandle»«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.
@@ -78,16 +87,10 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch CharSequence code(FeatureCall it, Enumerator target) '''«target.access»'''
 
+	/* Literals */
+	override dispatch CharSequence code(NullLiteral it) '''«Naming::NULL_STRING»'''
+
 	override dispatch CharSequence code(BoolLiteral it) '''«IF value»bool_true«ELSE»bool_false«ENDIF»'''
-
-	def dispatch CharSequence code(EventRaisingExpression it) '''
-	«IF value != null»
-		«event.definition.event.valueAccess» = «value.code»;
-	«ENDIF»
-	«event.definition.event.access» = bool_true'''
-
-	def dispatch CharSequence code(
-		ActiveStateReferenceExpression it) '''«flow.stateActiveFctID»(«scHandle», «value.shortName»)'''
 
 	// ensure we obtain an expression of type sc_boolean
 	def dispatch CharSequence sc_boolean_code(Expression it) '''«it.code»'''
@@ -99,6 +102,5 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch CharSequence sc_boolean_code(LogicalNotExpression it) '''(«it.code») ? bool_true : bool_false'''
 
 	def dispatch CharSequence sc_boolean_code(LogicalRelationExpression it) '''(«it.code») ? bool_true : bool_false'''
-
 
 }

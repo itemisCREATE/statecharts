@@ -41,25 +41,40 @@ import org.yakindu.sct.model.sexec.naming.INamingService
  * @author Rene Beckmann - Initial contribution and API
  */
 class ExpressionsGenerator {
-	
+
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ITypeSystemInferrer
 	@Inject protected extension INamingService
 	@Inject protected extension ICodegenTypeSystemAccess
-	
-	def dispatch CharSequence code(BinaryExpression expression) {
-		expression.leftOperand.code.toString.trim + " " + expression.operator.literal.toString.trim + " " + expression.rightOperand.code
-	}
 
-	def dispatch CharSequence code(UnaryExpression expression) {
-		expression.operator.literal + expression.operand.code
-	}
-	
 	def dispatch CharSequence code(EObject it) {
 		throw new IllegalStateException("No dispatch function for " + getClass().name)
 	}
-	
+
+	/* Expressions */
+	def dispatch CharSequence code(BinaryExpression it) {
+		leftOperand.code.toString.trim + " " + operator.literal.toString.trim + " " + rightOperand.code
+	}
+
+	def dispatch CharSequence code(UnaryExpression it) {
+		operator.literal + operand.code
+	}
+
+	def dispatch CharSequence code(AssignmentExpression it) '''«varRef.code» «operator.literal» «expression.code»'''
+
 	def dispatch CharSequence code(ConditionalExpression it) '''«condition.code» ? «trueCase.code» : «falseCase.code»'''
+
+	def dispatch CharSequence code(PrimitiveValueExpression it) '''«value.code»'''
+
+	def dispatch CharSequence code(ParenthesizedExpression it) '''(«expression.code»)'''
+
+	def dispatch CharSequence code(TypeCastExpression it) '''((«type.getTargetLanguageName») «operand.code»)'''
+
+	// TODO Check Java and CSharp. Which one should I take?
+	def dispatch CharSequence code(LogicalRelationExpression it) '''
+	«IF isSame(leftOperand.infer.type, getType(GenericTypeSystem.STRING))»
+		(strcmp(«leftOperand.code», «rightOperand.code») «operator.literal» 0)
+	«ELSE»«leftOperand.code» «operator.literal» «rightOperand.code»«ENDIF»'''
 
 	/* Literals */
 	def dispatch CharSequence code(Literal it) '''#error unknown literal type «getClass().name» '''
@@ -80,23 +95,10 @@ class ExpressionsGenerator {
 
 	def dispatch CharSequence code(BinaryLiteral it) '''0b«Integer::toBinaryString(value)»'''
 
-	def dispatch CharSequence code(PrimitiveValueExpression it) '''«value.code»'''
-	
 	def dispatch CharSequence code(BoolLiteral it) '''«value.toString»'''
-	
+
 	def dispatch CharSequence code(NullLiteral expression) {
 		'null'
 	}
-	
-	/* Statements */
-	def dispatch CharSequence code(AssignmentExpression it) '''«varRef.code» «operator.literal» «expression.code»'''
 
-	def dispatch CharSequence code(LogicalRelationExpression it) '''
-	«IF isSame(leftOperand.infer.type, getType(GenericTypeSystem.STRING))»
-		(strcmp(«leftOperand.code», «rightOperand.code») «operator.literal» 0)
-	«ELSE»«leftOperand.code» «operator.literal» «rightOperand.code»«ENDIF»'''
-
-	def dispatch CharSequence code(ParenthesizedExpression it) '''(«expression.code»)'''
-
-	def dispatch CharSequence code(TypeCastExpression it) '''((«type.getTargetLanguageName») «operand.code»)'''
 }

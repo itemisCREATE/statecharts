@@ -4,14 +4,10 @@ import com.google.inject.Inject
 import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.expressions.expressions.AssignmentExpression
-import org.yakindu.base.expressions.expressions.ConditionalExpression
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
-import org.yakindu.base.expressions.expressions.ParenthesizedExpression
-import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.RelationalOperator
-import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
@@ -20,7 +16,6 @@ import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
-import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
@@ -33,8 +28,7 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 	@Inject extension Navigation
 	@Inject extension ITypeSystem
 	@Inject extension ITypeSystemInferrer
-	@Inject extension ICodegenTypeSystemAccess
-
+	
 	private var List<TimeEvent> timeEvents;
 
 	def private getTimeEvents(TimeEvent it) {
@@ -48,13 +42,10 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 		return context + "operationCallback." + name.asEscapedIdentifier;
 	}
 
-	override dispatch CharSequence code(PrimitiveValueExpression primValue) {
-		primValue.value.code;
-	}
 
-	override dispatch CharSequence code(ParenthesizedExpression e) {
-		"(" + e.expression.code.toString.trim + ")";
-	}
+//	override dispatch CharSequence code(ParenthesizedExpression e) {
+//		"(" + e.expression.code.toString.trim + ")";
+//	}
 
 	/* Assignment */
 	override dispatch CharSequence code(AssignmentExpression it) {
@@ -69,9 +60,9 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 //	}
 
 
-	override dispatch CharSequence code(ConditionalExpression expression) {
-		expression.condition.code.toString.trim + ' ? ' + expression.trueCase.code + ' : ' + expression.falseCase.code
-	}
+//	override dispatch CharSequence code(ConditionalExpression expression) {
+//		expression.condition.code.toString.trim + ' ? ' + expression.trueCase.code + ' : ' + expression.falseCase.code
+//	}
 
 	override dispatch CharSequence code(LogicalRelationExpression expression) {
 		if (isSame(expression.leftOperand.infer.type, getType(GenericTypeSystem.STRING))) {
@@ -127,10 +118,6 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch CharSequence code(TimeEvent it) {
 		"timeEvents[" + getTimeEvents.indexOf(it) + "]"
-	}
-
-	override dispatch CharSequence code(TypeCastExpression it) {
-		'''((«type.getTargetLanguageName») «operand.code»)'''
 	}
 
 	def dispatch CharSequence getContext(Property it) {
