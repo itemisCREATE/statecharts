@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.BinaryExpression
 import org.yakindu.base.expressions.expressions.BinaryLiteral
+import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ConditionalExpression
 import org.yakindu.base.expressions.expressions.DoubleLiteral
 import org.yakindu.base.expressions.expressions.FloatLiteral
@@ -23,6 +24,7 @@ import org.yakindu.base.expressions.expressions.HexLiteral
 import org.yakindu.base.expressions.expressions.IntLiteral
 import org.yakindu.base.expressions.expressions.Literal
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
+import org.yakindu.base.expressions.expressions.NullLiteral
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
@@ -59,16 +61,14 @@ class ExpressionsGenerator {
 	
 	def dispatch CharSequence code(ConditionalExpression it) '''«condition.code» ? «trueCase.code» : «falseCase.code»'''
 
-	/* HANDLING LITERALS */
+	/* Literals */
 	def dispatch CharSequence code(Literal it) '''#error unknown literal type «getClass().name» '''
-
-
-
-	def dispatch CharSequence code(StringLiteral it) '''"«value.escaped»"'''
 
 	def String escaped(String it) {
 		return it.replace("\"", "\\\"");
 	}
+
+	def dispatch CharSequence code(StringLiteral it) '''"«value.escaped»"'''
 
 	def dispatch CharSequence code(IntLiteral it) '''«value.toString»'''
 
@@ -81,7 +81,13 @@ class ExpressionsGenerator {
 	def dispatch CharSequence code(BinaryLiteral it) '''0b«Integer::toBinaryString(value)»'''
 
 	def dispatch CharSequence code(PrimitiveValueExpression it) '''«value.code»'''
-
+	
+	def dispatch CharSequence code(BoolLiteral it) '''«value.toString»'''
+	
+	def dispatch CharSequence code(NullLiteral expression) {
+		'null'
+	}
+	
 	/* Statements */
 	def dispatch CharSequence code(AssignmentExpression it) '''«varRef.code» «operator.literal» «expression.code»'''
 

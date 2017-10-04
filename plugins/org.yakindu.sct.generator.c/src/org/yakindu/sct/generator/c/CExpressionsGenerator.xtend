@@ -44,7 +44,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		it.code(it.definition)
 	}
 	
-	def dispatch CharSequence code(NullLiteral it) '''«Naming::NULL_STRING»'''
+	override dispatch CharSequence code(NullLiteral it) '''«Naming::NULL_STRING»'''
 	
 	def dispatch CharSequence code(Expression it, Event target) '''«target.access»'''
 
@@ -78,7 +78,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch CharSequence code(FeatureCall it, Enumerator target) '''«target.access»'''
 
-	def dispatch CharSequence code(BoolLiteral it) '''«IF value»bool_true«ELSE»bool_false«ENDIF»'''
+	override dispatch CharSequence code(BoolLiteral it) '''«IF value»bool_true«ELSE»bool_false«ENDIF»'''
 
 	def dispatch CharSequence code(EventRaisingExpression it) '''
 	«IF value != null»

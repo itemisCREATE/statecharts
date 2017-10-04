@@ -4,20 +4,13 @@ import com.google.inject.Inject
 import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.expressions.expressions.AssignmentExpression
-import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ConditionalExpression
-import org.yakindu.base.expressions.expressions.DoubleLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
-import org.yakindu.base.expressions.expressions.FloatLiteral
-import org.yakindu.base.expressions.expressions.HexLiteral
-import org.yakindu.base.expressions.expressions.IntLiteral
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
-import org.yakindu.base.expressions.expressions.NullLiteral
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.RelationalOperator
-import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Event
@@ -26,15 +19,15 @@ import org.yakindu.base.types.Property
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 
-class CSharpExpressionCode extends ExpressionsGenerator {
+class CSharpExpressionsGenerator extends ExpressionsGenerator {
 
 	@Inject extension Naming
 	@Inject extension Navigation
@@ -69,33 +62,12 @@ class CSharpExpressionCode extends ExpressionsGenerator {
 	}
 
 	/* Literals */
-	def dispatch CharSequence code(BoolLiteral expression) {
-		expression.value.toString()
-	}
 
-	override dispatch CharSequence code(IntLiteral expression) {
-		expression.value.toString();
-	}
 
-	override dispatch CharSequence code(DoubleLiteral expression) {
-		expression.value.toString();
-	}
+//	override dispatch CharSequence code(StringLiteral expression) {
+//		"\"" + expression.value.toString().escaped + "\""
+//	}
 
-	override dispatch CharSequence code(FloatLiteral expression) {
-		expression.value.toString();
-	}
-
-	def dispatch CharSequence code(NullLiteral expression) {
-		'null'
-	}
-
-	override dispatch CharSequence code(StringLiteral expression) {
-		"\"" + expression.value.toString().escaped + "\""
-	}
-
-	override String escaped(String it) {
-		return it.replace("\"", "\\\"");
-	}
 
 	override dispatch CharSequence code(ConditionalExpression expression) {
 		expression.condition.code.toString.trim + ' ? ' + expression.trueCase.code + ' : ' + expression.falseCase.code
