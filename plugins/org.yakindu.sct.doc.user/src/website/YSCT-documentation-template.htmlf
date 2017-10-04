@@ -25,6 +25,7 @@
             }
         </style>
 
+        {#
         <script type="text/javascript" src="{{ get_public_template_url("custom/page/itemis/bootstrap-anchor.js") }}"></script>
         <script type="text/javascript">
         jQuery(document).ready(function() {
@@ -37,6 +38,7 @@
             jQuery('body').css('position', 'relative').scrollspy({target: "#sidebar-navigation", offset: 150});
         });
         </script>
+        #}
         
     {% elif dynamic_page_hubdb_table_id %}
         <link href="{{ get_public_template_url("Custom/page/itemis/it-yakindu-docs-overview.css") }}" rel="stylesheet" type="text/css">
