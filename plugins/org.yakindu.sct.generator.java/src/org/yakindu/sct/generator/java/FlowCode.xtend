@@ -35,7 +35,7 @@ class FlowCode {
 	
 	@Inject extension Naming
 	@Inject extension INamingService
-	@Inject extension ExpressionCode
+	@Inject extension JavaExpressionCode
 	@Inject extension SExecExtensions
 	
 	private var List<TimeEvent> timeEvents;

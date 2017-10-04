@@ -23,7 +23,7 @@ import org.yakindu.sct.model.sexec.TimeEvent
 class FlowCode {
 	
 	@Inject extension Naming
-	@Inject extension ExpressionCode
+	@Inject extension CSharpExpressionCode
 	@Inject extension SExecExtensions
 	
 	private var List<TimeEvent> timeEvents;

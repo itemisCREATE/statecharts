@@ -31,7 +31,7 @@ class StatemachineInterface {
 	@Inject extension Navigation
 	@Inject extension ITypeSystem
 	@Inject extension ICodegenTypeSystemAccess
-	@Inject extension ExpressionCode
+	@Inject extension CSharpExpressionCode
 	@Inject Beautifier beautifier
 
 	def generateStatemachineInterface(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {

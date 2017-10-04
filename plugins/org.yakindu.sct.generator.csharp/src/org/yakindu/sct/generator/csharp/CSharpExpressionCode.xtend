@@ -34,7 +34,7 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 
-class ExpressionCode extends ExpressionsGenerator {
+class CSharpExpressionCode extends ExpressionsGenerator {
 
 	@Inject extension Naming
 	@Inject extension Navigation
