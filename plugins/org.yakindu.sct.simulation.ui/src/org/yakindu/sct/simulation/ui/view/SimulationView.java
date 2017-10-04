@@ -56,9 +56,6 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.ui.IMemento;
-import org.eclipse.ui.IViewSite;
-import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
@@ -91,7 +88,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	private Font font;
 	private RaiseEventSelectionListener selectionListener;
 	private ITypeSystem typeSystem;
-	private IMemento memento;
 	private ITimeTaskScheduler timeScheduler;
 	private Label timeSchedulerLabel;
 	private TimeSchedulerComponentRefresher timeSchedulerRefresher;
@@ -140,12 +136,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 				&& !sessionDropdown.getControl().isDisposed()) {
 			sessionDropdown.getControl().dispose();
 		}
-	}
-
-	@Override
-	public void init(IViewSite site, IMemento memento) throws PartInitException {
-		super.init(site, memento);
-		this.memento = memento;
 	}
 
 	@Override
@@ -222,7 +212,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	}
 
 	protected Viewer createViewer(Composite parent) {
-		viewer = ExecutionContextViewerFactory.createViewer(parent, false, this, memento);
+		viewer = ExecutionContextViewerFactory.createViewer(parent, false, this);
 		selectionListener = new RaiseEventSelectionListener(viewer);
 		return viewer;
 	}

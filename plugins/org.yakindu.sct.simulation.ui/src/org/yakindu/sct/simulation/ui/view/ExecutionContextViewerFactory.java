@@ -20,7 +20,6 @@ import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.IMemento;
 import org.yakindu.sct.simulation.ui.view.editing.BooleanEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.EnumerationEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.IntegerEditingSupport;
@@ -35,14 +34,13 @@ import org.yakindu.sct.simulation.ui.view.editing.StringEditingSupport;
  * 
  */
 public class ExecutionContextViewerFactory {
-	
+
 	private static final int NAME_COL_MIN_WIDTH = 100;
 	private static final int NAME_COL_WIDTH_RATIO = 3;
 	private static final int VALUE_COL_MIN_WIDTH = 80;
 	private static final int VALUE_COL_WIDTH_RATIO = 1;
 
-	public static TreeViewer createViewer(Composite parent, boolean readOnly, ITypeSystemProvider provider,
-			IMemento memento) {
+	public static TreeViewer createViewer(Composite parent, boolean readOnly, ITypeSystemProvider provider) {
 
 		Composite comp = new Composite(parent, SWT.FILL);
 		TreeColumnLayout layout = new TreeColumnLayout(false);
