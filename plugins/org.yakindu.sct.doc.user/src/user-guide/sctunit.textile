@@ -206,7 +206,7 @@ bc.
 
 h2(#sctunit_the_sctunit_language). The SCTUnit language
 
-While section "&quot;SCTUnit by example&quot;":#sctunit_sctunit_by_example gave an overview of test classes and operation, the section at hand provides you with a complete description of the SCTUnit language. More precisely, since the SCTUnit language is an extension of the "statechart language":../user-guide/statechart_language.html, you will find herein a description of those language elements that are specific to the SCTUnit language. Please see section "&quot;The statechart language&quot;":../user-guide/statechart_language.html for everything else.
+While section "&quot;SCTUnit by example&quot;":#sctunit_sctunit_by_example gave an overview of test classes and operation, the section at hand provides you with a complete description of the SCTUnit language. More precisely, since the SCTUnit language is an extension of the "statechart language":../user-guide/statechart_language.html, you will find herein a description of those language elements that are specific to the SCTUnit language. Please see section "&quot;The statechart language&quot;":../user-guide/statechart_language.html#sclang_statechart_language_reference for everything else.
 
 An important extension of the SCTUnit language over the statechart language is the introduction of "operations":#sctunit_operations_and_tests (subroutines) and control statements, like "_if_":#sctunit_conditional_statements and "_while_":#sctunit_loops. They make it possible to "script" complex procedures, for example by raising different events under different conditions or by looping over a sequence of statements multiple times.
 

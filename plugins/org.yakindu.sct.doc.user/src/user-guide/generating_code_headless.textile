@@ -1,7 +1,7 @@
 
 h1(#hdls_headless_code_generation). Headless code generation
 
-State machine code is fully derived from a statechart model, and section "Generating state machine code":../user-guide/generating_code.html explains how to interactively run a code generator. Since release 2.9.0, YAKINDU Statechart Tools additionally provides a headless code generator infrastructure. This allows for code generation without a user interface which in turn allows to integrate code generation into continuous integration (CI) build environments.
+State machine code is fully derived from a statechart model, and section "Generating state machine code":../user-guide/generating_code.html#codegen_generating_state_machine_code explains how to interactively run a code generator. Since release 2.9.0, YAKINDU Statechart Tools additionally provides a headless code generator infrastructure. This allows for code generation without a user interface which in turn allows to integrate code generation into continuous integration (CI) build environments.
 
 Best practice is to generate code on the fly during a continuous integration build instead of cluttering your version control system with generated artifacts.
 

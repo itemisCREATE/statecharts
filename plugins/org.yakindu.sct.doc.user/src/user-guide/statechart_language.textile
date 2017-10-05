@@ -477,7 +477,7 @@ The *definition section* is a text area. Per default, it is located to the left 
 
 In the definition section, you have to define entities you want to use in your statechart. This includes "variables":#sclang_variables, "events":#sclang_events, and "operations":#sclang_operations. Variables and events have to be defined in the scope of a "named interface":#sclang_interface_scopes or the "internal interface":#sclang_internal_scope. Especially useful for larger parts of a statechart model is the possibility to use "namespaces":#sclang_namespaces.
 
-When it comes to "code generation":../user-guide/generating_code.html all these elements are properly reflected in the generated source code as far as the respective target language supports it.
+When it comes to "code generation":../user-guide/generating_code.html#codegen_generating_state_machine_code all these elements are properly reflected in the generated source code as far as the respective target language supports it.
 
 ###. FIXME (RK): Example needed!
 
@@ -707,7 +707,7 @@ The <code>@CycleBased</code> annotation specifies that the "_cycle-based executi
 
 Synopsis: <code>@CycleBased(</code>_period_<code>)</code>
 
-The mandatory parameter _period_ indicates the suggested period of time between two successive run-to-completion steps in milliseconds. Only the "statechart simulator":../user-guide/simulating_statecharts.html and the "SCTUnit testing framework":../user-guide/sctunit.html take the _period_ value into account, however. It is neither of significance to nor reflected in the generated code, and thus it remains the client code's responsibility to explicitly call _runCycle()_ – and to decide when to do so.
+The mandatory parameter _period_ indicates the suggested period of time between two successive run-to-completion steps in milliseconds. Only the "statechart simulator":../user-guide/simulating_statecharts.html#simu_simulating_statecharts and the "SCTUnit testing framework":../user-guide/sctunit.html#sctunit_the_sctunit_language take the _period_ value into account, however. It is neither of significance to nor reflected in the generated code, and thus it remains the client code's responsibility to explicitly call _runCycle()_ – and to decide when to do so.
 
 If the definition section contains neither the <code>@CycleBased</code> nor the <code>@EventDriven</code> annotation, the state machine will behave as if <code>@CycleBased(200)</code> would have been coded.
 
