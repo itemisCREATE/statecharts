@@ -23,22 +23,20 @@
     <div class="primary">
         <div class="row-fluid-wrapper">
             <div class="row-fluid">
-                {# 
                 <div class="themes-container search span4">
                     <h2>Can't find what you're looking for?</h2>
                     <p>Browse the whole documentation.</p>
-                    <div id="navigation-search-form" data-cx="015950920325887884916:2e61oxlndni">
+                    <div id="navigation-search-form" data-cx="015950920325887884916:nwstrxx2ycm">
                         <nav class="it-header__menu cf it-header__de hs-cta-wrapper">
                             <input data-id="it-header__search-input" placeholder="Type here." type="search"> <br /><br />
                             <a href="#" class="header-tools__search-icon it_cta_button_next white">search</a>
                         </nav>
                     </div>
                 </div>
-                #}
 
             {% for row in hubdb_table_rows(dynamic_page_hubdb_table_id, "&chapter__gte=1&orderBy=chapter") %}
                 
-                {% if loop.index != 1 && loop.index0 % 3 == 0 %}
+                {% if loop.index != 1 && loop.index % 3 == 0 %}
                         </div>
                     </div>
                     <div class="row-fluid-wrapper">
