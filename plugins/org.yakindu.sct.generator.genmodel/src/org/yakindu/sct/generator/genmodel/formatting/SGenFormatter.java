@@ -37,6 +37,7 @@ public class SGenFormatter extends AbstractDeclarativeFormatter {
 		c.setLinewrap(0, 1, 2).before(g.getML_COMMENTRule());
 		c.setLinewrap(0, 1, 1).after(g.getML_COMMENTRule());
 
+
 		// Find elements which declare their body in curly brackets.
 		// - Increment Indentation for the body.
 		// - Line wrap before opening and after closing element
@@ -51,16 +52,16 @@ public class SGenFormatter extends AbstractDeclarativeFormatter {
 			c.setLinewrap(1, 2, 2).before(containingGroup);
 			c.setLinewrap(1, 1, 2).after(containingGroup);
 		}
-		
-		for (Keyword var : grammar.findKeywords("var")) {
-			c.setLinewrap().before(var);
-		}
+
 
 		c.setLinewrap().around(g.getFeatureConfigurationRule());
 		c.setLinewrap().around(g.getFeatureParameterValueRule());
-		c.setNoLinewrap().after(g.getGeneratorEntryAccess().getContentTypeAssignment_0());
-		c.setNoLinewrap().after(g.getFeatureConfigurationAccess().getFeatureKeyword_1());
-		c.setNoLinewrap().before(g.getGeneratorModelAccess().getGeneratorModelKeyword_0());
+		c.setNoLinewrap().after(
+				g.getGeneratorEntryAccess().getContentTypeAssignment_0());
+		c.setNoLinewrap().after(
+				g.getFeatureConfigurationAccess().getFeatureKeyword_1());
+		c.setNoLinewrap().before(
+				g.getGeneratorModelAccess().getGeneratorModelKeyword_0());
 
 	}
 }
