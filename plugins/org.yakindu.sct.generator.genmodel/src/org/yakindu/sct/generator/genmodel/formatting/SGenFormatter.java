@@ -52,15 +52,12 @@ public class SGenFormatter extends AbstractDeclarativeFormatter {
 			c.setLinewrap(1, 2, 2).before(containingGroup);
 			c.setLinewrap(1, 1, 2).after(containingGroup);
 		}
-		
+
 		c.setLinewrap().around(g.getFeatureConfigurationRule());
 		c.setLinewrap().around(g.getFeatureParameterValueRule());
-		c.setNoLinewrap().after(
-				g.getGeneratorEntryAccess().getContentTypeAssignment_0());
-		c.setNoLinewrap().after(
-				g.getFeatureConfigurationAccess().getFeatureKeyword_1());
-		c.setNoLinewrap().before(
-				g.getGeneratorModelAccess().getGeneratorModelKeyword_0());
+		c.setNoLinewrap().after(g.getGeneratorEntryAccess().getContentTypeAssignment_0());
+		c.setNoLinewrap().after(g.getFeatureConfigurationAccess().getFeatureKeyword_1());
+		c.setNoLinewrap().before(g.getGeneratorModelAccess().getGeneratorModelKeyword_0());
 
 	}
 }
