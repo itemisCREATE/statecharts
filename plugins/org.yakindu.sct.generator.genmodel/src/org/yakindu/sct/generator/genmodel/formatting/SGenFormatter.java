@@ -52,6 +52,10 @@ public class SGenFormatter extends AbstractDeclarativeFormatter {
 			c.setLinewrap(1, 2, 2).before(containingGroup);
 			c.setLinewrap(1, 1, 2).after(containingGroup);
 		}
+		
+		for (Keyword var : grammar.findKeywords("var")) {
+            c.setLinewrap().before(var);
+        }
 
 
 		c.setLinewrap().around(g.getFeatureConfigurationRule());
