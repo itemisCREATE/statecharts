@@ -37,11 +37,11 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 class JavaExpressionsGenerator extends ExpressionsGenerator {
 
-	@Inject extension Naming
-	@Inject extension JavaNamingService
-	@Inject extension Navigation
-	@Inject extension ITypeSystem
-	@Inject extension ITypeSystemInferrer
+	@Inject protected extension Naming
+	@Inject protected extension JavaNamingService
+	@Inject protected extension Navigation
+	@Inject protected extension ITypeSystem
+	@Inject protected extension ITypeSystemInferrer
 
 	private var List<TimeEvent> timeEvents;
 

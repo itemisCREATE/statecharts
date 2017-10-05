@@ -11,7 +11,7 @@
 
 package org.yakindu.sct.generator.core.templates
 
-import javax.inject.Inject
+import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.BinaryExpression
@@ -19,7 +19,6 @@ import org.yakindu.base.expressions.expressions.BinaryLiteral
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ConditionalExpression
 import org.yakindu.base.expressions.expressions.DoubleLiteral
-import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.HexLiteral
 import org.yakindu.base.expressions.expressions.IntLiteral
@@ -30,10 +29,7 @@ import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.expressions.expressions.UnaryExpression
-import org.yakindu.base.types.inferrer.ITypeSystemInferrer
-import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
-import org.yakindu.sct.model.sexec.naming.INamingService
 
 /**
  * 
@@ -41,9 +37,6 @@ import org.yakindu.sct.model.sexec.naming.INamingService
  */
 class ExpressionsGenerator {
 
-	@Inject protected extension ITypeSystem
-	@Inject protected extension ITypeSystemInferrer
-	@Inject protected extension INamingService
 	@Inject protected extension ICodegenTypeSystemAccess
 
 	def dispatch CharSequence code(EObject it) {
@@ -51,8 +44,6 @@ class ExpressionsGenerator {
 	}
 
 	/* Expressions */
-	def dispatch CharSequence code(Expression it) '''#error TODO: generate code for «getClass().name»'''
-
 	def dispatch CharSequence code(BinaryExpression it) {
 		leftOperand.code.toString.trim + " " + operator.literal.toString.trim + " " + rightOperand.code
 	}
@@ -72,7 +63,9 @@ class ExpressionsGenerator {
 	def dispatch CharSequence code(TypeCastExpression it) '''((«type.getTargetLanguageName») «operand.code»)'''
 
 	/* Literals */
-	def dispatch CharSequence code(Literal it) '''#error unknown literal type «getClass().name» '''
+	def dispatch CharSequence code(Literal it){
+		throw new IllegalStateException("No dispatch function for " + getClass().name)
+	}
 
 	def dispatch CharSequence code(StringLiteral it) '''"«value.escaped»"'''
 

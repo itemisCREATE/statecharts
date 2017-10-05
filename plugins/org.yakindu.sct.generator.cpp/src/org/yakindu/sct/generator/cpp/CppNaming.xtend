@@ -8,6 +8,7 @@
  *   Contributors:
  *   	Markus Mühlbrandt - Initial contribution and API
  */
+ 
 package org.yakindu.sct.generator.cpp
 
 import com.google.inject.Inject
@@ -34,10 +35,10 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
  */
 class CppNaming extends Naming {
 
-	@Inject extension Navigation
-	@Inject extension ICodegenTypeSystemAccess
-	@Inject extension INamingService
-	@Inject extension GenmodelEntriesExtension
+	@Inject protected extension Navigation
+	@Inject protected extension ICodegenTypeSystemAccess
+	@Inject protected extension INamingService
+	@Inject protected extension GenmodelEntriesExtension
 	@Inject GeneratorEntry entry
 
 	def cpp(String it) { it + ".cpp" }
@@ -137,9 +138,6 @@ class CppNaming extends Naming {
 		interfaceName + "_OCB"
 	}
 
-	// def String getInternalOperationCallbackName() {
-	// "InternalOCB"
-	// }
 	override asFunction(OperationDefinition it) {
 		name.asEscapedIdentifier
 	}

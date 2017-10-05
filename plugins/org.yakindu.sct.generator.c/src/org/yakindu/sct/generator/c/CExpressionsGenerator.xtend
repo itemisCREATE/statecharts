@@ -1,6 +1,17 @@
+/** 
+ * Copyright (c) 2017 committers of YAKINDU and others. 
+ * All rights reserved. This program and the accompanying materials 
+ * are made available under the terms of the Eclipse Public License v1.0 
+ * which accompanies this distribution, and is available at 
+ * http://www.eclipse.org/legal/epl-v10.html 
+ * Contributors:
+ * committers of YAKINDU - initial API and implementation
+ * 
+ */
+
 package org.yakindu.sct.generator.c
 
-import javax.inject.Inject
+import com.google.inject.Inject
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.Expression
@@ -18,7 +29,6 @@ import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
-import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
@@ -34,7 +44,6 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ITypeSystemInferrer
 	@Inject protected extension INamingService
-	@Inject protected extension ICodegenTypeSystemAccess
 
 	/* Referring to declared elements */
 	def dispatch CharSequence code(ElementReferenceExpression it) {
@@ -68,12 +77,12 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch CharSequence code(
 		ActiveStateReferenceExpression it) '''«flow.stateActiveFctID»(«scHandle», «value.shortName»)'''
-	
+
 	def dispatch CharSequence code(LogicalRelationExpression it) '''
 	«IF isSame(leftOperand.infer.type, getType(GenericTypeSystem.STRING))»
 		(strcmp(«leftOperand.code», «rightOperand.code») «operator.literal» 0)
 	«ELSE»«leftOperand.code» «operator.literal» «rightOperand.code»«ENDIF»'''
-	
+
 	/* Feature call */
 	def dispatch CharSequence code(FeatureCall it) {
 		it.code(it.definition)

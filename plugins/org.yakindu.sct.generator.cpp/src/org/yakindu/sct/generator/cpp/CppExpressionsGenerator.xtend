@@ -8,16 +8,15 @@
  * committers of YAKINDU - initial API and implementation
  * 
  */
+ 
 package org.yakindu.sct.generator.cpp
 
-import javax.inject.Inject
+import com.google.inject.Inject
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
-import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.c.CExpressionsGenerator
-import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
@@ -28,9 +27,7 @@ class CppExpressionsGenerator extends CExpressionsGenerator {
 	@Inject protected extension CppNaming
 	@Inject protected extension Navigation
 	@Inject protected extension ITypeSystem
-	@Inject protected extension ITypeSystemInferrer
 	@Inject protected extension INamingService
-	@Inject protected extension ICodegenTypeSystemAccess
 
 	override dispatch CharSequence code(ElementReferenceExpression it,
 		OperationDefinition target) '''«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.

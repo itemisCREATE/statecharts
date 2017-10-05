@@ -34,10 +34,10 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 class CSharpExpressionsGenerator extends ExpressionsGenerator {
 
-	@Inject extension Naming
-	@Inject extension Navigation
-	@Inject extension ITypeSystem
-	@Inject extension ITypeSystemInferrer
+	@Inject protected extension Naming
+	@Inject protected extension Navigation
+	@Inject protected extension ITypeSystem
+	@Inject protected extension ITypeSystemInferrer
 
 	private var List<TimeEvent> timeEvents;
 
