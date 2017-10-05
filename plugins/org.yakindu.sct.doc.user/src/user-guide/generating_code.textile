@@ -5,7 +5,7 @@ Ultimately, you will need your state machine not only as a nice graphical statec
 
 YAKINDU Statechart Tools comes with a couple of code generators that save you from the time-consuming and error-prone task of coding your state machine manually. The YAKINDU code generators transform your statechart into source code of a target programming language in an instant. The generated code is always correct, at least in the sense that it is a true one-to-one mapping of your statechart – and at least unless a code generator is buggy itself.
 
-Use "SCTUnit":../user-guide/sctunit.html in order to test whether your state machine is also correct in the sense that it does what it is intended to do.
+Use "SCTUnit":../user-guide/sctunit.html#sctunit_test-driven_statechart_development_with_sctunit in order to test whether your state machine is also correct in the sense that it does what it is intended to do.
 
 Currently YAKINDU Statechart Tools support code generation for the following programming languages:
 * C

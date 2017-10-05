@@ -137,6 +137,18 @@
             <files dir="${lib.dir}/bin" layout="{groupId}/{artifactId}-{baseVersion}.{extension}" />
         </artifact:resolve>
 
+        <!-- Sources of MyLyn Wikitext's Textile support: -->
+        <artifact:resolve>
+            <artifact:dependencies>
+                <dependency groupId="org.eclipse.mylyn.docs"
+                            artifactId="org.eclipse.mylyn.wikitext.textile"
+                            version="${wikitext.version}"
+                            scope="compile"
+                            classifier="sources" />
+            </artifact:dependencies>
+            <files dir="${lib.dir}/src" layout="{groupId}/{artifactId}-{baseVersion}-{classifier}.{extension}" />
+        </artifact:resolve>
+
         <!-- Classpath for MyLyn Wikitext's Ant support: -->
         <artifact:resolve>
             <artifact:dependencies>
