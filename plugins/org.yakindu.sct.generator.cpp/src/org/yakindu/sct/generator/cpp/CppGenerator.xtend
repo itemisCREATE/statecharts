@@ -37,7 +37,7 @@ class CppGenerator implements IExecutionFlowGenerator {
 	@Inject extension StatemachineHeader statemachineHeaderContent
 	@Inject extension StatemachineImplementation statemachineSourceContent
 	@Inject extension Navigation
-	@Inject extension Naming
+	@Inject extension CppNaming
 	@Inject extension ICoreLibraryHelper
 
 	@Inject

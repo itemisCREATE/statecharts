@@ -16,49 +16,37 @@ import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.AssignmentOperator
-import org.yakindu.base.expressions.expressions.BoolLiteral
-import org.yakindu.base.expressions.expressions.ConditionalExpression
-import org.yakindu.base.expressions.expressions.DoubleLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.FeatureCall
-import org.yakindu.base.expressions.expressions.FloatLiteral
-import org.yakindu.base.expressions.expressions.HexLiteral
-import org.yakindu.base.expressions.expressions.IntLiteral
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
-import org.yakindu.base.expressions.expressions.NullLiteral
-import org.yakindu.base.expressions.expressions.ParenthesizedExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.RelationalOperator
-import org.yakindu.base.expressions.expressions.StringLiteral
-import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
-import org.yakindu.sct.generator.core.templates.Expressions
-import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 
-class ExpressionCode extends Expressions {
+class JavaExpressionsGenerator extends ExpressionsGenerator {
 
-	@Inject extension Naming
-	@Inject extension JavaNamingService
-	@Inject extension Navigation
-	@Inject extension ITypeSystem
-	@Inject extension ITypeSystemInferrer
-	@Inject extension ICodegenTypeSystemAccess
+	@Inject protected extension Naming
+	@Inject protected extension JavaNamingService
+	@Inject protected extension Navigation
+	@Inject protected extension ITypeSystem
+	@Inject protected extension ITypeSystemInferrer
 
 	private var List<TimeEvent> timeEvents;
 
 	def private getTimeEvents(TimeEvent it) {
-		if (timeEvents == null) {
+		if (timeEvents === null) {
 			timeEvents = flow.timeEvents
 		}
 		return timeEvents
@@ -68,16 +56,8 @@ class ExpressionCode extends Expressions {
 		return getContext + "operationCallback." + name.asEscapedIdentifier;
 	}
 
-	def dispatch String code(PrimitiveValueExpression primValue) {
-		primValue.value.code.toString;
-	}
-
-	def dispatch String code(ParenthesizedExpression e) {
-		"(" + e.expression.code + ")";
-	}
-
 	/* Assignment */
-	def dispatch String code(AssignmentExpression it) {
+	override dispatch String code(AssignmentExpression it) {
 		if (varRef.definition instanceof Property) {
 			var property = varRef.definition as Property
 			if (eContainer instanceof Expression) {
@@ -106,40 +86,6 @@ class ExpressionCode extends Expressions {
 		return cmd
 	}
 
-	/* Literals */
-	def dispatch String code(BoolLiteral expression) {
-		expression.value.toString()
-	}
-
-	def dispatch String code(IntLiteral expression) {
-		expression.value.toString();
-	}
-
-	def dispatch String code(DoubleLiteral expression) {
-		expression.value.toString();
-	}
-
-	def dispatch String code(FloatLiteral expression) {
-		expression.value.toString();
-	}
-
-	def dispatch String code(NullLiteral expression) {
-		'null'
-	}
-
-	def dispatch String code(StringLiteral expression) {
-		"\"" + expression.value.toString().escaped + "\""
-	}
-
-	def String escaped(String it) {
-		return it.replace("\"", "\\\"");
-	}
-
-
-	def dispatch String code(ConditionalExpression expression) {
-		expression.condition.code + ' ? ' + expression.trueCase.code + ' : ' + expression.falseCase.code
-	}
-
 	def dispatch String code(LogicalRelationExpression expression) {
 		if (isSame(expression.leftOperand.infer.type, getType(GenericTypeSystem.STRING))) {
 			expression.logicalString
@@ -162,7 +108,7 @@ class ExpressionCode extends Expressions {
 	}
 
 	def dispatch String code(EventRaisingExpression it) {
-		if (value != null) {
+		if (value !== null) {
 			event.definition.getContext + "raise" + event.definition.name.toFirstUpper + "(" + value.code + ")"
 		} else {
 			event.definition.getContext + "raise" + event.definition.name.toFirstUpper + "()"
@@ -210,20 +156,16 @@ class ExpressionCode extends Expressions {
 		"timeEvents[" + getTimeEvents.indexOf(it) + "]"
 	}
 
-	def dispatch String code(TypeCastExpression it) {
-		'''((«type.getTargetLanguageName») «operand.code»)'''
-	}
-
 	def dispatch String getContext(Property it) {
-		if (scope != null) {
+		if (scope !== null) {
 			return scope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""
 	}
-	
+
 	def dispatch String getStaticContext(Property it) {
 		if (it.const) {
-			if (scope != null) {
+			if (scope !== null) {
 				var result = scope.interfaceName + "."
 				return result
 			} else {
@@ -235,7 +177,7 @@ class ExpressionCode extends Expressions {
 	}
 
 	def dispatch String getContext(Declaration it) {
-		if (scope != null) {
+		if (scope !== null) {
 			return scope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""

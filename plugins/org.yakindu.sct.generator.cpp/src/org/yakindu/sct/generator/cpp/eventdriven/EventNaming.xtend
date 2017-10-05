@@ -12,18 +12,16 @@ package org.yakindu.sct.generator.cpp.eventdriven
 
 import com.google.inject.Inject
 import org.yakindu.base.types.Event
-import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
-import org.yakindu.sct.generator.cpp.Naming
+import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.Navigation
-import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.naming.INamingService
-import org.yakindu.sct.model.sgen.GeneratorEntry
+
 /**
  * @author René Beckmann - Initial contribution and API
  */
 class EventNaming {
-	@Inject extension Naming
+	@Inject extension CppNaming
 	@Inject extension Navigation
 	@Inject extension INamingService
 	

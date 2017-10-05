@@ -79,7 +79,7 @@ public class CCodeGeneratorModule implements IGeneratorModule {
 		if(eventDrivenAnnotation != null) {
 			binder.bind(StatemachineHeader.class).to(EventDrivenStatemachineHeader.class);
 			binder.bind(StatemachineSource.class).to(EventDrivenStatemachineSource.class);
-			binder.bind(ExpressionCode.class).to(EventDrivenExpressionCode.class);
+			binder.bind(CExpressionsGenerator.class).to(EventDrivenExpressionCode.class);
 		}
 	}
 

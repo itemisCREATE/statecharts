@@ -12,13 +12,13 @@ package org.yakindu.sct.generator.c.eventdriven
 
 import com.google.inject.Inject
 import org.yakindu.base.types.Direction
-import org.yakindu.sct.generator.c.ExpressionCode
+import org.yakindu.sct.generator.c.CExpressionsGenerator
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 
 /**
  * @author René Beckmann
  */
-class EventDrivenExpressionCode extends ExpressionCode {
+class EventDrivenExpressionCode extends CExpressionsGenerator {
 	@Inject extension EventNaming
 	
 	protected static int valueVarIndex = 0

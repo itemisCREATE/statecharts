@@ -30,13 +30,13 @@ import static org.eclipse.xtext.util.Strings.*
 
 class StatemachineImplementation implements IContentTemplate {
 	
-	@Inject protected extension Naming
+	@Inject protected extension CppNaming
 	@Inject protected extension Navigation
 	@Inject protected extension FlowCode
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension INamingService
-	@Inject protected extension ExpressionCode
+	@Inject protected extension CppExpressionsGenerator
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension EventCode
 	
