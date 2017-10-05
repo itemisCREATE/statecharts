@@ -2,6 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/MyLyn Wikitext"/>
+	<classpathentry kind="lib" path="lib/bin/com.google.guava/guava-15.0.jar"/>
+	<classpathentry kind="lib" path="lib/bin/org.eclipse.mylyn.docs/org.eclipse.mylyn.wikitext-3.0.18.jar"/>
+	<classpathentry kind="lib" path="lib/bin/org.eclipse.mylyn.docs/org.eclipse.mylyn.wikitext.textile-3.0.18.jar"/>
+	<classpathentry kind="lib" path="lib/bin/org.jsoup/jsoup-1.7.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
