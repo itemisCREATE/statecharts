@@ -19,11 +19,11 @@ import org.yakindu.base.expressions.expressions.BinaryLiteral
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ConditionalExpression
 import org.yakindu.base.expressions.expressions.DoubleLiteral
+import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.HexLiteral
 import org.yakindu.base.expressions.expressions.IntLiteral
 import org.yakindu.base.expressions.expressions.Literal
-import org.yakindu.base.expressions.expressions.LogicalRelationExpression
 import org.yakindu.base.expressions.expressions.NullLiteral
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
@@ -31,7 +31,6 @@ import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.expressions.expressions.UnaryExpression
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
-import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.naming.INamingService
@@ -52,6 +51,8 @@ class ExpressionsGenerator {
 	}
 
 	/* Expressions */
+	def dispatch CharSequence code(Expression it) '''#error TODO: generate code for «getClass().name»'''
+
 	def dispatch CharSequence code(BinaryExpression it) {
 		leftOperand.code.toString.trim + " " + operator.literal.toString.trim + " " + rightOperand.code
 	}
@@ -70,20 +71,14 @@ class ExpressionsGenerator {
 
 	def dispatch CharSequence code(TypeCastExpression it) '''((«type.getTargetLanguageName») «operand.code»)'''
 
-	// TODO Check Java and CSharp. Which one should I take?
-	def dispatch CharSequence code(LogicalRelationExpression it) '''
-	«IF isSame(leftOperand.infer.type, getType(GenericTypeSystem.STRING))»
-		(strcmp(«leftOperand.code», «rightOperand.code») «operator.literal» 0)
-	«ELSE»«leftOperand.code» «operator.literal» «rightOperand.code»«ENDIF»'''
-
 	/* Literals */
 	def dispatch CharSequence code(Literal it) '''#error unknown literal type «getClass().name» '''
 
-	def String escaped(String it) {
+	def dispatch CharSequence code(StringLiteral it) '''"«value.escaped»"'''
+
+	def protected String escaped(String it) {
 		return it.replace("\"", "\\\"");
 	}
-
-	def dispatch CharSequence code(StringLiteral it) '''"«value.escaped»"'''
 
 	def dispatch CharSequence code(IntLiteral it) '''«value.toString»'''
 

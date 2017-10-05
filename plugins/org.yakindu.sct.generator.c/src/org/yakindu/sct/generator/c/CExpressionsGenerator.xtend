@@ -15,6 +15,7 @@ import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
+import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
@@ -60,14 +61,18 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch CharSequence code(ElementReferenceExpression it, Property target) '''«target.access»'''
 
 	def dispatch CharSequence code(EventRaisingExpression it) '''
-	«IF value != null»
+	«IF value !== null»
 		«event.definition.event.valueAccess» = «value.code»;
 	«ENDIF»
 	«event.definition.event.access» = bool_true'''
 
 	def dispatch CharSequence code(
 		ActiveStateReferenceExpression it) '''«flow.stateActiveFctID»(«scHandle», «value.shortName»)'''
-
+	
+	def dispatch CharSequence code(LogicalRelationExpression it) '''
+	«IF isSame(leftOperand.infer.type, getType(GenericTypeSystem.STRING))»
+		(strcmp(«leftOperand.code», «rightOperand.code») «operator.literal» 0)
+	«ELSE»«leftOperand.code» «operator.literal» «rightOperand.code»«ENDIF»'''
 	/* Feature call */
 	def dispatch CharSequence code(FeatureCall it) {
 		it.code(it.definition)

@@ -46,7 +46,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	private var List<TimeEvent> timeEvents;
 
 	def private getTimeEvents(TimeEvent it) {
-		if (timeEvents == null) {
+		if (timeEvents === null) {
 			timeEvents = flow.timeEvents
 		}
 		return timeEvents
@@ -86,7 +86,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 		return cmd
 	}
 
-	override dispatch String code(LogicalRelationExpression expression) {
+	def dispatch String code(LogicalRelationExpression expression) {
 		if (isSame(expression.leftOperand.infer.type, getType(GenericTypeSystem.STRING))) {
 			expression.logicalString
 		} else
@@ -108,7 +108,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def dispatch String code(EventRaisingExpression it) {
-		if (value != null) {
+		if (value !== null) {
 			event.definition.getContext + "raise" + event.definition.name.toFirstUpper + "(" + value.code + ")"
 		} else {
 			event.definition.getContext + "raise" + event.definition.name.toFirstUpper + "()"
@@ -157,7 +157,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def dispatch String getContext(Property it) {
-		if (scope != null) {
+		if (scope !== null) {
 			return scope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""
@@ -165,7 +165,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch String getStaticContext(Property it) {
 		if (it.const) {
-			if (scope != null) {
+			if (scope !== null) {
 				var result = scope.interfaceName + "."
 				return result
 			} else {
@@ -177,7 +177,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def dispatch String getContext(Declaration it) {
-		if (scope != null) {
+		if (scope !== null) {
 			return scope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""

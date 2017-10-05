@@ -42,7 +42,7 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 	private var List<TimeEvent> timeEvents;
 
 	def private getTimeEvents(TimeEvent it) {
-		if (timeEvents == null) {
+		if (timeEvents === null) {
 			timeEvents = flow.timeEvents
 		}
 		return timeEvents
@@ -57,7 +57,7 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 		varRef.code.toString.trim + " " + operator.literal + " " + expression.code.toString.trim
 	}
 
-	override dispatch CharSequence code(LogicalRelationExpression expression) {
+	def dispatch CharSequence code(LogicalRelationExpression expression) {
 		if (isSame(expression.leftOperand.infer.type, getType(GenericTypeSystem.STRING))) {
 			expression.logicalString
 		} else
@@ -79,7 +79,7 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def dispatch CharSequence code(EventRaisingExpression it) {
-		if (value != null) {
+		if (value !== null) {
 			event.definition.context + "raise" + event.definition.name.toFirstUpper + "(" + value.code + ")"
 		} else {
 			event.definition.context + "raise" + event.definition.name.toFirstUpper + "()"
@@ -117,14 +117,14 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 		if (it.const) {
 			return getConstContext(it)
 		}
-		if (scope != null) {
+		if (scope !== null) {
 			return scope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""
 	}
 
 	def getConstContext(Property it) {
-		if (scope != null) {
+		if (scope !== null) {
 			return scope.interfaceName + "."
 		} else {
 			return it.flow.statemachineInterfaceName + "."
@@ -132,14 +132,14 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def dispatch CharSequence getContext(Event it) {
-		if (scope != null) {
+		if (scope !== null) {
 			return scope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""
 	}
 
 	def dispatch CharSequence getContext(OperationDefinition it) {
-		if (scope != null) {
+		if (scope !== null) {
 			return scope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""
