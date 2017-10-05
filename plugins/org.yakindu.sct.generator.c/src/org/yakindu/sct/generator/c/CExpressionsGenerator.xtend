@@ -73,6 +73,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	«IF isSame(leftOperand.infer.type, getType(GenericTypeSystem.STRING))»
 		(strcmp(«leftOperand.code», «rightOperand.code») «operator.literal» 0)
 	«ELSE»«leftOperand.code» «operator.literal» «rightOperand.code»«ENDIF»'''
+	
 	/* Feature call */
 	def dispatch CharSequence code(FeatureCall it) {
 		it.code(it.definition)
