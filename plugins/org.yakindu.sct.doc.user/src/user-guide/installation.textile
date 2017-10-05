@@ -214,8 +214,6 @@ Depending on your Linux distribution and version, you might need to install addi
 
 The list of Linux distributions mentioned below is in no way meant to be exhaustive. If your Linux distribution is not yet among them and you manage to find out the proper commands for it, please let us know – e.g. by directly editing this document:
 
-p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/installation/installation.textile
-
 
 h4(#inst_linux_webkit_gtk). Webkit GTK
 
