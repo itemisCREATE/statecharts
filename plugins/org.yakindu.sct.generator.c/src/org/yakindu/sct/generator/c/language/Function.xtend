@@ -12,10 +12,10 @@ package org.yakindu.sct.generator.c.language
 
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.yakindu.sct.generator.common.CharSequenceList
-import org.yakindu.sct.generator.common.IFunction
-import org.yakindu.sct.generator.common.IModifier
-import org.yakindu.sct.generator.common.IType
+import org.yakindu.sct.generator.core.language.CharSequenceList
+import org.yakindu.sct.generator.core.language.IFunction
+import org.yakindu.sct.generator.core.language.IModifier
+import org.yakindu.sct.generator.core.language.IType
 
 /**
  * @author rbeckmann

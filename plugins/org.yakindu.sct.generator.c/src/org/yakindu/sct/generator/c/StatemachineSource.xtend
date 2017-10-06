@@ -22,10 +22,10 @@ import org.yakindu.sct.generator.c.language.Preprocessor.LocalHeader
 import org.yakindu.sct.generator.c.language.Preprocessor.SystemHeader
 import org.yakindu.sct.generator.c.language.Type
 import org.yakindu.sct.generator.c.language.TypeQualifier
-import org.yakindu.sct.generator.common.Comment
-import org.yakindu.sct.generator.common.IFunction
-import org.yakindu.sct.generator.common.Parameter
-import org.yakindu.sct.generator.common.factory.FunctionFactory
+import org.yakindu.sct.generator.core.language.Comment
+import org.yakindu.sct.generator.core.language.IFunction
+import org.yakindu.sct.generator.core.language.Parameter
+import org.yakindu.sct.generator.core.language.factory.FunctionFactory
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow

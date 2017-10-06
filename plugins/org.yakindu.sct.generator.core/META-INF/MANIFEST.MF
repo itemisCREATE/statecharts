@@ -48,6 +48,8 @@ Export-Package: org.yakindu.sct.generator.core;
    org.eclipse.xtext.generator,
    org.yakindu.sct.model.sgen,
    org.yakindu.sct.generator.core.library",
+ org.yakindu.sct.generator.core.language,
+ org.yakindu.sct.generator.core.language.factory,
  org.yakindu.sct.generator.core.library;
   uses:="org.eclipse.emf.ecore,
    org.eclipse.core.runtime,

@@ -11,7 +11,7 @@
 package org.yakindu.sct.generator.c.language
 
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.yakindu.sct.generator.common.CodePart
+import org.yakindu.sct.generator.core.language.CodePart
 
 /**
  * @author rbeckmann
