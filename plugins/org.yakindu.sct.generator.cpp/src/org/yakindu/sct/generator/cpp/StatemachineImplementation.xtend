@@ -16,7 +16,6 @@ import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.MultiplicativeOperator
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
-import org.yakindu.sct.generator.c.ExpressionCode
 import org.yakindu.sct.generator.c.IContentTemplate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
@@ -41,9 +40,9 @@ class StatemachineImplementation implements IContentTemplate {
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension INamingService
-	@Inject protected extension ExpressionCode
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension EventCode
+	@Inject protected extension CppExpressionsGenerator
 	
 	protected GeneratorEntry entry
 	
