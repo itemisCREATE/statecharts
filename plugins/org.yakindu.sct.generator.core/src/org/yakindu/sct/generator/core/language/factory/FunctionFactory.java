@@ -8,14 +8,14 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.common.factory;
+package org.yakindu.sct.generator.core.language.factory;
 
 import java.util.List;
 
-import org.yakindu.sct.generator.common.IFunction;
-import org.yakindu.sct.generator.common.IModifier;
-import org.yakindu.sct.generator.common.IParameter;
-import org.yakindu.sct.generator.common.Parameter;
+import org.yakindu.sct.generator.core.language.IFunction;
+import org.yakindu.sct.generator.core.language.IModifier;
+import org.yakindu.sct.generator.core.language.IParameter;
+import org.yakindu.sct.generator.core.language.Parameter;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;

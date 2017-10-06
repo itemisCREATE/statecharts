@@ -8,11 +8,20 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.common;
+package org.yakindu.sct.generator.core.language
 
 /**
  * @author rbeckmann
  *
  */
-public interface ILoop extends ICodeBlock {
+abstract class CodeBlock extends CodePart implements ICodeBlock {
+	protected CharSequence content;
+	
+	override getContent() {
+		return content;
+	}
+
+	override setContent(CharSequence content) {
+		this.content = content;
+	}
 }

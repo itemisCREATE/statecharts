@@ -8,15 +8,11 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.common;
-
-import java.util.List;
+package org.yakindu.sct.generator.core.language;
 
 /**
  * @author rbeckmann
  *
  */
-public interface IModifierOwner extends ICodePart {
-	public List<IModifier> getModifiers();
-	public void setModifiers(List<IModifier> modifiers);
+public interface ILoop extends ICodeBlock {
 }

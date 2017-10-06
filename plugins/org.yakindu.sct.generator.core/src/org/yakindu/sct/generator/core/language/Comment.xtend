@@ -8,11 +8,10 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.common
+package org.yakindu.sct.generator.core.language
 
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.yakindu.sct.generator.common.CodePart
 
 /**
  * @author rbeckmann
@@ -58,11 +57,11 @@ class Comment extends CodePart {
 		lines.add(line.trim)
 		
 		'''
-		/* 
-		 «FOR l : lines»
-		 * «l»
-		 «ENDFOR»
-		 */
+			/* 
+			 «FOR l : lines»
+			 	* «l»
+			 «ENDFOR»
+			 */
 		'''
 	}
 	

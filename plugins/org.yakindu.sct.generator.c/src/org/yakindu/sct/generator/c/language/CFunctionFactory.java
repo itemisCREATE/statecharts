@@ -10,8 +10,8 @@
  */
 package org.yakindu.sct.generator.c.language;
 
-import org.yakindu.sct.generator.common.IFunction;
-import org.yakindu.sct.generator.common.factory.FunctionFactory;
+import org.yakindu.sct.generator.core.language.IFunction;
+import org.yakindu.sct.generator.core.language.factory.FunctionFactory;
 
 /**
  * @author rbeckmann

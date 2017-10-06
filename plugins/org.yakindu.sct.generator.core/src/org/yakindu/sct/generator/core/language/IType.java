@@ -8,11 +8,11 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.common;
+package org.yakindu.sct.generator.core.language;
 
 /**
  * @author rbeckmann
  *
  */
-public interface IParameter extends ITypeOwner, ITypeQualifierOwner, INameOwner {
+public interface IType extends ICodePart {
 }

@@ -8,16 +8,13 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.common;
+package org.yakindu.sct.generator.core.language;
 
 /**
  * @author rbeckmann
  *
  */
-public interface ICodeBlock extends ICodePart {
-	public CharSequence getBlockOpen();
-	public CharSequence getBlockClose();
-	
-	public CharSequence getContent();
-	public void setContent(CharSequence content);
+public interface INameOwner extends ICodePart {
+	public CharSequence getName();
+	public void setName(CharSequence name);
 }

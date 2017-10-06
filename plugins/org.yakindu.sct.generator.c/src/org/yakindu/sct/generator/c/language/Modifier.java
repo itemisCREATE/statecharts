@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.generator.c.language;
 
-import org.yakindu.sct.generator.common.IModifier;
+import org.yakindu.sct.generator.core.language.IModifier;
 
 /**
  * @author rbeckmann

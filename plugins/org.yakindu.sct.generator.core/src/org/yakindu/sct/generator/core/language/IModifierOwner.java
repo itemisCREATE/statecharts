@@ -8,13 +8,15 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.common;
+package org.yakindu.sct.generator.core.language;
+
+import java.util.List;
 
 /**
  * @author rbeckmann
  *
  */
-public interface IDocumentationOwner {
-	public CharSequence getDocumentation();
-	public void setDocumentation(CharSequence documentation);
+public interface IModifierOwner extends ICodePart {
+	public List<IModifier> getModifiers();
+	public void setModifiers(List<IModifier> modifiers);
 }

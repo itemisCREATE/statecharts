@@ -8,7 +8,7 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.common
+package org.yakindu.sct.generator.core.language
 
 import java.util.ArrayList
 import java.util.Collection

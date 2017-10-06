@@ -8,13 +8,13 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.common;
+package org.yakindu.sct.generator.core.language;
 
 /**
  * @author rbeckmann
  *
  */
-public interface ITypeQualifierOwner extends ICodePart {
-	public ITypeQualifier getTypeQualifier();
-	public void setTypeQualifier(ITypeQualifier typeQualifier);
+public interface IDocumentationOwner {
+	public CharSequence getDocumentation();
+	public void setDocumentation(CharSequence documentation);
 }

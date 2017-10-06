@@ -8,13 +8,12 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.common;
+package org.yakindu.sct.generator.core.language;
 
 /**
  * @author rbeckmann
  *
  */
-public interface ITypeOwner extends ICodePart {
-	public IType getType();
-	public void setType(IType type);
+public interface IModifier extends ICodePart {
+
 }

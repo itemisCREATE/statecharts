@@ -8,11 +8,15 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.common;
+package org.yakindu.sct.generator.core.language;
+
+import java.util.List;
 
 /**
  * @author rbeckmann
  *
  */
-public interface IType extends ICodePart {
+public interface IFunction extends ICodeBlock, IModifierOwner, ITypeOwner, INameOwner, IDocumentationOwner {
+	public List<CharSequence> getParameters();
+	public void setParameters(List<CharSequence> parameter);
 }

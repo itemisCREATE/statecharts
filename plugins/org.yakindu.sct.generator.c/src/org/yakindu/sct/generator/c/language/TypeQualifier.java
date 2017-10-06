@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.generator.c.language;
 
-import org.yakindu.sct.generator.common.ITypeQualifier;
+import org.yakindu.sct.generator.core.language.ITypeQualifier;
 
 /**
  * @author rbeckmann
