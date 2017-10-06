@@ -12,6 +12,8 @@
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
+import org.yakindu.base.expressions.expressions.AssignmentExpression
+import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.Expression
@@ -83,6 +85,13 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		(strcmp(«leftOperand.code», «rightOperand.code») «operator.literal» 0)
 	«ELSE»«leftOperand.code» «operator.literal» «rightOperand.code»«ENDIF»'''
 
+	override dispatch CharSequence code(AssignmentExpression it) {
+		if (it.operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal(it)) {
+			'''«varRef.code» = fmod(«varRef.code»,«expression.code»)'''
+		} else
+			'''«varRef.code» «operator.literal» «expression.code»'''
+	}
+
 	/* Feature call */
 	def dispatch CharSequence code(FeatureCall it) {
 		it.code(it.definition)
@@ -117,5 +126,11 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch CharSequence sc_boolean_code(LogicalNotExpression it) '''(«it.code») ? bool_true : bool_false'''
 
 	def dispatch CharSequence sc_boolean_code(LogicalRelationExpression it) '''(«it.code») ? bool_true : bool_false'''
+
+	def boolean haveCommonTypeReal(Expression expression) {
+		if(isSame(getCommonType((infer(expression).getType), getType(ITypeSystem.INTEGER)),
+			getType(ITypeSystem.INTEGER))) return false
+		return true
+	}
 
 }

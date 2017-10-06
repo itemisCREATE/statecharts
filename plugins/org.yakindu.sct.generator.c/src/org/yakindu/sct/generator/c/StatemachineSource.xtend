@@ -13,6 +13,10 @@ package org.yakindu.sct.generator.c
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtext.util.Strings
+import org.yakindu.base.expressions.expressions.AssignmentExpression
+import org.yakindu.base.expressions.expressions.AssignmentOperator
+import org.yakindu.base.expressions.expressions.MultiplicativeOperator
+import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -20,9 +24,9 @@ import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.stext.EventDefinition
 
 class StatemachineSource implements IContentTemplate {
 	
@@ -42,6 +46,7 @@ class StatemachineSource implements IContentTemplate {
 		
 		#include <stdlib.h>
 		#include <string.h>
+		«IF modOnReal»#include <math.h>«ENDIF»
 		#include "«(typesModule.h).relativeTo(module.c)»"
 		#include "«(module.h).relativeTo(module.c)»"
 		«IF timed || !it.operations.empty»
@@ -56,6 +61,11 @@ class StatemachineSource implements IContentTemplate {
 		
 		«functions»
 	'''
+	}
+	
+	def modOnReal(ExecutionFlow it) {
+		!eAllContents.filter(NumericalMultiplyDivideExpression).filter[operator == MultiplicativeOperator.MOD].filter[it.haveCommonTypeReal].isEmpty ||
+		!eAllContents.filter(AssignmentExpression).filter[operator == AssignmentOperator.MOD_ASSIGN].filter[it.haveCommonTypeReal].isEmpty
 	}
 	
 	def functions(ExecutionFlow it) '''
