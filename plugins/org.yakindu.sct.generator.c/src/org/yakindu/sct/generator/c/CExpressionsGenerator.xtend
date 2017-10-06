@@ -22,7 +22,9 @@ import org.yakindu.base.expressions.expressions.LogicalAndExpression
 import org.yakindu.base.expressions.expressions.LogicalNotExpression
 import org.yakindu.base.expressions.expressions.LogicalOrExpression
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
+import org.yakindu.base.expressions.expressions.MultiplicativeOperator
 import org.yakindu.base.expressions.expressions.NullLiteral
+import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
@@ -90,6 +92,14 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 			'''«varRef.code» = fmod(«varRef.code»,«expression.code»)'''
 		} else
 			'''«varRef.code» «operator.literal» «expression.code»'''
+	}
+
+	def dispatch CharSequence code(NumericalMultiplyDivideExpression expression) {
+		if (expression.operator == MultiplicativeOperator.MOD && haveCommonTypeReal(expression)) {
+			'''fmod(«expression.leftOperand.code.toString.trim»,«expression.rightOperand.code»)'''
+		} else {
+			super._code(expression);
+		}
 	}
 
 	/* Feature call */
