@@ -94,6 +94,7 @@ class StatemachineImplementation implements IContentTemplate {
 	'''
 	}
 	
+<<<<<<< HEAD
 <<<<<<< Upstream, based on master
 <<<<<<< Upstream, based on master
 
@@ -108,6 +109,12 @@ class StatemachineImplementation implements IContentTemplate {
 >>>>>>> fde1cf9 include <math.h> only when needed
 	}
 >>>>>>> 9db0730 fmod only on real, float and double variables
+=======
+	def modOnReal(ExecutionFlow it) {
+		!eAllContents.filter(NumericalMultiplyDivideExpression).filter[operator == MultiplicativeOperator.MOD].filter[it.haveCommonTypeReal].isEmpty ||
+		!eAllContents.filter(AssignmentExpression).filter[operator == AssignmentOperator.MOD_ASSIGN].filter[it.haveCommonTypeReal].isEmpty
+	}
+>>>>>>> branch 'issue_1654' of https://github.com/Yakindu/statecharts.git
 	
 	def protected usingNamespaces(ExecutionFlow it) {
 		''''''
