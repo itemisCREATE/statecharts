@@ -330,12 +330,12 @@ class StatemachineSource implements IContentTemplate {
 		f
 	}
 	
-	def interfaceOutgoingEventValueGetter(ExecutionFlow it, EventDefinition event) '''
-		«event.typeSpecifier.targetLanguageName» «event.asGetter»(const «scHandleDecl»)
-		{
-			return «event.valueAccess»;
-		}
-	'''
+	def interfaceOutgoingEventValueGetter(ExecutionFlow it, EventDefinition event) {
+		val returnType = new CustomType(event.typeSpecifier.targetLanguageName)
+		val func = function(event.asGetter, '''return «event.valueAccess»;''')
+		(func.parameters.get(0) as Parameter).typeQualifier = TypeQualifier.CONST
+		func.type = returnType
+	}
 	
 	def interfaceFunctions(ExecutionFlow it) '''
 		«FOR scope : interfaceScopes»
@@ -366,7 +366,7 @@ class StatemachineSource implements IContentTemplate {
 	'''
 	
 	/* ===================================================================================
-	 * Handling decralartion of function prototypes
+	 * Handling declaration of function prototypes
 	 */
 	 
 	def functionPrototypes(ExecutionFlow it) '''
@@ -409,7 +409,6 @@ class StatemachineSource implements IContentTemplate {
 	 * Handling implementation of internal functions
 	 */
 	 
-	/** */
 	def functionImplementations(ExecutionFlow it) '''
 		«new Comment("implementations of all internal functions")»
 		«FOR key : internalFunctions.keySet»
