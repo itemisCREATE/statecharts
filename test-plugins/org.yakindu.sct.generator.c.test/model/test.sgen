@@ -17,14 +17,14 @@ GeneratorModel for sctunit::c {
 			inlineEntryActions = false
 			inlineExitActions = false
 			inlineEnterSequences = false
-			inlineExitSequences = false
+			inlineExitSequences = false 
 			inlineChoices = false
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
 		}
-
-	}
+ 
+	} 
 
 	test AlwaysOncycle {
 
@@ -32,7 +32,7 @@ GeneratorModel for sctunit::c {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/AlwaysOncycle"
 			libraryTargetFolder = "libraryTarget"
-		}
+		} 
 
 		feature JUnitWrapper {
 			WrapToJUnit = true
@@ -760,6 +760,34 @@ GeneratorModel for sctunit::c {
 			GenerateSGen = true
 		}
 		
+	}
+	
+	test FloatModulo {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "gtests/FloatModulo"
+			libraryTargetFolder = "libraryTarget"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
 	}
 
 	test Guard {

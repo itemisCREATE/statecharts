@@ -36,7 +36,6 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Type;
-import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
@@ -243,11 +242,6 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		if (element instanceof Type) {
 			return super.getDisplayString(element, qualifiedNameAsString, shortName);
 		}
-		if (element instanceof State) {
-			qualifiedNameAsString = getQualifiedNameConverter()
-					.toString(getQualifiedNameConverter().toQualifiedName(qualifiedNameAsString).skipFirst(1));
-			return super.getDisplayString(element, qualifiedNameAsString, shortName);
-		}
 
 		if (element == null || element.eIsProxy()) {
 			return qualifiedNameAsString;
@@ -308,11 +302,6 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		priorityOptimizer.accept(proposal);
 	}
 
-	public void completeActiveStateReferenceExpression_Value(EObject model, Assignment assignment,
-			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		lookupCrossReference(((CrossReference) assignment.getTerminal()), context, acceptor);
-	}
-
 	private void alterPriority(ICompletionProposal proposal, int delta) {
 		if (proposal == null || !(proposal instanceof ConfigurableCompletionProposal))
 			return;
@@ -321,8 +310,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	}
 
 	/**
-	 * The acceptor delegate creates a Dummy EObject of type Keyword for the User
-	 * Help Hover integration
+	 * The acceptor delegate creates a Dummy EObject of type Keyword for the
+	 * User Help Hover integration
 	 * 
 	 */
 	public class AcceptorDelegate implements ICompletionProposalAcceptor {

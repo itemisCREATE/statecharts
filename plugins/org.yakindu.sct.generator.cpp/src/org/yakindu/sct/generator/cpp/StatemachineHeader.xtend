@@ -33,7 +33,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader {
 
-	@Inject protected extension CppNaming
+	@Inject protected extension Naming
 	@Inject protected extension Navigation
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension GenmodelEntriesExtension
@@ -116,12 +116,6 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		'''
 			«entry.innerClassVisibility»:
 			
-				«IF (timed || hasOperationCallbacks)»
-				«copyConstructorDecl»
-				
-				«assignmentOperatorDecl»
-				«ENDIF»
-			
 				«FOR s : scopes.filter(typeof(InternalScope))»«s.createInterface»«ENDFOR»
 			
 				«statemachineTypeDecl»
@@ -131,20 +125,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		'''
 	}
 	
-	
-	def protected copyConstructorDecl(ExecutionFlow it) {
-		'''
-		«module»(const «module» &rhs);
-		'''
-	}
-	
-	def protected assignmentOperatorDecl(ExecutionFlow it) {
-		'''
-			«module»& operator=(const «module»&);
-		'''
-	}
-	
-		def protected generatePrivateClassmembers(ExecutionFlow it) {
+	def protected generatePrivateClassmembers(ExecutionFlow it) {
 		''''''
 	}
 
@@ -322,7 +303,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		/*
 		 * Functions inherited from TimedStatemachineInterface
 		 */
-		virtual void setTimer(«timerInterface»* timerInterface);
+		virtual void setTimer(«timerInterface»* timer);
 		
 		virtual «timerInterface»* getTimer();
 		

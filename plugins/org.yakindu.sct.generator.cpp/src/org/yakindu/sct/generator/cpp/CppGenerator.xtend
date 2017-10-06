@@ -37,7 +37,7 @@ class CppGenerator implements IExecutionFlowGenerator {
 	@Inject extension StatemachineHeader statemachineHeaderContent
 	@Inject extension StatemachineImplementation statemachineSourceContent
 	@Inject extension Navigation
-	@Inject extension CppNaming
+	@Inject extension Naming
 	@Inject extension ICoreLibraryHelper
 
 	@Inject
@@ -51,21 +51,17 @@ class CppGenerator implements IExecutionFlowGenerator {
 	def generateArtifacts(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa,
 		IGenArtifactConfigurations locations) {
 		for (GenArtifactConfiguration a : locations.configurations) {
-			if (!a.skip) {
-				fsa.generateFile(a.getName, a.getOutputName, a.getContentTemplate.content(flow, entry, locations))
-			}
+			fsa.generateFile(a.getName, a.getOutputName, a.getContentTemplate.content(flow, entry, locations))
 		}
 	}
 
 	def initGenerationArtifacts(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations locations) {
-		locations.configure(flow.typesModule.h, entry.libraryOutput, typesContent, entry.skipLibraryFiles)
-		locations.configure(statemachineInterface.h, entry.libraryOutput, statemachineInterfaceContent,
-			entry.skipLibraryFiles)
+		locations.configure(flow.typesModule.h, entry.libraryOutput, typesContent)
+		locations.configure(statemachineInterface.h, entry.libraryOutput, statemachineInterfaceContent)
 
 		if (flow.timed) {
-			locations.configure(timedStatemachineInterface.h, entry.libraryOutput, timedStatemachineInterfaceContent,
-				entry.skipLibraryFiles)
-			locations.configure(timerInterface.h, entry.libraryOutput, timerInterfaceContent, entry.skipLibraryFiles)
+			locations.configure(timedStatemachineInterface.h, entry.libraryOutput, timedStatemachineInterfaceContent)
+			locations.configure(timerInterface.h, entry.libraryOutput, timerInterfaceContent)
 		}
 
 		locations.configure(flow.module.h, entry.headerOutput, statemachineHeaderContent)

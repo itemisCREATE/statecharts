@@ -27,9 +27,6 @@ class ITimerCallback {
 	@Inject ICoreLibraryHelper outletFeatureHelper
 
 	def generateITimerCallback(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-		if(outletFeatureHelper.getSkipLibraryFiles(entry)) {
-			return
-		}
 		if (outletFeatureHelper.getLibraryTargetFolderValue(entry) !== null) {
 			// generate into library target folder in case one is specified, as the contents are static
 			fsa.generateFile(entry.basePackagePath + '/' + iTimerCallback.java, LIBRARY_TARGET_FOLDER_OUTPUT,

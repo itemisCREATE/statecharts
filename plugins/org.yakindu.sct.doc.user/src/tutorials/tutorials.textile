@@ -1,9 +1,11 @@
 
+p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/tutorials/tutorials.textile
 
 
 
 
-h1(#tutorial_five-minutes_tutorial). Five-minutes tutorial
+
+h1(#tutorial_five-minutes-tutorial). Five-minutes tutorial
 
 The five-minutes tutorial gives you a brief introduction into modeling state machines with YAKINDU Statechart Tools by a simple example. It models a light switch, which has the states _on_ and _off_. Operating the switch repeatedly turns the light on, off, back on again, and so forth. You can simulate this behavior in a dynamic statechart model (state machine model). Here's how this looks like:
 
@@ -45,12 +47,12 @@ As an example, we will take the light switch statechart and generate Java source
 # In the next dialog, check the checkbox left from _light_switch.sct_, then click _Finish_.
 # Java classes implementing the statechart model are generated. You can find the generated source code in the folders _src_ and _src-gen_ within the _light_switch_ project. <p>!(standard-image)images/tuto_5min_140_generated_java_source_code.png(Generated Java source code)!</p>
 
-That's it. If you want to know more, take the time and work through the "Comprehensive Tutorial":#tutorial_comprehensive_tutorial.
+That's it. If you want to know more, take the time and work through the "Comprehensive Tutorial":#tutorial_comprehensive-tutorial.
 
 
+p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/tutorials/tutorials.textile
 
-
-h1(#tutorial_comprehensive_tutorial). Comprehensive tutorial
+h1(#tutorial_comprehensive-tutorial). Comprehensive tutorial
 
 This tutorial introduces YAKINDU Statechart Tools (SCT) which provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concepts of Finite State Machines (FSM) and Harel Statecharts. It is an easy-to-use tool featuring sophisticated graphical statechart editing, validation and simulation of statecharts as well as code generation for C, C&#43;&#43;, or Java.
 

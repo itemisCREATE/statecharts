@@ -15,9 +15,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.emf.common.ui.URIEditorInput;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
@@ -153,12 +150,6 @@ public class ActiveEditorTracker implements IPageListener, IPartListener,
 		if (editorInput instanceof IFileEditorInput) {
 			final IFileEditorInput input = (IFileEditorInput) editorInput;
 			return input.getFile().getProject();
-		} else if (editorInput instanceof URIEditorInput) {
-			final URI uri = ((URIEditorInput) editorInput).getURI();
-			if (uri.isPlatformResource()) {
-				final String platformString = uri.toPlatformString(true);
-				return ResourcesPlugin.getWorkspace().getRoot().findMember(platformString).getProject();
-			}
 		}
 		return null;
 	}

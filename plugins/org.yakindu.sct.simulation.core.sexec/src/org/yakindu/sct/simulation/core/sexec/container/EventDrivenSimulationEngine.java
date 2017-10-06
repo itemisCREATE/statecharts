@@ -60,11 +60,7 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 
 	@Override
 	public void stepForward() {
-		try {
-			interpreter.runCycle();
-		} catch (Exception ex) {
-			handleException(ex);
-		}
+		interpreter.runCycle();
 		super.stepForward();
 	}
 
@@ -75,7 +71,6 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 
 	public static class EventDrivenCycleAdapter extends EContentAdapter {
 
-		
 		private IExecutionFlowInterpreter interpreter;
 
 		private boolean suspended = false;
@@ -83,6 +78,7 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 
 		public EventDrivenCycleAdapter(IExecutionFlowInterpreter interpreter) {
 			this.interpreter = interpreter;
+
 		}
 
 		public void notifyChanged(Notification notification) {
@@ -91,7 +87,7 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 					&& notification.getFeature() == SRuntimePackage.Literals.EXECUTION_EVENT__RAISED) {
 				if (notification.getNewBooleanValue() != notification.getOldBooleanValue()) {
 					if (notification.getNewBooleanValue()) {
-						if (!suspended) 
+						if (!suspended)
 							interpreter.runCycle();
 						else {
 							cycleAfterResume = true;
@@ -101,7 +97,7 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 			}
 
 		}
-		
+
 		public boolean isAdapterForType(Object type) {
 			return type == EventDrivenCycleAdapter.class;
 		}

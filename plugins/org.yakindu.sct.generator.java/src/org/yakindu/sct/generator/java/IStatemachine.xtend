@@ -27,9 +27,6 @@ class IStatemachine {
 	@Inject ICoreLibraryHelper outletFeatureHelper
 	 
 	def generateIStatemachine(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-		if(outletFeatureHelper.getSkipLibraryFiles(entry)) {
-			return
-		}
 		if (outletFeatureHelper.getLibraryTargetFolderValue(entry) != null) {
 			// generate into library target folder in case one is specified, as the contents are static
 			fsa.generateFile(entry.basePackagePath + '/' + iStatemachine.java,

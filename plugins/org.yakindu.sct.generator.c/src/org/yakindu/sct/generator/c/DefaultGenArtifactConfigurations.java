@@ -44,12 +44,7 @@ public class DefaultGenArtifactConfigurations implements IGenArtifactConfigurati
 
 	@Override
 	public void configure(String artifactName, String outputConfigName, IContentTemplate contentTemplate) {
-		configure(artifactName, outputConfigName, contentTemplate, false);
-	}
-	
-	@Override
-	public void configure(String artifactName, String outputConfigName, IContentTemplate contentTemplate, boolean skip) {
-		generationArtifacts.add(new GenArtifactConfiguration(artifactName, outputConfigName, contentTemplate, skip));
+		generationArtifacts.add(new GenArtifactConfiguration(artifactName, outputConfigName, contentTemplate));
 	}
 
 	protected URI getOutputFolder(String artifactName) {

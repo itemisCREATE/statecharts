@@ -1,0 +1,9 @@
+testclass FloatModulo for statechart FloatModulo {
+	
+	@Test
+	operation test() {
+			enter
+			proceed 1 cycle
+			assert is_final						
+	}
+}
