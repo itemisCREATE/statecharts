@@ -8,30 +8,28 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.core.language
+package org.yakindu.sct.generator.cpp.language
 
+import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.yakindu.sct.generator.core.language.IFunction
 
 /**
  * @author rbeckmann
  *
  */
-class Parameter extends CodePart implements IParameter {
-	@Accessors protected IType type;
-	@Accessors protected ITypeQualifier typeQualifier;
-	@Accessors protected CharSequence name;
+class Constructor extends Function implements IFunction {
+	@Accessors protected List<CharSequence> initializerList;
 	
-	new(IVariable other) {
-		this.type = other.type
-		this.typeQualifier = other.typeQualifier
-		this.name = other.name
+	override getBlockOpen() {
+		if(initializerList.nullOrEmpty) {
+			super.getBlockOpen
+		} else {
+			'''«prefix»(«parameters») : «initializerList» «super.blockOpen»'''
+		}
 	}
 	
-	new() {
-		
-	}
-	
-	override toString() {
-		new CharSequenceList(#[typeQualifier, type, name]).toString
+	override prefix() {
+		getName()
 	}
 }

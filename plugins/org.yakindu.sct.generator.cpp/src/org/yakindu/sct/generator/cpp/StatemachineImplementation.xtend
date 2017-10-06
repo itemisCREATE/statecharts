@@ -14,6 +14,9 @@ import com.google.inject.Inject
 import java.util.List
 import org.yakindu.sct.generator.c.IContentTemplate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.generator.c.language.Preprocessor.Header
+import org.yakindu.sct.generator.c.language.Preprocessor.LocalHeader
+import org.yakindu.sct.generator.c.language.Preprocessor.SystemHeader
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.Check
@@ -44,11 +47,15 @@ class StatemachineImplementation implements IContentTemplate {
 	
 	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
 		this.entry = entry
+		val List<Header> includes = newArrayList
+		includes.add(new LocalHeader(module.h))
+		includes.add(new SystemHeader("string.h"))
 	'''	
 		«entry.licenseText»
 		
-		#include "«module.h»"
-		#include <string.h>
+		«FOR include : includes»
+		«include»
+		«ENDFOR»
 		
 		/*! \file Implementation of the state machine '«name»'
 		*/

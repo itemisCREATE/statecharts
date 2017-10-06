@@ -19,7 +19,7 @@ import org.yakindu.sct.generator.core.language.factory.FunctionFactory;
  */
 public class CFunctionFactory extends FunctionFactory {
 	/* (non-Javadoc)
-	 * @see org.yakindu.sct.generator.common.factory.FunctionFactory#newFunction()
+	 * @see org.yakindu.sct.generator.core.language.factory.FunctionFactory#newFunction()
 	 */
 	@Override
 	public IFunction function() {

@@ -11,8 +11,10 @@
 package org.yakindu.sct.generator.core.language;
 
 /**
+ * A
  * @author rbeckmann
  *
  */
-public interface IParameter extends IVariable {
+public interface IDeclarable extends ICodePart {
+	public CharSequence declare();
 }

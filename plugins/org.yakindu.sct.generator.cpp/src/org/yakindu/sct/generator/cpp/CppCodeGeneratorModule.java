@@ -20,14 +20,18 @@ import org.yakindu.sct.generator.c.DefaultGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.Naming;
 import org.yakindu.sct.generator.c.SimpleGenArtifactConfigurations;
+import org.yakindu.sct.generator.c.language.CFunctionFactory;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.IGeneratorModule;
+import org.yakindu.sct.generator.core.language.IFunction;
+import org.yakindu.sct.generator.core.language.factory.FunctionFactory;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenEventCode;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenExpressionCode;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineHeader;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineImplementation;
+import org.yakindu.sct.generator.cpp.language.Function;
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
@@ -51,10 +55,19 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		binder.bind(INamingService.class).to(CppNamingService.class);
 		binder.bind(ITypeSystemInferrer.class).to(STextTypeInferrer.class);
 		binder.bind(Naming.class).to(CppNaming.class);
+		bindLanguageModules(binder);
 		bindEventDrivenClasses(entry, binder);
 		bindIGenArtifactConfigurations(entry, binder);
 	}
 	
+	/**
+	 * @param binder
+	 */
+	private void bindLanguageModules(Binder binder) {
+		binder.bind(IFunction.class).to(Function.class);
+		binder.bind(FunctionFactory.class).to(CFunctionFactory.class);
+	}
+
 	protected void bindIGenArtifactConfigurations(GeneratorEntry entry, Binder binder) {
 		FeatureParameterValue useRelativePathParam = entry.getFeatureParameterValue(FEATURE_INCLUDES,
 				PARAMETER_INCLUDES_USE_RELATIVE_PATHS);

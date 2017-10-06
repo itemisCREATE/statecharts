@@ -13,6 +13,7 @@ package org.yakindu.sct.generator.c.language
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.yakindu.sct.generator.core.language.CharSequenceList
+import org.yakindu.sct.generator.core.language.IDeclarable
 import org.yakindu.sct.generator.core.language.IFunction
 import org.yakindu.sct.generator.core.language.IModifier
 import org.yakindu.sct.generator.core.language.IType
@@ -21,7 +22,7 @@ import org.yakindu.sct.generator.core.language.IType
  * @author rbeckmann
  *
  */
-class Function extends CodeBlock implements IFunction {
+class Function extends CodeBlock implements IFunction, IDeclarable {
 	@Accessors protected CharSequence name;
 	@Accessors protected List<CharSequence> parameters;
 	@Accessors protected List<IModifier> modifiers;
@@ -34,15 +35,14 @@ class Function extends CodeBlock implements IFunction {
 	}
 	
 	override getBlockOpen() {
-		val prefix = new CharSequenceList(#[modifiers.toString, type, name])
 		'''«prefix»(«parameters») «super.blockOpen»'''
 	}
 	
-	def declare() {
+	override declare() {
 		'''«prefix»(«parameters»);'''
 	}
 	
-	def prefix() {
+	def CharSequence prefix() {
 		new CharSequenceList(#[modifiers.toString, type, name])
 	}
 	
