@@ -18,6 +18,7 @@ import org.yakindu.base.expressions.expressions.MultiplicativeOperator
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
 import org.yakindu.sct.generator.c.IContentTemplate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.Check
@@ -43,6 +44,7 @@ class StatemachineImplementation implements IContentTemplate {
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension EventCode
 	@Inject protected extension CppExpressionsGenerator
+	@Inject protected extension ExpressionsChecker
 	
 	protected GeneratorEntry entry
 	

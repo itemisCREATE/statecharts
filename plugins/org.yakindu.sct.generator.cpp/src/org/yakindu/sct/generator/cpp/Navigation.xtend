@@ -17,7 +17,7 @@ import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 
-class Navigation extends org.yakindu.sct.generator.c.Navigation {
+class Navigation extends org.yakindu.sct.generator.c.extensions.Navigation {
 	
 	def getStatechartScopes(ExecutionFlow it) {
 		scopes.filter(typeof(StatechartScope))

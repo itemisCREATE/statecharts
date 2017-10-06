@@ -30,6 +30,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 
 class StatemachineSource implements IContentTemplate {
 	
@@ -41,6 +42,7 @@ class StatemachineSource implements IContentTemplate {
 	@Inject protected extension FlowCode
 	@Inject protected extension ConstantInitializationResolver
 	@Inject protected extension StateVectorExtensions
+	@Inject protected extension ExpressionsChecker
 	
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) { 
 		initializeNamingService
@@ -64,11 +66,6 @@ class StatemachineSource implements IContentTemplate {
 		
 		«functions»
 	'''
-	}
-	
-	def modOnReal(ExecutionFlow it) {
-		!eAllContents.filter(NumericalMultiplyDivideExpression).filter[operator == MultiplicativeOperator.MOD].filter[it.haveCommonTypeReal].isEmpty ||
-		!eAllContents.filter(AssignmentExpression).filter[operator == AssignmentOperator.MOD_ASSIGN].filter[it.haveCommonTypeReal].isEmpty
 	}
 	
 	def functions(ExecutionFlow it) '''
