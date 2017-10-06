@@ -32,6 +32,8 @@ import org.yakindu.base.types.Property
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.generator.c.extensions.Naming
+import org.yakindu.sct.generator.c.extensions.Navigation
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression

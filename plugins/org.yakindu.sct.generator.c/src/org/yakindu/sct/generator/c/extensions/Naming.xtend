@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.c
+package org.yakindu.sct.generator.c.extensions
 
 import com.google.inject.Inject
 import java.util.List
@@ -17,6 +17,7 @@ import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
+import org.yakindu.sct.generator.c.extensions.Navigation
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionState
