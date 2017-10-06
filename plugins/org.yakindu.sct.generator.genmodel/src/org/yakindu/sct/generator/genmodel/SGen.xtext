@@ -25,7 +25,7 @@ GeneratorModel returns GeneratorModel:
 
 PropertyDefinition returns PropertyDefinition:
 	{PropertyDefinition} ('var') name=ID ':' typeSpecifier=TypeSpecifier
-	'=' initialValue=Expression;
+	('=' initialValue=Expression)?;
 
 GeneratorEntry returns GeneratorEntry:
 	contentType=ID elementRef=[ecore::EObject|QID] '{'

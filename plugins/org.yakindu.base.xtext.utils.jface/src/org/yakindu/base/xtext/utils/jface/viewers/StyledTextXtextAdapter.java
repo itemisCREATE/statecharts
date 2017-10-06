@@ -12,7 +12,12 @@ package org.yakindu.base.xtext.utils.jface.viewers;
 
 import java.util.List;
 
+import org.eclipse.core.internal.jobs.JobManager;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.fieldassist.ControlDecoration;
@@ -79,7 +84,12 @@ import com.google.inject.Provider;
  */
 @SuppressWarnings("restriction")
 public class StyledTextXtextAdapter {
-	
+
+	protected XtextSourceViewer sourceviewer;
+
+	private ValidationJob validationJob;
+
+	private IssueResolutionProvider resolutionProvider = new IssueResolutionProvider.NullImpl();
 	@Inject
 	private IPreferenceStoreAccess preferenceStoreAccess;
 	@Inject
@@ -94,15 +104,8 @@ public class StyledTextXtextAdapter {
 	private Provider<IDocumentPartitioner> documentPartitioner;
 	@Inject
 	private XtextDocument document;
-
-	private final IssueResolutionProvider resolutionProvider = new IssueResolutionProvider.NullImpl();
+	private XtextFakeResourceContext fakeResourceContext;
 	private final IXtextFakeContextResourcesProvider contextFakeResourceProvider;
-	private final XtextFakeResourceContext fakeResourceContext;
-
-	private XtextSourceViewer sourceviewer;
-
-	private ValidationJob validationJob;
-
 
 	private StyledText styledText;
 
@@ -115,7 +118,7 @@ public class StyledTextXtextAdapter {
 		injector.injectMembers(this);
 
 		// create fake resource and containing resource set
-		this.fakeResourceContext = createFakeResourceContext(injector);
+		createFakeResourceContext(injector);
 	}
 
 	public StyledTextXtextAdapter(Injector injector) {
@@ -129,22 +132,20 @@ public class StyledTextXtextAdapter {
 		updateFakeResourceContext();
 
 		// connect Xtext document to fake resource
-		initXtextDocument(getFakeResourceContext());
+		initXtextDocument(fakeResourceContext);
 
 		// connect xtext document to xtext source viewer
-		this.sourceviewer = createXtextSourceViewer();
-		this.decorationSupport = createSourceViewerDecorationSupport();
-		configureSourceViewerDecorationSupport(getDecorationSupport());
+		createXtextSourceViewer();
 
 		// install semantic highlighting support
 		installHighlightingHelper();
 
-		this.validationJob = createValidationJob();
-		getXtextDocument().setValidationJob(getValidationJob());
+		validationJob = createValidationJob();
+		document.setValidationJob(validationJob);
 
 		styledText.setData(StyledTextXtextAdapter.class.getCanonicalName(), this);
 
-		final IContentAssistant contentAssistant = getXtextSourceviewer().getContentAssistant();
+		final IContentAssistant contentAssistant = sourceviewer.getContentAssistant();
 		final CompletionProposalAdapter completionProposalAdapter = new CompletionProposalAdapter(styledText,
 				contentAssistant, KeyStroke.getInstance(SWT.CTRL, SWT.SPACE), null);
 
@@ -172,7 +173,7 @@ public class StyledTextXtextAdapter {
 		service.addFocusTracker(styledText, StyledText.class.getCanonicalName());
 
 		// add JDT Style code completion hint decoration
-		this.decoration = createContentAssistDecoration(styledText);
+		createContentAssistDecoration(styledText);
 
 		initSelectionProvider();
 	}
@@ -186,52 +187,53 @@ public class StyledTextXtextAdapter {
 			XtextStyledTextSelectionProvider xtextStyledTextSelectionProvider = new XtextStyledTextSelectionProvider();
 			ChangeSelectionProviderOnFocusGain listener = new ChangeSelectionProviderOnFocusGain(site,
 					xtextStyledTextSelectionProvider);
-			getStyledText().addFocusListener(listener);
-			getStyledText().addDisposeListener(listener);
+			styledText.addFocusListener(listener);
+			styledText.addDisposeListener(listener);
 		} catch (NullPointerException ex) {
 			// Do nothing, not opened within editor context
 		}
 
 	}
 
-	private ControlDecoration createContentAssistDecoration(StyledText styledText) {
-		final ControlDecoration result = new ControlDecoration(styledText, SWT.TOP | SWT.LEFT);
-		result.setShowHover(true);
-		result.setShowOnlyOnFocus(true);
+	private void createContentAssistDecoration(StyledText styledText) {
+		decoration = new ControlDecoration(styledText, SWT.TOP | SWT.LEFT);
+		decoration.setShowHover(true);
+		decoration.setShowOnlyOnFocus(true);
 
 		final Image image = ImageDescriptor
 				.createFromFile(XtextStyledTextCellEditor.class, "images/content_assist_cue.gif").createImage();
-		result.setImage(image);
-		result.setDescriptionText("Content Assist Available (CTRL + Space)");
-		result.setMarginWidth(2);
+		decoration.setImage(image);
+		decoration.setDescriptionText("Content Assist Available (CTRL + Space)");
+		decoration.setMarginWidth(2);
 		styledText.addDisposeListener(new DisposeListener() {
 			public void widgetDisposed(DisposeEvent e) {
-				if (getDecoration() != null) {
-					getDecoration().dispose();
+				if (decoration != null) {
+					decoration.dispose();
 				}
 				if (image != null) {
 					image.dispose();
 				}
 			}
 		});
-		return result;
 	}
 
 	protected ValidationJob createValidationJob() {
-		return new ValidationJob(getValidator(), getXtextDocument(),
-				new AnnotationIssueProcessor(getXtextDocument(), getXtextSourceviewer().getAnnotationModel(), getResolutionProvider()),
+		return new ValidationJob(validator, document,
+				new AnnotationIssueProcessor(document, sourceviewer.getAnnotationModel(), resolutionProvider),
 				CheckMode.FAST_ONLY);
 	}
 
-	protected XtextFakeResourceContext createFakeResourceContext(Injector injector) {
-		return new XtextFakeResourceContext(injector);
+	protected void createFakeResourceContext(Injector injector) {
+		this.fakeResourceContext = new XtextFakeResourceContext(injector);
 	}
 
-	protected XtextSourceViewer createXtextSourceViewer() {
-		final XtextSourceViewer result = new XtextSourceViewerEx(getStyledText(), getPreferenceStoreAccess().getPreferenceStore());
-		result.configure(getXtextSourceViewerConfiguration());
-		result.setDocument(getXtextDocument(), new AnnotationModel());
-		return result;
+	protected void createXtextSourceViewer() {
+		sourceviewer = new XtextSourceViewerEx(styledText, preferenceStoreAccess.getPreferenceStore());
+		sourceviewer.configure(configuration);
+		sourceviewer.setDocument(document, new AnnotationModel());
+		decorationSupport = new SourceViewerDecorationSupport(sourceviewer, null, new DefaultMarkerAnnotationAccess(),
+				getSharedColors());
+		configureSourceViewerDecorationSupport(decorationSupport);
 	}
 
 	protected ISharedTextColors getSharedColors() {
@@ -250,11 +252,11 @@ public class StyledTextXtextAdapter {
 			support.setAnnotationPreference(annotationPreference);
 		}
 
-		support.setCharacterPairMatcher(getCharacterPairMatcher());
+		support.setCharacterPairMatcher(characterPairMatcher);
 		support.setMatchingCharacterPainterPreferenceKeys(BracketMatchingPreferencesInitializer.IS_ACTIVE_KEY,
 				BracketMatchingPreferencesInitializer.COLOR_KEY);
 
-		support.install(getPreferenceStoreAccess().getPreferenceStore());
+		support.install(preferenceStoreAccess.getPreferenceStore());
 	}
 
 	protected void unconfigureSourceViewerDecorationSupport(SourceViewerDecorationSupport support) {
@@ -262,54 +264,54 @@ public class StyledTextXtextAdapter {
 	}
 
 	protected void initXtextDocument(XtextFakeResourceContext context) {
-		getXtextDocument().setInput(context.getFakeResource());
-		IDocumentPartitioner partitioner = getDocumentPartitioner().get();
-		partitioner.connect(getXtextDocument());
-		getXtextDocument().setDocumentPartitioner(partitioner);
+		document.setInput(context.getFakeResource());
+		IDocumentPartitioner partitioner = documentPartitioner.get();
+		partitioner.connect(document);
+		document.setDocumentPartitioner(partitioner);
 	}
 
 	public void setVisibleRegion(int start, int length) {
-		getXtextSourceviewer().setVisibleRegion(start, length);
+		sourceviewer.setVisibleRegion(start, length);
 	}
 
 	public void resetVisibleRegion() {
-		getXtextSourceviewer().resetVisibleRegion();
+		sourceviewer.resetVisibleRegion();
 	}
 
 	private void installHighlightingHelper() {
-		if (getXtextStyledTextHighlightingHelper() != null) {
-			getXtextStyledTextHighlightingHelper().install(this, getXtextSourceviewer());
+		if (xtextStyledTextHighlightingHelper != null) {
+			xtextStyledTextHighlightingHelper.install(this, sourceviewer);
 		}
 	}
 
 	private void uninstallHighlightingHelper() {
-		if (getXtextStyledTextHighlightingHelper() != null) {
-			getXtextStyledTextHighlightingHelper().uninstall();
+		if (xtextStyledTextHighlightingHelper != null) {
+			xtextStyledTextHighlightingHelper.uninstall();
 		}
 	}
 
 	public void dispose() {
-		getXtextDocument().setOutdated(true);
-		if (getDecorationSupport() != null) {
-			unconfigureSourceViewerDecorationSupport(getDecorationSupport());
+		document.setOutdated(true);
+		if (decorationSupport != null) {
+			unconfigureSourceViewerDecorationSupport(decorationSupport);
 		}
 		uninstallHighlightingHelper();
 	}
 
 	protected XtextSourceViewerConfiguration getXtextSourceViewerConfiguration() {
-		return this.configuration;
+		return configuration;
 	}
 
 	protected XtextDocument getXtextDocument() {
-		return this.document;
+		return document;
 	}
 
 	protected XtextSourceViewer getXtextSourceviewer() {
-		return this.sourceviewer;
+		return sourceviewer;
 	}
 
 	public IParseResult getXtextParseResult() {
-		return getXtextDocument().readOnly(new IUnitOfWork<IParseResult, XtextResource>() {
+		return document.readOnly(new IUnitOfWork<IParseResult, XtextResource>() {
 
 			public IParseResult exec(XtextResource state) throws Exception {
 				return state.getParseResult();
@@ -322,68 +324,23 @@ public class StyledTextXtextAdapter {
 	}
 
 	public List<Issue> getXtextValidationIssues() {
-		return getValidationJob().createIssues(new NullProgressMonitor());
+		return validationJob.createIssues(new NullProgressMonitor());
 	}
 
 	public void updateFakeResourceContext() {
-		getFakeResourceContext().updateFakeResourceContext(getFakeResourceContextProvider());
+		fakeResourceContext.updateFakeResourceContext(contextFakeResourceProvider);
 	}
 
 	protected IXtextFakeContextResourcesProvider getFakeResourceContextProvider() {
-		return this.contextFakeResourceProvider;
+		return contextFakeResourceProvider;
 	}
 
 	public XtextFakeResourceContext getFakeResourceContext() {
-		return this.fakeResourceContext;
+		return fakeResourceContext;
 	}
 
-	protected SourceViewerDecorationSupport createSourceViewerDecorationSupport() {
-		return new SourceViewerDecorationSupport(getXtextSourceviewer(), null, new DefaultMarkerAnnotationAccess(),
-				getSharedColors());
-	}
+	private class XtextStyledTextSelectionProvider implements ISelectionProvider {
 
-	protected ValidationJob getValidationJob() {
-		return this.validationJob;
-	}
-
-	protected IssueResolutionProvider getResolutionProvider() {
-		return this.resolutionProvider;
-	}
-
-	protected StyledText getStyledText() {
-		return this.styledText;
-	}
-
-	protected ControlDecoration getDecoration() {
-		return this.decoration;
-	}
-
-	protected SourceViewerDecorationSupport getDecorationSupport() {
-		return this.decorationSupport;
-	}
-
-	protected IResourceValidator getValidator() {
-		return this.validator;
-	}
-
-	protected IPreferenceStoreAccess getPreferenceStoreAccess() {
-		return this.preferenceStoreAccess;
-	}
-
-	protected ICharacterPairMatcher getCharacterPairMatcher() {
-		return this.characterPairMatcher;
-	}
-
-	protected Provider<IDocumentPartitioner> getDocumentPartitioner() {
-		return this.documentPartitioner;
-	}
-
-	protected XtextStyledTextHighlightingHelper getXtextStyledTextHighlightingHelper() {
-		return this.xtextStyledTextHighlightingHelper;
-	}
-
-	protected class XtextStyledTextSelectionProvider implements ISelectionProvider {
-		
 		public void setSelection(ISelection selection) {
 		}
 
@@ -394,9 +351,9 @@ public class StyledTextXtextAdapter {
 		}
 
 		public ISelection getSelection() {
-			if (getStyledText().isDisposed())
+			if (styledText.isDisposed())
 				return StructuredSelection.EMPTY;
-			int offset = getStyledText().getCaretOffset() - 1;
+			int offset = styledText.getCaretOffset() - 1;
 			XtextResource fakeResource = StyledTextXtextAdapter.this.getFakeResourceContext().getFakeResource();
 			IParseResult parseResult = fakeResource.getParseResult();
 			if (parseResult == null)
@@ -411,11 +368,11 @@ public class StyledTextXtextAdapter {
 		}
 	}
 
-	protected class ChangeSelectionProviderOnFocusGain implements FocusListener, DisposeListener {
+	private class ChangeSelectionProviderOnFocusGain implements FocusListener, DisposeListener {
 
-		protected ISelectionProvider selectionProviderOnFocusGain;
-		protected ISelectionProvider selectionProviderOnFocusLost;
-		protected IWorkbenchPartSite site;
+		private ISelectionProvider selectionProviderOnFocusGain;
+		private ISelectionProvider selectionProviderOnFocusLost;
+		private IWorkbenchPartSite site;
 
 		public ChangeSelectionProviderOnFocusGain(IWorkbenchPartSite site,
 				ISelectionProvider selectionProviderOnFocusGain) {
@@ -424,19 +381,19 @@ public class StyledTextXtextAdapter {
 		}
 
 		public void focusLost(FocusEvent e) {
-			if (this.selectionProviderOnFocusLost != null) {
-				this.site.setSelectionProvider(this.selectionProviderOnFocusLost);
+			if (selectionProviderOnFocusLost != null) {
+				site.setSelectionProvider(selectionProviderOnFocusLost);
 			}
 		}
 
 		public void focusGained(FocusEvent e) {
-			this.selectionProviderOnFocusLost = this.site.getSelectionProvider();
-			this.site.setSelectionProvider(this.selectionProviderOnFocusGain);
+			selectionProviderOnFocusLost = site.getSelectionProvider();
+			site.setSelectionProvider(selectionProviderOnFocusGain);
 		}
 
 		public void widgetDisposed(DisposeEvent e) {
-			if (this.selectionProviderOnFocusLost != null) {
-				this.site.setSelectionProvider(this.selectionProviderOnFocusLost);
+			if (selectionProviderOnFocusLost != null) {
+				site.setSelectionProvider(selectionProviderOnFocusLost);
 			}
 			((StyledText) e.getSource()).removeFocusListener(this);
 			((StyledText) e.getSource()).removeDisposeListener(this);

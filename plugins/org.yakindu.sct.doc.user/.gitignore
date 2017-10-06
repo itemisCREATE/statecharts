@@ -8,5 +8,4 @@ pdf/
 src-gen/
 target/
 website/
-!src/website/
 *~

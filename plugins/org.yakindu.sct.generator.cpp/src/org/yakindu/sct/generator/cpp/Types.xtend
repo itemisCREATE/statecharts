@@ -19,7 +19,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 
 class Types implements IContentTemplate {
 
-	@Inject extension CppNaming
+	@Inject extension Naming
 	@Inject extension GenmodelEntries
 
 	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations locations) '''
@@ -43,8 +43,8 @@ class Types implements IContentTemplate {
 		
 		typedef intptr_t       sc_eventid;
 		
-		#ifndef «CppNaming::NULL_STRING»
-			#define «CppNaming::NULL_STRING» 0
+		#ifndef «Naming::NULL_STRING»
+			#define «Naming::NULL_STRING» 0
 		#endif
 		
 		#endif /* «typesModule.define»_H_ */

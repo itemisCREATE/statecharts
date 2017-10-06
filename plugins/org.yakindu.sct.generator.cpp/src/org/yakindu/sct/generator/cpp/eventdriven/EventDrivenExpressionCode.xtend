@@ -12,13 +12,14 @@
 
 import com.google.inject.Inject
 import org.yakindu.base.types.Direction
-import org.yakindu.sct.generator.cpp.CppExpressionsGenerator
+import org.yakindu.sct.generator.cpp.ExpressionCode
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
+import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 
 /**
  * @author René Beckmann - Initial contribution and API
  */
-class EventDrivenExpressionCode extends CppExpressionsGenerator {
+class EventDrivenExpressionCode extends ExpressionCode {
 	@Inject extension EventNaming eventNaming
 	
 	override dispatch CharSequence code(EventRaisingExpression it) {

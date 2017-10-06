@@ -20,7 +20,7 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
  * @author René Beckmann
  */
 class EventCode {
-	@Inject protected extension CppNaming
+	@Inject protected extension Naming
 	@Inject protected extension Navigation
 	@Inject protected extension ICodegenTypeSystemAccess
 	

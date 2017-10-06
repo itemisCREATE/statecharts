@@ -1,4 +1,10 @@
 
+p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/sctunit.textile
+
+
+
+
+
 h1(#sctunit_test-driven_statechart_development_with_sctunit). Test-driven statechart development with SCTUnit
 
 h2(#sctunit_brief_introduction_to_test-driven_development). Brief introduction to test-driven development
@@ -966,78 +972,3 @@ A _test unit_ is either a "test class":#sctunit_test_classes or a "test suite":#
 ###. CHECK IMPORT: !images/sctunit_grammar_030_test_unit.png(Test unit grammar)!
 
 ###. CHECK IMPORT: p=. Test unit grammar %{display: block; font-size: 50%; padding-left: 20%; padding-right: 20%;}*Please note:* The _PackageImport_ non-terminal symbol will be available in future versions of YAKINDU Statechart Tools.%
-
-
-
-
-h2(#sctunit_generating_sctunit_source_code). Generating SCTUnit source code
-
-Executing SCTUnit tests within the Eclipse development environment as described in section "&quot;Running the test&quot;":#sctunit_running_the_test is a nice and handy feature the developers. However, unit tests are usually also required to be executed automatically in "continuous integration (CI)":https://en.wikipedia.org/wiki/Continuous_integration environments, i.e. outside of and independent from Eclipse or any other IDE. Additionally, it should generally be possible to inspect what exactly happens inside a unit test, in order to be able to verify that what it does when executed in the right thing. This is of particular importance for software that is to be deployed in safety-critical areas.
-
-Generating unit tests as source code comes as a solution. Source code can be inspected, compiled, and integrated wherever needed.
-
-This section explains how you can generate your SCTUnit tests as source code with YAKINDU Statechart Tools. Supported programming languages are Java, C, and C++. The generated Java classes use "JUnit":http://junit.org/ as their testing framework and "Mockito":http://site.mockito.org/ for mocked methods. C and C++ sources rest upon the "Google Test":https://en.wikipedia.org/wiki/Google_Test unit testing library.
-
-In order to use the SCTUnit code generators effectively, you should already be familiar with generating source code from statecharts, as explained in chapter "&quot;Generating state machine code&quot;":../user-guide/generating_code#codegen_generating_state_machine_code. In fact, you have to generate your statechart as source code first, so that the SCTUnit tests have something to be executed upon. Below we are assuming that you have your statechart code generator model and the generated code handy. Generating SCTUnit test source code follows the same principcles as generating state machine source code, so we can focus on SCTUnit essentials here.
-
-
-
-h3(#sctunit_creating_a_generation_model). Creating a generation model
-
-The first step is to create a _generation model (SGen)_ for the SCTUnit test, similar to explanation in section "&quot;Generating state machine code&quot;":../user-guide/generating_code#setting_up_a_code_generator_project.
-
-# In the main menu, select _File → New → Other…_. The _New_ dialog opens.
-# In the _New_ dialog, select _YAKINDU SCT → Code Generator Model_.
-# Click on _Next_. The _YAKINDU Generator Model_ wizard opens.
-# Select a project and a folder as the SGen model's location. The filename must end on _.sgen_.
-# Click on _Next_.
-# In the _Generator_ drop-down menu, select one of the source code generators whose names begin with "SCTUnit", e.g. "SCTUnit Java Code Generator". As a consequence, the _Choose_ list below the drop-down menu switches from showing statechart models to displaying SCTUnit files.
-# In the _Choose_ list, check the SCTUnit files you want to generate as source code.
-# Click on _Finish_.
-
-As a result, the SGen model file is created. Figure "&quot;A sample SCTUnit SGen model&quot;":#sctunit_fig_a_sample_sctunit_sgen_model shows a generator model for the SCTUnit Java generator. The target language is reflected in the generator ID "sctunit::java". The generator IDs for C and C++ are "sctunit::c" and "sctunit::cpp", respectively. Each SCTUnit "test unit":#sctunit_test_units is contained in a section marked with the _test_ keyword, followed by the respective fully-qualified test unit name.
-
-p(#sctunit_fig_a_sample_sctunit_sgen_model). 
-
-!images/sctunit_genmodel_010_created.png(A sample SCTUnit SGen model)!
-
-p=. A sample SCTUnit SGen model
-
-In this example, the generation model refers to the SCTUnit sample test class defined in section "&quot;The _package_ statement&quot;":#sctunit_the_package_statement above. In that example, the test class is put into package _foo.light_switch.test_, while the test class itself is named _light_switch_tests_. Consequently, the test class' fully-qualified name is _foo.light_switch.test.light_switch_tests_, and that is what the generation model indicates in the _test_ statement.
-
-
-
-h3. Features
-
-A code generator's behavior can be controlled by so-called _features_. SCTUnit code generators are supporting the same set of features the all statechart code generators support. The same applies to the features of the respective language-specific generators. The *Outlet* feature is of particular importance, since it determines where the generated artifacts will be created.
-
-Documentation of feature details you can find here:
-
-* "Common features of all statechart code generators":../user-guide/generating_code#codegen_configuring_a_generator
-* "C statechart code generator features":../user-guide/generating_code#codegen_c_code_generator_features
-* "C++ statechart code generator features":../user-guide/generating_code#codegen_cpp_code_generator_features
-* "Java statechart code generator features":../user-guide/generating_code#codegen_java_code_generator_features
-
-
-
-h3. The SCTUnit Java code generator's _StatechartNaming_ feature
-
-For Java, the generated state machine code on one hand and the SCUnit test classes on the other hand may well belong to different packages. However, in order to be able to execute the state machine, the SCTUnit tests need to know what the state machine's package is.
-
-This is what the *StatechartNaming* feature is good for. Let's assume we added the following *StatechartNaming* feature to the generation model shown "above":#sctunit_creating_a_generation_model:
-
-bc. feature StatechartNaming {
-    basePackage = "bar.light_switch"
-    implementationSuffix = ""
-    libraryTargetFolder = "src-timer"
-}
-
-With these settings, the SCTunit code generator creates the test classes in the _src-gen_ directory. Additionally, it creates a few timer classes. These classes provide the concept of "virtual" time and are used during test execution to simulate arbitrary long periods of time in an instant. The source code of these classes is generated in the directory denoted by the _libraryTargetFolder_ property, here: _src-timer_. The timer classes belong to the _bar.light_switch_ package. The test classes expect the timer classes and the state machine to reside in that very same package, in order to execute the state machine parameterized with the virtual timer.
-
-
-
-h3. The generated Java test class
-
-The Java source code generated from SCTUnit test classes or test suites takes the form of JUnit tests and can be integrated in CI environments, for example.
-
-In Eclipse, you can execute such a generated JUnit test by right-clicking on the corresponding _.java_ file and selecting _Run As → JUnit Test_ in the context menu.

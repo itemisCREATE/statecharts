@@ -19,7 +19,6 @@ import java.util.Queue
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.lib.annotations.Data
 import org.yakindu.base.expressions.interpreter.IExpressionInterpreter
-import org.yakindu.base.types.typesystem.ITypeValueProvider
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.EnterState
@@ -40,7 +39,6 @@ import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.RegularState
-import org.yakindu.sct.model.sruntime.EventDirection
 import org.yakindu.sct.model.sruntime.ExecutionContext
 import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
@@ -81,9 +79,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	@Inject
 	protected StateVectorExtensions stateVectorExtensions;
 	@Inject
-	protected extension StatechartAnnotations
-	@Inject
-	extension ITypeValueProvider
+	protected extension StatechartAnnotations 
 
 	protected ExecutionFlow flow
 	protected ExecutionContext executionContext
@@ -173,15 +169,6 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			activeStateIndex = activeStateIndex + 1
 		}
 		executionContext.clearLocalAndInEvents
-	}
-
-	def protected clearLocalAndInEvents(ExecutionContext executionContext) {
-		executionContext.allEvents.filter[direction == EventDirection.IN || direction == EventDirection.LOCAL].forEach [
-			if (raised) {
-				raised = false;
-				value = if(type !== null) type.defaultValue else null
-			}
-		]
 	}
 
 	override exit() {
@@ -290,9 +277,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	def dispatch Object execute(ScheduleTimeEvent scheduleTimeEvent) {
 		val timeEvent = scheduleTimeEvent.timeEvent
 		val duration = statementInterpreter.evaluate(scheduleTimeEvent.timeValue, executionContext)
-		timingService.scheduleTimeTask(new TimeTask(timeEvent.name, [
-			executionContext.getEvent(timeEvent.name).raised = true
-		]), timeEvent.periodic, duration as Long)
+		timingService.scheduleTimeTask(new TimeTask(timeEvent.name, [executionContext.getEvent(timeEvent.name).raised = true]), timeEvent.periodic, duration as Long)
 		null
 	}
 

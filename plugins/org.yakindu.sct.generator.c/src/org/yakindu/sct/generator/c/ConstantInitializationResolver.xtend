@@ -15,7 +15,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 
-class ConstantInitializationResolver extends CExpressionsGenerator {
+class ConstantInitializationResolver extends ExpressionCode {
 	
 	def CharSequence resolveConstants(Expression it) {
 		code

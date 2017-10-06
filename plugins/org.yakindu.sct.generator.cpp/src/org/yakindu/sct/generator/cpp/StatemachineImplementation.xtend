@@ -34,13 +34,13 @@ import static org.eclipse.xtext.util.Strings.*
 
 class StatemachineImplementation implements IContentTemplate {
 	
-	@Inject protected extension CppNaming
+	@Inject protected extension Naming
 	@Inject protected extension Navigation
 	@Inject protected extension FlowCode
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension INamingService
-	@Inject protected extension CppExpressionsGenerator
+	@Inject protected extension ExpressionCode
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension EventCode
 	
@@ -94,27 +94,10 @@ class StatemachineImplementation implements IContentTemplate {
 	'''
 	}
 	
-<<<<<<< HEAD
-<<<<<<< Upstream, based on master
-<<<<<<< Upstream, based on master
-
-		
-=======
-	def modOnReal() {
-		return true
-=======
-	def modOnReal(ExecutionFlow it) {
-		!eAllContents.filter(NumericalMultiplyDivideExpression).filter[operator == MultiplicativeOperator.MOD].filter[it.haveCommonTypeReal].isEmpty ||
-		!eAllContents.filter(AssignmentExpression).filter[operator == AssignmentOperator.MOD_ASSIGN].filter[it.haveCommonTypeReal].isEmpty
->>>>>>> fde1cf9 include <math.h> only when needed
-	}
->>>>>>> 9db0730 fmod only on real, float and double variables
-=======
 	def modOnReal(ExecutionFlow it) {
 		!eAllContents.filter(NumericalMultiplyDivideExpression).filter[operator == MultiplicativeOperator.MOD].filter[it.haveCommonTypeReal].isEmpty ||
 		!eAllContents.filter(AssignmentExpression).filter[operator == AssignmentOperator.MOD_ASSIGN].filter[it.haveCommonTypeReal].isEmpty
 	}
->>>>>>> branch 'issue_1654' of https://github.com/Yakindu/statecharts.git
 	
 	def protected usingNamespaces(ExecutionFlow it) {
 		''''''
@@ -125,41 +108,25 @@ class StatemachineImplementation implements IContentTemplate {
 		''''''
 	}
 	
-
-	def constructorDefinition(ExecutionFlow it){
-	'''
-		«module»::«module»():
-			«initialisationList»
+	def constructorDefinition(ExecutionFlow it) '''
+		«module»::«module»()
 		{
 			«constructorBody(it)»
 		}
 	'''
-	}
-	
-	def protected initialisationList(ExecutionFlow it) {
-		'''
-			«IF timed»«timerInstance»(null),«ENDIF»
-			stateConfVectorPosition(0)«FOR s : getInterfaces»,
-			«s.instance»()«IF s.hasOperations && !entry.useStaticOPC»,
-			«s.OCB_Instance»(null)«ENDIF»«ENDFOR»
-		'''
-	}
-	
-	def protected initialisationListCopy(ExecutionFlow it) {
-		'''
-			«IF timed»«timerInstance»(rhs.«timerInstance»),«ENDIF»
-			stateConfVectorPosition(rhs.stateConfVectorPosition)«FOR s : getInterfaces»,
-			«s.instance»(rhs.«s.instance»)«IF s.hasOperations && !entry.useStaticOPC»,
-			«s.OCB_Instance»(rhs.«s.OCB_Instance»)«ENDIF»«ENDFOR»
-		'''	
-	}
 	
 	protected def CharSequence constructorBody(ExecutionFlow it)
 		'''
+		«scopes.filter(typeof(StatechartScope)).filter[hasOperations && !entry.useStaticOPC].map['''«OCB_Instance» = null;'''].join('\n')»
 		«IF hasHistory»
 			for (int i = 0; i < «historyStatesConst»; ++i)
 				historyVector[i] = «null_state»;
 				
+		«ENDIF»
+		stateConfVectorPosition = 0;
+		
+		«IF timed»
+			«timerInstance» = null;
 		«ENDIF»
 		'''
 	
@@ -256,7 +223,7 @@ class StatemachineImplementation implements IContentTemplate {
 			switch (stateConfVector[stateConfVectorPosition])
 			{
 			«FOR state : states»
-				«IF state.reactSequence !== null»
+				«IF state.reactSequence!=null»
 				case «state.shortName.asEscapedIdentifier» :
 				{
 					«state.reactSequence.shortName»();
@@ -274,9 +241,9 @@ class StatemachineImplementation implements IContentTemplate {
 	def timedStatemachineFunctions(ExecutionFlow it) '''
 		«IF timed»
 			
-			void «module»::setTimer(«timerInterface»* timerInterface)
+			void «module»::setTimer(«timerInterface»* timer)
 			{
-				this->«timerInstance» = timerInterface;
+				this->«timerInstance» = timer;
 			}
 			
 			«timerInterface»* «module»::getTimer()
