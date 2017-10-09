@@ -24,6 +24,7 @@
                 counter-increment: h1 +{{dynamic_page_hubdb_row.chapter - 1}};
             }
         </style>
+        {#
         <script type="text/javascript" src="{{ get_public_template_url("custom/page/itemis/bootstrap-anchor.js") }}"></script>
         <script type="text/javascript">
         jQuery(document).ready(function() {
@@ -36,6 +37,7 @@
             jQuery('body').css('position', 'relative').scrollspy({target: "#sidebar-navigation", offset: 150});
         });
         </script>
+        #}
         
     {% elif dynamic_page_hubdb_table_id %}
         <link href="{{ get_public_template_url("Custom/page/itemis/it-yakindu-docs-overview.css") }}" rel="stylesheet" type="text/css">
@@ -102,7 +104,7 @@
     <div class="cell-wrapper layout-widget-wrapper">
     {% widget_block raw_html "module_150227904680399" wrapping_html='', per_widget_wrapper_html='', overrideable=true, label='Custom HTML' %}
     {% widget_attribute "value" %}<div id="sidebar-navigation">
-        <h2><span>Statechart User Guide</span> THEMES</h2>
+        <h2>${navigation.title}</h2>
         <nav>
             <ol class="nav">
 

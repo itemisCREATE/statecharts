@@ -8,8 +8,10 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 
 import org.eclipse.mylyn.wikitext.parser.Attributes;
+import org.eclipse.mylyn.wikitext.parser.LinkAttributes;
 import org.eclipse.mylyn.wikitext.parser.builder.HtmlDocumentBuilder;
 
 /**
@@ -123,17 +125,19 @@ public class HubspotDocumentBuilder extends HtmlDocumentBuilder {
 	 * Constructor. Reads all the required static files and template files.
 	 * </p>
 	 * 
+	 * @param properties
+	 * 
 	 * @param pass1Headings
 	 */
 	public HubspotDocumentBuilder(final Reader p1Reader, final Reader contentsTemplateReader, final Reader p2Reader,
-			final Reader tocTemplateReader, final Reader p3Reader, final List<Heading> pass1Headings,
-			final Writer writer) {
+			final Reader tocTemplateReader, final Reader p3Reader, final Map<String, String> properties,
+			final List<Heading> pass1Headings, final Writer writer) {
 		super(writer, true);
 		this.pass1Headings = pass1Headings;
 		try {
-			this.p1 = readContents(p1Reader, false);
-			this.p2 = readContents(p2Reader, false);
-			this.p3 = readContents(p3Reader, false);
+			this.p1 = resolveProperties(readContents(p1Reader, false), properties);
+			this.p2 = resolveProperties(readContents(p2Reader, false), properties);
+			this.p3 = resolveProperties(readContents(p3Reader, false), properties);
 		} catch (IOException e) {
 			throw new RuntimeException("Reading one the p files failed.", e);
 		}
@@ -151,6 +155,28 @@ public class HubspotDocumentBuilder extends HtmlDocumentBuilder {
 			w = (PrintWriter) writer;
 		else
 			w = new PrintWriter(writer);
+	}
+
+	/**
+	 * <p>
+	 * Replaces all occurrences of the <var>properties</var> map's "key" entries
+	 * in a string by the corresponding "value" entries. Replacement starts at
+	 * the beginning of the string and proceeds to the end. However, the
+	 * processing order of the properties is undefined.
+	 * </p>
+	 * 
+	 * @param s
+	 *            the string to do the replacements in
+	 * @param properties
+	 *            the properties map
+	 * @return the resulting string with all replacements done
+	 */
+	private String resolveProperties(final String s, final Map<String, String> properties) {
+		String result = s;
+		for (final String key : properties.keySet()) {
+			result = result.replace(key, properties.get(key));
+		}
+		return result;
 	}
 
 	/**
@@ -248,8 +274,59 @@ public class HubspotDocumentBuilder extends HtmlDocumentBuilder {
 		if (isEarlySeparator) {
 			if (!isProcessingHeading)
 				h2.beginSpan(type, attributes);
-		} else
+		} else {
+			if (SpanType.LINK == type && attributes instanceof LinkAttributes) {
+				final LinkAttributes linkAttributes = (LinkAttributes) attributes;
+				String hrefOrHashName = linkAttributes.getHref();
+				if (hrefOrHashName.startsWith("../")) {
+					boolean hasHash = false;
+					boolean hasFragment = false;
+					boolean hasFilename = false;
+					final String fragmentID;
+
+					// Get the fragment ID:
+					int fragmentPosition = hrefOrHashName.lastIndexOf('#');
+					if (fragmentPosition >= 0) {
+						hasHash = true;
+						if (fragmentPosition + 1 < hrefOrHashName.length())
+							hasFragment = true;
+						fragmentPosition++;
+					} else
+						fragmentPosition = hrefOrHashName.length();
+					fragmentID = hrefOrHashName.substring(fragmentPosition);
+
+					// Strip the last component (filename) from the URL, if any:
+					final StringBuilder b = new StringBuilder();
+					int filenamePosition = hrefOrHashName.lastIndexOf('/', fragmentPosition - 1);
+					hasFilename = filenamePosition >= 2 && filenamePosition + 2 <= fragmentPosition;
+					if (hasFilename)
+						b.append(hrefOrHashName.substring(0, filenamePosition));
+					else
+						b.append(hrefOrHashName.substring(0, fragmentPosition - (hasHash ? 1 : 0)));
+
+					if (hasFilename)
+						b.append('/');
+					if (hasFragment) {
+						// Find the fragment's H1 heading:
+						final Heading h1Heading = lookupH1HeadingOf(pass1Headings, fragmentID);
+
+						// Append H1 heading's ID to the URL:
+						if (h1Heading != null)
+							b.append(h1Heading.getId());
+						else
+							System.err.println("WARNING: H1 heading for fragment #" + fragmentID + " not found.");
+
+						// Append fragment ID.
+						b.append('#');
+						b.append(fragmentID);
+					} else if (hasHash)
+						b.append('#');
+
+					linkAttributes.setHref(b.toString());
+				}
+			}
 			super.beginSpan(type, attributes);
+		}
 	}
 
 	@Override
@@ -359,8 +436,9 @@ public class HubspotDocumentBuilder extends HtmlDocumentBuilder {
 	public void link(final Attributes attributes, final String hrefOrHashName, final String text) {
 		if (isEarlySeparator)
 			h2.link(attributes, hrefOrHashName, text);
-		else
+		else {
 			super.link(attributes, hrefOrHashName, text);
+		}
 	}
 
 	@Override
@@ -503,6 +581,46 @@ public class HubspotDocumentBuilder extends HtmlDocumentBuilder {
 				result = h;
 		}
 		return result;
+	}
+
+	/**
+	 * <p>
+	 * Looks up the H1 heading of a specified subheading. The method first looks
+	 * up the subheading in the list of headings and then walks back the list
+	 * until it finds the next H1. If it turns out that the subheading is a H1
+	 * heading itself, that heading will be returned.
+	 * </p>
+	 * 
+	 * @param headings
+	 *            The list of heading to search
+	 * @param subheading
+	 *            The subheading
+	 * @return The subheading's associated H1 heading in the list of headings or
+	 *         <code>null</code> if either one or the other cannot be found.
+	 */
+	private Heading lookupH1HeadingOf(final List<Heading> headings, final String subheadingID) {
+		final ListIterator<Heading> i = headings.listIterator(headings.size());
+
+		// Look up the subheading:
+		Heading subheading = null;
+		while (subheading == null && i.hasPrevious()) {
+			final Heading h = i.previous();
+			if (subheadingID.equals(h.getId()))
+				subheading = h;
+		}
+		if (subheading == null)
+			return null;
+		if (subheading.getLevel() == 1)
+			return subheading;
+
+		// Look up the H1 heading:
+		Heading h1Heading = null;
+		while (h1Heading == null && i.hasPrevious()) {
+			final Heading h = i.previous();
+			if (h.getLevel() == 1)
+				h1Heading = h;
+		}
+		return h1Heading;
 	}
 
 	/**

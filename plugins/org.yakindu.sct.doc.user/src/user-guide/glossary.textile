@@ -174,7 +174,7 @@ h2(#glossary_state_machine_code). State machine code
 
 h2(#glossary_transition). Transition
 
-A *transition* is one of the fundamental concepts of "statecharts":#glossary_statechart. It leads from a source "state":#glossary_state to a target state. Details can be found in section "&quot;Transition&quot;":../user-guide/statechart_language#sclang_transitions.
+A *transition* is one of the fundamental concepts of "statecharts":#glossary_statechart. It leads from a source "state":#glossary_state to a target state. Details can be found in section "&quot;Transition&quot;":../user-guide/statechart_language.html#sclang_transitions.
 
 
 h2(#glossary_type_system). Type system

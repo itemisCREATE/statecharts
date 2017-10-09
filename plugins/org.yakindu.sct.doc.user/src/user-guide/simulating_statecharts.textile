@@ -5,7 +5,7 @@ Simulating a statechart model means to execute it, raise events manually, have t
 
 You can run multiple state machines in parallel and even multiple instances of the same state machine.
 
-An introduction to simulation is given in section "&quot;Simulating the light switch model&quot;":../tutorials/tutorials#tutorial_simulating_the_light_switch_model.
+An introduction to simulation is given in section "&quot;Simulating the light switch model&quot;":../tutorials/tutorials.html#tutorial_simulating_the_light_switch_model.
 
 
 
