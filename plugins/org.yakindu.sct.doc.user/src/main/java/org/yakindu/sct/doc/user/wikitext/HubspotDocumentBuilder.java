@@ -277,6 +277,7 @@ public class HubspotDocumentBuilder extends HtmlDocumentBuilder {
 		} else {
 			if (SpanType.LINK == type && attributes instanceof LinkAttributes) {
 				final LinkAttributes linkAttributes = (LinkAttributes) attributes;
+
 				final String hrefOrHashName = linkAttributes.getHref();
 
 				if (hrefOrHashName.startsWith("http")) {
@@ -449,8 +450,9 @@ public class HubspotDocumentBuilder extends HtmlDocumentBuilder {
 	public void link(final Attributes attributes, final String hrefOrHashName, final String text) {
 		if (isEarlySeparator)
 			h2.link(attributes, hrefOrHashName, text);
-		else
+		else {
 			super.link(attributes, hrefOrHashName, text);
+		}
 	}
 
 	@Override

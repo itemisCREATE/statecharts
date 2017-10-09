@@ -28,8 +28,8 @@ import org.yakindu.sct.model.sexec.If
 
 class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	
-	@Inject extension Naming naming
-	@Inject extension ExpressionCode expressions
+	@Inject extension CppNaming naming
+	@Inject extension CppExpressionsGenerator expressions
 	@Inject extension Navigation
 	@Inject extension INamingService
 	

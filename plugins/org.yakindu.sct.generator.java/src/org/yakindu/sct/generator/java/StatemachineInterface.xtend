@@ -34,7 +34,7 @@ class StatemachineInterface {
 	@Inject extension Navigation
 	@Inject extension ITypeSystem
 	@Inject extension ICodegenTypeSystemAccess
-	@Inject extension ExpressionCode
+	@Inject extension JavaExpressionsGenerator
 
 	@Inject ICoreLibraryHelper outletFeatureHelper
 

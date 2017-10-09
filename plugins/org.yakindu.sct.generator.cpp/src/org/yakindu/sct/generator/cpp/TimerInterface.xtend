@@ -19,7 +19,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 class TimerInterface implements IContentTemplate {
 	
 	@Inject
-	extension Naming
+	extension CppNaming
 	
 	@Inject
 	extension GenmodelEntries
