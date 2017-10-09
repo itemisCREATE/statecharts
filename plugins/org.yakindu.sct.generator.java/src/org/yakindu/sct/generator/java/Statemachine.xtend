@@ -639,7 +639,6 @@ class Statemachine {
 					throw new IllegalStateException("Operation callback for internal must be set.");	
 				}
 			«ENDIF»
-			
 			«FOR scope : flow.interfaceScopes»
 				«IF scope.hasOperations»
 					if (this.«scope.interfaceName.asEscapedIdentifier».operationCallback == null) {
@@ -648,7 +647,6 @@ class Statemachine {
 					
 				«ENDIF»
 			«ENDFOR»
-
 			«enterSequences.defaultSequence.code»
 		}
 
