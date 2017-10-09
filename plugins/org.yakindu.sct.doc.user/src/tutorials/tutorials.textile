@@ -15,7 +15,7 @@ In the simulation screenshot above, the light switch is currently in the _on_ st
 
 h2(#tutorial_importing-light-switch-example). Importing light switch example
 
-Now try this for yourself. We are assuming that you have already installed and started YAKINDU Statechart Tools. If you don't, please see the "Installation Guide":../installation/installation.html#inst_installing_yakindu_statechart_tools for details.
+Now try this for yourself. We are assuming that you have already installed and started YAKINDU Statechart Tools. If you don't, please see the "Installation Guide":../installation/installation.html for details.
 
 # If the "Welcome" page is still open, close it. <p>!(standard-image small)images/tuto_5min_010_close_welcome.png(Closing the "Welcome" page)!</p>
 # In the main menu, select _File → New → Example…_.
