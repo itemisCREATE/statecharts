@@ -277,8 +277,22 @@ public class HubspotDocumentBuilder extends HtmlDocumentBuilder {
 		} else {
 			if (SpanType.LINK == type && attributes instanceof LinkAttributes) {
 				final LinkAttributes linkAttributes = (LinkAttributes) attributes;
-				String hrefOrHashName = linkAttributes.getHref();
-				if (hrefOrHashName.startsWith("../")) {
+
+				final String hrefOrHashName = linkAttributes.getHref();
+
+				if (hrefOrHashName.startsWith("http")) {
+					/*
+					 * An external link should be opened in a new tab or window
+					 * and thus gets the target="_blank" attribute attached.
+					 */
+					linkAttributes.setTarget("_blank");
+				} else if (hrefOrHashName.startsWith("../")) {
+					/*
+					 * Links pointing into the parent directory are referring
+					 * another section of our documentation are require some
+					 * special handling in order to comply with the Hubspot
+					 * template.
+					 */
 					boolean hasHash = false;
 					boolean hasFragment = false;
 					boolean hasFilename = false;
