@@ -12,41 +12,27 @@ package org.yakindu.sct.generator.cpp.language
 
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.yakindu.sct.generator.c.language.CustomType
-import org.yakindu.sct.generator.core.language.CharSequenceList
 import org.yakindu.sct.generator.core.language.CodePart
 import org.yakindu.sct.generator.core.language.IDeclarable
 import org.yakindu.sct.generator.core.language.IModifier
 import org.yakindu.sct.generator.core.language.IModule
-import org.yakindu.sct.generator.core.language.IType
-import org.yakindu.sct.generator.core.language.ITypeQualifier
-import org.yakindu.sct.generator.core.language.IVariable
+import org.yakindu.sct.generator.core.language.IModuleMember
+import org.yakindu.sct.generator.core.language.INameOwner
 
 /**
  * @author rbeckmann
  *
  */
-class Variable extends CodePart implements IVariable, IDeclarable {
+class FriendClass extends CodePart implements INameOwner, IModuleMember, IDeclarable {
 	@Accessors protected CharSequence name
-	@Accessors protected IType type
-	@Accessors protected ITypeQualifier typeQualifier
 	@Accessors protected IModule parent
-	@Accessors protected List<IModifier> modifiers = new CharSequenceList()
+	@Accessors(PRIVATE_GETTER, PRIVATE_SETTER) protected List<IModifier> modifiers
 	
-	new() {
-		
-	}
-	
-	new(IType type, CharSequence name) {
-		this.type = type;
-		this.name = name;
-	}
-	
-	new(CharSequence type, CharSequence name) {
-		this(new CustomType(type), name)
+	new(CharSequence name) {
+		this.name = name
 	}
 	
 	override declare() {
-		new CharSequenceList(#[modifiers.toString, typeQualifier, type, name]) + ";"
+		'''friend class «name»;'''
 	}
 }

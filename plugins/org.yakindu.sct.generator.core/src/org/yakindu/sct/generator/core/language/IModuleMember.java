@@ -14,7 +14,7 @@ package org.yakindu.sct.generator.core.language;
  * @author rbeckmann
  *
  */
-public interface IModuleMember {
+public interface IModuleMember  {
 	public IModule getParent();
 	public void setParent(IModule parent);
 }

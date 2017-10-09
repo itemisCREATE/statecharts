@@ -16,9 +16,11 @@ import java.util.Map
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.yakindu.sct.generator.core.language.CodePart
 import org.yakindu.sct.generator.core.language.ICodePart
-import org.yakindu.sct.generator.core.language.IModule
 import org.yakindu.sct.generator.core.language.IDeclarable
 import org.yakindu.sct.generator.core.language.IDocumentationOwner
+import org.yakindu.sct.generator.core.language.IFunction
+import org.yakindu.sct.generator.core.language.IModule
+import org.yakindu.sct.generator.core.language.IModuleMember
 
 /**
  * @author rbeckmann
@@ -27,10 +29,11 @@ import org.yakindu.sct.generator.core.language.IDocumentationOwner
 class CppClass extends CodePart implements IModule, IDeclarable, IDocumentationOwner {
 	@Accessors protected CharSequence name;
 	@Accessors protected IModule parent;
-	@Accessors(PROTECTED_SETTER, PUBLIC_GETTER) protected Map<Visibility, List<CharSequence>> members = new EnumMap(Visibility);
+	@Accessors(PROTECTED_SETTER, PUBLIC_GETTER) protected Map<Visibility, List<IModuleMember>> members = new EnumMap(Visibility);
 	@Accessors protected CharSequence documentation = ""
+	@Accessors protected List<CharSequence> extendedClasses
 	
-	def addMember(ICodePart member, Visibility visibility) {
+	def addMember(IModuleMember member, Visibility visibility) {
 		this.members.get(visibility) += member
 	}
 	
@@ -71,6 +74,10 @@ class CppClass extends CodePart implements IModule, IDeclarable, IDocumentationO
 			«member.declare»
 			«ENDFOR»
 		'''
+	}
+	
+	def findFunction(CharSequence name) {
+		members.values.flatten.filter(IFunction).filter[it.name == name]
 	}
 	
 	

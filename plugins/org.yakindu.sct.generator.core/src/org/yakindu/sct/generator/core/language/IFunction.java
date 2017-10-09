@@ -16,7 +16,7 @@ import java.util.List;
  * @author rbeckmann
  *
  */
-public interface IFunction extends ICodeBlock, IModifierOwner, ITypeOwner, INameOwner, IDocumentationOwner {
+public interface IFunction extends ICodeBlock, IModifierOwner, ITypeOwner, ITypeQualifierOwner, INameOwner, IDocumentationOwner, IModuleMember {
 	public List<CharSequence> getParameters();
 	public void setParameters(List<CharSequence> parameter);
 }

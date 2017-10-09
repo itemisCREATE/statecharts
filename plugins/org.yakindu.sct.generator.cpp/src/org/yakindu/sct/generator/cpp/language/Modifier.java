@@ -8,31 +8,28 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.c.language;
+package org.yakindu.sct.generator.cpp.language;
 
-import org.yakindu.sct.generator.core.language.IType;
+import org.yakindu.sct.generator.c.language.CKeywords;
+import org.yakindu.sct.generator.core.language.IModifier;
 
 /**
  * @author rbeckmann
  *
  */
-public enum Type implements IType {
-	VOID (CKeywords.VOID),
-	INT ("sc_integer"),
-	BOOL ("sc_boolean")
+public enum Modifier implements IModifier, CKeywords {
+	STATIC (CKeywords.STATIC),
+	EXTERN (CKeywords.EXTERN),
+	VIRTUAL (CKeywords.VIRTUAL),
+	CONST (CKeywords.CONST)
 	;
 	
-	protected String s;
-	Type(String s) {
+	protected final String s;
+	
+	Modifier(String s) {
 		this.s = s;
 	}
 	
-	
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Enum#toString()
-	 */
-	@Override
 	public String toString() {
 		return s;
 	}
@@ -59,26 +56,6 @@ public enum Type implements IType {
 	@Override
 	public CharSequence subSequence(int start, int end) {
 		return toString().subSequence(start, end);
-	}
-
-
-
-	/* (non-Javadoc)
-	 * @see org.yakindu.sct.generator.core.language.INameOwner#getName()
-	 */
-	@Override
-	public CharSequence getName() {
-		// TODO Auto-generated method stub
-		return s;
-	}
-
-
-
-	/* (non-Javadoc)
-	 * @see org.yakindu.sct.generator.core.language.INameOwner#setName(java.lang.CharSequence)
-	 */
-	@Override
-	public void setName(CharSequence name) {
 	}
 
 }

@@ -34,7 +34,7 @@ abstract class CodeBlock extends org.yakindu.sct.generator.core.language.CodeBlo
 	override toString() {
 		'''
 		«blockOpen»
-			«IF content !== null»«content»«ENDIF»
+			«IF getContent !== null»«getContent»«ENDIF»
 		«blockClose»
 		'''
 	}

@@ -16,7 +16,9 @@ import org.yakindu.sct.generator.core.language.CharSequenceList
 import org.yakindu.sct.generator.core.language.IDeclarable
 import org.yakindu.sct.generator.core.language.IFunction
 import org.yakindu.sct.generator.core.language.IModifier
+import org.yakindu.sct.generator.core.language.IModule
 import org.yakindu.sct.generator.core.language.IType
+import org.yakindu.sct.generator.core.language.ITypeQualifier
 
 /**
  * @author rbeckmann
@@ -28,6 +30,8 @@ class Function extends CodeBlock implements IFunction, IDeclarable {
 	@Accessors protected List<IModifier> modifiers;
 	@Accessors protected IType type;
 	@Accessors protected CharSequence documentation;
+	@Accessors protected ITypeQualifier typeQualifier
+	@Accessors protected IModule parent
 	
 	new() {
 		this.parameters = new CharSequenceList(", ")
@@ -35,15 +39,19 @@ class Function extends CodeBlock implements IFunction, IDeclarable {
 	}
 	
 	override getBlockOpen() {
-		'''«prefix»(«parameters») «super.blockOpen»'''
+		'''«prefix»(«parameters»)«postfix» «super.blockOpen»'''
 	}
 	
 	override declare() {
-		'''«prefix»(«parameters»);'''
+		'''«prefix»(«parameters»)«postfix»;'''
 	}
 	
 	def CharSequence prefix() {
-		new CharSequenceList(#[modifiers.toString, type, name])
+		new CharSequenceList(#[modifiers.toString, typeQualifier, type, name])
+	}
+
+	def postfix() {
+		""
 	}
 	
 	override toString() {

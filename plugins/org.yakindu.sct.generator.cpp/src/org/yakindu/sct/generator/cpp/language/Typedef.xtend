@@ -8,11 +8,16 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.core.language;
+package org.yakindu.sct.generator.cpp.language
+
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.yakindu.sct.generator.core.language.IModule
+import org.yakindu.sct.generator.core.language.IModuleMember
 
 /**
  * @author rbeckmann
  *
  */
-public interface IType extends INameOwner {
+class Typedef extends org.yakindu.sct.generator.c.language.Typedef implements IModuleMember {
+	@Accessors protected IModule parent
 }

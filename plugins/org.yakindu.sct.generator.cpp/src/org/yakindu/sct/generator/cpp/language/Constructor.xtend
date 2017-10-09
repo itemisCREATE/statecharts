@@ -12,23 +12,28 @@ package org.yakindu.sct.generator.cpp.language
 
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.yakindu.sct.generator.core.language.CharSequenceList
 import org.yakindu.sct.generator.core.language.IFunction
 
 /**
  * @author rbeckmann
- *
+ * 
  */
 class Constructor extends Function implements IFunction {
 	@Accessors protected List<CharSequence> initializerList;
-	
+
+	new() {
+		this.initializerList = new CharSequenceList(",\n");
+	}
+
 	override getBlockOpen() {
-		if(initializerList.nullOrEmpty) {
+		if (initializerList.nullOrEmpty) {
 			super.getBlockOpen
 		} else {
 			'''«prefix»(«parameters») : «initializerList» «super.blockOpen»'''
 		}
 	}
-	
+
 	override prefix() {
 		getName()
 	}

@@ -14,5 +14,5 @@ package org.yakindu.sct.generator.core.language;
  * @author rbeckmann
  *
  */
-public interface IParameter extends IVariable {
+public interface IParameter extends ITypedElement {
 }

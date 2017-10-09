@@ -14,5 +14,6 @@ package org.yakindu.sct.generator.core.language;
  * @author rbeckmann
  *
  */
-public interface IType extends INameOwner {
+public interface ITypedElement extends ITypeOwner, ITypeQualifierOwner, INameOwner {
+
 }

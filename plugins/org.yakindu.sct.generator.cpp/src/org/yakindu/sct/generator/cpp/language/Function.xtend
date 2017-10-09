@@ -21,6 +21,7 @@ import org.yakindu.sct.generator.core.language.IDeclarable
  */
 class Function extends org.yakindu.sct.generator.c.language.Function implements IFunction, IDeclarable {
 	@Accessors protected CppClass parent
+	@Accessors protected boolean pure = false // Pure virtual functions
 	
 	override getName() {
 		if(parent === null) name
@@ -30,5 +31,19 @@ class Function extends org.yakindu.sct.generator.c.language.Function implements 
 	override prefix() {
 		if(parent === null) super.prefix
 		else new CharSequenceList(#[type, getName()])
+	}
+	
+	override getModifiers() {
+		modifiers.filter[parent == null || it == Modifier.VIRTUAL].toList
+	}
+	
+	override postfix() {
+		var postfix = if(modifiers.contains(Modifier.CONST)) " const" else ""
+		if(pure) postfix += " = 0"
+		postfix
+	}
+	
+	override toString() {
+		if (pure) "" else super.toString
 	}
 }

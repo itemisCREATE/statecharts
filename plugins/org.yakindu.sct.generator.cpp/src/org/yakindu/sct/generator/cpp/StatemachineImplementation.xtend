@@ -222,9 +222,8 @@ class StatemachineImplementation implements IContentTemplate {
 	def runCycleFunction(ExecutionFlow it) '''
 		void «module»::runCycle()
 		{
-			
 			clearOutEvents();
-			«runCycleFunctionForLoop»			
+			«runCycleFunctionForLoop»
 			clearInEvents();
 		}
 	'''

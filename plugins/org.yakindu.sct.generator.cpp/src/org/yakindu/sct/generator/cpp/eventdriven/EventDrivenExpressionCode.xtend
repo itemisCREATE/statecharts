@@ -22,7 +22,7 @@ class EventDrivenExpressionCode extends CppExpressionsGenerator {
 	@Inject extension EventNaming eventNaming
 	
 	override dispatch CharSequence code(EventRaisingExpression it) {
-		switch (event.definition.event.direction) {
+		switch (event.declaration.event.direction) {
 			case Direction::IN: {
 				return raiseInEvent
 			}
@@ -48,8 +48,8 @@ class EventDrivenExpressionCode extends CppExpressionsGenerator {
 	}
 	
 	def eventObjectPointer(EventRaisingExpression it) {
-		val cls = event.definition.event.eventClassName
-		val enm = event.definition.event.eventEnumMemberName
+		val cls = event.declaration.event.eventClassName
+		val enm = event.declaration.event.eventEnumMemberName
 		val args = '''«enm»«IF value !== null», «value.code»«ENDIF»'''
 		'''new «cls»(«args»)'''
 	}

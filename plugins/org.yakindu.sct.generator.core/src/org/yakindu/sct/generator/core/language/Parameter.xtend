@@ -21,10 +21,15 @@ class Parameter extends CodePart implements IParameter {
 	@Accessors protected ITypeQualifier typeQualifier;
 	@Accessors protected CharSequence name;
 	
-	new(IVariable other) {
+	new(ITypedElement other) {
 		this.type = other.type
 		this.typeQualifier = other.typeQualifier
 		this.name = other.name
+	}
+	
+	new(IType type, CharSequence name) {
+		this.type = type
+		this.name = name
 	}
 	
 	new() {

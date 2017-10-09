@@ -26,6 +26,7 @@ import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.language.IFunction;
 import org.yakindu.sct.generator.core.language.factory.FunctionFactory;
+import org.yakindu.sct.generator.core.language.factory.IStandardFunctionProvider;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenEventCode;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenExpressionCode;
@@ -66,6 +67,7 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 	private void bindLanguageModules(Binder binder) {
 		binder.bind(IFunction.class).to(Function.class);
 		binder.bind(FunctionFactory.class).to(CFunctionFactory.class);
+		binder.bind(IStandardFunctionProvider.class).to(StandardFunctionProvider.class);
 	}
 
 	protected void bindIGenArtifactConfigurations(GeneratorEntry entry, Binder binder) {

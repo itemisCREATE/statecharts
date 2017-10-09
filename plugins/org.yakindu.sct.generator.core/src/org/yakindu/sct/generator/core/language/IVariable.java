@@ -14,6 +14,6 @@ package org.yakindu.sct.generator.core.language;
  * @author rbeckmann
  *
  */
-public interface IVariable extends ITypeOwner, ITypeQualifierOwner, INameOwner {
+public interface IVariable extends ITypedElement, IModuleMember, IModifierOwner {
 
 }
