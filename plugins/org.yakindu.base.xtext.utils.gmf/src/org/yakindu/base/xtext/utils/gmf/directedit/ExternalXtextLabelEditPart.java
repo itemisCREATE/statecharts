@@ -28,7 +28,7 @@ import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.ShapeStyle;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
-import org.yakindu.base.xtext.utils.gmf.figures.HighlightingWrappingLabel;
+import org.yakindu.base.xtext.utils.gmf.figures.SyntaxColoringLabel;
 import org.yakindu.base.xtext.utils.jface.viewers.XtextStyledTextCellEditor;
 
 /**
@@ -43,6 +43,7 @@ public abstract class ExternalXtextLabelEditPart extends LabelEditPart implement
 
 	protected abstract DirectEditManager createDirectEditManager();
 	protected abstract void setContext(Resource resource);
+	protected abstract void setLabelStyles();
 
 	public ExternalXtextLabelEditPart(final View view) {
 		super(view);
@@ -50,15 +51,15 @@ public abstract class ExternalXtextLabelEditPart extends LabelEditPart implement
 
 	@Override
 	protected IFigure createFigure() {
-		final WrappingLabel label = new HighlightingWrappingLabel();
-		label.setTextWrap(true);
+		final WrappingLabel label = new SyntaxColoringLabel();
+		label.setTextWrap(false);
 		label.setAlignment(PositionConstants.LEFT | PositionConstants.TOP);
 		return label;
 	}
 
 	@Override
-	public WrappingLabel getFigure() {
-		return (WrappingLabel) super.getFigure();
+	public SyntaxColoringLabel getFigure() {
+		return (SyntaxColoringLabel) super.getFigure();
 	}
 
 	public void setLabelText(final String text) {
@@ -71,10 +72,12 @@ public abstract class ExternalXtextLabelEditPart extends LabelEditPart implement
 		refreshFont();
 		refreshFontColor();
 		updateLabelText();
+		setLabelStyles();
 	}
 
 	protected void updateLabelText() {
 		getFigure().setText(getEditText());
+		
 	}
 
 	@Override

@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
+import java.util.List;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -23,9 +25,11 @@ import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.viewers.ICellEditorValidator;
+import org.eclipse.swt.custom.StyleRange;
 import org.yakindu.base.gmf.runtime.parsers.StringAttributeParser;
 import org.yakindu.base.xtext.utils.gmf.directedit.ExternalXtextLabelEditPart;
 import org.yakindu.base.xtext.utils.gmf.directedit.IEAttributeProvider;
+import org.yakindu.base.xtext.utils.gmf.directedit.StyleRanges;
 import org.yakindu.base.xtext.utils.gmf.directedit.XtextDirectEditManager;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
@@ -42,8 +46,8 @@ import com.google.inject.Injector;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLabelEditPart implements
-		ITextAwareEditPart, IContextElementProvider, IEAttributeProvider {
+public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLabelEditPart
+		implements ITextAwareEditPart, IContextElementProvider, IEAttributeProvider {
 
 	private static final String PRIMARY_VIEW_LISTENER = "primaryViewListener";
 
@@ -133,6 +137,7 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 
 	@Override
 	protected void refreshVisuals() {
+		setLabelStyles();
 		updateLabelText();
 		super.refreshVisuals();
 	}
@@ -142,10 +147,16 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 		String label = (String) resolveSemanticElement().eGet(getAttribute());
 		getFigure().setText(label == null ? "" : label);
 	}
-	
+
+	protected void setLabelStyles() {
+		StyleRanges styleRanges = injector.getInstance(StyleRanges.class);
+		List<StyleRange> result = styleRanges.getRanges(getEditText());
+		getFigure().setRanges(result.toArray(new StyleRange[] {}));
+	}
+
 	@Override
 	protected void setContext(Resource resource) {
 		resource.eAdapters().add(new ContextElementAdapter(this));
-		
+
 	}
 }
