@@ -17,6 +17,6 @@ import org.yakindu.sct.generator.java.JavaSCTGeneratorTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({ OperationsTestCustom.class, OperationsWithoutBracesCustom.class, JavaSCTGeneratorTest.class,
-		WrapperTest.class, VariadicOperationsTestCustom.class })
+		WrapperTest.class, VariadicOperationsTestCustom.class, UnimplementedOCBTest.class})
 public class AllTestsTestCustom {
 }
