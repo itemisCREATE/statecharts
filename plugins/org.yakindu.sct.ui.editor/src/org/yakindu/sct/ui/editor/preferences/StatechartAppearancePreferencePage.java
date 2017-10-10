@@ -11,12 +11,14 @@
 package org.yakindu.sct.ui.editor.preferences;
 
 import org.eclipse.gmf.runtime.common.ui.preferences.ComboFieldEditor;
+import org.eclipse.gmf.runtime.common.ui.preferences.FontFieldEditor;
 import org.eclipse.gmf.runtime.diagram.ui.l10n.DiagramUIMessages;
 import org.eclipse.gmf.runtime.diagram.ui.preferences.IPreferenceConstants;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.ColorFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
@@ -48,8 +50,15 @@ public class StatechartAppearancePreferencePage extends FieldEditorPreferencePag
 		Composite main = createPageLayout(parent);
 		createColorEditors(main);
 		createLineStyleEditors(main);
+		createDefaultFontEditor(main);
 		createPriorityLabelEditor(main);
 		createLiveValidationEditor(main);
+	}
+
+	protected void createDefaultFontEditor(Composite main) {
+		Composite composite = createGroupComposite(main, "Font styles");
+		FontFieldEditor editor = new FontFieldEditor(IPreferenceConstants.PREF_DEFAULT_FONT, "Font: ", composite);
+		addField(editor);
 	}
 
 	protected void createPriorityLabelEditor(Composite main) {
@@ -58,7 +67,7 @@ public class StatechartAppearancePreferencePage extends FieldEditorPreferencePag
 				"Show transition priority", composite);
 		addField(editor);
 	}
-	
+
 	protected void createLiveValidationEditor(Composite main) {
 		Composite composite = createGroupComposite(main, "Validation");
 		BooleanFieldEditor editor = new BooleanFieldEditor(StatechartPreferenceConstants.PREF_LIVE_VALIDATION,
