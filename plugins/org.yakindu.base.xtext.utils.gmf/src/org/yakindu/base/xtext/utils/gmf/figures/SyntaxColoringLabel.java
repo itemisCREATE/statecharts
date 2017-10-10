@@ -93,6 +93,8 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 
 		@Override
 		protected void paintText(Graphics g, String draw, int x, int y, int bidiLevel) {
+			// hack to avoid tab expansion to 8 spaces
+			draw = draw.replaceAll("\t", "    ");
 			if (ranges.length == 0) {
 				super.paintText(g, draw, x, y, bidiLevel);
 				return;
@@ -136,8 +138,6 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		}
 
 		protected int getTextExtend(Font font, String string) {
-			// hack to avoid tab expansion to 8 spaces
-			string = string.replaceAll("\t", "    ");
 			gc.setFont(font);
 			int offset = gc.textExtent(string).x;
 			return offset;

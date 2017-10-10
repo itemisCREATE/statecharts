@@ -24,6 +24,8 @@ import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.ICellEditorValidator;
 import org.eclipse.swt.custom.StyleRange;
 import org.yakindu.base.gmf.runtime.parsers.StringAttributeParser;
@@ -38,6 +40,7 @@ import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementProvider;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.policies.EAttributeDirectEditPolicy;
+import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 
 import com.google.inject.Injector;
 
@@ -47,13 +50,26 @@ import com.google.inject.Injector;
  * 
  */
 public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLabelEditPart
-		implements ITextAwareEditPart, IContextElementProvider, IEAttributeProvider {
+		implements ITextAwareEditPart, IContextElementProvider, IEAttributeProvider, IPropertyChangeListener {
 
 	private static final String PRIMARY_VIEW_LISTENER = "primaryViewListener";
 
 	private Injector injector;
 
 	protected abstract int getEditorStyles();
+
+	@Override
+	public void activate() {
+		super.activate();
+		DiagramActivator.getDefault().getPreferenceStore().addPropertyChangeListener(this);
+	}
+
+	@Override
+	public void deactivate() {
+		super.deactivate();
+		DiagramActivator.getDefault().getPreferenceStore().removePropertyChangeListener(this);
+
+	}
 
 	public PlugableExternalXtextLabelEditPart(View view, String target) {
 		super(view);
@@ -145,18 +161,33 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 	@Override
 	protected void updateLabelText() {
 		String label = (String) resolveSemanticElement().eGet(getAttribute());
-		getFigure().setText(label == null ? "" : label);
+		if (label != null && label.equals(getFigure().getText()))
+			return;
+		setLabelStyles();
+		getFigure().setText(label);
 	}
 
 	protected void setLabelStyles() {
-		StyleRanges styleRanges = injector.getInstance(StyleRanges.class);
-		List<StyleRange> result = styleRanges.getRanges(getEditText());
-		getFigure().setRanges(result.toArray(new StyleRange[] {}));
+		if (DiagramActivator.getDefault().getPreferenceStore()
+				.getBoolean(StatechartPreferenceConstants.PREF_SYNTAX_COLORING)) {
+			StyleRanges styleRanges = injector.getInstance(StyleRanges.class);
+			List<StyleRange> result = styleRanges.getRanges(getEditText());
+			getFigure().setRanges(result.toArray(new StyleRange[] {}));
+		} else {
+			getFigure().setRanges(new StyleRange[] {});
+		}
 	}
 
 	@Override
 	protected void setContext(Resource resource) {
 		resource.eAdapters().add(new ContextElementAdapter(this));
+	}
 
+	@Override
+	public void propertyChange(PropertyChangeEvent event) {
+		if (StatechartPreferenceConstants.PREF_SYNTAX_COLORING.equals(event.getProperty())) {
+			setLabelStyles();
+			getFigure().repaint();
+		}
 	}
 }
