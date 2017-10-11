@@ -94,14 +94,15 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		@Override
 		protected void paintText(Graphics g, String draw, int x, int y, int bidiLevel) {
 			// hack to avoid tab expansion to 8 spaces
-			draw = draw.replaceAll("\t", "    ");
+			String originalDraw = draw;
 			if (ranges.length == 0) {
+				draw = replaceTabs(draw);
 				super.paintText(g, draw, x, y, bidiLevel);
 				return;
 			}
 			if (bidiLevel == -1) {
 				int paintOffset = 0;
-				int lineOffset = getText().indexOf(draw);
+				int lineOffset = getText().indexOf(originalDraw);
 				try {
 					g.pushState();
 					g.setFont(getFont());
@@ -119,14 +120,16 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 						g.setForegroundColor(range.foreground != null ? range.foreground : getForegroundColor());
 						g.setBackgroundColor(range.background != null ? range.background : getBackgroundColor());
 						int endIndex = beginIndex + range.length;
-						String substring = draw.substring(beginIndex > 0 ? beginIndex : 0,
+						String substring = originalDraw.substring(beginIndex > 0 ? beginIndex : 0,
 								Math.min(endIndex > 0 ? endIndex : 0, draw.length()));
+						substring = replaceTabs(substring);
 						g.drawString(substring, x + paintOffset, y);
 						int offset = getTextExtend(g.getFont(), substring);
 						paintOffset += offset;
 						if (range.fontStyle != SWT.NORMAL) {
-							g.getFont().dispose();
+							Font font = g.getFont();
 							g.setFont(getFont());
+							font.dispose();
 						}
 					}
 				} finally {
@@ -135,6 +138,10 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 			} else {
 				super.paintText(g, draw, x, y, bidiLevel);
 			}
+		}
+
+		protected String replaceTabs(String draw) {
+			return draw.replaceAll("\t", "    ");
 		}
 
 		protected int getTextExtend(Font font, String string) {

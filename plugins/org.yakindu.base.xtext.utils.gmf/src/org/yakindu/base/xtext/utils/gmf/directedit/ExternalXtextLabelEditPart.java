@@ -52,7 +52,7 @@ public abstract class ExternalXtextLabelEditPart extends LabelEditPart implement
 	@Override
 	protected IFigure createFigure() {
 		final WrappingLabel label = new SyntaxColoringLabel();
-		label.setTextWrap(false);
+		label.setTextWrap(true);
 		label.setAlignment(PositionConstants.LEFT | PositionConstants.TOP);
 		return label;
 	}
