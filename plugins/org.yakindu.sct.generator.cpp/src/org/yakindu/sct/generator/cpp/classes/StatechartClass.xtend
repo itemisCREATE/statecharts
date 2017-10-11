@@ -247,23 +247,34 @@ class StatechartClass extends CppClass {
 		}
 	}
 	
-	def createOCBInterface(StatechartScope scope) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-	
-	def createInternalInterface(InternalScope iface) {
-		val interface = new CppClass()
-		interface.documentation = new Comment('''Inner class for «iface.simpleName» interface scope.''')
-		for(decl : iface.declarations) {
-			
+	def createOCBInterface(StatechartScope it) {
+		if(hasOperations) {
+			addMember(
+				new StatechartOCBInterfaceClass(flow, entry, config, this, it),
+				Visibility.PUBLIC
+			)
 		}
+		
 	}
 	
-	def createInterface(InterfaceScope iface) {
+	def createInternalInterface(InternalScope it) {
+		createOCBInterface
+	}
+	
+	def createInterface(InterfaceScope it) {
 		addMember(
-			switch(iface) {
-				case iface.isDefaultInterface: new StatechartDefaultInterfaceClass(flow, entry, config, this, iface)
-				default: new StatechartInterfaceClass(flow, entry, config, this, iface)
+			switch(it) {
+				case isDefaultInterface: new StatechartDefaultInterfaceClass(flow, entry, config, this, it)
+				default: new StatechartInterfaceClass(flow, entry, config, this, it)
 			}, Visibility.PUBLIC)
+		createInterfaceGetter
+	}
+	
+	def void createInterfaceGetter(StatechartScope it) {
+		val getter = function("get" + interfaceName)
+		getter.documentation = new Comment('''Returns an instance of the interface class '«interfaceName»'.''')
+		getter.type = new CustomType(interfaceName + "*")
+		getter.content = '''return &«instance»;'''
+		addMember(getter, Visibility.PUBLIC)
 	}
 }
