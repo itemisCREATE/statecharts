@@ -8,7 +8,7 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.cpp.language
+package org.yakindu.sct.generator.c.language
 
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -32,6 +32,8 @@ class Variable extends CodePart implements IVariable, IDeclarable {
 	@Accessors protected ITypeQualifier typeQualifier
 	@Accessors protected IModule parent
 	@Accessors protected List<IModifier> modifiers = new CharSequenceList()
+	@Accessors protected CharSequence initialValue
+	@Accessors protected CharSequence documentation
 	
 	new() {
 		
@@ -46,7 +48,22 @@ class Variable extends CodePart implements IVariable, IDeclarable {
 		this(new CustomType(type), name)
 	}
 	
+	override toString() {
+		name.toString
+	}
+	
 	override declare() {
-		new CharSequenceList(#[modifiers.toString, typeQualifier, type, name]) + ";"
+		'''
+		«documentation»
+		«new CharSequenceList(#[modifiers.toString, typeQualifier, type, name, declareInitialValue]) + ";"»
+		'''
+	}
+	
+	def CharSequence declareInitialValue() {
+		if(initialValue === null || initialValue == "") {
+			""
+		} else {
+			" = " + initialValue
+		}
 	}
 }

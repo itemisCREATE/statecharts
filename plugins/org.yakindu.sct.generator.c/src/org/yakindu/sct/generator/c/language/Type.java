@@ -19,7 +19,8 @@ import org.yakindu.sct.generator.core.language.IType;
 public enum Type implements IType {
 	VOID (CKeywords.VOID),
 	INT ("sc_integer"),
-	BOOL ("sc_boolean")
+	BOOL ("sc_boolean"),
+	SHORT ("sc_ushort")
 	;
 	
 	protected String s;

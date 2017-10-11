@@ -16,12 +16,14 @@ import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations.GenArtifactConfiguration
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
+import org.yakindu.sct.generator.cpp.classes.StatechartClass
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Statechart
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.*
+import org.yakindu.sct.generator.cpp.classes.StatechartClassFactory
 
 /**
  * This is the CPP code generators main class. 
@@ -39,6 +41,7 @@ class CppGenerator implements IExecutionFlowGenerator {
 	@Inject extension Navigation
 	@Inject extension CppNaming
 	@Inject extension ICoreLibraryHelper
+	@Inject extension StatechartClassFactory
 
 	@Inject
 	IGenArtifactConfigurations locations
@@ -58,6 +61,14 @@ class CppGenerator implements IExecutionFlowGenerator {
 	}
 
 	def initGenerationArtifacts(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations locations) {
+		val newMode = true
+		val statechartClass = createStatechartClass(flow, entry, locations)
+		
+		statemachineHeaderContent.statechartClass = statechartClass
+		statemachineSourceContent.statechartClass = statechartClass
+		statemachineHeaderContent.newMode = newMode
+		statemachineSourceContent.newMode = newMode
+		
 		locations.configure(flow.typesModule.h, entry.libraryOutput, typesContent, entry.skipLibraryFiles)
 		locations.configure(statemachineInterface.h, entry.libraryOutput, statemachineInterfaceContent,
 			entry.skipLibraryFiles)

@@ -50,9 +50,9 @@ public interface IStandardFunctionProvider {
 	public IFunction getDefaultInterfaceEventValue(StatechartScope scope, EventDefinition evd);
 
 	/* Variable related functions */
-	public IFunction getInterfaceVariable(StatechartScope scope, VariableDefinition vad);
-	public IFunction setInterfaceVariable(StatechartScope scope, VariableDefinition vad);
-	public IFunction getDefaultInterfaceVariable(StatechartScope scope, VariableDefinition vad);
-	public IFunction setDefaultInterfaceVariable(StatechartScope scope, VariableDefinition vad);
+	public IFunction getInterfaceVariable(VariableDefinition vad);
+	public IFunction setInterfaceVariable(VariableDefinition vad);
+	public IFunction getDefaultInterfaceVariable(VariableDefinition vad);
+	public IFunction setDefaultInterfaceVariable(VariableDefinition vad);
 
 }

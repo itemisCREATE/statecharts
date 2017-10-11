@@ -12,6 +12,8 @@ package org.yakindu.sct.generator.cpp.classes
 
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.language.CustomType
+import org.yakindu.sct.generator.c.language.Parameter
+import org.yakindu.sct.generator.c.language.VarArgsParameter
 import org.yakindu.sct.generator.core.language.Comment
 import org.yakindu.sct.generator.core.language.IModule
 import org.yakindu.sct.generator.cpp.language.Constructor
@@ -20,7 +22,8 @@ import org.yakindu.sct.generator.cpp.language.Modifier
 import org.yakindu.sct.generator.cpp.language.Visibility
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.sct.model.stext.stext.StatechartScope
 
 /**
  * @author rbeckmann
@@ -28,8 +31,8 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
  */
 class StatechartOCBInterfaceClass extends AbstractStatechartInterfaceClass {
 	
-	new(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs, IModule parent, InterfaceScope scope) {
-		super(flow, entry, artifactConfigs, parent, scope)
+	override build(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs, IModule parent, StatechartScope scope) {
+		super.build(flow, entry, artifactConfigs, parent, scope)
 		
 		this.documentation = new Comment('''Inner class for «scope.simpleName» interface scope operation callbacks.''')
 		
@@ -38,8 +41,7 @@ class StatechartOCBInterfaceClass extends AbstractStatechartInterfaceClass {
 		if(!entry.useStaticOPC) {
 			val destructor = new Constructor() 
 			destructor.name = "~" + scope.interfaceOCBName
-			destructor.pure = true
-			destructor.modifiers += Modifier.VIRTUAL
+			destructor.setPure
 			addMember(destructor, Visibility.PUBLIC)
 		}
 		
@@ -53,6 +55,17 @@ class StatechartOCBInterfaceClass extends AbstractStatechartInterfaceClass {
 				callback.modifiers += Modifier.VIRTUAL
 				callback.pure = true
 			}
+		]
+	}
+	
+	def operationParameters(OperationDefinition op) {
+		op.parameters.map[
+			if(isVarArgs) new VarArgsParameter()
+			else new Parameter(
+					typeSpecifier.targetLanguageName, 
+					if(it.name.isKeyword) it.name + "Args"
+					else it.name
+				)
 		]
 	}
 	

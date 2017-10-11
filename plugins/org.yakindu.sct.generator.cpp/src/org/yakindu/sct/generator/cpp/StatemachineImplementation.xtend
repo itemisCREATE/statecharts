@@ -12,12 +12,14 @@ package org.yakindu.sct.generator.cpp
 
 import com.google.inject.Inject
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.yakindu.sct.generator.c.IContentTemplate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.language.Preprocessor.Header
 import org.yakindu.sct.generator.c.language.Preprocessor.LocalHeader
 import org.yakindu.sct.generator.c.language.Preprocessor.SystemHeader
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.cpp.classes.StatechartClass
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -45,6 +47,9 @@ class StatemachineImplementation implements IContentTemplate {
 	
 	protected GeneratorEntry entry
 	
+	@Accessors protected StatechartClass statechartClass
+	@Accessors protected boolean newMode = false
+	
 	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
 		this.entry = entry
 		val List<Header> includes = newArrayList
@@ -62,6 +67,9 @@ class StatemachineImplementation implements IContentTemplate {
 		
 		«usingNamespaces»
 		
+		«IF newMode && statechartClass !== null»
+		«statechartClass»
+		«ELSE»
 		«constructorDefinition»
 		
 		«destructorDefinition»
@@ -93,6 +101,7 @@ class StatemachineImplementation implements IContentTemplate {
 		«functionImplementations»
 		
 		«additionalFunctions»
+		«ENDIF»
 	'''
 	}
 	

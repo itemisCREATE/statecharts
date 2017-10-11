@@ -28,6 +28,7 @@ class CharSequenceList<T extends CharSequence> extends ArrayList<CharSequence> i
 	
 	new() {
 		super()
+		this.separator = " "
 	}
 	
 	new(Collection<CharSequence> elements, CharSequence separator) {
@@ -61,7 +62,10 @@ class CharSequenceList<T extends CharSequence> extends ArrayList<CharSequence> i
 	}
 	
 	override toString() {
-		if(this.nullOrEmpty || this.filter[!nullOrEmpty].nullOrEmpty) {
+		if(this.size == 0) {
+			return ""
+		}
+		if(this.nullOrEmpty || this.filter[isNotNullOrEmptyString].nullOrEmpty) {
 			return ""
 		}
 		return this.filter[isNotNullOrEmptyString].join(separator)

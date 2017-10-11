@@ -12,26 +12,24 @@ package org.yakindu.sct.generator.c.language
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.yakindu.sct.generator.core.language.CodePart
-import org.yakindu.sct.generator.core.language.IDeclarable
+import org.yakindu.sct.generator.core.language.IParameter
 import org.yakindu.sct.generator.core.language.IType
+import org.yakindu.sct.generator.core.language.ITypeQualifier
 
 /**
  * @author rbeckmann
  *
  */
-class Typedef extends CodePart implements IType, IDeclarable {
-	@Accessors protected CharSequence name
+class VarArgsParameter extends CodePart implements IParameter {
 	@Accessors protected IType type
-	@Accessors protected boolean declareInnerType = true
+	@Accessors protected ITypeQualifier typeQualifier
+	@Accessors protected CharSequence name
+	
+	new() {
+		
+	}
 	
 	override toString() {
-		name.toString
+		"..."
 	}
-	
-	override declare() {
-		if(declareInnerType && type instanceof IDeclarable ) '''typedef «(type as IDeclarable).declare.toString.replace(";", "")» «name»;'''
-		else '''typedef «type» «name»;'''
-	}
-	
-	
 }

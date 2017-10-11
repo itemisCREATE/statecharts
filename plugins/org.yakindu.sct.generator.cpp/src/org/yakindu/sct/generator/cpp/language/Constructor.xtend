@@ -26,12 +26,14 @@ class Constructor extends Function implements IFunction {
 		this.initializerList = new CharSequenceList(",\n");
 	}
 
-	override getBlockOpen() {
-		if (initializerList.nullOrEmpty) {
-			super.getBlockOpen
-		} else {
-			'''«prefix»(«parameters») : «initializerList» «super.blockOpen»'''
+	override postfix() {
+		if(!initializerList.nullOrEmpty) {
+			''' : «initializerList»'''
 		}
+	}
+	
+	override declare() {
+		'''«prefix»(«parameters»);'''
 	}
 
 	override prefix() {

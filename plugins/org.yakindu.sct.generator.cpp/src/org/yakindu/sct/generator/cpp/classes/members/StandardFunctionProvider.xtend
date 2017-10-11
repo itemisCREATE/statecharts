@@ -8,11 +8,9 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.cpp
+package org.yakindu.sct.generator.cpp.classes.members
 
 import com.google.inject.Inject
-import org.yakindu.base.types.Declaration
-import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.language.CFunctionFactory
 import org.yakindu.sct.generator.c.language.CustomType
 import org.yakindu.sct.generator.c.language.Type
@@ -23,12 +21,16 @@ import org.yakindu.sct.generator.core.language.IType
 import org.yakindu.sct.generator.core.language.Parameter
 import org.yakindu.sct.generator.core.language.factory.IStandardFunctionProvider
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.cpp.EventCode
+import org.yakindu.sct.generator.cpp.ExpressionCode
+import org.yakindu.sct.generator.cpp.FlowCode
+import org.yakindu.sct.generator.cpp.Naming
+import org.yakindu.sct.generator.cpp.Navigation
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.generator.cpp.language.Modifier
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
-import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
@@ -105,7 +107,9 @@ class StandardFunctionProvider implements IStandardFunctionProvider {
 	}
 	
 	override public IFunction isActive(ExecutionFlow it) {
-		function("isActive", '''return «FOR i : 0 ..< stateVector.size SEPARATOR '||'»stateConfVector[«i»] != «null_state»«ENDFOR»;''')
+		val isActive = function("isActive", '''return «FOR i : 0 ..< stateVector.size SEPARATOR '||'»stateConfVector[«i»] != «null_state»«ENDFOR»;''')
+		isActive.type = Type.BOOL
+		isActive		
 	}
 	
 	override public IFunction isStateActive(ExecutionFlow it, IType statesEnumType) {
@@ -227,7 +231,7 @@ class StandardFunctionProvider implements IStandardFunctionProvider {
 		raiseInterfaceEvent(scope, evd)
 	}
 	
-	def protected IFunction getVariable(StatechartScope scope, VariableDefinition vad) {
+	def protected IFunction getVariable(VariableDefinition vad) {
 		val getVariable = function(vad.asGetter)
 		getVariable.type = new CustomType(vad.typeSpecifier.targetLanguageName)
 		if(vad.const) {
@@ -237,32 +241,32 @@ class StandardFunctionProvider implements IStandardFunctionProvider {
 		getVariable
 	}
 	
-	override getDefaultInterfaceVariable(StatechartScope scope, VariableDefinition vad) {
-		val getVariable = getVariable(scope, vad)
+	override getDefaultInterfaceVariable(VariableDefinition vad) {
+		val getVariable = getVariable(vad)
 		getVariable.content = '''return «vad.access»;'''
 		getVariable
 	}
 	
-	override getInterfaceVariable(StatechartScope scope, VariableDefinition vad) {
-		val getVariable = getVariable(scope, vad)
+	override getInterfaceVariable(VariableDefinition vad) {
+		val getVariable = getVariable(vad)
 		getVariable.content = '''return «vad.localAccess»;'''
 		getVariable
 	}
 	
-	def protected IFunction setVariable(StatechartScope scope, VariableDefinition vad) {
+	def protected IFunction setVariable(VariableDefinition vad) {
 		val setVariable = function(vad.asSetter)
 		setVariable.parameters += new Parameter(new CustomType(vad.typeSpecifier.targetLanguageName), "value")
 		setVariable
 	}
 	
-	override setDefaultInterfaceVariable(StatechartScope scope, VariableDefinition vad) {
-		val setVariable = setVariable(scope, vad)
+	override setDefaultInterfaceVariable(VariableDefinition vad) {
+		val setVariable = setVariable(vad)
 		setVariable.content = '''«vad.access» = value;'''
 		setVariable
 	}
 	
-	override setInterfaceVariable(StatechartScope scope, VariableDefinition vad) {
-		val setVariable = setVariable(scope, vad)
+	override setInterfaceVariable(VariableDefinition vad) {
+		val setVariable = setVariable(vad)
 		setVariable.content = '''«vad.localAccess» = value;'''
 		setVariable
 	}

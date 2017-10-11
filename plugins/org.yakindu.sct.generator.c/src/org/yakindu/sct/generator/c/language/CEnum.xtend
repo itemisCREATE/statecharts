@@ -23,7 +23,7 @@ import org.yakindu.sct.generator.core.language.IType
  */
 class CEnum extends CodePart implements IType, IDeclarable {
 	@Accessors protected CharSequence name
-	@Accessors protected List<CharSequence> values
+	@Accessors protected CharSequenceList<CharSequence> values
 	
 	new() {
 		this.values = new CharSequenceList(",\n")
@@ -41,7 +41,7 @@ class CEnum extends CodePart implements IType, IDeclarable {
 	override declare() {
 		'''
 		«this.toString» {
-			«values»
+			«values.toString»
 		};'''
 	}
 	

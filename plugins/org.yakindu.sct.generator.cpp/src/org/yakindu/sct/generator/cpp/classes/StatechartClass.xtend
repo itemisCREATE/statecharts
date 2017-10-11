@@ -14,26 +14,19 @@ import com.google.inject.Inject
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.language.CEnum
 import org.yakindu.sct.generator.c.language.CustomType
+import org.yakindu.sct.generator.c.language.Parameter
+import org.yakindu.sct.generator.c.language.TypeQualifier
 import org.yakindu.sct.generator.core.language.Comment
-import org.yakindu.sct.generator.core.language.IFunction
 import org.yakindu.sct.generator.core.language.IType
 import org.yakindu.sct.generator.core.language.factory.FunctionFactory
 import org.yakindu.sct.generator.core.language.factory.IStandardFunctionProvider
-import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
-import org.yakindu.sct.generator.cpp.EventCode
-import org.yakindu.sct.generator.cpp.ExpressionCode
-import org.yakindu.sct.generator.cpp.FlowCode
-import org.yakindu.sct.generator.cpp.Naming
-import org.yakindu.sct.generator.cpp.Navigation
-import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
+import org.yakindu.sct.generator.cpp.classes.members.StatechartClassMembers
 import org.yakindu.sct.generator.cpp.language.Constructor
-import org.yakindu.sct.generator.cpp.language.CppClass
 import org.yakindu.sct.generator.cpp.language.Modifier
 import org.yakindu.sct.generator.cpp.language.Typedef
 import org.yakindu.sct.generator.cpp.language.Visibility
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
-import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
@@ -43,62 +36,152 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
  * @author rbeckmann
  *
  */
-class StatechartClass extends CppClass {
-	@Inject protected extension Naming
-	@Inject protected extension Navigation
-	@Inject protected extension FlowCode
-	@Inject protected extension GenmodelEntriesExtension
-	@Inject protected extension ICodegenTypeSystemAccess
-	@Inject protected extension INamingService
-	@Inject protected extension ExpressionCode
-	@Inject protected extension StateVectorExtensions
-	@Inject protected extension EventCode
-	
+class StatechartClass extends AbstractStatechartClass {
 	@Inject extension FunctionFactory
 	@Inject extension IStandardFunctionProvider
+	@Inject extension StatechartClassMembers
+	@Inject extension StatechartClassFactory
 	
-	protected ExecutionFlow flow
-	protected GeneratorEntry entry
-	protected IGenArtifactConfigurations config
 	protected IType classType
 	protected Typedef statesEnumType
 	
-	new(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
-		this.flow = flow
-		this.entry = entry
-		this.config = artifactConfigs
+	override build(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
+		super.build(flow, entry, artifactConfigs)
 		
 		this.name = flow.module
 		this.classType = new CustomType(this.name)
 		this.statesEnumType = createStateEnum
+
+		defineExtendedClasses()
 		
 		createPublicMembers()
 		createProtectedMembers()
 		createPrivateMembers()
 	}
 	
+	def defineExtendedClasses() {
+		extendedClasses = newArrayList
+		if(flow.timed) extendedClasses += "public " + timedStatemachineInterface
+		extendedClasses += "public " + statemachineInterface
+	}
+	
 	def createPublicMembers() {
-		createConstructors()
-		createDestructors()
+		createConstructor()
+		createDestructor()
 		addMember(statesEnumType, Visibility.PUBLIC)
 		createStandardFunctions()
 		if(flow.timed) {
+			addMember(timeEventsCountConstVar(flow), Visibility.PUBLIC)
+			addMember(timeEventsCountparallelConstVar(flow), Visibility.PUBLIC)
 			createTimedFunctions()
 		}
 		createInterfaces()
 	}
 	
 	def createProtectedMembers() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		if(flow.timed || flow.hasOperationCallbacks) {
+			createCopyConstructor()
+			createAssignmentOperator()
+		}
+		createInternalInterfaces()
+		createStatemachineMemberVariables()
+		createInternalFunctions()
 	}
 	
 	def createPrivateMembers() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+	def createCopyConstructor() {
+		val copy = new Constructor()
+		copy.name = this.name
+		val p = new Parameter(classType, "&rhs")
+		p.typeQualifier = TypeQualifier.CONST
+		copy.parameters = #[p]
+		copy.initializerList += copyInitializationList
+		
+	}
+	
+	def getCopyInitializationList() {
+		val initializerList = newArrayList
+		if(flow.timed) {
+			initializerList.add(timerInstance + '''(rhs.«timerInstance»)''')
+		}
+		initializerList.add("rhs.stateConfVectorPosition(0)")
+		for(iface : flow.getInterfaces) {
+			initializerList.add(iface.instance + '''(rhs.«iface.instance»)''')
+			if(iface.hasOperations && !entry.useStaticOPC) {
+				initializerList.add(iface.OCB_Instance + '''(rhs.«iface.OCB_Instance»)''')
+			}
+		}
+		initializerList
+	}
+	
+	def createAssignmentOperator() {
+		val func = function("operator=")
+		func.type = classType.pointer
+		val p = new Parameter(func.type, "rhs")
+		p.setConst
+		func.parameters = #[p]
+	}
+	
+	def createInternalInterfaces() {
+		for(s : flow.scopes.filter(InternalScope)) {
+			addMember(createStatechartInterfaceClass(flow, entry, config, this, s), innerClassVisibility)
+		}
+	}
+	
+	def createStatemachineMemberVariables() {
+		val visibility = innerClassVisibility
+		val it = flow
+		
+		addMember(orthogonalStatesConstVar, visibility)
+		
+		if(flow.hasHistory) {
+			addMember(historyStatesConstVar, visibility)
+		}
+		
+		if(flow.timed) {
+			addMember(timerInterfaceInstance, visibility)
+			addMember(timeEventsArray, visibility)
+		}
+		
+		addMember(stateConfVectorArray(statesEnumType), visibility)
+		
+		if(flow.hasHistory) {
+			addMember(historyVectorArray(statesEnumType), visibility)
+		}
+		
+		addMember(stateConfVectorPosition, visibility)
+		
+		for(iface : flow.getInterfaces) {
+			addMember(iface.interfaceInstance, visibility)
+			if(iface.hasOperations && !entry.useStaticOPC) {
+				addMember(iface.ocbInterfaceInstance, visibility)
+			}
+		}
+	}
+	
+	def createInternalFunctions() {
+		val it = flow
+		checkFunctions.internalFunctions
+		effectFunctions.internalFunctions
+		entryActionFunctions.internalFunctions
+		exitActionFunctions.internalFunctions
+		enterSequenceFunctions.internalFunctions
+		exitSequenceFunctions.internalFunctions
+		reactFunctions.internalFunctions
+		addMember(clearInEvents, innerClassVisibility)
+		addMember(clearOutEvents, innerClassVisibility)
+	}
+	
+	def internalFunctions(Iterable<Step> steps) {
+		steps.map[internalFunction].forEach[addMember(innerClassVisibility)]
 	}
 	
 	def createTimedFunctions() {
+		val it = flow
 		#[setTimer, getTimer, raiseTimeEvent].forEach [
-			modifiers += Modifier.VIRTUAL
+			setVirtual
 			addMember(Visibility.PUBLIC)
 		]
 	}
@@ -113,9 +196,8 @@ class StatechartClass extends CppClass {
 		stateEnumType
 	}
 	
-	def createConstructors() {
+	def createConstructor() {
 		val constructor = new Constructor()
-		constructor.parent = this
 		constructor.name = this.name
 		constructor.initializerList += initializerList
 		if(flow.hasHistory) {
@@ -135,7 +217,7 @@ class StatechartClass extends CppClass {
 		}
 		initializerList.add("stateConfVectorPosition(0)")
 		for(iface : flow.getInterfaces) {
-			initializerList.add(iface.instance)
+			initializerList.add(iface.instance + "()")
 			if(iface.hasOperations && !entry.useStaticOPC) {
 				initializerList.add(iface.OCB_Instance + "(null)")
 			}
@@ -143,11 +225,10 @@ class StatechartClass extends CppClass {
 		initializerList
 	}
 	
-	def createDestructors() {
+	def createDestructor() {
 		val destructor = new Constructor()
-		destructor.parent = this
-		destructor.name = this.name
-		destructor.modifiers += Modifier.VIRTUAL
+		destructor.name = "~" + this.name
+		destructor.setVirtual
 		addMember(destructor, Visibility.PUBLIC)
 	}
 	
@@ -178,59 +259,6 @@ class StatechartClass extends CppClass {
 		]
 	}
 	
-	def protected IFunction setTimer() {
-		function("setTimer", '''this->«timerInstance» = timerInterface;''', #['''«timerInterface»* timerInterface'''])
-	}
-	
-	def protected IFunction getTimer() {
-		val getTimer = function("getTimer", '''this->«timerInstance» = timerInterface;''')
-		getTimer.type = new CustomType(timerInterface + "*")
-		getTimer
-	}
-	
-	def protected IFunction raiseTimeEvent() {
-		function(flow.raiseTimeEventFctID, '''
-			if ((evid >= (sc_eventid)«timeEventsInstance») && (evid < (sc_eventid)(&«timeEventsInstance»[«timeEventsCountConst»])))
-			{
-				*(sc_boolean*)evid = true;
-			}
-			''',
-			#["sc_eventid event"]
-		)
-	}
-	
-	def protected IFunction clearInEvents() {
-		val it = flow
-		function("clearInEvents", '''
-			«FOR scope : scopes»
-				«FOR event : scope.incomingEvents»
-				«event.access» = false;
-				«ENDFOR»
-			«ENDFOR»
-			«IF hasLocalScope»
-				«FOR event : internalScope.events»
-				«event.access» = false; 
-				«ENDFOR»
-			«ENDIF»
-			«IF timed»
-				«FOR event : timeEventScope.events»
-				«event.access» = false; 
-				«ENDFOR»
-			«ENDIF»
-		''')
-	}
-	
-	def protected IFunction clearOutEvents() {
-		val it = flow
-		function("clearOutEvents", '''
-		«FOR scope : it.scopes»
-			«FOR event : scope.outgoingEvents»
-			«event.access» = false;
-			«ENDFOR»
-		«ENDFOR»
-		''')
-	}
-	
 	def createInterfaces() {
 		for(it : flow.scopes) {
 			switch(it) {
@@ -241,40 +269,44 @@ class StatechartClass extends CppClass {
 					}
 				}
 				InternalScope: {
-					createInternalInterface
+					if(hasOperations) {
+						createOCBInterface
+					}
 				}
 			}
 		}
 	}
 	
 	def createOCBInterface(StatechartScope it) {
-		if(hasOperations) {
+		addMember(
+			createStatechartOCBInterfaceClass(flow, entry, config, this, it),
+			Visibility.PUBLIC
+		)
+		if(!entry.useStaticOPC) {
 			addMember(
-				new StatechartOCBInterfaceClass(flow, entry, config, this, it),
+				function("set" + interfaceOCBName,
+					'''«OCB_Instance» = operationCallback;''',
+					#[new Parameter(interfaceOCBName + "*", "operationCallBack")]
+				),
 				Visibility.PUBLIC
 			)
 		}
-		
-	}
-	
-	def createInternalInterface(InternalScope it) {
-		createOCBInterface
 	}
 	
 	def createInterface(InterfaceScope it) {
-		addMember(
-			switch(it) {
-				case isDefaultInterface: new StatechartDefaultInterfaceClass(flow, entry, config, this, it)
-				default: new StatechartInterfaceClass(flow, entry, config, this, it)
-			}, Visibility.PUBLIC)
-		createInterfaceGetter
+		val iface = createStatechartInterfaceClass(flow, entry, config, this, it)
+		addMember(iface, Visibility.PUBLIC)
+		createInterfaceGetter(iface)
+
+		if (isDefaultInterface) {
+			createScopeDeclarationFunctions
+		}
 	}
 	
-	def void createInterfaceGetter(StatechartScope it) {
-		val getter = function("get" + interfaceName)
+	def void createInterfaceGetter(StatechartScope it, AbstractStatechartClass iface) {
+		val getter = function("get" + interfaceName, '''return &«instance»;''')
 		getter.documentation = new Comment('''Returns an instance of the interface class '«interfaceName»'.''')
-		getter.type = new CustomType(interfaceName + "*")
-		getter.content = '''return &«instance»;'''
+		getter.type = new CustomType(iface.name + "*")
 		addMember(getter, Visibility.PUBLIC)
 	}
 }

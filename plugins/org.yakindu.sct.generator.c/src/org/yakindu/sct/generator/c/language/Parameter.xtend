@@ -8,12 +8,14 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.core.language;
+package org.yakindu.sct.generator.c.language
 
 /**
  * @author rbeckmann
  *
  */
-public interface IVariable extends ITypedElement, IModuleMember, IModifierOwner, IDocumentationOwner {
-
+class Parameter extends org.yakindu.sct.generator.core.language.Parameter {
+	new(CharSequence type, CharSequence name) {
+		super(new CustomType(type), name)
+	}
 }

@@ -12,11 +12,13 @@ package org.yakindu.sct.generator.cpp
 
 import com.google.inject.Inject
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenation
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.cpp.classes.StatechartClass
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -40,6 +42,9 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 	@Inject protected extension INamingService
 
 	protected GeneratorEntry entry
+	
+	@Accessors protected StatechartClass statechartClass
+	@Accessors protected boolean newMode = false
 
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		this.entry = entry
@@ -74,14 +79,18 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 	}
 	
 	def protected generateClass(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
-		'''
-			class «module» : «interfaceExtensions»
-			{
-				«generatePublicClassmembers»
-				«generateInnerClasses»
-				«generatePrivateClassmembers»
-			};
-		'''
+		if(newMode && statechartClass !== null) {
+			statechartClass.declare
+		} else {
+			'''
+				class «module» : «interfaceExtensions»
+				{
+					«generatePublicClassmembers»
+					«generateInnerClasses»
+					«generatePrivateClassmembers»
+				};
+			'''
+		}
 	}
 
 	def protected generatePublicClassmembers(ExecutionFlow it) {

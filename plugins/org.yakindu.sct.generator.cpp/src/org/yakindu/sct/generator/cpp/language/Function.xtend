@@ -12,15 +12,16 @@ package org.yakindu.sct.generator.cpp.language
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.yakindu.sct.generator.core.language.CharSequenceList
-import org.yakindu.sct.generator.core.language.IFunction
 import org.yakindu.sct.generator.core.language.IDeclarable
+import org.yakindu.sct.generator.core.language.IFunction
+import org.yakindu.sct.generator.core.language.IModule
 
 /**
  * @author rbeckmann
  *
  */
 class Function extends org.yakindu.sct.generator.c.language.Function implements IFunction, IDeclarable {
-	@Accessors protected CppClass parent
+	@Accessors protected IModule parent
 	@Accessors protected boolean pure = false // Pure virtual functions
 	
 	override getName() {

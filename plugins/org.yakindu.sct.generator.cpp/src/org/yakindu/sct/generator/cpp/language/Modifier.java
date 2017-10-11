@@ -21,7 +21,8 @@ public enum Modifier implements IModifier, CKeywords {
 	STATIC (CKeywords.STATIC),
 	EXTERN (CKeywords.EXTERN),
 	VIRTUAL (CKeywords.VIRTUAL),
-	CONST (CKeywords.CONST)
+	CONST (CKeywords.CONST),
+	INLINE (CKeywords.INLINE)
 	;
 	
 	protected final String s;

@@ -10,54 +10,75 @@
  */
 package org.yakindu.sct.generator.cpp.classes
 
-import com.google.inject.Inject
+import java.util.List
+import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
-import org.yakindu.sct.generator.c.language.CFunctionFactory
+import org.yakindu.sct.generator.core.language.IFunction
 import org.yakindu.sct.generator.core.language.IModule
-import org.yakindu.sct.generator.core.language.factory.IStandardFunctionProvider
-import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
-import org.yakindu.sct.generator.cpp.EventCode
-import org.yakindu.sct.generator.cpp.ExpressionCode
-import org.yakindu.sct.generator.cpp.FlowCode
-import org.yakindu.sct.generator.cpp.Naming
-import org.yakindu.sct.generator.cpp.Navigation
-import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
-import org.yakindu.sct.generator.cpp.language.CppClass
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
-import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.stext.stext.StatechartScope
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 /**
  * @author rbeckmann
  *
  */
-abstract class AbstractStatechartInterfaceClass extends CppClass {
-	@Inject protected extension Naming
-	@Inject protected extension Navigation
-	@Inject protected extension FlowCode
-	@Inject protected extension GenmodelEntriesExtension
-	@Inject protected extension ICodegenTypeSystemAccess
-	@Inject protected extension INamingService
-	@Inject protected extension ExpressionCode
-	@Inject protected extension StateVectorExtensions
-	@Inject protected extension EventCode
-
-	@Inject protected extension IStandardFunctionProvider
-	@Inject protected extension CFunctionFactory
-	
-	protected ExecutionFlow flow
-	protected GeneratorEntry entry
-	protected IGenArtifactConfigurations config
-	protected InterfaceScope scope
-	
-	new(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs, IModule parent,
-		InterfaceScope scope) {
-		this.flow = flow
-		this.entry = entry
-		this.config = artifactConfigs
+abstract class AbstractStatechartInterfaceClass extends AbstractStatechartClass {
+	def void build(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs, IModule parent,
+		StatechartScope scope) {
+		super.build(flow, entry, artifactConfigs)
 		this.parent = parent
 		this.scope = scope
+	}
+	
+	override List<IFunction> createDeclarationFunctions(StatechartScope scope, Declaration declaration) {
+		switch (declaration) {
+			EventDefinition: createEventFunctions(scope, declaration)
+			VariableDefinition: createVariableFunctions(scope, declaration)
+		}
+	}
+
+	override List<IFunction> createEventFunctions(StatechartScope scope, EventDefinition declaration) {
+		val funcs = newArrayList
+		switch (declaration.direction) {
+			case Direction.LOCAL: {
+				funcs += createInEventFunctions(scope, declaration)
+				funcs += createOutEventFunctions(scope, declaration)
+			}
+			case Direction.IN: {
+				funcs += createInEventFunctions(scope, declaration)
+			}
+			case Direction.OUT: {
+				funcs += createOutEventFunctions(scope, declaration)
+			}
+		}
+		funcs
+	}
+
+	override List<IFunction> createInEventFunctions(StatechartScope scope, EventDefinition declaration) {
+		val funcs = newArrayList
+		funcs += raiseInterfaceEvent(scope, declaration)
+		funcs
+	}
+
+	override List<IFunction> createOutEventFunctions(StatechartScope scope, EventDefinition declaration) {
+		val funcs = newArrayList
+		funcs += isInterfaceEventRaised(scope, declaration)
+		if (declaration.hasValue) {
+			funcs += getInterfaceEventValue(scope, declaration)
+		}
+		funcs
+	}
+
+	override List<IFunction> createVariableFunctions(StatechartScope scope, VariableDefinition definition) {
+		val funcs = newArrayList
+		funcs += getInterfaceVariable(definition)
+		if (!(definition.readonly || definition.const)) {
+			funcs += setInterfaceVariable(definition)
+		}
+		funcs
 	}
 }

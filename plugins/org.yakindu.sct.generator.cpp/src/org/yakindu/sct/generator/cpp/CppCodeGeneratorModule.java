@@ -28,6 +28,7 @@ import org.yakindu.sct.generator.core.language.IFunction;
 import org.yakindu.sct.generator.core.language.factory.FunctionFactory;
 import org.yakindu.sct.generator.core.language.factory.IStandardFunctionProvider;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
+import org.yakindu.sct.generator.cpp.classes.members.StandardFunctionProvider;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenEventCode;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenExpressionCode;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineHeader;
