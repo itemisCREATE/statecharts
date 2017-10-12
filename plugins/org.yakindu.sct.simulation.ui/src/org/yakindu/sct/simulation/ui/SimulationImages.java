@@ -45,7 +45,9 @@ public enum SimulationImages {
 
 	LAUNCHER_ICON("icons/Statechart-Launcher-16.png"), 
 	
-	VARIABLE_LOCK("icons/Variable_lock.gif");
+	VARIABLE_LOCK("icons/Variable_lock.gif"),
+	
+	SIMULATION_CLOCK("icons/Clock-16.png");
 	
 	private final String path;
 

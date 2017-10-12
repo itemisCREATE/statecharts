@@ -10,9 +10,11 @@
  */
 package org.yakindu.sct.simulation.ui.view;
 
+import org.eclipse.jface.layout.TreeColumnLayout;
 import org.eclipse.jface.viewers.ColumnViewerEditorActivationEvent;
 import org.eclipse.jface.viewers.ColumnViewerEditorActivationListener;
 import org.eclipse.jface.viewers.ColumnViewerEditorDeactivationEvent;
+import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.jface.viewers.ViewerFilter;
@@ -33,36 +35,46 @@ import org.yakindu.sct.simulation.ui.view.editing.StringEditingSupport;
  */
 public class ExecutionContextViewerFactory {
 
+	private static final int NAME_COL_MIN_WIDTH = 100;
+	private static final int NAME_COL_WIDTH_RATIO = 3;
+	private static final int VALUE_COL_MIN_WIDTH = 80;
+	private static final int VALUE_COL_WIDTH_RATIO = 1;
+
 	public static TreeViewer createViewer(Composite parent, boolean readOnly, ITypeSystemProvider provider) {
-		final TreeViewer viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
+
+		Composite comp = new Composite(parent, SWT.FILL);
+		TreeColumnLayout layout = new TreeColumnLayout(false);
+		comp.setLayout(layout);
+		final TreeViewer viewer = new TreeViewer(comp,
+				SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
 		viewer.getTree().setHeaderVisible(true);
 		viewer.getTree().setLinesVisible(true);
 		final ExecutionContextContentProvider contentProvider = new ExecutionContextContentProvider();
 		viewer.setContentProvider(contentProvider);
-		viewer.setFilters(new ViewerFilter[] { new TimeEventViewerFilter() });
-		TreeViewerColumn nameColumn = new TreeViewerColumn(viewer, SWT.DEFAULT);
+		viewer.setFilters(new ViewerFilter[]{new TimeEventViewerFilter()});
+
+		TreeViewerColumn nameColumn = new TreeViewerColumn(viewer, SWT.NONE);
 		nameColumn.getColumn().setText("Name");
-		nameColumn.getColumn().setMoveable(true);
-		nameColumn.getColumn().setWidth(150);
+		nameColumn.getColumn().setResizable(true);
 		nameColumn.setLabelProvider(new ExecutionContextLabelProvider(0));
 
-		TreeViewerColumn valueColumn = new TreeViewerColumn(viewer, SWT.DEFAULT);
+		TreeViewerColumn valueColumn = new TreeViewerColumn(viewer, SWT.NONE);
 		valueColumn.getColumn().setText("Value");
-		valueColumn.getColumn().setMoveable(true);
-		valueColumn.getColumn().setWidth(100);
-		if (!readOnly)
-			valueColumn
-					.setEditingSupport(new MultiEditingSupport(viewer,
-							/*
-							 * Specialized editing supports first...
-							 */
-							new EnumerationEditingSupport(viewer, provider), //
-							new IntegerEditingSupport(viewer, provider), //
-							new RealEditingSupport(viewer, provider), //
-							new BooleanEditingSupport(viewer, provider), //
-							new StringEditingSupport(viewer, provider)));//
-
+		valueColumn.getColumn().setResizable(false);
 		valueColumn.setLabelProvider(new ExecutionContextLabelProvider(1));
+
+		layout.setColumnData(nameColumn.getColumn(), new ColumnWeightData(NAME_COL_WIDTH_RATIO, NAME_COL_MIN_WIDTH));
+		layout.setColumnData(valueColumn.getColumn(), new ColumnWeightData(VALUE_COL_WIDTH_RATIO, VALUE_COL_MIN_WIDTH));
+		if (!readOnly)
+			valueColumn.setEditingSupport(new MultiEditingSupport(viewer,
+					/*
+					 * Specialized editing supports first...
+					 */
+					new EnumerationEditingSupport(viewer, provider), //
+					new IntegerEditingSupport(viewer, provider), //
+					new RealEditingSupport(viewer, provider), //
+					new BooleanEditingSupport(viewer, provider), //
+					new StringEditingSupport(viewer, provider)));//
 
 		valueColumn.getViewer().getColumnViewerEditor()
 				.addEditorActivationListener(new ColumnViewerEditorActivationListener() {
