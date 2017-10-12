@@ -128,6 +128,7 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		}
 
 		public void deactivate() {
+			store.removeIssueStoreListener(this);
 			super.deactivate();
 		}
 
