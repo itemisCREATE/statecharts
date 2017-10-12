@@ -415,7 +415,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		protected void updateTimestamp(long timestamp) {
 			String formatDurationHMS = DurationFormatUtils.formatDuration(timestamp, "HH:mm:ss.SSS");
 			timeSchedulerLabel.setText("Simulation time: " + formatDurationHMS);
-			timeSchedulerLabel.requestLayout();
+			timeSchedulerLabel.update();
 		}
 
 		public boolean isCancel() {
