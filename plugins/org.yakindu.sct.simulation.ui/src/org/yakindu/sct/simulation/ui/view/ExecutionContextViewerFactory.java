@@ -43,7 +43,7 @@ public class ExecutionContextViewerFactory {
 	public static TreeViewer createViewer(Composite parent, boolean readOnly, ITypeSystemProvider provider) {
 
 		Composite comp = new Composite(parent, SWT.FILL);
-		TreeColumnLayout layout = new TreeColumnLayout(false);
+		TreeColumnLayout layout = new TreeColumnLayout();
 		comp.setLayout(layout);
 		final TreeViewer viewer = new TreeViewer(comp,
 				SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
