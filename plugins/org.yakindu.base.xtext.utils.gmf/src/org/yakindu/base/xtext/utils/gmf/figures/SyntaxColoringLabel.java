@@ -10,6 +10,8 @@
  */
 package org.yakindu.base.xtext.utils.gmf.figures;
 
+import java.util.concurrent.ExecutionException;
+
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.LineBorder;
@@ -20,6 +22,7 @@ import org.eclipse.draw2d.TextUtilities;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
+import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.MapModeUtil;
 import org.eclipse.gmf.runtime.draw2d.ui.text.FlowUtilitiesEx;
 import org.eclipse.gmf.runtime.draw2d.ui.text.TextFlowEx;
@@ -31,6 +34,10 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
+
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 
 /**
  * 
@@ -118,7 +125,6 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 
 		@Override
 		protected void paintText(Graphics g, String draw, int x, int y, int bidiLevel) {
-			// hack to avoid tab expansion to 8 spaces
 			if (ranges.length == 0) {
 				draw = replaceTabs(draw);
 				super.paintText(g, draw, x, y, bidiLevel);
@@ -163,7 +169,7 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		}
 
 		protected int getTextExtend(Font font, String string) {
-			// Can't use TextUtilities, wrong calculation
+			// Can't use TextUtilities, wrong calculation of " "
 			// getTextUtilities().getStringExtents(string, font).width;
 			if (gc.getFont() != font)
 				gc.setFont(font);
@@ -175,34 +181,12 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		public FlowUtilitiesEx getFlowUtilities() {
 			if (flowUtilities == null) {
 				flowUtilities = new FlowUtilitiesEx(MapModeUtil.getMapMode(this)) {
-					private TextUtilitiesEx textUtilities;
+					protected TextUtilitiesEx textUtilities;
 
 					@Override
 					protected TextUtilities getTextUtilities() {
 						if (textUtilities == null) {
-							textUtilities = new TextUtilitiesEx(MapModeUtil.getMapMode(StyledTextFlow.this)) {
-								@Override
-								public Dimension getTextExtents(String draw, Font f) {
-									Dimension d = super.getTextExtents(draw, f).getCopy();
-									int paintOffset = 0;
-									int lineOffset = getText().indexOf(draw);
-									for (StyleRange range : ranges) {
-										int beginIndex = range.start - lineOffset;
-										if (beginIndex > draw.length()) {
-											break;
-										}
-										int endIndex = beginIndex + range.length;
-										String substring = draw.substring(beginIndex > 0 ? beginIndex : 0,
-												Math.min(endIndex > 0 ? endIndex : 0, draw.length()));
-										Font font = SWT.BOLD == (range.fontStyle & SWT.BOLD) ? boldFont : getFont();
-										int offset = getTextExtend(font, substring);
-										paintOffset += offset;
-									}
-									d.width = Math.max(d.width, paintOffset);
-									return d;
-
-								}
-							};
+							textUtilities = new StyleTextUtilities(MapModeUtil.getMapMode(StyledTextFlow.this));
 						}
 						return textUtilities;
 					}
@@ -211,5 +195,54 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 			return flowUtilities;
 		}
 
+		protected class StyleTextUtilities extends TextUtilitiesEx {
+
+			protected LoadingCache<String, Dimension> cache;
+
+			public StyleTextUtilities(IMapMode mapmode) {
+				super(mapmode);
+				cache = CacheBuilder.newBuilder().recordStats().build(new CacheLoader<String, Dimension>() {
+					@Override
+					public Dimension load(String key) throws Exception {
+						return getTextExtentsInternal(key, getFont());
+					}
+				});
+			}
+
+			@Override
+			public Dimension getTextExtents(String draw, Font f) {
+				try {
+					return cache.get(draw);
+				} catch (ExecutionException e) {
+					e.printStackTrace();
+					return super.getTextExtents(draw, f);
+				}
+			}
+
+			/**
+			 * Add bold font size to label dimension
+			 */
+			protected Dimension getTextExtentsInternal(String draw, Font f) {
+				Dimension d = super.getTextExtents(draw, f).getCopy();
+				int paintOffset = 0;
+				int lineOffset = getText().indexOf(draw);
+				for (StyleRange range : ranges) {
+					int beginIndex = range.start - lineOffset;
+					if (beginIndex > draw.length()) {
+						break;
+					}
+					int endIndex = beginIndex + range.length;
+					String substring = draw.substring(beginIndex > 0 ? beginIndex : 0,
+							Math.min(endIndex > 0 ? endIndex : 0, draw.length()));
+					Font font = SWT.BOLD == (range.fontStyle & SWT.BOLD) ? boldFont : getFont();
+					int offset = getTextExtend(font, substring);
+					paintOffset += offset;
+				}
+				d.width = Math.max(d.width, paintOffset);
+				return d;
+
+			}
+
+		}
 	}
 }
