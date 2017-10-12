@@ -11,6 +11,7 @@
 package org.yakindu.sct.simulation.core.engine;
 
 import org.yakindu.sct.model.sruntime.ExecutionContext;
+import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler;
 
 /**
  * 
@@ -20,9 +21,11 @@ import org.yakindu.sct.model.sruntime.ExecutionContext;
 public interface ISimulationEngine {
 
 	public IExecutionControl getExecutionControl();
-	
+
 	public ExecutionContext getExecutionContext();
-	
+
 	public void setExecutionContext(ExecutionContext context);
+
+	public ITimeTaskScheduler getTimeTaskScheduler();
 
 }

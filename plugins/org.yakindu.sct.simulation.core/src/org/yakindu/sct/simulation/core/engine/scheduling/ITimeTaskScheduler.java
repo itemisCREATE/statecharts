@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.simulation.core.sexec.scheduling;
+package org.yakindu.sct.simulation.core.engine.scheduling;
 
 import com.google.inject.ImplementedBy;
 
@@ -35,6 +35,8 @@ public interface ITimeTaskScheduler {
 	public void step();
 
 	public void terminate();
+	
+	public long getCurrentTime();
 
 	public static class TimeTask implements Runnable, Comparable<TimeTask> {
 

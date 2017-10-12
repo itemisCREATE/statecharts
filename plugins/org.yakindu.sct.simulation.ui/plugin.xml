@@ -23,8 +23,8 @@
     	  category="org.yakindu.sct.category"
           allowMultiple="false"
           class="org.yakindu.sct.simulation.ui.view.SimulationView"
-          icon="icons/Declarations-View-16.gif"
-          id="org.yakindu.sct.simulation.ui.declarationview"
+          icon="icons/simulation_perspective.png"
+          id="org.yakindu.sct.simulation.ui.simulationview"
           name="Simulation"
           restorable="true">
     </view>
