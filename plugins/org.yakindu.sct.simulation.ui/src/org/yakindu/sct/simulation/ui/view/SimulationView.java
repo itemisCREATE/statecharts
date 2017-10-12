@@ -554,7 +554,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 			timeSchedulerLabel.setText("Simulation time: " + formatDurationHMS);
 			String time = getSimulationTimeWithoutPaddedZeros(timestamp);
 			timeSchedulerLabel.setToolTipText("Simulation running since " + time);
-			timeSchedulerLabel.requestLayout();
+			timeSchedulerLabel.update();
 		}
 
 		/**
