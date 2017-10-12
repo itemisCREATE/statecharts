@@ -65,12 +65,12 @@ public abstract class XtextLabelEditPart extends CompartmentEditPart implements 
 	}
 
 	public void setLabelText(final String text) {
-		setLabelStyles();
 		getFigure().setText(text);
 	}
 
 	@Override
 	protected void refreshVisuals() {
+		setLabelStyles();
 		super.refreshVisuals();
 		refreshFont();
 		refreshFontColor();

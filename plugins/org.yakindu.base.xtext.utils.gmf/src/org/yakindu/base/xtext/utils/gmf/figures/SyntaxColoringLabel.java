@@ -23,8 +23,6 @@ import org.eclipse.jface.resource.FontDescriptor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.GC;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
 /**
@@ -78,9 +76,6 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 
 	protected static class StyledTextFlow extends TextFlowEx {
 
-		private static final Image dummy = new Image(Display.getDefault(), 1, 1);
-		private static final GC gc = new GC(dummy);
-
 		private StyleRange[] ranges = new StyleRange[0];
 
 		public StyleRange[] getRanges() {
@@ -89,6 +84,11 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 
 		public void setRanges(StyleRange[] ranges) {
 			this.ranges = ranges;
+		}
+
+		@Override
+		protected void layout() {
+			super.layout();
 		}
 
 		@Override
@@ -111,11 +111,12 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 						if (beginIndex > draw.length()) {
 							continue;
 						}
+						Font newFont = null;
 						if (range.fontStyle != SWT.NORMAL) {
 							FontDescriptor boldDescriptor = FontDescriptor.createFrom(getFont())
 									.setStyle(range.fontStyle);
-							Font newfont = boldDescriptor.createFont(Display.getDefault());
-							g.setFont(newfont);
+							newFont = boldDescriptor.createFont(Display.getDefault());
+							g.setFont(newFont);
 						}
 						g.setForegroundColor(range.foreground != null ? range.foreground : getForegroundColor());
 						g.setBackgroundColor(range.background != null ? range.background : getBackgroundColor());
@@ -123,13 +124,12 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 						String substring = originalDraw.substring(beginIndex > 0 ? beginIndex : 0,
 								Math.min(endIndex > 0 ? endIndex : 0, draw.length()));
 						substring = replaceTabs(substring);
-						g.drawString(substring, x + paintOffset, y);
-						int offset = getTextExtend(g.getFont(), substring);
+						g.drawText(substring, x + paintOffset, y);
+						int offset = getTextExtend(newFont != null ? newFont : getFont(), substring);
 						paintOffset += offset;
-						if (range.fontStyle != SWT.NORMAL) {
-							Font font = g.getFont();
+						if (newFont != null) {
 							g.setFont(getFont());
-							font.dispose();
+							newFont.dispose();
 						}
 					}
 				} finally {
@@ -145,10 +145,8 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		}
 
 		protected int getTextExtend(Font font, String string) {
-			gc.setFont(font);
-			int offset = gc.textExtent(string).x;
-			return offset;
+			return getTextUtilities().getStringExtents(string, font).width;
 		}
-	}
 
+	}
 }

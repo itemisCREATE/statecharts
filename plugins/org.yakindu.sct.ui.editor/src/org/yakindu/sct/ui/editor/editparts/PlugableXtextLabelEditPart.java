@@ -173,7 +173,6 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart
 		String label = (String) resolveSemanticElement().eGet(getAttribute());
 		if (label != null && label.equals(getFigure().getText()))
 			return;
-		setLabelStyles();
 		getFigure().setText(label);
 	}
 

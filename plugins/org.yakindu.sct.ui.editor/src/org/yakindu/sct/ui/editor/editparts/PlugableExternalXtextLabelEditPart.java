@@ -163,7 +163,6 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 		String label = (String) resolveSemanticElement().eGet(getAttribute());
 		if (label != null && label.equals(getFigure().getText()))
 			return;
-		setLabelStyles();
 		getFigure().setText(label);
 	}
 
