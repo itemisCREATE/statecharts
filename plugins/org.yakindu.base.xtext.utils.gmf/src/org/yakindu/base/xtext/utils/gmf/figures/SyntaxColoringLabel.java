@@ -16,13 +16,20 @@ import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.MouseEvent;
 import org.eclipse.draw2d.MouseMotionListener;
+import org.eclipse.draw2d.TextUtilities;
+import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
+import org.eclipse.gmf.runtime.draw2d.ui.mapmode.MapModeUtil;
+import org.eclipse.gmf.runtime.draw2d.ui.text.FlowUtilitiesEx;
 import org.eclipse.gmf.runtime.draw2d.ui.text.TextFlowEx;
+import org.eclipse.gmf.runtime.draw2d.ui.text.TextUtilitiesEx;
 import org.eclipse.jface.resource.FontDescriptor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
 /**
@@ -76,6 +83,11 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 
 	protected static class StyledTextFlow extends TextFlowEx {
 
+		private FlowUtilitiesEx flowUtilities;
+		private static final Image dummy = new Image(Display.getDefault(), 1, 1);
+		private static final GC gc = new GC(dummy);
+		private Font boldFont;
+
 		private StyleRange[] ranges = new StyleRange[0];
 
 		public StyleRange[] getRanges() {
@@ -92,15 +104,28 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		}
 
 		@Override
+		public void setFont(Font f) {
+			super.setFont(f);
+			setBoldFont(f);
+		}
+
+		protected void setBoldFont(Font f) {
+			if (boldFont != null)
+				boldFont.dispose();
+			FontDescriptor boldDescriptor = FontDescriptor.createFrom(getFont()).setStyle(SWT.BOLD);
+			boldFont = boldDescriptor.createFont(Display.getDefault());
+		}
+
+		@Override
 		protected void paintText(Graphics g, String draw, int x, int y, int bidiLevel) {
 			// hack to avoid tab expansion to 8 spaces
-			String originalDraw = draw;
 			if (ranges.length == 0) {
 				draw = replaceTabs(draw);
 				super.paintText(g, draw, x, y, bidiLevel);
 				return;
 			}
 			if (bidiLevel == -1) {
+				String originalDraw = draw;
 				int paintOffset = 0;
 				int lineOffset = getText().indexOf(originalDraw);
 				try {
@@ -109,28 +134,21 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 					for (StyleRange range : ranges) {
 						int beginIndex = range.start - lineOffset;
 						if (beginIndex > draw.length()) {
-							continue;
+							break;
 						}
-						Font newFont = null;
-						if (range.fontStyle != SWT.NORMAL) {
-							FontDescriptor boldDescriptor = FontDescriptor.createFrom(getFont())
-									.setStyle(range.fontStyle);
-							newFont = boldDescriptor.createFont(Display.getDefault());
-							g.setFont(newFont);
+						Font font = SWT.BOLD == (range.fontStyle & SWT.BOLD) ? boldFont : getFont();
+						if (font != g.getFont()) {
+							g.setFont(font);
 						}
 						g.setForegroundColor(range.foreground != null ? range.foreground : getForegroundColor());
 						g.setBackgroundColor(range.background != null ? range.background : getBackgroundColor());
 						int endIndex = beginIndex + range.length;
-						String substring = originalDraw.substring(beginIndex > 0 ? beginIndex : 0,
+						String substring = draw.substring(beginIndex > 0 ? beginIndex : 0,
 								Math.min(endIndex > 0 ? endIndex : 0, draw.length()));
 						substring = replaceTabs(substring);
 						g.drawText(substring, x + paintOffset, y);
-						int offset = getTextExtend(newFont != null ? newFont : getFont(), substring);
+						int offset = getTextExtend(g.getFont(), substring);
 						paintOffset += offset;
-						if (newFont != null) {
-							g.setFont(getFont());
-							newFont.dispose();
-						}
 					}
 				} finally {
 					g.popState();
@@ -145,7 +163,52 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		}
 
 		protected int getTextExtend(Font font, String string) {
-			return getTextUtilities().getStringExtents(string, font).width;
+			// Can't use TextUtilities, wrong calculation
+			// getTextUtilities().getStringExtents(string, font).width;
+			if (gc.getFont() != font)
+				gc.setFont(font);
+			int offset = gc.textExtent(string).x;
+			return offset;
+		}
+
+		@Override
+		public FlowUtilitiesEx getFlowUtilities() {
+			if (flowUtilities == null) {
+				flowUtilities = new FlowUtilitiesEx(MapModeUtil.getMapMode(this)) {
+					private TextUtilitiesEx textUtilities;
+
+					@Override
+					protected TextUtilities getTextUtilities() {
+						if (textUtilities == null) {
+							textUtilities = new TextUtilitiesEx(MapModeUtil.getMapMode(StyledTextFlow.this)) {
+								@Override
+								public Dimension getTextExtents(String draw, Font f) {
+									Dimension d = super.getTextExtents(draw, f).getCopy();
+									int paintOffset = 0;
+									int lineOffset = getText().indexOf(draw);
+									for (StyleRange range : ranges) {
+										int beginIndex = range.start - lineOffset;
+										if (beginIndex > draw.length()) {
+											break;
+										}
+										int endIndex = beginIndex + range.length;
+										String substring = draw.substring(beginIndex > 0 ? beginIndex : 0,
+												Math.min(endIndex > 0 ? endIndex : 0, draw.length()));
+										Font font = SWT.BOLD == (range.fontStyle & SWT.BOLD) ? boldFont : getFont();
+										int offset = getTextExtend(font, substring);
+										paintOffset += offset;
+									}
+									d.width = Math.max(d.width, paintOffset);
+									return d;
+
+								}
+							};
+						}
+						return textUtilities;
+					}
+				};
+			}
+			return flowUtilities;
 		}
 
 	}
