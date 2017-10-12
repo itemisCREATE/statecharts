@@ -30,9 +30,8 @@ public enum StatechartImages {
 	
 	MENU("icons/obj16/Menu-16.png"),
 	
-	MIN_SPECIFICATION("icons/obj16/specification-min.gif"),
-	
-	MAX_SPECIFICATION("icons/obj16/specification-max.gif");
+	COLLAPSE_EXPAND("icons/obj16/collapse-expand-all.gif");
+
 	
 	
 

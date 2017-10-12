@@ -366,42 +366,43 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		specificationArea.setLayout(layout);
 		Button expandButton = new Button(specificationArea, SWT.PUSH);
 		expandButton.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false));
-
+		expandButton.setImage(StatechartImages.COLLAPSE_EXPAND.image());
+		expandButton.setToolTipText("Hide statechart specification area");
 		StyledText textControl = new StyledText(specificationArea, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
 		expandButton.moveAbove(textControl);
-		expandButton.setImage(StatechartImages.MIN_SPECIFICATION.image());
 		textControl.setAlwaysShowScrollBars(false);
 		textControl.setBackground(ColorConstants.white);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(textControl);
-		Boolean expanded[] = new Boolean[1];
-		expanded[0]=true;
+
+		int[] previousSashWidths  = new int[2];
+		previousSashWidths[0] = 0;
+		previousSashWidths[1] = 0;
+		int[] previousTextControlWidth = new int[1];
+		previousTextControlWidth[0] = 0;
 		expandButton.addSelectionListener(new SelectionAdapter() {
+
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-
+				if(textControl.getClientArea().width == 1)
+					textControl.setSize(previousTextControlWidth[0], specificationArea.getClientArea().height);
 				textControl.setVisible(!textControl.isVisible());
-				expandButton.setImage(textControl.isVisible()
-						? StatechartImages.MIN_SPECIFICATION.image()
-						: StatechartImages.MAX_SPECIFICATION.image());
+				
 				if (textControl.isVisible()) {
-					specificationArea.setSize(expandButton.getSize().x + textControl.getClientArea().width,
-							specificationArea.getClientArea().height);
-					((SashForm) parent).setWeights(new int[]{2, 10});
-					System.out.println(((SashForm) parent).getWeights()[0] + " " + ((SashForm) parent).getWeights()[1]);
-					expanded[0]=true;
+					((SashForm) parent).setWeights(new int[]{previousSashWidths[0],previousSashWidths[1]});
+					expandButton.setToolTipText("Hide statechart specification area");
 				} else {
-					specificationArea.setSize(expandButton.getSize().x, specificationArea.getClientArea().height);
-					((SashForm) parent)
-							.setWeights(new int[]{expandButton.getSize().x, parent.getParent().getClientArea().width-specificationArea.getClientArea().width});
-					expanded[0]=false;
-					System.out.println(((SashForm) parent).getWeights()[0] + " " + ((SashForm) parent).getWeights()[1]);
+					expandButton.setToolTipText("Show statechart specification area");
+
+					previousSashWidths[0]  = ((SashForm)parent).getWeights()[0];
+					previousSashWidths[1]  = ((SashForm)parent).getWeights()[1];
+					previousTextControlWidth[0] = textControl.getClientArea().width;
+					textControl.setSize(1, specificationArea.getClientArea().height);
+					((SashForm) parent).setWeights(new int[]{expandButton.getSize().x,((SashForm)parent).getWeights()[1]+specificationArea.getClientArea().width-expandButton.getSize().x});
+
 				}
-				textControl.layout();
-				specificationArea.layout();
-				((SashForm) parent).layout();
 			}
 		});
-		
+
 		final StyledTextXtextAdapter xtextAdapter = new StyledTextXtextAdapter(
 				getEmbeddedStatechartSpecificationInjector());
 		xtextAdapter.getFakeResourceContext().getFakeResource().eAdapters().add(new ContextElementAdapter(this));
