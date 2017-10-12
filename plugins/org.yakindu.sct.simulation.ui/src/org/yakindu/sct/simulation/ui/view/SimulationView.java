@@ -559,7 +559,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 			boolean isValidTime = time != null || (time != null && !time.isEmpty()) || timestamp != 0;
 			if (isValidTime) {
 				timeLabel.setToolTipText("Simulation running since " + time);
-				timeLabel.requestLayout();
+				timeLabel.update();
 			}
 			timeIconLabel.setVisible(isValidTime);
 		}
