@@ -28,7 +28,12 @@ public enum StatechartImages {
 	
 	PRO_EDITION("images/pro.png"),
 	
-	MENU("icons/obj16/Menu-16.png");
+	MENU("icons/obj16/Menu-16.png"),
+	
+	MIN_SPECIFICATION("icons/obj16/specification-min.gif"),
+	
+	MAX_SPECIFICATION("icons/obj16/specification-max.gif");
+	
 	
 
 	private final String path;

@@ -17,6 +17,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -44,6 +45,10 @@ import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerLabel;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorReference;
@@ -73,6 +78,8 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 	private DiagramPartitioningBreadcrumbViewer viewer;
 
 	private DiagramPartitioningDocumentProvider documentProvider;
+
+	protected abstract void createTextEditor(Composite parent);
 
 	public DiagramPartitioningEditor(boolean hasFlyoutPalette) {
 		super(hasFlyoutPalette);
@@ -105,7 +112,19 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 	public void createPartControl(Composite parent) {
 		GridLayoutFactory.fillDefaults().spacing(0, 0).applyTo(parent);
 		createBreadcrumbViewer(parent);
-		super.createPartControl(parent);
+		Composite sashForm = createParentSash(parent);
+		createTextEditor(sashForm);
+		super.createPartControl(sashForm);
+		((SashForm)sashForm).setWeights(new int[] {2,10});
+	}
+
+
+	protected Composite createParentSash(Composite parent) {
+		GridDataFactory.fillDefaults().grab(false, true).applyTo(parent);
+		SashForm sash = new SashForm(parent, SWT.HORIZONTAL);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(sash);
+		GridLayoutFactory.fillDefaults().applyTo(sash);
+		return sash;
 	}
 
 	@SuppressWarnings("restriction")

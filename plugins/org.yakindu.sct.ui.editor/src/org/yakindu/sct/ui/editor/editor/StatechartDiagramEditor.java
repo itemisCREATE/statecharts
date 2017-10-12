@@ -10,12 +10,19 @@
  */
 package org.yakindu.sct.ui.editor.editor;
 
+import java.awt.event.MouseAdapter;
+
+import org.eclipse.core.databinding.UpdateValueStrategy;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.emf.databinding.IEMFValueProperty;
+import org.eclipse.emf.databinding.edit.EMFEditProperties;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.KeyHandler;
@@ -30,12 +37,30 @@ import org.eclipse.gmf.runtime.diagram.ui.internal.parts.DiagramGraphicalViewerK
 import org.eclipse.gmf.runtime.gef.ui.internal.editparts.AnimatableZoomManager;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.databinding.swt.ISWTObservableValue;
+import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.ControlAdapter;
+import org.eclipse.swt.events.ControlEvent;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseTrackAdapter;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
@@ -45,13 +70,22 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.xtext.utils.gmf.resource.DirtyStateListener;
+import org.yakindu.base.xtext.utils.jface.fieldassist.CompletionProposalAdapter;
+import org.yakindu.base.xtext.utils.jface.viewers.FilteringMenuManager;
+import org.yakindu.base.xtext.utils.jface.viewers.StyledTextXtextAdapter;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.DomainStatus;
 import org.yakindu.sct.domain.extension.DomainStatus.Severity;
 import org.yakindu.sct.domain.extension.IDomain;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
+import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementProvider;
 import org.yakindu.sct.ui.editor.DiagramActivator;
+import org.yakindu.sct.ui.editor.StatechartImages;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningEditor;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
+import org.yakindu.sct.ui.editor.propertysheets.ValidatingEMFDatabindingContext;
 import org.yakindu.sct.ui.editor.proposals.ContentProposalViewerKeyHandler;
 import org.yakindu.sct.ui.editor.providers.ISCTOutlineFactory;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
@@ -66,7 +100,7 @@ import com.google.inject.Key;
  * @author martin esser
  */
 @SuppressWarnings("restriction")
-public class StatechartDiagramEditor extends DiagramPartitioningEditor implements IGotoMarker {
+public class StatechartDiagramEditor extends DiagramPartitioningEditor implements IGotoMarker, IContextElementProvider {
 
 	private static final int INITIAL_PALETTE_SIZE = 175;
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
@@ -148,6 +182,11 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		return injector;
 	}
 
+	protected Injector getEmbeddedStatechartSpecificationInjector() {
+		IDomain domain = DomainRegistry.getDomain(getDiagram().getElement());
+		return domain.getInjector(IDomain.FEATURE_EDITOR, Statechart.class.getName());
+	}
+
 	protected void checkXtextNature() {
 		IFileEditorInput editorInput = (IFileEditorInput) getEditorInput();
 		IProject project = editorInput.getFile().getProject();
@@ -193,7 +232,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		super.createGraphicalViewer(parent);
 		IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench().getHelpSystem();
 		helpSystem.setHelp(getGraphicalViewer().getControl(), HelpContextIds.SC_EDITOR_GRAPHICAL_VIEWER);
-
 	}
 
 	@Override
@@ -201,6 +239,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		super.configureGraphicalViewer();
 		disableAnimatedZoom();
 		createContentProposalViewerKeyHandler();
+		super.constructPaletteViewer();
 	}
 
 	// Disable the animated zoom, it is too slow for bigger models
@@ -317,4 +356,96 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		}
 		return super.getAdapter(type);
 	}
+
+	@Override
+	protected void createTextEditor(Composite parent) {
+		Composite specificationArea = new Composite(parent, SWT.NONE);
+		GridLayout layout = new GridLayout(2, false);
+		layout.marginHeight = 0;
+		layout.marginWidth = 0;
+		specificationArea.setLayout(layout);
+		Button expandButton = new Button(specificationArea, SWT.PUSH);
+		expandButton.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false));
+
+		StyledText textControl = new StyledText(specificationArea, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
+		expandButton.moveAbove(textControl);
+		expandButton.setImage(StatechartImages.MIN_SPECIFICATION.image());
+		textControl.setAlwaysShowScrollBars(false);
+		textControl.setBackground(ColorConstants.white);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(textControl);
+		Boolean expanded[] = new Boolean[1];
+		expanded[0]=true;
+		expandButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				textControl.setVisible(!textControl.isVisible());
+				expandButton.setImage(textControl.isVisible()
+						? StatechartImages.MIN_SPECIFICATION.image()
+						: StatechartImages.MAX_SPECIFICATION.image());
+				if (textControl.isVisible()) {
+					specificationArea.setSize(expandButton.getSize().x + textControl.getClientArea().width,
+							specificationArea.getClientArea().height);
+					((SashForm) parent).setWeights(new int[]{2, 10});
+					System.out.println(((SashForm) parent).getWeights()[0] + " " + ((SashForm) parent).getWeights()[1]);
+					expanded[0]=true;
+				} else {
+					specificationArea.setSize(expandButton.getSize().x, specificationArea.getClientArea().height);
+					((SashForm) parent)
+							.setWeights(new int[]{expandButton.getSize().x, parent.getParent().getClientArea().width-specificationArea.getClientArea().width});
+					expanded[0]=false;
+					System.out.println(((SashForm) parent).getWeights()[0] + " " + ((SashForm) parent).getWeights()[1]);
+				}
+				textControl.layout();
+				specificationArea.layout();
+				((SashForm) parent).layout();
+			}
+		});
+		
+		final StyledTextXtextAdapter xtextAdapter = new StyledTextXtextAdapter(
+				getEmbeddedStatechartSpecificationInjector());
+		xtextAdapter.getFakeResourceContext().getFakeResource().eAdapters().add(new ContextElementAdapter(this));
+		xtextAdapter.adapt((StyledText) textControl);
+		initContextMenu(textControl);
+		CompletionProposalAdapter adapter = new CompletionProposalAdapter(textControl,
+				xtextAdapter.getContentAssistant(),
+				org.eclipse.jface.bindings.keys.KeyStroke.getInstance(SWT.CTRL, SWT.SPACE), null);
+
+		IEMFValueProperty modelProperty = EMFEditProperties.value(getEditingDomain(),
+				SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION);
+		ISWTObservableValue uiProperty = WidgetProperties.text(new int[]{SWT.FocusOut, SWT.DefaultSelection})
+				.observe(textControl);
+		ValidatingEMFDatabindingContext context = new ValidatingEMFDatabindingContext(this, this.getSite().getShell());
+		context.bindValue(uiProperty, modelProperty.observe(getDiagram().getElement()), null,
+				new UpdateValueStrategy() {
+					@Override
+					protected IStatus doSet(IObservableValue observableValue, Object value) {
+						if (adapter != null && !adapter.isProposalPopupOpen())
+							return super.doSet(observableValue, value);
+						return Status.OK_STATUS;
+					}
+				});
+
+		// TODO provide Properties for StyledText control selection
+		// TODO activate context menu entries like in StatechartTextEditPart
+		// TODO add button to collapse/expand StyledText control
+		// TODO remove StatechartTextEditpart in StatechartDiagramEditor
+
+	}
+
+	@Override
+	public EObject getContextObject() {
+		return getDiagram().getElement();
+	}
+
+	protected void initContextMenu(Control control) {
+		MenuManager menuManager = new FilteringMenuManager();
+		Menu contextMenu = menuManager.createContextMenu(control);
+		control.setMenu(contextMenu);
+		IWorkbenchPartSite site = StatechartDiagramEditor.this.getSite();
+		if (site != null)
+			site.registerContextMenu("org.yakindu.base.xtext.utils.jface.viewers.StyledTextXtextAdapterContextMenu",
+					menuManager, site.getSelectionProvider());
+	}
+
 }
