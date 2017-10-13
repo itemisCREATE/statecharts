@@ -269,7 +269,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		updateSessionDropdownInput(debugTarget);
 	}
 
-	private void updateSessionDropdownInput(final IDebugTarget debugTarget) {
+	protected void updateSessionDropdownInput(final IDebugTarget debugTarget) {
 		Display.getDefault().asyncExec(() -> {
 			if (debugTarget != null) {
 				if (!targets.contains(debugTarget)) {
