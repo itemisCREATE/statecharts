@@ -91,21 +91,21 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		super.dispose();
 	}
 
-	private void disposeTimeSchedulerRefresher() {
+	protected void disposeTimeSchedulerRefresher() {
 		if (timeSchedulerRefresher != null) {
 			timeSchedulerRefresher.cancel = true;
 			timeSchedulerRefresher = null;
 		}
 	}
 
-	private void disposeViewerRefresher() {
+	protected void disposeViewerRefresher() {
 		if (viewerRefresher != null) {
 			viewerRefresher.cancel = true;
 			viewerRefresher = null;
 		}
 	}
 
-	private void disposeTimeSchedulerComponent() {
+	protected void disposeTimeSchedulerComponent() {
 		if (timeSchedulerLabel != null && !timeSchedulerLabel.isDisposed()) {
 			timeSchedulerLabel.dispose();
 		}
