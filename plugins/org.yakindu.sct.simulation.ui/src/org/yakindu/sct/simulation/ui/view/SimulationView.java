@@ -73,7 +73,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	private ITypeSystem typeSystem;
 	private ITimeTaskScheduler timeScheduler;
 	private Label timeSchedulerLabel;
-	private TimeSchedulerComponentRefresher timeSchedulerRefresher;
 
 	public SimulationView() {
 		kit = new FormToolkit(Display.getDefault());
@@ -87,15 +86,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		font.dispose();
 		disposeTimeSchedulerComponent();
 		disposeViewerRefresher();
-		disposeTimeSchedulerRefresher();
 		super.dispose();
-	}
-
-	protected void disposeTimeSchedulerRefresher() {
-		if (timeSchedulerRefresher != null) {
-			timeSchedulerRefresher.cancel = true;
-			timeSchedulerRefresher = null;
-		}
 	}
 
 	protected void disposeViewerRefresher() {
@@ -116,12 +107,8 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		parent.setLayout(new FillLayout(SWT.VERTICAL));
 		Composite top = kit.createComposite(parent);
 		top.setLayout(new FillLayout(SWT.VERTICAL));
-		SashForm sashForm = new SashForm(top, SWT.SMOOTH | SWT.VERTICAL);
-		sashForm.setBackground(ColorConstants.white);
-		sashForm.setLayout(new FillLayout(SWT.NONE));
-		createViewer(sashForm);
-		createTimeScheduler(sashForm);
-		sashForm.setWeights(new int[]{10, 1});
+		createViewer(top);
+		createTimeScheduler(top);
 		hookActions();
 		super.createPartControl(parent);
 	}
@@ -150,22 +137,16 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	protected void setViewerInput(Object input) {
 		if (viewerRefresher != null || input == null) {
 			viewerRefresher.cancel = true;
-			timeSchedulerRefresher.cancel = true;
 		} else {
 			if (viewerRefresher == null)
 				this.viewerRefresher = new ViewerRefresher();
-			if (timeSchedulerRefresher == null)
-				this.timeSchedulerRefresher = new TimeSchedulerComponentRefresher();
 		}
 		if (input != null) {
 			this.viewer.setInput(input);
 			if (this.viewerRefresher.isCancel())
 				this.viewerRefresher.cancel = false;
-			if (timeSchedulerRefresher.isCancel())
-				this.timeSchedulerRefresher.cancel = false;
 
 			new Thread(viewerRefresher).start();
-			new Thread(timeSchedulerRefresher).start();
 		}
 
 	}
@@ -371,36 +352,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 											.isShouldUpdate()) {
 								viewer.refresh();
 							}
-						}
-					});
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-		public boolean isCancel() {
-			return cancel;
-		}
-
-		public void setCancel(boolean cancel) {
-			this.cancel = cancel;
-		}
-	}
-
-	protected class TimeSchedulerComponentRefresher implements Runnable {
-
-		private static final int UPDATE_INTERVAL = 500;
-		private boolean cancel = false;
-
-		@Override
-		public void run() {
-			while (!cancel && !timeSchedulerLabel.isDisposed() && timeScheduler != null) {
-				try {
-					Thread.sleep(UPDATE_INTERVAL);
-					Display.getDefault().asyncExec(new Runnable() {
-						public void run() {
-
 							if (timeSchedulerLabel != null && !timeSchedulerLabel.isDisposed()) {
 								updateTimestamp(timeScheduler.getCurrentTime());
 							}
@@ -411,7 +362,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 				}
 			}
 		}
-
+		
 		protected void updateTimestamp(long timestamp) {
 			String formatDurationHMS = DurationFormatUtils.formatDuration(timestamp, "HH:mm:ss.SSS");
 			timeSchedulerLabel.setText("Simulation time: " + formatDurationHMS);
