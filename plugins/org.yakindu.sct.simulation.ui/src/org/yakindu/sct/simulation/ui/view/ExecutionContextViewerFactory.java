@@ -37,9 +37,9 @@ public class ExecutionContextViewerFactory {
 		final TreeViewer viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		viewer.getTree().setHeaderVisible(true);
 		viewer.getTree().setLinesVisible(true);
-		final ExecutionContextContentProvider contentProvider = new ExecutionContextContentProvider();
+		ExecutionContextContentProvider contentProvider = new ExecutionContextContentProvider();
 		viewer.setContentProvider(contentProvider);
-		viewer.setFilters(new ViewerFilter[] { new TimeEventViewerFilter() });
+		viewer.setFilters(new ViewerFilter[]{new TimeEventViewerFilter()});
 		TreeViewerColumn nameColumn = new TreeViewerColumn(viewer, SWT.DEFAULT);
 		nameColumn.getColumn().setText("Name");
 		nameColumn.getColumn().setMoveable(true);
@@ -51,16 +51,15 @@ public class ExecutionContextViewerFactory {
 		valueColumn.getColumn().setMoveable(true);
 		valueColumn.getColumn().setWidth(100);
 		if (!readOnly)
-			valueColumn
-					.setEditingSupport(new MultiEditingSupport(viewer,
-							/*
-							 * Specialized editing supports first...
-							 */
-							new EnumerationEditingSupport(viewer, provider), //
-							new IntegerEditingSupport(viewer, provider), //
-							new RealEditingSupport(viewer, provider), //
-							new BooleanEditingSupport(viewer, provider), //
-							new StringEditingSupport(viewer, provider)));//
+			valueColumn.setEditingSupport(new MultiEditingSupport(viewer,
+					/*
+					 * Specialized editing supports first...
+					 */
+					new EnumerationEditingSupport(viewer, provider), //
+					new IntegerEditingSupport(viewer, provider), //
+					new RealEditingSupport(viewer, provider), //
+					new BooleanEditingSupport(viewer, provider), //
+					new StringEditingSupport(viewer, provider)));//
 
 		valueColumn.setLabelProvider(new ExecutionContextLabelProvider(1));
 

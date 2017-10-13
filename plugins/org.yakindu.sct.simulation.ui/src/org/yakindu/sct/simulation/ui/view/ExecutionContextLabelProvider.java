@@ -38,12 +38,12 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 
 	public void update(ViewerCell cell) {
 		switch (index) {
-		case 0:
-			updateNameCell(cell);
-			break;
-		case 1:
-			updateValueCell(cell);
-			break;
+			case 0 :
+				updateNameCell(cell);
+				break;
+			case 1 :
+				updateValueCell(cell);
+				break;
 		}
 		super.update(cell);
 	}
@@ -86,7 +86,7 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 			style1.underline = true;
 			style1.foreground = ColorConstants.lightBlue;
 			cell.setText(event.getName());
-			cell.setStyleRanges(new StyleRange[] { style1 });
+			cell.setStyleRanges(new StyleRange[]{style1});
 			if (event.getName().contains("time_event")) {
 				cell.setImage(SimulationImages.TIMEEVENT.image());
 			} else {
