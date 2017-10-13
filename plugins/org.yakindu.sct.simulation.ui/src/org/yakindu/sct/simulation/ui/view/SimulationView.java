@@ -325,9 +325,10 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		@Override
 		public void selectionChanged(SelectionChangedEvent event) {
 			IStructuredSelection selection = (IStructuredSelection) event.getSelection();
-
-			launchChanged(((IDebugTarget) selection.getFirstElement()).getLaunch());
-			sctSourceDisplayDispatcher.displaySource(debugTarget, SimulationView.this.getSite().getPage(), true);
+			if ((IDebugTarget) selection.getFirstElement() != null) {
+				launchChanged(((IDebugTarget) selection.getFirstElement()).getLaunch());
+				sctSourceDisplayDispatcher.displaySource(debugTarget, SimulationView.this.getSite().getPage(), true);
+			}
 		}
 	}
 

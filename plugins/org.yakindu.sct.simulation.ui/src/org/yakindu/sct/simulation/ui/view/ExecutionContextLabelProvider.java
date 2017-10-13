@@ -95,6 +95,9 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 									new TreeEditorDisposeListener(currentItem));
 							viewerCells.add(currentItem);
 						}
+						// layout cells with checkbox widgets to update positions if tree contents have
+						// changed
+						cell.getControl().getParent().layout();
 					} else {
 						cell.setText(value.toString());
 					}
