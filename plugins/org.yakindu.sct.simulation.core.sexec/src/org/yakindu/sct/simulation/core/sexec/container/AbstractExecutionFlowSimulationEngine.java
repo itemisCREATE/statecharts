@@ -153,11 +153,7 @@ public class AbstractExecutionFlowSimulationEngine extends AbstractSimulationEng
 	public Statechart getStatechart() {
 		return statechart;
 	}
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.yakindu.sct.simulation.core.sexec.container.AbstractSimulationEngine#getTimeTaskScheduler()
-	 */
+	
 	@Override
 	public ITimeTaskScheduler getTimeTaskScheduler() {
 		return this.timeTaskScheduler;
