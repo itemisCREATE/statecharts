@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.tasks.DefaultTaskFinder;
 import org.eclipse.xtext.tasks.ITaskParser;
 import org.eclipse.xtext.tasks.ITaskTagProvider;
@@ -27,6 +28,7 @@ import org.yakindu.base.base.DocumentedElement;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.stext.resource.StextResource;
+import org.yakindu.sct.model.stext.tasks.SCTTask;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -52,7 +54,6 @@ public class STextTaskFinder extends DefaultTaskFinder {
 		return super.findTasks(resource);
 	}
 
-	//TODO: Extend the Task class to provide element id for MarkerNavigatorService 
 	public List<Task> findTasks(StextResource resource) {
 		TaskTags taskTags = taskTagProvider.getTaskTags(resource);
 		List<Task> result = Lists.newArrayList();
@@ -60,8 +61,8 @@ public class STextTaskFinder extends DefaultTaskFinder {
 		while (allContents.hasNext()) {
 			EObject eObject = (EObject) allContents.next();
 			if (eObject instanceof SpecificationElement) {
-				List<Task> parseTasks = parseTasks(eObject,
-						SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION, taskTags);
+				List<Task> parseTasks = parseTasks(eObject, SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION,
+						taskTags);
 				result.addAll(parseTasks);
 			}
 			if (eObject instanceof DocumentedElement) {
@@ -75,6 +76,13 @@ public class STextTaskFinder extends DefaultTaskFinder {
 		String expression = (String) element.eGet(feature);
 		if (expression == null)
 			return Collections.emptyList();
-		return parser.parseTasks(expression, tags);
+		List<Task> tasks = parser.parseTasks(expression, tags);
+		List<Task> result = Lists.newArrayList();
+		for (Task task : tasks) {
+			SCTTask sctTask = new SCTTask(task);
+			sctTask.setSemanticURI(EcoreUtil.getURI(element).fragment());
+			result.add(sctTask);
+		}
+		return result;
 	}
 }

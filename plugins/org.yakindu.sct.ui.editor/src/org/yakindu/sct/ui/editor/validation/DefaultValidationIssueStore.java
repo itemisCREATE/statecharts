@@ -28,7 +28,6 @@ import org.eclipse.xtext.validation.Issue;
 import org.yakindu.sct.model.sgraph.ui.validation.ISctIssueCreator;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTIssue;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerType;
-import org.yakindu.sct.ui.editor.validation.IValidationIssueStore;
 import org.yakindu.sct.ui.editor.validation.IResourceChangeToIssueProcessor.ResourceDeltaToIssueResult;
 
 import com.google.common.base.Predicate;
@@ -134,6 +133,8 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 			if ((file != null) && file.isAccessible()) {
 				markers.addAll(
 						Arrays.asList(file.findMarkers(SCTMarkerType.SUPERTYPE, true, IResource.DEPTH_INFINITE)));
+				markers.addAll(
+						Arrays.asList(file.findMarkers(SCTMarkerType.SCT_TASK_TYPE, true, IResource.DEPTH_INFINITE)));
 			}
 		} catch (CoreException e) {
 			e.printStackTrace();
@@ -180,7 +181,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 			visibleIssues.clear();
 			visibleIssues.putAll(newVisibleIssues);
 		}
-		
+
 		SetView<String> changes = Sets.symmetricDifference(oldVisibleIssues.keySet(), newVisibleIssues.keySet());
 		for (String semanticElementID : changes) {
 			notifyListeners(semanticElementID);
