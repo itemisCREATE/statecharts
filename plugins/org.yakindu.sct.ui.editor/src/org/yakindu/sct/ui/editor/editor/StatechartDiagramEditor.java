@@ -463,9 +463,9 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			private final Button expandButton;
 			private final StyledText textControl;
 
-			// indices: 0 - first sash width, 1 - second sash width, 2 - textcontrol width -
+			// indices: 0 - first sash width, 1 - second sash width
 			// needed to restore sashwidths
-			int[] previousWidths = {0, 0, 0};
+			int[] previousWidths = {0, 0};
 
 			protected SwitchListener(Composite parent, Button expandButton, StyledText textControl) {
 				this.parent = parent;
@@ -484,7 +484,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 					expandButton.setToolTipText("Show statechart specification area");
 					previousWidths[0] = ((SashForm) parent).getWeights()[0];
 					previousWidths[1] = ((SashForm) parent).getWeights()[1];
-					previousWidths[2] = textControl.getBounds().width;
 					setProminentSashControl(parent, expandButton);
 				}
 				((SashForm) parent).setRedraw(true);
