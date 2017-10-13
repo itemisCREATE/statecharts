@@ -10,8 +10,6 @@
  */
 package org.yakindu.sct.ui.editor.editor;
 
-import java.awt.event.MouseAdapter;
-
 import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.resources.IMarker;
@@ -46,8 +44,6 @@ import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseTrackAdapter;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -55,7 +51,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
@@ -374,34 +369,10 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		textControl.setBackground(ColorConstants.white);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(textControl);
 
-		int[] previousSashWidths  = new int[2];
-		previousSashWidths[0] = 0;
-		previousSashWidths[1] = 0;
-		int[] previousTextControlWidth = new int[1];
-		previousTextControlWidth[0] = 0;
-		expandButton.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				if(textControl.getClientArea().width == 1)
-					textControl.setSize(previousTextControlWidth[0], specificationArea.getClientArea().height);
-				textControl.setVisible(!textControl.isVisible());
-				
-				if (textControl.isVisible()) {
-					((SashForm) parent).setWeights(new int[]{previousSashWidths[0],previousSashWidths[1]});
-					expandButton.setToolTipText("Hide statechart specification area");
-				} else {
-					expandButton.setToolTipText("Show statechart specification area");
-
-					previousSashWidths[0]  = ((SashForm)parent).getWeights()[0];
-					previousSashWidths[1]  = ((SashForm)parent).getWeights()[1];
-					previousTextControlWidth[0] = textControl.getClientArea().width;
-					textControl.setSize(1, specificationArea.getClientArea().height);
-					((SashForm) parent).setWeights(new int[]{expandButton.getSize().x,((SashForm)parent).getWeights()[1]+specificationArea.getClientArea().width-expandButton.getSize().x});
-
-				}
-			}
-		});
+		expandButton.addSelectionListener(
+				new SpecificationControlAdapter.SwitchListener(parent, expandButton, textControl));
+		((SashForm) parent).addControlListener(
+				new SpecificationControlAdapter.ResizeListener(parent, specificationArea, expandButton, textControl));
 
 		final StyledTextXtextAdapter xtextAdapter = new StyledTextXtextAdapter(
 				getEmbeddedStatechartSpecificationInjector());
@@ -427,9 +398,8 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 					}
 				});
 
-		// TODO provide Properties for StyledText control selection
+		// TODO populate Propertiesview for StyledText control selection
 		// TODO activate context menu entries like in StatechartTextEditPart
-		// TODO add button to collapse/expand StyledText control
 		// TODO remove StatechartTextEditpart in StatechartDiagramEditor
 
 	}
@@ -449,4 +419,83 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 					menuManager, site.getSelectionProvider());
 	}
 
+	/**
+	 * @author robert rudi - Initial contribution and API
+	 * 
+	 */
+	protected static final class SpecificationControlAdapter {
+		/**
+		 * @author robert rudi - Initial contribution and API
+		 * 
+		 */
+		protected static class ResizeListener extends ControlAdapter {
+
+			private final Composite parent;
+			private final Composite specificationArea;
+			private final Button expandButton;
+			private final StyledText textControl;
+
+			protected ResizeListener(Composite parent, Composite specificationArea, Button expandButton,
+					StyledText textControl) {
+				this.parent = parent;
+				this.specificationArea = specificationArea;
+				this.expandButton = expandButton;
+				this.textControl = textControl;
+			}
+
+			@Override
+			public void controlResized(ControlEvent e) {
+				if (!textControl.isVisible()) {
+					if (specificationArea.getBounds().width != expandButton.getBounds().width) {
+						setProminentSashControl(parent, expandButton);
+					}
+				}
+			}
+		}
+
+		/**
+		 * @author robert rudi - Initial contribution and API
+		 * 
+		 */
+		protected static class SwitchListener extends SelectionAdapter {
+
+			private final Composite parent;
+			private final Button expandButton;
+			private final StyledText textControl;
+
+			// indices: 0 - first sash width, 1 - second sash width, 2 - textcontrol width -
+			// needed to restore sashwidths
+			int[] previousWidths = {0, 0, 0};
+
+			protected SwitchListener(Composite parent, Button expandButton, StyledText textControl) {
+				this.parent = parent;
+				this.expandButton = expandButton;
+				this.textControl = textControl;
+			}
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				((SashForm) parent).setRedraw(false);
+				textControl.setVisible(!textControl.isVisible());
+				if (textControl.isVisible()) {
+					expandButton.setToolTipText("Hide statechart specification area");
+					((SashForm) parent).setWeights(new int[]{previousWidths[0], previousWidths[1]});
+				} else {
+					expandButton.setToolTipText("Show statechart specification area");
+					previousWidths[0] = ((SashForm) parent).getWeights()[0];
+					previousWidths[1] = ((SashForm) parent).getWeights()[1];
+					previousWidths[2] = textControl.getBounds().width;
+					setProminentSashControl(parent, expandButton);
+				}
+				((SashForm) parent).setRedraw(true);
+			}
+		}
+
+		protected static void setProminentSashControl(Composite parent, Control prominentControl) {
+			int width = parent.getBounds().width;
+			double percent = 100 / (double) width / Math.abs(width - prominentControl.getBounds().width);
+			int percentRounded = (int) Math.floor(percent);
+			((SashForm) parent).setWeights(new int[]{100 - percentRounded, percentRounded});
+		}
+	}
 }
