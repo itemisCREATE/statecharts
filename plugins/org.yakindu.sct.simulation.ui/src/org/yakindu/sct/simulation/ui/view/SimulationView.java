@@ -257,7 +257,8 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	@Override
 	public void debugContextChanged(DebugContextEvent event) {
 		super.debugContextChanged(event);
-		this.sessionDropdown.setSelection(new StructuredSelection(debugTarget));
+		if (debugTarget != null)
+			this.sessionDropdown.setSelection(new StructuredSelection(debugTarget));
 	}
 
 	protected void activeTargetChanged(final IDebugTarget debugTarget) {
