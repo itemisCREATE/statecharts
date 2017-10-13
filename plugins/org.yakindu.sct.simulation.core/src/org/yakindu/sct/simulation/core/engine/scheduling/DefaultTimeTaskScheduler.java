@@ -205,6 +205,6 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 
 	@Override
 	public long getCurrentTime() {
-		return currentTime;
+		return this.currentTime;
 	}
 }

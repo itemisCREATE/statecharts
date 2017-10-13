@@ -50,10 +50,10 @@ public class ExecutionContextViewerFactory {
 				SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
 		viewer.getTree().setHeaderVisible(true);
 		viewer.getTree().setLinesVisible(true);
-		final ExecutionContextContentProvider contentProvider = new ExecutionContextContentProvider();
+		ExecutionContextContentProvider contentProvider = new ExecutionContextContentProvider();
 		viewer.setContentProvider(contentProvider);
 		viewer.setFilters(new ViewerFilter[]{new TimeEventViewerFilter()});
-
+    
 		TreeViewerColumn nameColumn = new TreeViewerColumn(viewer, SWT.NONE);
 		nameColumn.getColumn().setText("Name");
 		nameColumn.getColumn().setResizable(true);

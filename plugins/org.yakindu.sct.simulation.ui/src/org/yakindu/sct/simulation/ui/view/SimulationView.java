@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.simulation.ui.view;
 
+
 import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
 
@@ -25,6 +26,7 @@ import org.eclipse.debug.internal.ui.commands.actions.StepOverCommandAction;
 import org.eclipse.debug.internal.ui.commands.actions.SuspendCommandAction;
 import org.eclipse.debug.internal.ui.commands.actions.TerminateCommandAction;
 import org.eclipse.debug.ui.contexts.DebugContextEvent;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.IAction;
@@ -42,6 +44,7 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseMoveListener;
@@ -134,6 +137,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		if (sessionDropdown != null && sessionDropdown.getControl() != null
 				&& !sessionDropdown.getControl().isDisposed()) {
 			sessionDropdown.getControl().dispose();
+
 		}
 	}
 
@@ -145,6 +149,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		createSessionSelectorComponent(top);
 		createTimeSchedulerComponent(top);
 		createViewer(top);
+		createTimeScheduler(top);
 		hookActions();
 		super.createPartControl(parent);
 	}
@@ -203,6 +208,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		selectionListener = new RaiseEventSelectionListener(viewer);
 		return viewer;
 	}
+
 
 	public Label createTimeSchedulerComponent(Composite parent) {
 		Composite comp = new Composite(parent, SWT.NONE);
@@ -486,7 +492,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 
 		@Override
 		public void run() {
-
 			while (!cancel) {
 				try {
 					Thread.sleep(UPDATE_INTERVAL);
@@ -502,6 +507,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 						} else {
 							if (timeIconLabel != null && !timeIconLabel.isDisposed() && timeIconLabel.isVisible())
 								updateTimestamp(0);
+
 						}
 					});
 				} catch (InterruptedException e) {
@@ -509,7 +515,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 				}
 			}
 		}
-
 		protected void updateTimestamp(long timestamp) {
 			String formatDurationHMS = DurationFormatUtils.formatDuration(timestamp,
 					(timestamp == 0 ? "--:--:--.---" : "HH:mm:ss.SSS"), true);
@@ -533,6 +538,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 							(days > 0 ? "dd 'days '" : "") + (hours > 0 ? "HH 'hours '" : "")
 									+ (minutes > 0 ? "mm 'minutes '" : "") + (seconds > 0 ? "ss 'seconds '" : ""),
 							false);
+
 		}
 
 		public boolean isCancel() {

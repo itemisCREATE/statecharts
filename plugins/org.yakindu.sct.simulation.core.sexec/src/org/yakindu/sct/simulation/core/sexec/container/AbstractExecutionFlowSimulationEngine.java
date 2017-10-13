@@ -161,6 +161,11 @@ public class AbstractExecutionFlowSimulationEngine extends AbstractSimulationEng
 	public Statechart getStatechart() {
 		return statechart;
 	}
+	
+	@Override
+	public ITimeTaskScheduler getTimeTaskScheduler() {
+		return this.timeTaskScheduler;
+	}
 
 	@Override
 	public ITimeTaskScheduler getTimeTaskScheduler() {

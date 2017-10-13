@@ -26,6 +26,6 @@ public interface ISimulationEngine {
 	
 	public void setExecutionContext(ExecutionContext context);
 
-	ITimeTaskScheduler getTimeTaskScheduler();
+	public ITimeTaskScheduler getTimeTaskScheduler();
 
 }

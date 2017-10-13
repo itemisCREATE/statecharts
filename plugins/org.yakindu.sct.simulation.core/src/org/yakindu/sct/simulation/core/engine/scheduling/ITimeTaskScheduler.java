@@ -105,5 +105,4 @@ public interface ITimeTaskScheduler {
 			this.nextExecutionTime = nextExecutionTime;
 		}
 	}
-
 }
