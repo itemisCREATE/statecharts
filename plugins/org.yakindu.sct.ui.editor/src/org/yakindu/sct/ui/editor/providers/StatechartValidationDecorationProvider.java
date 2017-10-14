@@ -242,7 +242,7 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 
 			EObject element = getTargetEObject();
 			if (element == null) {
-				return null;
+				return Stream.of("-NO TARGET OBJECT-");
 			}
 
 			View view = getTargetView();
