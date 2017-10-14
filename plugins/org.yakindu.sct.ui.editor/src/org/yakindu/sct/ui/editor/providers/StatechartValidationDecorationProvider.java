@@ -12,6 +12,7 @@ package org.yakindu.sct.ui.editor.providers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.Label;
@@ -47,6 +48,8 @@ import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 import org.yakindu.sct.ui.editor.validation.IValidationIssueStore;
 import org.yakindu.sct.ui.editor.validation.IValidationIssueStore.IValidationIssueStoreListener;
+
+import com.google.common.collect.Sets;
 
 /**
  * 
@@ -100,11 +103,12 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		private static final String SUB_DIAGRAM_ERRORS = "The subdiagram contains errors.";
 		private IValidationIssueStore store;
 		private String semanticID;
-		private String subdiagramSemanticID;
+		private Set<String> subdiagramSemanticIDs;
 
 		public ValidationDecorator(IDecoratorTarget decoratorTarget, IValidationIssueStore store) {
 			super(decoratorTarget);
 			this.store = store;
+			subdiagramSemanticIDs = Sets.newHashSet();
 		}
 
 		public void refresh() {
@@ -182,13 +186,14 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 					TreeIterator<EObject> eAllContents = element.eAllContents();
 					while (eAllContents.hasNext()) {
 						EObject next = eAllContents.next();
-						List<SCTIssue> issues = store.getIssues(EcoreUtil.getURI(next).fragment());
+						String semanticURI = EcoreUtil.getURI(next).fragment();
+						List<SCTIssue> issues = store.getIssues(semanticURI);
+						subdiagramSemanticIDs.add(semanticURI);
 						for (final SCTIssue issue : issues) {
 							if (Severity.ERROR.equals(issue.getSeverity())) {
 								IssueImpl result = new Issue.IssueImpl();
 								result.setMessage(SUB_DIAGRAM_ERRORS);
 								result.setSeverity(Severity.ERROR);
-								subdiagramSemanticID = issue.getSemanticURI();
 								return new SCTIssue(result, issue.getSemanticURI());
 							}
 						}
@@ -222,8 +227,7 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		public List<String> getSemanticURIs() {
 			List<String> result = new ArrayList<String>();
 			result.add(semanticID);
-			if (subdiagramSemanticID != null)
-				result.add(subdiagramSemanticID);
+			result.addAll(subdiagramSemanticIDs);
 			return result;
 		}
 	}
