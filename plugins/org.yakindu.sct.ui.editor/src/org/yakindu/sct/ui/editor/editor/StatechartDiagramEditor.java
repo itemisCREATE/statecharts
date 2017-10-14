@@ -140,7 +140,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	protected void registerValidationListener() {
 		issueStore = getIssueStore();
-		issueStore.connect(getDiagram().eResource());
 		validationListener = getEditorInjector().getInstance(LiveValidationListener.class);
 		validationListener.setResource(getDiagram().eResource());
 		validationListener.setValidationIssueProcessor(issueStore);
