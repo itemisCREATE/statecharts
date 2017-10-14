@@ -198,12 +198,12 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 
 	protected boolean changedSeverity(String semanticElementID, Multimap<String, SCTIssue> oldVisibleIssues,
 			Multimap<String, SCTIssue> newVisibleIssues) {
-		Severity minOldSeverity = getMinSverity(oldVisibleIssues.get(semanticElementID));
-		Severity minNewSeverity = getMinSverity(newVisibleIssues.get(semanticElementID));
+		Severity minOldSeverity = getMinSeverity(oldVisibleIssues.get(semanticElementID));
+		Severity minNewSeverity = getMinSeverity(newVisibleIssues.get(semanticElementID));
 		return minNewSeverity.ordinal() != minOldSeverity.ordinal();
 	}
 
-	protected Severity getMinSverity(Collection<SCTIssue> issues) {
+	protected Severity getMinSeverity(Collection<SCTIssue> issues) {
 		Severity minNewSeverity = Severity.IGNORE;
 		for (SCTIssue sctIssue : issues) {
 			minNewSeverity = minNewSeverity.ordinal() > sctIssue.getSeverity().ordinal()
