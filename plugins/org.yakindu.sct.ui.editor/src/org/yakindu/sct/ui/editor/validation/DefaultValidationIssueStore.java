@@ -28,7 +28,6 @@ import org.eclipse.xtext.validation.Issue;
 import org.yakindu.sct.model.sgraph.ui.validation.ISctIssueCreator;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTIssue;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerType;
-import org.yakindu.sct.ui.editor.validation.IValidationIssueStore;
 import org.yakindu.sct.ui.editor.validation.IResourceChangeToIssueProcessor.ResourceDeltaToIssueResult;
 
 import com.google.common.base.Predicate;
@@ -91,7 +90,10 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 	protected void notifyListeners(String semanticURI) {
 		synchronized (listener) {
 			for (IValidationIssueStoreListener iResourceIssueStoreListener : listener) {
-				if (iResourceIssueStoreListener.getSemanticURIs().contains(semanticURI)) {
+				// use parallel stream to optimize processing of subdiagrams
+				// which might have a lot semantic uris
+				if (iResourceIssueStoreListener.getSemanticURIs().parallelStream().filter(e -> e.equals(semanticURI))
+						.findFirst().isPresent()) {
 					iResourceIssueStoreListener.issuesChanged();
 				}
 			}
