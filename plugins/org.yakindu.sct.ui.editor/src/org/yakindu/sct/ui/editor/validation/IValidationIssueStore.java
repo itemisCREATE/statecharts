@@ -11,6 +11,7 @@
 package org.yakindu.sct.ui.editor.validation;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ui.editor.validation.IValidationIssueProcessor;
@@ -31,7 +32,7 @@ public interface IValidationIssueStore extends IValidationIssueProcessor {
 
 		public void issuesChanged();
 		
-		public List<String> getSemanticURIs();
+		public Stream<String> getSemanticURIsStream();
 
 	}
 

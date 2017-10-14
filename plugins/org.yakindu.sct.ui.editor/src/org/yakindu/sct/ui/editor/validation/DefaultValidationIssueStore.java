@@ -92,7 +92,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 			for (IValidationIssueStoreListener iResourceIssueStoreListener : listener) {
 				// use parallel stream to optimize processing of subdiagrams
 				// which might have a lot semantic uris
-				if (iResourceIssueStoreListener.getSemanticURIs().parallelStream().filter(e -> e.equals(semanticURI))
+				if (iResourceIssueStoreListener.getSemanticURIsStream().parallel().filter(e -> e.equals(semanticURI))
 						.findFirst().isPresent()) {
 					iResourceIssueStoreListener.issuesChanged();
 				}

@@ -10,9 +10,12 @@
  */
 package org.yakindu.sct.ui.editor.providers;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.stream.Collector.Characteristics;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.Label;
@@ -48,8 +51,6 @@ import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 import org.yakindu.sct.ui.editor.validation.IValidationIssueStore;
 import org.yakindu.sct.ui.editor.validation.IValidationIssueStore.IValidationIssueStoreListener;
-
-import com.google.common.collect.Sets;
 
 /**
  * 
@@ -103,20 +104,17 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		private static final String SUB_DIAGRAM_ERRORS = "The subdiagram contains errors.";
 		private IValidationIssueStore store;
 		private String semanticID;
-		private Set<String> subdiagramSemanticIDs;
 
 		public ValidationDecorator(IDecoratorTarget decoratorTarget, IValidationIssueStore store) {
 			super(decoratorTarget);
 			this.store = store;
-			subdiagramSemanticIDs = Sets.newHashSet();
 		}
 
 		public void refresh() {
-			View view = (View) getDecoratorTarget().getAdapter(View.class);
-			if (view == null || view.eResource() == null) {
+			EObject element = getTargetEObject();
+			if (element == null) {
 				return;
 			}
-			EObject element = view.getElement();
 			if (element != null)
 				semanticID = element.eResource().getURIFragment(element);
 			removeDecoration();
@@ -124,7 +122,20 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 			if (editPart == null || editPart.getViewer() == null || !(editPart instanceof IPrimaryEditPart)) {
 				return;
 			}
-			decorate(view);
+			decorate(getTargetView());
+		}
+
+		protected EObject getTargetEObject() {
+			View view = getTargetView();
+			return view.getElement();
+		}
+
+		private View getTargetView() {
+			View view = (View) getDecoratorTarget().getAdapter(View.class);
+			if (view == null || view.eResource() == null) {
+				return null;
+			}
+			return view;
 		}
 
 		public void activate() {
@@ -186,9 +197,8 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 					TreeIterator<EObject> eAllContents = element.eAllContents();
 					while (eAllContents.hasNext()) {
 						EObject next = eAllContents.next();
-						String semanticURI = EcoreUtil.getURI(next).fragment();
+						String semanticURI = getSemanticURI(next);
 						List<SCTIssue> issues = store.getIssues(semanticURI);
-						subdiagramSemanticIDs.add(semanticURI);
 						for (final SCTIssue issue : issues) {
 							if (Severity.ERROR.equals(issue.getSeverity())) {
 								IssueImpl result = new Issue.IssueImpl();
@@ -201,6 +211,10 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 				}
 			}
 			return null;
+		}
+
+		private String getSemanticURI(EObject next) {
+			return EcoreUtil.getURI(next).fragment();
 		}
 
 		protected Image getImage(Severity severity) {
@@ -224,11 +238,27 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		}
 
 		@Override
-		public List<String> getSemanticURIs() {
-			List<String> result = new ArrayList<String>();
-			result.add(semanticID);
-			result.addAll(subdiagramSemanticIDs);
-			return result;
+		public Stream<String> getSemanticURIsStream() {
+
+			EObject element = getTargetEObject();
+			if (element == null) {
+				return null;
+			}
+
+			View view = getTargetView();
+			if (SemanticHints.STATE.equals(view.getType())) {
+				BooleanValueStyle style = GMFNotationUtil.getBooleanValueStyle(view,
+						DiagramPartitioningUtil.INLINE_STYLE);
+				if (style == null ? false : !style.isBooleanValue()) {
+					Stream<String> stream = StreamSupport.stream(() -> {
+						return Spliterators.spliteratorUnknownSize(element.eAllContents(), Spliterator.CONCURRENT);
+					}, Characteristics.CONCURRENT.ordinal(), true).map(e -> getSemanticURI(e));
+					return Stream.concat(Stream.of(semanticID), stream);
+				}
+			}
+
+			return Stream.of(semanticID);
 		}
+
 	}
 }
