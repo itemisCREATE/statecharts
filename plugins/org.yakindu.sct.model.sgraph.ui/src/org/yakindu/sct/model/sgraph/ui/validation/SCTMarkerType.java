@@ -18,6 +18,7 @@ public interface SCTMarkerType {
 	public final static String FAST_VALIDATION = "org.yakindu.sct.ui.editor.diagnostic.fast"; //$NON-NLS-1$
 	public final static String NORMAL_VALIDATION = "org.yakindu.sct.ui.editor.diagnostic.normal"; //$NON-NLS-1$
 	public final static String EXPENSIVE_VALIDATION = "org.yakindu.sct.ui.editor.diagnostic.expensive"; //$NON-NLS-1$
+	public static final String SCT_TASK_TYPE = "org.yakindu.sct.ui.editor.task"; //$NON-NLS-1$
 	
 	public static final String SEMANTIC_ELEMENT_ID = org.eclipse.gmf.runtime.common.core.resources.IMarker.ELEMENT_ID;
 			
