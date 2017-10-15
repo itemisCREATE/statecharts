@@ -22,6 +22,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.Issue;
@@ -89,12 +90,15 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 
 	protected void notifyListeners(String semanticURI) {
 		synchronized (listener) {
-			for (IValidationIssueStoreListener iResourceIssueStoreListener : listener) {
-				// use parallel stream to optimize processing of subdiagrams
-				// which might have a lot semantic uris
-				if (iResourceIssueStoreListener.getSemanticURIsStream().parallel().filter(e -> e.equals(semanticURI))
-						.findFirst().isPresent()) {
-					iResourceIssueStoreListener.issuesChanged();
+			for (IValidationIssueStoreListener currentListener : listener) {
+				String uriToListen = currentListener.getSemanticURI();
+				if (semanticURI.equals(uriToListen)) {
+					currentListener.issuesChanged();
+				} else if (currentListener.notifyOnChildChange() && connectedResource != null) {
+					if (EcoreUtil.isAncestor(connectedResource.getEObject(uriToListen),
+							connectedResource.getEObject(semanticURI))) {
+						currentListener.issuesChanged();
+					}
 				}
 			}
 		}
@@ -182,7 +186,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 			visibleIssues.clear();
 			visibleIssues.putAll(newVisibleIssues);
 		}
-		
+
 		SetView<String> changes = Sets.symmetricDifference(oldVisibleIssues.keySet(), newVisibleIssues.keySet());
 		for (String semanticElementID : changes) {
 			notifyListeners(semanticElementID);

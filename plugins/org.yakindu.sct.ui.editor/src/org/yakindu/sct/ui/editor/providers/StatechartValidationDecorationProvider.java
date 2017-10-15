@@ -11,11 +11,7 @@
 package org.yakindu.sct.ui.editor.providers;
 
 import java.util.List;
-import java.util.Spliterator;
-import java.util.Spliterators;
-import java.util.stream.Collector.Characteristics;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
+import java.util.Optional;
 
 import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.Label;
@@ -111,31 +107,35 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		}
 
 		public void refresh() {
-			EObject element = getTargetEObject();
-			if (element == null) {
+			Optional<EObject> element = getTargetEObject();
+			if (!element.isPresent()) {
 				return;
 			}
-			if (element != null)
-				semanticID = element.eResource().getURIFragment(element);
+			semanticID = element.get().eResource().getURIFragment(element.get());
 			removeDecoration();
 			EditPart editPart = (EditPart) getDecoratorTarget().getAdapter(EditPart.class);
 			if (editPart == null || editPart.getViewer() == null || !(editPart instanceof IPrimaryEditPart)) {
 				return;
 			}
-			decorate(getTargetView());
+			decorate(getTargetView().get());
 		}
 
-		protected EObject getTargetEObject() {
-			View view = getTargetView();
-			return view.getElement();
+		protected Optional<EObject> getTargetEObject() {
+			Optional<View> view = getTargetView();
+			if (view.isPresent()) {
+				EObject element = view.get().getElement();
+				if (element != null)
+					return Optional.of(element);
+			}
+			return Optional.empty();
 		}
 
-		private View getTargetView() {
+		private Optional<View> getTargetView() {
 			View view = (View) getDecoratorTarget().getAdapter(View.class);
 			if (view == null || view.eResource() == null) {
-				return null;
+				return Optional.empty();
 			}
-			return view;
+			return Optional.of(view);
 		}
 
 		public void activate() {
@@ -197,7 +197,7 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 					TreeIterator<EObject> eAllContents = element.eAllContents();
 					while (eAllContents.hasNext()) {
 						EObject next = eAllContents.next();
-						String semanticURI = getSemanticURI(next);
+						String semanticURI = EcoreUtil.getURI(next).fragment();
 						List<SCTIssue> issues = store.getIssues(semanticURI);
 						for (final SCTIssue issue : issues) {
 							if (Severity.ERROR.equals(issue.getSeverity())) {
@@ -211,10 +211,6 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 				}
 			}
 			return null;
-		}
-
-		private String getSemanticURI(EObject next) {
-			return EcoreUtil.getURI(next).fragment();
 		}
 
 		protected Image getImage(Severity severity) {
@@ -238,27 +234,19 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		}
 
 		@Override
-		public Stream<String> getSemanticURIsStream() {
-
-			EObject element = getTargetEObject();
-			if (element == null) {
-				return Stream.of("-NO TARGET OBJECT-");
-			}
-
-			View view = getTargetView();
-			if (SemanticHints.STATE.equals(view.getType())) {
-				BooleanValueStyle style = GMFNotationUtil.getBooleanValueStyle(view,
-						DiagramPartitioningUtil.INLINE_STYLE);
-				if (style == null ? false : !style.isBooleanValue()) {
-					Stream<String> stream = StreamSupport.stream(() -> {
-						return Spliterators.spliteratorUnknownSize(element.eAllContents(), Spliterator.CONCURRENT);
-					}, Characteristics.CONCURRENT.ordinal(), true).map(e -> getSemanticURI(e));
-					return Stream.concat(Stream.of(semanticID), stream);
-				}
-			}
-
-			return Stream.of(semanticID);
+		public String getSemanticURI() {
+			return semanticID;
 		}
 
+		@Override
+		public boolean notifyOnChildChange() {
+			Optional<View> view = getTargetView();
+			if (view.isPresent() && SemanticHints.STATE.equals(view.get().getType())) {
+				BooleanValueStyle style = GMFNotationUtil.getBooleanValueStyle(view.get(),
+						DiagramPartitioningUtil.INLINE_STYLE);
+				return style == null ? false : !style.isBooleanValue();
+			}
+			return false;
+		}
 	}
 }
