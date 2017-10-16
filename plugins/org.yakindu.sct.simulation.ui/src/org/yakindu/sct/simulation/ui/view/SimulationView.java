@@ -149,7 +149,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		createSessionSelectorComponent(top);
 		createTimeSchedulerComponent(top);
 		createViewer(top);
-		createTimeScheduler(top);
 		hookActions();
 		super.createPartControl(parent);
 	}

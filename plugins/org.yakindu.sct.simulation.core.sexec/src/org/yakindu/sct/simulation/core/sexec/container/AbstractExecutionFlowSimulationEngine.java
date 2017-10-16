@@ -167,8 +167,4 @@ public class AbstractExecutionFlowSimulationEngine extends AbstractSimulationEng
 		return this.timeTaskScheduler;
 	}
 
-	@Override
-	public ITimeTaskScheduler getTimeTaskScheduler() {
-		return timeTaskScheduler;
-	}
 }
