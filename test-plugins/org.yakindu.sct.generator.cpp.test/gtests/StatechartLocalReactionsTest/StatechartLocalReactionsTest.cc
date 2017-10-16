@@ -49,4 +49,5 @@ TEST_F(StatechartLocalReactionsTest, statechartLocalReactionsTest) {
 		runner->proceed_cycles(1);
 	}
 	
+	
 }

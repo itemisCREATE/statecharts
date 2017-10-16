@@ -40,4 +40,5 @@ TEST_F(EntryChoiceTest, EntryChoiceTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(EntryChoice::main_region_A));
 	
+	
 }

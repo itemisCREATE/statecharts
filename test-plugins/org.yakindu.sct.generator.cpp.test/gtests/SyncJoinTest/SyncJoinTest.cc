@@ -106,6 +106,7 @@ TEST_F(SyncJoinTest, syncJoin_C2_Waits) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_A));
 	
+	
 }
 TEST_F(SyncJoinTest, syncJoin_D2_Waits) {
 	
@@ -159,6 +160,7 @@ TEST_F(SyncJoinTest, syncJoin_D2_Waits) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D2));
 	
+	
 }
 TEST_F(SyncJoinTest, doubleEntryActionBug) {
 	
@@ -179,5 +181,6 @@ TEST_F(SyncJoinTest, doubleEntryActionBug) {
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_A));
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 1l);
+	
 	
 }

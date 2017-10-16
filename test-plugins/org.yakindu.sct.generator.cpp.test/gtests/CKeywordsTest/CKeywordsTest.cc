@@ -46,4 +46,5 @@ TEST_F(CKeywordsTest, CKeywordsTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(CKeywords::auto_loop_switch_case_enum_asm));
 	
+	
 }

@@ -41,6 +41,7 @@ void init(){
 	
 	statechart->getDefaultSCI()->set_entries(0l);
 	
+	
 }
 
 TEST_F(EntryExitSelfTransitionTest, SelfTransitionToChildState) {
@@ -58,6 +59,7 @@ TEST_F(EntryExitSelfTransitionTest, SelfTransitionToChildState) {
 	EXPECT_TRUE(statechart->isStateActive(EntryExitSelfTransition::main_region_A__region0_C));
 	
 	statechart->exit();
+	
 	
 }
 TEST_F(EntryExitSelfTransitionTest, SelfTransitionFromChildState) {
@@ -85,5 +87,6 @@ TEST_F(EntryExitSelfTransitionTest, SelfTransitionFromChildState) {
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_exits()== 1l);
 	
 	statechart->exit();
+	
 	
 }

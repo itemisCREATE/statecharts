@@ -40,4 +40,5 @@ TEST_F(FeatureCallsTest, FeatureCalls) {
 	
 	EXPECT_TRUE(statechart->isStateActive(FeatureCalls::main_region_A));
 	
+	
 }

@@ -43,4 +43,5 @@ TEST_F(TimedTransitionsTest, Timer01) {
 	
 	EXPECT_TRUE(statechart->isStateActive(TimedTransitions::main_region_End));
 	
+	
 }

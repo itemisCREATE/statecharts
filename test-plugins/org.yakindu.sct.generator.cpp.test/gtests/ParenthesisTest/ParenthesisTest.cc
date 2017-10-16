@@ -38,4 +38,5 @@ TEST_F(ParenthesisTest, simple) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_erg()== 8l);
 	
+	
 }

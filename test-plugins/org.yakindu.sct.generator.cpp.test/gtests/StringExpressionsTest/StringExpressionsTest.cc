@@ -96,4 +96,5 @@ TEST_F(StringExpressionsTest, StringExpressionsTest) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_stringVarNotEqual());
 	
+	
 }

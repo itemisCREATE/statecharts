@@ -40,4 +40,5 @@ TEST_F(EmptyTransitionTest, EmptyTransitionTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(EmptyTransition::main_region_A));
 	
+	
 }

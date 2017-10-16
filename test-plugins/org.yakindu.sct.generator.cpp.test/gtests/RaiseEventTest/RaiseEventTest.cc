@@ -48,4 +48,5 @@ TEST_F(RaiseEventTest, raiseEvent) {
 	
 	EXPECT_TRUE(statechart->isStateActive(RaiseEvent::main_region_StateB));
 	
+	
 }

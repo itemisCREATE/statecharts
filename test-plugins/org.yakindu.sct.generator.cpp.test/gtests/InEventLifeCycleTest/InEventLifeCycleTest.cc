@@ -42,4 +42,5 @@ TEST_F(InEventLifeCycleTest, eventLifeCycle) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_i()== 1l);
 	
+	
 }

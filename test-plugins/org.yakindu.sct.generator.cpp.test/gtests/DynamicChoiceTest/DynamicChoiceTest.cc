@@ -40,4 +40,5 @@ TEST_F(DynamicChoiceTest, DynamicChoiceTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(DynamicChoice::main_region_A));
 	
+	
 }

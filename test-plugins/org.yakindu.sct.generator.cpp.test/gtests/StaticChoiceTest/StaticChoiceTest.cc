@@ -38,4 +38,5 @@ TEST_F(StaticChoiceTest, StaticChoiceTest) {
 	
 	runner->proceed_cycles(1);
 	
+	
 }

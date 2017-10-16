@@ -52,4 +52,5 @@ TEST_F(SameNameDifferentRegionTest, sameNameDifferenRegionTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB_r1_StateB));
 	
+	
 }

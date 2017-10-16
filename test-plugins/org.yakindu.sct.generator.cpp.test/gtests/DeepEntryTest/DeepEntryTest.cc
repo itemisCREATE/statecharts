@@ -40,4 +40,5 @@ TEST_F(DeepEntryTest, enterToSubstate) {
 	
 	statechart->exit();
 	
+	
 }

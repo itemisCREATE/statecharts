@@ -72,4 +72,5 @@ TEST_F(ReadOnlyVariableTest, ReadOnlyVariableTest) {
 	
 	EXPECT_TRUE(statechart->getSCI_A()->get_myReal()== 7.7);
 	
+	
 }

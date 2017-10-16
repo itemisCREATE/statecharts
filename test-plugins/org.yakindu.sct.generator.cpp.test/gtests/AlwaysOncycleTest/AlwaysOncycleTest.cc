@@ -54,4 +54,5 @@ TEST_F(AlwaysOncycleTest, alwaysOnCycleTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateA));
 	
+	
 }

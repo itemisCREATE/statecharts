@@ -48,4 +48,5 @@ TEST_F(StateIsActiveTest, stateIsActive) {
 	
 	EXPECT_TRUE(statechart->isStateActive(StateIsActive::R2_R2B));
 	
+	
 }
