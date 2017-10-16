@@ -20,10 +20,10 @@ import org.yakindu.sct.generator.core.language.IFunction
 import org.yakindu.sct.generator.core.language.IType
 import org.yakindu.sct.generator.core.language.factory.FunctionFactory
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.cpp.CppExpressionsGenerator
+import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.EventCode
-import org.yakindu.sct.generator.cpp.ExpressionCode
 import org.yakindu.sct.generator.cpp.FlowCode
-import org.yakindu.sct.generator.cpp.Naming
 import org.yakindu.sct.generator.cpp.Navigation
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.generator.cpp.language.CodePartExtensions
@@ -41,13 +41,13 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
  *
  */
 class StatechartClassMembers {
-	@Inject protected extension Naming
+	@Inject protected extension CppNaming
 	@Inject protected extension Navigation
 	@Inject protected extension FlowCode
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension INamingService
-	@Inject protected extension ExpressionCode
+	@Inject protected extension CppExpressionsGenerator
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension EventCode
 	@Inject protected extension StatechartExtensions
