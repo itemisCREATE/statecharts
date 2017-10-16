@@ -77,11 +77,12 @@ abstract class AbstractStatechartClass extends CppClass {
 		switch (declaration) {
 			EventDefinition: createEventFunctions(scope, declaration)
 			VariableDefinition: createVariableFunctions(scope, declaration)
+			default: #[]
 		}
 	}
 	
 	def createScopeDeclarationFunctions(StatechartScope it) {
-		declarations.map[decl | createDeclarationFunctions(it, decl)].flatten.forEach[func | addMember(func, Visibility.PUBLIC)]
+		declarations.map[decl | createDeclarationFunctions(it, decl)].filter[!nullOrEmpty].flatten.forEach[func | addMember(func, Visibility.PUBLIC)]
 	}
 
 	def List<IFunction> createEventFunctions(StatechartScope scope, EventDefinition declaration) {

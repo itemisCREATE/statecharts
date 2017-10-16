@@ -12,6 +12,7 @@ package org.yakindu.sct.generator.c.language;
 
 import org.yakindu.sct.generator.core.language.IFunction;
 import org.yakindu.sct.generator.core.language.factory.FunctionFactory;
+import org.yakindu.sct.model.stext.stext.OperationDefinition;
 
 /**
  * @author rbeckmann

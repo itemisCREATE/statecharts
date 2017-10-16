@@ -68,6 +68,7 @@ class StatemachineImplementation implements IContentTemplate {
 		«usingNamespaces»
 		
 		«IF newMode && statechartClass !== null»
+		«constantDefinitions»
 		«statechartClass»
 		«ELSE»
 		«constructorDefinition»

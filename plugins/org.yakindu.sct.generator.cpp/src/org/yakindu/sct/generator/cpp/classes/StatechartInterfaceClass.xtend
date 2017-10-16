@@ -45,7 +45,7 @@ class StatechartInterfaceClass extends AbstractStatechartInterfaceClass {
 		val innerClassVisibility = getInnerClassVisibility()
 		addMember(new FriendClass(parent.name), innerClassVisibility)
 
-		scope.declarations.map[interfaceMember].flatten.filter[it !== null].forEach[addMember(innerClassVisibility)]
+		scope.declarations.map[interfaceMember].filter[!nullOrEmpty].flatten.filter[it !== null].forEach[addMember(innerClassVisibility)]
 	}
 
 	def dispatch Iterable<IVariable> interfaceMember(Declaration it) {

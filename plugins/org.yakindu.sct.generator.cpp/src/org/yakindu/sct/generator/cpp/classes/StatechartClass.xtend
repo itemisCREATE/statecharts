@@ -286,7 +286,7 @@ class StatechartClass extends AbstractStatechartClass {
 			addMember(
 				function("set" + interfaceOCBName,
 					'''«OCB_Instance» = operationCallback;''',
-					#[new Parameter(interfaceOCBName + "*", "operationCallBack")]
+					#[new Parameter(interfaceOCBName + "*", "operationCallback")]
 				),
 				Visibility.PUBLIC
 			)

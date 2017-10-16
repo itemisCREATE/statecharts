@@ -14,6 +14,8 @@ import java.util.EnumMap
 import java.util.List
 import java.util.Map
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.yakindu.sct.generator.c.language.TypeQualifier
+import org.yakindu.sct.generator.c.language.Variable
 import org.yakindu.sct.generator.core.language.CharSequenceList
 import org.yakindu.sct.generator.core.language.CodePart
 import org.yakindu.sct.generator.core.language.IDeclarable
@@ -48,18 +50,20 @@ class CppClass extends CodePart implements IModule, IDeclarable, IDocumentationO
 	override toString() {
 		'''
 		«memberBlock(Visibility.PUBLIC)»
+		
 		«memberBlock(Visibility.PROTECTED)»
+		
 		«memberBlock(Visibility.PRIVATE)»
 		'''
 	}
 	
 	def memberBlock(Visibility visibility) {
 		'''
-		«FOR member : members.get(visibility).filter(Function)»
+		«FOR member : members.get(visibility).filter(Function) SEPARATOR "\n"»
 			«member»
 		«ENDFOR»
 		
-		«FOR member : members.get(visibility).filter(CppClass) »
+		«FOR member : members.get(visibility).filter(CppClass) SEPARATOR "\n"»
 			«member»
 		«ENDFOR»
 		'''

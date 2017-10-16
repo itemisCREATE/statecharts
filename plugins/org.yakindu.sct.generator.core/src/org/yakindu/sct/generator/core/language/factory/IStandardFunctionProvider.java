@@ -32,6 +32,13 @@ public interface IStandardFunctionProvider {
 	public IFunction isActive(ExecutionFlow it);
 	public IFunction isStateActive(ExecutionFlow it, IType statesEnumType);
 	public IFunction isFinal(ExecutionFlow it);
+	
+	/* 
+	 * Timed functions
+	 */
+	public IFunction getTimer();
+	public IFunction setTimer();
+	public IFunction raiseTimeEvent(ExecutionFlow it);
 
 	/*
 	 * Event related functions

@@ -49,12 +49,14 @@ class StatechartOCBInterfaceClass extends AbstractStatechartInterfaceClass {
 			val callback = new Function
 			callback.name = it.name.asEscapedIdentifier
 			callback.type = new CustomType(it.typeSpecifier.targetLanguageName)
+			callback.parameters += operationParameters
 			if(entry.useStaticOPC) {
 				callback.modifiers += Modifier.STATIC
 			} else {
 				callback.modifiers += Modifier.VIRTUAL
 				callback.pure = true
 			}
+			addMember(callback, Visibility.PUBLIC)
 		]
 	}
 	
@@ -67,6 +69,10 @@ class StatechartOCBInterfaceClass extends AbstractStatechartInterfaceClass {
 					else it.name
 				)
 		]
+	}
+	
+	override toString() {
+		""
 	}
 	
 }

@@ -55,27 +55,6 @@ class StatechartClassMembers {
 	@Inject extension FunctionFactory
 	@Inject extension CodePartExtensions
 	
-	def public IFunction setTimer(ExecutionFlow flow) {
-		function("setTimer", '''this->«timerInstance» = timerInterface;''', #['''«timerInterface»* timerInterface'''])
-	}
-	
-	def public IFunction getTimer() {
-		val getTimer = function("getTimer", '''return «timerInstance»;''')
-		getTimer.type = new CustomType(timerInterface + "*")
-		getTimer
-	}
-	
-	def public IFunction raiseTimeEvent(ExecutionFlow it) {
-		function(raiseTimeEventFctID, '''
-			if ((evid >= (sc_eventid)«timeEventsInstance») && (evid < (sc_eventid)(&«timeEventsInstance»[«timeEventsCountConst»])))
-			{
-				*(sc_boolean*)evid = true;
-			}
-			''',
-			#["sc_eventid evid"]
-		)
-	}
-	
 	def public IFunction clearInEvents(ExecutionFlow it) {
 		function("clearInEvents", '''
 			«FOR scope : scopes»

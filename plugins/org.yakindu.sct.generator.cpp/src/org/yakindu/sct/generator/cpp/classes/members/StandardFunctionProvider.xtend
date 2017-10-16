@@ -152,6 +152,29 @@ class StandardFunctionProvider implements IStandardFunctionProvider {
 		isFinal
 	}
 	
+	/* Timed functions */
+	
+	override public IFunction setTimer() {
+		function("setTimer", '''this->«timerInstance» = timerInterface;''', #['''«timerInterface»* timerInterface'''])
+	}
+	
+	override public IFunction getTimer() {
+		val getTimer = function("getTimer", '''return «timerInstance»;''')
+		getTimer.type = new CustomType(timerInterface + "*")
+		getTimer
+	}
+	
+	override public IFunction raiseTimeEvent(ExecutionFlow it) {
+		function(raiseTimeEventFctID, '''
+			if ((evid >= (sc_eventid)«timeEventsInstance») && (evid < (sc_eventid)(&«timeEventsInstance»[«timeEventsCountConst»])))
+			{
+				*(sc_boolean*)evid = true;
+			}
+			''',
+			#["sc_eventid evid"]
+		)
+	}
+	
 	/*
 	 * Event functions
 	 */
@@ -182,7 +205,7 @@ class StandardFunctionProvider implements IStandardFunctionProvider {
 	
 	/* Raised checkers */
 	def protected IFunction isEventRaised(EventDefinition evd, StatechartScope scope) {
-		val isRaised = function(evd.asGetter)
+		val isRaised = function(evd.asRaised)
 		isRaised.documentation = new Comment('''Check if event «evd.name» in interface «scope.interfaceName» is raised.''')
 		isRaised.setFunctionConst
 		isRaised.type = Type.BOOL
