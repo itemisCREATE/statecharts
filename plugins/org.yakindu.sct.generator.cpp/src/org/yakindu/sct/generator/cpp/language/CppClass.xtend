@@ -46,23 +46,23 @@ class CppClass extends CodePart implements IModule, IDeclarable, IDocumentationO
 	}
 	
 	override toString() {
-		var builder = new StringBuilder()
-		builder.memberBlock(Visibility.PUBLIC)
-		builder.memberBlock(Visibility.PROTECTED)
-		builder.memberBlock(Visibility.PRIVATE)
-		return builder.toString
+		'''
+		«memberBlock(Visibility.PUBLIC)»
+		«memberBlock(Visibility.PROTECTED)»
+		«memberBlock(Visibility.PRIVATE)»
+		'''
 	}
 	
-	def memberBlock(StringBuilder builder, Visibility visibility) {
-		for(member : members.get(visibility).filter(Function)) {
-			builder.append(member)
-			builder.append("\n")
-		}
+	def memberBlock(Visibility visibility) {
+		'''
+		«FOR member : members.get(visibility).filter(Function)»
+			«member»
+		«ENDFOR»
 		
-		for(member : members.get(visibility).filter(CppClass)) {
-			builder.append(member)
-			builder.append("\n")
-		}
+		«FOR member : members.get(visibility).filter(CppClass) »
+			«member»
+		«ENDFOR»
+		'''
 	}
 	
 	override getName() {
