@@ -166,6 +166,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 
 	@Override
 	public synchronized void processIssues(List<Issue> issues, IProgressMonitor monitor) {
+		
 		final Multimap<String, SCTIssue> newVisibleIssues = ArrayListMultimap.create();
 		for (Issue issue : issues) {
 			if (issue instanceof SCTIssue) {
@@ -195,11 +196,16 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 		}
 
 		SetView<String> changes = Sets.symmetricDifference(oldVisibleIssues.keySet(), newVisibleIssues.keySet());
-		for (String semanticElementID : newVisibleIssues.keySet()) {
-			if (changes.contains(semanticElementID)
-					|| changedSeverity(semanticElementID, oldVisibleIssues, newVisibleIssues))
-				notifyListeners(semanticElementID);
+		for (String string : changes) {
+			notifyListeners(string);
 		}
+		SetView<String> intersection = Sets.intersection(oldVisibleIssues.keySet(), newVisibleIssues.keySet());
+		for (String string : intersection) {
+			if(changedSeverity(string, oldVisibleIssues, newVisibleIssues)){
+				notifyListeners(string);	
+			}
+		}
+		
 	}
 
 	protected boolean changedSeverity(String semanticElementID, Multimap<String, SCTIssue> oldVisibleIssues,
