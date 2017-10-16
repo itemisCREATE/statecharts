@@ -164,11 +164,7 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 
 		}
 		public void widgetDisposed(DisposeEvent e) {
-			if (currentItem.getData(EDITOR_DATA) != null) {
-				TreeEditor editor = (TreeEditor) currentItem.getData(EDITOR_DATA);
-				editor.getEditor().dispose();
-				editor.dispose();
-			}
+			disposeTreeEditor();
 		}
 
 		protected void disposeTreeEditor() {
