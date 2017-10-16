@@ -31,7 +31,9 @@ public interface IValidationIssueStore extends IValidationIssueProcessor {
 
 		public void issuesChanged();
 		
-		public List<String> getSemanticURIs();
+		public String getSemanticURI();
+		
+		public boolean notifyOnChildChange();
 
 	}
 
