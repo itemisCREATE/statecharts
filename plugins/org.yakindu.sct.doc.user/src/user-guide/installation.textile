@@ -25,9 +25,7 @@ Installation of Java is beyond the scope of this document. You can find more inf
 
 h3(#inst_eclipse). Eclipse
 
-Internally, YAKINDU Statechart Tools are based on *"Eclipse":http://www.eclipse.org/*, an integrated development environment (IDE). YAKINDU Statechart Tools are running inside the Eclipse environment. When you are installing YAKINDU Statechart Tools, a full-fledged Eclipse instance will be put on your computer. Currently (winter 2016) it is the *Neon* release.
-
-###. CHECK: Is the time still winter 2016? Is SCT still based on *Neon*?
+Internally, YAKINDU Statechart Tools are based on *"Eclipse":http://www.eclipse.org/*, an integrated development environment (IDE). YAKINDU Statechart Tools are running inside the Eclipse environment. When you are installing YAKINDU Statechart Tools, a full-fledged Eclipse instance will be put on your computer. Currently it is the *Oxegene* release.
 
 If you are new to Eclipse, you might find the "Eclipse Help":http://help.eclipse.org/ useful, especially the "Workbench User Guide".
 
