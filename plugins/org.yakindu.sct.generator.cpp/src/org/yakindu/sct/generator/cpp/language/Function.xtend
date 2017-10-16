@@ -23,6 +23,7 @@ import org.yakindu.sct.generator.core.language.IModule
 class Function extends org.yakindu.sct.generator.c.language.Function implements IFunction, IDeclarable {
 	@Accessors protected IModule parent
 	@Accessors protected boolean pure = false // Pure virtual functions
+	@Accessors protected boolean constFunction = false
 	
 	override getName() {
 		if(parent === null) name
@@ -31,17 +32,33 @@ class Function extends org.yakindu.sct.generator.c.language.Function implements 
 	
 	override prefix() {
 		if(parent === null) super.prefix
-		else new CharSequenceList(#[type, getName()])
+		else new CharSequenceList(#[typeQualifier, type, getName()])
 	}
 	
 	override getModifiers() {
-		modifiers.filter[parent == null || it == Modifier.VIRTUAL].toList
+		if(modifiers.contains(Modifier.CONST)) {
+			modifiers.remove(Modifier.CONST)
+			constFunction = true
+		}
+		modifiers
 	}
 	
 	override postfix() {
-		var postfix = if(modifiers.contains(Modifier.CONST)) " const" else ""
+		var postfix = if(isConstFunction) " const" else ""
 		if(pure) postfix += " = 0"
 		postfix
+	}
+	
+	def boolean isConstFunction() {
+		if(modifiers.contains(Modifier.CONST)) {
+			modifiers.remove(Modifier.CONST)
+			constFunction = true
+		}
+		constFunction
+	}
+	
+	override declare() {
+		'''«new CharSequenceList(#[modifiers.toString, typeQualifier, type, name])»(«parameters»)«postfix»;'''
 	}
 	
 	override toString() {

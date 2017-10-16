@@ -12,6 +12,7 @@ package org.yakindu.sct.generator.cpp.language
 
 import org.yakindu.sct.generator.c.language.CustomType
 import org.yakindu.sct.generator.c.language.TypeQualifier
+import org.yakindu.sct.generator.core.language.IFunction
 import org.yakindu.sct.generator.core.language.IModifierOwner
 import org.yakindu.sct.generator.core.language.IType
 import org.yakindu.sct.generator.core.language.ITypeQualifierOwner
@@ -33,8 +34,8 @@ class CodePartExtensions {
 		if(!modifiers.contains(Modifier.VIRTUAL)) modifiers += Modifier.VIRTUAL
 	}
 	
-	def setFunctionConst(IModifierOwner it) {
-		if(!modifiers.contains(Modifier.CONST)) modifiers += Modifier.CONST
+	def setFunctionConst(IFunction it) {
+		if(it instanceof Function) constFunction = true
 	}
 	
 	def pointer(IType type) {

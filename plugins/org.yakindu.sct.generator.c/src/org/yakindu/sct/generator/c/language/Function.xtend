@@ -43,7 +43,7 @@ class Function extends CodeBlock implements IFunction, IDeclarable {
 	}
 	
 	override declare() {
-		'''«prefix»(«parameters»)«postfix»;'''
+		'''«prefix»(«parameters»);'''
 	}
 	
 	def CharSequence prefix() {

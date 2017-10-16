@@ -27,6 +27,7 @@ import org.yakindu.sct.generator.cpp.FlowCode
 import org.yakindu.sct.generator.cpp.Naming
 import org.yakindu.sct.generator.cpp.Navigation
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
+import org.yakindu.sct.generator.cpp.language.CodePartExtensions
 import org.yakindu.sct.generator.cpp.language.Modifier
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
@@ -51,6 +52,8 @@ class StandardFunctionProvider implements IStandardFunctionProvider {
 	@Inject protected extension ExpressionCode
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension EventCode
+	
+	@Inject protected extension CodePartExtensions
 	
 	override public IFunction init(ExecutionFlow it) {
 		function("init", '''
@@ -109,6 +112,7 @@ class StandardFunctionProvider implements IStandardFunctionProvider {
 	override public IFunction isActive(ExecutionFlow it) {
 		val isActive = function("isActive", '''return «FOR i : 0 ..< stateVector.size SEPARATOR '||'»stateConfVector[«i»] != «null_state»«ENDFOR»;''')
 		isActive.type = Type.BOOL
+		isActive.setFunctionConst
 		isActive		
 	}
 	
@@ -127,6 +131,7 @@ class StandardFunctionProvider implements IStandardFunctionProvider {
 		''',
 		#[new Parameter(statesEnumType, "state")])
 		isStateActive.type = Type.BOOL
+		isStateActive.setFunctionConst
 		isStateActive
 	}
 	
@@ -136,6 +141,7 @@ class StandardFunctionProvider implements IStandardFunctionProvider {
 			isFinal.documentation = new Comment("Always returns 'false' since this state machine can never become final.")
 		}
 		isFinal.type = Type.BOOL
+		isFinal.setFunctionConst
 		isFinal.content = {
 			if (finalStateImpactVector.isCompletelyCovered) {
 			'''return «FOR i : 0 ..<finalStateImpactVector.size SEPARATOR ' && '»(«FOR fs : finalStateImpactVector.get(i) SEPARATOR ' || '»stateConfVector[«i»] == «IF fs.stateVector.offset == i»«fs.shortName»«ELSE»«null_state»«ENDIF»«ENDFOR»)«ENDFOR»;
@@ -154,7 +160,7 @@ class StandardFunctionProvider implements IStandardFunctionProvider {
 	def protected IFunction getEventValue(EventDefinition evd, StatechartScope scope) {
 		val getValue = function(evd.asGetter)
 		getValue.documentation = new Comment('''Get value of event «evd.name» in interface «scope.interfaceName»''')
-		getValue.modifiers += Modifier.CONST
+		getValue.setFunctionConst
 		getValue.type = new CustomType(evd.typeSpecifier.targetLanguageName)
 		getValue
 	}
@@ -179,7 +185,7 @@ class StandardFunctionProvider implements IStandardFunctionProvider {
 	def protected IFunction isEventRaised(EventDefinition evd, StatechartScope scope) {
 		val isRaised = function(evd.asGetter)
 		isRaised.documentation = new Comment('''Check if event «evd.name» in interface «scope.interfaceName» is raised.''')
-		isRaised.modifiers += Modifier.CONST
+		isRaised.setFunctionConst
 		isRaised.type = Type.BOOL
 		isRaised
 	}
@@ -237,7 +243,7 @@ class StandardFunctionProvider implements IStandardFunctionProvider {
 		if(vad.const) {
 			getVariable.typeQualifier = TypeQualifier.CONST
 		}
-		getVariable.modifiers += Modifier.CONST
+		getVariable.setFunctionConst
 		getVariable
 	}
 	

@@ -251,7 +251,7 @@ class StatechartClass extends AbstractStatechartClass {
 			isFinal
 		]
 		
-		#[isActive, isStateActive, isFinal].forEach[modifiers += Modifier.CONST]
+		#[isActive, isStateActive, isFinal].forEach[setFunctionConst]
 		
 		standardFunctions.forEach[
 			modifiers += Modifier.VIRTUAL

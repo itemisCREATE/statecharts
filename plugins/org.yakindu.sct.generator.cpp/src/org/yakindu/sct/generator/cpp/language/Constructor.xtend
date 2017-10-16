@@ -28,12 +28,14 @@ class Constructor extends Function implements IFunction {
 
 	override postfix() {
 		if(!initializerList.nullOrEmpty) {
-			''' : «initializerList»'''
+			'''
+			 : 
+			 	«initializerList»'''
 		}
 	}
 	
 	override declare() {
-		'''«prefix»(«parameters»);'''
+		'''«name»(«parameters»);'''
 	}
 
 	override prefix() {
