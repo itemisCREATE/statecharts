@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.simulation.ui.view;
 
+import org.apache.commons.lang.time.DurationFormatUtils;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IDebugTarget;
@@ -18,6 +19,7 @@ import org.eclipse.debug.internal.ui.commands.actions.ResumeCommandAction;
 import org.eclipse.debug.internal.ui.commands.actions.StepOverCommandAction;
 import org.eclipse.debug.internal.ui.commands.actions.SuspendCommandAction;
 import org.eclipse.debug.internal.ui.commands.actions.TerminateCommandAction;
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.IAction;
@@ -28,6 +30,7 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseMoveListener;
@@ -35,14 +38,19 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sruntime.ExecutionEvent;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
+import org.yakindu.sct.simulation.core.engine.scheduling.DefaultTimeTaskScheduler;
+import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler;
 import org.yakindu.sct.simulation.ui.view.actions.CollapseAllAction;
 import org.yakindu.sct.simulation.ui.view.actions.ExpandAllAction;
 import org.yakindu.sct.simulation.ui.view.actions.HideTimeEventsAction;
@@ -58,10 +66,13 @@ import com.google.common.collect.Lists;
 public class SimulationView extends AbstractDebugTargetView implements ITypeSystemProvider {
 
 	private TreeViewer viewer;
+	private ViewerRefresher viewerRefresher;
 	private FormToolkit kit;
 	private Font font;
 	private RaiseEventSelectionListener selectionListener;
 	private ITypeSystem typeSystem;
+	private ITimeTaskScheduler timeScheduler;
+	private Label timeSchedulerLabel;
 
 	public SimulationView() {
 		kit = new FormToolkit(Display.getDefault());
@@ -73,7 +84,22 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	public void dispose() {
 		selectionListener.dispose();
 		font.dispose();
+		disposeTimeSchedulerComponent();
+		disposeViewerRefresher();
 		super.dispose();
+	}
+
+	protected void disposeViewerRefresher() {
+		if (viewerRefresher != null) {
+			viewerRefresher.cancel = true;
+			viewerRefresher = null;
+		}
+	}
+
+	protected void disposeTimeSchedulerComponent() {
+		if (timeSchedulerLabel != null && !timeSchedulerLabel.isDisposed()) {
+			timeSchedulerLabel.dispose();
+		}
 	}
 
 	@Override
@@ -82,6 +108,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		Composite top = kit.createComposite(parent);
 		top.setLayout(new FillLayout(SWT.VERTICAL));
 		createViewer(top);
+		createTimeScheduler(top);
 		hookActions();
 		super.createPartControl(parent);
 	}
@@ -97,13 +124,40 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		return viewer;
 	}
 
+	public Label createTimeScheduler(Composite parent) {
+		Composite comp = new Composite(parent, SWT.BORDER);
+		GridLayout layout = new GridLayout();
+		comp.setLayout(layout);
+		timeSchedulerLabel = new Label(comp, SWT.NONE);
+		timeSchedulerLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, true));
+		timeSchedulerLabel.setToolTipText("Displays the duration since the simulation is running");
+		return timeSchedulerLabel;
+	}
+
+	protected void setViewerInput(Object input) {
+		if (viewerRefresher != null || input == null) {
+			viewerRefresher.cancel = true;
+		} else {
+			if (viewerRefresher == null)
+				this.viewerRefresher = new ViewerRefresher();
+		}
+		if (input != null) {
+			this.viewer.setInput(input);
+			if (this.viewerRefresher.isCancel())
+				this.viewerRefresher.cancel = false;
+
+			new Thread(viewerRefresher).start();
+		}
+
+	}
+
 	protected void handleDebugEvent(DebugEvent debugEvent) {
 		updateActions();
 		switch (debugEvent.getKind()) {
 			case DebugEvent.TERMINATE :
 				Display.getDefault().asyncExec(new Runnable() {
 					public void run() {
-						viewer.setInput(null);
+						setViewerInput(null);
 					}
 				});
 				break;
@@ -117,7 +171,8 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	protected void activeTargetChanged(final IDebugTarget debugTarget) {
 		updateTypeSystem(debugTarget);
 		ISimulationEngine engine = (ISimulationEngine) debugTarget.getAdapter(ISimulationEngine.class);
-		viewer.setInput(engine.getExecutionContext());
+		timeScheduler = (DefaultTimeTaskScheduler) engine.getTimeTaskScheduler();
+		setViewerInput(engine.getExecutionContext());
 		(new ExpandAllAction(viewer)).run();
 		updateActions();
 	}
@@ -303,4 +358,48 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 			return debugTarget != null && debugTarget.canResume();
 		}
 	}
+
+	protected class ViewerRefresher implements Runnable {
+
+		private static final int UPDATE_INTERVAL = 500;
+		private boolean cancel = false;
+
+		@Override
+		public void run() {
+			while (!cancel && viewer.getInput() != null) {
+				try {
+					Thread.sleep(UPDATE_INTERVAL);
+					Display.getDefault().asyncExec(new Runnable() {
+						public void run() {
+							if (viewer != null && !viewer.getControl().isDisposed()
+									&& ((ExecutionContextContentProvider) viewer.getContentProvider())
+											.isShouldUpdate()) {
+								viewer.refresh();
+							}
+							if (timeSchedulerLabel != null && !timeSchedulerLabel.isDisposed()) {
+								updateTimestamp(timeScheduler.getCurrentTime());
+							}
+						}
+					});
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		protected void updateTimestamp(long timestamp) {
+			String formatDurationHMS = DurationFormatUtils.formatDuration(timestamp, "HH:mm:ss.SSS");
+			timeSchedulerLabel.setText("Simulation time: " + formatDurationHMS);
+			timeSchedulerLabel.update();
+		}
+
+		public boolean isCancel() {
+			return cancel;
+		}
+
+		public void setCancel(boolean cancel) {
+			this.cancel = cancel;
+		}
+	}
+
 }

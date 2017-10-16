@@ -11,6 +11,7 @@
 package org.yakindu.sct.ui.editor.validation;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -24,6 +25,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.Issue;
 import org.yakindu.sct.model.sgraph.ui.validation.ISctIssueCreator;
@@ -140,6 +142,8 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 			if ((file != null) && file.isAccessible()) {
 				markers.addAll(
 						Arrays.asList(file.findMarkers(SCTMarkerType.SUPERTYPE, true, IResource.DEPTH_INFINITE)));
+				markers.addAll(
+						Arrays.asList(file.findMarkers(SCTMarkerType.SCT_TASK_TYPE, true, IResource.DEPTH_INFINITE)));
 			}
 		} catch (CoreException e) {
 			e.printStackTrace();
@@ -177,7 +181,10 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 			// validation, so persistent markers have to be copied
 			Iterable<SCTIssue> persistentIssues = Iterables.filter(visibleIssues.values(), new Predicate<SCTIssue>() {
 				public boolean apply(SCTIssue input) {
-					return input.getType() == CheckType.NORMAL || input.getType() == CheckType.EXPENSIVE;
+					CheckType type = input.getType();
+					Severity severity = input.getSeverity();
+					return CheckType.NORMAL == type || CheckType.EXPENSIVE == type 
+							|| Severity.INFO == severity;
 				}
 			});
 			for (SCTIssue sctIssue : persistentIssues) {
@@ -188,9 +195,28 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 		}
 
 		SetView<String> changes = Sets.symmetricDifference(oldVisibleIssues.keySet(), newVisibleIssues.keySet());
-		for (String semanticElementID : changes) {
-			notifyListeners(semanticElementID);
+		for (String semanticElementID : newVisibleIssues.keySet()) {
+			if (changes.contains(semanticElementID)
+					|| changedSeverity(semanticElementID, oldVisibleIssues, newVisibleIssues))
+				notifyListeners(semanticElementID);
 		}
+	}
+
+	protected boolean changedSeverity(String semanticElementID, Multimap<String, SCTIssue> oldVisibleIssues,
+			Multimap<String, SCTIssue> newVisibleIssues) {
+		Severity minOldSeverity = getMinSeverity(oldVisibleIssues.get(semanticElementID));
+		Severity minNewSeverity = getMinSeverity(newVisibleIssues.get(semanticElementID));
+		return minNewSeverity.ordinal() != minOldSeverity.ordinal();
+	}
+
+	protected Severity getMinSeverity(Collection<SCTIssue> issues) {
+		Severity minNewSeverity = Severity.IGNORE;
+		for (SCTIssue sctIssue : issues) {
+			minNewSeverity = minNewSeverity.ordinal() > sctIssue.getSeverity().ordinal()
+					? sctIssue.getSeverity()
+					: minNewSeverity;
+		}
+		return minNewSeverity;
 	}
 
 	@Override

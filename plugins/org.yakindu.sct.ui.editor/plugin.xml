@@ -446,7 +446,13 @@
       <super type="org.yakindu.sct.ui.editor.diagnostic"/>
       <super type="org.eclipse.xtext.ui.check.expensive"/>
       <persistent value="true"/>
+   </extension>
+     <extension id="org.yakindu.sct.ui.editor.task" name="Statechart Task" point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.xtext.ui.task"/>
+      <super type="org.eclipse.core.resources.taskmarker"/>
+      <persistent value="true"/>
    </extension>   
+      
   
    <extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders" id="markers-navigation">
       <MarkerNavigationProvider class="org.yakindu.sct.ui.editor.providers.StatechartMarkerNavigationProvider">
@@ -455,6 +461,7 @@
          <MarkerType name="org.yakindu.sct.ui.editor.diagnostic.normal"/>
          <MarkerType name="org.yakindu.sct.ui.editor.diagnostic.expensive"/>
          <MarkerType name="org.yakindu.sct.ui.editor.xtext.diagnostic"/>
+         <MarkerType name="org.yakindu.sct.ui.editor.task"/>
          <Priority name="Medium"/>
       </MarkerNavigationProvider>
    </extension>
