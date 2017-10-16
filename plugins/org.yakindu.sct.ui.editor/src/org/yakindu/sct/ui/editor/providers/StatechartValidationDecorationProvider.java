@@ -40,6 +40,7 @@ import org.eclipse.xtext.validation.Issue.IssueImpl;
 import org.yakindu.base.gmf.runtime.decorators.AbstractDecoratorProvider;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Pseudostate;
+import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTIssue;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.editparts.BorderItemEditPart;
@@ -197,6 +198,10 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 					TreeIterator<EObject> eAllContents = element.eAllContents();
 					while (eAllContents.hasNext()) {
 						EObject next = eAllContents.next();
+						if(next instanceof Transition) {
+							eAllContents.prune();
+							continue;
+						}
 						String semanticURI = EcoreUtil.getURI(next).fragment();
 						List<SCTIssue> issues = store.getIssues(semanticURI);
 						for (final SCTIssue issue : issues) {
