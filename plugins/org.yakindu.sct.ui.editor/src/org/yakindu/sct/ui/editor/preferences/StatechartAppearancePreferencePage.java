@@ -18,7 +18,6 @@ import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.ColorFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
@@ -51,6 +50,7 @@ public class StatechartAppearancePreferencePage extends FieldEditorPreferencePag
 		createColorEditors(main);
 		createLineStyleEditors(main);
 		createDefaultFontEditor(main);
+		createSyntaxColoringLabelEditor(main);
 		createPriorityLabelEditor(main);
 		createLiveValidationEditor(main);
 	}
@@ -72,6 +72,13 @@ public class StatechartAppearancePreferencePage extends FieldEditorPreferencePag
 		Composite composite = createGroupComposite(main, "Validation");
 		BooleanFieldEditor editor = new BooleanFieldEditor(StatechartPreferenceConstants.PREF_LIVE_VALIDATION,
 				"Enable live validation", composite);
+		addField(editor);
+	}
+	
+	protected void createSyntaxColoringLabelEditor(Composite main) {
+		Composite composite = createGroupComposite(main, "Syntax coloring");
+		BooleanFieldEditor editor = new BooleanFieldEditor(StatechartPreferenceConstants.PREF_SYNTAX_COLORING,
+				"Enable syntax coloring", composite);
 		addField(editor);
 	}
 
