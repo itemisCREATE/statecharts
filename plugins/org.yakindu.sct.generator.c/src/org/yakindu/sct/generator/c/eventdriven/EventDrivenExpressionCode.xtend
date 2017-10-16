@@ -26,15 +26,15 @@ class EventDrivenExpressionCode extends CExpressionsGenerator {
 	override dispatch CharSequence code(EventRaisingExpression it) {
 		val valueVarName = '''value_«valueVarIndex++»'''
 		'''
-		«IF event.declaration.event.direction != Direction::LOCAL»
+		«IF event.definition.event.direction != Direction::LOCAL»
 			«IF value !== null»
-				«event.declaration.event.valueAccess» = «value.code»;
+				«event.definition.event.valueAccess» = «value.code»;
 			«ENDIF»
-			«event.declaration.event.access» = bool_true«ELSE»
+			«event.definition.event.access» = bool_true«ELSE»
 			«IF value !== null»
-			«event.declaration.event.typeSpecifier.targetLanguageName» «valueVarName» = «value.code»;
-			«functionPrefix(flow)»add_value_event_to_queue(«scHandle», «event.declaration.event.eventEnumMemberName», «valueVarName»)
+			«event.definition.event.typeSpecifier.targetLanguageName» «valueVarName» = «value.code»;
+			«functionPrefix(flow)»add_value_event_to_queue(«scHandle», «event.definition.event.eventEnumMemberName», «valueVarName»)
 			«ELSE»
-			«functionPrefix(flow)»add_event_to_queue(«scHandle», «event.declaration.event.eventEnumMemberName»)«ENDIF»«ENDIF»'''
+			«functionPrefix(flow)»add_event_to_queue(«scHandle», «event.definition.event.eventEnumMemberName»)«ENDIF»«ENDIF»'''
 	}
 }
