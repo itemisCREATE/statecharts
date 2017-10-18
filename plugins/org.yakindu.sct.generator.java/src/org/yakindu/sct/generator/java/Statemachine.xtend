@@ -202,6 +202,20 @@ class Statemachine {
 				throw new IllegalStateException("timer not set.");
 			}
 			«ENDIF»
+			«IF flow.internalScope !== null && flow.internalScope.hasOperations»
+				if (this.operationCallback == null) {
+					throw new IllegalStateException("Operation callback for internal must be set.");	
+				}
+			«ENDIF»
+			
+			«FOR scope : flow.interfaceScopes»
+				«IF scope.hasOperations»
+					if (this.«scope.interfaceName.asEscapedIdentifier».operationCallback == null) {
+						throw new IllegalStateException("Operation callback for interface «scope.interfaceName.asEscapedIdentifier» must be set.");
+					}
+					
+				«ENDIF»
+			«ENDFOR»
 			for (int i = 0; i < «flow.stateVector.size»; i++) {
 				stateVector[i] = State.$NullState$;
 			}
@@ -634,19 +648,7 @@ class Statemachine {
 				throw new IllegalStateException("timer not set.");
 			}
 			«ENDIF»
-			«IF flow.internalScope !== null && flow.internalScope.hasOperations»
-				if (this.operationCallback == null) {
-					throw new IllegalStateException("Operation callback for internal must be set.");	
-				}
-			«ENDIF»
-			«FOR scope : flow.interfaceScopes»
-				«IF scope.hasOperations»
-					if (this.«scope.interfaceName.asEscapedIdentifier».operationCallback == null) {
-						throw new IllegalStateException("Operation callback for interface «scope.interfaceName.asEscapedIdentifier» must be set.");
-					}
-					
-				«ENDIF»
-			«ENDFOR»
+			
 			«enterSequences.defaultSequence.code»
 		}
 
