@@ -648,7 +648,7 @@ class Statemachine {
 				throw new IllegalStateException("timer not set.");
 			}
 			«ENDIF»
-			
+
 			«enterSequences.defaultSequence.code»
 		}
 

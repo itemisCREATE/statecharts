@@ -34,7 +34,7 @@ import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.viewers.ICellEditorValidator;
 import org.eclipse.swt.graphics.Color;
 import org.yakindu.base.gmf.runtime.parsers.StringAttributeParser;
-import org.yakindu.base.xtext.utils.gmf.figures.HighlightingWrappingLabel;
+import org.yakindu.base.xtext.utils.gmf.figures.SyntaxColoringLabel;
 
 /**
  * This is a common abstract base class for all {@link LabelEditPart} which are
@@ -124,7 +124,7 @@ public abstract class TextAwareExternalLabelEditPart extends LabelEditPart
 
 	@Override
 	protected IFigure createFigure() {
-		return new HighlightingWrappingLabel();
+		return new SyntaxColoringLabel();
 	}
 
 	public ICellEditorValidator getEditTextValidator() {

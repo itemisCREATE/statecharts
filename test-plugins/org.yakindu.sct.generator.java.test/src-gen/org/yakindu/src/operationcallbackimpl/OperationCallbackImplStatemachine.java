@@ -60,7 +60,7 @@ public class OperationCallbackImplStatemachine implements IOperationCallbackImpl
 		if (this.sCINamed.operationCallback == null) {
 			throw new IllegalStateException("Operation callback for interface sCINamed must be set.");
 		}
-		
+
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -73,7 +73,7 @@ public class OperationCallbackImplStatemachine implements IOperationCallbackImpl
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
 		}
-		
+
 		enterSequence_main_region_default();
 	}
 	

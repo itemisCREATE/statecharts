@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import org.eclipse.mylyn.wikitext.parser.MarkupParser;
@@ -36,6 +38,7 @@ public class TextileToHubspotConverter {
 		String p2Filename = null;
 		String tocTemplateFilename = null;
 		String p3Filename = null;
+		final Map<String, String> properties = new HashMap<String, String>();
 
 		/*
 		 * Parse command-line parameters:
@@ -68,6 +71,11 @@ public class TextileToHubspotConverter {
 			}
 			if (arg.equals("-o") || arg.equals("--output")) {
 				outFilename = args[++i];
+				continue;
+			}
+			if (arg.equals("-p") || arg.equals("--property")) {
+				final String nameValue = args[++i];
+				addTo(properties, nameValue);
 				continue;
 			}
 		}
@@ -114,7 +122,7 @@ public class TextileToHubspotConverter {
 		final Reader p3 = createFileReader(p3Filename, "P3 file not found");
 		final Writer out = new FileWriter(outFilename);
 		final HubspotDocumentBuilder docBuilder = new HubspotDocumentBuilder(p1, contentsTemplate, p2, tocTemplate, p3,
-				headings, out);
+				properties, headings, out);
 
 		/*
 		 * Concatenate all input files so that the Textile parser sees
@@ -141,6 +149,41 @@ public class TextileToHubspotConverter {
 		out.close();
 	}
 
+	/**
+	 * <p>
+	 * Add a name/value pair to a property map. The former is expected in the
+	 * form <code>name=value</code>. Leading or trailing white space around name
+	 * or value is removed. If the <code>=value</code> part or the
+	 * <code>value</code> part is missing, the <code>name</code> property will
+	 * be added with the value being the empty string. If the <code>name</code>
+	 * part is missing, a {@link RuntimeException} will be thrown.
+	 * </p>
+	 * 
+	 * @param properties
+	 *            the map to add the name/value pair to
+	 * @param nameValue
+	 *            the name/value pair
+	 */
+	private static void addTo(final Map<String, String> properties, final String nameValue) {
+		final int p = nameValue.indexOf('=');
+		final String name;
+		final String value;
+		if (p > 1) {
+			name = nameValue.substring(0, p);
+			if (p < nameValue.length() - 1)
+				value = nameValue.substring(p + 1);
+			else
+				value = "";
+		} else if (p == 0) {
+			value = nameValue.substring(1);
+			throw new RuntimeException("Name/value pair does not contain a name. Value: \"" + value + "\"");
+		} else {
+			name = nameValue;
+			value = "";
+		}
+		properties.put(name, value);
+	}
+
 	private static void assertParameterIsSpecified(final String p, final String msg) {
 		if (p == null || p.trim().isEmpty())
 			errorExit(msg);
@@ -153,10 +196,11 @@ public class TextileToHubspotConverter {
 
 	private static void errorExit(final String msg) {
 		System.err.println(msg);
-		System.err.println("Parameters: --p1-file part1File.htmlf"
-				+ " --contents-template-file contentTemplateFile.htmlf" + " --p2-file part2File.htmlf"
-				+ " --toc-template-file tocTemplateFile.htmlf" + " --p3-file part3file.htmlf"
-				+ " --input file.textile [--input file.textile]…" + " --output file.html");
+		System.err
+				.println("Parameters: --p1-file part1File.htmlf" + " --contents-template-file contentTemplateFile.htmlf"
+						+ " --p2-file part2File.htmlf" + " --toc-template-file tocTemplateFile.htmlf"
+						+ " --p3-file part3file.htmlf" + " --input file.textile [--input file.textile]…"
+						+ " --output file.html" + " [--property name=value]…");
 		System.exit(1);
 	}
 

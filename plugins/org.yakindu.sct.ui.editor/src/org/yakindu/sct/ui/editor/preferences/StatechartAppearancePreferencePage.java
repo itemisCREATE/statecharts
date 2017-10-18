@@ -11,6 +11,7 @@
 package org.yakindu.sct.ui.editor.preferences;
 
 import org.eclipse.gmf.runtime.common.ui.preferences.ComboFieldEditor;
+import org.eclipse.gmf.runtime.common.ui.preferences.FontFieldEditor;
 import org.eclipse.gmf.runtime.diagram.ui.l10n.DiagramUIMessages;
 import org.eclipse.gmf.runtime.diagram.ui.preferences.IPreferenceConstants;
 import org.eclipse.jface.preference.BooleanFieldEditor;
@@ -48,8 +49,16 @@ public class StatechartAppearancePreferencePage extends FieldEditorPreferencePag
 		Composite main = createPageLayout(parent);
 		createColorEditors(main);
 		createLineStyleEditors(main);
+		createDefaultFontEditor(main);
+		createSyntaxColoringLabelEditor(main);
 		createPriorityLabelEditor(main);
 		createLiveValidationEditor(main);
+	}
+
+	protected void createDefaultFontEditor(Composite main) {
+		Composite composite = createGroupComposite(main, "Font styles");
+		FontFieldEditor editor = new FontFieldEditor(IPreferenceConstants.PREF_DEFAULT_FONT, "Font: ", composite);
+		addField(editor);
 	}
 
 	protected void createPriorityLabelEditor(Composite main) {
@@ -58,11 +67,18 @@ public class StatechartAppearancePreferencePage extends FieldEditorPreferencePag
 				"Show transition priority", composite);
 		addField(editor);
 	}
-	
+
 	protected void createLiveValidationEditor(Composite main) {
 		Composite composite = createGroupComposite(main, "Validation");
 		BooleanFieldEditor editor = new BooleanFieldEditor(StatechartPreferenceConstants.PREF_LIVE_VALIDATION,
 				"Enable live validation", composite);
+		addField(editor);
+	}
+	
+	protected void createSyntaxColoringLabelEditor(Composite main) {
+		Composite composite = createGroupComposite(main, "Syntax coloring");
+		BooleanFieldEditor editor = new BooleanFieldEditor(StatechartPreferenceConstants.PREF_SYNTAX_COLORING,
+				"Enable syntax coloring", composite);
 		addField(editor);
 	}
 

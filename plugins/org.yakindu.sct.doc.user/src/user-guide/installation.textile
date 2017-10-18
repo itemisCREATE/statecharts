@@ -25,9 +25,7 @@ Installation of Java is beyond the scope of this document. You can find more inf
 
 h3(#inst_eclipse). Eclipse
 
-Internally, YAKINDU Statechart Tools are based on *"Eclipse":http://www.eclipse.org/*, an integrated development environment (IDE). YAKINDU Statechart Tools are running inside the Eclipse environment. When you are installing YAKINDU Statechart Tools, a full-fledged Eclipse instance will be put on your computer. Currently (winter 2016) it is the *Neon* release.
-
-###. CHECK: Is the time still winter 2016? Is SCT still based on *Neon*?
+Internally, YAKINDU Statechart Tools are based on *"Eclipse":http://www.eclipse.org/*, an integrated development environment (IDE). YAKINDU Statechart Tools are running inside the Eclipse environment. When you are installing YAKINDU Statechart Tools, a full-fledged Eclipse instance will be put on your computer. Currently it is the *Oxygen* release.
 
 If you are new to Eclipse, you might find the "Eclipse Help":http://help.eclipse.org/ useful, especially the "Workbench User Guide".
 
@@ -213,8 +211,6 @@ h3(#inst_linux_installing_required_packages). Installing required packages
 Depending on your Linux distribution and version, you might need to install additional packages for *Webkit GTK* and *Java* from your distribution's repository (or elsewhere). Below please find the necessary commands for some Linux distributions. To execute them, you have to have system administrator permissions. So please create a _root_ command-line shell or use the _sudo_ command, which is the typical procedure on Ubuntu.
 
 The list of Linux distributions mentioned below is in no way meant to be exhaustive. If your Linux distribution is not yet among them and you manage to find out the proper commands for it, please let us know – e.g. by directly editing this document:
-
-p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/installation/installation.textile
 
 
 h4(#inst_linux_webkit_gtk). Webkit GTK

@@ -137,6 +137,18 @@
             <files dir="${lib.dir}/bin" layout="{groupId}/{artifactId}-{baseVersion}.{extension}" />
         </artifact:resolve>
 
+        <!-- Sources of MyLyn Wikitext's Textile support: -->
+        <artifact:resolve>
+            <artifact:dependencies>
+                <dependency groupId="org.eclipse.mylyn.docs"
+                            artifactId="org.eclipse.mylyn.wikitext.textile"
+                            version="${wikitext.version}"
+                            scope="compile"
+                            classifier="sources" />
+            </artifact:dependencies>
+            <files dir="${lib.dir}/src" layout="{groupId}/{artifactId}-{baseVersion}-{classifier}.{extension}" />
+        </artifact:resolve>
+
         <!-- Classpath for MyLyn Wikitext's Ant support: -->
         <artifact:resolve>
             <artifact:dependencies>
@@ -345,7 +357,7 @@
             <taskdef classpathref="wikitext.all.classpath" resource="org/eclipse/mylyn/wikitext/ant/tasks.properties" />
 
             <!-- Tutorials -->
-            <create-website-part name="YSCT-tutorials" title="YAKINDU Statechart Tools Tutorials">
+            <create-website-part name="YSCT-tutorials" title="Tutorials">
                 <textile-files>
                     <filelist dir="${src.dir}">
                         <file name="tutorials/tutorials.textile" />
@@ -359,7 +371,7 @@
             </create-website-part>
 
             <!-- User Guide -->
-            <create-website-part name="YSCT-user-guide" title="YAKINDU Statechart Tools User Guide">
+            <create-website-part name="YSCT-user-guide" title="User Guide">
                 <textile-files>
                     <filelist dir="${src.dir}">
                         <file name="user-guide/overview.textile" />
@@ -444,6 +456,8 @@
                 <arg value="${work.dir}/${index.textile}" />
                 <arg value="--output" />
                 <arg value="${work.dir}/${index.html}" />
+                <arg value="--property" />
+                <arg value="${navigation.title}=@{title}" />
             </java>
 
             <!-- Replace "<pre><code>" durch "<pre class="prettyprint"><code>": -->

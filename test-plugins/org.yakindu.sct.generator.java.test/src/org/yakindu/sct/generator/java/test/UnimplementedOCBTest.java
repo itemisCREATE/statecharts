@@ -39,7 +39,35 @@ public class UnimplementedOCBTest {
 		exceptions.expectMessage("Operation callback for interface sCInterface must be set.");
 		statemachine.init();
 	}
-
+	
+	private OperationCallbackImplStatemachine statemachine;
+	
+	@Rule
+	public ExpectedException exceptions = ExpectedException.none();
+	
+	@Before
+	public void setUp() {
+		statemachine = new OperationCallbackImplStatemachine();
+		statemachine.init();
+	}
+	
+	@Test
+	public void testUnimplementedInternal() throws IllegalStateException{		
+		exceptions.expect(IllegalStateException.class);
+		exceptions.expectMessage("Operation callback for internal must be set.");
+		statemachine.enter();
+	}
+	
+	@Test
+	public void testUnimplementedInterfacce() {
+		statemachine.setInternalOperationCallback(new InternalOCBImpl()); 
+		
+		exceptions.expect(IllegalStateException.class);
+		exceptions.expectMessage("Operation callback for interface sCInterface must be set.");
+		
+		statemachine.enter();
+	}
+	
 	@Test
 	public void testUnimplementedNamedInterface() {
 		statemachine.setInternalOperationCallback(new InternalOCBImpl());
@@ -50,11 +78,11 @@ public class UnimplementedOCBTest {
 	}
 
 	@Test
-	public void testImplementedOCBs() {
+	public void testImplementedOCBs(){
+    statemachine.init();
 		statemachine.setInternalOperationCallback(new InternalOCBImpl());
 		statemachine.getSCInterface().setSCInterfaceOperationCallback(new InterfaceOCBImpl());
 		statemachine.getSCINamed().setSCINamedOperationCallback(new NamedInterfaceOCBImpl());
-		statemachine.init();
 		statemachine.enter();
 
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));

@@ -206,7 +206,7 @@ bc.
 
 h2(#sctunit_the_sctunit_language). The SCTUnit language
 
-While section "&quot;SCTUnit by example&quot;":#sctunit_sctunit_by_example gave an overview of test classes and operation, the section at hand provides you with a complete description of the SCTUnit language. More precisely, since the SCTUnit language is an extension of the "statechart language":../user-guide/statechart_language.html, you will find herein a description of those language elements that are specific to the SCTUnit language. Please see section "&quot;The statechart language&quot;":../user-guide/statechart_language.html for everything else.
+While section "&quot;SCTUnit by example&quot;":#sctunit_sctunit_by_example gave an overview of test classes and operation, the section at hand provides you with a complete description of the SCTUnit language. More precisely, since the SCTUnit language is an extension of the "statechart language":../user-guide/statechart_language.html, you will find herein a description of those language elements that are specific to the SCTUnit language. Please see section "&quot;The statechart language&quot;":../user-guide/statechart_language.html#sclang_statechart_language_reference for everything else.
 
 An important extension of the SCTUnit language over the statechart language is the introduction of "operations":#sctunit_operations_and_tests (subroutines) and control statements, like "_if_":#sctunit_conditional_statements and "_while_":#sctunit_loops. They make it possible to "script" complex procedures, for example by raising different events under different conditions or by looping over a sequence of statements multiple times.
 
@@ -340,7 +340,7 @@ While the <code>@Ignore</code> annotation and an omitted annotation have the sam
 
 h3(#sctunit_statements_and_expressions). Statements and expressions
 
-The body of an "operation":#sctunit_operations_and_tests consists of _statements_. Many types of statements, like _variable definitions_, _assignments_, _event raisings_, or _operation calls_, are already defined in the statechart language and are described "in section &quot;Statements&quot; of the statechart language documentation":../user-guide/statechart_language#sclang_statements.
+The body of an "operation":#sctunit_operations_and_tests consists of _statements_. Many types of statements, like _variable definitions_, _assignments_, _event raisings_, or _operation calls_, are already defined in the statechart language and are described "in section &quot;Statements&quot; of the statechart language documentation":../user-guide/statechart_language.html#sclang_statements.
 
 Statement types that are specific to the SCTUnit language are described in the following subsections.
 
@@ -372,7 +372,7 @@ The first statement asserts that state _State_A_ in region _main_region_ in stat
 
 The second statement asserts that _State_B_ is not active. Otherwise the test fails with the error message "State_B must not be active here.". 
 
-bq. *Please note:* "active(…)":../user-guide/statechart_language#sclang_active_state is a built-in function of the statechart language.
+bq. *Please note:* "active(…)":../user-guide/statechart_language.html#sclang_active_state is a built-in function of the statechart language.
 
 ==</div>==
 
@@ -525,7 +525,7 @@ This statement raises the _click_ event in the state machine's _user_ interface.
 
 Since state machine internals are inaccessible to SCTUnit tests and outgoing events are, well, outgoing, only incoming events can be raised. Events in the internal scope or outgoing events defined in an interface cannot be raised.
 
-bq. *Please note:* The _raise_ statement is not specific to the SCTUnit language, but is (also) part of the statechart language, see section "&quot;Raising an event&quot;":../user-guide/statechart_language#sclang_raising_an_event.
+bq. *Please note:* The _raise_ statement is not specific to the SCTUnit language, but is (also) part of the statechart language, see section "&quot;Raising an event&quot;":../user-guide/statechart_language.html#sclang_raising_an_event.
 
 ==<!-- End sctunit_keyword_raise -->==
 
@@ -573,7 +573,7 @@ p=. Proceed statement grammar
 
 h4(#sctunit_defining_variables_and_constants). Defining variables and constants
 
-Variables and constants (for brevity we'll summarize both as "variables") can be defined as specified in the statechart language, please see sections "&quot;Variables&quot;":../user-guide/statechart_language#sclang_variables and "&quot;Constants&quot;":../user-guide/statechart_language#sclang_constants for all the details. 
+Variables and constants (for brevity we'll summarize both as "variables") can be defined as specified in the statechart language, please see sections "&quot;Variables&quot;":../user-guide/statechart_language.html#sclang_variables and "&quot;Constants&quot;":../user-guide/statechart_language.html#sclang_constants for all the details. 
 
 However, variables in the SCTUnit language _must_ always be initialized. For example, while a definition like
 
@@ -978,13 +978,13 @@ Generating unit tests as source code comes as a solution. Source code can be ins
 
 This section explains how you can generate your SCTUnit tests as source code with YAKINDU Statechart Tools. Supported programming languages are Java, C, and C++. The generated Java classes use "JUnit":http://junit.org/ as their testing framework and "Mockito":http://site.mockito.org/ for mocked methods. C and C++ sources rest upon the "Google Test":https://en.wikipedia.org/wiki/Google_Test unit testing library.
 
-In order to use the SCTUnit code generators effectively, you should already be familiar with generating source code from statecharts, as explained in chapter "&quot;Generating state machine code&quot;":../user-guide/generating_code#codegen_generating_state_machine_code. In fact, you have to generate your statechart as source code first, so that the SCTUnit tests have something to be executed upon. Below we are assuming that you have your statechart code generator model and the generated code handy. Generating SCTUnit test source code follows the same principcles as generating state machine source code, so we can focus on SCTUnit essentials here.
+In order to use the SCTUnit code generators effectively, you should already be familiar with generating source code from statecharts, as explained in chapter "&quot;Generating state machine code&quot;":../user-guide/generating_code.html#codegen_generating_state_machine_code. In fact, you have to generate your statechart as source code first, so that the SCTUnit tests have something to be executed upon. Below we are assuming that you have your statechart code generator model and the generated code handy. Generating SCTUnit test source code follows the same principcles as generating state machine source code, so we can focus on SCTUnit essentials here.
 
 
 
 h3(#sctunit_creating_a_generation_model). Creating a generation model
 
-The first step is to create a _generation model (SGen)_ for the SCTUnit test, similar to explanation in section "&quot;Generating state machine code&quot;":../user-guide/generating_code#setting_up_a_code_generator_project.
+The first step is to create a _generation model (SGen)_ for the SCTUnit test, similar to explanation in section "&quot;Generating state machine code&quot;":../user-guide/generating_code.html#setting_up_a_code_generator_project.
 
 # In the main menu, select _File → New → Other…_. The _New_ dialog opens.
 # In the _New_ dialog, select _YAKINDU SCT → Code Generator Model_.
@@ -1013,10 +1013,10 @@ A code generator's behavior can be controlled by so-called _features_. SCTUnit c
 
 Documentation of feature details you can find here:
 
-* "Common features of all statechart code generators":../user-guide/generating_code#codegen_configuring_a_generator
-* "C statechart code generator features":../user-guide/generating_code#codegen_c_code_generator_features
-* "C++ statechart code generator features":../user-guide/generating_code#codegen_cpp_code_generator_features
-* "Java statechart code generator features":../user-guide/generating_code#codegen_java_code_generator_features
+* "Common features of all statechart code generators":../user-guide/generating_code.html#codegen_configuring_a_generator
+* "C statechart code generator features":../user-guide/generating_code.html#codegen_c_code_generator_features
+* "C++ statechart code generator features":../user-guide/generating_code.html#codegen_cpp_code_generator_features
+* "Java statechart code generator features":../user-guide/generating_code.html#codegen_java_code_generator_features
 
 
 
