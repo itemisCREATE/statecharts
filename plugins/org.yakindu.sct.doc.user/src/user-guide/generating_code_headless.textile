@@ -1,7 +1,7 @@
 
 h1(#hdls_headless_code_generation). Headless code generation
 
-State machine code is fully derived from a statechart model, and section "Generating state machine code":../user-guide/generating_code.html explains how to interactively run a code generator. Since release 2.9.0, YAKINDU Statechart Tools additionally provides a headless code generator infrastructure. This allows for code generation without a user interface which in turn allows to integrate code generation into continuous integration (CI) build environments.
+State machine code is fully derived from a statechart model, and section "Generating state machine code":../user-guide/generating_code.html#codegen_generating_state_machine_code explains how to interactively run a code generator. Since release 2.9.0, YAKINDU Statechart Tools additionally provides a headless code generator infrastructure. This allows for code generation without a user interface which in turn allows to integrate code generation into continuous integration (CI) build environments.
 
 Best practice is to generate code on the fly during a continuous integration build instead of cluttering your version control system with generated artifacts.
 
@@ -55,7 +55,7 @@ p.
 
 h3(#hdls_integrating_custom_code_generators). Integrating custom code generators
 
-YAKINDU Statechart Tools supports custom code generators as described in section "&quot;Custom code generators&quot;":../user-guide/generating_code#codegen_custom_code_generators. These custom generators can also be executed by use of the headless code generator infrastructure. To do so, the custom code generator has to be installed as an Eclipse plugin within the distribution directory. The custom code generator will be used whenever a generator model (_.sgen_ file) is loaded by the headless generator infrastructure and references the custom code generator ID.
+YAKINDU Statechart Tools supports custom code generators as described in section "&quot;Custom code generators&quot;":../user-guide/generating_code.html#codegen_custom_code_generators. These custom generators can also be executed by use of the headless code generator infrastructure. To do so, the custom code generator has to be installed as an Eclipse plugin within the distribution directory. The custom code generator will be used whenever a generator model (_.sgen_ file) is loaded by the headless generator infrastructure and references the custom code generator ID.
 
 
 
@@ -185,7 +185,7 @@ Use the <code>-m <em>models</em></code> option to select certain models known by
 
 h4(#hdls_specifying_property_values). Specifying property values
 
-Use the <code>-v <em>name1=value1;name2=value2;nameN=valueN</em></code> option to override properties _name1_, _name2_, _nameN_, specified in the generator models, by the given values _value1_, _value2_, and _valueN_, respectively. See section "&quot;Using properties and expressions in generator models&quot;":../user-guide/generating_code#codegen_using_properties_and_expressions_in_generator_models for details.
+Use the <code>-v <em>name1=value1;name2=value2;nameN=valueN</em></code> option to override properties _name1_, _name2_, _nameN_, specified in the generator models, by the given values _value1_, _value2_, and _valueN_, respectively. See section "&quot;Using properties and expressions in generator models&quot;":../user-guide/generating_code.html#codegen_using_properties_and_expressions_in_generator_models for details.
 
 
 

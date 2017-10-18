@@ -95,10 +95,10 @@ public class Heading {
         final StringBuilder b = new StringBuilder();
         b.append("Heading[level=");
         b.append(level);
-        b.append(", text=");
-        b.append(title);
         b.append(", id=");
         b.append(id);
+        b.append(", text=");
+        b.append(title);
         b.append(", resource=");
         b.append(resource);
         b.append("]");
