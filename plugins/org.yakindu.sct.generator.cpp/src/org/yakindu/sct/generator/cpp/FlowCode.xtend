@@ -18,13 +18,13 @@ import org.yakindu.sct.model.sexec.EnterState
 import org.yakindu.sct.model.sexec.Execution
 import org.yakindu.sct.model.sexec.ExitState
 import org.yakindu.sct.model.sexec.HistoryEntry
+import org.yakindu.sct.model.sexec.If
 import org.yakindu.sct.model.sexec.SaveHistory
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.naming.INamingService
-import org.yakindu.sct.model.sexec.If
 
 class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	

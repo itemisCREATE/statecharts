@@ -13,6 +13,13 @@ package org.yakindu.sct.generator.c
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtext.util.Strings
+import org.yakindu.base.expressions.expressions.AssignmentExpression
+import org.yakindu.base.expressions.expressions.AssignmentOperator
+import org.yakindu.base.expressions.expressions.MultiplicativeOperator
+import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries
+import org.yakindu.sct.generator.c.extensions.Naming
+import org.yakindu.sct.generator.c.extensions.Navigation
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -20,9 +27,10 @@ import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 
 class StatemachineSource implements IContentTemplate {
 	
@@ -34,6 +42,7 @@ class StatemachineSource implements IContentTemplate {
 	@Inject protected extension FlowCode
 	@Inject protected extension ConstantInitializationResolver
 	@Inject protected extension StateVectorExtensions
+	@Inject protected extension ExpressionsChecker
 	
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) { 
 		initializeNamingService
@@ -42,6 +51,7 @@ class StatemachineSource implements IContentTemplate {
 		
 		#include <stdlib.h>
 		#include <string.h>
+		«IF modOnReal»#include <math.h>«ENDIF»
 		#include "«(typesModule.h).relativeTo(module.c)»"
 		#include "«(module.h).relativeTo(module.c)»"
 		«IF timed || !it.operations.empty»
