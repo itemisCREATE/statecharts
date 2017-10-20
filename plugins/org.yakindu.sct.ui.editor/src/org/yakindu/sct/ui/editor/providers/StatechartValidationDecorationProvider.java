@@ -198,7 +198,7 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 					TreeIterator<EObject> eAllContents = element.eAllContents();
 					while (eAllContents.hasNext()) {
 						EObject next = eAllContents.next();
-						if(next instanceof Transition) {
+						if(next instanceof Transition && next.eContainer() == element) {
 							eAllContents.prune();
 							continue;
 						}
