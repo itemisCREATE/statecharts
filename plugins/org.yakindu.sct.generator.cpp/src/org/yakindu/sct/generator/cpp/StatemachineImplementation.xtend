@@ -329,19 +329,27 @@ class StatemachineImplementation implements IContentTemplate {
 		«ENDFOR»
 	'''
 	
-	def unimplementedOCBErrors(ExecutionFlow it) {'''
-		«FOR s : getInterfaces»
-			«IF s.hasOperations && !entry.useStaticOPC»
-				«IF s instanceof InternalScope»
-				if (this->«s.OCB_Instance» == null) return «ErrorCode.OCB_INTERNAL_INIT.name»;
-				«ELSE»
-					«IF s.defaultInterface»if (this->«s.OCB_Instance» == null) return «ErrorCode.OCB_DEFAULT_INIT.name»;
-					«ELSE»if (this->«s.OCB_Instance» == null) return «ErrorCode.OCB_NAMED_INIT.name»;«ENDIF»
-				«ENDIF»
+	def unimplementedOCBErrors(ExecutionFlow it)'''
+		«FOR iface : getInterfaces.filter[hasOperations && !entry.useStaticOPC]»
+			«IF iface instanceof InternalScope»
+				«checkInternalOCB(iface)»			
+			«ELSEIF iface instanceof InterfaceScope»
+				«checkInterfaceOCB(iface)»
 			«ENDIF»
 		«ENDFOR»
 	'''
-	}	
+	
+	def checkInternalOCB(StatechartScope it) '''
+		if (this->«OCB_Instance» == null) return «ErrorCode.OCB_INTERNAL_INIT.name»;
+	'''
+	
+	def checkInterfaceOCB(StatechartScope it) '''
+		«IF defaultInterface»
+			if (this->«OCB_Instance» == null) return «ErrorCode.OCB_DEFAULT_INIT.name»;
+		«ELSE»
+			if (this->«OCB_Instance» == null) return «ErrorCode.OCB_NAMED_INIT.name»;
+		«ENDIF»
+	'''
 	
 	/* ===================================================================================
 	 * Implementation of interface element access functions
