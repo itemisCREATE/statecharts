@@ -330,14 +330,16 @@ class StatemachineImplementation implements IContentTemplate {
 	'''
 	
 	def unimplementedOCBErrors(ExecutionFlow it) {'''
-			«FOR s : getInterfaces»
+		«FOR s : getInterfaces»
+			«IF s.hasOperations && !entry.useStaticOPC»
 				«IF s instanceof InternalScope»
 				if (this->«s.OCB_Instance» == null) return «ErrorCode.OCB_INTERNAL_INIT.name»;
 				«ELSE»
 					«IF s.defaultInterface»if (this->«s.OCB_Instance» == null) return «ErrorCode.OCB_DEFAULT_INIT.name»;
 					«ELSE»if (this->«s.OCB_Instance» == null) return «ErrorCode.OCB_NAMED_INIT.name»;«ENDIF»
 				«ENDIF»
-			«ENDFOR»
+			«ENDIF»
+		«ENDFOR»
 	'''
 	}	
 	
