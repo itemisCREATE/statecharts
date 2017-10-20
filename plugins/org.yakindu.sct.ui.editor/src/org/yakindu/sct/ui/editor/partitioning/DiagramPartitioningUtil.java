@@ -58,6 +58,7 @@ public class DiagramPartitioningUtil {
 
 	/** GMFs notation {@link Style} id **/
 	public static final String INLINE_STYLE = "isInline";
+	public static final String INLINE_DEFINITION_SECTION_STYLE = "inlineDefinitionSection";
 
 	private static final String DOMAIN_ID = "org.yakindu.sct.domain";
 
@@ -72,6 +73,16 @@ public class DiagramPartitioningUtil {
 		BooleanValueStyle result = GMFNotationUtil.getBooleanValueStyle(view, INLINE_STYLE);
 		return result;
 	}
+	
+	/**
+	 * returns the style for diagram inlining
+	 * 
+	 */
+	public static BooleanValueStyle getInlineDefinitionSectionStyle(View view) {
+		BooleanValueStyle result = GMFNotationUtil.getBooleanValueStyle(view, INLINE_DEFINITION_SECTION_STYLE);
+		return result;
+	}
+
 
 	/**
 	 * creates a new style for diagam inlining
@@ -80,6 +91,16 @@ public class DiagramPartitioningUtil {
 		BooleanValueStyle result = NotationFactory.eINSTANCE.createBooleanValueStyle();
 		result.setName(INLINE_STYLE);
 		result.setBooleanValue(true);
+		return result;
+	}
+	
+	/**
+	 * creates a new style for diagam inlining
+	 */
+	public static BooleanValueStyle createInlineDefinitionSectionStyle() {
+		BooleanValueStyle result = NotationFactory.eINSTANCE.createBooleanValueStyle();
+		result.setName(INLINE_DEFINITION_SECTION_STYLE);
+		result.setBooleanValue(false);
 		return result;
 	}
 

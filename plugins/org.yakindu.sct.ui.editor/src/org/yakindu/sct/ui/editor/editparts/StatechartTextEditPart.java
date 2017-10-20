@@ -22,8 +22,10 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.SemanticEditPolicy;
 import org.eclipse.gmf.runtime.emf.type.core.requests.DestroyRequest;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
+import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.StatechartTextFigure;
+import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.policies.PreferredSizeHandlerEditPolicy;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
 
@@ -54,21 +56,17 @@ public class StatechartTextEditPart extends ShapeNodeEditPart implements
 
 		// Disables deletion of the text compartment view if additional elements
 		// are selected too
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
-				new SemanticEditPolicy() {
-					@Override
-					protected boolean shouldProceed(
-							DestroyRequest destroyRequest) {
-						return false;
-					}
-				});
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new SemanticEditPolicy() {
+			@Override
+			protected boolean shouldProceed(DestroyRequest destroyRequest) {
+				return false;
+			}
+		});
 
 		// Disables deletion of the text compartment view via keyboard
-		installEditPolicy(EditPolicy.COMPONENT_ROLE,
-				new RootComponentEditPolicy());
+		installEditPolicy(EditPolicy.COMPONENT_ROLE, new RootComponentEditPolicy());
 		removeEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE);
-		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
-				new PreferredSizeHandlerEditPolicy(){
+		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new PreferredSizeHandlerEditPolicy() {
 			@Override
 			protected IFigure getPreferredSizeFigure() {
 				return getChildBySemanticHint(SemanticHints.STATECHART_NAME).getFigure();
@@ -79,13 +77,11 @@ public class StatechartTextEditPart extends ShapeNodeEditPart implements
 	@Override
 	protected void addChildVisual(EditPart childEditPart, int index) {
 		if (childEditPart instanceof StatechartNameEditPart) {
-			((StatechartNameEditPart) childEditPart).setLabel(getPrimaryShape()
-					.getName());
+			((StatechartNameEditPart) childEditPart).setLabel(getPrimaryShape().getName());
 		} else if (childEditPart instanceof StatechartTextExpressionEditPart) {
 			IFigure pane = getPrimaryShape().getCompartment();
 			pane.setLayoutManager(new StackLayout());
-			IFigure compartmentFigure = ((StatechartTextExpressionEditPart) childEditPart)
-					.getFigure();
+			IFigure compartmentFigure = ((StatechartTextExpressionEditPart) childEditPart).getFigure();
 			pane.add(compartmentFigure);
 		} else
 			super.addChildVisual(childEditPart, index);
@@ -95,11 +91,20 @@ public class StatechartTextEditPart extends ShapeNodeEditPart implements
 	protected void removeChildVisual(EditPart childEditPart) {
 		if (childEditPart instanceof StatechartTextExpressionEditPart) {
 			IFigure pane = getPrimaryShape().getCompartment();
-			IFigure compartmentFigure = ((StatechartTextExpressionEditPart) childEditPart)
-					.getFigure();
+			IFigure compartmentFigure = ((StatechartTextExpressionEditPart) childEditPart).getFigure();
 			pane.remove(compartmentFigure);
 		} else
 			super.removeChildVisual(childEditPart);
+	}
+
+	@Override
+	protected void refreshVisibility() {
+		setVisibility(isDefinitionSectionInlined());
+	}
+
+	protected boolean isDefinitionSectionInlined() {
+		BooleanValueStyle style = DiagramPartitioningUtil.getInlineDefinitionSectionStyle(getDiagramView());
+		return style != null ? style.isBooleanValue() : true;
 	}
 
 	private StatechartTextFigure getPrimaryShape() {

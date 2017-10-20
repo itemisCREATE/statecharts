@@ -46,9 +46,6 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerLabel;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
-import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorReference;
@@ -72,8 +69,10 @@ import org.yakindu.sct.ui.editor.StatechartImages;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor implements ISelectionChangedListener,
-		IEditingDomainProvider {
+public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
+		implements
+			ISelectionChangedListener,
+			IEditingDomainProvider {
 
 	private DiagramPartitioningBreadcrumbViewer viewer;
 
@@ -95,15 +94,13 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 	public IDocumentProvider getDocumentProvider() {
 		return documentProvider;
 	}
-	
+
 	@Override
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
-		if(input instanceof FileStoreEditorInput) {
-			throw new PartInitException(
-					"An error occured while opening the file.\n\n"
+		if (input instanceof FileStoreEditorInput) {
+			throw new PartInitException("An error occured while opening the file.\n\n"
 					+ "This might have happened because you tried to open a statechart with File->Open File.\n"
-            		+ "This is not supported. Please import the file into a project instead."
-	            		);
+					+ "This is not supported. Please import the file into a project instead.");
 		}
 		super.init(site, input);
 	}
@@ -112,16 +109,23 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 	public void createPartControl(Composite parent) {
 		GridLayoutFactory.fillDefaults().spacing(0, 0).applyTo(parent);
 		createBreadcrumbViewer(parent);
-		Composite sashForm = createParentSash(parent);
-		createTextEditor(sashForm);
-		super.createPartControl(sashForm);
-		((SashForm)sashForm).setWeights(new int[] {2,10});
+
+		if (!isDefinitionSectionInlined()) {
+			SashForm sash = (SashForm) createParentSash(parent);
+			createTextEditor(sash);
+			super.createPartControl(sash);
+			((SashForm) sash).setWeights(new int[]{2, 10});
+		} else {
+			super.createPartControl(parent);
+		}
 	}
 
+	protected abstract boolean isDefinitionSectionInlined();
 
 	protected Composite createParentSash(Composite parent) {
 		GridDataFactory.fillDefaults().grab(false, true).applyTo(parent);
-		SashForm sash = new SashForm(parent, SWT.HORIZONTAL);
+		SashForm sash = new SashForm(parent, SWT.HORIZONTAL | SWT.SMOOTH);
+		sash.setBackground(ColorConstants.white);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(sash);
 		GridLayoutFactory.fillDefaults().applyTo(sash);
 		return sash;
@@ -228,7 +232,9 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 		}
 	}
 
-	public static final class BreadcrumbViewerLabelProvider extends BaseLabelProvider implements ITreePathLabelProvider {
+	public static final class BreadcrumbViewerLabelProvider extends BaseLabelProvider
+			implements
+				ITreePathLabelProvider {
 
 		public void updateLabel(ViewerLabel label, TreePath elementPath) {
 			Diagram lastSegment = (Diagram) elementPath.getLastSegment();
@@ -246,13 +252,15 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 
 	public static class FilteringDiagramContextMenuProvider extends DiagramContextMenuProvider {
 		// Default context menu items that should be suppressed
-		protected String[] exclude = new String[] { "addNoteLinkAction", "properties",
-				"org.eclipse.mylyn.context.ui.commands.attachment.retrieveContext","org.eclipse.jst.ws.atk.ui.webservice.category.popupMenu",
-		        "org.eclipse.tptp.platform.analysis.core.ui.internal.actions.MultiAnalysisActionDelegate", "org.eclipse.debug.ui.contextualLaunch.debug.submenu", 
-		        "org.eclipse.debug.ui.contextualLaunch.profile.submenu",
+		protected String[] exclude = new String[]{"addNoteLinkAction", "properties",
+				"org.eclipse.mylyn.context.ui.commands.attachment.retrieveContext",
+				"org.eclipse.jst.ws.atk.ui.webservice.category.popupMenu",
+				"org.eclipse.tptp.platform.analysis.core.ui.internal.actions.MultiAnalysisActionDelegate",
+				"org.eclipse.debug.ui.contextualLaunch.debug.submenu",
+				"org.eclipse.debug.ui.contextualLaunch.profile.submenu",
 				"org.eclipse.mylyn.resources.ui.ui.interest.remove.element", "formatMenu", "filtersMenu", "addGroup",
-				"navigateGroup", "toolbarArrangeAllAction", "selectMenu", "diagramAddMenu", "navigateMenu",
-				"viewGroup", "viewMenu" };
+				"navigateGroup", "toolbarArrangeAllAction", "selectMenu", "diagramAddMenu", "navigateMenu", "viewGroup",
+				"viewMenu"};
 
 		protected FilteringDiagramContextMenuProvider(IWorkbenchPart part, EditPartViewer viewer) {
 			super(part, viewer);
