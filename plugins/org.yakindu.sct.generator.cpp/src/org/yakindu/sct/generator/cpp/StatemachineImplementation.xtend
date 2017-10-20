@@ -23,6 +23,7 @@ import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
@@ -147,8 +148,10 @@ class StatemachineImplementation implements IContentTemplate {
 	'''
 	
 	def initFunction(ExecutionFlow it) '''
-		void «module»::init()
+		sc_integer «module»::init()
 		{
+			«unimplementedOCBErrors»
+			
 			for (int i = 0; i < «orthogonalStatesConst»; ++i)
 				stateConfVector[i] = «null_state»;
 			
@@ -163,6 +166,7 @@ class StatemachineImplementation implements IContentTemplate {
 			clearOutEvents();
 			
 			«initSequence.code»
+			return 0;
 		}
 	'''
 	
@@ -324,6 +328,18 @@ class StatemachineImplementation implements IContentTemplate {
 			«ENDFOR»
 		«ENDFOR»
 	'''
+	
+	def unimplementedOCBErrors(ExecutionFlow it) {'''
+			«FOR s : getInterfaces»
+				«IF s instanceof InternalScope»
+				if (this->«s.OCB_Instance» == null) return «ErrorCode.OCB_INTERNAL_INIT.name»;
+				«ELSE»
+					«IF s.defaultInterface»if (this->«s.OCB_Instance» == null) return «ErrorCode.OCB_DEFAULT_INIT.name»;
+					«ELSE»if (this->«s.OCB_Instance» == null) return «ErrorCode.OCB_NAMED_INIT.name»;«ENDIF»
+				«ENDIF»
+			«ENDFOR»
+	'''
+	}	
 	
 	/* ===================================================================================
 	 * Implementation of interface element access functions

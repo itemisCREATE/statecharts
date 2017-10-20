@@ -32,8 +32,9 @@ class Types implements IContentTemplate {
 		// #include <cstdint>
 		#include <stdint.h>
 		
-
+		#ifndef sc_string
 		#define sc_string      char*
+		#endif
 		
 		typedef int_fast16_t   sc_short;
 		typedef uint_fast16_t  sc_ushort;
@@ -44,7 +45,19 @@ class Types implements IContentTemplate {
 		typedef intptr_t       sc_eventid;
 		
 		#ifndef «CppNaming::NULL_STRING»
-			#define «CppNaming::NULL_STRING» 0
+		#define «CppNaming::NULL_STRING» 0
+		#endif
+
+		#ifndef «ErrorCode.OCB_DEFAULT_INIT.name»
+		#define «ErrorCode.OCB_DEFAULT_INIT.name» «CppNaming.getIfaceError» «ErrorCode.OCB_DEFAULT_INIT.value»
+		#endif
+
+		#ifndef «ErrorCode.OCB_INTERNAL_INIT.name»
+		#define «ErrorCode.OCB_INTERNAL_INIT.name»«CppNaming.getIfaceError» «ErrorCode.OCB_INTERNAL_INIT.value»
+		#endif	
+
+		#ifndef «ErrorCode.OCB_NAMED_INIT.name»
+		#define «ErrorCode.OCB_NAMED_INIT.name» «CppNaming.getIfaceError» «ErrorCode.OCB_NAMED_INIT.value»
 		#endif
 		
 		#endif /* «typesModule.define»_H_ */
