@@ -16,14 +16,13 @@ import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations.GenArtifactConfiguration
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
-import org.yakindu.sct.generator.cpp.classes.StatechartClass
+import org.yakindu.sct.generator.cpp.classes.StatechartClassFactory
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Statechart
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.*
-import org.yakindu.sct.generator.cpp.classes.StatechartClassFactory
 
 /**
  * This is the CPP code generators main class. 

@@ -26,24 +26,21 @@ class StatechartClassFactory {
 	@Inject protected Injector injector
 	
 	def StatechartClass createStatechartClass(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
-		val cls = new StatechartClass()
-		injector.injectMembers(cls)
+		val cls = injector.getInstance(StatechartClass)
 		cls.build(flow, entry, artifactConfigs)
 		cls
 	}
 	
 	def StatechartInterfaceClass createStatechartInterfaceClass(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs, IModule parent,
 		StatechartScope scope) {
-		val cls = new StatechartInterfaceClass()
-		injector.injectMembers(cls)
+		val cls = injector.getInstance(StatechartInterfaceClass)
 		cls.build(flow, entry, artifactConfigs, parent, scope)
 		cls	
 	}
 	
 	def StatechartOCBInterfaceClass createStatechartOCBInterfaceClass(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs, IModule parent,
 		StatechartScope scope) {
-		val cls = new StatechartOCBInterfaceClass()
-		injector.injectMembers(cls)
+		val cls = injector.getInstance(StatechartOCBInterfaceClass)
 		cls.build(flow, entry, artifactConfigs, parent, scope)
 		cls
 	}

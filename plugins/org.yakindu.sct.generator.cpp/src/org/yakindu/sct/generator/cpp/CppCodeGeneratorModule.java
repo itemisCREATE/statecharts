@@ -28,9 +28,14 @@ import org.yakindu.sct.generator.core.language.IFunction;
 import org.yakindu.sct.generator.core.language.factory.FunctionFactory;
 import org.yakindu.sct.generator.core.language.factory.IStandardFunctionProvider;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
+import org.yakindu.sct.generator.cpp.classes.StatechartClass;
+import org.yakindu.sct.generator.cpp.classes.StatechartInterfaceClass;
 import org.yakindu.sct.generator.cpp.classes.members.StandardFunctionProvider;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenEventCode;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenExpressionCode;
+import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStandardFunctions;
+import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatechartClass;
+import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatechartInterfaceClass;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineHeader;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineImplementation;
 import org.yakindu.sct.generator.cpp.language.Function;
@@ -68,7 +73,6 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 	private void bindLanguageModules(Binder binder) {
 		binder.bind(IFunction.class).to(Function.class);
 		binder.bind(FunctionFactory.class).to(CFunctionFactory.class);
-		binder.bind(IStandardFunctionProvider.class).to(StandardFunctionProvider.class);
 	}
 
 	protected void bindIGenArtifactConfigurations(GeneratorEntry entry, Binder binder) {
@@ -91,6 +95,11 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 			binder.bind(StatemachineImplementation.class).to(EventDrivenStatemachineImplementation.class);
 			binder.bind(CppExpressionsGenerator.class).to(EventDrivenExpressionCode.class);
 			binder.bind(EventCode.class).to(EventDrivenEventCode.class);
+			binder.bind(StatechartClass.class).to(EventDrivenStatechartClass.class);
+			binder.bind(StatechartInterfaceClass.class).to(EventDrivenStatechartInterfaceClass.class);
+			binder.bind(IStandardFunctionProvider.class).to(EventDrivenStandardFunctions.class);
+		} else {
+			binder.bind(IStandardFunctionProvider.class).to(StandardFunctionProvider.class);
 		}
 	}
 

@@ -89,8 +89,7 @@ abstract class AbstractStatechartClass extends CppClass {
 		val funcs = newArrayList
 		switch (declaration.direction) {
 			case Direction.LOCAL: {
-				funcs += createInEventFunctions(scope, declaration)
-				funcs += createOutEventFunctions(scope, declaration)
+				funcs += createLocalEventFunctions(scope, declaration)
 			}
 			case Direction.IN: {
 				funcs += createInEventFunctions(scope, declaration)
@@ -99,6 +98,13 @@ abstract class AbstractStatechartClass extends CppClass {
 				funcs += createOutEventFunctions(scope, declaration)
 			}
 		}
+		funcs
+	}
+	
+	def List<IFunction> createLocalEventFunctions(StatechartScope scope, EventDefinition declaration) {
+		val funcs = newArrayList
+		funcs += createInEventFunctions(scope, declaration)
+		funcs += createOutEventFunctions(scope, declaration)
 		funcs
 	}
 

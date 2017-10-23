@@ -10,15 +10,20 @@
  */
 package org.yakindu.sct.generator.cpp.eventdriven
 
-import org.yakindu.sct.generator.cpp.classes.members.StandardFunctionProvider
+import com.google.inject.Inject
 import org.yakindu.sct.generator.core.language.factory.IStandardFunctionProvider
+import org.yakindu.sct.generator.cpp.classes.members.StandardFunctionProvider
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.stext.stext.StatechartScope
 
 /**
  * @author rbeckmann
  *
  */
 class EventDrivenStandardFunctions extends StandardFunctionProvider implements IStandardFunctionProvider {
+	@Inject extension EventNaming eventNaming
+	
 	override runCycle(ExecutionFlow it) {
 		val runCycle = super.runCycle(it)
 		runCycle.content = '''
@@ -70,6 +75,29 @@ class EventDrivenStandardFunctions extends StandardFunctionProvider implements I
 		}
 		'''
 		raiseTimeEvent
+	}
+	
+	override raiseInternalEvent(StatechartScope scope, EventDefinition evd) {
+		val func = super.raiseInternalEvent(scope, evd)
+		func.content = '''
+		«IF evd.hasValue»
+		parent->internalEventQueue.push_back(new «evd.eventClassName»(«evd.eventEnumMemberName», value));
+		«ELSE»
+		parent->internalEventQueue.push_back(new «evd.eventClassName»(«evd.eventEnumMemberName»));
+		«ENDIF»
+		parent->runCycle();
+		'''
+		func
+	}
+	
+	override raiseInterfaceEvent(StatechartScope scope, EventDefinition evd) {
+		val func = super.raiseInterfaceEvent(scope, evd)
+		func.content = '''
+			«func.content»
+			
+			parent->runCycle();
+		'''
+		func
 	}
 	
 }

@@ -45,8 +45,7 @@ abstract class AbstractStatechartInterfaceClass extends AbstractStatechartClass 
 		val funcs = newArrayList
 		switch (declaration.direction) {
 			case Direction.LOCAL: {
-				funcs += createInEventFunctions(scope, declaration)
-				funcs += createOutEventFunctions(scope, declaration)
+				funcs += createLocalEventFunctions(scope, declaration)
 			}
 			case Direction.IN: {
 				funcs += createInEventFunctions(scope, declaration)
