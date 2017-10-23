@@ -21,7 +21,7 @@ import org.yakindu.sct.generator.core.language.ITypeQualifierOwner
  * @author rbeckmann
  *
  */
-class CodePartExtensions {
+class CodePartExtensions extends org.yakindu.sct.generator.c.language.CodePartExtensions {
 	def setConst(ITypeQualifierOwner it) {
 		it.typeQualifier = TypeQualifier.CONST
 	}
@@ -36,14 +36,6 @@ class CodePartExtensions {
 	
 	def setFunctionConst(IFunction it) {
 		if(it instanceof Function) constFunction = true
-	}
-	
-	def pointer(IType type) {
-		new CustomType(type.name + "*")
-	}
-	
-	def pointer(CharSequence type) {
-		new CustomType(type + "*")
 	}
 	
 	def reference(IType type) {

@@ -113,6 +113,7 @@ public class StyledTextCellEditor extends CellEditor {
 	 */
 	protected Control createControl(Composite parent) {
 		text = createStyledText(parent);
+		text.setAlwaysShowScrollBars(false);
 		text.addSelectionListener(new SelectionAdapter() {
 			public void widgetDefaultSelected(SelectionEvent e) {
 				handleDefaultSelection(e);
@@ -189,7 +190,6 @@ public class StyledTextCellEditor extends CellEditor {
 	 */
 	protected void doSetFocus() {
 		if (text != null) {
-			text.selectAll();
 			text.setFocus();
 			checkSelection();
 			checkDeleteable();

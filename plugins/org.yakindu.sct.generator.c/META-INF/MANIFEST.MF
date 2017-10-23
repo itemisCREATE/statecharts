@@ -12,6 +12,7 @@ Require-Bundle: org.yakindu.sct.model.sexec,
  org.yakindu.sct.model.stext.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.yakindu.sct.generator.c,
+ org.yakindu.sct.generator.c.extensions,
  org.yakindu.sct.generator.c.features,
  org.yakindu.sct.generator.c.language,
  org.yakindu.sct.generator.c.types

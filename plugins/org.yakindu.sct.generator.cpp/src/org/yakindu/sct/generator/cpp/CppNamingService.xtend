@@ -13,8 +13,9 @@ package org.yakindu.sct.generator.cpp
 
 import com.google.inject.Inject
 import java.util.Arrays
+import org.yakindu.base.base.NamedElement
 import org.yakindu.sct.generator.c.CNamingService
-import org.yakindu.sct.generator.c.GenmodelEntries
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
@@ -23,7 +24,6 @@ import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 
 import static org.yakindu.sct.generator.cpp.CppKeywords.*
-import org.yakindu.base.base.NamedElement
 
 class CppNamingService extends CNamingService {
 

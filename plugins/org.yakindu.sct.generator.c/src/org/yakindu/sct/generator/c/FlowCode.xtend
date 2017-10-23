@@ -11,6 +11,9 @@
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries
+import org.yakindu.sct.generator.c.extensions.Naming
+import org.yakindu.sct.generator.c.extensions.Navigation
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.CheckRef

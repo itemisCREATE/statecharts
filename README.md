@@ -58,18 +58,19 @@ If you are familiar with Eclipse plugin development then you may want to checkou
 19. Do a "clean all", i.e. select *Project → Clean…* from the main menu, make sure *Clean all projects* is checked, then click on *OK*.
 
 ### How to setup your developer workspace without Oomph
-1. Download Eclipse Mars from https://www.eclipse.org/downloads/
-2. Install the current Xtext release -> Help / Install new Software / select 'Mars - http://download.eclipse.org/releases/mars'
+1. Download Eclipse Oxygen from https://www.eclipse.org/downloads/
+2. Install the current Xtext release -> Help / Install new Software / select 'Oxygen - http://download.eclipse.org/releases/oxygen'
 2.1 Select Modeling / Xtext Complete SDK
 3. Select the Git perspective and clone the following Git Repository:
 https://github.com/Yakindu/statecharts.git
 Select 'Import projects' on the 'working directory' subfolder
-4. Set the target platform to org.yakindu.base.target/mars.target
+4. Set the target platform to org.yakindu.base.target/oxygen.target
 Open the target file and click on the link for setting the target platform (takes some minutes the first time)
 5. Build relevant Xtext grammars
 Rightclick on org.yakindu.base.expressions/Expressions.xtext => Run As.. => Generate Xtext Artifacts
 Rightclick on org.yakindu.sct.stext/SText.xtext => Run As.. => Generate Xtext Artifacts
 Rightclick org.yakindu.sct.generator.genmodel/SGen.xtext => Run As.. => Generate Xtext Artifacts
+
 
 After these steps all projects should compile without errors. To launch a runtime instance which has these projects as installed plugins, just right-click on a project => Run As => Eclipse Application
 

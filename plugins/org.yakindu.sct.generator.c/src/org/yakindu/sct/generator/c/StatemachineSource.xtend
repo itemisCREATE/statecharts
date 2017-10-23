@@ -13,10 +13,15 @@ package org.yakindu.sct.generator.c
 import com.google.inject.Inject
 import java.util.List
 import java.util.Map
+import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries
+import org.yakindu.sct.generator.c.extensions.Naming
+import org.yakindu.sct.generator.c.extensions.Navigation
 import org.yakindu.sct.generator.c.language.CForLoopFactory
 import org.yakindu.sct.generator.c.language.CustomType
 import org.yakindu.sct.generator.c.language.Function
 import org.yakindu.sct.generator.c.language.Modifier
+import org.yakindu.sct.generator.c.language.Parameter
 import org.yakindu.sct.generator.c.language.Preprocessor.Header
 import org.yakindu.sct.generator.c.language.Preprocessor.LocalHeader
 import org.yakindu.sct.generator.c.language.Preprocessor.SystemHeader
@@ -24,7 +29,6 @@ import org.yakindu.sct.generator.c.language.Type
 import org.yakindu.sct.generator.c.language.TypeQualifier
 import org.yakindu.sct.generator.core.language.Comment
 import org.yakindu.sct.generator.core.language.IFunction
-import org.yakindu.sct.generator.core.language.Parameter
 import org.yakindu.sct.generator.core.language.factory.FunctionFactory
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Check
@@ -51,11 +55,13 @@ class StatemachineSource implements IContentTemplate {
 	@Inject protected extension CForLoopFactory
 	
 	protected Map<String, List<IFunction>> internalFunctions
+	@Inject protected extension ExpressionsChecker
+	@Inject protected extension CodePartExtensions
 	
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) { 
 		initializeNamingService
 		setDefaultParameter({
-			val p = new Parameter()
+			val p = new Parameter(flow.type.pointer, scHandle)
 			p.type = new CustomType(flow.type + "*")
 			p.name = scHandle
 			p
@@ -69,11 +75,23 @@ class StatemachineSource implements IContentTemplate {
 		if(timed || !operations.empty) {
 			includes.add(new LocalHeader((module.client.h).relativeTo(module.c)))
 		}
+		if(modOnReal) {
+			includes.add(new SystemHeader("math.h"))
+		}
 	'''
 		«entry.licenseText»
 		«FOR include : includes»
 		«include»
 		«ENDFOR»
+		
+		#include <stdlib.h>
+		#include <string.h>
+		«IF modOnReal»#include <math.h>«ENDIF»
+		#include "«(typesModule.h).relativeTo(module.c)»"
+		#include "«(module.h).relativeTo(module.c)»"
+		«IF timed || !it.operations.empty»
+			#include "«(module.client.h).relativeTo(module.c)»"
+		«ENDIF»
 		/*! \file Implementation of the state machine '«name»'
 		*/
 		

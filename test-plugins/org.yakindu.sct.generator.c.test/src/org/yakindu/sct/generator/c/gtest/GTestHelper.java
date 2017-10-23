@@ -201,6 +201,7 @@ public class GTestHelper {
 		}
 		command.add("-lgtest");
 		command.add("-lgtest_main");
+		command.add("-lm");
 		command.add("-lstdc++");
 		command.add("-pthread");
 		// command.add("-pg");

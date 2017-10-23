@@ -11,11 +11,14 @@
 package org.yakindu.sct.generator.cpp.classes
 
 import com.google.inject.Inject
+import java.util.List
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.language.CEnum
 import org.yakindu.sct.generator.c.language.CustomType
 import org.yakindu.sct.generator.c.language.Parameter
+import org.yakindu.sct.generator.c.language.Preprocessor.Header
 import org.yakindu.sct.generator.c.language.Preprocessor.LocalHeader
+import org.yakindu.sct.generator.c.language.Preprocessor.SystemHeader
 import org.yakindu.sct.generator.c.language.TypeQualifier
 import org.yakindu.sct.generator.core.language.Comment
 import org.yakindu.sct.generator.core.language.IType
@@ -32,8 +35,6 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
-import java.util.List
-import org.yakindu.sct.generator.c.language.Preprocessor.Header
 
 /**
  * @author rbeckmann
@@ -64,6 +65,7 @@ class StatechartClass extends AbstractStatechartClass {
 	
 	override List<Header> defineRequiredHeaders(extension IGenArtifactConfigurations artifactConfigs) {
 		val List<Header> headers = newArrayList
+		headers += new SystemHeader("string.h")
 		headers += new LocalHeader((flow.typesModule.h).relativeTo(flow.module.h))
 		headers += new LocalHeader((statemachineInterface.h).relativeTo(flow.module.h))
 		

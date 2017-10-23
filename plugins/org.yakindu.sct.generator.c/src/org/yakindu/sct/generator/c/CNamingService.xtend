@@ -15,6 +15,7 @@ import com.google.inject.Inject
 import java.util.Arrays
 import java.util.Map
 import org.yakindu.base.base.NamedElement
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Step
@@ -22,10 +23,10 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.DefaultNamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.State
+import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 
 import static org.yakindu.sct.generator.c.CKeywords.*
-import org.yakindu.sct.model.sgraph.Statechart
 
 public class CNamingService extends DefaultNamingService {
 	

@@ -12,14 +12,11 @@ package org.yakindu.sct.generator.c.eventdriven
 
 import com.google.inject.Inject
 import org.yakindu.base.types.Direction
-import org.yakindu.sct.generator.c.IContentTemplate
-import org.yakindu.sct.generator.c.IGenArtifactConfigurations
-import org.yakindu.sct.generator.c.Naming
-import org.yakindu.sct.generator.c.Navigation
+import org.yakindu.sct.generator.c.extensions.Naming
+import org.yakindu.sct.generator.c.extensions.Navigation
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.naming.INamingService
-import org.yakindu.sct.model.sgen.GeneratorEntry
 
 /**
  * @author René Beckmann

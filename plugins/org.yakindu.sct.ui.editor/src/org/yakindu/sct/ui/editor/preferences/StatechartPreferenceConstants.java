@@ -25,4 +25,5 @@ public interface StatechartPreferenceConstants extends IPreferenceConstants {
 	String PREF_REGION_LINE = "Appearance.region.line";
 	String PREF_PRIORITY_LABELS = "Appearance.transition.priority";
 	String PREF_LIVE_VALIDATION = "Appearance.live.validation";
+	String PREF_SYNTAX_COLORING = "Appearance.diagram.syntaxcoloring";
 }

@@ -38,7 +38,7 @@ import org.eclipse.swt.graphics.Color;
 import org.yakindu.base.gmf.runtime.parsers.StringAttributeParser;
 import org.yakindu.base.xtext.utils.gmf.directedit.DoubleClickDirectEditDragTracker;
 import org.yakindu.base.xtext.utils.gmf.directedit.DoubleClickDirectEditDragTracker.IDoubleClickCallback;
-import org.yakindu.base.xtext.utils.gmf.figures.HighlightingWrappingLabel;
+import org.yakindu.base.xtext.utils.gmf.figures.SyntaxColoringLabel;
 
 /**
  * This is a common abstract base class for all Label which are
@@ -127,7 +127,7 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 
 	@Override
 	protected IFigure createFigure() {
-		return new HighlightingWrappingLabel();
+		return new SyntaxColoringLabel();
 	}
 
 	public ICellEditorValidator getEditTextValidator() {
@@ -154,6 +154,8 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 				&& ((SelectionRequest) request).getLastButtonPressed() == 3)
 			return null;
 		IDoubleClickCallback callback = new IDoubleClickCallback() {
+
+			@Override
 			public void handleDoubleClick(int btn) {
 				performDirectEditRequest(request);
 			}

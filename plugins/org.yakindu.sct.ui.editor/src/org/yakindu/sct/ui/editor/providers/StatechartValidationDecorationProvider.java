@@ -10,8 +10,8 @@
  */
 package org.yakindu.sct.ui.editor.providers;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.Label;
@@ -40,6 +40,7 @@ import org.eclipse.xtext.validation.Issue.IssueImpl;
 import org.yakindu.base.gmf.runtime.decorators.AbstractDecoratorProvider;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Pseudostate;
+import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTIssue;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.editparts.BorderItemEditPart;
@@ -100,7 +101,6 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		private static final String SUB_DIAGRAM_ERRORS = "The subdiagram contains errors.";
 		private IValidationIssueStore store;
 		private String semanticID;
-		private String subdiagramSemanticID;
 
 		public ValidationDecorator(IDecoratorTarget decoratorTarget, IValidationIssueStore store) {
 			super(decoratorTarget);
@@ -108,19 +108,35 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		}
 
 		public void refresh() {
-			View view = (View) getDecoratorTarget().getAdapter(View.class);
-			if (view == null || view.eResource() == null) {
+			Optional<EObject> element = getTargetEObject();
+			if (!element.isPresent()) {
 				return;
 			}
-			EObject element = view.getElement();
-			if (element != null)
-				semanticID = element.eResource().getURIFragment(element);
+			semanticID = element.get().eResource().getURIFragment(element.get());
 			removeDecoration();
 			EditPart editPart = (EditPart) getDecoratorTarget().getAdapter(EditPart.class);
 			if (editPart == null || editPart.getViewer() == null || !(editPart instanceof IPrimaryEditPart)) {
 				return;
 			}
-			decorate(view);
+			decorate(getTargetView().get());
+		}
+
+		protected Optional<EObject> getTargetEObject() {
+			Optional<View> view = getTargetView();
+			if (view.isPresent()) {
+				EObject element = view.get().getElement();
+				if (element != null)
+					return Optional.of(element);
+			}
+			return Optional.empty();
+		}
+
+		private Optional<View> getTargetView() {
+			View view = (View) getDecoratorTarget().getAdapter(View.class);
+			if (view == null || view.eResource() == null) {
+				return Optional.empty();
+			}
+			return Optional.of(view);
 		}
 
 		public void activate() {
@@ -128,6 +144,7 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		}
 
 		public void deactivate() {
+			store.removeIssueStoreListener(this);
 			super.deactivate();
 		}
 
@@ -181,13 +198,17 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 					TreeIterator<EObject> eAllContents = element.eAllContents();
 					while (eAllContents.hasNext()) {
 						EObject next = eAllContents.next();
-						List<SCTIssue> issues = store.getIssues(EcoreUtil.getURI(next).fragment());
+						if(next instanceof Transition && next.eContainer() == element) {
+							eAllContents.prune();
+							continue;
+						}
+						String semanticURI = EcoreUtil.getURI(next).fragment();
+						List<SCTIssue> issues = store.getIssues(semanticURI);
 						for (final SCTIssue issue : issues) {
 							if (Severity.ERROR.equals(issue.getSeverity())) {
 								IssueImpl result = new Issue.IssueImpl();
 								result.setMessage(SUB_DIAGRAM_ERRORS);
 								result.setSeverity(Severity.ERROR);
-								subdiagramSemanticID = issue.getSemanticURI();
 								return new SCTIssue(result, issue.getSemanticURI());
 							}
 						}
@@ -218,12 +239,19 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		}
 
 		@Override
-		public List<String> getSemanticURIs() {
-			List<String> result = new ArrayList<String>();
-			result.add(semanticID);
-			if (subdiagramSemanticID != null)
-				result.add(subdiagramSemanticID);
-			return result;
+		public String getSemanticURI() {
+			return semanticID;
+		}
+
+		@Override
+		public boolean notifyOnChildChange() {
+			Optional<View> view = getTargetView();
+			if (view.isPresent() && SemanticHints.STATE.equals(view.get().getType())) {
+				BooleanValueStyle style = GMFNotationUtil.getBooleanValueStyle(view.get(),
+						DiagramPartitioningUtil.INLINE_STYLE);
+				return style == null ? false : !style.isBooleanValue();
+			}
+			return false;
 		}
 	}
 }

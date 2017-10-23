@@ -23,7 +23,7 @@ import org.eclipse.draw2d.StackLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
 import org.eclipse.swt.graphics.Color;
-import org.yakindu.base.xtext.utils.gmf.figures.HighlightingWrappingLabel;
+import org.yakindu.base.xtext.utils.gmf.figures.SyntaxColoringLabel;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
 
 /**
@@ -51,7 +51,7 @@ public class RegionFigure extends RectangleFigure {
 	}
 
 	private void createContents() {
-		nameLabel = new HighlightingWrappingLabel();
+		nameLabel = new SyntaxColoringLabel();
 		GridData data = GridDataFactory.fillDefaults().grab(true, false).getData();
 		nameLabel.setTextPlacement(PositionConstants.WEST);
 		this.add(nameLabel, data);
