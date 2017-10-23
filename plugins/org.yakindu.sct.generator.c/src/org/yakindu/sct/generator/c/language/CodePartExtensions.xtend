@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.generator.c.language
 
+import org.yakindu.sct.generator.core.language.IFunction
+import org.yakindu.sct.generator.core.language.IParameter
 import org.yakindu.sct.generator.core.language.IType
 
 /**
@@ -23,5 +25,13 @@ class CodePartExtensions {
 	
 	def pointer(CharSequence type) {
 		new CustomType(type + "*")
+	}
+	
+	def setParameterConst(IFunction function, int index) {
+		val p = function.parameters.get(index)
+		switch (p) {
+			IParameter: p.typeQualifier = TypeQualifier.CONST
+			CharSequence: function.parameters.set(index, TypeQualifier.CONST + p.toString)
+		}
 	}
 }

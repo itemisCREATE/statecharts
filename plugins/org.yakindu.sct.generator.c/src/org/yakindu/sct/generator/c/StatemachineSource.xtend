@@ -18,6 +18,7 @@ import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.c.extensions.Navigation
 import org.yakindu.sct.generator.c.language.CForLoopFactory
+import org.yakindu.sct.generator.c.language.CodePartExtensions
 import org.yakindu.sct.generator.c.language.CustomType
 import org.yakindu.sct.generator.c.language.Function
 import org.yakindu.sct.generator.c.language.Modifier
@@ -29,6 +30,7 @@ import org.yakindu.sct.generator.c.language.Type
 import org.yakindu.sct.generator.c.language.TypeQualifier
 import org.yakindu.sct.generator.core.language.Comment
 import org.yakindu.sct.generator.core.language.IFunction
+import org.yakindu.sct.generator.core.language.IParameter
 import org.yakindu.sct.generator.core.language.factory.FunctionFactory
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Check
@@ -60,12 +62,7 @@ class StatemachineSource implements IContentTemplate {
 	
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) { 
 		initializeNamingService
-		setDefaultParameter({
-			val p = new Parameter(flow.type.pointer, scHandle)
-			p.type = new CustomType(flow.type + "*")
-			p.name = scHandle
-			p
-		})
+		setDefaultParameter( new Parameter(flow.type.pointer, scHandle))
 		buildInternalFunctions(it)
 		val List<Header> includes = newArrayList
 		includes.add(new SystemHeader("stdlib.h"))
@@ -83,15 +80,7 @@ class StatemachineSource implements IContentTemplate {
 		«FOR include : includes»
 		«include»
 		«ENDFOR»
-		
-		#include <stdlib.h>
-		#include <string.h>
-		«IF modOnReal»#include <math.h>«ENDIF»
-		#include "«(typesModule.h).relativeTo(module.c)»"
-		#include "«(module.h).relativeTo(module.c)»"
-		«IF timed || !it.operations.empty»
-			#include "«(module.client.h).relativeTo(module.c)»"
-		«ENDIF»
+
 		/*! \file Implementation of the state machine '«name»'
 		*/
 		
@@ -251,7 +240,7 @@ class StatemachineSource implements IContentTemplate {
 			''',
 			#["sc_eventid evid"]
 			)
-			(func.parameters.get(0) as Parameter).typeQualifier = TypeQualifier.CONST
+			func.setParameterConst(0)
 			func
 		} else {
 			""
@@ -279,7 +268,7 @@ class StatemachineSource implements IContentTemplate {
 			'''
 		)
 		func.parameters += '''«statesEnumType» state'''
-		(func.parameters.get(0) as Parameter).typeQualifier = TypeQualifier.CONST
+		func.setParameterConst(0)
 		func.type = Type.BOOL
 		func
 	}
@@ -297,7 +286,7 @@ class StatemachineSource implements IContentTemplate {
 			
 			return result;
 			''')
-		(func.parameters.get(0) as Parameter).typeQualifier = TypeQualifier.CONST
+		func.setParameterConst(0)
 		func.type = Type.BOOL
 		func
 	}
@@ -343,7 +332,7 @@ class StatemachineSource implements IContentTemplate {
 	
 	def interfaceOutgoingEventGetter(ExecutionFlow it, EventDefinition event) {
 		val f = function(event.asRaised, '''return «event.access»;''')
-		(f.parameters.get(0) as Parameter).typeQualifier = TypeQualifier.CONST
+		f.setParameterConst(0)
 		f.type = Type.BOOL
 		f
 	}
@@ -351,7 +340,7 @@ class StatemachineSource implements IContentTemplate {
 	def interfaceOutgoingEventValueGetter(ExecutionFlow it, EventDefinition event) {
 		val returnType = new CustomType(event.typeSpecifier.targetLanguageName)
 		val func = function(event.asGetter, '''return «event.valueAccess»;''')
-		(func.parameters.get(0) as Parameter).typeQualifier = TypeQualifier.CONST
+		func.setParameterConst(0)
 		func.type = returnType
 	}
 	
@@ -410,7 +399,7 @@ class StatemachineSource implements IContentTemplate {
 		val func = function(shortName)
 		switch (it) {
 			Check: {
-				(func.parameters.get(0) as Parameter).typeQualifier = TypeQualifier.CONST
+				(func.parameters.get(0) as IParameter).typeQualifier = TypeQualifier.CONST
 				func.content = '''return «code»;'''
 				func.type = Type.BOOL
 			}
