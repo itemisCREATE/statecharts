@@ -65,44 +65,9 @@ class StatemachineImplementation implements IContentTemplate {
 		/*! \file Implementation of the state machine '«name»'
 		*/
 		
-		«usingNamespaces»
-		
-		«IF newMode && statechartClass !== null»
 		«constantDefinitions»
+		
 		«statechartClass»
-		«ELSE»
-		«constructorDefinition»
-		
-		«destructorDefinition»
-		
-		«constantDefinitions»
-		
-		«initFunction»
-		
-		«enterFunction»
-		
-		«exitFunction»
-		
-		«activeFunction»
-		
-		«finalFunction»
-		
-		«runCycleFunction»
-		
-		«clearInEventsFunction»
-		
-		«clearOutEventsFunction»
-
-		«timedStatemachineFunctions»
-
-		«isStateActiveFunction»
-		
-		«interfaceFunctions»
-		
-		«functionImplementations»
-		
-		«additionalFunctions»
-		«ENDIF»
 	'''
 	}
 	

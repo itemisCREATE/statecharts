@@ -26,10 +26,11 @@ class EventDrivenStandardFunctions extends StandardFunctionProvider implements I
 	
 	override runCycle(ExecutionFlow it) {
 		val runCycle = super.runCycle(it)
+		val sctEventType = (flow.eventNamespaceName + "::SctEvent").pointer
 		runCycle.content = '''
 			clearOutEvents();
 						
-			SctEvent * currentEvent = getNextEvent();
+			«sctEventType» currentEvent = getNextEvent();
 			
 			do
 			{

@@ -16,6 +16,7 @@ import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.language.CFunctionFactory
+import org.yakindu.sct.generator.c.language.Preprocessor.Header
 import org.yakindu.sct.generator.core.language.IFunction
 import org.yakindu.sct.generator.core.language.factory.IStandardFunctionProvider
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
@@ -64,7 +65,14 @@ abstract class AbstractStatechartClass extends CppClass {
 		this.flow = flow
 		this.entry = entry
 		this.config = artifactConfigs
+		
+		this.requiredHeaders = defineRequiredHeaders(artifactConfigs)
 	}
+	
+	def List<Header> defineRequiredHeaders(extension IGenArtifactConfigurations artifactConfigs) {
+		#[]
+	}
+	
 	def getInnerClassVisibility() {
 		switch (entry.innerClassVisibility) {
 			case "public": Visibility.PUBLIC

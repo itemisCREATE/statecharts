@@ -15,6 +15,7 @@ import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.language.CEnum
 import org.yakindu.sct.generator.c.language.CustomType
 import org.yakindu.sct.generator.c.language.Parameter
+import org.yakindu.sct.generator.c.language.Preprocessor.LocalHeader
 import org.yakindu.sct.generator.c.language.TypeQualifier
 import org.yakindu.sct.generator.core.language.Comment
 import org.yakindu.sct.generator.core.language.IType
@@ -31,6 +32,8 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
+import java.util.List
+import org.yakindu.sct.generator.c.language.Preprocessor.Header
 
 /**
  * @author rbeckmann
@@ -45,7 +48,7 @@ class StatechartClass extends AbstractStatechartClass {
 	protected IType classType
 	protected Typedef statesEnumType
 	
-	override build(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
+	override build(ExecutionFlow flow, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		super.build(flow, entry, artifactConfigs)
 		
 		this.name = flow.module
@@ -57,6 +60,18 @@ class StatechartClass extends AbstractStatechartClass {
 		createPublicMembers()
 		createProtectedMembers()
 		createPrivateMembers()
+	}
+	
+	override List<Header> defineRequiredHeaders(extension IGenArtifactConfigurations artifactConfigs) {
+		val List<Header> headers = newArrayList
+		headers += new LocalHeader((flow.typesModule.h).relativeTo(flow.module.h))
+		headers += new LocalHeader((statemachineInterface.h).relativeTo(flow.module.h))
+		
+		if(flow.timed) {
+			headers += new LocalHeader((timedStatemachineInterface.h).relativeTo(flow.module.h))
+		}
+		
+		headers
 	}
 	
 	def defineExtendedClasses() {

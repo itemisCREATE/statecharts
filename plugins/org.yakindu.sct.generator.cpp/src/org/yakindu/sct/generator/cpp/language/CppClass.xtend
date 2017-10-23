@@ -14,8 +14,7 @@ import java.util.EnumMap
 import java.util.List
 import java.util.Map
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.yakindu.sct.generator.c.language.TypeQualifier
-import org.yakindu.sct.generator.c.language.Variable
+import org.yakindu.sct.generator.c.language.Preprocessor.Header
 import org.yakindu.sct.generator.core.language.CharSequenceList
 import org.yakindu.sct.generator.core.language.CodePart
 import org.yakindu.sct.generator.core.language.IDeclarable
@@ -34,12 +33,15 @@ class CppClass extends CodePart implements IModule, IDeclarable, IDocumentationO
 	@Accessors(PROTECTED_SETTER, PUBLIC_GETTER) protected Map<Visibility, List<IModuleMember>> members = new EnumMap(Visibility);
 	@Accessors protected CharSequence documentation = ""
 	@Accessors protected List<CharSequence> extendedClasses
+	@Accessors protected List<Header> requiredHeaders
 	@Accessors protected boolean declareChildNested = true
 	
 	new() {
 		this.members.put(Visibility.PUBLIC, newArrayList)
 		this.members.put(Visibility.PROTECTED, newArrayList)
 		this.members.put(Visibility.PRIVATE, newArrayList)
+		
+		requiredHeaders = newArrayList
 	}
 	
 	def addMember(IModuleMember member, Visibility visibility) {

@@ -14,6 +14,7 @@ import com.google.inject.Inject
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.language.Parameter
+import org.yakindu.sct.generator.c.language.Preprocessor.SystemHeader
 import org.yakindu.sct.generator.c.language.Variable
 import org.yakindu.sct.generator.core.language.IType
 import org.yakindu.sct.generator.cpp.classes.StatechartClass
@@ -29,31 +30,30 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
  */
 class EventDrivenStatechartClass extends StatechartClass {
 	@Inject extension EventNaming
-	@Inject extension StatechartEvents events
 	
 	protected IType sctEventType
 	
-	new() {
-		super()
-		sctEventType = (flow.eventNamespaceName + "::SctEvent").pointer
-	}
-	
 	override build(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
 		super.build(flow, entry, artifactConfigs)
+		sctEventType = (flow.eventNamespaceName + "::SctEvent").pointer
 		
 		addMember(dispatchEventFunction, Visibility.PRIVATE)
 		addMember(getNextEventFunction, Visibility.PRIVATE)
 		
 		addMember(new Variable(
-			'''std::deque<«flow.eventNamespaceName»::SctEvent*>''',
+			'''std::deque<«sctEventType»>''',
 			"internalEventQueue"
 		), Visibility.PRIVATE)
+	}
+	
+	override defineRequiredHeaders(extension IGenArtifactConfigurations artifactConfigs) {
+		(#[new SystemHeader("deque")] + super.defineRequiredHeaders(artifactConfigs)).toList
 	}
 	
 	def getNextEventFunction() {
 		val getNextEvent = function("getNextEvent",
 			'''
-			SctEvent* nextEvent = 0;
+			«sctEventType» nextEvent = 0;
 			
 			if(!internalEventQueue.empty()) {
 				nextEvent = internalEventQueue.front();
@@ -88,6 +88,18 @@ class EventDrivenStatechartClass extends StatechartClass {
 				break;
 		}
 		''', #[new Parameter(sctEventType, "event")])
+	}
+	
+	override protected getInitializerList() {
+		val toInit = super.getInitializerList()
+		val interfaces = flow.interfaces.map[instance + "()"].toList
+		newArrayList(toInit.map[
+			if(interfaces.contains(it)) {
+				it.toString.replace("()", "(this)")
+			} else {
+				it
+			}
+		])
 	}
 	
 }

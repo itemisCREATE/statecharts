@@ -47,7 +47,12 @@ class CppGenerator implements IExecutionFlowGenerator {
 
 	override generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		initGenerationArtifacts(flow, entry, locations)
-		generateArtifacts(flow, entry, fsa, locations);
+		
+		val statechartClass = createStatechartClass(flow, entry, locations)
+		statemachineHeaderContent.statechartClass = statechartClass
+		statemachineSourceContent.statechartClass = statechartClass
+		
+		generateArtifacts(flow, entry, fsa, locations)
 	}
 
 	def generateArtifacts(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa,
@@ -60,14 +65,6 @@ class CppGenerator implements IExecutionFlowGenerator {
 	}
 
 	def initGenerationArtifacts(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations locations) {
-		val newMode = true
-		val statechartClass = createStatechartClass(flow, entry, locations)
-		
-		statemachineHeaderContent.statechartClass = statechartClass
-		statemachineSourceContent.statechartClass = statechartClass
-		statemachineHeaderContent.newMode = newMode
-		statemachineSourceContent.newMode = newMode
-		
 		locations.configure(flow.typesModule.h, entry.libraryOutput, typesContent, entry.skipLibraryFiles)
 		locations.configure(statemachineInterface.h, entry.libraryOutput, statemachineInterfaceContent,
 			entry.skipLibraryFiles)

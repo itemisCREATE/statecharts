@@ -15,14 +15,15 @@ import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.language.Parameter
 import org.yakindu.sct.generator.c.language.Variable
+import org.yakindu.sct.generator.core.language.IModule
 import org.yakindu.sct.generator.core.language.IType
 import org.yakindu.sct.generator.cpp.classes.StatechartInterfaceClass
 import org.yakindu.sct.generator.cpp.language.Constructor
+import org.yakindu.sct.generator.cpp.language.Visibility
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
-import org.yakindu.sct.generator.core.language.IModule
 
 /**
  * @author rbeckmann
@@ -33,15 +34,14 @@ class EventDrivenStatechartInterfaceClass extends StatechartInterfaceClass {
 	
 	protected IType sctEventType
 	
-	new() {
-		super()
-		(flow.eventNamespaceName + "::SctEvent").pointer
-	}
-	
 	override build(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs, IModule parent, StatechartScope scope) {
 		super.build(flow, entry, artifactConfigs, parent, scope)
 		
+		sctEventType = (flow.eventNamespaceName + "::SctEvent").pointer
+		
 		addMember(eventDispatchFunction, innerClassVisibility)
+		
+		addMember(createConstructor, Visibility.PUBLIC)
 		
 		addMember(new Variable(
 			flow.module.pointer,
@@ -57,6 +57,7 @@ class EventDrivenStatechartInterfaceClass extends StatechartInterfaceClass {
 			"parent"
 		)
 		constructor.initializerList += initializerList
+		constructor
 	}
 	
 	def getInitializerList() {
@@ -101,7 +102,7 @@ class EventDrivenStatechartInterfaceClass extends StatechartInterfaceClass {
 		funcs		
 	}
 	
-	def createInternalInterfaceEventRaiser(StatechartScope scope, EventDefinition event) {
+	def protected createInternalInterfaceEventRaiser(StatechartScope scope, EventDefinition event) {
 		val function = function('''internal_«event.asRaiser»''')
 		if(event.hasValue) {
 			function.content = '''
