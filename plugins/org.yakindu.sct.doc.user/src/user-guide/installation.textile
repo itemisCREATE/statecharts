@@ -27,6 +27,8 @@ h3(#inst_eclipse). Eclipse
 
 Internally, YAKINDU Statechart Tools are based on *"Eclipse":http://www.eclipse.org/*, an integrated development environment (IDE). YAKINDU Statechart Tools are running inside the Eclipse environment. When you are installing YAKINDU Statechart Tools, a full-fledged Eclipse instance will be put on your computer. Currently it is the *Oxygen* release.
 
+###. CHECK: Is Oxygen still the current Eclipse release?
+
 If you are new to Eclipse, you might find the "Eclipse Help":http://help.eclipse.org/ useful, especially the "Workbench User Guide".
 
 If you are an experienced Eclipse user, you can install YAKINDU Statechart Tools into a existing Eclipse instance from an update site.
@@ -454,7 +456,9 @@ In order to check whether you are affected, proceed as follows:
 # In the main menu, select _Window → Preferences_. The _Preferences_ window opens.
 # In the _Preferences_ window, select _Java → Installed JREs_.
 
-If the list of installed JREs is empty, you are affected by the problem and will have to manually add a JRE definition. Click on the _Add…_ button and follow the _Add JRE_ wizard. The Eclipse documentation explains in more detail how to "add a new JRE definition":http://help.eclipse.org/neon/index.jsp?topic=%252Forg.eclipse.jdt.doc.user%252Ftasks%252Ftask-add_new_jre.htm to your workspace.
+If the list of installed JREs is empty, you are affected by the problem and will have to manually add a JRE definition. Click on the _Add…_ button and follow the _Add JRE_ wizard. The Eclipse documentation explains in more detail how to "add a new JRE definition":http://help.eclipse.org/oxygen/index.jsp?topic=%2Forg.eclipse.jdt.doc.user%2Ftasks%2Ftask-add_new_jre.htm to your workspace.
+
+###. CHECK Does the link http://help.eclipse.org/oxygen/index.jsp?topic=%2Forg.eclipse.jdt.doc.user%2Ftasks%2Ftask-add_new_jre.htm still point to how to add a JRE?
 
 !(standard-image)images/inst_installed_jres_010.png(Installed JREs)!
 

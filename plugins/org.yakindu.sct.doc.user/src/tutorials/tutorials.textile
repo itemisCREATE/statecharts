@@ -45,7 +45,7 @@ As an example, we will take the light switch statechart and generate Java source
 # In the next dialog, check the checkbox left from _light_switch.sct_, then click _Finish_.
 # Java classes implementing the statechart model are generated. You can find the generated source code in the folders _src_ and _src-gen_ within the _light_switch_ project. <p>!(standard-image)images/tuto_5min_140_generated_java_source_code.png(Generated Java source code)!</p>
 
-That's it. If you want to know more, take the time and work through the "Comprehensive Tutorial":#tutorial_comprehensive_tutorial.
+That's it. If you want to know more, take the time and work through the "Comprehensive Tutorial":../tutorials/tutorials.html#tutorial_comprehensive_tutorial.
 
 
 
