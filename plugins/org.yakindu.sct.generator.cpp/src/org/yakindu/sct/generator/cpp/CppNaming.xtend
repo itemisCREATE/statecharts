@@ -41,7 +41,7 @@ class CppNaming extends Naming {
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject GeneratorEntry entry
 	
-	public static final String OCB_INIT_ERROR_NUMBER = "0b0001"
+	public static final String OCB_INIT_ERROR_NUMBER = "0b1001"
 	
 	def static getIfaceError(){
 		OCB_INIT_ERROR_NUMBER
