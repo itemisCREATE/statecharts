@@ -18,6 +18,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.yakindu.base.expressions.expressions.Argument;
@@ -27,12 +28,14 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
+import org.yakindu.base.expressions.expressions.LogicalRelationExpression;
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
+import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeParameter;
@@ -93,7 +96,10 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 	
 	public static final String ERROR_OPTIONAL_MUST_BE_LAST_CODE = "OptionalParametersLast";
 	public static final String ERROR_OPTIONAL_MUST_BE_LAST_MSG = "Required parameters must not be defined after optional parameters.";
-
+	
+	public static final String ERROR_WRONG_ASSIGNMENT_FOR_PRIMITIVE_TYPE_CODE = "WrongAssignmentForPrimitiveType";
+	public static final String ERROR_WRONG_ASSIGNMENT_FOR_PRIMITIVE_TYPE_MSG = "Assignment to primitive types not allowed.";
+	
 	@Inject
 	private GenericsPrettyPrinter printer;
 	@Inject
@@ -323,6 +329,18 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 			}
 			if (p.isOptional()) {
 				foundOptional = true;
+			}
+		}
+	}
+
+	@Check(CheckType.FAST)
+	public void checkPrimitiveTypeInLogicalRelationExpression(LogicalRelationExpression exp) {
+		if (!EcoreUtil2.getAllContentsOfType(exp, ElementReferenceExpression.class).isEmpty()) {
+			List<ElementReferenceExpression> elemRefs = EcoreUtil2.getAllContentsOfType(exp, ElementReferenceExpression.class);
+			for(ElementReferenceExpression elemRef : elemRefs) {
+				if(elemRef.getReference() instanceof PrimitiveType) {
+					error(ERROR_WRONG_ASSIGNMENT_FOR_PRIMITIVE_TYPE_MSG, null, ERROR_WRONG_ASSIGNMENT_FOR_PRIMITIVE_TYPE_CODE);					
+				}
 			}
 		}
 	}
