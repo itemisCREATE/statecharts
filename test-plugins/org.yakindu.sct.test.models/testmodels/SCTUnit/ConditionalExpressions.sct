@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_zaodgNQ1EeO6OdDmZN5_6A" specification="interface:&#xD;&#xA;in event e&#xD;&#xA;var condition : integer = boolVar ? 3 : 2&#xD;&#xA;var boolVar : boolean = true" name="ConditionalExpressions">
+  <sgraph:Statechart xmi:id="_zaodgNQ1EeO6OdDmZN5_6A" specification="interface:&#xD;&#xA;in event e&#xD;&#xA;var condition : integer = boolVar ? 3 : 2&#xD;&#xA;var boolVar : boolean = true&#xD;&#xA;var stringVar : string = &quot;&quot;&#xD;&#xA;var stringCondition : string = &quot;&quot;" name="ConditionalExpressions">
     <regions xmi:id="_zaprotQ1EeO6OdDmZN5_6A" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_zat9EdQ1EeO6OdDmZN5_6A">
         <outgoingTransitions xmi:id="_zavyQ9Q1EeO6OdDmZN5_6A" target="_zaukJNQ1EeO6OdDmZN5_6A"/>
@@ -8,7 +8,7 @@
       <vertices xsi:type="sgraph:State" xmi:id="_zaukJNQ1EeO6OdDmZN5_6A" specification="entry / condition = boolVar ? 1 : 0" name="A" incomingTransitions="_zavyQ9Q1EeO6OdDmZN5_6A">
         <outgoingTransitions xmi:id="_8hn3MNQ1EeO6OdDmZN5_6A" specification="e [1 == (boolVar ? 1: 0)]" target="_8OjxQNQ1EeO6OdDmZN5_6A"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_8OjxQNQ1EeO6OdDmZN5_6A" specification="entry / condition = ((condition == 2) ? 1 : 2)" name="B" incomingTransitions="_8hn3MNQ1EeO6OdDmZN5_6A"/>
+      <vertices xsi:type="sgraph:State" xmi:id="_8OjxQNQ1EeO6OdDmZN5_6A" specification="entry / condition = ((condition == 2) ? 1 : 2);&#xA;stringCondition = ((condition == 2) ? &quot;True&quot; : &quot;False&quot;)" name="B" incomingTransitions="_8hn3MNQ1EeO6OdDmZN5_6A"/>
     </regions>
   </sgraph:Statechart>
   <notation:Diagram xmi:id="_zaproNQ1EeO6OdDmZN5_6A" type="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor" element="_zaodgNQ1EeO6OdDmZN5_6A" measurementUnit="Pixel">
