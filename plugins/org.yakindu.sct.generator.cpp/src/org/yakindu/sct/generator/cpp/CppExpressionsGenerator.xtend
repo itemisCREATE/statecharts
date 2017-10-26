@@ -21,6 +21,7 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.base.expressions.expressions.StringLiteral
 
 class CppExpressionsGenerator extends CExpressionsGenerator {
 
@@ -48,5 +49,7 @@ class CppExpressionsGenerator extends CExpressionsGenerator {
 
 	/* Literals */
 	override dispatch CharSequence code(BoolLiteral it) '''«IF value»true«ELSE»false«ENDIF»'''
+	
+	override dispatch CharSequence code(StringLiteral it) '''(sc_string) «super._code(it)»'''
 
 }
