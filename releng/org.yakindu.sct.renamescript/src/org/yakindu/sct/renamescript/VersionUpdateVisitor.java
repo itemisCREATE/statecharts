@@ -13,7 +13,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FeatureXMLVisitor implements FileVisitor<Path> {
+public class VersionUpdateVisitor implements FileVisitor<Path> {
 
 	private int fileCount = 0;
 	private int dirCount = 0;
@@ -28,13 +28,13 @@ public class FeatureXMLVisitor implements FileVisitor<Path> {
 	public static List<Path> searchFor(Path startDir, String filePattern, String searchPattern, String replacePattern)
 			throws IOException {
 
-		FeatureXMLVisitor fileVisitor = new FeatureXMLVisitor(filePattern, searchPattern, replacePattern);
+		VersionUpdateVisitor fileVisitor = new VersionUpdateVisitor(filePattern, searchPattern, replacePattern);
 		Files.walkFileTree(startDir, fileVisitor);
 
 		return fileVisitor.getResultList();
 	}
 
-	private FeatureXMLVisitor(String filePattern, String searchPattern, String newValue) {
+	private VersionUpdateVisitor(String filePattern, String searchPattern, String newValue) {
 		this.filePattern = filePattern;
 		this.searchPattern = searchPattern;
 		this.replacePattern = newValue;
@@ -63,7 +63,7 @@ public class FeatureXMLVisitor implements FileVisitor<Path> {
 		if (pathMatcher.matches(path.getFileName())) {
 			searchList.add(path);
 			String charset = Charset.defaultCharset().name();
-			System.out.println(charset);
+			//System.out.println(charset);
 			String content = new String(Files.readAllBytes(path), charset);
 			content = content.replaceAll(this.searchPattern, this.replacePattern);
 			Files.write(path, content.getBytes(charset));
