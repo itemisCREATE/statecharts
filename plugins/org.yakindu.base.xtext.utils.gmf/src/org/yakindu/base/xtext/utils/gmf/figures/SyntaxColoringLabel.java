@@ -91,6 +91,7 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 	protected static class StyledTextFlow extends TextFlowEx {
 
 		private FlowUtilitiesEx flowUtilities;
+		private StyleTextUtilities textUtilities;
 		private static final Image dummy = new Image(Display.getDefault(), 1, 1);
 		private static final GC gc = new GC(dummy);
 		private Font boldFont;
@@ -181,8 +182,6 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		public FlowUtilitiesEx getFlowUtilities() {
 			if (flowUtilities == null) {
 				flowUtilities = new FlowUtilitiesEx(MapModeUtil.getMapMode(this)) {
-					protected TextUtilitiesEx textUtilities;
-
 					@Override
 					protected TextUtilities getTextUtilities() {
 						if (textUtilities == null) {
@@ -195,13 +194,21 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 			return flowUtilities;
 		}
 
+		@Override
+		public void invalidate() {
+			if (textUtilities != null) {
+				textUtilities.invalidate();
+			}
+			super.invalidate();
+		}
+
 		protected class StyleTextUtilities extends TextUtilitiesEx {
 
 			protected LoadingCache<String, Dimension> cache;
 
 			public StyleTextUtilities(IMapMode mapmode) {
 				super(mapmode);
-				cache = CacheBuilder.newBuilder().recordStats().build(new CacheLoader<String, Dimension>() {
+				cache = CacheBuilder.newBuilder().build(new CacheLoader<String, Dimension>() {
 					@Override
 					public Dimension load(String key) throws Exception {
 						return getTextExtentsInternal(key, getFont());
@@ -243,6 +250,9 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 
 			}
 
+			public void invalidate() {
+				cache.invalidateAll();
+			}
 		}
 	}
 }
