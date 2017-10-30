@@ -186,7 +186,8 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 	public void propertyChange(PropertyChangeEvent event) {
 		if (StatechartPreferenceConstants.PREF_SYNTAX_COLORING.equals(event.getProperty())) {
 			setLabelStyles();
-			getFigure().repaint();
+			getFigure().invalidateTree();
+			getFigure().revalidate();
 		}
 	}
 }
