@@ -32,7 +32,9 @@ public enum StatechartImages {
 
 	EXPAND("icons/obj16/arrow_right.png"),
 
-	COLLAPSE("icons/obj16/arrow_left.png");
+	COLLAPSE("icons/obj16/arrow_left.png"),
+	
+	PIN("icons/obj16/pin-view.gif");
 
 	private final String path;
 

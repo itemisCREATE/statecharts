@@ -34,8 +34,7 @@ import org.yakindu.sct.ui.editor.providers.SemanticHints;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class StatechartTextEditPart extends ShapeNodeEditPart implements
-		IPrimaryEditPart {
+public class StatechartTextEditPart extends ShapeNodeEditPart implements IPrimaryEditPart {
 
 	public StatechartTextEditPart(View view) {
 		super(view);
@@ -71,6 +70,7 @@ public class StatechartTextEditPart extends ShapeNodeEditPart implements
 			protected IFigure getPreferredSizeFigure() {
 				return getChildBySemanticHint(SemanticHints.STATECHART_NAME).getFigure();
 			}
+
 		});
 	}
 
@@ -100,6 +100,12 @@ public class StatechartTextEditPart extends ShapeNodeEditPart implements
 	@Override
 	protected void refreshVisibility() {
 		setVisibility(isDefinitionSectionInlined());
+	}
+
+	@Override
+	public void refresh() {
+		refreshVisibility();
+		super.refresh();
 	}
 
 	protected boolean isDefinitionSectionInlined() {
