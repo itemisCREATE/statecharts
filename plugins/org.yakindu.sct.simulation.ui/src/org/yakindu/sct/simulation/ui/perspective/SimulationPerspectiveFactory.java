@@ -40,7 +40,7 @@ public class SimulationPerspectiveFactory implements IPerspectiveFactory {
 		bottomleft.addView(IPageLayout.ID_OUTLINE);
 
 		IFolderLayout bottomRight = layout.createFolder("right", IPageLayout.RIGHT, 0.76f, editorArea);
-		bottomRight.addView("org.yakindu.sct.simulation.ui.simulationview");
+		bottomRight.addView("org.yakindu.sct.simulation.ui.declarationview");
 		bottomRight.addView("org.eclipse.debug.ui.BreakpointView");
 		bottomRight.addView("org.yakindu.sct.simulation.snapshots.ui.snapshotsview");
 		bottomRight.addPlaceholder("org.eclipse.debug.ui.DebugView");

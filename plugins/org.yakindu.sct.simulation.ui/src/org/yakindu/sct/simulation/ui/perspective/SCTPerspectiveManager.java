@@ -48,7 +48,7 @@ import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 @SuppressWarnings("restriction")
 public class SCTPerspectiveManager extends PerspectiveManager implements ILaunchListener, IDebugEventSetListener {
 
-	private static final String SIMULATION_VIEW_ID = "org.yakindu.sct.simulation.ui.simulationview"; //$NON-NLS-1$
+	private static final String SIMULATION_VIEW_ID = "org.yakindu.sct.simulation.ui.declarationview"; //$NON-NLS-1$
 	private static final String LAUNCH_TYPE = "org.yakindu.sct.simulation.core.launch.statechart";
 
 	public SCTPerspectiveManager() {

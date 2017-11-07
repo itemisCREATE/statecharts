@@ -84,7 +84,7 @@ import com.google.common.collect.Sets;
 @SuppressWarnings("restriction")
 public class SimulationView extends AbstractDebugTargetView implements ITypeSystemProvider {
 
-	public static final String ID = "org.yakindu.sct.simulation.ui.simulationview"; //$NON-NLS-1$
+	public static final String ID = "org.yakindu.sct.simulation.ui.declarationview"; //$NON-NLS-1$
 
 	private TreeViewer viewer;
 	private ViewerRefresher viewerRefresher;
