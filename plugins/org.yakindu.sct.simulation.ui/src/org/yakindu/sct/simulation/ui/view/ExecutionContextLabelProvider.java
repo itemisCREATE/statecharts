@@ -153,7 +153,7 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 	 * @author robert rudi - Initial contribution and API
 	 * 
 	 */
-	protected final class TreeEditorDisposeListener implements DisposeListener {
+	protected class TreeEditorDisposeListener implements DisposeListener {
 
 		private static final String LISTENER_DATA = "DISPOSELISTENER";
 		private static final String EDITOR_DATA = "EDITOR";
@@ -186,7 +186,7 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 	 * @author robert rudi - Initial contribution and API
 	 * 
 	 */
-	protected final static class NativeCellWidgetUtil {
+	protected static class NativeCellWidgetUtil {
 		protected static void addNativeCheckbox(ViewerCell cell, Object element, Object value,
 				TreeEditorDisposeListener listener) {
 
