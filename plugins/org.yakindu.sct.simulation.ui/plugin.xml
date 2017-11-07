@@ -24,7 +24,7 @@
           allowMultiple="false"
           class="org.yakindu.sct.simulation.ui.view.SimulationView"
           icon="icons/Statechart-Launcher-16.png"
-          id="org.yakindu.sct.simulation.ui.simulationview"
+          id="org.yakindu.sct.simulation.ui.declarationview"
           name="Simulation"
           restorable="true">
     </view>
