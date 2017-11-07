@@ -139,8 +139,10 @@ public class DefinitionSectionDecorationProvider extends AbstractDecoratorProvid
 						DiagramPartitioningUtil.INLINE_DEFINITION_SECTION_STYLE);
 				TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(diagramReference);
 				if (inlineStyle == null) {
+					inlineStyle = DiagramPartitioningUtil.createInlineDefinitionSectionStyle();
+					inlineStyle.setBooleanValue(true);
 					// add boolean value view style if no one exists
-					AddCommand command = addBooleanValueStyle(editPart, domain);
+					AddCommand command = addBooleanValueStyle(editPart, inlineStyle, domain);
 					domain.getCommandStack().execute(command);
 				}
 				// set the new value for the boolean value style
@@ -168,9 +170,7 @@ public class DefinitionSectionDecorationProvider extends AbstractDecoratorProvid
 			return command;
 		}
 
-		protected AddCommand addBooleanValueStyle(EditPart editPart, TransactionalEditingDomain domain) {
-			BooleanValueStyle inlineStyle = DiagramPartitioningUtil.createInlineDefinitionSectionStyle();
-			inlineStyle.setBooleanValue(true);
+		protected AddCommand addBooleanValueStyle(EditPart editPart, BooleanValueStyle inlineStyle, TransactionalEditingDomain domain) {
 			AddCommand command = new AddCommand(domain, getDiagramReference(editPart),
 					NotationPackage.Literals.VIEW__STYLES, inlineStyle);
 			return command;
