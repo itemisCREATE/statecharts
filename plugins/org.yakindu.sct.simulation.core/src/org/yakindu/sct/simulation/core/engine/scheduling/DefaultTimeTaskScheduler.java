@@ -41,7 +41,6 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 	protected boolean suspended;
 	protected boolean terminated;
 
-
 	public DefaultTimeTaskScheduler() {
 		tasks = new PriorityQueue<TimeTask>();
 		lock = new ReentrantLock();
@@ -197,7 +196,6 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 	public void resume() {
 		suspended = false;
 		start();
-
 	}
 
 	@Override

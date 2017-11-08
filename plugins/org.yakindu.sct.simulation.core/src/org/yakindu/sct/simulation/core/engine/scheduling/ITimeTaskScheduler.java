@@ -35,7 +35,7 @@ public interface ITimeTaskScheduler {
 	public void step();
 
 	public void terminate();
-	
+
 	public long getCurrentTime();
 
 	public static class TimeTask implements Runnable, Comparable<TimeTask> {
@@ -105,5 +105,4 @@ public interface ITimeTaskScheduler {
 			this.nextExecutionTime = nextExecutionTime;
 		}
 	}
-
 }

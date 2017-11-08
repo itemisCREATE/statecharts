@@ -15,7 +15,6 @@ import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.swt.widgets.Label;
 import org.yakindu.sct.model.sruntime.CompositeSlot;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.ui.SimulationActivator;
@@ -45,7 +44,7 @@ public class ExecutionContextContentProvider implements ITreeContentProvider, IP
 
 	public Object[] getElements(Object inputElement) {
 		if (inputElement == null) {
-			return new Object[] {};
+			return new Object[]{};
 		}
 		if (inputElement instanceof ExecutionContext) {
 			return ((ExecutionContext) inputElement).getSlots().toArray();

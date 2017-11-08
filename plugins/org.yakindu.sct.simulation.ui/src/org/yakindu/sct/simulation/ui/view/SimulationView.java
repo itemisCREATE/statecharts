@@ -10,22 +10,36 @@
  */
 package org.yakindu.sct.simulation.ui.view;
 
+
+import java.util.HashSet;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.commons.lang.time.DurationFormatUtils;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
+import org.eclipse.debug.core.DebugPlugin;
+import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IStep;
 import org.eclipse.debug.internal.ui.commands.actions.ResumeCommandAction;
 import org.eclipse.debug.internal.ui.commands.actions.StepOverCommandAction;
 import org.eclipse.debug.internal.ui.commands.actions.SuspendCommandAction;
 import org.eclipse.debug.internal.ui.commands.actions.TerminateCommandAction;
-import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.debug.ui.contexts.DebugContextEvent;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerCell;
@@ -40,6 +54,7 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
@@ -51,19 +66,25 @@ import org.yakindu.sct.model.sruntime.ExecutionEvent;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.engine.scheduling.DefaultTimeTaskScheduler;
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler;
+import org.yakindu.sct.simulation.ui.SimulationImages;
+import org.yakindu.sct.simulation.ui.model.presenter.SCTSourceDisplayDispatcher;
 import org.yakindu.sct.simulation.ui.view.actions.CollapseAllAction;
 import org.yakindu.sct.simulation.ui.view.actions.ExpandAllAction;
 import org.yakindu.sct.simulation.ui.view.actions.HideTimeEventsAction;
 import org.yakindu.sct.simulation.ui.view.editing.ScopeSlotEditingSupport.ITypeSystemProvider;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
+@SuppressWarnings("restriction")
 public class SimulationView extends AbstractDebugTargetView implements ITypeSystemProvider {
+
+	public static final String ID = "org.yakindu.sct.simulation.ui.declarationview"; //$NON-NLS-1$
 
 	private TreeViewer viewer;
 	private ViewerRefresher viewerRefresher;
@@ -72,20 +93,27 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	private RaiseEventSelectionListener selectionListener;
 	private ITypeSystem typeSystem;
 	private ITimeTaskScheduler timeScheduler;
-	private Label timeSchedulerLabel;
+	private Label timeLabel;
+	private Label timeIconLabel;
+	private ComboViewer sessionDropdown;
+	private HashSet<IDebugTarget> targets = Sets.newHashSet();
+	private static SCTSourceDisplayDispatcher sctSourceDisplayDispatcher;
 
 	public SimulationView() {
 		kit = new FormToolkit(Display.getDefault());
 		kit.setBorderStyle(SWT.BORDER);
 		font = new Font(Display.getDefault(), new FontData("Courier", 10, SWT.BOLD));
+		sctSourceDisplayDispatcher = new SCTSourceDisplayDispatcher();
 	}
 
 	@Override
 	public void dispose() {
 		selectionListener.dispose();
 		font.dispose();
-		disposeTimeSchedulerComponent();
+		sctSourceDisplayDispatcher = null;
+		disposeSessionDropDownComponent();
 		disposeViewerRefresher();
+		disposeTimeLabels();
 		super.dispose();
 	}
 
@@ -96,9 +124,20 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		}
 	}
 
-	protected void disposeTimeSchedulerComponent() {
-		if (timeSchedulerLabel != null && !timeSchedulerLabel.isDisposed()) {
-			timeSchedulerLabel.dispose();
+	protected void disposeTimeLabels() {
+		if (timeLabel != null && !timeLabel.isDisposed()) {
+			timeLabel.dispose();
+		}
+		if (timeIconLabel != null && !timeIconLabel.isDisposed()) {
+			timeIconLabel.dispose();
+		}
+	}
+
+	protected void disposeSessionDropDownComponent() {
+		if (sessionDropdown != null && sessionDropdown.getControl() != null
+				&& !sessionDropdown.getControl().isDisposed()) {
+			sessionDropdown.getControl().dispose();
+
 		}
 	}
 
@@ -106,11 +145,56 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	public void createPartControl(Composite parent) {
 		parent.setLayout(new FillLayout(SWT.VERTICAL));
 		Composite top = kit.createComposite(parent);
-		top.setLayout(new FillLayout(SWT.VERTICAL));
+		top.setLayout(new GridLayout(2, false));
+		createSessionSelectorComponent(top);
+		createTimeSchedulerComponent(top);
 		createViewer(top);
-		createTimeScheduler(top);
 		hookActions();
 		super.createPartControl(parent);
+	}
+
+	protected ComboViewer createSessionSelectorComponent(Composite top) {
+		Combo combo = new Combo(top, SWT.DROP_DOWN | SWT.READ_ONLY);
+		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		this.sessionDropdown = new ComboViewer(combo);
+		this.sessionDropdown.setContentProvider(new ArrayContentProvider());
+		this.sessionDropdown.setLabelProvider(new LabelProvider() {
+
+			@Override
+			public String getText(Object element) {
+				IDebugTarget target = ((IDebugTarget) element);
+				boolean isTerminated = target.isTerminated();
+				boolean isSuspended = target.isSuspended();
+
+				if (target.getLaunch().getDebugTarget() != null)
+					try {
+						return target.getLaunch().getDebugTarget().getName() + " ["
+								+ (isTerminated ? "terminated" : isSuspended ? "suspended" : "active") + "]";
+					} catch (DebugException e) {
+						return "unkown state";
+					}
+				else
+					return "No simulation running";
+			}
+		});
+
+		this.sessionDropdown.addPostSelectionChangedListener(new SessionSelectionChangedListener());
+
+		targets.clear();
+		for (ILaunch iLaunch : DebugPlugin.getDefault().getLaunchManager().getLaunches()) {
+			for (IDebugTarget iDebugTarget : iLaunch.getDebugTargets()) {
+				if (!iDebugTarget.isTerminated())
+					targets.add(iDebugTarget);
+			}
+		}
+		sessionDropdown.setInput(targets);
+		if (!targets.isEmpty()) {
+			IDebugTarget dt = targets.iterator().next();
+			sessionDropdown.setSelection(new StructuredSelection(dt), true);
+			activeTargetChanged(dt);
+		}
+
+		return this.sessionDropdown;
 	}
 
 	@Override
@@ -124,14 +208,18 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		return viewer;
 	}
 
-	public Label createTimeScheduler(Composite parent) {
-		Composite comp = new Composite(parent, SWT.BORDER);
-		GridLayout layout = new GridLayout();
-		comp.setLayout(layout);
-		timeSchedulerLabel = new Label(comp, SWT.NONE);
-		timeSchedulerLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, true));
-		timeSchedulerLabel.setToolTipText("Displays the duration since the simulation is running");
-		return timeSchedulerLabel;
+
+	public Label createTimeSchedulerComponent(Composite parent) {
+		Composite comp = new Composite(parent, SWT.NONE);
+		comp.setLayout(new GridLayout(2, false));
+		timeIconLabel = new Label(comp, SWT.NONE);
+		timeIconLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false));
+		timeIconLabel.setImage(SimulationImages.SIMULATION_CLOCK.image());
+		timeIconLabel.setToolTipText("Displays the duration since the simulation is running");
+		timeIconLabel.setVisible(false);
+		timeLabel = new Label(comp, SWT.NONE);
+		timeLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false));
+		return timeLabel;
 	}
 
 	protected void setViewerInput(Object input) {
@@ -141,13 +229,13 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 			if (viewerRefresher == null)
 				this.viewerRefresher = new ViewerRefresher();
 		}
-		if (input != null) {
+
+		Display.getDefault().asyncExec(() -> {
 			this.viewer.setInput(input);
 			if (this.viewerRefresher.isCancel())
 				this.viewerRefresher.cancel = false;
-
 			new Thread(viewerRefresher).start();
-		}
+		});
 
 	}
 
@@ -155,17 +243,27 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		updateActions();
 		switch (debugEvent.getKind()) {
 			case DebugEvent.TERMINATE :
-				Display.getDefault().asyncExec(new Runnable() {
-					public void run() {
-						setViewerInput(null);
-					}
-				});
+				setViewerInput(null);
 				break;
 			case DebugEvent.SUSPEND :
 				break;
 			case DebugEvent.RESUME :
 				break;
 		}
+		Display.getDefault().asyncExec(() -> {
+			if (debugEvent.getSource() != null) {
+				sessionDropdown.update(debugEvent.getSource(), null);
+				sessionDropdown.refresh();
+				targets.removeIf(dt -> dt.isTerminated());
+			}
+		});
+	}
+
+	@Override
+	public void debugContextChanged(DebugContextEvent event) {
+		super.debugContextChanged(event);
+		if (debugTarget != null)
+			this.sessionDropdown.setSelection(new StructuredSelection(debugTarget));
 	}
 
 	protected void activeTargetChanged(final IDebugTarget debugTarget) {
@@ -173,8 +271,24 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		ISimulationEngine engine = (ISimulationEngine) debugTarget.getAdapter(ISimulationEngine.class);
 		timeScheduler = (DefaultTimeTaskScheduler) engine.getTimeTaskScheduler();
 		setViewerInput(engine.getExecutionContext());
-		(new ExpandAllAction(viewer)).run();
 		updateActions();
+		updateSessionDropdownInput(debugTarget);
+	}
+
+	protected void updateSessionDropdownInput(final IDebugTarget debugTarget) {
+		Display.getDefault().asyncExec(() -> {
+			if (debugTarget != null) {
+				if (!targets.contains(debugTarget)) {
+					targets.add(debugTarget);
+					sessionDropdown.setInput(targets);
+					sessionDropdown.setSelection(new StructuredSelection(debugTarget), true);
+					sessionDropdown.refresh();
+				} else {
+					sessionDropdown.update(debugTarget, null);
+					sessionDropdown.refresh();
+				}
+			}
+		});
 	}
 
 	protected void updateActions() {
@@ -207,6 +321,21 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		IAction hideTimeEvent = new HideTimeEventsAction(false);
 		mgr.add(hideTimeEvent);
 		getViewSite().getActionBars().getToolBarManager().update(true);
+	}
+
+	/**
+	 * @author robert rudi - Initial contribution and API
+	 *
+	 */
+	protected final class SessionSelectionChangedListener implements ISelectionChangedListener {
+		@Override
+		public void selectionChanged(SelectionChangedEvent event) {
+			IStructuredSelection selection = (IStructuredSelection) event.getSelection();
+			if ((IDebugTarget) selection.getFirstElement() != null) {
+				launchChanged(((IDebugTarget) selection.getFirstElement()).getLaunch());
+				sctSourceDisplayDispatcher.displaySource(debugTarget, SimulationView.this.getSite().getPage(), true);
+			}
+		}
 	}
 
 	/**
@@ -265,7 +394,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		return typeSystem;
 	}
 
-	@SuppressWarnings("restriction")
 	protected class StepOverAction extends StepOverCommandAction implements IAction {
 		@Override
 		public void run() {
@@ -290,7 +418,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		}
 	}
 
-	@SuppressWarnings("restriction")
 	protected class TerminateAction extends TerminateCommandAction implements IAction {
 		@Override
 		public void run() {
@@ -313,7 +440,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		}
 	}
 
-	@SuppressWarnings("restriction")
 	protected class SuspendAction extends SuspendCommandAction implements IAction {
 		@Override
 		public void run() {
@@ -336,7 +462,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		}
 	}
 
-	@SuppressWarnings("restriction")
 	protected class ResumeAction extends ResumeCommandAction implements IAction {
 		@Override
 		public void run() {
@@ -366,19 +491,22 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 
 		@Override
 		public void run() {
-			while (!cancel && viewer.getInput() != null) {
+			while (!cancel) {
 				try {
 					Thread.sleep(UPDATE_INTERVAL);
-					Display.getDefault().asyncExec(new Runnable() {
-						public void run() {
-							if (viewer != null && !viewer.getControl().isDisposed()
-									&& ((ExecutionContextContentProvider) viewer.getContentProvider())
-											.isShouldUpdate()) {
-								viewer.refresh();
-							}
-							if (timeSchedulerLabel != null && !timeSchedulerLabel.isDisposed()) {
-								updateTimestamp(timeScheduler.getCurrentTime());
-							}
+					Display.getDefault().asyncExec(() -> {
+						if (viewer != null && !viewer.getControl().isDisposed()
+								&& ((ExecutionContextContentProvider) viewer.getContentProvider()).isShouldUpdate()) {
+							viewer.refresh();
+						}
+
+						if (timeLabel != null && !timeLabel.isDisposed() && timeScheduler != null && debugTarget != null
+								&& !debugTarget.isTerminated() && timeLabel != null && !timeLabel.isDisposed()) {
+							updateTimestamp(timeScheduler.getCurrentTime());
+						} else {
+							if (timeIconLabel != null && !timeIconLabel.isDisposed() && timeIconLabel.isVisible())
+								updateTimestamp(0);
+
 						}
 					});
 				} catch (InterruptedException e) {
@@ -386,11 +514,30 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 				}
 			}
 		}
-		
 		protected void updateTimestamp(long timestamp) {
-			String formatDurationHMS = DurationFormatUtils.formatDuration(timestamp, "HH:mm:ss.SSS");
-			timeSchedulerLabel.setText("Simulation time: " + formatDurationHMS);
-			timeSchedulerLabel.update();
+			String formatDurationHMS = DurationFormatUtils.formatDuration(timestamp,
+					(timestamp == 0 ? "--:--:--.---" : "HH:mm:ss.SSS"), true);
+			timeLabel.setText(formatDurationHMS);
+			String time = getReadableSimulationTime(timestamp);
+			boolean isValidTime = time != null || (time != null && !time.isEmpty()) || timestamp != 0;
+			timeIconLabel.setVisible(isValidTime);
+			if (isValidTime) {
+				timeLabel.setToolTipText("Simulation running since " + time);
+				timeLabel.getParent().getParent().layout(); // layout all time-relevant components
+			}
+		}
+
+		protected String getReadableSimulationTime(long timestamp) {
+			long days = TimeUnit.MILLISECONDS.toDays(timestamp);
+			long hours = TimeUnit.MILLISECONDS.toHours(timestamp);
+			long minutes = TimeUnit.MILLISECONDS.toMinutes(timestamp);
+			long seconds = TimeUnit.MILLISECONDS.toSeconds(timestamp);
+			return DurationFormatUtils
+					.formatDuration(timestamp,
+							(days > 0 ? "dd 'days '" : "") + (hours > 0 ? "HH 'hours '" : "")
+									+ (minutes > 0 ? "mm 'minutes '" : "") + (seconds > 0 ? "ss 'seconds '" : ""),
+							false);
+
 		}
 
 		public boolean isCancel() {
@@ -401,5 +548,4 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 			this.cancel = cancel;
 		}
 	}
-
 }
