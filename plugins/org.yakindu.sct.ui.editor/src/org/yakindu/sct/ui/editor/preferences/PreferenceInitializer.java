@@ -27,28 +27,23 @@ import org.yakindu.sct.ui.editor.DiagramActivator;
  * @author andreas muelder
  * 
  */
-public class PreferenceInitializer extends DiagramPreferenceInitializer
-		implements StatechartColorConstants {
+public class PreferenceInitializer extends DiagramPreferenceInitializer implements StatechartColorConstants {
 
 	@Override
 	public void initializeDefaultPreferences() {
 		super.initializeDefaultPreferences();
 		// Line colors
 		Color lineColor = DiagramColorConstants.darkGray;
-		PreferenceConverter.setDefault(getPreferenceStore(),
-				IPreferenceConstants.PREF_LINE_COLOR, lineColor.getRGB());
-		
-		getPreferenceStore().setDefault(IPreferenceConstants.PREF_LINE_STYLE,
-				Routing.RECTILINEAR);
+		PreferenceConverter.setDefault(getPreferenceStore(), IPreferenceConstants.PREF_LINE_COLOR, lineColor.getRGB());
+
+		getPreferenceStore().setDefault(IPreferenceConstants.PREF_LINE_STYLE, Routing.RECTILINEAR);
 
 		// rulers and grid defaults
-		getPreferenceStore().setDefault(
-				IPreferenceConstants.PREF_SNAP_TO_GEOMETRY, true);
+		getPreferenceStore().setDefault(IPreferenceConstants.PREF_SNAP_TO_GEOMETRY, true);
 
 		// set default font
 		FontData defaultFont = new FontData("Verdana", 9, SWT.NONE);
-		PreferenceConverter.setDefault(getPreferenceStore(),
-				IPreferenceConstants.PREF_DEFAULT_FONT, defaultFont);
+		PreferenceConverter.setDefault(getPreferenceStore(), IPreferenceConstants.PREF_DEFAULT_FONT, defaultFont);
 
 		// set preferences for tool palette.
 		DefaultPaletteViewerPreferences prefs = new DefaultPaletteViewerPreferences();
@@ -56,28 +51,23 @@ public class PreferenceInitializer extends DiagramPreferenceInitializer
 		prefs.setCurrentUseLargeIcons(true);
 
 		// State line and background color
-		PreferenceConverter.setDefault(getPreferenceStore(),
-				StatechartPreferenceConstants.PREF_STATE_BACKGROUND,
+		PreferenceConverter.setDefault(getPreferenceStore(), StatechartPreferenceConstants.PREF_STATE_BACKGROUND,
 				StatechartColorConstants.STATE_BG_COLOR.getRGB());
-		PreferenceConverter.setDefault(getPreferenceStore(),
-				StatechartPreferenceConstants.PREF_STATE_LINE,
+		PreferenceConverter.setDefault(getPreferenceStore(), StatechartPreferenceConstants.PREF_STATE_LINE,
 				StatechartColorConstants.STATE_LINE_COLOR.getRGB());
 
 		// Region fill color
-		PreferenceConverter.setDefault(getPreferenceStore(),
-				StatechartPreferenceConstants.PREF_REGION_BACKGROUND,
+		PreferenceConverter.setDefault(getPreferenceStore(), StatechartPreferenceConstants.PREF_REGION_BACKGROUND,
 				StatechartColorConstants.REGION_BG_COLOR.getRGB());
-		PreferenceConverter.setDefault(getPreferenceStore(),
-				StatechartPreferenceConstants.PREF_REGION_LINE,
+		PreferenceConverter.setDefault(getPreferenceStore(), StatechartPreferenceConstants.PREF_REGION_LINE,
 				StatechartColorConstants.REGION_LINE_COLOR.getRGB());
-		
-		//Transition Priority Labels
-		getPreferenceStore().setDefault(
-				StatechartPreferenceConstants.PREF_PRIORITY_LABELS, false);
-		//Live validation
-				getPreferenceStore().setDefault(
-						StatechartPreferenceConstants.PREF_LIVE_VALIDATION, true);
-		
+
+		// Transition Priority Labels
+		getPreferenceStore().setDefault(StatechartPreferenceConstants.PREF_PRIORITY_LABELS, false);
+		// Live validation
+		getPreferenceStore().setDefault(StatechartPreferenceConstants.PREF_LIVE_VALIDATION, true);
+		// Syntax coloring
+		getPreferenceStore().setDefault(StatechartPreferenceConstants.PREF_SYNTAX_COLORING, false);
 
 	}
 

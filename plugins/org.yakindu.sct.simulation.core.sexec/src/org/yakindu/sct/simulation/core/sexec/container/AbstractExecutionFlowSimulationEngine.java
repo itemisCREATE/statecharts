@@ -24,9 +24,9 @@ import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.core.SimulationCoreActivator;
 import org.yakindu.sct.simulation.core.engine.IExecutionControl;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
+import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler;
 import org.yakindu.sct.simulation.core.launch.AbstractSCTLaunchConfigurationDelegate.InitializationException;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
-import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler;
 
 import com.google.inject.Inject;
 
@@ -160,6 +160,11 @@ public class AbstractExecutionFlowSimulationEngine extends AbstractSimulationEng
 
 	public Statechart getStatechart() {
 		return statechart;
+	}
+	
+	@Override
+	public ITimeTaskScheduler getTimeTaskScheduler() {
+		return this.timeTaskScheduler;
 	}
 
 }

@@ -23,13 +23,12 @@ import org.eclipse.gef.requests.SelectionRequest;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
-import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.ShapeStyle;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
 import org.yakindu.base.xtext.utils.gmf.directedit.DoubleClickDirectEditDragTracker.IDoubleClickCallback;
-import org.yakindu.base.xtext.utils.gmf.figures.HighlightingWrappingLabel;
+import org.yakindu.base.xtext.utils.gmf.figures.SyntaxColoringLabel;
 import org.yakindu.base.xtext.utils.jface.viewers.XtextStyledTextCellEditor;
 
 /**
@@ -43,6 +42,8 @@ import org.yakindu.base.xtext.utils.jface.viewers.XtextStyledTextCellEditor;
 public abstract class XtextLabelEditPart extends CompartmentEditPart implements IXtextAwareEditPart {
 
 	protected abstract DirectEditManager createDirectEditManager();
+	
+	protected abstract void setLabelStyles();
 
 	protected abstract void setContext(Resource resource);
 
@@ -52,15 +53,15 @@ public abstract class XtextLabelEditPart extends CompartmentEditPart implements 
 
 	@Override
 	protected IFigure createFigure() {
-		final WrappingLabel label = new HighlightingWrappingLabel();
+		final SyntaxColoringLabel label = new SyntaxColoringLabel();
 		label.setTextWrap(true);
 		label.setAlignment(PositionConstants.LEFT | PositionConstants.TOP);
 		return label;
 	}
 
 	@Override
-	public WrappingLabel getFigure() {
-		return (WrappingLabel) super.getFigure();
+	public SyntaxColoringLabel getFigure() {
+		return (SyntaxColoringLabel) super.getFigure();
 	}
 
 	public void setLabelText(final String text) {
@@ -69,6 +70,7 @@ public abstract class XtextLabelEditPart extends CompartmentEditPart implements 
 
 	@Override
 	protected void refreshVisuals() {
+		setLabelStyles();
 		super.refreshVisuals();
 		refreshFont();
 		refreshFontColor();
@@ -103,6 +105,8 @@ public abstract class XtextLabelEditPart extends CompartmentEditPart implements 
 		if (request instanceof SelectionRequest && ((SelectionRequest) request).getLastButtonPressed() == 3)
 			return null;
 		IDoubleClickCallback callback = new IDoubleClickCallback() {
+
+			@Override
 			public void handleDoubleClick(int btn) {
 				performDirectEditRequest(request);
 			}

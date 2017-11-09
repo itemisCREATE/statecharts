@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU SText UI
 Bundle-Vendor: statecharts.org
-Bundle-Version: 3.1.0.qualifier
+Bundle-Version: 3.1.1.qualifier
 Bundle-SymbolicName: org.yakindu.sct.model.stext.ui;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.yakindu.sct.model.stext;visibility:=reexport,
@@ -51,5 +51,6 @@ Export-Package: org.yakindu.sct.model.stext.ui;
  org.yakindu.sct.model.stext.ui.internal;uses:="org.eclipse.ui.plugin,org.osgi.framework,com.google.inject",
  org.yakindu.sct.model.stext.ui.labeling;uses:="org.eclipse.emf.edit.ui.provider,org.eclipse.xtext.ui.label",
  org.yakindu.sct.model.stext.ui.outline;uses:="org.eclipse.xtext.ui.editor.outline.impl",
- org.yakindu.sct.model.stext.ui.quickfix;uses:="org.eclipse.xtext.ui.editor.quickfix"
+ org.yakindu.sct.model.stext.ui.quickfix;uses:="org.eclipse.xtext.ui.editor.quickfix",
+ org.yakindu.sct.model.stext.ui.tasks
 Bundle-Activator: org.yakindu.sct.model.stext.ui.internal.STextActivator

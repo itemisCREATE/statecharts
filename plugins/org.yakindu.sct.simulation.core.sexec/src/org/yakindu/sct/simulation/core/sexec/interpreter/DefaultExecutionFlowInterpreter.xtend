@@ -44,8 +44,8 @@ import org.yakindu.sct.model.sruntime.EventDirection
 import org.yakindu.sct.model.sruntime.ExecutionContext
 import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
-import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler
-import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler.TimeTask
+import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler
+import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.TimeTask
 import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
 
 /**

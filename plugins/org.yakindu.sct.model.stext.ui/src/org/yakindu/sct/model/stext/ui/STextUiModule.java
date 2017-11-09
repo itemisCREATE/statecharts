@@ -32,6 +32,8 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.ui.shared.Access;
+import org.eclipse.xtext.ui.tasks.TaskMarkerCreator;
+import org.eclipse.xtext.ui.tasks.TaskMarkerTypeProvider;
 import org.yakindu.base.utils.jface.help.CrossRefObjectTextHover;
 import org.yakindu.base.xtext.utils.jface.viewers.ParallelReadXtextDocument;
 import org.yakindu.sct.model.stext.ui.contentassist.AsyncContentAssistContextFactory;
@@ -41,6 +43,8 @@ import org.yakindu.sct.model.stext.ui.help.CustomCSSHelpHoverProvider;
 import org.yakindu.sct.model.stext.ui.help.STextUserHelpDocumentationProvider;
 import org.yakindu.sct.model.stext.ui.highlighting.SCTHighlightingConfiguration;
 import org.yakindu.sct.model.stext.ui.hyperlink.PackageImportHyperlinkHelper;
+import org.yakindu.sct.model.stext.ui.tasks.SCTTaskMarkerCreator;
+import org.yakindu.sct.model.stext.ui.tasks.SCTTaskMarkerTypeProvider;
 import org.yakindu.sct.model.stext.ui.tasks.STextTaskFinder;
 
 import com.google.inject.Binder;
@@ -84,6 +88,8 @@ public class STextUiModule extends org.yakindu.sct.model.stext.ui.AbstractSTextU
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named("stylesheet")).toInstance("/StextHoverStyleSheet.css");
 		binder.bind(XtextDocument.class).to(ParallelReadXtextDocument.class);
+		binder.bind(TaskMarkerCreator.class).to(SCTTaskMarkerCreator.class);
+		binder.bind(TaskMarkerTypeProvider.class).to(SCTTaskMarkerTypeProvider.class);
 	}
 
 	public com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> provideIAllContainersState() {

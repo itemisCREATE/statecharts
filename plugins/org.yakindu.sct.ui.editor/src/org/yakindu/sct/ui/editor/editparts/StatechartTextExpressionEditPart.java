@@ -16,9 +16,9 @@ import static org.eclipse.gef.EditPolicy.SELECTION_FEEDBACK_ROLE;
 import static org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles.CONNECTION_HANDLES_ROLE;
 
 import org.eclipse.gef.editpolicies.RootComponentEditPolicy;
-import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.SWT;
+import org.yakindu.base.xtext.utils.gmf.figures.SyntaxColoringLabel;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.policies.ContextSensitiveHelpPolicy;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
@@ -35,7 +35,7 @@ public class StatechartTextExpressionEditPart extends SpecificationElementEditPa
 	}
 
 	@Override
-	public WrappingLabel getFigure() {
+	public SyntaxColoringLabel getFigure() {
 		return super.getFigure();
 	}
 

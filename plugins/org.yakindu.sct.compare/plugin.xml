@@ -12,6 +12,8 @@
          point="org.eclipse.emf.compare.rcp.matchEngine">
       <engineFactory
             class="org.yakindu.sct.compare.match.SCTMatchEngineFactory"
+            description="This match engine ignores transient elements in statecharts."
+            label="Statechart Match Engine"
             ranking="11">
       </engineFactory>
    </extension>
@@ -19,6 +21,8 @@
          point="org.eclipse.emf.compare.rcp.postProcessor">
       <processor
             class="org.yakindu.sct.compare.postprocessor.EdgeChangePostProcessor"
+            description="This post processor improves difference results for edge changes between statechart states."
+            label="Statechart Edge Change Post Processor"
             ordinal="100">
          <nsURI
                value="http://www.eclipse.org/gmf/runtime/\d.\d.\d/notation">
@@ -29,8 +33,10 @@
          point="org.eclipse.emf.compare.edit.adapterFactory">
       <factory
             class="org.yakindu.sct.compare.labelprovider.SCTCompareAdapterFactory"
-              supportedTypes="org.eclipse.emf.edit.provider.IItemLabelProvider"
+            description="This label provider removes line breaks from statechart item labels."
+            label="Statechart Item Label Provider"
             ranking="11"
+            supportedTypes="org.eclipse.emf.edit.provider.IItemLabelProvider"
             uri="http://www.eclipse.org/emf/compare">
       </factory>
 </extension>

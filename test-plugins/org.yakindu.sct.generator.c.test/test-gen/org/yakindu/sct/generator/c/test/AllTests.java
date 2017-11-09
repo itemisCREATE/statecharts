@@ -36,6 +36,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	ExitStateTest.class,
 	FeatureCallsTest.class,
 	FinalStateTest.class,
+	FloatModuloTest.class,
 	GuardTest.class,
 	GuardedEntryTest.class,
 	GuardedExitTest.class,

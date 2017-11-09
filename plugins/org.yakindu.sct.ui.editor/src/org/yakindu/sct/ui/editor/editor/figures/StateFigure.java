@@ -26,7 +26,7 @@ import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.MapModeUtil;
 import org.eclipse.swt.graphics.Color;
-import org.yakindu.base.xtext.utils.gmf.figures.HighlightingWrappingLabel;
+import org.yakindu.base.xtext.utils.gmf.figures.SyntaxColoringLabel;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
 
 /**
@@ -58,7 +58,7 @@ public class StateFigure extends RoundedRectangle {
 
 	protected void createContents() {
 		// Name Label
-		nameFigure = new HighlightingWrappingLabel();
+		nameFigure = new SyntaxColoringLabel();
 		nameFigure.setAlignment(PositionConstants.CENTER);
 		this.add(nameFigure, GridDataFactory.fillDefaults().grab(true, false)
 				.getData());

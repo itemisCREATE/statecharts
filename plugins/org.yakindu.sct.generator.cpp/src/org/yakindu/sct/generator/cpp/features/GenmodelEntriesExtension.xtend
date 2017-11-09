@@ -10,9 +10,9 @@
 */
 package org.yakindu.sct.generator.cpp.features
 
-import org.yakindu.sct.generator.c.GenmodelEntries
-import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.cpp.features.CPPFeatureConstants.Visibility
+import org.yakindu.sct.model.sgen.GeneratorEntry
 
 class GenmodelEntriesExtension extends GenmodelEntries {
 

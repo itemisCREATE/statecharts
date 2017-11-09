@@ -27,6 +27,7 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
+import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 
 class StatemachineImplementation implements IContentTemplate {
 	
@@ -39,6 +40,7 @@ class StatemachineImplementation implements IContentTemplate {
 	@Inject protected extension CppExpressionsGenerator
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension EventCode
+	@Inject protected extension ExpressionsChecker
 	
 	protected GeneratorEntry entry
 	
@@ -49,6 +51,7 @@ class StatemachineImplementation implements IContentTemplate {
 		
 		#include "«module.h»"
 		#include <string.h>
+		«IF modOnReal»#include <math.h>«ENDIF»
 		
 		/*! \file Implementation of the state machine '«name»'
 		*/

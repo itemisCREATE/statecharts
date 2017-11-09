@@ -17,7 +17,7 @@ import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
-import org.yakindu.base.xtext.utils.gmf.figures.HighlightingWrappingLabel;
+import org.yakindu.base.xtext.utils.gmf.figures.SyntaxColoringLabel;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
 
 /**
@@ -46,7 +46,7 @@ public class StatechartTextFigure extends RectangleFigure {
 	}
 
 	private void createContents() {
-		name = new HighlightingWrappingLabel();
+		name = new SyntaxColoringLabel();
 		name.setLayoutManager(new StackLayout());
 		GridData data = GridDataFactory.fillDefaults()
 				.align(GridData.CENTER, GridData.CENTER).grab(true, false)

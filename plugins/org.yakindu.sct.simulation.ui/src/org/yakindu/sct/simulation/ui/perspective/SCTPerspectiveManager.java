@@ -26,6 +26,7 @@ import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchListener;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.internal.ui.DebugUIPlugin;
+import org.eclipse.debug.internal.ui.IInternalDebugUIConstants;
 import org.eclipse.debug.internal.ui.launchConfigurations.PerspectiveManager;
 import org.eclipse.debug.internal.ui.viewers.AsynchronousSchedulingRuleFactory;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -47,8 +48,13 @@ import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 @SuppressWarnings("restriction")
 public class SCTPerspectiveManager extends PerspectiveManager implements ILaunchListener, IDebugEventSetListener {
 
-	private static final String DEBUG_VIEW_ID = "org.eclipse.debug.ui.DebugView";
+	private static final String SIMULATION_VIEW_ID = "org.yakindu.sct.simulation.ui.declarationview"; //$NON-NLS-1$
 	private static final String LAUNCH_TYPE = "org.yakindu.sct.simulation.core.launch.statechart";
+
+	public SCTPerspectiveManager() {
+		DebugUIPlugin.getDefault().getPreferenceStore().setValue(IInternalDebugUIConstants.PREF_ACTIVATE_DEBUG_VIEW,
+				false);
+	}
 
 	public void launchAdded(ILaunch launch) {
 		try {
@@ -99,7 +105,7 @@ public class SCTPerspectiveManager extends PerspectiveManager implements ILaunch
 				// Force the debug view to open
 				if (window != null) {
 					try {
-						window.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(DEBUG_VIEW_ID);
+						window.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(SIMULATION_VIEW_ID);
 					} catch (PartInitException e) {
 						e.printStackTrace();
 					}

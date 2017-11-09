@@ -12,6 +12,8 @@
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
+import org.yakindu.base.expressions.expressions.AssignmentExpression
+import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.Expression
@@ -20,7 +22,9 @@ import org.yakindu.base.expressions.expressions.LogicalAndExpression
 import org.yakindu.base.expressions.expressions.LogicalNotExpression
 import org.yakindu.base.expressions.expressions.LogicalOrExpression
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
+import org.yakindu.base.expressions.expressions.MultiplicativeOperator
 import org.yakindu.base.expressions.expressions.NullLiteral
+import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
@@ -28,6 +32,8 @@ import org.yakindu.base.types.Property
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.generator.c.extensions.Naming
+import org.yakindu.sct.generator.c.extensions.Navigation
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
@@ -83,6 +89,21 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		(strcmp(«leftOperand.code», «rightOperand.code») «operator.literal» 0)
 	«ELSE»«leftOperand.code» «operator.literal» «rightOperand.code»«ENDIF»'''
 
+	override dispatch CharSequence code(AssignmentExpression it) {
+		if (it.operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal(it)) {
+			'''«varRef.code» = fmod(«varRef.code»,«expression.code»)'''
+		} else
+			'''«varRef.code» «operator.literal» «expression.code»'''
+	}
+
+	def dispatch CharSequence code(NumericalMultiplyDivideExpression expression) {
+		if (expression.operator == MultiplicativeOperator.MOD && haveCommonTypeReal(expression)) {
+			'''fmod(«expression.leftOperand.code.toString.trim»,«expression.rightOperand.code»)'''
+		} else {
+			super._code(expression);
+		}
+	}
+
 	/* Feature call */
 	def dispatch CharSequence code(FeatureCall it) {
 		it.code(it.definition)
@@ -117,5 +138,11 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch CharSequence sc_boolean_code(LogicalNotExpression it) '''(«it.code») ? bool_true : bool_false'''
 
 	def dispatch CharSequence sc_boolean_code(LogicalRelationExpression it) '''(«it.code») ? bool_true : bool_false'''
+
+	def boolean haveCommonTypeReal(Expression expression) {
+		if(isSame(getCommonType((infer(expression).getType), getType(ITypeSystem.INTEGER)),
+			getType(ITypeSystem.INTEGER))) return false
+		return true
+	}
 
 }

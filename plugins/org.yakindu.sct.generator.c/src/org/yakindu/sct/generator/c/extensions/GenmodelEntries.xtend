@@ -7,7 +7,7 @@
   Contributors:
   	Markus Muehlbrandt - Initial contribution and API
  */
-package org.yakindu.sct.generator.c
+package org.yakindu.sct.generator.c.extensions
 
 import org.yakindu.sct.generator.c.features.ICFeatureConstants
 import org.yakindu.sct.model.sgen.FeatureParameterValue

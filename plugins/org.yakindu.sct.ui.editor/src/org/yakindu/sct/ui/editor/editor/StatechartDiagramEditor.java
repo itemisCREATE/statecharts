@@ -80,6 +80,8 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IMemento;
@@ -117,6 +119,7 @@ import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 import org.yakindu.sct.ui.editor.validation.IValidationIssueStore;
 import org.yakindu.sct.ui.editor.validation.LiveValidationListener;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Injector;
 import com.google.inject.Key;
 
@@ -209,13 +212,44 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	}
 
 	protected void registerValidationListener() {
-		issueStore = getEditorInjector().getInstance(IValidationIssueStore.class);
-		issueStore.connect(getDiagram().eResource());
+		issueStore = getIssueStore();
 		validationListener = getEditorInjector().getInstance(LiveValidationListener.class);
 		validationListener.setResource(getDiagram().eResource());
 		validationListener.setValidationIssueProcessor(issueStore);
 		getEditingDomain().addResourceSetListener(validationListener);
 		validationListener.scheduleValidation();
+	}
+
+	protected IValidationIssueStore getIssueStore() {
+		Optional<IEditorPart> editorWithSameResource = getEditorWithSameResource();
+		if (editorWithSameResource.isPresent()) {
+			IValidationIssueStore sharedStore = editorWithSameResource.get()
+					.getAdapter(IValidationIssueStore.class);
+			return sharedStore;
+		} else {
+			IValidationIssueStore newStore = getEditorInjector().getInstance(IValidationIssueStore.class);
+			newStore.connect(getDiagram().eResource());
+			return newStore;
+		}
+	}
+
+	protected Optional<IEditorPart> getEditorWithSameResource() {
+		ArrayList<IEditorReference> currentEditors = Lists.newArrayList(
+				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getEditorReferences());
+
+		Optional<IEditorPart> editorWithSameResource = currentEditors.stream().filter(e -> {
+			try {
+				IEditorInput otherInput = e.getEditorInput();
+				IEditorInput thisInput = this.getEditorInput();
+
+				return ID.equals(e.getId()) && !otherInput.equals(thisInput) && ((IFileEditorInput) otherInput)
+						.getFile().getLocationURI().equals(((IFileEditorInput) thisInput).getFile().getLocationURI());
+			} catch (PartInitException e1) {
+				e1.printStackTrace();
+				return false;
+			}
+		}).map(e -> e.getEditor(false)).findFirst();
+		return editorWithSameResource;
 	}
 
 	protected Injector getEditorInjector() {
@@ -381,8 +415,9 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		if (validationListener != null) {
 			validationListener.dispose();
 		}
-		if (issueStore != null)
+		if (issueStore != null && !getEditorWithSameResource().isPresent()) {
 			issueStore.disconnect(getDiagram().eResource());
+		}
 		getEditingDomain().removeResourceSetListener(validationListener);
 		getEditingDomain().removeResourceSetListener(domainAdapter);
 		if (domainAdapter != null)

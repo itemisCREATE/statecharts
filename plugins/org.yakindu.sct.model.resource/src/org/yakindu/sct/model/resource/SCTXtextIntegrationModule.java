@@ -20,6 +20,8 @@ import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
 import org.eclipse.xtext.ui.markers.IMarkerContributor;
 import org.eclipse.xtext.ui.tasks.TaskMarkerContributor;
+import org.eclipse.xtext.ui.tasks.TaskMarkerCreator;
+import org.eclipse.xtext.ui.tasks.TaskMarkerTypeProvider;
 import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -30,6 +32,8 @@ import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerTypeProvider;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
 import org.yakindu.sct.model.stext.resource.SCTResourceDescriptionStrategy;
 import org.yakindu.sct.model.stext.resource.SCTResourceValidatorImpl;
+import org.yakindu.sct.model.stext.ui.tasks.SCTTaskMarkerCreator;
+import org.yakindu.sct.model.stext.ui.tasks.SCTTaskMarkerTypeProvider;
 import org.yakindu.sct.ui.editor.editor.SCTFileEditorOpener;
 
 import com.google.inject.Binder;
@@ -58,5 +62,7 @@ public class SCTXtextIntegrationModule implements Module {
 		
 		binder.bind(IMarkerContributor.class).to(TaskMarkerContributor.class);
 		binder.bind(ITaskFinder.class).to(DomainSpecificTaskFinder.class);
+		binder.bind(TaskMarkerCreator.class).to(SCTTaskMarkerCreator.class);
+		binder.bind(TaskMarkerTypeProvider.class).to(SCTTaskMarkerTypeProvider.class);
 	}
 }
