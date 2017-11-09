@@ -134,17 +134,18 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	public void createPartControl(Composite parent) {
 		GridLayoutFactory.fillDefaults().spacing(0, 0).applyTo(parent);
 		createBreadcrumbViewer(parent);
-
 		sash = (SashForm) createParentSash(parent);
 		createTextEditor(sash);
 		super.createPartControl(sash);
-		toggleDefinitionSection();
-		restoreSashWidths(sash, memento);
 	}
 
 	public void toggleDefinitionSection() {
-		sash.setMaximizedControl(!isDefinitionSectionInlined() ? null : sash.getChildren()[MAXIMIZED_CONTROL_INDEX]);
+		if (getContextObject() instanceof Statechart)
+			sash.setMaximizedControl(
+					!isDefinitionSectionInlined() ? null : sash.getChildren()[MAXIMIZED_CONTROL_INDEX]);
 	}
+
+	protected abstract EObject getContextObject();
 
 	public void restoreSashWidths(SashForm sash, IMemento memento) {
 		if (memento == null) {
