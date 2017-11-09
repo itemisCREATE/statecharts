@@ -514,8 +514,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (e.stateMask == SWT.CTRL && e.keyCode == 'a') { // selectAll action workaround
-					getDiagramGraphicalViewer().getSelectionManager().deselectAll();
+				if (e.stateMask == SWT.CTRL && e.keyCode == 'a') { 
 					textControl.selectAll();
 				}
 			}
@@ -523,17 +522,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			@Override
 			public void keyPressed(KeyEvent e) {
 			}
-		});
-		textControl.addFocusListener(new FocusListener() {
-
-			@Override
-			public void focusGained(FocusEvent e) {
-
-			}
-			@Override
-			public void focusLost(FocusEvent e) {
-			}
-
 		});
 		return textControl;
 	}
