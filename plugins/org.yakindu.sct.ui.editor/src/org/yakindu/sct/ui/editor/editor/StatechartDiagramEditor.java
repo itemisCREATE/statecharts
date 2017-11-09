@@ -407,15 +407,12 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			resizeListener = null;
 		}
 		if (imageLabelMouseListener != null) {
-			imageLabelMouseListener.dispose();
 			imageLabelMouseListener = null;
 		}
 		if (imageLabelMouseTrackListener != null) {
-			imageLabelMouseTrackListener.dispose();
 			imageLabelMouseTrackListener = null;
 		}
 		if (imageLabelPaintListener != null) {
-			imageLabelPaintListener.dispose();
 			imageLabelPaintListener = null;
 		}
 	}
@@ -514,7 +511,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (e.stateMask == SWT.CTRL && e.keyCode == 'a') { 
+				if (e.stateMask == SWT.CTRL && e.keyCode == 'a') {
 					textControl.selectAll();
 				}
 			}
@@ -544,9 +541,12 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		statechartImageLabel.setEnabled(getContextObject() instanceof Statechart);
 		labelComposite.setToolTipText(getTooltipText());
 		GridDataFactory.fillDefaults().applyTo(statechartImageLabel);
-		imageLabelMouseListener = new ImageLabelMouseListener(statechartImageLabel);
+		imageLabelMouseListener = new ImageLabelMouseListener();
 		imageLabelMouseTrackListener = new ImageLabelMouseTrackListener(statechartImageLabel);
 		imageLabelPaintListener = new ImageLabelPaintListener(statechartImageLabel);
+		statechartImageLabel.addMouseListener(imageLabelMouseListener);
+		statechartImageLabel.addMouseTrackListener(imageLabelMouseTrackListener);
+		statechartImageLabel.addPaintListener(imageLabelPaintListener);
 	}
 
 	protected String getTooltipText() {
@@ -644,12 +644,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	}
 
 	protected class ImageLabelMouseListener extends MouseAdapter {
-		private Label statechartImageLabel;
 
-		public ImageLabelMouseListener(Label statechartImageLabel) {
-			this.statechartImageLabel = statechartImageLabel;
-			this.statechartImageLabel.addMouseListener(this);
-		}
 		@Override
 		public void mouseUp(MouseEvent e) {
 			TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(getDiagram());
@@ -667,16 +662,12 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			refreshDiagramEditPartChildren();
 		}
 
-		public void dispose() {
-			this.statechartImageLabel.removeMouseListener(this);
-		}
 	}
 
 	protected class ImageLabelMouseTrackListener extends MouseTrackAdapter {
 		private final Label statechartImageLabel;
 		protected ImageLabelMouseTrackListener(Label statechartImageLabel) {
 			this.statechartImageLabel = statechartImageLabel;
-			this.statechartImageLabel.addMouseTrackListener(this);
 		}
 		@Override
 		public void mouseEnter(MouseEvent e) {
@@ -690,9 +681,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			statechartImageLabel.redraw();
 		}
 
-		public void dispose() {
-			this.statechartImageLabel.removeMouseTrackListener(this);
-		}
 	}
 
 	protected class ImageLabelPaintListener implements PaintListener {
@@ -700,7 +688,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 		protected ImageLabelPaintListener(Label statechartImageLabel) {
 			this.statechartImageLabel = statechartImageLabel;
-			this.statechartImageLabel.addPaintListener(this);
 		}
 
 		@Override
@@ -718,9 +705,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			gc.drawRectangle(0, 0, rect.width, rect.height);
 		}
 
-		public void dispose() {
-			this.statechartImageLabel.removePaintListener(this);
-		}
 	}
 
 	/**
