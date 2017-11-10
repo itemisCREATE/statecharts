@@ -82,8 +82,9 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 			IPersistableEditor,
 			IPersistableElement {
 
-	protected static final String FIRST_SASH_CONTROL = "FIRST";
-	protected static final String SECOND_SASH_CONTROL = "SECOND";
+	protected static final String IS_DEFINITION_SECTION_EXPANDED = ".IS_DEFINITION_SECTION_EXPANDED";
+	protected static final String FIRST_SASH_CONTROL_WEIGHT = "FIRST_SASH_CONTROL_WEIGHT";
+	protected static final String SECOND_SASH_CONTROL_WEIGHT = "SECOND_SASH_CONTROL_WEIGHT";
 	protected static final int[] DEFAULT_WEIGHTS = new int[]{2, 10};
 	protected static final int MAXIMIZED_CONTROL_INDEX = 1;
 
@@ -150,9 +151,10 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	public void restoreSashWidths(SashForm sash, IMemento memento) {
 		if (memento == null) {
 			setDefaultSashWeights(sash);
-			memento = XMLMemento.createWriteRoot(getEditorInput().getPersistable().getFactoryId());
-			memento.putInteger(FIRST_SASH_CONTROL, DEFAULT_WEIGHTS[0]);
-			memento.putInteger(SECOND_SASH_CONTROL, DEFAULT_WEIGHTS[1]);
+			memento = XMLMemento.createWriteRoot(getFactoryId());
+			memento.putInteger(FIRST_SASH_CONTROL_WEIGHT, DEFAULT_WEIGHTS[0]);
+			memento.putInteger(SECOND_SASH_CONTROL_WEIGHT, DEFAULT_WEIGHTS[1]);
+			memento.putBoolean(getTitle() + IS_DEFINITION_SECTION_EXPANDED, true);
 			setMemento(memento);
 		} else {
 			restoreState(memento);

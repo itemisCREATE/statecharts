@@ -136,15 +136,20 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
 
-	private static final String ROTATED_LABEL_TEXT = "Definition section";
-	private static final String CANNOT_INLINE_SECTION_TOOLTIP = "Cannot be inlined for subdiagrams";
-	private static final String INLINE_SECTION_TOOLTIP = "Inline statechart definition section";
-	private static final int TEXT_CONTROL_HORIZONTAL_MARGIN = 10;
-	private static final int INITIAL_PALETTE_SIZE = 175;
-	private static final int[] MIN_CONTROL_SIZE = {11, 21};
-	private static final int BORDERWIDTH = 2;
-	private static boolean imageLabelHasFocus = false;
-	private int[] previousWidths = DEFAULT_WEIGHTS;
+	protected static final String ROTATED_LABEL_TEXT = "Definition section";
+	protected static final String CANNOT_INLINE_SECTION_TOOLTIP = "Cannot be inlined for subdiagrams";
+	protected static final String INLINE_SECTION_TOOLTIP = "Inline statechart definition section";
+	protected static final String EXPAND_TOOLTIP = "Show statechart definintion section";
+	protected static final String COLLAPSE_TOOLTIP = "Hide statechart definintion section";
+	protected final Image EXPAND_IMAGE = StatechartImages.EXPAND.image();
+	protected final Image COLLAPSE_IMAGE = StatechartImages.COLLAPSE.image();
+
+	protected static final int TEXT_CONTROL_HORIZONTAL_MARGIN = 10;
+	protected static final int INITIAL_PALETTE_SIZE = 175;
+	protected static final int[] MIN_CONTROL_SIZE = {11, 21};
+	protected static final int BORDERWIDTH = 2;
+	protected static boolean imageLabelHasFocus = false;
+	protected int[] previousWidths = DEFAULT_WEIGHTS;
 
 	private KeyHandler keyHandler;
 	private DirtyStateListener domainAdapter;
@@ -152,12 +157,14 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	private IValidationIssueStore issueStore;
 	private SwitchListener switchListener;
 	private ResizeListener resizeListener;
-	private StyledText xtextControl;
-	private boolean isExpandedDefinitionSection = true;
+	private boolean isDefinitionSectionExpanded = true;
 
 	private ImageLabelMouseListener imageLabelMouseListener;
 	private ImageLabelMouseTrackListener imageLabelMouseTrackListener;
 	private ImageLabelPaintListener imageLabelPaintListener;
+
+	private StyledText xtextControl;
+	private Button switchControl;
 
 	public StatechartDiagramEditor() {
 		super(true);
@@ -226,8 +233,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	protected IValidationIssueStore getIssueStore() {
 		Optional<IEditorPart> editorWithSameResource = getEditorWithSameResource();
 		if (editorWithSameResource.isPresent()) {
-			IValidationIssueStore sharedStore = editorWithSameResource.get()
-					.getAdapter(IValidationIssueStore.class);
+			IValidationIssueStore sharedStore = editorWithSameResource.get().getAdapter(IValidationIssueStore.class);
 			return sharedStore;
 		} else {
 			IValidationIssueStore newStore = getEditorInjector().getInstance(IValidationIssueStore.class);
@@ -426,31 +432,36 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		if (domainAdapter != null)
 			domainAdapter.dispose();
 
-		disposeDefinitionSectionControlListeners();
-		if (xtextControl != null && !xtextControl.isDisposed())
-			xtextControl.dispose();
+		disposeDefinitionSectionControls();
 
 		super.dispose();
 	}
 
-	protected void disposeDefinitionSectionControlListeners() {
-		if (switchListener != null) {
-			switchListener.dispose();
-			switchListener = null;
+	protected void disposeDefinitionSectionControls() {
+		if (switchListener != null && switchControl != null && !switchControl.isDisposed())
+			switchControl.removeSelectionListener(switchListener);
+
+		if (resizeListener != null && getSash() != null && !getSash().isDisposed())
+			getSash().removeControlListener(resizeListener);
+
+		if (resizeListener != null && xtextControl != null && !xtextControl.isDisposed())
+			xtextControl.removeControlListener(resizeListener);
+
+		if (xtextControl != null && !xtextControl.isDisposed()) {
+			xtextControl.dispose();
+			xtextControl = null;
 		}
-		if (resizeListener != null) {
-			resizeListener.dispose();
-			resizeListener = null;
+
+		if (switchControl != null && !switchControl.isDisposed()) {
+			switchControl.dispose();
+			switchControl = null;
 		}
-		if (imageLabelMouseListener != null) {
-			imageLabelMouseListener = null;
-		}
-		if (imageLabelMouseTrackListener != null) {
-			imageLabelMouseTrackListener = null;
-		}
-		if (imageLabelPaintListener != null) {
-			imageLabelPaintListener = null;
-		}
+
+		switchListener = null;
+		resizeListener = null;
+		imageLabelMouseListener = null;
+		imageLabelMouseTrackListener = null;
+		imageLabelPaintListener = null;
 	}
 
 	@Override
@@ -475,24 +486,25 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		Composite definitionSection = new Composite(parent, SWT.BORDER);
 		GridLayoutFactory.fillDefaults().numColumns(2).spacing(0, 0).applyTo(definitionSection);
 
-		Button expandButton = createExpandControl(definitionSection);
+		switchControl = createExpandControl(definitionSection);
 		createDefinitionSectionLabels(definitionSection);
 		xtextControl = createXtextControl(definitionSection);
 
-		switchListener = new SwitchListener(parent, expandButton, xtextControl);
-		resizeListener = new ResizeListener(parent, definitionSection, expandButton);
+		switchListener = new SwitchListener(parent);
+		resizeListener = new ResizeListener(parent, definitionSection);
 
 		parent.addControlListener(resizeListener);
-		expandButton.addSelectionListener(switchListener);
+		switchControl.addSelectionListener(switchListener);
 		xtextControl.addControlListener(resizeListener);
 		definitionSection.addMouseListener(new org.eclipse.swt.events.MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
-				if (!isExpandedDefinitionSection) {
+				if (!isDefinitionSectionExpanded) {
 					switchListener.handleSelection();
 				}
 			}
 		});
+
 	}
 
 	/*
@@ -644,7 +656,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		Button expandButton = new Button(definitionSection, SWT.PUSH | SWT.BORDER_SOLID);
 		expandButton.setToolTipText("Hide statechart definition section");
 		expandButton.setImage(
-				isExpandedDefinitionSection ? StatechartImages.COLLAPSE.image() : StatechartImages.EXPAND.image());
+				isDefinitionSectionExpanded ? StatechartImages.COLLAPSE.image() : StatechartImages.EXPAND.image());
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.CENTER).indent(-1, 0)
 				.hint(MIN_CONTROL_SIZE[0], MIN_CONTROL_SIZE[1]).applyTo(expandButton);
 		return expandButton;
@@ -665,18 +677,28 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 					menuManager, site.getSelectionProvider());
 	}
 
-	/**
-	 * Updates the weights of the parent, which is a SashForm
-	 * 
-	 * @param parent
-	 *            The parent of the controls
-	 * @param prominentControl
-	 *            The control that should be always prominent in the SashForm, that
-	 *            is, the SashForm must not intercept the prominent control.
-	 */
-	protected void collapseSash(Composite parent, Control prominentControl) {
+	protected void collapseDefinitionSection(Composite parent) {
 		int width = parent.getBounds().width;
-		((SashForm) parent).setWeights(new int[]{prominentControl.getBounds().width + BORDERWIDTH, width});
+		((SashForm) parent).setWeights(new int[]{switchControl.getBounds().width + BORDERWIDTH, width});
+		updateSwitchControl(EXPAND_TOOLTIP, EXPAND_IMAGE);
+	}
+
+	protected void expandDefinitionSection(Composite parent) {
+		((SashForm) parent).setWeights(previousWidths);
+		updateSwitchControl(COLLAPSE_TOOLTIP, COLLAPSE_IMAGE);
+	}
+
+	/**
+	 * Updates the tooltip text and the image for the prominent switchControl.
+	 * 
+	 * @param tooltipText
+	 *            The tooltip text for the switchControl
+	 * @param image
+	 *            The image for the controls
+	 */
+	protected void updateSwitchControl(String tooltipText, Image image) {
+		switchControl.setToolTipText(tooltipText);
+		switchControl.setImage(image);
 	}
 
 	protected class ImageLabelMouseListener extends MouseAdapter {
@@ -751,12 +773,10 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 		private final Composite parent;
 		private final Composite definitionSection;
-		private final Control control;
 
-		protected ResizeListener(Composite parent, Composite definitionSection, Control control) {
+		protected ResizeListener(Composite parent, Composite definitionSection) {
 			this.parent = parent;
 			this.definitionSection = definitionSection;
-			this.control = control;
 		}
 
 		@Override
@@ -770,22 +790,13 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		}
 
 		protected void handleControlChanged() {
-			if (!isExpandedDefinitionSection) {
-				if (definitionSection.getBounds().width != control.getBounds().width) {
-					collapseSash(parent, control);
-				}
-			} else {
+			if (isDefinitionSectionExpanded) {
 				previousWidths = ((SashForm) parent).getWeights();
+			} else {
+				if (definitionSection.getBounds().width != switchControl.getBounds().width) {
+					collapseDefinitionSection(parent);
+				}
 			}
-		}
-
-		protected void dispose() {
-			if (this.parent != null && !this.parent.isDisposed())
-				this.parent.dispose();
-			if (this.definitionSection != null && !this.definitionSection.isDisposed())
-				this.definitionSection.dispose();
-			if (this.control != null && !this.control.isDisposed())
-				this.control.dispose();
 		}
 	}
 
@@ -796,19 +807,9 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	protected class SwitchListener extends SelectionAdapter {
 
 		protected final Composite parent;
-		protected final Control control;
-		protected final StyledText textControl;
 
-		protected static final String SHOW_TOOLTIP = "Show ";
-		protected static final String HIDE_TOOLTIP = "Hide ";
-		protected static final String STATECHART_SPECIFICATION_SECTION_TOOLTIP_TEXT = "statechart definintion section";
-		protected final Image EXPAND_IMAGE = StatechartImages.EXPAND.image();
-		protected final Image COLLAPSE_IMAGE = StatechartImages.COLLAPSE.image();
-
-		protected SwitchListener(Composite parent, Control control, StyledText textControl) {
+		protected SwitchListener(Composite parent) {
 			this.parent = parent;
-			this.control = control;
-			this.textControl = textControl;
 		}
 
 		@Override
@@ -818,46 +819,21 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 		protected void handleSelection() {
 			parent.setRedraw(false);
-			textControl.setVisible(!textControl.isVisible());
-			isExpandedDefinitionSection = !isExpandedDefinitionSection;
-			if (textControl.isVisible()) {
-				updateSwitchControl(HIDE_TOOLTIP, COLLAPSE_IMAGE);
-				((SashForm) parent).setWeights(previousWidths);
+			xtextControl.setVisible(!xtextControl.isVisible());
+			isDefinitionSectionExpanded = !isDefinitionSectionExpanded;
+			if (xtextControl.isVisible()) {
+				expandDefinitionSection(parent);
 			} else {
-				if (isExpandedDefinitionSection) {
+				if (isDefinitionSectionExpanded) {
 					// needed to restore previous widths of sashcontrols if definition section is
 					// collapsed and editor has been reopened
-					textControl.setVisible(!textControl.isVisible());
-					updateSwitchControl(HIDE_TOOLTIP, COLLAPSE_IMAGE);
-					((SashForm) parent).setWeights(previousWidths);
+					xtextControl.setVisible(!xtextControl.isVisible());
+					expandDefinitionSection(parent);
 				} else {
-					updateSwitchControl(SHOW_TOOLTIP, EXPAND_IMAGE);
-					collapseSash(parent, control);
+					collapseDefinitionSection(parent);
 				}
 			}
 			parent.setRedraw(true);
-		}
-
-		/**
-		 * Updates the tooltip text and the image for the prominent control.
-		 * 
-		 * @param tooltipText
-		 *            The tooltip text for the control
-		 * @param image
-		 *            The image for the controls
-		 */
-		protected void updateSwitchControl(String tooltipText, Image image) {
-			control.setToolTipText(tooltipText + STATECHART_SPECIFICATION_SECTION_TOOLTIP_TEXT);
-			((Button) control).setImage(image);
-		}
-
-		protected void dispose() {
-			if (this.parent != null && !this.parent.isDisposed())
-				this.parent.dispose();
-			if (this.control != null && !this.control.isDisposed())
-				this.control.dispose();
-			if (this.textControl != null && !this.textControl.isDisposed())
-				this.textControl.dispose();
 		}
 	}
 
@@ -888,7 +864,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 				@Override
 				public void handleEvent(Event event) {
-					if (switchListener != null && !isExpandedDefinitionSection)
+					if (switchListener != null && !isDefinitionSectionExpanded)
 						switchListener.handleSelection();
 				}
 			});
@@ -916,7 +892,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			tr.rotate(rotatingAngle);
 			e.gc.setTransform(tr);
 			int drawHeight = -((w / 3) * 2);
-			e.gc.drawString(isExpandedDefinitionSection ? "" : text, 0,
+			e.gc.drawString(isDefinitionSectionExpanded ? "" : text, 0,
 					(drawHeight % 2) != 0 ? drawHeight - 1 : drawHeight);
 		}
 
@@ -925,22 +901,26 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	@Override
 	public void saveState(IMemento memento) {
 		if (memento == null) {
-			String factoryId = getEditorInput().getPersistable().getFactoryId();
-			memento = XMLMemento.createWriteRoot(factoryId);
+			memento = XMLMemento.createWriteRoot(getFactoryId());
 		}
 
-		memento.putInteger(FIRST_SASH_CONTROL, previousWidths[0]);
-		memento.putInteger(SECOND_SASH_CONTROL, previousWidths[1]);
+		memento.putInteger(FIRST_SASH_CONTROL_WEIGHT, previousWidths[0]);
+		memento.putInteger(SECOND_SASH_CONTROL_WEIGHT, previousWidths[1]);
+		memento.putBoolean(getTitle() + IS_DEFINITION_SECTION_EXPANDED, isDefinitionSectionExpanded);
 
 		super.setMemento(memento);
 	}
 
 	@Override
 	public void restoreState(IMemento memento) {
-		if (getSash() != null && memento != null && memento.getInteger(FIRST_SASH_CONTROL) != null
-				&& memento.getInteger(SECOND_SASH_CONTROL) != null) {
-			getSash().setWeights(
-					new int[]{memento.getInteger(FIRST_SASH_CONTROL), memento.getInteger(SECOND_SASH_CONTROL)});
+		if (getSash() != null && memento != null && memento.getInteger(FIRST_SASH_CONTROL_WEIGHT) != null
+				&& memento.getInteger(SECOND_SASH_CONTROL_WEIGHT) != null) {
+			getSash().setWeights(new int[]{memento.getInteger(FIRST_SASH_CONTROL_WEIGHT),
+					memento.getInteger(SECOND_SASH_CONTROL_WEIGHT)});
+			previousWidths = getSash().getWeights();
+			isDefinitionSectionExpanded = (memento.getBoolean(getTitle() + IS_DEFINITION_SECTION_EXPANDED) == null)
+					? true
+					: memento.getBoolean(getTitle() + IS_DEFINITION_SECTION_EXPANDED);
 		}
 		super.setMemento(memento);
 	}
