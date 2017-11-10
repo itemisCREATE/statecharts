@@ -10,6 +10,9 @@
  */
 package org.yakindu.sct.ui.editor.editor;
 
+import java.util.ArrayList;
+import java.util.Optional;
+
 import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.resources.IMarker;
