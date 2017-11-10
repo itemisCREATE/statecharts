@@ -970,7 +970,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		packageEClass.getESuperTypes().add(theBasePackage.getNamedElement());
+		packageEClass.getESuperTypes().add(this.getPackageMember());
 		typeEClass.getESuperTypes().add(this.getPackageMember());
 		declarationEClass.getESuperTypes().add(this.getTypedElement());
 		declarationEClass.getESuperTypes().add(theBasePackage.getNamedElement());
