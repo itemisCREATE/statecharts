@@ -615,7 +615,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	protected void createDefinitionSectionNameLabel(Composite labelComposite) {
 		Text statechartNameLabel = new Text(labelComposite, SWT.SINGLE | SWT.NORMAL);
-		GridDataFactory.fillDefaults().indent(5, 0).grab(true, false).align(SWT.FILL, SWT.CENTER)
+		GridDataFactory.fillDefaults().indent(5, 1).grab(true, false).align(SWT.FILL, SWT.CENTER)
 				.applyTo(statechartNameLabel);
 		statechartNameLabel.setText(this.getTitle());
 		statechartNameLabel.addModifyListener(new ModifyListener() {
@@ -657,6 +657,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		expandButton.setToolTipText("Hide statechart definition section");
 		expandButton.setImage(
 				isDefinitionSectionExpanded ? StatechartImages.COLLAPSE.image() : StatechartImages.EXPAND.image());
+		expandButton.setCursor(new Cursor(Display.getDefault(), SWT.CURSOR_HAND));
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.CENTER).indent(-1, 0)
 				.hint(MIN_CONTROL_SIZE[0], MIN_CONTROL_SIZE[1]).applyTo(expandButton);
 		return expandButton;
