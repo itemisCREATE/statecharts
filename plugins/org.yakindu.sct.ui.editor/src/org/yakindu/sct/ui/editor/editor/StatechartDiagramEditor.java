@@ -108,6 +108,7 @@ import org.yakindu.sct.domain.extension.DomainStatus;
 import org.yakindu.sct.domain.extension.DomainStatus.Severity;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementProvider;
@@ -913,7 +914,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 		memento.putInteger(FIRST_SASH_CONTROL_WEIGHT, previousWidths[0]);
 		memento.putInteger(SECOND_SASH_CONTROL_WEIGHT, previousWidths[1]);
-		memento.putBoolean(getTitle() + IS_DEFINITION_SECTION_EXPANDED, isDefinitionSectionExpanded);
+		rememberExpandState(memento);
 
 		super.setMemento(memento);
 	}
@@ -925,9 +926,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			getSash().setWeights(new int[]{memento.getInteger(FIRST_SASH_CONTROL_WEIGHT),
 					memento.getInteger(SECOND_SASH_CONTROL_WEIGHT)});
 			previousWidths = getSash().getWeights();
-			isDefinitionSectionExpanded = (memento.getBoolean(getTitle() + IS_DEFINITION_SECTION_EXPANDED) == null)
-					? true
-					: memento.getBoolean(getTitle() + IS_DEFINITION_SECTION_EXPANDED);
+			isDefinitionSectionExpanded = getExpandState(memento);
 		}
 		super.setMemento(memento);
 	}

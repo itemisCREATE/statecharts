@@ -82,9 +82,10 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 			IPersistableEditor,
 			IPersistableElement {
 
-	protected static final String IS_DEFINITION_SECTION_EXPANDED = ".IS_DEFINITION_SECTION_EXPANDED";
-	protected static final String FIRST_SASH_CONTROL_WEIGHT = "FIRST_SASH_CONTROL_WEIGHT";
-	protected static final String SECOND_SASH_CONTROL_WEIGHT = "SECOND_SASH_CONTROL_WEIGHT";
+	private static final String REGEX_NO_WORD_NO_WHITESPACE = "[^\\w[\\s+_]]";
+	protected static final String IS_DEFINITION_SECTION_EXPANDED = "DefinitionSectionIsExpanded";
+	protected static final String FIRST_SASH_CONTROL_WEIGHT = "FirstSashControlWeight";
+	protected static final String SECOND_SASH_CONTROL_WEIGHT = "SecondSashControlWeight";
 	protected static final int[] DEFAULT_WEIGHTS = new int[]{2, 10};
 	protected static final int MAXIMIZED_CONTROL_INDEX = 1;
 
@@ -154,11 +155,37 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 			memento = XMLMemento.createWriteRoot(getFactoryId());
 			memento.putInteger(FIRST_SASH_CONTROL_WEIGHT, DEFAULT_WEIGHTS[0]);
 			memento.putInteger(SECOND_SASH_CONTROL_WEIGHT, DEFAULT_WEIGHTS[1]);
-			memento.putBoolean(getTitle() + IS_DEFINITION_SECTION_EXPANDED, true);
+			rememberExpandState(memento);
 			setMemento(memento);
 		} else {
 			restoreState(memento);
 		}
+	}
+
+	protected void rememberExpandState(IMemento memento) {
+		if (getContextObject() != null) {
+			if (getContextObject() instanceof NamedElement) {
+				NamedElement element = (NamedElement) getContextObject();
+				if (element != null)
+					memento.putBoolean(stripElementName(element.getName()) + IS_DEFINITION_SECTION_EXPANDED, true);
+			}
+		}
+	}
+
+	protected boolean getExpandState(IMemento memento) {
+		Object expandState = null;
+		if (getContextObject() instanceof NamedElement) {
+			NamedElement element = (NamedElement) getContextObject();
+			if (element != null)
+				expandState = memento.getBoolean(stripElementName(element.getName()) + IS_DEFINITION_SECTION_EXPANDED);
+		}
+		return expandState != null ? ((Boolean) expandState).booleanValue() : true;
+	}
+
+	protected String stripElementName(String name) {
+		if (name != null)
+			return name.replaceAll(REGEX_NO_WORD_NO_WHITESPACE, "");
+		return "";
 	}
 
 	public SashForm getSash() {
