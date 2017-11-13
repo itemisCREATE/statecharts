@@ -139,7 +139,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	protected static final String ROTATED_LABEL_TEXT = "Definition section";
 	protected static final String CANNOT_INLINE_SECTION_TOOLTIP = "Cannot be inlined for subdiagrams";
 	protected static final String INLINE_SECTION_TOOLTIP = "Inline statechart definition section";
-	protected static final String EXPAND_TOOLTIP = "Show statechart definintion section";
+	protected static final String EXPAND_TOOLTIP = "Show statechart definition section";
 	protected static final String COLLAPSE_TOOLTIP = "Hide statechart definintion section";
 	protected final Image EXPAND_IMAGE = StatechartImages.EXPAND.image();
 	protected final Image COLLAPSE_IMAGE = StatechartImages.COLLAPSE.image();
@@ -496,15 +496,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		parent.addControlListener(resizeListener);
 		switchControl.addSelectionListener(switchListener);
 		xtextControl.addControlListener(resizeListener);
-		definitionSection.addMouseListener(new org.eclipse.swt.events.MouseAdapter() {
-			@Override
-			public void mouseDown(MouseEvent e) {
-				if (!isDefinitionSectionExpanded) {
-					switchListener.handleSelection();
-				}
-			}
-		});
-
 	}
 
 	/*
@@ -648,13 +639,28 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	protected void createRotatedLabel(Composite definitionSection) {
 		RotatedLabel rotatedLabel = new RotatedLabel(definitionSection, SWT.NONE);
 		rotatedLabel.setText(ROTATED_LABEL_TEXT, new Font(Display.getDefault(), "Segoe UI", 8, SWT.NORMAL));
+		rotatedLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				if (!isDefinitionSectionExpanded)
+					switchListener.handleSelection();
+			}
+		});
+		rotatedLabel.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				rotatedLabel.setCursor(new Cursor(Display.getDefault(),
+						(!isDefinitionSectionExpanded) ? SWT.CURSOR_HAND : SWT.CURSOR_ARROW));
+				rotatedLabel.setToolTipText((!isDefinitionSectionExpanded) ? EXPAND_TOOLTIP : null);
+			}
+		});
 		GridDataFactory.fillDefaults().grab(false, false)
 				.hint(MIN_CONTROL_SIZE[0], definitionSection.getBounds().height).applyTo(rotatedLabel);
 	}
 
 	protected Button createExpandControl(Composite definitionSection) {
 		Button expandButton = new Button(definitionSection, SWT.PUSH | SWT.BORDER_SOLID);
-		expandButton.setToolTipText("Hide statechart definition section");
+		expandButton.setToolTipText(COLLAPSE_TOOLTIP);
 		expandButton.setImage(
 				isDefinitionSectionExpanded ? StatechartImages.COLLAPSE.image() : StatechartImages.EXPAND.image());
 		expandButton.setCursor(new Cursor(Display.getDefault(), SWT.CURSOR_HAND));
