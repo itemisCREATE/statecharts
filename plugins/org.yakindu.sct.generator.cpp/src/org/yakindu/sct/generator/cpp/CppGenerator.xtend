@@ -16,6 +16,7 @@ import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations.GenArtifactConfiguration
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
+import org.yakindu.sct.generator.cpp.classes.StatechartClassFactory
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Statechart
@@ -39,13 +40,19 @@ class CppGenerator implements IExecutionFlowGenerator {
 	@Inject extension Navigation
 	@Inject extension CppNaming
 	@Inject extension ICoreLibraryHelper
+	@Inject extension StatechartClassFactory
 
 	@Inject
 	IGenArtifactConfigurations locations
 
 	override generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		initGenerationArtifacts(flow, entry, locations)
-		generateArtifacts(flow, entry, fsa, locations);
+		
+		val statechartClass = createStatechartClass(flow, entry, locations)
+		statemachineHeaderContent.statechartClass = statechartClass
+		statemachineSourceContent.statechartClass = statechartClass
+		
+		generateArtifacts(flow, entry, fsa, locations)
 	}
 
 	def generateArtifacts(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa,

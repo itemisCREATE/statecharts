@@ -54,24 +54,14 @@ class EventDrivenStatemachineSource extends StatemachineSource {
 		«dispatchEventFunction»
 	'''
 	
-	override enterFunction(ExecutionFlow it) '''
-		void «functionPrefix»enter(«scHandleDecl»)
-		{
-			«enterSequences.defaultSequence.code»
-		}
-	'''
-	
-	override interfaceIncomingEventRaiser(ExecutionFlow it, EventDefinition event) '''
-		void «event.asRaiser»(«scHandleDecl»«event.valueParams»)
-		{
-			«IF event.hasValue»
-			«event.valueAccess» = value;
-			«ENDIF»
-			«event.access» = bool_true;
-			
-			«functionPrefix»runCycle(«scHandle»);
-		}
-	'''
+	override interfaceIncomingEventRaiser(ExecutionFlow it, EventDefinition event) {
+		val f = super.interfaceIncomingEventRaiser(it, event)
+		f.setContent(f.getContent() + '''
+		
+		«runCycleFunctionID»(«scHandle»);
+		''')
+		f
+	}
 	
 	def dispatchEventFunction(ExecutionFlow it) '''
 		static void «functionPrefix»dispatch_event(«scHandleDecl», const «eventStructTypeName» * event) {
@@ -112,9 +102,9 @@ class EventDrivenStatemachineSource extends StatemachineSource {
 	}
 	'''
 	
-	override runCycleFunction(ExecutionFlow it)  '''
-		void «functionPrefix»runCycle(«scHandleDecl»)
-		{
+	override runCycleFunction(ExecutionFlow it) {
+		val f = super.runCycleFunction(it)
+		f.content = '''
 			«clearOutEventsFctID»(«scHandle»);
 			
 			«eventStructTypeName» currentEvent = «eventQueuePopFunction»(&(«scHandle»->internal_event_queue));
@@ -124,9 +114,9 @@ class EventDrivenStatemachineSource extends StatemachineSource {
 				«runCycleForLoop»
 				«clearInEventsFctID»(«scHandle»);
 			} while((currentEvent = «eventQueuePopFunction»(&(«scHandle»->internal_event_queue))).name != invalid_event);
-			
-		}
-	'''
+		'''
+		f
+	}
 	
 	override raiseTimeEventFunction(ExecutionFlow it) '''
 		«IF timed»

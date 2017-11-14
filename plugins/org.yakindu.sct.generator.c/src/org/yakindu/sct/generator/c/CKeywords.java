@@ -16,21 +16,13 @@ package org.yakindu.sct.generator.c;
  * @author Markus Mühlbrandt
  * 
  */
-public final class CKeywords {
+public final class CKeywords implements org.yakindu.sct.generator.c.language.CKeywords {
+	public static final String[] C_KEYWORDS = {ALIGNAS, ALIGNOF, AND, AND_EQ, ASM, AUTO, BITAND, BITOR, BOOL, BREAK,
+			CASE, CATCH, CHAR, CHAR16_T, CHAR32_T, CLASS, COMPL, CONST, CONSTEXPR, CONST_CAST, CONTINUE, DECLTYPE,
+			DEFAULT, DELETE, DO, DOUBLE, DYNAMIC_CAST, ELSE, ENUM, EXPLICIT, EXPORT, EXTERN, FALSE, FLOAT, FOR, FRIEND,
+			GOTO, IF, INLINE, INT, LONG, MUTABLE, NAMESPACE, NEW, NOEXCEPT, NOT, NOT_EQ, NULLPTR, OPERATOR, OR, OR_EQ,
+			PRIVATE, PROTECTED, PUBLIC, REGISTER, REINTERPRET_CAST, RETURN, SHORT, SIGNED, SIZEOF, STATIC,
+			STATIC_ASSERT, STATIC_CAST, STRUCT, SWITCH, TEMPLATE, THIS, THREAD_LOCAL, THROW, TRUE, TRY, TYPEDEF, TYPEID,
+			TYPENAME, UNION, UNSIGNED, USING, VIRTUAL, VOID, VOLATILE, WCHAR_T, WHILE, XOR, XOR_EQ,};
 
-	public static final String[] C_KEYWORDS = { "alignas", "alignof", "and",
-			"and_eq", "asm", "auto", "bitand", "bitor", "bool", "break",
-			"case", "catch", "char", "char16_t", "char32_t", "class", "compl",
-			"const", "constexpr", "const_cast", "continue", "decltype",
-			"default", "delete", "do", "double", "dynamic_cast", "else",
-			"enum", "explicit", "export", "extern", "false", "float", "for",
-			"friend", "goto", "if", "inline", "int", "long", "mutable",
-			"namespace", "new", "noexcept", "not", "not_eq", "nullptr",
-			"operator", "or", "or_eq", "private", "protected", "public",
-			"register", "reinterpret_cast", "return", "short", "signed",
-			"sizeof", "static", "static_assert", "static_cast", "struct",
-			"switch", "template", "this", "thread_local", "throw", "true",
-			"try", "typedef", "typeid", "typename", "union", "unsigned",
-			"using", "virtual", "void", "volatile", "wchar_t", "while", "xor",
-			"xor_eq" };
 }
