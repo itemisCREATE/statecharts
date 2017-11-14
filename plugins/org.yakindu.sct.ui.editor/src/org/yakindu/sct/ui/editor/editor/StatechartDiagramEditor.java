@@ -141,7 +141,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	protected static final String CANNOT_INLINE_SECTION_TOOLTIP = "Cannot be inlined for subdiagrams";
 	protected static final String INLINE_SECTION_TOOLTIP = "Inline statechart definition section";
 	protected static final String EXPAND_TOOLTIP = "Show statechart definition section";
-	protected static final String COLLAPSE_TOOLTIP = "Hide statechart definintion section";
+	protected static final String COLLAPSE_TOOLTIP = "Hide statechart definition section";
 	protected final Image EXPAND_IMAGE = StatechartImages.EXPAND.image();
 	protected final Image COLLAPSE_IMAGE = StatechartImages.COLLAPSE.image();
 
