@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.State;
@@ -80,20 +79,18 @@ public class UnfoldExitActionsRefactoring extends AbstractRefactoring<State> {
 	private void addActionsToOutgoingTransitions(List<Expression> actionsToAdd) {
 		for (Transition transition : getContextObject()
 				.getOutgoingTransitions()) {
-			addActionsToTransition(transition, EcoreUtil.copyAll(actionsToAdd));
+			addActionsToTransition(transition, actionsToAdd);
 		}
 	}
 
-	private void addActionsToTransition(final Transition transition,
-			final Collection<Expression> actionsToAdd) {
+	private void addActionsToTransition(final Transition transition, final Collection<Expression> actionsToAdd) {
 
 		Effect effect = transition.getEffect();
 		if (effect instanceof ReactionEffect) {
 			ReactionEffect reactionEffect = (ReactionEffect) effect;
 			reactionEffect.getActions().addAll(0, actionsToAdd);
 		} else {
-			ReactionEffect reactionEffect = StextFactory.eINSTANCE
-					.createReactionEffect();
+			ReactionEffect reactionEffect = StextFactory.eINSTANCE.createReactionEffect();
 			reactionEffect.getActions().addAll(actionsToAdd);
 			transition.setEffect(reactionEffect);
 		}

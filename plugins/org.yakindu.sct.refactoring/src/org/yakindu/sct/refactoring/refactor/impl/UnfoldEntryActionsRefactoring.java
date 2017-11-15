@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.State;
@@ -80,7 +79,7 @@ public class UnfoldEntryActionsRefactoring extends AbstractRefactoring<State> {
 
 		for (Transition transition : getContextObject()
 				.getIncomingTransitions()) {
-			addActionsToTransition(transition, EcoreUtil.copyAll(actionsToAdd));
+			addActionsToTransition(transition, actionsToAdd);
 		}
 
 	}
