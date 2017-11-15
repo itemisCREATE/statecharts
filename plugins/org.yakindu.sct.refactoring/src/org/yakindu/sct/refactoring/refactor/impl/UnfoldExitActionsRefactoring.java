@@ -94,8 +94,8 @@ public class UnfoldExitActionsRefactoring extends AbstractRefactoring<State> {
 		} else {
 			ReactionEffect reactionEffect = StextFactory.eINSTANCE
 					.createReactionEffect();
-			transition.setEffect(reactionEffect);
 			reactionEffect.getActions().addAll(actionsToAdd);
+			transition.setEffect(reactionEffect);
 		}
 	}
 

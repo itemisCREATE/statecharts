@@ -95,10 +95,9 @@ public class UnfoldEntryActionsRefactoring extends AbstractRefactoring<State> {
 			reactionEffect.getActions().addAll(actionsToAdd);
 		} else {
 			reactionEffect = StextFactory.eINSTANCE.createReactionEffect();
+			reactionEffect.getActions().addAll(actionsToAdd);
 			transition.setEffect(reactionEffect);
 		}
-		reactionEffect.getActions().addAll(actionsToAdd);
-
 	}
 
 	@Override
