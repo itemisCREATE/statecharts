@@ -39,6 +39,7 @@ public abstract class StateBasedRefactoringTest extends RefactoringTest {
 		initialRes.setSerializerEnabled(true);
 		refactoring.internalExecute();
 		initialRes.setSerializerEnabled(false);
+		initialRes.parseSpecificationElements();
 		initialRes.linkSpecificationElements();
 
 		Statechart expected = models.loadStatechartFromResource(pathToExpectedSct);

@@ -82,7 +82,6 @@ public class UnfoldExitActionsRefactoring extends AbstractRefactoring<State> {
 	private void addActionsToOutgoingTransitions(List<Expression> actionsToAdd) {
 		for (Transition transition : getContextObject()
 				.getOutgoingTransitions()) {
-		    
 			addActionsToTransition(transition, EcoreUtil.copyAll(actionsToAdd));
 		}
 	}

@@ -135,6 +135,7 @@ public class RenameRefactoringTest extends RefactoringTest {
 		refactoring.internalExecute();
 		initialRes.setSerializerEnabled(false);
 
+		initialRes.parseSpecificationElements();
 		initialRes.linkSpecificationElements();
 
 		compareStatecharts(initial, expected);
