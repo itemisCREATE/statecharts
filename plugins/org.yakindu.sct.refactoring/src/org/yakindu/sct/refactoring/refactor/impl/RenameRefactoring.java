@@ -89,10 +89,11 @@ public class RenameRefactoring extends AbstractRefactoring<NamedElement> {
 				specificationsToParse.add(spec);
 			}
 		}
-		// TODO parsing is an workaround here for linking problem
+		// parse and link to re-establish cross references
 		for (SpecificationElement spec : specificationsToParse) {
 			res.parseSpecificationElement(spec);
 		}
+		res.linkSpecificationElements();
 	}
 
 	private Collection<EObject> findReferers(EObject referedElement) {
