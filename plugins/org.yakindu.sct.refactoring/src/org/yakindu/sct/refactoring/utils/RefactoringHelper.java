@@ -222,21 +222,9 @@ public class RefactoringHelper {
 			if (!(reaction.getEffect() instanceof ReactionEffect) || !(reaction.getTrigger() instanceof ReactionTrigger)) {
 				continue;
 			}
-			
-			ReactionTrigger reactionTrigger = (ReactionTrigger) reaction.getTrigger();
 			ReactionEffect reactionEffect = (ReactionEffect)reaction.getEffect();
-			List<EventSpec> triggers = new ArrayList<EventSpec>(reactionTrigger.getTriggers());
-			
-			if (containsOnlyEventsOfType(triggers, eventType)) {
-				EList<Expression> entryActions = reactionEffect.getActions();
-				resultActions.addAll(entryActions);
-				EcoreUtil.remove(reaction);
-			}
-			else if (containsAtLeastOneEventOfType(triggers, eventType)) {
-				EList<Expression> entryActions = reactionEffect.getActions();
-				resultActions.addAll(entryActions);
-				deleteAllEventsOfType(triggers, eventType);
-			}
+			EList<Expression> entryActions = reactionEffect.getActions();
+			resultActions.addAll(entryActions);
 		}
 		return resultActions;
 	}
@@ -261,15 +249,27 @@ public class RefactoringHelper {
 	
 	private void deleteAllEventsOfType(List<EventSpec> events, Class<? extends EventSpec> eventType) {
 		for (EventSpec event : events) {
-			if (event.getClass().getName().equals(eventType.getName())) {
+			if (eventType.isAssignableFrom(event.getClass())) {
 				EcoreUtil.remove(event);
+			}
+		}
+	}
+	
+	public void removeReactionsOfEventType(EList<Reaction> reactions, Class<? extends EventSpec> eventType) {
+		for (Reaction reaction : reactions) {
+			EList<EventSpec> triggers = ((ReactionTrigger)reaction.getTrigger()).getTriggers();
+			if (containsOnlyEventsOfType(triggers,eventType)) {
+				EcoreUtil.remove(reaction);
+			}
+			else if (containsAtLeastOneEventOfType(triggers, eventType)) {
+				deleteAllEventsOfType(triggers, eventType);
 			}
 		}
 	}
 
 	private boolean containsAtLeastOneEventOfType(List<EventSpec> events, Class<? extends EventSpec> eventType) {
 		for (EventSpec event : events) {
-			if (event.getClass().getName().equals(eventType.getName())) {
+			if (eventType.isAssignableFrom(event.getClass())) {
 				return true;
 			}
 		}
@@ -278,7 +278,7 @@ public class RefactoringHelper {
 
 	private boolean containsOnlyEventsOfType(List<EventSpec> events, Class<? extends EventSpec> eventType) {
 		for (EventSpec event : events) {
-			if (!event.getClass().getName().equals(eventType.getName())) {
+			if (!eventType.isAssignableFrom(event.getClass())) {
 				return false;
 			}
 		}

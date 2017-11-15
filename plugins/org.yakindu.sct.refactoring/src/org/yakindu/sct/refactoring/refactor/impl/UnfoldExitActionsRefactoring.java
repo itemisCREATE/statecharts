@@ -14,13 +14,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.stext.stext.ExitEvent;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.StextFactory;
-import org.yakindu.sct.model.stext.stext.impl.ExitEventImpl;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 /**
  * This refactoring moves exit actions of a state to its outgoing transitions.
@@ -72,14 +73,17 @@ public class UnfoldExitActionsRefactoring extends AbstractRefactoring<State> {
 	private void unfoldExitActions() {
 		List<Expression> actionsToUnfold = new ArrayList<Expression>(
 				helper.extractAllLocalActionsForEventType(getContextObject(),
-						ExitEventImpl.class));
+						ExitEvent.class));
 		addActionsToOutgoingTransitions(actionsToUnfold);
+		
+		helper.removeReactionsOfEventType(getContextObject().getLocalReactions(), ExitEvent.class);
 	}
 
 	private void addActionsToOutgoingTransitions(List<Expression> actionsToAdd) {
 		for (Transition transition : getContextObject()
 				.getOutgoingTransitions()) {
-			addActionsToTransition(transition, actionsToAdd);
+		    
+			addActionsToTransition(transition, EcoreUtil.copyAll(actionsToAdd));
 		}
 	}
 

@@ -14,13 +14,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.stext.stext.EntryEvent;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.StextFactory;
-import org.yakindu.sct.model.stext.stext.impl.EntryEventImpl;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 /**
  * This refactoring moves entry actions of a state to its incoming transitions.
@@ -71,17 +72,18 @@ public class UnfoldEntryActionsRefactoring extends AbstractRefactoring<State> {
 	private void unfoldEntryActions() {
 		List<Expression> actionsToUnfold = new ArrayList<Expression>(
 				helper.extractAllLocalActionsForEventType(getContextObject(),
-						EntryEventImpl.class));
+						EntryEvent.class));
 		addActionsToIncomingTransitions(actionsToUnfold);
+		
+		helper.removeReactionsOfEventType(getContextObject().getLocalReactions(), EntryEvent.class);
 	}
 
 	private void addActionsToIncomingTransitions(List<Expression> actionsToAdd) {
-
 		for (Transition transition : getContextObject()
 				.getIncomingTransitions()) {
-			addActionsToTransition(transition, actionsToAdd);
-		}
 
+			addActionsToTransition(transition,  EcoreUtil.copyAll(actionsToAdd));
+		}
 	}
 
 	private void addActionsToTransition(final Transition transition,
