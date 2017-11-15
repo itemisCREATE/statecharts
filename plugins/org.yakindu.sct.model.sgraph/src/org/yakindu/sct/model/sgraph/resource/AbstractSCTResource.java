@@ -343,6 +343,16 @@ public abstract class AbstractSCTResource extends XMIResourceImpl {
 			}
 		}
 	}
+	
+	public void parseSpecificationElements() {
+		TreeIterator<EObject> iter = getAllContents();
+		while (iter.hasNext()) {
+			EObject currentObject = iter.next();
+			if (currentObject instanceof SpecificationElement) {
+				parseSpecificationElement((SpecificationElement) currentObject);
+			}
+		}
+	}
 
 	protected void linkSpecificationElement(SpecificationElement element) {
 		isLinking = true;
@@ -368,8 +378,10 @@ public abstract class AbstractSCTResource extends XMIResourceImpl {
 				serializeStatechart((Statechart) element);
 			}
 		} catch (XtextSerializationException ex) {
+			ex.printStackTrace();
 			// Leave the old specification
 		} catch (IConcreteSyntaxValidator.InvalidConcreteSyntaxException ex) {
+			ex.printStackTrace();
 			// Leave the old specification
 		} finally {
 			isSerializing = false;

@@ -50,7 +50,6 @@ public class FoldIncomingActionsRefactoring extends AbstractRefactoring<State> {
 	protected void internalExecute() {
 		List<Expression> actionsToFold = getFoldableActions();
 		addActionsToEntryReaction(actionsToFold);
-		
 	}
 
 	/**

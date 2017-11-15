@@ -96,16 +96,19 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 					throws ExecutionException {
 				try {
 					internalExecute();
-					
-					Resource resource = getResource();
-					if (resource instanceof AbstractSCTResource) {
-						((AbstractSCTResource) resource).parseSpecificationElements();
-						((AbstractSCTResource) resource).linkSpecificationElements();
-					}
+					parseAndLinkSpecificationElements();
 				} catch (Exception ex) {
 					return CommandResult.newErrorCommandResult(ex);
 				}
 				return CommandResult.newOKCommandResult();
+			}
+
+			protected void parseAndLinkSpecificationElements() {
+				Resource resource = getResource();
+				if (resource instanceof AbstractSCTResource) {
+					((AbstractSCTResource) resource).parseSpecificationElements();
+					((AbstractSCTResource) resource).linkSpecificationElements();
+				}
 			}
 
 			@Override

@@ -24,7 +24,6 @@ import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
-import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 
 import com.google.common.collect.Sets;
@@ -71,7 +70,6 @@ public class RenameRefactoring extends AbstractRefactoring<NamedElement> {
 		Collection<EObject> elementReferers = findReferers(element);
 		element.setName(newName);
 
-		AbstractSCTResource res = (AbstractSCTResource) getResource();
 		Set<SpecificationElement> specificationsToParse = Sets.newHashSet();
 		
 		for (EObject referer : elementReferers) {
@@ -89,11 +87,6 @@ public class RenameRefactoring extends AbstractRefactoring<NamedElement> {
 				specificationsToParse.add(spec);
 			}
 		}
-		// parse and link to re-establish cross references
-		for (SpecificationElement spec : specificationsToParse) {
-			res.parseSpecificationElement(spec);
-		}
-		res.linkSpecificationElements();
 	}
 
 	private Collection<EObject> findReferers(EObject referedElement) {
