@@ -96,7 +96,7 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
 				try {
-					doInternalExecute();	
+					executeRefactoring();
 				} catch (Exception ex) {
 					return CommandResult.newErrorCommandResult(ex);
 				}
@@ -122,21 +122,20 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 		return true;
 	}
 	
-	/**
-	 * Combines the internal command execution call with the parsing and linking of the specification elements.
-	 */
-	protected void doInternalExecute() {
+    /**
+     * Combines the internal command execution call with the parsing and linking of the specification elements.
+     */
+	protected void executeRefactoring() {
 		internalExecute();
 		parseAndLinkSpecificationElements();
 	}
-
 	/**
 	 * Is called within {@link IRefactoring#execute()} method.
 	 */
 	protected abstract void internalExecute();
 
 	/**
-	 * Parsed and links the specification elements of {@link AbstractRefactoring#getResource()}
+	 * Parses and links the specification elements of {@link AbstractRefactoring#getResource()}
 	 */
 	protected void parseAndLinkSpecificationElements() {
 		Resource resource = getResource();
