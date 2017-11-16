@@ -28,6 +28,7 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
+import org.eclipse.xtext.formatting2.internal.AbstractHiddenRegionFormatter;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.refactoring.utils.RefactoringHelper;
 
@@ -95,20 +96,11 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
 				try {
-					internalExecute();
-					parseAndLinkSpecificationElements();
+					doInternalExecute();	
 				} catch (Exception ex) {
 					return CommandResult.newErrorCommandResult(ex);
 				}
 				return CommandResult.newOKCommandResult();
-			}
-
-			protected void parseAndLinkSpecificationElements() {
-				Resource resource = getResource();
-				if (resource instanceof AbstractSCTResource) {
-					((AbstractSCTResource) resource).parseSpecificationElements();
-					((AbstractSCTResource) resource).linkSpecificationElements();
-				}
 			}
 
 			@Override
@@ -129,12 +121,31 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 	protected boolean internalDoUndo() {
 		return true;
 	}
+	
+	/**
+	 * Combines the internal command execution call with the parsing and linking of the specification elements.
+	 */
+	protected void doInternalExecute() {
+		internalExecute();
+		parseAndLinkSpecificationElements();
+	}
 
 	/**
 	 * Is called within {@link IRefactoring#execute()} method.
 	 */
 	protected abstract void internalExecute();
 
+	/**
+	 * Parsed and links the specification elements of {@link AbstractRefactoring#getResource()}
+	 */
+	protected void parseAndLinkSpecificationElements() {
+		Resource resource = getResource();
+		if (resource instanceof AbstractSCTResource) {
+			((AbstractSCTResource) resource).parseSpecificationElements();
+			((AbstractSCTResource) resource).linkSpecificationElements();
+		}
+	}
+	
 	/**
 	 * Getter for the editing domain of the resource used in this refactoring.
 	 * 
