@@ -150,6 +150,7 @@ class StatemachineImplementation implements IContentTemplate {
 	def initFunction(ExecutionFlow it) '''
 		sc_integer «module»::init()
 		{
+			sc_integer errorCode = 0;
 			«unimplementedOCBErrors»
 			
 			for (int i = 0; i < «orthogonalStatesConst»; ++i)
@@ -166,7 +167,7 @@ class StatemachineImplementation implements IContentTemplate {
 			clearOutEvents();
 			
 			«initSequence.code»
-			return 0;
+			return errorCode;
 		}
 	'''
 	
@@ -340,14 +341,20 @@ class StatemachineImplementation implements IContentTemplate {
 	'''
 	
 	def checkInternalOCB(StatechartScope it) '''
-		if (this->«OCB_Instance» == null) return «ErrorCode.OCB_INTERNAL_INIT.name»;
+		if (this->«OCB_Instance» == null) { 
+			errorCode |= «ErrorCode.OCB_INTERNAL_INIT.name»;
+		}
 	'''
 	
 	def checkInterfaceOCB(StatechartScope it) '''
 		«IF defaultInterface»
-			if (this->«OCB_Instance» == null) return «ErrorCode.OCB_DEFAULT_INIT.name»;
+			if (this->«OCB_Instance» == null) { 
+				errorCode |=  «ErrorCode.OCB_DEFAULT_INIT.name»;
+			}
 		«ELSE»
-			if (this->«OCB_Instance» == null) return «ErrorCode.OCB_NAMED_INIT.name»;
+			if (this->«OCB_Instance» == null) { 
+				errorCode |= «ErrorCode.OCB_NAMED_INIT.name»;
+			}
 		«ENDIF»
 	'''
 	

@@ -47,17 +47,21 @@ class Types implements IContentTemplate {
 		#ifndef «CppNaming::NULL_STRING»
 		#define «CppNaming::NULL_STRING» 0
 		#endif
+		
+		#ifndef «ErrorCode.OCB_INIT_MASK.name»
+		#define «ErrorCode.OCB_INIT_MASK.name» «ErrorCode.OCB_INIT_MASK.value»
+		#endif
 
 		#ifndef «ErrorCode.OCB_DEFAULT_INIT.name»
-		#define «ErrorCode.OCB_DEFAULT_INIT.name» «CppNaming.getIfaceError»«ErrorCode.OCB_DEFAULT_INIT.value»
+		#define «ErrorCode.OCB_DEFAULT_INIT.name» («ErrorCode.OCB_INIT_MASK.name» | «ErrorCode.OCB_DEFAULT_INIT.value»)
 		#endif
 
 		#ifndef «ErrorCode.OCB_NAMED_INIT.name»
-		#define «ErrorCode.OCB_NAMED_INIT.name» «CppNaming.getIfaceError»«ErrorCode.OCB_NAMED_INIT.value»
+		#define «ErrorCode.OCB_NAMED_INIT.name» («ErrorCode.OCB_INIT_MASK.name» | «ErrorCode.OCB_NAMED_INIT.value»)
 		#endif
 
 		#ifndef «ErrorCode.OCB_INTERNAL_INIT.name»
-		#define «ErrorCode.OCB_INTERNAL_INIT.name» «CppNaming.getIfaceError»«ErrorCode.OCB_INTERNAL_INIT.value»
+		#define «ErrorCode.OCB_INTERNAL_INIT.name» («ErrorCode.OCB_INIT_MASK.name» | «ErrorCode.OCB_INTERNAL_INIT.value»)
 		#endif			
 		
 		#endif /* «typesModule.define»_H_ */
