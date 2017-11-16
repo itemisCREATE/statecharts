@@ -1,11 +1,11 @@
 /**
-  Copyright (c) 2012 committers of YAKINDU and others.
-  All rights reserved. This program and the accompanying materials
-  are made available under the terms of the Eclipse Public License v1.0
-  which accompanies this distribution, and is available at
-  http://www.eclipse.org/legal/epl-v10.html
-  Contributors:
-  	Markus Muehlbrandt - Initial contribution and API
+ *   Copyright (c) 2012 committers of YAKINDU and others.
+ *   All rights reserved. This program and the accompanying materials
+ *   are made available under the terms of the Eclipse Public License v1.0
+ *   which accompanies this distribution, and is available at
+ *   http://www.eclipse.org/legal/epl-v10.html
+ *   Contributors:
+ *   	Markus Muehlbrandt - Initial contribution and API
  */
 package org.yakindu.sct.generator.java
 
@@ -33,10 +33,18 @@ class GenmodelEntries {
 		getFeatureConfiguration(IJavaFeatureConstants::GENERAL_FEATURES)
 	}
 
+	def private getOutletFeatures(GeneratorEntry it) {
+		getFeatureConfiguration(OUTLET_FEATURE)
+	}
+
+	def private FeatureParameterValue getOutletFeatureTargetProject(GeneratorEntry it) {
+		outletFeatures.getParameterValue(OUTLET_FEATURE_TARGET_PROJECT)
+	}
+
 	def private FeatureParameterValue getBasePackageParameter(GeneratorEntry it) {
 		namingFeature?.getParameterValue(IJavaFeatureConstants::BASE_PACKAGE)
 	}
-	
+
 	def private FeatureParameterValue getImplementationSuffixParameter(GeneratorEntry it) {
 		namingFeature?.getParameterValue(IJavaFeatureConstants::IMPLEMENTATION_SUFFIX)
 	}
@@ -69,10 +77,10 @@ class GenmodelEntries {
 	}
 
 	def getBasePackageName(GeneratorEntry it) {
-		if (basePackageParameter != null) {
+		if (basePackageParameter != null)
 			return basePackageParameter.stringValue
-		}
-		return "org.yakindu.scr"
+		if (outletFeatureTargetProject != null)
+			return outletFeatureTargetProject.stringValue
 	}
 
 	def getImplementationSuffix(GeneratorEntry it, ExecutionFlow flow) {
@@ -93,7 +101,7 @@ class GenmodelEntries {
 	def getImplementationPackagePath(ExecutionFlow it, GeneratorEntry entry) {
 		getImplementationPackageName(entry).replace('.', '/')
 
-	//entry.basePackagePath+"/"+entry.getImplementationSuffix(it).toLowerCase
+	// entry.basePackagePath+"/"+entry.getImplementationSuffix(it).toLowerCase
 	}
 
 	def createTimerService(GeneratorEntry it) {
