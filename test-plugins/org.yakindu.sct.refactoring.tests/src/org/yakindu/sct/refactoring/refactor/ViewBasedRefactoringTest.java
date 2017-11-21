@@ -39,7 +39,6 @@ public abstract class ViewBasedRefactoringTest extends RefactoringTest {
 		initialRes.setSerializerEnabled(true);
 		refactoring.execute();
 		initialRes.setSerializerEnabled(false);
-		initialRes.linkSpecificationElements();
 
 		Statechart expected = models
 				.loadStatechartFromResource(pathToExpectedSct);
