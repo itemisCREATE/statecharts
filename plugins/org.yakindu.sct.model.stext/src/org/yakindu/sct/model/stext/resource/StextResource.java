@@ -13,8 +13,10 @@ package org.yakindu.sct.model.stext.resource;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.parser.IParseResult;
 import org.yakindu.base.types.Annotation;
+import org.yakindu.base.types.Declaration;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -23,6 +25,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
+import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.StateSpecification;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionReaction;
@@ -50,18 +53,60 @@ public class StextResource extends AbstractSCTResource {
 			builder.append("namespace " + statechart.getNamespace());
 			builder.append("\n");
 		}
-		for(Annotation annotation : statechart.getAnnotations()){
+		for (Annotation annotation : statechart.getAnnotations()) {
 			builder.append(serialize(annotation));
 			builder.append("\n");
 		}
-
 		for (Scope scope : statechart.getScopes()) {
-			builder.append(serialize(scope));
+			builder.append(serializeScope(scope));
 			builder.append("\n");
 		}
-		
-		
 		statechart.setSpecification(builder.toString());
+	}
+
+	protected String serializeScope(Scope scope) {
+		StringBuilder builder = new StringBuilder();
+		if (scope instanceof InternalScope) {
+			builder.append(serializeInternalScope((InternalScope) scope));
+		} else {
+			builder.append(serialize(scope));
+		}
+		return builder.toString();
+	}
+
+	protected String serializeInternalScope(InternalScope internalScope) {
+		StringBuilder builder = new StringBuilder();
+		InternalScope copiedScope = copyAndStripInternalScope(internalScope);
+		builder.append(serialize(copiedScope));
+		builder.append("\n");
+
+		for (Declaration declaration : internalScope.getDeclarations()) {	
+			builder.append(serialize(declaration));
+			builder.append("\n");
+		}
+		builder.append("\n");
+		for (Reaction reaction : internalScope.getReactions()) {
+			builder.append(serializeReaction(reaction));
+			builder.append("\n");
+		}
+		return builder.toString();
+	}
+
+	/**
+	 * Copies and strips the given internal scope to only contain the comments and
+	 * the "internal" keyword for serializing.
+	 * 
+	 * @param internalScope
+	 *            the internal scope to be copied and stripped
+	 * @return a copied internal scope with stripped contents
+	 */
+	protected InternalScope copyAndStripInternalScope(InternalScope internalScope) {
+		InternalScope copiedScope = EcoreUtil2.copy(internalScope);
+		copiedScope.getReactions().clear();
+		copiedScope.getDeclarations().clear();
+		copiedScope.eAdapters().addAll(internalScope.eAdapters());
+		EcoreUtil2.resolveAll(copiedScope);
+		return copiedScope;
 	}
 
 	protected void serializeState(State state) {
@@ -107,13 +152,13 @@ public class StextResource extends AbstractSCTResource {
 		if (definitionScopes != null) {
 			statechart.getScopes().addAll(definitionScopes);
 		}
-		
+
 		statechart.getAnnotations().clear();
 		EList<ArgumentedAnnotation> annotations = rootASTElement.getAnnotations();
-		if(annotations != null){
+		if (annotations != null) {
 			statechart.getAnnotations().addAll(annotations);
 		}
-		
+
 	}
 
 	protected void parseState(State state) {
