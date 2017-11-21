@@ -30,6 +30,7 @@ The generated state machine code implements one of two execution schemes:
 
 You can select the execution scheme via the <code>@CycleBased</code> or <code>@EventDriven</code> annotations. Write the appropriate annotation to the top of your statechart's definition section, see sections "&quot;@CycleBased&quot;":../user-guide/statechart_language.html#sclang_cyclebased and "&quot;@EventDriven&quot;":../user-guide/statechart_language.html#sclang_eventdriven.
 
+
 h4(#codegen_cycle-based_execution_scheme). Cycle-based execution scheme
 
 In the cycle-based execution scheme, each run cycle consists of two different phases:
@@ -2308,7 +2309,7 @@ If the UI thread has been terminated by the user, the state machine will be shut
 
 h4(#codegen_java_simulating_operations_with_custom_java_code). Simulating operations with custom Java code
 
-To simulate a model with operations it is possible to use custom Java code that mocks the desired behavior or even to simulate against an existing Java backend. For this purpose it is required to provide one or more custom Java classes having a method with a matching signature. 
+To simulate a model with operations it is possible to use custom Java code that mocks the desired behavior or even to simulate against an existing Java backend. For this purpose it is required to provide one or more custom Java classes having a method with a matching signature.
 
 !images/docu_java_simulating_operation_010_statechart_with_operation.png(A statechart model with an operation)!
 
@@ -2342,6 +2343,68 @@ When the simulation is executed, the variable _result_ gets the value 2.
 
 p=. Configuring an operations class
 
+
+
+
+
+==<div class="pro-feature">==
+
+h2(#codegen_statechart_images_generator). Statechart images generator
+
+The statechart images generator renders a statechart and all its subdiagrams, if any, as image files. The generator supports several pixel-based and vector-based image formats, subject to the capabilities of the Java implementation you are using.
+
+
+h3(#codegen_statechart_images_sample_generator_model). Sample statechart images generator model
+
+The following example is a generator model to create SVG vector images of the _turbineControl_ statechart. The generated images are placed in the _images_ folder, which is located in the _powerPlant_ project.
+
+==<div class="example">==
+
+bc.. GeneratorModel for yakindu::images {
+
+    statechart turbineControl {
+
+        feature Outlet {
+            targetProject = "powerPlant"
+            targetFolder = "images"
+        }
+
+        feature Renderer {
+            format = "svg"
+        }
+    }
+}
+
+p. 
+
+==</div>==
+
+
+h3(#codegen_statechart_images_generator_id). Statechart images generator ID
+
+The statechart images generator's ID is *yakindu::images*. If you are using the YAKINDU generator model configuration wizard to create a generator model, select the _YAKINDU Image Generator_ to place the generator ID into the _.sgen_ file.
+
+
+h3(#codegen_statechart_images_generator_features). Statechart image generator features
+
+h4(#codegen_statechart_images_outlet_feature). Outlet feature
+
+The mandatory *Outlet* feature specifies the project and folder the statechart images will be written to. See section "&quot;Outlet feature&quot;":#codegen_outlet_feature for details.
+
+bq. *Please note:* The images generator supports the *Outlet* feature's _targetProject_ and _targetFolder_ parameters only.
+
+
+==<!-- Start sgen_feature_renderer -->==
+
+h4(#codegen_statechart_images_renderer_feature). Renderer feature
+
+The mandatory *Renderer* feature controls the rendering of the images.
+
+* _format_ (String, required): Format of the generated images. Supported image formats are listed in section "&quot;Exporting_a_statechart_as_an_image_file&quot;":../user-guide/editing_statecharts.html#edit_exporting_a_statechart_as_an_image_file.
+
+==<!-- End sgen_feature_renderer -->==
+
+==</div>==
 
 
 
