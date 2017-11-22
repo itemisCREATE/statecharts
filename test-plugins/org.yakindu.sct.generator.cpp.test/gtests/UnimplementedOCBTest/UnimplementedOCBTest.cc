@@ -1,4 +1,4 @@
-//**
+/*
  * Copyright (c) 2017 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -21,6 +21,7 @@ TEST(UnimplementedOCBTest, UnimplementedOCBTest) {
 	OCBDefaultInterfaceImpl* di = new OCBDefaultInterfaceImpl();
 	OCBNamedInterfaceImpl* ni = new OCBNamedInterfaceImpl();
 	OCBInternalImpl* ii = new OCBInternalImpl();
+	
 	
 	EXPECT_TRUE(statechart->init() < 0);
 	statechart->setDefaultSCI_OCB(di);
