@@ -33,7 +33,7 @@ static InternalOperation1Mock* internalOperation1Mock;
 class InternalOperation2Mock{
 	struct parameters {
 		sc_integer param1;
-		int callCount;
+		int callCount = 0;
 		inline bool operator==(const parameters& other) {
 			return (this->param1 == other.param1);
 		}
@@ -121,7 +121,7 @@ static InternalOperation3Mock* internalOperation3Mock;
 class InternalOperation3aMock{
 	struct parameters {
 		sc_real param1;
-		int callCount;
+		int callCount = 0;
 		inline bool operator==(const parameters& other) {
 			return (this->param1 == other.param1);
 		}
@@ -209,7 +209,7 @@ static InternalOperation4Mock* internalOperation4Mock;
 class InternalOperation4aMock{
 	struct parameters {
 		sc_integer param1;
-		int callCount;
+		int callCount = 0;
 		inline bool operator==(const parameters& other) {
 			return (this->param1 == other.param1);
 		}
@@ -297,7 +297,7 @@ static InternalOperation5Mock* internalOperation5Mock;
 class InternalOperation5aMock{
 	struct parameters {
 		const sc_string param1;
-		int callCount;
+		int callCount = 0;
 		inline bool operator==(const parameters& other) {
 			return (this->param1 == other.param1);
 		}
@@ -385,7 +385,7 @@ static Interface1InterfaceOperation1Mock* interface1InterfaceOperation1Mock;
 class Interface1InterfaceOperation2Mock{
 	struct parameters {
 		sc_integer param1;
-		int callCount;
+		int callCount = 0;
 		inline bool operator==(const parameters& other) {
 			return (this->param1 == other.param1);
 		}
@@ -473,7 +473,7 @@ static Interface1InterfaceOperation3Mock* interface1InterfaceOperation3Mock;
 class Interface1InterfaceOperation3aMock{
 	struct parameters {
 		sc_real param1;
-		int callCount;
+		int callCount = 0;
 		inline bool operator==(const parameters& other) {
 			return (this->param1 == other.param1);
 		}
@@ -561,7 +561,7 @@ static Interface1InterfaceOperation4Mock* interface1InterfaceOperation4Mock;
 class Interface1InterfaceOperation4aMock{
 	struct parameters {
 		sc_integer param1;
-		int callCount;
+		int callCount = 0;
 		inline bool operator==(const parameters& other) {
 			return (this->param1 == other.param1);
 		}
@@ -649,7 +649,7 @@ static Interface1InterfaceOperation5Mock* interface1InterfaceOperation5Mock;
 class Interface1InterfaceOperation5aMock{
 	struct parameters {
 		const sc_string param1;
-		int callCount;
+		int callCount = 0;
 		inline bool operator==(const parameters& other) {
 			return (this->param1 == other.param1);
 		}
@@ -737,7 +737,7 @@ static UnnamedInterfaceOperation1Mock* unnamedInterfaceOperation1Mock;
 class UnnamedInterfaceOperation2Mock{
 	struct parameters {
 		sc_integer param1;
-		int callCount;
+		int callCount = 0;
 		inline bool operator==(const parameters& other) {
 			return (this->param1 == other.param1);
 		}
@@ -825,7 +825,7 @@ static UnnamedOperation3Mock* unnamedOperation3Mock;
 class UnnamedOperation3aMock{
 	struct parameters {
 		sc_real param1;
-		int callCount;
+		int callCount = 0;
 		inline bool operator==(const parameters& other) {
 			return (this->param1 == other.param1);
 		}
@@ -913,7 +913,7 @@ static UnnamedOperation4Mock* unnamedOperation4Mock;
 class UnnamedOperation4aMock{
 	struct parameters {
 		sc_integer param1;
-		int callCount;
+		int callCount = 0;
 		inline bool operator==(const parameters& other) {
 			return (this->param1 == other.param1);
 		}
@@ -1001,7 +1001,7 @@ static UnnamedOperation5Mock* unnamedOperation5Mock;
 class UnnamedOperation5aMock{
 	struct parameters {
 		const sc_string param1;
-		int callCount;
+		int callCount = 0;
 		inline bool operator==(const parameters& other) {
 			return (this->param1 == other.param1);
 		}
