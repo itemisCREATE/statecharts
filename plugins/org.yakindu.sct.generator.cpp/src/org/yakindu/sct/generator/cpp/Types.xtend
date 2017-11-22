@@ -39,6 +39,7 @@ class Types implements IContentTemplate {
 		typedef int_fast16_t   sc_short;
 		typedef uint_fast16_t  sc_ushort;
 		typedef int32_t        sc_integer;
+		typedef int16_t		   sc_errorCode;
 		typedef double         sc_real;
 		typedef bool           sc_boolean;
 		

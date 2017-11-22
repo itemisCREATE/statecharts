@@ -148,7 +148,7 @@ class StatemachineImplementation implements IContentTemplate {
 	'''
 	
 	def initFunction(ExecutionFlow it) '''
-		sc_integer «module»::init()
+		sc_errorCode «module»::init()
 		{
 			sc_integer errorCode = 0;
 			«unimplementedOCBErrors»
