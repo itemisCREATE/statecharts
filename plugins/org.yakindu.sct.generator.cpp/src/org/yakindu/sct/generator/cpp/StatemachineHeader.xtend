@@ -296,7 +296,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		/*
 		 * Functions inherited from StatemachineInterface
 		 */
-		virtual void init();
+		virtual sc_errorCode init();
 		
 		virtual void enter();
 		
