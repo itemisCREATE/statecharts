@@ -14,6 +14,7 @@ import com.google.inject.Inject
 import java.util.List
 import org.yakindu.sct.generator.c.IContentTemplate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.Check
@@ -23,11 +24,11 @@ import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
-import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 
 class StatemachineImplementation implements IContentTemplate {
 	
@@ -150,8 +151,11 @@ class StatemachineImplementation implements IContentTemplate {
 	'''
 	
 	def initFunction(ExecutionFlow it) '''
-		void «module»::init()
+		sc_errorCode «module»::init()
 		{
+			sc_integer errorCode = 0;
+			«unimplementedOCBErrors»
+			
 			for (int i = 0; i < «orthogonalStatesConst»; ++i)
 				stateConfVector[i] = «null_state»;
 			
@@ -166,6 +170,7 @@ class StatemachineImplementation implements IContentTemplate {
 			clearOutEvents();
 			
 			«initSequence.code»
+			return errorCode;
 		}
 	'''
 	
@@ -326,6 +331,34 @@ class StatemachineImplementation implements IContentTemplate {
 				«IF d.type.name != 'void'»const «d.typeSpecifier.targetLanguageName» «d.access» = «d.initialValue.code»;«ENDIF»
 			«ENDFOR»
 		«ENDFOR»
+	'''
+	
+	def unimplementedOCBErrors(ExecutionFlow it)'''
+		«FOR iface : getInterfaces.filter[hasOperations && !entry.useStaticOPC]»
+			«IF iface instanceof InternalScope»
+				«checkInternalOCB(iface)»			
+			«ELSEIF iface instanceof InterfaceScope»
+				«checkInterfaceOCB(iface)»
+			«ENDIF»
+		«ENDFOR»
+	'''
+	
+	def checkInternalOCB(StatechartScope it) '''
+		if (this->«OCB_Instance» == null) { 
+			errorCode |= «ErrorCode.OCB_INTERNAL_INIT.name»;
+		}
+	'''
+	
+	def checkInterfaceOCB(StatechartScope it) '''
+		«IF defaultInterface»
+			if (this->«OCB_Instance» == null) { 
+				errorCode |=  «ErrorCode.OCB_DEFAULT_INIT.name»;
+			}
+		«ELSE»
+			if (this->«OCB_Instance» == null) { 
+				errorCode |= «ErrorCode.OCB_NAMED_INIT.name»;
+			}
+		«ENDIF»
 	'''
 	
 	/* ===================================================================================

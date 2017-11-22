@@ -41,7 +41,7 @@ class StatemachineInterface implements IContentTemplate {
 				
 				/*! Initializes the state machine. Used to initialize internal variables etc.
 				*/
-				virtual void init() = 0;
+				virtual sc_errorCode init() = 0;
 			
 				/*! Enters the state machine. Sets the state machine into a defined state.
 				*/
