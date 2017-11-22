@@ -164,7 +164,7 @@ public class SCTResourceTest {
 		Scope internalScope = (InternalScope) statechart.getScopes().get(0);
 		Event event = internalScope.getEvents().get(0);
 		event.setName("Event2");
-		assertEquals("internal: event Event2\n", statechart.getSpecification());
+		assertEquals("internal:\nevent Event2\n", statechart.getSpecification());
 		assertEquals("" + res.getSyntaxDiagnostics(), 0, res.getSyntaxDiagnostics().size());
 	}
 
