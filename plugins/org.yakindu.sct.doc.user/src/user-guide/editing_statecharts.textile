@@ -57,7 +57,7 @@ YAKINDU Statechart Tools comes with a *statechart editor*. This section explains
 
 
 
-h3(#edit_sc_modeling_perspective). _SC Modeling_ perspective
+h3(#edit_the_sc_modeling_perspective). The _SC Modeling_ perspective
 
 _SC Modeling_ is an Eclipse perspective supporting the modeling of statecharts. The perspective defines the following views and their positions:
 * _Project Explorer_ (left): This view displays your workspace and projects, folders, and files contained therein. You can also use the _Project Explorer_ to inspect the internal structure of your statechart models.
@@ -258,7 +258,9 @@ A complementary way to mitigate the size of large statecharts are *subdiagrams*.
 Composite states resp. subdiagrams can be nested to any depth.
 
 The statechart editor provides various "refactorings":#edit_refactorings to support editing these hierarchies.
- 
+
+
+
 
 h2(#edit_using_subdiagrams). Using subdiagrams
 
@@ -285,22 +287,27 @@ p=. Subdiagram editor
 Using the "inlining subdiagram refactoring":#edit_inlining_subdiagram, you can turn a subdiagram back into the composite state.
 
 
-h2(#edit_statechart_diagram_definition_section_appearance). Editing appearance of the statechart diagram definition section
+h2(#edit_using_the_definition_section). Using the definition section
 
-All statechart diagrams provide a so called _Definition section_. By default, the definition section is positioned at the left side of a statechart diagram as an editable area. Within this area the main content and behaviour of the statechart can be described by providing actions, interfaces and variables. 
+###. I (Rainer) don't understand why the definition section's UI must be so complicated. In the new concept, it can be in a "legacy" or in a "pinned" state, where the "pinned" state is a composite state consisting of "visible" or "hidden". Why not simply have the definition section either visible or hidden? As a user, I don't grasp this.
 
-The definition section comes with an option to pin it to the left side of the view. In order to pin the definition section you simply have to click the small decorator icon in the upper-left corner of the area. 
-The pinned section also provides a small decorator icon in the upper-right corner, to restore the inlined state again. Please note that the inline option is not available for "subdiagrams":#edit_using_subdiagrams. The option to pin/inline makes changes to the model of the statechart diagram, so you have to save these changes to keep them.  
+By default, a statechart's "definition section":../user-guide/statechart_language.html#sclang_definition_section is positioned at the left-hand side of the "canvas":#edit_canvas.
 
-!images/docu_editor_definition_section_pin.png(Pin the statechart diagram definition section)!
+The definition section comes with an option to pin it to the left-hand side of the view. In order to pin the definition section you simply have to click the small decorator icon in the upper-left corner of the area.
 
-p=. Pin the statechart diagram definition section
+The pinned section also provides a small decorator icon in the upper-right corner, to restore the inlined state again. Please note that the inline option is not available for "subdiagrams":#edit_using_subdiagrams. The option to pin/inline makes changes to the model of the statechart diagram, so you have to save these changes to keep them.
+
+!images/docu_editor_definition_section_pin.png(Pinning the statechart diagram definition section)!
+
+p=. Pinning the statechart diagram definition section
 
 !images/docu_editor_definition_section_inline.png(Inlining the statechart diagram definition section)!
 
 p=. Inlining the statechart diagram definition section
 
-You can decide, whether you want the pinned definition section contents to be visible or not. For this, the pinned definition section comes with a small decorator icon for collapsing/expanding in the upper-left corner. In collapsed state, the definition section can also be expanded by clicking on the vertical bar with the vertically aligned text "_Definition section_". By default, the pinned definition section takes 20% of the diagrams view, but you can resize it as you want.
+You can decide whether you want the pinned definition section's contents to be visible or not. For this, the pinned definition section comes with a small decorator icon in the upper-left corner. Click on it to collapse or expand the definition section.
+
+In the collapsed state, the definition section can also be expanded by clicking on the vertical bar labeled "Definition section". By default, the pinned definition section takes 20% of the canvas' view, but you can resize it as you like.
 
 !images/docu_editor_definition_section_collapse.png(Collapsing the pinned definition section)!
 
@@ -310,11 +317,13 @@ p=. Collapsing the pinned definition section
 
 p=. Expanding the pinned definition section
 
-With the pinned definition section the name of the statechart can be edited by changing the displayed text in the top-center of the section. When changing the name in the definition section within a subdiagram, the corresponding state in the parent diagram will also be updated with the new value. The value will be applied when the focus changes.
+In the pinned definition section, the name of the statechart can be edited by changing the displayed text in the top-center of the section. When changing the name in the definition section within a subdiagram, the corresponding state in the parent diagram will also be updated with the new value. The value will be applied when the focus changes.
 
 !images/docu_editor_definition_section_name_edit.png(Changing the name of statechart diagram/subdiagram)!
 
 p=. Changing the name of statechart diagram/subdiagram
+
+
 
 
 h2(#edit_refactorings). Refactorings
