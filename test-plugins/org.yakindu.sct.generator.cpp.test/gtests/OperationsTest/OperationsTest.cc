@@ -13,7 +13,7 @@ using ::testing::_;
 
 class InternalOperation1Mock{
 	public:
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
@@ -42,7 +42,7 @@ class InternalOperation2Mock{
 	};
 	public:
 	std::list<InternalOperation2Mock::parameters> paramCount;
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
@@ -101,7 +101,7 @@ static InternalOperation2Mock* internalOperation2Mock;
 
 class InternalOperation3Mock{
 	public:
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
@@ -130,7 +130,7 @@ class InternalOperation3aMock{
 	};
 	public:
 	std::list<InternalOperation3aMock::parameters> paramCount;
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
@@ -189,7 +189,7 @@ static InternalOperation3aMock* internalOperation3aMock;
 
 class InternalOperation4Mock{
 	public:
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
@@ -218,7 +218,7 @@ class InternalOperation4aMock{
 	};
 	public:
 	std::list<InternalOperation4aMock::parameters> paramCount;
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
@@ -277,7 +277,7 @@ static InternalOperation4aMock* internalOperation4aMock;
 
 class InternalOperation5Mock{
 	public:
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
@@ -306,7 +306,7 @@ class InternalOperation5aMock{
 	};
 	public:
 	std::list<InternalOperation5aMock::parameters> paramCount;
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
@@ -365,7 +365,7 @@ static InternalOperation5aMock* internalOperation5aMock;
 
 class Interface1InterfaceOperation1Mock{
 	public:
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
@@ -394,7 +394,7 @@ class Interface1InterfaceOperation2Mock{
 	};
 	public:
 	std::list<Interface1InterfaceOperation2Mock::parameters> paramCount;
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
@@ -453,7 +453,7 @@ static Interface1InterfaceOperation2Mock* interface1InterfaceOperation2Mock;
 
 class Interface1InterfaceOperation3Mock{
 	public:
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
@@ -482,7 +482,7 @@ class Interface1InterfaceOperation3aMock{
 	};
 	public:
 	std::list<Interface1InterfaceOperation3aMock::parameters> paramCount;
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
@@ -541,7 +541,7 @@ static Interface1InterfaceOperation3aMock* interface1InterfaceOperation3aMock;
 
 class Interface1InterfaceOperation4Mock{
 	public:
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
@@ -570,7 +570,7 @@ class Interface1InterfaceOperation4aMock{
 	};
 	public:
 	std::list<Interface1InterfaceOperation4aMock::parameters> paramCount;
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
@@ -629,7 +629,7 @@ static Interface1InterfaceOperation4aMock* interface1InterfaceOperation4aMock;
 
 class Interface1InterfaceOperation5Mock{
 	public:
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
@@ -658,7 +658,7 @@ class Interface1InterfaceOperation5aMock{
 	};
 	public:
 	std::list<Interface1InterfaceOperation5aMock::parameters> paramCount;
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
@@ -717,7 +717,7 @@ static Interface1InterfaceOperation5aMock* interface1InterfaceOperation5aMock;
 
 class UnnamedInterfaceOperation1Mock{
 	public:
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
@@ -746,7 +746,7 @@ class UnnamedInterfaceOperation2Mock{
 	};
 	public:
 	std::list<UnnamedInterfaceOperation2Mock::parameters> paramCount;
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
@@ -805,7 +805,7 @@ static UnnamedInterfaceOperation2Mock* unnamedInterfaceOperation2Mock;
 
 class UnnamedOperation3Mock{
 	public:
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
@@ -834,7 +834,7 @@ class UnnamedOperation3aMock{
 	};
 	public:
 	std::list<UnnamedOperation3aMock::parameters> paramCount;
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
@@ -893,7 +893,7 @@ static UnnamedOperation3aMock* unnamedOperation3aMock;
 
 class UnnamedOperation4Mock{
 	public:
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
@@ -922,7 +922,7 @@ class UnnamedOperation4aMock{
 	};
 	public:
 	std::list<UnnamedOperation4aMock::parameters> paramCount;
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
@@ -981,7 +981,7 @@ static UnnamedOperation4aMock* unnamedOperation4aMock;
 
 class UnnamedOperation5Mock{
 	public:
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
@@ -1010,7 +1010,7 @@ class UnnamedOperation5aMock{
 	};
 	public:
 	std::list<UnnamedOperation5aMock::parameters> paramCount;
-	int callCount = 0;
+	int callCount;
 
 	sc_boolean calledAtLeast(const int times){
 		return (callCount >= times);
