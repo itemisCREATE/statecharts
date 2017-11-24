@@ -94,7 +94,7 @@ public class CPPDefaultFeatureValueProvider extends AbstractDefaultFeatureValueP
 			}
 		} else if (CPPFeatureConstants.PARAMETER_API_CHECK_UNIMPLEMENTED_OCBS.equals(parameterName)) {
 			if (!parameter.getStringValue().matches(VALID_IDENTIFIER_REGEX)) {
-				return error ("Invalid bla");
+				return error ("Invalid check for unimplemented OCBs");
 			}
 		}
 		return Status.OK_STATUS;
