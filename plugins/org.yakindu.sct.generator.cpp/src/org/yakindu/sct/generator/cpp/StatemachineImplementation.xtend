@@ -151,11 +151,12 @@ class StatemachineImplementation implements IContentTemplate {
 	'''
 	
 	def initFunction(ExecutionFlow it) '''
-		sc_errorCode «module»::init()
+		«IF entry.checkUnimplementedOCBs»sc_errorCode«ELSE»void«ENDIF» «module»::init()
 		{
-			sc_integer errorCode = 0;
-			«unimplementedOCBErrors»
+			«IF entry.checkUnimplementedOCBs»
+			sc_errorCode errorCode = 0;
 			
+			«unimplementedOCBErrors»«ENDIF»
 			for (int i = 0; i < «orthogonalStatesConst»; ++i)
 				stateConfVector[i] = «null_state»;
 			
@@ -170,7 +171,9 @@ class StatemachineImplementation implements IContentTemplate {
 			clearOutEvents();
 			
 			«initSequence.code»
+			«IF entry.checkUnimplementedOCBs»
 			return errorCode;
+			«ENDIF»
 		}
 	'''
 	

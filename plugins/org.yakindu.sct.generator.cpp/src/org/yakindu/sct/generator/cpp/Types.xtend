@@ -49,6 +49,7 @@ class Types implements IContentTemplate {
 		#define «CppNaming::NULL_STRING» 0
 		#endif
 		
+		/* Error codes and mask can be used to check unimplemented operation callbacks. They can be activated in the API feature within the .sgen file.*/
 		#ifndef «ErrorCode.OCB_INIT_MASK.name»
 		#define «ErrorCode.OCB_INIT_MASK.name» «ErrorCode.OCB_INIT_MASK.value»
 		#endif

@@ -40,4 +40,12 @@
         optional="true"
         parameterType="BOOLEAN"/>
   </types>
+  <types name="API"
+      comment=""
+      optional="true">
+    <parameters
+        name="checkUnimplementedOCBs"
+        comment="If set to 'true' init function returns an error code, otherwise the init function return type is void"
+        parameterType="BOOLEAN"/>
+  </types>
 </sgen:FeatureTypeLibrary>

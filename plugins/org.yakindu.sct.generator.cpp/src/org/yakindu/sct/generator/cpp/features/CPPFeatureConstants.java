@@ -33,4 +33,8 @@ public interface CPPFeatureConstants {
 	public static final String FEATURE_INCLUDES = "Includes";
 	
 	public static final String PARAMETER_INCLUDES_USE_RELATIVE_PATHS = "useRelativePaths";
+
+	public static final String FEATURE_API = "API";
+	
+	public static final String PARAMETER_API_CHECK_UNIMPLEMENTED_OCBS = "checkUnimplementedOCBs";
 }

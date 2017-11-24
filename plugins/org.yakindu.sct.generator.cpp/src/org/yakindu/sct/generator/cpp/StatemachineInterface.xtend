@@ -15,6 +15,7 @@ import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 
 class StatemachineInterface implements IContentTemplate {
 	
@@ -22,7 +23,7 @@ class StatemachineInterface implements IContentTemplate {
 	extension CppNaming
 	
 	@Inject
-	extension GenmodelEntries
+	extension GenmodelEntriesExtension
 	
 	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations locations) {
 		'''
@@ -41,7 +42,7 @@ class StatemachineInterface implements IContentTemplate {
 				
 				/*! Initializes the state machine. Used to initialize internal variables etc.
 				*/
-				virtual sc_errorCode init() = 0;
+				virtual «IF entry.checkUnimplementedOCBs»sc_errorCode«ELSE»void«ENDIF» init() = 0;
 			
 				/*! Enters the state machine. Sets the state machine into a defined state.
 				*/

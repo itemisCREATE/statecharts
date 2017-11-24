@@ -62,7 +62,9 @@ public class CPPDefaultFeatureValueProvider extends AbstractDefaultFeatureValueP
 			parameterValue.setValue(false);
 		} else if (parameterValue.getParameter().getName().equals(CPPFeatureConstants.PARAMETER_INCLUDES_USE_RELATIVE_PATHS)) {
 			parameterValue.setValue(true);
-		}
+		} else if (parameterValue.getParameter().getName().equals(CPPFeatureConstants.PARAMETER_API_CHECK_UNIMPLEMENTED_OCBS)) {
+			parameterValue.setValue(true);
+		} 
 	}
 
 	public IStatus validateParameterValue(FeatureParameterValue parameter) {
@@ -89,6 +91,10 @@ public class CPPDefaultFeatureValueProvider extends AbstractDefaultFeatureValueP
 			}
 			if (!found) {
 				return error("Visibility could only be private or protected");
+			}
+		} else if (CPPFeatureConstants.PARAMETER_API_CHECK_UNIMPLEMENTED_OCBS.equals(parameterName)) {
+			if (!parameter.getStringValue().matches(VALID_IDENTIFIER_REGEX)) {
+				return error ("Invalid bla");
 			}
 		}
 		return Status.OK_STATUS;

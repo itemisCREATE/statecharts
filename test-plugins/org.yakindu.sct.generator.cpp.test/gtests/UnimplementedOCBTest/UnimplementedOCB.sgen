@@ -16,5 +16,9 @@ GeneratorModel for yakindu::cpp {
 			targetProject = "gtests"
 			targetFolder = "UnimplementedOCBTest"
 		}
+		
+		feature API {
+			checkUnimplementedOCBs = true
+		}
 	}
 }
