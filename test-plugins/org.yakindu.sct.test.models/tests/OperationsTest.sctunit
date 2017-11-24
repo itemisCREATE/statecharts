@@ -9,11 +9,11 @@ testclass OperationsTest for statechart Operations {
 
 		assert active ( Operations.main_region.B )
 		assert called internalOperation1 
-		assert called InternalOperation2 with ( 4 )
+		assert called InternalOperation2(4)
 		assert called internalOperation3 
-		assert called internalOperation3a with (1.0)
+		assert called internalOperation3a(1.0)
 		assert called internalOperation4
-		assert called internalOperation4a with ( 5 )
+		assert called internalOperation4a(5)
 		assert called internalOperation5 
 		assert called internalOperation5a
 		
@@ -23,11 +23,11 @@ testclass OperationsTest for statechart Operations {
 
 		assert active(Operations.main_region.C)
 		assert called Interface1.interfaceOperation1  
-		assert called Interface1.InterfaceOperation2 with ( 4 ) 
+		assert called Interface1.InterfaceOperation2(4) 
 		assert called Interface1.interfaceOperation3
-		assert called Interface1.interfaceOperation3a with ( 1.0 )
+		assert called Interface1.interfaceOperation3a(1.0)
 		assert called Interface1.interfaceOperation4
-		assert called Interface1.interfaceOperation4a with ( 5 )
+		assert called Interface1.interfaceOperation4a(5)
 		assert called Interface1.interfaceOperation5
 		assert called Interface1.interfaceOperation5a
 		
@@ -37,13 +37,57 @@ testclass OperationsTest for statechart Operations {
 		
 		assert active(Operations.main_region.D)
 		assert called unnamedInterfaceOperation1 
-		assert called UnnamedInterfaceOperation2 with ( 4 )
+		assert called UnnamedInterfaceOperation2(4)
 		assert called unnamedOperation3 
-		assert called unnamedOperation3a with ( 1.0 )
+		assert called unnamedOperation3a(1.0)
 		assert called unnamedOperation4
-		assert called unnamedOperation4a with ( 5 )
+		assert called unnamedOperation4a(5)
 		assert called unnamedOperation5 
 		assert called unnamedOperation5a
+			
+	}
+	
+	@Test
+	operation operationsNotCalled (){
+		mock alwaysTrue returns ( true )
+		
+		enter
+
+		assert active ( Operations.main_region.A )
+		assert !called internalOperation1 
+		assert !called InternalOperation2(4)
+		assert !called internalOperation3 
+		assert !called internalOperation3a(1.0)
+		assert !called internalOperation4
+		assert !called internalOperation4a(5)
+		assert !called internalOperation5 
+		assert !called internalOperation5a
+		
+		raise ev
+		proceed 1 cycle
+
+		assert active(Operations.main_region.B)
+		assert !called Interface1.interfaceOperation1  
+		assert !called Interface1.InterfaceOperation2(4) 
+		assert !called Interface1.interfaceOperation3
+		assert !called Interface1.interfaceOperation3a(1.0)
+		assert !called Interface1.interfaceOperation4
+		assert !called Interface1.interfaceOperation4a(5)
+		assert !called Interface1.interfaceOperation5
+		assert !called Interface1.interfaceOperation5a
+		
+		raise ev
+		proceed 1 cycle
+		
+		assert active(Operations.main_region.C)
+		assert !called unnamedInterfaceOperation1 
+		assert !called UnnamedInterfaceOperation2(4)
+		assert !called unnamedOperation3 
+		assert !called unnamedOperation3a(1.0)
+		assert !called unnamedOperation4
+		assert !called unnamedOperation4a(5)
+		assert !called unnamedOperation5 
+		assert !called unnamedOperation5a
 			
 	}
 }
