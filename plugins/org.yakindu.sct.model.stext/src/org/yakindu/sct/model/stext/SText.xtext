@@ -40,19 +40,19 @@ TransitionSpecification:
 	reaction=TransitionReaction;
 
 StateScope returns sgraph::Scope:
-	{SimpleScope} (reactions+=(LocalReaction))*;
+	{SimpleScope} (members+=(LocalReaction))*;
 
 StatechartScope:
 	InterfaceScope | InternalScope | ImportScope;
 
 InterfaceScope:
-	{InterfaceScope} 'interface' (name=XID)? ':' (declarations+=InterfaceScopeDeclaration)*;
+	{InterfaceScope} 'interface' (name=XID)? ':' (members+=InterfaceScopeDeclaration)*;
 
 InterfaceScopeDeclaration returns types::Declaration:
 	EventDefinition | VariableDefinition | TypeAliasDefinition | OperationDefinition;
 
 InternalScope:
-	{InternalScope} 'internal' ':' ((declarations+=InternalScopeDeclaration) | (reactions +=LocalReaction))*
+	{InternalScope} 'internal' ':' (members+=(InternalScopeDeclaration | LocalReaction))*
 ;
 InternalScopeDeclaration returns types::Declaration:
 	EventDefinition | VariableDefinition | OperationDefinition | TypeAliasDefinition

@@ -884,7 +884,7 @@ public interface SGraphPackage extends EPackage {
 	int SCOPE = 15;
 
 	/**
-	 * The feature id for the '<em><b>Declarations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Declarations</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -911,7 +911,7 @@ public interface SGraphPackage extends EPackage {
 	int SCOPE__VARIABLES = 2;
 
 	/**
-	 * The feature id for the '<em><b>Reactions</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Reactions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -920,13 +920,22 @@ public interface SGraphPackage extends EPackage {
 	int SCOPE__REACTIONS = 3;
 
 	/**
+	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPE__MEMBERS = 4;
+
+	/**
 	 * The number of structural features of the '<em>Scope</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE_FEATURE_COUNT = 4;
+	int SCOPE_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.ScopedElementImpl <em>Scoped Element</em>}' class.
@@ -1257,6 +1266,25 @@ public interface SGraphPackage extends EPackage {
 	int IMPORT_DECLARATION_FEATURE_COUNT = TypesPackage.DECLARATION_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.ScopeMemberImpl <em>Scope Member</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sgraph.impl.ScopeMemberImpl
+	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getScopeMember()
+	 * @generated
+	 */
+	int SCOPE_MEMBER = 22;
+
+	/**
+	 * The number of structural features of the '<em>Scope Member</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPE_MEMBER_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.EntryKind <em>Entry Kind</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1264,7 +1292,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getEntryKind()
 	 * @generated
 	 */
-	int ENTRY_KIND = 22;
+	int ENTRY_KIND = 23;
 
 
 	/**
@@ -1275,7 +1303,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getChoiceKind()
 	 * @generated
 	 */
-	int CHOICE_KIND = 23;
+	int CHOICE_KIND = 24;
 
 
 	/**
@@ -1512,6 +1540,16 @@ public interface SGraphPackage extends EPackage {
 	EReference getImportDeclaration_Declaration();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.ScopeMember <em>Scope Member</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Scope Member</em>'.
+	 * @see org.yakindu.sct.model.sgraph.ScopeMember
+	 * @generated
+	 */
+	EClass getScopeMember();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Choice <em>Choice</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1710,10 +1748,10 @@ public interface SGraphPackage extends EPackage {
 	EClass getScope();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sgraph.Scope#getDeclarations <em>Declarations</em>}'.
+	 * Returns the meta object for the reference list '{@link org.yakindu.sct.model.sgraph.Scope#getDeclarations <em>Declarations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Declarations</em>'.
+	 * @return the meta object for the reference list '<em>Declarations</em>'.
 	 * @see org.yakindu.sct.model.sgraph.Scope#getDeclarations()
 	 * @see #getScope()
 	 * @generated
@@ -1743,15 +1781,26 @@ public interface SGraphPackage extends EPackage {
 	EReference getScope_Variables();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sgraph.Scope#getReactions <em>Reactions</em>}'.
+	 * Returns the meta object for the reference list '{@link org.yakindu.sct.model.sgraph.Scope#getReactions <em>Reactions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Reactions</em>'.
+	 * @return the meta object for the reference list '<em>Reactions</em>'.
 	 * @see org.yakindu.sct.model.sgraph.Scope#getReactions()
 	 * @see #getScope()
 	 * @generated
 	 */
 	EReference getScope_Reactions();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sgraph.Scope#getMembers <em>Members</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Members</em>'.
+	 * @see org.yakindu.sct.model.sgraph.Scope#getMembers()
+	 * @see #getScope()
+	 * @generated
+	 */
+	EReference getScope_Members();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.ScopedElement <em>Scoped Element</em>}'.
@@ -2032,6 +2081,16 @@ public interface SGraphPackage extends EPackage {
 		EReference IMPORT_DECLARATION__DECLARATION = eINSTANCE.getImportDeclaration_Declaration();
 
 		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.ScopeMemberImpl <em>Scope Member</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sgraph.impl.ScopeMemberImpl
+		 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getScopeMember()
+		 * @generated
+		 */
+		EClass SCOPE_MEMBER = eINSTANCE.getScopeMember();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.ChoiceImpl <em>Choice</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2206,7 +2265,7 @@ public interface SGraphPackage extends EPackage {
 		EClass SCOPE = eINSTANCE.getScope();
 
 		/**
-		 * The meta object literal for the '<em><b>Declarations</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Declarations</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2230,12 +2289,20 @@ public interface SGraphPackage extends EPackage {
 		EReference SCOPE__VARIABLES = eINSTANCE.getScope_Variables();
 
 		/**
-		 * The meta object literal for the '<em><b>Reactions</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Reactions</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference SCOPE__REACTIONS = eINSTANCE.getScope_Reactions();
+
+		/**
+		 * The meta object literal for the '<em><b>Members</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCOPE__MEMBERS = eINSTANCE.getScope_Members();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.ScopedElementImpl <em>Scoped Element</em>}' class.

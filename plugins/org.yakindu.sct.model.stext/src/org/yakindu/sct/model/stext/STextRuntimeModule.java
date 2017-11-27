@@ -15,6 +15,7 @@ import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
+import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.validation.CompositeEValidator;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
@@ -26,6 +27,7 @@ import org.yakindu.sct.model.stext.naming.StextNameProvider;
 import org.yakindu.sct.model.stext.resource.SCTResourceDescriptionStrategy;
 import org.yakindu.sct.model.stext.resource.StextResource;
 import org.yakindu.sct.model.stext.scoping.STextGlobalScopeProvider;
+import org.yakindu.sct.model.stext.serialization.STextTransientValueService;
 import org.yakindu.sct.model.stext.terminals.STextValueConverterService;
 
 import com.google.inject.Binder;
@@ -92,6 +94,11 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 
 	public Class<? extends ITypeSystemInferrer> bindITypeSystemInferrer() {
 		return STextTypeInferrer.class;
+	}
+	
+	@Override
+	public Class<? extends ITransientValueService> bindITransientValueService() {
+		return STextTransientValueService.class;
 	}
 
 }

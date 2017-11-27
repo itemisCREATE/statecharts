@@ -21,6 +21,7 @@ import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.TypedElement;
+import org.yakindu.sct.model.sgraph.*;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Effect;
@@ -195,6 +196,10 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseImportDeclaration(ImportDeclaration object) {
 				return createImportDeclarationAdapter();
+			}
+			@Override
+			public Adapter caseScopeMember(ScopeMember object) {
+				return createScopeMemberAdapter();
 			}
 			@Override
 			public Adapter caseNamedElement(NamedElement object) {
@@ -465,6 +470,20 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createImportDeclarationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.ScopeMember <em>Scope Member</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sgraph.ScopeMember
+	 * @generated
+	 */
+	public Adapter createScopeMemberAdapter() {
 		return null;
 	}
 

@@ -35,15 +35,13 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//Choice/kind"/>
     </genClasses>
     <genClasses ecoreClass="sgraph.ecore#//Statechart">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Statechart/imports"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//Statechart/domainID"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Statechart/annotations"/>
     </genClasses>
     <genClasses ecoreClass="sgraph.ecore#//Entry">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//Entry/kind"/>
     </genClasses>
     <genClasses ecoreClass="sgraph.ecore#//Exit"/>
     <genClasses image="false" ecoreClass="sgraph.ecore#//ReactiveElement">
-      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference sgraph.ecore#//ReactiveElement/reactions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//ReactiveElement/localReactions"/>
     </genClasses>
     <genClasses image="false" ecoreClass="sgraph.ecore#//Reaction">
@@ -61,6 +59,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Scope/declarations"/>
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference sgraph.ecore#//Scope/events"/>
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference sgraph.ecore#//Scope/variables"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference sgraph.ecore#//Scope/reactions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Scope/members"/>
     </genClasses>
     <genClasses image="false" ecoreClass="sgraph.ecore#//ScopedElement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//ScopedElement/scopes"/>
@@ -69,9 +69,6 @@
     <genClasses ecoreClass="sgraph.ecore#//Synchronization"/>
     <genClasses ecoreClass="sgraph.ecore#//State">
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/orthogonal"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sgraph.ecore#//State/substatechart"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/substatechartId"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/subchart"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/simple"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/composite"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/leaf"/>
@@ -80,11 +77,9 @@
     <genClasses image="false" ecoreClass="sgraph.ecore#//CompositeElement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//CompositeElement/regions"/>
     </genClasses>
-    <genClasses ecoreClass="sgraph.ecore#//Import">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//Import/importedNamespace"/>
-    </genClasses>
     <genClasses ecoreClass="sgraph.ecore#//ImportDeclaration">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sgraph.ecore#//ImportDeclaration/declaration"/>
     </genClasses>
+    <genClasses ecoreClass="sgraph.ecore#//ScopeMember"/>
   </genPackages>
 </genmodel:GenModel>

@@ -11,10 +11,10 @@
 package org.yakindu.sct.model.sgraph.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -38,6 +38,7 @@ import org.yakindu.sct.model.sgraph.util.DerivedSubsetEObjectEList;
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.ScopeImpl#getEvents <em>Events</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.ScopeImpl#getVariables <em>Variables</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.ScopeImpl#getReactions <em>Reactions</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.impl.ScopeImpl#getMembers <em>Members</em>}</li>
  * </ul>
  *
  * @generated
@@ -50,25 +51,14 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 	public static final String copyright = "Copyright (c) 2011 committers of YAKINDU and others.\r\nAll rights reserved. This program and the accompanying materials\r\nare made available under the terms of the Eclipse Public License v1.0\r\nwhich accompanies this distribution, and is available at\r\nhttp://www.eclipse.org/legal/epl-v10.html\r\nContributors:\r\ncommitters of YAKINDU - initial API and implementation\r\n";
 
 	/**
-	 * The cached value of the '{@link #getDeclarations() <em>Declarations</em>}
-	 * ' containment reference list. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
-	 * @see #getDeclarations()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Declaration> declarations;
-
-	/**
-	 * The cached value of the '{@link #getReactions() <em>Reactions</em>}' containment reference list.
+	 * The cached value of the '{@link #getMembers() <em>Members</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReactions()
+	 * @see #getMembers()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Reaction> reactions;
+	protected EList<EObject> members;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -89,13 +79,12 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public EList<Declaration> getDeclarations() {
-		if (declarations == null) {
-			declarations = new EObjectContainmentEList.Resolving<Declaration>(Declaration.class, this, SGraphPackage.SCOPE__DECLARATIONS);
-		}
-		return declarations;
+		return new DerivedSubsetEObjectEList<Declaration>(Declaration.class, this,
+				SGraphPackage.SCOPE__DECLARATIONS,
+				SGraphPackage.SCOPE__MEMBERS);
 	}
 
 	/**
@@ -106,7 +95,7 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 	public EList<Event> getEvents() {
 		return new DerivedSubsetEObjectEList<Event>(Event.class, this,
 				SGraphPackage.SCOPE__EVENTS,
-				SGraphPackage.SCOPE__DECLARATIONS);
+				SGraphPackage.SCOPE__MEMBERS);
 	}
 
 	/**
@@ -117,7 +106,18 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 	public EList<Property> getVariables() {
 		return new DerivedSubsetEObjectEList<Property>(Property.class, this,
 				SGraphPackage.SCOPE__VARIABLES,
-				SGraphPackage.SCOPE__DECLARATIONS);
+				SGraphPackage.SCOPE__MEMBERS);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public EList<Reaction> getReactions() {
+		return new DerivedSubsetEObjectEList<Reaction>(Reaction.class, this,
+				SGraphPackage.SCOPE__REACTIONS,
+				SGraphPackage.SCOPE__MEMBERS);
 	}
 
 	/**
@@ -125,11 +125,11 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Reaction> getReactions() {
-		if (reactions == null) {
-			reactions = new EObjectContainmentEList.Resolving<Reaction>(Reaction.class, this, SGraphPackage.SCOPE__REACTIONS);
+	public EList<EObject> getMembers() {
+		if (members == null) {
+			members = new EObjectContainmentEList.Resolving<EObject>(EObject.class, this, SGraphPackage.SCOPE__MEMBERS);
 		}
-		return reactions;
+		return members;
 	}
 
 	/**
@@ -140,10 +140,8 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SGraphPackage.SCOPE__DECLARATIONS:
-				return ((InternalEList<?>)getDeclarations()).basicRemove(otherEnd, msgs);
-			case SGraphPackage.SCOPE__REACTIONS:
-				return ((InternalEList<?>)getReactions()).basicRemove(otherEnd, msgs);
+			case SGraphPackage.SCOPE__MEMBERS:
+				return ((InternalEList<?>)getMembers()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -163,42 +161,39 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 				return getVariables();
 			case SGraphPackage.SCOPE__REACTIONS:
 				return getReactions();
+			case SGraphPackage.SCOPE__MEMBERS:
+				return getMembers();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SGraphPackage.SCOPE__DECLARATIONS:
-				getDeclarations().clear();
-				getDeclarations().addAll((Collection<? extends Declaration>)newValue);
-				return;
-			case SGraphPackage.SCOPE__REACTIONS:
-				getReactions().clear();
-				getReactions().addAll((Collection<? extends Reaction>)newValue);
+			case SGraphPackage.SCOPE__MEMBERS:
+				getMembers().clear();
+				getMembers().addAll((Collection<? extends EObject>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SGraphPackage.SCOPE__DECLARATIONS:
-				getDeclarations().clear();
-				return;
-			case SGraphPackage.SCOPE__REACTIONS:
-				getReactions().clear();
+			case SGraphPackage.SCOPE__MEMBERS:
+				getMembers().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -212,13 +207,15 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case SGraphPackage.SCOPE__DECLARATIONS:
-				return declarations != null && !declarations.isEmpty();
+				return !getDeclarations().isEmpty();
 			case SGraphPackage.SCOPE__EVENTS:
 				return !getEvents().isEmpty();
 			case SGraphPackage.SCOPE__VARIABLES:
 				return !getVariables().isEmpty();
 			case SGraphPackage.SCOPE__REACTIONS:
-				return reactions != null && !reactions.isEmpty();
+				return !getReactions().isEmpty();
+			case SGraphPackage.SCOPE__MEMBERS:
+				return members != null && !members.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
