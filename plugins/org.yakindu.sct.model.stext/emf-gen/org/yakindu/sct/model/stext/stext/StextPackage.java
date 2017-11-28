@@ -303,7 +303,7 @@ public interface StextPackage extends EPackage {
 	int STATECHART_SCOPE = 8;
 
 	/**
-	 * The feature id for the '<em><b>Declarations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Declarations</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -330,7 +330,7 @@ public interface StextPackage extends EPackage {
 	int STATECHART_SCOPE__VARIABLES = SGraphPackage.SCOPE__VARIABLES;
 
 	/**
-	 * The feature id for the '<em><b>Reactions</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Reactions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -367,7 +367,7 @@ public interface StextPackage extends EPackage {
 	int INTERFACE_SCOPE = 9;
 
 	/**
-	 * The feature id for the '<em><b>Declarations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Declarations</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -394,7 +394,7 @@ public interface StextPackage extends EPackage {
 	int INTERFACE_SCOPE__VARIABLES = STATECHART_SCOPE__VARIABLES;
 
 	/**
-	 * The feature id for the '<em><b>Reactions</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Reactions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -440,7 +440,7 @@ public interface StextPackage extends EPackage {
 	int INTERNAL_SCOPE = 10;
 
 	/**
-	 * The feature id for the '<em><b>Declarations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Declarations</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -467,7 +467,7 @@ public interface StextPackage extends EPackage {
 	int INTERNAL_SCOPE__VARIABLES = STATECHART_SCOPE__VARIABLES;
 
 	/**
-	 * The feature id for the '<em><b>Reactions</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Reactions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -504,7 +504,7 @@ public interface StextPackage extends EPackage {
 	int IMPORT_SCOPE = 11;
 
 	/**
-	 * The feature id for the '<em><b>Declarations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Declarations</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -531,7 +531,7 @@ public interface StextPackage extends EPackage {
 	int IMPORT_SCOPE__VARIABLES = STATECHART_SCOPE__VARIABLES;
 
 	/**
-	 * The feature id for the '<em><b>Reactions</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Reactions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1277,7 +1277,7 @@ public interface StextPackage extends EPackage {
 	int SIMPLE_SCOPE = 28;
 
 	/**
-	 * The feature id for the '<em><b>Declarations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Declarations</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1304,7 +1304,7 @@ public interface StextPackage extends EPackage {
 	int SIMPLE_SCOPE__VARIABLES = SGraphPackage.SCOPE__VARIABLES;
 
 	/**
-	 * The feature id for the '<em><b>Reactions</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Reactions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

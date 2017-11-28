@@ -70,7 +70,7 @@
         upperBound="-1" eType="ecore:EClass ../../../org.yakindu.base.types/model/types.ecore#//Property"
         changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="reactions" upperBound="-1"
-        eType="#//Reaction" changeable="false" volatile="true" transient="true"/>
+        eType="#//Reaction" changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"/>
   </eClassifiers>

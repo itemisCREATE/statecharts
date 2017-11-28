@@ -103,7 +103,7 @@ public interface Scope extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Reactions</em>' reference list.
 	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getScope_Reactions()
-	 * @model transient="true" changeable="false" volatile="true"
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	EList<Reaction> getReactions();
