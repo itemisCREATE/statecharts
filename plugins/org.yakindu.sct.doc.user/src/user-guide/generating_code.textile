@@ -989,6 +989,26 @@ bc. feature Includes {
 ==<!-- End sgen_feature_includes -->==
 
 
+==<!-- Start sgen_feature_api -->==
+
+h4(#codegen_cpp_api_feature). API feature
+
+The *API* feature allows to change the way include statements are generated:
+
+* _checkUnimplementedOCBs_ (Boolean, optional): If set to _true_ init function returns an error code, otherwise the init function return type is void.
+
+==<div class="example">==
+
+Example:
+
+bc. feature API {
+    checkUnimplementedOCBs = true
+}
+
+==</div>==
+
+==<!-- End sgen_feature_api -->==
+
 
 
 h3(#codegen_cpp_specification_of_cpp_code). Specification of C++ code
