@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.simulation.ui.view;
 
-
 import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
 
@@ -26,8 +25,8 @@ import org.eclipse.debug.internal.ui.commands.actions.StepOverCommandAction;
 import org.eclipse.debug.internal.ui.commands.actions.SuspendCommandAction;
 import org.eclipse.debug.internal.ui.commands.actions.TerminateCommandAction;
 import org.eclipse.debug.ui.contexts.DebugContextEvent;
-
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IContributionItem;
@@ -44,7 +43,6 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseMoveListener;
@@ -62,6 +60,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
+import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sruntime.ExecutionEvent;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.engine.scheduling.DefaultTimeTaskScheduler;
@@ -72,6 +71,7 @@ import org.yakindu.sct.simulation.ui.view.actions.CollapseAllAction;
 import org.yakindu.sct.simulation.ui.view.actions.ExpandAllAction;
 import org.yakindu.sct.simulation.ui.view.actions.HideTimeEventsAction;
 import org.yakindu.sct.simulation.ui.view.editing.ScopeSlotEditingSupport.ITypeSystemProvider;
+import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -137,7 +137,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		if (sessionDropdown != null && sessionDropdown.getControl() != null
 				&& !sessionDropdown.getControl().isDisposed()) {
 			sessionDropdown.getControl().dispose();
-
 		}
 	}
 
@@ -208,7 +207,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		return viewer;
 	}
 
-
 	public Label createTimeSchedulerComponent(Composite parent) {
 		Composite comp = new Composite(parent, SWT.NONE);
 		comp.setLayout(new GridLayout(2, false));
@@ -225,10 +223,10 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	protected void setViewerInput(Object input) {
 		if (viewerRefresher == null)
 			this.viewerRefresher = new ViewerRefresher();
-		
+
 		if (input == null) {
 			viewerRefresher.cancel = true;
-		} 
+		}
 
 		Display.getDefault().asyncExec(() -> {
 			this.viewer.setInput(input);
@@ -267,12 +265,30 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	}
 
 	protected void activeTargetChanged(final IDebugTarget debugTarget) {
+		openEditorForTarget(debugTarget);
 		updateTypeSystem(debugTarget);
 		ISimulationEngine engine = (ISimulationEngine) debugTarget.getAdapter(ISimulationEngine.class);
 		timeScheduler = (DefaultTimeTaskScheduler) engine.getTimeTaskScheduler();
 		setViewerInput(engine.getExecutionContext());
 		updateActions();
 		updateSessionDropdownInput(debugTarget);
+
+	}
+
+	protected void openEditorForTarget(final IDebugTarget debugTarget) {
+		if (this.debugTarget != null) {
+			EObject adapter = debugTarget.getAdapter(EObject.class);
+			if (adapter instanceof Statechart) {
+				Statechart statechart = (Statechart) adapter;
+				Diagram diagram = DiagramPartitioningUtil.getDiagramContaining(statechart);
+				Display.getDefault().asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						DiagramPartitioningUtil.openEditor(diagram);
+					}
+				});
+			}
+		}
 	}
 
 	protected void updateSessionDropdownInput(final IDebugTarget debugTarget) {
@@ -327,7 +343,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	 * @author robert rudi - Initial contribution and API
 	 *
 	 */
-	protected final class SessionSelectionChangedListener implements ISelectionChangedListener {
+	protected class SessionSelectionChangedListener implements ISelectionChangedListener {
 		@Override
 		public void selectionChanged(SelectionChangedEvent event) {
 			IStructuredSelection selection = (IStructuredSelection) event.getSelection();
