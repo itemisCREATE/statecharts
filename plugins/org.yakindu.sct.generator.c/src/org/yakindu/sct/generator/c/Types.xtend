@@ -63,6 +63,7 @@ class Types implements IContentTemplate {
 		
 		#define bool_true true
 		#define bool_false false
+		#define sc_invalid_event_value 0
 		
 		#endif /* «typesModule.define»_H_ */
 	'''

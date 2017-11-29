@@ -76,7 +76,7 @@ class StatechartEventsSource {
 		{
 			«eventStructTypeName» event;
 			if(«eventQueueSizeFunction»(eq) <= 0) {
-				«eventInitFunction»(&event, invalid_event);
+				«eventInitFunction»(&event, «invalidEventEnumName(it)»);
 			}
 			else {
 				event = eq->events[eq->pop_index];
