@@ -86,5 +86,19 @@ public interface ITypeSystemInferrer {
 	public InferenceResult infer(EObject object, IValidationIssueAcceptor acceptor);
 
 	public InferenceResult infer(EObject object);
+	
+	public static class NullImpl implements ITypeSystemInferrer {
 
+		@Override
+		public InferenceResult infer(EObject object, IValidationIssueAcceptor acceptor) {
+			return null;
+		}
+
+		@Override
+		public InferenceResult infer(EObject object) {
+			return null;
+		}
+		
+	}
+	
 }
