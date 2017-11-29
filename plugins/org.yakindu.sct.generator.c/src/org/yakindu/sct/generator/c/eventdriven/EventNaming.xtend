@@ -26,7 +26,7 @@ class EventNaming {
 	@Inject extension INamingService
 	
 	def eventEnumMemberName(Event it) {
-		'''«scope.functionPrefix»_«name.asIdentifier»'''
+		'''«scope.functionPrefix(it)»_«name.asIdentifier»'''
 	}
 	
 	def eventEnumName(ExecutionFlow it) {
