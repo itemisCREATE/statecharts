@@ -33,7 +33,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import static org.eclipse.xtext.util.Strings.*
 
 class StatemachineHeader implements IContentTemplate {
-
+	@Inject protected extension IncludeProvider
 	@Inject protected extension Naming cNaming
 	@Inject protected extension Navigation
 	@Inject protected extension ICodegenTypeSystemAccess
@@ -143,9 +143,13 @@ class StatemachineHeader implements IContentTemplate {
 		includes(it, defaultConfigs)
 	}
 
-	def includes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) '''
-		#include "«(typesModule.h).relativeTo(module.h)»"
-	'''
+	def final includes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
+		'''
+		«FOR i : getIncludes(newArrayList, artifactConfigs)»
+		  «i»
+		«ENDFOR»
+		'''
+	}
 	
 	def statesEnumDecl(ExecutionFlow it) '''
 		/*! Enumeration of all states */ 

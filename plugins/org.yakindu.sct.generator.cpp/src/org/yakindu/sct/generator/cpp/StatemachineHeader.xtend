@@ -148,14 +148,6 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		''''''
 	}
 
-	override includes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) '''
-		#include "«(typesModule.h).relativeTo(module.h)»"
-		#include "«(statemachineInterface.h).relativeTo(module.h)»"
-		«IF timed»
-			#include "«(timedStatemachineInterface.h).relativeTo(module.h)»"
-		«ENDIF»
-	'''
-
 	def protected getInterfaceExtensions(ExecutionFlow flow) {
 
 		var String interfaces = "";
