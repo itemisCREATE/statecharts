@@ -50,6 +50,7 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
+import org.yakindu.base.expressions.expressions.PostFixUnaryExpression;
 import org.yakindu.base.expressions.validation.ExpressionsJavaValidator;
 import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.Declaration;
@@ -655,7 +656,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	public void checkReactionEffectActions(ReactionEffect effect) {
 		for (Expression exp : effect.getActions()) {
 
-			if (!(exp instanceof AssignmentExpression) && !(exp instanceof EventRaisingExpression)) {
+			if (!(exp instanceof AssignmentExpression) && !(exp instanceof EventRaisingExpression) 
+					&& !(exp instanceof PostFixUnaryExpression)) {
 
 				if (exp instanceof FeatureCall) {
 					checkFeatureCallEffect((FeatureCall) exp);

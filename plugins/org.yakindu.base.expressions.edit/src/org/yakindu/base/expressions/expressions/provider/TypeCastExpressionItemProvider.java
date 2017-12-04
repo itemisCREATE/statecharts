@@ -230,6 +230,11 @@ public class TypeCastExpressionItemProvider extends ExpressionItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.TYPE_CAST_EXPRESSION__OPERAND,
+				 ExpressionsFactory.eINSTANCE.createPostFixUnaryExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.TYPE_CAST_EXPRESSION__OPERAND,
 				 ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
 
 		newChildDescriptors.add

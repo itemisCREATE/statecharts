@@ -40,6 +40,9 @@ public class CoreFunction extends Function {
 	public static final String POSITIVE = PLUS;
 	public static final String NEGATIVE = MINUS;
 	public static final String NOT = "!";
+	
+	public static final String INCREMENT = "++";
+	public static final String DECREMENT = "--";
 
 	@FunctionMethod(PLUS)
 	public Integer plus(Integer i1, Integer i2) {
@@ -1119,6 +1122,46 @@ public class CoreFunction extends Function {
 	@FunctionMethod(NOT)
 	public Boolean not(Boolean b) {
 		return !b;
+	}
+	
+	@FunctionMethod(INCREMENT)
+	public Integer increment(Integer i) {
+		return i = i + 1;
+	}
+	
+	@FunctionMethod(INCREMENT)
+	public Long increment(Long l) {
+		return l = l + 1;
+	}
+	
+	@FunctionMethod(INCREMENT)
+	public Double increment(Double d) {
+		return d = d + 1;
+	}
+	
+	@FunctionMethod(INCREMENT)
+	public Float increment(Float f) {
+		return f = f + 1;
+	}
+	
+	@FunctionMethod(DECREMENT)
+	public Integer decrement(Integer i) {
+		return i = i - 1;
+	}
+	
+	@FunctionMethod(DECREMENT)
+	public Long decrement(Long l) {
+		return l = l - 1;
+	}
+	
+	@FunctionMethod(DECREMENT)
+	public Double decrement(Double d) {
+		return d = d - 1;
+	}
+	
+	@FunctionMethod(DECREMENT)
+	public Float decrement(Float f) {
+		return f = f - 1;
 	}
 
 	@FunctionMethod(BIT_COMPLEMENT)

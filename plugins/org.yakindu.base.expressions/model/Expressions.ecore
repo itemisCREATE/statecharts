@@ -90,6 +90,10 @@
     <eLiterals name="and" value="1" literal="&amp;"/>
     <eLiterals name="or" value="2" literal="|"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PostFixOperator">
+    <eLiterals name="increment" literal="++"/>
+    <eLiterals name="decrement" value="1" literal="--"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AssignmentExpression" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="varRef" eType="#//Expression"
         containment="true"/>
@@ -125,6 +129,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NumericalUnaryExpression" eSuperTypes="#//UnaryExpression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//UnaryOperator"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PostFixUnaryExpression" eSuperTypes="#//UnaryExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//PostFixOperator"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveValueExpression" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Literal"

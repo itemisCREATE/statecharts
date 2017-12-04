@@ -10,95 +10,95 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Shift Operator</b></em>',
+ * A representation of the literals of the enumeration '<em><b>Post Fix Operator</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getShiftOperator()
+ * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getPostFixOperator()
  * @model
  * @generated
  */
-public enum ShiftOperator implements Enumerator {
+public enum PostFixOperator implements Enumerator {
 	/**
-	 * The '<em><b>Left</b></em>' literal object.
+	 * The '<em><b>Increment</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #LEFT_VALUE
+	 * @see #INCREMENT_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	LEFT(0, "left", "<<"),
+	INCREMENT(0, "increment", "++"),
 
 	/**
-	 * The '<em><b>Right</b></em>' literal object.
+	 * The '<em><b>Decrement</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #RIGHT_VALUE
+	 * @see #DECREMENT_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	RIGHT(1, "right", ">>");
+	DECREMENT(1, "decrement", "--");
 
 	/**
-	 * The '<em><b>Left</b></em>' literal value.
+	 * The '<em><b>Increment</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Left</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Increment</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #LEFT
-	 * @model name="left" literal="&lt;&lt;"
+	 * @see #INCREMENT
+	 * @model name="increment" literal="++"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LEFT_VALUE = 0;
+	public static final int INCREMENT_VALUE = 0;
 
 	/**
-	 * The '<em><b>Right</b></em>' literal value.
+	 * The '<em><b>Decrement</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Right</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Decrement</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #RIGHT
-	 * @model name="right" literal="&gt;&gt;"
+	 * @see #DECREMENT
+	 * @model name="decrement" literal="--"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int RIGHT_VALUE = 1;
+	public static final int DECREMENT_VALUE = 1;
 
 	/**
-	 * An array of all the '<em><b>Shift Operator</b></em>' enumerators.
+	 * An array of all the '<em><b>Post Fix Operator</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final ShiftOperator[] VALUES_ARRAY =
-		new ShiftOperator[] {
-			LEFT,
-			RIGHT,
+	private static final PostFixOperator[] VALUES_ARRAY =
+		new PostFixOperator[] {
+			INCREMENT,
+			DECREMENT,
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>Shift Operator</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>Post Fix Operator</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<ShiftOperator> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<PostFixOperator> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Shift Operator</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>Post Fix Operator</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param literal the literal.
 	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
-	public static ShiftOperator get(String literal) {
+	public static PostFixOperator get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			ShiftOperator result = VALUES_ARRAY[i];
+			PostFixOperator result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -107,16 +107,16 @@ public enum ShiftOperator implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Shift Operator</b></em>' literal with the specified name.
+	 * Returns the '<em><b>Post Fix Operator</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param name the name.
 	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
-	public static ShiftOperator getByName(String name) {
+	public static PostFixOperator getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			ShiftOperator result = VALUES_ARRAY[i];
+			PostFixOperator result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -125,17 +125,17 @@ public enum ShiftOperator implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Shift Operator</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>Post Fix Operator</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the integer value.
 	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
-	public static ShiftOperator get(int value) {
+	public static PostFixOperator get(int value) {
 		switch (value) {
-			case LEFT_VALUE: return LEFT;
-			case RIGHT_VALUE: return RIGHT;
+			case INCREMENT_VALUE: return INCREMENT;
+			case DECREMENT_VALUE: return DECREMENT;
 		}
 		return null;
 	}
@@ -167,7 +167,7 @@ public enum ShiftOperator implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private ShiftOperator(int value, String name, String literal) {
+	private PostFixOperator(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -211,4 +211,4 @@ public enum ShiftOperator implements Enumerator {
 		return literal;
 	}
 	
-} //ShiftOperator
+} //PostFixOperator

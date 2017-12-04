@@ -241,6 +241,11 @@ public class AssignmentExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF,
+				 ExpressionsFactory.eINSTANCE.createPostFixUnaryExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF,
 				 ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
 
 		newChildDescriptors.add
@@ -327,6 +332,11 @@ public class AssignmentExpressionItemProvider
 			(createChildParameter
 				(ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__EXPRESSION,
 				 ExpressionsFactory.eINSTANCE.createNumericalUnaryExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createPostFixUnaryExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
