@@ -87,7 +87,7 @@ public enum RelationalOperator implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #SMALLER
-	 * @model name="smaller" literal="<"
+	 * @model name="smaller" literal="&lt;"
 	 * @generated
 	 * @ordered
 	 */
@@ -102,7 +102,7 @@ public enum RelationalOperator implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #SMALLER_EQUAL
-	 * @model name="smallerEqual" literal="<="
+	 * @model name="smallerEqual" literal="&lt;="
 	 * @generated
 	 * @ordered
 	 */
@@ -117,7 +117,7 @@ public enum RelationalOperator implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #GREATER
-	 * @model name="greater" literal=">"
+	 * @model name="greater" literal="&gt;"
 	 * @generated
 	 * @ordered
 	 */
@@ -132,7 +132,7 @@ public enum RelationalOperator implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #GREATER_EQUAL
-	 * @model name="greaterEqual" literal=">="
+	 * @model name="greaterEqual" literal="&gt;="
 	 * @generated
 	 * @ordered
 	 */

@@ -561,6 +561,29 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.PostFixUnaryExpression} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PostFixUnaryExpressionItemProvider postFixUnaryExpressionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.PostFixUnaryExpression}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPostFixUnaryExpressionAdapter() {
+		if (postFixUnaryExpressionItemProvider == null) {
+			postFixUnaryExpressionItemProvider = new PostFixUnaryExpressionItemProvider(this);
+		}
+
+		return postFixUnaryExpressionItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.PrimitiveValueExpression} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -818,6 +841,7 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 		if (numericalAddSubtractExpressionItemProvider != null) numericalAddSubtractExpressionItemProvider.dispose();
 		if (numericalMultiplyDivideExpressionItemProvider != null) numericalMultiplyDivideExpressionItemProvider.dispose();
 		if (numericalUnaryExpressionItemProvider != null) numericalUnaryExpressionItemProvider.dispose();
+		if (postFixUnaryExpressionItemProvider != null) postFixUnaryExpressionItemProvider.dispose();
 		if (primitiveValueExpressionItemProvider != null) primitiveValueExpressionItemProvider.dispose();
 		if (featureCallItemProvider != null) featureCallItemProvider.dispose();
 		if (elementReferenceExpressionItemProvider != null) elementReferenceExpressionItemProvider.dispose();

@@ -192,6 +192,11 @@ public class BinaryExpressionItemProvider extends ExpressionItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.BINARY_EXPRESSION__LEFT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createPostFixUnaryExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.BINARY_EXPRESSION__LEFT_OPERAND,
 				 ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
 
 		newChildDescriptors.add
@@ -278,6 +283,11 @@ public class BinaryExpressionItemProvider extends ExpressionItemProvider {
 			(createChildParameter
 				(ExpressionsPackage.Literals.BINARY_EXPRESSION__RIGHT_OPERAND,
 				 ExpressionsFactory.eINSTANCE.createNumericalUnaryExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.BINARY_EXPRESSION__RIGHT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createPostFixUnaryExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
