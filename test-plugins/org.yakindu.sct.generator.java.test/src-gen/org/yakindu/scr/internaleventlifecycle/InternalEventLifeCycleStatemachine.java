@@ -38,6 +38,8 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 	
 	private int nextStateIndex;
 	
+	
+	
 	private boolean i1;
 	
 	private boolean i2;
@@ -48,6 +50,7 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 	
 	public void init() {
 		this.initialized = true;
+		
 		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -60,6 +63,7 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
 		}
+	
 		enterSequence_r1_default();
 		enterSequence_r2_default();
 	}
@@ -126,9 +130,11 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		i1 = true;
 	}
 	
+	
 	private void raiseI2() {
 		i2 = true;
 	}
+	
 	
 	public void raiseE() {
 		sCInterface.raiseE();

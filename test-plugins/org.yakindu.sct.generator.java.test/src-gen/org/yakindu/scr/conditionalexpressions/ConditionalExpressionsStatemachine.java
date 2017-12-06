@@ -30,6 +30,26 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 			this.boolVar = value;
 		}
 		
+		private String stringVar;
+		
+		public String getStringVar() {
+			return stringVar;
+		}
+		
+		public void setStringVar(String value) {
+			this.stringVar = value;
+		}
+		
+		private String stringCondition;
+		
+		public String getStringCondition() {
+			return stringCondition;
+		}
+		
+		public void setStringCondition(String value) {
+			this.stringCondition = value;
+		}
+		
 		protected void clearEvents() {
 			e = false;
 		}
@@ -49,12 +69,15 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 	
 	private int nextStateIndex;
 	
+	
+	
 	public ConditionalExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
+		
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -63,6 +86,10 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 		sCInterface.setCondition(sCInterface.boolVar ? 3 : 2);
 		
 		sCInterface.setBoolVar(true);
+		
+		sCInterface.setStringVar("");
+		
+		sCInterface.setStringCondition("");
 	}
 	
 	public void enter() {
@@ -70,6 +97,7 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
 		}
+	
 		enterSequence_main_region_default();
 	}
 	
@@ -144,6 +172,22 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 		sCInterface.setBoolVar(value);
 	}
 	
+	public String getStringVar() {
+		return sCInterface.getStringVar();
+	}
+	
+	public void setStringVar(String value) {
+		sCInterface.setStringVar(value);
+	}
+	
+	public String getStringCondition() {
+		return sCInterface.getStringCondition();
+	}
+	
+	public void setStringCondition(String value) {
+		sCInterface.setStringCondition(value);
+	}
+	
 	private boolean check_main_region_A_tr0_tr0() {
 		return (sCInterface.e) && (1==(sCInterface.getBoolVar() ? 1 : 0));
 	}
@@ -161,6 +205,8 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 	/* Entry action for state 'B'. */
 	private void entryAction_main_region_B() {
 		sCInterface.setCondition(((sCInterface.condition==2) ? 1 : 2));
+		
+		sCInterface.setStringCondition(((sCInterface.condition==2) ? "True" : "False"));
 	}
 	
 	/* 'default' enter sequence for state A */

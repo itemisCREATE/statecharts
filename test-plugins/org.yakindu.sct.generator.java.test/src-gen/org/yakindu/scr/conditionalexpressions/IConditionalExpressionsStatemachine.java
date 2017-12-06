@@ -16,6 +16,14 @@ public interface IConditionalExpressionsStatemachine extends IStatemachine {
 		
 		public void setBoolVar(boolean value);
 		
+		public String getStringVar();
+		
+		public void setStringVar(String value);
+		
+		public String getStringCondition();
+		
+		public void setStringCondition(String value);
+		
 	}
 	
 	public SCInterface getSCInterface();
