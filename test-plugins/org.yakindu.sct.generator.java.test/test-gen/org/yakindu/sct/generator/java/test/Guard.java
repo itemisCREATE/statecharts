@@ -39,19 +39,19 @@ public class Guard {
 	public void guardTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.raiseEvent1();
+		statemachine.getSCInterface().raiseEvent1();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.raiseEvent2();
+		statemachine.getSCInterface().raiseEvent2();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.main_region_B));
-		statemachine.raiseReturn();
+		statemachine.getSCInterface().raiseReturn();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.raiseEvent1();
+		statemachine.getSCInterface().raiseEvent1();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.main_region_B));
-		statemachine.raiseReturn();
+		statemachine.getSCInterface().raiseReturn();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 	}

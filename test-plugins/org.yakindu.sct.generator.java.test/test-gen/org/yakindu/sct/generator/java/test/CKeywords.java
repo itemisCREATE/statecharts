@@ -39,7 +39,7 @@ public class CKeywords {
 	public void cKeywordsTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.auto_char));
-		statemachine.raiseAuto();
+		statemachine.getSCInterface().raiseAuto();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.auto_loop));
 		assertTrue(statemachine.isStateActive(State.auto_loop_switch_case));

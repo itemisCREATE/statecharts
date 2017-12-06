@@ -40,7 +40,7 @@ public class ConditionalExpression {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(statemachine.getCondition() == 1l);
-		statemachine.raiseE();
+		statemachine.getSCInterface().raiseE();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		assertTrue(statemachine.getCondition() == 2l);
