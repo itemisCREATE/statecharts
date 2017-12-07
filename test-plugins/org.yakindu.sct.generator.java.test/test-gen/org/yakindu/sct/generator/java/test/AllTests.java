@@ -37,6 +37,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	ExitState.class,
 	FeatureCalls.class,
 	FinalState.class,
+	FloatModulo.class,
 	Guard.class,
 	GuardedEntry.class,
 	GuardedExit.class,

@@ -39,7 +39,7 @@ public class ExitState {
 	public void defaultExit() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
-		statemachine.raiseE();
+		statemachine.getSCInterface().raiseE();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.r_E));
 	}
@@ -47,7 +47,7 @@ public class ExitState {
 	public void namedExitThroughNamedTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
-		statemachine.raiseF();
+		statemachine.getSCInterface().raiseF();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.r_F));
 	}
@@ -55,7 +55,7 @@ public class ExitState {
 	public void namedExitThroughDefaultTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
-		statemachine.raiseG();
+		statemachine.getSCInterface().raiseG();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.r_E));
 	}

@@ -34,13 +34,13 @@ public class OperationsTest {
 		statemachine = new OperationsStatemachine();
 		timer = new VirtualTimer(200);
 		timer.schedulePeriodicalTask(new CycleTimeEventTask(statemachine), 200, 200);
-		statemachine.init();
 		defaultMock = mock(SCInterfaceOperationCallback.class);
 		statemachine.getSCInterface().setSCInterfaceOperationCallback(defaultMock);
 		internalMock = mock(InternalOperationCallback.class);
 		statemachine.setInternalOperationCallback(internalMock);
 		interface1Mock = mock(SCIInterface1OperationCallback.class);
 		statemachine.getSCIInterface1().setSCIInterface1OperationCallback(interface1Mock);
+		statemachine.init();
 	}
 
 	@After
@@ -82,7 +82,7 @@ public class OperationsTest {
 		 
 		verify(internalMock, atLeastOnce()).internalOperation5a(anyString());
 		 
-		statemachine.raiseEv();
+		statemachine.getSCInterface().raiseEv();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.main_region_C));
 		verify(interface1Mock, atLeastOnce()).interfaceOperation1();
@@ -101,7 +101,7 @@ public class OperationsTest {
 		 
 		verify(interface1Mock, atLeastOnce()).interfaceOperation5a(anyString());
 		 
-		statemachine.raiseEv();
+		statemachine.getSCInterface().raiseEv();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.main_region_D));
 		verify(defaultMock, atLeastOnce()).unnamedInterfaceOperation1();
@@ -148,7 +148,7 @@ public class OperationsTest {
 		 
 		verify(internalMock, never()).internalOperation5a(anyString());
 		 
-		statemachine.raiseEv();
+		statemachine.getSCInterface().raiseEv();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		verify(interface1Mock, never()).interfaceOperation1();
@@ -167,7 +167,7 @@ public class OperationsTest {
 		 
 		verify(interface1Mock, never()).interfaceOperation5a(anyString());
 		 
-		statemachine.raiseEv();
+		statemachine.getSCInterface().raiseEv();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.main_region_C));
 		verify(defaultMock, never()).unnamedInterfaceOperation1();

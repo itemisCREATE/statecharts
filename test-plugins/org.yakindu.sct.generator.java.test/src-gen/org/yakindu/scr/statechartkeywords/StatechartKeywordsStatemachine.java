@@ -120,6 +120,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	private ITimer timer;
 	
 	private final boolean[] timeEvents = new boolean[1];
+	
 	private boolean operationCallbackEvent;
 	
 	private boolean listeners;
@@ -194,6 +195,14 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
+		if (this.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for internal must be set.");	
+		}
+		
+		if (this.sCIIf.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for interface sCIIf must be set.");
+		}
+		
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -230,6 +239,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
+	
 		entryAction();
 		enterSequence_main_region_default();
 	}

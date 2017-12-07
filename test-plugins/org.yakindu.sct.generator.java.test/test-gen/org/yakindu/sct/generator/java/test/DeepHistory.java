@@ -38,21 +38,21 @@ public class DeepHistory {
 	@Test
 	public void deepHistoryTest() {
 		statemachine.enter();
-		statemachine.raiseEvent1();
+		statemachine.getSCInterface().raiseEvent1();
 		timer.cycleLeap(1);
-		statemachine.raiseEvent3();
+		statemachine.getSCInterface().raiseEvent3();
 		timer.cycleLeap(1);
-		statemachine.raiseEvent5();
+		statemachine.getSCInterface().raiseEvent5();
 		timer.cycleLeap(1);
-		statemachine.raiseEvent7();
+		statemachine.getSCInterface().raiseEvent7();
 		timer.cycleLeap(1);
 		assertTrue(!statemachine.isStateActive(State.mainRegion_State1));
 		assertTrue(statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
-		statemachine.raiseEvent2();
+		statemachine.getSCInterface().raiseEvent2();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.mainRegion_State1));
 		assertTrue(!statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
-		statemachine.raiseEvent1();
+		statemachine.getSCInterface().raiseEvent1();
 		timer.cycleLeap(1);
 		assertTrue(!statemachine.isStateActive(State.mainRegion_State1));
 		assertTrue(statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State7__region0_State9));

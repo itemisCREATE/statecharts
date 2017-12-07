@@ -5,6 +5,10 @@ GeneratorModel for yakindu::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
 		}
+		
+		feature Naming {
+			basePackage =  "org.yakindu.scr" 
+		}
 
 		feature GeneralFeatures {
 			TimerService = true
@@ -28,6 +32,10 @@ GeneratorModel for yakindu::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
+		}
+		
+		feature Naming {
+			basePackage =  "org.yakindu.scr" 
 		}
 
 		feature GeneralFeatures {
@@ -56,6 +64,10 @@ GeneratorModel for yakindu::java {
 			targetFolder = "src-gen"
 		}
 
+		feature Naming {
+			basePackage =  "org.yakindu.scr" 
+		}
+		
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
@@ -78,6 +90,10 @@ GeneratorModel for yakindu::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
+		}
+		
+		feature Naming {
+			basePackage =  "org.yakindu.scr" 
 		}
 
 		feature GeneralFeatures {
@@ -104,6 +120,10 @@ GeneratorModel for yakindu::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
 		}
+		
+		feature Naming {
+			basePackage =  "org.yakindu.scr" 
+		}
 
 		feature GeneralFeatures {
 			TimerService = true
@@ -127,6 +147,10 @@ GeneratorModel for yakindu::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
+		}
+		
+		feature Naming {
+			basePackage =  "org.yakindu.scr" 
 		}
 
 		feature GeneralFeatures {

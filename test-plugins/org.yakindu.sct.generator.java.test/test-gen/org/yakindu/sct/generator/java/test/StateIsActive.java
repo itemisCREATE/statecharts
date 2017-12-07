@@ -40,7 +40,7 @@ public class StateIsActive {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r1_R1A));
 		assertTrue(statemachine.isStateActive(State.r2_R2A));
-		statemachine.raiseEvent1();
+		statemachine.getSCInterface().raiseEvent1();
 		timer.cycleLeap(1);
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.r1_R1B));
