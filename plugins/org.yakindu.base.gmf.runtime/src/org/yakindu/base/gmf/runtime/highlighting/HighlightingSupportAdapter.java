@@ -13,8 +13,10 @@ package org.yakindu.base.gmf.runtime.highlighting;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.emf.ecore.EObject;
@@ -54,8 +56,75 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		}
 	}
 
+	private class Fader implements Runnable {
+
+		private final int fadingTime;
+		private final Color sourceForegroundColor;
+		private final Color targetForegroundColor;
+		private final IFigure figure;
+		private final boolean shouldFadeBack;
+		private final boolean shouldRegister;
+		private final Color sourceBackgroundColor;
+		private final Color targetBackgroundColor;
+		private final int flashCounter;
+		private Fader(IFigure figure, Color sourceForegroundColor, Color targetForegroundColor,
+				Color sourceBackgroundColor, Color targetBackgroundColor, int fadingTime, boolean shouldFadeBack,
+				int flashCounter, boolean shouldRegister) {
+			this.figure = figure;
+			this.sourceForegroundColor = sourceForegroundColor;
+			this.targetForegroundColor = targetForegroundColor;
+			this.sourceBackgroundColor = sourceBackgroundColor;
+			this.targetBackgroundColor = targetBackgroundColor;
+			this.shouldFadeBack = shouldFadeBack;
+			this.fadingTime = fadingTime;
+			this.flashCounter = flashCounter;
+			this.shouldRegister = shouldRegister;
+
+		}
+
+		public void run() {
+
+			if (shouldRegister) {
+				if (flashingFigures.contains(figure))
+					// if we were started as "back-fader" via timer and editor
+					// was released in the meantime, don't perform fading back
+					return;
+				else
+					flashingFigures.add(figure);
+			}
+			if (flashingFigures.contains(figure)) {
+
+				figure.setForegroundColor(targetForegroundColor);
+				figure.setBackgroundColor(targetBackgroundColor);
+				figure.invalidate();
+				if (shouldFadeBack) {
+					if (figure.getForegroundColor() == sourceForegroundColor
+							&& figure.getBackgroundColor() == sourceBackgroundColor) {
+						Fader fader = new Fader(figure, targetForegroundColor, sourceForegroundColor,
+								targetBackgroundColor, sourceBackgroundColor, fadingTime, false, flashCounter - 1,
+								false);
+						Display.getCurrent().timerExec(fadingTime, fader);
+					} else { // color changed between events
+						Fader fader = new Fader(figure, figure.getForegroundColor(), sourceForegroundColor,
+								figure.getBackgroundColor(), sourceBackgroundColor, fadingTime, false, flashCounter - 1,
+								false);
+						Display.getCurrent().timerExec(fadingTime, fader);
+					}
+				} else if (flashCounter > 0) {
+					Display.getCurrent().timerExec(fadingTime,
+							new Fader(figure, targetForegroundColor, sourceForegroundColor, targetBackgroundColor,
+									sourceBackgroundColor, fadingTime, true, flashCounter, false));
+				} else {
+					flashingFigures.remove(figure);
+				}
+
+			}
+		}
+	}
+
 	private final Map<IFigure, ColorMemento> figureStates = new HashMap<IFigure, ColorMemento>();
 	private boolean locked = false;
+	private Set<IFigure> flashingFigures = new HashSet<IFigure>();
 	private final IDiagramWorkbenchPart diagramWorkbenchPart;
 	private Map<EObject, IGraphicalEditPart> object2editPart = new HashMap<EObject, IGraphicalEditPart>();
 
@@ -140,6 +209,7 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		for (ColorMemento figureState : figureStates.values()) {
 			figureState.restore();
 		}
+		flashingFigures.clear();
 		figureStates.clear();
 		diagramWorkbenchPart.getDiagramEditPart().enableEditMode();
 		setSanityCheckEnablementState(true);
@@ -158,10 +228,26 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 						figure.setBackgroundColor(parameters.backgroundFadingColor);
 						figure.invalidate();
 					} else {
+						flashingFigures.clear();
 						ColorMemento memento = figureStates.get(figure);
 						if (memento != null)
 							memento.restore();
 					}
+				}
+			}
+		}
+	}
+
+	public void flash(List<? extends EObject> semanticElements, HighlightingParameters parameters) {
+		synchronized (semanticElements) {
+			for (EObject semanticElement : semanticElements) {
+				IGraphicalEditPart editPartForSemanticElement = getEditPartForSemanticElement(semanticElement);
+				if (editPartForSemanticElement != null) {
+					IFigure figure = getTargetFigure(editPartForSemanticElement);
+					Fader fader = new Fader(figure, figure.getForegroundColor(), parameters.foregroundFadingColor,
+							figure.getBackgroundColor(), parameters.backgroundFadingColor, parameters.highlightTime,
+							true, parameters.flashcounter, true);
+					Display.getCurrent().asyncExec(fader);
 				}
 			}
 		}
