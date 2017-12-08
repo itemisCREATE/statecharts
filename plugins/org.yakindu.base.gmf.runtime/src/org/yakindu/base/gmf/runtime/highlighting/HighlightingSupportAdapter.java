@@ -69,12 +69,6 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		private final int flashCounter;
 		private Fader(IFigure figure, Color sourceForegroundColor, Color targetForegroundColor,
 				Color sourceBackgroundColor, Color targetBackgroundColor, int fadingTime, boolean shouldFadeBack,
-				int flashCounter) {
-			this(figure, sourceForegroundColor, targetForegroundColor, sourceBackgroundColor, targetBackgroundColor,
-					fadingTime, shouldFadeBack, flashCounter, true);
-		}
-		private Fader(IFigure figure, Color sourceForegroundColor, Color targetForegroundColor,
-				Color sourceBackgroundColor, Color targetBackgroundColor, int fadingTime, boolean shouldFadeBack,
 				int flashCounter, boolean shouldRegister) {
 			this.figure = figure;
 			this.sourceForegroundColor = sourceForegroundColor;
@@ -252,7 +246,7 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 					IFigure figure = getTargetFigure(editPartForSemanticElement);
 					Fader fader = new Fader(figure, figure.getForegroundColor(), parameters.foregroundFadingColor,
 							figure.getBackgroundColor(), parameters.backgroundFadingColor, parameters.highlightTime,
-							true, parameters.flashcounter);
+							true, parameters.flashcounter, true);
 					Display.getCurrent().asyncExec(fader);
 				}
 			}
