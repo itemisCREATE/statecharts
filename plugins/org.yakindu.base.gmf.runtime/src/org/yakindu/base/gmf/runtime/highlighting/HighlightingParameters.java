@@ -28,12 +28,24 @@ public class HighlightingParameters {
 
 	public Color backgroundFadingColor = new Color(null, 245, 216, 44);
 
+	public int highlightTime = 150;
+
+	public int flashcounter = 0;
+
 	public HighlightingParameters() {
 	}
 
 	public HighlightingParameters(Color foregroundFadingColor, Color backgroundFadingColor) {
 		this.foregroundFadingColor = foregroundFadingColor;
 		this.backgroundFadingColor = backgroundFadingColor;
+	}
+
+	public HighlightingParameters(Color foregroundFadingColor, Color backgroundFadingColor, int highlightTime,
+			int flashcounter) {
+		this.foregroundFadingColor = foregroundFadingColor;
+		this.backgroundFadingColor = backgroundFadingColor;
+		this.highlightTime = highlightTime;
+		this.flashcounter = flashcounter;
 	}
 
 }

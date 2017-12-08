@@ -30,6 +30,8 @@ public interface IHighlightingSupport {
 
 	void highlight(List<? extends EObject> semanticElement, HighlightingParameters parameters);
 
+	void flash(List<? extends EObject> semanticElemesnt, HighlightingParameters parameters);
+
 	void executeAsync(List<Action> actions);
 
 	public static interface Action {
@@ -55,11 +57,30 @@ public interface IHighlightingSupport {
 		}
 	}
 
+	public static class Flash implements Action {
+
+		protected List<? extends EObject> semanticElements;
+		protected HighlightingParameters highligtingParams;
+
+		public Flash(EObject semanticElement, HighlightingParameters parameters) {
+			this(Collections.singletonList(semanticElement), parameters);
+		}
+
+		public Flash(List<? extends EObject> semanticElements, HighlightingParameters parameters) {
+			this.semanticElements = semanticElements;
+			this.highligtingParams = parameters;
+		}
+
+		public void execute(IHighlightingSupport hs) {
+			hs.flash(semanticElements, highligtingParams);
+		}
+
+	}
+
 	public static class HighlightingSupportNullImpl implements IHighlightingSupport {
 
 		@Override
 		public void lockEditor() {
-
 		}
 
 		@Override
@@ -69,7 +90,6 @@ public interface IHighlightingSupport {
 
 		@Override
 		public void releaseEditor() {
-
 		}
 
 		@Override
@@ -78,8 +98,10 @@ public interface IHighlightingSupport {
 
 		@Override
 		public void highlight(List<? extends EObject> semanticElement, HighlightingParameters parameters) {
-
 		}
 
+		@Override
+		public void flash(List<? extends EObject> semanticElemesnt, HighlightingParameters parameters) {
+		}
 	}
 }
