@@ -8,7 +8,7 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.genmodel.typesystem;
+package org.yakindu.sct.model.sgen.util;
 
 /**
  * @author rbeckmann

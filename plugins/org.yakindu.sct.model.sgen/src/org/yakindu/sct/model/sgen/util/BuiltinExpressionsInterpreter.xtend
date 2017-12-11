@@ -9,23 +9,28 @@
  */
 package org.yakindu.sct.model.sgen.util
 
+import java.text.DateFormat
+import java.util.Date
+import org.osgi.framework.FrameworkUtil
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.interpreter.DefaultExpressionInterpreter
 import org.yakindu.base.types.Property
-import java.util.Date
 
 /** 
  * @author rbeckmann
  */
-class BuiltinExpressionsInterpreter extends DefaultExpressionInterpreter {
+class BuiltinExpressionsInterpreter extends DefaultExpressionInterpreter implements BuiltinDeclarationNames {
 
 	override dispatch Object execute(ElementReferenceExpression expression) {
 		if (expression.reference instanceof Property) {
 			switch ((expression.reference as Property).name) {
-				case "version":
-					return "3.1.1"
-				case "now":
-					return new Date().toLocaleString
+				case SCT_VERSION_VAR: {
+					val v = FrameworkUtil.getBundle(getClass()).version
+					return v.toString
+				}
+				case TIMESTAMP_VAR: {
+					return DateFormat.getDateInstance().format(new Date())
+				}
 				default:
 					return executeElementReferenceExpression(expression)
 			}

@@ -9,9 +9,12 @@
  */
 package org.yakindu.sct.model.sgen.util;
 
+import java.text.DateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import org.eclipse.emf.ecore.EObject;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.Version;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression;
 import org.yakindu.base.expressions.expressions.BitwiseOrExpression;
@@ -34,12 +37,13 @@ import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.interpreter.DefaultExpressionInterpreter;
 import org.yakindu.base.types.Property;
+import org.yakindu.sct.model.sgen.util.BuiltinDeclarationNames;
 
 /**
  * @author rbeckmann
  */
 @SuppressWarnings("all")
-public class BuiltinExpressionsInterpreter extends DefaultExpressionInterpreter {
+public class BuiltinExpressionsInterpreter extends DefaultExpressionInterpreter implements BuiltinDeclarationNames {
   @Override
   protected Object _execute(final ElementReferenceExpression expression) {
     Object _xblockexpression = null;
@@ -50,10 +54,13 @@ public class BuiltinExpressionsInterpreter extends DefaultExpressionInterpreter 
         String _name = ((Property) _reference_1).getName();
         if (_name != null) {
           switch (_name) {
-            case "version":
-              return "3.1.1";
-            case "now":
-              return new Date().toLocaleString();
+            case BuiltinDeclarationNames.SCT_VERSION_VAR:
+              final Version v = FrameworkUtil.getBundle(this.getClass()).getVersion();
+              return v.toString();
+            case BuiltinDeclarationNames.TIMESTAMP_VAR:
+              DateFormat _dateInstance = DateFormat.getDateInstance();
+              Date _date = new Date();
+              return _dateInstance.format(_date);
             default:
               return this.executeElementReferenceExpression(expression);
           }

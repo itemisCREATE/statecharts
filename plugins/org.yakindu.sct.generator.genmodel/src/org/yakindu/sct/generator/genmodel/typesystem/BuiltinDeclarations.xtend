@@ -12,8 +12,9 @@ package org.yakindu.sct.generator.genmodel.typesystem
 
 import com.google.inject.Inject
 import org.yakindu.base.types.TypesFactory
-import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.base.types.typesystem.AbstractTypeSystem
+import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.model.sgen.util.BuiltinDeclarationNames
 
 /**
  * @author rbeckmann
