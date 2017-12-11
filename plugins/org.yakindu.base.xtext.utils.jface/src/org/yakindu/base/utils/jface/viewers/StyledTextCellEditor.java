@@ -19,6 +19,7 @@ import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.custom.VerifyKeyListener;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.KeyAdapter;
@@ -31,6 +32,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.TraverseEvent;
 import org.eclipse.swt.events.TraverseListener;
+import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
@@ -60,6 +62,8 @@ public class StyledTextCellEditor extends CellEditor {
 	private boolean isDeleteable = false;
 
 	private boolean isSelectable = false;
+
+	private VerifyKeyListener verifyKeyListener;
 
 	/**
 	 * Creates a new text string cell editor with no control The cell editor
@@ -136,8 +140,7 @@ public class StyledTextCellEditor extends CellEditor {
 		});
 		text.addTraverseListener(new TraverseListener() {
 			public void keyTraversed(TraverseEvent e) {
-				if (e.detail == SWT.TRAVERSE_ESCAPE
-						|| e.detail == SWT.TRAVERSE_RETURN) {
+				if (e.detail == SWT.TRAVERSE_ESCAPE || e.detail == SWT.TRAVERSE_RETURN) {
 					e.doit = false;
 				}
 			}
@@ -158,11 +161,39 @@ public class StyledTextCellEditor extends CellEditor {
 				StyledTextCellEditor.this.focusLost();
 			}
 		});
+
 		text.setFont(parent.getFont());
 		text.setBackground(parent.getBackground());
 		text.setText("");//$NON-NLS-1$
 		text.addModifyListener(getModifyListener());
+		text.addVerifyKeyListener(getVerifyKeyListener());
 		return text;
+	}
+
+	protected VerifyKeyListener getVerifyKeyListener() {
+		if (verifyKeyListener == null) {
+			verifyKeyListener = new VerifyKeyListener() {
+
+				@Override
+				public void verifyKey(VerifyEvent event) {
+					if (event.stateMask == SWT.CTRL) {
+						switch (event.character) {
+							case '\u0003' : // copy action
+								performCopy();
+								break;
+							case '\u0018' : // cut action
+								performCut();
+								break;
+							case '\u0001' : // selectAll action
+								performSelectAll();
+								break;
+						}
+						event.doit = true;
+					}
+				}
+			};
+		}
+		return verifyKeyListener;
 	}
 
 	/**

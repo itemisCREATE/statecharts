@@ -10,8 +10,13 @@
  */
 package org.yakindu.sct.ui.editor.factories;
 
+import java.util.List;
+
 import org.eclipse.gmf.runtime.diagram.ui.view.factories.DiagramViewFactory;
+import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.MeasurementUnit;
+import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 
 /**
  * 
@@ -23,5 +28,13 @@ public class StatechartDiagramViewFactory extends DiagramViewFactory {
 	@Override
 	protected MeasurementUnit getMeasurementUnit() {
 		return MeasurementUnit.PIXEL_LITERAL;
+	}
+
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	@Override
+	protected List createStyles(View view) {
+		BooleanValueStyle inlineDefinitionSectionStyle = DiagramPartitioningUtil.createInlineDefinitionSectionStyle();
+		view.getStyles().add(inlineDefinitionSectionStyle);
+		return super.createStyles(view);
 	}
 }

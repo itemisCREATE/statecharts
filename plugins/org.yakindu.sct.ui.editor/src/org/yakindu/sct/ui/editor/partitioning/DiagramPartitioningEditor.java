@@ -17,11 +17,13 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.ContextMenuProvider;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds;
@@ -44,15 +46,20 @@ import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerLabel;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IEditorSite;
+import org.eclipse.ui.IMemento;
+import org.eclipse.ui.IPersistableEditor;
+import org.eclipse.ui.IPersistableElement;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.XMLMemento;
 import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.xtext.util.Arrays;
 import org.yakindu.base.base.NamedElement;
@@ -65,14 +72,31 @@ import org.yakindu.sct.ui.editor.StatechartImages;
  * {@link DiagramPartitioningBreadcrumbViewer} to the top.
  * 
  * @author andreas muelder - Initial contribution and API
+ * @author robert rudi - added pinnable sash form for new diagrams
  * 
  */
-public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor implements ISelectionChangedListener,
-		IEditingDomainProvider {
+public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
+		implements
+			ISelectionChangedListener,
+			IEditingDomainProvider,
+			IPersistableEditor,
+			IPersistableElement {
+
+	private static final String REGEX_NO_WORD_NO_WHITESPACE = "[^\\w[\\s+_]]";
+	protected static final String IS_DEFINITION_SECTION_EXPANDED = "DefinitionSectionIsExpanded";
+	protected static final String FIRST_SASH_CONTROL_WEIGHT = "FirstSashControlWeight";
+	protected static final String SECOND_SASH_CONTROL_WEIGHT = "SecondSashControlWeight";
+	protected static final int[] DEFAULT_WEIGHTS = new int[]{2, 10};
+	protected static final int MAXIMIZED_CONTROL_INDEX = 1;
 
 	private DiagramPartitioningBreadcrumbViewer viewer;
 
 	private DiagramPartitioningDocumentProvider documentProvider;
+	private SashForm sash;
+
+	private static IMemento memento;
+
+	protected abstract void createTextEditor(Composite parent);
 
 	public DiagramPartitioningEditor(boolean hasFlyoutPalette) {
 		super(hasFlyoutPalette);
@@ -88,24 +112,116 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 	public IDocumentProvider getDocumentProvider() {
 		return documentProvider;
 	}
-	
+
 	@Override
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
-		if(input instanceof FileStoreEditorInput) {
-			throw new PartInitException(
-					"An error occured while opening the file.\n\n"
+		if (input instanceof FileStoreEditorInput) {
+			throw new PartInitException("An error occured while opening the file.\n\n"
 					+ "This might have happened because you tried to open a statechart with File->Open File.\n"
-            		+ "This is not supported. Please import the file into a project instead."
-	            		);
+					+ "This is not supported. Please import the file into a project instead.");
 		}
 		super.init(site, input);
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public Object getAdapter(Class type) {
+		if (DiagramPartitioningEditor.class.equals(type)) {
+			return this;
+		}
+		return super.getAdapter(type);
 	}
 
 	@Override
 	public void createPartControl(Composite parent) {
 		GridLayoutFactory.fillDefaults().spacing(0, 0).applyTo(parent);
 		createBreadcrumbViewer(parent);
-		super.createPartControl(parent);
+		sash = (SashForm) createParentSash(parent);
+		createTextEditor(sash);
+		super.createPartControl(sash);
+	}
+
+	public void toggleDefinitionSection() {
+		if (getContextObject() instanceof Statechart)
+			sash.setMaximizedControl(
+					!isDefinitionSectionInlined() ? null : sash.getChildren()[MAXIMIZED_CONTROL_INDEX]);
+	}
+
+	protected abstract EObject getContextObject();
+
+	public void restoreSashWidths(SashForm sash, IMemento memento) {
+		if (memento == null) {
+			setDefaultSashWeights(sash);
+			memento = XMLMemento.createWriteRoot(getFactoryId());
+			memento.putInteger(FIRST_SASH_CONTROL_WEIGHT, DEFAULT_WEIGHTS[0]);
+			memento.putInteger(SECOND_SASH_CONTROL_WEIGHT, DEFAULT_WEIGHTS[1]);
+			rememberExpandState(memento);
+			setMemento(memento);
+		} else {
+			restoreState(memento);
+		}
+	}
+
+	protected void rememberExpandState(IMemento memento) {
+		if (getContextObject() != null) {
+			if (getContextObject() instanceof NamedElement) {
+				NamedElement element = (NamedElement) getContextObject();
+				if (element != null)
+					memento.putBoolean(stripElementName(element.getName()) + IS_DEFINITION_SECTION_EXPANDED, true);
+			}
+		}
+	}
+
+	protected boolean getExpandState(IMemento memento) {
+		Object expandState = null;
+		if (getContextObject() instanceof NamedElement) {
+			NamedElement element = (NamedElement) getContextObject();
+			if (element != null)
+				expandState = memento.getBoolean(stripElementName(element.getName()) + IS_DEFINITION_SECTION_EXPANDED);
+		}
+		return expandState != null ? ((Boolean) expandState).booleanValue() : true;
+	}
+
+	protected String stripElementName(String name) {
+		if (name != null)
+			return name.replaceAll(REGEX_NO_WORD_NO_WHITESPACE, "");
+		return "";
+	}
+
+	public SashForm getSash() {
+		return sash;
+	}
+
+	protected void setDefaultSashWeights(SashForm sash) {
+		sash.setWeights(DEFAULT_WEIGHTS);
+	}
+
+	@Override
+	public abstract void restoreState(IMemento memento);
+
+	@Override
+	public abstract void saveState(IMemento memento);
+
+	public IMemento getMemento() {
+		return memento;
+	}
+
+	public void setMemento(IMemento memento) {
+		DiagramPartitioningEditor.memento = memento;
+	}
+
+	@Override
+	public abstract String getFactoryId();
+
+	protected abstract boolean isDefinitionSectionInlined();
+
+	protected Composite createParentSash(Composite parent) {
+		GridDataFactory.fillDefaults().grab(false, true).applyTo(parent);
+		SashForm sash = new SashForm(parent, SWT.HORIZONTAL | SWT.SMOOTH);
+		sash.setBackground(ColorConstants.white);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(sash);
+		GridLayoutFactory.fillDefaults().applyTo(sash);
+		return sash;
 	}
 
 	@SuppressWarnings("restriction")
@@ -148,11 +264,13 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 	}
 
 	protected void createBreadcrumbViewer(Composite parent) {
-		viewer = new DiagramPartitioningBreadcrumbViewer(parent, SWT.READ_ONLY);
-		viewer.addSelectionChangedListener(this);
-		viewer.setContentProvider(new BreadcrumbViewerContentProvider());
-		viewer.setLabelProvider(new BreadcrumbViewerLabelProvider());
-		viewer.setInput(DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram()));
+		if (viewer == null) {
+			viewer = new DiagramPartitioningBreadcrumbViewer(parent, SWT.READ_ONLY);
+			viewer.addSelectionChangedListener(this);
+			viewer.setContentProvider(new BreadcrumbViewerContentProvider());
+			viewer.setLabelProvider(new BreadcrumbViewerLabelProvider());
+			viewer.setInput(DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram()));
+		}
 		parent.pack(true);
 	}
 
@@ -209,7 +327,17 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 		}
 	}
 
-	public static final class BreadcrumbViewerLabelProvider extends BaseLabelProvider implements ITreePathLabelProvider {
+	protected void refreshDiagramEditPartChildren() {
+		((List<?>) getDiagramEditPart().getChildren()).forEach(part -> {
+			if (part instanceof EditPart) {
+				((EditPart) part).refresh();
+			}
+		});
+	}
+
+	public static final class BreadcrumbViewerLabelProvider extends BaseLabelProvider
+			implements
+				ITreePathLabelProvider {
 
 		public void updateLabel(ViewerLabel label, TreePath elementPath) {
 			Diagram lastSegment = (Diagram) elementPath.getLastSegment();
@@ -227,13 +355,15 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 
 	public static class FilteringDiagramContextMenuProvider extends DiagramContextMenuProvider {
 		// Default context menu items that should be suppressed
-		protected String[] exclude = new String[] { "addNoteLinkAction", "properties",
-				"org.eclipse.mylyn.context.ui.commands.attachment.retrieveContext","org.eclipse.jst.ws.atk.ui.webservice.category.popupMenu",
-		        "org.eclipse.tptp.platform.analysis.core.ui.internal.actions.MultiAnalysisActionDelegate", "org.eclipse.debug.ui.contextualLaunch.debug.submenu", 
-		        "org.eclipse.debug.ui.contextualLaunch.profile.submenu",
+		protected String[] exclude = new String[]{"addNoteLinkAction", "properties",
+				"org.eclipse.mylyn.context.ui.commands.attachment.retrieveContext",
+				"org.eclipse.jst.ws.atk.ui.webservice.category.popupMenu",
+				"org.eclipse.tptp.platform.analysis.core.ui.internal.actions.MultiAnalysisActionDelegate",
+				"org.eclipse.debug.ui.contextualLaunch.debug.submenu",
+				"org.eclipse.debug.ui.contextualLaunch.profile.submenu",
 				"org.eclipse.mylyn.resources.ui.ui.interest.remove.element", "formatMenu", "filtersMenu", "addGroup",
-				"navigateGroup", "toolbarArrangeAllAction", "selectMenu", "diagramAddMenu", "navigateMenu",
-				"viewGroup", "viewMenu" };
+				"navigateGroup", "toolbarArrangeAllAction", "selectMenu", "diagramAddMenu", "navigateMenu", "viewGroup",
+				"viewMenu"};
 
 		protected FilteringDiagramContextMenuProvider(IWorkbenchPart part, EditPartViewer viewer) {
 			super(part, viewer);

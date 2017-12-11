@@ -23,13 +23,18 @@ public enum StatechartImages {
 	SUB_STATECHART_PICTOGRAM("icons/obj16/Statechart-Pictogram-16.png"),
 
 	LOGO("icons/obj16/logo-16.png"),
-	
+
 	PRO_LOGO("icons/obj16/logopro-16.png"),
-	
+
 	PRO_EDITION("images/pro.png"),
+
+	MENU("icons/obj16/Menu-16.png"),
+
+	EXPAND("icons/obj16/arrow_right.png"),
+
+	COLLAPSE("icons/obj16/arrow_left.png"),
 	
-	MENU("icons/obj16/Menu-16.png");
-	
+	PIN("icons/obj16/pin-view.gif");
 
 	private final String path;
 
