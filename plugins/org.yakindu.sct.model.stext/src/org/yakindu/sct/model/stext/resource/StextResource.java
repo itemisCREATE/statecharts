@@ -35,6 +35,8 @@ import org.yakindu.sct.model.stext.stext.TransitionSpecification;
  */
 public class StextResource extends AbstractSCTResource {
 
+	private static final String NEW_LINE = System.lineSeparator();
+
 	public StextResource() {
 		this(null);
 	}
@@ -48,19 +50,16 @@ public class StextResource extends AbstractSCTResource {
 		StringBuilder builder = new StringBuilder();
 		if (statechart.getNamespace() != null) {
 			builder.append("namespace " + statechart.getNamespace());
-			builder.append("\n");
+			builder.append(NEW_LINE);
 		}
-		for(Annotation annotation : statechart.getAnnotations()){
+		for (Annotation annotation : statechart.getAnnotations()) {
 			builder.append(serialize(annotation));
-			builder.append("\n");
+			builder.append(NEW_LINE);
 		}
-
 		for (Scope scope : statechart.getScopes()) {
 			builder.append(serialize(scope));
-			builder.append("\n");
+			builder.append(NEW_LINE);
 		}
-		
-		
 		statechart.setSpecification(builder.toString());
 	}
 
@@ -72,7 +71,7 @@ public class StextResource extends AbstractSCTResource {
 		StringBuilder builder = new StringBuilder();
 		for (Reaction reaction : reactions) {
 			if (builder.length() > 0)
-				builder.append("\n");
+				builder.append(NEW_LINE);
 			builder.append(serializeReaction(reaction));
 		}
 		state.setSpecification(builder.toString());
@@ -107,13 +106,13 @@ public class StextResource extends AbstractSCTResource {
 		if (definitionScopes != null) {
 			statechart.getScopes().addAll(definitionScopes);
 		}
-		
+
 		statechart.getAnnotations().clear();
 		EList<ArgumentedAnnotation> annotations = rootASTElement.getAnnotations();
-		if(annotations != null){
+		if (annotations != null) {
 			statechart.getAnnotations().addAll(annotations);
 		}
-		
+
 	}
 
 	protected void parseState(State state) {

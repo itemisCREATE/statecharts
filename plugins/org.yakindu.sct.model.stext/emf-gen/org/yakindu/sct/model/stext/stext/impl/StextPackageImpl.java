@@ -374,6 +374,8 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 
 		// Initialize simple dependencies
 		ExpressionsPackage.eINSTANCE.eClass();
+		BasePackage.eINSTANCE.eClass();
+		TypesPackage.eINSTANCE.eClass();
 		SGraphPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects

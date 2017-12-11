@@ -145,6 +145,15 @@ public interface SGraphFactory extends EFactory {
 	ImportDeclaration createImportDeclaration();
 
 	/**
+	 * Returns a new object of class '<em>Scope Member</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Scope Member</em>'.
+	 * @generated
+	 */
+	ScopeMember createScopeMember();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
