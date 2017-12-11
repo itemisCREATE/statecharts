@@ -18,12 +18,14 @@ import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.sct.generator.c.DefaultGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations;
+import org.yakindu.sct.generator.c.IncludeProvider;
 import org.yakindu.sct.generator.c.SimpleGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.extensions.Naming;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
+import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenCppIncludeProvider;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenEventCode;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenExpressionCode;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineHeader;
@@ -51,6 +53,7 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		binder.bind(INamingService.class).to(CppNamingService.class);
 		binder.bind(ITypeSystemInferrer.class).to(STextTypeInferrer.class);
 		binder.bind(Naming.class).to(CppNaming.class);
+		binder.bind(IncludeProvider.class).to(StandardCppIncludeProvider.class);
 		bindEventDrivenClasses(entry, binder);
 		bindIGenArtifactConfigurations(entry, binder);
 	}
@@ -75,6 +78,7 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 			binder.bind(StatemachineImplementation.class).to(EventDrivenStatemachineImplementation.class);
 			binder.bind(CppExpressionsGenerator.class).to(EventDrivenExpressionCode.class);
 			binder.bind(EventCode.class).to(EventDrivenEventCode.class);
+			binder.bind(StandardCppIncludeProvider.class).to(EventDrivenCppIncludeProvider.class);
 		}
 	}
 

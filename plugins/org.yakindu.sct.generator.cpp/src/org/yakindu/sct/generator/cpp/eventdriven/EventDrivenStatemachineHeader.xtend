@@ -52,13 +52,6 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 		'''
 	}
 	
-	override includes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
-		'''
-		#include <deque>
-		«super.includes(it, artifactConfigs)»
-		'''
-	}
-	
 	override CharSequence protectedInnerClassMembers(StatechartScope scope) {
 		'''
 		«super.protectedInnerClassMembers(scope)»

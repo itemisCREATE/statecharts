@@ -10,5 +10,6 @@ Require-Bundle: org.yakindu.sct.model.sexec,
  org.yakindu.sct.generator.c,
  org.yakindu.sct.model.stext.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: org.yakindu.sct.generator.cpp
+Export-Package: org.yakindu.sct.generator.cpp,
+ org.yakindu.sct.generator.cpp.eventdriven
 Bundle-Vendor: statecharts.org
