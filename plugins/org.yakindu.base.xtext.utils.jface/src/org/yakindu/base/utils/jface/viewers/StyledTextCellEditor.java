@@ -63,6 +63,8 @@ public class StyledTextCellEditor extends CellEditor {
 
 	private boolean isSelectable = false;
 
+	private VerifyKeyListener verifyKeyListener;
+
 	/**
 	 * Creates a new text string cell editor with no control The cell editor
 	 * value is the string itself, which is initially the empty string.
@@ -138,8 +140,7 @@ public class StyledTextCellEditor extends CellEditor {
 		});
 		text.addTraverseListener(new TraverseListener() {
 			public void keyTraversed(TraverseEvent e) {
-				if (e.detail == SWT.TRAVERSE_ESCAPE
-						|| e.detail == SWT.TRAVERSE_RETURN) {
+				if (e.detail == SWT.TRAVERSE_ESCAPE || e.detail == SWT.TRAVERSE_RETURN) {
 					e.doit = false;
 				}
 			}
@@ -160,33 +161,39 @@ public class StyledTextCellEditor extends CellEditor {
 				StyledTextCellEditor.this.focusLost();
 			}
 		});
-		
+
 		text.setFont(parent.getFont());
 		text.setBackground(parent.getBackground());
 		text.setText("");//$NON-NLS-1$
 		text.addModifyListener(getModifyListener());
-		text.addVerifyKeyListener(new VerifyKeyListener() {
-
-			@Override
-			public void verifyKey(VerifyEvent event) {
-				if (event.stateMask == SWT.CTRL) {
-					switch (event.character) {
-						case '\u0003' :	//copy action
-							performCopy();
-							break;	
-						case '\u0018' : //cut action
-							performCut();
-							break;
-						case '\u0001' : //selectAll action
-							performSelectAll();
-							break;
-						
-					}
-					event.doit = true;
-				}
-			}
-		});
+		text.addVerifyKeyListener(getVerifyKeyListener());
 		return text;
+	}
+
+	protected VerifyKeyListener getVerifyKeyListener() {
+		if (verifyKeyListener == null) {
+			verifyKeyListener = new VerifyKeyListener() {
+
+				@Override
+				public void verifyKey(VerifyEvent event) {
+					if (event.stateMask == SWT.CTRL) {
+						switch (event.character) {
+							case '\u0003' : // copy action
+								performCopy();
+								break;
+							case '\u0018' : // cut action
+								performCut();
+								break;
+							case '\u0001' : // selectAll action
+								performSelectAll();
+								break;
+						}
+						event.doit = true;
+					}
+				}
+			};
+		}
+		return verifyKeyListener;
 	}
 
 	/**
