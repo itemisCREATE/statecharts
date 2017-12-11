@@ -62,7 +62,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Scope">
     <eStructuralFeatures xsi:type="ecore:EReference" name="declarations" upperBound="-1"
         eType="ecore:EClass ../../../org.yakindu.base.types/model/types.ecore#//Declaration"
-        containment="true"/>
+        changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
         eType="ecore:EClass ../../../org.yakindu.base.types/model/types.ecore#//Event"
         changeable="false" volatile="true" transient="true" derived="true"/>
@@ -70,7 +70,9 @@
         upperBound="-1" eType="ecore:EClass ../../../org.yakindu.base.types/model/types.ecore#//Property"
         changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="reactions" upperBound="-1"
-        eType="#//Reaction" containment="true"/>
+        eType="#//Reaction" changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScopedElement" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" upperBound="-1"
@@ -100,4 +102,5 @@
   <eClassifiers xsi:type="ecore:EClass" name="ImportDeclaration" eSuperTypes="../../../org.yakindu.base.types/model/types.ecore#//Declaration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="declaration" eType="ecore:EClass ../../../org.yakindu.base.types/model/types.ecore#//Declaration"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ScopeMember"/>
 </ecore:EPackage>

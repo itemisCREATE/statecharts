@@ -103,12 +103,12 @@ public class StyledTextXtextAdapter {
 
 	private ValidationJob validationJob;
 
-
 	private StyledText styledText;
 
 	private ControlDecoration decoration;
 
 	private SourceViewerDecorationSupport decorationSupport;
+	private IWorkbenchPartSite site;
 
 	public StyledTextXtextAdapter(Injector injector, IXtextFakeContextResourcesProvider contextFakeResourceProvider) {
 		this.contextFakeResourceProvider = contextFakeResourceProvider;
@@ -120,6 +120,11 @@ public class StyledTextXtextAdapter {
 
 	public StyledTextXtextAdapter(Injector injector) {
 		this(injector, IXtextFakeContextResourcesProvider.NULL_CONTEXT_PROVIDER);
+	}
+
+	public StyledTextXtextAdapter(Injector inject, IWorkbenchPartSite site) {
+		this(inject);
+		this.site = site;
 	}
 
 	public void adapt(StyledText styledText) {
@@ -181,8 +186,9 @@ public class StyledTextXtextAdapter {
 		// Overrides the editors selection provider to provide the text
 		// selection if opened within an editor context
 		try {
-			IWorkbenchPartSite site = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-					.getActiveEditor().getSite();
+			if (this.site == null) {
+				site = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor().getSite();
+			}
 			XtextStyledTextSelectionProvider xtextStyledTextSelectionProvider = new XtextStyledTextSelectionProvider();
 			ChangeSelectionProviderOnFocusGain listener = new ChangeSelectionProviderOnFocusGain(site,
 					xtextStyledTextSelectionProvider);

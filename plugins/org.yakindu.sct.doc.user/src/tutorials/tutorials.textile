@@ -1,8 +1,4 @@
 
-
-
-
-
 h1(#tutorial_five-minutes_tutorial). Five-minutes tutorial
 
 The five-minutes tutorial gives you a brief introduction into modeling state machines with YAKINDU Statechart Tools by a simple example. It models a light switch, which has the states _on_ and _off_. Operating the switch repeatedly turns the light on, off, back on again, and so forth. You can simulate this behavior in a dynamic statechart model (state machine model). Here's how this looks like:
@@ -13,9 +9,12 @@ p=. Interactive light switch statechart simulation
 
 In the simulation screenshot above, the light switch is currently in the _on_ state. To toggle the light switch, the user clicks on _operate_ on the right-hand side of the window.
 
+
+
+
 h2(#tutorial_importing-light-switch-example). Importing light switch example
 
-Now try this for yourself. We are assuming that you have already installed and started YAKINDU Statechart Tools. If you don't, please see the "Installation Guide":../installation/installation.html#inst_installing_yakindu_statechart_tools for details.
+Now try this for yourself. We are assuming that you have already installed and started YAKINDU Statechart Tools. If you don't, please see the "Installation Guide":../user-guide/installation.html#inst_installing_yakindu_statechart_tools for details.
 
 # If the "Welcome" page is still open, close it. <p>!(standard-image small)images/tuto_5min_010_close_welcome.png(Closing the "Welcome" page)!</p>
 # In the main menu, select _File → New → Example…_.
@@ -26,6 +25,9 @@ Now try this for yourself. We are assuming that you have already installed and s
 # In the project explorer on the left-hand side of the window, open the _light_switch_ project by clicking on the small triangle left from the project name ("light_switch"). Also open the _model_ folder.<p>!(standard-image small)images/tuto_5min_020_expand_project.png(Expand project)!</p>
 # The light switch statechart is defined in the file _light_switch.sct_. Double-click on this file to open the model.
 
+
+
+
 h2(#tutorial_running-the-light-switch-simulation). Simulating the light switch
 
 # Right-click on _light_switch.sct_ and select _Run As → Statechart Simulation_ in the context menu.
@@ -33,6 +35,9 @@ h2(#tutorial_running-the-light-switch-simulation). Simulating the light switch
 # At the right-bottom side of the window, the simulation view is located. In this view, you can change variable values and raise events during a simulation run. Click on the small triangle left from _internal_ to unfold the _operate_ link. This link represents the _operate_ event to switch the light on or off.
 # Click on the _operate_ link. The active state changes accordingly from *Off* to *On*. <p>!(standard-image)images/tuto_light_switch_330_statechart_simulator_state_on.png(Light switch simulation in "on" state)!</p>
 # Click on _operate_ again to switch off the light.
+
+
+
 
 h2(#tutorial_generating-statechart-code). Generating statechart code
 
@@ -50,6 +55,7 @@ That's it. If you want to know more, take the time and work through the "Compreh
 
 
 
+
 h1(#tutorial_comprehensive_tutorial). Comprehensive tutorial
 
 This tutorial introduces YAKINDU Statechart Tools (SCT) which provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concepts of Finite State Machines (FSM) and Harel Statecharts. It is an easy-to-use tool featuring sophisticated graphical statechart editing, validation and simulation of statecharts as well as code generation for C, C&#43;&#43;, or Java.
@@ -63,11 +69,16 @@ Please note that this tutorial will not explain statecharts in general, so you s
 
 In order to get a fully-working state machine implementation that you can integrate with your project, you will have to familiarize yourself with _code generation_, which is covered by chapter "Code generation":#tutorial_code-generation in this documentation. You can generate your state machine implementation as source code in C, C++, and Java out of the box. Alternatively, you can write your own code generator for other programming languages or for other purposes.
 
-Before we get started, make sure you have YAKINDU Statechart Tools installed. For installation instructions, see the "YAKINDU Statechart Tools Installation Guide":../installation/installation.html.
+Before we get started, make sure you have YAKINDU Statechart Tools installed. For installation instructions, see the "YAKINDU Statechart Tools Installation Guide":../user-guide/installation.html.
+
+
+
 
 h2(#tutorial_the-light-switch-example). The light switch example
 
 The most basic example of a state machine that actually does something is a light switch. In this scenario there is a light bulb and a switch to turn the bulb on and off. Of course there's also a power source and some electrical cabling to put it all together, but for the purpose of our model we can omit them.
+
+
 
 h3(#tutorial_the-behavior-of-a-light-switch). The behavior of a light switch
 
@@ -77,6 +88,9 @@ When modeling the light switch example as a statechart, we can disregard everyth
 * If the light switch is operated while being in its *Off* state, it changes to its *On* state.
 * If the light switch is operated while being in its *On* state, it changes to its *Off* state.
 
+
+
+
 h2(#tutorial_modeling-the-light-switch-as-a-statechart). Modeling the light switch as a statechart
 
 Now let's model the light switch as a statechart using YAKINDU Statechart Tools. This involves the following steps:
@@ -84,6 +98,8 @@ Now let's model the light switch as a statechart using YAKINDU Statechart Tools.
 # Creating an Eclipse project. It will serve as a container for the statechart model.
 # Modeling the light switch using the YAKINDU Statechart Tools editor. The result will be a static statechart model.
 # Simulating the model. We can play around with the model, operate the light switch and observe its behavior.
+
+
 
 h3(#tutorial_creating-an-eclipse-project). Creating an Eclipse project
 
@@ -117,6 +133,8 @@ Eclipse creates the new project:
 
 p=. Project _LightSwitch_ created
 
+
+
 h3(#tutorial_creating-a-folder-for-the-model). Creating a folder for the model
 
 Now that we have created the Eclipse project, we can establish the statechart model of the light switch. It is good practice to use a separate directory for models, so let's create a new folder called _model_.
@@ -136,6 +154,8 @@ p=. The _New Folder_ wizard
 Give the model folder a reasonable name, e. g. *model*, and type it into the _Folder Name_ text field. Then click _Finish_.
 
 The new _model_ folder is created and appears in the _Project Explorer_ view at the left.
+
+
 
 h3(#tutorial_starting-with-an-empty-statechart-model). Starting with an empty statechart model
 
@@ -175,6 +195,7 @@ Please answer the question regarding switching to the _YAKINDU Modeling_ perspec
 
 bq. *Please note:* If the _Confirm Perspective Switch_ dialog does not appear as described above you probably have already confirmed _Do not offer to switch perspective in the future_ once before.
 
+
 h4(#tutorial_the-initial-model). The initial model
 
 An empty statechart is created and displayed in the *statechart editor* in the middle of the Eclipse workbench. In the screenshot below the statechart editor is marked by a red rectangle. Subsequently, we will use the statechart editor to graphically develop the light switch statechart.
@@ -186,6 +207,8 @@ p=. The statechart editor
 
 Actually the new statechart isn't really empty. It already contains the initial state (a small filled black circle), a "normal" state, and a transition leading from the former to the latter.
 
+
+
 h3(#tutorial_statechart-validation). Statechart validation
 
 h4(#tutorial_error-markers-in-the-model-graph). Error markers in the model graph
@@ -196,9 +219,11 @@ The "normal" state, however, has a small filled red circle containing a white �
 
 bq. *Please note:* Since the current version of the statechart editor gives that state a proper name ("StateA"), the error marker is no longer present in a new model. So the following description is somewhat out of date. This will be fixed in a future version of this documentation. Until then, please follow the subsequent text nevertheless, because you will learn something important about statechart validation.
 
+
 h4(#tutorial_error-markers-in-the-project-explorer). Error markers in the project explorer
 
 The error marker is also shown in the _Project Explorer_ view at the left-hand side of the main window. In this way you can see immediately which of your projects contain errors. Click on the small show/hide symbol (triangle) left of a project's or any other resource's name to show or hide its respective contents. By doing so, you can quickly encircle the directories and files that are affected by errors. In the screenshot above we have clicked open the _LightSwitch_ project and the _model_ directory, showing the error is in the _LightSwitch.sct_ file.
+
 
 h4(#tutorial_validation-principles). Validation principles
 
@@ -210,6 +235,7 @@ Hovering with the mouse over the error marker in the statechart editor reveals w
 
 p=. An error marker and a popup window explaining it
 
+
 h4(#tutorial_error-markers-in-the-problems-view). Error markers in the "problems" view
 
 An alternative place to see error messages is the _Problems_ view. This view has the particular advantage to comprise all notifications in a clearly arranged list form, see the "screenshot above":#tutorial_light_switch_220_statechart_editor. It displays:
@@ -220,6 +246,8 @@ An alternative place to see error messages is the _Problems_ view. This view has
 Double-clicking on an error message in the _Problems_ view brings you directly to the erroneous object.
 
 Hang on, we will correct the error in a second!
+
+
 
 h3(#tutorial_giving-a-state-a-name). Giving a state a name
 
@@ -236,6 +264,8 @@ table(scedit).
 |<. Drop the state box at this very place, and everything looks much better now:|<. !(standard-image)images/tuto_light_switch_230_statechart_editor_change_state_name_05.png(Dropping the state)!|
 |<. Alternatively, we could have used the state box's handles to resize it. However, we just deselect the box by clicking elsewhere:|<. !(standard-image)images/tuto_light_switch_230_statechart_editor_change_state_name_06.png(Deselecting the state)!|
 
+
+
 h3(#tutorial_creating-a-state). Creating a state
 
 With the *Off* state only, the light switch statechart isn't complete yet. We also need an *On* state, and we going to create it now.
@@ -247,6 +277,8 @@ table(scedit).
 |<. Rename the new state to *On*. Vertically align it to the *Off* state, if you like:|<. !(standard-image)images/tuto_light_switch_240_statechart_editor_create_state_04.png(Renaming the new state)!|
 |<. You'll notice that the new state is showing an error marker. The reason is that it is not yet possible to reach the *On* state.|<. |
 |<. Before we'll go on and fix that problem, here's another way to create a new state. When you are hovering with the mouse pointer over the main region, i. e. the large rectangle with a gray background, a popup menu shows up. If you click on the ‘S' symbol in that menu, a new state will be created. Other options in this menu are to create an initial state, a final state, or a choice.|<. !(standard-image)images/tuto_light_switch_240_statechart_editor_create_state_05.png(Creating a state using the popup menu)!|
+
+
 
 h3(#tutorial_creating-a-transition). Creating a transition
 
@@ -274,7 +306,7 @@ bc. internal:
     event operate
 
 
-The keyword @internal@ makes the following definition of the _operate_ event belong to the internal scope. The latter is explained in section "&quot;Internal scope&quot;":../user-guide/statechart_language.html#internal-scope.
+The keyword @internal@ makes the following definition of the _operate_ event belong to the internal scope. The latter is explained in section "&quot;Internal scope&quot;":../user-guide/statechart_language.html#sclang_internal_scope.
 
 Click anywhere outside of the text field, which terminates editing the definition section. The statechart editor digests the definition, recognizes the definition of the _operate_ event, and validates the model as being okay:
 
@@ -288,6 +320,9 @@ table(scedit).
 |<. However, in order to not get two straight lines being close together in the graph, let's first make some room and turn the present line into an arc. Move the mouse pointer over the transition line, but not over the text. The mouse pointer changes its shape to indicate that you can insert a control point. Click and hold to add the control point, then drag it to an appropriate position.|<. !(standard-image)images/tuto_light_switch_270_statechart_editor_create_transition_01.png(Inserting a control point)!|
 |<. Now let's insert the second transition. This time we won't use the palette, but instead use another method. Hover the mouse pointer over the source state, i. e. *On*. An incoming and an outgoing arrow appear, both with a handle. Click and hold the handle of the outgoing arrow and drag it to the *Off* target state.|<. !(standard-image)images/tuto_light_switch_270_statechart_editor_create_transition_02.png(Creating a transition by using the source state's outgoing arrow handle)!|
 |<. Upon releasing the mouse button the transition is established. Type @operate@ as the transition's event trigger into the text field. Reshape the transition arrow to make the graph look nice.|<. !(standard-image)images/tuto_light_switch_270_statechart_editor_create_transition_03.png(Completing the transition creation)!|
+
+
+
 
 h2(#tutorial_simulating_the_light_switch_model). Simulating the light switch model
 
@@ -332,9 +367,14 @@ Click on _operate_ again, and the active state changes back to *Off*. Click on _
 
 Stop the simulator by clicking at the little red termination button in the toolbar at the top.
 
+
+
+
 h2(#tutorial_code-generation). Code generation
 
 YAKINDU Statechart Tools include code generators for Java, C, and C&#43;&#43; out of the box. The code generators are following a "code-only" approach: They are generating all the code that is needed and do not rely on any additional runtime libraries. The generated code provides a well-defined application programming interface and can be integrated easily with any client code. In this tutorial we will generate Java code for a sample statechart modeling the handling of a phone call, the *CallHandling* example.
+
+
 
 h3(#tutorial_the-callhandling-example). The CallHandling example
 
@@ -353,6 +393,8 @@ p=. The CallHandling statechart model
 
 In order to eventually obtain the *CallHandling* example in the form of executable code, we have to create the model in the statechart editor first, followed by creating a suitable generator model, followed by executing the code generator to create the source code we need.
 
+
+
 h3(#tutorial_creating-the-statechart-model). Creating the statechart model
 
 In the "previous section":#tutorial_starting-with-an-empty-statechart-model we have seen how to work with the statechart editor. So let's create a new project now and use the statechart editor to create the *CallHandling* statechart model as outlined above.
@@ -360,6 +402,7 @@ In the "previous section":#tutorial_starting-with-an-empty-statechart-model we h
 Since we are going to generate Java code, we should use a Java project to host the statechart model. Use _File → New → Java Project_ and follow the _New Java Project_ wizard to create one.
 
 In addition to what we have learned above already, there is one new concept: interfaces.
+
 
 h4(#tutorial_creating-interfaces). Creating interfaces
 
@@ -387,6 +430,8 @@ If everything went well, any error markers in the model are gone. Your model sho
 !(standard-image)images/tuto_callhandling_example_final.png(The CallHandling statechart modeled in the statechart editor)!
 
 p=. The CallHandling statechart modeled in the statechart editor
+
+
 
 h3(#tutorial_creating-a-generator-model). Creating a generator model
 
@@ -445,6 +490,8 @@ A statechart reference may contain various configuration features. You will lear
 
 ###. FIXME: Insert a reference here.
 
+
+
 h3(#tutorial_enhancing-the-generator-model-by-timing-capabilities). Enhancing the generator model by timing capabilities
 
 The default generator model is insufficient yet. The _CallHandling_ statechart model uses _after_ and _every_ expressions. That is, it is dealing with *time events*, requiring a timer service to trigger them. We can instruct the code generator to provide us with a default timer service implementation by adding the following feature to the generator model:
@@ -452,6 +499,7 @@ The default generator model is insufficient yet. The _CallHandling_ statechart m
 bc. feature GeneralFeatures {
     TimerService = true
 }
+
 
 
 h3(#tutorial_generating-java-source-code). Generating Java source code
@@ -474,9 +522,12 @@ p=. Declaring _src-gen_ as a source folder
 
 If you want to execute your generator model manually, select _Generate Code Artifacts_ from the @.sgen@ file's context menu in the project explorer.
 
+
+
 h3(#tutorial_integration-with-client-code). Integration with client code
 
 Now that we have a generated Java implementation of the _CallHandling_ state machine available, we want to actually use it from some client code. We'll create that client code in a second.
+
 
 h4(#tutorial_creating-client-code). Creating client code
 
@@ -547,9 +598,13 @@ p. Let's have a detailed look at this client code:
 * Before hanging up the phone, let's find out how much time we spent in the call. @sm.getSCIPhone().getDuration()@ retrieves the call's duration, which is then formatted and printed to the console.
 * Finally, @sm.getSCIUser().raiseDismiss_call()@ raises the _dismiss_call_ event. It activates the *Dismiss Call* state after the next run cycle.
 
+
 h4(#tutorial_executing-the-client-code). Executing the client code
 
 You can execute the client code via _Run As → Java Application_ from the class file's context menu.
+
+
+
 
 h2(#tutorial_closing-remarks). Closing remarks
 

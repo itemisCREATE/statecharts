@@ -68,6 +68,8 @@ public class PreferenceInitializer extends DiagramPreferenceInitializer implemen
 		getPreferenceStore().setDefault(StatechartPreferenceConstants.PREF_LIVE_VALIDATION, true);
 		// Syntax coloring
 		getPreferenceStore().setDefault(StatechartPreferenceConstants.PREF_SYNTAX_COLORING, false);
+		// Definition section pinning
+		getPreferenceStore().setDefault(StatechartPreferenceConstants.PREF_DEFINITION_SECTION, false);
 
 	}
 

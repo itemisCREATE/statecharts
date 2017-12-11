@@ -478,7 +478,12 @@
 		<decoratorProvider class="org.yakindu.sct.ui.editor.submachine.SubmachineDecorationProvider"> 
 			<Priority name="Lowest" />
  		</decoratorProvider> 
- </extension> 
+ 	</extension> 
+ 	<extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders"> 
+		<decoratorProvider class="org.yakindu.sct.ui.editor.decoratorprovider.DefinitionSectionDecorationProvider"> 
+			<Priority name="Lowest" />
+ 		</decoratorProvider> 
+	 </extension>
  <extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders"> 
 		<decoratorProvider class="org.yakindu.sct.ui.editor.providers.TransitionPriorityDecorationProvider"> 
 			<Priority name="Lowest" />
@@ -872,4 +877,11 @@
             priority="medium">
       </factory>
    </extension>
+ <extension
+       point="org.eclipse.ui.elementFactories">
+    <factory
+          class="org.yakindu.sct.ui.editor.DiagramEditorInputFactory"
+          id="org.yakindu.sct.ui.editor.DiagramEditorInputFactory">
+    </factory>
+ </extension>
 </plugin>
