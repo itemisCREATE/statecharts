@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
@@ -24,51 +24,55 @@ class EventNaming {
 	@Inject extension Naming
 	@Inject extension Navigation
 	@Inject extension INamingService
-	
+
 	def eventEnumMemberName(Event it) {
-		'''«scope.functionPrefix»_«name.asIdentifier»'''
+		'''«scope.functionPrefix(it)»_«name.asIdentifier»'''
 	}
-	
+
+	def invalidEventEnumName(ExecutionFlow it) {
+		'''«module»_invalid_event'''.toString.toLowerCase
+	}
+
 	def eventEnumName(ExecutionFlow it) {
 		'''«module»_event_name'''.toString.toLowerCase
 	}
-	
+
 	def eventValueUnionName(ExecutionFlow it) {
 		'''«module»_event_value'''.toString.toLowerCase
 	}
-	
+
 	def eventStructTypeName(ExecutionFlow it) {
 		'''«name»_event'''.toString.toLowerCase
 	}
-	
+
 	def eventQueueTypeName(ExecutionFlow it) {
 		'''«name»_eventqueue'''.toString.toLowerCase
 	}
-	
+
 	def eventInitFunction(ExecutionFlow it) {
 		'''«eventStructTypeName»_init'''
 	}
-	
+
 	def valueEventInitFunction(ExecutionFlow it) {
 		'''«eventStructTypeName»_value_init'''
 	}
-	
+
 	def eventQueueInitFunction(ExecutionFlow it) {
 		'''«eventQueueTypeName»_init'''
 	}
-	
+
 	def eventQueueSizeFunction(ExecutionFlow it) {
 		'''«eventQueueTypeName»_size'''
 	}
-	
+
 	def eventQueuePopFunction(ExecutionFlow it) {
 		'''«eventQueueTypeName»_pop'''
 	}
-	
+
 	def eventQueuePushFunction(ExecutionFlow it) {
 		'''«eventQueueTypeName»_push'''
 	}
-	
+
 	def bufferSize(ExecutionFlow it) {
 		'''«name»_eventqueue_buffersize'''.toString.toUpperCase
 	}

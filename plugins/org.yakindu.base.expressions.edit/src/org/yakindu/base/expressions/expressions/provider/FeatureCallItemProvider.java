@@ -284,6 +284,11 @@ public class FeatureCallItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.FEATURE_CALL__OWNER,
+				 ExpressionsFactory.eINSTANCE.createPostFixUnaryExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__OWNER,
 				 ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
 
 		newChildDescriptors.add
@@ -370,6 +375,11 @@ public class FeatureCallItemProvider
 			(createChildParameter
 				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createNumericalUnaryExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createPostFixUnaryExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter

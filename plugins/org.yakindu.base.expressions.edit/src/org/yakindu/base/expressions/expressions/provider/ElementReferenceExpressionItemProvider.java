@@ -282,6 +282,11 @@ public class ElementReferenceExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createPostFixUnaryExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
 
 		newChildDescriptors.add

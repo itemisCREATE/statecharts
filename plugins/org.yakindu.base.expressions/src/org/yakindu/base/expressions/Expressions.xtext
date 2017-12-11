@@ -71,8 +71,10 @@ NumericalMultiplyDivideExpression returns Expression:
 	rightOperand=NumericalUnaryExpression)*;
 
 NumericalUnaryExpression returns Expression:
-	TypeCastExpression | {NumericalUnaryExpression}
-	operator=UnaryOperator operand=TypeCastExpression;
+	PostFixUnaryExpression | {NumericalUnaryExpression} operator=UnaryOperator operand=PostFixUnaryExpression;
+
+PostFixUnaryExpression returns Expression:
+	TypeCastExpression ({PostFixUnaryExpression.operand=current} operator=PostFixOperator)*;
 
 TypeCastExpression returns Expression:
 	PrimaryExpression (({TypeCastExpression.operand=current} 'as') type=[types::Type|QID])*;
@@ -155,6 +157,9 @@ BitwiseOrOperator:
 
 BitwiseAndOperator:
 	'&';
+
+enum PostFixOperator:
+	increment="++" | decrement="--";
 
 enum AssignmentOperator:
 	assign='='

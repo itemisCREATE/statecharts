@@ -98,13 +98,14 @@ public class FoldOutgoingActionsRefactoring extends AbstractRefactoring<State> {
 				.getFirstExitActions(getContextObject());
 
 		if (actionsOriginal == null) {
-			actionsOriginal = createExitBlock();
+			actionsOriginal = createExitBlock(actionsToAdd);
+		} else {
+			actionsOriginal.addAll(actionsToAdd);
 		}
 
-		actionsOriginal.addAll(actionsToAdd);
 	}
 
-	private EList<Expression> createExitBlock() {
+	private EList<Expression> createExitBlock(List<Expression> actionsToAdd) {
 		EList<Expression> actionsOriginal;
 		LocalReaction newLocalReaction = StextFactory.eINSTANCE
 				.createLocalReaction();
@@ -116,6 +117,8 @@ public class FoldOutgoingActionsRefactoring extends AbstractRefactoring<State> {
 
 		newLocalReaction.setTrigger(newReactionTrigger);
 		newReactionTrigger.getTriggers().add(exitEvent);
+		
+		newReactionEffect.getActions().addAll(actionsToAdd);
 		newLocalReaction.setEffect(newReactionEffect);
 
 		Scope scope = getContextObject().getScopes().get(0);
@@ -130,13 +133,14 @@ public class FoldOutgoingActionsRefactoring extends AbstractRefactoring<State> {
 		for (Transition transition : transitions) {
 			List<Expression> actionsToRemove = getFirstActions(transition,
 					number);
-			for (Expression action : actionsToRemove) {
-				EcoreUtil.delete(action);
-			}
-			// delete transition's effect when no more actions left
 			Effect effect = transition.getEffect();
-			if (!helper.hasAtLeastOneAction(transition) && effect != null) {
-				EcoreUtil.delete(effect);
+			if (effect instanceof ReactionEffect && actionsToRemove.size() == ((ReactionEffect)effect).getActions().size()) {
+				// we need to remove all actions, so just remove the effect recursively which avoids serializer exceptions
+				EcoreUtil.delete(effect, true);
+			} else {
+				for (Expression action : actionsToRemove) {
+					EcoreUtil.delete(action);
+				}
 			}
 		}
 	}

@@ -40,14 +40,14 @@ public class InternalEventLifeCycle {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r1_A));
 		assertTrue(statemachine.isStateActive(State.r2_C));
-		statemachine.raiseE();
+		statemachine.getSCInterface().raiseE();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.r1_A));
 		assertTrue(statemachine.isStateActive(State.r2_D));
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.r1_A));
 		assertTrue(statemachine.isStateActive(State.r2_D));
-		statemachine.raiseF();
+		statemachine.getSCInterface().raiseF();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.r1_A));
 		assertTrue(statemachine.isStateActive(State.r2_C));

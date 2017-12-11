@@ -31,8 +31,8 @@ public class OperationsWithoutBracesCustom implements SCInterfaceOperationCallba
 	@Before
 	public void setUp() {
 		statemachine = new OperationsWithoutBracesStatemachine();
-		statemachine.init();
 		statemachine.getSCInterface().setSCInterfaceOperationCallback(this);
+		statemachine.init();
 	}
 
 	@After

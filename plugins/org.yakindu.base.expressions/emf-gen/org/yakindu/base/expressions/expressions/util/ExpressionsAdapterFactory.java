@@ -201,6 +201,10 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 				return createNumericalUnaryExpressionAdapter();
 			}
 			@Override
+			public Adapter casePostFixUnaryExpression(PostFixUnaryExpression object) {
+				return createPostFixUnaryExpressionAdapter();
+			}
+			@Override
 			public Adapter casePrimitiveValueExpression(PrimitiveValueExpression object) {
 				return createPrimitiveValueExpressionAdapter();
 			}
@@ -647,6 +651,20 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createArgumentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.expressions.expressions.PostFixUnaryExpression <em>Post Fix Unary Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.expressions.expressions.PostFixUnaryExpression
+	 * @generated
+	 */
+	public Adapter createPostFixUnaryExpressionAdapter() {
 		return null;
 	}
 

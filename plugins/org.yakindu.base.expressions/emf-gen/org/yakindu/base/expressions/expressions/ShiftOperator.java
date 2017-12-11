@@ -47,7 +47,7 @@ public enum ShiftOperator implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #LEFT
-	 * @model name="left" literal="<<"
+	 * @model name="left" literal="&lt;&lt;"
 	 * @generated
 	 * @ordered
 	 */
@@ -62,7 +62,7 @@ public enum ShiftOperator implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #RIGHT
-	 * @model name="right" literal=">>"
+	 * @model name="right" literal="&gt;&gt;"
 	 * @generated
 	 * @ordered
 	 */

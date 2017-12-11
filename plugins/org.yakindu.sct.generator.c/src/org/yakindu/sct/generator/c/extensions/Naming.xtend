@@ -13,11 +13,11 @@ package org.yakindu.sct.generator.c.extensions
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.emf.ecore.EObject
+import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
-import org.yakindu.sct.generator.c.extensions.Navigation
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionState
@@ -26,6 +26,7 @@ import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
+import org.yakindu.sct.model.sgraph.ScopedElement
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.EventDefinition
@@ -120,11 +121,17 @@ class Naming {
 		'internal'
 	}
 
-	def functionPrefix(Scope it) {
-		if (!entry.statemachinePrefix.nullOrEmpty) {
+	def functionPrefix(Scope it, Declaration decl) {
+		// only non-unique declarations in different scopes will be prefixed with the name of the scope
+		if (!isUniqueName(it, decl) && !entry.statemachinePrefix.nullOrEmpty)
+			return entry.statemachinePrefix + separator + it.instance.toFirstUpper
+		if (!entry.statemachinePrefix.nullOrEmpty)
 			return entry.statemachinePrefix
-		}
 		return type.toFirstLower
+	}
+
+	protected def boolean isUniqueName(Scope scope, Declaration decl) {
+		(scope.eContainer as ScopedElement).scopes.map[declarations].flatten.filter[it.name == decl.name].size == 1
 	}
 
 	def functionPrefix(ExecutionFlow it) {
@@ -161,7 +168,7 @@ class Naming {
 	def lastStateID() {
 		separator + "last" + separator + "state"
 	}
-	
+
 	def stateVectorDefine(ExecutionState it) {
 		'''SCVI_«shortName»'''.toString.toUpperCase
 	}
@@ -190,37 +197,37 @@ class Naming {
 	def isStateActiveFctID(ExecutionFlow it) {
 		functionPrefix + "isStateActive"
 	}
-	
+
 	def isActiveFctID(ExecutionFlow it) {
 		functionPrefix + "isActive"
 	}
-	
+
 	def isFinalFctID(ExecutionFlow it) {
 		functionPrefix + "isFinal"
 	}
 
 	def asRaiser(EventDefinition it) {
-		scope.functionPrefix + separator + 'raise' + separator + name.asIdentifier.toFirstLower
+		scope.functionPrefix(it) + separator + 'raise' + separator + name.asIdentifier.toFirstLower
 	}
 
 	def asRaised(EventDefinition it) {
-		scope.functionPrefix + separator + 'israised' + separator + name.asIdentifier.toFirstLower
+		scope.functionPrefix(it) + separator + 'israised' + separator + name.asIdentifier.toFirstLower
 	}
 
 	def asGetter(EventDefinition it) {
-		scope.functionPrefix + separator + 'get' + separator + name.asIdentifier.toFirstLower + separator + 'value'
+		scope.functionPrefix(it) + separator + 'get' + separator + name.asIdentifier.toFirstLower + separator + 'value'
 	}
 
 	def asGetter(VariableDefinition it) {
-		scope.functionPrefix + separator + 'get' + separator + name.asIdentifier.toFirstLower
+		scope.functionPrefix(it) + separator + 'get' + separator + name.asIdentifier.toFirstLower
 	}
 
 	def asSetter(VariableDefinition it) {
-		scope.functionPrefix + separator + 'set' + separator + name.asIdentifier.toFirstLower
+		scope.functionPrefix(it) + separator + 'set' + separator + name.asIdentifier.toFirstLower
 	}
 
 	def asFunction(OperationDefinition it) {
-		scope.functionPrefix + separator + name.asIdentifier.toFirstLower
+		scope.functionPrefix(it) + separator + name.asIdentifier.toFirstLower
 	}
 
 	def raised(CharSequence it) { it + separator + 'raised' }
@@ -258,7 +265,7 @@ class Naming {
 	def dispatch access(Operation it) {
 		'''«name.asEscapedIdentifier»'''
 	}
-	
+
 	def dispatch access(Enumerator it) {
 		'''«name.asEscapedIdentifier»'''
 	}
@@ -272,10 +279,10 @@ class Naming {
 	def dispatch access(EObject it) '''#error cannot access elements of type «getClass().name»'''
 
 	def valueAccess(Event it) '''«scHandle»->«scope.instance».«name.asIdentifier.value»'''
-	
+
 	def maxOrthogonalStates(ExecutionFlow it) '''«type.toUpperCase»_MAX_ORTHOGONAL_STATES'''
-	
+
 	def maxHistoryStates(ExecutionFlow it) '''«type.toUpperCase»_MAX_HISTORY_STATES'''
-	
+
 	def maxParallelTimeEvents(ExecutionFlow it) '''«type.toUpperCase»_MAX_PARALLEL_TIME_EVENTS'''
 }

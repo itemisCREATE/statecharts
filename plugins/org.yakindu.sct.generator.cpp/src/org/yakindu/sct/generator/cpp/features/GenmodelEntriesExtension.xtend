@@ -19,9 +19,17 @@ class GenmodelEntriesExtension extends GenmodelEntries {
 	def private getGeneratorOptionsFeature(GeneratorEntry it) {
 		getFeatureConfiguration(CPPFeatureConstants::FEATURE_GENERATOR_OPTIONS)
 	}
+	
+	def private getAPIFeature(GeneratorEntry it){
+		getFeatureConfiguration(CPPFeatureConstants::FEATURE_API)
+	}
 
 	def private getVisibilityParameter(GeneratorEntry it) {
 		generatorOptionsFeature?.getParameterValue(CPPFeatureConstants.PARAMETER_INNER_FUNCTION_VISIBILITY)
+	}
+	
+	def private getCheckUnimplementedParamter(GeneratorEntry it) {
+		APIFeature?.getParameterValue(CPPFeatureConstants.PARAMETER_API_CHECK_UNIMPLEMENTED_OCBS)
 	}
 
 	def getInnerClassVisibility(GeneratorEntry it) {
@@ -40,5 +48,11 @@ class GenmodelEntriesExtension extends GenmodelEntries {
 			return staticOPCParameter.booleanValue
 		}
 		return false
+	}
+	
+	def getCheckUnimplementedOCBs(GeneratorEntry it) {
+		if (checkUnimplementedParamter != null){
+			return checkUnimplementedParamter.booleanValue
+		}
 	}
 }

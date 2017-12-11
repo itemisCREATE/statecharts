@@ -265,6 +265,15 @@ public interface ExpressionsFactory extends EFactory {
 	Argument createArgument();
 
 	/**
+	 * Returns a new object of class '<em>Post Fix Unary Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Post Fix Unary Expression</em>'.
+	 * @generated
+	 */
+	PostFixUnaryExpression createPostFixUnaryExpression();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

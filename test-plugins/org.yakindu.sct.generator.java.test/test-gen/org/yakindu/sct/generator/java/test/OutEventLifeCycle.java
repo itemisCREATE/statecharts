@@ -38,7 +38,7 @@ public class OutEventLifeCycle {
 	@Test
 	public void availableAfterCycle() {
 		statemachine.enter();
-		statemachine.raiseE();
+		statemachine.getSCInterface().raiseE();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isRaisedF());
 	}
@@ -59,7 +59,7 @@ public class OutEventLifeCycle {
 	}
 	public void init(boolean sndCycle) {
 		statemachine.enter();
-		statemachine.raiseE();
+		statemachine.getSCInterface().raiseE();
 		timer.cycleLeap(1);
 		if (sndCycle) {
 			timer.cycleLeap(1);

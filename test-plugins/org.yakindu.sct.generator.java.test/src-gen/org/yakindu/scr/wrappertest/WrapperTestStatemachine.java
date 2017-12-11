@@ -95,6 +95,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	private ITimer timer;
 	
 	private final boolean[] timeEvents = new boolean[2];
+	
 	public WrapperTestStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -104,6 +105,11 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
+		
+		if (this.sCInterface.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for interface sCInterface must be set.");
+		}
+		
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -124,6 +130,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
+	
 		entryAction();
 		enterSequence_main_region_default();
 	}

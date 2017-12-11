@@ -38,7 +38,6 @@ public class VariadicOperationsTestCustom {
 	@Before
 	public void setUp() {
 		statemachine = new VariadicFunctionsStatemachine();
-		statemachine.init();
 	}
 
 	@After
@@ -58,6 +57,7 @@ public class VariadicOperationsTestCustom {
 		statemachine.setInternalOperationCallback(internalMock);
 		statemachine.getSCInterface().setSCInterfaceOperationCallback(interfaceMock);
 		statemachine.getSCIIF2().setSCIIF2OperationCallback(interface2Mock);
+		statemachine.init();
 		statemachine.enter();
 
 		verify(interfaceMock, times(3)).myVarOperation(interfaceCapture.capture());

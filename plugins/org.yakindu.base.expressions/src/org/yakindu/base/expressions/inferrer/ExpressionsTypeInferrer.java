@@ -47,6 +47,7 @@ import org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression;
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression;
 import org.yakindu.base.expressions.expressions.NumericalUnaryExpression;
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression;
+import org.yakindu.base.expressions.expressions.PostFixUnaryExpression;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
 import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
@@ -182,6 +183,10 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		}
 		return result1;
 	}
+	
+	public InferenceResult doInfer(PostFixUnaryExpression expression) {
+		return inferTypeDispatch(expression.getOperand());
+	}
 
 	public InferenceResult doInfer(TypeCastExpression e) {
 		InferenceResult result1 = inferTypeDispatch(e.getOperand());
@@ -203,8 +208,8 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 
 	/**
-	 * The type of a type alias is its (recursively inferred) base type, i.e.
-	 * type aliases are assignable if their inferred base types are assignable.
+	 * The type of a type alias is its (recursively inferred) base type, i.e. type
+	 * aliases are assignable if their inferred base types are assignable.
 	 */
 	public InferenceResult doInfer(TypeAlias typeAlias) {
 		return inferTypeDispatch(typeAlias.getTypeSpecifier());
@@ -236,7 +241,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		if (e.isOperationCall()) {
 			if (e.getReference() != null && !e.getReference().eIsProxy()) {
 				return inferOperation(e, (Operation) e.getReference(),
-						Maps.<TypeParameter, InferenceResult> newHashMap());
+						Maps.<TypeParameter, InferenceResult>newHashMap());
 			} else {
 				return getAnyType();
 			}
@@ -256,8 +261,8 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 
 	/**
-	 * Can be extended to e.g. add operation caller to argument list for
-	 * extension methods
+	 * Can be extended to e.g. add operation caller to argument list for extension
+	 * methods
 	 */
 	protected List<Expression> getOperationArguments(ArgumentExpression e) {
 		return e.getExpressions();
@@ -274,10 +279,10 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	protected InferenceResult inferReturnType(Operation operation,
 			Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) {
 		InferenceResult returnType = inferTypeDispatch(operation);
-			returnType = typeParameterInferrer.buildInferenceResult(returnType, inferredTypeParameterTypes, acceptor);
-			if(returnType == null) {
-				return getAnyType();
-			}
+		returnType = typeParameterInferrer.buildInferenceResult(returnType, inferredTypeParameterTypes, acceptor);
+		if (returnType == null) {
+			return getAnyType();
+		}
 		return returnType;
 	}
 
@@ -286,29 +291,28 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 
 	/**
-	 * Takes the operation parameter type and performs a lookup for all
-	 * contained type parameters by using the given type parameter inference
-	 * map.<br>
+	 * Takes the operation parameter type and performs a lookup for all contained
+	 * type parameters by using the given type parameter inference map.<br>
 	 * The parameter types are validated against the operation call's argument
 	 * types.
 	 * 
 	 * @throws TypeParameterInferrenceException
 	 */
-	protected Map<TypeParameter, InferenceResult> validateParameters(
+	public Map<TypeParameter, InferenceResult> validateParameters(
 			Map<TypeParameter, InferenceResult> typeParameterMapping, Operation operation, List<Expression> args,
 			IValidationIssueAcceptor acceptor) {
 		List<Parameter> parameters = operation.getParameters();
-			for (int i = 0; i < parameters.size(); i++) {
-				if (args.size() > i) {
-					Parameter parameter = parameters.get(i);
-					Expression argument = args.get(i);
-					InferenceResult parameterType = inferTypeDispatch(parameter);
-					InferenceResult argumentType = inferTypeDispatch(argument);
-					parameterType = typeParameterInferrer.buildInferenceResult(parameterType, typeParameterMapping,
-							acceptor);
-					assertAssignable(parameterType, argumentType,
-							String.format(INCOMPATIBLE_TYPES, argumentType, parameterType));
-				}
+		for (int i = 0; i < parameters.size(); i++) {
+			if (args.size() > i) {
+				Parameter parameter = parameters.get(i);
+				Expression argument = args.get(i);
+				InferenceResult parameterType = inferTypeDispatch(parameter);
+				InferenceResult argumentType = inferTypeDispatch(argument);
+				parameterType = typeParameterInferrer.buildInferenceResult(parameterType, typeParameterMapping,
+						acceptor);
+				assertAssignable(parameterType, argumentType,
+						String.format(INCOMPATIBLE_TYPES, argumentType, parameterType));
+			}
 		}
 		if (operation.isVariadic() && args.size() - 1 >= operation.getVarArgIndex()) {
 			Parameter parameter = operation.getParameters().get(operation.getVarArgIndex());

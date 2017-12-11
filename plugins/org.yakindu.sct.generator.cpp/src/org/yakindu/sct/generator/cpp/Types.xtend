@@ -32,20 +32,39 @@ class Types implements IContentTemplate {
 		// #include <cstdint>
 		#include <stdint.h>
 		
-
+		#ifndef sc_string
 		#define sc_string      char*
+		#endif
 		
 		typedef int_fast16_t   sc_short;
 		typedef uint_fast16_t  sc_ushort;
 		typedef int32_t        sc_integer;
+		typedef int16_t		   sc_errorCode;
 		typedef double         sc_real;
 		typedef bool           sc_boolean;
 		
 		typedef intptr_t       sc_eventid;
 		
 		#ifndef «CppNaming::NULL_STRING»
-			#define «CppNaming::NULL_STRING» 0
+		#define «CppNaming::NULL_STRING» 0
 		#endif
+		
+		/* Error codes and mask can be used to check unimplemented operation callbacks. They can be activated in the API feature within the .sgen file.*/
+		#ifndef «ErrorCode.OCB_INIT_MASK.name»
+		#define «ErrorCode.OCB_INIT_MASK.name» «ErrorCode.OCB_INIT_MASK.value»
+		#endif
+
+		#ifndef «ErrorCode.OCB_DEFAULT_INIT.name»
+		#define «ErrorCode.OCB_DEFAULT_INIT.name» («ErrorCode.OCB_INIT_MASK.name» | «ErrorCode.OCB_DEFAULT_INIT.value»)
+		#endif
+
+		#ifndef «ErrorCode.OCB_NAMED_INIT.name»
+		#define «ErrorCode.OCB_NAMED_INIT.name» («ErrorCode.OCB_INIT_MASK.name» | «ErrorCode.OCB_NAMED_INIT.value»)
+		#endif
+
+		#ifndef «ErrorCode.OCB_INTERNAL_INIT.name»
+		#define «ErrorCode.OCB_INTERNAL_INIT.name» («ErrorCode.OCB_INIT_MASK.name» | «ErrorCode.OCB_INTERNAL_INIT.value»)
+		#endif			
 		
 		#endif /* «typesModule.define»_H_ */
 	'''

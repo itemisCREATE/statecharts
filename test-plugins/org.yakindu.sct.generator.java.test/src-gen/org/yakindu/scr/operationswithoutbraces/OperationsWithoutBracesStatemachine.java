@@ -38,6 +38,11 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 	
 	public void init() {
 		this.initialized = true;
+		
+		if (this.sCInterface.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for interface sCInterface must be set.");
+		}
+		
 		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -50,6 +55,7 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
 		}
+	
 		enterSequence_main_region_default();
 		enterSequence_another_region_default();
 	}

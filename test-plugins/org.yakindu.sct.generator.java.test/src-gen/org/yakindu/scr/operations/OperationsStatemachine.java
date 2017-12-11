@@ -67,6 +67,18 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	
 	public void init() {
 		this.initialized = true;
+		if (this.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for internal must be set.");	
+		}
+		
+		if (this.sCIInterface1.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for interface sCIInterface1 must be set.");
+		}
+		
+		if (this.sCInterface.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for interface sCInterface must be set.");
+		}
+		
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -80,6 +92,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
 		}
+	
 		enterSequence_main_region_default();
 	}
 	
