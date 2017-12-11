@@ -30,6 +30,7 @@ import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.expressions.expressions.UnaryExpression
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
 
 /**
  * 
@@ -50,6 +51,10 @@ class ExpressionsGenerator {
 
 	def dispatch CharSequence code(UnaryExpression it) {
 		operator.literal + operand.code
+	}
+
+	def dispatch CharSequence code(PostFixUnaryExpression it) {
+		operand.code + operator.literal
 	}
 
 	def dispatch CharSequence code(AssignmentExpression it) '''«varRef.code» «operator.literal» «expression.code»'''

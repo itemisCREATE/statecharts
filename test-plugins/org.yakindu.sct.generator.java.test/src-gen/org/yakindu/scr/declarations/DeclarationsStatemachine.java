@@ -318,24 +318,22 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	
 	private int nextStateIndex;
 	
+	
+	
 	private boolean evInA;
 	
 	private boolean evInB;
 	
 	private boolean evInC;
-	
 	private boolean evInCValue;
 	
 	private boolean evInD;
-	
 	private long evInDValue;
 	
 	private boolean evInE;
-	
 	private double evInEValue;
 	
 	private boolean evInF;
-	
 	private String evInFValue;
 	
 	private boolean varInA;
@@ -395,6 +393,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	
 	public void init() {
 		this.initialized = true;
+		
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -408,7 +407,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 		sCInterface.setVarD("myString");
 		
-		sCInterface.setVarE(16);
+		sCInterface.setVarE(0x10);
 		
 		sCIIfA.setVarA(false);
 		
@@ -418,7 +417,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 		sCIIfA.setVarD("myString");
 		
-		sCIIfA.setVarE(16);
+		sCIIfA.setVarE(0x10);
 		
 		setVarInA(false);
 		
@@ -428,7 +427,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 		setVarInD("myString");
 		
-		setVarInE(16);
+		setVarInE(0x10);
 	}
 	
 	public void enter() {
@@ -436,6 +435,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
 		}
+	
 		enterSequence_main_region_default();
 	}
 	
@@ -507,9 +507,11 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		evInA = true;
 	}
 	
+	
 	private void raiseEvInB() {
 		evInB = true;
 	}
+	
 	
 	private void raiseEvInC(boolean value) {
 		evInCValue = value;

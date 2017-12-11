@@ -50,6 +50,7 @@ import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.sruntime.ExecutionVariable
 import org.yakindu.sct.model.sruntime.ReferenceSlot
 import com.google.inject.Singleton
+import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
 
 /**
  * 
@@ -116,6 +117,12 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 
 	def dispatch Object execute(NumericalUnaryExpression expression) {
 		executeUnaryCoreFunction(expression.operand, expression.operator.getName())
+	}
+	
+	def dispatch Object execute(PostFixUnaryExpression it) {
+		var result = operand.execute
+		context.resolve(operand).value =  evaluate(operator.getName(), result)
+		result
 	}
 
 	def executeBinaryCoreFunction(Expression leftStatement, Expression rightStatement, String operator) {

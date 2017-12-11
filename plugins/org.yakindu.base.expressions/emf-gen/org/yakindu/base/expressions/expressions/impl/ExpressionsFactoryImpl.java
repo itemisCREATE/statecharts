@@ -111,6 +111,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 			case ExpressionsPackage.NUMERICAL_ADD_SUBTRACT_EXPRESSION: return createNumericalAddSubtractExpression();
 			case ExpressionsPackage.NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION: return createNumericalMultiplyDivideExpression();
 			case ExpressionsPackage.NUMERICAL_UNARY_EXPRESSION: return createNumericalUnaryExpression();
+			case ExpressionsPackage.POST_FIX_UNARY_EXPRESSION: return createPostFixUnaryExpression();
 			case ExpressionsPackage.PRIMITIVE_VALUE_EXPRESSION: return createPrimitiveValueExpression();
 			case ExpressionsPackage.FEATURE_CALL: return createFeatureCall();
 			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION: return createElementReferenceExpression();
@@ -146,6 +147,8 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 				return createLogicalOperatorFromString(eDataType, initialValue);
 			case ExpressionsPackage.BITWISE_OPERATOR:
 				return createBitwiseOperatorFromString(eDataType, initialValue);
+			case ExpressionsPackage.POST_FIX_OPERATOR:
+				return createPostFixOperatorFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -175,6 +178,8 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 				return convertLogicalOperatorToString(eDataType, instanceValue);
 			case ExpressionsPackage.BITWISE_OPERATOR:
 				return convertBitwiseOperatorToString(eDataType, instanceValue);
+			case ExpressionsPackage.POST_FIX_OPERATOR:
+				return convertPostFixOperatorToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -455,6 +460,16 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public PostFixUnaryExpression createPostFixUnaryExpression() {
+		PostFixUnaryExpressionImpl postFixUnaryExpression = new PostFixUnaryExpressionImpl();
+		return postFixUnaryExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public AssignmentOperator createAssignmentOperatorFromString(EDataType eDataType, String initialValue) {
 		AssignmentOperator result = AssignmentOperator.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -607,6 +622,26 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * @generated
 	 */
 	public String convertBitwiseOperatorToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PostFixOperator createPostFixOperatorFromString(EDataType eDataType, String initialValue) {
+		PostFixOperator result = PostFixOperator.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertPostFixOperatorToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

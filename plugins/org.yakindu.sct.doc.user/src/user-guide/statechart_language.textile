@@ -126,6 +126,8 @@ YAKINDU Statechart Tools Professional Edition allows for additional domains to b
 * C
 * TypeScript
 
+###. CHECK: Does YAKINDU Statechart Tools Professional Edition provide domains for C and TypeScript, or should the list be extended?
+
 ==</div>==
 
 

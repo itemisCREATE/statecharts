@@ -123,7 +123,7 @@ class EventDrivenStatemachineSource extends StatemachineSource {
 				«functionPrefix»dispatch_event(«scHandle», &currentEvent);
 				«runCycleForLoop»
 				«clearInEventsFctID»(«scHandle»);
-			} while((currentEvent = «eventQueuePopFunction»(&(«scHandle»->internal_event_queue))).name != invalid_event);
+			} while((currentEvent = «eventQueuePopFunction»(&(«scHandle»->internal_event_queue))).name != «invalidEventEnumName»);
 			
 		}
 	'''

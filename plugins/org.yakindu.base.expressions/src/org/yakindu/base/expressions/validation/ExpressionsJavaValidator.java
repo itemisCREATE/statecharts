@@ -252,7 +252,7 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 			}
 		} else if (varRef instanceof ElementReferenceExpression) {
 			EObject referencedObject = ((ElementReferenceExpression) varRef).getReference();
-			if (!(referencedObject instanceof Property)) {
+			if (!(referencedObject instanceof Property) && !(referencedObject  instanceof Parameter)) {
 				error(ERROR_LEFT_HAND_ASSIGNMENT_MSG, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF, ERROR_LEFT_HAND_ASSIGNMENT_CODE);
 			}
 

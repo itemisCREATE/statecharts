@@ -39,7 +39,7 @@ public class EnterState {
 	public void defaultEntry() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
-		statemachine.raiseE();
+		statemachine.getSCInterface().raiseE();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.r_B_r_E));
 	}
@@ -47,7 +47,7 @@ public class EnterState {
 	public void namedEntryThroughNamedTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
-		statemachine.raiseF();
+		statemachine.getSCInterface().raiseF();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.r_B_r_F));
 	}
@@ -55,7 +55,7 @@ public class EnterState {
 	public void namedEntryThroughDefaultTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
-		statemachine.raiseG();
+		statemachine.getSCInterface().raiseG();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.r_B_r_E));
 	}

@@ -23,7 +23,7 @@ import org.yakindu.base.base.NamedElement;
  * @model
  * @generated
  */
-public interface Package extends NamedElement {
+public interface Package extends PackageMember {
 	/**
 	 * Returns the value of the '<em><b>Member</b></em>' containment reference list.
 	 * The list contents are of type {@link org.yakindu.base.types.PackageMember}.

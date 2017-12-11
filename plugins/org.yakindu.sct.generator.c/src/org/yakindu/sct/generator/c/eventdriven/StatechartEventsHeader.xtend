@@ -57,7 +57,7 @@ class StatechartEventsHeader {
 		 * Enum of event names in the statechart.
 		 */
 		typedef enum  {
-			invalid_event,
+			«invalidEventEnumName(it)» = sc_invalid_event_value,
 			«FOR e : getAllEvents SEPARATOR ","»
 				«eventEnumMemberName(e)»
 			«ENDFOR»

@@ -170,6 +170,11 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 	
 	public void init() {
 		this.initialized = true;
+		
+		if (this.sCInterface.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for interface sCInterface must be set.");
+		}
+		
 		for (int i = 0; i < 4; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -207,6 +212,7 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
 		}
+	
 		enterSequence_ChildFirstOrthogonalReactions_r_default();
 		enterSequence_ChildFirstOrthogonalReactions_r2_default();
 	}

@@ -227,7 +227,7 @@ public enum AssignmentOperator implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #LEFT_SHIFT_ASSIGN
-	 * @model name="leftShiftAssign" literal="<<="
+	 * @model name="leftShiftAssign" literal="&lt;&lt;="
 	 * @generated
 	 * @ordered
 	 */
@@ -242,7 +242,7 @@ public enum AssignmentOperator implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #RIGHT_SHIFT_ASSIGN
-	 * @model name="rightShiftAssign" literal=">>="
+	 * @model name="rightShiftAssign" literal="&gt;&gt;="
 	 * @generated
 	 * @ordered
 	 */
@@ -257,7 +257,7 @@ public enum AssignmentOperator implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #AND_ASSIGN
-	 * @model name="andAssign" literal="&="
+	 * @model name="andAssign" literal="&amp;="
 	 * @generated
 	 * @ordered
 	 */

@@ -33,7 +33,7 @@ import org.yakindu.base.types.TypesPackage;
  *
  * @generated
  */
-public class PackageImpl extends NamedElementImpl implements org.yakindu.base.types.Package {
+public class PackageImpl extends PackageMemberImpl implements org.yakindu.base.types.Package {
 	/**
 	 * The cached value of the '{@link #getMember() <em>Member</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

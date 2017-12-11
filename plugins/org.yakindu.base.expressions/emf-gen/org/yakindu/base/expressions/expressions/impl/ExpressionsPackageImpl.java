@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.expressions.expressions.AdditiveOperator;
 import org.yakindu.base.expressions.expressions.Argument;
 import org.yakindu.base.expressions.expressions.ArgumentExpression;
@@ -42,6 +43,8 @@ import org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression;
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression;
 import org.yakindu.base.expressions.expressions.NumericalUnaryExpression;
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression;
+import org.yakindu.base.expressions.expressions.PostFixOperator;
+import org.yakindu.base.expressions.expressions.PostFixUnaryExpression;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
 import org.yakindu.base.expressions.expressions.RelationalOperator;
 import org.yakindu.base.expressions.expressions.ShiftExpression;
@@ -267,6 +270,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass postFixUnaryExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass argumentExpressionEClass = null;
 
 	/**
@@ -340,6 +350,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	private EEnum bitwiseOperatorEEnum = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum postFixOperatorEEnum = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -386,6 +403,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		isInited = true;
 
 		// Initialize simple dependencies
+		BasePackage.eINSTANCE.eClass();
 		TypesPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
@@ -948,6 +966,24 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getPostFixUnaryExpression() {
+		return postFixUnaryExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPostFixUnaryExpression_Operator() {
+		return (EAttribute)postFixUnaryExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getArgumentExpression() {
 		return argumentExpressionEClass;
 	}
@@ -1083,6 +1119,15 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getPostFixOperator() {
+		return postFixOperatorEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ExpressionsFactory getExpressionsFactory() {
 		return (ExpressionsFactory)getEFactoryInstance();
 	}
@@ -1178,6 +1223,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		numericalUnaryExpressionEClass = createEClass(NUMERICAL_UNARY_EXPRESSION);
 		createEAttribute(numericalUnaryExpressionEClass, NUMERICAL_UNARY_EXPRESSION__OPERATOR);
 
+		postFixUnaryExpressionEClass = createEClass(POST_FIX_UNARY_EXPRESSION);
+		createEAttribute(postFixUnaryExpressionEClass, POST_FIX_UNARY_EXPRESSION__OPERATOR);
+
 		primitiveValueExpressionEClass = createEClass(PRIMITIVE_VALUE_EXPRESSION);
 		createEReference(primitiveValueExpressionEClass, PRIMITIVE_VALUE_EXPRESSION__VALUE);
 
@@ -1214,6 +1262,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		relationalOperatorEEnum = createEEnum(RELATIONAL_OPERATOR);
 		logicalOperatorEEnum = createEEnum(LOGICAL_OPERATOR);
 		bitwiseOperatorEEnum = createEEnum(BITWISE_OPERATOR);
+		postFixOperatorEEnum = createEEnum(POST_FIX_OPERATOR);
 	}
 
 	/**
@@ -1271,6 +1320,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		numericalAddSubtractExpressionEClass.getESuperTypes().add(this.getBinaryExpression());
 		numericalMultiplyDivideExpressionEClass.getESuperTypes().add(this.getBinaryExpression());
 		numericalUnaryExpressionEClass.getESuperTypes().add(this.getUnaryExpression());
+		postFixUnaryExpressionEClass.getESuperTypes().add(this.getUnaryExpression());
 		primitiveValueExpressionEClass.getESuperTypes().add(this.getExpression());
 		featureCallEClass.getESuperTypes().add(this.getArgumentExpression());
 		elementReferenceExpressionEClass.getESuperTypes().add(this.getArgumentExpression());
@@ -1358,6 +1408,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		initEClass(numericalUnaryExpressionEClass, NumericalUnaryExpression.class, "NumericalUnaryExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNumericalUnaryExpression_Operator(), this.getUnaryOperator(), "operator", null, 0, 1, NumericalUnaryExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(postFixUnaryExpressionEClass, PostFixUnaryExpression.class, "PostFixUnaryExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPostFixUnaryExpression_Operator(), this.getPostFixOperator(), "operator", null, 0, 1, PostFixUnaryExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(primitiveValueExpressionEClass, PrimitiveValueExpression.class, "PrimitiveValueExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPrimitiveValueExpression_Value(), this.getLiteral(), null, "value", null, 0, 1, PrimitiveValueExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1434,6 +1487,10 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		addEEnumLiteral(bitwiseOperatorEEnum, BitwiseOperator.XOR);
 		addEEnumLiteral(bitwiseOperatorEEnum, BitwiseOperator.AND);
 		addEEnumLiteral(bitwiseOperatorEEnum, BitwiseOperator.OR);
+
+		initEEnum(postFixOperatorEEnum, PostFixOperator.class, "PostFixOperator");
+		addEEnumLiteral(postFixOperatorEEnum, PostFixOperator.INCREMENT);
+		addEEnumLiteral(postFixOperatorEEnum, PostFixOperator.DECREMENT);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -91,7 +91,9 @@ public class TypesSwitch<T> extends Switch<T> {
 			case TypesPackage.PACKAGE: {
 				org.yakindu.base.types.Package package_ = (org.yakindu.base.types.Package)theEObject;
 				T result = casePackage(package_);
+				if (result == null) result = casePackageMember(package_);
 				if (result == null) result = caseNamedElement(package_);
+				if (result == null) result = caseAnnotatableElement(package_);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

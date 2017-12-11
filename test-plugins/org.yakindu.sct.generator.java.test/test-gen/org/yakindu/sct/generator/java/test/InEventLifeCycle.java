@@ -38,7 +38,7 @@ public class InEventLifeCycle {
 	@Test
 	public void eventLifeCycle() {
 		statemachine.enter();
-		statemachine.raiseE();
+		statemachine.getSCInterface().raiseE();
 		assertTrue(statemachine.getI() == 0l);
 		timer.cycleLeap(1);
 		assertTrue(statemachine.getI() == 1l);

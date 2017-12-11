@@ -5,9 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import static org.mockito.Mockito.*;
 import static org.mockito.Matchers.*;
 import static org.hamcrest.CoreMatchers.*;
-import org.yakindu.scr.operations.IOperationsStatemachine.*;
-import org.mockito.ArgumentCaptor;
-import static org.mockito.ArgumentCaptor.forClass;		
+import org.yakindu.scr.operations.IOperationsStatemachine.*;	
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.junit.*;
@@ -36,13 +34,13 @@ public class OperationsTest {
 		statemachine = new OperationsStatemachine();
 		timer = new VirtualTimer(200);
 		timer.schedulePeriodicalTask(new CycleTimeEventTask(statemachine), 200, 200);
-		statemachine.init();
 		defaultMock = mock(SCInterfaceOperationCallback.class);
 		statemachine.getSCInterface().setSCInterfaceOperationCallback(defaultMock);
 		internalMock = mock(InternalOperationCallback.class);
 		statemachine.setInternalOperationCallback(internalMock);
 		interface1Mock = mock(SCIInterface1OperationCallback.class);
 		statemachine.getSCIInterface1().setSCIInterface1OperationCallback(interface1Mock);
+		statemachine.init();
 	}
 
 	@After
@@ -70,78 +68,123 @@ public class OperationsTest {
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		verify(internalMock, atLeastOnce()).internalOperation1();
 		 
-		ArgumentCaptor<Long> longCaptureinternalOperation2_6_0 = forClass(Long.class);
-		verify(internalMock, atLeastOnce()).internalOperation2(longCaptureinternalOperation2_6_0.capture());
-		assertThat(longCaptureinternalOperation2_6_0.getValue(), is(4l));
+		verify(internalMock, atLeastOnce()).internalOperation2((4l));
 		 
 		verify(internalMock, atLeastOnce()).internalOperation3();
 		 
-		ArgumentCaptor<Double> doubleCaptureinternalOperation3a_8_0 = forClass(Double.class);
-		verify(internalMock, atLeastOnce()).internalOperation3a(doubleCaptureinternalOperation3a_8_0.capture());
-		assertThat(doubleCaptureinternalOperation3a_8_0.getValue(), is(1.0));
+		verify(internalMock, atLeastOnce()).internalOperation3a((1.0));
 		 
 		verify(internalMock, atLeastOnce()).internalOperation4();
 		 
-		ArgumentCaptor<Long> longCaptureinternalOperation4a_10_0 = forClass(Long.class);
-		verify(internalMock, atLeastOnce()).internalOperation4a(longCaptureinternalOperation4a_10_0.capture());
-		assertThat(longCaptureinternalOperation4a_10_0.getValue(), is(5l));
+		verify(internalMock, atLeastOnce()).internalOperation4a((5l));
 		 
 		verify(internalMock, atLeastOnce()).internalOperation5();
 		 
-		ArgumentCaptor<String> stringCaptureinternalOperation5a_12_0 = forClass(String.class);
-		verify(internalMock, atLeastOnce()).internalOperation5a(stringCaptureinternalOperation5a_12_0.capture());
+		verify(internalMock, atLeastOnce()).internalOperation5a(anyString());
 		 
-		statemachine.raiseEv();
+		statemachine.getSCInterface().raiseEv();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.main_region_C));
 		verify(interface1Mock, atLeastOnce()).interfaceOperation1();
 		 
-		ArgumentCaptor<Long> longCaptureinterfaceOperation2_17_0 = forClass(Long.class);
-		verify(interface1Mock, atLeastOnce()).interfaceOperation2(longCaptureinterfaceOperation2_17_0.capture());
-		assertThat(longCaptureinterfaceOperation2_17_0.getValue(), is(4l));
+		verify(interface1Mock, atLeastOnce()).interfaceOperation2((4l));
 		 
 		verify(interface1Mock, atLeastOnce()).interfaceOperation3();
 		 
-		ArgumentCaptor<Double> doubleCaptureinterfaceOperation3a_19_0 = forClass(Double.class);
-		verify(interface1Mock, atLeastOnce()).interfaceOperation3a(doubleCaptureinterfaceOperation3a_19_0.capture());
-		assertThat(doubleCaptureinterfaceOperation3a_19_0.getValue(), is(1.0));
+		verify(interface1Mock, atLeastOnce()).interfaceOperation3a((1.0));
 		 
 		verify(interface1Mock, atLeastOnce()).interfaceOperation4();
 		 
-		ArgumentCaptor<Long> longCaptureinterfaceOperation4a_21_0 = forClass(Long.class);
-		verify(interface1Mock, atLeastOnce()).interfaceOperation4a(longCaptureinterfaceOperation4a_21_0.capture());
-		assertThat(longCaptureinterfaceOperation4a_21_0.getValue(), is(5l));
+		verify(interface1Mock, atLeastOnce()).interfaceOperation4a((5l));
 		 
 		verify(interface1Mock, atLeastOnce()).interfaceOperation5();
 		 
-		ArgumentCaptor<String> stringCaptureinterfaceOperation5a_23_0 = forClass(String.class);
-		verify(interface1Mock, atLeastOnce()).interfaceOperation5a(stringCaptureinterfaceOperation5a_23_0.capture());
+		verify(interface1Mock, atLeastOnce()).interfaceOperation5a(anyString());
 		 
-		statemachine.raiseEv();
+		statemachine.getSCInterface().raiseEv();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.main_region_D));
 		verify(defaultMock, atLeastOnce()).unnamedInterfaceOperation1();
 		 
-		ArgumentCaptor<Long> longCaptureunnamedInterfaceOperation2_28_0 = forClass(Long.class);
-		verify(defaultMock, atLeastOnce()).unnamedInterfaceOperation2(longCaptureunnamedInterfaceOperation2_28_0.capture());
-		assertThat(longCaptureunnamedInterfaceOperation2_28_0.getValue(), is(4l));
+		verify(defaultMock, atLeastOnce()).unnamedInterfaceOperation2((4l));
 		 
 		verify(defaultMock, atLeastOnce()).unnamedOperation3();
 		 
-		ArgumentCaptor<Double> doubleCaptureunnamedOperation3a_30_0 = forClass(Double.class);
-		verify(defaultMock, atLeastOnce()).unnamedOperation3a(doubleCaptureunnamedOperation3a_30_0.capture());
-		assertThat(doubleCaptureunnamedOperation3a_30_0.getValue(), is(1.0));
+		verify(defaultMock, atLeastOnce()).unnamedOperation3a((1.0));
 		 
 		verify(defaultMock, atLeastOnce()).unnamedOperation4();
 		 
-		ArgumentCaptor<Long> longCaptureunnamedOperation4a_32_0 = forClass(Long.class);
-		verify(defaultMock, atLeastOnce()).unnamedOperation4a(longCaptureunnamedOperation4a_32_0.capture());
-		assertThat(longCaptureunnamedOperation4a_32_0.getValue(), is(5l));
+		verify(defaultMock, atLeastOnce()).unnamedOperation4a((5l));
 		 
 		verify(defaultMock, atLeastOnce()).unnamedOperation5();
 		 
-		ArgumentCaptor<String> stringCaptureunnamedOperation5a_34_0 = forClass(String.class);
-		verify(defaultMock, atLeastOnce()).unnamedOperation5a(stringCaptureunnamedOperation5a_34_0.capture());
+		verify(defaultMock, atLeastOnce()).unnamedOperation5a(anyString());
+		 
+	}
+	@Test
+	public void operationsNotCalled() {
+		when(defaultMock.alwaysTrue()).thenAnswer(new Answer<Boolean>() {
+			@Override
+			public Boolean answer(InvocationOnMock invocation) {
+				return true;
+			}
+		});
+		 
+		statemachine.enter();
+		assertTrue(statemachine.isStateActive(State.main_region_A));
+		verify(internalMock, never()).internalOperation1();
+		 
+		verify(internalMock, never()).internalOperation2((4l));
+		 
+		verify(internalMock, never()).internalOperation3();
+		 
+		verify(internalMock, never()).internalOperation3a((1.0));
+		 
+		verify(internalMock, never()).internalOperation4();
+		 
+		verify(internalMock, never()).internalOperation4a((5l));
+		 
+		verify(internalMock, never()).internalOperation5();
+		 
+		verify(internalMock, never()).internalOperation5a(anyString());
+		 
+		statemachine.getSCInterface().raiseEv();
+		timer.cycleLeap(1);
+		assertTrue(statemachine.isStateActive(State.main_region_B));
+		verify(interface1Mock, never()).interfaceOperation1();
+		 
+		verify(interface1Mock, never()).interfaceOperation2((4l));
+		 
+		verify(interface1Mock, never()).interfaceOperation3();
+		 
+		verify(interface1Mock, never()).interfaceOperation3a((1.0));
+		 
+		verify(interface1Mock, never()).interfaceOperation4();
+		 
+		verify(interface1Mock, never()).interfaceOperation4a((5l));
+		 
+		verify(interface1Mock, never()).interfaceOperation5();
+		 
+		verify(interface1Mock, never()).interfaceOperation5a(anyString());
+		 
+		statemachine.getSCInterface().raiseEv();
+		timer.cycleLeap(1);
+		assertTrue(statemachine.isStateActive(State.main_region_C));
+		verify(defaultMock, never()).unnamedInterfaceOperation1();
+		 
+		verify(defaultMock, never()).unnamedInterfaceOperation2((4l));
+		 
+		verify(defaultMock, never()).unnamedOperation3();
+		 
+		verify(defaultMock, never()).unnamedOperation3a((1.0));
+		 
+		verify(defaultMock, never()).unnamedOperation4();
+		 
+		verify(defaultMock, never()).unnamedOperation4a((5l));
+		 
+		verify(defaultMock, never()).unnamedOperation5();
+		 
+		verify(defaultMock, never()).unnamedOperation5a(anyString());
 		 
 	}
 }

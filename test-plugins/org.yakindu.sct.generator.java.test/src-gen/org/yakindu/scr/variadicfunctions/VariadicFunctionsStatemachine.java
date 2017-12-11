@@ -46,6 +46,18 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 	
 	public void init() {
 		this.initialized = true;
+		if (this.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for internal must be set.");	
+		}
+		
+		if (this.sCInterface.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for interface sCInterface must be set.");
+		}
+		
+		if (this.sCIIF2.operationCallback == null) {
+			throw new IllegalStateException("Operation callback for interface sCIIF2 must be set.");
+		}
+		
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -58,6 +70,7 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
 		}
+	
 		enterSequence_main_region_default();
 	}
 	

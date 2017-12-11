@@ -26,7 +26,6 @@ import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
-
 /**
  * Implementation for 'fold incoming actions' refactoring. This refactoring
  * moves actions of incoming transitions to the entry block of a state. Actions
@@ -98,13 +97,14 @@ public class FoldIncomingActionsRefactoring extends AbstractRefactoring<State> {
 				.getFirstEntryActions(getContextObject());
 
 		if (actionsOriginal == null) {
-			actionsOriginal = createEntryBlock();
+			actionsOriginal = createEntryBlock(actionsToAdd);
+		} else {
+			actionsOriginal.addAll(actionsToAdd);
 		}
 
-		actionsOriginal.addAll(actionsToAdd);
 	}
 
-	private EList<Expression> createEntryBlock() {
+	private EList<Expression> createEntryBlock(List<Expression> actionsToAdd) {
 		EList<Expression> actionsOriginal;
 		LocalReaction newLocalReaction = StextFactory.eINSTANCE
 				.createLocalReaction();
@@ -116,6 +116,7 @@ public class FoldIncomingActionsRefactoring extends AbstractRefactoring<State> {
 
 		newLocalReaction.setTrigger(newReactionTrigger);
 		newReactionTrigger.getTriggers().add(entryEvent);
+		newReactionEffect.getActions().addAll(actionsToAdd);
 		newLocalReaction.setEffect(newReactionEffect);
 
 		Scope scope = getContextObject().getScopes().get(0);
@@ -128,15 +129,17 @@ public class FoldIncomingActionsRefactoring extends AbstractRefactoring<State> {
 	private void removeLastActions(EList<Transition> transitions, int number) {
 
 		for (Transition transition : transitions) {
-			List<Expression> actionsToRemove = getLastActions(transition,
-					number);
-			for (Expression action : actionsToRemove) {
-				EcoreUtil.delete(action);
-			}
-			// delete transition's effect when no more actions left
+			List<Expression> actionsToRemove = getLastActions(transition, number);
 			Effect effect = transition.getEffect();
-			if (!helper.hasAtLeastOneAction(transition) && effect != null) {
-				EcoreUtil.delete(transition.getEffect());
+			if (effect instanceof ReactionEffect
+					&& actionsToRemove.size() == ((ReactionEffect) effect).getActions().size()) {
+				// we need to remove all actions, so just remove the effect
+				// recursively which avoids serializer exceptions
+				EcoreUtil.delete(effect, true);
+			} else {
+				for (Expression action : actionsToRemove) {
+					EcoreUtil.delete(action);
+				}
 			}
 		}
 	}

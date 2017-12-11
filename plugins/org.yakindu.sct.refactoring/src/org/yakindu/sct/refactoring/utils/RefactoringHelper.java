@@ -37,14 +37,14 @@ import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 
 /**
- * Utility class providing several convenience methods used in refactoring commands.
+ * Utility class providing several convenience methods used in refactoring
+ * commands.
  * 
  * @author thomas kutz - Initial contribution and API
  *
  */
 public class RefactoringHelper {
 
-	
 	/**
 	 * Collects all actions of the specified transitions and returns them.
 	 * 
@@ -58,16 +58,16 @@ public class RefactoringHelper {
 			if (effect instanceof ReactionEffect) {
 				ReactionEffect reactionEffect = (ReactionEffect) effect;
 				allActions.add(reactionEffect.getActions());
-			}
-			else {
-				allActions.add(Collections.<Expression>emptyList());
+			} else {
+				allActions.add(Collections.<Expression> emptyList());
 			}
 		}
 		return allActions;
 	}
-	
+
 	/**
 	 * Checks if the specified state has at least one entry action.
+	 * 
 	 * @param state
 	 * @return true if condition is satisfied, false otherwise.
 	 */
@@ -78,9 +78,10 @@ public class RefactoringHelper {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Checks if the specified state has at least one exit action.
+	 * 
 	 * @param state
 	 * @return true if condition is satisfied, false otherwise.
 	 */
@@ -91,18 +92,18 @@ public class RefactoringHelper {
 		}
 		return false;
 	}
-	
+
 	/**
-	 * Checks if at least one of the outgoing transitions of the specified state leaves a parent composite
-	 * of this state which has exit actions.
+	 * Checks if at least one of the outgoing transitions of the specified state
+	 * leaves a parent composite of this state which has exit actions.
 	 * 
-	 * @param state 
+	 * @param state
 	 * @return true if condition is satisfied, false otherwise
 	 */
 	public boolean oneOutgoingTransitionLeavesCompositeWithExitActions(State state) {
 
 		Set<State> sourceParentStates = new HashSet<State>(getParentStates(state));
-		
+
 		for (Transition transition : state.getOutgoingTransitions()) {
 			// all parent states of target need to be contained in the set of
 			// the source's parent states
@@ -117,17 +118,18 @@ public class RefactoringHelper {
 		}
 		return false;
 	}
-	
+
 	/**
-	 * Checks if at least one of the incoming transitions of the specified state enters a parent composite
-	 * of this state which has entry actions. 
+	 * Checks if at least one of the incoming transitions of the specified state
+	 * enters a parent composite of this state which has entry actions.
+	 * 
 	 * @param state
 	 * @return true if condition is satisfied, false otherwise
 	 */
 	public boolean oneIncomingTransitionEntersCompositeWithEntryActions(State state) {
 
 		Set<State> targetParentStates = new HashSet<State>(getParentStates(state));
-		
+
 		for (Transition transition : state.getIncomingTransitions()) {
 			// all parent states of source need to be contained in the set of
 			// the target's parent states
@@ -142,14 +144,15 @@ public class RefactoringHelper {
 		}
 		return false;
 	}
-	
+
 	/**
-	 * Returns the entry actions of a state.
-	 * Returns null if no entry block is defined.
-	 * If multiple entry blocks are defined, only the actions of the first one are returned.
+	 * Returns the entry actions of a state. Returns null if no entry block is
+	 * defined. If multiple entry blocks are defined, only the actions of the first
+	 * one are returned.
 	 * 
 	 * @param state
-	 * @return list of actions of the first entry block defined in the specified state
+	 * @return list of actions of the first entry block defined in the specified
+	 *         state
 	 */
 	public EList<Expression> getFirstEntryActions(State state) {
 		EList<Reaction> localReactions = state.getLocalReactions();
@@ -160,21 +163,22 @@ public class RefactoringHelper {
 				EList<EventSpec> triggers = reactionTrigger.getTriggers();
 				for (EventSpec eventSpec : triggers) {
 					if (eventSpec instanceof EntryEvent && reaction.getEffect() instanceof ReactionEffect) {
-						return ((ReactionEffect)reaction.getEffect()).getActions();
+						return ((ReactionEffect) reaction.getEffect()).getActions();
 					}
 				}
 			}
 		}
 		return null;
 	}
-	
+
 	/**
-	 * Returns the exit actions of a state.
-	 * Returns null if no exit block is defined.
-	 * If multiple exit blocks are defined, only the actions of the first one are returned.
+	 * Returns the exit actions of a state. Returns null if no exit block is
+	 * defined. If multiple exit blocks are defined, only the actions of the first
+	 * one are returned.
 	 * 
 	 * @param state
-	 * @return list of actions of the first exit block defined in the specified state
+	 * @return list of actions of the first exit block defined in the specified
+	 *         state
 	 */
 	public EList<Expression> getFirstExitActions(State state) {
 		EList<Reaction> localReactions = state.getLocalReactions();
@@ -185,7 +189,7 @@ public class RefactoringHelper {
 				EList<EventSpec> triggers = reactionTrigger.getTriggers();
 				for (EventSpec eventSpec : triggers) {
 					if (eventSpec instanceof ExitEvent && reaction.getEffect() instanceof ReactionEffect) {
-						return ((ReactionEffect)reaction.getEffect()).getActions();
+						return ((ReactionEffect) reaction.getEffect()).getActions();
 					}
 				}
 			}
@@ -194,6 +198,7 @@ public class RefactoringHelper {
 	}
 	/**
 	 * Checks if the effect definition of a transition contains at least one action.
+	 * 
 	 * @param transition
 	 * @return true if the condition is satisfied, false otherwise
 	 */
@@ -206,45 +211,47 @@ public class RefactoringHelper {
 		}
 		return false;
 	}
-	
+
 	/**
-	 * Collects all actions of the specified state which have the specified type. The collected actions are deleted from their
-	 * current containers and returned.
+	 * Collects all actions of the specified state which have the specified type.
+	 * 
 	 * @param state
 	 * @param eventType
 	 * @return all actions of the specified state which have the specified type
 	 */
 	public List<Expression> extractAllLocalActionsForEventType(State state, Class<? extends EventSpec> eventType) {
-		// creating new collection required to delete its elements with EcoreUtil 
-		List<Reaction> localReactions = new ArrayList<Reaction>(state.getLocalReactions());
 		List<Expression> resultActions = new ArrayList<Expression>();
-		for (Reaction reaction : localReactions) {
-			if (!(reaction.getEffect() instanceof ReactionEffect) || !(reaction.getTrigger() instanceof ReactionTrigger)) {
+		for (Reaction reaction : state.getLocalReactions()) {
+			if (!(reaction.getEffect() instanceof ReactionEffect)
+					|| !(reaction.getTrigger() instanceof ReactionTrigger)) {
 				continue;
 			}
-			
-			ReactionTrigger reactionTrigger = (ReactionTrigger) reaction.getTrigger();
-			ReactionEffect reactionEffect = (ReactionEffect)reaction.getEffect();
-			List<EventSpec> triggers = new ArrayList<EventSpec>(reactionTrigger.getTriggers());
-			
-			if (containsOnlyEventsOfType(triggers, eventType)) {
-				EList<Expression> entryActions = reactionEffect.getActions();
-				resultActions.addAll(entryActions);
-				EcoreUtil.remove(reaction);
-			}
-			else if (containsAtLeastOneEventOfType(triggers, eventType)) {
-				EList<Expression> entryActions = reactionEffect.getActions();
-				resultActions.addAll(entryActions);
-				deleteAllEventsOfType(triggers, eventType);
-			}
+			resultActions.addAll(getReactionEffectActionsForEventType(reaction, eventType));
 		}
 		return resultActions;
 	}
-	
+
+	/**
+	 * Returns all actions for the specified reaction and event type.
+	 * 
+	 * @param eventType
+	 * @param reaction
+	 * @return
+	 */
+	protected List<Expression> getReactionEffectActionsForEventType(Reaction reaction,
+			Class<? extends EventSpec> eventType) {
+		EList<EventSpec> triggers = ((ReactionTrigger) reaction.getTrigger()).getTriggers();
+		if (containsAtLeastOneEventOfType(triggers, eventType)) {
+			return ((ReactionEffect) reaction.getEffect()).getActions();
+		}
+		return Collections.emptyList();
+	}
+
 	/**
 	 * Returns all parent states of the specified child state.
 	 * 
-	 * @param state child state
+	 * @param state
+	 *            child state
 	 * @return all parent states of the specified child state
 	 */
 	// TODO are hierarchies of regions possible?
@@ -258,18 +265,30 @@ public class RefactoringHelper {
 		}
 		return parentStates;
 	}
-	
+
 	private void deleteAllEventsOfType(List<EventSpec> events, Class<? extends EventSpec> eventType) {
 		for (EventSpec event : events) {
-			if (event.getClass().getName().equals(eventType.getName())) {
+			if (eventType.isAssignableFrom(event.getClass())) {
 				EcoreUtil.remove(event);
+			}
+		}
+	}
+
+	public void removeReactionsOfEventType(EList<Reaction> reactions, Class<? extends EventSpec> eventType) {
+		for (Reaction reaction : reactions) {
+			List<EventSpec> triggers = new ArrayList<EventSpec>(
+					((ReactionTrigger) reaction.getTrigger()).getTriggers());
+			if (containsOnlyEventsOfType(triggers, eventType)) {
+				EcoreUtil.remove(reaction);
+			} else if (containsAtLeastOneEventOfType(triggers, eventType)) {
+				deleteAllEventsOfType(triggers, eventType);
 			}
 		}
 	}
 
 	private boolean containsAtLeastOneEventOfType(List<EventSpec> events, Class<? extends EventSpec> eventType) {
 		for (EventSpec event : events) {
-			if (event.getClass().getName().equals(eventType.getName())) {
+			if (eventType.isAssignableFrom(event.getClass())) {
 				return true;
 			}
 		}
@@ -278,7 +297,7 @@ public class RefactoringHelper {
 
 	private boolean containsOnlyEventsOfType(List<EventSpec> events, Class<? extends EventSpec> eventType) {
 		for (EventSpec event : events) {
-			if (!event.getClass().getName().equals(eventType.getName())) {
+			if (!eventType.isAssignableFrom(event.getClass())) {
 				return false;
 			}
 		}
@@ -286,17 +305,16 @@ public class RefactoringHelper {
 	}
 
 	/**
-	 * Checks if all given transitions have at least one action.
-	 * Returns false for empty lists.
+	 * Checks if all given transitions have at least one action. Returns false for
+	 * empty lists.
 	 * 
 	 * @param transitions
 	 * @return
 	 */
-	public boolean haveAllAtLeastOneAction(
-			EList<Transition> transitions) {
+	public boolean haveAllAtLeastOneAction(EList<Transition> transitions) {
 		if (transitions.isEmpty())
 			return false;
-		
+
 		for (Transition transition : transitions) {
 			if (!hasAtLeastOneAction(transition)) {
 				return false;
@@ -304,9 +322,11 @@ public class RefactoringHelper {
 		}
 		return true;
 	}
-	
+
 	/**
-	 * Returns for the given semantic element the notation view element in the given diagram
+	 * Returns for the given semantic element the notation view element in the given
+	 * diagram
+	 * 
 	 * @param semanticElement
 	 * @param diagram
 	 * @return
@@ -322,7 +342,7 @@ public class RefactoringHelper {
 				}
 			}
 		}
-		throw new IllegalArgumentException("No view found for semantic element "+semanticElement);
+		throw new IllegalArgumentException("No view found for semantic element " + semanticElement);
 	}
-	
+
 }

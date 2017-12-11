@@ -41,7 +41,7 @@ public class BooleanExpressions {
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		assertTrue(statemachine.getMyBool1() == true);
 		assertTrue(statemachine.getMyBool2() == false);
-		statemachine.raiseE1();
+		statemachine.getSCInterface().raiseE1();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.main_region_StateB));
 		assertTrue(statemachine.getAnd() == false);

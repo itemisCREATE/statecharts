@@ -234,9 +234,73 @@ This chapter describes how to install YAKINDU Statechart Tools on a Linux machin
 
 h3(#inst_installing_on_linux_installing_required_packages). Installing required packages
 
-Depending on your Linux distribution and version, you might need to install additional packages for *Webkit GTK* and *Java* from your distribution's repository (or elsewhere). Below please find the necessary commands for some Linux distributions. To execute them, you have to have system administrator permissions. So please create a _root_ command-line shell or use the _sudo_ command, which is the typical procedure on Ubuntu.
+Depending on your Linux distribution and version, you might need to install additional packages for *Webkit GTK* and *Java* from your distribution's repository (or elsewhere). Below please find the necessary commands for some Linux distributions. To execute them, you have to have system administrator permissions. So please create a _root_ command-line shell or use the _sudo_ command, which is the typical procedure on Linux.
 
 The list of Linux distributions mentioned below is in no way meant to be exhaustive. If your Linux distribution is not yet among them and you manage to find out the proper commands for it, please let us know!
+
+On Linux, Eclipse uses the GTK library for drawing the user interface. Some users experience issues, especially when using the default version GTK3. If your installation of YAKINDU Statechart Tools does not perform as expected, is laggy, has drawing issues or looks weird, refer to "Configuring YAKINDU Statechart Tools to use GTK2":#inst_linux_gtk2. If the welcome page looks broken and asks you to configure _webkitgtk_, refer to "Webkit GTK":#inst_linux_webkit_gtk.
+
+
+h4(#inst_linux_gtk2). Configuring YAKINDU Statechart Tools to use GTK2
+
+_GTK+_ is one of two major graphics libraries used in the Linux world (the other one being _Qt_), and it is the one being used by the Eclipse project, on which YAKINDU Statechart Tools are based. There are two different versions of GTK+: The newest one is often referred to as "GTK3", and the old one is named "GTK2" or just "GTK".
+
+Eclipse made the switch from GTK2 to GTK3 with the Mars release. While in general it looks and performs somewhat better, some users experience issues with it, especially concerning the performance or just drawing bugs, like wrong colors being used or widgets not displaying properly. If you experience anything like that, you should try to configure YAKINDU Statechart Tools to use GTK2, which is fairly easy to do.
+
+h5. Giving GTK2 a try
+
+You can use GTK2 instead of GTK3 on a case-by-case basis by having the environment variable or shell variable _SWT_GTK3_ set as shown below when starting YAKINDU Statechart Tools. On the command line, you would usually start the stand-alone YAKINDU Statechart Tools like this:
+
+bc. ./SCT
+
+This assumes your current directory is the tool's installation folder. Please also see section "&quot;Starting YAKINDU Statechart Tools&quot;":#inst_starting-yakindu-statechart-tools-2.
+
+To use GTK2, execute this command instead:
+
+bc. SWT_GTK3=0 ./SCT
+
+It defines the _SWT_GTK3_ shell variable _SWT_GTK3_ with a value of 0 and passes it to the _SCT_ process.
+
+If you installed YAKINDU Statechart Tools into another Eclipse instance, the corresponding command to start that Eclipse instance is:
+
+bc. SWT_GTK3=0 ./eclipse
+
+h5. Permanently changing to GTK2
+
+If you want to make your switch to GTK2 permanent without having to set the _SWT_GTK3_ variable each time, you can define that in the tool's _.ini_ file. In a stand-alone YAKINDU Statechart Tools installation, that's the file _SCT.ini_ in the _yakindu-sct_ installation folder. If you installed YAKINDU Statechart Tools into an existing Eclipse installation instead, it's the file _eclipse.ini_ in that Eclipse instance's installation directory.
+
+Navigate to the _yakindu-sct_ installation folder of your YAKINDU Statechart Tools instance or to the _eclipse_ installation folder of your Eclipse instance, and open the file _SCT.ini_ or _eclipse.ini_, respectively, with a plain-text editor of your choice.
+
+Look for the "-vmargs" line. Right _above_ this line, paste these two new lines:
+
+bc. 
+--launcher.GTK_version
+2
+
+The result looks similar to this:
+
+bc. 
+-startup
+plugins/org.eclipse.equinox.launcher_1.4.0.v20161219-1356.jar
+--launcher.library
+plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.1.550.v20170928-1359
+--launcher.GTK_version
+2
+-vmargs
+-Dosgi.requiredJavaVersion=1.8
+-Xms256m
+-server
+-XX:PermSize=256m
+-XX:+UseParallelGC
+-Xmx3G
+-XX:MaxPermSize=256m
+
+bq. *Please note*: Do _not_ attempt to replace all of the contents of your _SCT.ini_ file with the lines above! The specified version numbers have to match your installation, and if you change them, SCT will not be able to start anymore.
+
+In order to double-check that YAKINDU Statechart Tools now uses GTK2, please proceed as follows:
+* Start YAKINDU Statechart Tools.
+* Navigate to _Help → About YAKINDU SCT → Installation Details → Configuration_. You will get a bunch of text containing all kinds of internal variables.
+* Somewhat down the lines, you will find the _org.eclipse.swt.internal.gtk.version_ entry. Its major version number should now be 2 instead of 3, for example 2.24.30.
 
 
 h4(#inst_installing_on_linux_webkit_gtk). Webkit GTK
@@ -319,15 +383,13 @@ h3(#inst_installing_on_linux_starting_yakindu_statechart_tools). Starting YAKIND
 
 Start YAKINDU Statechart Tools by running the _SCT_ executable.
 
-To do so, please enter the command
+To do so, please _cd_ to the _yakindu-sct_ folder and enter this command:
 
-bc. yakindu-sct/SCT
+bc. ./SCT
 
-in your installation directory. Or issue the command
+If your command shell is in some other working directory, issue this command:
 
 bc. /my/software/yakindu-sct/SCT
-
-if your command shell is in any other working directory.
 
 From a graphical file browser, you can start YAKINDU Statechart Tools by clicking on the _SCT_ symbol.
 

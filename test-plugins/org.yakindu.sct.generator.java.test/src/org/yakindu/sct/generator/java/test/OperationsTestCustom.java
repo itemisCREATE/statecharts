@@ -48,10 +48,10 @@ public class OperationsTestCustom{
 		interface2Mock = mock(SCIInterface1OperationCallback.class);
 		when(interfaceMock.alwaysTrue()).thenReturn(true);
 		statemachine = new OperationsStatemachine();
-		statemachine.init();
 		statemachine.setInternalOperationCallback(internalMock);
 		statemachine.getSCInterface().setSCInterfaceOperationCallback(interfaceMock);
 		statemachine.getSCIInterface1().setSCIInterface1OperationCallback(interface2Mock);
+		statemachine.init();
 	}
 
 	@After

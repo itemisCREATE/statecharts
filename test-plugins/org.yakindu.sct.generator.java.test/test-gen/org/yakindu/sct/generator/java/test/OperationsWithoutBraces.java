@@ -5,9 +5,7 @@ package org.yakindu.sct.generator.java.test;
 import static org.mockito.Mockito.*;
 import static org.mockito.Matchers.*;
 import static org.hamcrest.CoreMatchers.*;
-import org.yakindu.scr.operationswithoutbraces.IOperationsWithoutBracesStatemachine.*;
-import org.mockito.ArgumentCaptor;
-import static org.mockito.ArgumentCaptor.forClass;		
+import org.yakindu.scr.operationswithoutbraces.IOperationsWithoutBracesStatemachine.*;	
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.junit.*;
@@ -34,9 +32,9 @@ public class OperationsWithoutBraces {
 		statemachine = new OperationsWithoutBracesStatemachine();
 		timer = new VirtualTimer(200);
 		timer.schedulePeriodicalTask(new CycleTimeEventTask(statemachine), 200, 200);
-		statemachine.init();
 		defaultMock = mock(SCInterfaceOperationCallback.class);
 		statemachine.getSCInterface().setSCInterfaceOperationCallback(defaultMock);
+		statemachine.init();
 	}
 
 	@After
