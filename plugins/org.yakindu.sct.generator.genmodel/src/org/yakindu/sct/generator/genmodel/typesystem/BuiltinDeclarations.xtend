@@ -30,6 +30,8 @@ class BuiltinDeclarations implements BuiltinDeclarationNames {
 
 	protected Property sct_version
 	protected Property timestamp
+	protected Property hostname
+	protected Property username
 
 	@Inject
 	new(ITypeSystem typeSystem) {
@@ -40,6 +42,8 @@ class BuiltinDeclarations implements BuiltinDeclarationNames {
 		
 		sct_version = createProperty(SCT_VERSION_VAR, stringtype)
 		timestamp = createProperty(TIMESTAMP_VAR, stringtype)
+		hostname = createProperty(HOSTNAME_VAR, stringtype)
+		username = createProperty(USER_VAR, stringtype)
 	}
 	
 	def protected Property createProperty(String name, Type type) {
@@ -58,7 +62,9 @@ class BuiltinDeclarations implements BuiltinDeclarationNames {
 	def getDeclarations() {
 		#[
 			sct_version,
-			timestamp
+			timestamp,
+			hostname,
+			username
 		]
 	}
 

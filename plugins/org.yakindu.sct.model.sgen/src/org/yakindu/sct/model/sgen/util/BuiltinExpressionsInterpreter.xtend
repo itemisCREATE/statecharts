@@ -9,6 +9,7 @@
  */
 package org.yakindu.sct.model.sgen.util
 
+import java.net.InetAddress
 import java.text.DateFormat
 import java.util.Date
 import org.osgi.framework.FrameworkUtil
@@ -26,10 +27,16 @@ class BuiltinExpressionsInterpreter extends DefaultExpressionInterpreter impleme
 			switch ((expression.reference as Property).name) {
 				case SCT_VERSION_VAR: {
 					val v = FrameworkUtil.getBundle(getClass()).version
-					return v.toString
+					return '''«v.major».«v.minor».«v.micro»'''.toString
 				}
 				case TIMESTAMP_VAR: {
-					return DateFormat.getDateInstance().format(new Date())
+					return DateFormat.getDateTimeInstance().format(new Date()).toString
+				}
+				case USER_VAR: {
+					return System.getProperty("user.name").toString
+				}
+				case HOSTNAME_VAR: {
+					return InetAddress.localHost.hostName.toString
 				}
 				default:
 					return executeElementReferenceExpression(expression)

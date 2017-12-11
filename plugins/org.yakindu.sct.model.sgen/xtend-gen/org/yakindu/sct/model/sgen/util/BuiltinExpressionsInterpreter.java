@@ -9,10 +9,13 @@
  */
 package org.yakindu.sct.model.sgen.util;
 
+import java.net.InetAddress;
 import java.text.DateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.Version;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
@@ -46,31 +49,48 @@ import org.yakindu.sct.model.sgen.util.BuiltinDeclarationNames;
 public class BuiltinExpressionsInterpreter extends DefaultExpressionInterpreter implements BuiltinDeclarationNames {
   @Override
   protected Object _execute(final ElementReferenceExpression expression) {
-    Object _xblockexpression = null;
-    {
-      EObject _reference = expression.getReference();
-      if ((_reference instanceof Property)) {
-        EObject _reference_1 = expression.getReference();
-        String _name = ((Property) _reference_1).getName();
-        if (_name != null) {
-          switch (_name) {
-            case BuiltinDeclarationNames.SCT_VERSION_VAR:
-              final Version v = FrameworkUtil.getBundle(this.getClass()).getVersion();
-              return v.toString();
-            case BuiltinDeclarationNames.TIMESTAMP_VAR:
-              DateFormat _dateInstance = DateFormat.getDateInstance();
-              Date _date = new Date();
-              return _dateInstance.format(_date);
-            default:
-              return this.executeElementReferenceExpression(expression);
+    try {
+      Object _xblockexpression = null;
+      {
+        EObject _reference = expression.getReference();
+        if ((_reference instanceof Property)) {
+          EObject _reference_1 = expression.getReference();
+          String _name = ((Property) _reference_1).getName();
+          if (_name != null) {
+            switch (_name) {
+              case BuiltinDeclarationNames.SCT_VERSION_VAR:
+                final Version v = FrameworkUtil.getBundle(this.getClass()).getVersion();
+                StringConcatenation _builder = new StringConcatenation();
+                int _major = v.getMajor();
+                _builder.append(_major);
+                _builder.append(".");
+                int _minor = v.getMinor();
+                _builder.append(_minor);
+                _builder.append(".");
+                int _micro = v.getMicro();
+                _builder.append(_micro);
+                return _builder.toString();
+              case BuiltinDeclarationNames.TIMESTAMP_VAR:
+                DateFormat _dateTimeInstance = DateFormat.getDateTimeInstance();
+                Date _date = new Date();
+                return _dateTimeInstance.format(_date).toString();
+              case BuiltinDeclarationNames.USER_VAR:
+                return System.getProperty("user.name").toString();
+              case BuiltinDeclarationNames.HOSTNAME_VAR:
+                return InetAddress.getLocalHost().getHostName().toString();
+              default:
+                return this.executeElementReferenceExpression(expression);
+            }
+          } else {
+            return this.executeElementReferenceExpression(expression);
           }
-        } else {
-          return this.executeElementReferenceExpression(expression);
         }
+        _xblockexpression = this.executeElementReferenceExpression(expression);
       }
-      _xblockexpression = this.executeElementReferenceExpression(expression);
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
-    return _xblockexpression;
   }
   
   public Object execute(final Expression expression) {

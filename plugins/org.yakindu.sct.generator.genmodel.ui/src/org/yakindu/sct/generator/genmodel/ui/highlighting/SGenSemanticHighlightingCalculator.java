@@ -29,13 +29,14 @@ import org.yakindu.sct.model.sgen.DeprecatableElement;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.SGenPackage;
 import org.yakindu.sct.model.sgen.impl.FeatureConfigurationImpl;
+import org.yakindu.sct.model.sgen.util.BuiltinDeclarationNames;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SGenSemanticHighlightingCalculator implements ISemanticHighlightingCalculator {
+public class SGenSemanticHighlightingCalculator implements ISemanticHighlightingCalculator, BuiltinDeclarationNames {
 
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		if (resource == null || resource.getParseResult() == null)
@@ -73,8 +74,10 @@ public class SGenSemanticHighlightingCalculator implements ISemanticHighlighting
 				for (INode node : nodes) {
 					String name = ((Property) ((ElementReferenceExpression) object).getReference()).getName();
 					switch (name) {
-						case "version" :
-						case "now" :
+						case HOSTNAME_VAR :
+						case USER_VAR :
+						case SCT_VERSION_VAR :
+						case TIMESTAMP_VAR :
 							acceptor.addPosition(node.getTotalOffset(), node.getTotalLength(),
 									DefaultHighlightingConfiguration.KEYWORD_ID);
 					}
