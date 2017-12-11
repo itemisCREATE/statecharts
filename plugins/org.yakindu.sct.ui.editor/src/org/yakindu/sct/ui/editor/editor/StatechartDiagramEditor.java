@@ -51,6 +51,8 @@ import org.eclipse.jface.databinding.swt.ISWTObservableValue;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.StyledText;
@@ -108,7 +110,6 @@ import org.yakindu.sct.domain.extension.DomainStatus;
 import org.yakindu.sct.domain.extension.DomainStatus.Severity;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementProvider;
@@ -116,6 +117,7 @@ import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.StatechartImages;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningEditor;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
+import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 import org.yakindu.sct.ui.editor.propertysheets.ValidatingEMFDatabindingContext;
 import org.yakindu.sct.ui.editor.proposals.ContentProposalViewerKeyHandler;
 import org.yakindu.sct.ui.editor.providers.ISCTOutlineFactory;
@@ -133,7 +135,7 @@ import com.google.inject.Key;
  * @author robert rudi
  */
 @SuppressWarnings("restriction")
-public class StatechartDiagramEditor extends DiagramPartitioningEditor implements IGotoMarker, IContextElementProvider {
+public class StatechartDiagramEditor extends DiagramPartitioningEditor implements IGotoMarker, IContextElementProvider, IPropertyChangeListener {
 
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
 
@@ -220,6 +222,11 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		super.init(site, input);
 		checkXtextNature();
 		registerValidationListener();
+		registerPropertyChangeListener();
+	}
+
+	protected void registerPropertyChangeListener() {
+		DiagramActivator.getDefault().getPreferenceStore().addPropertyChangeListener(this);
 	}
 
 	protected void registerValidationListener() {
@@ -422,6 +429,8 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	@Override
 	public void dispose() {
 		saveState(getMemento());
+		
+		removepropertyChangeListener();
 		if (validationListener != null) {
 			validationListener.dispose();
 		}
@@ -436,6 +445,10 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		disposeDefinitionSectionControls();
 
 		super.dispose();
+	}
+
+	protected void removepropertyChangeListener() {
+		DiagramActivator.getDefault().getPreferenceStore().removePropertyChangeListener(this);
 	}
 
 	protected void disposeDefinitionSectionControls() {
@@ -513,6 +526,23 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		toggleDefinitionSection();
 		restoreSashWidths(getSash(), getMemento());
 		enableXtext(xtextControl);
+		reloadFromPreferences();
+	}
+
+	protected void reloadFromPreferences() {
+		boolean pinningActivated = DiagramActivator.getDefault().getPreferenceStore()
+				.getBoolean(StatechartPreferenceConstants.PREF_DEFINITION_SECTION);
+		if (!isDefinitionSectionInlined() && !pinningActivated) {
+			// set the new value for the boolean value style
+			TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(getDiagram());
+			BooleanValueStyle inlineStyle = DiagramPartitioningUtil.getInlineDefinitionSectionStyle(getDiagram());
+
+			SetCommand command = setBooleanValueStyle(inlineStyle, domain);
+			domain.getCommandStack().execute(command);
+
+			toggleDefinitionSection();
+			refreshDiagramEditPartChildren();
+		}
 	}
 
 	protected void enableXtext(StyledText xtextControl) {
@@ -929,6 +959,13 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			isDefinitionSectionExpanded = getExpandState(memento);
 		}
 		super.setMemento(memento);
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent event) {
+		if(StatechartPreferenceConstants.PREF_DEFINITION_SECTION.equals(event.getProperty())) {
+			reloadFromPreferences();
+		}
 	}
 
 }

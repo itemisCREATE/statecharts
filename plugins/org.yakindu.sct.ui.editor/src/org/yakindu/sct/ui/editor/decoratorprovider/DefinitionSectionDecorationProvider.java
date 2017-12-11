@@ -32,6 +32,7 @@ import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Image;
@@ -41,10 +42,12 @@ import org.yakindu.base.gmf.runtime.decorators.AbstractDecoratorProvider;
 import org.yakindu.base.gmf.runtime.decorators.InteractiveDecorator;
 import org.yakindu.base.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
+import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.StatechartImages;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
+import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 
 /**
@@ -66,6 +69,7 @@ public class DefinitionSectionDecorationProvider extends AbstractDecoratorProvid
 
 		private static final Insets HIGHLIGHTING_BORDER_INSETS = new Insets(1, 1, 1, 1);
 		private static final String TOOLTIP_TEXT = "Pin statechart definition section";
+		protected static final IPreferenceStore preferenceStore = DiagramActivator.getDefault().getPreferenceStore();
 
 		public DefinitionSectionDecorator(IDecoratorTarget decoratorTarget) {
 			super(decoratorTarget);
@@ -83,12 +87,14 @@ public class DefinitionSectionDecorationProvider extends AbstractDecoratorProvid
 
 		@Override
 		protected boolean shouldDecorate(EObject element) {
-			if (getDecoratorTarget().getAdapter(IPrimaryEditPart.class) instanceof StatechartTextEditPart) {
-				StatechartTextEditPart adapter = (StatechartTextEditPart) getDecoratorTarget()
-						.getAdapter(IPrimaryEditPart.class);
-				BooleanValueStyle style = GMFNotationUtil.getBooleanValueStyle(adapter.getNotationView(),
-						DiagramPartitioningUtil.INLINE_DEFINITION_SECTION_STYLE);
-				return style == null ? true : style.isBooleanValue();
+			if (preferenceStore.getBoolean(StatechartPreferenceConstants.PREF_DEFINITION_SECTION)) {
+				if (getDecoratorTarget().getAdapter(IPrimaryEditPart.class) instanceof StatechartTextEditPart) {
+					StatechartTextEditPart adapter = (StatechartTextEditPart) getDecoratorTarget()
+							.getAdapter(IPrimaryEditPart.class);
+					BooleanValueStyle style = GMFNotationUtil.getBooleanValueStyle(adapter.getNotationView(),
+							DiagramPartitioningUtil.INLINE_DEFINITION_SECTION_STYLE);
+					return style == null ? true : style.isBooleanValue();
+				}
 			}
 			return false;
 		}
@@ -170,7 +176,8 @@ public class DefinitionSectionDecorationProvider extends AbstractDecoratorProvid
 			return command;
 		}
 
-		protected AddCommand addBooleanValueStyle(EditPart editPart, BooleanValueStyle inlineStyle, TransactionalEditingDomain domain) {
+		protected AddCommand addBooleanValueStyle(EditPart editPart, BooleanValueStyle inlineStyle,
+				TransactionalEditingDomain domain) {
 			AddCommand command = new AddCommand(domain, getDiagramReference(editPart),
 					NotationPackage.Literals.VIEW__STYLES, inlineStyle);
 			return command;
