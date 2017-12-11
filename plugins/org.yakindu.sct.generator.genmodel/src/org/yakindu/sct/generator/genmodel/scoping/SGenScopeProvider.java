@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.generator.genmodel.scoping;
 
+import java.util.List;
+
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -26,6 +28,7 @@ import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
+import org.yakindu.base.types.Property;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
@@ -33,6 +36,7 @@ import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.generator.core.extensions.ILibraryDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
 import org.yakindu.sct.generator.genmodel.resource.FeatureResourceDescription;
+import org.yakindu.sct.generator.genmodel.typesystem.BuiltinDeclarations;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgen.PropertyDefinition;
@@ -53,11 +57,12 @@ public class SGenScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	@Inject
 	private XtextResourceSet resourceSet;
-
 	@Inject
 	private Injector injector;
 	@Inject
 	private ITypeSystem typeSystem;
+	@Inject
+	private BuiltinDeclarations buildInDeclarations;
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
@@ -82,7 +87,8 @@ public class SGenScopeProvider extends AbstractDeclarativeScopeProvider {
 	protected IScope getElementReferenceScope(EObject context) {
 		GeneratorModel generatorModel = (GeneratorModel) EcoreUtil.getRootContainer(context);
 		EList<PropertyDefinition> properties = generatorModel.getProperties();
-		return Scopes.scopeFor(properties);
+		List<Property> all = buildInDeclarations.getDeclarations();
+		return Scopes.scopeFor(properties, Scopes.scopeFor(all));
 	}
 
 	protected IScope scope_GeneratorEntry_elementRef(final EObject context, final EReference reference) {

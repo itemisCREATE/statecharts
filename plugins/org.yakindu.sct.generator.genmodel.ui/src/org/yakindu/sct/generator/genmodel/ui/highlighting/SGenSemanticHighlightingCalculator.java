@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.LeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -21,6 +22,9 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
+import org.yakindu.base.expressions.expressions.ExpressionsPackage;
+import org.yakindu.base.types.Property;
 import org.yakindu.sct.model.sgen.DeprecatableElement;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.SGenPackage;
@@ -62,7 +66,19 @@ public class SGenSemanticHighlightingCalculator implements ISemanticHighlighting
 						}
 					}
 				}
-				allContents.prune();
+				// allContents.prune();
+			} else if (object instanceof ElementReferenceExpression) {
+				List<INode> nodes = NodeModelUtils.findNodesForFeature(object,
+						ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE);
+				for (INode node : nodes) {
+					String name = ((Property) ((ElementReferenceExpression) object).getReference()).getName();
+					switch (name) {
+						case "version" :
+						case "now" :
+							acceptor.addPosition(node.getTotalOffset(), node.getTotalLength(),
+									DefaultHighlightingConfiguration.KEYWORD_ID);
+					}
+				}
 			}
 		}
 	}
