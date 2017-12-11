@@ -11,6 +11,9 @@
 package org.yakindu.sct.generator.genmodel.typesystem
 
 import com.google.inject.Inject
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.yakindu.base.types.Property
+import org.yakindu.base.types.Type
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.typesystem.AbstractTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
@@ -20,25 +23,43 @@ import org.yakindu.sct.model.sgen.util.BuiltinDeclarationNames
  * @author rbeckmann
  * 
  */
+@Accessors(PUBLIC_GETTER)
 class BuiltinDeclarations implements BuiltinDeclarationNames {
+	protected TypesFactory typesFactory
+	protected ITypeSystem typeSystem
 
-	extension TypesFactory factory = TypesFactory.eINSTANCE
-	@Inject ITypeSystem typesystem
+	protected Property sct_version
+	protected Property timestamp
+
+	@Inject
+	new(ITypeSystem typeSystem) {
+		this.typesFactory = TypesFactory.eINSTANCE
+		this.typeSystem = typeSystem
+		
+		val stringtype = typeSystem.getType(ITypeSystem.STRING)
+		
+		sct_version = createProperty(SCT_VERSION_VAR, stringtype)
+		timestamp = createProperty(TIMESTAMP_VAR, stringtype)
+	}
+	
+	def protected Property createProperty(String name, Type type) {
+		typesFactory.createProperty => [prop |
+			(typeSystem as AbstractTypeSystem).resource.contents += prop
+			
+			prop.name = name
+			prop.typeSpecifier = typesFactory.createTypeSpecifier => [
+				it.type = type
+			]
+			prop.const = false
+			prop.readonly = false
+		]
+	}
 
 	def getDeclarations() {
-		val declarations = #[
-			SCT_VERSION_VAR,
-			TIMESTAMP_VAR
-		].map [ decl |
-			createProperty => [
-				name = decl
-				typeSpecifier = createTypeSpecifier => [
-					type = typesystem.getType(ITypeSystem.STRING)
-				]
-			]
+		#[
+			sct_version,
+			timestamp
 		]
-		declarations.forEach[(typesystem as AbstractTypeSystem).resource.contents += it]
-		declarations
 	}
 
 }
