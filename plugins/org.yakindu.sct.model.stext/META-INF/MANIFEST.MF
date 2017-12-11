@@ -6,7 +6,6 @@ Bundle-Version: 3.1.1.qualifier
 Bundle-SymbolicName: org.yakindu.sct.model.stext;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
- org.apache.log4j;visibility:=reexport,
  org.apache.commons.logging;resolution:=optional;visibility:=reexport,
  org.eclipse.xtext.generator;resolution:=optional,
  org.eclipse.emf.codegen.ecore;resolution:=optional,
