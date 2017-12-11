@@ -2414,7 +2414,7 @@ The mandatory *Outlet* feature specifies the project and folder the statechart i
 bq. *Please note:* The images generator supports the *Outlet* feature's _targetProject_ and _targetFolder_ parameters only.
 
 
-==<!-- Start sgen_feature_renderer -->==
+==<!-- Start-pro sgen_feature_renderer -->==
 
 h4(#codegen_statechart_images_renderer_feature). Renderer feature
 
@@ -2422,7 +2422,7 @@ The mandatory *Renderer* feature controls the rendering of the images.
 
 * _format_ (String, required): Format of the generated images. Supported image formats are listed in section "&quot;Exporting_a_statechart_as_an_image_file&quot;":../user-guide/editing_statecharts.html#edit_exporting_a_statechart_as_an_image_file.
 
-==<!-- End sgen_feature_renderer -->==
+==<!-- End-pro sgen_feature_renderer -->==
 
 ==</div>==
 
