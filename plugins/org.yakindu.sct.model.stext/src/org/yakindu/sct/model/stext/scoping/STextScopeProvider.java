@@ -97,15 +97,16 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 	
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
+		ErrorHandler<IScope> originalHandler = getErrorHandler();
 		try {
-			ErrorHandler<IScope> originalHandler = getErrorHandler();
 			setErrorHandler(new ErrorHandlerDelegate<IScope>(originalHandler));
 			IScope scope = super.getScope(context, reference);
-			setErrorHandler(originalHandler);
 			return scope;
 		} catch (Throwable t) {
 			t.printStackTrace();
 			return null;
+		} finally {
+			setErrorHandler(originalHandler);
 		}
 	}
 	
