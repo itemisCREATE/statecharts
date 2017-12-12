@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.simulation.ui.view;
 
-import java.util.HashSet;
+import java.util.Map;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.jface.viewers.StyledCellLabelProvider;
@@ -38,7 +38,7 @@ import org.yakindu.sct.model.sruntime.ExecutionVariable;
 import org.yakindu.sct.model.sruntime.ReferenceSlot;
 import org.yakindu.sct.simulation.ui.SimulationImages;
 
-import com.google.common.collect.Sets;
+import com.google.common.collect.Maps;
 
 /**
  * 
@@ -48,7 +48,7 @@ import com.google.common.collect.Sets;
 public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 
 	private final int index;
-	private static HashSet<TreeItem> viewerCells = Sets.newHashSet();
+	private static Map<String, Button> viewerCells = Maps.newHashMap();
 
 	public ExecutionContextLabelProvider(int index) {
 		this.index = index;
@@ -90,11 +90,9 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 					if (primitiveType != null
 							&& Boolean.class.getSimpleName().equalsIgnoreCase(primitiveType.getName())) {
 						TreeItem currentItem = (TreeItem) cell.getItem();
-						if (!viewerCells.contains(currentItem)) {
-							NativeCellWidgetUtil.addNativeCheckbox(cell, element, value,
-									new TreeEditorDisposeListener(currentItem));
-							viewerCells.add(currentItem);
-						}
+						NativeCellWidgetUtil.addNativeCheckbox(cell, element, value,
+								new TreeEditorDisposeListener(currentItem));
+
 						// layout cells with checkbox widgets to update positions if tree contents have
 						// changed
 						cell.getControl().getParent().layout();
@@ -172,6 +170,7 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 				TreeEditor editor = (TreeEditor) currentItem.getData(EDITOR_DATA);
 				editor.getEditor().dispose();
 				editor.dispose();
+
 			}
 		}
 		protected void removeDisposeListener() {
@@ -187,15 +186,21 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 	 * 
 	 */
 	protected static class NativeCellWidgetUtil {
+
 		protected static void addNativeCheckbox(ViewerCell cell, Object element, Object value,
 				TreeEditorDisposeListener listener) {
 
 			TreeItem currentItem = (TreeItem) cell.getItem();
-			manageEditorDisposal(currentItem, listener);
-			TreeEditor editor = createEditor(currentItem);
-			Composite comp = createEditorComposite(currentItem);
-			createNativeCheckboxCellWidget(element, comp);
-			editor.setEditor(comp, currentItem, cell.getColumnIndex()); // update editor content
+			String cellKey = ((ExecutionSlot) element).getName();
+			if (viewerCells.get(cellKey) == null || viewerCells.get(cellKey).isDisposed()
+					|| (viewerCells.get(cellKey).getSelection() != ((Boolean) value).booleanValue())) {
+				manageEditorDisposal(currentItem, listener);
+				TreeEditor editor = createEditor(currentItem);
+				Composite comp = createEditorComposite(currentItem);
+				final Button button = createNativeCheckboxCellWidget(element, comp);
+				editor.setEditor(comp, currentItem, cell.getColumnIndex()); // update editor content
+				viewerCells.put(cellKey, button);
+			}
 		}
 
 		protected static Button createNativeCheckboxCellWidget(Object element, Composite comp) {
