@@ -98,7 +98,6 @@ public class ExecutionContextViewerFactory {
 					public void beforeEditorActivated(ColumnViewerEditorActivationEvent event) {
 					}
 				});
-
 		return viewer;
 	}
 }
