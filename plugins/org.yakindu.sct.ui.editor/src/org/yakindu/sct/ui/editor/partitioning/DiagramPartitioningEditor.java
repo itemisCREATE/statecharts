@@ -63,9 +63,12 @@ import org.eclipse.ui.XMLMemento;
 import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.xtext.util.Arrays;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.provider.SGraphItemProviderAdapterFactory;
+import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.StatechartImages;
+import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 
 /**
  * Editor that uses a {@link DiagramPartitioningDocumentProvider} and adds a
@@ -143,8 +146,17 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 
 	public void toggleDefinitionSection() {
 		if (getContextObject() instanceof Statechart)
-			sash.setMaximizedControl(
-					!isDefinitionSectionInlined() ? null : sash.getChildren()[MAXIMIZED_CONTROL_INDEX]);
+			sash.setMaximizedControl(!isDefinitionSectionInlined() && isPinningActivated()
+					? null
+					: sash.getChildren()[MAXIMIZED_CONTROL_INDEX]);
+		if (getContextObject() instanceof State) {
+			sash.setMaximizedControl(isDefinitionSectionInlined() && isPinningActivated() ? null : sash.getChildren()[MAXIMIZED_CONTROL_INDEX]);
+		}
+	}
+
+	protected boolean isPinningActivated() {
+		return DiagramActivator.getDefault().getPreferenceStore()
+				.getBoolean(StatechartPreferenceConstants.PREF_DEFINITION_SECTION);
 	}
 
 	protected abstract EObject getContextObject();
@@ -162,25 +174,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 		}
 	}
 
-	protected void rememberExpandState(IMemento memento) {
-		if (getContextObject() != null) {
-			if (getContextObject() instanceof NamedElement) {
-				NamedElement element = (NamedElement) getContextObject();
-				if (element != null)
-					memento.putBoolean(stripElementName(element.getName()) + IS_DEFINITION_SECTION_EXPANDED, true);
-			}
-		}
-	}
-
-	protected boolean getExpandState(IMemento memento) {
-		Object expandState = null;
-		if (getContextObject() instanceof NamedElement) {
-			NamedElement element = (NamedElement) getContextObject();
-			if (element != null)
-				expandState = memento.getBoolean(stripElementName(element.getName()) + IS_DEFINITION_SECTION_EXPANDED);
-		}
-		return expandState != null ? ((Boolean) expandState).booleanValue() : true;
-	}
+	protected abstract void rememberExpandState(IMemento memento);
 
 	protected String stripElementName(String name) {
 		if (name != null)
