@@ -115,7 +115,7 @@ class TypesTestFactory {
 	def PrimitiveType createPrimitiveType(String name, String baseTypeName) {
 		factory.createPrimitiveType => [
 			it.name = name
-			it.baseType = ts.getType(baseTypeName) as PrimitiveType
+			it.superTypes += ts.getType(baseTypeName) as PrimitiveType
 		]
 	}
 

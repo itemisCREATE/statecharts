@@ -56,6 +56,7 @@ public class TypeItemProvider
 
 			addAbstractPropertyDescriptor(object);
 			addVisiblePropertyDescriptor(object);
+			addSuperTypesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -100,6 +101,28 @@ public class TypeItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Super Types feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSuperTypesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Type_superTypes_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Type_superTypes_feature", "_UI_Type_type"),
+				 TypesPackage.Literals.TYPE__SUPER_TYPES,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

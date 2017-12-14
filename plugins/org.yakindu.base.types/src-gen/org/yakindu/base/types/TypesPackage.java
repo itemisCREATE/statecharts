@@ -285,13 +285,22 @@ public interface TypesPackage extends EPackage {
 	int TYPE__VISIBLE = PACKAGE_MEMBER_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE__SUPER_TYPES = PACKAGE_MEMBER_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_FEATURE_COUNT = PACKAGE_MEMBER_FEATURE_COUNT + 3;
+	int TYPE_FEATURE_COUNT = PACKAGE_MEMBER_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -805,13 +814,13 @@ public interface TypesPackage extends EPackage {
 	int PRIMITIVE_TYPE__VISIBLE = TYPE__VISIBLE;
 
 	/**
-	 * The feature id for the '<em><b>Base Type</b></em>' reference.
+	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMITIVE_TYPE__BASE_TYPE = TYPE_FEATURE_COUNT + 0;
+	int PRIMITIVE_TYPE__SUPER_TYPES = TYPE__SUPER_TYPES;
 
 	/**
 	 * The number of structural features of the '<em>Primitive Type</em>' class.
@@ -820,7 +829,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMITIVE_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
+	int PRIMITIVE_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -877,13 +886,13 @@ public interface TypesPackage extends EPackage {
 	int ENUMERATION_TYPE__VISIBLE = PRIMITIVE_TYPE__VISIBLE;
 
 	/**
-	 * The feature id for the '<em><b>Base Type</b></em>' reference.
+	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION_TYPE__BASE_TYPE = PRIMITIVE_TYPE__BASE_TYPE;
+	int ENUMERATION_TYPE__SUPER_TYPES = PRIMITIVE_TYPE__SUPER_TYPES;
 
 	/**
 	 * The feature id for the '<em><b>Enumerator</b></em>' containment reference list.
@@ -978,6 +987,15 @@ public interface TypesPackage extends EPackage {
 	int COMPLEX_TYPE__VISIBLE = TYPE__VISIBLE;
 
 	/**
+	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_TYPE__SUPER_TYPES = TYPE__SUPER_TYPES;
+
+	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -996,22 +1014,13 @@ public interface TypesPackage extends EPackage {
 	int COMPLEX_TYPE__FEATURES = TYPE_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_TYPE__SUPER_TYPES = TYPE_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Complex Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLEX_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 3;
+	int COMPLEX_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.EnumeratorImpl <em>Enumerator</em>}' class.
@@ -1187,6 +1196,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_PARAMETER__VISIBLE = TYPE__VISIBLE;
+
+	/**
+	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_PARAMETER__SUPER_TYPES = TYPE__SUPER_TYPES;
 
 	/**
 	 * The feature id for the '<em><b>Bound</b></em>' reference.
@@ -1390,13 +1408,22 @@ public interface TypesPackage extends EPackage {
 	int TYPE_ALIAS__VISIBLE = TYPED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS__SUPER_TYPES = TYPED_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Type Alias</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 6;
+	int TYPE_ALIAS_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.AnnotationImpl <em>Annotation</em>}' class.
@@ -1556,6 +1583,15 @@ public interface TypesPackage extends EPackage {
 	int ANNOTATION_TYPE__VISIBLE = TYPE__VISIBLE;
 
 	/**
+	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_TYPE__SUPER_TYPES = TYPE__SUPER_TYPES;
+
+	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1677,6 +1713,17 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getType_Visible();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.yakindu.base.types.Type#getSuperTypes <em>Super Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Super Types</em>'.
+	 * @see org.yakindu.base.types.Type#getSuperTypes()
+	 * @see #getType()
+	 * @generated
+	 */
+	EReference getType_SuperTypes();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Declaration <em>Declaration</em>}'.
@@ -1934,17 +1981,6 @@ public interface TypesPackage extends EPackage {
 	EClass getPrimitiveType();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.yakindu.base.types.PrimitiveType#getBaseType <em>Base Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Base Type</em>'.
-	 * @see org.yakindu.base.types.PrimitiveType#getBaseType()
-	 * @see #getPrimitiveType()
-	 * @generated
-	 */
-	EReference getPrimitiveType_BaseType();
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.ComplexType <em>Complex Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1964,17 +2000,6 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getComplexType_Features();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.yakindu.base.types.ComplexType#getSuperTypes <em>Super Types</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Super Types</em>'.
-	 * @see org.yakindu.base.types.ComplexType#getSuperTypes()
-	 * @see #getComplexType()
-	 * @generated
-	 */
-	EReference getComplexType_SuperTypes();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Enumerator <em>Enumerator</em>}'.
@@ -2351,6 +2376,14 @@ public interface TypesPackage extends EPackage {
 		EAttribute TYPE__VISIBLE = eINSTANCE.getType_Visible();
 
 		/**
+		 * The meta object literal for the '<em><b>Super Types</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPE__SUPER_TYPES = eINSTANCE.getType_SuperTypes();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.DeclarationImpl <em>Declaration</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2561,14 +2594,6 @@ public interface TypesPackage extends EPackage {
 		EClass PRIMITIVE_TYPE = eINSTANCE.getPrimitiveType();
 
 		/**
-		 * The meta object literal for the '<em><b>Base Type</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PRIMITIVE_TYPE__BASE_TYPE = eINSTANCE.getPrimitiveType_BaseType();
-
-		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.ComplexTypeImpl <em>Complex Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2585,14 +2610,6 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPLEX_TYPE__FEATURES = eINSTANCE.getComplexType_Features();
-
-		/**
-		 * The meta object literal for the '<em><b>Super Types</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPLEX_TYPE__SUPER_TYPES = eINSTANCE.getComplexType_SuperTypes();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.EnumeratorImpl <em>Enumerator</em>}' class.

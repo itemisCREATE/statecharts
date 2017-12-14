@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeConstraint;
@@ -31,6 +32,7 @@ import org.yakindu.base.types.TypesPackage;
  *   <li>{@link org.yakindu.base.types.impl.TypeImpl#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeImpl#isVisible <em>Visible</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.TypeImpl#getSuperTypes <em>Super Types</em>}</li>
  * </ul>
  *
  * @generated
@@ -85,6 +87,16 @@ public class TypeImpl extends PackageMemberImpl implements Type {
 	 * @ordered
 	 */
 	protected boolean visible = VISIBLE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSuperTypes() <em>Super Types</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSuperTypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Type> superTypes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -161,6 +173,18 @@ public class TypeImpl extends PackageMemberImpl implements Type {
 
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Type> getSuperTypes() {
+		if (superTypes == null) {
+			superTypes = new EObjectResolvingEList<Type>(Type.class, this, TypesPackage.TYPE__SUPER_TYPES);
+		}
+		return superTypes;
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
@@ -198,6 +222,8 @@ public class TypeImpl extends PackageMemberImpl implements Type {
 				return isAbstract();
 			case TypesPackage.TYPE__VISIBLE:
 				return isVisible();
+			case TypesPackage.TYPE__SUPER_TYPES:
+				return getSuperTypes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -221,6 +247,10 @@ public class TypeImpl extends PackageMemberImpl implements Type {
 			case TypesPackage.TYPE__VISIBLE:
 				setVisible((Boolean)newValue);
 				return;
+			case TypesPackage.TYPE__SUPER_TYPES:
+				getSuperTypes().clear();
+				getSuperTypes().addAll((Collection<? extends Type>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -242,6 +272,9 @@ public class TypeImpl extends PackageMemberImpl implements Type {
 			case TypesPackage.TYPE__VISIBLE:
 				setVisible(VISIBLE_EDEFAULT);
 				return;
+			case TypesPackage.TYPE__SUPER_TYPES:
+				getSuperTypes().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -260,6 +293,8 @@ public class TypeImpl extends PackageMemberImpl implements Type {
 				return abstract_ != ABSTRACT_EDEFAULT;
 			case TypesPackage.TYPE__VISIBLE:
 				return visible != VISIBLE_EDEFAULT;
+			case TypesPackage.TYPE__SUPER_TYPES:
+				return superTypes != null && !superTypes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

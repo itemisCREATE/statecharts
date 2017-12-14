@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
@@ -40,6 +41,7 @@ import org.yakindu.base.types.TypesUtil;
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#isVisible <em>Visible</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getSuperTypes <em>Super Types</em>}</li>
  * </ul>
  *
  * @generated
@@ -139,6 +141,16 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	 * @ordered
 	 */
 	protected boolean visible = VISIBLE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSuperTypes() <em>Super Types</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSuperTypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Type> superTypes;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -314,6 +326,18 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Type> getSuperTypes() {
+		if (superTypes == null) {
+			superTypes = new EObjectResolvingEList<Type>(Type.class, this, TypesPackage.TYPE_ALIAS__SUPER_TYPES);
+		}
+		return superTypes;
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
@@ -366,6 +390,8 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				return isAbstract();
 			case TypesPackage.TYPE_ALIAS__VISIBLE:
 				return isVisible();
+			case TypesPackage.TYPE_ALIAS__SUPER_TYPES:
+				return getSuperTypes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -398,6 +424,10 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 			case TypesPackage.TYPE_ALIAS__VISIBLE:
 				setVisible((Boolean)newValue);
 				return;
+			case TypesPackage.TYPE_ALIAS__SUPER_TYPES:
+				getSuperTypes().clear();
+				getSuperTypes().addAll((Collection<? extends Type>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -427,6 +457,9 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 			case TypesPackage.TYPE_ALIAS__VISIBLE:
 				setVisible(VISIBLE_EDEFAULT);
 				return;
+			case TypesPackage.TYPE_ALIAS__SUPER_TYPES:
+				getSuperTypes().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -454,6 +487,8 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				return abstract_ != ABSTRACT_EDEFAULT;
 			case TypesPackage.TYPE_ALIAS__VISIBLE:
 				return visible != VISIBLE_EDEFAULT;
+			case TypesPackage.TYPE_ALIAS__SUPER_TYPES:
+				return superTypes != null && !superTypes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -487,6 +522,7 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				case TypesPackage.TYPE_ALIAS__CONSTRAINT: return TypesPackage.TYPE__CONSTRAINT;
 				case TypesPackage.TYPE_ALIAS__ABSTRACT: return TypesPackage.TYPE__ABSTRACT;
 				case TypesPackage.TYPE_ALIAS__VISIBLE: return TypesPackage.TYPE__VISIBLE;
+				case TypesPackage.TYPE_ALIAS__SUPER_TYPES: return TypesPackage.TYPE__SUPER_TYPES;
 				default: return -1;
 			}
 		}
@@ -522,6 +558,7 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				case TypesPackage.TYPE__CONSTRAINT: return TypesPackage.TYPE_ALIAS__CONSTRAINT;
 				case TypesPackage.TYPE__ABSTRACT: return TypesPackage.TYPE_ALIAS__ABSTRACT;
 				case TypesPackage.TYPE__VISIBLE: return TypesPackage.TYPE_ALIAS__VISIBLE;
+				case TypesPackage.TYPE__SUPER_TYPES: return TypesPackage.TYPE_ALIAS__SUPER_TYPES;
 				default: return -1;
 			}
 		}
