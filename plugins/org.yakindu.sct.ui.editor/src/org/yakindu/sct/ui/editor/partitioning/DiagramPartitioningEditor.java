@@ -82,7 +82,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 			IPersistableEditor,
 			IPersistableElement {
 
-	private static final String REGEX_NO_WORD_NO_WHITESPACE = "[^\\w[\\s+_]]";
+	private static final String REGEX_NO_WORD_NO_WHITESPACE = "[^\\w[\\s+]]";
 	protected static final String IS_DEFINITION_SECTION_EXPANDED = "DefinitionSectionIsExpanded";
 	protected static final String FIRST_SASH_CONTROL_WEIGHT = "FirstSashControlWeight";
 	protected static final String SECOND_SASH_CONTROL_WEIGHT = "SecondSashControlWeight";
