@@ -658,18 +658,8 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	}
 
 	protected String getStatechartName() {
-		String statechartName = "";
-		EObject container = getContextObject();
-		if (container != null) {
-			while (container.eContainer() != null) {
-				container = container.eContainer();
-			}
-			if (container instanceof Statechart) {
-				Statechart statechart = (Statechart) container;
-				statechartName = statechart.getName();
-			}
-		}
-		return statechartName;
+		Statechart statechart = EcoreUtil2.getContainerOfType(getContextObject(), Statechart.class);
+		return statechart.getName();
 	}
 
 	protected void observeStatechartName(Text statechartNameLabel) {
