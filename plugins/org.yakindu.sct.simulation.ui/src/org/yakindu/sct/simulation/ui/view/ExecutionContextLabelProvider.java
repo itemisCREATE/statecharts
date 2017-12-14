@@ -87,8 +87,7 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 				}
 				if (((ExecutionSlot) element).getType().getOriginType() instanceof PrimitiveType) {
 					PrimitiveType primitiveType = (PrimitiveType) ((ExecutionSlot) element).getType().getOriginType();
-					if (primitiveType != null
-							&& Boolean.class.getSimpleName().equalsIgnoreCase(primitiveType.getName())) {
+					if (primitiveType != null && value instanceof Boolean) {
 						TreeItem currentItem = (TreeItem) cell.getItem();
 						NativeCellWidgetUtil.addNativeCheckbox(cell, element, value,
 								new TreeEditorDisposeListener(currentItem));
@@ -99,8 +98,6 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 					} else {
 						cell.setText(value.toString());
 					}
-				} else {
-					cell.setText(value.toString());
 				}
 			} else {
 				cell.setText("");
