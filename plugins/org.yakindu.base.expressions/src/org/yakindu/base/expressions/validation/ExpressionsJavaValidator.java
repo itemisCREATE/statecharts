@@ -202,11 +202,11 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 
 	@Check
 	public void checkTypeNotExtendsItself(ComplexType type) {
-		EList<ComplexType> superTypes = type.getSuperTypes();
-		for (ComplexType superType : superTypes) {
+		EList<Type> superTypes = type.getSuperTypes();
+		for (Type superType : superTypes) {
 			if (superType.equals(type)) {
 				error(String.format(ERROR_CYCLE_DETECTED_MSG, type.getName()), type,
-						TypesPackage.Literals.COMPLEX_TYPE__SUPER_TYPES, ERROR_CYCLE_DETECTED_CODE);
+						TypesPackage.Literals.TYPE__SUPER_TYPES, ERROR_CYCLE_DETECTED_CODE);
 			}
 		}
 	}

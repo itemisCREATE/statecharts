@@ -16,12 +16,10 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.yakindu.base.base.provider.NamedElementItemProvider;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
 
@@ -32,7 +30,7 @@ import org.yakindu.base.types.TypesPackage;
  * @generated
  */
 public class PackageItemProvider
-	extends NamedElementItemProvider {
+	extends PackageMemberItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -176,6 +174,11 @@ public class PackageItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.PACKAGE__MEMBER,
+				 TypesFactory.eINSTANCE.createPackage()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PACKAGE__MEMBER,
 				 TypesFactory.eINSTANCE.createType()));
 
 		newChildDescriptors.add
@@ -232,17 +235,6 @@ public class PackageItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.PACKAGE__DOMAIN,
 				 TypesFactory.eINSTANCE.createDomain()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return TypesEditPlugin.INSTANCE;
 	}
 
 }

@@ -351,6 +351,15 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getType_SuperTypes() {
+		return (EReference)typeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDeclaration() {
 		return declarationEClass;
 	}
@@ -552,14 +561,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getPrimitiveType_BaseType() {
-		return (EReference)primitiveTypeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -575,15 +576,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 */
 	public EReference getComplexType_Features() {
 		return (EReference)complexTypeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getComplexType_SuperTypes() {
-		return (EReference)complexTypeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -859,6 +851,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		createEReference(typeEClass, TYPE__CONSTRAINT);
 		createEAttribute(typeEClass, TYPE__ABSTRACT);
 		createEAttribute(typeEClass, TYPE__VISIBLE);
+		createEReference(typeEClass, TYPE__SUPER_TYPES);
 
 		declarationEClass = createEClass(DECLARATION);
 
@@ -892,11 +885,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		createEReference(enumerationTypeEClass, ENUMERATION_TYPE__ENUMERATOR);
 
 		primitiveTypeEClass = createEClass(PRIMITIVE_TYPE);
-		createEReference(primitiveTypeEClass, PRIMITIVE_TYPE__BASE_TYPE);
 
 		complexTypeEClass = createEClass(COMPLEX_TYPE);
 		createEReference(complexTypeEClass, COMPLEX_TYPE__FEATURES);
-		createEReference(complexTypeEClass, COMPLEX_TYPE__SUPER_TYPES);
 
 		enumeratorEClass = createEClass(ENUMERATOR);
 		createEReference(enumeratorEClass, ENUMERATOR__OWNING_ENUMERATION);
@@ -1007,6 +998,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEReference(getType_Constraint(), this.getTypeConstraint(), null, "constraint", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getType_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getType_Visible(), ecorePackage.getEBoolean(), "visible", "true", 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getType_SuperTypes(), this.getType(), null, "superTypes", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(typeEClass, this.getType(), "getOriginType", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -1044,11 +1036,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEReference(getEnumerationType_Enumerator(), this.getEnumerator(), this.getEnumerator_OwningEnumeration(), "enumerator", null, 0, -1, EnumerationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(primitiveTypeEClass, PrimitiveType.class, "PrimitiveType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPrimitiveType_BaseType(), this.getPrimitiveType(), null, "baseType", null, 0, 1, PrimitiveType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(complexTypeEClass, ComplexType.class, "ComplexType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComplexType_Features(), this.getDeclaration(), null, "features", null, 0, -1, ComplexType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComplexType_SuperTypes(), this.getComplexType(), null, "superTypes", null, 0, -1, ComplexType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(complexTypeEClass, this.getDeclaration(), "getAllFeatures", 0, -1, IS_UNIQUE, IS_ORDERED);
 

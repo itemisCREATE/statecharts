@@ -22,7 +22,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
@@ -73,10 +72,10 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		Type result = typeRegistry.get(type);
 		return result;
 	}
-	
+
 	/**
-	 * Returns all direct and indirect super types. Also reflects primitive
-	 * type's base types, type parameter bounds and complex type's super types.
+	 * Returns all direct and indirect super types. Also reflects primitive type's
+	 * base types, type parameter bounds and complex type's super types.
 	 */
 	@Override
 	public List<Type> getSuperTypes(Type type) {
@@ -86,8 +85,9 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	}
 
 	/**
-	 * Returns the list of direct super types for given type. Also reflects primitive
-	 * type's base types, type parameter bounds and complex type's super types.
+	 * Returns the list of direct super types for given type. Also reflects
+	 * primitive type's base types, type parameter bounds and complex type's super
+	 * types.
 	 */
 	protected List<Type> getDirectSuperTypes(Type type) {
 		List<Type> superTypes = new ArrayList<Type>();
@@ -96,17 +96,7 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 				superTypes.add(entry.getValue());
 			}
 		}
-		if (type instanceof PrimitiveType) {
-			PrimitiveType primitiveType = (PrimitiveType) type;
-			PrimitiveType baseType = primitiveType.getBaseType();
-			if (baseType != null) {
-				superTypes.add(baseType);
-			}
-		}
-		if (type instanceof ComplexType) {
-			ComplexType complexType = (ComplexType) type;
-			superTypes.addAll(complexType.getSuperTypes());
-		}
+		superTypes.addAll(type.getSuperTypes());
 		if (type instanceof TypeParameter) {
 			TypeParameter typeParameter = (TypeParameter) type;
 			Type bound = typeParameter.getBound();
@@ -118,7 +108,8 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	}
 
 	/**
-	 * @returns <code>true</code> if superType is a direct or indirect super type of subType.
+	 * @returns <code>true</code> if superType is a direct or indirect super type of
+	 *          subType.
 	 */
 	@Override
 	public boolean isSuperType(Type subtype, Type supertype) {
@@ -133,7 +124,8 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	}
 
 	/**
-	 * Recursively calls itself to create list of all direct and indirect super types of given sub type
+	 * Recursively calls itself to create list of all direct and indirect super
+	 * types of given sub type
 	 */
 	protected void collectSupertypes(Type subType, List<Type> typeHierachy) {
 		if (subType == null)

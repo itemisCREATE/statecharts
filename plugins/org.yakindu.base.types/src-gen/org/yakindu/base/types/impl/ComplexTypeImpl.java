@@ -13,7 +13,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Declaration;
@@ -31,7 +30,6 @@ import org.yakindu.base.types.TypesPackage;
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.ComplexTypeImpl#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.ComplexTypeImpl#getFeatures <em>Features</em>}</li>
- *   <li>{@link org.yakindu.base.types.impl.ComplexTypeImpl#getSuperTypes <em>Super Types</em>}</li>
  * </ul>
  *
  * @generated
@@ -55,15 +53,6 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 	 * @ordered
 	 */
 	protected EList<Declaration> features;
-
-	/**
-	 * The cached value of the '{@link #getSuperTypes() <em>Super Types</em>}' reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getSuperTypes()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ComplexType> superTypes;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -103,17 +92,6 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 			features = new EObjectContainmentEList<Declaration>(Declaration.class, this, TypesPackage.COMPLEX_TYPE__FEATURES);
 		}
 		return features;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<ComplexType> getSuperTypes() {
-		if (superTypes == null) {
-			superTypes = new EObjectResolvingEList<ComplexType>(ComplexType.class, this, TypesPackage.COMPLEX_TYPE__SUPER_TYPES);
-		}
-		return superTypes;
 	}
 
 	/**
@@ -170,8 +148,6 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 				return getTypeParameters();
 			case TypesPackage.COMPLEX_TYPE__FEATURES:
 				return getFeatures();
-			case TypesPackage.COMPLEX_TYPE__SUPER_TYPES:
-				return getSuperTypes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -192,10 +168,6 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 				getFeatures().clear();
 				getFeatures().addAll((Collection<? extends Declaration>)newValue);
 				return;
-			case TypesPackage.COMPLEX_TYPE__SUPER_TYPES:
-				getSuperTypes().clear();
-				getSuperTypes().addAll((Collection<? extends ComplexType>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -213,9 +185,6 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 			case TypesPackage.COMPLEX_TYPE__FEATURES:
 				getFeatures().clear();
 				return;
-			case TypesPackage.COMPLEX_TYPE__SUPER_TYPES:
-				getSuperTypes().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -231,8 +200,6 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 				return typeParameters != null && !typeParameters.isEmpty();
 			case TypesPackage.COMPLEX_TYPE__FEATURES:
 				return features != null && !features.isEmpty();
-			case TypesPackage.COMPLEX_TYPE__SUPER_TYPES:
-				return superTypes != null && !superTypes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
