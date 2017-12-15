@@ -20,12 +20,16 @@ import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.TreeEditor;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TreeItem;
 import org.yakindu.base.types.EnumerationType;
@@ -200,26 +204,34 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 		}
 
 		protected static Button createNativeCheckboxCellWidget(Object element, Composite comp) {
+			Cursor cursor = new Cursor(Display.getDefault(), SWT.CURSOR_HAND);
 			Button button = new Button(comp, SWT.CHECK);
+			button.setCursor(cursor);
 			button.setLayoutData(new GridData(SWT.BEGINNING, SWT.FILL, false, true));
 			Label label = new Label(comp, SWT.BOLD);
+			label.setCursor(cursor);
 			label.setForeground(ColorConstants.gray);
 			label.setText(((ExecutionSlot) element).getValue().toString());
 			label.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-			button.addSelectionListener(new SelectionListener() {
-
+			label.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseUp(MouseEvent e) {	
+					changeLabelText(element, label);
+				}
+			});
+			button.addSelectionListener(new SelectionAdapter() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
-					((ExecutionSlot) element).setValue(!(Boolean) ((ExecutionSlot) element).getValue());
-					label.setText(((ExecutionSlot) element).getValue().toString());
-				}
-
-				@Override
-				public void widgetDefaultSelected(SelectionEvent e) {
+					changeLabelText(element, label);
 				}
 			});
 			restoreSelection(((ExecutionSlot) element).getValue(), button);
 			return button;
+		}
+
+		protected static void changeLabelText(Object element, Label label) {
+			((ExecutionSlot) element).setValue(!(Boolean) ((ExecutionSlot) element).getValue());
+			label.setText(((ExecutionSlot) element).getValue().toString());
 		}
 
 		protected static Composite createEditorComposite(TreeItem currentItem) {
