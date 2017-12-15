@@ -327,7 +327,7 @@ There are several builtin variables which can be used in expressions in generato
 
 Please be advised that neither USER nor HOSTNAME should be used for any security related tasks. Especially the username can easily be spoofed if anyone would want to. 
 
-h4(#codegen_using_properties_and_expressions_in_generator_models_builtin). Overriding variables in a headless build
+h4(#codegen_using_properties_and_expressions_in_generator_models_headless). Overriding variables in a headless build
 
 The values assigned to properties are _default_ values only. That means, you can override them by different values when actually executing a generation model by way of running the "headless code generator":../user-guide/generating_code_headless.html#hdls_headless_code_generation.
 
