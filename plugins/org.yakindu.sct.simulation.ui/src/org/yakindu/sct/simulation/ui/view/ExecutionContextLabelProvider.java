@@ -80,21 +80,20 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 		} else if (element instanceof ExecutionSlot) {
 			Object value = ((ExecutionSlot) element).getValue();
 			if (value != null) {
-				if (((ExecutionSlot) element).getType().getOriginType() instanceof EnumerationType) {
-					EnumerationType enumType = (EnumerationType) ((ExecutionSlot) element).getType().getOriginType();
-					String text = enumType.getEnumerator().get(((Long) value).intValue()).getName();
-					cell.setText(text);
-				}
 				if (((ExecutionSlot) element).getType().getOriginType() instanceof PrimitiveType) {
 					PrimitiveType primitiveType = (PrimitiveType) ((ExecutionSlot) element).getType().getOriginType();
 					if (primitiveType != null && value instanceof Boolean) {
 						TreeItem currentItem = (TreeItem) cell.getItem();
 						NativeCellWidgetUtil.addNativeCheckbox(cell, element, value,
 								new TreeEditorDisposeListener(currentItem));
-
 						// layout cells with checkbox widgets to update positions if tree contents have
 						// changed
 						cell.getControl().getParent().layout();
+					} else if (((ExecutionSlot) element).getType().getOriginType() instanceof EnumerationType) {
+						EnumerationType enumType = (EnumerationType) ((ExecutionSlot) element).getType()
+								.getOriginType();
+						String text = enumType.getEnumerator().get(((Long) value).intValue()).getName();
+						cell.setText(text);
 					} else {
 						cell.setText(value.toString());
 					}
