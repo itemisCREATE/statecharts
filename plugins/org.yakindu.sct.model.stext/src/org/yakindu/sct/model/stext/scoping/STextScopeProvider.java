@@ -79,7 +79,7 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 	
 	public static class ErrorHandlerDelegate<T> implements ErrorHandler<T> {
 
-		private ErrorHandler<T> delegate;
+		protected ErrorHandler<T> delegate;
 
 		public static final Log LOG = LogFactory.getLog(STextScopeProvider.class);
 
@@ -108,10 +108,7 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 			IScope scope = super.getScope(context, reference);
 			return scope;
 		} catch (Throwable t) {
-			// t.printStackTrace();
-			if (t instanceof Error)
 				throw t;
-			return null;
 		} finally {
 			setErrorHandler(originalHandler);
 		}
