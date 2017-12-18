@@ -99,7 +99,7 @@ public abstract class AbstractDebugTargetView extends ViewPart
 		}
 	}
 
-	private void changeTarget(IDebugTarget newTarget) {
+	protected void changeTarget(IDebugTarget newTarget) {
 		if (newTarget == debugTarget) {
 			return;
 		}
