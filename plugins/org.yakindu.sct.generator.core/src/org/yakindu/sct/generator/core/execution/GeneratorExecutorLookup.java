@@ -70,8 +70,8 @@ public class GeneratorExecutorLookup {
 
 			// XXX: avoid resolving the whole resource set, because there might
 			// be models with different domains, we have to ensure that just the models related to the current entry are resolved.
-			EcoreUtil.resolveAll(entry.eResource());
-			EcoreUtil.resolveAll(entry.getElementRef().eResource());
+			EcoreUtil.resolveAll(entry);
+			EcoreUtil.resolveAll(entry.getElementRef());
 			EcoreUtil.resolveAll(((AbstractTypeSystem) typeSystem).getResource());
 		}
 
