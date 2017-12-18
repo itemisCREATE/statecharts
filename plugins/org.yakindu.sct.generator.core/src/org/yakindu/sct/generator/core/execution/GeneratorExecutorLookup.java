@@ -67,7 +67,12 @@ public class GeneratorExecutorLookup {
 		if (typeSystem instanceof AbstractTypeSystem) {
 			ResourceSet set = entry.getElementRef().eResource().getResourceSet();
 			set.getResources().add(((AbstractTypeSystem) typeSystem).getResource());
-			EcoreUtil.resolveAll(set);
+
+			// XXX: avoid resolving the whole resource set, because there might
+			// be models with different domains, we have to ensure that just the models related to the current entry are resolved.
+			EcoreUtil.resolveAll(entry.eResource());
+			EcoreUtil.resolveAll(entry.getElementRef().eResource());
+			EcoreUtil.resolveAll(((AbstractTypeSystem) typeSystem).getResource());
 		}
 
 		return executor;
