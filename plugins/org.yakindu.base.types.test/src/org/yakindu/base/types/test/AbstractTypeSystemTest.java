@@ -118,7 +118,7 @@ public class AbstractTypeSystemTest extends AbstractTypeSystem {
 		primitiveBaseType = createPrimitive(PRIMITIVE_BASE_TYPE);
 		primitiveType = createPrimitive(PRIMITIVE_TYPE);
 		declareType(primitiveType, PRIMITIVE_TYPE);
-		primitiveType.setBaseType(primitiveBaseType);
+		primitiveType.getSuperTypes().add(primitiveBaseType);
 		
 		// ComplexType extends SuperComplexType extends SuperSuperComplexType
 		superSuperComplexType = createComplexType(SUPER_SUPER_COMPLEX_TYPE);

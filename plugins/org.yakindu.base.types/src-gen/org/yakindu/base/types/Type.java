@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.yakindu.base.types.Type#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.yakindu.base.types.Type#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.yakindu.base.types.Type#isVisible <em>Visible</em>}</li>
+ *   <li>{@link org.yakindu.base.types.Type#getSuperTypes <em>Super Types</em>}</li>
  * </ul>
  *
  * @see org.yakindu.base.types.TypesPackage#getType()
@@ -96,6 +97,22 @@ public interface Type extends PackageMember {
 	 * @generated
 	 */
 	void setVisible(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Super Types</b></em>' reference list.
+	 * The list contents are of type {@link org.yakindu.base.types.Type}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Super Types</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Super Types</em>' reference list.
+	 * @see org.yakindu.base.types.TypesPackage#getType_SuperTypes()
+	 * @model
+	 * @generated
+	 */
+	EList<Type> getSuperTypes();
 
 	/**
 	 * <!-- begin-user-doc -->

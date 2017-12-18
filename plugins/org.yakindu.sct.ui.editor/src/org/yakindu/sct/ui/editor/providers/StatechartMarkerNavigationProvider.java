@@ -60,6 +60,7 @@ public class StatechartMarkerNavigationProvider extends AbstractModelMarkerNavig
 
 		EditPart targetEditPart = (EditPart) editPartRegistry.get(view);
 		if (targetEditPart != null) {
+			if(!targetEditPart.isSelectable()) return;
 			DiagramPartitioningUtil.selectElementsInDiagram(editor, Arrays.asList(new EditPart[] { targetEditPart }));
 		}
 

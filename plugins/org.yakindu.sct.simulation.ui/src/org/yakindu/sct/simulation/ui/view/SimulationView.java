@@ -250,7 +250,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		}
 		Display.getDefault().asyncExec(() -> {
 			if (debugEvent.getSource() != null) {
-				sessionDropdown.update(debugEvent.getSource(), null);
 				sessionDropdown.refresh();
 				targets.removeIf(dt -> dt.isTerminated());
 			}
@@ -298,11 +297,8 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 					targets.add(debugTarget);
 					sessionDropdown.setInput(targets);
 					sessionDropdown.setSelection(new StructuredSelection(debugTarget), true);
-					sessionDropdown.refresh();
-				} else {
-					sessionDropdown.update(debugTarget, null);
-					sessionDropdown.refresh();
 				}
+				sessionDropdown.refresh();
 			}
 		});
 	}
