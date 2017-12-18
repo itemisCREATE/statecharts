@@ -48,7 +48,6 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 		binder.bind(IDefaultResourceDescriptionStrategy.class).to(SCTResourceDescriptionStrategy.class);
 		// https://github.com/Yakindu/statecharts/issues/1199
 		binder.bind(IReferableElementsUnloader.class).to(IReferableElementsUnloader.NullUnloader.class);
-
 	}
 
 	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
