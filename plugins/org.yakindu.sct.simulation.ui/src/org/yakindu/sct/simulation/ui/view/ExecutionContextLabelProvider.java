@@ -53,9 +53,11 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 
 	private final int index;
 	private static Map<String, Button> viewerCells = Maps.newHashMap();
+	private boolean isReadOnly;
 
-	public ExecutionContextLabelProvider(int index) {
+	public ExecutionContextLabelProvider(int index, boolean isReadOnly) {
 		this.index = index;
+		this.isReadOnly = isReadOnly;
 	}
 
 	public void update(ViewerCell cell) {
@@ -84,28 +86,52 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 		} else if (element instanceof ExecutionSlot) {
 			Object value = ((ExecutionSlot) element).getValue();
 			if (value != null) {
-				if (((ExecutionSlot) element).getType().getOriginType() instanceof PrimitiveType) {
+				if(isReadOnly) {
+					cell.setText(getCellTextValue(element, value));
+				}
+				else if (isPrimitiveType(element)) {
 					PrimitiveType primitiveType = (PrimitiveType) ((ExecutionSlot) element).getType().getOriginType();
-					if (primitiveType != null && value instanceof Boolean) {
+					if (isBooleanType(value, primitiveType)) {
 						TreeItem currentItem = (TreeItem) cell.getItem();
 						NativeCellWidgetUtil.addNativeCheckbox(cell, element, value,
 								new TreeEditorDisposeListener(currentItem));
 						// layout cells with checkbox widgets to update positions if tree contents have
 						// changed
 						cell.getControl().getParent().layout();
-					} else if (((ExecutionSlot) element).getType().getOriginType() instanceof EnumerationType) {
-						EnumerationType enumType = (EnumerationType) ((ExecutionSlot) element).getType()
-								.getOriginType();
-						String text = enumType.getEnumerator().get(((Long) value).intValue()).getName();
-						cell.setText(text);
 					} else {
-						cell.setText(value.toString());
+						cell.setText(getCellTextValue(element, value));
 					}
-				}
+				} 
 			} else {
 				cell.setText("");
 			}
 		}
+	}
+	
+	protected String getCellTextValue(Object element, Object value) {
+		if(isEnumType(element)) {
+			return getEnumName(element, value);
+		} 
+		return value.toString();
+	}
+
+	protected boolean isBooleanType(Object value, PrimitiveType primitiveType) {
+		return primitiveType != null && value instanceof Boolean;
+	}
+
+	protected boolean isPrimitiveType(Object element) {
+		return ((ExecutionSlot) element).getType().getOriginType() instanceof PrimitiveType;
+	}
+
+	protected String getEnumName(Object element, Object value) {
+		EnumerationType enumType = (EnumerationType) ((ExecutionSlot) element).getType()
+				.getOriginType();
+		String text = enumType.getEnumerator().get(((Long) value).intValue()).getName();
+		return text;
+	}
+
+	protected boolean isEnumType(Object element) {
+		return ((ExecutionSlot) element).getType().getOriginType() instanceof EnumerationType;
 	}
 
 	private void updateNameCell(ViewerCell cell) {
@@ -191,7 +217,8 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 				TreeEditorDisposeListener listener) {
 
 			TreeItem currentItem = (TreeItem) cell.getItem();
-			String cellKey = ((ExecutionSlot) element).getName();
+			ExecutionSlot execSlot = (ExecutionSlot) element;
+			String cellKey = ((CompositeSlot) execSlot.eContainer()).getName() + "." + execSlot.getName();
 			if (viewerCells.get(cellKey) == null || viewerCells.get(cellKey).isDisposed()
 					|| (viewerCells.get(cellKey).getSelection() != ((Boolean) value).booleanValue())) {
 				manageEditorDisposal(currentItem, listener);
@@ -215,7 +242,7 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 			label.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 			label.addMouseListener(new MouseAdapter() {
 				@Override
-				public void mouseUp(MouseEvent e) {	
+				public void mouseUp(MouseEvent e) {
 					changeLabelText(element, label);
 				}
 			});

@@ -57,12 +57,12 @@ public class ExecutionContextViewerFactory {
 		TreeViewerColumn nameColumn = new TreeViewerColumn(viewer, SWT.NONE);
 		nameColumn.getColumn().setText("Name");
 		nameColumn.getColumn().setResizable(true);
-		nameColumn.setLabelProvider(new ExecutionContextLabelProvider(0));
+		nameColumn.setLabelProvider(new ExecutionContextLabelProvider(0, readOnly));
 
 		TreeViewerColumn valueColumn = new TreeViewerColumn(viewer, SWT.NONE);
 		valueColumn.getColumn().setText("Value");
 		valueColumn.getColumn().setResizable(false);
-		valueColumn.setLabelProvider(new ExecutionContextLabelProvider(1));
+		valueColumn.setLabelProvider(new ExecutionContextLabelProvider(1, readOnly));
 
 		layout.setColumnData(nameColumn.getColumn(), new ColumnWeightData(NAME_COL_WIDTH_RATIO, NAME_COL_MIN_WIDTH));
 		layout.setColumnData(valueColumn.getColumn(), new ColumnWeightData(VALUE_COL_WIDTH_RATIO, VALUE_COL_MIN_WIDTH));
