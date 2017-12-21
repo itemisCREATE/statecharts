@@ -18,6 +18,9 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
+import org.yakindu.sct.model.stext.stext.ImportScope
+import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.stext.InternalScope
 
 /*
  * To restore the event queue for in events, revert commit 235659d
@@ -121,56 +124,66 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 		«ENDFOR»
 		'''
 	}
-	
-	def generateInterfaceDispatchFunction(ExecutionFlow it, Scope s) {
+
+	def dispatch generateInterfaceDispatchFunction(ExecutionFlow it, ImportScope s) {}
+
+	def dispatch generateInterfaceDispatchFunction(ExecutionFlow it, Scope s) {
 		'''
-		void «module»::«s.interfaceName»::dispatch_event(SctEvent * event)
-		{
-			switch(event->name)
-			{
-				«FOR e: s.declarations.filter(EventDefinition).filter[direction == Direction::LOCAL]»
-					case «e.eventEnumMemberName»:
+			«val localEvents = s.declarations.filter(EventDefinition).filter[direction == Direction::LOCAL]»
+			«IF localEvents.size > 0»
+				void «module»::«s.interfaceName»::dispatch_event(SctEvent * event)
+				{
+					switch(event->name)
 					{
-						«IF e.hasValue»
-						«e.eventClassName» * e = dynamic_cast<«e.eventClassName»*>(event);
-						if(e != 0) {
-							internal_«e.asRaiser»(e->value);
-						}
-						«ELSE»
-						internal_«e.asRaiser»();
-						«ENDIF»
-						break;
-					}
-				«ENDFOR»
-				default:
-					break;
-			}
-		}
-		'''
-	}
-	
-	def generateInternalDispatchEventFunction(ExecutionFlow it) {
-		'''
-		void «module»::dispatch_event(SctEvent * event)
-		{
-			if(event == 0) {
-				return;
-			}
-			switch(event->name)
-			{
-				«FOR s : scopes.filter(StatechartScope)»
-					«FOR e : s.declarations.filter(EventDefinition).filter[direction == Direction::LOCAL]»
-						case «e.eventEnumMemberName»:
-					«ENDFOR»
-					{
-							«s.instance».dispatch_event(event);
+						«FOR e : localEvents»
+							case «e.eventEnumMemberName»:
+							{
+								«IF e.hasValue»
+									«e.eventClassName» * e = dynamic_cast<«e.eventClassName»*>(event);
+									if(e != 0) {
+										internal_«e.asRaiser»(e->value);
+									}
+								«ELSE»
+									internal_«e.asRaiser»();
+								«ENDIF»
+								break;
+							}
+						«ENDFOR»
+						default:
 							break;
+						}
 					}
-				«ENDFOR»
-				default:
-					break;
+				«ENDIF»
+			'''
+	}
+
+	def generateInternalDispatchEventFunction(ExecutionFlow it) {
+		'''	
+			void «module»::dispatch_event(SctEvent * event)
+			{
+				if(event == 0) {
+					return;
+				}
+				switch(event->name)
+				{
+					«FOR s : scopes.filter(StatechartScope)»
+						«IF !(s instanceof ImportScope)»
+							«val localEvents = s.declarations.filter(EventDefinition).filter[direction == Direction.LOCAL]»
+							«IF localEvents.size > 0»
+								«FOR e : localEvents»
+									case «e.eventEnumMemberName»:
+								«ENDFOR»
+								{
+									«s.instance».dispatch_event(event);
+									break;
+								}
+							«ENDIF»
+						«ENDIF»
+					«ENDFOR»
+					default:
+						break;
+				}
 			}
-		}
 		'''
 	}
 }
