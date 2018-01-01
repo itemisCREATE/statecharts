@@ -55,4 +55,13 @@ public interface STextValidationMessages {
 	public static final String IMPORT_NOT_RESOLVED_MSG = "Import '%s' cannot be resolved.";
 	public static final String IMPORT_NOT_RESOLVED_CODE = "ImportNotResolved";
 	public static final String CONTRADICTORY_ANNOTATIONS = "Some annotations (%s) have contradictory effects.";
+
+	public static final String SMELL_SEMANTIC_EQUIVALENT_TRIGGERS = "%s and %s are semantically equal.";
+	public static final String SMELL_IDENTIC_TRIGGERS = "Multiple %s triggers.";
+	public static final String SMELL_IDENTIC_TRIGGERS_GENERIC = "Some events are used at least twice.";
+	public static final String SMELL_CONTRADICTING_EVENTS = "The two trigger %s and %s are contradicting each other.";
+	public static final String SMELL_INTERFACE_NAMES_MUST_BE_UNIQUE = "The interface name %s is used at least twice.";
+	public static final String SMELL_BAD_EVENT_NAMES = "Some events in the interface [%s] use the internal names %s";
+	public static final String SMELL_IN_INTERFACE_DEFINED_EVENTS_SHOULD_BE_USED = "The events %s were defined in interfaces, but not used as triggers for transitions."
+			+ "\n(They still meight be used inside states - that's not covered by this validation)";
 }

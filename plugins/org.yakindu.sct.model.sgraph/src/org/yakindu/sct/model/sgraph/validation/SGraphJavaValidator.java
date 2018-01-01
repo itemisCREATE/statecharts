@@ -11,6 +11,7 @@
 package org.yakindu.sct.model.sgraph.validation;
 
 import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.areOrthogonal;
+
 import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.collectAncestors;
 import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.commonAncestor;
 import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.findCommonAncestor;
@@ -20,11 +21,14 @@ import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.targets;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
@@ -38,11 +42,13 @@ import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
 
+// import org.yakindu.sct.model.stext.stext.impl.ReactionEffectImpl;
 import com.google.inject.Inject;
 
 /**
@@ -84,8 +90,16 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_TRANSITION_ORTHOGONAL = "Source and target of a transition must not be located in orthogonal regions!";
 	public static final String ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER = "Outgoing transitions from entries can only target to sibling or inner states.";
 	public static final String ISSUE_STATECHART_NAME_NO_IDENTIFIER = "%s is not a valid identifier!";
+	public static final String SMELL_TWO_OUTGOING_TRANSITIONS_OF_ONE_STATE_HAVE_THE_SAME_EFFECT = "Two outgoing transitions have the same effect.";
+	public static final String SMELL_TWO_INCOMING_TRANSITIONS_OF_ONE_STATE_HAVE_THE_SAME_EFFECT = "Two incoming transitions have the same effect.";
+	public static final String SMELL_MULTIPLE_UNAMED_ENTRIES_PER_REGION = "There are multiple, unamed entry nodes in this region.";
+	public static final String SMELL_MORE_THAN_ONE_FINAL_STATE_PER_REGION = "This region contains %d final states - at most one is recommended.";
+	public static final String SMELL_NAMED_EXIT_NODE_NOT_USED = "A named exit node should be used in an outgoing transition of the composite state.";
+	public static final String SMELL_NAMED_ENTRY_NODE_NOT_USED = "A named entry node should be used in an incoming transition of the composite state.";
+	public static final String SMELL_COMPOSITE_STATE_WITH_ONE_REGION_CONTAINS_EXIT_AND_FINAL_STATES = "This region contains both final state and exit node.";
+	public static final String SMELL_NON_FINAL_STATES_SHOULD_NOT_BE_SINKS = "This state is effectively a sink: Neither this state nor one of its parents states contain an outgoing transition.";
+	public static final String SMELL_TRANSITIONS_WITH_SAME_TRIGGER_EXIST_IN_HIERARCHY = "Transition with same trigger exist in hierarchy (only in upper direction)";
 
-	
 	@Check(CheckType.FAST)
 	public void vertexNotReachable(final Vertex vertex) {
 		if (!(vertex instanceof Entry)) {
@@ -374,11 +388,12 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	@Check
 	public void checkStatechartNameIsIdentifier(Statechart statechart) {
 		if (!isValidJavaIdentifier(statechart.getName())) {
-			error(String.format(ISSUE_STATECHART_NAME_NO_IDENTIFIER, statechart.getName()), statechart, BasePackage.Literals.NAMED_ELEMENT__NAME, -1);
+			error(String.format(ISSUE_STATECHART_NAME_NO_IDENTIFIER, statechart.getName()), statechart,
+					BasePackage.Literals.NAMED_ELEMENT__NAME, -1);
 
 		}
 	}
-	
+
 	protected boolean isValidJavaIdentifier(String s) {
 		if (s == null || s.length() == 0) {
 			return false;
@@ -406,4 +421,231 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public void register(EValidatorRegistrar registrar) {
 		// Do not register because this validator is only a composite #398987
 	}
+
+	// SGraph smells for Transition
+
+	@Check()
+	public void checkAtLeastTwoOutgoingTransitionsHaveIdenticalEffects(org.yakindu.sct.model.sgraph.State state) {
+
+		boolean showWarning = false;
+
+		for (Transition t1 : state.getOutgoingTransitions()) {
+			for (Transition t2 : state.getOutgoingTransitions()) {
+				if (t1 == t2) {
+					continue; // both references point to the same transition
+				}
+				if (t1.getEffect() != null && t2.getEffect() != null
+						&& EcoreUtil.equals(t1.getEffect(), t2.getEffect())) {
+					showWarning = true;
+				}
+			}
+		}
+		if (showWarning) {
+			warning(SMELL_TWO_OUTGOING_TRANSITIONS_OF_ONE_STATE_HAVE_THE_SAME_EFFECT, state,
+					SGraphPackage.Literals.STATE__SIMPLE, -1);
+		}
+
+	}
+
+	@Check()
+	public void checkAtLeastTwoIncomingTransitionsHaveIdenticalEffects(org.yakindu.sct.model.sgraph.State state) {
+		boolean showWarning = false;
+		for (Transition t1 : state.getIncomingTransitions()) {
+			for (Transition t2 : state.getIncomingTransitions()) {
+				if (t1 == t2) {
+					continue;
+				}
+				if (EcoreUtil.equals(t1.getEffect(), t2.getEffect())) {
+					showWarning = true;
+				}
+			}
+		}
+		if (showWarning) {
+			warning(SMELL_TWO_INCOMING_TRANSITIONS_OF_ONE_STATE_HAVE_THE_SAME_EFFECT, state,
+					SGraphPackage.Literals.STATE__SIMPLE, -1);
+		}
+	}
+
+	@Check
+	public void checkARegionHasMoreThanOneUnamedEntry(Region region) {
+		if (region.getVertices().stream().filter(Entry.class::isInstance).map(Entry.class::cast)
+				.filter(v -> v.getKind() == EntryKind.INITIAL && v.getName().equals("")).count() > 1) {
+			warning(SMELL_MULTIPLE_UNAMED_ENTRIES_PER_REGION, region, SGraphPackage.Literals.REGION__VERTICES, -1);
+		}
+	}
+
+	@Check
+	public void checkARegionHasMoreThanOneFinalState(Region region) {
+		long numberOfFinalStates = region.getVertices().stream().filter(FinalState.class::isInstance).count();
+		if (numberOfFinalStates > 1) {
+			warning(String.format(SMELL_MORE_THAN_ONE_FINAL_STATE_PER_REGION, numberOfFinalStates), region,
+					SGraphPackage.Literals.REGION__VERTICES, -1);
+		}
+	}
+
+	private static CompositeElement getParent(Vertex v) {
+		return v.getParentRegion().getComposite();
+	}
+	
+	/*
+	@Check
+	public void checkNamedFinalStateIsUsed(Exit exitNode) {
+
+		CompositeElement comp = getParent(exitNode);
+		if (!(comp instanceof org.yakindu.sct.model.sgraph.State)) {
+			return; // this case should never ever happen ...
+		}
+
+		org.yakindu.sct.model.sgraph.State compositeState = (org.yakindu.sct.model.sgraph.State) comp;
+
+		if (compositeState.getOutgoingTransitions().stream()
+				.filter(t -> t.getSpecification().contains(exitNode.getName())).count() == 0) {
+			warning(SMELL_NAMED_EXIT_NODE_NOT_USED, exitNode, null, // TODO: Wozu ist das genau gut?
+					-1);
+		}
+	}
+	*/
+
+	/*
+	@Check
+	public void checkNamedEntryIsUsed(Entry entry) {
+		// This check applies to named entry nodes only
+		if (entry.getName().equals("")) {
+			return;
+		}
+
+		CompositeElement comp = getParent(entry);
+		if (!(comp instanceof org.yakindu.sct.model.sgraph.State)) {
+			// might happen, if the main entry node is named (of course this is invalid, but
+			// that error shouldn't trigger this check)
+			return;
+		}
+
+		org.yakindu.sct.model.sgraph.State compositeState = (org.yakindu.sct.model.sgraph.State) comp;
+
+		if (compositeState.getIncomingTransitions().stream().filter(t -> t.getSpecification().contains(entry.getName()))
+				.count() == 0) {
+			warning(SMELL_NAMED_ENTRY_NODE_NOT_USED, entry, null, // TODO: Wozu ist das genau gut?
+					-1);
+		}
+	}
+	*/
+
+	@Check
+	public void checkAOneRegionCompositeStateMustNotHaveExitNodesAndFinalStates(Region region) {
+		// if the current region is not contained inside a state (aka composite state), then return.
+		if (!(region.getComposite() instanceof org.yakindu.sct.model.sgraph.State)) {
+			return;
+		}
+		org.yakindu.sct.model.sgraph.State compositeState = (org.yakindu.sct.model.sgraph.State) region.getComposite();
+		assert compositeState.isComposite();
+		long numberOfFinalStates = region.getVertices().stream().filter(FinalState.class::isInstance).count();
+		long numbreOfExitNodes = region.getVertices().stream().filter(Exit.class::isInstance).count();
+
+		if (numberOfFinalStates > 0 && numbreOfExitNodes > 0) {
+			warning(SMELL_COMPOSITE_STATE_WITH_ONE_REGION_CONTAINS_EXIT_AND_FINAL_STATES, region,
+					SGraphPackage.Literals.REGION__VERTICES, -1);
+		}
+	}
+
+	@Check
+	public void checkNoNonFinalStateIsSink(org.yakindu.sct.model.sgraph.State state) {
+		// at least one state in the parent hierarchy must have one outgoing transition
+
+		// State is automatically a non FinalState by class hierarchy
+		if (!stateOrContainingStateHasAtLeastOneOutgoingTransition(state)) {
+			warning(SMELL_NON_FINAL_STATES_SHOULD_NOT_BE_SINKS, state, SGraphPackage.Literals.STATE__SIMPLE, -1);
+		}
+
+	}
+
+	private boolean stateOrContainingStateHasAtLeastOneOutgoingTransition(org.yakindu.sct.model.sgraph.State state) {
+		// is the state itself contains an outgoing transition we're done.
+		if (state.getOutgoingTransitions().size() > 0) {
+			return true;
+		}
+
+		// get the parent, if there's one, and perform the same check,
+		CompositeElement comp = state.getParentRegion().getComposite();
+		if (comp instanceof org.yakindu.sct.model.sgraph.State) {
+			return stateOrContainingStateHasAtLeastOneOutgoingTransition((org.yakindu.sct.model.sgraph.State) comp);
+		}
+
+		// no outgoing transition and no parent => check failed.
+		return false;
+	}
+
+	@Check
+	public void transitionsWithSameTriggerExistsInHierarchy(org.yakindu.sct.model.sgraph.State state) {
+		if (transitionsWithSameTriggerExistsInHierarchyHelper(state)) {
+			warning(SMELL_TRANSITIONS_WITH_SAME_TRIGGER_EXIST_IN_HIERARCHY,
+					state,
+					SGraphPackage.Literals.STATE__COMPOSITE,
+					-1);
+		};
+	}
+
+	private boolean transitionsWithSameTriggerExistsInHierarchyHelper(org.yakindu.sct.model.sgraph.State state) {
+		List<Transition> allTransitions = getAllTransitionInHierarchy(state);
+		List<Transition> localTransitions = state.getOutgoingTransitions();
+		
+		for (Transition lt: localTransitions) {
+			for (Transition at: allTransitions) {
+				if (lt == at) {
+					// necessary, because getAllTransitionsInHierarchy returns also the outgoing transitions of the state itself
+					continue;
+				}
+				
+				if(EcoreUtil.equals(lt.getTrigger(), at.getTrigger())) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public static List<Transition> getAllTransitionInHierarchy(org.yakindu.sct.model.sgraph.State state) {
+		List<Transition> tmp = new ArrayList<>();
+		// tmp.addAll(getOutgoingTransitionsForAllChildren(state));
+		tmp.addAll(state.getOutgoingTransitions());
+		
+		// start with parent: Otherwise the outgoing transition of the current state will be included twice
+		CompositeElement comp = getParent(state);
+		if (comp instanceof org.yakindu.sct.model.sgraph.State) {
+			tmp.addAll( getOutgoingTransitionsForAllParents((org.yakindu.sct.model.sgraph.State) comp ));
+		}
+		
+		return tmp;		
+	}
+
+	private static List<Transition> getOutgoingTransitionsForAllParents(org.yakindu.sct.model.sgraph.State state){
+		CompositeElement comp = getParent(state);
+		List<Transition> tmp = new LinkedList<>();
+		tmp.addAll(state.getOutgoingTransitions());
+		if (comp instanceof org.yakindu.sct.model.sgraph.State) {
+			tmp.addAll(getOutgoingTransitionsForAllParents((org.yakindu.sct.model.sgraph.State) comp));
+		}		
+		return tmp;		
+	}
+	
+	/*
+	private static List<Transition> getOutgoingTransitionsForAllChildren(org.yakindu.sct.model.sgraph.State state) {
+		if (!state.isComposite()) {
+			return state.getOutgoingTransitions();
+		}
+		// we can now safely assume, that it's composite
+		List<Transition> tmp = new LinkedList<>();
+		tmp.addAll(state.getOutgoingTransitions());
+		for (Region region : state.getRegions()) {
+			List<org.yakindu.sct.model.sgraph.State> statesInRegion = region.getVertices().stream()
+					.filter(org.yakindu.sct.model.sgraph.State.class::isInstance).map(v -> (org.yakindu.sct.model.sgraph.State) v)
+					.collect(Collectors.toList());
+
+			for (org.yakindu.sct.model.sgraph.State r_state : statesInRegion) {
+				tmp.addAll(getOutgoingTransitionsForAllChildren(r_state));
+			}
+		}
+		return tmp;
+	}
+	*/
 }
