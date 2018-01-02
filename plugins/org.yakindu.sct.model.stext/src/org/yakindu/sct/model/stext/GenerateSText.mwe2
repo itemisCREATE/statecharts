@@ -36,7 +36,6 @@ Workflow {
 	component = Generator {
 		pathRtProject = runtimeProject
 		pathUiProject = "${runtimeProject}.ui"
-//		pathTestProject = "../../test-plugins/${projectName}.test"
 		projectNameRt = projectName
 		projectNameUi = "${projectName}.ui"
 		language = {
@@ -48,14 +47,6 @@ Workflow {
 				xmlVersion = "1.0"
 			}
 
-//			// generates Java API for the generated EPackages 
-//			fragment = ecore.EcoreGeneratorFragment {
-//				generateEdit = true
-//				genModel = "model/SText.genmodel"
-//				emfRuntimeVersion = "2.8"
-//				xmiModelDirectory = "${runtimeProject}/model"
-//			}
-
 			// the serialization component
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 
@@ -66,33 +57,17 @@ Workflow {
 
 			// The antlr parser generator fragment.
 			fragment = parser.antlr.XtextAntlrGeneratorFragment {
-			//  options = {
-			//		backtrack = true
-			//	}
 			}
 			
 			// java-based API for validation 
 			fragment = validation.JavaValidatorFragment {
-				composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
-				composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
-				// registerForImportedPackages = true
 			}
-
-			// scoping and exporting API
-			// fragment = scoping.ImportURIScopingFragment {}
-			// fragment = exporting.SimpleNamesFragment {}
 
 			// scoping and exporting API 
 			fragment = scoping.ImportNamespacesScopingFragment {}
 			fragment = exporting.QualifiedNamesFragment {}
 			fragment = builder.BuilderIntegrationFragment {}
 
-			// generator API
-			//fragment = generator.GeneratorFragment {
-			//	generateMwe = true
-			//	generateJavaMain = true
-			//}
-			
 			// formatter API 
 			fragment = formatting.FormatterFragment {}
 
