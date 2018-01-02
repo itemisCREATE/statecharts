@@ -404,6 +404,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 				if (Notification.SET == notification.getEventType()) {
 					Object feature = notification.getFeature();
 					if (feature != null && feature.equals(BasePackage.Literals.NAMED_ELEMENT__NAME)) {
+						initializeTitle(getDiagram());
 						viewer.refresh();
 					}
 				}
