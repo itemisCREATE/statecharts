@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.core.listener.DiagramEventBroker;
 import org.eclipse.gmf.runtime.diagram.core.listener.NotificationListener;
@@ -27,7 +28,6 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.ui.IEditorPart;
 import org.yakindu.base.gmf.runtime.decorators.AbstractDecoratorProvider;
 import org.yakindu.base.gmf.runtime.decorators.BaseDecorator;
-import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
@@ -67,26 +67,25 @@ public abstract class AbstractPriorityDecorationProvider extends AbstractDecorat
 
 	public abstract static class AbstractPriorityDecorator extends BaseDecorator {
 
-
 		public abstract int getPriority(IGraphicalEditPart editPart);
 
 		public abstract boolean needsDecoration(IGraphicalEditPart editPart);
 
 		public abstract void createDecorators(IGraphicalEditPart editPart);
 
-		private int featureID;
-		
 		protected EObject owningElement;
 
-		public AbstractPriorityDecorator(IDecoratorTarget decoratorTarget, int featureID) {
+		private EReference owningReference;
+
+		public AbstractPriorityDecorator(IDecoratorTarget decoratorTarget, EReference owningReference) {
 			super(decoratorTarget);
-			this.featureID = featureID;
+			this.owningReference = owningReference;
 		}
 
 		protected NotificationListener prioChangedListener = new NotificationListener() {
 
 			public void notifyChanged(Notification notification) {
-				if (notification.getFeatureID(Vertex.class) == featureID)
+				if (notification.getFeature() == owningReference)
 					refresh();
 			}
 		};

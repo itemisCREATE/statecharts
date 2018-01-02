@@ -53,12 +53,11 @@ public class TransitionPriorityDecorationProvider extends AbstractPriorityDecora
 	public static class TransitionPriorityDecorator extends AbstractPriorityDecorator {
 
 		public TransitionPriorityDecorator(IDecoratorTarget decoratorTarget) {
-			super(decoratorTarget, SGraphPackage.VERTEX__OUTGOING_TRANSITIONS);
+			super(decoratorTarget, SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS);
 		}
 
 		@Override
 		public void activate() {
-			super.activate();
 			if (!(semanticElement instanceof Transition)
 					|| !(((Transition) semanticElement).eContainer() instanceof Vertex)) {
 				return;
@@ -66,6 +65,7 @@ public class TransitionPriorityDecorationProvider extends AbstractPriorityDecora
 			if (((Transition) semanticElement).eContainer() != null) {
 				owningElement = (Vertex) ((Transition) semanticElement).eContainer();
 			}
+			super.activate();
 		}
 
 		@Override

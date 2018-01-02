@@ -53,18 +53,18 @@ public class RegionPriorityDecorationProvider extends AbstractPriorityDecoration
 	public static class RegionPriorityDecorator extends AbstractPriorityDecorator {
 
 		public RegionPriorityDecorator(IDecoratorTarget decoratorTarget) {
-			super(decoratorTarget, SGraphPackage.COMPOSITE_ELEMENT__REGIONS);
+			super(decoratorTarget, SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS);
 		}
 
 		@Override
 		public void activate() {
-			super.activate();
 			if (!(semanticElement instanceof Region)) {
 				return;
 			}
 			if (semanticElement.eContainer() != null) {
 				owningElement = semanticElement.eContainer();
 			}
+			super.activate();
 		}
 
 		@Override
