@@ -18,6 +18,9 @@ import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -62,6 +65,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.XMLMemento;
 import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.xtext.util.Arrays;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -98,6 +102,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	private SashForm sash;
 
 	private static IMemento memento;
+	private Adapter breadcrumSynchronizer;
 
 	protected abstract void createTextEditor(Composite parent);
 
@@ -237,6 +242,10 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 
 	protected void initializeTitle(IDiagramEditorInput input) {
 		Diagram diagram = input.getDiagram();
+		initializeTitle(diagram);
+	}
+
+	private void initializeTitle(Diagram diagram) {
 		EObject element = diagram.getElement();
 		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(
 				new SGraphItemProviderAdapterFactory());
@@ -263,7 +272,9 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 			viewer.addSelectionChangedListener(this);
 			viewer.setContentProvider(new BreadcrumbViewerContentProvider());
 			viewer.setLabelProvider(new BreadcrumbViewerLabelProvider());
-			viewer.setInput(DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram()));
+			List<Diagram> diagramContainerHierachy = DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram());
+			initBreadcrumbSynchronizer(diagramContainerHierachy);
+			viewer.setInput(diagramContainerHierachy);
 		}
 		parent.pack(true);
 	}
@@ -282,6 +293,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	@Override
 	public void dispose() {
 		closeSubdiagramEditors();
+		removeBreadcrumbSynchronizer(DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram()));
 		super.dispose();
 	}
 
@@ -371,6 +383,39 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 		}
 	}
 
+	protected void initBreadcrumbSynchronizer(List<Diagram> diagramContainerHierachy) {
+		breadcrumSynchronizer = createBreadcrumbSynchronizer();
+		for (Diagram diagram : diagramContainerHierachy) {
+			diagram.getElement().eAdapters().add(breadcrumSynchronizer);
+		}
+	}
+	protected void removeBreadcrumbSynchronizer(List<Diagram> diagramContainerHierachy) {
+		for (Diagram diagram2 : diagramContainerHierachy) {
+			diagram2.getElement().eAdapters().remove(breadcrumSynchronizer);
+		}
+		breadcrumSynchronizer = null;
+	}
+
+	protected AdapterImpl createBreadcrumbSynchronizer() {
+		return new AdapterImpl() {
+
+			@Override
+			public void notifyChanged(Notification notification) {
+				if (Notification.SET == notification.getEventType()) {
+					Object feature = notification.getFeature();
+					if (feature != null && feature.equals(BasePackage.Literals.NAMED_ELEMENT__NAME)) {
+						viewer.refresh();
+					}
+				}
+			}
+
+			@Override
+			public boolean isAdapterForType(Object type) {
+				return type instanceof IEditingDomainProvider;
+			}
+		};
+	}
+
 	@SuppressWarnings("unchecked")
 	public static final class BreadcrumbViewerContentProvider implements ITreePathContentProvider {
 
@@ -407,5 +452,4 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 		}
 
 	}
-
 }
