@@ -102,7 +102,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	private SashForm sash;
 
 	private static IMemento memento;
-	private Adapter breadcrumSynchronizer;
+	private Adapter breadcrumbSynchronizer;
 
 	protected abstract void createTextEditor(Composite parent);
 
@@ -384,16 +384,16 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	}
 
 	protected void initBreadcrumbSynchronizer(List<Diagram> diagramContainerHierachy) {
-		breadcrumSynchronizer = createBreadcrumbSynchronizer();
+		breadcrumbSynchronizer = createBreadcrumbSynchronizer();
 		for (Diagram diagram : diagramContainerHierachy) {
-			diagram.getElement().eAdapters().add(breadcrumSynchronizer);
+			diagram.getElement().eAdapters().add(breadcrumbSynchronizer);
 		}
 	}
 	protected void removeBreadcrumbSynchronizer(List<Diagram> diagramContainerHierachy) {
 		for (Diagram diagram2 : diagramContainerHierachy) {
-			diagram2.getElement().eAdapters().remove(breadcrumSynchronizer);
+			diagram2.getElement().eAdapters().remove(breadcrumbSynchronizer);
 		}
-		breadcrumSynchronizer = null;
+		breadcrumbSynchronizer = null;
 	}
 
 	protected AdapterImpl createBreadcrumbSynchronizer() {
