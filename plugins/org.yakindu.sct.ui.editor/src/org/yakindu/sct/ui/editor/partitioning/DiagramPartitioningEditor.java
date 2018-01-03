@@ -245,7 +245,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 		initializeTitle(diagram);
 	}
 
-	private void initializeTitle(Diagram diagram) {
+	protected void initializeTitle(Diagram diagram) {
 		EObject element = diagram.getElement();
 		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(
 				new SGraphItemProviderAdapterFactory());
@@ -359,6 +359,25 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 		}
 	}
 
+	private final class BreadcrumbSynchronizer extends AdapterImpl {
+
+		@Override
+		public void notifyChanged(Notification notification) {
+			if (Notification.SET == notification.getEventType()) {
+				Object feature = notification.getFeature();
+				if (feature != null && feature.equals(BasePackage.Literals.NAMED_ELEMENT__NAME)) {
+					viewer.refresh();
+					if (getDiagram().getElement() instanceof State)
+						initializeTitle(getDiagram());
+				}
+			}
+		}
+		@Override
+		 public boolean isAdapterForType(Object type) {
+			return type instanceof BreadcrumbSynchronizer;
+		 }
+	}
+
 	public static class FilteringDiagramContextMenuProvider extends DiagramContextMenuProvider {
 		// Default context menu items that should be suppressed
 		protected String[] exclude = new String[]{"addNoteLinkAction", "properties",
@@ -396,26 +415,8 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 		breadcrumbSynchronizer = null;
 	}
 
-	protected AdapterImpl createBreadcrumbSynchronizer() {
-		return new AdapterImpl() {
-
-			@Override
-			public void notifyChanged(Notification notification) {
-				if (Notification.SET == notification.getEventType()) {
-					Object feature = notification.getFeature();
-					if (feature != null && feature.equals(BasePackage.Literals.NAMED_ELEMENT__NAME)) {
-						viewer.refresh();
-						if(getDiagram().getElement() instanceof State) 
-							initializeTitle(getDiagram());
-					}
-				}
-			}
-
-			@Override
-			public boolean isAdapterForType(Object type) {
-				return type instanceof IEditingDomainProvider;
-			}
-		};
+	protected Adapter createBreadcrumbSynchronizer() {
+		return new BreadcrumbSynchronizer();
 	}
 
 	@SuppressWarnings("unchecked")
