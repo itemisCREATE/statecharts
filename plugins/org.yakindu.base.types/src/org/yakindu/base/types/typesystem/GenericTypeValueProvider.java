@@ -18,8 +18,10 @@ import static org.yakindu.base.types.typesystem.ITypeSystem.VOID;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.EnumerationType;
+import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Type;
 
 import com.google.inject.Inject;
@@ -53,7 +55,7 @@ public class GenericTypeValueProvider implements ITypeValueProvider {
 			return new String("");
 		}
 		if (type instanceof EnumerationType) {
-			return null;
+			return new Long(0);
 		}
 		if (type instanceof ComplexType) {
 			return null;
