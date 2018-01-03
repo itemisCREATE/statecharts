@@ -390,8 +390,8 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 		}
 	}
 	protected void removeBreadcrumbSynchronizer(List<Diagram> diagramContainerHierachy) {
-		for (Diagram diagram2 : diagramContainerHierachy) {
-			diagram2.getElement().eAdapters().remove(breadcrumbSynchronizer);
+		for (Diagram diagram : diagramContainerHierachy) {
+			diagram.getElement().eAdapters().remove(breadcrumbSynchronizer);
 		}
 		breadcrumbSynchronizer = null;
 	}
