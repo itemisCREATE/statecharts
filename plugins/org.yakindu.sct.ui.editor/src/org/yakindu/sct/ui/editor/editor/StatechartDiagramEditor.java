@@ -387,13 +387,19 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 
 			// Zoom original - all OS
 			getKeyHandler().put(/* CTRL + '0' */
-					KeyStroke.getPressed('0',0x30, SWT.MOD1), new Action() {
+					KeyStroke.getPressed('0', 0x30, SWT.MOD1), new Action() {
 						@Override
 						public void run() {
-							ZoomManager manager = (ZoomManager) getGraphicalViewer()
-									.getProperty(ZoomManager.class.toString());
-							if (manager != null)
-								manager.setZoom(1.0d);
+							resetZoom();
+						}
+					});
+			
+			// Zoom original - all OS - Numpad 0
+			getKeyHandler().put(/* CTRL + '0' */
+					KeyStroke.getPressed('0', SWT.KEYPAD_0, SWT.MOD1), new Action() {
+						@Override
+						public void run() {
+							resetZoom();
 						}
 					});
 
@@ -410,6 +416,13 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 
 		}
 		return keyHandler;
+	}
+	
+	protected void resetZoom() {
+		ZoomManager manager = (ZoomManager) getGraphicalViewer()
+				.getProperty(ZoomManager.class.toString());
+		if (manager != null)
+			manager.setZoom(1.0d);
 	}
 
 	@SuppressWarnings("unchecked")
