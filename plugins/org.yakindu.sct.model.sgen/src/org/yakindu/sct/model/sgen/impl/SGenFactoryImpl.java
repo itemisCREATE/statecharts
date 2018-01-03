@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.yakindu.base.expressions.ExpressionsRuntimeModule;
-import org.yakindu.sct.model.sgen.*;
+import org.yakindu.base.expressions.interpreter.IExpressionInterpreter;
 import org.yakindu.sct.model.sgen.DeprecatableElement;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
@@ -28,9 +28,12 @@ import org.yakindu.sct.model.sgen.GeneratorConfiguration;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgen.ParameterTypes;
+import org.yakindu.sct.model.sgen.PropertyDefinition;
 import org.yakindu.sct.model.sgen.SGenFactory;
 import org.yakindu.sct.model.sgen.SGenPackage;
+import org.yakindu.sct.model.sgen.util.BuiltinExpressionsInterpreter;
 
+import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -69,7 +72,13 @@ public class SGenFactoryImpl extends EFactoryImpl implements SGenFactory {
 	 * @generated NOT
 	 */
 	public SGenFactoryImpl() {
-		injector = Guice.createInjector(new ExpressionsRuntimeModule());
+		injector = Guice.createInjector(new ExpressionsRuntimeModule() {
+			@Override
+			public void configure(Binder binder) {
+				binder.bind(IExpressionInterpreter.class).to(BuiltinExpressionsInterpreter.class);
+				super.configure(binder);
+			}
+		});
 	}
 
 	/**

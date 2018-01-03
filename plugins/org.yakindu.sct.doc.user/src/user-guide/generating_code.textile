@@ -287,7 +287,7 @@ bc. feature Debug {
 
 h3(#codegen_using_properties_and_expressions_in_generator_models). Using properties and expressions in generator models
 
-An SGen generator model may assign values to properties and later use these properties in expressions. The following sample generator model uses the *var* keyword to declare the properties _projectName_, _version_, _isBeta_, and _generateTimerServce_ with their respective types and default values. The model then uses these values in *feature* clauses by referring to the properties:
+An SGen generator model may assign values to properties and later use these properties in expressions. The following sample generator model uses the *var* keyword to declare the properties _projectName_, _version_, _isBeta_, and _generateTimerService_ with their respective types and default values. The model then uses these values in *feature* clauses by referring to the properties:
 
 bc.. 
 GeneratorModel for yakindu::java {
@@ -295,7 +295,7 @@ GeneratorModel for yakindu::java {
     var projectName : string = "light_switch"
     var version : string = "1.0"
     var isBeta : boolean = true
-    var generateTimerServce : boolean = true
+    var generateTimerService : boolean = true
 
     statechart myStateAutomaton {
 
@@ -315,6 +315,19 @@ GeneratorModel for yakindu::java {
 p. The syntax rules for expressions in generator models are the same as for statechart language expressions, see section "&quot;Expressions&quot;":../user-guide/statechart_language.html#sclang_expressions. However, expressions are constrained to a subset that semantically makes sense in the context of a generator model. That means that, for example, while you can use the @+@ operator to concatenate strings, you cannot use statechart-related constructs like the _after_ keyword or the _active()_ built-in function.
 
 In the properties definition section near the top of a generator model, a value assigned to a property must be given as a _literal_. More complex expressions are not supported there.
+
+h4(#codegen_using_properties_and_expressions_in_generator_models_builtin). Builtin Variables
+
+There are several builtin variables which can be used in expressions in generator models:
+
+* SCTVERSION (String): Returns the current version of YAKINDU Statechart Tools, for example "3.2.0".
+* TIMESTAMP (String): Returns the current date and time as a localized string, for example "11.12.2017 17:08:14".
+* USER (String): Returns the name of the current user that started this instance of YAKINDU Statechart Tools (via @System.getProperty("user.name")@
+* HOSTNAME (String): Returns the host name of the machine on which YAKINDU Statechart Tools runs.
+
+Please be advised that neither USER nor HOSTNAME should be used for any security related tasks. Especially the username can easily be spoofed if anyone would want to. 
+
+h4(#codegen_using_properties_and_expressions_in_generator_models_headless). Overriding variables in a headless build
 
 The values assigned to properties are _default_ values only. That means, you can override them by different values when actually executing a generation model by way of running the "headless code generator":../user-guide/generating_code_headless.html#hdls_headless_code_generation.
 
