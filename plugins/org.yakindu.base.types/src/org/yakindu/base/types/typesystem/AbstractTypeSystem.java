@@ -14,9 +14,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -32,6 +34,7 @@ import org.yakindu.base.types.annotations.TypeAnnotations;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
 
 /**
  * Abstract base implementation if {@link ITypeSystem}. Provides convenience
@@ -79,9 +82,9 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	 */
 	@Override
 	public List<Type> getSuperTypes(Type type) {
-		List<Type> allSuperTypes = new ArrayList<Type>();
+		Set<Type> allSuperTypes = new LinkedHashSet<Type>();
 		collectSupertypes(type, allSuperTypes);
-		return allSuperTypes;
+		return Lists.newArrayList(allSuperTypes);
 	}
 
 	/**
@@ -113,7 +116,7 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	 */
 	@Override
 	public boolean isSuperType(Type subtype, Type supertype) {
-		List<Type> typehierachy = new ArrayList<Type>();
+		Set<Type> typehierachy = new LinkedHashSet<Type>();
 		typehierachy.add(subtype);
 		collectSupertypes(subtype, typehierachy);
 		for (Type eObject : typehierachy) {
@@ -127,13 +130,15 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	 * Recursively calls itself to create list of all direct and indirect super
 	 * types of given sub type
 	 */
-	protected void collectSupertypes(Type subType, List<Type> typeHierachy) {
+	protected void collectSupertypes(Type subType, Set<Type> typeHierachy) {
 		if (subType == null)
 			return;
 
 		List<Type> superTypes = getDirectSuperTypes(subType);
 		for (Type superType : superTypes) {
 			typeHierachy.add(superType);
+		}
+		for (Type superType : superTypes) {
 			collectSupertypes(superType, typeHierachy);
 		}
 	}
@@ -232,9 +237,11 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		if (isSuperType(type2, type1))
 			return type1;
 
-		List<Type> typehierachy1 = new ArrayList<Type>();
+		Set<Type> typehierachy1 = new LinkedHashSet<Type>();
 		collectSupertypes(type1, typehierachy1);
-		List<Type> typehierachy2 = new ArrayList<Type>();
+		
+		
+		Set<Type> typehierachy2 = new LinkedHashSet<Type>();
 		collectSupertypes(type2, typehierachy2);
 
 		for (Type type : typehierachy1) {
