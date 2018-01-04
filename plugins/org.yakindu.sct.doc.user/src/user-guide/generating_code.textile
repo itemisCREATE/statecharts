@@ -2382,12 +2382,12 @@ p=. Configuring an operations class
 
 ==<div class="pro-feature">==
 
-h2(#codegen_statechart_images_generator). Statechart images generator
+h2(#codegen_statechart_images_generator). Statechart image generator
 
-The statechart images generator renders a statechart and all its subdiagrams, if any, as image files. The generator supports several pixel-based and vector-based image formats, subject to the capabilities of the Java implementation you are using.
+The statechart image generator renders a statechart and all its subdiagrams, if any, as image files. The generator supports several pixel-based and vector-based image formats, subject to the capabilities of the Java implementation you are using.
 
 
-h3(#codegen_statechart_images_sample_generator_model). Sample statechart images generator model
+h3(#codegen_statechart_images_sample_generator_model). Sample statechart image generator model
 
 The following example is a generator model to create SVG vector images of the _turbineControl_ statechart. The generated images are placed in the _images_ folder, which is located in the _powerPlant_ project.
 
@@ -2413,9 +2413,9 @@ p.
 ==</div>==
 
 
-h3(#codegen_statechart_images_generator_id). Statechart images generator ID
+h3(#codegen_statechart_images_generator_id). Statechart image generator ID
 
-The statechart images generator's ID is *yakindu::images*. If you are using the YAKINDU generator model configuration wizard to create a generator model, select the _YAKINDU Image Generator_ to place the generator ID into the _.sgen_ file.
+The statechart image generator's ID is *yakindu::images*. If you are using the YAKINDU generator model configuration wizard to create a generator model, select the _YAKINDU Image Generator_ to place the generator ID into the _.sgen_ file.
 
 
 h3(#codegen_statechart_images_generator_features). Statechart image generator features
@@ -2424,7 +2424,7 @@ h4(#codegen_statechart_images_outlet_feature). Outlet feature
 
 The mandatory *Outlet* feature specifies the project and folder the statechart images will be written to. See section "&quot;Outlet feature&quot;":#codegen_outlet_feature for details.
 
-bq. *Please note:* The images generator supports the *Outlet* feature's _targetProject_ and _targetFolder_ parameters only.
+bq. *Please note:* The image generator supports the *Outlet* feature's _targetProject_ and _targetFolder_ parameters only.
 
 
 ==<!-- Start-pro sgen_feature_renderer -->==
