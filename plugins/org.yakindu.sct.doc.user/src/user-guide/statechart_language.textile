@@ -759,53 +759,13 @@ p.
 
 h4(#sclang_childfirstexecution). @ChildFirstExecution
 
-The <code>@ChildFirstExecution</code> annotation specifies that the state machine should always first execute the substates ("children") of an active composite state, before executing the composite state ("parent") itself. Should the execution of a substate trigger a transition leading away from the composite state, the latter and any remaining not-yet-executed substates will not be executed, except for any _exit_ actions.
+The <code>@ChildFirstExecution</code> annotation specifies that the state machine should always execute the substates ("children") of an active composite state first, before executing the composite state ("parent") itself. Please see section "&quot;Parent-first versus child-first execution&quot;":#sclang_parent-first_and_child-first_execution for details and examples.
 
 Synopsis: <code>@ChildFirstExecution</code>
 
 Please note that "<code>@ParentFirstExecution</code>":#sclang_parentfirstexecution specifies the opposite behaviour. Both <code>@ChildFirstExecution</code> and <code>@ParentFirstExecution</code> are global settings for _all_ composite states.
 
 If the definition section contains neither the <code>@ParentFirstExecution</code> nor the <code>@ChildFirstExecution</code> annotation, the state machine will behave as if <code>@ParentFirstExecution</code> would have been coded.
-
-==<div class="example">==
-
-Example 1a:
-
-Consider the statechart in the "figure below":#fig_child-first_parent-first_example_1a-1. Composite state *A* and its substate *B* are active and the <code>@ChildFirstExecution</code> annotation has been specified in the definition section.
-
-p(#fig_child-first_parent-first_example_1a-1). 
-!images/docu_childfirst_010_example_01a-1.png(Child-first, example 1a, before transition)!
-
-p=. Child-first, example 1a, before transition
-
-If event _e_ occurs, the state machine will consider child state *B* first, find a matching transition, and thus immediately proceed to state *D*, see the "figure below":#fig_child-first_parent-first_example_1a-2.
-
-p(#fig_child-first_parent-first_example_1a-2). 
-!images/docu_childfirst_010_example_01a-2.png(Child-first, example 1a, after transition)!
-
-p=. Child-first, example 1a, after transition
-
-==</div>==
-
-==<div class="example">==
-
-Example 1b:
-
-Consider the statechart in the "figure below":#fig_child-first_parent-first_example_1a-1. Composite state *A* and its substate *B* are active and the <code>@ParentFirstExecution</code> annotation has been specified in the definition section.
-
-p(#fig_child-first_parent-first_example_1b-1). 
-!images/docu_childfirst_010_example_01b-1.png(Parent-first, example 1b, before transition)!
-
-p=. Parent-first, example 1b, before transition
-
-If event _e_ occurs, the state machine will consider parent state *A* first, find a matching transition, and thus immediately proceed to state *C*, see the "figure below":#fig_child-first_parent-first_example_1b-2.
-
-p(#fig_child-first_parent-first_example_1b-2). 
-!images/docu_childfirst_010_example_01b-2.png(Parent-first, example 1b, after transition)!
-
-p=. Parent-first, example 1b, after transition
-
-==</div>==
 
 ==<!-- End stext_keyword_childfirstexecution -->==
 
@@ -814,15 +774,13 @@ p=. Parent-first, example 1b, after transition
 
 h4(#sclang_parentfirstexecution). @ParentFirstExecution
 
-The <code>@ParentFirstExecution</code> annotation specifies that the state machine should always first execute an active composite state ("parent") itself, before executing its substates ("children"). Should the execution of the composite state trigger a transition leading away from the parent, its substates will not be executed, except for any _exit_ actions.
+The <code>@ParentFirstExecution</code> annotation specifies that the state machine should always first execute an active composite state ("parent") itself, before executing its substates ("children"). Please see section "&quot;Parent-first versus child-first execution&quot;":#sclang_parent-first_and_child-first_execution for details and examples.
 
 Synopsis: <code>@ParentFirstExecution</code>
 
 Please note that "<code>@ChildFirstExecution</code>":#sclang_childfirstexecution specifies the opposite behaviour. Both <code>@ChildFirstExecution</code> and <code>@ParentFirstExecution</code> are global settings for _all_ composite states.
 
 If the definition section contains neither the <code>@ParentFirstExecution</code> nor the <code>@ChildFirstExecution</code> annotation, the state machine will behave as if <code>@ParentFirstExecution</code> would have been coded.
-
-Please see section "&quot;@ChildFirstExecution&quot;":#sclang_childfirstexecution for examples.
 
 ==<!-- End stext_keyword_parentfirstexecution -->==
 
@@ -1307,6 +1265,250 @@ Returns _true_ if the specified state is active and _false_ otherwise.
 bc. myBool = active(StateA)
 
 ==<!-- End stext_keyword_ -->==
+
+
+
+
+h2(#sclang_parent-first_and_child-first_execution). Parent-first and child-first execution
+
+Whenever a state machine is in a "composite":#sclang_composite_states or "orthogonal state":#sclang_orthogonal_states, multiple states are active at the same time: the composite/orthogonal state itself ("parent") and one or more of its substates ("children").
+
+When an event occurs, the state machine checks the active states one by one for a transition that can be taken, subject to the event(s) received and the guard conditions on the transitions. As soon as a matching transition is found, it is taken immediately, and its target state becomes active. After executing the transition, the state machine does not check any further for other matching transitions.
+
+Since the first match always wins, it is crucial in which order states are checked and how you can control that. In an orthogonal state, active substates are checked according to the  arrangement of their regions: They are executed either from left to right or from top to bottom.
+
+Whether the parent state or its child state(s) are checked first, you can specify by setting either the "<code>@ParentFirstExecution</code> annotation":#sclang_parentfirstexecution or the "<code>@ChildFirstExecution</code> annotation":#sclang_childfirstexecution in the statechart's definition section. If the definition section contains none of these annotations, <code>@ParentFirstExecution</code> is assumed. Whichever variant you choose, it is statechart-global and thus applies to _all_ composite and orthogonal states.
+
+bq. *Please note:* Specifying parent-first or child-first execution pertains to checking for matching transitions only, not to entry and exit actions. Entry actions are always executed from the outside to the inside, i.e. on the parent state first and after that on the children. Exit actions are executed in reverse : in child states first, followed by the parent state.
+
+
+
+h3(#sclang_examples). Examples
+
+Parent-first versus child-first execution are best explained by a couple of examples.
+
+
+h4. Simple child-first/parent-first examples
+
+==<div class="example">==
+
+p(#sclang_example_1a). Example 1a:
+
+Consider the statechart in the "figure below":#fig_child-first_parent-first_example_1a-1. Composite state *A* and its substate *B* are active, and the <code>@ChildFirstExecution</code> annotation has been specified in the definition section.
+
+p(#fig_child-first_parent-first_example_1a-1). 
+
+!images/docu_childfirst_010_example_01a-1.png(Child-first, example 1a, before transition)!
+
+p=. Child-first, example 1a, before transition
+
+When event _e_ occurs, the state machine considers child state *B* first, finds a matching transition, and thus immediately proceeds to state *D*, see the "figure below":#fig_child-first_parent-first_example_1a-2.
+
+p(#fig_child-first_parent-first_example_1a-2). 
+
+!images/docu_childfirst_010_example_01a-2.png(Child-first, example 1a, after transition)!
+
+p=. Child-first, example 1a, after transition
+
+==</div>==
+
+
+
+==<div class="example">==
+
+p(#sclang_example_1b). Example 1b:
+
+Consider the statechart in the "figure below":#fig_child-first_parent-first_example_1b-1. Composite state *A* and its substate *B* are active, and the <code>@ParentFirstExecution</code> annotation has been specified in the definition section.
+
+p(#fig_child-first_parent-first_example_1b-1). 
+
+!images/docu_childfirst_010_example_01b-1.png(Parent-first, example 1b, before transition)!
+
+p=. Parent-first, example 1b, before transition
+
+When event _e_ occurs, the state machine considers parent state *A* first, finds a matching transition, and thus immediately proceeds to state *C*, see the "figure below":#fig_child-first_parent-first_example_1b-2.
+
+p(#fig_child-first_parent-first_example_1b-2). 
+
+!images/docu_childfirst_010_example_01b-2.png(Parent-first, example 1b, after transition)!
+
+p=. Parent-first, example 1b, after transition
+
+==</div>==
+
+
+h4. Child-first/parent-first and local reactions
+
+The following examples are somewhat more complex. The statechart used in the examples defines the integer variables _m_, _n_, _o_, _p_, _q_, and _r_. Initially, they are all set to 0. Local reactions in states *A* and *B* set these variables to non-zero values on certain conditions:
+* when entering a state,
+* when leaving a state, and
+* when receiving event _e_.
+
+This is useful to understand which actions are performed (or not performed) and in which order.
+
+The local reactions in composite state *A* are as follows:
+
+bc. entry / m = 1
+e / n = 1
+exit / o = 1; r = 1
+
+The local reactions in substate *B* are as follows:
+
+bc. entry / m = 2
+e / p = 1
+exit / q = 1; r = 2
+
+The settings above are the same for all subsequent examples, except for "example 4":#sclang_example_4.
+
+
+
+==<div class="example">==
+
+p(#sclang_example_2a). Example 2a:
+
+Consider the statechart in the "figure below":#fig_child-first_parent-first_example_2a-1. Composite state *A* and its substate *B* are active, and the <code>@ChildFirstExecution</code> annotation has been specified in the definition section.
+
+p(#fig_child-first_parent-first_example_2a-1). 
+
+!images/docu_childfirst_010_example_02a-1.png(Child-first, example 2a, before transition)!
+
+p=. Child-first, example 2a, before transition
+
+In "this scenario":#fig_child-first_parent-first_example_2a-1, *A* and *B* have just been entered, and their entry actions have already been executed. Since the execution order of entry actions is independent of parent-first/child-first execution order and always proceeds from outer states to inner states, the entry action of *A* is executed first and sets variable _m_ to 1. After that, the entry action of *B* is executed and overrides variable _m_ with a value of 2.
+
+When event _e_ occurs, the state machine considers child state *B* first, finds a matching transition, and thus immediately proceeds to state *D*, see the "figure below":#fig_child-first_parent-first_example_2a-2. The state machine executes the exit actions of *A* and *B* after these states have become inactive.
+
+p(#fig_child-first_parent-first_example_2a-2). 
+
+!images/docu_childfirst_010_example_02a-2.png(Child-first, example 2a, after transition)!
+
+p=. Child-first, example 2a, after transition
+
+It is worth having a look at the variables and understand what has happened. When the state machine is in state *D*, the variable values are as follows:
+
+|_. Variable |_. Value |
+| _m_ | 2 |
+| _n_ | 0 |
+| _o_ | 1 |
+| _p_ | 0 |
+| _q_ | 1 |
+| _r_ | 1 |
+
+We have already seen why _m_ is 2.
+
+Variable _n_ would be set to 1 by a local reaction in *A*, triggered by event _e_. However, since the statechart is in child-first mode, and the _e_ event triggers an immediate transition from *B* to *D*, it is no surprise that _n_ remains 0. The composite state is left before @e / n = 1@ in *A* gets any chance to be executed.
+
+However, _p_ is also 0, although *B* has priority over *A*, according to child-first execution. The reason is that an active state is checked for possible transitions _first_, and local reactions are executed _second_. This can lead to local reactions not being executed at all. In this case, checking for possible transitions after receiving _e_ finds the transition from *B* to *D*. This transition is executed _immediately_. "Immediately" means that *B* is left straight away. No further action will be done on it, and consequently the local reaction @e / p = 1@ fails to be executed.
+
+The only exception to the rule is are exit actions, because they are _always_ executed when the corresponding state becomes inactive. That's why the variables _o_, _q_, and _r_ all have a value of 1: They have been modified in the exit actions of *A* and *B*. The execution of exit actions starts with the inner-most state and then proceeds to the outside. Here, the exit action of *B* has set _q_ to 1 and _r_ to 2. After that, the exit action of *A* has set _o_ to 1 and has overridden _r_ with 1.
+
+==</div>==
+
+
+
+==<div class="example">==
+
+p(#sclang_example_2b). Example 2b:
+
+Consider the statechart in the "figure below":#fig_child-first_parent-first_example_2b-1. Composite state *A* and its substate *B* are active, and the <code>@ChildFirstExecution</code> annotation has been specified in the definition section.
+
+p(#fig_child-first_parent-first_example_2b-1). 
+
+!images/docu_childfirst_010_example_02b-1.png(Parent-first, example 2b, before transition)!
+
+p=. Parent-first, example 2b, before transition
+
+In "this scenario":#fig_child-first_parent-first_example_2b-1, *A* and *B* have just been entered, and their entry actions have already been executed. Variable _m_ has a value of 2, as explained in "example 2a":#sclang_example_2a.
+
+When event _e_ occurs, the state machine considers parent state *A* first, finds a matching transition, and thus immediately proceeds to state *C*, see the "figure below":#fig_child-first_parent-first_example_2b-2. The state machine executes the exit actions of *A* and *B* after these states have become inactive.
+
+p(#fig_child-first_parent-first_example_2b-2). 
+
+!images/docu_childfirst_010_example_02b-2.png(Parent-first, example 2b, after transition)!
+
+p=. Parent-first, example 2b, after transition
+
+The variable values are the same as in "example 2a":#sclang_example_2a and essentially for the same reasons: Entry and exit actions are executed in the same order, and the local reactions on event _e_ are not executed at all.
+
+==</div>==
+
+
+==<div class="example">==
+
+p(#sclang_example_3a). Example 3a:
+
+Let's make a small change now to the "statechart in example 2a":#fig_child-first_parent-first_example_2a-1 and add a guard condition @[p == 1]@ to the transition *B → D*, see the "figure below":#fig_child-first_parent-first_example_3a-1. Please note that the <code>@ChildFirstExecution</code> annotation has been specified in the definition section.
+
+p(#fig_child-first_parent-first_example_3a-1). 
+
+!images/docu_childfirst_010_example_03a-1.png(Child-first, example 3a, before transition)!
+
+p=. Child-first, example 3a, before transition
+
+Event _e_ causes the following to happen:
+# Due to the <code>@ChildFirstExecution</code> annotation, state *B* is checked first for any transitions to be taken. However, since _p_ is 0, the guard condition of *B → D* is not fulfilled, and the transition is not triggered.
+# After that, the local reactions of state *B* are considered. There is one reaction to an _e_ event, and it sets variable _p_ to 1. Now the guard condition would be fulfilled. However, looking for a matching transition has already been done and won't be repeated in the current run-to-completion step.
+# Since the child (state *B*) didn't trigger a transition, checking continues with the parent (state *A*). Here a matching transition is found, and the execution flow proceeds to state *C*.
+# The exit actions of *B* and *A* are executed.
+
+The "figure below":#fig_child-first_parent-first_example_3a-2 shows the result.
+
+
+p(#fig_child-first_parent-first_example_3a-2). 
+
+!images/docu_childfirst_010_example_03a-2.png(Child-first, example 3a, after transition)!
+
+p=. Child-first, example 3a, after transition
+
+The variables are set as follows:
+
+|_. Variable |_. Value |
+| _m_ | 2 |
+| _n_ | 0 |
+| _o_ | 1 |
+| _p_ | 1 |
+| _q_ | 1 |
+| _r_ | 1 |
+
+==</div>==
+
+
+
+==<div class="example">==
+
+p(#sclang_example_3b). Example 3b:
+
+This example is here for the sake of completeness only. It is like "example 3a":#sclang_example_3a, but with the <code>@ParentFirstExecution</code> annotation in effect.
+
+The state machine reacts to an event _e_ just like the one in "example 2b":#sclang_example_2b: Since the parent is checked first and a matching transition from *A* to *C* is found, that transition is taken immediately, without considering *B* in any way, except for executing its exit action.
+
+Thus in state *C* the variable values are as follows:
+
+|_. Variable |_. Value |
+| _m_ | 2 |
+| _n_ | 0 |
+| _o_ | 1 |
+| _p_ | 0 |
+| _q_ | 1 |
+| _r_ | 1 |
+
+==</div>==
+
+
+
+==<div class="example">==
+
+p(#sclang_example_4). Example 4:
+
+Last but not least, here's an example that is left as an exercise to the reader: What is the next state in the "statechart below":#fig_child-first_parent-first_example_4-1 after event _e_ arrives? To find out whether your guess is correct, recreate the example and check it with the interactive "statechart simulator":../user-guide/simulating_statecharts.html.
+
+p(#fig_child-first_parent-first_example_4-1). 
+
+!images/docu_childfirst_010_example_04-1.png(Child-first, example 4, before transition)!
+
+p=. Child-first, example 4, before transition
+
+==</div>==
 
 
 
