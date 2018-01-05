@@ -55,7 +55,7 @@ public class GenericTypeValueProvider implements ITypeValueProvider {
 			return new String("");
 		}
 		if (type instanceof EnumerationType) {
-			return new Long(0);
+			return null;
 		}
 		if (type instanceof ComplexType) {
 			return null;
