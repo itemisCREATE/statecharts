@@ -66,14 +66,12 @@ public class DomainRegistry {
 
 	private static List<IDomain> domainDescriptors;
 
-	public static List<IDomain> getDomains() {
-		synchronized (domainDescriptors) {
-			if (domainDescriptors == null) {
-				domainDescriptors = Lists.newArrayList();
-				initFromExtensions();
-			}
-			return domainDescriptors;
+	public static synchronized List<IDomain> getDomains() {
+		if (domainDescriptors == null) {
+			domainDescriptors = Lists.newArrayList();
+			initFromExtensions();
 		}
+		return domainDescriptors;
 	}
 
 	public static IDomain getDomain(final String id) {
