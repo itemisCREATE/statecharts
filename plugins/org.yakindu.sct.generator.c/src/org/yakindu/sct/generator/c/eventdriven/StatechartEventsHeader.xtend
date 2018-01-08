@@ -36,6 +36,9 @@ class StatechartEventsHeader {
 		#ifndef «bufferSize»
 		#define «bufferSize» «BUFFER_SIZE»
 		#endif
+		#ifndef SC_INVALID_EVENT_VALUE
+		#define SC_INVALID_EVENT_VALUE 0
+		#endif
 		
 		«generateEventsEnum»
 		
@@ -57,7 +60,7 @@ class StatechartEventsHeader {
 		 * Enum of event names in the statechart.
 		 */
 		typedef enum  {
-			«invalidEventEnumName(it)» = sc_invalid_event_value,
+			«invalidEventEnumName(it)» = SC_INVALID_EVENT_VALUE,
 			«FOR e : getAllEvents SEPARATOR ","»
 				«eventEnumMemberName(e)»
 			«ENDFOR»

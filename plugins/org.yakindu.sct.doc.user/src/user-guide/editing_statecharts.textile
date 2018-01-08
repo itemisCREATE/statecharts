@@ -289,25 +289,32 @@ Using the "inlining subdiagram refactoring":#edit_inlining_subdiagram, you can t
 
 h2(#edit_using_the_definition_section). Using the definition section
 
-###. I (Rainer) don't understand why the definition section's UI must be so complicated. In the new concept, it can be in a "legacy" or in a "pinned" state, where the "pinned" state is a composite state consisting of "visible" or "hidden". Why not simply have the definition section either visible or hidden? As a user, I don't grasp this.
-
 By default, a statechart's "definition section":../user-guide/statechart_language.html#sclang_definition_section is positioned at the left-hand side of the "canvas":#edit_canvas.
 
-The definition section comes with an option to pin it to the left-hand side of the view. In order to pin the definition section you simply have to click the small decorator icon in the upper-left corner of the area.
+You can edit the definition section in two different modes: _Legacy mode_ and the new _pinnable mode_. You can select your preferred editing mode in the "YAKINDU SCT preferences":#edit_setting_the_definition_section_editing_mode.
 
-The pinned section also provides a small decorator icon in the upper-right corner, to restore the inlined state again. Please note that the inline option is not available for "subdiagrams":#edit_using_subdiagrams. The option to pin/inline makes changes to the model of the statechart diagram, so you have to save these changes to keep them.
 
-!images/docu_editor_definition_section_pin.png(Pinning the statechart diagram definition section)!
 
-p=. Pinning the statechart diagram definition section
+h3(#edit_legacy_mode). Legacy mode
 
-!images/docu_editor_definition_section_inline.png(Inlining the statechart diagram definition section)!
+Legacy mode is the definition section's traditional editing mode, which has been available in YAKINDU Statechart Tools for a long time already. Currently it is the default editing mode. However, a future version will make the "pinnable mode":#edit_pinnable_mode the default.
 
-p=. Inlining the statechart diagram definition section
+###. CHECK: Is "legacy mode" still the definition section's default editing mode?
 
-You can decide whether you want the pinned definition section's contents to be visible or not. For this, the pinned definition section comes with a small decorator icon in the upper-left corner. Click on it to collapse or expand the definition section.
+To edit the definition section, double-click into it and enter your statements. While editing, syntax highlighting is applied to the text in the definition section. To quit editing, click outside the definition section. Now the text will appear without any syntax coloring.
 
-In the collapsed state, the definition section can also be expanded by clicking on the vertical bar labeled "Definition section". By default, the pinned definition section takes 20% of the canvas' view, but you can resize it as you like.
+Technically, the defintion section is part of the "canvas":#edit_canvas. If you print the canvas or save it to an image file, the definition section is included in the result. Definition section and top-level region are always scrolled in sync, which might have the rather unwanted effect that your statechart diagram is scrolled off your screen if you have a very long definition section and you are editing something down below in it.
+
+
+
+h3(#edit_pinnable_mode). Pinnable mode
+
+Pinnable mode is an improved editing mode that has been introduced with YAKINDU Statechart Tools 3.20. However, it is slightly incompatible with previous versions, so you have the choice to use it or not.
+
+In pinnable mode, the definition section can be either part of the "canvas":#edit_canvas ("inlined") or not ("pinned"), and you can change that at will. The definition section comes with a little pin symbol !(inlinemediaobject)images/button_pin.png("pin")! at its top-left. Click on it, and the definition section will be detached from the canvas. This has a couple of advantages:
+* You can edit definition section and graphical statechart independently of each other. In particular, you can scroll either area as you like, while the other one will remain where it is.
+* The definition section is syntax-highlighted all the time.
+* If you don't need to see the definition section you can collapse resp. fold it away by clicking on the little triangle in the top-left corner. Click on it once more to make the definition section visible again. Another way to expand the definition section is to click on the vertical bar labeled "Definition section".
 
 !images/docu_editor_definition_section_collapse.png(Collapsing the pinned definition section)!
 
@@ -317,11 +324,40 @@ p=. Collapsing the pinned definition section
 
 p=. Expanding the pinned definition section
 
-In the pinned definition section, the name of the statechart can be edited by changing the displayed text in the top-center of the section. When changing the name in the definition section within a subdiagram, the corresponding state in the parent diagram will also be updated with the new value. The value will be applied when the focus changes.
+By default, the pinned definition section takes 20 percent of the canvas' view, but you can resize it as you like.
 
-!images/docu_editor_definition_section_name_edit.png(Changing the name of statechart diagram/subdiagram)!
+You can unpin the definition section and inline it with the canvas. To do so, click on the pin symbol !(inlinemediaobject)images/button_pin.png("pin")!, which in the pinned state is in the definition section's upper-right corner.
 
-p=. Changing the name of statechart diagram/subdiagram
+bq. *Please note:* Inlining the definition section is possible in the top-level diagram. If you are editing a "subdiagram":#edit_using_subdiagrams in pinned mode, the pin symbol is greyed out.
+
+bq. *Please also note:* Pinning and inlining the definition section changes your statechart model. You have to save it in order to maintain the current status.
+
+!images/docu_editor_definition_section_pin.png(Pinning the statechart diagram definition section)!
+
+p=. Pinning the statechart diagram definition section
+
+!images/docu_editor_definition_section_inline.png(Inlining the statechart diagram definition section)!
+
+p=. Inlining the statechart diagram definition section
+
+In the pinned definition section, you can edit the name of the statechart by changing the displayed text in the top-center of the section.
+
+!images/docu_editor_definition_section_name_edit.png(Changing the statechart name)!
+
+p=. Changing the statechart name
+
+
+
+h3(#edit_setting_the_definition_section_editing_mode). Setting the definition section editing mode
+
+Choose the definition section editing mode to be used by setting the corresponding option in the preferences:
+
+# In the main menu, select the _Window → Preferences_ entry. The _Preferences_ dialog appears.
+# In the navigation area on the left, open _YAKINDU SCT_.
+# Under _YAKINDU SCT_, select _Diagram appearance_.
+# In the preferences setting on the right, the relevant option is _Enable pinning of statechart definition section_.
+## Check it to enable "pinnable mode":#edit_pinnable_mode.
+## Uncheck it to enable "legacy mode":#edit_legacy_mode.
 
 
 

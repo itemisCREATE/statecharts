@@ -137,7 +137,7 @@ class StatemachineImplementation implements IContentTemplate {
 	protected def CharSequence constructorBody(ExecutionFlow it)
 		'''
 		«IF hasHistory»
-			for (int i = 0; i < «historyStatesConst»; ++i)
+			for (sc_ushort i = 0; i < «historyStatesConst»; ++i)
 				historyVector[i] = «null_state»;
 				
 		«ENDIF»
@@ -157,11 +157,11 @@ class StatemachineImplementation implements IContentTemplate {
 			sc_errorCode errorCode = 0;
 			
 			«unimplementedOCBErrors»«ENDIF»
-			for (int i = 0; i < «orthogonalStatesConst»; ++i)
+			for (sc_ushort i = 0; i < «orthogonalStatesConst»; ++i)
 				stateConfVector[i] = «null_state»;
 			
 			«IF hasHistory»
-			for (int i = 0; i < «historyStatesConst»; ++i)
+			for (sc_ushort i = 0; i < «historyStatesConst»; ++i)
 				historyVector[i] = «null_state»;
 			
 			«ENDIF»

@@ -18,6 +18,9 @@ import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -62,10 +65,14 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.XMLMemento;
 import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.xtext.util.Arrays;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.provider.SGraphItemProviderAdapterFactory;
+import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.StatechartImages;
+import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 
 /**
  * Editor that uses a {@link DiagramPartitioningDocumentProvider} and adds a
@@ -82,7 +89,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 			IPersistableEditor,
 			IPersistableElement {
 
-	private static final String REGEX_NO_WORD_NO_WHITESPACE = "[^\\w[\\s+_]]";
+	private static final String REGEX_NO_WORD_NO_WHITESPACE = "[^\\w[\\s+]]";
 	protected static final String IS_DEFINITION_SECTION_EXPANDED = "DefinitionSectionIsExpanded";
 	protected static final String FIRST_SASH_CONTROL_WEIGHT = "FirstSashControlWeight";
 	protected static final String SECOND_SASH_CONTROL_WEIGHT = "SecondSashControlWeight";
@@ -95,6 +102,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	private SashForm sash;
 
 	private static IMemento memento;
+	private Adapter breadcrumbSynchronizer;
 
 	protected abstract void createTextEditor(Composite parent);
 
@@ -143,8 +151,17 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 
 	public void toggleDefinitionSection() {
 		if (getContextObject() instanceof Statechart)
-			sash.setMaximizedControl(
-					!isDefinitionSectionInlined() ? null : sash.getChildren()[MAXIMIZED_CONTROL_INDEX]);
+			sash.setMaximizedControl(!isDefinitionSectionInlined() && isPinningActivated()
+					? null
+					: sash.getChildren()[MAXIMIZED_CONTROL_INDEX]);
+		if (getContextObject() instanceof State) {
+			sash.setMaximizedControl(isDefinitionSectionInlined() && isPinningActivated() ? null : sash.getChildren()[MAXIMIZED_CONTROL_INDEX]);
+		}
+	}
+
+	protected boolean isPinningActivated() {
+		return DiagramActivator.getDefault().getPreferenceStore()
+				.getBoolean(StatechartPreferenceConstants.PREF_DEFINITION_SECTION);
 	}
 
 	protected abstract EObject getContextObject();
@@ -162,25 +179,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 		}
 	}
 
-	protected void rememberExpandState(IMemento memento) {
-		if (getContextObject() != null) {
-			if (getContextObject() instanceof NamedElement) {
-				NamedElement element = (NamedElement) getContextObject();
-				if (element != null)
-					memento.putBoolean(stripElementName(element.getName()) + IS_DEFINITION_SECTION_EXPANDED, true);
-			}
-		}
-	}
-
-	protected boolean getExpandState(IMemento memento) {
-		Object expandState = null;
-		if (getContextObject() instanceof NamedElement) {
-			NamedElement element = (NamedElement) getContextObject();
-			if (element != null)
-				expandState = memento.getBoolean(stripElementName(element.getName()) + IS_DEFINITION_SECTION_EXPANDED);
-		}
-		return expandState != null ? ((Boolean) expandState).booleanValue() : true;
-	}
+	protected abstract void rememberExpandState(IMemento memento);
 
 	protected String stripElementName(String name) {
 		if (name != null)
@@ -243,6 +242,10 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 
 	protected void initializeTitle(IDiagramEditorInput input) {
 		Diagram diagram = input.getDiagram();
+		initializeTitle(diagram);
+	}
+
+	protected void initializeTitle(Diagram diagram) {
 		EObject element = diagram.getElement();
 		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(
 				new SGraphItemProviderAdapterFactory());
@@ -269,7 +272,9 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 			viewer.addSelectionChangedListener(this);
 			viewer.setContentProvider(new BreadcrumbViewerContentProvider());
 			viewer.setLabelProvider(new BreadcrumbViewerLabelProvider());
-			viewer.setInput(DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram()));
+			List<Diagram> diagramContainerHierachy = DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram());
+			initBreadcrumbSynchronizer(diagramContainerHierachy);
+			viewer.setInput(diagramContainerHierachy);
 		}
 		parent.pack(true);
 	}
@@ -288,6 +293,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	@Override
 	public void dispose() {
 		closeSubdiagramEditors();
+		removeBreadcrumbSynchronizer(DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram()));
 		super.dispose();
 	}
 
@@ -353,6 +359,25 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 		}
 	}
 
+	private final class BreadcrumbSynchronizer extends AdapterImpl {
+
+		@Override
+		public void notifyChanged(Notification notification) {
+			if (Notification.SET == notification.getEventType()) {
+				Object feature = notification.getFeature();
+				if (feature != null && feature.equals(BasePackage.Literals.NAMED_ELEMENT__NAME)) {
+					viewer.refresh();
+					if (getDiagram().getElement() instanceof State)
+						initializeTitle(getDiagram());
+				}
+			}
+		}
+		@Override
+		 public boolean isAdapterForType(Object type) {
+			return type instanceof BreadcrumbSynchronizer;
+		 }
+	}
+
 	public static class FilteringDiagramContextMenuProvider extends DiagramContextMenuProvider {
 		// Default context menu items that should be suppressed
 		protected String[] exclude = new String[]{"addNoteLinkAction", "properties",
@@ -375,6 +400,23 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 			}
 			return true;
 		}
+	}
+
+	protected void initBreadcrumbSynchronizer(List<Diagram> diagramContainerHierachy) {
+		breadcrumbSynchronizer = createBreadcrumbSynchronizer();
+		for (Diagram diagram : diagramContainerHierachy) {
+			diagram.getElement().eAdapters().add(breadcrumbSynchronizer);
+		}
+	}
+	protected void removeBreadcrumbSynchronizer(List<Diagram> diagramContainerHierachy) {
+		for (Diagram diagram : diagramContainerHierachy) {
+			diagram.getElement().eAdapters().remove(breadcrumbSynchronizer);
+		}
+		breadcrumbSynchronizer = null;
+	}
+
+	protected Adapter createBreadcrumbSynchronizer() {
+		return new BreadcrumbSynchronizer();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -413,5 +455,4 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 		}
 
 	}
-
 }

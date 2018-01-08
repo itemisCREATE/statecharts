@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.yakindu.base.base.impl.NamedElementImpl;
 import org.yakindu.base.types.Domain;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.TypesPackage;

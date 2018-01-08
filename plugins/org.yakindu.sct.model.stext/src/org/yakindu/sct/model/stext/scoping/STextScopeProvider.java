@@ -55,6 +55,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 /**
  * 
@@ -73,16 +74,14 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 	private IQualifiedNameProvider nameProvider;
 	@Inject
 	private ContextPredicateProvider predicateProvider;
+	@Inject
+	private Injector injector;
 	
-	private static class ErrorHandlerDelegate<T> implements ErrorHandler<T> {
+	public static class ErrorHandlerDelegate<T> implements ErrorHandler<T> {
 
-		private ErrorHandler<T> delegate;
+		protected ErrorHandler<T> delegate;
 
 		public static final Log LOG = LogFactory.getLog(STextScopeProvider.class);
-
-		public ErrorHandlerDelegate(ErrorHandler<T> delegate) {
-			this.delegate = delegate;
-		}
 
 		public T handle(Object[] params, Throwable throwable) {
 			if (throwable instanceof NoSuchMethodException) {
@@ -93,19 +92,25 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 			return delegate.handle(params, throwable);
 		}
 
+		public void setDelegate(ErrorHandler<T> delegate) {
+			this.delegate = delegate;
+		}
+
 	}
 	
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
+		ErrorHandler<IScope> originalHandler = getErrorHandler();
 		try {
-			ErrorHandler<IScope> originalHandler = getErrorHandler();
-			setErrorHandler(new ErrorHandlerDelegate<IScope>(originalHandler));
+			ErrorHandlerDelegate instance = injector.getInstance(ErrorHandlerDelegate.class);
+			instance.setDelegate(originalHandler);
+			setErrorHandler(instance);
 			IScope scope = super.getScope(context, reference);
-			setErrorHandler(originalHandler);
 			return scope;
 		} catch (Throwable t) {
-			t.printStackTrace();
-			return null;
+				throw t;
+		} finally {
+			setErrorHandler(originalHandler);
 		}
 	}
 	

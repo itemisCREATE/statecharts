@@ -250,7 +250,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		}
 		Display.getDefault().asyncExec(() -> {
 			if (debugEvent.getSource() != null) {
-				sessionDropdown.update(debugEvent.getSource(), null);
 				sessionDropdown.refresh();
 				targets.removeIf(dt -> dt.isTerminated());
 			}
@@ -272,7 +271,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		setViewerInput(engine.getExecutionContext());
 		updateActions();
 		updateSessionDropdownInput(debugTarget);
-
 	}
 
 	protected void openEditorForTarget(final IDebugTarget debugTarget) {
@@ -298,11 +296,9 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 					targets.add(debugTarget);
 					sessionDropdown.setInput(targets);
 					sessionDropdown.setSelection(new StructuredSelection(debugTarget), true);
-					sessionDropdown.refresh();
-				} else {
-					sessionDropdown.update(debugTarget, null);
-					sessionDropdown.refresh();
+					changeTarget(debugTarget);
 				}
+				sessionDropdown.refresh();
 			}
 		});
 	}
@@ -347,8 +343,9 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		@Override
 		public void selectionChanged(SelectionChangedEvent event) {
 			IStructuredSelection selection = (IStructuredSelection) event.getSelection();
-			if ((IDebugTarget) selection.getFirstElement() != null) {
-				launchChanged(((IDebugTarget) selection.getFirstElement()).getLaunch());
+			IDebugTarget debugTarget = (IDebugTarget) selection.getFirstElement();
+			if (debugTarget != null) {
+				changeTarget(debugTarget);
 				sctSourceDisplayDispatcher.displaySource(debugTarget, SimulationView.this.getSite().getPage(), true);
 			}
 		}

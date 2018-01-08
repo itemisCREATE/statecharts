@@ -16,6 +16,7 @@ import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.domain.extension.IModuleProvider;
 import org.yakindu.sct.model.stext.STextRuntimeModule;
 import org.yakindu.sct.model.stext.resource.StextResource;
+import org.yakindu.sct.model.stext.scoping.STextScopeProvider.ErrorHandlerDelegate;
 import org.yakindu.sct.model.stext.ui.STextUiModule;
 import org.yakindu.sct.model.stext.ui.internal.STextActivator;
 
@@ -33,7 +34,13 @@ public class ResourceModuleProvider implements IModuleProvider {
 	@Override
 	public Module getModule(String... options) {
 		if (options.length == 1 && IDomain.OPTION_HEADLESS.equals(options[0])) {
-			return getLanguageRuntimeModule();
+			return Modules.combine(getLanguageRuntimeModule(), new Module() {
+
+				@Override
+				public void configure(Binder binder) {
+					binder.bind(ErrorHandlerDelegate.class).to(HeadlessErrorHandler.class);
+				}
+			});
 		}
 		Module module = Modules.override(getLanguageRuntimeModule())
 				.with(new STextUiModule(STextActivator.getInstance()));

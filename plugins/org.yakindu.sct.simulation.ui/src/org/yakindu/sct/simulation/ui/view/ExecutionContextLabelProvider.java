@@ -20,12 +20,16 @@ import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.TreeEditor;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TreeItem;
 import org.yakindu.base.types.EnumerationType;
@@ -49,9 +53,11 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 
 	private final int index;
 	private static Map<String, Button> viewerCells = Maps.newHashMap();
+	private boolean isReadOnly;
 
-	public ExecutionContextLabelProvider(int index) {
+	public ExecutionContextLabelProvider(int index, boolean isReadOnly) {
 		this.index = index;
+		this.isReadOnly = isReadOnly;
 	}
 
 	public void update(ViewerCell cell) {
@@ -80,32 +86,52 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 		} else if (element instanceof ExecutionSlot) {
 			Object value = ((ExecutionSlot) element).getValue();
 			if (value != null) {
-				if (((ExecutionSlot) element).getType().getOriginType() instanceof EnumerationType) {
-					EnumerationType enumType = (EnumerationType) ((ExecutionSlot) element).getType().getOriginType();
-					String text = enumType.getEnumerator().get(((Long) value).intValue()).getName();
-					cell.setText(text);
+				if(isReadOnly) {
+					cell.setText(getCellTextValue(element, value));
 				}
-				if (((ExecutionSlot) element).getType().getOriginType() instanceof PrimitiveType) {
+				else if (isPrimitiveType(element)) {
 					PrimitiveType primitiveType = (PrimitiveType) ((ExecutionSlot) element).getType().getOriginType();
-					if (primitiveType != null
-							&& Boolean.class.getSimpleName().equalsIgnoreCase(primitiveType.getName())) {
+					if (isBooleanType(value, primitiveType)) {
 						TreeItem currentItem = (TreeItem) cell.getItem();
 						NativeCellWidgetUtil.addNativeCheckbox(cell, element, value,
 								new TreeEditorDisposeListener(currentItem));
-
 						// layout cells with checkbox widgets to update positions if tree contents have
 						// changed
 						cell.getControl().getParent().layout();
 					} else {
-						cell.setText(value.toString());
+						cell.setText(getCellTextValue(element, value));
 					}
-				} else {
-					cell.setText(value.toString());
-				}
+				} 
 			} else {
 				cell.setText("");
 			}
 		}
+	}
+	
+	protected String getCellTextValue(Object element, Object value) {
+		if(isEnumType(element)) {
+			return getEnumName(element, value);
+		} 
+		return value.toString();
+	}
+
+	protected boolean isBooleanType(Object value, PrimitiveType primitiveType) {
+		return primitiveType != null && value instanceof Boolean;
+	}
+
+	protected boolean isPrimitiveType(Object element) {
+		return ((ExecutionSlot) element).getType().getOriginType() instanceof PrimitiveType;
+	}
+
+	protected String getEnumName(Object element, Object value) {
+		EnumerationType enumType = (EnumerationType) ((ExecutionSlot) element).getType()
+				.getOriginType();
+		String text = enumType.getEnumerator().get(((Long) value).intValue()).getName();
+		return text;
+	}
+
+	protected boolean isEnumType(Object element) {
+		return ((ExecutionSlot) element).getType().getOriginType() instanceof EnumerationType;
 	}
 
 	private void updateNameCell(ViewerCell cell) {
@@ -191,7 +217,8 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 				TreeEditorDisposeListener listener) {
 
 			TreeItem currentItem = (TreeItem) cell.getItem();
-			String cellKey = ((ExecutionSlot) element).getName();
+			ExecutionSlot execSlot = (ExecutionSlot) element;
+			String cellKey = ((CompositeSlot) execSlot.eContainer()).getName() + "." + execSlot.getName();
 			if (viewerCells.get(cellKey) == null || viewerCells.get(cellKey).isDisposed()
 					|| (viewerCells.get(cellKey).getSelection() != ((Boolean) value).booleanValue())) {
 				manageEditorDisposal(currentItem, listener);
@@ -204,26 +231,34 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 		}
 
 		protected static Button createNativeCheckboxCellWidget(Object element, Composite comp) {
+			Cursor cursor = new Cursor(Display.getDefault(), SWT.CURSOR_HAND);
 			Button button = new Button(comp, SWT.CHECK);
+			button.setCursor(cursor);
 			button.setLayoutData(new GridData(SWT.BEGINNING, SWT.FILL, false, true));
 			Label label = new Label(comp, SWT.BOLD);
+			label.setCursor(cursor);
 			label.setForeground(ColorConstants.gray);
 			label.setText(((ExecutionSlot) element).getValue().toString());
 			label.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-			button.addSelectionListener(new SelectionListener() {
-
+			label.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseUp(MouseEvent e) {
+					changeLabelText(element, label);
+				}
+			});
+			button.addSelectionListener(new SelectionAdapter() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
-					((ExecutionSlot) element).setValue(!(Boolean) ((ExecutionSlot) element).getValue());
-					label.setText(((ExecutionSlot) element).getValue().toString());
-				}
-
-				@Override
-				public void widgetDefaultSelected(SelectionEvent e) {
+					changeLabelText(element, label);
 				}
 			});
 			restoreSelection(((ExecutionSlot) element).getValue(), button);
 			return button;
+		}
+
+		protected static void changeLabelText(Object element, Label label) {
+			((ExecutionSlot) element).setValue(!(Boolean) ((ExecutionSlot) element).getValue());
+			label.setText(((ExecutionSlot) element).getValue().toString());
 		}
 
 		protected static Composite createEditorComposite(TreeItem currentItem) {

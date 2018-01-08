@@ -63,9 +63,9 @@ public class StatechartAppearancePreferencePage extends FieldEditorPreferencePag
 	}
 
 	protected void createPriorityLabelEditor(Composite main) {
-		Composite composite = createGroupComposite(main, "Transition Decorator");
+		Composite composite = createGroupComposite(main, "Priority Decorator");
 		BooleanFieldEditor editor = new BooleanFieldEditor(StatechartPreferenceConstants.PREF_PRIORITY_LABELS,
-				"Show transition priority", composite);
+				"Show transition and region priority", composite);
 		addField(editor);
 	}
 
