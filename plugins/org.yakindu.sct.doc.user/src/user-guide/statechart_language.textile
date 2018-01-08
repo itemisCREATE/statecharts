@@ -1337,22 +1337,22 @@ p=. Parent-first, example 1b, after transition
 ==</div>==
 
 
-h4. Child-first/parent-first and local reactions
+h4. Child-first/parent-first and reactions in states
 
-The following examples are somewhat more complex. The statechart used in the examples defines the integer variables _m_, _n_, _o_, _p_, _q_, and _r_. Initially, they are all set to 0. Local reactions in states *A* and *B* set these variables to non-zero values on certain conditions:
+The following examples are somewhat more complex. The statechart used in the examples defines the integer variables _m_, _n_, _o_, _p_, _q_, and _r_. Initially, they are all set to 0. Reactions in states *A* and *B* set these variables to non-zero values on certain conditions:
 * when entering a state,
 * when leaving a state, and
 * when receiving event _e_.
 
 This is useful to understand which actions are performed (or not performed) and in which order.
 
-The local reactions in composite state *A* are as follows:
+The reactions in composite state *A* are as follows:
 
 bc. entry / m = 1
 e / n = 1
 exit / o = 1; r = 1
 
-The local reactions in substate *B* are as follows:
+The reactions in substate *B* are as follows:
 
 bc. entry / m = 2
 e / p = 1
@@ -1396,9 +1396,9 @@ It is worth having a look at the variables and understand what has happened. Whe
 
 We have already seen why _m_ is 2.
 
-Variable _n_ would be set to 1 by a local reaction in *A*, triggered by event _e_. However, since the statechart is in child-first mode, and the _e_ event triggers an immediate transition from *B* to *D*, it is no surprise that _n_ remains 0. The composite state is left before @e / n = 1@ in *A* gets any chance to be executed.
+Variable _n_ would be set to 1 by a reaction in *A*, triggered by event _e_. However, since the statechart is in child-first mode, and the _e_ event triggers an immediate transition from *B* to *D*, it is no surprise that _n_ remains 0. The composite state is left before @e / n = 1@ in *A* gets any chance to be executed.
 
-However, _p_ is also 0, although *B* has priority over *A*, according to child-first execution. The reason is that an active state is checked for possible transitions _first_, and local reactions are executed _second_. This can lead to local reactions not being executed at all. In this case, checking for possible transitions after receiving _e_ finds the transition from *B* to *D*. This transition is executed _immediately_. "Immediately" means that *B* is left straight away. No further action will be done on it, and consequently the local reaction @e / p = 1@ fails to be executed.
+However, _p_ is also 0, although *B* has priority over *A*, according to child-first execution. The reason is that an active state is checked for possible transitions _first_, and reactions within the state are executed _second_. This can lead to certain reactions not being executed at all. In this case, checking for possible transitions after receiving _e_ finds the transition from *B* to *D*. This transition is executed _immediately_. "Immediately" means that *B* is left straight away. No further action will be done on it, and consequently the reaction @e / p = 1@ fails to be executed.
 
 The only exception to the rule is are exit actions, because they are _always_ executed when the corresponding state becomes inactive. That's why the variables _o_, _q_, and _r_ all have a value of 1: They have been modified in the exit actions of *A* and *B*. The execution of exit actions starts with the inner-most state and then proceeds to the outside. Here, the exit action of *B* has set _q_ to 1 and _r_ to 2. After that, the exit action of *A* has set _o_ to 1 and has overridden _r_ with 1.
 
@@ -1428,7 +1428,7 @@ p(#fig_child-first_parent-first_example_2b-2).
 
 p=. Parent-first, example 2b, after transition
 
-The variable values are the same as in "example 2a":#sclang_example_2a and essentially for the same reasons: Entry and exit actions are executed in the same order, and the local reactions on event _e_ are not executed at all.
+The variable values are the same as in "example 2a":#sclang_example_2a and essentially for the same reasons: Entry and exit actions are executed in the same order, and any reactions on event _e_ are not executed at all.
 
 ==</div>==
 
@@ -1447,7 +1447,7 @@ p=. Child-first, example 3a, before transition
 
 Event _e_ causes the following to happen:
 # Due to the <code>@ChildFirstExecution</code> annotation, state *B* is checked first for any transitions to be taken. However, since _p_ is 0, the guard condition of *B → D* is not fulfilled, and the transition is not triggered.
-# After that, the local reactions of state *B* are considered. There is one reaction to an _e_ event, and it sets variable _p_ to 1. Now the guard condition would be fulfilled. However, looking for a matching transition has already been done and won't be repeated in the current run-to-completion step.
+# After that, the reactions of state *B* are considered. There is one reaction to an _e_ event, and it sets variable _p_ to 1. Now the guard condition would be fulfilled. However, looking for a matching transition has already been done and won't be repeated in the current run-to-completion step.
 # Since the child (state *B*) didn't trigger a transition, checking continues with the parent (state *A*). Here a matching transition is found, and the execution flow proceeds to state *C*.
 # The exit actions of *B* and *A* are executed.
 
