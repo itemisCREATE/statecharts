@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static ConstOnlyInternalScope* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class ConstOnlyInternalScopeTest : public ::testing::Test{
 	protected:
+	
+	ConstOnlyInternalScope* statechart;
+	
 	virtual void SetUp() {
 		statechart = new ConstOnlyInternalScope();
 		statechart->init();
@@ -36,6 +36,7 @@ TEST_F(ConstOnlyInternalScopeTest, statechartEntry) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ConstOnlyInternalScope::ConstOnlyInternalScope_main_region_A));
 	
+	
 }
 TEST_F(ConstOnlyInternalScopeTest, stateTransition) {
 	
@@ -46,5 +47,6 @@ TEST_F(ConstOnlyInternalScopeTest, stateTransition) {
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(ConstOnlyInternalScope::ConstOnlyInternalScope_main_region_B));
+	
 	
 }

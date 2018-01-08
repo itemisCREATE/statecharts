@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static Declarations* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class DeclarationsTest : public ::testing::Test{
 	protected:
+	
+	Declarations* statechart;
+	
 	virtual void SetUp() {
 		statechart = new Declarations();
 		statechart->init();
@@ -33,5 +33,6 @@ class DeclarationsTest : public ::testing::Test{
 TEST_F(DeclarationsTest, declarationsTest) {
 	
 	statechart->enter();
+	
 	
 }

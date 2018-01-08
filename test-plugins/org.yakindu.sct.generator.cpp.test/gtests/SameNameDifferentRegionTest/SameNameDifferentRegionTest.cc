@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static SameNameDifferentRegion* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class SameNameDifferentRegionTest : public ::testing::Test{
 	protected:
+	
+	SameNameDifferentRegion* statechart;
+	
 	virtual void SetUp() {
 		statechart = new SameNameDifferentRegion();
 		statechart->init();
@@ -51,5 +51,6 @@ TEST_F(SameNameDifferentRegionTest, sameNameDifferenRegionTest) {
 	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB));
 	
 	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB_r1_StateB));
+	
 	
 }

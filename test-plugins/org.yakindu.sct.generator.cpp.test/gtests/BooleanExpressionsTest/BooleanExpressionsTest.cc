@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static BooleanExpressions* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class BooleanExpressionsTest : public ::testing::Test{
 	protected:
+	
+	BooleanExpressions* statechart;
+	
 	virtual void SetUp() {
 		statechart = new BooleanExpressions();
 		statechart->init();
@@ -55,5 +55,6 @@ TEST_F(BooleanExpressionsTest, booleanExpressions) {
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_equal()== false);
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_notequal()== true);
+	
 	
 }

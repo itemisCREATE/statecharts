@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static TimedTransitions* statechart;
-
 //! The timers are managed by a timer service. */
 static TimedSctUnitRunner * runner;
 
 class TimedTransitionsTest : public ::testing::Test{
 	protected:
+	
+	TimedTransitions* statechart;
+	
 	virtual void SetUp() {
 		statechart = new TimedTransitions();
 		statechart->init();
@@ -42,5 +42,6 @@ TEST_F(TimedTransitionsTest, Timer01) {
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(TimedTransitions::main_region_End));
+	
 	
 }

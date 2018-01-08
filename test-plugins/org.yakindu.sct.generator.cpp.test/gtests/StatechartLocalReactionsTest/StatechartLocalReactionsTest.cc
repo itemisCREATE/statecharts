@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static StatechartLocalReactions* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class StatechartLocalReactionsTest : public ::testing::Test{
 	protected:
+	
+	StatechartLocalReactions* statechart;
+	
 	virtual void SetUp() {
 		statechart = new StatechartLocalReactions();
 		statechart->init();
@@ -48,5 +48,6 @@ TEST_F(StatechartLocalReactionsTest, statechartLocalReactionsTest) {
 		}
 		runner->proceed_cycles(1);
 	}
+	
 	
 }

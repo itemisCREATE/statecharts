@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static HistoryWithExitPoint* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class HistoryWithExitPointTest : public ::testing::Test{
 	protected:
+	
+	HistoryWithExitPoint* statechart;
+	
 	virtual void SetUp() {
 		statechart = new HistoryWithExitPoint();
 		statechart->init();
@@ -65,5 +65,6 @@ TEST_F(HistoryWithExitPointTest, historyEntryAfterExit) {
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithExitPoint::mr_A_r_X2));
+	
 	
 }

@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static SimpleHierachy* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class SimpleHierachyTest : public ::testing::Test{
 	protected:
+	
+	SimpleHierachy* statechart;
+	
 	virtual void SetUp() {
 		statechart = new SimpleHierachy();
 		statechart->init();
@@ -47,5 +47,6 @@ TEST_F(SimpleHierachyTest, simpleHierachyTest) {
 	EXPECT_TRUE(statechart->isStateActive(SimpleHierachy::main_region_B));
 	
 	EXPECT_TRUE(statechart->isStateActive(SimpleHierachy::main_region_B_subregion1_B1));
+	
 	
 }

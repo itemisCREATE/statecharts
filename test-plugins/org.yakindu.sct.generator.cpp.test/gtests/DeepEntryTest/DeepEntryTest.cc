@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static DeepEntry* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class DeepEntryTest : public ::testing::Test{
 	protected:
+	
+	DeepEntry* statechart;
+	
 	virtual void SetUp() {
 		statechart = new DeepEntry();
 		statechart->init();
@@ -39,5 +39,6 @@ TEST_F(DeepEntryTest, enterToSubstate) {
 	EXPECT_TRUE(vergleich== 4l);
 	
 	statechart->exit();
+	
 	
 }

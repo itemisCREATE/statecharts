@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static CKeywords* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class CKeywordsTest : public ::testing::Test{
 	protected:
+	
+	CKeywords* statechart;
+	
 	virtual void SetUp() {
 		statechart = new CKeywords();
 		statechart->init();
@@ -45,5 +45,6 @@ TEST_F(CKeywordsTest, CKeywordsTest) {
 	EXPECT_TRUE(statechart->isStateActive(CKeywords::auto_loop_switch_case));
 	
 	EXPECT_TRUE(statechart->isStateActive(CKeywords::auto_loop_switch_case_enum_asm));
+	
 	
 }

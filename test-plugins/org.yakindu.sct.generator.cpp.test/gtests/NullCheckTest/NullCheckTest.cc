@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static NullCheck* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class NullCheckTest : public ::testing::Test{
 	protected:
+	
+	NullCheck* statechart;
+	
 	virtual void SetUp() {
 		statechart = new NullCheck();
 		statechart->init();
@@ -39,5 +39,6 @@ TEST_F(NullCheckTest, SimpleNullCheckTest) {
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(NullCheck::main_region_B));
+	
 	
 }

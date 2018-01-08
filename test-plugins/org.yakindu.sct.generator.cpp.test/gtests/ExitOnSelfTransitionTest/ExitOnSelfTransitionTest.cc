@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static ExitOnSelfTransition* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class ExitOnSelfTransitionTest : public ::testing::Test{
 	protected:
+	
+	ExitOnSelfTransition* statechart;
+	
 	virtual void SetUp() {
 		statechart = new ExitOnSelfTransition();
 		statechart->init();
@@ -55,5 +55,6 @@ TEST_F(ExitOnSelfTransitionTest, ExitOnSelfTransitionTest) {
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_entryCount()== 2l);
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 2l);
+	
 	
 }

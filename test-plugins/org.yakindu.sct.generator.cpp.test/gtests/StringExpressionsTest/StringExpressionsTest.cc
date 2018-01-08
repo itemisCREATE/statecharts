@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static StringExpressions* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class StringExpressionsTest : public ::testing::Test{
 	protected:
+	
+	StringExpressions* statechart;
+	
 	virtual void SetUp() {
 		statechart = new StringExpressions();
 		statechart->init();
@@ -95,5 +95,6 @@ TEST_F(StringExpressionsTest, StringExpressionsTest) {
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_stringVarEqual());
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_stringVarNotEqual());
+	
 	
 }

@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static NamedInterfaceAccess* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class NamedInterfaceAccessTest : public ::testing::Test{
 	protected:
+	
+	NamedInterfaceAccess* statechart;
+	
 	virtual void SetUp() {
 		statechart = new NamedInterfaceAccess();
 		statechart->init();
@@ -49,5 +49,6 @@ TEST_F(NamedInterfaceAccessTest, SafeOpenSuccess) {
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->getSCI_Safe()->isRaised_open());
+	
 	
 }

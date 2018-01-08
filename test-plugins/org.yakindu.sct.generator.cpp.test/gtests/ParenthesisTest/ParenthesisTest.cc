@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static Parenthesis* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class ParenthesisTest : public ::testing::Test{
 	protected:
+	
+	Parenthesis* statechart;
+	
 	virtual void SetUp() {
 		statechart = new Parenthesis();
 		statechart->init();
@@ -37,5 +37,6 @@ TEST_F(ParenthesisTest, simple) {
 	EXPECT_TRUE(statechart->isStateActive(Parenthesis::mainRegion_A));
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_erg()== 8l);
+	
 	
 }

@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static AssignmentAsExpression* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class AssignmentAsExpressionTest : public ::testing::Test{
 	protected:
+	
+	AssignmentAsExpression* statechart;
+	
 	virtual void SetUp() {
 		statechart = new AssignmentAsExpression();
 		statechart->init();
@@ -91,5 +91,6 @@ TEST_F(AssignmentAsExpressionTest, simpleAssignment) {
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_u()== 12l);
 	
 	statechart->exit();
+	
 	
 }

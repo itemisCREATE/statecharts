@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static ParentFirstExecutionHierarchy* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class ParentFirstExecutionHierarchyTest : public ::testing::Test{
 	protected:
+	
+	ParentFirstExecutionHierarchy* statechart;
+	
 	virtual void SetUp() {
 		statechart = new ParentFirstExecutionHierarchy();
 		statechart->init();
@@ -36,6 +36,7 @@ void assertNoLocalReaction(){
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_aa_local());
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_aaa_local());
+	
 	
 }
 
@@ -67,6 +68,7 @@ TEST_F(ParentFirstExecutionHierarchyTest, childShouldTakeTransition) {
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_aaa_local());
 	
+	
 }
 TEST_F(ParentFirstExecutionHierarchyTest, parentShouldTakeTransition) {
 	
@@ -94,6 +96,7 @@ TEST_F(ParentFirstExecutionHierarchyTest, parentShouldTakeTransition) {
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_aaa_local());
 	
+	
 }
 TEST_F(ParentFirstExecutionHierarchyTest, grandparentShouldTakeTransition) {
 	
@@ -115,6 +118,7 @@ TEST_F(ParentFirstExecutionHierarchyTest, grandparentShouldTakeTransition) {
 	
 	assertNoLocalReaction();
 	
+	
 }
 TEST_F(ParentFirstExecutionHierarchyTest, expectLocalReactrionsExecuteWithNoTransition) {
 	
@@ -131,5 +135,6 @@ TEST_F(ParentFirstExecutionHierarchyTest, expectLocalReactrionsExecuteWithNoTran
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local());
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local());
+	
 	
 }

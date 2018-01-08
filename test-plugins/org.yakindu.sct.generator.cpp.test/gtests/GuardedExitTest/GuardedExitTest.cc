@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static GuardedExit* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class GuardedExitTest : public ::testing::Test{
 	protected:
+	
+	GuardedExit* statechart;
+	
 	virtual void SetUp() {
 		statechart = new GuardedExit();
 		statechart->init();
@@ -39,6 +39,7 @@ void checkDone(bool shouldBeDone){
 	
 	EXPECT_TRUE(shouldBeDone ? statechart->getDefaultSCI()->get_done()  : !statechart->getDefaultSCI()->get_done());
 	
+	
 }
 
 TEST_F(GuardedExitTest, ExitTaken) {
@@ -51,6 +52,7 @@ TEST_F(GuardedExitTest, ExitTaken) {
 	
 	checkDone(false);
 	
+	
 }
 TEST_F(GuardedExitTest, ExitNotTaken) {
 	
@@ -61,5 +63,6 @@ TEST_F(GuardedExitTest, ExitNotTaken) {
 	statechart->getDefaultSCI()->set_guard(true);
 	
 	checkDone(true);
+	
 	
 }

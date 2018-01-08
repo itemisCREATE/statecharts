@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static ReadOnlyVariable* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class ReadOnlyVariableTest : public ::testing::Test{
 	protected:
+	
+	ReadOnlyVariable* statechart;
+	
 	virtual void SetUp() {
 		statechart = new ReadOnlyVariable();
 		statechart->init();
@@ -71,5 +71,6 @@ TEST_F(ReadOnlyVariableTest, ReadOnlyVariableTest) {
 	EXPECT_TRUE(statechart->getSCI_A()->get_myBool()== false);
 	
 	EXPECT_TRUE(statechart->getSCI_A()->get_myReal()== 7.7);
+	
 	
 }

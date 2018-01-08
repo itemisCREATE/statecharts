@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static EventDrivenTriggeredByTimeEvent* statechart;
-
 //! The timers are managed by a timer service. */
 static TimedSctUnitRunner * runner;
 
 class EventDrivenTriggeredByTimeEventTest : public ::testing::Test{
 	protected:
+	
+	EventDrivenTriggeredByTimeEvent* statechart;
+	
 	virtual void SetUp() {
 		statechart = new EventDrivenTriggeredByTimeEvent();
 		statechart->init();
@@ -78,5 +78,6 @@ TEST_F(EventDrivenTriggeredByTimeEventTest, timeEventTriggersRunCycle) {
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_transition_count()== 2000l);
 	
 	statechart->exit();
+	
 	
 }

@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static Constants* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class ConstantsTests : public ::testing::Test{
 	protected:
+	
+	Constants* statechart;
+	
 	virtual void SetUp() {
 		statechart = new Constants();
 		statechart->init();
@@ -63,5 +63,6 @@ TEST_F(ConstantsTests, constantDefinition) {
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_result()== 1000l);
 	
 	EXPECT_TRUE(statechart->isStateActive(Constants::main_region_A));
+	
 	
 }

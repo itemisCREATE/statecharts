@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static FeatureCalls* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class FeatureCallsTest : public ::testing::Test{
 	protected:
+	
+	FeatureCalls* statechart;
+	
 	virtual void SetUp() {
 		statechart = new FeatureCalls();
 		statechart->init();
@@ -39,5 +39,6 @@ TEST_F(FeatureCallsTest, FeatureCalls) {
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(FeatureCalls::main_region_A));
+	
 	
 }

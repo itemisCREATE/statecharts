@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static Choice* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class ChoiceTest : public ::testing::Test{
 	protected:
+	
+	Choice* statechart;
+	
 	virtual void SetUp() {
 		statechart = new Choice();
 		statechart->init();
@@ -41,6 +41,7 @@ void initForEventE(bool valueForC){
 	
 	runner->proceed_cycles(1);
 	
+	
 }
 void initForEventF(bool valueForC){
 	
@@ -53,6 +54,7 @@ void initForEventF(bool valueForC){
 	statechart->getDefaultSCI()->raise_f();
 	
 	runner->proceed_cycles(1);
+	
 	
 }
 void initForEventG(bool valueForC){
@@ -67,6 +69,7 @@ void initForEventG(bool valueForC){
 	
 	runner->proceed_cycles(1);
 	
+	
 }
 void initForEventH(bool valueForC){
 	
@@ -80,6 +83,7 @@ void initForEventH(bool valueForC){
 	
 	runner->proceed_cycles(1);
 	
+	
 }
 
 TEST_F(ChoiceTest, elseChoiceUsingNonDefaultTransition) {
@@ -88,12 +92,14 @@ TEST_F(ChoiceTest, elseChoiceUsingNonDefaultTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_C));
 	
+	
 }
 TEST_F(ChoiceTest, elseChoiceUsingDefaultTransition) {
 	
 	initForEventE(false);
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_B));
+	
 	
 }
 TEST_F(ChoiceTest, defaultChoiceUsingNonDefaultTransition) {
@@ -102,12 +108,14 @@ TEST_F(ChoiceTest, defaultChoiceUsingNonDefaultTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_C));
 	
+	
 }
 TEST_F(ChoiceTest, defaultChoiceUsingDefaultTransition) {
 	
 	initForEventG(false);
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_B));
+	
 	
 }
 TEST_F(ChoiceTest, uncheckedChoiceUsingNonDefaultTransition) {
@@ -116,6 +124,7 @@ TEST_F(ChoiceTest, uncheckedChoiceUsingNonDefaultTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_C));
 	
+	
 }
 TEST_F(ChoiceTest, uncheckedChoiceUsingDefaultTransition) {
 	
@@ -123,11 +132,13 @@ TEST_F(ChoiceTest, uncheckedChoiceUsingDefaultTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_B));
 	
+	
 }
 TEST_F(ChoiceTest, alwaysTrueTransitionInChoice) {
 	
 	initForEventH(true);
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_C));
+	
 	
 }

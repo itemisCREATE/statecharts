@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static ConditionalExpressions* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class ConditionalExpression : public ::testing::Test{
 	protected:
+	
+	ConditionalExpressions* statechart;
+	
 	virtual void SetUp() {
 		statechart = new ConditionalExpressions();
 		statechart->init();
@@ -45,5 +45,6 @@ TEST_F(ConditionalExpression, ConditionalExpressionTest) {
 	EXPECT_TRUE(statechart->isStateActive(ConditionalExpressions::main_region_B));
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_condition()== 2l);
+	
 	
 }

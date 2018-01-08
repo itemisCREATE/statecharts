@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static FinalState* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class FinalStateTest : public ::testing::Test{
 	protected:
+	
+	FinalState* statechart;
+	
 	virtual void SetUp() {
 		statechart = new FinalState();
 		statechart->init();
@@ -37,5 +37,6 @@ TEST_F(FinalStateTest, StatechartNameTest) {
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isFinal());
+	
 	
 }

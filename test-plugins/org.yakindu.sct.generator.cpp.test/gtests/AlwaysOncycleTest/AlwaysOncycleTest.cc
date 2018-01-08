@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static AlwaysOncycle* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class AlwaysOncycleTest : public ::testing::Test{
 	protected:
+	
+	AlwaysOncycle* statechart;
+	
 	virtual void SetUp() {
 		statechart = new AlwaysOncycle();
 		statechart->init();
@@ -53,5 +53,6 @@ TEST_F(AlwaysOncycleTest, alwaysOnCycleTest) {
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateA));
+	
 	
 }

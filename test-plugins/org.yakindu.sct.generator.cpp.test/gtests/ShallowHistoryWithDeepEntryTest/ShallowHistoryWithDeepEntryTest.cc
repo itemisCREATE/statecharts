@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static ShallowHistoryWithDeepEntry* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class ShallowHistoryWithDeepEntryTest : public ::testing::Test{
 	protected:
+	
+	ShallowHistoryWithDeepEntry* statechart;
+	
 	virtual void SetUp() {
 		statechart = new ShallowHistoryWithDeepEntry();
 		statechart->init();
@@ -54,6 +54,7 @@ TEST_F(ShallowHistoryWithDeepEntryTest, noDeepEntryWithinHistory) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Z__region0_A));
 	
+	
 }
 TEST_F(ShallowHistoryWithDeepEntryTest, deepEntryWithinHistory) {
 	
@@ -89,6 +90,7 @@ TEST_F(ShallowHistoryWithDeepEntryTest, deepEntryWithinHistory) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Z__region0_B));
 	
+	
 }
 TEST_F(ShallowHistoryWithDeepEntryTest, directDeepEntryIntoHistory) {
 	
@@ -117,5 +119,6 @@ TEST_F(ShallowHistoryWithDeepEntryTest, directDeepEntryIntoHistory) {
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Z__region0_B__region0_C));
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Z__region0_B));
+	
 	
 }

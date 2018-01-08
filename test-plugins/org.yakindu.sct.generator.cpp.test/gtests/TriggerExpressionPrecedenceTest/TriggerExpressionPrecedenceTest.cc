@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static TriggerExpressionPrecedence* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class TriggerExpressionPrecedenceTest : public ::testing::Test{
 	protected:
+	
+	TriggerExpressionPrecedence* statechart;
+	
 	virtual void SetUp() {
 		statechart = new TriggerExpressionPrecedence();
 		statechart->init();
@@ -42,6 +42,7 @@ TEST_F(TriggerExpressionPrecedenceTest, unsatisfiedTriggerAndFGuardFalseOrFalse)
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_e1_transition());
 	
+	
 }
 TEST_F(TriggerExpressionPrecedenceTest, unsatisfiedTriggerAndFGuardTrueOrFalse) {
 	
@@ -54,6 +55,7 @@ TEST_F(TriggerExpressionPrecedenceTest, unsatisfiedTriggerAndFGuardTrueOrFalse) 
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_e1_transition());
+	
 	
 }
 TEST_F(TriggerExpressionPrecedenceTest, unsatisfiedTriggerAndFGuardFalseOrTrue) {
@@ -68,6 +70,7 @@ TEST_F(TriggerExpressionPrecedenceTest, unsatisfiedTriggerAndFGuardFalseOrTrue) 
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_e1_transition());
 	
+	
 }
 TEST_F(TriggerExpressionPrecedenceTest, unsatisfiedTriggerAndFGuardTrueOrTrue) {
 	
@@ -80,5 +83,6 @@ TEST_F(TriggerExpressionPrecedenceTest, unsatisfiedTriggerAndFGuardTrueOrTrue) {
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_e1_transition());
+	
 	
 }

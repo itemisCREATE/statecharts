@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static IntegerExpressions* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class IntegerExpressionsTest : public ::testing::Test{
 	protected:
+	
+	IntegerExpressions* statechart;
+	
 	virtual void SetUp() {
 		statechart = new IntegerExpressions();
 		statechart->init();
@@ -77,5 +77,6 @@ TEST_F(IntegerExpressionsTest, integerExpressions) {
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_minusAssign()== - 8l );
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_moduloAssign()== 0l);
+	
 	
 }

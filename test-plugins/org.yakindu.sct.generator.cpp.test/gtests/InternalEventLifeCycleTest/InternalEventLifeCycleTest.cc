@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static InternalEventLifeCycle* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class InternalEventLifeCycleTest : public ::testing::Test{
 	protected:
+	
+	InternalEventLifeCycle* statechart;
+	
 	virtual void SetUp() {
 		statechart = new InternalEventLifeCycle();
 		statechart->init();
@@ -65,5 +65,6 @@ TEST_F(InternalEventLifeCycleTest, InternalEventLifeCycleTest) {
 	EXPECT_TRUE(statechart->isStateActive(InternalEventLifeCycle::r1_A));
 	
 	EXPECT_TRUE(statechart->isStateActive(InternalEventLifeCycle::r2_C));
+	
 	
 }

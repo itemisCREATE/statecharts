@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static FloatModulo* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class FloatModuloTest : public ::testing::Test{
 	protected:
+	
+	FloatModulo* statechart;
+	
 	virtual void SetUp() {
 		statechart = new FloatModulo();
 		statechart->init();
@@ -37,5 +37,6 @@ TEST_F(FloatModuloTest, test) {
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isFinal());
+	
 	
 }

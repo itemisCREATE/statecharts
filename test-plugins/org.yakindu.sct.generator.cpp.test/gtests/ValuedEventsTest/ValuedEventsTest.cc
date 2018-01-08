@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static ValuedEvents* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class ValuedEventsTest : public ::testing::Test{
 	protected:
+	
+	ValuedEvents* statechart;
+	
 	virtual void SetUp() {
 		statechart = new ValuedEvents();
 		statechart->init();
@@ -63,5 +63,6 @@ TEST_F(ValuedEventsTest, valuedEventsTest) {
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myReal()== 20l);
 	
 	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), "tool") == 0);
+	
 	
 }

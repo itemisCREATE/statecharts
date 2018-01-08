@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static GuardedEntry* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class GuardedEntryTest : public ::testing::Test{
 	protected:
+	
+	GuardedEntry* statechart;
+	
 	virtual void SetUp() {
 		statechart = new GuardedEntry();
 		statechart->init();
@@ -51,6 +51,7 @@ void initEntryInTransition(bool guardVar, bool doneVar){
 	
 	EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_A));
 	
+	
 }
 
 TEST_F(GuardedEntryTest, EntryNotTakenOnStatechartEnter) {
@@ -63,6 +64,7 @@ TEST_F(GuardedEntryTest, EntryNotTakenOnStatechartEnter) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_done()== false);
 	
+	
 }
 TEST_F(GuardedEntryTest, EntryTakenOnStatechartEnter) {
 	
@@ -74,6 +76,7 @@ TEST_F(GuardedEntryTest, EntryTakenOnStatechartEnter) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_done()== true);
 	
+	
 }
 TEST_F(GuardedEntryTest, EntryTakenInTransition) {
 	
@@ -81,11 +84,13 @@ TEST_F(GuardedEntryTest, EntryTakenInTransition) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_done());
 	
+	
 }
 TEST_F(GuardedEntryTest, EntryNotTakenInTransition) {
 	
 	initEntryInTransition(false,false);
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_done());
+	
 	
 }

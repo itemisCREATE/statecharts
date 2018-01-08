@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static StatechartActive* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class StatechartActiveTest : public ::testing::Test{
 	protected:
+	
+	StatechartActive* statechart;
+	
 	virtual void SetUp() {
 		statechart = new StatechartActive();
 		statechart->init();
@@ -34,12 +34,14 @@ TEST_F(StatechartActiveTest, inactiveBeforeEnter) {
 	
 	EXPECT_TRUE(!statechart->isActive());
 	
+	
 }
 TEST_F(StatechartActiveTest, activeAfterEnter) {
 	
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isActive());
+	
 	
 }
 TEST_F(StatechartActiveTest, inactiveAfterExit) {
@@ -49,6 +51,7 @@ TEST_F(StatechartActiveTest, inactiveAfterExit) {
 	statechart->exit();
 	
 	EXPECT_TRUE(!statechart->isActive());
+	
 	
 }
 TEST_F(StatechartActiveTest, activeAfterReenter) {
@@ -60,5 +63,6 @@ TEST_F(StatechartActiveTest, activeAfterReenter) {
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isActive());
+	
 	
 }

@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static DeepHistory* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class DeepHistoryTest : public ::testing::Test{
 	protected:
+	
+	DeepHistory* statechart;
+	
 	virtual void SetUp() {
 		statechart = new DeepHistory();
 		statechart->init();
@@ -69,5 +69,6 @@ TEST_F(DeepHistoryTest, deepHistoryTest) {
 	EXPECT_TRUE(!statechart->isStateActive(DeepHistory::mainRegion_State1));
 	
 	EXPECT_TRUE(statechart->isStateActive(DeepHistory::mainRegion_State2__region0_State4__region0_State7__region0_State9));
+	
 	
 }

@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static Guard* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class GuardTest : public ::testing::Test{
 	protected:
+	
+	Guard* statechart;
+	
 	virtual void SetUp() {
 		statechart = new Guard();
 		statechart->init();
@@ -65,5 +65,6 @@ TEST_F(GuardTest, guardTest) {
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(Guard::main_region_A));
+	
 	
 }

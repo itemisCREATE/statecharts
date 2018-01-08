@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static STextKeywordsInStatesAndRegions* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class STextKeywordsInStatesAndRegionsTest : public ::testing::Test{
 	protected:
+	
+	STextKeywordsInStatesAndRegions* statechart;
+	
 	virtual void SetUp() {
 		statechart = new STextKeywordsInStatesAndRegions();
 		statechart->init();
@@ -953,5 +953,6 @@ TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::valueof_oncycle));
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_valueof));
+	
 	
 }

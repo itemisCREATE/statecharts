@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static TriggerGuardExpressions* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class TriggerGuardExpressionsTest : public ::testing::Test{
 	protected:
+	
+	TriggerGuardExpressions* statechart;
+	
 	virtual void SetUp() {
 		statechart = new TriggerGuardExpressions();
 		statechart->init();
@@ -66,6 +66,7 @@ TEST_F(TriggerGuardExpressionsTest, trueGuard) {
 	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_B));
 	
+	
 }
 TEST_F(TriggerGuardExpressionsTest, falseGuard) {
 	
@@ -94,5 +95,6 @@ TEST_F(TriggerGuardExpressionsTest, falseGuard) {
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
+	
 	
 }

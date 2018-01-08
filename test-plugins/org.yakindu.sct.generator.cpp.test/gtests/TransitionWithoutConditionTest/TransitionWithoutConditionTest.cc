@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static TransitionWithoutCondition* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class TransitionWithoutConditionTest : public ::testing::Test{
 	protected:
+	
+	TransitionWithoutCondition* statechart;
+	
 	virtual void SetUp() {
 		statechart = new TransitionWithoutCondition();
 		statechart->init();
@@ -39,5 +39,6 @@ TEST_F(TransitionWithoutConditionTest, TransitionWithoutConditionTest) {
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(TransitionWithoutCondition::main_region_B));
+	
 	
 }

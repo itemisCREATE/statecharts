@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static EnterState* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class EnterStateTest : public ::testing::Test{
 	protected:
+	
+	EnterState* statechart;
+	
 	virtual void SetUp() {
 		statechart = new EnterState();
 		statechart->init();
@@ -42,6 +42,7 @@ TEST_F(EnterStateTest, defaultEntry) {
 	
 	EXPECT_TRUE(statechart->isStateActive(EnterState::r_B_r_E));
 	
+	
 }
 TEST_F(EnterStateTest, namedEntryThroughNamedTransition) {
 	
@@ -55,6 +56,7 @@ TEST_F(EnterStateTest, namedEntryThroughNamedTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(EnterState::r_B_r_F));
 	
+	
 }
 TEST_F(EnterStateTest, namedEntryThroughDefaultTransition) {
 	
@@ -67,5 +69,6 @@ TEST_F(EnterStateTest, namedEntryThroughDefaultTransition) {
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(EnterState::r_B_r_E));
+	
 	
 }

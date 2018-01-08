@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static PriorityValues* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class PriorityValuesTest : public ::testing::Test{
 	protected:
+	
+	PriorityValues* statechart;
+	
 	virtual void SetUp() {
 		statechart = new PriorityValues();
 		statechart->init();
@@ -42,6 +42,7 @@ TEST_F(PriorityValuesTest, transitionPriority) {
 	
 	EXPECT_TRUE(statechart->isStateActive(PriorityValues::main_region_C));
 	
+	
 }
 TEST_F(PriorityValuesTest, regionPriority) {
 	
@@ -56,5 +57,6 @@ TEST_F(PriorityValuesTest, regionPriority) {
 	EXPECT_TRUE(statechart->isStateActive(PriorityValues::someRegion_B));
 	
 	EXPECT_TRUE(!statechart->isStateActive(PriorityValues::main_region_E));
+	
 	
 }

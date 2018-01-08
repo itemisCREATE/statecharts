@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static BitExpressions* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class BitExpressionsTest : public ::testing::Test{
 	protected:
+	
+	BitExpressions* statechart;
+	
 	virtual void SetUp() {
 		statechart = new BitExpressions();
 		statechart->init();
@@ -57,5 +57,6 @@ TEST_F(BitExpressionsTest, BitExpressions) {
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_bitwiseOr()== 7l);
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_bitwiseXor()== 2l);
+	
 	
 }

@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static EventDrivenInternalEvent* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class EventDrivenInternalEventTest : public ::testing::Test{
 	protected:
+	
+	EventDrivenInternalEvent* statechart;
+	
 	virtual void SetUp() {
 		statechart = new EventDrivenInternalEvent();
 		statechart->init();
@@ -53,5 +53,6 @@ TEST_F(EventDrivenInternalEventTest, checkInternlEventQueueing) {
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_i2_sequence()== 3l);
 	
 	statechart->exit();
+	
 	
 }

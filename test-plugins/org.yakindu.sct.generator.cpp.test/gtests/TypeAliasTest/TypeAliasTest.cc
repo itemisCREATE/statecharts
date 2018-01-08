@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static TypeAlias* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class TypeAliasTest : public ::testing::Test{
 	protected:
+	
+	TypeAlias* statechart;
+	
 	virtual void SetUp() {
 		statechart = new TypeAlias();
 		statechart->init();
@@ -53,5 +53,6 @@ TEST_F(TypeAliasTest, TypeAliasTest) {
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(TypeAlias::main_region_End));
+	
 	
 }

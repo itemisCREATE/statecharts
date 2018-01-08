@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static CastExpressions* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class CastExpressionsTest : public ::testing::Test{
 	protected:
+	
+	CastExpressions* statechart;
+	
 	virtual void SetUp() {
 		statechart = new CastExpressions();
 		statechart->init();
@@ -47,5 +47,6 @@ TEST_F(CastExpressionsTest, CastExpressionTest) {
 	EXPECT_TRUE(statechart->isStateActive(CastExpressions::main_region_C));
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_realValue()== 757l);
+	
 	
 }

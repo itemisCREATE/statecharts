@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static SyncFork* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class SyncForkTest : public ::testing::Test{
 	protected:
+	
+	SyncFork* statechart;
+	
 	virtual void SetUp() {
 		statechart = new SyncFork();
 		statechart->init();
@@ -71,5 +71,6 @@ TEST_F(SyncForkTest, syncForkTest) {
 	EXPECT_TRUE(statechart->isStateActive(SyncFork::main_region_B_r1_C1));
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncFork::main_region_B_r2_D1));
+	
 	
 }

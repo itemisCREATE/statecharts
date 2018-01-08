@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static DynamicChoice* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class DynamicChoiceTest : public ::testing::Test{
 	protected:
+	
+	DynamicChoice* statechart;
+	
 	virtual void SetUp() {
 		statechart = new DynamicChoice();
 		statechart->init();
@@ -39,5 +39,6 @@ TEST_F(DynamicChoiceTest, DynamicChoiceTest) {
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(DynamicChoice::main_region_A));
+	
 	
 }

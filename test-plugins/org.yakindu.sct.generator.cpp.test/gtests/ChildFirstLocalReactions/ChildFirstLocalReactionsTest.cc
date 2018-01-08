@@ -5,16 +5,16 @@
 #include "sc_runner.h"
 #include "sc_types.h"
 
-static long counter = 0l;
-
-
-static ChildFirstLocalReactions* statechart;
 
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class ChildFirstLocalReactionsTest : public ::testing::Test{
 	protected:
+	
+	ChildFirstLocalReactions* statechart;
+	long counter = 0l;
+	
 	virtual void SetUp() {
 		statechart = new ChildFirstLocalReactions();
 		statechart->init();
@@ -49,6 +49,7 @@ TEST_F(ChildFirstLocalReactionsTest, expectBottomUpLocalReactionOrder) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 4l);
 	
+	
 }
 TEST_F(ChildFirstLocalReactionsTest, expectParentLocalReactionOnChildLocalTransition) {
 	
@@ -69,6 +70,7 @@ TEST_F(ChildFirstLocalReactionsTest, expectParentLocalReactionOnChildLocalTransi
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 2l);
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 3l);
+	
 	
 }
 TEST_F(ChildFirstLocalReactionsTest, expectGrandparentLocalReactionOnParentLocalTransition) {
@@ -92,6 +94,7 @@ TEST_F(ChildFirstLocalReactionsTest, expectGrandparentLocalReactionOnParentLocal
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 2l);
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 3l);
+	
 	
 }
 TEST_F(ChildFirstLocalReactionsTest, expectNoLocalReactionOnGrandparentTransition) {
@@ -117,5 +120,6 @@ TEST_F(ChildFirstLocalReactionsTest, expectNoLocalReactionOnGrandparentTransitio
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 0l);
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 3l);
+	
 	
 }

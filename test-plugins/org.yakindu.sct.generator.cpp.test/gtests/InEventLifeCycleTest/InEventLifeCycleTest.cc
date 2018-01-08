@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static InEventLifeCycle* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class InEventLifeCycleTest : public ::testing::Test{
 	protected:
+	
+	InEventLifeCycle* statechart;
+	
 	virtual void SetUp() {
 		statechart = new InEventLifeCycle();
 		statechart->init();
@@ -41,5 +41,6 @@ TEST_F(InEventLifeCycleTest, eventLifeCycle) {
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_i()== 1l);
+	
 	
 }

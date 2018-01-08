@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static OutEventLifeCycle* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class OutEventLifeCycleTest : public ::testing::Test{
 	protected:
+	
+	OutEventLifeCycle* statechart;
+	
 	virtual void SetUp() {
 		statechart = new OutEventLifeCycle();
 		statechart->init();
@@ -41,6 +41,7 @@ void init(bool sndCycle){
 		runner->proceed_cycles(1);
 	}
 	
+	
 }
 
 TEST_F(OutEventLifeCycleTest, availableAfterCycle) {
@@ -53,12 +54,14 @@ TEST_F(OutEventLifeCycleTest, availableAfterCycle) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->isRaised_f());
 	
+	
 }
 TEST_F(OutEventLifeCycleTest, availableWithinCycle) {
 	
 	init(false);
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_f_available_in_cycle());
+	
 	
 }
 TEST_F(OutEventLifeCycleTest, unvailableWithin2ndCycle) {
@@ -67,11 +70,13 @@ TEST_F(OutEventLifeCycleTest, unvailableWithin2ndCycle) {
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_f_available_in_next_cycle());
 	
+	
 }
 TEST_F(OutEventLifeCycleTest, unvailableAfter2ndCycle) {
 	
 	init(true);
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->isRaised_f());
+	
 	
 }

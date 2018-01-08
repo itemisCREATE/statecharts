@@ -6,14 +6,14 @@
 #include "sc_types.h"
 
 
-
-static HistoryWithoutInitialStep* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class HistoryWithoutInitialStepTest : public ::testing::Test{
 	protected:
+	
+	HistoryWithoutInitialStep* statechart;
+	
 	virtual void SetUp() {
 		statechart = new HistoryWithoutInitialStep();
 		statechart->init();
@@ -39,6 +39,7 @@ void init(){
 	
 	runner->proceed_cycles(1);
 	
+	
 }
 
 TEST_F(HistoryWithoutInitialStepTest, enterThroughInitialEntry) {
@@ -52,6 +53,7 @@ TEST_F(HistoryWithoutInitialStepTest, enterThroughInitialEntry) {
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_B_r1_D));
+	
 	
 }
 TEST_F(HistoryWithoutInitialStepTest, enterCThroughHistory) {
@@ -71,6 +73,7 @@ TEST_F(HistoryWithoutInitialStepTest, enterCThroughHistory) {
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_B_r1_C));
+	
 	
 }
 TEST_F(HistoryWithoutInitialStepTest, enterDThroughHistory) {
@@ -94,5 +97,6 @@ TEST_F(HistoryWithoutInitialStepTest, enterDThroughHistory) {
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_B_r1_D));
+	
 	
 }

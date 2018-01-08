@@ -10,7 +10,6 @@ using ::testing::AtLeast;
 using ::testing::Return;
 using ::testing::_;
 
-
 class InternalOperation1Mock{
 	public:
 	int callCount;
@@ -1204,13 +1203,14 @@ class MockDefault : public Operations::DefaultSCI_OCB {
 	}
 };
 
-static Operations* statechart;
-
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class OperationsTest : public ::testing::Test{
 	protected:
+	
+	Operations* statechart;
+	
 	virtual void SetUp() {
 		statechart = new Operations();
 		statechart->init();
