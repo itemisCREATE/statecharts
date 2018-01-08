@@ -12,12 +12,8 @@
       name="CycleBased">
     <properties
         name="period">
-      <typeSpecifier
-          type="//@member.2"/>
     </properties>
   </member>
-  <member xsi:type="types:PrimitiveType"
-      name="integer"/>
   <member xsi:type="types:AnnotationType"
       name="ChildFirstExecution"/>
   <member xsi:type="types:AnnotationType"
