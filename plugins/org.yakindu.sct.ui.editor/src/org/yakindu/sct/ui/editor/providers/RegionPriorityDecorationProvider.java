@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 committers of YAKINDU and others.
+ * Copyright (c) 2018 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -19,16 +19,16 @@ import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditDomain;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecorator;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecoratorTarget;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.MapModeUtil;
+import org.yakindu.sct.model.sgraph.CompositeElement;
+import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.model.sgraph.Transition;
-import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.ui.editor.editor.figures.PriorityFigure;
-import org.yakindu.sct.ui.editor.editparts.TransitionEditPart;
+import org.yakindu.sct.ui.editor.editparts.RegionEditPart;
 
 /**
  * @author andreas muelder - Initial contribution and API
  */
-public class TransitionPriorityDecorationProvider extends AbstractPriorityDecorationProvider {
+public class RegionPriorityDecorationProvider extends AbstractPriorityDecorationProvider {
 
 	@Override
 	public void createDecorators(IDecoratorTarget decoratorTarget) {
@@ -38,7 +38,7 @@ public class TransitionPriorityDecorationProvider extends AbstractPriorityDecora
 			if (!(ed instanceof DiagramEditDomain)) {
 				return;
 			}
-			if (shouldInstall(((DiagramEditDomain) ed).getEditorPart()) && editPart instanceof TransitionEditPart) {
+			if (shouldInstall(((DiagramEditDomain) ed).getEditorPart()) && editPart instanceof RegionEditPart) {
 				IDecorator decorator = createStatusDecorator(decoratorTarget);
 				decorators.add(decorator);
 				decoratorTarget.installDecorator(getDecoratorKey(), decorator);
@@ -47,30 +47,29 @@ public class TransitionPriorityDecorationProvider extends AbstractPriorityDecora
 	}
 
 	protected IDecorator createStatusDecorator(IDecoratorTarget decoratorTarget) {
-		return new TransitionPriorityDecorator(decoratorTarget);
+		return new RegionPriorityDecorator(decoratorTarget);
 	}
 
-	public static class TransitionPriorityDecorator extends AbstractPriorityDecorator {
+	public static class RegionPriorityDecorator extends AbstractPriorityDecorator {
 
-		public TransitionPriorityDecorator(IDecoratorTarget decoratorTarget) {
-			super(decoratorTarget, SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS);
+		public RegionPriorityDecorator(IDecoratorTarget decoratorTarget) {
+			super(decoratorTarget, SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS);
 		}
 
 		@Override
 		public void activate() {
-			if (!(semanticElement instanceof Transition)
-					|| !(((Transition) semanticElement).eContainer() instanceof Vertex)) {
+			if (!(semanticElement instanceof Region)) {
 				return;
 			}
-			if (((Transition) semanticElement).eContainer() != null) {
-				owningElement = (Vertex) ((Transition) semanticElement).eContainer();
+			if (semanticElement.eContainer() != null) {
+				owningElement = semanticElement.eContainer();
 			}
 			super.activate();
 		}
 
 		@Override
 		public void deactivate() {
-			if (!(semanticElement instanceof Transition)) {
+			if (!(semanticElement instanceof Region)) {
 				return;
 			}
 			owningElement = null;
@@ -78,25 +77,24 @@ public class TransitionPriorityDecorationProvider extends AbstractPriorityDecora
 		}
 
 		public boolean needsDecoration(IGraphicalEditPart editPart) {
-			Transition transition = (Transition) editPart.resolveSemanticElement();
-			Vertex container = (Vertex) transition.eContainer();
-			return container.getOutgoingTransitions().size() > 1;
-
+			Region element = ((Region) editPart.resolveSemanticElement());
+			CompositeElement container = (CompositeElement) element.eContainer();
+			return container.getRegions().size() > 1;
 		}
 
 		public void createDecorators(IGraphicalEditPart editPart) {
 			PriorityFigure figure = new PriorityFigure(MapModeUtil.getMapMode(), getPriority(editPart));
 			figure.setSize(10, 10);
-			setDecoration(getDecoratorTarget().addConnectionDecoration(figure, 5, false));
+			setDecoration(
+					getDecoratorTarget().addShapeDecoration(figure, IDecoratorTarget.Direction.NORTH_WEST, -1, false));
 		}
 
 		public int getPriority(IGraphicalEditPart editPart) {
-			Transition transition = ((Transition) editPart.resolveSemanticElement());
-			Vertex container = (Vertex) transition.eContainer();
-			int indexOf = container.getOutgoingTransitions().indexOf(transition);
+			Region element = ((Region) editPart.resolveSemanticElement());
+			CompositeElement container = (CompositeElement) element.eContainer();
+			int indexOf = container.getRegions().indexOf(element);
 			// visible priorities should start with 1
 			return indexOf + 1;
 		}
 	}
-
 }

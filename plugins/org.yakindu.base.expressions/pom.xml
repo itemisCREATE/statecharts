@@ -125,7 +125,6 @@
 								<jvmArgs>
 									<jvmArg>-Xms100m</jvmArg>
 									<jvmArg>-Xmx700m</jvmArg>
-									<jvmArg>-XX:MaxPermSize=128m</jvmArg>
 									<jvmArg>-Dlog4j.configuration=file:${basedir}/log4j.properties</jvmArg>
 								</jvmArgs>
 							</jvmSettings>

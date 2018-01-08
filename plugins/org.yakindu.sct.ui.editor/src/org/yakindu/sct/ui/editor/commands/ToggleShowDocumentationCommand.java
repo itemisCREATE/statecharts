@@ -19,9 +19,9 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.operations.OperationHistoryFactory;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gmf.runtime.common.core.command.CompositeCommand;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
 import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
@@ -58,11 +58,12 @@ public class ToggleShowDocumentationCommand extends AbstractHandler {
 			if (style == null) {
 				style = createInitialStyle(view);
 			}
-			String featureName = style.getStringValue().equals(
-					SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION.getName()) ? BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION
-					.getName() : SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION.getName();
-			command.add(new SetValueCommand(new SetRequest(style,
-					NotationPackage.Literals.STRING_VALUE_STYLE__STRING_VALUE, featureName)));
+			String featureName = style.getStringValue()
+					.equals(SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION.getName())
+							? BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION.getName()
+							: SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION.getName();
+			command.add(new SetValueCommand(
+					new SetRequest(style, NotationPackage.Literals.STRING_VALUE_STYLE__STRING_VALUE, featureName)));
 		}
 		executeCommand(command);
 	}
@@ -88,12 +89,13 @@ public class ToggleShowDocumentationCommand extends AbstractHandler {
 		List<View> result = new ArrayList<View>();
 		IStructuredSelection structuredSelection = (IStructuredSelection) selection;
 		for (@SuppressWarnings("unchecked")
-		Iterator<IGraphicalEditPart> iter = structuredSelection.iterator(); iter.hasNext();) {
-			IGraphicalEditPart next = iter.next();
-			while(next != null && !(next instanceof IPrimaryEditPart)){
-				next = (IGraphicalEditPart) next.getParent();
+		Iterator<GraphicalEditPart> iter = structuredSelection.iterator(); iter.hasNext();) {
+			GraphicalEditPart next = iter.next();
+			while (next != null && !(next instanceof IPrimaryEditPart)) {
+				next = (GraphicalEditPart) next.getParent();
 			}
-			result.add(next.getNotationView());
+			if (next != null && next.getModel() instanceof View)
+				result.add((View) next.getModel());
 		}
 		return result;
 	}

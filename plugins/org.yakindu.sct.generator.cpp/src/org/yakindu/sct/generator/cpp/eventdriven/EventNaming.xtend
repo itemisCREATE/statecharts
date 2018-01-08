@@ -25,6 +25,10 @@ class EventNaming {
 	@Inject extension Navigation
 	@Inject extension INamingService
 	
+	def invalidEventEnumName(ExecutionFlow it) {
+		'''«module»_invalid_event'''.toString.toLowerCase
+	}
+	
 	def eventEnumMemberName(Event it) {
 		'''«scope.interfaceName»_«name.asIdentifier»'''
 	}

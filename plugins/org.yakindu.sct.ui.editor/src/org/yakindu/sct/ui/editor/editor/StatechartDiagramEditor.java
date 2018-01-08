@@ -134,7 +134,8 @@ import com.google.inject.Key;
  * @author robert rudi
  */
 @SuppressWarnings("restriction")
-public class StatechartDiagramEditor extends DiagramPartitioningEditor implements IGotoMarker, IContextElementProvider, IPropertyChangeListener {
+public class StatechartDiagramEditor extends DiagramPartitioningEditor
+		implements IGotoMarker, IContextElementProvider, IPropertyChangeListener {
 
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
 
@@ -148,7 +149,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	protected static final int TEXT_CONTROL_HORIZONTAL_MARGIN = 10;
 	protected static final int INITIAL_PALETTE_SIZE = 175;
-	protected static final int[] MIN_CONTROL_SIZE = {11, 21};
+	protected static final int[] MIN_CONTROL_SIZE = { 11, 21 };
 	protected static final int BORDERWIDTH = 2;
 	protected static boolean imageLabelHasFocus = false;
 	protected int[] previousWidths = DEFAULT_WEIGHTS;
@@ -384,6 +385,24 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			getKeyHandler().put(KeyStroke.getPressed((char) 0x1d, 0x2b, SWT.MOD1),
 					getActionRegistry().getAction(GEFActionConstants.ZOOM_IN));
 
+			// Zoom original - all OS
+			getKeyHandler().put(/* CTRL + '0' */
+					KeyStroke.getPressed('0', 0x30, SWT.MOD1), new Action() {
+						@Override
+						public void run() {
+							resetZoom();
+						}
+					});
+			
+			// Zoom original - all OS - Numpad 0
+			getKeyHandler().put(/* CTRL + '0' */
+					KeyStroke.getPressed('0', SWT.KEYPAD_0, SWT.MOD1), new Action() {
+						@Override
+						public void run() {
+							resetZoom();
+						}
+					});
+
 			// Test Error - for AERI testing only
 			// DOWN: stateMask=0x50000 CTRL ALT, keyCode=0x6c 'l', character=0xc
 			// ' '
@@ -397,6 +416,13 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 		}
 		return keyHandler;
+	}
+	
+	protected void resetZoom() {
+		ZoomManager manager = (ZoomManager) getGraphicalViewer()
+				.getProperty(ZoomManager.class.toString());
+		if (manager != null)
+			manager.setZoom(1.0d);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -559,7 +585,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		IEMFValueProperty modelProperty = EMFEditProperties.value(getEditingDomain(),
 				SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION);
 
-		ISWTObservableValue uiProperty = WidgetProperties.text(new int[]{SWT.FocusOut, SWT.Modify})
+		ISWTObservableValue uiProperty = WidgetProperties.text(new int[] { SWT.FocusOut, SWT.Modify })
 				.observe(xtextControl);
 		ValidatingEMFDatabindingContext context = new ValidatingEMFDatabindingContext(this, getSite().getShell());
 		context.bindValue(uiProperty, modelProperty.observe(
@@ -669,7 +695,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 					this.getSite().getShell());
 			IEMFValueProperty property = EMFEditProperties.value(TransactionUtil.getEditingDomain(getContextObject()),
 					BasePackage.Literals.NAMED_ELEMENT__NAME);
-			ISWTObservableValue observe = WidgetProperties.text(new int[]{SWT.FocusOut, SWT.DefaultSelection})
+			ISWTObservableValue observe = WidgetProperties.text(new int[] { SWT.FocusOut, SWT.DefaultSelection })
 					.observe(statechartNameLabel);
 			context.bindValue(observe, property.observe(this.getContextObject()));
 		}
@@ -737,8 +763,8 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		if (width - switchControl.getBounds().width < 0 || width < switchControl.getBounds().width) {
 			sashWidths = DEFAULT_WEIGHTS;
 		} else {
-			sashWidths = new int[]{switchControl.getBounds().width + BORDERWIDTH,
-					width - switchControl.getBounds().width};
+			sashWidths = new int[] { switchControl.getBounds().width + BORDERWIDTH,
+					width - switchControl.getBounds().width };
 		}
 		((SashForm) parent).setWeights(sashWidths);
 		updateSwitchControl(EXPAND_TOOLTIP, EXPAND_IMAGE);
@@ -785,15 +811,18 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	protected class ImageLabelMouseTrackListener extends MouseTrackAdapter {
 		private final Label statechartImageLabel;
+
 		protected ImageLabelMouseTrackListener(Label statechartImageLabel) {
 			this.statechartImageLabel = statechartImageLabel;
 		}
+
 		@Override
 		public void mouseEnter(MouseEvent e) {
 			statechartImageLabel.setCursor(new Cursor(Display.getDefault(), SWT.CURSOR_HAND));
 			imageLabelHasFocus = true;
 			statechartImageLabel.redraw();
 		}
+
 		@Override
 		public void mouseExit(MouseEvent e) {
 			imageLabelHasFocus = false;
@@ -815,6 +844,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 				drawIconBorder(statechartImageLabel, e.gc);
 			}
 		}
+
 		protected void drawIconBorder(Label statechartImageLabel, GC gc) {
 			Rectangle rect = new Rectangle(0, 0, statechartImageLabel.getBounds().width - 1,
 					statechartImageLabel.getBounds().height - 1);
@@ -988,8 +1018,8 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	public void restoreState(IMemento memento) {
 		if (getSash() != null && memento != null && memento.getInteger(FIRST_SASH_CONTROL_WEIGHT) != null
 				&& memento.getInteger(SECOND_SASH_CONTROL_WEIGHT) != null) {
-			getSash().setWeights(new int[]{memento.getInteger(FIRST_SASH_CONTROL_WEIGHT),
-					memento.getInteger(SECOND_SASH_CONTROL_WEIGHT)});
+			getSash().setWeights(new int[] { memento.getInteger(FIRST_SASH_CONTROL_WEIGHT),
+					memento.getInteger(SECOND_SASH_CONTROL_WEIGHT) });
 			previousWidths = getSash().getWeights();
 			isDefinitionSectionExpanded = getExpandState(memento);
 		}

@@ -166,7 +166,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 
 	@Override
 	public synchronized void processIssues(List<Issue> issues, IProgressMonitor monitor) {
-		
+
 		final Multimap<String, SCTIssue> newVisibleIssues = ArrayListMultimap.create();
 		for (Issue issue : issues) {
 			if (issue instanceof SCTIssue) {
@@ -184,8 +184,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 				public boolean apply(SCTIssue input) {
 					CheckType type = input.getType();
 					Severity severity = input.getSeverity();
-					return CheckType.NORMAL == type || CheckType.EXPENSIVE == type 
-							|| Severity.INFO == severity;
+					return CheckType.NORMAL == type || CheckType.EXPENSIVE == type || Severity.INFO == severity;
 				}
 			});
 			for (SCTIssue sctIssue : persistentIssues) {
@@ -199,13 +198,20 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 		for (String string : changes) {
 			notifyListeners(string);
 		}
+
 		SetView<String> intersection = Sets.intersection(oldVisibleIssues.keySet(), newVisibleIssues.keySet());
 		for (String string : intersection) {
-			if(changedSeverity(string, oldVisibleIssues, newVisibleIssues)){
-				notifyListeners(string);	
+			if (changedSeverity(string, oldVisibleIssues, newVisibleIssues)
+					|| changedErrorCount(string, oldVisibleIssues, newVisibleIssues)) {
+				notifyListeners(string);
 			}
 		}
-		
+
+	}
+
+	protected boolean changedErrorCount(String semanticElementID, Multimap<String, SCTIssue> oldVisibleIssues,
+			Multimap<String, SCTIssue> newVisibleIssues) {
+		return oldVisibleIssues.get(semanticElementID).size() != newVisibleIssues.get(semanticElementID).size();
 	}
 
 	protected boolean changedSeverity(String semanticElementID, Multimap<String, SCTIssue> oldVisibleIssues,
@@ -218,8 +224,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 	protected Severity getMinSeverity(Collection<SCTIssue> issues) {
 		Severity minNewSeverity = Severity.IGNORE;
 		for (SCTIssue sctIssue : issues) {
-			minNewSeverity = minNewSeverity.ordinal() > sctIssue.getSeverity().ordinal()
-					? sctIssue.getSeverity()
+			minNewSeverity = minNewSeverity.ordinal() > sctIssue.getSeverity().ordinal() ? sctIssue.getSeverity()
 					: minNewSeverity;
 		}
 		return minNewSeverity;

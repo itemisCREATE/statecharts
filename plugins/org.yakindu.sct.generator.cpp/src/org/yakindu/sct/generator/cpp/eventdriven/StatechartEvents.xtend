@@ -40,6 +40,9 @@ class StatechartEvents {
 		'''
 		#ifndef «generateHeaderDefineGuard»
 		#define «generateHeaderDefineGuard»
+		#ifndef SC_INVALID_EVENT_VALUE
+		#define SC_INVALID_EVENT_VALUE 0
+		#endif
 		
 		namespace «eventNamespaceName»
 		{
@@ -64,8 +67,10 @@ class StatechartEvents {
 		if(timed) {
 			enumMembers.add(timeEventEnumName)
 		}
+		
 		'''
 		typedef enum  {
+			«invalidEventEnumName(it)» = SC_INVALID_EVENT_VALUE,
 			«FOR e : enumMembers SEPARATOR ","»
 				«e»
 			«ENDFOR»
