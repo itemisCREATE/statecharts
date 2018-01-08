@@ -4,6 +4,7 @@
 #include "ExitState.h"
 #include "sc_runner.h"
 #include "sc_types.h"
+			
 
 
 //! The timers are managed by a timer service. */
@@ -27,60 +28,61 @@ class ExitStateTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
-
-TEST_F(ExitStateTest, defaultExit) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
-	
-	statechart->getDefaultSCI()->raise_e();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(ExitState::r_E));
-	
-	
+	TEST_F(ExitStateTest, defaultExit) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
+		
+		statechart->getDefaultSCI()->raise_e();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(ExitState::r_E));
+		
+		
 }
-TEST_F(ExitStateTest, namedExitThroughNamedTransition) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
-	
-	statechart->getDefaultSCI()->raise_f();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(ExitState::r_F));
-	
-	
+	TEST_F(ExitStateTest, namedExitThroughNamedTransition) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
+		
+		statechart->getDefaultSCI()->raise_f();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(ExitState::r_F));
+		
+		
 }
-TEST_F(ExitStateTest, namedExitThroughDefaultTransition) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
-	
-	statechart->getDefaultSCI()->raise_g();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(ExitState::r_E));
-	
-	
+	TEST_F(ExitStateTest, namedExitThroughDefaultTransition) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
+		
+		statechart->getDefaultSCI()->raise_g();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(ExitState::r_E));
+		
+		
 }
-TEST_F(ExitStateTest, remainInA) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
-	
-	
+	TEST_F(ExitStateTest, remainInA) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
+		
+		
 }

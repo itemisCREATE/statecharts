@@ -4,6 +4,7 @@
 #include "NamedInterfaceAccess.h"
 #include "sc_runner.h"
 #include "sc_types.h"
+			
 
 
 //! The timers are managed by a timer service. */
@@ -27,28 +28,29 @@ class NamedInterfaceAccessTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
-
-TEST_F(NamedInterfaceAccessTest, SafeOpenSuccess) {
-	
-	statechart->enter();
-	
-	runner->proceed_cycles(1);
-	
-	statechart->getSCI_User()->raise_numberPressed(3l);
-	
-	runner->proceed_cycles(1);
-	
-	statechart->getSCI_User()->raise_numberPressed(7l);
-	
-	runner->proceed_cycles(1);
-	
-	statechart->getSCI_User()->raise_numberPressed(5l);
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->getSCI_Safe()->isRaised_open());
-	
-	
+	TEST_F(NamedInterfaceAccessTest, SafeOpenSuccess) {
+		
+		statechart->enter();
+		
+		runner->proceed_cycles(1);
+		
+		statechart->getSCI_User()->raise_numberPressed(3l);
+		
+		runner->proceed_cycles(1);
+		
+		statechart->getSCI_User()->raise_numberPressed(7l);
+		
+		runner->proceed_cycles(1);
+		
+		statechart->getSCI_User()->raise_numberPressed(5l);
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->getSCI_Safe()->isRaised_open());
+		
+		
 }

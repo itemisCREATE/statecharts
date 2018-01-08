@@ -4,6 +4,7 @@
 #include "StatechartKeywords.h"
 #include "sc_runner_timed.h"
 #include "sc_types.h"
+			
 
 
 //! The timers are managed by a timer service. */
@@ -28,14 +29,15 @@ class StatemachineKeywords : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
-
-TEST_F(StatemachineKeywords, statemachineKeywords) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(StatechartKeywords::main_region_Timer));
-	
-	
+	TEST_F(StatemachineKeywords, statemachineKeywords) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(StatechartKeywords::main_region_Timer));
+		
+		
 }

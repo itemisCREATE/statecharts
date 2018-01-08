@@ -4,6 +4,7 @@
 #include "CastExpressions.h"
 #include "sc_runner.h"
 #include "sc_types.h"
+			
 
 
 //! The timers are managed by a timer service. */
@@ -27,26 +28,27 @@ class CastExpressionsTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
-
-TEST_F(CastExpressionsTest, CastExpressionTest) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_realValue()== 5l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_intValue()== 5l);
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_realValue()== 15l);
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(CastExpressions::main_region_C));
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_realValue()== 757l);
-	
-	
+	TEST_F(CastExpressionsTest, CastExpressionTest) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_realValue()== 5l);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_intValue()== 5l);
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_realValue()== 15l);
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(CastExpressions::main_region_C));
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_realValue()== 757l);
+		
+		
 }

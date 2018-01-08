@@ -9,7 +9,7 @@
 using ::testing::AtLeast;
 using ::testing::Return;
 using ::testing::_;
-
+			
 class InternalOperation1Mock{
 	public:
 	int callCount;
@@ -1203,6 +1203,7 @@ class MockDefault : public Operations::DefaultSCI_OCB {
 	}
 };
 
+
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
@@ -1224,270 +1225,271 @@ class OperationsTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
-
-TEST_F(OperationsTest, operationsCalled) {
-	alwaysTrueMock = new AlwaysTrueMock();
-	alwaysTrueMock->initializeBehavior();
-	internalOperation1Mock = new InternalOperation1Mock();
-	internalOperation2Mock = new InternalOperation2Mock();
-	internalOperation3Mock = new InternalOperation3Mock();
-	internalOperation3aMock = new InternalOperation3aMock();
-	internalOperation4Mock = new InternalOperation4Mock();
-	internalOperation4aMock = new InternalOperation4aMock();
-	internalOperation5Mock = new InternalOperation5Mock();
-	internalOperation5aMock = new InternalOperation5aMock();
-	interface1InterfaceOperation1Mock = new Interface1InterfaceOperation1Mock();
-	interface1InterfaceOperation2Mock = new Interface1InterfaceOperation2Mock();
-	interface1InterfaceOperation3Mock = new Interface1InterfaceOperation3Mock();
-	interface1InterfaceOperation3aMock = new Interface1InterfaceOperation3aMock();
-	interface1InterfaceOperation4Mock = new Interface1InterfaceOperation4Mock();
-	interface1InterfaceOperation4aMock = new Interface1InterfaceOperation4aMock();
-	interface1InterfaceOperation5Mock = new Interface1InterfaceOperation5Mock();
-	interface1InterfaceOperation5aMock = new Interface1InterfaceOperation5aMock();
-	unnamedInterfaceOperation1Mock = new UnnamedInterfaceOperation1Mock();
-	unnamedInterfaceOperation2Mock = new UnnamedInterfaceOperation2Mock();
-	unnamedOperation3Mock = new UnnamedOperation3Mock();
-	unnamedOperation3aMock = new UnnamedOperation3aMock();
-	unnamedOperation4Mock = new UnnamedOperation4Mock();
-	unnamedOperation4aMock = new UnnamedOperation4aMock();
-	unnamedOperation5Mock = new UnnamedOperation5Mock();
-	unnamedOperation5aMock = new UnnamedOperation5aMock();
-	MockDefault defaultMock;
-	
-	MockInternal internalMock;
-	
-	MockInterface1 interface1Mock;
-	
-	statechart->setDefaultSCI_OCB(&defaultMock);
-	statechart->setInternalSCI_OCB(&internalMock);
-	statechart->setSCI_Interface1_OCB(&interface1Mock);
-	
-	alwaysTrueMock->setDefaultBehavior(&AlwaysTrueMock::alwaysTrue1);
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(Operations::main_region_A));
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(Operations::main_region_B));
-	
-	EXPECT_TRUE(internalOperation1Mock->calledAtLeastOnce());
-	
-	EXPECT_TRUE(internalOperation2Mock->calledAtLeastOnce(4l));
-	
-	EXPECT_TRUE(internalOperation3Mock->calledAtLeastOnce());
-	
-	EXPECT_TRUE(internalOperation3aMock->calledAtLeastOnce(1.0));
-	
-	EXPECT_TRUE(internalOperation4Mock->calledAtLeastOnce());
-	
-	EXPECT_TRUE(internalOperation4aMock->calledAtLeastOnce(5l));
-	
-	EXPECT_TRUE(internalOperation5Mock->calledAtLeastOnce());
-	
-	EXPECT_TRUE(internalOperation5aMock->calledAtLeastOnce());
-	
-	statechart->getDefaultSCI()->raise_ev();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(Operations::main_region_C));
-	
-	EXPECT_TRUE(interface1InterfaceOperation1Mock->calledAtLeastOnce());
-	
-	EXPECT_TRUE(interface1InterfaceOperation2Mock->calledAtLeastOnce(4l));
-	
-	EXPECT_TRUE(interface1InterfaceOperation3Mock->calledAtLeastOnce());
-	
-	EXPECT_TRUE(interface1InterfaceOperation3aMock->calledAtLeastOnce(1.0));
-	
-	EXPECT_TRUE(interface1InterfaceOperation4Mock->calledAtLeastOnce());
-	
-	EXPECT_TRUE(interface1InterfaceOperation4aMock->calledAtLeastOnce(5l));
-	
-	EXPECT_TRUE(interface1InterfaceOperation5Mock->calledAtLeastOnce());
-	
-	EXPECT_TRUE(interface1InterfaceOperation5aMock->calledAtLeastOnce());
-	
-	statechart->getDefaultSCI()->raise_ev();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(Operations::main_region_D));
-	
-	EXPECT_TRUE(unnamedInterfaceOperation1Mock->calledAtLeastOnce());
-	
-	EXPECT_TRUE(unnamedInterfaceOperation2Mock->calledAtLeastOnce(4l));
-	
-	EXPECT_TRUE(unnamedOperation3Mock->calledAtLeastOnce());
-	
-	EXPECT_TRUE(unnamedOperation3aMock->calledAtLeastOnce(1.0));
-	
-	EXPECT_TRUE(unnamedOperation4Mock->calledAtLeastOnce());
-	
-	EXPECT_TRUE(unnamedOperation4aMock->calledAtLeastOnce(5l));
-	
-	EXPECT_TRUE(unnamedOperation5Mock->calledAtLeastOnce());
-	
-	EXPECT_TRUE(unnamedOperation5aMock->calledAtLeastOnce());
-	
-	
-	alwaysTrueMock->reset();
-	internalOperation1Mock->reset();
-	internalOperation2Mock->reset();
-	internalOperation3Mock->reset();
-	internalOperation3aMock->reset();
-	internalOperation4Mock->reset();
-	internalOperation4aMock->reset();
-	internalOperation5Mock->reset();
-	internalOperation5aMock->reset();
-	interface1InterfaceOperation1Mock->reset();
-	interface1InterfaceOperation2Mock->reset();
-	interface1InterfaceOperation3Mock->reset();
-	interface1InterfaceOperation3aMock->reset();
-	interface1InterfaceOperation4Mock->reset();
-	interface1InterfaceOperation4aMock->reset();
-	interface1InterfaceOperation5Mock->reset();
-	interface1InterfaceOperation5aMock->reset();
-	unnamedInterfaceOperation1Mock->reset();
-	unnamedInterfaceOperation2Mock->reset();
-	unnamedOperation3Mock->reset();
-	unnamedOperation3aMock->reset();
-	unnamedOperation4Mock->reset();
-	unnamedOperation4aMock->reset();
-	unnamedOperation5Mock->reset();
-	unnamedOperation5aMock->reset();
+	TEST_F(OperationsTest, operationsCalled) {
+		alwaysTrueMock = new AlwaysTrueMock();
+		alwaysTrueMock->initializeBehavior();
+		internalOperation1Mock = new InternalOperation1Mock();
+		internalOperation2Mock = new InternalOperation2Mock();
+		internalOperation3Mock = new InternalOperation3Mock();
+		internalOperation3aMock = new InternalOperation3aMock();
+		internalOperation4Mock = new InternalOperation4Mock();
+		internalOperation4aMock = new InternalOperation4aMock();
+		internalOperation5Mock = new InternalOperation5Mock();
+		internalOperation5aMock = new InternalOperation5aMock();
+		interface1InterfaceOperation1Mock = new Interface1InterfaceOperation1Mock();
+		interface1InterfaceOperation2Mock = new Interface1InterfaceOperation2Mock();
+		interface1InterfaceOperation3Mock = new Interface1InterfaceOperation3Mock();
+		interface1InterfaceOperation3aMock = new Interface1InterfaceOperation3aMock();
+		interface1InterfaceOperation4Mock = new Interface1InterfaceOperation4Mock();
+		interface1InterfaceOperation4aMock = new Interface1InterfaceOperation4aMock();
+		interface1InterfaceOperation5Mock = new Interface1InterfaceOperation5Mock();
+		interface1InterfaceOperation5aMock = new Interface1InterfaceOperation5aMock();
+		unnamedInterfaceOperation1Mock = new UnnamedInterfaceOperation1Mock();
+		unnamedInterfaceOperation2Mock = new UnnamedInterfaceOperation2Mock();
+		unnamedOperation3Mock = new UnnamedOperation3Mock();
+		unnamedOperation3aMock = new UnnamedOperation3aMock();
+		unnamedOperation4Mock = new UnnamedOperation4Mock();
+		unnamedOperation4aMock = new UnnamedOperation4aMock();
+		unnamedOperation5Mock = new UnnamedOperation5Mock();
+		unnamedOperation5aMock = new UnnamedOperation5aMock();
+		MockDefault defaultMock;
+		
+		MockInternal internalMock;
+		
+		MockInterface1 interface1Mock;
+		
+		statechart->setDefaultSCI_OCB(&defaultMock);
+		statechart->setInternalSCI_OCB(&internalMock);
+		statechart->setSCI_Interface1_OCB(&interface1Mock);
+		
+		alwaysTrueMock->setDefaultBehavior(&AlwaysTrueMock::alwaysTrue1);
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(Operations::main_region_A));
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(Operations::main_region_B));
+		
+		EXPECT_TRUE(internalOperation1Mock->calledAtLeastOnce());
+		
+		EXPECT_TRUE(internalOperation2Mock->calledAtLeastOnce(4l));
+		
+		EXPECT_TRUE(internalOperation3Mock->calledAtLeastOnce());
+		
+		EXPECT_TRUE(internalOperation3aMock->calledAtLeastOnce(1.0));
+		
+		EXPECT_TRUE(internalOperation4Mock->calledAtLeastOnce());
+		
+		EXPECT_TRUE(internalOperation4aMock->calledAtLeastOnce(5l));
+		
+		EXPECT_TRUE(internalOperation5Mock->calledAtLeastOnce());
+		
+		EXPECT_TRUE(internalOperation5aMock->calledAtLeastOnce());
+		
+		statechart->getDefaultSCI()->raise_ev();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(Operations::main_region_C));
+		
+		EXPECT_TRUE(interface1InterfaceOperation1Mock->calledAtLeastOnce());
+		
+		EXPECT_TRUE(interface1InterfaceOperation2Mock->calledAtLeastOnce(4l));
+		
+		EXPECT_TRUE(interface1InterfaceOperation3Mock->calledAtLeastOnce());
+		
+		EXPECT_TRUE(interface1InterfaceOperation3aMock->calledAtLeastOnce(1.0));
+		
+		EXPECT_TRUE(interface1InterfaceOperation4Mock->calledAtLeastOnce());
+		
+		EXPECT_TRUE(interface1InterfaceOperation4aMock->calledAtLeastOnce(5l));
+		
+		EXPECT_TRUE(interface1InterfaceOperation5Mock->calledAtLeastOnce());
+		
+		EXPECT_TRUE(interface1InterfaceOperation5aMock->calledAtLeastOnce());
+		
+		statechart->getDefaultSCI()->raise_ev();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(Operations::main_region_D));
+		
+		EXPECT_TRUE(unnamedInterfaceOperation1Mock->calledAtLeastOnce());
+		
+		EXPECT_TRUE(unnamedInterfaceOperation2Mock->calledAtLeastOnce(4l));
+		
+		EXPECT_TRUE(unnamedOperation3Mock->calledAtLeastOnce());
+		
+		EXPECT_TRUE(unnamedOperation3aMock->calledAtLeastOnce(1.0));
+		
+		EXPECT_TRUE(unnamedOperation4Mock->calledAtLeastOnce());
+		
+		EXPECT_TRUE(unnamedOperation4aMock->calledAtLeastOnce(5l));
+		
+		EXPECT_TRUE(unnamedOperation5Mock->calledAtLeastOnce());
+		
+		EXPECT_TRUE(unnamedOperation5aMock->calledAtLeastOnce());
+		
+		
+		alwaysTrueMock->reset();
+		internalOperation1Mock->reset();
+		internalOperation2Mock->reset();
+		internalOperation3Mock->reset();
+		internalOperation3aMock->reset();
+		internalOperation4Mock->reset();
+		internalOperation4aMock->reset();
+		internalOperation5Mock->reset();
+		internalOperation5aMock->reset();
+		interface1InterfaceOperation1Mock->reset();
+		interface1InterfaceOperation2Mock->reset();
+		interface1InterfaceOperation3Mock->reset();
+		interface1InterfaceOperation3aMock->reset();
+		interface1InterfaceOperation4Mock->reset();
+		interface1InterfaceOperation4aMock->reset();
+		interface1InterfaceOperation5Mock->reset();
+		interface1InterfaceOperation5aMock->reset();
+		unnamedInterfaceOperation1Mock->reset();
+		unnamedInterfaceOperation2Mock->reset();
+		unnamedOperation3Mock->reset();
+		unnamedOperation3aMock->reset();
+		unnamedOperation4Mock->reset();
+		unnamedOperation4aMock->reset();
+		unnamedOperation5Mock->reset();
+		unnamedOperation5aMock->reset();
 }
-TEST_F(OperationsTest, operationsNotCalled) {
-	alwaysTrueMock = new AlwaysTrueMock();
-	alwaysTrueMock->initializeBehavior();
-	internalOperation1Mock = new InternalOperation1Mock();
-	internalOperation2Mock = new InternalOperation2Mock();
-	internalOperation3Mock = new InternalOperation3Mock();
-	internalOperation3aMock = new InternalOperation3aMock();
-	internalOperation4Mock = new InternalOperation4Mock();
-	internalOperation4aMock = new InternalOperation4aMock();
-	internalOperation5Mock = new InternalOperation5Mock();
-	internalOperation5aMock = new InternalOperation5aMock();
-	interface1InterfaceOperation1Mock = new Interface1InterfaceOperation1Mock();
-	interface1InterfaceOperation2Mock = new Interface1InterfaceOperation2Mock();
-	interface1InterfaceOperation3Mock = new Interface1InterfaceOperation3Mock();
-	interface1InterfaceOperation3aMock = new Interface1InterfaceOperation3aMock();
-	interface1InterfaceOperation4Mock = new Interface1InterfaceOperation4Mock();
-	interface1InterfaceOperation4aMock = new Interface1InterfaceOperation4aMock();
-	interface1InterfaceOperation5Mock = new Interface1InterfaceOperation5Mock();
-	interface1InterfaceOperation5aMock = new Interface1InterfaceOperation5aMock();
-	unnamedInterfaceOperation1Mock = new UnnamedInterfaceOperation1Mock();
-	unnamedInterfaceOperation2Mock = new UnnamedInterfaceOperation2Mock();
-	unnamedOperation3Mock = new UnnamedOperation3Mock();
-	unnamedOperation3aMock = new UnnamedOperation3aMock();
-	unnamedOperation4Mock = new UnnamedOperation4Mock();
-	unnamedOperation4aMock = new UnnamedOperation4aMock();
-	unnamedOperation5Mock = new UnnamedOperation5Mock();
-	unnamedOperation5aMock = new UnnamedOperation5aMock();
-	MockDefault defaultMock;
-	
-	MockInternal internalMock;
-	
-	MockInterface1 interface1Mock;
-	
-	statechart->setDefaultSCI_OCB(&defaultMock);
-	statechart->setInternalSCI_OCB(&internalMock);
-	statechart->setSCI_Interface1_OCB(&interface1Mock);
-	
-	alwaysTrueMock->setDefaultBehavior(&AlwaysTrueMock::alwaysTrue1);
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(Operations::main_region_A));
-	
-	EXPECT_FALSE(internalOperation1Mock->calledAtLeastOnce());
-	
-	EXPECT_FALSE(internalOperation2Mock->calledAtLeastOnce(4l));
-	
-	EXPECT_FALSE(internalOperation3Mock->calledAtLeastOnce());
-	
-	EXPECT_FALSE(internalOperation3aMock->calledAtLeastOnce(1.0));
-	
-	EXPECT_FALSE(internalOperation4Mock->calledAtLeastOnce());
-	
-	EXPECT_FALSE(internalOperation4aMock->calledAtLeastOnce(5l));
-	
-	EXPECT_FALSE(internalOperation5Mock->calledAtLeastOnce());
-	
-	EXPECT_FALSE(internalOperation5aMock->calledAtLeastOnce());
-	
-	statechart->getDefaultSCI()->raise_ev();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(Operations::main_region_B));
-	
-	EXPECT_FALSE(interface1InterfaceOperation1Mock->calledAtLeastOnce());
-	
-	EXPECT_FALSE(interface1InterfaceOperation2Mock->calledAtLeastOnce(4l));
-	
-	EXPECT_FALSE(interface1InterfaceOperation3Mock->calledAtLeastOnce());
-	
-	EXPECT_FALSE(interface1InterfaceOperation3aMock->calledAtLeastOnce(1.0));
-	
-	EXPECT_FALSE(interface1InterfaceOperation4Mock->calledAtLeastOnce());
-	
-	EXPECT_FALSE(interface1InterfaceOperation4aMock->calledAtLeastOnce(5l));
-	
-	EXPECT_FALSE(interface1InterfaceOperation5Mock->calledAtLeastOnce());
-	
-	EXPECT_FALSE(interface1InterfaceOperation5aMock->calledAtLeastOnce());
-	
-	statechart->getDefaultSCI()->raise_ev();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(Operations::main_region_C));
-	
-	EXPECT_FALSE(unnamedInterfaceOperation1Mock->calledAtLeastOnce());
-	
-	EXPECT_FALSE(unnamedInterfaceOperation2Mock->calledAtLeastOnce(4l));
-	
-	EXPECT_FALSE(unnamedOperation3Mock->calledAtLeastOnce());
-	
-	EXPECT_FALSE(unnamedOperation3aMock->calledAtLeastOnce(1.0));
-	
-	EXPECT_FALSE(unnamedOperation4Mock->calledAtLeastOnce());
-	
-	EXPECT_FALSE(unnamedOperation4aMock->calledAtLeastOnce(5l));
-	
-	EXPECT_FALSE(unnamedOperation5Mock->calledAtLeastOnce());
-	
-	EXPECT_FALSE(unnamedOperation5aMock->calledAtLeastOnce());
-	
-	
-	alwaysTrueMock->reset();
-	internalOperation1Mock->reset();
-	internalOperation2Mock->reset();
-	internalOperation3Mock->reset();
-	internalOperation3aMock->reset();
-	internalOperation4Mock->reset();
-	internalOperation4aMock->reset();
-	internalOperation5Mock->reset();
-	internalOperation5aMock->reset();
-	interface1InterfaceOperation1Mock->reset();
-	interface1InterfaceOperation2Mock->reset();
-	interface1InterfaceOperation3Mock->reset();
-	interface1InterfaceOperation3aMock->reset();
-	interface1InterfaceOperation4Mock->reset();
-	interface1InterfaceOperation4aMock->reset();
-	interface1InterfaceOperation5Mock->reset();
-	interface1InterfaceOperation5aMock->reset();
-	unnamedInterfaceOperation1Mock->reset();
-	unnamedInterfaceOperation2Mock->reset();
-	unnamedOperation3Mock->reset();
-	unnamedOperation3aMock->reset();
-	unnamedOperation4Mock->reset();
-	unnamedOperation4aMock->reset();
-	unnamedOperation5Mock->reset();
-	unnamedOperation5aMock->reset();
+	TEST_F(OperationsTest, operationsNotCalled) {
+		alwaysTrueMock = new AlwaysTrueMock();
+		alwaysTrueMock->initializeBehavior();
+		internalOperation1Mock = new InternalOperation1Mock();
+		internalOperation2Mock = new InternalOperation2Mock();
+		internalOperation3Mock = new InternalOperation3Mock();
+		internalOperation3aMock = new InternalOperation3aMock();
+		internalOperation4Mock = new InternalOperation4Mock();
+		internalOperation4aMock = new InternalOperation4aMock();
+		internalOperation5Mock = new InternalOperation5Mock();
+		internalOperation5aMock = new InternalOperation5aMock();
+		interface1InterfaceOperation1Mock = new Interface1InterfaceOperation1Mock();
+		interface1InterfaceOperation2Mock = new Interface1InterfaceOperation2Mock();
+		interface1InterfaceOperation3Mock = new Interface1InterfaceOperation3Mock();
+		interface1InterfaceOperation3aMock = new Interface1InterfaceOperation3aMock();
+		interface1InterfaceOperation4Mock = new Interface1InterfaceOperation4Mock();
+		interface1InterfaceOperation4aMock = new Interface1InterfaceOperation4aMock();
+		interface1InterfaceOperation5Mock = new Interface1InterfaceOperation5Mock();
+		interface1InterfaceOperation5aMock = new Interface1InterfaceOperation5aMock();
+		unnamedInterfaceOperation1Mock = new UnnamedInterfaceOperation1Mock();
+		unnamedInterfaceOperation2Mock = new UnnamedInterfaceOperation2Mock();
+		unnamedOperation3Mock = new UnnamedOperation3Mock();
+		unnamedOperation3aMock = new UnnamedOperation3aMock();
+		unnamedOperation4Mock = new UnnamedOperation4Mock();
+		unnamedOperation4aMock = new UnnamedOperation4aMock();
+		unnamedOperation5Mock = new UnnamedOperation5Mock();
+		unnamedOperation5aMock = new UnnamedOperation5aMock();
+		MockDefault defaultMock;
+		
+		MockInternal internalMock;
+		
+		MockInterface1 interface1Mock;
+		
+		statechart->setDefaultSCI_OCB(&defaultMock);
+		statechart->setInternalSCI_OCB(&internalMock);
+		statechart->setSCI_Interface1_OCB(&interface1Mock);
+		
+		alwaysTrueMock->setDefaultBehavior(&AlwaysTrueMock::alwaysTrue1);
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(Operations::main_region_A));
+		
+		EXPECT_FALSE(internalOperation1Mock->calledAtLeastOnce());
+		
+		EXPECT_FALSE(internalOperation2Mock->calledAtLeastOnce(4l));
+		
+		EXPECT_FALSE(internalOperation3Mock->calledAtLeastOnce());
+		
+		EXPECT_FALSE(internalOperation3aMock->calledAtLeastOnce(1.0));
+		
+		EXPECT_FALSE(internalOperation4Mock->calledAtLeastOnce());
+		
+		EXPECT_FALSE(internalOperation4aMock->calledAtLeastOnce(5l));
+		
+		EXPECT_FALSE(internalOperation5Mock->calledAtLeastOnce());
+		
+		EXPECT_FALSE(internalOperation5aMock->calledAtLeastOnce());
+		
+		statechart->getDefaultSCI()->raise_ev();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(Operations::main_region_B));
+		
+		EXPECT_FALSE(interface1InterfaceOperation1Mock->calledAtLeastOnce());
+		
+		EXPECT_FALSE(interface1InterfaceOperation2Mock->calledAtLeastOnce(4l));
+		
+		EXPECT_FALSE(interface1InterfaceOperation3Mock->calledAtLeastOnce());
+		
+		EXPECT_FALSE(interface1InterfaceOperation3aMock->calledAtLeastOnce(1.0));
+		
+		EXPECT_FALSE(interface1InterfaceOperation4Mock->calledAtLeastOnce());
+		
+		EXPECT_FALSE(interface1InterfaceOperation4aMock->calledAtLeastOnce(5l));
+		
+		EXPECT_FALSE(interface1InterfaceOperation5Mock->calledAtLeastOnce());
+		
+		EXPECT_FALSE(interface1InterfaceOperation5aMock->calledAtLeastOnce());
+		
+		statechart->getDefaultSCI()->raise_ev();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(Operations::main_region_C));
+		
+		EXPECT_FALSE(unnamedInterfaceOperation1Mock->calledAtLeastOnce());
+		
+		EXPECT_FALSE(unnamedInterfaceOperation2Mock->calledAtLeastOnce(4l));
+		
+		EXPECT_FALSE(unnamedOperation3Mock->calledAtLeastOnce());
+		
+		EXPECT_FALSE(unnamedOperation3aMock->calledAtLeastOnce(1.0));
+		
+		EXPECT_FALSE(unnamedOperation4Mock->calledAtLeastOnce());
+		
+		EXPECT_FALSE(unnamedOperation4aMock->calledAtLeastOnce(5l));
+		
+		EXPECT_FALSE(unnamedOperation5Mock->calledAtLeastOnce());
+		
+		EXPECT_FALSE(unnamedOperation5aMock->calledAtLeastOnce());
+		
+		
+		alwaysTrueMock->reset();
+		internalOperation1Mock->reset();
+		internalOperation2Mock->reset();
+		internalOperation3Mock->reset();
+		internalOperation3aMock->reset();
+		internalOperation4Mock->reset();
+		internalOperation4aMock->reset();
+		internalOperation5Mock->reset();
+		internalOperation5aMock->reset();
+		interface1InterfaceOperation1Mock->reset();
+		interface1InterfaceOperation2Mock->reset();
+		interface1InterfaceOperation3Mock->reset();
+		interface1InterfaceOperation3aMock->reset();
+		interface1InterfaceOperation4Mock->reset();
+		interface1InterfaceOperation4aMock->reset();
+		interface1InterfaceOperation5Mock->reset();
+		interface1InterfaceOperation5aMock->reset();
+		unnamedInterfaceOperation1Mock->reset();
+		unnamedInterfaceOperation2Mock->reset();
+		unnamedOperation3Mock->reset();
+		unnamedOperation3aMock->reset();
+		unnamedOperation4Mock->reset();
+		unnamedOperation4aMock->reset();
+		unnamedOperation5Mock->reset();
+		unnamedOperation5aMock->reset();
 }

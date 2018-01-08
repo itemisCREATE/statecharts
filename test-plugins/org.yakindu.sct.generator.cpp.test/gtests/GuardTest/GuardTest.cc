@@ -4,6 +4,7 @@
 #include "Guard.h"
 #include "sc_runner.h"
 #include "sc_types.h"
+			
 
 
 //! The timers are managed by a timer service. */
@@ -27,44 +28,45 @@ class GuardTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
-
-TEST_F(GuardTest, guardTest) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(Guard::main_region_A));
-	
-	statechart->getDefaultSCI()->raise_event1();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(Guard::main_region_A));
-	
-	statechart->getDefaultSCI()->raise_event2();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(Guard::main_region_B));
-	
-	statechart->getDefaultSCI()->raise_return();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(Guard::main_region_A));
-	
-	statechart->getDefaultSCI()->raise_event1();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(Guard::main_region_B));
-	
-	statechart->getDefaultSCI()->raise_return();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(Guard::main_region_A));
-	
-	
+	TEST_F(GuardTest, guardTest) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(Guard::main_region_A));
+		
+		statechart->getDefaultSCI()->raise_event1();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(Guard::main_region_A));
+		
+		statechart->getDefaultSCI()->raise_event2();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(Guard::main_region_B));
+		
+		statechart->getDefaultSCI()->raise_return();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(Guard::main_region_A));
+		
+		statechart->getDefaultSCI()->raise_event1();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(Guard::main_region_B));
+		
+		statechart->getDefaultSCI()->raise_return();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(Guard::main_region_A));
+		
+		
 }

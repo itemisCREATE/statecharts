@@ -4,6 +4,7 @@
 #include "EnterState.h"
 #include "sc_runner.h"
 #include "sc_types.h"
+			
 
 
 //! The timers are managed by a timer service. */
@@ -27,48 +28,49 @@ class EnterStateTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
-
-TEST_F(EnterStateTest, defaultEntry) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(EnterState::r_A));
-	
-	statechart->getDefaultSCI()->raise_e();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(EnterState::r_B_r_E));
-	
-	
+	TEST_F(EnterStateTest, defaultEntry) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(EnterState::r_A));
+		
+		statechart->getDefaultSCI()->raise_e();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(EnterState::r_B_r_E));
+		
+		
 }
-TEST_F(EnterStateTest, namedEntryThroughNamedTransition) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(EnterState::r_A));
-	
-	statechart->getDefaultSCI()->raise_f();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(EnterState::r_B_r_F));
-	
-	
+	TEST_F(EnterStateTest, namedEntryThroughNamedTransition) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(EnterState::r_A));
+		
+		statechart->getDefaultSCI()->raise_f();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(EnterState::r_B_r_F));
+		
+		
 }
-TEST_F(EnterStateTest, namedEntryThroughDefaultTransition) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(EnterState::r_A));
-	
-	statechart->getDefaultSCI()->raise_g();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(EnterState::r_B_r_E));
-	
-	
+	TEST_F(EnterStateTest, namedEntryThroughDefaultTransition) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(EnterState::r_A));
+		
+		statechart->getDefaultSCI()->raise_g();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(EnterState::r_B_r_E));
+		
+		
 }

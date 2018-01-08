@@ -4,6 +4,7 @@
 #include "DeepEntry.h"
 #include "sc_runner.h"
 #include "sc_types.h"
+			
 
 
 //! The timers are managed by a timer service. */
@@ -27,18 +28,19 @@ class DeepEntryTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
-
-TEST_F(DeepEntryTest, enterToSubstate) {
-	
-	statechart->enter();
-	
-	long vergleich = 4l;
-	
-	EXPECT_TRUE(vergleich== 4l);
-	
-	statechart->exit();
-	
-	
+	TEST_F(DeepEntryTest, enterToSubstate) {
+		
+		statechart->enter();
+		
+		long vergleich = 4l;
+		
+		EXPECT_TRUE(vergleich== 4l);
+		
+		statechart->exit();
+		
+		
 }

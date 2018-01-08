@@ -4,6 +4,7 @@
 #include "EventDrivenInternalEvent.h"
 #include "sc_runner.h"
 #include "sc_types.h"
+			
 
 
 //! The timers are managed by a timer service. */
@@ -27,32 +28,33 @@ class EventDrivenInternalEventTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
-
-TEST_F(EventDrivenInternalEventTest, checkInternlEventQueueing) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(EventDrivenInternalEvent::EventDrivenInternalEvent_r1_A));
-	
-	EXPECT_TRUE(statechart->isStateActive(EventDrivenInternalEvent::EventDrivenInternalEvent_r2_C));
-	
-	EXPECT_TRUE(statechart->isStateActive(EventDrivenInternalEvent::EventDrivenInternalEvent_check_VALID));
-	
-	statechart->getDefaultSCI()->raise_start();
-	
-	EXPECT_TRUE(statechart->isStateActive(EventDrivenInternalEvent::EventDrivenInternalEvent_r1_B));
-	
-	EXPECT_TRUE(statechart->isStateActive(EventDrivenInternalEvent::EventDrivenInternalEvent_r2_D));
-	
-	EXPECT_TRUE(statechart->isStateActive(EventDrivenInternalEvent::EventDrivenInternalEvent_check_VALID));
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_i1_sequence()== 2l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_i2_sequence()== 3l);
-	
-	statechart->exit();
-	
-	
+	TEST_F(EventDrivenInternalEventTest, checkInternlEventQueueing) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(EventDrivenInternalEvent::EventDrivenInternalEvent_r1_A));
+		
+		EXPECT_TRUE(statechart->isStateActive(EventDrivenInternalEvent::EventDrivenInternalEvent_r2_C));
+		
+		EXPECT_TRUE(statechart->isStateActive(EventDrivenInternalEvent::EventDrivenInternalEvent_check_VALID));
+		
+		statechart->getDefaultSCI()->raise_start();
+		
+		EXPECT_TRUE(statechart->isStateActive(EventDrivenInternalEvent::EventDrivenInternalEvent_r1_B));
+		
+		EXPECT_TRUE(statechart->isStateActive(EventDrivenInternalEvent::EventDrivenInternalEvent_r2_D));
+		
+		EXPECT_TRUE(statechart->isStateActive(EventDrivenInternalEvent::EventDrivenInternalEvent_check_VALID));
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_i1_sequence()== 2l);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_i2_sequence()== 3l);
+		
+		statechart->exit();
+		
+		
 }

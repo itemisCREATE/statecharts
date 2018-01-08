@@ -4,6 +4,7 @@
 #include "DynamicChoice.h"
 #include "sc_runner.h"
 #include "sc_types.h"
+			
 
 
 //! The timers are managed by a timer service. */
@@ -27,18 +28,19 @@ class DynamicChoiceTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
-
-TEST_F(DynamicChoiceTest, DynamicChoiceTest) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(DynamicChoice::main_region_Start));
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(DynamicChoice::main_region_A));
-	
-	
+	TEST_F(DynamicChoiceTest, DynamicChoiceTest) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(DynamicChoice::main_region_Start));
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(DynamicChoice::main_region_A));
+		
+		
 }

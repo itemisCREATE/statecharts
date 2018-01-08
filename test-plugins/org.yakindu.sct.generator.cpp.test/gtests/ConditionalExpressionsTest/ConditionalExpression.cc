@@ -4,6 +4,7 @@
 #include "ConditionalExpressions.h"
 #include "sc_runner.h"
 #include "sc_types.h"
+			
 
 
 //! The timers are managed by a timer service. */
@@ -27,24 +28,25 @@ class ConditionalExpression : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
-
-TEST_F(ConditionalExpression, ConditionalExpressionTest) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(ConditionalExpressions::main_region_A));
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_condition()== 1l);
-	
-	statechart->getDefaultSCI()->raise_e();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(ConditionalExpressions::main_region_B));
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_condition()== 2l);
-	
-	
+	TEST_F(ConditionalExpression, ConditionalExpressionTest) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(ConditionalExpressions::main_region_A));
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_condition()== 1l);
+		
+		statechart->getDefaultSCI()->raise_e();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(ConditionalExpressions::main_region_B));
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_condition()== 2l);
+		
+		
 }

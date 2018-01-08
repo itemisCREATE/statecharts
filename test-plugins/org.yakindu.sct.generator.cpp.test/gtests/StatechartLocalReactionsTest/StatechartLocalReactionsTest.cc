@@ -4,6 +4,7 @@
 #include "StatechartLocalReactions.h"
 #include "sc_runner.h"
 #include "sc_types.h"
+			
 
 
 //! The timers are managed by a timer service. */
@@ -27,27 +28,28 @@ class StatechartLocalReactionsTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
-
-TEST_F(StatechartLocalReactionsTest, statechartLocalReactionsTest) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(StatechartLocalReactions::main_region_S1));
-	
-	EXPECT_TRUE(statechart->isStateActive(StatechartLocalReactions::region2_a));
-	
-	while (statechart->getDefaultSCI()->get_myInt()< 10l) {
+	TEST_F(StatechartLocalReactionsTest, statechartLocalReactionsTest) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(StatechartLocalReactions::main_region_S1));
+		
 		EXPECT_TRUE(statechart->isStateActive(StatechartLocalReactions::region2_a));
-		if (statechart->getDefaultSCI()->get_myInt()%2l== 0l) {
-			EXPECT_TRUE(statechart->isStateActive(StatechartLocalReactions::main_region_S1));
+		
+		while (statechart->getDefaultSCI()->get_myInt()< 10l) {
+			EXPECT_TRUE(statechart->isStateActive(StatechartLocalReactions::region2_a));
+			if (statechart->getDefaultSCI()->get_myInt()%2l== 0l) {
+				EXPECT_TRUE(statechart->isStateActive(StatechartLocalReactions::main_region_S1));
+			}
+			else {
+				EXPECT_TRUE(statechart->isStateActive(StatechartLocalReactions::main_region_S2));
+			}
+			runner->proceed_cycles(1);
 		}
-		else {
-			EXPECT_TRUE(statechart->isStateActive(StatechartLocalReactions::main_region_S2));
-		}
-		runner->proceed_cycles(1);
-	}
-	
-	
+		
+		
 }

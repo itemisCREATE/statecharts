@@ -4,6 +4,7 @@
 #include "SameNameDifferentRegion.h"
 #include "sc_runner.h"
 #include "sc_types.h"
+			
 
 
 //! The timers are managed by a timer service. */
@@ -27,30 +28,31 @@ class SameNameDifferentRegionTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
-
-TEST_F(SameNameDifferentRegionTest, sameNameDifferenRegionTest) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateA));
-	
-	statechart->getDefaultSCI()->raise_e1();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB));
-	
-	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB_r1_StateA));
-	
-	statechart->getDefaultSCI()->raise_e1();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB));
-	
-	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB_r1_StateB));
-	
-	
+	TEST_F(SameNameDifferentRegionTest, sameNameDifferenRegionTest) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateA));
+		
+		statechart->getDefaultSCI()->raise_e1();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB));
+		
+		EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB_r1_StateA));
+		
+		statechart->getDefaultSCI()->raise_e1();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB));
+		
+		EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB_r1_StateB));
+		
+		
 }

@@ -4,6 +4,7 @@
 #include "IntegerExpressions.h"
 #include "sc_runner.h"
 #include "sc_types.h"
+			
 
 
 //! The timers are managed by a timer service. */
@@ -27,56 +28,57 @@ class IntegerExpressionsTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
-
-TEST_F(IntegerExpressionsTest, integerExpressions) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(IntegerExpressions::main_region_StateA));
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_myInt1()== 10l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_myInt2()== 5l);
-	
-	statechart->getDefaultSCI()->raise_e1();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_less()== false);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_greater()== true);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_equalOrLess()== false);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_equalOrGreater()== true);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_equal()== false);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_notEqual()== true);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_plus()== 15l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_minus()== 5l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_multiply()== 50l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_division()== 2l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_modulo()== 0l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_negat()== - 10l );
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_multiAssign()== 20l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_divAssign()== 2l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_plusAssign()== 12l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_minusAssign()== - 8l );
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_moduloAssign()== 0l);
-	
-	
+	TEST_F(IntegerExpressionsTest, integerExpressions) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(IntegerExpressions::main_region_StateA));
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_myInt1()== 10l);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_myInt2()== 5l);
+		
+		statechart->getDefaultSCI()->raise_e1();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_less()== false);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_greater()== true);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_equalOrLess()== false);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_equalOrGreater()== true);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_equal()== false);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_notEqual()== true);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_plus()== 15l);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_minus()== 5l);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_multiply()== 50l);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_division()== 2l);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_modulo()== 0l);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_negat()== - 10l );
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_multiAssign()== 20l);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_divAssign()== 2l);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_plusAssign()== 12l);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_minusAssign()== - 8l );
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_moduloAssign()== 0l);
+		
+		
 }

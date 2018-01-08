@@ -4,6 +4,7 @@
 #include "LocalReactions.h"
 #include "sc_runner.h"
 #include "sc_types.h"
+			
 
 
 //! The timers are managed by a timer service. */
@@ -27,18 +28,19 @@ class LocalReactionsTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
-
-TEST_F(LocalReactionsTest, LocalReactionsTest) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(LocalReactions::main_region_A));
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 1l);
-	
-	
+	TEST_F(LocalReactionsTest, LocalReactionsTest) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(LocalReactions::main_region_A));
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 1l);
+		
+		
 }

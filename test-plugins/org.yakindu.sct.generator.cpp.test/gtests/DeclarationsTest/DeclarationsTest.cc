@@ -4,6 +4,7 @@
 #include "Declarations.h"
 #include "sc_runner.h"
 #include "sc_types.h"
+			
 
 
 //! The timers are managed by a timer service. */
@@ -27,12 +28,13 @@ class DeclarationsTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
-
-TEST_F(DeclarationsTest, declarationsTest) {
-	
-	statechart->enter();
-	
-	
+	TEST_F(DeclarationsTest, declarationsTest) {
+		
+		statechart->enter();
+		
+		
 }

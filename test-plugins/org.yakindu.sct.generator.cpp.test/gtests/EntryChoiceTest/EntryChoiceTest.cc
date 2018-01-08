@@ -4,6 +4,7 @@
 #include "EntryChoice.h"
 #include "sc_runner.h"
 #include "sc_types.h"
+			
 
 
 //! The timers are managed by a timer service. */
@@ -27,18 +28,19 @@ class EntryChoiceTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
-
-TEST_F(EntryChoiceTest, EntryChoiceTest) {
-	
-	statechart->enter();
-	
-	runner->proceed_cycles(1);
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(EntryChoice::main_region_A));
-	
-	
+	TEST_F(EntryChoiceTest, EntryChoiceTest) {
+		
+		statechart->enter();
+		
+		runner->proceed_cycles(1);
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(EntryChoice::main_region_A));
+		
+		
 }

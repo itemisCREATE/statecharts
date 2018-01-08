@@ -4,6 +4,7 @@
 #include "FloatModulo.h"
 #include "sc_runner.h"
 #include "sc_types.h"
+			
 
 
 //! The timers are managed by a timer service. */
@@ -27,16 +28,17 @@ class FloatModuloTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
-
-TEST_F(FloatModuloTest, test) {
-	
-	statechart->enter();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isFinal());
-	
-	
+	TEST_F(FloatModuloTest, test) {
+		
+		statechart->enter();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isFinal());
+		
+		
 }
