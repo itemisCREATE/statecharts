@@ -4,16 +4,17 @@
 #include "EmptyTransition.h"
 #include "sc_runner.h"
 #include "sc_types.h"
+			
 
-
-
-static EmptyTransition* statechart;
 
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class EmptyTransitionTest : public ::testing::Test{
 	protected:
+	
+	EmptyTransition* statechart;
+	
 	virtual void SetUp() {
 		statechart = new EmptyTransition();
 		statechart->init();
@@ -27,17 +28,19 @@ class EmptyTransitionTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
-
-TEST_F(EmptyTransitionTest, EmptyTransitionTest) {
-	
-	statechart->enter();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(!statechart->isStateActive(EmptyTransition::main_region_B));
-	
-	EXPECT_TRUE(statechart->isStateActive(EmptyTransition::main_region_A));
-	
+	TEST_F(EmptyTransitionTest, EmptyTransitionTest) {
+		
+		statechart->enter();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(!statechart->isStateActive(EmptyTransition::main_region_B));
+		
+		EXPECT_TRUE(statechart->isStateActive(EmptyTransition::main_region_A));
+		
+		
 }

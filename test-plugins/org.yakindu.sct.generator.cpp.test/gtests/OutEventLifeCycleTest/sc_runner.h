@@ -17,7 +17,7 @@ extern "C" {
 class SctUnitRunner {
 	public:
 		SctUnitRunner(StatemachineInterface * statemachine, bool event_driven, sc_integer cycle_period);
-		~SctUnitRunner(){}
+		virtual ~SctUnitRunner(){};
 		void proceed_time(sc_integer time_ms);
 		void proceed_cycles(sc_integer cycles);
 		virtual void cancel();

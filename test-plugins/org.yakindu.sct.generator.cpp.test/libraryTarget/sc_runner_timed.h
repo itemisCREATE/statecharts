@@ -19,7 +19,7 @@ extern "C" {
 class TimedSctUnitRunner : public TimerInterface {
 	public:
 		TimedSctUnitRunner(StatemachineInterface * statemachine, bool event_driven, sc_integer cycle_period);
-		~TimedSctUnitRunner(){}
+		virtual ~TimedSctUnitRunner(){};
 		void proceed_time(sc_integer time_ms);
 		void proceed_cycles(sc_integer cycles);
 		virtual void setTimer(TimedStatemachineInterface* statemachine, sc_eventid event, sc_integer time_ms, sc_boolean isPeriodic);

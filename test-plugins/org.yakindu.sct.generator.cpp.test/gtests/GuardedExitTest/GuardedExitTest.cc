@@ -4,16 +4,17 @@
 #include "GuardedExit.h"
 #include "sc_runner.h"
 #include "sc_types.h"
+			
 
-
-
-static GuardedExit* statechart;
 
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class GuardedExitTest : public ::testing::Test{
 	protected:
+	
+	GuardedExit* statechart;
+	
 	virtual void SetUp() {
 		statechart = new GuardedExit();
 		statechart->init();
@@ -27,39 +28,43 @@ class GuardedExitTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	virtual void checkDone(bool shouldBeDone) {
+		
+		statechart->getDefaultSCI()->raise_e();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(GuardedExit::main_region_B));
+		
+		EXPECT_TRUE(shouldBeDone ? statechart->getDefaultSCI()->get_done()  : !statechart->getDefaultSCI()->get_done());
+		
+		
+	}
+	
 };
 
-void checkDone(bool shouldBeDone){
-	
-	statechart->getDefaultSCI()->raise_e();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(GuardedExit::main_region_B));
-	
-	EXPECT_TRUE(shouldBeDone ? statechart->getDefaultSCI()->get_done()  : !statechart->getDefaultSCI()->get_done());
-	
+	TEST_F(GuardedExitTest, ExitTaken) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(GuardedExit::main_region_A));
+		
+		EXPECT_TRUE(!statechart->getDefaultSCI()->get_guard());
+		
+		checkDone(false);
+		
+		
 }
-
-TEST_F(GuardedExitTest, ExitTaken) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(GuardedExit::main_region_A));
-	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_guard());
-	
-	checkDone(false);
-	
-}
-TEST_F(GuardedExitTest, ExitNotTaken) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(GuardedExit::main_region_A));
-	
-	statechart->getDefaultSCI()->set_guard(true);
-	
-	checkDone(true);
-	
+	TEST_F(GuardedExitTest, ExitNotTaken) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(GuardedExit::main_region_A));
+		
+		statechart->getDefaultSCI()->set_guard(true);
+		
+		checkDone(true);
+		
+		
 }

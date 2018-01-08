@@ -4,16 +4,17 @@
 #include "OutEventLifeCycle.h"
 #include "sc_runner.h"
 #include "sc_types.h"
+			
 
-
-
-static OutEventLifeCycle* statechart;
 
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class OutEventLifeCycleTest : public ::testing::Test{
 	protected:
+	
+	OutEventLifeCycle* statechart;
+	
 	virtual void SetUp() {
 		statechart = new OutEventLifeCycle();
 		statechart->init();
@@ -27,51 +28,57 @@ class OutEventLifeCycleTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
-};
-
-void init(bool sndCycle){
 	
-	statechart->enter();
-	
-	statechart->getDefaultSCI()->raise_e();
-	
-	runner->proceed_cycles(1);
-	
-	if (sndCycle) {
+	virtual void init(bool sndCycle) {
+		
+		statechart->enter();
+		
+		statechart->getDefaultSCI()->raise_e();
+		
 		runner->proceed_cycles(1);
+		
+		if (sndCycle) {
+			runner->proceed_cycles(1);
+		}
+		
+		
 	}
 	
-}
+};
 
-TEST_F(OutEventLifeCycleTest, availableAfterCycle) {
-	
-	statechart->enter();
-	
-	statechart->getDefaultSCI()->raise_e();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->isRaised_f());
-	
+	TEST_F(OutEventLifeCycleTest, availableAfterCycle) {
+		
+		statechart->enter();
+		
+		statechart->getDefaultSCI()->raise_e();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->isRaised_f());
+		
+		
 }
-TEST_F(OutEventLifeCycleTest, availableWithinCycle) {
-	
-	init(false);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_f_available_in_cycle());
-	
+	TEST_F(OutEventLifeCycleTest, availableWithinCycle) {
+		
+		init(false);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_f_available_in_cycle());
+		
+		
 }
-TEST_F(OutEventLifeCycleTest, unvailableWithin2ndCycle) {
-	
-	init(true);
-	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_f_available_in_next_cycle());
-	
+	TEST_F(OutEventLifeCycleTest, unvailableWithin2ndCycle) {
+		
+		init(true);
+		
+		EXPECT_TRUE(!statechart->getDefaultSCI()->get_f_available_in_next_cycle());
+		
+		
 }
-TEST_F(OutEventLifeCycleTest, unvailableAfter2ndCycle) {
-	
-	init(true);
-	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->isRaised_f());
-	
+	TEST_F(OutEventLifeCycleTest, unvailableAfter2ndCycle) {
+		
+		init(true);
+		
+		EXPECT_TRUE(!statechart->getDefaultSCI()->isRaised_f());
+		
+		
 }

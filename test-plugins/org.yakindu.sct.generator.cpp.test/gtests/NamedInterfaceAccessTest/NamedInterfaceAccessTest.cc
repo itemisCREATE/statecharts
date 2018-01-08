@@ -4,16 +4,17 @@
 #include "NamedInterfaceAccess.h"
 #include "sc_runner.h"
 #include "sc_types.h"
+			
 
-
-
-static NamedInterfaceAccess* statechart;
 
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class NamedInterfaceAccessTest : public ::testing::Test{
 	protected:
+	
+	NamedInterfaceAccess* statechart;
+	
 	virtual void SetUp() {
 		statechart = new NamedInterfaceAccess();
 		statechart->init();
@@ -27,27 +28,29 @@ class NamedInterfaceAccessTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
-
-TEST_F(NamedInterfaceAccessTest, SafeOpenSuccess) {
-	
-	statechart->enter();
-	
-	runner->proceed_cycles(1);
-	
-	statechart->getSCI_User()->raise_numberPressed(3l);
-	
-	runner->proceed_cycles(1);
-	
-	statechart->getSCI_User()->raise_numberPressed(7l);
-	
-	runner->proceed_cycles(1);
-	
-	statechart->getSCI_User()->raise_numberPressed(5l);
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->getSCI_Safe()->isRaised_open());
-	
+	TEST_F(NamedInterfaceAccessTest, SafeOpenSuccess) {
+		
+		statechart->enter();
+		
+		runner->proceed_cycles(1);
+		
+		statechart->getSCI_User()->raise_numberPressed(3l);
+		
+		runner->proceed_cycles(1);
+		
+		statechart->getSCI_User()->raise_numberPressed(7l);
+		
+		runner->proceed_cycles(1);
+		
+		statechart->getSCI_User()->raise_numberPressed(5l);
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->getSCI_Safe()->isRaised_open());
+		
+		
 }

@@ -4,16 +4,17 @@
 #include "FeatureCalls.h"
 #include "sc_runner.h"
 #include "sc_types.h"
+			
 
-
-
-static FeatureCalls* statechart;
 
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class FeatureCallsTest : public ::testing::Test{
 	protected:
+	
+	FeatureCalls* statechart;
+	
 	virtual void SetUp() {
 		statechart = new FeatureCalls();
 		statechart->init();
@@ -27,17 +28,19 @@ class FeatureCallsTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
-
-TEST_F(FeatureCallsTest, FeatureCalls) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(FeatureCalls::main_region_A));
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(FeatureCalls::main_region_A));
-	
+	TEST_F(FeatureCallsTest, FeatureCalls) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(FeatureCalls::main_region_A));
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(FeatureCalls::main_region_A));
+		
+		
 }
