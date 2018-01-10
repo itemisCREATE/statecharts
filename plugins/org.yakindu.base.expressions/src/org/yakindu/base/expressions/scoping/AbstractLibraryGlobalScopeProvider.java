@@ -13,14 +13,13 @@ package org.yakindu.base.expressions.scoping;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Callable;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -32,9 +31,8 @@ import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.SelectableBasedScope;
 
 import com.google.common.base.Predicate;
+import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -61,15 +59,10 @@ public abstract class AbstractLibraryGlobalScopeProvider extends AbstractGlobalS
 		});
 	}
 
-	private LoadingCache<URI, Iterable<IEObjectDescription>> libraryCache;
+	private Cache<URI, Iterable<IEObjectDescription>> libraryCache;
 
 	public AbstractLibraryGlobalScopeProvider() {
-		libraryCache = CacheBuilder.newBuilder().build(new CacheLoader<URI, Iterable<IEObjectDescription>>() {
-			@Override
-			public Iterable<IEObjectDescription> load(URI key) throws Exception {
-				return getDescriptions(key);
-			}
-		});
+		libraryCache = CacheBuilder.newBuilder().<URI, Iterable<IEObjectDescription>> build();
 	}
 
 	@Override
@@ -77,7 +70,13 @@ public abstract class AbstractLibraryGlobalScopeProvider extends AbstractGlobalS
 		List<IEObjectDescription> descriptions = Lists.newArrayList();
 		for (URI uri : getValidLibraries(context)) {
 			try {
-				Iterables.addAll(descriptions, libraryCache.get(uri));
+				Iterables.addAll(descriptions, libraryCache.get(uri, new Callable<Iterable<IEObjectDescription>>() {
+
+					@Override
+					public Iterable<IEObjectDescription> call() throws Exception {
+						return getDescriptions(context, uri);
+					}
+				}));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -86,9 +85,9 @@ public abstract class AbstractLibraryGlobalScopeProvider extends AbstractGlobalS
 				reference.getEReferenceType(), isIgnoreCase(reference));
 	}
 
-	protected Iterable<IEObjectDescription> getDescriptions(URI uri) {
+	protected Iterable<IEObjectDescription> getDescriptions(Resource context, URI uri) {
 		List<IEObjectDescription> result = Lists.newArrayList();
-		ResourceSet set = new ResourceSetImpl();
+		ResourceSet set = context.getResourceSet();
 		Resource resource = set.getResource(uri, true);
 		IResourceServiceProvider resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(uri);
 		if (resourceServiceProvider == null) {
