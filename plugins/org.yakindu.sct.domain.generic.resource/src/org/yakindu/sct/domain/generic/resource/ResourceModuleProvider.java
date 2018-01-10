@@ -16,7 +16,6 @@ import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.domain.extension.IModuleProvider;
 import org.yakindu.sct.model.stext.STextRuntimeModule;
 import org.yakindu.sct.model.stext.resource.StextResource;
-import org.yakindu.sct.model.stext.scoping.STextScopeProvider.ErrorHandlerDelegate;
 import org.yakindu.sct.model.stext.ui.STextUiModule;
 import org.yakindu.sct.model.stext.ui.internal.STextActivator;
 
@@ -38,7 +37,6 @@ public class ResourceModuleProvider implements IModuleProvider {
 
 				@Override
 				public void configure(Binder binder) {
-					binder.bind(ErrorHandlerDelegate.class).to(HeadlessErrorHandler.class);
 				}
 			});
 		}
