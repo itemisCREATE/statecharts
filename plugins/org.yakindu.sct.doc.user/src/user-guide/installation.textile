@@ -238,7 +238,7 @@ Depending on your Linux distribution and version, you might need to install addi
 
 The list of Linux distributions mentioned below is in no way meant to be exhaustive. If your Linux distribution is not yet among them and you manage to find out the proper commands for it, please let us know!
 
-On Linux, Eclipse uses the GTK library for drawing the user interface. Some users experience issues, especially when using the default version GTK3. If your installation of YAKINDU Statechart Tools does not perform as expected, is laggy, has drawing issues or looks weird, refer to "Configuring YAKINDU Statechart Tools to use GTK2":#inst_linux_gtk2. If the welcome page looks broken and asks you to configure _webkitgtk_, refer to "Webkit GTK":#inst_linux_webkit_gtk.
+On Linux, Eclipse uses the GTK library for drawing the user interface. Some users experience issues, especially when using the default version GTK3. If your installation of YAKINDU Statechart Tools does not perform as expected, is laggy, has drawing issues or looks weird, refer to "Configuring YAKINDU Statechart Tools to use GTK2":#inst_linux_gtk2. If the welcome page looks broken and asks you to configure _webkitgtk_, refer to "Webkit GTK":#inst_installing_on_linux_webkit_gtk.
 
 
 h4(#inst_linux_gtk2). Configuring YAKINDU Statechart Tools to use GTK2
@@ -253,7 +253,7 @@ You can use GTK2 instead of GTK3 on a case-by-case basis by having the environme
 
 bc. ./SCT
 
-This assumes your current directory is the tool's installation folder. Please also see section "&quot;Starting YAKINDU Statechart Tools&quot;":#inst_starting-yakindu-statechart-tools-2.
+This assumes your current directory is the tool's installation folder. Please also see section "&quot;Starting YAKINDU Statechart Tools&quot;":#inst_installing_on_linux_starting_yakindu_statechart_tools.
 
 To use GTK2, execute this command instead:
 

@@ -32,7 +32,7 @@ h2(#overview_which_licensing_rules_do_apply_to_yakindu_statechart_tools). Which 
 
 ###. CHECK Do these licensing information still apply?
 
-The source code of YAKINDU Statechart Tools is provided under the "Eclipse Public License":http://www.eclipse.org/legal/epl-v10.html.
+Parts of the source code of YAKINDU Statechart Tools are provided under the "Eclipse Public License":http://www.eclipse.org/legal/epl-v10.html.
 
 The code generators coming with YAKINDU Statechart Tools do not imply any license constraints on the generated code whatsoever. The generated code is property of the user, as a person or as an organization. For the generated code, the user is free to choose any license model they wish.
 
