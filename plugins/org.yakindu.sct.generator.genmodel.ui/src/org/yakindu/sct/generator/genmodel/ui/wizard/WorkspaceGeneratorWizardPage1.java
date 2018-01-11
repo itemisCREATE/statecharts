@@ -10,13 +10,15 @@
  */
 package org.yakindu.sct.generator.genmodel.ui.wizard;
 
+
+
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
@@ -45,22 +47,9 @@ public class WorkspaceGeneratorWizardPage1 extends IProjectWizardPage {
 		}
 	};
 	
-	public final MouseListener mouseListener = new MouseListener() {
-		
-		@Override
+	public final MouseAdapter mouseListener = new MouseAdapter() {
 		public void mouseUp(MouseEvent e) {
 			validate();
-			
-		}
-		
-		@Override
-		public void mouseDown(MouseEvent e) {
-			// empty
-		}
-		
-		@Override
-		public void mouseDoubleClick(MouseEvent e) {
-			// empty
 		}
 	}; 
 
@@ -203,5 +192,4 @@ public class WorkspaceGeneratorWizardPage1 extends IProjectWizardPage {
 		}
 
 	}
-
 }
