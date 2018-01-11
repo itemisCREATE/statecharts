@@ -8,12 +8,22 @@ YAKINDU Statechart Tools comes with a couple of code generators that save you fr
 Use "SCTUnit":../user-guide/sctunit.html#sctunit_test-driven_statechart_development_with_sctunit in order to test whether your state machine is also correct in the sense that it does what it is intended to do.
 
 Currently YAKINDU Statechart Tools support code generation for the following programming languages:
-* C
-* C++
-* Java
-* TypeScript
+* "C":#codegen_c_code_generator
+* "C++":#codegen_cpp_code_generator
+* "Java":#codegen_java_code_generator
 
-###. CHECK: YSCT supports code generation for C, C++, Java, TypeScript
+YSCT also includes a "statechart image generator":#codegen_statechart_images_generator.
+
+###. CHECK: YSCT supports code generation for C, C++, Java, and statechart images.
+
+Additionally, you can install a couple of code generators from the "YAKINDU Labs update site":https://updates.yakindu.com/statecharts/labs/. To do so, select _Help → Install new software …_ in the main menu, and use "https://updates.yakindu.com/statecharts/labs/":https://updates.yakindu.com/statecharts/labs/ as the site location. The following code generators are available; click on the link to find more information about the respective generator:
+* "Python":https://blogs.itemis.com/en/python-code-generation-with-yakindu-statechart-tools
+* "Swift":https://www.itemis.com/en/yakindu/state-machine/documentation/examples/example/SwiftExample
+* "TypeScript":https://blogs.itemis.com/en/typescript-code-generation-with-yakindu-statechart-tools
+
+###. CHECK: YAKINDU Labs generators: Python, Swift, TypeScript
+
+bq. *Please note:* Code generators in YAKINDU Labs are still in their beta phase and might well contain some rough edges. If you encounter any problems, please let us know!
 
 If these code generators don't suit your needs, you are free to develop your very own "custom code generator":#codegen_custom_code_generators.
 
@@ -316,18 +326,20 @@ p. The syntax rules for expressions in generator models are the same as for stat
 
 In the properties definition section near the top of a generator model, a value assigned to a property must be given as a _literal_. More complex expressions are not supported there.
 
-h4(#codegen_using_properties_and_expressions_in_generator_models_builtin). Builtin Variables
 
-There are several builtin variables which can be used in expressions in generator models:
+h4(#codegen_built-in_variables). Built-in variables
 
-* SCTVERSION (String): Returns the current version of YAKINDU Statechart Tools, for example "3.2.0".
-* TIMESTAMP (String): Returns the current date and time as a localized string, for example "11.12.2017 17:08:14".
-* USER (String): Returns the name of the current user that started this instance of YAKINDU Statechart Tools (via @System.getProperty("user.name")@
-* HOSTNAME (String): Returns the host name of the machine on which YAKINDU Statechart Tools runs.
+There are several built-in read-only variables which can be used in expressions in generator models:
 
-Please be advised that neither USER nor HOSTNAME should be used for any security related tasks. Especially the username can easily be spoofed if anyone would want to. 
+* _SCTVERSION_ (String): the current version of YAKINDU Statechart Tools, for example, "3.2.0"
+* _TIMESTAMP_ (String): the current date and time as a localized string, for example "11.12.2017 17:08:14"
+* _USER_ (String): the name of the current user who started this instance of YAKINDU Statechart Tools (via @System.getProperty("user.name")@)
+* _HOSTNAME_ (String): the host name of the machine on which YAKINDU Statechart Tools is running.
 
-h4(#codegen_using_properties_and_expressions_in_generator_models_headless). Overriding variables in a headless build
+bq. *Please note:* Neither _USER_ nor _HOSTNAME_ should be used for any security-related tasks. Especially the username can be spoofed easily, if anyone wanted to.
+
+
+h4(#codegen_overriding_variables_in_a_headless_build). Overriding variables in a headless build
 
 The values assigned to properties are _default_ values only. That means, you can override them by different values when actually executing a generation model by way of running the "headless code generator":../user-guide/generating_code_headless.html#hdls_headless_code_generation.
 
@@ -1009,7 +1021,7 @@ h4(#codegen_cpp_api_feature). API feature
 
 The *API* feature allows to change the way include statements are generated:
 
-* _checkUnimplementedOCBs_ (Boolean, optional): If set to _true_ init function returns an error code, otherwise the init function return type is void.
+* _checkUnimplementedOCBs_ (Boolean, optional): If set to _true_, the _init_ function returns an error code, otherwise the _init_ function's return type is _void_.
 
 ==<div class="example">==
 
