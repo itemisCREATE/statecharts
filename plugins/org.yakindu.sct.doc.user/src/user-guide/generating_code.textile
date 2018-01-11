@@ -2456,9 +2456,9 @@ The mandatory *Renderer* feature controls the rendering of the images.
 
 h2(#codegen_custom_code_generators). Custom code generators
 
-Although YAKINDU Statechart Tools are shipped with powerful code generators for C, C++, Java, and TypeScript, it may be necessary to create a custom code generator to support a variety of use cases. One reason for a custom code generator could be to support additional programming languages – in this case we would be happy to receive a contribution! – or to generate code for an existing framework.
+Although YAKINDU Statechart Tools are shipped with powerful code generators for C, C++, and Java, it may be necessary to create a custom code generator to support a variety of use cases. One reason for a custom code generator could be to support additional programming languages – in this case we would be happy to receive a contribution! – or to generate code for an existing framework.
 
-###. CHECK: Does YSCT provide code generators for C, C++, Java, and TypeScript?
+###. CHECK: Does YSCT provide code generators for C, C++, and Java.
 
 
 

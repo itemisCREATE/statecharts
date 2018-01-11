@@ -9,10 +9,12 @@ The Standard Edition of YAKINDU Statechart Tools provides the following features
 
 * *Statechart diagram editor* to graphically create and edit statecharts, the graphical representation of state machines
 * *Statechart simulator* to simulate the behavior of statecharts
-* *Code generators for Java, C, C++, and TypeScript* to transform statecharts into programming language source code
+* *Code generators for Java, C, and C++* to transform statecharts into programming language source code
 * *Custom generator projects* to easily create model-to-text transformations with Xtend or Java in order to create any code of your own choice
 * *Integrated validator* to check for syntactical or semantical problems of the statechart model
 * *Testing framework* to test your state machines with unit tests
+
+###. CHECK: Does YSCT provide code generators for C, C++, and Java?
 
 The following graph shows these features and their relation to each other:
 
@@ -48,4 +50,6 @@ YAKINDU Statechart Tools is developed and driven by "itemis AG":https://en.wikip
 
 h2(#overview_who_is_using_yakindu_statechart_tools). Who is using YAKINDU Statechart Tools?
 
-Initially YAKINDU Statechart Tools have been designed for the embedded systems industry: automotive, system controls, vending machines etc. However, YAKINDU Statechart Tools are bringing the benefits of finite-state machines (FSM) and Harel statecharts to everyone who needs to design, simulate and develop behavior. People can use YAKINDU Statechart Tools to generate Java, C, C++, or TypeScript code.
+Initially YAKINDU Statechart Tools have been designed for the embedded systems industry: automotive, system controls, vending machines etc. However, YAKINDU Statechart Tools are bringing the benefits of finite-state machines (FSM) and Harel statecharts to everyone who needs to design, simulate and develop behavior. People can use YAKINDU Statechart Tools to generate Java, C, or C++ code.
+
+###. CHECK: Does YSCT provide code generators for C, C++, and Java?
