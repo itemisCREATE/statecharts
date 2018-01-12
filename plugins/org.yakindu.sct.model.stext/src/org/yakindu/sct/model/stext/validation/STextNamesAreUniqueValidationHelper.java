@@ -95,11 +95,8 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 		Node<EClass> superClassesOne = getSuperClassTree(one.getEClass());
 		Node<EClass> superClassesTwo = getSuperClassTree(two.getEClass());
 		
-		List<EClass> flatOne = new ArrayList<>();
-		List<EClass> flatTwo = new ArrayList<>();
-		
-		superClassesOne.flatten(flatOne);
-		superClassesTwo.flatten(flatTwo);
+		List<EClass> flatOne = superClassesOne.flatten();
+		List<EClass> flatTwo = superClassesTwo.flatten();
 		
 		for(EClass eC : flatOne) {
 			if(flatTwo.contains(eC))
@@ -154,6 +151,15 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 		
 		public T getData() {
 			return this.data;
+		}
+		
+		public List<T> flatten() {
+			List<T> data = new ArrayList<T>();
+			data.add(this.getData());
+			
+			this.flatten(data);
+			
+			return data;
 		}
 		
 		public void flatten(List<T> data) {
