@@ -12,6 +12,9 @@ package org.yakindu.sct.ui.editor.propertysheets.filter;
 
 import org.eclipse.jface.viewers.IFilter;
 import org.yakindu.sct.ui.editor.editparts.StatechartDiagramEditPart;
+import org.yakindu.sct.ui.editor.editparts.StatechartNameEditPart;
+import org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart;
+import org.yakindu.sct.ui.editor.editparts.StatechartTextExpressionEditPart;
 
 /**
  * 
@@ -22,7 +25,7 @@ public class StatechartPropertySectionFilter implements IFilter {
 	
 	@Override
 	public boolean select(Object selection) {
-		if (selection instanceof StatechartDiagramEditPart)
+		if (selection instanceof StatechartNameEditPart || selection instanceof StatechartTextEditPart || selection instanceof StatechartTextExpressionEditPart || selection instanceof StatechartDiagramEditPart)
 			return true;
 		return false;
 	}

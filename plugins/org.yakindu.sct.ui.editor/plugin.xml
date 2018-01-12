@@ -213,15 +213,14 @@
             <popupStructuredContributionCriteria objectClass="org.yakindu.sct.ui.editor.editparts.StatechartTextExpressionEditPart"/>
             <popupPredefinedItem id="editGroup" remove="true"/>
          </popupContribution>
-         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
+        <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider"> 
 			<popupStructuredContributionCriteria objectClass="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart"/>
 			<popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
-		</popupContribution>
+		 </popupContribution>
       </contributionItemProvider>
    </extension>
    
   <!-- View Provider -->
-   
    <extension
          point="org.eclipse.gmf.runtime.diagram.core.viewProviders">
       <viewProvider
@@ -230,6 +229,7 @@
                name="Highest">
          </Priority>
       </viewProvider>
+      
    </extension>
    
    <!-- EditPart Provider -->
@@ -262,7 +262,7 @@
   <paletteProvider
         class="org.yakindu.sct.ui.editor.providers.StatechartPaletteProvider">
          <Priority
-           name="High">
+           name="High"> 
      </Priority>
      <editor
            class="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
@@ -307,17 +307,11 @@
             tab="property.tab.domain" 
             filter="org.yakindu.sct.ui.editor.propertysheets.filter.StatechartPropertySectionFilter"
             class="org.yakindu.sct.ui.editor.propertysheets.StatechartPropertySection"> 
+			<input type="org.yakindu.sct.ui.editor.editparts.StatechartDiagramEditPart"/>
 			<input type="org.yakindu.sct.ui.editor.editparts.StatechartNameEditPart"/>
             <input type="org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart"/>
             <input type="org.yakindu.sct.ui.editor.editparts.StatechartTextExpressionEditPart"/>
 		</propertySection>
-		<!-- Statechart model section for pinned definition section 
-		<propertySection
-            id="property.section.domain.statechart" 
-            tab="property.tab.domain" 
-            class="org.yakindu.sct.ui.editor.propertysheets.StatechartPropertySection" 
-            filter="org.yakindu.sct.ui.editor.propertysheets.appearance.filters.StatechartDiagramEditorPropertySectionFilter">
-		</propertySection>-->
 		<!-- State model section -->         
 		<propertySection
             id="property.section.domain.state" 
