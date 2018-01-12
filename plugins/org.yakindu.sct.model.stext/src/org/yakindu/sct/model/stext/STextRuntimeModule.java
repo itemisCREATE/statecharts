@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.validation.CompositeEValidator;
+import org.eclipse.xtext.validation.INamesAreUniqueValidationHelper;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
@@ -29,6 +30,7 @@ import org.yakindu.sct.model.stext.resource.StextResource;
 import org.yakindu.sct.model.stext.scoping.STextGlobalScopeProvider;
 import org.yakindu.sct.model.stext.serialization.STextTransientValueService;
 import org.yakindu.sct.model.stext.terminals.STextValueConverterService;
+import org.yakindu.sct.model.stext.validation.STextNamesAreUniqueValidationHelper;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -48,6 +50,7 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 		binder.bind(IDefaultResourceDescriptionStrategy.class).to(SCTResourceDescriptionStrategy.class);
 		// https://github.com/Yakindu/statecharts/issues/1199
 		binder.bind(IReferableElementsUnloader.class).to(IReferableElementsUnloader.NullUnloader.class);
+		binder.bind(INamesAreUniqueValidationHelper.class).to(STextNamesAreUniqueValidationHelper.class);
 	}
 
 	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
