@@ -41,6 +41,7 @@ import org.eclipse.gef.ui.actions.ZoomOutAction;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.internal.parts.DiagramGraphicalViewerKeyHandler;
+import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.gmf.runtime.gef.ui.internal.editparts.AnimatableZoomManager;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
@@ -59,6 +60,8 @@ import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
+import org.eclipse.swt.events.FocusAdapter;
+import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.ModifyEvent;
@@ -104,6 +107,7 @@ import org.yakindu.base.xtext.utils.gmf.resource.DirtyStateListener;
 import org.yakindu.base.xtext.utils.jface.fieldassist.CompletionProposalAdapter;
 import org.yakindu.base.xtext.utils.jface.viewers.FilteringMenuManager;
 import org.yakindu.base.xtext.utils.jface.viewers.StyledTextXtextAdapter;
+import org.yakindu.base.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.DomainStatus;
 import org.yakindu.sct.domain.extension.DomainStatus.Severity;
@@ -135,7 +139,10 @@ import com.google.inject.Key;
  */
 @SuppressWarnings("restriction")
 public class StatechartDiagramEditor extends DiagramPartitioningEditor
-		implements IGotoMarker, IContextElementProvider, IPropertyChangeListener {
+		implements
+			IGotoMarker,
+			IContextElementProvider,
+			IPropertyChangeListener {
 
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
 
@@ -149,7 +156,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 
 	protected static final int TEXT_CONTROL_HORIZONTAL_MARGIN = 10;
 	protected static final int INITIAL_PALETTE_SIZE = 175;
-	protected static final int[] MIN_CONTROL_SIZE = { 11, 21 };
+	protected static final int[] MIN_CONTROL_SIZE = {11, 21};
 	protected static final int BORDERWIDTH = 2;
 	protected static boolean imageLabelHasFocus = false;
 	protected int[] previousWidths = DEFAULT_WEIGHTS;
@@ -393,7 +400,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 							resetZoom();
 						}
 					});
-			
+
 			// Zoom original - all OS - Numpad 0
 			getKeyHandler().put(/* CTRL + '0' */
 					KeyStroke.getPressed('0', SWT.KEYPAD_0, SWT.MOD1), new Action() {
@@ -417,10 +424,9 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 		}
 		return keyHandler;
 	}
-	
+
 	protected void resetZoom() {
-		ZoomManager manager = (ZoomManager) getGraphicalViewer()
-				.getProperty(ZoomManager.class.toString());
+		ZoomManager manager = (ZoomManager) getGraphicalViewer().getProperty(ZoomManager.class.toString());
 		if (manager != null)
 			manager.setZoom(1.0d);
 	}
@@ -585,9 +591,10 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 		IEMFValueProperty modelProperty = EMFEditProperties.value(getEditingDomain(),
 				SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION);
 
-		ISWTObservableValue uiProperty = WidgetProperties.text(new int[] { SWT.FocusOut, SWT.Modify })
+		ISWTObservableValue uiProperty = WidgetProperties.text(new int[]{SWT.FocusOut, SWT.Modify})
 				.observe(xtextControl);
 		ValidatingEMFDatabindingContext context = new ValidatingEMFDatabindingContext(this, getSite().getShell());
+
 		context.bindValue(uiProperty, modelProperty.observe(
 				EcoreUtil.getObjectByType(getDiagram().eResource().getContents(), SGraphPackage.Literals.STATECHART)),
 				null, new UpdateValueStrategy() {
@@ -617,6 +624,12 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 			@Override
 			public void keyPressed(KeyEvent e) {
 			}
+		});
+		textControl.addFocusListener(new FocusAdapter() {
+			public void focusGained(FocusEvent e) {
+				((DiagramDocumentEditor) ActiveEditorTracker.getLastActiveEditor()).getDiagramGraphicalViewer()
+						.select(getDiagramEditPart());
+			};
 		});
 		return textControl;
 	}
@@ -695,7 +708,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 					this.getSite().getShell());
 			IEMFValueProperty property = EMFEditProperties.value(TransactionUtil.getEditingDomain(getContextObject()),
 					BasePackage.Literals.NAMED_ELEMENT__NAME);
-			ISWTObservableValue observe = WidgetProperties.text(new int[] { SWT.FocusOut, SWT.DefaultSelection })
+			ISWTObservableValue observe = WidgetProperties.text(new int[]{SWT.FocusOut, SWT.DefaultSelection})
 					.observe(statechartNameLabel);
 			context.bindValue(observe, property.observe(this.getContextObject()));
 		}
@@ -763,8 +776,8 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 		if (width - switchControl.getBounds().width < 0 || width < switchControl.getBounds().width) {
 			sashWidths = DEFAULT_WEIGHTS;
 		} else {
-			sashWidths = new int[] { switchControl.getBounds().width + BORDERWIDTH,
-					width - switchControl.getBounds().width };
+			sashWidths = new int[]{switchControl.getBounds().width + BORDERWIDTH,
+					width - switchControl.getBounds().width};
 		}
 		((SashForm) parent).setWeights(sashWidths);
 		updateSwitchControl(EXPAND_TOOLTIP, EXPAND_IMAGE);
@@ -1018,8 +1031,8 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 	public void restoreState(IMemento memento) {
 		if (getSash() != null && memento != null && memento.getInteger(FIRST_SASH_CONTROL_WEIGHT) != null
 				&& memento.getInteger(SECOND_SASH_CONTROL_WEIGHT) != null) {
-			getSash().setWeights(new int[] { memento.getInteger(FIRST_SASH_CONTROL_WEIGHT),
-					memento.getInteger(SECOND_SASH_CONTROL_WEIGHT) });
+			getSash().setWeights(new int[]{memento.getInteger(FIRST_SASH_CONTROL_WEIGHT),
+					memento.getInteger(SECOND_SASH_CONTROL_WEIGHT)});
 			previousWidths = getSash().getWeights();
 			isDefinitionSectionExpanded = getExpandState(memento);
 		}
