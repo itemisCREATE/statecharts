@@ -13,11 +13,11 @@ package org.yakindu.sct.model.sgraph.validation;
 import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.areOrthogonal;
 import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.collectAncestors;
 import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.commonAncestor;
-import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.findCommonAncestor;
 import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.sources;
 import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.targets;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -81,6 +81,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL = "The source states of a synchronization must be orthogonal!";
 	public static final String ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE = "The source states of a synchronization have to be contained in the same parent state within different regions!";
 	public static final String ISSUE_SYNCHRONIZATION_TRANSITION_COUNT = "A synchronization should have at least two incoming or two outgoing transitions.";
+	public static final String ISSUE_SYNCHRONIZATION_SOURCE_TARGET_STATES_PARENT_REGION = "A synchronization's source- and parent states last common ancestor has to be a region!";
 	public static final String ISSUE_TRANSITION_ORTHOGONAL = "Source and target of a transition must not be located in orthogonal regions!";
 	public static final String ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER = "Outgoing transitions from entries can only target to sibling or inner states.";
 	public static final String ISSUE_STATECHART_NAME_NO_IDENTIFIER = "%s is not a valid identifier!";
@@ -225,7 +226,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 
 	@Check(CheckType.FAST)
 	public void synchronizationTransitionCount(Synchronization sync) {
-		if (sync.getIncomingTransitions().size() < 2 && sync.getOutgoingTransitions().size() < 2) {
+		if (sync.getIncomingTransitions().size() + sync.getOutgoingTransitions().size()  < 3) {
 			warning(ISSUE_SYNCHRONIZATION_TRANSITION_COUNT, sync, null, -1);
 		}
 	}
@@ -330,7 +331,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 			error(ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL, sync, null, -1);
 		}
 	}
-
+	
 	@Check
 	public void orthogonalSynchronizedTransition(Synchronization sync) {
 
@@ -346,27 +347,31 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 			outAncestorsList.add(collectAncestors(trans.getTarget(), new ArrayList<EObject>()));
 		}
 
-		Set<Transition> inOrthogonal = new HashSet<Transition>(incoming);
-		Set<Transition> outOrthogonal = new HashSet<Transition>(outgoing);
+		Set<Transition> inOrthogonal = new HashSet<Transition>();
+		Set<Transition> outOrthogonal = new HashSet<Transition>();
+		
+		if(incoming.size() == 0 || outgoing.size() == 0) {
+			return;
+		}
 
 		for (int i = 0; i < incoming.size(); i++) {
 			for (int j = 0; j < outgoing.size(); j++) {
 
-				EObject commonAncestor = findCommonAncestor(inAncestorsList.get(i), outAncestorsList.get(j));
-
-				if (commonAncestor instanceof Region) {
-					inOrthogonal.remove(incoming.get(i));
-					outOrthogonal.remove(outgoing.get(j));
+				List<Vertex> states = new ArrayList<>(Arrays.asList(incoming.get(i).getSource(), outgoing.get(j).getTarget()));
+				
+				if (areOrthogonal(states)) {
+					inOrthogonal.add(incoming.get(i));
+					outOrthogonal.add(outgoing.get(j));
 				}
 			}
 		}
 
 		for (Transition trans : inOrthogonal) {
-			error(ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE, trans, null, -1);
+			error(ISSUE_SYNCHRONIZATION_SOURCE_TARGET_STATES_PARENT_REGION, trans, null, -1);
 		}
 
 		for (Transition trans : outOrthogonal) {
-			error(ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE, trans, null, -1);
+			error(ISSUE_SYNCHRONIZATION_SOURCE_TARGET_STATES_PARENT_REGION, trans, null, -1);
 		}
 
 	}
