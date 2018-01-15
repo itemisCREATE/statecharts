@@ -926,6 +926,9 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		expectNoErrors("b = t.op(true, 10)",
 				"internal var t:ComplexParameterizedType<boolean, integer> var b:boolean");
 
+		expectErrors("b = t.op(true, 10.5)",
+				"internal var t:ComplexParameterizedType<boolean, integer> var b:boolean", ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1);
+
 		assertTrue(isBooleanType(inferTypeResultForExpression("b = t.op(true, 10)",
 				"internal var t:ComplexParameterizedType<integer> var b:boolean").getType()));
 		
