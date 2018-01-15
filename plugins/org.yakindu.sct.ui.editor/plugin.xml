@@ -203,22 +203,43 @@
    </extension>
    
    <!-- Contribution Item Provider -->
-   <extension point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
-      <contributionItemProvider
+	<extension point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
+		<contributionItemProvider
             class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContributionItemProvider"
             checkPluginLoaded="false">
-         <Priority name="Low"/>
-         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart"/>
-            <popupStructuredContributionCriteria objectClass="org.yakindu.sct.ui.editor.editparts.StatechartTextExpressionEditPart"/>
-            <popupPredefinedItem id="editGroup" remove="true"/>
+			<Priority name="Low"/>
+        	<popupContribution
+               class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider"
+               id="contributionItemProviders-editGroup">
+				<popupStructuredContributionCriteria objectClass="org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart"/>
+            	<popupStructuredContributionCriteria objectClass="org.yakindu.sct.ui.editor.editparts.StatechartTextExpressionEditPart"/>
+            	<popupPredefinedItem id="editGroup" remove="true"/>
+			</popupContribution>
+        	<popupContribution
+               class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider"
+               id="contributionItemProviders-removeDeleteFromDiagram"> 
+				<popupStructuredContributionCriteria objectClass="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart"/>
+				<popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
+	 		</popupContribution>
+         <popupContribution
+               class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider"
+               id="contributionItemProviders-addDeleteFromDiagram">
+            <popupStructuredContributionCriteria
+                  objectClass="org.eclipse.gmf.runtime.diagram.ui.editparts.NoteEditPart">
+            </popupStructuredContributionCriteria>
+            <popupStructuredContributionCriteria
+                  objectClass="org.eclipse.gmf.runtime.diagram.ui.internal.editparts.NoteAttachmentEditPart">
+            </popupStructuredContributionCriteria>
+            <popupStructuredContributionCriteria
+                  objectClass="org.eclipse.gmf.runtime.diagram.ui.internal.editparts.TextEditPart">
+            </popupStructuredContributionCriteria>
+            <popupAction
+                  id="deleteFromDiagramAction"
+                  path="/editGroup">
+            </popupAction>
          </popupContribution>
-         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-			<popupStructuredContributionCriteria objectClass="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart"/>
-			<popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
-		</popupContribution>
-      </contributionItemProvider>
-   </extension>
+		</contributionItemProvider>
+	</extension>
    
   <!-- View Provider -->
    
