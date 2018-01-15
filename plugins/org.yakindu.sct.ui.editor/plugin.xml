@@ -242,7 +242,6 @@
 	</extension>
    
   <!-- View Provider -->
-   
    <extension
          point="org.eclipse.gmf.runtime.diagram.core.viewProviders">
       <viewProvider
@@ -251,6 +250,7 @@
                name="Highest">
          </Priority>
       </viewProvider>
+      
    </extension>
    
    <!-- EditPart Provider -->
@@ -283,7 +283,7 @@
   <paletteProvider
         class="org.yakindu.sct.ui.editor.providers.StatechartPaletteProvider">
          <Priority
-           name="High">
+           name="High"> 
      </Priority>
      <editor
            class="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
@@ -320,86 +320,100 @@
       </propertyTabs>
    </extension>
    
-   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections" id="propsections">
-      <propertySections contributorId="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
-		<!-- State model section -->         
-         <propertySection
-            id="property.section.domain.state" 
-            tab="property.tab.domain"
-            class="org.yakindu.sct.ui.editor.propertysheets.StatePropertySection">
-           <input type="org.yakindu.sct.ui.editor.editparts.StateEditPart"/>
-           <input type="org.yakindu.sct.ui.editor.editparts.StateNameEditPart"/>
-           <input type="org.yakindu.sct.ui.editor.editparts.StateTextCompartmentEditPart"/>
-           <input type="org.yakindu.sct.ui.editor.editparts.StateTextCompartmentExpressionEditPart"/>
-         </propertySection>
+<extension point="org.eclipse.ui.views.properties.tabbed.propertySections" id="propsections">
+      <propertySections contributorId="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">	
         <!-- Statechart model section -->         
-         <propertySection
-            id="property.section.domain.statechart" 
-            tab="property.tab.domain"
-            class="org.yakindu.sct.ui.editor.propertysheets.StatechartPropertySection">
-            <input type="org.yakindu.sct.ui.editor.editparts.StatechartNameEditPart"/>
+        <propertySection
+           	id="property.section.domain.statechart" 
+            tab="property.tab.domain" 
+            filter="org.yakindu.sct.ui.editor.propertysheets.filter.StatechartPropertySectionFilter"
+            class="org.yakindu.sct.ui.editor.propertysheets.StatechartPropertySection"> 
+			<input type="org.yakindu.sct.ui.editor.editparts.StatechartDiagramEditPart"/>
+			<input type="org.yakindu.sct.ui.editor.editparts.StatechartNameEditPart"/>
             <input type="org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart"/>
             <input type="org.yakindu.sct.ui.editor.editparts.StatechartTextExpressionEditPart"/>
-         </propertySection>
-        <!-- Transition model section -->         
-         <propertySection
+		</propertySection>
+		<!-- State model section -->         
+		<propertySection
+            id="property.section.domain.state" 
+            tab="property.tab.domain"
+			class="org.yakindu.sct.ui.editor.propertysheets.StatePropertySection">
+          	<input type="org.yakindu.sct.ui.editor.editparts.StateEditPart"/>
+          	<input type="org.yakindu.sct.ui.editor.editparts.StateNameEditPart"/>
+          	<input type="org.yakindu.sct.ui.editor.editparts.StateTextCompartmentEditPart"/>
+          	<input type="org.yakindu.sct.ui.editor.editparts.StateTextCompartmentExpressionEditPart"/>
+        </propertySection>
+		<!-- Transition model section -->         
+		<propertySection
             id="property.section.domain.transition" 
             tab="property.tab.domain"
             class="org.yakindu.sct.ui.editor.propertysheets.TransitionPropertySection">
             <input type="org.yakindu.sct.ui.editor.editparts.TransitionEditPart"/>
-               <input type="org.yakindu.sct.ui.editor.editparts.TransitionExpressionEditPart"/>
-         </propertySection>
-           <!-- Entry model section -->         
-         <propertySection
+            <input type="org.yakindu.sct.ui.editor.editparts.TransitionExpressionEditPart"/>
+		</propertySection>
+		<!-- Entry model section -->         
+		<propertySection
             id="property.section.domain.entry" 
             tab="property.tab.domain"
             class="org.yakindu.sct.ui.editor.propertysheets.EntryPropertySection">
             <input type="org.yakindu.sct.ui.editor.editparts.EntryEditPart"/>
-         </propertySection>
-            <!-- Exit model section -->         
-         <propertySection
+		</propertySection>
+		<!-- Exit model section -->         
+		<propertySection
             id="property.section.domain.exit" 
             tab="property.tab.domain"
             class="org.yakindu.sct.ui.editor.propertysheets.ExitPropertySection">
             <input type="org.yakindu.sct.ui.editor.editparts.ExitEditPart"/>
-         </propertySection>
-            <!-- Region model section -->         
-         <propertySection
+		</propertySection>
+		<!-- Region model section -->         
+		<propertySection
             id="property.section.domain.region" 
             tab="property.tab.domain"
             class="org.yakindu.sct.ui.editor.propertysheets.RegionPropertySection">
             <input type="org.yakindu.sct.ui.editor.editparts.RegionEditPart"/>
-         </propertySection>
-            <!-- Choice model section -->         
-         <propertySection
+            <input type="org.yakindu.sct.ui.editor.editparts.RegionNameEditPart"/>
+		</propertySection>
+		<!-- Choice model section -->         
+		<propertySection
             id="property.section.domain.choice" 
             tab="property.tab.domain"
             class="org.yakindu.sct.ui.editor.propertysheets.ChoicePropertySection">
             <input type="org.yakindu.sct.ui.editor.editparts.ChoiceEditPart"/>
-         </propertySection>
-         
-         <propertySection id="property.section.ConnectorAppearancePropertySection" 
-            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ConnectionEditPartPropertySectionFilter" 
-            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ConnectionAppearancePropertySection" 
+		</propertySection>
+    	
+		<!-- Property appearance section -->
+		<propertySection id="property.section.ConnectorAppearancePropertySection" 
+			filter="org.yakindu.sct.ui.editor.propertysheets.filter.TransitionAppearancePropertySectionFilter" 
+            class="org.yakindu.sct.ui.editor.propertysheets.appearance.TransitionAppearancePropertySection" 
             tab="property.tab.AppearancePropertySection">
-         </propertySection>
-         <propertySection id="property.section.ShapeColorAndFontPropertySection" 
-            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ShapeEditPartPropertySectionFilter" 
-            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ShapeColorsAndFontsPropertySection" 
+		</propertySection>
+		<propertySection id="property.section.ShapeColorAndFontPropertySection" 
+            filter="org.yakindu.sct.ui.editor.propertysheets.filter.LabeledEditPartAppearancePropertySectionFilter" 
+            class="org.yakindu.sct.ui.editor.propertysheets.appearance.LabeledEditPartAppearancePropertySection" 
             tab="property.tab.AppearancePropertySection">
-         </propertySection> 
-         <propertySection id="property.section.DiagramColorsAndFontsPropertySection" 
+		</propertySection> 
+		<propertySection id="property.section.ShapeColorAndFontPropertySection" 
+            filter="org.yakindu.sct.ui.editor.propertysheets.filter.StateAppearancePropertySectionFilter" 
+            class="org.yakindu.sct.ui.editor.propertysheets.appearance.StateAppearancePropertySection" 
+            tab="property.tab.AppearancePropertySection">
+		</propertySection> 
+		<propertySection id="property.section.ShapeColorAndFontPropertySection" 
+            filter="org.yakindu.sct.ui.editor.propertysheets.filter.RegionAppearancePropertySectionFilter" 
+            class="org.yakindu.sct.ui.editor.propertysheets.appearance.RegionAppearancePropertySection" 
+            tab="property.tab.AppearancePropertySection">
+		</propertySection> 
+		<propertySection id="property.section.DiagramColorsAndFontsPropertySection" 
             filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
             class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.DiagramColorsAndFontsPropertySection" 
             tab="property.tab.AppearancePropertySection">
-         </propertySection>     
-         <propertySection id="property.section.RulerGridPropertySection" 
+		</propertySection>     
+		<propertySection id="property.section.RulerGridPropertySection" 
             filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
             class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.grid.RulerGridPropertySection" 
             tab="property.tab.DiagramPropertySection">
-         </propertySection>     
-      </propertySections>
-   </extension>
+		</propertySection>     
+	</propertySections>
+</extension>
 
    <!-- Modeling Assistant -->
    
