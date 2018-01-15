@@ -28,7 +28,11 @@ public enum StatechartImages {
 
 	PRO_EDITION("images/pro.png"),
 
-	MENU("icons/obj16/Menu-16.png"),
+	MENU("icons/obj16/MENU-16.png"),
+	
+	DOCU("icons/obj16/docu-16.png"),
+	
+	EXPR("icons/obj16/expr-16.png"),
 
 	EXPAND("icons/obj16/arrow_right.png"),
 

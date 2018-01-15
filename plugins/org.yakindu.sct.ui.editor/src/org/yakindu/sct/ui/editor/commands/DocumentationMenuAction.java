@@ -49,8 +49,10 @@ public class DocumentationMenuAction extends Action implements IMenuCreator {
 
 	private void createActions() {
 		Action action = new DocumentationDropDownAction("Show expressions", SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION.getName());
+		action.setImageDescriptor(StatechartImages.EXPR.imageDescriptor());
 		actions.add(action);
 		action = new DocumentationDropDownAction("Show documentation", BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION.getName());
+		action.setImageDescriptor(StatechartImages.DOCU.imageDescriptor());
 		actions.add(action);
 	}
 
