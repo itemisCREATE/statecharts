@@ -146,15 +146,11 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 			style1.foreground = ColorConstants.lightBlue;
 			cell.setText(event.getName());
 			cell.setStyleRanges(new StyleRange[]{style1});
-			if (event.getName().contains("time_event")) {
-				cell.setImage(SimulationImages.TIMEEVENT.image());
-			} else {
 				if (event.isRaised()) {
 					cell.setImage(SimulationImages.EVENT_ENABLED.image());
 				} else {
 					cell.setImage(SimulationImages.EVENT_DISABLED.image());
 				}
-			}
 		} else if (element instanceof ExecutionOperation) {
 			ExecutionVariable variable = (ExecutionVariable) element;
 			cell.setText(variable.getName());
