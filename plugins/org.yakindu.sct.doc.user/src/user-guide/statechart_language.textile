@@ -16,7 +16,7 @@ A *"state diagram":https://en.wikipedia.org/wiki/State_diagram* is one of many p
 
 A *"statechart":https://en.wikipedia.org/wiki/State_diagram#Harel_statechart* or *Harel statechart* is an extended form of the classic state diagram. The basic principles are the same, however. In this documentation, the term _statechart_ usually denotes the _graphical representation_ of an FSM.
 
-The term *state machine* is a short form of _finite-state machine_. In this documentation, the term _state machine_ usually pertains to the _dynamic aspects_ of an FSM, i.e. it is more thought of as being executed, simulated etc. than being depicted.
+The term *state machine* is a short form of _finite-state machine_. In this documentation, the term _state machine_ usually pertains to the _dynamic aspects_ of an FSM, i.e., it is more thought of as being executed, simulated etc. than being depicted.
 
 
 
@@ -355,7 +355,7 @@ Within a region, only a single final state is allowed, but each region may have 
 
 When a region reaches its final state, control stops there and waits until all other orthogonal regions, if any, have reached their respective final states, too. The semantics of final states is different from that of exits; please see section "&quot;Exit point&quot;":#sclang_exit_points for details.
 
-bq.. *Please note:* In YAKINDU Statechart Tools, final states are proper states. This is different from the "UML":https://en.wikipedia.org/wiki/Unified_Modeling_Language, where a final state is a pseudo state, i.e. in the UML a final state cannot have any properties that normal states can have, except for a name.
+bq.. *Please note:* In YAKINDU Statechart Tools, final states are proper states. This is different from the "UML":https://en.wikipedia.org/wiki/Unified_Modeling_Language, where a final state is a pseudo state, i.e., in the UML a final state cannot have any properties that normal states can have, except for a name.
 
 
 
@@ -504,7 +504,7 @@ bc. namespace trafficlights
 
 h4(#sclang_interface_scopes). Interface scopes
 
-Declarations in the *interface scope* are externally visible. They can be shared within the environment, e.g. client code that uses the state machine.
+Declarations in the *interface scope* are externally visible. They can be shared within the environment, e.g., client code that uses the state machine.
 
 bc. 
 interface NamedInterface:
@@ -568,7 +568,7 @@ bc. var external variable3: integer = 34
 
 h3(#sclang_constants). Constants
 
-A variable can be immutable, i.e. *constant*. For this special variable the keyword @const@ is used:
+A variable can be immutable, i.e., *constant*. For this special variable the keyword @const@ is used:
 
 bc. const variable1: real
 
@@ -658,7 +658,7 @@ A state machine typically interacts with the outside world, in order, for exampl
 
 ==<div class="example">==
 
-Consider, for example, a C function @float read_sensor()@ that should be called by the state machine. To interface with that function, an operation _read_sensor_ must first be defined in the state machine, and can then be called from e.g. a state or transition. At execution time, a call to the _read_sensor_ operation is mapped to an actual call of the external C function with the same name. To make this work, the statechart must have been generated as source code of the respective target language, of course.
+Consider, for example, a C function @float read_sensor()@ that should be called by the state machine. To interface with that function, an operation _read_sensor_ must first be defined in the state machine, and can then be called from, e.g., a state or transition. At execution time, a call to the _read_sensor_ operation is mapped to an actual call of the external C function with the same name. To make this work, the statechart must have been generated as source code of the respective target language, of course.
 
 ==</div>==
 
@@ -979,7 +979,7 @@ A transition specification may contain zero, one or more *actions* that are exec
 
 _trigger_ @[@ _guard_ @] /@ _effect_
 
-###. FIXME: Explain the "transition properties", i.e. refer to the section on entry and exit points!
+###. FIXME: Explain the "transition properties", i.e., refer to the section on entry and exit points!
 
 This means that the effect will only be executed if the trigger fires or does not exist _and_ the guard condition evaluates to true or does not exist _and_ at least a trigger or a guard exist. See the sections about "triggers":#sclang_trigger_specifications and "guard conditions":#sclang_guard_conditions.
 
@@ -1011,7 +1011,7 @@ For the syntax of event raising, see section "&quot;Raising an event&quot;":#scl
 For the syntax of event declaration, see section "&quot;Events&quot;":#sclang_events.
 
 When a reaction raises an event, the subsequent behaviour of the state machine is highly dependent on the execution scheme, selected by either the "@CycleBased":#sclang_cyclebased (default) or the "@EventDriven":#sclang_eventdriven annotation. In short:
-* In the _cycle-based execution scheme_, the raised event will be added to the events that are processed by the current run-to-completion step. However, it will only be visible "downstream" in the run cycle, i.e. active states that have not yet been executed can take the event into account. When the run cycle is completed, the event will cease to exist. It can thus not be processed in any subsequent run-to-completion step.
+* In the _cycle-based execution scheme_, the raised event will be added to the events that are processed by the current run-to-completion step. However, it will only be visible "downstream" in the run cycle, i.e., active states that have not yet been executed can take the event into account. When the run cycle is completed, the event will cease to exist. It can thus not be processed in any subsequent run-to-completion step.
 * In the _event-driven execution scheme_, the raised event will be added to an event queue. As a consequence, it will not be visible "downstream" in the current run cycle. Instead, the event will trigger a run cycle on its own. In that run-to-completion step, it will be visible everywhere.
 
 The following sections will give a more in-depth view on these different behaviours.
@@ -1065,7 +1065,7 @@ Consider, for example, events _a_ and _b_ having entered, in that order, a state
 
 However, _c_ is put on a different event queue, a queue that is reserved for internal events only. Events in the internal event queue are always processed first. The external event queue will be considered only if the internal event queue is empty. As a consequence for our example, the order of events being processed by successive run-to-completion steps is _a_, _c_, _b_.
 
-bq. *Please note:* There is only a _single_ internal event queue, and all internally-raised events are appended to it. Let's consider the example above again and let's assume that processing of _a_ not only raised the internal event _c_, but also an additional event _d_. Since both _c_ and _d_ are going to the internal event queue, the overall processing sequence is _a_, _c_, _d_, _b_. Now let's also assume that in the course of processing _c_ yet another event _e_ is raised. Like all internally-raised events, it will be appended to the end of the internal event queue, i.e. behind _d_, not behind _c_, resulting in an overall execution sequence of _a_, _c_, _d_, _e_, _b_. In other words, the state machine is taking a _breadth-first_ approach on internally raised events, in lieu of _depth-first_.
+bq. *Please note:* There is only a _single_ internal event queue, and all internally-raised events are appended to it. Let's consider the example above again and let's assume that processing of _a_ not only raised the internal event _c_, but also an additional event _d_. Since both _c_ and _d_ are going to the internal event queue, the overall processing sequence is _a_, _c_, _d_, _b_. Now let's also assume that in the course of processing _c_ yet another event _e_ is raised. Like all internally-raised events, it will be appended to the end of the internal event queue, i.e., behind _d_, not behind _c_, resulting in an overall execution sequence of _a_, _c_, _d_, _e_, _b_. In other words, the state machine is taking a _breadth-first_ approach on internally raised events, in lieu of _depth-first_.
 
 bq. *Please also note:* In event-driven execution mode, there's a looming risk of endless event processing you should be aware of. In the example above, imagine processing of event _c_ would always raise another instance of _c_. In that case, the internal event queue would never get empty, the state machine would be busily processing one _c_ after the other, without ever ending and without ever getting to _b_.
 
@@ -1279,7 +1279,7 @@ Since the first match always wins, it is crucial in which order states are check
 
 Whether the parent state or its child state(s) are checked first, you can specify by setting either the "<code>@ParentFirstExecution</code> annotation":#sclang_parentfirstexecution or the "<code>@ChildFirstExecution</code> annotation":#sclang_childfirstexecution in the statechart's definition section. If the definition section contains none of these annotations, <code>@ParentFirstExecution</code> is assumed. Whichever variant you choose, it is statechart-global and thus applies to _all_ composite and orthogonal states.
 
-bq. *Please note:* Specifying parent-first or child-first execution pertains to checking for matching transitions only, not to entry and exit actions. Entry actions are always executed from the outside to the inside, i.e. on the parent state first and after that on the children. Exit actions are executed in reverse : in child states first, followed by the parent state.
+bq. *Please note:* Specifying parent-first or child-first execution pertains to checking for matching transitions only, not to entry and exit actions. Entry actions are always executed from the outside to the inside, i.e., on the parent state first and after that on the children. Exit actions are executed in reverse : in child states first, followed by the parent state.
 
 
 
@@ -1529,7 +1529,7 @@ On the left-hand side you'll find the so-called "_non-terminal symbol_":https://
 
 On its way, the train passes several "stations". Each station represents a language element that is valid at this point. In our example, the first station is a rectangle with a grey background. The grey background denotes a non-terminal, and the word inside the rectangle is the non-terminal's name, here: _ID_. You will have to look up this particular non-terminal's railroad diagram to learn more about it. However, for simplicity and because their meanings are more or less obvious, a few non-terminals are not refined further. Examples are _STRING_, _INT_, _BOOL_, or _ID_.
 
-In a _SimpleElementReferenceExpression_, a valid ID – a name – is always the first element, e.g. @init42@. If the train turns right at the junction, it moves directly to the railroad diagram's exit. That means an _ID_ like @init42@ is a valid _SimpleElementReferenceExpression_. Please note that when the train reaches the junction right before the exit, it cannot turn left, because trains don't move that way. That is, the train is unable to travel to the @(@ station.
+In a _SimpleElementReferenceExpression_, a valid ID – a name – is always the first element, e.g., @init42@. If the train turns right at the junction, it moves directly to the railroad diagram's exit. That means an _ID_ like @init42@ is a valid _SimpleElementReferenceExpression_. Please note that when the train reaches the junction right before the exit, it cannot turn left, because trains don't move that way. That is, the train is unable to travel to the @(@ station.
 
 The train can reach the @)@ from the opposite direction only. After having left the initial _ID_ station, the train can move to the left at the junction and then run a stretch touching only the @(@ and @)@ stations, in that order. These rectangles have a white background color, denoting a "_terminal symbol_":https://en.wikipedia.org/wiki/Terminal_and_nonterminal_symbols or _terminal_ for short. A terminal stands for itself; write it down as it is.
 

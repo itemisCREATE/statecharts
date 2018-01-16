@@ -158,13 +158,13 @@ The messages are grouped by message type, typically "error" or "warning". Click 
 
 Double-clicking on an entry in the _problems_ view takes you directly to the resource or model element causing the problem.
 
-You can configure the _problems_ view in a multitude of ways, e.g. to group entries by different criteria, to sort them in a specific way, or to restrict them to certain projects. You can even define multiple _problems_ views, each with different selection or display criteria.
+You can configure the _problems_ view in a multitude of ways, e.g., to group entries by different criteria, to sort them in a specific way, or to restrict them to certain projects. You can even define multiple _problems_ views, each with different selection or display criteria.
 
 To start configuring the _problems_ view, click on the small triangle pointing downwards in the _Problem_ view's title bar. A drop-down menu will open and display the options that you have.
 
 To configure the view click the small triangle pointing downwards in the view's title bar. A drop-down menu opens and shows the options you have.
 
-bq. *Please note:* The _problems_ view reflects the error/warning status of _persisted_ statecharts only, i.e. statecharts that have been saved to the statechart file. If you create an error during editing, for example a new state that is not (yet) connected to any other state, the respective element will have an error marker on the canvas, however, it will not appear in the _problems_ view, unless you have saved the statechart. The same holds true for resolved errors: An error will disappear from the _problems_ view only after you saved the fixed error to the statechart file.
+bq. *Please note:* The _problems_ view reflects the error/warning status of _persisted_ statecharts only, i.e., statecharts that have been saved to the statechart file. If you create an error during editing, for example a new state that is not (yet) connected to any other state, the respective element will have an error marker on the canvas, however, it will not appear in the _problems_ view, unless you have saved the statechart. The same holds true for resolved errors: An error will disappear from the _problems_ view only after you saved the fixed error to the statechart file.
 
 
 
@@ -195,7 +195,7 @@ h2(#edit_editing_the_documentation_of_states_and_transitions). Editing the docum
 
 You can attach documentation to states and transitions. In this context, documentation is some text offering additional information to a human reader. In the model, it does not serve any functional purpose.
 
-By default, a state's rectangle shows the state's behaviour, and a transition shows its expression alongside its arrow. You can instead display an objects's documentation, i.e. the documentation of a state or transition:
+By default, a state's rectangle shows the state's behaviour, and a transition shows its expression alongside its arrow. You can instead display an objects's documentation, i.e., the documentation of a state or transition:
 # Right-click on the object.
 # In the context menu, select _Toggle documentation_.
 # The object now shows its documentation in place of the formerly displayed text.
@@ -736,7 +736,7 @@ Many aspects of YAKINDU Statechart Tools can be configured by _preferences_. You
 
 # In the main menu, select _Window → Preferences_. The _Preferences_ dialog appears.
 # In the navigation on the left-hand side, scroll to _YAKINDU SCT_. Open it and its subentries as needed.
-# Click on an entry to display the associated preference pane on the right-hand side of the _Preferences_ dialog, see e.g. figure "Preferences: Diagram Appearance":#edit_fig_preferences_diagram_appearance.
+# Click on an entry to display the associated preference pane on the right-hand side of the _Preferences_ dialog, see e.g., figure "Preferences: Diagram Appearance":#edit_fig_preferences_diagram_appearance.
 
 In the subsequent sections we will quickly walk through the preferences.
 

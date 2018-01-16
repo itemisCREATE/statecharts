@@ -77,7 +77,7 @@ p=. Unpacking the downloaded file on Windows &#91;2]
 
 Click on _Extract_ to start the extraction process. With Window's built-in unpacker, this will take a surprisingly long period of time. Alternatively, you can use a 3rd-party unpacker like "7-Zip":http://www.7-zip.org/. Saves you a lot of time!
 
-After unpacking, you will find a folder _yakindu-sct_ in your installation directory, i. e. _C:\Program Files\YAKINDU\yakindu-sct_ in our example, as shown in figure "&quot;The extracted _yakindu-sct_ folder&quot;":#inst_fig_installing_on_windows_the_extracted_yakindu_sct_folder.
+After unpacking, you will find a folder _yakindu-sct_ in your installation directory, i.e., _C:\Program Files\YAKINDU\yakindu-sct_ in our example, as shown in figure "&quot;The extracted _yakindu-sct_ folder&quot;":#inst_fig_installing_on_windows_the_extracted_yakindu_sct_folder.
 
 p(#inst_fig_installing_on_windows_the_extracted_yakindu_sct_folder). 
 
@@ -305,7 +305,7 @@ In order to double-check that YAKINDU Statechart Tools now uses GTK2, please pro
 
 h4(#inst_installing_on_linux_webkit_gtk). Webkit GTK
 
-On Linux, you might encounter certain user interface problems or display irregularities when working with Eclipse-based software, e.g. when viewing the welcome page. This is a general problem that can also affect YAKINDU Statechart Tools. It is due to Eclipse on Linux needing specific versions of the _libwebkitgtk_ library to function properly. Depending on your Linux distribution and version, you already have a suitable _libwebkitgtk_ library installed or not.
+On Linux, you might encounter certain user interface problems or display irregularities when working with Eclipse-based software, e.g., when viewing the welcome page. This is a general problem that can also affect YAKINDU Statechart Tools. It is due to Eclipse on Linux needing specific versions of the _libwebkitgtk_ library to function properly. Depending on your Linux distribution and version, you already have a suitable _libwebkitgtk_ library installed or not.
 
 Commands for installing proper _libwebkitgtk_ versions:
 
@@ -329,7 +329,7 @@ _Works out of the box; nothing to be done._
 
 *Red Hat Workstation 7.3:*
 
-# Download the RPM file _webkitgtk-2.4.9-1.el7.x86_64.rpm_ from e.g. "http://rpm.pbone.net/index.php3/stat/4/idpl/31819125/dir/redhat_el_7/com/webkitgtk-2.4.9-1.el7.x86_64.rpm.html":http://rpm.pbone.net/index.php3/stat/4/idpl/31819125/dir/redhat_el_7/com/webkitgtk-2.4.9-1.el7.x86_64.rpm.html.
+# Download the RPM file _webkitgtk-2.4.9-1.el7.x86_64.rpm_ from, e.g., "http://rpm.pbone.net/index.php3/stat/4/idpl/31819125/dir/redhat_el_7/com/webkitgtk-2.4.9-1.el7.x86_64.rpm.html":http://rpm.pbone.net/index.php3/stat/4/idpl/31819125/dir/redhat_el_7/com/webkitgtk-2.4.9-1.el7.x86_64.rpm.html.
 # Install the downloaded RPM file using the following command, assuming you downloaded the file to _/opt/software/webkitgtk-2.4.9-1.el7.x86_64.rpm_:
 
 ==<div style="margin-left: 4em">==
@@ -359,7 +359,7 @@ Unpack the software distribution file. If the downloaded file is located in _/do
 
 bc. unzip /download/sct-linux.gtk.x86_64.zip
 
-This will create a folder _yakindu-sct_ in your installation directory, i. e. _/my/software/yakindu-sct_ in our example, as shown in the image below:
+This will create a folder _yakindu-sct_ in your installation directory, i.e., _/my/software/yakindu-sct_ in our example, as shown in the image below:
 
 p(#inst_fig_installing_on_linux_unpacking_the_downloaded_file). 
 
@@ -456,7 +456,7 @@ A dialog opens, asking you to specify the update repository you want to install 
 
 bq. *Please note:* Update site URLs are available online via the "YAKINDU Statechart Tools download page":https://info.itemis.com/state-machine/download-yakindu-statechart-tools.
 
-Enter some text into the _Name_ field. This text is abitrary in principle, but you should choose something that makes it easier for you to identify this particular update repository among other update repositories. In the example below, the repository's name is @YAKINDU Statechart Tools (Luna)@. It describes which piece of software the repository provides (YAKINDU Statechart Tools) and which Eclipse release that software is compatible with (Luna, i. e. Eclipse 4.4).
+Enter some text into the _Name_ field. This text is abitrary in principle, but you should choose something that makes it easier for you to identify this particular update repository among other update repositories. In the example below, the repository's name is @YAKINDU Statechart Tools (Luna)@. It describes which piece of software the repository provides (YAKINDU Statechart Tools) and which Eclipse release that software is compatible with (Luna, i.e., Eclipse 4.4).
 
 !images/inst_eclipse_030_eclipse_add_repository.png(Adding a software repository)!
 

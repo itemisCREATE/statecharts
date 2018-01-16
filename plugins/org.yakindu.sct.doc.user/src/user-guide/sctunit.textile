@@ -71,13 +71,13 @@ p. Let's walk through this example line by line and see what all of this means.
 * @testclass light_switch_tests for statechart light_switch {@
 ** The keyword @testclass@ introduces a test class, a collection of tests. In this example, it is named _light_switch_tests_.
 ** A test class always refers to a statechart that is under control and is to be tested. This relationship is established by the _for statechart_ clause. The keywords @for statechart@ are followed by the name of the statechart, here: _light_switch_. However, since there is no _light_switch_ statechart yet, an error marker is attached to the statechart name, as shown in the following screenshot:<br/>!images/sctunit_light_switch_010_initial_test.png(Initial test)!
-** The body of the test class is bracketed in braces, i.e. between @{@ and @}@.
+** The body of the test class is bracketed in braces, i.e., between @{@ and @}@.
 * <code>@Test</code><br/><code>operation isStateOffActiveAfterInit () {</code>
 ** Each test is an _operation_ that is annotated by <code>@Test</code>. This example defines the operation _isStateOffActiveAfterInit_. It has no parameters, which is indicated by <code>()</code>. As we will see later, an operation does not necessarily have to be a test, but can be a mere subroutine. Such operations can have parameters. The operation's body is bracketed in braces.
 * @enter@
 ** The _enter_ statement initializes and starts the state machine; it "enters" it. As a consequence, the state machine activates the state that is pointed to by the initial state.
 * @assert active (light_switch.main_region.Off)@
-** The _assert_ statement expects that a specified condition is fulfilled. Using the built-in _active_ function, our example's assertion expects that the state *Off* is active. The state is addressed in a fully-qualified manner, i.e. _statechart_._region_._state_. However, since we don't have a statechart model yet and less than ever any state, the *Off* state in the assertion is flagged as an error.
+** The _assert_ statement expects that a specified condition is fulfilled. Using the built-in _active_ function, our example's assertion expects that the state *Off* is active. The state is addressed in a fully-qualified manner, i.e., _statechart_._region_._state_. However, since we don't have a statechart model yet and less than ever any state, the *Off* state in the assertion is flagged as an error.
 
 
 
@@ -393,7 +393,7 @@ assert called myOperation with (42, 815)
 
 The first assertion checks whether the operation _myOperation_ has been called during the execution of this test. If it hasn't, the test fails.
 
-The second assertion not only checks whether the operation _myOperation_ has been called, but also checks whether it has been called with parameters 42 and 815. If the operation hasn't been called at all, the test fails. The test also fails if the operation has been called, but with different parameters than 42 and 815, e.g. @myOperation(1, 2)@.
+The second assertion not only checks whether the operation _myOperation_ has been called, but also checks whether it has been called with parameters 42 and 815. If the operation hasn't been called at all, the test fails. The test also fails if the operation has been called, but with different parameters than 42 and 815, e.g., @myOperation(1, 2)@.
 
 ==</div>==
 
@@ -550,7 +550,7 @@ This example raises the _operate_ and _user.click_ events. The subsequent statem
 
 The _proceed_ statement consists of the keyword @proceed@ and an indication by what to proceed. Two variants are available:
 * @proceed@ _number_ @cycle@ – This variant instructs the state machine to perform _number_ run-to-completion steps.
-* @proceed@ _number_ _time_unit_ – This variant instructs the state machine to proceed by the specified time, e.g. @proceed 30 s@ proceeds by 30 seconds. Supported time units are:
+* @proceed@ _number_ _time_unit_ – This variant instructs the state machine to proceed by the specified time, e.g., @proceed 30 s@ proceeds by 30 seconds. Supported time units are:
 ** @s@ – seconds
 ** @ms@ – milliseconds
 ** @us@ – microseconds
@@ -686,7 +686,7 @@ p=. While statement grammar
 
 h4(#sctunit_retrieving_the_state_machines_status). Retrieving the state machine's status
 
-The keywords @is_active@ and @is_final@ make it possible to retrieve certain aspects of the state machine's status as boolean values and e.g. use them in "assertions":#sctunit_assertions.
+The keywords @is_active@ and @is_final@ make it possible to retrieve certain aspects of the state machine's status as boolean values and e.g., use them in "assertions":#sctunit_assertions.
 
 ==<div class="example">==
 
@@ -744,7 +744,7 @@ That's what the _mock_ statement is for. It is a makeshift that mimics an actual
 # It creates a static mapping from a specific operation call with a specific list of parameter values to a specific return value.
 # If that operation is called with exactly that specific list of parameter values the caller receives the mapped return value as a result.
 
-A test can create an arbitrary number of such mappings, i.e. it can use the _mock_ statement multiple times for multiple operations, or for multiple parameter list of the same operation.
+A test can create an arbitrary number of such mappings, i.e., it can use the _mock_ statement multiple times for multiple operations, or for multiple parameter list of the same operation.
 
 ==<div class="example">==
 
@@ -823,7 +823,7 @@ bc.
         return pi * pi * radius
     }
 
-The _return_ statement evaluates the expression @pi * pi * radius@, i.e. the area of a circle with radius _radius_, and returns the result to the caller of the operation. .
+The _return_ statement evaluates the expression @pi * pi * radius@, i.e., the area of a circle with radius _radius_, and returns the result to the caller of the operation. .
 
 ==</div>==
 
@@ -919,7 +919,7 @@ p. The _package_ statement puts the _light_switch_tests_ test class into the _fo
 
 ==</div>==
 
-The _package_ statement consists of the keyword @package@, followed by the package name (namespace). The package name is fully-qualified, i.e. in dot notation.
+The _package_ statement consists of the keyword @package@, followed by the package name (namespace). The package name is fully-qualified, i.e., in dot notation.
 
 Please see section "&quot;Test units&quot;":#sctunit_test_units for a summary of the _package_ statement's and related statements' grammar.
 
@@ -972,7 +972,7 @@ A _test unit_ is either a "test class":#sctunit_test_classes or a "test suite":#
 
 h2(#sctunit_generating_sctunit_source_code). Generating SCTUnit source code
 
-Executing SCTUnit tests within the Eclipse development environment as described in section "&quot;Running the test&quot;":#sctunit_running_the_test is a nice and handy feature the developers. However, unit tests are usually also required to be executed automatically in "continuous integration (CI)":https://en.wikipedia.org/wiki/Continuous_integration environments, i.e. outside of and independent from Eclipse or any other IDE. Additionally, it should generally be possible to inspect what exactly happens inside a unit test, in order to be able to verify that what it does when executed in the right thing. This is of particular importance for software that is to be deployed in safety-critical areas.
+Executing SCTUnit tests within the Eclipse development environment as described in section "&quot;Running the test&quot;":#sctunit_running_the_test is a nice and handy feature the developers. However, unit tests are usually also required to be executed automatically in "continuous integration (CI)":https://en.wikipedia.org/wiki/Continuous_integration environments, i.e., outside of and independent from Eclipse or any other IDE. Additionally, it should generally be possible to inspect what exactly happens inside a unit test, in order to be able to verify that what it does when executed in the right thing. This is of particular importance for software that is to be deployed in safety-critical areas.
 
 Generating unit tests as source code comes as a solution. Source code can be inspected, compiled, and integrated wherever needed.
 
@@ -991,7 +991,7 @@ The first step is to create a _generation model (SGen)_ for the SCTUnit test, si
 # Click on _Next_. The _YAKINDU Generator Model_ wizard opens.
 # Select a project and a folder as the SGen model's location. The filename must end on _.sgen_.
 # Click on _Next_.
-# In the _Generator_ drop-down menu, select one of the source code generators whose names begin with "SCTUnit", e.g. "SCTUnit Java Code Generator". As a consequence, the _Choose_ list below the drop-down menu switches from showing statechart models to displaying SCTUnit files.
+# In the _Generator_ drop-down menu, select one of the source code generators whose names begin with "SCTUnit", e.g., "SCTUnit Java Code Generator". As a consequence, the _Choose_ list below the drop-down menu switches from showing statechart models to displaying SCTUnit files.
 # In the _Choose_ list, check the SCTUnit files you want to generate as source code.
 # Click on _Finish_.
 
