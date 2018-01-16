@@ -40,6 +40,8 @@ public class ExampleLabelProvider extends LabelProvider implements IStyledLabelP
 		if (element instanceof ExampleData) {
 			if (((ExampleData) element).isProfessional()) {
 				return StatechartImages.PRO_LOGO.image();
+			} else if (((ExampleData) element).isLabs()){
+				return StatechartImages.LABS_LOGO.image();
 			} else {
 				return StatechartImages.LOGO.image();
 			}
