@@ -108,7 +108,7 @@ In this case the statechart compiler determines whether a _.project_ file is ava
 
 h3(#hdls_using_scc_options). Using scc options
 
-Within the root folder of your YAKINDU Statechart Tools installation enter one of the following platform-specific commands. The string @[pathToBasedir]@ must be replaced by the concrete path to the base directory, i.e. the common parent directory of the project directories.
+Within the root folder of your YAKINDU Statechart Tools installation enter one of the following platform-specific commands. The string @[pathToBasedir]@ must be replaced by the concrete path to the base directory, i.e., the common parent directory of the project directories.
 
 Windows:
 
@@ -158,7 +158,7 @@ You can specify a base directory using the <code>-d _basedir_</code> option. It 
 # It is used to evaluate the absolute paths to model locations, provided they are given as relative paths.
 # It is used to evaluate the respective generation target folders, depending on the values given in the generator models.
 
-*Default:* If the @-d@ option is not specified, this is equivalent to @-d .@, i.e. the current working directory will be the base directory.
+*Default:* If the @-d@ option is not specified, this is equivalent to @-d .@, i.e., the current working directory will be the base directory.
 
 The target folder of generated artifacts will be evaluated as follows:
 
@@ -167,13 +167,13 @@ The target folder of generated artifacts will be evaluated as follows:
 
 h4(#hdls_specifying_statechart_model_files). Specifying statechart model files
 
-Use the <code>-m <em>models</em></code> option to select certain models known by the statechart compiler. Usually these will be _.sgen_ or _.sct_ files. However, other model files that are supported by particular code generators, can be specified, too, e.g. C header files for YAKINDU Statechart Tool PRO's deep C integration. The @-m@ option's value can be absolute or relative, can be a file or a folder and can be a single value or a comma-separated list of values.
+Use the <code>-m <em>models</em></code> option to select certain models known by the statechart compiler. Usually these will be _.sgen_ or _.sct_ files. However, other model files that are supported by particular code generators, can be specified, too, e.g., C header files for YAKINDU Statechart Tool Professional's Deep C Integration. The @-m@ option's value can be absolute or relative, can be a file or a folder and can be a single value or a comma-separated list of values.
 
 * If _model_ is a comma-separated list of values, the statechart compiler will handle each value as described for _model_ in the subsequent bullet points.
 * If _model_ is relative, it is evaluated as <code><em>basedir</em>/<em>model</em></code>.
 * If _model_ is a folder, the generator will search recursively for all model files known by the statechart compiler within <code><em>basedir</em>/<em>statechart_model</em></code>.
 
-*Default:* If the @-m@ option is not specified, this is equivalent to <code>-m <em>basedir</em></code>, i.e. all model files in and beneath _basedir_ are processed.
+*Default:* If the @-m@ option is not specified, this is equivalent to <code>-m <em>basedir</em></code>, i.e., all model files in and beneath _basedir_ are processed.
 
 
 h4(#hdls_specifying_property_values). Specifying property values

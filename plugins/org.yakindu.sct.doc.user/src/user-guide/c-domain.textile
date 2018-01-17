@@ -94,7 +94,7 @@ Now we can create a C header file specifying our own C type definitions which we
 
 h2(#cdom_defining_a_c_struct). Defining a C struct
 
-In the created header file we define a struct type named _Point_, which we will later use in a statechart. A (two-dimensional) point consists of an _x_ and a _y_ coordinate. We choose _int16_t_ to represent a coordinate, i.e. a 16-bit signed integer. The complete header file containing the struct definition looks like this:
+In the created header file we define a struct type named _Point_, which we will later use in a statechart. A (two-dimensional) point consists of an _x_ and a _y_ coordinate. We choose _int16_t_ to represent a coordinate, i.e., a 16-bit signed integer. The complete header file containing the struct definition looks like this:
 
 bc.. 
 /*
@@ -178,7 +178,7 @@ interface:
     var pointA: Point
     in event tick
 
-The statechart below uses these variables in various places, i.e. in transition actions, in internal actions, and in guard conditions.
+The statechart below uses these variables in various places, i.e., in transition actions, in internal actions, and in guard conditions.
 
 !images/cdom_geometry_050_using_c_type_variables_010.png(Using C-type variables)!
 
@@ -677,7 +677,7 @@ p=. Rectangle areas modified and rechecked
 
 h2(#cdom_looking_up_a_type_definition). Looking up a type definition
 
-Given a variable definition in a statechart's definition section, you can lookup the corresponding type definition. The definition section must be in editing mode, i.e. you must have double-clicked into it. Now press the @[Ctrl]@ key and move the mouse pointer over the type name. The former changes its shape into a hand symbol and the latter changes into a hyperlink:
+Given a variable definition in a statechart's definition section, you can lookup the corresponding type definition. The definition section must be in editing mode, i.e., you must have double-clicked into it. Now press the @[Ctrl]@ key and move the mouse pointer over the type name. The former changes its shape into a hand symbol and the latter changes into a hyperlink:
 
 !images/cdom_geometry_160_type_lookup_010.png(Looking up a C type)!
 
@@ -694,7 +694,7 @@ p=. Showing the C type definition
 
 h2(#cdom_generating_c_source_code). Generating C source code
 
-Code generation, i.e. turning a statechart model into source code of a programming language, is explained in the section _Generating state machine code_. Therefore we won't go into the details here, but instead only put some emphasis on code generation specialties of Deep C/C++ Integration.
+Code generation, i.e., turning a statechart model into source code of a programming language, is explained in the section _Generating state machine code_. Therefore we won't go into the details here, but instead only put some emphasis on code generation specialties of Deep C/C++ Integration.
 
 
 

@@ -47,7 +47,7 @@ In the cycle-based execution scheme, each run cycle consists of two different ph
 # In the first phase, incoming events and time events are collected.
 # In the second phase, _runCycle()_ is executed and processes the events collected in the first phase.
 
-This approach allows for explicitly processing several events at the same time as well as for checking combinations of events, e.g. a guard condition like @[eventA && eventB]@. This is very useful for systems that are close to hardware and input signals. Basically it is the "input-process-output (IPO) model":https://en.wikipedia.org/wiki/IPO_model.
+This approach allows for explicitly processing several events at the same time as well as for checking combinations of events, e.g., a guard condition like @[eventA && eventB]@. This is very useful for systems that are close to hardware and input signals. Basically it is the "input-process-output (IPO) model":https://en.wikipedia.org/wiki/IPO_model.
 
 ==<div class="example">==
 
@@ -60,7 +60,7 @@ sc_runCycle(handle);
 
 ==</div>==
 
-bq. *Please note:* In the cycle-based execution scheme, an event that has been raised internally using the "_raise_ statement":../user-guide/statechart_language.html#sclang_raising_an_event is visible in the run cycle "downstream" only, i.e. in such regions and the states therein that have not yet been processed in the current run cycle. Everything that is "upstream" in the run cycle cannot "see" this event. *This is semantically different from the event-driven execution scheme.* Read more on this topic in section "&quot;Raising and processing an event&quot;":../user-guide/statechart_language.html#sclang_raising_and_processing_an_event.
+bq. *Please note:* In the cycle-based execution scheme, an event that has been raised internally using the "_raise_ statement":../user-guide/statechart_language.html#sclang_raising_an_event is visible in the run cycle "downstream" only, i.e., in such regions and the states therein that have not yet been processed in the current run cycle. Everything that is "upstream" in the run cycle cannot "see" this event. *This is semantically different from the event-driven execution scheme.* Read more on this topic in section "&quot;Raising and processing an event&quot;":../user-guide/statechart_language.html#sclang_raising_and_processing_an_event.
 
 
 h4(#codegen_event-driven_execution_scheme). Event-driven execution scheme
@@ -82,7 +82,7 @@ bq. *Please note:* In the event-driven execution scheme, an event that is raised
 
 h3(#codegen_responsibilities-of-generated-code). Responsibilities of generated code
 
-The generated source code supports a basic statechart execution model that can be used to implement different variants. It is important to understand the responsibilities of the generated code, i.e. what it cares about and what it doesn't. The remaining issues are out of scope and must be dealt with in the client code the developer has to provide.
+The generated source code supports a basic statechart execution model that can be used to implement different variants. It is important to understand the responsibilities of the generated code, i.e., what it cares about and what it doesn't. The remaining issues are out of scope and must be dealt with in the client code the developer has to provide.
 
 The generated code basically takes care about the following:
 * It provides the interfaces to access state machine variables and events.
@@ -128,7 +128,7 @@ To create a generator model using the wizard, proceed as follows:
 # The _New YAKINDU SGen model_ wizard opens.
 # Select an appropriate folder and specify the filename of your SGen model. The filename must have the extension _.sgen_.
 # Click on _Next >_.
-# From the _Generator_ drop-down menu, choose the code generator you want to use, e.g. _YAKINDU SCT Java code generator_.
+# From the _Generator_ drop-down menu, choose the code generator you want to use, e.g., _YAKINDU SCT Java code generator_.
 # Check the statechart(s) to generate code from.
 # Click on _Finish_.
 
@@ -197,8 +197,8 @@ The *Outlet* feature specifies target project and target folder for the generate
 * _targetProject_ (String, required): The project to write the generated artifacts to.
 * _targetFolder_ (String, required): The folder within the _target folder_ to write the generated artifacts to. If a _library target folder_ (see below) is specified, only the model-dependent artifacts are generated in the _target folder_. All artifacts in this folder will be overwritten during re-generation.
 * _libraryTargetFolder_ (String, optional): The folder to write the model-independent artifacts to. If this parameter is not specified, these artifacts will be generated in the _target folder_ (see above). All artifacts in this folder will be preserved during re-generation. Manual modifications of these artifacts will _not_ be overwritten upon re-generation.
-* _apiTargetFolder_ (String, optional): The folder to write API code to, e.g. interfaces or header files. If this parameter is not specified, these artifacts will be generated in the _target folder_ (see above).
-* _skipLibraryFiles_ (Boolean, optional): If you wish to exclude the static files from the code generation, i.e. those that are put into the _libraryTargetFolder_, you can set this value to _true_. If the value is _false_ or not specified at all, the files are generated as usual. Currently supported for the Java, C and C++ generators.
+* _apiTargetFolder_ (String, optional): The folder to write API code to, e.g., interfaces or header files. If this parameter is not specified, these artifacts will be generated in the _target folder_ (see above).
+* _skipLibraryFiles_ (Boolean, optional): If you wish to exclude the static files from the code generation, i.e., those that are put into the _libraryTargetFolder_, you can set this value to _true_. If the value is _false_ or not specified at all, the files are generated as usual. Currently supported for the Java, C and C++ generators.
 
 ==<div class="example">==
 
@@ -451,8 +451,8 @@ You will find the generated code in the _src-gen_ folder of the traffic light ex
 The C code generator generates two or three header files, depending on the statechart.
 
 * _sc_types.h_: Contains type definitions used by the statechart. Since the contents of this file is always the same for all statecharts, it will be generated only if it does not yet exist. And since it will never be overwritten, you can change or amend the definitions made there. For example, you might wish to adapt the types to better match your target platform.
-* _Statechart.h_: Contains the basic declarations for everything needed in the underlying statechart's code. The file is named after the statechart, i.e. if the statechart's name is _TrafficLight_, this file's name will be _TrafficLight.h_. It is always generated.
-* _StatechartRequired.h_: Contains declarations of functions _the developer has to implement_. The file is named after the statechart, i.e. if the statechart's name is _TrafficLight_, this file's name will be _TrafficLightRequired.h_. It is generated only if one or more of the following conditions are fulfilled:
+* _Statechart.h_: Contains the basic declarations for everything needed in the underlying statechart's code. The file is named after the statechart, i.e., if the statechart's name is _TrafficLight_, this file's name will be _TrafficLight.h_. It is always generated.
+* _StatechartRequired.h_: Contains declarations of functions _the developer has to implement_. The file is named after the statechart, i.e., if the statechart's name is _TrafficLight_, this file's name will be _TrafficLightRequired.h_. It is generated only if one or more of the following conditions are fulfilled:
 ** The statechart declares _operations_.
 ** The statechart uses _timing features_.
 ** The code generator model activates the "Tracing feature":#codegen_c_tracing_feature.
@@ -813,7 +813,7 @@ The following functions are dealing with timing functionality:
 
 h5(#codegen_c_function_settimer). Function setTimer
 
-A state machine calls the _setTimer()_ function – short for the function's full name like e.g. @void trafficLight_setTimer(TrafficLight* handle, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic)@ – to tell the timer service that it has to start a timer for the given time event identifier and raise it after the period of time specified by the _time&#95;ms_ parameter has expired. It is important to only start a timer thread or a hardware timer interrupt within the _setTimer()_ function and avoid any time-consuming operations like extensive computations, sleeping or waiting. Never call the statechart API functions from within these functions! Otherwise the state machine execution might hang within the timer service or might not show the expected runtime behavior.
+A state machine calls the _setTimer()_ function – short for the function's full name like, e.g., @void trafficLight_setTimer(TrafficLight* handle, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic)@ – to tell the timer service that it has to start a timer for the given time event identifier and raise it after the period of time specified by the _time&#95;ms_ parameter has expired. It is important to only start a timer thread or a hardware timer interrupt within the _setTimer()_ function and avoid any time-consuming operations like extensive computations, sleeping or waiting. Never call the statechart API functions from within these functions! Otherwise the state machine execution might hang within the timer service or might not show the expected runtime behavior.
 
 In order to have the timer service raise the time event periodically, the parameter _periodic_ must be _true_.
 
@@ -1851,7 +1851,7 @@ public interface ITimer {
 
 h5(#codegen_java_method_settimer). Method setTimer
 
-A state machine calls the _setTimer(ITimerCallback callback, int eventID, long time, boolean isPeriodic)_ method to tell the timer service that it has to start a timer for the given _eventID_. The _time_ parameter specifies the number of milliseconds until the timer expires. When this period of time has elapsed, the timer service must raise the time event by calling the method _public void timeElapsed(int eventID)_ on the _ITimerCallback_ specified by the _callback_ parameter, i.e. usually the state machine.
+A state machine calls the _setTimer(ITimerCallback callback, int eventID, long time, boolean isPeriodic)_ method to tell the timer service that it has to start a timer for the given _eventID_. The _time_ parameter specifies the number of milliseconds until the timer expires. When this period of time has elapsed, the timer service must raise the time event by calling the method _public void timeElapsed(int eventID)_ on the _ITimerCallback_ specified by the _callback_ parameter, i.e., usually the state machine.
 
 It is important to keep the execution of the _setTimer()_ method short and use it only to start a timer thread, a hardware timer interrupt, or the like. Avoid any time-consuming operations like extensive computations, _Thread.sleep(…)_, waiting, etc. Otherwise the state machine execution might hang within the timer service or might not show the expected runtime behavior.
 
@@ -1859,7 +1859,7 @@ If the parameter _isPeriodic_ is _false_, the timer service raises the time even
 
 h5(#codegen_java_method_unsettimer). Method unsetTimer
 
-If the state machine calls the _unsetTimer(ITimerCallback callback, int eventID)_ method the timer service must unset the timer for the given _eventID_, i.e. the time event will not be raised.
+If the state machine calls the _unsetTimer(ITimerCallback callback, int eventID)_ method the timer service must unset the timer for the given _eventID_, i.e., the time event will not be raised.
 
 
 
