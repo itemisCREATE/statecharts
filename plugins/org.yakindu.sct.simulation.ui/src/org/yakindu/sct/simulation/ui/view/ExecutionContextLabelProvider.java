@@ -148,6 +148,8 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 			cell.setStyleRanges(new StyleRange[]{style1});
 				if (event.isRaised()) {
 					cell.setImage(SimulationImages.EVENT_ENABLED.image());
+				} else if (event.getName().contains("time_event")) {
+					cell.setImage(SimulationImages.TIMEEVENT.image());
 				} else {
 					cell.setImage(SimulationImages.EVENT_DISABLED.image());
 				}
