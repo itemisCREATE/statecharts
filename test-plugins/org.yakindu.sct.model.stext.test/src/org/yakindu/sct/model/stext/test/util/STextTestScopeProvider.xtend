@@ -24,6 +24,7 @@ import org.eclipse.xtext.scoping.impl.SimpleScope
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.EnumerationType
+import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.sct.model.sgraph.SGraphFactory
@@ -93,6 +94,11 @@ class STextTestScopeProvider extends STextScopeProvider {
 		addToIndex(descriptions, createPrimitiveType("SubInt", INTEGER))
 		addToIndex(descriptions, createPrimitiveType("SubString", STRING))
 		
+		addToIndex(descriptions, createOperationWithOptionalParameter)
+		addToIndex(descriptions, createOperationWithMultipleOptionalParameters)
+		addToIndex(descriptions, createOperationWithMixedOptionalParameters)
+		addToIndex(descriptions, createOperationWithMixedOptionalAndVarargsParameters)
+		
 		return new SimpleScope(descriptions)
 	}
 	
@@ -103,6 +109,48 @@ class STextTestScopeProvider extends STextScopeProvider {
 				descriptionStrategy.createEObjectDescriptions(element, [descriptions+=it])
 			}
 		}
+	}
+	
+	def protected Operation createOperationWithOptionalParameter() {
+		val op = createOperation("optOp1", ts.getType(VOID))
+		val p1 = createParameter("p1", ts.getType(INTEGER))
+		p1.optional = true
+		op.parameters += p1
+		op
+	}
+	
+	def protected Operation createOperationWithMultipleOptionalParameters() {
+		val op = createOperation("optOp2", ts.getType(VOID))
+		val p1 = createParameter("p1", ts.getType(INTEGER))
+		val p2 = createParameter("p2", ts.getType(INTEGER))
+		p1.optional = true
+		p2.optional = true
+		op.parameters += p1
+		op.parameters += p2
+		op
+	}
+	
+	def protected Operation createOperationWithMixedOptionalParameters() {
+		val op = createOperation("optOp3", ts.getType(VOID))
+		val p1 = createParameter("p1", ts.getType(INTEGER))
+		val p2 = createParameter("p2", ts.getType(INTEGER))
+		p2.optional = true
+		op.parameters += p1
+		op.parameters += p2
+		op
+	}
+	
+	def protected Operation createOperationWithMixedOptionalAndVarargsParameters() {
+		val op = createOperation("optOp4", ts.getType(VOID))
+		val p1 = createParameter("p1", ts.getType(INTEGER))
+		val p2 = createParameter("p2", ts.getType(INTEGER))
+		val p3 = createParameter("...", ts.getType(ANY))
+		p2.optional = true
+		p3.varArgs = true
+		op.parameters += p1
+		op.parameters += p2
+		op.parameters += p3
+		op
 	}
 	
 	def protected State createDummyModel() {
