@@ -13,6 +13,7 @@ package org.yakindu.base.types.inferrer;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
@@ -115,8 +116,8 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 		});
 	}
 
-	protected void initDispatcher() {
-		dispatcher = new PolymorphicDispatcher<Object>(METHOD_NAME, 1, 1, Collections.singletonList(this),
+	public void initDispatcher(List<ITypeSystemInferrer> targets) {
+		dispatcher = new PolymorphicDispatcher<Object>(METHOD_NAME, 1, 1, targets,
 				new PolymorphicDispatcher.ErrorHandler<Object>() {
 					@Override
 					public Object handle(Object[] params, Throwable throwable) {
@@ -128,6 +129,10 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 						return null;
 					}
 				});
+	}
+
+	protected void initDispatcher() {
+		initDispatcher(Collections.singletonList(this));
 	}
 
 	protected void assertNotType(InferenceResult currentResult, String msg, InferenceResult... candidates) {
