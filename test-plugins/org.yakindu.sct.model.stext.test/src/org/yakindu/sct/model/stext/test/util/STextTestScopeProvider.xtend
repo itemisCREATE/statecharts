@@ -214,7 +214,7 @@ class STextTestScopeProvider extends STextScopeProvider {
 	def Package createPackageWithTemplateFunction() {
 		createRootPackage("simpleTemplate") => [ types |
 			types.member += factory.createOperation => [ op |
-				op.name = "genericOp"
+				op.name = "templateOp"
 				op.typeParameters += createTypeParameter("T")
 				op.parameters += factory.createParameter => [
 					name = "a"
