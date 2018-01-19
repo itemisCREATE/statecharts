@@ -207,7 +207,7 @@ class STextTestScopeProvider extends STextScopeProvider {
 	 * Returns a model of the following function:
 	 * 
 	 * template <typename T>
-	 * T genericOp(T a, T b) {
+	 * T templateOp(T a, T b) {
 	 * 		return a > b ? a : b;
 	 * }
 	 */
