@@ -44,7 +44,7 @@
     <property name="aether.jar.file" value="${lib.dir}/aether-ant-tasks-uber.jar" />
 
     <!-- MyLyn Wikitext version: -->
-    <property name="wikitext.version" value="3.0.18" />
+    <property name="wikitext.version" value="3.0.20" />
 
     <!-- Compiled Java classes go here: -->
     <property name="bin.dir" value="bin" />
