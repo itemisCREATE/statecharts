@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.service.OperationCanceledManager;
@@ -34,8 +36,6 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 
 	protected Map<QualifiedName, IEObjectDescription> nameMap;
 	
-	protected Map<EClass, Node<EClass>> superClasses = new HashMap<>();
-
 	@Override
 	public void checkUniqueNames(Iterable<IEObjectDescription> descriptions, ValidationMessageAcceptor acceptor) {
 		checkUniqueNames(descriptions, null, acceptor);
@@ -74,29 +74,13 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 			}
 		}
 	}
-	
-	protected Node<EClass> getSuperClassTree(EClass eClass) {
-		Node<EClass> node;
-		
-		node = superClasses.get(eClass);
-		
-		if(node == null) {
-			node = new Node<EClass>(eClass);
-			buildSuperClassTree(node);
-			superClasses.put(eClass, node);
-		}
-		
-		return node;
-	}
 
 	protected EClass checkForCommonSuperClass(IEObjectDescription one, IEObjectDescription two,
 			ValidationMessageAcceptor acceptor) {
 		
-		Node<EClass> superClassesOne = getSuperClassTree(one.getEClass());
-		Node<EClass> superClassesTwo = getSuperClassTree(two.getEClass());
 		
-		List<EClass> flatOne = superClassesOne.flatten();
-		List<EClass> flatTwo = superClassesTwo.flatten();
+		List<EClass> flatOne = buildSuperClassList(one.getEClass());
+		List<EClass> flatTwo = buildSuperClassList(two.getEClass());
 		
 		for(EClass eC : flatOne) {
 			if(flatTwo.contains(eC))
@@ -106,71 +90,30 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 		return null;
 	}
 	
-	protected void buildSuperClassTree(Node<EClass> node) {
-		List<EClass> superClasses = node.getData().getESuperTypes();
+	protected List<EClass> buildSuperClassList(EClass eClass) {
+		List<List<EClass>> superClasses = new ArrayList<>();
 		
-		for(EClass sC : superClasses) {
-			Node<EClass> sCNode = new Node<EClass>(sC);
-			node.addChild(sCNode);
-			buildSuperClassTree(sCNode);
+		buildSuperClassList(superClasses, eClass, 0);
+		
+		List<EClass> result = new ArrayList<>();
+		for(List<EClass> list : superClasses) {
+			result.addAll(list);
 		}
+		
+		return result;
 	}
 	
-	private static class Node<T> {
-		protected T data;
-		
-		protected List<Node<T>> children = new ArrayList<>();
-		
-		protected Node<T> parent;
-		
-		public Node(T data) {
-			this.data = data;
+	protected void buildSuperClassList(List<List<EClass>> superClasses, EClass eClass, int depth) {
+		if(superClasses.size() <= depth) {
+			superClasses.add(depth, new ArrayList<>());
 		}
 		
-		public void addChild(T childData) {
-			Node<T> node = new Node<T>(childData);
-			addChild(node);
-		}
-		
-		public void addChild(Node<T> child) {
-			child.setParent(this);
-			this.children.add(child);
-		}
-		
-		public void setParent(Node<T> parent) {
-			this.parent = parent;
-		}
-		
-		public Node<T> getParent() {
-			return this.parent;
-		}
-		
-		public List<Node<T>> getChildren() {
-			return this.children;
-		}
-		
-		public T getData() {
-			return this.data;
-		}
-		
-		public List<T> flatten() {
-			List<T> data = new ArrayList<T>();
-			data.add(this.getData());
-			
-			this.flatten(data);
-			
-			return data;
-		}
-		
-		public void flatten(List<T> data) {
-			for(Node<T> child : this.getChildren()) {
-				data.add(child.getData());
-			}
+		List<EClass> superTypes = eClass.getESuperTypes();
 
-			for(Node<T> child : this.getChildren()) {
-				child.flatten(data);
-			}
+		superClasses.get(depth).add(eClass);
+		
+		for(EClass superType : superTypes) {
+			buildSuperClassList(superClasses, superType, depth + 1);
 		}
 	}
-
 }
