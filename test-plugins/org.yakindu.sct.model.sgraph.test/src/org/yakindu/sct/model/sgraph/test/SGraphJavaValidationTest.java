@@ -693,8 +693,8 @@ public class SGraphJavaValidationTest {
 		Synchronization sync = (Synchronization) stateB.getOutgoingTransitions().get(0).getTarget();
 		
 		assertFalse(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
-		assertIssueCount(diagnostics, 1);
-		assertError(diagnostics, ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE);
+		assertIssueCount(diagnostics, 2);
+		assertError(diagnostics, ISSUE_SYNCHRONIZATION_SOURCE_TARGET_STATES_PARENT_REGION);
 	}
 
 
@@ -705,8 +705,8 @@ public class SGraphJavaValidationTest {
 		Synchronization sync = (Synchronization) stateC.getOutgoingTransitions().get(0).getTarget();
 		
 		assertFalse(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
-		assertIssueCount(diagnostics, 1);
-		assertError(diagnostics, ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE);
+		assertIssueCount(diagnostics, 2);
+		assertError(diagnostics, ISSUE_SYNCHRONIZATION_SOURCE_TARGET_STATES_PARENT_REGION);
 	}
 
 
