@@ -207,14 +207,14 @@ class STextTestScopeProvider extends STextScopeProvider {
 	 * Returns a model of the following function:
 	 * 
 	 * template <typename T>
-	 * T genericOp(T a, T b) {
+	 * T templateOp(T a, T b) {
 	 * 		return a > b ? a : b;
 	 * }
 	 */
 	def Package createPackageWithTemplateFunction() {
 		createRootPackage("simpleTemplate") => [ types |
 			types.member += factory.createOperation => [ op |
-				op.name = "genericOp"
+				op.name = "templateOp"
 				op.typeParameters += createTypeParameter("T")
 				op.parameters += factory.createParameter => [
 					name = "a"

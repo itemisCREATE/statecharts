@@ -984,7 +984,7 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 	 * Uses a model of the following function:
 	 * 
 	 * template <typename T>
-	 * T genericOp(T a, T b) {
+	 * T templateOp(T a, T b) {
 	 * 		return a > b ? a : b;
 	 * }
 	 */
@@ -998,19 +998,19 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 				+ "var myCPT: ComplexParameterizedType<boolean, integer> "
 				+ "var myCPT2: ComplexParameterizedType<integer, boolean> ";
 		
-		expectNoErrors("myI = genericOp(myI, myI)", scopes);
-		assertTrue(isIntegerType(inferTypeResultForExpression("myI = genericOp(myI, myI)", scopes).getType()));
+		expectNoErrors("myI = templateOp(myI, myI)", scopes);
+		assertTrue(isIntegerType(inferTypeResultForExpression("myI = templateOp(myI, myI)", scopes).getType()));
 		
-		expectNoErrors("myF = genericOp(3+5, 2.3)", scopes);
-		assertTrue(isRealType(inferTypeResultForExpression("myF = genericOp(3+5, 2.3)", scopes).getType()));
+		expectNoErrors("myF = templateOp(3+5, 2.3)", scopes);
+		assertTrue(isRealType(inferTypeResultForExpression("myF = templateOp(3+5, 2.3)", scopes).getType()));
 		
-		expectNoErrors("myCPT = genericOp(myCPT, myCPT)", scopes);
+		expectNoErrors("myCPT = templateOp(myCPT, myCPT)", scopes);
 		
-		expectError("myB = genericOp(myI, myI)", scopes, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
-		expectError("myB = genericOp(3+5, boolean)", scopes, ITypeSystemInferrer.NOT_INFERRABLE_TYPE_PARAMETER_CODE);
+		expectError("myB = templateOp(myI, myI)", scopes, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
+		expectError("myB = templateOp(3+5, boolean)", scopes, ITypeSystemInferrer.NOT_INFERRABLE_TYPE_PARAMETER_CODE);
 		
-		expectErrors("myCPT2 = genericOp(myCPT, myCPT)", scopes, ITypeSystemInferrer.NOT_SAME_CODE, 2);
-		expectErrors("myCPT = genericOp(myCPT, myCPT2)", scopes, ITypeSystemInferrer.NOT_SAME_CODE, 2);
+		expectErrors("myCPT2 = templateOp(myCPT, myCPT)", scopes, ITypeSystemInferrer.NOT_SAME_CODE, 2);
+		expectErrors("myCPT = templateOp(myCPT, myCPT2)", scopes, ITypeSystemInferrer.NOT_SAME_CODE, 2);
 	}
 	
 	@Test
