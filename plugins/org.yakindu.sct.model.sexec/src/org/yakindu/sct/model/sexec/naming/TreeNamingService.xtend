@@ -44,10 +44,10 @@ class TreeNamingService implements INamingService {
 
 	@Inject extension ElementNameProvider
 
-	@Inject private StringTreeNodeDepthComparator stringTreeNodeDepthComparator
+	@Inject protected StringTreeNodeDepthComparator stringTreeNodeDepthComparator
 
 	// from public class org.yakindu.sct.generator.c.features.CDefaultFeatureValueProvider extends		
-	private static final String VALID_IDENTIFIER_REGEX = "[_a-zA-Z][_a-zA-Z0-9]*";
+	protected static final String VALID_IDENTIFIER_REGEX = "[_a-zA-Z][_a-zA-Z0-9]*";
 
 	var protected int maxLength = 0;
 
@@ -91,7 +91,7 @@ class TreeNamingService implements INamingService {
 	}
 
 	override initializeNamingService(Statechart statechart) {
-		if (tree == null || activeStatechart != statechart) {
+		if (tree === null || activeStatechart != statechart) {
 			map = Maps.newHashMap
 			treeMap = Maps.newHashMap
 			shortNamesValid = false;
@@ -107,7 +107,7 @@ class TreeNamingService implements INamingService {
 		}
 	}
 
-	def private void createNameTree(Statechart statechart) {
+	def protected void createNameTree(Statechart statechart) {
 		tree = new StringTreeNode();
 
 		addShortVertexNames(statechart);
@@ -135,7 +135,7 @@ class TreeNamingService implements INamingService {
 	}
 
 	override initializeNamingService(ExecutionFlow flow) {
-		if (tree == null || activeFlow != flow) {
+		if (tree === null || activeFlow != flow) {
 			map = Maps.newHashMap
 			treeMap = Maps.newHashMap
 			shortNamesValid = false;
@@ -151,7 +151,7 @@ class TreeNamingService implements INamingService {
 		}
 	}
 
-	def private void createNameTree(ExecutionFlow flow) {
+	def protected void createNameTree(ExecutionFlow flow) {
 		// Initialize tree
 		tree = new StringTreeNode();
 
@@ -197,13 +197,13 @@ class TreeNamingService implements INamingService {
 		for (tes : timeEventSpecs) {
 			val timeEvent = executionFlowElement.flow.getTimeEvent(sgraphElement.fullyQualifiedName + "_time_event_" +
 				timeEventSpecs.indexOf(tes))
-			if (timeEvent != null) {
+			if (timeEvent !== null) {
 				addElement(executionFlowElement, prefix(tes, sgraphElement), suffix(tes, sgraphElement));
 			}
 		}
 	}
 
-	def private void addElement(NamedElement elem, List<String> prefix, List<String> suffix) {
+	def protected void addElement(NamedElement elem, List<String> prefix, List<String> suffix) {
 		val name = new ArrayList<String>(elem.elementNameSegments());
 		val segments = new ArrayList<String>();
 		segments.addAll(prefix);
@@ -275,7 +275,7 @@ class TreeNamingService implements INamingService {
 		return name;
 	}
 
-	def private Map<StringTreeNode, ArrayList<StringTreeNode>> constructIndividualNames() {
+	def protected Map<StringTreeNode, ArrayList<StringTreeNode>> constructIndividualNames() {
 		/*
 		 * The map doublets is a three dimensional construct.
 		 * For each end-node-name in the tree, it holds a list of lists describing that name.
@@ -378,8 +378,8 @@ class TreeNamingService implements INamingService {
 		return mapping;
 	}
 
-	def private shortenNames() {
-		if (individualMap == null || individualMap.isEmpty()) {
+	def protected shortenNames() {
+		if (individualMap === null || individualMap.isEmpty()) {
 			constructIndividualNames();
 		}
 		if (this.maxLength == 0) {
@@ -394,7 +394,7 @@ class TreeNamingService implements INamingService {
 		shortNamesValid = true;
 	}
 
-	def private boolean shortenOneCharacter(ArrayList<StringTreeNode> endnodes, int max_weight) {
+	def protected boolean shortenOneCharacter(ArrayList<StringTreeNode> endnodes, int max_weight) {
 		/*
 		 * takes all end-nodes of the tree, finds their attached individual chain of nodes, their shortstring and shortens the
 		 * longest chain's cheapest shortstring.
@@ -458,14 +458,14 @@ class TreeNamingService implements INamingService {
 			shortstr.rollback(); // revert changes
 		}
 
-		if (best_cut == null) {
+		if (best_cut === null) {
 			return false;
 		}
 		best_cut.removeCheapestChar(); // reapply best change
 		return true;
 	}
 
-	def private Map<StringTreeNode, ShortString> createShortStringMapping() {
+	def protected Map<StringTreeNode, ShortString> createShortStringMapping() {
 		val HashMap<StringTreeNode, ShortString> mapping = newHashMap;
 		for (node : tree.getNodes()) {
 			mapping.put(
@@ -477,29 +477,29 @@ class TreeNamingService implements INamingService {
 		return mapping;
 	}
 
-	def private StringTreeNode getNodeForElement(NamedElement elem) {
+	def protected StringTreeNode getNodeForElement(NamedElement elem) {
 		return treeMap.get(elem);
 	}
 
-	def private ShortString getShortStringForNode(StringTreeNode node) {
-		if (node_shortString_map == null || node_shortString_map.isEmpty()) {
+	def protected ShortString getShortStringForNode(StringTreeNode node) {
+		if (node_shortString_map === null || node_shortString_map.isEmpty()) {
 			createShortStringMapping();
 		}
 		return node_shortString_map.get(node);
 	}
 
-	def private ArrayList<StringTreeNode> getIndividualName(StringTreeNode node) {
+	def protected ArrayList<StringTreeNode> getIndividualName(StringTreeNode node) {
 		if (individualMap.isEmpty()) {
 			constructIndividualNames();
 		}
 		return individualMap.get(node);
 	}
 
-	def private getShortenedName(StringTreeNode node) {
+	def protected getShortenedName(StringTreeNode node) {
 		return joinShortStrings(getIndividualName(node));
 	}
 
-	def private getShortenedName(NamedElement elem) {
+	def protected getShortenedName(NamedElement elem) {
 		return getShortenedName(getNodeForElement(elem));
 	}
 
@@ -527,7 +527,7 @@ class TreeNamingService implements INamingService {
 		return tree.getContents();
 	}
 
-	def private List<NamedElement> getNodeElements(StringTreeNode node) {
+	def protected List<NamedElement> getNodeElements(StringTreeNode node) {
 		val ArrayList<NamedElement> list = new ArrayList<NamedElement>();
 
 		for (elem : treeMap.keySet()) {
@@ -539,7 +539,7 @@ class TreeNamingService implements INamingService {
 		return list;
 	}
 
-	def private String joinShortStrings(ArrayList list) {
+	def protected String joinShortStrings(ArrayList<?> list) {
 		val sb = new StringBuilder();
 		var first = true;
 

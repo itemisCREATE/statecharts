@@ -17,10 +17,10 @@ class ShortString {
 	/*
 	 * Class that manages a string and shortened versions of it.
 	 */
-	private String originalString;
+	protected String originalString;
 
-	private int[] cutArray; // holds information if char is cut or not
-	private int[] previous_cutArray; // holds previous state for rollback / undo possibility
+	protected int[] cutArray; // holds information if char is cut or not
+	protected int[] previous_cutArray; // holds previous state for rollback / undo possibility
 	// cost of cutting operations
 	final static public int COST_LOWERCASE_VOCALS = 1;
 	final static public int COST_UNDERSCORE = 1;
@@ -30,7 +30,7 @@ class ShortString {
 	final static public int COST_FIRSTLETTER = 10;
 
 	new(String s) {
-		if (s == null) {
+		if (s === null) {
 			originalString = "";
 		} else {
 			originalString = s;
@@ -45,7 +45,7 @@ class ShortString {
 		originalString
 	}
 
-	def private int size() {
+	def protected int size() {
 		// instead of saving originalString.length as an own member
 		originalString.length
 	}
@@ -58,7 +58,7 @@ class ShortString {
 		}
 	}
 
-	def private saveCurrentToPrevious() {
+	def protected saveCurrentToPrevious() {
 		// save current cut-state to previous_cutArray.
 		for (var i = 0; i < size; i++) {
 			previous_cutArray.set(i, cutArray.get(i));
@@ -171,12 +171,12 @@ class ShortString {
 		}
 	}
 
-	def private boolean isLowercaseVocal(int i) {
+	def protected boolean isLowercaseVocal(int i) {
 		var c = originalString.charAt(i);
 		return isLowercaseVocal(c);
 	}
 
-	def private boolean isLowercaseVocal(char c) {
+	def protected boolean isLowercaseVocal(char c) {
 		val s = c.toString();
 		return (s == "a" || s == "e" || s == "i" || s == "o" || s == "u");
 	}

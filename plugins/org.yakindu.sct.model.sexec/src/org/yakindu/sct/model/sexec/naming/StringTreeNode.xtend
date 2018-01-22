@@ -149,7 +149,7 @@ class StringTreeNode {
 
 	def public int getDepth() {
 		// Upwards recursion to get distance from root
-		if (parent == null) {
+		if (parent === null) {
 			return 0;
 		} else {
 			return parent.getDepth() + 1;
@@ -275,7 +275,7 @@ class StringTreeNode {
 			}
 		}
 
-		if (maxEqualNode == null) {
+		if (maxEqualNode === null) {
 			return null;
 		}
 
@@ -285,7 +285,7 @@ class StringTreeNode {
 
 		val childrenNodeChain = maxEqualNode.getNodeChain(rest);
 
-		if (childrenNodeChain == null) {
+		if (childrenNodeChain === null) {
 			return null;
 		}
 
@@ -443,7 +443,7 @@ class StringTreeNode {
 	}
 
 	def public boolean isRoot() {
-		return this.parent == null;
+		return this.parent === null;
 	}
 
 	def public boolean isEnd() {
