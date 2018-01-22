@@ -71,6 +71,10 @@ class ShortString {
 			cutArray.set(i, previous_cutArray.get(i));
 		}
 	}
+	
+	override toString() {
+		shortenedString
+	}
 
 	def public String getShortenedString() {
 		// return the current version of the shortened string according to cutArray
