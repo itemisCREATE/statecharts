@@ -78,7 +78,8 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_SUBMACHINE_UNRESOLVABLE = "Referenced substate machine '%s'does not exist!";
 	public static final String ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL = "The target states of a synchronization must be orthogonal!";
 	public static final String ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL = "The source states of a synchronization must be orthogonal!";
-	public static final String ISSUE_SYNCHRONIZATION_TRANSITION_COUNT = "A synchronization should have at least two incoming or two outgoing transitions.";
+	public static final String ISSUE_SYNCHRONIZATION_TRANSITION_COUNT = "A synchronization must have at least two incoming or two outgoing transitions.";
+	public static final String ISSUE_SYNCHRONIZATION_TRANSITION_OUTGOING = "A synchronization must have an outgoing transition.";
 	public static final String ISSUE_SYNCHRONIZATION_SOURCE_TARGET_STATES_PARENT_REGION = "A synchronization's source- and parent states last common ancestor has to be a region!";
 	public static final String ISSUE_TRANSITION_ORTHOGONAL = "Source and target of a transition must not be located in orthogonal regions!";
 	public static final String ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER = "Outgoing transitions from entries can only target to sibling or inner states.";
@@ -223,9 +224,18 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	}
 
 	@Check(CheckType.FAST)
+	public void synchronizationOutgoingTransitionCount(Synchronization sync) {
+		if (sync.getOutgoingTransitions().size() == 0) {
+			error(ISSUE_SYNCHRONIZATION_TRANSITION_OUTGOING, sync, null, -1);
+		}
+	}
+	
+	@Check(CheckType.FAST)
 	public void synchronizationTransitionCount(Synchronization sync) {
-		if (sync.getIncomingTransitions().size() + sync.getOutgoingTransitions().size()  < 3) {
-			warning(ISSUE_SYNCHRONIZATION_TRANSITION_COUNT, sync, null, -1);
+		int in = sync.getIncomingTransitions().size();
+		int out = sync.getOutgoingTransitions().size();
+		if (in < 2 && out < 2) {
+			error(ISSUE_SYNCHRONIZATION_TRANSITION_COUNT, sync, null, -1);
 		}
 	}
 
