@@ -22,6 +22,8 @@ import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.E
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE;
 import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
 
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
+
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -45,7 +47,6 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
-import org.yakindu.sct.model.sgraph.impl.StatechartImpl;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
@@ -821,9 +822,114 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		assertIssueCount(diagnostics, 3);
 		assertWarning(diagnostics, INTERNAL_DECLARATION_UNUSED);
 	}
-
+	
 	@Test
 	public void transitionsWithNoTrigger() {
 	}
+	
+	@Test
+	public void testOptionalParameter() {
+		EObject model;
+		String rule = Expression.class.getSimpleName();
+		AssertableDiagnostics result;
+		
+		model = parseExpression("optOp1()", rule);
+		result = tester.validate(model);
+		result.assertOK();
+		
+		model = parseExpression("optOp1(3)", rule);
+		result = tester.validate(model);
+		result.assertOK();
+		
+		model = parseExpression("optOp1(true)", rule);
+		result = tester.validate(model);
+		result.assertError(ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
+	}
+	
+	@Test
+	public void testMultipleOptionalParameters() {
+		EObject model;
+		String rule = Expression.class.getSimpleName();
+		AssertableDiagnostics result;
+		
+		model = parseExpression("optOp2()", rule);
+		result = tester.validate(model);
+		result.assertOK();
+		
+		model = parseExpression("optOp2(3)", rule);
+		result = tester.validate(model);
+		result.assertOK();
+		
+		model = parseExpression("optOp2(3, 4)", rule);
+		result = tester.validate(model);
+		result.assertOK();
+		
+		model = parseExpression("optOp2(true)", rule);
+		result = tester.validate(model);
+		result.assertError(ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
+
+		model = parseExpression("optOp2(true, 3, 4)", rule);
+		result = tester.validate(model);
+		result.assertAll(
+				errorCode(ITypeSystemInferrer.NOT_COMPATIBLE_CODE),
+				errorCode(ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE)
+				);
+	}
+	
+	@Test
+	public void testMixedOptionalParameters() {
+		EObject model;
+		String rule = Expression.class.getSimpleName();
+		AssertableDiagnostics result;
+		
+		model = parseExpression("optOp3(3)", rule);
+		result = tester.validate(model);
+		result.assertOK();
+		
+		model = parseExpression("optOp3(3, 4)", rule);
+		result = tester.validate(model);
+		result.assertOK();
+
+		model = parseExpression("optOp3(3, 4, true)", rule);
+		result = tester.validate(model);
+		result.assertError(ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
+		
+		model = parseExpression("optOp3()", rule);
+		result = tester.validate(model);
+		result.assertError(ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
+		
+		model = parseExpression("optOp3(3, true)", rule);
+		result = tester.validate(model);
+		result.assertError(ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
+	}
+	
+	@Test
+	@Ignore("Why should anyone do that anyways")
+	public void testMixedOptionalAndVarArgsParameters() {
+		EObject model;
+		String rule = Expression.class.getSimpleName();
+		AssertableDiagnostics result;
+		
+		model = parseExpression("optOp4(3)", rule);
+		result = tester.validate(model);
+		result.assertOK();
+		
+		model = parseExpression("optOp4(3, 4)", rule);
+		result = tester.validate(model);
+		result.assertOK();
+		
+		model = parseExpression("optOp4(3, 4, 5, 6)", rule);
+		result = tester.validate(model);
+		result.assertOK();
+		
+		model = parseExpression("optOp4(3, 4, true)", rule);
+		result = tester.validate(model);
+		result.assertOK();
+		
+		model = parseExpression("optOp4(true)", rule);
+		result = tester.validate(model);
+		result.assertError(ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
+	}
+	
 
 }

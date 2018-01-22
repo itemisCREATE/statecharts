@@ -11,6 +11,7 @@
  */
 package org.yakindu.base.expressions.validation;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -279,12 +280,31 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 
 	protected void assertOperationArguments(Operation operation, List<Expression> args) {
 		EList<Parameter> parameters = operation.getParameters();
-		if ((operation.isVariadic() && operation.getVarArgIndex() > args.size())
-				|| !operation.isVariadic() && parameters.size() != args.size()) {
+		List<Parameter> optionalParameters = filterOptionalParameters(parameters);
+		if (
+			(operation.isVariadic() && operation.getVarArgIndex() > args.size())
+			|| 
+			(!operation.isVariadic() &&
+					!(args.size() <= parameters.size() && args.size() >= parameters.size() - optionalParameters.size()))
+			) {
 			error(String.format(ERROR_WRONG_NUMBER_OF_ARGUMENTS_MSG, parameters), null, ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
 		}
 	}
 	
+	/**
+	 * @param parameters
+	 * @return
+	 */
+	protected List<Parameter> filterOptionalParameters(EList<Parameter> parameters) {
+		List<Parameter> optionalParameters = new ArrayList<>();
+		for(Parameter p : parameters) {
+			if(p.isOptional()) {
+				optionalParameters.add(p);
+			}
+		}
+		return optionalParameters;
+	}
+
 	@Check(CheckType.FAST)
 	public void checkVarArgParameterIsLast(Operation operation) {
 		if (operation.isVariadic() && operation.getVarArgIndex() != operation.getParameters().size() - 1) {
