@@ -254,7 +254,21 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		// resolve type parameter from operation call
 		List<InferenceResult> argumentTypes = getArgumentTypes(getOperationArguments(e));
 		List<Parameter> parameters = op.getParameters();
-		typeParameterInferrer.inferTypeParametersFromOperationArguments(parameters, argumentTypes, typeParameterMapping,
+		
+		List<InferenceResult> argumentsToInfer = new ArrayList<>();
+		List<Parameter> parametersToInfer = new ArrayList<>();
+		
+		for(int i = 0; i < parameters.size(); i++) {
+			if(!typeParameterMapping.containsKey(parameters.get(i).getType())) {
+				parametersToInfer.add(parameters.get(i));
+				if(i < argumentTypes.size()) {
+					argumentsToInfer.add(argumentTypes.get(i));
+				}
+				
+			}
+		}
+		
+		typeParameterInferrer.inferTypeParametersFromOperationArguments(parametersToInfer, argumentsToInfer, typeParameterMapping,
 				acceptor);
 		validateParameters(typeParameterMapping, op, getOperationArguments(e), acceptor);
 		return inferReturnType(op, typeParameterMapping);
