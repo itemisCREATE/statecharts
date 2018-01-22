@@ -867,6 +867,13 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		model = parseExpression("optOp2(true)", rule);
 		result = tester.validate(model);
 		result.assertError(ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
+
+		model = parseExpression("optOp2(true, 3, 4)", rule);
+		result = tester.validate(model);
+		result.assertAll(
+				errorCode(ITypeSystemInferrer.NOT_COMPATIBLE_CODE),
+				errorCode(ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE)
+				);
 	}
 	
 	@Test
@@ -882,6 +889,10 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		model = parseExpression("optOp3(3, 4)", rule);
 		result = tester.validate(model);
 		result.assertOK();
+
+		model = parseExpression("optOp3(3, 4, true)", rule);
+		result = tester.validate(model);
+		result.assertError(ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
 		
 		model = parseExpression("optOp3()", rule);
 		result = tester.validate(model);
