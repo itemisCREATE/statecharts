@@ -93,8 +93,9 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 			val pkg = EcoreUtil2.getContainerOfType(decl, Package)
 			if (pkg !== null) {
 				val namespace = pkg.name
+				val pkgHeader = pkg.fullyQualifiedName.lastSegment
 				val declName = decl.name
-				val slot = composite.slots.getSlotFor(namespace)
+				val slot = composite.slots.getSlotFor(pkgHeader)
 				val declarationSlot = decl.transform
 				declarationSlot.setFqName(namespace + "." + declName)
 				declarationSlot.setName(declName)
