@@ -256,9 +256,6 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 			cumulated_time += System.currentTimeMillis() - t0;
 			for (ExecutionState state : flow.getStates()) {
 				String name = executionflowNamingService.getShortName(state);
-				if(names.contains(name)) {
-					System.out.println(name + " is doubled");
-				}
 				assertEquals(names.contains(name), false);
 				assertEquals(true, name.length() <= maxLength);
 				names.add(name);
