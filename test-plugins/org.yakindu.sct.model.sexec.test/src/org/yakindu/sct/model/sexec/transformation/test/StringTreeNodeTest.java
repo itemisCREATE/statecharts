@@ -46,10 +46,10 @@ public class StringTreeNodeTest {
 		testStrings.add("Statechart1.Region2.StateA");
 
 		for (String s : testStrings) {
-			tree.addString(s);
+			addString(tree, s);
 		}
 
-		List<String> treeContents = tree.getContents();
+		List<String> treeContents = getContents(tree);
 
 		stringListsEqual(testStrings, treeContents);
 	}
@@ -57,24 +57,24 @@ public class StringTreeNodeTest {
 	@Test
 	public void noDoublesTest() {
 		// Add the same string twice, expect it to be in the tree only once.
-		tree.addString("DoubleString");
-		tree.addString("DoubleString");
+		addString(tree, "DoubleString");
+		addString(tree, "DoubleString");
 
-		assertEquals(1, tree.getContents().size());
+		assertEquals(1, getContents(tree).size());
 	}
 
 	@Test
 	public void compressTest() {
 		// Add data to the tree, compress it, and compare contents before and
 		// after compressing.
-		tree.addString("PartOne");
-		tree.addString("PartTwo");
+		addString(tree, "PartOne");
+		addString(tree, "PartTwo");
 
-		List<String> beforeContents = tree.getContents();
+		List<String> beforeContents = getContents(tree);
 
 		tree.compress();
 
-		List<String> afterContents = tree.getContents();
+		List<String> afterContents = getContents(tree);
 
 		stringListsEqual(beforeContents, afterContents);
 	}
@@ -83,12 +83,12 @@ public class StringTreeNodeTest {
 	public void compressNodeTest() {
 		// Add data to the tree, compress it, and check if the nodes match the
 		// expectation.
-		tree.addString("PartOne");
-		tree.addString("PartTwo");
+		addString(tree, "PartOne");
+		addString(tree, "PartTwo");
 
 		tree.compress();
 
-		List<StringTreeNode> nodelist = tree.getNodes();
+		List<StringTreeNode> nodelist = getNodes(tree);
 		List<String> nodecontents = new ArrayList<String>();
 		List<String> expectednodecontents = new ArrayList<String>();
 
@@ -108,20 +108,10 @@ public class StringTreeNodeTest {
 	}
 
 	@Test
-	public void hasSiblingsTest() {
-		testSiblings("Sc1Reg1StateA", new ArrayList<String>(Arrays.asList("StateB", "StateC")));
-	}
-
-	@Test
-	public void hasNoSiblingsTest() {
-		testSiblings("Sc1Reg2StateA", new ArrayList<String>());
-	}
-
-	@Test
 	public void nodeChainContainedTest() {
 		buildStandardTestTree();
 		String testString = new String("Sc1Reg1StateA");
-		List<StringTreeNode> nodes = tree.getNodeChain(testString);
+		List<StringTreeNode> nodes = getNodeChain(tree, testString);
 
 		StringBuilder builder = new StringBuilder();
 
@@ -136,7 +126,7 @@ public class StringTreeNodeTest {
 	public void nodeChainNotContainedTest() {
 		buildStandardTestTree();
 		String testString = new String("Sc1Reg3StateA");
-		List<StringTreeNode> nodes = tree.getNodeChain(testString);
+		List<StringTreeNode> nodes = getNodeChain(tree, testString);
 
 		assertEquals(nodes, null);
 	}
@@ -150,41 +140,20 @@ public class StringTreeNodeTest {
 	}
 
 	@Test
-	public void distanceTest() {
-		buildStandardTestTree();
-		List<StringTreeNode> nodes1, nodes2, nodes3, nodes4;
-		StringTreeNode testNode1, testNode2, testNode3, testNode4;
-
-		nodes1 = tree.getNodeChain("Sc1Reg1StateA");
-		nodes2 = tree.getNodeChain("Sc1Reg1StateB");
-		nodes3 = tree.getNodeChain("Sc1Reg2StateA");
-		nodes4 = tree.getNodeChain("Sc2Reg1StateA");
-
-		testNode1 = nodes1.get(nodes1.size() - 1); // (Sc1Reg1)State A
-		testNode2 = nodes2.get(nodes2.size() - 1); // (Sc1Reg1)State B
-		testNode3 = nodes3.get(nodes3.size() - 1); // (Sc1Reg2)State A
-		testNode4 = nodes4.get(nodes4.size() - 1); // (Sc2Reg1)State A
-
-		assertEquals(2, testNode1.getDistance(testNode2));
-		assertEquals(4, testNode1.getDistance(testNode3));
-		assertEquals(6, testNode1.getDistance(testNode4));
-	}
-
-	@Test
 	public void navigateTest() {
 		buildStandardTestTree();
 
-		StringTreeNode nextnode = tree.navigate("Sc1");
+		StringTreeNode nextnode = navigate(tree, "Sc1");
 
 		assertEquals(true, nextnode != null);
 		assertEquals("Sc1", nextnode.getData());
 
-		nextnode = nextnode.navigate("Reg2");
+		nextnode = navigate(nextnode, "Reg2");
 
 		assertEquals(true, nextnode != null);
 		assertEquals("Reg2", nextnode.getData());
 
-		nextnode = nextnode.navigate("StateA");
+		nextnode = navigate(nextnode, "StateA");
 
 		assertEquals(true, nextnode != null);
 		assertEquals("StateA", nextnode.getData());
@@ -199,23 +168,11 @@ public class StringTreeNodeTest {
 	public void childrenContentTest() {
 		buildStandardTestTree();
 
-		StringTreeNode nextnode = tree.navigate("Sc1");
+		StringTreeNode nextnode = navigate(tree, "Sc1");
 
 		ArrayList<String> expectedChildren = new ArrayList<String>(Arrays.asList("Reg1", "Reg2"));
 
-		stringListsEqual(expectedChildren, nextnode.getChildrenContents());
-	}
-
-	@Test
-	public void deletionTest() {
-		buildStandardTestTree();
-
-		tree.navigate("Sc1").navigate("Reg2").delete();
-
-		ArrayList<String> expectedContents = new ArrayList<String>(
-				Arrays.asList("Sc1Reg1StateA", "Sc1Reg1StateB", "Sc1Reg1StateC", "Sc2Reg1StateA"));
-
-		stringListsEqual(expectedContents, tree.getContents());
+		stringListsEqual(expectedChildren, getChildrenContents(nextnode));
 	}
 
 	@Test
@@ -223,7 +180,7 @@ public class StringTreeNodeTest {
 		List<String> list = new ArrayList<String>(Arrays.asList("Un", "Deux", "Trois", "Quatre"));
 		StringTreeNode testNode = tree.addStringList(list);
 
-		assertEquals("UnDeuxTroisQuatre", testNode.getContentUpwards());
+		assertEquals("UnDeuxTroisQuatre", getContentUpwards(testNode));
 	}
 
 	@Test
@@ -236,7 +193,7 @@ public class StringTreeNodeTest {
 
 		StringTreeNode testNode = tree.addStringList(list1);
 
-		assertEquals("UnDeuxTroisQuatre", testNode.getContentUpwards());
+		assertEquals("UnDeuxTroisQuatre", getContentUpwards(testNode));
 	}
 
 	@Test
@@ -246,12 +203,7 @@ public class StringTreeNodeTest {
 		assertEquals(15, tree.getWeight());
 	}
 
-	private void testSiblings(String testString, List<String> expectedSiblings) {
-		buildStandardTestTree();
-		stringListsEqual(tree.getSiblings(testString), expectedSiblings);
-	}
-
-	private void buildStandardTestTree() {
+	protected void buildStandardTestTree() {
 		/*
 		 * StateA / root-Sc1-Reg1-StateB \ \ \ \ \ StateC \ \ \ Reg2-StateA \
 		 * Sc2-Reg1-StateA
@@ -263,9 +215,122 @@ public class StringTreeNodeTest {
 		tree.addStringList(new ArrayList<String>(Arrays.asList("Sc2", "Reg1", "StateA")));
 	}
 
-	private void stringListsEqual(List<String> onelist, List<String> otherlist) {
+	protected void stringListsEqual(List<String> onelist, List<String> otherlist) {
 		java.util.Collections.sort(onelist, Collator.getInstance());
 		java.util.Collections.sort(otherlist, Collator.getInstance());
 		assertEquals(onelist, otherlist);
+	}
+	
+	protected StringTreeNode navigate(StringTreeNode node, String content) {
+		for (StringTreeNode child : node.getChildren()) {
+			if (content.equals(child.getData())) {
+				return child;
+			}
+		}
+
+		return null;
+	}
+	
+	protected List<String> getContents(StringTreeNode tree) {
+		/*
+		 * Returns a list of all strings contained in the tree
+		 */
+		List<String> contents = new ArrayList<>();
+		List<StringTreeNode> endNodes = tree.getEndNodes();
+
+		for (StringTreeNode end : endNodes) {
+			contents.add(getContentUpwards(end));
+		}
+
+		return contents;
+	}
+
+	protected String getContentUpwards(StringTreeNode node) {
+		/*
+		 * Traverse tree upwards and return the string ended by this node up to root
+		 */
+		String s = "";
+
+		if (!node.isRoot()) {
+			s = getContentUpwards(node.getParent()) + node.getData();
+		}
+
+		return s;
+	}
+	
+	protected List<String> getChildrenContents(StringTreeNode node) {
+		List<String> returnList = new ArrayList<>();
+
+		for (StringTreeNode child : node.getChildren()) {
+			returnList.add(child.getData());
+		}
+
+		return returnList;
+	}
+	
+	protected List<StringTreeNode> getNodeChain(StringTreeNode tree, String name) {
+		/*
+		 * produces an ArrayList containing the Nodes that form the given string.
+		 */
+		List<StringTreeNode> nodeChain = new ArrayList<>();
+
+		if (tree.getChildren().size() == 0 || (tree.getChildren().size() == 1 && tree.getChildren().get(0).isEnd())) {
+			return nodeChain;
+		}
+
+		int maxEquality = 0;
+		StringTreeNode maxEqualNode = null;
+
+		for (StringTreeNode child : tree.getChildren()) // find maximum equality in tree to select the correct branch
+		{
+			String childS = child.getData();
+			if (name.startsWith(childS) && childS.length() > maxEquality) {
+				maxEquality = childS.length();
+				maxEqualNode = child;
+			}
+		}
+
+		if (maxEqualNode == null) {
+			return null;
+		}
+
+		String rest = name.substring(maxEquality);
+
+		nodeChain.add(maxEqualNode);
+
+		List<StringTreeNode> childrenNodeChain = getNodeChain(maxEqualNode, rest);
+
+		if (childrenNodeChain == null) {
+			return null;
+		}
+
+		nodeChain.addAll(childrenNodeChain);
+
+		return nodeChain;
+	}
+	
+	protected StringTreeNode addString(StringTreeNode node, String s) {
+		/*
+		 * Cut the string into an ArrayList containing the single chars in the string,
+		 * and call addStringList afterwards.
+		 */
+		List<String> sList = new ArrayList<>();
+
+		for (int i = 0; i < s.length(); i++) {
+			sList.add(Character.toString(s.charAt(i)));
+		}
+		return node.addStringList(sList);
+	}
+	
+	protected List<StringTreeNode> getNodes(StringTreeNode node) {
+		List<StringTreeNode> nodelist = new ArrayList<>();
+
+		nodelist.add(node);
+
+		for (StringTreeNode child : node.getChildren()) {
+			nodelist.addAll(getNodes(child));
+		}
+
+		return nodelist;
 	}
 }
