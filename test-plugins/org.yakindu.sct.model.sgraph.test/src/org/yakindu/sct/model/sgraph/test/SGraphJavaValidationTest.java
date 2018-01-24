@@ -572,13 +572,13 @@ public class SGraphJavaValidationTest {
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Synchronization) {
-				assertTrue(validator.validate(element, diagnostics,
+				assertFalse(validator.validate(element, diagnostics,
 						new HashMap<Object, Object>()));
 			}
 		}
 
 		assertIssueCount(diagnostics, 2);
-		assertWarning(diagnostics, ISSUE_SYNCHRONIZATION_TRANSITION_COUNT);
+		assertError(diagnostics, ISSUE_SYNCHRONIZATION_TRANSITION_COUNT);
 	}
 
 	
@@ -808,6 +808,18 @@ public class SGraphJavaValidationTest {
 		validator.validate(statechart, diagnostics,
 				new HashMap<Object, Object>());
 		assertIssueCount(diagnostics, 0);
+	}
+	
+	@Test
+	public void synchronizationOutgoingTransitionCount() {
+		statechart = loadStatechart("SyncOutgoingTransition.sct");
+		
+		State state = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "StateB");
+		Synchronization sync = (Synchronization) state.getOutgoingTransitions().get(0).getTarget();
+		
+		assertFalse(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics, ISSUE_SYNCHRONIZATION_TRANSITION_OUTGOING);
 	}
 
 	/**
