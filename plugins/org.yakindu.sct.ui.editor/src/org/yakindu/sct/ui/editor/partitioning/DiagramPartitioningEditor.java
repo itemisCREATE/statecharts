@@ -70,9 +70,7 @@ import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.provider.SGraphItemProviderAdapterFactory;
-import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.StatechartImages;
-import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 
 /**
  * Editor that uses a {@link DiagramPartitioningDocumentProvider} and adds a
@@ -151,17 +149,12 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 
 	public void toggleDefinitionSection() {
 		if (getContextObject() instanceof Statechart)
-			sash.setMaximizedControl(!isDefinitionSectionInlined() && isPinningActivated()
+			sash.setMaximizedControl(!isDefinitionSectionInlined() 
 					? null
 					: sash.getChildren()[MAXIMIZED_CONTROL_INDEX]);
 		if (getContextObject() instanceof State) {
-			sash.setMaximizedControl(isDefinitionSectionInlined() && isPinningActivated() ? null : sash.getChildren()[MAXIMIZED_CONTROL_INDEX]);
+			sash.setMaximizedControl(isDefinitionSectionInlined() ? null : sash.getChildren()[MAXIMIZED_CONTROL_INDEX]);
 		}
-	}
-
-	protected boolean isPinningActivated() {
-		return DiagramActivator.getDefault().getPreferenceStore()
-				.getBoolean(StatechartPreferenceConstants.PREF_DEFINITION_SECTION);
 	}
 
 	protected abstract EObject getContextObject();

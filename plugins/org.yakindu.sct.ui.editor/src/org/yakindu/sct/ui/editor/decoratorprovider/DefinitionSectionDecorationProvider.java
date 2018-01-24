@@ -47,7 +47,6 @@ import org.yakindu.sct.ui.editor.StatechartImages;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
-import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 
 /**
@@ -87,15 +86,14 @@ public class DefinitionSectionDecorationProvider extends AbstractDecoratorProvid
 
 		@Override
 		protected boolean shouldDecorate(EObject element) {
-			if (preferenceStore.getBoolean(StatechartPreferenceConstants.PREF_DEFINITION_SECTION)) {
-				if (getDecoratorTarget().getAdapter(IPrimaryEditPart.class) instanceof StatechartTextEditPart) {
-					StatechartTextEditPart adapter = (StatechartTextEditPart) getDecoratorTarget()
-							.getAdapter(IPrimaryEditPart.class);
-					BooleanValueStyle style = GMFNotationUtil.getBooleanValueStyle(adapter.getNotationView(),
-							DiagramPartitioningUtil.INLINE_DEFINITION_SECTION_STYLE);
-					return style == null ? true : style.isBooleanValue();
-				}
+			if (getDecoratorTarget().getAdapter(IPrimaryEditPart.class) instanceof StatechartTextEditPart) {
+				StatechartTextEditPart adapter = (StatechartTextEditPart) getDecoratorTarget()
+						.getAdapter(IPrimaryEditPart.class);
+				BooleanValueStyle style = GMFNotationUtil.getBooleanValueStyle(adapter.getNotationView(),
+						DiagramPartitioningUtil.INLINE_DEFINITION_SECTION_STYLE);
+				return style == null ? true : style.isBooleanValue();
 			}
+
 			return false;
 		}
 

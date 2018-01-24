@@ -53,8 +53,6 @@ import org.eclipse.jface.databinding.swt.ISWTObservableValue;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
-import org.eclipse.jface.util.IPropertyChangeListener;
-import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.StyledText;
@@ -120,7 +118,6 @@ import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.StatechartImages;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningEditor;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
-import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 import org.yakindu.sct.ui.editor.propertysheets.ValidatingEMFDatabindingContext;
 import org.yakindu.sct.ui.editor.proposals.ContentProposalViewerKeyHandler;
 import org.yakindu.sct.ui.editor.providers.ISCTOutlineFactory;
@@ -138,11 +135,7 @@ import com.google.inject.Key;
  * @author robert rudi
  */
 @SuppressWarnings("restriction")
-public class StatechartDiagramEditor extends DiagramPartitioningEditor
-		implements
-			IGotoMarker,
-			IContextElementProvider,
-			IPropertyChangeListener {
+public class StatechartDiagramEditor extends DiagramPartitioningEditor implements IGotoMarker, IContextElementProvider {
 
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
 
@@ -229,11 +222,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 		super.init(site, input);
 		checkXtextNature();
 		registerValidationListener();
-		registerPropertyChangeListener();
-	}
-
-	protected void registerPropertyChangeListener() {
-		DiagramActivator.getDefault().getPreferenceStore().addPropertyChangeListener(this);
 	}
 
 	protected void registerValidationListener() {
@@ -461,7 +449,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 	public void dispose() {
 		saveState(getMemento());
 
-		removepropertyChangeListener();
 		if (validationListener != null) {
 			validationListener.dispose();
 		}
@@ -478,9 +465,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 		super.dispose();
 	}
 
-	protected void removepropertyChangeListener() {
-		DiagramActivator.getDefault().getPreferenceStore().removePropertyChangeListener(this);
-	}
 
 	protected void disposeDefinitionSectionControls() {
 		if (switchListener != null && switchControl != null && !switchControl.isDisposed())
@@ -557,26 +541,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 		toggleDefinitionSection();
 		restoreSashWidths(getSash(), getMemento());
 		enableXtext(xtextControl);
-		reloadFromPreferences();
-	}
-
-	/**
-	 * Checks if the pinning feature is activated. In case the definition section is
-	 * expanded, but the pinning feature was deactivated, the notation model will be
-	 * changed, so the inline statechart diagram style will be visible.
-	 */
-	protected void reloadFromPreferences() {
-		boolean pinningActivated = isPinningActivated();
-		if (!isDefinitionSectionInlined() && !pinningActivated) {
-			TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(getDiagram());
-			BooleanValueStyle inlineStyle = DiagramPartitioningUtil.getInlineDefinitionSectionStyle(getDiagram());
-
-			SetCommand command = setBooleanValueStyle(inlineStyle, domain);
-			domain.getCommandStack().execute(command);
-
-			toggleDefinitionSection();
-			refreshDiagramEditPartChildren();
-		}
 	}
 
 	protected void enableXtext(StyledText xtextControl) {
@@ -1046,14 +1010,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 			if (element != null)
 				expandState = memento.getBoolean(stripElementName(element.getName()) + IS_DEFINITION_SECTION_EXPANDED);
 		}
-		return expandState != null ? ((Boolean) expandState).booleanValue() : false;
-	}
-
-	@Override
-	public void propertyChange(PropertyChangeEvent event) {
-		if (StatechartPreferenceConstants.PREF_DEFINITION_SECTION.equals(event.getProperty())) {
-			reloadFromPreferences();
-		}
+		return expandState != null ? ((Boolean) expandState).booleanValue() : true;
 	}
 
 }

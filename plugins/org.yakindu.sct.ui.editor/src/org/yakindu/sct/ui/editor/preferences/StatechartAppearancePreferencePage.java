@@ -51,7 +51,6 @@ public class StatechartAppearancePreferencePage extends FieldEditorPreferencePag
 		createLineStyleEditors(main);
 		createDefaultFontEditor(main);
 		createSyntaxColoringLabelEditor(main);
-		createPinnableStatechartDefinitionEditor(main);
 		createPriorityLabelEditor(main);
 		createLiveValidationEditor(main);
 	}
@@ -80,13 +79,6 @@ public class StatechartAppearancePreferencePage extends FieldEditorPreferencePag
 		Composite composite = createGroupComposite(main, "Syntax coloring");
 		BooleanFieldEditor editor = new BooleanFieldEditor(StatechartPreferenceConstants.PREF_SYNTAX_COLORING,
 				"Enable syntax coloring", composite);
-		addField(editor);
-	}
-	
-	protected void createPinnableStatechartDefinitionEditor(Composite main) {
-		Composite composite = createGroupComposite(main, "Definition section");
-		BooleanFieldEditor editor = new BooleanFieldEditor(StatechartPreferenceConstants.PREF_DEFINITION_SECTION,
-				"Enable pinning of statechart definition section", composite);
 		addField(editor);
 	}
 
