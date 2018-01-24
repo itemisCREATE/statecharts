@@ -148,13 +148,9 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	}
 
 	public void toggleDefinitionSection() {
-		if (getContextObject() instanceof Statechart)
-			sash.setMaximizedControl(!isDefinitionSectionInlined() 
-					? null
-					: sash.getChildren()[MAXIMIZED_CONTROL_INDEX]);
-		if (getContextObject() instanceof State) {
-			sash.setMaximizedControl(isDefinitionSectionInlined() ? null : sash.getChildren()[MAXIMIZED_CONTROL_INDEX]);
-		}
+		sash.setMaximizedControl(!isDefinitionSectionInlined() && getContextObject() instanceof Statechart
+				? null
+				: sash.getChildren()[MAXIMIZED_CONTROL_INDEX]);
 	}
 
 	protected abstract EObject getContextObject();
@@ -366,9 +362,9 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 			}
 		}
 		@Override
-		 public boolean isAdapterForType(Object type) {
+		public boolean isAdapterForType(Object type) {
 			return type instanceof BreadcrumbSynchronizer;
-		 }
+		}
 	}
 
 	public static class FilteringDiagramContextMenuProvider extends DiagramContextMenuProvider {
