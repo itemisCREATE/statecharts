@@ -59,8 +59,9 @@ class TreeStringShortener implements IStringShortener {
 	
 	def protected void assertValidState() {
 		if(!validState) {
+			result = newHashMap
+			storage = newHashMap
 			if(maxLength == 0) {
-				result = newHashMap
 				originalStrings.keySet.forEach[token |
 					result.put(token, originalStrings.get(token).join)
 				]
@@ -86,30 +87,31 @@ class TreeStringShortener implements IStringShortener {
 	def protected shortenNames() {
 		val List<List<StringTreeNode>> nodes = newArrayList
 		val Map<StringTreeNode, List<StringTreeNode>> map = newHashMap
-		val Map<StringTreeNode, List<ShortString>> shortStrings = newHashMap
+		val Map<StringTreeNode, List<ShortString>> endNodeShortStrings = newHashMap
+		val Map<StringTreeNode, ShortString> shortStrings = newHashMap
 		
 		for(node : tree.endNodes) {
 			val List<StringTreeNode> list = newArrayList
 			list.add(node)
 			nodes.add(list)
 			map.put(node, list)
-			shortStrings.put(node, newArrayList)
+			endNodeShortStrings.put(node, newArrayList)
 		}
 		
 		buildIndividualNames(nodes)
 		
 		
 		map.keySet.forEach[node |
-			shortStrings.get(node).addAll(map.get(node).map[toShortString])
+			endNodeShortStrings.get(node).addAll(map.get(node).map[toShortString(shortStrings)])
 		]
 		
-		val List<List<ShortString>> shortStringLists = newArrayList(shortStrings.values)
+		val List<List<ShortString>> shortStringLists = newArrayList(endNodeShortStrings.values)
 		calculateShortNames(shortStringLists)
 		
 		storage.keySet.forEach[token |
 			result.put(
 				token,
-				shortStrings.get(storage.get(token)).join
+				endNodeShortStrings.get(storage.get(token)).join
 			)
 		]
 		

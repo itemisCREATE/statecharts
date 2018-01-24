@@ -25,4 +25,9 @@ public class StorageToken {
 		myID = tokenID;
 		tokenID += 1;
 	}
+	
+	@Override
+	public String toString() {
+		return "StorageToken[" + myID + "]";
+	}
 }

@@ -204,8 +204,8 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 
 		// these names are shorter than 15 characters because there are more
 		// elements containing these names, e.g. state actions
-		List<String> expectedNames = new ArrayList<String>(Arrays.asList("mgn_SA", "mgn_StteB", "s_S", "t_S",
-				"t_S_AR_SA", "t_S_AR_StB", "s_S_AR_SA", "s_S_AR_StB"));
+		List<String> expectedNames = new ArrayList<String>(Arrays.asList("mrgn_StA", "mrgn_StteB", "s_SA", "t_SA",
+				"t_SA_AR_SA", "t_SA_AR_StB", "s_SA_AR_SA", "s_SA_AR_StB"));
 
 		ExecutionFlow flow = optimizer.transform(sequencer.transform(toTest));
 
@@ -256,6 +256,9 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 			cumulated_time += System.currentTimeMillis() - t0;
 			for (ExecutionState state : flow.getStates()) {
 				String name = executionflowNamingService.getShortName(state);
+				if(names.contains(name)) {
+					System.out.println(name + " is doubled");
+				}
 				assertEquals(names.contains(name), false);
 				assertEquals(true, name.length() <= maxLength);
 				names.add(name);

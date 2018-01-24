@@ -32,7 +32,8 @@ class TreeServiceNamesValidator {
 		} else {
 			for(name : names) {
 				val s = name.join
-				if(set.contains(s)) {
+				
+				if(!set.add(s)) {
 					return false
 				}
 			}

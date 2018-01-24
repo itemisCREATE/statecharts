@@ -11,6 +11,7 @@
 package org.yakindu.sct.model.sexec.naming.tree
 
 import java.util.List
+import java.util.Map
 
 /**
  * @author rbeckmann
@@ -37,7 +38,11 @@ class ShortStringUtils {
 		sb.toString
 	}
 	
-	def public ShortString toShortString(StringTreeNode node) {
-		new ShortString(node.data, node.getRoot.weight - node.weight + 1)
+	def public ShortString toShortString(StringTreeNode node, Map<StringTreeNode, ShortString> map) {
+		if(!map.containsKey(node)) {
+			map.put(node, new ShortString(node.data, node.getRoot.weight - node.weight + 1))
+		}
+		map.get(node)
+		
 	}
 }
