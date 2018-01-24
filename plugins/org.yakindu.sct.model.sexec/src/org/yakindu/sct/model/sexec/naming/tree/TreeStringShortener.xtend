@@ -15,7 +15,6 @@ import java.util.List
 import java.util.Map
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.yakindu.sct.model.sexec.naming.IStringShortener
-import org.yakindu.sct.model.sexec.naming.StorageToken
 
 /**
  * @author rbeckmann
@@ -31,23 +30,21 @@ class TreeStringShortener implements IStringShortener {
 	
 	protected boolean validState = false
 	
-	protected Map<StorageToken, String> result
-	protected Map<StorageToken, StringTreeNode> storage
-	protected Map<StorageToken, List<String>> originalStrings = newHashMap
+	protected Map<Object, String> result
+	protected Map<Object, StringTreeNode> storage
+	protected Map<Object, List<String>> originalStrings = newHashMap
 	
 	override reset() {
 		originalStrings = newHashMap
 		validState = false
 	}
 
-	override addString(List<String> s) {
+	override addString(List<String> s, Object token) {
 		validState = false
-		val token = new StorageToken()
 		originalStrings.put(token, s)
-		return token
 	}
 	
-	override getString(StorageToken token) {
+	override getString(Object token) {
 		if(!originalStrings.containsKey(token)) {
 			return null
 		}

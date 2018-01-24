@@ -23,9 +23,12 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(TreeStringShortener.class)
 public interface IStringShortener {
 	public void setMaxLength(int length);
-	public StorageToken addString(List<String> s);
 	
-	public String getString(StorageToken token);
+	/** Adds a string to the shortener. Can be retreived later in shortened form via getString using the token. */
+	public void addString(List<String> s, Object token);
+	
+	/** Retrieves a shortened String from the shortener, using the token that was specified on depositing the original String. */
+	public String getString(Object token);
 	
 	public void reset();
 }

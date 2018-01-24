@@ -11,7 +11,6 @@
 
 package org.yakindu.sct.model.sexec.naming.tree
 
-import com.google.common.collect.Maps
 import java.util.ArrayList
 import java.util.List
 import java.util.Map
@@ -27,7 +26,6 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.ElementNameProvider
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sexec.naming.IStringShortener
-import org.yakindu.sct.model.sexec.naming.StorageToken
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgraph.CompositeElement
 import org.yakindu.sct.model.sgraph.Region
@@ -64,8 +62,6 @@ class TreeNamingService implements INamingService {
 	 */
 	protected Map<NamedElement, String> map
 	
-	protected Map<NamedElement, StorageToken> tokens
-
 	// if the naming service is initialized with a flow, activeStatechart is null, and vice versa.
 	protected ExecutionFlow activeFlow;
 	protected Statechart activeStatechart;
@@ -82,7 +78,6 @@ class TreeNamingService implements INamingService {
 	
 	def protected void reset() {
 		map = newHashMap
-		tokens = newHashMap
 		activeFlow = null
 		activeStatechart = null
 		
@@ -176,10 +171,7 @@ class TreeNamingService implements INamingService {
 		segments.addAll(prefix);
 		segments.addAll(name);
 		segments.addAll(suffix);
-		if (!segments.isEmpty()) {
-			tokens.put(elem, shortener.addString(addSeparator(segments)))
-		}
-	// System.out.println(name);
+		shortener.addString(addSeparator(segments), elem)
 	}
 
 	def protected asIndexPosition(ExecutionScope it) {
@@ -217,12 +209,13 @@ class TreeNamingService implements INamingService {
 		if (map.containsKey(element)) {
 			return map.get(element);
 		}
-		// if not, check if element is located in the shortener
-		if (!tokens.containsKey(element)) {
-			addElement(element, new ArrayList<String>(), new ArrayList<String>());
-		}
 
-		val name = shortener.getString(tokens.get(element))
+		var name = shortener.getString(element)
+		
+		if (name === null) {
+			addElement(element, new ArrayList<String>(), new ArrayList<String>());
+			name = shortener.getString(element)
+		}
 
 		map.put(element, name);
 		return name;
