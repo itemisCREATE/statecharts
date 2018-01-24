@@ -16,23 +16,34 @@ import java.util.Comparator
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 
+/**
+ * @author rbeckmann
+ */
 class StringTreeNodeDepthComparator implements Comparator<StringTreeNode> {
 	override compare(StringTreeNode o1, StringTreeNode o2) {
 		return o1.getDepth() - o2.getDepth();
 	}
+	
+	def protected int getDepth(StringTreeNode node) {
+		if (node.isRoot) {
+			return 0;
+		} else {
+			return getDepth(node.parent) + 1;
+		}
+	}
 }
 
+/**
+ * @author rbeckmann
+ * 
+ * Implements a data tree for strings, used in the TreeNamingService.
+ */
 class StringTreeNode {
-	/*
-	 * implements a data tree to hold the various statechart elements' names
-	 */
+
 	@Accessors(PUBLIC_GETTER) protected String data;
 	@Accessors(PUBLIC_GETTER) protected ArrayList<StringTreeNode> children;
 	@Accessors(PUBLIC_GETTER) protected StringTreeNode parent;
 
-	/*
-	 * Constructors
-	 */
 	new(String data) {
 		this.data = data;
 		this.parent = null;
@@ -45,13 +56,7 @@ class StringTreeNode {
 		this.children = new ArrayList();
 	}
 
-	/*
-	 * Tree construction functions
-	 */
 	def protected void addChild(StringTreeNode node) {
-		/*
-		 * Function to add a child to this node.
-		 */
 		node.parent = this;
 		children.add(node);
 	}
@@ -91,23 +96,17 @@ class StringTreeNode {
 	/*
 	 * Tree reading functions
 	 */
+	/** The weight is the number of children, plus their weight recursively.
+	 * 	The tree's root has the maximum weight, while a leaf node's weight is zero.
+	 */
 	def public int getWeight() {
-		var weight = 0;
+		var weight = children.size()
 
 		for (c : children) {
-			weight += c.getWeight() + 1; // + 1: count children as well
+			weight += c.getWeight()
 		}
 
 		return weight;
-	}
-
-	def public int getDepth() {
-		// Upwards recursion to get distance from root
-		if (parent === null) {
-			return 0;
-		} else {
-			return parent.getDepth() + 1;
-		}
 	}
 
 	def public List<StringTreeNode> getEndNodes() {
@@ -133,9 +132,6 @@ class StringTreeNode {
 		}
 	}
 
-	/*
-	 * Tree manipulating functions
-	 */
 	def public void compress() {
 		/*
 		 * Compresses branches.
@@ -156,21 +152,18 @@ class StringTreeNode {
 		 *      \
 		 *       FG-#
 		 */
-		if (!isRoot()) // don't do for root, no data should be saved in root
-		{
-			while (this.children.length() == 1 && !children.get(0).isEnd()) {
-				var myChild = children.get(0); // reference to only child
-				this.children.removeAll(myChild); // delete from list
-				this.data += myChild.getData(); // append myChilds data to own
-				for (child : myChild.getChildren()) // adopt myChilds children as own
-				{
+		if (!isRoot()) {
+			while (this.children.size() == 1 && !children.get(0).isEnd()) {
+				var myChild = children.head;
+				this.data += myChild.getData();
+				for (child : myChild.getChildren()) {
 					this.addChild(child);
 				}
+				this.children.removeAll(myChild);
 			}
 		}
 
-		for (child : this.children) // recursion
-		{
+		for (child : this.children) {
 			child.compress();
 		}
 
