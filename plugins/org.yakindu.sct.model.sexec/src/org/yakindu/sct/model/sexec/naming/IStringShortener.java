@@ -12,10 +12,13 @@ package org.yakindu.sct.model.sexec.naming;
 
 import java.util.List;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * @author rbeckmann
  *
  */
+@ImplementedBy(TreeStringShortener.class)
 public interface IStringShortener {
 	public void setMaxLength(int length);
 	public StorageToken addString(List<String> s);

@@ -33,7 +33,7 @@ class ElementNameProvider {
 	def protected List<String> elementNameSegments(NamedElement e) {
 		val name = elementName(e);
 		var ArrayList<String> l;
-		if (name != null) {
+		if (name !== null) {
 			l = new ArrayList<String>(name.getSegments());
 		} else {
 			l = new ArrayList<String>();

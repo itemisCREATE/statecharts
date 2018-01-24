@@ -83,22 +83,22 @@ public class ShortStringTest {
 		shortstr = new ShortString("012345");
 		
 		shortstr.removeIndex(0);
-		assertEquals(11, shortstr.getCutCostFactor());
+		assertEquals(11, shortstr.getCutRatioFactor());
 		
 		shortstr.removeIndex(1);
-		assertEquals(13, shortstr.getCutCostFactor());
+		assertEquals(13, shortstr.getCutRatioFactor());
 		
 		shortstr.removeIndex(2);
-		assertEquals(15, shortstr.getCutCostFactor());
+		assertEquals(15, shortstr.getCutRatioFactor());
 		
 		shortstr.removeIndex(3);
-		assertEquals(16, shortstr.getCutCostFactor());
+		assertEquals(16, shortstr.getCutRatioFactor());
 		
 		shortstr.removeIndex(4);
-		assertEquals(18, shortstr.getCutCostFactor());
+		assertEquals(18, shortstr.getCutRatioFactor());
 		
 		shortstr.removeIndex(5);
-		assertEquals(20, shortstr.getCutCostFactor());
+		assertEquals(20, shortstr.getCutRatioFactor());
 	}
 	
 	@Test
@@ -128,7 +128,7 @@ public class ShortStringTest {
 		shortstr.removeIndex(18); // o
 		shortstr.removeIndex(19); // o
 		
-		int expectedCost = 8 * ShortString.COST_LOWERCASE_VOCALS * shortstr.getCutCostFactor();
+		int expectedCost = 8 * ShortString.COST_LOWERCASE_VOCALS * shortstr.getCutRatioFactor();
 		
 		assertEquals(expectedCost, shortstr.getCutCost());
 	}
@@ -143,7 +143,7 @@ public class ShortStringTest {
 		int expectedCost = (
 				1 * ShortString.COST_FIRSTLETTER +
 				1 * ShortString.COST_LOWERCASE_VOCALS
-				) * shortstr.getCutCostFactor();
+				) * shortstr.getCutRatioFactor();
 		
 		assertEquals(expectedCost, shortstr.getCutCost());
 	}
@@ -158,7 +158,7 @@ public class ShortStringTest {
 		int expectedCost = (
 				1 * ShortString.COST_FIRSTLETTER + 
 				1 * ShortString.COST_UPPERCASE
-				) * shortstr.getCutCostFactor();
+				) * shortstr.getCutRatioFactor();
 		
 		assertEquals(expectedCost, shortstr.getCutCost());
 	}

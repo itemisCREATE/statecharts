@@ -171,7 +171,7 @@ class StringTreeNode {
 		return siblingsContents
 	}
 
-	def public ArrayList<StringTreeNode> getSiblings() {
+	def public List<StringTreeNode> getSiblings() {
 		// returns a list of the parent's children without this - can be empty.
 		if (isRoot()) {
 			return new ArrayList<StringTreeNode>();
@@ -183,7 +183,7 @@ class StringTreeNode {
 
 	}
 
-	def public ArrayList<String> getContents() {
+	def public List<String> getContents() {
 		/*
 		 * Returns a list of all strings contained in the tree
 		 */
@@ -197,7 +197,7 @@ class StringTreeNode {
 		return contents;
 	}
 
-	def public ArrayList<StringTreeNode> getEndNodes() {
+	def public List<StringTreeNode> getEndNodes() {
 		/*
 		 * returns a list of nodes that are string ending nodes (node.isEnd() == true)
 		 */
@@ -253,7 +253,7 @@ class StringTreeNode {
 		this.children.removeAll(child);
 	}
 
-	def public ArrayList<StringTreeNode> getNodeChain(String name) {
+	def public List<StringTreeNode> getNodeChain(String name) {
 		/*
 		 * produces an ArrayList containing the Nodes that form the given string.
 		 */
@@ -306,6 +306,14 @@ class StringTreeNode {
 
 	def public StringTreeNode getParent() {
 		return parent;
+	}
+	
+	def public StringTreeNode getRoot() {
+		if(parent === null) {
+			return this
+		} else {
+			return parent.getRoot()
+		}
 	}
 
 	def public List<String> getChildrenContents() {

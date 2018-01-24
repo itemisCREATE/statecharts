@@ -11,11 +11,13 @@
 
 package org.yakindu.sct.model.sexec.naming
 
+import com.google.common.collect.Maps
 import java.util.ArrayList
 import java.util.HashMap
 import java.util.List
 import java.util.Map
 import javax.inject.Inject
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.base.NamedElement
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -30,13 +32,14 @@ import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import com.google.common.collect.Maps
 
 /** New implementation of the naming service for various identifiers used in the generated code. 
  * It is responsible for identifier construction depending on the thing to be named including different strategies 
  * which also include name shortening.
  */
 class TreeNamingService implements INamingService {
+	@Accessors protected int maxLength = 0;
+	@Accessors protected char separator = '_';
 
 	@Inject extension SExecExtensions
 	@Inject extension StatechartExtensions
@@ -45,40 +48,24 @@ class TreeNamingService implements INamingService {
 	@Inject extension ElementNameProvider
 
 	@Inject protected StringTreeNodeDepthComparator stringTreeNodeDepthComparator
+	
+	@Inject protected IStringShortener shortener
 
 	// from public class org.yakindu.sct.generator.c.features.CDefaultFeatureValueProvider extends		
 	protected static final String VALID_IDENTIFIER_REGEX = "[_a-zA-Z][_a-zA-Z0-9]*";
 
-	var protected int maxLength = 0;
 
-	var protected char separator = '_';
 
 	/*
 	 * Holds the name of each element whose name was requested.
 	 */
-	var protected Map<NamedElement, String> map;
+	protected Map<NamedElement, String> map
+	
+	protected Map<NamedElement, StorageToken> tokens
 
-	/*
-	 * Holds the end node in the tree for each NamedElement that was added.
-	 */
-	var protected Map<NamedElement, StringTreeNode> treeMap;
-
-	/*
-	 * For each node in the tree, there is a mapping to a short string managing the shortening of the name.
-	 */
-	var protected Map<StringTreeNode, ShortString> node_shortString_map;
-
-	/*
-	 * For each end node, individualMap holds a List of Nodes which make this name individual. (a subset of the tree basically)
-	 */
-	var protected Map<StringTreeNode, ArrayList<StringTreeNode>> individualMap;
-
-	var protected boolean shortNamesValid; // marker to remember if the names are currently correctly shortened
-	var protected StringTreeNode tree; // the tree which holds the added names
 	// if the naming service is initialized with a flow, activeStatechart is null, and vice versa.
-	var protected ExecutionFlow activeFlow;
-
-	var protected Statechart activeStatechart;
+	protected ExecutionFlow activeFlow;
+	protected Statechart activeStatechart;
 
 	new(int maxLength, char separator) {
 		this.maxLength = maxLength
@@ -91,29 +78,16 @@ class TreeNamingService implements INamingService {
 	}
 
 	override initializeNamingService(Statechart statechart) {
-		if (tree === null || activeStatechart != statechart) {
+		if (activeStatechart != statechart) {
 			map = Maps.newHashMap
-			treeMap = Maps.newHashMap
-			shortNamesValid = false;
-
 			activeFlow = null;
 			activeStatechart = statechart;
-			createNameTree(statechart);
-
-			individualMap = constructIndividualNames();
-			node_shortString_map = createShortStringMapping();
-
-			shortenNames();
+			
+			collectNames(statechart)
 		}
 	}
 
-	def protected void createNameTree(Statechart statechart) {
-		tree = new StringTreeNode();
-
-		addShortVertexNames(statechart);
-	}
-
-	def protected void addShortVertexNames(CompositeElement element) {
+	def protected void collectNames(CompositeElement element) {
 		for (region : element.regions) {
 			addElement(region, new ArrayList<String>(), new ArrayList<String>());
 			for (vertex : region.vertices) {
@@ -128,32 +102,23 @@ class TreeNamingService implements INamingService {
 		for (region : element.regions) {
 			for (vertex : region.vertices) {
 				if (vertex instanceof CompositeElement) {
-					addShortVertexNames(vertex as CompositeElement)
+					collectNames(vertex as CompositeElement)
 				}
 			}
 		}
 	}
 
 	override initializeNamingService(ExecutionFlow flow) {
-		if (tree === null || activeFlow != flow) {
+		if (activeFlow != flow) {
 			map = Maps.newHashMap
-			treeMap = Maps.newHashMap
-			shortNamesValid = false;
-
 			activeFlow = flow;
 			activeStatechart = null;
 
-			createNameTree(flow);
-			individualMap = constructIndividualNames();
-			node_shortString_map = createShortStringMapping();
-
-			shortenNames();
+			collectNames(flow);
 		}
 	}
 
-	def protected void createNameTree(ExecutionFlow flow) {
-		// Initialize tree
-		tree = new StringTreeNode();
+	def protected void collectNames(ExecutionFlow flow) {
 
 		for (region : flow.regions) {
 			addElement(region, new ArrayList<String>(), new ArrayList<String>());
@@ -184,14 +149,6 @@ class TreeNamingService implements INamingService {
 		}
 	}
 
-	def public test_printTreeContents() {
-		for (s : tree.getContents()) {
-			System.out.println(s);
-		}
-
-		System.out.println();
-	}
-
 	def protected addShortTimeEventName(NamedElement executionFlowElement, NamedElement sgraphElement) {
 		var timeEventSpecs = sgraphElement.timeEventSpecs;
 		for (tes : timeEventSpecs) {
@@ -210,10 +167,7 @@ class TreeNamingService implements INamingService {
 		segments.addAll(name);
 		segments.addAll(suffix);
 		if (!segments.isEmpty()) {
-			val addedNode = tree.addStringList(segments);
-
-			treeMap.put(elem, addedNode); // remember for later access
-			shortNamesValid = false;
+			tokens.put(elem, shortener.addString(addSeparator(segments)))
 		}
 	// System.out.println(name);
 	}
@@ -236,6 +190,7 @@ class TreeNamingService implements INamingService {
 
 	override public setMaxLength(int length) {
 		maxLength = length
+		shortener.maxLength = length
 	}
 
 	override public setSeparator(char sep) {
@@ -247,157 +202,20 @@ class TreeNamingService implements INamingService {
 		separator = sep
 	}
 
-	override public getMaxLength() {
-		return maxLength
-	}
-
-	override public getSeparator() {
-		return separator
-	}
-
 	override getShortName(NamedElement element) {
 		// check if element was named before
 		if (map.containsKey(element)) {
 			return map.get(element);
 		}
-		// if not, check if element is located in the tree
-		if (!treeMap.containsKey(element)) {
+		// if not, check if element is located in the shortener
+		if (!tokens.containsKey(element)) {
 			addElement(element, new ArrayList<String>(), new ArrayList<String>());
 		}
-		// check if names are shortened already
-		if (!shortNamesValid) {
-			shortenNames();
-		}
 
-		val name = getShortenedName(element);
+		val name = shortener.getString(tokens.get(element))
 
 		map.put(element, name);
 		return name;
-	}
-
-	def protected shortenNames() {
-		if (individualMap === null || individualMap.isEmpty()) {
-			constructIndividualNames();
-		}
-		if (this.maxLength == 0) {
-			return;
-		}
-		
-		val max_weight = tree.getWeight();
-
-		while (shortenOneCharacter(tree.getEndNodes(), max_weight)) {
-		}
-
-		shortNamesValid = true;
-	}
-
-	def protected boolean shortenOneCharacter(ArrayList<StringTreeNode> endnodes, int max_weight) {
-		/*
-		 * takes all end-nodes of the tree, finds their attached individual chain of nodes, their shortstring and shortens the
-		 * longest chain's cheapest shortstring.
-		 */
-		var max_length = 0;
-		var StringTreeNode max_length_node;
-
-		var names = new ArrayList<String>();
-
-		for (node : endnodes) {
-			// iterates over all endnodes and returns the maximum length of all names.
-			var newname = node.getIndividualName.joinShortStrings();
-			names.add(newname);
-			var length = newname.length();
-			if (length > max_length) {
-				max_length = length;
-				max_length_node = node;
-			}
-		}
-
-		if (max_length < this.maxLength) {
-			return false;
-		}
-
-		var min_cost = Integer.MAX_VALUE;
-		var ShortString best_cut;
-
-		for (node : max_length_node.getIndividualName) // all nodes describing the individual name of this end node
-		{
-			val shortstr = node.shortStringForNode;
-			val current_cost = shortstr.getCutCost();
-
-			var noDoubles = false;
-
-			val node_cost_factor = max_weight - node.getWeight() + 1;
-
-			shortstr.removeCheapestChar();
-
-			val cut_cost = (shortstr.getCutCost() - current_cost) * node_cost_factor;
-
-			val current_name = max_length_node.getIndividualName.joinShortStrings;
-
-			if (!names.contains(current_name)) {
-				noDoubles = true;
-				// do further check to avoid double names only when quick check is okay
-				var doubleCheckArray = new ArrayList<String>();
-				for (n : endnodes) {
-					var newname = n.getIndividualName.joinShortStrings();
-					if (doubleCheckArray.contains(newname)) {
-						noDoubles = false;
-					}
-					doubleCheckArray.add(newname);
-				}
-			}
-
-			if (noDoubles && cut_cost > 0 && cut_cost < min_cost) {
-				min_cost = cut_cost;
-				best_cut = shortstr;
-			}
-
-			shortstr.rollback(); // revert changes
-		}
-
-		if (best_cut === null) {
-			return false;
-		}
-		best_cut.removeCheapestChar(); // reapply best change
-		return true;
-	}
-
-	def protected Map<StringTreeNode, ShortString> createShortStringMapping() {
-		val HashMap<StringTreeNode, ShortString> mapping = newHashMap;
-		for (node : tree.getNodes()) {
-			mapping.put(
-				node,
-				new ShortString(node.getData())
-			);
-		}
-
-		return mapping;
-	}
-
-	def protected StringTreeNode getNodeForElement(NamedElement elem) {
-		return treeMap.get(elem);
-	}
-
-	def protected ShortString getShortStringForNode(StringTreeNode node) {
-		if (node_shortString_map === null || node_shortString_map.isEmpty()) {
-			createShortStringMapping();
-		}
-		return node_shortString_map.get(node);
-	}
-
-	def protected ArrayList<StringTreeNode> getIndividualName(StringTreeNode node) {
-		if (individualMap.isEmpty()) {
-			constructIndividualNames();
-		}
-		return individualMap.get(node);
-	}
-
-	def protected getShortenedName(StringTreeNode node) {
-		return joinShortStrings(getIndividualName(node));
-	}
-
-	def protected getShortenedName(NamedElement elem) {
-		return getShortenedName(getNodeForElement(elem));
 	}
 
 	override asEscapedIdentifier(String string) {
@@ -413,52 +231,13 @@ class TreeNamingService implements INamingService {
 	}
 
 	override getShortNameMap(Statechart statechart) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		initializeNamingService(statechart)
+		return map
 	}
 
 	override getShortNameMap(ExecutionFlow flow) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-
-	def public getTreeContents() {
-		return tree.getContents();
-	}
-
-	def protected List<NamedElement> getNodeElements(StringTreeNode node) {
-		val ArrayList<NamedElement> list = new ArrayList<NamedElement>();
-
-		for (elem : treeMap.keySet()) {
-			if (treeMap.get(elem) == node) {
-				list.add(elem);
-			}
-		}
-
-		return list;
-	}
-
-	def protected String joinShortStrings(ArrayList<?> list) {
-		val sb = new StringBuilder();
-		var first = true;
-
-		for (s : list) {
-			var String shortened;
-			if (s instanceof ShortString) {
-				shortened = s.getShortenedString();
-			} else if (s instanceof StringTreeNode) {
-				shortened = s.getShortStringForNode.getShortenedString();
-			}
-			if (shortened.length > 0) {
-				if (first) {
-					sb.append(shortened);
-					first = false;
-				} else {
-					sb.append(separator);
-					sb.append(shortened);
-				}
-			}
-		}
-
-		return sb.toString();
+		initializeNamingService(flow)
+		return map
 	}
 
 	def protected suffix(Step it) {
@@ -544,5 +323,18 @@ class TreeNamingService implements INamingService {
 
 	def protected suffix(Vertex it) {
 		return new ArrayList<String>();
+	}
+	
+	def protected List<String> addSeparator(List<String> segments) {
+		val List<String> result = newArrayList
+		for(var i = 0; i < segments.size(); i++) {
+			result.add(segments.get(i)) {
+				if(i < segments.size() - 1) {
+					result.add(separator.toString)
+				}
+			}
+			
+		}
+		result
 	}
 }

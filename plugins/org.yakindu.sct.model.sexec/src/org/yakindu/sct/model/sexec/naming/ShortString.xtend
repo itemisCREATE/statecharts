@@ -11,13 +11,16 @@
 
 package org.yakindu.sct.model.sexec.naming
 
-import java.lang.String
+import org.eclipse.xtend.lib.annotations.Accessors
 
 class ShortString {
 	/*
 	 * Class that manages a string and shortened versions of it.
 	 */
 	protected String originalString;
+	
+	/** Custom factor for the cut cost */
+	@Accessors int costFactor = 1; 
 
 	protected int[] cutArray; // holds information if char is cut or not
 	protected int[] previous_cutArray; // holds previous state for rollback / undo possibility
@@ -30,6 +33,10 @@ class ShortString {
 	final static public int COST_FIRSTLETTER = 10;
 
 	new(String s) {
+		this(s, 1)
+	}
+	
+	new(String s, int factor) {
 		if (s === null) {
 			originalString = "";
 		} else {
@@ -39,6 +46,7 @@ class ShortString {
 		previous_cutArray = newIntArrayOfSize(size);
 		reset();
 		saveCurrentToPrevious();
+		costFactor = factor
 	}
 
 	def public getOriginalString() {
@@ -100,7 +108,7 @@ class ShortString {
 		return length;
 	}
 
-	def public int getCutCostFactor() {
+	def public int getCutRatioFactor() {
 		// factor that takes into account how much of the string is already cut, so that cutting away more characters get's more expensive
 		return 10 + (getCutRatio() * 10) as int;
 	}
@@ -118,7 +126,7 @@ class ShortString {
 			}
 		}
 
-		return cost * getCutCostFactor;
+		return cost * getCutRatioFactor * costFactor;
 	}
 
 	def public int getBaseCutCost(int index) {
@@ -128,18 +136,18 @@ class ShortString {
 		var c = originalString.charAt(index);
 
 		if (index == 0) {
-			cost += org.yakindu.sct.model.sexec.naming.ShortString.COST_FIRSTLETTER;
+			cost += ShortString.COST_FIRSTLETTER;
 		}
 		if (Character.isDigit(c)) {
-			cost += org.yakindu.sct.model.sexec.naming.ShortString.COST_DIGIT;
+			cost += ShortString.COST_DIGIT;
 		} else if (Character.isUpperCase(c)) {
-			cost += org.yakindu.sct.model.sexec.naming.ShortString.COST_UPPERCASE;
+			cost += ShortString.COST_UPPERCASE;
 		} else if (isLowercaseVocal(c)) {
-			cost += org.yakindu.sct.model.sexec.naming.ShortString.COST_LOWERCASE_VOCALS;
+			cost += ShortString.COST_LOWERCASE_VOCALS;
 		} else if (c.toString().equals("_")) {
-			cost += org.yakindu.sct.model.sexec.naming.ShortString.COST_UNDERSCORE;
+			cost += ShortString.COST_UNDERSCORE;
 		} else {
-			cost += org.yakindu.sct.model.sexec.naming.ShortString.COST_LOWERCASE_CONSONANTS;
+			cost += ShortString.COST_LOWERCASE_CONSONANTS;
 		}
 
 		return cost;
