@@ -8,13 +8,14 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.model.sexec.naming
+package org.yakindu.sct.model.sexec.naming.tree
 
 import com.google.inject.Inject
 import java.util.List
 import java.util.Map
 import org.eclipse.xtend.lib.annotations.Accessors
-import com.google.inject.ImplementedBy
+import org.yakindu.sct.model.sexec.naming.IStringShortener
+import org.yakindu.sct.model.sexec.naming.StorageToken
 
 /**
  * @author rbeckmann
@@ -33,6 +34,11 @@ class TreeStringShortener implements IStringShortener {
 	protected Map<StorageToken, String> result
 	protected Map<StorageToken, StringTreeNode> storage
 	protected Map<StorageToken, List<String>> originalStrings = newHashMap
+	
+	override reset() {
+		originalStrings = newHashMap
+		validState = false
+	}
 
 	override addString(List<String> s) {
 		validState = false

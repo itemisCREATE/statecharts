@@ -30,7 +30,7 @@ import java.util.ArrayList
 class ElementNameProvider {
 	@Inject private StextNameProvider provider
 
-	def protected List<String> elementNameSegments(NamedElement e) {
+	def public List<String> elementNameSegments(NamedElement e) {
 		val name = elementName(e);
 		var ArrayList<String> l;
 		if (name !== null) {

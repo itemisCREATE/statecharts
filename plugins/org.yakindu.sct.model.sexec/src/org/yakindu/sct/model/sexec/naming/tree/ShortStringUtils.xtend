@@ -8,7 +8,7 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.model.sexec.naming
+package org.yakindu.sct.model.sexec.naming.tree
 
 import java.util.List
 

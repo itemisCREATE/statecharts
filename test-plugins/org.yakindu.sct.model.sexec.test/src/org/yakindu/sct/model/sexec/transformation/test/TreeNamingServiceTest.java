@@ -23,7 +23,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
-import org.yakindu.sct.model.sexec.naming.TreeNamingService;
+import org.yakindu.sct.model.sexec.naming.tree.TreeNamingService;
 import org.yakindu.sct.model.sexec.transformation.FlowOptimizer;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.test.models.SCTUnitTestModels;

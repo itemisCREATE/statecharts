@@ -9,11 +9,10 @@
  * 		@author René Beckmann (beckmann@itemis.de)
  */
 
-package org.yakindu.sct.model.sexec.naming
+package org.yakindu.sct.model.sexec.naming.tree
 
 import com.google.common.collect.Maps
 import java.util.ArrayList
-import java.util.HashMap
 import java.util.List
 import java.util.Map
 import javax.inject.Inject
@@ -25,6 +24,10 @@ import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sexec.naming.ElementNameProvider
+import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sexec.naming.IStringShortener
+import org.yakindu.sct.model.sexec.naming.StorageToken
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgraph.CompositeElement
 import org.yakindu.sct.model.sgraph.Region
@@ -76,11 +79,19 @@ class TreeNamingService implements INamingService {
 		this.maxLength = 0
 		this.separator = '_'
 	}
+	
+	def protected void reset() {
+		map = newHashMap
+		tokens = newHashMap
+		activeFlow = null
+		activeStatechart = null
+		
+		shortener.reset()
+	}
 
 	override initializeNamingService(Statechart statechart) {
 		if (activeStatechart != statechart) {
-			map = Maps.newHashMap
-			activeFlow = null;
+			reset()
 			activeStatechart = statechart;
 			
 			collectNames(statechart)
@@ -110,9 +121,8 @@ class TreeNamingService implements INamingService {
 
 	override initializeNamingService(ExecutionFlow flow) {
 		if (activeFlow != flow) {
-			map = Maps.newHashMap
+			reset()
 			activeFlow = flow;
-			activeStatechart = null;
 
 			collectNames(flow);
 		}

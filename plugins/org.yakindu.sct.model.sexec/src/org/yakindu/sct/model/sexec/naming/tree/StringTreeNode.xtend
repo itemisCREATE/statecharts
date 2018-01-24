@@ -9,7 +9,7 @@
  * 		@author René Beckmann (beckmann@itemis.de)
  */
 
-package org.yakindu.sct.model.sexec.naming
+package org.yakindu.sct.model.sexec.naming.tree
 
 import java.util.ArrayList
 import java.util.List

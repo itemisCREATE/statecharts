@@ -8,7 +8,7 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.model.sexec.naming
+package org.yakindu.sct.model.sexec.naming.tree
 
 import com.google.inject.Inject
 import java.util.List

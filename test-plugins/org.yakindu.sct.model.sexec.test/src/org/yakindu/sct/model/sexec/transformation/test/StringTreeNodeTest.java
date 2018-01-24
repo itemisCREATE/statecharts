@@ -11,17 +11,15 @@
 package org.yakindu.sct.model.sexec.transformation.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
-import org.junit.Before;
-import org.junit.Test;
-
-import org.yakindu.sct.model.sexec.naming.StringTreeNode;
 
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.yakindu.sct.model.sexec.naming.tree.StringTreeNode;
 
 public class StringTreeNodeTest {
 	private StringTreeNode tree;

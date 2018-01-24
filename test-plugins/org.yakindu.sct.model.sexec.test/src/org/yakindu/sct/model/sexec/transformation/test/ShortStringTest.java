@@ -12,13 +12,9 @@
 package org.yakindu.sct.model.sexec.transformation.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.yakindu.sct.model.sexec.naming.ShortString;
-
-import com.google.common.primitives.Shorts;
+import org.yakindu.sct.model.sexec.naming.tree.ShortString;
 
 public class ShortStringTest {
 	private ShortString shortstr;

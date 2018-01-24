@@ -12,6 +12,8 @@ package org.yakindu.sct.model.sexec.naming;
 
 import java.util.List;
 
+import org.yakindu.sct.model.sexec.naming.tree.TreeStringShortener;
+
 import com.google.inject.ImplementedBy;
 
 /**
@@ -24,4 +26,6 @@ public interface IStringShortener {
 	public StorageToken addString(List<String> s);
 	
 	public String getString(StorageToken token);
+	
+	public void reset();
 }
