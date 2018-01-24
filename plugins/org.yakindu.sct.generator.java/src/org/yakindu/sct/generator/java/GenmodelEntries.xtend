@@ -70,21 +70,21 @@ class GenmodelEntries {
 	}
 
 	def getLicenseText(GeneratorEntry it) {
-		if (licenseTextParameter != null) {
+		if (licenseTextParameter !== null) {
 			return "/** " + licenseTextParameter.stringValue.trim + " */"
 		}
 		return null
 	}
 
 	def getBasePackageName(GeneratorEntry it) {
-		if (basePackageParameter != null)
-			return basePackageParameter.stringValue
-		if (outletFeatureTargetProject != null)
-			return outletFeatureTargetProject.stringValue
+		if (basePackageParameter !== null)
+			return basePackageParameter.stringValue.toLowerCase
+		if (outletFeatureTargetProject !== null)
+			return outletFeatureTargetProject.stringValue.toLowerCase
 	}
 
 	def getImplementationSuffix(GeneratorEntry it, ExecutionFlow flow) {
-		if (implementationSuffixParameter != null) {
+		if (implementationSuffixParameter !== null) {
 			return flow.statemachineName + implementationSuffixParameter.stringValue
 		}
 		return flow.statemachineName
@@ -105,28 +105,28 @@ class GenmodelEntries {
 	}
 
 	def createTimerService(GeneratorEntry it) {
-		if (timerServiceParameter != null) {
+		if (timerServiceParameter !== null) {
 			return timerServiceParameter.booleanValue
 		}
 		return false
 	}
 
 	def createRuntimeService(GeneratorEntry it) {
-		if (runtimeServiceParameter != null) {
+		if (runtimeServiceParameter !== null) {
 			return runtimeServiceParameter.booleanValue
 		}
 		return false
 	}
 
 	def createInterfaceObserver(GeneratorEntry it) {
-		if (interfaceObserverSupportParameter != null) {
+		if (interfaceObserverSupportParameter !== null) {
 			return interfaceObserverSupportParameter.booleanValue
 		}
 		return false
 	}
 
 	def useJavaInt(GeneratorEntry it) {
-		if (useJavaIntForInteger != null) {
+		if (useJavaIntForInteger !== null) {
 			return useJavaIntForInteger.booleanValue
 		}
 		return false
