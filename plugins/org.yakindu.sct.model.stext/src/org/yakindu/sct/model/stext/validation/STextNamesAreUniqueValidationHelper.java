@@ -76,10 +76,9 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 				createDuplicateNameError(put, common, acceptor);
 			}
 		} else if(lowerCasePut != null) {
-			EClass common = checkForCommonSuperClass(lowerCasePut, description);
-			if(common != null) {
-				createDuplicateNameWarning(description, common, acceptor);
-				createDuplicateNameWarning(lowerCasePut, common, acceptor);
+			if(lowerCasePut.getEClass().equals(description.getEClass())) {
+				createDuplicateNameWarning(description, description.getEClass(), acceptor);
+				createDuplicateNameWarning(lowerCasePut, description.getEClass(), acceptor);
 			}
 		}
 	}

@@ -976,7 +976,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
 		
 		result = tester.validate(model);
-		result.assertAll(warningMsg("Duplicate"), warningMsg("Duplicate"));
+		result.assertOK();
 		
 		
 		scope = "interface: " + 
@@ -993,7 +993,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
 		
 		result = tester.validate(model);
-		result.assertAll(warningMsg("Duplicate"), warningMsg("Duplicate"), warningMsg("Duplicate"), warningMsg("Duplicate"), errorMsg("Duplicate"), errorMsg("Duplicate"));
+		result.assertAll(warningMsg("Duplicate"), warningMsg("Duplicate"), errorMsg("Duplicate"), errorMsg("Duplicate"));
 	}
 	
 
