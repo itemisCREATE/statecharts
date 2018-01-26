@@ -13,6 +13,7 @@ package org.yakindu.sct.model.stext.test.validation;
 
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorCode;
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorMsg;
+import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.warningMsg;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_ASSIGNMENT_TO_CONST_MSG;
@@ -21,8 +22,6 @@ import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.E
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_VAR_ARGS_LAST_CODE;
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE;
 import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
-
-import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -38,6 +37,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.types.Operation;
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
@@ -929,6 +929,71 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		model = parseExpression("optOp4(true)", rule);
 		result = tester.validate(model);
 		result.assertError(ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
+	}
+	
+	@Test
+	public void testDuplicateNames() {
+		EObject model;
+		AssertableDiagnostics result;
+		String scope;
+		
+		
+		scope = "interface: var x: integer var x: integer";
+		model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
+		
+		result = tester.validate(model);
+		result.assertAll(errorMsg("Duplicate"), errorMsg("Duplicate"));
+		
+		
+		scope = "interface: var x: integer internal: var x: integer";
+		model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
+		
+		result = tester.validate(model);
+		result.assertAll(errorMsg("Duplicate"), errorMsg("Duplicate"));
+		
+		
+		scope = "interface: var x: integer interface d: var x: integer";
+		model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
+		
+		result = tester.validate(model);
+		result.assertOK();
+		
+		
+		scope = "interface: var x: integer interface x: var d: integer";
+		model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
+		
+		result = tester.validate(model);
+		result.assertAll(errorMsg("Duplicate"), errorMsg("Duplicate"));
+		
+		
+		scope = "interface: var x: integer var X: integer";
+		model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
+		
+		result = tester.validate(model);
+		result.assertAll(warningMsg("Duplicate"), warningMsg("Duplicate"));
+		
+		scope = "interface: var x: integer interface X: var d: integer";
+		model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
+		
+		result = tester.validate(model);
+		result.assertAll(warningMsg("Duplicate"), warningMsg("Duplicate"));
+		
+		
+		scope = "interface: " + 
+				"var X: integer " + 
+				"var x: integer " + 
+				"" + 
+				"var d: integer " + 
+				" " + 
+				"interface D: " + 
+				"var x: integer " + 
+				" " + 
+				"interface x: " + 
+				"var i: integer";
+		model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
+		
+		result = tester.validate(model);
+		result.assertAll(warningMsg("Duplicate"), warningMsg("Duplicate"), warningMsg("Duplicate"), warningMsg("Duplicate"), errorMsg("Duplicate"), errorMsg("Duplicate"));
 	}
 	
 
