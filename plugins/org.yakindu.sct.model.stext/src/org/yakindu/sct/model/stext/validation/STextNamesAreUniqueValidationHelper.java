@@ -35,6 +35,7 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 	protected OperationCanceledManager operationCanceledManager = new OperationCanceledManager();
 
 	protected Map<QualifiedName, IEObjectDescription> nameMap;
+	protected Map<QualifiedName, IEObjectDescription> caseInsensitiveMap;
 	
 	@Override
 	public void checkUniqueNames(Iterable<IEObjectDescription> descriptions, ValidationMessageAcceptor acceptor) {
@@ -53,6 +54,7 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 			ValidationMessageAcceptor acceptor) {
 		Iterator<IEObjectDescription> iter = descriptions.iterator();
 		this.nameMap = new HashMap<>();
+		this.caseInsensitiveMap = new HashMap<>();
 		if (!iter.hasNext())
 			return;
 		while (iter.hasNext()) {
@@ -66,17 +68,40 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 			ValidationMessageAcceptor acceptor) {
 		QualifiedName qName = description.getName();
 		IEObjectDescription put = nameMap.put(qName, description);
+		IEObjectDescription lowerCasePut = caseInsensitiveMap.put(qName.toLowerCase(), description);
 		if(put != null) {
-			EClass common = checkForCommonSuperClass(put, description, acceptor);
+			EClass common = checkForCommonSuperClass(put, description);
 			if(common != null) {
 				createDuplicateNameError(description, common, acceptor);
 				createDuplicateNameError(put, common, acceptor);
 			}
+		} else if(lowerCasePut != null) {
+			EClass common = checkForCommonSuperClass(lowerCasePut, description);
+			if(common != null) {
+				createDuplicateNameWarning(description, common, acceptor);
+				createDuplicateNameWarning(lowerCasePut, common, acceptor);
+			}
 		}
 	}
 
-	protected EClass checkForCommonSuperClass(IEObjectDescription one, IEObjectDescription two,
+	protected void createDuplicateNameWarning(IEObjectDescription description, EClass eClass,
 			ValidationMessageAcceptor acceptor) {
+		EObject object = description.getEObjectOrProxy();
+		EStructuralFeature feature = getNameFeature(object);
+		acceptor.acceptWarning(
+				getDuplicateNameWarningMessage(description, eClass, feature), 
+				object, 
+				feature,
+				ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+				getErrorCode());
+	}
+
+	protected String getDuplicateNameWarningMessage(IEObjectDescription description, EClass eClass,
+			EStructuralFeature feature) {
+		return getDuplicateNameErrorMessage(description, eClass, feature) + ". Names differ only in case, which can lead to compilation problems.";
+	}
+
+	protected EClass checkForCommonSuperClass(IEObjectDescription one, IEObjectDescription two) {
 		
 		
 		List<EClass> flatOne = buildSuperClassList(one.getEClass());
