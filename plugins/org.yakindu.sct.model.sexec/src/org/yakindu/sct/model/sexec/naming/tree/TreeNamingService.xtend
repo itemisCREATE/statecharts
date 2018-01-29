@@ -33,7 +33,6 @@ import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import com.google.inject.Singleton
 
 /** New implementation of the naming service for various identifiers used in the generated code. 
  * It is responsible for identifier construction depending on the thing to be named including different strategies 
@@ -161,18 +160,22 @@ class TreeNamingService implements INamingService {
 			val timeEvent = executionFlowElement.flow.getTimeEvent(sgraphElement.fullyQualifiedName + "_time_event_" +
 				timeEventSpecs.indexOf(tes))
 			if (timeEvent !== null) {
-				addElement(executionFlowElement, prefix(tes, sgraphElement), suffix(tes, sgraphElement));
+				addElement(executionFlowElement, prefix(tes, sgraphElement), suffix(tes, sgraphElement), timeEvent);
 			}
 		}
 	}
 
 	def protected void addElement(NamedElement elem, List<String> prefix, List<String> suffix) {
+		addElement(elem, prefix, suffix, elem)
+	}
+	
+	def protected void addElement(NamedElement elem, List<String> prefix, List<String> suffix, Object token) {
 		val name = new ArrayList<String>(elem.elementNameSegments());
 		val segments = new ArrayList<String>();
 		segments.addAll(prefix);
 		segments.addAll(name);
 		segments.addAll(suffix);
-		shortener.addString(addSeparator(segments), elem)
+		shortener.addString(addSeparator(segments), token)
 	}
 
 	def protected asIndexPosition(ExecutionScope it) {

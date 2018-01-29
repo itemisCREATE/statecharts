@@ -109,7 +109,7 @@ public class CTreeNamingService extends TreeNamingService {
 	
 	override protected prefix(ExecutionState it) {
 		if (entry.statemachinePrefix.nullOrEmpty) {
-			#[super.prefix(it).head?.toFirstUpper]			
+			super.prefix(it).toFirstUpper		
 		} else {
 			#[entry.statemachinePrefix]
 		}

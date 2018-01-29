@@ -60,6 +60,33 @@ class StringTreeNode {
 		node.parent = this;
 		children.add(node);
 	}
+	
+	def protected List<String> getContents() {
+		/*
+		 * Returns a list of all strings contained in the tree
+		 */
+		val List<String> contents = newArrayList
+		val List<StringTreeNode> endNodes = getEndNodes
+
+		for (StringTreeNode end : endNodes) {
+			contents.add(end.contentUpwards);
+		}
+
+		return contents;
+	}
+	
+	def protected String getContentUpwards() {
+		/*
+		 * Traverse tree upwards and return the string ended by this node up to root
+		 */
+		var s = "";
+
+		if (!isRoot()) {
+			s = parent.getContentUpwards() + getData();
+		}
+
+		return s;
+	}
 
 	def public StringTreeNode addStringList(List<String> sList) {
 		/*
