@@ -32,6 +32,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.inject.Binder;
+import com.google.inject.Singleton;
 import com.google.inject.name.Names;
 /**
  * 
@@ -44,7 +45,7 @@ public class CCodeGeneratorModule implements IGeneratorModule {
 	public void configure(GeneratorEntry entry, Binder binder) {
 		binder.bind(GeneratorEntry.class).toInstance(entry);
 		binder.bind(IExecutionFlowGenerator.class).to(CGenerator.class);
-		binder.bind(INamingService.class).to(CNamingService.class);
+		binder.bind(INamingService.class).to(CTreeNamingService.class).in(Singleton.class);
 		binder.bind(ICodegenTypeSystemAccess.class).to(CTypeSystemAccess.class);
 		binder.bind(IncludeProvider.class).to(StandardIncludeProvider.class);
 		bindIGenArtifactConfigurations(entry, binder);

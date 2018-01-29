@@ -33,6 +33,7 @@ import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
+import com.google.inject.Singleton
 
 /** New implementation of the naming service for various identifiers used in the generated code. 
  * It is responsible for identifier construction depending on the thing to be named including different strategies 
@@ -243,7 +244,7 @@ class TreeNamingService implements INamingService {
 		return map
 	}
 
-	def protected suffix(Step it) {
+	def protected List<String> suffix(Step it) {
 		var l = new ArrayList<String>();
 
 		switch (it) {
@@ -281,27 +282,27 @@ class TreeNamingService implements INamingService {
 		return l;
 	}
 
-	def protected prefix(Step it) {
+	def protected List<String> prefix(Step it) {
 		return new ArrayList<String>();
 	}
 
-	def protected prefix(ExecutionState it) {
+	def protected List<String> prefix(ExecutionState it) {
 		var l = new ArrayList<String>();
 		// l.add(flow.name);
 		return l;
 	}
 
-	def protected suffix(ExecutionState it) {
+	def protected List<String> suffix(ExecutionState it) {
 		return new ArrayList<String>();
 	}
 
-	def protected prefix(TimeEventSpec it, NamedElement element) {
+	def protected List<String> prefix(TimeEventSpec it, NamedElement element) {
 		var l = new ArrayList<String>();
 		// l.add(activeFlow.name);
 		return l;
 	}
 
-	def protected suffix(TimeEventSpec it, NamedElement element) {
+	def protected List<String> suffix(TimeEventSpec it, NamedElement element) {
 		var l = new ArrayList<String>();
 		switch (element) {
 			Statechart: {
@@ -314,17 +315,17 @@ class TreeNamingService implements INamingService {
 		return l;
 	}
 
-	def protected prefix(State it) {
+	def protected List<String> prefix(State it) {
 		var l = new ArrayList<String>();
 		// l.add(activeStatechart.name);
 		return l;
 	}
 
-	def protected prefix(Vertex it) {
+	def protected List<String> prefix(Vertex it) {
 		return new ArrayList<String>();
 	}
 
-	def protected suffix(Vertex it) {
+	def protected List<String> suffix(Vertex it) {
 		return new ArrayList<String>();
 	}
 	
@@ -339,5 +340,23 @@ class TreeNamingService implements INamingService {
 			
 		}
 		result
+	}
+	
+	def protected List<String> toFirstUpper(List<String> segments) {
+		val result = newArrayList
+		if(segments.nullOrEmpty) {
+			return result
+		}
+		else {
+			for(var i = 0; i < segments.size(); i++) {
+				if(i == 0) {
+					result.add(segments.get(i).toFirstUpper)
+				} else {
+					result.add(segments.get(i))
+				}
+			}
+		}
+		
+		return result
 	}
 }

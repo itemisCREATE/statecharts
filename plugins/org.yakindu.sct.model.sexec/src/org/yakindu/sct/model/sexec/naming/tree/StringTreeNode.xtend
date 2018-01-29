@@ -79,7 +79,7 @@ class StringTreeNode {
 			return newNode;
 		}
 
-		var firstString = sList.get(0); // first element to search in own children. If not found, create new one.
+		var firstString = sList.get(0) ?: ""; // first element to search in own children. If not found, create new one.
 		var rest = sList.subList(1, sList.size()); // the rest of the array that the child's addStringList function is called with
 
 		for (child : children) // search for child that fits
