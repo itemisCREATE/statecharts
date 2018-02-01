@@ -32,7 +32,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -252,7 +251,16 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		// applies only for readonly variable definitions
 		if (!definition.isReadonly())
 			return;
-		warning(String.format(STextValidationMessages.DECLARATION_DEPRECATED, "readonly"), StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE);
+		ICompositeNode definitionNode = NodeModelUtils.getNode(definition);
+		String tokenText = NodeModelUtils.getTokenText(definitionNode);
+
+		if (tokenText == null || tokenText.isEmpty())
+			return;
+		if (tokenText.contains(TypesPackage.Literals.PROPERTY__READONLY.getName())) {
+			warning(String.format(STextValidationMessages.DECLARATION_DEPRECATED,
+					TypesPackage.Literals.PROPERTY__READONLY.getName()), definition,
+					TypesPackage.Literals.PROPERTY__READONLY);
+		}
 	}
 
 	@Check(CheckType.FAST)
@@ -260,8 +268,15 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		// applies only for external variable definitions
 		if (!definition.isExternal())
 			return;
-		warning(String.format(STextValidationMessages.DECLARATION_DEPRECATED, "external"), StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE);
-
+		ICompositeNode definitionNode = NodeModelUtils.getNode(definition);
+		String tokenText = NodeModelUtils.getTokenText(definitionNode);
+		if (tokenText == null || tokenText.isEmpty())
+			return;
+		if (tokenText.contains(TypesPackage.Literals.PROPERTY__EXTERNAL.getName())) {
+			warning(String.format(STextValidationMessages.DECLARATION_DEPRECATED,
+					TypesPackage.Literals.PROPERTY__EXTERNAL.getName()), definition,
+					TypesPackage.Literals.PROPERTY__EXTERNAL);
+		}
 	}
 
 	@Check(CheckType.NORMAL)
@@ -734,29 +749,15 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 	@Check(CheckType.FAST)
 	public void checkDeprecatedLocalEventDefinition(EventDefinition event) {
+		// applies only for local event definitions
 		if (event.eContainer() instanceof InternalScope && event.getDirection() == Direction.LOCAL) {
-			ICompositeNode findActualNodeFor = NodeModelUtils.findActualNodeFor(event);
-			while (findActualNodeFor.getFirstChild() != null) {
-				if (findActualNodeFor != null) {
-					INode node = findActualNodeFor.getFirstChild();
-					if (node != null) {
-						INode nextNode = node.getNextSibling();
-						EnumLiteralDeclaration literal = null;
-						if (node != null && node.getGrammarElement() instanceof EnumLiteralDeclaration) {
-							literal = (EnumLiteralDeclaration) node.getGrammarElement();
-						} else if (nextNode != null && nextNode.getGrammarElement() instanceof EnumLiteralDeclaration) {
-							literal = (EnumLiteralDeclaration) nextNode.getGrammarElement();
-						}
-						if (literal != null && Direction.LOCAL.getLiteral().equalsIgnoreCase(literal.getLiteral().getValue())) {
-							warning(String.format(STextValidationMessages.DECLARATION_DEPRECATED, literal.getLiteral().getValue()), event, TypesPackage.Literals.EVENT__DIRECTION);
-							return;
-						}
-					}
-				}
-				if (findActualNodeFor.getFirstChild() instanceof ICompositeNode)
-					findActualNodeFor = (ICompositeNode) findActualNodeFor.getFirstChild();
-				else
-					return;
+			ICompositeNode definitionNode = NodeModelUtils.getNode(event);
+			String tokenText = NodeModelUtils.getTokenText(definitionNode);
+			if (tokenText == null || tokenText.isEmpty())
+				return;
+			if (tokenText.contains(Direction.LOCAL.getLiteral())) {
+				warning(String.format(STextValidationMessages.DECLARATION_DEPRECATED, Direction.LOCAL.getLiteral()), event,
+						TypesPackage.Literals.EVENT__DIRECTION);
 			}
 		}
 	}
