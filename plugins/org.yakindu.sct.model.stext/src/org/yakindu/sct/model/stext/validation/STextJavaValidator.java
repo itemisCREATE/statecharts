@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -244,6 +245,25 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				}
 			}
 		}
+	}
+
+	@Check(CheckType.FAST)
+	public void checkReadOnlyValueDefinitionExpression(VariableDefinition definition) {
+		// applies only for readonly variable definitions
+		if (!definition.isReadonly())
+			return;
+		warning("The keyword 'readonly' is deprecated. Use 'const' for constant definitions instead.",
+				StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+				((Scope) definition.eContainer()).getVariables().indexOf(definition));
+	}
+
+	@Check(CheckType.FAST)
+	public void checkExternalValueDefinitionExpression(VariableDefinition definition) {
+		// applies only for external variable definitions
+		if (!definition.isExternal())
+			return;
+		warning("The keyword 'external' is deprecated. Can be removed.",
+				StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE);
 	}
 
 	@Check(CheckType.NORMAL)
@@ -711,6 +731,35 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 		if (event.eContainer() instanceof InternalScope && event.getDirection() != Direction.LOCAL) {
 			error(IN_OUT_DECLARATIONS, TypesPackage.Literals.EVENT__DIRECTION);
+		}
+	}
+
+	@Check(CheckType.FAST)
+	public void checkDeprecatedLocalEventDefinition(EventDefinition event) {
+		if (event.eContainer() instanceof InternalScope && event.getDirection() == Direction.LOCAL) {
+			ICompositeNode findActualNodeFor = NodeModelUtils.findActualNodeFor(event);
+			while (findActualNodeFor.getFirstChild() != null) {
+				if (findActualNodeFor != null) {
+					INode node = findActualNodeFor.getFirstChild();
+					if (node != null) {
+						INode nextNode = node.getNextSibling();
+						EnumLiteralDeclaration literal = null;
+						if (node != null && node.getGrammarElement() instanceof EnumLiteralDeclaration) {
+							literal = (EnumLiteralDeclaration) node.getGrammarElement();
+						} else if (nextNode != null && nextNode.getGrammarElement() instanceof EnumLiteralDeclaration) {
+							literal = (EnumLiteralDeclaration) nextNode.getGrammarElement();
+						}
+						if (literal != null && Direction.LOCAL.getLiteral().equalsIgnoreCase(literal.getLiteral().getValue())) {
+							warning("The keyword 'local' is deprecated. Can be removed.", event, TypesPackage.Literals.EVENT__DIRECTION);
+							return;
+						}
+					}
+				}
+				if (findActualNodeFor.getFirstChild() instanceof ICompositeNode)
+					findActualNodeFor = (ICompositeNode) findActualNodeFor.getFirstChild();
+				else
+					return;
+			}
 		}
 	}
 
