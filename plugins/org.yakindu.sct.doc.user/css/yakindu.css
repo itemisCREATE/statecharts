@@ -278,3 +278,44 @@ body.eclipsehelp {
     padding-left: 0em;
     margin-bottom: 0ex;
 }
+
+.body-container .primary .web-link {
+    background: #4178f0;
+    color: #fff;
+    padding: 10px 10px 10px 50px;
+    display: block;
+    position: relative;
+}
+
+.body-container .primary .web-link::before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    height: 20px;
+    width: 30px;
+    border-right: 1px solid #fff;
+    background: url(http://info.itemis.com/hubfs/Corporate_Website/itemis-cta-iconset.png?t=1504179064344) no-repeat -660px -46px transparent;
+    background-size: 800px 600px;
+}
+
+.body-container .primary .web-link a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+/* Add permalinks to headlines: */
+.permalink:after {
+    content: " 🔗 ";
+    font-size-adjust: 0.3;
+}
+
+.permalink {
+    visibility: hidden;
+    text-decoration: none;
+}
+
+h1:hover .permalink, h2:hover .permalink, h3:hover .permalink, h4:hover .permalink, h5:hover .permalink, h6:hover .permalink
+    {
+    visibility: visible;
+    text-decoration: none;
+}
