@@ -13,6 +13,7 @@ import java.util.Map;
 import org.eclipse.mylyn.wikitext.parser.Attributes;
 import org.eclipse.mylyn.wikitext.parser.LinkAttributes;
 import org.eclipse.mylyn.wikitext.parser.builder.HtmlDocumentBuilder;
+import org.eclipse.mylyn.wikitext.util.XmlStreamWriter;
 
 /**
  * <p>
@@ -411,6 +412,15 @@ public class HubspotDocumentBuilder extends HtmlDocumentBuilder {
 		if (!isEarlySeparator) {
 			headings.add(currentHeading);
 			isProcessingHeading = false;
+
+			/* Write the permalink: */
+			final XmlStreamWriter w = super.getWriter();
+			w.writeStartElement("a");
+			w.writeAttribute("href", '#' + currentHeading.getId());
+			w.writeAttribute("class", "permalink");
+			w.writeAttribute("title", "Permalink to \"" + currentHeading.getTitle() + "\"");
+			w.writeEndElement();
+
 			super.endHeading();
 		}
 	}
