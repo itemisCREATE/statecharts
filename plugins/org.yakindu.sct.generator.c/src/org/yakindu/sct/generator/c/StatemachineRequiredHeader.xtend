@@ -50,8 +50,8 @@ class StatemachineRequiredHeader implements IContentTemplate {
 		
 		«IF timed»
 			This is a state machine uses time events which require access to a timing service. Thus the function prototypes:
-				- «type.toFirstLower»_setTimer and
-				- «type.toFirstLower»_unsetTimer
+				- «setTimerFctID» and
+				- «unsetTimerFctID»
 			are defined.
 			
 		«ENDIF»
@@ -85,14 +85,14 @@ class StatemachineRequiredHeader implements IContentTemplate {
 			\time_ms The time in milli seconds
 			\periodic Indicates the the time event must be raised periodically until the timer is unset 
 		*/
-		extern void «type.toFirstLower»_setTimer(«scHandleDecl», const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
+		extern void «setTimerFctID»(«scHandleDecl», const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 
 		/*! This function has to unset timers for the time events that are required by the state machine. */
 		/*! 
 			This function will be called for each time event taht is relevant for a state when a state will be left.
 			\param evid An unique identifier of the event.
 		*/
-		extern void «type.toFirstLower»_unsetTimer(«scHandleDecl», const sc_eventid evid);
+		extern void «unsetTimerFctID»(«scHandleDecl», const sc_eventid evid);
 		«ENDIF»
 		
 		
@@ -102,12 +102,12 @@ class StatemachineRequiredHeader implements IContentTemplate {
 		 */
 		«IF entry.tracingEnterState»
 			/*! This function is called when a state is entered. */
-			extern void «type.toFirstLower»_stateEntered(«scHandleDecl», const «statesEnumType» state);
+			extern void «enterStateTracingFctID»(«scHandleDecl», const «statesEnumType» state);
 		«ENDIF»
 		
 		«IF entry.tracingExitState»
 			/*! This function is called when a state is exited. */
-			extern void «type.toFirstLower»_stateExited(«scHandleDecl», const «statesEnumType» state);
+			extern void «exitStateTracingFctID»(«scHandleDecl», const «statesEnumType» state);
 		«ENDIF»
 		«ENDIF»
 		

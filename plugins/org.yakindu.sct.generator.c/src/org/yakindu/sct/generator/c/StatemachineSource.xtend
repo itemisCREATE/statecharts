@@ -95,7 +95,7 @@ class StatemachineSource implements IContentTemplate {
 	'''
 	
 	def initFunction(ExecutionFlow it) '''
-		void «functionPrefix»init(«scHandleDecl»)
+		void «initFctID»(«scHandleDecl»)
 		{
 			«initFunctionBody(it)»
 		}
@@ -128,14 +128,14 @@ class StatemachineSource implements IContentTemplate {
 	
 	
 	def enterFunction(ExecutionFlow it) '''
-		void «functionPrefix»enter(«scHandleDecl»)
+		void «enterFctID»(«scHandleDecl»)
 		{
 			«enterSequences.defaultSequence.code»
 		}
 	'''
 	
 	def exitFunction(ExecutionFlow it) '''
-		void «type.toFirstLower»_exit(«scHandleDecl»)
+		void «exitFctID»(«scHandleDecl»)
 		{
 			«exitSequence.code»
 		}
@@ -174,7 +174,7 @@ class StatemachineSource implements IContentTemplate {
 	'''
 	
 	def runCycleFunction(ExecutionFlow it) '''
-		void «functionPrefix»runCycle(«scHandleDecl»)
+		void «runCycleFctID»(«scHandleDecl»)
 		{
 			
 			«clearOutEventsFctID»(«scHandle»);

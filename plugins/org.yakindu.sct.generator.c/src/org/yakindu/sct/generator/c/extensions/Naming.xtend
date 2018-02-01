@@ -150,11 +150,11 @@ class Naming {
 	}
 
 	def clearInEventsFctID(ExecutionFlow it) {
-		functionPrefix + "clearInEvents"
+		"clearInEvents"
 	}
 
 	def clearOutEventsFctID(ExecutionFlow it) {
-		functionPrefix + "clearOutEvents"
+		"clearOutEvents"
 	}
 
 	def dispatch String null_state(ExecutionFlow it) {
@@ -185,6 +185,10 @@ class Naming {
 		}
 		return null;
 	}
+	
+	def bool() {
+		"sc_boolean"
+	}
 
 	def constantName(VariableDefinition it) {
 		(flow.type + separator + scope.type + separator + name.asEscapedIdentifier).toUpperCase
@@ -205,7 +209,51 @@ class Naming {
 	def isFinalFctID(ExecutionFlow it) {
 		functionPrefix + "isFinal"
 	}
+	
+	def initFctID(ExecutionFlow it) {
+		functionPrefix + "init"
+	}
+	
+	def enterFctID(ExecutionFlow it) {
+		functionPrefix + "enter"
+	}
 
+	def exitFctID(ExecutionFlow it) {
+		functionPrefix + "exit"
+	}
+	
+	def runCycleFctID(ExecutionFlow it) {
+		functionPrefix + "runCycle"
+	}
+	
+	def eventValueVariable(EventDefinition it) {
+		name.asIdentifier.value
+	}
+	
+	def timeEventRaisedFlag(TimeEvent it) {
+		shortName.raised
+	}
+	
+	def eventRaisedFlag(EventDefinition it) {
+		 name.asIdentifier.raised
+	}
+	
+	def setTimerFctID(ExecutionFlow it) {
+		functionPrefix + "setTimer"
+	}
+	
+	def unsetTimerFctID(ExecutionFlow it) {
+		functionPrefix + "unsetTimer"
+	}
+	
+	def enterStateTracingFctID(ExecutionFlow it) {
+		functionPrefix + "stateEntered"
+	}
+	
+	def exitStateTracingFctID(ExecutionFlow it) {
+		functionPrefix + "stateExited"
+	}
+ 
 	def asRaiser(EventDefinition it) {
 		scope.functionPrefix(it) + separator + 'raise' + separator + name.asIdentifier.toFirstLower
 	}
@@ -228,6 +276,14 @@ class Naming {
 
 	def asFunction(OperationDefinition it) {
 		scope.functionPrefix(it) + separator + name.asIdentifier.toFirstLower
+	}
+	
+	def variable(VariableDefinition it) {
+		name.asEscapedIdentifier
+	}
+	
+	def stateName(ExecutionState it) {
+		shortName
 	}
 
 	def raised(CharSequence it) { it + separator + 'raised' }
