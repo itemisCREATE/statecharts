@@ -252,9 +252,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		// applies only for readonly variable definitions
 		if (!definition.isReadonly())
 			return;
-		warning("The keyword 'readonly' is deprecated. Use 'const' for constant definitions instead.",
-				StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-				((Scope) definition.eContainer()).getVariables().indexOf(definition));
+		warning(String.format(STextValidationMessages.DECLARATION_DEPRECATED, "readonly"), StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE);
 	}
 
 	@Check(CheckType.FAST)
@@ -262,8 +260,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		// applies only for external variable definitions
 		if (!definition.isExternal())
 			return;
-		warning("The keyword 'external' is deprecated. Can be removed.",
-				StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE);
+		warning(String.format(STextValidationMessages.DECLARATION_DEPRECATED, "external"), StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE);
+
 	}
 
 	@Check(CheckType.NORMAL)
@@ -750,7 +748,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 							literal = (EnumLiteralDeclaration) nextNode.getGrammarElement();
 						}
 						if (literal != null && Direction.LOCAL.getLiteral().equalsIgnoreCase(literal.getLiteral().getValue())) {
-							warning("The keyword 'local' is deprecated. Can be removed.", event, TypesPackage.Literals.EVENT__DIRECTION);
+							warning(String.format(STextValidationMessages.DECLARATION_DEPRECATED, literal.getLiteral().getValue()), event, TypesPackage.Literals.EVENT__DIRECTION);
 							return;
 						}
 					}

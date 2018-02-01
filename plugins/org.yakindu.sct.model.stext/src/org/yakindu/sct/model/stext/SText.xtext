@@ -67,7 +67,7 @@ enum Direction returns types::Direction:
 	LOCAL='local' | IN='in' | OUT='out';
 
 VariableDefinition:
-	{VariableDefinition} (((const?='const'|'const''var') |  (readonly?='readonly')? & (external?='external')? 'var')) name=XID ':' typeSpecifier=TypeSpecifier
+	{VariableDefinition} (const?='const'|'var') ((readonly?='readonly')? & (external?='external')?) name=XID ':' typeSpecifier=TypeSpecifier
 	('=' initialValue=Expression)?;  
 	
 TypeAliasDefinition:
@@ -175,7 +175,7 @@ enum TimeUnit:
 	second='s' | millisecond='ms' | microsecond='us' | nanosecond='ns';
 
 XID:
-	ID | 'namespace' | 'interface' | 'internal' | 'event' | 'in' | 'out' | 'var' | 'readonly' |
+	ID | 'namespace' | 'interface' | 'internal' | 'event' | 'local' | 'in' | 'out' | 'var' | 'readonly' | 'external' |
 	'operation' | 'default' | 'else' | 'entry' | 'exit' | 'always' | 'oncycle' | 'raise' | 'valueof' | 'active';
 
 FQN:
