@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -24,6 +25,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.core.services.ViewService;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.Bounds;
 import org.eclipse.gmf.runtime.notation.Diagram;
@@ -31,6 +34,8 @@ import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.Style;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.ui.IEditorPart;
+import org.yakindu.base.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.ReactionProperty;
@@ -46,8 +51,10 @@ import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
+import org.yakindu.sct.ui.editor.factories.StateViewFactory;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
+import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 
 /**
  * 
@@ -308,10 +315,44 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 		Diagram subdiagram = ViewService.createDiagram(contextElement, StatechartDiagramEditor.ID, preferencesHint);
 		View figureCompartment = ViewUtil.getChildBySemanticHint(contextView, SemanticHints.STATE_FIGURE_COMPARTMENT);
 		getResource().getContents().add(subdiagram);
+
+		boolean isHorizontal = isHorizontal(figureCompartment);
+		int offset = 0;
 		while (figureCompartment.getChildren().size() > 0) {
-			subdiagram.insertChild((View) figureCompartment.getChildren().get(0));
+			Node child = (Node) figureCompartment.getChildren().get(0);
+			Rectangle actualBounds = getActualBounds(child);
+			if (actualBounds != Rectangle.SINGLETON) {
+				Bounds modelBounds = (Bounds) child.getLayoutConstraint();
+				modelBounds.setWidth(actualBounds.width());
+				modelBounds.setHeight(actualBounds.height());
+				if (isHorizontal) {
+					modelBounds.setX(offset);
+					offset += actualBounds.width();
+				} else {
+					modelBounds.setY(offset);
+					offset += actualBounds.height();
+				}
+			}
+
+			subdiagram.insertChild(child);
 		}
 		return subdiagram;
+	}
+
+	protected boolean isHorizontal(View child) {
+		BooleanValueStyle style = GMFNotationUtil.getBooleanValueStyle((View) child.eContainer(),
+				StateViewFactory.ALIGNMENT_ORIENTATION);
+		return (style != null) ? style.isBooleanValue() : true;
+	}
+
+	protected Rectangle getActualBounds(Node child) {
+		IEditorPart lastActiveEditor = ActiveEditorTracker.getLastActiveEditor();
+		if (lastActiveEditor instanceof StatechartDiagramEditor) {
+			IDiagramGraphicalViewer viewer = ((StatechartDiagramEditor) lastActiveEditor).getDiagramGraphicalViewer();
+			IGraphicalEditPart editPart = (IGraphicalEditPart) viewer.getEditPartRegistry().get(child);
+			return editPart.getFigure().getBounds();
+		}
+		return Rectangle.SINGLETON;
 	}
 
 	protected void setPreferredSize() {
