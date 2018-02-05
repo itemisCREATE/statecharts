@@ -642,7 +642,7 @@ h3(#edit_changing_the_repository_location). Changing the repository location
 
 You can change the location used by the example wizard to store the online repository's local clone.
 
-# When the example wizard shows the _Download_ button on its first start, click on the link _"change the storage location here"_. The example wizard's preferences dialog opens. Alternatively, open _Window → Preferences_ and select _YAKINDU SCT → Example Wizard_.
+# When the example wizard shows the _Download_ button on its first start, click on the link _"change the storage location here"_. The example wizard's preferences dialog opens. Alternatively, open _Window → Preferences_ and select _YAKINDU SCT → Example wizard_.
 # On the examples preferences page, enter the desired directory into the _Storage Location_ text field.
 # Click on _OK_. The dialog closes.
 
@@ -688,7 +688,7 @@ Downloading the repository as a ZIP archive:
 # Copy the _examples-release.zip_ file to the computer without Internet access and continue with the following steps on that machine.
 # Unpack the archive file. A directory named _examples-release_ is created, containing the YAKINDU Statechart Tools examples repository.
 # In YAKINDU Statechart Tools, select _Window → Preferences_. The _preferences_ dialog opens.
-# In the _preferences_ dialog, navigate to _YAKINDU SCT → Example Wizard_.
+# In the _preferences_ dialog, navigate to _YAKINDU SCT → Example wizard_.
 # Click on _Browse..._, and select the folder that you just extracted from the ZIP file, then click _OK_.
 # On the next try, the example wizard will now show a catalogue of YAKINDU Statechart Tools examples.
 
@@ -701,7 +701,7 @@ Alternatively, you can clone the repository. Cloning the examples repository con
 # In the _New Example_ dialog, select _YAKINDU statechart examples_ and click on _Next >_. The example wizard opens.
 # When the example wizard is opened for the first time, there are no examples on the local disk yet.
 # In YAKINDU Statechart Tools, select _Window → Preferences_. The _preferences_ dialog opens.
-# In the _preferences_ dialog, navigate to _YAKINDU SCT → Example Wizard_.
+# In the _preferences_ dialog, navigate to _YAKINDU SCT → Example wizard_.
 # Click on _Browse..._, and select the folder you just cloned, then click _OK_.
 # On the next try, the example wizard will show a catalogue of YAKINDU Statechart Tools examples.
 
@@ -745,9 +745,9 @@ In the subsequent sections we will quickly walk through the preferences.
 h3(#edit_diagram_appearance). Diagram appearance
 
 p(#edit_fig_preferences_diagram_appearance). 
-!images/docu_preferences_010_diagram_appearance_01.png(Preferences: Diagram Appearance)!
+!images/docu_preferences_010_diagram_appearance_01.png(Preferences: Diagram appearance)!
 
-p=. Preferences: Diagram Appearance
+p=. Preferences: Diagram appearance
 
 
 h4(#edit_colors_and_line_styles). Colors and line styles

@@ -45,7 +45,7 @@ You have developed and tested your statechart model, and now you need it as a C,
 
 As an example, we will take the light switch statechart and generate Java source code from it. Please proceed as follows:
 
-# In the project explorer, right-click on _light_switch.sct_ and select _New → Code Generator Model_ in the context menu. <p>!(standard-image)images/tuto_5min_110_new_code_generator_model.png(Creating a new code generator model)!</p>
+# In the project explorer, right-click on _light_switch.sct_ and select _New → Code generator model_ in the context menu. <p>!(standard-image)images/tuto_5min_110_new_code_generator_model.png(Creating a new code generator model)!</p>
 # In the dialog, replace @default.sgen@ by @light_switch.sgen@, then click _Next >_.
 # In the next dialog, check the checkbox left from _light_switch.sct_, then click _Finish_.
 # Java classes implementing the statechart model are generated. You can find the generated source code in the folders _src_ and _src-gen_ within the _light_switch_ project. <p>!(standard-image)images/tuto_5min_140_generated_java_source_code.png(Generated Java source code)!</p>
@@ -437,13 +437,13 @@ h3(#tutorial_creating-a-generator-model). Creating a generator model
 
 For code generation, YAKINDU Statechart Tools use a textual generator model called *SGen*. The generator model holds key parameters for the code generation process and allows for the latter's customization.
 
-The first step to code generation is to create a new SGen model. Right-click on the _model_ folder in the project explorer and select _New → Code Generator Model_ from the context menu.
+The first step to code generation is to create a new SGen model. Right-click on the _model_ folder in the project explorer and select _New → Code generator model_ from the context menu.
 
-!(standard-image)images/tuto_callhandling_200_generation_create_generator_model.png(Selecting "New → Code Generator Model" in the context menu)!
+!(standard-image)images/tuto_callhandling_200_generation_create_generator_model.png(Selecting "New → Code generator model" in the context menu)!
 
-p=. Selecting _New → Code Generator Model_ in the context menu
+p=. Selecting _New → Code generator model_ in the context menu
 
-The _YAKINDU Generator Model_ wizard opens. Change the _File name_ to *CallHandling.sgen*, then click _Next &gt;_.
+The _YAKINDU generator model_ wizard opens. Change the _File name_ to *CallHandling.sgen*, then click _Next &gt;_.
 
 !(standard-image)images/tuto_callhandling_210_generation_new_sgen_model_1.png(Selecting a filename for the generator model)!
 

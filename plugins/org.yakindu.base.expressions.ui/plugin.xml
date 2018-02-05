@@ -14,7 +14,7 @@
             category="org.yakindu.base.expressions.Expressions"
             class="org.yakindu.base.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
             id="org.yakindu.base.expressions.Expressions.coloring"
-            name="Syntax Coloring">
+            name="Syntax coloring">
             <keywordReference id="org.yakindu.base.expressions.ui.keyword_Expressions"/>
         </page>
         <page
