@@ -86,7 +86,7 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 		} else if (element instanceof ExecutionSlot) {
 			Object value = ((ExecutionSlot) element).getValue();
 			if (value != null) {
-				if(isReadOnly) {
+				if(!((ExecutionSlot)element).isWritable() || isReadOnly) {
 					cell.setText(getCellTextValue(element, value));
 				}
 				else if (isPrimitiveType(element)) {
