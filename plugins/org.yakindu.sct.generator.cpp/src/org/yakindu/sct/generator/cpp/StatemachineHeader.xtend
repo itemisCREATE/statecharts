@@ -225,10 +225,6 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		''''''	
 	}
 	
-	override dispatch scopeTypeDeclMember(VariableDefinition it) '''
-		«IF type.name != 'void'»«IF const»static const «ENDIF»«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
-	'''
-
 	def createOCBInterface(StatechartScope scope) {
 		'''
 			«IF scope.hasOperations»

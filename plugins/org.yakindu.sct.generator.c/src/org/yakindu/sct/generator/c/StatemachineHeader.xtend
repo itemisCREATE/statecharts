@@ -162,21 +162,6 @@ class StatemachineHeader implements IContentTemplate {
 		} «statesEnumType»;
 	'''
 
-	def dispatch scopeTypeDeclMember(EventDefinition it) '''
-		«bool» «eventRaisedFlag»;
-		«IF type != null && type.name != 'void'»«typeSpecifier.targetLanguageName» «eventValueVariable»;«ENDIF»
-	'''
-
-	def dispatch scopeTypeDeclMember(TimeEvent it) '''
-		«bool» «timeEventRaisedFlag»;
-	'''
-
-	def dispatch scopeTypeDeclMember(VariableDefinition it) '''
-		«IF type.name != 'void' && !isConst»«typeSpecifier.targetLanguageName» «variable»;«ENDIF»
-	'''
-	
-	def dispatch scopeTypeDeclMember(Declaration it) ''''''
-
 	def scopeTypeDecl(Scope scope) '''
 		«val typeRelevantDeclarations = scope.typeRelevantDeclarations.toList»
 		«IF !typeRelevantDeclarations.empty»

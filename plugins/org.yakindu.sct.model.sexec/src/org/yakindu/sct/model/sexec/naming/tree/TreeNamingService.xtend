@@ -11,6 +11,7 @@
 
 package org.yakindu.sct.model.sexec.naming.tree
 
+import com.google.inject.name.Named
 import java.util.ArrayList
 import java.util.List
 import java.util.Map
@@ -40,7 +41,7 @@ import org.yakindu.sct.model.stext.stext.TimeEventSpec
  */
 class TreeNamingService implements INamingService {
 	@Accessors protected int maxLength = 0;
-	@Accessors protected char separator = '_';
+	@Inject @Named("Separator") @Accessors protected char separator = '_';
 
 	@Inject extension SExecExtensions
 	@Inject extension StatechartExtensions

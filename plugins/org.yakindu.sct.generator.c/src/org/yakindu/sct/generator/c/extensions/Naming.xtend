@@ -11,6 +11,7 @@
 package org.yakindu.sct.generator.c.extensions
 
 import com.google.inject.Inject
+import com.google.inject.name.Named
 import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.types.Declaration
@@ -24,10 +25,10 @@ import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sexec.naming.INamingService
-import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.ScopedElement
 import org.yakindu.sct.model.sgraph.State
+import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
@@ -36,18 +37,15 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class Naming {
+	@Inject @Named("Separator") protected String sep;
 
-	@Inject extension Navigation
+	@Inject protected extension Navigation
 
-	@Inject extension ICodegenTypeSystemAccess
+	@Inject protected extension ICodegenTypeSystemAccess
 
-	@Inject private StextNameProvider provider
+	@Inject protected StextNameProvider provider
 
-	@Inject extension INamingService
-
-	@Inject GeneratorEntry entry
-
-	@Inject extension GenmodelEntries
+	@Inject protected extension INamingService
 
 	public static final String NULL_STRING = "null";
 
@@ -56,10 +54,7 @@ class Naming {
 	}
 
 	def module(ExecutionFlow it) {
-		if (entry.moduleName.nullOrEmpty) {
-			return name.asIdentifier.toFirstUpper
-		}
-		return entry.moduleName.toFirstUpper
+		type
 	}
 
 	def filterNullOrEmptyAndJoin(Iterable<CharSequence> it) {
@@ -103,10 +98,7 @@ class Naming {
 	}
 
 	def dispatch String type(ExecutionFlow it) {
-		if (entry.statemachinePrefix.nullOrEmpty) {
-			return name.asIdentifier.toFirstUpper
-		}
-		return entry.statemachinePrefix.toFirstUpper
+		name.asIdentifier.toFirstUpper
 	}
 
 	def dispatch instance(InterfaceScope it) {
@@ -122,11 +114,6 @@ class Naming {
 	}
 
 	def functionPrefix(Scope it, Declaration decl) {
-		// only non-unique declarations in different scopes will be prefixed with the name of the scope
-		if (!isUniqueName(it, decl) && !entry.statemachinePrefix.nullOrEmpty)
-			return entry.statemachinePrefix + separator + it.instance.toFirstUpper
-		if (!entry.statemachinePrefix.nullOrEmpty)
-			return entry.statemachinePrefix
 		return type.toFirstLower
 	}
 
@@ -135,14 +122,11 @@ class Naming {
 	}
 
 	def functionPrefix(ExecutionFlow it) {
-		if (!entry.statemachinePrefix.nullOrEmpty) {
-			return entry.statemachinePrefix + separator
-		}
 		type.toFirstLower + separator
 	}
 
 	def separator() {
-		var sep = entry.separator
+		var sep = this.sep
 		if (sep.nullOrEmpty) {
 			sep = "_"
 		}
@@ -186,9 +170,37 @@ class Naming {
 		return null;
 	}
 	
+	def Statechart statechart(EObject element) {
+		var ret = element;
+
+		while (ret !== null) {
+			if (ret instanceof Statechart) {
+				return ret as Statechart
+			} else {
+				ret = ret.eContainer;
+			}
+		}
+		return null;
+	}
+	
 	def bool() {
 		"sc_boolean"
 	}
+	
+	def dispatch scopeTypeDeclMember(EventDefinition it) '''
+		«bool» «eventRaisedFlag»;
+		«IF type !== null && type.name != 'void'»«typeSpecifier.targetLanguageName» «eventValueVariable»;«ENDIF»
+	'''
+
+	def dispatch scopeTypeDeclMember(TimeEvent it) '''
+		«bool» «timeEventRaisedFlag»;
+	'''
+
+	def dispatch scopeTypeDeclMember(VariableDefinition it) '''
+		«IF type.name != 'void' && !isConst»«typeSpecifier.targetLanguageName» «variable»;«ENDIF»
+	'''
+	
+	def dispatch scopeTypeDeclMember(Declaration it) ''''''
 
 	def constantName(VariableDefinition it) {
 		(flow.type + separator + scope.type + separator + name.asEscapedIdentifier).toUpperCase
@@ -255,27 +267,31 @@ class Naming {
 	}
  
 	def asRaiser(EventDefinition it) {
-		scope.functionPrefix(it) + separator + 'raise' + separator + name.asIdentifier.toFirstLower
+		accessFunction("raise")
 	}
 
 	def asRaised(EventDefinition it) {
-		scope.functionPrefix(it) + separator + 'israised' + separator + name.asIdentifier.toFirstLower
+		accessFunction("israised")
 	}
 
 	def asGetter(EventDefinition it) {
-		scope.functionPrefix(it) + separator + 'get' + separator + name.asIdentifier.toFirstLower + separator + 'value'
+		accessFunction("get").value
 	}
 
 	def asGetter(VariableDefinition it) {
-		scope.functionPrefix(it) + separator + 'get' + separator + name.asIdentifier.toFirstLower
+		accessFunction("get")
 	}
 
 	def asSetter(VariableDefinition it) {
-		scope.functionPrefix(it) + separator + 'set' + separator + name.asIdentifier.toFirstLower
+		accessFunction("set")
 	}
 
 	def asFunction(OperationDefinition it) {
 		scope.functionPrefix(it) + separator + name.asIdentifier.toFirstLower
+	}
+	
+	def accessFunction(Declaration it, String funcName) {
+		scope.functionPrefix(it) + separator + funcName + separator + name.asIdentifier.toFirstLower
 	}
 	
 	def variable(VariableDefinition it) {
