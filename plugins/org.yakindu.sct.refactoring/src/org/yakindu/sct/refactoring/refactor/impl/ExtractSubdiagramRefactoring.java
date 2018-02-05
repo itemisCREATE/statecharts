@@ -318,22 +318,24 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 
 		boolean isHorizontal = isHorizontal(figureCompartment);
 		int offset = 0;
+		int subregions = figureCompartment.getChildren().size();
 		while (figureCompartment.getChildren().size() > 0) {
 			Node child = (Node) figureCompartment.getChildren().get(0);
-			Rectangle actualBounds = getActualBounds(child);
-			if (actualBounds != Rectangle.SINGLETON) {
-				Bounds modelBounds = (Bounds) child.getLayoutConstraint();
-				modelBounds.setWidth(actualBounds.width());
-				modelBounds.setHeight(actualBounds.height());
-				if (isHorizontal) {
-					modelBounds.setX(offset);
-					offset += actualBounds.width();
-				} else {
-					modelBounds.setY(offset);
-					offset += actualBounds.height();
+			if (subregions > 1) {
+				Rectangle actualBounds = getActualBounds(child);
+				if (actualBounds != Rectangle.SINGLETON) {
+					Bounds modelBounds = (Bounds) child.getLayoutConstraint();
+					modelBounds.setWidth(actualBounds.width());
+					modelBounds.setHeight(actualBounds.height());
+					if (isHorizontal) {
+						modelBounds.setX(offset);
+						offset += actualBounds.width();
+					} else {
+						modelBounds.setY(offset);
+						offset += actualBounds.height();
+					}
 				}
 			}
-
 			subdiagram.insertChild(child);
 		}
 		return subdiagram;
