@@ -20,6 +20,7 @@ import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.internal.commands.SetConnectionBendpointsCommand;
+import org.yakindu.base.xtext.utils.gmf.commands.SetLabelsOffsetOperation;
 
 /**
  * This class allows to update edge label Node position when updating

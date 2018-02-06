@@ -9,7 +9,7 @@
  *    Obeo - initial API and implementation
  *******************************************************************************/
 
-package org.yakindu.sct.ui.editor.commands;
+package org.yakindu.base.xtext.utils.gmf.commands;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -159,7 +159,7 @@ public class SetLabelsOffsetOperation {
 		}
 	}
 
-	protected boolean isEdgeWithObliqueRoutingStyle(ConnectionEditPart part) {
+	public static boolean isEdgeWithObliqueRoutingStyle(org.eclipse.gef.ConnectionEditPart part) {
 		Edge edge = (Edge) part.getModel();
 		ConnectorStyle style = (ConnectorStyle) edge.getStyle(NotationPackage.Literals.CONNECTOR_STYLE);
 		if (style != null) {

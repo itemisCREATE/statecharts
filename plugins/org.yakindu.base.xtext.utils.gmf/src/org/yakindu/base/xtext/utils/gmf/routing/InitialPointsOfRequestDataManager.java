@@ -19,6 +19,7 @@ import org.eclipse.draw2d.geometry.Vector;
 import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gef.requests.LocationRequest;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
+import org.yakindu.base.xtext.utils.gmf.commands.SetLabelsOffsetOperation;
 import org.yakindu.base.xtext.utils.gmf.directedit.ExternalXtextLabelEditPart;
 
 /**
@@ -35,84 +36,84 @@ import org.yakindu.base.xtext.utils.gmf.directedit.ExternalXtextLabelEditPart;
  * @author <a href="mailto:laurent.redor@obeo.fr">Laurent Redor</a>
  */
 public class InitialPointsOfRequestDataManager {
-    /**
-     * The key used to store the initial points of the edge (before the feedback
-     * drawing).
-     */
-    private static final String INITIAL_POINTS_KEY = "InitialPointsManagerForEdgePolicy.initialPointsKey"; //$NON-NLS-1$
+	/**
+	 * The key used to store the initial points of the edge (before the feedback
+	 * drawing).
+	 */
+	private static final String INITIAL_POINTS_KEY = "InitialPointsManagerForEdgePolicy.initialPointsKey"; //$NON-NLS-1$
 
-    /** The list of points before feedback drawing. */
-    private PointList initialPoints;
+	/** The list of points before feedback drawing. */
+	private PointList initialPoints;
 
-    /**
-     * Store the initial points of the edge in the request (before feedback
-     * drawing). This data can be used later for computing the location of the
-     * labels of this edge in the command construction.<BR>
-     * This method also set the feedback data of the {@link EdgeLabelLocator} of
-     * the labels of the current connection to correctly draw the label feedback
-     * during the label move.
-     *
-     * @param request
-     *            the request in which to store the original points of the edge.
-     * @param connectionEditPart
-     *            the editPart of the edge
-     */
-    @SuppressWarnings("unchecked")
+	/**
+	 * Store the initial points of the edge in the request (before feedback
+	 * drawing). This data can be used later for computing the location of the
+	 * labels of this edge in the command construction.<BR>
+	 * This method also set the feedback data of the {@link EdgeLabelLocator} of the
+	 * labels of the current connection to correctly draw the label feedback during
+	 * the label move.
+	 *
+	 * @param request
+	 *            the request in which to store the original points of the edge.
+	 * @param connectionEditPart
+	 *            the editPart of the edge
+	 */
+	@SuppressWarnings("unchecked")
 	public void storeInitialPointsInRequest(LocationRequest request, ConnectionEditPart connectionEditPart) {
-        if (initialPoints == null) {
-            initialPoints = new PointList();
-            Connection connection = (Connection) connectionEditPart.getFigure();
-            for (int i = 0; i < connection.getPoints().size(); i++) {
-                initialPoints.addPoint(connection.getPoints().getPoint(i).getCopy());
-            }
+		if (initialPoints == null) {
+			initialPoints = new PointList();
+			Connection connection = (Connection) connectionEditPart.getFigure();
+			for (int i = 0; i < connection.getPoints().size(); i++) {
+				initialPoints.addPoint(connection.getPoints().getPoint(i).getCopy());
+			}
 
-            request.getExtendedData().put(INITIAL_POINTS_KEY, initialPoints);
-            List<?> children = connectionEditPart.getChildren();
-            for (Object child : children) {
-                if (child instanceof ExternalXtextLabelEditPart) {
-                    IFigure figure = ((ExternalXtextLabelEditPart) child).getFigure();
-                        Object currentConstraint = connection.getLayoutManager().getConstraint(figure);
-                        if (currentConstraint instanceof EdgeLabelLocator) {
-                            EdgeLabelLocator edgeLabelLocator = (EdgeLabelLocator) currentConstraint;
-                            edgeLabelLocator.setFeedbackData(initialPoints, new Vector(edgeLabelLocator.getOffset().x, edgeLabelLocator.getOffset().y), true);
-//                                    new ConnectionEditPartQuery(connectionEditPart).isEdgeWithObliqueRoutingStyle()); //TODO
-                        }
-                    }
-                }
-            }
-    }
+			request.getExtendedData().put(INITIAL_POINTS_KEY, initialPoints);
+			List<?> children = connectionEditPart.getChildren();
+			for (Object child : children) {
+				if (child instanceof ExternalXtextLabelEditPart) {
+					IFigure figure = ((ExternalXtextLabelEditPart) child).getFigure();
+					Object currentConstraint = connection.getLayoutManager().getConstraint(figure);
+					if (currentConstraint instanceof EdgeLabelLocator) {
+						EdgeLabelLocator edgeLabelLocator = (EdgeLabelLocator) currentConstraint;
+						edgeLabelLocator.setFeedbackData(initialPoints,
+								new Vector(edgeLabelLocator.getOffset().x, edgeLabelLocator.getOffset().y),
+								SetLabelsOffsetOperation.isEdgeWithObliqueRoutingStyle(connectionEditPart));
 
+					}
+				}
+			}
+		}
+	}
 
-    /**
-     * Reset the initial points stored in this manager and also erase the
-     * feedback data from all the {@link EdgeLabelLocator} of the labels of the
-     * current connection.
-     *
-     * @param connection
-     *            The connection from which to erase feedback data
-     */
-    public void eraseInitialPoints(Connection connection) {
-        initialPoints = null;
-        for (Object object : connection.getChildren()) {
-            if (object instanceof WrappingLabel) {
-                Object currentConstraint = connection.getLayoutManager().getConstraint((WrappingLabel) object);
-                if (currentConstraint instanceof EdgeLabelLocator) {
-                    ((EdgeLabelLocator) currentConstraint).eraseFeedbackData();
-                }
-            }
-        }
-    }
+	/**
+	 * Reset the initial points stored in this manager and also erase the feedback
+	 * data from all the {@link EdgeLabelLocator} of the labels of the current
+	 * connection.
+	 *
+	 * @param connection
+	 *            The connection from which to erase feedback data
+	 */
+	public void eraseInitialPoints(Connection connection) {
+		initialPoints = null;
+		for (Object object : connection.getChildren()) {
+			if (object instanceof WrappingLabel) {
+				Object currentConstraint = connection.getLayoutManager().getConstraint((WrappingLabel) object);
+				if (currentConstraint instanceof EdgeLabelLocator) {
+					((EdgeLabelLocator) currentConstraint).eraseFeedbackData();
+				}
+			}
+		}
+	}
 
-    /**
-     * Get the initial points list of the edge stored in the
-     * <code>request</code>.
-     *
-     * @param request
-     *            The request to query
-     * @return the original points list or null if no original points are stored
-     *         in this request.
-     */
-    public static PointList getOriginalPoints(LocationRequest request) {
-        return (PointList) request.getExtendedData().get(INITIAL_POINTS_KEY);
-    }
+	/**
+	 * Get the initial points list of the edge stored in the <code>request</code>.
+	 *
+	 * @param request
+	 *            The request to query
+	 * @return the original points list or null if no original points are stored in
+	 *         this request.
+	 */
+	public static PointList getOriginalPoints(LocationRequest request) {
+		return (PointList) request.getExtendedData().get(INITIAL_POINTS_KEY);
+	}
 }
