@@ -51,14 +51,18 @@ public class TransitionEditPart extends ConnectionNodeEditPart {
 
 	@Override
 	public void installEditPolicy(Object key, EditPolicy editPolicy) {
-		if (getConnectionFigure().getConnectionRouter() instanceof ForestRouter) {
-			super.installEditPolicy(EditPolicy.CONNECTION_BENDPOINTS_ROLE, new TreeConnectionBendpointEditPolicy());
-		} else if (getConnectionFigure().getConnectionRouter() instanceof OrthogonalRouter) {
-			super.installEditPolicy(EditPolicy.CONNECTION_BENDPOINTS_ROLE,
-					new InitialPointsConnectionBendpointEditPolicy(LineMode.ORTHOGONAL_FREE));
+		if (EditPolicy.CONNECTION_BENDPOINTS_ROLE.equals(key)) {
+			if (getConnectionFigure().getConnectionRouter() instanceof ForestRouter) {
+				super.installEditPolicy(EditPolicy.CONNECTION_BENDPOINTS_ROLE, new TreeConnectionBendpointEditPolicy());
+			} else if (getConnectionFigure().getConnectionRouter() instanceof OrthogonalRouter) {
+				super.installEditPolicy(EditPolicy.CONNECTION_BENDPOINTS_ROLE,
+						new InitialPointsConnectionBendpointEditPolicy(LineMode.ORTHOGONAL_FREE));
+			} else {
+				super.installEditPolicy(EditPolicy.CONNECTION_BENDPOINTS_ROLE,
+						new InitialPointsConnectionBendpointEditPolicy());
+			}
 		} else {
-			super.installEditPolicy(EditPolicy.CONNECTION_BENDPOINTS_ROLE,
-					new InitialPointsConnectionBendpointEditPolicy());
+			super.installEditPolicy(key, editPolicy);
 		}
 	}
 
