@@ -15,10 +15,13 @@ import static org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants.REQ_D
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.Request;
+import org.eclipse.gef.editparts.AbstractConnectionEditPart;
+import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.tools.DragEditPartsTrackerEx;
@@ -29,6 +32,7 @@ import org.eclipse.gmf.runtime.notation.ShapeStyle;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
 import org.yakindu.base.xtext.utils.gmf.figures.SyntaxColoringLabel;
+import org.yakindu.base.xtext.utils.gmf.routing.EdgeLabelLocator;
 import org.yakindu.base.xtext.utils.jface.viewers.XtextStyledTextCellEditor;
 
 /**
@@ -42,7 +46,9 @@ import org.yakindu.base.xtext.utils.jface.viewers.XtextStyledTextCellEditor;
 public abstract class ExternalXtextLabelEditPart extends LabelEditPart implements IXtextAwareEditPart {
 
 	protected abstract DirectEditManager createDirectEditManager();
+
 	protected abstract void setContext(Resource resource);
+
 	protected abstract void setLabelStyles();
 
 	public ExternalXtextLabelEditPart(final View view) {
@@ -75,9 +81,18 @@ public abstract class ExternalXtextLabelEditPart extends LabelEditPart implement
 		setLabelStyles();
 	}
 
+	@Override
+	public void refreshBounds() {
+		int dx = ((Integer) getStructuralFeatureValue(NotationPackage.eINSTANCE.getLocation_X())).intValue();
+		int dy = ((Integer) getStructuralFeatureValue(NotationPackage.eINSTANCE.getLocation_Y())).intValue();
+		Rectangle bounds = new Rectangle(dx, dy, -1, -1);
+		((AbstractGraphicalEditPart) getParent()).setLayoutConstraint(this, getFigure(), new EdgeLabelLocator(
+				((AbstractConnectionEditPart) getParent()).getConnectionFigure(), bounds, getKeyPoint()));
+	}
+
 	protected void updateLabelText() {
 		getFigure().setText(getEditText());
-		
+
 	}
 
 	@Override
@@ -122,10 +137,11 @@ public abstract class ExternalXtextLabelEditPart extends LabelEditPart implement
 
 				public void run() {
 					if (isActive()) {
-						
-						if (theRequest.getExtendedData().get(REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR) instanceof Character) {
-							final Character initialChar = (Character) theRequest.getExtendedData().get(
-									REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR);
+
+						if (theRequest.getExtendedData()
+								.get(REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR) instanceof Character) {
+							final Character initialChar = (Character) theRequest.getExtendedData()
+									.get(REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR);
 							if (manager instanceof XtextDirectEditManager) {
 								XtextDirectEditManager xtextDirectEditManager = (XtextDirectEditManager) manager;
 								xtextDirectEditManager.show(initialChar);
