@@ -51,6 +51,25 @@ public class TransitionEditPart extends ConnectionNodeEditPart {
 		} else
 			super.addChildVisual(childEditPart, index);
 	}
+	
+	@Override
+	public TransitionFigure getFigure() {
+		return (TransitionFigure) super.getFigure();
+	}
+
+	@Override
+	public void setSelected(int value) {
+		switch (value) {
+		case EditPart.SELECTED:
+		case EditPart.SELECTED_PRIMARY:
+			getFigure().setLineWidth(getMapMode().DPtoLP(2));
+			break;
+		default:
+			getFigure().setLineWidth(getMapMode().DPtoLP(1));
+		}
+
+		super.setSelected(value);
+	}
 
 	@Override
 	protected void removeChildVisual(EditPart childEditPart) {
