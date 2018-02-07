@@ -45,7 +45,7 @@ public abstract class StateTemplatesModification extends AbstractSemanticModific
 
 	@Override
 	protected boolean check(EObject semanticObject, View view) {
-		return semanticObject instanceof State;
+		return semanticObject instanceof State && view.getType() == SemanticHints.STATE;
 	}
 
 
