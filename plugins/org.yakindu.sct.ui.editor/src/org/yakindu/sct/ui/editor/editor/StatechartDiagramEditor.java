@@ -40,7 +40,6 @@ import org.eclipse.gef.ui.actions.ZoomOutAction;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.internal.parts.DiagramGraphicalViewerKeyHandler;
-import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.gmf.runtime.gef.ui.internal.editparts.AnimatableZoomManager;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
@@ -52,12 +51,18 @@ import org.eclipse.jface.databinding.swt.ISWTObservableValue;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.ISelectionProvider;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
-import org.eclipse.swt.events.FocusAdapter;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.ModifyEvent;
@@ -96,14 +101,23 @@ import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
+import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorFactory;
+import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorModelAccess;
+import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.xtext.utils.gmf.resource.DirtyStateListener;
 import org.yakindu.base.xtext.utils.jface.viewers.FilteringMenuManager;
 import org.yakindu.base.xtext.utils.jface.viewers.StyledTextXtextAdapter;
-import org.yakindu.base.xtext.utils.jface.viewers.util.ActiveEditorTracker;
+import org.yakindu.base.xtext.utils.jface.viewers.context.XtextFakeResourceContext;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.DomainStatus;
 import org.yakindu.sct.domain.extension.DomainStatus.Severity;
@@ -143,8 +157,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	protected static final String SHOW_SECTION = "Show " + DEFINITION_SECTION;
 	protected static final String HIDE_SECTION = "Hide " + DEFINITION_SECTION;
 
-	private static final int EDITOR_HORIZONTAL_MARGIN = 10;
-	private static final int EDITOR_VERTICAL_MARGIN = 10;
 	protected static final int INITIAL_PALETTE_SIZE = 175;
 	protected static final int[] MIN_SIZE = {11, 21};
 	protected static final int BORDERWIDTH = 2;
@@ -164,14 +176,16 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	private NameModificationListener nameModificationListener;
 	private CollapsedBorderMouseTrackListener collapsedBorderMouseTrackListener;
 	private CollapsedBorderMouseListener collapsedBorderMouseListener;
-	private EmbeddedEditorFocusListener embeddedEditorFocusListener;
+	private ChangeSelectionProviderOnFocusGain embeddedEditorSelectionProviderListener;
 	private EmbeddedEditorKeyListener embeddedEditorKeyListener;
 
 	private Label switchControl;
 	private Composite labelComposite;
 	private CollapsedBorder collapsedBorder;
 
-	private StyledText embeddedEditor;
+	private EmbeddedEditor embeddedEditor;
+
+	private XtextResource xtextResource;
 
 	public StatechartDiagramEditor() {
 		super(true);
@@ -477,22 +491,27 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			switchControl = null;
 		}
 
-		if (embeddedEditor != null && !embeddedEditor.isDisposed()) {
-			if (resizeListener != null) {
-				embeddedEditor.removeControlListener(resizeListener);
-				getSash().removeControlListener(resizeListener);
-				resizeListener = null;
+		if (embeddedEditor != null) {
+			StyledText textWidget = embeddedEditor.getViewer().getTextWidget();
+			if (textWidget != null && !textWidget.isDisposed()) {
+				if (resizeListener != null) {
+					textWidget.removeControlListener(resizeListener);
+					getSash().removeControlListener(resizeListener);
+					resizeListener = null;
+				}
+				if (embeddedEditorKeyListener != null) {
+					textWidget.removeKeyListener(embeddedEditorKeyListener);
+					embeddedEditorKeyListener = null;
+				}
+				if (embeddedEditorSelectionProviderListener != null) {
+					textWidget.removeFocusListener(embeddedEditorSelectionProviderListener);
+					textWidget.removeDisposeListener(embeddedEditorSelectionProviderListener);
+					embeddedEditorSelectionProviderListener = null;
+				}
+				textWidget.dispose();
+				textWidget = null;
+				embeddedEditor = null;
 			}
-			if (embeddedEditorKeyListener != null) {
-				embeddedEditor.removeKeyListener(embeddedEditorKeyListener);
-				embeddedEditorKeyListener = null;
-			}
-			if (embeddedEditorFocusListener != null) {
-				embeddedEditor.removeFocusListener(embeddedEditorFocusListener);
-				embeddedEditorFocusListener = null;
-			}
-			embeddedEditor.dispose();
-			embeddedEditor = null;
 		}
 
 		iconMouseListener = null;
@@ -528,15 +547,14 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 			switchControl = createSwitchControl(definitionSection);
 			createDefinitionSectionLabels(definitionSection);
-			embeddedEditor = createEmbeddedEditor(definitionSection);
+			createSpecificationEditor(definitionSection);
 
-			selectionListener = new SelectionListener(embeddedEditor);
+			selectionListener = new SelectionListener(embeddedEditor.getViewer().getTextWidget());
 			switchControl.addMouseListener(selectionListener);
 
 			resizeListener = new ResizeListener(definitionSection);
-
-			parent.addControlListener(resizeListener);
-			embeddedEditor.addControlListener(resizeListener);
+			getSash().addControlListener(resizeListener);
+			embeddedEditor.getViewer().getTextWidget().addControlListener(resizeListener);
 		}
 	}
 
@@ -554,44 +572,70 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		if (getContextObject() instanceof Statechart) {
 			toggleDefinitionSection();
 			restoreSashWidths(getSash(), getMemento());
-			enableXtext(embeddedEditor);
 		}
 	}
 
+	protected void createSpecificationEditor(Composite definitionSection) {
+		embeddedEditor = createEmbeddedEditor(definitionSection);
+		EmbeddedEditorModelAccess modelAccess = embeddedEditor.createPartialEditor();
+		modelAccess.updateModel(getStatechartSpecification());
+		GridDataFactory.fillDefaults().grab(true, true).span(2, 1).applyTo(embeddedEditor.getViewer().getControl());
+		initializeEmbeddedEditorWidget();
+	}
+
+	protected void initializeEmbeddedEditorWidget() {
+		StyledText editorWidget = embeddedEditor.getViewer().getTextWidget();
+		editorWidget.setAlwaysShowScrollBars(false);
+		editorWidget.setSelection(0);
+		embeddedEditorKeyListener = new EmbeddedEditorKeyListener();
+		editorWidget.addKeyListener(embeddedEditorKeyListener);
+		enableXtext(editorWidget);
+		initContextMenu(editorWidget);
+	}
+
+	protected void enableXtext(StyledText editor) {
+		initXtextSelectionProvider(editor);
+		initBinding(editor);
+	}
+
+	protected void initXtextSelectionProvider(StyledText editor) {
+		XtextStyledTextSelectionProvider xtextStyledTextSelectionProvider = new XtextStyledTextSelectionProvider();
+		embeddedEditorSelectionProviderListener = new ChangeSelectionProviderOnFocusGain(getSite(),
+				xtextStyledTextSelectionProvider);
+		editor.addFocusListener(embeddedEditorSelectionProviderListener);
+		editor.addDisposeListener(embeddedEditorSelectionProviderListener);
+	}
+
 	@SuppressWarnings({"unchecked", "rawtypes"})
-	protected void enableXtext(StyledText xtextControl) {
-		final StyledTextXtextAdapter xtextAdapter = createXtextAdapter();
-		xtextAdapter.adapt((StyledText) xtextControl);
-		initContextMenu(xtextControl);
+	protected void initBinding(StyledText editor) {
 		IEMFValueProperty modelProperty = EMFEditProperties.value(getEditingDomain(),
 				SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION);
-		ISWTObservableValue uiProperty = WidgetProperties.text(new int[]{SWT.FocusOut, SWT.Modify})
-				.observe(xtextControl);
+		ISWTObservableValue uiProperty = WidgetProperties.text(new int[]{SWT.FocusOut, SWT.Modify}).observe(editor);
 		IObservableValue modelPropertyObservable = modelProperty.observe(
 				EcoreUtil.getObjectByType(getDiagram().eResource().getContents(), SGraphPackage.Literals.STATECHART));
 		ValidatingEMFDatabindingContext context = new ValidatingEMFDatabindingContext(this, getSite().getShell());
 		context.bindValue(uiProperty, modelPropertyObservable, null, null);
 	}
 
-	protected StyledTextXtextAdapter createXtextAdapter() {
-		final StyledTextXtextAdapter xtextAdapter = new StyledTextXtextAdapter(
-				getEmbeddedStatechartSpecificationInjector(), getSite());
-		xtextAdapter.getFakeResourceContext().getFakeResource().eAdapters().add(new ContextElementAdapter(this));
-		return xtextAdapter;
+	protected EmbeddedEditor createEmbeddedEditor(Composite definitionSection) {
+		Injector embeddedEditorInjector = getEmbeddedStatechartSpecificationInjector();
+		EmbeddedEditorFactory instance = embeddedEditorInjector.getInstance(EmbeddedEditorFactory.class);
+		IEditedResourceProvider provider = getXtextResourceProvider(embeddedEditorInjector);
+
+		return instance.newEditor(provider).showErrorAndWarningAnnotations().withParent(definitionSection);
 	}
 
-	protected StyledText createEmbeddedEditor(Composite definitionSection) {
-		StyledText textControl = new StyledText(definitionSection, SWT.MULTI | SWT.V_SCROLL | SWT.WRAP);
-		GridDataFactory.fillDefaults().grab(true, true).indent(EDITOR_HORIZONTAL_MARGIN, EDITOR_VERTICAL_MARGIN)
-				.span(2, 1).applyTo(textControl);
+	protected IEditedResourceProvider getXtextResourceProvider(Injector injector) {
+		return new IEditedResourceProvider() {
 
-		textControl.setAlwaysShowScrollBars(false);
-		textControl.setBackground(ColorConstants.white);
-		embeddedEditorKeyListener = new EmbeddedEditorKeyListener();
-		embeddedEditorFocusListener = new EmbeddedEditorFocusListener();
-		textControl.addKeyListener(embeddedEditorKeyListener);
-		textControl.addFocusListener(embeddedEditorFocusListener);
-		return textControl;
+			@Override
+			public XtextResource createResource() {
+				XtextFakeResourceContext resource = new XtextFakeResourceContext(injector);
+				xtextResource = resource.getFakeResource();
+				xtextResource.eAdapters().add(new ContextElementAdapter(StatechartDiagramEditor.this));
+				return xtextResource;
+			}
+		};
 	}
 
 	protected void createDefinitionSectionLabels(Composite definitionSection) {
@@ -726,7 +770,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			getSash().setRedraw(false);
 			getSash().setSashWidth(sashWidth);
 			getSash().setWeights(weights);
-			embeddedEditor.setVisible(visible);
+			embeddedEditor.getViewer().getControl().setVisible(visible);
 			labelComposite.setVisible(visible);
 			if (visible)
 				refreshSwitchControl(HIDE_SECTION, StatechartImages.COLLAPSE.image());
@@ -740,7 +784,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	}
 
 	protected void layoutEmbeddedEditor(int hSpan) {
-		((GridData) embeddedEditor.getLayoutData()).horizontalSpan = hSpan;
+		((GridData) embeddedEditor.getViewer().getControl().getLayoutData()).horizontalSpan = hSpan;
 	}
 
 	protected void layoutCollapsedBorder(int hSpan) {
@@ -836,27 +880,8 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		@Override
 		public void keyReleased(KeyEvent e) {
 			if (e.stateMask == SWT.CTRL && e.keyCode == 'a') {
-				embeddedEditor.selectAll();
+				embeddedEditor.getViewer().getTextWidget().selectAll();
 			}
-		}
-	}
-
-	/**
-	 * @author robert rudi - Initial contribution and API
-	 * 
-	 */
-	protected class EmbeddedEditorFocusListener extends FocusAdapter {
-
-		@Override
-		public void focusGained(FocusEvent e) {
-			// needed to be able to show the right property sheet in PropertiesView
-			((DiagramDocumentEditor) ActiveEditorTracker.getLastActiveEditor()).getDiagramGraphicalViewer()
-					.select(getDiagramEditPart());
-		}
-
-		@Override
-		public void focusLost(FocusEvent e) {
-			embeddedEditor.setSelection(0);
 		}
 	}
 
@@ -1105,6 +1130,77 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			int drawHeight = -w + 2;
 			e.gc.drawString(isSectionExpanded ? "" : text, 0, drawHeight % 2 != 0 ? drawHeight + 1 : drawHeight - 1);
 			update();
+		}
+	}
+
+	/**
+	 * copied from {@link StyledTextXtextAdapter}
+	 */
+	protected class XtextStyledTextSelectionProvider implements ISelectionProvider {
+
+		public void setSelection(ISelection selection) {
+		}
+
+		public void removeSelectionChangedListener(ISelectionChangedListener listener) {
+		}
+
+		public void addSelectionChangedListener(ISelectionChangedListener listener) {
+		}
+
+		public ISelection getSelection() {
+			if (embeddedEditor.getViewer().getTextWidget().isDisposed())
+				return StructuredSelection.EMPTY;
+			int offset = embeddedEditor.getViewer().getTextWidget().getCaretOffset() - 1;
+			if (xtextResource != null) {
+
+				IParseResult parseResult = xtextResource.getParseResult();
+
+				if (parseResult == null)
+					return StructuredSelection.EMPTY;
+				ICompositeNode rootNode = parseResult.getRootNode();
+				ILeafNode selectedNode = NodeModelUtils.findLeafNodeAtOffset(rootNode, offset);
+				final EObject selectedObject = NodeModelUtils.findActualSemanticObjectFor(selectedNode);
+				if (selectedObject == null) {
+					return StructuredSelection.EMPTY;
+				}
+				return new StructuredSelection(selectedObject);
+			}
+			return StructuredSelection.EMPTY;
+		}
+	}
+
+	/**
+	 * copied from {@link StyledTextXtextAdapter}
+	 */
+	protected class ChangeSelectionProviderOnFocusGain implements FocusListener, DisposeListener {
+
+		protected ISelectionProvider selectionProviderOnFocusGain;
+		protected ISelectionProvider selectionProviderOnFocusLost;
+		protected IWorkbenchPartSite site;
+
+		public ChangeSelectionProviderOnFocusGain(IWorkbenchPartSite site,
+				ISelectionProvider selectionProviderOnFocusGain) {
+			this.selectionProviderOnFocusGain = selectionProviderOnFocusGain;
+			this.site = site;
+		}
+
+		public void focusLost(FocusEvent e) {
+			if (this.selectionProviderOnFocusLost != null) {
+				this.site.setSelectionProvider(this.selectionProviderOnFocusLost);
+			}
+		}
+
+		public void focusGained(FocusEvent e) {
+			this.selectionProviderOnFocusLost = this.site.getSelectionProvider();
+			this.site.setSelectionProvider(this.selectionProviderOnFocusGain);
+		}
+
+		public void widgetDisposed(DisposeEvent e) {
+			if (this.selectionProviderOnFocusLost != null) {
+				this.site.setSelectionProvider(this.selectionProviderOnFocusLost);
+			}
+			((StyledText) e.getSource()).removeFocusListener(this);
+			((StyledText) e.getSource()).removeDisposeListener(this);
 		}
 	}
 

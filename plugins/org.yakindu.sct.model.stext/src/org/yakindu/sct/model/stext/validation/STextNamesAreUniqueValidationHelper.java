@@ -26,6 +26,7 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.INamesAreUniqueValidationHelper;
 import org.eclipse.xtext.validation.NamesAreUniqueValidationHelper;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
+import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
  * @author rbeckmann
@@ -66,6 +67,9 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 
 	protected void checkDescriptionForDuplicatedName(IEObjectDescription description,
 			ValidationMessageAcceptor acceptor) {
+		if(!(getParentContainer(description.getEObjectOrProxy()) instanceof Statechart)) {
+			return;
+		}
 		QualifiedName qName = description.getName();
 		IEObjectDescription put = nameMap.put(qName, description);
 		IEObjectDescription lowerCasePut = caseInsensitiveMap.put(qName.toLowerCase(), description);
@@ -81,6 +85,13 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 				createDuplicateNameWarning(lowerCasePut, description.getEClass(), acceptor);
 			}
 		}
+	}
+
+	protected EObject getParentContainer(EObject object) {
+		if(object.eContainer() == null) {
+			return object;
+		}
+		return getParentContainer(object.eContainer());
 	}
 
 	protected void createDuplicateNameWarning(IEObjectDescription description, EClass eClass,
