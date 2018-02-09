@@ -11,6 +11,7 @@
 package org.yakindu.sct.ui.editor.editparts;
 
 import org.eclipse.draw2d.Connection;
+import org.eclipse.draw2d.IFigure;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.EditPart;
@@ -74,6 +75,7 @@ public class TransitionEditPart extends ConnectionNodeEditPart {
 			super.addChildVisual(childEditPart, index);
 	}
 
+	
 	@Override
 	protected void removeChildVisual(EditPart childEditPart) {
 		if (childEditPart instanceof TransitionExpressionEditPart) {
@@ -88,6 +90,25 @@ public class TransitionEditPart extends ConnectionNodeEditPart {
 		} else {
 			super.handleNotificationEvent(notification);
 		}
+	}
+	
+	@Override
+	public TransitionFigure getFigure() {
+		return (TransitionFigure) super.getFigure();
+	}
+	
+	@Override
+	public void setSelected(int value) {
+		switch (value) {
+		case EditPart.SELECTED:
+		case EditPart.SELECTED_PRIMARY:
+			getFigure().setLineWidth(getMapMode().DPtoLP(2));
+			break;
+		default:
+			getFigure().setLineWidth(getMapMode().DPtoLP(1));
+		}
+
+		super.setSelected(value);
 	}
 
 	@Override
