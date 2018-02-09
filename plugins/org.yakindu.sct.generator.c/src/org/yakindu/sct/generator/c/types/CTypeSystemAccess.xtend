@@ -27,23 +27,19 @@ import static org.yakindu.base.types.typesystem.ITypeSystem.*
  */
 class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 
-	@Inject protected ITypeSystem typesystem
+	@Inject protected extension ITypeSystem
 	
 	protected static val String ARRAY = "array"
 	protected static val String POINTER = "pointer"
 	
-	def protected getTypesystem(EObject context)  {
-		return typesystem
-	}
-	
 	override getTargetLanguageName(Type type) {
 		val originalType = type?.originType
 		switch (originalType) {
-			case originalType === null || type.typesystem.isSame(originalType, type.typesystem.getType(VOID)) : 'void'
-			case type.typesystem.isSame(originalType, type.typesystem.getType(INTEGER)): 'sc_integer'
-			case type.typesystem.isSame(originalType, type.typesystem.getType(REAL)): 'sc_real'
-			case type.typesystem.isSame(originalType, type.typesystem.getType(BOOLEAN)): 'sc_boolean'
-			case type.typesystem.isSame(originalType, type.typesystem.getType(STRING)): 'sc_string'
+			case originalType === null || isSame(originalType, getType(VOID)) : 'void'
+			case isSame(originalType, getType(INTEGER)): 'sc_integer'
+			case isSame(originalType, getType(REAL)): 'sc_real'
+			case isSame(originalType, getType(BOOLEAN)): 'sc_boolean'
+			case isSame(originalType, getType(STRING)): 'sc_string'
 			default: throw new IllegalArgumentException("Target language name could not be inferred for type " + type)
 		}
 	}
