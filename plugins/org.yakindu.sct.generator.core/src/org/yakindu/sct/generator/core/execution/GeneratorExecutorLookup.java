@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.generator.core.execution;
 
@@ -29,9 +29,9 @@ import com.google.inject.Module;
 import com.google.inject.util.Modules;
 
 /**
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public class GeneratorExecutorLookup {
 
@@ -89,7 +89,11 @@ public class GeneratorExecutorLookup {
 	}
 
 	protected Module getDomainGeneratorModule(GeneratorEntry entry, String generatorId) {
-		return DomainRegistry.getDomain(entry.getElementRef()).getModule(IDomain.FEATURE_GENERATOR,
+		Module module = DomainRegistry.getDomain(entry.getElementRef()).getModule(IDomain.FEATURE_GENERATOR,
 				generatorId);
+		if (module instanceof IGeneratorEntryModuleExtension) {
+			((IGeneratorEntryModuleExtension) module).setGeneratorEntry(entry);
+		}
+		return module;
 	}
 }
