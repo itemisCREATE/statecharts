@@ -76,12 +76,12 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 	@Override
 	public void addPages() {
 		modelFilePage = new ModelCreationWizardPage("fileName", selection, "sgen");
-		modelFilePage.setTitle("YAKINDU Generator Model");
-		modelFilePage.setDescription("Create a new YAKINDU Generator Model");
+		modelFilePage.setTitle("YAKINDU generator model");
+		modelFilePage.setDescription("Create a new YAKINDU generator model");
 		addPage(modelFilePage);
 		generatorConfigPage = new SGenWizardPage2("content", modelFilePage, selection);
 		injector.injectMembers(generatorConfigPage);
-		generatorConfigPage.setTitle("YAKINDU Generator model configuration");
+		generatorConfigPage.setTitle("YAKINDU generator model configuration");
 		generatorConfigPage.setDescription("Select the generator type and the content");
 		addPage(generatorConfigPage);
 	}
