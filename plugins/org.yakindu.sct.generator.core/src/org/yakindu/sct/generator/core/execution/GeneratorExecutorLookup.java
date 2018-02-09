@@ -17,6 +17,8 @@ import org.yakindu.base.types.typesystem.AbstractTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
+import org.yakindu.sct.domain.extension.IModuleConfigurator;
+import org.yakindu.sct.domain.extension.impl.LazyCombiningModule;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
@@ -89,10 +91,11 @@ public class GeneratorExecutorLookup {
 	}
 
 	protected Module getDomainGeneratorModule(GeneratorEntry entry, String generatorId) {
+		IModuleConfigurator configurator = new GeneratorEntryModuleConfigurator(entry);
 		Module module = DomainRegistry.getDomain(entry.getElementRef()).getModule(IDomain.FEATURE_GENERATOR,
 				generatorId);
-		if (module instanceof IGeneratorEntryModuleExtension) {
-			((IGeneratorEntryModuleExtension) module).setGeneratorEntry(entry);
+		if (module instanceof LazyCombiningModule) {
+			((LazyCombiningModule) module).applyConfigurator(configurator);
 		}
 		return module;
 	}
