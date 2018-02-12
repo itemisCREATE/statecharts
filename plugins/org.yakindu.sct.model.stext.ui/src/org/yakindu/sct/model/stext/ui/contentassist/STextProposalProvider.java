@@ -149,6 +149,7 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	}
 
 	protected void suppressKeywords(List<Keyword> suppressKeywords, InternalScope model) {
+		suppressKeywords.add(grammarAccess.getDirectionAccess().getLOCALLocalKeyword_0_0());
 		suppressKeywords.add(grammarAccess.getDirectionAccess().getINInKeyword_1_0());
 		suppressKeywords.add(grammarAccess.getDirectionAccess().getOUTOutKeyword_2_0());
 	}
