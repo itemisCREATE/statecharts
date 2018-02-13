@@ -16,90 +16,182 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PrecisionPoint;
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gef.handles.HandleBounds;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramRootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.BaseSlidableAnchor;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
+import org.eclipse.gmf.runtime.gef.ui.figures.SlidableAnchor;
 import org.eclipse.gmf.runtime.notation.Anchor;
 import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.IdentityAnchor;
+import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.View;
 
 /**
- * EXPERIMENTAL !!
  * 
  * Recalculates the {@link IdentityAnchor}s to recalculate connection anchors
  * when a node is resized
  * 
- * @author andreas muelder - Initial contribution and API
+ * Parts are copied from Sirius ShiftEdgeIdentityAnchorOperation
  * 
  */
 public class AdjustIdentityAnchorCommand extends AbstractTransactionalCommand {
 
-	private ChangeBoundsRequest request;
-	private List<IGraphicalEditPart> editParts;
+	final private static char TERMINAL_START_CHAR = '(';
+	final private static char TERMINAL_DELIMITER_CHAR = ',';
+	final private static char TERMINAL_END_CHAR = ')';
 
-	@SuppressWarnings("unchecked")
+	private final static PrecisionPoint DEFAULT_POINT = new PrecisionPoint(0.5d, 0.5d);
+
+	private ChangeBoundsRequest request;
+
+	private Dimension futureSize;
+
+	private PrecisionPoint delta;
+
 	public AdjustIdentityAnchorCommand(TransactionalEditingDomain domain, ChangeBoundsRequest request) {
 		super(domain, "Adjusting anchors", null);
 		this.request = request;
-		editParts = request.getEditParts();
 
 	}
 
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-		for (EditPart editPart : editParts) {
+		@SuppressWarnings("unchecked")
+		List<IGraphicalEditPart> editParts = request.getEditParts();
+		for (IGraphicalEditPart editPart : editParts) {
 			adjustAnchors(editPart);
 		}
 		return CommandResult.newOKCommandResult();
 	}
 
 	@SuppressWarnings("unchecked")
-	private void adjustAnchors(EditPart editPart) {
+	protected void adjustAnchors(IGraphicalEditPart editPart) {
 		if (editPart instanceof IGraphicalEditPart) {
 			View view = ((IGraphicalEditPart) editPart).getNotationView();
-			EList<Edge> targetEdges = view.getTargetEdges();
+			List<Edge> targetEdges = view.getTargetEdges();
 			for (Edge edge : targetEdges) {
-				Anchor targetAnchor = edge.getTargetAnchor();
-				if (targetAnchor instanceof IdentityAnchor) {
-					PrecisionPoint anchorPoint = BaseSlidableAnchor.parseTerminalString(((IdentityAnchor) targetAnchor)
-							.getId());
-					IFigure figure = ((IGraphicalEditPart) editPart).getFigure();
-					Dimension sizeBefore = figure.getBounds().getSize();
-					float widthFactor = (float) (sizeBefore.width() + request.getSizeDelta().width())
-							/ (float) sizeBefore.width();
-					float heightFactor = (float) (sizeBefore.height() + request.getSizeDelta().height())
-							/ (float) sizeBefore.height();
-					PrecisionPoint newPoint = new PrecisionPoint(anchorPoint.preciseX() / widthFactor,
-							anchorPoint.preciseY() / heightFactor);
-					((IdentityAnchor) targetAnchor).setId(composeTerminalString(newPoint));
-				}
+				handleEdge(edge, editPart, false);
+			}
+			List<Edge> sourceEdges = view.getSourceEdges();
+			for (Edge edge : sourceEdges) {
+				handleEdge(edge, editPart, true);
 			}
 		}
-
 	}
 
-	// Copied from BaseSlideableAnchor
-	final private static char TERMINAL_START_CHAR = '(';
-	final private static char TERMINAL_DELIMITER_CHAR = ',';
-	final private static char TERMINAL_END_CHAR = ')';
+	private void handleEdge(Edge edge, EditPart editPart, boolean sourceAnchor) {
+		Anchor anchorToModify;
+		if (sourceAnchor) {
+			anchorToModify = edge.getSourceAnchor();
+		} else {
+			anchorToModify = edge.getTargetAnchor();
+		}
+		String terminalString = composeTerminalString(DEFAULT_POINT);
+		if (anchorToModify instanceof IdentityAnchor) {
+			terminalString = ((IdentityAnchor) anchorToModify).getId();
+		}
+		PrecisionPoint anchorPoint = BaseSlidableAnchor.parseTerminalString(terminalString);
+		PrecisionPoint newPoint = computeNewAnchor(anchorPoint, editPart);
+		String newTerminalString = new SlidableAnchor(null, newPoint).getTerminal();
+		if (anchorToModify instanceof IdentityAnchor) {
+			((IdentityAnchor) anchorToModify).setId(newTerminalString);
+		} else if (anchorToModify == null) {
+			// Create a new one
+			IdentityAnchor newAnchor = NotationFactory.eINSTANCE.createIdentityAnchor();
+			newAnchor.setId(newTerminalString);
+			if (sourceAnchor) {
+				edge.setSourceAnchor(newAnchor);
+			} else {
+				edge.setTargetAnchor(newAnchor);
+			}
+		}
+	}
+
+	protected double getScale(EditPart part) {
+		double scale = 1.0;
+		if (part.getRoot() instanceof DiagramRootEditPart) {
+			DiagramRootEditPart rootEditPart = (DiagramRootEditPart) part.getRoot();
+			scale = rootEditPart.getZoomManager().getZoom();
+		}
+		return scale;
+	}
+
+	private PrecisionPoint computeNewAnchor(PrecisionPoint currentAnchorPoint, EditPart editPart) {
+
+		double scale = getScale(editPart);
+		IFigure figure = ((IGraphicalEditPart) editPart).getFigure();
+		Rectangle bounds = figure.getBounds();
+		if (figure instanceof HandleBounds) {
+			bounds = ((HandleBounds) figure).getHandleBounds();
+		}
+
+		Point currentRelativePoint = getAnchorRelativePoint(currentAnchorPoint, bounds);
+
+		if (futureSize != null && delta != null) {
+			// In case of border node, the real location is computed earlier
+			// (according to BorderItemLocator). The corresponding futureSize
+			// and delta are used instead of the request data.
+			return new PrecisionPoint(((double) (currentRelativePoint.x - delta.x)) / futureSize.width,
+					((double) (currentRelativePoint.y - delta.y)) / futureSize.height);
+		} else {
+
+			double logicalWidthDelta = request.getSizeDelta().width / scale;
+			double logicalHeightDelta = request.getSizeDelta().height / scale;
+
+			int direction = request.getResizeDirection();
+
+			double newRelativeX = computeNewXRelativeLocation(direction, currentRelativePoint, logicalWidthDelta);
+			double newRelativeY = computeNewYRelativeLocation(direction, currentRelativePoint, logicalHeightDelta);
+
+			return new PrecisionPoint(newRelativeX / (bounds.width() + logicalWidthDelta),
+					newRelativeY / (bounds.height() + logicalHeightDelta));
+		}
+	}
+
+	protected Point getAnchorRelativePoint(PrecisionPoint currentAnchorPoint, Rectangle bounds) {
+		return new PrecisionPoint(bounds.width() * currentAnchorPoint.preciseX(),
+				bounds.height() * currentAnchorPoint.preciseY());
+	}
+
+	private double computeNewXRelativeLocation(int direction, Point currentRelativePoint, double logicalWidthDelta) {
+
+		if (direction == PositionConstants.NORTH_WEST || direction == PositionConstants.WEST
+				|| direction == PositionConstants.SOUTH_WEST) {
+			return currentRelativePoint.preciseX() + logicalWidthDelta;
+		} else {
+
+			return currentRelativePoint.preciseX();
+		}
+	}
+
+	protected double computeNewYRelativeLocation(int direction, Point currentRelativePoint, double logicalHeightDelta) {
+
+		if (direction == PositionConstants.NORTH_WEST || direction == PositionConstants.NORTH
+				|| direction == PositionConstants.NORTH_EAST) {
+			return currentRelativePoint.preciseY() + logicalHeightDelta;
+		} else {
+			return currentRelativePoint.preciseY();
+		}
+	}
 
 	protected String composeTerminalString(PrecisionPoint p) {
 		StringBuffer s = new StringBuffer(24);
-		s.append(TERMINAL_START_CHAR); // 1 char
-		s.append(p.preciseX()); // 10 chars
-		s.append(TERMINAL_DELIMITER_CHAR); // 1 char
-		s.append(p.preciseY()); // 10 chars
-		s.append(TERMINAL_END_CHAR); // 1 char
-		return s.toString(); // 24 chars max (+1 for safety, i.e. for string
-								// termination)
+		s.append(TERMINAL_START_CHAR);
+		s.append(p.preciseX());
+		s.append(TERMINAL_DELIMITER_CHAR);
+		s.append(p.preciseY());
+		s.append(TERMINAL_END_CHAR);
+		return s.toString();
 	}
-
 }

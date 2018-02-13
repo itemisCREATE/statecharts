@@ -71,7 +71,8 @@ public class GeneratorExtensions {
 		@Override
 		public Module getBindings(GeneratorEntry entry) {
 			try {
-				IGeneratorModule module = (IGeneratorModule) configElement.createExecutableExtension(ATTRIBUTE_BINDINGS);
+				IGeneratorModule module = (IGeneratorModule) configElement
+						.createExecutableExtension(ATTRIBUTE_BINDINGS);
 				return new GeneratorModuleAdapter(module, entry);
 			} catch (CoreException e) {
 				e.printStackTrace();
@@ -81,7 +82,7 @@ public class GeneratorExtensions {
 
 		@Override
 		public List<String> getLibraryIDs() {
-			List<String> libs = new ArrayList<String>();
+			List<String> libs = new ArrayList<>();
 			for (IConfigurationElement child : configElement.getChildren(LIBRARY_CONFIG_ELEMENT)) {
 				String lib_id = child.getAttribute(ATTRIBUTE_LIBRARY_ID);
 				if (lib_id != null && !lib_id.isEmpty()) {
@@ -160,6 +161,7 @@ public class GeneratorExtensions {
 	public static IGeneratorDescriptor getGeneratorDescriptor(final String generatorId) {
 		try {
 			return Iterables.find(getGeneratorDescriptors(), new Predicate<IGeneratorDescriptor>() {
+				@Override
 				public boolean apply(IGeneratorDescriptor input) {
 					return input != null && input.getId() != null && input.getId().equals(generatorId);
 				}

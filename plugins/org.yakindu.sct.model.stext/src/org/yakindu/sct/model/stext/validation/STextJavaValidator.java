@@ -246,6 +246,39 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 	}
 
+	@Check(CheckType.FAST)
+	public void checkReadOnlyValueDefinitionExpression(VariableDefinition definition) {
+		// applies only for readonly variable definitions
+		if (!definition.isReadonly())
+			return;
+		ICompositeNode definitionNode = NodeModelUtils.getNode(definition);
+		String tokenText = NodeModelUtils.getTokenText(definitionNode);
+
+		if (tokenText == null || tokenText.isEmpty())
+			return;
+		if (tokenText.contains(TypesPackage.Literals.PROPERTY__READONLY.getName())) {
+			warning(String.format(STextValidationMessages.DECLARATION_DEPRECATED,
+					TypesPackage.Literals.PROPERTY__READONLY.getName()), definition,
+					TypesPackage.Literals.PROPERTY__READONLY);
+		}
+	}
+
+	@Check(CheckType.FAST)
+	public void checkExternalValueDefinitionExpression(VariableDefinition definition) {
+		// applies only for external variable definitions
+		if (!definition.isExternal())
+			return;
+		ICompositeNode definitionNode = NodeModelUtils.getNode(definition);
+		String tokenText = NodeModelUtils.getTokenText(definitionNode);
+		if (tokenText == null || tokenText.isEmpty())
+			return;
+		if (tokenText.contains(TypesPackage.Literals.PROPERTY__EXTERNAL.getName())) {
+			warning(String.format(STextValidationMessages.DECLARATION_DEPRECATED,
+					TypesPackage.Literals.PROPERTY__EXTERNAL.getName()), definition,
+					TypesPackage.Literals.PROPERTY__EXTERNAL);
+		}
+	}
+
 	@Check(CheckType.NORMAL)
 	public void checkUnusedVariablesInInternalScope(InternalScope internalScope) {
 		EList<Declaration> internalScopeDeclarations = internalScope.getDeclarations();
@@ -711,6 +744,21 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 		if (event.eContainer() instanceof InternalScope && event.getDirection() != Direction.LOCAL) {
 			error(IN_OUT_DECLARATIONS, TypesPackage.Literals.EVENT__DIRECTION);
+		}
+	}
+
+	@Check(CheckType.FAST)
+	public void checkDeprecatedLocalEventDefinition(EventDefinition event) {
+		// applies only for local event definitions
+		if (event.eContainer() instanceof InternalScope && event.getDirection() == Direction.LOCAL) {
+			ICompositeNode definitionNode = NodeModelUtils.getNode(event);
+			String tokenText = NodeModelUtils.getTokenText(definitionNode);
+			if (tokenText == null || tokenText.isEmpty())
+				return;
+			if (tokenText.contains(Direction.LOCAL.getLiteral())) {
+				warning(String.format(STextValidationMessages.DECLARATION_DEPRECATED, Direction.LOCAL.getLiteral()), event,
+						TypesPackage.Literals.EVENT__DIRECTION);
+			}
 		}
 	}
 
