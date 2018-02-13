@@ -160,9 +160,8 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	protected void collectPackageImports(Resource resource, String packageImport, IAcceptor<String> acceptor,
 			LinkedHashSet<URI> uniqueImportURIs) {
 		Optional<PackageImport> pkgImport = mapper.findPackageImport(resource, packageImport);
-		PackageImport currentImport = pkgImport.get();
-		if (pkgImport.isPresent() && currentImport.getUri() != null && URIConverter.INSTANCE.exists(currentImport.getUri(), null)) {
-			acceptor.accept(currentImport.getUri().toString());
+		if (pkgImport.isPresent() && pkgImport.get().getUri() != null && URIConverter.INSTANCE.exists(pkgImport.get().getUri(), null)) {
+			acceptor.accept(pkgImport.get().getUri().toString());
 		}
 	}
 
