@@ -101,8 +101,12 @@ public abstract class AbstractSTextValidationTest extends AbstractSTextTest {
 
 	protected Statechart loadStatechart(String modelName) {
 		return AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR
+				.loadStatechart(getModelDir()
 						+ modelName);
+	}
+
+	protected String getModelDir() {
+		return VALIDATION_TESTMODEL_DIR;
 	}
 
 	protected void doValidateAllContents(Class<? extends EObject> clazz) {
