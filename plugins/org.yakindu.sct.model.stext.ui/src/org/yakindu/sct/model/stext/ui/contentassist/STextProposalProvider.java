@@ -13,14 +13,23 @@ package org.yakindu.sct.model.stext.ui.contentassist;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
+import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.jface.viewers.StyledString.Styler;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.TextStyle;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EnumLiteralDeclaration;
@@ -37,6 +46,8 @@ import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper;
+import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
@@ -44,6 +55,7 @@ import org.yakindu.sct.model.stext.stext.SimpleScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
+import org.yakindu.sct.model.stext.ui.internal.STextActivator;
 
 import com.google.common.base.Function;
 import com.google.inject.Inject;
@@ -55,6 +67,8 @@ import com.google.inject.Inject;
  */
 public class STextProposalProvider extends AbstractSTextProposalProvider {
 
+	protected static final String ICONS_INCLUDE = "icons/Package.png";
+
 	@Inject
 	protected STextGrammarAccess grammarAccess;
 	private ComposedAdapterFactory composedAdapterFactory = new ComposedAdapterFactory(
@@ -62,6 +76,24 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	@Inject
 	@ContentProposalLabelProvider
 	private ILabelProvider labelProvider;
+	@Inject
+	private IPackageImport2URIMapper mapper;
+
+	public static class StrikeThroughStyler extends Styler {
+
+		@Override
+		public void applyStyles(TextStyle textStyle) {
+			textStyle.strikeout = true;
+		}
+	}
+
+	public static class GreyoutStyler extends Styler {
+
+		@Override
+		public void applyStyles(TextStyle textStyle) {
+			textStyle.foreground = Display.getDefault().getSystemColor(SWT.COLOR_GRAY);
+		}
+	}
 
 	/**
 	 * Validates if a keyword should be viewed by the proposal view.
@@ -219,6 +251,38 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 
 			priorityOptimizer.accept(proposal);
 		}
+	}
+
+	@Override
+	public void completeImportScope_Imports(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		StringProposalDelegate stringProposalDelegate = new StringProposalDelegate(acceptor, context);
+		Set<PackageImport> allImports = mapper.getAllImports(model.eResource());
+		for (PackageImport pkgImport : allImports) {
+
+			ConfigurableCompletionProposal doCreateProposal = doCreateProposal("\"" + pkgImport.getName() + "\"",
+					computePackageStyledString(pkgImport), getIncludeImage(), pkgImport.getUri().isFile() ? -1 : 1,
+					context);
+
+			stringProposalDelegate.accept(doCreateProposal);
+		}
+	}
+
+	protected Image getIncludeImage() {
+		final ImageRegistry imageRegistry = STextActivator.getInstance().getImageRegistry();
+		return imageRegistry.get(ICONS_INCLUDE);
+	}
+
+	protected StyledString computePackageStyledString(PackageImport pkgImport) {
+		StyledString firstPart = new StyledString(pkgImport.getName());
+		StyledString secondPart = getPackageImportStyleString(pkgImport.getUri());
+		return firstPart.append(secondPart);
+	}
+
+	protected StyledString getPackageImportStyleString(URI uri) {
+		String headerFilePath = uri.isPlatform() ? uri.toPlatformString(true) : uri.toFileString();
+		StyledString secondPart = new StyledString(" - " + headerFilePath, new GreyoutStyler());
+		return secondPart;
 	}
 
 	protected ICompletionProposalAcceptor getCustomAcceptor(EObject model, String typeName,

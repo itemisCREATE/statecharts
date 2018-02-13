@@ -11,9 +11,9 @@
  */
 package org.yakindu.sct.model.stext.validation;
 
-import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION;
-import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_ANNOTATION;
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CHILD_FIRST_ANNOTATION;
+import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_ANNOTATION;
+import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION;
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.PARENT_FIRST_ANNOTATION;
 
 import java.util.Collections;
@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
@@ -29,6 +30,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.EcoreUtil2;
@@ -78,6 +80,8 @@ import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.validation.SCTResourceValidator;
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
+import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper;
+import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
@@ -90,6 +94,7 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.ExitEvent;
 import org.yakindu.sct.model.stext.stext.ExitPointSpec;
 import org.yakindu.sct.model.stext.stext.Guard;
+import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
@@ -115,7 +120,8 @@ import com.google.inject.name.Named;
  * @author muelder
  * 
  */
-@ComposedChecks(validators = { SGraphJavaValidator.class, SCTResourceValidator.class, ExpressionsJavaValidator.class, STextNamesAreUniqueValidator.class })
+@ComposedChecks(validators = { SGraphJavaValidator.class, SCTResourceValidator.class, ExpressionsJavaValidator.class,
+		STextNamesAreUniqueValidator.class })
 public class STextJavaValidator extends AbstractSTextJavaValidator implements STextValidationMessages {
 
 	@Inject
@@ -130,6 +136,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	@Inject(optional = true)
 	@Named(DomainRegistry.DOMAIN_ID)
 	private String domainID = BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
+	@Inject(optional = true)
+	private IPackageImport2URIMapper mapper;
 
 	@Check(CheckType.FAST)
 	public void checkExpression(VariableDefinition expression) {
@@ -666,7 +674,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			if (element instanceof NamedElement) {
 				elementName = ((NamedElement) element).getName();
 			}
-			error(String.format("'%s' is not an event.", elementName), StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT, -1);
+			error(String.format("'%s' is not an event.", elementName),
+					StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT, -1);
 		}
 	}
 
@@ -689,7 +698,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	public void checkReactionEffectActions(ReactionEffect effect) {
 		for (Expression exp : effect.getActions()) {
 
-			if (!(exp instanceof AssignmentExpression) && !(exp instanceof EventRaisingExpression) 
+			if (!(exp instanceof AssignmentExpression) && !(exp instanceof EventRaisingExpression)
 					&& !(exp instanceof PostFixUnaryExpression)) {
 
 				if (exp instanceof FeatureCall) {
@@ -756,8 +765,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			if (tokenText == null || tokenText.isEmpty())
 				return;
 			if (tokenText.contains(Direction.LOCAL.getLiteral())) {
-				warning(String.format(STextValidationMessages.DECLARATION_DEPRECATED, Direction.LOCAL.getLiteral()), event,
-						TypesPackage.Literals.EVENT__DIRECTION);
+				warning(String.format(STextValidationMessages.DECLARATION_DEPRECATED, Direction.LOCAL.getLiteral()),
+						event, TypesPackage.Literals.EVENT__DIRECTION);
 			}
 		}
 	}
@@ -798,6 +807,39 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 		if (!found)
 			warning(CHOICE_ONE_OUTGOING_DEFAULT_TRANSITION, SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS);
+	}
+
+	@Check
+	public void checkDuplicateImport(ImportScope importScope) {
+		EList<Scope> allScopes = EcoreUtil2.getContainerOfType(importScope, ScopedElement.class).getScopes();
+
+		nextImportOfCurrentScope: for (String importToCheck : importScope.getImports()) {
+			Set<String> allImports = Sets.newHashSet();
+			for (Scope scope : allScopes) {
+				if (!(scope instanceof ImportScope))
+					continue;// exclude internal & interface scopes
+				for (String anImport : ((ImportScope) scope).getImports()) {
+					if (anImport.equals(importToCheck) && !allImports.add(anImport)) {
+						warning(String.format(DUPLICATE_IMPORT, importToCheck), importScope,
+								StextPackage.Literals.IMPORT_SCOPE__IMPORTS,
+								importScope.getImports().indexOf(importToCheck));
+						continue nextImportOfCurrentScope;
+					}
+				}
+			}
+		}
+	}
+
+	@Check
+	public void checkImportExists(ImportScope scope) {
+		EList<String> imports = scope.getImports();
+		for (String packageImport : imports) {
+			Optional<PackageImport> pkImport = mapper.findPackageImport(scope.eResource(), packageImport);
+			if (!pkImport.isPresent() || !URIConverter.INSTANCE.exists(pkImport.get().getUri(), null)) {
+				error(String.format(IMPORT_NOT_RESOLVED_MSG, packageImport), scope,
+						StextPackage.Literals.IMPORT_SCOPE__IMPORTS, imports.indexOf(packageImport));
+			}
+		}
 	}
 
 	protected void checkElementReferenceEffect(ElementReferenceExpression refExp) {

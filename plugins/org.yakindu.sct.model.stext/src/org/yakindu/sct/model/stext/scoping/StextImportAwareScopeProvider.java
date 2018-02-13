@@ -12,6 +12,7 @@ package org.yakindu.sct.model.stext.scoping;
 import static java.util.Collections.singletonList;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -86,9 +87,9 @@ public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalSc
 		List<ImportNormalizer> importedNamespaceResolvers = Lists.newArrayList();
 		ImportScope importScope = (ImportScope) scope;
 		for (String child : importScope.getImports()) {
-			PackageImport pkgImport = mapper.findPackageImport(scope.eResource(), child);
-			if (pkgImport != null) {
-				ImportNormalizer resolver = createImportedNamespaceResolver(pkgImport.getNamespace(), ignoreCase);
+			Optional<PackageImport> pkgImport = mapper.findPackageImport(scope.eResource(), child);
+			if (pkgImport.isPresent()) {
+				ImportNormalizer resolver = createImportedNamespaceResolver(pkgImport.get().getNamespace(), ignoreCase);
 				if (resolver != null)
 					importedNamespaceResolvers.add(resolver);
 			}
