@@ -82,7 +82,7 @@ class DefaultNamingService implements INamingService {
 	// from public class org.yakindu.sct.generator.c.features.CDefaultFeatureValueProvider extends		
 	private static final String VALID_IDENTIFIER_REGEX = "[_a-zA-Z][_a-zA-Z0-9]*";
 
-	var protected int maxLength = 0
+	val protected int maxLength = 0
 
 	var protected char separator = '_'
 
@@ -93,12 +93,10 @@ class DefaultNamingService implements INamingService {
 	var protected Statechart activeStatechart
 
 	new(int maxLength, char separator) {
-		this.maxLength = maxLength
 		this.separator = separator
 	}
 
 	new() {
-		this.maxLength = 0
 		this.separator = '_'
 	}
 
@@ -504,7 +502,6 @@ class DefaultNamingService implements INamingService {
 	}
 
 	override public setMaxLength(int length) {
-		maxLength = length
 	}
 
 	override public setSeparator(char sep) {
