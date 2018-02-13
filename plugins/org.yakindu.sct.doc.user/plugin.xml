@@ -13,7 +13,8 @@
         <toc file="help/user-guide/c-domain-toc.xml" primary="false"/>
         <!-- <toc file="help/user-guide/typescript-domain-toc.xml" primary="false"/> -->
         <toc file="help/user-guide/statechart_language-toc.xml" primary="false"/>
-        <toc file="help/user-guide/generating_code-toc.xml" primary="false"/>
+        <toc file="help/user-guide/code_generation_intro-toc.xml" primary="false"/>
+        <toc file="help/user-guide/code_generation_generators-toc.xml" primary="false"/>
         <toc file="help/user-guide/generating_code_headless-toc.xml" primary="false"/>
         <toc file="help/user-guide/sctunit-toc.xml" primary="false"/>
         <toc file="help/user-guide/installation-toc.xml" primary="false"/>
