@@ -1,13 +1,13 @@
 /**
-  Copyright (c) 2014-2015 committers of YAKINDU Statechart Tools.
-  All rights reserved. This program and the accompanying materials
-  are made available under the terms of the Eclipse Public License v1.0
-  which accompanies this distribution, and is available at
-  http://www.eclipse.org/legal/epl-v10.html
-  
-  Contributors:
-  	Markus Mühlbrandt - Initial contribution and API
-*/
+ *   Copyright (c) 2014-2015 committers of YAKINDU Statechart Tools.
+ *   All rights reserved. This program and the accompanying materials
+ *   are made available under the terms of the Eclipse Public License v1.0
+ *   which accompanies this distribution, and is available at
+ *   http://www.eclipse.org/legal/epl-v10.html
+ *   
+ *   Contributors:
+ *   	Markus Mühlbrandt - Initial contribution and API
+ */
 
 package org.yakindu.sct.generator.c
 
@@ -29,46 +29,46 @@ import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import static org.yakindu.sct.generator.c.CKeywords.*
 
 public class CNamingService extends DefaultNamingService {
-	
+
 	@Inject
 	extension GenmodelEntries
 	@Inject
 	extension SExecExtensions
 	@Inject
 	var GeneratorEntry entry
-	
+
 	override void initializeNamingService(Statechart statechart) {
 		if (entry.separator !== null) {
 			separator = entry.separator.charAt(0)
 		}
-		
+
 		super.initializeNamingService(statechart)
 	}
-	
+
 	override void initializeNamingService(ExecutionFlow flow) {
 		if (entry.separator !== null) {
 			separator = entry.separator.charAt(0)
 		}
-		
+
 		super.initializeNamingService(flow)
 	}
-	
+
 	override Map<NamedElement, String> getShortNameMap(ExecutionFlow flow) {
 		if (entry.separator !== null) {
 			separator = entry.separator.charAt(0)
 		}
-		
+
 		return super.getShortNameMap(flow)
 	}
-	
+
 	override Map<NamedElement, String> getShortNameMap(Statechart statechart) {
 		if (entry.separator !== null) {
 			separator = entry.separator.charAt(0)
 		}
-		
+
 		return super.getShortNameMap(statechart)
 	}
-	
+
 	override protected prefix(Step it, char separator) {
 		switch (it) {
 			case isCheckFunction: "check"
@@ -83,39 +83,27 @@ public class CNamingService extends DefaultNamingService {
 			default: ""
 		}
 	}
-	
+
 	override protected prefix(ExecutionState it, char separator) {
-		if (entry.statemachinePrefix.nullOrEmpty) {
-			super.prefix(it, separator).toFirstUpper			
-		} else {
-			entry.statemachinePrefix
-		}
+		super.prefix(it, separator).toFirstUpper
 	}
-	
+
 	override protected prefix(State it, char separator) {
-		if (entry.statemachinePrefix.nullOrEmpty) {
-			super.prefix(it, separator).toFirstUpper
-		} else {
-			entry.statemachinePrefix
-		}
+		super.prefix(it, separator).toFirstUpper
 	}
-	
+
 	override protected prefix(TimeEventSpec it, NamedElement element, char separator) {
-		if (entry.statemachinePrefix.nullOrEmpty) {
-			super.prefix(it, element, separator).toFirstLower
-		} else {
-			entry.statemachinePrefix
-		}
+		super.prefix(it, element, separator).toFirstLower
 	}
-	
+
 	override asEscapedIdentifier(String it) {
 		var s = it
 		if (s.isKeyword) {
-			s = s + separator +'ID'
+			s = s + separator + 'ID'
 		}
 		return s.asIdentifier
 	}
-	
+
 	override boolean isKeyword(String name) {
 		return !Arrays::asList(C_KEYWORDS).findFirst[it.equalsIgnoreCase(name)].nullOrEmpty
 	}
