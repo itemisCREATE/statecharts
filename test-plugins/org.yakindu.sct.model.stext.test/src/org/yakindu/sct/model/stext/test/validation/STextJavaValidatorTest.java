@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  * 	itemis AG - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.model.stext.test.validation;
 
@@ -15,7 +15,6 @@ import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorCod
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorMsg;
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.warningMsg;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_ASSIGNMENT_TO_CONST_MSG;
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_LEFT_HAND_ASSIGNMENT_MSG;
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_OPTIONAL_MUST_BE_LAST_CODE;
@@ -68,7 +67,7 @@ import com.google.inject.Inject;
 
 /**
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 @RunWith(XtextRunner.class)
 @InjectWith(STextInjectorProvider.class)
@@ -88,7 +87,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	/**
-	 *  
+	 * 
 	 * @see STextJavaValidator#checkAssignmentExpression(org.yakindu.sct.model.stext.stext.AssignmentExpression)
 	 */
 	@Test
@@ -223,7 +222,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		validationResult.assertError(ERROR_VAR_ARGS_LAST_CODE);
 
 	}
-	
+
 	@Test
 	public void checkOperationNamedParameters() {
 		String scope = "internal: operation myOperation(param1 : integer, param2 : boolean)";
@@ -240,37 +239,39 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		model = super.parseExpression("myOperation(param1 = 5, true)", Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
 		validationResult.assertOK();
-		model = super.parseExpression("myOperation(param1 = 5, param2 = true)", Expression.class.getSimpleName(), scope);
+		model = super.parseExpression("myOperation(param1 = 5, param2 = true)", Expression.class.getSimpleName(),
+				scope);
 		validationResult = tester.validate(model);
 		validationResult.assertOK();
-		model = super.parseExpression("myOperation(param2 = true, param1 = 5)", Expression.class.getSimpleName(), scope);
+		model = super.parseExpression("myOperation(param2 = true, param1 = 5)", Expression.class.getSimpleName(),
+				scope);
 		validationResult = tester.validate(model);
 		validationResult.assertOK();
 
 		model = super.parseExpression("myOperation(param2 = true)", Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
 		validationResult.assertError(ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
-		
+
 		model = super.parseExpression("myOperation(param1 = 5)", Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
 		validationResult.assertError(ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
 
 	}
-	
+
 	@Inject
 	protected TypesTestFactory typesTestFactory = TypesTestFactory.INSTANCE;
-	
+
 	@Test
 	public void checkOptionalArgumentsAreLast() {
 		Scope scope = (Scope) super.parseExpression("internal: ", InternalScope.class.getSimpleName());
 		OperationDefinition op = StextTestFactory._createOperation("op", scope);
 		tester.validate(scope).assertOK();
-		
+
 		// optional parameter last => no error
 		op.getParameters().add(typesTestFactory.createParameter("p1", ITypeSystem.INTEGER, false));
 		op.getParameters().add(typesTestFactory.createParameter("p2", ITypeSystem.INTEGER, true));
 		tester.validate(op).assertOK();
-		
+
 		// optional parameter not last anymore => error
 		op.getParameters().add(typesTestFactory.createParameter("p3", ITypeSystem.INTEGER, false));
 		tester.validate(op).assertError(ERROR_OPTIONAL_MUST_BE_LAST_CODE);
@@ -284,8 +285,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		String scope = "@CycleBased";
 		EObject model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(model);
-		validationResult.assertError(STextJavaValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
-		;
+		validationResult.assertError(STextJavaValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);;
 
 		scope = "@EventDriven";
 		model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
@@ -300,21 +300,21 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	public void checkAnnotationTarget() {
 		// TODO: Implement me when default annotation for target is available
 	}
-	
+
 	@Test
 	public void checkAnnotations() {
 		String scope;
 		StatechartSpecification model;
 		AssertableDiagnostics validationResult;
-		
+
 		statechart.setName("Annotated");
-		
+
 		scope = "@EventDriven";
 		model = (StatechartSpecification) super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
 		statechart.getAnnotations().addAll(model.getAnnotations());
 		validationResult = tester.validate(statechart);
 		validationResult.assertOK();
-		
+
 		scope = "@CycleBased(200)";
 		model = (StatechartSpecification) super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
 		statechart.getAnnotations().clear();
@@ -322,8 +322,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		validationResult = tester.validate(statechart);
 		validationResult.assertOK();
 
-		scope = "@CycleBased(200)\n"
-				+ "@EventDriven";
+		scope = "@CycleBased(200)\n" + "@EventDriven";
 		model = (StatechartSpecification) super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
 		statechart.getAnnotations().clear();
 		statechart.getAnnotations().addAll(model.getAnnotations());
@@ -336,16 +335,15 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		statechart.getAnnotations().addAll(model.getAnnotations());
 		validationResult = tester.validate(statechart);
 		validationResult.assertOK();
-		
+
 		scope = "@ChildFirstExecution";
 		model = (StatechartSpecification) super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
 		statechart.getAnnotations().clear();
 		statechart.getAnnotations().addAll(model.getAnnotations());
 		validationResult = tester.validate(statechart);
 		validationResult.assertOK();
-		
-		scope = "@ParentFirstExecution\n"
-				+ "@ChildFirstExecution";
+
+		scope = "@ParentFirstExecution\n" + "@ChildFirstExecution";
 		model = (StatechartSpecification) super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
 		statechart.getAnnotations().clear();
 		statechart.getAnnotations().addAll(model.getAnnotations());
@@ -403,7 +401,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	/**
-	 * 
+	 *
 	 * @see STextJavaValidator#checkReactionTrigger(org.yakindu.sct.model.stext.stext.ReactionTrigger)
 	 */
 	@Test
@@ -454,7 +452,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		validationResult.assertAll(errorMsg("Trigger 'x' is no event."), errorMsg("Trigger 'y' is no event."));
 
 	}
-	
+
 	@Test
 	public void checkRaisingExpressionEvent() {
 
@@ -463,13 +461,11 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		EObject model = super.parseExpression("raise e", ReactionEffect.class.getSimpleName(), scope);
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertOK();
-		
+
 		model = super.parseExpression("raise y", ReactionEffect.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
 		validationResult.assertAll(errorMsg("'y' is not an event."));
 	}
-	
-	
 
 	/**
 	 * @see STextJavaValidator#checkReactionEffectActions(org.yakindu.sct.model.stext.stext.ReactionEffect)
@@ -619,7 +615,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Entry) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics, new HashMap<>());
 			}
 		}
 
@@ -643,11 +639,10 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		assertIssueCount(diagnostics, 1);
 		assertWarning(diagnostics, TOP_LEVEL_REGION_ENTRY_HAVE_TO_BE_A_DEFAULT_ENTRY);
 	}
-	
+
 	@Test
 	public void checkTopLevelRegionHasEntry() {
-		statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR + "TopLevelRegionNoEntryPoint.sct");
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "TopLevelRegionNoEntryPoint.sct");
 		doValidateAllContents(Region.class);
 		assertIssueCount(diagnostics, 1);
 		assertError(diagnostics, REGION_UNBOUND_DEFAULT_ENTRY_POINT);
@@ -667,28 +662,6 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 		assertIssueCount(diagnostics, 1);
 		assertError(diagnostics, EXIT_DEFAULT_UNUSED);
-	}
-
-	protected void doValidateAllContents(Class<? extends EObject> clazz) {
-		Iterator<EObject> iter = statechart.eAllContents();
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (clazz.isInstance(element)) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
-			}
-		}
-	}
-
-	protected void assertAllTransitionsAreValid(Class<? extends EObject> clazz) {
-		Iterator<EObject> iter;
-		iter = statechart.eAllContents();
-
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (clazz.isInstance(element)) {
-				assertTrue(validator.validate(element, diagnostics, new HashMap<Object, Object>()));
-			}
-		}
 	}
 
 	@Test
@@ -742,10 +715,10 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 			EObject element = iter.next();
 			if (element instanceof Transition) {
 				((Transition) element).setTrigger(trigger);
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics, new HashMap<>());
 			}
 			if (element instanceof State) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics, new HashMap<>());
 			}
 		}
 
@@ -761,10 +734,10 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 			EObject element = iter.next();
 			if (element instanceof Transition) {
 				((Transition) element).setTrigger(trigger);
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics, new HashMap<>());
 			}
 			if (element instanceof State) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics, new HashMap<>());
 			}
 		}
 		assertIssueCount(diagnostics, 4);
@@ -778,7 +751,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Transition) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics, new HashMap<>());
 			}
 		}
 
@@ -822,70 +795,68 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		assertIssueCount(diagnostics, 3);
 		assertWarning(diagnostics, INTERNAL_DECLARATION_UNUSED);
 	}
-	
+
 	@Test
 	public void transitionsWithNoTrigger() {
 	}
-	
+
 	@Test
 	public void testOptionalParameter() {
 		EObject model;
 		String rule = Expression.class.getSimpleName();
 		AssertableDiagnostics result;
-		
+
 		model = parseExpression("optOp1()", rule);
 		result = tester.validate(model);
 		result.assertOK();
-		
+
 		model = parseExpression("optOp1(3)", rule);
 		result = tester.validate(model);
 		result.assertOK();
-		
+
 		model = parseExpression("optOp1(true)", rule);
 		result = tester.validate(model);
 		result.assertError(ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
 	}
-	
+
 	@Test
 	public void testMultipleOptionalParameters() {
 		EObject model;
 		String rule = Expression.class.getSimpleName();
 		AssertableDiagnostics result;
-		
+
 		model = parseExpression("optOp2()", rule);
 		result = tester.validate(model);
 		result.assertOK();
-		
+
 		model = parseExpression("optOp2(3)", rule);
 		result = tester.validate(model);
 		result.assertOK();
-		
+
 		model = parseExpression("optOp2(3, 4)", rule);
 		result = tester.validate(model);
 		result.assertOK();
-		
+
 		model = parseExpression("optOp2(true)", rule);
 		result = tester.validate(model);
 		result.assertError(ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
 
 		model = parseExpression("optOp2(true, 3, 4)", rule);
 		result = tester.validate(model);
-		result.assertAll(
-				errorCode(ITypeSystemInferrer.NOT_COMPATIBLE_CODE),
-				errorCode(ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE)
-				);
+		result.assertAll(errorCode(ITypeSystemInferrer.NOT_COMPATIBLE_CODE),
+				errorCode(ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE));
 	}
-	
+
 	@Test
 	public void testMixedOptionalParameters() {
 		EObject model;
 		String rule = Expression.class.getSimpleName();
 		AssertableDiagnostics result;
-		
+
 		model = parseExpression("optOp3(3)", rule);
 		result = tester.validate(model);
 		result.assertOK();
-		
+
 		model = parseExpression("optOp3(3, 4)", rule);
 		result = tester.validate(model);
 		result.assertOK();
@@ -893,108 +864,93 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		model = parseExpression("optOp3(3, 4, true)", rule);
 		result = tester.validate(model);
 		result.assertError(ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
-		
+
 		model = parseExpression("optOp3()", rule);
 		result = tester.validate(model);
 		result.assertError(ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
-		
+
 		model = parseExpression("optOp3(3, true)", rule);
 		result = tester.validate(model);
 		result.assertError(ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
 	}
-	
+
 	@Test
 	@Ignore("Why should anyone do that anyways")
 	public void testMixedOptionalAndVarArgsParameters() {
 		EObject model;
 		String rule = Expression.class.getSimpleName();
 		AssertableDiagnostics result;
-		
+
 		model = parseExpression("optOp4(3)", rule);
 		result = tester.validate(model);
 		result.assertOK();
-		
+
 		model = parseExpression("optOp4(3, 4)", rule);
 		result = tester.validate(model);
 		result.assertOK();
-		
+
 		model = parseExpression("optOp4(3, 4, 5, 6)", rule);
 		result = tester.validate(model);
 		result.assertOK();
-		
+
 		model = parseExpression("optOp4(3, 4, true)", rule);
 		result = tester.validate(model);
 		result.assertOK();
-		
+
 		model = parseExpression("optOp4(true)", rule);
 		result = tester.validate(model);
 		result.assertError(ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
 	}
-	
+
 	@Test
 	public void testDuplicateNames() {
 		EObject model;
 		AssertableDiagnostics result;
 		String scope;
-		
-		
+
 		scope = "interface: var x: integer var x: integer";
 		model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
-		
+
 		result = tester.validate(model);
 		result.assertAll(errorMsg("Duplicate"), errorMsg("Duplicate"));
-		
-		
+
 		scope = "interface: var x: integer internal: var x: integer";
 		model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
-		
+
 		result = tester.validate(model);
 		result.assertAll(errorMsg("Duplicate"), errorMsg("Duplicate"));
-		
-		
+
 		scope = "interface: var x: integer interface d: var x: integer";
 		model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
-		
+
 		result = tester.validate(model);
 		result.assertOK();
-		
-		
+
 		scope = "interface: var x: integer interface x: var d: integer";
 		model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
-		
+
 		result = tester.validate(model);
 		result.assertAll(errorMsg("Duplicate"), errorMsg("Duplicate"));
-		
-		
+
 		scope = "interface: var x: integer var X: integer";
 		model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
-		
+
 		result = tester.validate(model);
 		result.assertAll(warningMsg("Duplicate"), warningMsg("Duplicate"));
-		
+
 		scope = "interface: var x: integer interface X: var d: integer";
 		model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
-		
+
 		result = tester.validate(model);
 		result.assertOK();
-		
-		
-		scope = "interface: " + 
-				"var X: integer " + 
-				"var x: integer " + 
-				"" + 
-				"var d: integer " + 
-				" " + 
-				"interface D: " + 
-				"var x: integer " + 
-				" " + 
-				"interface x: " + 
-				"var i: integer";
+
+		scope = "interface: " + "var X: integer " + "var x: integer " + "" + "var d: integer " + " " + "interface D: "
+				+ "var x: integer " + " " + "interface x: " + "var i: integer";
 		model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
-		
+
 		result = tester.validate(model);
-		result.assertAll(warningMsg("Duplicate"), warningMsg("Duplicate"), errorMsg("Duplicate"), errorMsg("Duplicate"));
+		result.assertAll(warningMsg("Duplicate"), warningMsg("Duplicate"), errorMsg("Duplicate"),
+				errorMsg("Duplicate"));
 	}
-	
 
 }

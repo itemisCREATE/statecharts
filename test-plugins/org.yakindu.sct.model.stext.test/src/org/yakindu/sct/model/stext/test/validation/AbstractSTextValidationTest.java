@@ -2,9 +2,11 @@ package org.yakindu.sct.model.stext.test.validation;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -101,6 +103,28 @@ public abstract class AbstractSTextValidationTest extends AbstractSTextTest {
 		return AbstractTestModelsUtil
 				.loadStatechart(VALIDATION_TESTMODEL_DIR
 						+ modelName);
+	}
+
+	protected void doValidateAllContents(Class<? extends EObject> clazz) {
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (clazz.isInstance(element)) {
+				validator.validate(element, diagnostics, new HashMap<>());
+			}
+		}
+	}
+
+	protected void assertAllTransitionsAreValid(Class<? extends EObject> clazz) {
+		Iterator<EObject> iter;
+		iter = statechart.eAllContents();
+	
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (clazz.isInstance(element)) {
+				assertTrue(validator.validate(element, diagnostics, new HashMap<>()));
+			}
+		}
 	}
 
 }
