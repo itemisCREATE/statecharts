@@ -48,7 +48,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
-import org.yakindu.sct.model.stext.stext.EventDefinition;
+import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.OperationDefinition;
@@ -56,7 +56,6 @@ import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
-import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.stext.impl.StextFactoryImpl;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.model.stext.test.util.StextTestFactory;
@@ -844,6 +843,18 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
 		assertIssueCount(diagnostics, 5);
 		assertWarning(diagnostics, INTERNAL_DECLARATION_UNUSED);
+	}
+	
+	@Test
+	public void checkImportExists() {
+		Scope context = (Scope) parseExpression("import: does.not.exist", ImportScope.class.getSimpleName());
+		AssertableDiagnostics validationResult = tester.validate(context);
+		validationResult.assertErrorContains(String.format(STextValidationMessages.IMPORT_NOT_RESOLVED_MSG,"does.not.exist"));
+	}
+	
+	@Test
+	public void checkDuplicateImport() {
+		//Can't be checked here
 	}
 
 	@Test
