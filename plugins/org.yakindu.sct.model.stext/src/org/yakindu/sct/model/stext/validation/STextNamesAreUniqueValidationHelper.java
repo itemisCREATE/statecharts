@@ -26,18 +26,19 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.INamesAreUniqueValidationHelper;
 import org.eclipse.xtext.validation.NamesAreUniqueValidationHelper;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
-import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
  * @author rbeckmann
  *
  */
-public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidationHelper implements INamesAreUniqueValidationHelper {
+public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidationHelper
+		implements
+			INamesAreUniqueValidationHelper {
 	protected OperationCanceledManager operationCanceledManager = new OperationCanceledManager();
 
 	protected Map<QualifiedName, IEObjectDescription> nameMap;
 	protected Map<QualifiedName, IEObjectDescription> caseInsensitiveMap;
-	
+
 	@Override
 	public void checkUniqueNames(Iterable<IEObjectDescription> descriptions, ValidationMessageAcceptor acceptor) {
 		checkUniqueNames(descriptions, null, acceptor);
@@ -67,28 +68,32 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 
 	protected void checkDescriptionForDuplicatedName(IEObjectDescription description,
 			ValidationMessageAcceptor acceptor) {
-		if(!(getParentContainer(description.getEObjectOrProxy()) instanceof Statechart)) {
-			return;
-		}
 		QualifiedName qName = description.getName();
 		IEObjectDescription put = nameMap.put(qName, description);
 		IEObjectDescription lowerCasePut = caseInsensitiveMap.put(qName.toLowerCase(), description);
-		if(put != null) {
+		if (put != null) {
 			EClass common = checkForCommonSuperClass(put, description);
-			if(common != null) {
+			if (inEqualContainer(lowerCasePut, description) && common != null) {
 				createDuplicateNameError(description, common, acceptor);
 				createDuplicateNameError(put, common, acceptor);
 			}
-		} else if(lowerCasePut != null) {
-			if(lowerCasePut.getEClass().equals(description.getEClass())) {
+		} else if (lowerCasePut != null) {
+			if (inEqualContainer(lowerCasePut, description)
+					&& lowerCasePut.getEClass().equals(description.getEClass())) {
 				createDuplicateNameWarning(description, description.getEClass(), acceptor);
 				createDuplicateNameWarning(lowerCasePut, description.getEClass(), acceptor);
 			}
 		}
 	}
 
+	protected boolean inEqualContainer(IEObjectDescription one, IEObjectDescription two) {
+		EObject container1 = getParentContainer(one.getEObjectOrProxy());
+		EObject container2 = getParentContainer(two.getEObjectOrProxy());
+		return container1.equals(container2);
+	}
+
 	protected EObject getParentContainer(EObject object) {
-		if(object.eContainer() == null) {
+		if (object.eContainer() == null) {
 			return object;
 		}
 		return getParentContainer(object.eContainer());
@@ -98,56 +103,51 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 			ValidationMessageAcceptor acceptor) {
 		EObject object = description.getEObjectOrProxy();
 		EStructuralFeature feature = getNameFeature(object);
-		acceptor.acceptWarning(
-				getDuplicateNameWarningMessage(description, eClass, feature), 
-				object, 
-				feature,
-				ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-				getErrorCode());
+		acceptor.acceptWarning(getDuplicateNameWarningMessage(description, eClass, feature), object, feature,
+				ValidationMessageAcceptor.INSIGNIFICANT_INDEX, getErrorCode());
 	}
 
 	protected String getDuplicateNameWarningMessage(IEObjectDescription description, EClass eClass,
 			EStructuralFeature feature) {
-		return getDuplicateNameErrorMessage(description, eClass, feature) + ". Names differ only in case, which can lead to compilation problems.";
+		return getDuplicateNameErrorMessage(description, eClass, feature)
+				+ ". Names differ only in case, which can lead to compilation problems.";
 	}
 
 	protected EClass checkForCommonSuperClass(IEObjectDescription one, IEObjectDescription two) {
-		
-		
 		List<EClass> flatOne = buildSuperClassList(one.getEClass());
 		List<EClass> flatTwo = buildSuperClassList(two.getEClass());
-		
-		for(EClass eC : flatOne) {
-			if(flatTwo.contains(eC))
+
+		for (EClass eC : flatOne) {
+			if (flatTwo.contains(eC))
 				return eC;
 		}
-		
+
 		return null;
 	}
-	
+
 	protected List<EClass> buildSuperClassList(EClass eClass) {
 		List<List<EClass>> superClasses = new ArrayList<>();
-		
+
 		buildSuperClassList(superClasses, eClass, 0);
-		
+
 		List<EClass> result = new ArrayList<>();
-		for(List<EClass> list : superClasses) {
+		for (List<EClass> list : superClasses) {
 			result.addAll(list);
 		}
-		
+
 		return result;
 	}
-	
+
 	protected void buildSuperClassList(List<List<EClass>> superClasses, EClass eClass, int depth) {
-		if(superClasses.size() <= depth) {
+		if (superClasses.size() <= depth) {
 			superClasses.add(depth, new ArrayList<>());
 		}
-		
+
 		List<EClass> superTypes = eClass.getESuperTypes();
 
 		superClasses.get(depth).add(eClass);
-		
-		for(EClass superType : superTypes) {
+
+		for (EClass superType : superTypes) {
 			buildSuperClassList(superClasses, superType, depth + 1);
 		}
 	}
