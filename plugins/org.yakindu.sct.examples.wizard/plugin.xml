@@ -34,7 +34,7 @@
          category="org.yakindu.sct.ui.preferences.root"
          class="org.yakindu.sct.examples.wizard.preferences.ExamplesPreferencePage"
          id="com.yakindu.sct.examples"
-         name="Example Wizard">
+         name="Example wizard">
       </page>
    </extension>
    <extension point="org.eclipse.core.runtime.preferences">

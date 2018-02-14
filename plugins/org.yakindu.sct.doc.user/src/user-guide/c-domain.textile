@@ -703,7 +703,7 @@ h3(#cdom_creating_a_generator_model). Creating a generator model
 In the statechart model introduced above, do the following:
 
 # In the project view, right-click on the project's name. The context menu opens.
-# In the context menu, select _New → Code Generator Model_. The _YAKINDU Generator Model_ wizard opens.
+# In the context menu, select _New → Code generator model_. The _YAKINDU generator model_ wizard opens.
 # Enter a filename into the _File name_ field, e.g., _c.sgen_, and click _Next >_.
 # In the _Generator_ drop-down menu, select *YAKINDU SCT C Code Generator*.
 # Select the statechart models to generate C source code for. Click _Finish_.

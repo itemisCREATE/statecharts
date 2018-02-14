@@ -25,7 +25,7 @@ import org.yakindu.sct.generator.core.GeneratorActivator;
 public class GeneratorRootPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
 	public GeneratorRootPreferencePage() {
-		setDescription("Change the behavior of the Generator Model");
+		setDescription("Change the behavior of the generator model");
 	}
 
 	@Override

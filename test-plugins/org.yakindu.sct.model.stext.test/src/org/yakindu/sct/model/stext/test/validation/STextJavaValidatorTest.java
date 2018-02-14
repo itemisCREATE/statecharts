@@ -47,6 +47,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
+import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.OperationDefinition;
@@ -599,8 +600,33 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 	}
 
+	@Test
+	public void checkReadOnlyValueDefinitionExpression() {
+		String decl = "internal: var readonly v1:integer";
+		EObject model = super.parseExpression(decl, InternalScope.class.getSimpleName());
+		AssertableDiagnostics result = tester.validate(model);
+		result.assertDiagnosticsCount(1);
+		result.assertWarningContains(String.format(STextJavaValidator.DECLARATION_DEPRECATED, "readonly"));
+	}
+
+	@Test
+	public void checkExternalValueDefinitionExpression() {
+		String decl = "internal: var external v1:integer";
+		EObject model = super.parseExpression(decl, InternalScope.class.getSimpleName());
+		AssertableDiagnostics result = tester.validate(model);
+		result.assertDiagnosticsCount(1);
+		result.assertWarningContains(String.format(STextJavaValidator.DECLARATION_DEPRECATED, "external"));	}
+
+	@Test
+	public void checkDeprecatedLocalEventDefinition() {
+		String decl = "internal: local event e1";
+		EObject model = super.parseExpression(decl, InternalScope.class.getSimpleName());
+		AssertableDiagnostics result = tester.validate(model);
+		result.assertDiagnosticsCount(1);
+		result.assertWarningContains(String.format(STextJavaValidator.DECLARATION_DEPRECATED, "local"));
+	}
 	/**
-	 * checks tht each @Check method of {@link STextJavaValidator} has a @Test
+	 * checks that each @Check method of {@link STextJavaValidator} has a @Test
 	 * method in this class with the same name
 	 */
 	@Test
@@ -792,8 +818,20 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		Statechart statechart = AbstractTestModelsUtil
 				.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnusedInternalDeclarations.sct");
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
-		assertIssueCount(diagnostics, 3);
+		assertIssueCount(diagnostics, 5);
 		assertWarning(diagnostics, INTERNAL_DECLARATION_UNUSED);
+	}
+
+	@Test
+	public void checkImportExists() {
+		Scope context = (Scope) parseExpression("import: does.not.exist", ImportScope.class.getSimpleName());
+		AssertableDiagnostics validationResult = tester.validate(context);
+		validationResult.assertErrorContains(String.format(STextValidationMessages.IMPORT_NOT_RESOLVED_MSG,"does.not.exist"));
+	}
+
+	@Test
+	public void checkDuplicateImport() {
+		//Can't be checked here
 	}
 
 	@Test
