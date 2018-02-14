@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<templates>
+	<template autoinsert="true"
+		context="org.yakindu.sct.model.stext.SText.VariableDefinition"
+		deleted="false" description="Create a string constant" enabled="true"
+		name="Const" id="at001">const ${name} : string</template>
+	<template autoinsert="true"
+		context="org.yakindu.sct.model.stext.SText.EventDefinition" deleted="false"
+		description="Create a new in event" enabled="true" name="In Event" id="at002">
+		in event ${name}
+	</template>
+	<template autoinsert="true" id="ar003"
+		context="org.yakindu.sct.model.stext.SText.VariableDefinition"
+		deleted="false" description="Create a new integer variable" enabled="true"
+		name="intVariable" >var ${name}: integer = ${value}</template>
+	<template autoinsert="true"
+		context="org.yakindu.sct.model.stext.SText.OperationDefinition"
+		deleted="false" description="Create an operation with two parameters"
+		enabled="true" name="New operation" id="as004">operation ${name} (${param1}: integer, ${param2}:
+		integer): integer</template>
+	<template autoinsert="true"
+		context="org.yakindu.sct.model.stext.SText.EventDefinition" deleted="false"
+		description="Creates a new out event" enabled="true" name="Out Event" id="ert005">out event
+		${name}</template>
+	<template autoinsert="true"
+		context="org.yakindu.sct.model.stext.SText.StextTrigger" deleted="false"
+		description="After some miliseconds trigger" enabled="true" name="Time trigger" id="ert006">after
+		${number} ms</template>
+	<template autoinsert="true"
+		context="org.yakindu.sct.model.stext.SText.StextTrigger" deleted="false"
+		description="Trigger with simple guard" enabled="true" name="Trigger" id="007">[counter
+		== 1]</template>
+	<template autoinsert="true"
+		context="org.yakindu.sct.model.stext.SText.StextTrigger" deleted="false"
+		description="Timed Trigger with guard and effect" enabled="true"
+		name="Trigger with guard and event" id="008">after ${number} ms [${true}] / raise ${someEvent}</template>
+</templates>
