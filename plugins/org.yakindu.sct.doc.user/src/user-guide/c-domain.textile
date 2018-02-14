@@ -782,6 +782,8 @@ This is mainly done by:
 
 Keep in mind that all public functions and types of the statechart are prefixed with its name, so keeping that one short helps a lot.
 
+This annotation is not supported by the C++ generator, only by the C generator.
+
 h3(#cdom_annotations_short_identifiers_example). Example
 
 See the following example:
