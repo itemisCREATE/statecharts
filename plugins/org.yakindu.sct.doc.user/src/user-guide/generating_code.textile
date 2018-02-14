@@ -363,9 +363,9 @@ h4(#codegen_c_identifiersettings_feature). IdentifierSettings feature
 The *IdentifierSettings* feature allows the configuration of module names and identifier character length:
 
 * _moduleName_ (String, optional): Name for header and implementation. Default: statechart name.
-* _statemachinePrefix_ (Boolean, optional): Prefix that is prepended to function, state, and type names.
-* _maxIdentifierLength_ (Integer, optional): Maximum number of characters of an identifier. Default: 31 characters, which is complying with the ANSI C99 standard.
 * _separator_ (String, optional): Character to replace whitespace and otherwise illegal characters in names.
+
+Please note that the two options _statemachinePrefix_ and _maxIdentifierLength_ that existed in older versions of YAKINDU Statechart Tools were removed in favor of a statechart annotation that is only available in C Domain bundled with YAKINDU Statechart Tools Professional Edition, see "@ShortIdentifiers":../user-guide/c_domain.textile#cdom_annotations_short_identifiers .
 
 
 ==<div class="example">==
@@ -374,8 +374,6 @@ Example:
 
 bc. feature IdentifierSettings {
     moduleName = "MyStatechart"
-    statemachinePrefix = "myStatechart"
-    maxIdentifierLength = 31
     separator = "_"
 }
 
