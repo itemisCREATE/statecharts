@@ -184,7 +184,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	private CollapsedBorder collapsedBorder;
 
 	private EmbeddedEditor embeddedEditor;
-
 	private XtextResource xtextResource;
 
 	public StatechartDiagramEditor() {

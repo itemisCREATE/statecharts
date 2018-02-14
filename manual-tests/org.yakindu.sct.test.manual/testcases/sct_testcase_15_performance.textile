@@ -4,6 +4,6 @@ h1. YAKINDU Statechart Tools – Testcase 15 - Performance
 | 15.1 | Loading big model | Open statechart _big_file.sct_. | The statechart is opened. | %{color:red}open% |
 | 15.2 | Performance check: editing | Add a new state to the statechart. | <ul><li><p>The editor works smoothly.</p></li><li><p>The validation is done quickly.</p></li><li><p>The overall user experience is okay.</p></li></ul> | %{color:red}open% |
 | 15.3 | Performance check: saving | Save the statechart. | <ul><li><p>Saving the statechart to a file is done quickly.</p></li></ul> | %{color:red}open% |
-| 15.4 | Changing preferences | <ol><li><p>In the main menu, select _Window → Preferences_.</p></li><li><p>Select _YAKINDU SCT → Diagram Appearance_.</p></li><li><p>Disable _Enable live validation_.</p></li></ol> | <ul><li><p>No error occurred.</p></li></ul> | %{color:red}open% |
+| 15.4 | Changing preferences | <ol><li><p>In the main menu, select _Window → Preferences_.</p></li><li><p>Select _YAKINDU SCT → Diagram appearance_.</p></li><li><p>Disable _Enable live validation_.</p></li></ol> | <ul><li><p>No error occurred.</p></li></ul> | %{color:red}open% |
 | 15.5 | Performance check | Add a new state to the statechart. | <ul><li><p>The new state has no error marker.</p></li></ul> | %{color:red}open% |
 | 15.6 | Performance check | Save the statechart. | <ul><li><p>Saving the statechart to a file is done quickly.</p></li><li><p>The new state from T15.5 has an error marker now.</p></li></ul> | %{color:red}open% |
