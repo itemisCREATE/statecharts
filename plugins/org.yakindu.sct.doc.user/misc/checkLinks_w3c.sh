@@ -45,16 +45,23 @@ do
     esac
 done
 
+commonExcludes="https://github.com/Yakindu/.*|mailto:.*|https://itemisag.wistia.com/medias/9ek8usz18r|https://bugs.eclipse.org/.*"
 if [ "${target}" == "eclipsehelp" ]
 then
     checklink --broken --dir-redirects \
 	--recursive --depth 1 \
-	--exclude https://github.com/Yakindu/.* \
+	--exclude "${commonExcludes}" \
 	${prefix}user-guide/c-domain.html \
+	${prefix}user-guide/code_generation_cpp.textile \
+	${prefix}user-guide/code_generation_c.textile \
+	${prefix}user-guide/code_generation_custom.textile \
+	${prefix}user-guide/code_generation_intro.textile \
+	${prefix}user-guide/code_generation_java.textile \
+	${prefix}user-guide/code_generation_statechart_image.textile \
 	${prefix}user-guide/editing_statecharts.html \
 	${prefix}user-guide/generating_code_headless.html \
-	${prefix}user-guide/generating_code.html \
 	${prefix}user-guide/glossary.html \
+	${prefix}user-guide/installation.html \
 	${prefix}user-guide/overview.html \
 	${prefix}user-guide/sctunit.html \
 	${prefix}user-guide/simulating_statecharts.html \
@@ -65,7 +72,7 @@ elif [ "${target}" == "web" ]
 then
     checklink --broken --dir-redirects \
 	--recursive --depth 1 \
-	--exclude 'https://github.com/Yakindu/.*|http://groups.google.com/.*|javascript:.*|tel:.*|mailto:.*|https://cta-redirect.hubspot.com/' \
+	--exclude "${commonExcludes}"'|http://groups.google.com/.*|javascript:.*|tel:.*|https://cta-redirect.hubspot.com/' \
 	https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide/ \
 	https://www.itemis.com/en/yakindu/state-machine/documentation/tutorials/ \
         2>&1 | tee log.txt

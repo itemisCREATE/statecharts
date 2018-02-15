@@ -195,7 +195,11 @@
                 <!-- include name="user-guide/typescript-domain.textile" / -->
                 <include name="user-guide/statechart_language.textile" />
                 <include name="user-guide/code_generation_intro.textile" />
-                <include name="user-guide/code_generation_generators.textile" />
+                <include name="user-guide/code_generation_c.textile" />
+                <include name="user-guide/code_generation_cpp.textile" />
+                <include name="user-guide/code_generation_java.textile" />
+                <include name="user-guide/code_generation_statechart_image.textile" />
+                <include name="user-guide/code_generation_custom.textile" />
                 <include name="user-guide/generating_code_headless.textile" />
                 <include name="user-guide/sctunit.textile" />
                 <!-- <include name="user-guide/glossary.textile" /> -->
@@ -204,15 +208,13 @@
             <!-- Check whether we have all the expected textile source files – no more, no less: -->
             <fail message="Number of textile source file(s) doesn't match.">
                 <condition>
-                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="11" />
+                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="15" />
                 </condition>
             </fail>
 
-            <!-- TO DO: Concatenate all source files into a single one and play around with multipleOutputFiles="true" -->
-
             <!-- Convert textile source files to HTML: -->
             <wikitext-to-eclipse-help markupLanguage="Textile"
-                                      multipleOutputFiles="true"
+                                      multipleOutputFiles="false"
                                       navigationImages="true"
                                       formatoutput="true"
                                       validate="true"
@@ -385,7 +387,11 @@
                         <!-- file name="user-guide/typescript-domain.textile" /-->
                         <file name="user-guide/statechart_language.textile" />
                         <file name="user-guide/code_generation_intro.textile" />
-                        <file name="user-guide/code_generation_generators.textile" />
+                        <file name="user-guide/code_generation_c.textile" />
+                        <file name="user-guide/code_generation_cpp.textile" />
+                        <file name="user-guide/code_generation_java.textile" />
+                        <file name="user-guide/code_generation_statechart_image.textile" />
+                        <file name="user-guide/code_generation_custom.textile" />
                         <file name="user-guide/generating_code_headless.textile" />
                         <file name="user-guide/sctunit.textile" />
                         <!-- file name="user-guide/glossary.textile" / -->

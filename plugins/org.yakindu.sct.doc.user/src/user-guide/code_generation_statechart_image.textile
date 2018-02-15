@@ -1,0 +1,65 @@
+
+p. 
+
+==<div style="counter-reset: h1 7 h2 7">==
+
+==<div class="pro-feature">==
+
+h2(#codegen_statechart_images_generator). Statechart image generator
+
+The statechart image generator renders a statechart and all its subdiagrams, if any, as image files. The generator supports several pixel-based and vector-based image formats, subject to the capabilities of the Java implementation you are using.
+
+
+h3(#codegen_statechart_images_sample_generator_model). Sample statechart image generator model
+
+The following example is a generator model to create SVG vector images of the _turbineControl_ statechart. The generated images are placed in the _images_ folder, which is located in the _powerPlant_ project.
+
+==<div class="example">==
+
+bc.. GeneratorModel for yakindu::images {
+
+    statechart turbineControl {
+
+        feature Outlet {
+            targetProject = "powerPlant"
+            targetFolder = "images"
+        }
+
+        feature Renderer {
+            format = "svg"
+        }
+    }
+}
+
+p. 
+
+==</div>==
+
+
+h3(#codegen_statechart_images_generator_id). Statechart image generator ID
+
+The statechart image generator's ID is *yakindu::images*. If you are using the YAKINDU generator model configuration wizard to create a generator model, select the _YAKINDU Image Generator_ to place the generator ID into the _.sgen_ file.
+
+
+h3(#codegen_statechart_images_generator_features). Statechart image generator features
+
+h4(#codegen_statechart_images_outlet_feature). Outlet feature
+
+The mandatory *Outlet* feature specifies the project and folder the statechart images will be written to. See section "&quot;Outlet feature&quot;":../user-guide/code_generation_intro.html#codegen_outlet_feature for details.
+
+bq. *Please note:* The image generator supports the *Outlet* feature's _targetProject_ and _targetFolder_ parameters only.
+
+
+==<!-- Start-pro sgen_feature_renderer -->==
+
+h4(#codegen_statechart_images_renderer_feature). Renderer feature
+
+The mandatory *Renderer* feature controls the rendering of the images.
+
+* _format_ (String, required): Format of the generated images. Supported image formats are listed in section "&quot;Exporting_a_statechart_as_an_image_file&quot;":../user-guide/editing_statecharts.html#edit_exporting_a_statechart_as_an_image_file.
+
+==<!-- End-pro sgen_feature_renderer -->==
+
+==</div>==
+
+==</div>==

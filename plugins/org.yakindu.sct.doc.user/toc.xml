@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?NLS TYPE="org.eclipse.help.toc"?>
 
-<toc label="YAKINDU Statechart Tools Documentation">
+<toc label="YAKINDU Statechart Tools documentation">
 
-    <topic label="Overview">
-        <link toc="help/user-guide/overview-toc.xml"/>
+    <topic label="User guide">
+    <link toc="help/user-guide/overview-toc.xml"/>
+    <link toc="help/user-guide/installation-toc.xml"/>
+    <link toc="help/user-guide/editing_statecharts-toc.xml"/>
+    <link toc="help/user-guide/simulating_statecharts-toc.xml"/>
+    <link toc="help/user-guide/c-domain-toc.xml"/>
+    <!-- <link toc="help/user-guide/typescript-domain-toc.xml"/> -->
+    <link toc="help/user-guide/statechart_language-toc.xml"/>
+    <topic label="Generating code" href="help/user-guide/code_generation_intro.html">
+        <link toc="help/user-guide/code_generation_intro-toc.xml"/>
+        <link toc="help/user-guide/code_generation_c-toc.xml"/>
+        <link toc="help/user-guide/code_generation_cpp-toc.xml"/>
+        <link toc="help/user-guide/code_generation_java-toc.xml"/>
+        <link toc="help/user-guide/code_generation_statechart_image-toc.xml"/>
+        <link toc="help/user-guide/code_generation_custom-toc.xml"/>
+        <link toc="help/user-guide/generating_code_headless-toc.xml"/>
+    </topic>
+    <link toc="help/user-guide/sctunit-toc.xml"/>
     </topic>
 
     <topic label="Tutorials">
         <link toc="help/tutorials/tutorials-toc.xml"/>
     </topic>
-
-    <topic label="User Guide">
-        <link toc="help/user-guide/editing_statecharts-toc.xml"/>
-        <link toc="help/user-guide/simulating_statecharts-toc.xml"/>
-        <link toc="help/user-guide/c-domain-toc.xml"/>
-        <!-- <link toc="help/user-guide/typescript-domain-toc.xml"/> -->
-        <link toc="help/user-guide/statechart_language-toc.xml"/>
-        <link toc="help/user-guide/code_generation_intro-toc.xml"/>
-        <link toc="help/user-guide/code_generation_generators-toc.xml"/>
-        <link toc="help/user-guide/generating_code_headless-toc.xml"/>
-        <link toc="help/user-guide/sctunit-toc.xml"/>
-    </topic>
-
-    <link toc="help/user-guide/installation-toc.xml"/>
 
 </toc>
