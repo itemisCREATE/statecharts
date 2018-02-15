@@ -24,13 +24,9 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.DestroyRequest;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.View;
-import org.eclipse.jface.util.IPropertyChangeListener;
-import org.eclipse.jface.util.PropertyChangeEvent;
-import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.editor.figures.StatechartTextFigure;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.policies.PreferredSizeHandlerEditPolicy;
-import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
 
 /**
@@ -38,7 +34,7 @@ import org.yakindu.sct.ui.editor.providers.SemanticHints;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class StatechartTextEditPart extends ShapeNodeEditPart implements IPrimaryEditPart, IPropertyChangeListener {
+public class StatechartTextEditPart extends ShapeNodeEditPart implements IPrimaryEditPart {
 
 	public StatechartTextEditPart(View view) {
 		super(view);
@@ -56,13 +52,11 @@ public class StatechartTextEditPart extends ShapeNodeEditPart implements IPrimar
 	@Override
 	public void activate() {
 		super.activate();
-		DiagramActivator.getDefault().getPreferenceStore().addPropertyChangeListener(this);
 	}
 
 	@Override
 	public void deactivate() {
 		super.deactivate();
-		DiagramActivator.getDefault().getPreferenceStore().removePropertyChangeListener(this);
 	}
 
 	@Override
@@ -131,13 +125,5 @@ public class StatechartTextEditPart extends ShapeNodeEditPart implements IPrimar
 
 	private StatechartTextFigure getPrimaryShape() {
 		return (StatechartTextFigure) getFigure().getChildren().get(0);
-	}
-
-	@Override
-	public void propertyChange(PropertyChangeEvent event) {
-		if (StatechartPreferenceConstants.PREF_DEFINITION_SECTION.equals(event.getProperty())) {
-			refresh();
-		}
-
 	}
 }

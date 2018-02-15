@@ -119,7 +119,7 @@ h2(#setting_up_a_code_generator_project). Setting up a code generator project
 
 In order to deploy a code generator and actually generate code, you have to set up a _code generator project_. This is described in the following subsections.
 
-For configuring the code generation process, YAKINDU Statechart Tools uses a textual generator model called _SGen_. It can be created either by using the _YAKINDU Statechart Generator Model_ wizard or by creating a text file with the filename extension _.sgen_.
+For configuring the code generation process, YAKINDU Statechart Tools uses a textual generator model called _SGen_. It can be created either by using the _YAKINDU Statechart generator model_ wizard or by creating a text file with the filename extension _.sgen_.
 
 To create a generator model using the wizard, proceed as follows:
 

@@ -13,7 +13,6 @@ package org.yakindu.sct.ui.editor.editor;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
@@ -53,17 +52,14 @@ import org.eclipse.jface.databinding.swt.ISWTObservableValue;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
-import org.eclipse.jface.util.IPropertyChangeListener;
-import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.MouseAdapter;
@@ -76,6 +72,7 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Transform;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -104,7 +101,6 @@ import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.xtext.utils.gmf.resource.DirtyStateListener;
-import org.yakindu.base.xtext.utils.jface.fieldassist.CompletionProposalAdapter;
 import org.yakindu.base.xtext.utils.jface.viewers.FilteringMenuManager;
 import org.yakindu.base.xtext.utils.jface.viewers.StyledTextXtextAdapter;
 import org.yakindu.base.xtext.utils.jface.viewers.util.ActiveEditorTracker;
@@ -120,7 +116,6 @@ import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.StatechartImages;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningEditor;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
-import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 import org.yakindu.sct.ui.editor.propertysheets.ValidatingEMFDatabindingContext;
 import org.yakindu.sct.ui.editor.proposals.ContentProposalViewerKeyHandler;
 import org.yakindu.sct.ui.editor.providers.ISCTOutlineFactory;
@@ -138,43 +133,45 @@ import com.google.inject.Key;
  * @author robert rudi
  */
 @SuppressWarnings("restriction")
-public class StatechartDiagramEditor extends DiagramPartitioningEditor
-		implements
-			IGotoMarker,
-			IContextElementProvider,
-			IPropertyChangeListener {
+public class StatechartDiagramEditor extends DiagramPartitioningEditor implements IGotoMarker, IContextElementProvider {
 
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
 
-	protected static final String ROTATED_LABEL_TEXT = "Definition section";
-	protected static final String CANNOT_INLINE_SECTION_TOOLTIP = "Cannot be inlined for subdiagrams";
-	protected static final String INLINE_SECTION_TOOLTIP = "Inline statechart definition section";
-	protected static final String EXPAND_TOOLTIP = "Show statechart definition section";
-	protected static final String COLLAPSE_TOOLTIP = "Hide statechart definition section";
-	protected final Image EXPAND_IMAGE = StatechartImages.EXPAND.image();
-	protected final Image COLLAPSE_IMAGE = StatechartImages.COLLAPSE.image();
+	protected static final String CANNOT_INLINE_SECTION = "Cannot be inlined for subdiagrams";
+	protected static final String DEFINITION_SECTION = "definition section";
+	protected static final String INLINE_SECTION = "Inline " + DEFINITION_SECTION;
+	protected static final String SHOW_SECTION = "Show " + DEFINITION_SECTION;
+	protected static final String HIDE_SECTION = "Hide " + DEFINITION_SECTION;
 
-	protected static final int TEXT_CONTROL_HORIZONTAL_MARGIN = 10;
+	private static final int EDITOR_HORIZONTAL_MARGIN = 10;
+	private static final int EDITOR_VERTICAL_MARGIN = 10;
 	protected static final int INITIAL_PALETTE_SIZE = 175;
-	protected static final int[] MIN_CONTROL_SIZE = {11, 21};
+	protected static final int[] MIN_SIZE = {11, 21};
 	protected static final int BORDERWIDTH = 2;
-	protected static boolean imageLabelHasFocus = false;
+	protected static boolean iconHasFocus = false;
 	protected int[] previousWidths = DEFAULT_WEIGHTS;
+	private boolean isSectionExpanded = true;
 
 	private KeyHandler keyHandler;
 	private DirtyStateListener domainAdapter;
 	private LiveValidationListener validationListener;
 	private IValidationIssueStore issueStore;
-	private SwitchListener switchListener;
+	private SelectionListener selectionListener;
 	private ResizeListener resizeListener;
-	private boolean isDefinitionSectionExpanded = true;
+	private IconPaintListener iconPaintListener;
+	private IconMouseListener iconMouseListener;
+	private IconMouseTrackListener iconMouseTrackListener;
+	private NameModificationListener nameModificationListener;
+	private CollapsedBorderMouseTrackListener collapsedBorderMouseTrackListener;
+	private CollapsedBorderMouseListener collapsedBorderMouseListener;
+	private EmbeddedEditorFocusListener embeddedEditorFocusListener;
+	private EmbeddedEditorKeyListener embeddedEditorKeyListener;
 
-	private ImageLabelMouseListener imageLabelMouseListener;
-	private ImageLabelMouseTrackListener imageLabelMouseTrackListener;
-	private ImageLabelPaintListener imageLabelPaintListener;
-
-	private StyledText xtextControl;
 	private Label switchControl;
+	private Composite labelComposite;
+	private CollapsedBorder collapsedBorder;
+
+	private StyledText embeddedEditor;
 
 	public StatechartDiagramEditor() {
 		super(true);
@@ -229,11 +226,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 		super.init(site, input);
 		checkXtextNature();
 		registerValidationListener();
-		registerPropertyChangeListener();
-	}
-
-	protected void registerPropertyChangeListener() {
-		DiagramActivator.getDefault().getPreferenceStore().addPropertyChangeListener(this);
 	}
 
 	protected void registerValidationListener() {
@@ -461,7 +453,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 	public void dispose() {
 		saveState(getMemento());
 
-		removepropertyChangeListener();
 		if (validationListener != null) {
 			validationListener.dispose();
 		}
@@ -473,40 +464,43 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 		if (domainAdapter != null)
 			domainAdapter.dispose();
 
-		disposeDefinitionSectionControls();
+		disposeEmbeddedEditor();
 
 		super.dispose();
 	}
 
-	protected void removepropertyChangeListener() {
-		DiagramActivator.getDefault().getPreferenceStore().removePropertyChangeListener(this);
-	}
-
-	protected void disposeDefinitionSectionControls() {
-		if (switchListener != null && switchControl != null && !switchControl.isDisposed())
-			switchControl.removeMouseListener(switchListener);
-
-		if (resizeListener != null && getSash() != null && !getSash().isDisposed())
-			getSash().removeControlListener(resizeListener);
-
-		if (resizeListener != null && xtextControl != null && !xtextControl.isDisposed())
-			xtextControl.removeControlListener(resizeListener);
-
-		if (xtextControl != null && !xtextControl.isDisposed()) {
-			xtextControl.dispose();
-			xtextControl = null;
-		}
-
-		if (switchControl != null && !switchControl.isDisposed()) {
+	protected void disposeEmbeddedEditor() {
+		if (selectionListener != null && switchControl != null && !switchControl.isDisposed()) {
+			switchControl.removeMouseListener(selectionListener);
+			selectionListener = null;
 			switchControl.dispose();
 			switchControl = null;
 		}
 
-		switchListener = null;
-		resizeListener = null;
-		imageLabelMouseListener = null;
-		imageLabelMouseTrackListener = null;
-		imageLabelPaintListener = null;
+		if (embeddedEditor != null && !embeddedEditor.isDisposed()) {
+			if (resizeListener != null) {
+				embeddedEditor.removeControlListener(resizeListener);
+				getSash().removeControlListener(resizeListener);
+				resizeListener = null;
+			}
+			if (embeddedEditorKeyListener != null) {
+				embeddedEditor.removeKeyListener(embeddedEditorKeyListener);
+				embeddedEditorKeyListener = null;
+			}
+			if (embeddedEditorFocusListener != null) {
+				embeddedEditor.removeFocusListener(embeddedEditorFocusListener);
+				embeddedEditorFocusListener = null;
+			}
+			embeddedEditor.dispose();
+			embeddedEditor = null;
+		}
+
+		iconMouseListener = null;
+		iconMouseTrackListener = null;
+		iconPaintListener = null;
+		nameModificationListener = null;
+		collapsedBorderMouseTrackListener = null;
+		collapsedBorderMouseListener = null;
 	}
 
 	@Override
@@ -528,19 +522,22 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 
 	@Override
 	protected void createTextEditor(Composite parent) {
-		Composite definitionSection = new Composite(parent, SWT.BORDER);
-		GridLayoutFactory.fillDefaults().numColumns(2).spacing(0, 0).applyTo(definitionSection);
+		if (getContextObject() instanceof Statechart) {
+			Composite definitionSection = new Composite(parent, SWT.BORDER);
+			GridLayoutFactory.fillDefaults().numColumns(2).spacing(0, 0).applyTo(definitionSection);
 
-		switchControl = createSwitchControl(definitionSection);
-		createDefinitionSectionLabels(definitionSection);
-		xtextControl = createXtextControl(definitionSection);
+			switchControl = createSwitchControl(definitionSection);
+			createDefinitionSectionLabels(definitionSection);
+			embeddedEditor = createEmbeddedEditor(definitionSection);
 
-		switchListener = new SwitchListener(parent);
-		resizeListener = new ResizeListener(parent, definitionSection);
+			selectionListener = new SelectionListener(embeddedEditor);
+			switchControl.addMouseListener(selectionListener);
 
-		parent.addControlListener(resizeListener);
-		switchControl.addMouseListener(switchListener);
-		xtextControl.addControlListener(resizeListener);
+			resizeListener = new ResizeListener(definitionSection);
+
+			parent.addControlListener(resizeListener);
+			embeddedEditor.addControlListener(resizeListener);
+		}
 	}
 
 	/*
@@ -554,114 +551,76 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 	@Override
 	public void createPartControl(Composite parent) {
 		super.createPartControl(parent);
-		toggleDefinitionSection();
-		restoreSashWidths(getSash(), getMemento());
-		enableXtext(xtextControl);
-		reloadFromPreferences();
-	}
-
-	/**
-	 * Checks if the pinning feature is activated. In case the definition section is
-	 * expanded, but the pinning feature was deactivated, the notation model will be
-	 * changed, so the inline statechart diagram style will be visible.
-	 */
-	protected void reloadFromPreferences() {
-		boolean pinningActivated = isPinningActivated();
-		if (!isDefinitionSectionInlined() && !pinningActivated) {
-			TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(getDiagram());
-			BooleanValueStyle inlineStyle = DiagramPartitioningUtil.getInlineDefinitionSectionStyle(getDiagram());
-
-			SetCommand command = setBooleanValueStyle(inlineStyle, domain);
-			domain.getCommandStack().execute(command);
-
+		if (getContextObject() instanceof Statechart) {
 			toggleDefinitionSection();
-			refreshDiagramEditPartChildren();
+			restoreSashWidths(getSash(), getMemento());
+			enableXtext(embeddedEditor);
 		}
 	}
 
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	protected void enableXtext(StyledText xtextControl) {
+		final StyledTextXtextAdapter xtextAdapter = createXtextAdapter();
+		xtextAdapter.adapt((StyledText) xtextControl);
+		initContextMenu(xtextControl);
+		IEMFValueProperty modelProperty = EMFEditProperties.value(getEditingDomain(),
+				SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION);
+		ISWTObservableValue uiProperty = WidgetProperties.text(new int[]{SWT.FocusOut, SWT.Modify})
+				.observe(xtextControl);
+		IObservableValue modelPropertyObservable = modelProperty.observe(
+				EcoreUtil.getObjectByType(getDiagram().eResource().getContents(), SGraphPackage.Literals.STATECHART));
+		ValidatingEMFDatabindingContext context = new ValidatingEMFDatabindingContext(this, getSite().getShell());
+		context.bindValue(uiProperty, modelPropertyObservable, null, null);
+	}
+
+	protected StyledTextXtextAdapter createXtextAdapter() {
 		final StyledTextXtextAdapter xtextAdapter = new StyledTextXtextAdapter(
 				getEmbeddedStatechartSpecificationInjector(), getSite());
 		xtextAdapter.getFakeResourceContext().getFakeResource().eAdapters().add(new ContextElementAdapter(this));
-		xtextAdapter.adapt((StyledText) xtextControl);
-		initContextMenu(xtextControl);
-		CompletionProposalAdapter adapter = new CompletionProposalAdapter(xtextControl,
-				xtextAdapter.getContentAssistant(),
-				org.eclipse.jface.bindings.keys.KeyStroke.getInstance(SWT.CTRL, SWT.SPACE), null);
-		IEMFValueProperty modelProperty = EMFEditProperties.value(getEditingDomain(),
-				SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION);
-
-		ISWTObservableValue uiProperty = WidgetProperties.text(new int[]{SWT.FocusOut, SWT.Modify})
-				.observe(xtextControl);
-		ValidatingEMFDatabindingContext context = new ValidatingEMFDatabindingContext(this, getSite().getShell());
-
-		context.bindValue(uiProperty, modelProperty.observe(
-				EcoreUtil.getObjectByType(getDiagram().eResource().getContents(), SGraphPackage.Literals.STATECHART)),
-				null, new UpdateValueStrategy() {
-					@Override
-					protected IStatus doSet(IObservableValue observableValue, Object value) {
-						if (adapter != null && !adapter.isProposalPopupOpen())
-							return super.doSet(observableValue, value);
-						return Status.OK_STATUS;
-					}
-				});
+		return xtextAdapter;
 	}
 
-	protected StyledText createXtextControl(Composite definitionSection) {
+	protected StyledText createEmbeddedEditor(Composite definitionSection) {
 		StyledText textControl = new StyledText(definitionSection, SWT.MULTI | SWT.V_SCROLL | SWT.WRAP);
-		GridDataFactory.fillDefaults().grab(true, true).indent(TEXT_CONTROL_HORIZONTAL_MARGIN, 0).applyTo(textControl);
+		GridDataFactory.fillDefaults().grab(true, true).indent(EDITOR_HORIZONTAL_MARGIN, EDITOR_VERTICAL_MARGIN)
+				.span(2, 1).applyTo(textControl);
+
 		textControl.setAlwaysShowScrollBars(false);
 		textControl.setBackground(ColorConstants.white);
-		textControl.addKeyListener(new KeyListener() {
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				if (e.stateMask == SWT.CTRL && e.keyCode == 'a') {
-					textControl.selectAll();
-				}
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-			}
-		});
-		textControl.addFocusListener(new FocusAdapter() {
-			public void focusGained(FocusEvent e) {
-				((DiagramDocumentEditor) ActiveEditorTracker.getLastActiveEditor()).getDiagramGraphicalViewer()
-						.select(getDiagramEditPart());
-			};
-		});
+		embeddedEditorKeyListener = new EmbeddedEditorKeyListener();
+		embeddedEditorFocusListener = new EmbeddedEditorFocusListener();
+		textControl.addKeyListener(embeddedEditorKeyListener);
+		textControl.addFocusListener(embeddedEditorFocusListener);
 		return textControl;
 	}
 
-	protected Composite createDefinitionSectionLabels(Composite definitionSection) {
-		Composite labelComposite = new Composite(definitionSection, SWT.NONE);
+	protected void createDefinitionSectionLabels(Composite definitionSection) {
+		labelComposite = new Composite(definitionSection, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(2).spacing(0, 0).applyTo(labelComposite);
 		GridDataFactory.fillDefaults().grab(true, false).align(SWT.FILL, SWT.CENTER).applyTo(labelComposite);
-		createDefinitionSectionNameLabel(labelComposite);
-		createDefinitionSectionImageLabel(labelComposite);
+		createNameLabel(labelComposite);
+		createInlineIcon(labelComposite);
 		createSeparator(definitionSection);
-		createRotatedLabel(definitionSection);
-		return labelComposite;
+		createCollapsedBorder(definitionSection);
 	}
 
-	protected void createDefinitionSectionImageLabel(Composite labelComposite) {
-		Label statechartImageLabel = new Label(labelComposite, SWT.FILL);
-		statechartImageLabel.setImage(StatechartImages.PIN.image());
-		statechartImageLabel.setToolTipText(INLINE_SECTION_TOOLTIP);
-		statechartImageLabel.setEnabled(getContextObject() instanceof Statechart);
-		labelComposite.setToolTipText(getTooltipText());
-		GridDataFactory.fillDefaults().applyTo(statechartImageLabel);
-		imageLabelMouseListener = new ImageLabelMouseListener();
-		imageLabelMouseTrackListener = new ImageLabelMouseTrackListener(statechartImageLabel);
-		imageLabelPaintListener = new ImageLabelPaintListener(statechartImageLabel);
-		statechartImageLabel.addMouseListener(imageLabelMouseListener);
-		statechartImageLabel.addMouseTrackListener(imageLabelMouseTrackListener);
-		statechartImageLabel.addPaintListener(imageLabelPaintListener);
+	protected void createInlineIcon(Composite labelComposite) {
+		Label icon = new Label(labelComposite, SWT.FILL);
+		icon.setImage(StatechartImages.PIN.image());
+		icon.setToolTipText(INLINE_SECTION);
+		icon.setEnabled(getContextObject() instanceof Statechart);
+		labelComposite.setToolTipText(getInlineTooltipText());
+		GridDataFactory.fillDefaults().applyTo(icon);
+		iconMouseListener = new IconMouseListener();
+		iconMouseTrackListener = new IconMouseTrackListener(icon);
+		iconPaintListener = new IconPaintListener(icon);
+		icon.addMouseListener(iconMouseListener);
+		icon.addMouseTrackListener(iconMouseTrackListener);
+		icon.addPaintListener(iconPaintListener);
 	}
 
-	protected String getTooltipText() {
-		return (getContextObject() instanceof Statechart) ? INLINE_SECTION_TOOLTIP : CANNOT_INLINE_SECTION_TOOLTIP;
+	protected String getInlineTooltipText() {
+		return (getContextObject() instanceof Statechart) ? INLINE_SECTION : CANNOT_INLINE_SECTION;
 	}
 
 	protected SetCommand setBooleanValueStyle(BooleanValueStyle inlineStyle, TransactionalEditingDomain domain) {
@@ -676,25 +635,15 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 		return command;
 	}
 
-	protected void createDefinitionSectionNameLabel(Composite labelComposite) {
-		Text statechartNameLabel = new Text(labelComposite, SWT.SINGLE | SWT.NORMAL);
-		GridDataFactory.fillDefaults().indent(5, 1).grab(true, false).align(SWT.FILL, SWT.CENTER)
-				.applyTo(statechartNameLabel);
+	protected void createNameLabel(Composite labelComposite) {
+		Text nameLabel = new Text(labelComposite, SWT.SINGLE | SWT.NORMAL);
+		GridDataFactory.fillDefaults().indent(5, 1).grab(true, false).align(SWT.FILL, SWT.CENTER).applyTo(nameLabel);
 
-		statechartNameLabel.setText(getStatechartName());
-		statechartNameLabel.setEditable(getContextObject() instanceof Statechart);
-		statechartNameLabel.setBackground(ColorConstants.white);
-		statechartNameLabel.addModifyListener(new ModifyListener() {
-
-			@Override
-			public void modifyText(ModifyEvent e) {
-				statechartNameLabel.update();
-				statechartNameLabel.redraw();
-				statechartNameLabel.getParent().layout();
-			}
-		});
-
-		observeStatechartName(statechartNameLabel);
+		nameLabel.setText(getStatechartName());
+		nameLabel.setEditable(getContextObject() instanceof Statechart);
+		nameLabel.setBackground(ColorConstants.white);
+		nameModificationListener = new NameModificationListener(nameLabel);
+		nameLabel.addModifyListener(nameModificationListener);
 	}
 
 	protected String getStatechartName() {
@@ -702,59 +651,38 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 		return statechart.getName();
 	}
 
-	protected void observeStatechartName(Text statechartNameLabel) {
-		if (getContextObject() instanceof Statechart) {
-			ValidatingEMFDatabindingContext context = new ValidatingEMFDatabindingContext(this,
-					this.getSite().getShell());
-			IEMFValueProperty property = EMFEditProperties.value(TransactionUtil.getEditingDomain(getContextObject()),
-					BasePackage.Literals.NAMED_ELEMENT__NAME);
-			ISWTObservableValue observe = WidgetProperties.text(new int[]{SWT.FocusOut, SWT.DefaultSelection})
-					.observe(statechartNameLabel);
-			context.bindValue(observe, property.observe(this.getContextObject()));
-		}
-	}
-
 	protected void createSeparator(Composite definitionSection) {
 		Label separator = new Label(definitionSection, SWT.SEPARATOR | SWT.HORIZONTAL);
 		GridDataFactory.fillDefaults().span(2, 1).grab(true, false).applyTo(separator);
 	}
 
-	protected void createRotatedLabel(Composite definitionSection) {
-		RotatedLabel rotatedLabel = new RotatedLabel(definitionSection, SWT.NONE);
-		rotatedLabel.setText(ROTATED_LABEL_TEXT, new Font(Display.getDefault(), "Segoe UI", 8, SWT.NORMAL));
-		rotatedLabel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseUp(MouseEvent e) {
-				if (!isDefinitionSectionExpanded)
-					switchListener.handleSelection();
-				rotatedLabel.setCursor(new Cursor(Display.getDefault(), SWT.CURSOR_ARROW));
-			}
-		});
-		rotatedLabel.addMouseTrackListener(new MouseTrackAdapter() {
-			@Override
-			public void mouseEnter(MouseEvent e) {
-				rotatedLabel.setCursor(new Cursor(Display.getDefault(),
-						(!isDefinitionSectionExpanded) ? SWT.CURSOR_HAND : SWT.CURSOR_ARROW));
-				rotatedLabel.setToolTipText((!isDefinitionSectionExpanded) ? EXPAND_TOOLTIP : null);
-			}
-		});
-		GridDataFactory.fillDefaults().grab(false, false)
-				.hint(MIN_CONTROL_SIZE[0], definitionSection.getBounds().height).applyTo(rotatedLabel);
+	protected void createCollapsedBorder(Composite definitionSection) {
+		collapsedBorder = new CollapsedBorder(definitionSection, SWT.NONE);
+		collapsedBorder.setText("Definition section", new Font(getDisplay(), "Segoe UI", 8, SWT.NORMAL));
+		collapsedBorderMouseListener = new CollapsedBorderMouseListener(collapsedBorder);
+		collapsedBorderMouseTrackListener = new CollapsedBorderMouseTrackListener(collapsedBorder);
+		collapsedBorder.addMouseListener(collapsedBorderMouseListener);
+		collapsedBorder.addMouseTrackListener(collapsedBorderMouseTrackListener);
+
+		GridDataFactory.fillDefaults().grab(false, false).span(2, 1).hint(0, definitionSection.getBounds().height)
+				.applyTo(collapsedBorder);
+
+		refresh(definitionSection);
 	}
 
 	protected Label createSwitchControl(Composite definitionSection) {
-		Label switchLabel = new Label(definitionSection, SWT.PUSH);
-		switchLabel.setToolTipText(COLLAPSE_TOOLTIP);
-		switchLabel.setImage(
-				isDefinitionSectionExpanded ? StatechartImages.COLLAPSE.image() : StatechartImages.EXPAND.image());
-		switchLabel.setCursor(new Cursor(Display.getDefault(), SWT.CURSOR_HAND));
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.CENTER).indent(-1, 0)
-				.hint(MIN_CONTROL_SIZE[0], MIN_CONTROL_SIZE[1]).applyTo(switchLabel);
-		return switchLabel;
+		Label switchControl = new Label(definitionSection, SWT.PUSH);
+		switchControl.setToolTipText(HIDE_SECTION);
+		switchControl.setImage(isSectionExpanded ? StatechartImages.COLLAPSE.image() : StatechartImages.EXPAND.image());
+		switchControl.setCursor(new Cursor(getDisplay(), SWT.CURSOR_HAND));
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.CENTER).indent(-1, 0).hint(MIN_SIZE[0], MIN_SIZE[1])
+				.applyTo(switchControl);
+		return switchControl;
 	}
 
 	@Override
 	public EObject getContextObject() {
+		Assert.isNotNull(getDiagram());
 		EObject element = getDiagram().getElement();
 		Assert.isNotNull(element);
 		return element;
@@ -770,42 +698,237 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 					menuManager, site.getSelectionProvider());
 	}
 
-	protected void collapseDefinitionSection(Composite parent) {
-		int width = parent.getBounds().width;
-		int[] sashWidths;
-		if (width - switchControl.getBounds().width < 0 || width < switchControl.getBounds().width) {
+	protected void collapseDefinitionSection() {
+		int parentWidth = getSashWidth();
+		int switchControlWidth = getSwitchControlWidth();
+		int[] sashWidths = getCollapsedSashWidths(parentWidth, switchControlWidth);
+		if ((parentWidth - switchControlWidth) < 0 || (parentWidth < switchControlWidth)) {
 			sashWidths = DEFAULT_WEIGHTS;
-		} else {
-			sashWidths = new int[]{switchControl.getBounds().width + BORDERWIDTH,
-					width - switchControl.getBounds().width};
 		}
-		((SashForm) parent).setWeights(sashWidths);
-		updateSwitchControl(EXPAND_TOOLTIP, EXPAND_IMAGE);
+		layoutDefinitionSection(0, sashWidths, false, 1);
 	}
 
-	protected void expandDefinitionSection(Composite parent) {
-		((SashForm) parent).setWeights(previousWidths);
-		updateSwitchControl(COLLAPSE_TOOLTIP, COLLAPSE_IMAGE);
+	protected void expandDefinitionSection() {
+		layoutDefinitionSection(SASH_WIDTH, previousWidths, true, 2);
 	}
 
-	/**
-	 * Updates the tooltip text and the image for the prominent switchControl.
-	 * 
-	 * @param tooltipText
-	 *            The tooltip text for the switchControl
-	 * @param image
-	 *            The image for the controls
-	 */
-	protected void updateSwitchControl(String tooltipText, Image image) {
+	protected int getSashWidth() {
+		return getSash().getBounds().width;
+	}
+
+	protected int[] getCollapsedSashWidths(int parentWidth, int switchControlWidth) {
+		int diff = parentWidth - switchControlWidth;
+		return new int[]{switchControlWidth, (diff % 2 != 0) ? diff - (1 + BORDERWIDTH) : diff};
+	}
+
+	protected void layoutDefinitionSection(int sashWidth, int[] weights, boolean visible, int hSpan) {
+		getDisplay().asyncExec(() -> {
+			getSash().setRedraw(false);
+			getSash().setSashWidth(sashWidth);
+			getSash().setWeights(weights);
+			embeddedEditor.setVisible(visible);
+			labelComposite.setVisible(visible);
+			if (visible)
+				refreshSwitchControl(HIDE_SECTION, StatechartImages.COLLAPSE.image());
+			else
+				refreshSwitchControl(SHOW_SECTION, StatechartImages.EXPAND.image());
+			layoutCollapsedBorder(hSpan);
+			layoutEmbeddedEditor(hSpan);
+			refresh(getSash());
+			getSash().setRedraw(true);
+		});
+	}
+
+	protected void layoutEmbeddedEditor(int hSpan) {
+		((GridData) embeddedEditor.getLayoutData()).horizontalSpan = hSpan;
+	}
+
+	protected void layoutCollapsedBorder(int hSpan) {
+		((GridData) collapsedBorder.getLayoutData()).horizontalSpan = hSpan;
+	}
+
+	protected void refresh(Composite comp) {
+		comp.layout(false, true);
+		comp.redraw();
+		comp.update();
+	}
+
+	protected void refreshSwitchControl(String tooltipText, Image image) {
 		switchControl.setToolTipText(tooltipText);
 		switchControl.setImage(image);
 	}
 
-	protected class ImageLabelMouseListener extends MouseAdapter {
+	@Override
+	protected boolean isDefinitionSectionInlined() {
+		BooleanValueStyle style = DiagramPartitioningUtil.getInlineDefinitionSectionStyle(getDiagram());
+		return style != null ? style.isBooleanValue() : true;
+	}
+
+	@Override
+	public void saveState(IMemento memento) {
+		if (memento == null) {
+			memento = XMLMemento.createWriteRoot(getFactoryId());
+		}
+		memento.putInteger(FIRST_SASH_WEIGHT, previousWidths[0]);
+		memento.putInteger(SECOND_SASH_WEIGHT, previousWidths[1]);
+		setExpandState(memento);
+
+		super.setMemento(memento);
+	}
+
+	@Override
+	protected void setExpandState(IMemento memento) {
+		if (getContextObject() != null) {
+			if (getContextObject() instanceof NamedElement) {
+				NamedElement element = (NamedElement) getContextObject();
+				if (element != null)
+					memento.putBoolean(stripElementName(element.getName()) + MEM_EXPANDED, isSectionExpanded);
+			}
+		}
+	}
+
+	@Override
+	public void restoreState(IMemento memento) {
+		if (getSash() != null && memento != null) {
+			if (memento.getInteger(FIRST_SASH_WEIGHT) != null && memento.getInteger(SECOND_SASH_WEIGHT) != null) {
+				int[] weights = new int[]{memento.getInteger(FIRST_SASH_WEIGHT),
+						memento.getInteger(SECOND_SASH_WEIGHT)};
+				getSash().setWeights(weights);
+				previousWidths = weights;
+				isSectionExpanded = getExpandState(memento);
+			}
+		}
+		super.setMemento(memento);
+	}
+
+	protected boolean getExpandState(IMemento memento) {
+		Object expandState = null;
+		if (getContextObject() instanceof NamedElement) {
+			NamedElement element = (NamedElement) getContextObject();
+			if (element != null)
+				expandState = memento.getBoolean(stripElementName(element.getName()) + MEM_EXPANDED);
+		}
+		return expandState != null ? ((Boolean) expandState).booleanValue() : true;
+	}
+
+	protected TransactionalEditingDomain getTransactionalEditingDomain() {
+		return TransactionUtil.getEditingDomain(getDiagram());
+	}
+
+	protected String getStatechartSpecification() {
+		return ((Statechart) getContextObject()).getSpecification();
+	}
+
+	protected Display getDisplay() {
+		return Display.getCurrent() != null ? Display.getCurrent() : Display.getDefault();
+	}
+
+	protected int getSwitchControlWidth() {
+		return switchControl.getBounds().width + BORDERWIDTH;
+	}
+
+	/**
+	 * 
+	 * @author robert rudi - Initial contribution and API
+	 *
+	 */
+	public class EmbeddedEditorKeyListener extends KeyAdapter {
+		@Override
+		public void keyReleased(KeyEvent e) {
+			if (e.stateMask == SWT.CTRL && e.keyCode == 'a') {
+				embeddedEditor.selectAll();
+			}
+		}
+	}
+
+	/**
+	 * @author robert rudi - Initial contribution and API
+	 * 
+	 */
+	protected class EmbeddedEditorFocusListener extends FocusAdapter {
+
+		@Override
+		public void focusGained(FocusEvent e) {
+			// needed to be able to show the right property sheet in PropertiesView
+			((DiagramDocumentEditor) ActiveEditorTracker.getLastActiveEditor()).getDiagramGraphicalViewer()
+					.select(getDiagramEditPart());
+		}
+
+		@Override
+		public void focusLost(FocusEvent e) {
+			embeddedEditor.setSelection(0);
+		}
+	}
+
+	/**
+	 * @author robert rudi - Initial contribution and API
+	 * 
+	 */
+	protected class NameModificationListener implements ModifyListener {
+
+		private final Text nameLabel;
+
+		protected NameModificationListener(Text nameLabel) {
+			this.nameLabel = nameLabel;
+		}
+
+		@Override
+		public void modifyText(ModifyEvent e) {
+			if (getContextObject() instanceof Statechart) {
+				getSash().setRedraw(false);
+				TransactionalEditingDomain domain = getTransactionalEditingDomain();
+				SetCommand command = new SetCommand(domain, getContextObject(),
+						BasePackage.Literals.NAMED_ELEMENT__NAME, nameLabel.getText());
+				domain.getCommandStack().execute(command);
+				refresh(nameLabel.getParent());
+				getSash().setRedraw(true);
+			}
+		}
+	}
+
+	/**
+	 * @author robert rudi - Initial contribution and API
+	 * 
+	 */
+	protected class CollapsedBorderMouseListener extends MouseAdapter {
+		private final CollapsedBorder collapsedBorder;
+		protected CollapsedBorderMouseListener(CollapsedBorder collapsedBorder) {
+			this.collapsedBorder = collapsedBorder;
+		}
+		@Override
+		public void mouseUp(MouseEvent e) {
+			if (!isSectionExpanded)
+				selectionListener.handleSelection();
+			collapsedBorder.setCursor(new Cursor(getDisplay(), SWT.CURSOR_ARROW));
+		}
+	}
+
+	/**
+	 * @author robert rudi - Initial contribution and API
+	 * 
+	 */
+	protected class CollapsedBorderMouseTrackListener extends MouseTrackAdapter {
+		private final CollapsedBorder collapsedBorder;
+		protected CollapsedBorderMouseTrackListener(CollapsedBorder collapsedBorder) {
+			this.collapsedBorder = collapsedBorder;
+		}
+		@Override
+		public void mouseEnter(MouseEvent e) {
+			collapsedBorder
+					.setCursor(new Cursor(getDisplay(), (!isSectionExpanded) ? SWT.CURSOR_HAND : SWT.CURSOR_ARROW));
+			collapsedBorder.setToolTipText((!isSectionExpanded) ? SHOW_SECTION : null);
+		}
+	}
+
+	/**
+	 * @author robert rudi - Initial contribution and API
+	 * 
+	 */
+	protected class IconMouseListener extends MouseAdapter {
 
 		@Override
 		public void mouseUp(MouseEvent e) {
-			TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(getDiagram());
+			TransactionalEditingDomain domain = getTransactionalEditingDomain();
 			BooleanValueStyle inlineStyle = DiagramPartitioningUtil.getInlineDefinitionSectionStyle(getDiagram());
 			if (inlineStyle == null) {
 				inlineStyle = DiagramPartitioningUtil.createInlineDefinitionSectionStyle();
@@ -819,54 +942,59 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 			toggleDefinitionSection();
 			refreshDiagramEditPartChildren();
 		}
-
 	}
 
-	protected class ImageLabelMouseTrackListener extends MouseTrackAdapter {
-		private final Label statechartImageLabel;
+	/**
+	 * @author robert rudi - Initial contribution and API
+	 * 
+	 */
+	protected class IconMouseTrackListener extends MouseTrackAdapter {
+		private final Label icon;
 
-		protected ImageLabelMouseTrackListener(Label statechartImageLabel) {
-			this.statechartImageLabel = statechartImageLabel;
+		protected IconMouseTrackListener(Label icon) {
+			this.icon = icon;
 		}
 
 		@Override
 		public void mouseEnter(MouseEvent e) {
-			statechartImageLabel.setCursor(new Cursor(Display.getDefault(), SWT.CURSOR_HAND));
-			imageLabelHasFocus = true;
-			statechartImageLabel.redraw();
+			icon.setCursor(new Cursor(getDisplay(), SWT.CURSOR_HAND));
+			iconHasFocus = true;
+			refresh(icon.getParent());
 		}
 
 		@Override
 		public void mouseExit(MouseEvent e) {
-			imageLabelHasFocus = false;
-			statechartImageLabel.redraw();
+			iconHasFocus = false;
+			refresh(icon.getParent());
 		}
-
 	}
 
-	protected class ImageLabelPaintListener implements PaintListener {
-		private final Label statechartImageLabel;
+	/**
+	 * @author robert rudi - Initial contribution and API
+	 * 
+	 */
+	protected class IconPaintListener implements PaintListener {
+		private final Label icon;
 
-		protected ImageLabelPaintListener(Label statechartImageLabel) {
-			this.statechartImageLabel = statechartImageLabel;
+		protected IconPaintListener(Label icon) {
+			this.icon = icon;
 		}
 
 		@Override
 		public void paintControl(PaintEvent e) {
-			if (imageLabelHasFocus) {
-				drawIconBorder(statechartImageLabel, e.gc);
+			if (iconHasFocus) {
+				drawIconBorder(icon, e.gc);
 			}
 		}
 
-		protected void drawIconBorder(Label statechartImageLabel, GC gc) {
-			Rectangle rect = new Rectangle(0, 0, statechartImageLabel.getBounds().width - 1,
-					statechartImageLabel.getBounds().height - 1);
-			Transform t = new Transform(Display.getDefault());
+		protected void drawIconBorder(Label icon, GC gc) {
+			Rectangle rect = new Rectangle(0, 0, icon.getBounds().width - 1, icon.getBounds().height - 1);
+			Transform t = new Transform(getDisplay());
 			gc.setTransform(t);
 			gc.setForeground(ColorConstants.lightGray);
 			gc.drawRectangle(0, 0, rect.width, rect.height);
+			refresh(icon.getParent());
 		}
-
 	}
 
 	/**
@@ -875,11 +1003,9 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 	 */
 	protected class ResizeListener extends ControlAdapter {
 
-		private final Composite parent;
 		private final Composite definitionSection;
 
-		protected ResizeListener(Composite parent, Composite definitionSection) {
-			this.parent = parent;
+		protected ResizeListener(Composite definitionSection) {
 			this.definitionSection = definitionSection;
 		}
 
@@ -894,11 +1020,11 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 		}
 
 		protected void handleControlChanged() {
-			if (isDefinitionSectionExpanded) {
-				previousWidths = ((SashForm) parent).getWeights();
+			if (isSectionExpanded) {
+				previousWidths = getSash().getWeights();// save current weights so the widths can later be restored
 			} else {
-				if (definitionSection.getBounds().width != switchControl.getBounds().width) {
-					collapseDefinitionSection(parent);
+				if (definitionSection.getBounds().width != getSwitchControlWidth()) {
+					collapseDefinitionSection(); // keep sash collapsed
 				}
 			}
 		}
@@ -908,31 +1034,25 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 	 * @author robert rudi - Initial contribution and API
 	 * 
 	 */
-	protected class SwitchListener extends MouseAdapter {
+	protected class SelectionListener extends MouseAdapter {
 
-		protected final Composite parent;
+		protected final StyledText xtextEditor;
 
-		protected SwitchListener(Composite parent) {
-			this.parent = parent;
+		protected SelectionListener(StyledText xtextEditor) {
+			this.xtextEditor = xtextEditor;
 		}
 
 		protected void handleSelection() {
-			parent.setRedraw(false);
-			xtextControl.setVisible(!xtextControl.isVisible());
-			isDefinitionSectionExpanded = !isDefinitionSectionExpanded;
-			if (xtextControl.isVisible()) {
-				expandDefinitionSection(parent);
+			getSash().setRedraw(false);
+			isSectionExpanded = !isSectionExpanded;
+			if (isSectionExpanded) {
+				xtextEditor.setVisible(true);
+				expandDefinitionSection();
 			} else {
-				if (isDefinitionSectionExpanded) {
-					// needed to restore previous widths of sashcontrols if definition section is
-					// collapsed and editor has been reopened
-					xtextControl.setVisible(!xtextControl.isVisible());
-					expandDefinitionSection(parent);
-				} else {
-					collapseDefinitionSection(parent);
-				}
+				xtextEditor.setVisible(false);
+				collapseDefinitionSection();
 			}
-			parent.setRedraw(true);
+			getSash().setRedraw(true);
 		}
 
 		@Override
@@ -941,22 +1061,16 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 		}
 	}
 
-	@Override
-	protected boolean isDefinitionSectionInlined() {
-		BooleanValueStyle style = DiagramPartitioningUtil.getInlineDefinitionSectionStyle(getDiagram());
-		return style != null ? style.isBooleanValue() : true;
-	}
-
 	/**
 	 * @author robert rudi - Initial contribution and API
 	 * 
 	 */
-	protected class RotatedLabel extends Canvas {
+	protected class CollapsedBorder extends Canvas {
 
 		private String text;
-		float rotatingAngle = -90f;
+		float rotationAngle = -90f;
 
-		public RotatedLabel(Composite parent, int style) {
+		public CollapsedBorder(Composite parent, int style) {
 			super(parent, style);
 
 			this.addPaintListener(new PaintListener() {
@@ -968,8 +1082,8 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 
 				@Override
 				public void handleEvent(Event event) {
-					if (switchListener != null && !isDefinitionSectionExpanded)
-						switchListener.handleSelection();
+					if (selectionListener != null && !isSectionExpanded)
+						selectionListener.handleSelection();
 				}
 			});
 		}
@@ -977,14 +1091,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 		public void setText(String string, Font font) {
 			this.text = string;
 			setFont(font);
-			redraw();
-			update();
-		}
-
-		public void setText(String string) {
-			this.text = string;
-			redraw();
-			update();
+			refresh(this);
 		}
 
 		public void paint(PaintEvent e) {
@@ -992,67 +1099,12 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor
 			tr = new Transform(e.display);
 			int w = e.width;
 			int h = e.height;
-			tr.translate(w / 2, h / 3);
-			tr.rotate(rotatingAngle);
+			tr.translate(w / 2, h / 2);
+			tr.rotate(rotationAngle);
 			e.gc.setTransform(tr);
-			int drawHeight = -((w / 3) * 2);
-			e.gc.drawString(isDefinitionSectionExpanded ? "" : text, 0,
-					(drawHeight % 2) != 0 ? drawHeight - 1 : drawHeight);
-		}
-
-	}
-
-	@Override
-	public void saveState(IMemento memento) {
-		if (memento == null) {
-			memento = XMLMemento.createWriteRoot(getFactoryId());
-		}
-
-		memento.putInteger(FIRST_SASH_CONTROL_WEIGHT, previousWidths[0]);
-		memento.putInteger(SECOND_SASH_CONTROL_WEIGHT, previousWidths[1]);
-		rememberExpandState(memento);
-
-		super.setMemento(memento);
-	}
-
-	@Override
-	protected void rememberExpandState(IMemento memento) {
-		if (getContextObject() != null) {
-			if (getContextObject() instanceof NamedElement) {
-				NamedElement element = (NamedElement) getContextObject();
-				if (element != null)
-					memento.putBoolean(stripElementName(element.getName()) + IS_DEFINITION_SECTION_EXPANDED,
-							isDefinitionSectionExpanded);
-			}
-		}
-	}
-
-	@Override
-	public void restoreState(IMemento memento) {
-		if (getSash() != null && memento != null && memento.getInteger(FIRST_SASH_CONTROL_WEIGHT) != null
-				&& memento.getInteger(SECOND_SASH_CONTROL_WEIGHT) != null) {
-			getSash().setWeights(new int[]{memento.getInteger(FIRST_SASH_CONTROL_WEIGHT),
-					memento.getInteger(SECOND_SASH_CONTROL_WEIGHT)});
-			previousWidths = getSash().getWeights();
-			isDefinitionSectionExpanded = getExpandState(memento);
-		}
-		super.setMemento(memento);
-	}
-
-	protected boolean getExpandState(IMemento memento) {
-		Object expandState = null;
-		if (getContextObject() instanceof NamedElement) {
-			NamedElement element = (NamedElement) getContextObject();
-			if (element != null)
-				expandState = memento.getBoolean(stripElementName(element.getName()) + IS_DEFINITION_SECTION_EXPANDED);
-		}
-		return expandState != null ? ((Boolean) expandState).booleanValue() : false;
-	}
-
-	@Override
-	public void propertyChange(PropertyChangeEvent event) {
-		if (StatechartPreferenceConstants.PREF_DEFINITION_SECTION.equals(event.getProperty())) {
-			reloadFromPreferences();
+			int drawHeight = -w + 2;
+			e.gc.drawString(isSectionExpanded ? "" : text, 0, drawHeight % 2 != 0 ? drawHeight + 1 : drawHeight - 1);
+			update();
 		}
 	}
 

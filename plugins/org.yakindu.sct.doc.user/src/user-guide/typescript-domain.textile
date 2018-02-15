@@ -118,7 +118,7 @@ Statechart variables are defined in the definition section that is usually on th
 
 h4(#tsdom-using-a-typescript-variable-in-a-statechart). Using a TypeScript variable in a statechart
 
-Now let's see how the TypeScript variable we have defined above can actually be used. Figure "Diagram Appearance":#tsdom-fig-sample-screen-changing-statechart-model shows the modeling of our HMI behaviour: When the specified time has elapsed, a transition takes place from the _blankScreen_ source state to the _mainScreen_ target state.
+Now let's see how the TypeScript variable we have defined above can actually be used. Figure "Diagram appearance":#tsdom-fig-sample-screen-changing-statechart-model shows the modeling of our HMI behaviour: When the specified time has elapsed, a transition takes place from the _blankScreen_ source state to the _mainScreen_ target state.
 
 p(#tsdom-fig-sample-screen-changing-statechart-model). 
 !images/tsdomain_sct_var.png(Sample screen-changing statechart model)!
@@ -135,12 +135,12 @@ h3(#tsdom-creating-a-statechart-generator-model). Creating a statechart generato
 
 In order to actually execute the HMI with statechart control, we have to generate the statechart as TypeScript code into the Angular project.
 
-For configuring the code generation process, YAKINDU Statechart Tools uses a textual generator model called _SGen_. It can be created either by using the _YAKINDU Statechart Generator Model_ wizard or by manually creating a text file containing the SGen model. Such a file must have the filename extension _.sgen_.
+For configuring the code generation process, YAKINDU Statechart Tools uses a textual generator model called _SGen_. It can be created either by using the _YAKINDU statechart generator model_ wizard or by manually creating a text file containing the SGen model. Such a file must have the filename extension _.sgen_.
 
 To create a generator model using the wizard, proceed as follows:
-# In the main menu, select _File → New → YAKINDU SCT → Code Generator Model_. The wizard _YAKINDU Statechart Generator Model_ opens.
+# In the main menu, select _File → New → YAKINDU SCT → Code generator model_. The wizard _YAKINDU statechart generator model_ opens.
 # Enter a name and click _Next_.
-# Choose the _YAKINDU SCT TypeScript Generator_ generator.
+# Choose the _YAKINDU SCT TypeScript generator_ generator.
 # Check the model(s) to generate code from.
 # Click _Finish_.
 

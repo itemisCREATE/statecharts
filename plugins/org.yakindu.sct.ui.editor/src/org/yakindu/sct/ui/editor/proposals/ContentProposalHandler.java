@@ -77,7 +77,7 @@ public class ContentProposalHandler implements IContentProposalProvider {
 	}
 
 	protected void initProposalProvidersOnDemand() {
-		if (proposalProviders == null) {
+		if (proposalProviders == null && getSelectedView() != null) {
 			IDomain domain = DomainRegistry.getDomain(getSelectedView().getElement());
 			Injector injector = domain.getInjector(IDomain.FEATURE_EDITOR);
 			injector.injectMembers(this);

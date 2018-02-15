@@ -270,7 +270,7 @@ Which transition will be taken if the state machine is in state *A* and event _e
 
 Fortunately YAKINDU state machines behave deterministically, so this question can be answered unambiguously. Outgoing transitions of a state have a definite order and are _prioritized_ by that order. The state machine checks the transitions one by one in this order and executes the first transition that fulfills all prerequisites for firing.
 
-As you can see in figure "&quot;Transition priorities &#91;1]&quot;":#sclang_fig_transition-priorities-1, little numbers at the transition arrows indicate their priorities. This numbering is shown only if the option _Show transition priority_ in _Window → Preferences → YAKINDU SCT → Diagram Appearance_ has been activated. By default, this option is _not_ activated.
+As you can see in figure "&quot;Transition priorities &#91;1]&quot;":#sclang_fig_transition-priorities-1, little numbers at the transition arrows indicate their priorities. This numbering is shown only if the option _Show transition priority_ in _Window → Preferences → YAKINDU SCT → Diagram appearance_ has been activated. By default, this option is _not_ activated.
 
 The order of transitions is a property of their source state. In the example above, the transition priorities of state *A* appear like this in the _properties_ view:
 

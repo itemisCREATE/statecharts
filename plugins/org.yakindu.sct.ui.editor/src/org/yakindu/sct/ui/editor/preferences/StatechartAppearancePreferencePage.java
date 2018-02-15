@@ -47,67 +47,54 @@ public class StatechartAppearancePreferencePage extends FieldEditorPreferencePag
 
 	protected void addFields(Composite parent) {
 		Composite main = createPageLayout(parent);
-		createColorEditors(main);
-		createLineStyleEditors(main);
-		createDefaultFontEditor(main);
-		createSyntaxColoringLabelEditor(main);
-		createPinnableStatechartDefinitionEditor(main);
-		createPriorityLabelEditor(main);
-		createLiveValidationEditor(main);
+		createColorsLineStyleFontEditors(main);
+		createMiscellaneousEditors(main);
 	}
 
-	protected void createDefaultFontEditor(Composite main) {
-		Composite composite = createGroupComposite(main, "Font styles");
-		FontFieldEditor editor = new FontFieldEditor(IPreferenceConstants.PREF_DEFAULT_FONT, "Font: ", composite);
-		addField(editor);
-	}
+	protected void createColorsLineStyleFontEditors(Composite main) {
+		Composite composite = createGroupComposite(main, "Colors, line style, and font");
 
-	protected void createPriorityLabelEditor(Composite main) {
-		Composite composite = createGroupComposite(main, "Priority Decorator");
-		BooleanFieldEditor editor = new BooleanFieldEditor(StatechartPreferenceConstants.PREF_PRIORITY_LABELS,
-				"Show transition and region priority", composite);
-		addField(editor);
-	}
-
-	protected void createLiveValidationEditor(Composite main) {
-		Composite composite = createGroupComposite(main, "Validation");
-		BooleanFieldEditor editor = new BooleanFieldEditor(StatechartPreferenceConstants.PREF_LIVE_VALIDATION,
-				"Enable live validation", composite);
-		addField(editor);
-	}
-	
-	protected void createSyntaxColoringLabelEditor(Composite main) {
-		Composite composite = createGroupComposite(main, "Syntax coloring");
-		BooleanFieldEditor editor = new BooleanFieldEditor(StatechartPreferenceConstants.PREF_SYNTAX_COLORING,
-				"Enable syntax coloring", composite);
-		addField(editor);
-	}
-	
-	protected void createPinnableStatechartDefinitionEditor(Composite main) {
-		Composite composite = createGroupComposite(main, "Definition section");
-		BooleanFieldEditor editor = new BooleanFieldEditor(StatechartPreferenceConstants.PREF_DEFINITION_SECTION,
-				"Enable pinning of statechart definition section", composite);
-		addField(editor);
-	}
-
-	protected void createLineStyleEditors(Composite parent) {
-		Composite composite = createGroupComposite(parent, "Line styles");
-		ComboFieldEditor lineStyleFieldEditor = new ComboFieldEditor(IPreferenceConstants.PREF_LINE_STYLE,
-				"Routing style", composite, ComboFieldEditor.INT_TYPE, false, 0, 0, true);
-		addField(lineStyleFieldEditor);
-		Combo lineStyleCombo = lineStyleFieldEditor.getComboControl();
-		lineStyleCombo.add(DiagramUIMessages.ConnectionsPreferencePage_ConnectionView_Manual_text);
-		lineStyleCombo.add(DiagramUIMessages.ConnectionsPreferencePage_ConnectionView_Rectilinear_text);
-	}
-
-	protected void createColorEditors(Composite parent) {
-		Composite composite = createGroupComposite(parent, "Diagram colors");
+		// Colors:
 		addField(new ColorFieldEditor(StatechartPreferenceConstants.PREF_REGION_BACKGROUND, "Region background color:",
 				composite));
 		addField(new ColorFieldEditor(StatechartPreferenceConstants.PREF_REGION_LINE, "Region line color:", composite));
 		addField(new ColorFieldEditor(StatechartPreferenceConstants.PREF_STATE_BACKGROUND, "State background color:",
 				composite));
 		addField(new ColorFieldEditor(StatechartPreferenceConstants.PREF_STATE_LINE, "State line color:", composite));
+
+		// Line style:
+		ComboFieldEditor lineStyleFieldEditor = new ComboFieldEditor(IPreferenceConstants.PREF_LINE_STYLE,
+				"Routing style:", composite, ComboFieldEditor.INT_TYPE, false, 0, 0, true);
+		Combo lineStyleCombo = lineStyleFieldEditor.getComboControl();
+		GridData gridData = new GridData();
+		gridData.horizontalSpan = 2;
+		lineStyleCombo.setLayoutData(gridData);
+		addField(lineStyleFieldEditor);
+		lineStyleCombo.add(DiagramUIMessages.ConnectionsPreferencePage_ConnectionView_Manual_text);
+		lineStyleCombo.add(DiagramUIMessages.ConnectionsPreferencePage_ConnectionView_Rectilinear_text);
+
+		// Font:
+		FontFieldEditor editor = new FontFieldEditor(IPreferenceConstants.PREF_DEFAULT_FONT, "Font: ", composite);
+		addField(editor);
+	}
+
+	protected void createMiscellaneousEditors(Composite main) {
+		Composite composite = createGroupComposite(main, "Miscellaneous");
+
+		// Syntax coloring:
+		BooleanFieldEditor syntaxColoringEditor = new BooleanFieldEditor(
+				StatechartPreferenceConstants.PREF_SYNTAX_COLORING, "Enable syntax coloring", composite);
+		addField(syntaxColoringEditor);
+
+		// Priority labels:
+		BooleanFieldEditor priorityLabelsEditor = new BooleanFieldEditor(
+				StatechartPreferenceConstants.PREF_PRIORITY_LABELS, "Show transition and region priority", composite);
+		addField(priorityLabelsEditor);
+
+		// Live validation:
+		BooleanFieldEditor liveValidationEditor = new BooleanFieldEditor(
+				StatechartPreferenceConstants.PREF_LIVE_VALIDATION, "Enable live validation", composite);
+		addField(liveValidationEditor);
 	}
 
 	protected Composite createPageLayout(Composite parent) {
@@ -118,17 +105,18 @@ public class StatechartAppearancePreferencePage extends FieldEditorPreferencePag
 	}
 
 	protected Composite createGroupComposite(Composite parent, String title) {
+		final int COLUMNS = 3;
 		Group group = new Group(parent, SWT.NONE);
+		group.setText(title);
 		group.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		group.setLayout(new GridLayout(3, false));
+		group.setLayout(new GridLayout(COLUMNS, false));
 		Composite composite = new Composite(group, SWT.NONE);
-		GridLayout gridLayout = new GridLayout(3, false);
+		GridLayout gridLayout = new GridLayout(COLUMNS, false);
 		composite.setLayout(gridLayout);
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.grabExcessHorizontalSpace = true;
-		gridData.horizontalSpan = 3;
+		gridData.horizontalSpan = COLUMNS;
 		composite.setLayoutData(gridData);
-		group.setText(title);
 		return composite;
 	}
 

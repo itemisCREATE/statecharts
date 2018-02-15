@@ -70,9 +70,7 @@ import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.provider.SGraphItemProviderAdapterFactory;
-import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.StatechartImages;
-import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 
 /**
  * Editor that uses a {@link DiagramPartitioningDocumentProvider} and adds a
@@ -89,22 +87,25 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 			IPersistableEditor,
 			IPersistableElement {
 
+	protected static final int SASH_WIDTH = 5;
 	private static final String REGEX_NO_WORD_NO_WHITESPACE = "[^\\w[\\s+]]";
-	protected static final String IS_DEFINITION_SECTION_EXPANDED = "DefinitionSectionIsExpanded";
-	protected static final String FIRST_SASH_CONTROL_WEIGHT = "FirstSashControlWeight";
-	protected static final String SECOND_SASH_CONTROL_WEIGHT = "SecondSashControlWeight";
+	protected static final String MEM_EXPANDED = "DefinitionSectionIsExpanded";
+	protected static final String FIRST_SASH_WEIGHT = "FirstSashControlWeight";
+	protected static final String SECOND_SASH_WEIGHT = "SecondSashControlWeight";
 	protected static final int[] DEFAULT_WEIGHTS = new int[]{2, 10};
 	protected static final int MAXIMIZED_CONTROL_INDEX = 1;
 
 	private DiagramPartitioningBreadcrumbViewer viewer;
-
 	private DiagramPartitioningDocumentProvider documentProvider;
+	private Adapter breadcrumbSynchronizer;
+
 	private SashForm sash;
 
 	private static IMemento memento;
-	private Adapter breadcrumbSynchronizer;
 
 	protected abstract void createTextEditor(Composite parent);
+
+	protected abstract EObject getContextObject();
 
 	public DiagramPartitioningEditor(boolean hasFlyoutPalette) {
 		super(hasFlyoutPalette);
@@ -149,37 +150,34 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 		super.createPartControl(sash);
 	}
 
+	protected Composite createParentSash(Composite parent) {
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(parent);
+		SashForm sash = new SashForm(parent, SWT.HORIZONTAL);
+		sash.setBackground(ColorConstants.white);
+		sash.setSashWidth(SASH_WIDTH);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(sash);
+		GridLayoutFactory.fillDefaults().applyTo(sash);
+		return sash;
+	}
+
 	public void toggleDefinitionSection() {
-		if (getContextObject() instanceof Statechart)
-			sash.setMaximizedControl(!isDefinitionSectionInlined() && isPinningActivated()
-					? null
-					: sash.getChildren()[MAXIMIZED_CONTROL_INDEX]);
-		if (getContextObject() instanceof State) {
-			sash.setMaximizedControl(isDefinitionSectionInlined() && isPinningActivated() ? null : sash.getChildren()[MAXIMIZED_CONTROL_INDEX]);
-		}
-	}
-
-	protected boolean isPinningActivated() {
-		return DiagramActivator.getDefault().getPreferenceStore()
-				.getBoolean(StatechartPreferenceConstants.PREF_DEFINITION_SECTION);
-	}
-
-	protected abstract EObject getContextObject();
-
+		sash.setMaximizedControl(!isDefinitionSectionInlined() ? null : sash.getChildren()[MAXIMIZED_CONTROL_INDEX]);
+	}	
+	
 	public void restoreSashWidths(SashForm sash, IMemento memento) {
 		if (memento == null) {
 			setDefaultSashWeights(sash);
 			memento = XMLMemento.createWriteRoot(getFactoryId());
-			memento.putInteger(FIRST_SASH_CONTROL_WEIGHT, DEFAULT_WEIGHTS[0]);
-			memento.putInteger(SECOND_SASH_CONTROL_WEIGHT, DEFAULT_WEIGHTS[1]);
-			rememberExpandState(memento);
+			memento.putInteger(FIRST_SASH_WEIGHT, DEFAULT_WEIGHTS[0]);
+			memento.putInteger(SECOND_SASH_WEIGHT, DEFAULT_WEIGHTS[1]);
+			setExpandState(memento);
 			setMemento(memento);
 		} else {
 			restoreState(memento);
 		}
 	}
 
-	protected abstract void rememberExpandState(IMemento memento);
+	protected abstract void setExpandState(IMemento memento);
 
 	protected String stripElementName(String name) {
 		if (name != null)
@@ -213,15 +211,6 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	public abstract String getFactoryId();
 
 	protected abstract boolean isDefinitionSectionInlined();
-
-	protected Composite createParentSash(Composite parent) {
-		GridDataFactory.fillDefaults().grab(false, true).applyTo(parent);
-		SashForm sash = new SashForm(parent, SWT.HORIZONTAL | SWT.SMOOTH);
-		sash.setBackground(ColorConstants.white);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(sash);
-		GridLayoutFactory.fillDefaults().applyTo(sash);
-		return sash;
-	}
 
 	@SuppressWarnings("restriction")
 	@Override
@@ -373,9 +362,9 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 			}
 		}
 		@Override
-		 public boolean isAdapterForType(Object type) {
+		public boolean isAdapterForType(Object type) {
 			return type instanceof BreadcrumbSynchronizer;
-		 }
+		}
 	}
 
 	public static class FilteringDiagramContextMenuProvider extends DiagramContextMenuProvider {
