@@ -1,5 +1,8 @@
 
 h1(#hdls_headless_code_generation). Headless code generation
+p. 
+
+==<div style="counter-reset: h1 7 h2 9">==
 
 State machine code is fully derived from a statechart model, and section "Generating state machine code":../user-guide/generating_code.html#codegen_generating_state_machine_code explains how to interactively run a code generator. Since release 2.9.0, YAKINDU Statechart Tools additionally provides a headless code generator infrastructure. This allows for code generation without a user interface which in turn allows to integrate code generation into continuous integration (CI) build environments.
 
@@ -214,3 +217,5 @@ bc.
 plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.1.400.v20160518-1444
 
 Replace the path in the _headless.ini_ file with the path from _eclipse.ini_. After saving _headless.ini_, _scc_ should work.
+
+==</div>==
