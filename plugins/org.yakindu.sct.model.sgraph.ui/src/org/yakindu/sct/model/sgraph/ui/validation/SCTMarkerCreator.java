@@ -41,7 +41,7 @@ public class SCTMarkerCreator extends MarkerCreator {
 			return;
 		}
 
-		if (e instanceof NamedElement && issue.getMessage().toLowerCase().contains("name")) {
+		if (e instanceof NamedElement && isNamingIssue(issue.getMessage())) {
 			try {
 				marker.setAttribute(SCTMarkerType.NAMEDELEMENT_NAME, true);
 			} catch (CoreException e1) {
@@ -55,6 +55,10 @@ public class SCTMarkerCreator extends MarkerCreator {
 				e1.printStackTrace();
 			}
 		}
+	}
+
+	protected boolean isNamingIssue(String message) {
+		return message.toLowerCase().contains("name") || message.toLowerCase().contains("duplicate");
 	}
 
 }

@@ -28,9 +28,10 @@ import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.gmf.runtime.editparts.TextAwareLabelEditPart;
 import org.yakindu.base.xtext.utils.gmf.directedit.IXtextAwareEditPart;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerType;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 
@@ -41,6 +42,13 @@ import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
  */
 public class StatechartMarkerNavigationProvider extends AbstractModelMarkerNavigationProvider {
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see org.eclipse.gmf.runtime.common.ui.services.marker.
+	 * AbstractMarkerNavigationProvider#doGotoMarker(org.eclipse.core.resources.
+	 * IMarker)
+	 */
 	@Override
 	@SuppressWarnings("rawtypes")
 	protected void doGotoMarker(IMarker marker) {
@@ -77,8 +85,11 @@ public class StatechartMarkerNavigationProvider extends AbstractModelMarkerNavig
 						EcoreUtil2.eAllContentsAsList(view));
 
 				for (IGraphicalEditPart editPart : allEditParts) {
-					if (editPart instanceof IXtextAwareEditPart) {
+					if (editPart instanceof IXtextAwareEditPart
+							|| (editPart instanceof TextAwareLabelEditPart) && ((TextAwareLabelEditPart) editPart)
+									.getFeature().equals(request.getDirectEditFeature())) {
 						editPart.performRequest(request);
+						break;
 					}
 				}
 			}
@@ -102,7 +113,7 @@ public class StatechartMarkerNavigationProvider extends AbstractModelMarkerNavig
 		if (targetObject == null) {
 			return defaultAttr;
 		}
-		if (targetObject instanceof State && isReasonNamedElementName(marker)) {
+		if (targetObject instanceof Vertex && isReasonNamedElementName(marker)) {
 			return BasePackage.eINSTANCE.getNamedElement_Name();
 		} else {
 			return defaultAttr;
