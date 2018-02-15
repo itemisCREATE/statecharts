@@ -19,6 +19,7 @@ import java.util.Queue
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.lib.annotations.Data
 import org.yakindu.base.expressions.interpreter.IExpressionInterpreter
+import org.yakindu.base.types.Direction
 import org.yakindu.base.types.typesystem.ITypeValueProvider
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
@@ -302,7 +303,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	override raise(ExecutionEvent ev, Object value) {
-		if (useInternalEventQueue) {
+		if (useInternalEventQueue && ev.direction == Direction::LOCAL) {
 			internalEventQueue.add(new Event(ev, value));
 
 		} else {
