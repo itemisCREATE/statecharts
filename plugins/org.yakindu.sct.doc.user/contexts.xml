@@ -4,8 +4,8 @@
    <context id="sc_properties_entry_entrykind" title="Entry">
       <description>An entry, possibly with a shallow or deep history, defines which state is to be activated first in a state machine or region.</description>
       <topic href="help/user-guide/statechart_language.html#entry" label="Entry"/>
-      <topic href="help/user-guide/statechart_language.html#shallow-history" label="Shallow History state"/>
-        <topic href="help/user-guide/statechart_language.html#deep-history" label="Deep History state"/>
+      <topic href="help/user-guide/statechart_language.html#shallow-history" label="Shallow history state"/>
+        <topic href="help/user-guide/statechart_language.html#deep-history" label="Deep history state"/>
    </context>
    <context id="sc_properties_state_expression" title="State">
       <description>States are central elements of a state machine.</description>
@@ -20,15 +20,15 @@
       <topic href="help/user-guide/statechart_language.html#transition" label="Transition reference"/>
    </context>
    <context id="sgen_feature" title="Genmodel Features">
-      <topic href="help/user-guide/generating_code.html" label="Generating state machine code"/>
+      <topic href="help/user-guide/code_generation_intro.html" label="Generating state machine code"/>
    </context>
    <context id="headless_feature" title="Headless Features">
-      <topic href="help/user-guide/generating_code_headless.html" label="Headless Generating"/>
+      <topic href="help/user-guide/generating_code_headless.html" label="Headless code generation"/>
    </context>
    <context id="stext_keyword">
-      <topic href="help/user-guide/statechart_language.html" label="YAKINDU Statechart Tools User Guide"/>
+      <topic href="help/user-guide/statechart_language.html" label="YAKINDU Statechart Tools user guide"/>
    </context>
    <context id="sctunit_keyword">
-      <topic href="help/user-guide/sctunit.html" label="YAKINDU Statechart Tools SCT Unit"/>
+      <topic href="help/user-guide/sctunit.html" label="YAKINDU Statechart Tools SCTUnit"/>
    </context>
 </contexts>
