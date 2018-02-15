@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.model.sgraph.ui.validation;
 
@@ -22,18 +22,19 @@ import org.yakindu.sct.model.sgraph.SpecificationElement;
 import com.google.inject.Inject;
 
 /**
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public class SCTDiagnosticConverterImpl extends DiagnosticConverterImpl {
 
 	@Inject
 	ISctIssueCreator issueCreator;
-	
+
 	@Override
 	public void convertValidatorDiagnostic(final Diagnostic diagnostic, final IAcceptor<Issue> acceptor) {
 		super.convertValidatorDiagnostic(diagnostic, new IAcceptor<Issue>() {
+			@Override
 			public void accept(Issue t) {
 				boolean notAccepted = true;
 				if (diagnostic.getData().get(0) instanceof EObject) {
@@ -43,7 +44,8 @@ public class SCTDiagnosticConverterImpl extends DiagnosticConverterImpl {
 							eObject = EcoreUtil2.getContainerOfType(eObject, SpecificationElement.class);
 						}
 						if (eObject != null && eObject.eResource() != null) {
-							acceptor.accept(issueCreator.create(t, eObject.eResource().getURIFragment(eObject)));
+							acceptor.accept(
+									issueCreator.create(t, eObject, eObject.eResource().getURIFragment(eObject)));
 							notAccepted = false;
 						}
 					}

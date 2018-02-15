@@ -6,20 +6,23 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.model.sgraph.ui.validation;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.validation.Issue;
+import org.yakindu.base.base.NamedElement;
+import org.yakindu.sct.model.sgraph.SpecificationElement;
 
 /**
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public class SCTMarkerCreator extends MarkerCreator {
 
@@ -28,6 +31,29 @@ public class SCTMarkerCreator extends MarkerCreator {
 		super.setMarkerAttributes(issue, resource, marker);
 		if (issue instanceof SCTIssue) {
 			marker.setAttribute(SCTMarkerType.SEMANTIC_ELEMENT_ID, ((SCTIssue) issue).getSemanticURI());
+			setIssueReason(marker, (SCTIssue) issue);
+		}
+	}
+
+	protected void setIssueReason(IMarker marker, SCTIssue issue) {
+		EObject e = issue.getEObject();
+		if (e == null) {
+			return;
+		}
+
+		if (e instanceof NamedElement && issue.getMessage().toLowerCase().contains("name")) {
+			try {
+				marker.setAttribute(SCTMarkerType.NAMEDELEMENT_NAME, true);
+			} catch (CoreException e1) {
+				e1.printStackTrace();
+			}
+		}
+		if (e instanceof SpecificationElement) {
+			try {
+				marker.setAttribute(SCTMarkerType.SPECIFICATIONELMENT_SPECIFICATION, true);
+			} catch (CoreException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 
