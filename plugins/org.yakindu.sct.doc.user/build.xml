@@ -23,6 +23,9 @@
     <!-- Root CSS file to be referenced by the generated HTML files. -->
     <property name="css.root.file" value="style.css" />
 
+    <!-- Javascript files are located here. -->
+    <property name="js.dir" value="js" />
+
     <!-- Image files reside in subdirectories with the following name: -->
     <property name="img.dir" value="images" />
 
@@ -249,6 +252,15 @@
                 </fileset>
             </replaceregexp>
 
+            <!-- Add HTML SCRIPT element to include our own Javascript file -->
+            <replaceregexp byline="false"
+                           match='(\s*)(&lt;title&gt;)'
+                           replace='\1&lt;script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"&gt;&lt;/script&gt;&lt;script type="text/javascript" src="../js/yakindu.js"&gt;&lt;/script&gt;\1\2'>
+                <fileset dir="${help.dir}">
+                    <include name="**/*.html" />
+                </fileset>
+            </replaceregexp>
+
             <!-- Add CSS classes "eclipsehelp" and "body-container" to BODY element and
                  nest a DIV child with CSS class "primary" into the BODY element. -->
             <replaceregexp byline="true"
@@ -312,6 +324,13 @@
                 </fileset>
             </copy>
 
+            <!-- Copy the Javascript files to the destination directory: -->
+            <copy todir="${help.dir}/${js.dir}">
+                <fileset dir="${js.dir}">
+                    <include name="*" />
+                </fileset>
+            </copy>
+
             <!-- Copy the image files to the destination directory: -->
             <copy todir="${help.dir}">
                 <fileset dir="src">
@@ -331,6 +350,7 @@
              YCST-tutorials.html
              css/yakindu.css
              css/ysct.css
+             js/yakindu.js
                  …
              images/…
     -->
@@ -516,6 +536,13 @@
             <!-- Copy the CSS files to the destination directory: -->
             <copy todir="${work.dir}/${css.dir}">
                 <fileset dir="${css.dir}">
+                    <include name="*" />
+                </fileset>
+            </copy>
+
+            <!-- Copy the Javascript files to the destination directory: -->
+            <copy todir="${work.dir}/${js.dir}">
+                <fileset dir="${js.dir}">
                     <include name="*" />
                 </fileset>
             </copy>
