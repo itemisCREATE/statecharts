@@ -252,15 +252,6 @@
                 </fileset>
             </replaceregexp>
 
-            <!-- Add HTML SCRIPT element to include our own Javascript file -->
-            <replaceregexp byline="false"
-                           match='(\s*)(&lt;title&gt;)'
-                           replace='\1&lt;script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"&gt;&lt;/script&gt;&lt;script type="text/javascript" src="../js/yakindu.js"&gt;&lt;/script&gt;\1\2'>
-                <fileset dir="${help.dir}">
-                    <include name="**/*.html" />
-                </fileset>
-            </replaceregexp>
-
             <!-- Add CSS classes "eclipsehelp" and "body-container" to BODY element and
                  nest a DIV child with CSS class "primary" into the BODY element. -->
             <replaceregexp byline="true"
@@ -345,9 +336,9 @@
          name and a title, and consists of a set of source files. The generated documentation structure looks like this:
 
          website
-             YCST-installation.html
-             YCST-user-guide.html
-             YCST-tutorials.html
+             YSCT-installation.html
+             YSCT-user-guide.html
+             YSCT-tutorials.html
              css/yakindu.css
              css/ysct.css
              js/yakindu.js
