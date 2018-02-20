@@ -418,7 +418,12 @@ public class HubspotDocumentBuilder extends HtmlDocumentBuilder {
 			w.writeAttribute("href", '#' + currentHeading.getId());
 			w.writeAttribute("class", "permalink");
 			w.writeAttribute("title", "Permalink to \"" + currentHeading.getTitle() + "\"");
-			w.writeEndElement();
+			w.writeAttribute("onclick", "copyPermalinkToClipboard(event, this);");
+			w.writeStartElement("span");
+			w.writeAttribute("class", "tooltip");
+			w.writeCharacters("Copy link to clipboard");
+			w.writeEndElement(); // span
+			w.writeEndElement(); // a
 
 			super.endHeading();
 		}

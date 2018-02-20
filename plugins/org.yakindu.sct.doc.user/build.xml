@@ -23,6 +23,9 @@
     <!-- Root CSS file to be referenced by the generated HTML files. -->
     <property name="css.root.file" value="style.css" />
 
+    <!-- Javascript files are located here. -->
+    <property name="js.dir" value="js" />
+
     <!-- Image files reside in subdirectories with the following name: -->
     <property name="img.dir" value="images" />
 
@@ -312,6 +315,13 @@
                 </fileset>
             </copy>
 
+            <!-- Copy the Javascript files to the destination directory: -->
+            <copy todir="${help.dir}/${js.dir}">
+                <fileset dir="${js.dir}">
+                    <include name="*" />
+                </fileset>
+            </copy>
+
             <!-- Copy the image files to the destination directory: -->
             <copy todir="${help.dir}">
                 <fileset dir="src">
@@ -326,11 +336,12 @@
          name and a title, and consists of a set of source files. The generated documentation structure looks like this:
 
          website
-             YCST-installation.html
-             YCST-user-guide.html
-             YCST-tutorials.html
+             YSCT-installation.html
+             YSCT-user-guide.html
+             YSCT-tutorials.html
              css/yakindu.css
              css/ysct.css
+             js/yakindu.js
                  …
              images/…
     -->
@@ -516,6 +527,13 @@
             <!-- Copy the CSS files to the destination directory: -->
             <copy todir="${work.dir}/${css.dir}">
                 <fileset dir="${css.dir}">
+                    <include name="*" />
+                </fileset>
+            </copy>
+
+            <!-- Copy the Javascript files to the destination directory: -->
+            <copy todir="${work.dir}/${js.dir}">
+                <fileset dir="${js.dir}">
                     <include name="*" />
                 </fileset>
             </copy>
