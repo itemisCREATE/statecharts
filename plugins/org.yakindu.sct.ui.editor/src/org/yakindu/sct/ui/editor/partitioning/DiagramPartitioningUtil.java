@@ -157,14 +157,15 @@ public class DiagramPartitioningUtil {
 	 * Opens the {@link StatechartDiagramEditor} for a fiven {@link IFile}
 	 * 
 	 */
-	public static void openEditor(IFile file) {
+	public static IEditorPart openEditor(IFile file) {
 		try {
 			IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(file.getName());
 			final IWorkbenchPage wbPage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-			wbPage.openEditor(new FileEditorInput(file), desc.getId());
+			return wbPage.openEditor(new FileEditorInput(file), desc.getId());
 		} catch (PartInitException e) {
 			e.printStackTrace();
 		}
+		return null;
 
 	}
 
