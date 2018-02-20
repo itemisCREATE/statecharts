@@ -1,4 +1,8 @@
 
+p. 
+
+==<div style="counter-reset: h1 1">==
+
 h1(#inst_installing_yakindu_statechart_tools). Installing YAKINDU Statechart Tools
 
 In order to start working with YAKINDU Statechart Tools, you have to install the software on your computer. We are assuming you have downloaded the software package and stored it somewhere on your machine.
@@ -571,3 +575,4 @@ If the list of installed JREs is empty, you are affected by the problem and will
 
 p=. Installed JREs
 
+==</div>==

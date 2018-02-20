@@ -1,7 +1,11 @@
 
-h1(#hdls_headless_code_generation). Headless code generation
+p. 
 
-State machine code is fully derived from a statechart model, and section "Generating state machine code":../user-guide/generating_code.html#codegen_generating_state_machine_code explains how to interactively run a code generator. Since release 2.9.0, YAKINDU Statechart Tools additionally provides a headless code generator infrastructure. This allows for code generation without a user interface which in turn allows to integrate code generation into continuous integration (CI) build environments.
+==<div style="counter-reset: h1 7 h2 9">==
+
+h2(#hdls_headless_code_generation). Headless code generation
+
+State machine code is fully derived from a statechart model, and section "Generating state machine code":../user-guide/code_generation_intro.html#codegen_generating_state_machine_code explains how to interactively run a code generator. Since release 2.9.0, YAKINDU Statechart Tools additionally provides a headless code generator infrastructure. This allows for code generation without a user interface which in turn allows to integrate code generation into continuous integration (CI) build environments.
 
 Best practice is to generate code on the fly during a continuous integration build instead of cluttering your version control system with generated artifacts.
 
@@ -10,9 +14,9 @@ The headless code generator can simply be called from a command line and thus ca
 
 
 
-h2(#hdls_installation). Installation
+h3(#hdls_installation). Installation
 
-h3(#hdls_the_scc_statechart_compiler). The scc statechart compiler
+h4(#hdls_the_scc_statechart_compiler). The scc statechart compiler
 
 The SCT installation directory contains the file _scc_ (Linux, macOS) resp. _scc.bat_ (Windows): the _statechart compiler_. Technically, it is a script file launching the SCT executable, passing proper parameters for headless code generation.
 
@@ -45,15 +49,13 @@ usage: scc [-d <path>] [-h] [-m <path(s)>] [-v <arg>]
 p. 
 
 
+h4(#hdls_integrating_custom_code_generators). Integrating custom code generators
 
-h3(#hdls_integrating_custom_code_generators). Integrating custom code generators
-
-YAKINDU Statechart Tools supports custom code generators as described in section "&quot;Custom code generators&quot;":../user-guide/generating_code.html#codegen_custom_code_generators. These custom generators can also be executed by use of the headless code generator infrastructure. To do so, the custom code generator has to be installed as an Eclipse plugin within the distribution directory. The custom code generator will be used whenever a generator model (_.sgen_ file) is loaded by the headless generator infrastructure and references the custom code generator ID.
-
+YAKINDU Statechart Tools supports custom code generators as described in section "&quot;Custom code generators&quot;":../user-guide/code_generation_custom.html#codegen_custom_code_generators. These custom generators can also be executed by use of the headless code generator infrastructure. To do so, the custom code generator has to be installed as an Eclipse plugin within the distribution directory. The custom code generator will be used whenever a generator model (_.sgen_ file) is loaded by the headless generator infrastructure and references the custom code generator ID.
 
 
 
-h2(#hdls_generating_code). Generating code
+h3(#hdls_generating_code). Generating code
 
 For the purpose of this documentation we are assuming the following directory structure. This includes SCT-related files like generator models and statechart models.
 
@@ -72,8 +74,7 @@ GeneratorModel for yakindu::java {
 }
 
 
-
-h3(#hdls_generating_code_for_an_eclipse_project). Generating code for an Eclipse project
+h4(#hdls_generating_code_for_an_eclipse_project). Generating code for an Eclipse project
 
 The most simple way to invoke the code generator on the command line is to generate the code for a single Eclipse project. Using a commend-line shell, change to the project directory you want to generate code. Example:
 
@@ -145,13 +146,11 @@ For our example this means the generated code can be found in
 <code>_basedir_/project1/src-gen/</code>
 
 
-
-h3(#hdls_available_scc_options). Available scc options
+h4(#hdls_available_scc_options). Available scc options
 
 All parameters are essentially optional. The reason is that for a directory structure adhering to Eclipse workspace standards like projects within a root folder, or no additional hierarchies, everything can be calculated automatically.
 
-
-h4(#hdls_specifying_a_base_directory). Specifying a base directory
+h5(#hdls_specifying_a_base_directory). Specifying a base directory
 
 You can specify a base directory using the <code>-d _basedir_</code> option. It is used for two major tasks:
 
@@ -164,8 +163,7 @@ The target folder of generated artifacts will be evaluated as follows:
 
 <code><em>basedir</em>/<em>sgen.targetProject</em>/<em>sgen.targetFolder</em></code>
 
-
-h4(#hdls_specifying_statechart_model_files). Specifying statechart model files
+h5(#hdls_specifying_statechart_model_files). Specifying statechart model files
 
 Use the <code>-m <em>models</em></code> option to select certain models known by the statechart compiler. Usually these will be _.sgen_ or _.sct_ files. However, other model files that are supported by particular code generators, can be specified, too, e.g., C header files for YAKINDU Statechart Tool Professional's Deep C Integration. The @-m@ option's value can be absolute or relative, can be a file or a folder and can be a single value or a comma-separated list of values.
 
@@ -175,27 +173,23 @@ Use the <code>-m <em>models</em></code> option to select certain models known by
 
 *Default:* If the @-m@ option is not specified, this is equivalent to <code>-m <em>basedir</em></code>, i.e., all model files in and beneath _basedir_ are processed.
 
+h5(#hdls_specifying_property_values). Specifying property values
 
-h4(#hdls_specifying_property_values). Specifying property values
-
-Use the <code>-v <em>name1=value1;name2=value2;nameN=valueN</em></code> option to override properties _name1_, _name2_, _nameN_, specified in the generator models, by the given values _value1_, _value2_, and _valueN_, respectively. See section "&quot;Using properties and expressions in generator models&quot;":../user-guide/generating_code.html#codegen_using_properties_and_expressions_in_generator_models for details.
-
+Use the <code>-v <em>name1=value1;name2=value2;nameN=valueN</em></code> option to override properties _name1_, _name2_, _nameN_, specified in the generator models, by the given values _value1_, _value2_, and _valueN_, respectively. See section "&quot;Using properties and expressions in generator models&quot;":../user-guide/code_generation_intro.html#codegen_using_properties_and_expressions_in_generator_models for details.
 
 
 
-h2(#hdls_troubleshooting). Troubleshooting
+h3(#hdls_troubleshooting). Troubleshooting
 
 If the _scc_ command fails, here are some tips and fixes.
 
 
-
-h3(#hdls_troubleshooting_error_neither_sct_nor_eclipse_executable_found). [ERROR] Neither 'SCT' nor 'eclipse' executable found!
+h4(#hdls_troubleshooting_error_neither_sct_nor_eclipse_executable_found). [ERROR] Neither 'SCT' nor 'eclipse' executable found!
 
 If you encounter this error message on Linux, this means the _scc_ command was neither able to locate a _SCT_ executable binary nor an _eclipse_ executable. This happens if the _scc_ executable, which is really only a launcher, is not in the same directory as the _SCT_ or _eclipse_ executables. In a YAKINDU Statechart Tools stand-alone installation, the executable binary is named _SCT_. However, its name is _eclipse_ if you have installed YAKINDU Statechart Tools from an update site into an already existing Eclipse installation. The _scc_ launcher tries to find one of _SCT_ or _eclipse_ and launches the correct one.
 
 
-
-h3(#hdls_troubleshooting_the_eclipse_executable_launcher_was_unable_to_locate_its_companion_shared_library). The Eclipse executable launcher was unable to locate its companion shared library
+h4(#hdls_troubleshooting_the_eclipse_executable_launcher_was_unable_to_locate_its_companion_shared_library). The Eclipse executable launcher was unable to locate its companion shared library
 
 This error message is usually issued if you have installed YAKINDU Statechart Tools from an update site into an already existing Eclipse installation _and_ you installed the latter using the _Eclipse Installer / Oomph_.
 
@@ -214,3 +208,5 @@ bc.
 plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.1.400.v20160518-1444
 
 Replace the path in the _headless.ini_ file with the path from _eclipse.ini_. After saving _headless.ini_, _scc_ should work.
+
+==</div>==
