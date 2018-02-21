@@ -278,9 +278,9 @@ When the _Extract Subdiagram_ "refactoring":#edit_refactorings is executed on a 
 
 Extracting a subdiagram creates "entry and exit points":../user-guide/statechart_language.html#sclang_entry_and_exit_points in the subdiagram as needed.
 
-!images/docu_subdiagram_020_preview.png(Subdiagram popup window)!
+!images/docu_subdiagram_020_preview.png(Subdiagram pop-up window)!
 
-p=. Subdiagram popup window
+p=. Subdiagram pop-up window
 
 A click on the decorator opens the subdiagram in a separate editor tab. The breadcrumb at the top allows easy navigation throughout the hierachy levels.
 
@@ -488,7 +488,7 @@ h3(#edit_using_text_proposals). Using text proposals
 
 Proposals assist you when writing statechart language expressions. Whenever editing some text anywhere in the graphical statechart editor or in the properties view, at any point you can press the @[Ctrl+Space]@ key combination to get some context-sensitive help.
 
-Certain proposals, like statechart language keywords, have documentation associated with them. When such a proposal is selected, either using the mouse or the keyboard, this information is shown in a secondary popup window next to the proposal.
+Certain proposals, like statechart language keywords, have documentation associated with them. When such a proposal is selected, either using the mouse or the keyboard, this information is shown in a secondary pop-up window next to the proposal.
 
 You can either use the mouse or the keyboard to select and insert a proposal in the text:
 * Double-click on a proposal to insert it in the text at the current position.
@@ -498,9 +498,9 @@ You can either use the mouse or the keyboard to select and insert a proposal in 
 
 h3(#edit_using_action_proposals_on_states). Using actions proposals on states
 
-When a state is selected, @[Ctrl+Space]@ opens a popup window showing a context-sensitive menu with possible action choices to perform on the state.
+When a state is selected, @[Ctrl+Space]@ opens a pop-up window showing a context-sensitive menu with possible action choices to perform on the state.
 
-These action proposals have additional information associated to them. When a proposal is selected either using the mouse or the keyboard, this information is shown in a secondary popup window next to the proposal.
+These action proposals have additional information associated to them. When a proposal is selected either using the mouse or the keyboard, this information is shown in a secondary pop-up window next to the proposal.
 
 You can either use the mouse or the keyboard to execute a proposal:
 * Double-click on a proposal to execute it.
