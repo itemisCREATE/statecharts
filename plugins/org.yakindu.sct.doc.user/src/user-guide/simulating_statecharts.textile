@@ -214,16 +214,14 @@ h4(#advsim_the_light_switch_example). The light switch example
 
 Throughout this chapter we will be using the _light switch_ statechart as an example. It models a lamp which can be turned on and off and also supports various brightness values.
 
-If you press the _pressLightOn_ button, the lamp turns on at its lowest brightness value. If you operate _pressLightOn_ repeatedly, each time the lamp becomes brighter until it reaches its maximum brightness. Pressing the _pressLightOff_ button, immediately turns off the light completely. The brightness can only be raised as long as it hasn't yet reached its maximum value of five. After that, the guard condition disallows to raise it any further.
+If you press the _pressLightOn_ button, the lamp turns on at its lowest brightness value. If you operate _pressLightOn_ repeatedly, each time the lamp becomes brighter until it reaches its maximum brightness. Pressing the _pressLightOff_ button immediately turns off the light completely. The brightness can only be raised as long as it hasn't yet reached its maximum value of five. After that, the guard condition disallows to raise it any further.
 
-Here's the light switch example's statechart:
+Here's the light switch example's statechart followed by its definition section:
 
 p(#advsim_fig_the_light_switch_sample_statechart). 
 !images/advsim_010_lightswitch_010_statechart.png(The light switch sample statechart)!
 
 p=. The light switch sample statechart
-
-The statechart's definition section looks like this:
 
 bc.. interface:
     in event pressLightOn
@@ -241,9 +239,9 @@ Breakpoints allow for automatically suspending the simulation when a certain ele
 
 
 
-h3(#advsim_executing_in_debugging_mode). Executing in debugging mode
+h3(#advsim_executing_in_debug_mode). Executing in debug mode
 
-To make use of breakpoints, the statechart simulation needs to be executed in debugging mode:
+To make use of breakpoints, the statechart simulation needs to be executed in debug mode. You have already seen how to "start a statechart simulation in run mode":#simu_starting_a_simulation. For using breakpoints and snapshots, however, the debug mode is needed.
 
 # Right-click on the statechart model. The context menu opens.
 # Select _Debug As→Statechart Simulation_, see "Figure &quot;Starting a simulation in debugging mode&quot;":#advsim_fig_starting_a_simulation_in_debugging_mode.
@@ -252,7 +250,14 @@ To make use of breakpoints, the statechart simulation needs to be executed in de
 p(#advsim_fig_starting_a_simulation_in_debugging_mode). 
 !(shadowless)images/advsim_020_start_debugging_010_debug_as_menu.png(Starting a simulation in debugging mode)!
 
-p=. Starting a simulation in debugging mode
+# Right-click on the statechart model. The context menu opens.
+# Select _Debug As→Statechart Simulation_, see "Figure &quot;Starting a simulation in debug mode&quot;":#advsim_fig_starting_a_simulation_in_debug_mode.
+# The statechart simulation starts in the debug mode.
+
+p(#advsim_fig_starting_a_simulation_in_debug_mode). 
+!(shadowless)images/advsim_020_start_debugging_010_debug_as_menu.png(Starting a simulation in debug mode)!
+
+p=. Starting a simulation in debug mode
 
 
 h4(#advsim_setting_a_breakpoint). Setting a breakpoint
@@ -265,7 +270,7 @@ p(#advsim_fig_setting_a_breakpoint).
 
 p=. Setting a breakpoint
 
-States and transitions having a breakpoint attached are labeled with a !(inlinemediaobject)images/advsim_symbol_breakpoint_enabled.png(Symbol: Breakpoint enabled)! symbol. "Figure &quot;Breakpoints on transition and state&quot;":#advsim_fig_breakpoints_on_transition_and_state shows an example.
+States and transitions with a breakpoint are labeled with a !(inlinemediaobject)images/advsim_symbol_breakpoint_enabled.png(Symbol: Breakpoint enabled)! symbol. "Figure &quot;Breakpoints on transition and state&quot;":#advsim_fig_breakpoints_on_transition_and_state shows an example.
 
 p(#advsim_fig_breakpoints_on_transition_and_state). 
 !(shadowless)images/advsim_030_breakpoint_020_transition_and_state_with_breakpoints.png(Breakpoints on transition and state)!
@@ -275,13 +280,13 @@ p=. Breakpoints on transition and state
 
 h4(#advsim_hitting_a_breakpoint). Hitting a breakpoint
 
-If the simulation runs into a state with a breakpoint, the state's entry actions, if any, are executed. After that, execution of the state machine is suspended. The state is highlighted by a small green border.
+If the simulation runs into a _state_ with a breakpoint, the state's entry actions, if any, are executed. After that, execution of the state machine is suspended. The state is highlighted by a small green border.
 
 !images/advsim_030_breakpoint_030_suspending_at_state.png(Highlighting a suspended state)!
 
 p=. Highlighting a suspended state
 
-If the simulation runs into a transition with a breakpoint, execution of the state machine is suspended. The transition is highlighted by drawing the transition arrow in green. The transition's actions, if any, are executed when the state machine is resumed.
+If the simulation runs into a _transition_ with a breakpoint, execution of the state machine is suspended. The transition is highlighted by drawing the transition arc in green. The transition's actions, if any, are executed when the state machine is resumed.
 
 !images/advsim_030_breakpoint_040_suspending_at_transition.png(Highlighting a suspended transition)!
 
@@ -317,9 +322,9 @@ A breakpoint is either enabled or disabled.
 
 "Figure &quot;Breakpoints view&quot;":#advsim_fig_breakpoints_view shows an enabled and a disabled breakpoint in the statechart editor and in the breakpoints view, respectively.
 
-You can instruct the statechart simulation to skip all breakpoints by clicking on the !(inlinemediaobject)images/advsim_button_breakpoint_skip_disengaged.png(Button [disengaged]: Skip all breakpoints)! button in the breakpoints view. The button will appear "pressed", and while it is, the "skip breakpoints" functionality is engaged. That means, the simulation will not suspend at any breakpoint.
+You can instruct the statechart simulation to _skip all breakpoints_ by clicking on the !(inlinemediaobject)images/advsim_button_breakpoint_skip_disengaged.png(Button [disengaged]: Skip all breakpoints)! button in the breakpoints view. The button will appear "pressed", and while it is, the "skip breakpoints" functionality is engaged. That means, the simulation will not suspend at any breakpoint.
 
-This is different from disabling all breakpoints, in that each breakpoint keeps its state of being enabled or disabled. Once you disengage the skip breakpoints functionality by clicking on the !(inlinemediaobject)images/advsim_button_breakpoint_skip_engaged.png(Button [engaged]: Skip all breakpoints)! button again, the simulation will suspend again at enabled breakpoints and will not suspend at disabled breakpoints.
+This is different from _disabling all breakpoints_, in that each breakpoint keeps its state of being enabled or disabled. Once you disengage the skip breakpoints functionality by clicking on the !(inlinemediaobject)images/advsim_button_breakpoint_skip_engaged.png(Button [engaged]: Skip all breakpoints)! button again, the simulation will suspend again at enabled breakpoints and will not suspend at disabled breakpoints.
 
 
 h4(#advsim_removing_breakpoints). Removing breakpoints
@@ -354,10 +359,14 @@ h4(#advsim_raising_multiple_events_simultaneously). Raising multiple events simu
 If you click on an event's name in the simulation view to raise that event in normal simulation, i.e., while execution isn't suspended, the state machine immediately processes that event and takes the corresponding transition, if any.
 
 However, while the simulation is suspended, you can raise multiple events, without instant execution. Once execution resumes, the state machine's behavior depends on its "execution scheme":../user-guide/code_generation_intro.html#codegen_execution_schemes:
-* In the cycle-based execution scheme, both events are handled at the same time, or, to be more exact, in the same run-to-completion step (RTS).
-* In the event-driven execution scheme, the two events will be processed in the order you raised them. Each click on 
+* In the _cycle-based_ execution scheme, both events are handled at the same time, or, to be more exact, in the same run-to-completion step (RTC).
+* In the _event-driven_ execution scheme, each of the two events will trigger a run-to-completion step (RTC) of its own.
 
-Consider for example, you want to press the &quot;light on&quot; and &quot;light off&quot; buttons at the same time and observe what happens. "Figure &quot;Raising multiple events simultaneously&quot;":#advsim_fig_raising_multiple_events_simultaneously_1 is showing the scenario:
+==<div class="example">==
+
+Let's have a look at an example. Please note that this example uses the _cycle-based_ execution scheme! This is important, because in the the _event-driven_ case the state machine's behavior would be different.
+
+Let's consider that you want to press the &quot;light on&quot; and &quot;light off&quot; buttons _at the same time_ and want to observe what happens. "Figure &quot;Raising multiple events simultaneously&quot;":#advsim_fig_raising_multiple_events_simultaneously_1 shows the scenario:
 
 p(#advsim_fig_raising_multiple_events_simultaneously_1). 
 !images/advsim_040_multiple_events_010_events_not_raised.png(Raising multiple events simultaneously [1])!
@@ -365,24 +374,30 @@ p(#advsim_fig_raising_multiple_events_simultaneously_1).
 p=. Raising multiple events simultaneously &#91;1]
 
 * The simulation has encountered a breakpoint at the _LightOn_ state and has been suspended there.
-* The simulation view shows the _LightOn_ and the _LightOff_ events. Both events are labeled with a !(inlinemediaobject)images/advsim_symbol_event.png(Symbol: Event [not raised])! symbol, meaning the respective event is not raised.
+* The simulation view shows the _pressLightOn_ and the _pressLightOff_ events. Both events are labeled with a !(inlinemediaobject)images/advsim_symbol_event.png(Symbol: Event [not raised])! symbol, meaning the respective event is not raised.
 
 p(#advsim_fig_raising_multiple_events_simultaneously_2). 
 !images/advsim_040_multiple_events_020_events_raised.png(Raising multiple events simultaneously [2])!
 
 p=. Raising multiple events simultaneously &#91;2]
 
-* Clicking at an event raises it and adds a blue triangle to the event symbol: !(inlinemediaobject)images/advsim_symbol_event_raised.png(Symbol: Event [raised])!. Since the simulation remains suspended, the user can raise multiple events.
+* Clicking on an event raises it and adds a blue triangle to the event symbol: !(inlinemediaobject)images/advsim_symbol_event_raised.png(Symbol: Event [raised])!. Since the simulation remains suspended, the user can raise multiple events.
 
-Both events are raised and will be handled by the state machine during the next run-to-completion step. The latter will be performed as soon as the user clicks on the step&#45;over button !(inlinemediaobject)images/advsim_symbol_stepover.png(Symbol: Step Over)! or the resume button !(inlinemediaobject)images/advsim_symbol_resume.png(Symbol: Resume)!.
+Both events are raised and will be handled by the state machine during the next run-to-completion step. The latter will be performed as soon as the user clicks on the step-over button !(inlinemediaobject)images/advsim_symbol_stepover.png(Symbol: Step Over)! or the resume button !(inlinemediaobject)images/advsim_symbol_resume.png(Symbol: Resume)!.
 
-bq. Please note: While the execution is still suspended, you can "unraise" an already raised event by clicking on the event symbol !(inlinemediaobject)images/advsim_symbol_event_raised.png(Symbol: Event [raised])! a second time. The blue triangle will disappear, and upon continuation of the simulation the event will not be handled.
+bq. *Please note:* Under the _even-driven_ execution scheme, multiple events are never processed at the same time. Each event triggers a separate RTC.
+
+==</div>==
+
+bq. *Please note:* While the execution is still suspended, you can "unraise" an already raised event by clicking on the event symbol !(inlinemediaobject)images/advsim_symbol_event_raised.png(Symbol: Event [raised])! a second time. The blue triangle will disappear, and upon continuation of the simulation the event will not be handled.
 
 h5(#advsim_transition_priorities). Transition priorities
 
-It is important to understand that there is not queue of events. That is, in case several events occur simultaneously, the state machine consults the active state's transitions priorities in the order that is specified in the corresponding property, see "figure &quot;Transition priorities&quot;":#advsim_fig_transition_priorities. You can change the transitions priorities by selecting a transition and moving it up or down by clicking on the respective button.
+It is important to understand that in the event-driven execution scheme there is a queue of events, while in the cycle-based scheme there isn't. If in the latter case multiple events occur simultaneously, they are all present at the same time, and the state machine has to figure out which event should trigger which transition. For example, what should the light switch state machine do, if it is in the *LightOn* state and both events, _pressLightOn_ and _pressLightOff_, have been raised simultaneously?
 
-The first transition whose condition is fulfilled will be executed. All remaining events are quashed.
+The answer is "transition priorities":../user-guide/statechart_language.html#sclang_transition_priorities. The state machine always consults the active state's transitions in a well-defined order, it fires the first matching transition it encounters, and it forgets about the rest. Transition priorities are specified in the corresponding property of the respective state, see "figure &quot;Transition priorities&quot;":#advsim_fig_transition_priorities. You can change these priorities, and thus the order the transitions are being checked, by selecting a transition and moving it up or down by clicking on the respective button.
+
+The first transition whose condition is fulfilled will be executed. Under the cycle-based execution scheme, all remaining events are quashed. In the light switch example as shown in "figure &quot;Transition priorities&quot;":#advsim_fig_transition_priorities, the _pressLightOff_ event would "win" and trigger a transition from the *LightOn* to the *LightOff* state, while the _pressLightOff_ event would be discarded. 
 
 p(#advsim_fig_transition_priorities). 
 !images/advsim_040_multiple_events_030_transition_priorities.png(Transition priorities)!
