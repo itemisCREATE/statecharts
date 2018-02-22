@@ -20,9 +20,9 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 
 /**
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public class SCTUnitTestModels extends AbstractTestModelsUtil {
 
@@ -42,6 +42,7 @@ public class SCTUnitTestModels extends AbstractTestModelsUtil {
 	public static final String DYNAMIC_CHOICE = "DynamicChoice.sct";
 	public static final String ENTER_STATE = "EnterState.sct";
 	public static final String ENTRY_CHOICE = "EntryChoice.sct";
+	public static final String EVENT_DRIVEN_OUT_EVENTS = "EventDrivenOutEvents.sct";
 	public static final String EXIT_ON_SELF_TRANSITION = "ExitOnSelfTransition.sct";
 	public static final String EXIT_STATE = "ExitState.sct";
 	public static final String EXIT_STATECHART = "ExitStatechart.sct /* don't test currently */";
@@ -91,7 +92,7 @@ public class SCTUnitTestModels extends AbstractTestModelsUtil {
 	}
 
 	public List<Statechart> loadAllStatecharts() throws Exception {
-		List<Statechart> result = new ArrayList<Statechart>();
+		List<Statechart> result = new ArrayList<>();
 		Field[] fields = getClass().getFields();
 		for (Field field : fields) {
 			String value = (String) field.get(this);
@@ -105,6 +106,7 @@ public class SCTUnitTestModels extends AbstractTestModelsUtil {
 		SCTUnitTestModels models = new SCTUnitTestModels();
 		List<Statechart> all = models.loadAllStatecharts();
 		return Iterables.transform(all, new Function<Statechart, Object[]>() {
+			@Override
 			public Object[] apply(Statechart input) {
 				return new Object[]{input};
 			}
