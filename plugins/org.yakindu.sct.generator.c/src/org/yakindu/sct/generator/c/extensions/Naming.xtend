@@ -25,6 +25,7 @@ import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.ScopedElement
 import org.yakindu.sct.model.sgraph.State
@@ -44,8 +45,12 @@ class Naming {
 	@Inject protected extension ICodegenTypeSystemAccess
 
 	@Inject protected StextNameProvider provider
+	
+	@Inject GeneratorEntry entry
 
 	@Inject protected extension INamingService
+	
+	@Inject extension GenmodelEntries
 
 	public static final String NULL_STRING = "null";
 
@@ -54,7 +59,10 @@ class Naming {
 	}
 
 	def module(ExecutionFlow it) {
-		type
+		if (entry.moduleName.nullOrEmpty) {
+			return name.asIdentifier.toFirstUpper
+		}
+		return entry.moduleName.toFirstUpper
 	}
 
 	def filterNullOrEmptyAndJoin(Iterable<CharSequence> it) {
@@ -80,7 +88,7 @@ class Naming {
 	def timerType(ExecutionFlow it) {
 		'SCTimer'
 	}
-
+	
 	def statesEnumType(ExecutionFlow it) {
 		flow.type + 'States'
 	}
@@ -98,7 +106,10 @@ class Naming {
 	}
 
 	def dispatch String type(ExecutionFlow it) {
-		name.asIdentifier.toFirstUpper
+		if (entry.statemachinePrefix.nullOrEmpty) {
+			return name.asIdentifier.toFirstUpper
+		}
+		return entry.statemachinePrefix.toFirstUpper
 	}
 
 	def dispatch instance(InterfaceScope it) {
@@ -114,6 +125,11 @@ class Naming {
 	}
 
 	def functionPrefix(Scope it, Declaration decl) {
+		// only non-unique declarations in different scopes will be prefixed with the name of the scope
+		if (!isUniqueName(it, decl) && !entry.statemachinePrefix.nullOrEmpty)
+			return entry.statemachinePrefix + separator + it.instance.toFirstUpper
+		if (!entry.statemachinePrefix.nullOrEmpty)
+			return entry.statemachinePrefix
 		return type.toFirstLower
 	}
 
@@ -122,6 +138,9 @@ class Naming {
 	}
 
 	def functionPrefix(ExecutionFlow it) {
+		if (!entry.statemachinePrefix.nullOrEmpty) {
+			return entry.statemachinePrefix + separator
+		}
 		type.toFirstLower + separator
 	}
 
