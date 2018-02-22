@@ -408,18 +408,18 @@ p=. Transition priorities
 
 h3(#advsim_snapshots). Snapshots
 
-The snapshot feature allows to store and restore the state of a simulation run. A snapshot comprises all *active states* of the state machine as well as all *variable values* at the time of snapshot creation. 
+The snapshot feature allows to store and restore the state of a simulation run. A snapshot comprises all _active states_ of the state machine as well as all _variable values_ at the time of snapshot creation. 
 
-This feature is especially useful when testing complex state machines in which a number of steps need to be taken before reaching a desired situation. Using snapshots, you can store this desired situation once and simply restore it again without repeating all the steps to reach it. Depending on the complexity of the usecase, this can be a huge time-saver.
+This feature is especially useful when testing complex state machines in which a number of steps need to be taken before reaching a certain situation you want to investigate. Using snapshots, you can store this desired situation once and then simply restore it anytime and as often as you like, without having to repeat all the tedious steps to reach that situation from scratch. Depending on the complexity of your use case, using snapshots can be a huge time-saver.
 
 
 h4(#advsim_creating_a_snapshot). Creating a snapshot
 
 To create a snapshot of the current statechart simulation, proceed as follows:
 
-# Change to _Snapshots_ view.
+# Change to _Snapshots_ view on the right-hand side of the YAKINDU Statechart Tools window.
 # Click at the camera button !(inlinemediaobject)images/advsim_button_camera.png(Button: Camera)! in the view's toolbar.
-# The snapshot is taken and appears in the snapshot list. It is labeled as "Snapshot" and tagged with the current timestamp. See "figure &quot;A freshly taken snapshot&quot;":#advsim_fig_a_freshly_taken_snapshot.
+# The snapshot is taken and appears in the snapshot list. It is labeled "Snapshot" (can be changed), and it is tagged with the current timestamp. "Figure &quot;A freshly taken snapshot&quot;":#advsim_fig_a_freshly_taken_snapshot shows an example.
 
 p(#advsim_fig_a_freshly_taken_snapshot). 
 !images/advsim_050_snapshots_010_a_freshly-taken_snapshot.png(A freshly taken snapshot)!
@@ -430,15 +430,15 @@ p=. A freshly taken snapshot
 h4(#advsim_the_snapshots_view). The snapshots view
 
 The _snapshots_ view consists of two parts.
-* The _snapshot list_ contains all snapshots with their respective names and timestamps.
-* The _snapshot details_ part displays the contents of the snapshot. It contains two different views which can be toggled via the toolbar buttons:
+* The _snapshot list_ in the upper half contains all snapshots with their respective names and timestamps.
+* The _snapshot details_ part in the lower half displays the contents of the snapshot. It contains two different views which can be toggled via its toolbar buttons:
 ** !(inlinemediaobject)images/advsim_button_snapshot_variable_overview.png(Button: Show all variable values)!: shows all variable values
-** !(inlinemediaobject)images/advsim_button_snapshot_image_overview.png(Button: Show image overview)!: shows an image of the state machine with highlighted active elements
+** !(inlinemediaobject)images/advsim_button_snapshot_image_overview.png(Button: Show image overview)!: shows an overview image of the state machine with the active state(s) being highlighted
 
-p(#advsim_fig_inspecting_the_variables_of_a_snapshots). 
-!images/advsim_050_snapshots_025_details_view.png(Inspecting snapshot details: variables overview [left], image overview [right])!
+p(#advsim_fig_inspecting_a_snapshot). 
+!(shadowless)images/advsim_050_snapshots_040_snapshot_details_combined.png(Inspecting snapshot details: variables overview [left], states overview [right])!
 
-p=. Inspecting snapshot details: variables overview [left], image overview [right]
+p=. Inspecting snapshot details: variables overview [left], states overview [right]
 
 h4(#advsim_restoring_a_snapshot). Restoring a snapshot
 
@@ -453,7 +453,7 @@ h4(#advsim_naming_a_snapshot). Naming a snapshot
 
 The label of a snapshot can be changed as follows:
 # Click at its label. The label becomes an editable field.
-# Enter the new snapshot name and press @[Return]@ or click anywhere outside the editable field.
+# Enter the new snapshot name and press @[Return]@, or click anywhere outside the editable field.
 
 h4(#advsim_deleting_a_snapshot). Deleting a snapshot
 
