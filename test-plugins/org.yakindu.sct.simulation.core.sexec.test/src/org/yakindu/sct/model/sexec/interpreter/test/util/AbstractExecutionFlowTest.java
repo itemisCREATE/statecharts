@@ -23,8 +23,10 @@ import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.model.sruntime.ExecutionVariable;
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations;
 import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer;
+import org.yakindu.sct.simulation.core.sexec.interpreter.IEventRaiser;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
 import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
@@ -32,9 +34,9 @@ import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
 
 /**
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public abstract class AbstractExecutionFlowTest {
 	@Inject
@@ -61,8 +63,12 @@ public abstract class AbstractExecutionFlowTest {
 	}
 
 	protected void initInterpreter(ExecutionFlow flow) {
+		initInterpreter(flow, false);
+	}
+
+	protected void initInterpreter(ExecutionFlow flow, boolean useInternalEventQueue) {
 		initializer.initialize(context, flow);
-		interpreter.initialize(flow, context, false);
+		interpreter.initialize(flow, context, useInternalEventQueue);
 		this.flow = flow;
 	}
 
@@ -125,17 +131,29 @@ public abstract class AbstractExecutionFlowTest {
 	}
 
 	protected void raiseEvent(String eventName) {
-		context().getEvent(eventName).setRaised(true);
+		raiseEvent(eventName, null);
 	}
 
 	protected void raiseEvent(String eventName, Object value) {
-		context().getEvent(eventName).setValue(value);
-		context().getEvent(eventName).setRaised(true);
+		if (interpreter instanceof IEventRaiser) {
+			((IEventRaiser) interpreter).raise(context().getEvent(eventName), value);
+		} else {
+			context().getEvent(eventName).setValue(value);
+			context().getEvent(eventName).setRaised(true);
+		}
+		if (isEventDriven()) {
+			interpreter.runCycle();
+		}
 
 	}
 
 	protected boolean isRaised(String eventName) {
 		return context().getEvent(eventName).isRaised();
+	}
+
+	protected boolean isEventDriven() {
+		StatechartAnnotations annotations = new StatechartAnnotations();
+		return annotations.isEventDriven((Statechart) this.flow.getSourceElement());
 	}
 
 	protected long getCyclePeriod() {
