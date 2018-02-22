@@ -1,4 +1,8 @@
 
+p. 
+
+==<div style="counter-reset: h1 5">==
+
 h1(#sclang_statechart_language_reference). Statechart language reference
 
 The statechart language is used to describe statecharts. It consists both of graphical and of textual elements.
@@ -479,7 +483,7 @@ The *definition section* is a text area. Per default, it is located to the left 
 
 In the definition section, you have to define entities you want to use in your statechart. This includes "variables":#sclang_variables, "events":#sclang_events, and "operations":#sclang_operations. Variables and events have to be defined in the scope of a "named interface":#sclang_interface_scopes or the "internal interface":#sclang_internal_scope. Especially useful for larger parts of a statechart model is the possibility to use "namespaces":#sclang_namespaces.
 
-When it comes to "code generation":../user-guide/generating_code.html#codegen_generating_state_machine_code all these elements are properly reflected in the generated source code as far as the respective target language supports it.
+When it comes to "code generation":../user-guide/code_generation_intro.html#codegen_generating_state_machine_code all these elements are properly reflected in the generated source code as far as the respective target language supports it.
 
 ###. FIXME (RK): Example needed!
 
@@ -662,7 +666,7 @@ Consider, for example, a C function @float read_sensor()@ that should be called 
 
 ==</div>==
 
-It is the purpose of a code generator to create a suitable construct in the respective target language for the procedure call. For details on code generation, please see section "&quot;Generating state machine code&quot;":../user-guide/generating_code.html.
+It is the purpose of a code generator to create a suitable construct in the respective target language for the procedure call. For details on code generation, please see section "&quot;Generating state machine code&quot;":../user-guide/code_generation_intro.html#codegen_generating_state_machine_code.
 
 Operations can have none, one, or multiple parameters. A parameter is declared with a name and a type. An operation may have a single or no return type similar to usual programming languages. Please see section "&quot;Types&quot;":#sclang_types for details.
 
@@ -705,7 +709,7 @@ Annotations are metadata that you can add to the definition section of your stat
 
 h4(#sclang_cyclebased). @CycleBased
 
-The <code>@CycleBased</code> annotation specifies that the "_cycle-based execution scheme_":../user-guide/generating_code.html#codegen_execution_schemes is to be used.
+The <code>@CycleBased</code> annotation specifies that the "_cycle-based execution scheme_":../user-guide/code_generation_intro.html#codegen_execution_schemes is to be used.
 
 Synopsis: <code>@CycleBased(</code>_period_<code>)</code>
 
@@ -733,7 +737,7 @@ p.
 
 h4(#sclang_eventdriven). @EventDriven
 
-The <code>@EventDriven</code> annotation specifies that the "_event-driven execution scheme_":../user-guide/generating_code.html#codegen_execution_schemes is to be used.
+The <code>@EventDriven</code> annotation specifies that the "_event-driven execution scheme_":../user-guide/code_generation_intro.html#codegen_execution_schemes is to be used.
 
 Synopsis: <code>@EventDriven</code>
 
@@ -1566,3 +1570,5 @@ p(#sclang_fig_expressions_grammar).
 !images/docu_grammar_010_expressions.png(Expressions grammar)!
 
 p=. Expressions grammar
+
+==</div>==
