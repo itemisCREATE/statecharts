@@ -6,7 +6,7 @@
         <outgoingTransitions xmi:id="_Z2AhARe2EeimCJvyl8XbKA" target="_Z18Pkxe2EeimCJvyl8XbKA"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_Z18Pkxe2EeimCJvyl8XbKA" name="StateA" incomingTransitions="_Z2AhARe2EeimCJvyl8XbKA">
-        <outgoingTransitions xmi:id="_dA-BIBe2EeimCJvyl8XbKA" specification="always" target="_b_RTkBe2EeimCJvyl8XbKA"/>
+        <outgoingTransitions xmi:id="_dA-BIBe2EeimCJvyl8XbKA" specification="e1" target="_b_RTkBe2EeimCJvyl8XbKA"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_b_RTkBe2EeimCJvyl8XbKA" specification="entry / raise e2" name="StateB" incomingTransitions="_dA-BIBe2EeimCJvyl8XbKA"/>
     </regions>
