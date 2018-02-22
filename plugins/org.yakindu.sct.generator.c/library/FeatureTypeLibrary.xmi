@@ -12,6 +12,13 @@
         name="moduleName"
         optional="true"/>
     <parameters
+        name="statemachinePrefix"
+        optional="true"/>
+    <parameters
+        name="maxIdentifierLength"
+        optional="true"
+        parameterType="INTEGER"/>
+    <parameters
         name="separator"
         optional="true"/>
   </types>
