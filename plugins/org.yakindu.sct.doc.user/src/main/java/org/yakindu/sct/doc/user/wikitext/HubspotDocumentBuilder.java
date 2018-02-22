@@ -13,6 +13,7 @@ import java.util.Map;
 import org.eclipse.mylyn.wikitext.parser.Attributes;
 import org.eclipse.mylyn.wikitext.parser.LinkAttributes;
 import org.eclipse.mylyn.wikitext.parser.builder.HtmlDocumentBuilder;
+import org.eclipse.mylyn.wikitext.util.XmlStreamWriter;
 
 /**
  * <p>
@@ -277,7 +278,6 @@ public class HubspotDocumentBuilder extends HtmlDocumentBuilder {
 		} else {
 			if (SpanType.LINK == type && attributes instanceof LinkAttributes) {
 				final LinkAttributes linkAttributes = (LinkAttributes) attributes;
-
 				final String hrefOrHashName = linkAttributes.getHref();
 
 				if (hrefOrHashName.startsWith("http")) {
@@ -411,6 +411,20 @@ public class HubspotDocumentBuilder extends HtmlDocumentBuilder {
 		if (!isEarlySeparator) {
 			headings.add(currentHeading);
 			isProcessingHeading = false;
+
+			/* Write the permalink: */
+			final XmlStreamWriter w = super.getWriter();
+			w.writeStartElement("a");
+			w.writeAttribute("href", '#' + currentHeading.getId());
+			w.writeAttribute("class", "permalink");
+			w.writeAttribute("title", "Permalink to \"" + currentHeading.getTitle() + "\"");
+			w.writeAttribute("onclick", "copyPermalinkToClipboard(event, this);");
+			w.writeStartElement("span");
+			w.writeAttribute("class", "tooltip");
+			w.writeCharacters("Copy link to clipboard");
+			w.writeEndElement(); // span
+			w.writeEndElement(); // a
+
 			super.endHeading();
 		}
 	}
@@ -450,9 +464,8 @@ public class HubspotDocumentBuilder extends HtmlDocumentBuilder {
 	public void link(final Attributes attributes, final String hrefOrHashName, final String text) {
 		if (isEarlySeparator)
 			h2.link(attributes, hrefOrHashName, text);
-		else {
+		else
 			super.link(attributes, hrefOrHashName, text);
-		}
 	}
 
 	@Override

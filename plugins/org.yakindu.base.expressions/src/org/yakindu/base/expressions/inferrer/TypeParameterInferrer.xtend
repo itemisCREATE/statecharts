@@ -24,6 +24,7 @@ import org.yakindu.base.types.TypeSpecifier
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.base.types.validation.IValidationIssueAcceptor
+import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue.Severity
 import org.yakindu.base.types.validation.TypeValidator
@@ -62,17 +63,17 @@ class TypeParameterInferrer {
 	 */
 	def void inferTypeParametersFromOperationArguments(List<Parameter> parameters, List<InferenceResult> arguments,
 		Map<TypeParameter, InferenceResult> inferredTypeParameterTypes, IValidationIssueAcceptor acceptor) {
-		if (parameters.size() <= arguments.size()) {
-			for (var i = 0; i < parameters.size(); i++) {
+		if (parameters.size <= arguments.size) {
+			for (var i = 0; i < parameters.size; i++) {
 				val parameter = parameters.get(i).typeSpecifier;
 				val argument = arguments.get(i);
 				if (parameterContainsTypeParameter(parameter)) {
-					val listAcceptor = new IValidationIssueAcceptor.ListBasedValidationIssueAcceptor();
+					val thisIssueAcceptor = createIssueAcceptor
 					assertArgumentAndParameterSoftCompatible(argument, parameter, [
-						listAcceptor.accept(it);
+						thisIssueAcceptor.accept(it);
 						acceptor.accept(it)
 					])
-					if (listAcceptor.traces.empty) {
+					if (thisIssueAcceptor.traces.empty) {
 						inferTypeParameterFromOperationArgument(parameter, argument, inferredTypeParameterTypes,
 							acceptor)
 					}
@@ -81,8 +82,8 @@ class TypeParameterInferrer {
 		}
 	}
 
-	def boolean parameterContainsTypeParameter(TypeSpecifier specifier) {
-		val type = specifier.type
+	def protected boolean parameterContainsTypeParameter(TypeSpecifier specifier) {
+		val type = specifier?.type
 		if (type instanceof PrimitiveType) {
 			return false
 		}
@@ -90,11 +91,10 @@ class TypeParameterInferrer {
 			return true
 		}
 		if (type instanceof ComplexType) {
-			val complexType = type as ComplexType
-			if (complexType.typeParameters != null) {
+			if (type.typeParameters !== null) {
 				return true;
 			} else {
-				for (prop : complexType.features.filter(Property)) {
+				for (prop : type.features.filter(Property)) {
 					if (prop.typeSpecifier.parameterContainsTypeParameter) {
 						return true
 					}
@@ -107,7 +107,7 @@ class TypeParameterInferrer {
 	def protected void inferTypeParameterFromOperationArgument(TypeSpecifier parameterTypeSpecifier,
 		InferenceResult argumentType, Map<TypeParameter, InferenceResult> inferredTypeParameterTypes,
 		IValidationIssueAcceptor acceptor) {
-		val parameterType = parameterTypeSpecifier.getType()
+		val parameterType = parameterTypeSpecifier?.type
 
 		if (parameterType instanceof TypeParameter) {
 			doInferTypeParameterFromOperationArgument(parameterType, argumentType, inferredTypeParameterTypes, acceptor)
@@ -120,12 +120,12 @@ class TypeParameterInferrer {
 	def protected doInferGenericTypeFromOperationArgument(TypeSpecifier parameterTypeSpecifier,
 		InferenceResult argumentType, Map<TypeParameter, InferenceResult> inferredTypeParameterTypes,
 		IValidationIssueAcceptor acceptor) {
-		for (var i = 0; i < parameterTypeSpecifier.getTypeArguments().size(); i++) {
-			val typeParameter = parameterTypeSpecifier.getTypeArguments().get(i);
-			if (argumentType.getBindings().size() <= i) {
+		for (var i = 0; i < parameterTypeSpecifier.typeArguments.size; i++) {
+			val typeParameter = parameterTypeSpecifier.typeArguments.get(i);
+			if (argumentType.bindings.size <= i) {
 				acceptor.error(typeParameter, NOT_INFERRABLE_TYPE_PARAMETER_CODE)
 			} else {
-				val typeArgument = argumentType.getBindings().get(i);
+				val typeArgument = argumentType.bindings.get(i);
 				inferTypeParameterFromOperationArgument(typeParameter, typeArgument, inferredTypeParameterTypes,
 					acceptor);
 			}
@@ -135,34 +135,33 @@ class TypeParameterInferrer {
 	def protected doInferTypeParameterFromOperationArgument(TypeParameter typeParameter, InferenceResult argumentType,
 		Map<TypeParameter, InferenceResult> inferredTypeParameterTypes, IValidationIssueAcceptor acceptor) {
 
-		val newMappedType = argumentType.getType();
+		val newMappedType = argumentType.type;
 		val typeInMap = inferredTypeParameterTypes.get(typeParameter);
-		if (typeInMap == null) {
+		if (typeInMap === null) {
 			inferredTypeParameterTypes.put(typeParameter,
-				InferenceResult.from(newMappedType, argumentType.getBindings()));
+				InferenceResult.from(newMappedType, argumentType.bindings));
 		} else {
 			val commonType = getCommonType(argumentType, typeInMap);
 			val errorMsg = String.format(INCOMPATIBLE_TYPES, argumentType.toString, typeInMap.toString)
-			val listAcceptor = new IValidationIssueAcceptor.ListBasedValidationIssueAcceptor();
+			val thisIssueAcceptor = createIssueAcceptor
 			typeValidator.assertTypeBindingsSame(argumentType, typeInMap, errorMsg,  [
-						listAcceptor.accept(it);
+						thisIssueAcceptor.accept(it);
 						acceptor.accept(it)
 					])
-			if (commonType == null || !listAcceptor.traces.isEmpty) {
+			if (commonType === null || !thisIssueAcceptor.traces.isEmpty) {
 				inferredTypeParameterTypes.put(typeParameter, null);
 				acceptor.error(
 					String.format(INFER_COMMON_TYPE, typeParameter.name,
 						newArrayList(argumentType.type.name, typeInMap.type.name)), NOT_INFERRABLE_TYPE_PARAMETER_CODE)
 			} else {
 				inferredTypeParameterTypes.put(typeParameter,
-					InferenceResult.from(commonType, argumentType.getBindings()));
+					InferenceResult.from(commonType, argumentType.bindings));
 			}
 		}
 	}
 
 	def protected Type getCommonType(InferenceResult type1, InferenceResult type2) {
-		val result = registry.getCommonType(type1.getType(), type2.getType())
-		return result
+		return registry.getCommonType(type1.type, type2.type)
 	}
 
 	/**
@@ -172,33 +171,32 @@ class TypeParameterInferrer {
 	 */
 	def protected InferenceResult buildInferenceResult(InferenceResult oldInferenceResult,
 		Map<TypeParameter, InferenceResult> inferredTypeParameterTypes, IValidationIssueAcceptor acceptor) {
-		if (oldInferenceResult.getType() instanceof TypeParameter) {
+		val oldInferredType = oldInferenceResult.type
+		if (oldInferredType instanceof TypeParameter) {
 			// get already inferred type from type parameter map
-			val typeParameter = oldInferenceResult.getType() as TypeParameter
-			val mappedType = inferredTypeParameterTypes.get(typeParameter);
-			if (mappedType == null) {
-				acceptor.warning(typeParameter, NOT_INFERRABLE_TYPE_PARAMETER_CODE)
+			val mappedType = inferredTypeParameterTypes.get(oldInferredType);
+			if (mappedType === null) {
+				acceptor.warning(oldInferredType, NOT_INFERRABLE_TYPE_PARAMETER_CODE)
 				return null
 			} else {
 				return mappedType;
 			}
-		} else if (oldInferenceResult.getType() instanceof GenericElement) {
+		} else if (oldInferredType instanceof GenericElement) {
 			val List<InferenceResult> newBindings = newArrayList()
-			for (InferenceResult oldBinding : oldInferenceResult.getBindings()) {
+			for (InferenceResult oldBinding : oldInferenceResult.bindings) {
 				newBindings.add(buildInferenceResult(oldBinding, inferredTypeParameterTypes, acceptor))
 			}
-			val result = InferenceResult.from(oldInferenceResult.getType(), newBindings);
-			return result;
+			return InferenceResult.from(oldInferenceResult.type, newBindings);
 		}
 		return oldInferenceResult;
 	}
 
 	def void inferTypeParametersFromOwner(InferenceResult operationOwnerResult,
 		Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) {
-		var operationOwnerType = operationOwnerResult.getType()
+		val operationOwnerType = operationOwnerResult?.type
 		if (operationOwnerType instanceof GenericElement) {
-			for (var i = 0; i < operationOwnerType.typeParameters.size() &&
-				i < operationOwnerResult.bindings.size(); i++) { // T1, T2...
+			for (var i = 0; i < operationOwnerType.typeParameters.size &&
+				i < operationOwnerResult.bindings.size; i++) { // T1, T2...
 				val typeParameter = operationOwnerType.typeParameters.get(i)
 				val binding = operationOwnerResult.bindings.get(i) // integer, boolean...
 				inferredTypeParameterTypes.put(typeParameter, binding)
@@ -224,54 +222,57 @@ class TypeParameterInferrer {
 	 * <li><code>integer</code></li>
 	 * </ul>
 	 */
-	def assertArgumentAndParameterSoftCompatible(InferenceResult argumentResult, TypeSpecifier parameter,
+	def protected assertArgumentAndParameterSoftCompatible(InferenceResult argumentResult, TypeSpecifier parameter,
 		IValidationIssueAcceptor acceptor) {
 		// I can't think of anything that's not compatible to a TypeParameter, so...
-		if (parameter.type instanceof TypeParameter) {
+		if (parameter?.type instanceof TypeParameter) {
 			return
 		}
-		var result1 = InferenceResult.from(argumentResult.type) // ignore bindings
+		val result1 = InferenceResult.from(argumentResult.type) // ignore bindings
 		val result2 = InferenceResult.from(parameter.type)
-		val listAcceptor = new IValidationIssueAcceptor.ListBasedValidationIssueAcceptor();
-		typeValidator.assertCompatible(result1, result2, null, [listAcceptor.accept(it); acceptor.accept(it)])
+		val thisIssueAcceptor = createIssueAcceptor();
+		typeValidator.assertCompatible(result1, result2, null, [thisIssueAcceptor.accept(it); acceptor.accept(it)])
 		// check for correct number of TypeParameters / Argument's type parameters
-		if (listAcceptor.traces.isEmpty && parameter.typeArguments != null &&
+		if (thisIssueAcceptor.traces.isEmpty && parameter.typeArguments !== null &&
 			parameter.typeArguments.size != argumentResult.bindings.size) {
 			// build temporary binding list for error message
 			val bindings = parameter.typeArguments.map [
 				InferenceResult.from(type)
 			]
-			acceptor.accept(
-				new IValidationIssueAcceptor.ValidationIssue(ValidationIssue.Severity.ERROR,
-					String.format(INCOMPATIBLE_TYPES, argumentResult, InferenceResult.from(parameter.type, bindings)),
-					NOT_COMPATIBLE_CODE))
+			acceptor.error(
+				String.format(INCOMPATIBLE_TYPES, argumentResult, InferenceResult.from(parameter.type, bindings)),
+				NOT_COMPATIBLE_CODE)
 			}
 		}
+		
+	def protected ListBasedValidationIssueAcceptor createIssueAcceptor() {
+		new IValidationIssueAcceptor.ListBasedValidationIssueAcceptor()
+	}
 
-		def error(IValidationIssueAcceptor acceptor, String msg, String issueCode) {
-			acceptor.accept(new ValidationIssue(Severity.ERROR, msg, issueCode));
+	def protected error(IValidationIssueAcceptor acceptor, String msg, String issueCode) {
+		acceptor.accept(new ValidationIssue(Severity.ERROR, msg, issueCode));
+	}
+
+	def protected error(IValidationIssueAcceptor acceptor, TypeSpecifier typeSpecifier, String issueCode) {
+		acceptor.accept(
+			new ValidationIssue(Severity.ERROR, String.format(INFER_TYPE_PARAMETER, typeSpecifier.type.name),
+				issueCode));
+	}
+
+	def protected error(IValidationIssueAcceptor acceptor, TypeParameter typeParameter, String issueCode) {
+		acceptor.accept(
+			new ValidationIssue(Severity.ERROR, String.format(INFER_TYPE_PARAMETER, typeParameter.name),
+				issueCode));
 		}
 
-		def error(IValidationIssueAcceptor acceptor, TypeSpecifier typeSpecifier, String issueCode) {
-			acceptor.accept(
-				new ValidationIssue(Severity.ERROR, String.format(INFER_TYPE_PARAMETER, typeSpecifier.type.name),
-					issueCode));
-		}
+	def protected warning(IValidationIssueAcceptor acceptor, String msg, String issueCode) {
+		acceptor.accept(new ValidationIssue(Severity.WARNING, msg, issueCode))
+	}
 
-		def error(IValidationIssueAcceptor acceptor, TypeParameter typeParameter, String issueCode) {
-			acceptor.accept(
-				new ValidationIssue(Severity.ERROR, String.format(INFER_TYPE_PARAMETER, typeParameter.name),
-					issueCode));
-			}
-
-		def warning(IValidationIssueAcceptor acceptor, String msg, String issueCode) {
-			acceptor.accept(new ValidationIssue(Severity.WARNING, msg, issueCode))
-		}
-
-		def warning(IValidationIssueAcceptor acceptor, TypeParameter typeParameter, String issueCode) {
-			acceptor.accept(
-				new ValidationIssue(Severity.WARNING, String.format(INFER_TYPE_PARAMETER, typeParameter.name),
-					issueCode));
-		}
+	def protected warning(IValidationIssueAcceptor acceptor, TypeParameter typeParameter, String issueCode) {
+		acceptor.accept(
+			new ValidationIssue(Severity.WARNING, String.format(INFER_TYPE_PARAMETER, typeParameter.name),
+				issueCode));
+	}
 }
 		

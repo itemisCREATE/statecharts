@@ -1,6 +1,8 @@
 
 h1{%EARLY_SEPARATOR%}. 
 
+==<div style="counter-reset: h1 4">==
+
 ==<div class="pro-feature">==
 
 h1(#cdom_deep_c_integration). Deep C/C++ Integration: Integrating your C/C++ source code with your state machines
@@ -703,7 +705,7 @@ h3(#cdom_creating_a_generator_model). Creating a generator model
 In the statechart model introduced above, do the following:
 
 # In the project view, right-click on the project's name. The context menu opens.
-# In the context menu, select _New → Code Generator Model_. The _YAKINDU Generator Model_ wizard opens.
+# In the context menu, select _New → Code generator model_. The _YAKINDU generator model_ wizard opens.
 # Enter a filename into the _File name_ field, e.g., _c.sgen_, and click _Next >_.
 # In the _Generator_ drop-down menu, select *YAKINDU SCT C Code Generator*.
 # Select the statechart models to generate C source code for. Click _Finish_.
@@ -919,5 +921,7 @@ In C it is possible to define structs, unions and enums without a _typedef_. The
 h3(#cdom_please_get_in_touch_with_us). Please get in touch with us
 
 Please note that the preceding list of restrictions might not be complete. If you discover any further problems, please do not hesitate to contact us! Your feedback is highly appreciated!
+
+==</div>==
 
 ==</div>==

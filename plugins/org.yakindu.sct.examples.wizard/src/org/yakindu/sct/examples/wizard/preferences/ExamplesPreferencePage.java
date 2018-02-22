@@ -53,7 +53,7 @@ public class ExamplesPreferencePage extends FieldEditorPreferencePage implements
 
 	public ExamplesPreferencePage() {
 		super(GRID);
-		setDescription("Examples Preference Page");
+		setDescription("Example wizard preferences");
 	}
 
 	@Override
@@ -63,16 +63,16 @@ public class ExamplesPreferencePage extends FieldEditorPreferencePage implements
 	}
 
 	protected void addFields(Composite main) {
-		addField(new StorageLocationFieldEditor(ExamplesPreferenceConstants.STORAGE_LOCATION, "Storage Location:",
+		addField(new StorageLocationFieldEditor(ExamplesPreferenceConstants.STORAGE_LOCATION, "Storage location:",
 				main));
 		separator();
 		StringFieldEditor remoteLocationEditor = new StringFieldEditor(ExamplesPreferenceConstants.REMOTE_LOCATION,
-				"Remote Location", main);
+				"Remote location", main);
 		remoteLocationEditor.getTextControl(main).setEditable(false);
 		addField(remoteLocationEditor);
 		separator();
 		StringFieldEditor remoteBranchEditor = new StringFieldEditor(ExamplesPreferenceConstants.REMOTE_BRANCH,
-				"Remote Branch:", main);
+				"Remote branch:", main);
 		addField(remoteBranchEditor);
 	}
 

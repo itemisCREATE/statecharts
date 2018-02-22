@@ -28,29 +28,29 @@ public class SimulationPreferencePage extends FieldEditorPreferencePage
 		super(GRID);
 		setPreferenceStore(SimulationActivator.getDefault()
 				.getPreferenceStore());
-		setDescription("Preference Page for simulation preferences");
+		setDescription("Simulation preferences");
 	}
 
 	public void createFieldEditors() {
 		addField(new ColorFieldEditor(
 				SimulationPreferenceConstants.STATE_FOREGROUND_HIGHLIGHTING_COLOR,
-				"&state highlighting foreground color:", getFieldEditorParent()));
+				"&State highlighting foreground color:", getFieldEditorParent()));
 
 		addField(new ColorFieldEditor(
 				SimulationPreferenceConstants.STATE_BACKGROUND_HIGHLIGHTING_COLOR,
-				"&state highlighting background color:", getFieldEditorParent()));
+				"&State highlighting background color:", getFieldEditorParent()));
 
 		addField(new ColorFieldEditor(
 				SimulationPreferenceConstants.VERTEX_FOREGROUND_TRANSIENT_COLOR,
-				"&vertex transient foreground color:", getFieldEditorParent()));
+				"&Vertex transient foreground color:", getFieldEditorParent()));
 
 		addField(new ColorFieldEditor(
 				SimulationPreferenceConstants.VERTEX_BACKGROUND_TRANSIENT_COLOR,
-				"&vertex transient background color:", getFieldEditorParent()));
+				"&Vertex transient background color:", getFieldEditorParent()));
 
 		addField(new ColorFieldEditor(
 				SimulationPreferenceConstants.TRANSITION_HIGHLIGHTING_COLOR,
-				"&transition highlighting color", getFieldEditorParent()));
+				"&Transition highlighting color", getFieldEditorParent()));
 	}
 
 	@Override

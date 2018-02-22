@@ -84,14 +84,14 @@
         	category="org.yakindu.sct.ui.preferences.root"
             class="org.yakindu.sct.generator.genmodel.ui.preferences.GeneratorRootPreferencePage"
             id="org.yakindu.sct.generator.genmodel.SGen"
-            name="Generator Model">
+            name="Generator model">
             <keywordReference id="org.yakindu.sct.generator.genmodel.ui.keyword_SGen"/>
         </page>
         <page
             category="org.yakindu.sct.generator.genmodel.SGen"
             class="org.yakindu.sct.generator.genmodel.ui.SGenExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
             id="org.yakindu.sct.generator.genmodel.SGen.coloring"
-            name="Syntax Coloring">
+            name="Syntax coloring">
             <keywordReference id="org.yakindu.sct.generator.genmodel.ui.keyword_SGen"/>
         </page>
         <page
@@ -371,7 +371,7 @@
             class="org.yakindu.sct.generator.genmodel.ui.SGenExecutableExtensionFactory:org.yakindu.sct.generator.genmodel.ui.wizard.SGenNewFileWizard"
             icon="icons/GenModel-16.png"
             id="org.yakindu.sct.generator.genmodel.ui.SGenNewFileWizard"
-            name="Code Generator Model"
+            name="Code generator model"
             project="false">
       </wizard>
       <wizard

@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -158,9 +159,9 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 
 	protected void collectPackageImports(Resource resource, String packageImport, IAcceptor<String> acceptor,
 			LinkedHashSet<URI> uniqueImportURIs) {
-		PackageImport pkgImport = mapper.findPackageImport(resource, packageImport);
-		if (pkgImport != null && pkgImport.getUri() != null && URIConverter.INSTANCE.exists(pkgImport.getUri(), null)) {
-			acceptor.accept(pkgImport.getUri().toString());
+		Optional<PackageImport> pkgImport = mapper.findPackageImport(resource, packageImport);
+		if (pkgImport.isPresent() && pkgImport.get().getUri() != null && URIConverter.INSTANCE.exists(pkgImport.get().getUri(), null)) {
+			acceptor.accept(pkgImport.get().getUri().toString());
 		}
 	}
 

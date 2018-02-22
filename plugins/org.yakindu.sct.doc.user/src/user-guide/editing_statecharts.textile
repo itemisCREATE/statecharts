@@ -1,4 +1,8 @@
 
+p. 
+
+==<div style="counter-reset: h1 2">==
+
 h1(#edit_editing_statecharts). Editing statecharts
 
 h2(#edit_creating_and_deleting_statecharts). Creating and deleting statecharts
@@ -642,7 +646,7 @@ h3(#edit_changing_the_repository_location). Changing the repository location
 
 You can change the location used by the example wizard to store the online repository's local clone.
 
-# When the example wizard shows the _Download_ button on its first start, click on the link _"change the storage location here"_. The example wizard's preferences dialog opens. Alternatively, open _Window → Preferences_ and select _YAKINDU SCT → Example Wizard_.
+# When the example wizard shows the _Download_ button on its first start, click on the link _"change the storage location here"_. The example wizard's preferences dialog opens. Alternatively, open _Window → Preferences_ and select _YAKINDU SCT → Example wizard_.
 # On the examples preferences page, enter the desired directory into the _Storage Location_ text field.
 # Click on _OK_. The dialog closes.
 
@@ -688,7 +692,7 @@ Downloading the repository as a ZIP archive:
 # Copy the _examples-release.zip_ file to the computer without Internet access and continue with the following steps on that machine.
 # Unpack the archive file. A directory named _examples-release_ is created, containing the YAKINDU Statechart Tools examples repository.
 # In YAKINDU Statechart Tools, select _Window → Preferences_. The _preferences_ dialog opens.
-# In the _preferences_ dialog, navigate to _YAKINDU SCT → Example Wizard_.
+# In the _preferences_ dialog, navigate to _YAKINDU SCT → Example wizard_.
 # Click on _Browse..._, and select the folder that you just extracted from the ZIP file, then click _OK_.
 # On the next try, the example wizard will now show a catalogue of YAKINDU Statechart Tools examples.
 
@@ -701,7 +705,7 @@ Alternatively, you can clone the repository. Cloning the examples repository con
 # In the _New Example_ dialog, select _YAKINDU statechart examples_ and click on _Next >_. The example wizard opens.
 # When the example wizard is opened for the first time, there are no examples on the local disk yet.
 # In YAKINDU Statechart Tools, select _Window → Preferences_. The _preferences_ dialog opens.
-# In the _preferences_ dialog, navigate to _YAKINDU SCT → Example Wizard_.
+# In the _preferences_ dialog, navigate to _YAKINDU SCT → Example wizard_.
 # Click on _Browse..._, and select the folder you just cloned, then click _OK_.
 # On the next try, the example wizard will show a catalogue of YAKINDU Statechart Tools examples.
 
@@ -736,7 +740,7 @@ Many aspects of YAKINDU Statechart Tools can be configured by _preferences_. You
 
 # In the main menu, select _Window → Preferences_. The _Preferences_ dialog appears.
 # In the navigation on the left-hand side, scroll to _YAKINDU SCT_. Open it and its subentries as needed.
-# Click on an entry to display the associated preference pane on the right-hand side of the _Preferences_ dialog, see e.g., figure "Preferences: Diagram Appearance":#edit_fig_preferences_diagram_appearance.
+# Click on an entry to display the associated preference page on the right-hand side of the _Preferences_ dialog, see, e.g., figure "&quot;Preferences: Diagram appearance&quot;":#edit_fig_preferences_diagram_appearance.
 
 In the subsequent sections we will quickly walk through the preferences.
 
@@ -745,21 +749,41 @@ In the subsequent sections we will quickly walk through the preferences.
 h3(#edit_diagram_appearance). Diagram appearance
 
 p(#edit_fig_preferences_diagram_appearance). 
-!images/docu_preferences_010_diagram_appearance_01.png(Preferences: Diagram Appearance)!
+!images/docu_preferences_010_diagram_appearance_01.png(Preferences: Diagram appearance)!
 
-p=. Preferences: Diagram Appearance
-
-
-h4(#edit_colors_and_line_styles). Colors and line styles
-
-The "diagram appearance":#edit_fig_preferences_diagram_appearance preferences define default colors for the backgrounds and borders of states and regions, as well as the default routing style for transitions and other lines, with _oblique_ and _rectilinear_ being the options at your choice.
-
-Please keep in mind that colors and line styles will apply to _new_ elements only. Existing regions, states, etc. will remain as they are. However, you can modify the properties of an existing element anytime using its _properties_ view.
+p=. Preferences: Diagram appearance
 
 
-h4(#edit_showing_transition_priorities). Showing transition priorities
+h4(#edit_colors_line_styles_and_fonts). Colors, line styles, and fonts
 
-In order to display "transition priorities":../user-guide/statechart_language.html#sclang_transition_priorities in a statechart, set a check mark at the respective preference option. Section "&quot;Transition priorities&quot;":../user-guide/statechart_language.html#sclang_transition_priorities explains what transition priorities are and shows an example.
+The "diagram appearance":#edit_fig_preferences_diagram_appearance preferences define
+* the _default colors_ for the backgrounds and borders of states and regions,
+* the _default routing style_ for transitions and other lines, with _oblique_ and _rectilinear_ being the options at your choice, and
+* the _default font_ for any text.
+
+Please keep in mind that these settings will apply to _new_ elements only. Existing regions, states, etc. will remain as they are. However, you can modify the properties of an existing element anytime, using its properties view.
+
+
+h4(#syntax-coloring). Syntax coloring
+
+By default, YAKINDU Statechart Tools highlights textual statechart language elements in different colors while the corresponding text fragment is being edited.
+
+If the _"Enable syntax coloring"_ option is checked, syntax highlighting is turned on all the time, i.e., also for text that is not being edited.
+
+You can configure the colors to actually use on the following preference pages:
+* "_Expression syntax coloring_":#edit_expression_syntax_coloring
+* "_Generator model syntax coloring_":#edit_generator_model_syntax_coloring
+* "_SCTUnit syntax coloring_":#edit_sctunit_syntax_coloring
+
+
+h4(#definition-section-pinning). Definition section pinning
+
+Check or uncheck the _"Enable pinning of statechart definition section pinning"_ option to toggle between pinning and legacy mode of the definition section. Section "&quot;Using the definition section&quot;":#edit_using_the_definition_section explains what this is all about.
+
+
+h4(#edit_showing_transition_and_region_priorities). Showing transition and region priorities
+
+In order to display "transition and region priorities":../user-guide/statechart_language.html#sclang_transition_priorities in a statechart, set a check mark at the respective preference option. Section "&quot;Transition priorities&quot;":../user-guide/statechart_language.html#sclang_transition_priorities explains what transition priorities are and shows an example.
 
 
 h4(#edit_disabling_live_validation). Disabling live validation
@@ -779,6 +803,8 @@ p=. Preferences: Example wizard
 
 You can change the example wizard storage location here. This is a local directory where the "example wizard":#edit_example_wizard stores your local clone of the examples Git repository. The default is the _sct_examples_ directory in your home directory.
 
+You could also change the location of the Git repository and the branch to use, but you won't probably want to do that.
+
 
 
 h3(#edit_expressions_preferences). Expressions preferences
@@ -788,7 +814,7 @@ p(#edit_fig_preferences_expressions).
 
 p=. Preferences: Expressions
 
-Certain dialogs in the statechart editor allow you to opt for never seeing them again. By clicking on the _Clear_ button on this preference pane these hidden dialogs will be shown again at their respective locations.
+Certain dialogs in the statechart editor allow you to opt for never seeing them again. By clicking on the _Clear_ button on this preference page the hidden dialogs pertaining to the statechart language will be shown again at their respective locations.
 
 
 h4(#edit_expression_syntax_coloring). Expression syntax coloring
@@ -798,7 +824,7 @@ p(#edit_fig_preferences_expression_syntax_coloring).
 
 p=. Preferences: Expression syntax coloring
 
-This preferences pane defines foreground color, background color, font, and style for displaying certain syntactical elements in statechart language texts.
+This preference page defines foreground color, background color, font, and style for displaying certain syntactical elements in statechart language texts.
 
 
 h4(#edit_expression_templates). Expression templates
@@ -808,11 +834,11 @@ p(#edit_fig_preferences_expression_templates).
 
 p=. Preferences: Expression templates
 
-Templates are sections of textual code that occur frequently enough that you would like to be able to insert them with a few keystrokes. This function is known as _content assist_; the sections of code that are inserted are known as _templates_.
+Templates are sections of textual code that occur frequently enough to make you want to insert them with a few keystrokes only. This function is known as _content assist_; the sections of code that are inserted are known as _templates_.
 
-To insert an existing content assist template, type the initial character, then press @[Ctrl+Space]@. The templates that begin with that character appear. Double-click on a template to insert it.
+To insert an existing content assist template, type the initial character, then press @[Ctrl+Space]@. The templates whose names begin with that character will appear. Double-click on a template to insert it.
 
-On this preference pane you can create, edit, and delete statechart language templates.
+On this preference page you can create, edit, and delete statechart language templates.
 
 
 
@@ -835,6 +861,10 @@ p=. Preferences: Generator model refactoring
 
 Change these preference settings for refactoring in generator models as you see fit.
 
+The _"Save all modified resources automatically prior to refactoring"_ option is somewhat dangerous, because you might have made changes to files that you intentionally do _not_ want to save to disk – or at least not yet. For that reason, this option is turned off by default.
+
+The _"Rename in editor without dialog if possible"_ pertains to how the renaming operation is performed. By default, if you click on a name and press @[Shift+Alt+R]@, you can edit the name directly in the source code, and all other occurences of that element are renamed while you are typing. If this is not possible or if this option is not checked, a dialog will ask you for the element's new name.
+
 
 h4(#edit_generator_model_syntax_coloring). Generator model syntax coloring
 
@@ -843,7 +873,7 @@ p(#edit_fig_preferences_generator_model_syntax_coloring).
 
 p=. Preferences: Generator model syntax coloring
 
-This preferences pane defines foreground color, background color, font, and style for displaying certain syntactical elements in generator model texts.
+This preference page defines foreground color, background color, font, and style for displaying certain syntactical elements in generator model texts.
 
 
 h4(#edit_generator_model_templates). Generator model templates
@@ -853,11 +883,60 @@ p(#edit_fig_preferences_generator_model_templates).
 
 p=. Preferences: Generator model templates
 
-Templates are sections of textual code that occur frequently enough that you would like to be able to insert them with a few keystrokes. This function is known as _content assist_; the sections of code that are inserted are known as _templates_.
+Templates are sections of textual code that occur frequently enough to make you want to insert them with a few keystrokes only. This function is known as _content assist_; the sections of code that are inserted are known as _templates_.
 
-To insert an existing content assist template, type the initial character, then press @[Ctrl+Space]@. The templates that begin with that character appear. Double-click on a template to insert it.
+To insert an existing content assist template, type the initial character, then press @[Ctrl+Space]@. The templates whose names begin with that character will appear. Double-click on a template to insert it.
 
-On this preference pane you can create, edit, and delete generator model language templates.
+On this preference page you can create, edit, and delete generator model language templates.
+
+
+
+h3(#edit_sctunit). SCTUnit
+
+p(#edit_fig_preferences_sctunit). 
+!images/docu_preferences_091_sctunit_01.png(Preferences: SCTUnit)!
+
+p=. Preferences: SCTUnit
+
+Certain dialogs in SCTUnit allow you to opt for never seeing them again. By clicking on the _Clear_ button on this preference page the hidden dialogs pertaining to SCTUnit will be shown again at their respective locations.
+
+
+h4(#edit_sctunit_refactoring). SCTUnit refactoring
+
+p(#edit_fig_preferences_sctunit_refactoring). 
+!images/docu_preferences_092_sctunit_refactoring_01.png(Preferences: SCTUnit refactoring)!
+
+p=. Preferences: SCTUnit refactoring
+
+Change these preference settings for refactoring in SCTUnit source files as you see fit.
+
+The _"Save all modified resources automatically prior to refactoring"_ option is somewhat dangerous, because you might have made changes to files that you intentionally do _not_ want to save to disk – or at least not yet. For that reason, this option is turned off by default.
+
+The _"Rename in editor without dialog if possible"_ pertains to how the renaming operation is performed. By default, if you click on a name and press @[Shift+Alt+R]@, you can edit the name directly in the source code, and all other occurences of that element are renamed while you are typing. If this is not possible or if this option is not checked, a dialog will ask you for the element's new name.
+
+
+h4(#edit_sctunit_syntax_coloring). SCTUnit syntax coloring
+
+p(#edit_fig_preferences_sctunit_syntax_coloring). 
+!images/docu_preferences_093_sctunit_syntax_coloring_01.png(Preferences: SCTUnit syntax coloring)!
+
+p=. Preferences: SCTUnit syntax coloring
+
+This preference page defines foreground color, background color, font, and style for displaying certain syntactical elements in SCTUnit source texts.
+
+
+h4(#edit_sctunit_templates). SCTUnit templates
+
+p(#edit_fig_preferences_sctunit_templates). 
+!images/docu_preferences_094_sctunit_templates_01.png(Preferences: SCTUnit templates)!
+
+p=. Preferences: SCTUnit templates
+
+Templates are sections of textual code that occur frequently enough to make you want to insert them with a few keystrokes only. This function is known as _content assist_; the sections of code that are inserted are known as _templates_.
+
+To insert an existing content assist template, type the initial character, then press @[Ctrl+Space]@. The templates whose names begin with that character will appear. Double-click on a template to insert it.
+
+On this preference page you can create, edit, and delete SCTUnit language templates.
 
 
 
@@ -868,4 +947,6 @@ p(#edit_fig_preferences_simulation).
 
 p=. Preferences: Simulation
 
-Set your color preferences for the statechart simulator on this preference pane.
+Set your color preferences for the statechart simulator on this preference page.
+
+==</div>==
