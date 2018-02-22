@@ -19,7 +19,7 @@ The open source code generators coming with YAKINDU Statechart Tools do not impl
 In addition to the source code provided here on GitHub we also provide ready-tu-use builds for Windows, Linux and OS X along with an Eclipse update site. If you just want to use YAKINDU Statechart Tools we strongly recommend to go this way. 
 
 1. Dowload a package from our <a href="http://www.statecharts.org/download.html" target="_blank">download page</a>.
-2. Follow the <a href="https://github.com/Yakindu/statecharts/blob/master/plugins/org.yakindu.sct.doc.user/src/installation/installation.textile" target="_blank">installation instructions</a>.
+2. Follow the <a href="https://github.com/Yakindu/statecharts/blob/master/plugins/org.yakindu.sct.doc.user/src/user-guide/installation.textile" target="_blank">installation instructions</a>.
 
 ## How to Contribute
 
