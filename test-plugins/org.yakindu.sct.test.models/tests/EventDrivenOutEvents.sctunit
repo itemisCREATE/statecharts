@@ -1,0 +1,13 @@
+testclass EventDrivenOutEvents for statechart EventDrivenOutEvents {
+	
+	@Test
+	operation test() {
+		enter
+		assert active(EventDrivenOutEvents.main_region.StateA)
+		assert active(EventDrivenOutEvents.second_region.StateC)
+		raise e1
+		assert active(EventDrivenOutEvents.main_region.StateB)
+		assert active(EventDrivenOutEvents.second_region.StateD)
+		exit
+	}
+}
