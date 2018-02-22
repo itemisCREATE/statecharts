@@ -92,6 +92,10 @@ class Naming {
 	def statesEnumType(ExecutionFlow it) {
 		flow.type + 'States'
 	}
+	
+	def protected String entryStatemachinePrefix() {
+		entry.statemachinePrefix
+	}
 
 	def dispatch String type(InterfaceScope it) {
 		flow.type + 'Iface' + (if(name.nullOrEmpty) '' else name).asIdentifier.toFirstUpper
@@ -106,10 +110,10 @@ class Naming {
 	}
 
 	def dispatch String type(ExecutionFlow it) {
-		if (entry.statemachinePrefix.nullOrEmpty) {
+		if (entryStatemachinePrefix.nullOrEmpty) {
 			return name.asIdentifier.toFirstUpper
 		}
-		return entry.statemachinePrefix.toFirstUpper
+		return entryStatemachinePrefix.toFirstUpper
 	}
 
 	def dispatch instance(InterfaceScope it) {
@@ -126,10 +130,10 @@ class Naming {
 
 	def functionPrefix(Scope it, Declaration decl) {
 		// only non-unique declarations in different scopes will be prefixed with the name of the scope
-		if (!isUniqueName(it, decl) && !entry.statemachinePrefix.nullOrEmpty)
-			return entry.statemachinePrefix + separator + it.instance.toFirstUpper
-		if (!entry.statemachinePrefix.nullOrEmpty)
-			return entry.statemachinePrefix
+		if (!isUniqueName(it, decl) && !entryStatemachinePrefix.nullOrEmpty)
+			return entryStatemachinePrefix + separator + it.instance.toFirstUpper
+		if (!entryStatemachinePrefix.nullOrEmpty)
+			return entryStatemachinePrefix
 		return type.toFirstLower
 	}
 
@@ -138,8 +142,8 @@ class Naming {
 	}
 
 	def functionPrefix(ExecutionFlow it) {
-		if (!entry.statemachinePrefix.nullOrEmpty) {
-			return entry.statemachinePrefix + separator
+		if (!entryStatemachinePrefix.nullOrEmpty) {
+			return entryStatemachinePrefix + separator
 		}
 		type.toFirstLower + separator
 	}
