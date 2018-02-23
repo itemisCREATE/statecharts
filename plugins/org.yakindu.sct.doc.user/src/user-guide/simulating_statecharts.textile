@@ -120,26 +120,32 @@ The _Simulation_ view is used to manually raise events and to inspect and modify
 
 The _Simulation_ view groups events and variables by their _interfaces_. The unnamed interface appears as _default_ in the interface list. Click on the small triangle left from an interface's name to show or hide that interface's contents, i.e., events and variables.
 
-bq.. *Please note:*
+The simulation view also displays _time events_, provided the statechart uses time constructs like _after_ or _every_. Press or release the _"show time events"_ button !(inlinemediaobject)images/symbol_event_time_016.png(symbol: "show time events")! to toggle between displaying and not displaying time events. You can click on a time event to raise it, i.e., you don't have to wait for 24 hours to elapse in real time until the _"after 24 * 60 * 60 s"_ transition fires.
 
-Depending on your screen resolution and font size settings, you might not be able to spot the _Simulation_ view by its name, because the tab containing it is quite narrow and might not provide enough space for displaying the title. Hover over the tabs to reveal their respective titles in a pop-up window.
+You can have multiple simulation instances running at the same time. They may simulate the same or different statecharts. Use the simulation view's drop-down menu to switch between simulation instances.
 
-"Figure &quot;The SC Simulation perspective&quot;":#simu_fig_the_sc_simulation_perspective is demonstrating this: The user has hovered the mouse pointer over a tab that just displays the first letters of its title. However, a pop-up window right under the pointer shows the tab's full title "Simulation".
+A digital clock right from the drop-down menu displays the time spent in the simulation. It pauses while the simulation is suspended.
 
 p(#simu_fig_simulation_view). 
 !(shadowless)images/simulation_030_simulation_view.png(The "Simulation" view)!
 
 p=. The _Simulation_ view 
 
+bq.. *Please note:*
+
+Depending on your screen resolution and font size settings, you might not be able to spot the _Simulation_ view by its name, because the tab containing it is quite narrow and might not provide enough space for displaying the title. Hover over the tabs to reveal their respective titles in a pop-up window.
+
+"Figure &quot;The SC Simulation perspective&quot;":#simu_fig_the_sc_simulation_perspective is demonstrating this: The user has hovered the mouse pointer over a tab that just displays the first letters of its title. However, a pop-up window right under the pointer shows the tab's full title "Simulation".
+
 
 
 
 h2(#simu_controlling_a_simulation). Controlling a simulation
 
-* To terminate the simulation, click on the _Terminate_ button !(inlinemediaobject)images/docu_symbol_terminate.png(Symbol: Terminate)!.
-* To suspend the simulation, click on the _Suspend_ button !(inlinemediaobject)images/docu_symbol_suspend.png(Symbol: Suspend)!.
-* To resume a suspended simulation, click on the _Resume_ button !(inlinemediaobject)images/docu_symbol_resume.png(Symbol: Resume)!.
-* Use the _Step Over_ button !(inlinemediaobject)images/docu_symbol_stepover.png(Symbol: Step Over)! to execute a single run-to-completion step.
+* To terminate the simulation, click on the _Terminate_ button !(inlinemediaobject)images/symbol_terminate.png(Symbol: Terminate)!.
+* To suspend the simulation, click on the _Suspend_ button !(inlinemediaobject)images/symbol_suspend.png(Symbol: Suspend)!.
+* To resume a suspended simulation, click on the _Resume_ button !(inlinemediaobject)images/symbol_resume.png(Symbol: Resume)!.
+* Use the _Step Over_ button !(inlinemediaobject)images/symbol_stepover.png(Symbol: Step Over)! to execute a single run-to-completion step.
 
 
 
@@ -241,21 +247,14 @@ Breakpoints allow for automatically suspending the simulation when a certain ele
 
 h3(#advsim_executing_in_debug_mode). Executing in debug mode
 
-To make use of breakpoints, the statechart simulation needs to be executed in debug mode. You have already seen how to "start a statechart simulation in run mode":#simu_starting_a_simulation. For using breakpoints and snapshots, however, the debug mode is needed.
+To make use of breakpoints, the statechart simulation needs to be executed in debug mode. You have already seen how to "start a statechart simulation in run mode":#simu_starting_a_simulation. For using breakpoints and snapshots, however, the _debug mode_ is needed.
 
 # Right-click on the statechart model. The context menu opens.
-# Select _Debug As→Statechart Simulation_, see "Figure &quot;Starting a simulation in debugging mode&quot;":#advsim_fig_starting_a_simulation_in_debugging_mode.
+# Select _Debug As → Statechart Simulation_, see "Figure &quot;Starting a simulation in debugging mode&quot;":#advsim_fig_starting_a_simulation_in_debugging_mode.
 # The statechart simulation starts in the debugging mode.
 
 p(#advsim_fig_starting_a_simulation_in_debugging_mode). 
 !(shadowless)images/advsim_020_start_debugging_010_debug_as_menu.png(Starting a simulation in debugging mode)!
-
-# Right-click on the statechart model. The context menu opens.
-# Select _Debug As→Statechart Simulation_, see "Figure &quot;Starting a simulation in debug mode&quot;":#advsim_fig_starting_a_simulation_in_debug_mode.
-# The statechart simulation starts in the debug mode.
-
-p(#advsim_fig_starting_a_simulation_in_debug_mode). 
-!(shadowless)images/advsim_020_start_debugging_010_debug_as_menu.png(Starting a simulation in debug mode)!
 
 p=. Starting a simulation in debug mode
 
@@ -270,7 +269,7 @@ p(#advsim_fig_setting_a_breakpoint).
 
 p=. Setting a breakpoint
 
-States and transitions with a breakpoint are labeled with a !(inlinemediaobject)images/advsim_symbol_breakpoint_enabled.png(Symbol: Breakpoint enabled)! symbol. "Figure &quot;Breakpoints on transition and state&quot;":#advsim_fig_breakpoints_on_transition_and_state shows an example.
+States and transitions with a breakpoint are labeled with a !(inlinemediaobject)images/symbol_breakpoint_enabled.png(Symbol: Breakpoint enabled)! symbol. "Figure &quot;Breakpoints on transition and state&quot;":#advsim_fig_breakpoints_on_transition_and_state shows an example.
 
 p(#advsim_fig_breakpoints_on_transition_and_state). 
 !(shadowless)images/advsim_030_breakpoint_020_transition_and_state_with_breakpoints.png(Breakpoints on transition and state)!
@@ -297,8 +296,8 @@ h4(#advsim_continuing_the_simulation). Continuing the simulation
 
 In order to continue from a breakpoint, you have two options:
 
-* To continue execution, click on the resume button !(inlinemediaobject)images/advsim_symbol_resume.png(Symbol: Resume)! in the simulation view. The statechart simulation continues until the next breakpoint is hit or the simulation is terminated.
-* To execute only the next run-cycle of the simulation and then suspend again, click on the step-over button !(inlinemediaobject)images/advsim_symbol_stepover.png(Symbol: Step Over)! in the simulation view.
+* To continue execution, click on the resume button !(inlinemediaobject)images/symbol_resume.png(Symbol: Resume)! in the simulation view. The statechart simulation continues until the next breakpoint is hit or the simulation is terminated.
+* To execute only the next run-cycle of the simulation and then suspend again, click on the step-over button !(inlinemediaobject)images/symbol_stepover.png(Symbol: Step Over)! in the simulation view.
 
 
 h4(#advsim_using_the_breakpoints_view). Using the breakpoints view
@@ -317,8 +316,8 @@ h4(#advsim_enabling_and_disabling_breakpoints). Enabling and disabling breakpoin
 
 A breakpoint is either enabled or disabled.
 
-* An _enabled_ breakpoint causes the statechart simulation to suspend when reaching it. In the statechart and in the breakpoints view, an enabled breakpoint is visualized by a filled light blue circle with a grey border: !(inlinemediaobject)images/advsim_symbol_breakpoint_enabled.png(Symbol: Breakpoint enabled)!.
-* A _disabled_ breakpoint is ignored by the statechart simulation. In the statechart and in the breakpoints view, a disabled breakpoint is visualized by a hollow circle with a grey border: !(inlinemediaobject)images/advsim_symbol_breakpoint_disabled.png(Symbol: Breakpoint disabled)!.
+* An _enabled_ breakpoint causes the statechart simulation to suspend when reaching it. In the statechart and in the breakpoints view, an enabled breakpoint is visualized by a filled light blue circle with a grey border: !(inlinemediaobject)images/symbol_breakpoint_enabled.png(Symbol: Breakpoint enabled)!.
+* A _disabled_ breakpoint is ignored by the statechart simulation. In the statechart and in the breakpoints view, a disabled breakpoint is visualized by a hollow circle with a grey border: !(inlinemediaobject)images/symbol_breakpoint_disabled.png(Symbol: Breakpoint disabled)!.
 
 "Figure &quot;Breakpoints view&quot;":#advsim_fig_breakpoints_view shows an enabled and a disabled breakpoint in the statechart editor and in the breakpoints view, respectively.
 
@@ -374,22 +373,22 @@ p(#advsim_fig_raising_multiple_events_simultaneously_1).
 p=. Raising multiple events simultaneously &#91;1]
 
 * The simulation has encountered a breakpoint at the _LightOn_ state and has been suspended there.
-* The simulation view shows the _pressLightOn_ and the _pressLightOff_ events. Both events are labeled with a !(inlinemediaobject)images/advsim_symbol_event.png(Symbol: Event [not raised])! symbol, meaning the respective event is not raised.
+* The simulation view shows the _pressLightOn_ and the _pressLightOff_ events. Both events are labeled with a !(inlinemediaobject)images/symbol_event.png(Symbol: Event [not raised])! symbol, meaning the respective event is not raised.
 
 p(#advsim_fig_raising_multiple_events_simultaneously_2). 
 !images/advsim_040_multiple_events_020_events_raised.png(Raising multiple events simultaneously [2])!
 
 p=. Raising multiple events simultaneously &#91;2]
 
-* Clicking on an event raises it and adds a blue triangle to the event symbol: !(inlinemediaobject)images/advsim_symbol_event_raised.png(Symbol: Event [raised])!. Since the simulation remains suspended, the user can raise multiple events.
+* Clicking on an event raises it and adds a blue triangle to the event symbol: !(inlinemediaobject)images/symbol_event_raised.png(Symbol: Event [raised])!. Since the simulation remains suspended, the user can raise multiple events.
 
-Both events are raised and will be handled by the state machine during the next run-to-completion step. The latter will be performed as soon as the user clicks on the step-over button !(inlinemediaobject)images/advsim_symbol_stepover.png(Symbol: Step Over)! or the resume button !(inlinemediaobject)images/advsim_symbol_resume.png(Symbol: Resume)!.
+Both events are raised and will be handled by the state machine during the next run-to-completion step. The latter will be performed as soon as the user clicks on the step-over button !(inlinemediaobject)images/symbol_stepover.png(Symbol: Step Over)! or the resume button !(inlinemediaobject)images/symbol_resume.png(Symbol: Resume)!.
 
 bq. *Please note:* Under the _even-driven_ execution scheme, multiple events are never processed at the same time. Each event triggers a separate RTC.
 
 ==</div>==
 
-bq. *Please note:* While the execution is still suspended, you can "unraise" an already raised event by clicking on the event symbol !(inlinemediaobject)images/advsim_symbol_event_raised.png(Symbol: Event [raised])! a second time. The blue triangle will disappear, and upon continuation of the simulation the event will not be handled.
+bq. *Please note:* While the execution is still suspended, you can "unraise" an already raised event by clicking on the event symbol !(inlinemediaobject)images/symbol_event_raised.png(Symbol: Event [raised])! a second time. The blue triangle will disappear, and upon continuation of the simulation the event will not be handled.
 
 h5(#advsim_transition_priorities). Transition priorities
 
