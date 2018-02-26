@@ -299,9 +299,9 @@ bc.
 
 ==</div>==
 
-p. The _header_ of an operation consists of an optional annotation, typically <code>&#x40;Test</code>, followed by the keyword @operation@, followed by the name of the operation, followed by a parenthesized list of parameters, optionally followed by a colon and a return type.
+p. The _header_ of an operation consists of an optional annotation, typically <code>&#x40;Test</code>, followed by the keyword @operation@, followed by the name of the operation, followed by a parenthesized list of parameters, optionally followed by a colon and a return type. Specifying no return type is equivalent to explicitly specifying @void@ as return type.
 
-The _body_ of an operation is enclosed in braces (<code>{ … }</code>). It consists of a sequence of "statements":#sctunit_statements_and_expressions, which may be empty.
+The _body_ of an operation is enclosed in braces (<code>{ … }</code>). It consists of a sequence of "statements":#sctunit_statements_and_expressions, which may be empty. If the operation's header specifies a return type different from @void@, a value of that type must be returned using the "_return_ statement":#sctunit_returning_an_operations_result.
 
 Figure "&quot;Operation grammar&quot;":#sctunit_fig_operation_grammar summarizes the structure of an operation:
 
@@ -407,10 +407,57 @@ In the second variant of the _assert called_ statement the keyword @with@ follow
 
 ==<!-- End sctunit_keyword_called -->==
 
+h5. Asserting an outgoing event
+
+Finally, you can use the _assert_ statement to check whether the state machine has raised an outgoing event. To do so, the @assert@ keyword is followed by the name of the desired event. It is also possible to assert the opposite, i.e., that the event has _not_ been raised. In this case, insert the negation operator @!@ between @assert@ and the event name.
+
+Here's an example:
+
+==<div class="example">==
+
+The statechart below transitions from state *A* to state *B* on either the _e1_ or the _e2_ incoming event. However, on _e1_, the outgoing event _e3_ will be raised, while this is not the case on _e2_.
+
+p(#sctunit_fig_statechart_raising_an_outgoing_event). 
+!(small)images/sctunit_outgoing_event_010.png(Statechart raising an outgoing event)!
+
+p=. Statechart raising an outgoing event
+
+You can verify this behavior using the following SCTUnit test class. The statement
+* @assert e3@
+succeeds if the _e3_ event has been raised, while
+* @assert ! e3@
+succeeds if that event has _not_ been raised.
+
+bc.. 
+testclass outgoingEventTest for statechart raiseOutgoingEvent {
+
+    @Test
+    operation test_e1 () {
+        enter
+        raise e1
+        proceed 1 cycle
+        assert e3
+        exit
+    }
+
+    @Test
+    operation test_e2 () {
+        enter
+        raise e2
+        proceed 1 cycle
+        assert ! e3
+        exit
+    }
+}
+p. 
+
+==</div>==
+
+h5. Assertion grammar
+
 Figure "&quot;Assertion grammar&quot;":#sctunit_fig_assertion_grammar summarizes the structure of an assertion:
 
 p(#sctunit_fig_assertion_grammar). 
-
 !images/sctunit_grammar_030_assertion.png(Assertion grammar)!
 
 p=. Assertion grammar
@@ -432,7 +479,7 @@ The _enter_ statement's grammar is very simple, as figure "&quot;Enter grammar&q
 
 p(#sctunit_fig_enter_grammar). 
 
-!images/sctunit_grammar_020_enterexpression.png(Enter grammar)!
+!(tiny)images/sctunit_grammar_020_enterexpression.png(Enter grammar)!
 
 p=. Enter grammar
 
@@ -493,7 +540,7 @@ The _exit_ statement's grammar is very simple, as figure "&quot;Exit grammar&quo
 
 p(#sctunit_fig_exit_grammar). 
 
-!images/sctunit_grammar_020_exitexpression.png(Exit grammar)!
+!(tiny)images/sctunit_grammar_020_exitexpression.png(Exit grammar)!
 
 p=. Exit grammar
 
@@ -586,14 +633,6 @@ bc. var sum: integer
 is fine in the statechart language, it is an error in the SCTUnit language. You would rather have to write something like
 
 bc. var sum: integer = 0
-
-Figure "&quot;Variable definition grammar&quot;":#sctunit_fig_variable_definition_grammar summarizes the structure of a _variable definition_:
-
-p(#sctunit_fig_variable_definition_grammar). 
-
-!images/sctunit_grammar_020_sctunitvariabledefinition.png(Variable definition grammar)!
-
-p=. Variable definition grammar
 
 ==<!-- End sctunit_keyword_var -->==
 
@@ -815,7 +854,7 @@ h4(#sctunit_returning_an_operations_result). Returning an operation's result
 
 ==<!-- Start sctunit_keyword_return -->==
 
-The _return_ statement terminates the execution of the current operation and returns the value of an expression to the caller. The type of the expression must match the operation's return type.
+The _return_ statement terminates the execution of the current operation. It either returns nothing or the value of an expression to the caller. If an expression is returned, its type must match the operation's return type. If the operation returns nothing, the 
 
 ==<div class="example">==
 

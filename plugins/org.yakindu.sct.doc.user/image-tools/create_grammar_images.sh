@@ -192,7 +192,8 @@ create_grammar_image operation \
 # Assertion
 create_grammar_image assertion \
     assertionstatement \
-    verifystatement
+    positiveverifystatement \
+    negativeverifystatement
 
 # Process
 create_grammar_image proceed \
