@@ -13,7 +13,6 @@ package org.yakindu.base.xtext.utils.jface.viewers;
 import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -22,10 +21,7 @@ import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.jface.text.source.ISharedTextColors;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
-import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.DisposeEvent;
@@ -44,9 +40,6 @@ import org.eclipse.ui.texteditor.AnnotationPreference;
 import org.eclipse.ui.texteditor.DefaultMarkerAnnotationAccess;
 import org.eclipse.ui.texteditor.MarkerAnnotationPreferences;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.ILeafNode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -79,7 +72,7 @@ import com.google.inject.Provider;
  */
 @SuppressWarnings("restriction")
 public class StyledTextXtextAdapter {
-	
+
 	@Inject
 	private IPreferenceStoreAccess preferenceStoreAccess;
 	@Inject
@@ -189,7 +182,8 @@ public class StyledTextXtextAdapter {
 			if (this.site == null) {
 				site = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor().getSite();
 			}
-			XtextStyledTextSelectionProvider xtextStyledTextSelectionProvider = new XtextStyledTextSelectionProvider();
+			XtextStyledTextSelectionProvider xtextStyledTextSelectionProvider = new XtextStyledTextSelectionProvider(
+					this.styledText, getFakeResourceContext().getFakeResource());
 			ChangeSelectionProviderOnFocusGain listener = new ChangeSelectionProviderOnFocusGain(site,
 					xtextStyledTextSelectionProvider);
 			getStyledText().addFocusListener(listener);
@@ -197,7 +191,6 @@ public class StyledTextXtextAdapter {
 		} catch (NullPointerException ex) {
 			// Do nothing, not opened within editor context
 		}
-
 	}
 
 	private ControlDecoration createContentAssistDecoration(StyledText styledText) {
@@ -224,9 +217,8 @@ public class StyledTextXtextAdapter {
 	}
 
 	protected ValidationJob createValidationJob() {
-		return new ValidationJob(getValidator(), getXtextDocument(),
-				new AnnotationIssueProcessor(getXtextDocument(), getXtextSourceviewer().getAnnotationModel(), getResolutionProvider()),
-				CheckMode.FAST_ONLY);
+		return new ValidationJob(getValidator(), getXtextDocument(), new AnnotationIssueProcessor(getXtextDocument(),
+				getXtextSourceviewer().getAnnotationModel(), getResolutionProvider()), CheckMode.FAST_ONLY);
 	}
 
 	protected XtextFakeResourceContext createFakeResourceContext(Injector injector) {
@@ -234,7 +226,8 @@ public class StyledTextXtextAdapter {
 	}
 
 	protected XtextSourceViewer createXtextSourceViewer() {
-		final XtextSourceViewer result = new XtextSourceViewerEx(getStyledText(), getPreferenceStoreAccess().getPreferenceStore());
+		final XtextSourceViewer result = new XtextSourceViewerEx(getStyledText(),
+				getPreferenceStoreAccess().getPreferenceStore());
 		result.configure(getXtextSourceViewerConfiguration());
 		result.setDocument(getXtextDocument(), new AnnotationModel());
 		return result;
@@ -388,36 +381,7 @@ public class StyledTextXtextAdapter {
 		return this.xtextStyledTextHighlightingHelper;
 	}
 
-	protected class XtextStyledTextSelectionProvider implements ISelectionProvider {
-		
-		public void setSelection(ISelection selection) {
-		}
-
-		public void removeSelectionChangedListener(ISelectionChangedListener listener) {
-		}
-
-		public void addSelectionChangedListener(ISelectionChangedListener listener) {
-		}
-
-		public ISelection getSelection() {
-			if (getStyledText().isDisposed())
-				return StructuredSelection.EMPTY;
-			int offset = getStyledText().getCaretOffset() - 1;
-			XtextResource fakeResource = StyledTextXtextAdapter.this.getFakeResourceContext().getFakeResource();
-			IParseResult parseResult = fakeResource.getParseResult();
-			if (parseResult == null)
-				return StructuredSelection.EMPTY;
-			ICompositeNode rootNode = parseResult.getRootNode();
-			ILeafNode selectedNode = NodeModelUtils.findLeafNodeAtOffset(rootNode, offset);
-			final EObject selectedObject = NodeModelUtils.findActualSemanticObjectFor(selectedNode);
-			if (selectedObject == null) {
-				return StructuredSelection.EMPTY;
-			}
-			return new StructuredSelection(selectedObject);
-		}
-	}
-
-	protected class ChangeSelectionProviderOnFocusGain implements FocusListener, DisposeListener {
+	public static class ChangeSelectionProviderOnFocusGain implements FocusListener, DisposeListener {
 
 		protected ISelectionProvider selectionProviderOnFocusGain;
 		protected ISelectionProvider selectionProviderOnFocusLost;

@@ -920,7 +920,7 @@
  <extension
        point="org.eclipse.ui.elementFactories">
     <factory
-          class="org.yakindu.sct.ui.editor.DiagramEditorInputFactory"
+          class="org.yakindu.sct.ui.editor.partitioning.DiagramEditorInputFactory"
           id="org.yakindu.sct.ui.editor.DiagramEditorInputFactory">
     </factory>
  </extension>
