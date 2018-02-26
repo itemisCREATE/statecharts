@@ -1,5 +1,6 @@
 function copyPermalinkToClipboard(event, element) {
 	event.preventDefault();
+    event.stopPropagation();
     var origin = (window.location.origin != 'null') ? window.location.origin : window.location.href;
     var permalink = origin + window.location.pathname + '#' + jQuery(element).parent().attr('id');
 
