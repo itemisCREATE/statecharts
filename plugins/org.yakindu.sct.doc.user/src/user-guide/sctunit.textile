@@ -854,7 +854,7 @@ h4(#sctunit_returning_an_operations_result). Returning an operation's result
 
 ==<!-- Start sctunit_keyword_return -->==
 
-The _return_ statement terminates the execution of the current operation. It either returns nothing or the value of an expression to the caller. If an expression is returned, its type must match the operation's return type. If the operation returns nothing, the 
+The _return_ statement terminates the execution of the current operation. It either returns nothing or the value of an expression to the caller. If an expression is returned, its type must match the operation's return type. If the operation returns nothing, its return type must be _void_, either implicitly or explicitly.
 
 ==<div class="example">==
 
