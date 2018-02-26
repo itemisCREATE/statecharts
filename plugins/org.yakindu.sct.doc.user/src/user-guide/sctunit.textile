@@ -1,4 +1,8 @@
 
+p. 
+
+==<div style="counter-reset: h1 7">==
+
 h1(#sctunit_test-driven_statechart_development_with_sctunit). Test-driven statechart development with SCTUnit
 
 h2(#sctunit_brief_introduction_to_test-driven_development). Brief introduction to test-driven development
@@ -12,7 +16,7 @@ Tests are not written for the complete software product in advance, but rather o
 
 h2(#sctunit_test-driven_statechart_modelling). Test-driven statechart modelling
 
-In "model-driven software development (MDSD)":https://en.wikipedia.org/wiki/Model-driven_software_development, specific parts of the software are created by a code generator instead of being written manually. This also pertains to code "generated from statechart models":../user-guide/generating_code.html.
+In "model-driven software development (MDSD)":https://en.wikipedia.org/wiki/Model-driven_software_development, specific parts of the software are created by a code generator instead of being written manually. This also pertains to code "generated from statechart models":../user-guide/code_generation_intro.html#codegen_generating_state_machine_code.
 
 The nice thing about generated code is that we can safely assume it to be correct – at least as long as the code generator developers have tested their product thoroughly enough. However, what about the model? While the generated code might be correct, this won't help at all if the underlying model is broken in the first place.
 
@@ -978,13 +982,13 @@ Generating unit tests as source code comes as a solution. Source code can be ins
 
 This section explains how you can generate your SCTUnit tests as source code with YAKINDU Statechart Tools. Supported programming languages are Java, C, and C++. The generated Java classes use "JUnit":http://junit.org/ as their testing framework and "Mockito":http://site.mockito.org/ for mocked methods. C and C++ sources rest upon the "Google Test":https://en.wikipedia.org/wiki/Google_Test unit testing library.
 
-In order to use the SCTUnit code generators effectively, you should already be familiar with generating source code from statecharts, as explained in chapter "&quot;Generating state machine code&quot;":../user-guide/generating_code.html#codegen_generating_state_machine_code. In fact, you have to generate your statechart as source code first, so that the SCTUnit tests have something to be executed upon. Below we are assuming that you have your statechart code generator model and the generated code handy. Generating SCTUnit test source code follows the same principcles as generating state machine source code, so we can focus on SCTUnit essentials here.
+In order to use the SCTUnit code generators effectively, you should already be familiar with generating source code from statecharts, as explained in chapter "&quot;Generating state machine code&quot;":../user-guide/code_generation_intro.html#codegen_generating_state_machine_code. In fact, you have to generate your statechart as source code first, so that the SCTUnit tests have something to be executed upon. Below we are assuming that you have your statechart code generator model and the generated code handy. Generating SCTUnit test source code follows the same principcles as generating state machine source code, so we can focus on SCTUnit essentials here.
 
 
 
 h3(#sctunit_creating_a_generation_model). Creating a generation model
 
-The first step is to create a _generation model (SGen)_ for the SCTUnit test, similar to explanation in section "&quot;Generating state machine code&quot;":../user-guide/generating_code.html#setting_up_a_code_generator_project.
+The first step is to create a _generation model (SGen)_ for the SCTUnit test, similar to explanation in section "&quot;Generating state machine code&quot;":../user-guide/code_generation_custom.html#setting_up_a_code_generator_project.
 
 # In the main menu, select _File → New → Other…_. The _New_ dialog opens.
 # In the _New_ dialog, select _YAKINDU SCT → Code generator model_.
@@ -1013,10 +1017,10 @@ A code generator's behavior can be controlled by so-called _features_. SCTUnit c
 
 Documentation of feature details you can find here:
 
-* "Common features of all statechart code generators":../user-guide/generating_code.html#codegen_configuring_a_generator
-* "C statechart code generator features":../user-guide/generating_code.html#codegen_c_code_generator_features
-* "C++ statechart code generator features":../user-guide/generating_code.html#codegen_cpp_code_generator_features
-* "Java statechart code generator features":../user-guide/generating_code.html#codegen_java_code_generator_features
+* "Common features of all statechart code generators":../user-guide/code_generation_intro.html#codegen_configuring_a_generator
+* "C statechart code generator features":../user-guide/code_generation_c.html#codegen_c_code_generator_features
+* "C++ statechart code generator features":../user-guide/code_generation_cpp.html#codegen_cpp_code_generator_features
+* "Java statechart code generator features":../user-guide/code_generation_java.html#codegen_java_code_generator_features
 
 
 
@@ -1041,3 +1045,5 @@ h3. The generated Java test class
 The Java source code generated from SCTUnit test classes or test suites takes the form of JUnit tests and can be integrated in CI environments, for example.
 
 In Eclipse, you can execute such a generated JUnit test by right-clicking on the corresponding _.java_ file and selecting _Run As → JUnit Test_ in the context menu.
+
+==</div>==
