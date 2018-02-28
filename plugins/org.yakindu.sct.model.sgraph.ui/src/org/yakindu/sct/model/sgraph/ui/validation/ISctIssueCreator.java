@@ -11,7 +11,6 @@
 package org.yakindu.sct.model.sgraph.ui.validation;
 
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Issue;
 
 import com.google.inject.ImplementedBy;
@@ -23,8 +22,6 @@ import com.google.inject.ImplementedBy;
 public interface ISctIssueCreator {
 
 	SCTIssue createFromMarker(IMarker marker, String elementID);
-
-	SCTIssue create(Issue t, EObject e, String uriFragment);
 
 	SCTIssue create(Issue t, String uriFragment);
 }

@@ -7,12 +7,11 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- *
+ * 
  */
 package org.yakindu.sct.model.sgraph.ui.validation;
 
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.validation.Issue;
 
@@ -29,17 +28,11 @@ public class SctIssueCreator implements ISctIssueCreator {
 	@Override
 	public SCTIssue createFromMarker(final IMarker marker, final String id) {
 		final Issue delegate = issueCreator.createIssue(marker);
-		return create(delegate, id);
+		return create(delegate,id);
 	}
 
-	@Override
 	public SCTIssue create(Issue delegate, String id) {
-		return create(delegate, null, id);
-	}
-
-	@Override
-	public SCTIssue create(Issue delegate, EObject e, String id) {
-		final SCTIssue issue = new SCTIssue(delegate, e, id);
+		final SCTIssue issue = new SCTIssue(delegate, id);
 		return issue;
 	}
 

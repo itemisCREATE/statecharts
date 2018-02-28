@@ -11,7 +11,6 @@
 package org.yakindu.sct.model.sgraph.ui.validation;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.Issue;
@@ -28,24 +27,13 @@ public class SCTIssue extends IssueImpl {
 
 	private final String semanticURI;
 
-	private final EObject eObject;
-
-	public SCTIssue(final Issue delegate, EObject eObject, String semanticURI) {
-		this.delegate = delegate;
-		this.eObject = eObject;
-		this.semanticURI = semanticURI;
-	}
-
 	public SCTIssue(final Issue delegate, String semanticURI) {
-		this(delegate, null, semanticURI);
+		this.delegate = delegate;
+		this.semanticURI = semanticURI;
 	}
 
 	public String getSemanticURI() {
 		return semanticURI;
-	}
-
-	public EObject getEObject() {
-		return this.eObject;
 	}
 
 	@Override

@@ -27,11 +27,11 @@ import org.eclipse.gmf.runtime.emf.ui.providers.marker.AbstractModelMarkerNaviga
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.xtext.EcoreUtil2;
-import org.yakindu.base.base.BasePackage;
+import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.validation.Issue;
 import org.yakindu.base.gmf.runtime.editparts.TextAwareLabelEditPart;
 import org.yakindu.base.xtext.utils.gmf.directedit.IXtextAwareEditPart;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerType;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 
@@ -42,13 +42,6 @@ import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
  */
 public class StatechartMarkerNavigationProvider extends AbstractModelMarkerNavigationProvider {
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see org.eclipse.gmf.runtime.common.ui.services.marker.
-	 * AbstractMarkerNavigationProvider#doGotoMarker(org.eclipse.core.resources.
-	 * IMarker)
-	 */
 	@Override
 	@SuppressWarnings("rawtypes")
 	protected void doGotoMarker(IMarker marker) {
@@ -113,11 +106,29 @@ public class StatechartMarkerNavigationProvider extends AbstractModelMarkerNavig
 		if (targetObject == null) {
 			return defaultAttr;
 		}
-		if (targetObject instanceof Vertex && isReasonNamedElementName(marker)) {
-			return BasePackage.eINSTANCE.getNamedElement_Name();
-		} else {
-			return defaultAttr;
+		try {
+			String[] data = Strings.unpack((String) marker.getAttribute(Issue.DATA_KEY));
+			if (data != null) {
+				for (String string : data) {
+					EAttribute attribute = getEditFeature(targetObject, string);
+					if (attribute != null) {
+						return attribute;
+					}
+				}
+			}
+		} catch (CoreException e) {
+			e.printStackTrace();
 		}
+		return defaultAttr;
+	}
+
+	protected EAttribute getEditFeature(EObject targetObject, String featureName) {
+		for (EAttribute attribute : targetObject.eClass().getEAllAttributes()) {
+			if (attribute.getName().equals(featureName)) {
+				return attribute;
+			}
+		}
+		return null;
 	}
 
 	protected boolean isReasonNamedElementName(IMarker marker) {

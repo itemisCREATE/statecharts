@@ -44,8 +44,7 @@ public class SCTDiagnosticConverterImpl extends DiagnosticConverterImpl {
 							eObject = EcoreUtil2.getContainerOfType(eObject, SpecificationElement.class);
 						}
 						if (eObject != null && eObject.eResource() != null) {
-							acceptor.accept(
-									issueCreator.create(t, eObject, eObject.eResource().getURIFragment(eObject)));
+							acceptor.accept(issueCreator.create(t, eObject.eResource().getURIFragment(eObject)));
 							notAccepted = false;
 						}
 					}
