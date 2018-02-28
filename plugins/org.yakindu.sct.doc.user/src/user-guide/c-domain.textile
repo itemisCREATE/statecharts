@@ -13,7 +13,7 @@ The YAKINDU Statechart Tools Professional Edition comes with a _Deep C/C++ Integ
 
 Making your self-defined C/C++ types, structs, and unions available in your YAKINDU statecharts saves you a lot of time and hassle that would otherwise be needed to map data from your C-type variables to statechart variables and vice versa.
 
-The C Domain offers one more feature: The annotation @ShortIdentifiers@ changes the naming scheme used by the code generator and activates more checks in the statechart validation to ensure that no identifiers produced by the code generator are longer than 31 characters. 
+The C Domain offers one more feature: The annotation @ShortCIdentifiers@ changes the naming scheme used by the code generator and activates more checks in the statechart validation to ensure that no identifiers produced by the code generator are longer than 31 characters. 
 
 
 h2(#cdom_what_can_you_do_with_deep_ccpp_integration). What can you do with Deep C/C++ Integration?
@@ -774,7 +774,7 @@ h2(#cdom_annotations_short_identifiers). The @ShortCIdentifiers annotation
 
 It is possible to add annotations to a statechart's specification to alter their or the code generator's behavior, see "Statechart Annotations":../user-guide/statechart_language.textile#sclang_annotations.
 
-The C Domain offers one more annotation: @ShortIdentifiers helps you to keep the generated code compliant to rules which require C identifiers not to be longer than 31 characters (or rather, to be uniquely identified by the first 31 characters). To achieve this, instead of aggressively shortening names which are part of a statechart's API, YAKINDU Statechart Tools gives feedback about the names that will be generated and warns if any user input results in C Code that is non-compliant with the 31 character rule. This puts the user in charge of the naming scheme and keeps the resulting C identifiers predictable.
+The C Domain offers one more annotation: @ShortCIdentifiers helps you to keep the generated code compliant to rules which require C identifiers not to be longer than 31 characters (or rather, to be uniquely identified by the first 31 characters). To achieve this, instead of aggressively shortening names which are part of a statechart's API, YAKINDU Statechart Tools gives feedback about the names that will be generated and warns if any user input results in C Code that is non-compliant with the 31 character rule. This puts the user in charge of the naming scheme and keeps the resulting C identifiers predictable.
 
 This is mainly done by:
 
@@ -806,7 +806,7 @@ p=. All issues resolved: the states were renamed to be globally unique and some 
 
 The state's names need to be globally unique because of a change in the naming scheme of the state enum.
 
-Enum without @ShortIdentifiers:
+Enum without @ShortCIdentifiers:
 
 bc. /*! Enumeration of all states */ 
 typedef enum
@@ -824,7 +824,7 @@ typedef enum
 	House_main_region_Automation_pond_Pond_On
 } HouseStates;
 
-Enum with @ShortIdentifiers:
+Enum with @ShortCIdentifiers:
 
 bc. /*! Enumeration of all states */ 
 typedef enum
@@ -844,7 +844,7 @@ typedef enum
 
 Notice how the state's names are not prefixed with their containing regions anymore to save characters.
 
-p. The name shortening algorithm for the static functions works like this, again without @ShortIdentifiers:
+p. The name shortening algorithm for the static functions works like this, again without @ShortCIdentifiers:
 
 bc. /* prototypes of all internal functions */
 static sc_boolean check_main_region_Idle_tr0_tr0(const House* handle);
@@ -860,7 +860,7 @@ static sc_boolean check_main_region_Automation_lights_Lights_On_tr0_tr0(const Ho
 static sc_boolean check_main_region_Automation_pond_Pond_Off_tr0_tr0(const House* handle);
 static sc_boolean check_main_region_Automation_pond_Pond_On_tr0_tr0(const House* handle);
 
-p. With @ShortIdentifiers annotation:
+p. With @@ShortCIdentifiers annotation:
 
 bc. /* prototypes of all internal functions */
 static sc_boolean Idle_tr0_check(const House* handle);
