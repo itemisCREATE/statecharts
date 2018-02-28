@@ -21,6 +21,4 @@ public interface SCTMarkerType {
 	public static final String SCT_TASK_TYPE = "org.yakindu.sct.ui.editor.task"; //$NON-NLS-1$
 
 	public static final String SEMANTIC_ELEMENT_ID = org.eclipse.gmf.runtime.common.core.resources.IMarker.ELEMENT_ID;
-	public static final String SPECIFICATIONELMENT_SPECIFICATION = "org.yakindu.sct.model.sgraph.SGraphPackage.SPECIFICATION_ELEMENT__SPECIFICATION";
-	public static final String NAMEDELEMENT_NAME = "org.yakindu.base.base.BasePackage.NAMED_ELEMENT__NAME";
 }

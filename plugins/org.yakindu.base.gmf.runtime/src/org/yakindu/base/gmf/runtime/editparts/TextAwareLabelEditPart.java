@@ -144,9 +144,6 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart impleme
 		return new StringAttributeParser(feature, pluginId);
 	}
 
-	/**
-	 * @return the feature
-	 */
 	public EAttribute getFeature() {
 		return feature;
 	}
