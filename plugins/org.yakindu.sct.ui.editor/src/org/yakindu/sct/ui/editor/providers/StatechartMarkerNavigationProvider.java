@@ -130,23 +130,4 @@ public class StatechartMarkerNavigationProvider extends AbstractModelMarkerNavig
 		}
 		return null;
 	}
-
-	protected boolean isReasonNamedElementName(IMarker marker) {
-		return containsAttribute(marker, SCTMarkerType.NAMEDELEMENT_NAME);
-	}
-
-	protected boolean isReasonSpecificationElementSpecification(IMarker marker) {
-		return containsAttribute(marker, SCTMarkerType.SPECIFICATIONELMENT_SPECIFICATION);
-	}
-
-	protected boolean containsAttribute(IMarker marker, String attributeName) {
-		try {
-			Object attribute = marker.getAttribute(attributeName);
-			return attribute != null;
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-
 }
