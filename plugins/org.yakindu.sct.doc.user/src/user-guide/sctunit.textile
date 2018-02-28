@@ -299,9 +299,9 @@ bc.
 
 ==</div>==
 
-p. The _header_ of an operation consists of an optional annotation, typically <code>&#x40;Test</code>, followed by the keyword @operation@, followed by the name of the operation, followed by a parenthesized list of parameters, optionally followed by a colon and a return type. Specifying no return type is equivalent to explicitly specifying @void@ as return type.
+p. The _header_ of an operation consists of an optional annotation, typically <code>&#x40;Test</code>, followed by the keyword @operation@, followed by the name of the operation, followed by a parenthesized list of parameters, optionally followed by a colon and a return type. If no return type is specified, it is inferred from the operation's "_return_ statement(s)":#sctunit_returning_an_operations_result.
 
-The _body_ of an operation is enclosed in braces (<code>{ … }</code>). It consists of a sequence of "statements":#sctunit_statements_and_expressions, which may be empty. If the operation's header specifies a return type different from @void@, a value of that type must be returned using the "_return_ statement":#sctunit_returning_an_operations_result.
+The _body_ of an operation is enclosed in braces (<code>{ … }</code>). It consists of a sequence of "statements":#sctunit_statements_and_expressions, which may be empty. If the operation's header specifies a return type different from @void@, the operation must return a value of that type, using the "_return_ statement":#sctunit_returning_an_operations_result.
 
 Figure "&quot;Operation grammar&quot;":#sctunit_fig_operation_grammar summarizes the structure of an operation:
 
