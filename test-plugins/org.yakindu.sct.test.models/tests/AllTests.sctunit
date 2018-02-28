@@ -30,6 +30,7 @@ testsuite AllTests {
 //	EventDrivenInternalEvent,
 	EventDrivenTriggeredByEvent,
 	EventDrivenTriggeredByTimeEvent,
+	EventDrivenOutEvents,
 
 	ExitOnSelfTransition, 
 	ExitState,

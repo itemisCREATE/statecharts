@@ -33,6 +33,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	// EventDrivenInternalEvent.class,
 	// EventDrivenTriggeredByEvent.class,
 	// EventDrivenTriggeredByTimeEvent.class,
+	EventDrivenOutEvents.class,
 	ExitOnSelfTransition.class,
 	ExitState.class,
 	FeatureCalls.class,
