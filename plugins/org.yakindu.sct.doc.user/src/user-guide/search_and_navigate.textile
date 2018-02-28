@@ -1,8 +1,9 @@
+
 h1(#search_and_nav_searching_and_navigating_in_statecharts). Searching and navigating in statecharts
 
-Model engineering is one of the first steps in _YAKINDU Statechart Tools_. The outcomes of this step are models of different complexity. Whereas models with high complexity are less abstract and more accurate, making these models interesting to further processes. One issue of such models is finding model elements you or other involved users are interested in. For this case _YAKINDU Statechart Tools_ allows you several ways for finding model elements and navigating to them to save you precious time.
+The larger the model, the greater the need to quickly search for elements, for example, all states with a given name resp. name pattern, all occurrences of a certain variable, etc. This section explains how _YAKINDU Statechart Tools_ supports you in finding model elements and quickly navigating to them.
 
-###. FIXME: Remove verbiage
+###. FIXME (RKL): Describe how to find transitions!
 
 
 
@@ -12,15 +13,15 @@ h2(#search_and_nav_searching_via_search_dialog). Searching via search dialog
 One option and the most complex one is to use the search dialog. You can open the dialog using the shortcut @[Ctrl+H]@ or through selecting _Search → Search..._ in the main menu. 
 Doing this will open an dialog with several tabs as shown in the following screenshot:<br/>!images/search_and_nav_search_dialog.png(Search Dialog)!
 
-The tab you want to use is *Model Search*. If you can not find a tab with this text written on, you probably disabled this in the past by mistake. You can enable it again by pressing the _Customize..._ button and selecting *Model Search* as you can see on the following figure:
+The tab you want to use is _Model search_. If you can not find a tab with this text written on, you probably disabled this in the past by mistake. You can enable it again by pressing the _Customize..._ button and selecting _Model search_ as you can see on the following figure:
 !images/search_and_nav_customize_dialog.png(Customize Dialog)!
 
 
-Switching to *Model Search* will show you a clean and easily understandable dialog, which can be extended using the _Show advanced settings_ check box for a more professional usage. The possible settings will be described in the following subsection.
+Switching to _Model search_ will show you a clean and easily understandable dialog, which can be extended using the _Show advanced settings_ check box for a more professional usage. The possible settings will be described in the following subsection.
 
 bq.. *User tip:*
 
-Checking the _Remember last used page_ option in the _Customize_ Dialog will help you to keep the focus on the *Model Search* tab for further search processes. 
+Checking the _Remember last used page_ option in the _Customize_ Dialog will help you to keep the focus on the _Model search_ tab for further search processes. 
 
  
 h3(#search_and_nav_search_dialog_settings). Search dialog settings
@@ -29,16 +30,16 @@ The _Model search_ dialog has several options to control your search.
 
 !images/search_and_nav_model_search_dialog_extended.png(Advanced Search Dialog)!
 
-The following table lists the various search options and explains what the search function does if the corresponding checkmark has been set.
+The following table lists the various search options and explains what the search function does if the corresponding checkmark is set.
 
 |_. Setting |_. Description |
-| _Case sensitive_| Differentiate between upper-case and lower-case letters in the search string. If this option is not checked, upper-case letters and their corresponding lower-case letters are regarded as the same. |
+| _Case sensitive_| Differentiate between upper-case and lower-case letters in the search string. If this option is not checked, upper-case letters and their corresponding lower-case letters are regarded the same. |
 | _Regular expression_ | Interpret the search string as a "regular expression":https://en.wikipedia.org/wiki/Regular_expression. Please note that YAKINDU Statechart Tools supports Java regular expressions, as explained in the "java.util.regex.Pattern class API documentation":https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html. |
-| _Search for states/regions_ | Include matching states and regions in the search result. |
+| _Search for states/regions_ | Include states and regions with matching _names_ in the search result. |
 | _Search for declarations_ | Include matching declarations in the search result. _Declarations_ are statechart language elements in the definition section, such as variables, events, operations, and named interfaces. The search function will find all occurrences of matching elements. |
-| _Search for properties_ | Include elements with matching properties in the search result. The following items are regarded as properties: <ul><li>_Documentation_ of model elements</li><li>_Text_ of text elements and notes !(inlinemediaobject)images/docu_editor_palette_070_symbol_note.png(editor palette symbol "Note")!</li></ul> |
+| _Search for properties_ | Include elements with matching _properties_ in the search result. The following items are regarded as properties: <ul><li>_Documentation_ of model elements</li><li>_Behavior_ of states, i.e., local actions, etc.</li><li>_Text_ of text elements and notes !(inlinemediaobject)images/docu_editor_palette_070_symbol_note.png(editor palette symbol "Note")!</li></ul> |
 | _Scope: workspace_ | Perform the search operation on _all_ statecharts in the workspace. |
-| _Scope: selected resource_ | Perform the search operation only on the statechart that is currently being edited. |
+| _Scope: selected resources_ | If a statechart editor has the focus, perform the search operation only on that statechart. If the _Project explorer_ view has the focus, perform the search operation on all statecharts in the selected resources. |
 
 
 
