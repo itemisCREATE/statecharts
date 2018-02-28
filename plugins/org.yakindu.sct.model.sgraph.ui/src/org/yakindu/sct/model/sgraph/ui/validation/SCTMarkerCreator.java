@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.model.sgraph.ui.validation;
 
@@ -17,9 +17,9 @@ import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.validation.Issue;
 
 /**
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public class SCTMarkerCreator extends MarkerCreator {
 
@@ -30,5 +30,4 @@ public class SCTMarkerCreator extends MarkerCreator {
 			marker.setAttribute(SCTMarkerType.SEMANTIC_ELEMENT_ID, ((SCTIssue) issue).getSemanticURI());
 		}
 	}
-
 }

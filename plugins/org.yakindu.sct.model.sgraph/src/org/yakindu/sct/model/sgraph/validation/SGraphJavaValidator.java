@@ -49,10 +49,10 @@ import com.google.inject.Inject;
  * This validator is intended to be used by a compositeValidator (See
  * {@link org.eclipse.xtext.validation.ComposedChecks}) of another language
  * specific validator. It does not register itself as an EValidator.
- * 
+ *
  * This validator checks for common graphical constraints for all kinds of state
  * charts.
- * 
+ *
  * @author terfloth
  * @author muelder
  * @author bohl - migrated to xtext infrastruture
@@ -85,24 +85,23 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER = "Outgoing transitions from entries can only target to sibling or inner states.";
 	public static final String ISSUE_STATECHART_NAME_NO_IDENTIFIER = "%s is not a valid identifier!";
 
-	
 	@Check(CheckType.FAST)
 	public void vertexNotReachable(final Vertex vertex) {
 		if (!(vertex instanceof Entry)) {
 
-			final Set<Object> stateScopeSet = new HashSet<Object>();
+			final Set<Object> stateScopeSet = new HashSet<>();
 			for (EObject obj : EcoreUtil2.eAllContents(vertex)) {
 				stateScopeSet.add(obj);
 			}
 			stateScopeSet.add(vertex);
 
-			final List<Object> externalPredecessors = new ArrayList<Object>();
+			final List<Object> externalPredecessors = new ArrayList<>();
 
 			DFS dfs = new DFS() {
 
 				@Override
 				public Iterator<Object> getElementLinks(Object element) {
-					List<Object> elements = new ArrayList<Object>();
+					List<Object> elements = new ArrayList<>();
 
 					if (element instanceof org.yakindu.sct.model.sgraph.State) {
 						if (!stateScopeSet.contains(element)) {
@@ -155,7 +154,8 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	@Check(CheckType.FAST)
 	public void nameIsNotEmpty(org.yakindu.sct.model.sgraph.State state) {
 		if ((state.getName() == null || state.getName().trim().length() == 0) && !(state instanceof FinalState)) {
-			error(ISSUE_STATE_WITHOUT_NAME, state, null, -1);
+			error(ISSUE_STATE_WITHOUT_NAME, state, null, -1, ISSUE_STATE_WITHOUT_NAME,
+					BasePackage.Literals.NAMED_ELEMENT__NAME.getName());
 		}
 	}
 
@@ -213,7 +213,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 
 	/**
 	 * Exit nodes in top level regions are not supported.
-	 * 
+	 *
 	 * @param exit
 	 */
 	@Check(CheckType.FAST)
@@ -229,7 +229,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 			error(ISSUE_SYNCHRONIZATION_TRANSITION_OUTGOING, sync, null, -1);
 		}
 	}
-	
+
 	@Check(CheckType.FAST)
 	public void synchronizationTransitionCount(Synchronization sync) {
 		int in = sync.getIncomingTransitions().size();
@@ -259,7 +259,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	/**
 	 * Checks if all composite states that are siblings of a shallow history can
 	 * enter their regions.
-	 * 
+	 *
 	 * @param e
 	 */
 	@Check(CheckType.FAST)
@@ -268,7 +268,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 		if (e.getKind() == EntryKind.SHALLOW_HISTORY) {
 
 			// get all regions off all sibling states
-			List<Region> regions = new ArrayList<Region>();
+			List<Region> regions = new ArrayList<>();
 			for (Vertex v : e.getParentRegion().getVertices()) {
 				if (v instanceof org.yakindu.sct.model.sgraph.State) {
 					org.yakindu.sct.model.sgraph.State state = (org.yakindu.sct.model.sgraph.State) v;
@@ -339,34 +339,35 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 			error(ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL, sync, null, -1);
 		}
 	}
-	
+
 	@Check
 	public void orthogonalSynchronizedTransition(Synchronization sync) {
 
 		List<Transition> incoming = sync.getIncomingTransitions();
-		List<List<EObject>> inAncestorsList = new ArrayList<List<EObject>>();
+		List<List<EObject>> inAncestorsList = new ArrayList<>();
 		for (Transition trans : incoming) {
 			inAncestorsList.add(collectAncestors(trans.getSource(), new ArrayList<EObject>()));
 		}
 
 		List<Transition> outgoing = sync.getOutgoingTransitions();
-		List<List<EObject>> outAncestorsList = new ArrayList<List<EObject>>();
+		List<List<EObject>> outAncestorsList = new ArrayList<>();
 		for (Transition trans : outgoing) {
 			outAncestorsList.add(collectAncestors(trans.getTarget(), new ArrayList<EObject>()));
 		}
 
-		Set<Transition> inOrthogonal = new HashSet<Transition>();
-		Set<Transition> outOrthogonal = new HashSet<Transition>();
-		
-		if(incoming.size() == 0 || outgoing.size() == 0) {
+		Set<Transition> inOrthogonal = new HashSet<>();
+		Set<Transition> outOrthogonal = new HashSet<>();
+
+		if (incoming.size() == 0 || outgoing.size() == 0) {
 			return;
 		}
 
 		for (int i = 0; i < incoming.size(); i++) {
 			for (int j = 0; j < outgoing.size(); j++) {
 
-				List<Vertex> states = new ArrayList<>(Arrays.asList(incoming.get(i).getSource(), outgoing.get(j).getTarget()));
-				
+				List<Vertex> states = new ArrayList<>(
+						Arrays.asList(incoming.get(i).getSource(), outgoing.get(j).getTarget()));
+
 				if (areOrthogonal(states)) {
 					inOrthogonal.add(incoming.get(i));
 					outOrthogonal.add(outgoing.get(j));
@@ -387,11 +388,12 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	@Check
 	public void checkStatechartNameIsIdentifier(Statechart statechart) {
 		if (!isValidJavaIdentifier(statechart.getName())) {
-			error(String.format(ISSUE_STATECHART_NAME_NO_IDENTIFIER, statechart.getName()), statechart, BasePackage.Literals.NAMED_ELEMENT__NAME, -1);
+			error(String.format(ISSUE_STATECHART_NAME_NO_IDENTIFIER, statechart.getName()), statechart,
+					BasePackage.Literals.NAMED_ELEMENT__NAME, -1);
 
 		}
 	}
-	
+
 	protected boolean isValidJavaIdentifier(String s) {
 		if (s == null || s.length() == 0) {
 			return false;
@@ -415,6 +417,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 		return false;
 	}
 
+	@Override
 	@Inject
 	public void register(EValidatorRegistrar registrar) {
 		// Do not register because this validator is only a composite #398987
