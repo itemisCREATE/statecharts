@@ -20,9 +20,7 @@ import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gef.KeyHandler;
@@ -391,12 +389,8 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			return issueStore;
 		} else if (EObject.class.equals(type)) {
 			return this.getContextObject();
-		} else if (IContextElementProvider.class.equals(type)) {
-			return this;
 		} else if (TransactionalEditingDomain.class.equals(type)) {
 			return getTransactionalEditingDomain();
-		} else if (EList.class.equals(type)) {
-			return getDiagramContents();
 		} else if (Diagram.class.equals(type)) {
 			return getDiagram();
 		} else if (DiagramEditPart.class.equals(type)) {
@@ -428,16 +422,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	protected boolean isStatechart() {
 		return getContextObject() instanceof Statechart;
-	}
-
-	public EList<EObject> getDiagramContents() {
-		Diagram diagram = getDiagram();
-		Assert.isNotNull(diagram);
-		Resource resource = diagram.eResource();
-		Assert.isNotNull(resource);
-		EList<EObject> contents = resource.getContents();
-		Assert.isNotNull(contents);
-		return contents;
 	}
 
 	@Override
