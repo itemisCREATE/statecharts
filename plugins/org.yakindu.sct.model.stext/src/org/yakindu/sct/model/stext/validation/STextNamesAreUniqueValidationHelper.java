@@ -69,34 +69,25 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 	protected void checkDescriptionForDuplicatedName(IEObjectDescription description,
 			ValidationMessageAcceptor acceptor) {
 		QualifiedName qName = description.getName();
-		IEObjectDescription put = nameMap.put(qName, description);
-		IEObjectDescription lowerCasePut = caseInsensitiveMap.put(qName.toLowerCase(), description);
-		if (put != null) {
-			EClass common = checkForCommonSuperClass(put, description);
-			if (inEqualContainer(lowerCasePut, description) && common != null) {
+		IEObjectDescription existing = nameMap.put(qName, description);
+		IEObjectDescription existingLowerCase = caseInsensitiveMap.put(qName.toLowerCase(), description);
+		if (existing != null) {
+			EClass common = checkForCommonSuperClass(existing, description);
+			if (inSameResource(existing, description) && common != null) {
 				createDuplicateNameError(description, common, acceptor);
-				createDuplicateNameError(put, common, acceptor);
+				createDuplicateNameError(existing, common, acceptor);
 			}
-		} else if (lowerCasePut != null) {
-			if (inEqualContainer(lowerCasePut, description)
-					&& lowerCasePut.getEClass().equals(description.getEClass())) {
+		} else if (existingLowerCase != null) {
+			if (inSameResource(existingLowerCase, description)
+					&& existingLowerCase.getEClass().equals(description.getEClass())) {
 				createDuplicateNameWarning(description, description.getEClass(), acceptor);
-				createDuplicateNameWarning(lowerCasePut, description.getEClass(), acceptor);
+				createDuplicateNameWarning(existingLowerCase, description.getEClass(), acceptor);
 			}
 		}
 	}
 
-	protected boolean inEqualContainer(IEObjectDescription one, IEObjectDescription two) {
-		EObject container1 = getParentContainer(one.getEObjectOrProxy());
-		EObject container2 = getParentContainer(two.getEObjectOrProxy());
-		return container1.equals(container2);
-	}
-
-	protected EObject getParentContainer(EObject object) {
-		if (object.eContainer() == null) {
-			return object;
-		}
-		return getParentContainer(object.eContainer());
+	protected boolean inSameResource(IEObjectDescription one, IEObjectDescription two) {
+		return one.getEObjectOrProxy().eResource().equals(two.getEObjectOrProxy().eResource());
 	}
 
 	protected void createDuplicateNameWarning(IEObjectDescription description, EClass eClass,

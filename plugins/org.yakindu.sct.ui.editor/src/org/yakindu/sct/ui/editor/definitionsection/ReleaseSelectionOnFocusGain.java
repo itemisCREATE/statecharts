@@ -32,13 +32,12 @@ public class ReleaseSelectionOnFocusGain extends StyledTextXtextAdapter.ChangeSe
 
 	public void focusGained(FocusEvent e) {
 		releaseSelection();
-		selectionProviderOnFocusLost = site.getSelectionProvider();
-		site.setSelectionProvider(this.selectionProviderOnFocusGain);
+		super.focusGained(e);
 	}
 
 	protected void releaseSelection() {
 		if (site != null && this.selectionProviderOnFocusGain != null
 				&& !site.getSelectionProvider().equals(selectionProviderOnFocusGain))
-			site.getSelectionProvider().setSelection(new StructuredSelection());
+			site.getSelectionProvider().setSelection(StructuredSelection.EMPTY);
 	}
 }

@@ -39,12 +39,12 @@ import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.ST;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.events.KeyAdapter;
-import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.MouseAdapter;
@@ -126,7 +126,6 @@ public class StatechartDefinitionSection extends Composite
 	private ResizeListener resizeListener;
 	private ModifyListener nameModificationListener;
 	private ReleaseSelectionOnFocusGain selectionProviderListener;
-	private KeyAdapter embeddedEditorKeyListener;
 
 	private Label switchControl;
 	private Composite labelComposite;
@@ -270,15 +269,7 @@ public class StatechartDefinitionSection extends Composite
 		StyledText embeddedEditorWidget = embeddedEditor.getViewer().getTextWidget();
 		embeddedEditorWidget.setAlwaysShowScrollBars(false);
 		embeddedEditorWidget.setSelection(0);
-		embeddedEditorKeyListener = new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent e) {
-				if (e.stateMask == SWT.CTRL && e.keyCode == 'a') {
-					embeddedEditorWidget.selectAll();
-				}
-			}
-		};
-		embeddedEditorWidget.addKeyListener(embeddedEditorKeyListener);
+		embeddedEditorWidget.setKeyBinding(SWT.MOD1 | SWT.KEY_MASK & 'a', ST.SELECT_ALL);
 		initXtextSelectionProvider(embeddedEditorWidget);
 		initBinding(embeddedEditorWidget);
 		initContextMenu(embeddedEditorWidget);
@@ -460,10 +451,6 @@ public class StatechartDefinitionSection extends Composite
 					embeddedEditorWidget.removeControlListener(resizeListener);
 					getSash().removeControlListener(resizeListener);
 					resizeListener = null;
-				}
-				if (embeddedEditorKeyListener != null) {
-					embeddedEditorWidget.removeKeyListener(embeddedEditorKeyListener);
-					embeddedEditorKeyListener = null;
 				}
 				if (selectionProviderListener != null) {
 					embeddedEditorWidget.removeFocusListener(selectionProviderListener);
