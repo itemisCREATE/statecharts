@@ -100,7 +100,7 @@ public class DiagramPartitioningUtil {
 	public static BooleanValueStyle createInlineDefinitionSectionStyle() {
 		BooleanValueStyle result = NotationFactory.eINSTANCE.createBooleanValueStyle();
 		result.setName(INLINE_DEFINITION_SECTION_STYLE);
-		result.setBooleanValue(true);
+		result.setBooleanValue(false);
 		return result;
 	}
 
@@ -157,15 +157,14 @@ public class DiagramPartitioningUtil {
 	 * Opens the {@link StatechartDiagramEditor} for a fiven {@link IFile}
 	 * 
 	 */
-	public static IEditorPart openEditor(IFile file) {
+	public static void openEditor(IFile file) {
 		try {
 			IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(file.getName());
 			final IWorkbenchPage wbPage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-			return wbPage.openEditor(new FileEditorInput(file), desc.getId());
+			wbPage.openEditor(new FileEditorInput(file), desc.getId());
 		} catch (PartInitException e) {
 			e.printStackTrace();
 		}
-		return null;
 
 	}
 

@@ -71,21 +71,24 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 	protected void checkDescriptionForDuplicatedName(IEObjectDescription description,
 			ValidationMessageAcceptor acceptor) {
 		QualifiedName qName = description.getName();
-		IEObjectDescription put = nameMap.put(qName, description);
-		IEObjectDescription lowerCasePut = caseInsensitiveMap.put(qName.toLowerCase(), description);
-		IEObjectDescription lastElementPut = lastElementMap.put(qName.getLastSegment(), description);
-		if (put != null) {
-			EClass common = checkForCommonSuperClass(put, description);
-			if (common != null) {
-				duplicateFQN(description, put, common, acceptor);
+		IEObjectDescription existing = nameMap.put(qName, description);
+		IEObjectDescription existingLowerCase = caseInsensitiveMap.put(qName.toLowerCase(), description);
+    IEObjectDescription existingLastElement = lastElementMap.put(qName.getLastSegment(), description);
+		if (existing != null) {
+			EClass common = checkForCommonSuperClass(existing, description);
+			if (inSameResource(existing, description) && common != null) {
+				createDuplicateNameError(description, common, acceptor);
+				createDuplicateNameError(existing, common, acceptor);
 			}
-		} else if (lowerCasePut != null) {
-			if (lowerCasePut.getEClass().equals(description.getEClass())) {
-				duplicateCaseInsensitiveFQN(description, lowerCasePut, acceptor);
+		} else if (existingLowerCase != null) {
+			if (inSameResource(existingLowerCase, description)
+					&& existingLowerCase.getEClass().equals(description.getEClass())) {
+				createDuplicateNameWarning(description, description.getEClass(), acceptor);
+				createDuplicateNameWarning(existingLowerCase, description.getEClass(), acceptor);
 			}
 		}
-		if (lastElementPut != null) {
-			duplicateLastElement(description, lastElementPut, acceptor);
+		if (existingLastElement != null) {
+			duplicateLastElement(description, existingLastElement, acceptor);
 		}
 	}
 
@@ -105,6 +108,10 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 		createDuplicateNameError(old, common, acceptor);
 	}
 
+	protected boolean inSameResource(IEObjectDescription one, IEObjectDescription two) {
+		return one.getEObjectOrProxy().eResource().equals(two.getEObjectOrProxy().eResource());
+	}
+
 	protected void createDuplicateNameWarning(IEObjectDescription description, EClass eClass,
 			ValidationMessageAcceptor acceptor) {
 		EObject object = description.getEObjectOrProxy();
@@ -120,7 +127,6 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 	}
 
 	protected EClass checkForCommonSuperClass(IEObjectDescription one, IEObjectDescription two) {
-
 		List<EClass> flatOne = buildSuperClassList(one.getEClass());
 		List<EClass> flatTwo = buildSuperClassList(two.getEClass());
 
