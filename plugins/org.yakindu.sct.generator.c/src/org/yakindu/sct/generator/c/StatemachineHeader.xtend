@@ -98,16 +98,16 @@ class StatemachineHeader implements IContentTemplate {
 		'''
 		
 		/*! Initializes the «type» state machine data structures. Must be called before first usage.*/
-		extern void «functionPrefix»init(«scHandleDecl»);
+		extern void «initFctID»(«scHandleDecl»);
 		
 		/*! Activates the state machine */
-		extern void «functionPrefix»enter(«scHandleDecl»);
+		extern void «enterFctID»(«scHandleDecl»);
 		
 		/*! Deactivates the state machine */
-		extern void «functionPrefix»exit(«scHandleDecl»);
+		extern void «exitFctID»(«scHandleDecl»);
 		
 		/*! Performs a 'run to completion' step. */
-		extern void «functionPrefix»runCycle(«scHandleDecl»);
+		extern void «runCycleFctID»(«scHandleDecl»);
 		
 		«IF timed»
 			/*! Raises a time event. */
@@ -157,25 +157,10 @@ class StatemachineHeader implements IContentTemplate {
 		{
 			«null_state»,
 			«FOR state : states SEPARATOR ","»
-				«state.shortName»
+				«state.stateName»
 			«ENDFOR»
 		} «statesEnumType»;
 	'''
-
-	def dispatch scopeTypeDeclMember(EventDefinition it) '''
-		sc_boolean «name.asIdentifier»_raised;
-		«IF type != null && type.name != 'void'»«typeSpecifier.targetLanguageName» «name.asIdentifier»_value;«ENDIF»
-	'''
-
-	def dispatch scopeTypeDeclMember(TimeEvent it) '''
-		sc_boolean «shortName.raised»;
-	'''
-
-	def dispatch scopeTypeDeclMember(VariableDefinition it) '''
-		«IF type.name != 'void' && !isConst»«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
-	'''
-	
-	def dispatch scopeTypeDeclMember(Declaration it) ''''''
 
 	def scopeTypeDecl(Scope scope) '''
 		«val typeRelevantDeclarations = scope.typeRelevantDeclarations.toList»
@@ -287,7 +272,7 @@ class StatemachineHeader implements IContentTemplate {
 
 	def dispatch functionPrototypes(VariableDefinition it) '''
 		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
-		extern «IF const»const «ENDIF»«typeSpecifier.targetLanguageName» «it.asGetter»(const «scHandleDecl»);
+		extern «IF const»const «ENDIF»«typeSpecifier.targetLanguageName» «asGetter»(const «scHandleDecl»);
 		«IF !readonly && !const»
 			/*! Sets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
 			extern void «asSetter»(«scHandleDecl», «typeSpecifier.targetLanguageName» value);

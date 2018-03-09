@@ -9,18 +9,21 @@
  * 		@author René Beckmann (beckmann@itemis.de)
  */
 
-package org.yakindu.sct.model.sexec.naming
+package org.yakindu.sct.model.sexec.naming.tree
 
-import java.lang.String
+import org.eclipse.xtend.lib.annotations.Accessors
 
 class ShortString {
 	/*
 	 * Class that manages a string and shortened versions of it.
 	 */
-	private String originalString;
+	protected String originalString;
+	
+	/** Custom factor for the cut cost */
+	@Accessors int costFactor = 1; 
 
-	private int[] cutArray; // holds information if char is cut or not
-	private int[] previous_cutArray; // holds previous state for rollback / undo possibility
+	protected int[] cutArray; // holds information if char is cut or not
+	protected int[] previous_cutArray; // holds previous state for rollback / undo possibility
 	// cost of cutting operations
 	final static public int COST_LOWERCASE_VOCALS = 1;
 	final static public int COST_UNDERSCORE = 1;
@@ -30,7 +33,11 @@ class ShortString {
 	final static public int COST_FIRSTLETTER = 10;
 
 	new(String s) {
-		if (s == null) {
+		this(s, 1)
+	}
+	
+	new(String s, int factor) {
+		if (s === null) {
 			originalString = "";
 		} else {
 			originalString = s;
@@ -39,13 +46,14 @@ class ShortString {
 		previous_cutArray = newIntArrayOfSize(size);
 		reset();
 		saveCurrentToPrevious();
+		costFactor = factor
 	}
 
 	def public getOriginalString() {
 		originalString
 	}
 
-	def private int size() {
+	def protected int size() {
 		// instead of saving originalString.length as an own member
 		originalString.length
 	}
@@ -58,7 +66,7 @@ class ShortString {
 		}
 	}
 
-	def private saveCurrentToPrevious() {
+	def protected saveCurrentToPrevious() {
 		// save current cut-state to previous_cutArray.
 		for (var i = 0; i < size; i++) {
 			previous_cutArray.set(i, cutArray.get(i));
@@ -70,6 +78,10 @@ class ShortString {
 		for (var i = 0; i < size; i++) {
 			cutArray.set(i, previous_cutArray.get(i));
 		}
+	}
+	
+	override toString() {
+		shortenedString
 	}
 
 	def public String getShortenedString() {
@@ -96,7 +108,7 @@ class ShortString {
 		return length;
 	}
 
-	def public int getCutCostFactor() {
+	def public int getCutRatioFactor() {
 		// factor that takes into account how much of the string is already cut, so that cutting away more characters get's more expensive
 		return 10 + (getCutRatio() * 10) as int;
 	}
@@ -114,7 +126,7 @@ class ShortString {
 			}
 		}
 
-		return cost * getCutCostFactor;
+		return cost * getCutRatioFactor * costFactor;
 	}
 
 	def public int getBaseCutCost(int index) {
@@ -124,18 +136,18 @@ class ShortString {
 		var c = originalString.charAt(index);
 
 		if (index == 0) {
-			cost += org.yakindu.sct.model.sexec.naming.ShortString.COST_FIRSTLETTER;
+			cost += ShortString.COST_FIRSTLETTER;
 		}
 		if (Character.isDigit(c)) {
-			cost += org.yakindu.sct.model.sexec.naming.ShortString.COST_DIGIT;
+			cost += ShortString.COST_DIGIT;
 		} else if (Character.isUpperCase(c)) {
-			cost += org.yakindu.sct.model.sexec.naming.ShortString.COST_UPPERCASE;
+			cost += ShortString.COST_UPPERCASE;
 		} else if (isLowercaseVocal(c)) {
-			cost += org.yakindu.sct.model.sexec.naming.ShortString.COST_LOWERCASE_VOCALS;
+			cost += ShortString.COST_LOWERCASE_VOCALS;
 		} else if (c.toString().equals("_")) {
-			cost += org.yakindu.sct.model.sexec.naming.ShortString.COST_UNDERSCORE;
+			cost += ShortString.COST_UNDERSCORE;
 		} else {
-			cost += org.yakindu.sct.model.sexec.naming.ShortString.COST_LOWERCASE_CONSONANTS;
+			cost += ShortString.COST_LOWERCASE_CONSONANTS;
 		}
 
 		return cost;
@@ -171,12 +183,12 @@ class ShortString {
 		}
 	}
 
-	def private boolean isLowercaseVocal(int i) {
+	def protected boolean isLowercaseVocal(int i) {
 		var c = originalString.charAt(i);
 		return isLowercaseVocal(c);
 	}
 
-	def private boolean isLowercaseVocal(char c) {
+	def protected boolean isLowercaseVocal(char c) {
 		val s = c.toString();
 		return (s == "a" || s == "e" || s == "i" || s == "o" || s == "u");
 	}

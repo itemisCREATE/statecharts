@@ -82,6 +82,10 @@ class CppNaming extends Naming {
 	def timeEventsInstance() {
 		'timeEvents'
 	}
+	
+	override dispatch scopeTypeDeclMember(VariableDefinition it) '''
+		«IF type.name != 'void'»«IF const»static const «ENDIF»«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
+	'''
 
 	def protected signature(OperationDefinition it) '''
 	«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»(«FOR parameter : parameters SEPARATOR ', '»«IF parameter.isVarArgs»...«ELSE»«parameter.typeSpecifier.

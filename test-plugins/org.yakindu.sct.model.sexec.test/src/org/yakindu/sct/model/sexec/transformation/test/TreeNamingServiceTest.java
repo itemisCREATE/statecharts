@@ -1,9 +1,9 @@
-/** 
- * Copyright (c) 2016 committers of YAKINDU and others. 
- * All rights reserved. This program and the accompanying materials 
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at 
- * http://www.eclipse.org/legal/epl-v10.html 
+/**
+ * Copyright (c) 2016 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * @author René Beckmann (beckmann@itemis.de)
  *
@@ -23,7 +23,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
-import org.yakindu.sct.model.sexec.naming.TreeNamingService;
+import org.yakindu.sct.model.sexec.naming.tree.TreeNamingService;
 import org.yakindu.sct.model.sexec.transformation.FlowOptimizer;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
@@ -84,7 +84,7 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 			ExecutionFlow flow = sequencer.transform(statechart);
 			flow = optimizer.transform(flow);
 
-			List<String> names = new ArrayList<String>();
+			List<String> names = new ArrayList<>();
 
 			executionflowNamingService.setMaxLength(15);
 			executionflowNamingService.setSeparator('_');
@@ -102,26 +102,6 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 	@Test
 	public void nameLengthTest31() {
 		nameLengthTest(31);
-	}
-
-	@Test
-	public void nameLengthTest20() {
-		nameLengthTest(20);
-	}
-
-	@Test
-	public void nameLengthTest15() {
-		nameLengthTest(15);
-	}
-
-	@Test
-	public void nameLengthTest10() {
-		nameLengthTest(10);
-	}
-
-	@Test
-	public void nameLengthTest8() {
-		nameLengthTest(8);
 	}
 
 	@Test
@@ -154,7 +134,7 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 
 			ExecutionFlow optimizedflow = optimizer.transform(flow);
 
-			List<String> names = new ArrayList<String>();
+			List<String> names = new ArrayList<>();
 
 			executionflowNamingService.initializeNamingService(optimizedflow);
 			for (ExecutionState state : flow.getStates()) {
@@ -169,9 +149,9 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 	public void statechartTest1() {
 		Statechart toTest = getNamingServiceStatechart();
 
-		List<String> names = new ArrayList<String>();
+		List<String> names = new ArrayList<>();
 
-		List<String> expectedNames = new ArrayList<String>(
+		List<String> expectedNames = new ArrayList<>(
 				Arrays.asList("main_region_StateA", "main_region_StateB", "second_region_StateA", "third_region_StateA",
 						"second_region_StateA_AnotherRegion_StateA", "second_region_StateA_AnotherRegion_StateB",
 						"third_region_StateA_AnotherRegion_StateA", "third_region_StateA_AnotherRegion_StateB"));
@@ -200,12 +180,12 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 	public void statechartTest2() {
 		Statechart toTest = getNamingServiceStatechart();
 
-		List<String> names = new ArrayList<String>();
+		List<String> names = new ArrayList<>();
 
 		// these names are shorter than 15 characters because there are more
 		// elements containing these names, e.g. state actions
-		List<String> expectedNames = new ArrayList<String>(Arrays.asList("mgn_SA", "mgn_StteB", "s_S", "t_S",
-				"t_S_AR_SA", "t_S_AR_StB", "s_S_AR_SA", "s_S_AR_StB"));
+		List<String> expectedNames = new ArrayList<>(Arrays.asList("mrgn_StA", "mrgn_StteB", "s_SA", "t_SA",
+				"t_SA_AR_SA", "t_SA_AR_StB", "s_SA_AR_SA", "s_SA_AR_StB"));
 
 		ExecutionFlow flow = optimizer.transform(sequencer.transform(toTest));
 
@@ -246,7 +226,7 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 			ExecutionFlow flow = sequencer.transform(statechart);
 			flow = optimizer.transform(flow);
 
-			List<String> names = new ArrayList<String>();
+			List<String> names = new ArrayList<>();
 
 			executionflowNamingService.setMaxLength(maxLength);
 			executionflowNamingService.setSeparator('_');

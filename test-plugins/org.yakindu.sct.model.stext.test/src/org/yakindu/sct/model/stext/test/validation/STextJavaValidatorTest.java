@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  * 	itemis AG - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.model.stext.test.validation;
 
@@ -15,7 +15,6 @@ import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorCod
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorMsg;
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.warningMsg;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_ASSIGNMENT_TO_CONST_MSG;
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_LEFT_HAND_ASSIGNMENT_MSG;
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_OPTIONAL_MUST_BE_LAST_CODE;
@@ -69,7 +68,7 @@ import com.google.inject.Inject;
 
 /**
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 @RunWith(XtextRunner.class)
 @InjectWith(STextInjectorProvider.class)
@@ -403,7 +402,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	/**
-	 * 
+	 *
 	 * @see STextJavaValidator#checkReactionTrigger(org.yakindu.sct.model.stext.stext.ReactionTrigger)
 	 */
 	@Test
@@ -642,7 +641,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Entry) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics, new HashMap<>());
 			}
 		}
 
@@ -689,28 +688,6 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 		assertIssueCount(diagnostics, 1);
 		assertError(diagnostics, EXIT_DEFAULT_UNUSED);
-	}
-
-	protected void doValidateAllContents(Class<? extends EObject> clazz) {
-		Iterator<EObject> iter = statechart.eAllContents();
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (clazz.isInstance(element)) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
-			}
-		}
-	}
-
-	protected void assertAllTransitionsAreValid(Class<? extends EObject> clazz) {
-		Iterator<EObject> iter;
-		iter = statechart.eAllContents();
-
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (clazz.isInstance(element)) {
-				assertTrue(validator.validate(element, diagnostics, new HashMap<Object, Object>()));
-			}
-		}
 	}
 
 	@Test
@@ -764,10 +741,10 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 			EObject element = iter.next();
 			if (element instanceof Transition) {
 				((Transition) element).setTrigger(trigger);
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics, new HashMap<>());
 			}
 			if (element instanceof State) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics, new HashMap<>());
 			}
 		}
 
@@ -783,10 +760,10 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 			EObject element = iter.next();
 			if (element instanceof Transition) {
 				((Transition) element).setTrigger(trigger);
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics, new HashMap<>());
 			}
 			if (element instanceof State) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics, new HashMap<>());
 			}
 		}
 		assertIssueCount(diagnostics, 4);
@@ -800,7 +777,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Transition) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics, new HashMap<>());
 			}
 		}
 
@@ -844,14 +821,14 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		assertIssueCount(diagnostics, 5);
 		assertWarning(diagnostics, INTERNAL_DECLARATION_UNUSED);
 	}
-	
+
 	@Test
 	public void checkImportExists() {
 		Scope context = (Scope) parseExpression("import: does.not.exist", ImportScope.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(context);
 		validationResult.assertErrorContains(String.format(STextValidationMessages.IMPORT_NOT_RESOLVED_MSG,"does.not.exist"));
 	}
-	
+
 	@Test
 	public void checkDuplicateImport() {
 		//Can't be checked here

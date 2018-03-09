@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	rbeckmann - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.model.stext.validation;
 
@@ -38,6 +38,7 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 
 	protected Map<QualifiedName, IEObjectDescription> nameMap;
 	protected Map<QualifiedName, IEObjectDescription> caseInsensitiveMap;
+	protected Map<String, IEObjectDescription> lastElementMap;
 
 	@Override
 	public void checkUniqueNames(Iterable<IEObjectDescription> descriptions, ValidationMessageAcceptor acceptor) {
@@ -57,6 +58,7 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 		Iterator<IEObjectDescription> iter = descriptions.iterator();
 		this.nameMap = new HashMap<>();
 		this.caseInsensitiveMap = new HashMap<>();
+		this.lastElementMap = new HashMap<>();
 		if (!iter.hasNext())
 			return;
 		while (iter.hasNext()) {
@@ -71,6 +73,7 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 		QualifiedName qName = description.getName();
 		IEObjectDescription existing = nameMap.put(qName, description);
 		IEObjectDescription existingLowerCase = caseInsensitiveMap.put(qName.toLowerCase(), description);
+    IEObjectDescription existingLastElement = lastElementMap.put(qName.getLastSegment(), description);
 		if (existing != null) {
 			EClass common = checkForCommonSuperClass(existing, description);
 			if (inSameResource(existing, description) && common != null) {
@@ -84,6 +87,25 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 				createDuplicateNameWarning(existingLowerCase, description.getEClass(), acceptor);
 			}
 		}
+		if (existingLastElement != null) {
+			duplicateLastElement(description, existingLastElement, acceptor);
+		}
+	}
+
+	protected void duplicateLastElement(IEObjectDescription description, IEObjectDescription lastElementPut,
+			ValidationMessageAcceptor acceptor) {
+	}
+
+	protected void duplicateCaseInsensitiveFQN(IEObjectDescription description, IEObjectDescription lowerCasePut,
+			ValidationMessageAcceptor acceptor) {
+		createDuplicateNameWarning(description, description.getEClass(), acceptor);
+		createDuplicateNameWarning(lowerCasePut, description.getEClass(), acceptor);
+	}
+
+	protected void duplicateFQN(IEObjectDescription description, IEObjectDescription old, EClass common,
+			ValidationMessageAcceptor acceptor) {
+		createDuplicateNameError(description, common, acceptor);
+		createDuplicateNameError(old, common, acceptor);
 	}
 
 	protected boolean inSameResource(IEObjectDescription one, IEObjectDescription two) {

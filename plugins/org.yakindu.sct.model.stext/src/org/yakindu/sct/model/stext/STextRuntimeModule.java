@@ -38,7 +38,7 @@ import com.google.inject.name.Names;
 /**
  * Use this class to register components to be used at runtime / without the
  * Equinox extension registry.
- * 
+ *
  * @author andreas muelder
  * @author axel terfloth
  */
@@ -50,9 +50,13 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 		binder.bind(IDefaultResourceDescriptionStrategy.class).to(SCTResourceDescriptionStrategy.class);
 		// https://github.com/Yakindu/statecharts/issues/1199
 		binder.bind(IReferableElementsUnloader.class).to(IReferableElementsUnloader.NullUnloader.class);
-		binder.bind(INamesAreUniqueValidationHelper.class).to(STextNamesAreUniqueValidationHelper.class);
 	}
 
+	public Class<? extends INamesAreUniqueValidationHelper> bindNamesAreUniqueValidationHelper() {
+		return STextNamesAreUniqueValidationHelper.class;
+	}
+
+	@Override
 	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return STextGlobalScopeProvider.class;
 	}
@@ -76,6 +80,7 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 		return STextValueConverterService.class;
 	}
 
+	@Override
 	public void configureFileExtensions(Binder binder) {
 		binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("stext,sct");
 	}
@@ -98,7 +103,7 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 	public Class<? extends ITypeSystemInferrer> bindITypeSystemInferrer() {
 		return STextTypeInferrer.class;
 	}
-	
+
 	@Override
 	public Class<? extends ITransientValueService> bindITransientValueService() {
 		return STextTransientValueService.class;

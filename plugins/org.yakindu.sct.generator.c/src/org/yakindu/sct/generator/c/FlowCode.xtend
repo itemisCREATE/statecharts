@@ -59,13 +59,13 @@ class FlowCode {
 	
 	def dispatch CharSequence code(TraceStateEntered it) '''
 		«IF entry.tracingEnterState»
-		«flow.type.toFirstLower»_stateEntered(«scHandle», «it.state.shortName»);
+		«flow.type.toFirstLower»_stateEntered(«scHandle», «it.state.stateName»);
 		«ENDIF»
 	'''
 	
 	def dispatch CharSequence code(TraceStateExited it) '''
 		«IF entry.tracingExitState»
-		«flow.type.toFirstLower»_stateExited(«scHandle», «it.state.shortName»);
+		«flow.type.toFirstLower»_stateExited(«scHandle», «it.state.stateName»);
 		«ENDIF»
 	'''
 
@@ -95,7 +95,7 @@ class FlowCode {
 			{
 		«ENDIF»
 			«FOR caseid : cases»
-				case «caseid.state.shortName» :
+				case «caseid.state.stateName» :
 				{
 					«caseid.step.code»
 					break;
@@ -147,7 +147,7 @@ class FlowCode {
 	'''
 	
 	def dispatch CharSequence code(EnterState it) '''
-		«scHandle»->stateConfVector[«state.stateVector.offset»] = «state.shortName»;
+		«scHandle»->stateConfVector[«state.stateVector.offset»] = «state.stateName»;
 		«scHandle»->stateConfVectorPosition = «state.stateVector.offset»;
 	'''
 

@@ -95,7 +95,7 @@ class StatemachineSource implements IContentTemplate {
 	'''
 	
 	def initFunction(ExecutionFlow it) '''
-		void «functionPrefix»init(«scHandleDecl»)
+		void «initFctID»(«scHandleDecl»)
 		{
 			«initFunctionBody(it)»
 		}
@@ -128,14 +128,14 @@ class StatemachineSource implements IContentTemplate {
 	
 	
 	def enterFunction(ExecutionFlow it) '''
-		void «functionPrefix»enter(«scHandleDecl»)
+		void «enterFctID»(«scHandleDecl»)
 		{
 			«enterSequences.defaultSequence.code»
 		}
 	'''
 	
 	def exitFunction(ExecutionFlow it) '''
-		void «type.toFirstLower»_exit(«scHandleDecl»)
+		void «exitFctID»(«scHandleDecl»)
 		{
 			«exitSequence.code»
 		}
@@ -174,7 +174,7 @@ class StatemachineSource implements IContentTemplate {
 	'''
 	
 	def runCycleFunction(ExecutionFlow it) '''
-		void «functionPrefix»runCycle(«scHandleDecl»)
+		void «runCycleFctID»(«scHandleDecl»)
 		{
 			
 			«clearOutEventsFctID»(«scHandle»);
@@ -194,7 +194,7 @@ class StatemachineSource implements IContentTemplate {
 			{
 			«FOR state : states»
 				«IF state.reactSequence !== null»
-				case «state.shortName»:
+				case «state.stateName»:
 				{
 					«state.reactSequence.shortName»(«scHandle»);
 					break;
@@ -229,10 +229,10 @@ class StatemachineSource implements IContentTemplate {
 			switch (state)
 			{
 				«FOR s : states»
-				case «s.shortName» :
-					result = (sc_boolean) («IF s.leaf»«scHandle»->stateConfVector[«s.stateVectorDefine»] == «s.shortName»
-					«ELSE»«scHandle»->stateConfVector[«s.stateVectorDefine»] >= «s.shortName»
-						&& «scHandle»->stateConfVector[«s.stateVectorDefine»] <= «s.subStates.last.shortName»«ENDIF»);
+				case «s.stateName» :
+					result = (sc_boolean) («IF s.leaf»«scHandle»->stateConfVector[«s.stateVectorDefine»] == «s.stateName»
+					«ELSE»«scHandle»->stateConfVector[«s.stateVectorDefine»] >= «s.stateName»
+						&& «scHandle»->stateConfVector[«s.stateVectorDefine»] <= «s.subStates.last.stateName»«ENDIF»);
 					break;
 				«ENDFOR»
 				default:
@@ -272,7 +272,7 @@ class StatemachineSource implements IContentTemplate {
 		''' +
 		// only if the impact vector is completely covered by final states the state machine
 		// can become final
-		{if (finalStateImpactVector.isCompletelyCovered) {'''	return «FOR i : 0 ..<finalStateImpactVector.size SEPARATOR ' && '»(«FOR fs : finalStateImpactVector.get(i) SEPARATOR ' || '»«scHandle»->stateConfVector[«i»] == «IF fs.stateVector.offset == i»«fs.shortName»«ELSE»«null_state»«ENDIF»«ENDFOR»)«ENDFOR»;
+		{if (finalStateImpactVector.isCompletelyCovered) {'''	return «FOR i : 0 ..<finalStateImpactVector.size SEPARATOR ' && '»(«FOR fs : finalStateImpactVector.get(i) SEPARATOR ' || '»«scHandle»->stateConfVector[«i»] == «IF fs.stateVector.offset == i»«fs.stateName»«ELSE»«null_state»«ENDIF»«ENDFOR»)«ENDFOR»;
 		'''} else {'''   return bool_false;'''} }		
 		+ Strings.newLine + '''}'''
 	}
