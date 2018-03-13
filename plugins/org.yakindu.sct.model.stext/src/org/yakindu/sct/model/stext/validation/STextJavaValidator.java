@@ -287,7 +287,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 	}
 
-	@Check(CheckType.NORMAL)
+	@Check(CheckType.FAST)
 	public void checkUnusedVariablesInInternalScope(InternalScope internalScope) {
 		EList<Declaration> internalScopeDeclarations = internalScope.getDeclarations();
 
@@ -329,7 +329,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 					}
 				}
 				if (!internalDeclarationUsed) {
-
 					if (internalDeclaration instanceof VariableDefinition
 							|| internalDeclaration instanceof EventDefinition
 							|| internalDeclaration instanceof OperationDefinition)
@@ -337,7 +336,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				}
 			}
 		}
-
 	}
 
 	@Check(CheckType.FAST)
