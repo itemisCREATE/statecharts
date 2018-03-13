@@ -102,7 +102,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	public SimulationView() {
 		kit = new FormToolkit(Display.getDefault());
 		kit.setBorderStyle(SWT.BORDER);
-		font = new Font(Display.getDefault(), new FontData("Courier", 10, SWT.BOLD));
+		font = new Font(Display.getDefault(), new FontData("Courier", 10, SWT.NORMAL));
 		sctSourceDisplayDispatcher = new SCTSourceDisplayDispatcher();
 	}
 
@@ -531,6 +531,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 			String formatDurationHMS = DurationFormatUtils.formatDuration(timestamp,
 					(timestamp == 0 ? "--:--:--.---" : "HH:mm:ss.SSS"), true);
 			timeLabel.setText(formatDurationHMS);
+			timeLabel.setFont(font);
 			String time = getReadableSimulationTime(timestamp);
 			boolean isValidTime = time != null || (time != null && !time.isEmpty()) || timestamp != 0;
 			timeIconLabel.setVisible(isValidTime);
