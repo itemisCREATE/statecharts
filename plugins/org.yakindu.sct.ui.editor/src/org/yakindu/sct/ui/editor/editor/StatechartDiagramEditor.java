@@ -410,7 +410,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	public void createPartControl(Composite parent) {
 		super.createPartControl(parent);
 		toggleDefinitionSection();
-
 	}
 
 	public void toggleDefinitionSection() {

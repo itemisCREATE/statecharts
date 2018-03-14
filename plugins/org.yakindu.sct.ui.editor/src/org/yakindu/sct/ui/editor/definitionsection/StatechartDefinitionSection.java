@@ -124,7 +124,6 @@ public class StatechartDefinitionSection extends Composite
 	private MouseListener mouseListener;
 	private ResizeListener resizeListener;
 	private ModifyListener nameModificationListener;
-	private ReleaseSelectionOnFocusGain selectionProviderListener;
 
 	private Label switchControl;
 	private Composite labelComposite;
@@ -274,14 +273,12 @@ public class StatechartDefinitionSection extends Composite
 		initContextMenu(embeddedEditorWidget);
 	}
 
-	protected void initXtextSelectionProvider(StyledText embeddedEditorWidget) {
+	@SuppressWarnings("unused")
+	protected void initXtextSelectionProvider(StyledText widget) {
 		try {
-			XtextStyledTextSelectionProvider styledTextSelectionProvider = new XtextStyledTextSelectionProvider(
-					embeddedEditorWidget, xtextResource);
-			ReleaseSelectionOnFocusGain selectionChangeListener = new ReleaseSelectionOnFocusGain(
-					this.editorPart.getSite(), styledTextSelectionProvider);
-			embeddedEditorWidget.addFocusListener(selectionChangeListener);
-			embeddedEditorWidget.addDisposeListener(selectionChangeListener);
+			XtextStyledTextSelectionProvider provider = new XtextStyledTextSelectionProvider(widget, xtextResource);
+			StyledTextSelectionListener listener = new StyledTextSelectionListener(this.editorPart.getSite(), widget,
+					provider);
 		} catch (NullPointerException e) {
 			// do nothing, not opened within editor context
 		}
@@ -450,11 +447,6 @@ public class StatechartDefinitionSection extends Composite
 					embeddedEditorWidget.removeControlListener(resizeListener);
 					getSash().removeControlListener(resizeListener);
 					resizeListener = null;
-				}
-				if (selectionProviderListener != null) {
-					embeddedEditorWidget.removeFocusListener(selectionProviderListener);
-					embeddedEditorWidget.removeDisposeListener(selectionProviderListener);
-					selectionProviderListener = null;
 				}
 				embeddedEditorWidget.dispose();
 				embeddedEditorWidget = null;
