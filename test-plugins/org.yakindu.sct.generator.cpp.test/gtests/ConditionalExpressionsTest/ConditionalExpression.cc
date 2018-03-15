@@ -4,7 +4,9 @@
 #include "ConditionalExpressions.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 
 //! The timers are managed by a timer service. */
@@ -49,4 +51,6 @@ class ConditionalExpression : public ::testing::Test{
 		EXPECT_TRUE(statechart->getDefaultSCI()->get_condition()== 2l);
 		
 		
+}
+
 }

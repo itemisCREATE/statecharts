@@ -4,7 +4,9 @@
 #include "ParentFirstLocalReactions.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 long counter = 0l;
 
@@ -128,4 +130,6 @@ class ParentFirstLocalReactionsTest : public ::testing::Test{
 		EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 0l);
 		
 		
+}
+
 }

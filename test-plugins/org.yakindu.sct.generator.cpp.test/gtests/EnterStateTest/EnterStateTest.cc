@@ -4,7 +4,9 @@
 #include "EnterState.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 
 //! The timers are managed by a timer service. */
@@ -73,4 +75,6 @@ class EnterStateTest : public ::testing::Test{
 		EXPECT_TRUE(statechart->isStateActive(EnterState::r_B_r_E));
 		
 		
+}
+
 }

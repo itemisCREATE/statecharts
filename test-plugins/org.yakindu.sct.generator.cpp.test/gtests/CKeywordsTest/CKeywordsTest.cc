@@ -4,7 +4,9 @@
 #include "CKeywords.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 
 //! The timers are managed by a timer service. */
@@ -49,4 +51,6 @@ class CKeywordsTest : public ::testing::Test{
 		EXPECT_TRUE(statechart->isStateActive(CKeywords::auto_loop_switch_case_enum_asm));
 		
 		
+}
+
 }

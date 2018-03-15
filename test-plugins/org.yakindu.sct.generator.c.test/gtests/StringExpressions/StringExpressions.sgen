@@ -4,7 +4,10 @@ GeneratorModel for yakindu::c {
 			targetProject = "gtests"
 			targetFolder = "StringExpressions"
 		}
-
+		feature IdentifierSettings {
+			maxIdentifierLength = 254
+			separator =  "_" 
+		}
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false

@@ -4,7 +4,9 @@
 #include "StaticChoice.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 
 //! The timers are managed by a timer service. */
@@ -41,4 +43,6 @@ class StaticChoiceTest : public ::testing::Test{
 		runner->proceed_cycles(1);
 		
 		
+}
+
 }

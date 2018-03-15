@@ -4,7 +4,9 @@
 #include "InternalEventLifeCycle.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 
 //! The timers are managed by a timer service. */
@@ -69,4 +71,6 @@ class InternalEventLifeCycleTest : public ::testing::Test{
 		EXPECT_TRUE(statechart->isStateActive(InternalEventLifeCycle::r2_C));
 		
 		
+}
+
 }

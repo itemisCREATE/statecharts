@@ -4,7 +4,9 @@
 #include "StatechartLocalReactions.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 
 //! The timers are managed by a timer service. */
@@ -52,4 +54,6 @@ class StatechartLocalReactionsTest : public ::testing::Test{
 		}
 		
 		
+}
+
 }
