@@ -4,7 +4,9 @@
 #include "ExitState.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 
 //! The timers are managed by a timer service. */
@@ -85,4 +87,6 @@ class ExitStateTest : public ::testing::Test{
 		EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
 		
 		
+}
+
 }

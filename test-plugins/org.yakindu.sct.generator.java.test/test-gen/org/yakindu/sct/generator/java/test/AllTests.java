@@ -30,7 +30,6 @@ import org.junit.runners.Suite.SuiteClasses;
 	EntryChoice.class,
 	EntryExitSelfTransition.class,
 	EntryReactionAction.class,
-	EventDrivenInternalEvent.class,
 	EventDrivenTriggeredByEvent.class,
 	EventDrivenTriggeredByTimeEvent.class,
 	ExitOnSelfTransition.class,

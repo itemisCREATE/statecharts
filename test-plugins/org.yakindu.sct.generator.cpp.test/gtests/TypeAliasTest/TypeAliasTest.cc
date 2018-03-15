@@ -4,7 +4,9 @@
 #include "TypeAlias.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 
 //! The timers are managed by a timer service. */
@@ -57,4 +59,6 @@ class TypeAliasTest : public ::testing::Test{
 		EXPECT_TRUE(statechart->isStateActive(TypeAlias::main_region_End));
 		
 		
+}
+
 }

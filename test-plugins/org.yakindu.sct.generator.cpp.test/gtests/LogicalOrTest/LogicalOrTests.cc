@@ -4,7 +4,9 @@
 #include "LogicalOr.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 
 //! The timers are managed by a timer service. */
@@ -41,4 +43,6 @@ class LogicalOrTests : public ::testing::Test{
 		EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 4l && statechart->getDefaultSCI()->get_b()) << "logical or expression was executed in wrong order..." ;
 		
 		
+}
+
 }

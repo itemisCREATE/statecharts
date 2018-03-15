@@ -4,7 +4,9 @@
 #include "SyncFork.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 
 //! The timers are managed by a timer service. */
@@ -75,4 +77,6 @@ class SyncForkTest : public ::testing::Test{
 		EXPECT_TRUE(statechart->isStateActive(SyncFork::main_region_B_r2_D1));
 		
 		
+}
+
 }

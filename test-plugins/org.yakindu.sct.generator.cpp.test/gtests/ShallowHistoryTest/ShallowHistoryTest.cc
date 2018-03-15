@@ -4,7 +4,9 @@
 #include "ShallowHistory.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 
 //! The timers are managed by a timer service. */
@@ -97,4 +99,6 @@ class ShallowHistoryTest : public ::testing::Test{
 		EXPECT_TRUE(statechart->isStateActive(ShallowHistory::mainRegion_State2__region0_State4__region0_State7__region0_State9));
 		
 		
+}
+
 }

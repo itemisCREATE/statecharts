@@ -4,7 +4,9 @@
 #include "EntryChoice.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 
 //! The timers are managed by a timer service. */
@@ -43,4 +45,6 @@ class EntryChoiceTest : public ::testing::Test{
 		EXPECT_TRUE(statechart->isStateActive(EntryChoice::main_region_A));
 		
 		
+}
+
 }
