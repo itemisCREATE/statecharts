@@ -22,7 +22,7 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import org.yakindu.base.expressions.expressions.FeatureCall
-import org.yakindu.base.types.Package
+import org.yakindu.base.types.Event
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.CheckRef
@@ -65,7 +65,6 @@ import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventType
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.base.types.Event
 
 @Singleton class SexecElementMapping {
 	
@@ -121,7 +120,7 @@ import org.yakindu.base.types.Event
 	
 	 
 	def ExecutionState create r : sexecFactory.createExecutionState create(RegularState state){
-		if (state != null) {
+		if (state !== null) {
 			val n = state.parentRegion.vertices.filter(typeof (FinalState)).toList.indexOf(state)
 			r.simpleName = if (state instanceof FinalState) "_final_"+n else state.name
 			r.name = state.fullyQualifiedName.toString.replaceAll(" ", "")	
@@ -130,7 +129,7 @@ import org.yakindu.base.types.Event
 	}
 	
 	def ExecutionChoice create r : sexecFactory.createExecutionChoice create(Choice choice){
-		if (choice != null) {
+		if (choice !== null) {
 			val n = choice.parentRegion.vertices.filter( typeof ( Choice) ).toList.indexOf(choice)
 			r.simpleName =   "_choice" + n + "_"
 			r.name = choice.fullyQualifiedName.toString.replaceAll(" ", "")	
@@ -140,12 +139,12 @@ import org.yakindu.base.types.Event
 	}
 
 	def ExecutionEntry create r : sexecFactory.createExecutionEntry create(Entry entry){
-		if (entry != null) {
+		if (entry !== null) {
 			val region = entry.eContainer as Region
 			val regionName = region.name.toFirstUpper
 			val stateName = if(region.eContainer instanceof State) {(region.eContainer as State).name.toFirstUpper}
 			val entryName = {if (!entry?.name.empty) entry.name else "_entry_Default"}
-			r.simpleName = {if (regionName!= null)regionName else ""}+"_"+{if (stateName!= null)stateName else ""}+"_"+entryName
+			r.simpleName = {if (regionName!== null)regionName else ""}+"_"+{if (stateName!== null)stateName else ""}+"_"+entryName
 			r.name = entry.fullyQualifiedName.toString.replaceAll(" ", "")	
 			r.sourceElement = entry	
 			val seq = sexec.factory.createSequence
@@ -164,12 +163,12 @@ import org.yakindu.base.types.Event
 	
 	
 	def ExecutionEntry create r : sexecFactory.createExecutionEntry create(Exit exit){
-		if (exit != null) {
+		if (exit !== null) {
 			val region = exit.eContainer as Region
 			val regionName = region.name.toFirstUpper
 			val stateName = if(region.eContainer instanceof State) {(region.eContainer as State).name.toFirstUpper}
 			val exitName = {if (!exit?.name.empty) exit.name else "default"}
-			r.simpleName = {if (regionName!= null)regionName else ""}+"_"+{if (stateName!= null)stateName else ""}+"_"+exitName
+			r.simpleName = {if (regionName!== null)regionName else ""}+"_"+{if (stateName!= null)stateName else ""}+"_"+exitName
 			r.name = exit.fullyQualifiedName.toString.replaceAll(" ", "")	
 			r.sourceElement = exit	
 			val seq = sexec.factory.createSequence
@@ -183,7 +182,7 @@ import org.yakindu.base.types.Event
 	
 	
 	def ExecutionSynchronization create r : sexecFactory.createExecutionSynchronization create(Synchronization sync){
-		if (sync != null) {
+		if (sync !== null) {
 			val n = sync.parentRegion.vertices.filter( typeof ( Synchronization) ).toList.indexOf(sync)
 			r.simpleName =   "_sync" + n + "_"
 			r.name = sync.fullyQualifiedName.toString.replaceAll(" ", "")	
@@ -195,7 +194,7 @@ import org.yakindu.base.types.Event
 	
 	
 	def ExecutionRegion create r : sexecFactory.createExecutionRegion create(Region region){
-		if (region != null) {
+		if (region !== null) {
 			if (Strings::isEmpty(region.name)) {
 				val container = region.eContainer as CompositeElement
 				val index = container.regions.indexOf(region)
@@ -238,7 +237,7 @@ import org.yakindu.base.types.Event
 	} 
 
 	def Call newCall(Step step) {
-		if (step ==  null) throw new IllegalArgumentException("Attempt to create 'null' call.")
+		if (step ===  null) throw new IllegalArgumentException("Attempt to create 'null' call.")
 		val r = sexecFactory.createCall
 		r.step = step
 		r
@@ -271,7 +270,7 @@ import org.yakindu.base.types.Event
 		
 		val event = e.resolveRegularEventSpec(e.eContainer)
 		// for externally defined events, return the original feature call
-		if (EcoreUtil2.getContainerOfType(event, Package) != null && e.event instanceof FeatureCall) {
+		if ((EcoreUtil2.getContainerOfType(event, Statechart) === null) && e.event instanceof FeatureCall) {
 			return EcoreUtil.copy(e.event) as FeatureCall
 		}
 		
@@ -281,9 +280,9 @@ import org.yakindu.base.types.Event
 	} 	 
 	
 	def dispatch NamedElement resolveRegularEventSpec(Object o, Object context) { null }
-	def dispatch NamedElement resolveRegularEventSpec(RegularEventSpec re, Object context) { if ( re.event != null ) re.event.resolveRegularEventSpec(re) }
-	def dispatch NamedElement resolveRegularEventSpec(FeatureCall fc, Object context) { if (fc.feature != null) fc.feature.resolveRegularEventSpec(fc) }
-	def dispatch NamedElement resolveRegularEventSpec(ElementReferenceExpression ter, Object context) { if (ter.reference != null) ter.reference.resolveRegularEventSpec(ter) }
+	def dispatch NamedElement resolveRegularEventSpec(RegularEventSpec re, Object context) { if ( re.event !== null ) re.event.resolveRegularEventSpec(re) }
+	def dispatch NamedElement resolveRegularEventSpec(FeatureCall fc, Object context) { if (fc.feature !== null) fc.feature.resolveRegularEventSpec(fc) }
+	def dispatch NamedElement resolveRegularEventSpec(ElementReferenceExpression ter, Object context) { if (ter.reference !== null) ter.reference.resolveRegularEventSpec(ter) }
 	def dispatch NamedElement resolveRegularEventSpec(Event ed, Object context) { ed }
 	
 	
