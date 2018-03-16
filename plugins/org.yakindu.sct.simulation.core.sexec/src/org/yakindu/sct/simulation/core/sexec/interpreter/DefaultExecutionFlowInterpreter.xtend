@@ -48,6 +48,7 @@ import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.TimeTask
 import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
+import org.yakindu.sct.model.sexec.SexecFactory
 
 /**
  * 
@@ -93,6 +94,9 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	protected List<Step> executionStack
 	protected int activeStateIndex
 	protected boolean useInternalEventQueue
+	
+	protected static final Trace beginRunCycleTrace = SexecFactory.eINSTANCE.createTraceBeginRunCycle
+	protected static final Trace endRunCycleTrace = SexecFactory.eINSTANCE.createTraceEndRunCycle
 
 	override initialize(ExecutionFlow flow, ExecutionContext context) {
 		initialize(flow, context, false)
@@ -149,6 +153,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	override runCycle() {
+		traceInterpreter.evaluate(beginRunCycleTrace, executionContext)
 		var Event event = null
 		do {
 			// activate an event if there is one
@@ -162,6 +167,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			// get next event if available
 			if(! internalEventQueue.empty) event = internalEventQueue.poll
 		} while (event !== null)
+		traceInterpreter.evaluate(endRunCycleTrace, executionContext)
 	}
 
 	def rtcStep() {
