@@ -388,8 +388,17 @@ class BehaviorMapping {
 	}
 	
 	def Sequence mapToEffect(LocalReaction lr) {
-		if (lr.effect != null) lr.effect.mapEffect	
+		if (lr.effect !== null) {
+			if (trace.addTraceSteps) {
+				val sequence = lr.effect.mapEffect
+				sequence.steps.add(0, lr.create.newTraceReactionWillFire)
+				sequence.steps.add(lr.create.newTraceReactionFired)
+				return sequence
+			} else
+				return lr.effect.mapEffect
+		}
 	}
+
 	
 	def Sequence mapToEffect(Transition t, Reaction r) {
 		val sequence = sexec.factory.createSequence 

@@ -200,7 +200,6 @@ class ReactionBuilder {
 
 
 	def Sequence createLocalReactionSequence(ExecutionNode state, Step localStep) {	
-				
 		val localReactions = state.reactions.filter(r | ! r.transition ).toList
 		var localSteps = sexec.factory.createSequence
 		localSteps.steps.addAll(localReactions.map(lr | {
@@ -226,7 +225,6 @@ class ReactionBuilder {
 		if (localStep != null) localSteps.steps += localStep
 		if (localSteps.steps.empty) localSteps = null
 				
-				
 		val transitionReactions = state.reactions.filter(r | r.transition && ! r.unchecked ).toList
 		val transitionStep = transitionReactions.reverseView.fold(localSteps as Step, [s, reaction | {
 				var ifStep = sexec.factory.createIf
@@ -236,47 +234,11 @@ class ReactionBuilder {
 				ifStep as Step
 			}])
 
-	
 		if (transitionStep != null) cycle.steps.add(transitionStep)		
 		else if (localSteps != null) cycle.steps.add(localSteps)
 		
 		return cycle
 	}
-	
-	
-//	def Sequence createReactionSequence(ExecutionNode state, Step localStep) {	
-//		val cycle = sexec.factory.createSequence
-//		cycle.name = "react"
-//		
-//		val localReactions = state.reactions.filter(r | ! r.transition ).toList
-//		var localSteps = sexec.factory.createSequence
-//		localSteps.steps.addAll(localReactions.map(lr | {
-//				var ifStep = sexec.factory.createIf
-//				ifStep.check = lr.check.newRef		
-//				ifStep.thenStep = lr.effect.newCall
-//				ifStep
-//		}))
-//		
-//		if (localStep != null) localSteps.steps += localStep
-//		if (localSteps.steps.empty) localSteps = null
-//				
-//				
-//		val transitionReactions = state.reactions.filter(r | r.transition && ! r.unchecked ).toList
-//		val transitionStep = transitionReactions.reverseView.fold(localSteps as Step, [s, reaction | {
-//				var ifStep = sexec.factory.createIf
-//				ifStep.check = reaction.check.newRef		
-//				ifStep.thenStep = reaction.effect.newCall
-//				ifStep.elseStep = s
-//				ifStep as Step
-//			}])
-//
-//	
-//		if (transitionStep != null) cycle.steps.add(transitionStep)		
-//		else if (localSteps != null) cycle.steps.add(localSteps)
-//		
-//		return cycle
-//	}
-	
 	
 	def ExecutionFlow defineEntryReactions(Statechart statechart, ExecutionFlow r) {
 		statechart.allEntries.forEach(e|e.defineReaction)
