@@ -28,8 +28,6 @@ public enum StatechartImages {
 	
 	LABS_LOGO("icons/obj16/logolabs-16.png"),
 
-	PRO_EDITION("images/pro.png"),
-
 	MENU("icons/obj16/MENU-16.png"),
 	
 	DOCU("icons/obj16/docu-16.png"),
