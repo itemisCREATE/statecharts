@@ -83,8 +83,10 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		}
 		// This is required for OffscreenEditPartFactory to render problem markers into
 		// the preview image
-		if (part == null)
+		if (part == null) {
+			issueStore = new IValidationIssueStore.NullImpl();
 			return true;
+		}
 		return false;
 	}
 
