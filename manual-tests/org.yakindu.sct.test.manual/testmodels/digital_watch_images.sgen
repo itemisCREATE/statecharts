@@ -1,0 +1,74 @@
+GeneratorModel for yakindu::images {
+
+	statechart watch_subdiagrams {
+
+		feature Outlet {
+			targetProject = "digital_watch"
+			targetFolder = "images-gen-bmp"
+		}
+
+		feature Renderer {
+			format = "bmp"
+		}
+	}
+	
+	statechart watch_subdiagrams {
+
+		feature Outlet {
+			targetProject = "digital_watch"
+			targetFolder = "images-gen-png"
+		}
+
+		feature Renderer {
+			format = "png"
+		}
+	}
+	
+	statechart watch_subdiagrams {
+
+		feature Outlet {
+			targetProject = "digital_watch"
+			targetFolder = "images-gen-jpg"
+		}
+
+		feature Renderer {
+			format = "jpg"
+		}
+	}
+	
+	statechart watch_subdiagrams {
+
+		feature Outlet {
+			targetProject = "digital_watch"
+			targetFolder = "images-gen-jpeg"
+		}
+
+		feature Renderer {
+			format = "jpeg"
+		}
+	}
+	
+	statechart watch_subdiagrams {
+
+		feature Outlet {
+			targetProject = "digital_watch"
+			targetFolder = "images-gen-svg"
+		}
+
+		feature Renderer {
+			format = "svg"
+		}
+	}
+	
+	statechart watch_subdiagrams {
+
+		feature Outlet {
+			targetProject = "digital_watch"
+			targetFolder = "images-gen-pdf"
+		}
+
+		feature Renderer {
+			format = "pdf"
+		}
+	}
+}
