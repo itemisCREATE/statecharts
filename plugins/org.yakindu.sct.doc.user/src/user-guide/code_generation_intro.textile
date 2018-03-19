@@ -333,7 +333,7 @@ h4(#codegen_built-in_variables). Built-in variables
 
 There are several built-in read-only variables which can be used in expressions in generator models:
 
-* _SCTVERSION_ (String): the current version of YAKINDU Statechart Tools, for example, "3.2.0"
+* _SCTVERSION_ (String): the current version of YAKINDU Statechart Tools, for example, "3.3.0"
 * _TIMESTAMP_ (String): the current date and time as a localized string, for example "11.12.2017 17:08:14"
 * _USER_ (String): the name of the current user who started this instance of YAKINDU Statechart Tools (via @System.getProperty("user.name")@)
 * _HOSTNAME_ (String): the host name of the machine on which YAKINDU Statechart Tools is running.
