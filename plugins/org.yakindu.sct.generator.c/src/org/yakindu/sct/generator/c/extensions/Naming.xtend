@@ -115,6 +115,13 @@ class Naming {
 		}
 		return entryStatemachinePrefix.toFirstUpper
 	}
+	
+	def dispatch String type(Statechart it) {
+		if(entryStatemachinePrefix.nullOrEmpty) {
+			return name.asIdentifier.toFirstUpper
+		}
+		return entryStatemachinePrefix.toFirstUpper
+	}
 
 	def dispatch instance(InterfaceScope it) {
 		'iface' + (if(name.nullOrEmpty) '' else name).asIdentifier.toFirstUpper
@@ -324,6 +331,10 @@ class Naming {
 	def stateName(ExecutionState it) {
 		shortName
 	}
+	
+	def stateName(State it) {
+		shortName
+	}
 
 	def raised(CharSequence it) { it + separator + 'raised' }
 
@@ -337,7 +348,7 @@ class Naming {
 
 	def dispatch scopeDescription(Scope it) '''scope'''
 
-	def dispatch scopeDescription(InterfaceScope it) '''«IF name == null || name.empty»default interface scope«ELSE»interface scope '«name»'«ENDIF»'''
+	def dispatch scopeDescription(InterfaceScope it) '''«IF name.nullOrEmpty»default interface scope«ELSE»interface scope '«name»'«ENDIF»'''
 
 	def dispatch scopeDescription(InternalScope it) '''internal scope'''
 
