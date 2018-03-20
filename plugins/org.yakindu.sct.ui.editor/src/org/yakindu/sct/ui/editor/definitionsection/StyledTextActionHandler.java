@@ -75,8 +75,6 @@ public class StyledTextActionHandler {
 					updateActionsEnableState();
 					break;
 				case SWT.Deactivate :
-					if (styledText != null && !styledText.isDisposed())
-						styledText.setSelection(0);
 					styledText = null;
 					updateActionsEnableState();
 					break;
