@@ -232,7 +232,8 @@ public class StatechartDefinitionSection extends Composite
 	protected EmbeddedEditor createSpecificationEditor() {
 		EmbeddedEditor embeddedEditor = createEmbeddedEditor();
 		EmbeddedEditorModelAccess modelAccess = embeddedEditor.createPartialEditor();
-		modelAccess.updateModel(((Statechart) getContextObject()).getSpecification());
+		String specification = ((Statechart) getContextObject()).getSpecification();
+		modelAccess.updateModel(specification != null ? specification : "");
 		GridDataFactory.fillDefaults().grab(true, true).span(2, 1).applyTo(embeddedEditor.getViewer().getControl());
 		initializeEmbeddedEditorWidget(embeddedEditor);
 		return embeddedEditor;
