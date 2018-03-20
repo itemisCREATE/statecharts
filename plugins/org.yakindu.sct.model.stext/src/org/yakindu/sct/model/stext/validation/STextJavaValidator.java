@@ -960,6 +960,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		if (provider == null) {
 			return EcoreUtil2.getContainerOfType(context, Statechart.class);
 		} else {
+			if(provider.getElement().eResource() == null) return null;
 			return (Statechart) EcoreUtil.getObjectByType(provider.getElement().eResource().getContents(),
 					SGraphPackage.Literals.STATECHART);
 		}
