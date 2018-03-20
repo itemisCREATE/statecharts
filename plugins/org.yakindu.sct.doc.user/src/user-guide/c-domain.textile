@@ -483,7 +483,7 @@ bq.. *Please note:* State machines calling C functions as operations are debarre
 
 h2(#cdom_cppclasses). C++ classes
 
-Classes contained in C++ header files are usable from statecharts as well.
+Classes contained in C++ header files are usable from statecharts as well. Supported within C++ projects are the default CDT fileextenions for C++ Header files: ".h", ".hh", "hpp", "hxx" and ".inc".
 
 bc.. class Point
 {
