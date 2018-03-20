@@ -94,7 +94,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	protected List<Step> executionStack
 	protected int activeStateIndex
 	protected boolean useInternalEventQueue
-	
+
 	protected static final Trace beginRunCycleTrace = SexecFactory.eINSTANCE.createTraceBeginRunCycle
 	protected static final Trace endRunCycleTrace = SexecFactory.eINSTANCE.createTraceEndRunCycle
 
@@ -153,9 +153,9 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	override runCycle() {
-		traceInterpreter.evaluate(beginRunCycleTrace, executionContext)
 		var Event event = null
 		do {
+			traceInterpreter.evaluate(beginRunCycleTrace, executionContext)
 			// activate an event if there is one
 			if (event !== null) {
 				event.event.raised = true
@@ -166,8 +166,8 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			rtcStep
 			// get next event if available
 			if(! internalEventQueue.empty) event = internalEventQueue.poll
+			traceInterpreter.evaluate(endRunCycleTrace, executionContext)
 		} while (event !== null)
-		traceInterpreter.evaluate(endRunCycleTrace, executionContext)
 	}
 
 	def rtcStep() {
