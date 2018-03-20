@@ -554,7 +554,7 @@ GeneratorModel for sctunit::java {
 			libraryTargetFolder = "src-gen"
 		}
 	}
-
+	
 	test LocalReactions {
 		feature Naming {
 			basePackage = "org.yakindu.sct.generator.java.test"

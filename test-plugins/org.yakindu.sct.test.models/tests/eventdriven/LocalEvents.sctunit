@@ -1,0 +1,17 @@
+testclass LocalEvents for statechart eventdriven.localEvents {
+	
+	@Test
+	operation test() {
+		enter
+		
+		assert active(eventdriven.localEvents.r1.A)
+		assert active(eventdriven.localEvents.r2.idle)
+		
+		raise BUTTON_ON
+		
+		assert active(eventdriven.localEvents.r1.C)
+		assert active(eventdriven.localEvents.r2.D)
+		
+		exit
+	}
+}
