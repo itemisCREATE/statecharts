@@ -35,7 +35,6 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	
 	private int nextStateIndex;
 	
-	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
 	
 	private boolean sTART_B;

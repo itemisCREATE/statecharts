@@ -74,7 +74,6 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	
 	private int nextStateIndex;
 	
-	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
 	
 	private boolean i1;

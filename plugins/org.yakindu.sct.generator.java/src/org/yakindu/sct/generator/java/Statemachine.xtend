@@ -128,9 +128,7 @@ class Statemachine {
 		
 		private final boolean[] timeEvents = new boolean[«flow.timeEvents.size»];
 		«ENDIF»
-		
 		«flow.internalEventFields»		
-		
 		«FOR variable : flow.internalScopeVariables SEPARATOR newLine AFTER newLine»
 			«IF !variable.const»
 				«variable.fieldDeclaration»
@@ -207,7 +205,6 @@ class Statemachine {
 					throw new IllegalStateException("Operation callback for internal must be set.");	
 				}
 			«ENDIF»
-			
 			«FOR scope : flow.interfaceScopes»
 				«IF scope.hasOperations»
 					if (this.«scope.interfaceName.asEscapedIdentifier».operationCallback == null) {
@@ -648,7 +645,6 @@ class Statemachine {
 				throw new IllegalStateException("timer not set.");
 			}
 			«ENDIF»
-
 			«enterSequences.defaultSequence.code»
 		}
 

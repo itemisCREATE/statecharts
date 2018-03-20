@@ -88,6 +88,22 @@ public interface IIntegerExpressionsStatemachine extends IStatemachine {
 		
 		public void setModuloAssign(long value);
 		
+		public long getIncrement();
+		
+		public void setIncrement(long value);
+		
+		public long getIncrementAssign();
+		
+		public void setIncrementAssign(long value);
+		
+		public long getDecrement();
+		
+		public void setDecrement(long value);
+		
+		public long getDecrementAssign();
+		
+		public void setDecrementAssign(long value);
+		
 	}
 	
 	public SCInterface getSCInterface();

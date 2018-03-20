@@ -48,7 +48,6 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	private int nextStateIndex;
 	
 	
-	
 	public EventDrivenOutEventsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}

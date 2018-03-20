@@ -69,15 +69,12 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 	
 	private int nextStateIndex;
 	
-	
-	
 	public ConditionalExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
-		
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -97,7 +94,6 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
 		}
-	
 		enterSequence_main_region_default();
 	}
 	

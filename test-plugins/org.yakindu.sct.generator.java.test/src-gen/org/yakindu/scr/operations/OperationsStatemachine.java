@@ -70,7 +70,6 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		if (this.operationCallback == null) {
 			throw new IllegalStateException("Operation callback for internal must be set.");	
 		}
-		
 		if (this.sCIInterface1.operationCallback == null) {
 			throw new IllegalStateException("Operation callback for interface sCIInterface1 must be set.");
 		}
@@ -92,7 +91,6 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
 		}
-	
 		enterSequence_main_region_default();
 	}
 	

@@ -99,8 +99,6 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 	
 	private int nextStateIndex;
 	
-	
-	
 	public BooleanExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}

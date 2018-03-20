@@ -210,6 +210,46 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 			this.moduloAssign = value;
 		}
 		
+		private long increment;
+		
+		public long getIncrement() {
+			return increment;
+		}
+		
+		public void setIncrement(long value) {
+			this.increment = value;
+		}
+		
+		private long incrementAssign;
+		
+		public long getIncrementAssign() {
+			return incrementAssign;
+		}
+		
+		public void setIncrementAssign(long value) {
+			this.incrementAssign = value;
+		}
+		
+		private long decrement;
+		
+		public long getDecrement() {
+			return decrement;
+		}
+		
+		public void setDecrement(long value) {
+			this.decrement = value;
+		}
+		
+		private long decrementAssign;
+		
+		public long getDecrementAssign() {
+			return decrementAssign;
+		}
+		
+		public void setDecrementAssign(long value) {
+			this.decrementAssign = value;
+		}
+		
 		protected void clearEvents() {
 			e1 = false;
 		}
@@ -279,6 +319,14 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		sCInterface.setMinusAssign(2);
 		
 		sCInterface.setModuloAssign(20);
+		
+		sCInterface.setIncrement(0);
+		
+		sCInterface.setIncrementAssign(0);
+		
+		sCInterface.setDecrement(0);
+		
+		sCInterface.setDecrementAssign(0);
 	}
 	
 	public void enter() {
@@ -504,6 +552,38 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		sCInterface.setModuloAssign(value);
 	}
 	
+	public long getIncrement() {
+		return sCInterface.getIncrement();
+	}
+	
+	public void setIncrement(long value) {
+		sCInterface.setIncrement(value);
+	}
+	
+	public long getIncrementAssign() {
+		return sCInterface.getIncrementAssign();
+	}
+	
+	public void setIncrementAssign(long value) {
+		sCInterface.setIncrementAssign(value);
+	}
+	
+	public long getDecrement() {
+		return sCInterface.getDecrement();
+	}
+	
+	public void setDecrement(long value) {
+		sCInterface.setDecrement(value);
+	}
+	
+	public long getDecrementAssign() {
+		return sCInterface.getDecrementAssign();
+	}
+	
+	public void setDecrementAssign(long value) {
+		sCInterface.setDecrementAssign(value);
+	}
+	
 	private boolean check_main_region_StateA_tr0_tr0() {
 		return sCInterface.e1;
 	}
@@ -555,6 +635,10 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		sCInterface.setMinusAssign(sCInterface.getMinusAssign() - sCInterface.myInt1);
 		
 		sCInterface.setModuloAssign(sCInterface.getModuloAssign() % sCInterface.myInt1);
+		
+		sCInterface.setIncrementAssign(sCInterface.increment++);
+		
+		sCInterface.setDecrementAssign(sCInterface.decrement++);
 	}
 	
 	/* 'default' enter sequence for state StateA */

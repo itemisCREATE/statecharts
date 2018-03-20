@@ -49,7 +49,6 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 		if (this.operationCallback == null) {
 			throw new IllegalStateException("Operation callback for internal must be set.");	
 		}
-		
 		if (this.sCInterface.operationCallback == null) {
 			throw new IllegalStateException("Operation callback for interface sCInterface must be set.");
 		}
@@ -70,7 +69,6 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
 		}
-	
 		enterSequence_main_region_default();
 	}
 	

@@ -96,6 +96,22 @@ public interface IRealExpressionsStatemachine extends IStatemachine {
 		
 		public void setModuloAssign(boolean value);
 		
+		public double getIncrement();
+		
+		public void setIncrement(double value);
+		
+		public double getIncrementAssign();
+		
+		public void setIncrementAssign(double value);
+		
+		public double getDecrement();
+		
+		public void setDecrement(double value);
+		
+		public double getDecrementAssign();
+		
+		public void setDecrementAssign(double value);
+		
 	}
 	
 	public SCInterface getSCInterface();
