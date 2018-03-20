@@ -338,7 +338,7 @@ There are several built-in read-only variables which can be used in expressions 
 * _USER_ (String): the name of the current user who started this instance of YAKINDU Statechart Tools (via @System.getProperty("user.name")@)
 * _HOSTNAME_ (String): the host name of the machine on which YAKINDU Statechart Tools is running.
 * _SHA256_ (String): The hash of the referenced file (for example, the statechart file).
-* _SCTPATH_ (String): Path to the statechart file relative to the workspace.
+* _SCTFILE_ (String): Path to the statechart file relative to the workspace.
 
 bq. *Please note:* Neither _USER_ nor _HOSTNAME_ should be used for any security-related tasks. Especially the username can be spoofed easily, if anyone wanted to.
 
