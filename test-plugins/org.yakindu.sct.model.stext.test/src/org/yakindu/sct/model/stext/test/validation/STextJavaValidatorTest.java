@@ -35,6 +35,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.expressions.terminals.ExpressionsValueConverterService;
+import org.yakindu.base.expressions.validation.ExpressionsJavaValidator;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.ITypeSystem;
@@ -76,7 +78,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 	@Inject
 	TestCompletenessAssertions checkAvailable;
-
+	
 	/**
 	 * @see STextJavaValidator#checkVariableDefinition(org.yakindu.sct.model.stext.stext.VariableDefinition)
 	 */
@@ -399,6 +401,20 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 				scope);
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertOK();
+	}
+	
+	@Test
+	public void checkPostFixOperatorOnlyOnVariables() {
+		EObject model = super.parseExpression("ABC.intVar++", Expression.class.getSimpleName(), interfaceScope());
+		AssertableDiagnostics validationResult = tester.validate(model);
+		validationResult.assertOK();
+		model = super.parseExpression("intVar++", Expression.class.getSimpleName(), internalScope());
+		validationResult = tester.validate(model);
+		validationResult.assertOK();
+		model = super.parseExpression("5++", Expression.class.getSimpleName(), interfaceScope());
+		validationResult = tester.validate(model);
+		validationResult.assertError(ExpressionsJavaValidator.POSTFIX_ONLY_ON_VARIABLES_CODE);
+		
 	}
 
 	/**

@@ -28,6 +28,7 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
+import org.yakindu.base.expressions.expressions.PostFixUnaryExpression;
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.ComplexType;
@@ -76,24 +77,27 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 
 	public static final String ERROR_DUPLICATE_PARAMETER_ASSIGNMENT_CODE = "ErrorDuplicateParameterAssignment";
 	public static final String ERROR_DUPLICATE_PARAMETER_ASSIGNMENT_MSG = "Duplicate assignment to parameter '%s'.";
-	
+
 	public static final String ERROR_ASSIGNMENT_TO_CONST_CODE = "AssignmentToConst";
 	public static final String ERROR_ASSIGNMENT_TO_CONST_MSG = "Assignment to constant not allowed.";
-	
+
 	public static final String ERROR_LEFT_HAND_ASSIGNMENT_CODE = "LeftHandAssignment";
 	public static final String ERROR_LEFT_HAND_ASSIGNMENT_MSG = "The left-hand side of an assignment must be a variable.";
-	
+
 	public static final String ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE = "WrongNrOfArgs";
 	public static final String ERROR_WRONG_NUMBER_OF_ARGUMENTS_MSG = "Wrong number of arguments, expected %s .";
-	
+
 	public static final String ERROR_VAR_ARGS_LAST_CODE = "VarArgsMustBeLast";
 	public static final String ERROR_VAR_ARGS_LAST_MSG = "The variable argument type must be the last argument.";
-	
+
 	public static final String ERROR_WRONG_ANNOTATION_TARGET_CODE = "WrongAnnotationTarget";
 	public static final String ERROR_WRONG_ANNOTATION_TARGET_MSG = "Annotation '%s' can not be applied on %s .";
-	
+
 	public static final String ERROR_OPTIONAL_MUST_BE_LAST_CODE = "OptionalParametersLast";
 	public static final String ERROR_OPTIONAL_MUST_BE_LAST_MSG = "Required parameters must not be defined after optional parameters.";
+
+	public static final String POSTFIX_ONLY_ON_VARIABLES_CODE = "PostfixOnlyOnVariables";
+	public static final String POSTFIX_ONLY_ON_VARIABLES_MSG = "Invalid argument to operator '++/--'";
 
 	@Inject
 	private GenericsPrettyPrinter printer;
@@ -120,6 +124,14 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 			break;
 		case INFO:
 			break;
+		}
+	}
+
+	@Check
+	public void checkPostFixOperatorOnlyOnVariables(PostFixUnaryExpression expression) {
+		if (!(expression.getOperand() instanceof ElementReferenceExpression)
+				&& !(expression.getOperand() instanceof FeatureCall)) {
+			error(POSTFIX_ONLY_ON_VARIABLES_MSG, expression, null, POSTFIX_ONLY_ON_VARIABLES_CODE);
 		}
 	}
 
@@ -227,7 +239,7 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 			}
 		}
 	}
-	
+
 	@Check(CheckType.FAST)
 	public void checkAssignmentToFinalVariable(AssignmentExpression exp) {
 		Expression varRef = exp.getVarRef();
@@ -238,27 +250,31 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 			referencedObject = ((ElementReferenceExpression) varRef).getReference();
 		if (referencedObject instanceof Property) {
 			if (((Property) referencedObject).isConst()) {
-				error(ERROR_ASSIGNMENT_TO_CONST_MSG, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF, ERROR_ASSIGNMENT_TO_CONST_CODE);
+				error(ERROR_ASSIGNMENT_TO_CONST_MSG, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF,
+						ERROR_ASSIGNMENT_TO_CONST_CODE);
 			}
 		}
 	}
-	
+
 	@Check(CheckType.FAST)
 	public void checkLeftHandAssignment(final AssignmentExpression expression) {
 		Expression varRef = expression.getVarRef();
 		if (varRef instanceof FeatureCall) {
 			EObject referencedObject = ((FeatureCall) varRef).getFeature();
 			if (!(referencedObject instanceof Property)) {
-				error(ERROR_LEFT_HAND_ASSIGNMENT_MSG, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF, ERROR_LEFT_HAND_ASSIGNMENT_CODE);
+				error(ERROR_LEFT_HAND_ASSIGNMENT_MSG, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF,
+						ERROR_LEFT_HAND_ASSIGNMENT_CODE);
 			}
 		} else if (varRef instanceof ElementReferenceExpression) {
 			EObject referencedObject = ((ElementReferenceExpression) varRef).getReference();
-			if (!(referencedObject instanceof Property) && !(referencedObject  instanceof Parameter)) {
-				error(ERROR_LEFT_HAND_ASSIGNMENT_MSG, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF, ERROR_LEFT_HAND_ASSIGNMENT_CODE);
+			if (!(referencedObject instanceof Property) && !(referencedObject instanceof Parameter)) {
+				error(ERROR_LEFT_HAND_ASSIGNMENT_MSG, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF,
+						ERROR_LEFT_HAND_ASSIGNMENT_CODE);
 			}
 
 		} else {
-			error(ERROR_LEFT_HAND_ASSIGNMENT_MSG, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF, ERROR_LEFT_HAND_ASSIGNMENT_CODE);
+			error(ERROR_LEFT_HAND_ASSIGNMENT_MSG, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF,
+					ERROR_LEFT_HAND_ASSIGNMENT_CODE);
 		}
 	}
 
@@ -281,24 +297,22 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 	protected void assertOperationArguments(Operation operation, List<Expression> args) {
 		EList<Parameter> parameters = operation.getParameters();
 		List<Parameter> optionalParameters = filterOptionalParameters(parameters);
-		if (
-			(operation.isVariadic() && operation.getVarArgIndex() > args.size())
-			|| 
-			(!operation.isVariadic() &&
-					!(args.size() <= parameters.size() && args.size() >= parameters.size() - optionalParameters.size()))
-			) {
-			error(String.format(ERROR_WRONG_NUMBER_OF_ARGUMENTS_MSG, parameters), null, ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
+		if ((operation.isVariadic() && operation.getVarArgIndex() > args.size())
+				|| (!operation.isVariadic() && !(args.size() <= parameters.size()
+						&& args.size() >= parameters.size() - optionalParameters.size()))) {
+			error(String.format(ERROR_WRONG_NUMBER_OF_ARGUMENTS_MSG, parameters), null,
+					ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
 		}
 	}
-	
+
 	/**
 	 * @param parameters
 	 * @return
 	 */
 	protected List<Parameter> filterOptionalParameters(EList<Parameter> parameters) {
 		List<Parameter> optionalParameters = new ArrayList<>();
-		for(Parameter p : parameters) {
-			if(p.isOptional()) {
+		for (Parameter p : parameters) {
+			if (p.isOptional()) {
 				optionalParameters.add(p);
 			}
 		}
@@ -312,13 +326,13 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 					ERROR_VAR_ARGS_LAST_CODE);
 		}
 	}
-	
+
 	@Check(CheckType.FAST)
 	public void checkAnnotationTarget(final AnnotatableElement element) {
 		EList<Annotation> annotations = element.getAnnotations();
 		for (Annotation annotation : annotations) {
 			EList<EObject> targets = annotation.getType().getTargets();
-			if(targets.isEmpty())
+			if (targets.isEmpty())
 				continue;
 			boolean found = Iterables.any(targets, new Predicate<EObject>() {
 				@Override
@@ -328,12 +342,12 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 			});
 			if (!found) {
 				error(String.format(ERROR_WRONG_ANNOTATION_TARGET_MSG, annotation.getType().getName(),
-						element.eClass()), null,
-						element.getAnnotations().indexOf(annotation), ERROR_WRONG_ANNOTATION_TARGET_CODE);
+						element.eClass()), null, element.getAnnotations().indexOf(annotation),
+						ERROR_WRONG_ANNOTATION_TARGET_CODE);
 			}
 		}
 	}
-	
+
 	@Check(CheckType.FAST)
 	public void checkOptionalArgumentsAreLast(Operation op) {
 		boolean foundOptional = false;
