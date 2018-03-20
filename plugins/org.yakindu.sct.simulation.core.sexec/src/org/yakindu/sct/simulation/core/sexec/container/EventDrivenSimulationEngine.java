@@ -55,8 +55,8 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 
 	@Override
 	public void resume() {
-		cycleAdapter.resume();
 		super.resume();
+		cycleAdapter.resume();
 	}
 
 	@Override
