@@ -26,7 +26,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionEvent" eSuperTypes="#//ExecutionSlot">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="raised" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//EventDirection"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="ecore:EEnum ../../org.yakindu.base.types/model/types.ecore#//Direction"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionSlot" abstract="true" eSuperTypes="../../org.yakindu.base.types/model/base.ecore#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//JavaObject"/>
@@ -39,11 +39,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="CompositeSlot" eSuperTypes="#//ExecutionSlot">
     <eStructuralFeatures xsi:type="ecore:EReference" name="slots" upperBound="-1"
         eType="#//ExecutionSlot" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="EventDirection">
-    <eLiterals name="LOCAL"/>
-    <eLiterals name="IN" value="1"/>
-    <eLiterals name="OUT" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="JavaObject" instanceClassName="java.lang.Object"/>
   <eClassifiers xsi:type="ecore:EClass" name="ReferenceSlot" eSuperTypes="#//CompositeSlot">

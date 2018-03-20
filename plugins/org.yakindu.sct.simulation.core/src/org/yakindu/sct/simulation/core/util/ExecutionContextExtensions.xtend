@@ -12,14 +12,14 @@ package org.yakindu.sct.simulation.core.util
 
 import java.util.ArrayList
 import java.util.List
+import org.yakindu.base.types.Direction
 import org.yakindu.sct.model.sgraph.RegularState
-import org.yakindu.sct.model.sruntime.EventDirection
 import org.yakindu.sct.model.sruntime.ExecutionContext
 
 class ExecutionContextExtensions {
 
 	def clearOutEvents(ExecutionContext executionContext) {
-		executionContext.allEvents.filter[direction == EventDirection.OUT].forEach[if(raised) raised = false]
+		executionContext.allEvents.filter[direction == Direction.OUT].forEach[if(raised) raised = false]
 	}
 
 	def List<RegularState> getAllActiveStates(ExecutionContext context) {

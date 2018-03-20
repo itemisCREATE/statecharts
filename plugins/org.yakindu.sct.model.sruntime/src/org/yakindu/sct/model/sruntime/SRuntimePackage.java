@@ -13,7 +13,6 @@ package org.yakindu.sct.model.sruntime;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -606,16 +605,6 @@ public interface SRuntimePackage extends EPackage {
 	int EXECUTION_OPERATION_FEATURE_COUNT = EXECUTION_VARIABLE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sruntime.EventDirection <em>Event Direction</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sruntime.EventDirection
-	 * @see org.yakindu.sct.model.sruntime.impl.SRuntimePackageImpl#getEventDirection()
-	 * @generated
-	 */
-	int EVENT_DIRECTION = 7;
-
-	/**
 	 * The meta object id for the '<em>Java Object</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -623,7 +612,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @see org.yakindu.sct.model.sruntime.impl.SRuntimePackageImpl#getJavaObject()
 	 * @generated
 	 */
-	int JAVA_OBJECT = 8;
+	int JAVA_OBJECT = 7;
 
 
 	/**
@@ -829,16 +818,6 @@ public interface SRuntimePackage extends EPackage {
 	EClass getExecutionOperation();
 
 	/**
-	 * Returns the meta object for enum '{@link org.yakindu.sct.model.sruntime.EventDirection <em>Event Direction</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Event Direction</em>'.
-	 * @see org.yakindu.sct.model.sruntime.EventDirection
-	 * @generated
-	 */
-	EEnum getEventDirection();
-
-	/**
 	 * Returns the meta object for data type '{@link java.lang.Object <em>Java Object</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1036,16 +1015,6 @@ public interface SRuntimePackage extends EPackage {
 		 * @generated
 		 */
 		EClass EXECUTION_OPERATION = eINSTANCE.getExecutionOperation();
-
-		/**
-		 * The meta object literal for the '{@link org.yakindu.sct.model.sruntime.EventDirection <em>Event Direction</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.yakindu.sct.model.sruntime.EventDirection
-		 * @see org.yakindu.sct.model.sruntime.impl.SRuntimePackageImpl#getEventDirection()
-		 * @generated
-		 */
-		EEnum EVENT_DIRECTION = eINSTANCE.getEventDirection();
 
 		/**
 		 * The meta object literal for the '<em>Java Object</em>' data type.
