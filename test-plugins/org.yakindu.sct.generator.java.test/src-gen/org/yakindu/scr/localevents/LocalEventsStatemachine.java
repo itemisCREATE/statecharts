@@ -6,15 +6,55 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 
 	protected class SCInterfaceImpl implements SCInterface {
 	
-		private boolean bUTTON_ON;
+		private boolean e;
 		
-		public void raiseBUTTON_ON() {
-			bUTTON_ON = true;
+		public void raiseE() {
+			e = true;
 			runCycle();
 		}
 		
+		private long cycleCountSm;
+		
+		public long getCycleCountSm() {
+			return cycleCountSm;
+		}
+		
+		public void setCycleCountSm(long value) {
+			this.cycleCountSm = value;
+		}
+		
+		private long cycleCount1;
+		
+		public long getCycleCount1() {
+			return cycleCount1;
+		}
+		
+		public void setCycleCount1(long value) {
+			this.cycleCount1 = value;
+		}
+		
+		private long cycleCount2;
+		
+		public long getCycleCount2() {
+			return cycleCount2;
+		}
+		
+		public void setCycleCount2(long value) {
+			this.cycleCount2 = value;
+		}
+		
+		private long checksum;
+		
+		public long getChecksum() {
+			return checksum;
+		}
+		
+		public void setChecksum(long value) {
+			this.checksum = value;
+		}
+		
 		protected void clearEvents() {
-			bUTTON_ON = false;
+			e = false;
 		}
 	}
 	
@@ -23,11 +63,15 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {
-		localEvents_r1_A,
-		localEvents_r1_C,
-		localEvents_r2_idle,
-		localEvents_r2_B,
-		localEvents_r2_D,
+		localEvents_r1_Comp1,
+		localEvents_r1_Comp1_r_A1,
+		localEvents_r1_Comp1_r_C1,
+		localEvents_r1_Comp1_r_D1,
+		localEvents_r2_Comp2,
+		localEvents_r2_Comp2_r_A2,
+		localEvents_r2_Comp2_r_B2,
+		localEvents_r2_Comp2_r_C2,
+		localEvents_r2_Comp2_r_D2,
 		$NullState$
 	};
 	
@@ -37,10 +81,12 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
 	
-	private boolean sTART_B;
+	private boolean activate_b;
 	
-	private boolean sTART_C;
+	private boolean activate_c;
 	
+	private boolean activate_d;
+	private long activate_dValue;
 	public LocalEventsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -52,6 +98,13 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		}
 		clearEvents();
 		clearOutEvents();
+		sCInterface.setCycleCountSm(0);
+		
+		sCInterface.setCycleCount1(0);
+		
+		sCInterface.setCycleCount2(0);
+		
+		sCInterface.setChecksum(0);
 	}
 	
 	public void enter() {
@@ -88,8 +141,9 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
-		sTART_B = false;
-		sTART_C = false;
+		activate_b = false;
+		activate_c = false;
+		activate_d = false;
 	}
 	
 	/**
@@ -104,16 +158,26 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	public boolean isStateActive(State state) {
 	
 		switch (state) {
-		case localEvents_r1_A:
-			return stateVector[0] == State.localEvents_r1_A;
-		case localEvents_r1_C:
-			return stateVector[0] == State.localEvents_r1_C;
-		case localEvents_r2_idle:
-			return stateVector[1] == State.localEvents_r2_idle;
-		case localEvents_r2_B:
-			return stateVector[1] == State.localEvents_r2_B;
-		case localEvents_r2_D:
-			return stateVector[1] == State.localEvents_r2_D;
+		case localEvents_r1_Comp1:
+			return stateVector[0].ordinal() >= State.
+					localEvents_r1_Comp1.ordinal()&& stateVector[0].ordinal() <= State.localEvents_r1_Comp1_r_D1.ordinal();
+		case localEvents_r1_Comp1_r_A1:
+			return stateVector[0] == State.localEvents_r1_Comp1_r_A1;
+		case localEvents_r1_Comp1_r_C1:
+			return stateVector[0] == State.localEvents_r1_Comp1_r_C1;
+		case localEvents_r1_Comp1_r_D1:
+			return stateVector[0] == State.localEvents_r1_Comp1_r_D1;
+		case localEvents_r2_Comp2:
+			return stateVector[1].ordinal() >= State.
+					localEvents_r2_Comp2.ordinal()&& stateVector[1].ordinal() <= State.localEvents_r2_Comp2_r_D2.ordinal();
+		case localEvents_r2_Comp2_r_A2:
+			return stateVector[1] == State.localEvents_r2_Comp2_r_A2;
+		case localEvents_r2_Comp2_r_B2:
+			return stateVector[1] == State.localEvents_r2_Comp2_r_B2;
+		case localEvents_r2_Comp2_r_C2:
+			return stateVector[1] == State.localEvents_r2_Comp2_r_C2;
+		case localEvents_r2_Comp2_r_D2:
+			return stateVector[1] == State.localEvents_r2_Comp2_r_D2;
 		default:
 			return false;
 		}
@@ -123,101 +187,222 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		return sCInterface;
 	}
 	
-	private void raiseSTART_B() {
+	private void raiseActivate_b() {
 	
 		internalEventQueue.add( new Runnable() {
 			@Override public void run() {
-				sTART_B = true;					
+				activate_b = true;					
 				runCycle();
 			}
 		});
 	}
 	
 	
-	private void raiseSTART_C() {
+	private void raiseActivate_c() {
 	
 		internalEventQueue.add( new Runnable() {
 			@Override public void run() {
-				sTART_C = true;					
+				activate_c = true;					
 				runCycle();
 			}
 		});
 	}
 	
 	
-	public void raiseBUTTON_ON() {
-		sCInterface.raiseBUTTON_ON();
+	private void raiseActivate_d(final long value) {
+	
+		internalEventQueue.add( new Runnable() {
+			@Override public void run() {
+				activate_dValue = value;
+				activate_d = true;					
+				runCycle();
+			}
+		});
 	}
 	
-	private boolean check_localEvents_r1_A_lr0_lr0() {
-		return sCInterface.bUTTON_ON;
+	private long getActivate_dValue() {
+		if (! activate_d ) 
+			throw new IllegalStateException("Illegal event value access. Event Activate_d is not raised!");
+		return activate_dValue;
 	}
 	
-	private boolean check_localEvents_r1_A_tr0_tr0() {
-		return sTART_C;
+	public void raiseE() {
+		sCInterface.raiseE();
 	}
 	
-	private boolean check_localEvents_r2_idle_tr0_tr0() {
-		return sTART_B;
+	public long getCycleCountSm() {
+		return sCInterface.getCycleCountSm();
 	}
 	
-	private boolean check_localEvents_r2_B_tr0_tr0() {
-		return sTART_C;
+	public void setCycleCountSm(long value) {
+		sCInterface.setCycleCountSm(value);
 	}
 	
-	private void effect_localEvents_r1_A_lr0_lr0() {
-		raiseSTART_B();
+	public long getCycleCount1() {
+		return sCInterface.getCycleCount1();
 	}
 	
-	private void effect_localEvents_r1_A_tr0() {
-		exitSequence_localEvents_r1_A();
-		enterSequence_localEvents_r1_C_default();
+	public void setCycleCount1(long value) {
+		sCInterface.setCycleCount1(value);
 	}
 	
-	private void effect_localEvents_r2_idle_tr0() {
-		exitSequence_localEvents_r2_idle();
-		enterSequence_localEvents_r2_B_default();
+	public long getCycleCount2() {
+		return sCInterface.getCycleCount2();
 	}
 	
-	private void effect_localEvents_r2_B_tr0() {
-		exitSequence_localEvents_r2_B();
-		enterSequence_localEvents_r2_D_default();
+	public void setCycleCount2(long value) {
+		sCInterface.setCycleCount2(value);
 	}
 	
-	/* Entry action for state 'B'. */
-	private void entryAction_localEvents_r2_B() {
-		raiseSTART_C();
+	public long getChecksum() {
+		return sCInterface.getChecksum();
 	}
 	
-	/* 'default' enter sequence for state A */
-	private void enterSequence_localEvents_r1_A_default() {
+	public void setChecksum(long value) {
+		sCInterface.setChecksum(value);
+	}
+	
+	private boolean check__lr0() {
+		return activate_c;
+	}
+	
+	private boolean check__lr1() {
+		return activate_d;
+	}
+	
+	private boolean check__lr2() {
+		return true;
+	}
+	
+	private boolean check_localEvents_r1_Comp1_lr0_lr0() {
+		return true;
+	}
+	
+	private boolean check_localEvents_r1_Comp1_r_A1_lr0_lr0() {
+		return sCInterface.e;
+	}
+	
+	private boolean check_localEvents_r1_Comp1_r_A1_tr0_tr0() {
+		return activate_c;
+	}
+	
+	private boolean check_localEvents_r1_Comp1_r_C1_tr0_tr0() {
+		return (activate_d) && (getActivate_dValue()==1);
+	}
+	
+	private boolean check_localEvents_r2_Comp2_lr0_lr0() {
+		return true;
+	}
+	
+	private boolean check_localEvents_r2_Comp2_r_A2_tr0_tr0() {
+		return activate_b;
+	}
+	
+	private boolean check_localEvents_r2_Comp2_r_B2_tr0_tr0() {
+		return activate_c;
+	}
+	
+	private boolean check_localEvents_r2_Comp2_r_C2_tr0_tr0() {
+		return (activate_d) && (getActivate_dValue()==2);
+	}
+	
+	private void effect__lr0() {
+		raiseActivate_d(1);
+	}
+	
+	private void effect__lr1() {
+		sCInterface.setChecksum(sCInterface.getChecksum() + (getActivate_dValue()));
+	}
+	
+	private void effect__lr2() {
+		sCInterface.setCycleCountSm(sCInterface.getCycleCountSm() + 1);
+	}
+	
+	private void effect_localEvents_r1_Comp1_lr0_lr0() {
+		sCInterface.setCycleCount1(sCInterface.getCycleCount1() + 1);
+	}
+	
+	private void effect_localEvents_r1_Comp1_r_A1_lr0_lr0() {
+		raiseActivate_b();
+	}
+	
+	private void effect_localEvents_r1_Comp1_r_A1_tr0() {
+		exitSequence_localEvents_r1_Comp1_r_A1();
+		enterSequence_localEvents_r1_Comp1_r_C1_default();
+	}
+	
+	private void effect_localEvents_r1_Comp1_r_C1_tr0() {
+		exitSequence_localEvents_r1_Comp1_r_C1();
+		raiseActivate_d(2);
+		
+		enterSequence_localEvents_r1_Comp1_r_D1_default();
+	}
+	
+	private void effect_localEvents_r2_Comp2_lr0_lr0() {
+		sCInterface.setCycleCount2(sCInterface.getCycleCount2() + 1);
+	}
+	
+	private void effect_localEvents_r2_Comp2_r_A2_tr0() {
+		exitSequence_localEvents_r2_Comp2_r_A2();
+		enterSequence_localEvents_r2_Comp2_r_B2_default();
+	}
+	
+	private void effect_localEvents_r2_Comp2_r_B2_tr0() {
+		exitSequence_localEvents_r2_Comp2_r_B2();
+		enterSequence_localEvents_r2_Comp2_r_C2_default();
+	}
+	
+	private void effect_localEvents_r2_Comp2_r_C2_tr0() {
+		exitSequence_localEvents_r2_Comp2_r_C2();
+		enterSequence_localEvents_r2_Comp2_r_D2_default();
+	}
+	
+	/* Entry action for state 'B2'. */
+	private void entryAction_localEvents_r2_Comp2_r_B2() {
+		raiseActivate_c();
+	}
+	
+	/* 'default' enter sequence for state A1 */
+	private void enterSequence_localEvents_r1_Comp1_r_A1_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.localEvents_r1_A;
+		stateVector[0] = State.localEvents_r1_Comp1_r_A1;
 	}
 	
-	/* 'default' enter sequence for state C */
-	private void enterSequence_localEvents_r1_C_default() {
+	/* 'default' enter sequence for state C1 */
+	private void enterSequence_localEvents_r1_Comp1_r_C1_default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.localEvents_r1_C;
+		stateVector[0] = State.localEvents_r1_Comp1_r_C1;
 	}
 	
-	/* 'default' enter sequence for state idle */
-	private void enterSequence_localEvents_r2_idle_default() {
-		nextStateIndex = 1;
-		stateVector[1] = State.localEvents_r2_idle;
+	/* 'default' enter sequence for state D1 */
+	private void enterSequence_localEvents_r1_Comp1_r_D1_default() {
+		nextStateIndex = 0;
+		stateVector[0] = State.localEvents_r1_Comp1_r_D1;
 	}
 	
-	/* 'default' enter sequence for state B */
-	private void enterSequence_localEvents_r2_B_default() {
-		entryAction_localEvents_r2_B();
+	/* 'default' enter sequence for state A2 */
+	private void enterSequence_localEvents_r2_Comp2_r_A2_default() {
 		nextStateIndex = 1;
-		stateVector[1] = State.localEvents_r2_B;
+		stateVector[1] = State.localEvents_r2_Comp2_r_A2;
 	}
 	
-	/* 'default' enter sequence for state D */
-	private void enterSequence_localEvents_r2_D_default() {
+	/* 'default' enter sequence for state B2 */
+	private void enterSequence_localEvents_r2_Comp2_r_B2_default() {
+		entryAction_localEvents_r2_Comp2_r_B2();
 		nextStateIndex = 1;
-		stateVector[1] = State.localEvents_r2_D;
+		stateVector[1] = State.localEvents_r2_Comp2_r_B2;
+	}
+	
+	/* 'default' enter sequence for state C2 */
+	private void enterSequence_localEvents_r2_Comp2_r_C2_default() {
+		nextStateIndex = 1;
+		stateVector[1] = State.localEvents_r2_Comp2_r_C2;
+	}
+	
+	/* 'default' enter sequence for state D2 */
+	private void enterSequence_localEvents_r2_Comp2_r_D2_default() {
+		nextStateIndex = 1;
+		stateVector[1] = State.localEvents_r2_Comp2_r_D2;
 	}
 	
 	/* 'default' enter sequence for region r1 */
@@ -230,32 +415,44 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		react_localEvents_r2__entry_Default();
 	}
 	
-	/* Default exit sequence for state A */
-	private void exitSequence_localEvents_r1_A() {
+	/* Default exit sequence for state A1 */
+	private void exitSequence_localEvents_r1_Comp1_r_A1() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
-	/* Default exit sequence for state C */
-	private void exitSequence_localEvents_r1_C() {
+	/* Default exit sequence for state C1 */
+	private void exitSequence_localEvents_r1_Comp1_r_C1() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 	
-	/* Default exit sequence for state idle */
-	private void exitSequence_localEvents_r2_idle() {
+	/* Default exit sequence for state D1 */
+	private void exitSequence_localEvents_r1_Comp1_r_D1() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+	
+	/* Default exit sequence for state A2 */
+	private void exitSequence_localEvents_r2_Comp2_r_A2() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 	
-	/* Default exit sequence for state B */
-	private void exitSequence_localEvents_r2_B() {
+	/* Default exit sequence for state B2 */
+	private void exitSequence_localEvents_r2_Comp2_r_B2() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 	
-	/* Default exit sequence for state D */
-	private void exitSequence_localEvents_r2_D() {
+	/* Default exit sequence for state C2 */
+	private void exitSequence_localEvents_r2_Comp2_r_C2() {
+		nextStateIndex = 1;
+		stateVector[1] = State.$NullState$;
+	}
+	
+	/* Default exit sequence for state D2 */
+	private void exitSequence_localEvents_r2_Comp2_r_D2() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
@@ -263,11 +460,31 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	/* Default exit sequence for region r1 */
 	private void exitSequence_localEvents_r1() {
 		switch (stateVector[0]) {
-		case localEvents_r1_A:
-			exitSequence_localEvents_r1_A();
+		case localEvents_r1_Comp1_r_A1:
+			exitSequence_localEvents_r1_Comp1_r_A1();
 			break;
-		case localEvents_r1_C:
-			exitSequence_localEvents_r1_C();
+		case localEvents_r1_Comp1_r_C1:
+			exitSequence_localEvents_r1_Comp1_r_C1();
+			break;
+		case localEvents_r1_Comp1_r_D1:
+			exitSequence_localEvents_r1_Comp1_r_D1();
+			break;
+		default:
+			break;
+		}
+	}
+	
+	/* Default exit sequence for region r */
+	private void exitSequence_localEvents_r1_Comp1_r() {
+		switch (stateVector[0]) {
+		case localEvents_r1_Comp1_r_A1:
+			exitSequence_localEvents_r1_Comp1_r_A1();
+			break;
+		case localEvents_r1_Comp1_r_C1:
+			exitSequence_localEvents_r1_Comp1_r_C1();
+			break;
+		case localEvents_r1_Comp1_r_D1:
+			exitSequence_localEvents_r1_Comp1_r_D1();
 			break;
 		default:
 			break;
@@ -277,61 +494,126 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	/* Default exit sequence for region r2 */
 	private void exitSequence_localEvents_r2() {
 		switch (stateVector[1]) {
-		case localEvents_r2_idle:
-			exitSequence_localEvents_r2_idle();
+		case localEvents_r2_Comp2_r_A2:
+			exitSequence_localEvents_r2_Comp2_r_A2();
 			break;
-		case localEvents_r2_B:
-			exitSequence_localEvents_r2_B();
+		case localEvents_r2_Comp2_r_B2:
+			exitSequence_localEvents_r2_Comp2_r_B2();
 			break;
-		case localEvents_r2_D:
-			exitSequence_localEvents_r2_D();
+		case localEvents_r2_Comp2_r_C2:
+			exitSequence_localEvents_r2_Comp2_r_C2();
+			break;
+		case localEvents_r2_Comp2_r_D2:
+			exitSequence_localEvents_r2_Comp2_r_D2();
 			break;
 		default:
 			break;
 		}
 	}
 	
-	/* The reactions of state A. */
-	private void react_localEvents_r1_A() {
-		if (check_localEvents_r1_A_tr0_tr0()) {
-			effect_localEvents_r1_A_tr0();
+	/* Default exit sequence for region r */
+	private void exitSequence_localEvents_r2_Comp2_r() {
+		switch (stateVector[1]) {
+		case localEvents_r2_Comp2_r_A2:
+			exitSequence_localEvents_r2_Comp2_r_A2();
+			break;
+		case localEvents_r2_Comp2_r_B2:
+			exitSequence_localEvents_r2_Comp2_r_B2();
+			break;
+		case localEvents_r2_Comp2_r_C2:
+			exitSequence_localEvents_r2_Comp2_r_C2();
+			break;
+		case localEvents_r2_Comp2_r_D2:
+			exitSequence_localEvents_r2_Comp2_r_D2();
+			break;
+		default:
+			break;
+		}
+	}
+	
+	/* The reactions of state A1. */
+	private void react_localEvents_r1_Comp1_r_A1() {
+		if (check__lr0()) {
+			effect__lr0();
+		}
+		if (check__lr1()) {
+			effect__lr1();
+		}
+		effect__lr2();
+		effect_localEvents_r1_Comp1_lr0_lr0();
+		if (check_localEvents_r1_Comp1_r_A1_tr0_tr0()) {
+			effect_localEvents_r1_Comp1_r_A1_tr0();
 		} else {
-			if (check_localEvents_r1_A_lr0_lr0()) {
-				effect_localEvents_r1_A_lr0_lr0();
+			if (check_localEvents_r1_Comp1_r_A1_lr0_lr0()) {
+				effect_localEvents_r1_Comp1_r_A1_lr0_lr0();
 			}
 		}
 	}
 	
-	/* The reactions of state C. */
-	private void react_localEvents_r1_C() {
-	}
-	
-	/* The reactions of state idle. */
-	private void react_localEvents_r2_idle() {
-		if (check_localEvents_r2_idle_tr0_tr0()) {
-			effect_localEvents_r2_idle_tr0();
+	/* The reactions of state C1. */
+	private void react_localEvents_r1_Comp1_r_C1() {
+		if (check__lr0()) {
+			effect__lr0();
+		}
+		if (check__lr1()) {
+			effect__lr1();
+		}
+		effect__lr2();
+		effect_localEvents_r1_Comp1_lr0_lr0();
+		if (check_localEvents_r1_Comp1_r_C1_tr0_tr0()) {
+			effect_localEvents_r1_Comp1_r_C1_tr0();
 		}
 	}
 	
-	/* The reactions of state B. */
-	private void react_localEvents_r2_B() {
-		if (check_localEvents_r2_B_tr0_tr0()) {
-			effect_localEvents_r2_B_tr0();
+	/* The reactions of state D1. */
+	private void react_localEvents_r1_Comp1_r_D1() {
+		if (check__lr0()) {
+			effect__lr0();
+		}
+		if (check__lr1()) {
+			effect__lr1();
+		}
+		effect__lr2();
+		effect_localEvents_r1_Comp1_lr0_lr0();
+	}
+	
+	/* The reactions of state A2. */
+	private void react_localEvents_r2_Comp2_r_A2() {
+		effect_localEvents_r2_Comp2_lr0_lr0();
+		if (check_localEvents_r2_Comp2_r_A2_tr0_tr0()) {
+			effect_localEvents_r2_Comp2_r_A2_tr0();
 		}
 	}
 	
-	/* The reactions of state D. */
-	private void react_localEvents_r2_D() {
+	/* The reactions of state B2. */
+	private void react_localEvents_r2_Comp2_r_B2() {
+		effect_localEvents_r2_Comp2_lr0_lr0();
+		if (check_localEvents_r2_Comp2_r_B2_tr0_tr0()) {
+			effect_localEvents_r2_Comp2_r_B2_tr0();
+		}
+	}
+	
+	/* The reactions of state C2. */
+	private void react_localEvents_r2_Comp2_r_C2() {
+		effect_localEvents_r2_Comp2_lr0_lr0();
+		if (check_localEvents_r2_Comp2_r_C2_tr0_tr0()) {
+			effect_localEvents_r2_Comp2_r_C2_tr0();
+		}
+	}
+	
+	/* The reactions of state D2. */
+	private void react_localEvents_r2_Comp2_r_D2() {
+		effect_localEvents_r2_Comp2_lr0_lr0();
 	}
 	
 	/* Default react sequence for initial entry  */
 	private void react_localEvents_r1__entry_Default() {
-		enterSequence_localEvents_r1_A_default();
+		enterSequence_localEvents_r1_Comp1_r_A1_default();
 	}
 	
 	/* Default react sequence for initial entry  */
 	private void react_localEvents_r2__entry_Default() {
-		enterSequence_localEvents_r2_idle_default();
+		enterSequence_localEvents_r2_Comp2_r_A2_default();
 	}
 	
 	public void runCycle() {
@@ -354,20 +636,26 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	protected void singleCycle() {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case localEvents_r1_A:
-				react_localEvents_r1_A();
+			case localEvents_r1_Comp1_r_A1:
+				react_localEvents_r1_Comp1_r_A1();
 				break;
-			case localEvents_r1_C:
-				react_localEvents_r1_C();
+			case localEvents_r1_Comp1_r_C1:
+				react_localEvents_r1_Comp1_r_C1();
 				break;
-			case localEvents_r2_idle:
-				react_localEvents_r2_idle();
+			case localEvents_r1_Comp1_r_D1:
+				react_localEvents_r1_Comp1_r_D1();
 				break;
-			case localEvents_r2_B:
-				react_localEvents_r2_B();
+			case localEvents_r2_Comp2_r_A2:
+				react_localEvents_r2_Comp2_r_A2();
 				break;
-			case localEvents_r2_D:
-				react_localEvents_r2_D();
+			case localEvents_r2_Comp2_r_B2:
+				react_localEvents_r2_Comp2_r_B2();
+				break;
+			case localEvents_r2_Comp2_r_C2:
+				react_localEvents_r2_Comp2_r_C2();
+				break;
+			case localEvents_r2_Comp2_r_D2:
+				react_localEvents_r2_Comp2_r_D2();
 				break;
 			default:
 				// $NullState$

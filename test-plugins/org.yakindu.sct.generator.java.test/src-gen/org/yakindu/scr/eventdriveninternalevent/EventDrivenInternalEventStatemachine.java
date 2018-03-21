@@ -79,7 +79,6 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	private boolean i1;
 	
 	private boolean i2;
-	
 	public EventDrivenInternalEventStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}

@@ -32,11 +32,15 @@ public class LocalEvents {
 	@Test
 	public void test() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.localEvents_r1_A));
-		assertTrue(statemachine.isStateActive(State.localEvents_r2_idle));
-		statemachine.getSCInterface().raiseBUTTON_ON();
-		assertTrue(statemachine.isStateActive(State.localEvents_r1_C));
-		assertTrue(statemachine.isStateActive(State.localEvents_r2_D));
+		assertTrue(statemachine.isStateActive(State.localEvents_r1_Comp1_r_A1));
+		assertTrue(statemachine.isStateActive(State.localEvents_r2_Comp2_r_A2));
+		statemachine.getSCInterface().raiseE();
+		assertTrue(statemachine.isStateActive(State.localEvents_r1_Comp1_r_D1));
+		assertTrue(statemachine.isStateActive(State.localEvents_r2_Comp2_r_D2));
+		assertTrue(statemachine.getCycleCountSm() == 5l);
+		assertTrue(statemachine.getCycleCount1() == 5l);
+		assertTrue(statemachine.getCycleCount2() == 5l);
+		assertTrue(statemachine.getChecksum() == 3l);
 		statemachine.exit();
 	}
 }

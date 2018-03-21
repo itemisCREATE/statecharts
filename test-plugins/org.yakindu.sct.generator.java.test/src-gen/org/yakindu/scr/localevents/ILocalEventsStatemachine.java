@@ -6,7 +6,23 @@ public interface ILocalEventsStatemachine extends IStatemachine {
 
 	public interface SCInterface {
 	
-		public void raiseBUTTON_ON();
+		public void raiseE();
+		
+		public long getCycleCountSm();
+		
+		public void setCycleCountSm(long value);
+		
+		public long getCycleCount1();
+		
+		public void setCycleCount1(long value);
+		
+		public long getCycleCount2();
+		
+		public void setCycleCount2(long value);
+		
+		public long getChecksum();
+		
+		public void setChecksum(long value);
 		
 	}
 	

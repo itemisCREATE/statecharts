@@ -4,14 +4,19 @@ testclass LocalEvents for statechart eventdriven.localEvents {
 	operation test() {
 		enter
 		
-		assert active(eventdriven.localEvents.r1.A)
-		assert active(eventdriven.localEvents.r2.idle)
+		assert active(eventdriven.localEvents.r1.Comp1.r.A1)
+		assert active(eventdriven.localEvents.r2.Comp2.r.A2)
 		
-		raise BUTTON_ON
+		raise e
 		
-		assert active(eventdriven.localEvents.r1.C)
-		assert active(eventdriven.localEvents.r2.D)
-		
+		assert active(eventdriven.localEvents.r1.Comp1.r.D1)
+		assert active(eventdriven.localEvents.r2.Comp2.r.D2)
+
+		assert cycleCountSm == 5
+		assert cycleCount1 == 5
+		assert cycleCount2 == 5
+		assert checksum == 3
+
 		exit
 	}
 }

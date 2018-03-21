@@ -53,7 +53,6 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 	
 	private int nextStateIndex;
 	
-	
 	public ConstOnlyNamedScopeStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 		sCIA = new SCIAImpl();

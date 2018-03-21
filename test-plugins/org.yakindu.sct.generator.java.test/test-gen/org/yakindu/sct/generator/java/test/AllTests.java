@@ -50,7 +50,6 @@ import org.junit.runners.Suite.SuiteClasses;
 	LocalReactions.class,
 	LogicalAndTests.class,
 	LogicalOrTests.class,
-	LocalEvents.class,
 	NamedInterfaceAccess.class,
 	OperationsTest.class,
 	OutEventLifeCycle.class,
