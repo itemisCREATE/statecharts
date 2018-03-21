@@ -33,6 +33,7 @@ import org.yakindu.sct.model.sexec.If
 import org.yakindu.sct.model.sexec.SaveHistory
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent
 import org.yakindu.sct.model.sexec.Sequence
+import org.yakindu.sct.model.sexec.SexecFactory
 import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.Trace
@@ -41,14 +42,12 @@ import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.RegularState
-import org.yakindu.sct.model.sruntime.EventDirection
 import org.yakindu.sct.model.sruntime.ExecutionContext
 import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.TimeTask
 import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
-import org.yakindu.sct.model.sexec.SexecFactory
 
 /**
  * 
@@ -183,7 +182,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	def protected clearLocalAndInEvents(ExecutionContext executionContext) {
-		executionContext.allEvents.filter[direction == EventDirection.IN || direction == EventDirection.LOCAL].forEach [
+		executionContext.allEvents.filter[direction == Direction.IN || direction == Direction.LOCAL].forEach [
 			if (raised) {
 				raised = false;
 				value = if(type !== null) type.defaultValue else null

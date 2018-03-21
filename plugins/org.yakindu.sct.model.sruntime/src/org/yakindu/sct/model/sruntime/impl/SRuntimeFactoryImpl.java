@@ -78,8 +78,6 @@ public class SRuntimeFactoryImpl extends EFactoryImpl implements SRuntimeFactory
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case SRuntimePackage.EVENT_DIRECTION:
-				return createEventDirectionFromString(eDataType, initialValue);
 			case SRuntimePackage.JAVA_OBJECT:
 				return createJavaObjectFromString(eDataType, initialValue);
 			default:
@@ -94,8 +92,6 @@ public class SRuntimeFactoryImpl extends EFactoryImpl implements SRuntimeFactory
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case SRuntimePackage.EVENT_DIRECTION:
-				return convertEventDirectionToString(eDataType, instanceValue);
 			case SRuntimePackage.JAVA_OBJECT:
 				return convertJavaObjectToString(eDataType, instanceValue);
 			default:
@@ -157,24 +153,6 @@ public class SRuntimeFactoryImpl extends EFactoryImpl implements SRuntimeFactory
 	public ExecutionOperation createExecutionOperation() {
 		ExecutionOperationImpl executionOperation = new ExecutionOperationImpl();
 		return executionOperation;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EventDirection createEventDirectionFromString(EDataType eDataType, String initialValue) {
-		EventDirection result = EventDirection.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertEventDirectionToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

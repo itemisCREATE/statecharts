@@ -1,63 +1,60 @@
-package org.yakindu.scr.variadicfunctions;
+package org.yakindu.scr.eventdrivenoutevents;
 
-public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemachine {
+public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsStatemachine {
 
 	protected class SCInterfaceImpl implements SCInterface {
 	
-		private SCInterfaceOperationCallback operationCallback;
+		private boolean e1;
 		
-		public void setSCInterfaceOperationCallback(
-				SCInterfaceOperationCallback operationCallback) {
-			this.operationCallback = operationCallback;
+		public void raiseE1() {
+			e1 = true;
+			runCycle();
 		}
+		
+		private boolean e2;
+		
+		public boolean isRaisedE2() {
+			return e2;
+		}
+		
+		protected void raiseE2() {
+			e2 = true;
+		}
+		
+		protected void clearEvents() {
+			e1 = false;
+		}
+		protected void clearOutEvents() {
+		
+		e2 = false;
+		}
+		
 	}
 	
 	protected SCInterfaceImpl sCInterface;
-	
-	protected class SCIIF2Impl implements SCIIF2 {
-	
-		private SCIIF2OperationCallback operationCallback;
-		
-		public void setSCIIF2OperationCallback(
-				SCIIF2OperationCallback operationCallback) {
-			this.operationCallback = operationCallback;
-		}
-	}
-	
-	protected SCIIF2Impl sCIIF2;
 	
 	private boolean initialized = false;
 	
 	public enum State {
 		main_region_StateA,
 		main_region_StateB,
+		second_region_StateC,
+		second_region_StateD,
 		$NullState$
 	};
 	
-	private final State[] stateVector = new State[1];
+	private final State[] stateVector = new State[2];
 	
 	private int nextStateIndex;
 	
-	private InternalOperationCallback operationCallback;
-	public VariadicFunctionsStatemachine() {
+	
+	public EventDrivenOutEventsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
-		sCIIF2 = new SCIIF2Impl();
 	}
 	
 	public void init() {
 		this.initialized = true;
-		if (this.operationCallback == null) {
-			throw new IllegalStateException("Operation callback for internal must be set.");	
-		}
-		if (this.sCInterface.operationCallback == null) {
-			throw new IllegalStateException("Operation callback for interface sCInterface must be set.");
-		}
-		
-		if (this.sCIIF2.operationCallback == null) {
-			throw new IllegalStateException("Operation callback for interface sCIIF2 must be set.");
-		}
-		
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
 		clearEvents();
@@ -70,17 +67,19 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 					"The state machine needs to be initialized first by calling the init() function.");
 		}
 		enterSequence_main_region_default();
+		enterSequence_second_region_default();
 	}
 	
 	public void exit() {
 		exitSequence_main_region();
+		exitSequence_second_region();
 	}
 	
 	/**
 	 * @see IStatemachine#isActive()
 	 */
 	public boolean isActive() {
-		return stateVector[0] != State.$NullState$;
+		return stateVector[0] != State.$NullState$||stateVector[1] != State.$NullState$;
 	}
 	
 	/** 
@@ -95,12 +94,14 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 	* This method resets the incoming events (time events included).
 	*/
 	protected void clearEvents() {
+		sCInterface.clearEvents();
 	}
 	
 	/**
 	* This method resets the outgoing events.
 	*/
 	protected void clearOutEvents() {
+		sCInterface.clearOutEvents();
 	}
 	
 	/**
@@ -113,6 +114,10 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 			return stateVector[0] == State.main_region_StateA;
 		case main_region_StateB:
 			return stateVector[0] == State.main_region_StateB;
+		case second_region_StateC:
+			return stateVector[1] == State.second_region_StateC;
+		case second_region_StateD:
+			return stateVector[1] == State.second_region_StateD;
 		default:
 			return false;
 		}
@@ -122,47 +127,39 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 		return sCInterface;
 	}
 	
-	public SCIIF2 getSCIIF2() {
-		return sCIIF2;
+	public void raiseE1() {
+		sCInterface.raiseE1();
 	}
 	
-	public void setInternalOperationCallback(
-			InternalOperationCallback operationCallback) {
-		this.operationCallback = operationCallback;
+	public boolean isRaisedE2() {
+		return sCInterface.isRaisedE2();
 	}
 	
 	private boolean check_main_region_StateA_tr0_tr0() {
-		return true;
+		return sCInterface.e1;
+	}
+	
+	private boolean check_second_region_StateC_tr0_tr0() {
+		return sCInterface.e2;
 	}
 	
 	private void effect_main_region_StateA_tr0() {
 		exitSequence_main_region_StateA();
-		operationCallback.myInternalVarOperation(0.0, 0.2);
-		
 		enterSequence_main_region_StateB_default();
 	}
 	
-	/* Entry action for state 'StateA'. */
-	private void entryAction_main_region_StateA() {
-		sCInterface.operationCallback.myVarOperation();
-		
-		sCInterface.operationCallback.myVarOperation("one");
-		
-		sCInterface.operationCallback.myVarOperation("one", "two", "three");
+	private void effect_second_region_StateC_tr0() {
+		exitSequence_second_region_StateC();
+		enterSequence_second_region_StateD_default();
 	}
 	
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
-		sCIIF2.operationCallback.myVarOperation2(1);
-		
-		sCIIF2.operationCallback.myVarOperation2(1, 2);
-		
-		sCIIF2.operationCallback.myVarOperation2(1, 2, 3, 4);
+		sCInterface.raiseE2();
 	}
 	
 	/* 'default' enter sequence for state StateA */
 	private void enterSequence_main_region_StateA_default() {
-		entryAction_main_region_StateA();
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_StateA;
 	}
@@ -174,9 +171,26 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 		stateVector[0] = State.main_region_StateB;
 	}
 	
+	/* 'default' enter sequence for state StateC */
+	private void enterSequence_second_region_StateC_default() {
+		nextStateIndex = 1;
+		stateVector[1] = State.second_region_StateC;
+	}
+	
+	/* 'default' enter sequence for state StateD */
+	private void enterSequence_second_region_StateD_default() {
+		nextStateIndex = 1;
+		stateVector[1] = State.second_region_StateD;
+	}
+	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
 		react_main_region__entry_Default();
+	}
+	
+	/* 'default' enter sequence for region second region */
+	private void enterSequence_second_region_default() {
+		react_second_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state StateA */
@@ -189,6 +203,18 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 	private void exitSequence_main_region_StateB() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
+	}
+	
+	/* Default exit sequence for state StateC */
+	private void exitSequence_second_region_StateC() {
+		nextStateIndex = 1;
+		stateVector[1] = State.$NullState$;
+	}
+	
+	/* Default exit sequence for state StateD */
+	private void exitSequence_second_region_StateD() {
+		nextStateIndex = 1;
+		stateVector[1] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for region main region */
@@ -205,13 +231,40 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 		}
 	}
 	
+	/* Default exit sequence for region second region */
+	private void exitSequence_second_region() {
+		switch (stateVector[1]) {
+		case second_region_StateC:
+			exitSequence_second_region_StateC();
+			break;
+		case second_region_StateD:
+			exitSequence_second_region_StateD();
+			break;
+		default:
+			break;
+		}
+	}
+	
 	/* The reactions of state StateA. */
 	private void react_main_region_StateA() {
-		effect_main_region_StateA_tr0();
+		if (check_main_region_StateA_tr0_tr0()) {
+			effect_main_region_StateA_tr0();
+		}
 	}
 	
 	/* The reactions of state StateB. */
 	private void react_main_region_StateB() {
+	}
+	
+	/* The reactions of state StateC. */
+	private void react_second_region_StateC() {
+		if (check_second_region_StateC_tr0_tr0()) {
+			effect_second_region_StateC_tr0();
+		}
+	}
+	
+	/* The reactions of state StateD. */
+	private void react_second_region_StateD() {
 	}
 	
 	/* Default react sequence for initial entry  */
@@ -219,11 +272,23 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 		enterSequence_main_region_StateA_default();
 	}
 	
+	/* Default react sequence for initial entry  */
+	private void react_second_region__entry_Default() {
+		enterSequence_second_region_StateC_default();
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
+	
 		clearOutEvents();
+		singleCycle();
+		clearEvents();
+		
+	}
+	
+	protected void singleCycle() {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_StateA:
@@ -232,10 +297,15 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 			case main_region_StateB:
 				react_main_region_StateB();
 				break;
+			case second_region_StateC:
+				react_second_region_StateC();
+				break;
+			case second_region_StateD:
+				react_second_region_StateD();
+				break;
 			default:
 				// $NullState$
 			}
 		}
-		clearEvents();
 	}
 }

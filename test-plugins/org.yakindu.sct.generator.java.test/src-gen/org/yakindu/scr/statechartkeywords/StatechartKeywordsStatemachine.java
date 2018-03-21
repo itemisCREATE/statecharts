@@ -124,7 +124,6 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	private boolean operationCallbackEvent;
 	
 	private boolean listeners;
-	
 	private long timerVariable;
 	
 	protected void setTimerVariable(long value) {
@@ -198,7 +197,6 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		if (this.operationCallback == null) {
 			throw new IllegalStateException("Operation callback for internal must be set.");	
 		}
-		
 		if (this.sCIIf.operationCallback == null) {
 			throw new IllegalStateException("Operation callback for interface sCIIf must be set.");
 		}
@@ -239,7 +237,6 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
-	
 		entryAction();
 		enterSequence_main_region_default();
 	}
@@ -328,9 +325,11 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		operationCallbackEvent = true;
 	}
 	
+	
 	private void raiseListeners() {
 		listeners = true;
 	}
+	
 	
 	public void setInternalOperationCallback(
 			InternalOperationCallback operationCallback) {

@@ -45,7 +45,6 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	
 	private final boolean[] timeEvents = new boolean[2];
 	
-	
 	public EventDrivenTriggeredByTimeEventStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
