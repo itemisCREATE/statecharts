@@ -48,7 +48,6 @@ import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.TimeTask
 import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
-import org.yakindu.sct.simulation.core.sexec.container.EventDrivenSimulationEngine.EventDrivenCycleAdapter
 
 /**
  * 
@@ -153,10 +152,6 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	override runCycle() {
-		val cycleAdapter = EcoreUtil.getExistingAdapter(executionContext, EventDrivenCycleAdapter) as EventDrivenCycleAdapter
-		try {
-			if(cycleAdapter !== null )
-				executionContext.eAdapters.remove(cycleAdapter)
 		var Event event = null
 		do {
 			traceInterpreter.evaluate(beginRunCycleTrace, executionContext)
@@ -172,14 +167,9 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			if(! internalEventQueue.empty) event = internalEventQueue.poll
 			traceInterpreter.evaluate(endRunCycleTrace, executionContext)
 		} while (event !== null)
-		}finally{
-			if(cycleAdapter !== null)
-				executionContext.eAdapters.add(cycleAdapter)
-		}
 	}
 
 	def rtcStep() {
-		
 		activeStateIndex = 0
 		if(executionContext.executedElements.size > 0) executionContext.executedElements.clear
 		executionContext.clearOutEvents
