@@ -39,7 +39,6 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 	
 	private int nextStateIndex;
 	
-	
 	protected long getB() {
 		return b;
 	}
