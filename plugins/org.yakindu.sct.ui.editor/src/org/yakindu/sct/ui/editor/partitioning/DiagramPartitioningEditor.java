@@ -309,6 +309,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 				"org.eclipse.tptp.platform.analysis.core.ui.internal.actions.MultiAnalysisActionDelegate",
 				"org.eclipse.debug.ui.contextualLaunch.debug.submenu",
 				"org.eclipse.debug.ui.contextualLaunch.profile.submenu",
+				"org.eclipse.cdt.ui.buildConfigContributionM",
 				"org.eclipse.mylyn.resources.ui.ui.interest.remove.element", "formatMenu", "filtersMenu", "addGroup",
 				"navigateGroup", "toolbarArrangeAllAction", "selectMenu", "diagramAddMenu", "navigateMenu", "viewGroup",
 				"viewMenu"};
