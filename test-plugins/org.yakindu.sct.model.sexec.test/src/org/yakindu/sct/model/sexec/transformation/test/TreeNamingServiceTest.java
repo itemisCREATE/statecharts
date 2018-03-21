@@ -146,7 +146,7 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 	}
 
 	@Test
-	public void statechartTest1() {
+	public void statechartNamingBaseTest() {
 		Statechart toTest = getNamingServiceStatechart();
 
 		List<String> names = new ArrayList<>();
@@ -176,16 +176,21 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 		stringListsEqual(expectedNames, names);
 	}
 
+	/*
+	 * This test will fail if any details of the naming algorithm are changed.
+	 * It is safe to change these names to the new ones if the changes were
+	 * expected.
+	 */
 	@Test
-	public void statechartTest2() {
+	public void statechartNamingRegressionTest() {
 		Statechart toTest = getNamingServiceStatechart();
 
 		List<String> names = new ArrayList<>();
 
 		// these names are shorter than 15 characters because there are more
 		// elements containing these names, e.g. state actions
-		List<String> expectedNames = new ArrayList<>(Arrays.asList("mrgn_StA", "mrgn_StteB", "s_SA", "t_SA",
-				"t_SA_AR_SA", "t_SA_AR_StB", "s_SA_AR_SA", "s_SA_AR_StB"));
+		List<String> expectedNames = new ArrayList<>(Arrays.asList("mgn_SA", "mgn_StteB", "s_SA", "t_SA", "t_SA_AR_SA",
+				"t_SA_AR_StB", "s_SA_AR_SA", "s_SA_AR_StB"));
 
 		ExecutionFlow flow = optimizer.transform(sequencer.transform(toTest));
 
