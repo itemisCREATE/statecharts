@@ -101,7 +101,7 @@ class EventDrivenStatemachine extends Statemachine {
 				@Override public void run() {
 					«IF hasPayload»«valueIdentifier» = value;«ENDIF»
 					«identifier» = true;					
-					runCycle();
+					singleCycle();
 				}
 			});
 		}
@@ -121,7 +121,6 @@ class EventDrivenStatemachine extends Statemachine {
 			// process queued events
 			while (internalEventQueue.size() > 0) {
 				internalEventQueue.poll().run();
-				singleCycle();
 				clearEvents();
 			}
 			«ENDIF»
@@ -147,6 +146,5 @@ class EventDrivenStatemachine extends Statemachine {
 			}
 		}
 	'''
-	
 
 }

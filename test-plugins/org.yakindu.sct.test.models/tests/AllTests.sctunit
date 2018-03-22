@@ -43,7 +43,7 @@ testsuite AllTests {
 	LocalReactions,
 	LogicalAndTests, 
 	LogicalOrTests,
-//	LocalEvents,
+	LocalEvents,
 	NamedInterfaceAccess,
 	OperationsTest,
 //	OperationsWithoutBraces,

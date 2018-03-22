@@ -192,7 +192,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		internalEventQueue.add( new Runnable() {
 			@Override public void run() {
 				activate_b = true;					
-				runCycle();
+				singleCycle();
 			}
 		});
 	}
@@ -203,7 +203,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		internalEventQueue.add( new Runnable() {
 			@Override public void run() {
 				activate_c = true;					
-				runCycle();
+				singleCycle();
 			}
 		});
 	}
@@ -215,7 +215,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 			@Override public void run() {
 				activate_dValue = value;
 				activate_d = true;					
-				runCycle();
+				singleCycle();
 			}
 		});
 	}
@@ -628,7 +628,6 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		// process queued events
 		while (internalEventQueue.size() > 0) {
 			internalEventQueue.poll().run();
-			singleCycle();
 			clearEvents();
 		}
 	}
