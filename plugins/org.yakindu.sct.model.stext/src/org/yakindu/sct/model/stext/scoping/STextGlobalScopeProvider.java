@@ -39,6 +39,7 @@ import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.base.types.resource.TypedResourceDescriptionStrategy;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
@@ -100,7 +101,10 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 			}
 		});
 		result = filterAnnotations(reference, result);
-		return result;
+		return new FilteringScope(result, input -> {
+			String isVisible = input.getUserData(TypedResourceDescriptionStrategy.IS_VISIBLE_TYPE);
+			return isVisible == null || Boolean.valueOf(isVisible);
+		});
 	}
 
 	protected IScope filterAnnotations(EReference reference, IScope result) {
