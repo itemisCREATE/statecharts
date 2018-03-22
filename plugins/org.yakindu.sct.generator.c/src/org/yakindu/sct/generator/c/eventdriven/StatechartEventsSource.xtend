@@ -11,6 +11,7 @@
 package org.yakindu.sct.generator.c.eventdriven
 
 import com.google.inject.Inject
+import org.yakindu.sct.generator.c.extensions.EventNaming
 import org.yakindu.sct.generator.c.extensions.Navigation
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
