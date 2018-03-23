@@ -60,7 +60,7 @@ public class CoreLibraryDefaultFeatureValueProvider extends AbstractDefaultFeatu
 			return error(String.format("The Project %s does not exist.", parameterValue.getStringValue()));
 		if (OUTLET_FEATURE_TARGET_PROJECT.equals(parameterName) && access.projectExists(parameterValue.getStringValue())
 				&& !access.projectOpened(parameterValue.getStringValue()))
-			return error(String.format("The Project %s is not open.", parameterValue.getExpression()));
+			return error(String.format("The Project %s is not open.", parameterValue.getStringValue()));
 		if (OUTLET_FEATURE_TARGET_FOLDER.equals(parameterName)
 				|| OUTLET_FEATURE_LIBRARY_TARGET_FOLDER.equals(parameterName)
 				|| OUTLET_FEATURE_API_TARGET_FOLDER.equals(parameterName)) {
