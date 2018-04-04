@@ -272,7 +272,10 @@ public class OperationImpl extends DeclarationImpl implements Operation {
 	
 	@Override
 	public String getId() {
-		StringBuilder builder = new StringBuilder(super.getId());
+		String superId = super.getId();
+		if(superId == null)
+			return null;
+		StringBuilder builder = new StringBuilder(superId);
 		EList<Parameter> parameters = getParameters();
 		for (Parameter parameter : parameters) {
 			if(parameter.getType() == null || parameter.getType().getName() == null)
