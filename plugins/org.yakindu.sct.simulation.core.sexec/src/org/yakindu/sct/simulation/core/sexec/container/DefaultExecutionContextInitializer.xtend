@@ -19,6 +19,7 @@ import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.ITypeSystem
@@ -30,7 +31,6 @@ import org.yakindu.sct.model.sgraph.ImportDeclaration
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sruntime.CompositeSlot
-import org.yakindu.sct.model.sruntime.EventDirection
 import org.yakindu.sct.model.sruntime.ExecutionContext
 import org.yakindu.sct.model.sruntime.ExecutionSlot
 import org.yakindu.sct.model.sruntime.SRuntimeFactory
@@ -93,8 +93,9 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 			val pkg = EcoreUtil2.getContainerOfType(decl, Package)
 			if (pkg !== null) {
 				val namespace = pkg.name
+				val pkgHeader = pkg.fullyQualifiedName.lastSegment
 				val declName = decl.name
-				val slot = composite.slots.getSlotFor(namespace)
+				val slot = composite.slots.getSlotFor(pkgHeader)
 				val declarationSlot = decl.transform
 				declarationSlot.setFqName(namespace + "." + declName)
 				declarationSlot.setName(declName)
@@ -166,7 +167,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 			fqName = event.fullyQualifiedName.toString
 			type = event.type
 			value = it.type?.defaultValue
-			direction = EventDirection.get(event.direction.value)
+			direction = Direction.get(event.direction.value)
 		]
 	}
 

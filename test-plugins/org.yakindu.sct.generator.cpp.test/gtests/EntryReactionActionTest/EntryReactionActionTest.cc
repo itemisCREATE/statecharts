@@ -5,15 +5,18 @@
 #include "sc_runner.h"
 #include "sc_types.h"
 
+namespace  {
 
 
-static EntryReactionAction* statechart;
 
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class EntryReactionActionTest : public ::testing::Test{
 	protected:
+	
+	EntryReactionAction* statechart;
+	
 	virtual void SetUp() {
 		statechart = new EntryReactionAction();
 		statechart->init();
@@ -27,74 +30,81 @@ class EntryReactionActionTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	virtual void init() {
+		
+		statechart->enter();
+		
+		statechart->getDefaultSCI()->raise_b();
+		
+		runner->proceed_cycles(1);
+		
+		statechart->getDefaultSCI()->raise_d();
+		
+		runner->proceed_cycles(1);
+		
+		statechart->getDefaultSCI()->set_enteredR1(false);
+		
+		statechart->getDefaultSCI()->set_enteredR2(false);
+		
+		statechart->getDefaultSCI()->set_enteredBdefault(false);
+		
+		statechart->getDefaultSCI()->set_enteredBother(false);
+		
+		
+	}
+	
 };
 
-void init(){
-	
-	statechart->enter();
-	
-	statechart->getDefaultSCI()->raise_b();
-	
-	runner->proceed_cycles(1);
-	
-	statechart->getDefaultSCI()->raise_d();
-	
-	runner->proceed_cycles(1);
-	
-	statechart->getDefaultSCI()->set_enteredR1(false);
-	
-	statechart->getDefaultSCI()->set_enteredR2(false);
-	
-	statechart->getDefaultSCI()->set_enteredBdefault(false);
-	
-	statechart->getDefaultSCI()->set_enteredBother(false);
-	
+	TEST_F(EntryReactionActionTest, entryTransitionActionOnStatechartEnter) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_enteredR1());
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_enteredR2());
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_enteredBdefault());
+		
+		EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredBother());
+		
+		
+}
+	TEST_F(EntryReactionActionTest, entryOnRTS) {
+		
+		init();
+		
+		statechart->getDefaultSCI()->raise_b();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredR1());
+		
+		EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredR2());
+		
+		EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredBdefault());
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_enteredBother());
+		
+		
+}
+	TEST_F(EntryReactionActionTest, noEntryTransitionActionOnHistory) {
+		
+		init();
+		
+		statechart->getDefaultSCI()->raise_d();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredR1());
+		
+		EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredR2());
+		
+		EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredBdefault());
+		
+		EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredBother());
+		
+		
 }
 
-TEST_F(EntryReactionActionTest, entryTransitionActionOnStatechartEnter) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_enteredR1());
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_enteredR2());
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_enteredBdefault());
-	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredBother());
-	
-}
-TEST_F(EntryReactionActionTest, entryOnRTS) {
-	
-	init();
-	
-	statechart->getDefaultSCI()->raise_b();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredR1());
-	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredR2());
-	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredBdefault());
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_enteredBother());
-	
-}
-TEST_F(EntryReactionActionTest, noEntryTransitionActionOnHistory) {
-	
-	init();
-	
-	statechart->getDefaultSCI()->raise_d();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredR1());
-	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredR2());
-	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredBdefault());
-	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredBother());
-	
 }

@@ -225,10 +225,6 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		''''''	
 	}
 	
-	override dispatch scopeTypeDeclMember(VariableDefinition it) '''
-		«IF type.name != 'void'»«IF const»static const «ENDIF»«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
-	'''
-
 	def createOCBInterface(StatechartScope scope) {
 		'''
 			«IF scope.hasOperations»
@@ -255,10 +251,10 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 
 	override statemachineTypeDecl(ExecutionFlow it) '''
 		//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
-		static const sc_integer «orthogonalStatesConst» = «stateVector.size»;
+		static const sc_ushort «orthogonalStatesConst» = «stateVector.size»;
 		«IF hasHistory»
-			//! dimension of the state configuration vector for history states
-		static const sc_integer «historyStatesConst» = «historyVector.size»;«ENDIF»
+		//! dimension of the state configuration vector for history states
+		static const sc_ushort «historyStatesConst» = «historyVector.size»;«ENDIF»
 		
 		«IF timed»
 			«timerInterface»* «timerInstance»;

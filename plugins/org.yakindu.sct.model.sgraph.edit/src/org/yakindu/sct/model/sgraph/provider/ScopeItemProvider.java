@@ -27,6 +27,7 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.yakindu.base.base.BaseFactory;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
@@ -138,6 +139,7 @@ public class ScopeItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(SGraphPackage.Literals.SCOPE__DECLARATIONS);
 			childrenFeatures.add(SGraphPackage.Literals.SCOPE__REACTIONS);
+			childrenFeatures.add(SGraphPackage.Literals.SCOPE__MEMBERS);
 		}
 		return childrenFeatures;
 	}
@@ -191,6 +193,7 @@ public class ScopeItemProvider
 		switch (notification.getFeatureID(Scope.class)) {
 			case SGraphPackage.SCOPE__DECLARATIONS:
 			case SGraphPackage.SCOPE__REACTIONS:
+			case SGraphPackage.SCOPE__MEMBERS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -235,8 +238,211 @@ public class ScopeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGraphPackage.Literals.SCOPE__REACTIONS,
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 SGraphFactory.eINSTANCE.createRegion()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
 				 SGraphFactory.eINSTANCE.createTransition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 SGraphFactory.eINSTANCE.createFinalState()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 SGraphFactory.eINSTANCE.createChoice()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 SGraphFactory.eINSTANCE.createStatechart()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 SGraphFactory.eINSTANCE.createEntry()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 SGraphFactory.eINSTANCE.createExit()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 SGraphFactory.eINSTANCE.createReactionProperty()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 SGraphFactory.eINSTANCE.createScope()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 SGraphFactory.eINSTANCE.createSynchronization()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 SGraphFactory.eINSTANCE.createState()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 SGraphFactory.eINSTANCE.createImportDeclaration()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 SGraphFactory.eINSTANCE.createScopeMember()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 BaseFactory.eINSTANCE.createNamedElement()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 BaseFactory.eINSTANCE.createDocumentedElement()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 BaseFactory.eINSTANCE.createDomainElement()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createPackageMember()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createPackage()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createOperation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createProperty()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createTypeSpecifier()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createPrimitiveType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createEnumerationType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createComplexType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createEnumerator()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createTypeConstraint()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createTypeParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createGenericElement()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createRangeConstraint()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createDomain()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createTypeAlias()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createAnnotation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createArrayTypeSpecifier()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createAnnotationType()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == SGraphPackage.Literals.SCOPE__DECLARATIONS ||
+			childFeature == SGraphPackage.Literals.SCOPE__MEMBERS;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**

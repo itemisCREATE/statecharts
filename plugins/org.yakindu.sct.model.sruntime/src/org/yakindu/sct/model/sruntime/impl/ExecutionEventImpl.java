@@ -13,7 +13,7 @@ package org.yakindu.sct.model.sruntime.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.yakindu.sct.model.sruntime.EventDirection;
+import org.yakindu.base.types.Direction;
 import org.yakindu.sct.model.sruntime.ExecutionEvent;
 import org.yakindu.sct.model.sruntime.SRuntimePackage;
 
@@ -60,7 +60,7 @@ public class ExecutionEventImpl extends ExecutionSlotImpl implements ExecutionEv
 	 * @generated
 	 * @ordered
 	 */
-	protected static final EventDirection DIRECTION_EDEFAULT = EventDirection.LOCAL;
+	protected static final Direction DIRECTION_EDEFAULT = Direction.LOCAL;
 
 	/**
 	 * The cached value of the '{@link #getDirection() <em>Direction</em>}' attribute.
@@ -70,7 +70,7 @@ public class ExecutionEventImpl extends ExecutionSlotImpl implements ExecutionEv
 	 * @generated
 	 * @ordered
 	 */
-	protected EventDirection direction = DIRECTION_EDEFAULT;
+	protected Direction direction = DIRECTION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -117,7 +117,7 @@ public class ExecutionEventImpl extends ExecutionSlotImpl implements ExecutionEv
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EventDirection getDirection() {
+	public Direction getDirection() {
 		return direction;
 	}
 
@@ -126,8 +126,8 @@ public class ExecutionEventImpl extends ExecutionSlotImpl implements ExecutionEv
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDirection(EventDirection newDirection) {
-		EventDirection oldDirection = direction;
+	public void setDirection(Direction newDirection) {
+		Direction oldDirection = direction;
 		direction = newDirection == null ? DIRECTION_EDEFAULT : newDirection;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SRuntimePackage.EXECUTION_EVENT__DIRECTION, oldDirection, direction));
@@ -161,7 +161,7 @@ public class ExecutionEventImpl extends ExecutionSlotImpl implements ExecutionEv
 				setRaised((Boolean)newValue);
 				return;
 			case SRuntimePackage.EXECUTION_EVENT__DIRECTION:
-				setDirection((EventDirection)newValue);
+				setDirection((Direction)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

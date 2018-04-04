@@ -25,10 +25,16 @@ public enum StatechartImages {
 	LOGO("icons/obj16/logo-16.png"),
 
 	PRO_LOGO("icons/obj16/logopro-16.png"),
+	
+	LABS_LOGO("icons/obj16/logolabs-16.png"),
 
 	PRO_EDITION("images/pro.png"),
 
 	MENU("icons/obj16/Menu-16.png"),
+	
+	DOCU("icons/obj16/docu-16.png"),
+	
+	EXPR("icons/obj16/expr-16.png"),
 
 	EXPAND("icons/obj16/arrow_right.png"),
 

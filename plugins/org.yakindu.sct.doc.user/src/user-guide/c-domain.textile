@@ -1,25 +1,69 @@
 
 h1{%EARLY_SEPARATOR%}. 
 
+==<div style="counter-reset: h1 4">==
+
 ==<div class="pro-feature">==
 
-h1(#cdom_deep_c_integration). Deep C integration: Integrating your C source code with your state machines
+h1(#cdom_deep_c_integration). Deep C/C++ Integration: Integrating your C/C++ source code with your state machines
 
 h2(#cdom_introduction). Introduction
 
-The YAKINDU Statechart Tools Professional Edition comes with a _Deep C Integration_ feature which allows for using C types, variables, and operations directly within the statechart model. C header files located in your workspace are automatically recognized by the tool and all contained type and operation declarations are made accessible in the statechart editor with all its editing features like code completion and validation. In addition to your custom C types, the C99 standard primitive types, like _int16_t_, are also available out of the box. 
+The YAKINDU Statechart Tools Professional Edition comes with a _Deep C/C++ Integration_ feature, which allows for using C/C++ types, variables, and operations directly within the statechart model. C/C++ header files located in your workspace are automatically recognized by the tool, and all contained type and operation declarations are made accessible in the statechart editor with all its editing features like code completion and validation. In addition to your custom C/C++ types, the C99 standard primitive types, like _int16_t_, are also available out of the box. 
 
-Making your self-defined C types, structs, and unions available in your YAKINDU statecharts saves you a lot of time and hassle that would otherwise be needed to map data from your C-type variables to statechart variables and vice versa. The _Deep C Integration_, however, allows you to _directly_ create and manipulate your data structures in their native C types.
+Making your self-defined C/C++ types, structs, and unions available in your YAKINDU statecharts saves you a lot of time and hassle that would otherwise be needed to map data from your C-type variables to statechart variables and vice versa.
 
-
-bq.. *Please note:*
-
-Instead of "types, structs, and unions", subsequently we will speak of "types" only. While this does not precisely confirm with the C programming language nomenclature, it is much easier to read in a text. From a statechart's point of view, there is no relevant difference between types, structs, and unions anyway. Should it become necessary to differentiate between types, structs, and unions, we will do so explicitly.
-
-p. The subsequent sections will explain how to use the C integration in practice, using a sample project. In this example, we will define some geometry types like _Point_ or _Triangle_ in C header files and demonstrate how to make them available and use them in a statechart model.
+The C Domain offers one more feature: The annotation @ShortCIdentifiers@ changes the naming scheme used by the code generator and activates more checks in the statechart validation to ensure that no identifiers produced by the code generator are longer than 31 characters. 
 
 
-h2(#cdom_creating_a_new_c_project). Creating a new C project
+h2(#cdom_what_can_you_do_with_deep_ccpp_integration). What can you do with Deep C/C++ Integration?
+
+Deep C/C++ Integration allows you to use constructs declared in C/C++ header files seamlessly in your statecharts. For C, this includes:
+
+* Functions, including variadic parameters
+* Structs, unions and enums contained in a typedef
+** Function pointers contained in a struct can be called it right from your statechart.
+* Values introduced by the @#define@ statement, e.g., @#define ARRAYSIZE 20@
+* Variables
+* Arrays, provided they are allocated in the header file
+* Pointers
+
+The following C++ features are supported:
+
+* Classes, including their fields and functions
+* Namespaces
+* Template classes and functions
+* Functions with optional parameters
+
+C/C++ features that are currently unsupported:
+
+* Structs, unions and enums that are _not_ contained in a typedef
+* Accessing or modifying function pointer values in structs
+* Constructors and initializers
+* Memory allocation
+
+###. CHECK: Still unsupported by C/C++ domain? Structs, unions and enums that are _not_ contained in a typedef
+###. CHECK: Still unsupported by C/C++ domain? Accessing or modifying function pointer values in structs
+###. CHECK: Still unsupported by C/C++ domain? Constructors and initializers
+###. CHECK: Still unsupported by C/C++ domain? Memory allocation
+
+
+
+
+h2(#cdom_how_to_use_deep_ccpp_integration). How to use Deep C/C++ Integration
+
+Using Deep C/C++ Integration is pretty straightforward:
+
+# Your YAKINDU Statechart Tools license must include the C domain.
+# You have to use a "C domain" statechart or change the domain of an existing statechart.
+# The Eclipse project your statechart is in must be a "CDT project":https://help.eclipse.org/oxygen/index.jsp?topic=%2Forg.eclipse.cdt.doc.user%2Fconcepts%2Fcdt_c_projects.htm.
+
+The subsequent sections will explain how to use Deep C/C++ Integration in practice, using a sample project. In this example, we will define some geometry types like _Point_ or _Triangle_ in C/C++ header files and demonstrate how to make them available and use them in a statechart model. While this example covers C constructs only, there is no extra effort involved in using C++ features – with one exception: Your project must be a C/C++ or a pure C++ project.
+
+
+
+
+h3(#cdom_creating_a_new_c_project). Creating a new C project
 
 # In the Eclipse main menu, select _File → New → Project…_. The _New Project_ wizard opens.
 # Select _C/C++ → C Project_.<br/>!images/cdom_geometry_010_new_c_project_010.png(Creating a new C project)!
@@ -34,7 +78,10 @@ h2(#cdom_creating_a_new_c_project). Creating a new C project
 # Eclipse asks whether it should associate this kind of project with the C/C++ perspective. Usually this is what you want, so set a checkmark at _Remember my decision_ and click _Yes_.
 # Eclipse creates the C project, here *Geometry*.
 
-h2(#cdom_creating_a_c_header_file). Creating a C header file
+
+
+
+h3(#cdom_creating_a_c_header_file). Creating a C header file
 
 Now we can create a C header file specifying our own C type definitions which we can use in a state machine later. In order to create the file, let's proceed as follows:
 
@@ -42,11 +89,14 @@ Now we can create a C header file specifying our own C type definitions which we
 # In the context menu, select _New → Header File_.<br/>!images/cdom_geometry_020_new_header_file_010.png(Creating a C header file)!
 # The dialog _New Header File_ is shown. Specify the name of the header file. Here we choose *point.h*.<br/>!images/cdom_geometry_020_new_header_file_020.png(Selecting a header filename)!
 # Click _Finish_. 
-# The header file *point.h* is created.<br/>
+# The header file _point.h_ is created.<br/>
 
-h2(#cdom_defining_a_c_struct). Defining a C struct
 
-In the created header file we define a struct type named *Point*, which we will later use in a statechart. A (two-dimensional) point consists of an _x_ and a _y_ coordinate. We choose *int16_t* to represent a coordinate, i.e. a 16-bit signed integer. The complete header file containing the struct definition looks like this:
+
+
+h3(#cdom_defining_a_c_struct). Defining a C struct
+
+In the created header file we define a struct type named _Point_, which we will later use in a statechart. A (two-dimensional) point consists of an _x_ and a _y_ coordinate. We choose _int16_t_ to represent a coordinate, i.e., a 16-bit signed integer. The complete header file containing the struct definition looks like this:
 
 bc.. 
 /*
@@ -66,11 +116,12 @@ typedef struct {
 
 #endif /* POINT_H_ */
 
-bq.. *Please note:*
+bq.. *Please note:* In C it is possible to define structs, unions and enums without a _typedef_. They can be referenced by using the corresponding qualifying keyword (_struct_, _union_, or _enum_, respectively). As the statechart language does *not* support these qualifiers, the usage of struct, union and enumeration types is currently restricted to those defined by a _typedef_.
 
-In C it is possible to define structs, unions and enums without a _typedef_. They can be referenced by using the corresponding qualifying keyword (_struct_, _union_, or _enum_, respectively). As the statechart language does *not* support these qualifiers, the usage of struct, union and enumeration types is currently restricted to those defined by a _typedef_.
 
-h2(#cdom_using_a_c_struct_in_a_statechart). Using C types in a statechart
+
+
+h2(#cdom_using_c_types_in_a_statechart). Using C types in a statechart
 
 h3(#cdom_creating_a_statechart_model). Creating a statechart model
 
@@ -81,6 +132,8 @@ Let's create a statechart model now to make use of the C type _Point_ we have ju
 # In the dialog, specify the directory and the filename for the new statechart model file. The filename should end with @.sct@.
 # Click _Finish_. If Eclipse asks you whether to switch to the _YAKINDU Modeling_ perspective, please confirm.
 # The new statechart model is created:<br/>!images/cdom_geometry_030_new_statechart_model_030.png(New statechart model)!
+
+
 
 h3(#cdom_defining_a_c-type_variable_in_a_statechart). Defining a C-type variable in a statechart
 
@@ -95,7 +148,7 @@ With the definitions from _point.h_ at hand, we can declare a variable _pointA_ 
 
 bc. 
 interface:
-	var pointA:
+    var pointA:
 
 On the right-hand side of the colon in the variable declaration, the variable's type must follow. In order to see which types are available, press @[Ctrl+Space]@. The content assist opens and shows the C types available, depending on the headers imported within your statechart, i.e.
 * the C basic standard types,
@@ -113,11 +166,13 @@ Selecting the _Point_ menu entry completes the variable definition:
 
 p=. A _Point_ variable
 
+
+
 h3(#cdom_using_a_c-type_variable_in_a_statechart). Using a C-type variable in a statechart
 
 A statechart variable with a C type can be used everywhere a "normal" statechart variable can be used.
 
-Let's consider the above example extended by an additional *count* variable of the C99 _int8_t_ standard type. Additionally, we add an event that will be used as a trigger to switch between states.
+Let's consider the above example extended by an additional _count_ variable of the C99 _int8_t_ standard type. Additionally, we introduce an event that will be used as a trigger to switch between states.
 
 bc. import: "point.h"
 interface:
@@ -125,22 +180,24 @@ interface:
     var pointA: Point
     in event tick
 
-The statechart below uses these variables in various places, i.e. in transition actions, in internal actions, and in guard conditions.
+The statechart below uses these variables in various places, i.e., in transition actions, in internal actions, and in guard conditions.
 
 !images/cdom_geometry_050_using_c_type_variables_010.png(Using C-type variables)!
 
 p=. Using C-type variables
 
-Variables of primitive types like @var count: int8_t@ are accessed as expected, e.g. @count = 0@ or @count += 1;@
+Variables of primitive types like @var count: int8_t@ are accessed as expected, e.g., @count = 0@ or @count += 1;@
 
-The dot notation is used to access structure elements. For example, @pointA.x = 0; pointA.y = 0@ sets *pointA* to the origin of the coordinate system.
+The dot notation is used to access structure elements. For example, @pointA.x = 0; pointA.y = 0@ sets _pointA_ to the origin of the coordinate system.
+
 
 
 h3(#cdom_the_statechart_type_system). The statechart type system
 
-When parsing a C header file YAKINDU Statechart Tools are mapping the C data types to an internal type system. You can open a C header file in Eclipse with the _Sample Reflective Ecore Model Editor_ to see how the mapping result looks like.
+When parsing a C header file, YAKINDU Statechart Tools are mapping the C data types to an internal type system. You can open a C header file in Eclipse with the _Sample Reflective Ecore Model Editor_ to see how the mapping result looks like.
 
-In case you are interested in the EMF model underlying SCT's type system, you can find it in the source code of the YAKINDU Statechart Tools open edition at _/org.yakindu.base.types/model/types.ecore_.
+In case you are interested in the EMF model underlying YAKINDU Statechart Tools' type system, you can find it in the source code of the YAKINDU Statechart Tools open edition at _/org.yakindu.base.types/model/types.ecore_.
+
 
 
 
@@ -148,13 +205,11 @@ h2(#cdom_imports_and_includes). Imports and includes
 
 h3(#cdom_importing_a_c_header). Importing a C header
 
-YAKINDU Statechart Tools gives you direct access to C header files within the statechart model. This saves time during development, especially while integrating your state machine with your C program. In general you can import (include) all C header files residing in the same project as well as those header files that are available on one of the CDT project's include paths, see _Properties → C/C++ General → Paths and Symbols_ in the context menu of your C project.
+YAKINDU Statechart Tools gives you direct access to C header files within the statechart model. This saves time during development, especially while integrating your state machine with your C program. In general you can import (include) all C header files residing in the same project as well as those header files that are available on one of the CDT project's include paths, see _Properties → C/C++ General → Paths and Symbols_ in the context menu of your C project. Valid file extensions for C/C++ header files: ".h", ".hh", "hpp", "hxx" and ".inc".
 
 To import a C header file, go to the beginning of your statechart's definition section, enter @import:@ and hit <code>[Ctrl]+[Space]</code>. The content assist now shows all C header files you can import (besides other syntactical elements that would be valid here). In our example one of the first includes provided by the content assist is _point.h_, which is found in _/Geometry/point.h_. Other imports shown by the content assist are provided by the various include paths configured in your CDT project. For example, figure "&quot;Selecting a C header to import&quot;":#cdom_fig_selecting_a_c_header_to_import shows headers on the basic _cygwin_ toolchain on a Windows system.
 
-bq.. *Please note:*
-
-Contrary to a C compiler, YAKINDU Statechart Tools do not support transitive imports. That is to say, if a header file _a.h_ imports another header file _b.h_ using the @#include@ directive, _b.h_ will not be "seen" in YAKINDU Statechart Tools unless you import it explicitly in your statechart's definition section.
+bq.. *Please note:* Contrary to a C compiler, YAKINDU Statechart Tools do not support transitive imports. That is to say, if a header file _a.h_ imports another header file _b.h_ using the @#include@ directive, _b.h_ will not be "seen" in YAKINDU Statechart Tools unless you import it explicitly in your statechart's definition section.
 
 p(#cdom_fig_selecting_a_c_header_to_import). 
 
@@ -171,8 +226,8 @@ Click on the _point.h_ entry in the menu to complete the @import@ statement. The
 bc.. import: "point.h"
 
 interface:
-	var pointA: Point
-
+    var pointA: Point
+p. 
 
 
 
@@ -180,7 +235,7 @@ h2(#cdom_data_structure_traversal_via_dot_notation). Data structure traversal vi
 
 The dot notation to access structure members can traverse an arbitrary number of stages. As an example, let's define a datatype named _Triangle_. A triangle is defined by three points. Using dot notation in a statechart, you can navigate from a triangle to its individual points and further on to the points' coordinates.
 
-The C header file *triangle.h* specifies the _Triangle_ type:
+The C header file _triangle.h_ specifies the _Triangle_ type:
 
 bc.. #ifndef TRIANGLE_H_
 #define TRIANGLE_H_
@@ -192,14 +247,12 @@ typedef struct {
 } Triangle;
 
 #endif /* TRIANGLE_H_ */
-
 p. A _Triangle_ consists of the three _Points_ _a_, _b_, and _c_. Let's define a _Triangle_ _t_ in a statechart's definition section as follows:
 
 bc.. import: triangle
 
 interface:
     var t: Triangle
-
 p. With this definition we can use expressions like @t.a.x@, see the image below. Regardless of where you are currently editing an expression, you can always use the code assist to explore which fields are available at that very point and of which types these fields are. Example:
 
 !images/cdom_geometry_170_data_structure_traversal_010.png(Content assist in data structure traversal)!
@@ -207,14 +260,18 @@ p. With this definition we can use expressions like @t.a.x@, see the image below
 p=. Content assist in data structure traversal
 
 
+
+
 h2(#cdom_pointers). Pointers
 
-Pointers are a core feature of the C programming language. YAKINDU Statechart Tools' Deep C Integration is making C pointers available to you in your statecharts. In particular, you can
+Pointers are a core feature of the C programming language. YAKINDU Statechart Tools' Deep C/C++ Integration is making C pointers available to you in your statecharts. In particular, you can
 * declare typed pointer variables,
 * assign a pointer to a pointer variable of the same type,
 * retrieve the pointer pointing to a given variable,
 * pass pointers as parameters to functions, and
 * receive a pointer as a functions return value.
+
+
 
 h3(#cdom_declaring_pointer_variables). Declaring pointer variables
 
@@ -232,9 +289,8 @@ The declarations above declare
 * _ppInt_ as a pointer that is pointing to a pointer that is pointing to a variable of type _int32_t_, and
 * _pTriangle_ as a pointer to a variable of the self-defined type _Triangle_.
 
-bq.. *Please note:*
+bq.. *Please note:* When closing the type specification in a pointer declaration with angle brackets, e.g., @pointer<pointer<int32_t> >@, the @>@ characters must be separated from each other by one or more white space characters. Writing, for example, @pointer<pointer<int32_t>>@ would result in an error. This restriction will be fixed in a later release.
 
-When closing the type specification in a pointer declaration with angle brackets, e.&nbsp;g. @pointer<pointer<int32_t> >@, the @>@ characters must be separated from each other by one or more white space characters. Writing e.&nbsp;g. @pointer<pointer<int32_t>>@ would result in an error. This restrictions pertains to the current release candidate of YAKINDU Statechart Tools PRO only and will be fixed in the final release.
 
 
 h3(#cdom_using_pointer_variables). Using pointer variables
@@ -271,16 +327,16 @@ Provided the function is declared in an imported C header file, you can call it 
 
 bc. pTriangle2 = rotateTriangle(pTriangle, pCenterPoint, 45.0);
 
-bq.. *Please note:*
+bq.. *Please note:* Assigning a pointer to a pointer variable is only possible if the pointer types are the same.
 
-Assigning a pointer to a pointer variable is only possible if the pointer types are the same.
+
 
 
 h2(#cdom_arrays). Arrays
 
 Unlike other variables, arrays are not defined in a statechart's definition section, but rather on the C side in header files. Importing a C header containing an array definition makes the array available to a statechart.
 
-While YAKINDU Statechart Tool's Deep C Integration provides mechanisms for accessing individual elements of an existent array, arrays must be allocated statically or dynamically in C. Initializing the array elements is possible in C as well as in the statechart. However, depending on the concrete application it might generally be easier in C.
+While YAKINDU Statechart Tool's Deep C/C++ Integration provides mechanisms for accessing individual elements of an existent array, arrays must be allocated statically or dynamically in C. Initializing the array elements is possible in C as well as in the statechart. However, depending on the concrete application it might generally be easier in C.
 
 The header file _sample_arrays.h_ defines a couple of sample arrays:
 
@@ -297,7 +353,6 @@ Triangle manyTriangles[200];
 int32_t * pArray[10];
 
 #endif /* SAMPLE_ARRAYS_H_ */
-
 p. The following arrays are defined:
 * _coordinates_ is statically allocated to hold six _int32_t_ elements and it is initialized with values for all six of them. More precisely, the number of elements in the initializer determines the size of the array.
 * _manyTriangles_ is statically allocated with enough memory to hold 200 elements of the self-defined _Triangle_ type. However, these elements are not initialized. This can and should be done either in C or in the state machine. An example is given below.
@@ -330,9 +385,214 @@ Provided the function is declared in an imported C header file, you can call it 
 
 bc. sort(coordinates, 6)
 
-bq.. *Please note:*
+bq.. *Please note:* The current YAKINDU Statecharts Tools release only supports statically allocated arrays. Arrays dynamically allocated using _malloc()_ or _calloc()_ will be supported in a later version.
 
-The current YAKINDU Statecharts Tools release only supports statically allocated arrays. Arrays dynamically allocated using _malloc()_ or _calloc()_ will be supported in a later version.
+
+
+
+h2(#cdom_enums). Enums
+
+Besides specifying structured types, it is also possible to declare enumeration types in a C header. Here's the header file _color.h_, which defines the _Color_ enumeration type:
+
+bc.. #ifndef COLOR_H_
+#define COLOR_H_
+
+typedef enum {
+    RED, GREEN, BLUE, YELLOW, BLACK, WHITE
+} Color;
+
+#endif /* COLOR_H_ */
+p. Now let's extend the _Triangle_ defined above by a fill color:
+
+bc.. #ifndef TRIANGLE_H_
+#define TRIANGLE_H_
+
+#include "./point.h"
+#include "./color.h"
+
+typedef struct {
+    Point a, b, c;
+    Color fillColor;
+
+} Triangle;
+
+#endif /* TRIANGLE_H_ */
+p. Similar to the _Triangle_ type or any other C type, the _Color_ enumeration type can be used in the statechart, e.g., by declaring an additional interface variable:
+
+bc.. import: color
+import: triangle
+
+interface:
+    var t: Triangle
+    var c: Color = Color.BLUE
+p. Please note that unlike structured types, enumeration variables can be initialized directly in their definitions within the statechart's definition section.
+
+In order to see which enumeration values are available, the content assist, triggered by @[Ctrl+Space]@, is helpful again.
+
+p(#cdom_fig_ssing_content_assist_to_select_an_enumeration_value_1). 
+
+!(small)images/cdom_geometry_083_enum_010_content_assist.png(Using content assist to select an enumeration value [1])!
+
+p=. Using content assist to select an enumeration value &#91;1]
+
+Once initialized, the _c_ variable can now be used, e.g., in an assignment to the triangle _t_'s fill color:
+
+bc.  t.fillColor = c;
+
+Accordingly, during simulation, the values of enum variables are displayed in the simulation view. It is also possible to modify them manually.
+
+p(#cdom_fig_ssing_content_assist_to_select_an_enumeration_value_2). 
+
+!images/cdom_geometry_083_enum_020_simulation.png(Using content assist to select an enumeration value [2])!
+
+p=. Using content assist to select an enumeration value &#91;2]
+
+
+
+
+h2(#cdom_operations). Operations
+
+A function declared in a C header file becomes available in a statechart. The state machine can call it as an _operation_.
+
+Let's say our _rectangle.h_ header file not only defines the data type, but also declares one or more C functions to operate on them. The following line declares a function named _area_, taking a _Rectangle_ parameter by value and returning an _int32_t_ result.
+
+bc. extern int32_t area(Rectangle r);
+
+For the sake of the example, let's assume the function calculates the area of the given rectangle. Of course we could also do this with means built into the statechart language. However, in the general case you neither _can_ nor _want_ to do that.
+* Implementing the functionality in the statechart language might not be possible, because the latter does not provide the necessary means, e.g., to pull some data from an external source.
+* Even if it would be possible to implement the functionality in the statechart language, it might still not be desirable, if the functionality has been developed and fully tested in C already. You will neither want to re-invent the wheel nor would you want to introduce any new errors into an alternative implementation.
+
+YAKINDU Statechart Tools parses function declarations in header files and makes the functions available in the statechart language. It doesn't care where those functions are defined – or whether they are defined at all – nor what they do. Questions like these will become relevant later when the state machine is generated as C source code, compiled and linked to the functions' implementations.
+
+For now, once the statechart knows about the _area_ function's declaration in the C header file, the function can be used immediately in statechart language operations. A corresponding @operation@ declaration in the statechart's definition section is not needed. Example:
+
+!images/cdom_geometry_090_operations_010_content_assist.png(Using content assist to enter a C function call)!
+
+p=. Using content assist to enter a C function call
+
+Here's the complete example with the area calculations done by the _area_ function:
+
+!images/cdom_geometry_090_operations_020_calling_area.png(Example calling the "area" function)!
+
+p=. Example calling the "area" function
+
+bq.. *Please note:* State machines calling C functions as operations are debarred from simulation and debugging. The simulator is not yet capable to call C functions.
+
+
+
+
+h2(#cdom_cppclasses). C++ classes
+
+Classes contained in C++ header files are usable from statecharts as well.
+
+bc.. class Point
+{
+    public:
+        int32_t get_x();
+        void set_x(int32_t x);
+        int32_t get_y();
+        void set_y(int32_t y);
+    private:
+        int32_t x;
+        int32_t y;
+};
+p. By importing a header file containing this C++ class definition, one or more variables of the _Point_ type can be defined in the statechart:
+
+bc. import: "Point.h"
+interface:
+    var PointA: Point
+    var PointB: Point
+    out event e
+
+As expected, it is possible to access public functions and fields of these variables. For example, _x_ and _y_ can be set and read from within a state's or a transition's reactions:
+
+bc. entry / PointA.set_x(42); PointA.set_y(0)
+
+bc. [PointA.get_x() == 42] / raise e
+
+
+
+
+h2(#cdom_cpp_template_classes_and_functions). C++ template classes and functions
+
+h3(#cdom_template_classes). Template classes
+
+C++ allows to create generic constructs by defining templates. For example, if you want to be able to create _Point_ objects with integer as well as floating point coordinates, you could write:
+
+bc.. template<typename T>
+class Point
+{
+    public:
+        T get_x();
+        void set_x(T x);
+        T get_y();
+        void set_y(T y);
+    private:
+        T x;
+        T y;
+};
+p. This definition creates a generic type in YAKINDU Statechart Tools. In the definition section, you then supply the concrete type parameter, here _int32_t_:
+
+bc.. import: "Point.h"
+interface:
+    var PointA: Point<int32_t>
+    var PointB: Point<int32_t>
+    out event e
+p. Instead of _int32_t_, _double_, _ComplexNumber_, or any other type could have been specified instead.
+
+YAKINDU Statechart Tools verifies the usage. Thus with _int32_t_, the function call @PointA.set_x(4.2)@ would be flagged as an error.
+
+
+
+h3(#cdom_template_functions). Template functions
+
+C++ also allows to create template functions, which can, but don't have to, be a part of a class.
+
+A typical example is a @max(T a, T b)@ function:
+
+bc. template<typename T>
+T max(T a, T b)
+{
+    return (a < b) ? b : a;
+}
+
+Template functions do not have to have their type parameter declared. YAKINDU Statechart Tools checks whether the supplied arguments are compatible. Calling @max(4, 3.5)@ would be fine, and _T_ would be inferred to be _double_, whereas _max(4, true)_ is invalid, because integer types and boolean types are not compatible.
+
+
+
+
+h2(#cdom_namespaces). Namespaces
+
+In C++, things can be organized in namespaces. Namespaces are typically applied to classes.
+
+bc.. namespace Geo {
+
+    class Point
+    {
+    public:
+        double get_x();
+        void set_x(double x);
+        double get_y();
+        void set_y(double y);
+    private:
+        double x;
+        double y;
+    };
+
+}
+p. To use the _Point_ class, one would have to write @Geo::Point@ in C++. In YAKINDU Statechart Tools, namespaces are reflected as _packages_. For each header file you import into your statechart, a package is created, plus an additional package for each namespace.
+
+In the definition section, one would write:
+
+bc. import: "Point.h"
+interface:
+    var PointA: Geo.Point
+    var PointB: Geo.Point
+    out event e
+
+Namespaces can be nested, so if namespace _Geo_ would be contained in namespace _Math_, _Point_ would be addressed as @Math.Geo.Point@.
+
+
 
 
 h2(#cdom_simulation). Simulation
@@ -368,7 +628,6 @@ typedef struct {
     Point lowerLeft;
     int16_t width, height;
 } Rectangle;
-
 p. In order to simulate the statechart, right-click on the statechart file in the project explorer and select _Run As → Statechart Simulation_ from the context menu.
 
 The statechart simulation
@@ -377,6 +636,8 @@ The statechart simulation
 * in the *Check* state, calculates the rectangles' areas and stores the results in the _area_a_ and _area_b_ variables,
 * transitions to the *A is larger* state, because its guard condition is fulfilled, and
 * stops, waiting for the _compare_size_ event to occur.
+
+
 
 h3(#cdom_inspecting_c_data_structures). Inspecting C data structures
 
@@ -389,9 +650,7 @@ The simulation view in the screenshot above is showing the state machine's varia
 * the calculated areas of the _a_ and _b_ rectangles,
 * the coordinates of the points defining the respective lower left corner of the rectangles.
 
-bq.. *Warning:*
-
-Simple C variables and fields in C data structure are *not* initialized. Never try to read a variable or field you haven't written before, because it might contain arbitrary values.
+bq.. *Warning:* Simple C variables and fields in C data structure are *not* initialized. Never try to read a variable or field you haven't written before, because it might contain arbitrary values.
 
 Even if the _Point_ data structures in the example above look like having been initialized to defined values, they are not. Without going into details, in C, variables are generally *not* initialized. This also holds for statechart variables from the C integration. If you are reading a variable, make sure you have written to it before. Otherwise you might get surprising and non-deterministic results.
 
@@ -416,9 +675,11 @@ In the example, click _compare_size_ to trigger the event. The state machine tra
 p=. Rectangle areas modified and rechecked
 
 
+
+
 h2(#cdom_looking_up_a_type_definition). Looking up a type definition
 
-Given a variable definition in a statechart's definition section, you can lookup the corresponding type definition. The definition section must be in editing mode, i.e. you must have double-clicked into it. Now press the @[Ctrl]@ key and move the mouse pointer over the type name. The former changes its shape into a hand symbol and the latter changes into a hyperlink:
+Given a variable definition in a statechart's definition section, you can lookup the corresponding type definition. The definition section must be in editing mode, i.e., you must have double-clicked into it. Now press the @[Ctrl]@ key and move the mouse pointer over the type name. The former changes its shape into a hand symbol and the latter changes into a hyperlink:
 
 !images/cdom_geometry_160_type_lookup_010.png(Looking up a C type)!
 
@@ -431,109 +692,25 @@ Click on the hyperlink to open the header file containing the respective type de
 p=. Showing the C type definition
 
 
-h2(#cdom_enums). Enums
 
-Besides specifying structure types, it is also possible to declare enumeration types in a C header. Here's the header file *color.h* which defines the _Color_ enumeration type:
-
-bc.. #ifndef COLOR_H_
-#define COLOR_H_
-
-typedef enum {
-	RED, GREEN, BLUE, YELLOW, BLACK, WHITE
-} Color;
-
-#endif /* COLOR_H_ */
-
-p. Now let's extend the _Triangle_ defined above by a fill color:
-
-bc.. #ifndef TRIANGLE_H_
-#define TRIANGLE_H_
-
-#include "./point.h"
-#include "./color.h"
-
-typedef struct {
-	Point a, b, c;
-	Color fillColor;
-
-} Triangle;
-
-#endif /* TRIANGLE_H_ */
-
-
-p. Similar to the _Triangle_ type or any other C type, the _Color_ enumeration type can be used in the statechart, e.g. by declaring an additional interface variable:
-
-bc.. import: color
-import: triangle
-
-interface:
-	var t: Triangle
-	var c: Color = Color.BLUE
-
-p. Please note that in contrast to structured types, enumeration variables can be initialized directly in their definitions.
-
-In order to see which values are available the content assist, triggered by @[Ctrl+Space]@, is helpful again.
-
-!images/cdom_geometry_083_enum_010_content_assist.png(Using content assist to select an enumeration value)!
-
-p=. Using content assist to select an enumeration value
-
-Once initialized, the _c_ variable can now be used e.g. in an assignment to the triangle _t_'s fill color:
-
-bc.  t.fillColor = c;
-
-Accordingly, during simulation the values of enum variables are displayed in the simulation view. It is also possible to modify them manually.
-
-!images/cdom_geometry_083_enum_020_simulation.png(Using content assist to select an enumeration value)!
-
-p=. Using content assist to select an enumeration value
-
-h2(#cdom_operations). Operations
-
-Functions declared in a C header file become available in a statechart. The state machine can call it as an _operation_.
-
-Let's say our *rectangle.h* header file not only defines the data type, but also declares one or more C functions to operate on them. The following line declares a function named _area_, taking a _Rectangle_ parameter by value and returning an _int32_t_ result.
-
-bc. extern int32_t area(Rectangle r);
-
-For the sake of the example, let's assume the function calculates the area of the given rectangle. Of course we could also do this with means built into the statechart language. However, in the general case you neither _can_ nor _want_ to do that.
-* Implementing the functionality in the statechart language might not be possible, because the latter does not provide the necessary means, e.g. to pull some data from an external source.
-* Even if it would be possible to implement the functionality in the statechart language, it might still not be desirable, if the functionality has been developed and fully tested in C already. You will neither want to re-invent the wheel nor would you want to introduce any new errors into an alternative implementation.
-
-YAKINDU Statechart Tools parses function declarations in header files and makes the functions available in the statechart language. It doesn't care where those functions are defined – or whether they are defined at all – nor what they do. Questions like these will become relevant later when the state machine is generated as C source code, compiled and linked to the functions' implementations.
-
-For now, once the statechart knows about the _area_ function's declaration in the C header file, the function can be used immediately in statechart language operations. Any @operation@ declaration in the statechart's definition section is not needed. Example:
-
-!images/cdom_geometry_090_operations_010_content_assist.png(Using content assist to enter a C function call)!
-
-p=. Using content assist to enter a C function call
-
-Here's the complete example with the area calculations done by the _area_ function:
-
-!images/cdom_geometry_090_operations_020_calling_area.png(Example calling the "area" function)!
-
-p=. Example calling the "area" function
-
-
-bq.. *Please note:*
-
-State machines calling C functions as operations are debarred from simulation and debugging. The simulator is not yet capable to call C functions.
 
 h2(#cdom_generating_c_source_code). Generating C source code
 
-Code generation, i.e. turning a statechart model into source code of a programming language, is explained in the section _Generating state machine code_. Therefore we won't go into the details here, but instead only put some emphasis on code generation specialties of the _Deep C Integration_.
+Code generation, i.e., turning a statechart model into source code of a programming language, is explained in the section _Generating state machine code_. Therefore we won't go into the details here, but instead only put some emphasis on code generation specialties of Deep C/C++ Integration.
+
+
 
 h3(#cdom_creating_a_generator_model). Creating a generator model
 
 In the statechart model introduced above, do the following:
 
 # In the project view, right-click on the project's name. The context menu opens.
-# In the context menu, select _New → Code Generator Model_. The _YAKINDU Generator Model_ wizard opens.
-# Enter a filename into the _File name_ field, e.g. *c.sgen*, and click _Next >_.
+# In the context menu, select _New → Code generator model_. The _YAKINDU generator model_ wizard opens.
+# Enter a filename into the _File name_ field, e.g., _c.sgen_, and click _Next >_.
 # In the _Generator_ drop-down menu, select *YAKINDU SCT C Code Generator*.
 # Select the statechart models to generate C source code for. Click _Finish_.
 
-YAKINDU Statechart Tools creates the following generator model in the file *c.sgen*:
+YAKINDU Statechart Tools creates the following generator model in the file _c.sgen_:
 
 bc.. GeneratorModel for yakindu::c {
 
@@ -546,39 +723,40 @@ bc.. GeneratorModel for yakindu::c {
         }
     }
 }
-
 p. YAKINDU Statechart Tools creates the target folders _src_ and _src-gen_ and generates the C source representing the statemachine into them.
+
+
 
 h3(#cdom_the_generated_c_code). The generated C code
 
-Particularly interesting are the files *Statechart.h* and *Statechart.c*.
+Particularly interesting are the files _Statechart.h_ and _Statechart.c_.
 
-*Statechart.h* first includes the *sc_types.h* header followed by very same C header files that have been included in the statechart:
+_Statechart.h_ first includes the _sc_types.h_ header followed by very same C header files that have been included in the statechart:
 
 bc. #include "sc_types.h"
 #include "rectangle.h"
 
-The generated code in *Statechart.h* then uses the native standard and user-defined C data types. For example, the statechart implementation defines the type _StatechartIface_ as follows:
+The generated code in _Statechart.h_ then uses the native standard and user-defined C data types. For example, the statechart implementation defines the type _StatechartIface_ as follows:
 
 bc. /*! Type definition of the data structure for the StatechartIface interface scope. */
 typedef struct
 {
-	Rectangle a;
-	Rectangle b;
-	int32_t area_a;
-	int32_t area_b;
-	Point p;
+    Rectangle a;
+    Rectangle b;
+    int32_t area_a;
+    int32_t area_b;
+    Point p;
 } StatechartIface;
 
-By including *Statechart.h* all definitions are available in *Statechart.c*, too. For example, a getter and a setter function for the _Rectangle_ variable _a_ are defined as follows:
+By including _Statechart.h_ all definitions are available in _Statechart.c_, too. For example, a getter and a setter function for the _Rectangle_ variable _a_ are defined as follows:
 
 bc. Rectangle statechartIface_get_a(const Statechart* handle)
 {
-	return handle->iface.a;
+    return handle->iface.a;
 }
 void statechartIface_set_a(Statechart* handle, Rectangle value)
 {
-	handle->iface.a = value;
+    handle->iface.a = value;
 }
 
 The external _area_ function is called in the entry actions section of state _Check_:
@@ -586,15 +764,122 @@ The external _area_ function is called in the entry actions section of state _Ch
 bc. /* Entry action for state 'Check'. */
 static void statechart_enact_main_region_Check(Statechart* handle)
 {
-	/* Entry action for state 'Check'. */
-	handle->iface.area_a = area(handle->iface.a);
-	handle->iface.area_b = area(handle->iface.b);
+    /* Entry action for state 'Check'. */
+    handle->iface.area_a = area(handle->iface.a);
+    handle->iface.area_b = area(handle->iface.b);
 }
+
+
+h2(#cdom_annotations_short_identifiers). The @ShortCIdentifiers annotation
+
+It is possible to add annotations to a statechart's specification to alter their or the code generator's behavior, see "Statechart Annotations":../user-guide/statechart_language.textile#sclang_annotations.
+
+The C Domain offers one more annotation: @ShortCIdentifiers helps you to keep the generated code compliant to rules which require C identifiers not to be longer than 31 characters (or rather, to be uniquely identified by the first 31 characters). To achieve this, instead of aggressively shortening names which are part of a statechart's API, YAKINDU Statechart Tools gives feedback about the names that will be generated and warns if any user input results in C Code that is non-compliant with the 31 character rule. This puts the user in charge of the naming scheme and keeps the resulting C identifiers predictable.
+
+This is mainly done by:
+
+# Using only the actual state's name to identify it and forcing you to use individual names for _all_ states
+# Checking all names that will be generated by constructs in the statecharts and providing you with feedback if any of them will be longer than 31 characters
+# An intelligent name shortening strategy is applied to the static functions in the statechart's source file that keeps a good balance between readability and shortness
+
+Please note that the generator model's option _statemachinePrefix_ is ignored when @ShortCIdentifiers is used.
+
+Keep in mind that all public functions and types of the statechart are prefixed with its name, so keeping that one short helps a lot.
+
+This annotation is not supported by the C++ generator, only by the C generator.
+
+h3(#cdom_annotations_short_identifiers_example). Example
+
+See the following example:
+
+!images/shortidentifiers_errors.png(Unambiguous state names produce errors)!
+
+p=. State names that are not globally unique produce errors.
+
+!images/shortidentifiers_warnings.png(Warnings for elements in the definition section)!
+
+p=. The name of some elements in the definition section produces warnings because resulting identifiers in the source code will be longer than 31 characters.
+
+!images/shortidentifiers_fixed.png(All issues resolved)!
+
+p=. All issues resolved: the states were renamed to be globally unique and some identifiers as well as the statechart's name were shortened to keep everything short.
+
+The state's names need to be globally unique because of a change in the naming scheme of the state enum.
+
+Enum without @ShortCIdentifiers:
+
+bc. /*! Enumeration of all states */ 
+typedef enum
+{
+	House_last_state,
+	House_main_region_Idle,
+	House_main_region_Automation,
+	House_main_region_Automation_heater_Manual,
+	House_main_region_Automation_heater_Auto,
+	House_main_region_Automation_heater_Auto_modes_Normal,
+	House_main_region_Automation_heater_Auto_modes_Absence,
+	House_main_region_Automation_lights_Lights_Off,
+	House_main_region_Automation_lights_Lights_On,
+	House_main_region_Automation_pond_Pond_Off,
+	House_main_region_Automation_pond_Pond_On
+} HouseStates;
+
+Enum with @ShortCIdentifiers:
+
+bc. /*! Enumeration of all states */ 
+typedef enum
+{
+	House_last_state,
+	House_Idle,
+	House_Automation,
+	House_Manual,
+	House_Auto,
+	House_Normal,
+	House_Absence,
+	House_Lights_Off,
+	House_Lights_On,
+	House_Pond_Off,
+	House_Pond_On
+} HouseStates;
+
+Notice how the state's names are not prefixed with their containing regions anymore to save characters.
+
+p. The name shortening algorithm for the static functions works like this, again without @ShortCIdentifiers:
+
+bc. /* prototypes of all internal functions */
+static sc_boolean check_main_region_Idle_tr0_tr0(const House* handle);
+static sc_boolean check_main_region_Automation_tr0_tr0(const House* handle);
+static sc_boolean check_main_region_Automation_heater_Manual_tr0_tr0(const House* handle);
+static sc_boolean check_main_region_Automation_heater_Auto_tr0_tr0(const House* handle);
+static sc_boolean check_main_region_Automation_heater_Auto_modes_Normal_lr0_lr0(const House* handle);
+static sc_boolean check_main_region_Automation_heater_Auto_modes_Normal_tr0_tr0(const House* handle);
+static sc_boolean check_main_region_Automation_heater_Auto_modes_Absence_lr0_lr0(const House* handle);
+static sc_boolean check_main_region_Automation_heater_Auto_modes_Absence_tr0_tr0(const House* handle);
+static sc_boolean check_main_region_Automation_lights_Lights_Off_tr0_tr0(const House* handle);
+static sc_boolean check_main_region_Automation_lights_Lights_On_tr0_tr0(const House* handle);
+static sc_boolean check_main_region_Automation_pond_Pond_Off_tr0_tr0(const House* handle);
+static sc_boolean check_main_region_Automation_pond_Pond_On_tr0_tr0(const House* handle);
+
+p. With @@ShortCIdentifiers annotation:
+
+bc. /* prototypes of all internal functions */
+static sc_boolean Idle_tr0_check(const House* handle);
+static sc_boolean Automation_tr0_check(const House* handle);
+static sc_boolean Manual_tr0_check(const House* handle);
+static sc_boolean Auto_tr0_check(const House* handle);
+static sc_boolean Normal_lr0_check(const House* handle);
+static sc_boolean Normal_tr0_check(const House* handle);
+static sc_boolean Absence_lr0_check(const House* handle);
+static sc_boolean Absence_tr0_check(const House* handle);
+static sc_boolean Lights_Off_tr0_check(const House* handle);
+static sc_boolean Lights_On_tr0_check(const House* handle);
+static sc_boolean Pond_Off_tr0_check(const House* handle);
+static sc_boolean Pond_On_tr0_check(const House* handle);
 
 
 h2(#cdom_currently_supported_primitive_types). Currently supported primitive types
 
-The _Deep C Integration_ natively supports the following primitive C types. That is, in a statechart without any additional data type definitions, the following types are readily available:
+Deep C/C++ Integration natively supports the following primitive C types. That is, in a statechart without any additional data type definitions, the following types are readily available:
 
 * _bool_
 * _double_
@@ -611,15 +896,21 @@ The _Deep C Integration_ natively supports the following primitive C types. That
 * _void_
 
 
+
+
 h2(#cdom_current_restrictions). Current restrictions
 
 The current release candidate of YAKINDU Statechart Tools PRO is still missing some C functionalities that will be approached as soon as possible by subsequent releases. Among others, the following issues are known to be not available yet:
 
+
+
 h3(#cdom_current_type_range_checks). Type range checks
 
-Type range validations are currently not implemented. As a consequence, it is possible to e.g. assign an _int32_t_ value to an _int8_t_ variable one without any warning.
+Type range validations are currently not implemented. As a consequence, it is possible to e.g., assign an _int32_t_ value to an _int8_t_ variable one without any warning.
 
 ###. CHECK: Are type range validations still not implemented in the C domain?
+
+
 
 h3(#cdom_plain_struct_union_and_enum_types). Plain struct, union, and enum types
 
@@ -632,5 +923,7 @@ In C it is possible to define structs, unions and enums without a _typedef_. The
 h3(#cdom_please_get_in_touch_with_us). Please get in touch with us
 
 Please note that the preceding list of restrictions might not be complete. If you discover any further problems, please do not hesitate to contact us! Your feedback is highly appreciated!
+
+==</div>==
 
 ==</div>==

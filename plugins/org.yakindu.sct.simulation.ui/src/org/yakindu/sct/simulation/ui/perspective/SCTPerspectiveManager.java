@@ -70,7 +70,7 @@ public class SCTPerspectiveManager extends PerspectiveManager implements ILaunch
 
 	public void handleDebugEvents(DebugEvent[] events) {
 		for (DebugEvent debugEvent : events) {
-			if ((debugEvent.getSource() instanceof SCTDebugTarget))
+			if ((debugEvent.getSource().getClass().equals(SCTDebugTarget.class)))
 				switch (debugEvent.getKind()) {
 					case DebugEvent.TERMINATE :
 						if (allTargetsTerminated())

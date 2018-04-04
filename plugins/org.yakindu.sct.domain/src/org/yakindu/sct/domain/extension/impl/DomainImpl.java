@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.domain.extension.impl;
 
@@ -26,11 +26,10 @@ import com.google.common.cache.LoadingCache;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.util.Modules;
 
 /**
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public class DomainImpl implements IDomain {
 
@@ -145,7 +144,7 @@ public class DomainImpl implements IDomain {
 		}
 		return createInjector(feature, options);
 	}
-	
+
 	@Override
 	public Injector getInjector(String feature, String... options) {
 		return getInjector(feature, true, options);
@@ -163,7 +162,7 @@ public class DomainImpl implements IDomain {
 				modules.add(module.getModuleProvider().getModule(options));
 			}
 		}
-		Module result = Modules.combine(modules);
+		Module result = new LazyCombiningModule(modules);
 		return result;
 
 	}

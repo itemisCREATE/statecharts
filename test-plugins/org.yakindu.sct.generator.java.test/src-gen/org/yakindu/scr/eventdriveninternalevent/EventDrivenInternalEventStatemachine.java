@@ -74,13 +74,11 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	
 	private int nextStateIndex;
 	
-	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
 	
 	private boolean i1;
 	
 	private boolean i2;
-	
 	public EventDrivenInternalEventStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -177,7 +175,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		internalEventQueue.add( new Runnable() {
 			@Override public void run() {
 				i1 = true;					
-				runCycle();
+				singleCycle();
 			}
 		});
 	}
@@ -188,7 +186,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		internalEventQueue.add( new Runnable() {
 			@Override public void run() {
 				i2 = true;					
-				runCycle();
+				singleCycle();
 			}
 		});
 	}
@@ -530,7 +528,6 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		// process queued events
 		while (internalEventQueue.size() > 0) {
 			internalEventQueue.poll().run();
-			singleCycle();
 			clearEvents();
 		}
 	}

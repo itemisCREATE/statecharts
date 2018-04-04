@@ -1,7 +1,11 @@
 
+p. 
+
+==<div style="counter-reset: h1 0">==
+
 h1(#overview_what_are_yakindu_statechart_tools). What are YAKINDU Statechart Tools?
 
-YAKINDU Statechart Tools (YAKINDU SCT) is a modular toolkit for developing, simulating, and generating executable "_finite-state machines (FSM)_":https://en.wikipedia.org/wiki/Finite-state_machine or simply _state machines_. State machines are useful for the model-driven development of so-called event-discrete systems, i.e. systems that are always in exactly one state of a finite number of states. State machines are particularly well-suited for embedded systems, but they are in no way restricted to them.
+YAKINDU Statechart Tools (YAKINDU SCT) is a modular toolkit for developing, simulating, and generating executable "_finite-state machines (FSM)_":https://en.wikipedia.org/wiki/Finite-state_machine or simply _state machines_. State machines are useful for the model-driven development of so-called event-discrete systems, i.e., systems that are always in exactly one state of a finite number of states. State machines are particularly well-suited for embedded systems, but they are in no way restricted to them.
 
 With YAKINDU Statechart Tools you can easily develop and simulate state machines, as well as generating them as source code for your target software system. YAKINDU Statechart Tools is based on the open-source development platform Eclipse.
 
@@ -9,10 +13,12 @@ The Standard Edition of YAKINDU Statechart Tools provides the following features
 
 * *Statechart diagram editor* to graphically create and edit statecharts, the graphical representation of state machines
 * *Statechart simulator* to simulate the behavior of statecharts
-* *Code generators for Java, C, C++, and TypeScript* to transform statecharts into programming language source code
+* *Code generators for Java, C, and C++* to transform statecharts into programming language source code
 * *Custom generator projects* to easily create model-to-text transformations with Xtend or Java in order to create any code of your own choice
 * *Integrated validator* to check for syntactical or semantical problems of the statechart model
 * *Testing framework* to test your state machines with unit tests
+
+###. CHECK: Does YSCT provide code generators for C, C++, and Java?
 
 The following graph shows these features and their relation to each other:
 
@@ -32,7 +38,7 @@ h2(#overview_which_licensing_rules_do_apply_to_yakindu_statechart_tools). Which 
 
 ###. CHECK Do these licensing information still apply?
 
-The source code of YAKINDU Statechart Tools is provided under the "Eclipse Public License":http://www.eclipse.org/legal/epl-v10.html.
+Parts of the source code of YAKINDU Statechart Tools are provided under the "Eclipse Public License":http://www.eclipse.org/legal/epl-v10.html.
 
 The code generators coming with YAKINDU Statechart Tools do not imply any license constraints on the generated code whatsoever. The generated code is property of the user, as a person or as an organization. For the generated code, the user is free to choose any license model they wish.
 
@@ -48,4 +54,8 @@ YAKINDU Statechart Tools is developed and driven by "itemis AG":https://en.wikip
 
 h2(#overview_who_is_using_yakindu_statechart_tools). Who is using YAKINDU Statechart Tools?
 
-Initially YAKINDU Statechart Tools have been designed for the embedded systems industry: automotive, system controls, vending machines etc. However, YAKINDU Statechart Tools are bringing the benefits of finite-state machines (FSM) and Harel statecharts to everyone who needs to design, simulate and develop behavior. People can use YAKINDU Statechart Tools to generate Java, C, C++, or TypeScript code.
+Initially YAKINDU Statechart Tools have been designed for the embedded systems industry: automotive, system controls, vending machines etc. However, YAKINDU Statechart Tools are bringing the benefits of finite-state machines (FSM) and Harel statecharts to everyone who needs to design, simulate and develop behavior. People can use YAKINDU Statechart Tools to generate Java, C, or C++ code.
+
+###. CHECK: Does YSCT provide code generators for C, C++, and Java?
+
+==</div>==

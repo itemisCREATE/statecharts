@@ -32,7 +32,6 @@ import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Image;
@@ -42,12 +41,10 @@ import org.yakindu.base.gmf.runtime.decorators.AbstractDecoratorProvider;
 import org.yakindu.base.gmf.runtime.decorators.InteractiveDecorator;
 import org.yakindu.base.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
-import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.StatechartImages;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
-import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 
 /**
@@ -67,12 +64,28 @@ public class DefinitionSectionDecorationProvider extends AbstractDecoratorProvid
 
 	public static class DefinitionSectionDecorator extends InteractiveDecorator {
 
-		private static final Insets HIGHLIGHTING_BORDER_INSETS = new Insets(1, 1, 1, 1);
+		private static final LineBorder decorationLineBorder = new LineBorder(ColorConstants.lightGray);
+		private static final MarginBorder marginBorder = new MarginBorder(1, 0, 1, 0);
+		private static final Insets decorationExpandInsets = new Insets(0, 0, 0, 3);
 		private static final String TOOLTIP_TEXT = "Pin statechart definition section";
-		protected static final IPreferenceStore preferenceStore = DiagramActivator.getDefault().getPreferenceStore();
+		private static Cursor handCursor;
+		private static final int SHIFT_DY = 1;
+		private static final int SHIFT_DX = -2;
+		private DecorationMouseMotionListener decorationMouseMotionListener;
 
 		public DefinitionSectionDecorator(IDecoratorTarget decoratorTarget) {
 			super(decoratorTarget);
+		}
+
+		@Override
+		protected void disposeDecoration() {
+			if (handCursor != null)
+				handCursor.dispose();
+			if (getDecoration() != null && decorationMouseMotionListener != null) {
+				getDecoration().removeMouseMotionListener(decorationMouseMotionListener);
+				decorationMouseMotionListener = null;
+			}
+			super.disposeDecoration();
 		}
 
 		@Override
@@ -87,14 +100,12 @@ public class DefinitionSectionDecorationProvider extends AbstractDecoratorProvid
 
 		@Override
 		protected boolean shouldDecorate(EObject element) {
-			if (preferenceStore.getBoolean(StatechartPreferenceConstants.PREF_DEFINITION_SECTION)) {
-				if (getDecoratorTarget().getAdapter(IPrimaryEditPart.class) instanceof StatechartTextEditPart) {
-					StatechartTextEditPart adapter = (StatechartTextEditPart) getDecoratorTarget()
-							.getAdapter(IPrimaryEditPart.class);
-					BooleanValueStyle style = GMFNotationUtil.getBooleanValueStyle(adapter.getNotationView(),
-							DiagramPartitioningUtil.INLINE_DEFINITION_SECTION_STYLE);
-					return style == null ? true : style.isBooleanValue();
-				}
+			if (getDecoratorTarget().getAdapter(IPrimaryEditPart.class) instanceof StatechartTextEditPart) {
+				StatechartTextEditPart adapter = (StatechartTextEditPart) getDecoratorTarget()
+						.getAdapter(IPrimaryEditPart.class);
+				BooleanValueStyle style = GMFNotationUtil.getBooleanValueStyle(adapter.getNotationView(),
+						DiagramPartitioningUtil.INLINE_DEFINITION_SECTION_STYLE);
+				return style == null ? true : style.isBooleanValue();
 			}
 			return false;
 		}
@@ -102,37 +113,17 @@ public class DefinitionSectionDecorationProvider extends AbstractDecoratorProvid
 		@Override
 		protected Decoration createDecoration(EObject semanticElement) {
 			Decoration decoration = super.createDecoration(semanticElement);
-			installIconHighlighting(decoration, semanticElement);
+			if (decoration != null && semanticElement != null)
+				installIconHighlighting(decoration, semanticElement);
 			return decoration;
 		}
 
 		protected void installIconHighlighting(Decoration decoration, final EObject semanticElement) {
-			decoration.getBounds().expand(HIGHLIGHTING_BORDER_INSETS);
-			decoration.addMouseMotionListener(new MouseMotionListener() {
-
-				@Override
-				public void mouseDragged(org.eclipse.draw2d.MouseEvent me) {
-				}
-
-				@Override
-				public void mouseEntered(org.eclipse.draw2d.MouseEvent me) {
-					decoration.setCursor(new Cursor(Display.getDefault(), SWT.CURSOR_HAND));
-					decoration.setBorder(new LineBorder(ColorConstants.lightGray));
-				}
-
-				@Override
-				public void mouseExited(org.eclipse.draw2d.MouseEvent me) {
-					decoration.setBorder(new MarginBorder(HIGHLIGHTING_BORDER_INSETS));
-				}
-
-				@Override
-				public void mouseHover(org.eclipse.draw2d.MouseEvent me) {
-				}
-
-				@Override
-				public void mouseMoved(org.eclipse.draw2d.MouseEvent me) {
-				}
-			});
+			decoration.getBounds().translate(SHIFT_DX, SHIFT_DY);
+			decoration.getBounds().expand(decorationExpandInsets);
+			if (decorationMouseMotionListener == null)
+				decorationMouseMotionListener = new DecorationMouseMotionListener(decoration);
+			decoration.addMouseMotionListener(decorationMouseMotionListener);
 		}
 
 		@Override
@@ -188,6 +179,31 @@ public class DefinitionSectionDecorationProvider extends AbstractDecoratorProvid
 			return new Label(TOOLTIP_TEXT);
 		}
 
+		protected class DecorationMouseMotionListener implements MouseMotionListener {
+			private final Decoration decoration;
+			protected DecorationMouseMotionListener(Decoration decoration) {
+				this.decoration = decoration;
+			}
+			@Override
+			public void mouseEntered(org.eclipse.draw2d.MouseEvent me) {
+				if (handCursor == null || handCursor.isDisposed())
+					handCursor = new Cursor(Display.getDefault(), SWT.CURSOR_HAND);
+				decoration.setCursor(handCursor);
+				decoration.setBorder(decorationLineBorder);
+			}
+			@Override
+			public void mouseExited(org.eclipse.draw2d.MouseEvent me) {
+				decoration.setBorder(marginBorder);
+			}
+			@Override
+			public void mouseDragged(org.eclipse.draw2d.MouseEvent me) {
+			}
+			@Override
+			public void mouseHover(org.eclipse.draw2d.MouseEvent me) {
+			}
+			@Override
+			public void mouseMoved(org.eclipse.draw2d.MouseEvent me) {
+			}
+		}
 	}
-
 }

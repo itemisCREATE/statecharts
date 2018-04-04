@@ -66,12 +66,10 @@ public class DomainRegistry {
 
 	private static List<IDomain> domainDescriptors;
 
-	public static List<IDomain> getDomains() {
+	public static synchronized List<IDomain> getDomains() {
 		if (domainDescriptors == null) {
 			domainDescriptors = Lists.newArrayList();
-			if (Platform.isRunning()) {
-				initFromExtensions();
-			}
+			initFromExtensions();
 		}
 		return domainDescriptors;
 	}
@@ -105,8 +103,10 @@ public class DomainRegistry {
 			Iterables.find(getDomains(), new Predicate<IDomain>() {
 				@Override
 				public boolean apply(IDomain input) {
-					return input.getDomainID().equals(domainID == null || domainID.isEmpty()
-							? BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral() : domainID);
+					return input.getDomainID()
+							.equals(domainID == null || domainID.isEmpty()
+									? BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral()
+									: domainID);
 				}
 			});
 		} catch (NoSuchElementException e) {
@@ -175,6 +175,7 @@ public class DomainRegistry {
 					}
 				}), provider);
 	}
+
 	/**
 	 * Efficient parser to determine the DomainId without loading the whole resource
 	 *

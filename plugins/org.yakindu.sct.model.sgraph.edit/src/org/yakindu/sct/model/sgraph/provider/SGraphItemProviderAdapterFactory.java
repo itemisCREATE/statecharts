@@ -361,6 +361,29 @@ public class SGraphItemProviderAdapterFactory extends SGraphAdapterFactory imple
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sgraph.ScopeMember} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ScopeMemberItemProvider scopeMemberItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sgraph.ScopeMember}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createScopeMemberAdapter() {
+		if (scopeMemberItemProvider == null) {
+			scopeMemberItemProvider = new ScopeMemberItemProvider(this);
+		}
+
+		return scopeMemberItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -471,6 +494,7 @@ public class SGraphItemProviderAdapterFactory extends SGraphAdapterFactory imple
 		if (synchronizationItemProvider != null) synchronizationItemProvider.dispose();
 		if (stateItemProvider != null) stateItemProvider.dispose();
 		if (importDeclarationItemProvider != null) importDeclarationItemProvider.dispose();
+		if (scopeMemberItemProvider != null) scopeMemberItemProvider.dispose();
 	}
 
 }

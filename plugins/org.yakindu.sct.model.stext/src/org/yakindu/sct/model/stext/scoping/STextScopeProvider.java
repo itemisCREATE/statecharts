@@ -13,8 +13,6 @@ package org.yakindu.sct.model.stext.scoping;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -30,7 +28,6 @@ import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.scoping.impl.ImportScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
-import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
@@ -55,7 +52,6 @@ import org.yakindu.sct.model.stext.stext.InternalScope;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 
 /**
  * 
@@ -74,45 +70,6 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 	private IQualifiedNameProvider nameProvider;
 	@Inject
 	private ContextPredicateProvider predicateProvider;
-	@Inject
-	private Injector injector;
-	
-	public static class ErrorHandlerDelegate<T> implements ErrorHandler<T> {
-
-		protected ErrorHandler<T> delegate;
-
-		public static final Log LOG = LogFactory.getLog(STextScopeProvider.class);
-
-		public T handle(Object[] params, Throwable throwable) {
-			if (throwable instanceof NoSuchMethodException) {
-				LOG.debug("Error in scope method, using fallback", throwable);
-			} else {
-				LOG.warn("Error in scope method, using fallback", throwable);
-			}
-			return delegate.handle(params, throwable);
-		}
-
-		public void setDelegate(ErrorHandler<T> delegate) {
-			this.delegate = delegate;
-		}
-
-	}
-	
-	@Override
-	public IScope getScope(EObject context, EReference reference) {
-		ErrorHandler<IScope> originalHandler = getErrorHandler();
-		try {
-			ErrorHandlerDelegate instance = injector.getInstance(ErrorHandlerDelegate.class);
-			instance.setDelegate(originalHandler);
-			setErrorHandler(instance);
-			IScope scope = super.getScope(context, reference);
-			return scope;
-		} catch (Throwable t) {
-				throw t;
-		} finally {
-			setErrorHandler(originalHandler);
-		}
-	}
 	
 	public IScope scope_ActiveStateReferenceExpression_value(EObject context, EReference reference) {
 		Statechart statechart = getStatechart(context);

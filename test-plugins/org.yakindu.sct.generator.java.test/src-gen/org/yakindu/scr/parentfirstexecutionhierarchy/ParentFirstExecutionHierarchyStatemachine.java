@@ -121,8 +121,6 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 	
 	private int nextStateIndex;
 	
-	
-	
 	public ParentFirstExecutionHierarchyStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}

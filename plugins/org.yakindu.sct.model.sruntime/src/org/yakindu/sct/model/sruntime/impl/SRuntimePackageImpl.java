@@ -13,7 +13,6 @@ package org.yakindu.sct.model.sruntime.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -21,7 +20,6 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sruntime.CompositeSlot;
-import org.yakindu.sct.model.sruntime.EventDirection;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.model.sruntime.ExecutionEvent;
 import org.yakindu.sct.model.sruntime.ExecutionOperation;
@@ -86,13 +84,6 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * @generated
 	 */
 	private EClass executionOperationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EEnum eventDirectionEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -342,15 +333,6 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getEventDirection() {
-		return eventDirectionEEnum;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EDataType getJavaObject() {
 		return javaObjectEDataType;
 	}
@@ -408,9 +390,6 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 		createEReference(referenceSlotEClass, REFERENCE_SLOT__REFERENCE);
 
 		executionOperationEClass = createEClass(EXECUTION_OPERATION);
-
-		// Create enums
-		eventDirectionEEnum = createEEnum(EVENT_DIRECTION);
 
 		// Create data types
 		javaObjectEDataType = createEDataType(JAVA_OBJECT);
@@ -483,7 +462,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 
 		initEClass(executionEventEClass, ExecutionEvent.class, "ExecutionEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getExecutionEvent_Raised(), ecorePackage.getEBoolean(), "raised", null, 0, 1, ExecutionEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getExecutionEvent_Direction(), this.getEventDirection(), "direction", null, 0, 1, ExecutionEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getExecutionEvent_Direction(), theTypesPackage.getDirection(), "direction", null, 0, 1, ExecutionEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(executionSlotEClass, ExecutionSlot.class, "ExecutionSlot", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getExecutionSlot_Value(), this.getJavaObject(), "value", null, 0, 1, ExecutionSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -500,12 +479,6 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 		initEReference(getReferenceSlot_Reference(), this.getExecutionSlot(), null, "reference", null, 0, 1, ReferenceSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(executionOperationEClass, ExecutionOperation.class, "ExecutionOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		// Initialize enums and add enum literals
-		initEEnum(eventDirectionEEnum, EventDirection.class, "EventDirection");
-		addEEnumLiteral(eventDirectionEEnum, EventDirection.LOCAL);
-		addEEnumLiteral(eventDirectionEEnum, EventDirection.IN);
-		addEEnumLiteral(eventDirectionEEnum, EventDirection.OUT);
 
 		// Initialize data types
 		initEDataType(javaObjectEDataType, Object.class, "JavaObject", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

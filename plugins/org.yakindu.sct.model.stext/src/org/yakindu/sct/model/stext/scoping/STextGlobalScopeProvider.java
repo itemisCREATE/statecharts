@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -38,6 +39,7 @@ import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.base.types.resource.TypedResourceDescriptionStrategy;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
@@ -99,7 +101,10 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 			}
 		});
 		result = filterAnnotations(reference, result);
-		return result;
+		return new FilteringScope(result, input -> {
+			String isVisible = input.getUserData(TypedResourceDescriptionStrategy.IS_VISIBLE_TYPE);
+			return isVisible == null || Boolean.valueOf(isVisible);
+		});
 	}
 
 	protected IScope filterAnnotations(EReference reference, IScope result) {
@@ -158,9 +163,9 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 
 	protected void collectPackageImports(Resource resource, String packageImport, IAcceptor<String> acceptor,
 			LinkedHashSet<URI> uniqueImportURIs) {
-		PackageImport pkgImport = mapper.findPackageImport(resource, packageImport);
-		if (pkgImport != null && pkgImport.getUri() != null && URIConverter.INSTANCE.exists(pkgImport.getUri(), null)) {
-			acceptor.accept(pkgImport.getUri().toString());
+		Optional<PackageImport> pkgImport = mapper.findPackageImport(resource, packageImport);
+		if (pkgImport.isPresent() && pkgImport.get().getUri() != null && URIConverter.INSTANCE.exists(pkgImport.get().getUri(), null)) {
+			acceptor.accept(pkgImport.get().getUri().toString());
 		}
 	}
 

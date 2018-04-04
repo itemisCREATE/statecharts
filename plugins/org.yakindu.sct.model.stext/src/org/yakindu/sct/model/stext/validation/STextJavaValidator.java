@@ -11,9 +11,9 @@
  */
 package org.yakindu.sct.model.stext.validation;
 
-import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION;
-import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_ANNOTATION;
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CHILD_FIRST_ANNOTATION;
+import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_ANNOTATION;
+import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION;
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.PARENT_FIRST_ANNOTATION;
 
 import java.util.ArrayList;
@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -33,6 +34,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.mwe2.language.mwe2.StringLiteral;
 import org.eclipse.xtext.Constants;
@@ -84,6 +86,8 @@ import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.validation.SCTResourceValidator;
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
+import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper;
+import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
@@ -98,6 +102,7 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.ExitEvent;
 import org.yakindu.sct.model.stext.stext.ExitPointSpec;
 import org.yakindu.sct.model.stext.stext.Guard;
+import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
@@ -126,7 +131,8 @@ import com.ibm.icu.impl.PVecToTrieCompactHandler;
  * @author herrendorf
  * 
  */
-@ComposedChecks(validators = {SGraphJavaValidator.class, SCTResourceValidator.class, ExpressionsJavaValidator.class})
+@ComposedChecks(validators = { SGraphJavaValidator.class, SCTResourceValidator.class, ExpressionsJavaValidator.class,
+		STextNamesAreUniqueValidator.class })
 public class STextJavaValidator extends AbstractSTextJavaValidator implements STextValidationMessages {
 
 	@Inject
@@ -141,6 +147,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	@Inject(optional = true)
 	@Named(DomainRegistry.DOMAIN_ID)
 	private String domainID = BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
+	@Inject(optional = true)
+	private IPackageImport2URIMapper mapper;
 
 	@Check(CheckType.FAST)
 	public void checkExpression(VariableDefinition expression) {
@@ -257,7 +265,40 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 	}
 
-	@Check(CheckType.NORMAL)
+	@Check(CheckType.FAST)
+	public void checkReadOnlyValueDefinitionExpression(VariableDefinition definition) {
+		// applies only for readonly variable definitions
+		if (!definition.isReadonly())
+			return;
+		ICompositeNode definitionNode = NodeModelUtils.getNode(definition);
+		String tokenText = NodeModelUtils.getTokenText(definitionNode);
+
+		if (tokenText == null || tokenText.isEmpty())
+			return;
+		if (tokenText.contains(TypesPackage.Literals.PROPERTY__READONLY.getName())) {
+			warning(String.format(STextValidationMessages.DECLARATION_DEPRECATED,
+					TypesPackage.Literals.PROPERTY__READONLY.getName()), definition,
+					TypesPackage.Literals.PROPERTY__READONLY);
+		}
+	}
+
+	@Check(CheckType.FAST)
+	public void checkExternalValueDefinitionExpression(VariableDefinition definition) {
+		// applies only for external variable definitions
+		if (!definition.isExternal())
+			return;
+		ICompositeNode definitionNode = NodeModelUtils.getNode(definition);
+		String tokenText = NodeModelUtils.getTokenText(definitionNode);
+		if (tokenText == null || tokenText.isEmpty())
+			return;
+		if (tokenText.contains(TypesPackage.Literals.PROPERTY__EXTERNAL.getName())) {
+			warning(String.format(STextValidationMessages.DECLARATION_DEPRECATED,
+					TypesPackage.Literals.PROPERTY__EXTERNAL.getName()), definition,
+					TypesPackage.Literals.PROPERTY__EXTERNAL);
+		}
+	}
+
+	@Check(CheckType.FAST)
 	public void checkUnusedVariablesInInternalScope(InternalScope internalScope) {
 		EList<Declaration> internalScopeDeclarations = internalScope.getDeclarations();
 
@@ -299,7 +340,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 					}
 				}
 				if (!internalDeclarationUsed) {
-
 					if (internalDeclaration instanceof VariableDefinition
 							|| internalDeclaration instanceof EventDefinition
 							|| internalDeclaration instanceof OperationDefinition)
@@ -307,7 +347,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				}
 			}
 		}
-
 	}
 
 	@Check(CheckType.FAST)
@@ -728,6 +767,21 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	}
 
 	@Check(CheckType.FAST)
+	public void checkDeprecatedLocalEventDefinition(EventDefinition event) {
+		// applies only for local event definitions
+		if (event.eContainer() instanceof InternalScope && event.getDirection() == Direction.LOCAL) {
+			ICompositeNode definitionNode = NodeModelUtils.getNode(event);
+			String tokenText = NodeModelUtils.getTokenText(definitionNode);
+			if (tokenText == null || tokenText.isEmpty())
+				return;
+			if (tokenText.contains(Direction.LOCAL.getLiteral())) {
+				warning(String.format(STextValidationMessages.DECLARATION_DEPRECATED, Direction.LOCAL.getLiteral()),
+						event, TypesPackage.Literals.EVENT__DIRECTION);
+			}
+		}
+	}
+
+	@Check(CheckType.FAST)
 	public void checkExitPointSpecWithTrigger(Transition t) {
 		if (!STextValidationModelUtils.getExitPointSpecs(t.getProperties()).isEmpty() && t.getTrigger() != null
 				&& t.getSource() instanceof org.yakindu.sct.model.sgraph.State) {
@@ -763,6 +817,39 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 		if (!found)
 			warning(CHOICE_ONE_OUTGOING_DEFAULT_TRANSITION, SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS);
+	}
+
+	@Check
+	public void checkDuplicateImport(ImportScope importScope) {
+		EList<Scope> allScopes = EcoreUtil2.getContainerOfType(importScope, ScopedElement.class).getScopes();
+
+		nextImportOfCurrentScope: for (String importToCheck : importScope.getImports()) {
+			Set<String> allImports = Sets.newHashSet();
+			for (Scope scope : allScopes) {
+				if (!(scope instanceof ImportScope))
+					continue;// exclude internal & interface scopes
+				for (String anImport : ((ImportScope) scope).getImports()) {
+					if (anImport.equals(importToCheck) && !allImports.add(anImport)) {
+						warning(String.format(DUPLICATE_IMPORT, importToCheck), importScope,
+								StextPackage.Literals.IMPORT_SCOPE__IMPORTS,
+								importScope.getImports().indexOf(importToCheck));
+						continue nextImportOfCurrentScope;
+					}
+				}
+			}
+		}
+	}
+
+	@Check
+	public void checkImportExists(ImportScope scope) {
+		EList<String> imports = scope.getImports();
+		for (String packageImport : imports) {
+			Optional<PackageImport> pkImport = mapper.findPackageImport(scope.eResource(), packageImport);
+			if (!pkImport.isPresent() || !URIConverter.INSTANCE.exists(pkImport.get().getUri(), null)) {
+				error(String.format(IMPORT_NOT_RESOLVED_MSG, packageImport), scope,
+						StextPackage.Literals.IMPORT_SCOPE__IMPORTS, imports.indexOf(packageImport));
+			}
+		}
 	}
 
 	protected void checkElementReferenceEffect(ElementReferenceExpression refExp) {
@@ -885,6 +972,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		if (provider == null) {
 			return EcoreUtil2.getContainerOfType(context, Statechart.class);
 		} else {
+			if(provider.getElement().eResource() == null) return null;
 			return (Statechart) EcoreUtil.getObjectByType(provider.getElement().eResource().getContents(),
 					SGraphPackage.Literals.STATECHART);
 		}

@@ -53,6 +53,7 @@ public class RegionFigure extends RectangleFigure {
 	private void createContents() {
 		nameLabel = new SyntaxColoringLabel();
 		GridData data = GridDataFactory.fillDefaults().grab(true, false).getData();
+		data.horizontalIndent = 5;
 		nameLabel.setTextPlacement(PositionConstants.WEST);
 		this.add(nameLabel, data);
 

@@ -55,6 +55,7 @@
 
 
     {{ user_head_overrides }}
+    <script type="text/javascript" src="{{ get_public_template_url('custom/page/YSCT_Templates/yakindu.js') }}"></script>
 </head>
 <body class="homepage-test sct-docs {{ builtin_body_classes }}" style="">
     

@@ -6,13 +6,14 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 
 package org.yakindu.sct.simulation.core.sexec.container;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.util.EContentAdapter;
+import org.yakindu.base.types.Direction;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sruntime.ExecutionEvent;
 import org.yakindu.sct.model.sruntime.SRuntimePackage;
@@ -21,9 +22,9 @@ import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpret
 
 /**
  * Event Driven implementation of the {@link ISimulationEngine}.
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulationEngine {
 
@@ -54,8 +55,8 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 
 	@Override
 	public void resume() {
-		cycleAdapter.resume();
 		super.resume();
+		cycleAdapter.resume();
 	}
 
 	@Override
@@ -75,7 +76,6 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 
 	public static class EventDrivenCycleAdapter extends EContentAdapter {
 
-		
 		private IExecutionFlowInterpreter interpreter;
 
 		private boolean suspended = false;
@@ -85,13 +85,15 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 			this.interpreter = interpreter;
 		}
 
+		@Override
 		public void notifyChanged(Notification notification) {
 			super.notifyChanged(notification);
 			if (notification.getNotifier() instanceof ExecutionEvent
 					&& notification.getFeature() == SRuntimePackage.Literals.EXECUTION_EVENT__RAISED) {
+				ExecutionEvent event = (ExecutionEvent) notification.getNotifier();
 				if (notification.getNewBooleanValue() != notification.getOldBooleanValue()) {
-					if (notification.getNewBooleanValue()) {
-						if (!suspended) 
+					if (notification.getNewBooleanValue() && event.getDirection() != Direction.OUT) {
+						if (!suspended)
 							interpreter.runCycle();
 						else {
 							cycleAfterResume = true;
@@ -101,7 +103,8 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 			}
 
 		}
-		
+
+		@Override
 		public boolean isAdapterForType(Object type) {
 			return type == EventDrivenCycleAdapter.class;
 		}

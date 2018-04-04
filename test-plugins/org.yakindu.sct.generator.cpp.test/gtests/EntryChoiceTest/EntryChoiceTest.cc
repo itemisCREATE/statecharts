@@ -5,15 +5,18 @@
 #include "sc_runner.h"
 #include "sc_types.h"
 
+namespace  {
 
 
-static EntryChoice* statechart;
 
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class EntryChoiceTest : public ::testing::Test{
 	protected:
+	
+	EntryChoice* statechart;
+	
 	virtual void SetUp() {
 		statechart = new EntryChoice();
 		statechart->init();
@@ -27,17 +30,21 @@ class EntryChoiceTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
+	TEST_F(EntryChoiceTest, EntryChoiceTest) {
+		
+		statechart->enter();
+		
+		runner->proceed_cycles(1);
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(EntryChoice::main_region_A));
+		
+		
+}
 
-TEST_F(EntryChoiceTest, EntryChoiceTest) {
-	
-	statechart->enter();
-	
-	runner->proceed_cycles(1);
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(EntryChoice::main_region_A));
-	
 }

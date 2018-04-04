@@ -253,4 +253,25 @@ public class AbstractTypeSystemTest extends AbstractTypeSystem {
 		assertTrue(isExtensionOperation(extensionOperation3));
 	}
 	
+	@Test
+	public void testMultipleInheritance() {
+		// SubType extends SuperType
+		Type int16 = createPrimitive("int16");
+		declareType(int16, "int16");
+		
+		Type uint16 = createPrimitive("uint16");
+		declareType(uint16, "uint16");
+		
+		Type int8 = createPrimitive("int8");
+		declareType(int8, "int8");
+		
+		Type uint8 = createPrimitive("uint8");
+		declareType(uint8, "uint8");
+		
+		declareSuperType(int8, int16);
+		declareSuperType(uint8, int16);
+		
+		assertTrue(isSame(getType("int16"), getCommonType(int8, uint8)));
+	}
+	
 }

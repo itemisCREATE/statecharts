@@ -5,15 +5,18 @@
 #include "sc_runner.h"
 #include "sc_types.h"
 
+namespace  {
 
 
-static NullCheck* statechart;
 
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class NullCheckTest : public ::testing::Test{
 	protected:
+	
+	NullCheck* statechart;
+	
 	virtual void SetUp() {
 		statechart = new NullCheck();
 		statechart->init();
@@ -27,17 +30,21 @@ class NullCheckTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
+	TEST_F(NullCheckTest, SimpleNullCheckTest) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(NullCheck::main_region_A));
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(NullCheck::main_region_B));
+		
+		
+}
 
-TEST_F(NullCheckTest, SimpleNullCheckTest) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(NullCheck::main_region_A));
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(NullCheck::main_region_B));
-	
 }

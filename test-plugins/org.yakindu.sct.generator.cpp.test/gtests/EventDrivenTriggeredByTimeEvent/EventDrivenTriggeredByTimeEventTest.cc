@@ -5,15 +5,18 @@
 #include "sc_runner_timed.h"
 #include "sc_types.h"
 
+namespace  {
 
 
-static EventDrivenTriggeredByTimeEvent* statechart;
 
 //! The timers are managed by a timer service. */
 static TimedSctUnitRunner * runner;
 
 class EventDrivenTriggeredByTimeEventTest : public ::testing::Test{
 	protected:
+	
+	EventDrivenTriggeredByTimeEvent* statechart;
+	
 	virtual void SetUp() {
 		statechart = new EventDrivenTriggeredByTimeEvent();
 		statechart->init();
@@ -28,55 +31,59 @@ class EventDrivenTriggeredByTimeEventTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
+	TEST_F(EventDrivenTriggeredByTimeEventTest, timeEventTriggersRunCycle) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_A));
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
+		
+		runner->proceed_time(999);
+		
+		EXPECT_TRUE(statechart->isStateActive(EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_A));
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
+		
+		runner->proceed_time(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_B));
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_transition_count()== 1l);
+		
+		runner->proceed_time(1000);
+		
+		EXPECT_TRUE(statechart->isStateActive(EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_A));
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_transition_count()== 2l);
+		
+		runner->proceed_time(999000);
+		
+		EXPECT_TRUE(statechart->isStateActive(EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_B));
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_transition_count()== 1001l);
+		
+		runner->proceed_time(999000);
+		
+		EXPECT_TRUE(statechart->isStateActive(EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_A));
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_transition_count()== 2000l);
+		
+		statechart->exit();
+		
+		
+}
 
-TEST_F(EventDrivenTriggeredByTimeEventTest, timeEventTriggersRunCycle) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_A));
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
-	
-	runner->proceed_time(999);
-	
-	EXPECT_TRUE(statechart->isStateActive(EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_A));
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
-	
-	runner->proceed_time(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_B));
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_transition_count()== 1l);
-	
-	runner->proceed_time(1000);
-	
-	EXPECT_TRUE(statechart->isStateActive(EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_A));
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_transition_count()== 2l);
-	
-	runner->proceed_time(999000);
-	
-	EXPECT_TRUE(statechart->isStateActive(EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_B));
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_transition_count()== 1001l);
-	
-	runner->proceed_time(999000);
-	
-	EXPECT_TRUE(statechart->isStateActive(EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_A));
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_transition_count()== 2000l);
-	
-	statechart->exit();
-	
 }

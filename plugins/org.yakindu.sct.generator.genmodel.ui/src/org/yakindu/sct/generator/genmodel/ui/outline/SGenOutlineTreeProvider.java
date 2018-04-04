@@ -10,12 +10,24 @@
 */
 package org.yakindu.sct.generator.genmodel.ui.outline;
 
+import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
+import org.yakindu.base.base.NamedElement;
+import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 /**
  * customization of the default outline structure
  * 
  */
 public class SGenOutlineTreeProvider extends DefaultOutlineTreeProvider {
-	
+
+	protected void _createNode(IOutlineNode parentNode, GeneratorEntry modelElement) {
+		String name = modelElement.getContentType();
+		if (modelElement.getElementRef() instanceof NamedElement) {
+			name = name + " " + ((NamedElement) modelElement.getElementRef()).getName();
+		}
+		createEObjectNode(parentNode, modelElement, imageDispatcher.invoke(modelElement), name,
+				isLeafDispatcher.invoke(modelElement));
+	}
+
 }

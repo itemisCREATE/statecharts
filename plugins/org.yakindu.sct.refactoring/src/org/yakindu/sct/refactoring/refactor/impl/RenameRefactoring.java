@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
+import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 
 /**
@@ -54,7 +55,7 @@ public class RenameRefactoring extends AbstractRefactoring<NamedElement> {
 
 	@Override
 	public boolean isExecutable() {
-		return (getContextObject() != null);
+		return (getContextObject() != null && EcoreUtil.getRootContainer(getContextObject()) instanceof Statechart);
 	}
 
 	@Override

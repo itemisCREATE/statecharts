@@ -10,11 +10,15 @@
  */
 package org.yakindu.sct.generator.genmodel.ui.wizard;
 
+
+
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
@@ -42,6 +46,14 @@ public class WorkspaceGeneratorWizardPage1 extends IProjectWizardPage {
 			validate();
 		}
 	};
+	
+	public final MouseAdapter mouseListener = new MouseAdapter() {
+		public void mouseUp(MouseEvent e) {
+			validate();
+		}
+	}; 
+
+	
 	private GeneratorComposite generatorComposite;
 
 	protected WorkspaceGeneratorWizardPage1(String pageName) {
@@ -62,6 +74,7 @@ public class WorkspaceGeneratorWizardPage1 extends IProjectWizardPage {
 		lblProjectName.setText("Project name:");
 		txtProjectName = new Text(projectNameGroup, SWT.SINGLE | SWT.BORDER);
 		txtProjectName.addKeyListener(textBoxListener);
+		txtProjectName.addMouseListener(mouseListener);
 		GridDataFactory.fillDefaults().grab(true, false)
 				.applyTo(txtProjectName);
 
@@ -70,6 +83,7 @@ public class WorkspaceGeneratorWizardPage1 extends IProjectWizardPage {
 
 		txtGeneratorClass = new Text(projectNameGroup, SWT.SINGLE | SWT.BORDER);
 		txtGeneratorClass.addKeyListener(textBoxListener);
+		txtGeneratorClass.addMouseListener(mouseListener);
 		GridDataFactory.fillDefaults().grab(true, false)
 				.applyTo(txtGeneratorClass);
 
@@ -178,5 +192,4 @@ public class WorkspaceGeneratorWizardPage1 extends IProjectWizardPage {
 		}
 
 	}
-
 }

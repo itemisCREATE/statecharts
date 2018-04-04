@@ -5,15 +5,18 @@
 #include "sc_runner.h"
 #include "sc_types.h"
 
+namespace  {
 
 
-static LogicalAnd* statechart;
 
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class LogicalAndTests : public ::testing::Test{
 	protected:
+	
+	LogicalAnd* statechart;
+	
 	virtual void SetUp() {
 		statechart = new LogicalAnd();
 		statechart->init();
@@ -27,15 +30,19 @@ class LogicalAndTests : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
+	TEST_F(LogicalAndTests, operandEvaluationOrder) {
+		
+		statechart->enter();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 4l && statechart->getDefaultSCI()->get_b()) << "logical and expression was executed in wrong order..." ;
+		
+		
+}
 
-TEST_F(LogicalAndTests, operandEvaluationOrder) {
-	
-	statechart->enter();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 4l && statechart->getDefaultSCI()->get_b()) << "logical and expression was executed in wrong order..." ;
-	
 }

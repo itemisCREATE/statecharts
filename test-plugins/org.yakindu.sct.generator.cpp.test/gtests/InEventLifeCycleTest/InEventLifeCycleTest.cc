@@ -5,15 +5,18 @@
 #include "sc_runner.h"
 #include "sc_types.h"
 
+namespace  {
 
 
-static InEventLifeCycle* statechart;
 
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class InEventLifeCycleTest : public ::testing::Test{
 	protected:
+	
+	InEventLifeCycle* statechart;
+	
 	virtual void SetUp() {
 		statechart = new InEventLifeCycle();
 		statechart->init();
@@ -27,19 +30,23 @@ class InEventLifeCycleTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
+	TEST_F(InEventLifeCycleTest, eventLifeCycle) {
+		
+		statechart->enter();
+		
+		statechart->getDefaultSCI()->raise_e();
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_i()== 0l);
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_i()== 1l);
+		
+		
+}
 
-TEST_F(InEventLifeCycleTest, eventLifeCycle) {
-	
-	statechart->enter();
-	
-	statechart->getDefaultSCI()->raise_e();
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_i()== 0l);
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_i()== 1l);
-	
 }

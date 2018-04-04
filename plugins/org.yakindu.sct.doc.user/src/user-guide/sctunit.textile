@@ -1,4 +1,8 @@
 
+p. 
+
+==<div style="counter-reset: h1 7">==
+
 h1(#sctunit_test-driven_statechart_development_with_sctunit). Test-driven statechart development with SCTUnit
 
 h2(#sctunit_brief_introduction_to_test-driven_development). Brief introduction to test-driven development
@@ -12,7 +16,7 @@ Tests are not written for the complete software product in advance, but rather o
 
 h2(#sctunit_test-driven_statechart_modelling). Test-driven statechart modelling
 
-In "model-driven software development (MDSD)":https://en.wikipedia.org/wiki/Model-driven_software_development, specific parts of the software are created by a code generator instead of being written manually. This also pertains to code "generated from statechart models":../user-guide/generating_code.html.
+In "model-driven software development (MDSD)":https://en.wikipedia.org/wiki/Model-driven_software_development, specific parts of the software are created by a code generator instead of being written manually. This also pertains to code "generated from statechart models":../user-guide/code_generation_intro.html#codegen_generating_state_machine_code.
 
 The nice thing about generated code is that we can safely assume it to be correct – at least as long as the code generator developers have tested their product thoroughly enough. However, what about the model? While the generated code might be correct, this won't help at all if the underlying model is broken in the first place.
 
@@ -71,13 +75,13 @@ p. Let's walk through this example line by line and see what all of this means.
 * @testclass light_switch_tests for statechart light_switch {@
 ** The keyword @testclass@ introduces a test class, a collection of tests. In this example, it is named _light_switch_tests_.
 ** A test class always refers to a statechart that is under control and is to be tested. This relationship is established by the _for statechart_ clause. The keywords @for statechart@ are followed by the name of the statechart, here: _light_switch_. However, since there is no _light_switch_ statechart yet, an error marker is attached to the statechart name, as shown in the following screenshot:<br/>!images/sctunit_light_switch_010_initial_test.png(Initial test)!
-** The body of the test class is bracketed in braces, i.e. between @{@ and @}@.
+** The body of the test class is bracketed in braces, i.e., between @{@ and @}@.
 * <code>@Test</code><br/><code>operation isStateOffActiveAfterInit () {</code>
 ** Each test is an _operation_ that is annotated by <code>@Test</code>. This example defines the operation _isStateOffActiveAfterInit_. It has no parameters, which is indicated by <code>()</code>. As we will see later, an operation does not necessarily have to be a test, but can be a mere subroutine. Such operations can have parameters. The operation's body is bracketed in braces.
 * @enter@
 ** The _enter_ statement initializes and starts the state machine; it "enters" it. As a consequence, the state machine activates the state that is pointed to by the initial state.
 * @assert active (light_switch.main_region.Off)@
-** The _assert_ statement expects that a specified condition is fulfilled. Using the built-in _active_ function, our example's assertion expects that the state *Off* is active. The state is addressed in a fully-qualified manner, i.e. _statechart_._region_._state_. However, since we don't have a statechart model yet and less than ever any state, the *Off* state in the assertion is flagged as an error.
+** The _assert_ statement expects that a specified condition is fulfilled. Using the built-in _active_ function, our example's assertion expects that the state *Off* is active. The state is addressed in a fully-qualified manner, i.e., _statechart_._region_._state_. However, since we don't have a statechart model yet and less than ever any state, the *Off* state in the assertion is flagged as an error.
 
 
 
@@ -295,9 +299,9 @@ bc.
 
 ==</div>==
 
-p. The _header_ of an operation consists of an optional annotation, typically <code>&#x40;Test</code>, followed by the keyword @operation@, followed by the name of the operation, followed by a parenthesized list of parameters, optionally followed by a colon and a return type.
+p. The _header_ of an operation consists of an optional annotation, typically <code>&#x40;Test</code>, followed by the keyword @operation@, followed by the name of the operation, followed by a parenthesized list of parameters, optionally followed by a colon and a return type. If no return type is specified, it is inferred from the operation's "_return_ statement(s)":#sctunit_returning_an_operations_result.
 
-The _body_ of an operation is enclosed in braces (<code>{ … }</code>). It consists of a sequence of "statements":#sctunit_statements_and_expressions, which may be empty.
+The _body_ of an operation is enclosed in braces (<code>{ … }</code>). It consists of a sequence of "statements":#sctunit_statements_and_expressions, which may be empty. If the operation's header specifies a return type different from @void@, the operation must return a value of that type, using the "_return_ statement":#sctunit_returning_an_operations_result.
 
 Figure "&quot;Operation grammar&quot;":#sctunit_fig_operation_grammar summarizes the structure of an operation:
 
@@ -393,7 +397,7 @@ assert called myOperation with (42, 815)
 
 The first assertion checks whether the operation _myOperation_ has been called during the execution of this test. If it hasn't, the test fails.
 
-The second assertion not only checks whether the operation _myOperation_ has been called, but also checks whether it has been called with parameters 42 and 815. If the operation hasn't been called at all, the test fails. The test also fails if the operation has been called, but with different parameters than 42 and 815, e.g. @myOperation(1, 2)@.
+The second assertion not only checks whether the operation _myOperation_ has been called, but also checks whether it has been called with parameters 42 and 815. If the operation hasn't been called at all, the test fails. The test also fails if the operation has been called, but with different parameters than 42 and 815, e.g., @myOperation(1, 2)@.
 
 ==</div>==
 
@@ -403,10 +407,57 @@ In the second variant of the _assert called_ statement the keyword @with@ follow
 
 ==<!-- End sctunit_keyword_called -->==
 
+h5. Asserting an outgoing event
+
+Finally, you can use the _assert_ statement to check whether the state machine has raised an outgoing event. To do so, the @assert@ keyword is followed by the name of the desired event. It is also possible to assert the opposite, i.e., that the event has _not_ been raised. In this case, insert the negation operator @!@ between @assert@ and the event name.
+
+Here's an example:
+
+==<div class="example">==
+
+The statechart below transitions from state *A* to state *B* on either the _e1_ or the _e2_ incoming event. However, on _e1_, the outgoing event _e3_ will be raised, while this is not the case on _e2_.
+
+p(#sctunit_fig_statechart_raising_an_outgoing_event). 
+!(small)images/sctunit_outgoing_event_010.png(Statechart raising an outgoing event)!
+
+p=. Statechart raising an outgoing event
+
+You can verify this behavior using the following SCTUnit test class. The statement
+* @assert e3@
+succeeds if the _e3_ event has been raised, while
+* @assert ! e3@
+succeeds if that event has _not_ been raised.
+
+bc.. 
+testclass outgoingEventTest for statechart raiseOutgoingEvent {
+
+    @Test
+    operation test_e1 () {
+        enter
+        raise e1
+        proceed 1 cycle
+        assert e3
+        exit
+    }
+
+    @Test
+    operation test_e2 () {
+        enter
+        raise e2
+        proceed 1 cycle
+        assert ! e3
+        exit
+    }
+}
+p. 
+
+==</div>==
+
+h5. Assertion grammar
+
 Figure "&quot;Assertion grammar&quot;":#sctunit_fig_assertion_grammar summarizes the structure of an assertion:
 
 p(#sctunit_fig_assertion_grammar). 
-
 !images/sctunit_grammar_030_assertion.png(Assertion grammar)!
 
 p=. Assertion grammar
@@ -428,7 +479,7 @@ The _enter_ statement's grammar is very simple, as figure "&quot;Enter grammar&q
 
 p(#sctunit_fig_enter_grammar). 
 
-!images/sctunit_grammar_020_enterexpression.png(Enter grammar)!
+!(tiny)images/sctunit_grammar_020_enterexpression.png(Enter grammar)!
 
 p=. Enter grammar
 
@@ -489,7 +540,7 @@ The _exit_ statement's grammar is very simple, as figure "&quot;Exit grammar&quo
 
 p(#sctunit_fig_exit_grammar). 
 
-!images/sctunit_grammar_020_exitexpression.png(Exit grammar)!
+!(tiny)images/sctunit_grammar_020_exitexpression.png(Exit grammar)!
 
 p=. Exit grammar
 
@@ -550,7 +601,7 @@ This example raises the _operate_ and _user.click_ events. The subsequent statem
 
 The _proceed_ statement consists of the keyword @proceed@ and an indication by what to proceed. Two variants are available:
 * @proceed@ _number_ @cycle@ – This variant instructs the state machine to perform _number_ run-to-completion steps.
-* @proceed@ _number_ _time_unit_ – This variant instructs the state machine to proceed by the specified time, e.g. @proceed 30 s@ proceeds by 30 seconds. Supported time units are:
+* @proceed@ _number_ _time_unit_ – This variant instructs the state machine to proceed by the specified time, e.g., @proceed 30 s@ proceeds by 30 seconds. Supported time units are:
 ** @s@ – seconds
 ** @ms@ – milliseconds
 ** @us@ – microseconds
@@ -582,14 +633,6 @@ bc. var sum: integer
 is fine in the statechart language, it is an error in the SCTUnit language. You would rather have to write something like
 
 bc. var sum: integer = 0
-
-Figure "&quot;Variable definition grammar&quot;":#sctunit_fig_variable_definition_grammar summarizes the structure of a _variable definition_:
-
-p(#sctunit_fig_variable_definition_grammar). 
-
-!images/sctunit_grammar_020_sctunitvariabledefinition.png(Variable definition grammar)!
-
-p=. Variable definition grammar
 
 ==<!-- End sctunit_keyword_var -->==
 
@@ -686,7 +729,7 @@ p=. While statement grammar
 
 h4(#sctunit_retrieving_the_state_machines_status). Retrieving the state machine's status
 
-The keywords @is_active@ and @is_final@ make it possible to retrieve certain aspects of the state machine's status as boolean values and e.g. use them in "assertions":#sctunit_assertions.
+The keywords @is_active@ and @is_final@ make it possible to retrieve certain aspects of the state machine's status as boolean values and e.g., use them in "assertions":#sctunit_assertions.
 
 ==<div class="example">==
 
@@ -744,7 +787,7 @@ That's what the _mock_ statement is for. It is a makeshift that mimics an actual
 # It creates a static mapping from a specific operation call with a specific list of parameter values to a specific return value.
 # If that operation is called with exactly that specific list of parameter values the caller receives the mapped return value as a result.
 
-A test can create an arbitrary number of such mappings, i.e. it can use the _mock_ statement multiple times for multiple operations, or for multiple parameter list of the same operation.
+A test can create an arbitrary number of such mappings, i.e., it can use the _mock_ statement multiple times for multiple operations, or for multiple parameter list of the same operation.
 
 ==<div class="example">==
 
@@ -811,7 +854,7 @@ h4(#sctunit_returning_an_operations_result). Returning an operation's result
 
 ==<!-- Start sctunit_keyword_return -->==
 
-The _return_ statement terminates the execution of the current operation and returns the value of an expression to the caller. The type of the expression must match the operation's return type.
+The _return_ statement terminates the execution of the current operation. It either returns nothing or the value of an expression to the caller. If an expression is returned, its type must match the operation's return type. If the operation returns nothing, its return type must be _void_, either implicitly or explicitly.
 
 ==<div class="example">==
 
@@ -823,7 +866,7 @@ bc.
         return pi * pi * radius
     }
 
-The _return_ statement evaluates the expression @pi * pi * radius@, i.e. the area of a circle with radius _radius_, and returns the result to the caller of the operation. .
+The _return_ statement evaluates the expression @pi * pi * radius@, i.e., the area of a circle with radius _radius_, and returns the result to the caller of the operation. .
 
 ==</div>==
 
@@ -919,7 +962,7 @@ p. The _package_ statement puts the _light_switch_tests_ test class into the _fo
 
 ==</div>==
 
-The _package_ statement consists of the keyword @package@, followed by the package name (namespace). The package name is fully-qualified, i.e. in dot notation.
+The _package_ statement consists of the keyword @package@, followed by the package name (namespace). The package name is fully-qualified, i.e., in dot notation.
 
 Please see section "&quot;Test units&quot;":#sctunit_test_units for a summary of the _package_ statement's and related statements' grammar.
 
@@ -972,26 +1015,26 @@ A _test unit_ is either a "test class":#sctunit_test_classes or a "test suite":#
 
 h2(#sctunit_generating_sctunit_source_code). Generating SCTUnit source code
 
-Executing SCTUnit tests within the Eclipse development environment as described in section "&quot;Running the test&quot;":#sctunit_running_the_test is a nice and handy feature the developers. However, unit tests are usually also required to be executed automatically in "continuous integration (CI)":https://en.wikipedia.org/wiki/Continuous_integration environments, i.e. outside of and independent from Eclipse or any other IDE. Additionally, it should generally be possible to inspect what exactly happens inside a unit test, in order to be able to verify that what it does when executed in the right thing. This is of particular importance for software that is to be deployed in safety-critical areas.
+Executing SCTUnit tests within the Eclipse development environment as described in section "&quot;Running the test&quot;":#sctunit_running_the_test is a nice and handy feature the developers. However, unit tests are usually also required to be executed automatically in "continuous integration (CI)":https://en.wikipedia.org/wiki/Continuous_integration environments, i.e., outside of and independent from Eclipse or any other IDE. Additionally, it should generally be possible to inspect what exactly happens inside a unit test, in order to be able to verify that what it does when executed in the right thing. This is of particular importance for software that is to be deployed in safety-critical areas.
 
 Generating unit tests as source code comes as a solution. Source code can be inspected, compiled, and integrated wherever needed.
 
 This section explains how you can generate your SCTUnit tests as source code with YAKINDU Statechart Tools. Supported programming languages are Java, C, and C++. The generated Java classes use "JUnit":http://junit.org/ as their testing framework and "Mockito":http://site.mockito.org/ for mocked methods. C and C++ sources rest upon the "Google Test":https://en.wikipedia.org/wiki/Google_Test unit testing library.
 
-In order to use the SCTUnit code generators effectively, you should already be familiar with generating source code from statecharts, as explained in chapter "&quot;Generating state machine code&quot;":../user-guide/generating_code.html#codegen_generating_state_machine_code. In fact, you have to generate your statechart as source code first, so that the SCTUnit tests have something to be executed upon. Below we are assuming that you have your statechart code generator model and the generated code handy. Generating SCTUnit test source code follows the same principcles as generating state machine source code, so we can focus on SCTUnit essentials here.
+In order to use the SCTUnit code generators effectively, you should already be familiar with generating source code from statecharts, as explained in chapter "&quot;Generating state machine code&quot;":../user-guide/code_generation_intro.html#codegen_generating_state_machine_code. In fact, you have to generate your statechart as source code first, so that the SCTUnit tests have something to be executed upon. Below we are assuming that you have your statechart code generator model and the generated code handy. Generating SCTUnit test source code follows the same principcles as generating state machine source code, so we can focus on SCTUnit essentials here.
 
 
 
 h3(#sctunit_creating_a_generation_model). Creating a generation model
 
-The first step is to create a _generation model (SGen)_ for the SCTUnit test, similar to explanation in section "&quot;Generating state machine code&quot;":../user-guide/generating_code.html#setting_up_a_code_generator_project.
+The first step is to create a _generation model (SGen)_ for the SCTUnit test, similar to explanation in section "&quot;Generating state machine code&quot;":../user-guide/code_generation_custom.html#setting_up_a_code_generator_project.
 
 # In the main menu, select _File → New → Other…_. The _New_ dialog opens.
-# In the _New_ dialog, select _YAKINDU SCT → Code Generator Model_.
-# Click on _Next_. The _YAKINDU Generator Model_ wizard opens.
+# In the _New_ dialog, select _YAKINDU SCT → Code generator model_.
+# Click on _Next_. The _YAKINDU generator model_ wizard opens.
 # Select a project and a folder as the SGen model's location. The filename must end on _.sgen_.
 # Click on _Next_.
-# In the _Generator_ drop-down menu, select one of the source code generators whose names begin with "SCTUnit", e.g. "SCTUnit Java Code Generator". As a consequence, the _Choose_ list below the drop-down menu switches from showing statechart models to displaying SCTUnit files.
+# In the _Generator_ drop-down menu, select one of the source code generators whose names begin with "SCTUnit", e.g., "SCTUnit Java Code Generator". As a consequence, the _Choose_ list below the drop-down menu switches from showing statechart models to displaying SCTUnit files.
 # In the _Choose_ list, check the SCTUnit files you want to generate as source code.
 # Click on _Finish_.
 
@@ -1013,10 +1056,10 @@ A code generator's behavior can be controlled by so-called _features_. SCTUnit c
 
 Documentation of feature details you can find here:
 
-* "Common features of all statechart code generators":../user-guide/generating_code.html#codegen_configuring_a_generator
-* "C statechart code generator features":../user-guide/generating_code.html#codegen_c_code_generator_features
-* "C++ statechart code generator features":../user-guide/generating_code.html#codegen_cpp_code_generator_features
-* "Java statechart code generator features":../user-guide/generating_code.html#codegen_java_code_generator_features
+* "Common features of all statechart code generators":../user-guide/code_generation_intro.html#codegen_configuring_a_generator
+* "C statechart code generator features":../user-guide/code_generation_c.html#codegen_c_code_generator_features
+* "C++ statechart code generator features":../user-guide/code_generation_cpp.html#codegen_cpp_code_generator_features
+* "Java statechart code generator features":../user-guide/code_generation_java.html#codegen_java_code_generator_features
 
 
 
@@ -1041,3 +1084,5 @@ h3. The generated Java test class
 The Java source code generated from SCTUnit test classes or test suites takes the form of JUnit tests and can be integrated in CI environments, for example.
 
 In Eclipse, you can execute such a generated JUnit test by right-clicking on the corresponding _.java_ file and selecting _Run As → JUnit Test_ in the context menu.
+
+==</div>==

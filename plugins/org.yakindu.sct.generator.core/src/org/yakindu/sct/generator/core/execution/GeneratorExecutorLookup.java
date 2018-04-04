@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.generator.core.execution;
 
@@ -17,6 +17,8 @@ import org.yakindu.base.types.typesystem.AbstractTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
+import org.yakindu.sct.domain.extension.IModuleConfigurator;
+import org.yakindu.sct.domain.extension.impl.LazyCombiningModule;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
@@ -29,9 +31,9 @@ import com.google.inject.Module;
 import com.google.inject.util.Modules;
 
 /**
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public class GeneratorExecutorLookup {
 
@@ -69,7 +71,8 @@ public class GeneratorExecutorLookup {
 			set.getResources().add(((AbstractTypeSystem) typeSystem).getResource());
 
 			// XXX: avoid resolving the whole resource set, because there might
-			// be models with different domains, we have to ensure that just the models related to the current entry are resolved.
+			// be models with different domains, we have to ensure that just the
+			// models related to the current entry are resolved
 			EcoreUtil.resolveAll(entry);
 			EcoreUtil.resolveAll(entry.getElementRef());
 			EcoreUtil.resolveAll(((AbstractTypeSystem) typeSystem).getResource());
@@ -88,7 +91,12 @@ public class GeneratorExecutorLookup {
 	}
 
 	protected Module getDomainGeneratorModule(GeneratorEntry entry, String generatorId) {
-		return DomainRegistry.getDomain(entry.getElementRef()).getModule(IDomain.FEATURE_GENERATOR,
+		IModuleConfigurator configurator = new GeneratorEntryModuleConfigurator(entry);
+		Module module = DomainRegistry.getDomain(entry.getElementRef()).getModule(IDomain.FEATURE_GENERATOR,
 				generatorId);
+		if (module instanceof LazyCombiningModule) {
+			((LazyCombiningModule) module).applyConfigurator(configurator);
+		}
+		return module;
 	}
 }

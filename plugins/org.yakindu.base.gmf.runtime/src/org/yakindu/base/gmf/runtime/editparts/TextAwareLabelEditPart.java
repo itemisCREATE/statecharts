@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.base.gmf.runtime.editparts;
 
@@ -43,16 +43,15 @@ import org.yakindu.base.xtext.utils.gmf.figures.SyntaxColoringLabel;
 /**
  * This is a common abstract base class for all Label which are
  * {@link ITextAwareEditPart}.
- * 
+ *
  * * This edit part is only to be used for labels inside a figure! for external
  * labels, use {@link TextAwareExternalLabelEditPart}
- * 
- * 
+ *
+ *
  * @author andreas muelder
- * 
+ *
  */
-public abstract class TextAwareLabelEditPart extends CompartmentEditPart
-		implements ITextAwareEditPart {
+public abstract class TextAwareLabelEditPart extends CompartmentEditPart implements ITextAwareEditPart {
 
 	private final DirectEditManager manager;
 
@@ -95,8 +94,7 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
-				new LabelDirectEditPolicy());
+		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new LabelDirectEditPolicy());
 		// TODO: Add a Feedback role
 	}
 
@@ -112,11 +110,12 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 		getWrappingLabel().setForegroundColor(color);
 	}
 
+	@Override
 	public String getEditText() {
-		return getParser().getEditString(
-				new EObjectAdapter(resolveSemanticElement()), -1);
+		return getParser().getEditString(new EObjectAdapter(resolveSemanticElement()), -1);
 	}
 
+	@Override
 	public void setLabelText(String text) {
 		updateLabelText();
 	}
@@ -130,18 +129,26 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 		return new SyntaxColoringLabel();
 	}
 
+	@Override
 	public ICellEditorValidator getEditTextValidator() {
 		return null;
 	}
 
+	@Override
 	public ParserOptions getParserOptions() {
 		return ParserOptions.NONE;
 	}
 
+	@Override
 	public IParser getParser() {
 		return new StringAttributeParser(feature, pluginId);
 	}
 
+	public EAttribute getFeature() {
+		return feature;
+	}
+
+	@Override
 	public IContentAssistProcessor getCompletionProcessor() {
 		return null;
 	}
@@ -150,8 +157,7 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 	 */
 	@Override
 	public DragTracker getDragTracker(final Request request) {
-		if (request instanceof SelectionRequest
-				&& ((SelectionRequest) request).getLastButtonPressed() == 3)
+		if (request instanceof SelectionRequest && ((SelectionRequest) request).getLastButtonPressed() == 3)
 			return null;
 		IDoubleClickCallback callback = new IDoubleClickCallback() {
 
@@ -160,8 +166,7 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 				performDirectEditRequest(request);
 			}
 		};
-		return new DoubleClickDirectEditDragTracker(this,
-				getTopGraphicEditPart(), callback);
+		return new DoubleClickDirectEditDragTracker(this, getTopGraphicEditPart(), callback);
 	}
 
 	@Override
@@ -170,13 +175,13 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 		try {
 			getEditingDomain().runExclusive(new Runnable() {
 
+				@Override
 				public void run() {
 					if (isActive()) {
-						if (theRequest.getExtendedData().get(
-								REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR) instanceof Character
+						if (theRequest.getExtendedData()
+								.get(REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR) instanceof Character
 								&& manager instanceof TextDirectEditManager) {
-							Character initialChar = (Character) theRequest
-									.getExtendedData()
+							Character initialChar = (Character) theRequest.getExtendedData()
 									.get(REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR);
 
 							((TextDirectEditManager) manager).show(initialChar);

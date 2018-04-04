@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.model.sruntime;
 
+import org.yakindu.base.types.Direction;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -57,7 +59,7 @@ public interface ExecutionEvent extends ExecutionSlot {
 
 	/**
 	 * Returns the value of the '<em><b>Direction</b></em>' attribute.
-	 * The literals are from the enumeration {@link org.yakindu.sct.model.sruntime.EventDirection}.
+	 * The literals are from the enumeration {@link org.yakindu.base.types.Direction}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Direction</em>' attribute isn't clear,
@@ -65,23 +67,23 @@ public interface ExecutionEvent extends ExecutionSlot {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Direction</em>' attribute.
-	 * @see org.yakindu.sct.model.sruntime.EventDirection
-	 * @see #setDirection(EventDirection)
+	 * @see org.yakindu.base.types.Direction
+	 * @see #setDirection(Direction)
 	 * @see org.yakindu.sct.model.sruntime.SRuntimePackage#getExecutionEvent_Direction()
 	 * @model
 	 * @generated
 	 */
-	EventDirection getDirection();
+	Direction getDirection();
 
 	/**
 	 * Sets the value of the '{@link org.yakindu.sct.model.sruntime.ExecutionEvent#getDirection <em>Direction</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Direction</em>' attribute.
-	 * @see org.yakindu.sct.model.sruntime.EventDirection
+	 * @see org.yakindu.base.types.Direction
 	 * @see #getDirection()
 	 * @generated
 	 */
-	void setDirection(EventDirection value);
+	void setDirection(Direction value);
 
 } // ExecutionEvent

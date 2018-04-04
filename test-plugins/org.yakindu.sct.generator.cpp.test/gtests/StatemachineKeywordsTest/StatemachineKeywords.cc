@@ -5,15 +5,18 @@
 #include "sc_runner_timed.h"
 #include "sc_types.h"
 
+namespace  {
 
 
-static StatechartKeywords* statechart;
 
 //! The timers are managed by a timer service. */
 static TimedSctUnitRunner * runner;
 
 class StatemachineKeywords : public ::testing::Test{
 	protected:
+	
+	StatechartKeywords* statechart;
+	
 	virtual void SetUp() {
 		statechart = new StatechartKeywords();
 		statechart->init();
@@ -28,13 +31,17 @@ class StatemachineKeywords : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
+	TEST_F(StatemachineKeywords, statemachineKeywords) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(StatechartKeywords::main_region_Timer));
+		
+		
+}
 
-TEST_F(StatemachineKeywords, statemachineKeywords) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(StatechartKeywords::main_region_Timer));
-	
 }

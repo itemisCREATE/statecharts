@@ -5,15 +5,18 @@
 #include "sc_runner.h"
 #include "sc_types.h"
 
+namespace  {
 
 
-static ExitOnSelfTransition* statechart;
 
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class ExitOnSelfTransitionTest : public ::testing::Test{
 	protected:
+	
+	ExitOnSelfTransition* statechart;
+	
 	virtual void SetUp() {
 		statechart = new ExitOnSelfTransition();
 		statechart->init();
@@ -27,33 +30,37 @@ class ExitOnSelfTransitionTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
+	TEST_F(ExitOnSelfTransitionTest, ExitOnSelfTransitionTest) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(ExitOnSelfTransition::main_region_A));
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_entryCount()== 1l);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 0l);
+		
+		statechart->getDefaultSCI()->raise_e();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_entryCount()== 2l);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 1l);
+		
+		statechart->getDefaultSCI()->raise_f();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_entryCount()== 2l);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 2l);
+		
+		
+}
 
-TEST_F(ExitOnSelfTransitionTest, ExitOnSelfTransitionTest) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(ExitOnSelfTransition::main_region_A));
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_entryCount()== 1l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 0l);
-	
-	statechart->getDefaultSCI()->raise_e();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_entryCount()== 2l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 1l);
-	
-	statechart->getDefaultSCI()->raise_f();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_entryCount()== 2l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 2l);
-	
 }

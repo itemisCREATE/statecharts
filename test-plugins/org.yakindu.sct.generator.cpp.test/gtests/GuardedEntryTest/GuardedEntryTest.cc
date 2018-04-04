@@ -5,15 +5,18 @@
 #include "sc_runner.h"
 #include "sc_types.h"
 
+namespace  {
 
 
-static GuardedEntry* statechart;
 
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class GuardedEntryTest : public ::testing::Test{
 	protected:
+	
+	GuardedEntry* statechart;
+	
 	virtual void SetUp() {
 		statechart = new GuardedEntry();
 		statechart->init();
@@ -27,65 +30,73 @@ class GuardedEntryTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	virtual void initEntryInTransition(bool guardVar, bool doneVar) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_A));
+		
+		statechart->getDefaultSCI()->raise_e();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_B));
+		
+		statechart->getDefaultSCI()->set_guard(guardVar);
+		
+		statechart->getDefaultSCI()->set_done(doneVar);
+		
+		statechart->getDefaultSCI()->raise_e();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_A));
+		
+		
+	}
+	
 };
 
-void initEntryInTransition(bool guardVar, bool doneVar){
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_A));
-	
-	statechart->getDefaultSCI()->raise_e();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_B));
-	
-	statechart->getDefaultSCI()->set_guard(guardVar);
-	
-	statechart->getDefaultSCI()->set_done(doneVar);
-	
-	statechart->getDefaultSCI()->raise_e();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_A));
-	
+	TEST_F(GuardedEntryTest, EntryNotTakenOnStatechartEnter) {
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_guard()== false);
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_A));
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_done()== false);
+		
+		
+}
+	TEST_F(GuardedEntryTest, EntryTakenOnStatechartEnter) {
+		
+		statechart->getDefaultSCI()->set_guard(true);
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_A));
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_done()== true);
+		
+		
+}
+	TEST_F(GuardedEntryTest, EntryTakenInTransition) {
+		
+		initEntryInTransition(true,false);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_done());
+		
+		
+}
+	TEST_F(GuardedEntryTest, EntryNotTakenInTransition) {
+		
+		initEntryInTransition(false,false);
+		
+		EXPECT_TRUE(!statechart->getDefaultSCI()->get_done());
+		
+		
 }
 
-TEST_F(GuardedEntryTest, EntryNotTakenOnStatechartEnter) {
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_guard()== false);
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_A));
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_done()== false);
-	
-}
-TEST_F(GuardedEntryTest, EntryTakenOnStatechartEnter) {
-	
-	statechart->getDefaultSCI()->set_guard(true);
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_A));
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_done()== true);
-	
-}
-TEST_F(GuardedEntryTest, EntryTakenInTransition) {
-	
-	initEntryInTransition(true,false);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_done());
-	
-}
-TEST_F(GuardedEntryTest, EntryNotTakenInTransition) {
-	
-	initEntryInTransition(false,false);
-	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_done());
-	
 }

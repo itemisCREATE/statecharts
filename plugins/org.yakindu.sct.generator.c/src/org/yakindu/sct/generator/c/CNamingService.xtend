@@ -38,10 +38,6 @@ public class CNamingService extends DefaultNamingService {
 	var GeneratorEntry entry
 	
 	override void initializeNamingService(Statechart statechart) {
-		if (entry.identifierLength != null) {
-			maxLength = entry.identifierLength
-		}
-		
 		if (entry.separator != null) {
 			separator = entry.separator.charAt(0)
 		}
@@ -50,10 +46,6 @@ public class CNamingService extends DefaultNamingService {
 	}
 	
 	override void initializeNamingService(ExecutionFlow flow) {
-		if (entry.identifierLength != null) {
-			maxLength = entry.identifierLength
-		}
-		
 		if (entry.separator != null) {
 			separator = entry.separator.charAt(0)
 		}
@@ -62,10 +54,6 @@ public class CNamingService extends DefaultNamingService {
 	}
 	
 	override Map<NamedElement, String> getShortNameMap(ExecutionFlow flow) {
-		if (entry.identifierLength != null) {
-			maxLength = entry.identifierLength
-		}
-		
 		if (entry.separator != null) {
 			separator = entry.separator.charAt(0)
 		}
@@ -74,10 +62,6 @@ public class CNamingService extends DefaultNamingService {
 	}
 	
 	override Map<NamedElement, String> getShortNameMap(Statechart statechart) {
-		if (entry.identifierLength != null) {
-			maxLength = entry.identifierLength
-		}
-		
 		if (entry.separator != null) {
 			separator = entry.separator.charAt(0)
 		}
@@ -86,20 +70,16 @@ public class CNamingService extends DefaultNamingService {
 	}
 	
 	override protected prefix(Step it, char separator) {
-		var prefix = flow.name.toFirstLower
-		if (entry.statemachinePrefix != null) {
-			prefix = entry.statemachinePrefix
-		}
 		switch (it) {
-			case isCheckFunction: prefix + separator + "check"
-			case isEntryAction: prefix + separator + "enact"
-			case isExitAction: prefix + separator + "exact"
-			case isEffect: prefix + separator + "effect"
-			case isEnterSequence: prefix + separator + "enseq"
-			case isDeepEnterSequence: prefix + separator + "dhenseq"
-			case isShallowEnterSequence: prefix + separator + "shenseq"
-			case isExitSequence: prefix + separator + "exseq"
-			case isReactSequence: prefix + separator + "react"
+			case isCheckFunction: "check"
+			case isEntryAction: "enact"
+			case isExitAction: "exact"
+			case isEffect: "effect"
+			case isEnterSequence: "enseq"
+			case isDeepEnterSequence: "dhenseq"
+			case isShallowEnterSequence: "shenseq"
+			case isExitSequence: "exseq"
+			case isReactSequence: "react"
 			default: ""
 		}
 	}

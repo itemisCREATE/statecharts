@@ -22,6 +22,7 @@ import java.util.Arrays;
 public class ExampleData implements Comparable<ExampleData> {
 
 	private static final String PRO_EXAMPLE = "professional";
+	private static final String LABS_EXAMPLE = "labs";
 	private String id;
 	private String title;
 	private String[] category;
@@ -96,6 +97,10 @@ public class ExampleData implements Comparable<ExampleData> {
 
 	public boolean isProfessional() {
 		return Arrays.asList(getCategory()).contains(PRO_EXAMPLE);
+	}
+	
+	public boolean isLabs() {
+		return Arrays.asList(getCategory()).contains(LABS_EXAMPLE);
 	}
 
 	@Override

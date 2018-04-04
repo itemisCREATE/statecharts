@@ -234,6 +234,46 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 			this.moduloAssign = value;
 		}
 		
+		private double increment;
+		
+		public double getIncrement() {
+			return increment;
+		}
+		
+		public void setIncrement(double value) {
+			this.increment = value;
+		}
+		
+		private double incrementAssign;
+		
+		public double getIncrementAssign() {
+			return incrementAssign;
+		}
+		
+		public void setIncrementAssign(double value) {
+			this.incrementAssign = value;
+		}
+		
+		private double decrement;
+		
+		public double getDecrement() {
+			return decrement;
+		}
+		
+		public void setDecrement(double value) {
+			this.decrement = value;
+		}
+		
+		private double decrementAssign;
+		
+		public double getDecrementAssign() {
+			return decrementAssign;
+		}
+		
+		public void setDecrementAssign(double value) {
+			this.decrementAssign = value;
+		}
+		
 		protected void clearEvents() {
 			e1 = false;
 		}
@@ -307,6 +347,14 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		sCInterface.setMinusAssign(8.6);
 		
 		sCInterface.setModuloAssign(false);
+		
+		sCInterface.setIncrement(0);
+		
+		sCInterface.setIncrementAssign(0);
+		
+		sCInterface.setDecrement(0);
+		
+		sCInterface.setDecrementAssign(0);
 	}
 	
 	public void enter() {
@@ -548,6 +596,38 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		sCInterface.setModuloAssign(value);
 	}
 	
+	public double getIncrement() {
+		return sCInterface.getIncrement();
+	}
+	
+	public void setIncrement(double value) {
+		sCInterface.setIncrement(value);
+	}
+	
+	public double getIncrementAssign() {
+		return sCInterface.getIncrementAssign();
+	}
+	
+	public void setIncrementAssign(double value) {
+		sCInterface.setIncrementAssign(value);
+	}
+	
+	public double getDecrement() {
+		return sCInterface.getDecrement();
+	}
+	
+	public void setDecrement(double value) {
+		sCInterface.setDecrement(value);
+	}
+	
+	public double getDecrementAssign() {
+		return sCInterface.getDecrementAssign();
+	}
+	
+	public void setDecrementAssign(double value) {
+		sCInterface.setDecrementAssign(value);
+	}
+	
 	private boolean check_main_region_StateA_tr0_tr0() {
 		return sCInterface.e1;
 	}
@@ -603,6 +683,10 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		sCInterface.setMinusAssign(sCInterface.getMinusAssign() - sCInterface.myReal1);
 		
 		sCInterface.setModuloAssign((-0.1<=(sCInterface.assignMyReal1(sCInterface.getMyReal1() % sCInterface.myReal1))));
+		
+		sCInterface.setIncrementAssign(sCInterface.increment++);
+		
+		sCInterface.setDecrementAssign(sCInterface.decrement++);
 	}
 	
 	/* 'default' enter sequence for state StateA */

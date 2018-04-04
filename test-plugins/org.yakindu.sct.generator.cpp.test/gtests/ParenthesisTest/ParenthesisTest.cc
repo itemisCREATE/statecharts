@@ -5,15 +5,18 @@
 #include "sc_runner.h"
 #include "sc_types.h"
 
+namespace  {
 
 
-static Parenthesis* statechart;
 
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class ParenthesisTest : public ::testing::Test{
 	protected:
+	
+	Parenthesis* statechart;
+	
 	virtual void SetUp() {
 		statechart = new Parenthesis();
 		statechart->init();
@@ -27,15 +30,19 @@ class ParenthesisTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
+	TEST_F(ParenthesisTest, simple) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(Parenthesis::mainRegion_A));
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_erg()== 8l);
+		
+		
+}
 
-TEST_F(ParenthesisTest, simple) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(Parenthesis::mainRegion_A));
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_erg()== 8l);
-	
 }

@@ -5,15 +5,18 @@
 #include "sc_runner.h"
 #include "sc_types.h"
 
+namespace  {
 
 
-static EntryExitSelfTransition* statechart;
 
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
 
 class EntryExitSelfTransitionTest : public ::testing::Test{
 	protected:
+	
+	EntryExitSelfTransition* statechart;
+	
 	virtual void SetUp() {
 		statechart = new EntryExitSelfTransition();
 		statechart->init();
@@ -27,63 +30,69 @@ class EntryExitSelfTransitionTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	virtual void init() {
+		
+		statechart->enter();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_entries()== 1l);
+		
+		EXPECT_TRUE(statechart->isStateActive(EntryExitSelfTransition::main_region_A__region0_B));
+		
+		statechart->getDefaultSCI()->set_entries(0l);
+		
+		
+	}
+	
 };
 
-void init(){
-	
-	statechart->enter();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_entries()== 1l);
-	
-	EXPECT_TRUE(statechart->isStateActive(EntryExitSelfTransition::main_region_A__region0_B));
-	
-	statechart->getDefaultSCI()->set_entries(0l);
-	
+	TEST_F(EntryExitSelfTransitionTest, SelfTransitionToChildState) {
+		
+		init();
+		
+		statechart->getDefaultSCI()->raise_e();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_entries()== 1l);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_exits()== 1l);
+		
+		EXPECT_TRUE(statechart->isStateActive(EntryExitSelfTransition::main_region_A__region0_C));
+		
+		statechart->exit();
+		
+		
+}
+	TEST_F(EntryExitSelfTransitionTest, SelfTransitionFromChildState) {
+		
+		init();
+		
+		statechart->getDefaultSCI()->raise_e1();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_entries()== 0l);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_exits()== 0l);
+		
+		EXPECT_TRUE(statechart->isStateActive(EntryExitSelfTransition::main_region_A__region0_C));
+		
+		statechart->getDefaultSCI()->raise_e1();
+		
+		runner->proceed_cycles(1);
+		
+		EXPECT_TRUE(statechart->isStateActive(EntryExitSelfTransition::main_region_A__region0_B));
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_entries()== 1l);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_exits()== 1l);
+		
+		statechart->exit();
+		
+		
 }
 
-TEST_F(EntryExitSelfTransitionTest, SelfTransitionToChildState) {
-	
-	init();
-	
-	statechart->getDefaultSCI()->raise_e();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_entries()== 1l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_exits()== 1l);
-	
-	EXPECT_TRUE(statechart->isStateActive(EntryExitSelfTransition::main_region_A__region0_C));
-	
-	statechart->exit();
-	
-}
-TEST_F(EntryExitSelfTransitionTest, SelfTransitionFromChildState) {
-	
-	init();
-	
-	statechart->getDefaultSCI()->raise_e1();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_entries()== 0l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_exits()== 0l);
-	
-	EXPECT_TRUE(statechart->isStateActive(EntryExitSelfTransition::main_region_A__region0_C));
-	
-	statechart->getDefaultSCI()->raise_e1();
-	
-	runner->proceed_cycles(1);
-	
-	EXPECT_TRUE(statechart->isStateActive(EntryExitSelfTransition::main_region_A__region0_B));
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_entries()== 1l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_exits()== 1l);
-	
-	statechart->exit();
-	
 }

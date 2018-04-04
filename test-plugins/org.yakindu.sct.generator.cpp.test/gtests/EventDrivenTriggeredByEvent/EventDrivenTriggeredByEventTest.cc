@@ -5,15 +5,18 @@
 #include "sc_runner_timed.h"
 #include "sc_types.h"
 
+namespace  {
 
 
-static EventDrivenTriggeredByEvent* statechart;
 
 //! The timers are managed by a timer service. */
 static TimedSctUnitRunner * runner;
 
 class EventDrivenTriggeredByEventTest : public ::testing::Test{
 	protected:
+	
+	EventDrivenTriggeredByEvent* statechart;
+	
 	virtual void SetUp() {
 		statechart = new EventDrivenTriggeredByEvent();
 		statechart->init();
@@ -28,40 +31,45 @@ class EventDrivenTriggeredByEventTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
+	
+	
 };
 
-
-TEST_F(EventDrivenTriggeredByEventTest, internalEventTriggersRunCycle) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(EventDrivenTriggeredByEvent::EventDrivenTriggeredByEvent_main_region_A));
-	
-	statechart->getDefaultSCI()->raise_e();
-	
-	EXPECT_TRUE(statechart->isStateActive(EventDrivenTriggeredByEvent::EventDrivenTriggeredByEvent_main_region_B));
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
-	
-	statechart->getDefaultSCI()->raise_e();
-	
-	EXPECT_TRUE(statechart->isStateActive(EventDrivenTriggeredByEvent::EventDrivenTriggeredByEvent_main_region_A));
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
-	
-	statechart->exit();
-	
+	TEST_F(EventDrivenTriggeredByEventTest, internalEventTriggersRunCycle) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(EventDrivenTriggeredByEvent::EventDrivenTriggeredByEvent_main_region_A));
+		
+		statechart->getDefaultSCI()->raise_e();
+		
+		EXPECT_TRUE(statechart->isStateActive(EventDrivenTriggeredByEvent::EventDrivenTriggeredByEvent_main_region_B));
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
+		
+		statechart->getDefaultSCI()->raise_e();
+		
+		EXPECT_TRUE(statechart->isStateActive(EventDrivenTriggeredByEvent::EventDrivenTriggeredByEvent_main_region_A));
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
+		
+		statechart->exit();
+		
+		
 }
-TEST_F(EventDrivenTriggeredByEventTest, proceedTimeDoesNotTriggerRunCycle) {
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(EventDrivenTriggeredByEvent::EventDrivenTriggeredByEvent_main_region_A));
-	
-	runner->proceed_time(120000);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
-	
-	statechart->exit();
-	
+	TEST_F(EventDrivenTriggeredByEventTest, proceedTimeDoesNotTriggerRunCycle) {
+		
+		statechart->enter();
+		
+		EXPECT_TRUE(statechart->isStateActive(EventDrivenTriggeredByEvent::EventDrivenTriggeredByEvent_main_region_A));
+		
+		runner->proceed_time(120000);
+		
+		EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
+		
+		statechart->exit();
+		
+		
+}
+
 }

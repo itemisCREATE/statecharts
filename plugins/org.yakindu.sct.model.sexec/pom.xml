@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.yakindu.sct</groupId>
 		<artifactId>org.yakindu.sct.releng</artifactId>
-		<version>3.2.0-SNAPSHOT</version>
+		<version>3.3.0-SNAPSHOT</version>
 		<relativePath>../../releng/org.yakindu.sct.releng/pom.xml</relativePath>
 	</parent>
 	<artifactId>org.yakindu.sct.model.sexec</artifactId>
@@ -19,32 +19,6 @@
 			</resource>
 		</resources>
 		<plugins>
-			<!-- Copy all Xtext related sources to seperate folder that is registered 
-				as resource folder -->
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>copy-resources</id>
-						<phase>initialize</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${project.build.directory}/xtext</outputDirectory>
-							<resources>
-								<resource>
-									<directory>src</directory>
-									<includes>
-										<include>**/*.xtext</include>
-										<include>**/*.mwe2</include>
-									</includes>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
