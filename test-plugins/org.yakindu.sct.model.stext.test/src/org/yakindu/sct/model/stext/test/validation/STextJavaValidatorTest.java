@@ -840,7 +840,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 	@Test
 	public void checkImportExists() {
-		Scope context = (Scope) parseExpression("import: does.not.exist", ImportScope.class.getSimpleName());
+		Scope context = (Scope) parseExpression("import: \"does.not.exist\"", ImportScope.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(context);
 		validationResult.assertErrorContains(String.format(STextValidationMessages.IMPORT_NOT_RESOLVED_MSG,"does.not.exist"));
 	}
