@@ -13,12 +13,14 @@ package org.yakindu.sct.model.stext;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.linking.ILinker;
+import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.validation.CompositeEValidator;
 import org.eclipse.xtext.validation.INamesAreUniqueValidationHelper;
+import org.yakindu.base.expressions.linking.OperationOverloadingLinkingService;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
@@ -107,6 +109,11 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 	@Override
 	public Class<? extends ITransientValueService> bindITransientValueService() {
 		return STextTransientValueService.class;
+	}
+
+	@Override
+	public Class<? extends ILinkingService> bindILinkingService() {
+		return OperationOverloadingLinkingService.class;
 	}
 
 }
