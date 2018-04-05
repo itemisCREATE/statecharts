@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.model.stext.test.util;
 
-import org.eclipse.xtext.junit4.IInjectorProvider;
+import org.eclipse.xtext.testing.IInjectorProvider;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.sct.domain.extension.DomainRegistry;

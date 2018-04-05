@@ -11,8 +11,8 @@
  */
 package org.yakindu.sct.model.stext.test;
 
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
