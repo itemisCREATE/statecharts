@@ -77,8 +77,8 @@ class BehaviorMapping {
 		}	
 		
 		statechart.entryReactions
-			.map([lr | if (lr.effect != null) { (lr.effect as ReactionEffect).mapEffect } else null])
-			.forEach(e | if (e != null) { seq.steps.add(e) })
+			.map([lr | if (lr.effect !== null) { (lr.effect as ReactionEffect).mapEffect } else null])
+			.forEach(e | if (e !== null) { seq.steps.add(e) })
 		
 		r.entryAction = seq
 		
@@ -104,17 +104,17 @@ class BehaviorMapping {
 		
 		state.entryReactions
 			.map([lr | lr.mapEntryAction ])
-			.forEach(e | if (e != null) { seq.steps.add(e) })
+			.forEach(e | if (e !== null) { seq.steps.add(e) })
 		
 		if (seq.steps.size > 0) seq else null
 	}	
 
 	def Step mapEntryAction(LocalReaction it) {
-		if (effect != null) { 
+		if (effect !== null) { 
 			var effectSeq = (effect as ReactionEffect).mapEffect
 			var guard =  trigger.buildGuard
 			
-			if ( guard != null ) {			
+			if ( guard !== null ) {			
 				var ifStep = sexec.factory.createIf
 				ifStep.check = sexec.factory.createCheck
 				ifStep.check.condition = guard		
@@ -166,8 +166,8 @@ class BehaviorMapping {
 		}	
 		
 		statechart.exitReactions
-			.map([lr | if (lr.effect != null) { (lr.effect as ReactionEffect).mapEffect } else null])
-			.forEach(e | if (e != null) { seq.steps.add(e) })
+			.map([lr | if (lr.effect !== null) { (lr.effect as ReactionEffect).mapEffect } else null])
+			.forEach(e | if (e !== null) { seq.steps.add(e) })
 		
 		r.exitAction = seq
 		
@@ -193,20 +193,19 @@ class BehaviorMapping {
 		}	
 		
 		state.exitReactions
-//			.map([lr | if (lr.effect != null) { (lr.effect as ReactionEffect).mapEffect } else null])
 			.map([lr | lr.mapExitAction()])
-			.forEach(e | if (e != null) { seq.steps.add(e) })
+			.forEach(e | if (e !== null) { seq.steps.add(e) })
 		
 		if (seq.steps.size > 0) seq else null
 	}
 
 
 	def Step mapExitAction(LocalReaction it) {
-		if (effect != null) { 
+		if (effect !== null) { 
 			var effectSeq = (effect as ReactionEffect).mapEffect
 			var guard =  trigger.buildGuard
 			
-			if ( guard != null ) {			
+			if ( guard !== null ) {			
 				var ifStep = sexec.factory.createIf
 				ifStep.check = sexec.factory.createCheck
 				ifStep.check.condition = guard		
@@ -256,7 +255,7 @@ class BehaviorMapping {
 	
 	def dispatch Reaction mapTransition(Transition t, Vertex source, Vertex target) {
 		val r = t.create 
-		if (t.trigger != null) r.check = mapToCheck(t.trigger)
+		if (t.trigger !== null) r.check = mapToCheck(t.trigger)
 		r.effect = mapToEffect(newArrayList(t), r)
 		
 		return r
@@ -264,7 +263,7 @@ class BehaviorMapping {
 	
 	def dispatch Reaction mapTransition(Transition t, Choice source, Vertex target) {
 		val r = t.create 
-		if (t.trigger != null) {
+		if (t.trigger !== null) {
 			r.check = mapToCheck(t.trigger) 
 		} else {
 			r.check = sexecFactory.createCheck
@@ -293,7 +292,7 @@ class BehaviorMapping {
 		val r = t.create 
 		
 		// create a check for the reaction
-		if (t.trigger != null) r.check = mapToCheck(t.trigger)
+		if (t.trigger !== null) r.check = mapToCheck(t.trigger)
 		else {
 			r.check = sexecFactory.createCheck
 			r.check.name = target.create.name + "join_check"
@@ -309,7 +308,7 @@ class BehaviorMapping {
 		for ( trans : joinTransitions.filter( trans | trans != t )) { 
 			if (trans.source instanceof State) { 
 				condition = condition.conjunct(stext.active(trans.source as State))
-				if (trans.trigger != null) condition = condition.conjunct(trans.trigger.buildCondition)			
+				if (trans.trigger !== null) condition = condition.conjunct(trans.trigger.buildCondition)			
 			}
 		}
 		r.check.condition = condition	
@@ -326,8 +325,8 @@ class BehaviorMapping {
 	}
 	
 	def Expression conjunct(Expression c1, Expression c2) {
-		if (c1 != null && c2 != null ) stext.and(c1 as Expression, c2 as Expression)
-		else if (c1 != null) c1
+		if (c1 !== null && c2 !== null ) stext.and(c1 as Expression, c2 as Expression)
+		else if (c1 !== null) c1
 		else c2
 	}
 	
@@ -382,7 +381,7 @@ class BehaviorMapping {
 	 
 	def Reaction mapReaction(LocalReaction lr) {
 		val r = lr.create 
-		if (lr.trigger != null) r.check = mapToCheck(lr.trigger)
+		if (lr.trigger !== null) r.check = mapToCheck(lr.trigger)
 		r.effect = mapToEffect(lr)
 		return r
 	}
@@ -411,15 +410,15 @@ class BehaviorMapping {
 		
 		// first process the exit behavior of orthogonal states that has to be performed before source exit
 		val topExitState = t.exitStates.last
-		if (topExitState != null) {
+		if (topExitState !== null) {
 			val exitSequence = topExitState.create.exitSequence
-			if (exitSequence != null) {
+			if (exitSequence !== null) {
 				sequence.steps.add(exitSequence.newCall)
 			}
 		}
 
 		// map transition actions
-		if (t.effect != null) sequence.steps.add(t.effect.mapEffect)	
+		if (t.effect !== null) sequence.steps.add(t.effect.mapEffect)	
 		if (trace.addTraceSteps) { 
 			sequence.steps += r.newTraceReactionFired
 		}
@@ -451,16 +450,16 @@ class BehaviorMapping {
 			}
 		}
 		
-		if (topExitState != null) {
+		if (topExitState !== null) {
 			val exitSequence = topExitState.create.exitSequence
-			if (exitSequence != null) {
+			if (exitSequence !== null) {
 				sequence.steps.add(exitSequence.newCall)
 			}
 		}
 
 		// map transition actions
 		for ( t : transitions ) {
-			if (t.effect != null) sequence.steps.add(t.effect.mapEffect)	
+			if (t.effect !== null) sequence.steps.add(t.effect.mapEffect)	
 			if (trace.addTraceSteps) { 
 				sequence.steps += t.create.newTraceReactionFired
 			}
@@ -477,7 +476,7 @@ class BehaviorMapping {
 		val lcaRegion = commonAncestors.firstRegion
 		
 		val localReactionSequence = lcaRegion.lcaDoSequence(topExitState.create.flow)
-		if (localReactionSequence != null) sequence.steps += localReactionSequence
+		if (localReactionSequence !== null) sequence.steps += localReactionSequence
 		
 		return sequence
 	}
@@ -485,7 +484,7 @@ class BehaviorMapping {
 	
 	private def Sequence lcaDoSequence(Region region, ExecutionFlow flow) {
 		
-		if ( region == null ) return null
+		if ( region === null ) return null
 
 		val execRegion = region.create
 		
@@ -500,7 +499,7 @@ class BehaviorMapping {
 				]
 		 
 		
-		if (region.parentStates.head != null) {
+		if (region.parentStates.head !== null) {
 			val state = region.parentStates.head
 			val execState = state.create
 									
@@ -532,10 +531,7 @@ class BehaviorMapping {
 				ifStep
 		}))
 
-		if (localStep != null) localSteps.steps += localStep
-		
-//		if (localSteps.steps.empty) return null		
-//		else 
+		if (localStep !== null) localSteps.steps += localStep
 		return localSteps
 	}
 	
@@ -566,7 +562,7 @@ class BehaviorMapping {
 													}])
 															
 		// recursively extend the sequence by entering the scope for the specified targets		
-		if (entryScope != null) entryScope.addEnterStepsForTargetsToSequence( targets, sequence)	
+		if (entryScope !== null) entryScope.addEnterStepsForTargetsToSequence( targets, sequence)	
 		else {
 			for ( t : targets ) t.target.addEnterStepsForTargetsToSequence(targets, sequence)
  		}	
@@ -585,7 +581,7 @@ class BehaviorMapping {
 	
 	def Sequence enterSequence(ExecutionScope it, String name) {
 		var Sequence seq = enterSequences.byName(name)
-		if (seq == null) seq = enterSequences.defaultSequence
+		if (seq === null) seq = enterSequences.defaultSequence
 
 		return seq
 	}
@@ -594,11 +590,11 @@ class BehaviorMapping {
 		
 		val target = targets.findFirst( t | t.target == it)
 		
-		if ( target != null ) {
-			if (target.enterSequence != null) seq.steps += target.enterSequence.newCall		
+		if ( target !== null ) {
+			if (target.enterSequence !== null) seq.steps += target.enterSequence.newCall		
 		}
 		else {
-			if ( it.entryAction != null ) seq.steps.add(it.entryAction.newCall)
+			if ( it.entryAction !== null ) seq.steps.add(it.entryAction.newCall)
 			if ( trace.addTraceSteps ) seq.steps.add(it.newTraceStateEntered)
 
 			
@@ -608,7 +604,7 @@ class BehaviorMapping {
 			
 			/* save state to shallow history if parent region contains one */ { 
 				val parentRegion = it.superScope as ExecutionRegion
-				if(parentRegion.historyVector != null) {
+				if(parentRegion.historyVector !== null) {
 					seq.steps += parentRegion.newSaveHistory()
 				}	
 			}
@@ -623,7 +619,7 @@ class BehaviorMapping {
 		// if a target is a direct node
 		val target =  targets.filter( t | it.nodes.contains( t.target )).head 
 
-		if (target != null) {
+		if (target !== null) {
 			target.target.addEnterStepsForTargetsToSequence(targets, seq)
 			return
 		}
@@ -799,23 +795,23 @@ class BehaviorMapping {
 			[s,e | {
 				val Expression raised = e.raised()
 				
-				if (raised == null) s
-				else if (s==null) raised  
+				if (raised === null) s
+				else if (s===null) raised  
 				else raised.or(s)
 			}]
 		) else null;
 		
 		val guard = t.buildGuard
 		
-		if ( triggerCheck != null && guard != null )  stext.and(stext.parenthesis(triggerCheck), stext.parenthesis(guard))
-		else if ( triggerCheck != null )  triggerCheck
+		if ( triggerCheck !== null && guard !== null )  stext.and(stext.parenthesis(triggerCheck), stext.parenthesis(guard))
+		else if ( triggerCheck !== null )  triggerCheck
 		else guard
 	}
 	
 	def dispatch Expression buildGuard( Trigger t) {null}
 	
 	def dispatch Expression buildGuard( ReactionTrigger t) {
-		if ( t.guard != null ) EcoreUtil::copy(t.guard.expression) else null
+		if ( t.guard !== null ) EcoreUtil::copy(t.guard.expression) else null
 	}
 		
 	

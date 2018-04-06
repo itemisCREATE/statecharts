@@ -49,7 +49,7 @@ class Navigation extends SExecExtensions {
 	}
 	
 	def hasValue (EventDefinition it) {
-		type != null && type.name != 'void'
+		type !== null && type.name != 'void'
 	}
 	
 	def operations(ExecutionFlow it) {
@@ -61,7 +61,7 @@ class Navigation extends SExecExtensions {
 	}
 	
 	def boolean hasLocalScope(ExecutionFlow it) {
-		return internalScope != null;
+		return internalScope !== null;
 	}
 	
 		

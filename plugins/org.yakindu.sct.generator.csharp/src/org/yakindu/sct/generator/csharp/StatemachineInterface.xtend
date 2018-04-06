@@ -32,7 +32,6 @@ class StatemachineInterface {
 	@Inject extension ITypeSystem
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension CSharpExpressionsGenerator
-	@Inject Beautifier beautifier
 
 	def generateStatemachineInterface(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		var filename = flow.statemachineInterfaceName.csharp
@@ -51,7 +50,7 @@ class StatemachineInterface {
 			namespace «entry.namespaceName»
 			{
 				public interface «flow.statemachineInterfaceName» : «flow.statemachineInterfaceExtensions» {
-					«IF flow.internalScope != null»
+					«IF flow.internalScope !== null»
 					
 					«var constants = flow.internalScope.declarations.filter(VariableDefinition).filter[const]»
 					«FOR constant : constants»
@@ -139,7 +138,7 @@ class StatemachineInterface {
 				public interface «scope.getInterfaceListenerName()» {
 					«FOR event : scope.eventDefinitions»
 						«IF event.direction == Direction::OUT»
-							«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+							«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 								void on«event.name.toFirstUpper()»Raised(«event.typeSpecifier.targetLanguageName» value);
 							«ELSE»
 								void on«event.name.toFirstUpper()»Raised();
@@ -168,7 +167,7 @@ class StatemachineInterface {
 		'''
 			«FOR event : scope.eventDefinitions»
 				«IF event.direction == Direction::IN»
-				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+				«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 						void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value);
 					«ELSE»
 						void raise«event.name.asName»();
@@ -176,7 +175,7 @@ class StatemachineInterface {
 				«ELSEIF event.direction == Direction::OUT»
 					bool isRaised«event.name.asName»();
 					««« IMPORTANT: An event not specifying a type is regarded to have a void type
-				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+				«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 						«event.typeSpecifier.targetLanguageName» get«event.name.asName»Value();
 					«ENDIF»	
 				«ENDIF»

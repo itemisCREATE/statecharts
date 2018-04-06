@@ -41,7 +41,7 @@ class StatemachineInterface {
 	def generateStatemachineInterface(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		var filename = flow.getImplementationPackagePath(entry) + '/' + flow.statemachineInterfaceName.java
 		var content = content(flow, entry)
-		if (outletFeatureHelper.getApiTargetFolderValue(entry) != null) {
+		if (outletFeatureHelper.getApiTargetFolderValue(entry) !== null) {
 			// generate into API target folder in case one is specified, as it is an interface
 			fsa.generateFile(filename, API_TARGET_FOLDER_OUTPUT, content)
 		} else {
@@ -64,7 +64,7 @@ class StatemachineInterface {
 			
 			public interface «flow.statemachineInterfaceName» extends «flow.statemachineInterfaceExtensions» {
 			
-				«IF flow.internalScope != null»
+				«IF flow.internalScope !== null»
 			«var constants = flow.internalScope.declarations.filter(VariableDefinition).filter[const]»
 					«FOR constant : constants»
 				«constant.constantFieldDeclaration()»
@@ -147,7 +147,7 @@ class StatemachineInterface {
 				
 					«FOR event : scope.eventDefinitions»
 						«IF event.direction == Direction::OUT»
-							«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+							«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 								public void on«event.name.toFirstUpper()»Raised(«event.typeSpecifier.targetLanguageName» value);
 							«ELSE»
 								public void on«event.name.toFirstUpper()»Raised();
@@ -177,7 +177,7 @@ class StatemachineInterface {
 		'''
 			«FOR event : scope.eventDefinitions»
 				«IF event.direction == Direction::IN»
-					«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+					«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 						public void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value);
 						
 					«ELSE»
@@ -188,7 +188,7 @@ class StatemachineInterface {
 					public boolean isRaised«event.name.asName»();
 					
 					««« IMPORTANT: An event not specifying a type is regarded to have a void type
-				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+				«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 						public «event.typeSpecifier.targetLanguageName» «event.getter»;
 						
 					«ENDIF»	

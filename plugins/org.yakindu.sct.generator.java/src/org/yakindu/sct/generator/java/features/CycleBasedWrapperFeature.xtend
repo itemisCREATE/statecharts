@@ -28,20 +28,20 @@ class CycleBasedWrapperFeature {
 	}
 
 	def hasFeatureCycleWrapper(GeneratorEntry it) {
-		featureCycleWrapper != null
+		featureCycleWrapper !== null
 	}
 
 	def getNamePrefix(GeneratorEntry it) {
-		if (featureCycleWrapper != null &&
-			featureCycleWrapper.getParameterValue(IJavaFeatureConstants::VALUE_NAME_PREFIX) != null)
+		if (featureCycleWrapper !== null &&
+			featureCycleWrapper.getParameterValue(IJavaFeatureConstants::VALUE_NAME_PREFIX) !== null)
 			featureCycleWrapper.getParameterValue(IJavaFeatureConstants::VALUE_NAME_PREFIX).stringValue
 		else
 			IJavaFeatureConstants::SYCHRONIZED_WRAPPER_NAME_PREFIX_DEFAULT
 	}
 
 	def getNameSuffix(GeneratorEntry it) {
-		if (featureCycleWrapper != null &&
-			featureCycleWrapper.getParameterValue(IJavaFeatureConstants::VALUE_NAME_PREFIX) != null)
+		if (featureCycleWrapper !== null &&
+			featureCycleWrapper.getParameterValue(IJavaFeatureConstants::VALUE_NAME_PREFIX) !== null)
 			featureCycleWrapper.getParameterValue(IJavaFeatureConstants::VALUE_NAME_SUFFIX).stringValue
 		else
 			IJavaFeatureConstants::SYCHRONIZED_WRAPPER_NAME_SUFFIX_DEFAULT

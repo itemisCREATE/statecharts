@@ -38,7 +38,7 @@ public class CNamingService extends DefaultNamingService {
 	var GeneratorEntry entry
 	
 	override void initializeNamingService(Statechart statechart) {
-		if (entry.separator != null) {
+		if (entry.separator !== null) {
 			separator = entry.separator.charAt(0)
 		}
 		
@@ -46,7 +46,7 @@ public class CNamingService extends DefaultNamingService {
 	}
 	
 	override void initializeNamingService(ExecutionFlow flow) {
-		if (entry.separator != null) {
+		if (entry.separator !== null) {
 			separator = entry.separator.charAt(0)
 		}
 		
@@ -54,7 +54,7 @@ public class CNamingService extends DefaultNamingService {
 	}
 	
 	override Map<NamedElement, String> getShortNameMap(ExecutionFlow flow) {
-		if (entry.separator != null) {
+		if (entry.separator !== null) {
 			separator = entry.separator.charAt(0)
 		}
 		
@@ -62,7 +62,7 @@ public class CNamingService extends DefaultNamingService {
 	}
 	
 	override Map<NamedElement, String> getShortNameMap(Statechart statechart) {
-		if (entry.separator != null) {
+		if (entry.separator !== null) {
 			separator = entry.separator.charAt(0)
 		}
 		

@@ -30,11 +30,11 @@ class IStatemachine {
 		if(outletFeatureHelper.getSkipLibraryFiles(entry)) {
 			return
 		}
-		if (outletFeatureHelper.getLibraryTargetFolderValue(entry) != null) {
+		if (outletFeatureHelper.getLibraryTargetFolderValue(entry) !== null) {
 			// generate into library target folder in case one is specified, as the contents are static
 			fsa.generateFile(entry.basePackagePath + '/' + iStatemachine.java,
 				LIBRARY_TARGET_FOLDER_OUTPUT, content(entry))
-		} else if (outletFeatureHelper.getApiTargetFolderValue(entry) != null) {
+		} else if (outletFeatureHelper.getApiTargetFolderValue(entry) !== null) {
 			// generate into API target folder in case one is specified, as it is an interface
 			fsa.generateFile(entry.basePackagePath + '/' + iStatemachine.java,
 				API_TARGET_FOLDER_OUTPUT, content(entry))

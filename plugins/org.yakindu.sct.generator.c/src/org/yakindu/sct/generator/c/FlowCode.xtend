@@ -79,7 +79,7 @@ class FlowCode {
 		if («scHandle»->historyVector[«region.historyVector.offset»] != «null_state»)
 		{
 			«historyStep.code»
-		} «IF initialStep != null»else
+		} «IF initialStep !== null»else
 		{
 			«initialStep.code»
 		} «ENDIF»
@@ -87,7 +87,7 @@ class FlowCode {
 
 	def dispatch CharSequence code(StateSwitch it) '''
 		«stepComment»
-		«IF historyRegion != null»
+		«IF historyRegion !== null»
 			switch(«scHandle»->historyVector[ «historyRegion.historyVector.offset» ])
 			{
 		«ELSE»
@@ -129,17 +129,17 @@ class FlowCode {
 	'''	
 
 	def dispatch CharSequence code(Check it)
-		'''«IF condition != null»«condition.sc_boolean_code»«ELSE»bool_true«ENDIF»'''
+		'''«IF condition !== null»«condition.sc_boolean_code»«ELSE»bool_true«ENDIF»'''
 	
 	def dispatch CharSequence code(CheckRef it)
-		'''«IF check != null»«check.shortName»(«scHandle»)«ELSE»bool_true«ENDIF»'''
+		'''«IF check !== null»«check.shortName»(«scHandle»)«ELSE»bool_true«ENDIF»'''
 
 	def dispatch CharSequence code(If it) '''
 		«stepComment»
 		if («check.code» == bool_true)
 		{ 
 			«thenStep.code»
-		} «IF (elseStep != null)» else
+		} «IF (elseStep !== null)» else
 		{
 			«elseStep.code»
 		}

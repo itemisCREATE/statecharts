@@ -67,7 +67,7 @@ class CGenerator implements IExecutionFlowGenerator {
 	}
 
 	def protected getHeaderOutput(GeneratorEntry entry) {
-		if (entry.apiTargetFolderValue != null) {
+		if (entry.apiTargetFolderValue !== null) {
 			API_TARGET_FOLDER_OUTPUT
 		} else {
 			TARGET_FOLDER_OUTPUT
@@ -75,7 +75,7 @@ class CGenerator implements IExecutionFlowGenerator {
 	}
 
 	def protected getLibraryOutput(GeneratorEntry entry) {
-		if (entry.libraryTargetFolderValue != null) {
+		if (entry.libraryTargetFolderValue !== null) {
 			LIBRARY_TARGET_FOLDER_OUTPUT
 		} else {
 			entry.headerOutput

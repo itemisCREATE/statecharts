@@ -33,22 +33,22 @@ import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
+import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 class SExecExtensions {
 	
 	def isDefaultInterface(StatechartScope scope) {
 		switch scope {
-			InterfaceScope: scope.name == null || scope.name.empty
+			InterfaceScope: scope.name === null || scope.name.empty
 			default: false
 		}
 	}
 	
 	def ExecutionFlow flow(EObject element){
 		var ExecutionFlow ret = null;
-		if (element != null) {
+		if (element !== null) {
 			if (element instanceof ExecutionFlow) {
 				return element as ExecutionFlow
 			}
@@ -72,7 +72,7 @@ class SExecExtensions {
 	}
 	
 	def hasHistory(ExecutionFlow it) {
-		historyVector != null && historyVector.size > 0;		
+		historyVector !== null && historyVector.size > 0;		
 	}
 	
 	def hasOutgoingEvents(Scope it) {
@@ -144,11 +144,11 @@ class SExecExtensions {
 	}
 	
 	def referencedChecks(ExecutionNode it) {
-		reactions.filter( r | r.check != null && r.check.refs.size > 0).map[it.check]
+		reactions.filter( r | r.check !== null && r.check.refs.size > 0).map[it.check]
 	}
 
 	def referencedEffects(ExecutionNode it) {
-		reactions.filter( r | r.effect != null && r.effect.caller.size > 0).map( r | r.effect )
+		reactions.filter( r | r.effect !== null && r.effect.caller.size > 0).map( r | r.effect )
 	}
 	
 	def List<Step> checkFunctions(ExecutionFlow it) {
@@ -184,7 +184,7 @@ class SExecExtensions {
 	/**
 	 * Checks if a step is called or not.
 	 */
-	def isCalled(Step it) { it != null && caller.size > 0 }
+	def isCalled(Step it) { it !== null && caller.size > 0 }
 	
 	
 	/**
@@ -275,7 +275,7 @@ class SExecExtensions {
 	 * Returns the default step that is the step without name or the name 'default'.
 	 */
 	def Sequence defaultSequence(List<Sequence>steps) {
-		steps.filter(s | s.name == null || s.name.trim == "" ||  s.name.trim == "default" ).head
+		steps.filter(s | s.name === null || s.name.trim == "" ||  s.name.trim == "default" ).head
 	}
 	
 	/**
@@ -285,7 +285,7 @@ class SExecExtensions {
 	 * 		The super ExecutionScope or null
 	 */
 	def ExecutionScope parentExecutionScope(EObject it) {
-		if (it != null) {
+		if (it !== null) {
 			if (it instanceof ExecutionScope) {
 				return it as ExecutionScope
 			} else {

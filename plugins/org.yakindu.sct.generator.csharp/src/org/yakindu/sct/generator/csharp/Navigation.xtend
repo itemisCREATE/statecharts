@@ -51,7 +51,7 @@ class Navigation extends SExecExtensions {
 	
 	
 	def getDefaultScope(ExecutionFlow it) {
-		interfaceScopes.filter[name == null || name.empty].head
+		interfaceScopes.filter[name === null || name.empty].head
 	}
 	
 	def Iterable<InternalScope> getInternalScopes(ExecutionFlow it) {

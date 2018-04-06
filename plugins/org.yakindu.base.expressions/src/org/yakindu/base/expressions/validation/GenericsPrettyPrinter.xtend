@@ -18,7 +18,7 @@ import org.yakindu.base.types.TypeSpecifier
 class GenericsPrettyPrinter {
 
 	def concatTypeParameter(List<TypeParameter> parameter) {
-		return '''<«FOR param : parameter SEPARATOR ', '»«param.name»«IF param.bound != null» extends «(param.bound as Type).name»«ENDIF»«ENDFOR»>'''.toString
+		return '''<«FOR param : parameter SEPARATOR ', '»«param.name»«IF param.bound !== null» extends «(param.bound as Type).name»«ENDIF»«ENDFOR»>'''.toString
 	}
 
 	def concatTypeArguments(List<TypeSpecifier> parameter) {

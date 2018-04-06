@@ -41,7 +41,6 @@ import static org.yakindu.sct.model.stext.test.util.StextTestFactory.createGuard
 
 import java.util.List;
 
-import org.eclipse.core.runtime.AssertionFailedException;
 import org.junit.Test;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentOperator;

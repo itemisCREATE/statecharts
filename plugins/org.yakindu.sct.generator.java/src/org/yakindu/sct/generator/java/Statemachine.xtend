@@ -12,14 +12,16 @@ package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
 import java.util.List
+import java.util.Set
+import java.util.TreeSet
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.base.types.Direction
+import org.yakindu.base.types.Event
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
@@ -28,10 +30,6 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
-import org.yakindu.base.types.Event
-import java.util.Set
-import java.util.TreeSet
-import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 class Statemachine {
 	
@@ -438,7 +436,7 @@ class Statemachine {
 	protected def generateEventDefinition(EventDefinition event, GeneratorEntry entry, InterfaceScope scope) '''
 		private boolean «event.identifier»;
 
-		«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+		«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 			private «event.typeSpecifier.targetLanguageName» «event.valueIdentifier»;
 
 		«ENDIF»
@@ -455,7 +453,7 @@ class Statemachine {
 			return «event.identifier»;
 		}
 		
-		«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+		«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 			protected void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
 				«event.identifier» = true;
 				«event.valueIdentifier» = value;
@@ -485,7 +483,7 @@ class Statemachine {
 	'''
 
 	protected def generateInEventDefinition(EventDefinition event) '''
-		«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+		«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 			public void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
 				«event.identifier» = true;
 				«event.valueIdentifier» = value;
@@ -568,11 +566,11 @@ class Statemachine {
 	
 	
 	def protected defaultInterfaceFunctions(ExecutionFlow flow, GeneratorEntry entry) '''
-		«IF flow.defaultScope != null»
+		«IF flow.defaultScope !== null»
 			«var InterfaceScope scope = flow.defaultScope»
 			«FOR event : scope.eventDefinitions»
 				«IF event.direction == Direction::IN»
-					«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+					«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 					public void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
 						«scope.interfaceName.asEscapedIdentifier».raise«event.name.asName»(value);
 					}
@@ -588,7 +586,7 @@ class Statemachine {
 						return «scope.interfaceName.asEscapedIdentifier».isRaised«event.name.asName»();
 					}
 
-					«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+					«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 						public «event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
 							return «scope.interfaceName.asEscapedIdentifier».get«event.name.asName»Value();
 						}
@@ -620,7 +618,7 @@ class Statemachine {
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 				switch (stateVector[nextStateIndex]) {
 				«FOR state : flow.states»
-					«IF state.reactSequence!=null»
+					«IF state.reactSequence!==null»
 						case «state.stateName.asEscapedIdentifier»:
 							«state.reactSequence.functionName»();
 							break;

@@ -9,9 +9,7 @@
  */
 package org.yakindu.sct.model.sgen.util
 
-import java.io.FileReader
 import java.net.InetAddress
-import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.security.MessageDigest

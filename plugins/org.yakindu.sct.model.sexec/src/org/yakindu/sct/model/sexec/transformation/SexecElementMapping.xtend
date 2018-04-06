@@ -168,7 +168,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 			val regionName = region.name.toFirstUpper
 			val stateName = if(region.eContainer instanceof State) {(region.eContainer as State).name.toFirstUpper}
 			val exitName = {if (!exit?.name.empty) exit.name else "default"}
-			r.simpleName = {if (regionName!== null)regionName else ""}+"_"+{if (stateName!= null)stateName else ""}+"_"+exitName
+			r.simpleName = {if (regionName!== null)regionName else ""}+"_"+{if (stateName!== null)stateName else ""}+"_"+exitName
 			r.name = exit.fullyQualifiedName.toString.replaceAll(" ", "")	
 			r.sourceElement = exit	
 			val seq = sexec.factory.createSequence

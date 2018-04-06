@@ -181,7 +181,7 @@ class CycleBasedSynchronizedWrapper {
 		«ENDIF»
 		«FOR event : scope.eventDefinitions»
 			«IF event.direction == Direction::IN»
-				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+				«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 					public void raise«event.name.asName»(final «event.typeSpecifier.targetLanguageName» value) {
 						
 						synchronized (statemachine) {
@@ -208,7 +208,7 @@ class CycleBasedSynchronizedWrapper {
 					}
 				}
 				
-				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+				«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 					public «event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
 						synchronized(statemachine) {
 							return statemachine.get«scope.interfaceName»().get«event.name.asName»Value();

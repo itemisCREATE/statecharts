@@ -53,7 +53,7 @@ class NullCallTest extends ModelSequencerTest {
 	
 	
 	def void assertNoNullCalls(EObject e) {
-		assertFalse (e.eAllContents.filter(Call).exists[ step == null] )
+		assertFalse (e.eAllContents.filter(Call).exists[ step === null] )
 	}
 	
 

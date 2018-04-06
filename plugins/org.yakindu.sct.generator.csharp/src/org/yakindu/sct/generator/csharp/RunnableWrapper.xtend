@@ -195,7 +195,7 @@ class RunnableWrapper {
 	def protected toImplementation(InterfaceScope scope, GeneratorEntry entry) '''				
 		«FOR event : scope.eventDefinitions»
 			«IF event.direction == Direction::IN»
-				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+				«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 					public void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
 						
 						eventQueue.Add( new Runnable() {
@@ -231,7 +231,7 @@ class RunnableWrapper {
 					}
 				}
 				
-				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+				«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 					public «event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
 						lock(statemachine) {
 							return statemachine.get«scope.interfaceName»().get«event.name.asName»Value();

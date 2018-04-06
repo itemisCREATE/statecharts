@@ -29,7 +29,7 @@ class FlowCode {
 	private var List<TimeEvent> timeEvents;
 	
 	def stepComment(Step it) '''
-		«IF comment != null && ! comment.empty»
+		«IF comment !== null && ! comment.empty»
 			/* «comment» */
 		«ENDIF»
 	'''
@@ -39,7 +39,7 @@ class FlowCode {
 	'''
 	
 	def dispatch CharSequence code(StateSwitch it) '''
-		«IF historyRegion != null»
+		«IF historyRegion !== null»
 			switch(historyVector[«historyRegion.historyVector.offset»]) {
 		«ELSE»
 			switch(stateVector[«stateConfigurationIdx»]) {
@@ -78,7 +78,7 @@ class FlowCode {
 	}
 	
 	def dispatch CharSequence code(Check it) '''
-		«IF this != null»
+		«IF this !== null»
 			«condition.code()»
 		«ELSE»
 			true
@@ -86,7 +86,7 @@ class FlowCode {
 	'''
 	
 	def dispatch CharSequence code(CheckRef it) '''
-		«IF check != null»
+		«IF check !== null»
 			«comment»
 			«check.functionName()»()
 		«ELSE»
@@ -102,7 +102,7 @@ class FlowCode {
 		«stepComment»
 		if («check.code.toString.trim») { 
 			«thenStep.code»
-		}«IF elseStep != null» else {
+		}«IF elseStep !== null» else {
 			«elseStep.code»
 		}
 		«ENDIF»
@@ -124,7 +124,7 @@ class FlowCode {
 		«stepComment»
 		if (historyVector[«region.historyVector.offset»] != State.$NullState$) {
 			«historyStep.code»
-		} «IF initialStep != null»else {
+		} «IF initialStep !== null»else {
 			«initialStep.code»
 		} «ENDIF»
 	'''
@@ -135,7 +135,7 @@ class FlowCode {
 	'''
 	
 	def private getTimeEvents(Step it) {
-		if (timeEvents==null) {
+		if (timeEvents===null) {
 			timeEvents = flow.timeEvents
 		}
 		return timeEvents

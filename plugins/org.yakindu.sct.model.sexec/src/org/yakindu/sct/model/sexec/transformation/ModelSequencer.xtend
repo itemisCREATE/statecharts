@@ -32,7 +32,6 @@ import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.base.types.Property
 
 class ModelSequencer implements IModelSequencer {
 	 
@@ -126,31 +125,31 @@ class ModelSequencer implements IModelSequencer {
 	 * as soon as the sequencer will be extended to cover the complete behavior.
 	 */
 	def retarget(ElementReferenceExpression ere, Collection<Declaration> declared) {
-		if (ere.reference != null 
+		if (ere.reference !== null 
 			&& ! declared.contains(ere.reference) 
 			&& ! (ere.reference instanceof InterfaceScope)
 		) {
 			// elements within externally declared packages should not be replaced but referenced
-			if (EcoreUtil2.getContainerOfType(ere.reference, Package) == null) {
+			if (EcoreUtil2.getContainerOfType(ere.reference, Package) === null) {
 				val r = ere.reference.replaced 
-				if (r != null) ere.reference = r
+				if (r !== null) ere.reference = r
 			}
 		}
 	}
 
 	def retarget(FeatureCall call, Collection<Declaration> declared) {
-		if (call.feature != null && ! declared.contains(call.feature) ) {
+		if (call.feature !== null && ! declared.contains(call.feature) ) {
 			// elements within externally declared packages should not be replaced but referenced
-			if (EcoreUtil2.getContainerOfType(call.feature, Package) == null) {
+			if (EcoreUtil2.getContainerOfType(call.feature, Package) === null) {
 				val r = call.feature.replaced 
-				if ( r != null ) call.feature = r as Declaration
+				if ( r !== null ) call.feature = r as Declaration
 			}
 		}
 	}
 	
 	
 	def dispatch Declaration replaced(EObject ne) {
-		var err = if (ne == null) "Replace called with null" else {
+		var err = if (ne === null) "Replace called with null" else {
 			"Replace with unknown EObject (" + ne.class.simpleName + ") called: " 
 			+ ne.fullyQualifiedName + " in " + ne.eResource.URI.toString
 		}

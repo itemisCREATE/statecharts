@@ -26,7 +26,7 @@ class GenmodelEntries {
 	}
 	
 	def getLicenseText(GeneratorEntry it) {
-		if (licenseTextParameter != null) {
+		if (licenseTextParameter !== null) {
 			return "/* " + licenseTextParameter.stringValue.trim + " */"
 		}
 		return null
@@ -41,7 +41,7 @@ class GenmodelEntries {
 	}
 	
 	def getIdentifierLength(GeneratorEntry it) {
-		if (maxIdentifierLengthParameter != null) {
+		if (maxIdentifierLengthParameter !== null) {
 			try {
 				return Integer.valueOf(maxIdentifierLengthParameter.stringValue)
 			}
@@ -83,7 +83,7 @@ class GenmodelEntries {
 	
 	def getTracingEnterState(GeneratorEntry it){
 		val enterStateParameter = tracingFeature?.getParameterValue(ICFeatureConstants::PARAMETER_TRACING_ENTER_STATE)
-		if (enterStateParameter != null) {
+		if (enterStateParameter !== null) {
 			return enterStateParameter.booleanValue
 		}
 		return false
@@ -91,7 +91,7 @@ class GenmodelEntries {
 	
 	def getTracingExitState(GeneratorEntry it){
 		val exitStateParameter = tracingFeature?.getParameterValue(ICFeatureConstants::PARAMETER_TRACING_EXIT_STATE)
-		if (exitStateParameter != null) {
+		if (exitStateParameter !== null) {
 			return exitStateParameter.booleanValue
 		}
 		return false
