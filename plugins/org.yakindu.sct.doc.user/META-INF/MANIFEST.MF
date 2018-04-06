@@ -4,3 +4,4 @@ Bundle-Name: YAKINDU User Help
 Bundle-SymbolicName: org.yakindu.sct.doc.user;singleton:=true
 Bundle-Version: 3.3.0.qualifier
 Bundle-Vendor: statecharts.org
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
