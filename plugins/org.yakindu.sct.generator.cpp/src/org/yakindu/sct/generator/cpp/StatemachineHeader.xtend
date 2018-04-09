@@ -221,7 +221,11 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		'''
 	
 
-	def privateFunctionPrototypes(Declaration it) {
+	def dispatch privateFunctionPrototypes(Declaration it) {
+		''''''	
+	}
+	
+	def dispatch privateFunctionPrototypes(EventDefinition it) {
 		''''''	
 	}
 	
