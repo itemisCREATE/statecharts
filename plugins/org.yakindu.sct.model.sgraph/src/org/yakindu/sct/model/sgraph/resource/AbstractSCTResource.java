@@ -177,7 +177,7 @@ public abstract class AbstractSCTResource extends XMIResourceImpl {
 	}
 
 	@Override
-	public synchronized EObject getEObject(String uriFragment) {
+	public EObject getEObject(String uriFragment) {
 		if (encoder.isCrossLinkFragment(this, uriFragment)) {
 			Triple<EObject, EReference, INode> triple = encoder.decode(this, uriFragment);
 			List<EObject> linkedObjects = null;
@@ -196,7 +196,7 @@ public abstract class AbstractSCTResource extends XMIResourceImpl {
 	}
 
 	@Override
-	public synchronized String getURIFragment(EObject eObject) {
+	public String getURIFragment(EObject eObject) {
 		if (unloadingContents != null) {
 			return super.getURIFragment(eObject);
 		}
@@ -343,7 +343,7 @@ public abstract class AbstractSCTResource extends XMIResourceImpl {
 			}
 		}
 	}
-	
+
 	public void parseSpecificationElements() {
 		TreeIterator<EObject> iter = getAllContents();
 		while (iter.hasNext()) {
@@ -495,8 +495,7 @@ public abstract class AbstractSCTResource extends XMIResourceImpl {
 
 	/**
 	 * overridden because original calls 'Util.denormalizeURI(uri,
-	 * getResourceSet())' which leads into error if there is no platform
-	 * available
+	 * getResourceSet())' which leads into error if there is no platform available
 	 */
 	@Override
 	public void setURI(URI uri) {
