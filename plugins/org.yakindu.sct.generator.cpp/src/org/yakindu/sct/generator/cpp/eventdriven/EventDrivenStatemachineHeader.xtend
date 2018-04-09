@@ -90,7 +90,7 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 		'''
 	}
 	
-	def privateFunctionPrototypes(EventDefinition it) {
+	override dispatch privateFunctionPrototypes(EventDefinition it) {
 		'''
 		«IF direction == Direction::LOCAL»
 			/*! Raises the in event '«name»' that is defined in the «scope.scopeDescription». */
