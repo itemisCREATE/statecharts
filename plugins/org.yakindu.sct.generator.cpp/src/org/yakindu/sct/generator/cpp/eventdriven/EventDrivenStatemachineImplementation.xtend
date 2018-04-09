@@ -137,7 +137,7 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 							case «e.eventEnumMemberName»:
 							{
 								«IF e.hasValue»
-									«e.eventClassName» * e = dynamic_cast<«e.eventClassName»*>(event);
+									«e.eventClassName» * e = static_cast<«e.eventClassName»*>(event);
 									if(e != 0) {
 										internal_«e.asRaiser»(e->value);
 									}
