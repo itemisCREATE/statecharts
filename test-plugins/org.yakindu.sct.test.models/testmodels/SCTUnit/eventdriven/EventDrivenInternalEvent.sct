@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_wSGvUHOOEee07dEgYYRu0Q" specification="namespace eventdriven&#xA;&#xA;@EventDriven&#xA;&#xA;interface:&#xA;&#xA;in event start&#xA;in event reset&#xA;&#xA;var x : integer = 0&#xA;var i1_sequence : integer&#xA;var i2_sequence : integer&#xA;&#xA;internal: &#xA;&#xA;event i1&#xA;event i2&#xA;&#xA;&#xA;always / x += 1&#xA;" namespace="eventdriven" name="EventDrivenInternalEvent">
+  <sgraph:Statechart xmi:id="_wSGvUHOOEee07dEgYYRu0Q" specification="namespace eventdriven&#xA;&#xA;@EventDriven&#xA;&#xA;interface:&#xA;&#xA;in event start&#xA;in event reset&#xA;out event e: integer&#xA;&#xA;var x : integer = 0&#xA;var i1_sequence : integer&#xA;var i2_sequence : integer&#xA;&#xA;internal: &#xA;&#xA;event i1&#xA;event i2&#xA;&#xA;&#xA;always / x += 1&#xA;" namespace="eventdriven" name="EventDrivenInternalEvent">
     <regions xmi:id="_wSGvVXOOEee07dEgYYRu0Q" name="r1">
       <vertices xsi:type="sgraph:Entry" xmi:id="_wSHWaXOOEee07dEgYYRu0Q">
         <outgoingTransitions xmi:id="_wSH9hHOOEee07dEgYYRu0Q" target="_wSH9dHOOEee07dEgYYRu0Q"/>

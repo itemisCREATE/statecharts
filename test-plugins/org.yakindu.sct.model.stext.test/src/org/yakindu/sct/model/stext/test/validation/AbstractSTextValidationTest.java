@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.validation.ValidatorTester;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.junit.After;
 import org.junit.Before;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
@@ -34,7 +35,7 @@ public abstract class AbstractSTextValidationTest extends AbstractSTextTest {
 	@Inject
 	public Injector injector;
 
-	protected ValidatorTester<STextJavaValidator> tester;
+	protected ValidatorTester<? extends AbstractDeclarativeValidator> tester;
 	protected BasicDiagnostic diagnostics;
 	protected SGraphFactory factory;
 	protected Statechart statechart;

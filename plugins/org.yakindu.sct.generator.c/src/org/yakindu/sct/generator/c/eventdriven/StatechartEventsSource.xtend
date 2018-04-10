@@ -11,6 +11,7 @@
 package org.yakindu.sct.generator.c.eventdriven
 
 import com.google.inject.Inject
+import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.extensions.EventNaming
 import org.yakindu.sct.generator.c.extensions.Navigation
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
@@ -47,7 +48,7 @@ class StatechartEventsSource {
 			
 			switch(name)
 			{
-				«FOR e : getAllEvents.filter[hasValue]»
+				«FOR e : getAllEvents.filter[hasValue && direction != Direction::OUT]»
 				case «e.eventEnumMemberName»:
 					ev->value.«e.eventEnumMemberName»_value = *((«e.typeSpecifier.targetLanguageName»*)value);
 					break;
