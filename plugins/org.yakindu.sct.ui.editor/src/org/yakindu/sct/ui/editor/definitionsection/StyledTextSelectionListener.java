@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.definitionsection;
 
@@ -30,12 +30,12 @@ import org.yakindu.sct.ui.editor.editor.StatechartDiagramActionbarContributor;
  * be able to release selection of previous selection provider. This in needed
  * to be able to perform keyboard shortcuts on the text in the statechart
  * definition section without interacting with the elements of the diagram.
- * 
+ *
  * This class does also hook the default clipboard actions Copy, Cut, Paste and
  * Select All for text widgets to a <code>StyledText</code> widget, which gets a
  * focus. The hook is for retargeting global actions, which are mapped to
  * diagram actions by default.
- * 
+ *
  * @author robert rudi - Initial contribution and API
  */
 public class StyledTextSelectionListener extends StyledTextXtextAdapter.ChangeSelectionProviderOnFocusGain {
@@ -55,7 +55,7 @@ public class StyledTextSelectionListener extends StyledTextXtextAdapter.ChangeSe
 
 	public StyledTextSelectionListener(IWorkbenchPartSite site, StyledText widget,
 			ISelectionProvider selectionProviderOnFocusGain) {
-		super(site, selectionProviderOnFocusGain);
+		super(site, selectionProviderOnFocusGain, widget);
 		contextService = site.getService(IContextService.class);
 		site.setSelectionProvider(selectionProviderOnFocusGain);
 		widget.addFocusListener(this);
@@ -78,10 +78,12 @@ public class StyledTextSelectionListener extends StyledTextXtextAdapter.ChangeSe
 	}
 
 	protected void redefineParentContext(String childContext, String parentContext) {
-		if (embeddedEditorCtx != null) { // deactivates the context on focus lost
+		if (embeddedEditorCtx != null) { // deactivates the context on focus
+											// lost
 			contextService.deactivateContext(embeddedEditorCtx);
 			embeddedEditorCtx = null;
-		} else { // redefines the parent of the child context, to avoid keybinding conflicts
+		} else { // redefines the parent of the child context, to avoid
+					// keybinding conflicts
 			final Context childCtx = contextService.getContext(childContext);
 			if (childCtx != null) {
 				childCtx.define(childContext, CHILD_CONTEXT_SCOPE_DESCRIPTION, parentContext);

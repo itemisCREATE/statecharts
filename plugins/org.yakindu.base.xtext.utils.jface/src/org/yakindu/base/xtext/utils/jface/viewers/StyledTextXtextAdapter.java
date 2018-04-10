@@ -1,9 +1,9 @@
-/** 
- * Copyright (c) 2015 committers of YAKINDU and others. 
- * All rights reserved. This program and the accompanying materials 
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at 
- * http://www.eclipse.org/legal/epl-v10.html 
+/**
+ * Copyright (c) 2015 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * committers of YAKINDU - initial API and implementation
  *
@@ -64,11 +64,11 @@ import com.google.inject.Injector;
 import com.google.inject.Provider;
 
 /**
- * 
+ *
  * @author andreas.muelder@itemis.de
  * @author alexander.nyssen@itemis.de
  * @author patrick.koenemann@itemis.de
- * 
+ *
  */
 @SuppressWarnings("restriction")
 public class StyledTextXtextAdapter {
@@ -151,6 +151,7 @@ public class StyledTextXtextAdapter {
 			// when using the StyledText.VerifyKey event (3005), we get the
 			// event early enough!
 			styledText.addListener(3005, new Listener() {
+				@Override
 				public void handleEvent(Event event) {
 					if (event.character == SWT.CR && !completionProposalAdapter.isProposalPopupOpen()) {
 						Event selectionEvent = new Event();
@@ -185,7 +186,7 @@ public class StyledTextXtextAdapter {
 			XtextStyledTextSelectionProvider xtextStyledTextSelectionProvider = new XtextStyledTextSelectionProvider(
 					this.styledText, getFakeResourceContext().getFakeResource());
 			ChangeSelectionProviderOnFocusGain listener = new ChangeSelectionProviderOnFocusGain(site,
-					xtextStyledTextSelectionProvider);
+					xtextStyledTextSelectionProvider, styledText);
 			getStyledText().addFocusListener(listener);
 			getStyledText().addDisposeListener(listener);
 		} catch (NullPointerException ex) {
@@ -204,6 +205,7 @@ public class StyledTextXtextAdapter {
 		result.setDescriptionText("Content Assist Available (CTRL + Space)");
 		result.setMarginWidth(2);
 		styledText.addDisposeListener(new DisposeListener() {
+			@Override
 			public void widgetDisposed(DisposeEvent e) {
 				if (getDecoration() != null) {
 					getDecoration().dispose();
@@ -238,9 +240,10 @@ public class StyledTextXtextAdapter {
 	}
 
 	/**
-	 * Creates decoration support for the sourceViewer. code is entirely copied from
-	 * {@link XtextEditor} and its super class {@link AbstractDecoratedTextEditor}.
-	 * 
+	 * Creates decoration support for the sourceViewer. code is entirely copied
+	 * from {@link XtextEditor} and its super class
+	 * {@link AbstractDecoratedTextEditor}.
+	 *
 	 */
 	protected void configureSourceViewerDecorationSupport(SourceViewerDecorationSupport support) {
 		MarkerAnnotationPreferences annotationPreferences = new MarkerAnnotationPreferences();
@@ -310,6 +313,7 @@ public class StyledTextXtextAdapter {
 	public IParseResult getXtextParseResult() {
 		return getXtextDocument().readOnly(new IUnitOfWork<IParseResult, XtextResource>() {
 
+			@Override
 			public IParseResult exec(XtextResource state) throws Exception {
 				return state.getParseResult();
 			}
@@ -386,24 +390,50 @@ public class StyledTextXtextAdapter {
 		protected ISelectionProvider selectionProviderOnFocusGain;
 		protected ISelectionProvider selectionProviderOnFocusLost;
 		protected IWorkbenchPartSite site;
+		private boolean ignoreNextFocusLost = false;
+		private StyledText text;
 
 		public ChangeSelectionProviderOnFocusGain(IWorkbenchPartSite site,
-				ISelectionProvider selectionProviderOnFocusGain) {
+				ISelectionProvider selectionProviderOnFocusGain, StyledText text) {
 			this.selectionProviderOnFocusGain = selectionProviderOnFocusGain;
 			this.site = site;
+			this.text = text;
 		}
 
+		@Override
 		public void focusLost(FocusEvent e) {
+			if (SWT.getPlatform().equals("gtk")) {
+				if (isIgnoreNextFocusLost()) {
+					setIgnoreNextFocusLost(false);
+					return;
+				}
+				if (text.getMenu().isVisible()) {
+					setIgnoreNextFocusLost(true);
+					return;
+				}
+			}
+
 			if (this.selectionProviderOnFocusLost != null) {
 				this.site.setSelectionProvider(this.selectionProviderOnFocusLost);
 			}
 		}
 
+		protected void setIgnoreNextFocusLost(boolean b) {
+			this.ignoreNextFocusLost = b;
+
+		}
+
+		protected boolean isIgnoreNextFocusLost() {
+			return ignoreNextFocusLost;
+		}
+
+		@Override
 		public void focusGained(FocusEvent e) {
 			this.selectionProviderOnFocusLost = this.site.getSelectionProvider();
 			this.site.setSelectionProvider(this.selectionProviderOnFocusGain);
 		}
 
+		@Override
 		public void widgetDisposed(DisposeEvent e) {
 			if (this.selectionProviderOnFocusLost != null) {
 				this.site.setSelectionProvider(this.selectionProviderOnFocusLost);
