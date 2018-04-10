@@ -58,6 +58,7 @@ import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.DomainStatus;
 import org.yakindu.sct.domain.extension.DomainStatus.Severity;
 import org.yakindu.sct.domain.extension.IDomain;
+import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementProvider;
 import org.yakindu.sct.ui.editor.DiagramActivator;
@@ -433,5 +434,14 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	protected TransactionalEditingDomain getTransactionalEditingDomain() {
 		return TransactionUtil.getEditingDomain(getDiagram());
+	}
+
+	@Override
+	public boolean isDirty() {
+		if (!(getContextObject() instanceof SpecificationElement))
+			return super.isDirty();
+		SpecificationElement contextObject = (SpecificationElement) getContextObject();
+		return super.isDirty() || (definitionSection.getDefinition() != null
+				&& !definitionSection.getDefinition().equals(contextObject.getSpecification()));
 	}
 }
