@@ -71,12 +71,28 @@ class SExecExtensions {
 		scopes.fold(new ArrayList<TimeEvent>, [l, s | l += s.declarations.filter(typeof(TimeEvent)) l])
 	}
 	
+	def hasValue (EventDefinition it) {
+		type !== null && type.name != 'void'
+	}
+	
+	def boolean hasLocalScope(ExecutionFlow it) {
+		return internalScope !== null;
+	}
+	
 	def hasHistory(ExecutionFlow it) {
 		historyVector !== null && historyVector.size > 0;		
 	}
 	
 	def hasOutgoingEvents(Scope it) {
 		!outgoingEvents.empty
+	}
+	
+	def hasLocalEvents(ExecutionFlow it) {
+		return hasLocalScope && !internalScope.localEvents.empty
+	}
+	
+	def hasLocalEventsWithValue(ExecutionFlow it) {
+		return hasLocalScope && !internalScope.localEvents.filter[hasValue].empty
 	}
 	
 	def getOutgoingEvents(Scope it) {

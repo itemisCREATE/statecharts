@@ -34,6 +34,7 @@ encoding//testmodels/SCTUnit/TypeAlias.sct=UTF-8
 encoding//testmodels/SCTUnit/ValuedEvents.sct=UTF-8
 encoding//testmodels/SCTUnit/entries/EntryReactionAction.sct=UTF-8
 encoding//testmodels/SCTUnit/eventdriven/LocalEvents.sct=UTF-8
+encoding//testmodels/SCTUnit/eventdriven/NoLocalEvents.sct=UTF-8
 encoding//testmodels/SCTUnit/executionorder/ChildFirstExecutionHierarchy.sct=UTF-8
 encoding//testmodels/extensions/NoTimeEvents.sct=UTF-8
 encoding//testmodels/validation/EntryTransitionToParentState.sct=UTF-8

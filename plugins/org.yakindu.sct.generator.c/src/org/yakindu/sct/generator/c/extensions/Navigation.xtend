@@ -48,10 +48,6 @@ class Navigation extends SExecExtensions {
 		return scopes.map[declarations.filter(EventDefinition)].reduce[i1, i2 | i1 + i2]
 	}
 	
-	def hasValue (EventDefinition it) {
-		type !== null && type.name != 'void'
-	}
-	
 	def operations(ExecutionFlow it) {
 		scopes.fold(new ArrayList<OperationDefinition>(), [ l, s | l.addAll(s.declarations.filter( typeof(OperationDefinition))) return l ])
 	}
@@ -59,10 +55,4 @@ class Navigation extends SExecExtensions {
 	def Scope getTimeEventScope(ExecutionFlow it) {
 		return 	scopes.filter[declarations.filter( typeof(TimeEvent) ).size > 0].head
 	}
-	
-	def boolean hasLocalScope(ExecutionFlow it) {
-		return internalScope !== null;
-	}
-	
-		
 }

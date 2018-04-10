@@ -30,29 +30,35 @@ class EventDrivenStatemachineSource extends StatemachineSource {
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) { 
 		'''
 		«super.content(it, entry, artifactConfigs)»
+		«IF hasLocalEvents»
 		
 		/*
 		 * Helper functions for event driven execution model
 		 */
 		
 		«events.content(it)»
+		«ENDIF»
 		'''
 	}
 	
 	override protected initFunctionBody(ExecutionFlow it) {
 		'''
 		«super.initFunctionBody(it)»
+		«IF hasLocalEvents»
 		«eventQueueInitFunction»(&(handle->internal_event_queue));
+		«ENDIF»
 		'''
 	}
 	
 	override functions(ExecutionFlow it) '''
 		«super.functions(it)»
+		«IF hasLocalEvents»
 		«addToEventQueueFunction»
 		
 		«addToEventQueueValueFunction»
 		
 		«dispatchEventFunction»
+		«ENDIF»
 	'''
 	
 	override enterFunction(ExecutionFlow it) '''
@@ -113,21 +119,27 @@ class EventDrivenStatemachineSource extends StatemachineSource {
 	}
 	'''
 	
-	override runCycleFunction(ExecutionFlow it)  '''
-		void «functionPrefix»runCycle(«scHandleDecl»)
-		{
-			«clearOutEventsFctID»(«scHandle»);
-			
-			«eventStructTypeName» currentEvent = «eventQueuePopFunction»(&(«scHandle»->internal_event_queue));
-			
-			do {
-				«functionPrefix»dispatch_event(«scHandle», &currentEvent);
-				«runCycleForLoop»
-				«clearInEventsFctID»(«scHandle»);
-			} while((currentEvent = «eventQueuePopFunction»(&(«scHandle»->internal_event_queue))).name != «invalidEventEnumName»);
-			
+	override runCycleFunction(ExecutionFlow it)  {
+		if(!hasLocalEvents) {
+			return super.runCycleFunction(it)
+		} else {
+			'''
+				void «functionPrefix»runCycle(«scHandleDecl»)
+				{
+					«clearOutEventsFctID»(«scHandle»);
+					
+					«eventStructTypeName» currentEvent = «eventQueuePopFunction»(&(«scHandle»->internal_event_queue));
+					
+					do {
+						«functionPrefix»dispatch_event(«scHandle», &currentEvent);
+						«runCycleForLoop»
+						«clearInEventsFctID»(«scHandle»);
+					} while((currentEvent = «eventQueuePopFunction»(&(«scHandle»->internal_event_queue))).name != «invalidEventEnumName»);
+					
+				}
+			'''
 		}
-	'''
+	}
 	
 	override raiseTimeEventFunction(ExecutionFlow it) '''
 		«IF timed»
@@ -147,9 +159,22 @@ class EventDrivenStatemachineSource extends StatemachineSource {
 	override functionPrototypes(ExecutionFlow it) {
 		'''
 		«super.functionPrototypes(it)»
-		static void «functionPrefix»add_event_to_queue(«scHandleDecl», «eventEnumName» name);
+		«IF hasLocalEvents»
+		static void «eventQueueInitFunction»(«eventQueueTypeName» * eq);
+		static sc_integer «eventQueueSizeFunction»(«eventQueueTypeName» * eq);
+		static «eventStructTypeName» «eventQueuePopFunction»(«eventQueueTypeName» * eq);
+		static sc_boolean «eventQueuePushFunction»(«eventQueueTypeName» * eq, «eventStructTypeName» ev);
+
 		static void «functionPrefix»dispatch_event(«scHandleDecl», const «eventStructTypeName» * event);
+
+		static void «eventInitFunction»(«eventStructTypeName» * ev, «eventEnumName» name);
+		static void «functionPrefix»add_event_to_queue(«scHandleDecl», «eventEnumName» name);
+		«IF hasLocalEventsWithValue»
+
+		static void «valueEventInitFunction»(«eventStructTypeName» * ev, «eventEnumName» name, void * value);
 		static void «functionPrefix»add_value_event_to_queue(«scHandleDecl», «eventEnumName» name, void * value);
+		«ENDIF»
+		«ENDIF»
 		'''
 	}
 }
