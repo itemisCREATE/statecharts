@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.ui.editor.definitionsection;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.value.IObservableValue;
@@ -74,6 +75,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorFactory;
+import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorFactory.Builder;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorModelAccess;
 import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
 import org.yakindu.base.base.BasePackage;
@@ -241,7 +243,27 @@ public class StatechartDefinitionSection extends Composite
 		Injector embeddedEditorInjector = getEmbeddedStatechartSpecificationInjector();
 		EmbeddedEditorFactory instance = embeddedEditorInjector.getInstance(EmbeddedEditorFactory.class);
 		IEditedResourceProvider provider = getXtextResourceProvider(embeddedEditorInjector);
-		return instance.newEditor(provider).showErrorAndWarningAnnotations().withParent(this);
+		Builder embeddedEditorBuilder = buildEmbeddedEditor(instance.newEditor(provider));
+		return embeddedEditorBuilder.withParent(this);
+	}
+
+	protected Builder buildEmbeddedEditor(Builder embeddedEditorBuilder) {
+		try {
+			for (Method m : embeddedEditorBuilder.getClass().getDeclaredMethods()) {
+				switch(m.getName()) {
+					//line numbers doesn't look good with the default settings configured in EmbeddedEditorFactory class
+					//case "showLineNumbers" : 
+					case "showErrorAndWarningAnnotations" :
+						embeddedEditorBuilder = (Builder) m.invoke(embeddedEditorBuilder);
+						break;
+					default :
+						break;
+				}
+			}
+		} catch (Exception e) {
+			// ignore, method not available for current target
+		}
+		return embeddedEditorBuilder;
 	}
 
 	protected Injector getEmbeddedStatechartSpecificationInjector() {
