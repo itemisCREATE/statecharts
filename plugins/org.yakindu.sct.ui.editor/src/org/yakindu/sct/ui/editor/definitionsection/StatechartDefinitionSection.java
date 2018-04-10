@@ -28,7 +28,6 @@ import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
@@ -65,6 +64,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.IPersistableEditor;
 import org.eclipse.ui.IPersistableElement;
@@ -88,6 +88,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementProvider;
 import org.yakindu.sct.ui.editor.StatechartImages;
+import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningEditor;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.propertysheets.ValidatingEMFDatabindingContext;
 
@@ -100,10 +101,7 @@ import com.google.inject.Injector;
  */
 @SuppressWarnings("restriction")
 public class StatechartDefinitionSection extends Composite
-		implements
-			IPersistableEditor,
-			IPersistableElement,
-			IContextElementProvider {
+		implements IPersistableEditor, IPersistableElement, IContextElementProvider {
 
 	protected static final String INLINE_TOOLTIP = "Inline definition section";
 	protected static final String SHOW_SECTION_TOOLTIP = "Show definition section";
@@ -116,8 +114,8 @@ public class StatechartDefinitionSection extends Composite
 	protected static final String MEM_EXPANDED = "DefinitionSectionIsExpanded";
 	protected static final String MEM_FIRST_WEIGHT = "FirstSashWeight";
 	protected static final String MEM_SECOND_WEIGHT = "SecondSashWeight";
-	protected static final int[] MIN_SIZE = {11, 21};
-	protected static final int[] DEFAULT_WEIGHTS = new int[]{2, 10};
+	protected static final int[] MIN_SIZE = { 11, 21 };
+	protected static final int[] DEFAULT_WEIGHTS = new int[] { 2, 10 };
 	protected int[] previousWidths = DEFAULT_WEIGHTS;
 	private boolean isSectionExpanded = true;
 
@@ -133,11 +131,11 @@ public class StatechartDefinitionSection extends Composite
 	private EmbeddedEditor embeddedEditor;
 	private XtextResource xtextResource;
 	private SashForm sash;
-	private DiagramDocumentEditor editorPart;
+	private DiagramPartitioningEditor editorPart;
 
 	private static IMemento memento;
 
-	public StatechartDefinitionSection(Composite parent, int style, DiagramDocumentEditor editorPart) {
+	public StatechartDefinitionSection(Composite parent, int style, DiagramPartitioningEditor editorPart) {
 		super(parent, style);
 		this.sash = (SashForm) parent;
 		this.editorPart = editorPart;
@@ -272,6 +270,7 @@ public class StatechartDefinitionSection extends Composite
 		initXtextSelectionProvider(embeddedEditorWidget);
 		initBinding(embeddedEditorWidget);
 		initContextMenu(embeddedEditorWidget);
+		embeddedEditorWidget.addModifyListener((event) -> editorPart.firePropertyChange(IEditorPart.PROP_DIRTY));
 	}
 
 	@SuppressWarnings("unused")
@@ -285,11 +284,11 @@ public class StatechartDefinitionSection extends Composite
 		}
 	}
 
-	@SuppressWarnings({"unchecked", "rawtypes"})
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected void initBinding(StyledText embeddedEditorWidget) {
 		IEMFValueProperty modelProperty = EMFEditProperties.value(getTransactionalEditingDomain(),
 				SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION);
-		ISWTObservableValue uiProperty = WidgetProperties.text(new int[]{SWT.FocusOut, SWT.Modify})
+		ISWTObservableValue uiProperty = WidgetProperties.text(new int[] { SWT.FocusOut })
 				.observe(embeddedEditorWidget);
 		IObservableValue modelPropertyObservable = modelProperty.observe(getContextObject());
 		ValidatingEMFDatabindingContext context = new ValidatingEMFDatabindingContext(
@@ -378,7 +377,7 @@ public class StatechartDefinitionSection extends Composite
 		if (diff < 0) {
 			return DEFAULT_WEIGHTS;
 		}
-		return new int[]{switchControlWidth, (diff % 2 != 0) ? diff - (1 + BORDERWIDTH) : diff};
+		return new int[] { switchControlWidth, (diff % 2 != 0) ? diff - (1 + BORDERWIDTH) : diff };
 	}
 
 	protected void layoutDefinitionSection(int sashWidth, int[] weights, boolean visible, int hSpan) {
@@ -536,7 +535,7 @@ public class StatechartDefinitionSection extends Composite
 		Integer first = memento.getInteger(sectionProperty + MEM_FIRST_WEIGHT);
 		Integer second = memento.getInteger(sectionProperty + MEM_SECOND_WEIGHT);
 		if (first != null && second != null)
-			return new int[]{first, second};
+			return new int[] { first, second };
 		return DEFAULT_WEIGHTS;
 	}
 
@@ -699,6 +698,7 @@ public class StatechartDefinitionSection extends Composite
 			setFont(font);
 			refresh(this);
 		}
+
 		@Override
 		public void paintControl(PaintEvent e) {
 			int w = e.width;
@@ -753,5 +753,9 @@ public class StatechartDefinitionSection extends Composite
 			font.dispose();
 			super.dispose();
 		}
+	}
+
+	public String getDefinition() {
+		return embeddedEditor.getDocument().get();
 	}
 }

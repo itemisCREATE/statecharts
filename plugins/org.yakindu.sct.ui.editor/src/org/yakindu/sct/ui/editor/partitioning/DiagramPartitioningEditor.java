@@ -342,6 +342,11 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	protected Adapter createBreadcrumbSynchronizer() {
 		return new BreadcrumbSynchronizer();
 	}
+	
+	@Override
+	public void firePropertyChange(int property) {
+		super.firePropertyChange(property);
+	}
 
 	@SuppressWarnings("unchecked")
 	public static final class BreadcrumbViewerContentProvider implements ITreePathContentProvider {
