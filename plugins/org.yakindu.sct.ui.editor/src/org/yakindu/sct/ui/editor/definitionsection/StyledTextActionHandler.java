@@ -36,20 +36,24 @@ import org.eclipse.ui.actions.ActionFactory;
  *
  */
 public class StyledTextActionHandler {
-	private CopyActionHandler styledTextCopyAction = new CopyActionHandler();
-	private CutActionHandler styledTextCutAction = new CutActionHandler();
-	private PasteActionHandler styledTextPasteAction = new PasteActionHandler();
-	private SelectAllActionHandler styledTextSelectAllAction = new SelectAllActionHandler();
+	private CopyActionHandler styledTextCopyActionHandler = new CopyActionHandler();
+	private CutActionHandler styledTextCutActionHandler = new CutActionHandler();
+	private PasteActionHandler styledTextPasteActionHandler = new PasteActionHandler();
+	private SelectAllActionHandler styledTextSelectAllActionHandler = new SelectAllActionHandler();
+	private PrintActionHandler styledTextPrintActionHandler = new PrintActionHandler();
 
-	private IPropertyChangeListener copyActionListener = new PropertyChangeListener(styledTextCopyAction);
-	private IPropertyChangeListener cutActionListener = new PropertyChangeListener(styledTextCutAction);
-	private IPropertyChangeListener pasteActionListener = new PropertyChangeListener(styledTextPasteAction);
-	private IPropertyChangeListener selectAllActionListener = new PropertyChangeListener(styledTextSelectAllAction);
+	private IPropertyChangeListener copyActionListener = new PropertyChangeListener(styledTextCopyActionHandler);
+	private IPropertyChangeListener cutActionListener = new PropertyChangeListener(styledTextCutActionHandler);
+	private IPropertyChangeListener pasteActionListener = new PropertyChangeListener(styledTextPasteActionHandler);
+	private IPropertyChangeListener selectAllActionListener = new PropertyChangeListener(
+			styledTextSelectAllActionHandler);
+	private IPropertyChangeListener printActionListener = new PropertyChangeListener(styledTextPrintActionHandler);
 
 	private IAction copyAction;
 	private IAction cutAction;
 	private IAction pasteAction;
 	private IAction selectAllAction;
+	private IAction printAction;
 
 	private StyledText styledText;
 
@@ -226,6 +230,37 @@ public class StyledTextActionHandler {
 		}
 	}
 
+	protected class PrintActionHandler extends Action {
+		protected PrintActionHandler() {
+			super("Print");
+			setId("StyledTextPrintActionHandler");
+			setEnabled(false);
+		}
+
+		public void runWithEvent(Event event) {
+			if (styledText != null && !styledText.isDisposed()) {
+				styledText.print();
+				return;
+			}
+			if (printAction != null) {
+				printAction.runWithEvent(event);
+				return;
+			}
+		}
+
+		public void updateEnabledState() {
+			if (styledText != null && !styledText.isDisposed()) {
+				setEnabled(!styledText.getText().isEmpty());
+				return;
+			}
+			if (printAction != null) {
+				setEnabled(printAction.isEnabled());
+				return;
+			}
+			setEnabled(false);
+		}
+	}
+
 	/**
 	 * Creates a <code>StyledText</code> widget action handler for the global Copy,
 	 * Cut, Paste and Select All of the action bar.
@@ -236,10 +271,11 @@ public class StyledTextActionHandler {
 	 */
 	public StyledTextActionHandler(IActionBars actionBars) {
 		super();
-		actionBars.setGlobalActionHandler(ActionFactory.COPY.getId(), styledTextCopyAction);
-		actionBars.setGlobalActionHandler(ActionFactory.CUT.getId(), styledTextCutAction);
-		actionBars.setGlobalActionHandler(ActionFactory.PASTE.getId(), styledTextPasteAction);
-		actionBars.setGlobalActionHandler(ActionFactory.SELECT_ALL.getId(), styledTextSelectAllAction);
+		actionBars.setGlobalActionHandler(ActionFactory.COPY.getId(), styledTextCopyActionHandler);
+		actionBars.setGlobalActionHandler(ActionFactory.CUT.getId(), styledTextCutActionHandler);
+		actionBars.setGlobalActionHandler(ActionFactory.PASTE.getId(), styledTextPasteActionHandler);
+		actionBars.setGlobalActionHandler(ActionFactory.SELECT_ALL.getId(), styledTextSelectAllActionHandler);
+		actionBars.setGlobalActionHandler(ActionFactory.PRINT.getId(), styledTextPrintActionHandler);
 	}
 
 	/**
@@ -273,6 +309,7 @@ public class StyledTextActionHandler {
 		setCutAction(null);
 		setPasteAction(null);
 		setSelectAllAction(null);
+		setPrintAction(null);
 	}
 
 	/**
@@ -318,7 +355,7 @@ public class StyledTextActionHandler {
 		if (copyAction != null)
 			copyAction.addPropertyChangeListener(copyActionListener);
 
-		styledTextCopyAction.updateEnabledState();
+		styledTextCopyActionHandler.updateEnabledState();
 	}
 
 	/**
@@ -342,7 +379,7 @@ public class StyledTextActionHandler {
 		if (cutAction != null)
 			cutAction.addPropertyChangeListener(cutActionListener);
 
-		styledTextCutAction.updateEnabledState();
+		styledTextCutActionHandler.updateEnabledState();
 	}
 
 	/**
@@ -365,8 +402,7 @@ public class StyledTextActionHandler {
 
 		if (pasteAction != null)
 			pasteAction.addPropertyChangeListener(pasteActionListener);
-
-		styledTextPasteAction.updateEnabledState();
+		styledTextPasteActionHandler.updateEnabledState();
 	}
 
 	/**
@@ -390,7 +426,23 @@ public class StyledTextActionHandler {
 		if (selectAllAction != null)
 			selectAllAction.addPropertyChangeListener(selectAllActionListener);
 
-		styledTextSelectAllAction.updateEnabledState();
+		styledTextSelectAllActionHandler.updateEnabledState();
+	}
+
+	public void setPrintAction(IAction action) {
+		if (printAction == action)
+			return;
+
+		if (printAction != null)
+			printAction.removePropertyChangeListener(printActionListener);
+
+		printAction = action;
+
+		if (printAction != null)
+			printAction.addPropertyChangeListener(printActionListener);
+
+		styledTextPrintActionHandler.updateEnabledState();
+
 	}
 
 	/**
@@ -398,9 +450,11 @@ public class StyledTextActionHandler {
 	 * handlers
 	 */
 	private void updateActionsEnableState() {
-		styledTextCopyAction.updateEnabledState();
-		styledTextCutAction.updateEnabledState();
-		styledTextPasteAction.updateEnabledState();
-		styledTextSelectAllAction.updateEnabledState();
+		styledTextCopyActionHandler.updateEnabledState();
+		styledTextCutActionHandler.updateEnabledState();
+		styledTextPasteActionHandler.updateEnabledState();
+		styledTextSelectAllActionHandler.updateEnabledState();
+		styledTextPrintActionHandler.updateEnabledState();
 	}
+
 }

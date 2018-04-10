@@ -41,6 +41,7 @@ public class StyledTextSelectionListener extends StyledTextXtextAdapter.ChangeSe
 	private IAction cutAction;
 	private IAction pasteAction;
 	private IAction selectAllAction;
+	private IAction printAction;
 	private StyledTextActionHandler actionHandler;
 
 	public StyledTextSelectionListener(IWorkbenchPartSite site, StyledText widget, ISelectionProvider selectionProviderOnFocusGain) {
@@ -84,6 +85,7 @@ public class StyledTextSelectionListener extends StyledTextXtextAdapter.ChangeSe
 		actionHandler.setCutAction(cutAction);
 		actionHandler.setPasteAction(pasteAction);
 		actionHandler.setSelectAllAction(selectAllAction);
+		actionHandler.setPrintAction(printAction);
 	}
 
 	protected IActionBars saveDiagramActions() {
@@ -93,6 +95,7 @@ public class StyledTextSelectionListener extends StyledTextXtextAdapter.ChangeSe
 		cutAction = contributor.getActionBars().getGlobalActionHandler(ActionFactory.CUT.getId());
 		pasteAction = contributor.getActionBars().getGlobalActionHandler(ActionFactory.PASTE.getId());
 		selectAllAction = contributor.getActionBars().getGlobalActionHandler(ActionFactory.SELECT_ALL.getId());
+		printAction = contributor.getActionBars().getGlobalActionHandler(ActionFactory.PRINT.getId());
 		return contributor.getActionBars();
 	}
 
