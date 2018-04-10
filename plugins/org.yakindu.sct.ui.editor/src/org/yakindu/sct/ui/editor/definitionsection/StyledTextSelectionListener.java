@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.ui.editor.definitionsection;
 
+import org.eclipse.core.commands.contexts.Context;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -19,6 +20,8 @@ import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.actions.ActionFactory;
+import org.eclipse.ui.contexts.IContextActivation;
+import org.eclipse.ui.contexts.IContextService;
 import org.yakindu.base.xtext.utils.jface.viewers.StyledTextXtextAdapter;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramActionbarContributor;
 
@@ -26,7 +29,7 @@ import org.yakindu.sct.ui.editor.editor.StatechartDiagramActionbarContributor;
  * Extends {@link StyledTextXtextAdapter.ChangeSelectionProviderOnFocusGain} to
  * be able to release selection of previous selection provider. This in needed
  * to be able to perform keyboard shortcuts on the text in the statechart
- * definition section without interacting with the elements of the diagram. 
+ * definition section without interacting with the elements of the diagram.
  * 
  * This class does also hook the default clipboard actions Copy, Cut, Paste and
  * Select All for text widgets to a <code>StyledText</code> widget, which gets a
@@ -37,14 +40,22 @@ import org.yakindu.sct.ui.editor.editor.StatechartDiagramActionbarContributor;
  */
 public class StyledTextSelectionListener extends StyledTextXtextAdapter.ChangeSelectionProviderOnFocusGain {
 
+	protected static final String CHILD_CONTEXT_SCOPE_DESCRIPTION = "Embedded text editor scope";
+	protected static final String DIALOG_AND_WINDOW_SCOPE = "org.eclipse.ui.contexts.dialogAndWindow";
+	protected static final String EMBEDDED_TEXT_EDITOR_SCOPE = "org.eclipse.xtext.ui.embeddedTextEditorScope";
+	protected static final String TEXT_EDITOR_SCOPE = "org.eclipse.ui.textEditorScope";
 	private IAction copyAction;
 	private IAction cutAction;
 	private IAction pasteAction;
 	private IAction selectAllAction;
 	private StyledTextActionHandler actionHandler;
+	private IContextActivation embeddedEditorCtx;
+	private IContextService contextService;
 
-	public StyledTextSelectionListener(IWorkbenchPartSite site, StyledText widget, ISelectionProvider selectionProviderOnFocusGain) {
+	public StyledTextSelectionListener(IWorkbenchPartSite site, StyledText widget,
+			ISelectionProvider selectionProviderOnFocusGain) {
 		super(site, selectionProviderOnFocusGain);
+		contextService = site.getService(IContextService.class);
 		site.setSelectionProvider(selectionProviderOnFocusGain);
 		widget.addFocusListener(this);
 		widget.addDisposeListener(this);
@@ -54,12 +65,28 @@ public class StyledTextSelectionListener extends StyledTextXtextAdapter.ChangeSe
 	public void focusLost(FocusEvent e) {
 		super.focusLost(e);
 		unhookActions(e);
+		redefineParentContext(EMBEDDED_TEXT_EDITOR_SCOPE, DIALOG_AND_WINDOW_SCOPE);
 	}
 
+	@Override
 	public void focusGained(FocusEvent e) {
 		releaseSelection();
 		hookActions(e);
+		redefineParentContext(EMBEDDED_TEXT_EDITOR_SCOPE, TEXT_EDITOR_SCOPE);
 		super.focusGained(e);
+	}
+
+	protected void redefineParentContext(String childContext, String parentContext) {
+		if (embeddedEditorCtx != null) { // deactivates the context on focus lost
+			contextService.deactivateContext(embeddedEditorCtx);
+			embeddedEditorCtx = null;
+		} else { // redefines the parent of the child context, to avoid keybinding conflicts
+			final Context childCtx = contextService.getContext(childContext);
+			if (childCtx != null) {
+				childCtx.define(childContext, CHILD_CONTEXT_SCOPE_DESCRIPTION, parentContext);
+				embeddedEditorCtx = contextService.activateContext(childContext);
+			}
+		}
 	}
 
 	protected void releaseSelection() {
