@@ -22,15 +22,19 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 	override preStatechartDeclarations(ExecutionFlow it) {
 		'''
 		«super.preStatechartDeclarations(it)»
+		«IF hasLocalEvents»
 		
 		«events.content(it)»
+		«ENDIF»
 		'''
 	}
 	
 	override statemachineTypeStructContent(ExecutionFlow it) {
 		'''
 		«super.statemachineTypeStructContent(it)»
+		«IF hasLocalEvents»
 		«eventQueueTypeName» internal_event_queue;
+		«ENDIF»
 		'''
 	}
 	

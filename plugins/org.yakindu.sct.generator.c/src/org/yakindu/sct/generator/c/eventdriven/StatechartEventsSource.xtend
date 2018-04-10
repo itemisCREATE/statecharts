@@ -35,13 +35,16 @@ class StatechartEventsSource {
 	
 	def eventFunctions(ExecutionFlow it) {
 		'''
-		void «eventInitFunction»(«eventStructTypeName» * ev, «eventEnumName» name)
+		static void «eventInitFunction»(«eventStructTypeName» * ev, «eventEnumName» name)
 		{
 			ev->name = name;
+			«IF hasLocalEventsWithValue»
 			ev->has_value = false;
+			«ENDIF»
 		}
+		«IF hasLocalEventsWithValue»
 		
-		void «valueEventInitFunction»(«eventStructTypeName» * ev, «eventEnumName» name, void * value)
+		static void «valueEventInitFunction»(«eventStructTypeName» * ev, «eventEnumName» name, void * value)
 		{
 			ev->name = name;
 			ev->has_value = true;
@@ -57,24 +60,25 @@ class StatechartEventsSource {
 					break;
 			}
 		}
+		«ENDIF»
 		'''
 	}
 	
 	def eventQueueFunctions(ExecutionFlow it) {
 		'''
-		void «eventQueueInitFunction»(«eventQueueTypeName» * eq)
+		static void «eventQueueInitFunction»(«eventQueueTypeName» * eq)
 		{
 			eq->push_index = 0;
 			eq->pop_index = 0;
 			eq->size = 0;
 		}
 		
-		sc_integer «eventQueueSizeFunction»(«eventQueueTypeName» * eq)
+		static sc_integer «eventQueueSizeFunction»(«eventQueueTypeName» * eq)
 		{
 			return eq->size;
 		}
 		
-		«eventStructTypeName» «eventQueuePopFunction»(«eventQueueTypeName» * eq)
+		static «eventStructTypeName» «eventQueuePopFunction»(«eventQueueTypeName» * eq)
 		{
 			«eventStructTypeName» event;
 			if(«eventQueueSizeFunction»(eq) <= 0) {
@@ -94,7 +98,7 @@ class StatechartEventsSource {
 			return event;
 		}
 		
-		sc_boolean «eventQueuePushFunction»(«eventQueueTypeName» * eq, «eventStructTypeName» ev)
+		static sc_boolean «eventQueuePushFunction»(«eventQueueTypeName» * eq, «eventStructTypeName» ev)
 		{
 			if(«eventQueueSizeFunction»(eq) == «bufferSize») {
 				return false;
