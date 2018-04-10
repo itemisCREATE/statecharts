@@ -51,7 +51,7 @@ class StatechartEventsSource {
 			
 			switch(name)
 			{
-				«FOR e : getAllEvents.filter[hasValue && direction != Direction::OUT]»
+				«FOR e : getAllEvents.filter[hasValue && direction == Direction::LOCAL]»
 				case «e.eventEnumMemberName»:
 					ev->value.«e.eventEnumMemberName»_value = *((«e.typeSpecifier.targetLanguageName»*)value);
 					break;
