@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.refactoring.refactor;
 
@@ -35,9 +35,9 @@ import org.yakindu.sct.refactoring.utils.RefactoringHelper;
  * Base abstract class for all refactorings providing some default
  * implementations. Concrete subclasses are responsible for implementing the
  * refactoring logic which is applied on the refactoring's context objects.
- * 
+ *
  * @author thomas kutz - Initial contribution and API
- * 
+ *
  */
 public abstract class AbstractRefactoring<T extends Object> implements IRefactoring<T> {
 
@@ -61,6 +61,7 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 	 */
 	protected RefactoringHelper helper = new RefactoringHelper();
 
+	@Override
 	public boolean isExecutable() {
 		return getContextObjects() != null && getContextObjects().size() > 0;
 	}
@@ -68,7 +69,7 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 	/**
 	 * Returns the resource which is affected by this refactoring. Default
 	 * implementation returns the resource of the first context object.
-	 * 
+	 *
 	 * @return resource
 	 */
 	protected Resource getResource() {
@@ -83,6 +84,7 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 	 * Wraps an {@link AbstractTransactionalCommand} around the refactoring
 	 * logic.
 	 */
+	@Override
 	public void execute() {
 		if (!isExecutable()) {
 			return;
@@ -120,10 +122,11 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 	protected boolean internalDoUndo() {
 		return true;
 	}
-	
-    /**
-     * Combines the internal command execution call with the parsing and linking of the specification elements.
-     */
+
+	/**
+	 * Combines the internal command execution call with the parsing and linking
+	 * of the specification elements.
+	 */
 	protected void executeRefactoring() {
 		internalExecute();
 		parseAndLinkSpecificationElements();
@@ -134,7 +137,8 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 	protected abstract void internalExecute();
 
 	/**
-	 * Parses and links the specification elements of {@link AbstractRefactoring#getResource()}
+	 * Parses and links the specification elements of
+	 * {@link AbstractRefactoring#getResource()}
 	 */
 	protected void parseAndLinkSpecificationElements() {
 		Resource resource = getResource();
@@ -143,10 +147,10 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 			((AbstractSCTResource) resource).linkSpecificationElements();
 		}
 	}
-	
+
 	/**
 	 * Getter for the editing domain of the resource used in this refactoring.
-	 * 
+	 *
 	 * @return editing domain
 	 */
 	protected TransactionalEditingDomain getEditingDomain() {
@@ -155,7 +159,7 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 
 	/**
 	 * Returns a list of files affected by this refactoring.
-	 * 
+	 *
 	 * @return list of affected files
 	 */
 	protected List<?> getAffectedFiles() {
@@ -164,7 +168,7 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 
 	/**
 	 * Returns the label of this refactoring's command.
-	 * 
+	 *
 	 * @return command label
 	 */
 	protected String getCommandLabel() {
@@ -174,7 +178,7 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 	/**
 	 * Executes the specified command and handles enabling and disabling of the
 	 * resource's serializer.
-	 * 
+	 *
 	 * @param command
 	 *            the command to execute
 	 * @param resource
@@ -206,7 +210,7 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 			}
 		}
 	}
-	
+
 	protected String asIdentifier(String string) {
 		return string.replaceAll("[^a-z&&[^A-Z&&[^0-9]]]", "_");
 	}
