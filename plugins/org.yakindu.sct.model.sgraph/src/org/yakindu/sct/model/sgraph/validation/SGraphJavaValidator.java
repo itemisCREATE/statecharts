@@ -438,8 +438,6 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 		// Do not register because this validator is only a composite #398987
 	}
 
-	// SGraph smells for Transition
-
 	@Check()
 	public void checkAtLeastTwoOutgoingTransitionsHaveIdenticalEffects(org.yakindu.sct.model.sgraph.State state) {
 
@@ -503,53 +501,9 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 		return v.getParentRegion().getComposite();
 	}
 	
-	/*
-	@Check
-	public void checkNamedFinalStateIsUsed(Exit exitNode) {
-
-		CompositeElement comp = getParent(exitNode);
-		if (!(comp instanceof org.yakindu.sct.model.sgraph.State)) {
-			return; // this case should never ever happen ...
-		}
-
-		org.yakindu.sct.model.sgraph.State compositeState = (org.yakindu.sct.model.sgraph.State) comp;
-
-		if (compositeState.getOutgoingTransitions().stream()
-				.filter(t -> t.getSpecification().contains(exitNode.getName())).count() == 0) {
-			warning(SMELL_NAMED_EXIT_NODE_NOT_USED, exitNode, null, // TODO: Wozu ist das genau gut?
-					-1);
-		}
-	}
-	*/
-
-	/*
-	@Check
-	public void checkNamedEntryIsUsed(Entry entry) {
-		// This check applies to named entry nodes only
-		if (entry.getName().equals("")) {
-			return;
-		}
-
-		CompositeElement comp = getParent(entry);
-		if (!(comp instanceof org.yakindu.sct.model.sgraph.State)) {
-			// might happen, if the main entry node is named (of course this is invalid, but
-			// that error shouldn't trigger this check)
-			return;
-		}
-
-		org.yakindu.sct.model.sgraph.State compositeState = (org.yakindu.sct.model.sgraph.State) comp;
-
-		if (compositeState.getIncomingTransitions().stream().filter(t -> t.getSpecification().contains(entry.getName()))
-				.count() == 0) {
-			warning(SMELL_NAMED_ENTRY_NODE_NOT_USED, entry, null, // TODO: Wozu ist das genau gut?
-					-1);
-		}
-	}
-	*/
-
 	@Check
 	public void checkAOneRegionCompositeStateMustNotHaveExitNodesAndFinalStates(Region region) {
-		// if the current region is not contained inside a state (aka composite state), then return.
+		// if the current region is not contained inside a state (composite state), then return.
 		if (!(region.getComposite() instanceof org.yakindu.sct.model.sgraph.State)) {
 			return;
 		}
@@ -566,8 +520,6 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 
 	@Check
 	public void checkNoNonFinalStateIsSink(org.yakindu.sct.model.sgraph.State state) {
-		// at least one state in the parent hierarchy must have one outgoing transition
-
 		// State is automatically a non FinalState by class hierarchy
 		if (!stateOrContainingStateHasAtLeastOneOutgoingTransition(state)) {
 			warning(SMELL_NON_FINAL_STATES_SHOULD_NOT_BE_SINKS, state, SGraphPackage.Literals.STATE__SIMPLE, -1);
@@ -576,18 +528,14 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	}
 
 	private boolean stateOrContainingStateHasAtLeastOneOutgoingTransition(org.yakindu.sct.model.sgraph.State state) {
-		// is the state itself contains an outgoing transition we're done.
 		if (state.getOutgoingTransitions().size() > 0) {
 			return true;
 		}
-
 		// get the parent, if there's one, and perform the same check,
 		CompositeElement comp = state.getParentRegion().getComposite();
 		if (comp instanceof org.yakindu.sct.model.sgraph.State) {
 			return stateOrContainingStateHasAtLeastOneOutgoingTransition((org.yakindu.sct.model.sgraph.State) comp);
 		}
-
-		// no outgoing transition and no parent => check failed.
 		return false;
 	}
 
@@ -622,7 +570,6 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	
 	public static List<Transition> getAllTransitionInHierarchy(org.yakindu.sct.model.sgraph.State state) {
 		List<Transition> tmp = new ArrayList<>();
-		// tmp.addAll(getOutgoingTransitionsForAllChildren(state));
 		tmp.addAll(state.getOutgoingTransitions());
 		
 		// start with parent: Otherwise the outgoing transition of the current state will be included twice
@@ -644,24 +591,4 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 		return tmp;		
 	}
 	
-	/*
-	private static List<Transition> getOutgoingTransitionsForAllChildren(org.yakindu.sct.model.sgraph.State state) {
-		if (!state.isComposite()) {
-			return state.getOutgoingTransitions();
-		}
-		// we can now safely assume, that it's composite
-		List<Transition> tmp = new LinkedList<>();
-		tmp.addAll(state.getOutgoingTransitions());
-		for (Region region : state.getRegions()) {
-			List<org.yakindu.sct.model.sgraph.State> statesInRegion = region.getVertices().stream()
-					.filter(org.yakindu.sct.model.sgraph.State.class::isInstance).map(v -> (org.yakindu.sct.model.sgraph.State) v)
-					.collect(Collectors.toList());
-
-			for (org.yakindu.sct.model.sgraph.State r_state : statesInRegion) {
-				tmp.addAll(getOutgoingTransitionsForAllChildren(r_state));
-			}
-		}
-		return tmp;
-	}
-	*/
 }

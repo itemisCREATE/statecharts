@@ -978,7 +978,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 	}
 
-	// custom
 	@Check
 	public void checkConflictingTriggers(ReactionTrigger rt) {
 
@@ -1033,19 +1032,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 	}
 
-	/*
-	 * // already covered
-	 * 
-	 * @Check public void containsAlwaysAndOnCycle(ReactionTrigger rt) { // must use
-	 * textual representation because always and oncycle are mapped to the // same
-	 * non terminal in SText.xtext if (rt.eContainer() instanceof Transition) {
-	 * String spec = ((Transition) rt.eContainer()).getSpecification(); if
-	 * (spec.contains("always") && spec.contains("oncycle")) {
-	 * warning(String.format(STextValidationMessages.
-	 * SMELL_SEMANTIC_EQUIVALENT_TRIGGERS, "always", "oncycle"), rt,
-	 * StextPackage.Literals.REACTION_TRIGGER__TRIGGERS, -1); } } }
-	 */
-
 	@Check
 	public void conflictingTriggers(ReactionTrigger rt) {
 		if (rt.eContainer() instanceof Transition) {
@@ -1088,6 +1074,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	static List<String> badNames = Arrays.asList(new String[]{"always", "oncycle", "after", "every"});
 
 	/**
+	 * The events defined in {@link #badNames} must not be used as event names in statecharts.
+	 * 
 	 * Extended version: Checks for every interface and not just the default
 	 * interface.
 	 * 
@@ -1108,12 +1096,12 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 	}
 
-	@Check
 	/**
-	 * Validiert nur auf der obersten Ebene; composite sates werden ignoriert.
-	 * 
+	 * Known limitation: Validation is only performed on top level, composite states are ignored. So
+	 * it might mark a variable as unused although it's been used in a composite state.
 	 * @param statechart
 	 */
+	@Check
 	public void eventsAreUsedInTransitions(Statechart statechart) {
 		List<String> eventNamesDefinedInInterfaces = getAllEventsInAllScopes(statechart).stream()
 				.map(ev -> ev.getName()).collect(Collectors.toList());
@@ -1136,7 +1124,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 	private Set<RegularEventSpec> getEventsForStatechart(Statechart statechart) {
 		Set<Transition> allTransitions = new HashSet<>();
-		// Set<RegularEventSpec> allRegularEvents = new HashSet<>();
 		for (Region region : statechart.getRegions()) {
 			for (Vertex v : region.getVertices()) {
 				if (v instanceof org.yakindu.sct.model.sgraph.State) {
