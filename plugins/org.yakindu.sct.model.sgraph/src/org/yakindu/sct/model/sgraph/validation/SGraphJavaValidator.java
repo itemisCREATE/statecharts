@@ -569,7 +569,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	 * composite state has a transition with a target, that's outside the composite state. The composite state will still
 	 * be tagged with a warning!
 	 */
-	@Check
+	// @Check TODO enable this check, if a configuration option has been created
 	public void checkNoNonFinalStateIsSink(org.yakindu.sct.model.sgraph.State state) {
 		// State is automatically a non FinalState by class hierarchy
 		if (!stateOrContainingStateHasAtLeastOneOutgoingTransition(state)) {
