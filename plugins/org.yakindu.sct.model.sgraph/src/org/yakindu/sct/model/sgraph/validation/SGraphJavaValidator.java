@@ -90,8 +90,8 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_TRANSITION_ORTHOGONAL = "Source and target of a transition must not be located in orthogonal regions!";
 	public static final String ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER = "Outgoing transitions from entries can only target to sibling or inner states.";
 	public static final String ISSUE_STATECHART_NAME_NO_IDENTIFIER = "%s is not a valid identifier!";
-	public static final String SMELL_TWO_OUTGOING_TRANSITIONS_OF_ONE_STATE_HAVE_THE_SAME_EFFECT = "Two outgoing transitions have the same effect.";
-	public static final String SMELL_TWO_INCOMING_TRANSITIONS_OF_ONE_STATE_HAVE_THE_SAME_EFFECT = "Two incoming transitions have the same effect.";
+	public static final String SMELL_ALL_OUTGOING_TRANSITIONS_OF_ONE_STATE_HAVE_THE_SAME_EFFECT = "All outgoing transitions have the same effect.";
+	public static final String SMELL_ALL_INCOMING_TRANSITIONS_OF_ONE_STATE_HAVE_THE_SAME_EFFECT = "All incoming transitions have the same effect.";
 	public static final String SMELL_MULTIPLE_UNAMED_ENTRIES_PER_REGION = "There are multiple, unamed entry nodes in this region.";
 	public static final String SMELL_MORE_THAN_ONE_FINAL_STATE_PER_REGION = "This region contains %d final states - at most one is recommended.";
 	public static final String SMELL_NAMED_EXIT_NODE_NOT_USED = "A named exit node should be used in an outgoing transition of the composite state.";
@@ -439,44 +439,61 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	}
 
 	@Check()
-	public void checkAtLeastTwoOutgoingTransitionsHaveIdenticalEffects(org.yakindu.sct.model.sgraph.State state) {
+	public void checkAllOutgoingTransitionsHaveIdenticalEffects(Vertex vertex) {
+		// check only applies to States or Choice. If all outgoing transitions have the same effect, the
+		// effect could be merged into state or the choice-incoming transition. This is not possible
+		// on all other Vertices.
+		if (!(vertex instanceof org.yakindu.sct.model.sgraph.State || vertex instanceof Choice)) {
+			return;
+		}		
+		if (vertex.getOutgoingTransitions().size() <= 1) {
+			return;  // prevent warning in case of only one transition
+		}
+		boolean showWarning = true;
 
-		boolean showWarning = false;
-
-		for (Transition t1 : state.getOutgoingTransitions()) {
-			for (Transition t2 : state.getOutgoingTransitions()) {
+		for (Transition t1 : vertex.getOutgoingTransitions()) {
+			for (Transition t2 : vertex.getOutgoingTransitions()) {
 				if (t1 == t2) {
 					continue; // both references point to the same transition
 				}
-				if (t1.getEffect() != null && t2.getEffect() != null
-						&& EcoreUtil.equals(t1.getEffect(), t2.getEffect())) {
-					showWarning = true;
+				if (!(t1.getEffect() != null && t2.getEffect() != null
+						&& EcoreUtil.equals(t1.getEffect(), t2.getEffect()))) {
+					showWarning = false;
 				}
 			}
 		}
 		if (showWarning) {
-			warning(SMELL_TWO_OUTGOING_TRANSITIONS_OF_ONE_STATE_HAVE_THE_SAME_EFFECT, state,
-					SGraphPackage.Literals.STATE__SIMPLE, -1);
+			warning(SMELL_ALL_OUTGOING_TRANSITIONS_OF_ONE_STATE_HAVE_THE_SAME_EFFECT, vertex,
+					null, -1);
 		}
 
 	}
 
 	@Check()
-	public void checkAtLeastTwoIncomingTransitionsHaveIdenticalEffects(org.yakindu.sct.model.sgraph.State state) {
-		boolean showWarning = false;
-		for (Transition t1 : state.getIncomingTransitions()) {
-			for (Transition t2 : state.getIncomingTransitions()) {
+	public void checkAllIncomingTransitionsHaveIdenticalEffects(Vertex vertex) {
+		// check only applies to state or synchronization, because only the allow to trigger some effect on entering
+		// in case of the synchronization it's the outgoing transition
+		if (!(vertex instanceof org.yakindu.sct.model.sgraph.State || vertex instanceof Synchronization)) {
+			return;
+		}
+		if (vertex.getIncomingTransitions().size() <= 1) {
+			return;  // prevent warning in case of only one transition
+		}
+		boolean showWarning = true;
+		for (Transition t1 : vertex.getIncomingTransitions()) {
+			for (Transition t2 : vertex.getIncomingTransitions()) {
 				if (t1 == t2) {
 					continue;
 				}
-				if (EcoreUtil.equals(t1.getEffect(), t2.getEffect())) {
-					showWarning = true;
+				if (!(t1.getEffect() != null && t2.getEffect() != null 
+						&& EcoreUtil.equals(t1.getEffect(), t2.getEffect()))) {
+					showWarning = false;
 				}
 			}
 		}
 		if (showWarning) {
-			warning(SMELL_TWO_INCOMING_TRANSITIONS_OF_ONE_STATE_HAVE_THE_SAME_EFFECT, state,
-					SGraphPackage.Literals.STATE__SIMPLE, -1);
+			warning(SMELL_ALL_INCOMING_TRANSITIONS_OF_ONE_STATE_HAVE_THE_SAME_EFFECT, vertex,
+					null, -1);
 		}
 	}
 
