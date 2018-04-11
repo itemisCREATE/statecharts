@@ -417,7 +417,8 @@ public class StyledTextXtextAdapter {
 				this.site.setSelectionProvider(this.selectionProviderOnFocusLost);
 			}
 
-			text.setSelection(0);
+			text.setSelection(text.getCaretOffset());
+			
 		}
 
 		protected void setIgnoreNextFocusLost(boolean b) {
