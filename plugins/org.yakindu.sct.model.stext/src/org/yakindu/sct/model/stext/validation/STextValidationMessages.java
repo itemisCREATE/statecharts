@@ -65,5 +65,5 @@ public interface STextValidationMessages {
 	public static final String SMELL_INTERFACE_NAMES_MUST_BE_UNIQUE = "The interface name %s is used at least twice.";
 	public static final String SMELL_BAD_EVENT_NAMES = "Some events in the interface [%s] use the internal names %s";
 	public static final String SMELL_IN_INTERFACE_DEFINED_EVENTS_SHOULD_BE_USED = "The events %s were defined in interfaces, but not used as triggers for transitions."
-			+ "\n(They still meight be used inside states - that's not covered by this validation)";
+			+ "\n(They still might be used inside states - that's not covered by this validation)";
 }

@@ -978,6 +978,12 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 	}
 
+	/**
+	 * If the same triggers (always, after, custom defined events) are used multiple times in one trigger on a transaction,
+	 * this is considered to be a smell.
+	 * 
+	 * @param rt
+	 */
 	@Check
 	public void checkConflictingTriggers(ReactionTrigger rt) {
 
@@ -991,21 +997,21 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			}
 
 			boolean multipleAfterEvents = rt.getTriggers().stream().filter(TimeEventSpec.class::isInstance)
-					.map(t -> (TimeEventSpec) t).filter(t -> t.getType() == TimeEventType.AFTER).count() > 1;
+					.map(TimeEventSpec.class::cast).filter(t -> t.getType() == TimeEventType.AFTER).count() > 1;
 			// TimeEventType.EVERY is unnecessary, because it's not valid on transitions
 			if (multipleAfterEvents) {
 				duplicateTriggers.add("after");
 			}
 
 			// regular events
-			List<RegularEventSpec> events = rt.getTriggers().stream().filter(RegularEventSpec.class::isInstance)
-					.map(e -> (RegularEventSpec) e).collect(Collectors.toList());
+			List<RegularEventSpec> regEvents = rt.getTriggers().stream().filter(RegularEventSpec.class::isInstance)
+					.map(RegularEventSpec.class::cast).collect(Collectors.toList());
 
 			// fallback, if event name can't be resolved
 			boolean useGenericWarning = false;
 
-			for (RegularEventSpec res : events) {
-				if (events.stream().filter(e -> EcoreUtil.equals(res.getEvent(), e.getEvent())).count() > 1) {
+			for (RegularEventSpec res : regEvents) {
+				if (regEvents.stream().filter(e -> EcoreUtil.equals(res.getEvent(), e.getEvent())).count() > 1) {
 					// try to get the name of the event
 					if (res.getEvent() instanceof ElementReferenceExpression) {
 						ElementReferenceExpression ere = (ElementReferenceExpression) res.getEvent();
@@ -1032,6 +1038,10 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 	}
 
+	/**
+	 * You must not use always/oncycle and after at the same time!
+	 * @param rt
+	 */
 	@Check
 	public void conflictingTriggers(ReactionTrigger rt) {
 		if (rt.eContainer() instanceof Transition) {
@@ -1047,6 +1057,10 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 	}
 
+	/**
+	 * Interface names must be unique
+	 * @param statechart
+	 */
 	@Check
 	public void UniqueInterfaceNames(Statechart statechart) {
 		List<InterfaceScope> is = getAllInterfaceScopes(statechart);
@@ -1077,7 +1091,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	 * The events defined in {@link #badNames} must not be used as event names in statecharts.
 	 * 
 	 * Extended version: Checks for every interface and not just the default
-	 * interface.
+	 * interface, but not for the internal one.
 	 * 
 	 * @param statechart
 	 */
@@ -1097,6 +1111,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	}
 
 	/**
+	 * In interface defined events should be used inside the statechart.
+	 * 
 	 * Known limitation: Validation is only performed on top level, composite states are ignored. So
 	 * it might mark a variable as unused although it's been used in a composite state.
 	 * @param statechart
@@ -1106,7 +1122,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		List<String> eventNamesDefinedInInterfaces = getAllEventsInAllScopes(statechart).stream()
 				.map(ev -> ev.getName()).collect(Collectors.toList());
 
-		List<String> eventNamesUsedInStatechart = getEventsForStatechart(statechart).stream()
+		List<String> eventNamesUsedInStatechart = getEventsForStatechartOnlyOnTopLevel(statechart).stream()
 				.map(RegularEventSpec::getEvent).filter(ElementReferenceExpression.class::isInstance)
 				.map(ElementReferenceExpression.class::cast).map(ElementReferenceExpression::getReference)
 				.filter(EventDefinition.class::isInstance).map(EventDefinition.class::cast)
@@ -1122,13 +1138,13 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 	}
 
-	private Set<RegularEventSpec> getEventsForStatechart(Statechart statechart) {
+	private Set<RegularEventSpec> getEventsForStatechartOnlyOnTopLevel(Statechart statechart) {
 		Set<Transition> allTransitions = new HashSet<>();
 		for (Region region : statechart.getRegions()) {
 			for (Vertex v : region.getVertices()) {
 				if (v instanceof org.yakindu.sct.model.sgraph.State) {
 					allTransitions.addAll(
-							SGraphJavaValidator.getAllTransitionInHierarchy((org.yakindu.sct.model.sgraph.State) v));
+							SGraphJavaValidator.getAllTransitionsInHierarchy((org.yakindu.sct.model.sgraph.State) v));
 				}
 			}
 		}
