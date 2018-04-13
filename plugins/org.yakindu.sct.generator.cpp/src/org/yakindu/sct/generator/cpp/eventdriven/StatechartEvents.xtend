@@ -37,6 +37,7 @@ class StatechartEvents {
 	protected ExecutionFlow flow
 	
 	def content(ExecutionFlow it) {
+		if(!hasLocalEvents) return ''''''
 		'''
 		#ifndef «generateHeaderDefineGuard»
 		#define «generateHeaderDefineGuard»
