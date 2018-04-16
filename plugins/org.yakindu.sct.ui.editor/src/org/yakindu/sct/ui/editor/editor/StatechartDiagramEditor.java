@@ -438,7 +438,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	@Override
 	public boolean isDirty() {
-		if (!(getContextObject() instanceof SpecificationElement))
+		if (getDiagram() == null || !(getContextObject() instanceof SpecificationElement))
 			return super.isDirty();
 		SpecificationElement contextObject = (SpecificationElement) getContextObject();
 		return super.isDirty() || (definitionSection.getDefinition() != null
