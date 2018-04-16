@@ -441,7 +441,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		if (getDiagram() == null || !(getContextObject() instanceof SpecificationElement))
 			return super.isDirty();
 		SpecificationElement contextObject = (SpecificationElement) getContextObject();
-		return super.isDirty() || (definitionSection.getDefinition() != null
-				&& !definitionSection.getDefinition().equals(contextObject.getSpecification()));
+		return super.isDirty() || (definitionSection != null && (definitionSection.getDefinition() != null
+				&& !definitionSection.getDefinition().equals(contextObject.getSpecification())));
 	}
 }
