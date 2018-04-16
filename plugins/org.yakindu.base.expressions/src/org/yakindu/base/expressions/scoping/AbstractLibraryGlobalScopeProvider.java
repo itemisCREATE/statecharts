@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -87,7 +88,7 @@ public abstract class AbstractLibraryGlobalScopeProvider extends AbstractGlobalS
 
 	protected Iterable<IEObjectDescription> getDescriptions(Resource context, URI uri) {
 		List<IEObjectDescription> result = Lists.newArrayList();
-		ResourceSet set = context.getResourceSet();
+		ResourceSet set = new ResourceSetImpl();
 		Resource resource = set.getResource(uri, true);
 		IResourceServiceProvider resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(uri);
 		if (resourceServiceProvider == null) {
