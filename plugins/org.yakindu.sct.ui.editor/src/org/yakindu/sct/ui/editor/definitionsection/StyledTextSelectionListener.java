@@ -10,7 +10,10 @@
  */
 package org.yakindu.sct.ui.editor.definitionsection;
 
-import org.eclipse.core.commands.contexts.Context;
+import static org.yakindu.sct.ui.editor.definitionsection.ContextScopeHandler.DIALOG_AND_WINDOW_SCOPE;
+import static org.yakindu.sct.ui.editor.definitionsection.ContextScopeHandler.EMBEDDED_TEXT_EDITOR_SCOPE;
+import static org.yakindu.sct.ui.editor.definitionsection.ContextScopeHandler.TEXT_EDITOR_SCOPE;
+
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -21,7 +24,6 @@ import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.contexts.IContextActivation;
-import org.eclipse.ui.contexts.IContextService;
 import org.yakindu.base.xtext.utils.jface.viewers.StyledTextXtextAdapter;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramActionbarContributor;
 
@@ -40,10 +42,6 @@ import org.yakindu.sct.ui.editor.editor.StatechartDiagramActionbarContributor;
  */
 public class StyledTextSelectionListener extends StyledTextXtextAdapter.ChangeSelectionProviderOnFocusGain {
 
-	protected static final String CHILD_CONTEXT_SCOPE_DESCRIPTION = "Embedded text editor scope";
-	protected static final String DIALOG_AND_WINDOW_SCOPE = "org.eclipse.ui.contexts.dialogAndWindow";
-	protected static final String EMBEDDED_TEXT_EDITOR_SCOPE = "org.eclipse.xtext.ui.embeddedTextEditorScope";
-	protected static final String TEXT_EDITOR_SCOPE = "org.eclipse.ui.textEditorScope";
 	private IAction copyAction;
 	private IAction cutAction;
 	private IAction pasteAction;
@@ -51,12 +49,10 @@ public class StyledTextSelectionListener extends StyledTextXtextAdapter.ChangeSe
 	private IAction printAction;
 	private StyledTextActionHandler actionHandler;
 	private IContextActivation embeddedEditorCtx;
-	private IContextService contextService;
 
 	public StyledTextSelectionListener(IWorkbenchPartSite site, StyledText widget,
 			ISelectionProvider selectionProviderOnFocusGain) {
 		super(site, selectionProviderOnFocusGain, widget);
-		contextService = site.getService(IContextService.class);
 		site.setSelectionProvider(selectionProviderOnFocusGain);
 		widget.addFocusListener(this);
 		widget.addDisposeListener(this);
@@ -77,18 +73,14 @@ public class StyledTextSelectionListener extends StyledTextXtextAdapter.ChangeSe
 		super.focusGained(e);
 	}
 
-	protected void redefineParentContext(String childContext, String parentContext) {
-		if (embeddedEditorCtx != null) { // deactivates the context on focus
-											// lost
-			contextService.deactivateContext(embeddedEditorCtx);
+	protected void redefineParentContext(String childCtx, String parentCtx) {
+		if (embeddedEditorCtx != null) { // deactivates the context on focus lost
+			ContextScopeHandler.deactivateContext(embeddedEditorCtx);
 			embeddedEditorCtx = null;
-		} else { // redefines the parent of the child context, to avoid
-					// keybinding conflicts
-			final Context childCtx = contextService.getContext(childContext);
-			if (childCtx != null) {
-				childCtx.define(childContext, CHILD_CONTEXT_SCOPE_DESCRIPTION, parentContext);
-				embeddedEditorCtx = contextService.activateContext(childContext);
-			}
+		} else { // redefines child context, to avoid keybinding conflicts
+			ContextScopeHandler.defineContext(childCtx, parentCtx);
+			embeddedEditorCtx = ContextScopeHandler.activateContext(childCtx);
+
 		}
 	}
 
