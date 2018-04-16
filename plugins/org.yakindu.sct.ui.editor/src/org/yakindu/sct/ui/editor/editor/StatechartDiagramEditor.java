@@ -415,7 +415,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	public void toggleDefinitionSection() {
 		if (definitionSection != null && !definitionSection.isDisposed() && isStatechart()) {
-			definitionSection.toggleDefinitionSection();
+			definitionSection.updateStyle();
 			definitionSection.restoreSashWidths();
 		}
 	}
