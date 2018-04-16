@@ -172,7 +172,7 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	protected Statechart getStatechart(Resource context) {
 		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context,
 				ContextElementAdapter.class);
-		if (provider == null) {
+		if (provider == null || provider.getElement() == null) {
 			return (Statechart) EcoreUtil2.getObjectByType(context.getContents(), SGraphPackage.Literals.STATECHART);
 		} else {
 			return (Statechart) EcoreUtil.getObjectByType(provider.getElement().eResource().getContents(),

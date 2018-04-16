@@ -956,8 +956,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	protected Statechart getStatechart(EObject context) {
 		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context.eResource(),
 				ContextElementAdapter.class);
-
-		if (provider == null) {
+		if (provider == null || provider.getElement() == null) {
 			return EcoreUtil2.getContainerOfType(context, Statechart.class);
 		} else {
 			if(provider.getElement().eResource() == null) return null;
