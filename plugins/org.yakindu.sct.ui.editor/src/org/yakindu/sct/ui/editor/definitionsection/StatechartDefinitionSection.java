@@ -10,6 +10,9 @@
  */
 package org.yakindu.sct.ui.editor.definitionsection;
 
+import static org.yakindu.sct.ui.editor.definitionsection.ContextScopeHandler.EMBEDDED_TEXT_EDITOR_SCOPE;
+import static org.yakindu.sct.ui.editor.definitionsection.ContextScopeHandler.TEXT_EDITOR_SCOPE;
+
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.value.IObservableValue;
@@ -227,6 +230,7 @@ public class StatechartDefinitionSection extends Composite
 	}
 
 	protected EmbeddedEditor createSpecificationEditor() {
+		ContextScopeHandler.defineContext(EMBEDDED_TEXT_EDITOR_SCOPE, TEXT_EDITOR_SCOPE);
 		EmbeddedEditor embeddedEditor = createEmbeddedEditor();
 		embeddedEditor.createPartialEditor();
 		GridDataFactory.fillDefaults().grab(true, true).span(2, 1).applyTo(embeddedEditor.getViewer().getControl());

@@ -929,8 +929,7 @@
     <context
           description="Embedded Xtext Editor Scope"
           id="org.eclipse.xtext.ui.embeddedTextEditorScope"
-          name="Embedded Xtext Editor Scope"
-          parentId="org.eclipse.ui.contexts.dialogAndWindow">
+          name="Embedded Xtext Editor Scope">
     </context>
  </extension>
  <extension
