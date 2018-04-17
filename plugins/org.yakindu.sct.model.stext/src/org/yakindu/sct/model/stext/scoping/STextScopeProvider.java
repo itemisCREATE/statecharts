@@ -240,15 +240,21 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 	protected ScopedElement getScopedElement(EObject context) {
 		ScopedElement scopedElement = EcoreUtil2.getContainerOfType(context, ScopedElement.class);
 		if (scopedElement != null)
-			return scopedElement;
+			return (Statechart) retrieveStatechartFromScope(scopedElement);
 		return getStatechart(context);
+	}
+
+	protected Statechart retrieveStatechartFromScope(ScopedElement scopedElement) {
+		if (scopedElement != null && scopedElement instanceof Statechart)
+			return (Statechart) scopedElement;
+		return retrieveStatechartFromScope((ScopedElement)scopedElement.eContainer());
 	}
 
 	protected Statechart getStatechart(EObject context) {
 		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context.eResource(),
 				ContextElementAdapter.class);
 
-		if (provider == null) {
+		if (provider == null || provider.getElement() == null) {
 			return EcoreUtil2.getContainerOfType(context, Statechart.class);
 		} else {
 			return (Statechart) EcoreUtil.getObjectByType(provider.getElement().eResource().getContents(),

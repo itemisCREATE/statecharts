@@ -104,7 +104,7 @@ public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalSc
 	protected Statechart getStatechart(EObject context) {
 		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context.eResource(),
 				ContextElementAdapter.class);
-		if (provider == null) {
+		if (provider == null || provider.getElement() == null) {
 			return EcoreUtil2.getContainerOfType(context, Statechart.class);
 		} else {
 			return (Statechart) EcoreUtil.getObjectByType(provider.getElement().eResource().getContents(),
