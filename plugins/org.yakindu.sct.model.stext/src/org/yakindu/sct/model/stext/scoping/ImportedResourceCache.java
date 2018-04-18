@@ -15,7 +15,6 @@ import java.util.Optional;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.transaction.RunnableWithResult;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.WorkspaceEditingDomainFactory;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
@@ -56,41 +55,30 @@ public class ImportedResourceCache {
 	}
 
 	public IResourceDescription get(final URI uri) {
-		try {
-			return (IResourceDescription) getEditingDomain()
-					.runExclusive(new RunnableWithResult.Impl<IResourceDescription>() {
+
+		final ResourceSet set = getResourceSet();
+		final Resource resource = set.getResource(uri, true);
+		if (resource != null) {
+			Optional<IResourceDescription> optional = cache.get(ImportedResourceCache.class, resource,
+					new Provider<Optional<IResourceDescription>>() {
 						@Override
-						public void run() {
-							final ResourceSet set = getResourceSet();
-							final Resource resource = set.getResource(uri, true);
-							if (resource != null) {
-								Optional<IResourceDescription> optional = cache.get(ImportedResourceCache.class,
-										resource, new Provider<Optional<IResourceDescription>>() {
-											@Override
-											public Optional<IResourceDescription> get() {
-												IResourceServiceProvider serviceProvider = serviceProviderRegistry
-														.getResourceServiceProvider(uri);
-												if (serviceProvider == null)
-													return Optional.empty();
-												final Manager resourceDescriptionManager = serviceProvider
-														.getResourceDescriptionManager();
-												if (resourceDescriptionManager == null)
-													return Optional.empty();
-												IResourceDescription result = resourceDescriptionManager
-														.getResourceDescription(resource);
-												return Optional.of(result);
-											}
-										});
-								if (optional.isPresent()) {
-									setResult(optional.get());
-								}
-							}
+						public Optional<IResourceDescription> get() {
+							IResourceServiceProvider serviceProvider = serviceProviderRegistry
+									.getResourceServiceProvider(uri);
+							if (serviceProvider == null)
+								return Optional.empty();
+							final Manager resourceDescriptionManager = serviceProvider.getResourceDescriptionManager();
+							if (resourceDescriptionManager == null)
+								return Optional.empty();
+							IResourceDescription result = resourceDescriptionManager.getResourceDescription(resource);
+							return Optional.of(result);
 						}
 					});
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-			return null;
+			if (optional.isPresent()) {
+				return optional.get();
+			}
 		}
+		return null;
 	}
 
 	protected ResourceSet getResourceSet() {
