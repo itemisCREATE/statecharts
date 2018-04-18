@@ -216,7 +216,8 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	@Override
 	public void dispose() {
 		closeSubdiagramEditors();
-		removeBreadcrumbSynchronizer(DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram()));
+		if (getDiagram() != null)
+			removeBreadcrumbSynchronizer(DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram()));
 		super.dispose();
 	}
 
