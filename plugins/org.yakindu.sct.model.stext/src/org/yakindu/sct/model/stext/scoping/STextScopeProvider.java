@@ -49,6 +49,7 @@ import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.stext.scoping.ContextPredicateProvider.EmptyPredicate;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
+import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
@@ -239,22 +240,16 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 
 	protected ScopedElement getScopedElement(EObject context) {
 		ScopedElement scopedElement = EcoreUtil2.getContainerOfType(context, ScopedElement.class);
-		if (scopedElement != null)
-			return (Statechart) retrieveStatechartFromScope(scopedElement);
+		if (EcoreUtil.getRootContainer(context) instanceof StatechartSpecification && scopedElement != null)
+			return scopedElement;
 		return getStatechart(context);
-	}
-
-	protected Statechart retrieveStatechartFromScope(ScopedElement scopedElement) {
-		if (scopedElement != null && scopedElement instanceof Statechart)
-			return (Statechart) scopedElement;
-		return retrieveStatechartFromScope((ScopedElement)scopedElement.eContainer());
 	}
 
 	protected Statechart getStatechart(EObject context) {
 		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context.eResource(),
 				ContextElementAdapter.class);
 
-		if (provider == null || provider.getElement() == null) {
+		if (provider == null) {
 			return EcoreUtil2.getContainerOfType(context, Statechart.class);
 		} else {
 			return (Statechart) EcoreUtil.getObjectByType(provider.getElement().eResource().getContents(),
