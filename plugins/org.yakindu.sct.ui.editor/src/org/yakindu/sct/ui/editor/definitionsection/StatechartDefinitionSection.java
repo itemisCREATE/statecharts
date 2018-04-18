@@ -449,6 +449,7 @@ public class StatechartDefinitionSection extends Composite
 			collapsedBorder.dispose();
 
 		if (embeddedEditor != null) {
+			embeddedEditor.getDocument().getValidationJob().cancel();
 			StyledText embeddedEditorWidget = embeddedEditor.getViewer().getTextWidget();
 			if (embeddedEditorWidget != null && !embeddedEditorWidget.isDisposed()) {
 				if (resizeListener != null) {
