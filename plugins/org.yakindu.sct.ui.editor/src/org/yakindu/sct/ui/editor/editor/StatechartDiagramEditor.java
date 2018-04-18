@@ -16,7 +16,6 @@ import java.util.Optional;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -426,9 +425,9 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	@Override
 	public EObject getContextObject() {
-		Assert.isNotNull(getDiagram());
+		if(getDiagram() == null || getDiagram().getElement() == null)
+			return null;
 		EObject element = getDiagram().getElement();
-		Assert.isNotNull(element);
 		return element;
 	}
 
