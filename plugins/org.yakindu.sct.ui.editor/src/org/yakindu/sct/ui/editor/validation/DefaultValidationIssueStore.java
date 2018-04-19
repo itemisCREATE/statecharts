@@ -120,7 +120,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 		initFromPersistentMarkers();
 	}
 
-	protected synchronized void initFromPersistentMarkers() {
+	protected void initFromPersistentMarkers() {
 		Multimap<String, SCTIssue> newVisibleIssues = ArrayListMultimap.create();
 		List<IMarker> markers = getMarkersOfConnectedResource();
 		for (IMarker iMarker : markers) {
@@ -165,7 +165,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 	}
 
 	@Override
-	public synchronized void processIssues(List<Issue> issues, IProgressMonitor monitor) {
+	public void processIssues(List<Issue> issues, IProgressMonitor monitor) {
 
 		final Multimap<String, SCTIssue> newVisibleIssues = ArrayListMultimap.create();
 		for (Issue issue : issues) {
@@ -231,7 +231,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 	}
 
 	@Override
-	public synchronized List<SCTIssue> getIssues(String uri) {
+	public List<SCTIssue> getIssues(String uri) {
 		List<SCTIssue> result = Lists.newArrayList();
 		synchronized (visibleIssues) {
 			Iterables.addAll(result, visibleIssues.get(uri));
