@@ -11,6 +11,7 @@
 package org.yakindu.sct.generator.core.execution;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.types.typesystem.AbstractTypeSystem;
@@ -68,14 +69,17 @@ public class GeneratorExecutorLookup {
 		}
 		if (typeSystem instanceof AbstractTypeSystem) {
 			ResourceSet set = entry.getElementRef().eResource().getResourceSet();
-			set.getResources().add(((AbstractTypeSystem) typeSystem).getResource());
+			Resource typeSystemResource = ((AbstractTypeSystem) typeSystem).getResource();
+			if (set != null && typeSystemResource != null && !set.getResources().contains(typeSystemResource)) {
+				set.getResources().add(typeSystemResource);
 
-			// XXX: avoid resolving the whole resource set, because there might
-			// be models with different domains, we have to ensure that just the
-			// models related to the current entry are resolved
-			EcoreUtil.resolveAll(entry);
-			EcoreUtil.resolveAll(entry.getElementRef());
-			EcoreUtil.resolveAll(((AbstractTypeSystem) typeSystem).getResource());
+				// XXX: avoid resolving the whole resource set, because there might
+				// be models with different domains, we have to ensure that just the
+				// models related to the current entry are resolved
+				EcoreUtil.resolveAll(entry);
+				EcoreUtil.resolveAll(entry.getElementRef());
+				EcoreUtil.resolveAll(typeSystemResource);
+			}
 		}
 
 		return executor;
