@@ -16,13 +16,17 @@ import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION;
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.PARENT_FIRST_ANNOTATION;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -32,6 +36,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.mwe2.language.mwe2.StringLiteral;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
@@ -53,6 +58,7 @@ import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.expressions.PostFixUnaryExpression;
+import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
 import org.yakindu.base.expressions.validation.ExpressionsJavaValidator;
 import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.Declaration;
@@ -83,7 +89,9 @@ import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
+import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
+import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
 import org.yakindu.sct.model.stext.stext.EntryPointSpec;
@@ -104,6 +112,7 @@ import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.RegularEventSpec;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
+import org.yakindu.sct.model.stext.stext.TimeEventType;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.common.base.Predicate;
@@ -112,12 +121,14 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+import com.ibm.icu.impl.PVecToTrieCompactHandler;
 
 /**
  * Several validations for nonsensical expressions.
  * 
  * @author muehlbrandt
  * @author muelder
+ * @author herrendorf
  * 
  */
 @ComposedChecks(validators = { SGraphJavaValidator.class, SCTResourceValidator.class, ExpressionsJavaValidator.class,
@@ -406,7 +417,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				Iterator<Transition> transitionIt = state.getOutgoingTransitions().iterator();
 				while (transitionIt.hasNext() && !hasOutgoingTransition) {
 					Transition transition = transitionIt.next();
-					hasOutgoingTransition = STextValidationModelUtils.isDefaultExitTransition(transition) ? true
+					hasOutgoingTransition = STextValidationModelUtils.isDefaultExitTransition(transition)
+							? true
 							: STextValidationModelUtils.isNamedExitTransition(transition, exit.getName());
 				}
 				if (!hasOutgoingTransition) {
@@ -882,7 +894,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		final String[] issueData = null;
 		ICompositeNode rootNode = NodeModelUtils.findActualNodeFor(source);
 		if (rootNode != null) {
-			INode child = findNode(source, false, rootNode, keyword, new int[] { index });
+			INode child = findNode(source, false, rootNode, keyword, new int[]{index});
 			if (child != null) {
 				int offset = child.getTotalOffset();
 				int length = child.getTotalLength();
@@ -963,5 +975,196 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			return (Statechart) EcoreUtil.getObjectByType(provider.getElement().eResource().getContents(),
 					SGraphPackage.Literals.STATECHART);
 		}
+	}
+
+	/**
+	 * If the same triggers (always, after, custom defined events) are used multiple times in one trigger on a transaction,
+	 * this is considered to be a smell.
+	 * 
+	 * @param rt
+	 */
+	@Check
+	public void checkConflictingTriggers(ReactionTrigger rt) {
+
+		if (rt.eContainer() instanceof Transition) {
+			Set<String> duplicateTriggers = new HashSet<>();
+
+			// basic events
+			boolean multipleAlwaysEvents = rt.getTriggers().stream().filter(AlwaysEvent.class::isInstance).count() > 1;
+			if (multipleAlwaysEvents) {
+				duplicateTriggers.add("always or oncycle");
+			}
+
+			boolean multipleAfterEvents = rt.getTriggers().stream().filter(TimeEventSpec.class::isInstance)
+					.map(TimeEventSpec.class::cast).filter(t -> t.getType() == TimeEventType.AFTER).count() > 1;
+			// TimeEventType.EVERY is unnecessary, because it's not valid on transitions
+			if (multipleAfterEvents) {
+				duplicateTriggers.add("after");
+			}
+
+			// regular events
+			List<RegularEventSpec> regEvents = rt.getTriggers().stream().filter(RegularEventSpec.class::isInstance)
+					.map(RegularEventSpec.class::cast).collect(Collectors.toList());
+
+			// fallback, if event name can't be resolved
+			boolean useGenericWarning = false;
+
+			for (RegularEventSpec res : regEvents) {
+				if (regEvents.stream().filter(e -> EcoreUtil.equals(res.getEvent(), e.getEvent())).count() > 1) {
+					// try to get the name of the event
+					if (res.getEvent() instanceof ElementReferenceExpression) {
+						ElementReferenceExpression ere = (ElementReferenceExpression) res.getEvent();
+						if (ere.getReference() instanceof EventDefinition) {
+							duplicateTriggers.add(((EventDefinition) ere.getReference()).getName());
+						}
+					} else {
+						// use generic fallback
+						useGenericWarning = true;
+					}
+				}
+			}
+
+			// plug everything together.
+			for (String s : duplicateTriggers) {
+				warning(String.format(STextValidationMessages.SMELL_IDENTIC_TRIGGERS, s), rt,
+						StextPackage.Literals.REACTION_TRIGGER__TRIGGERS, -1);
+			}
+
+			if (useGenericWarning) {
+				warning(STextValidationMessages.SMELL_IDENTIC_TRIGGERS_GENERIC, rt,
+						StextPackage.Literals.REACTION_TRIGGER__TRIGGERS, -1);
+			}
+		}
+	}
+
+	/**
+	 * You must not use always/oncycle and after at the same time!
+	 * @param rt
+	 */
+	@Check
+	public void conflictingTriggers(ReactionTrigger rt) {
+		if (rt.eContainer() instanceof Transition) {
+			long numberOfAlwaysTrigger = rt.getTriggers().stream().filter(AlwaysEvent.class::isInstance).count();
+			long numberOfAfterEvents = rt.getTriggers().stream()
+					.filter(t -> (t instanceof TimeEventSpec) && ((TimeEventSpec) t).getType() == TimeEventType.AFTER)
+					.count();
+
+			if (numberOfAfterEvents > 0 && numberOfAlwaysTrigger > 0) {
+				warning(String.format(STextValidationMessages.SMELL_CONTRADICTING_EVENTS, "always/oncycle", "after"),
+						rt, StextPackage.Literals.REACTION_TRIGGER__TRIGGERS, -1);
+			}
+		}
+	}
+
+	/**
+	 * Interface names must be unique
+	 * @param statechart
+	 */
+	@Check
+	public void UniqueInterfaceNames(Statechart statechart) {
+		List<InterfaceScope> is = getAllInterfaceScopes(statechart);
+
+		Set<String> duplicateNames = new HashSet<>();
+		for (InterfaceScope is_a : is) {
+			for (InterfaceScope is_b : is) {
+				if (is_a == is_b) {
+					continue;
+				}
+				// null check is mandatory, because .getName() returns null on the default interface
+				if (is_a.getName() != null && is_a.getName().equals(is_b.getName())) {
+					duplicateNames.add(is_a.getName());
+				}
+			}
+		}
+
+		for (String name : duplicateNames) {
+			warning(String.format(STextValidationMessages.SMELL_INTERFACE_NAMES_MUST_BE_UNIQUE, name), statechart,
+					SGraphPackage.Literals.STATECHART__ANNOTATIONS, -1);
+		}
+	}
+
+	// names that shouldn't/mustn't be used for variable names in the default interface
+	static List<String> badNames = Arrays.asList(new String[]{"always", "oncycle", "after", "every"});
+
+	/**
+	 * The events defined in {@link #badNames} must not be used as event names in statecharts.
+	 * 
+	 * Extended version: Checks for every interface and not just the default
+	 * interface, but not for the internal one.
+	 * 
+	 * @param statechart
+	 */
+	@Check
+	public void interfaceHasValidEventnames(Statechart statechart) {
+		statechart.getScopes().stream().filter(InterfaceScope.class::isInstance).map(InterfaceScope.class::cast)
+				.forEach(is -> {
+					boolean badInterfaceNameUsed = is.getEvents().stream().filter(e -> badNames.contains(e.getName()))
+							.count() > 0;
+					if (badInterfaceNameUsed) {
+						// print pretty name for default interface
+						warning(String.format(STextValidationMessages.SMELL_BAD_EVENT_NAMES, is.getName() == null ? "default" : is.getName(), badNames.toString()),
+								statechart, null, -1);
+					}
+				});
+
+	}
+
+	/**
+	 * In interface defined events should be used inside the statechart.
+	 * 
+	 * Known limitation: Validation is only performed on top level, composite states are ignored. So
+	 * it might mark a variable as unused although it's been used in a composite state.
+	 * @param statechart
+	 */
+	@Check
+	public void eventsAreUsedInTransitions(Statechart statechart) {
+		List<String> eventNamesDefinedInInterfaces = getAllEventsInAllScopes(statechart).stream()
+				.map(ev -> ev.getName()).collect(Collectors.toList());
+
+		List<String> eventNamesUsedInStatechart = getEventsForStatechartOnlyOnTopLevel(statechart).stream()
+				.map(RegularEventSpec::getEvent).filter(ElementReferenceExpression.class::isInstance)
+				.map(ElementReferenceExpression.class::cast).map(ElementReferenceExpression::getReference)
+				.filter(EventDefinition.class::isInstance).map(EventDefinition.class::cast)
+				.map(EventDefinition::getName).collect(Collectors.toList());
+
+		Set<String> unusedEventNames = new HashSet<>(eventNamesDefinedInInterfaces);
+		unusedEventNames.removeAll(new HashSet<>(eventNamesUsedInStatechart));
+
+		if (unusedEventNames.size() > 0) {
+			warning(String.format(STextValidationMessages.SMELL_IN_INTERFACE_DEFINED_EVENTS_SHOULD_BE_USED,
+					unusedEventNames), statechart, null, -1);
+		}
+
+	}
+
+	private Set<RegularEventSpec> getEventsForStatechartOnlyOnTopLevel(Statechart statechart) {
+		Set<Transition> allTransitions = new HashSet<>();
+		for (Region region : statechart.getRegions()) {
+			for (Vertex v : region.getVertices()) {
+				if (v instanceof org.yakindu.sct.model.sgraph.State) {
+					allTransitions.addAll(
+							SGraphJavaValidator.getAllTransitionsInHierarchy((org.yakindu.sct.model.sgraph.State) v));
+				}
+			}
+		}
+
+		return allTransitions.stream().map(Transition::getTrigger).filter(ReactionTrigger.class::isInstance)
+				.flatMap(t -> ((ReactionTrigger) t).getTriggers().stream().filter(RegularEventSpec.class::isInstance)
+						.map(RegularEventSpec.class::cast))
+				.collect(Collectors.toSet());
+
+	}
+
+	private List<InterfaceScope> getAllInterfaceScopes(Statechart statechart) {
+		return statechart.getScopes().stream().filter(InterfaceScope.class::isInstance).map(InterfaceScope.class::cast)
+				.collect(Collectors.toList());
+	}
+
+	private List<Event> getAllEventsInAllScopes(Statechart statechart) {
+		List<Event> tmp = new LinkedList<>();
+		for (InterfaceScope scope : getAllInterfaceScopes(statechart)) {
+			tmp.addAll(scope.getEvents());
+		}
+		return tmp;
 	}
 }

@@ -11,6 +11,7 @@
 package org.yakindu.sct.model.sgraph.validation;
 
 import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.areOrthogonal;
+
 import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.collectAncestors;
 import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.commonAncestor;
 import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.sources;
@@ -20,11 +21,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
@@ -38,11 +42,13 @@ import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
 
+// import org.yakindu.sct.model.stext.stext.impl.ReactionEffectImpl;
 import com.google.inject.Inject;
 
 /**
@@ -84,6 +90,16 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_TRANSITION_ORTHOGONAL = "Source and target of a transition must not be located in orthogonal regions!";
 	public static final String ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER = "Outgoing transitions from entries can only target to sibling or inner states.";
 	public static final String ISSUE_STATECHART_NAME_NO_IDENTIFIER = "%s is not a valid identifier!";
+	
+	public static final String SMELL_ALL_OUTGOING_TRANSITIONS_OF_ONE_STATE_HAVE_THE_SAME_EFFECT = "All outgoing transitions have the same effect.";
+	public static final String SMELL_ALL_INCOMING_TRANSITIONS_OF_ONE_STATE_HAVE_THE_SAME_EFFECT = "All incoming transitions have the same effect.";
+	public static final String SMELL_MULTIPLE_UNAMED_ENTRIES_PER_REGION = "There are multiple, unamed entry nodes in this region.";
+	public static final String SMELL_MORE_THAN_ONE_FINAL_STATE_PER_REGION = "This region contains %d final states - at most one is recommended.";
+	public static final String SMELL_NAMED_EXIT_NODE_NOT_USED = "A named exit node should be used in an outgoing transition of the composite state.";
+	public static final String SMELL_NAMED_ENTRY_NODE_NOT_USED = "A named entry node should be used in an incoming transition of the composite state.";
+	public static final String SMELL_COMPOSITE_STATE_WITH_ONE_REGION_CONTAINS_EXIT_AND_FINAL_STATES = "This region contains both final state and exit node.";
+	public static final String SMELL_NON_FINAL_STATES_SHOULD_NOT_BE_SINKS = "This state is effectively a sink: Neither this state nor one of its parents states contain an outgoing transition.";
+	public static final String SMELL_TRANSITIONS_WITH_SAME_TRIGGER_EXIST_IN_HIERARCHY = "Transition with same trigger exist in hierarchy (only in upper direction)";
 
 	@Check(CheckType.FAST)
 	public void vertexNotReachable(final Vertex vertex) {
@@ -422,4 +438,212 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public void register(EValidatorRegistrar registrar) {
 		// Do not register because this validator is only a composite #398987
 	}
+
+	/**
+	 * If all outgoing transitions of a {@link org.yakindu.sct.model.sgraph.State} or a {@link Choice}
+	 * have the same effect, the effect could also be defined inside the state (onExit event) or the incoming
+	 * transition of the choice.
+	 * 
+	 * @param vertex
+	 */
+	@Check()
+	public void checkAllOutgoingTransitionsHaveIdenticalEffects(Vertex vertex) {
+		// check only applies to States or Choice. If all outgoing transitions have the same effect, the
+		// effect could be merged into state or the choice-incoming transition. This is not possible
+		// on all other Vertices.
+		if (!(vertex instanceof org.yakindu.sct.model.sgraph.State || vertex instanceof Choice)) {
+			return;
+		}		
+		if (vertex.getOutgoingTransitions().size() <= 1) {
+			return;  // prevent warning in case of only one transition
+		}
+		boolean showWarning = true;
+
+		for (Transition t1 : vertex.getOutgoingTransitions()) {
+			for (Transition t2 : vertex.getOutgoingTransitions()) {
+				if (t1 == t2) {
+					continue; // both references point to the same transition
+				}
+				if (!(t1.getEffect() != null && t2.getEffect() != null
+						&& EcoreUtil.equals(t1.getEffect(), t2.getEffect()))) {
+					showWarning = false;
+				}
+			}
+		}
+		if (showWarning) {
+			warning(SMELL_ALL_OUTGOING_TRANSITIONS_OF_ONE_STATE_HAVE_THE_SAME_EFFECT, vertex,
+					null, -1);
+		}
+
+	}
+
+	/**
+	 * If all incoming transition of the {@link org.yakindu.sct.model.sgraph.State} or a {@link Synchronization}
+	 * have the same effect, this effect could also be defined in {@link org.yakindu.sct.model.sgraph.State} (onEntry)
+	 * or the outgoing transition of the synchronization.
+	 * @param vertex
+	 */
+	@Check()
+	public void checkAllIncomingTransitionsHaveIdenticalEffects(Vertex vertex) {
+		// check only applies to state or synchronization, because only the allow to trigger some effect on entering
+		// in case of the synchronization it's the outgoing transition
+		if (!(vertex instanceof org.yakindu.sct.model.sgraph.State || vertex instanceof Synchronization)) {
+			return;
+		}
+		if (vertex.getIncomingTransitions().size() <= 1) {
+			return;  // prevent warning in case of only one transition
+		}
+		boolean showWarning = true;
+		for (Transition t1 : vertex.getIncomingTransitions()) {
+			for (Transition t2 : vertex.getIncomingTransitions()) {
+				if (t1 == t2) {
+					continue;
+				}
+				if (!(t1.getEffect() != null && t2.getEffect() != null 
+						&& EcoreUtil.equals(t1.getEffect(), t2.getEffect()))) {
+					showWarning = false;
+				}
+			}
+		}
+		if (showWarning) {
+			warning(SMELL_ALL_INCOMING_TRANSITIONS_OF_ONE_STATE_HAVE_THE_SAME_EFFECT, vertex,
+					null, -1);
+		}
+	}
+
+	/**
+	 * Only one unnamed entry (== default entry) per region is permitted.
+	 * @param region
+	 */
+	@Check
+	public void checkARegionHasMoreThanOneUnamedEntry(Region region) {
+		if (region.getVertices().stream().filter(Entry.class::isInstance).map(Entry.class::cast)
+				.filter(v -> v.getKind() == EntryKind.INITIAL && v.getName().equals("")).count() > 1) {
+			warning(SMELL_MULTIPLE_UNAMED_ENTRIES_PER_REGION, region, SGraphPackage.Literals.REGION__VERTICES, -1);
+		}
+	}
+
+	/**
+	 * A region must have at most one {@link FinalState}
+	 * @param region
+	 */
+	@Check
+	public void checkARegionHasMoreThanOneFinalState(Region region) {
+		long numberOfFinalStates = region.getVertices().stream().filter(FinalState.class::isInstance).count();
+		if (numberOfFinalStates > 1) {
+			warning(String.format(SMELL_MORE_THAN_ONE_FINAL_STATE_PER_REGION, numberOfFinalStates), region,
+					SGraphPackage.Literals.REGION__VERTICES, -1);
+		}
+	}
+
+	private static CompositeElement getParentComposite(Vertex v) {
+		return v.getParentRegion().getComposite();
+	}
+	
+	/**
+	 * Inside a composite region either {@link Exit}s or {@link FinalState}s should be used, but not both.
+	 * @param region
+	 */
+	@Check
+	public void checkOneRegionCompositeStateMustNotHaveExitNodesAndFinalStates(Region region) {
+		// if the current region is not contained inside a state (composite state), then return.
+		// check only applies to composite states and not to orthogonal states
+		CompositeElement ce = region.getComposite();
+		if (!(ce instanceof org.yakindu.sct.model.sgraph.State) || !((org.yakindu.sct.model.sgraph.State) ce).isComposite()) {
+			return;
+		}		
+		long numberOfFinalStates = region.getVertices().stream().filter(FinalState.class::isInstance).count();
+		long numbreOfExitNodes = region.getVertices().stream().filter(Exit.class::isInstance).count();
+
+		if (numberOfFinalStates > 0 && numbreOfExitNodes > 0) {
+			warning(SMELL_COMPOSITE_STATE_WITH_ONE_REGION_CONTAINS_EXIT_AND_FINAL_STATES, region,
+					SGraphPackage.Literals.REGION__VERTICES, -1);
+		}
+	}
+
+	/**
+	 * A State without an outgoing transition or an outgoing transition in one of its containers
+	 * is considered to be a sink. We prefer explicit exits over implicit ones.
+	 * 
+	 * Check does not cover the opposite case: Composite state without outgoing transition, but a state inside this
+	 * composite state has a transition with a target, that's outside the composite state. The composite state will still
+	 * be tagged with a warning!
+	 */
+	// @Check TODO enable this check, if a configuration option has been created
+	public void checkNoNonFinalStateIsSink(org.yakindu.sct.model.sgraph.State state) {
+		// State is automatically a non FinalState by class hierarchy
+		if (!stateOrContainingStateHasAtLeastOneOutgoingTransition(state)) {
+			warning(SMELL_NON_FINAL_STATES_SHOULD_NOT_BE_SINKS, state, SGraphPackage.Literals.STATE__SIMPLE, -1);
+		}
+
+	}
+
+	private boolean stateOrContainingStateHasAtLeastOneOutgoingTransition(org.yakindu.sct.model.sgraph.State state) {
+		if (state.getOutgoingTransitions().size() > 0) {
+			return true;
+		}
+		// get the parent, if there's one, and perform the same check,
+		CompositeElement comp = getParentComposite(state);
+		if (comp instanceof org.yakindu.sct.model.sgraph.State) {
+			return stateOrContainingStateHasAtLeastOneOutgoingTransition((org.yakindu.sct.model.sgraph.State) comp);
+		}
+		return false;
+	}
+
+	/**
+	 * No transitions with the same trigger exist in (upper) hierarchy. This is a smell, because one of them always wins and the
+	 * other one is never executed. Applies to always and after triggers. 
+	 * @param state
+	 */
+	@Check
+	public void transitionsWithSameTriggerExistsInHierarchy(org.yakindu.sct.model.sgraph.State state) {
+		if (transitionsWithSameTriggerExistsInHierarchyHelper(state)) {
+			warning(SMELL_TRANSITIONS_WITH_SAME_TRIGGER_EXIST_IN_HIERARCHY,
+					state,
+					SGraphPackage.Literals.STATE__COMPOSITE,
+					-1);
+		};
+	}
+
+	private boolean transitionsWithSameTriggerExistsInHierarchyHelper(org.yakindu.sct.model.sgraph.State state) {
+		List<Transition> allTransitions = getAllTransitionsInHierarchy(state);
+		List<Transition> localTransitions = state.getOutgoingTransitions();
+		
+		for (Transition lt: localTransitions) {
+			for (Transition at: allTransitions) {
+				if (lt == at) {
+					// necessary, because getAllTransitionsInHierarchy returns also the outgoing transitions of the state itself
+					continue;
+				}
+				
+				if(EcoreUtil.equals(lt.getTrigger(), at.getTrigger())) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public static List<Transition> getAllTransitionsInHierarchy(org.yakindu.sct.model.sgraph.State state) {
+		List<Transition> tmp = new ArrayList<>();
+		tmp.addAll(state.getOutgoingTransitions());
+		
+		// start with parent: Otherwise the outgoing transition of the current state will be included twice
+		CompositeElement comp = getParentComposite(state);
+		if (comp instanceof org.yakindu.sct.model.sgraph.State) {
+			tmp.addAll( getOutgoingTransitionsForAllParents((org.yakindu.sct.model.sgraph.State) comp ));
+		}		
+		return tmp;		
+	}
+
+	private static List<Transition> getOutgoingTransitionsForAllParents(org.yakindu.sct.model.sgraph.State state){
+		CompositeElement comp = getParentComposite(state);
+		List<Transition> tmp = new LinkedList<>();
+		tmp.addAll(state.getOutgoingTransitions());
+		if (comp instanceof org.yakindu.sct.model.sgraph.State) {
+			tmp.addAll(getOutgoingTransitionsForAllParents((org.yakindu.sct.model.sgraph.State) comp));
+		}		
+		return tmp;		
+	}
+	
 }
