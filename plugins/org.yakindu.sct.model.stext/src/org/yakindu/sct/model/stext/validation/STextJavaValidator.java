@@ -966,8 +966,9 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 	}
 	
-	// names that shouldn't/mustn't be used for variable names in the default interface
-	static List<String> badNames = Arrays.asList(new String[]{"always", "oncycle", "after", "every"});
+	// names that shouldn't/mustn't be used for event names in the default interface
+	// after and every are missing, because they cause a SyntaxException.
+	static List<String> badNames = Arrays.asList(new String[]{"always", "oncycle"});
 
 	/**
 	 * The events defined in {@link #badNames} must not be used as event names in

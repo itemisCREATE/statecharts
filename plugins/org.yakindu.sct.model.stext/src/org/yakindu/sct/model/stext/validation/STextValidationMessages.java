@@ -57,5 +57,5 @@ public interface STextValidationMessages {
 	public static final String IMPORT_NOT_RESOLVED_CODE = "ImportNotResolved";
 	public static final String DUPLICATE_IMPORT = "Duplicate import '%s'.";
 	public static final String CONTRADICTORY_ANNOTATIONS = "Some annotations (%s) have contradictory effects.";
-	public static final String BAD_EVENT_NAMES = "You must not use [%s] as a name, because it's already used for an internal event.";
+	public static final String BAD_EVENT_NAMES = "'%s' is already used as name of an internal event.";
 }
