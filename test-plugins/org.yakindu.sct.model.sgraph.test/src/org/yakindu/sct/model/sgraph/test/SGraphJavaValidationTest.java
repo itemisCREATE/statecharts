@@ -940,6 +940,11 @@ public class SGraphJavaValidationTest {
 						+ modelName);
 	}
 
+	@Test
+	@Ignore
+	public void checkAllOutgoingTransitionsHaveIdenticalEffects() {
+		// stub
+	}
 
 
 }
