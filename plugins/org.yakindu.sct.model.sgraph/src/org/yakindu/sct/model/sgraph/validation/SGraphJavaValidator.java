@@ -25,6 +25,7 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
@@ -84,6 +85,8 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_TRANSITION_ORTHOGONAL = "Source and target of a transition must not be located in orthogonal regions!";
 	public static final String ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER = "Outgoing transitions from entries can only target to sibling or inner states.";
 	public static final String ISSUE_STATECHART_NAME_NO_IDENTIFIER = "%s is not a valid identifier!";
+	
+	public static final String SMELL_ALL_INCOMING_TRANSITIONS_OF_ONE_STATE_HAVE_THE_SAME_EFFECT = "All incoming transitions have the same effect.";
 
 	@Check(CheckType.FAST)
 	public void vertexNotReachable(final Vertex vertex) {
@@ -421,5 +424,39 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	@Inject
 	public void register(EValidatorRegistrar registrar) {
 		// Do not register because this validator is only a composite #398987
+	}
+	
+	/**
+	 * If all incoming transition of the {@link org.yakindu.sct.model.sgraph.State} or a {@link Synchronization}
+	 * have the same effect, this effect could also be defined in {@link org.yakindu.sct.model.sgraph.State} (onEntry)
+	 * or the outgoing transition of the synchronization.
+	 * @param vertex
+	 */
+	@Check()
+	public void checkAllIncomingTransitionsHaveIdenticalEffects(Vertex vertex) {
+		// check only applies to state or synchronization, because only the allow to trigger some effect on entering
+		// in case of the synchronization it's the outgoing transition
+		if (!(vertex instanceof org.yakindu.sct.model.sgraph.State || vertex instanceof Synchronization)) {
+			return;
+		}
+		if (vertex.getIncomingTransitions().size() <= 1) {
+			return;  // prevent warning in case of only one transition
+		}
+		boolean showWarning = true;
+		for (Transition t1 : vertex.getIncomingTransitions()) {
+			for (Transition t2 : vertex.getIncomingTransitions()) {
+				if (t1 == t2) {
+					continue;
+				}
+				if (!(t1.getEffect() != null && t2.getEffect() != null 
+						&& EcoreUtil.equals(t1.getEffect(), t2.getEffect()))) {
+					showWarning = false;
+				}
+			}
+		}
+		if (showWarning) {
+			warning(SMELL_ALL_INCOMING_TRANSITIONS_OF_ONE_STATE_HAVE_THE_SAME_EFFECT, vertex,
+					null, -1);
+		}
 	}
 }
