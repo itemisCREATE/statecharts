@@ -25,6 +25,7 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
@@ -58,6 +59,7 @@ import com.google.inject.Inject;
  * @author bohl - migrated to xtext infrastruture
  * @author schwertfeger
  * @author antony
+ * @author herrendorf
  */
 public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 
@@ -84,6 +86,8 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_TRANSITION_ORTHOGONAL = "Source and target of a transition must not be located in orthogonal regions!";
 	public static final String ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER = "Outgoing transitions from entries can only target to sibling or inner states.";
 	public static final String ISSUE_STATECHART_NAME_NO_IDENTIFIER = "%s is not a valid identifier!";
+	
+	public static final String SMELL_ALL_OUTGOING_TRANSITIONS_OF_ONE_STATE_HAVE_THE_SAME_EFFECT = "All outgoing transitions have the same effect.";
 
 	@Check(CheckType.FAST)
 	public void vertexNotReachable(final Vertex vertex) {
@@ -422,4 +426,43 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public void register(EValidatorRegistrar registrar) {
 		// Do not register because this validator is only a composite #398987
 	}
+	
+	/**
+	 * If all outgoing transitions of a {@link org.yakindu.sct.model.sgraph.State} or a {@link Choice}
+	 * have the same effect, the effect could also be defined inside the state (onExit event) or the incoming
+	 * transition of the choice.
+	 * 
+	 * @param vertex
+	 */
+	@Check()
+	public void checkAllOutgoingTransitionsHaveIdenticalEffects(Vertex vertex) {
+		// check only applies to States or Choice. If all outgoing transitions have the same effect, the
+		// effect could be merged into state or the choice-incoming transition. This is not possible
+		// on all other Vertices.
+		if (!(vertex instanceof org.yakindu.sct.model.sgraph.State || vertex instanceof Choice)) {
+			return;
+		}		
+		if (vertex.getOutgoingTransitions().size() <= 1) {
+			return;  // prevent warning in case of only one transition
+		}
+		boolean showWarning = true;
+
+		for (Transition t1 : vertex.getOutgoingTransitions()) {
+			for (Transition t2 : vertex.getOutgoingTransitions()) {
+				if (t1 == t2) {
+					continue; // both references point to the same transition
+				}
+				if (!(t1.getEffect() != null && t2.getEffect() != null
+						&& EcoreUtil.equals(t1.getEffect(), t2.getEffect()))) {
+					showWarning = false;
+				}
+			}
+		}
+		if (showWarning) {
+			warning(SMELL_ALL_OUTGOING_TRANSITIONS_OF_ONE_STATE_HAVE_THE_SAME_EFFECT, vertex,
+					null, -1);
+		}
+
+	}
+	
 }
