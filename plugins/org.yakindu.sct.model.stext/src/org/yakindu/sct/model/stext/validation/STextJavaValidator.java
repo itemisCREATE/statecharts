@@ -16,6 +16,7 @@ import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION;
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.PARENT_FIRST_ANNOTATION;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -962,6 +963,21 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			if(provider.getElement().eResource() == null) return null;
 			return (Statechart) EcoreUtil.getObjectByType(provider.getElement().eResource().getContents(),
 					SGraphPackage.Literals.STATECHART);
+		}
+	}
+	
+	// names that shouldn't/mustn't be used for variable names in the default interface
+	static List<String> badNames = Arrays.asList(new String[]{"always", "oncycle", "after", "every"});
+
+	/**
+	 * The events defined in {@link #badNames} must not be used as event names in
+	 * statecharts.
+	 * 
+	 */	
+	@Check
+	public void checkBadEventNamesUsed(EventDefinition event) {
+		if (badNames.contains(event.getName().trim())) {
+			error(String.format(STextValidationMessages.BAD_EVENT_NAMES, event.getName()), event, null, -1);
 		}
 	}
 }
