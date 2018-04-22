@@ -22,6 +22,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -84,6 +85,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_TRANSITION_ORTHOGONAL = "Source and target of a transition must not be located in orthogonal regions!";
 	public static final String ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER = "Outgoing transitions from entries can only target to sibling or inner states.";
 	public static final String ISSUE_STATECHART_NAME_NO_IDENTIFIER = "%s is not a valid identifier!";
+	public final static String ISSUE_MULTIPLE_DEFAULT_ENTRIES = "There are multiple default entry nodes (one without a name and one named 'default') in this region.";
 
 	@Check(CheckType.FAST)
 	public void vertexNotReachable(final Vertex vertex) {
@@ -422,4 +424,20 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public void register(EValidatorRegistrar registrar) {
 		// Do not register because this validator is only a composite #398987
 	}
+	
+	/**
+	 * Only one default entry per region is permitted.
+	 * @param region
+	 */
+	@Check
+	public void checkOnlyOneDefaultEntryPermitted(Region region) {
+		List<Entry> initialEntires = region.getVertices().stream().filter(Entry.class::isInstance).map(Entry.class::cast)
+				.filter(v -> v.getKind() == EntryKind.INITIAL).collect(Collectors.toList());
+		boolean unamedEntryExists = initialEntires.stream().filter(v->v.getName().equals("")).count() > 0;
+		boolean defaultNamedEntryExists = initialEntires.stream().filter(v -> v.getName().trim().equalsIgnoreCase("default")).count() > 0;		
+		if (unamedEntryExists && defaultNamedEntryExists) {
+			error(ISSUE_MULTIPLE_DEFAULT_ENTRIES, region, null, -1);
+		}
+	}
+	
 }
