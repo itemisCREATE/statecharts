@@ -1006,4 +1006,26 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 				errorMsg("Duplicate"));
 	}
 
+	@Test
+	@Ignore
+	public void checkDuplicateTriggers() {
+		EObject model;
+		AssertableDiagnostics result;
+		String reactionTrigger;
+		
+		reactionTrigger = "always, oncycle [true]";
+		model = super.parseExpression(reactionTrigger, ReactionTrigger.class.getSimpleName());
+		result = tester.validate(model);
+		result.assertWarningContains("always or oncycle");
+		
+		reactionTrigger = "after 10s, after 2s";
+		model = super.parseExpression(reactionTrigger, ReactionTrigger.class.getSimpleName());
+		result = tester.validate(model);
+		result.assertWarningContains("after");
+		
+		reactionTrigger = "after 10s, after 2s [true]";
+		model = super.parseExpression(reactionTrigger, ReactionTrigger.class.getSimpleName());
+		result = tester.validate(model);
+		result.assertOK();
+	}
 }

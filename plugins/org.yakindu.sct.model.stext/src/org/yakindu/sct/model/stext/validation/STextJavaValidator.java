@@ -17,12 +17,14 @@ import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.PARENT_FIRST_ANNOTATION;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -83,6 +85,7 @@ import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
+import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
@@ -104,6 +107,7 @@ import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.RegularEventSpec;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
+import org.yakindu.sct.model.stext.stext.TimeEventType;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.common.base.Predicate;
@@ -962,6 +966,62 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			if(provider.getElement().eResource() == null) return null;
 			return (Statechart) EcoreUtil.getObjectByType(provider.getElement().eResource().getContents(),
 					SGraphPackage.Literals.STATECHART);
+		}
+	}
+	
+	/**
+	 * If the same triggers (always, after, custom defined events) are used multiple times in one trigger on a transaction,
+	 * this is considered to be a smell. 'After' is considered if and only if there's guard, because the guard expression
+	 * might evalutae to different values depending on the time.
+	 * 
+	 * @param rt
+	 */
+	@Check
+	public void checkDuplicateTriggers(ReactionTrigger rt) {
+		if (rt.eContainer() instanceof Transition) {
+			Set<String> duplicateTriggers = new HashSet<>();
+			// basic events
+			boolean multipleAlwaysEvents = rt.getTriggers().stream().filter(AlwaysEvent.class::isInstance).count() > 1;
+			if (multipleAlwaysEvents) {
+				duplicateTriggers.add("always or oncycle");
+			}
+			
+			// respect the guard expression!
+			boolean multipleAfterEvents = rt.getGuard() == null && rt.getTriggers().stream().filter(TimeEventSpec.class::isInstance)
+					.map(TimeEventSpec.class::cast).filter(t -> t.getType() == TimeEventType.AFTER).count() > 1;
+			// TimeEventType.EVERY is unnecessary, because it's not valid on transitions
+			if (multipleAfterEvents) {
+				duplicateTriggers.add("after");
+			}
+			
+			// regular events
+			List<RegularEventSpec> regEvents = rt.getTriggers().stream().filter(RegularEventSpec.class::isInstance)
+					.map(RegularEventSpec.class::cast).collect(Collectors.toList());
+			// fallback, if event name can't be resolved
+			boolean useGenericWarning = false;
+			for (RegularEventSpec res : regEvents) {
+				if (regEvents.stream().filter(e -> EcoreUtil.equals(res.getEvent(), e.getEvent())).count() > 1) {
+					// try to get the name of the event
+					if (res.getEvent() instanceof ElementReferenceExpression) {
+						ElementReferenceExpression ere = (ElementReferenceExpression) res.getEvent();
+						if (ere.getReference() instanceof EventDefinition) {
+							duplicateTriggers.add(((EventDefinition) ere.getReference()).getName());
+						}
+					} else {
+						// use generic fallback
+						useGenericWarning = true;
+					}
+				}
+			}
+			// plug everything together.
+			for (String s : duplicateTriggers) {
+				warning(String.format(STextValidationMessages.SMELL_IDENTIC_TRIGGERS, s), rt,
+						null, -1);
+			}
+			if (useGenericWarning) {
+				warning(STextValidationMessages.SMELL_IDENTIC_TRIGGERS_GENERIC, rt,
+						null, -1);
+			}
 		}
 	}
 }

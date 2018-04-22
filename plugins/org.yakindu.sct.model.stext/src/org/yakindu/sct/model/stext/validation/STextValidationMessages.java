@@ -57,4 +57,7 @@ public interface STextValidationMessages {
 	public static final String IMPORT_NOT_RESOLVED_CODE = "ImportNotResolved";
 	public static final String DUPLICATE_IMPORT = "Duplicate import '%s'.";
 	public static final String CONTRADICTORY_ANNOTATIONS = "Some annotations (%s) have contradictory effects.";
+	
+	public static final String SMELL_IDENTIC_TRIGGERS = "Multiple %s triggers.";
+	public static final String SMELL_IDENTIC_TRIGGERS_GENERIC = "Some events are used at least twice.";
 }
