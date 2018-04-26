@@ -8,7 +8,7 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.model.sgraph.test;
+package org.yakindu.sct.model.sgraph.test.util;
 
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.xtext.Constants;

@@ -13,13 +13,19 @@ package org.yakindu.sct.model.sgraph.test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+import org.yakindu.sct.model.sgraph.validation.test.ChoiceValidatorTest;
+import org.yakindu.sct.model.sgraph.validation.test.EntryExitValidatorTest;
+import org.yakindu.sct.model.sgraph.validation.test.FinalStateValidatorTest;
+import org.yakindu.sct.model.sgraph.validation.test.StateValidatorTest;
+import org.yakindu.sct.model.sgraph.validation.test.StatechartValidatorTest;
+import org.yakindu.sct.model.sgraph.validation.test.SynchronizationValidatorTest;
+import org.yakindu.sct.model.sgraph.validation.test.TransitionValidatorTest;
+import org.yakindu.sct.model.sgraph.validation.test.VertexValidatorTest;
 
-/**
- * 
- * @author terfloth
- */
 @RunWith(value = Suite.class)
-@SuiteClasses(value = { SGraphJavaValidationTest.class, StateImplTest.class })
+@SuiteClasses(value = { StatechartValidatorTest.class, ChoiceValidatorTest.class, EntryExitValidatorTest.class,
+		FinalStateValidatorTest.class, StateValidatorTest.class, SynchronizationValidatorTest.class,
+		TransitionValidatorTest.class, VertexValidatorTest.class })
 public class AllTests {
 
 }

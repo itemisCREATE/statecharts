@@ -18,12 +18,12 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.TYPE_INTEGER;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.findState;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createEntry;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createFinalState;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createRegion;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createState;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createStatechart;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createTransition;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createEntry;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createFinalState;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createRegion;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createState;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createStatechart;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createTransition;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createEntryAction;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createEntryAssignment;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createEventDefinition;
@@ -78,7 +78,6 @@ import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
-
 public class ModelSequencerStateTest extends ModelSequencerTest {
 
 	/**

@@ -10,11 +10,11 @@
 */
 package org.yakindu.sct.model.sexec.transformation.test;
 
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createEntry;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createRegion;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createState;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createStatechart;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createTransition;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createEntry;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createRegion;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createState;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createStatechart;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createTransition;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createBooleanType;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createEventDefinition;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createIntegerType;
@@ -48,7 +48,6 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
-
 public class SCTTestUtil {
 
 	public static Type TYPE_INTEGER = _createIntegerType("integer");
