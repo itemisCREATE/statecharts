@@ -51,6 +51,12 @@ public class EntryExitValidator extends AbstractSGraphValidator {
 	private static final String ENTRY_NO_TRIGGER_MSG = "Outgoing transitions from entry points can not have a trigger or guard.";
 	public static final String ENTRY_NO_TRIGGER_CODE = "entry.no.trigger";
 
+	private static final String REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NO_DEFAULT_ENTRY_MSG = "The region can't be entered using the shallow history. Add a default entry node.";
+	public static final String REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NO_DEFAULT_ENTRY_CODE = "entry.region.default";
+
+	private static final String REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NON_CONNECTED_DEFAULT_ENTRY_MSG = "The region can't be entered using the shallow history. Add a transition from default entry to a state.";
+	public static final String REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NON_CONNECTED_DEFAULT_ENTRY_CODE = "The region can't be entered using the shallow history. Add a transition from default entry to a state.";
+
 	@Check(CheckType.FAST)
 	public void initialEntryWithoutIncomingTransitions(Entry entry) {
 		if (entry.getIncomingTransitions().size() > 0 && entry.getKind().equals(EntryKind.INITIAL)) {
@@ -97,9 +103,6 @@ public class EntryExitValidator extends AbstractSGraphValidator {
 		}
 	}
 
-	private static final String ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NO_DEFAULT_ENTRY = "The region can't be entered using the shallow history. Add a default entry node.";
-	private static final String ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NON_CONNECTED_DEFAULT_ENTRY = "The region can't be entered using the shallow history. Add a transition from default entry to a state.";
-
 	@Check(CheckType.FAST)
 	public void regionCantBeEnteredUsingShallowHistory(Entry e) {
 		if (e.getKind() == EntryKind.SHALLOW_HISTORY) {
@@ -121,9 +124,11 @@ public class EntryExitValidator extends AbstractSGraphValidator {
 					}
 				}
 				if (defaultEntry == null) {
-					error(ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NO_DEFAULT_ENTRY, r, null, -1);
+					error(REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NO_DEFAULT_ENTRY_MSG, r, null, -1,
+							REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NO_DEFAULT_ENTRY_CODE);
 				} else if (defaultEntry.getOutgoingTransitions().size() != 1) {
-					error(ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NON_CONNECTED_DEFAULT_ENTRY, r, null, -1);
+					error(REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NON_CONNECTED_DEFAULT_ENTRY_MSG, r, null, -1,
+							REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NON_CONNECTED_DEFAULT_ENTRY_CODE);
 				}
 			}
 

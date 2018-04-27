@@ -8,17 +8,23 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.model.sgraph.validation.test;
+package org.yakindu.sct.model.sgraph.test.validation;
 
 import static org.yakindu.sct.model.sgraph.validation.TransitionValidator.INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER_CODE;
 import static org.yakindu.sct.model.sgraph.validation.TransitionValidator.TRANSITION_SOURCE_TARGET_NOT_ORTHOGONAL_CODE;
 
 import org.junit.Test;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.test.util.SGraphJavaValidatorTester;
 import org.yakindu.sct.model.sgraph.validation.TransitionValidator;
 
 import com.google.inject.Inject;
 
+/**
+ *
+ * Tests for {@link TransitionValidator}
+ *
+ */
 public class TransitionValidatorTest extends AbstractSGraphValidatorTest {
 
 	@Inject

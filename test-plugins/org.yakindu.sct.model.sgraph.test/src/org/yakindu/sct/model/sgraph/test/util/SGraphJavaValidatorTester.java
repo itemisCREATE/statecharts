@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.model.sgraph.validation.test;
+package org.yakindu.sct.model.sgraph.test.util;
 
 import org.eclipse.emf.ecore.impl.EValidatorRegistryImpl;
 import org.eclipse.emf.ecore.util.Diagnostician;

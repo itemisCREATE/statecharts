@@ -8,13 +8,11 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.model.sgraph.validation.test;
+package org.yakindu.sct.model.sgraph.test.validation;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.yakindu.sct.model.sgraph.validation.EntryExitValidator.*;
 
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.junit.Test;
 import org.yakindu.sct.model.sgraph.Entry;
@@ -24,11 +22,16 @@ import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.sgraph.test.util.SGraphJavaValidatorTester;
 import org.yakindu.sct.model.sgraph.validation.EntryExitValidator;
 
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
+/**
+ * 
+ * Tests for {@link EntryExitValidator}
+ *
+ */
 public class EntryExitValidatorTest extends AbstractSGraphValidatorTest {
 
 	@Inject
@@ -97,11 +100,11 @@ public class EntryExitValidatorTest extends AbstractSGraphValidatorTest {
 
 		entry.setKind(EntryKind.DEEP_HISTORY);
 		tester.validate(entry).assertError(INITIAL_ENTRY_ONE_OUT_TRANSITION_CODE);
-		
+
 		entry.setKind(EntryKind.SHALLOW_HISTORY);
 		tester.validate(entry).assertError(INITIAL_ENTRY_ONE_OUT_TRANSITION_CODE);
 	}
-	
+
 	/**
 	 * An entry should not have more than one outgoing transition
 	 */
@@ -123,7 +126,6 @@ public class EntryExitValidatorTest extends AbstractSGraphValidatorTest {
 		entry.setKind(EntryKind.DEEP_HISTORY);
 		tester.validate(entry).assertError(INITIAL_ENTRY_ONE_OUT_TRANSITION_CODE);
 	}
-
 
 	/**
 	 * An exit node should have at leat one incoming transition.
@@ -188,51 +190,34 @@ public class EntryExitValidatorTest extends AbstractSGraphValidatorTest {
 
 		tester.validate(exit).assertOK();
 	}
-	
+
 	@Test
 	public void disallowTrigger() {
 		State state = createState();
-		Region region  = ((Region)state.eContainer());
+		Region region = ((Region) state.eContainer());
 		Entry entry = factory.createEntry();
 		region.getVertices().add(entry);
 		Transition trans = createTransition(entry, state);
 		trans.setTrigger(sTextFactory.createReactionTrigger());
 		tester.validate(entry).assertError(ENTRY_NO_TRIGGER_CODE);
 	}
-	
+
 	@Test
 	public void regionCantBeEnteredUsingShallowHistory() {
 		Statechart statechart = loadStatechart("RegionCantBeEnteredUsingShallowHistory.sct");
 		AssertableDiagnostics result = tester.validate(statechart);
-		Iterable<Diagnostic> allDiagnostics = result.getAllDiagnostics();
 		result.assertDiagnosticsCount(2);
-//		result.assertError(issueCode);;
-		
-//
-//		Diagnostic issue = issueByName(diagnostics,
-//				ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NO_DEFAULT_ENTRY);
-//		assertTrue(issue.getSeverity() == Diagnostic.ERROR);
-//		assertEquals("r_a", ((NamedElement) issue.getData().get(0)).getName());
-//
-//		issue = issueByName(diagnostics,
-//				ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NON_CONNECTED_DEFAULT_ENTRY);
-//		assertTrue(issue.getSeverity() == Diagnostic.ERROR);
-//		assertEquals("r_c", ((NamedElement) issue.getData().get(0)).getName());
+
+		result.assertAny(
+				AssertableDiagnostics.errorCode(REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NO_DEFAULT_ENTRY_CODE));
+		result.assertAny(AssertableDiagnostics
+				.errorCode(REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NON_CONNECTED_DEFAULT_ENTRY_CODE));
 	}
-	
+
 	@Test
 	public void validTransitionToInnerChoice() {
 		Statechart statechart = loadStatechart("ValidTransitionToInnerChoice.sct");
-		tester.validate(statechart);
-		// Iterator<EObject> iter = statechart.eAllContents();
-		// while (iter.hasNext()) {
-		// EObject element = iter.next();
-		// if (element instanceof State) {
-		// validator.validate(element, diagnostics, new HashMap<Object, Object>());
-		// }
-		// }
-		//
-		// assertIssueCount(diagnostics, 0);
+		tester.validate(statechart).assertOK();
 	}
 
 	@Override

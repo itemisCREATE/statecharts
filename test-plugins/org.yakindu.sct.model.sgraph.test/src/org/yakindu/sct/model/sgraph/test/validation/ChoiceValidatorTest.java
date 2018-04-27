@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.model.sgraph.validation.test;
+package org.yakindu.sct.model.sgraph.test.validation;
 
 import static org.yakindu.sct.model.sgraph.validation.ChoiceValidator.OUTGOING_TRANSITION_COUNT_CODE;
 
@@ -17,10 +17,16 @@ import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.test.util.SGraphJavaValidatorTester;
 import org.yakindu.sct.model.sgraph.validation.ChoiceValidator;
 
 import com.google.inject.Inject;
 
+/**
+ * 
+ * Tests for {@link ChoiceValidator}
+ *
+ */
 public class ChoiceValidatorTest extends AbstractSGraphValidatorTest {
 
 	@Inject

@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.model.sgraph.validation.test;
+package org.yakindu.sct.model.sgraph.test.validation;
 
 import static org.yakindu.sct.model.sgraph.validation.FinalStateValidator.FINAL_STATE_NO_OUT_TRANSITION_CODE;
 
@@ -17,10 +17,16 @@ import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.test.util.SGraphJavaValidatorTester;
 import org.yakindu.sct.model.sgraph.validation.FinalStateValidator;
 
 import com.google.inject.Inject;
 
+/**
+ *
+ * Tests for {@link FinalStateValidator}
+ *
+ */
 public class FinalStateValidatorTest extends AbstractSGraphValidatorTest {
 
 	@Inject

@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.model.sgraph.validation.test;
+package org.yakindu.sct.model.sgraph.test.validation;
 
 import static org.yakindu.sct.model.sgraph.validation.VertexValidator.VERTEX_REACHABLE_CODE;
 
@@ -20,10 +20,16 @@ import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.sgraph.test.util.SGraphJavaValidatorTester;
 import org.yakindu.sct.model.sgraph.validation.VertexValidator;
 
 import com.google.inject.Inject;
 
+/**
+ *
+ * Tests for {@link VertexValidator}
+ *
+ */
 public class VertexValidatorTest extends AbstractSGraphValidatorTest {
 
 	@Inject
@@ -61,22 +67,16 @@ public class VertexValidatorTest extends AbstractSGraphValidatorTest {
 	@Test
 	public void vertexNotReachable_AcceptThroughSubentry() {
 		State state = createState();
-
 		State stateA = factory.createState();
-
 		Region subRegion = factory.createRegion();
 		state.getRegions().add(subRegion);
-
 		State stateC = factory.createState();
 		subRegion.getVertices().add(stateC);
-
 		Entry entry = factory.createEntry();
 		subRegion.getVertices().add(entry);
-
 		Transition t1 = factory.createTransition();
 		t1.setSource(stateA);
 		t1.setTarget(entry);
-
 		Transition t2 = factory.createTransition();
 		t2.setSource(entry);
 		t2.setTarget(stateC);
@@ -90,22 +90,16 @@ public class VertexValidatorTest extends AbstractSGraphValidatorTest {
 	@Test
 	public void vertexNotReachable_AcceptThroughSubchoice() {
 		State state = createState();
-
 		State stateA = factory.createState();
-
 		Region subRegion = factory.createRegion();
 		state.getRegions().add(subRegion);
-
 		State stateC = factory.createState();
 		subRegion.getVertices().add(stateC);
-
 		Choice choice = factory.createChoice();
 		subRegion.getVertices().add(choice);
-
 		Transition t1 = factory.createTransition();
 		t1.setSource(stateA);
 		t1.setTarget(choice);
-
 		Transition t2 = factory.createTransition();
 		t2.setSource(choice);
 		t2.setTarget(stateC);

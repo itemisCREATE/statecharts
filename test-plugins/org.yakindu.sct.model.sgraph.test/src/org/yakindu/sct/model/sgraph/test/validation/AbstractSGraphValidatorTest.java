@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.model.sgraph.validation.test;
+package org.yakindu.sct.model.sgraph.test.validation;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -29,7 +29,10 @@ import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.sgraph.test.util.SGraphTestInjectorProvider;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 
-// Remove the deprecated API when Mars support is dropped
+/**
+ * Abstract base class for all Validator Tests
+ *
+ */
 @SuppressWarnings("deprecation")
 @RunWith(XtextRunner.class)
 @InjectWith(SGraphTestInjectorProvider.class)

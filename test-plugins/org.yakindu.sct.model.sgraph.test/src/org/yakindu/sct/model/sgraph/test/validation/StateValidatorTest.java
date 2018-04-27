@@ -8,17 +8,23 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.model.sgraph.validation.test;
+package org.yakindu.sct.model.sgraph.test.validation;
 
 import static org.yakindu.sct.model.sgraph.validation.StateValidator.ISSUE_STATE_NAME_CODE;
 
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.junit.Test;
 import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.model.sgraph.test.util.SGraphJavaValidatorTester;
 import org.yakindu.sct.model.sgraph.validation.StateValidator;
 
 import com.google.inject.Inject;
 
+/**
+ *
+ * Tests for {@link StateValidator}
+ *
+ */
 public class StateValidatorTest extends AbstractSGraphValidatorTest {
 
 	@Inject
