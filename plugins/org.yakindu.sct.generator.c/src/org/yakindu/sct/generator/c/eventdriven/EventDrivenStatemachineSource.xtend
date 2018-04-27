@@ -13,8 +13,9 @@ package org.yakindu.sct.generator.c.eventdriven
 import com.google.inject.Inject
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
-import org.yakindu.sct.generator.c.StatemachineSource
+import org.yakindu.sct.generator.c.StatemachineSourceContentProvider
 import org.yakindu.sct.generator.c.extensions.EventNaming
+import org.yakindu.sct.generator.c.extensions.StatechartEventsGenerator
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
@@ -23,9 +24,9 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 /**
  * @author René Beckmann
  */
-class EventDrivenStatemachineSource extends StatemachineSource {
+class EventDrivenStatemachineSource extends StatemachineSourceContentProvider {
 	@Inject extension EventNaming
-	@Inject extension StatechartEventsSource events
+	@Inject extension StatechartEventsGenerator events
 	
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) { 
 		'''
@@ -41,15 +42,6 @@ class EventDrivenStatemachineSource extends StatemachineSource {
 		'''
 	}
 	
-	override protected initFunctionBody(ExecutionFlow it) {
-		'''
-		«super.initFunctionBody(it)»
-		«IF hasLocalEvents»
-		«eventQueueInitFunction»(&(handle->internal_event_queue));
-		«ENDIF»
-		'''
-	}
-	
 	override functions(ExecutionFlow it) '''
 		«super.functions(it)»
 		«IF hasLocalEvents»
@@ -59,25 +51,6 @@ class EventDrivenStatemachineSource extends StatemachineSource {
 		
 		«dispatchEventFunction»
 		«ENDIF»
-	'''
-	
-	override enterFunction(ExecutionFlow it) '''
-		void «functionPrefix»enter(«scHandleDecl»)
-		{
-			«enterSequences.defaultSequence.code»
-		}
-	'''
-	
-	override interfaceIncomingEventRaiser(ExecutionFlow it, EventDefinition event) '''
-		void «event.asRaiser»(«scHandleDecl»«event.valueParams»)
-		{
-			«IF event.hasValue»
-			«event.valueAccess» = value;
-			«ENDIF»
-			«event.access» = bool_true;
-			
-			«functionPrefix»runCycle(«scHandle»);
-		}
 	'''
 	
 	def dispatchEventFunction(ExecutionFlow it) '''
@@ -118,63 +91,4 @@ class EventDrivenStatemachineSource extends StatemachineSource {
 		«eventQueuePushFunction»(&(handle->internal_event_queue), event);
 	}
 	'''
-	
-	override runCycleFunction(ExecutionFlow it)  {
-		if(!hasLocalEvents) {
-			return super.runCycleFunction(it)
-		} else {
-			'''
-				void «functionPrefix»runCycle(«scHandleDecl»)
-				{
-					«clearOutEventsFctID»(«scHandle»);
-					
-					«eventStructTypeName» currentEvent = «eventQueuePopFunction»(&(«scHandle»->internal_event_queue));
-					
-					do {
-						«functionPrefix»dispatch_event(«scHandle», &currentEvent);
-						«runCycleForLoop»
-						«clearInEventsFctID»(«scHandle»);
-					} while((currentEvent = «eventQueuePopFunction»(&(«scHandle»->internal_event_queue))).name != «invalidEventEnumName»);
-					
-				}
-			'''
-		}
-	}
-	
-	override raiseTimeEventFunction(ExecutionFlow it) '''
-		«IF timed»
-			void «raiseTimeEventFctID»(«scHandleDecl», sc_eventid evid)
-			{
-				if ( ((sc_intptr_t)evid) >= ((sc_intptr_t)&(«scHandle»->timeEvents))
-					&&  ((sc_intptr_t)evid) < ((sc_intptr_t)&(«scHandle»->timeEvents)) + sizeof(«timeEventScope.type»))
-					{
-					*(sc_boolean*)evid = bool_true;
-					
-					«functionPrefix»runCycle(«scHandle»);
-				}		
-			}
-		«ENDIF»
-		'''
-
-	override functionPrototypes(ExecutionFlow it) {
-		'''
-		«super.functionPrototypes(it)»
-		«IF hasLocalEvents»
-		static void «eventQueueInitFunction»(«eventQueueTypeName» * eq);
-		static sc_integer «eventQueueSizeFunction»(«eventQueueTypeName» * eq);
-		static «eventStructTypeName» «eventQueuePopFunction»(«eventQueueTypeName» * eq);
-		static sc_boolean «eventQueuePushFunction»(«eventQueueTypeName» * eq, «eventStructTypeName» ev);
-
-		static void «functionPrefix»dispatch_event(«scHandleDecl», const «eventStructTypeName» * event);
-
-		static void «eventInitFunction»(«eventStructTypeName» * ev, «eventEnumName» name);
-		static void «functionPrefix»add_event_to_queue(«scHandleDecl», «eventEnumName» name);
-		«IF hasLocalEventsWithValue»
-
-		static void «valueEventInitFunction»(«eventStructTypeName» * ev, «eventEnumName» name, void * value);
-		static void «functionPrefix»add_value_event_to_queue(«scHandleDecl», «eventEnumName» name, void * value);
-		«ENDIF»
-		«ENDIF»
-		'''
-	}
 }
