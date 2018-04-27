@@ -1028,4 +1028,16 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		result = tester.validate(model);
 		result.assertOK();
 	}
+	
+	@Test
+	@Ignore
+	public void checkEveryEventUsedWithoutAGuard() {
+		// stub
+	}
+	
+	@Test
+	@Ignore
+	public void checkEveryUsedWithoutCycleBasedEvaluation() {
+		// stub
+	}
 }

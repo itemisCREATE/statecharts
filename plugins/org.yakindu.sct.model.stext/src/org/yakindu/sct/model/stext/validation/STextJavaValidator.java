@@ -82,6 +82,7 @@ import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.validation.SCTResourceValidator;
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
@@ -957,7 +958,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		return true;
 	}
 
-	protected Statechart getStatechart(EObject context) {
+	protected static Statechart getStatechart(EObject context) {
 		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context.eResource(),
 				ContextElementAdapter.class);
 		if (provider == null || provider.getElement() == null) {
@@ -989,7 +990,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			// respect the guard expression!
 			boolean multipleAfterEvents = rt.getGuard() == null && rt.getTriggers().stream().filter(TimeEventSpec.class::isInstance)
 					.map(TimeEventSpec.class::cast).filter(t -> t.getType() == TimeEventType.AFTER).count() > 1;
-			// TimeEventType.EVERY is unnecessary, because it's not valid on transitions
+			// TimeEventType.EVERY is convered in a separate smell
 			if (multipleAfterEvents) {
 				duplicateTriggers.add("after");
 			}
@@ -1024,4 +1025,28 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			}
 		}
 	}
+	
+	@Check
+	public void checkEveryEventUsedWithoutAGuard(ReactionTrigger rt) {
+		if (rt.getGuard() == null && getEveryEventsCount(rt) > 0){
+			warning(STextJavaValidator.SMELL_EVERY_USED_WITHOUT_A_GUARD, rt, null, -1);
+		}
+	}
+	
+	@Check
+	public void checkEveryUsedWithoutCycleBasedEvaluation(ReactionTrigger rt) {			
+		if (!isCycleBased(rt) && getEveryEventsCount(rt) > 0) {			
+			warning(STextJavaValidator.SMELL_EVERY_USED_IN_NON_CYCLE_BASED_EVALUATION, rt, null, -1);
+		}				
+	}
+	
+	private static boolean isCycleBased(ReactionTrigger rt) {
+		return new StatechartAnnotations().isCycleBased(getStatechart(rt));
+	}
+	
+	private static long getEveryEventsCount(ReactionTrigger rt) {
+		return rt.getTriggers().stream().filter(TimeEventSpec.class::isInstance)
+				.map(TimeEventSpec.class::cast).filter(t -> t.getType() == TimeEventType.EVERY).count();
+	}
+		
 }

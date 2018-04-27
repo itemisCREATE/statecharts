@@ -60,4 +60,6 @@ public interface STextValidationMessages {
 	
 	public static final String SMELL_IDENTIC_TRIGGERS = "Multiple %s triggers.";
 	public static final String SMELL_IDENTIC_TRIGGERS_GENERIC = "Some events are used at least twice.";
+	public static final String SMELL_EVERY_USED_WITHOUT_A_GUARD = "'every' is used without a guard. Maybe use 'after' instead?";
+	public static final String SMELL_EVERY_USED_IN_NON_CYCLE_BASED_EVALUATION = "'every' is used without '@CycleBased'";
 }
