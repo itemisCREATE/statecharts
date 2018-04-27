@@ -36,7 +36,7 @@ import org.yakindu.sct.model.stext.stext.StextFactory;
 @SuppressWarnings("deprecation")
 @RunWith(XtextRunner.class)
 @InjectWith(SGraphTestInjectorProvider.class)
-public class AbstractSGraphValidatorTest {
+public abstract class AbstractSGraphValidatorTest {
 
 	public static final String VALIDATION_TESTMODEL_DIR = "org.yakindu.sct.model.sgraph.test/testmodels/";
 
