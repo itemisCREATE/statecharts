@@ -436,7 +436,9 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public void checkAllIncomingTransitionsHaveIdenticalEffects(Vertex vertex) {
 		// check only applies to state or synchronization, because only the allow to trigger some effect on entering
 		// in case of the synchronization it's the outgoing transition
-		if (!(vertex instanceof org.yakindu.sct.model.sgraph.State || vertex instanceof Synchronization)) {
+		if (!(vertex instanceof org.yakindu.sct.model.sgraph.State || 
+				// check applies to synchronizations iff they have one outgoing transition
+				(vertex instanceof Synchronization && vertex.getOutgoingTransitions().size() == 1))) {
 			return;
 		}
 		if (vertex.getIncomingTransitions().size() <= 1) {
