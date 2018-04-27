@@ -439,7 +439,8 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 		// check only applies to States or Choice. If all outgoing transitions have the same effect, the
 		// effect could be merged into state or the choice-incoming transition. This is not possible
 		// on all other Vertices.
-		if (!(vertex instanceof org.yakindu.sct.model.sgraph.State || vertex instanceof Choice)) {
+		if (!(vertex instanceof org.yakindu.sct.model.sgraph.State || 
+				(vertex instanceof Choice && vertex.getIncomingTransitions().size() == 1))) {
 			return;
 		}		
 		if (vertex.getOutgoingTransitions().size() <= 1) {
