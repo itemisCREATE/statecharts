@@ -30,7 +30,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
  * @author rbeckmann
  *
  */
-class StatemachineSourceContentProvider {
+class StatemachineSourceContentProvider implements ISourceContentProvider {
 	@Inject protected extension Naming
 	@Inject protected extension GenmodelEntries
 	@Inject protected extension Navigation
@@ -45,26 +45,37 @@ class StatemachineSourceContentProvider {
 	
 	@Inject protected extension InternalFunctionsGenerator
 	@Inject protected extension InterfaceFunctionsGenerator
+
+	override CharSequence fileComment(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
+		'''«entry.licenseText»'''
+	}
 	
-	def public CharSequence content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
+	override CharSequence includes(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		'''
-		«entry.licenseText»
+		#include "«(module.h).relativeTo(module.c)»"
+		#include "«(typesModule.h).relativeTo(module.c)»"
+		«IF timed || !it.operations.empty»
+			#include "«(module.client.h).relativeTo(module.c)»"
+		«ENDIF»
 		
 		#include <stdlib.h>
 		#include <string.h>
 		«IF modOnReal»#include <math.h>«ENDIF»
-		#include "«(typesModule.h).relativeTo(module.c)»"
-		#include "«(module.h).relativeTo(module.c)»"
-		«IF timed || !it.operations.empty»
-			#include "«(module.client.h).relativeTo(module.c)»"
-		«ENDIF»
 		/*! \file Implementation of the state machine '«name»'
 		*/
-		
+		'''
+	}
+	
+	override CharSequence declarations(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
+		'''
 		«functionPrototypes»
-		
+				
 		«constantDefinitions»
-		
+		'''
+	}
+	
+	override CharSequence implementations(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
+		'''
 		«functions»
 		'''
 	}

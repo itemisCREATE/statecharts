@@ -11,6 +11,7 @@
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
+import java.util.List
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
@@ -18,12 +19,60 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 class StatemachineSource implements IContentTemplate {
 	@Inject protected extension INamingService
 
-	@Inject protected extension StatemachineSourceContentProvider contentProvider
-	
+	val protected List<ISourceContentProvider> contentProviders = newArrayList();
+		
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) { 
 		initializeNamingService
 		
-		return contentProvider.content(it, entry, artifactConfigs).toString
+		'''
+		«fileComment(entry, artifactConfigs)»
+		
+		«includes(entry, artifactConfigs)»
+		
+		«declarations(entry, artifactConfigs)»
+		
+		«implementations(entry, artifactConfigs)»
+		'''
+	}
+	
+	def CharSequence fileComment(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
+		'''
+		«FOR p : contentProviders»
+		«p.fileComment(it, entry, artifactConfigs)»
+		
+		«ENDFOR»
+		'''
+	}
+	
+	def CharSequence includes(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
+		'''
+		«FOR p : contentProviders»
+		«p.includes(it, entry, artifactConfigs)»
+		
+		«ENDFOR»
+		'''
+	}
+	
+	def CharSequence declarations(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
+		'''
+		«FOR p : contentProviders»
+		«p.declarations(it, entry, artifactConfigs)»
+		
+		«ENDFOR»
+		'''
+	}
+	
+	def CharSequence implementations(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
+		'''
+		«FOR p : contentProviders»
+		«p.implementations(it, entry, artifactConfigs)»
+		
+		«ENDFOR»
+		'''
+	}
+	
+	def getContentProviders() {
+		return contentProviders
 	}
 	
 	
