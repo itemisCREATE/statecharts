@@ -12,6 +12,7 @@ package org.yakindu.sct.model.sgraph.validation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
@@ -55,7 +56,10 @@ public class EntryExitValidator extends AbstractSGraphValidator {
 	public static final String REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NO_DEFAULT_ENTRY_CODE = "entry.region.default";
 
 	private static final String REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NON_CONNECTED_DEFAULT_ENTRY_MSG = "The region can't be entered using the shallow history. Add a transition from default entry to a state.";
-	public static final String REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NON_CONNECTED_DEFAULT_ENTRY_CODE = "The region can't be entered using the shallow history. Add a transition from default entry to a state.";
+	public static final String REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NON_CONNECTED_DEFAULT_ENTRY_CODE = "entry.in.transition";
+
+	private final static String REGION_MULTIPLE_DEFAULT_ENTRIES_MSG = "There are multiple default entry nodes (one without a name and one named 'default') in this region.";
+	public final static String REGION_MULTIPLE_DEFAULT_ENTRIES_CODE = "region.duplicate.entry";
 
 	@Check(CheckType.FAST)
 	public void initialEntryWithoutIncomingTransitions(Entry entry) {
@@ -134,6 +138,19 @@ public class EntryExitValidator extends AbstractSGraphValidator {
 
 		}
 
+	}
+
+	@Check
+	public void checkOnlyOneDefaultEntryPermitted(Entry entry) {
+		Region region = (Region) entry.eContainer();
+		List<Entry> initialEntires = region.getVertices().stream().filter(Entry.class::isInstance)
+				.map(Entry.class::cast).filter(v -> v.getKind() == EntryKind.INITIAL).collect(Collectors.toList());
+		boolean unamedEntryExists = initialEntires.stream().filter(v -> v.getName().equals("")).count() > 0;
+		boolean defaultNamedEntryExists = initialEntires.stream()
+				.filter(v -> v.getName().trim().equalsIgnoreCase("default")).count() > 0;
+		if (unamedEntryExists && defaultNamedEntryExists) {
+			error(REGION_MULTIPLE_DEFAULT_ENTRIES_MSG, region, null, -1, REGION_MULTIPLE_DEFAULT_ENTRIES_CODE);
+		}
 	}
 
 }

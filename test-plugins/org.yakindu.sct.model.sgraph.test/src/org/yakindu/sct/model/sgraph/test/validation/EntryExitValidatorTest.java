@@ -203,6 +203,20 @@ public class EntryExitValidatorTest extends AbstractSGraphValidatorTest {
 	}
 
 	@Test
+	public void checkOnlyOneDefaultEntryPermitted() {
+		State state = createState();
+		Region region = ((Region) state.eContainer());
+		Entry entry = factory.createEntry();
+		region.getVertices().add(entry);
+		Entry entry2 = factory.createEntry();
+		entry2.setName("default");
+		region.getVertices().add(entry2);
+		createTransition(entry, state);
+		createTransition(entry2, state);
+		tester.validate(entry).assertError(REGION_MULTIPLE_DEFAULT_ENTRIES_CODE);
+	}
+
+	@Test
 	public void regionCantBeEnteredUsingShallowHistory() {
 		Statechart statechart = loadStatechart("RegionCantBeEnteredUsingShallowHistory.sct");
 		AssertableDiagnostics result = tester.validate(statechart);
