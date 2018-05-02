@@ -27,6 +27,7 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.validation.Check;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.base.base.NamedElement;
@@ -941,5 +942,10 @@ public class SGraphJavaValidationTest {
 	}
 
 
-
+	@Test
+	@Ignore
+	public void checkOnlyOneDefaultEntryPermitted() {
+		// stub
+	}
+	
 }
