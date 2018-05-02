@@ -10,6 +10,9 @@
  */
 package org.yakindu.sct.ui.editor.definitionsection;
 
+import static org.yakindu.sct.ui.editor.definitionsection.ContextScopeHandler.EMBEDDED_TEXT_EDITOR_SCOPE;
+import static org.yakindu.sct.ui.editor.definitionsection.ContextScopeHandler.TEXT_EDITOR_SCOPE;
+
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.value.IObservableValue;
@@ -28,7 +31,6 @@ import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
@@ -65,6 +67,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.IPersistableEditor;
 import org.eclipse.ui.IPersistableElement;
@@ -74,7 +77,6 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorFactory;
-import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorModelAccess;
 import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
@@ -88,6 +90,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementProvider;
 import org.yakindu.sct.ui.editor.StatechartImages;
+import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningEditor;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.propertysheets.ValidatingEMFDatabindingContext;
 
@@ -100,12 +103,8 @@ import com.google.inject.Injector;
  */
 @SuppressWarnings("restriction")
 public class StatechartDefinitionSection extends Composite
-		implements
-			IPersistableEditor,
-			IPersistableElement,
-			IContextElementProvider {
+		implements IPersistableEditor, IPersistableElement, IContextElementProvider {
 
-	protected static final String INLINE_TOOLTIP = "Inline definition section";
 	protected static final String SHOW_SECTION_TOOLTIP = "Show definition section";
 	protected static final String HIDE_SECTION_TOOLTIP = "Hide definition section";
 
@@ -116,10 +115,10 @@ public class StatechartDefinitionSection extends Composite
 	protected static final String MEM_EXPANDED = "DefinitionSectionIsExpanded";
 	protected static final String MEM_FIRST_WEIGHT = "FirstSashWeight";
 	protected static final String MEM_SECOND_WEIGHT = "SecondSashWeight";
-	protected static final int[] MIN_SIZE = {11, 21};
-	protected static final int[] DEFAULT_WEIGHTS = new int[]{2, 10};
+	protected static final int[] MIN_SIZE = { 11, 21 };
+	protected static final int[] DEFAULT_WEIGHTS = new int[] { 2, 10 };
 	protected int[] previousWidths = DEFAULT_WEIGHTS;
-	private boolean isSectionExpanded = true;
+	private boolean sectionExpanded = true;
 
 	private MouseListener mouseListener;
 	private ResizeListener resizeListener;
@@ -133,11 +132,12 @@ public class StatechartDefinitionSection extends Composite
 	private EmbeddedEditor embeddedEditor;
 	private XtextResource xtextResource;
 	private SashForm sash;
-	private DiagramDocumentEditor editorPart;
+	private DiagramPartitioningEditor editorPart;
 
 	private static IMemento memento;
+	private ValidatingEMFDatabindingContext context;
 
-	public StatechartDefinitionSection(Composite parent, int style, DiagramDocumentEditor editorPart) {
+	public StatechartDefinitionSection(Composite parent, int style, DiagramPartitioningEditor editorPart) {
 		super(parent, style);
 		this.sash = (SashForm) parent;
 		this.editorPart = editorPart;
@@ -150,8 +150,8 @@ public class StatechartDefinitionSection extends Composite
 
 	protected Label createSwitchControl() {
 		Label switchControl = new Label(this, SWT.PUSH);
-		switchControl.setToolTipText(isSectionExpanded ? HIDE_SECTION_TOOLTIP : SHOW_SECTION_TOOLTIP);
-		switchControl.setImage(isSectionExpanded ? StatechartImages.COLLAPSE.image() : StatechartImages.EXPAND.image());
+		switchControl.setToolTipText(sectionExpanded ? HIDE_SECTION_TOOLTIP : SHOW_SECTION_TOOLTIP);
+		switchControl.setImage(sectionExpanded ? StatechartImages.COLLAPSE.image() : StatechartImages.EXPAND.image());
 		switchControl.setCursor(new Cursor(getDisplay(), SWT.CURSOR_HAND));
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.CENTER).indent(-1, -1).hint(MIN_SIZE[0], MIN_SIZE[1])
 				.applyTo(switchControl);
@@ -230,12 +230,17 @@ public class StatechartDefinitionSection extends Composite
 	}
 
 	protected EmbeddedEditor createSpecificationEditor() {
+		ContextScopeHandler.defineContext(EMBEDDED_TEXT_EDITOR_SCOPE, TEXT_EDITOR_SCOPE);
 		EmbeddedEditor embeddedEditor = createEmbeddedEditor();
-		EmbeddedEditorModelAccess modelAccess = embeddedEditor.createPartialEditor();
-		String specification = ((Statechart) getContextObject()).getSpecification();
-		modelAccess.updateModel(specification != null ? specification : "");
+		embeddedEditor.createPartialEditor();
 		GridDataFactory.fillDefaults().grab(true, true).span(2, 1).applyTo(embeddedEditor.getViewer().getControl());
-		initializeEmbeddedEditorWidget(embeddedEditor);
+		StyledText text = embeddedEditor.getViewer().getTextWidget();
+		text.setAlwaysShowScrollBars(false);
+		text.setSelection(0);
+		text.setKeyBinding(SWT.MOD1 | SWT.KEY_MASK & 'a', ST.SELECT_ALL);
+		initXtextSelectionProvider(text);
+		initContextMenu(text);
+		text.addModifyListener((event) -> editorPart.firePropertyChange(IEditorPart.PROP_DIRTY));
 		return embeddedEditor;
 	}
 
@@ -264,16 +269,6 @@ public class StatechartDefinitionSection extends Composite
 		};
 	}
 
-	protected void initializeEmbeddedEditorWidget(EmbeddedEditor embeddedEditor) {
-		StyledText embeddedEditorWidget = embeddedEditor.getViewer().getTextWidget();
-		embeddedEditorWidget.setAlwaysShowScrollBars(false);
-		embeddedEditorWidget.setSelection(0);
-		embeddedEditorWidget.setKeyBinding(SWT.MOD1 | SWT.KEY_MASK & 'a', ST.SELECT_ALL);
-		initXtextSelectionProvider(embeddedEditorWidget);
-		initBinding(embeddedEditorWidget);
-		initContextMenu(embeddedEditorWidget);
-	}
-
 	@SuppressWarnings("unused")
 	protected void initXtextSelectionProvider(StyledText widget) {
 		try {
@@ -285,15 +280,25 @@ public class StatechartDefinitionSection extends Composite
 		}
 	}
 
-	@SuppressWarnings({"unchecked", "rawtypes"})
-	protected void initBinding(StyledText embeddedEditorWidget) {
+	protected void activate() {
+		initBinding(embeddedEditor.getViewer().getTextWidget());
+		getSash().setMaximizedControl(null);
+	}
+
+	protected void deactivate() {
+		getSash().setMaximizedControl(getSash().getChildren()[MAXIMIZED_CONTROL_INDEX]);
+		if (context != null)
+			context.dispose();
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	protected void initBinding(StyledText text) {
 		IEMFValueProperty modelProperty = EMFEditProperties.value(getTransactionalEditingDomain(),
 				SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION);
-		ISWTObservableValue uiProperty = WidgetProperties.text(new int[]{SWT.FocusOut, SWT.Modify})
-				.observe(embeddedEditorWidget);
+		ISWTObservableValue uiProperty = WidgetProperties.text(new int[] { SWT.FocusOut }).observe(text);
 		IObservableValue modelPropertyObservable = modelProperty.observe(getContextObject());
-		ValidatingEMFDatabindingContext context = new ValidatingEMFDatabindingContext(
-				(IContextElementProvider) editorPart, editorPart.getSite().getShell());
+		context = new ValidatingEMFDatabindingContext((IContextElementProvider) editorPart,
+				editorPart.getSite().getShell());
 		context.bindValue(uiProperty, modelPropertyObservable, null, null);
 	}
 
@@ -326,31 +331,33 @@ public class StatechartDefinitionSection extends Composite
 		return (Diagram) editorPart.getAdapter(Diagram.class);
 	}
 
-	protected void updateInlineStyle() {
+	protected void toggleDefinitionSection() {
+		toggleInlineStyle();
+		updateStyle();
+		refreshEditorContents();
+	}
+
+	private void toggleInlineStyle() {
 		TransactionalEditingDomain domain = getTransactionalEditingDomain();
 		Diagram diagram = getDiagram();
 		BooleanValueStyle inlineStyle = DiagramPartitioningUtil.getInlineDefinitionSectionStyle(diagram);
 		if (inlineStyle == null) {
 			inlineStyle = DiagramPartitioningUtil.createInlineDefinitionSectionStyle();
-			addInlineStyle(inlineStyle, domain);
+			AddCommand command = new AddCommand(domain, (View) getDiagram(), NotationPackage.Literals.VIEW__STYLES,
+					inlineStyle);
+			domain.getCommandStack().execute(command);
 		}
-		setInlineStyleValue(inlineStyle, domain);
-	}
-
-	protected void setInlineStyleValue(BooleanValueStyle inlineStyle, TransactionalEditingDomain domain) {
 		SetCommand command = new SetCommand(domain, inlineStyle,
 				NotationPackage.Literals.BOOLEAN_VALUE_STYLE__BOOLEAN_VALUE, !inlineStyle.isBooleanValue());
 		domain.getCommandStack().execute(command);
 	}
 
-	protected void addInlineStyle(BooleanValueStyle inlineStyle, TransactionalEditingDomain domain) {
-		AddCommand command = new AddCommand(domain, (View) getDiagram(), NotationPackage.Literals.VIEW__STYLES,
-				inlineStyle);
-		domain.getCommandStack().execute(command);
-	}
-
-	public void toggleDefinitionSection() {
-		getSash().setMaximizedControl(!isInlined() ? null : getSash().getChildren()[MAXIMIZED_CONTROL_INDEX]);
+	public void updateStyle() {
+		if (isInlined()) {
+			deactivate();
+		} else {
+			activate();
+		}
 	}
 
 	protected boolean isInlined() {
@@ -378,7 +385,7 @@ public class StatechartDefinitionSection extends Composite
 		if (diff < 0) {
 			return DEFAULT_WEIGHTS;
 		}
-		return new int[]{switchControlWidth, (diff % 2 != 0) ? diff - (1 + BORDERWIDTH) : diff};
+		return new int[] { switchControlWidth, (diff % 2 != 0) ? diff - (1 + BORDERWIDTH) : diff };
 	}
 
 	protected void layoutDefinitionSection(int sashWidth, int[] weights, boolean visible, int hSpan) {
@@ -399,8 +406,8 @@ public class StatechartDefinitionSection extends Composite
 
 	protected void toggleExpandState() {
 		getSash().setRedraw(false);
-		isSectionExpanded = !isSectionExpanded;
-		if (isSectionExpanded) {
+		sectionExpanded = !sectionExpanded;
+		if (sectionExpanded) {
 			expandDefinitionSection();
 		} else {
 			collapseDefinitionSection();
@@ -442,6 +449,7 @@ public class StatechartDefinitionSection extends Composite
 			collapsedBorder.dispose();
 
 		if (embeddedEditor != null) {
+			embeddedEditor.getDocument().getValidationJob().cancel();
 			StyledText embeddedEditorWidget = embeddedEditor.getViewer().getTextWidget();
 			if (embeddedEditorWidget != null && !embeddedEditorWidget.isDisposed()) {
 				if (resizeListener != null) {
@@ -495,7 +503,7 @@ public class StatechartDefinitionSection extends Composite
 			Boolean hasMemento = getExpandProperty(memento);
 			if (hasMemento != null) {
 				previousWidths = getWeightProperties(memento);
-				isSectionExpanded = hasMemento.booleanValue();
+				sectionExpanded = hasMemento.booleanValue();
 				refreshEditorContents();
 				saveCurrentMemento(memento);
 			} else {
@@ -513,7 +521,7 @@ public class StatechartDefinitionSection extends Composite
 		String sectionProperty = getSectionProperty(getContextObject());
 		memento.putInteger(sectionProperty + MEM_FIRST_WEIGHT, previousWidths[0]);
 		memento.putInteger(sectionProperty + MEM_SECOND_WEIGHT, previousWidths[1]);
-		memento.putBoolean(sectionProperty + MEM_EXPANDED, isSectionExpanded);
+		memento.putBoolean(sectionProperty + MEM_EXPANDED, sectionExpanded);
 	}
 
 	protected String getSectionProperty(EObject element) {
@@ -536,8 +544,14 @@ public class StatechartDefinitionSection extends Composite
 		Integer first = memento.getInteger(sectionProperty + MEM_FIRST_WEIGHT);
 		Integer second = memento.getInteger(sectionProperty + MEM_SECOND_WEIGHT);
 		if (first != null && second != null)
-			return new int[]{first, second};
+			return new int[] { first, second };
 		return DEFAULT_WEIGHTS;
+	}
+
+	public String getDefinition() {
+		if (isInlined())
+			return null;
+		return embeddedEditor.getDocument().get();
 	}
 
 	/**
@@ -557,7 +571,7 @@ public class StatechartDefinitionSection extends Composite
 					public void run() {
 						if (isDisposed() || getSash().isDisposed())
 							return;
-						if (isSectionExpanded) {
+						if (sectionExpanded) {
 							// save current weights so the widths can later be restored
 							previousWidths = getSash().getWeights();
 							saveState(memento);
@@ -587,6 +601,7 @@ public class StatechartDefinitionSection extends Composite
 			resizeFinishedJob.cancel();
 			resizeFinishedJob.schedule(DELAY);
 		}
+		
 	}
 
 	/**
@@ -595,6 +610,7 @@ public class StatechartDefinitionSection extends Composite
 	 */
 	protected class InlineIcon extends Composite implements MouseListener, MouseTrackListener, PaintListener {
 
+		protected static final String INLINE_TOOLTIP = "Inline definition section";
 		private Cursor handCursor = new Cursor(getDisplay(), SWT.CURSOR_HAND);
 		private boolean iconHasFocus = false;
 		private Label icon;
@@ -614,9 +630,7 @@ public class StatechartDefinitionSection extends Composite
 
 		@Override
 		public void mouseUp(MouseEvent e) {
-			updateInlineStyle();
 			toggleDefinitionSection();
-			refreshEditorContents();
 			saveState(memento);
 		}
 
@@ -699,6 +713,7 @@ public class StatechartDefinitionSection extends Composite
 			setFont(font);
 			refresh(this);
 		}
+
 		@Override
 		public void paintControl(PaintEvent e) {
 			int w = e.width;
@@ -709,26 +724,26 @@ public class StatechartDefinitionSection extends Composite
 			e.gc.setTransform(tr);
 			tr.dispose();
 			int drawHeight = -w + 2;
-			e.gc.drawString(isSectionExpanded ? "" : text, 0, drawHeight % 2 != 0 ? drawHeight + 1 : drawHeight - 1);
+			e.gc.drawString(sectionExpanded ? "" : text, 0, drawHeight % 2 != 0 ? drawHeight + 1 : drawHeight - 1);
 		}
 
 		@Override
 		public void mouseUp(MouseEvent e) {
-			if (!isSectionExpanded)
+			if (!sectionExpanded)
 				toggleExpandState();
 			setCursor(arrowCursor);
 		}
 
 		@Override
 		public void mouseDown(MouseEvent e) {
-			if (mouseListener != null && !isSectionExpanded)
+			if (mouseListener != null && !sectionExpanded)
 				toggleExpandState();
 		}
 
 		@Override
 		public void mouseEnter(MouseEvent e) {
-			setCursor((!isSectionExpanded) ? handCursor : arrowCursor);
-			setToolTipText((!isSectionExpanded) ? SHOW_SECTION_TOOLTIP : null);
+			setCursor((!sectionExpanded) ? handCursor : arrowCursor);
+			setToolTipText((!sectionExpanded) ? SHOW_SECTION_TOOLTIP : null);
 		}
 
 		@Override

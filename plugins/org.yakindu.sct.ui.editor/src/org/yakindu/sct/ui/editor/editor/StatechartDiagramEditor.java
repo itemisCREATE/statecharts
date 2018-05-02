@@ -16,7 +16,6 @@ import java.util.Optional;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -58,6 +57,7 @@ import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.DomainStatus;
 import org.yakindu.sct.domain.extension.DomainStatus.Severity;
 import org.yakindu.sct.domain.extension.IDomain;
+import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementProvider;
 import org.yakindu.sct.ui.editor.DiagramActivator;
@@ -414,7 +414,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	public void toggleDefinitionSection() {
 		if (definitionSection != null && !definitionSection.isDisposed() && isStatechart()) {
-			definitionSection.toggleDefinitionSection();
+			definitionSection.updateStyle();
 			definitionSection.restoreSashWidths();
 		}
 	}
@@ -425,13 +425,22 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	@Override
 	public EObject getContextObject() {
-		Assert.isNotNull(getDiagram());
+		if(getDiagram() == null || getDiagram().getElement() == null)
+			return null;
 		EObject element = getDiagram().getElement();
-		Assert.isNotNull(element);
 		return element;
 	}
 
 	protected TransactionalEditingDomain getTransactionalEditingDomain() {
 		return TransactionUtil.getEditingDomain(getDiagram());
+	}
+
+	@Override
+	public boolean isDirty() {
+		if (getDiagram() == null || !(getContextObject() instanceof SpecificationElement))
+			return super.isDirty();
+		SpecificationElement contextObject = (SpecificationElement) getContextObject();
+		return super.isDirty() || (definitionSection != null && (definitionSection.getDefinition() != null
+				&& !definitionSection.getDefinition().equals(contextObject.getSpecification())));
 	}
 }

@@ -588,7 +588,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 	@Check(CheckType.FAST)
 	public void checkAnnotationArguments(ArgumentedAnnotation annotation) {
-		if (annotation.getExpressions().size() != annotation.getType().getProperties().size()) {
+		if (annotation.getType() != null && annotation.getExpressions().size() != annotation.getType().getProperties().size()) {
 			error(String.format(ERROR_WRONG_NUMBER_OF_ARGUMENTS_MSG, annotation.getType().getProperties()), null,
 					ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
 		}
@@ -956,8 +956,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	protected Statechart getStatechart(EObject context) {
 		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context.eResource(),
 				ContextElementAdapter.class);
-
-		if (provider == null) {
+		if (provider == null || provider.getElement() == null) {
 			return EcoreUtil2.getContainerOfType(context, Statechart.class);
 		} else {
 			if(provider.getElement().eResource() == null) return null;

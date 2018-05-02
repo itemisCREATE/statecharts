@@ -97,7 +97,7 @@ class StructureMapping {
 	}
 	
 	protected def doCreateAndAddImportDecl(Declaration decl, Scope scope){
-		scope.declarations += SGraphFactory.eINSTANCE.createImportDeclaration => [
+		scope.members += SGraphFactory.eINSTANCE.createImportDeclaration => [
 			name = decl.name
 			declaration = decl
 		]
