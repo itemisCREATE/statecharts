@@ -11,46 +11,21 @@
 package org.yakindu.sct.generator.c.extensions
 
 import com.google.inject.Inject
+import org.yakindu.sct.generator.c.CGeneratorConstants
+import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 
 /**
  * @author rbeckmann
  *
  */
-class InterfaceFunctionsGenerator {
+class EventCode {
 	@Inject protected extension Navigation
 	@Inject protected extension Naming
 	@Inject protected extension ICodegenTypeSystemAccess
-	
-	def interfaceFunctions(ExecutionFlow it) '''
-		«FOR scope : interfaceScopes»
-			«FOR event : scope.incomingEvents»
-				«interfaceIncomingEventRaiser(event)»
-			«ENDFOR»
-			
-			«FOR event : scope.outgoingEvents»
-				«interfaceOutgoingEventGetter(event)»
-				«IF event.hasValue» 
-					«interfaceOutgoingEventValueGetter(event)»
-				«ENDIF»
-			«ENDFOR»
-			
-			«FOR variable : scope.variableDefinitions»
-				«IF variable.const»const «ENDIF»«variable.typeSpecifier.targetLanguageName» «variable.asGetter»(const «scHandleDecl»)
-				{
-					return «variable.access»;
-				}
-				«IF !variable.readonly && !variable.const»
-				void «variable.asSetter»(«scHandleDecl», «variable.typeSpecifier.targetLanguageName» value)
-				{
-					«variable.access» = value;
-				}
-				«ENDIF»
-			«ENDFOR»
-		«ENDFOR»
-	'''
 	
 	def interfaceIncomingEventRaiser(ExecutionFlow it, EventDefinition event) '''
 		void «event.asRaiser»(«scHandleDecl»«event.valueParams»)
@@ -75,4 +50,10 @@ class InterfaceFunctionsGenerator {
 			return «event.valueAccess»;
 		}
 	'''
+	
+	def eventRaisingCode(EventRaisingExpression it, ExpressionsGenerator exp) '''
+		«IF value !== null»
+			«event.definition.event.valueAccess» = «exp.code(value)»;
+		«ENDIF»
+		«event.definition.event.access» = «CGeneratorConstants.TRUE»'''
 }

@@ -23,7 +23,6 @@ import org.yakindu.base.expressions.expressions.LogicalNotExpression
 import org.yakindu.base.expressions.expressions.LogicalOrExpression
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
 import org.yakindu.base.expressions.expressions.MultiplicativeOperator
-import org.yakindu.base.expressions.expressions.NullLiteral
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Event
@@ -32,6 +31,7 @@ import org.yakindu.base.types.Property
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.generator.c.extensions.EventCode
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
@@ -50,7 +50,9 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ITypeSystemInferrer
 	@Inject protected extension INamingService
-
+	
+	@Inject protected extension EventCode
+	
 	/* Referring to declared elements */
 	def dispatch CharSequence code(ElementReferenceExpression it) {
 		it.code(it.definition)
@@ -75,11 +77,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch CharSequence code(ElementReferenceExpression it, Property target) '''«target.access»'''
 
-	def dispatch CharSequence code(EventRaisingExpression it) '''
-	«IF value !== null»
-		«event.definition.event.valueAccess» = «value.code»;
-	«ENDIF»
-	«event.definition.event.access» = bool_true'''
+	def dispatch CharSequence code(EventRaisingExpression it) {eventRaisingCode(this)}
 
 	def dispatch CharSequence code(
 		ActiveStateReferenceExpression it) '''«flow.stateActiveFctID»(«scHandle», «value.shortName»)'''
@@ -93,7 +91,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		if (it.operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal(it)) {
 			'''«varRef.code» = fmod(«varRef.code»,«expression.code»)'''
 		} else
-			'''«varRef.code» «operator.literal» «expression.code»'''
+			super.code(it)
 	}
 
 	def dispatch CharSequence code(NumericalMultiplyDivideExpression expression) {
@@ -124,20 +122,20 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch CharSequence code(FeatureCall it, Enumerator target) '''«target.access»'''
 
 	/* Literals */
-	override dispatch CharSequence code(NullLiteral it) '''«Naming::NULL_STRING»'''
-
-	override dispatch CharSequence code(BoolLiteral it) '''«IF value»bool_true«ELSE»bool_false«ENDIF»'''
+	override dispatch CharSequence code(BoolLiteral it) '''«IF value»«CGeneratorConstants.TRUE»«ELSE»«CGeneratorConstants.FALSE»«ENDIF»'''
 
 	// ensure we obtain an expression of type sc_boolean
 	def dispatch CharSequence sc_boolean_code(Expression it) '''«it.code»'''
 
-	def dispatch CharSequence sc_boolean_code(LogicalOrExpression it) '''(«it.code») ? bool_true : bool_false'''
+	def dispatch CharSequence sc_boolean_code(LogicalOrExpression it) {ternaryGuard}
 
-	def dispatch CharSequence sc_boolean_code(LogicalAndExpression it) '''(«it.code») ? bool_true : bool_false'''
+	def dispatch CharSequence sc_boolean_code(LogicalAndExpression it) {ternaryGuard}
 
-	def dispatch CharSequence sc_boolean_code(LogicalNotExpression it) '''(«it.code») ? bool_true : bool_false'''
+	def dispatch CharSequence sc_boolean_code(LogicalNotExpression it) {ternaryGuard}
 
-	def dispatch CharSequence sc_boolean_code(LogicalRelationExpression it) '''(«it.code») ? bool_true : bool_false'''
+	def dispatch CharSequence sc_boolean_code(LogicalRelationExpression it) {ternaryGuard}
+	
+	def CharSequence ternaryGuard(Expression it) '''(«it.code») ? «CGeneratorConstants.TRUE» : «CGeneratorConstants.FALSE»'''
 
 	def boolean haveCommonTypeReal(Expression expression) {
 		if(isSame(getCommonType((infer(expression).getType), getType(ITypeSystem.INTEGER)),
