@@ -19,10 +19,15 @@ import static org.yakindu.sct.model.sexec.transformation.IModelSequencer.ADD_TRA
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION;
 
 import org.yakindu.base.types.Annotation;
-import org.yakindu.sct.generator.c.eventdriven.EventDrivenExpressionCode;
 import org.yakindu.sct.generator.c.eventdriven.EventDrivenStatemachineHeader;
-import org.yakindu.sct.generator.c.eventdriven.EventDrivenStatemachineSource;
+import org.yakindu.sct.generator.c.eventdriven.EventDrivenStatemachineSourceContentProvider;
+import org.yakindu.sct.generator.c.extensions.APIGenerator;
+import org.yakindu.sct.generator.c.extensions.EventCode;
+import org.yakindu.sct.generator.c.extensions.EventDrivenAPIGenerator;
+import org.yakindu.sct.generator.c.extensions.EventDrivenEventCode;
+import org.yakindu.sct.generator.c.extensions.EventDrivenInternalFunctionsGenerator;
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries;
+import org.yakindu.sct.generator.c.extensions.InternalFunctionsGenerator;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.IGeneratorModule;
@@ -33,6 +38,8 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.inject.Binder;
+import com.google.inject.Injector;
+import com.google.inject.Provides;
 import com.google.inject.name.Names;
 /**
  *
@@ -76,13 +83,11 @@ public class CCodeGeneratorModule implements IGeneratorModule {
 	}
 
 	protected void configureEventDriven(GeneratorEntry entry, Binder binder) {
-		Statechart statechart = (Statechart) entry.getElementRef();
-		Annotation eventDrivenAnnotation = statechart.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION);
-
-		if (eventDrivenAnnotation != null) {
+		if (isEventDriven(entry)) {
 			binder.bind(StatemachineHeader.class).to(EventDrivenStatemachineHeader.class);
-			binder.bind(StatemachineSource.class).to(EventDrivenStatemachineSource.class);
-			binder.bind(CExpressionsGenerator.class).to(EventDrivenExpressionCode.class);
+			binder.bind(APIGenerator.class).to(EventDrivenAPIGenerator.class);
+			binder.bind(EventCode.class).to(EventDrivenEventCode.class);
+			binder.bind(InternalFunctionsGenerator.class).to(EventDrivenInternalFunctionsGenerator.class);
 		}
 	}
 
@@ -96,4 +101,23 @@ public class CCodeGeneratorModule implements IGeneratorModule {
 		}
 	}
 
+	protected boolean isEventDriven(GeneratorEntry entry) {
+		Statechart statechart = (Statechart) entry.getElementRef();
+		Annotation eventDrivenAnnotation = statechart.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION);
+		return eventDrivenAnnotation != null;
+	}
+
+	@Provides
+	StatemachineSource getStatemachineSource(Injector injector) {
+		StatemachineSource source = new StatemachineSource();
+		injector.injectMembers(source);
+
+		GeneratorEntry entry = injector.getInstance(GeneratorEntry.class);
+
+		source.getContentProviders().add(injector.getInstance(StatemachineSourceContentProvider.class));
+		if (isEventDriven(entry)) {
+			source.getContentProviders().add(injector.getInstance(EventDrivenStatemachineSourceContentProvider.class));
+		}
+		return source;
+	}
 }
