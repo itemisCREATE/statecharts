@@ -68,6 +68,7 @@ import org.yakindu.sct.model.stext.validation.STextJavaValidator;
 import org.yakindu.sct.model.stext.validation.STextValidationMessages;
 import org.yakindu.sct.test.models.AbstractTestModelsUtil;
 
+import com.google.inject.Exposed;
 import com.google.inject.Inject;
 
 /**
@@ -80,7 +81,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 	@Inject
 	TestCompletenessAssertions checkAvailable;
-	
+
 	/**
 	 * @see STextJavaValidator#checkVariableDefinition(org.yakindu.sct.model.stext.stext.VariableDefinition)
 	 */
@@ -290,7 +291,8 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		String scope = "@CycleBased";
 		EObject model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(model);
-		validationResult.assertError(STextJavaValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);;
+		validationResult.assertError(STextJavaValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
+		;
 
 		scope = "@EventDriven";
 		model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
@@ -404,7 +406,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertOK();
 	}
-	
+
 	@Test
 	public void checkPostFixOperatorOnlyOnVariables() {
 		EObject model = super.parseExpression("ABC.intVar++", Expression.class.getSimpleName(), interfaceScope());
@@ -416,7 +418,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		model = super.parseExpression("5++", Expression.class.getSimpleName(), interfaceScope());
 		validationResult = tester.validate(model);
 		validationResult.assertError(ExpressionsJavaValidator.POSTFIX_ONLY_ON_VARIABLES_CODE);
-		
+
 	}
 
 	/**
@@ -633,7 +635,8 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		EObject model = super.parseExpression(decl, InternalScope.class.getSimpleName());
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertDiagnosticsCount(1);
-		result.assertWarningContains(String.format(STextJavaValidator.DECLARATION_DEPRECATED, "external"));	}
+		result.assertWarningContains(String.format(STextJavaValidator.DECLARATION_DEPRECATED, "external"));
+	}
 
 	@Test
 	public void checkDeprecatedLocalEventDefinition() {
@@ -643,6 +646,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		result.assertDiagnosticsCount(1);
 		result.assertWarningContains(String.format(STextJavaValidator.DECLARATION_DEPRECATED, "local"));
 	}
+
 	/**
 	 * checks that each @Check method of {@link STextJavaValidator} has a @Test
 	 * method in this class with the same name
@@ -844,12 +848,13 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	public void checkImportExists() {
 		Scope context = (Scope) parseExpression("import: \"does.not.exist\"", ImportScope.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(context);
-		validationResult.assertErrorContains(String.format(STextValidationMessages.IMPORT_NOT_RESOLVED_MSG,"does.not.exist"));
+		validationResult
+				.assertErrorContains(String.format(STextValidationMessages.IMPORT_NOT_RESOLVED_MSG, "does.not.exist"));
 	}
 
 	@Test
 	public void checkDuplicateImport() {
-		//Can't be checked here
+		// Can't be checked here
 	}
 
 	@Test
@@ -1008,20 +1013,4 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		result.assertAll(warningMsg("Duplicate"), warningMsg("Duplicate"), errorMsg("Duplicate"),
 				errorMsg("Duplicate"));
 	}
-	
-	@Test
-	public void checkBadEventNamesUsed() {
-		EObject model;
-		AssertableDiagnostics result;
-		String scope;
-		List<String> badNames = Arrays.asList(new String[] {"always", "oncycle"});
-		for (String name : badNames) {		
-			scope = "interface: in event " + name;
-			model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
-			
-			result = tester.validate(model);
-			result.assertAll(errorMsg("internal event"));
-		}
-	}
-		
 }

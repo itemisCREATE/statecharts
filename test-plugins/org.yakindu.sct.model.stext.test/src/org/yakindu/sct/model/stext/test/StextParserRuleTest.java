@@ -11,14 +11,19 @@
  */
 package org.yakindu.sct.model.stext.test;
 
+import static org.junit.Assert.assertTrue;
+
+import java.util.Arrays;
+import java.util.List;
+
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
+import org.yakindu.sct.model.stext.expressions.STextExpressionParser.SyntaxException;
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
@@ -27,6 +32,7 @@ import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
+import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionReaction;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
@@ -66,7 +72,7 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		parseExpression("0xFFB5C5", rule);
 		parseExpression("0XFFB5C5", rule);
 	}
-	
+
 	@Test
 	public void testBinaryLiteral() {
 		String rule = PrimitiveValueExpression.class.getSimpleName();
@@ -149,9 +155,8 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	}
 
 	/**
-	 * {ReactionTrigger} ((triggers+=EventSpec ("," triggers+=EventSpec)* (=>
-	 * '[' guardExpression=Expression ']')?) | ('[' guardExpression=Expression
-	 * ']'));
+	 * {ReactionTrigger} ((triggers+=EventSpec ("," triggers+=EventSpec)* (=> '['
+	 * guardExpression=Expression ']')?) | ('[' guardExpression=Expression ']'));
 	 */
 	@Test
 	public void testReactionTrigger() {
@@ -176,8 +181,8 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	}
 
 	/**
-	 * DefaultTrigger returns sgraph::Trigger: {DefaultTrigger} ('default' |
-	 * 'else') ;
+	 * DefaultTrigger returns sgraph::Trigger: {DefaultTrigger} ('default' | 'else')
+	 * ;
 	 */
 	@Test
 	public void testDefaultTrigger() {
@@ -188,8 +193,8 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	}
 
 	/**
-	 * ReactionEffect returns sgraph::Effect: {ReactionEffect}
-	 * actions+=(Expression | EventRaisingExpression) (=> ';'
+	 * ReactionEffect returns sgraph::Effect: {ReactionEffect} actions+=(Expression
+	 * | EventRaisingExpression) (=> ';'
 	 * actions+=(Expression|EventRaisingExpression) )* ; // (';')?;
 	 */
 	@Test
@@ -208,17 +213,21 @@ public class StextParserRuleTest extends AbstractSTextTest {
 
 	}
 
+	/**
+	 * TransitionReaction: {TransitionReaction} (trigger=StextTrigger)? ('/'
+	 * effect=ReactionEffect)? ('#' (properties+=TransitionProperty)*)?;
+	 * 
+	 */
 	@Test
-	@Ignore("Disabled entry / exit points for release")
 	public void testReactionProperties() {
-//		 String rule = ReactionProperties.class.getSimpleName();
-//		 parseExpression("> ABC.EntryPoint", interfaceScope(), rule);
-//		 parseExpression("ABC.ExitPoint >", interfaceScope(), rule);
+		String rule = TransitionReaction.class.getSimpleName();
+		parseExpression("# > EntryPoint", rule, interfaceScope());
+		parseExpression("# ExitPoint >", rule, interfaceScope());
 	}
 
 	/**
-	 * LocalReaction: (trigger=ReactionTrigger) =>('/' effect=ReactionEffect)
-	 * ('#' properties=ReactionProperties)?;
+	 * LocalReaction: (trigger=ReactionTrigger) =>('/' effect=ReactionEffect) ('#'
+	 * properties=ReactionProperties)?;
 	 */
 	@Test
 	public void tesLocalReaction() {
@@ -237,9 +246,8 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	}
 
 	/**
-	 * {InterfaceScope} 'interface' (name=ID)? ':'
-	 * (declarations+=(EventDeclarartion | VariableDeclaration |
-	 * OperationDeclaration | Entrypoint | Exitpoint))*;
+	 * {InterfaceScope} 'interface' (name=ID)? ':' (declarations+=(EventDeclarartion
+	 * | VariableDeclaration | OperationDeclaration | Entrypoint | Exitpoint))*;
 	 */
 	@Test
 	public void testInterfaceScope() {
@@ -267,12 +275,49 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	}
 
 	/**
-	 * StateScope returns sgraph::Scope: {SimpleScope}
-	 * (declarations+=(LocalReaction | Entrypoint | Exitpoint))*;
+	 * StateScope returns sgraph::Scope: {SimpleScope} (declarations+=(LocalReaction
+	 * | Entrypoint | Exitpoint))*;
 	 */
 	@Test
 	public void testStateScope() {
 
+	}
+
+	/**
+	 * EventDefinition: (direction=Direction)? 'event' name=(ID | Keywords) (':'
+	 * typeSpecifier=TypeSpecifier)?;
+	 */
+	@Test
+	public void testInvalidEventNamesUsed() {
+		String scope;
+		List<String> invalidEventNames = Arrays
+				.asList(new String[] { "after", "always", "oncycle", "exit", "entry", "every" });
+		for (String name : invalidEventNames) {
+			scope = "interface: in event " + name;
+			boolean thrown = false;
+			try {
+				parseExpression(scope, StatechartSpecification.class.getSimpleName());
+			} catch (SyntaxException ex) {
+				thrown = true;
+			}
+			assertTrue(thrown);
+		}
+	}
+
+	/**
+	 * EventDefinition: (direction=Direction)? 'event' name=(ID | Keywords) (':'
+	 * typeSpecifier=TypeSpecifier)?;
+	 * 
+	 */
+	public void testValidEventNamesUsed() {
+		String scope;
+		List<String> validEventNames = Arrays.asList(
+				new String[] { "namespace", "interface", "internal", "import", "event", "local", "in", "out", "const",
+						"var", "readonly", "external", "operation", "default", "else", "raise", "valueof", "active" });
+		for (String name : validEventNames) {
+			scope = "interface: in event " + name;
+			parseExpression(scope, StatechartSpecification.class.getSimpleName());
+		}
 	}
 
 }
