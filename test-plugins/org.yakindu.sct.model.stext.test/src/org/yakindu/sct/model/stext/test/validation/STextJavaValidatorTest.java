@@ -22,8 +22,11 @@ import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.E
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE;
 import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
@@ -1005,5 +1008,20 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		result.assertAll(warningMsg("Duplicate"), warningMsg("Duplicate"), errorMsg("Duplicate"),
 				errorMsg("Duplicate"));
 	}
-
+	
+	@Test
+	public void checkBadEventNamesUsed() {
+		EObject model;
+		AssertableDiagnostics result;
+		String scope;
+		List<String> badNames = Arrays.asList(new String[] {"always", "oncycle"});
+		for (String name : badNames) {		
+			scope = "interface: in event " + name;
+			model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
+			
+			result = tester.validate(model);
+			result.assertAll(errorMsg("internal event"));
+		}
+	}
+		
 }
