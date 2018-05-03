@@ -20,8 +20,9 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.c.IHeaderContentFragment
 
-class EventDrivenStatemachineHeaderContentProvider implements IHeaderContentProvider {
+class EventDrivenStatemachineHeaderContentProvider implements IHeaderContentFragment {
 	@Inject protected extension Naming
 	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess

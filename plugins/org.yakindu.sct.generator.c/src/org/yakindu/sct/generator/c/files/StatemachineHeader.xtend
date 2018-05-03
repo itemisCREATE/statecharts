@@ -16,6 +16,7 @@ import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.c.IHeaderContentFragment
 
 class StatemachineHeader implements org.yakindu.sct.generator.c.IContentTemplate {
 	@Inject protected extension Naming cNaming
@@ -24,9 +25,9 @@ class StatemachineHeader implements org.yakindu.sct.generator.c.IContentTemplate
 	@Inject
 	org.yakindu.sct.generator.c.IGenArtifactConfigurations defaultConfigs
 	
-	protected List<org.yakindu.sct.generator.c.IHeaderContentProvider> contentProviders = newArrayList
+	protected List<IHeaderContentFragment> contentProviders = newArrayList
 	
-	def List<org.yakindu.sct.generator.c.IHeaderContentProvider> getContentProviders() {
+	def List<IHeaderContentFragment> getContentProviders() {
 		contentProviders
 	}
 	

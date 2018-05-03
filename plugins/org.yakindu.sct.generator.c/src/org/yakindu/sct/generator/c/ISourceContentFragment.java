@@ -17,7 +17,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
  * @author rbeckmann
  *
  */
-public interface ISourceContentProvider {
+public interface ISourceContentFragment {
 	public CharSequence fileComment(ExecutionFlow flow, GeneratorEntry entry,
 			IGenArtifactConfigurations artifactConfigs);
 

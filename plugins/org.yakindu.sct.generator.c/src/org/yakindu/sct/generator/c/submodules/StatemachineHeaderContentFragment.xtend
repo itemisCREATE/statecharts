@@ -14,7 +14,6 @@ import com.google.inject.Inject
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
-import org.yakindu.sct.generator.c.IHeaderContentProvider
 import org.yakindu.sct.generator.c.IncludeProvider
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
@@ -29,12 +28,13 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.generator.c.IHeaderContentFragment
 
 /**
  * @author rbeckmann
  *
  */
-class StatemachineHeaderContentProvider implements IHeaderContentProvider {
+class StatemachineHeaderContentFragment implements IHeaderContentFragment {
 	@Inject protected extension IncludeProvider
 	@Inject protected extension Naming cNaming
 	@Inject protected extension Navigation
@@ -78,8 +78,8 @@ class StatemachineHeaderContentProvider implements IHeaderContentProvider {
 		functions
 	}
 	
-	override includes(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	override includes(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
+		includes(artifactConfigs)
 	}
 	
 	override types(ExecutionFlow it, GeneratorEntry entry , IGenArtifactConfigurations artifactConfigs) {

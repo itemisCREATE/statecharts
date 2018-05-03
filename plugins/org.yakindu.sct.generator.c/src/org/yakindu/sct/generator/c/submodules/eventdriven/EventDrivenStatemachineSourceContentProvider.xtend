@@ -13,7 +13,6 @@ package org.yakindu.sct.generator.c.submodules.eventdriven
 import com.google.inject.Inject
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
-import org.yakindu.sct.generator.c.ISourceContentProvider
 import org.yakindu.sct.generator.c.extensions.EventNaming
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.c.extensions.Navigation
@@ -22,11 +21,12 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
+import org.yakindu.sct.generator.c.ISourceContentFragment
 
 /**
  * @author René Beckmann
  */
-class EventDrivenStatemachineSourceContentProvider implements ISourceContentProvider {
+class EventDrivenStatemachineSourceContentProvider implements ISourceContentFragment {
 	@Inject extension Navigation
 	@Inject extension Naming
 	@Inject protected extension ICodegenTypeSystemAccess

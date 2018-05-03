@@ -14,15 +14,15 @@ import com.google.inject.Inject
 import java.util.List
 import org.yakindu.sct.generator.c.IContentTemplate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
-import org.yakindu.sct.generator.c.ISourceContentProvider
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.c.ISourceContentFragment
 
 class StatemachineSource implements IContentTemplate {
 	@Inject protected extension INamingService
 
-	val protected List<ISourceContentProvider> contentProviders = newArrayList();
+	val protected List<ISourceContentFragment> contentProviders = newArrayList();
 		
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) { 
 		initializeNamingService

@@ -91,7 +91,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		if (it.operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal(it)) {
 			'''«varRef.code» = fmod(«varRef.code»,«expression.code»)'''
 		} else
-			super.code(it)
+			super._code(it)
 	}
 
 	def dispatch CharSequence code(NumericalMultiplyDivideExpression expression) {
