@@ -31,6 +31,7 @@ import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
@@ -59,8 +60,45 @@ class SExecExtensions {
 		return ret;
 	}
 	
+	def Scope scope(Declaration it) {
+		if (eContainer instanceof Scope) eContainer as Scope
+		else null
+	}
+	
+	def getAllEvents(ExecutionFlow it) {
+		return scopes.map[declarations.filter(EventDefinition)].reduce[i1, i2 | i1 + i2]
+	}
+	
+	def operations(ExecutionFlow it) {
+		scopes.map[operations].flatten
+	}
+	
+	def Scope getTimeEventScope(ExecutionFlow it) {
+		return 	scopes.filter[declarations.filter( typeof(TimeEvent) ).size > 0].head
+	}
+	
 	def isTimed (ExecutionFlow it) {
 		scopes.filter[declarations.filter( typeof(TimeEvent) ).size > 0].size > 0
+	}
+	
+	def getStatechartScopes(ExecutionFlow it) {
+		scopes.filter(typeof(StatechartScope))
+	}
+	
+	def operations(Scope it) {
+		declarations.filter(typeof(OperationDefinition));
+	}
+	
+	def hasOperations(Scope it) {
+		!operations.isEmpty;
+	}
+	
+	def indexOf(TimeEvent it) {
+		scope.declarations.filter(typeof(TimeEvent)).toList.indexOf(it);
+	}
+	
+	def getInterfaces(ExecutionFlow it) {
+		scopes.filter(typeof(StatechartScope)).filter[!(it instanceof ImportScope)]
 	}
 	
 	def hasOperationCallbacks (ExecutionFlow it){

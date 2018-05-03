@@ -19,23 +19,5 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 
 class Navigation extends org.yakindu.sct.generator.c.extensions.Navigation {
 	
-	def getStatechartScopes(ExecutionFlow it) {
-		scopes.filter(typeof(StatechartScope))
-	}
 	
-	def operations(Scope it) {
-		declarations.filter(typeof(OperationDefinition));
-	}
-	
-	def hasOperations(Scope it) {
-		!operations.isEmpty;
-	}
-	
-	def indexOf(TimeEvent it) {
-		scope.declarations.filter(typeof(TimeEvent)).toList.indexOf(it);
-	}
-	
-	def getInterfaces(ExecutionFlow it) {
-		scopes.filter(typeof(StatechartScope)).filter[!(it instanceof ImportScope)]
-	}
 }

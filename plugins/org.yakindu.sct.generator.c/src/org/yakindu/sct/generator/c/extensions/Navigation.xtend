@@ -22,37 +22,4 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 class Navigation extends SExecExtensions {
 	
-	def dispatch ExecutionFlow flow(Scope scope) {
-		if (scope.eContainer instanceof ExecutionFlow) scope.eContainer as ExecutionFlow
-		else null
-	}
-	
-	def dispatch ExecutionFlow flow(Declaration it) {
-		scope?.flow
-	}
-	
-	def dispatch ExecutionFlow flow(EObject it) {
-		eContainer.flow
-	}
-	
-	def dispatch ExecutionFlow flow(ExecutionFlow it) {
-		it
-	}
-	
-	def Scope scope(Declaration it) {
-		if (eContainer instanceof Scope) eContainer as Scope
-		else null
-	}
-	
-	def getAllEvents(ExecutionFlow it) {
-		return scopes.map[declarations.filter(EventDefinition)].reduce[i1, i2 | i1 + i2]
-	}
-	
-	def operations(ExecutionFlow it) {
-		scopes.fold(new ArrayList<OperationDefinition>(), [ l, s | l.addAll(s.declarations.filter( typeof(OperationDefinition))) return l ])
-	}
-	
-	def Scope getTimeEventScope(ExecutionFlow it) {
-		return 	scopes.filter[declarations.filter( typeof(TimeEvent) ).size > 0].head
-	}
 }
