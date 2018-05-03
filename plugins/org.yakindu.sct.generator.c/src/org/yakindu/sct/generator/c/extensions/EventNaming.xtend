@@ -12,9 +12,8 @@ package org.yakindu.sct.generator.c.extensions
 
 import com.google.inject.Inject
 import org.yakindu.base.types.Event
-import org.yakindu.sct.generator.c.extensions.Naming
-import org.yakindu.sct.generator.c.extensions.Navigation
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 
 /**
@@ -22,7 +21,7 @@ import org.yakindu.sct.model.sexec.naming.INamingService
  */
 class EventNaming {
 	@Inject extension Naming
-	@Inject extension Navigation
+	@Inject extension SExecExtensions
 	@Inject extension INamingService
 
 	def eventEnumMemberName(Event it) {

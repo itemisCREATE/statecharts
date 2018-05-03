@@ -20,6 +20,7 @@ import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
@@ -33,7 +34,7 @@ import static org.eclipse.xtext.util.Strings.*
 class StatemachineImplementation implements IContentTemplate {
 	
 	@Inject protected extension CppNaming
-	@Inject protected extension Navigation
+	@Inject protected extension SExecExtensions
 	@Inject protected extension FlowCode
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension ICodegenTypeSystemAccess

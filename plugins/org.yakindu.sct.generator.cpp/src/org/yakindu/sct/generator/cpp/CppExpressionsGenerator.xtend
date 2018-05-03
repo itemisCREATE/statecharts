@@ -15,18 +15,19 @@ import com.google.inject.Inject
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.c.CExpressionsGenerator
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.yakindu.base.expressions.expressions.StringLiteral
 
 class CppExpressionsGenerator extends CExpressionsGenerator {
 
 	@Inject protected extension CppNaming
-	@Inject protected extension Navigation
+	@Inject protected extension SExecExtensions
 	@Inject protected extension ITypeSystem
 	@Inject protected extension INamingService
 

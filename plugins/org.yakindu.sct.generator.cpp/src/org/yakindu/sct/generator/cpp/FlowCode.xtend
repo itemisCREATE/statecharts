@@ -24,13 +24,14 @@ import org.yakindu.sct.model.sexec.ScheduleTimeEvent
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 
 class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	
 	@Inject extension CppNaming naming
 	@Inject extension CppExpressionsGenerator expressions
-	@Inject extension Navigation
+	@Inject extension SExecExtensions
 	@Inject extension INamingService
 	
 	override dispatch CharSequence code(SaveHistory it) '''

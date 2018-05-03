@@ -17,6 +17,7 @@ import org.yakindu.sct.generator.c.IGenArtifactConfigurations.GenArtifactConfigu
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Statechart
 
@@ -36,7 +37,7 @@ class CppGenerator implements IExecutionFlowGenerator {
 	@Inject extension StatemachineInterface statemachineInterfaceContent
 	@Inject extension StatemachineHeader statemachineHeaderContent
 	@Inject extension StatemachineImplementation statemachineSourceContent
-	@Inject extension Navigation
+	@Inject extension SExecExtensions
 	@Inject extension CppNaming
 	@Inject extension ICoreLibraryHelper
 

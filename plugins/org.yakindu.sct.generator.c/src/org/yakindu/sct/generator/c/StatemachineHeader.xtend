@@ -15,10 +15,10 @@ import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
-import org.yakindu.sct.generator.c.extensions.Navigation
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
@@ -35,7 +35,7 @@ import static org.eclipse.xtext.util.Strings.*
 class StatemachineHeader implements IContentTemplate {
 	@Inject protected extension IncludeProvider
 	@Inject protected extension Naming cNaming
-	@Inject protected extension Navigation
+	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension GenmodelEntries
 	@Inject protected extension INamingService
