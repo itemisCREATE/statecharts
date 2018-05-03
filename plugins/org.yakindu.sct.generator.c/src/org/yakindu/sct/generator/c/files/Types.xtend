@@ -8,9 +8,12 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.c
+package org.yakindu.sct.generator.c.files
 
 import com.google.inject.Inject
+import org.yakindu.sct.generator.c.CGeneratorConstants
+import org.yakindu.sct.generator.c.IContentTemplate
+import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -61,8 +64,8 @@ class Types implements IContentTemplate {
 			#endif
 		#endif
 		
-		#define bool_true true
-		#define bool_false false
+		#define «CGeneratorConstants.TRUE» true
+		#define «CGeneratorConstants.FALSE» false
 		
 		#endif /* «typesModule.define»_H_ */
 	'''
