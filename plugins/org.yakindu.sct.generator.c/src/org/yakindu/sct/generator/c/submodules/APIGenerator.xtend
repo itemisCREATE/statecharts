@@ -15,8 +15,8 @@ import com.google.inject.Singleton
 import org.eclipse.xtext.util.Strings
 import org.yakindu.sct.generator.c.FlowCode
 import org.yakindu.sct.generator.c.extensions.Naming
-import org.yakindu.sct.generator.c.extensions.Navigation
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 
@@ -30,7 +30,7 @@ class APIGenerator {
 	@Inject protected extension FlowCode
 	@Inject protected extension INamingService
 	@Inject protected extension Naming
-	@Inject protected extension Navigation
+	@Inject protected extension SExecExtensions
 	@Inject protected extension StateVectorExtensions
 
 	def runCycle(ExecutionFlow it) {

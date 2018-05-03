@@ -75,6 +75,15 @@ class SExecExtensions {
 		return 	scopes.filter[declarations.filter(TimeEvent).size > 0].head
 	}
 	
+	def Scope scope(Declaration it) {
+		if (eContainer instanceof Scope) eContainer as Scope
+		else null
+	}
+	
+	def getStatechartScopes(ExecutionFlow it) {
+		scopes.filter(typeof(StatechartScope))
+	}
+	
 	def isTimed (ExecutionFlow it) {
 		!timeEvents.empty
 	}
@@ -97,6 +106,10 @@ class SExecExtensions {
 	
 	def getInterfaces(ExecutionFlow it) {
 		scopes.filter(StatechartScope).filter[!(it instanceof ImportScope)]
+	}
+	
+	def indexOf(TimeEvent it) {
+		scope.declarations.filter(typeof(TimeEvent)).toList.indexOf(it);
 	}
 	
 	def hasOperationCallbacks (ExecutionFlow it){
@@ -207,6 +220,30 @@ class SExecExtensions {
 	
 	def boolean isInEvent(EventDefinition it) {
 		direction === Direction::IN
+	}
+	
+	def getInterfaces(ExecutionFlow it) {
+		scopes.filter(typeof(StatechartScope)).filter[!(it instanceof ImportScope)]
+	}
+	
+	def operations(Scope it) {
+		declarations.filter(typeof(OperationDefinition));
+	}
+	
+	def operations(ExecutionFlow it) {
+		scopes.map[operations].flatten
+	}
+	
+	def hasOperations(Scope it) {
+		!operations.isEmpty;
+	}
+	
+	def getAllEvents(ExecutionFlow it) {
+		return scopes.map[declarations.filter(EventDefinition)].reduce[i1, i2 | i1 + i2]
+	}
+	
+	def Scope getTimeEventScope(ExecutionFlow it) {
+		return 	scopes.filter[declarations.filter( typeof(TimeEvent) ).size > 0].head
 	}
 	
 	def getInterfaceScopes(ExecutionFlow it) {

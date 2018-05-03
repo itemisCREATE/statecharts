@@ -14,10 +14,10 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.yakindu.sct.generator.c.CGeneratorConstants
 import org.yakindu.sct.generator.c.extensions.Naming
-import org.yakindu.sct.generator.c.extensions.Navigation
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 
@@ -27,7 +27,7 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
  */
 @Singleton // Guice
 class EventCode {
-	@Inject protected extension Navigation
+	@Inject protected extension SExecExtensions
 	@Inject protected extension Naming
 	@Inject protected extension ICodegenTypeSystemAccess
 	

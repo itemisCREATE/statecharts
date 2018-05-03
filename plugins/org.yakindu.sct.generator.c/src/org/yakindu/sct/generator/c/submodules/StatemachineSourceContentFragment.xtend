@@ -14,18 +14,18 @@ import com.google.inject.Inject
 import org.yakindu.sct.generator.c.ConstantInitializationResolver
 import org.yakindu.sct.generator.c.FlowCode
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.generator.c.ISourceContentFragment
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
-import org.yakindu.sct.generator.c.extensions.Navigation
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.generator.c.ISourceContentFragment
 
 /**
  * @author rbeckmann
@@ -34,7 +34,7 @@ import org.yakindu.sct.generator.c.ISourceContentFragment
 class StatemachineSourceContentFragment implements ISourceContentFragment {
 	@Inject protected extension Naming
 	@Inject protected extension GenmodelEntries
-	@Inject protected extension Navigation
+	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension INamingService
 	@Inject protected extension FlowCode

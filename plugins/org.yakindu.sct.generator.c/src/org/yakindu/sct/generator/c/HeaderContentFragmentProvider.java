@@ -15,7 +15,7 @@ import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN
 import org.yakindu.base.types.Annotation;
 import org.yakindu.sct.generator.c.files.StatemachineHeader;
 import org.yakindu.sct.generator.c.submodules.StatemachineHeaderContentFragment;
-import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenStatemachineHeaderContentProvider;
+import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenStatemachineHeaderFragment;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
 
@@ -39,7 +39,7 @@ public class HeaderContentFragmentProvider implements Provider<StatemachineHeade
 		GeneratorEntry entry = injector.getInstance(GeneratorEntry.class);
 
 		if (isEventDriven(entry)) {
-			source.getContentProviders().add(injector.getInstance(EventDrivenStatemachineHeaderContentProvider.class));
+			source.getContentProviders().add(injector.getInstance(EventDrivenStatemachineHeaderFragment.class));
 		}
 
 		source.getContentProviders().add(injector.getInstance(StatemachineHeaderContentFragment.class));

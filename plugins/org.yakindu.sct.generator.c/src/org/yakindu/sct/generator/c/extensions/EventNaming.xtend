@@ -16,6 +16,7 @@ import org.yakindu.base.types.Event
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 
 /**
  * @author René Beckmann
