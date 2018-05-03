@@ -8,41 +8,52 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.generator.c.eventdriven
+package org.yakindu.sct.generator.c.submodules.eventdriven
 
 import com.google.inject.Inject
+import org.yakindu.sct.generator.c.CGeneratorConstants
+import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.extensions.EventNaming
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sgen.GeneratorEntry
 
-/**
- * @author René Beckmann
- */
-class StatechartEventsHeader {
+class EventDrivenStatemachineHeaderContentProvider implements IHeaderContentProvider {
 	@Inject protected extension Naming
 	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension INamingService
+	@Inject extension EventNaming
 	
-	@Inject extension EventNaming eventNaming
-	
-	protected static final int BUFFER_SIZE = 20
-	
-	def content(ExecutionFlow it) {
-		if(!hasLocalEvents) {
-			return ''''''
-		}
+	override defines(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
 		'''
 		#ifndef «bufferSize»
-		#define «bufferSize» «BUFFER_SIZE»
+		#define «bufferSize» «CGeneratorConstants.EVENT_QUEUE_BUFFER_SIZE»
 		#endif
 		#ifndef SC_INVALID_EVENT_VALUE
 		#define SC_INVALID_EVENT_VALUE 0
 		#endif
-		
+		'''
+	}
+	
+	override fileComment(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
+		''''''
+	}
+	
+	override functions(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
+		''''''
+	}
+	
+	override includes(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
+		''''''
+	}
+	
+	override types(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
+		'''
+		«IF hasLocalEvents»
 		«generateEventsEnum»
 		
 		«generateEventValueUnion»
@@ -50,6 +61,7 @@ class StatechartEventsHeader {
 		«generateEventStruct»
 		
 		«generateEventQueue»
+		«ENDIF»
 		'''
 	}
 	
@@ -112,7 +124,4 @@ class StatechartEventsHeader {
 		'''
 	}
 	
-	def generateHeaderDefineGuard(ExecutionFlow it) {
-		'''SCT_EVENTS_«name.toUpperCase»_H'''
-	}
 }

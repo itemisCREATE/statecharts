@@ -19,15 +19,21 @@ import static org.yakindu.sct.model.sexec.transformation.IModelSequencer.ADD_TRA
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION;
 
 import org.yakindu.base.types.Annotation;
-import org.yakindu.sct.generator.c.eventdriven.EventDrivenStatemachineHeader;
-import org.yakindu.sct.generator.c.eventdriven.EventDrivenStatemachineSourceContentProvider;
-import org.yakindu.sct.generator.c.extensions.APIGenerator;
-import org.yakindu.sct.generator.c.extensions.EventCode;
-import org.yakindu.sct.generator.c.extensions.EventDrivenAPIGenerator;
-import org.yakindu.sct.generator.c.extensions.EventDrivenEventCode;
-import org.yakindu.sct.generator.c.extensions.EventDrivenInternalFunctionsGenerator;
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries;
-import org.yakindu.sct.generator.c.extensions.InternalFunctionsGenerator;
+import org.yakindu.sct.generator.c.files.StatemachineHeader;
+import org.yakindu.sct.generator.c.files.StatemachineSource;
+import org.yakindu.sct.generator.c.submodules.APIGenerator;
+import org.yakindu.sct.generator.c.submodules.EventCode;
+import org.yakindu.sct.generator.c.submodules.InternalFunctionsGenerator;
+import org.yakindu.sct.generator.c.submodules.StatechartTypes;
+import org.yakindu.sct.generator.c.submodules.StatemachineHeaderContentProvider;
+import org.yakindu.sct.generator.c.submodules.StatemachineSourceContentProvider;
+import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenAPIGenerator;
+import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenEventCode;
+import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenInternalFunctionsGenerator;
+import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenStatechartTypes;
+import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenStatemachineHeaderContentProvider;
+import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenStatemachineSourceContentProvider;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.IGeneratorModule;
@@ -84,10 +90,10 @@ public class CCodeGeneratorModule implements IGeneratorModule {
 
 	protected void configureEventDriven(GeneratorEntry entry, Binder binder) {
 		if (isEventDriven(entry)) {
-			binder.bind(StatemachineHeader.class).to(EventDrivenStatemachineHeader.class);
 			binder.bind(APIGenerator.class).to(EventDrivenAPIGenerator.class);
 			binder.bind(EventCode.class).to(EventDrivenEventCode.class);
 			binder.bind(InternalFunctionsGenerator.class).to(EventDrivenInternalFunctionsGenerator.class);
+			binder.bind(StatechartTypes.class).to(EventDrivenStatechartTypes.class);
 		}
 	}
 
@@ -119,5 +125,21 @@ public class CCodeGeneratorModule implements IGeneratorModule {
 			source.getContentProviders().add(injector.getInstance(EventDrivenStatemachineSourceContentProvider.class));
 		}
 		return source;
+	}
+
+	@Provides
+	StatemachineHeader getStatemachineHeader(Injector injector) {
+		StatemachineHeader header = new StatemachineHeader();
+		injector.injectMembers(header);
+
+		GeneratorEntry entry = injector.getInstance(GeneratorEntry.class);
+
+		header.getContentProviders().add(injector.getInstance(StatemachineHeaderContentProvider.class));
+
+		if (isEventDriven(entry)) {
+			header.getContentProviders().add(injector.getInstance(EventDrivenStatemachineHeaderContentProvider.class));
+		}
+
+		return header;
 	}
 }

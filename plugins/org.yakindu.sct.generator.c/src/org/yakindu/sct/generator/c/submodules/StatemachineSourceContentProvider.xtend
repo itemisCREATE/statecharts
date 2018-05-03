@@ -8,14 +8,15 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.c
+package org.yakindu.sct.generator.c.submodules
 
 import com.google.inject.Inject
-import org.yakindu.sct.generator.c.extensions.APIGenerator
+import org.yakindu.sct.generator.c.ConstantInitializationResolver
+import org.yakindu.sct.generator.c.FlowCode
+import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.generator.c.ISourceContentProvider
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
-import org.yakindu.sct.generator.c.extensions.InterfaceFunctionsGenerator
-import org.yakindu.sct.generator.c.extensions.InternalFunctionsGenerator
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.c.extensions.Navigation
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
@@ -69,7 +70,7 @@ class StatemachineSourceContentProvider implements ISourceContentProvider {
 	override CharSequence declarations(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		'''
 		«functionPrototypes»
-				
+		
 		«constantDefinitions»
 		'''
 	}
