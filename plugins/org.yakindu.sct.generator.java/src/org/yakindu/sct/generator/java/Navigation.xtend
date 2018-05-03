@@ -67,29 +67,21 @@ class Navigation extends SExecExtensions {
 		scope.declarations.filter(typeof(EventDefinition))
 	}
 
-	def getOperations(Scope it) {
-		declarations.filter(typeof(OperationDefinition));
-	}
-
-	def hasOperations(Scope it) {
-		!operations.isEmpty;
-	}
-
-	def dispatch scope(Property it) {
+	def dispatch interfaceScope(Property it) {
 		if (eContainer instanceof InterfaceScope)
 			eContainer as InterfaceScope
 		else
 			null
 	}
 
-	def dispatch scope(Event it) {
+	def dispatch interfaceScope(Event it) {
 		if (eContainer instanceof InterfaceScope)
 			eContainer as InterfaceScope
 		else
 			null
 	}
 
-	def dispatch scope(OperationDefinition it) {
+	def dispatch interfaceScope(OperationDefinition it) {
 		if (eContainer instanceof InterfaceScope)
 			eContainer as InterfaceScope
 		else
