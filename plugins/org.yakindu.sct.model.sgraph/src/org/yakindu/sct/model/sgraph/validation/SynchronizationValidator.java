@@ -35,55 +35,65 @@ import org.yakindu.sct.model.sgraph.Vertex;
  */
 public class SynchronizationValidator extends AbstractSGraphValidator {
 
-	private static final String SYNCHRONIZATION_TRANSITION_OUTGOING_MSG = "A synchronization must have an outgoing transition.";
-	public static final String SYNCHRONIZATION_TRANSITION_OUTGOING_CODE = "synchronization.out.transition";
 
-	private static final String SYNCHRONIZATION_TRANSITION_COUNT_MSG = "A synchronization must have at least two incoming or two outgoing transitions.";
-	public static final String SYNCHRONIZATION_TRANSITION_COUNT_CODE = "synchronization.transition";
-
-	private static final String SYNCHRONIZATION_SOURCE_ORTHOGONAL_MSG = "The source states of a synchronization must be orthogonal.";
-	public static final String SYNCHRONIZATION_SOURCE_ORTHOGONAL_CODE = "synchronization.source.orthogonal";
-
-	private static final String SYNCHRONIZATION_TARGET_ORTHOGONAL_MSG = "The target states of a synchronization must be orthogonal.";
-	public static final String SYNCHRONIZATION_TARGET_ORTHOGONAL_CODE = "synchronization.target.orthogonal";
-
-	private static final String SYNCHRONIZATION_SOURCE_TARGET_PARENT_REGION_MSG = "A synchronization's source- and parent states common ancestor has to be a region.";
-	public static final String SYNCHRONIZATION_SOURCE_TARGET_PARENT_REGION_CODE = "synchronization.source.target.ancestor";
+	private static final String SYNCHRONIZATION_TRANSITIONS_REQUIRE_N_OUT_MSG = "A synchronization must have at least one outgoing transition.";
+	public static final String SYNCHRONIZATION_TRANSITIONS_REQUIRE_N_OUT_CODE = "synchronization.transitions.RequireNOut";
 
 	@Check(CheckType.FAST)
-	public void synchronizationOutgoingTransitionCount(Synchronization sync) {
+	public void checkSynchronizationTransitionsRequireNOut(Synchronization sync) {
 		if (sync.getOutgoingTransitions().size() == 0) {
-			error(SYNCHRONIZATION_TRANSITION_OUTGOING_MSG, sync, null, -1, SYNCHRONIZATION_TRANSITION_OUTGOING_CODE);
+			error(SYNCHRONIZATION_TRANSITIONS_REQUIRE_N_OUT_MSG, sync, null, -1, SYNCHRONIZATION_TRANSITIONS_REQUIRE_N_OUT_CODE);
 		}
 	}
 
+
+	
+	private static final String SYNCHRONIZATION_TRANSITIONS_REQUIRE_MULTIPLE_IN_OR_MULTIPLE_OUT_MSG = "A synchronization must have either multiple incoming or multiple outgoing transitions.";
+	public static final String SYNCHRONIZATION_TRANSITIONS_REQUIRE_MULTIPLE_IN_OR_MULTIPLE_OUT_CODE = "synchronization.transitions.RequireMultipleInOrMultipleOut";
+	
 	@Check(CheckType.FAST)
-	public void synchronizationTransitionCount(Synchronization sync) {
+	public void checkSynchronizationTransitionsRequireMultipleInOrMultipleOut(Synchronization sync) {
 		int in = sync.getIncomingTransitions().size();
 		int out = sync.getOutgoingTransitions().size();
 		if (in < 2 && out < 2) {
-			error(SYNCHRONIZATION_TRANSITION_COUNT_MSG, sync, null, -1, SYNCHRONIZATION_TRANSITION_COUNT_CODE);
+			error(SYNCHRONIZATION_TRANSITIONS_REQUIRE_MULTIPLE_IN_OR_MULTIPLE_OUT_MSG, sync, null, -1, SYNCHRONIZATION_TRANSITIONS_REQUIRE_MULTIPLE_IN_OR_MULTIPLE_OUT_CODE);
 		}
 	}
 
+
+	
+	private static final String SYNCHRONIZATION_REQUIRES_ORTHOGONAL_SOURCE_STATES_MSG = "The source states of a synchronization must be orthogonal.";
+	public static final String SYNCHRONIZATION_REQUIRES_ORTHOGONAL_SOURCE_STATES_CODE = "synchronization.RequiresOrthogonalSourceStates";
+
 	@Check
-	public void orthogonalSourceStates(Synchronization sync) {
+	public void checkSynchronizationRequiresOrthogonalSourceStates(Synchronization sync) {
 		List<Vertex> sourceVertices = sources(sync.getIncomingTransitions());
 		if (!areOrthogonal(sourceVertices)) {
-			error(SYNCHRONIZATION_SOURCE_ORTHOGONAL_MSG, sync, null, -1, SYNCHRONIZATION_SOURCE_ORTHOGONAL_CODE);
+			error(SYNCHRONIZATION_REQUIRES_ORTHOGONAL_SOURCE_STATES_MSG, sync, null, -1, SYNCHRONIZATION_REQUIRES_ORTHOGONAL_SOURCE_STATES_CODE);
 		}
 	}
 
+	
+	
+	private static final String SYNCHRONIZATION_REQUIRES_ORTHOGONAL_TARGET_STATES_MSG = "The target states of a synchronization must be orthogonal.";
+	public static final String SYNCHRONIZATION_REQUIRES_ORTHOGONAL_TARGET_STATES_CODE = "synchronization.RequiresOrthogonalTargetStates";
+
 	@Check
-	public void orthogonalTargetStates(Synchronization sync) {
+	public void checkSynchronizationRequiresOrthogonalTargetStates(Synchronization sync) {
 		List<Vertex> sourceVertices = targets(sync.getOutgoingTransitions());
 		if (!areOrthogonal(sourceVertices)) {
-			error(SYNCHRONIZATION_TARGET_ORTHOGONAL_MSG, sync, null, -1, SYNCHRONIZATION_TARGET_ORTHOGONAL_CODE);
+			error(SYNCHRONIZATION_REQUIRES_ORTHOGONAL_TARGET_STATES_MSG, sync, null, -1, SYNCHRONIZATION_REQUIRES_ORTHOGONAL_TARGET_STATES_CODE);
 		}
 	}
 
+
+	
+	private static final String SYNCHRONIZATION_REQUIRES_SOURCE_STATES_ORTHOGONAL_TO_TARGET_STATES_MSG = "A synchronization's source states must be orthogonal to it's target states. (Common ancestor must be a region.)";
+	public static final String SYNCHRONIZATION_REQUIRES_SOURCE_STATES_ORTHOGONAL_TO_TARGET_STATES_CODE = "synchronization.RequiresSourceStatesOrthogonalToTargetStates";
+
 	@Check
-	public void orthogonalSynchronizedTransition(Synchronization sync) {
+	public void checkSynchronizationRequiresSourceStatesOrthogonalToTargetStates(Synchronization sync) {
+		
 		List<Transition> incoming = sync.getIncomingTransitions();
 		List<List<EObject>> inAncestorsList = new ArrayList<>();
 		for (Transition trans : incoming) {
@@ -116,12 +126,12 @@ public class SynchronizationValidator extends AbstractSGraphValidator {
 			}
 		}
 		for (Transition trans : inOrthogonal) {
-			error(SYNCHRONIZATION_SOURCE_TARGET_PARENT_REGION_MSG, trans, null, -1,
-					SYNCHRONIZATION_SOURCE_TARGET_PARENT_REGION_CODE);
+			error(SYNCHRONIZATION_REQUIRES_SOURCE_STATES_ORTHOGONAL_TO_TARGET_STATES_MSG, trans, null, -1,
+					SYNCHRONIZATION_REQUIRES_SOURCE_STATES_ORTHOGONAL_TO_TARGET_STATES_CODE);
 		}
 		for (Transition trans : outOrthogonal) {
-			error(SYNCHRONIZATION_SOURCE_TARGET_PARENT_REGION_MSG, trans, null, -1,
-					SYNCHRONIZATION_SOURCE_TARGET_PARENT_REGION_CODE);
+			error(SYNCHRONIZATION_REQUIRES_SOURCE_STATES_ORTHOGONAL_TO_TARGET_STATES_MSG, trans, null, -1,
+					SYNCHRONIZATION_REQUIRES_SOURCE_STATES_ORTHOGONAL_TO_TARGET_STATES_CODE);
 		}
 
 	}

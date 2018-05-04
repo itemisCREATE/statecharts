@@ -34,13 +34,13 @@ public class SynchronizationValidatorTest extends AbstractSGraphValidatorTest {
 		Statechart statechart = loadStatechart("SynchronizationTransitionCount.sct");
 		AssertableDiagnostics diagnostics = tester.validate(statechart);
 		diagnostics.assertDiagnosticsCount(2);
-		diagnostics.assertAny(errorCode(SYNCHRONIZATION_TRANSITION_COUNT_CODE));
+		diagnostics.assertAny(errorCode(SYNCHRONIZATION_TRANSITIONS_REQUIRE_MULTIPLE_IN_OR_MULTIPLE_OUT_CODE));
 	}
 
 	@Test
 	public void synchronizationOutgoingTransitionCount() {
 		Statechart statechart = loadStatechart("SyncOutgoingTransition.sct");
-		tester.validate(statechart).assertError(SYNCHRONIZATION_TRANSITION_OUTGOING_CODE);
+		tester.validate(statechart).assertError(SYNCHRONIZATION_TRANSITIONS_REQUIRE_N_OUT_CODE);
 	}
 
 	@Test
@@ -66,8 +66,8 @@ public class SynchronizationValidatorTest extends AbstractSGraphValidatorTest {
 		Statechart statechart = loadStatechart("NotOrthogonalRegion01.sct");
 		AssertableDiagnostics diagnostics = tester.validate(statechart);
 		diagnostics.assertDiagnosticsCount(2);
-		diagnostics.assertAny(errorCode(SYNCHRONIZATION_SOURCE_ORTHOGONAL_CODE));
-		diagnostics.assertAny(errorCode(SYNCHRONIZATION_TARGET_ORTHOGONAL_CODE));
+		diagnostics.assertAny(errorCode(SYNCHRONIZATION_REQUIRES_ORTHOGONAL_SOURCE_STATES_CODE));
+		diagnostics.assertAny(errorCode(SYNCHRONIZATION_REQUIRES_ORTHOGONAL_TARGET_STATES_CODE));
 	}
 
 	@Test
@@ -75,14 +75,14 @@ public class SynchronizationValidatorTest extends AbstractSGraphValidatorTest {
 		Statechart statechart = loadStatechart("NotOrthogonalRegion02.sct");
 		AssertableDiagnostics diagnostics = tester.validate(statechart);
 		diagnostics.assertDiagnosticsCount(2);
-		diagnostics.assertAny(errorCode(SYNCHRONIZATION_SOURCE_ORTHOGONAL_CODE));
-		diagnostics.assertAny(errorCode(SYNCHRONIZATION_TARGET_ORTHOGONAL_CODE));
+		diagnostics.assertAny(errorCode(SYNCHRONIZATION_REQUIRES_ORTHOGONAL_SOURCE_STATES_CODE));
+		diagnostics.assertAny(errorCode(SYNCHRONIZATION_REQUIRES_ORTHOGONAL_TARGET_STATES_CODE));
 	}
 
 	@Test
 	public void orthogonalSynchronizedTransition() {
 		Statechart statechart = loadStatechart("NotOrthogonalRegion03.sct");
-		tester.validate(statechart).assertAny(errorCode(SYNCHRONIZATION_SOURCE_TARGET_PARENT_REGION_CODE));
+		tester.validate(statechart).assertAny(errorCode(SYNCHRONIZATION_REQUIRES_SOURCE_STATES_ORTHOGONAL_TO_TARGET_STATES_CODE));
 	}
 
 	protected Statechart loadStatechart(String modelName) {
