@@ -21,11 +21,11 @@ import org.yakindu.sct.model.sgraph.FinalState;
  */
 public class FinalStateValidator extends AbstractSGraphValidator {
 
-	private static final String FINAL_STATE_NO_OUT_TRANSITION_MSG = "A final state should have no outgoing transition.";
-	public static final String FINAL_STATE_NO_OUT_TRANSITION_CODE = "finalstate.out.transition";
+	private static final String FINAL_STATE_NO_OUT_TRANSITION_MSG = "A final state must not have outgoing transitions.";
+	public static final String FINAL_STATE_NO_OUT_TRANSITION_CODE = "finalstate.NoOutTransitions";
 
 	@Check(CheckType.FAST)
-	public void finalStateWithOutgoingTransition(FinalState finalState) {
+	public void checkNoOutTransitions(FinalState finalState) {
 		if ((finalState.getOutgoingTransitions().size() > 0)) {
 			warning(FINAL_STATE_NO_OUT_TRANSITION_MSG, finalState, null, -1, FINAL_STATE_NO_OUT_TRANSITION_CODE);
 		}

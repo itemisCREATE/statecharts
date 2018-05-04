@@ -24,19 +24,37 @@ import com.google.inject.Inject;
 
 /**
  *
- * Tests for {@link FinalStateValidator}
- *
+ * Tests for {@link FinalStateValidator#checkNoOutTransitions}
+ * 
  */
-public class FinalStateValidatorTest extends AbstractSGraphValidatorTest {
+public class FinalStateNoOutTransitionsValidatorTest extends AbstractSGraphValidatorTest {
 
 	@Inject
 	private SGraphJavaValidatorTester<FinalStateValidator> tester;
 
 	/**
-	 * A final state should have no outgoing transitions
+	 * If a final state does not have any outgoing transitions, the model does not
+	 * contain any diagnostics.
 	 */
 	@Test
-	public void finalStateWithOutgoingTransition() {
+	public void testNoOutTransitionsOK() {
+		Statechart statechart = factory.createStatechart();
+		Region region = factory.createRegion();
+		statechart.getRegions().add(region);
+		FinalState finalState = factory.createFinalState();
+		region.getVertices().add(finalState);
+		State state = factory.createState();
+		region.getVertices().add(state);
+		createTransition(state, finalState);
+
+		tester.validate(finalState).assertOK();
+	}
+
+	/**
+	 * If a final state does have one outgoing transition, one warning is expected.
+	 */
+	@Test
+	public void testSingleOutTransitionWarning() {
 		Statechart statechart = factory.createStatechart();
 		Region region = factory.createRegion();
 		statechart.getRegions().add(region);
@@ -52,10 +70,11 @@ public class FinalStateValidatorTest extends AbstractSGraphValidatorTest {
 	}
 
 	/**
-	 * A positive case for a valid final state.
+	 * If a final state does have multiple outgoing transitions, one warning is
+	 * expected.
 	 */
 	@Test
-	public void finalStateValid() {
+	public void testMultipleOutTransitionsWarning() {
 		Statechart statechart = factory.createStatechart();
 		Region region = factory.createRegion();
 		statechart.getRegions().add(region);
@@ -63,9 +82,11 @@ public class FinalStateValidatorTest extends AbstractSGraphValidatorTest {
 		region.getVertices().add(finalState);
 		State state = factory.createState();
 		region.getVertices().add(state);
+
 		createTransition(state, finalState);
+		createTransition(finalState, state);
+		createTransition(finalState, state);
 
-		tester.validate(finalState).assertOK();
+		tester.validate(finalState).assertWarning(FINAL_STATE_NO_OUT_TRANSITION_CODE);
 	}
-
 }

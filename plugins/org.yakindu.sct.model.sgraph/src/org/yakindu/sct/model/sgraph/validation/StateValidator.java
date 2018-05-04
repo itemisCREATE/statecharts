@@ -10,9 +10,6 @@
  */
 package org.yakindu.sct.model.sgraph.validation;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.yakindu.base.base.BasePackage;
@@ -35,11 +32,4 @@ public class StateValidator extends AbstractSGraphValidator {
 					BasePackage.Literals.NAMED_ELEMENT__NAME.getName());
 		}
 	}
-	
-	@Override
-	protected List<EPackage> getEPackages() {
-		// TODO Auto-generated method stub
-		return super.getEPackages();
-	}
-	
 }

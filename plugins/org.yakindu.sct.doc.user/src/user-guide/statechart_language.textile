@@ -353,7 +353,13 @@ A *final state* denotes the end of the execution flow of a state machine or regi
 
 A final state is depicted as an unfilled circle with a smaller filled black circle inside, see figure "&quot;Entry point, exit point, and final state&quot;":#sclang_fig_state_entry_exit_final_explained.
 
-A final state can have multiple incoming transitions and has no outgoing ones.
+Like a "regular state":#sclang_states, A final state can have multiple incoming transitions.
+
+###. ==<div class="constraints">==
+###.	Severity : Warning
+###.	ID: finalstate.NoOutTransitions
+###.	Description: A final state must not have outgoing transitions.
+###. ==</div>==
 
 Within a region, only a single final state is allowed, but each region may have its own final state.
 
