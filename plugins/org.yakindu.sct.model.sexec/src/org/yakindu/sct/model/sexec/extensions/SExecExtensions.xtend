@@ -11,7 +11,6 @@
 package org.yakindu.sct.model.sexec.extensions
 
 import java.util.ArrayList
-import java.util.HashSet
 import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.EcoreUtil2

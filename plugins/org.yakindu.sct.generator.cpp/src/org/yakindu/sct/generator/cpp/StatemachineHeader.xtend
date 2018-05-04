@@ -388,6 +388,8 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			
 		«ENDIF»
 	'''
+	
+	def dispatch functionPrototypes(Declaration it) ''''''
 
 	/* ===================================================================================
 	 * Handling declaration of function prototypes
