@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.model.sgraph.test.validation;
 
-import static org.yakindu.sct.model.sgraph.validation.StateValidator.ISSUE_STATE_NAME_CODE;
+import static org.yakindu.sct.model.sgraph.validation.StateValidator.STATE_NAME_REQUIRED_CODE;
 
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.junit.Test;
@@ -38,7 +38,7 @@ public class StateValidatorTest extends AbstractSGraphValidatorTest {
 		State state = createState();
 		state.setName(null);
 		AssertableDiagnostics result = tester.validate(state);
-		result.assertError(ISSUE_STATE_NAME_CODE);
+		result.assertError(STATE_NAME_REQUIRED_CODE);
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class StateValidatorTest extends AbstractSGraphValidatorTest {
 		State state = createState();
 		state.setName("");
 		AssertableDiagnostics result = tester.validate(state);
-		result.assertError(ISSUE_STATE_NAME_CODE);
+		result.assertError(STATE_NAME_REQUIRED_CODE);
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class StateValidatorTest extends AbstractSGraphValidatorTest {
 		State state = createState();
 		state.setName(" 	");
 		AssertableDiagnostics result = tester.validate(state);
-		result.assertError(ISSUE_STATE_NAME_CODE);
+		result.assertError(STATE_NAME_REQUIRED_CODE);
 	}
 
 }

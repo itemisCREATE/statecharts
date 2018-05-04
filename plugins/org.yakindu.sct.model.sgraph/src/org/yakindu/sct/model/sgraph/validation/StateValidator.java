@@ -22,13 +22,13 @@ import org.yakindu.sct.model.sgraph.FinalState;
  */
 public class StateValidator extends AbstractSGraphValidator {
 
-	private static final String ISSUE_STATE_NAME_MSG = "A state must have a name.";
-	public static final String ISSUE_STATE_NAME_CODE = "state.name";
+	private static final String STATE_NAME_REQUIRED_MSG = "A state must have a name.";
+	public static final String STATE_NAME_REQUIRED_CODE = "state.name.required";
 
 	@Check(CheckType.FAST)
-	public void nameIsNotEmpty(org.yakindu.sct.model.sgraph.State state) {
+	public void checkStateNameRequired(org.yakindu.sct.model.sgraph.State state) {
 		if ((state.getName() == null || state.getName().trim().length() == 0) && !(state instanceof FinalState)) {
-			error(ISSUE_STATE_NAME_MSG, state, null, -1, ISSUE_STATE_NAME_CODE,
+			error(STATE_NAME_REQUIRED_MSG, state, null, -1, STATE_NAME_REQUIRED_CODE,
 					BasePackage.Literals.NAMED_ELEMENT__NAME.getName());
 		}
 	}
