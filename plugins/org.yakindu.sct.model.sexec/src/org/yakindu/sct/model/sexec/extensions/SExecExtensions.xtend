@@ -104,7 +104,7 @@ class SExecExtensions {
 	}
 	
 	def getTimeEvents(ExecutionFlow it) {
-		scopes.map[declarations.filter(TimeEvent)].flatten
+		scopes.map[declarations.filter(TimeEvent)].flatten.toList
 	}
 	
 	def getTimeEvent(ExecutionFlow flow, String timeEventName) {

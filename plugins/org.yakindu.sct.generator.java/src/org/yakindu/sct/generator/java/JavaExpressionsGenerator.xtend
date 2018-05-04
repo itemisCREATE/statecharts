@@ -158,7 +158,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def dispatch String getContext(Property it) {
-		if (scope !== null) {
+		if (interfaceScope !== null) {
 			return interfaceScope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""
@@ -166,7 +166,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch String getStaticContext(Property it) {
 		if (it.const) {
-			if (scope !== null) {
+			if (interfaceScope !== null) {
 				var result = interfaceScope.interfaceName + "."
 				return result
 			} else {
@@ -178,7 +178,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def dispatch String getContext(Declaration it) {
-		if (scope !== null) {
+		if (interfaceScope !== null) {
 			return interfaceScope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""
