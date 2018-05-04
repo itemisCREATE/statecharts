@@ -12,18 +12,17 @@ package org.yakindu.sct.generator.c.files
 
 import com.google.inject.Inject
 import java.util.List
+import org.yakindu.sct.generator.c.IContentTemplate
+import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.generator.c.IHeaderContentFragment
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.generator.c.IHeaderContentFragment
 
-class StatemachineHeader implements org.yakindu.sct.generator.c.IContentTemplate {
+class StatemachineHeader implements IContentTemplate {
 	@Inject protected extension Naming cNaming
 	@Inject protected extension INamingService
-	
-	@Inject
-	org.yakindu.sct.generator.c.IGenArtifactConfigurations defaultConfigs
 	
 	protected List<IHeaderContentFragment> contentProviders = newArrayList
 	
@@ -31,7 +30,7 @@ class StatemachineHeader implements org.yakindu.sct.generator.c.IContentTemplate
 		contentProviders
 	}
 	
-	override content(ExecutionFlow it, GeneratorEntry entry , org.yakindu.sct.generator.c.IGenArtifactConfigurations artifactConfigs) {
+	override content(ExecutionFlow it, GeneratorEntry entry , IGenArtifactConfigurations artifactConfigs) {
 		initializeNamingService
 	'''
 			«fileComment(entry, artifactConfigs)»
@@ -62,7 +61,7 @@ class StatemachineHeader implements org.yakindu.sct.generator.c.IContentTemplate
 		'''
 	}
 	
-	def fileComment(ExecutionFlow it, GeneratorEntry entry , org.yakindu.sct.generator.c.IGenArtifactConfigurations artifactConfigs) {
+	def fileComment(ExecutionFlow it, GeneratorEntry entry , IGenArtifactConfigurations artifactConfigs) {
 		'''
 			«FOR p : contentProviders»
 				«p.fileComment(it, entry, artifactConfigs)»
@@ -71,7 +70,7 @@ class StatemachineHeader implements org.yakindu.sct.generator.c.IContentTemplate
 		'''
 	}
 	
-	def includes(ExecutionFlow it, GeneratorEntry entry , org.yakindu.sct.generator.c.IGenArtifactConfigurations artifactConfigs) {
+	def includes(ExecutionFlow it, GeneratorEntry entry , IGenArtifactConfigurations artifactConfigs) {
 		'''
 			«FOR p : contentProviders»
 				«p.includes(it, entry, artifactConfigs)»
@@ -80,7 +79,7 @@ class StatemachineHeader implements org.yakindu.sct.generator.c.IContentTemplate
 		'''
 	}
 	
-	def defines(ExecutionFlow it, GeneratorEntry entry , org.yakindu.sct.generator.c.IGenArtifactConfigurations artifactConfigs) {
+	def defines(ExecutionFlow it, GeneratorEntry entry , IGenArtifactConfigurations artifactConfigs) {
 		'''
 			«FOR p : contentProviders»
 				«p.defines(it, entry, artifactConfigs)»
@@ -89,7 +88,7 @@ class StatemachineHeader implements org.yakindu.sct.generator.c.IContentTemplate
 		'''
 	}
 	
-	def types(ExecutionFlow it, GeneratorEntry entry , org.yakindu.sct.generator.c.IGenArtifactConfigurations artifactConfigs) {
+	def types(ExecutionFlow it, GeneratorEntry entry , IGenArtifactConfigurations artifactConfigs) {
 		'''
 			«FOR p : contentProviders»
 				«p.types(it, entry, artifactConfigs)»
@@ -98,7 +97,7 @@ class StatemachineHeader implements org.yakindu.sct.generator.c.IContentTemplate
 		'''
 	}
 	
-	def functions(ExecutionFlow it, GeneratorEntry entry , org.yakindu.sct.generator.c.IGenArtifactConfigurations artifactConfigs) {
+	def functions(ExecutionFlow it, GeneratorEntry entry , IGenArtifactConfigurations artifactConfigs) {
 		'''
 			«FOR p : contentProviders»
 				«p.functions(it, entry, artifactConfigs)»
