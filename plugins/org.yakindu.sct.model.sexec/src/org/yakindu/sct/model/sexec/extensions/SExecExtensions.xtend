@@ -11,14 +11,18 @@
 package org.yakindu.sct.model.sexec.extensions
 
 import java.util.ArrayList
+import java.util.HashSet
 import java.util.List
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.EcoreUtil2
+import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Event
+import org.yakindu.base.types.Property
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionNode
@@ -39,6 +43,9 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class SExecExtensions {
+	def <T extends EObject> T eContainerOfType(EObject eObject, Class<T> type) {
+		EcoreUtil2.getContainerOfType(eObject, type)
+	}
 	
 	def isDefaultInterface(StatechartScope scope) {
 		switch scope {
@@ -47,17 +54,8 @@ class SExecExtensions {
 		}
 	}
 	
-	def ExecutionFlow flow(EObject element){
-		var ExecutionFlow ret = null;
-		if (element !== null) {
-			if (element instanceof ExecutionFlow) {
-				return element as ExecutionFlow
-			}
-			else {
-				ret = flow(element.eContainer)
-			}
-		}
-		return ret;
+	def ExecutionFlow flow(EObject it){
+		eContainerOfType(ExecutionFlow)
 	}
 	
 	def Scope scope(Declaration it) {
@@ -65,8 +63,8 @@ class SExecExtensions {
 		else null
 	}
 	
-	def getAllEvents(ExecutionFlow it) {
-		return scopes.map[declarations.filter(EventDefinition)].reduce[i1, i2 | i1 + i2]
+	def InterfaceScope getInterfaceScope(EObject it) {
+		eContainerOfType(InterfaceScope)
 	}
 	
 	def operations(ExecutionFlow it) {
@@ -74,19 +72,19 @@ class SExecExtensions {
 	}
 	
 	def Scope getTimeEventScope(ExecutionFlow it) {
-		return 	scopes.filter[declarations.filter( typeof(TimeEvent) ).size > 0].head
+		return 	scopes.filter[declarations.filter(TimeEvent).size > 0].head
 	}
 	
 	def isTimed (ExecutionFlow it) {
-		scopes.filter[declarations.filter( typeof(TimeEvent) ).size > 0].size > 0
+		scopes.filter[declarations.filter(TimeEvent).size > 0].size > 0
 	}
 	
 	def getStatechartScopes(ExecutionFlow it) {
-		scopes.filter(typeof(StatechartScope))
+		scopes.filter(StatechartScope)
 	}
 	
 	def operations(Scope it) {
-		declarations.filter(typeof(OperationDefinition));
+		declarations.filter(OperationDefinition);
 	}
 	
 	def hasOperations(Scope it) {
@@ -98,15 +96,19 @@ class SExecExtensions {
 	}
 	
 	def getInterfaces(ExecutionFlow it) {
-		scopes.filter(typeof(StatechartScope)).filter[!(it instanceof ImportScope)]
+		scopes.filter(StatechartScope).filter[!(it instanceof ImportScope)]
 	}
 	
 	def hasOperationCallbacks (ExecutionFlow it){
-		scopes.filter[declarations.filter( typeof(OperationDefinition) ).size > 0].size > 0
+		scopes.filter[declarations.filter(OperationDefinition).size > 0].size > 0
 	}
 	
 	def getTimeEvents(ExecutionFlow it) {
 		scopes.fold(new ArrayList<TimeEvent>, [l, s | l += s.declarations.filter(typeof(TimeEvent)) l])
+	}
+	
+	def getTimeEvent(ExecutionFlow flow, String timeEventName) {
+		flow.timeEvents.findFirst[name.compareTo(timeEventName) == 0]
 	}
 	
 	def hasValue (EventDefinition it) {
@@ -114,7 +116,7 @@ class SExecExtensions {
 	}
 	
 	def boolean hasLocalScope(ExecutionFlow it) {
-		return internalScope !== null;
+		internalScope !== null;
 	}
 	
 	def hasHistory(ExecutionFlow it) {
@@ -123,6 +125,36 @@ class SExecExtensions {
 	
 	def hasOutgoingEvents(Scope it) {
 		!outgoingEvents.empty
+	}
+	
+	def hasOutgoingEvents(ExecutionFlow it) {
+		!outgoingEvents.empty
+	}
+	
+	def getInternalScopeEvents(ExecutionFlow flow) {
+		flow.internalScopes.map[eventDefinitions].flatten
+	}
+
+	def getInternalScopeVariables(ExecutionFlow flow) {
+		val variables = new ArrayList<VariableDefinition>
+		flow.internalScopes.forEach[variables.addAll(variableDefinitions)]
+		return variables
+	}
+	
+	def getEventDefinitions(Scope scope) {
+		scope.declarations.filter(typeof(EventDefinition))
+	}
+	
+	def boolean hasEvents(Scope it) {
+		return !eventDefinitions.empty
+	}
+	
+	def boolean hasEvents(ExecutionFlow it) {
+		return !getAllEvents.empty
+	}
+	
+	def getAllEvents(ExecutionFlow it) {
+		return scopes.map[eventDefinitions].flatten
 	}
 	
 	def hasLocalEvents(ExecutionFlow it) {
@@ -134,7 +166,11 @@ class SExecExtensions {
 	}
 	
 	def getOutgoingEvents(Scope it) {
-		declarations.filter(typeof(EventDefinition)).filter[direction == Direction::OUT].fold(new ArrayList<EventDefinition>, [l, ev | l += ev l])
+		eventDefinitions.filter[isOutEvent]
+	}
+	
+	def Iterable<EventDefinition> getOutgoingEvents(ExecutionFlow it) {
+		scopes.map[outgoingEvents].flatten
 	}
 	
 	def hasIncomingEvents(Scope it) {
@@ -142,15 +178,35 @@ class SExecExtensions {
 	}
 		
 	def List<EventDefinition> getIncomingEvents(Scope it) {
-		declarations.filter(typeof(EventDefinition)).filter[direction == Direction::IN].fold(new ArrayList<EventDefinition>, [l, ev | l += ev l])
+		declarations.filter(typeof(EventDefinition)).filter[isInEvent].toList
 	}
 	
 	def List<EventDefinition> getLocalEvents(Scope it) {
-		declarations.filter(typeof(EventDefinition)).filter[direction == Direction::LOCAL].fold(new ArrayList<EventDefinition>, [l, ev | l += ev l])
+		declarations.filter(typeof(EventDefinition)).filter[isLocalEvent].toList
+	}
+	
+	def boolean isLocalEvent(EventDefinition it) {
+		direction === Direction::LOCAL
+	}
+	
+	def boolean isOutEvent(EventDefinition it) {
+		direction === Direction::OUT
+	}
+	
+	def boolean isInEvent(EventDefinition it) {
+		direction === Direction::IN
 	}
 	
 	def getInterfaceScopes(ExecutionFlow it) {
 		scopes.filter(typeof(InterfaceScope))
+	}
+	
+	def Iterable<InternalScope> getInternalScopes(ExecutionFlow it) {
+		return scopes.filter(typeof(InternalScope))
+	}
+	
+	def getDefaultScope(ExecutionFlow it) {
+		interfaceScopes.filter[isDefaultInterface].head
 	}
 	
 	def getVariableDefinitions(Scope it) {
@@ -170,8 +226,16 @@ class SExecExtensions {
 		null
 	}
 	
+	def needsAssignMethod(Property property) {
+		property.flow.eAllContents.filter(AssignmentExpression)
+			.filter[eContainer instanceof Expression 
+				&& varRef.definition instanceof Property
+			]
+			.findFirst[(varRef.definition as Property).equals(property)] !== null
+	}
+	
 	def Event event(Declaration it) {
-		if ( it instanceof Event ) it as Event else null 	
+		if (it instanceof Event) it as Event else null 	
 	}
 
 	def dispatch List<ExecutionState> subStates(ExecutionState it) {
@@ -339,14 +403,7 @@ class SExecExtensions {
 	 * 		The super ExecutionScope or null
 	 */
 	def ExecutionScope parentExecutionScope(EObject it) {
-		if (it !== null) {
-			if (it instanceof ExecutionScope) {
-				return it as ExecutionScope
-			} else {
-				return parentExecutionScope(it.eContainer)
-			}
-		}
-		return null
+		eContainerOfType(ExecutionScope)
 	}
 	
 	/**
@@ -373,7 +430,7 @@ class SExecExtensions {
 		if (it instanceof ExecutionFlow) {
 			return 0
 		} else {
-			scopeDepth = superScope.getScopeDepth + 1
+			scopeDepth = superScope.scopeDepth + 1
 		}
 		return scopeDepth
 	}
@@ -392,11 +449,4 @@ class SExecExtensions {
 		functions.addAll(reactFunctions)
 		return functions
 	}
-	
-	def getTimeEvent(ExecutionFlow flow, String timeEventName) {
-		flow.timeEvents.findFirst[name.compareTo(timeEventName) == 0]
-	}
-	
-		
-	
 }
