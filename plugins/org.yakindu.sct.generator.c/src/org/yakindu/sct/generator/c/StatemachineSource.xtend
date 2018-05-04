@@ -145,7 +145,7 @@ class StatemachineSource implements IContentTemplate {
 				«event.access» = bool_false;
 				«ENDFOR»
 			«ENDFOR»
-			«IF hasLocalScope»
+			«IF hasInternalScope»
 				«FOR event : internalScope.events»
 				«event.access» = bool_false;
 				«ENDFOR»

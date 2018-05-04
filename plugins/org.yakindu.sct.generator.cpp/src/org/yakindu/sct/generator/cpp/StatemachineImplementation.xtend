@@ -200,7 +200,7 @@ class StatemachineImplementation implements IContentTemplate {
 				«event.access» = false;
 				«ENDFOR»
 			«ENDFOR»
-			«IF hasLocalScope»
+			«IF hasInternalScope»
 				«FOR event : internalScope.events»
 				«event.access» = false; 
 				«ENDFOR»

@@ -76,7 +76,7 @@ class SExecExtensions {
 	}
 	
 	def isTimed (ExecutionFlow it) {
-		scopes.filter[declarations.filter(TimeEvent).size > 0].size > 0
+		!timeEvents.empty
 	}
 	
 	def getStatechartScopes(ExecutionFlow it) {
@@ -92,7 +92,7 @@ class SExecExtensions {
 	}
 	
 	def indexOf(TimeEvent it) {
-		scope.declarations.filter(typeof(TimeEvent)).toList.indexOf(it);
+		scope.declarations.filter(TimeEvent).toList.indexOf(it);
 	}
 	
 	def getInterfaces(ExecutionFlow it) {
@@ -104,7 +104,7 @@ class SExecExtensions {
 	}
 	
 	def getTimeEvents(ExecutionFlow it) {
-		scopes.fold(new ArrayList<TimeEvent>, [l, s | l += s.declarations.filter(typeof(TimeEvent)) l])
+		scopes.map[declarations.filter(TimeEvent)].flatten
 	}
 	
 	def getTimeEvent(ExecutionFlow flow, String timeEventName) {
@@ -115,8 +115,20 @@ class SExecExtensions {
 		type !== null && type.name != 'void'
 	}
 	
+	/**
+	 * @deprecated use {@link #hasInternalScope(ExecutionFlow) hasInternalScope} instead
+	 */
+	@Deprecated
 	def boolean hasLocalScope(ExecutionFlow it) {
+		hasInternalScope
+	}
+	
+	def boolean hasInternalScope(ExecutionFlow it) {
 		internalScope !== null;
+	}
+	
+	def getInternalScope(ExecutionFlow it) {
+		it.scopes.filter(typeof(InternalScope)).head
 	}
 	
 	def hasHistory(ExecutionFlow it) {
@@ -158,11 +170,11 @@ class SExecExtensions {
 	}
 	
 	def hasLocalEvents(ExecutionFlow it) {
-		return hasLocalScope && !internalScope.localEvents.empty
+		return hasInternalScope && !internalScope.localEvents.empty
 	}
 	
 	def hasLocalEventsWithValue(ExecutionFlow it) {
-		return hasLocalScope && !internalScope.localEvents.filter[hasValue].empty
+		return hasInternalScope && !internalScope.localEvents.filter[hasValue].empty
 	}
 	
 	def getOutgoingEvents(Scope it) {
@@ -212,9 +224,6 @@ class SExecExtensions {
 	def getVariableDefinitions(Scope it) {
 		declarations.filter(typeof(VariableDefinition))
 	} 
-	def getInternalScope(ExecutionFlow it) {
-		it.scopes.filter(typeof(InternalScope)).head
-	}
 	
 	def dispatch definition(ElementReferenceExpression it) {
 		if (reference instanceof Declaration) reference as Declaration
