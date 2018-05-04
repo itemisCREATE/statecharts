@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.model.sgraph.test.validation;
 
-import static org.yakindu.sct.model.sgraph.validation.FinalStateValidator.FINAL_STATE_NO_OUT_TRANSITION_CODE;
+import static org.yakindu.sct.model.sgraph.validation.FinalStateValidator.FINAL_STATE_TRANSITIONS_NO_OUT_CODE;
 
 import org.junit.Test;
 import org.yakindu.sct.model.sgraph.FinalState;
@@ -66,7 +66,7 @@ public class FinalStateNoOutTransitionsValidatorTest extends AbstractSGraphValid
 		createTransition(state, finalState);
 		createTransition(finalState, state);
 
-		tester.validate(finalState).assertWarning(FINAL_STATE_NO_OUT_TRANSITION_CODE);
+		tester.validate(finalState).assertWarning(FINAL_STATE_TRANSITIONS_NO_OUT_CODE);
 	}
 
 	/**
@@ -87,6 +87,6 @@ public class FinalStateNoOutTransitionsValidatorTest extends AbstractSGraphValid
 		createTransition(finalState, state);
 		createTransition(finalState, state);
 
-		tester.validate(finalState).assertWarning(FINAL_STATE_NO_OUT_TRANSITION_CODE);
+		tester.validate(finalState).assertWarning(FINAL_STATE_TRANSITIONS_NO_OUT_CODE);
 	}
 }
