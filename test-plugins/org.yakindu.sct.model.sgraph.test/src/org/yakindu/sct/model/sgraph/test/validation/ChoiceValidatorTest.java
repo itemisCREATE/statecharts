@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.model.sgraph.test.validation;
 
-import static org.yakindu.sct.model.sgraph.validation.ChoiceValidator.OUTGOING_TRANSITION_COUNT_CODE;
+import static org.yakindu.sct.model.sgraph.validation.ChoiceValidator.CHOICE_TRANSITIONS_REQUIRE_N_OUT_CODE;
 
 import org.junit.Test;
 import org.yakindu.sct.model.sgraph.Choice;
@@ -46,7 +46,7 @@ public class ChoiceValidatorTest extends AbstractSGraphValidatorTest {
 		region.getVertices().add(state);
 		createTransition(state, choice);
 
-		tester.validate(choice).assertError(OUTGOING_TRANSITION_COUNT_CODE);
+		tester.validate(choice).assertError(CHOICE_TRANSITIONS_REQUIRE_N_OUT_CODE);
 	}
 
 }

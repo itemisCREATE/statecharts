@@ -16,18 +16,19 @@ import org.yakindu.sct.model.sgraph.Choice;
 
 /**
  * 
- * All validation contraints for the meta model element {@link Choice}
+ * All validation constraints for the meta model element {@link Choice}
  * 
  */
 public class ChoiceValidator extends AbstractSGraphValidator {
 
-	private static final String OUTGOING_TRANSITION_COUNT_MSG = "A choice must have at least one outgoing transition.";
-	public static final String OUTGOING_TRANSITION_COUNT_CODE = "choice.out.transition";
+	private static final String CHOICE_TRANSITIONS_REQUIRE_N_OUT_MSG = "A choice must have at least one outgoing transition.";
+	public static final String CHOICE_TRANSITIONS_REQUIRE_N_OUT_CODE = "choice.transitions.RequireNOut";
 
+	
 	@Check(CheckType.FAST)
-	public void choiceHasOutgoingTransition(Choice choice) {
+	public void checkChoiceTransitionsRequireNOut(Choice choice) {
 		if (choice.getOutgoingTransitions().size() == 0) {
-			error(OUTGOING_TRANSITION_COUNT_MSG, choice, null, -1, OUTGOING_TRANSITION_COUNT_CODE);
+			error(CHOICE_TRANSITIONS_REQUIRE_N_OUT_MSG, choice, null, -1, CHOICE_TRANSITIONS_REQUIRE_N_OUT_CODE);
 		}
 	}
 
