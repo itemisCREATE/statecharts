@@ -11,7 +11,7 @@
 package org.yakindu.sct.model.sgraph.test.validation;
 
 import static org.junit.Assert.assertEquals;
-import static org.yakindu.sct.model.sgraph.validation.EntryExitValidator.*;
+import static org.yakindu.sct.model.sgraph.validation.EntryValidator.*;
 
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.junit.Test;
@@ -23,19 +23,19 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.test.util.SGraphJavaValidatorTester;
-import org.yakindu.sct.model.sgraph.validation.EntryExitValidator;
+import org.yakindu.sct.model.sgraph.validation.EntryValidator;
 
 import com.google.inject.Inject;
 
 /**
  * 
- * Tests for {@link EntryExitValidator}
+ * Tests for {@link EntryValidator}
  *
  */
-public class EntryExitValidatorTest extends AbstractSGraphValidatorTest {
+public class EntryValidatorTest extends AbstractSGraphValidatorTest {
 
 	@Inject
-	protected SGraphJavaValidatorTester<EntryExitValidator> tester;
+	protected SGraphJavaValidatorTester<EntryValidator> tester;
 
 	/**
 	 * An initial entry should have no incoming transition
@@ -50,7 +50,7 @@ public class EntryExitValidatorTest extends AbstractSGraphValidatorTest {
 		createTransition(entry, state);
 
 		assertEquals(EntryKind.INITIAL, entry.getKind());
-		tester.validate(entry).assertWarning(INITIAL_ENTRY_NO_IN_TRANSITION_CODE);
+		tester.validate(entry).assertWarning(ENTRY_TRANSITIONS_NO_IN_IF_INITIAL_CODE);
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class EntryExitValidatorTest extends AbstractSGraphValidatorTest {
 		region.getVertices().add(entry);
 
 		assertEquals(EntryKind.INITIAL, entry.getKind());
-		tester.validate(entry).assertWarning(INITIAL_ENTRY_ONE_OUT_TRANSITION_CODE);
+		tester.validate(entry).assertError(ENTRY_TRANSITIONS_REQUIRE_OUT_IF_INITIAL_CODE);
 
 	}
 
@@ -96,13 +96,13 @@ public class EntryExitValidatorTest extends AbstractSGraphValidatorTest {
 		createTransition(entry, state);
 
 		assertEquals(EntryKind.INITIAL, entry.getKind());
-		tester.validate(entry).assertError(INITIAL_ENTRY_ONE_OUT_TRANSITION_CODE);
+		tester.validate(entry).assertError(ENTRY_TRANSITIONS_NO_MULTIPLE_OUT_CODE);
 
 		entry.setKind(EntryKind.DEEP_HISTORY);
-		tester.validate(entry).assertError(INITIAL_ENTRY_ONE_OUT_TRANSITION_CODE);
+		tester.validate(entry).assertError(ENTRY_TRANSITIONS_NO_MULTIPLE_OUT_CODE);
 
 		entry.setKind(EntryKind.SHALLOW_HISTORY);
-		tester.validate(entry).assertError(INITIAL_ENTRY_ONE_OUT_TRANSITION_CODE);
+		tester.validate(entry).assertError(ENTRY_TRANSITIONS_NO_MULTIPLE_OUT_CODE);
 	}
 
 	/**
@@ -118,59 +118,15 @@ public class EntryExitValidatorTest extends AbstractSGraphValidatorTest {
 		createTransition(entry, state);
 
 		assertEquals(EntryKind.INITIAL, entry.getKind());
-		tester.validate(entry).assertError(INITIAL_ENTRY_ONE_OUT_TRANSITION_CODE);
+		tester.validate(entry).assertError(ENTRY_TRANSITIONS_NO_MULTIPLE_OUT_CODE);
 
 		entry.setKind(EntryKind.SHALLOW_HISTORY);
-		tester.validate(entry).assertError(INITIAL_ENTRY_ONE_OUT_TRANSITION_CODE);
+		tester.validate(entry).assertError(ENTRY_TRANSITIONS_NO_MULTIPLE_OUT_CODE);
 
 		entry.setKind(EntryKind.DEEP_HISTORY);
-		tester.validate(entry).assertError(INITIAL_ENTRY_ONE_OUT_TRANSITION_CODE);
+		tester.validate(entry).assertError(ENTRY_TRANSITIONS_NO_MULTIPLE_OUT_CODE);
 	}
 
-	/**
-	 * An exit node should have at leat one incoming transition.
-	 */
-	@Test
-	public void exitWithoutIncomingTransition() {
-		State state = createState();
-		Region subRegion = factory.createRegion();
-		state.getRegions().add(subRegion);
-		Exit exit = factory.createExit();
-		subRegion.getVertices().add(exit);
-
-		tester.validate(exit).assertWarning(EXIT_AT_LEAST_ONE_IN_TRANSITION_CODE);
-	}
-
-	/**
-	 * An exit node must have no outgoing transitions.
-	 */
-	@Test
-	public void exitWithOutgoingTransition() {
-		State state = createState();
-		Region subRegion = factory.createRegion();
-		state.getRegions().add(subRegion);
-		Exit exit = factory.createExit();
-		subRegion.getVertices().add(exit);
-		State s = factory.createState();
-		subRegion.getVertices().add(s);
-		createTransition(exit, s);
-		createTransition(s, exit);
-
-		tester.validate(exit).assertError(EXIT_NO_OUTGOING_TRANSITION_CODE);
-	}
-
-	/**
-	 * An exit node must not be used in top level regions.
-	 */
-	@Test
-	public void exitOnStatechart() {
-		State state = createState();
-		Region region = (Region) state.eContainer();
-		Exit exit = factory.createExit();
-		createTransition(state, exit);
-		region.getVertices().add(exit);
-		tester.validate(exit).assertError(EXIT_NO_TOPLEVEL_REGION_CODE);
-	}
 
 	/**
 	 * Tests a scenario where no issues for an exit nodes exists.
@@ -199,7 +155,7 @@ public class EntryExitValidatorTest extends AbstractSGraphValidatorTest {
 		region.getVertices().add(entry);
 		Transition trans = createTransition(entry, state);
 		trans.setTrigger(sTextFactory.createReactionTrigger());
-		tester.validate(entry).assertError(ENTRY_NO_TRIGGER_CODE);
+		tester.validate(entry).assertError(ENTRY_TRANSITIONS_NO_TRIGGER_ON_OUT_CODE);
 	}
 
 	@Test

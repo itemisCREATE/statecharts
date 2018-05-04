@@ -14,7 +14,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 import org.yakindu.sct.model.sgraph.test.validation.ChoiceValidatorTest;
-import org.yakindu.sct.model.sgraph.test.validation.EntryExitValidatorTest;
+import org.yakindu.sct.model.sgraph.test.validation.EntryValidatorTest;
+import org.yakindu.sct.model.sgraph.test.validation.ExitValidatorTest;
 import org.yakindu.sct.model.sgraph.test.validation.FinalStateNoOutTransitionsValidatorTest;
 import org.yakindu.sct.model.sgraph.test.validation.StateValidatorTest;
 import org.yakindu.sct.model.sgraph.test.validation.StatechartValidatorTest;
@@ -23,9 +24,16 @@ import org.yakindu.sct.model.sgraph.test.validation.TransitionValidatorTest;
 import org.yakindu.sct.model.sgraph.test.validation.VertexValidatorTest;
 
 @RunWith(value = Suite.class)
-@SuiteClasses(value = { StatechartValidatorTest.class, ChoiceValidatorTest.class, EntryExitValidatorTest.class,
-		FinalStateNoOutTransitionsValidatorTest.class, StateValidatorTest.class, SynchronizationValidatorTest.class,
-		TransitionValidatorTest.class, VertexValidatorTest.class })
+@SuiteClasses(value = { 
+		StatechartValidatorTest.class, 
+		ChoiceValidatorTest.class, 
+		EntryValidatorTest.class, 
+		ExitValidatorTest.class,
+		FinalStateNoOutTransitionsValidatorTest.class, 
+		StateValidatorTest.class, 
+		SynchronizationValidatorTest.class,
+		TransitionValidatorTest.class, 
+		VertexValidatorTest.class })
 public class AllTests {
 
 }

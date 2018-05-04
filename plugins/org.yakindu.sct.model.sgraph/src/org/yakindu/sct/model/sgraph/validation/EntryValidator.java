@@ -27,30 +27,11 @@ import org.yakindu.sct.model.sgraph.Vertex;
 
 /**
  * 
- * All validation contraints for the meta model elements {@link Entry} and
- * {@link Exit}
+ * All validation contraints for the meta model elements {@link Entry}
  *
  */
-public class EntryExitValidator extends AbstractSGraphValidator {
+public class EntryValidator extends AbstractSGraphValidator {
 
-	private static final String INITIAL_ENTRY_NO_IN_TRANSITION_MSG = "Initial entry should have no incoming transition.";
-	public static final String INITIAL_ENTRY_NO_IN_TRANSITION_CODE = "entry.in.transition";
-
-	public static final String ENTRY_WITH_MULTIPLE_OUT_TRANS_MSG = "Entries must not have more than one outgoing transition.";
-	private static final String INITIAL_ENTRY_ONE_OUT_TRANSITION_MSG = "Initial entry should have exactly one outgoing transition.";
-	public static final String INITIAL_ENTRY_ONE_OUT_TRANSITION_CODE = "entry.out.transition";
-
-	private static final String EXIT_AT_LEAST_ONE_IN_TRANSITION_MSG = "Exit node should have at least one incoming transition.";
-	public static final String EXIT_AT_LEAST_ONE_IN_TRANSITION_CODE = "exit.in.transition";
-
-	private static final String EXIT_NO_OUTGOING_TRANSITION_MSG = "Exit node should have no outgoing transition.";
-	public static final String EXIT_NO_OUTGOING_TRANSITION_CODE = "exit.out.transition";
-
-	private static final String EXIT_NO_TOPLEVEL_REGION_MSG = "Exit node in top level region not supported - use final states instead.";
-	public static final String EXIT_NO_TOPLEVEL_REGION_CODE = "exit.not.toplevel";
-
-	private static final String ENTRY_NO_TRIGGER_MSG = "Outgoing transitions from entry points can not have a trigger or guard.";
-	public static final String ENTRY_NO_TRIGGER_CODE = "entry.no.trigger";
 
 	private static final String REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NO_DEFAULT_ENTRY_MSG = "The region can't be entered using the shallow history. Add a default entry node.";
 	public static final String REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NO_DEFAULT_ENTRY_CODE = "entry.region.default";
@@ -61,48 +42,50 @@ public class EntryExitValidator extends AbstractSGraphValidator {
 	private final static String REGION_MULTIPLE_DEFAULT_ENTRIES_MSG = "There are multiple default entry nodes (one without a name and one named 'default') in this region.";
 	public final static String REGION_MULTIPLE_DEFAULT_ENTRIES_CODE = "region.duplicate.entry";
 
+
+	
+	
+	private static final String ENTRY_TRANSITIONS_NO_IN_IF_INITIAL_MSG  = "Initial entry should have no incoming transition.";
+	public static final String  ENTRY_TRANSITIONS_NO_IN_IF_INITIAL_CODE = "entry.transitions.NoInIfInitial";
+
 	@Check(CheckType.FAST)
-	public void initialEntryWithoutIncomingTransitions(Entry entry) {
+	public void checkEntryTransitionsNoInIfInitial(Entry entry) {
 		if (entry.getIncomingTransitions().size() > 0 && entry.getKind().equals(EntryKind.INITIAL)) {
-			warning(INITIAL_ENTRY_NO_IN_TRANSITION_MSG, entry, null, -1, INITIAL_ENTRY_NO_IN_TRANSITION_CODE);
+			warning(ENTRY_TRANSITIONS_NO_IN_IF_INITIAL_MSG, entry, null, -1, ENTRY_TRANSITIONS_NO_IN_IF_INITIAL_CODE);
 		}
 	}
 
+
+	private static final String ENTRY_TRANSITIONS_REQUIRE_OUT_IF_INITIAL_MSG  = "Initial entry must have an outgoing transition.";
+	public static final String  ENTRY_TRANSITIONS_REQUIRE_OUT_IF_INITIAL_CODE = "entry.transitions.RequireOutIfInitial";
+
 	@Check(CheckType.FAST)
-	public void initialEntryWithoutOutgoingTransition(Entry entry) {
+	public void checkEntryTransitionsRequireOneOutIfInitial(Entry entry) {
+		if (entry.getKind().equals(EntryKind.INITIAL) && entry.getOutgoingTransitions().size() == 0 ) {
+			error(ENTRY_TRANSITIONS_REQUIRE_OUT_IF_INITIAL_MSG, entry, null, -1, ENTRY_TRANSITIONS_REQUIRE_OUT_IF_INITIAL_CODE);
+		}
+	}
+
+		
+	private static final String ENTRY_TRANSITIONS_NO_MULTIPLE_OUT_MSG  = "Entries must not have more than one outgoing transition.";
+	public static final String  ENTRY_TRANSITIONS_NO_MULTIPLE_OUT_CODE = "entry.transitions.NoMultipleOut";
+
+	@Check(CheckType.FAST)
+	public void checkEntryTransitionsNoMultipleOut(Entry entry) {
 		if (entry.getOutgoingTransitions().size() > 1) {
-			error(ENTRY_WITH_MULTIPLE_OUT_TRANS_MSG, entry, null, -1, INITIAL_ENTRY_ONE_OUT_TRANSITION_CODE);
-		} else if (entry.getOutgoingTransitions().size() != 1 && ((Entry) entry).getKind().equals(EntryKind.INITIAL)) {
-			warning(INITIAL_ENTRY_ONE_OUT_TRANSITION_MSG, entry, null, -1, INITIAL_ENTRY_ONE_OUT_TRANSITION_CODE);
+			error(ENTRY_TRANSITIONS_NO_MULTIPLE_OUT_MSG, entry, null, -1, ENTRY_TRANSITIONS_NO_MULTIPLE_OUT_CODE);
 		}
 	}
 
-	@Check(CheckType.FAST)
-	public void exitWithoutIncomingTransition(Exit exit) {
-		if (exit.getIncomingTransitions().size() == 0) {
-			warning(EXIT_AT_LEAST_ONE_IN_TRANSITION_MSG, exit, null, -1, EXIT_AT_LEAST_ONE_IN_TRANSITION_CODE);
-		}
-	}
+	
+	private static final String ENTRY_TRANSITIONS_NO_TRIGGER_ON_OUT_MSG = "Outgoing transitions from entry points must not have a trigger or guard.";
+	public static final String ENTRY_TRANSITIONS_NO_TRIGGER_ON_OUT_CODE = "entry.transitions.NoTriggerOnOut";
 
 	@Check(CheckType.FAST)
-	public void exitWithOutgoingTransition(Exit exit) {
-		if (exit.getOutgoingTransitions().size() > 0) {
-			error(EXIT_NO_OUTGOING_TRANSITION_MSG, exit, null, -1, EXIT_NO_OUTGOING_TRANSITION_CODE);
-		}
-	}
-
-	@Check(CheckType.FAST)
-	public void exitOnStatechart(Exit exit) {
-		if (exit.getParentRegion().getComposite() instanceof Statechart) {
-			error(EXIT_NO_TOPLEVEL_REGION_MSG, exit, null, -1, EXIT_NO_TOPLEVEL_REGION_CODE);
-		}
-	}
-
-	@Check(CheckType.FAST)
-	public void disallowTrigger(Entry entry) {
+	public void checkEntryTransitionsNoTriggerOnOut(Entry entry) {
 		for (Transition transition : entry.getOutgoingTransitions()) {
 			if (transition.getTrigger() != null) {
-				error(ENTRY_NO_TRIGGER_MSG, entry, null, -1, ENTRY_NO_TRIGGER_CODE);
+				error(ENTRY_TRANSITIONS_NO_TRIGGER_ON_OUT_MSG, entry, null, -1, ENTRY_TRANSITIONS_NO_TRIGGER_ON_OUT_CODE);
 			}
 		}
 	}
