@@ -8,7 +8,7 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.model.sgraph.validation;
+package org.yakindu.sct.model.sgraph.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
