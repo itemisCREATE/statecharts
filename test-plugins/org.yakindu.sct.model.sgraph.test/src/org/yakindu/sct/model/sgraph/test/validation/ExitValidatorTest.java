@@ -70,18 +70,6 @@ public class ExitValidatorTest extends AbstractSGraphValidatorTest {
 		tester.validate(exit).assertError(EXIT_TRANSITIONS_NO_OUT_CODE);
 	}
 
-	/**
-	 * An exit node must not be used in top level regions.
-	 */
-	@Test
-	public void exitOnStatechart() {
-		State state = createState();
-		Region region = (Region) state.eContainer();
-		Exit exit = factory.createExit();
-		createTransition(state, exit);
-		region.getVertices().add(exit);
-		tester.validate(exit).assertError(REGION_NO_EXIT_ON_TOP_LEVEL_CODE);
-	}
 
 	/**
 	 * Tests a scenario where no issues for an exit nodes exists.

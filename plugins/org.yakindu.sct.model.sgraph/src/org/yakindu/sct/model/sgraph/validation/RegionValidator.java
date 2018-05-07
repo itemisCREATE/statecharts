@@ -101,4 +101,20 @@ public class RegionValidator extends AbstractSGraphValidator {
 		}
 	}
 
+	
+	
+	private static final String REGION_NO_EXIT_ON_TOP_LEVEL_MSG  = "Exit node in top level region not supported - use final states instead.";
+	public static final String  REGION_NO_EXIT_ON_TOP_LEVEL_CODE = "region.NoExitOnTopLevel";
+
+	/**
+	 * TODO: check region instead of exit. 
+	 * @param exit
+	 */
+	@Check(CheckType.FAST)
+	public void checkRegionNoExitOnTopLevel(Exit exit) {
+		if (exit.getParentRegion().getComposite() instanceof Statechart) {
+			error(REGION_NO_EXIT_ON_TOP_LEVEL_MSG, exit, null, -1, REGION_NO_EXIT_ON_TOP_LEVEL_CODE);
+		}
+	}
+
 }

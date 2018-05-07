@@ -15,6 +15,7 @@ import static org.yakindu.sct.model.sgraph.validation.RegionValidator.*;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.junit.Test;
 import org.yakindu.sct.model.sgraph.Entry;
+import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -68,6 +69,21 @@ public class RegionValidatorTest extends AbstractSGraphValidatorTest {
 		tester.validate(statechart).assertOK();
 	}
 
+	
+	/**
+	 * An exit node must not be used in top level regions.
+	 */
+	@Test
+	public void exitOnStatechart() {
+		State state = createState();
+		Region region = (Region) state.eContainer();
+		Exit exit = factory.createExit();
+		createTransition(state, exit);
+		region.getVertices().add(exit);
+		tester.validate(exit).assertError(REGION_NO_EXIT_ON_TOP_LEVEL_CODE);
+	}
+
+	
 	@Override
 	protected Statechart loadStatechart(String path) {
 		return super.loadStatechart("region/" + path);
