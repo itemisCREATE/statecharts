@@ -21,18 +21,19 @@ import org.yakindu.sct.model.sgraph.Statechart;
  */
 public class StatechartValidator extends AbstractSGraphValidator {
 
-	private static final String STATECHART_NAME_VALID_IDENTIFIER_MSG = "%s is not a valid identifier!";
-	public static final String STATECHART_NAME_VALID_IDENTIFIER_CODE = "statechart.name";
+	private static final String STATECHART_NAME_MUST_BE_IDENTIFIER_MSG = "%s is not a valid identifier!";
+	public static final String STATECHART_NAME_MUST_BE_IDENTIFIER_CODE = "statechart.name.MustBeIdentifier";
 
 	@Check
-	public void checkStatechartNameIsIdentifier(Statechart statechart) {
+	public void checkStatechartNameMustBeIdentifier(Statechart statechart) {
 		if (!isValidJavaIdentifier(statechart.getName())) {
-			error(String.format(STATECHART_NAME_VALID_IDENTIFIER_MSG, statechart.getName()), statechart,
-					BasePackage.Literals.NAMED_ELEMENT__NAME, -1, STATECHART_NAME_VALID_IDENTIFIER_CODE);
+			error(String.format(STATECHART_NAME_MUST_BE_IDENTIFIER_MSG, statechart.getName()), statechart,
+					BasePackage.Literals.NAMED_ELEMENT__NAME, -1, STATECHART_NAME_MUST_BE_IDENTIFIER_CODE);
 
 		}
 	}
 
+	
 	protected boolean isValidJavaIdentifier(String s) {
 		if (s == null || s.length() == 0) {
 			return false;

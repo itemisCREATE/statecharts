@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.model.sgraph.test.validation;
 
-import static org.yakindu.sct.model.sgraph.validation.StatechartValidator.STATECHART_NAME_VALID_IDENTIFIER_CODE;
+import static org.yakindu.sct.model.sgraph.validation.StatechartValidator.STATECHART_NAME_MUST_BE_IDENTIFIER_CODE;
 
 import org.junit.Test;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
@@ -30,14 +30,17 @@ public class StatechartValidatorTest extends AbstractSGraphValidatorTest {
 	@Inject
 	protected SGraphJavaValidatorTester<StatechartValidator> tester;
 
+	/** 
+	 * TODO: Test is not complete.
+	 */
 	@Test
 	public void checkStatechartNameIsIdentifier() {
 		Statechart statechart = SGraphFactory.eINSTANCE.createStatechart();
 		statechart.setName("Not a valid identifier");
-		tester.validate(statechart).assertError(STATECHART_NAME_VALID_IDENTIFIER_CODE);
+		tester.validate(statechart).assertError(STATECHART_NAME_MUST_BE_IDENTIFIER_CODE);
 
 		statechart.setName("0Notavalididentifier");
-		tester.validate(statechart).assertError(STATECHART_NAME_VALID_IDENTIFIER_CODE);
+		tester.validate(statechart).assertError(STATECHART_NAME_MUST_BE_IDENTIFIER_CODE);
 
 		statechart.setName("ValidIdentifier");
 		tester.validate(statechart).assertOK();
