@@ -21,37 +21,46 @@ import org.yakindu.sct.model.sgraph.Statechart;
  *
  */
 public class ExitValidator extends AbstractSGraphValidator {
-
-
-	private static final String EXIT_AT_LEAST_ONE_IN_TRANSITION_MSG = "Exit node should have at least one incoming transition.";
-	public static final String EXIT_AT_LEAST_ONE_IN_TRANSITION_CODE = "exit.in.transition";
-
-	private static final String EXIT_NO_OUTGOING_TRANSITION_MSG = "Exit node should have no outgoing transition.";
-	public static final String EXIT_NO_OUTGOING_TRANSITION_CODE = "exit.out.transition";
-
-	private static final String EXIT_NO_TOPLEVEL_REGION_MSG = "Exit node in top level region not supported - use final states instead.";
-	public static final String EXIT_NO_TOPLEVEL_REGION_CODE = "exit.not.toplevel";
-
 	
 	
+	private static final String EXIT_TRANSITIONS_MUST_HAVE_N_IN_MSG  = "Exit node should have at least one incoming transition.";
+	public static final String  EXIT_TRANSITIONS_MUST_HAVE_N_IN_CODE = "exit.transitions.MustHaveNIn";
+	
+	/**
+	 * TODO: severity error?
+	 * @param exit
+	 */
 	@Check(CheckType.FAST)
-	public void exitWithoutIncomingTransition(Exit exit) {
+	public void checkExitTransitionsMustHaveNIn(Exit exit) {
 		if (exit.getIncomingTransitions().size() == 0) {
-			warning(EXIT_AT_LEAST_ONE_IN_TRANSITION_MSG, exit, null, -1, EXIT_AT_LEAST_ONE_IN_TRANSITION_CODE);
+			warning(EXIT_TRANSITIONS_MUST_HAVE_N_IN_MSG, exit, null, -1, EXIT_TRANSITIONS_MUST_HAVE_N_IN_CODE);
 		}
 	}
+
+	
+	
+	private static final String EXIT_TRANSITIONS_NO_OUT_MSG  = "Exit node must not have outgoing transitions.";
+	public static final String  EXIT_TRANSITIONS_NO_OUT_CODE = "exit.transitions.NoOut";
 
 	@Check(CheckType.FAST)
-	public void exitWithOutgoingTransition(Exit exit) {
+	public void checkExtitTransitionsNoOut(Exit exit) {
 		if (exit.getOutgoingTransitions().size() > 0) {
-			error(EXIT_NO_OUTGOING_TRANSITION_MSG, exit, null, -1, EXIT_NO_OUTGOING_TRANSITION_CODE);
+			error(EXIT_TRANSITIONS_NO_OUT_MSG, exit, null, -1, EXIT_TRANSITIONS_NO_OUT_CODE);
 		}
 	}
 
+	
+	private static final String REGION_NO_EXIT_ON_TOP_LEVEL_MSG  = "Exit node in top level region not supported - use final states instead.";
+	public static final String  REGION_NO_EXIT_ON_TOP_LEVEL_CODE = "region.NoExitOnTopLevel";
+
+	/**
+	 * TODO: move to region validation
+	 * @param exit
+	 */
 	@Check(CheckType.FAST)
 	public void exitOnStatechart(Exit exit) {
 		if (exit.getParentRegion().getComposite() instanceof Statechart) {
-			error(EXIT_NO_TOPLEVEL_REGION_MSG, exit, null, -1, EXIT_NO_TOPLEVEL_REGION_CODE);
+			error(REGION_NO_EXIT_ON_TOP_LEVEL_MSG, exit, null, -1, REGION_NO_EXIT_ON_TOP_LEVEL_CODE);
 		}
 	}
 

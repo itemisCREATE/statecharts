@@ -49,7 +49,7 @@ public class ExitValidatorTest extends AbstractSGraphValidatorTest {
 		Exit exit = factory.createExit();
 		subRegion.getVertices().add(exit);
 
-		tester.validate(exit).assertWarning(EXIT_AT_LEAST_ONE_IN_TRANSITION_CODE);
+		tester.validate(exit).assertWarning(EXIT_TRANSITIONS_MUST_HAVE_N_IN_CODE);
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class ExitValidatorTest extends AbstractSGraphValidatorTest {
 		createTransition(exit, s);
 		createTransition(s, exit);
 
-		tester.validate(exit).assertError(EXIT_NO_OUTGOING_TRANSITION_CODE);
+		tester.validate(exit).assertError(EXIT_TRANSITIONS_NO_OUT_CODE);
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class ExitValidatorTest extends AbstractSGraphValidatorTest {
 		Exit exit = factory.createExit();
 		createTransition(state, exit);
 		region.getVertices().add(exit);
-		tester.validate(exit).assertError(EXIT_NO_TOPLEVEL_REGION_CODE);
+		tester.validate(exit).assertError(REGION_NO_EXIT_ON_TOP_LEVEL_CODE);
 	}
 
 	/**
