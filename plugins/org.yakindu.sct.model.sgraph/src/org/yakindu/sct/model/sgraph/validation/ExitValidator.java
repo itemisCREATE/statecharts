@@ -13,7 +13,6 @@ package org.yakindu.sct.model.sgraph.validation;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.yakindu.sct.model.sgraph.Exit;
-import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
  * 

@@ -12,12 +12,9 @@ package org.yakindu.sct.model.sgraph.validation;
 
 import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.commonAncestor;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Check;
-import org.eclipse.xtext.validation.CheckType;
 import org.yakindu.sct.model.sgraph.CompositeElement;
-import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
