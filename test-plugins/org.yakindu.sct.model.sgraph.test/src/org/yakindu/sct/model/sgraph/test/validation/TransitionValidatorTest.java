@@ -10,8 +10,8 @@
  */
 package org.yakindu.sct.model.sgraph.test.validation;
 
-import static org.yakindu.sct.model.sgraph.validation.TransitionValidator.INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER_CODE;
-import static org.yakindu.sct.model.sgraph.validation.TransitionValidator.TRANSITION_SOURCE_TARGET_NOT_ORTHOGONAL_CODE;
+import static org.yakindu.sct.model.sgraph.validation.TransitionValidator.REGION_ENTRY_TARGET_MUST_BE_CHILD_CODE;
+import static org.yakindu.sct.model.sgraph.validation.TransitionValidator.TRANSITION_SOURCE_NOT_ORTHOGONAL_TO_TARGET_CODE;
 
 import org.junit.Test;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -33,19 +33,19 @@ public class TransitionValidatorTest extends AbstractSGraphValidatorTest {
 	@Test
 	public void initialEntryWithTransitionToContainer() {
 		Statechart statechart = loadStatechart("EntryTransitionToParentState.sct");
-		tester.validate(statechart).assertError(INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER_CODE);
+		tester.validate(statechart).assertError(REGION_ENTRY_TARGET_MUST_BE_CHILD_CODE);
 	}
 
 	@Test
 	public void orthogonalTransition_BetweenTopLevelRegions() {
 		Statechart statechart = loadStatechart("OrthogonalTransition01.sct");
-		tester.validate(statechart).assertError(TRANSITION_SOURCE_TARGET_NOT_ORTHOGONAL_CODE);
+		tester.validate(statechart).assertError(TRANSITION_SOURCE_NOT_ORTHOGONAL_TO_TARGET_CODE);
 	}
 
 	@Test
 	public void orthogonalTransition_BetweenCompositeStateRegions() {
 		Statechart statechart = loadStatechart("OrthogonalTransition02.sct");
-		tester.validate(statechart).assertError(TRANSITION_SOURCE_TARGET_NOT_ORTHOGONAL_CODE);
+		tester.validate(statechart).assertError(TRANSITION_SOURCE_NOT_ORTHOGONAL_TO_TARGET_CODE);
 	}
 
 	@Override

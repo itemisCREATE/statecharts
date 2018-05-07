@@ -29,30 +29,36 @@ import org.yakindu.sct.model.sgraph.Vertex;
  */
 public class TransitionValidator extends AbstractSGraphValidator {
 
-	private static final String TRANSITION_SOURCE_TARGET_NOT_ORTHOGONAL_MSG = "Source and target of a transition must not be located in orthogonal regions!";
-	public static final String TRANSITION_SOURCE_TARGET_NOT_ORTHOGONAL_CODE = "transition.source.target";
-
-	private static final String INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER_MSG = "Outgoing transitions from entries can only target to sibling or inner states.";
-	public static final String INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER_CODE = "transition.source.entry";
+	private static final String RANSITION_SOURCE_NOT_ORTHOGONAL_TO_TARGET_MSG = "Source and target of a transition must not be located in orthogonal regions!";
+	public static final String  TRANSITION_SOURCE_NOT_ORTHOGONAL_TO_TARGET_CODE = "transition.SourceNotOrthogonalToTarget";
 
 	@Check
-	public void orthogonalTransition(Transition transition) {
+	public void checkTransitionSourceNotOrthogonalToTarget(Transition transition) {
 		Vertex source = transition.getSource();
 		Vertex target = transition.getTarget();
 		if ((source instanceof Synchronization) || (target instanceof Synchronization))
 			return;
 		EObject commonAncestor = commonAncestor(source, target);
 		if (commonAncestor instanceof CompositeElement) {
-			error(TRANSITION_SOURCE_TARGET_NOT_ORTHOGONAL_MSG, transition, null, -1,
-					TRANSITION_SOURCE_TARGET_NOT_ORTHOGONAL_CODE);
+			error(RANSITION_SOURCE_NOT_ORTHOGONAL_TO_TARGET_MSG, transition, null, -1,
+					TRANSITION_SOURCE_NOT_ORTHOGONAL_TO_TARGET_CODE);
 		}
 	}
 
+
+	
+	private static final String REGION_ENTRY_TARGET_MUST_BE_CHILD_MSG  = "Entry target must be child of the region.";
+	public static final String  REGION_ENTRY_TARGET_MUST_BE_CHILD_CODE = "region.EntryTargetMustBeChild";
+
+	/**
+	 * TODO: check region instead of transition.
+	 * @param t
+	 */
 	@Check(CheckType.FAST)
-	public void initialEntryWithTransitionToContainer(Transition t) {
+	public void checkRegionEntryTargetMustBeChild(Transition t) {
 		if (t.getSource() instanceof Entry && !isChildOrSibling(t.getSource(), t.getTarget())) {
-			error(INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER_MSG, t, null, -1,
-					INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER_CODE);
+			error(REGION_ENTRY_TARGET_MUST_BE_CHILD_MSG, t, null, -1,
+					REGION_ENTRY_TARGET_MUST_BE_CHILD_CODE);
 		}
 	}
 
