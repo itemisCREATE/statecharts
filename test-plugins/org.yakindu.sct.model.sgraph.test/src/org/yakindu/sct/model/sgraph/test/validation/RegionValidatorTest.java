@@ -47,7 +47,7 @@ public class RegionValidatorTest extends AbstractSGraphValidatorTest {
 		region.getVertices().add(entry2);
 		createTransition(entry, state);
 		createTransition(entry2, state);
-		tester.validate(entry).assertError(REGION_MULTIPLE_DEFAULT_ENTRIES_CODE);
+		tester.validate(entry).assertError(REGION_NO_MULTIPLE_DEFAULT_ENTRIES_CODE);
 	}
 
 	@Test
@@ -57,7 +57,7 @@ public class RegionValidatorTest extends AbstractSGraphValidatorTest {
 		result.assertDiagnosticsCount(2);
 
 		result.assertAny(
-				AssertableDiagnostics.errorCode(REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NO_DEFAULT_ENTRY_CODE));
+				AssertableDiagnostics.errorCode(REGION_REQUIRES_DEFAULT_ENTRY_IF_ENTERED_BY_SHALLOW_HISTORY_CODE));
 		result.assertAny(AssertableDiagnostics
 				.errorCode(REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NON_CONNECTED_DEFAULT_ENTRY_CODE));
 	}
