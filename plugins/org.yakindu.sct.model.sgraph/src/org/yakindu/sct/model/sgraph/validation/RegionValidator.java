@@ -43,11 +43,12 @@ public class RegionValidator extends AbstractSGraphValidator {
 
 	/**
 	 * TODO: remove second message as this is not required. Every default entry must have a target transition.
+	 * TODO: check on region instead of entry. 
 	 * 
 	 * @param e
 	 */
 	@Check(CheckType.FAST)
-	public void regionCantBeEnteredUsingShallowHistory(Entry e) {
+	public void checkRegionRequiresDefaultEntryIfEnteredByShallowHistory(Entry e) {
 		if (e.getKind() == EntryKind.SHALLOW_HISTORY) {
 			List<Region> regions = new ArrayList<>();
 			for (Vertex v : e.getParentRegion().getVertices()) {
@@ -81,10 +82,14 @@ public class RegionValidator extends AbstractSGraphValidator {
 
 	
 	private final static String REGION_NO_MULTIPLE_DEFAULT_ENTRIES_MSG = "There are multiple default entry nodes (one without a name and one named 'default') in this region.";
-	public final static String REGION_NO_MULTIPLE_DEFAULT_ENTRIES_CODE = "region.NoMultipleDefaultEntries";
+	public final static String REGION_MUST_NOT_HAVE_MULTIPLE_DEFAULT_ENTRIES_CODE = "region.MustNotHaveMultipleDefaultEntries";
 
+	/**
+	 * TODO: check on region instead of entry.
+	 * @param entry
+	 */
 	@Check
-	public void checkOnlyOneDefaultEntryPermitted(Entry entry) {
+	public void checkRegionMustNotHaveMultipleDefaultEntries(Entry entry) {
 		Region region = (Region) entry.eContainer();
 		List<Entry> initialEntires = region.getVertices().stream().filter(Entry.class::isInstance)
 				.map(Entry.class::cast).filter(v -> v.getKind() == EntryKind.INITIAL).collect(Collectors.toList());
@@ -92,7 +97,7 @@ public class RegionValidator extends AbstractSGraphValidator {
 		boolean defaultNamedEntryExists = initialEntires.stream()
 				.filter(v -> v.getName().trim().equalsIgnoreCase("default")).count() > 0;
 		if (unamedEntryExists && defaultNamedEntryExists) {
-			error(REGION_NO_MULTIPLE_DEFAULT_ENTRIES_MSG, region, null, -1, REGION_NO_MULTIPLE_DEFAULT_ENTRIES_CODE);
+			error(REGION_NO_MULTIPLE_DEFAULT_ENTRIES_MSG, region, null, -1, REGION_MUST_NOT_HAVE_MULTIPLE_DEFAULT_ENTRIES_CODE);
 		}
 	}
 

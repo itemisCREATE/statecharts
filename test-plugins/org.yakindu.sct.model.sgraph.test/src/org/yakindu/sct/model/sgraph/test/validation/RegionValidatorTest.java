@@ -47,7 +47,7 @@ public class RegionValidatorTest extends AbstractSGraphValidatorTest {
 		region.getVertices().add(entry2);
 		createTransition(entry, state);
 		createTransition(entry2, state);
-		tester.validate(entry).assertError(REGION_NO_MULTIPLE_DEFAULT_ENTRIES_CODE);
+		tester.validate(entry).assertError(REGION_MUST_NOT_HAVE_MULTIPLE_DEFAULT_ENTRIES_CODE);
 	}
 
 	@Test
