@@ -47,28 +47,4 @@ public class TransitionValidator extends AbstractSGraphValidator {
 
 
 	
-	private static final String REGION_ENTRY_TARGET_MUST_BE_CHILD_MSG  = "Entry target must be child of the region.";
-	public static final String  REGION_ENTRY_TARGET_MUST_BE_CHILD_CODE = "region.EntryTargetMustBeChild";
-
-	/**
-	 * TODO: check region instead of transition.
-	 * @param t
-	 */
-	@Check(CheckType.FAST)
-	public void checkRegionEntryTargetMustBeChild(Transition t) {
-		if (t.getSource() instanceof Entry && !isChildOrSibling(t.getSource(), t.getTarget())) {
-			error(REGION_ENTRY_TARGET_MUST_BE_CHILD_MSG, t, null, -1,
-					REGION_ENTRY_TARGET_MUST_BE_CHILD_CODE);
-		}
-	}
-
-	protected boolean isChildOrSibling(Vertex source, Vertex target) {
-		TreeIterator<EObject> iter = source.getParentRegion().eAllContents();
-		while (iter.hasNext()) {
-			if (target == iter.next()) {
-				return true;
-			}
-		}
-		return false;
-	}
 }

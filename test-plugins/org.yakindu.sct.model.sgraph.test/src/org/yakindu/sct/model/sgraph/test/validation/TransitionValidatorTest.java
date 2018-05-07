@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.model.sgraph.test.validation;
 
-import static org.yakindu.sct.model.sgraph.validation.TransitionValidator.REGION_ENTRY_TARGET_MUST_BE_CHILD_CODE;
 import static org.yakindu.sct.model.sgraph.validation.TransitionValidator.TRANSITION_SOURCE_NOT_ORTHOGONAL_TO_TARGET_CODE;
 
 import org.junit.Test;
@@ -29,12 +28,6 @@ public class TransitionValidatorTest extends AbstractSGraphValidatorTest {
 
 	@Inject
 	protected SGraphJavaValidatorTester<TransitionValidator> tester;
-
-	@Test
-	public void initialEntryWithTransitionToContainer() {
-		Statechart statechart = loadStatechart("EntryTransitionToParentState.sct");
-		tester.validate(statechart).assertError(REGION_ENTRY_TARGET_MUST_BE_CHILD_CODE);
-	}
 
 	@Test
 	public void orthogonalTransition_BetweenTopLevelRegions() {

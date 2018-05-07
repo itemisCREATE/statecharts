@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.yakindu.sct.model.sgraph.CompositeElement;
@@ -115,6 +117,33 @@ public class RegionValidator extends AbstractSGraphValidator {
 		if (exit.getParentRegion().getComposite() instanceof Statechart) {
 			error(REGION_NO_EXIT_ON_TOP_LEVEL_MSG, exit, null, -1, REGION_NO_EXIT_ON_TOP_LEVEL_CODE);
 		}
+	}
+
+	
+	
+	private static final String REGION_ENTRY_TARGET_MUST_BE_CHILD_MSG  = "Entry target must be child of the region.";
+	public static final String  REGION_ENTRY_TARGET_MUST_BE_CHILD_CODE = "region.EntryTargetMustBeChild";
+
+	/**
+	 * TODO: check region instead of transition.
+	 * @param t
+	 */
+	@Check(CheckType.FAST)
+	public void checkRegionEntryTargetMustBeChild(Transition t) {
+		if (t.getSource() instanceof Entry && !isChildOrSibling(t.getSource(), t.getTarget())) {
+			error(REGION_ENTRY_TARGET_MUST_BE_CHILD_MSG, t, null, -1,
+					REGION_ENTRY_TARGET_MUST_BE_CHILD_CODE);
+		}
+	}
+
+	protected boolean isChildOrSibling(Vertex source, Vertex target) {
+		TreeIterator<EObject> iter = source.getParentRegion().eAllContents();
+		while (iter.hasNext()) {
+			if (target == iter.next()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
