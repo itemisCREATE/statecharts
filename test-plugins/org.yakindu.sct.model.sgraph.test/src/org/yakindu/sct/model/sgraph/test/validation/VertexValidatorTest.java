@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.model.sgraph.test.validation;
 
-import static org.yakindu.sct.model.sgraph.validation.VertexValidator.VERTEX_REACHABLE_CODE;
+import static org.yakindu.sct.model.sgraph.validation.VertexValidator.VERTEX_MUST_BE_REACHABLE_CODE;
 
 import org.junit.Test;
 import org.yakindu.sct.model.sgraph.Choice;
@@ -28,6 +28,8 @@ import com.google.inject.Inject;
 /**
  *
  * Tests for {@link VertexValidator}
+ * 
+ * @author terfloth
  *
  */
 public class VertexValidatorTest extends AbstractSGraphValidatorTest {
@@ -41,7 +43,7 @@ public class VertexValidatorTest extends AbstractSGraphValidatorTest {
 	@Test
 	public void vertexNotReachable() {
 		State state = createState();
-		tester.validate(state).assertError(VERTEX_REACHABLE_CODE);
+		tester.validate(state).assertError(VERTEX_MUST_BE_REACHABLE_CODE);
 	}
 
 	/**
@@ -119,7 +121,7 @@ public class VertexValidatorTest extends AbstractSGraphValidatorTest {
 		((Region) state.eContainer()).getVertices().add(choice);
 		createTransition(state, choice);
 		createTransition(choice, state);
-		tester.validate(state).assertError(VERTEX_REACHABLE_CODE);
+		tester.validate(state).assertError(VERTEX_MUST_BE_REACHABLE_CODE);
 	}
 
 	/**
@@ -143,7 +145,7 @@ public class VertexValidatorTest extends AbstractSGraphValidatorTest {
 		createTransition(stateA, choice);
 		createTransition(choice, stateA);
 
-		tester.validate(state).assertError(VERTEX_REACHABLE_CODE);
+		tester.validate(state).assertError(VERTEX_MUST_BE_REACHABLE_CODE);
 	}
 
 	/**
@@ -157,7 +159,7 @@ public class VertexValidatorTest extends AbstractSGraphValidatorTest {
 		FinalState finalState = factory.createFinalState();
 		region.getVertices().add(finalState);
 
-		tester.validate(finalState).assertError(VERTEX_REACHABLE_CODE);
+		tester.validate(finalState).assertError(VERTEX_MUST_BE_REACHABLE_CODE);
 	}
 
 }
