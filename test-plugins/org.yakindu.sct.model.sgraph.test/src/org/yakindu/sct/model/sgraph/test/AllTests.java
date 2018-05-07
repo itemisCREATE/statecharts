@@ -17,6 +17,7 @@ import org.yakindu.sct.model.sgraph.test.validation.ChoiceValidatorTest;
 import org.yakindu.sct.model.sgraph.test.validation.EntryValidatorTest;
 import org.yakindu.sct.model.sgraph.test.validation.ExitValidatorTest;
 import org.yakindu.sct.model.sgraph.test.validation.FinalStateNoOutTransitionsValidatorTest;
+import org.yakindu.sct.model.sgraph.test.validation.RegionValidatorTest;
 import org.yakindu.sct.model.sgraph.test.validation.StateValidatorTest;
 import org.yakindu.sct.model.sgraph.test.validation.StatechartValidatorTest;
 import org.yakindu.sct.model.sgraph.test.validation.SynchronizationValidatorTest;
@@ -26,6 +27,7 @@ import org.yakindu.sct.model.sgraph.test.validation.VertexValidatorTest;
 @RunWith(value = Suite.class)
 @SuiteClasses(value = { 
 		StatechartValidatorTest.class, 
+		RegionValidatorTest.class,
 		ChoiceValidatorTest.class, 
 		EntryValidatorTest.class, 
 		ExitValidatorTest.class,

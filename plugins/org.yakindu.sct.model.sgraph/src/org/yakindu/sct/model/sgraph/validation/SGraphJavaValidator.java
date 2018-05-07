@@ -22,9 +22,18 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
  *
  *
  */
-@ComposedChecks(validators = { ResourceValidator.class, StatechartValidator.class, StateValidator.class,
-		ChoiceValidator.class, EntryValidator.class, ExitValidator.class, FinalStateValidator.class, SynchronizationValidator.class,
-		TransitionValidator.class, VertexValidator.class })
+@ComposedChecks(validators = { 
+		ResourceValidator.class, 
+		StatechartValidator.class, 
+		StateValidator.class,
+		RegionValidator.class,
+		ChoiceValidator.class, 
+		EntryValidator.class, 
+		ExitValidator.class, 
+		FinalStateValidator.class, 
+		SynchronizationValidator.class,
+		TransitionValidator.class, 
+		VertexValidator.class })
 public class SGraphJavaValidator extends AbstractSGraphValidator {
 
 }
