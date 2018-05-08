@@ -48,6 +48,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.ide.IGotoMarker;
+import org.eclipse.ui.internal.part.NullEditorInput;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ui.XtextProjectHelper;
@@ -106,6 +107,11 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	}
 
 	protected DomainStatus getDomainStatus() {
+		if (getDiagram() == null || getEditorInput() == null || getEditorInput() instanceof NullEditorInput) {
+			return new DomainStatus(Severity.ERROR, "An error occured while opening the file.\n\n"
+					+ "This might have happened because you tried to open a corrupt statechart with merge conflicts.\n"
+					+ "You need to resolve them with the Merge Tool (Right click on file in Project Explorer 'Team > Merge Tool')");
+		}
 		EObject element = getDiagram().getElement();
 		DomainElement domainElement = EcoreUtil2.getContainerOfType(element, DomainElement.class);
 		if (domainElement != null) {
@@ -120,8 +126,11 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		DomainStatus domainStatus = getDomainStatus();
 		if (domainStatus != null && !(domainStatus.getSeverity() == Severity.OK)) {
 			createStatusLabel(parent, domainStatus);
+			setIsValidDomain(false);
+		} else {
+			setIsValidDomain(true);
+			super.createBreadcrumbViewer(parent);
 		}
-		super.createBreadcrumbViewer(parent);
 	}
 
 	protected void createStatusLabel(Composite parent, DomainStatus domainStatus) {
@@ -143,9 +152,17 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	@Override
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
-		super.init(site, input);
-		checkXtextNature();
-		registerValidationListener();
+		try {
+			super.init(site, input);
+
+			checkXtextNature();
+			registerValidationListener();
+
+		} catch (Exception e) {
+			setIsValidDomain(false);
+			super.init(site, new NullEditorInput());
+		}
+
 	}
 
 	protected void registerValidationListener() {
@@ -163,9 +180,12 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			IValidationIssueStore sharedStore = editorWithSameResource.get().getAdapter(IValidationIssueStore.class);
 			return sharedStore;
 		} else {
+			if (getDiagram() == null)
+				throw new IllegalArgumentException("Diagram is null");
 			IValidationIssueStore newStore = getEditorInjector().getInstance(IValidationIssueStore.class);
 			newStore.connect(getDiagram().eResource());
 			return newStore;
+
 		}
 	}
 
@@ -177,7 +197,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			try {
 				IEditorInput otherInput = e.getEditorInput();
 				IEditorInput thisInput = this.getEditorInput();
-
 				return ID.equals(e.getId()) && !otherInput.equals(thisInput) && ((IFileEditorInput) otherInput)
 						.getFile().getLocationURI().equals(((IFileEditorInput) thisInput).getFile().getLocationURI());
 			} catch (PartInitException e1) {
@@ -236,9 +255,11 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	@Override
 	protected void createGraphicalViewer(Composite parent) {
+
 		super.createGraphicalViewer(parent);
 		IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench().getHelpSystem();
 		helpSystem.setHelp(getGraphicalViewer().getControl(), HelpContextIds.SC_EDITOR_GRAPHICAL_VIEWER);
+
 	}
 
 	@Override
@@ -383,20 +404,26 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	@Override
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class type) {
-		if (IContentOutlinePage.class.equals(type)) {
-			return createOutline(type);
-		} else if (IValidationIssueStore.class.equals(type)) {
-			return issueStore;
-		} else if (EObject.class.equals(type)) {
-			return this.getContextObject();
-		} else if (TransactionalEditingDomain.class.equals(type)) {
-			return getTransactionalEditingDomain();
-		} else if (Diagram.class.equals(type)) {
-			return getDiagram();
-		} else if (DiagramEditPart.class.equals(type)) {
-			return getDiagramEditPart();
+		try {
+			if (IContentOutlinePage.class.equals(type)) {
+				return createOutline(type);
+			} else if (IValidationIssueStore.class.equals(type)) {
+				return issueStore;
+			} else if (EObject.class.equals(type)) {
+				return this.getContextObject();
+			} else if (TransactionalEditingDomain.class.equals(type)) {
+				return getTransactionalEditingDomain();
+			} else if (Diagram.class.equals(type)) {
+				return getDiagram();
+			} else if (DiagramEditPart.class.equals(type)) {
+				return getDiagramEditPart();
+			}
+
+			return super.getAdapter(type);
+		} catch (Exception e) {
+			return null;
 		}
-		return super.getAdapter(type);
+
 	}
 
 	@Override
@@ -409,7 +436,10 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	@Override
 	public void createPartControl(Composite parent) {
 		super.createPartControl(parent);
-		toggleDefinitionSection();
+		if (isValidDomain()) {
+			toggleDefinitionSection();
+		}
+
 	}
 
 	public void toggleDefinitionSection() {
@@ -425,7 +455,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	@Override
 	public EObject getContextObject() {
-		if(getDiagram() == null || getDiagram().getElement() == null)
+		if (getDiagram() == null || getDiagram().getElement() == null)
 			return null;
 		EObject element = getDiagram().getElement();
 		return element;

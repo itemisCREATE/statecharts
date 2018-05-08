@@ -116,22 +116,10 @@ public class EdgeChangePostProcessor implements IPostProcessor {
 				if (requiredByRefChange.getReference() == SGraphPackage.Literals.VERTEX__INCOMING_TRANSITIONS
 						&& requiredByRefChange.getKind() == changeKind) {
 					return Collections
-							.<Diff> singletonList(requiredByRefChange); // FIXME:
-																		// collect
-																		// all
-																		// and
-																		// return
-																		// set?
-																		// Are
-																		// there
-																		// cases
-																		// where
-																		// more
-																		// than
-																		// one
-																		// should
-																		// be
-																		// returned?
+							.<Diff> singletonList(requiredByRefChange); 
+					// FIXME:
+					// collect all and return set?
+					// Are there cases where more than one should be returned?
 				}
 			}
 		}

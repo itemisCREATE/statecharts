@@ -37,9 +37,11 @@ public class StatechartPaletteProvider extends AbstractProvider implements IPale
 		IFile adapter = (IFile) editor.getEditorInput().getAdapter(IFile.class);
 		String domainID = DomainRegistry
 				.determineDomainID(URI.createPlatformResourceURI(adapter.getFullPath().toOSString(), true));
-		Injector editorInjector = DomainRegistry.getDomain(domainID).getInjector(IDomain.FEATURE_EDITOR);
-		ISCTPaletteFactory factory = editorInjector.getInstance(ISCTPaletteFactory.class);
-		factory.createPaletteEntries(root);
+		if (domainID != null && !domainID.isEmpty()) {
+			Injector editorInjector = DomainRegistry.getDomain(domainID).getInjector(IDomain.FEATURE_EDITOR);
+			ISCTPaletteFactory factory = editorInjector.getInstance(ISCTPaletteFactory.class);
+			factory.createPaletteEntries(root);
+		}
 	}
 
 	@Override

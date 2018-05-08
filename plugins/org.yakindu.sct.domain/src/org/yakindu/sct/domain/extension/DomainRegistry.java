@@ -117,7 +117,14 @@ public class DomainRegistry {
 
 	public static String determineDomainID(URI uri) {
 		if (URIConverter.INSTANCE.exists(uri, null)) {
-			return DomainIDParser.parse(uri);
+			try {
+				return DomainIDParser.parse(uri);
+			} catch (SAXException e) {
+				// the model is corrupt 
+				return "";
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
 	}
@@ -193,7 +200,7 @@ public class DomainRegistry {
 
 		}
 
-		public static String parse(URI uri) {
+		public static String parse(URI uri) throws Exception {
 			final StringBuilder result = new StringBuilder();
 			SAXParserFactory f = SAXParserFactory.newInstance();
 			try (InputStream is = URIConverter.INSTANCE.createInputStream(uri, null)) {
@@ -214,7 +221,7 @@ public class DomainRegistry {
 			} catch (StopParsingException e) {
 				// Intentional to cancel parsing
 			} catch (SAXException | IOException | ParserConfigurationException e) {
-				e.printStackTrace();
+				throw e;
 			}
 			if (result.length() == 0)
 				result.append(BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral());

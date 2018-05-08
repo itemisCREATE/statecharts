@@ -46,8 +46,8 @@ public class ResourceUtil {
 
 	public static Statechart loadStatechart(String filename) {
 		Resource resource = loadResource(filename);
-		Statechart statechart = (Statechart) EcoreUtil.getObjectByType(
-				resource.getContents(), SGraphPackage.Literals.STATECHART);
+		Statechart statechart = (Statechart) EcoreUtil.getObjectByType(resource.getContents(),
+				SGraphPackage.Literals.STATECHART);
 		return statechart;
 	}
 

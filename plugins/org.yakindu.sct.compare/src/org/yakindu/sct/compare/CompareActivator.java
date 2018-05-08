@@ -10,13 +10,17 @@
 */
 package org.yakindu.sct.compare;
 
+import org.eclipse.emf.compare.ide.ui.internal.EMFCompareIDEUIPlugin;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 /**
  * The activator class controls the plug-in life cycle
  */
+@SuppressWarnings("restriction")
 public class CompareActivator extends AbstractUIPlugin {
+
+	public static final String DEFAULT_MERGE_RESOLUTION_PROVIDER = "org.eclipse.emf.compare.egit.ui.internal.mergeresolution.PostMergeStager";
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.yakindu.sct.compare"; //$NON-NLS-1$
@@ -28,6 +32,8 @@ public class CompareActivator extends AbstractUIPlugin {
 	 * The constructor
 	 */
 	public CompareActivator() {
+		//see https://www.eclipse.org/forums/index.php/t/1089622/
+		EMFCompareIDEUIPlugin.getDefault().getMergeResolutionListenerRegistry().removeProvider(DEFAULT_MERGE_RESOLUTION_PROVIDER);
 	}
 
 	/*

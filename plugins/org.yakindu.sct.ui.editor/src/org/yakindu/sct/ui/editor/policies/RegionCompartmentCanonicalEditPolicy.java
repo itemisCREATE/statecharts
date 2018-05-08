@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.emf.common.command.AbstractCommand;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewType;
@@ -36,7 +37,7 @@ import com.google.common.collect.Lists;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-@SuppressWarnings({ "rawtypes", "unchecked" })
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class RegionCompartmentCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 
 	@Override
@@ -124,10 +125,19 @@ public class RegionCompartmentCanonicalEditPolicy extends CanonicalConnectionEdi
 	}
 
 	protected void persistTransientViews(List<IAdaptable> createdViews) {
-		for (IAdaptable iAdaptable : createdViews) {
-			((View) iAdaptable.getAdapter(View.class)).persist();
-		}
-		// View#persist is not overridden for Edges in GMF Notation (Bug)
-		getHost().getNotationView().getDiagram().persistEdges();
+		getHost().getEditingDomain().getCommandStack().execute(new AbstractCommand() {
+			@Override
+			public void execute() {
+				for (IAdaptable iAdaptable : createdViews) {
+					((View) iAdaptable.getAdapter(View.class)).persist();
+				}
+				// View#persist is not overridden for Edges in GMF Notation (Bug)
+				getHost().getNotationView().getDiagram().persistEdges();
+			}
+
+			@Override
+			public void redo() {
+			}
+		});
 	}
 }

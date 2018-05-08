@@ -40,8 +40,7 @@ import org.yakindu.sct.ui.navigator.utils.ComposedAdapterFactoryUtil;
  * @author markus.muehlbrandt
  * 
  */
-public class StatechartNavigatorContentProvider implements
-		ICommonContentProvider {
+public class StatechartNavigatorContentProvider implements ICommonContentProvider {
 
 	private AdapterFactoryContentProvider myAdapterFctoryContentProvier;
 
@@ -60,26 +59,23 @@ public class StatechartNavigatorContentProvider implements
 	private ViewerFilter viewerFilter;
 
 	public StatechartNavigatorContentProvider() {
-		myAdapterFctoryContentProvier = new AdapterFactoryContentProvider(
-				ComposedAdapterFactoryUtil.FACTORY);
+		myAdapterFctoryContentProvier = new AdapterFactoryContentProvider(ComposedAdapterFactoryUtil.FACTORY);
 
-		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE
-				.createEditingDomain();
+		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE.createEditingDomain();
 		myEditingDomain = (AdapterFactoryEditingDomain) editingDomain;
-		myEditingDomain
-				.setResourceToReadOnlyMap(new HashMap<Resource, Boolean>() {
-					/**
-			 * 
-			 */
-					private static final long serialVersionUID = -7623655803631543084L;
+		myEditingDomain.setResourceToReadOnlyMap(new HashMap<Resource, Boolean>() {
+			/**
+			* 
+			*/
+			private static final long serialVersionUID = -7623655803631543084L;
 
-					public Boolean get(Object key) {
-						if (!containsKey(key)) {
-							put((Resource) key, Boolean.TRUE);
-						}
-						return super.get(key);
-					}
-				});
+			public Boolean get(Object key) {
+				if (!containsKey(key)) {
+					put((Resource) key, Boolean.TRUE);
+				}
+				return super.get(key);
+			}
+		});
 		myViewerRefreshRunnable = new Runnable() {
 			public void run() {
 				if (myViewer != null && !myViewer.getControl().isDisposed()) {
@@ -87,71 +83,60 @@ public class StatechartNavigatorContentProvider implements
 				}
 			}
 		};
-		myWorkspaceSynchronizer = new WorkspaceSynchronizer(editingDomain,
-				new WorkspaceSynchronizer.Delegate() {
-					public void dispose() {
-					}
+		myWorkspaceSynchronizer = new WorkspaceSynchronizer(editingDomain, new WorkspaceSynchronizer.Delegate() {
+			public void dispose() {
+			}
 
-					public boolean handleResourceChanged(final Resource resource) {
-						for (Iterator<Resource> it = myEditingDomain
-								.getResourceSet().getResources().iterator(); it
-								.hasNext();) {
-							Resource nextResource = (Resource) it.next();
-							nextResource.unload();
-						}
-						if (myViewer != null) {
-							myViewer.getControl().getDisplay()
-									.asyncExec(myViewerRefreshRunnable);
-						}
-						return true;
-					}
+			public boolean handleResourceChanged(final Resource resource) {
+				for (Iterator<Resource> it = myEditingDomain.getResourceSet().getResources().iterator(); it
+						.hasNext();) {
+					Resource nextResource = (Resource) it.next();
+					nextResource.unload();
+				}
+				if (myViewer != null) {
+					myViewer.getControl().getDisplay().asyncExec(myViewerRefreshRunnable);
+				}
+				return true;
+			}
 
-					public boolean handleResourceDeleted(Resource resource) {
-						for (Iterator<Resource> it = myEditingDomain
-								.getResourceSet().getResources().iterator(); it
-								.hasNext();) {
-							Resource nextResource = (Resource) it.next();
-							nextResource.unload();
-						}
-						if (myViewer != null) {
-							myViewer.getControl().getDisplay()
-									.asyncExec(myViewerRefreshRunnable);
-						}
-						return true;
-					}
+			public boolean handleResourceDeleted(Resource resource) {
+				for (Iterator<Resource> it = myEditingDomain.getResourceSet().getResources().iterator(); it
+						.hasNext();) {
+					Resource nextResource = (Resource) it.next();
+					nextResource.unload();
+				}
+				if (myViewer != null) {
+					myViewer.getControl().getDisplay().asyncExec(myViewerRefreshRunnable);
+				}
+				return true;
+			}
 
-					public boolean handleResourceMoved(Resource resource,
-							final URI newURI) {
-						for (Iterator<Resource> it = myEditingDomain
-								.getResourceSet().getResources().iterator(); it
-								.hasNext();) {
-							Resource nextResource = (Resource) it.next();
-							nextResource.unload();
-						}
-						if (myViewer != null) {
-							myViewer.getControl().getDisplay()
-									.asyncExec(myViewerRefreshRunnable);
-						}
-						return true;
-					}
-				});
+			public boolean handleResourceMoved(Resource resource, final URI newURI) {
+				for (Iterator<Resource> it = myEditingDomain.getResourceSet().getResources().iterator(); it
+						.hasNext();) {
+					Resource nextResource = (Resource) it.next();
+					nextResource.unload();
+				}
+				if (myViewer != null) {
+					myViewer.getControl().getDisplay().asyncExec(myViewerRefreshRunnable);
+				}
+				return true;
+			}
+		});
 
 		myCrossReferenceAdapter = new ECrossReferenceAdapter();
-		myEditingDomain.getResourceSet().eAdapters()
-				.add(myCrossReferenceAdapter);
+		myEditingDomain.getResourceSet().eAdapters().add(myCrossReferenceAdapter);
 	}
 
 	public void dispose() {
 		myWorkspaceSynchronizer.dispose();
 		myWorkspaceSynchronizer = null;
 		myViewerRefreshRunnable = null;
-		for (Iterator<Resource> it = myEditingDomain.getResourceSet()
-				.getResources().iterator(); it.hasNext();) {
+		for (Iterator<Resource> it = myEditingDomain.getResourceSet().getResources().iterator(); it.hasNext();) {
 			Resource resource = (Resource) it.next();
 			resource.unload();
 		}
-		myEditingDomain.getResourceSet().eAdapters()
-				.remove(myCrossReferenceAdapter);
+		myEditingDomain.getResourceSet().eAdapters().remove(myCrossReferenceAdapter);
 		((TransactionalEditingDomain) myEditingDomain).dispose();
 		myEditingDomain = null;
 	}
@@ -177,19 +162,19 @@ public class StatechartNavigatorContentProvider implements
 
 		if (parentElement instanceof IFile) {
 			IFile file = (IFile) parentElement;
-			URI fileURI = URI.createPlatformResourceURI(file.getFullPath()
-					.toString(), true);
-			Resource resource = myEditingDomain.getResourceSet().getResource(
-					fileURI, true);
-			return wrapEObjects(
-					myAdapterFctoryContentProvier.getChildren(resource),
-					parentElement);
+			URI fileURI = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+			try {
+				Resource resource = myEditingDomain.getResourceSet().getResource(fileURI, true);
+				return wrapEObjects(myAdapterFctoryContentProvier.getChildren(resource), parentElement);
+			} catch (Exception e) {
+				return null;
+			}
 		}
 
 		if (parentElement instanceof DomainNavigatorItem) {
 			return wrapEObjects(
-					myAdapterFctoryContentProvier.getChildren(((DomainNavigatorItem) parentElement)
-							.getEObject()), parentElement);
+					myAdapterFctoryContentProvier.getChildren(((DomainNavigatorItem) parentElement).getEObject()),
+					parentElement);
 		}
 		return EMPTY_ARRAY;
 	}
@@ -198,8 +183,7 @@ public class StatechartNavigatorContentProvider implements
 		Collection<DomainNavigatorItem> result = new ArrayList<DomainNavigatorItem>();
 		for (int i = 0; i < objects.length; i++) {
 			if (objects[i] instanceof EObject) {
-				DomainNavigatorItem navigatorItem = new DomainNavigatorItem(
-						(EObject) objects[i], parentElement,
+				DomainNavigatorItem navigatorItem = new DomainNavigatorItem((EObject) objects[i], parentElement,
 						myAdapterFctoryContentProvier);
 				// Check if object has a corresponding View
 				if (!(objects[i] instanceof View)) {
@@ -214,13 +198,11 @@ public class StatechartNavigatorContentProvider implements
 
 	private View getReferencigView(EObject eObject) {
 
-		Collection<Setting> inverseReferences = myCrossReferenceAdapter
-				.getInverseReferences(eObject, true);
+		Collection<Setting> inverseReferences = myCrossReferenceAdapter.getInverseReferences(eObject, true);
 
 		for (Setting setting : inverseReferences) {
 			if (setting.getEObject() instanceof View
-					&& setting.getEStructuralFeature() == NotationPackage.eINSTANCE
-							.getView_Element()) {
+					&& setting.getEStructuralFeature() == NotationPackage.eINSTANCE.getView_Element()) {
 				return (View) setting.getEObject();
 			}
 		}
@@ -244,6 +226,8 @@ public class StatechartNavigatorContentProvider implements
 	}
 
 	protected boolean hasVisibleChildren(Object parent) {
+		if (myViewer == null || myViewer.getInput() == null)
+			return false;
 		Object[] children = getChildren(parent);
 		for (Object obj : children) {
 			if (getViewerFilter().select(null, parent, obj)) {
