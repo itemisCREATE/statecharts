@@ -15,11 +15,11 @@
 <plugin>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated sruntime -->
+      <!-- @generated SRuntime -->
       <package
             uri="http://www.yakindu.org/sct/sruntime/2.0.0"
             class="org.yakindu.sct.model.sruntime.SRuntimePackage"
-            genModel="model/sruntime.genmodel"/>
+            genModel="model/SRuntime.xcore"/>
    </extension>
 
 </plugin>
