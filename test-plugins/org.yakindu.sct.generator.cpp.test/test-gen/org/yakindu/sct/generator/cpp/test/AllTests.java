@@ -17,7 +17,7 @@ import org.junit.runners.Suite.SuiteClasses;
 		FloatModuloTest.class, GuardTest.class, GuardedEntryTest.class, GuardedExitTest.class,
 		HistoryWithExitPointTest.class, HistoryWithoutInitialStepTest.class, InEventLifeCycleTest.class,
 		IntegerExpressionsTest.class, InternalEventLifeCycleTest.class, LocalReactionsTest.class, LogicalAndTests.class,
-		LogicalOrTests.class, LocalEventsTest.class, NamedInterfaceAccessTest.class, OperationsTest.class,
+		LogicalOrTests.class, LocalEventsTest.class, NamedInterfaceAccessTest.class, NoLocalEventsTest.class, OperationsTest.class,
 		OutEventLifeCycleTest.class, ParenthesisTest.class, ParentFirstExecutionHierarchyTest.class,
 		ParentFirstLocalReactionsTest.class, PriorityValuesTest.class, RaiseEventTest.class, ReadOnlyVariableTest.class,
 		SameNameDifferentRegionTest.class, ShallowHistoryTest.class, ShallowHistoryWithDeepEntryTest.class,
