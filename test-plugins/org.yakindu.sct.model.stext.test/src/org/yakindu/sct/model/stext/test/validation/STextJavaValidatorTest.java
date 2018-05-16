@@ -806,6 +806,15 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		assertIssueCount(diagnostics, 2);
 		assertError(diagnostics, EXITPOINTSPEC_WITH_TRIGGER);
 	}
+	
+	@Test
+	public void checkExitTransitionExists() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "NoExitTransition.sct");
+		
+		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics, EXIT_DEFAULT_UNUSED);
+	}
 
 	@Test
 	public void checkAssignmentToFinalVariable() {
