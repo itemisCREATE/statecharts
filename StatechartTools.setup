@@ -2523,5 +2523,8 @@
       xsi:type="launching:LaunchTask"
       excludedTriggers="STARTUP"
       launcher="GenerateSGen.mwe2"/>
+  <setupTask
+      xsi:type="projects:ProjectsBuildTask"
+      clean="true"/>
   <stream name="master"/>
 </setup:Project>
