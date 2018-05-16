@@ -55,7 +55,6 @@ If you are familiar with Eclipse plugin development then you may want to checkou
 16. After having built the workspace, you will see a lot of errors in it. That's because the language artifacts haven't been generated yet. Oomph made a contribution to the toolbar. Click on the double-arrow symbol. The *Confirmation* window appears. Deselect everything except for the three "Launch …" tasks. (The other tasks have already been executed.) The selected tasks will generate the languages "Expressions", "SText", and "SGen".
 17. Click on *Finish*.
 18. Click *Proceed* three times in order to confirm the execution of each launch despite any existing errors.
-19. Do a "clean all", i.e. select *Project → Clean…* from the main menu, make sure *Clean all projects* is checked, then click on *OK*.
 
 ### How to setup your developer workspace without Oomph
 1. Download Eclipse Oxygen from https://www.eclipse.org/downloads/
