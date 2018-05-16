@@ -813,7 +813,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	@Test
-	public void checkSynchronizationOutTrigger() {
+	public void checkSyncNoTriggersOnOutgoingTransition() {
 		Statechart statechart = AbstractTestModelsUtil
 				.loadStatechart(VALIDATION_TESTMODEL_DIR + "SynchronizationExitTransition.sct");
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
