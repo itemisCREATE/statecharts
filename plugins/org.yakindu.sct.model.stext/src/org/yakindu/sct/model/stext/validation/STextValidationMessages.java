@@ -4,18 +4,18 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  * 	itemis AG - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.model.stext.validation;
 
 /**
- * 
- * 
+ *
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public interface STextValidationMessages {
 
@@ -58,4 +58,5 @@ public interface STextValidationMessages {
 	public static final String DUPLICATE_IMPORT = "Duplicate import '%s'.";
 	public static final String CONTRADICTORY_ANNOTATIONS = "Some annotations (%s) have contradictory effects.";
 	public static final String BAD_EVENT_NAMES = "'%s' is already used as name of an internal event.";
+	public static final String SYNC_OUTGOING_TRIGGER = "Triggers and guards on a synchronization's outgoing transitions will be ignored.";
 }

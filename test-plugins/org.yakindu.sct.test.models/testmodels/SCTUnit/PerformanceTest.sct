@@ -76,7 +76,7 @@
         </regions>
       </vertices>
       <vertices xsi:type="sgraph:Synchronization" xmi:id="_sn444ANbEeKwQP8D-v2eag" incomingTransitions="_ttsqYANbEeKwQP8D-v2eag _zDMIYANbEeKwQP8D-v2eag">
-        <outgoingTransitions xmi:id="_wiS48ANbEeKwQP8D-v2eag" specification="always" target="_pyZkYQNZEeKwQP8D-v2eag"/>
+        <outgoingTransitions xmi:id="_wiS48ANbEeKwQP8D-v2eag" specification="" target="_pyZkYQNZEeKwQP8D-v2eag"/>
       </vertices>
     </regions>
   </sgraph:Statechart>
