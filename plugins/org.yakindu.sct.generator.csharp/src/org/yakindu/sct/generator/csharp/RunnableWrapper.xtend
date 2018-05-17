@@ -17,6 +17,7 @@ import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 
@@ -29,7 +30,7 @@ class RunnableWrapper {
 	@Inject protected extension RunnableFeature
 
 	@Inject protected extension Naming
-	@Inject protected extension Navigation
+	@Inject protected extension SExecExtensions
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ICodegenTypeSystemAccess
 	
