@@ -13,15 +13,15 @@ package org.yakindu.sct.generator.c.eventdriven
 import com.google.inject.Inject
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.extensions.EventNaming
-import org.yakindu.sct.generator.c.extensions.Navigation
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 
 /**
  * @author René Beckmann
  */
 class StatechartEventsSource {
-	@Inject extension Navigation
+	@Inject extension SExecExtensions
 	@Inject extension EventNaming
 	@Inject protected extension ICodegenTypeSystemAccess
 	

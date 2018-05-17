@@ -21,6 +21,7 @@ import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
@@ -34,7 +35,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader {
 
 	@Inject protected extension CppNaming
-	@Inject protected extension Navigation
+	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension INamingService

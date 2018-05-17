@@ -14,9 +14,9 @@ import com.google.inject.Inject
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.CppNaming
-import org.yakindu.sct.generator.cpp.Navigation
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
@@ -26,7 +26,7 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
  */
 class StatechartEvents {
 	@Inject protected extension CppNaming
-	@Inject protected extension Navigation
+	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension INamingService

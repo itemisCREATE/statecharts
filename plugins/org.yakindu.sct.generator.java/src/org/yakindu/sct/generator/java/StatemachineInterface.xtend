@@ -18,20 +18,22 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*;
+
+import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
 
 class StatemachineInterface {
 
 	@Inject extension Naming
 	@Inject extension JavaNamingService
 	@Inject extension GenmodelEntries
-	@Inject extension Navigation
+	@Inject extension SExecExtensions
 	@Inject extension ITypeSystem
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension JavaExpressionsGenerator

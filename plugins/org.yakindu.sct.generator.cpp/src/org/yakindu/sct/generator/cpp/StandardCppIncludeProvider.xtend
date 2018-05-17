@@ -6,11 +6,12 @@ import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.IncludeProvider
 import org.yakindu.sct.generator.c.StandardIncludeProvider
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 
 class StandardCppIncludeProvider extends StandardIncludeProvider implements IncludeProvider {
 
 	@Inject protected extension CppNaming
-	@Inject protected extension Navigation
+	@Inject protected extension SExecExtensions
 
 	override getIncludes(ExecutionFlow it, List<CharSequence> includes,
 		extension IGenArtifactConfigurations artifactConfigs) {
