@@ -405,8 +405,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				Iterator<Transition> transitionIt = state.getOutgoingTransitions().iterator();
 				while (transitionIt.hasNext() && !hasOutgoingTransition) {
 					Transition transition = transitionIt.next();
-					hasOutgoingTransition = STextValidationModelUtils.isDefaultExitTransition(transition) ? true
-							: STextValidationModelUtils.isNamedExitTransition(transition, exit.getName());
+					hasOutgoingTransition = STextValidationModelUtils.isDefaultExitTransition(transition)
+							|| STextValidationModelUtils.isNamedExitTransition(transition, exit.getName());
 				}
 				if (!hasOutgoingTransition) {
 					error(EXIT_UNUSED, exit, null, -1);
@@ -418,7 +418,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 					hasOutgoingTransition = STextValidationModelUtils.isDefaultExitTransition(transitionIt.next());
 				}
 				if (!hasOutgoingTransition) {
-					error(EXIT_DEFAULT_UNUSED, exit, null, -1);
+					error(EXIT_UNUSED, exit, null, -1);
 				}
 			}
 		}
