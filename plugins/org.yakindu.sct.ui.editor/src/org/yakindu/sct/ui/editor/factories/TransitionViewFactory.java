@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.factories;
 
@@ -20,9 +20,9 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
 
 /**
- * 
+ *
  * @author muelder
- * 
+ *
  */
 public class TransitionViewFactory extends ConnectionViewFactory {
 

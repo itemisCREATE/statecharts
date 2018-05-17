@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.editor.figures;
 
@@ -27,10 +27,10 @@ import org.yakindu.base.xtext.utils.gmf.figures.SyntaxColoringLabel;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
 
 /**
- * 
+ *
  * @author muelder
  * @author terfloth
- * 
+ *
  */
 public class RegionFigure extends RectangleFigure {
 
@@ -82,7 +82,7 @@ public class RegionFigure extends RectangleFigure {
 	@Override
 	protected void fillShape(Graphics graphics) {
 		Color c = mixColor(getBackgroundColor(), ColorConstants.white, 220);
-		fillVerticalGradientRectangle(graphics, getBounds(), getBackgroundColor(), c);
+		fillVerticalGradientRectangle(graphics, getBounds(), getBackgroundColor(), getBackgroundColor());
 		c.dispose();
 	}
 

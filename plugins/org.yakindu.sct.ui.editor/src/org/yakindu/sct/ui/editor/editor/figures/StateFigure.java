@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.editor.figures;
 
@@ -24,16 +24,15 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
-import org.eclipse.gmf.runtime.draw2d.ui.mapmode.MapModeUtil;
 import org.eclipse.swt.graphics.Color;
 import org.yakindu.base.xtext.utils.gmf.figures.SyntaxColoringLabel;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
 
 /**
- * 
+ *
  * @author andreas muelder
  * @author axel terfloth
- * 
+ *
  */
 public class StateFigure extends RoundedRectangle {
 
@@ -115,39 +114,39 @@ public class StateFigure extends RoundedRectangle {
 	@Override
 	protected void fillShape(Graphics graphics) {
 		Color c = mixColor(getBackgroundColor(), ColorConstants.white, 224);
-		fillVerticalGradientRoundedRectangle(graphics, getBounds(),
-				getCornerDimensions(), getBackgroundColor(), c);
+		fillVerticalGradientRoundedRectangle(graphics, getBounds(), getCornerDimensions(), getBackgroundColor(),
+				getBackgroundColor());
 		c.dispose();
 	}
 
 	private void drawBlurredShadow(Graphics graphics) {
 		// draw the shadow...
-		graphics.pushState();
-
-		int size = MapModeUtil.getMapMode(this).DPtoLP(BLUR_SHADOW_WIDTH);
-		int step = MapModeUtil.getMapMode(this).DPtoLP(-1);
-
-		graphics.setForegroundColor(ColorConstants.gray);
-		graphics.setLineWidth(MapModeUtil.getMapMode(this).DPtoLP(2));
-		graphics.translate(size, size);
-		graphics.setClip(graphics.getClip(new Rectangle(getBounds())).expand(
-				size, size));
-		graphics.setAlpha(20);
-		outlineShape(graphics);
-		graphics.translate(step, step);
-		graphics.setAlpha(30);
-		outlineShape(graphics);
-		graphics.translate(step, step);
-		graphics.setAlpha(60);
-		outlineShape(graphics);
-		graphics.translate(step, step);
-		graphics.setAlpha(100);
-		outlineShape(graphics);
-		graphics.translate(step, step);
-		graphics.setAlpha(150);
-		outlineShape(graphics);
-
-		graphics.popState();
+		// graphics.pushState();
+		//
+		// int size = MapModeUtil.getMapMode(this).DPtoLP(BLUR_SHADOW_WIDTH);
+		// int step = MapModeUtil.getMapMode(this).DPtoLP(-1);
+		//
+		// graphics.setForegroundColor(ColorConstants.gray);
+		// graphics.setLineWidth(MapModeUtil.getMapMode(this).DPtoLP(2));
+		// graphics.translate(size, size);
+		// graphics.setClip(graphics.getClip(new Rectangle(getBounds())).expand(
+		// size, size));
+		// graphics.setAlpha(20);
+		// outlineShape(graphics);
+		// graphics.translate(step, step);
+		// graphics.setAlpha(30);
+		// outlineShape(graphics);
+		// graphics.translate(step, step);
+		// graphics.setAlpha(60);
+		// outlineShape(graphics);
+		// graphics.translate(step, step);
+		// graphics.setAlpha(100);
+		// outlineShape(graphics);
+		// graphics.translate(step, step);
+		// graphics.setAlpha(150);
+		// outlineShape(graphics);
+		//
+		// graphics.popState();
 	}
 
 }

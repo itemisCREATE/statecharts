@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.base.xtext.utils.gmf.figures;
 
@@ -40,9 +40,9 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
 /**
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionListener {
 
@@ -68,22 +68,27 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		textFlow.setRanges(ranges);
 	}
 
+	@Override
 	public void mouseEntered(MouseEvent me) {
 		setBorder(FOCUS_BORDER);
 	}
 
+	@Override
 	public void mouseExited(MouseEvent me) {
 		setBorder(NO_FOCUS_BORDER);
 	}
 
+	@Override
 	public void mouseDragged(MouseEvent me) {
 		// Nothing to do
 	}
 
+	@Override
 	public void mouseHover(MouseEvent me) {
 		// Nothing to do
 	}
 
+	@Override
 	public void mouseMoved(MouseEvent me) {
 		// Nothing to do
 	}
