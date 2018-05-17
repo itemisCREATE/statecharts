@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.factories;
 
@@ -30,19 +30,36 @@ import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
 
 /**
  * Convenience methods for semantic and notation model element creation.
- * 
+ *
  * @author muelder
- * 
+ *
  */
 public final class FactoryUtils {
 
-	private static final String INITIAL_SPECIFICATION = "@CycleBased(200)\n\ninterface:\n// Define events and\n// and variables here. \n//Use CTRL + Space for content assist.";
+	/* @formatter:off */
+	private static final String INITIAL_SPECIFICATION = ""
+			+ "@" + StatechartAnnotations.EVENT_DRIVEN_ANNOTATION + "\n"
+			+ "// Use the event driven execution model.\n"
+			+ "// Runs a run-to-completion step\n" + "// each time an event is raised.\n"
+			+ "// Switch to cycle based behavior\n" + "// by specifying '@CycleBased(200)'\n"
+			+ "// instead.\n"
+			+ "\n"
+			+ "@" + StatechartAnnotations.CHILD_FIRST_ANNOTATION + "\n"
+			+ "// In composite states, execute\n" + "// child states first.\n"
+			+ "// @" + StatechartAnnotations.PARENT_FIRST_ANNOTATION + " does the opposite.\n"
+			+ "\n"
+			+ "interface:\n"
+			+ "// Define events\n"
+			+ "// and variables here. \n"
+			+ "// Use CTRL + Space for content assist.";
+	/* @formatter:on */
 	private static final int INITIAL_REGION_WIDTH = 400;
 	private static final int INITIAL_REGION_HEIGHT = 400;
 	private static final String INITIAL_REGION_NAME = "main region";
@@ -59,7 +76,7 @@ public final class FactoryUtils {
 
 	/**
 	 * Creates a Label view
-	 * 
+	 *
 	 * @param owner
 	 * @param hint
 	 * @return
@@ -80,7 +97,7 @@ public final class FactoryUtils {
 
 	/**
 	 * Creates a Statechart with an initial Region and an initial State
-	 * 
+	 *
 	 * @return instanceof {@link Statechart}
 	 */
 	public static void createStatechartModel(Resource resource) {
@@ -89,7 +106,7 @@ public final class FactoryUtils {
 
 	/**
 	 * Creates a Statechart with an initial Region and an initial State
-	 * 
+	 *
 	 * @return instanceof {@link Statechart}
 	 */
 	public static void createStatechartModel(Resource resource, PreferencesHint preferencesHint) {
