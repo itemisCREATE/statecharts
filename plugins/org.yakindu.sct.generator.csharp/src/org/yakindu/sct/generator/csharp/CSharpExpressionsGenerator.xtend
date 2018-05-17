@@ -27,6 +27,7 @@ import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
@@ -35,7 +36,7 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 class CSharpExpressionsGenerator extends ExpressionsGenerator {
 
 	@Inject protected extension Naming
-	@Inject protected extension Navigation
+	@Inject protected extension SExecExtensions
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ITypeSystemInferrer
 
@@ -118,14 +119,14 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 			return getConstContext(it)
 		}
 		if (scope !== null) {
-			return scope.interfaceName.asEscapedIdentifier + "."
+			return interfaceScope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""
 	}
 
 	def getConstContext(Property it) {
 		if (scope !== null) {
-			return scope.interfaceName + "."
+			return interfaceScope.interfaceName + "."
 		} else {
 			return it.flow.statemachineInterfaceName + "."
 		}
@@ -133,14 +134,14 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch CharSequence getContext(Event it) {
 		if (scope !== null) {
-			return scope.interfaceName.asEscapedIdentifier + "."
+			return interfaceScope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""
 	}
 
 	def dispatch CharSequence getContext(OperationDefinition it) {
 		if (scope !== null) {
-			return scope.interfaceName.asEscapedIdentifier + "."
+			return interfaceScope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""
 	}
