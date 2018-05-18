@@ -121,7 +121,8 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	
 	def dispatch Object execute(PostFixUnaryExpression it) {
 		var result = operand.execute
-		context.resolve(operand).value =  evaluate(operator.getName(), result)
+		result = evaluate(operator.getName(), result)
+		context.resolve(operand).value =  result
 		result
 	}
 
