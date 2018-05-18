@@ -54,7 +54,14 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		executeWithDefaultScope("intVar = 42");
 		assertEquals(42L, getIntValue());
 	}
-
+	
+	@Test
+	public void testIncrementAssignment() {
+		executeWithDefaultScope("realVar = intVar++");
+		assertEquals(1, getIntValue());
+		assertEquals(0, getRealValue());
+	}
+	
 	@Test
 	public void testHexVariableAssignment() {
 		executeWithDefaultScope("intVar = 0xFF");
