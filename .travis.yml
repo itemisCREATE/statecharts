@@ -3,7 +3,6 @@ language: java
 dist: precise
 jdk: 
  - oraclejdk8
- - oraclejdk9
 addons:
  apt:
   packages:
