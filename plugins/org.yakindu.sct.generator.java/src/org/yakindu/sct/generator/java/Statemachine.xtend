@@ -171,10 +171,6 @@ class Statemachine {
 		«ENDIF»
 	'''
 	
-	def hasInternalEvents(ExecutionFlow it) {
-		! flow.internalScopeEvents.empty
-	}
-	
 	//reused by interfaces
 	def protected fieldDeclaration(VariableDefinition variable) {
 		'''private «variable.typeSpecifier.targetLanguageName» «variable.identifier»;
