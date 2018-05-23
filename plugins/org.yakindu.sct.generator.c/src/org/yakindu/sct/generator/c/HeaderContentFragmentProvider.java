@@ -21,7 +21,8 @@ import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenStatemachin
 public class HeaderContentFragmentProvider extends AbstractContentFragmentProvider<StatemachineHeader> {
 	@Override
 	public StatemachineHeader get() {
-		StatemachineHeader header = injector.getInstance(StatemachineHeader.class);
+		StatemachineHeader header = new StatemachineHeader();
+		injector.injectMembers(header);
 
 		if (isEventDriven()) {
 			header.getContentProviders().add(injector.getInstance(EventDrivenStatemachineHeaderFragment.class));

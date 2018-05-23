@@ -21,8 +21,8 @@ import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenStatemachin
 public class SourceContentFragmentProvider extends AbstractContentFragmentProvider<StatemachineSource> {
 	@Override
 	public StatemachineSource get() {
-		StatemachineSource source = injector.getInstance(StatemachineSource.class);
-
+		StatemachineSource source = new StatemachineSource();
+		injector.injectMembers(source);
 
 		source.getContentProviders().add(injector.getInstance(StatemachineSourceContentFragment.class));
 		if (isEventDriven()) {
