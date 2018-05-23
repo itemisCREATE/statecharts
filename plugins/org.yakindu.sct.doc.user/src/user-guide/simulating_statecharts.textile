@@ -124,7 +124,7 @@ The simulation view also displays _time events_, provided the statechart uses ti
 
 You can have multiple simulation instances running at the same time. They may simulate the same or different statecharts. Use the simulation view's drop-down menu to switch between simulation instances.
 
-A digital clock right from the drop-down menu displays the time spent in the simulation. It pauses while the simulation is suspended.
+A digital clock right from the drop-down menu displays the virtual time elapsed in the simulation. It pauses while the simulation is suspended.
 
 p(#simu_fig_simulation_view). 
 !(shadowless)images/simulation_030_simulation_view.png(The "Simulation" view)!
@@ -213,7 +213,7 @@ h3(#advsim_introduction). Introduction
 
 YAKINDU Statechart Tools' Professional Edition includes two simulator features that increase your productivity considerably when debugging statecharts:
 * You can attach *breakpoints* to states and transitions. If a statechart simulation reaches a transition or state with a breakpoint, it suspends execution of the simulation. A breakpoint can be amended with a _condition_. Such a breakpoint will suspend the simulation only if that condition is fulfilled, i.e., evaluates to _true_.
-* You can create *snapshots* of your statechart simulation. A snapshot contains everything making up your state machine simulation at any point in time. It describes the state of the state machine, if you will. Snapshots can be saved and restored later in order to continue the simulation from exactly the point the snapshot was taken.
+* You can create *snapshots* of your statechart simulation. A snapshot contains everything making up your state machine simulation at any point in time. It describes the state of the state machine. Snapshots can be saved and restored later in order to continue the simulation from exactly the point the snapshot was taken.
 
 
 h4(#advsim_the_light_switch_example). The light switch example
@@ -355,7 +355,7 @@ In the suspended status of a statechart simulation, you can change variable valu
 
 h4(#advsim_raising_multiple_events_simultaneously). Raising multiple events simultaneously
 
-If you click on an event's name in the simulation view to raise that event in normal simulation, i.e., while execution isn't suspended, the state machine immediately processes that event and takes the corresponding transition, if any.
+If you click on an event's name in the simulation view to raise that event in normal simulation, i.e., while execution isn't suspended, the state machine processes that event and takes the corresponding transition, if any.
 
 However, while the simulation is suspended, you can raise multiple events, without instant execution. Once execution resumes, the state machine's behavior depends on its "execution scheme":../user-guide/code_generation_intro.html#codegen_execution_schemes:
 * In the _cycle-based_ execution scheme, both events are handled at the same time, or, to be more exact, in the same run-to-completion step (RTC).
