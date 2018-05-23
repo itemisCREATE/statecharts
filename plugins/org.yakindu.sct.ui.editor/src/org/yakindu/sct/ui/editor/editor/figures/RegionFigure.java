@@ -10,10 +10,6 @@
  */
 package org.yakindu.sct.ui.editor.editor.figures;
 
-import static org.yakindu.sct.ui.editor.editor.figures.utils.GraphicsUtil.fillVerticalGradientRectangle;
-import static org.yakindu.sct.ui.editor.editor.figures.utils.GraphicsUtil.mixColor;
-
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.GridData;
 import org.eclipse.draw2d.GridLayout;
@@ -22,7 +18,6 @@ import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
-import org.eclipse.swt.graphics.Color;
 import org.yakindu.base.xtext.utils.gmf.figures.SyntaxColoringLabel;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
 
@@ -81,9 +76,7 @@ public class RegionFigure extends RectangleFigure {
 	 */
 	@Override
 	protected void fillShape(Graphics graphics) {
-		Color c = mixColor(getBackgroundColor(), ColorConstants.white, 220);
-		fillVerticalGradientRectangle(graphics, getBounds(), getBackgroundColor(), getBackgroundColor());
-		c.dispose();
+		super.fillShape(graphics);
 	}
 
 	public IMapMode getMapMode() {

@@ -6,10 +6,11 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.editparts;
 
+import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
@@ -20,11 +21,16 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.XYLayoutEditPolicy;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.policies.CompositeElementCanonicalEditPolicy;
+import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
 
 /**
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
+ */
+/**
+ * @author rbeckmann
+ *
  */
 public class StatechartDiagramEditPart extends DiagramEditPart implements IDiagramPreferenceSupport {
 
@@ -44,10 +50,20 @@ public class StatechartDiagramEditPart extends DiagramEditPart implements IDiagr
 		installEditPolicy(EditPolicyRoles.SNAP_FEEDBACK_ROLE, new SimpleSnapFeedbackPolicy());
 	}
 
+	@Override
+	public IFigure getFigure() {
+		IFigure figure = super.getFigure();
+		figure.setBackgroundColor(StatechartColorConstants.CANVAS_BG_COLOR);
+		figure.setOpaque(true);
+		return figure;
+	}
+
+	@Override
 	public void setPreferencesHint(PreferencesHint preferenceHint) {
 		this.preferenceHint = preferenceHint;
 	}
 
+	@Override
 	public PreferencesHint getPreferencesHint() {
 		return preferenceHint;
 	}

@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.editparts;
 
@@ -16,7 +16,6 @@ import org.eclipse.draw2d.GridData;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -53,12 +52,12 @@ import org.yakindu.sct.ui.editor.providers.SemanticHints;
 
 /**
  * The EditPart for the State.
- * 
- * 
+ *
+ *
  * @author andreas muelder
  * @author alexander nyssen
  * @author markus muehlbrandt
- * 
+ *
  */
 public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart {
 
@@ -102,10 +101,7 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 			@Override
 			// StateFigure is drawed smaller (Blurshadow size)
 			public Rectangle getHandleBounds() {
-				Insets insets = new Insets(0, 0, StateFigure.BLUR_SHADOW_WIDTH, StateFigure.BLUR_SHADOW_WIDTH);
-				return new Rectangle(getBounds().x + insets.left, getBounds().y + insets.top,
-						getBounds().width - (insets.right + insets.left),
-						getBounds().height - (insets.bottom + insets.top));
+				return new Rectangle(getBounds().x, getBounds().y, getBounds().width, getBounds().height);
 			}
 
 		};
@@ -244,7 +240,7 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 	public State resolveSemanticElement() {
 		return (State) super.resolveSemanticElement();
 	}
-	
+
 	@Override
 	public DragTracker getDragTracker(Request request) {
 		return new NonRevealingDragEditPartsTrackerEx(this);

@@ -19,10 +19,11 @@ import org.eclipse.swt.graphics.Color;
  *
  */
 public interface StatechartColorConstants {
+	Color CANVAS_BG_COLOR = new Color(null, 245, 245, 245);
 
 	Color STATE_BG_COLOR = new Color(null, 205, 220, 243);
 
-	Color REGION_BG_COLOR = new Color(null, 245, 245, 245);
+	Color REGION_BG_COLOR = ColorConstants.white;
 
 	Color STATE_LINE_COLOR = new Color(null, 163, 163, 163);
 

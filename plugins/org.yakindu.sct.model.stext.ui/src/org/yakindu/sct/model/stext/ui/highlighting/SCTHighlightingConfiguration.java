@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.model.stext.ui.highlighting;
 
@@ -16,9 +16,9 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfigurati
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 
 /**
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public class SCTHighlightingConfiguration extends DefaultHighlightingConfiguration {
 
@@ -28,5 +28,12 @@ public class SCTHighlightingConfiguration extends DefaultHighlightingConfigurati
 		textStyle.setColor(new RGB(14, 48, 131));
 		textStyle.setStyle(SWT.BOLD);
 		return textStyle;
+	}
+
+	@Override
+	public TextStyle numberTextStyle() {
+		TextStyle numberTextStyle = super.numberTextStyle();
+		numberTextStyle.setColor(new RGB(80, 80, 80));
+		return numberTextStyle;
 	}
 }
