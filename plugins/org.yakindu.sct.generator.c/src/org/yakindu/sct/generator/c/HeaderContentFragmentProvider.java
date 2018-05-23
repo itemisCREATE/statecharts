@@ -33,17 +33,16 @@ public class HeaderContentFragmentProvider implements Provider<StatemachineHeade
 
 	@Override
 	public StatemachineHeader get() {
-		StatemachineHeader source = new StatemachineHeader();
-		injector.injectMembers(source);
+		StatemachineHeader header = injector.getInstance(StatemachineHeader.class);
 
 		GeneratorEntry entry = injector.getInstance(GeneratorEntry.class);
 
 		if (isEventDriven(entry)) {
-			source.getContentProviders().add(injector.getInstance(EventDrivenStatemachineHeaderFragment.class));
+			header.getContentProviders().add(injector.getInstance(EventDrivenStatemachineHeaderFragment.class));
 		}
 
-		source.getContentProviders().add(injector.getInstance(StatemachineHeaderContentFragment.class));
-		return source;
+		header.getContentProviders().add(injector.getInstance(StatemachineHeaderContentFragment.class));
+		return header;
 	}
 
 	protected boolean isEventDriven(GeneratorEntry entry) {

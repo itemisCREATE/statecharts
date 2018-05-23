@@ -33,8 +33,7 @@ public class SourceContentFragmentProvider implements Provider<StatemachineSourc
 
 	@Override
 	public StatemachineSource get() {
-		StatemachineSource source = new StatemachineSource();
-		injector.injectMembers(source);
+		StatemachineSource source = injector.getInstance(StatemachineSource.class);
 
 		GeneratorEntry entry = injector.getInstance(GeneratorEntry.class);
 
