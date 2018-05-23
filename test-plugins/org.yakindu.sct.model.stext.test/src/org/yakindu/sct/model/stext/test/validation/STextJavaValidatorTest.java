@@ -22,11 +22,8 @@ import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.E
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE;
 import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
@@ -68,7 +65,6 @@ import org.yakindu.sct.model.stext.validation.STextJavaValidator;
 import org.yakindu.sct.model.stext.validation.STextValidationMessages;
 import org.yakindu.sct.test.models.AbstractTestModelsUtil;
 
-import com.google.inject.Exposed;
 import com.google.inject.Inject;
 
 /**
@@ -93,7 +89,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	/**
-	 * 
+	 *
 	 * @see STextJavaValidator#checkAssignmentExpression(org.yakindu.sct.model.stext.stext.AssignmentExpression)
 	 */
 	@Test
@@ -709,7 +705,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		doValidateAllContents(Exit.class);
 
 		assertIssueCount(diagnostics, 1);
-		assertError(diagnostics, EXIT_DEFAULT_UNUSED);
+		assertError(diagnostics, EXIT_UNUSED);
 	}
 
 	@Test
@@ -808,12 +804,30 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	@Test
+	public void checkExitTransitionExists() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "NoExitTransition.sct");
+
+		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics, EXIT_UNUSED);
+	}
+
+	@Test
 	public void checkAssignmentToFinalVariable() {
 		Statechart statechart = AbstractTestModelsUtil
 				.loadStatechart(VALIDATION_TESTMODEL_DIR + "AssignmentToValue.sct");
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
 		assertIssueCount(diagnostics, 2);
 		assertError(diagnostics, ERROR_ASSIGNMENT_TO_CONST_MSG);
+	}
+
+	@Test
+	public void checkSyncNoTriggersOnOutgoingTransition() {
+		Statechart statechart = AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "SynchronizationExitTransition.sct");
+		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
+		assertIssueCount(diagnostics, 1);
+		assertWarning(diagnostics, SYNC_OUTGOING_TRIGGER);
 	}
 
 	@Test
@@ -849,7 +863,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		Scope context = (Scope) parseExpression("import: \"does.not.exist\"", ImportScope.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(context);
 		validationResult
-				.assertErrorContains(String.format(STextValidationMessages.IMPORT_NOT_RESOLVED_MSG, "does.not.exist"));
+		.assertErrorContains(String.format(STextValidationMessages.IMPORT_NOT_RESOLVED_MSG, "does.not.exist"));
 	}
 
 	@Test

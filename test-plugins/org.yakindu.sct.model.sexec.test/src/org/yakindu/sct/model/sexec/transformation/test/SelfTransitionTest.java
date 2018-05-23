@@ -12,11 +12,11 @@ package org.yakindu.sct.model.sexec.transformation.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.TYPE_INTEGER;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createEntry;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createRegion;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createState;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createStatechart;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createTransition;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createEntry;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createRegion;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createState;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createStatechart;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createTransition;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createInterfaceScope;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createVariableDefinition;
 
@@ -33,7 +33,6 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
-
 public class SelfTransitionTest extends ModelSequencerTest {
 
 	@SuppressWarnings("unused")

@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.model.sexec.transformation.test;
 
+import static org.junit.Assert.assertEquals;
+
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Test;
@@ -20,8 +22,6 @@ import org.yakindu.sct.test.models.ExtensionTestModels;
 import org.yakindu.sct.test.models.TestModelInjectorProvider;
 
 import com.google.inject.Inject;
-
-import static org.junit.Assert.*;
 
 /**
  * @author rbeckmann

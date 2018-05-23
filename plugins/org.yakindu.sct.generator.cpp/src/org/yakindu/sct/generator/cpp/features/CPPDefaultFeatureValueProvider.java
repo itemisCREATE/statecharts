@@ -52,7 +52,7 @@ public class CPPDefaultFeatureValueProvider extends AbstractDefaultFeatureValueP
 			parameterValue.setValue(StringExtensions.toFirstLower(asIdentifier(statechart.getName(), "_")));
 		} else if (parameterValue.getParameter().getName()
 				.equals(ICFeatureConstants.PARAMETER_NAMING_MAX_IDENTIFIER_LENGTH)) {
-			parameterValue.setValue("31");
+			parameterValue.setValue(31);
 		} else if (parameterValue.getParameter().getName().equals(ICFeatureConstants.PARAMETER_NAMING_SEPARATOR)) {
 			parameterValue.setValue("_");
 		} else if (parameterValue.getParameter().getName()

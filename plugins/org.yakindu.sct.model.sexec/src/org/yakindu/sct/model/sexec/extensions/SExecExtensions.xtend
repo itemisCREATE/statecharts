@@ -11,6 +11,7 @@
 package org.yakindu.sct.model.sexec.extensions
 
 import java.util.ArrayList
+import java.util.HashSet
 import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.EcoreUtil2
@@ -153,7 +154,7 @@ class SExecExtensions {
 	}
 	
 	def getEventDefinitions(Scope scope) {
-		scope.declarations.filter(typeof(EventDefinition))
+		scope.declarations.filter(EventDefinition)
 	}
 	
 	def boolean hasEvents(Scope it) {
@@ -209,9 +210,9 @@ class SExecExtensions {
 	}
 	
 	def getInterfaceScopes(ExecutionFlow it) {
-		scopes.filter(typeof(InterfaceScope))
+		scopes.filter(InterfaceScope)
 	}
-	
+
 	def Iterable<InternalScope> getInternalScopes(ExecutionFlow it) {
 		return scopes.filter(typeof(InternalScope))
 	}
@@ -221,7 +222,7 @@ class SExecExtensions {
 	}
 	
 	def getVariableDefinitions(Scope it) {
-		declarations.filter(typeof(VariableDefinition))
+		declarations.filter(VariableDefinition)
 	} 
 	
 	def dispatch definition(ElementReferenceExpression it) {
