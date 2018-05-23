@@ -1,6 +1,6 @@
 h1. YAKINDU Statechart Tools – Testcase 13 - Smart Editing
 
 |_. Nr |_. Testname |_. Test Instructions |_. Postconditions |_. Status|
-| 13.1 | State templates available | <ol><li><p>Select a state.</p></li><li><p>Press @[Ctrl+Space]@.</p></li></ol> | <ul><li><p>The following proposals are shown: "@Add subregion@", "@Add outgoing state@".</p></li><li><p>For each selected proposal, a corresponding documentation popup window opens.</p></li></ul> | %{color:red}open% |
+| 13.1 | State templates available | <ol><li><p>Select a state.</p></li><li><p>Press @[Ctrl+Space]@.</p></li></ol> | <ul><li><p>The following proposals are shown: "@Add subregion@", "@Add outgoing state@".</p></li><li><p>For each selected proposal, a corresponding documentation pop-up window opens.</p></li></ul> | %{color:red}open% |
 | 13.2 | Add composite behaviour | Double-click on the _Add subregion_ proposal. | A subregion is added to the selected state, containing an entry, a transition and a substate. The state is enlarged so that the whole content is shown. | %{color:red}open% |
 | 9.1 | Add orthogonal behavior | Double-click on the _Add outgoing state_ proposal. | A new state is added. A transition is drawn from the selected state to the new state. | %{color:red}open% |
