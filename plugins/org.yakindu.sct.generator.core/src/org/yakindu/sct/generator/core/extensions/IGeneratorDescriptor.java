@@ -13,6 +13,7 @@ package org.yakindu.sct.generator.core.extensions;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Set;
 
 import org.yakindu.sct.generator.core.execution.IGeneratorEntryExecutor;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
@@ -43,5 +44,7 @@ public interface IGeneratorDescriptor {
 	String getDescription();
 
 	String getElementRefType();
+	
+	Set<String> getValidDomains();
 
 }
