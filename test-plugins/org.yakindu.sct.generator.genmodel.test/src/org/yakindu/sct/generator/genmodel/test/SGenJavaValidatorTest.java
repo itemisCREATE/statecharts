@@ -72,21 +72,31 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 	}
 
 	/**
+	 * @see SGenJavaValidator#checkDomainCompatibility(GeneratorModel)
+	 */
+	@Test
+	public void checkDomainCompatibility() {
+		EObject model = parseExpression("GeneratorModel for yakindu::java { statechart UnknownDomainStatechart { }}",
+				GeneratorModel.class.getSimpleName());
+		AssertableDiagnostics result = tester.validate(model);
+		result.assertAny(new MsgPredicate(
+				"This generator can not be used for domain does.not.exist. Valid domains are [org.yakindu.domain.default]"));
+	}
+
+	/**
 	 * @see SGenJavaValidator#checkContentType(org.yakindu.sct.model.sgen.GeneratorEntry)
 	 */
 	@Test
 	public void checkContentType() {
-		EObject model = parseExpression(
-				"GeneratorModel for yakindu::java { unkownType Example {}}",
+		EObject model = parseExpression("GeneratorModel for yakindu::java { unkownType Example {}}",
 				GeneratorModel.class.getSimpleName());
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertAny(new MsgPredicate(UNKNOWN_CONTENT_TYPE));
 	}
-	
+
 	@Test
 	public void checkInitialValue() {
-		EObject model = parseExpression(
-				"GeneratorModel for yakindu::java { var x : boolean = 5 }",
+		EObject model = parseExpression("GeneratorModel for yakindu::java { var x : boolean = 5 }",
 				GeneratorModel.class.getSimpleName());
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertAny(new MsgPredicate("Incompatible types boolean and integer."));
@@ -118,9 +128,7 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 	 */
 	@Test
 	public void checkGeneratorExists() {
-		EObject model = parseExpression(
-				"GeneratorModel for yakindu::unknown {}",
-				GeneratorModel.class.getSimpleName());
+		EObject model = parseExpression("GeneratorModel for yakindu::unknown {}", GeneratorModel.class.getSimpleName());
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertAny(new MsgPredicate(UNKOWN_GENERATOR));
 	}
@@ -154,8 +162,7 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 	 */
 	@Test
 	public void checkRequiredFeatures() {
-		EObject model = parseExpression(
-				"GeneratorModel for yakindu::java { statechart Example {}}",
+		EObject model = parseExpression("GeneratorModel for yakindu::java { statechart Example {}}",
 				GeneratorModel.class.getSimpleName());
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertAny(new MsgPredicate(MISSING_REQUIRED_FEATURE));
@@ -166,8 +173,7 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 	 */
 	@Test
 	public void checkRequiredParameters() {
-		EObject model = parseExpression(
-				"GeneratorModel for yakindu::java { statechart Example { feature Outlet {}}}",
+		EObject model = parseExpression("GeneratorModel for yakindu::java { statechart Example { feature Outlet {}}}",
 				GeneratorModel.class.getSimpleName());
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertAny(new MsgPredicate(MISSING_REQUIRED_PARAMETER));
@@ -185,8 +191,7 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 			fail("Model is of the wrong type");
 		} else {
 			GeneratorModel genModel = (GeneratorModel) model;
-			genModel.getEntries().get(0).getFeatures().get(0).getType()
-					.setDeprecated(true);
+			genModel.getEntries().get(0).getFeatures().get(0).getType().setDeprecated(true);
 			AssertableDiagnostics result = tester.validate(genModel);
 			result.assertAny(new MsgPredicate(DEPRECATED));
 		}
@@ -204,21 +209,18 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 			fail("Model is of the wrong type");
 		} else {
 			GeneratorModel genModel = (GeneratorModel) model;
-			genModel.getEntries().get(0).getFeatures().get(0).getType()
-					.getParameters().get(0).setDeprecated(true);
+			genModel.getEntries().get(0).getFeatures().get(0).getType().getParameters().get(0).setDeprecated(true);
 			AssertableDiagnostics result = tester.validate(genModel);
 			result.assertAny(new MsgPredicate(DEPRECATED));
 		}
 	}
-	
+
 	/**
 	 * @see SGenJavaValidator#checkDeprecatedParameters(GeneratorEntry)
 	 */
 	@Test
 	public void checkEntriesExist() {
-		EObject model = parseExpression(
-				"GeneratorModel for yakindu::java {}",
-				GeneratorModel.class.getSimpleName());
+		EObject model = parseExpression("GeneratorModel for yakindu::java {}", GeneratorModel.class.getSimpleName());
 		if (!(model instanceof GeneratorModel)) {
 			fail("Model is of the wrong type");
 		} else {
@@ -234,8 +236,7 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 	 */
 	@Test
 	public void testAllChecksHaveTests() throws Exception {
-		Iterable<Method> methods = Lists.newArrayList(SGenJavaValidator.class
-				.getDeclaredMethods());
+		Iterable<Method> methods = Lists.newArrayList(SGenJavaValidator.class.getDeclaredMethods());
 		methods = Iterables.filter(methods, new Predicate<Method>() {
 			public boolean apply(Method input) {
 				return input.getAnnotation(Check.class) != null;
@@ -245,14 +246,12 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 			try {
 				getClass().getMethod(checkMethod.getName());
 			} catch (NoSuchMethodException ex) {
-				fail("Missing @Test Annotation for method "
-						+ checkMethod.getName());
+				fail("Missing @Test Annotation for method " + checkMethod.getName());
 			}
 		}
 	}
 
-	public static final class MsgPredicate implements
-			AssertableDiagnostics.DiagnosticPredicate {
+	public static final class MsgPredicate implements AssertableDiagnostics.DiagnosticPredicate {
 
 		private final String msg;
 
