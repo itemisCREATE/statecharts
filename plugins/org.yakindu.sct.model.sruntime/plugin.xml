@@ -21,5 +21,12 @@
             class="org.yakindu.sct.model.sruntime.SRuntimePackage"
             genModel="model/SRuntime.xcore"/>
    </extension>
+   <extension
+         point="org.eclipse.emf.ecore.factory_override">
+      <factory
+            class="org.yakindu.sct.model.sruntime.SRuntimeFactoryImplOverride"
+            uri="http://www.yakindu.org/sct/sruntime/2.0.0">
+      </factory>
+   </extension>
 
 </plugin>
