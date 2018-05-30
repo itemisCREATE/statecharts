@@ -11,7 +11,6 @@ import java.util.Set;
 import org.yakindu.base.expressions.interpreter.IOperationMockup;
 import org.yakindu.base.types.Operation;
 
-import com.google.common.collect.Multimap;
 import com.google.inject.Singleton;
 
 @Singleton
