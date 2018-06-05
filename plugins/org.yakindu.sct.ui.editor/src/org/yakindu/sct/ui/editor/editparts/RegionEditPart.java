@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.editparts;
 
@@ -29,17 +29,17 @@ import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.RegionFigure;
+import org.yakindu.sct.ui.editor.editor.themes.IStatechartsTheme;
+import org.yakindu.sct.ui.editor.editor.themes.ThemeProvider;
 import org.yakindu.sct.ui.editor.editparts.tracker.NonRevealingDragEditPartsTrackerEx;
 import org.yakindu.sct.ui.editor.policies.PreferredSizeHandlerEditPolicy;
-import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
 
 /**
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public class RegionEditPart extends ShapeNodeEditPart {
-
 	public RegionEditPart(View view) {
 		super(view);
 	}
@@ -120,10 +120,11 @@ public class RegionEditPart extends ShapeNodeEditPart {
 	 */
 	@Override
 	public Object getPreferredValue(EStructuralFeature feature) {
+		IStatechartsTheme theme = ThemeProvider.getInstance().getTheme();
 		if (feature == NotationPackage.eINSTANCE.getLineStyle_LineColor()) {
-			return FigureUtilities.RGBToInteger(StatechartColorConstants.REGION_LINE_COLOR.getRGB());
+			return FigureUtilities.RGBToInteger(theme.getRegionOutlineColor().getRGB());
 		} else if (feature == NotationPackage.eINSTANCE.getFillStyle_FillColor()) {
-			return FigureUtilities.RGBToInteger(StatechartColorConstants.REGION_BG_COLOR.getRGB());
+			return FigureUtilities.RGBToInteger(theme.getRegionBgColor().getRGB());
 		}
 		return super.getPreferredValue(feature);
 	}

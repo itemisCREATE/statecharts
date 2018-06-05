@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.editor.figures;
 
@@ -25,15 +25,15 @@ import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
 import org.eclipse.swt.graphics.Color;
 import org.yakindu.base.xtext.utils.gmf.figures.SyntaxColoringLabel;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
+import org.yakindu.sct.ui.editor.editor.themes.ThemeProvider;
 
 /**
- * 
+ *
  * @author muelder
  * @author terfloth
- * 
+ *
  */
 public class RegionFigure extends RectangleFigure {
-
 	private WrappingLabel nameLabel;
 
 	private RectangleFigure compartmentPane;
@@ -81,9 +81,13 @@ public class RegionFigure extends RectangleFigure {
 	 */
 	@Override
 	protected void fillShape(Graphics graphics) {
-		Color c = mixColor(getBackgroundColor(), ColorConstants.white, 220);
-		fillVerticalGradientRectangle(graphics, getBounds(), getBackgroundColor(), c);
-		c.dispose();
+		if (ThemeProvider.getInstance().getTheme().getDrawRegionBgGradient()) {
+			Color c = mixColor(getBackgroundColor(), ColorConstants.white, 220);
+			fillVerticalGradientRectangle(graphics, getBounds(), getBackgroundColor(), c);
+			c.dispose();
+		} else {
+			super.fillShape(graphics);
+		}
 	}
 
 	public IMapMode getMapMode() {

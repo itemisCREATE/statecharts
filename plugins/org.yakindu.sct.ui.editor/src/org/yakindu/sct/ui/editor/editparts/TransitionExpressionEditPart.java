@@ -6,13 +6,15 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.editparts;
 
 import static org.yakindu.base.base.BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION;
 import static org.yakindu.sct.model.sgraph.SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION;
 
+import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.gef.EditPolicy;
@@ -30,6 +32,7 @@ import org.yakindu.base.xtext.utils.gmf.directedit.IXtextAwareEditPart;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.ui.editor.commands.ToggleShowDocumentationCommand;
+import org.yakindu.sct.ui.editor.editor.themes.ThemeProvider;
 import org.yakindu.sct.ui.editor.editparts.SpecificationElementEditPart.MultilineTextCellEditor;
 import org.yakindu.sct.ui.editor.policies.ContextSensitiveHelpPolicy;
 import org.yakindu.sct.ui.editor.policies.TransitionExpressionComponentEditPolicy;
@@ -37,12 +40,11 @@ import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 
 /**
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public class TransitionExpressionEditPart extends PlugableExternalXtextLabelEditPart implements IXtextAwareEditPart {
-
 	public TransitionExpressionEditPart(View view) {
 		super(view, Transition.class.getName());
 	}
@@ -69,6 +71,7 @@ public class TransitionExpressionEditPart extends PlugableExternalXtextLabelEdit
 				if (handle instanceof AbstractHandle) {
 					AbstractHandle h = (AbstractHandle) handle;
 					h.setDragTracker(new DragEditPartsTrackerEx(getHost()) {
+						@Override
 						protected boolean isMove() {
 							return true;
 						};
@@ -94,6 +97,14 @@ public class TransitionExpressionEditPart extends PlugableExternalXtextLabelEdit
 		updateTooltip();
 	}
 
+	@Override
+	protected IFigure createFigure() {
+		IFigure figure = super.createFigure();
+		figure.setBackgroundColor(ColorConstants.white);
+		figure.setOpaque(ThemeProvider.getInstance().getTheme().getTransitionExpressionOpaque());
+		return figure;
+	}
+
 	protected void updateTooltip() {
 		String documentation = (String) resolveSemanticElement().eGet(DOCUMENTED_ELEMENT__DOCUMENTATION);
 		if (getAttribute() == DOCUMENTED_ELEMENT__DOCUMENTATION)
@@ -102,6 +113,7 @@ public class TransitionExpressionEditPart extends PlugableExternalXtextLabelEdit
 			getFigure().setToolTip(new Label(documentation));
 	}
 
+	@Override
 	public EAttribute getAttribute() {
 		StringValueStyle featureStyle = GMFNotationUtil.getStringValueStyle(getPrimaryView(),
 				ToggleShowDocumentationCommand.FEATURE_TO_SHOW);

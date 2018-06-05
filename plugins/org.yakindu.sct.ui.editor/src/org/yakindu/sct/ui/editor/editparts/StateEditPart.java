@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.editparts;
 
@@ -43,22 +43,22 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.editor.figures.StateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
+import org.yakindu.sct.ui.editor.editor.themes.ThemeProvider;
 import org.yakindu.sct.ui.editor.editparts.tracker.NonRevealingDragEditPartsTrackerEx;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPolicy;
 import org.yakindu.sct.ui.editor.policies.FeedbackGraphicalNodeEditPolicy;
 import org.yakindu.sct.ui.editor.policies.PreferredSizeHandlerEditPolicy;
-import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
 
 /**
  * The EditPart for the State.
- * 
- * 
+ *
+ *
  * @author andreas muelder
  * @author alexander nyssen
  * @author markus muehlbrandt
- * 
+ *
  */
 public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart {
 
@@ -102,7 +102,8 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 			@Override
 			// StateFigure is drawed smaller (Blurshadow size)
 			public Rectangle getHandleBounds() {
-				Insets insets = new Insets(0, 0, StateFigure.BLUR_SHADOW_WIDTH, StateFigure.BLUR_SHADOW_WIDTH);
+				int shadowWidth = ThemeProvider.getInstance().getTheme().getStateBlurShadowWidth();
+				Insets insets = new Insets(0, 0, shadowWidth, shadowWidth);
 				return new Rectangle(getBounds().x + insets.left, getBounds().y + insets.top,
 						getBounds().width - (insets.right + insets.left),
 						getBounds().height - (insets.bottom + insets.top));
@@ -233,9 +234,9 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 	@Override
 	public Object getPreferredValue(EStructuralFeature feature) {
 		if (feature == NotationPackage.eINSTANCE.getLineStyle_LineColor()) {
-			return FigureUtilities.RGBToInteger(StatechartColorConstants.STATE_LINE_COLOR.getRGB());
+			return FigureUtilities.RGBToInteger(ThemeProvider.getInstance().getTheme().getStateOutlineColor().getRGB());
 		} else if (feature == NotationPackage.eINSTANCE.getFillStyle_FillColor()) {
-			return FigureUtilities.RGBToInteger(StatechartColorConstants.STATE_BG_COLOR.getRGB());
+			return FigureUtilities.RGBToInteger(ThemeProvider.getInstance().getTheme().getStateBgColor().getRGB());
 		}
 		return super.getPreferredValue(feature);
 	}
@@ -244,7 +245,7 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 	public State resolveSemanticElement() {
 		return (State) super.resolveSemanticElement();
 	}
-	
+
 	@Override
 	public DragTracker getDragTracker(Request request) {
 		return new NonRevealingDragEditPartsTrackerEx(this);

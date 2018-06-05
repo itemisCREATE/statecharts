@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.preferences;
 
@@ -21,13 +21,15 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.FontData;
 import org.yakindu.sct.ui.editor.DiagramActivator;
+import org.yakindu.sct.ui.editor.editor.themes.IStatechartsTheme;
 
 /**
- * 
+ *
  * @author andreas muelder
- * 
+ *
  */
-public class PreferenceInitializer extends DiagramPreferenceInitializer implements StatechartColorConstants {
+public class PreferenceInitializer extends DiagramPreferenceInitializer {
+	protected IStatechartsTheme theme;
 
 	@Override
 	public void initializeDefaultPreferences() {
@@ -52,15 +54,15 @@ public class PreferenceInitializer extends DiagramPreferenceInitializer implemen
 
 		// State line and background color
 		PreferenceConverter.setDefault(getPreferenceStore(), StatechartPreferenceConstants.PREF_STATE_BACKGROUND,
-				StatechartColorConstants.STATE_BG_COLOR.getRGB());
+				theme.getStateBgColor().getRGB());
 		PreferenceConverter.setDefault(getPreferenceStore(), StatechartPreferenceConstants.PREF_STATE_LINE,
-				StatechartColorConstants.STATE_LINE_COLOR.getRGB());
+				theme.getStateOutlineColor().getRGB());
 
 		// Region fill color
 		PreferenceConverter.setDefault(getPreferenceStore(), StatechartPreferenceConstants.PREF_REGION_BACKGROUND,
-				StatechartColorConstants.REGION_BG_COLOR.getRGB());
+				theme.getRegionBgColor().getRGB());
 		PreferenceConverter.setDefault(getPreferenceStore(), StatechartPreferenceConstants.PREF_REGION_LINE,
-				StatechartColorConstants.REGION_LINE_COLOR.getRGB());
+				theme.getRegionOutlineColor().getRGB());
 
 		// Transition Priority Labels
 		getPreferenceStore().setDefault(StatechartPreferenceConstants.PREF_PRIORITY_LABELS, true);

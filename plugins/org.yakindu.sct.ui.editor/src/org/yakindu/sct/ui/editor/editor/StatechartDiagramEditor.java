@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.editor;
 
@@ -97,6 +97,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		super(true);
 	}
 
+	@Override
 	public boolean isEditable() {
 		DomainStatus domainStatus = getDomainStatus();
 		if (domainStatus == null || domainStatus.getSeverity() == Severity.ERROR) {
@@ -225,6 +226,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		return domain;
 	}
 
+	@Override
 	public void gotoMarker(IMarker marker) {
 		MarkerNavigationService.getInstance().gotoMarker(this, marker);
 	}
@@ -260,7 +262,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		ContentProposalViewerKeyHandler contentProposalHandler = new ContentProposalViewerKeyHandler(
 				getGraphicalViewer());
 		contentProposalHandler
-				.setParent(new DiagramGraphicalViewerKeyHandler(getGraphicalViewer()).setParent(getKeyHandler()));
+		.setParent(new DiagramGraphicalViewerKeyHandler(getGraphicalViewer()).setParent(getKeyHandler()));
 		getGraphicalViewer().setKeyHandler(contentProposalHandler);
 	}
 
@@ -324,7 +326,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 				@Override
 				public void run() {
 					DiagramActivator.getDefault().getLog()
-							.log(new Status(IStatus.ERROR, DiagramActivator.PLUGIN_ID, "AERI Testing error"));
+					.log(new Status(IStatus.ERROR, DiagramActivator.PLUGIN_ID, "AERI Testing error"));
 				}
 			});
 
@@ -343,13 +345,13 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		IAction action;
 		action = new ZoomInAction(getZoomManager());
 		action.setText(""); //$NON-NLS-1$ // no text necessary since this
-							// is not a visible action
+		// is not a visible action
 		getActionRegistry().registerAction(action);
 		getSelectionActions().add(action.getId());
 
 		action = new ZoomOutAction(getZoomManager());
 		action.setText(""); //$NON-NLS-1$ // no text necessary since this
-							// is not a visible action
+		// is not a visible action
 		getActionRegistry().registerAction(action);
 		getSelectionActions().add(action.getId());
 	}

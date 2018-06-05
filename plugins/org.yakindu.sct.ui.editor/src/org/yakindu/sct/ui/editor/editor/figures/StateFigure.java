@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.editor.figures;
 
@@ -28,17 +28,15 @@ import org.eclipse.gmf.runtime.draw2d.ui.mapmode.MapModeUtil;
 import org.eclipse.swt.graphics.Color;
 import org.yakindu.base.xtext.utils.gmf.figures.SyntaxColoringLabel;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
+import org.yakindu.sct.ui.editor.editor.themes.ThemeProvider;
 
 /**
- * 
+ *
  * @author andreas muelder
  * @author axel terfloth
- * 
+ *
  */
 public class StateFigure extends RoundedRectangle {
-
-	public static final int BLUR_SHADOW_WIDTH = 5;
-
 	private WrappingLabel nameFigure;
 	private Figure textCompartmentPane;
 	private Figure figureCompartmentPane;
@@ -89,15 +87,16 @@ public class StateFigure extends RoundedRectangle {
 	@Override
 	public Dimension getPreferredSize(int wHint, int hHint) {
 		Dimension result = super.getPreferredSize(wHint, hHint);
-		return new Dimension(result.width + BLUR_SHADOW_WIDTH, result.height
-				+ BLUR_SHADOW_WIDTH);
+		return new Dimension(result.width + ThemeProvider.getInstance().getTheme().getStateBlurShadowWidth(),
+				result.height + ThemeProvider.getInstance().getTheme().getStateBlurShadowWidth());
 	}
 
 	@Override
 	public void setBounds(Rectangle rect) {
 		// reduce the width and height with the blur shadow
 		super.setBounds(new Rectangle(rect.x, rect.y, rect.width
-				- BLUR_SHADOW_WIDTH, rect.height - BLUR_SHADOW_WIDTH));
+				- ThemeProvider.getInstance().getTheme().getStateBlurShadowWidth(),
+				rect.height - ThemeProvider.getInstance().getTheme().getStateBlurShadowWidth()));
 	}
 
 	// ========= drawing related methods ============================
@@ -114,17 +113,23 @@ public class StateFigure extends RoundedRectangle {
 	 */
 	@Override
 	protected void fillShape(Graphics graphics) {
-		Color c = mixColor(getBackgroundColor(), ColorConstants.white, 224);
-		fillVerticalGradientRoundedRectangle(graphics, getBounds(),
-				getCornerDimensions(), getBackgroundColor(), c);
-		c.dispose();
+		if (ThemeProvider.getInstance().getTheme().getDrawStateBgGradient()) {
+			Color c = mixColor(getBackgroundColor(), ColorConstants.white, 224);
+			fillVerticalGradientRoundedRectangle(graphics, getBounds(), getCornerDimensions(), getBackgroundColor(), c);
+			c.dispose();
+		} else {
+			super.fillShape(graphics);
+		}
 	}
 
 	private void drawBlurredShadow(Graphics graphics) {
-		// draw the shadow...
+		if (!ThemeProvider.getInstance().getTheme().getDrawStateShadows()) {
+			return;
+		}
 		graphics.pushState();
 
-		int size = MapModeUtil.getMapMode(this).DPtoLP(BLUR_SHADOW_WIDTH);
+		int size = MapModeUtil.getMapMode(this)
+				.DPtoLP(ThemeProvider.getInstance().getTheme().getStateBlurShadowWidth());
 		int step = MapModeUtil.getMapMode(this).DPtoLP(-1);
 
 		graphics.setForegroundColor(ColorConstants.gray);
