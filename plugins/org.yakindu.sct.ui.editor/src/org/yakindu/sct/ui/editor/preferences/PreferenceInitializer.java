@@ -22,6 +22,7 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.FontData;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.editor.themes.IStatechartsTheme;
+import org.yakindu.sct.ui.editor.editor.themes.ThemeProvider;
 
 /**
  *
@@ -29,11 +30,11 @@ import org.yakindu.sct.ui.editor.editor.themes.IStatechartsTheme;
  *
  */
 public class PreferenceInitializer extends DiagramPreferenceInitializer {
-	protected IStatechartsTheme theme;
-
 	@Override
 	public void initializeDefaultPreferences() {
+
 		super.initializeDefaultPreferences();
+		IStatechartsTheme theme = ThemeProvider.getInstance().getTheme();
 		// Line colors
 		Color lineColor = DiagramColorConstants.darkGray;
 		PreferenceConverter.setDefault(getPreferenceStore(), IPreferenceConstants.PREF_LINE_COLOR, lineColor.getRGB());

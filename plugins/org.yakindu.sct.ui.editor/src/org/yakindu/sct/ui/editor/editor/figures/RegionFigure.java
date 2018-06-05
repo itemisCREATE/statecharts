@@ -94,4 +94,9 @@ public class RegionFigure extends RectangleFigure {
 		return mapMode;
 	}
 
+	@Override
+	public Color getBackgroundColor() {
+		return ThemeProvider.getInstance().getTheme().getRegionBgColor();
+	}
+
 }

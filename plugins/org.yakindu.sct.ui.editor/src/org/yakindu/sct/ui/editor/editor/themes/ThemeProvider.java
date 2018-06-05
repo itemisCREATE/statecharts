@@ -13,7 +13,7 @@ public class ThemeProvider {
 		if (instance == null) {
 			instance = new ThemeProvider();
 		}
-
+		instance.setTheme(new FlatTheme());
 		return instance;
 	}
 
