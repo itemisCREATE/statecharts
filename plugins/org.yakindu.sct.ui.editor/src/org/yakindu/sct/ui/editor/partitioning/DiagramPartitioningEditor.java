@@ -90,7 +90,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	private Adapter breadcrumbSynchronizer;
 
 	private SashForm sash;
-	protected boolean hasValidDomain = true;
+	protected boolean validDiagram = true;
 
 	protected abstract void createTextEditor(Composite parent);
 
@@ -123,76 +123,55 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 			super.init(site, input);
 		} catch (Exception e) {
 			// tried to open corrupt diagram
-			
 		}
 	}
 
 	@Override
 	protected void handleEditorInputChanged() {
-		if (hasValidDomain)
+		if (validDiagram)
 			super.handleEditorInputChanged();
 	}
-
-	// @SuppressWarnings("rawtypes")
-	// @Override
-	// public Object getAdapter(Class type) {
-	// if (DiagramPartitioningEditor.class.equals(type)) {
-	// return this;
-	// }
-	// return super.getAdapter(type);
-	// }
 
 	@Override
 	public void createPartControl(Composite parent) {
 		GridLayoutFactory.fillDefaults().spacing(0, 0).applyTo(parent);
 		createBreadcrumbViewer(parent);
 
-		if (isValidDomain()) {
+		if (isValidDiagram()) {
 			sash = (SashForm) createParentSash(parent);
 			createTextEditor(sash);
-			try {
-				Class<?> clazz = this.getClass().getSuperclass().getSuperclass().getSuperclass();
-				final Field field = Class
-						.forName("org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditorWithFlyOutPalette", false,
-								clazz.getClassLoader())
-						.getDeclaredField("fHasFlyoutPalette");
-				field.setAccessible(true);
-				field.set(this, true);
-				field.setAccessible(false);
-			} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException
-					| ClassNotFoundException e) {
-				e.printStackTrace();
-			}
+			setFlyoutPalette(true);
 			super.createPartControl(sash);
 		} else {
+			setFlyoutPalette(false);
 			try {
-				Class<?> clazz = this.getClass().getSuperclass().getSuperclass().getSuperclass();
-				final Field field = Class
-						.forName("org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditorWithFlyOutPalette", false,
-								clazz.getClassLoader())
-						.getDeclaredField("fHasFlyoutPalette");
-				field.setAccessible(true);
-				field.set(this, false);
-				field.setAccessible(false);
-			} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException
-					| ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-			try {
-
 				super.createPartControl(parent);
 			} catch (Exception e) {
-				//
+				// could not create diagram part
 			}
 		}
 	}
 
-	protected boolean isValidDomain() {
-		return hasValidDomain;
+	protected void setFlyoutPalette(boolean active) {
+		try {
+			Class<?> clazz = this.getClass().getSuperclass().getSuperclass().getSuperclass();
+			final Field field = Class.forName("org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditorWithFlyOutPalette",
+					false, clazz.getClassLoader()).getDeclaredField("fHasFlyoutPalette");
+			field.setAccessible(true);
+			field.set(this, active);
+			field.setAccessible(false);
+		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException
+				| ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
-	protected void setIsValidDomain(boolean valid) {
-		hasValidDomain = valid;
+	protected boolean isValidDiagram() {
+		return validDiagram;
+	}
+
+	protected void setValidDiagram(boolean valid) {
+		validDiagram = valid;
 	}
 
 	@Override
@@ -221,7 +200,6 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	@SuppressWarnings("restriction")
 	@Override
 	protected void sanityCheckState(IEditorInput input) {
-
 		super.sanityCheckState(input);
 		// Refresh viewer input since the context may have changed
 		if ((getDiagram() != null && viewer != null && !viewer.getControl().isDisposed()))
@@ -230,7 +208,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	}
 	@Override
 	protected boolean isStatusLineOn() {
-		if (isValidDomain())
+		if (isValidDiagram())
 			return super.isStatusLineOn();
 		return false;
 	}
@@ -248,13 +226,13 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	}
 	@Override
 	protected void initializeGraphicalViewerContents() {
-		if (isValidDomain())
+		if (isValidDiagram())
 			super.initializeGraphicalViewerContents();
 	}
 
 	@Override
 	protected void clearGraphicalViewerContents() {
-		if (isValidDomain())
+		if (isValidDiagram())
 			super.clearGraphicalViewerContents();
 	}
 
@@ -291,19 +269,18 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 
 			List<Diagram> diagramContainerHierachy = DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram());
 			if (diagramContainerHierachy.isEmpty()) {
-				hasValidDomain = false;
+				validDiagram = false;
 			} else {
 				viewer.addSelectionChangedListener(this);
 				viewer.setContentProvider(new BreadcrumbViewerContentProvider());
 				viewer.setLabelProvider(new BreadcrumbViewerLabelProvider());
 				initBreadcrumbSynchronizer(diagramContainerHierachy);
 				viewer.setInput(diagramContainerHierachy);
-				hasValidDomain = true;
+				validDiagram = true;
 			}
 
 		}
 		parent.pack(true);
-
 	}
 
 	@Override
@@ -327,9 +304,10 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 
 	@Override
 	public void persistViewerSettings() {
-		if (isValidDomain())
+		if (isValidDiagram())
 			super.persistViewerSettings();
 	}
+
 	protected void closeSubdiagramEditors() {
 		if (getDiagram() != null && getDiagram().getElement() instanceof Statechart) {
 			List<IEditorReference> refsToClose = new ArrayList<IEditorReference>();

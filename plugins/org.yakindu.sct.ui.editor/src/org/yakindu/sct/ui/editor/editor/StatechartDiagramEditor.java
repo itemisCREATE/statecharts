@@ -107,11 +107,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	}
 
 	protected DomainStatus getDomainStatus() {
-		if (getDiagram() == null || getEditorInput() == null || getEditorInput() instanceof NullEditorInput) {
-			return new DomainStatus(Severity.ERROR, "An error occured while opening the file.\n\n"
-					+ "This might have happened because you tried to open a corrupt statechart with merge conflicts.\n"
-					+ "You need to resolve them with the Merge Tool (Right click on file in Project Explorer 'Team > Merge Tool')");
-		}
 		EObject element = getDiagram().getElement();
 		DomainElement domainElement = EcoreUtil2.getContainerOfType(element, DomainElement.class);
 		if (domainElement != null) {
@@ -121,20 +116,39 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		return null;
 	}
 
+	protected DiagramStatus getDiagramStatus() {
+		if (getDiagram() == null || getEditorInput() == null) {
+			return new DiagramStatus(Severity.ERROR, "An error occured while opening the file.\n\n"
+					+ "This might have happened because you tried to open a corrupt statechart with merge conflicts.\n"
+					+ "You need to resolve them with the Merge Tool (Right click on file in Project Explorer 'Team > Merge Tool')");
+		}
+		return new DiagramStatus(Severity.OK);
+	}
 	@Override
 	protected void createBreadcrumbViewer(Composite parent) {
 		DomainStatus domainStatus = getDomainStatus();
 		if (domainStatus != null && !(domainStatus.getSeverity() == Severity.OK)) {
-			createStatusLabel(parent, domainStatus);
-			setIsValidDomain(false);
-		} else {
-			setIsValidDomain(true);
+			createDomainStatusLabel(parent, domainStatus);		
+		}
+	
+		DiagramStatus diagramStatus = getDiagramStatus();
+		if(diagramStatus != null && !(diagramStatus.getSeverity() == Severity.OK)) {
+			createDiagramStatusLabel(parent, diagramStatus);
+			validDiagram = false;
+		}else {
+			validDiagram = true;
 			super.createBreadcrumbViewer(parent);
 		}
 	}
 
-	protected void createStatusLabel(Composite parent, DomainStatus domainStatus) {
+	protected void createDomainStatusLabel(Composite parent, DomainStatus domainStatus) {
 		DomainStatusLabel label = new DomainStatusLabel(domainStatus, parent);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(label);
+		parent.pack(true);
+	}
+	
+	protected void createDiagramStatusLabel(Composite parent, DiagramStatus diagramStatus) {
+		DiagramStatusLabel label = new DiagramStatusLabel(diagramStatus, parent);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(label);
 		parent.pack(true);
 	}
@@ -154,15 +168,13 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		try {
 			super.init(site, input);
-
 			checkXtextNature();
 			registerValidationListener();
-
+			setValidDiagram(true);
 		} catch (Exception e) {
-			setIsValidDomain(false);
+			setValidDiagram(false);
 			super.init(site, new NullEditorInput());
 		}
-
 	}
 
 	protected void registerValidationListener() {
@@ -436,7 +448,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	@Override
 	public void createPartControl(Composite parent) {
 		super.createPartControl(parent);
-		if (isValidDomain()) {
+		if (isValidDiagram()) {
 			toggleDefinitionSection();
 		}
 
