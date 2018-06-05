@@ -42,7 +42,7 @@ public class EclipseContextGeneratorExecutorLookup extends GeneratorExecutorLook
 				try {
 					execute(model);
 				} catch (Exception ex) {
-					return new Status(IStatus.ERROR, BuilderActivator.PLUGIN_ID, ex.getMessage(), ex);
+					return new Status(IStatus.ERROR, BuilderActivator.PLUGIN_ID, "An error occurred during code generation.", ex);
 				}
 				return Status.OK_STATUS;
 			}

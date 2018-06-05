@@ -154,7 +154,7 @@ class SExecExtensions {
 	}
 	
 	def getEventDefinitions(Scope scope) {
-		scope.declarations.filter(typeof(EventDefinition))
+		scope.declarations.filter(EventDefinition)
 	}
 	
 	def boolean hasEvents(Scope it) {
@@ -210,11 +210,11 @@ class SExecExtensions {
 	}
 	
 	def getInterfaceScopes(ExecutionFlow it) {
-		scopes.filter(typeof(InterfaceScope))
+		scopes.filter(InterfaceScope)
 	}
 	
 	def Iterable<InternalScope> getInternalScopes(ExecutionFlow it) {
-		return scopes.filter(typeof(InternalScope))
+		return scopes.filter(InternalScope)
 	}
 	
 	def getDefaultScope(ExecutionFlow it) {
@@ -222,7 +222,7 @@ class SExecExtensions {
 	}
 	
 	def getVariableDefinitions(Scope it) {
-		declarations.filter(typeof(VariableDefinition))
+		declarations.filter(VariableDefinition)
 	} 
 	
 	def dispatch definition(ElementReferenceExpression it) {
