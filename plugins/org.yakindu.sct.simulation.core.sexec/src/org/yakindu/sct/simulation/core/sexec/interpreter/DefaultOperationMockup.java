@@ -36,7 +36,6 @@ public class DefaultOperationMockup implements IOperationMockup {
 	
 	@Override
 	public boolean canExecute(Operation definition, Object[] parameter) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
