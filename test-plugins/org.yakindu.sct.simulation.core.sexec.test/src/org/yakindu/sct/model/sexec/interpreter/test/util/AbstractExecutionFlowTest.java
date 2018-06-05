@@ -22,12 +22,18 @@ import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
+import org.yakindu.sct.model.sruntime.ExecutionEvent;
 import org.yakindu.sct.model.sruntime.ExecutionVariable;
+import org.yakindu.sct.model.sruntime.SRuntimeFactory;
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations;
 import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
+import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler;
+import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.TimeTask;
+import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.TimeTask.Priority;
 import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IEventRaiser;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
+import org.yakindu.sct.simulation.core.sexec.container.EventDrivenSimulationEngine.EventDrivenCycleAdapter;
 import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 
@@ -39,6 +45,10 @@ import com.google.inject.Inject;
  *
  */
 public abstract class AbstractExecutionFlowTest {
+	
+	public static final long DEFAULT_CYCLE_PERIOD = 200;
+	@Inject
+	protected ITimeTaskScheduler timer;
 	@Inject
 	protected IExecutionFlowInterpreter interpreter;
 	@Inject
@@ -51,6 +61,8 @@ public abstract class AbstractExecutionFlowTest {
 	protected IExpressionInterpreter stmtInterpreter;
 	@Inject
 	protected ExecutionContextExtensions contextExtensions;
+	@Inject
+	protected StatechartAnnotations stateChartAnnotations;
 
 	protected ExecutionFlow flow;
 
@@ -70,6 +82,25 @@ public abstract class AbstractExecutionFlowTest {
 		initializer.initialize(context, flow);
 		interpreter.initialize(flow, context, useInternalEventQueue);
 		this.flow = flow;
+		if (flow.getSourceElement() instanceof Statechart) {
+			Statechart statechart = (Statechart) flow.getSourceElement();
+			if (stateChartAnnotations.isEventDriven(statechart)) {
+				context.eAdapters().add(new EventDrivenCycleAdapter(interpreter));
+			} else {
+				Long cyclePeriod = DEFAULT_CYCLE_PERIOD;
+				ArgumentedAnnotation cycleBased = (ArgumentedAnnotation) statechart
+						.getAnnotationOfType(CYCLE_BASED_ANNOTATION);
+				if (cycleBased != null) {
+					cyclePeriod = (Long) stmtInterpreter.evaluate(cycleBased.getExpressions().get(0),
+							SRuntimeFactory.eINSTANCE.createExecutionContext());
+				}
+
+				TimeTask cycleTask = new TimeTask("$cycle", () -> {
+						interpreter.runCycle();
+				}, Priority.LOW);
+				timer.scheduleTimeTask(cycleTask, true, cyclePeriod);
+			}
+		}
 	}
 
 	protected long getInteger(String varName) {
@@ -135,15 +166,19 @@ public abstract class AbstractExecutionFlowTest {
 	}
 
 	protected void raiseEvent(String eventName, Object value) {
-		if (interpreter instanceof IEventRaiser) {
-			((IEventRaiser) interpreter).raise(context().getEvent(eventName), value);
-		} else {
-			context().getEvent(eventName).setValue(value);
-			context().getEvent(eventName).setRaised(true);
-		}
 		if (isEventDriven()) {
-			interpreter.runCycle();
+			ExecutionEvent event = context().getEvent(eventName);
+			event.setValue(value);
+			event.setRaised(true);
+		} else {			
+			if (interpreter instanceof IEventRaiser) {
+				((IEventRaiser) interpreter).raise(context().getEvent(eventName), value);
+			} else {
+				context().getEvent(eventName).setValue(value);
+				context().getEvent(eventName).setRaised(true);
+			}
 		}
+
 
 	}
 

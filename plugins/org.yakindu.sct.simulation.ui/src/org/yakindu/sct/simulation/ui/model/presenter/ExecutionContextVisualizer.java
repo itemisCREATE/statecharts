@@ -28,8 +28,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.gmf.runtime.highlighting.HighlightingParameters;
 import org.yakindu.base.gmf.runtime.highlighting.IHighlightingSupport;
 import org.yakindu.sct.model.sgraph.RegularState;
+import org.yakindu.sct.model.sruntime.CrossDocumentContentAdapter;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
-import org.yakindu.sct.model.sruntime.util.CrossDocumentContentAdapter;
 
 import com.google.common.collect.Lists;
 

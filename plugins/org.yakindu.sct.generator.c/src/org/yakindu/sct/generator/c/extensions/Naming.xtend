@@ -24,6 +24,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
@@ -40,7 +41,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 class Naming {
 	@Inject @Named("Separator") protected String sep;
 
-	@Inject protected extension Navigation
+	@Inject protected extension SExecExtensions
 
 	@Inject protected extension ICodegenTypeSystemAccess
 

@@ -159,7 +159,6 @@ public class StatechartNavigatorContentProvider implements ICommonContentProvide
 	}
 
 	public Object[] getChildren(Object parentElement) {
-
 		if (parentElement instanceof IFile) {
 			IFile file = (IFile) parentElement;
 			URI fileURI = URI.createPlatformResourceURI(file.getFullPath().toString(), true);

@@ -55,12 +55,13 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.gmf.runtime.util.EditPartUtils;
+import org.yakindu.sct.domain.extension.DomainRegistry;
+import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.StatechartImages;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
-import org.yakindu.sct.ui.editor.factories.FactoryUtils;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
 import org.yakindu.sct.ui.wizards.ModelCreationWizardPage;
 
@@ -226,8 +227,8 @@ public class CreationWizard extends Wizard implements INewWizard {
 			@Override
 			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
-
-				FactoryUtils.createStatechartModel(resource, preferencesHint);
+				IModelCreator creator = DomainRegistry.getDomain(create.getDomainID()).getInjector(IDomain.FEATURE_EDITOR).getInstance(IModelCreator.class);
+				creator.createStatechartModel(resource, preferencesHint);
 				Statechart statechart = (Statechart) EcoreUtil.getObjectByType(resource.getContents(),
 						SGraphPackage.Literals.STATECHART);
 				statechart.setDomainID(create.getDomainID());

@@ -60,13 +60,16 @@ public class SimulationLaunchErrorDialog extends ErrorDialog {
 		try {
 			if (id == IDialogConstants.OK_ID) {
 				for (IDebugTarget target : targets) {
-					target.getLaunch().terminate();
+					if (target != null)
+						target.getLaunch().terminate();
 				}
 			} else if (id == RELAUNCH_ID) {
 				for (IDebugTarget target : targets) {
-					target.getLaunch().terminate();
-					ILaunchConfiguration launchConfiguration = target.getLaunch().getLaunchConfiguration();
-					DebugUITools.launch(launchConfiguration, target.getLaunch().getLaunchMode());
+					if (target != null) {
+						target.getLaunch().terminate();
+						ILaunchConfiguration launchConfiguration = target.getLaunch().getLaunchConfiguration();
+						DebugUITools.launch(launchConfiguration, target.getLaunch().getLaunchMode());
+					}
 				}
 			}
 		} catch (DebugException e) {

@@ -13,7 +13,6 @@ package org.yakindu.sct.generator.c
 import com.google.inject.Inject
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
-import org.yakindu.sct.generator.c.extensions.Navigation
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.CheckRef
@@ -31,13 +30,14 @@ import org.yakindu.sct.model.sexec.Trace
 import org.yakindu.sct.model.sexec.TraceStateEntered
 import org.yakindu.sct.model.sexec.TraceStateExited
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
 class FlowCode {
 	
 	@Inject extension Naming
-	@Inject extension Navigation
+	@Inject extension SExecExtensions
 	@Inject extension CExpressionsGenerator
 	@Inject extension INamingService
 	@Inject extension GenmodelEntries

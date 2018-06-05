@@ -215,7 +215,12 @@ A standard "UML":https://en.wikipedia.org/wiki/Unified_Modeling_Language composi
 
 Unlike UML composite states, however, composite states in YAKINDU statecharts can additionally denote specific named _entry points_. A transition leading to a composite state can specify the entry point to be used instead of the initial state.
 
-Analogously, a composite state can have named _exit points_. Transitions with that composite state as their source state may specify which exit point to react to, and thus lead to different target states, depending on which of the source composite state's exit points has been taken.
+Analogously, a composite state can have named _exit points_. Outgoing transitions of that composite state may specify which exit point to react to, and thus lead to different target states, depending on which of the source composite state's exit points has been taken. A blank transition with no trigger or guard reacts to all exit points, and is needed when a composite state contains a default exit point.
+
+p(#sclang_fig_exit_transitions). 
+!images/exit_point_transitions.png(Exit point transitions)!
+
+p=. The event @e@ leads to the unnamed (default) exit point, which is connected to the blank transition. The event @g@ activates the transition to the exit point named @g@, for which no specific transition exists, so the blank transition to state @E@ is taken. The event @f@ leads to the named exit @f@. The lower outgoing transition is connected to this exit point via @# f >@ and takes precedence over the blank transition, thus state @F@ becomes active. Named exit points take precedence over the actual transition priority.
 
 The syntax to connect a transition to an "entry point":#sclang_entry_points with the name _entry-point-1_ of a target composite state is as follows:
 
@@ -353,7 +358,13 @@ A *final state* denotes the end of the execution flow of a state machine or regi
 
 A final state is depicted as an unfilled circle with a smaller filled black circle inside, see figure "&quot;Entry point, exit point, and final state&quot;":#sclang_fig_state_entry_exit_final_explained.
 
-A final state can have multiple incoming transitions and has no outgoing ones.
+Like a "regular state":#sclang_states, A final state can have multiple incoming transitions.
+
+###. ==<div class="constraints">==
+###.	Severity : Warning
+###.	ID: finalstate.NoOutTransitions
+###.	Description: A final state must not have outgoing transitions.
+###. ==</div>==
 
 Within a region, only a single final state is allowed, but each region may have its own final state.
 

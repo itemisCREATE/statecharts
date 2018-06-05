@@ -14,11 +14,12 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator
 import org.yakindu.sct.generator.java.features.CycleBasedWrapperFeature
 import org.yakindu.sct.generator.java.features.EventBasedRunnableFeature
+import org.yakindu.sct.generator.java.wrappers.CycleBasedSynchronizedWrapper
+import org.yakindu.sct.generator.java.wrappers.EventBasedRunnableWrapper
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.generator.java.wrappers.EventBasedRunnableWrapper
-import org.yakindu.sct.generator.java.wrappers.CycleBasedSynchronizedWrapper
 
 /**
  * This is the Java code generators main class.
@@ -32,7 +33,7 @@ class JavaGenerator implements IExecutionFlowGenerator {
 	@Inject extension EventBasedRunnableFeature
 	@Inject extension CycleBasedWrapperFeature
 
-	@Inject extension Navigation
+	@Inject extension SExecExtensions
 	@Inject extension IStatemachine
 	@Inject extension ITimerCallback
 	@Inject extension ITimer

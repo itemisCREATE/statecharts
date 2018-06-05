@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  * 	itemis AG - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.model.stext.validation;
 
@@ -78,7 +78,6 @@ import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
-import org.yakindu.sct.model.sgraph.validation.SCTResourceValidator;
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
@@ -115,12 +114,12 @@ import com.google.inject.name.Named;
 
 /**
  * Several validations for nonsensical expressions.
- * 
+ *
  * @author muehlbrandt
  * @author muelder
- * 
+ *
  */
-@ComposedChecks(validators = { SGraphJavaValidator.class, SCTResourceValidator.class, ExpressionsJavaValidator.class,
+@ComposedChecks(validators = { SGraphJavaValidator.class, ExpressionsJavaValidator.class,
 		STextNamesAreUniqueValidator.class })
 public class STextJavaValidator extends AbstractSTextJavaValidator implements STextValidationMessages {
 
@@ -406,8 +405,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				Iterator<Transition> transitionIt = state.getOutgoingTransitions().iterator();
 				while (transitionIt.hasNext() && !hasOutgoingTransition) {
 					Transition transition = transitionIt.next();
-					hasOutgoingTransition = STextValidationModelUtils.isDefaultExitTransition(transition) ? true
-							: STextValidationModelUtils.isNamedExitTransition(transition, exit.getName());
+					hasOutgoingTransition = STextValidationModelUtils.isDefaultExitTransition(transition)
+							|| STextValidationModelUtils.isNamedExitTransition(transition, exit.getName());
 				}
 				if (!hasOutgoingTransition) {
 					error(EXIT_UNUSED, exit, null, -1);
@@ -419,7 +418,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 					hasOutgoingTransition = STextValidationModelUtils.isDefaultExitTransition(transitionIt.next());
 				}
 				if (!hasOutgoingTransition) {
-					error(EXIT_DEFAULT_UNUSED, exit, null, -1);
+					error(EXIT_UNUSED, exit, null, -1);
 				}
 			}
 		}
@@ -588,7 +587,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 	@Check(CheckType.FAST)
 	public void checkAnnotationArguments(ArgumentedAnnotation annotation) {
-		if (annotation.getType() != null && annotation.getExpressions().size() != annotation.getType().getProperties().size()) {
+		if (annotation.getType() != null
+				&& annotation.getExpressions().size() != annotation.getType().getProperties().size()) {
 			error(String.format(ERROR_WRONG_NUMBER_OF_ARGUMENTS_MSG, annotation.getType().getProperties()), null,
 					ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
 		}
@@ -600,6 +600,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		List<AssignmentExpression> contents = EcoreUtil2.eAllOfType(exp, AssignmentExpression.class);
 		contents.remove(exp);
 		Iterable<AssignmentExpression> filter = Iterables.filter(contents, new Predicate<AssignmentExpression>() {
+			@Override
 			public boolean apply(final AssignmentExpression ex) {
 				String variableName = getVariableName(ex);
 				return variableName.equals(name);
@@ -687,9 +688,19 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		return element;
 	}
 
+	@Check(CheckType.FAST)
+	public void checkSyncNoTriggersOnOutgoingTransition(Synchronization synchronization) {
+		List<Transition> outgoing = synchronization.getOutgoingTransitions();
+		for (Transition transition : outgoing) {
+			if (transition.getTrigger() != null) {
+				warning(SYNC_OUTGOING_TRIGGER, transition, null);
+			}
+		}
+	}
+
 	/**
 	 * Only Expressions that produce an effect should be used as actions.
-	 * 
+	 *
 	 * @param effect
 	 */
 	@Check(CheckType.FAST)
@@ -717,16 +728,16 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				&& !(call.getFeature() instanceof Operation)) {
 			if (call.getFeature() instanceof Property) {
 				error("Access to property '" + nameProvider.getFullyQualifiedName(call.getFeature())
-						+ "' has no effect.", call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE,
-						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
+				+ "' has no effect.", call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE,
+				INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			} else if (call.getFeature() instanceof Event) {
 				error("Access to event '" + nameProvider.getFullyQualifiedName(call.getFeature()) + "' has no effect.",
 						call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE, INSIGNIFICANT_INDEX,
 						FEATURE_CALL_HAS_NO_EFFECT);
 			} else {
 				error("Access to feature '" + nameProvider.getFullyQualifiedName(call.getFeature())
-						+ "' has no effect.", call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE,
-						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
+				+ "' has no effect.", call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE,
+				INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			}
 		}
 	}
@@ -779,7 +790,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 	@Check(CheckType.FAST)
 	public void checkInterfaceScope(ScopedElement statechart) {
-		List<InterfaceScope> defaultInterfaces = new LinkedList<InterfaceScope>();
+		List<InterfaceScope> defaultInterfaces = new LinkedList<>();
 
 		for (Scope scope : statechart.getScopes()) {
 			if (scope instanceof InterfaceScope && ((InterfaceScope) scope).getName() == null) {
@@ -844,19 +855,19 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		if (!(refExp.getReference() instanceof Operation)) {
 			if (refExp.getReference() instanceof Property) {
 				error("Access to property '" + nameProvider.getFullyQualifiedName(refExp.getReference())
-						+ "' has no effect.", refExp,
-						ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
-						FEATURE_CALL_HAS_NO_EFFECT);
+				+ "' has no effect.", refExp,
+				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
+				FEATURE_CALL_HAS_NO_EFFECT);
 			} else if (refExp.getReference() instanceof Event) {
 				error("Access to event '" + nameProvider.getFullyQualifiedName(refExp.getReference())
-						+ "' has no effect.", refExp,
-						ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
-						FEATURE_CALL_HAS_NO_EFFECT);
+				+ "' has no effect.", refExp,
+				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
+				FEATURE_CALL_HAS_NO_EFFECT);
 			} else {
 				error("Access to feature '" + nameProvider.getFullyQualifiedName(refExp.getReference())
-						+ "' has no effect.", refExp,
-						ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
-						FEATURE_CALL_HAS_NO_EFFECT);
+				+ "' has no effect.", refExp,
+				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
+				FEATURE_CALL_HAS_NO_EFFECT);
 			}
 		}
 	}
@@ -864,7 +875,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	protected boolean isDefault(Trigger trigger) {
 		return trigger == null || trigger instanceof DefaultTrigger
 				|| ((trigger instanceof ReactionTrigger) && ((ReactionTrigger) trigger).getTriggers().size() == 0
-						&& ((ReactionTrigger) trigger).getGuard() == null);
+				&& ((ReactionTrigger) trigger).getGuard() == null);
 	}
 
 	@Override
@@ -959,7 +970,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		if (provider == null || provider.getElement() == null) {
 			return EcoreUtil2.getContainerOfType(context, Statechart.class);
 		} else {
-			if(provider.getElement().eResource() == null) return null;
+			if (provider.getElement().eResource() == null)
+				return null;
 			return (Statechart) EcoreUtil.getObjectByType(provider.getElement().eResource().getContents(),
 					SGraphPackage.Literals.STATECHART);
 		}

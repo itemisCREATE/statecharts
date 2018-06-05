@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  * 	itemis AG - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.model.stext.validation;
 
@@ -35,22 +35,21 @@ public final class STextValidationModelUtils {
 	/**
 	 * Sorts the given elements in transition without and with
 	 * {@link EntryPointSpec}s
-	 * 
+	 *
 	 * @param elements
 	 *            list of transitions to sort
-	 * @return an array with the sorted elements. The first index contains a
-	 *         list of the transitions without {@link EntryPointSpec}s. The
-	 *         second index contains a list of the transitions with
-	 *         {@link EntryPointSpec}s.
+	 * @return an array with the sorted elements. The first index contains a list of
+	 *         the transitions without {@link EntryPointSpec}s. The second index
+	 *         contains a list of the transitions with {@link EntryPointSpec}s.
 	 */
 	public static List<Transition>[] getEntrySpecSortedTransitions(
 			List<Transition> elements) {
 		@SuppressWarnings("unchecked")
 		final List<Transition>[] transitions = new ArrayList[2];
 		// first list contains Transitions without entry spec
-		transitions[0] = new ArrayList<Transition>();
+		transitions[0] = new ArrayList<>();
 		// second list contains Transitions with entry spec
-		transitions[1] = new ArrayList<Transition>();
+		transitions[1] = new ArrayList<>();
 		for (Transition transition : elements) {
 			boolean hasEntrySpec = false;
 			for (ReactionProperty property : transition.getProperties()) {
@@ -70,22 +69,21 @@ public final class STextValidationModelUtils {
 	/**
 	 * Sorts the given elements in transition without and with
 	 * {@link ExitPointSpec}s
-	 * 
+	 *
 	 * @param elements
 	 *            - list of transitions to sort
-	 * @return an array with the sorted elements. The first index contains a
-	 *         list of the transitions without {@link ExitPointSpec}s. The
-	 *         second index contains a list of the transitions with
-	 *         {@link ExitPointSpec}s.
+	 * @return an array with the sorted elements. The first index contains a list of
+	 *         the transitions without {@link ExitPointSpec}s. The second index
+	 *         contains a list of the transitions with {@link ExitPointSpec}s.
 	 */
 	public static List<Transition>[] getExitSpecSortedTransitions(
 			List<Transition> elements) {
 		@SuppressWarnings("unchecked")
 		final List<Transition>[] transitions = new ArrayList[2];
 		// first list contains Transitions without exit spec
-		transitions[0] = new ArrayList<Transition>();
+		transitions[0] = new ArrayList<>();
 		// second list contains Transitions with exit spec
-		transitions[1] = new ArrayList<Transition>();
+		transitions[1] = new ArrayList<>();
 		for (Transition transition : elements) {
 			boolean hasExitSpec = false;
 			for (ReactionProperty property : transition.getProperties()) {
@@ -103,18 +101,17 @@ public final class STextValidationModelUtils {
 	}
 
 	/**
-	 * If a {@link Region} contains no 'default' named {@link entry} it is added
-	 * as key to a map with a list of all entries of the region.
-	 * 
+	 * If a {@link Region} contains no 'default' named {@link entry} it is added as
+	 * key to a map with a list of all entries of the region.
+	 *
 	 * @param elements
 	 *            - a list with {@link Region} elements.
-	 * @return a map with a region (key) which contains no default {@link entry}
-	 *         and a list of all {@link entry} elements of the {@link Region}
-	 *         (value).
+	 * @return a map with a region (key) which contains no default {@link entry} and
+	 *         a list of all {@link entry} elements of the {@link Region} (value).
 	 */
 	public static Map<Region, List<Entry>> getRegionsWithoutDefaultEntry(
 			List<Region> elements) {
-		Map<Region, List<Entry>> regions = new HashMap<Region, List<Entry>>();
+		Map<Region, List<Entry>> regions = new HashMap<>();
 		for (Region region : elements) {
 			boolean hasDefaultEntry = false;
 			final List<Entry> entries = getEntries(region.eContents());
@@ -132,18 +129,17 @@ public final class STextValidationModelUtils {
 	}
 
 	/**
-	 * If a {@link Region} contains no 'default' named {@link exit} it is added
-	 * as key to a map with a list of all exits of the region.
-	 * 
+	 * If a {@link Region} contains no 'default' named {@link exit} it is added as
+	 * key to a map with a list of all exits of the region.
+	 *
 	 * @param elements
 	 *            - a list with {@link Region} elements.
-	 * @return a map with a region (key) which contains no default {@link exit}
-	 *         and a list of all {@link exit} elements of the {@link Region}
-	 *         (value).
+	 * @return a map with a region (key) which contains no default {@link exit} and
+	 *         a list of all {@link exit} elements of the {@link Region} (value).
 	 */
 	public static Map<Region, List<Exit>> getRegionsWithoutDefaultExit(
 			List<Region> elements) {
-		Map<Region, List<Exit>> regions = new HashMap<Region, List<Exit>>();
+		Map<Region, List<Exit>> regions = new HashMap<>();
 		for (Region region : elements) {
 			boolean hasDefaultExit = false;
 			final List<Exit> exits = getExits(region.eContents());
@@ -168,11 +164,11 @@ public final class STextValidationModelUtils {
 	/**
 	 * Checks if the name of the given element matches the requirements to be a
 	 * 'default' element.
-	 * 
+	 *
 	 * @param element
 	 *            - the {@link NamedElement}
-	 * @return {@code true} if the name is null, empty or equals 'default'
-	 *         (ignoring case).
+	 * @return {@code true} if the name is null, empty or equals 'default' (ignoring
+	 *         case).
 	 */
 	public static boolean isDefault(final NamedElement element) {
 		return element.getName() == null
@@ -181,9 +177,9 @@ public final class STextValidationModelUtils {
 	}
 
 	/**
-	 * Validates if the a {@link Transition} has an {@link ExitPointSpec} with
-	 * the given name.
-	 * 
+	 * Validates if the a {@link Transition} has an {@link ExitPointSpec} with the
+	 * given name.
+	 *
 	 * @param transition
 	 *            - the transition to check
 	 * @param name
@@ -224,24 +220,23 @@ public final class STextValidationModelUtils {
 				}
 			}
 		} else {
-			isDefault = true;
+			isDefault = transition.getTrigger() == null;
 		}
 
 		return isDefault;
 	}
 
 	/**
-	 * Filters the given list of {@link ReactionProperty} to return only a list
-	 * of {@link ExitPointSpec}.
-	 * 
+	 * Filters the given list of {@link ReactionProperty} to return only a list of
+	 * {@link ExitPointSpec}.
+	 *
 	 * @param elements
-	 * 			- list of ReactionProperties
-	 * @return
-	 * 		A list of ExitPointSpecs.
+	 *            - list of ReactionProperties
+	 * @return A list of ExitPointSpecs.
 	 */
 	public static List<ExitPointSpec> getExitPointSpecs(
 			List<ReactionProperty> elements) {
-		List<ExitPointSpec> exits = new ArrayList<ExitPointSpec>();
+		List<ExitPointSpec> exits = new ArrayList<>();
 		for (ReactionProperty element : elements) {
 			if (element instanceof ExitPointSpec) {
 				exits.add((ExitPointSpec) element);
@@ -251,17 +246,17 @@ public final class STextValidationModelUtils {
 	}
 
 	public static List<Entry> getEntries(List<?> elements) {
-		List<Entry> entries = new ArrayList<Entry>();
+		List<Entry> entries = new ArrayList<>();
 		for (Object element : elements) {
 			if (element instanceof Entry) {
-				entries.add((Entry) element); 
+				entries.add((Entry) element);
 			}
 		}
 		return entries;
 	}
 
 	public static List<Exit> getExits(List<EObject> elements) {
-		List<Exit> exits = new ArrayList<Exit>();
+		List<Exit> exits = new ArrayList<>();
 		for (EObject element : elements) {
 			if (element instanceof Exit) {
 				exits.add((Exit) element);

@@ -21,6 +21,7 @@ import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
@@ -34,7 +35,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader {
 
 	@Inject protected extension CppNaming
-	@Inject protected extension Navigation
+	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension INamingService
@@ -77,64 +78,72 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		'''
 			class «module» : «interfaceExtensions»
 			{
-				«generatePublicClassmembers»
-				«generateInnerClasses»
-				«generatePrivateClassmembers»
+				public:
+					«generatePublicClassmembers»
+				protected:
+					«generateProtectedClassmembers»
+				private:
+					«generatePrivateClassmembers»
 			};
 		'''
 	}
 
 	def protected generatePublicClassmembers(ExecutionFlow it) {
 		'''
-			public:
+			«module»();
+			
+			~«module»();
+			
+			«statesEnumDecl»
+			
+			«FOR s : it.scopes»«s.createPublicScope»«ENDFOR»
+			
+			«publicFunctionPrototypes»
+			
+			/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
+			sc_boolean «stateActiveFctID»(«statesEnumType» state) const;
+			
+			«IF timed»
+				//! number of time events used by the state machine.
+				static const sc_integer «timeEventsCountConst» = «timeEvents.size»;
 				
-				«module»();
-				
-				~«module»();
-				
-				«statesEnumDecl»
-				
-				«FOR s : it.scopes»«s.createPublicScope»«ENDFOR»
-				
-				«publicFunctionPrototypes»
-				
-				/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
-				sc_boolean «stateActiveFctID»(«statesEnumType» state) const;
-				
-				«IF timed»
-					//! number of time events used by the state machine.
-					static const sc_integer «timeEventsCountConst» = «timeEvents.size»;
-					
-					//! number of time events that can be active at once.
-					static const sc_integer «timeEventsCountparallelConst» = «(it.sourceElement as Statechart).maxNumberOfParallelTimeEvents»;
-				«ENDIF»
-				
+				//! number of time events that can be active at once.
+				static const sc_integer «timeEventsCountparallelConst» = «(it.sourceElement as Statechart).maxNumberOfParallelTimeEvents»;
+			«ENDIF»
+			«IF entry.innerClassVisibility == "public"»
+			
+			«generateInnerClasses»
+			«ENDIF»
+		'''
+	}
+	
+	def protected generateProtectedClassmembers(ExecutionFlow it) {
+		'''
+			«IF entry.innerClassVisibility == "protected"»
+			«generateInnerClasses»
+			«ENDIF»
 		'''
 	}
 
 	def protected generateInnerClasses(ExecutionFlow it) {
 		'''
-			«entry.innerClassVisibility»:
+			«IF (timed || hasOperationCallbacks)»
+			«copyConstructorDecl»
+			«assignmentOperatorDecl»
+			«ENDIF»
 			
-				«IF (timed || hasOperationCallbacks)»
-				«copyConstructorDecl»
-				
-				«assignmentOperatorDecl»
-				«ENDIF»
+			«FOR s : scopes.filter(typeof(InternalScope))»«s.createInterface»«ENDFOR»
 			
-				«FOR s : scopes.filter(typeof(InternalScope))»«s.createInterface»«ENDFOR»
+			«statemachineTypeDecl»
 			
-				«statemachineTypeDecl»
-				
-				«prototypes»
-				
+			«prototypes»
 		'''
 	}
 	
 	
 	def protected copyConstructorDecl(ExecutionFlow it) {
 		'''
-		«module»(const «module» &rhs);
+			«module»(const «module» &rhs);
 		'''
 	}
 	
@@ -144,8 +153,12 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		'''
 	}
 	
-		def protected generatePrivateClassmembers(ExecutionFlow it) {
-		''''''
+	def protected generatePrivateClassmembers(ExecutionFlow it) {
+		'''
+			«IF entry.innerClassVisibility == "private"»
+			«generateInnerClasses»
+			«ENDIF»
+		'''
 	}
 
 	def protected getInterfaceExtensions(ExecutionFlow flow) {

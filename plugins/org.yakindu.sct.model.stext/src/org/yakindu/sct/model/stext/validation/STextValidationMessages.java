@@ -4,18 +4,18 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  * 	itemis AG - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.model.stext.validation;
 
 /**
- * 
- * 
+ *
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public interface STextValidationMessages {
 
@@ -41,8 +41,7 @@ public interface STextValidationMessages {
 	public static final String REGION_UNBOUND_DEFAULT_ENTRY_POINT = "Region must have a 'default' entry.";
 	public static final String REGION_UNBOUND_NAMED_ENTRY_POINT = "Region should have a named entry to support transitions entry specification: ";
 	public static final String ENTRY_UNUSED = "The named entry is not used by incoming transitions.";
-	public static final String EXIT_UNUSED = "The named exit is not used by outgoing transitions.";
-	public static final String EXIT_DEFAULT_UNUSED = "The parent composite state has no 'default' exit transition.";
+	public static final String EXIT_UNUSED = "This exit is not connected to any outgoing transitions.";
 	public static final String TRANSITION_EXIT_SPEC_ON_MULTIPLE_SIBLINGS = "ExitPointSpec can't be used on transition siblings.";
 	public static final String ISSUE_TRANSITION_WITHOUT_TRIGGER = "Missing trigger. Transition is never taken. Use 'oncycle' or 'always' instead.";
 	public static final String EXITPOINTSPEC_WITH_TRIGGER = "Transitions with an exit point spec does not have a trigger or guard.";
@@ -57,4 +56,6 @@ public interface STextValidationMessages {
 	public static final String IMPORT_NOT_RESOLVED_CODE = "ImportNotResolved";
 	public static final String DUPLICATE_IMPORT = "Duplicate import '%s'.";
 	public static final String CONTRADICTORY_ANNOTATIONS = "Some annotations (%s) have contradictory effects.";
+	public static final String BAD_EVENT_NAMES = "'%s' is already used as name of an internal event.";
+	public static final String SYNC_OUTGOING_TRIGGER = "Triggers and guards on a synchronization's outgoing transitions will be ignored.";
 }
