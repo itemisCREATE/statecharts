@@ -166,7 +166,7 @@ public class StatechartNavigatorContentProvider implements ICommonContentProvide
 				Resource resource = myEditingDomain.getResourceSet().getResource(fileURI, true);
 				return wrapEObjects(myAdapterFctoryContentProvier.getChildren(resource), parentElement);
 			} catch (Exception e) {
-				return null;
+				return EMPTY_ARRAY;
 			}
 		}
 

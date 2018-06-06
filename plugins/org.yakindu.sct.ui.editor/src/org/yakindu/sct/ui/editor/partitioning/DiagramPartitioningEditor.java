@@ -22,6 +22,7 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -31,7 +32,6 @@ import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditorInput;
 import org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDocumentProvider;
@@ -53,6 +53,7 @@ import org.eclipse.jface.viewers.ViewerLabel;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IEditorSite;
@@ -62,7 +63,6 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.FileStoreEditorInput;
-import org.eclipse.ui.part.ShowInContext;
 import org.eclipse.xtext.util.Arrays;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
@@ -90,7 +90,6 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	private Adapter breadcrumbSynchronizer;
 
 	private SashForm sash;
-	protected boolean validDiagram = true;
 
 	protected abstract void createTextEditor(Composite parent);
 
@@ -118,38 +117,17 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 					+ "This might have happened because you tried to open a statechart with File->Open File.\n"
 					+ "This is not supported. Please import the file into a project instead.");
 		}
-
-		try {
-			super.init(site, input);
-		} catch (Exception e) {
-			// tried to open corrupt diagram
-		}
-	}
-
-	@Override
-	protected void handleEditorInputChanged() {
-		if (validDiagram)
-			super.handleEditorInputChanged();
+		super.init(site, input);
 	}
 
 	@Override
 	public void createPartControl(Composite parent) {
 		GridLayoutFactory.fillDefaults().spacing(0, 0).applyTo(parent);
 		createBreadcrumbViewer(parent);
-
-		if (isValidDiagram()) {
-			sash = (SashForm) createParentSash(parent);
-			createTextEditor(sash);
-			setFlyoutPalette(true);
-			super.createPartControl(sash);
-		} else {
-			setFlyoutPalette(false);
-			try {
-				super.createPartControl(parent);
-			} catch (Exception e) {
-				// could not create diagram part
-			}
-		}
+		sash = (SashForm) createParentSash(parent);
+		createTextEditor(sash);
+		setFlyoutPalette(true);
+		super.createPartControl(sash);
 	}
 
 	protected void setFlyoutPalette(boolean active) {
@@ -166,27 +144,6 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 		}
 	}
 
-	protected boolean isValidDiagram() {
-		return validDiagram;
-	}
-
-	protected void setValidDiagram(boolean valid) {
-		validDiagram = valid;
-	}
-
-	@Override
-	public ShowInContext getShowInContext() {
-		if (getGraphicalViewer() != null)
-			return super.getShowInContext();
-		return null;
-	}
-	@Override
-	public DiagramEditPart getDiagramEditPart() {
-		if (getDiagramGraphicalViewer() != null)
-			return super.getDiagramEditPart();
-		return null;
-	}
-
 	protected Composite createParentSash(Composite parent) {
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(parent);
 		SashForm sash = new SashForm(parent, SWT.HORIZONTAL);
@@ -200,40 +157,32 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	@SuppressWarnings("restriction")
 	@Override
 	protected void sanityCheckState(IEditorInput input) {
-		super.sanityCheckState(input);
-		// Refresh viewer input since the context may have changed
-		if ((getDiagram() != null && viewer != null && !viewer.getControl().isDisposed()))
-			viewer.setInput(DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram()));
-
-	}
-	@Override
-	protected boolean isStatusLineOn() {
-		if (isValidDiagram())
-			return super.isStatusLineOn();
-		return false;
+		try {
+			super.sanityCheckState(input);
+			// Refresh viewer input since the context may have changed
+			if ((getDiagram() != null && viewer != null && !viewer.getControl().isDisposed()))
+				viewer.setInput(DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram()));
+		} catch (Exception e) {
+			MessageDialog.openInformation(Display.getDefault().getActiveShell(), "Cannot open statechart diagram",
+					"The statechart diagram file is corrupt and cannot be opened.\n\n"
+							+ "This might have happened because you tried to open it with merge conflicts.\n"
+							+ "In this case you need to resolve the issues with the Merge Tool.\n"
+							+ "Right click on the .sct file in the Project Explorer 'Team > Merge Tool').\n\n"
+							+ "The editor will be closed now.");
+			closeEditor(false);
+		}
 	}
 
 	@Override
 	public void setInput(IEditorInput input) {
 		try {
-			super.setInput(input);
-			if (input instanceof IDiagramEditorInput) {
-				initializeTitle((IDiagramEditorInput) input);
-			}
+			super.doSetInput(input, true);
 		} catch (Exception e) {
-			throw e;
+			throw new WrappedException(e);
 		}
-	}
-	@Override
-	protected void initializeGraphicalViewerContents() {
-		if (isValidDiagram())
-			super.initializeGraphicalViewerContents();
-	}
-
-	@Override
-	protected void clearGraphicalViewerContents() {
-		if (isValidDiagram())
-			super.clearGraphicalViewerContents();
+		if (input instanceof IDiagramEditorInput) {
+			initializeTitle((IDiagramEditorInput) input);
+		}
 	}
 
 	protected void initializeTitle(IDiagramEditorInput input) {
@@ -263,22 +212,14 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	}
 
 	protected void createBreadcrumbViewer(Composite parent) {
-
 		if (viewer == null) {
 			viewer = new DiagramPartitioningBreadcrumbViewer(parent, SWT.READ_ONLY);
-
 			List<Diagram> diagramContainerHierachy = DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram());
-			if (diagramContainerHierachy.isEmpty()) {
-				validDiagram = false;
-			} else {
-				viewer.addSelectionChangedListener(this);
-				viewer.setContentProvider(new BreadcrumbViewerContentProvider());
-				viewer.setLabelProvider(new BreadcrumbViewerLabelProvider());
-				initBreadcrumbSynchronizer(diagramContainerHierachy);
-				viewer.setInput(diagramContainerHierachy);
-				validDiagram = true;
-			}
-
+			viewer.addSelectionChangedListener(this);
+			viewer.setContentProvider(new BreadcrumbViewerContentProvider());
+			viewer.setLabelProvider(new BreadcrumbViewerLabelProvider());
+			initBreadcrumbSynchronizer(diagramContainerHierachy);
+			viewer.setInput(diagramContainerHierachy);
 		}
 		parent.pack(true);
 	}
@@ -300,12 +241,6 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 		closeSubdiagramEditors();
 		removeBreadcrumbSynchronizer(DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram()));
 		super.dispose();
-	}
-
-	@Override
-	public void persistViewerSettings() {
-		if (isValidDiagram())
-			super.persistViewerSettings();
 	}
 
 	protected void closeSubdiagramEditors() {

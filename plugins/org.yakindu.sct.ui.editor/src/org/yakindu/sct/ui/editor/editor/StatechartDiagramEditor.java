@@ -19,6 +19,7 @@ import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
@@ -48,7 +49,6 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.ide.IGotoMarker;
-import org.eclipse.ui.internal.part.NullEditorInput;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ui.XtextProjectHelper;
@@ -116,39 +116,26 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		return null;
 	}
 
-	protected DiagramStatus getDiagramStatus() {
-		if (getDiagram() == null || getEditorInput() == null) {
-			return new DiagramStatus(Severity.ERROR, "An error occured while opening the file.\n\n"
-					+ "This might have happened because you tried to open a corrupt statechart with merge conflicts.\n"
-					+ "You need to resolve them with the Merge Tool (Right click on file in Project Explorer 'Team > Merge Tool')");
-		}
-		return new DiagramStatus(Severity.OK);
-	}
 	@Override
 	protected void createBreadcrumbViewer(Composite parent) {
 		DomainStatus domainStatus = getDomainStatus();
 		if (domainStatus != null && !(domainStatus.getSeverity() == Severity.OK)) {
-			createDomainStatusLabel(parent, domainStatus);		
+			createDomainStatusLabel(parent, domainStatus);
 		}
-	
-		DiagramStatus diagramStatus = getDiagramStatus();
-		if(diagramStatus != null && !(diagramStatus.getSeverity() == Severity.OK)) {
-			createDiagramStatusLabel(parent, diagramStatus);
-			validDiagram = false;
-		}else {
-			validDiagram = true;
-			super.createBreadcrumbViewer(parent);
+		super.createBreadcrumbViewer(parent);
+	}
+
+	@Override
+	public void doSetInput(IEditorInput input, boolean releaseEditorContents) throws CoreException {
+		try {
+			super.doSetInput(input, releaseEditorContents);
+		} catch (Exception ex) {
+			throw new RuntimeException(ex);
 		}
 	}
 
 	protected void createDomainStatusLabel(Composite parent, DomainStatus domainStatus) {
 		DomainStatusLabel label = new DomainStatusLabel(domainStatus, parent);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(label);
-		parent.pack(true);
-	}
-	
-	protected void createDiagramStatusLabel(Composite parent, DiagramStatus diagramStatus) {
-		DiagramStatusLabel label = new DiagramStatusLabel(diagramStatus, parent);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(label);
 		parent.pack(true);
 	}
@@ -168,13 +155,12 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		try {
 			super.init(site, input);
-			checkXtextNature();
-			registerValidationListener();
-			setValidDiagram(true);
-		} catch (Exception e) {
-			setValidDiagram(false);
-			super.init(site, new NullEditorInput());
+		} catch (WrappedException ex) {
+			throw new PartInitException(new Status(IStatus.ERROR, ID,
+					"An error occured while opening the statechart model.\n\nThis might have happened because you tried to open a corrupt statechart with merge conflicts.\nYou need to resolve them with the Merge Tool (Right click on the .sct file in the Project Explorer 'Team > Merge Tool')"));
 		}
+		checkXtextNature();
+		registerValidationListener();
 	}
 
 	protected void registerValidationListener() {
@@ -192,19 +178,15 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			IValidationIssueStore sharedStore = editorWithSameResource.get().getAdapter(IValidationIssueStore.class);
 			return sharedStore;
 		} else {
-			if (getDiagram() == null)
-				throw new IllegalArgumentException("Diagram is null");
 			IValidationIssueStore newStore = getEditorInjector().getInstance(IValidationIssueStore.class);
 			newStore.connect(getDiagram().eResource());
 			return newStore;
-
 		}
 	}
 
 	protected Optional<IEditorPart> getEditorWithSameResource() {
 		ArrayList<IEditorReference> currentEditors = Lists.newArrayList(
 				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getEditorReferences());
-
 		Optional<IEditorPart> editorWithSameResource = currentEditors.stream().filter(e -> {
 			try {
 				IEditorInput otherInput = e.getEditorInput();
@@ -267,11 +249,9 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	@Override
 	protected void createGraphicalViewer(Composite parent) {
-
 		super.createGraphicalViewer(parent);
 		IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench().getHelpSystem();
 		helpSystem.setHelp(getGraphicalViewer().getControl(), HelpContextIds.SC_EDITOR_GRAPHICAL_VIEWER);
-
 	}
 
 	@Override
@@ -430,12 +410,10 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			} else if (DiagramEditPart.class.equals(type)) {
 				return getDiagramEditPart();
 			}
-
 			return super.getAdapter(type);
 		} catch (Exception e) {
 			return null;
 		}
-
 	}
 
 	@Override
@@ -448,10 +426,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	@Override
 	public void createPartControl(Composite parent) {
 		super.createPartControl(parent);
-		if (isValidDiagram()) {
-			toggleDefinitionSection();
-		}
-
+		toggleDefinitionSection();
 	}
 
 	public void toggleDefinitionSection() {
@@ -482,7 +457,9 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		if (getDiagram() == null || !(getContextObject() instanceof SpecificationElement))
 			return super.isDirty();
 		SpecificationElement contextObject = (SpecificationElement) getContextObject();
-		return super.isDirty() || (definitionSection != null && (definitionSection.getDefinition() != null
-				&& !definitionSection.getDefinition().equals(contextObject.getSpecification())));
+		return super.isDirty() || (definitionSection != null
+				&& (definitionSection.getDefinition() != null
+						&& !definitionSection.getDefinition().equals(contextObject.getSpecification()))
+				&& !definitionSection.getDefinition().isEmpty());
 	}
 }

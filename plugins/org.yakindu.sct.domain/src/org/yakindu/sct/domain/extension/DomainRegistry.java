@@ -93,7 +93,8 @@ public class DomainRegistry {
 
 	public static IDomain getDomain(EObject object) {
 		DomainElement domainElement = EcoreUtil2.getContainerOfType(object, DomainElement.class);
-		String domainID = domainElement != null ? domainElement.getDomainID()
+		String domainID = domainElement != null
+				? domainElement.getDomainID()
 				: BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
 		return getDomain(domainID);
 	}
@@ -120,7 +121,7 @@ public class DomainRegistry {
 			try {
 				return DomainIDParser.parse(uri);
 			} catch (SAXException e) {
-				// the model is corrupt 
+				// the model is corrupt
 				return "";
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -208,7 +209,7 @@ public class DomainRegistry {
 				newSAXParser.parse(is, new DefaultHandler() {
 					@Override
 					public void startElement(String uri, String localName, String qName, Attributes attributes)
-							throws SAXException {
+							throws StopParsingException {
 						if (SGRAPH_STATECHART.equals(qName)) {
 							String domainId = attributes.getValue(DOMAIN_ID);
 							if (domainId != null) {
@@ -221,7 +222,7 @@ public class DomainRegistry {
 			} catch (StopParsingException e) {
 				// Intentional to cancel parsing
 			} catch (SAXException | IOException | ParserConfigurationException e) {
-				throw e;
+				// the model is corrupt
 			}
 			if (result.length() == 0)
 				result.append(BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral());
