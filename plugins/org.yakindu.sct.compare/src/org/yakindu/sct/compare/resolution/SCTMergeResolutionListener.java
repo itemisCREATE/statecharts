@@ -22,7 +22,6 @@ public class SCTMergeResolutionListener implements IMergeResolutionListener  {
 
 	@Override
 	public void mergeResolutionCompleted(Comparison comparison) {
-		
 	}
 
 }

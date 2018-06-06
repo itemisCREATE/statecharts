@@ -110,7 +110,11 @@ public class DiagramPartitioningDocumentProvider extends FileDiagramDocumentProv
 			document.setContent(diagram);
 			return true;
 		} else if (editorInput instanceof FileEditorInputProxy) {
+			try {
 			setDocumentContentFromStorage(document, ((FileEditorInputProxy) editorInput).getFile());
+			}catch(Exception e) {
+				return false;
+			}
 			return true;
 		}
 		return super.setDocumentContent(document, editorInput);
