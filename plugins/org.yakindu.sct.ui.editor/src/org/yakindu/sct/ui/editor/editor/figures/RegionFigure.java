@@ -20,8 +20,10 @@ import org.eclipse.draw2d.GridLayout;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.StackLayout;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
+import org.eclipse.gmf.runtime.draw2d.ui.mapmode.MapModeUtil;
 import org.eclipse.swt.graphics.Color;
 import org.yakindu.base.xtext.utils.gmf.figures.SyntaxColoringLabel;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
@@ -73,6 +75,12 @@ public class RegionFigure extends RectangleFigure {
 		return compartmentPane;
 	}
 
+	@Override
+	public void paintFigure(Graphics graphics) {
+		super.paintFigure(graphics);
+		drawBlurredShadow(graphics);
+	}
+
 	// ========= drawing related methods ============================
 
 	/**
@@ -94,9 +102,35 @@ public class RegionFigure extends RectangleFigure {
 		return mapMode;
 	}
 
-	@Override
-	public Color getBackgroundColor() {
-		return ThemeProvider.getInstance().getTheme().getRegionBgColor();
+	private void drawBlurredShadow(Graphics graphics) {
+		if (!ThemeProvider.getInstance().getTheme().getDrawRegionShadows()) {
+			return;
+		}
+		graphics.pushState();
+
+		int size = MapModeUtil.getMapMode(this)
+				.DPtoLP(ThemeProvider.getInstance().getTheme().getRegionBlurShadowWidth());
+		int step = MapModeUtil.getMapMode(this).DPtoLP(1);
+
+		graphics.setForegroundColor(ColorConstants.gray);
+		graphics.setLineWidth(MapModeUtil.getMapMode(this).DPtoLP(2));
+		graphics.setClip(graphics.getClip(new Rectangle(getBounds())));
+		graphics.setAlpha(150);
+		outlineShape(graphics);
+		graphics.translate(step, step);
+		graphics.setAlpha(100);
+		outlineShape(graphics);
+		graphics.translate(step, step);
+		graphics.setAlpha(60);
+		outlineShape(graphics);
+		graphics.translate(step, step);
+		graphics.setAlpha(30);
+		outlineShape(graphics);
+		graphics.translate(step, step);
+		graphics.setAlpha(20);
+		outlineShape(graphics);
+
+		graphics.popState();
 	}
 
 }
