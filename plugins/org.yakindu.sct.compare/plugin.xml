@@ -40,10 +40,4 @@
             uri="http://www.eclipse.org/emf/compare">
       </factory>
 </extension>
-  <extension
-        point="org.eclipse.emf.compare.ide.ui.mergeResolutionListener">
-     <listener
-           class="org.yakindu.sct.compare.resolution.SCTMergeResolutionListener">
-     </listener>
-  </extension>
 </plugin>
