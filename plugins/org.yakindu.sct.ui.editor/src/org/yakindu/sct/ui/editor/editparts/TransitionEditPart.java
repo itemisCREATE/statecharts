@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.editparts;
 
@@ -19,6 +19,7 @@ import org.eclipse.gef.Request;
 import org.eclipse.gef.requests.DirectEditRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.internal.editpolicies.TreeConnectionBendpointEditPolicy;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.gmf.runtime.draw2d.ui.internal.routers.ForestRouter;
 import org.eclipse.gmf.runtime.draw2d.ui.internal.routers.OrthogonalRouter;
 import org.eclipse.gmf.runtime.gef.ui.internal.editpolicies.LineMode;
@@ -26,12 +27,13 @@ import org.eclipse.gmf.runtime.gef.ui.internal.tools.SelectConnectionEditPartTra
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.TransitionFigure;
+import org.yakindu.sct.ui.editor.editor.themes.ThemeProvider;
 import org.yakindu.sct.ui.editor.policies.InitialPointsConnectionBendpointEditPolicy;
 
 /**
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 @SuppressWarnings("restriction")
 public class TransitionEditPart extends ConnectionNodeEditPart {
@@ -42,11 +44,12 @@ public class TransitionEditPart extends ConnectionNodeEditPart {
 
 	@Override
 	protected Connection createConnectionFigure() {
-		return new TransitionFigure(getMapMode());
+		TransitionFigure transitionFigure = new TransitionFigure(getMapMode());
+		return transitionFigure;
 	}
 
 	private TransitionFigure getPrimaryShape() {
-		return (TransitionFigure) getFigure();
+		return getFigure();
 	}
 
 	@Override
@@ -74,7 +77,6 @@ public class TransitionEditPart extends ConnectionNodeEditPart {
 			super.addChildVisual(childEditPart, index);
 	}
 
-	
 	@Override
 	protected void removeChildVisual(EditPart childEditPart) {
 		if (childEditPart instanceof TransitionExpressionEditPart) {
@@ -90,21 +92,21 @@ public class TransitionEditPart extends ConnectionNodeEditPart {
 			super.handleNotificationEvent(notification);
 		}
 	}
-	
+
 	@Override
 	public TransitionFigure getFigure() {
 		return (TransitionFigure) super.getFigure();
 	}
-	
+
 	@Override
 	public void setSelected(int value) {
 		switch (value) {
-		case EditPart.SELECTED:
-		case EditPart.SELECTED_PRIMARY:
-			getFigure().setLineWidth(getMapMode().DPtoLP(2));
-			break;
-		default:
-			getFigure().setLineWidth(getMapMode().DPtoLP(1));
+			case EditPart.SELECTED:
+			case EditPart.SELECTED_PRIMARY:
+				getFigure().setLineWidth(getMapMode().DPtoLP(2));
+				break;
+			default:
+				getFigure().setLineWidth(getMapMode().DPtoLP(1));
 		}
 
 		super.setSelected(value);
@@ -123,4 +125,13 @@ public class TransitionEditPart extends ConnectionNodeEditPart {
 		};
 	}
 
+	@Override
+	protected void refreshRoundedBendpoints() {
+		Connection connection = getConnectionFigure();
+		if (!(connection instanceof PolylineConnectionEx))
+			return;
+
+		PolylineConnectionEx poly = (PolylineConnectionEx) connection;
+		poly.setRoundedBendpointsRadius(ThemeProvider.getInstance().getTheme().getTransitionBendpointRadius());
+	}
 }

@@ -6,27 +6,29 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.editor.figures;
 
 import java.lang.reflect.Field;
 
+import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.PolygonDecoration;
 import org.eclipse.draw2d.RotatableDecoration;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
+import org.yakindu.sct.ui.editor.editor.themes.ThemeProvider;
 
 /**
- * 
+ *
  * @author muelder
- * 
+ *
  */
 public class TransitionFigure extends PolylineConnectionEx {
 
 	private final IMapMode mapMode;
 
-	protected static final int TOLERANCE = 4;
+	protected static final int TOLERANCE = 3;
 
 	public TransitionFigure(IMapMode mapMode) {
 		this(mapMode, false);
@@ -40,6 +42,7 @@ public class TransitionFigure extends PolylineConnectionEx {
 			setSourceDecoration(createTargetDecoration());
 		else
 			setTargetDecoration(createTargetDecoration());
+		setRoundedBendpointsRadius(ThemeProvider.getInstance().getTheme().getTransitionBendpointRadius());
 	}
 
 	protected void setTolerance() {
@@ -52,6 +55,12 @@ public class TransitionFigure extends PolylineConnectionEx {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void paintFigure(Graphics graphics) {
+		setRoundedBendpointsRadius(ThemeProvider.getInstance().getTheme().getTransitionBendpointRadius());
+		super.paintFigure(graphics);
 	}
 
 	protected IMapMode getMapMode() {
