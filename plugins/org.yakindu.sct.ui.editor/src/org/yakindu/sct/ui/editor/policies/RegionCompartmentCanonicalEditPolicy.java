@@ -120,24 +120,24 @@ public class RegionCompartmentCanonicalEditPolicy extends CanonicalConnectionEdi
 		List<IAdaptable> allViews = new ArrayList<IAdaptable>(createdConnectionViews.size() + createdViews.size());
 		allViews.addAll(createdViews);
 		allViews.addAll(createdConnectionViews);
-		makeViewsImmutable(allViews);
-		persistTransientViews(createdViews);
-	}
-
-	protected void persistTransientViews(List<IAdaptable> createdViews) {
 		getHost().getEditingDomain().getCommandStack().execute(new AbstractCommand() {
 			@Override
 			public void execute() {
-				for (IAdaptable iAdaptable : createdViews) {
-					((View) iAdaptable.getAdapter(View.class)).persist();
-				}
-				// View#persist is not overridden for Edges in GMF Notation (Bug)
-				getHost().getNotationView().getDiagram().persistEdges();
+				makeViewsImmutable(allViews);
+				persistTransientViews(createdViews);
 			}
-
 			@Override
 			public void redo() {
 			}
 		});
+		super.refreshSemantic();
+	}
+
+	protected void persistTransientViews(List<IAdaptable> createdViews) {
+		for (IAdaptable iAdaptable : createdViews) {
+			((View) iAdaptable.getAdapter(View.class)).persist();
+		}
+		// View#persist is not overridden for Edges in GMF Notation (Bug)
+		getHost().getNotationView().getDiagram().persistEdges();
 	}
 }
