@@ -103,6 +103,7 @@ public class StateFigure extends RoundedRectangle {
 
 	@Override
 	public void paintFigure(Graphics graphics) {
+		graphics.setForegroundColor(ThemeProvider.getInstance().getTheme().getStateOutlineColor(getBackgroundColor()));
 		drawBlurredShadow(graphics);
 		super.paintFigure(graphics);
 	}
