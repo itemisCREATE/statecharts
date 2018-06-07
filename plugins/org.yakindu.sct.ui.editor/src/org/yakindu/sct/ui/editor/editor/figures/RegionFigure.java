@@ -89,6 +89,8 @@ public class RegionFigure extends RectangleFigure {
 	 */
 	@Override
 	protected void fillShape(Graphics graphics) {
+		setBackgroundColor(ThemeProvider.getInstance().getTheme().getRegionBgColor());
+		setForegroundColor(ThemeProvider.getInstance().getTheme().getRegionOutlineColor());
 		if (ThemeProvider.getInstance().getTheme().getDrawRegionBgGradient()) {
 			Color c = mixColor(getBackgroundColor(), ColorConstants.white, 220);
 			fillVerticalGradientRectangle(graphics, getBounds(), getBackgroundColor(), c);
