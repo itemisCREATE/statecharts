@@ -1,9 +1,8 @@
 package org.yakindu.sct.ui.editor.editor.themes;
 
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.swt.graphics.Color;
 
-public class FlatTheme extends AbstractTheme {
+public abstract class AbstractTheme implements IStatechartsTheme {
 
 	@Override
 	public boolean getDrawStateShadows() {
@@ -17,7 +16,17 @@ public class FlatTheme extends AbstractTheme {
 
 	@Override
 	public boolean getTransitionExpressionOpaque() {
-		return true;
+		return false;
+	}
+
+	@Override
+	public boolean getDrawRelativeStateOutline() {
+		return false;
+	}
+
+	@Override
+	public double getRelativeStateOutlineFactor() {
+		return 0;
 	}
 
 	@Override
@@ -42,42 +51,45 @@ public class FlatTheme extends AbstractTheme {
 
 	@Override
 	public Color getCanvasBgColor() {
-		return new Color(null, 245, 245, 245);
+		return null;
 	}
 
 	@Override
 	public Color getStateBgColor() {
-		return new Color(null, 205, 220, 243);
+		return null;
 	}
 
 	@Override
 	public Color getRegionBgColor() {
-		return ColorConstants.white;
+		return null;
 	}
 
 	@Override
 	public Color getRegionOutlineColor() {
-		return new Color(null, 220, 220, 220);
+		return null;
 	}
 
 	@Override
-	public Color getInternalStateOutlineColor() {
-		return new Color(null, 163, 163, 163);
+	public final Color getStateOutlineColor() {
+		return getStateOutlineColor(null);
 	}
 
 	@Override
-	public boolean getDrawRelativeStateOutline() {
-		return true;
+	public final Color getStateOutlineColor(Color stateColor) {
+		if (getDrawRelativeStateOutline()) {
+			Color bgColor = stateColor != null ? stateColor : getStateBgColor();
+			double offset = getRelativeStateOutlineFactor();
+			return ColorHelper.modifyColorShade(bgColor, offset);
+		} else {
+			return getInternalStateOutlineColor();
+		}
 	}
 
-	@Override
-	public double getRelativeStateOutlineFactor() {
-		return 0.85;
-	}
+	protected abstract Color getInternalStateOutlineColor();
 
 	@Override
 	public int getTransitionBendpointRadius() {
-		return 10;
+		return 0;
 	}
 
 }

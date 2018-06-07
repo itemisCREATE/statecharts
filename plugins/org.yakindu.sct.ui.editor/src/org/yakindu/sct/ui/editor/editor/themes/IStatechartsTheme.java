@@ -3,20 +3,60 @@ package org.yakindu.sct.ui.editor.editor.themes;
 import org.eclipse.swt.graphics.Color;
 
 public interface IStatechartsTheme {
-	public abstract boolean getDrawStateShadows();
-	public abstract boolean getDrawRegionShadows();
-	public abstract boolean getTransitionExpressionOpaque();
+	/** Draw state shadows */
+	public boolean getDrawStateShadows();
 
-	public abstract boolean getDrawStateBgGradient();
-	public abstract boolean getDrawRegionBgGradient();
+	/** Draw region shadows */
+	public boolean getDrawRegionShadows();
 
-	public abstract int getStateBlurShadowWidth();
-	public abstract int getRegionBlurShadowWidth();
+	/** Opaque (white) background for transition expression labels */
+	public boolean getTransitionExpressionOpaque();
+	/** Radius of transition bendpoints - no bend when 0 */
+	public int getTransitionBendpointRadius();
 
-	public abstract Color getCanvasBgColor();
-	public abstract Color getStateBgColor();
-	public abstract Color getRegionBgColor();
+	/**
+	 * Overrides the state outline color and automatically calculates the
+	 * outline color, using the factor specified in
+	 * {@link #getRelativeStateOutlineFactor()}.
+	 */
+	public boolean getDrawRelativeStateOutline();
+	/** The factor used to darken the states bg color in the HSL color space */
+	public double getRelativeStateOutlineFactor();
 
-	public abstract Color getRegionOutlineColor();
-	public abstract Color getStateOutlineColor();
+	/** Fill states with a gradient instead of a solid color */
+	public boolean getDrawStateBgGradient();
+	/** Fill regions with a gradient instead of a solid color */
+	public boolean getDrawRegionBgGradient();
+
+	/**
+	 * Blur width of the state shadow Only active with
+	 * {@link #getDrawStateShadows()}
+	 */
+	public int getStateBlurShadowWidth();
+	/**
+	 * Blur width of the region shadow Only active with
+	 * {@link #getDrawRegionShadows()}
+	 */
+	public int getRegionBlurShadowWidth();
+
+	/** Background color of the canvas on which regions are drawn */
+	public Color getCanvasBgColor();
+	/** Background / fill color of states */
+	public Color getStateBgColor();
+	/** Background / fill color of regions */
+	public Color getRegionBgColor();
+
+	/** Outline color of regions */
+	public Color getRegionOutlineColor();
+	/**
+	 * Outline color of states overridden by
+	 * {@link #getDrawRelativeStateOutline()}
+	 */
+	public Color getStateOutlineColor();
+
+	/**
+	 * Helper method to generate the outline color when
+	 * {@link #getDrawRelativeStateOutline()} returns true
+	 */
+	public Color getStateOutlineColor(Color stateBgColor);
 }

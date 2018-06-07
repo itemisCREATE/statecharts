@@ -3,7 +3,7 @@ package org.yakindu.sct.ui.editor.editor.themes;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.swt.graphics.Color;
 
-public class ClassicTheme implements IStatechartsTheme {
+public class ClassicTheme extends AbstractTheme {
 	@Override
 	public boolean getDrawStateShadows() {
 		return true;
@@ -60,8 +60,18 @@ public class ClassicTheme implements IStatechartsTheme {
 	}
 
 	@Override
-	public Color getStateOutlineColor() {
+	public Color getInternalStateOutlineColor() {
 		return ColorConstants.lightGray;
+	}
+
+	@Override
+	public boolean getDrawRelativeStateOutline() {
+		return false;
+	}
+
+	@Override
+	public double getRelativeStateOutlineFactor() {
+		return 0;
 	}
 
 }
