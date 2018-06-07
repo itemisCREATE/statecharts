@@ -111,8 +111,8 @@ public class DiagramPartitioningDocumentProvider extends FileDiagramDocumentProv
 			return true;
 		} else if (editorInput instanceof FileEditorInputProxy) {
 			try {
-			setDocumentContentFromStorage(document, ((FileEditorInputProxy) editorInput).getFile());
-			}catch(Exception e) {
+				setDocumentContentFromStorage(document, ((FileEditorInputProxy) editorInput).getFile());
+			} catch (Exception e) {
 				return false;
 			}
 			return true;
@@ -124,17 +124,13 @@ public class DiagramPartitioningDocumentProvider extends FileDiagramDocumentProv
 	protected void disposeElementInfo(Object element, ElementInfo info) {
 		Object content = info.fDocument.getContent();
 		info.fDocument.setContent(null);
-		// Unset the content first to avoid call to DiagramIOUtil.unload
-		try {
-			super.disposeElementInfo(element, info);
-			info.fDocument.setContent(content);
-			if (content instanceof Diagram && info instanceof InputDiagramFileInfo) {
-				// Unload non needed resources
-				ResourceUnloadingTool.unloadEditorInput(DiagramPartitioningUtil.getSharedDomain().getResourceSet(),
-						((InputDiagramFileInfo) info).getEditorInput());
-			}
-		} catch (Exception e) {
-			// editor input was corrupt
+		// Unset the content first to avoid call to DiagramIOUtil.unload	
+		super.disposeElementInfo(element, info);
+		info.fDocument.setContent(content);
+		if (content instanceof Diagram && info instanceof InputDiagramFileInfo) {
+			// Unload non needed resources
+			ResourceUnloadingTool.unloadEditorInput(DiagramPartitioningUtil.getSharedDomain().getResourceSet(),
+					((InputDiagramFileInfo) info).getEditorInput());
 		}
 	}
 

@@ -163,11 +163,12 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 			if ((getDiagram() != null && viewer != null && !viewer.getControl().isDisposed()))
 				viewer.setInput(DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram()));
 		} catch (Exception e) {
-			MessageDialog.openInformation(Display.getDefault().getActiveShell(), "Cannot open statechart diagram",
+			MessageDialog.openWarning(Display.getDefault().getActiveShell(), "Cannot open statechart diagram",
 					"The statechart diagram file is corrupt and cannot be opened.\n\n"
 							+ "This might have happened because you tried to open it with merge conflicts.\n"
-							+ "In this case you need to resolve the issues with the Merge Tool.\n"
+							+ "In this case you need to resolve the conflicts with the Merge Tool.\n"
 							+ "Right click on the .sct file in the Project Explorer 'Team > Merge Tool').\n\n"
+							+ "Please note:\nSelect the workspace version of conflicting files when merging.\n"
 							+ "The editor will be closed now.");
 			closeEditor(false);
 		}
