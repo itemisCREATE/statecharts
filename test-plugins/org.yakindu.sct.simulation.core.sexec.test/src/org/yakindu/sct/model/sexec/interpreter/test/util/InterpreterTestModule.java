@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 committers of YAKINDU and others.
+ * Copyright (c) 2018 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,21 +10,19 @@
  */
 package org.yakindu.sct.model.sexec.interpreter.test.util;
 
-import org.eclipse.xtext.junit4.IInjectorProvider;
+import org.yakindu.base.expressions.interpreter.IOperationMockup;
 import org.yakindu.sct.domain.generic.simulation.GenericSimulationModule;
-
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import org.yakindu.sct.simulation.core.sexec.interpreter.DefaultOperationMockup;
 
 /**
  * 
- * @author andreas muelder - Initial contribution and API
+ * @author jonathan thoene - Initial contribution and API
  * 
  */
-public class SExecInjectionProvider implements IInjectorProvider {
-
-	public Injector getInjector() {
-		return Guice.createInjector(new InterpreterTestModule());
+public class InterpreterTestModule extends GenericSimulationModule{
+	
+	@Override
+	public Class<? extends IOperationMockup> bindIOperationMockup() {
+		return DefaultOperationMockup.class;
 	}
-
 }
