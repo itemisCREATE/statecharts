@@ -143,7 +143,6 @@ public class StextResource extends AbstractSCTResource {
 
 	@Override
 	public void doLoad(InputSource inputSource, Map<?, ?> options) throws IOException {
-		
 		try {
 			super.doLoad(inputSource, options);
 		} catch (Exception e) {
@@ -153,7 +152,6 @@ public class StextResource extends AbstractSCTResource {
 	
 	@Override
 	public void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
-		
 		try {
 			super.doLoad(inputStream, options);
 		} catch (Exception e) {

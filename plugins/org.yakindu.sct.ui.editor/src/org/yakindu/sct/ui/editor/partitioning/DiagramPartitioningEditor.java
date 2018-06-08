@@ -12,7 +12,6 @@ package org.yakindu.sct.ui.editor.partitioning;
 
 import static org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil.openEditor;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -126,22 +125,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 		createBreadcrumbViewer(parent);
 		sash = (SashForm) createParentSash(parent);
 		createTextEditor(sash);
-		setFlyoutPalette(true);
 		super.createPartControl(sash);
-	}
-
-	protected void setFlyoutPalette(boolean active) {
-		try {
-			Class<?> clazz = this.getClass().getSuperclass().getSuperclass().getSuperclass();
-			final Field field = Class.forName("org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditorWithFlyOutPalette",
-					false, clazz.getClassLoader()).getDeclaredField("fHasFlyoutPalette");
-			field.setAccessible(true);
-			field.set(this, active);
-			field.setAccessible(false);
-		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException
-				| ClassNotFoundException e) {
-			e.printStackTrace();
-		}
 	}
 
 	protected Composite createParentSash(Composite parent) {
