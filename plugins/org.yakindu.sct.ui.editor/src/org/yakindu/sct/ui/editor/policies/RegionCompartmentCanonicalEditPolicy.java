@@ -130,7 +130,6 @@ public class RegionCompartmentCanonicalEditPolicy extends CanonicalConnectionEdi
 			public void redo() {
 			}
 		});
-		super.refreshSemantic();
 	}
 
 	protected void persistTransientViews(List<IAdaptable> createdViews) {
