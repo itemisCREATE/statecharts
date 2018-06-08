@@ -16,7 +16,6 @@ import org.osgi.framework.BundleContext;
 /**
  * The activator class controls the plug-in life cycle
  */
-@SuppressWarnings("restriction")
 public class CompareActivator extends AbstractUIPlugin {
 
 	// The plug-in ID
