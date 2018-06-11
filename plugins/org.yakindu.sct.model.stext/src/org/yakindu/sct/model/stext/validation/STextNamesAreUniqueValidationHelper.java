@@ -26,14 +26,17 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.INamesAreUniqueValidationHelper;
 import org.eclipse.xtext.validation.NamesAreUniqueValidationHelper;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
 
 /**
  * @author rbeckmann
  *
  */
 public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidationHelper
-		implements
-			INamesAreUniqueValidationHelper {
+		implements INamesAreUniqueValidationHelper {
+
+	public static final String STATE_NAME_NOT_UNIQUE = "This state's name is not unique.";
+
 	protected OperationCanceledManager operationCanceledManager = new OperationCanceledManager();
 
 	protected Map<QualifiedName, IEObjectDescription> nameMap;
@@ -73,7 +76,7 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 		QualifiedName qName = description.getName();
 		IEObjectDescription existing = nameMap.put(qName, description);
 		IEObjectDescription existingLowerCase = caseInsensitiveMap.put(qName.toLowerCase(), description);
-    IEObjectDescription existingLastElement = lastElementMap.put(qName.getLastSegment(), description);
+		IEObjectDescription existingLastElement = lastElementMap.put(qName.getLastSegment(), description);
 		if (existing != null) {
 			EClass common = checkForCommonSuperClass(existing, description);
 			if (inSameResource(existing, description) && common != null) {
@@ -92,8 +95,32 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 		}
 	}
 
-	protected void duplicateLastElement(IEObjectDescription description, IEObjectDescription lastElementPut,
+	protected void duplicateLastElement(IEObjectDescription description, IEObjectDescription put,
 			ValidationMessageAcceptor acceptor) {
+
+		if (!isValidationNeeded(description)) {
+			return;
+		}
+		if (description.getEClass() == SGraphPackage.Literals.STATE
+				&& put.getEClass() == SGraphPackage.Literals.STATE) {
+			createDuplicateStateNameError(description, acceptor);
+			createDuplicateStateNameError(put, acceptor);
+		}
+	}
+
+	/**
+	 * Override to enabble unique name validation
+	 */
+	protected boolean isValidationNeeded(IEObjectDescription description) {
+		return false;
+	}
+
+	protected void createDuplicateStateNameError(IEObjectDescription description, ValidationMessageAcceptor acceptor) {
+		String msg = STATE_NAME_NOT_UNIQUE;
+		EObject object = description.getEObjectOrProxy();
+		EStructuralFeature feature = getNameFeature(object);
+
+		acceptor.acceptError(msg, object, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, getErrorCode());
 	}
 
 	protected void duplicateCaseInsensitiveFQN(IEObjectDescription description, IEObjectDescription lowerCasePut,
