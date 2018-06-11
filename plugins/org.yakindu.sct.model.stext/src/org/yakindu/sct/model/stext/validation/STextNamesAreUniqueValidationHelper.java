@@ -109,7 +109,7 @@ public class STextNamesAreUniqueValidationHelper extends NamesAreUniqueValidatio
 	}
 
 	/**
-	 * Override to enabble unique name validation
+	 * Override to enable unique name validation
 	 */
 	protected boolean isValidationNeeded(IEObjectDescription description) {
 		return false;
