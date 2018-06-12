@@ -11,14 +11,9 @@
 
 package org.yakindu.sct.model.stext.resource;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Map;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.parser.IParseResult;
-import org.xml.sax.InputSource;
 import org.yakindu.base.types.Annotation;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactionProperty;
@@ -138,24 +133,6 @@ public class StextResource extends AbstractSCTResource {
 			transition.setEffect(reaction.getEffect());
 			transition.setTrigger(reaction.getTrigger());
 			transition.getProperties().addAll(reaction.getProperties());
-		}
-	}
-
-	@Override
-	public void doLoad(InputSource inputSource, Map<?, ?> options) throws IOException {
-		try {
-			super.doLoad(inputSource, options);
-		} catch (Exception e) {
-			// resource is corrupt
-		}
-	}
-	
-	@Override
-	public void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
-		try {
-			super.doLoad(inputStream, options);
-		} catch (Exception e) {
-			// resource is corrupt
 		}
 	}
 
