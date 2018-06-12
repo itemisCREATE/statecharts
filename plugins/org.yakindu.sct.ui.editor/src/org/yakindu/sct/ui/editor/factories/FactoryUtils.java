@@ -30,14 +30,6 @@ public final class FactoryUtils {
 	private FactoryUtils() {
 	}
 
-	/**
-	 * Creates a Label view
-	 *
-	 * @param owner
-	 * @param hint
-	 * @return
-	 */
-
 	@SuppressWarnings("unchecked")
 	public static Node createLabel(View owner, String hint) {
 		DecorationNode nameLabel = NotationFactory.eINSTANCE.createDecorationNode();
