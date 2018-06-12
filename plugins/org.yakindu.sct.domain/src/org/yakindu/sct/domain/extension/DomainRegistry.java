@@ -97,9 +97,7 @@ public class DomainRegistry {
 
 	public static IDomain getDomain(EObject object) {
 		DomainElement domainElement = EcoreUtil2.getContainerOfType(object, DomainElement.class);
-		String domainID = domainElement != null
-				? domainElement.getDomainID()
-				: getDefaultDomain();
+		String domainID = domainElement != null ? domainElement.getDomainID() : getDefaultDomain();
 		return getDomain(domainID);
 	}
 
@@ -109,9 +107,7 @@ public class DomainRegistry {
 				@Override
 				public boolean apply(IDomain input) {
 					return input.getDomainID()
-							.equals(domainID == null || domainID.isEmpty()
-									? getDefaultDomain()
-									: domainID);
+							.equals(domainID == null || domainID.isEmpty() ? getDefaultDomain() : domainID);
 				}
 			});
 		} catch (NoSuchElementException e) {
@@ -224,8 +220,9 @@ public class DomainRegistry {
 				});
 			} catch (StopParsingException e) {
 				// Intentional to cancel parsing
+				e.printStackTrace();
 			} catch (SAXException | IOException | ParserConfigurationException e) {
-				// the model is corrupt
+				e.printStackTrace();
 			}
 			if (result.length() == 0)
 				result.append(BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral());
