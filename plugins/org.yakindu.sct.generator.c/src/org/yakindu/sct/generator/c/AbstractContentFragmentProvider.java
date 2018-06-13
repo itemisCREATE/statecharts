@@ -12,7 +12,7 @@ import com.google.inject.Provider;
 
 public abstract class AbstractContentFragmentProvider<T> implements Provider<T> {
 	@Inject
-	Injector injector;
+	protected Injector injector;
 
 	protected boolean isEventDriven() {
 		GeneratorEntry entry = injector.getInstance(GeneratorEntry.class);
