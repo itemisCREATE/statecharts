@@ -7,6 +7,7 @@
             description="The default domain for YAKINDU Statechart Tools."
             domainID="org.yakindu.domain.default"
             domainStatusProvider="org.yakindu.sct.domain.generic.GenericDomainStatusProvider"
+            documentationProvider="org.yakindu.sct.domain.generic.GenericDomainDocumentationProvider"
             image="icons/logo_small.png"
             name="Default">
       </Domain>

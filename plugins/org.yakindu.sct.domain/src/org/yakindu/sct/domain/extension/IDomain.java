@@ -32,7 +32,10 @@ public interface IDomain {
 
 	String getName();
 
+	@Deprecated()
 	String getDescription();
+	
+	IDomainDocumentationProvider getDocumentationProvider();
 
 	/**
 	 * Injector instances are cached for the features and the specified options

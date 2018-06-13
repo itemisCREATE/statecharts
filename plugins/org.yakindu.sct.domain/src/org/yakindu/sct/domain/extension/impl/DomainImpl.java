@@ -18,6 +18,7 @@ import java.util.concurrent.ExecutionException;
 
 import org.yakindu.sct.domain.extension.DomainStatus;
 import org.yakindu.sct.domain.extension.IDomain;
+import org.yakindu.sct.domain.extension.IDomainDocumentationProvider;
 import org.yakindu.sct.domain.extension.IDomainStatusProvider;
 
 import com.google.common.cache.CacheBuilder;
@@ -38,6 +39,7 @@ public class DomainImpl implements IDomain {
 	private String description;
 	private URL imagePath;
 	private IDomainStatusProvider statusProvider;
+	private IDomainDocumentationProvider documentationProvider;
 	private Iterable<ModuleContribution> modules;
 	private LoadingCache<CacheKey, Injector> injectorCache;
 
@@ -90,17 +92,20 @@ public class DomainImpl implements IDomain {
 
 	public DomainImpl(String domainID, String name, String description, URL imagePath,
 			Iterable<ModuleContribution> modules) {
-		this(domainID, name, description, imagePath, modules, new IDomainStatusProvider.DefaultDomainStatusProvider());
+		this(domainID, name, description, imagePath, modules, new IDomainStatusProvider.DefaultDomainStatusProvider(),
+				new IDomainDocumentationProvider.NullImpl());
 	}
 
 	public DomainImpl(String domainID, String name, String description, URL imagePath,
-			Iterable<ModuleContribution> modules, IDomainStatusProvider provider) {
+			Iterable<ModuleContribution> modules, IDomainStatusProvider provider,
+			IDomainDocumentationProvider docuProvider) {
 		this.domainID = domainID;
 		this.name = name;
 		this.description = description;
 		this.imagePath = imagePath;
 		this.modules = modules;
 		this.statusProvider = provider;
+		this.documentationProvider = docuProvider;
 		initializeCache();
 	}
 
@@ -170,6 +175,11 @@ public class DomainImpl implements IDomain {
 	@Override
 	public DomainStatus getAvailabilityStatus() {
 		return statusProvider.getDomainStatus();
+	}
+
+	@Override
+	public IDomainDocumentationProvider getDocumentationProvider() {
+		return documentationProvider;
 	}
 
 }

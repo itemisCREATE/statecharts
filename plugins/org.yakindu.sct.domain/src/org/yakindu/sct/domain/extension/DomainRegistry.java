@@ -57,6 +57,7 @@ public class DomainRegistry {
 	private static final String IMAGE = "image";
 	private static final String NAME = "name";
 	private static final String DOMAIN_STATUS_PROVIDER = "domainStatusProvider";
+	private static final String DOCU_PROVIDER = "documentationProvider";
 
 	private static final String FEATURE = "feature";
 	private static final String MODULE_PROVIDER = "moduleProvider";
@@ -158,14 +159,24 @@ public class DomainRegistry {
 			Bundle extensionBundle = Platform.getBundle(element.getContributor().getName());
 			image = extensionBundle.getEntry(path);
 		}
-		IDomainStatusProvider provider = new IDomainStatusProvider.DefaultDomainStatusProvider();
+		IDomainStatusProvider statusProvider = new IDomainStatusProvider.DefaultDomainStatusProvider();
 		if (element.getAttribute(DOMAIN_STATUS_PROVIDER) != null) {
 			try {
-				provider = (IDomainStatusProvider) element.createExecutableExtension(DOMAIN_STATUS_PROVIDER);
+				statusProvider = (IDomainStatusProvider) element.createExecutableExtension(DOMAIN_STATUS_PROVIDER);
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}
 		}
+
+		IDomainDocumentationProvider docuProvider = new IDomainDocumentationProvider.NullImpl();
+		if (element.getAttribute(DOCU_PROVIDER) != null) {
+			try {
+				docuProvider = (IDomainDocumentationProvider) element.createExecutableExtension(DOCU_PROVIDER);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}
+
 		return new DomainImpl(element.getAttribute(DOMAIN_ID), element.getAttribute(NAME),
 				element.getAttribute(DESCRIPTION), image,
 				Iterables.filter(allModules, new Predicate<ModuleContribution>() {
@@ -173,7 +184,7 @@ public class DomainRegistry {
 					public boolean apply(ModuleContribution input) {
 						return input.getDomainID().equals(element.getAttribute(DOMAIN_ID));
 					}
-				}), provider);
+				}), statusProvider, docuProvider);
 	}
 
 	/**
