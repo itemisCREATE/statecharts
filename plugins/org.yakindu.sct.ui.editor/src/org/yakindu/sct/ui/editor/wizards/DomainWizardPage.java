@@ -12,9 +12,6 @@ package org.yakindu.sct.ui.editor.wizards;
 
 import java.util.List;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -45,16 +42,14 @@ import org.yakindu.sct.ui.editor.DiagramActivator;
 public class DomainWizardPage extends WizardPage {
 
 	private ComboViewer domainCombo;
-
 	private Label description;
-
 	private Label image;
-
 	private Object domainDescriptors;
 
 	protected DomainWizardPage(String pageName) {
 		this(pageName, DomainRegistry.getDomains());
 	}
+
 	protected DomainWizardPage(String pageName, List<IDomain> domainDescriptors) {
 		super(pageName);
 		this.domainDescriptors = domainDescriptors;
@@ -109,27 +104,10 @@ public class DomainWizardPage extends WizardPage {
 			}
 
 		});
-		
+
 		trySelectDefaultDomain();
-
-		IConfigurationElement[] configurationElements = Platform.getExtensionRegistry()
-				.getConfigurationElementsFor("org.yakindu.sct.ui.wizard.create.contribution");
-		if (configurationElements.length > 0) {
-
-			Label spacer2 = new Label(domainSelectionGroup, SWT.NONE);
-			GridDataFactory.fillDefaults().span(2, 1).applyTo(spacer2);
-			for (IConfigurationElement iConfigurationElement : configurationElements) {
-				try {
-					CreationWizardContribution contribution = (CreationWizardContribution) iConfigurationElement
-							.createExecutableExtension("class");
-					contribution.toDomainWizardPage(composite);
-				} catch (CoreException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 	}
-	
+
 	private void trySelectDefaultDomain() {
 		try {
 			domainCombo.setSelection(new StructuredSelection(
@@ -141,14 +119,29 @@ public class DomainWizardPage extends WizardPage {
 		}
 	}
 
+	private boolean visible = false;
+
+	@Override
+	public void setVisible(boolean visible) {
+		this.visible = true;
+		super.setVisible(visible);
+	}
+	
+	public boolean domainSelected() {
+		return visible;
+	}
+
+	public boolean isPageComplete() {
+		return super.isPageComplete() && visible;
+	}
+
 	public String getDomainID() {
 		return unwrap(domainCombo.getSelection()).getDomainID();
 	}
 
-	private IDomain unwrap(ISelection selection) {
+	protected IDomain unwrap(ISelection selection) {
 		IDomain domain = (IDomain) ((StructuredSelection) selection).getFirstElement();
 		return domain;
 	}
 
 }
-

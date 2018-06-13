@@ -98,7 +98,6 @@ public class CreationWizard extends Wizard implements INewWizard {
 	@Override
 	public void addPages() {
 		initModelCreationPage();
-		
 		initDomainWizardPage();
 
 	}
@@ -116,11 +115,12 @@ public class CreationWizard extends Wizard implements INewWizard {
 		domainWizardPage.setTitle("Select Statechart Domain");
 		domainWizardPage.setDescription("Select the domain you want to create a statechart for.");
 		domainWizardPage.setImageDescriptor(StatechartImages.LOGO.imageDescriptor());
-		addPage(domainWizardPage);
+		if (DomainRegistry.getDomains().size() > 1)
+			addPage(domainWizardPage);
 	}
 
-	public static class DiagramCreationDesccription{
- 
+	public static class DiagramCreationDesccription {
+
 		private URI uri;
 		private String domainID;
 
@@ -136,17 +136,17 @@ public class CreationWizard extends Wizard implements INewWizard {
 		public String getDomainID() {
 			return domainID;
 		}
-		
+
 	}
 	
 	@Override
 	public boolean performFinish() {
 		final DiagramCreationDesccription create = getDiagramDescription();
-		
+
 		IRunnableWithProgress op = new WorkspaceModifyOperation(null) {
 			@Override
 			protected void execute(IProgressMonitor monitor) throws CoreException, InterruptedException {
-				
+
 				diagram = createDiagram(create, monitor);
 				if (isOpenOnCreate() && diagram != null) {
 					try {
@@ -171,12 +171,10 @@ public class CreationWizard extends Wizard implements INewWizard {
 		URI uri = modelCreationPage.getURI();
 		final String domainID = domainWizardPage != null ? domainWizardPage.getDomainID()
 				: BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
-		
-		final DiagramCreationDesccription create = new DiagramCreationDesccription(uri,domainID);
+
+		final DiagramCreationDesccription create = new DiagramCreationDesccription(uri, domainID);
 		return create;
 	}
-
-	
 
 	protected boolean openDiagram(Resource diagram) throws PartInitException {
 		String path = diagram.getURI().toPlatformString(true);
@@ -206,12 +204,6 @@ public class CreationWizard extends Wizard implements INewWizard {
 		return false;
 	}
 
-	/**
-	 * Returns the Editor ID of the editor to open, after a new diagram was
-	 * created Override for subclasses with custom editors.
-	 * 
-	 * @return the ID of the editor.
-	 */
 	protected String getEditorID() {
 		return StatechartDiagramEditor.ID;
 	}
@@ -219,15 +211,16 @@ public class CreationWizard extends Wizard implements INewWizard {
 	protected Resource createDiagram(final DiagramCreationDesccription create, IProgressMonitor progressMonitor) {
 		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE.createEditingDomain();
 		progressMonitor.beginTask("Creating diagram file ...", 3);
-		
+
 		final Resource resource = editingDomain.getResourceSet().createResource(create.getModelURI());
-		
+
 		AbstractTransactionalCommand command = new AbstractTransactionalCommand(editingDomain,
 				"Creating diagram file ...", Collections.EMPTY_LIST) {
 			@Override
 			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
-				IModelCreator creator = DomainRegistry.getDomain(create.getDomainID()).getInjector(IDomain.FEATURE_EDITOR).getInstance(IModelCreator.class);
+				IModelCreator creator = DomainRegistry.getDomain(create.getDomainID())
+						.getInjector(IDomain.FEATURE_EDITOR).getInstance(IModelCreator.class);
 				creator.createStatechartModel(resource, preferencesHint);
 				Statechart statechart = (Statechart) EcoreUtil.getObjectByType(resource.getContents(),
 						SGraphPackage.Literals.STATECHART);
@@ -286,15 +279,7 @@ public class CreationWizard extends Wizard implements INewWizard {
 		this.openOnCreate = openOnCreate;
 	}
 
-	/**
-	 * Set the preference hint for preferences of new created diagrams
-	 * 
-	 * @param hint
-	 *            the PreferenceHint for the PreferenceStore (mostly from
-	 *            Activator)
-	 */
 	protected void setPreferenceHint(PreferencesHint hint) {
 		preferencesHint = hint;
 	}
-
 }
