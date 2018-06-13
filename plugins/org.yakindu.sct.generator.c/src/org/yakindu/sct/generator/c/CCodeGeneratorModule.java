@@ -53,7 +53,7 @@ public class CCodeGeneratorModule implements IGeneratorModule {
 		binder.bind(GeneratorEntry.class).toInstance(entry);
 		binder.bind(IExecutionFlowGenerator.class).to(CGenerator.class);
 		binder.bind(ICodegenTypeSystemAccess.class).to(CTypeSystemAccess.class);
-		binder.bind(IncludeProvider.class).to(StandardIncludeProvider.class);
+		binder.bind(IncludeProvider.class).to(getIncludeProvider());
 		binder.bind(INamingService.class).to(CNamingService.class);
 		binder.bind(StatemachineSource.class).toProvider(SourceContentFragmentProvider.class);
 		binder.bind(StatemachineHeader.class).toProvider(HeaderContentFragmentProvider.class);
@@ -61,6 +61,18 @@ public class CCodeGeneratorModule implements IGeneratorModule {
 		bindTracingProperty(entry, binder);
 		configureEventDriven(entry, binder);
 		binder.bind(String.class).annotatedWith(Names.named("Separator")).toInstance(getSeparator(entry));
+	}
+
+	protected Class<? extends IncludeProvider> getIncludeProvider() {
+		return StandardIncludeProvider.class;
+	}
+
+	protected Class<? extends SourceContentFragmentProvider> getSourceContentFragmentProvider() {
+		return SourceContentFragmentProvider.class;
+	}
+
+	protected Class<? extends HeaderContentFragmentProvider> getHeaderContentFragmentProvider() {
+		return HeaderContentFragmentProvider.class;
 	}
 
 	protected void bindTracingProperty(GeneratorEntry entry, Binder binder) {
