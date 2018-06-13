@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.factories;
 
@@ -21,9 +21,9 @@ import org.eclipse.gmf.runtime.notation.View;
 
 /**
  * Convenience methods for semantic and notation model element creation.
- * 
+ *
  * @author muelder
- * 
+ *
  */
 public final class FactoryUtils {
 
@@ -43,4 +43,5 @@ public final class FactoryUtils {
 		nameLabel.setLayoutConstraint(NotationFactory.eINSTANCE.createLocation());
 		return nameLabel;
 	}
+
 }
