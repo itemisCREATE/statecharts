@@ -188,9 +188,21 @@ class SExecExtensions {
 	def hasIncomingEvents(Scope it) {
 		!incomingEvents.empty
 	}
+	
+	def hasIncomingEventsWithValue(Scope it) {
+		!incomingEvents.filter[hasValue].empty
+	}
+	
+	def hasIncomingEventsWithValue(ExecutionFlow it) {
+		!interfaces.filter[hasIncomingEventsWithValue].empty
+	}
 		
 	def List<EventDefinition> getIncomingEvents(Scope it) {
 		declarations.filter(typeof(EventDefinition)).filter[isInEvent].toList
+	}
+	
+	def List<EventDefinition> getIncomingEvents(ExecutionFlow it) {
+		interfaces.map[incomingEvents].flatten.toList
 	}
 	
 	def List<EventDefinition> getLocalEvents(Scope it) {
