@@ -11,8 +11,8 @@
 package org.yakindu.sct.generator.c;
 
 import org.yakindu.sct.generator.c.files.StatemachineSource;
-import org.yakindu.sct.generator.c.submodules.StatemachineSourceContentFragment;
-import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenStatemachineSourceContentProvider;
+import org.yakindu.sct.generator.c.submodules.StatemachineSourceFragment;
+import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenStatemachineSourceFragment;
 
 /**
  * @author rbeckmann
@@ -24,9 +24,9 @@ public class SourceContentFragmentProvider extends AbstractContentFragmentProvid
 		StatemachineSource source = new StatemachineSource();
 		injector.injectMembers(source);
 
-		source.getContentProviders().add(injector.getInstance(StatemachineSourceContentFragment.class));
+		source.getContentProviders().add(injector.getInstance(StatemachineSourceFragment.class));
 		if (isEventDriven()) {
-			source.getContentProviders().add(injector.getInstance(EventDrivenStatemachineSourceContentProvider.class));
+			source.getContentProviders().add(injector.getInstance(EventDrivenStatemachineSourceFragment.class));
 		}
 		return source;
 	}

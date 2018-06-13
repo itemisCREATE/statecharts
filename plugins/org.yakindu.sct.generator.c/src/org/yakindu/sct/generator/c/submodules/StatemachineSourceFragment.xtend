@@ -14,7 +14,6 @@ import com.google.inject.Inject
 import org.yakindu.sct.generator.c.ConstantInitializationResolver
 import org.yakindu.sct.generator.c.FlowCode
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
-import org.yakindu.sct.generator.c.ISourceContentFragment
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
@@ -26,12 +25,13 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.generator.c.ISourceFragment
 
 /**
  * @author rbeckmann
  *
  */
-class StatemachineSourceContentFragment implements ISourceContentFragment {
+class StatemachineSourceFragment implements ISourceFragment {
 	@Inject protected extension Naming
 	@Inject protected extension GenmodelEntries
 	@Inject protected extension SExecExtensions

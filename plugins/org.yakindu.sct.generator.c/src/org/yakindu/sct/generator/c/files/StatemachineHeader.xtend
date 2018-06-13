@@ -14,19 +14,19 @@ import com.google.inject.Inject
 import java.util.List
 import org.yakindu.sct.generator.c.IContentTemplate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
-import org.yakindu.sct.generator.c.IHeaderContentFragment
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.c.IHeaderFragment
 
 class StatemachineHeader implements IContentTemplate {
 	@Inject protected extension Naming cNaming
 	@Inject protected extension INamingService
 	
-	protected List<IHeaderContentFragment> contentProviders = newArrayList
+	protected List<IHeaderFragment> contentProviders = newArrayList
 	
-	def List<IHeaderContentFragment> getContentProviders() {
+	def List<IHeaderFragment> getContentProviders() {
 		contentProviders
 	}
 	

@@ -11,7 +11,7 @@
 package org.yakindu.sct.generator.c;
 
 import org.yakindu.sct.generator.c.files.StatemachineHeader;
-import org.yakindu.sct.generator.c.submodules.StatemachineHeaderContentFragment;
+import org.yakindu.sct.generator.c.submodules.StatemachineHeaderFragment;
 import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenStatemachineHeaderFragment;
 
 /**
@@ -28,7 +28,7 @@ public class HeaderContentFragmentProvider extends AbstractContentFragmentProvid
 			header.getContentProviders().add(injector.getInstance(EventDrivenStatemachineHeaderFragment.class));
 		}
 
-		header.getContentProviders().add(injector.getInstance(StatemachineHeaderContentFragment.class));
+		header.getContentProviders().add(injector.getInstance(StatemachineHeaderFragment.class));
 		return header;
 	}
 }

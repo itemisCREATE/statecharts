@@ -13,7 +13,6 @@ package org.yakindu.sct.generator.c.submodules.eventdriven
 import com.google.inject.Inject
 import org.yakindu.sct.generator.c.CGeneratorConstants
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
-import org.yakindu.sct.generator.c.IHeaderContentFragment
 import org.yakindu.sct.generator.c.extensions.EventNaming
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
@@ -21,8 +20,9 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.c.IHeaderFragment
 
-class EventDrivenStatemachineHeaderFragment implements IHeaderContentFragment {
+class EventDrivenStatemachineHeaderFragment implements IHeaderFragment {
 	@Inject protected extension Naming
 	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess

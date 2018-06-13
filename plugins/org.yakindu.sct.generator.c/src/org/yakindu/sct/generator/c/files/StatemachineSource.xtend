@@ -17,12 +17,12 @@ import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.generator.c.ISourceContentFragment
+import org.yakindu.sct.generator.c.ISourceFragment
 
 class StatemachineSource implements IContentTemplate {
 	@Inject protected extension INamingService
 
-	val protected List<ISourceContentFragment> contentProviders = newArrayList();
+	val protected List<ISourceFragment> contentProviders = newArrayList();
 		
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) { 
 		initializeNamingService

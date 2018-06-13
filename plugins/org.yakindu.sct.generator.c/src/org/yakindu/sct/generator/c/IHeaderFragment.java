@@ -17,15 +17,15 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
  * @author rbeckmann
  *
  */
-public interface ISourceContentFragment {
+public interface IHeaderFragment {
 	public CharSequence fileComment(ExecutionFlow flow, GeneratorEntry entry,
 			IGenArtifactConfigurations artifactConfigs);
 
 	public CharSequence includes(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs);
 
-	public CharSequence declarations(ExecutionFlow flow, GeneratorEntry entry,
-			IGenArtifactConfigurations artifactConfigs);
+	public CharSequence defines(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs);
 
-	public CharSequence implementations(ExecutionFlow flow, GeneratorEntry entry,
-			IGenArtifactConfigurations artifactConfigs);
+	public CharSequence types(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs);
+
+	public CharSequence functions(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs);
 }
