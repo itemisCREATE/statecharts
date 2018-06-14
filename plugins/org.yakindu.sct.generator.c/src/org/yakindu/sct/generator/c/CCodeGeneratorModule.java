@@ -55,8 +55,8 @@ public class CCodeGeneratorModule implements IGeneratorModule {
 		binder.bind(ICodegenTypeSystemAccess.class).to(CTypeSystemAccess.class);
 		binder.bind(IncludeProvider.class).to(getIncludeProvider());
 		binder.bind(INamingService.class).to(CNamingService.class);
-		binder.bind(StatemachineSource.class).toProvider(SourceContentFragmentProvider.class);
-		binder.bind(StatemachineHeader.class).toProvider(HeaderContentFragmentProvider.class);
+		binder.bind(StatemachineSource.class).toProvider(getSourceContentFragmentProvider());
+		binder.bind(StatemachineHeader.class).toProvider(getHeaderContentFragmentProvider());
 		bindIGenArtifactConfigurations(entry, binder);
 		bindTracingProperty(entry, binder);
 		configureEventDriven(entry, binder);
