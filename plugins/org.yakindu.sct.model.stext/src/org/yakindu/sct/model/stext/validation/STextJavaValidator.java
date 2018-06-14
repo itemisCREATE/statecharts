@@ -64,7 +64,6 @@ import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.model.sgraph.Choice;
-import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.ReactionProperty;
@@ -77,8 +76,6 @@ import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.Vertex;
-import org.yakindu.sct.model.sgraph.impl.EntryImpl;
-import org.yakindu.sct.model.sgraph.impl.ExitImpl;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
@@ -220,20 +217,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				}
 				if (!hasIncomingTransition) {
 					warning(ENTRY_UNUSED, entry, null, -1);
-				}
-			} else {
-				EList<Region> regions = state.getRegions();
-				boolean hasIncomingTransition = false;
-				Iterator<Transition> transitionIt = state.getIncomingTransitions().iterator();
-				while (transitionIt.hasNext() && !hasIncomingTransition) {
-					Iterator<ReactionProperty> propertyIt = transitionIt.next().getProperties().iterator();
-					while (propertyIt.hasNext() && !hasIncomingTransition) {
-						ReactionProperty property = propertyIt.next();
-						String entrypoint = null;
-						if (property instanceof EntryPointSpec) {
-							entrypoint = ((EntryPointSpec) property).getEntrypoint();
-						}
-					}
 				}
 			}
 		}
@@ -431,9 +414,9 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 					error(EXIT_UNUSED, exit, null, -1);
 				}
 				for (Transition transition : state.getOutgoingTransitions()) {
-					for (ReactionProperty propertie : transition.getProperties()) {
-						if (propertie instanceof ExitPointSpec) {
-							String exitpoint = ((ExitPointSpec) propertie).getExitpoint();
+					for (ReactionProperty property : transition.getProperties()) {
+						if (property instanceof ExitPointSpec) {
+							String exitpoint = ((ExitPointSpec) property).getExitpoint();
 							if (exitpoint.equals(exit.getName())) {
 								equalsOutgoingTransition = true;
 							}
@@ -581,7 +564,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 							for (Region region : state.getRegions()) {
 								EList<Vertex> vertices = region.getVertices();
 								for(Vertex vertice : vertices) {
-									if (vertice instanceof EntryImpl) {
+									if (vertice instanceof Entry) {
 										if (spec.getEntrypoint().equals(vertice.getName())) {
 											usingEntry = true;
 										}
