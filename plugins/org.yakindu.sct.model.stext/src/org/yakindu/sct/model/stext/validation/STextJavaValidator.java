@@ -425,6 +425,12 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 					Transition transition = transitionIt.next();
 					hasOutgoingTransition = STextValidationModelUtils.isDefaultExitTransition(transition)
 							|| STextValidationModelUtils.isNamedExitTransition(transition, exit.getName());
+				
+				}
+				if (!hasOutgoingTransition) {
+					error(EXIT_UNUSED, exit, null, -1);
+				}
+				for (Transition transition : state.getOutgoingTransitions()) {
 					for (ReactionProperty propertie : transition.getProperties()) {
 						if (propertie instanceof ExitPointSpec) {
 							String exitpoint = ((ExitPointSpec) propertie).getExitpoint();
@@ -433,9 +439,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 							}
 						}
 					}
-				}
-				if (!hasOutgoingTransition) {
-					error(EXIT_UNUSED, exit, null, -1);
 				}
 				if (!equalsOutgoingTransition) {
 					warning(EXIT_NEVER_USED + "'" + exit.getName() + "'", exit, null, -1);
