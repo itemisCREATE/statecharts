@@ -705,7 +705,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnusedDefaultExitPoint.sct");
 		doValidateAllContents(Exit.class);
 
-		assertIssueCount(diagnostics, 2);
+		assertIssueCount(diagnostics, 1);
 		assertError(diagnostics, EXIT_UNUSED);
 	}
 
