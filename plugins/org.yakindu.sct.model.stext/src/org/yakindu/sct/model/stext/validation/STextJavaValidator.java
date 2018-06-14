@@ -78,6 +78,7 @@ import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.sgraph.impl.EntryImpl;
+import org.yakindu.sct.model.sgraph.impl.ExitImpl;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
@@ -424,8 +425,13 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 					Transition transition = transitionIt.next();
 					hasOutgoingTransition = STextValidationModelUtils.isDefaultExitTransition(transition)
 							|| STextValidationModelUtils.isNamedExitTransition(transition, exit.getName());
-					if (transition.getSpecification().equals(exit.getName())) {
-						equalsOutgoingTransition = true;
+					for (ReactionProperty propertie : transition.getProperties()) {
+						if (propertie instanceof ExitPointSpec) {
+							String exitpoint = ((ExitPointSpec) propertie).getExitpoint();
+							if (exitpoint.equals(exit.getName())) {
+								equalsOutgoingTransition = true;
+							}
+						}
 					}
 				}
 				if (!hasOutgoingTransition) {
@@ -520,7 +526,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			error(errorMsg, parentFirst, null, -1);
 		}
 	}
-
+	
 	@Check(CheckType.NORMAL)
 	public void checkUnboundEntryPoints(final org.yakindu.sct.model.sgraph.State state) {
 		if (state.isComposite()) {

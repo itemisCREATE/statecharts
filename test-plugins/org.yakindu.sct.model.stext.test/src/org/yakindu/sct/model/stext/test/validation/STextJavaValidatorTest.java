@@ -1047,7 +1047,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	public void checkNeverUsedExit() {
 		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnusedExitPoint2.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { 
 			EObject element = iter.next();
 			if (element instanceof Exit) {
 				validator.validate(element, diagnostics, new HashMap<>());
