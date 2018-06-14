@@ -32,13 +32,8 @@ public class ResourceModuleProvider implements IModuleProvider {
 
 	@Override
 	public Module getModule(String... options) {
-		if (options.length == 1 && IDomain.OPTION_HEADLESS.equals(options[0])) {
-			return Modules.combine(getLanguageRuntimeModule(), new Module() {
-
-				@Override
-				public void configure(Binder binder) {
-				}
-			});
+		if (isHeadless(options)) {
+			return getLanguageRuntimeModule();
 		}
 		Module module = Modules.override(getLanguageRuntimeModule())
 				.with(new STextUiModule(STextActivator.getInstance()));
@@ -53,6 +48,15 @@ public class ResourceModuleProvider implements IModuleProvider {
 
 	protected Module getLanguageRuntimeModule() {
 		return new STextRuntimeModule();
+	}
+
+	protected boolean isHeadless(String[] options) {
+		for (String option : options) {
+			if (option.equals(IDomain.OPTION_HEADLESS)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

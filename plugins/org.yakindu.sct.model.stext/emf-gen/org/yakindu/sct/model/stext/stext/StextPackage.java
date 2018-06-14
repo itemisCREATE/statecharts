@@ -913,6 +913,15 @@ public interface StextPackage extends EPackage {
 	int TYPE_ALIAS_DEFINITION__VISIBLE = TypesPackage.TYPE_ALIAS__VISIBLE;
 
 	/**
+	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS_DEFINITION__SUPER_TYPES = TypesPackage.TYPE_ALIAS__SUPER_TYPES;
+
+	/**
 	 * The number of structural features of the '<em>Type Alias Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

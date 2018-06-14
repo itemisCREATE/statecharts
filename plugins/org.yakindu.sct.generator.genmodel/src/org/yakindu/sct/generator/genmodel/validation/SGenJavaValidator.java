@@ -14,13 +14,18 @@ import static com.google.common.collect.Iterables.concat;
 import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Iterables.transform;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
+import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
@@ -58,7 +63,6 @@ import com.google.inject.Injector;
  */
 public class SGenJavaValidator extends AbstractSGenJavaValidator {
 
-	// Error messages
 	public static final String MISSING_REQUIRED_PARAMETER = "Missing required parameter.";
 	public static final String MISSING_REQUIRED_FEATURE = "Missing required feature.";
 	public static final String DUPLICATE_PARAMETER = "Duplicate parameter.";
@@ -67,7 +71,8 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	public static final String UNKNOWN_CONTENT_TYPE = "Unknown content type '";
 	public static final String DEPRECATED = "Element is depricated.";
 	public static final String EMPTY_SGEN = ".sgen file does not contain any entries.";
-	// Failure codes
+	public static final String INVALID_DOMAIN_ID = "This generator can not be used for domain %s. Valid domains are %s";
+
 	public static final String CODE_REQUIRED_FEATURE = "code_req_feature.";
 
 	@Inject
@@ -78,6 +83,23 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	protected TypeValidator typeValidator;
 	@Inject
 	protected ITypeSystem typesystem;
+
+	@Check
+	public void checkDomainCompatibility(GeneratorModel model) {
+		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
+		Set<String> validDomains = generatorDescriptor.getValidDomains();
+		EList<GeneratorEntry> entries = model.getEntries();
+		for (GeneratorEntry generatorEntry : entries) {
+			EObject reference = generatorEntry.getElementRef();
+			if (reference instanceof DomainElement) {
+				String domainID = ((DomainElement) reference).getDomainID();
+				if (!validDomains.isEmpty() && !validDomains.contains(domainID)) {
+					error(String.format(INVALID_DOMAIN_ID, domainID, Arrays.toString(validDomains.toArray())),
+							generatorEntry, SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF);
+				}
+			}
+		}
+	}
 
 	@Check(CheckType.FAST)
 	public void checkInitialValue(PropertyDefinition property) {
