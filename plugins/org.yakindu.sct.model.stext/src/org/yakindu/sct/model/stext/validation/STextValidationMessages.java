@@ -41,7 +41,9 @@ public interface STextValidationMessages {
 	public static final String REGION_UNBOUND_DEFAULT_ENTRY_POINT = "Region must have a 'default' entry.";
 	public static final String REGION_UNBOUND_NAMED_ENTRY_POINT = "Region should have a named entry to support transitions entry specification: ";
 	public static final String ENTRY_UNUSED = "The named entry is not used by incoming transitions.";
+	public static final String ENTRY_NOT_EXIST = "The named entry does not exist: ";
 	public static final String EXIT_UNUSED = "This exit is not connected to any outgoing transitions.";
+	public static final String EXIT_NEVER_USED = "The named exit is not used: ";
 	public static final String TRANSITION_EXIT_SPEC_ON_MULTIPLE_SIBLINGS = "ExitPointSpec can't be used on transition siblings.";
 	public static final String ISSUE_TRANSITION_WITHOUT_TRIGGER = "Missing trigger. Transition is never taken. Use 'oncycle' or 'always' instead.";
 	public static final String EXITPOINTSPEC_WITH_TRIGGER = "Transitions with an exit point spec does not have a trigger or guard.";

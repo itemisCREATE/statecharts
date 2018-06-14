@@ -402,15 +402,31 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 			if (!STextValidationModelUtils.isDefault(exit)) {
 				boolean hasOutgoingTransition = false;
+				boolean equalsOutgoingTransition = false;
 				Iterator<Transition> transitionIt = state.getOutgoingTransitions().iterator();
 				while (transitionIt.hasNext() && !hasOutgoingTransition) {
 					Transition transition = transitionIt.next();
 					hasOutgoingTransition = STextValidationModelUtils.isDefaultExitTransition(transition)
 							|| STextValidationModelUtils.isNamedExitTransition(transition, exit.getName());
+				
 				}
 				if (!hasOutgoingTransition) {
 					error(EXIT_UNUSED, exit, null, -1);
 				}
+				for (Transition transition : state.getOutgoingTransitions()) {
+					for (ReactionProperty property : transition.getProperties()) {
+						if (property instanceof ExitPointSpec) {
+							String exitpoint = ((ExitPointSpec) property).getExitpoint();
+							if (exitpoint.equals(exit.getName())) {
+								equalsOutgoingTransition = true;
+							}
+						}
+					}
+				}
+				if (!equalsOutgoingTransition) {
+					warning(EXIT_NEVER_USED + "'" + exit.getName() + "'", exit, null, -1);
+				}
+				
 			} else {
 				boolean hasOutgoingTransition = false;
 				Iterator<Transition> transitionIt = state.getOutgoingTransitions().iterator();
@@ -496,7 +512,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			error(errorMsg, parentFirst, null, -1);
 		}
 	}
-
+	
 	@Check(CheckType.NORMAL)
 	public void checkUnboundEntryPoints(final org.yakindu.sct.model.sgraph.State state) {
 		if (state.isComposite()) {
@@ -543,6 +559,20 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 							}
 							if (!hasTargetEntry) {
 								error(TRANSITION_UNBOUND_NAMED_ENTRY_POINT + specName, transition, null, -1);
+							}
+							boolean usingEntry = false;
+							for (Region region : state.getRegions()) {
+								EList<Vertex> vertices = region.getVertices();
+								for(Vertex vertice : vertices) {
+									if (vertice instanceof Entry) {
+										if (spec.getEntrypoint().equals(vertice.getName())) {
+											usingEntry = true;
+										}
+									}
+								}
+							}
+							if (!usingEntry) {
+								warning(ENTRY_NOT_EXIST + specName, transition, null, -1);
 							}
 						}
 					}

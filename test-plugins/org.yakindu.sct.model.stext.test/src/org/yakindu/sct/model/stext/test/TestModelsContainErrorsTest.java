@@ -66,12 +66,17 @@ public class TestModelsContainErrorsTest {
 	}
 
 	@Test
-	public void testTestModelContainsErrors() throws Exception {
+	public void testTestModelContainsNoErrors() throws Exception {
 		AssertableDiagnostics validate = tester.validate(statechart);
-		//TODO: check warning in Choice.sct
-		if (statechart.getName().equals("Choice"))
-			return;
 		assertTrue("Testmodel " + statechart.getName() + " contains validation diagnostics",
-				Iterables.size(validate.getAllDiagnostics()) == 0);
+				Iterables.size(validate.getAllDiagnostics()) == getAllowedDiagnostics(statechart.getName()));
+	}
+	
+	private int getAllowedDiagnostics (String name) {
+		if("EnterState".equals(name)) // EnterState should contain 1 warning marker for unknown entry point 'g'
+			return 1;
+		if("ExitState".equals(name)) // ExitState should contain 1 warning marker for unusd exit point 'g'
+			return 1;
+		return 0;
 	}
 }
