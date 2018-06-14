@@ -1043,4 +1043,18 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		assertWarning(diagnostics, ENTRY_NOT_EXIST + "'doesNotExist'");
 	}
 	
+	@Test
+	public void checkNeverUsedExit() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnusedExitPoint2.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Exit) {
+				validator.validate(element, diagnostics, new HashMap<>());
+			}
+		}
+		assertIssueCount(diagnostics, 1);
+		assertWarning(diagnostics, EXIT_NEVER_USED + "'unusedExitPoint'");
+	}
+	
 }
