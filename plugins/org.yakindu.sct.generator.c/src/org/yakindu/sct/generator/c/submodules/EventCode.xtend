@@ -34,11 +34,15 @@ class EventCode {
 	def interfaceIncomingEventRaiser(ExecutionFlow it, EventDefinition event) '''
 		«eventRaiserSignature(event)»
 		{
-			«IF event.hasValue»
-			«event.valueAccess» = value;
-			«ENDIF»
-			«event.access» = bool_true;
+			«interfaceIncomingEventRaiserBody(event)»
 		}
+	'''
+	
+	def interfaceIncomingEventRaiserBody(ExecutionFlow it, EventDefinition event) '''
+		«IF event.hasValue»
+		«event.valueAccess» = value;
+		«ENDIF»
+		«event.access» = bool_true;
 	'''
 	
 	def interfaceOutgoingEventGetter(ExecutionFlow it, EventDefinition event) '''
