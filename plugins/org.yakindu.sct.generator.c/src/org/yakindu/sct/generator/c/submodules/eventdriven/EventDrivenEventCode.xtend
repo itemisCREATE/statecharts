@@ -45,15 +45,14 @@ class EventDrivenEventCode extends EventCode {
 			«functionPrefix(flow)»add_event_to_queue(«scHandle», «event.definition.event.eventEnumMemberName»)«ENDIF»«ENDIF»'''
 	}
 	
-	override interfaceIncomingEventRaiser(ExecutionFlow it, EventDefinition event) '''
-		void «event.asRaiser»(«scHandleDecl»«event.valueParams»)
-		{
+	override interfaceIncomingEventRaiserBody(ExecutionFlow it, EventDefinition event) '''
 			«IF event.hasValue»
 			«event.valueAccess» = value;
 			«ENDIF»
 			«event.access» = bool_true;
 			
 			«functionPrefix»runCycle(«scHandle»);
-		}
 	'''
+	
+	
 }

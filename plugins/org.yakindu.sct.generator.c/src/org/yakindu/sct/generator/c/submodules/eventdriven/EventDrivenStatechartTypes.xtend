@@ -32,4 +32,67 @@ class EventDrivenStatechartTypes extends StatechartTypes {
 		«ENDIF»
 		'''
 	}
+	
+	def generateEventsEnum(ExecutionFlow it) {
+		'''
+		/*
+		 * Enum of event names in the statechart.
+		 */
+		typedef enum  {
+			«invalidEventEnumName(it)» = SC_INVALID_EVENT_VALUE,
+			«FOR e : internalScope.getLocalEvents SEPARATOR ","»
+				«eventEnumMemberName(e)»
+			«ENDFOR»
+		} «eventEnumName»;
+		'''
+	}
+	
+	def generateEventValueUnion(ExecutionFlow it) {
+		if(valueUnionEvents.empty) {
+			return ''''''
+		}
+		'''
+		/*
+		 * Union of all possible event value types.
+		 */
+		typedef union {
+			«FOR e : valueUnionEvents»
+			«e.typeSpecifier.targetLanguageName» «eventEnumMemberName(e)»_value;
+			«ENDFOR»
+		} «eventValueUnionName»;
+		'''
+	}
+	
+	def generateEventStruct(ExecutionFlow it) {
+		'''
+		/*
+		 * Struct that represents a single event.
+		 */
+		typedef struct {
+			«eventEnumName» name;
+			«IF hasLocalEventsWithValue»
+			sc_boolean has_value;
+			«eventValueUnionName» value;
+			«ENDIF»
+		} «eventStructTypeName»;
+		'''
+	}
+
+	def generateEventQueue(ExecutionFlow it) {
+		'''
+		/*
+		 * Queue that holds the raised events.
+		 */
+		typedef struct «eventQueueTypeName»_s {
+			«eventStructTypeName» events[«bufferSize»];
+			sc_integer pop_index;
+			sc_integer push_index;
+			sc_integer size;
+		} «eventQueueTypeName»;
+		'''
+	}
+	
+	def valueUnionEvents(ExecutionFlow it) {
+		internalScope.getLocalEvents.filter[hasValue]
+	}
 }
