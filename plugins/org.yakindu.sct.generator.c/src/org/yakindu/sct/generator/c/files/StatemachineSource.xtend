@@ -42,7 +42,6 @@ class StatemachineSource implements IContentTemplate {
 		'''
 		«FOR p : contentProviders»
 		«p.fileComment(it, entry, artifactConfigs)»
-		
 		«ENDFOR»
 		'''
 	}
@@ -51,7 +50,6 @@ class StatemachineSource implements IContentTemplate {
 		'''
 		«FOR p : contentProviders»
 		«p.includes(it, entry, artifactConfigs)»
-		
 		«ENDFOR»
 		'''
 	}
@@ -60,7 +58,6 @@ class StatemachineSource implements IContentTemplate {
 		'''
 		«FOR p : contentProviders»
 		«p.declarations(it, entry, artifactConfigs)»
-		
 		«ENDFOR»
 		'''
 	}
@@ -69,7 +66,6 @@ class StatemachineSource implements IContentTemplate {
 		'''
 		«FOR p : contentProviders»
 		«p.implementations(it, entry, artifactConfigs)»
-		
 		«ENDFOR»
 		'''
 	}

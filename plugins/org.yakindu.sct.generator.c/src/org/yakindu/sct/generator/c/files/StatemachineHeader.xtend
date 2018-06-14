@@ -65,7 +65,6 @@ class StatemachineHeader implements IContentTemplate {
 		'''
 			«FOR p : contentProviders»
 				«p.fileComment(it, entry, artifactConfigs)»
-				
 			«ENDFOR»
 		'''
 	}
@@ -74,7 +73,6 @@ class StatemachineHeader implements IContentTemplate {
 		'''
 			«FOR p : contentProviders»
 				«p.includes(it, entry, artifactConfigs)»
-				
 			«ENDFOR»
 		'''
 	}
@@ -83,7 +81,6 @@ class StatemachineHeader implements IContentTemplate {
 		'''
 			«FOR p : contentProviders»
 				«p.defines(it, entry, artifactConfigs)»
-				
 			«ENDFOR»
 		'''
 	}
@@ -92,7 +89,6 @@ class StatemachineHeader implements IContentTemplate {
 		'''
 			«FOR p : contentProviders»
 				«p.types(it, entry, artifactConfigs)»
-				
 			«ENDFOR»
 		'''
 	}
@@ -101,7 +97,6 @@ class StatemachineHeader implements IContentTemplate {
 		'''
 			«FOR p : contentProviders»
 				«p.functions(it, entry, artifactConfigs)»
-				
 			«ENDFOR»
 		'''
 	}
