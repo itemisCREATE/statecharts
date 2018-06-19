@@ -20,26 +20,19 @@ import org.yakindu.sct.model.sgraph.Exit;
  *
  */
 public class ExitValidator extends AbstractSGraphValidator {
-	
-	
-	private static final String EXIT_TRANSITIONS_MUST_HAVE_N_IN_MSG  = "Exit node should have at least one incoming transition.";
-	public static final String  EXIT_TRANSITIONS_MUST_HAVE_N_IN_CODE = "exit.transitions.MustHaveNIn";
-	
-	/**
-	 * TODO: severity error?
-	 * @param exit
-	 */
+
+	private static final String EXIT_TRANSITIONS_MUST_HAVE_N_IN_MSG = "Exit node should have at least one incoming transition.";
+	public static final String EXIT_TRANSITIONS_MUST_HAVE_N_IN_CODE = "exit.transitions.MustHaveNIn";
+
 	@Check(CheckType.FAST)
 	public void checkExitTransitionsMustHaveNIn(Exit exit) {
 		if (exit.getIncomingTransitions().size() == 0) {
-			warning(EXIT_TRANSITIONS_MUST_HAVE_N_IN_MSG, exit, null, -1, EXIT_TRANSITIONS_MUST_HAVE_N_IN_CODE);
+			error(EXIT_TRANSITIONS_MUST_HAVE_N_IN_MSG, exit, null, -1, EXIT_TRANSITIONS_MUST_HAVE_N_IN_CODE);
 		}
 	}
 
-	
-	
-	private static final String EXIT_TRANSITIONS_NO_OUT_MSG  = "Exit node must not have outgoing transitions.";
-	public static final String  EXIT_TRANSITIONS_NO_OUT_CODE = "exit.transitions.NoOut";
+	private static final String EXIT_TRANSITIONS_NO_OUT_MSG = "Exit node must not have outgoing transitions.";
+	public static final String EXIT_TRANSITIONS_NO_OUT_CODE = "exit.transitions.NoOut";
 
 	@Check(CheckType.FAST)
 	public void checkExtitTransitionsNoOut(Exit exit) {
@@ -47,7 +40,5 @@ public class ExitValidator extends AbstractSGraphValidator {
 			error(EXIT_TRANSITIONS_NO_OUT_MSG, exit, null, -1, EXIT_TRANSITIONS_NO_OUT_CODE);
 		}
 	}
-
-	
 
 }

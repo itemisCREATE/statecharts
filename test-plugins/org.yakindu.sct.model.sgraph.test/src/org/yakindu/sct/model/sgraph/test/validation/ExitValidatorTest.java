@@ -33,11 +33,6 @@ public class ExitValidatorTest extends AbstractSGraphValidatorTest {
 	@Inject
 	protected SGraphJavaValidatorTester<ExitValidator> tester;
 
-
-
-
-
-
 	/**
 	 * An exit node should have at leat one incoming transition.
 	 */
@@ -48,8 +43,7 @@ public class ExitValidatorTest extends AbstractSGraphValidatorTest {
 		state.getRegions().add(subRegion);
 		Exit exit = factory.createExit();
 		subRegion.getVertices().add(exit);
-
-		tester.validate(exit).assertWarning(EXIT_TRANSITIONS_MUST_HAVE_N_IN_CODE);
+		tester.validate(exit).assertError(EXIT_TRANSITIONS_MUST_HAVE_N_IN_CODE);
 	}
 
 	/**
@@ -70,7 +64,6 @@ public class ExitValidatorTest extends AbstractSGraphValidatorTest {
 		tester.validate(exit).assertError(EXIT_TRANSITIONS_NO_OUT_CODE);
 	}
 
-
 	/**
 	 * Tests a scenario where no issues for an exit nodes exists.
 	 */
@@ -89,5 +82,5 @@ public class ExitValidatorTest extends AbstractSGraphValidatorTest {
 
 		tester.validate(exit).assertOK();
 	}
-	
+
 }
