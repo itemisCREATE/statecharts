@@ -34,9 +34,6 @@ public class RegionValidatorTest extends AbstractSGraphValidatorTest {
 	@Inject
 	protected SGraphJavaValidatorTester<RegionValidator> tester;
 
-
-
-
 	@Test
 	public void checkOnlyOneDefaultEntryPermitted() {
 		State state = createState();
@@ -55,12 +52,7 @@ public class RegionValidatorTest extends AbstractSGraphValidatorTest {
 	public void regionCantBeEnteredUsingShallowHistory() {
 		Statechart statechart = loadStatechart("RegionCantBeEnteredUsingShallowHistory.sct");
 		AssertableDiagnostics result = tester.validate(statechart);
-		result.assertDiagnosticsCount(2);
-
-		result.assertAny(
-				AssertableDiagnostics.errorCode(REGION_REQUIRES_DEFAULT_ENTRY_IF_ENTERED_BY_SHALLOW_HISTORY_CODE));
-		result.assertAny(AssertableDiagnostics
-				.errorCode(REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NON_CONNECTED_DEFAULT_ENTRY_CODE));
+		result.assertError(REGION_REQUIRES_DEFAULT_ENTRY_IF_ENTERED_BY_SHALLOW_HISTORY_CODE);
 	}
 
 	@Test
@@ -69,7 +61,6 @@ public class RegionValidatorTest extends AbstractSGraphValidatorTest {
 		tester.validate(statechart).assertOK();
 	}
 
-	
 	/**
 	 * An exit node must not be used in top level regions.
 	 */
@@ -80,18 +71,15 @@ public class RegionValidatorTest extends AbstractSGraphValidatorTest {
 		Exit exit = factory.createExit();
 		createTransition(state, exit);
 		region.getVertices().add(exit);
-		tester.validate(exit).assertError(REGION_NO_EXIT_ON_TOP_LEVEL_CODE);
+		tester.validate(region).assertError(REGION_NO_EXIT_ON_TOP_LEVEL_CODE);
 	}
 
-	
 	@Test
 	public void initialEntryWithTransitionToContainer() {
 		Statechart statechart = loadStatechart("EntryTransitionToParentState.sct");
 		tester.validate(statechart).assertError(REGION_ENTRY_TARGET_MUST_BE_CHILD_CODE);
 	}
 
-
-	
 	@Override
 	protected Statechart loadStatechart(String path) {
 		return super.loadStatechart("region/" + path);

@@ -35,33 +35,30 @@ import org.yakindu.sct.model.sgraph.Vertex;
  */
 public class SynchronizationValidator extends AbstractSGraphValidator {
 
-
 	private static final String SYNCHRONIZATION_TRANSITIONS_REQUIRE_N_OUT_MSG = "A synchronization must have at least one outgoing transition.";
 	public static final String SYNCHRONIZATION_TRANSITIONS_REQUIRE_N_OUT_CODE = "synchronization.transitions.RequireNOut";
 
 	@Check(CheckType.FAST)
 	public void checkSynchronizationTransitionsRequireNOut(Synchronization sync) {
 		if (sync.getOutgoingTransitions().size() == 0) {
-			error(SYNCHRONIZATION_TRANSITIONS_REQUIRE_N_OUT_MSG, sync, null, -1, SYNCHRONIZATION_TRANSITIONS_REQUIRE_N_OUT_CODE);
+			error(SYNCHRONIZATION_TRANSITIONS_REQUIRE_N_OUT_MSG, sync, null, -1,
+					SYNCHRONIZATION_TRANSITIONS_REQUIRE_N_OUT_CODE);
 		}
 	}
 
-
-	
 	private static final String SYNCHRONIZATION_TRANSITIONS_REQUIRE_MULTIPLE_IN_OR_MULTIPLE_OUT_MSG = "A synchronization must have either multiple incoming or multiple outgoing transitions.";
 	public static final String SYNCHRONIZATION_TRANSITIONS_REQUIRE_MULTIPLE_IN_OR_MULTIPLE_OUT_CODE = "synchronization.transitions.RequireMultipleInOrMultipleOut";
-	
+
 	@Check(CheckType.FAST)
 	public void checkSynchronizationTransitionsRequireMultipleInOrMultipleOut(Synchronization sync) {
 		int in = sync.getIncomingTransitions().size();
 		int out = sync.getOutgoingTransitions().size();
 		if (in < 2 && out < 2) {
-			error(SYNCHRONIZATION_TRANSITIONS_REQUIRE_MULTIPLE_IN_OR_MULTIPLE_OUT_MSG, sync, null, -1, SYNCHRONIZATION_TRANSITIONS_REQUIRE_MULTIPLE_IN_OR_MULTIPLE_OUT_CODE);
+			error(SYNCHRONIZATION_TRANSITIONS_REQUIRE_MULTIPLE_IN_OR_MULTIPLE_OUT_MSG, sync, null, -1,
+					SYNCHRONIZATION_TRANSITIONS_REQUIRE_MULTIPLE_IN_OR_MULTIPLE_OUT_CODE);
 		}
 	}
 
-
-	
 	private static final String SYNCHRONIZATION_REQUIRES_ORTHOGONAL_SOURCE_STATES_MSG = "The source states of a synchronization must be orthogonal.";
 	public static final String SYNCHRONIZATION_REQUIRES_ORTHOGONAL_SOURCE_STATES_CODE = "synchronization.RequiresOrthogonalSourceStates";
 
@@ -69,12 +66,11 @@ public class SynchronizationValidator extends AbstractSGraphValidator {
 	public void checkSynchronizationRequiresOrthogonalSourceStates(Synchronization sync) {
 		List<Vertex> sourceVertices = sources(sync.getIncomingTransitions());
 		if (!areOrthogonal(sourceVertices)) {
-			error(SYNCHRONIZATION_REQUIRES_ORTHOGONAL_SOURCE_STATES_MSG, sync, null, -1, SYNCHRONIZATION_REQUIRES_ORTHOGONAL_SOURCE_STATES_CODE);
+			error(SYNCHRONIZATION_REQUIRES_ORTHOGONAL_SOURCE_STATES_MSG, sync, null, -1,
+					SYNCHRONIZATION_REQUIRES_ORTHOGONAL_SOURCE_STATES_CODE);
 		}
 	}
 
-	
-	
 	private static final String SYNCHRONIZATION_REQUIRES_ORTHOGONAL_TARGET_STATES_MSG = "The target states of a synchronization must be orthogonal.";
 	public static final String SYNCHRONIZATION_REQUIRES_ORTHOGONAL_TARGET_STATES_CODE = "synchronization.RequiresOrthogonalTargetStates";
 
@@ -82,18 +78,17 @@ public class SynchronizationValidator extends AbstractSGraphValidator {
 	public void checkSynchronizationRequiresOrthogonalTargetStates(Synchronization sync) {
 		List<Vertex> sourceVertices = targets(sync.getOutgoingTransitions());
 		if (!areOrthogonal(sourceVertices)) {
-			error(SYNCHRONIZATION_REQUIRES_ORTHOGONAL_TARGET_STATES_MSG, sync, null, -1, SYNCHRONIZATION_REQUIRES_ORTHOGONAL_TARGET_STATES_CODE);
+			error(SYNCHRONIZATION_REQUIRES_ORTHOGONAL_TARGET_STATES_MSG, sync, null, -1,
+					SYNCHRONIZATION_REQUIRES_ORTHOGONAL_TARGET_STATES_CODE);
 		}
 	}
 
-
-	
 	private static final String SYNCHRONIZATION_REQUIRES_SOURCE_STATES_ORTHOGONAL_TO_TARGET_STATES_MSG = "A synchronization's source states must be orthogonal to it's target states. (Common ancestor must be a region.)";
 	public static final String SYNCHRONIZATION_REQUIRES_SOURCE_STATES_ORTHOGONAL_TO_TARGET_STATES_CODE = "synchronization.RequiresSourceStatesOrthogonalToTargetStates";
 
 	@Check
 	public void checkSynchronizationRequiresSourceStatesOrthogonalToTargetStates(Synchronization sync) {
-		
+
 		List<Transition> incoming = sync.getIncomingTransitions();
 		List<List<EObject>> inAncestorsList = new ArrayList<>();
 		for (Transition trans : incoming) {
