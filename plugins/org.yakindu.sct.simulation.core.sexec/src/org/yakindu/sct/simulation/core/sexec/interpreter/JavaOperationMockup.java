@@ -87,7 +87,6 @@ public class JavaOperationMockup implements IOperationMockup {
 			if (className != null) {
 				targets = callbacks.stream().filter(c -> className.equals(c.getClass().getSimpleName()))
 						.collect(Collectors.toList());
-				System.out.println("TARGET FOUND " + targets);
 			}
 		}
 		PolymorphicDispatcher<Object> dispatcher = new PolymorphicDispatcher<Object>(definition.getName(),
