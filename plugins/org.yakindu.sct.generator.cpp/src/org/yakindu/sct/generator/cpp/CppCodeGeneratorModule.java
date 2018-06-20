@@ -12,9 +12,7 @@ package org.yakindu.sct.generator.cpp;
 
 import static org.yakindu.sct.generator.cpp.features.CPPFeatureConstants.FEATURE_INCLUDES;
 import static org.yakindu.sct.generator.cpp.features.CPPFeatureConstants.PARAMETER_INCLUDES_USE_RELATIVE_PATHS;
-import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION;
 
-import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.sct.generator.c.DefaultGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations;
@@ -25,6 +23,7 @@ import org.yakindu.sct.generator.c.extensions.Naming;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.IGeneratorModule;
+import org.yakindu.sct.generator.core.extensions.AnnotationExtensions;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenCppIncludeProvider;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenEventCode;
@@ -34,7 +33,6 @@ import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineImplemen
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
-import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 
 import com.google.inject.Binder;
@@ -73,10 +71,7 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 	}
 
 	protected void bindEventDrivenClasses(GeneratorEntry entry, Binder binder) {
-		Statechart statechart = (Statechart) entry.getElementRef();
-		Annotation eventDrivenAnnotation = statechart.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION);
-
-		if (eventDrivenAnnotation != null) {
+		if ((new AnnotationExtensions()).isEventDriven(entry)) {
 			binder.bind(StatemachineHeader.class).to(EventDrivenStatemachineHeader.class);
 			binder.bind(StatemachineImplementation.class).to(EventDrivenStatemachineImplementation.class);
 			binder.bind(CppExpressionsGenerator.class).to(EventDrivenExpressionCode.class);
