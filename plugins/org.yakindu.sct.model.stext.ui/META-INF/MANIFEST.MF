@@ -21,9 +21,8 @@ Require-Bundle: org.yakindu.sct.model.stext;visibility:=reexport,
  org.yakindu.sct.doc.user,
  org.yakindu.base.xtext.utils.jface,
  org.eclipse.xtext.ui.shared
-Import-Package: org.antlr.analysis;version="3.2.0",
- org.apache.commons.logging,
- org.apache.log4j
+Import-Package: org.apache.log4j,
+ org.apache.commons.logging
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.yakindu.sct.model.stext.ui;
   uses:="org.eclipse.ui.plugin,
