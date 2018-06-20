@@ -28,6 +28,7 @@ Import-Package: org.apache.commons.logging,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.yakindu.sct.model.stext,
  org.yakindu.sct.model.stext.expressions,
+ org.yakindu.sct.model.stext.extensions,
  org.yakindu.sct.model.stext.formatting,
  org.yakindu.sct.model.stext.inferrer,
  org.yakindu.sct.model.stext.naming,
@@ -43,6 +44,5 @@ Export-Package: org.yakindu.sct.model.stext,
  org.yakindu.sct.model.stext.stext.util,
  org.yakindu.sct.model.stext.tasks,
  org.yakindu.sct.model.stext.terminals,
- org.yakindu.sct.model.stext.utils,
  org.yakindu.sct.model.stext.validation
 Bundle-ClassPath: .
