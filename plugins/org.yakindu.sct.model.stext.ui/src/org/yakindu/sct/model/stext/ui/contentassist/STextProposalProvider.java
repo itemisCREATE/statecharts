@@ -45,7 +45,13 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Type;
+import org.yakindu.sct.model.sgraph.Entry;
+import org.yakindu.sct.model.sgraph.Exit;
+import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
@@ -53,9 +59,11 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.SimpleScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
+import org.yakindu.sct.model.stext.stext.TransitionReaction;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.ui.internal.STextActivator;
+import org.yakindu.sct.model.stext.utils.STextUtils;
 
 import com.google.common.base.Function;
 import com.google.inject.Inject;
@@ -79,6 +87,9 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	@Inject
 	private IPackageImport2URIMapper mapper;
 
+	@Inject
+	private STextUtils utils; 
+	
 	public static class StrikeThroughStyler extends Styler {
 
 		@Override
@@ -372,7 +383,61 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 				proposalText + " - " + ruleCall.getRule().getName(), null, context);
 		priorityOptimizer.accept(proposal);
 	}
+	
+	@Override
+	public void complete_ID(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		if (model instanceof TransitionReaction) {
+			SpecificationElement contextElement = utils.getContextElement(model);
+			if (contextElement instanceof Transition) {
+				Transition transition = (Transition) contextElement;
+				// check if outgoing or incoming transition
+				EObject eContainer = ruleCall.eContainer();
+				Vertex state = null;
+				boolean entry = false;
+				if (eContainer instanceof Assignment) {
+					String feature = ((Assignment) eContainer).getFeature();
+					if ("entrypoint".equals(feature)) {
+						state = transition.getTarget();
+						entry = true;
+					} else if ("exitpoint".equals(feature)) {
+						entry = false;
+						state = transition.getSource();
+					} else {
+						super.complete_ID(model, ruleCall, context, acceptor);
+					}
+				}
+				if (state instanceof State) {
+					createContentAssistForEntryAndExit((State) state, entry, context, acceptor);
+				}
+			}
+		}
+		super.complete_ID(model, ruleCall, context, acceptor);
+	}
 
+	private void createContentAssistForEntryAndExit(State state, boolean entry, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		for (Region region : state.getRegions()) {
+			for (Vertex vertex : region.getVertices()) {
+				if (entry) {
+					if (vertex instanceof Entry) {
+						String assist = vertex.getName();
+						if (assist.length() > 0) {
+							acceptor.accept(createCompletionProposal(assist, context));
+						}
+					}
+				} else {
+					if (vertex instanceof Exit) {
+						String assist = vertex.getName();
+						if (assist.length() > 0) {
+							acceptor.accept(createCompletionProposal(assist, context));
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	public void completeActiveStateReferenceExpression_Value(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		lookupCrossReference(((CrossReference) assignment.getTerminal()), context, acceptor);

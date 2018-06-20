@@ -43,5 +43,6 @@ Export-Package: org.yakindu.sct.model.stext,
  org.yakindu.sct.model.stext.stext.util,
  org.yakindu.sct.model.stext.tasks,
  org.yakindu.sct.model.stext.terminals,
+ org.yakindu.sct.model.stext.utils,
  org.yakindu.sct.model.stext.validation
 Bundle-ClassPath: .
