@@ -1,4 +1,4 @@
-package org.yakindu.sct.model.stext.utils;
+package org.yakindu.sct.model.stext.extensions;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -10,7 +10,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 
-public class STextUtils {
+public class STextExtensions {
 	public SpecificationElement getContextElement(EObject context) {
 		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context.eResource(),
 				ContextElementAdapter.class);

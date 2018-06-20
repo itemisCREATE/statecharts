@@ -52,6 +52,7 @@ import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
+import org.yakindu.sct.model.stext.extensions.STextExtensions;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
@@ -63,7 +64,6 @@ import org.yakindu.sct.model.stext.stext.TransitionReaction;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.ui.internal.STextActivator;
-import org.yakindu.sct.model.stext.utils.STextUtils;
 
 import com.google.common.base.Function;
 import com.google.inject.Inject;
@@ -88,7 +88,7 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	private IPackageImport2URIMapper mapper;
 
 	@Inject
-	private STextUtils utils; 
+	private STextExtensions utils; 
 	
 	public static class StrikeThroughStyler extends Styler {
 
@@ -151,6 +151,9 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	protected void suppressKeywords(List<Keyword> suppressKeywords, TransitionSpecification model) {
 		suppressKeywords.addAll(getKeywords(grammarAccess.getEntryEventAccess().getGroup().eContents()));
 		suppressKeywords.addAll(getKeywords(grammarAccess.getExitEventAccess().getGroup().eContents()));
+		suppressKeywords.addAll(getKeywords(grammarAccess.getExitPointSpecAccess().getGroup().eContents()));
+		suppressKeywords.addAll(getKeywords(grammarAccess.getExitEventAccess().getExitEventAction_0().eContents()));
+		suppressKeywords.addAll(getKeywords(grammarAccess.getExitEventAccess().getExitKeyword_1().eContents()));
 	}
 
 	// context States

@@ -46,11 +46,11 @@ import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
+import org.yakindu.sct.model.stext.extensions.STextExtensions;
 import org.yakindu.sct.model.stext.scoping.ContextPredicateProvider.EmptyPredicate;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
-import org.yakindu.sct.model.stext.utils.STextUtils;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
@@ -75,7 +75,7 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 	private ContextPredicateProvider predicateProvider;
 	
 	@Inject
-	private STextUtils utils;
+	private STextExtensions utils;
 
 	public IScope scope_ActiveStateReferenceExpression_value(EObject context, EReference reference) {
 		Statechart statechart = utils.getStatechart(context);
