@@ -56,13 +56,16 @@ import org.yakindu.sct.model.stext.extensions.STextExtensions;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
+import org.yakindu.sct.model.stext.stext.EntryPointSpec;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.SimpleScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
+import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TransitionReaction;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
+import org.yakindu.sct.model.stext.stext.impl.EntryPointSpecImpl;
 import org.yakindu.sct.model.stext.ui.internal.STextActivator;
 
 import com.google.common.base.Function;
@@ -400,10 +403,10 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 				boolean entry = false;
 				if (eContainer instanceof Assignment) {
 					String feature = ((Assignment) eContainer).getFeature();
-					if ("entrypoint".equals(feature)) {
+					if (StextPackage.Literals.ENTRY_POINT_SPEC__ENTRYPOINT.getName().equals(feature)) {
 						state = transition.getTarget();
 						entry = true;
-					} else if ("exitpoint".equals(feature)) {
+					} else if (StextPackage.Literals.EXIT_POINT_SPEC__EXITPOINT.getName().equals(feature)) {
 						entry = false;
 						state = transition.getSource();
 					} else {
