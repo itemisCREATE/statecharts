@@ -10,37 +10,14 @@
  */
 package org.yakindu.sct.generator.c;
 
-import static org.yakindu.sct.generator.c.features.ICFeatureConstants.FEATURE_INCLUDES;
-import static org.yakindu.sct.generator.c.features.ICFeatureConstants.FEATURE_TRACING;
-import static org.yakindu.sct.generator.c.features.ICFeatureConstants.PARAMETER_INCLUDES_USE_RELATIVE_PATHS;
-import static org.yakindu.sct.generator.c.features.ICFeatureConstants.PARAMETER_TRACING_ENTER_STATE;
-import static org.yakindu.sct.generator.c.features.ICFeatureConstants.PARAMETER_TRACING_EXIT_STATE;
-import static org.yakindu.sct.model.sexec.transformation.IModelSequencer.ADD_TRACES;
-import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION;
-
-import org.yakindu.base.types.Annotation;
-import org.yakindu.sct.generator.c.extensions.GenmodelEntries;
-import org.yakindu.sct.generator.c.files.StatemachineHeader;
-import org.yakindu.sct.generator.c.files.StatemachineSource;
-import org.yakindu.sct.generator.c.submodules.APIGenerator;
-import org.yakindu.sct.generator.c.submodules.EventCode;
-import org.yakindu.sct.generator.c.submodules.InternalFunctionsGenerator;
-import org.yakindu.sct.generator.c.submodules.StatechartTypes;
-import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenAPIGenerator;
-import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenEventCode;
-import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenInternalFunctionsGenerator;
-import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenStatechartTypes;
-import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
-import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.IGeneratorModule;
-import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
-import org.yakindu.sct.model.sexec.naming.INamingService;
-import org.yakindu.sct.model.sgen.FeatureParameterValue;
+import org.yakindu.sct.generator.core.extensions.AnnotationExtensions;
+import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
-import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.inject.Binder;
-import com.google.inject.name.Names;
+import com.google.inject.Module;
+import com.google.inject.util.Modules;
 /**
  *
  * @author andreas muelder - Initial contribution and API
@@ -50,74 +27,22 @@ public class CCodeGeneratorModule implements IGeneratorModule {
 
 	@Override
 	public void configure(GeneratorEntry entry, Binder binder) {
-		binder.bind(GeneratorEntry.class).toInstance(entry);
-		binder.bind(IExecutionFlowGenerator.class).to(CGenerator.class);
-		binder.bind(ICodegenTypeSystemAccess.class).to(CTypeSystemAccess.class);
-		binder.bind(IncludeProvider.class).to(getIncludeProvider());
-		binder.bind(INamingService.class).to(CNamingService.class);
-		binder.bind(StatemachineSource.class).toProvider(getSourceContentFragmentProvider());
-		binder.bind(StatemachineHeader.class).toProvider(getHeaderContentFragmentProvider());
-		bindIGenArtifactConfigurations(entry, binder);
-		bindTracingProperty(entry, binder);
-		configureEventDriven(entry, binder);
-		binder.bind(String.class).annotatedWith(Names.named("Separator")).toInstance(getSeparator(entry));
+		binder.install(getModule(entry));
 	}
 
-	protected Class<? extends IncludeProvider> getIncludeProvider() {
-		return StandardIncludeProvider.class;
-	}
-
-	protected Class<? extends SourceContentFragmentProvider> getSourceContentFragmentProvider() {
-		return SourceContentFragmentProvider.class;
-	}
-
-	protected Class<? extends HeaderContentFragmentProvider> getHeaderContentFragmentProvider() {
-		return HeaderContentFragmentProvider.class;
-	}
-
-	protected void bindTracingProperty(GeneratorEntry entry, Binder binder) {
-		FeatureParameterValue traceEnterFeature = entry.getFeatureParameterValue(FEATURE_TRACING,
-				PARAMETER_TRACING_ENTER_STATE);
-		FeatureParameterValue traceExitFeature = entry.getFeatureParameterValue(FEATURE_TRACING,
-				PARAMETER_TRACING_EXIT_STATE);
-		boolean traceEnter = traceEnterFeature != null ? traceEnterFeature.getBooleanValue() : false;
-		boolean traceExit = traceExitFeature != null ? traceEnterFeature.getBooleanValue() : false;
-		binder.bind(Boolean.class).annotatedWith(Names.named(ADD_TRACES)).toInstance(traceEnter || traceExit);
-	}
-
-	protected void bindIGenArtifactConfigurations(GeneratorEntry entry, Binder binder) {
-		FeatureParameterValue useRelativePathParam = entry.getFeatureParameterValue(FEATURE_INCLUDES,
-				PARAMETER_INCLUDES_USE_RELATIVE_PATHS);
-		boolean useRelativePath = useRelativePathParam != null ? useRelativePathParam.getBooleanValue() : true;
-		if (useRelativePath) {
-			binder.bind(IGenArtifactConfigurations.class).to(DefaultGenArtifactConfigurations.class);
-		} else {
-			binder.bind(IGenArtifactConfigurations.class).to(SimpleGenArtifactConfigurations.class);
-		}
-	}
-
-	protected void configureEventDriven(GeneratorEntry entry, Binder binder) {
+	protected Module getModule(GeneratorEntry entry) {
+		Module module = moduleAdapter(new CCodeGeneratorStandardModule(), entry);
 		if (isEventDriven(entry)) {
-			binder.bind(APIGenerator.class).to(EventDrivenAPIGenerator.class);
-			binder.bind(EventCode.class).to(EventDrivenEventCode.class);
-			binder.bind(InternalFunctionsGenerator.class).to(EventDrivenInternalFunctionsGenerator.class);
-			binder.bind(StatechartTypes.class).to(EventDrivenStatechartTypes.class);
+			module = Modules.override(module).with(moduleAdapter(new CCodeGeneratorEventDrivenModule(), entry));
 		}
-	}
-
-	protected String getSeparator(GeneratorEntry entry) {
-		GenmodelEntries entries = new GenmodelEntries();
-		String separator = entries.getSeparator(entry);
-		if (separator == null) {
-			return "_";
-		} else {
-			return separator;
-		}
+		return module;
 	}
 
 	protected boolean isEventDriven(GeneratorEntry entry) {
-		Statechart statechart = (Statechart) entry.getElementRef();
-		Annotation eventDrivenAnnotation = statechart.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION);
-		return eventDrivenAnnotation != null;
+		return (new AnnotationExtensions()).isEventDriven(entry);
+	}
+
+	protected Module moduleAdapter(IGeneratorModule module, GeneratorEntry entry) {
+		return new GeneratorExtensions.GeneratorModuleAdapter(module, entry);
 	}
 }
