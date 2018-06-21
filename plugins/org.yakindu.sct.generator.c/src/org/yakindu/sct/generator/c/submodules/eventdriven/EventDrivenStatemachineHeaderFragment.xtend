@@ -55,10 +55,10 @@ class EventDrivenStatemachineHeaderFragment implements IHeaderFragment {
 	
 	override types(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
 		'''
+		«generateEventValueUnion»
+
 		«IF hasLocalEvents»
 		«generateEventsEnum»
-		
-		«generateEventValueUnion»
 		
 		«generateEventStruct»
 		

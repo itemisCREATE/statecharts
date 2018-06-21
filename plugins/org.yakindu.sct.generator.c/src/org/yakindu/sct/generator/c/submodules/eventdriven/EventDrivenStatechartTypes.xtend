@@ -48,9 +48,7 @@ class EventDrivenStatechartTypes extends StatechartTypes {
 	}
 	
 	def generateEventValueUnion(ExecutionFlow it) {
-		if(valueUnionEvents.empty) {
-			return ''''''
-		}
+		if(!isEventValueUnionNeeded) return ''''''
 		'''
 		/*
 		 * Union of all possible event value types.
@@ -61,6 +59,10 @@ class EventDrivenStatechartTypes extends StatechartTypes {
 			«ENDFOR»
 		} «eventValueUnionName»;
 		'''
+	}
+	
+	def isEventValueUnionNeeded(ExecutionFlow it) {
+		!valueUnionEvents.empty
 	}
 	
 	def generateEventStruct(ExecutionFlow it) {

@@ -206,6 +206,7 @@ class SExecExtensions {
 	}
 	
 	def List<EventDefinition> getLocalEvents(Scope it) {
+		if(it === null) return emptyList
 		declarations.filter(typeof(EventDefinition)).filter[isLocalEvent].toList
 	}
 	
