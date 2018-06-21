@@ -42,7 +42,7 @@ class EventDrivenAPIGenerator extends APIGenerator {
 				{
 					«clearOutEventsFctID»(«scHandle»);
 					
-					«eventStructTypeName» currentEvent = «eventQueuePopFunction»(&(«scHandle»->internal_event_queue));
+					«internalEventStructTypeName» currentEvent = «eventQueuePopFunction»(&(«scHandle»->internal_event_queue));
 					
 					do {
 						«functionPrefix»dispatch_event(«scHandle», &currentEvent);

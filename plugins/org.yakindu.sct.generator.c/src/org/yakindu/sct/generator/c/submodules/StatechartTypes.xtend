@@ -80,7 +80,7 @@ class StatechartTypes {
 					«d.scopeTypeDeclMember»
 				«ENDFOR»
 			} «scope.type»;
-
+			
 		«ENDIF»
 	'''
 	

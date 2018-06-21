@@ -47,7 +47,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 	'''
 	
 	def dispatchEventFunction(ExecutionFlow it) '''
-		static void «functionPrefix»dispatch_event(«scHandleDecl», const «eventStructTypeName» * event) {
+		static void «functionPrefix»dispatch_event(«scHandleDecl», const «internalEventStructTypeName» * event) {
 			switch(event->name) {
 				«FOR s : scopes.filter(StatechartScope)»
 					«FOR e : s.declarations.filter(EventDefinition).filter[direction == Direction::LOCAL]»
@@ -70,7 +70,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 	def addToEventQueueFunction(ExecutionFlow it) '''
 	static void «functionPrefix»add_event_to_queue(«scHandleDecl», «eventEnumName» name)
 	{
-		«eventStructTypeName» event;
+		«internalEventStructTypeName» event;
 		«eventInitFunction»(&event, name);
 		«eventQueuePushFunction»(&(handle->internal_event_queue), event);
 	}
@@ -79,7 +79,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 	def addToEventQueueValueFunction(ExecutionFlow it) '''
 	static void «functionPrefix»add_value_event_to_queue(«scHandleDecl», «eventEnumName» name, void * value) 
 	{
-		«eventStructTypeName» event;
+		«internalEventStructTypeName» event;
 		«valueEventInitFunction»(&event, name, value);
 		«eventQueuePushFunction»(&(handle->internal_event_queue), event);
 	}
@@ -87,7 +87,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 	
 	def eventFunctions(ExecutionFlow it) {
 		'''
-			static void «eventInitFunction»(«eventStructTypeName» * ev, «eventEnumName» name)
+			static void «eventInitFunction»(«internalEventStructTypeName» * ev, «eventEnumName» name)
 			{
 				ev->name = name;
 				«IF hasLocalEventsWithValue»
@@ -96,14 +96,14 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 			}
 			«IF hasLocalEventsWithValue»
 				
-				static void «valueEventInitFunction»(«eventStructTypeName» * ev, «eventEnumName» name, void * value)
+				static void «valueEventInitFunction»(«internalEventStructTypeName» * ev, «eventEnumName» name, void * value)
 				{
 					ev->name = name;
 					ev->has_value = true;
 					
 					switch(name)
 					{
-						«FOR e : getAllEvents.filter[hasValue && direction == Direction::LOCAL]»
+						«FOR e : localEvents.filter[hasValue]»
 							case «e.eventEnumMemberName»:
 								ev->value.«e.eventEnumMemberName»_value = *((«e.typeSpecifier.targetLanguageName»*)value);
 								break;
@@ -130,9 +130,9 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 				return eq->size;
 			}
 			
-			static «eventStructTypeName» «eventQueuePopFunction»(«eventQueueTypeName» * eq)
+			static «internalEventStructTypeName» «eventQueuePopFunction»(«eventQueueTypeName» * eq)
 			{
-				«eventStructTypeName» event;
+				«internalEventStructTypeName» event;
 				if(«eventQueueSizeFunction»(eq) <= 0) {
 					«eventInitFunction»(&event, «invalidEventEnumName(it)»);
 				}
@@ -150,7 +150,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 				return event;
 			}
 			
-			static sc_boolean «eventQueuePushFunction»(«eventQueueTypeName» * eq, «eventStructTypeName» ev)
+			static sc_boolean «eventQueuePushFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» ev)
 			{
 				if(«eventQueueSizeFunction»(eq) == «bufferSize») {
 					return false;

@@ -88,10 +88,13 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 		
 		«FOR s : it.scopes»
 			«s.scopeTypeDecl»
+			
 			«s.scopeConstDecl»
+			
 		«ENDFOR»
 		
 		«statemachineStruct»
+		
 		'''
 	}
 	

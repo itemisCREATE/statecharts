@@ -198,7 +198,7 @@ class SExecExtensions {
 	}
 		
 	def List<EventDefinition> getIncomingEvents(Scope it) {
-		declarations.filter(typeof(EventDefinition)).filter[isInEvent].toList
+		declarations.filter(EventDefinition).filter[isInEvent].toList
 	}
 	
 	def List<EventDefinition> getIncomingEvents(ExecutionFlow it) {
@@ -207,7 +207,11 @@ class SExecExtensions {
 	
 	def List<EventDefinition> getLocalEvents(Scope it) {
 		if(it === null) return emptyList
-		declarations.filter(typeof(EventDefinition)).filter[isLocalEvent].toList
+		declarations.filter(EventDefinition).filter[isLocalEvent].toList
+	}
+	
+	def List<EventDefinition> getLocalEvents(ExecutionFlow it) {
+		internalScope.localEvents
 	}
 	
 	def boolean isLocalEvent(EventDefinition it) {
@@ -227,7 +231,7 @@ class SExecExtensions {
 	}
 
 	def Iterable<InternalScope> getInternalScopes(ExecutionFlow it) {
-		return scopes.filter(typeof(InternalScope))
+		return scopes.filter(InternalScope)
 	}
 	
 	def getDefaultScope(ExecutionFlow it) {

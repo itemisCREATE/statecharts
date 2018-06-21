@@ -34,6 +34,7 @@ class EventDrivenStatechartTypes extends StatechartTypes {
 	}
 	
 	def generateEventsEnum(ExecutionFlow it) {
+		if(!hasLocalEvents) return ''''''
 		'''
 		/*
 		 * Enum of event names in the statechart.
@@ -55,7 +56,7 @@ class EventDrivenStatechartTypes extends StatechartTypes {
 		 */
 		typedef union {
 			«FOR e : valueUnionEvents»
-			«e.typeSpecifier.targetLanguageName» «eventEnumMemberName(e)»_value;
+			«e.typeSpecifier.targetLanguageName» «eventValueUnionMemberName(e)»;
 			«ENDFOR»
 		} «eventValueUnionName»;
 		'''
@@ -76,7 +77,7 @@ class EventDrivenStatechartTypes extends StatechartTypes {
 			sc_boolean has_value;
 			«eventValueUnionName» value;
 			«ENDIF»
-		} «eventStructTypeName»;
+		} «internalEventStructTypeName»;
 		'''
 	}
 
@@ -86,7 +87,7 @@ class EventDrivenStatechartTypes extends StatechartTypes {
 		 * Queue that holds the raised events.
 		 */
 		typedef struct «eventQueueTypeName»_s {
-			«eventStructTypeName» events[«bufferSize»];
+			«internalEventStructTypeName» events[«bufferSize»];
 			sc_integer pop_index;
 			sc_integer push_index;
 			sc_integer size;
@@ -95,6 +96,6 @@ class EventDrivenStatechartTypes extends StatechartTypes {
 	}
 	
 	def valueUnionEvents(ExecutionFlow it) {
-		internalScope.getLocalEvents.filter[hasValue]
+		localEvents.filter[hasValue]
 	}
 }

@@ -30,16 +30,16 @@ class EventDrivenInternalFunctionsGenerator extends InternalFunctionsGenerator {
 		«IF hasLocalEvents»
 		static void «eventQueueInitFunction»(«eventQueueTypeName» * eq);
 		static sc_integer «eventQueueSizeFunction»(«eventQueueTypeName» * eq);
-		static «eventStructTypeName» «eventQueuePopFunction»(«eventQueueTypeName» * eq);
-		static sc_boolean «eventQueuePushFunction»(«eventQueueTypeName» * eq, «eventStructTypeName» ev);
+		static «internalEventStructTypeName» «eventQueuePopFunction»(«eventQueueTypeName» * eq);
+		static sc_boolean «eventQueuePushFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» ev);
 
-		static void «functionPrefix»dispatch_event(«scHandleDecl», const «eventStructTypeName» * event);
+		static void «functionPrefix»dispatch_event(«scHandleDecl», const «internalEventStructTypeName» * event);
 
-		static void «eventInitFunction»(«eventStructTypeName» * ev, «eventEnumName» name);
+		static void «eventInitFunction»(«internalEventStructTypeName» * ev, «eventEnumName» name);
 		static void «functionPrefix»add_event_to_queue(«scHandleDecl», «eventEnumName» name);
 		«IF hasLocalEventsWithValue»
 
-		static void «valueEventInitFunction»(«eventStructTypeName» * ev, «eventEnumName» name, void * value);
+		static void «valueEventInitFunction»(«internalEventStructTypeName» * ev, «eventEnumName» name, void * value);
 		static void «functionPrefix»add_value_event_to_queue(«scHandleDecl», «eventEnumName» name, void * value);
 		«ENDIF»
 		«ENDIF»
