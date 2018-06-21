@@ -71,7 +71,7 @@ public class SCTMatchEngineFactory implements IMatchEngine.Factory {
 				@Override
 				public boolean apply(EObject eobject) {
 					// We only want to diff the SGraph and notation elements,
-					// not the transient palceholders for concrete languages
+					// not the transient placeholders for concrete languages
 					EPackage ePackage = eobject.eClass().getEPackage();
 					return ePackage == SGraphPackage.eINSTANCE || ePackage == NotationPackage.eINSTANCE;
 				}

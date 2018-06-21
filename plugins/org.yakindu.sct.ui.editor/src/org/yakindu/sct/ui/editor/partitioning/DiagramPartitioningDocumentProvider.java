@@ -14,6 +14,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditorInput;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditorInput;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.DiagramDocument;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.DiagramModificationListener;
@@ -42,8 +43,7 @@ public class DiagramPartitioningDocumentProvider extends FileDiagramDocumentProv
 
 	/**
 	 * Extension of {@link DiagramFileInfo} that stores the given
-	 * {@link IEditorInput} which is required for the
-	 * {@link ResourceUnloadingTool}
+	 * {@link IEditorInput} which is required for the {@link ResourceUnloadingTool}
 	 */
 	protected class InputDiagramFileInfo extends DiagramFileInfo {
 
@@ -80,7 +80,7 @@ public class DiagramPartitioningDocumentProvider extends FileDiagramDocumentProv
 	@Override
 	protected ElementInfo createElementInfo(Object element) throws CoreException {
 		ElementInfo info = super.createElementInfo(element);
-		if (element instanceof IDiagramEditorInput) {
+		if (element != null && element instanceof IDiagramEditorInput) {
 			Resource eResource = ((IDiagramEditorInput) element).getDiagram().eResource();
 			TransactionalEditingDomain sharedDomain = DiagramPartitioningUtil.getSharedDomain();
 			if (eResource.isLoaded() && !sharedDomain.isReadOnly(eResource) && eResource.isModified()) {
@@ -110,7 +110,11 @@ public class DiagramPartitioningDocumentProvider extends FileDiagramDocumentProv
 			document.setContent(diagram);
 			return true;
 		} else if (editorInput instanceof FileEditorInputProxy) {
-			setDocumentContentFromStorage(document, ((FileEditorInputProxy) editorInput).getFile());
+			try {
+				setDocumentContentFromStorage(document, ((FileEditorInputProxy) editorInput).getFile());
+			} catch (Exception e) {
+				return false;
+			}
 			return true;
 		}
 		return super.setDocumentContent(document, editorInput);
@@ -120,7 +124,7 @@ public class DiagramPartitioningDocumentProvider extends FileDiagramDocumentProv
 	protected void disposeElementInfo(Object element, ElementInfo info) {
 		Object content = info.fDocument.getContent();
 		info.fDocument.setContent(null);
-		// Unset the content first to avoid call to DiagramIOUtil.unload
+		// Unset the content first to avoid call to DiagramIOUtil.unload	
 		super.disposeElementInfo(element, info);
 		info.fDocument.setContent(content);
 		if (content instanceof Diagram && info instanceof InputDiagramFileInfo) {

@@ -159,12 +159,15 @@ public class StatechartNavigatorContentProvider implements ICommonContentProvide
 	}
 
 	public Object[] getChildren(Object parentElement) {
-
 		if (parentElement instanceof IFile) {
 			IFile file = (IFile) parentElement;
 			URI fileURI = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-			Resource resource = myEditingDomain.getResourceSet().getResource(fileURI, true);
-			return wrapEObjects(myAdapterFctoryContentProvier.getChildren(resource), parentElement);
+			try {
+				Resource resource = myEditingDomain.getResourceSet().getResource(fileURI, true);
+				return wrapEObjects(myAdapterFctoryContentProvier.getChildren(resource), parentElement);
+			} catch (Exception e) {
+				return EMPTY_ARRAY;
+			}
 		}
 
 		if (parentElement instanceof DomainNavigatorItem) {
@@ -222,6 +225,8 @@ public class StatechartNavigatorContentProvider implements ICommonContentProvide
 	}
 
 	protected boolean hasVisibleChildren(Object parent) {
+		if (myViewer == null || myViewer.getInput() == null)
+			return false;
 		Object[] children = getChildren(parent);
 		for (Object obj : children) {
 			if (getViewerFilter().select(null, parent, obj)) {

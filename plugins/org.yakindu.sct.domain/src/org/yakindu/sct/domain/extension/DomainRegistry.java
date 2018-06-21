@@ -75,7 +75,7 @@ public class DomainRegistry {
 	}
 
 	public static IDomain getDomain(final String id) {
-		final String defaultDomainID = BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
+		final String defaultDomainID = getDefaultDomain();
 		try {
 			return Iterables.find(getDomains(), new Predicate<IDomain>() {
 				@Override
@@ -91,10 +91,13 @@ public class DomainRegistry {
 		}
 	}
 
+	protected static String getDefaultDomain() {
+		return BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
+	}
+
 	public static IDomain getDomain(EObject object) {
 		DomainElement domainElement = EcoreUtil2.getContainerOfType(object, DomainElement.class);
-		String domainID = domainElement != null ? domainElement.getDomainID()
-				: BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
+		String domainID = domainElement != null ? domainElement.getDomainID() : getDefaultDomain();
 		return getDomain(domainID);
 	}
 
@@ -104,9 +107,7 @@ public class DomainRegistry {
 				@Override
 				public boolean apply(IDomain input) {
 					return input.getDomainID()
-							.equals(domainID == null || domainID.isEmpty()
-									? BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral()
-									: domainID);
+							.equals(domainID == null || domainID.isEmpty() ? getDefaultDomain() : domainID);
 				}
 			});
 		} catch (NoSuchElementException e) {
@@ -117,9 +118,15 @@ public class DomainRegistry {
 
 	public static String determineDomainID(URI uri) {
 		if (URIConverter.INSTANCE.exists(uri, null)) {
-			return DomainIDParser.parse(uri);
+			try {
+				return DomainIDParser.parse(uri);
+			} catch (SAXException e) {
+				return getDefaultDomain();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		return BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
+		return getDefaultDomain();
 	}
 
 	public static DomainStatus getDomainStatus(String domainID) {
@@ -193,7 +200,7 @@ public class DomainRegistry {
 
 		}
 
-		public static String parse(URI uri) {
+		public static String parse(URI uri) throws Exception {
 			final StringBuilder result = new StringBuilder();
 			SAXParserFactory f = SAXParserFactory.newInstance();
 			try (InputStream is = URIConverter.INSTANCE.createInputStream(uri, null)) {
@@ -201,7 +208,7 @@ public class DomainRegistry {
 				newSAXParser.parse(is, new DefaultHandler() {
 					@Override
 					public void startElement(String uri, String localName, String qName, Attributes attributes)
-							throws SAXException {
+							throws StopParsingException {
 						if (SGRAPH_STATECHART.equals(qName)) {
 							String domainId = attributes.getValue(DOMAIN_ID);
 							if (domainId != null) {

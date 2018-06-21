@@ -114,7 +114,9 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 			if (!element.isPresent()) {
 				return;
 			}
-			semanticID = element.get().eResource().getURIFragment(element.get());
+			if (element.get().eResource() != null) {
+				semanticID = element.get().eResource().getURIFragment(element.get());
+			}
 			removeDecoration();
 			EditPart editPart = (EditPart) getDecoratorTarget().getAdapter(EditPart.class);
 			if (editPart == null || editPart.getViewer() == null || !(editPart instanceof IPrimaryEditPart)) {
@@ -151,43 +153,46 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		}
 
 		protected void decorate(View view) {
-			List<SCTIssue> issues = store.getIssues(semanticID);
-			SCTIssue subDiagramIssue = getSubDiagramIssue(view);
-			if (subDiagramIssue != null)
-				issues.add(subDiagramIssue);
-			Severity severity = Severity.INFO;
-			Label toolTip = null;
-			if (issues.isEmpty())
-				return;
-			for (int i = 0; i < issues.size(); i++) {
-				Issue issue = issues.get(i);
-				Severity nextSeverity = issue.getSeverity();
-				Image nextImage = getImage(nextSeverity);
-				if (toolTip == null) {
-					toolTip = new Label(issue.getMessage(), nextImage);
-				} else {
-					if (toolTip.getChildren().isEmpty()) {
-						Label comositeLabel = new Label();
-						FlowLayout fl = new FlowLayout(false);
-						fl.setMinorSpacing(0);
-						comositeLabel.setLayoutManager(fl);
-						comositeLabel.add(toolTip);
-						toolTip = comositeLabel;
+			if (semanticID != null) {
+				List<SCTIssue> issues = store.getIssues(semanticID);
+				SCTIssue subDiagramIssue = getSubDiagramIssue(view);
+				if (subDiagramIssue != null)
+					issues.add(subDiagramIssue);
+				Severity severity = Severity.INFO;
+				Label toolTip = null;
+				if (issues.isEmpty())
+					return;
+				for (int i = 0; i < issues.size(); i++) {
+					Issue issue = issues.get(i);
+					Severity nextSeverity = issue.getSeverity();
+					Image nextImage = getImage(nextSeverity);
+					if (toolTip == null) {
+						toolTip = new Label(issue.getMessage(), nextImage);
+					} else {
+						if (toolTip.getChildren().isEmpty()) {
+							Label comositeLabel = new Label();
+							FlowLayout fl = new FlowLayout(false);
+							fl.setMinorSpacing(0);
+							comositeLabel.setLayoutManager(fl);
+							comositeLabel.add(toolTip);
+							toolTip = comositeLabel;
+						}
+						toolTip.add(new Label(issue.getMessage(), nextImage));
 					}
-					toolTip.add(new Label(issue.getMessage(), nextImage));
+					severity = (nextSeverity.ordinal() < severity.ordinal()) ? nextSeverity : severity;
 				}
-				severity = (nextSeverity.ordinal() < severity.ordinal()) ? nextSeverity : severity;
-			}
 
-			if (view instanceof Edge) {
-				setDecoration(getDecoratorTarget().addConnectionDecoration(getImage(severity), 50, true));
-				getDecoration().setToolTip(toolTip);
-			} else {
-				int margin = view.getElement() instanceof Pseudostate || view.getElement() instanceof FinalState ? 0
-						: -1;
-				setDecoration(getDecoratorTarget().addShapeDecoration(getImage(severity),
-						IDecoratorTarget.Direction.NORTH_EAST, margin, false));
-				getDecoration().setToolTip(toolTip);
+				if (view instanceof Edge) {
+					setDecoration(getDecoratorTarget().addConnectionDecoration(getImage(severity), 50, true));
+					getDecoration().setToolTip(toolTip);
+				} else {
+					int margin = view.getElement() instanceof Pseudostate || view.getElement() instanceof FinalState
+							? 0
+							: -1;
+					setDecoration(getDecoratorTarget().addShapeDecoration(getImage(severity),
+							IDecoratorTarget.Direction.NORTH_EAST, margin, false));
+					getDecoration().setToolTip(toolTip);
+				}
 			}
 		}
 
@@ -200,7 +205,7 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 					TreeIterator<EObject> eAllContents = element.eAllContents();
 					while (eAllContents.hasNext()) {
 						EObject next = eAllContents.next();
-						if(next instanceof Transition && next.eContainer() == element) {
+						if (next instanceof Transition && next.eContainer() == element) {
 							eAllContents.prune();
 							continue;
 						}
@@ -223,14 +228,14 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		protected Image getImage(Severity severity) {
 			String imageName = ISharedImages.IMG_OBJS_ERROR_TSK;
 			switch (severity) {
-			case ERROR:
-				imageName = ISharedImages.IMG_OBJS_ERROR_TSK;
-				break;
-			case WARNING:
-				imageName = ISharedImages.IMG_OBJS_WARN_TSK;
-				break;
-			default:
-				imageName = ISharedImages.IMG_OBJS_INFO_TSK;
+				case ERROR :
+					imageName = ISharedImages.IMG_OBJS_ERROR_TSK;
+					break;
+				case WARNING :
+					imageName = ISharedImages.IMG_OBJS_WARN_TSK;
+					break;
+				default :
+					imageName = ISharedImages.IMG_OBJS_INFO_TSK;
 			}
 			return PlatformUI.getWorkbench().getSharedImages().getImage(imageName);
 		}

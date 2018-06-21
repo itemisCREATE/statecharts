@@ -73,7 +73,7 @@ public class DiagramPartitioningUtil {
 		BooleanValueStyle result = GMFNotationUtil.getBooleanValueStyle(view, INLINE_STYLE);
 		return result;
 	}
-	
+
 	/**
 	 * returns the style for diagram inlining
 	 * 
@@ -82,7 +82,6 @@ public class DiagramPartitioningUtil {
 		BooleanValueStyle result = GMFNotationUtil.getBooleanValueStyle(view, INLINE_DEFINITION_SECTION_STYLE);
 		return result;
 	}
-
 
 	/**
 	 * creates a new style for diagam inlining
@@ -93,7 +92,7 @@ public class DiagramPartitioningUtil {
 		result.setBooleanValue(true);
 		return result;
 	}
-	
+
 	/**
 	 * creates a new style for diagam inlining
 	 */
@@ -111,8 +110,7 @@ public class DiagramPartitioningUtil {
 	 * @return the {@link TransactionalEditingDomain}
 	 */
 	public static synchronized TransactionalEditingDomain getSharedDomain() {
-		return TransactionalEditingDomain.Registry.INSTANCE
-				.getEditingDomain(DOMAIN_ID);
+		return TransactionalEditingDomain.Registry.INSTANCE.getEditingDomain(DOMAIN_ID);
 	}
 
 	/**
@@ -157,16 +155,24 @@ public class DiagramPartitioningUtil {
 	 * Opens the {@link StatechartDiagramEditor} for a fiven {@link IFile}
 	 * 
 	 */
-	public static IEditorPart openEditor(IFile file) {
+	public static void openEditor(IFile file) {
 		try {
 			IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(file.getName());
 			final IWorkbenchPage wbPage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-			return wbPage.openEditor(new FileEditorInput(file), desc.getId());
+			wbPage.openEditor(new FileEditorInput(file), desc.getId());
 		} catch (PartInitException e) {
 			e.printStackTrace();
 		}
-		return null;
 
+	}
+	
+	public static boolean isValidFile(IFile file) {
+		try {
+			openEditor(file);
+		}catch(Exception e) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -187,8 +193,7 @@ public class DiagramPartitioningUtil {
 		}
 		return null;
 	}
-	
-	
+
 	public static View findNotationView(EObject semanticElement) {
 		Collection<Diagram> objects = EcoreUtil.getObjectsByType(semanticElement.eResource().getContents(),
 				NotationPackage.Literals.DIAGRAM);
@@ -205,7 +210,7 @@ public class DiagramPartitioningUtil {
 		}
 		return null;
 	}
-	
+
 	public static void selectElementsInDiagram(IDiagramWorkbenchPart diagramPart, List<EditPart> editParts) {
 		diagramPart.getDiagramGraphicalViewer().deselectAll();
 
@@ -256,14 +261,15 @@ public class DiagramPartitioningUtil {
 	}
 
 	public static List<Diagram> getDiagramContainerHierachy(Diagram diagram) {
-		Assert.isNotNull(diagram);
 		List<Diagram> result = new ArrayList<Diagram>();
-		result.add(diagram);
-		while (diagram.getElement() instanceof State) {
-			diagram = DiagramPartitioningUtil.getDiagramContaining((State) diagram.getElement());
+		if (diagram != null) {
 			result.add(diagram);
+			while (diagram.getElement() instanceof State) {
+				diagram = DiagramPartitioningUtil.getDiagramContaining((State) diagram.getElement());
+				result.add(diagram);
+			}
+			Collections.reverse(result);
 		}
-		Collections.reverse(result);
 		return result;
 	}
 

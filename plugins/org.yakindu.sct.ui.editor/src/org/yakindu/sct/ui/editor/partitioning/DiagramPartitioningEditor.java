@@ -21,6 +21,7 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -51,6 +52,7 @@ import org.eclipse.jface.viewers.ViewerLabel;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IEditorSite;
@@ -79,8 +81,7 @@ import org.yakindu.sct.ui.editor.StatechartImages;
 public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 		implements
 			ISelectionChangedListener,
-			IEditingDomainProvider
-			{
+			IEditingDomainProvider {
 
 	protected static final int SASH_WIDTH = 5;
 	private DiagramPartitioningBreadcrumbViewer viewer;
@@ -118,15 +119,6 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 		super.init(site, input);
 	}
 
-	@SuppressWarnings("rawtypes")
-	@Override
-	public Object getAdapter(Class type) {
-		if (DiagramPartitioningEditor.class.equals(type)) {
-			return this;
-		}
-		return super.getAdapter(type);
-	}
-
 	@Override
 	public void createPartControl(Composite parent) {
 		GridLayoutFactory.fillDefaults().spacing(0, 0).applyTo(parent);
@@ -149,15 +141,30 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	@SuppressWarnings("restriction")
 	@Override
 	protected void sanityCheckState(IEditorInput input) {
-		super.sanityCheckState(input);
-		// Refresh viewer input since the context may have changed
-		if ((getDiagram() != null && viewer != null && !viewer.getControl().isDisposed()))
-			viewer.setInput(DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram()));
+		try {
+			super.sanityCheckState(input);
+			// Refresh viewer input since the context may have changed
+			if ((getDiagram() != null && viewer != null && !viewer.getControl().isDisposed()))
+				viewer.setInput(DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram()));
+		} catch (Exception e) {
+			MessageDialog.openWarning(Display.getDefault().getActiveShell(), "Cannot open statechart diagram",
+					"The statechart diagram file is corrupt and cannot be opened.\n\n"
+							+ "This might have happened because you tried to open it with merge conflicts.\n"
+							+ "In this case you need to resolve the conflicts with the Merge Tool.\n"
+							+ "Right click on the .sct file in the Project Explorer 'Team > Merge Tool').\n\n"
+							+ "Please note:\nSelect the workspace version of conflicting files when merging.\n"
+							+ "The editor will be closed now.");
+			closeEditor(false);
+		}
 	}
 
 	@Override
 	public void setInput(IEditorInput input) {
-		super.setInput(input);
+		try {
+			super.doSetInput(input, true);
+		} catch (Exception e) {
+			throw new WrappedException(e);
+		}
 		if (input instanceof IDiagramEditorInput) {
 			initializeTitle((IDiagramEditorInput) input);
 		}
@@ -192,10 +199,10 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	protected void createBreadcrumbViewer(Composite parent) {
 		if (viewer == null) {
 			viewer = new DiagramPartitioningBreadcrumbViewer(parent, SWT.READ_ONLY);
+			List<Diagram> diagramContainerHierachy = DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram());
 			viewer.addSelectionChangedListener(this);
 			viewer.setContentProvider(new BreadcrumbViewerContentProvider());
 			viewer.setLabelProvider(new BreadcrumbViewerLabelProvider());
-			List<Diagram> diagramContainerHierachy = DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram());
 			initBreadcrumbSynchronizer(diagramContainerHierachy);
 			viewer.setInput(diagramContainerHierachy);
 		}
@@ -206,6 +213,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	protected void createGraphicalViewer(Composite parent) {
 		super.createGraphicalViewer(parent);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(parent);
+
 	}
 
 	public void selectionChanged(SelectionChangedEvent event) {
@@ -216,8 +224,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	@Override
 	public void dispose() {
 		closeSubdiagramEditors();
-		if (getDiagram() != null)
-			removeBreadcrumbSynchronizer(DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram()));
+		removeBreadcrumbSynchronizer(DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram()));
 		super.dispose();
 	}
 
@@ -291,7 +298,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 				Object feature = notification.getFeature();
 				if (feature != null && feature.equals(BasePackage.Literals.NAMED_ELEMENT__NAME)) {
 					viewer.refresh();
-					if (getDiagram().getElement() instanceof State)
+					if (getDiagram() != null && getDiagram().getElement() instanceof State)
 						initializeTitle(getDiagram());
 				}
 			}
@@ -309,8 +316,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 				"org.eclipse.jst.ws.atk.ui.webservice.category.popupMenu",
 				"org.eclipse.tptp.platform.analysis.core.ui.internal.actions.MultiAnalysisActionDelegate",
 				"org.eclipse.debug.ui.contextualLaunch.debug.submenu",
-				"org.eclipse.debug.ui.contextualLaunch.profile.submenu",
-				"org.eclipse.cdt.ui.buildConfigContributionM",
+				"org.eclipse.debug.ui.contextualLaunch.profile.submenu", "org.eclipse.cdt.ui.buildConfigContributionM",
 				"org.eclipse.mylyn.resources.ui.ui.interest.remove.element", "formatMenu", "filtersMenu", "addGroup",
 				"navigateGroup", "toolbarArrangeAllAction", "selectMenu", "diagramAddMenu", "navigateMenu", "viewGroup",
 				"viewMenu"};
@@ -343,7 +349,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	protected Adapter createBreadcrumbSynchronizer() {
 		return new BreadcrumbSynchronizer();
 	}
-	
+
 	@Override
 	public void firePropertyChange(int property) {
 		super.firePropertyChange(property);
@@ -385,4 +391,5 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 		}
 
 	}
+
 }

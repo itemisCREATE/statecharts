@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.emf.common.command.AbstractCommand;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewType;
@@ -36,7 +37,7 @@ import com.google.common.collect.Lists;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-@SuppressWarnings({ "rawtypes", "unchecked" })
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class RegionCompartmentCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 
 	@Override
@@ -119,8 +120,16 @@ public class RegionCompartmentCanonicalEditPolicy extends CanonicalConnectionEdi
 		List<IAdaptable> allViews = new ArrayList<IAdaptable>(createdConnectionViews.size() + createdViews.size());
 		allViews.addAll(createdViews);
 		allViews.addAll(createdConnectionViews);
-		makeViewsImmutable(allViews);
-		persistTransientViews(createdViews);
+		getHost().getEditingDomain().getCommandStack().execute(new AbstractCommand() {
+			@Override
+			public void execute() {
+				makeViewsImmutable(allViews);
+				persistTransientViews(createdViews);
+			}
+			@Override
+			public void redo() {
+			}
+		});
 	}
 
 	protected void persistTransientViews(List<IAdaptable> createdViews) {
