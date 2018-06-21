@@ -47,7 +47,7 @@ public class VertexValidator extends AbstractSGraphValidator {
 			}
 			stateScopeSet.add(vertex);
 			final List<Object> externalPredecessors = new ArrayList<>();
-			
+
 			DFS dfs = new DFS() {
 
 				@Override

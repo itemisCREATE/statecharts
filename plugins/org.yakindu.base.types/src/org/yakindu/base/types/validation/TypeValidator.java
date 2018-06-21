@@ -20,6 +20,7 @@ import static org.yakindu.base.types.inferrer.ITypeSystemInferrer.NOT_TYPE_CODE;
 import java.util.List;
 
 import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.Type;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue;
@@ -63,6 +64,7 @@ public class TypeValidator {
 				|| isNullOnComplexType(result2, result1)) {
 			return;
 		}
+
 		if (!registry.haveCommonType(result1.getType(), result2.getType())) {
 			msg = msg != null ? msg : String.format(ASSERT_COMPATIBLE, result1, result2);
 			acceptor.accept(new ValidationIssue(Severity.ERROR, msg, NOT_COMPATIBLE_CODE));
@@ -77,6 +79,11 @@ public class TypeValidator {
 		if (varResult == null || valueResult == null || isNullOnComplexType(varResult, valueResult)) {
 			return;
 		}
+
+		if (isAnyType(varResult.getType())) {
+			return;
+		}
+
 		if (!registry.isSuperType(valueResult.getType(), varResult.getType())) {
 			msg = msg != null ? msg : String.format(ASSERT_COMPATIBLE, varResult, valueResult);
 			acceptor.accept(new ValidationIssue(Severity.ERROR, msg, NOT_COMPATIBLE_CODE));
@@ -112,5 +119,9 @@ public class TypeValidator {
 	public boolean isNullOnComplexType(InferenceResult result1, InferenceResult result2) {
 		return result1.getType() instanceof ComplexType
 				&& registry.isSame(result2.getType(), registry.getType(ITypeSystem.NULL));
+	}
+
+	protected boolean isAnyType(Type type) {
+		return registry.isSame(type, registry.getType(ITypeSystem.ANY));
 	}
 }
