@@ -21,13 +21,6 @@ public class STextExtensions {
 			return (SpecificationElement) provider.getElement();
 		}
 	}
-	
-	public ScopedElement getScopedElement(EObject context) {
-		ScopedElement scopedElement = EcoreUtil2.getContainerOfType(context, ScopedElement.class);
-		if (EcoreUtil.getRootContainer(context) instanceof StatechartSpecification && scopedElement != null)
-			return scopedElement;
-		return getStatechart(context);
-	}
 
 	public Statechart getStatechart(EObject context) {
 		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context.eResource(),
