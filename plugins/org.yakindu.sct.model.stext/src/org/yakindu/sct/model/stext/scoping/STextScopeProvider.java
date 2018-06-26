@@ -39,13 +39,11 @@ import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.Region;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.stext.extensions.STextExtensions;
 import org.yakindu.sct.model.stext.scoping.ContextPredicateProvider.EmptyPredicate;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
@@ -78,7 +76,7 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 	private STextExtensions utils;
 
 	public IScope scope_ActiveStateReferenceExpression_value(EObject context, EReference reference) {
-		Statechart statechart = utils.getStatechart(context);
+		Statechart statechart = getStatechart(context);
 		if (statechart == null)
 			return IScope.NULLSCOPE;
 		List<State> allStates = EcoreUtil2.getAllContentsOfType(statechart, State.class);
@@ -191,7 +189,7 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 	 */
 	protected IScope getNamedTopLevelScope(final EObject context, EReference reference) {
 		List<EObject> scopeCandidates = Lists.newArrayList();
-		ScopedElement scopedElement = utils.getScopedElement(context);
+		ScopedElement scopedElement = getScopedElement(context);
 		if (scopedElement == null)
 			return IScope.NULLSCOPE;
 		EList<Scope> scopes = scopedElement.getScopes();
@@ -211,7 +209,7 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 	 */
 	protected IScope getUnnamedTopLevelScope(final EObject context, EReference reference) {
 		List<EObject> scopeCandidates = Lists.newArrayList();
-		ScopedElement scopedElement = utils.getScopedElement(context);
+		ScopedElement scopedElement = getScopedElement(context);
 		if (scopedElement == null)
 			return IScope.NULLSCOPE;
 		EList<Scope> scopes = scopedElement.getScopes();
@@ -230,6 +228,16 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 		IScope scope = getDelegate().getScope(context, reference);
 		return Scopes.scopeFor(scopeCandidates, scope);
 	}
-
+	
+	protected Statechart getStatechart(EObject context) {
+		return utils.getStatechart(context);
+	}
+	
+	protected ScopedElement getScopedElement(EObject context) {
+		ScopedElement scopedElement = EcoreUtil2.getContainerOfType(context, ScopedElement.class);
+		if (EcoreUtil.getRootContainer(context) instanceof StatechartSpecification && scopedElement != null)
+			return scopedElement;
+		return getStatechart(context);
+	}
 
 }
