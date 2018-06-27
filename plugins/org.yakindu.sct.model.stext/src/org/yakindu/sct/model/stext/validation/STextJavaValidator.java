@@ -79,6 +79,7 @@ import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
+import org.yakindu.sct.model.stext.extensions.ISCTExtensions;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
@@ -137,6 +138,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	private String domainID = BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
 	@Inject(optional = true)
 	private IPackageImport2URIMapper mapper;
+	@Inject
+	protected ISCTExtensions utils;
 
 	@Check(CheckType.FAST)
 	public void checkExpression(VariableDefinition expression) {
@@ -987,23 +990,11 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		boolean isResponsible = super.isResponsible(context, eObject);
 		if (!isResponsible)
 			return false;
-		Statechart statechart = getStatechart(eObject);
+		Statechart statechart = utils.getStatechart(eObject);
 		if ((statechart != null) && !domainID.equals(statechart.getDomainID())) {
 			return false;
 		}
 		return true;
 	}
 
-	protected Statechart getStatechart(EObject context) {
-		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context.eResource(),
-				ContextElementAdapter.class);
-		if (provider == null || provider.getElement() == null) {
-			return EcoreUtil2.getContainerOfType(context, Statechart.class);
-		} else {
-			if (provider.getElement().eResource() == null)
-				return null;
-			return (Statechart) EcoreUtil.getObjectByType(provider.getElement().eResource().getContents(),
-					SGraphPackage.Literals.STATECHART);
-		}
-	}
 }

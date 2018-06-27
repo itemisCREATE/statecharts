@@ -25,6 +25,8 @@ import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.resource.SCTLinker;
+import org.yakindu.sct.model.stext.extensions.ISCTExtensions;
+import org.yakindu.sct.model.stext.extensions.STextExtensions;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
 import org.yakindu.sct.model.stext.resource.SCTResourceDescriptionStrategy;
@@ -104,6 +106,10 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 
 	public Class<? extends ITypeSystemInferrer> bindITypeSystemInferrer() {
 		return STextTypeInferrer.class;
+	}
+	
+	public Class<? extends ISCTExtensions> bindISCTExtensions() {
+		return STextExtensions.class;
 	}
 
 	@Override
