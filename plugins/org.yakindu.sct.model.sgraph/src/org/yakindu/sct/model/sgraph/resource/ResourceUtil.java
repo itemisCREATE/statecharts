@@ -8,7 +8,7 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.simulation.core.util;
+package org.yakindu.sct.model.sgraph.resource;
 
 import java.io.IOException;
 import java.util.Collections;
