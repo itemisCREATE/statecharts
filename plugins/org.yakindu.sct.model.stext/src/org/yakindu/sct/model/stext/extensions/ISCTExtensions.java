@@ -16,11 +16,13 @@ import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.Statechart;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * @author jonathan thoene - Initial contribution and API
  * 
  */
-
+@ImplementedBy(STextExtensions.class)
 public interface ISCTExtensions {
 	public SpecificationElement getContextElement(EObject context);
 	
