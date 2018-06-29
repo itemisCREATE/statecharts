@@ -15,18 +15,16 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
-import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 
 /**
  * @author jonathan thoene - Initial contribution and API
  * 
  */
 
-public class STextExtensions implements ISCTExtensions{
+public class STextExtensions {
 	public SpecificationElement getContextElement(EObject context) {
 		final ContextElementAdapter provider = getContextElementAdapter(context.eResource());
 
@@ -35,13 +33,6 @@ public class STextExtensions implements ISCTExtensions{
 		} else {
 			return (SpecificationElement) provider.getElement();
 		}
-	}
-	
-	public ScopedElement getScopedElement(EObject context) {
-		ScopedElement scopedElement = EcoreUtil2.getContainerOfType(context, ScopedElement.class);
-		if (EcoreUtil.getRootContainer(context) instanceof StatechartSpecification && scopedElement != null)
-			return scopedElement;
-		return getStatechart(context);
 	}
 
 	public Statechart getStatechart(EObject context) {
@@ -68,7 +59,6 @@ public class STextExtensions implements ISCTExtensions{
 	}
 
 	protected ContextElementAdapter getContextElementAdapter(Resource context) {
-		return (ContextElementAdapter) EcoreUtil.getExistingAdapter(context,
-				ContextElementAdapter.class);
+		return (ContextElementAdapter) EcoreUtil.getExistingAdapter(context, ContextElementAdapter.class);
 	}
 }
