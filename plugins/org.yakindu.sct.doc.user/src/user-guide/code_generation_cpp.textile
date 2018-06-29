@@ -478,21 +478,52 @@ bc..
 				/*! Set the working instance of the operation callback interface 'SCI_Sample_OCB'. */
 				void setSCI_Sample_OCB(SCI_Sample_OCB* operationCallback);
 
-p. An additional interface _SCI_Sample_OCB_ with the pure virtual function _sc_integer myOperation(sc_integer p1, sc_boolean p2)_ has been generated. This interface has to be implemented, and an instance of the implementing class has to be provided to the state machine via the _setSCI_Sample_OCB(SCI_Sample_OCB* operationCallback)_ function, so that the state machine can use it.
+p. An additional interface _SCI_Sample_OCB_ with the pure virtual function _sc_integer myOperation(sc_integer p1, sc_boolean p2)_ has been generated. This interface has to be implemented, and an instance of the implementing class has to be provided to the state machine via the _setSCI_Sample_OCB(SCI_Sample_OCB* operationCallback)_ function, so that the state machine can use it. The virtual function _sc_integer myOperation(sc_integer p1, sc_boolean p2)_ can be implemented in a new class _OCBImplementation_ with the .h file:
 
 bc.. 
+#ifndef OCBIMPLEMENTATION_H_
+#define OCBIMPLEMENTATION_H_
+
 #include "DefaultSM.h"
 
-sc_integer DefaultSM::SCI_Sample_OCB::myOperation(sc_integer p1, sc_boolean p2) {
+class OCBImplementation : public DefaultSM::SCI_Sample_OCB{
+public:
+    OCBImplementation();
+    virtual ~OCBImplementation();
+    sc_integer myOperation(sc_integer p1, sc_boolean p2);
+};
+
+#endif /* OCBIMPLEMENTATION_H_ */
+
+p. 
+
+And the implementation in the .cpp file:
+
+bc.. 
+#include "OCBImplementation.h"
+
+OCBImplementation::OCBImplementation() {
+}
+
+OCBImplementation::~OCBImplementation() {
+}
+
+sc_integer OCBImplementation::myOperation(sc_integer p1, sc_boolean p2){
     // Your operation code should be placed here;
     return 0;
 }
 
+p. 
+
+Now the OCB must be set by using the _setSCI_Sample_OCB(SCI_Sample_OCB* operationCallback)_ function.
+
+bc.. 
+#include "src-gen/DefaultSM.h"
+#include "OCBImplementation.h"
+
 int main(int argc, char *argv[]) {
     DefaultSM *defaultSM = new DefaultSM();
-    SCI_Sample_OCB *sci_Sample_OCB = new SCI_Sample_OCB();
-
-    defaultSM->setSCI_Sample_OCB(sci_Sample_OCB);
+    defaultSM->setSCI_Sample_OCB(new OCBImplementation());
 
     defaultSM->init();
     defaultSM->enter();
