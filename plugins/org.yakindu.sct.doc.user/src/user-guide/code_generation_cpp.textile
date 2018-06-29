@@ -515,7 +515,7 @@ sc_integer OCBImplementation::myOperation(sc_integer p1, sc_boolean p2){
 
 p. 
 
-Now the function must be implemented function must be provided by the _setSCI_Sample_OCB(SCI_Sample_OCB* operationCallback)_ function.
+Now the OCB must be set by using the _setSCI_Sample_OCB(SCI_Sample_OCB* operationCallback)_ function.
 
 bc.. 
 #include "src-gen/DefaultSM.h"
