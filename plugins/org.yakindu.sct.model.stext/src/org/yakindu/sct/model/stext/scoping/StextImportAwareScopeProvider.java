@@ -21,7 +21,7 @@ import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 import org.yakindu.base.types.Package;
 import org.yakindu.sct.model.sgraph.Scope;
-import org.yakindu.sct.model.stext.extensions.ISCTExtensions;
+import org.yakindu.sct.model.stext.extensions.STextExtensions;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.StateSpecification;
@@ -40,7 +40,7 @@ public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalSc
 	@Inject
 	private IPackageImport2URIMapper mapper;
 
-	@Inject ISCTExtensions utils;
+	@Inject STextExtensions utils;
 	
 	@Override
 	public IScope getScope(EObject context, EReference reference) {

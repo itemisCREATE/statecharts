@@ -79,7 +79,7 @@ import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
-import org.yakindu.sct.model.stext.extensions.ISCTExtensions;
+import org.yakindu.sct.model.stext.extensions.STextExtensions;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
@@ -139,7 +139,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	@Inject(optional = true)
 	private IPackageImport2URIMapper mapper;
 	@Inject
-	protected ISCTExtensions utils;
+	protected STextExtensions utils;
 
 	@Check(CheckType.FAST)
 	public void checkExpression(VariableDefinition expression) {

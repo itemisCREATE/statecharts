@@ -43,7 +43,7 @@ import org.yakindu.base.types.resource.TypedResourceDescriptionStrategy;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.stext.extensions.ISCTExtensions;
+import org.yakindu.sct.model.stext.extensions.STextExtensions;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
@@ -77,7 +77,7 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	@Inject
 	private ImportedResourceCache resourceDescriptionCache;
 	@Inject
-	private ISCTExtensions utils;
+	private STextExtensions utils;
 
 	public void setCache(IResourceScopeCache cache) {
 		this.cache = cache;
