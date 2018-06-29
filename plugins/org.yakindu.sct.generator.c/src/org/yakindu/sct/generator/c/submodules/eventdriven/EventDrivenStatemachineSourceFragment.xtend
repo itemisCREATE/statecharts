@@ -77,12 +77,14 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 	'''
 	
 	def addToEventQueueValueFunction(ExecutionFlow it) '''
+	«IF hasLocalEventsWithValue»
 	static void «functionPrefix»add_value_event_to_queue(«scHandleDecl», «eventEnumName» name, void * value) 
 	{
 		«internalEventStructTypeName» event;
 		«valueEventInitFunction»(&event, name, value);
 		«eventQueuePushFunction»(&(handle->internal_event_queue), event);
 	}
+	«ENDIF»
 	'''
 	
 	def eventFunctions(ExecutionFlow it) {
