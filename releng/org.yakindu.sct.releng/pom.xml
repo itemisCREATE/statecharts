@@ -286,7 +286,7 @@
 			</build>
 		</profile>
 		<profile>
-			<id>Oxygen.target</id>
+			<id>Photon.target</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
