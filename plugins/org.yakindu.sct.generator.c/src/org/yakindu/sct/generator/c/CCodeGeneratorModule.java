@@ -19,10 +19,17 @@ import static org.yakindu.sct.model.sexec.transformation.IModelSequencer.ADD_TRA
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION;
 
 import org.yakindu.base.types.Annotation;
-import org.yakindu.sct.generator.c.eventdriven.EventDrivenExpressionCode;
-import org.yakindu.sct.generator.c.eventdriven.EventDrivenStatemachineHeader;
-import org.yakindu.sct.generator.c.eventdriven.EventDrivenStatemachineSource;
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries;
+import org.yakindu.sct.generator.c.files.StatemachineHeader;
+import org.yakindu.sct.generator.c.files.StatemachineSource;
+import org.yakindu.sct.generator.c.submodules.APIGenerator;
+import org.yakindu.sct.generator.c.submodules.EventCode;
+import org.yakindu.sct.generator.c.submodules.InternalFunctionsGenerator;
+import org.yakindu.sct.generator.c.submodules.StatechartTypes;
+import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenAPIGenerator;
+import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenEventCode;
+import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenInternalFunctionsGenerator;
+import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenStatechartTypes;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.IGeneratorModule;
@@ -48,6 +55,8 @@ public class CCodeGeneratorModule implements IGeneratorModule {
 		binder.bind(ICodegenTypeSystemAccess.class).to(CTypeSystemAccess.class);
 		binder.bind(IncludeProvider.class).to(StandardIncludeProvider.class);
 		binder.bind(INamingService.class).to(CNamingService.class);
+		binder.bind(StatemachineSource.class).toProvider(SourceContentFragmentProvider.class);
+		binder.bind(StatemachineHeader.class).toProvider(HeaderContentFragmentProvider.class);
 		bindIGenArtifactConfigurations(entry, binder);
 		bindTracingProperty(entry, binder);
 		configureEventDriven(entry, binder);
@@ -76,13 +85,11 @@ public class CCodeGeneratorModule implements IGeneratorModule {
 	}
 
 	protected void configureEventDriven(GeneratorEntry entry, Binder binder) {
-		Statechart statechart = (Statechart) entry.getElementRef();
-		Annotation eventDrivenAnnotation = statechart.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION);
-
-		if (eventDrivenAnnotation != null) {
-			binder.bind(StatemachineHeader.class).to(EventDrivenStatemachineHeader.class);
-			binder.bind(StatemachineSource.class).to(EventDrivenStatemachineSource.class);
-			binder.bind(CExpressionsGenerator.class).to(EventDrivenExpressionCode.class);
+		if (isEventDriven(entry)) {
+			binder.bind(APIGenerator.class).to(EventDrivenAPIGenerator.class);
+			binder.bind(EventCode.class).to(EventDrivenEventCode.class);
+			binder.bind(InternalFunctionsGenerator.class).to(EventDrivenInternalFunctionsGenerator.class);
+			binder.bind(StatechartTypes.class).to(EventDrivenStatechartTypes.class);
 		}
 	}
 
@@ -96,4 +103,9 @@ public class CCodeGeneratorModule implements IGeneratorModule {
 		}
 	}
 
+	protected boolean isEventDriven(GeneratorEntry entry) {
+		Statechart statechart = (Statechart) entry.getElementRef();
+		Annotation eventDrivenAnnotation = statechart.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION);
+		return eventDrivenAnnotation != null;
+	}
 }

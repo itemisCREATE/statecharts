@@ -212,9 +212,9 @@ class SExecExtensions {
 	def getInterfaceScopes(ExecutionFlow it) {
 		scopes.filter(InterfaceScope)
 	}
-	
+
 	def Iterable<InternalScope> getInternalScopes(ExecutionFlow it) {
-		return scopes.filter(InternalScope)
+		return scopes.filter(typeof(InternalScope))
 	}
 	
 	def getDefaultScope(ExecutionFlow it) {
