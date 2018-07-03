@@ -10,23 +10,23 @@ The larger the model, the greater the need to quickly search for elements, for e
 
 h2(#search_and_nav_searching_via_search_dialog). Searching via search dialog
 
-One option and the most complex one is to use the search dialog. You can open the dialog using the shortcut @[Ctrl+H]@ or through selecting _Search → Search..._ in the main menu. 
-Doing this will open an dialog with several tabs as shown in the following screenshot:<br/>!images/search_and_nav_search_dialog.png(Search Dialog)!
+One option, and the most complex one, is to use the search dialog. You can open the dialog using the shortcut @[Ctrl+H]@ or through selecting _Search → Search..._ in the main menu. 
+Doing this will open a dialog with several tabs as shown in the following screenshot:<br/>!images/search_and_nav_search_dialog.png(Search Dialog)!
 
-The tab you want to use is _Model search_. If you can not find a tab with this text written on, you probably disabled this in the past by mistake. You can enable it again by pressing the _Customize..._ button and selecting _Model search_ as you can see on the following figure:
+The tab you want to use is _Statechart Search_. If you can not find this tab, you probably disabled this in the past by mistake. You can enable it again by pressing the _Customize..._ button and selecting _Statechart Search_ as you can see on the following figure:
 !images/search_and_nav_customize_dialog.png(Customize Dialog)!
 
 
-Switching to _Model search_ will show you a clean and easily understandable dialog, which can be extended using the _Show advanced settings_ check box for a more professional usage. The possible settings will be described in the following subsection.
+Switching to _Statechart Search_ will show you a clean and easily understandable dialog, which can be extended using the _Show advanced settings_ check box for a more professional usage. The possible settings will be described in the following subsection.
 
 bq.. *User tip:*
 
-Checking the _Remember last used page_ option in the _Customize_ Dialog will help you to keep the focus on the _Model search_ tab for further search processes. 
+Checking the _Remember last used page_ option in the _Customize_ dialog will help you to keep the focus on the _Statechart Search_ tab for further search processes. 
 
  
 h3(#search_and_nav_search_dialog_settings). Search dialog settings
 
-The _Model search_ dialog has several options to control your search.
+The _Statechart Search_ dialog has several options to control your search.
 
 !images/search_and_nav_model_search_dialog_extended.png(Advanced Search Dialog)!
 
@@ -114,7 +114,7 @@ You can perform certain actions on the entries in the first column:
 
 h2(#search_and_nav_finding_references). Finding references
 
-An other realized search feature is to find references of model elements. You can perform this search on choosing _Find references_ in the context menu of:
+Another realized search feature is to find references of model elements. You can perform this search on choosing _Find references_ in the context menu of:
 * model elements in the editor
 * model elements in the project explorer
 * referenced object in syntax checking editors inside statechart models like the _Definition Section_ or _State Behavior_ editor 
@@ -132,7 +132,7 @@ As written in the previous section, _Find references_ is searching for the usage
 
 Finding occurrences of model elements matching the search string makes it possible to search in different statecharts at the same time, while finding references of a model element is limited to the statechart defining that model element. Depending on your search goals, one method could be more suitable than the other.
 
-To clarify the difference between these methods, different search operations was done using the same model. The used model can be taken from the following figure. It does not have any meaning and is only used for clarification purposes.
+To clarify the difference between these methods, different search operations were done using the same model. The used model can be taken from the following figure. It does not have any meaning and is only used for clarification purposes.
 
 ###. FIXME (RKL): It puzzles me that finding references not only finds references, but also finds definitions. Consequently, the function should be called "find occurrences".
 
