@@ -1670,11 +1670,6 @@ GeneratorModel for sctunit::c {
 			WrapToJUnit = true
 		}
 
-		feature IdentifierSettings {
-			maxIdentifierLength = 254
-			separator = "_"
-		}
-
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false

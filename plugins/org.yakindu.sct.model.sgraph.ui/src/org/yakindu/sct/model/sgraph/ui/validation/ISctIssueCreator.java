@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.model.sgraph.ui.validation;
 
@@ -21,8 +21,7 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(SctIssueCreator.class)
 public interface ISctIssueCreator {
 
-    SCTIssue createFromMarker(IMarker marker, String elementID);
+	SCTIssue createFromMarker(IMarker marker, String elementID);
 
 	SCTIssue create(Issue t, String uriFragment);
-    
 }

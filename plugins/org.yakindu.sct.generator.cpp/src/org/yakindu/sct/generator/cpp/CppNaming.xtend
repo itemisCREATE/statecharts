@@ -19,6 +19,7 @@ import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
@@ -35,7 +36,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
  */
 class CppNaming extends Naming {
 
-	@Inject protected extension Navigation
+	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension INamingService
 	@Inject protected extension GenmodelEntriesExtension
@@ -82,6 +83,10 @@ class CppNaming extends Naming {
 	def timeEventsInstance() {
 		'timeEvents'
 	}
+	
+	override dispatch scopeTypeDeclMember(VariableDefinition it) '''
+		«IF type.name != 'void'»«IF const»static const «ENDIF»«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
+	'''
 
 	def protected signature(OperationDefinition it) '''
 	«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»(«FOR parameter : parameters SEPARATOR ', '»«IF parameter.isVarArgs»...«ELSE»«parameter.typeSpecifier.

@@ -79,8 +79,8 @@ class StructureMapping {
 		for (String importString : scope.imports){
 			val pkgImport = mapper.findPackageImport(scope.eResource,importString)
 			
-			if (pkgImport !== null && URIConverter.INSTANCE.exists(pkgImport.getUri(), null)) {
-				val packageForNamespace = scope.eResource.resourceSet.getResource(pkgImport.uri, true).contents.
+			if (pkgImport.isPresent && URIConverter.INSTANCE.exists(pkgImport.get.getUri(), null)) {
+				val packageForNamespace = scope.eResource.resourceSet.getResource(pkgImport.get.uri, true).contents.
 					head as Package
 				packageForNamespace.member.filter(Declaration).toList.forEach[createImportDeclaration(_scope)]
 			}
@@ -97,7 +97,7 @@ class StructureMapping {
 	}
 	
 	protected def doCreateAndAddImportDecl(Declaration decl, Scope scope){
-		scope.declarations += SGraphFactory.eINSTANCE.createImportDeclaration => [
+		scope.members += SGraphFactory.eINSTANCE.createImportDeclaration => [
 			name = decl.name
 			declaration = decl
 		]

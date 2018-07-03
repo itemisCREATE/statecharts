@@ -4,7 +4,9 @@
 #include "HistoryWithoutInitialStep.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 
 //! The timers are managed by a timer service. */
@@ -101,4 +103,6 @@ class HistoryWithoutInitialStepTest : public ::testing::Test{
 		EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_B_r1_D));
 		
 		
+}
+
 }

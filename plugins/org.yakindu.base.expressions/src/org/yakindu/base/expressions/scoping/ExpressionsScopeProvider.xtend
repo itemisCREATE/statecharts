@@ -29,17 +29,17 @@ class ExpressionsScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	def scope_Argument_parameter(Argument object, EReference ref) {
 		var parameters = object?.eContainer?.operation?.parameters
-		return if(parameters != null) Scopes.scopeFor(parameters) else IScope.NULLSCOPE;
+		return if(parameters !== null) Scopes.scopeFor(parameters) else IScope.NULLSCOPE;
 	}
 
 	def scope_Argument_parameter(ElementReferenceExpression exp, EReference ref) {
 		var parameters = exp?.operation?.parameters
-		return if(parameters != null) Scopes.scopeFor(parameters) else IScope.NULLSCOPE;
+		return if(parameters !== null) Scopes.scopeFor(parameters) else IScope.NULLSCOPE;
 	}
 
 	def scope_Argument_parameter(FeatureCall fc, EReference ref) {
 		var parameters = fc?.operation?.parameters
-		return if(parameters != null) Scopes.scopeFor(parameters) else IScope.NULLSCOPE;
+		return if(parameters !== null) Scopes.scopeFor(parameters) else IScope.NULLSCOPE;
 	}
 
 	def dispatch getOperation(ElementReferenceExpression it) {

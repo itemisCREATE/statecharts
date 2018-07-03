@@ -12,6 +12,9 @@
              icon="icons/sct.png"
              id="yakindu::java"
              name="YAKINDU SCT Java Code Generator">
+             <Domain
+                   id="org.yakindu.domain.default">
+             </Domain>
           <FeatureLibrary
                 library_id="org.yakindu.generator.core.features">
           </FeatureLibrary>

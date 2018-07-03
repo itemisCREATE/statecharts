@@ -106,7 +106,7 @@ class JavaNamingService extends DefaultNamingService {
 
 	protected def getDerivedIdentifiers() {
 		if (derivedIdentifiers.isEmpty) {
-			if (activeFlow != null) {
+			if (activeFlow !== null) {
 				activeFlow.interfaceScopes.forEach[derivedIdentifiers.add(interfaceName.asEscapedIdentifier)]
 			}
 		}
@@ -114,7 +114,7 @@ class JavaNamingService extends DefaultNamingService {
 	}
 
 	def String getInterfaceName(InterfaceScope it) {
-		if (name != null) {
+		if (name !== null) {
 			return "SCI" + name.toFirstUpper()
 		} else {
 			return "SCInterface";

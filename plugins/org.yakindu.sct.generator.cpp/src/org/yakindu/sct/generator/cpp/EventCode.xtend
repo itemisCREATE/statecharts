@@ -13,6 +13,7 @@ package org.yakindu.sct.generator.cpp
 import com.google.inject.Inject
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 
@@ -21,7 +22,7 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
  */
 class EventCode {
 	@Inject protected extension CppNaming
-	@Inject protected extension Navigation
+	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	
 	def generateEvents(ExecutionFlow it, StatechartScope scope)

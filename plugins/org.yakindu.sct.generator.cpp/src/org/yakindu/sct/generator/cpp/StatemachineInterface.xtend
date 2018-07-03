@@ -12,10 +12,9 @@ package org.yakindu.sct.generator.cpp
 import com.google.inject.Inject
 import org.yakindu.sct.generator.c.IContentTemplate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
-import org.yakindu.sct.generator.c.extensions.GenmodelEntries
+import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 
 class StatemachineInterface implements IContentTemplate {
 	

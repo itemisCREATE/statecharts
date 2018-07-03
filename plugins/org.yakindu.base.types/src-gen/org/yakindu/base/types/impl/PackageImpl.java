@@ -13,7 +13,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.yakindu.base.types.Domain;
+import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.TypesPackage;
 
@@ -25,14 +26,32 @@ import org.yakindu.base.types.TypesPackage;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.yakindu.base.types.impl.PackageImpl#getDomainID <em>Domain ID</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.PackageImpl#getMember <em>Member</em>}</li>
- *   <li>{@link org.yakindu.base.types.impl.PackageImpl#getDomain <em>Domain</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.PackageImpl#getImport <em>Import</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class PackageImpl extends PackageMemberImpl implements org.yakindu.base.types.Package {
+	/**
+	 * The default value of the '{@link #getDomainID() <em>Domain ID</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDomainID()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DOMAIN_ID_EDEFAULT = "org.yakindu.domain.default";
+	/**
+	 * The cached value of the '{@link #getDomainID() <em>Domain ID</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDomainID()
+	 * @generated
+	 * @ordered
+	 */
+	protected String domainID = DOMAIN_ID_EDEFAULT;
 	/**
 	 * The cached value of the '{@link #getMember() <em>Member</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -42,15 +61,6 @@ public class PackageImpl extends PackageMemberImpl implements org.yakindu.base.t
 	 * @ordered
 	 */
 	protected EList<PackageMember> member;
-	/**
-	 * The cached value of the '{@link #getDomain() <em>Domain</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDomain()
-	 * @generated
-	 * @ordered
-	 */
-	protected Domain domain;
 	/**
 	 * The cached value of the '{@link #getImport() <em>Import</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -84,54 +94,32 @@ public class PackageImpl extends PackageMemberImpl implements org.yakindu.base.t
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getDomainID() {
+		return domainID;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDomainID(String newDomainID) {
+		String oldDomainID = domainID;
+		domainID = newDomainID;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.PACKAGE__DOMAIN_ID, oldDomainID, domainID));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<PackageMember> getMember() {
 		if (member == null) {
 			member = new EObjectContainmentEList<PackageMember>(PackageMember.class, this, TypesPackage.PACKAGE__MEMBER);
 		}
 		return member;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Domain getDomain() {
-		return domain;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetDomain(Domain newDomain, NotificationChain msgs) {
-		Domain oldDomain = domain;
-		domain = newDomain;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.PACKAGE__DOMAIN, oldDomain, newDomain);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDomain(Domain newDomain) {
-		if (newDomain != domain) {
-			NotificationChain msgs = null;
-			if (domain != null)
-				msgs = ((InternalEObject)domain).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.PACKAGE__DOMAIN, null, msgs);
-			if (newDomain != null)
-				msgs = ((InternalEObject)newDomain).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.PACKAGE__DOMAIN, null, msgs);
-			msgs = basicSetDomain(newDomain, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.PACKAGE__DOMAIN, newDomain, newDomain));
 	}
 
 	/**
@@ -156,8 +144,6 @@ public class PackageImpl extends PackageMemberImpl implements org.yakindu.base.t
 		switch (featureID) {
 			case TypesPackage.PACKAGE__MEMBER:
 				return ((InternalEList<?>)getMember()).basicRemove(otherEnd, msgs);
-			case TypesPackage.PACKAGE__DOMAIN:
-				return basicSetDomain(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -170,10 +156,10 @@ public class PackageImpl extends PackageMemberImpl implements org.yakindu.base.t
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case TypesPackage.PACKAGE__DOMAIN_ID:
+				return getDomainID();
 			case TypesPackage.PACKAGE__MEMBER:
 				return getMember();
-			case TypesPackage.PACKAGE__DOMAIN:
-				return getDomain();
 			case TypesPackage.PACKAGE__IMPORT:
 				return getImport();
 		}
@@ -189,12 +175,12 @@ public class PackageImpl extends PackageMemberImpl implements org.yakindu.base.t
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case TypesPackage.PACKAGE__DOMAIN_ID:
+				setDomainID((String)newValue);
+				return;
 			case TypesPackage.PACKAGE__MEMBER:
 				getMember().clear();
 				getMember().addAll((Collection<? extends PackageMember>)newValue);
-				return;
-			case TypesPackage.PACKAGE__DOMAIN:
-				setDomain((Domain)newValue);
 				return;
 			case TypesPackage.PACKAGE__IMPORT:
 				getImport().clear();
@@ -212,11 +198,11 @@ public class PackageImpl extends PackageMemberImpl implements org.yakindu.base.t
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case TypesPackage.PACKAGE__DOMAIN_ID:
+				setDomainID(DOMAIN_ID_EDEFAULT);
+				return;
 			case TypesPackage.PACKAGE__MEMBER:
 				getMember().clear();
-				return;
-			case TypesPackage.PACKAGE__DOMAIN:
-				setDomain((Domain)null);
 				return;
 			case TypesPackage.PACKAGE__IMPORT:
 				getImport().clear();
@@ -233,14 +219,62 @@ public class PackageImpl extends PackageMemberImpl implements org.yakindu.base.t
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case TypesPackage.PACKAGE__DOMAIN_ID:
+				return DOMAIN_ID_EDEFAULT == null ? domainID != null : !DOMAIN_ID_EDEFAULT.equals(domainID);
 			case TypesPackage.PACKAGE__MEMBER:
 				return member != null && !member.isEmpty();
-			case TypesPackage.PACKAGE__DOMAIN:
-				return domain != null;
 			case TypesPackage.PACKAGE__IMPORT:
 				return import_ != null && !import_.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == DomainElement.class) {
+			switch (derivedFeatureID) {
+				case TypesPackage.PACKAGE__DOMAIN_ID: return BasePackage.DOMAIN_ELEMENT__DOMAIN_ID;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == DomainElement.class) {
+			switch (baseFeatureID) {
+				case BasePackage.DOMAIN_ELEMENT__DOMAIN_ID: return TypesPackage.PACKAGE__DOMAIN_ID;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (domainID: ");
+		result.append(domainID);
+		result.append(')');
+		return result.toString();
 	}
 
 } //PackageImpl

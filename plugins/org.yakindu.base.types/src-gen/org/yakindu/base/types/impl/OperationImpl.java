@@ -269,5 +269,21 @@ public class OperationImpl extends DeclarationImpl implements Operation {
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
+	
+	@Override
+	public String getId() {
+		String superId = super.getId();
+		if(superId == null)
+			return null;
+		StringBuilder builder = new StringBuilder(superId);
+		EList<Parameter> parameters = getParameters();
+		for (Parameter parameter : parameters) {
+			if(parameter.getType() == null || parameter.getType().getName() == null)
+				continue;
+			builder.append("_");
+			builder.append(parameter.getType().getName());
+		}
+		return builder.toString();
+	}
 
 } //OperationImpl

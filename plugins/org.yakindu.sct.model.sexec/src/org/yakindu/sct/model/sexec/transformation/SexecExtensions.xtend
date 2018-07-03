@@ -35,7 +35,7 @@ class SexecExtensions {
 	
 	def newEnterStateStep(ExecutionState s) {
 		var EnterState ess
-		if (s != null) {
+		if (s !== null) {
 			ess = factory.createEnterState
 			ess.state = s	
 		}
@@ -45,7 +45,7 @@ class SexecExtensions {
 	
 	def newExitStateStep(ExecutionState s) {
 		var ExitState ess  
-		if (s != null) {
+		if (s !== null) {
 			ess = factory.createExitState
 			ess.state = s	
 		}
@@ -98,7 +98,7 @@ class SexecExtensions {
 	def parentScopes(ExecutionScope scope) {
 		val parents = <ExecutionScope>newArrayList
 		var s = scope
-		while(s != null) {
+		while(s !== null) {
 			parents.add(s)
 			s=s.superScope
 		}
@@ -135,7 +135,7 @@ class SexecExtensions {
 	 * Returns the default step that is the step without name or the name 'default'.
 	 */
 	def Sequence defaultSequence(List<Sequence>steps) {
-		steps.findFirst(s | s.name == null || s.name.trim == "" ||  s.name.trim == DEFAULT_SEQUENCE_NAME )
+		steps.findFirst(s | s.name === null || s.name.trim == "" ||  s.name.trim == DEFAULT_SEQUENCE_NAME )
 	}
 	
 	def ExecutionFlow getFlow(EObject it) {

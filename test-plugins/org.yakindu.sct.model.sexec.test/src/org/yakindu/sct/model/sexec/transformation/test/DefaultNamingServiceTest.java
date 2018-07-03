@@ -1,9 +1,9 @@
-/** 
- * Copyright (c) 2015 committers of YAKINDU and others. 
- * All rights reserved. This program and the accompanying materials 
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at 
- * http://www.eclipse.org/legal/epl-v10.html 
+/**
+ * Copyright (c) 2015 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * committers of YAKINDU - initial API and implementation
  *
@@ -27,7 +27,6 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 
 import com.google.inject.Inject;
-
 
 public class DefaultNamingServiceTest extends ModelSequencerTest {
 
@@ -99,174 +98,13 @@ public class DefaultNamingServiceTest extends ModelSequencerTest {
 		}
 	}
 
-	@Test
-	public void testDefaultNamingServiceState_NameMatch_31() {
-
-		for (Statechart statechart : statecharts) {
-
-			// Transform statechart
-			ExecutionFlow flow = sequencer.transform(statechart);
-			flow = optimizer.transform(flow);
-
-			statechartNamingService.setMaxLength(31);
-			statechartNamingService.setSeparator('_');
-			flowNamingService.setMaxLength(31);
-			flowNamingService.setSeparator('_');
-
-			// Initialize naming services for statechart and ExecutionFlow
-			statechartNamingService.initializeNamingService(statechart);
-			flowNamingService.initializeNamingService(flow);
-
-			// Check for equality
-			checkNameEquality(flow, statechartNamingService, flowNamingService);
-		}
-	}
-
-	@Test
-	public void testDefaultNamingServiceState_NameMatch_15() {
-
-		for (Statechart statechart : statecharts) {
-
-			// Transform statechart
-			ExecutionFlow flow = sequencer.transform(statechart);
-			flow = optimizer.transform(flow);
-
-			statechartNamingService.setMaxLength(15);
-			statechartNamingService.setSeparator('_');
-			flowNamingService.setMaxLength(15);
-			flowNamingService.setSeparator('_');
-
-			// Initialize naming services for statechart and ExecutionFlow
-			statechartNamingService.initializeNamingService(statechart);
-			flowNamingService.initializeNamingService(flow);
-
-			// Check for equality
-			checkNameEquality(flow, statechartNamingService, flowNamingService);
-		}
-	}
-
-	@Test
-	public void testDefaultNamingServiceState_NameMatch_7() {
-
-		for (Statechart statechart : statecharts) {
-
-			// Transform statechart
-			ExecutionFlow flow = sequencer.transform(statechart);
-			flow = optimizer.transform(flow);
-
-			statechartNamingService.setMaxLength(7);
-			statechartNamingService.setSeparator('_');
-			flowNamingService.setMaxLength(7);
-			flowNamingService.setSeparator('_');
-
-			// Initialize naming services for statechart and ExecutionFlow
-			statechartNamingService.initializeNamingService(statechart);
-			flowNamingService.initializeNamingService(flow);
-
-			// Check for equality
-			checkNameEquality(flow, statechartNamingService, flowNamingService);
-		}
-	}
-
-	@Test
-	public void testDefaultNamingServiceState_NameMatch_4() {
-
-		for (Statechart statechart : statecharts) {
-
-			// Transform statechart
-			ExecutionFlow flow = sequencer.transform(statechart);
-			flow = optimizer.transform(flow);
-
-			statechartNamingService.setMaxLength(4);
-			statechartNamingService.setSeparator('_');
-			flowNamingService.setMaxLength(4);
-			flowNamingService.setSeparator('_');
-
-			// Initialize naming services for statechart and ExecutionFlow
-			statechartNamingService.initializeNamingService(statechart);
-			flowNamingService.initializeNamingService(flow);
-
-			// Check for equality
-			checkNameEquality(flow, statechartNamingService, flowNamingService);
-		}
-	}
-
-	@Test
-	public void testDefaultNamingServiceState_NameMatch_3() {
-
-		for (Statechart statechart : statecharts) {
-
-			// Transform statechart
-			ExecutionFlow flow = sequencer.transform(statechart);
-			flow = optimizer.transform(flow);
-
-			statechartNamingService.setMaxLength(3);
-			statechartNamingService.setSeparator('_');
-			flowNamingService.setMaxLength(3);
-			flowNamingService.setSeparator('_');
-
-			// Initialize naming services for statechart and ExecutionFlow
-			statechartNamingService.initializeNamingService(statechart);
-			flowNamingService.initializeNamingService(flow);
-
-			// Check for equality
-			checkNameEquality(flow, statechartNamingService, flowNamingService);
-		}
-	}
-
-	@Test
-	public void testDefaultNamingServiceState_NameMatch_2() {
-
-		for (Statechart statechart : statecharts) {
-			// Transform statechart
-			ExecutionFlow flow = sequencer.transform(statechart);
-			flow = optimizer.transform(flow);
-
-			statechartNamingService.setMaxLength(2);
-			statechartNamingService.setSeparator('_');
-			flowNamingService.setMaxLength(2);
-			flowNamingService.setSeparator('_');
-
-			// Initialize naming services for statechart and ExecutionFlow
-			statechartNamingService.initializeNamingService(statechart);
-			flowNamingService.initializeNamingService(flow);
-
-			// Check for equality
-			checkNameEquality(flow, statechartNamingService, flowNamingService);
-		}
-	}
-
-	@Test
-	public void testDefaultNamingServiceState_NameMatch_1() {
-
-		for (Statechart statechart : statecharts) {
-			// Transform statechart
-			ExecutionFlow flow = sequencer.transform(statechart);
-			flow = optimizer.transform(flow);
-
-			statechartNamingService.setMaxLength(1);
-			statechartNamingService.setSeparator('_');
-			flowNamingService.setMaxLength(1);
-			flowNamingService.setSeparator('_');
-
-			// Initialize naming services for statechart and ExecutionFlow
-			statechartNamingService.initializeNamingService(statechart);
-			flowNamingService.initializeNamingService(flow);
-
-			// Check for equality
-			checkNameEquality(flow, statechartNamingService, flowNamingService);
-		}
-	}
-
-	private void checkNameEquality(ExecutionFlow flow,
-			INamingService statechartNamingService,
+	private void checkNameEquality(ExecutionFlow flow, INamingService statechartNamingService,
 			INamingService flowNamingService) {
 
 		for (ExecutionState state : flow.getStates()) {
 			if (state.getSourceElement() instanceof State) {
 				assertEquals(flowNamingService.getShortName(state),
-						statechartNamingService.getShortName((State) state
-								.getSourceElement()));
+						statechartNamingService.getShortName((State) state.getSourceElement()));
 
 			}
 		}

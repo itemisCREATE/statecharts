@@ -49,6 +49,22 @@ public class ExtractSubdiagramRefactoringTest extends ViewBasedRefactoringTest {
 				EXTRACT_SUBDIAGRAM + "after_whitespaceStateName.sct", 
 				"A");
 	}
+	//#1445
+	@Test
+	public void testStateWithMoreThan1RegionHorizontal() {
+		testRefactoring(
+				EXTRACT_SUBDIAGRAM + "before_orthogonal1.sct", 
+				EXTRACT_SUBDIAGRAM + "after_orthogonal1.sct", 
+				"StateA");
+	}
+	//#1445
+		@Test
+		public void testStateWithMoreThan1RegionVertical() {
+			testRefactoring(
+					EXTRACT_SUBDIAGRAM + "before_orthogonal2.sct", 
+					EXTRACT_SUBDIAGRAM + "after_orthogonal2.sct", 
+					"StateA");
+		}
 	
 	@Override
 	protected AbstractRefactoring<View> getRefactoring() {

@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.model.stext.ui.hyperlink;
 
+import java.util.Optional;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.text.Region;
@@ -51,14 +53,16 @@ public class PackageImportHyperlinkHelper extends HyperlinkHelper {
 			ImportScope importScope = (ImportScope) node.getSemanticElement();
 			EList<String> imports = importScope.getImports();
 			for (String pkgImport : imports) {
-				PackageImport mappedImport = mapper.findPackageImport(resource, pkgImport);
-				final URI targetURI = mappedImport.getUri();
-				XtextHyperlink result = getHyperlinkProvider().get();
-				result.setURI(targetURI);
-				Region region = new Region(node.getOffset(), node.getLength());
-				result.setHyperlinkRegion(region);
-				result.setHyperlinkText(targetURI.toString());
-				acceptor.accept(result);
+				Optional<PackageImport> mappedImport = mapper.findPackageImport(resource, pkgImport);
+				if (mappedImport.isPresent()) {
+					final URI targetURI = mappedImport.get().getUri();
+					XtextHyperlink result = getHyperlinkProvider().get();
+					result.setURI(targetURI);
+					Region region = new Region(node.getOffset(), node.getLength());
+					result.setHyperlinkRegion(region);
+					result.setHyperlinkText(targetURI.toString());
+					acceptor.accept(result);
+				}
 			}
 
 		}

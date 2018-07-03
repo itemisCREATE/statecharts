@@ -29,7 +29,7 @@ class JavaTypeSystemAccess implements ICodegenTypeSystemAccess {
 	override String getTargetLanguageName(Type type) {
 		val originalType = type?.originType
 		switch (originalType) {
-			case originalType == null || ts.isSame(originalType, getType(VOID)) : 'void'
+			case originalType === null || ts.isSame(originalType, getType(VOID)) : 'void'
 			case ts.isSame(originalType, getType(REAL)): "double"
 			case ts.isSame(originalType, getType(INTEGER)): "long"
 			case ts.isSame(originalType, getType(BOOLEAN)): "boolean"

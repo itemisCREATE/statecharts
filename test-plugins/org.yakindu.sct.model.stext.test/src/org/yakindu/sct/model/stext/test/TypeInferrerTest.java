@@ -640,6 +640,24 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		expectIssue(inferType("5 >> stringVar"),
 				"Bitwise operator '>>' may only be applied on integer types, not on integer and string.");
 	}
+	@Test
+	public void testPostfixIncrementDecrementSuccess() {
+		assertTrue(isIntegerType(inferType("intVar++")));
+		assertTrue(isRealType(inferType("realVar++")));
+		assertTrue(isIntegerType(inferType("intVar--")));
+		assertTrue(isRealType(inferType("realVar--")));
+	}
+	@Test
+	public void testPostfixIncrementDecrementFailure() {
+		expectIssue(inferType("boolVar++"),
+				"Incompatible types boolean and real.");
+		expectIssue(inferType("stringVar++"),
+				"Incompatible types string and real.");
+		expectIssue(inferType("boolVar--"),
+				"Incompatible types boolean and real.");
+		expectIssue(inferType("stringVar--"),
+				"Incompatible types string and real.");
+	}
 
 	@Test
 	// No Expression in SText.xtext

@@ -12,11 +12,11 @@ package org.yakindu.sct.model.sexec.transformation.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createEntry;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createRegion;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createState;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createStatechart;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createTransition;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createEntry;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createRegion;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createState;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createStatechart;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createTransition;
 
 import org.junit.Test;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -29,7 +29,6 @@ import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
-
 public class ModelSequencerStateVectorTest extends ModelSequencerTest {
 
 	/**

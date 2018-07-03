@@ -33,7 +33,7 @@ class GenmodelEntriesExtension extends GenmodelEntries {
 	}
 
 	def getInnerClassVisibility(GeneratorEntry it) {
-		if (visibilityParameter != null) {
+		if (visibilityParameter !== null) {
 			return visibilityParameter.stringValue
 		}
 		return Visibility.PRIVATE.toString.toLowerCase
@@ -44,14 +44,14 @@ class GenmodelEntriesExtension extends GenmodelEntries {
 	}
 
 	def useStaticOPC(GeneratorEntry it) {
-		if (staticOPCParameter != null) {
+		if (staticOPCParameter !== null) {
 			return staticOPCParameter.booleanValue
 		}
 		return false
 	}
 	
 	def getCheckUnimplementedOCBs(GeneratorEntry it) {
-		if (checkUnimplementedParamter != null){
+		if (checkUnimplementedParamter !== null){
 			return checkUnimplementedParamter.booleanValue
 		}
 	}

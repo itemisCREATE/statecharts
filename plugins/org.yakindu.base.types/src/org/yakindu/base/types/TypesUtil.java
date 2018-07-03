@@ -59,7 +59,7 @@ public class TypesUtil {
 				Object elements = container.eContainer().eGet(feature);
 				int index = 0;
 				if (elements instanceof BasicEList) {
-					BasicEList elementList = (BasicEList) elements;
+					BasicEList<?> elementList = (BasicEList<?>) elements;
 					index = elementList.indexOf(container);
 				}
 				name = feature.getName() + index;

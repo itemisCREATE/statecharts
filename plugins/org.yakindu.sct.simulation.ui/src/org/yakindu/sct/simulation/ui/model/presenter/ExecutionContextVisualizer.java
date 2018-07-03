@@ -24,11 +24,12 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.gmf.runtime.highlighting.HighlightingParameters;
 import org.yakindu.base.gmf.runtime.highlighting.IHighlightingSupport;
 import org.yakindu.sct.model.sgraph.RegularState;
+import org.yakindu.sct.model.sruntime.CrossDocumentContentAdapter;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
-import org.yakindu.sct.model.sruntime.util.CrossDocumentContentAdapter;
 
 import com.google.common.collect.Lists;
 
@@ -57,15 +58,38 @@ public class ExecutionContextVisualizer extends CrossDocumentContentAdapter {
 	public void notifyChanged(final Notification notification) {
 		super.notifyChanged(notification);
 		if (notification.getFeature() == EXECUTION_CONTEXT__ACTIVE_STATES) {
-			highlightStates(notification, DefaultDynamicNotationHandler.STATE_HIGHLIGHT_PARAMS);
+			highlightActiveStates(notification, DefaultDynamicNotationHandler.STATE_HIGHLIGHT_PARAMS);
 		} else if (notification.getFeature() == EXECUTION_CONTEXT__EXECUTED_ELEMENTS) {
 			highlight(notification, DefaultDynamicNotationHandler.TRANSITION_PARAMS);
 		} else if (notification.getFeature() == EXECUTION_CONTEXT__SUSPENDED_ELEMENTS) {
-			highlight(notification, DefaultDynamicNotationHandler.SUSPENDED_PARAMS);
+			highlightSuspendedElements(notification);
 		}
 	}
 
-	protected void highlightStates(Notification notification, HighlightingParameters params) {
+	protected void highlightSuspendedElements(final Notification notification) {
+		highlight(notification, DefaultDynamicNotationHandler.SUSPENDED_PARAMS);
+		List<IHighlightingSupport.Action> actions = new ArrayList<IHighlightingSupport.Action>();
+		// This is required to set active state highlighting after resuming from
+		// terminated local reaction breakpoint
+		ExecutionContext context = getExecutionContext(notification);
+		List<EObject> newValues = toList(notification.getNewValue());
+		List<EObject> oldValues = toList(notification.getOldValue());
+		oldValues.removeAll(newValues);
+		for (EObject eObject : oldValues) {
+			if (context.getActiveStates().contains(eObject)) {
+				actions.add(new IHighlightingSupport.Highlight(eObject,
+						DefaultDynamicNotationHandler.STATE_HIGHLIGHT_PARAMS));
+			}
+		}
+		getHighlightingSupport().executeAsync(actions);
+	}
+
+	private ExecutionContext getExecutionContext(final Notification notification) {
+		ExecutionContext context = (ExecutionContext) EcoreUtil.getRootContainer((EObject) notification.getNotifier());
+		return context;
+	}
+
+	protected void highlightActiveStates(Notification notification, HighlightingParameters params) {
 		int eventType = notification.getEventType();
 		List<EObject> objects = null;
 		if (eventType == ADD || eventType == ADD_MANY) {
@@ -73,9 +97,9 @@ public class ExecutionContextVisualizer extends CrossDocumentContentAdapter {
 		} else if (eventType == REMOVE || eventType == REMOVE_MANY) {
 			objects = toList(notification.getOldValue());
 		}
-		if(objects.size() == 0)
+		if (objects.size() == 0)
 			return;
-		
+
 		List<IHighlightingSupport.Action> actions = new ArrayList<IHighlightingSupport.Action>();
 		for (EObject eObject : objects) {
 			if (eObject instanceof RegularState) {

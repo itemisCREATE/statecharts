@@ -12,8 +12,10 @@ package org.yakindu.sct.generator.core.extensions;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -45,6 +47,7 @@ public class GeneratorExtensions {
 	private static final String ATTRIBUTE_ELEMENT_REF_TYPE = "elementRefType";
 	private static final String ATTRIBUTE_ICON = "icon";
 	private static final String ATTRIBUTE_DESCRIPTION = "description";
+	private static final String DOMAIN_CONFIG_ELEMENT = "Domain";
 
 	private static List<IGeneratorDescriptor> descriptors;
 
@@ -71,7 +74,8 @@ public class GeneratorExtensions {
 		@Override
 		public Module getBindings(GeneratorEntry entry) {
 			try {
-				IGeneratorModule module = (IGeneratorModule) configElement.createExecutableExtension(ATTRIBUTE_BINDINGS);
+				IGeneratorModule module = (IGeneratorModule) configElement
+						.createExecutableExtension(ATTRIBUTE_BINDINGS);
 				return new GeneratorModuleAdapter(module, entry);
 			} catch (CoreException e) {
 				e.printStackTrace();
@@ -81,7 +85,7 @@ public class GeneratorExtensions {
 
 		@Override
 		public List<String> getLibraryIDs() {
-			List<String> libs = new ArrayList<String>();
+			List<String> libs = new ArrayList<>();
 			for (IConfigurationElement child : configElement.getChildren(LIBRARY_CONFIG_ELEMENT)) {
 				String lib_id = child.getAttribute(ATTRIBUTE_LIBRARY_ID);
 				if (lib_id != null && !lib_id.isEmpty()) {
@@ -89,6 +93,17 @@ public class GeneratorExtensions {
 				}
 			}
 			return libs;
+		}
+		
+		public Set<String> getValidDomains() {
+			Set<String> domains = new HashSet<>();
+			for (IConfigurationElement child : configElement.getChildren(DOMAIN_CONFIG_ELEMENT)) {
+				String domainID = child.getAttribute(ATTRIBUTE_ID);
+				if (domainID != null && !domainID.isEmpty()) {
+					domains.add(domainID);
+				}
+			}
+			return domains;
 		}
 
 		@Override
@@ -160,6 +175,7 @@ public class GeneratorExtensions {
 	public static IGeneratorDescriptor getGeneratorDescriptor(final String generatorId) {
 		try {
 			return Iterables.find(getGeneratorDescriptors(), new Predicate<IGeneratorDescriptor>() {
+				@Override
 				public boolean apply(IGeneratorDescriptor input) {
 					return input != null && input.getId() != null && input.getId().equals(generatorId);
 				}

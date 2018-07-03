@@ -299,17 +299,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPackage_Domain() {
-		return (EReference)packageEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getPackage_Import() {
-		return (EReference)packageEClass.getEStructuralFeatures().get(2);
+		return (EReference)packageEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -844,7 +835,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		// Create classes and their features
 		packageEClass = createEClass(PACKAGE);
 		createEReference(packageEClass, PACKAGE__MEMBER);
-		createEReference(packageEClass, PACKAGE__DOMAIN);
 		createEReference(packageEClass, PACKAGE__IMPORT);
 
 		typeEClass = createEClass(TYPE);
@@ -962,6 +952,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		// Add supertypes to classes
 		packageEClass.getESuperTypes().add(this.getPackageMember());
+		packageEClass.getESuperTypes().add(theBasePackage.getDomainElement());
 		typeEClass.getESuperTypes().add(this.getPackageMember());
 		declarationEClass.getESuperTypes().add(this.getTypedElement());
 		declarationEClass.getESuperTypes().add(theBasePackage.getNamedElement());
@@ -991,7 +982,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		// Initialize classes and features; add operations and parameters
 		initEClass(packageEClass, org.yakindu.base.types.Package.class, "Package", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPackage_Member(), this.getPackageMember(), null, "member", null, 0, -1, org.yakindu.base.types.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPackage_Domain(), this.getDomain(), null, "domain", null, 0, 1, org.yakindu.base.types.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPackage_Import(), this.getPackage(), null, "import", null, 0, -1, org.yakindu.base.types.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

@@ -13,14 +13,23 @@ package org.yakindu.sct.model.stext.ui.contentassist;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
+import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.jface.viewers.StyledString.Styler;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.TextStyle;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EnumLiteralDeclaration;
@@ -36,14 +45,28 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Type;
+import org.yakindu.sct.model.sgraph.Entry;
+import org.yakindu.sct.model.sgraph.Exit;
+import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.sgraph.Vertex;
+import org.yakindu.sct.model.stext.extensions.STextExtensions;
+import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper;
+import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
+import org.yakindu.sct.model.stext.stext.EntryPointSpec;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.SimpleScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
+import org.yakindu.sct.model.stext.stext.StextPackage;
+import org.yakindu.sct.model.stext.stext.TransitionReaction;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
+import org.yakindu.sct.model.stext.stext.impl.EntryPointSpecImpl;
+import org.yakindu.sct.model.stext.ui.internal.STextActivator;
 
 import com.google.common.base.Function;
 import com.google.inject.Inject;
@@ -55,6 +78,8 @@ import com.google.inject.Inject;
  */
 public class STextProposalProvider extends AbstractSTextProposalProvider {
 
+	protected static final String ICONS_INCLUDE = "icons/Package.png";
+
 	@Inject
 	protected STextGrammarAccess grammarAccess;
 	private ComposedAdapterFactory composedAdapterFactory = new ComposedAdapterFactory(
@@ -62,6 +87,27 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	@Inject
 	@ContentProposalLabelProvider
 	private ILabelProvider labelProvider;
+	@Inject
+	private IPackageImport2URIMapper mapper;
+
+	@Inject
+	private STextExtensions utils; 
+	
+	public static class StrikeThroughStyler extends Styler {
+
+		@Override
+		public void applyStyles(TextStyle textStyle) {
+			textStyle.strikeout = true;
+		}
+	}
+
+	public static class GreyoutStyler extends Styler {
+
+		@Override
+		public void applyStyles(TextStyle textStyle) {
+			textStyle.foreground = Display.getDefault().getSystemColor(SWT.COLOR_GRAY);
+		}
+	}
 
 	/**
 	 * Validates if a keyword should be viewed by the proposal view.
@@ -108,6 +154,9 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	protected void suppressKeywords(List<Keyword> suppressKeywords, TransitionSpecification model) {
 		suppressKeywords.addAll(getKeywords(grammarAccess.getEntryEventAccess().getGroup().eContents()));
 		suppressKeywords.addAll(getKeywords(grammarAccess.getExitEventAccess().getGroup().eContents()));
+		suppressKeywords.addAll(getKeywords(grammarAccess.getExitPointSpecAccess().getGroup().eContents()));
+		suppressKeywords.addAll(getKeywords(grammarAccess.getExitEventAccess().getExitEventAction_0().eContents()));
+		suppressKeywords.addAll(getKeywords(grammarAccess.getExitEventAccess().getExitKeyword_1().eContents()));
 	}
 
 	// context States
@@ -149,6 +198,7 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	}
 
 	protected void suppressKeywords(List<Keyword> suppressKeywords, InternalScope model) {
+		suppressKeywords.add(grammarAccess.getDirectionAccess().getLOCALLocalKeyword_0_0());
 		suppressKeywords.add(grammarAccess.getDirectionAccess().getINInKeyword_1_0());
 		suppressKeywords.add(grammarAccess.getDirectionAccess().getOUTOutKeyword_2_0());
 	}
@@ -218,6 +268,38 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 
 			priorityOptimizer.accept(proposal);
 		}
+	}
+
+	@Override
+	public void completeImportScope_Imports(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		StringProposalDelegate stringProposalDelegate = new StringProposalDelegate(acceptor, context);
+		Set<PackageImport> allImports = mapper.getAllImports(model.eResource());
+		for (PackageImport pkgImport : allImports) {
+
+			ConfigurableCompletionProposal doCreateProposal = doCreateProposal("\"" + pkgImport.getName() + "\"",
+					computePackageStyledString(pkgImport), getIncludeImage(), pkgImport.getUri().isFile() ? -1 : 1,
+					context);
+
+			stringProposalDelegate.accept(doCreateProposal);
+		}
+	}
+
+	protected Image getIncludeImage() {
+		final ImageRegistry imageRegistry = STextActivator.getInstance().getImageRegistry();
+		return imageRegistry.get(ICONS_INCLUDE);
+	}
+
+	protected StyledString computePackageStyledString(PackageImport pkgImport) {
+		StyledString firstPart = new StyledString(pkgImport.getName());
+		StyledString secondPart = getPackageImportStyleString(pkgImport.getUri());
+		return firstPart.append(secondPart);
+	}
+
+	protected StyledString getPackageImportStyleString(URI uri) {
+		String headerFilePath = uri.isPlatform() ? uri.toPlatformString(true) : uri.toFileString();
+		StyledString secondPart = new StyledString(" - " + headerFilePath, new GreyoutStyler());
+		return secondPart;
 	}
 
 	protected ICompletionProposalAcceptor getCustomAcceptor(EObject model, String typeName,
@@ -307,7 +389,61 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 				proposalText + " - " + ruleCall.getRule().getName(), null, context);
 		priorityOptimizer.accept(proposal);
 	}
+	
+	@Override
+	public void complete_ID(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		if (model instanceof TransitionReaction) {
+			SpecificationElement contextElement = utils.getContextElement(model);
+			if (contextElement instanceof Transition) {
+				Transition transition = (Transition) contextElement;
+				// check if outgoing or incoming transition
+				EObject eContainer = ruleCall.eContainer();
+				Vertex state = null;
+				boolean entry = false;
+				if (eContainer instanceof Assignment) {
+					String feature = ((Assignment) eContainer).getFeature();
+					if (StextPackage.Literals.ENTRY_POINT_SPEC__ENTRYPOINT.getName().equals(feature)) {
+						state = transition.getTarget();
+						entry = true;
+					} else if (StextPackage.Literals.EXIT_POINT_SPEC__EXITPOINT.getName().equals(feature)) {
+						entry = false;
+						state = transition.getSource();
+					} else {
+						super.complete_ID(model, ruleCall, context, acceptor);
+					}
+				}
+				if (state instanceof State) {
+					createContentAssistForEntryAndExit((State) state, entry, context, acceptor);
+				}
+			}
+		}
+		super.complete_ID(model, ruleCall, context, acceptor);
+	}
 
+	private void createContentAssistForEntryAndExit(State state, boolean entry, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		for (Region region : state.getRegions()) {
+			for (Vertex vertex : region.getVertices()) {
+				if (entry) {
+					if (vertex instanceof Entry) {
+						String assist = vertex.getName();
+						if (assist.length() > 0) {
+							acceptor.accept(createCompletionProposal(assist, context));
+						}
+					}
+				} else {
+					if (vertex instanceof Exit) {
+						String assist = vertex.getName();
+						if (assist.length() > 0) {
+							acceptor.accept(createCompletionProposal(assist, context));
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	public void completeActiveStateReferenceExpression_Value(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		lookupCrossReference(((CrossReference) assignment.getTerminal()), context, acceptor);

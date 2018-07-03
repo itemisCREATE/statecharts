@@ -2,15 +2,18 @@ package org.yakindu.sct.model.stext.test.validation;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.validation.ValidatorTester;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.junit.After;
 import org.junit.Before;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
@@ -32,7 +35,7 @@ public abstract class AbstractSTextValidationTest extends AbstractSTextTest {
 	@Inject
 	public Injector injector;
 
-	protected ValidatorTester<STextJavaValidator> tester;
+	protected ValidatorTester<? extends AbstractDeclarativeValidator> tester;
 	protected BasicDiagnostic diagnostics;
 	protected SGraphFactory factory;
 	protected Statechart statechart;
@@ -99,8 +102,34 @@ public abstract class AbstractSTextValidationTest extends AbstractSTextTest {
 
 	protected Statechart loadStatechart(String modelName) {
 		return AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR
+				.loadStatechart(getModelDir()
 						+ modelName);
+	}
+
+	protected String getModelDir() {
+		return VALIDATION_TESTMODEL_DIR;
+	}
+
+	protected void doValidateAllContents(Class<? extends EObject> clazz) {
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (clazz.isInstance(element)) {
+				validator.validate(element, diagnostics, new HashMap<>());
+			}
+		}
+	}
+
+	protected void assertAllTransitionsAreValid(Class<? extends EObject> clazz) {
+		Iterator<EObject> iter;
+		iter = statechart.eAllContents();
+	
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (clazz.isInstance(element)) {
+				assertTrue(validator.validate(element, diagnostics, new HashMap<>()));
+			}
+		}
 	}
 
 }

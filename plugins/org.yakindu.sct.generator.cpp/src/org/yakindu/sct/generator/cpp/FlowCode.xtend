@@ -24,13 +24,14 @@ import org.yakindu.sct.model.sexec.ScheduleTimeEvent
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 
 class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	
 	@Inject extension CppNaming naming
 	@Inject extension CppExpressionsGenerator expressions
-	@Inject extension Navigation
+	@Inject extension SExecExtensions
 	@Inject extension INamingService
 	
 	override dispatch CharSequence code(SaveHistory it) '''
@@ -43,7 +44,7 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 		if (historyVector[«region.historyVector.offset»] != «null_state»)
 		{
 			«historyStep.code»
-		} «IF initialStep != null»else
+		} «IF initialStep !== null»else
 		{
 			«initialStep.code»
 		} «ENDIF»
@@ -51,7 +52,7 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 
 	override dispatch CharSequence code(StateSwitch it) '''
 		«stepComment»
-		«IF historyRegion != null»
+		«IF historyRegion !== null»
 			switch(historyVector[ «historyRegion.historyVector.offset» ])
 			{
 		«ELSE»
@@ -93,17 +94,17 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	'''	
 	
 	override dispatch CharSequence code(Check it) 
-		'''«IF condition != null»«condition.code»«ELSE»true«ENDIF»'''
+		'''«IF condition !== null»«condition.code»«ELSE»true«ENDIF»'''
 	
 	override dispatch CharSequence code(CheckRef it) 
-		'''«IF check != null»«check.shortName»()«ELSE»true«ENDIF»'''
+		'''«IF check !== null»«check.shortName»()«ELSE»true«ENDIF»'''
 		
     override dispatch CharSequence code(If it) '''
 		«stepComment»
 		if («check.code»)
 		{ 
 			«thenStep.code»
-		} «IF (elseStep != null)» else
+		} «IF (elseStep !== null)» else
 		{
 			«elseStep.code»
 		}

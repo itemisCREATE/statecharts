@@ -1,0 +1,91 @@
+@GenModel(copyrightText="Copyright (c) 2018 committers of YAKINDU and others.\r\nAll rights reserved. This program and the accompanying materials\r\nare made available under the terms of the Eclipse Public License v1.0\r\nwhich accompanies this distribution, and is available at\r\nhttp://www.eclipse.org/legal/epl-v10.html\r\nContributors:\r\ncommitters of YAKINDU - initial API and implementation\r\n",
+	operationReflection="false", prefix="SRuntime", modelDirectory="/org.yakindu.sct.model.sruntime/emf-gen",
+	suppressEMFTypes="true", importerID="org.eclipse.emf.importer.ecore", publicConstructors="true",
+	interfaceNamePattern="", dataTypeConverters="true")
+@Ecore(nsURI="http://www.yakindu.org/sct/sruntime/2.0.0")
+package org.yakindu.sct.model.sruntime
+
+import com.google.common.collect.Lists
+import org.eclipse.core.runtime.Assert
+import org.eclipse.emf.common.util.BasicEList
+import org.eclipse.emf.ecore.EObject
+import org.yakindu.base.base.NamedElement
+import org.yakindu.base.types.Direction
+import org.yakindu.base.types.Type
+
+/**
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
+class ExecutionContext extends NamedElement, CompositeSlot {
+	refers EObject[] activeStates
+	refers EObject[] executedElements
+	refers EObject[] suspendedElements
+	boolean snapshot
+	op unique ExecutionEvent[] getRaisedEvents() {
+		return allEvents.filter[raised].toList
+	}
+	op ExecutionVariable getVariable(String qualifiedName) {
+		Assert.isNotNull(qualifiedName);
+		allVariables.findFirst[qualifiedName == it.fqName]
+	}
+	op ExecutionEvent getEvent(String qualifiedName) {
+		Assert.isNotNull(qualifiedName);
+		allEvents.findFirst[qualifiedName == it.fqName]
+	}
+	op ExecutionSlot getSlot(String qualifiedName) {
+		Assert.isNotNull(qualifiedName);
+		allSlots.findFirst[qualifiedName == it.fqName]
+	}
+	op unique ExecutionEvent[] getAllEvents() {
+		allSlots.filter(ExecutionEvent).toList
+	}
+	op unique ExecutionVariable[] getAllVariables() {
+		allSlots.filter(ExecutionVariable).toList
+	}
+	op unique ExecutionSlot[] getAllSlots() {
+		var result = new BasicEList<ExecutionSlot>
+		addSlots(result, slots, Lists.newArrayList)
+		result
+	}
+	op void addSlots(ExecutionSlot[] result, ExecutionSlot[] slots, unique ExecutionSlot[] visited) {
+		slots.forEach [
+			if (visited.add(it)) {
+				result.add(it)
+				if (it instanceof CompositeSlot) {
+					addSlots(result, it.slots, visited)
+				}
+
+			}
+		]
+	}
+}
+
+class ExecutionEvent extends ExecutionSlot {
+	boolean raised
+	Direction direction
+}
+
+abstract class ExecutionSlot extends NamedElement {
+	JavaObject value
+	String fqName
+	boolean writable = "true"
+	refers Type ^type
+}
+
+class ExecutionVariable extends ExecutionSlot {
+}
+
+class CompositeSlot extends ExecutionSlot {
+	contains ExecutionSlot[] slots
+}
+
+class ReferenceSlot extends CompositeSlot {
+	refers ExecutionSlot reference
+}
+
+class ExecutionOperation extends ExecutionVariable {
+}
+
+type JavaObject wraps Object

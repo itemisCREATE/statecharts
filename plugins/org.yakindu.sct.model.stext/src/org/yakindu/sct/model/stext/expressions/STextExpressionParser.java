@@ -102,6 +102,7 @@ public class STextExpressionParser implements IExpressionParser {
 			sc.setSpecification(specification);
 		}
 		resource.getContents().add(sc);
+		resource.getLinkingDiagnostics().clear();
 		linker.linkModel(sc, diagnosticsConsumer);
 		linker.linkModel(rootASTElement, diagnosticsConsumer);
 		resource.resolveLazyCrossReferences(CancelIndicator.NullImpl);

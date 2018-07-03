@@ -4,7 +4,9 @@
 #include "SimpleHierachy.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 
 //! The timers are managed by a timer service. */
@@ -51,4 +53,6 @@ class SimpleHierachyTest : public ::testing::Test{
 		EXPECT_TRUE(statechart->isStateActive(SimpleHierachy::main_region_B_subregion1_B1));
 		
 		
+}
+
 }

@@ -98,11 +98,13 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	private ComboViewer sessionDropdown;
 	private HashSet<IDebugTarget> targets = Sets.newHashSet();
 	private static SCTSourceDisplayDispatcher sctSourceDisplayDispatcher;
+	private static final int FONT_SIZE = 11;
+	private static final String FONT = "Courier New";
 
 	public SimulationView() {
 		kit = new FormToolkit(Display.getDefault());
 		kit.setBorderStyle(SWT.BORDER);
-		font = new Font(Display.getDefault(), new FontData("Courier", 10, SWT.BOLD));
+		font = new Font(Display.getDefault(), new FontData(FONT, FONT_SIZE, SWT.NORMAL));
 		sctSourceDisplayDispatcher = new SCTSourceDisplayDispatcher();
 	}
 
@@ -499,7 +501,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 
 	protected class ViewerRefresher implements Runnable {
 
-		private static final int UPDATE_INTERVAL = 500;
+		private static final long UPDATE_INTERVAL = 500;
 		private boolean cancel = false;
 
 		@Override
@@ -519,7 +521,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 						} else {
 							if (timeIconLabel != null && !timeIconLabel.isDisposed() && timeIconLabel.isVisible())
 								updateTimestamp(0);
-
 						}
 					});
 				} catch (InterruptedException e) {
@@ -527,10 +528,12 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 				}
 			}
 		}
+		
 		protected void updateTimestamp(long timestamp) {
 			String formatDurationHMS = DurationFormatUtils.formatDuration(timestamp,
 					(timestamp == 0 ? "--:--:--.---" : "HH:mm:ss.SSS"), true);
 			timeLabel.setText(formatDurationHMS);
+			timeLabel.setFont(font);
 			String time = getReadableSimulationTime(timestamp);
 			boolean isValidTime = time != null || (time != null && !time.isEmpty()) || timestamp != 0;
 			timeIconLabel.setVisible(isValidTime);
@@ -550,7 +553,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 							(days > 0 ? "dd 'days '" : "") + (hours > 0 ? "HH 'hours '" : "")
 									+ (minutes > 0 ? "mm 'minutes '" : "") + (seconds > 0 ? "ss 'seconds '" : ""),
 							false);
-
 		}
 
 		public boolean isCancel() {

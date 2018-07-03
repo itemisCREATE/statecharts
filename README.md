@@ -19,7 +19,7 @@ The open source code generators coming with YAKINDU Statechart Tools do not impl
 In addition to the source code provided here on GitHub we also provide ready-tu-use builds for Windows, Linux and OS X along with an Eclipse update site. If you just want to use YAKINDU Statechart Tools we strongly recommend to go this way. 
 
 1. Dowload a package from our <a href="http://www.statecharts.org/download.html" target="_blank">download page</a>.
-2. Follow the <a href="https://github.com/Yakindu/statecharts/blob/master/plugins/org.yakindu.sct.doc.user/src/installation/installation.textile" target="_blank">installation instructions</a>.
+2. Follow the <a href="https://github.com/Yakindu/statecharts/blob/master/plugins/org.yakindu.sct.doc.user/src/user-guide/installation.textile" target="_blank">installation instructions</a>.
 
 ## How to Contribute
 
@@ -52,10 +52,9 @@ If you are familiar with Eclipse plugin development then you may want to checkou
 13. After the installation has been completed, Eclipse starts up with the YAKINDU Statechart Tools projects in your workspace.
 14. (Optional) Click on *Finish* in the Oomph window to close it. 
 15. (Optional) While installing, clicking on the double-arrow (![double arrow](oomph_icon.png)) allows you to see the further progression. Click on *Finish* to close the window when the installer is done.
-16. After having built the workspace, you will see a lot of errors in it. That's because the language artifacts haven't been generated yet. Oomph made a contribution to the toolbar. Click on the double-arrow symbol. The *Confirmation* window appears. Deselect everything except for the three "Launch …" tasks. (The other tasks have already been executed.) The selected tasks will generate the languages "Expressions", "SText", and "SGen".
+16. After having built the workspace, you will see a lot of errors in it. That's because the language artifacts haven't been generated yet. Oomph made a contribution to the toolbar. Click on the double-arrow symbol. The *Confirmation* window appears. Deselect everything except for the three "Launch …" tasks and the "Project Build (Clean, Build) task. (The other tasks have already been executed.) The selected tasks will generate the languages "Expressions", "SText", and "SGen" and run a clean build.
 17. Click on *Finish*.
 18. Click *Proceed* three times in order to confirm the execution of each launch despite any existing errors.
-19. Do a "clean all", i.e. select *Project → Clean…* from the main menu, make sure *Clean all projects* is checked, then click on *OK*.
 
 ### How to setup your developer workspace without Oomph
 1. Download Eclipse Oxygen from https://www.eclipse.org/downloads/

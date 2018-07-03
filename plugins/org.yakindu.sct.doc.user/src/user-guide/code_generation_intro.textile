@@ -1,0 +1,356 @@
+
+==<div style="counter-reset: h1 6">==
+
+h1(#codegen_generating_state_machine_code). Generating state machine code
+
+Ultimately, you will need your state machine not only as a nice graphical statechart model, but rather in the form of executable code that you can integrate with your software project as a component. You will want to send events to the state machine, receive events from it, retrieve information regarding the currently active state (or states), set and get state machine variables, and have the state machine invoke specific behaviour that is external to it.
+
+YAKINDU Statechart Tools comes with a couple of code generators that save you from the time-consuming and error-prone task of coding your state machine manually. The YAKINDU code generators transform your statechart into source code of a target programming language in an instant. The generated code is always correct, at least in the sense that it is a true one-to-one mapping of your statechart – and at least unless a code generator is buggy itself.
+
+Use "SCTUnit":../user-guide/sctunit.html#sctunit_test-driven_statechart_development_with_sctunit in order to test whether your state machine is also correct in the sense that it does what it is intended to do.
+
+Currently YAKINDU Statechart Tools support code generation for the following programming languages:
+* "C":../user-guide/code_generation_generators.html#codegen_c_code_generator
+* "C++":../user-guide/code_generation_generators.html#codegen_cpp_code_generator
+* "Java":../user-guide/code_generation_generators.html#codegen_java_code_generator
+
+YSCT also includes a "statechart image generator":../user-guide/code_generation_generators.html#codegen_statechart_images_generator.
+
+###. CHECK: YSCT supports code generation for C, C++, Java, and statechart images.
+
+Additionally, you can install a couple of code generators from the "YAKINDU Labs update site":https://updates.yakindu.com/statecharts/labs/. To do so, select _Help → Install new software …_ in the main menu, and use "https://updates.yakindu.com/statecharts/labs/":https://updates.yakindu.com/statecharts/labs/ as the site location. The following code generators are available; click on the link to find more information about the respective generator:
+* "Python":https://blogs.itemis.com/en/python-code-generation-with-yakindu-statechart-tools
+* "Swift":https://www.itemis.com/en/yakindu/state-machine/documentation/examples/example/SwiftExample
+* "TypeScript":https://blogs.itemis.com/en/typescript-code-generation-with-yakindu-statechart-tools
+
+###. CHECK: YAKINDU Labs generators: Python, Swift, TypeScript
+
+bq. *Please note:* Code generators in YAKINDU Labs are still in their beta phase and might well contain some rough edges. If you encounter any problems, please let us know!
+
+If these code generators don't suit your needs, you are free to develop your very own "custom code generator":../user-guide/code_generation_generators.html#codegen_custom_code_generators.
+
+
+
+
+h2(#codegen_general_concepts_of_the_state_machine_code). General concepts of the state machine code
+
+h3(#codegen_execution_schemes). Execution schemes
+
+The generated state machine code implements one of two execution schemes:
+* In the _cycle-based execution scheme_, the state machine will first collect events and later process them in a run-to-completion step. Run-to-completion steps are typically executed in regular time intervals.
+* In the _event-driven execution scheme_, the state machine becomes active each time an event arrives and processes it right away in a run-to-completion step.
+
+You can select the execution scheme via the <code>@CycleBased</code> or <code>@EventDriven</code> annotations. Write the appropriate annotation to the top of your statechart's definition section, see sections "&quot;@CycleBased&quot;":../user-guide/statechart_language.html#sclang_cyclebased and "&quot;@EventDriven&quot;":../user-guide/statechart_language.html#sclang_eventdriven.
+
+
+h4(#codegen_cycle-based_execution_scheme). Cycle-based execution scheme
+
+In the cycle-based execution scheme, each run cycle consists of two different phases:
+# In the first phase, incoming events and time events are collected.
+# In the second phase, _runCycle()_ is executed and processes the events collected in the first phase.
+
+This approach allows for explicitly processing several events at the same time as well as for checking combinations of events, e.g., a guard condition like @[eventA && eventB]@. This is very useful for systems that are close to hardware and input signals. Basically it is the "input-process-output (IPO) model":https://en.wikipedia.org/wiki/IPO_model.
+
+==<div class="example">==
+
+Example: The sample client code below first raises events _eventA_ and _eventB_ in the state machine. These events are lingering in the state machine until the client code calls _runCycle()_ to actually process the events.
+
+bc. sc_raiseEventA(handle);
+sc_raiseEventB(handle);
+…
+sc_runCycle(handle);
+
+==</div>==
+
+bq. *Please note:* In the cycle-based execution scheme, an event that has been raised internally using the "_raise_ statement":../user-guide/statechart_language.html#sclang_raising_an_event is visible in the run cycle "downstream" only, i.e., in such regions and the states therein that have not yet been processed in the current run cycle. Everything that is "upstream" in the run cycle cannot "see" this event. *This is semantically different from the event-driven execution scheme.* Read more on this topic in section "&quot;Raising and processing an event&quot;":../user-guide/statechart_language.html#sclang_raising_and_processing_an_event.
+
+
+h4(#codegen_event-driven_execution_scheme). Event-driven execution scheme
+
+In the _event-driven execution scheme_, each incoming event or time event immediately triggers the execution of a run-to-completion step. As a consequence, the state machine will never process two events simultaneously, and a guard condition like @[eventA && eventB]@ will never become true.
+
+==<div class="example">==
+
+Example: The sample client code below raises the events _eventA_ and _eventB_. The state machine processes each event immediately as it arrives, triggered by the respective _raise…()_ method. Thus the client code does not need to call _runCycle()_.
+
+bc. sc_raiseEventA(handle);
+sc_raiseEventB(handle);
+
+==</div>==
+
+bq. *Please note:* In the event-driven execution scheme, an event that is raised internally in a run-to-completion step using the "_raise_ statement":../user-guide/statechart_language.html#sclang_raising_an_event will not be acted upon by any active state "downstream" in the event cycle. The reason is that only a single event can be processed at a time, and this is the event that caused the current run cycle to execute in the first place. The internally-raised event will trigger its own run-to-completion step subsequently. Thus it will be visible to all active states in that RTC. *This is semantically different from the cycle-based execution scheme.* Read more on this topic in section "&quot;Raising and processing an event&quot;":../user-guide/statechart_language.html#sclang_raising_and_processing_an_event.
+
+
+
+h3(#codegen_responsibilities-of-generated-code). Responsibilities of generated code
+
+The generated source code supports a basic statechart execution model that can be used to implement different variants. It is important to understand the responsibilities of the generated code, i.e., what it cares about and what it doesn't. The remaining issues are out of scope and must be dealt with in the client code the developer has to provide.
+
+The generated code basically takes care about the following:
+* It provides the interfaces to access state machine variables and events.
+* It initializes the state machine.
+* It implements the execution semantics within a run-to-completion (RTC) step. This is everything that is happening within the _runCycle()_ function.
+
+There are some predefined constraints:
+* The implementation is not thread-safe. Therefore the _runCycle()_ method must never be called in parallel by different threads.
+* All events for a run-to-completion step will be consumed.
+
+Out of scope are:
+* *Scheduling:* The code generator cannot make any general assumptions about scheduling mechanisms and constraints.
+* *Timers:* The code generator does not know how the system handles times. If any specific time-dependend behavior is required, the client code has to contribute it.
+* *Event handling:* The code generator cannot know and does not prescribe how events are entering the system. Therefore deciding when events will be delivered to the state machine is an outside (client code) responsibility.
+* *Concurrency:* The client code has to care about any thread synchronization.
+* *Memory management:* The generated state machine code will never allocate any memory. Allocating the memory needed for the statechart structure is a responsibility of the client code.
+
+All these things are out of the generated code's scope, since the code generators coming with YAKINDU Statechart Tools cannot provide tailored solutions without knowing any details about a respective specific environment, like runtime system, libraries, etc.
+
+In order to have a better code generator support for specific usage patterns, you would have to implement corresponding code generator extensions.
+
+
+
+h3(#codegen_thread-safe_execution). Thread-safe execution
+
+In order to circumvent the missing thread-safety of the _runCycle()_ method, the Java code generator has an option for generating a so-called runnable wrapper, providing event queueing and multi-threading support. For details, see section "&quot;RunnableWrapper&quot;":../user-guide/code_generation_generators.html#codegen_java_runnablewrapper_feature. It is easy to implement this as a general solution for Java, since the programming language provides corresponding standard features that by definition are available everywhere by can simply be used.
+
+The C programming language, however, does not have any standardized threading features. Therefore a general solution cannot be given. Specific solutions for specific threading libraries would require the implementation of a suitable code generator extension.
+
+
+
+
+h2(#setting_up_a_code_generator_project). Setting up a code generator project
+
+In order to deploy a code generator and actually generate code, you have to set up a _code generator project_. This is described in the following subsections.
+
+For configuring the code generation process, YAKINDU Statechart Tools uses a textual generator model called _SGen_. It can be created either by using the _YAKINDU Statechart generator model_ wizard or by creating a text file with the filename extension _.sgen_.
+
+To create a generator model using the wizard, proceed as follows:
+
+# In the _project explorer_ view, right-click on your project. The context meu opens.
+# In the context menu, select _New → Code generator model_.
+# The _New YAKINDU SGen model_ wizard opens.
+# Select an appropriate folder and specify the filename of your SGen model. The filename must have the extension _.sgen_.
+# Click on _Next >_.
+# From the _Generator_ drop-down menu, choose the code generator you want to use, e.g., _YAKINDU SCT Java code generator_.
+# Check the statechart(s) to generate code from.
+# Click on _Finish_.
+
+!images/docu_genmodelwizardchooselanguage.jpg(Selecting code generator and statecharts)!
+
+p=. Selecting code generator and statecharts
+
+The result is the specified _.sgen_ file. It has the following format: 
+ 
+bc. 
+GeneratorModel for [GeneratorId] {
+	statechart [StatechartReference] {
+		feature [Feature] {
+			[ParameterName] = [ParameterValue]
+		}
+	}
+}
+
+The _[GeneratorId]_ represents the unique ID of the chosen generator. Currently, YAKINDU Statechart Tools supports the following code generators out of the box:
+
+* @yakindu::java@ – Generator ID for the Java code generator 
+* @yakindu::c@ – Generator ID for the C code generator
+* @yakindu::cpp@ – Generator ID for the C++ code generator
+* @yakindu::generic@ – Generator ID for custom Java-based code generators
+* @sctunit::c@ – Generator ID for SCTUnit/C code generator
+
+A single generator model may contain multiple @statechart … { … }@ blocks and thus specify the code generation for multiple statecharts. For each statechart, the generator process can be configured with _Features_. Each feature has one or more parameters. These parameters can be configured with _ParameterName_ @=@ _ParameterValue_.
+
+
+
+
+h2(#running_a_generator). Running a generator
+
+Provided you have created the generator model, proceed as follows:
+# In the project explorer view, right-click on the _.sgen_ file containing the generator model. The context menu opens.
+# In the context menu, select _Generate Code Artifacts_.
+# The generator is executed.
+
+The source files the generator produces depend on the generator itself. Each generator makes use of its specific target language and the latter's features and best practices. For example, the Java generator generates Java interfaces and classes, and the C and C++ generators generate _.h_ header files and _.c_ source files. The _location_ of the generated sources can be changed in the generator model. The respective options are explained in the following section.
+
+The generator model is executed by a so-called Eclipse builder. Thus, the artifacts are generated automatically whenever the statechart is modified, as long as _Project → Build Automatically_ is checked. If you want or need to execute your generator model manually, select _Generate Statechart Artifacts_ from the _package explorer_'s context menu.
+
+
+
+
+h2(#codegen_configuring_a_generator). Configuring a generator
+
+As mentioned above, all generators can be set up and customized by a generator model. The following screenshot shows a sample configuration for the Java code generator.
+
+!images/docu_sGenEditor.png(SGen generator model with default values)!
+
+p=. SGen generator model with default values
+
+###. FIXME: Explain what a "builder" is!
+
+The following sections describe _core features_, which are available for _all_ code generators. Individual code generators usually support specific additional features; please see the respective code generator documentation for details.
+
+
+
+==<!-- Start sgen_feature_outlet -->==
+
+h3(#codegen_outlet_feature). Outlet feature
+
+The *Outlet* feature specifies target project and target folder for the generated artifacts. It is a _required_ feature and has the following parameters:
+
+* _targetProject_ (String, required): The project to write the generated artifacts to.
+* _targetFolder_ (String, required): The folder within the _target folder_ to write the generated artifacts to. If a _library target folder_ (see below) is specified, only the model-dependent artifacts are generated in the _target folder_. All artifacts in this folder will be overwritten during re-generation.
+* _libraryTargetFolder_ (String, optional): The folder to write the model-independent artifacts to. If this parameter is not specified, these artifacts will be generated in the _target folder_ (see above). All artifacts in this folder will be preserved during re-generation. Manual modifications of these artifacts will _not_ be overwritten upon re-generation.
+* _apiTargetFolder_ (String, optional): The folder to write API code to, e.g., interfaces or header files. If this parameter is not specified, these artifacts will be generated in the _target folder_ (see above).
+* _skipLibraryFiles_ (Boolean, optional): If you wish to exclude the static files from the code generation, i.e., those that are put into the _libraryTargetFolder_, you can set this value to _true_. If the value is _false_ or not specified at all, the files are generated as usual. Currently supported for the Java, C and C++ generators.
+
+==<div class="example">==
+
+Example:
+
+bc. feature Outlet {
+    targetProject = "SampleProject"
+    targetFolder = "src-gen"
+    libraryTargetFolder = "src"
+    apiTargetFolder = "api-gen"
+}
+
+==</div>==
+
+==<!-- End sgen_feature_outlet -->==
+
+
+
+==<!-- Start sgen_feature_licenseheader -->==
+
+h3(#codegen_generating_code_licenseheader_feature). LicenseHeader feature
+
+The *LicenseHeader* feature specifies the license text to be added as a header to the generated artifacts. It is an _optional_ feature and has the following parameter:
+
+* _licenseText_ (String, required): License text to be added as a file header
+
+==<div class="example">==
+
+Example:
+
+bc. feature LicenseHeader {
+    licenseText = "Copyright (c) 2017 committers of YAKINDU and others."
+}
+
+==</div>==
+
+==<!-- End sgen_feature_licenseheader -->==
+
+
+
+==<!-- Start sgen_feature_functioninlining -->==
+
+h3(#codegen_generating_code_functioninlining_feature). FunctionInlining feature
+
+The *FunctionInlining* feature enables the inlining of expressions instead of generating separate functions or methods. This might reduce the readability of the generated code, but increases performance, because less operation calls are necessary. This is an _optional_ feature and has the following parameters:
+
+* _inlineReactions_ (Boolean, optional): inlines the expression for reactions
+* _inlineEntryActions_ (Boolean, optional): inlines the expression for entry actions
+* _inlineExitActions_ (Boolean, optional): inlines the expression for exit actions
+* _inlineEnterSequences_ (Boolean, optional): inlines the expression for state-entering sequences
+* _inlineExitSequences_ (Boolean, optional): inlines the expression for state-exiting sequences
+* _inlineChoices_ (Boolean, optional): inlines the expression for choices
+* _inlineEnterRegion_ (Boolean, optional): inlines the expression for region-entering sequences
+* _inlineExitRegion_ (Boolean, optional): inlines the expression for region-exiting sequences
+* _inlineEntries_ (Boolean, optional): inlines the expression for entries
+
+ALl parameters of the *FunctionInlining* feature are _false_ by default.
+
+==<div class="example">==
+
+Example:
+
+bc. feature FunctionInlining {
+    inlineChoices = false
+    inlineEnterRegion = true
+    inlineEntries = true
+}
+
+==</div>==
+
+==<!-- End sgen_feature_functioninlining -->==
+
+
+
+==<!-- Start sgen_feature_debug -->==
+
+h3(#codegen_generating_code_debug_feature). Debug feature
+
+The *Debug* feature dumps the execution model to the target folder as an XMI model. It is an _optional_ feature and has the following parameter:
+
+* _dumpSexec_ (Boolean, required): dumps the execution model as XMI model (default: _false_)
+
+==<div class="example">==
+
+Example:
+
+bc. feature Debug {
+    dumpSexec = true
+}
+
+==</div>==
+
+==<!-- End sgen_feature_debug -->==
+
+
+
+h3(#codegen_using_properties_and_expressions_in_generator_models). Using properties and expressions in generator models
+
+An SGen generator model may assign values to properties and later use these properties in expressions. The following sample generator model uses the *var* keyword to declare the properties _projectName_, _version_, _isBeta_, and _generateTimerService_ with their respective types and default values. The model then uses these values in *feature* clauses by referring to the properties:
+
+bc.. 
+GeneratorModel for yakindu::java {
+
+    var projectName : string = "light_switch"
+    var version : string = "1.0"
+    var isBeta : boolean = true
+    var generateTimerService : boolean = true
+
+    statechart myStateAutomaton {
+
+        feature Outlet {
+            targetProject = projectName
+            targetFolder = "src-gen/" + version + (isBeta ? "beta" : "")
+            libraryTargetFolder = "src"
+        }
+
+        feature GeneralFeatures {
+            TimerService = generateTimerServce
+        }
+
+    }
+}
+
+p. The syntax rules for expressions in generator models are the same as for statechart language expressions, see section "&quot;Expressions&quot;":../user-guide/statechart_language.html#sclang_expressions. However, expressions are constrained to a subset that semantically makes sense in the context of a generator model. That means that, for example, while you can use the @+@ operator to concatenate strings, you cannot use statechart-related constructs like the _after_ keyword or the _active()_ built-in function.
+
+In the properties definition section near the top of a generator model, a value assigned to a property must be given as a _literal_. More complex expressions are not supported there.
+
+
+h4(#codegen_built-in_variables). Built-in variables
+
+There are several built-in read-only variables which can be used in expressions in generator models:
+
+* _SCTVERSION_ (String): the current version of YAKINDU Statechart Tools, for example, "3.4.0"
+* _TIMESTAMP_ (String): the current date and time as a localized string, for example "11.12.2017 17:08:14"
+* _USER_ (String): the name of the current user who started this instance of YAKINDU Statechart Tools (via @System.getProperty("user.name")@)
+* _HOSTNAME_ (String): the host name of the machine on which YAKINDU Statechart Tools is running.
+* _SHA256_ (String): The hash of the referenced file (for example, the statechart file).
+* _SCTFILE_ (String): Path to the statechart file relative to the workspace.
+
+bq. *Please note:* Neither _USER_ nor _HOSTNAME_ should be used for any security-related tasks. Especially the username can be spoofed easily, if anyone wanted to.
+
+
+h4(#codegen_overriding_variables_in_a_headless_build). Overriding variables in a headless build
+
+The values assigned to properties are _default_ values only. That means, you can override them by different values when actually executing a generation model by way of running the "headless code generator":../user-guide/generating_code_headless.html#hdls_headless_code_generation.
+
+For example, the command to call the headless generator might look like this:
+
+bc. scc -m myGenmodel.sct -v version=2.0;isBeta=false
+
+The name/value pairs specified by the @-v@ option would override the corresponding default values of the properties in the generator model. In this case, the properties _version_ and _isBeta_ would be set to the values "2.0" and "false", respectively. The variables _projectName_ and _generateTimerServce_ would maintain their default values as specified in the SGen file.
+
+==</div>==

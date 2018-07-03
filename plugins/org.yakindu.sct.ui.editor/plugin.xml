@@ -448,7 +448,7 @@
             category="org.yakindu.sct.ui.preferences.root"
             class="org.yakindu.sct.ui.editor.preferences.StatechartAppearancePreferencePage"
             id="com.yakindu.sct.ui.appearance"
-            name="Diagram Appearance">
+            name="Diagram appearance">
         </page>
     </extension>
    <extension
@@ -920,8 +920,35 @@
  <extension
        point="org.eclipse.ui.elementFactories">
     <factory
-          class="org.yakindu.sct.ui.editor.DiagramEditorInputFactory"
+          class="org.yakindu.sct.ui.editor.partitioning.DiagramEditorInputFactory"
           id="org.yakindu.sct.ui.editor.DiagramEditorInputFactory">
     </factory>
+ </extension>
+ <extension
+       point="org.eclipse.ui.contexts">
+    <context
+          description="Embedded Xtext Editor Scope"
+          id="org.eclipse.xtext.ui.embeddedTextEditorScope"
+          name="Embedded Xtext Editor Scope">
+    </context>
+ </extension>
+ <extension
+       point="org.eclipse.ui.bindings">
+    <scheme
+          description="Statechart Definition Section Keybinding Configuration"
+          id="org.yakindu.sct.ui.editor.definitionsection.keybindingConfiguration"
+          name="Statechart Definition Section Keybinding Configuration"
+          parentId="org.eclipse.ui.defaultAcceleratorConfiguration">
+    </scheme>
+    <key
+          contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+          schemeId="org.yakindu.sct.ui.editor.definitionsection.keybindingConfiguration"
+          sequence="F2">
+    </key>
+    <key
+          contextId="org.eclipse.xtext.ui.XtextEditorScope"
+          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+          sequence="M3+M1+H">
+    </key>
  </extension>
 </plugin>

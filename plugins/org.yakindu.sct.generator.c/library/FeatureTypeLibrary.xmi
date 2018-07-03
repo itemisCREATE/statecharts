@@ -16,6 +16,7 @@
         optional="true"/>
     <parameters
         name="maxIdentifierLength"
+        deprecated="true"
         optional="true"
         parameterType="INTEGER"/>
     <parameters

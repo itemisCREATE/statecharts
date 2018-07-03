@@ -60,7 +60,7 @@ public class SubdiagramAwareCopyCommand extends CopyCommand implements ICommand 
 		}
 	}
 
-	protected CustomData copyViews(List<EObject> source) {
+	protected CustomData copyViews(List source) {
 		String copy = copyWithSubdiagrams(source);
 		return new CustomData(DRAWING_SURFACE, copy.getBytes());
 	}
@@ -70,7 +70,7 @@ public class SubdiagramAwareCopyCommand extends CopyCommand implements ICommand 
 	 * {@link org.eclipse.gmf.runtime.diagram.ui.internal.commands.ClipboardCommand.copyViewsToString(List)}
 	 * which is static and therefore not exchangeable. Only difference is adding of sub diagrams.
 	 */
-	protected String copyWithSubdiagrams(List<EObject> views) {
+	protected String copyWithSubdiagrams(List views) {
 		Assert.isNotNull(views);
 		Assert.isTrue(views.size() > 0);
 
@@ -107,7 +107,7 @@ public class SubdiagramAwareCopyCommand extends CopyCommand implements ICommand 
 		return ClipboardUtil.copyElementsToString(selection, new HashMap(), new NullProgressMonitor());
 	}
 
-	protected EAnnotation getMeasurementUnitAnnotation(List<EObject> views) {
+	protected EAnnotation getMeasurementUnitAnnotation(List views) {
 		View firstView = (View) views.get(0);
 		Diagram dgrm = firstView.getDiagram();
 		EAnnotation measureUnitAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();

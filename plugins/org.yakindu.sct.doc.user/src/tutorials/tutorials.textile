@@ -45,7 +45,7 @@ You have developed and tested your statechart model, and now you need it as a C,
 
 As an example, we will take the light switch statechart and generate Java source code from it. Please proceed as follows:
 
-# In the project explorer, right-click on _light_switch.sct_ and select _New → Code Generator Model_ in the context menu. <p>!(standard-image)images/tuto_5min_110_new_code_generator_model.png(Creating a new code generator model)!</p>
+# In the project explorer, right-click on _light_switch.sct_ and select _New → Code generator model_ in the context menu. <p>!(standard-image)images/tuto_5min_110_new_code_generator_model.png(Creating a new code generator model)!</p>
 # In the dialog, replace @default.sgen@ by @light_switch.sgen@, then click _Next >_.
 # In the next dialog, check the checkbox left from _light_switch.sct_, then click _Finish_.
 # Java classes implementing the statechart model are generated. You can find the generated source code in the folders _src_ and _src-gen_ within the _light_switch_ project. <p>!(standard-image)images/tuto_5min_140_generated_java_source_code.png(Generated Java source code)!</p>
@@ -229,11 +229,11 @@ h4(#tutorial_validation-principles). Validation principles
 
 This error marker exemplifies YAKINDU Statechart Tools' model validation capabilities. Statechart validation includes syntactical and semantical checks of the whole statechart. For example, a statechart is checked for unreachable states, dead ends, or references to unknown events. These validation constraints are checked during editing. In case any constraints are violated, error or warning markers are attached to the faulty model elements. Thus the user receives direct and immediate feedback on the validation state of his statechart.
 
-Hovering with the mouse over the error marker in the statechart editor reveals what the problem is. A small popup appears and displays the error description: "A state must have a name."
+Hovering with the mouse over the error marker in the statechart editor reveals what the problem is. A small pop-up appears and displays the error description: "A state must have a name."
 
-!(standard-image)images/tuto_light_switch_210_error_marker_and_popup.png(An error marker and a popup window explaining it)!
+!(standard-image)images/tuto_light_switch_210_error_marker_and_pop-up.png(An error marker and a pop-up window explaining it)!
 
-p=. An error marker and a popup window explaining it
+p=. An error marker and a pop-up window explaining it
 
 
 h4(#tutorial_error-markers-in-the-problems-view). Error markers in the "problems" view
@@ -276,7 +276,7 @@ table(scedit).
 |<. The new state appears in the model graph:|<. !(standard-image)images/tuto_light_switch_240_statechart_editor_create_state_03.png(A new state)!|
 |<. Rename the new state to *On*. Vertically align it to the *Off* state, if you like:|<. !(standard-image)images/tuto_light_switch_240_statechart_editor_create_state_04.png(Renaming the new state)!|
 |<. You'll notice that the new state is showing an error marker. The reason is that it is not yet possible to reach the *On* state.|<. |
-|<. Before we'll go on and fix that problem, here's another way to create a new state. When you are hovering with the mouse pointer over the main region, i.e., the large rectangle with a gray background, a popup menu shows up. If you click on the ‘S' symbol in that menu, a new state will be created. Other options in this menu are to create an initial state, a final state, or a choice.|<. !(standard-image)images/tuto_light_switch_240_statechart_editor_create_state_05.png(Creating a state using the popup menu)!|
+|<. Before we'll go on and fix that problem, here's another way to create a new state. When you are hovering with the mouse pointer over the main region, i.e., the large rectangle with a gray background, a pop-up menu shows up. If you click on the ‘S' symbol in that menu, a new state will be created. Other options in this menu are to create an initial state, a final state, or a choice.|<. !(standard-image)images/tuto_light_switch_240_statechart_editor_create_state_05.png(Creating a state using the pop-up menu)!|
 
 
 
@@ -337,7 +337,7 @@ p=. Selecting _Run As → Statechart Simulation_ in the context menu
 The perspective changes from _SC Modeling_ to _SC Simulation_. This perspective defines two additional views:
 
 * The _Debug_ view at the top shows all running state machine instances and allows to select one of them. YAKINDU Statechart Tools allow multiple executions of the same state machine as well as parallel executions of different state machines at the same time.
-* The _Simulation_ view on the right-hand side is used to raise events and to inspect and modify variables. Depending on your screen resolution and font size settings, you might not be able to spot the _Simulation_ view by its name, because the tab containing it is quite narrow and might not provide enough space for displaying the title. Hover over the tabs to reveal their respective titles in a popup window. Figure "&quot;Light switch simulation in &quot;off&quot; state&quot;":#tutorial_fig_light_switch_simulation_in_off_state is demonstrating this: The user has hovered the mouse pointer over a tab that is just displaying the starting letter 'S' of its title. However, a popup window right besides the pointer is showing the tab's full title "Simulation View".
+* The _Simulation_ view on the right-hand side is used to raise events and to inspect and modify variables. Depending on your screen resolution and font size settings, you might not be able to spot the _Simulation_ view by its name, because the tab containing it is quite narrow and might not provide enough space for displaying the title. Hover over the tabs to reveal their respective titles in a pop-up window. Figure "&quot;Light switch simulation in &quot;off&quot; state&quot;":#tutorial_fig_light_switch_simulation_in_off_state is demonstrating this: The user has hovered the mouse pointer over a tab that is just displaying the starting letter 'S' of its title. However, a pop-up window right besides the pointer is showing the tab's full title "Simulation View".
 
 Not surprisingly, the simulation starts at the initial state and then transitions to the *Off* state immediately. The latter becomes the active state now. It is highlighted by a red background:
 
@@ -437,13 +437,13 @@ h3(#tutorial_creating-a-generator-model). Creating a generator model
 
 For code generation, YAKINDU Statechart Tools use a textual generator model called *SGen*. The generator model holds key parameters for the code generation process and allows for the latter's customization.
 
-The first step to code generation is to create a new SGen model. Right-click on the _model_ folder in the project explorer and select _New → Code Generator Model_ from the context menu.
+The first step to code generation is to create a new SGen model. Right-click on the _model_ folder in the project explorer and select _New → Code generator model_ from the context menu.
 
-!(standard-image)images/tuto_callhandling_200_generation_create_generator_model.png(Selecting "New → Code Generator Model" in the context menu)!
+!(standard-image)images/tuto_callhandling_200_generation_create_generator_model.png(Selecting "New → Code generator model" in the context menu)!
 
-p=. Selecting _New → Code Generator Model_ in the context menu
+p=. Selecting _New → Code generator model_ in the context menu
 
-The _YAKINDU Generator Model_ wizard opens. Change the _File name_ to *CallHandling.sgen*, then click _Next &gt;_.
+The _YAKINDU generator model_ wizard opens. Change the _File name_ to *CallHandling.sgen*, then click _Next &gt;_.
 
 !(standard-image)images/tuto_callhandling_210_generation_new_sgen_model_1.png(Selecting a filename for the generator model)!
 

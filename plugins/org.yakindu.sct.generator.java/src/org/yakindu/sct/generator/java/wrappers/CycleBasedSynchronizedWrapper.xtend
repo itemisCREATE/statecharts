@@ -16,16 +16,16 @@ import org.yakindu.base.types.Direction
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.java.GenmodelEntries
+import org.yakindu.sct.generator.java.JavaNamingService
+import org.yakindu.sct.generator.java.Naming
 import org.yakindu.sct.generator.java.features.CycleBasedWrapperFeature
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 
 import static org.eclipse.xtext.util.Strings.*
-import org.yakindu.sct.generator.java.GenmodelEntries
-import org.yakindu.sct.generator.java.JavaNamingService
-import org.yakindu.sct.generator.java.Naming
-import org.yakindu.sct.generator.java.Navigation
 
 /**
  * Generates the cycle bases synchronized wrapper for the state machine.
@@ -37,7 +37,7 @@ class CycleBasedSynchronizedWrapper {
 
 	@Inject protected extension JavaNamingService
 	@Inject protected extension Naming
-	@Inject protected extension Navigation
+	@Inject protected extension SExecExtensions
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ICodegenTypeSystemAccess
 
@@ -181,7 +181,7 @@ class CycleBasedSynchronizedWrapper {
 		«ENDIF»
 		«FOR event : scope.eventDefinitions»
 			«IF event.direction == Direction::IN»
-				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+				«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 					public void raise«event.name.asName»(final «event.typeSpecifier.targetLanguageName» value) {
 						
 						synchronized (statemachine) {
@@ -208,7 +208,7 @@ class CycleBasedSynchronizedWrapper {
 					}
 				}
 				
-				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+				«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 					public «event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
 						synchronized(statemachine) {
 							return statemachine.get«scope.interfaceName»().get«event.name.asName»Value();

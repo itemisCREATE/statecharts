@@ -10,12 +10,13 @@
 */
 package org.yakindu.sct.model.sexec.transformation.test
 
-import org.junit.Test
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory.*
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory.*
-import static org.junit.Assert.*
 import org.eclipse.emf.ecore.EObject
+import org.junit.Test
 import org.yakindu.sct.model.sexec.Call
+
+import static org.junit.Assert.*
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory.*
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory.*
 
 /** 
  * This test class tests transformation errors that create calls to null sequences. This covers the issues:
@@ -53,7 +54,7 @@ class NullCallTest extends ModelSequencerTest {
 	
 	
 	def void assertNoNullCalls(EObject e) {
-		assertFalse (e.eAllContents.filter(Call).exists[ step == null] )
+		assertFalse (e.eAllContents.filter(Call).exists[ step === null] )
 	}
 	
 

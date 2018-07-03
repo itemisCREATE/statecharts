@@ -12,18 +12,18 @@ package org.yakindu.sct.generator.cpp;
 
 import static org.yakindu.sct.generator.cpp.features.CPPFeatureConstants.FEATURE_INCLUDES;
 import static org.yakindu.sct.generator.cpp.features.CPPFeatureConstants.PARAMETER_INCLUDES_USE_RELATIVE_PATHS;
-import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION;
 
-import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.sct.generator.c.DefaultGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.IncludeProvider;
 import org.yakindu.sct.generator.c.SimpleGenArtifactConfigurations;
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries;
 import org.yakindu.sct.generator.c.extensions.Naming;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.IGeneratorModule;
+import org.yakindu.sct.generator.core.extensions.AnnotationExtensions;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenCppIncludeProvider;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenEventCode;
@@ -33,21 +33,22 @@ import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineImplemen
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
-import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 
 import com.google.inject.Binder;
+import com.google.inject.name.Names;
 
 /**
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public class CppCodeGeneratorModule implements IGeneratorModule {
 
 	@Override
 	public void configure(GeneratorEntry entry, Binder binder) {
 		binder.bind(GeneratorEntry.class).toInstance(entry);
+		binder.bind(String.class).annotatedWith(Names.named("Separator")).toInstance(getSeparator(entry));
 		binder.bind(IExecutionFlowGenerator.class).to(CppGenerator.class);
 		binder.bind(ICodegenTypeSystemAccess.class).to(CTypeSystemAccess.class);
 		binder.bind(INamingService.class).to(CppNamingService.class);
@@ -57,7 +58,7 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		bindEventDrivenClasses(entry, binder);
 		bindIGenArtifactConfigurations(entry, binder);
 	}
-	
+
 	protected void bindIGenArtifactConfigurations(GeneratorEntry entry, Binder binder) {
 		FeatureParameterValue useRelativePathParam = entry.getFeatureParameterValue(FEATURE_INCLUDES,
 				PARAMETER_INCLUDES_USE_RELATIVE_PATHS);
@@ -68,17 +69,24 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 			binder.bind(IGenArtifactConfigurations.class).to(SimpleGenArtifactConfigurations.class);
 		}
 	}
-	
+
 	protected void bindEventDrivenClasses(GeneratorEntry entry, Binder binder) {
-		Statechart statechart = (Statechart) entry.getElementRef();
-		Annotation eventDrivenAnnotation = statechart.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION);
-		
-		if(eventDrivenAnnotation != null) {
+		if ((new AnnotationExtensions()).isEventDriven(entry)) {
 			binder.bind(StatemachineHeader.class).to(EventDrivenStatemachineHeader.class);
 			binder.bind(StatemachineImplementation.class).to(EventDrivenStatemachineImplementation.class);
 			binder.bind(CppExpressionsGenerator.class).to(EventDrivenExpressionCode.class);
 			binder.bind(EventCode.class).to(EventDrivenEventCode.class);
 			binder.bind(StandardCppIncludeProvider.class).to(EventDrivenCppIncludeProvider.class);
+		}
+	}
+
+	protected String getSeparator(GeneratorEntry entry) {
+		GenmodelEntries entries = new GenmodelEntries();
+		String separator = entries.getSeparator(entry);
+		if (separator == null) {
+			return "_";
+		} else {
+			return separator;
 		}
 	}
 

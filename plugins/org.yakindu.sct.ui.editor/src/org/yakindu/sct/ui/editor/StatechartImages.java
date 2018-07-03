@@ -30,7 +30,7 @@ public enum StatechartImages {
 
 	PRO_EDITION("images/pro.png"),
 
-	MENU("icons/obj16/MENU-16.png"),
+	MENU("icons/obj16/Menu-16.png"),
 	
 	DOCU("icons/obj16/docu-16.png"),
 	

@@ -1,4 +1,8 @@
 
+p. 
+
+==<div style="counter-reset: h1 5">==
+
 h1(#sclang_statechart_language_reference). Statechart language reference
 
 The statechart language is used to describe statecharts. It consists both of graphical and of textual elements.
@@ -211,7 +215,12 @@ A standard "UML":https://en.wikipedia.org/wiki/Unified_Modeling_Language composi
 
 Unlike UML composite states, however, composite states in YAKINDU statecharts can additionally denote specific named _entry points_. A transition leading to a composite state can specify the entry point to be used instead of the initial state.
 
-Analogously, a composite state can have named _exit points_. Transitions with that composite state as their source state may specify which exit point to react to, and thus lead to different target states, depending on which of the source composite state's exit points has been taken.
+Analogously, a composite state can have named _exit points_. Outgoing transitions of that composite state may specify which exit point to react to, and thus lead to different target states, depending on which of the source composite state's exit points has been taken. A blank transition with no trigger or guard reacts to all exit points, and is needed when a composite state contains a default exit point.
+
+p(#sclang_fig_exit_transitions). 
+!images/exit_point_transitions.png(Exit point transitions)!
+
+p=. The event @e@ leads to the unnamed (default) exit point, which is connected to the blank transition. The event @g@ activates the transition to the exit point named @g@, for which no specific transition exists, so the blank transition to state @E@ is taken. The event @f@ leads to the named exit @f@. The lower outgoing transition is connected to this exit point via @# f >@ and takes precedence over the blank transition, thus state @F@ becomes active. Named exit points take precedence over the actual transition priority.
 
 The syntax to connect a transition to an "entry point":#sclang_entry_points with the name _entry-point-1_ of a target composite state is as follows:
 
@@ -270,7 +279,7 @@ Which transition will be taken if the state machine is in state *A* and event _e
 
 Fortunately YAKINDU state machines behave deterministically, so this question can be answered unambiguously. Outgoing transitions of a state have a definite order and are _prioritized_ by that order. The state machine checks the transitions one by one in this order and executes the first transition that fulfills all prerequisites for firing.
 
-As you can see in figure "&quot;Transition priorities &#91;1]&quot;":#sclang_fig_transition-priorities-1, little numbers at the transition arrows indicate their priorities. This numbering is shown only if the option _Show transition priority_ in _Window → Preferences → YAKINDU SCT → Diagram Appearance_ has been activated. By default, this option is _not_ activated.
+As you can see in figure "&quot;Transition priorities &#91;1]&quot;":#sclang_fig_transition-priorities-1, little numbers at the transition arrows indicate their priorities. This numbering is shown only if the option _Show transition priority_ in _Window → Preferences → YAKINDU SCT → Diagram appearance_ has been activated. By default, this option is _not_ activated.
 
 The order of transitions is a property of their source state. In the example above, the transition priorities of state *A* appear like this in the _properties_ view:
 
@@ -349,7 +358,13 @@ A *final state* denotes the end of the execution flow of a state machine or regi
 
 A final state is depicted as an unfilled circle with a smaller filled black circle inside, see figure "&quot;Entry point, exit point, and final state&quot;":#sclang_fig_state_entry_exit_final_explained.
 
-A final state can have multiple incoming transitions and has no outgoing ones.
+Like a "regular state":#sclang_states, A final state can have multiple incoming transitions.
+
+###. ==<div class="constraints">==
+###.	Severity : Warning
+###.	ID: finalstate.NoOutTransitions
+###.	Description: A final state must not have outgoing transitions.
+###. ==</div>==
 
 Within a region, only a single final state is allowed, but each region may have its own final state.
 
@@ -479,7 +494,7 @@ The *definition section* is a text area. Per default, it is located to the left 
 
 In the definition section, you have to define entities you want to use in your statechart. This includes "variables":#sclang_variables, "events":#sclang_events, and "operations":#sclang_operations. Variables and events have to be defined in the scope of a "named interface":#sclang_interface_scopes or the "internal interface":#sclang_internal_scope. Especially useful for larger parts of a statechart model is the possibility to use "namespaces":#sclang_namespaces.
 
-When it comes to "code generation":../user-guide/generating_code.html#codegen_generating_state_machine_code all these elements are properly reflected in the generated source code as far as the respective target language supports it.
+When it comes to "code generation":../user-guide/code_generation_intro.html#codegen_generating_state_machine_code all these elements are properly reflected in the generated source code as far as the respective target language supports it.
 
 ###. FIXME (RK): Example needed!
 
@@ -662,7 +677,7 @@ Consider, for example, a C function @float read_sensor()@ that should be called 
 
 ==</div>==
 
-It is the purpose of a code generator to create a suitable construct in the respective target language for the procedure call. For details on code generation, please see section "&quot;Generating state machine code&quot;":../user-guide/generating_code.html.
+It is the purpose of a code generator to create a suitable construct in the respective target language for the procedure call. For details on code generation, please see section "&quot;Generating state machine code&quot;":../user-guide/code_generation_intro.html#codegen_generating_state_machine_code.
 
 Operations can have none, one, or multiple parameters. A parameter is declared with a name and a type. An operation may have a single or no return type similar to usual programming languages. Please see section "&quot;Types&quot;":#sclang_types for details.
 
@@ -705,7 +720,7 @@ Annotations are metadata that you can add to the definition section of your stat
 
 h4(#sclang_cyclebased). @CycleBased
 
-The <code>@CycleBased</code> annotation specifies that the "_cycle-based execution scheme_":../user-guide/generating_code.html#codegen_execution_schemes is to be used.
+The <code>@CycleBased</code> annotation specifies that the "_cycle-based execution scheme_":../user-guide/code_generation_intro.html#codegen_execution_schemes is to be used.
 
 Synopsis: <code>@CycleBased(</code>_period_<code>)</code>
 
@@ -733,7 +748,7 @@ p.
 
 h4(#sclang_eventdriven). @EventDriven
 
-The <code>@EventDriven</code> annotation specifies that the "_event-driven execution scheme_":../user-guide/generating_code.html#codegen_execution_schemes is to be used.
+The <code>@EventDriven</code> annotation specifies that the "_event-driven execution scheme_":../user-guide/code_generation_intro.html#codegen_execution_schemes is to be used.
 
 Synopsis: <code>@EventDriven</code>
 
@@ -1566,3 +1581,5 @@ p(#sclang_fig_expressions_grammar).
 !images/docu_grammar_010_expressions.png(Expressions grammar)!
 
 p=. Expressions grammar
+
+==</div>==

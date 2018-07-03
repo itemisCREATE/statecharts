@@ -19,6 +19,7 @@ import java.util.Queue
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.lib.annotations.Data
 import org.yakindu.base.expressions.interpreter.IExpressionInterpreter
+import org.yakindu.base.types.Direction
 import org.yakindu.base.types.typesystem.ITypeValueProvider
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
@@ -32,6 +33,7 @@ import org.yakindu.sct.model.sexec.If
 import org.yakindu.sct.model.sexec.SaveHistory
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent
 import org.yakindu.sct.model.sexec.Sequence
+import org.yakindu.sct.model.sexec.SexecFactory
 import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.Trace
@@ -40,13 +42,13 @@ import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.RegularState
-import org.yakindu.sct.model.sruntime.EventDirection
 import org.yakindu.sct.model.sruntime.ExecutionContext
 import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.TimeTask
 import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
+import org.yakindu.sct.simulation.core.sexec.container.EventDrivenSimulationEngine.EventDrivenCycleAdapter
 
 /**
  * 
@@ -92,6 +94,9 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	protected List<Step> executionStack
 	protected int activeStateIndex
 	protected boolean useInternalEventQueue
+
+	protected static final Trace beginRunCycleTrace = SexecFactory.eINSTANCE.createTraceBeginRunCycle
+	protected static final Trace endRunCycleTrace = SexecFactory.eINSTANCE.createTraceEndRunCycle
 
 	override initialize(ExecutionFlow flow, ExecutionContext context) {
 		initialize(flow, context, false)
@@ -148,8 +153,13 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	override runCycle() {
+		val cycleAdapter = EcoreUtil.getExistingAdapter(executionContext, EventDrivenCycleAdapter) as EventDrivenCycleAdapter
+		try {
+			if(cycleAdapter !== null )
+				executionContext.eAdapters.remove(cycleAdapter)
 		var Event event = null
 		do {
+			traceInterpreter.evaluate(beginRunCycleTrace, executionContext)
 			// activate an event if there is one
 			if (event !== null) {
 				event.event.raised = true
@@ -160,10 +170,16 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			rtcStep
 			// get next event if available
 			if(! internalEventQueue.empty) event = internalEventQueue.poll
+			traceInterpreter.evaluate(endRunCycleTrace, executionContext)
 		} while (event !== null)
+		}finally{
+			if(cycleAdapter !== null)
+				executionContext.eAdapters.add(cycleAdapter)
+		}
 	}
 
 	def rtcStep() {
+		
 		activeStateIndex = 0
 		if(executionContext.executedElements.size > 0) executionContext.executedElements.clear
 		executionContext.clearOutEvents
@@ -176,7 +192,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	def protected clearLocalAndInEvents(ExecutionContext executionContext) {
-		executionContext.allEvents.filter[direction == EventDirection.IN || direction == EventDirection.LOCAL].forEach [
+		executionContext.allEvents.filter[direction == Direction.IN || direction == Direction.LOCAL].forEach [
 			if (raised) {
 				raised = false;
 				value = if(type !== null) type.defaultValue else null
@@ -302,7 +318,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	override raise(ExecutionEvent ev, Object value) {
-		if (useInternalEventQueue) {
+		if (useInternalEventQueue && ev.direction == Direction::LOCAL) {
 			internalEventQueue.add(new Event(ev, value));
 
 		} else {

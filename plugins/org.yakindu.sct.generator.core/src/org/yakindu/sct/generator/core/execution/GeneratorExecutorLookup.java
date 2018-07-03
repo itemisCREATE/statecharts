@@ -6,17 +6,20 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.generator.core.execution;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.types.typesystem.AbstractTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
+import org.yakindu.sct.domain.extension.IModuleConfigurator;
+import org.yakindu.sct.domain.extension.impl.LazyCombiningModule;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
@@ -29,9 +32,9 @@ import com.google.inject.Module;
 import com.google.inject.util.Modules;
 
 /**
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public class GeneratorExecutorLookup {
 
@@ -55,25 +58,28 @@ public class GeneratorExecutorLookup {
 		IGeneratorDescriptor description = GeneratorExtensions.getGeneratorDescriptor(generatorId);
 		if (description == null)
 			throw new RuntimeException("No generator registered for ID: " + generatorId);
+		if (entry.getElementRef() == null || entry.getElementRef().eResource() == null) {
+			throw new RuntimeException("Could not resolve reference to model ");
+		}
 		final IGeneratorEntryExecutor executor = description.createExecutor();
 		if (executor == null)
 			throw new RuntimeException("Failed to create generator instance for ID:" + generatorId);
 		Injector injector = createInjector(entry, description, generatorId);
 		injector.injectMembers(executor);
 		ITypeSystem typeSystem = injector.getInstance(ITypeSystem.class);
-		if (entry.getElementRef() == null || entry.getElementRef().eResource() == null) {
-			throw new RuntimeException("Could not resolve reference to model ");
-		}
 		if (typeSystem instanceof AbstractTypeSystem) {
 			ResourceSet set = entry.getElementRef().eResource().getResourceSet();
-			set.getResources().add(((AbstractTypeSystem) typeSystem).getResource());
+			Resource typeSystemResource = ((AbstractTypeSystem) typeSystem).getResource();
+			if (set != null && typeSystemResource != null && !set.getResources().contains(typeSystemResource)) {
+				set.getResources().add(typeSystemResource);
 
-			// XXX: avoid resolving the whole resource set, because there might
-			// be models with different domains, we have to ensure that just the
-			// models related to the current entry are resolved
-			EcoreUtil.resolveAll(entry);
-			EcoreUtil.resolveAll(entry.getElementRef());
-			EcoreUtil.resolveAll(((AbstractTypeSystem) typeSystem).getResource());
+				// XXX: avoid resolving the whole resource set, because there might
+				// be models with different domains, we have to ensure that just the
+				// models related to the current entry are resolved
+				EcoreUtil.resolveAll(entry);
+				EcoreUtil.resolveAll(entry.getElementRef());
+				EcoreUtil.resolveAll(typeSystemResource);
+			}
 		}
 
 		return executor;
@@ -89,7 +95,12 @@ public class GeneratorExecutorLookup {
 	}
 
 	protected Module getDomainGeneratorModule(GeneratorEntry entry, String generatorId) {
-		return DomainRegistry.getDomain(entry.getElementRef()).getModule(IDomain.FEATURE_GENERATOR,
+		IModuleConfigurator configurator = new GeneratorEntryModuleConfigurator(entry);
+		Module module = DomainRegistry.getDomain(entry.getElementRef()).getModule(IDomain.FEATURE_GENERATOR,
 				generatorId);
+		if (module instanceof LazyCombiningModule) {
+			((LazyCombiningModule) module).applyConfigurator(configurator);
+		}
+		return module;
 	}
 }

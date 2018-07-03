@@ -23,6 +23,9 @@
     <!-- Root CSS file to be referenced by the generated HTML files. -->
     <property name="css.root.file" value="style.css" />
 
+    <!-- Javascript files are located here. -->
+    <property name="js.dir" value="js" />
+
     <!-- Image files reside in subdirectories with the following name: -->
     <property name="img.dir" value="images" />
 
@@ -194,7 +197,12 @@
                 <include name="user-guide/c-domain.textile" />
                 <!-- include name="user-guide/typescript-domain.textile" / -->
                 <include name="user-guide/statechart_language.textile" />
-                <include name="user-guide/generating_code.textile" />
+                <include name="user-guide/code_generation_intro.textile" />
+                <include name="user-guide/code_generation_c.textile" />
+                <include name="user-guide/code_generation_cpp.textile" />
+                <include name="user-guide/code_generation_java.textile" />
+                <include name="user-guide/code_generation_statechart_image.textile" />
+                <include name="user-guide/code_generation_custom.textile" />
                 <include name="user-guide/generating_code_headless.textile" />
                 <include name="user-guide/sctunit.textile" />
                 <include name="user-guide/search_and_navigate.textile" />
@@ -204,7 +212,7 @@
             <!-- Check whether we have all the expected textile source files – no more, no less: -->
             <fail message="Number of textile source file(s) doesn't match.">
                 <condition>
-                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="11" />
+                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="16" />
                 </condition>
             </fail>
 
@@ -313,6 +321,13 @@
                 </fileset>
             </copy>
 
+            <!-- Copy the Javascript files to the destination directory: -->
+            <copy todir="${help.dir}/${js.dir}">
+                <fileset dir="${js.dir}">
+                    <include name="*" />
+                </fileset>
+            </copy>
+
             <!-- Copy the image files to the destination directory: -->
             <copy todir="${help.dir}">
                 <fileset dir="src">
@@ -327,11 +342,12 @@
          name and a title, and consists of a set of source files. The generated documentation structure looks like this:
 
          website
-             YCST-installation.html
-             YCST-user-guide.html
-             YCST-tutorials.html
+             YSCT-installation.html
+             YSCT-user-guide.html
+             YSCT-tutorials.html
              css/yakindu.css
              css/ysct.css
+             js/yakindu.js
                  …
              images/…
     -->
@@ -382,7 +398,12 @@
                         <file name="user-guide/c-domain.textile" />
                         <!-- file name="user-guide/typescript-domain.textile" /-->
                         <file name="user-guide/statechart_language.textile" />
-                        <file name="user-guide/generating_code.textile" />
+                        <file name="user-guide/code_generation_intro.textile" />
+                        <file name="user-guide/code_generation_c.textile" />
+                        <file name="user-guide/code_generation_cpp.textile" />
+                        <file name="user-guide/code_generation_java.textile" />
+                        <file name="user-guide/code_generation_statechart_image.textile" />
+                        <file name="user-guide/code_generation_custom.textile" />
                         <file name="user-guide/generating_code_headless.textile" />
                         <file name="user-guide/sctunit.textile" />
                         <file name="user-guide/search_and_navigate.textile" />
@@ -518,6 +539,13 @@
             <!-- Copy the CSS files to the destination directory: -->
             <copy todir="${work.dir}/${css.dir}">
                 <fileset dir="${css.dir}">
+                    <include name="*" />
+                </fileset>
+            </copy>
+
+            <!-- Copy the Javascript files to the destination directory: -->
+            <copy todir="${work.dir}/${js.dir}">
+                <fileset dir="${js.dir}">
                     <include name="*" />
                 </fileset>
             </copy>

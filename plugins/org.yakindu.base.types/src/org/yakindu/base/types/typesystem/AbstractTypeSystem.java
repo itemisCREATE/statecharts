@@ -59,7 +59,12 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	protected TypeAnnotations typeAnnotations;
 
 	public AbstractTypeSystem() {
-		resource = new ResourceImpl(URI.createURI("types"));
+		resource = new ResourceImpl(URI.createURI("types")) {
+			@Override
+			protected void doUnload() {
+				// Unloading should not be performed for in memory resource
+			}
+		};
 		typeAnnotations = new TypeAnnotations();
 		initRegistries();
 	}
@@ -239,8 +244,7 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 
 		Set<Type> typehierachy1 = new LinkedHashSet<Type>();
 		collectSupertypes(type1, typehierachy1);
-		
-		
+
 		Set<Type> typehierachy2 = new LinkedHashSet<Type>();
 		collectSupertypes(type2, typehierachy2);
 

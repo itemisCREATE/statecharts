@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.ui.editor.editor.figures;
 
+import java.lang.reflect.Field;
+
 import org.eclipse.draw2d.PolygonDecoration;
 import org.eclipse.draw2d.RotatableDecoration;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
@@ -24,17 +26,32 @@ public class TransitionFigure extends PolylineConnectionEx {
 
 	private final IMapMode mapMode;
 
+	protected static final int TOLERANCE = 4;
+
 	public TransitionFigure(IMapMode mapMode) {
 		this(mapMode, false);
 	}
 
 	public TransitionFigure(IMapMode mapMode, boolean reversed) {
 		this.mapMode = mapMode;
+		setTolerance();
 		setLineWidth(mapMode.DPtoLP(1));
 		if (reversed)
 			setSourceDecoration(createTargetDecoration());
 		else
 			setTargetDecoration(createTargetDecoration());
+	}
+
+	protected void setTolerance() {
+		// Have to use reflection here, PolylineConnectionEx#calculateTolerance() is
+		// private....
+		try {
+			Field declaredField = PolylineConnectionEx.class.getDeclaredField("TOLERANCE");
+			declaredField.setAccessible(true);
+			declaredField.set(null, TOLERANCE);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	protected IMapMode getMapMode() {

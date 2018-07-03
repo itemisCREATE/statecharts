@@ -27,7 +27,7 @@ class EventDrivenStatemachine extends Statemachine {
 
 		val Set<String> importSet = super.imports(it, entry);	
 		
-		if (hasInternalEvents) {
+		if (hasLocalEvents) {
 			importSet += "java.util.Queue"
 			importSet += "java.util.LinkedList"
 		}
@@ -61,7 +61,7 @@ class EventDrivenStatemachine extends Statemachine {
 		«IF flow.timed»
 			/**
 			* Set the {@link ITimer} for the state machine. It must be set
-			* externally on a timed state machine before a run cycle can be correct
+			* externally on a timed state machine before a run cycle can be correctly
 			* executed.
 			* 
 			* @param timer
@@ -87,11 +87,11 @@ class EventDrivenStatemachine extends Statemachine {
 		«ENDIF»
 	'''
 
-	override protected internalEventFields(ExecutionFlow flow) '''
-		«IF flow.hasInternalEvents»
+	override protected internalEventFields(ExecutionFlow it) '''
+		«IF hasLocalEvents»
 			private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
 		«ENDIF»
-		«super.internalEventFields(flow)»
+		«super.internalEventFields(it)»
 	'''
 
 	override protected internalEventRaiser(EventDefinition it) '''
@@ -101,40 +101,42 @@ class EventDrivenStatemachine extends Statemachine {
 				@Override public void run() {
 					«IF hasPayload»«valueIdentifier» = value;«ENDIF»
 					«identifier» = true;					
-					runCycle();
+					singleCycle();
 				}
 			});
 		}
 	'''
 
-	override protected runCycleFunction(ExecutionFlow flow) '''
-		public void runCycle() {
-			if (!initialized)
-				throw new IllegalStateException(
-						"The state machine needs to be initialized first by calling the init() function.");
-		
-			clearOutEvents();
-			singleCycle();
-			clearEvents();
+	override protected runCycleFunction(ExecutionFlow it) {
+		if(!hasLocalEvents) {
+			return super.runCycleFunction(it)
+		}
+		'''
+			public void runCycle() {
+				if (!initialized)
+					throw new IllegalStateException(
+							"The state machine needs to be initialized first by calling the init() function.");
 			
-			«IF flow.hasInternalEvents»
-			// process queued events
-			while (internalEventQueue.size() > 0) {
-				internalEventQueue.poll().run();
+				clearOutEvents();
 				singleCycle();
 				clearEvents();
+				
+				// process queued events
+				while (internalEventQueue.size() > 0) {
+					internalEventQueue.poll().run();
+					clearEvents();
+				}
 			}
-			«ENDIF»
-		}
-		
-		«flow.singelCycle»
-	'''
+			
+			«it.singleCycle»
+		'''
+	}
 	
-	def protected singelCycle(ExecutionFlow flow) '''
+	def protected singleCycle(ExecutionFlow it) '''
 		protected void singleCycle() {
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 				switch (stateVector[nextStateIndex]) {
-				«FOR state : flow.states»
+				«FOR state : states»
 					«IF state.reactSequence !== null»
 						case «state.stateName.asEscapedIdentifier»:
 							«state.reactSequence.functionName»();
@@ -147,6 +149,5 @@ class EventDrivenStatemachine extends Statemachine {
 			}
 		}
 	'''
-	
 
 }

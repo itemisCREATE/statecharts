@@ -11,11 +11,11 @@
 package org.yakindu.sct.generator.c.eventdriven
 
 import com.google.inject.Inject
-import org.yakindu.base.types.Direction
+import org.yakindu.sct.generator.c.extensions.EventNaming
 import org.yakindu.sct.generator.c.extensions.Naming
-import org.yakindu.sct.generator.c.extensions.Navigation
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 
 /**
@@ -23,7 +23,7 @@ import org.yakindu.sct.model.sexec.naming.INamingService
  */
 class StatechartEventsHeader {
 	@Inject protected extension Naming
-	@Inject protected extension Navigation
+	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension INamingService
 	
@@ -32,6 +32,9 @@ class StatechartEventsHeader {
 	protected static final int BUFFER_SIZE = 20
 	
 	def content(ExecutionFlow it) {
+		if(!hasLocalEvents) {
+			return ''''''
+		}
 		'''
 		#ifndef «bufferSize»
 		#define «bufferSize» «BUFFER_SIZE»
@@ -47,10 +50,6 @@ class StatechartEventsHeader {
 		«generateEventStruct»
 		
 		«generateEventQueue»
-		
-		«eventFunctionPrototypes»
-		
-		«eventQueueFunctionPrototypes»
 		'''
 	}
 	
@@ -61,7 +60,7 @@ class StatechartEventsHeader {
 		 */
 		typedef enum  {
 			«invalidEventEnumName(it)» = SC_INVALID_EVENT_VALUE,
-			«FOR e : getAllEvents SEPARATOR ","»
+			«FOR e : internalScope.getLocalEvents SEPARATOR ","»
 				«eventEnumMemberName(e)»
 			«ENDFOR»
 		} «eventEnumName»;
@@ -69,12 +68,15 @@ class StatechartEventsHeader {
 	}
 	
 	def generateEventValueUnion(ExecutionFlow it) {
+		if(!hasLocalEventsWithValue) {
+			return ''''''
+		}
 		'''
 		/*
 		 * Union of all possible event value types.
 		 */
 		typedef union {
-			«FOR e : getAllEvents.filter[hasValue && direction != Direction::OUT]»
+			«FOR e : internalScope.getLocalEvents.filter[hasValue]»
 			«e.typeSpecifier.targetLanguageName» «eventEnumMemberName(e)»_value;
 			«ENDFOR»
 		} «eventValueUnionName»;
@@ -88,8 +90,10 @@ class StatechartEventsHeader {
 		 */
 		typedef struct {
 			«eventEnumName» name;
+			«IF hasLocalEventsWithValue»
 			sc_boolean has_value;
 			«eventValueUnionName» value;
+			«ENDIF»
 		} «eventStructTypeName»;
 		'''
 	}
@@ -105,26 +109,6 @@ class StatechartEventsHeader {
 			sc_integer push_index;
 			sc_integer size;
 		} «eventQueueTypeName»;
-		'''
-	}
-	
-	def eventFunctionPrototypes(ExecutionFlow it) {
-		'''
-		void «eventInitFunction»(«eventStructTypeName» * ev, «eventEnumName» name);
-
-		void «valueEventInitFunction»(«eventStructTypeName» * ev, «eventEnumName» name, void * value);
-		'''
-	}
-	
-	def eventQueueFunctionPrototypes(ExecutionFlow it) {
-		'''
-		void «eventQueueInitFunction»(«eventQueueTypeName» * eq);
-		
-		sc_integer «eventQueueSizeFunction»(«eventQueueTypeName» * eq);
-		
-		«eventStructTypeName» «eventQueuePopFunction»(«eventQueueTypeName» * eq);
-		
-		sc_boolean «eventQueuePushFunction»(«eventQueueTypeName» * eq, «eventStructTypeName» ev);
 		'''
 	}
 	
