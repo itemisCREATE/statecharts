@@ -58,15 +58,15 @@ public class GeneratorExecutorLookup {
 		IGeneratorDescriptor description = GeneratorExtensions.getGeneratorDescriptor(generatorId);
 		if (description == null)
 			throw new RuntimeException("No generator registered for ID: " + generatorId);
+		if (entry.getElementRef() == null || entry.getElementRef().eResource() == null) {
+			throw new RuntimeException("Could not resolve reference to model ");
+		}
 		final IGeneratorEntryExecutor executor = description.createExecutor();
 		if (executor == null)
 			throw new RuntimeException("Failed to create generator instance for ID:" + generatorId);
 		Injector injector = createInjector(entry, description, generatorId);
 		injector.injectMembers(executor);
 		ITypeSystem typeSystem = injector.getInstance(ITypeSystem.class);
-		if (entry.getElementRef() == null || entry.getElementRef().eResource() == null) {
-			throw new RuntimeException("Could not resolve reference to model ");
-		}
 		if (typeSystem instanceof AbstractTypeSystem) {
 			ResourceSet set = entry.getElementRef().eResource().getResourceSet();
 			Resource typeSystemResource = ((AbstractTypeSystem) typeSystem).getResource();
