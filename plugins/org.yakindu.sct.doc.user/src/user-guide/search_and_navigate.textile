@@ -158,7 +158,7 @@ As can be seen in this case the search dialog has problems with searching refere
 
 h2(#search_and_nav_open_model_element). Open model element 
 
-_Open model element_ is an other kind of searching method. It can be used to quickly navigate to states and regions. To access _Open model element_, use the shortcut @[Ctrl+Shift+Q]@ or select _Navigate → Open model element_ in the main menu.
+_Open model element_ is another kind of searching method. It can be used to quickly navigate to states and regions. To access _Open model element_, use the shortcut @[Ctrl+Shift+Q]@ or select _Navigate → Open model element_ in the main menu.
 
 By doing so, the dialog shown in the next screenshot will open up.
 
@@ -182,7 +182,7 @@ Differences between _Open model element_ and _Search Dialog_ are slight, but not
 
 Navigating to a result can be done by double clicking the result or pressing _OK_ or @[Enter]@ on an selected match. 
 
-After doing so, the match will be saved. On reopening the dialog, saved model elements that matches the new search string will be displayed at the top of unsaved elements making it easier to navigate to them again at a later time.
+After doing so, the match will be saved. On reopening the dialog, saved model elements that match the new search string will be displayed at the top of unsaved elements making it easier to navigate to them again at a later time.
 !images/search_and_nav_open_model_element_dialog_saved_elements.png(Saved Elements)!
 
 Saved elements can be removed from history via selecting them and pressing @[Del]@ or right-click on a saved element and choosing _Remove from history_ in the context menu.
