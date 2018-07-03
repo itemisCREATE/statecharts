@@ -17,7 +17,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -28,8 +27,6 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIHelperImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMISaveImpl;
 import org.eclipse.emf.transaction.util.TransactionUtil;
-import org.eclipse.gmf.runtime.common.core.command.CommandResult;
-import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
@@ -85,22 +82,19 @@ public class ShadowModelValidationJob extends ValidationJob {
 	protected void cloneResource(final IProgressMonitor monitor, final Resource shadowResource)
 			throws ExecutionException {
 		final ByteArrayOutputStream bout = new ByteArrayOutputStream();
-		AbstractTransactionalCommand cmd = new AbstractTransactionalCommand(TransactionUtil.getEditingDomain(resource),
-				"", null) {
-			@Override
-			protected CommandResult doExecuteWithResult(final IProgressMonitor monitor, IAdaptable info)
-					throws ExecutionException {
+		try {
+			TransactionUtil.getEditingDomain(resource).runExclusive(() -> {
 				try {
 					XMISaveImpl saver = new XMISaveImpl(new XMIHelperImpl((XMLResource) resource));
 					saver.save((XMLResource) resource, bout, Collections.emptyMap());
 					bout.flush();
-				} catch (Throwable t) {
-					return CommandResult.newErrorCommandResult(t.getMessage());
+				} catch (Throwable tt) {
+					tt.printStackTrace();
 				}
-				return CommandResult.newOKCommandResult();
-			}
-		};
-		cmd.execute(monitor, null);
+			});
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
 		try {
 			shadowResource.load(new ByteArrayInputStream(bout.toByteArray()), Collections.emptyMap());
 		} catch (IOException e) {
