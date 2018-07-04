@@ -45,7 +45,8 @@ do
     esac
 done
 
-commonExcludes="https://github.com/Yakindu/.*|mailto:.*|https://itemisag.wistia.com/medias/9ek8usz18r|https://bugs.eclipse.org/.*"
+commonExcludes="http://groups.google.com/.*|https://github.com/Yakindu/.*|https://www.instagram.com/itemisag/|mailto:.*|https://itemisag.wistia.com/medias/9ek8usz18r|https://bugs.eclipse.org/.*|javascript:.*|tel:.*|https://cta-redirect.hubspot.com/|https://www.facebook.com/ItemisAg/"
+
 if [ "${target}" == "eclipsehelp" ]
 then
     checklink --broken --dir-redirects \
@@ -72,7 +73,7 @@ elif [ "${target}" == "web" ]
 then
     checklink --broken --dir-redirects \
 	--recursive --depth 1 \
-	--exclude "${commonExcludes}"'|http://groups.google.com/.*|javascript:.*|tel:.*|https://cta-redirect.hubspot.com/' \
+	--exclude "${commonExcludes}"'|http://github.com/Yakindu/statecharts.*' \
 	https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide/ \
 	https://www.itemis.com/en/yakindu/state-machine/documentation/tutorials/ \
         2>&1 | tee log.txt
