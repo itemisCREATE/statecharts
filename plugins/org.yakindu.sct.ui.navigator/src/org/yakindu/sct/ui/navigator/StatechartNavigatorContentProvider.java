@@ -12,20 +12,16 @@ package org.yakindu.sct.ui.navigator;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
-import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
-import org.eclipse.gmf.runtime.emf.core.GMFEditingDomainFactory;
+import org.eclipse.gmf.runtime.emf.core.util.CrossReferenceAdapter;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.viewers.Viewer;
@@ -33,6 +29,7 @@ import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.navigator.ICommonContentExtensionSite;
 import org.eclipse.ui.navigator.ICommonContentProvider;
+import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.navigator.utils.ComposedAdapterFactoryUtil;
 
 /**
@@ -42,40 +39,24 @@ import org.yakindu.sct.ui.navigator.utils.ComposedAdapterFactoryUtil;
  */
 public class StatechartNavigatorContentProvider implements ICommonContentProvider {
 
-	private AdapterFactoryContentProvider myAdapterFctoryContentProvier;
+	private AdapterFactoryContentProvider myAdapterFactoryContentProvier;
 
 	private static final Object[] EMPTY_ARRAY = new Object[0];
 
 	private Viewer myViewer;
 
-	private AdapterFactoryEditingDomain myEditingDomain;
+	private TransactionalEditingDomain editingDomain;
 
 	private WorkspaceSynchronizer myWorkspaceSynchronizer;
 
 	private Runnable myViewerRefreshRunnable;
 
-	private ECrossReferenceAdapter myCrossReferenceAdapter;
-
 	private ViewerFilter viewerFilter;
 
 	public StatechartNavigatorContentProvider() {
-		myAdapterFctoryContentProvier = new AdapterFactoryContentProvider(ComposedAdapterFactoryUtil.FACTORY);
+		myAdapterFactoryContentProvier = new AdapterFactoryContentProvider(ComposedAdapterFactoryUtil.FACTORY);
+		editingDomain = DiagramPartitioningUtil.getSharedDomain();
 
-		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE.createEditingDomain();
-		myEditingDomain = (AdapterFactoryEditingDomain) editingDomain;
-		myEditingDomain.setResourceToReadOnlyMap(new HashMap<Resource, Boolean>() {
-			/**
-			* 
-			*/
-			private static final long serialVersionUID = -7623655803631543084L;
-
-			public Boolean get(Object key) {
-				if (!containsKey(key)) {
-					put((Resource) key, Boolean.TRUE);
-				}
-				return super.get(key);
-			}
-		});
 		myViewerRefreshRunnable = new Runnable() {
 			public void run() {
 				if (myViewer != null && !myViewer.getControl().isDisposed()) {
@@ -88,11 +69,6 @@ public class StatechartNavigatorContentProvider implements ICommonContentProvide
 			}
 
 			public boolean handleResourceChanged(final Resource resource) {
-				for (Iterator<Resource> it = myEditingDomain.getResourceSet().getResources().iterator(); it
-						.hasNext();) {
-					Resource nextResource = (Resource) it.next();
-					nextResource.unload();
-				}
 				if (myViewer != null) {
 					myViewer.getControl().getDisplay().asyncExec(myViewerRefreshRunnable);
 				}
@@ -100,11 +76,6 @@ public class StatechartNavigatorContentProvider implements ICommonContentProvide
 			}
 
 			public boolean handleResourceDeleted(Resource resource) {
-				for (Iterator<Resource> it = myEditingDomain.getResourceSet().getResources().iterator(); it
-						.hasNext();) {
-					Resource nextResource = (Resource) it.next();
-					nextResource.unload();
-				}
 				if (myViewer != null) {
 					myViewer.getControl().getDisplay().asyncExec(myViewerRefreshRunnable);
 				}
@@ -112,33 +83,18 @@ public class StatechartNavigatorContentProvider implements ICommonContentProvide
 			}
 
 			public boolean handleResourceMoved(Resource resource, final URI newURI) {
-				for (Iterator<Resource> it = myEditingDomain.getResourceSet().getResources().iterator(); it
-						.hasNext();) {
-					Resource nextResource = (Resource) it.next();
-					nextResource.unload();
-				}
 				if (myViewer != null) {
 					myViewer.getControl().getDisplay().asyncExec(myViewerRefreshRunnable);
 				}
 				return true;
 			}
 		});
-
-		myCrossReferenceAdapter = new ECrossReferenceAdapter();
-		myEditingDomain.getResourceSet().eAdapters().add(myCrossReferenceAdapter);
 	}
 
 	public void dispose() {
 		myWorkspaceSynchronizer.dispose();
 		myWorkspaceSynchronizer = null;
 		myViewerRefreshRunnable = null;
-		for (Iterator<Resource> it = myEditingDomain.getResourceSet().getResources().iterator(); it.hasNext();) {
-			Resource resource = (Resource) it.next();
-			resource.unload();
-		}
-		myEditingDomain.getResourceSet().eAdapters().remove(myCrossReferenceAdapter);
-		((TransactionalEditingDomain) myEditingDomain).dispose();
-		myEditingDomain = null;
 	}
 
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
@@ -163,13 +119,13 @@ public class StatechartNavigatorContentProvider implements ICommonContentProvide
 		if (parentElement instanceof IFile) {
 			IFile file = (IFile) parentElement;
 			URI fileURI = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-			Resource resource = myEditingDomain.getResourceSet().getResource(fileURI, true);
-			return wrapEObjects(myAdapterFctoryContentProvier.getChildren(resource), parentElement);
+			Resource resource = editingDomain.getResourceSet().getResource(fileURI, true);
+			return wrapEObjects(myAdapterFactoryContentProvier.getChildren(resource), parentElement);
 		}
 
 		if (parentElement instanceof DomainNavigatorItem) {
 			return wrapEObjects(
-					myAdapterFctoryContentProvier.getChildren(((DomainNavigatorItem) parentElement).getEObject()),
+					myAdapterFactoryContentProvier.getChildren(((DomainNavigatorItem) parentElement).getEObject()),
 					parentElement);
 		}
 		return EMPTY_ARRAY;
@@ -180,7 +136,7 @@ public class StatechartNavigatorContentProvider implements ICommonContentProvide
 		for (int i = 0; i < objects.length; i++) {
 			if (objects[i] instanceof EObject) {
 				DomainNavigatorItem navigatorItem = new DomainNavigatorItem((EObject) objects[i], parentElement,
-						myAdapterFctoryContentProvier);
+						myAdapterFactoryContentProvier);
 				// Check if object has a corresponding View
 				if (!(objects[i] instanceof View)) {
 					EObject eObject = (EObject) objects[i];
@@ -193,8 +149,13 @@ public class StatechartNavigatorContentProvider implements ICommonContentProvide
 	}
 
 	private View getReferencigView(EObject eObject) {
-
-		Collection<Setting> inverseReferences = myCrossReferenceAdapter.getInverseReferences(eObject, true);
+		
+		CrossReferenceAdapter refAdapter = (CrossReferenceAdapter) CrossReferenceAdapter
+				.getExistingCrossReferenceAdapter(eObject.eResource());
+		if(refAdapter == null)
+			return null;
+		@SuppressWarnings("unchecked")
+		Collection<Setting> inverseReferences = refAdapter.getInverseReferences(eObject, true);
 
 		for (Setting setting : inverseReferences) {
 			if (setting.getEObject() instanceof View
