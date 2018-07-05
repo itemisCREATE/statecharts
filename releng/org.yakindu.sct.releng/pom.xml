@@ -285,7 +285,7 @@
 					<plugin>
 					<groupId>org.eclipse.xtend</groupId>
 					<artifactId>xtend-maven-plugin</artifactId>
-					<version>${xtextVersion}</version>
+					<version>${xtext-version}</version>
 					<dependencies>
 						<dependency>
 						    <groupId>org.eclipse.jdt</groupId>
