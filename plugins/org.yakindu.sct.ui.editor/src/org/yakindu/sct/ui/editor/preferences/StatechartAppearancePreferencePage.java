@@ -82,10 +82,13 @@ public class StatechartAppearancePreferencePage extends FieldEditorPreferencePag
 		Composite composite = createGroupComposite(main, "Miscellaneous");
 
 		// Syntax coloring:
-		BooleanFieldEditor fontScalingEditor = new BooleanFieldEditor(
-					StatechartPreferenceConstants.PREF_FONT_SCALING, "Enable font scaling", composite);
+		BooleanFieldEditor fontScalingEditor = new BooleanFieldEditor(StatechartPreferenceConstants.PREF_FONT_SCALING,
+				"Enable font scaling (Windows)", composite);
 		addField(fontScalingEditor);
-		
+		if (System.getProperty("os.name").toLowerCase().indexOf("win") == -1) {
+			fontScalingEditor.setEnabled(false, composite);
+		}
+
 		// Syntax coloring:
 		BooleanFieldEditor syntaxColoringEditor = new BooleanFieldEditor(
 				StatechartPreferenceConstants.PREF_SYNTAX_COLORING, "Enable syntax coloring", composite);

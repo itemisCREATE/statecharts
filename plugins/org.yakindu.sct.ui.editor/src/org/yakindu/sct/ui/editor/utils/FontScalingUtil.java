@@ -13,13 +13,14 @@ import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 public class FontScalingUtil {
 
 	private static final int WINDOWS_DEFAULT_DPI = 96;
+	private static final String OPERATING_SYSTEM = System.getProperty("os.name").toLowerCase();
 
 	public static FontData scaleFont(FontData fontData) {
 		return scaleFont(fontData, 0);
 	}
 
 	public static FontData scaleFont(FontData fontData, int style) {
-		if (DiagramActivator.getDefault().getPreferenceStore()
+		if (OPERATING_SYSTEM.indexOf("win") == -1 || DiagramActivator.getDefault().getPreferenceStore()
 				.getBoolean(StatechartPreferenceConstants.PREF_FONT_SCALING)) {
 			return fontData;
 		}

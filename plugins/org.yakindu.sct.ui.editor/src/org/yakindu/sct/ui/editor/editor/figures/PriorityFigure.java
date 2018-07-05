@@ -32,8 +32,11 @@ public class PriorityFigure extends Ellipse {
 	private static final FontData SMALL_FONT = new FontData("Arial", 7, SWT.NORMAL);
 	private static final FontData NORMAL_FONT = new FontData("Arial", 8, SWT.NORMAL);
 	protected IMapMode mapMode;
+	private int priority;
+	private Label label;
 
 	public PriorityFigure(IMapMode mapMode, int priority) {
+		this.priority = priority;
 		this.setLayoutManager(new StackLayout());
 		setForegroundColor(ColorConstants.black);
 		setBackgroundColor(ColorConstants.white);
@@ -41,7 +44,7 @@ public class PriorityFigure extends Ellipse {
 		setOpaque(false);
 		setFill(true);
 		this.setLineWidth(-1);
-		Label label = new Label(String.valueOf(priority));
+		label = new Label(String.valueOf(priority));
 		label.setFont(createFont(priority));
 		add(label);
 	}
@@ -49,6 +52,10 @@ public class PriorityFigure extends Ellipse {
 	protected Font createFont(int priority) {
 		return JFaceResources.getResources().createFont(
 				FontDescriptor.createFrom(FontScalingUtil.scaleFont(priority > 9 ? SMALL_FONT : NORMAL_FONT)));
+	}
+
+	public void refreshFont() {
+		label.setFont(createFont(priority));
 	}
 
 }

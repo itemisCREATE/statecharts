@@ -69,7 +69,7 @@ public class PreferenceInitializer extends DiagramPreferenceInitializer implemen
 		// Syntax coloring
 		getPreferenceStore().setDefault(StatechartPreferenceConstants.PREF_SYNTAX_COLORING, false);
 		//Font scaling
-		getPreferenceStore().setDefault(StatechartPreferenceConstants.PREF_FONT_SCALING, true);
+		getPreferenceStore().setDefault(StatechartPreferenceConstants.PREF_FONT_SCALING, false);
 
 	}
 
