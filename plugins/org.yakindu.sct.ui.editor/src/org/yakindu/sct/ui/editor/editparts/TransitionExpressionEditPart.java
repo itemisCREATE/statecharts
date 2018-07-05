@@ -117,8 +117,4 @@ public class TransitionExpressionEditPart extends PlugableExternalXtextLabelEdit
 		return SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION;
 	}
 	
-	@Override
-	protected void setFont(FontData fontData) {
-		super.setFont(FontScalingUtil.scaleFont(fontData));
-	}
 }

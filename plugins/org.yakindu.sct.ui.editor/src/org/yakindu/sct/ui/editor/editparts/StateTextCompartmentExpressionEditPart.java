@@ -44,10 +44,4 @@ public class StateTextCompartmentExpressionEditPart extends SpecificationElement
 	protected int getEditorStyles() {
 		return SWT.MULTI | SWT.WRAP;
 	}
-
-	@Override
-	protected void setFont(FontData fontData) {
-		super.setFont(FontScalingUtil.scaleFont(fontData));
-	}
-
 }

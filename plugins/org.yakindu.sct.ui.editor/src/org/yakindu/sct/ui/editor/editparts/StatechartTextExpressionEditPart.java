@@ -57,8 +57,4 @@ public class StatechartTextExpressionEditPart extends SpecificationElementEditPa
 		return SWT.MULTI | SWT.V_SCROLL | SWT.WRAP;
 	}
 
-	@Override
-	protected void setFont(FontData fontData) {
-		super.setFont(FontScalingUtil.scaleFont(fontData));
-	}
 }
