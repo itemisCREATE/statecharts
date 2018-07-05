@@ -270,13 +270,6 @@
 						<groupId>org.eclipse.tycho</groupId>
 						<artifactId>target-platform-configuration</artifactId>
 						<version>${tycho-version}</version>
-						<dependencies>
-							<dependency>
-							    	<groupId>org.eclipse.jdt</groupId>
-						    		<artifactId>org.eclipse.jdt.core</artifactId>
-						    		<version>3.13.102</version>
-								</dependency>
-						</dependencies>
 						<configuration>
 							<includePackedArtifacts>true</includePackedArtifacts>
 							<target>
@@ -288,6 +281,19 @@
 								</artifact>
 							</target>
 						</configuration>
+					</plugin>
+					<!-- workaround for https://github.com/eclipse/xtext/issues/1231 -->
+					<plugin>
+						<groupId>org.eclipse.xtend</groupId>
+						<artifactId>xtend-maven-plugin</artifactId>
+						<version>${xtext-version}</version>
+						<dependencies>
+							<dependency>
+							    	<groupId>org.eclipse.jdt</groupId>
+						    		<artifactId>org.eclipse.jdt.core</artifactId>
+						    		<version>3.13.102</version>
+								</dependency>
+						</dependencies>
 					</plugin>
 				</plugins>
 			</build>
