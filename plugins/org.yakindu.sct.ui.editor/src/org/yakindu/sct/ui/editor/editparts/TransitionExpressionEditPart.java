@@ -25,6 +25,7 @@ import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
 import org.eclipse.gmf.runtime.notation.StringValueStyle;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.FontData;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.xtext.utils.gmf.directedit.IXtextAwareEditPart;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
@@ -33,6 +34,7 @@ import org.yakindu.sct.ui.editor.commands.ToggleShowDocumentationCommand;
 import org.yakindu.sct.ui.editor.editparts.SpecificationElementEditPart.MultilineTextCellEditor;
 import org.yakindu.sct.ui.editor.policies.ContextSensitiveHelpPolicy;
 import org.yakindu.sct.ui.editor.policies.TransitionExpressionComponentEditPolicy;
+import org.yakindu.sct.ui.editor.utils.FontScalingUtil;
 import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 
@@ -113,5 +115,10 @@ public class TransitionExpressionEditPart extends PlugableExternalXtextLabelEdit
 			return BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION;
 		}
 		return SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION;
+	}
+	
+	@Override
+	protected void setFont(FontData fontData) {
+		super.setFont(FontScalingUtil.scaleFont(fontData));
 	}
 }

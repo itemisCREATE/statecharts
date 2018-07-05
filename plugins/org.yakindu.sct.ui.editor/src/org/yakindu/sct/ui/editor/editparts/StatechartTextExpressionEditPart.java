@@ -18,9 +18,11 @@ import static org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles.CO
 import org.eclipse.gef.editpolicies.RootComponentEditPolicy;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.FontData;
 import org.yakindu.base.xtext.utils.gmf.figures.SyntaxColoringLabel;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.policies.ContextSensitiveHelpPolicy;
+import org.yakindu.sct.ui.editor.utils.FontScalingUtil;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 
 /**
@@ -45,13 +47,18 @@ public class StatechartTextExpressionEditPart extends SpecificationElementEditPa
 		// Disables deletion of the text compartment via keyboard
 		installEditPolicy(COMPONENT_ROLE, new RootComponentEditPolicy());
 		removeEditPolicy(PRIMARY_DRAG_ROLE);
-		installEditPolicy(SELECTION_FEEDBACK_ROLE, new ContextSensitiveHelpPolicy(
-				HelpContextIds.SC_PROPERTIES_STATECHART_EXPRESSION));
+		installEditPolicy(SELECTION_FEEDBACK_ROLE,
+				new ContextSensitiveHelpPolicy(HelpContextIds.SC_PROPERTIES_STATECHART_EXPRESSION));
 		removeEditPolicy(CONNECTION_HANDLES_ROLE);
 	}
 
 	@Override
 	protected int getEditorStyles() {
 		return SWT.MULTI | SWT.V_SCROLL | SWT.WRAP;
+	}
+
+	@Override
+	protected void setFont(FontData fontData) {
+		super.setFont(FontScalingUtil.scaleFont(fontData));
 	}
 }
