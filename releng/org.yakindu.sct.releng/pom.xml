@@ -359,6 +359,13 @@
 								</artifact>
 							</target>
 						</configuration>
+						<dependencies>
+							<dependency>
+							    <groupId>org.eclipse.jdt</groupId>
+							    <artifactId>org.eclipse.jdt.core</artifactId>
+							    <version>3.13.102</version>
+							</dependency>
+						</dependencies>
 					</plugin>
 					<plugin>
 						<!-- Workaround for https://github.com/eclipse/xtext/issues/1231 -->
