@@ -109,9 +109,9 @@ public class SharedEditingDomainFactory extends DiagramEditingDomainFactory
 								IResource resource = delta.getResource();
 								if (resource instanceof IFile) {
 									URI uri = URI.createPlatformResourceURI(resource.getFullPath().toString(), true);
-									Resource resource2 = editingDomain.getResourceSet().getResource(uri, false);
-									if (resource2 != null)
-										resource2.unload();
+									Resource existingResource = editingDomain.getResourceSet().getResource(uri, false);
+									if (existingResource != null && !(existingResource instanceof AbstractSCTResource))
+										existingResource.unload();
 
 								}
 							}
