@@ -102,22 +102,27 @@ public class SharedEditingDomainFactory extends DiagramEditingDomainFactory
 			public void resourceChanged(IResourceChangeEvent event) {
 				IResourceDelta delta = event.getDelta();
 				try {
-					delta.accept(new IResourceDeltaVisitor() {
-						@Override
-						public boolean visit(IResourceDelta delta) throws CoreException {
-							if (delta.getKind() == IResourceDelta.ADDED) {
-								IResource resource = delta.getResource();
-								if (resource instanceof IFile) {
-									URI uri = URI.createPlatformResourceURI(resource.getFullPath().toString(), true);
-									Resource existingResource = editingDomain.getResourceSet().getResource(uri, false);
-									if (existingResource != null && !(existingResource instanceof AbstractSCTResource))
-										existingResource.unload();
+					if (delta != null) {
+						delta.accept(new IResourceDeltaVisitor() {
+							@Override
+							public boolean visit(IResourceDelta delta) throws CoreException {
+								if (delta.getKind() == IResourceDelta.ADDED) {
+									IResource resource = delta.getResource();
+									if (resource instanceof IFile) {
+										URI uri = URI.createPlatformResourceURI(resource.getFullPath().toString(),
+												true);
+										Resource existingResource = editingDomain.getResourceSet().getResource(uri,
+												false);
+										if (existingResource != null
+												&& !(existingResource instanceof AbstractSCTResource))
+											existingResource.unload();
 
+									}
 								}
+								return true;
 							}
-							return true;
-						}
-					});
+						});
+					}
 				} catch (CoreException e) {
 					e.printStackTrace();
 				}
