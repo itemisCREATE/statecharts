@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Example Template</title>
+<title>YAKINDU Statechart Tools Default Domain</title>
 <link href="./css/bootstrap.css" rel="stylesheet">
 </head>
 <body class="body-container">
@@ -11,11 +11,12 @@
     <h2>YAKINDU Statechart Tools - Default Domain</h2>
     <div>
       <p>
-      YAKINDU Statechart Tools 'Default Domain' is a platform independent domain with a basic type system. Choose this domain if you are new to YAKINDU Statechart Tools or you want to develop a generic statemachine.
+      YAKINDU Statechart Tools 'Default Domain' is a platform independent domain with a basic type system.
+      Choose this domain if you are new to YAKINDU Statechart Tools or you want to develop a generic statemachine, for for example to generate C, C++ or Java code.
       <br />
       </p>
-      <h3>Default Type System</h3>
-
+      
+  <h3>Default Type System</h3>
     The 'Default Domain' integrated type system consists of the following simple types:
     <ul>
 	<li>integer</li>
@@ -24,9 +25,10 @@
 	<li>string</li>
 	<li>void</li>
 	</ul>
-    
-    //TBD
-    
+    <p>
+  	Depending on the code generator, these types will be mapped to language specific types.
+  	For C and C++, this is configurable via the generated sc_types.h. For exmaple, the type integer will be mapped to an int32_t.
+    </p>
     </div>
 </body>
 </html>
