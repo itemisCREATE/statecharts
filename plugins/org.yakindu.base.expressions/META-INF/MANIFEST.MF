@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Base Expressions
 Bundle-Vendor: statecharts.org
-Bundle-Version: 3.2.0.qualifier
+Bundle-Version: 3.4.0.qualifier
 Bundle-SymbolicName: org.yakindu.base.expressions; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
@@ -31,6 +31,7 @@ Export-Package: org.yakindu.base.expressions,
  org.yakindu.base.expressions.formatting,
  org.yakindu.base.expressions.generator,
  org.yakindu.base.expressions.inferrer,
+ org.yakindu.base.expressions.linking,
  org.yakindu.base.expressions.parser.antlr,
  org.yakindu.base.expressions.parser.antlr.internal,
  org.yakindu.base.expressions.scoping,

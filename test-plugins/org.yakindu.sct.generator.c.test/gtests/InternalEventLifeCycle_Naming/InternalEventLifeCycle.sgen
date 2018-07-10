@@ -1,0 +1,22 @@
+GeneratorModel for yakindu::c {
+	statechart InternalEventLifeCycle {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "InternalEventLifeCycle_Naming"
+		}
+		feature IdentifierSettings {
+			statemachinePrefix =  "intlEvent" 
+		}
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineEnterSequences = false 
+			inlineExitActions = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEntries = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+		}
+	}
+}

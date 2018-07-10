@@ -16,11 +16,11 @@ import static org.junit.Assert.assertTrue;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.TYPE_INTEGER;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.findState;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.findStateFullyQualified;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createEntry;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createRegion;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createState;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createStatechart;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createTransition;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createEntry;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createRegion;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createState;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createStatechart;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createTransition;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createEntryAssignment;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createExitAssignment;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createInterfaceScope;
@@ -43,7 +43,6 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-
 public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 
 	/**

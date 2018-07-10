@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  * 	itemis AG - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.model.stext.test.validation;
 
@@ -15,12 +15,11 @@ import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorCod
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorMsg;
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.warningMsg;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_ASSIGNMENT_TO_CONST_MSG;
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_LEFT_HAND_ASSIGNMENT_MSG;
-import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_OPTIONAL_MUST_BE_LAST_CODE;
-import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_VAR_ARGS_LAST_CODE;
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE;
+import static org.yakindu.base.types.validation.TypesJavaValidator.ERROR_OPTIONAL_MUST_BE_LAST_CODE;
+import static org.yakindu.base.types.validation.TypesJavaValidator.ERROR_VAR_ARGS_LAST_CODE;
 import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
 
 import java.util.HashMap;
@@ -36,6 +35,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.expressions.validation.ExpressionsJavaValidator;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.ITypeSystem;
@@ -47,6 +47,7 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
+import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
@@ -69,7 +70,7 @@ import com.google.inject.Inject;
 
 /**
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 @RunWith(XtextRunner.class)
 @InjectWith(STextInjectorProvider.class)
@@ -89,7 +90,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	/**
-	 * 
+	 *
 	 * @see STextJavaValidator#checkAssignmentExpression(org.yakindu.sct.model.stext.stext.AssignmentExpression)
 	 */
 	@Test
@@ -287,7 +288,8 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		String scope = "@CycleBased";
 		EObject model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(model);
-		validationResult.assertError(STextJavaValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);;
+		validationResult.assertError(STextJavaValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
+		;
 
 		scope = "@EventDriven";
 		model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
@@ -402,8 +404,22 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		validationResult.assertOK();
 	}
 
+	@Test
+	public void checkPostFixOperatorOnlyOnVariables() {
+		EObject model = super.parseExpression("ABC.intVar++", Expression.class.getSimpleName(), interfaceScope());
+		AssertableDiagnostics validationResult = tester.validate(model);
+		validationResult.assertOK();
+		model = super.parseExpression("intVar++", Expression.class.getSimpleName(), internalScope());
+		validationResult = tester.validate(model);
+		validationResult.assertOK();
+		model = super.parseExpression("5++", Expression.class.getSimpleName(), interfaceScope());
+		validationResult = tester.validate(model);
+		validationResult.assertError(ExpressionsJavaValidator.POSTFIX_ONLY_ON_VARIABLES_CODE);
+
+	}
+
 	/**
-	 * 
+	 *
 	 * @see STextJavaValidator#checkReactionTrigger(org.yakindu.sct.model.stext.stext.ReactionTrigger)
 	 */
 	@Test
@@ -616,7 +632,8 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		EObject model = super.parseExpression(decl, InternalScope.class.getSimpleName());
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertDiagnosticsCount(1);
-		result.assertWarningContains(String.format(STextJavaValidator.DECLARATION_DEPRECATED, "external"));	}
+		result.assertWarningContains(String.format(STextJavaValidator.DECLARATION_DEPRECATED, "external"));
+	}
 
 	@Test
 	public void checkDeprecatedLocalEventDefinition() {
@@ -626,6 +643,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		result.assertDiagnosticsCount(1);
 		result.assertWarningContains(String.format(STextJavaValidator.DECLARATION_DEPRECATED, "local"));
 	}
+
 	/**
 	 * checks that each @Check method of {@link STextJavaValidator} has a @Test
 	 * method in this class with the same name
@@ -642,7 +660,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Entry) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics, new HashMap<>());
 			}
 		}
 
@@ -680,7 +698,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnusedExitPoint.sct");
 		doValidateAllContents(Exit.class);
 
-		assertIssueCount(diagnostics, 1);
+		assertIssueCount(diagnostics, 2);
 		assertError(diagnostics, EXIT_UNUSED);
 
 		resetDiagnostics();
@@ -688,29 +706,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		doValidateAllContents(Exit.class);
 
 		assertIssueCount(diagnostics, 1);
-		assertError(diagnostics, EXIT_DEFAULT_UNUSED);
-	}
-
-	protected void doValidateAllContents(Class<? extends EObject> clazz) {
-		Iterator<EObject> iter = statechart.eAllContents();
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (clazz.isInstance(element)) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
-			}
-		}
-	}
-
-	protected void assertAllTransitionsAreValid(Class<? extends EObject> clazz) {
-		Iterator<EObject> iter;
-		iter = statechart.eAllContents();
-
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (clazz.isInstance(element)) {
-				assertTrue(validator.validate(element, diagnostics, new HashMap<Object, Object>()));
-			}
-		}
+		assertError(diagnostics, EXIT_UNUSED);
 	}
 
 	@Test
@@ -764,10 +760,10 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 			EObject element = iter.next();
 			if (element instanceof Transition) {
 				((Transition) element).setTrigger(trigger);
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics, new HashMap<>());
 			}
 			if (element instanceof State) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics, new HashMap<>());
 			}
 		}
 
@@ -783,10 +779,10 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 			EObject element = iter.next();
 			if (element instanceof Transition) {
 				((Transition) element).setTrigger(trigger);
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics, new HashMap<>());
 			}
 			if (element instanceof State) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics, new HashMap<>());
 			}
 		}
 		assertIssueCount(diagnostics, 4);
@@ -800,12 +796,21 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Transition) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics, new HashMap<>());
 			}
 		}
 
 		assertIssueCount(diagnostics, 2);
 		assertError(diagnostics, EXITPOINTSPEC_WITH_TRIGGER);
+	}
+
+	@Test
+	public void checkExitTransitionExists() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "NoExitTransition.sct");
+
+		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics, EXIT_UNUSED);
 	}
 
 	@Test
@@ -815,6 +820,15 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
 		assertIssueCount(diagnostics, 2);
 		assertError(diagnostics, ERROR_ASSIGNMENT_TO_CONST_MSG);
+	}
+
+	@Test
+	public void checkSyncNoTriggersOnOutgoingTransition() {
+		Statechart statechart = AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "SynchronizationExitTransition.sct");
+		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
+		assertIssueCount(diagnostics, 1);
+		assertWarning(diagnostics, SYNC_OUTGOING_TRIGGER);
 	}
 
 	@Test
@@ -844,17 +858,18 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		assertIssueCount(diagnostics, 5);
 		assertWarning(diagnostics, INTERNAL_DECLARATION_UNUSED);
 	}
-	
+
 	@Test
 	public void checkImportExists() {
-		Scope context = (Scope) parseExpression("import: does.not.exist", ImportScope.class.getSimpleName());
+		Scope context = (Scope) parseExpression("import: \"does.not.exist\"", ImportScope.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(context);
-		validationResult.assertErrorContains(String.format(STextValidationMessages.IMPORT_NOT_RESOLVED_MSG,"does.not.exist"));
+		validationResult
+				.assertErrorContains(String.format(STextValidationMessages.IMPORT_NOT_RESOLVED_MSG, "does.not.exist"));
 	}
-	
+
 	@Test
 	public void checkDuplicateImport() {
-		//Can't be checked here
+		// Can't be checked here
 	}
 
 	@Test
@@ -1012,6 +1027,34 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		result = tester.validate(model);
 		result.assertAll(warningMsg("Duplicate"), warningMsg("Duplicate"), errorMsg("Duplicate"),
 				errorMsg("Duplicate"));
+	}
+
+	@Test
+	public void checkUnknownEntry() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnknownEntryPoint.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Vertex) {
+				validator.validate(element, diagnostics, new HashMap<>());
+			}
+		}
+		assertIssueCount(diagnostics, 1);
+		assertWarning(diagnostics, ENTRY_NOT_EXIST + "'doesNotExist'");
+	}
+
+	@Test
+	public void checkNeverUsedExit() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnusedExitPoint2.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Exit) {
+				validator.validate(element, diagnostics, new HashMap<>());
+			}
+		}
+		assertIssueCount(diagnostics, 1);
+		assertWarning(diagnostics, EXIT_NEVER_USED + "'unusedExitPoint'");
 	}
 
 }

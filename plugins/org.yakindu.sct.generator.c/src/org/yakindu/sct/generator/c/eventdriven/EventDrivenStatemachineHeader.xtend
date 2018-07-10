@@ -11,8 +11,8 @@
 package org.yakindu.sct.generator.c.eventdriven
 
 import com.google.inject.Inject
-import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.StatemachineHeader
+import org.yakindu.sct.generator.c.extensions.EventNaming
 import org.yakindu.sct.model.sexec.ExecutionFlow
 
 class EventDrivenStatemachineHeader extends StatemachineHeader {
@@ -22,15 +22,19 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 	override preStatechartDeclarations(ExecutionFlow it) {
 		'''
 		«super.preStatechartDeclarations(it)»
+		«IF hasLocalEvents»
 		
 		«events.content(it)»
+		«ENDIF»
 		'''
 	}
 	
 	override statemachineTypeStructContent(ExecutionFlow it) {
 		'''
 		«super.statemachineTypeStructContent(it)»
+		«IF hasLocalEvents»
 		«eventQueueTypeName» internal_event_queue;
+		«ENDIF»
 		'''
 	}
 	

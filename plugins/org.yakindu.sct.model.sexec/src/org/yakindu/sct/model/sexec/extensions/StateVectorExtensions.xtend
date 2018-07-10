@@ -47,7 +47,7 @@ class StateVectorExtensions {
 			var regionVector = fs.superScope.stateVector
 			for ( i : regionVector.offset ..< regionVector.offset + regionVector.size) {
 				// create a list for the slot if it does not already exist.
-				if (vector.get(i) == null) {
+				if (vector.get(i) === null) {
 					vector.set(i, new ArrayList<ExecutionState>())
 				}
 				// and add the final state to it.
@@ -64,7 +64,7 @@ class StateVectorExtensions {
 	 * Checks if all state vector positions are covered by states. 
 	 */
 	def boolean isCompletelyCovered(List<ExecutionState>[] finalStateImpactVector) {
-		finalStateImpactVector.forall[ l | (l != null) && (!l.isEmpty) ]
+		finalStateImpactVector.forall[ l | (l !== null) && (!l.isEmpty) ]
 	}
 	
 	

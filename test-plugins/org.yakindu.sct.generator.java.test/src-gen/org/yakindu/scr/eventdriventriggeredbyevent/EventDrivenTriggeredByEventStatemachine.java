@@ -44,8 +44,6 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 	private ITimer timer;
 	
 	private final boolean[] timeEvents = new boolean[1];
-	
-	
 	public EventDrivenTriggeredByEventStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}

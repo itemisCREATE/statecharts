@@ -81,6 +81,8 @@ public class SGenUserHelpDocumentationProvider extends AbstractUserHelpDocumenta
 	 * @return the documentation snippet as HTML code.
 	 */
 	protected String getFeatureTypeDocumentation(String name) {
+		if(name == null)
+			return EMPTY_DOCUMENTATION;
 		name = CONTEXT_ID + "_" + name.toLowerCase();
 
 		/* Lookup all help resources, i.e., files containing documentation: */

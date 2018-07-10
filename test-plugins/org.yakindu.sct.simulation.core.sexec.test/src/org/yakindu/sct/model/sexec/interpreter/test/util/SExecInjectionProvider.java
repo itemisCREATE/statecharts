@@ -24,7 +24,7 @@ import com.google.inject.Injector;
 public class SExecInjectionProvider implements IInjectorProvider {
 
 	public Injector getInjector() {
-		return Guice.createInjector(new GenericSimulationModule());
+		return Guice.createInjector(new InterpreterTestModule());
 	}
 
 }

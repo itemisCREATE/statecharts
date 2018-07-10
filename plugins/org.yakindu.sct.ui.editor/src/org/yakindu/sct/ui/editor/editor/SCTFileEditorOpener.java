@@ -64,7 +64,7 @@ public class SCTFileEditorOpener implements IURIEditorOpener {
 						DiagramPartitioningUtil.selectElementsInDiagram(diagramEditor,
 								Arrays.asList(new EditPart[] { targetEditPart }));
 					}
-
+					return diagramEditor;
 				}
 				return editor;
 			}

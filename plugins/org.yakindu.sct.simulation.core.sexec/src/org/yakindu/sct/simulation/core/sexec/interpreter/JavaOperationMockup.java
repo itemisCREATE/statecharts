@@ -12,6 +12,7 @@ package org.yakindu.sct.simulation.core.sexec.interpreter;
 
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.WrappedException;
@@ -20,6 +21,7 @@ import org.yakindu.base.expressions.interpreter.IExecutionSlotResolver;
 import org.yakindu.base.expressions.interpreter.IOperationMockup;
 import org.yakindu.base.types.Operation;
 import org.yakindu.sct.commons.WorkspaceClassLoaderFactory;
+import org.yakindu.sct.model.stext.stext.InterfaceScope;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -44,8 +46,8 @@ public class JavaOperationMockup implements IOperationMockup {
 	public void initOperationCallbacks(IProject project, String[] classes) {
 		callbacks = Lists.newArrayList();
 
-		ClassLoader classLoader = new WorkspaceClassLoaderFactory().createClassLoader(project, getClass()
-				.getClassLoader());
+		ClassLoader classLoader = new WorkspaceClassLoaderFactory().createClassLoader(project,
+				getClass().getClassLoader());
 		try {
 			if (classes.length > 0)
 				for (String string : classes) {
@@ -79,8 +81,17 @@ public class JavaOperationMockup implements IOperationMockup {
 	}
 
 	public Object execute(Operation definition, Object[] parameter) {
-		PolymorphicDispatcher<Object> dispatcher = new PolymorphicDispatcher<Object>(definition.getName(), definition
-				.getParameters().size(), definition.getParameters().size(), callbacks);
+		List<Object> targets = callbacks;
+		if (definition.eContainer() instanceof InterfaceScope) {
+			String className = ((InterfaceScope) definition.eContainer()).getName();
+			if (className != null) {
+				targets = callbacks.stream().filter(c -> className.equals(c.getClass().getSimpleName()))
+						.collect(Collectors.toList());
+			}
+		}
+		PolymorphicDispatcher<Object> dispatcher = new PolymorphicDispatcher<Object>(definition.getName(),
+				definition.getParameters().size(), definition.getParameters().size(),
+				targets.size() > 0 ? targets : callbacks);
 		try {
 			return dispatcher.invoke(parameter);
 		} catch (Exception ex) {

@@ -13,7 +13,6 @@ package org.yakindu.sct.generator.cpp.eventdriven
 import com.google.inject.Inject
 import java.util.List
 import org.yakindu.base.types.Direction
-import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.cpp.StatemachineHeader
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.stext.stext.EventDefinition
@@ -35,20 +34,16 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 		'''
 	}
 	
-	override protected generatePublicClassmembers(ExecutionFlow it) {
-		'''
-		«super.generatePublicClassmembers(it)»
-		'''
-	}
-	
 	override protected generatePrivateClassmembers(ExecutionFlow it) {
 		'''
-		private:
+			«super.generatePrivateClassmembers(it)»
+			«IF hasLocalEvents»
 			std::deque<«eventNamespaceName»::SctEvent*> internalEventQueue;
 			
 			«eventNamespaceName»::SctEvent* getNextEvent();
 			
 			void dispatch_event(«eventNamespaceName»::SctEvent * event);
+			«ENDIF»
 		'''
 	}
 	
@@ -56,8 +51,9 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 		'''
 		«super.protectedInnerClassMembers(scope)»
 		«scope.execution_flow.module()» * parent;
+		«IF scope.flow.hasLocalEvents»
 		void dispatch_event(«scope.flow.eventNamespaceName»::SctEvent * event);
-		
+		«ENDIF»
 		'''
 	}
 	
@@ -74,13 +70,13 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 			//! Inner class for «simpleName» interface scope.
 			class «interfaceName»
 			{
-				
 				public:
-					«interfaceName»(«execution_flow.module()» * parent): 
-					«FOR init : toInit SEPARATOR ","»
-						«init»
-					«ENDFOR»
+					«interfaceName»(«execution_flow.module()» * parent):
+						«FOR init : toInit SEPARATOR ","»
+							«init»
+						«ENDFOR»
 					{}
+					
 					«FOR d : declarations»
 						«d.functionPrototypes»
 					«ENDFOR»
@@ -91,7 +87,7 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 		'''
 	}
 	
-	def dispatch privateFunctionPrototypes(EventDefinition it) {
+	override dispatch privateFunctionPrototypes(EventDefinition it) {
 		'''
 		«IF direction == Direction::LOCAL»
 			/*! Raises the in event '«name»' that is defined in the «scope.scopeDescription». */

@@ -9,25 +9,19 @@
 */
 package org.yakindu.sct.model.stext.scoping;
 
-import static java.util.Collections.singletonList;
-
 import java.util.List;
 import java.util.Optional;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.resource.ISelectable;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 import org.yakindu.base.types.Package;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
-import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
+import org.yakindu.sct.model.stext.extensions.STextExtensions;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.StateSpecification;
@@ -46,6 +40,8 @@ public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalSc
 	@Inject
 	private IPackageImport2URIMapper mapper;
 
+	@Inject STextExtensions utils;
+	
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		if (context == null)
@@ -66,7 +62,7 @@ public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalSc
 		List<ImportNormalizer> importedNamespaceResolvers = Lists.newArrayList();
 		List<ImportScope> importScopes = null;
 		if (context instanceof StateSpecification || context instanceof TransitionSpecification) {
-			importScopes = EcoreUtil2.getAllContentsOfType(getStatechart(context), ImportScope.class);
+			importScopes = EcoreUtil2.getAllContentsOfType(utils.getStatechart(context), ImportScope.class);
 		} else {
 			importScopes = EcoreUtil2.getAllContentsOfType(context, ImportScope.class);
 		}
@@ -97,48 +93,10 @@ public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalSc
 		return importedNamespaceResolvers;
 	}
 
-	protected IScope getLocalElementsScope(IScope parent, final EObject context, final EReference reference) {
-		IScope result = parent;
-		ISelectable allDescriptions = getAllDescriptions(context.eResource());
-		QualifiedName name = getQualifiedNameOfLocalElement(context);
-		boolean ignoreCase = isIgnoreCase(reference);
-		final List<ImportNormalizer> namespaceResolvers = getImportedNamespaceResolvers(context, ignoreCase);
-		if (!namespaceResolvers.isEmpty()) {
-			if (isRelativeImport() && name != null && !name.isEmpty()) {
-				ImportNormalizer localNormalizer = doCreateImportNormalizer(name, true, ignoreCase);
-				result = createImportScope(result, singletonList(localNormalizer), allDescriptions,
-						reference.getEReferenceType(), isIgnoreCase(reference));
-			}
-			result = createImportScope(result, namespaceResolvers, null, reference.getEReferenceType(),
-					isIgnoreCase(reference));
-		}
-		if (name != null) {
-			ImportNormalizer localNormalizer = doCreateImportNormalizer(name, true, ignoreCase);
-			result = createImportScope(result, singletonList(localNormalizer), allDescriptions,
-					reference.getEReferenceType(), isIgnoreCase(reference));
-		}
-		return result;
-	}
-
-
 	@Override
 	protected String getImportedNamespace(EObject object) {
 		if (object instanceof Package)
 			return ((Package) object).getName();
 		return super.getImportedNamespace(object);
 	}
-
-	protected Statechart getStatechart(EObject context) {
-
-		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context.eResource(),
-				ContextElementAdapter.class);
-
-		if (provider == null) {
-			return EcoreUtil2.getContainerOfType(context, Statechart.class);
-		} else {
-			return (Statechart) EcoreUtil.getObjectByType(provider.getElement().eResource().getContents(),
-					SGraphPackage.Literals.STATECHART);
-		}
-	}
-
 }

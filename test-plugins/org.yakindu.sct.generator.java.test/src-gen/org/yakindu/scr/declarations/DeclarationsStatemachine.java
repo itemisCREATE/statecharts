@@ -319,7 +319,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	private int nextStateIndex;
 	
 	
-	
 	private boolean evInA;
 	
 	private boolean evInB;
@@ -335,7 +334,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	
 	private boolean evInF;
 	private String evInFValue;
-	
 	private boolean varInA;
 	
 	protected void setVarInA(boolean value) {
@@ -393,7 +391,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	
 	public void init() {
 		this.initialized = true;
-		
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -435,7 +432,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
 		}
-	
 		enterSequence_main_region_default();
 	}
 	

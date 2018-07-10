@@ -133,10 +133,10 @@ class ReactionBuilder {
 		
 		// find the transition that relates to the matching exit point
 		val outTransitions = (it.parentRegion.composite as Vertex).outgoingTransitions
-		var exitTrans = outTransitions.filter( t | t.trigger == null && t.exitPointName.equals(realName)).head
-		if (exitTrans == null) exitTrans = outTransitions.filter( t | t.trigger == null && t.exitPointName.equals('default')).head
+		var exitTrans = outTransitions.filter( t | t.trigger === null && t.exitPointName.equals(realName)).head
+		if (exitTrans === null) exitTrans = outTransitions.filter( t | t.trigger === null && t.exitPointName.equals('default')).head
 		
-		if (exitTrans != null) {
+		if (exitTrans !== null) {
 			val exitReaction = exitTrans.create
 			execExit.reactSequence.steps.add(exitReaction.effect.newCall)
 		}
@@ -147,7 +147,7 @@ class ReactionBuilder {
 	}	
 
 	def alwaysTrue(Check check) {
-		if (check != null && check.condition instanceof PrimitiveValueExpression) {
+		if (check !== null && check.condition instanceof PrimitiveValueExpression) {
 			val pve = (check.condition as PrimitiveValueExpression)
 			return ( pve.value instanceof BoolLiteral && ( pve.value as BoolLiteral ).value )
 		} 
@@ -200,7 +200,6 @@ class ReactionBuilder {
 
 
 	def Sequence createLocalReactionSequence(ExecutionNode state, Step localStep) {	
-				
 		val localReactions = state.reactions.filter(r | ! r.transition ).toList
 		var localSteps = sexec.factory.createSequence
 		localSteps.steps.addAll(localReactions.map(lr | {
@@ -210,7 +209,7 @@ class ReactionBuilder {
 				ifStep
 		}))
 
-		if (localStep != null) localSteps.steps += localStep
+		if (localStep !== null) localSteps.steps += localStep
 		
 //		if (localSteps.steps.empty) return null		
 //		else 
@@ -223,9 +222,8 @@ class ReactionBuilder {
 		cycle.name = "react"
 		
 		var localSteps = sexec.factory.createSequence		
-		if (localStep != null) localSteps.steps += localStep
+		if (localStep !== null) localSteps.steps += localStep
 		if (localSteps.steps.empty) localSteps = null
-				
 				
 		val transitionReactions = state.reactions.filter(r | r.transition && ! r.unchecked ).toList
 		val transitionStep = transitionReactions.reverseView.fold(localSteps as Step, [s, reaction | {
@@ -236,47 +234,11 @@ class ReactionBuilder {
 				ifStep as Step
 			}])
 
-	
-		if (transitionStep != null) cycle.steps.add(transitionStep)		
-		else if (localSteps != null) cycle.steps.add(localSteps)
+		if (transitionStep !== null) cycle.steps.add(transitionStep)		
+		else if (localSteps!== null) cycle.steps.add(localSteps)
 		
 		return cycle
 	}
-	
-	
-//	def Sequence createReactionSequence(ExecutionNode state, Step localStep) {	
-//		val cycle = sexec.factory.createSequence
-//		cycle.name = "react"
-//		
-//		val localReactions = state.reactions.filter(r | ! r.transition ).toList
-//		var localSteps = sexec.factory.createSequence
-//		localSteps.steps.addAll(localReactions.map(lr | {
-//				var ifStep = sexec.factory.createIf
-//				ifStep.check = lr.check.newRef		
-//				ifStep.thenStep = lr.effect.newCall
-//				ifStep
-//		}))
-//		
-//		if (localStep != null) localSteps.steps += localStep
-//		if (localSteps.steps.empty) localSteps = null
-//				
-//				
-//		val transitionReactions = state.reactions.filter(r | r.transition && ! r.unchecked ).toList
-//		val transitionStep = transitionReactions.reverseView.fold(localSteps as Step, [s, reaction | {
-//				var ifStep = sexec.factory.createIf
-//				ifStep.check = reaction.check.newRef		
-//				ifStep.thenStep = reaction.effect.newCall
-//				ifStep.elseStep = s
-//				ifStep as Step
-//			}])
-//
-//	
-//		if (transitionStep != null) cycle.steps.add(transitionStep)		
-//		else if (localSteps != null) cycle.steps.add(localSteps)
-//		
-//		return cycle
-//	}
-	
 	
 	def ExecutionFlow defineEntryReactions(Statechart statechart, ExecutionFlow r) {
 		statechart.allEntries.forEach(e|e.defineReaction)
@@ -292,14 +254,14 @@ class ReactionBuilder {
 		var Sequence entryTransSeq = null
 		val entryTransitionEffect = e?.transition?.effect		
 		val target = e.target.create
-		val targetEnterSequence = if (target != null && e.outgoingTransitions.size > 0) { e.outgoingTransitions.mapToStateConfigurationEnterSequence } else null
+		val targetEnterSequence = if (target !== null && e.outgoingTransitions.size > 0) { e.outgoingTransitions.mapToStateConfigurationEnterSequence } else null
 			
-		if ( entryTransitionEffect != null || targetEnterSequence != null) {
+		if ( entryTransitionEffect !== null || targetEnterSequence !== null) {
 			entryTransSeq = sexecFactory.createSequence
-			if (entryTransitionEffect != null) {
+			if (entryTransitionEffect !== null) {
 				entryTransSeq.steps += entryTransitionEffect.mapEffect	
 			}
-			if (targetEnterSequence != null) {
+			if (targetEnterSequence !== null) {
 				entryTransSeq.steps += targetEnterSequence
 			}
 		}	
@@ -310,7 +272,7 @@ class ReactionBuilder {
 		if ( trace.addTraceSteps ) seq.steps.add(0,execEntry.newTraceNodeExecuted)
 		
 		if (e.kind == EntryKind::INITIAL) {			
-			if (entryTransSeq != null) seq.steps += entryTransSeq
+			if (entryTransSeq !== null) seq.steps += entryTransSeq
 			
 		} else if (e.kind == EntryKind::SHALLOW_HISTORY) {
 			val entryStep = sexec.factory.createHistoryEntry
@@ -319,7 +281,7 @@ class ReactionBuilder {
 			entryStep.deep = false
 			entryStep.region = (e.eContainer as Region).create
 			
-			if (entryTransSeq != null) entryStep.initialStep = entryTransSeq
+			if (entryTransSeq !== null) entryStep.initialStep = entryTransSeq
 			
 			entryStep.historyStep = (e.eContainer as Region).create.shallowEnterSequence.newCall
 			
@@ -331,7 +293,7 @@ class ReactionBuilder {
 			entryStep.region = (e.eContainer as Region).create
 			entryStep.deep = true
 			
-			if (entryTransSeq != null) entryStep.initialStep = entryTransSeq
+			if (entryTransSeq !== null) entryStep.initialStep = entryTransSeq
 			
 			
 			entryStep.historyStep =  (e.eContainer as Region).create.deepEnterSequence.newCall

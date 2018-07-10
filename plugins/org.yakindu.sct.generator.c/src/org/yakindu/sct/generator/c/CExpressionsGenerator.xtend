@@ -33,8 +33,8 @@ import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.c.extensions.Naming
-import org.yakindu.sct.generator.c.extensions.Navigation
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
@@ -45,7 +45,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 class CExpressionsGenerator extends ExpressionsGenerator {
 
 	@Inject protected extension Naming
-	@Inject protected extension Navigation
+	@Inject protected extension SExecExtensions
 
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ITypeSystemInferrer

@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.emf.transaction.ResourceSetListenerImpl;
-import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.xtext.ui.editor.validation.IValidationIssueProcessor;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.DiagramActivator;
@@ -82,7 +81,6 @@ public class LiveValidationListener extends ResourceSetListenerImpl {
 	public void setResource(Resource resource) {
 		this.resource = resource;
 		validationJob.setResource(resource);
-		validationJob.setRule(WorkspaceSynchronizer.getFile(resource));
 	}
 
 	public void setValidationIssueProcessor(IValidationIssueProcessor validationIssueProcessor) {

@@ -19,7 +19,9 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
 
@@ -52,9 +54,32 @@ public class PackageItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addDomainIDPropertyDescriptor(object);
 			addImportPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Domain ID feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDomainIDPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_DomainElement_domainID_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DomainElement_domainID_feature", "_UI_DomainElement_type"),
+				 BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -92,7 +117,6 @@ public class PackageItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.PACKAGE__MEMBER);
-			childrenFeatures.add(TypesPackage.Literals.PACKAGE__DOMAIN);
 		}
 		return childrenFeatures;
 	}
@@ -147,8 +171,10 @@ public class PackageItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(org.yakindu.base.types.Package.class)) {
+			case TypesPackage.PACKAGE__DOMAIN_ID:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case TypesPackage.PACKAGE__MEMBER:
-			case TypesPackage.PACKAGE__DOMAIN:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -230,11 +256,6 @@ public class PackageItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.PACKAGE__MEMBER,
 				 TypesFactory.eINSTANCE.createAnnotationType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.PACKAGE__DOMAIN,
-				 TypesFactory.eINSTANCE.createDomain()));
 	}
 
 }

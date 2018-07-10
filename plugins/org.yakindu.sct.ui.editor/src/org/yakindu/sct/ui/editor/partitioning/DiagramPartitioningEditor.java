@@ -54,15 +54,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IEditorSite;
-import org.eclipse.ui.IMemento;
-import org.eclipse.ui.IPersistableEditor;
-import org.eclipse.ui.IPersistableElement;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.XMLMemento;
 import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.xtext.util.Arrays;
 import org.yakindu.base.base.BasePackage;
@@ -83,25 +79,15 @@ import org.yakindu.sct.ui.editor.StatechartImages;
 public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 		implements
 			ISelectionChangedListener,
-			IEditingDomainProvider,
-			IPersistableEditor,
-			IPersistableElement {
+			IEditingDomainProvider
+			{
 
 	protected static final int SASH_WIDTH = 5;
-	private static final String REGEX_NO_WORD_NO_WHITESPACE = "[^\\w[\\s+]]";
-	protected static final String MEM_EXPANDED = "DefinitionSectionIsExpanded";
-	protected static final String FIRST_SASH_WEIGHT = "FirstSashControlWeight";
-	protected static final String SECOND_SASH_WEIGHT = "SecondSashControlWeight";
-	protected static final int[] DEFAULT_WEIGHTS = new int[]{2, 10};
-	protected static final int MAXIMIZED_CONTROL_INDEX = 1;
-
 	private DiagramPartitioningBreadcrumbViewer viewer;
 	private DiagramPartitioningDocumentProvider documentProvider;
 	private Adapter breadcrumbSynchronizer;
 
 	private SashForm sash;
-
-	private static IMemento memento;
 
 	protected abstract void createTextEditor(Composite parent);
 
@@ -159,58 +145,6 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 		GridLayoutFactory.fillDefaults().applyTo(sash);
 		return sash;
 	}
-
-	public void toggleDefinitionSection() {
-		sash.setMaximizedControl(!isDefinitionSectionInlined() ? null : sash.getChildren()[MAXIMIZED_CONTROL_INDEX]);
-	}	
-	
-	public void restoreSashWidths(SashForm sash, IMemento memento) {
-		if (memento == null) {
-			setDefaultSashWeights(sash);
-			memento = XMLMemento.createWriteRoot(getFactoryId());
-			memento.putInteger(FIRST_SASH_WEIGHT, DEFAULT_WEIGHTS[0]);
-			memento.putInteger(SECOND_SASH_WEIGHT, DEFAULT_WEIGHTS[1]);
-			setExpandState(memento);
-			setMemento(memento);
-		} else {
-			restoreState(memento);
-		}
-	}
-
-	protected abstract void setExpandState(IMemento memento);
-
-	protected String stripElementName(String name) {
-		if (name != null)
-			return name.replaceAll(REGEX_NO_WORD_NO_WHITESPACE, "");
-		return "";
-	}
-
-	public SashForm getSash() {
-		return sash;
-	}
-
-	protected void setDefaultSashWeights(SashForm sash) {
-		sash.setWeights(DEFAULT_WEIGHTS);
-	}
-
-	@Override
-	public abstract void restoreState(IMemento memento);
-
-	@Override
-	public abstract void saveState(IMemento memento);
-
-	public IMemento getMemento() {
-		return memento;
-	}
-
-	public void setMemento(IMemento memento) {
-		DiagramPartitioningEditor.memento = memento;
-	}
-
-	@Override
-	public abstract String getFactoryId();
-
-	protected abstract boolean isDefinitionSectionInlined();
 
 	@SuppressWarnings("restriction")
 	@Override
@@ -282,7 +216,8 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 	@Override
 	public void dispose() {
 		closeSubdiagramEditors();
-		removeBreadcrumbSynchronizer(DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram()));
+		if (getDiagram() != null)
+			removeBreadcrumbSynchronizer(DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram()));
 		super.dispose();
 	}
 
@@ -375,6 +310,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 				"org.eclipse.tptp.platform.analysis.core.ui.internal.actions.MultiAnalysisActionDelegate",
 				"org.eclipse.debug.ui.contextualLaunch.debug.submenu",
 				"org.eclipse.debug.ui.contextualLaunch.profile.submenu",
+				"org.eclipse.cdt.ui.buildConfigContributionM",
 				"org.eclipse.mylyn.resources.ui.ui.interest.remove.element", "formatMenu", "filtersMenu", "addGroup",
 				"navigateGroup", "toolbarArrangeAllAction", "selectMenu", "diagramAddMenu", "navigateMenu", "viewGroup",
 				"viewMenu"};
@@ -406,6 +342,11 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 
 	protected Adapter createBreadcrumbSynchronizer() {
 		return new BreadcrumbSynchronizer();
+	}
+	
+	@Override
+	public void firePropertyChange(int property) {
+		super.firePropertyChange(property);
 	}
 
 	@SuppressWarnings("unchecked")

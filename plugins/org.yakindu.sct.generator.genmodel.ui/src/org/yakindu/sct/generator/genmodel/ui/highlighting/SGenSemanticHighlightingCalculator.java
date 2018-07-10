@@ -14,7 +14,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.LeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -68,16 +67,18 @@ public class SGenSemanticHighlightingCalculator implements ISemanticHighlighting
 					}
 				}
 				// allContents.prune();
-			} else if (object instanceof ElementReferenceExpression) {
+			} else if (object instanceof ElementReferenceExpression && !((ElementReferenceExpression) object).getReference().eIsProxy()) {
 				List<INode> nodes = NodeModelUtils.findNodesForFeature(object,
 						ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE);
 				for (INode node : nodes) {
 					String name = ((Property) ((ElementReferenceExpression) object).getReference()).getName();
 					switch (name) {
-						case HOSTNAME_VAR :
-						case USER_VAR :
 						case SCT_VERSION_VAR :
+						case SHA256 :
+						case SCTFILE:
 						case TIMESTAMP_VAR :
+						case USER_VAR :
+						case HOSTNAME_VAR :
 							acceptor.addPosition(node.getTotalOffset(), node.getTotalLength(),
 									DefaultHighlightingConfiguration.KEYWORD_ID);
 					}

@@ -4,7 +4,9 @@
 #include "HistoryWithExitPoint.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 
 //! The timers are managed by a timer service. */
@@ -69,4 +71,6 @@ class HistoryWithExitPointTest : public ::testing::Test{
 		EXPECT_TRUE(statechart->isStateActive(HistoryWithExitPoint::mr_A_r_X2));
 		
 		
+}
+
 }

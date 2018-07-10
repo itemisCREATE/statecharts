@@ -13,30 +13,26 @@ package org.yakindu.sct.generator.c
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtext.util.Strings
-import org.yakindu.base.expressions.expressions.AssignmentExpression
-import org.yakindu.base.expressions.expressions.AssignmentOperator
-import org.yakindu.base.expressions.expressions.MultiplicativeOperator
-import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
+import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
-import org.yakindu.sct.generator.c.extensions.Navigation
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 
 class StatemachineSource implements IContentTemplate {
 	
 	@Inject protected extension Naming
 	@Inject protected extension GenmodelEntries
-	@Inject protected extension Navigation
+	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension INamingService
 	@Inject protected extension FlowCode
@@ -95,7 +91,7 @@ class StatemachineSource implements IContentTemplate {
 	'''
 	
 	def initFunction(ExecutionFlow it) '''
-		void «functionPrefix»init(«scHandleDecl»)
+		void «initFctID»(«scHandleDecl»)
 		{
 			«initFunctionBody(it)»
 		}
@@ -128,14 +124,14 @@ class StatemachineSource implements IContentTemplate {
 	
 	
 	def enterFunction(ExecutionFlow it) '''
-		void «functionPrefix»enter(«scHandleDecl»)
+		void «enterFctID»(«scHandleDecl»)
 		{
 			«enterSequences.defaultSequence.code»
 		}
 	'''
 	
 	def exitFunction(ExecutionFlow it) '''
-		void «type.toFirstLower»_exit(«scHandleDecl»)
+		void «exitFctID»(«scHandleDecl»)
 		{
 			«exitSequence.code»
 		}
@@ -149,7 +145,7 @@ class StatemachineSource implements IContentTemplate {
 				«event.access» = bool_false;
 				«ENDFOR»
 			«ENDFOR»
-			«IF hasLocalScope»
+			«IF hasInternalScope»
 				«FOR event : internalScope.events»
 				«event.access» = bool_false;
 				«ENDFOR»
@@ -174,7 +170,7 @@ class StatemachineSource implements IContentTemplate {
 	'''
 	
 	def runCycleFunction(ExecutionFlow it) '''
-		void «functionPrefix»runCycle(«scHandleDecl»)
+		void «runCycleFctID»(«scHandleDecl»)
 		{
 			
 			«clearOutEventsFctID»(«scHandle»);
@@ -194,7 +190,7 @@ class StatemachineSource implements IContentTemplate {
 			{
 			«FOR state : states»
 				«IF state.reactSequence !== null»
-				case «state.shortName»:
+				case «state.stateName»:
 				{
 					«state.reactSequence.shortName»(«scHandle»);
 					break;
@@ -229,10 +225,10 @@ class StatemachineSource implements IContentTemplate {
 			switch (state)
 			{
 				«FOR s : states»
-				case «s.shortName» :
-					result = (sc_boolean) («IF s.leaf»«scHandle»->stateConfVector[«s.stateVectorDefine»] == «s.shortName»
-					«ELSE»«scHandle»->stateConfVector[«s.stateVectorDefine»] >= «s.shortName»
-						&& «scHandle»->stateConfVector[«s.stateVectorDefine»] <= «s.subStates.last.shortName»«ENDIF»);
+				case «s.stateName» :
+					result = (sc_boolean) («IF s.leaf»«scHandle»->stateConfVector[«s.stateVectorDefine»] == «s.stateName»
+					«ELSE»«scHandle»->stateConfVector[«s.stateVectorDefine»] >= «s.stateName»
+						&& «scHandle»->stateConfVector[«s.stateVectorDefine»] <= «s.subStates.last.stateName»«ENDIF»);
 					break;
 				«ENDFOR»
 				default:
@@ -272,7 +268,7 @@ class StatemachineSource implements IContentTemplate {
 		''' +
 		// only if the impact vector is completely covered by final states the state machine
 		// can become final
-		{if (finalStateImpactVector.isCompletelyCovered) {'''	return «FOR i : 0 ..<finalStateImpactVector.size SEPARATOR ' && '»(«FOR fs : finalStateImpactVector.get(i) SEPARATOR ' || '»«scHandle»->stateConfVector[«i»] == «IF fs.stateVector.offset == i»«fs.shortName»«ELSE»«null_state»«ENDIF»«ENDFOR»)«ENDFOR»;
+		{if (finalStateImpactVector.isCompletelyCovered) {'''	return «FOR i : 0 ..<finalStateImpactVector.size SEPARATOR ' && '»(«FOR fs : finalStateImpactVector.get(i) SEPARATOR ' || '»«scHandle»->stateConfVector[«i»] == «IF fs.stateVector.offset == i»«fs.stateName»«ELSE»«null_state»«ENDIF»«ENDFOR»)«ENDFOR»;
 		'''} else {'''   return bool_false;'''} }		
 		+ Strings.newLine + '''}'''
 	}

@@ -8,15 +8,12 @@ testsuite AllTests {
 	CKeywords,
 	ConditionalExpression,
 	ConstantsTests,
-	
 	ConstOnlyDefaultScope,
 	ConstOnlyInternalScope,
 	ConstOnlyNamedScope,
-	
 	ChildFirstExecutionHierarchy,
 	ChildFirstLocalReactions,
 //	ChildFirstOrthogonalReactions,
-	
 	Declarations, 
 	DeepEntry,
 	DeepHistory,
@@ -26,12 +23,10 @@ testsuite AllTests {
 	EntryChoice,
 	EntryExitSelfTransition,
 	EntryReactionAction,
-	
-//	EventDrivenInternalEvent,
+	EventDrivenInternalEvent,
 	EventDrivenTriggeredByEvent,
 	EventDrivenTriggeredByTimeEvent,
 	EventDrivenOutEvents,
-
 	ExitOnSelfTransition, 
 	ExitState,
 	FeatureCalls,
@@ -48,16 +43,15 @@ testsuite AllTests {
 	LocalReactions,
 	LogicalAndTests, 
 	LogicalOrTests,
+	LocalEvents,
 	NamedInterfaceAccess,
 	OperationsTest,
 //	OperationsWithoutBraces,
 	OutEventLifeCycle,
 	Parenthesis,
-	
 	ParentFirstExecutionHierarchy,
 	ParentFirstLocalReactions,
 //	ParentFirstOrthogonalReactions,
-	
 	PriorityValues,
 	RaiseEvent,
 	ReadOnlyVariable,

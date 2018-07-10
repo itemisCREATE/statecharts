@@ -22,6 +22,7 @@ import org.yakindu.base.types.Annotation;
 import org.yakindu.sct.generator.c.eventdriven.EventDrivenExpressionCode;
 import org.yakindu.sct.generator.c.eventdriven.EventDrivenStatemachineHeader;
 import org.yakindu.sct.generator.c.eventdriven.EventDrivenStatemachineSource;
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.IGeneratorModule;
@@ -34,9 +35,9 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
 /**
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public class CCodeGeneratorModule implements IGeneratorModule {
 
@@ -44,12 +45,13 @@ public class CCodeGeneratorModule implements IGeneratorModule {
 	public void configure(GeneratorEntry entry, Binder binder) {
 		binder.bind(GeneratorEntry.class).toInstance(entry);
 		binder.bind(IExecutionFlowGenerator.class).to(CGenerator.class);
-		binder.bind(INamingService.class).to(CNamingService.class);
 		binder.bind(ICodegenTypeSystemAccess.class).to(CTypeSystemAccess.class);
 		binder.bind(IncludeProvider.class).to(StandardIncludeProvider.class);
+		binder.bind(INamingService.class).to(CNamingService.class);
 		bindIGenArtifactConfigurations(entry, binder);
 		bindTracingProperty(entry, binder);
 		configureEventDriven(entry, binder);
+		binder.bind(String.class).annotatedWith(Names.named("Separator")).toInstance(getSeparator(entry));
 	}
 
 	protected void bindTracingProperty(GeneratorEntry entry, Binder binder) {
@@ -72,15 +74,25 @@ public class CCodeGeneratorModule implements IGeneratorModule {
 			binder.bind(IGenArtifactConfigurations.class).to(SimpleGenArtifactConfigurations.class);
 		}
 	}
-	
+
 	protected void configureEventDriven(GeneratorEntry entry, Binder binder) {
 		Statechart statechart = (Statechart) entry.getElementRef();
 		Annotation eventDrivenAnnotation = statechart.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION);
-		
-		if(eventDrivenAnnotation != null) {
+
+		if (eventDrivenAnnotation != null) {
 			binder.bind(StatemachineHeader.class).to(EventDrivenStatemachineHeader.class);
 			binder.bind(StatemachineSource.class).to(EventDrivenStatemachineSource.class);
 			binder.bind(CExpressionsGenerator.class).to(EventDrivenExpressionCode.class);
+		}
+	}
+
+	protected String getSeparator(GeneratorEntry entry) {
+		GenmodelEntries entries = new GenmodelEntries();
+		String separator = entries.getSeparator(entry);
+		if (separator == null) {
+			return "_";
+		} else {
+			return separator;
 		}
 	}
 

@@ -50,11 +50,50 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	private ITypeSystem typeSystem;
 
 	@Test
+	public void testIncrementToVariableAssignment() {
+		executeWithDefaultScope("realVar = intVar++");
+		assertEquals(1, getIntValue());
+		assertEquals(0, getRealValue());
+	}
+	
+	@Test
+	public void testIncrementVariableAssignment() {
+		executeWithDefaultScope("intVar = intVar++");
+		assertEquals(0, getIntValue());
+	}
+	
+	@Test
+	public void testIncrementAssignment() {
+		executeWithDefaultScope("intVar++");
+		assertEquals(1, getIntValue());
+	}
+	
+	@Test
+	public void testDecrementAssignment() {
+		executeWithDefaultScope("intVar--");
+		assertEquals(-1, getIntValue());
+	}
+	
+	@Test
+	public void testDecrementVariableAssignment() {
+		executeWithDefaultScope("intVar = intVar--");
+		assertEquals(0, getIntValue());
+	}
+	
+	@Test
+	public void testDecrementToVariableAssignment() {
+		executeWithDefaultScope("realVar = intVar--");
+		assertEquals(-1, getIntValue());
+		assertEquals(0, getRealValue());
+	}
+	
+	@Test
 	public void testIntVariableAssignment() {
 		executeWithDefaultScope("intVar = 42");
 		assertEquals(42L, getIntValue());
 	}
-
+	
+	
 	@Test
 	public void testHexVariableAssignment() {
 		executeWithDefaultScope("intVar = 0xFF");

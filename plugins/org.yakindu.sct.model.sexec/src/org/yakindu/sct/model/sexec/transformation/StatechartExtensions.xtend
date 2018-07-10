@@ -204,14 +204,14 @@ class StatechartExtensions {
 	 * The id of a transition is unique within the context of its source vertex.
 	 */	
 	def dispatch String id(Transition t) {
-		"tr" + if (t.source != null) t.source.outgoingTransitions.indexOf(t) else ""
+		"tr" + if (t.source !== null) t.source.outgoingTransitions.indexOf(t) else ""
 	}
 	
 	/**
 	 * The id of a local reaction is unique within the context of its source vertex.
 	 */	
 	def dispatch String id(LocalReaction t) {
-		"lr" + if (t.reactiveElement != null) t.reactiveElement.localReactions.indexOf(t) else ""
+		"lr" + if (t.reactiveElement !== null) t.reactiveElement.localReactions.indexOf(t) else ""
 	}
 	
 	

@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	rbeckmann - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.model.sgen.util;
 
@@ -16,6 +16,8 @@ package org.yakindu.sct.model.sgen.util;
  */
 public interface BuiltinDeclarationNames {
 	public static final String SCT_VERSION_VAR = "SCTVERSION";
+	public static final String SHA256 = "SHA256";
+	public static final String SCTFILE = "SCTFILE";
 	public static final String TIMESTAMP_VAR = "TIMESTAMP";
 	public static final String USER_VAR = "USER";
 	public static final String HOSTNAME_VAR = "HOSTNAME";

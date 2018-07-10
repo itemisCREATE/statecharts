@@ -100,7 +100,7 @@ public class DiagramPartitioningUtil {
 	public static BooleanValueStyle createInlineDefinitionSectionStyle() {
 		BooleanValueStyle result = NotationFactory.eINSTANCE.createBooleanValueStyle();
 		result.setName(INLINE_DEFINITION_SECTION_STYLE);
-		result.setBooleanValue(true);
+		result.setBooleanValue(false);
 		return result;
 	}
 

@@ -10,11 +10,17 @@
  */
 package org.yakindu.sct.ui.editor.propertysheets.appearance;
 
+import java.util.List;
+
+import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ConnectionAppearancePropertySection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IWorkbenchPart;
 import org.yakindu.sct.ui.editor.editparts.TransitionEditPart;
+import org.yakindu.sct.ui.editor.editparts.TransitionExpressionEditPart;
 import org.yakindu.sct.ui.editor.propertysheets.util.SelectionUnwrapperUtil;
+
+import com.google.common.collect.Lists;
 
 /**
  * 
@@ -27,4 +33,20 @@ public class TransitionAppearancePropertySection extends ConnectionAppearancePro
 	public void setInput(IWorkbenchPart part, ISelection selection) {
 		super.setInput(part, SelectionUnwrapperUtil.unwrapSelectionForType(selection, TransitionEditPart.class));
 	}
+	
+	@Override
+	public List<ConnectionEditPart> getInput() {
+		List<?> elements = super.getInput();
+		List<ConnectionEditPart> connectionEditParts = Lists.newArrayList();
+		if(elements != null)
+			elements.forEach(e -> {
+				if (e instanceof TransitionExpressionEditPart) {
+					connectionEditParts.add((TransitionEditPart) ((TransitionExpressionEditPart) e).getParent());
+				}else if(e instanceof TransitionEditPart) {
+					connectionEditParts.add((TransitionEditPart) e);
+				}
+			});
+		return connectionEditParts;
+	}
+
 }

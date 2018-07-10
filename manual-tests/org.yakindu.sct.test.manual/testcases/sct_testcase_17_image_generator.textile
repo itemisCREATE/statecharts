@@ -1,0 +1,7 @@
+h1. YAKINDU Statechart Tools – Testcase 17 - Image Generator
+
+|_. Nr |_. Testname |_. Test Instructions |_. Postconditions |_. Status|
+| 17.1 | Open Digital Watch Example and copy  | <ol><li><p>Select _File → New → Example... → YAKINDU Statechart Examples_.</p></li><li><p>Select _Digital Watch_ and click on _Finish_.</p></li><li><p>Copy _digital_watch_images.sgen_ from _testmodels_ folder in _models_ folder of the Digital Watch example project</p></li><li><p>Right-click on _digital_watch_images.sgen_ and select _Generate Code Artifacts</p></li></ol> | For all specified image formats in SGEN file there is a folder generated with corresponding images | %{color:red}open% |
+| 17.2 | Enable syntax coloring  | <ol><li><p>Select _Preferences → YAKINDU SCT → Diagram Appearance → Enable Syntax Coloring_</p></li></ol> | The diagram shows syntax highlighting | %{color:red}open% |
+| 17.3 | Generate image with syntax coloring  | <ol><li><p>Right-click on _digital_watch_images.sgen_ and select _Generate Code Artifacts</p></li></ol> | The generated images have syntax coloring | %{color:red}open% |
+

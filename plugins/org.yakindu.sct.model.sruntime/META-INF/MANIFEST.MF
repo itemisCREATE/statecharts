@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.yakindu.sct.model.sruntime;singleton:=true
-Bundle-Version: 3.2.0.qualifier
+Bundle-Version: 3.4.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -13,5 +13,8 @@ Export-Package: org.yakindu.sct.model.sruntime,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.yakindu.base.types;visibility:=reexport,
- com.google.guava
+ com.google.guava,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.emf.ecore.xcore.lib
 Bundle-ActivationPolicy: lazy
+

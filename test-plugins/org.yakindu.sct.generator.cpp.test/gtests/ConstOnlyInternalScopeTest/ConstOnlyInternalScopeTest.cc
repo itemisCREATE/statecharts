@@ -4,7 +4,9 @@
 #include "ConstOnlyInternalScope.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 
 //! The timers are managed by a timer service. */
@@ -51,4 +53,6 @@ class ConstOnlyInternalScopeTest : public ::testing::Test{
 		EXPECT_TRUE(statechart->isStateActive(ConstOnlyInternalScope::ConstOnlyInternalScope_main_region_B));
 		
 		
+}
+
 }

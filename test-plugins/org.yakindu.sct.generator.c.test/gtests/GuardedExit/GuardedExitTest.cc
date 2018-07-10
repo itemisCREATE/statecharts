@@ -31,7 +31,7 @@ void checkDone(bool shouldBeDone){
 	guardedExitIface_raise_e(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(guardedExit_isStateActive(&statechart, GuardedExit_main_region_B));
-	EXPECT_TRUE(shouldBeDone ? guardedExitIface_get_done(&statechart)  : !guardedExitIface_get_done(&statechart));
+	EXPECT_TRUE(shouldBeDone ? guardedExitIface_get_done(&statechart) : !guardedExitIface_get_done(&statechart));
 }
 
 TEST_F(GuardedExitTest, ExitTaken) {

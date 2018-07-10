@@ -4,7 +4,9 @@
 #include "EventDrivenTriggeredByTimeEvent.h"
 #include "sc_runner_timed.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 
 //! The timers are managed by a timer service. */
@@ -82,4 +84,6 @@ class EventDrivenTriggeredByTimeEventTest : public ::testing::Test{
 		statechart->exit();
 		
 		
+}
+
 }

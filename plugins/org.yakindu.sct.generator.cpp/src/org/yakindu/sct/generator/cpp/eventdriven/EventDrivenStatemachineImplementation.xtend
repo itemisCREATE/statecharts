@@ -17,10 +17,8 @@ import org.yakindu.sct.generator.cpp.StatemachineImplementation
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.ImportScope
-import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.yakindu.sct.model.stext.stext.InternalScope
+import org.yakindu.sct.model.stext.stext.StatechartScope
 
 /*
  * To restore the event queue for in events, revert commit 235659d
@@ -32,6 +30,7 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 	@Inject extension EventNaming eventNaming
 	
 	override additionalFunctions(ExecutionFlow it) {
+		if(!hasLocalEvents) return ''''''
 		'''
 		«nextEventFunction»
 		
@@ -42,6 +41,7 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 	}
 	
 	override protected usingNamespaces(ExecutionFlow it) {
+		if(!hasLocalEvents) return ''''''
 		'''using namespace «eventNamespaceName»;'''
 	}
 	
@@ -53,31 +53,34 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 			{
 				*(sc_boolean*)evid = true;
 				runCycle();
-			}				
+			}
 		}
 	'''
 	
-	override runCycleFunction(ExecutionFlow it) { 
-	'''
-		void «module»::runCycle()
-		{
-			clearOutEvents();
-			
-			SctEvent * currentEvent = getNextEvent();
-			
-			do
-			{
-				/* Set event flags as usual */
-				dispatch_event(currentEvent);
-				
-				«runCycleFunctionForLoop»
-				
-				/* Delete event from memory */
-				delete currentEvent;
-				clearInEvents();
-			} while((currentEvent = getNextEvent()));
+	override runCycleFunction(ExecutionFlow it) {
+		if(!hasLocalEvents) {
+			return super.runCycleFunction(it)
 		}
-	'''
+		'''
+			void «module»::runCycle()
+			{
+				clearOutEvents();
+				
+				SctEvent * currentEvent = getNextEvent();
+				
+				do
+				{
+					/* Set event flags as usual */
+					dispatch_event(currentEvent);
+					
+					«runCycleFunctionForLoop»
+					
+					/* Delete event from memory */
+					delete currentEvent;
+					clearInEvents();
+				} while((currentEvent = getNextEvent()));
+			}
+		'''
 	}
 	
 	def getNextEventFunction(ExecutionFlow it) {
@@ -129,31 +132,28 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 
 	def dispatch generateInterfaceDispatchFunction(ExecutionFlow it, Scope s) {
 		'''
-			«val localEvents = s.declarations.filter(EventDefinition).filter[direction == Direction::LOCAL]»
-			«IF localEvents.size > 0»
-				void «module»::«s.interfaceName»::dispatch_event(SctEvent * event)
+			void «module»::«s.interfaceName»::dispatch_event(SctEvent * event)
+			{
+				switch(event->name)
 				{
-					switch(event->name)
-					{
-						«FOR e : localEvents»
-							case «e.eventEnumMemberName»:
-							{
-								«IF e.hasValue»
-									«e.eventClassName» * e = dynamic_cast<«e.eventClassName»*>(event);
-									if(e != 0) {
-										internal_«e.asRaiser»(e->value);
-									}
-								«ELSE»
-									internal_«e.asRaiser»();
-								«ENDIF»
-								break;
-							}
-						«ENDFOR»
-						default:
+					«FOR e : s.localEvents»
+						case «e.eventEnumMemberName»:
+						{
+							«IF e.hasValue»
+								«e.eventClassName» * e = static_cast<«e.eventClassName»*>(event);
+								if(e != 0) {
+									internal_«e.asRaiser»(e->value);
+								}
+							«ELSE»
+								internal_«e.asRaiser»();
+							«ENDIF»
 							break;
 						}
-					}
-				«ENDIF»
+					«ENDFOR»
+					default:
+						break;
+				}
+			}
 			'''
 	}
 

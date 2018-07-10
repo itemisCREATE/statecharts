@@ -174,7 +174,7 @@ class FlowOptimizer {
 	
 	
 	def alwaysTrue(Check check) {
-		if (check != null && check.condition instanceof PrimitiveValueExpression) {
+		if (check !== null && check.condition instanceof PrimitiveValueExpression) {
 			val pve = (check.condition as PrimitiveValueExpression)
 			return ( pve.value instanceof BoolLiteral && ( pve.value as BoolLiteral ).value )
 		} 
@@ -199,7 +199,7 @@ class FlowOptimizer {
 	}
 	
 	def inline(Check c) {
-		if ( c != null ) {
+		if ( c !== null ) {
 			val List<CheckRef> cRefs = new ArrayList<CheckRef>()
 			cRefs.addAll(c.refs)
 			
@@ -250,7 +250,7 @@ class FlowOptimizer {
 	// GENERIC STEP INLINING
 	
 	def inline(Step step) {
-		if ( step != null ) {
+		if ( step !== null ) {
 			val List<Call> calls = new ArrayList<Call>()
 			calls.addAll( step.caller )
 			
@@ -291,7 +291,7 @@ class FlowOptimizer {
 
 	def dispatch boolean substituteCall(Sequence owner, Call call, Step step) {
 		if ( owner.steps.contains(call) ) { 
-			if ( step != null )
+			if ( step !== null )
 				owner.steps.set(owner.steps.indexOf(call), step)
 			else 
 				owner.steps.remove(owner.steps.indexOf(call))
@@ -333,8 +333,8 @@ class FlowOptimizer {
 		_copy.name = _if.name
 		_copy.comment = _if.comment
 		_copy.check =  _if.check.stepCopy as Check
-		_copy.thenStep = if (_if.thenStep != null ) _if.thenStep.stepCopy else null
-		_copy.elseStep = if (_if.elseStep != null ) _if.elseStep.stepCopy else null
+		_copy.thenStep = if (_if.thenStep !== null ) _if.thenStep.stepCopy else null
+		_copy.elseStep = if (_if.elseStep !== null ) _if.elseStep.stepCopy else null
 
 		_copy
 	}

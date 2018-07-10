@@ -4,7 +4,9 @@
 #include "ChildFirstLocalReactions.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 long counter = 0l;
 
@@ -124,4 +126,6 @@ class ChildFirstLocalReactionsTest : public ::testing::Test{
 		EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 3l);
 		
 		
+}
+
 }

@@ -97,7 +97,7 @@ class Naming implements CSharpKeywords {
 	}
 
 	def String getInterfaceName(InterfaceScope it) {
-		if (name != null) {
+		if (name !== null) {
 			return "SCI" + name.toFirstUpper()
 		} else {
 			return "SCInterface";
