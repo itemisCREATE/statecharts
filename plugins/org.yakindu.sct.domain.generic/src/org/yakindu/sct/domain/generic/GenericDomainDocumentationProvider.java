@@ -13,9 +13,8 @@ public class GenericDomainDocumentationProvider implements IDomainDocumentationP
 
 	@Override
 	public URL getDocumentationURL() {
-		Bundle plugin = GenericDomainActivator.getContext().getBundle();
 		IPath relativePagePath = new Path(getDocPathString());
-		URL fileInPlugin = FileLocator.find(plugin, relativePagePath, null);
+		URL fileInPlugin = FileLocator.find(getBundle(), relativePagePath, null);
 		try {
 			return FileLocator.toFileURL(fileInPlugin);
 		} catch (IOException e) {
@@ -26,6 +25,10 @@ public class GenericDomainDocumentationProvider implements IDomainDocumentationP
 
 	protected String getDocPathString() {
 		return "docu/default_domain.html";
+	}
+
+	protected Bundle getBundle() {
+		return GenericDomainActivator.getContext().getBundle();
 	}
 
 }
