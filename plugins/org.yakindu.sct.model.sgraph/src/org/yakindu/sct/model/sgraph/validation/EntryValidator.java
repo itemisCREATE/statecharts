@@ -23,12 +23,8 @@ import org.yakindu.sct.model.sgraph.Transition;
  */
 public class EntryValidator extends AbstractSGraphValidator {
 
-
-
-	
-	
-	private static final String ENTRY_TRANSITIONS_NO_IN_IF_INITIAL_MSG  = "Initial entry should have no incoming transition.";
-	public static final String  ENTRY_TRANSITIONS_NO_IN_IF_INITIAL_CODE = "entry.transitions.NoInIfInitial";
+	private static final String ENTRY_TRANSITIONS_NO_IN_IF_INITIAL_MSG = "Initial entry should have no incoming transition.";
+	public static final String ENTRY_TRANSITIONS_NO_IN_IF_INITIAL_CODE = "entry.transitions.NoInIfInitial";
 
 	@Check(CheckType.FAST)
 	public void checkEntryTransitionsNoInIfInitial(Entry entry) {
@@ -37,20 +33,19 @@ public class EntryValidator extends AbstractSGraphValidator {
 		}
 	}
 
-
-	private static final String ENTRY_TRANSITIONS_REQUIRE_OUT_IF_INITIAL_MSG  = "Initial entry must have an outgoing transition.";
-	public static final String  ENTRY_TRANSITIONS_REQUIRE_OUT_IF_INITIAL_CODE = "entry.transitions.RequireOutIfInitial";
+	private static final String ENTRY_TRANSITIONS_REQUIRE_OUT_IF_INITIAL_MSG = "Initial entry must have an outgoing transition.";
+	public static final String ENTRY_TRANSITIONS_REQUIRE_OUT_IF_INITIAL_CODE = "entry.transitions.RequireOutIfInitial";
 
 	@Check(CheckType.FAST)
 	public void checkEntryTransitionsRequireOneOutIfInitial(Entry entry) {
-		if (entry.getKind().equals(EntryKind.INITIAL) && entry.getOutgoingTransitions().size() == 0 ) {
-			error(ENTRY_TRANSITIONS_REQUIRE_OUT_IF_INITIAL_MSG, entry, null, -1, ENTRY_TRANSITIONS_REQUIRE_OUT_IF_INITIAL_CODE);
+		if (entry.getKind().equals(EntryKind.INITIAL) && entry.getOutgoingTransitions().size() == 0) {
+			error(ENTRY_TRANSITIONS_REQUIRE_OUT_IF_INITIAL_MSG, entry, null, -1,
+					ENTRY_TRANSITIONS_REQUIRE_OUT_IF_INITIAL_CODE);
 		}
 	}
 
-		
-	private static final String ENTRY_TRANSITIONS_NO_MULTIPLE_OUT_MSG  = "Entries must not have more than one outgoing transition.";
-	public static final String  ENTRY_TRANSITIONS_NO_MULTIPLE_OUT_CODE = "entry.transitions.NoMultipleOut";
+	private static final String ENTRY_TRANSITIONS_NO_MULTIPLE_OUT_MSG = "Entries must not have more than one outgoing transition.";
+	public static final String ENTRY_TRANSITIONS_NO_MULTIPLE_OUT_CODE = "entry.transitions.NoMultipleOut";
 
 	@Check(CheckType.FAST)
 	public void checkEntryTransitionsNoMultipleOut(Entry entry) {
@@ -59,7 +54,6 @@ public class EntryValidator extends AbstractSGraphValidator {
 		}
 	}
 
-	
 	private static final String ENTRY_TRANSITIONS_NO_TRIGGER_ON_OUT_MSG = "The outgoing transitions of an entry must not have a trigger or guard.";
 	public static final String ENTRY_TRANSITIONS_NO_TRIGGER_ON_OUT_CODE = "entry.transitions.NoTriggerOnOut";
 
@@ -67,10 +61,10 @@ public class EntryValidator extends AbstractSGraphValidator {
 	public void checkEntryTransitionsNoTriggerOnOut(Entry entry) {
 		for (Transition transition : entry.getOutgoingTransitions()) {
 			if (transition.getTrigger() != null) {
-				error(ENTRY_TRANSITIONS_NO_TRIGGER_ON_OUT_MSG, entry, null, -1, ENTRY_TRANSITIONS_NO_TRIGGER_ON_OUT_CODE);
+				error(ENTRY_TRANSITIONS_NO_TRIGGER_ON_OUT_MSG, entry, null, -1,
+						ENTRY_TRANSITIONS_NO_TRIGGER_ON_OUT_CODE);
 			}
 		}
 	}
-
 
 }

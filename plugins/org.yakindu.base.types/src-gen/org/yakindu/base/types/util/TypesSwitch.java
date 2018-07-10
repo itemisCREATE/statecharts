@@ -9,6 +9,7 @@ package org.yakindu.base.types.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Annotation;
@@ -92,6 +93,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				org.yakindu.base.types.Package package_ = (org.yakindu.base.types.Package)theEObject;
 				T result = casePackage(package_);
 				if (result == null) result = casePackageMember(package_);
+				if (result == null) result = caseDomainElement(package_);
 				if (result == null) result = caseNamedElement(package_);
 				if (result == null) result = caseAnnotatableElement(package_);
 				if (result == null) result = defaultCase(theEObject);
@@ -431,6 +433,21 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNamedElement(NamedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Domain Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Domain Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDomainElement(DomainElement object) {
 		return null;
 	}
 
