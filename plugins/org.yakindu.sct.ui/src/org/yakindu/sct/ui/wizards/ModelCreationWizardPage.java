@@ -36,7 +36,7 @@ public class ModelCreationWizardPage extends WizardNewFileCreationPage {
 	protected String getExtension() {
 		return fileExtension;
 	}
-
+	
 	public URI getURI() {
 		return URI.createPlatformResourceURI(URI.encodeFragment(getFilePath().toString(),true), false);
 	}
