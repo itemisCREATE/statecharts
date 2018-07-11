@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
+import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditorInput;
 import org.eclipse.gmf.runtime.emf.core.util.EMFCoreUtil;
 import org.eclipse.gmf.runtime.notation.Diagram;
@@ -61,13 +62,23 @@ public class ResourceUnloadingTool {
 				exc.printStackTrace();
 			}
 		}
-		for (final Resource resourceToUnload : resourcesToUnload) {
-			try {
-				resourceToUnload.unload();
-				resources.remove(resourceToUnload);
-			} catch (final Throwable t) {
-				t.printStackTrace();
-			}
+		try {
+			TransactionUtil.getEditingDomain(resourceSet).runExclusive(new Runnable() {
+				@Override
+				public void run() {
+					for (final Resource resourceToUnload : resourcesToUnload) {
+						try {
+							resourceToUnload.unload();
+							resources.remove(resourceToUnload);
+						} catch (final Throwable t) {
+							t.printStackTrace();
+						}
+					}
+
+				}
+			});
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 
