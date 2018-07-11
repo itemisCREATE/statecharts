@@ -28,6 +28,7 @@ import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.ICellEditorValidator;
 import org.eclipse.swt.custom.StyleRange;
+import org.eclipse.swt.graphics.FontData;
 import org.yakindu.base.gmf.runtime.parsers.StringAttributeParser;
 import org.yakindu.base.xtext.utils.gmf.directedit.IEAttributeProvider;
 import org.yakindu.base.xtext.utils.gmf.directedit.StyleRanges;
@@ -41,6 +42,7 @@ import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementPr
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.policies.EAttributeDirectEditPolicy;
 import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
+import org.yakindu.sct.ui.editor.utils.FontScalingUtil;
 
 import com.google.inject.Injector;
 
@@ -188,8 +190,14 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart
 			setLabelStyles();
 			getFigure().invalidateTree();
 			getFigure().revalidate();
-
+		} else if (StatechartPreferenceConstants.PREF_FONT_SCALING.equals(event.getProperty())) {
+			refreshVisuals();
 		}
+	}
+
+	@Override
+	protected void setFont(FontData fontData) {
+		super.setFont(FontScalingUtil.scaleFont(fontData));
 	}
 
 }

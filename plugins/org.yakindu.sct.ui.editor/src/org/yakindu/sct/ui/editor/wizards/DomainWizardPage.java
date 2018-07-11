@@ -10,11 +10,9 @@
  */
 package org.yakindu.sct.ui.editor.wizards;
 
+import java.net.URL;
 import java.util.List;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -28,10 +26,11 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
@@ -45,16 +44,13 @@ import org.yakindu.sct.ui.editor.DiagramActivator;
 public class DomainWizardPage extends WizardPage {
 
 	private ComboViewer domainCombo;
-
-	private Label description;
-
-	private Label image;
-
 	private Object domainDescriptors;
+	private Browser browser;
 
 	protected DomainWizardPage(String pageName) {
 		this(pageName, DomainRegistry.getDomains());
 	}
+
 	protected DomainWizardPage(String pageName, List<IDomain> domainDescriptors) {
 		super(pageName);
 		this.domainDescriptors = domainDescriptors;
@@ -64,18 +60,7 @@ public class DomainWizardPage extends WizardPage {
 		final Composite composite = new Composite(parent, SWT.NONE);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(composite);
 		GridLayoutFactory.fillDefaults().applyTo(composite);
-		final Group domainSelectionGroup = new Group(composite, SWT.NONE);
-		domainSelectionGroup.setText("Select the statechart domain:");
-
-		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(domainSelectionGroup);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(domainSelectionGroup);
-
-		Label spacer = new Label(domainSelectionGroup, SWT.NONE);
-		GridDataFactory.fillDefaults().span(2, 1).applyTo(spacer);
-
-		image = new Label(domainSelectionGroup, SWT.NONE);
-		GridDataFactory.fillDefaults().grab(false, false).applyTo(image);
-		domainCombo = new ComboViewer(domainSelectionGroup, SWT.READ_ONLY);
+		domainCombo = new ComboViewer(composite, SWT.READ_ONLY);
 		GridDataFactory.fillDefaults().grab(true, false).align(SWT.FILL, SWT.CENTER).applyTo(domainCombo.getCombo());
 		domainCombo.setContentProvider(new ArrayContentProvider());
 		domainCombo.setLabelProvider(new LabelProvider() {
@@ -83,23 +68,10 @@ public class DomainWizardPage extends WizardPage {
 			public String getText(Object element) {
 				return ((IDomain) element).getName();
 			}
-		});
-		domainCombo.setInput(domainDescriptors);
 
-		description = new Label(domainSelectionGroup, SWT.WRAP);
-		GridDataFactory.fillDefaults().grab(true, false).span(2, 1).applyTo(description);
-		setControl(composite);
-		domainCombo.addSelectionChangedListener(new ISelectionChangedListener() {
-
-			public void selectionChanged(SelectionChangedEvent event) {
-				IDomain domain = unwrap(event.getSelection());
-				description.setText(domain.getDescription());
-				image.setImage(asImage(domain));
-				domainSelectionGroup.layout();
-
-			}
-
-			private Image asImage(IDomain domain) {
+			@Override
+			public Image getImage(Object element) {
+				IDomain domain = unwrap(domainCombo.getSelection());
 				ImageRegistry imageRegistry = DiagramActivator.getDefault().getImageRegistry();
 				Image image = imageRegistry.get(domain.getImagePath().toString());
 				if (image == null)
@@ -107,29 +79,24 @@ public class DomainWizardPage extends WizardPage {
 							ImageDescriptor.createFromURL(domain.getImagePath()).createImage());
 				return imageRegistry.get(domain.getImagePath().toString());
 			}
-
 		});
-		
-		trySelectDefaultDomain();
 
-		IConfigurationElement[] configurationElements = Platform.getExtensionRegistry()
-				.getConfigurationElementsFor("org.yakindu.sct.ui.wizard.create.contribution");
-		if (configurationElements.length > 0) {
-
-			Label spacer2 = new Label(domainSelectionGroup, SWT.NONE);
-			GridDataFactory.fillDefaults().span(2, 1).applyTo(spacer2);
-			for (IConfigurationElement iConfigurationElement : configurationElements) {
-				try {
-					CreationWizardContribution contribution = (CreationWizardContribution) iConfigurationElement
-							.createExecutableExtension("class");
-					contribution.toDomainWizardPage(composite);
-				} catch (CoreException e) {
-					e.printStackTrace();
-				}
+		domainCombo.setInput(domainDescriptors);
+		final Composite composite2 = new Composite(composite, SWT.BORDER);
+		composite2.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		composite2.setLayout(new FillLayout());
+		browser = new Browser(composite2, SWT.NONE);
+		domainCombo.addSelectionChangedListener(new ISelectionChangedListener() {
+			public void selectionChanged(SelectionChangedEvent event) {
+				URL url = unwrap(domainCombo.getSelection()).getDocumentationProvider().getDocumentationURL();
+				if (url != null)
+					browser.setUrl(url.toString());
 			}
-		}
+		});
+		setControl(composite);
+		trySelectDefaultDomain();
 	}
-	
+
 	private void trySelectDefaultDomain() {
 		try {
 			domainCombo.setSelection(new StructuredSelection(
@@ -141,14 +108,32 @@ public class DomainWizardPage extends WizardPage {
 		}
 	}
 
+	private boolean visible = false;
+
+	@Override
+	public void setVisible(boolean visible) {
+		this.visible = true;
+		super.setVisible(visible);
+		if (!visible) {
+			browser.setUrl("about:blank");
+		}
+	}
+
+	public boolean domainSelected() {
+		return visible;
+	}
+
+	public boolean isPageComplete() {
+		return super.isPageComplete() && visible;
+	}
+
 	public String getDomainID() {
 		return unwrap(domainCombo.getSelection()).getDomainID();
 	}
 
-	private IDomain unwrap(ISelection selection) {
+	protected IDomain unwrap(ISelection selection) {
 		IDomain domain = (IDomain) ((StructuredSelection) selection).getFirstElement();
 		return domain;
 	}
 
 }
-
