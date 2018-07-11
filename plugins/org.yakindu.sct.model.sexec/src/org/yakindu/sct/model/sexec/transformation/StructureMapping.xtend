@@ -63,7 +63,10 @@ class StructureMapping {
 	 * @return A set of used declaration that are imported from an external resource
 	 */
 	def protected importedDeclarations(Statechart it) {
-		it.eAllContents.filter(ElementReferenceExpression).map[reference].filter(Declaration).filter[decl|!decl.eResource.URI.equals(it.eResource.URI)].toSet
+		val allDeclarations = it.eAllContents.filter(ElementReferenceExpression).map[reference].filter(Declaration).toSet
+		return if(it.eResource !== null)
+			allDeclarations.filter[decl|!decl.eResource.URI.equals(it.eResource.URI)].toSet
+		else allDeclarations
 	}
 	
 	

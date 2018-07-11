@@ -37,7 +37,7 @@ import com.google.inject.name.Names;
  * @author axel terfloth
  *
  */
-public class ModelSequencerTest extends Assert {
+public abstract class ModelSequencerTest extends Assert {
 
 	@Inject
 	protected IModelSequencer sequencer;
