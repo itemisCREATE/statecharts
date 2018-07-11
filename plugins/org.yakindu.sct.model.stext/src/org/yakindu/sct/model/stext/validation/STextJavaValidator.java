@@ -206,7 +206,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				&& entry.getIncomingTransitions().isEmpty()) {
 			org.yakindu.sct.model.sgraph.State state = (org.yakindu.sct.model.sgraph.State) entry.getParentRegion()
 					.getComposite();
-			if (!STextValidationModelUtils.isDefault(entry)) {
+			if (!entry.isDefault()) {
 				boolean hasIncomingTransition = false;
 				Iterator<Transition> transitionIt = state.getIncomingTransitions().iterator();
 				while (transitionIt.hasNext() && !hasIncomingTransition) {
@@ -403,7 +403,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			org.yakindu.sct.model.sgraph.State state = (org.yakindu.sct.model.sgraph.State) exit.getParentRegion()
 					.getComposite();
 
-			if (!STextValidationModelUtils.isDefault(exit)) {
+			if (!exit.isDefault()) {
 				boolean hasOutgoingTransition = false;
 				boolean equalsOutgoingTransition = false;
 				Iterator<Transition> transitionIt = state.getOutgoingTransitions().iterator();
@@ -589,9 +589,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		Region parentRegion = entry.getParentRegion();
 		// 1. check if is toplevel
 		if (isTopLevelRegion(parentRegion)) {
-			boolean isDefaultEntry = STextValidationModelUtils.isDefault(entry);
 			// 2. check if is default entry
-			if (!isDefaultEntry) {
+			if (!entry.isDefault()) {
 				Map<Region, List<Entry>> regionsWithoutDefaultEntry = STextValidationModelUtils
 						.getRegionsWithoutDefaultEntry(Lists.newArrayList(parentRegion));
 				List<Entry> list = regionsWithoutDefaultEntry.get(parentRegion);
