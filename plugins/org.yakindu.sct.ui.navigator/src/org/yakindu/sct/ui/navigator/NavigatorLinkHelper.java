@@ -44,10 +44,10 @@ import org.yakindu.sct.ui.navigator.utils.ComposedAdapterFactoryUtil;
  */
 public class NavigatorLinkHelper implements ILinkHelper {
 
-	private AdapterFactoryContentProvider myAdapterFctoryContentProvier;
+	private AdapterFactoryContentProvider myAdapterFactoryContentProvier;
 
 	public NavigatorLinkHelper() {
-		myAdapterFctoryContentProvier = new AdapterFactoryContentProvider(
+		myAdapterFactoryContentProvier = new AdapterFactoryContentProvider(
 				ComposedAdapterFactoryUtil.FACTORY);
 	}
 
@@ -79,7 +79,7 @@ public class NavigatorLinkHelper implements ILinkHelper {
 			IFile file = WorkspaceSynchronizer.getFile(diagram.eResource());
 			if (file != null) {
 				DomainNavigatorItem item = new DomainNavigatorItem(diagram,
-						file, myAdapterFctoryContentProvier);
+						file, myAdapterFactoryContentProvier);
 				return new StructuredSelection(item);
 			}
 		}

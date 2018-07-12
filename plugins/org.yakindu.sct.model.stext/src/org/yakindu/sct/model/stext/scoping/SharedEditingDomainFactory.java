@@ -12,6 +12,14 @@ package org.yakindu.sct.model.stext.scoping;
 
 import java.io.IOException;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IResourceDelta;
+import org.eclipse.core.resources.IResourceDeltaVisitor;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -58,6 +66,7 @@ public class SharedEditingDomainFactory extends DiagramEditingDomainFactory
 		editingDomain.setID(DOMAIN_ID);
 		replaceCrossReferenceAdapterWithNonResolvingAdapter(editingDomain);
 		new WorkspaceSynchronizer(editingDomain, new WorkspaceSynchronizer.Delegate() {
+
 			public boolean handleResourceDeleted(Resource resource) {
 				resource.unload();
 				return true;
@@ -87,13 +96,44 @@ public class SharedEditingDomainFactory extends DiagramEditingDomainFactory
 				// nothing to dispose (especially as I am shared)
 			}
 		});
+
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(new IResourceChangeListener() {
+			@Override
+			public void resourceChanged(IResourceChangeEvent event) {
+				IResourceDelta delta = event.getDelta();
+				try {
+					if (delta != null) {
+						delta.accept(new IResourceDeltaVisitor() {
+							@Override
+							public boolean visit(IResourceDelta delta) throws CoreException {
+								if (delta.getKind() == IResourceDelta.ADDED) {
+									IResource resource = delta.getResource();
+									if (resource instanceof IFile) {
+										URI uri = URI.createPlatformResourceURI(resource.getFullPath().toString(),
+												true);
+										Resource existingResource = editingDomain.getResourceSet().getResource(uri,
+												false);
+										if (existingResource != null
+												&& !(existingResource instanceof AbstractSCTResource))
+											existingResource.unload();
+
+									}
+								}
+								return true;
+							}
+						});
+					}
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	protected void replaceCrossReferenceAdapterWithNonResolvingAdapter(final TransactionalEditingDomain domain) {
 		final CrossReferenceAdapter adapter = getCrossReferenceAdapter(domain);
 		if (null != adapter) {
 			adapter.unsetTarget(domain.getResourceSet());
-
 			domain.getResourceSet().eAdapters().remove(adapter);
 			domain.getResourceSet().eAdapters().add(new CrossReferenceAdapter(false));
 		}
