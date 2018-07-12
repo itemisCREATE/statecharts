@@ -34,6 +34,7 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.DefaultTrigger
+import org.yakindu.sct.model.sgraph.Transition
 
 class ReactionBuilder {
 	@Inject extension SexecElementMapping mapping
@@ -77,7 +78,7 @@ class ReactionBuilder {
 		
 		sc.allChoices().forEach( choice | choice.defineReaction() )
 		sc.allSynchronizations().forEach( sync | sync.defineReaction() )
-		sc.allExits().forEach( sync | sync.defineReaction() )
+		sc.allExits().forEach( exit | exit.defineReaction() )
 	}
 	
 
@@ -133,8 +134,8 @@ class ReactionBuilder {
 		
 		// find the transition that relates to the matching exit point
 		val outTransitions = (it.parentRegion.composite as Vertex).outgoingTransitions
-		var exitTrans = outTransitions.filter( t | t.trigger === null && t.exitPointName.equals(realName)).head
-		if (exitTrans === null) exitTrans = outTransitions.filter( t | t.trigger === null && t.exitPointName.equals('default')).head
+		var exitTrans = outTransitions.filter( t | t.hasNoTrigger && t.exitPointName.equals(realName)).head
+		if (exitTrans === null) exitTrans = outTransitions.filter( t | t.hasNoTrigger && t.exitPointName.equals('default')).head
 		
 		if (exitTrans !== null) {
 			val exitReaction = exitTrans.create
@@ -144,7 +145,11 @@ class ReactionBuilder {
 		if ( trace.addTraceSteps ) execExit.reactSequence.steps.add(0,it.create.newTraceNodeExecuted)
 		
 		return execExit.reactSequence
-	}	
+	}
+	
+	def protected hasNoTrigger(Transition t) {
+		return t.trigger === null && !(t.target instanceof Synchronization)
+	}
 
 	def alwaysTrue(Check check) {
 		if (check !== null && check.condition instanceof PrimitiveValueExpression) {
