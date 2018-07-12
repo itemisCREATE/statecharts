@@ -134,9 +134,6 @@ public class RegionFigure extends RectangleFigure {
 			return;
 		}
 		graphics.pushState();
-		// TODO check
-		int size = MapModeUtil.getMapMode(this)
-				.DPtoLP(regionBlurShadowWidth);
 		int step = MapModeUtil.getMapMode(this).DPtoLP(1);
 
 		graphics.setForegroundColor(ColorConstants.gray);
