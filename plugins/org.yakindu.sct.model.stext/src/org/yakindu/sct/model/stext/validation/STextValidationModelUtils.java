@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.ReactionProperty;
@@ -116,7 +115,7 @@ public final class STextValidationModelUtils {
 			boolean hasDefaultEntry = false;
 			final List<Entry> entries = getEntries(region.eContents());
 			for (Entry entry : entries) {
-				if (isDefault(entry)) {
+				if (entry.isDefault()) {
 					hasDefaultEntry = true;
 					break;
 				}
@@ -145,7 +144,7 @@ public final class STextValidationModelUtils {
 			final List<Exit> exits = getExits(region.eContents());
 			if (!exits.isEmpty()) {
 				for (Exit exit : exits) {
-					if (isDefault(exit)) {
+					if (exit.isDefault()) {
 						hasDefaultExit = true;
 						break;
 					}
@@ -159,21 +158,6 @@ public final class STextValidationModelUtils {
 			}
 		}
 		return regions;
-	}
-
-	/**
-	 * Checks if the name of the given element matches the requirements to be a
-	 * 'default' element.
-	 *
-	 * @param element
-	 *            - the {@link NamedElement}
-	 * @return {@code true} if the name is null, empty or equals 'default' (ignoring
-	 *         case).
-	 */
-	public static boolean isDefault(final NamedElement element) {
-		return element.getName() == null
-				|| (element.getName() != null && (element.getName().isEmpty() || element
-						.getName().equalsIgnoreCase("default")));
 	}
 
 	/**

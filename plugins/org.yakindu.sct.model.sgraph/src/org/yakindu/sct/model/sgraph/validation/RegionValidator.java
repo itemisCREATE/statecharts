@@ -52,12 +52,9 @@ public class RegionValidator extends AbstractSGraphValidator {
 			for (Region r : regions) {
 				Entry defaultEntry = null;
 				for (Vertex v : r.getVertices()) {
-					if (v instanceof Entry) {
-						String name = v.getName().trim().toLowerCase();
-						if (name != null || "".equals(name) || "default".equals(name)) {
-							defaultEntry = (Entry) v;
-							break;
-						}
+					if (v instanceof Entry && ((Entry) v).isDefault()) {
+						defaultEntry = (Entry) v;
+						break;
 					}
 				}
 				if (defaultEntry == null) {
@@ -76,7 +73,7 @@ public class RegionValidator extends AbstractSGraphValidator {
 		Region region = (Region) entry.eContainer();
 		List<Entry> initialEntires = region.getVertices().stream().filter(Entry.class::isInstance)
 				.map(Entry.class::cast).filter(v -> v.getKind() == EntryKind.INITIAL).collect(Collectors.toList());
-		boolean unamedEntryExists = initialEntires.stream().filter(v -> v.getName().equals("")).count() > 0;
+		boolean unamedEntryExists = initialEntires.stream().filter(v -> v.getName().trim().equals("")).count() > 0;
 		boolean defaultNamedEntryExists = initialEntires.stream()
 				.filter(v -> v.getName().trim().equalsIgnoreCase("default")).count() > 0;
 		if (unamedEntryExists && defaultNamedEntryExists) {
