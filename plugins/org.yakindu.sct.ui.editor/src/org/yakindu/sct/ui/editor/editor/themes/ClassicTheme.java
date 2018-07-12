@@ -4,6 +4,9 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.swt.graphics.Color;
 
 public class ClassicTheme extends AbstractTheme {
+	private static final Color REGION_BG_COLOR = new Color(null, 240, 240, 240);
+	private static final Color STATE_BG_COLOR = new Color(null, 205, 220, 243);
+
 	@Override
 	public boolean getDrawStateShadows() {
 		return true;
@@ -46,12 +49,13 @@ public class ClassicTheme extends AbstractTheme {
 
 	@Override
 	public Color getStateBgColor() {
-		return new Color(null, 205, 220, 243);
+		// TODO constant static
+		return STATE_BG_COLOR;
 	}
 
 	@Override
 	public Color getRegionBgColor() {
-		return new Color(null, 240, 240, 240);
+		return REGION_BG_COLOR;
 	}
 
 	@Override

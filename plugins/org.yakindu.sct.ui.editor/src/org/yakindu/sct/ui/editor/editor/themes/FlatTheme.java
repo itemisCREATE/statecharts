@@ -5,6 +5,11 @@ import org.eclipse.swt.graphics.Color;
 
 public class FlatTheme extends AbstractTheme {
 
+	private static final Color STATE_OUTLINE_COLOR = new Color(null, 163, 163, 163);
+	private static final Color REGION_OUTLINE_COLOR = new Color(null, 220, 220, 220);
+	private static final Color STATE_BG_COLOR = new Color(null, 205, 220, 243);
+	private static final Color CANVAS_BG_COLOR = new Color(null, 245, 245, 245);
+
 	@Override
 	public boolean getDrawStateShadows() {
 		return false;
@@ -42,12 +47,12 @@ public class FlatTheme extends AbstractTheme {
 
 	@Override
 	public Color getCanvasBgColor() {
-		return new Color(null, 245, 245, 245);
+		return CANVAS_BG_COLOR;
 	}
 
 	@Override
 	public Color getStateBgColor() {
-		return new Color(null, 205, 220, 243);
+		return STATE_BG_COLOR;
 	}
 
 	@Override
@@ -57,12 +62,12 @@ public class FlatTheme extends AbstractTheme {
 
 	@Override
 	public Color getRegionOutlineColor() {
-		return new Color(null, 220, 220, 220);
+		return REGION_OUTLINE_COLOR;
 	}
 
 	@Override
 	public Color getInternalStateOutlineColor() {
-		return new Color(null, 163, 163, 163);
+		return STATE_OUTLINE_COLOR;
 	}
 
 	@Override
