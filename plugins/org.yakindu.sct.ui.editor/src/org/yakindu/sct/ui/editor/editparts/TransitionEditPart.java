@@ -102,6 +102,12 @@ public class TransitionEditPart extends ConnectionNodeEditPart {
 	}
 
 	@Override
+	protected void refreshVisuals() {
+		getPrimaryShape().setTransitionBendpointRadius(themeProvider.getTheme().getTransitionBendpointRadius());
+		super.refreshVisuals();
+	}
+
+	@Override
 	public void setSelected(int value) {
 		switch (value) {
 			case EditPart.SELECTED:
@@ -135,6 +141,6 @@ public class TransitionEditPart extends ConnectionNodeEditPart {
 			return;
 
 		PolylineConnectionEx poly = (PolylineConnectionEx) connection;
-		poly.setRoundedBendpointsRadius(ThemeProvider.getInstance().getTheme().getTransitionBendpointRadius());
+		poly.setRoundedBendpointsRadius(themeProvider.getTheme().getTransitionBendpointRadius());
 	}
 }

@@ -45,6 +45,8 @@ import org.yakindu.sct.ui.editor.utils.HelpContextIds;
  *
  */
 public class TransitionExpressionEditPart extends PlugableExternalXtextLabelEditPart implements IXtextAwareEditPart {
+	protected ThemeProvider themeProvider = ThemeProvider.getInstance();
+
 	public TransitionExpressionEditPart(View view) {
 		super(view, Transition.class.getName());
 	}
@@ -93,6 +95,7 @@ public class TransitionExpressionEditPart extends PlugableExternalXtextLabelEdit
 
 	@Override
 	protected void refreshVisuals() {
+		figure.setOpaque(themeProvider.getTheme().getTransitionExpressionOpaque());
 		super.refreshVisuals();
 		updateTooltip();
 	}
@@ -101,7 +104,7 @@ public class TransitionExpressionEditPart extends PlugableExternalXtextLabelEdit
 	protected IFigure createFigure() {
 		IFigure figure = super.createFigure();
 		figure.setBackgroundColor(ColorConstants.white);
-		figure.setOpaque(ThemeProvider.getInstance().getTheme().getTransitionExpressionOpaque());
+		figure.setOpaque(themeProvider.getTheme().getTransitionExpressionOpaque());
 		return figure;
 	}
 
