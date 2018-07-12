@@ -67,26 +67,28 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 		ChangeBoundsRequest cbr = (ChangeBoundsRequest) request;
 		CompoundCommand result = new CompoundCommand();
 
-		// Update Bounds of the container hierachy
-		for (IGraphicalEditPart currentContainer : containerHierachy) {
-			IFigure figure = currentContainer.getFigure();
-			SetBoundsCommand boundsCommand = new SetBoundsCommand(getHost().getEditingDomain(),
-					DiagramUIMessages.SetLocationCommand_Label_Resize, new EObjectAdapter(
-							currentContainer.getNotationView()), figure.getBounds());
-			result.add(new ICommandProxy(boundsCommand));
-
-			// Update child bounds of elements that stand in the way...
-			List<IGraphicalEditPart> children = currentContainer.getParent().getChildren();
-			for (IGraphicalEditPart childPart : children) {
-				if (cbr.getEditParts().contains(childPart))
-					continue;
-				IFigure childFigure = childPart.getFigure();
-				if (childPart == currentContainer)
-					continue;
-				SetBoundsCommand childBoundsCommand = new SetBoundsCommand(getHost().getEditingDomain(),
+		// Update Bounds of the container hierarchy
+		if (containerHierachy != null) {
+			for (IGraphicalEditPart currentContainer : containerHierachy) {
+				IFigure figure = currentContainer.getFigure();
+				SetBoundsCommand boundsCommand = new SetBoundsCommand(getHost().getEditingDomain(),
 						DiagramUIMessages.SetLocationCommand_Label_Resize, new EObjectAdapter(
-								childPart.getNotationView()), childFigure.getBounds());
-				result.add(new ICommandProxy(childBoundsCommand));
+								currentContainer.getNotationView()), figure.getBounds());
+				result.add(new ICommandProxy(boundsCommand));
+				
+				// Update child bounds of elements that stand in the way...
+				List<IGraphicalEditPart> children = currentContainer.getParent().getChildren();
+				for (IGraphicalEditPart childPart : children) {
+					if (cbr.getEditParts().contains(childPart))
+						continue;
+					IFigure childFigure = childPart.getFigure();
+					if (childPart == currentContainer)
+						continue;
+					SetBoundsCommand childBoundsCommand = new SetBoundsCommand(getHost().getEditingDomain(),
+							DiagramUIMessages.SetLocationCommand_Label_Resize, new EObjectAdapter(
+									childPart.getNotationView()), childFigure.getBounds());
+					result.add(new ICommandProxy(childBoundsCommand));
+				}
 			}
 		}
 		return result;

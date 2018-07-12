@@ -17,9 +17,9 @@ import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.warningM
 import static org.junit.Assert.assertEquals;
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_ASSIGNMENT_TO_CONST_MSG;
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_LEFT_HAND_ASSIGNMENT_MSG;
-import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_OPTIONAL_MUST_BE_LAST_CODE;
-import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_VAR_ARGS_LAST_CODE;
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE;
+import static org.yakindu.base.types.validation.TypesJavaValidator.ERROR_OPTIONAL_MUST_BE_LAST_CODE;
+import static org.yakindu.base.types.validation.TypesJavaValidator.ERROR_VAR_ARGS_LAST_CODE;
 import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
 
 import java.util.HashMap;
@@ -47,6 +47,7 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
+import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
@@ -697,7 +698,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnusedExitPoint.sct");
 		doValidateAllContents(Exit.class);
 
-		assertIssueCount(diagnostics, 1);
+		assertIssueCount(diagnostics, 2);
 		assertError(diagnostics, EXIT_UNUSED);
 
 		resetDiagnostics();
@@ -863,7 +864,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		Scope context = (Scope) parseExpression("import: \"does.not.exist\"", ImportScope.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(context);
 		validationResult
-		.assertErrorContains(String.format(STextValidationMessages.IMPORT_NOT_RESOLVED_MSG, "does.not.exist"));
+				.assertErrorContains(String.format(STextValidationMessages.IMPORT_NOT_RESOLVED_MSG, "does.not.exist"));
 	}
 
 	@Test
@@ -1027,4 +1028,33 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		result.assertAll(warningMsg("Duplicate"), warningMsg("Duplicate"), errorMsg("Duplicate"),
 				errorMsg("Duplicate"));
 	}
+
+	@Test
+	public void checkUnknownEntry() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnknownEntryPoint.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Vertex) {
+				validator.validate(element, diagnostics, new HashMap<>());
+			}
+		}
+		assertIssueCount(diagnostics, 1);
+		assertWarning(diagnostics, ENTRY_NOT_EXIST + "'doesNotExist'");
+	}
+
+	@Test
+	public void checkNeverUsedExit() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnusedExitPoint2.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Exit) {
+				validator.validate(element, diagnostics, new HashMap<>());
+			}
+		}
+		assertIssueCount(diagnostics, 1);
+		assertWarning(diagnostics, EXIT_NEVER_USED + "'unusedExitPoint'");
+	}
+
 }

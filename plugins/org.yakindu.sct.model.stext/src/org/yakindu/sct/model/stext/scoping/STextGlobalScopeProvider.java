@@ -42,9 +42,8 @@ import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.resource.TypedResourceDescriptionStrategy;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
+import org.yakindu.sct.model.stext.extensions.STextExtensions;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
@@ -77,6 +76,8 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	private IPackageImport2URIMapper mapper;
 	@Inject
 	private ImportedResourceCache resourceDescriptionCache;
+	@Inject
+	private STextExtensions utils;
 
 	public void setCache(IResourceScopeCache cache) {
 		this.cache = cache;
@@ -87,7 +88,7 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	public IScope getScope(Resource context, EReference reference, Predicate<IEObjectDescription> filter) {
 		IScope parentScope = super.getScope(context, reference, filter);
 		parentScope = new SimpleScope(parentScope, filterPropertiesOfLibrary(context, reference, filter).getAllElements());
-		Statechart statechart = getStatechart(context);
+		Statechart statechart = utils.getStatechart(context);
 		if(statechart == null)
 			return IScope.NULLSCOPE;
 		final String statechartDomain = statechart.getDomainID();
@@ -157,7 +158,7 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 				if (specification != null) {
 					return EcoreUtil.getObjectsByType(specification.getScopes(), StextPackage.Literals.IMPORT_SCOPE);
 				} else {
-					Statechart statechart = getStatechart(resource);
+					Statechart statechart = utils.getStatechart(resource);
 					if (statechart == null) {
 						return new LinkedHashSet<>();
 					}
@@ -172,17 +173,6 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 		Optional<PackageImport> pkgImport = mapper.findPackageImport(resource, packageImport);
 		if (pkgImport.isPresent() && pkgImport.get().getUri() != null && URIConverter.INSTANCE.exists(pkgImport.get().getUri(), null)) {
 			acceptor.accept(pkgImport.get().getUri().toString());
-		}
-	}
-
-	protected Statechart getStatechart(Resource context) {
-		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context,
-				ContextElementAdapter.class);
-		if (provider == null || provider.getElement() == null) {
-			return (Statechart) EcoreUtil2.getObjectByType(context.getContents(), SGraphPackage.Literals.STATECHART);
-		} else {
-			return (Statechart) EcoreUtil.getObjectByType(provider.getElement().eResource().getContents(),
-					SGraphPackage.Literals.STATECHART);
 		}
 	}
 

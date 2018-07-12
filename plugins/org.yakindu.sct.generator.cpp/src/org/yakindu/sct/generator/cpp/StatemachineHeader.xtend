@@ -78,64 +78,72 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		'''
 			class «module» : «interfaceExtensions»
 			{
-				«generatePublicClassmembers»
-				«generateInnerClasses»
-				«generatePrivateClassmembers»
+				public:
+					«generatePublicClassmembers»
+				protected:
+					«generateProtectedClassmembers»
+				private:
+					«generatePrivateClassmembers»
 			};
 		'''
 	}
 
 	def protected generatePublicClassmembers(ExecutionFlow it) {
 		'''
-			public:
+			«module»();
+			
+			~«module»();
+			
+			«statesEnumDecl»
+			
+			«FOR s : it.scopes»«s.createPublicScope»«ENDFOR»
+			
+			«publicFunctionPrototypes»
+			
+			/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
+			sc_boolean «stateActiveFctID»(«statesEnumType» state) const;
+			
+			«IF timed»
+				//! number of time events used by the state machine.
+				static const sc_integer «timeEventsCountConst» = «timeEvents.size»;
 				
-				«module»();
-				
-				~«module»();
-				
-				«statesEnumDecl»
-				
-				«FOR s : it.scopes»«s.createPublicScope»«ENDFOR»
-				
-				«publicFunctionPrototypes»
-				
-				/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
-				sc_boolean «stateActiveFctID»(«statesEnumType» state) const;
-				
-				«IF timed»
-					//! number of time events used by the state machine.
-					static const sc_integer «timeEventsCountConst» = «timeEvents.size»;
-					
-					//! number of time events that can be active at once.
-					static const sc_integer «timeEventsCountparallelConst» = «(it.sourceElement as Statechart).maxNumberOfParallelTimeEvents»;
-				«ENDIF»
-				
+				//! number of time events that can be active at once.
+				static const sc_integer «timeEventsCountparallelConst» = «(it.sourceElement as Statechart).maxNumberOfParallelTimeEvents»;
+			«ENDIF»
+			«IF entry.innerClassVisibility == "public"»
+			
+			«generateInnerClasses»
+			«ENDIF»
+		'''
+	}
+	
+	def protected generateProtectedClassmembers(ExecutionFlow it) {
+		'''
+			«IF entry.innerClassVisibility == "protected"»
+			«generateInnerClasses»
+			«ENDIF»
 		'''
 	}
 
 	def protected generateInnerClasses(ExecutionFlow it) {
 		'''
-			«entry.innerClassVisibility»:
+			«IF (timed || hasOperationCallbacks)»
+			«copyConstructorDecl»
+			«assignmentOperatorDecl»
+			«ENDIF»
 			
-				«IF (timed || hasOperationCallbacks)»
-				«copyConstructorDecl»
-				
-				«assignmentOperatorDecl»
-				«ENDIF»
+			«FOR s : scopes.filter(typeof(InternalScope))»«s.createInterface»«ENDFOR»
 			
-				«FOR s : scopes.filter(typeof(InternalScope))»«s.createInterface»«ENDFOR»
+			«statemachineTypeDecl»
 			
-				«statemachineTypeDecl»
-				
-				«prototypes»
-				
+			«prototypes»
 		'''
 	}
 	
 	
 	def protected copyConstructorDecl(ExecutionFlow it) {
 		'''
-		«module»(const «module» &rhs);
+			«module»(const «module» &rhs);
 		'''
 	}
 	
@@ -145,8 +153,12 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		'''
 	}
 	
-		def protected generatePrivateClassmembers(ExecutionFlow it) {
-		''''''
+	def protected generatePrivateClassmembers(ExecutionFlow it) {
+		'''
+			«IF entry.innerClassVisibility == "private"»
+			«generateInnerClasses»
+			«ENDIF»
+		'''
 	}
 
 	def protected getInterfaceExtensions(ExecutionFlow flow) {

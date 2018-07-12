@@ -58,7 +58,8 @@ public abstract class AbstractPriorityDecorationProvider extends AbstractDecorat
 
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
-		if (StatechartPreferenceConstants.PREF_PRIORITY_LABELS.equals(event.getProperty())) {
+		if (StatechartPreferenceConstants.PREF_PRIORITY_LABELS.equals(event.getProperty())
+				|| StatechartPreferenceConstants.PREF_FONT_SCALING.equals(event.getProperty())) {
 			for (IDecorator decorator : decorators) {
 				decorator.refresh();
 			}

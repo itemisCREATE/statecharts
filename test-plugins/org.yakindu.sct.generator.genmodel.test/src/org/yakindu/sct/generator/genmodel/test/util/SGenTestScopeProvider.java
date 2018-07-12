@@ -34,15 +34,22 @@ public class SGenTestScopeProvider extends SGenScopeProvider {
 	private XtextResource resource;
 
 	@Override
-	protected IScope scope_GeneratorEntry_elementRef(EObject context,
-			EReference reference) {
-		return Scopes.scopeFor(Lists.newArrayList(createDummyModel()));
+	protected IScope scope_GeneratorEntry_elementRef(EObject context, EReference reference) {
+		return Scopes.scopeFor(Lists.newArrayList(createDummyModel(), createDummyDomain()));
 
 	}
 
-	private Statechart createDummyModel() {
+	protected Statechart createDummyModel() {
 		Statechart chart = SGraphFactory.eINSTANCE.createStatechart();
 		chart.setName("Example");
+		resource.getContents().add(chart);
+		return chart;
+	}
+
+	protected Statechart createDummyDomain() {
+		Statechart chart = SGraphFactory.eINSTANCE.createStatechart();
+		chart.setName("UnknownDomainStatechart");
+		chart.setDomainID("does.not.exist");
 		resource.getContents().add(chart);
 		return chart;
 	}

@@ -33,7 +33,6 @@ public class StatechartValidator extends AbstractSGraphValidator {
 		}
 	}
 
-	
 	protected boolean isValidJavaIdentifier(String s) {
 		if (s == null || s.length() == 0) {
 			return false;

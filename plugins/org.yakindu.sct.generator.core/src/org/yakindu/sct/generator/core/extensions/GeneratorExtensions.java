@@ -12,8 +12,10 @@ package org.yakindu.sct.generator.core.extensions;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -45,6 +47,7 @@ public class GeneratorExtensions {
 	private static final String ATTRIBUTE_ELEMENT_REF_TYPE = "elementRefType";
 	private static final String ATTRIBUTE_ICON = "icon";
 	private static final String ATTRIBUTE_DESCRIPTION = "description";
+	private static final String DOMAIN_CONFIG_ELEMENT = "Domain";
 
 	private static List<IGeneratorDescriptor> descriptors;
 
@@ -90,6 +93,17 @@ public class GeneratorExtensions {
 				}
 			}
 			return libs;
+		}
+		
+		public Set<String> getValidDomains() {
+			Set<String> domains = new HashSet<>();
+			for (IConfigurationElement child : configElement.getChildren(DOMAIN_CONFIG_ELEMENT)) {
+				String domainID = child.getAttribute(ATTRIBUTE_ID);
+				if (domainID != null && !domainID.isEmpty()) {
+					domains.add(domainID);
+				}
+			}
+			return domains;
 		}
 
 		@Override

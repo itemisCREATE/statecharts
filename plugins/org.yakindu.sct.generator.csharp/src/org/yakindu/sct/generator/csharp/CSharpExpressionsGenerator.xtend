@@ -62,7 +62,7 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 		if (isSame(expression.leftOperand.infer.type, getType(GenericTypeSystem.STRING))) {
 			expression.logicalString
 		} else
-			expression.leftOperand.code.toString.trim + expression.operator.value + expression.rightOperand.code;
+			expression.leftOperand.code.toString.trim + expression.operator.literal + expression.rightOperand.code;
 	}
 
 	def CharSequence logicalString(LogicalRelationExpression expression) {

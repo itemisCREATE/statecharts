@@ -27,7 +27,7 @@ import org.yakindu.sct.model.sgraph.Vertex;
 public class TransitionValidator extends AbstractSGraphValidator {
 
 	private static final String RANSITION_SOURCE_NOT_ORTHOGONAL_TO_TARGET_MSG = "Source and target of a transition must not be located in orthogonal regions!";
-	public static final String  TRANSITION_SOURCE_NOT_ORTHOGONAL_TO_TARGET_CODE = "transition.SourceNotOrthogonalToTarget";
+	public static final String TRANSITION_SOURCE_NOT_ORTHOGONAL_TO_TARGET_CODE = "transition.SourceNotOrthogonalToTarget";
 
 	@Check
 	public void checkTransitionSourceNotOrthogonalToTarget(Transition transition) {
@@ -42,6 +42,4 @@ public class TransitionValidator extends AbstractSGraphValidator {
 		}
 	}
 
-
-	
 }

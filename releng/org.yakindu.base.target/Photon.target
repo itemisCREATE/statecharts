@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Photon (SCT)" sequenceNumber="8">
+<?pde version="3.8"?><target name="Photon (SCT)" sequenceNumber="12">
 <locations>
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.pde.source.feature.group" version="3.13.100.v20180308-0630"/>
-<unit id="org.eclipse.platform.ide" version="4.8.0.I20180308-0630"/>
-<repository location="http://download.eclipse.org/eclipse/updates/4.8milestones"/>
-</location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.jgit.feature.group" version="4.5.0.201609210915-r"/>
 <repository location="http://download.eclipse.org/egit/updates-4.5/"/>
@@ -25,20 +20,27 @@
 <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.emf.compare.diagram.papyrus.feature.group" version="3.3.2.201709090201"/>
-<unit id="org.eclipse.emf.compare.ide.ui.feature.group" version="3.3.2.201709090201"/>
-<unit id="org.eclipse.epp.logging.aeri.feature.feature.group" version="2.0.7.v20170906-1327"/>
-<repository location="http://download.eclipse.org/releases/oxygen/"/>
+<unit id="org.eclipse.pde.source.feature.group" version="3.13.100.v20180611-0826"/>
+<unit id="org.eclipse.platform.sdk" version="4.8.0.I20180611-0500"/>
+<repository location="http://download.eclipse.org/eclipse/updates/4.8"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.cdt.sdk.feature.group" version="9.5.0.201803112200"/>
-<unit id="org.eclipse.emf.sdk.feature.group" version="2.14.0.v20180123-1714"/>
-<unit id="org.eclipse.gmf.feature.group" version="1.12.0.201801291558"/>
-<unit id="org.eclipse.gmf.runtime.sdk.feature.group" version="1.12.0.201801291558"/>
-<unit id="org.eclipse.jdt.feature.group" version="3.14.0.v20180308-0630"/>
-<unit id="org.eclipse.uml2.sdk.feature.group" version="5.4.0.v20180308-1732"/>
-<unit id="org.eclipse.xtext.sdk.feature.group" version="2.13.0.v20171020-0920"/>
+<unit id="org.eclipse.cdt.sdk.feature.group" version="9.5.0.201806170908"/>
+<unit id="org.eclipse.emf.compare.ide.ui.feature.group" version="3.3.3.201805161152"/>
+<unit id="org.eclipse.emf.ecore.xcore.sdk.feature.group" version="1.6.0.v20180527-1213"/>
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.14.0.v20180529-1157"/>
+<unit id="org.eclipse.epp.logging.aeri.feature.feature.group" version="2.0.7.v20170906-1327"/>
+<unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.12.0.201805221301"/>
+<unit id="org.eclipse.gmf.runtime.sdk.feature.group" version="1.12.0.201806010809"/>
+<unit id="org.eclipse.jdt.feature.group" version="3.14.0.v20180611-0500"/>
+<unit id="org.eclipse.recommenders.news.rcp.feature.feature.group" version="2.5.3.v20180609-1554"/>
+<unit id="org.eclipse.uml2.sdk.feature.group" version="5.4.0.v20180604-1153"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.14.0.v20180523-0937"/>
 <repository location="http://download.eclipse.org/releases/photon/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.compare.diagram.papyrus.feature.group" version="3.3.2.201709090201"/>
+<repository location="http://download.eclipse.org/releases/oxygen/"/>
 </location>
 </locations>
 </target>

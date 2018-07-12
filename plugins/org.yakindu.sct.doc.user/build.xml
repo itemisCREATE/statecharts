@@ -205,13 +205,14 @@
                 <include name="user-guide/code_generation_custom.textile" />
                 <include name="user-guide/generating_code_headless.textile" />
                 <include name="user-guide/sctunit.textile" />
+                <include name="user-guide/search_and_navigate.textile" />
                 <!-- <include name="user-guide/glossary.textile" /> -->
             </fileset>
 
             <!-- Check whether we have all the expected textile source files – no more, no less: -->
             <fail message="Number of textile source file(s) doesn't match.">
                 <condition>
-                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="15" />
+                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="16" />
                 </condition>
             </fail>
 
@@ -405,6 +406,7 @@
                         <file name="user-guide/code_generation_custom.textile" />
                         <file name="user-guide/generating_code_headless.textile" />
                         <file name="user-guide/sctunit.textile" />
+                        <file name="user-guide/search_and_navigate.textile" />
                         <!-- file name="user-guide/glossary.textile" / -->
                     </filelist>
                 </textile-files>

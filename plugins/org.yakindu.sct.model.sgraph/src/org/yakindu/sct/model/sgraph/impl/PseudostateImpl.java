@@ -48,4 +48,28 @@ public abstract class PseudostateImpl extends VertexImpl implements Pseudostate 
 		return SGraphPackage.Literals.PSEUDOSTATE;
 	}
 
+	/**
+	 * Checks if the name of the given element matches the requirements to be a
+	 * 'default' element.
+	 *
+	 * @param element
+	 *            - the {@link NamedElement}
+	 * @return {@code true} if the name is null, empty or equals 'default' (ignoring
+	 *         case).
+	 */
+	
+	
+	/**
+	 * Checks if the name matches the requirements to be a 'default' element.
+	 *
+	 * @return {@code true} if the name is null, empty or equals 'default'
+	 *         (ignoring case and after whitespace trimming).
+	 * 
+	 * @generated NOT
+	 */
+	public boolean isDefault() {
+		return getName() == null
+				|| (getName() != null && (getName().trim().isEmpty() || getName().trim().equalsIgnoreCase("default")));
+	}
+
 } //PseudostateImpl
