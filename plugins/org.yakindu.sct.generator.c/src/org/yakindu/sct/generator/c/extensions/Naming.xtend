@@ -123,6 +123,13 @@ class Naming {
 		}
 		return entryStatemachinePrefix.toFirstUpper
 	}
+	
+	def String getContainerType(EObject it) {
+		if (flow !== null) {
+			return flow.type
+		}
+		return statechart.type
+	}
 
 	def dispatch instance(InterfaceScope it) {
 		'iface' + (if(name.nullOrEmpty) '' else name).asIdentifier.toFirstUpper
