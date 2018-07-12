@@ -27,7 +27,6 @@ import org.eclipse.gmf.runtime.draw2d.ui.mapmode.MapModeUtil;
 import org.eclipse.swt.graphics.Color;
 import org.yakindu.base.xtext.utils.gmf.figures.SyntaxColoringLabel;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
-import org.yakindu.sct.ui.editor.editor.themes.ThemeProvider;
 
 /**
  *
@@ -41,6 +40,10 @@ public class RegionFigure extends RectangleFigure {
 	private RectangleFigure compartmentPane;
 
 	private final IMapMode mapMode;
+
+	private boolean drawRegionBgGradient;
+	private boolean drawRegionShadows;
+	private int regionBlurShadowWidth;
 
 	public RegionFigure(IMapMode mapMode) {
 		this.mapMode = mapMode;
@@ -75,6 +78,30 @@ public class RegionFigure extends RectangleFigure {
 		return compartmentPane;
 	}
 
+	public boolean getDrawRegionBgGradient() {
+		return drawRegionBgGradient;
+	}
+
+	public void setDrawRegionBgGradient(boolean drawRegionBgGradient) {
+		this.drawRegionBgGradient = drawRegionBgGradient;
+	}
+
+	public boolean getDrawRegionShadows() {
+		return drawRegionShadows;
+	}
+
+	public void setDrawRegionShadows(boolean drawRegionShadows) {
+		this.drawRegionShadows = drawRegionShadows;
+	}
+
+	public int getRegionBlurShadowWidth() {
+		return regionBlurShadowWidth;
+	}
+
+	public void setRegionBlurShadowWidth(int regionBlurShadowWidth) {
+		this.regionBlurShadowWidth = regionBlurShadowWidth;
+	}
+
 	@Override
 	public void paintFigure(Graphics graphics) {
 		super.paintFigure(graphics);
@@ -89,9 +116,7 @@ public class RegionFigure extends RectangleFigure {
 	 */
 	@Override
 	protected void fillShape(Graphics graphics) {
-		setBackgroundColor(ThemeProvider.getInstance().getTheme().getRegionBgColor());
-		setForegroundColor(ThemeProvider.getInstance().getTheme().getRegionOutlineColor());
-		if (ThemeProvider.getInstance().getTheme().getDrawRegionBgGradient()) {
+		if (drawRegionBgGradient) {
 			Color c = mixColor(getBackgroundColor(), ColorConstants.white, 220);
 			fillVerticalGradientRectangle(graphics, getBounds(), getBackgroundColor(), c);
 			c.dispose();
@@ -105,13 +130,13 @@ public class RegionFigure extends RectangleFigure {
 	}
 
 	private void drawBlurredShadow(Graphics graphics) {
-		if (!ThemeProvider.getInstance().getTheme().getDrawRegionShadows()) {
+		if (!drawRegionShadows) {
 			return;
 		}
 		graphics.pushState();
-
+		// TODO check
 		int size = MapModeUtil.getMapMode(this)
-				.DPtoLP(ThemeProvider.getInstance().getTheme().getRegionBlurShadowWidth());
+				.DPtoLP(regionBlurShadowWidth);
 		int step = MapModeUtil.getMapMode(this).DPtoLP(1);
 
 		graphics.setForegroundColor(ColorConstants.gray);

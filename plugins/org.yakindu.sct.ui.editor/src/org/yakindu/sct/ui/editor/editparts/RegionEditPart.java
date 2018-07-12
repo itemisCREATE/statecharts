@@ -40,17 +40,40 @@ import org.yakindu.sct.ui.editor.policies.PreferredSizeHandlerEditPolicy;
  *
  */
 public class RegionEditPart extends ShapeNodeEditPart {
+
+	private ThemeProvider themeProvider = ThemeProvider.getInstance();
+
 	public RegionEditPart(View view) {
 		super(view);
 	}
 
 	@Override
+	public void activate() {
+		super.activate();
+
+	}
+	@Override
 	protected NodeFigure createNodeFigure() {
 		final NodeFigure figure = new NodeFigure();
 		figure.setLayoutManager(new StackLayout());
 		figure.setMinimumSize(new Dimension(0, 0));
-		figure.add(new RegionFigure(getMapMode()));
+		figure.add(createPrimaryShape());
 		return figure;
+	}
+
+	private RegionFigure createPrimaryShape() {
+		RegionFigure figure = new RegionFigure(getMapMode());
+		setFigureThemeOptions(figure);
+		return figure;
+	}
+
+	private void setFigureThemeOptions(RegionFigure figure) {
+		IStatechartsTheme theme = themeProvider.getTheme();
+		figure.setBackgroundColor(theme.getRegionBgColor());
+		figure.setForegroundColor(theme.getRegionOutlineColor());
+		figure.setDrawRegionBgGradient(theme.getDrawRegionBgGradient());
+		figure.setDrawRegionShadows(theme.getDrawRegionShadows());
+		figure.setRegionBlurShadowWidth(theme.getRegionBlurShadowWidth());
 	}
 
 	@Override
@@ -76,6 +99,12 @@ public class RegionEditPart extends ShapeNodeEditPart {
 			}
 		}
 		return super.getTargetEditPart(request);
+	}
+
+	@Override
+	protected void refreshVisuals() {
+		setFigureThemeOptions(getPrimaryShape());
+		super.refreshVisuals();
 	}
 
 	@Override
