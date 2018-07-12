@@ -38,6 +38,8 @@ import org.yakindu.sct.ui.editor.policies.InitialPointsConnectionBendpointEditPo
 @SuppressWarnings("restriction")
 public class TransitionEditPart extends ConnectionNodeEditPart {
 
+	protected ThemeProvider themeProvider = ThemeProvider.getInstance();
+
 	public TransitionEditPart(View view) {
 		super(view);
 	}
@@ -45,6 +47,7 @@ public class TransitionEditPart extends ConnectionNodeEditPart {
 	@Override
 	protected Connection createConnectionFigure() {
 		TransitionFigure transitionFigure = new TransitionFigure(getMapMode());
+		transitionFigure.setTransitionBendpointRadius(themeProvider.getTheme().getTransitionBendpointRadius());
 		return transitionFigure;
 	}
 

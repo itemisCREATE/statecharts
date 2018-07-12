@@ -17,7 +17,6 @@ import org.eclipse.draw2d.PolygonDecoration;
 import org.eclipse.draw2d.RotatableDecoration;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
-import org.yakindu.sct.ui.editor.editor.themes.ThemeProvider;
 
 /**
  *
@@ -28,7 +27,9 @@ public class TransitionFigure extends PolylineConnectionEx {
 
 	private final IMapMode mapMode;
 
-	protected static final int TOLERANCE = 3;
+	protected static final int TOLERANCE = 4;
+
+	protected int transitionBendpointRadius;
 
 	public TransitionFigure(IMapMode mapMode) {
 		this(mapMode, false);
@@ -42,7 +43,15 @@ public class TransitionFigure extends PolylineConnectionEx {
 			setSourceDecoration(createTargetDecoration());
 		else
 			setTargetDecoration(createTargetDecoration());
-		setRoundedBendpointsRadius(ThemeProvider.getInstance().getTheme().getTransitionBendpointRadius());
+		setRoundedBendpointsRadius(transitionBendpointRadius);
+	}
+
+	public int getTransitionBendpointRadius() {
+		return transitionBendpointRadius;
+	}
+
+	public void setTransitionBendpointRadius(int transitionBendpointRadius) {
+		this.transitionBendpointRadius = transitionBendpointRadius;
 	}
 
 	protected void setTolerance() {
@@ -59,7 +68,7 @@ public class TransitionFigure extends PolylineConnectionEx {
 
 	@Override
 	public void paintFigure(Graphics graphics) {
-		setRoundedBendpointsRadius(ThemeProvider.getInstance().getTheme().getTransitionBendpointRadius());
+		setRoundedBendpointsRadius(transitionBendpointRadius);
 		super.paintFigure(graphics);
 	}
 
