@@ -43,6 +43,7 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.editor.figures.StateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
+import org.yakindu.sct.ui.editor.editor.themes.IStatechartsTheme;
 import org.yakindu.sct.ui.editor.editor.themes.ThemeProvider;
 import org.yakindu.sct.ui.editor.editparts.tracker.NonRevealingDragEditPartsTrackerEx;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
@@ -63,6 +64,8 @@ import org.yakindu.sct.ui.editor.providers.SemanticHints;
 public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart {
 
 	private EditPart figureCompartmentEditPart;
+
+	private ThemeProvider themeProvider = ThemeProvider.getInstance();
 
 	public StateEditPart(View view) {
 		super(view);
@@ -120,8 +123,20 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 		return MapModeUtils.getDefaultSizeDimension(getMapMode());
 	}
 
-	public StateFigure createPrimaryShape() {
-		return new StateFigure(getMapMode());
+	protected StateFigure createPrimaryShape() {
+		StateFigure stateFigure = new StateFigure(getMapMode());
+		setFigureThemeOptions(stateFigure);
+		return stateFigure;
+	}
+
+	protected void setFigureThemeOptions(StateFigure figure) {
+		IStatechartsTheme theme = themeProvider.getTheme();
+		figure.setBackgroundColor(theme.getStateBgColor());
+		figure.setForegroundColor(
+				theme.getStateOutlineColor(theme.getStateBgColor()));
+		figure.setDrawStateBgGradient(theme.getDrawStateBgGradient());
+		figure.setDrawStateShadows(theme.getDrawStateShadows());
+		figure.setBlurShadowWidth(theme.getStateBlurShadowWidth());
 	}
 
 	@Override
@@ -136,6 +151,7 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 	@Override
 	protected void refreshVisuals() {
 		refreshCompartmentLayout();
+		setFigureThemeOptions(getPrimaryShape());
 		super.refreshVisuals();
 	}
 

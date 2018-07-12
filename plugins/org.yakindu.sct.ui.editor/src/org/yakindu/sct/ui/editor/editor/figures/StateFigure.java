@@ -28,7 +28,6 @@ import org.eclipse.gmf.runtime.draw2d.ui.mapmode.MapModeUtil;
 import org.eclipse.swt.graphics.Color;
 import org.yakindu.base.xtext.utils.gmf.figures.SyntaxColoringLabel;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
-import org.yakindu.sct.ui.editor.editor.themes.ThemeProvider;
 
 /**
  *
@@ -40,6 +39,10 @@ public class StateFigure extends RoundedRectangle {
 	private WrappingLabel nameFigure;
 	private Figure textCompartmentPane;
 	private Figure figureCompartmentPane;
+
+	private int blurShadowWidth;
+	private boolean drawStateBgGradient;
+	private boolean drawStateShadows;
 
 	public StateFigure(IMapMode mapMode) {
 		GridLayout layout = new GridLayout(1, false);
@@ -87,23 +90,44 @@ public class StateFigure extends RoundedRectangle {
 	@Override
 	public Dimension getPreferredSize(int wHint, int hHint) {
 		Dimension result = super.getPreferredSize(wHint, hHint);
-		return new Dimension(result.width + ThemeProvider.getInstance().getTheme().getStateBlurShadowWidth(),
-				result.height + ThemeProvider.getInstance().getTheme().getStateBlurShadowWidth());
+		return new Dimension(result.width + blurShadowWidth, result.height + blurShadowWidth);
+	}
+
+	public int getBlurShadowWidth() {
+		return blurShadowWidth;
+	}
+
+	public void setBlurShadowWidth(int blurShadowWidth) {
+		this.blurShadowWidth = blurShadowWidth;
+	}
+
+	public boolean isDrawStateBgGradient() {
+		return drawStateBgGradient;
+	}
+
+	public void setDrawStateBgGradient(boolean drawStateBgGradient) {
+		this.drawStateBgGradient = drawStateBgGradient;
+	}
+
+	public boolean isDrawStateShadows() {
+		return drawStateShadows;
+	}
+
+	public void setDrawStateShadows(boolean drawStateShadows) {
+		this.drawStateShadows = drawStateShadows;
 	}
 
 	@Override
 	public void setBounds(Rectangle rect) {
 		// reduce the width and height with the blur shadow
 		super.setBounds(new Rectangle(rect.x, rect.y, rect.width
-				- ThemeProvider.getInstance().getTheme().getStateBlurShadowWidth(),
-				rect.height - ThemeProvider.getInstance().getTheme().getStateBlurShadowWidth()));
+				- blurShadowWidth, rect.height - blurShadowWidth));
 	}
 
 	// ========= drawing related methods ============================
 
 	@Override
 	public void paintFigure(Graphics graphics) {
-		graphics.setForegroundColor(ThemeProvider.getInstance().getTheme().getStateOutlineColor(getBackgroundColor()));
 		drawBlurredShadow(graphics);
 		super.paintFigure(graphics);
 	}
@@ -114,7 +138,7 @@ public class StateFigure extends RoundedRectangle {
 	 */
 	@Override
 	protected void fillShape(Graphics graphics) {
-		if (ThemeProvider.getInstance().getTheme().getDrawStateBgGradient()) {
+		if (drawStateBgGradient) {
 			Color c = mixColor(getBackgroundColor(), ColorConstants.white, 224);
 			fillVerticalGradientRoundedRectangle(graphics, getBounds(), getCornerDimensions(), getBackgroundColor(), c);
 			c.dispose();
@@ -124,13 +148,13 @@ public class StateFigure extends RoundedRectangle {
 	}
 
 	private void drawBlurredShadow(Graphics graphics) {
-		if (!ThemeProvider.getInstance().getTheme().getDrawStateShadows()) {
+		if (!drawStateShadows) {
 			return;
 		}
 		graphics.pushState();
 
 		int size = MapModeUtil.getMapMode(this)
-				.DPtoLP(ThemeProvider.getInstance().getTheme().getStateBlurShadowWidth());
+				.DPtoLP(blurShadowWidth);
 		int step = MapModeUtil.getMapMode(this).DPtoLP(-1);
 
 		graphics.setForegroundColor(ColorConstants.gray);
