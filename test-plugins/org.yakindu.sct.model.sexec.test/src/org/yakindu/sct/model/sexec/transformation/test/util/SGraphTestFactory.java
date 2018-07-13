@@ -12,6 +12,7 @@ package org.yakindu.sct.model.sexec.transformation.test.util;
 
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
+import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
@@ -72,6 +73,14 @@ public class SGraphTestFactory extends SGraphFactoryImpl {
 		if (r != null)
 			r.getVertices().add(entry);
 		return entry;
+	}
+	
+	public static Exit _createExit(String name, Region r) {
+		Exit exit = SGraphFactory.eINSTANCE.createExit();
+		exit.setName(name);
+		if (r != null)
+			r.getVertices().add(exit);
+		return exit;
 	}
 
 	public static Synchronization _createSynchronization(Region r) {

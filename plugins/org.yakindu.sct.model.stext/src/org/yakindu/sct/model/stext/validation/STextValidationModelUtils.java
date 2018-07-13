@@ -22,6 +22,7 @@ import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.stext.EntryPointSpec;
 import org.yakindu.sct.model.stext.stext.ExitPointSpec;
@@ -204,7 +205,8 @@ public final class STextValidationModelUtils {
 				}
 			}
 		} else {
-			isDefault = transition.getTrigger() == null;
+			isDefault = transition.getTrigger() == null && 
+					!(transition.getTarget() instanceof Synchronization); // transitions to sync nodes have implicit guard
 		}
 
 		return isDefault;

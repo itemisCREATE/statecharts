@@ -812,6 +812,15 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		assertIssueCount(diagnostics, 1);
 		assertError(diagnostics, EXIT_UNUSED);
 	}
+	
+	@Test
+	public void checkExitTransitionExistsNoSync() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "NoExitTransitionToSync.sct");
+
+		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics, EXIT_UNUSED);
+	}
 
 	@Test
 	public void checkAssignmentToFinalVariable() {
