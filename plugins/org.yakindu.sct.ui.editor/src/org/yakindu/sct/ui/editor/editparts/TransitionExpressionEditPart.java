@@ -26,18 +26,18 @@ import org.eclipse.gmf.runtime.diagram.ui.tools.DragEditPartsTrackerEx;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
 import org.eclipse.gmf.runtime.notation.StringValueStyle;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.FontData;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.xtext.utils.gmf.directedit.IXtextAwareEditPart;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.commands.ToggleShowDocumentationCommand;
 import org.yakindu.sct.ui.editor.editor.themes.ThemeProvider;
 import org.yakindu.sct.ui.editor.editparts.SpecificationElementEditPart.MultilineTextCellEditor;
 import org.yakindu.sct.ui.editor.policies.ContextSensitiveHelpPolicy;
 import org.yakindu.sct.ui.editor.policies.TransitionExpressionComponentEditPolicy;
-import org.yakindu.sct.ui.editor.utils.FontScalingUtil;
 import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 
@@ -51,6 +51,12 @@ public class TransitionExpressionEditPart extends PlugableExternalXtextLabelEdit
 
 	public TransitionExpressionEditPart(View view) {
 		super(view, Transition.class.getName());
+	}
+
+	@Override
+	public void activate() {
+		super.activate();
+		DiagramActivator.getDefault().getPreferenceStore().addPropertyChangeListener(this);
 	}
 
 	@Override
@@ -97,7 +103,6 @@ public class TransitionExpressionEditPart extends PlugableExternalXtextLabelEdit
 
 	@Override
 	protected void refreshVisuals() {
-		figure.setOpaque(themeProvider.getTheme().getTransitionExpressionOpaque());
 		super.refreshVisuals();
 		updateTooltip();
 	}
@@ -131,5 +136,11 @@ public class TransitionExpressionEditPart extends PlugableExternalXtextLabelEdit
 		}
 		return SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION;
 	}
-	
+
+	@Override
+	public void propertyChange(PropertyChangeEvent event) {
+		super.propertyChange(event);
+		figure.setOpaque(themeProvider.getTheme().getTransitionExpressionOpaque());
+	}
+
 }

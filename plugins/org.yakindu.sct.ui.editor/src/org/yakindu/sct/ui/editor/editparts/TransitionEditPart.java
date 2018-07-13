@@ -26,9 +26,13 @@ import org.eclipse.gmf.runtime.gef.ui.internal.editpolicies.LineMode;
 import org.eclipse.gmf.runtime.gef.ui.internal.tools.SelectConnectionEditPartTracker;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
+import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.editor.figures.TransitionFigure;
 import org.yakindu.sct.ui.editor.editor.themes.ThemeProvider;
 import org.yakindu.sct.ui.editor.policies.InitialPointsConnectionBendpointEditPolicy;
+import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 
 /**
  *
@@ -36,7 +40,7 @@ import org.yakindu.sct.ui.editor.policies.InitialPointsConnectionBendpointEditPo
  *
  */
 @SuppressWarnings("restriction")
-public class TransitionEditPart extends ConnectionNodeEditPart {
+public class TransitionEditPart extends ConnectionNodeEditPart implements IPropertyChangeListener {
 
 	protected ThemeProvider themeProvider = ThemeProvider.getInstance();
 
@@ -49,6 +53,12 @@ public class TransitionEditPart extends ConnectionNodeEditPart {
 		TransitionFigure transitionFigure = new TransitionFigure(getMapMode());
 		transitionFigure.setTransitionBendpointRadius(themeProvider.getTheme().getTransitionBendpointRadius());
 		return transitionFigure;
+	}
+
+	@Override
+	public void activate() {
+		super.activate();
+		DiagramActivator.getDefault().getPreferenceStore().addPropertyChangeListener(this);
 	}
 
 	private TransitionFigure getPrimaryShape() {
@@ -102,12 +112,6 @@ public class TransitionEditPart extends ConnectionNodeEditPart {
 	}
 
 	@Override
-	protected void refreshVisuals() {
-		getPrimaryShape().setTransitionBendpointRadius(themeProvider.getTheme().getTransitionBendpointRadius());
-		super.refreshVisuals();
-	}
-
-	@Override
 	public void setSelected(int value) {
 		switch (value) {
 			case EditPart.SELECTED:
@@ -142,5 +146,15 @@ public class TransitionEditPart extends ConnectionNodeEditPart {
 
 		PolylineConnectionEx poly = (PolylineConnectionEx) connection;
 		poly.setRoundedBendpointsRadius(themeProvider.getTheme().getTransitionBendpointRadius());
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent event) {
+		if (StatechartPreferenceConstants.PREF_SCT_THEME.equals(event.getProperty())) {
+			getPrimaryShape().setTransitionBendpointRadius(themeProvider.getTheme().getTransitionBendpointRadius());
+			getFigure().invalidateTree();
+			getFigure().revalidate();
+		}
+
 	}
 }

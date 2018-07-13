@@ -6,16 +6,16 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.preferences;
 
 import org.eclipse.gmf.runtime.diagram.ui.preferences.IPreferenceConstants;
 
 /**
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public interface StatechartPreferenceConstants extends IPreferenceConstants {
 
@@ -27,4 +27,5 @@ public interface StatechartPreferenceConstants extends IPreferenceConstants {
 	String PREF_LIVE_VALIDATION = "Appearance.live.validation";
 	String PREF_SYNTAX_COLORING = "Appearance.diagram.syntaxcoloring";
 	String PREF_FONT_SCALING = "Appearance.diagram.fontscaling";
+	String PREF_SCT_THEME = "Apperance.editor.theme";
 }

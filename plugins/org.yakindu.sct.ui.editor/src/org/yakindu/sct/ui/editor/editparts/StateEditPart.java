@@ -38,8 +38,11 @@ import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.Compartment;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.editor.figures.StateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
@@ -50,6 +53,7 @@ import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPolicy;
 import org.yakindu.sct.ui.editor.policies.FeedbackGraphicalNodeEditPolicy;
 import org.yakindu.sct.ui.editor.policies.PreferredSizeHandlerEditPolicy;
+import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
 
 /**
@@ -61,7 +65,7 @@ import org.yakindu.sct.ui.editor.providers.SemanticHints;
  * @author markus muehlbrandt
  *
  */
-public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart {
+public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart, IPropertyChangeListener {
 
 	private EditPart figureCompartmentEditPart;
 
@@ -88,6 +92,12 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 		}
 
 		return super.getTargetEditPart(request);
+	}
+
+	@Override
+	public void activate() {
+		super.activate();
+		DiagramActivator.getDefault().getPreferenceStore().addPropertyChangeListener(this);
 	}
 
 	private boolean areInsertableChildren(List<?> editParts) {
@@ -151,7 +161,6 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 	@Override
 	protected void refreshVisuals() {
 		refreshCompartmentLayout();
-		setFigureThemeOptions(getPrimaryShape());
 		super.refreshVisuals();
 	}
 
@@ -279,5 +288,15 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 			refreshVisuals();
 		}
 		super.handleNotificationEvent(notification);
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent event) {
+		if (StatechartPreferenceConstants.PREF_SCT_THEME.equals(event.getProperty())) {
+			setFigureThemeOptions(getPrimaryShape());
+			getFigure().invalidateTree();
+			getFigure().revalidate();
+		}
+
 	}
 }

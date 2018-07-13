@@ -11,28 +11,41 @@
 
 package org.yakindu.sct.ui.editor.editor.themes;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import org.yakindu.sct.ui.editor.DiagramActivator;
+import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
+
 public class ThemeProvider {
+
+	public static final String CLASSIC_THEME = "Classic";
+	public static final String FLAT_THEME = "Flat";
+
+	protected Map<String, IStatechartsTheme> themes = new HashMap<>();
+
 	protected static ThemeProvider instance;
 
-	private IStatechartsTheme theme;
-
 	private ThemeProvider() {
-
+		themes.put(CLASSIC_THEME, new ClassicTheme());
+		themes.put(FLAT_THEME, new FlatTheme());
 	}
 
 	public static ThemeProvider getInstance() {
 		if (instance == null) {
 			instance = new ThemeProvider();
 		}
-		instance.setTheme(new FlatTheme());
 		return instance;
 	}
 
 	public IStatechartsTheme getTheme() {
-		return theme;
+		IStatechartsTheme iStatechartsTheme = themes.get(DiagramActivator.getDefault().getPreferenceStore()
+				.getString(StatechartPreferenceConstants.PREF_SCT_THEME));
+		return iStatechartsTheme;
 	}
 
-	public void setTheme(IStatechartsTheme theme) {
-		this.theme = theme;
+	public Set<String> getThemes() {
+		return themes.keySet();
 	}
 }

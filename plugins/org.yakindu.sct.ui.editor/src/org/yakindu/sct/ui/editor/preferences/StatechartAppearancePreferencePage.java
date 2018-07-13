@@ -6,9 +6,11 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.preferences;
+
+import java.util.Set;
 
 import org.eclipse.gmf.runtime.common.ui.preferences.ComboFieldEditor;
 import org.eclipse.gmf.runtime.common.ui.preferences.FontFieldEditor;
@@ -26,11 +28,12 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.yakindu.sct.ui.editor.DiagramActivator;
+import org.yakindu.sct.ui.editor.editor.themes.ThemeProvider;
 
 /**
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public class StatechartAppearancePreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
@@ -52,8 +55,14 @@ public class StatechartAppearancePreferencePage extends FieldEditorPreferencePag
 	}
 
 	protected void createColorsLineStyleFontEditors(Composite main) {
-		Composite composite = createGroupComposite(main, "Colors, line style, and font");
+		createThemeGroup(main);
 
+		createAppearanceGroup(main);
+	}
+
+	protected void createAppearanceGroup(Composite main) {
+		GridData gridData;
+		Composite composite = createGroupComposite(main, "Colors, line style, and font");
 		// Colors:
 		addField(new ColorFieldEditor(StatechartPreferenceConstants.PREF_REGION_BACKGROUND, "Region background color:",
 				composite));
@@ -66,16 +75,31 @@ public class StatechartAppearancePreferencePage extends FieldEditorPreferencePag
 		ComboFieldEditor lineStyleFieldEditor = new ComboFieldEditor(IPreferenceConstants.PREF_LINE_STYLE,
 				"Routing style:", composite, ComboFieldEditor.INT_TYPE, false, 0, 0, true);
 		Combo lineStyleCombo = lineStyleFieldEditor.getComboControl();
-		GridData gridData = new GridData();
+		gridData = new GridData();
 		gridData.horizontalSpan = 2;
 		lineStyleCombo.setLayoutData(gridData);
 		addField(lineStyleFieldEditor);
 		lineStyleCombo.add(DiagramUIMessages.ConnectionsPreferencePage_ConnectionView_Manual_text);
 		lineStyleCombo.add(DiagramUIMessages.ConnectionsPreferencePage_ConnectionView_Rectilinear_text);
-
 		// Font:
 		FontFieldEditor editor = new FontFieldEditor(IPreferenceConstants.PREF_DEFAULT_FONT, "Font: ", composite);
 		addField(editor);
+	}
+
+	protected void createThemeGroup(Composite main) {
+		Composite themeComp = createGroupComposite(main, "Theme");
+
+		ComboFieldEditor themeFieldEditor = new ComboFieldEditor(StatechartPreferenceConstants.PREF_SCT_THEME,
+				"Diagram editor theme:", themeComp, ComboFieldEditor.STRING_TYPE, false, 0, 0, true);
+		Combo themeCombo = themeFieldEditor.getComboControl();
+		GridData gridData = new GridData();
+		gridData.horizontalSpan = 2;
+		themeCombo.setLayoutData(gridData);
+		addField(themeFieldEditor);
+		Set<String> themes = ThemeProvider.getInstance().getThemes();
+		for (String theme : themes) {
+			themeCombo.add(theme);
+		}
 	}
 
 	protected void createMiscellaneousEditors(Composite main) {
@@ -128,6 +152,7 @@ public class StatechartAppearancePreferencePage extends FieldEditorPreferencePag
 		return composite;
 	}
 
+	@Override
 	public void init(IWorkbench workbench) {
 		setPreferenceStore(DiagramActivator.getDefault().getPreferenceStore());
 	}

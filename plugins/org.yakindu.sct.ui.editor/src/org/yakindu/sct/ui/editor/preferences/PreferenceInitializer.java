@@ -74,6 +74,9 @@ public class PreferenceInitializer extends DiagramPreferenceInitializer {
 		//Font scaling
 		getPreferenceStore().setDefault(StatechartPreferenceConstants.PREF_FONT_SCALING, false);
 
+		// Theme
+		getPreferenceStore().setDefault(StatechartPreferenceConstants.PREF_SCT_THEME, ThemeProvider.CLASSIC_THEME);
+
 	}
 
 	@Override

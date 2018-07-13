@@ -28,18 +28,22 @@ import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
+import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.editor.figures.RegionFigure;
 import org.yakindu.sct.ui.editor.editor.themes.IStatechartsTheme;
 import org.yakindu.sct.ui.editor.editor.themes.ThemeProvider;
 import org.yakindu.sct.ui.editor.editparts.tracker.NonRevealingDragEditPartsTrackerEx;
 import org.yakindu.sct.ui.editor.policies.PreferredSizeHandlerEditPolicy;
+import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 
 /**
  *
  * @author andreas muelder - Initial contribution and API
  *
  */
-public class RegionEditPart extends ShapeNodeEditPart {
+public class RegionEditPart extends ShapeNodeEditPart implements IPropertyChangeListener {
 
 	private ThemeProvider themeProvider = ThemeProvider.getInstance();
 
@@ -50,8 +54,9 @@ public class RegionEditPart extends ShapeNodeEditPart {
 	@Override
 	public void activate() {
 		super.activate();
-
+		DiagramActivator.getDefault().getPreferenceStore().addPropertyChangeListener(this);
 	}
+
 	@Override
 	protected NodeFigure createNodeFigure() {
 		final NodeFigure figure = new NodeFigure();
@@ -156,5 +161,14 @@ public class RegionEditPart extends ShapeNodeEditPart {
 			return FigureUtilities.RGBToInteger(theme.getRegionBgColor().getRGB());
 		}
 		return super.getPreferredValue(feature);
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent event) {
+		if (StatechartPreferenceConstants.PREF_SCT_THEME.equals(event.getProperty())) {
+			setFigureThemeOptions(getPrimaryShape());
+			getFigure().invalidateTree();
+			getFigure().revalidate();
+		}
 	}
 }
