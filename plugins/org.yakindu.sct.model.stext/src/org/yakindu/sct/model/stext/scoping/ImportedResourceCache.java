@@ -79,7 +79,10 @@ public class ImportedResourceCache {
 	 * Editing Domain runexclusive
 	 */
 	protected void refreshFile(final URI uri) {
-		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uri.toPlatformString(true)));
+		String platformString = uri.toPlatformString(true);
+		if (platformString == null)
+			return;
+		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(platformString));
 		if (file.isAccessible() && !file.isSynchronized(IResource.DEPTH_INFINITE)) {
 			try {
 				file.refreshLocal(IResource.DEPTH_INFINITE, null);
