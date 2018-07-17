@@ -12,12 +12,13 @@ package org.yakindu.sct.model.sexec.transformation
 
 import com.google.inject.Inject
 import java.util.ArrayList
-import org.eclipse.emf.ecore.resource.URIConverter
+import java.util.Set
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Operation
-import org.yakindu.base.types.Package
 import org.yakindu.base.types.Property
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionRegion
@@ -32,20 +33,16 @@ import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
-import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.eclipse.emf.ecore.EObject
 
 class StructureMapping {
 	 
 	@Inject extension SexecElementMapping mapping
 	@Inject extension StatechartExtensions sct
 	@Inject extension IQualifiedNameProvider
-	@Inject
-	private IPackageImport2URIMapper mapper;
 	
 	
 	//==========================================================================
@@ -57,15 +54,26 @@ class StructureMapping {
 	 * This includes creating the scopes and adding all relevant declarations. Empty scopes wont be mapped.
 	 */
 	def ExecutionFlow mapScopes(Statechart sc, ExecutionFlow flow) {
-		flow.scopes.addAll(sc.scopes.map(scope | scope.mapScope))
+		val usedDeclarations = sc.importedDeclarations
+		flow.scopes.addAll(sc.scopes.map(scope | scope.mapScope(usedDeclarations)))
 		flow
+	}
+	
+	/**
+	 * @return A set of used declaration that are imported from an external resource
+	 */
+	def protected importedDeclarations(Statechart it) {
+		val allDeclarations = it.eAllContents.filter(ElementReferenceExpression).map[reference].filter(Declaration).toSet
+		return if(it.eResource !== null)
+			allDeclarations.filter[decl|!decl.eResource.URI.equals(it.eResource.URI)].toSet
+		else allDeclarations
 	}
 	
 	
 	/**
 	 *  Interface and internal scopes have declarations
 	 */
-	def dispatch Scope mapScope(Scope scope) {
+	def dispatch Scope mapScope(Scope scope, Set<Declaration> usedDeclarationss) {
 		val _scope = scope.createScope
 		_scope.declarations.addAll(scope.declarations.map(decl | decl.map).filterNull)
 		return _scope
@@ -74,17 +82,9 @@ class StructureMapping {
 	/**
 	 * Import scope has imports which needs to be resolved to get all imported variable and operation definitions
 	 */
-	def dispatch Scope mapScope(ImportScope scope) {
+	def dispatch Scope mapScope(ImportScope scope, Set<Declaration> usedDeclarations) {
 		val _scope = scope.createScope
-		for (String importString : scope.imports){
-			val pkgImport = mapper.findPackageImport(scope.eResource,importString)
-			
-			if (pkgImport.isPresent && URIConverter.INSTANCE.exists(pkgImport.get.getUri(), null)) {
-				val packageForNamespace = scope.eResource.resourceSet.getResource(pkgImport.get.uri, true).contents.
-					head as Package
-				packageForNamespace.member.filter(Declaration).toList.forEach[createImportDeclaration(_scope)]
-			}
-		}
+		usedDeclarations.forEach[createImportDeclaration(_scope)]
 		return _scope
 	}
 	
@@ -111,17 +111,14 @@ class StructureMapping {
 	}
 	
 	def dispatch Declaration map(EventDefinition e) {
-		val _e = e.create
-		return _e
+		e.create
 	}
 	
 	def dispatch Declaration map(VariableDefinition v) {
-		val _v = v.create
-		return _v
+		v.create
 	}
 	def dispatch Declaration map(OperationDefinition v) {
-		val _v = v.create
-		return _v
+		v.create
 	}
 	 
 	
