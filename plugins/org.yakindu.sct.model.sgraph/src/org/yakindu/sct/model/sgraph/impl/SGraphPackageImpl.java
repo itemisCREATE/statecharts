@@ -263,7 +263,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link SGraphPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -277,7 +277,8 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		if (isInited) return (SGraphPackage)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI);
 
 		// Obtain or create and register package
-		SGraphPackageImpl theSGraphPackage = (SGraphPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SGraphPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SGraphPackageImpl());
+		Object registeredSGraphPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		SGraphPackageImpl theSGraphPackage = registeredSGraphPackage instanceof SGraphPackageImpl ? (SGraphPackageImpl)registeredSGraphPackage : new SGraphPackageImpl();
 
 		isInited = true;
 
@@ -294,7 +295,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		// Mark meta-data to indicate it can't be changed
 		theSGraphPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(SGraphPackage.eNS_URI, theSGraphPackage);
 		return theSGraphPackage;
