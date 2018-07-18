@@ -6,12 +6,13 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.editparts;
 
 import java.util.List;
 
+import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.GridData;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
@@ -19,6 +20,7 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.EditPart;
@@ -29,6 +31,7 @@ import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
+import org.eclipse.gmf.runtime.diagram.ui.l10n.DiagramColorRegistry;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewAndElementRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
@@ -36,10 +39,20 @@ import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.Compartment;
+import org.eclipse.gmf.runtime.notation.DecorationNode;
+import org.eclipse.gmf.runtime.notation.FillStyle;
+import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.preference.PreferenceConverter;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.RGB;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.editor.figures.StateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
@@ -49,18 +62,19 @@ import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPolicy;
 import org.yakindu.sct.ui.editor.policies.FeedbackGraphicalNodeEditPolicy;
 import org.yakindu.sct.ui.editor.policies.PreferredSizeHandlerEditPolicy;
 import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
+import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
 
 /**
  * The EditPart for the State.
- * 
- * 
+ *
+ *
  * @author andreas muelder
  * @author alexander nyssen
  * @author markus muehlbrandt
- * 
+ *
  */
-public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart {
+public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart, IPropertyChangeListener {
 
 	private EditPart figureCompartmentEditPart;
 
@@ -85,6 +99,59 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 		}
 
 		return super.getTargetEditPart(request);
+	}
+
+	@Override
+	protected void refreshBackgroundColor() {
+		if (!hasCustomColor()) {
+			IPreferenceStore store = DiagramActivator.getDefault().getPreferenceStore();
+			RGB color = PreferenceConverter.getColor(store, StatechartPreferenceConstants.PREF_STATE_BACKGROUND);
+			setBackgroundColor(DiagramColorRegistry.getInstance().getColor(color));
+		} else {
+			super.refreshBackgroundColor();
+		}
+	}
+
+	@Override
+	protected void setBackgroundColor(Color c) {
+		super.setBackgroundColor(c);
+		Figure figure = getPrimaryShape();
+		figure.setBackgroundColor(c);
+	}
+
+	protected boolean hasCustomColor() {
+		Object model = getModel();
+		if (model != null && model instanceof View) {
+			Node child = getChild(SemanticHints.STATE_NAME);
+			FillStyle decoFillStyle = (FillStyle) ((DecorationNode) child)
+					.getStyle(NotationPackage.eINSTANCE.getFillStyle());
+			FillStyle nodeFillStyle = (FillStyle) ((View) model).getStyle(NotationPackage.eINSTANCE.getFillStyle());
+			RGB figureRGB = getPrimaryShape().getBackgroundColor().getRGB();
+			RGB decoRGB = FigureUtilities.integerToRGB(decoFillStyle.getFillColor());
+			RGB nodeRGB = FigureUtilities.integerToRGB(nodeFillStyle.getFillColor());
+			if (decoFillStyle.getFillColor() == 16777215 && nodeFillStyle.getFillColor() != 16777215) {
+				return false;
+			}
+			return decoFillStyle.getFillColor() == nodeFillStyle.getFillColor();
+		}
+		return false;
+	}
+
+	protected Node getChild(String type) {
+		Object model = getModel();
+		if (!(model instanceof View)) {
+			return null;
+		}
+		View view = (View) model;
+		EList<?> persistedChildren = view.getPersistedChildren();
+		for(Object o : persistedChildren) {
+			if(o instanceof Node) {
+				if (type.equals(((Node) o).getType())) {
+					return (Node) o;
+				}
+			}
+		}
+		return null;
 	}
 
 	private boolean areInsertableChildren(List<?> editParts) {
@@ -232,10 +299,12 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 	 */
 	@Override
 	public Object getPreferredValue(EStructuralFeature feature) {
+		IPreferenceStore store = DiagramActivator.getDefault().getPreferenceStore();
 		if (feature == NotationPackage.eINSTANCE.getLineStyle_LineColor()) {
 			return FigureUtilities.RGBToInteger(StatechartColorConstants.STATE_LINE_COLOR.getRGB());
 		} else if (feature == NotationPackage.eINSTANCE.getFillStyle_FillColor()) {
-			return FigureUtilities.RGBToInteger(StatechartColorConstants.STATE_BG_COLOR.getRGB());
+			RGB color = PreferenceConverter.getColor(store, StatechartPreferenceConstants.PREF_STATE_BACKGROUND);
+			return FigureUtilities.RGBToInteger(color);
 		}
 		return super.getPreferredValue(feature);
 	}
@@ -244,7 +313,7 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 	public State resolveSemanticElement() {
 		return (State) super.resolveSemanticElement();
 	}
-	
+
 	@Override
 	public DragTracker getDragTracker(Request request) {
 		return new NonRevealingDragEditPartsTrackerEx(this);
@@ -255,12 +324,37 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 		if (notification.getFeature() == NotationPackage.Literals.BOOLEAN_VALUE_STYLE__BOOLEAN_VALUE) {
 			refresh();
 		}
-		if (notification.getFeature() == NotationPackage.Literals.DRAWER_STYLE__COLLAPSED) {
+		else if (notification.getFeature() == NotationPackage.Literals.DRAWER_STYLE__COLLAPSED) {
 			refreshVisuals();
 		}
-		if (notification.getFeature() == SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS) {
+		else if (notification.getFeature() == SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS) {
 			refreshVisuals();
 		}
-		super.handleNotificationEvent(notification);
+		else if (notification.getFeature() == NotationPackage.Literals.FILL_STYLE__FILL_COLOR) {
+			super.refreshBackgroundColor();
+		}
+		else {
+			super.handleNotificationEvent(notification);
+		}
 	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent event) {
+		if (StatechartPreferenceConstants.PREF_STATE_BACKGROUND.equals(event.getProperty())) {
+			refreshVisuals();
+		}
+	}
+
+	@Override
+	public void activate() {
+		DiagramActivator.getDefault().getPreferenceStore().addPropertyChangeListener(this);
+		super.activate();
+	}
+
+	@Override
+	public void deactivate() {
+		DiagramActivator.getDefault().getPreferenceStore().removePropertyChangeListener(this);
+		super.deactivate();
+	}
+
 }
