@@ -127,13 +127,4 @@ public class TransactionalXtextDocument extends ParallelReadXtextDocument {
 		}
 		return super.modify(new UnitOfWorkOnTransactionalEditingDomain<T>(work)); 
 	}
-	
-	@Override
-	public <T> T internalModify(IUnitOfWork<T, XtextResource> work) {
-		if (work instanceof CancelableUnitOfWork) {
-			return super.internalModify(new CancelableUnitOfWorkOnTransactionalEditingDomain<T>((CancelableUnitOfWork<T, XtextResource>) work));
-		}
-		return super.internalModify(new UnitOfWorkOnTransactionalEditingDomain<T>(work)); 
-	}
-
 }
