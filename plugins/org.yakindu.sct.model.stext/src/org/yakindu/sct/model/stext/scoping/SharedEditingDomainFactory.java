@@ -11,6 +11,9 @@
 package org.yakindu.sct.model.stext.scoping;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -20,15 +23,15 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.diagram.core.DiagramEditingDomainFactory;
-import org.eclipse.gmf.runtime.emf.core.util.CrossReferenceAdapter;
+import org.eclipse.gmf.runtime.emf.core.util.EMFCoreUtil;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 
 /**
@@ -64,16 +67,15 @@ public class SharedEditingDomainFactory extends DiagramEditingDomainFactory
 
 	protected void setup(TransactionalEditingDomain editingDomain) {
 		editingDomain.setID(DOMAIN_ID);
-		replaceCrossReferenceAdapterWithNonResolvingAdapter(editingDomain);
 		new WorkspaceSynchronizer(editingDomain, new WorkspaceSynchronizer.Delegate() {
 
 			public boolean handleResourceDeleted(Resource resource) {
-				resource.unload();
+				unloadWithReferences(resource);
 				return true;
 			}
 
 			public boolean handleResourceMoved(Resource resource, URI newURI) {
-				resource.unload();
+				unloadWithReferences(resource);
 				return true;
 			}
 
@@ -83,7 +85,7 @@ public class SharedEditingDomainFactory extends DiagramEditingDomainFactory
 					// underlying the currently opened editor
 					return true;
 				}
-				resource.unload();
+				unloadWithReferences(resource);
 				try {
 					resource.load(resource.getResourceSet().getLoadOptions());
 				} catch (IOException e) {
@@ -96,7 +98,7 @@ public class SharedEditingDomainFactory extends DiagramEditingDomainFactory
 				// nothing to dispose (especially as I am shared)
 			}
 		});
-
+		
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(new IResourceChangeListener() {
 			@Override
 			public void resourceChanged(IResourceChangeEvent event) {
@@ -115,7 +117,7 @@ public class SharedEditingDomainFactory extends DiagramEditingDomainFactory
 												false);
 										if (existingResource != null
 												&& !(existingResource instanceof AbstractSCTResource))
-											existingResource.unload();
+											unloadWithReferences(existingResource);
 
 									}
 								}
@@ -129,23 +131,55 @@ public class SharedEditingDomainFactory extends DiagramEditingDomainFactory
 			}
 		});
 	}
+	protected void unloadWithReferences(Resource resource) {
+		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(resource);
+		try {
+			editingDomain.runExclusive(new Runnable() {
+				@Override
+				public void run() {
+					Set<Resource> resourcesToUnload = new HashSet<>();
+					collectTransitiveReferences(resource, resourcesToUnload);
+					resourcesToUnload.add(resource);
+					
+					collectResourcesWithErrors(resource, resourcesToUnload);
+					
+					for (Resource current : resourcesToUnload) {
+						if (current instanceof AbstractSCTResource || !current.getURI().isPlatform())
+							continue;
+						current.unload();
+					}
+				}
 
-	protected void replaceCrossReferenceAdapterWithNonResolvingAdapter(final TransactionalEditingDomain domain) {
-		final CrossReferenceAdapter adapter = getCrossReferenceAdapter(domain);
-		if (null != adapter) {
-			adapter.unsetTarget(domain.getResourceSet());
-			domain.getResourceSet().eAdapters().remove(adapter);
-			domain.getResourceSet().eAdapters().add(new CrossReferenceAdapter(false));
+			});
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
-
-	protected CrossReferenceAdapter getCrossReferenceAdapter(final TransactionalEditingDomain domain) {
-		final EList<Adapter> eAdapters = domain.getResourceSet().eAdapters();
-		for (final Adapter adapter : eAdapters) {
-			if (adapter instanceof CrossReferenceAdapter) {
-				return (CrossReferenceAdapter) adapter;
+	
+	protected void collectResourcesWithErrors(Resource resource, Set<Resource> resourcesToUnload) {
+		for (Resource currentResource : resource.getResourceSet().getResources()) {
+			if (currentResource.getErrors().size() > 0) {
+				collectTransitiveReferences(currentResource, resourcesToUnload);
+				resourcesToUnload.add(currentResource);
 			}
 		}
-		return null;
 	}
+
+	@SuppressWarnings("unchecked")
+	protected void collectTransitiveReferences(Resource resource, Set<Resource> references) {
+		EList<Resource> resources = resource.getResourceSet().getResources();
+		for (Resource currentResource : resources) {
+			final Collection<Resource> allImports = EMFCoreUtil.getImports(currentResource);
+			for (Resource currentImport : allImports) {
+				if (currentImport == resource) {
+					if (!references.contains(currentResource)) {
+						references.add(currentResource);
+						collectTransitiveReferences(currentResource, references);
+					}
+				}
+			}
+		}
+	}
+
+	
 }
