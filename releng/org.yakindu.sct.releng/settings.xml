@@ -14,7 +14,7 @@
             <password>${P2_SERVER_PASSWORD}</password>
         </server>
         <server>
-            <id>projects.itemis.de</id>
+            <id>yakindu-commons</id>
             <username>${P2_SERVER_USER}</username>
             <password>${P2_SERVER_PASSWORD}</password>
         </server>

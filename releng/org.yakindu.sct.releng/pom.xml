@@ -415,16 +415,26 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<pluginRepositories>
-				<pluginRepository>
-					<id>nexus-projects.itemis.de</id>
-					<url>https://projects.itemis.de/nexus/content/groups/maven-plugins/</url>
-					<releases>
-						<enabled>true</enabled>
-					</releases>
-					<snapshots>
-						<enabled>true</enabled>
-					</snapshots>
-				</pluginRepository>
+                <pluginRepository>
+                    <id>nexus-projects.itemis.de</id>
+                    <url>https://projects.itemis.de/nexus/content/groups/maven-plugins/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+                <pluginRepository>
+                    <id>yakindu-commons</id>
+                    <url>https://projects.itemis.de/nexus/content/groups/yakindu/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
 			</pluginRepositories>
 			<build>
 				<plugins>
