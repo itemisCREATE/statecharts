@@ -14,6 +14,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 
 /**
  * This is the C# code generators main class. 
@@ -26,7 +27,7 @@ class CSharpGenerator implements IExecutionFlowGenerator {
 	@Inject extension GenmodelEntries
 	@Inject extension RunnableFeature
 
-	@Inject extension Navigation
+	@Inject extension SExecExtensions
 	@Inject extension IStatemachine
 	@Inject extension ITimerCallback
 	@Inject extension ITimer

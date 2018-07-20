@@ -95,7 +95,7 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String DOCUMENTATION_EDEFAULT = null;
+	protected static final String DOCUMENTATION_EDEFAULT = "";
 
 	/**
 	 * The cached value of the '{@link #getDocumentation() <em>Documentation</em>}' attribute.

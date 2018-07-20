@@ -4,7 +4,9 @@
 #include "ConstOnlyNamedScope.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 
 //! The timers are managed by a timer service. */
@@ -51,4 +53,6 @@ class ConstOnlyNamedScopeTest : public ::testing::Test{
 		EXPECT_TRUE(statechart->isStateActive(ConstOnlyNamedScope::ConstOnlyNamedScope_main_region_B));
 		
 		
+}
+
 }

@@ -9,7 +9,9 @@
 using ::testing::AtLeast;
 using ::testing::Return;
 using ::testing::_;
-			
+
+namespace  {
+
 class InternalOperation1Mock{
 	public:
 	int callCount;
@@ -1492,4 +1494,6 @@ class OperationsTest : public ::testing::Test{
 		unnamedOperation4aMock->reset();
 		unnamedOperation5Mock->reset();
 		unnamedOperation5aMock->reset();
+}
+
 }

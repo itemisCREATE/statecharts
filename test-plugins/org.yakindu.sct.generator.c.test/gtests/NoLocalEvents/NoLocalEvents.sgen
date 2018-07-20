@@ -1,0 +1,19 @@
+GeneratorModel for yakindu::c {
+	statechart NoLocalEvents {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "NoLocalEvents"
+		}
+		feature FunctionInlining {
+			inlineReactions = true
+			inlineEntryActions = true
+			inlineEnterSequences = true 
+			inlineExitActions = true
+			inlineExitSequences = true
+			inlineChoices = true
+			inlineEntries = true
+			inlineEnterRegion = true
+			inlineExitRegion = true
+		}
+	}
+}

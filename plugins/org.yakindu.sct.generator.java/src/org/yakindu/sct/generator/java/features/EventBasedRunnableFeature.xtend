@@ -25,20 +25,20 @@ class EventBasedRunnableFeature {
 	}
 
 	def hasFeatureEventRunnable(GeneratorEntry it) {
-		featureEventRunnable != null
+		featureEventRunnable !== null
 	}
 
 	def getNamePrefix(GeneratorEntry it) {
-		if (featureEventRunnable != null &&
-			featureEventRunnable.getParameterValue(IJavaFeatureConstants::VALUE_NAME_PREFIX) != null)
+		if (featureEventRunnable !== null &&
+			featureEventRunnable.getParameterValue(IJavaFeatureConstants::VALUE_NAME_PREFIX) !== null)
 			featureEventRunnable.getParameterValue(IJavaFeatureConstants::VALUE_NAME_PREFIX).stringValue
 		else
 			IJavaFeatureConstants::RUNNABLE_WRAPPER_NAME_PREFIX_DEFAULT
 	}
 
 	def getNameSuffix(GeneratorEntry it) {
-		if (featureEventRunnable != null &&
-			featureEventRunnable.getParameterValue(IJavaFeatureConstants::VALUE_NAME_SUFFIX) != null)
+		if (featureEventRunnable !== null &&
+			featureEventRunnable.getParameterValue(IJavaFeatureConstants::VALUE_NAME_SUFFIX) !== null)
 			featureEventRunnable.getParameterValue(IJavaFeatureConstants::VALUE_NAME_SUFFIX).stringValue
 		else
 			IJavaFeatureConstants::RUNNABLE_WRAPPER_NAME_SUFFIX_DEFAULT

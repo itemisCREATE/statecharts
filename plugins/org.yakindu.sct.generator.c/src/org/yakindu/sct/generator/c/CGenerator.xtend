@@ -15,10 +15,10 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations.GenArtifactConfiguration
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
-import org.yakindu.sct.generator.c.extensions.Navigation
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
@@ -34,7 +34,7 @@ class CGenerator implements IExecutionFlowGenerator {
 	@Inject extension StatemachineHeader statemachineHeader
 	@Inject extension StatemachineSource statemachineSource
 	@Inject extension StatemachineRequiredHeader statemachineRequiredHeader
-	@Inject extension Navigation
+	@Inject extension SExecExtensions
 	@Inject extension GenmodelEntries
 	@Inject extension Naming
 	@Inject extension ICoreLibraryHelper
@@ -67,7 +67,7 @@ class CGenerator implements IExecutionFlowGenerator {
 	}
 
 	def protected getHeaderOutput(GeneratorEntry entry) {
-		if (entry.apiTargetFolderValue != null) {
+		if (entry.apiTargetFolderValue !== null) {
 			API_TARGET_FOLDER_OUTPUT
 		} else {
 			TARGET_FOLDER_OUTPUT
@@ -75,7 +75,7 @@ class CGenerator implements IExecutionFlowGenerator {
 	}
 
 	def protected getLibraryOutput(GeneratorEntry entry) {
-		if (entry.libraryTargetFolderValue != null) {
+		if (entry.libraryTargetFolderValue !== null) {
 			LIBRARY_TARGET_FOLDER_OUTPUT
 		} else {
 			entry.headerOutput

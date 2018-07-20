@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  * 	itemis AG - initial API and implementation
- * 
+ *
  */
 package org.yakindu.base.xtext.utils.jface.viewers;
 
@@ -43,12 +43,12 @@ import com.google.inject.Injector;
  * This class integrates Xtext features into a {@link CellEditor} and can be
  * used e.g. in jFace {@link StructuredViewer}s or in GMF EditParts via
  * DirectEditManager.
- * 
+ *
  * The current implementation supports, code completion, syntax highlighting and
  * validation
- * 
+ *
  * @see XtextStyledTextProvider
- * 
+ *
  * @author andreas.muelder@itemis.de
  * @author alexander.nyssen@itemis.de
  * @author patrick.koenemann@itemis.de
@@ -80,6 +80,7 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 	protected Control createControl(Composite parent) {
 		StyledText styledText = (StyledText) super.createControl(parent);
 		styledText.addFocusListener(new FocusAdapter() {
+			@Override
 			public void focusLost(FocusEvent e) {
 				XtextStyledTextCellEditor.this.focusLost();
 			}
@@ -97,6 +98,7 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 		// This listener notifies the modification, when text is selected via
 		// proposal. A ModifyEvent is not thrown by the StyledText in this case.
 		getXtextAdapter().getXtextSourceviewer().addTextListener(new ITextListener() {
+			@Override
 			public void textChanged(TextEvent event) {
 				editOccured(null);
 			}
@@ -108,6 +110,7 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 			// when using the StyledText.VerifyKey event (3005), we get the
 			// event early enough!
 			styledText.addListener(3005, new Listener() {
+				@Override
 				public void handleEvent(Event event) {
 					if (event.character == SWT.CR && !getCompletionProposalAdapter().isProposalPopupOpen()) {
 						focusLost();
@@ -116,6 +119,7 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 			});
 		}
 		styledText.addListener(3005, new Listener() {
+			@Override
 			public void handleEvent(Event event) {
 				if (event.character == '\u001b' // ESC
 						&& !getCompletionProposalAdapter().isProposalPopupOpen()) {
@@ -142,6 +146,7 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 		return new FilteringMenuManager();
 	}
 
+	@Override
 	protected void keyReleaseOccured(KeyEvent keyEvent) {
 		if (keyEvent.character == '\u001b') { // ESC
 			return;
@@ -198,8 +203,7 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 				setIgnoreNextFocusLost(false);
 				return;
 			}
-
-			if (getCompletionProposalAdapter().isProposalPopupOpen()) {
+			if (getCompletionProposalAdapter().isProposalPopupOpen() || text.getMenu().isVisible()) {
 				setIgnoreNextFocusLost(true);
 				return;
 			}
@@ -228,7 +232,7 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 	public void setVisibleRegion(int start, int length) {
 		getXtextAdapter().setVisibleRegion(start, length);
 	}
-	
+
 	public StyledTextXtextAdapter getXtextAdapter() {
 		return this.xtextAdapter;
 	}
@@ -241,14 +245,16 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 		return this.contextFakeResourceProvider;
 	}
 
-	protected CompletionProposalAdapter createCompletionProposalAdapter(StyledText styledText, final IContentAssistant contentAssistant) {
-		return new CompletionProposalAdapter(styledText, contentAssistant, KeyStroke.getInstance(
-				SWT.CTRL, SWT.SPACE), null);
+	protected CompletionProposalAdapter createCompletionProposalAdapter(StyledText styledText,
+			final IContentAssistant contentAssistant) {
+		return new CompletionProposalAdapter(styledText, contentAssistant, KeyStroke.getInstance(SWT.CTRL, SWT.SPACE),
+				null);
 	}
 
 	protected StyledTextXtextAdapter createXtextAdapter() {
 		return new StyledTextXtextAdapter(this.getInjector(),
-				getContextFakeResourceProvider() == null ? IXtextFakeContextResourcesProvider.NULL_CONTEXT_PROVIDER
+				getContextFakeResourceProvider() == null
+						? IXtextFakeContextResourcesProvider.NULL_CONTEXT_PROVIDER
 						: getContextFakeResourceProvider());
 	}
 

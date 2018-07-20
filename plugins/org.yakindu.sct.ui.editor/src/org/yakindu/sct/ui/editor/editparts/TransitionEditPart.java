@@ -11,7 +11,6 @@
 package org.yakindu.sct.ui.editor.editparts;
 
 import org.eclipse.draw2d.Connection;
-import org.eclipse.draw2d.IFigure;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.EditPart;

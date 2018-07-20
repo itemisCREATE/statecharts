@@ -4,7 +4,9 @@
 #include "GuardedExit.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 
 //! The timers are managed by a timer service. */
@@ -37,7 +39,7 @@ class GuardedExitTest : public ::testing::Test{
 		
 		EXPECT_TRUE(statechart->isStateActive(GuardedExit::main_region_B));
 		
-		EXPECT_TRUE(shouldBeDone ? statechart->getDefaultSCI()->get_done()  : !statechart->getDefaultSCI()->get_done());
+		EXPECT_TRUE(shouldBeDone ? statechart->getDefaultSCI()->get_done() : !statechart->getDefaultSCI()->get_done());
 		
 		
 	}
@@ -67,4 +69,6 @@ class GuardedExitTest : public ::testing::Test{
 		checkDone(true);
 		
 		
+}
+
 }

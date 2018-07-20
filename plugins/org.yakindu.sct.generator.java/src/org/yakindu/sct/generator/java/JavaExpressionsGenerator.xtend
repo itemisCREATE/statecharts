@@ -30,6 +30,7 @@ import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
@@ -39,7 +40,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 
 	@Inject protected extension Naming
 	@Inject protected extension JavaNamingService
-	@Inject protected extension Navigation
+	@Inject protected extension SExecExtensions
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ITypeSystemInferrer
 
@@ -157,16 +158,16 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def dispatch String getContext(Property it) {
-		if (scope !== null) {
-			return scope.interfaceName.asEscapedIdentifier + "."
+		if (interfaceScope !== null) {
+			return interfaceScope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""
 	}
 
 	def dispatch String getStaticContext(Property it) {
 		if (it.const) {
-			if (scope !== null) {
-				var result = scope.interfaceName + "."
+			if (interfaceScope !== null) {
+				var result = interfaceScope.interfaceName + "."
 				return result
 			} else {
 				var result = it.flow.statemachineInterfaceName + "."
@@ -177,8 +178,8 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def dispatch String getContext(Declaration it) {
-		if (scope !== null) {
-			return scope.interfaceName.asEscapedIdentifier + "."
+		if (interfaceScope !== null) {
+			return interfaceScope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""
 	}

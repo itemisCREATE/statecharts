@@ -32,9 +32,11 @@ class BuiltinDeclarations implements BuiltinDeclarationNames {
 	protected ITypeSystem typeSystem
 
 	protected Property sct_version
+	protected Property sct_file
 	protected Property timestamp
 	protected Property hostname
 	protected Property username
+	protected Property sha256
 
 	protected Resource builtinResource
 
@@ -48,6 +50,8 @@ class BuiltinDeclarations implements BuiltinDeclarationNames {
 		timestamp = createProperty(TIMESTAMP_VAR, stringtype)
 		hostname = createProperty(HOSTNAME_VAR, stringtype)
 		username = createProperty(USER_VAR, stringtype)
+		sct_file = createProperty(SCTFILE, stringtype)
+		sha256 = createProperty(SHA256, stringtype)
 	}
 
 	def protected Property createProperty(String name, Type type) {
@@ -66,9 +70,11 @@ class BuiltinDeclarations implements BuiltinDeclarationNames {
 	def getDeclarations() {
 		#[
 			sct_version,
+			sct_file,
 			timestamp,
 			hostname,
-			username
+			username,
+			sha256
 		]
 	}
 

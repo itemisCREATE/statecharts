@@ -28,7 +28,7 @@ class CSharpTypeSystemAccess implements ICodegenTypeSystemAccess {
 
 	override String getTargetLanguageName(Type type) {
 		switch (type) {
-			case type == null || ts.isSame(type, getType(VOID)) : 'void'
+			case type === null || ts.isSame(type, getType(VOID)) : 'void'
 			case ts.isSame(type, getType(REAL)): "double"
 			case ts.isSame(type, getType(INTEGER)): "long"
 			case ts.isSame(type, getType(BOOLEAN)): "bool"

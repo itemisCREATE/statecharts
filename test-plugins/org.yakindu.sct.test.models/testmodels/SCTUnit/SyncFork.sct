@@ -31,8 +31,8 @@
         </regions>
       </vertices>
       <vertices xsi:type="sgraph:Synchronization" xmi:id="_DBjOsKioEeG5WeGhg2moBQ" incomingTransitions="_Eg6IoKioEeG5WeGhg2moBQ">
-        <outgoingTransitions xmi:id="_QeB7wKjFEeG5WeGhg2moBQ" specification="always" target="_G_gIoKjBEeG5WeGhg2moBQ"/>
-        <outgoingTransitions xmi:id="_SiJIkKjFEeG5WeGhg2moBQ" specification="always" target="_LrdhcKjBEeG5WeGhg2moBQ"/>
+        <outgoingTransitions xmi:id="_QeB7wKjFEeG5WeGhg2moBQ" specification="" target="_G_gIoKjBEeG5WeGhg2moBQ"/>
+        <outgoingTransitions xmi:id="_SiJIkKjFEeG5WeGhg2moBQ" specification="" target="_LrdhcKjBEeG5WeGhg2moBQ"/>
       </vertices>
     </regions>
   </sgraph:Statechart>

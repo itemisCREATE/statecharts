@@ -4,7 +4,9 @@
 #include "EntryExitSelfTransition.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 
 //! The timers are managed by a timer service. */
@@ -91,4 +93,6 @@ class EntryExitSelfTransitionTest : public ::testing::Test{
 		statechart->exit();
 		
 		
+}
+
 }

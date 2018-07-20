@@ -26,14 +26,16 @@ import org.eclipse.xtext.naming.QualifiedName
 import org.yakindu.sct.model.sexec.Reaction
 import java.util.List
 import java.util.ArrayList
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 
 class ElementNameProvider {
 	@Inject private StextNameProvider provider
+	@Inject protected extension SExecExtensions
 
-	def protected List<String> elementNameSegments(NamedElement e) {
+	def public List<String> elementNameSegments(NamedElement e) {
 		val name = elementName(e);
 		var ArrayList<String> l;
-		if (name != null) {
+		if (name !== null) {
 			l = new ArrayList<String>(name.getSegments());
 		} else {
 			l = new ArrayList<String>();
@@ -68,7 +70,7 @@ class ElementNameProvider {
 	}
 
 	def protected dispatch QualifiedName elementName(Reaction it) {
-		return provider.getFullyQualifiedName(it).skipFirst(2)
+		provider.getFullyQualifiedName(it).skipFirst(2)
 	}
 
 	def protected dispatch QualifiedName elementName(Region it) {
@@ -76,7 +78,12 @@ class ElementNameProvider {
 	}
 
 	def protected dispatch QualifiedName elementName(Step it) {
-		return eContainer.elementName()
+		var parentName = eContainer.elementName
+		// parent name may be null
+		if (( isEnterSequence || isCheckFunction || isEffect ) && (name !== null) && (!name.trim.empty))
+			parentName.append(name)
+		else
+			parentName
 	}
 
 	def protected dispatch QualifiedName elementName(Vertex it) {

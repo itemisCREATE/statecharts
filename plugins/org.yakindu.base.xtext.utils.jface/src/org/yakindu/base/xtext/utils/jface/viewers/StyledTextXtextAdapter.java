@@ -1,9 +1,9 @@
-/** 
- * Copyright (c) 2015 committers of YAKINDU and others. 
- * All rights reserved. This program and the accompanying materials 
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at 
- * http://www.eclipse.org/legal/epl-v10.html 
+/**
+ * Copyright (c) 2015 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * committers of YAKINDU - initial API and implementation
  *
@@ -13,7 +13,6 @@ package org.yakindu.base.xtext.utils.jface.viewers;
 import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -22,10 +21,7 @@ import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.jface.text.source.ISharedTextColors;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
-import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.DisposeEvent;
@@ -44,9 +40,6 @@ import org.eclipse.ui.texteditor.AnnotationPreference;
 import org.eclipse.ui.texteditor.DefaultMarkerAnnotationAccess;
 import org.eclipse.ui.texteditor.MarkerAnnotationPreferences;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.ILeafNode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -71,15 +64,15 @@ import com.google.inject.Injector;
 import com.google.inject.Provider;
 
 /**
- * 
+ *
  * @author andreas.muelder@itemis.de
  * @author alexander.nyssen@itemis.de
  * @author patrick.koenemann@itemis.de
- * 
+ *
  */
 @SuppressWarnings("restriction")
 public class StyledTextXtextAdapter {
-	
+
 	@Inject
 	private IPreferenceStoreAccess preferenceStoreAccess;
 	@Inject
@@ -158,6 +151,7 @@ public class StyledTextXtextAdapter {
 			// when using the StyledText.VerifyKey event (3005), we get the
 			// event early enough!
 			styledText.addListener(3005, new Listener() {
+				@Override
 				public void handleEvent(Event event) {
 					if (event.character == SWT.CR && !completionProposalAdapter.isProposalPopupOpen()) {
 						Event selectionEvent = new Event();
@@ -189,15 +183,15 @@ public class StyledTextXtextAdapter {
 			if (this.site == null) {
 				site = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor().getSite();
 			}
-			XtextStyledTextSelectionProvider xtextStyledTextSelectionProvider = new XtextStyledTextSelectionProvider();
+			XtextStyledTextSelectionProvider xtextStyledTextSelectionProvider = new XtextStyledTextSelectionProvider(
+					this.styledText, getFakeResourceContext().getFakeResource());
 			ChangeSelectionProviderOnFocusGain listener = new ChangeSelectionProviderOnFocusGain(site,
-					xtextStyledTextSelectionProvider);
+					xtextStyledTextSelectionProvider, styledText);
 			getStyledText().addFocusListener(listener);
 			getStyledText().addDisposeListener(listener);
 		} catch (NullPointerException ex) {
 			// Do nothing, not opened within editor context
 		}
-
 	}
 
 	private ControlDecoration createContentAssistDecoration(StyledText styledText) {
@@ -211,6 +205,7 @@ public class StyledTextXtextAdapter {
 		result.setDescriptionText("Content Assist Available (CTRL + Space)");
 		result.setMarginWidth(2);
 		styledText.addDisposeListener(new DisposeListener() {
+			@Override
 			public void widgetDisposed(DisposeEvent e) {
 				if (getDecoration() != null) {
 					getDecoration().dispose();
@@ -224,9 +219,8 @@ public class StyledTextXtextAdapter {
 	}
 
 	protected ValidationJob createValidationJob() {
-		return new ValidationJob(getValidator(), getXtextDocument(),
-				new AnnotationIssueProcessor(getXtextDocument(), getXtextSourceviewer().getAnnotationModel(), getResolutionProvider()),
-				CheckMode.FAST_ONLY);
+		return new ValidationJob(getValidator(), getXtextDocument(), new AnnotationIssueProcessor(getXtextDocument(),
+				getXtextSourceviewer().getAnnotationModel(), getResolutionProvider()), CheckMode.FAST_ONLY);
 	}
 
 	protected XtextFakeResourceContext createFakeResourceContext(Injector injector) {
@@ -234,7 +228,8 @@ public class StyledTextXtextAdapter {
 	}
 
 	protected XtextSourceViewer createXtextSourceViewer() {
-		final XtextSourceViewer result = new XtextSourceViewerEx(getStyledText(), getPreferenceStoreAccess().getPreferenceStore());
+		final XtextSourceViewer result = new XtextSourceViewerEx(getStyledText(),
+				getPreferenceStoreAccess().getPreferenceStore());
 		result.configure(getXtextSourceViewerConfiguration());
 		result.setDocument(getXtextDocument(), new AnnotationModel());
 		return result;
@@ -245,9 +240,10 @@ public class StyledTextXtextAdapter {
 	}
 
 	/**
-	 * Creates decoration support for the sourceViewer. code is entirely copied from
-	 * {@link XtextEditor} and its super class {@link AbstractDecoratedTextEditor}.
-	 * 
+	 * Creates decoration support for the sourceViewer. code is entirely copied
+	 * from {@link XtextEditor} and its super class
+	 * {@link AbstractDecoratedTextEditor}.
+	 *
 	 */
 	protected void configureSourceViewerDecorationSupport(SourceViewerDecorationSupport support) {
 		MarkerAnnotationPreferences annotationPreferences = new MarkerAnnotationPreferences();
@@ -317,6 +313,7 @@ public class StyledTextXtextAdapter {
 	public IParseResult getXtextParseResult() {
 		return getXtextDocument().readOnly(new IUnitOfWork<IParseResult, XtextResource>() {
 
+			@Override
 			public IParseResult exec(XtextResource state) throws Exception {
 				return state.getParseResult();
 			}
@@ -388,58 +385,58 @@ public class StyledTextXtextAdapter {
 		return this.xtextStyledTextHighlightingHelper;
 	}
 
-	protected class XtextStyledTextSelectionProvider implements ISelectionProvider {
-		
-		public void setSelection(ISelection selection) {
-		}
-
-		public void removeSelectionChangedListener(ISelectionChangedListener listener) {
-		}
-
-		public void addSelectionChangedListener(ISelectionChangedListener listener) {
-		}
-
-		public ISelection getSelection() {
-			if (getStyledText().isDisposed())
-				return StructuredSelection.EMPTY;
-			int offset = getStyledText().getCaretOffset() - 1;
-			XtextResource fakeResource = StyledTextXtextAdapter.this.getFakeResourceContext().getFakeResource();
-			IParseResult parseResult = fakeResource.getParseResult();
-			if (parseResult == null)
-				return StructuredSelection.EMPTY;
-			ICompositeNode rootNode = parseResult.getRootNode();
-			ILeafNode selectedNode = NodeModelUtils.findLeafNodeAtOffset(rootNode, offset);
-			final EObject selectedObject = NodeModelUtils.findActualSemanticObjectFor(selectedNode);
-			if (selectedObject == null) {
-				return StructuredSelection.EMPTY;
-			}
-			return new StructuredSelection(selectedObject);
-		}
-	}
-
-	protected class ChangeSelectionProviderOnFocusGain implements FocusListener, DisposeListener {
+	public static class ChangeSelectionProviderOnFocusGain implements FocusListener, DisposeListener {
 
 		protected ISelectionProvider selectionProviderOnFocusGain;
 		protected ISelectionProvider selectionProviderOnFocusLost;
 		protected IWorkbenchPartSite site;
+		private boolean ignoreNextFocusLost = false;
+		private StyledText text;
 
 		public ChangeSelectionProviderOnFocusGain(IWorkbenchPartSite site,
-				ISelectionProvider selectionProviderOnFocusGain) {
+				ISelectionProvider selectionProviderOnFocusGain, StyledText text) {
 			this.selectionProviderOnFocusGain = selectionProviderOnFocusGain;
 			this.site = site;
+			this.text = text;
 		}
 
+		@Override
 		public void focusLost(FocusEvent e) {
+			if (SWT.getPlatform().equals("gtk")) {
+				if (isIgnoreNextFocusLost()) {
+					setIgnoreNextFocusLost(false);
+					return;
+				}
+				if (text.getMenu().isVisible()) {
+					setIgnoreNextFocusLost(true);
+					return;
+				}
+			}
+
 			if (this.selectionProviderOnFocusLost != null) {
 				this.site.setSelectionProvider(this.selectionProviderOnFocusLost);
 			}
+
+			text.setSelection(text.getCaretOffset());
+			
 		}
 
+		protected void setIgnoreNextFocusLost(boolean b) {
+			this.ignoreNextFocusLost = b;
+
+		}
+
+		protected boolean isIgnoreNextFocusLost() {
+			return ignoreNextFocusLost;
+		}
+
+		@Override
 		public void focusGained(FocusEvent e) {
 			this.selectionProviderOnFocusLost = this.site.getSelectionProvider();
 			this.site.setSelectionProvider(this.selectionProviderOnFocusGain);
 		}
 
+		@Override
 		public void widgetDisposed(DisposeEvent e) {
 			if (this.selectionProviderOnFocusLost != null) {
 				this.site.setSelectionProvider(this.selectionProviderOnFocusLost);

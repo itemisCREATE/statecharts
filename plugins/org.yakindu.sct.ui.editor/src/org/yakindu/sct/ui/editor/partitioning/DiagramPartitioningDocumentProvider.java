@@ -42,8 +42,7 @@ public class DiagramPartitioningDocumentProvider extends FileDiagramDocumentProv
 
 	/**
 	 * Extension of {@link DiagramFileInfo} that stores the given
-	 * {@link IEditorInput} which is required for the
-	 * {@link ResourceUnloadingTool}
+	 * {@link IEditorInput} which is required for the {@link ResourceUnloadingTool}
 	 */
 	protected class InputDiagramFileInfo extends DiagramFileInfo {
 
@@ -125,9 +124,18 @@ public class DiagramPartitioningDocumentProvider extends FileDiagramDocumentProv
 		info.fDocument.setContent(content);
 		if (content instanceof Diagram && info instanceof InputDiagramFileInfo) {
 			// Unload non needed resources
-			ResourceUnloadingTool.unloadEditorInput(DiagramPartitioningUtil.getSharedDomain().getResourceSet(),
-					((InputDiagramFileInfo) info).getEditorInput());
+			try {
+				DiagramPartitioningUtil.getSharedDomain().runExclusive(new Runnable() {
+					@Override
+					public void run() {
+						ResourceUnloadingTool.unloadEditorInput(
+								DiagramPartitioningUtil.getSharedDomain().getResourceSet(),
+								((InputDiagramFileInfo) info).getEditorInput());
+					}
+				});
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
-
 }

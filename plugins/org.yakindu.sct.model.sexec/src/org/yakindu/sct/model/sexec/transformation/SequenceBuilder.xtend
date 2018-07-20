@@ -106,7 +106,7 @@ class SequenceBuilder {
 				if (execChild.leaf) {
 					seq.steps += execChild.enterSequences.defaultSequence.newCall
 				} else {
-					if(execChild.entryAction != null) seq.steps += execChild.entryAction.newCall
+					if(execChild.entryAction !== null) seq.steps += execChild.entryAction.newCall
 					if(trace.addTraceSteps) seq.steps += execChild.newTraceStateEntered
 					for (childRegion : child.regions) {
 						seq.steps += childRegion.create.deepEnterSequence.newCall
@@ -175,14 +175,14 @@ class SequenceBuilder {
 		// create an enter sequence for each contained entry
 		for (e : r.collectEntries) {
 			val seq = sexec.factory.createSequence
-			seq.name = if (e.name == null || e.name.trim == "")
+			seq.name = if (e.name === null || e.name.trim == "")
 				DEFAULT_SEQUENCE_NAME
 			else
 				e.name
 			seq.comment = "'" + seq.name + "' enter sequence for region " + r.name
 
 			val entryNode = e.create
-			if (entryNode != null && entryNode.reactSequence != null) {
+			if (entryNode !== null && entryNode.reactSequence !== null) {
 				seq.steps.add(entryNode.reactSequence.newCall);
 			}
 
@@ -198,7 +198,7 @@ class SequenceBuilder {
 		val seq = sexec.factory.createSequence
 		seq.name = DEFAULT_SEQUENCE_NAME
 		seq.comment = "Default enter sequence for state " + state.name
-		if(execState.entryAction != null) seq.steps.add(execState.entryAction.newCall)
+		if(execState.entryAction !== null) seq.steps.add(execState.entryAction.newCall)
 
 		if(_addTraceSteps) seq.steps += execState.newTraceStateEntered
 
@@ -229,7 +229,7 @@ class SequenceBuilder {
 			val seq = sexec.factory.createSequence
 			seq.name = epName
 			seq.comment = "'" + epName + "' enter sequence for state " + state.name
-			if(execState.entryAction != null) seq.steps.add(execState.entryAction.newCall)
+			if(execState.entryAction !== null) seq.steps.add(execState.entryAction.newCall)
 
 			if(_addTraceSteps) seq.steps += execState.newTraceStateEntered
 
@@ -243,11 +243,11 @@ class SequenceBuilder {
 					val execRegion = r.create
 					var regionEnterSeq = execRegion.enterSequences.byName(epName)
 
-					if (regionEnterSeq == null) {
+					if (regionEnterSeq === null) {
 						regionEnterSeq = execRegion.enterSequences.defaultSequence
 					}
 
-					if (regionEnterSeq != null) {
+					if (regionEnterSeq !== null) {
 						seq.steps += regionEnterSeq.newCall
 					}
 				}
@@ -255,7 +255,7 @@ class SequenceBuilder {
 
 			// save the history on entering a state 
 			val execRegion = state.parentRegion.create
-			if (execRegion.historyVector != null) {
+			if (execRegion.historyVector !== null) {
 				seq.steps += execRegion.newSaveHistory()
 			}
 
@@ -334,13 +334,13 @@ class SequenceBuilder {
 				r.defineStateExitSequence
 
 				val execRegion = r.create
-				if (execRegion.exitSequence != null) {
+				if (execRegion.exitSequence !== null) {
 					seq.steps.add(execRegion.exitSequence.newCall)
 				}
 			}
 		}
 
-		if(execState.exitAction != null) seq.steps.add(execState.exitAction.newCall)
+		if(execState.exitAction !== null) seq.steps.add(execState.exitAction.newCall)
 
 		if(_addTraceSteps) seq.steps += execState.newTraceStateExited
 
@@ -370,7 +370,7 @@ class SequenceBuilder {
 			exitScopes.fold(caseSeq,
 				[cs, exitScope|
 					{
-						if (exitScope instanceof ExecutionRegion && (exitScope as ExecutionRegion).historyVector != null) {
+						if (exitScope instanceof ExecutionRegion && (exitScope as ExecutionRegion).historyVector !== null) {
 							// val execRegion = exitScope as ExecutionRegion
 							// cs.steps += execRegion.newSaveHistory
 						}
@@ -378,7 +378,7 @@ class SequenceBuilder {
 					}])
 
 			//Leave leaf
-			if (s.exitSequence != null) {
+			if (s.exitSequence !== null) {
 				caseSeq.steps += s.exitSequence.newCall
 			}
 
@@ -388,7 +388,7 @@ class SequenceBuilder {
 					{
 						if (exitScope instanceof ExecutionState && s.stateVector.last == exitScope.stateVector.last) {
 							val execState = exitScope as ExecutionState
-							if(execState.exitAction != null) cs.steps.add(execState.exitAction.newCall)
+							if(execState.exitAction !== null) cs.steps.add(execState.exitAction.newCall)
 							if(_addTraceSteps) cs.steps.add(execState.newTraceStateExited)
 						}
 						cs
@@ -408,12 +408,12 @@ class SequenceBuilder {
 
 		for (r : sc.regions) {
 			val execRegion = r.create
-			if (execRegion.exitSequence != null) {
+			if (execRegion.exitSequence !== null) {
 				exitSequence.steps.add(execRegion.exitSequence.newCall)
 			}
 		}
 
-		if(flow.exitAction != null) exitSequence.steps.add(flow.exitAction.newCall)
+		if(flow.exitAction !== null) exitSequence.steps.add(flow.exitAction.newCall)
 
 		flow.exitSequence = exitSequence
 		return exitSequence
@@ -428,11 +428,11 @@ class SequenceBuilder {
 		enterSequence.name = DEFAULT_SEQUENCE_NAME
 		enterSequence.comment = "Default enter sequence for statechart " + sc.name
 
-		if(flow.entryAction != null) enterSequence.steps.add(flow.entryAction.newCall)
+		if(flow.entryAction !== null) enterSequence.steps.add(flow.entryAction.newCall)
 
 		for (r : sc.regions) {
 			val execRegion = r.create
-			if (execRegion.enterSequences.defaultSequence != null) {
+			if (execRegion.enterSequences.defaultSequence !== null) {
 				enterSequence.steps.add(execRegion.enterSequences.defaultSequence.newCall)
 			}
 		}
@@ -488,14 +488,14 @@ class SequenceBuilder {
 	}
 
 	def addVariableInitializationStep(Sequence initSequence, VariableDefinition vd) {
-		if (vd.effectiveInitialValue != null) {
+		if (vd.effectiveInitialValue !== null) {
 			initSequence.steps.add(vd.createInitialization)
 		}
 	}
 
 	//TODO: Move to type system
 	def effectiveInitialValue(VariableDefinition vd) {
-		if (vd.initialValue != null) {
+		if (vd.initialValue !== null) {
 			return vd.initialValue
 		} else {
 			return vd.type?.defaultValue?.buildValue

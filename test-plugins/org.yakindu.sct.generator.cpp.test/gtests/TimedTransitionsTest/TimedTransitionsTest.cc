@@ -4,7 +4,9 @@
 #include "TimedTransitions.h"
 #include "sc_runner_timed.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 
 //! The timers are managed by a timer service. */
@@ -46,4 +48,6 @@ class TimedTransitionsTest : public ::testing::Test{
 		EXPECT_TRUE(statechart->isStateActive(TimedTransitions::main_region_End));
 		
 		
+}
+
 }

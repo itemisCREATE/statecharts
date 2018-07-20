@@ -10,21 +10,23 @@
  */
 package org.yakindu.sct.model.stext.scoping;
 
-import java.util.Optional;
+import static org.yakindu.sct.model.stext.scoping.SharedEditingDomainFactory.DOMAIN_ID;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.transaction.RunnableWithResult;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.emf.workspace.WorkspaceEditingDomainFactory;
-import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.util.IResourceScopeCache;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 /**
@@ -35,49 +37,59 @@ import com.google.inject.Singleton;
 @Singleton
 public class ImportedResourceCache {
 
-	public static final String DOMAIN_ID = "org.yakindu.sct.domain.resources";
-
 	@Inject
 	private IResourceServiceProvider.Registry serviceProviderRegistry;
-	@Inject
-	private IResourceScopeCache cache;
 
 	protected TransactionalEditingDomain getEditingDomain() {
-		TransactionalEditingDomain editingDomain = TransactionalEditingDomain.Registry.INSTANCE
-				.getEditingDomain(DOMAIN_ID);
-		if (editingDomain == null) {
-			TransactionalEditingDomain resourceDomain = WorkspaceEditingDomainFactory.INSTANCE.createEditingDomain();
-			resourceDomain.setID(DOMAIN_ID);
-			TransactionalEditingDomain.Registry.INSTANCE.add(DOMAIN_ID, resourceDomain);
-			new WorkspaceSynchronizer(resourceDomain);
-		}
 		return TransactionalEditingDomain.Registry.INSTANCE.getEditingDomain(DOMAIN_ID);
 	}
 
 	public IResourceDescription get(final URI uri) {
-		final ResourceSet set = getResourceSet();
-		final Resource resource = set.getResource(uri, true);
-		if (resource != null) {
-			Optional<IResourceDescription> optional = cache.get(ImportedResourceCache.class, resource,
-					new Provider<Optional<IResourceDescription>>() {
+		refreshFile(uri);
+		try {
+			return (IResourceDescription) getEditingDomain()
+					.runExclusive(new RunnableWithResult.Impl<IResourceDescription>() {
 						@Override
-						public Optional<IResourceDescription> get() {
-							IResourceServiceProvider serviceProvider = serviceProviderRegistry
-									.getResourceServiceProvider(uri);
-							if (serviceProvider == null)
-								return Optional.empty();
-							final Manager resourceDescriptionManager = serviceProvider.getResourceDescriptionManager();
-							if (resourceDescriptionManager == null)
-								return Optional.empty();
-							IResourceDescription result = resourceDescriptionManager.getResourceDescription(resource);
-							return Optional.of(result);
+						public void run() {
+							final ResourceSet set = getResourceSet();
+							final Resource resource = set.getResource(uri, true);
+							if (resource != null) {
+								IResourceServiceProvider serviceProvider = serviceProviderRegistry
+										.getResourceServiceProvider(uri);
+								if (serviceProvider == null)
+									return;
+								final Manager resourceDescriptionManager = serviceProvider
+										.getResourceDescriptionManager();
+								if (resourceDescriptionManager == null)
+									return;
+								IResourceDescription result = resourceDescriptionManager
+										.getResourceDescription(resource);
+								setResult(result);
+							}
 						}
 					});
-			if (optional.isPresent()) {
-				return optional.get();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	/**
+	 * Refresh local file to avoid deadlock with scheduling rule XtextBuilder ->
+	 * Editing Domain runexclusive
+	 */
+	protected void refreshFile(final URI uri) {
+		String platformString = uri.toPlatformString(true);
+		if (platformString == null)
+			return;
+		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(platformString));
+		if (file.isAccessible() && !file.isSynchronized(IResource.DEPTH_INFINITE)) {
+			try {
+				file.refreshLocal(IResource.DEPTH_INFINITE, null);
+			} catch (CoreException e) {
+				e.printStackTrace();
 			}
 		}
-		return null;
 	}
 
 	protected ResourceSet getResourceSet() {

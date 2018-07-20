@@ -15,16 +15,16 @@ class RunnableFeature {
 	}
 	
 	def hasFeatureRunnable(GeneratorEntry it) {
-		featureRunnable != null
+		featureRunnable !== null
 	}
 	
 	def getNamePrefix(GeneratorEntry it) {
-		if (featureRunnable != null) featureRunnable.getParameterValue(ICSharpFeatureConstants::NAME_PREFIX).stringValue
+		if (featureRunnable !== null) featureRunnable.getParameterValue(ICSharpFeatureConstants::NAME_PREFIX).stringValue
 		else ""	
 	}
 	
 	def getNameSuffix(GeneratorEntry it) {
-		if (featureRunnable != null) featureRunnable.getParameterValue(ICSharpFeatureConstants::NAME_SUFFIX).stringValue
+		if (featureRunnable !== null) featureRunnable.getParameterValue(ICSharpFeatureConstants::NAME_SUFFIX).stringValue
 		else ""	
 	}
 	

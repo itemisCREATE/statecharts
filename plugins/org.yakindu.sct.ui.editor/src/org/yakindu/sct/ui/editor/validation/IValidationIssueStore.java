@@ -10,10 +10,13 @@
  */
 package org.yakindu.sct.ui.editor.validation;
 
+import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ui.editor.validation.IValidationIssueProcessor;
+import org.eclipse.xtext.validation.Issue;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTIssue;
 
 import com.google.inject.ImplementedBy;
@@ -46,4 +49,33 @@ public interface IValidationIssueStore extends IValidationIssueProcessor {
 	public void disconnect(Resource resource);
 
 	public List<SCTIssue> getIssues(String uriFragment);
+	
+	public class NullImpl implements IValidationIssueStore {
+
+		@Override
+		public void processIssues(List<Issue> issues, IProgressMonitor monitor) {
+		}
+
+		@Override
+		public void addIssueStoreListener(IValidationIssueStoreListener listener) {
+		}
+
+		@Override
+		public void removeIssueStoreListener(IValidationIssueStoreListener listener) {
+		}
+
+		@Override
+		public void connect(Resource resource) {
+		}
+
+		@Override
+		public void disconnect(Resource resource) {
+		}
+
+		@Override
+		public List<SCTIssue> getIssues(String uriFragment) {
+			return Collections.emptyList();
+		}
+		
+	}
 }

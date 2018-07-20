@@ -145,22 +145,22 @@ public interface TypesPackage extends EPackage {
 	int PACKAGE__ANNOTATIONS = PACKAGE_MEMBER__ANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>Domain ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__DOMAIN_ID = PACKAGE_MEMBER_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Member</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__MEMBER = PACKAGE_MEMBER_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Domain</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__DOMAIN = PACKAGE_MEMBER_FEATURE_COUNT + 1;
+	int PACKAGE__MEMBER = PACKAGE_MEMBER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Import</b></em>' reference list.
@@ -1650,17 +1650,6 @@ public interface TypesPackage extends EPackage {
 	EReference getPackage_Member();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.types.Package#getDomain <em>Domain</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Domain</em>'.
-	 * @see org.yakindu.base.types.Package#getDomain()
-	 * @see #getPackage()
-	 * @generated
-	 */
-	EReference getPackage_Domain();
-
-	/**
 	 * Returns the meta object for the reference list '{@link org.yakindu.base.types.Package#getImport <em>Import</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2324,14 +2313,6 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PACKAGE__MEMBER = eINSTANCE.getPackage_Member();
-
-		/**
-		 * The meta object literal for the '<em><b>Domain</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PACKAGE__DOMAIN = eINSTANCE.getPackage_Domain();
 
 		/**
 		 * The meta object literal for the '<em><b>Import</b></em>' reference list feature.

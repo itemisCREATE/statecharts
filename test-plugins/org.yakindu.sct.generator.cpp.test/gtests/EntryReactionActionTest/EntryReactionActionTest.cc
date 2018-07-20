@@ -4,7 +4,9 @@
 #include "EntryReactionAction.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 
 //! The timers are managed by a timer service. */
@@ -103,4 +105,6 @@ class EntryReactionActionTest : public ::testing::Test{
 		EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredBother());
 		
 		
+}
+
 }

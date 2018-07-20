@@ -15,8 +15,11 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.yakindu.base.expressions.expressions.Argument;
 import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
 
@@ -31,14 +34,16 @@ public class ArgumentSorter {
 		Expression[] result = new Expression[arguments.size()];
 		for (int index = 0; index < arguments.size(); index++) {
 			Argument argument = arguments.get(index);
-			if (argument.getParameter() == null)
+			List<INode> nodes = NodeModelUtils.findNodesForFeature(argument,
+					ExpressionsPackage.Literals.ARGUMENT__PARAMETER);
+			if (nodes.isEmpty()) {
 				result[index] = argument.getValue();
-			else {
+			} else {
 				// operation.getParameters().indexOf(argument.getParameter() can
 				// not be used here since it uses object.equals instead of
 				// EcoreUtil.equals.)
 				for (Parameter param : operation.getParameters()) {
-					if (param.getName().equals(argument.getParameter().getName())) {
+					if (param.getName().equals(nodes.get(0).getText())) {
 						int parameterIndex = operation.getParameters().indexOf(param);
 						if (parameterIndex < result.length)
 							result[parameterIndex] = argument.getValue();

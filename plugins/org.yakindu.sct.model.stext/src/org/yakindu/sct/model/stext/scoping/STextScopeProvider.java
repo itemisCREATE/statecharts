@@ -39,15 +39,16 @@ import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.Region;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
+import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
+import org.yakindu.sct.model.stext.extensions.STextExtensions;
 import org.yakindu.sct.model.stext.scoping.ContextPredicateProvider.EmptyPredicate;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
+import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
@@ -64,13 +65,16 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 
 	@Inject
 	private ITypeSystemInferrer typeInferrer;
-	@Inject 
+	@Inject
 	private ITypeSystem typeSystem;
 	@Inject
 	private IQualifiedNameProvider nameProvider;
 	@Inject
 	private ContextPredicateProvider predicateProvider;
 	
+	@Inject
+	protected STextExtensions utils;
+
 	public IScope scope_ActiveStateReferenceExpression_value(EObject context, EReference reference) {
 		Statechart statechart = getStatechart(context);
 		if (statechart == null)
@@ -84,12 +88,12 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 
 	protected List<ImportNormalizer> getActiveStateNormalizer(EObject context) {
 		List<ImportNormalizer> normalizer = Lists.newArrayList();
-		SpecificationElement contextElement = getContextElement(context);
-		if(contextElement == null)
+		SpecificationElement contextElement = utils.getContextElement(context);
+		if (contextElement == null)
 			return normalizer;
 		Region containingRegion = EcoreUtil2.getContainerOfType(contextElement, Region.class);
-		if(containingRegion == null)
-			return normalizer; 
+		if (containingRegion == null)
+			return normalizer;
 		QualifiedName fullyQualifiedName = nameProvider.getFullyQualifiedName(containingRegion);
 		while (!fullyQualifiedName.getSegments().isEmpty()) {
 			normalizer.add(new ImportNormalizer(fullyQualifiedName, true, false));
@@ -97,6 +101,7 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 		}
 		return normalizer;
 	}
+
 	/**
 	 * Scoping for types and taking imported namespaces into account e.g. in
 	 * variable declarations.
@@ -114,7 +119,7 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 		unnamedScope = new FilteringScope(unnamedScope, predicate);
 		return new SimpleScope(unnamedScope, namedScope.getAllElements());
 	}
-	
+
 	public IScope scope_FeatureCall_feature(final FeatureCall context, EReference reference) {
 
 		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference);
@@ -136,11 +141,11 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 		if (element instanceof Scope) {
 			scope = Scopes.scopeFor(((Scope) element).getDeclarations());
 			return new FilteringScope(scope, predicate);
-		}else if(ownerType != null){
+		} else if (ownerType != null) {
 			scope = Scopes.scopeFor(typeSystem.getPropertyExtensions(ownerType));
-			scope = Scopes.scopeFor(typeSystem.getOperationExtensions(ownerType),scope);
+			scope = Scopes.scopeFor(typeSystem.getOperationExtensions(ownerType), scope);
 		}
-		
+
 		if (ownerType instanceof ComplexType) {
 			return addScopeForComplexType((ComplexType) ownerType, scope, predicate);
 		}
@@ -150,13 +155,15 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 		return scope;
 	}
 
-	protected IScope addScopeForEnumType(EnumerationType element, IScope scope, final Predicate<IEObjectDescription> predicate) {
+	protected IScope addScopeForEnumType(EnumerationType element, IScope scope,
+			final Predicate<IEObjectDescription> predicate) {
 		scope = Scopes.scopeFor((element).getEnumerator(), scope);
 		scope = new FilteringScope(scope, predicate);
 		return scope;
 	}
 
-	protected IScope addScopeForComplexType(final ComplexType type, IScope scope, final Predicate<IEObjectDescription> predicate) {
+	protected IScope addScopeForComplexType(final ComplexType type, IScope scope,
+			final Predicate<IEObjectDescription> predicate) {
 		scope = Scopes.scopeFor(type.getAllFeatures(), scope);
 		scope = new FilteringScope(scope, predicate);
 		return scope;
@@ -182,10 +189,10 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 	 */
 	protected IScope getNamedTopLevelScope(final EObject context, EReference reference) {
 		List<EObject> scopeCandidates = Lists.newArrayList();
-		Statechart statechart = getStatechart(context);
-		if (statechart == null)
+		ScopedElement scopedElement = getScopedElement(context);
+		if (scopedElement == null)
 			return IScope.NULLSCOPE;
-		EList<Scope> scopes = statechart.getScopes();
+		EList<Scope> scopes = scopedElement.getScopes();
 		for (Scope scope : scopes) {
 			if (scope instanceof InterfaceScope) {
 				String name = ((InterfaceScope) scope).getName();
@@ -202,10 +209,10 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 	 */
 	protected IScope getUnnamedTopLevelScope(final EObject context, EReference reference) {
 		List<EObject> scopeCandidates = Lists.newArrayList();
-		Statechart statechart = getStatechart(context);
-		if (statechart == null)
+		ScopedElement scopedElement = getScopedElement(context);
+		if (scopedElement == null)
 			return IScope.NULLSCOPE;
-		EList<Scope> scopes = statechart.getScopes();
+		EList<Scope> scopes = scopedElement.getScopes();
 		for (Scope scope : scopes) {
 			if (scope instanceof InterfaceScope) {
 				String name = ((InterfaceScope) scope).getName();
@@ -221,27 +228,16 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 		IScope scope = getDelegate().getScope(context, reference);
 		return Scopes.scopeFor(scopeCandidates, scope);
 	}
-
-	protected SpecificationElement getContextElement(EObject context) {
-		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context.eResource(),
-				ContextElementAdapter.class);
-
-		if (provider == null) {
-			return EcoreUtil2.getContainerOfType(context, SpecificationElement.class);
-		} else {
-			return (SpecificationElement) provider.getElement();
-		}
+	
+	protected ScopedElement getScopedElement(EObject context) {
+		ScopedElement scopedElement = EcoreUtil2.getContainerOfType(context, ScopedElement.class);
+		if (EcoreUtil.getRootContainer(context) instanceof StatechartSpecification && scopedElement != null)
+			return scopedElement;
+		return getStatechart(context);
 	}
 	
 	protected Statechart getStatechart(EObject context) {
-		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context.eResource(),
-				ContextElementAdapter.class);
-
-		if (provider == null) {
-			return EcoreUtil2.getContainerOfType(context, Statechart.class);
-		} else {
-			return (Statechart) EcoreUtil.getObjectByType(provider.getElement().eResource().getContents(),
-					SGraphPackage.Literals.STATECHART);
-		}
+		return utils.getStatechart(context);
 	}
+
 }

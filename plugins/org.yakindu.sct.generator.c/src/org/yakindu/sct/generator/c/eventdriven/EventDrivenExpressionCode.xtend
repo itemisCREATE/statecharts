@@ -13,6 +13,7 @@ package org.yakindu.sct.generator.c.eventdriven
 import com.google.inject.Inject
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.CExpressionsGenerator
+import org.yakindu.sct.generator.c.extensions.EventNaming
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 
 /**
@@ -33,7 +34,7 @@ class EventDrivenExpressionCode extends CExpressionsGenerator {
 			«event.definition.event.access» = bool_true«ELSE»
 			«IF value !== null»
 			«event.definition.event.typeSpecifier.targetLanguageName» «valueVarName» = «value.code»;
-			«functionPrefix(flow)»add_value_event_to_queue(«scHandle», «event.definition.event.eventEnumMemberName», «valueVarName»)
+			«functionPrefix(flow)»add_value_event_to_queue(«scHandle», «event.definition.event.eventEnumMemberName», &«valueVarName»)
 			«ELSE»
 			«functionPrefix(flow)»add_event_to_queue(«scHandle», «event.definition.event.eventEnumMemberName»)«ENDIF»«ENDIF»'''
 	}

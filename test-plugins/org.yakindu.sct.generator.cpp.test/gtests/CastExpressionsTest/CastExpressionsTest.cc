@@ -4,7 +4,9 @@
 #include "CastExpressions.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
 
 
 //! The timers are managed by a timer service. */
@@ -51,4 +53,6 @@ class CastExpressionsTest : public ::testing::Test{
 		EXPECT_TRUE(statechart->getDefaultSCI()->get_realValue()== 757l);
 		
 		
+}
+
 }

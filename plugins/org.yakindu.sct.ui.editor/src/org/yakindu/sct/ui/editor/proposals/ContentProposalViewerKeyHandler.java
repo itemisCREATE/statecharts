@@ -62,7 +62,7 @@ public class ContentProposalViewerKeyHandler extends DirectEditKeyHandler {
 	public boolean keyPressed(KeyEvent e) {
 		if (getCurrentSelection() == null)
 			return super.keyPressed(e);
-		if ((e.character == ' ') && ((e.stateMask & SWT.CTRL) != 0)) {
+		if ((e.character == ' ' || e.keyCode == 32) && ((e.stateMask & SWT.CTRL) != 0)) {
 			// Do not execute super - the default ctrl key binding is a
 			// deselection of the current selected element for whatever
 			// reason

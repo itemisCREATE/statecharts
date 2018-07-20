@@ -1,9 +1,9 @@
-/** 
- * Copyright (c) 2015 committers of YAKINDU and others. 
- * All rights reserved. This program and the accompanying materials 
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at 
- * http://www.eclipse.org/legal/epl-v10.html 
+/**
+ * Copyright (c) 2015 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * committers of YAKINDU - initial API and implementation
  *
@@ -30,13 +30,14 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.google.inject.name.Names;
 
 /**
- * 
+ *
  * @author axel terfloth
- * 
+ *
  */
-public class ModelSequencerTest extends Assert {
+public abstract class ModelSequencerTest extends Assert {
 
 	@Inject
 	protected IModelSequencer sequencer;
@@ -49,13 +50,14 @@ public class ModelSequencerTest extends Assert {
 
 	@Before
 	public void setup() {
-		Module m = new Module(){
+		Module m = new Module() {
 			@Override
 			public void configure(Binder binder) {
 				binder.bind(INamingService.class).to(DefaultNamingService.class);
 				binder.bind(IQualifiedNameProvider.class).to(SGraphNameProvider.class);
 				binder.bind(ITypeSystem.class).toInstance(GenericTypeSystem.getInstance());
 				binder.bind(IResourceDescriptions.class).to(ResourceSetBasedResourceDescriptions.class);
+				binder.bind(String.class).annotatedWith(Names.named("Separator")).toInstance("_");
 			}
 		};
 		Injector injector = Guice.createInjector(m);

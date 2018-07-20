@@ -64,14 +64,14 @@ class NamingHelper {
 	def dispatch String fqElementName(NamedElement it, char separator) {
 		val qualifiedName = provider.getFullyQualifiedName(it)
 		
-		if (qualifiedName!=null) {
+		if (qualifiedName!==null) {
 			return qualifiedName.skipFirst(1).toString(separator.toString)
 		}
 		return class.simpleName
 	}
 	
 	def containsName(List<String> it, String shortName) {
-		findFirst[compareTo(shortName) == 0] != null
+		findFirst[compareTo(shortName) == 0] !== null
 	}
 	
 	def String getHash(String text, int length) {

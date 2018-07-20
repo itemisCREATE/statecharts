@@ -49,12 +49,10 @@ public abstract class AbstractTypeInferrerTest extends AbstractSTextTest {
 		return inferTypeResult(expression, Expression.class.getSimpleName(), scopes);
 	}
 	
-	@Deprecated
 	protected Type inferTypeForExpression(String expression, String scopes) {
 		return inferType(expression, Expression.class.getSimpleName(), scopes);
 	}
 
-	@Deprecated
 	protected Type inferType(String expression, String parserRule, String scopes) {
  		InferenceResult inferTypeResult = inferTypeResult(expression, parserRule, scopes);
 		if(inferTypeResult == null)

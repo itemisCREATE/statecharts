@@ -46,7 +46,7 @@ StatechartScope:
 	InterfaceScope | InternalScope | ImportScope;
 
 InterfaceScope:
-	{InterfaceScope} 'interface' (name=XID)? ':' (members+=InterfaceScopeDeclaration)*;
+	{InterfaceScope} 'interface' (name=IDWithKeywords)? ':' (members+=InterfaceScopeDeclaration)*;
 
 InterfaceScopeDeclaration returns types::Declaration:
 	EventDefinition | VariableDefinition | TypeAliasDefinition | OperationDefinition;
@@ -58,24 +58,24 @@ InternalScopeDeclaration returns types::Declaration:
 	EventDefinition | VariableDefinition | OperationDefinition | TypeAliasDefinition
 ;
 ImportScope:
-	 {ImportScope} 'import' ':' (imports+=QID | imports+=STRING)*;
+	 {ImportScope} 'import' ':' imports+=STRING*;
 
 EventDefinition:
-	(direction=Direction)? 'event' name=XID (':' typeSpecifier=TypeSpecifier)?;
+	(direction=Direction)? 'event' name=(ID | Keywords) (':' typeSpecifier=TypeSpecifier)?;
 
 enum Direction returns types::Direction:
 	LOCAL='local' | IN='in' | OUT='out';
 
 VariableDefinition:
-	{VariableDefinition} (const?='const'|'var') ((readonly?='readonly')? & (external?='external')?) name=XID ':' typeSpecifier=TypeSpecifier
+	{VariableDefinition} (const?='const'|'var') ((readonly?='readonly')? & (external?='external')?) name=IDWithKeywords ':' typeSpecifier=TypeSpecifier
 	('=' initialValue=Expression)?;  
 	
 TypeAliasDefinition:
-	{TypeAliasDefinition} 'alias' name=XID ':' typeSpecifier=TypeSpecifier;
+	{TypeAliasDefinition} 'alias' name=IDWithKeywords ':' typeSpecifier=TypeSpecifier;
 
 OperationDefinition:
 	{OperationDefinition} 
-	'operation' name=XID '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')' (':'
+	'operation' name=IDWithKeywords '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')' (':'
 	typeSpecifier=TypeSpecifier)?;
 	
 ArgumentedAnnotation:
@@ -87,7 +87,7 @@ SimpleArgument returns exp::Argument:
 ;
 
 Parameter returns types::Parameter:
-	 name=XID (varArgs?='...')? ':' typeSpecifier=TypeSpecifier;
+	 name=IDWithKeywords (varArgs?='...')? ':' typeSpecifier=TypeSpecifier;
 
 LocalReaction:
 	(trigger=ReactionTrigger) => ('/' effect=ReactionEffect);
@@ -174,9 +174,17 @@ PrimaryExpression returns exp::Expression:
 enum TimeUnit:
 	second='s' | millisecond='ms' | microsecond='us' | nanosecond='ns';
 
-XID:
-	ID | 'namespace' | 'interface' | 'internal' | 'event' | 'local' | 'in' | 'out' | 'var' | 'readonly' | 'external' |
-	'operation' | 'default' | 'else' | 'entry' | 'exit' | 'always' | 'oncycle' | 'raise' | 'valueof' | 'active';
+IDWithKeywords:
+	ID | TriggerKeywords | Keywords
+;
+
+Keywords:
+	 'namespace' | 'interface' | 'internal' |'import' | 'event' | 'local' | 'in' | 'out' | 'const' | 'var' | 'readonly' | 'external' |
+	'operation' | 'default' | 'else' | 'raise' | 'valueof' | 'active';
+
+TriggerKeywords:
+	 'every' | 'always' | 'oncycle' | 'after' | 'exit' | 'entry'
+;
 
 FQN:
-	XID ('.' XID)*;
+	IDWithKeywords ('.' IDWithKeywords)*;

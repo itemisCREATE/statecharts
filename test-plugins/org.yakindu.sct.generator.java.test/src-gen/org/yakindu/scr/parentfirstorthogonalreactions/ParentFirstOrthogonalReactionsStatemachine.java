@@ -162,15 +162,12 @@ public class ParentFirstOrthogonalReactionsStatemachine implements IParentFirstO
 	
 	private int nextStateIndex;
 	
-	
-	
 	public ParentFirstOrthogonalReactionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
 	
 	public void init() {
 		this.initialized = true;
-		
 		if (this.sCInterface.operationCallback == null) {
 			throw new IllegalStateException("Operation callback for interface sCInterface must be set.");
 		}
@@ -212,7 +209,6 @@ public class ParentFirstOrthogonalReactionsStatemachine implements IParentFirstO
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
 		}
-	
 		enterSequence_ParentFirstOrthogonalReactions_r_default();
 		enterSequence_ParentFirstOrthogonalReactions_r2_default();
 	}

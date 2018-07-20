@@ -26,7 +26,7 @@ public class TransitionFigure extends PolylineConnectionEx {
 
 	private final IMapMode mapMode;
 
-	protected static final int TOLERANCE = 5;
+	protected static final int TOLERANCE = 4;
 
 	public TransitionFigure(IMapMode mapMode) {
 		this(mapMode, false);
