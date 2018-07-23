@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
@@ -172,16 +173,16 @@ public class GeneratorExtensions {
 	 * returns the Generator Descriptor for the given generator id, or null, if
 	 * the id is unknown
 	 */
-	public static IGeneratorDescriptor getGeneratorDescriptor(final String generatorId) {
+	public static Optional<IGeneratorDescriptor> getGeneratorDescriptor(final String generatorId) {
 		try {
-			return Iterables.find(getGeneratorDescriptors(), new Predicate<IGeneratorDescriptor>() {
+			return Optional.of(Iterables.find(getGeneratorDescriptors(), new Predicate<IGeneratorDescriptor>() {
 				@Override
 				public boolean apply(IGeneratorDescriptor input) {
 					return input != null && input.getId() != null && input.getId().equals(generatorId);
 				}
-			});
+			}));
 		} catch (NoSuchElementException ex) {
-			return null;
+			return Optional.empty();
 		}
 	}
 
