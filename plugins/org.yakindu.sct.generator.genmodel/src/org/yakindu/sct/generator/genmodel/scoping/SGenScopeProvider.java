@@ -11,6 +11,7 @@
 package org.yakindu.sct.generator.genmodel.scoping;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.EList;
@@ -94,10 +95,11 @@ public class SGenScopeProvider extends AbstractDeclarativeScopeProvider {
 	protected IScope scope_GeneratorEntry_elementRef(final EObject context, final EReference reference) {
 		GeneratorModel generatorModel = (GeneratorModel) EcoreUtil2.getRootContainer(context);
 		String id = generatorModel.getGeneratorId();
-		final IGeneratorDescriptor desc = GeneratorExtensions.getGeneratorDescriptor(id);
-		if (desc == null)
+		final Optional<IGeneratorDescriptor> desc = GeneratorExtensions.getGeneratorDescriptor(id);
+		if (!desc.isPresent()) {
 			return IScope.NULLSCOPE;
-		final String elementRefType = desc.getElementRefType();
+		}
+		final String elementRefType = desc.get().getElementRefType();
 		IScope scope = new FilteringScope(getDelegate().getScope(context, reference),
 				new Predicate<IEObjectDescription>() {
 					public boolean apply(IEObjectDescription input) {
@@ -151,13 +153,11 @@ public class SGenScopeProvider extends AbstractDeclarativeScopeProvider {
 		Assert.isNotNull(generatorModel);
 		String generatorId = generatorModel.getGeneratorId();
 
-		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(generatorId);
-
 		Iterable<IEObjectDescription> allElements = Lists.newArrayList();
-
-		if (generatorDescriptor != null) {
+		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(generatorId);
+		if (generatorDescriptor.isPresent()) {
 			Iterable<ILibraryDescriptor> libraryDescriptor = LibraryExtensions
-					.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
+					.getLibraryDescriptors(generatorDescriptor.get().getLibraryIDs());
 
 			for (ILibraryDescriptor desc : libraryDescriptor) {
 				Resource library = resourceSet.getResource(desc.getURI(), true);

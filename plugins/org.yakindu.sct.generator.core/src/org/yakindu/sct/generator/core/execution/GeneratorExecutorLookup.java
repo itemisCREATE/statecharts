@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.generator.core.execution;
 
+import java.util.Optional;
+
 import org.eclipse.emf.common.util.EList;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
@@ -50,16 +52,16 @@ public class GeneratorExecutorLookup {
 	}
 
 	public IGeneratorEntryExecutor createExecutor(GeneratorEntry entry, String generatorId) {
-		IGeneratorDescriptor description = GeneratorExtensions.getGeneratorDescriptor(generatorId);
-		if (description == null)
+		Optional<IGeneratorDescriptor> description = GeneratorExtensions.getGeneratorDescriptor(generatorId);
+		if (!description.isPresent())
 			throw new RuntimeException("No generator registered for ID: " + generatorId);
 		if (entry.getElementRef() == null || entry.getElementRef().eResource() == null) {
 			throw new RuntimeException("Could not resolve reference to model ");
 		}
-		final IGeneratorEntryExecutor executor = description.createExecutor();
+		final IGeneratorEntryExecutor executor = description.get().createExecutor();
 		if (executor == null)
 			throw new RuntimeException("Failed to create generator instance for ID:" + generatorId);
-		Injector injector = createInjector(entry, description, generatorId);
+		Injector injector = createInjector(entry, description.get(), generatorId);
 		injector.injectMembers(executor);
 		return executor;
 	}

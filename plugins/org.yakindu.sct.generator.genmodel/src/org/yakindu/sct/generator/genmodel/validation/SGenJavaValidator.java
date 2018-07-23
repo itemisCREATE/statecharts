@@ -16,6 +16,7 @@ import static com.google.common.collect.Iterables.transform;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IStatus;
@@ -86,8 +87,12 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 
 	@Check
 	public void checkDomainCompatibility(GeneratorModel model) {
-		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
-		Set<String> validDomains = generatorDescriptor.getValidDomains();
+		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions
+				.getGeneratorDescriptor(model.getGeneratorId());
+		if (!generatorDescriptor.isPresent()) {
+			return;
+		}
+		Set<String> validDomains = generatorDescriptor.get().getValidDomains();
 		EList<GeneratorEntry> entries = model.getEntries();
 		for (GeneratorEntry generatorEntry : entries) {
 			EObject reference = generatorEntry.getElementRef();
@@ -112,14 +117,15 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	@Check
 	public void checkContentType(GeneratorEntry entry) {
 		GeneratorModel generatorModel = EcoreUtil2.getContainerOfType(entry, GeneratorModel.class);
-		IGeneratorDescriptor descriptor = GeneratorExtensions.getGeneratorDescriptor(generatorModel.getGeneratorId());
-		if (descriptor == null)
+		Optional<IGeneratorDescriptor> descriptor = GeneratorExtensions
+				.getGeneratorDescriptor(generatorModel.getGeneratorId());
+		if (!descriptor.isPresent())
 			return;
 		String contentType = entry.getContentType();
 		if (contentType == null || contentType.trim().length() == 0) {
 			return;
 		}
-		if (!contentType.equals(descriptor.getContentType())) {
+		if (!contentType.equals(descriptor.get().getContentType())) {
 			error(UNKNOWN_CONTENT_TYPE + contentType + "'", SGenPackage.Literals.GENERATOR_ENTRY__CONTENT_TYPE);
 		}
 	}
@@ -154,10 +160,13 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 			return;
 		GeneratorModel model = (GeneratorModel) EcoreUtil2.getRootContainer(value);
 
-		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
-
+		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions
+				.getGeneratorDescriptor(model.getGeneratorId());
+		if (!generatorDescriptor.isPresent()) {
+			return;
+		}
 		IDefaultFeatureValueProvider provider = LibraryExtensions.getDefaultFeatureValueProvider(
-				generatorDescriptor.getLibraryIDs(), value.getParameter().getFeatureType().getLibrary());
+				generatorDescriptor.get().getLibraryIDs(), value.getParameter().getFeatureType().getLibrary());
 		injector.injectMembers(provider);
 		IStatus status = provider.validateParameterValue(value);
 		createMarker(status);
@@ -175,8 +184,8 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 
 	@Check
 	public void checkGeneratorExists(GeneratorModel model) {
-		IGeneratorDescriptor descriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
-		if (descriptor == null) {
+		Optional<IGeneratorDescriptor> descriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
+		if (!descriptor.isPresent()) {
 			error(String.format(UNKOWN_GENERATOR + " %s!", model.getGeneratorId()),
 					SGenPackage.Literals.GENERATOR_MODEL__GENERATOR_ID);
 		}
@@ -222,10 +231,13 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	public void checkRequiredFeatures(GeneratorEntry entry) {
 		GeneratorModel model = (GeneratorModel) EcoreUtil2.getRootContainer(entry);
 
-		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
-
+		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions
+				.getGeneratorDescriptor(model.getGeneratorId());
+		if (!generatorDescriptor.isPresent()) {
+			return;
+		}
 		Iterable<ILibraryDescriptor> libraryDescriptors = LibraryExtensions
-				.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
+				.getLibraryDescriptors(generatorDescriptor.get().getLibraryIDs());
 
 		Iterable<FeatureType> requiredFeatures = filter(
 				concat(transform(transform(libraryDescriptors, getFeatureTypeLibrary()), getFeatureTypes())),
@@ -256,10 +268,12 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	public void checkRequiredParameters(FeatureConfiguration configuration) {
 		GeneratorModel model = (GeneratorModel) EcoreUtil2.getRootContainer(configuration);
 
-		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
-
+		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
+		if(!generatorDescriptor.isPresent()) {
+			return;
+		}
 		Iterable<ILibraryDescriptor> libraryDescriptors = LibraryExtensions
-				.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
+				.getLibraryDescriptors(generatorDescriptor.get().getLibraryIDs());
 
 		Iterable<String> requiredParameters = transform(filter(concat(transform(
 				filter(concat(transform(transform(libraryDescriptors, getFeatureTypeLibrary()), getFeatureTypes())),

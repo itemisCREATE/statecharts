@@ -91,7 +91,7 @@ class Naming {
 	}
 	
 	def statesEnumType(ExecutionFlow it) {
-		flow.type + 'States'
+		containerType + 'States'
 	}
 	
 	def protected String entryStatemachinePrefix() {
@@ -99,15 +99,15 @@ class Naming {
 	}
 
 	def dispatch String type(InterfaceScope it) {
-		flow.type + 'Iface' + (if(name.nullOrEmpty) '' else name).asIdentifier.toFirstUpper
+		containerType + 'Iface' + (if(name.nullOrEmpty) '' else name).asIdentifier.toFirstUpper
 	}
 
 	def dispatch String type(InternalScope it) {
-		flow.type + 'Internal'
+		containerType + 'Internal'
 	}
 
 	def dispatch String type(Scope it) {
-		flow.type + 'TimeEvents'
+		containerType + 'TimeEvents'
 	}
 
 	def dispatch String type(ExecutionFlow it) {
@@ -241,7 +241,7 @@ class Naming {
 	def dispatch scopeTypeDeclMember(Declaration it) ''''''
 
 	def constantName(VariableDefinition it) {
-		(flow.type + separator + scope.type + separator + name.asEscapedIdentifier).toUpperCase
+		(containerType + separator + scope.type + separator + name.asEscapedIdentifier).toUpperCase
 	}
 
 	def raiseTimeEventFctID(ExecutionFlow it) {
@@ -360,7 +360,7 @@ class Naming {
 
 	def dispatch scopeDescription(InternalScope it) '''internal scope'''
 
-	def scHandleDecl(EObject it) { flow.type + '* ' + scHandle }
+	def scHandleDecl(EObject it) { containerType + '* ' + scHandle }
 
 	def scHandle() { 'handle' }
 

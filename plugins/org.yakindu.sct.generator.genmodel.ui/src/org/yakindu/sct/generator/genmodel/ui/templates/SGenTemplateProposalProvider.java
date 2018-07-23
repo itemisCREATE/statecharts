@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.generator.genmodel.ui.templates;
 
+import java.util.Optional;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -72,10 +74,12 @@ public class SGenTemplateProposalProvider extends DefaultTemplateProposalProvide
 			ITemplateAcceptor acceptor) {
 		GeneratorModel model = (GeneratorModel) EcoreUtil2.getRootContainer(context.getCurrentModel());
 
-		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
-
+		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
+		if(!generatorDescriptor.isPresent()) {
+			return;
+		}
 		Iterable<ILibraryDescriptor> libraryDescriptor = LibraryExtensions
-				.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
+				.getLibraryDescriptors(generatorDescriptor.get().getLibraryIDs());
 
 		for (ILibraryDescriptor desc : libraryDescriptor) {
 			ResourceSet set = new ResourceSetImpl();
