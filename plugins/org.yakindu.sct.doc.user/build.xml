@@ -169,12 +169,12 @@
         <!-- Classpath for YAKINDU Docs: -->
         <artifact:resolve>
             <artifact:dependencies>
-                <dependency groupId="com.yakindu.docs"
+                <dependency groupId="org.yakindu.docs"
                             artifactId="yakindu-docs-maven-plugin"
                             version="0.0.1-SNAPSHOT"
                             scope="compile" />
             </artifact:dependencies>
-            <path refid="com.yakindu.docs.classpath" />
+            <path refid="org.yakindu.docs.classpath" />
         </artifact:resolve>
 
     </target>
@@ -450,10 +450,10 @@
 
             <!-- Convert textile source files to Hubspot HTML: -->
             <path id="converter.classpath">
-                <path refid="com.yakindu.docs.classpath" />
+                <path refid="org.yakindu.docs.classpath" />
                 <path refid="wikitext.all.classpath" />
             </path>
-            <java classname="com.yakindu.docs.wikitext.TextileToHubspotConverter"
+            <java classname="org.yakindu.docs.wikitext.TextileToHubspotConverter"
                   classpathref="converter.classpath"
                   fork="true"
                   dir="${basedir}"
