@@ -14,6 +14,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -21,6 +22,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.BasicInternalEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EcoreEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.DocumentedElement;
@@ -203,13 +205,13 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	 * @generated NOT
 	 */
 	public EList<Reaction> getLocalReactions() {
-		EList<Reaction> result = new BasicInternalEList<Reaction>(
-				Reaction.class);
+		EList<Reaction> result = new BasicEList<Reaction>();
 		EList<Scope> scopes = getScopes();
 		for (Scope scope : scopes) {
 				result.addAll(scope.getReactions());
 		}
-		return result;
+		return new EcoreEList.UnmodifiableEList<Reaction>(this,
+				SGraphPackage.Literals.REACTIVE_ELEMENT__LOCAL_REACTIONS, result.size(), result.toArray());
 	}
 
 	/**
@@ -605,7 +607,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (namespace: ");
 		result.append(namespace);
 		result.append(", name: ");
