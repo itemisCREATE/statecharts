@@ -231,8 +231,9 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	public void checkRequiredFeatures(GeneratorEntry entry) {
 		GeneratorModel model = (GeneratorModel) EcoreUtil2.getRootContainer(entry);
 
-		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
-		if(generatorDescriptor.isPresent()) {
+		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions
+				.getGeneratorDescriptor(model.getGeneratorId());
+		if (!generatorDescriptor.isPresent()) {
 			return;
 		}
 		Iterable<ILibraryDescriptor> libraryDescriptors = LibraryExtensions
