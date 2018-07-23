@@ -182,7 +182,7 @@ bc.
 
 A prerequisite for dealing with an _operate_ event in the *On* state is to get into that state in the first place. However, we have implemented the necessary actions before, namely in the test _isStateOnActiveAfterOperateInOffState_. The great thing is that we can just use that test by calling it as subroutine. This is like calling a function or method in any other programming language.
 
-We know that after executing _isStateOnActiveAfterOperateInOffState_ the *On* state is active – we even _assert_ that in the called test operation. So now we just have to raise _operate_ again, cycle the statechat once and check whether we are in the *Off* state after that.
+We know that after executing _isStateOnActiveAfterOperateInOffState_ the *On* state is active – we even _assert_ that in the called test operation. So now we just have to raise _operate_ again, cycle the statechart once and check whether we are in the *Off* state after that.
 
 
 h4. Looping
@@ -432,9 +432,9 @@ The first assertion checks whether the operation _myOperation_ has been called d
 
 The second assertion not only checks whether the operation _myOperation_ has been called, but also checks whether it has been called with parameters 42 and 815. If the operation hasn't been called at all, the test fails. The test also fails if the operation has been called, but with different parameters than 42 and 815, e.g., @myOperation(1, 2)@.
 
-The third assertion checks whether the operation myOperation has been called exactly 4 times, no matter the arguments, while the fourth assertion checks if the operation has been called exactly one time with the specified parameters.
+The third assertion checks whether the operation _myOperation_ has been called exactly 4 times, no matter the arguments, while the fourth assertion checks if the operation has been called exactly one time with the specified parameters.
 
-The fifth assertion checks if the "forbidden" operation @myError@ has been called, and fails if it was. 
+The fifth assertion checks if the "forbidden" operation @myError@ has been called, and fails in that case. 
 
 ==</div>==
 
@@ -794,11 +794,11 @@ The assertion fails if the specified state is not active.
 
 h4(#sctunit_mocking_an_operation_call). Mocking an operation call
 
-The _mock_ statement allows you to mock the operations defined in the statechart. You can specify what should be returned when the operation is called, even depending on the given parameters.
+The _mock_ statement allows you to mock the operations defined in the statechart. You can specify what should be returned when the operation is called, even depending on the given input parameters.
 
 ==<div class="example">==
 
-Consider a complex operation _getNeutronFlux_, which takes a real value as an argument and returns a real value as a result. During _semantic unit testing_ of your statechart – as opposed to _integration testing_ –, you won't want to integrate the operation into your testing environment. Aside from that, it's currently not possible to call operations, for example defined in a java class, from SCTUnit.
+Consider a complex operation _getNeutronFlux_, which takes a real value as an argument and returns a real value as a result. During _semantic unit testing_ of your statechart – as opposed to _integration testing_ –, you won't want to integrate the operation into your testing environment. Aside from that, it's currently not possible to call operations, for example defined in a Java class, from SCTUnit.
 
 Your statechart, however, depends on _getNeutronFlux_ returning actual results, as can be seen in the simple model shown in figure "&quot;Neutron flux statechart&quot;":#sctunit_fig_neutron_flux_statechart:
 
@@ -902,7 +902,7 @@ p. The test suite _MyTest_Suite_ comprises the test classes _TestClassA_, _TestC
 
 The nice thing about test suites is that you can run all tests of all the test classes at once. Right-click on the test suite file, say, _mytestsuite.sctunit_, and select _Run As → SCTUnit_ in the context menu. All tests in all test classes referenced in the test suite will be executed.
 
-You can put test classes into one test suite which test different statecharts. However, all test classes within a test suite must pertain to statecharts using the same language domain. For example, if you have a statechart using YAKINDU Statechart Tools' standard domain and another statechart using the "C domain":../user-guide/c-domain.html, you cannot put their respective test classes into the same test suite. Instead you would have to write two different test suites: one for the test classes testing your "normal" statecharts, the another one for testing your "C" statecharts.
+You can put test classes which test different statecharts into one test suite. However, all test classes within a test suite must pertain to statecharts using the same language domain. For example, if you have a statechart using YAKINDU Statechart Tools' default domain and another statechart using the "C domain":../user-guide/c-domain.html, you cannot put their respective test classes into the same test suite. Instead you would have to write two different test suites: one for the test classes testing your "normal" statecharts, the another one for testing your "C" statecharts.
 
 A test suite is defined by the keyword @testsuite@, followed by the name of the test suite.
 
