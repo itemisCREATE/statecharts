@@ -427,7 +427,7 @@
                 </pluginRepository>
                 <pluginRepository>
                     <id>yakindu-commons</id>
-                    <url>https://projects.itemis.de/nexus/content/groups/yakindu/</url>
+                    <url>https://projects.itemis.de/nexus/content/groups/OS/</url>
                     <releases>
                         <enabled>true</enabled>
                     </releases>
