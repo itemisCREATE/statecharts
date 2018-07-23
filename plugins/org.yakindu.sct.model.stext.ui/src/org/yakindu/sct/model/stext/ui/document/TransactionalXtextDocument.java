@@ -127,5 +127,4 @@ public class TransactionalXtextDocument extends ParallelReadXtextDocument {
 		}
 		return super.modify(new UnitOfWorkOnTransactionalEditingDomain<T>(work)); 
 	}
-
 }
