@@ -97,12 +97,12 @@ public class StatePropertySection extends AbstractTwoColumnEditorPropertySection
 	}
 
 	@Override
-	protected void setEObject(EObject object) {
-		super.setEObject(object);
+	protected void inputChanged() {
 		Injector injector = getInjector(State.class.getName());
 		if (injector != null) {
 			enableXtext(txtSpecification, injector);
 		}
+		super.inputChanged();
 	}
 
 	protected void createTransitionsControl(Composite parent) {
