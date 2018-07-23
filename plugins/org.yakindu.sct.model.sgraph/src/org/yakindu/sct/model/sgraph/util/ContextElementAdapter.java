@@ -34,6 +34,15 @@ public class ContextElementAdapter extends AdapterImpl {
 		this.provider = provider;
 	}
 
+	public ContextElementAdapter(EObject eObject) {
+		this.provider = new IContextElementProvider() {
+			@Override
+			public EObject getContextObject() {
+				return eObject;
+			}
+		};
+	}
+
 	@Override
 	public boolean isAdapterForType(Object type) {
 		return type == ContextElementAdapter.class;

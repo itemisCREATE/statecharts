@@ -114,7 +114,7 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 
 	protected void enableXtext(Control styledText, Injector injector) {
 		final StyledTextXtextAdapter xtextAdapter = new StyledTextXtextAdapter(injector);
-		xtextAdapter.getFakeResourceContext().getFakeResource().eAdapters().add(new ContextElementAdapter(this));
+		xtextAdapter.getFakeResourceContext().getFakeResource().eAdapters().add(new ContextElementAdapter(getEObject()));
 		xtextAdapter.adapt((StyledText) styledText);
 
 		initContextMenu(styledText);

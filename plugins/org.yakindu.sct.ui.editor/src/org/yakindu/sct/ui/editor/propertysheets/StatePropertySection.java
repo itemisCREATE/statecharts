@@ -88,13 +88,21 @@ public class StatePropertySection extends AbstractTwoColumnEditorPropertySection
 		if (injector != null) {
 			txtSpecification = new StyledText(parent, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
 			((StyledText) txtSpecification).setAlwaysShowScrollBars(false);
-			enableXtext(txtSpecification, injector);
 			createHelpWidget(parent, txtSpecification, HelpContextIds.SC_PROPERTIES_STATE_EXPRESSION);
 		} else {
 			txtSpecification = getToolkit().createText(parent, "", SWT.MULTI);
 		}
 		GridDataFactory.fillDefaults().span(2, 1).applyTo(lblDocumentation);
 		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize()).applyTo(txtSpecification);
+	}
+
+	@Override
+	protected void setEObject(EObject object) {
+		super.setEObject(object);
+		Injector injector = getInjector(State.class.getName());
+		if (injector != null) {
+			enableXtext(txtSpecification, injector);
+		}
 	}
 
 	protected void createTransitionsControl(Composite parent) {
