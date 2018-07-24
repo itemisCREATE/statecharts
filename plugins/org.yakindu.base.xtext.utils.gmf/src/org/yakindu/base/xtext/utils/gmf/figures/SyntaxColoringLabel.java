@@ -172,6 +172,8 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		protected int getTextExtend(Font font, String string) {
 			// Can't use TextUtilities, wrong calculation of " "
 			// getTextUtilities().getStringExtents(string, font).width;
+			if (string.isEmpty())
+				return 0;
 			if (gc.getFont() != font)
 				gc.setFont(font);
 			int offset = gc.textExtent(string).x;
