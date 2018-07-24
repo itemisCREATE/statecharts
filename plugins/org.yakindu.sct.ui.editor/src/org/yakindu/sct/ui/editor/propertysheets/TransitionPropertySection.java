@@ -67,12 +67,12 @@ public class TransitionPropertySection extends AbstractTwoColumnEditorPropertySe
 	}
 
 	@Override
-	protected void setEObject(EObject object) {
-		super.setEObject(object);
+	protected void inputChanged() {
 		Injector injector = getInjector(Transition.class.getName());
 		if (injector != null) {
 			enableXtext(textControl, injector);
 		}
+		super.inputChanged();
 	}
 
 	@Override

@@ -75,10 +75,6 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 	@Override
 	public void refresh() {
 		super.refresh();
-		if (bindingContext != null)
-			bindingContext.dispose();
-		bindingContext = new ValidatingEMFDatabindingContext(this, form.getShell());
-		bindModel(bindingContext);
 	}
 
 	@Override
@@ -88,6 +84,22 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 			bindingContext.dispose();
 		if (toolkit != null)
 			toolkit.dispose();
+	}
+
+	@Override
+	protected void setEObject(EObject newValue) {
+		EObject oldValue = getEObject();
+		super.setEObject(newValue);
+		if (newValue != null && newValue != oldValue) {
+			inputChanged();
+		}
+	}
+	
+	protected void inputChanged() {
+		if (bindingContext != null)
+			bindingContext.dispose();
+		bindingContext = new ValidatingEMFDatabindingContext(this, form.getShell());
+		bindModel(bindingContext);
 	}
 
 	@Override
@@ -114,7 +126,8 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 
 	protected void enableXtext(Control styledText, Injector injector) {
 		final StyledTextXtextAdapter xtextAdapter = new StyledTextXtextAdapter(injector);
-		xtextAdapter.getFakeResourceContext().getFakeResource().eAdapters().add(new ContextElementAdapter(getEObject()));
+		xtextAdapter.getFakeResourceContext().getFakeResource().eAdapters()
+				.add(new ContextElementAdapter(getEObject()));
 		xtextAdapter.adapt((StyledText) styledText);
 
 		initContextMenu(styledText);
