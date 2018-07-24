@@ -212,7 +212,9 @@ public class DiagramPartitioningUtil {
 		EditPart firstPrimary = null;
 		for (Iterator<EditPart> it = editParts.iterator(); it.hasNext();) {
 			EditPart nextPart = it.next();
-			diagramPart.getDiagramGraphicalViewer().appendSelection(nextPart);
+			if (nextPart.isSelectable()) {
+				diagramPart.getDiagramGraphicalViewer().appendSelection(nextPart);
+			}
 			if (firstPrimary == null && nextPart instanceof IPrimaryEditPart) {
 				firstPrimary = nextPart;
 			}
