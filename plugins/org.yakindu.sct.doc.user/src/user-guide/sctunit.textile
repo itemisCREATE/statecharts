@@ -804,20 +804,75 @@ The assertion fails if the specified state is not active.
 
 h4(#sctunit_mocking_an_operation_call). Mocking an operation call
 
-The _mock_ statement allows you to mock the operations defined in the statechart. You can specify what should be returned when the operation is called during execution of the test, even depending on the given input parameters.
+The _mock_ statement allows you to mock the operations defined in the statechart. You can specify what should be returned when the operation is called, even depending on the given input parameters.
 
 ==<div class="example">==
 
-bc. 
-mock myOperation returns (3.14)
-mock myOperation(2) returns (6.28)
-mock myOperation returns (d)
+Consider a complex operation _getNeutronFlux_, which takes a real value as an argument and returns a real value as a result. During _semantic unit testing_ of your statechart – as opposed to _integration testing_ –, you won't want to integrate the operation into your testing environment. Aside from that, it's currently not possible to call operations, for example defined in a Java class, from SCTUnit.
+
+Your statechart, however, depends on _getNeutronFlux_ returning actual results, as can be seen in the simple model shown in figure "&quot;Neutron flux statechart&quot;":#sctunit_fig_neutron_flux_statechart:
+
+p(#sctunit_fig_neutron_flux_statechart). 
+
+!images/sctunit_neutron_flux_010_statechart.png(Neutron flux statechart)!
+
+p=. Neutron flux statechart
+
+While *State_A* is active, the state machine will call _getNeutronFlux(p)_ during each run-to-completion step and, depending on the results, will take the transition to *State_B* (or not).
 
 ==</div>==
 
-These are some usage examples - you can specify a default return value, and you can create mappings from parameter values to return values. You can create as many mappings as you like. Furthermore, you can specify that the mock should return a certain variable. When the variable changes, the return value is changed as well.
+However, how could you test the behaviour of your statechart if you cannot call an actual operation and retrieve its results?
 
-You can also override mappings - when a mocking call specifies parameter values (or none) that were specified before, the mapping is replaced. In the example above, the default return value is changed from @3.14@ to @d@.
+That's what the _mock_ statement is for. It is a makeshift that mimics an actual operation call by two mechanisms:
+# It creates a static mapping from a specific operation call with a specific list of parameter values to a specific return value.
+# If that operation is called with exactly that specific list of parameter values the caller receives the mapped return value as a result.
+
+A test can create an arbitrary number of such mappings, i.e., it can use the _mock_ statement multiple times for multiple operations, or for multiple parameter list of the same operation.
+
+==<div class="example">==
+
+Consider the following test:
+
+bc. 
+    @Test
+    operation testNeutronFlux() {
+        mock getNeutronFlux(12.0) returns (1000000000.0)
+        mock getNeutronFlux(18.0) returns (4.3)
+        enter
+        p = 18.0
+        proceed 1 cycle
+        assert active(neutronFlux.main_region.State_A)
+        p = 12.0
+        proceed 1 cycle
+        assert active(neutronFlux.main_region.State_B)
+    }
+
+The effect of the two _mock_ statements is as follows:
+* If _getNeutronFlux(12.0)_ is called, the return value is 1000000000.0.
+* If _getNeutronFlux(18.0)_ is called, the return value is 4.3.
+* If _getNeutronFlux_ is called with any other parameter value, the return value is undefined.
+
+The test assigns 18.0 to the statechart variable _p_, and performs one run-to-completion step. During this RTC, the state machine calls _getNeutronFlux(p)_ in order to evaluate the guard condition @[getNeutronFlux(p) >= 100.0]@. Since _p_ has a value of 18.0, the mocked operation returns 4.3, and the transition from *State_A* to *State_B* is not taken.
+
+After that, the test sets _p_ to 12.0 and executes another RTC. This time, the mocked operation returns 1000000000.0, the guard condition evaluates to _true_ and the state machine transitions to *State_B*.
+
+Calling _getNeutronFlux_ with any other parameter value than 12.0 or 18.0 would not only let the test fail, but would also throw an exception, because the actual operation cannot be called in test mode (simulation mode) and its return value is undefined.
+
+==</div>==
+
+In order to avoid an exception to be thrown, you can define a _mock_ statement with a _default_ return value. This value will be returned from all calls of the mocked operation that are not explicitly overridden by _mock_ statements with specific parameters.
+
+==<div class="example">==
+
+The _mock_ statements in the example above might have better been written as follows:
+
+bc. 
+        mock getNeutronFlux returns (-1.0)
+        mock getNeutronFlux(12.0) returns (1000000000.0)
+        mock getNeutronFlux(18.0) returns (4.3)
+
+The first _mock_ statements defines a return value of -1.0 for each and every call to the _getNeutronFlux_ operation, irrespective of the parameter value. The following statements, however, override this setting for the parameter values 12.0 and 18.0.
 
 bq. *Please note:* The order of the _mock_ statements is important! You should define the general case first, followed by specifying return values for specific parameter lists.
 
