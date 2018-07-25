@@ -78,7 +78,12 @@ public class SCTResourceTest {
 		Injector injector = STextActivator.getInstance().getInjector(STextActivator.ORG_YAKINDU_SCT_MODEL_STEXT_STEXT);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		res = new StextResource(URI.createURI("test.test"));
-		res.eAdapters().add(new ContextElementAdapter(res.getContents().get(0)));
+		res.eAdapters().add(new ContextElementAdapter() {
+			@Override
+			public EObject getElement() {
+				return res.getContents().get(0);
+			}
+		});
 		resourceSet.getResources().add(res);
 		injector.injectMembers(res);
 	}
