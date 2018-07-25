@@ -27,6 +27,9 @@ public class ContextElementAdapter extends AdapterImpl {
 
 	private EObject eObject;
 
+	public ContextElementAdapter() {
+	}
+	
 	public ContextElementAdapter(EObject eObject) {
 		Assert.isNotNull(eObject);
 		this.eObject = eObject;

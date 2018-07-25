@@ -75,8 +75,12 @@ public class STextExpressionParser implements IExpressionParser {
 	public StextResource getResource() {
 		final StextResource resource = new StextResource();
 		injector.injectMembers(resource);
-		resource.eAdapters().add(new ContextElementAdapter(
-				(EObject) EcoreUtil.getObjectByType(resource.getContents(), SGraphPackage.Literals.STATECHART)));
+		resource.eAdapters().add(new ContextElementAdapter() {
+			@Override
+			public EObject getElement() {
+				return (EObject) EcoreUtil.getObjectByType(resource.getContents(), SGraphPackage.Literals.STATECHART);
+			}
+		});
 		ResourceSet set = new ResourceSetImpl();
 		set.getResources().add(resource);
 		return resource;
