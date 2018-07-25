@@ -59,7 +59,6 @@ import org.yakindu.sct.domain.extension.DomainStatus.Severity;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementProvider;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.definitionsection.StatechartDefinitionSection;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningEditor;
@@ -80,7 +79,7 @@ import com.google.inject.Key;
  * @author robert rudi
  */
 @SuppressWarnings("restriction")
-public class StatechartDiagramEditor extends DiagramPartitioningEditor implements IGotoMarker, IContextElementProvider {
+public class StatechartDiagramEditor extends DiagramPartitioningEditor implements IGotoMarker {
 
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
 

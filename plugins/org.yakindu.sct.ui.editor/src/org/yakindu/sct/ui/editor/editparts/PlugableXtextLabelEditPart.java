@@ -13,7 +13,6 @@ package org.yakindu.sct.ui.editor.editparts;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.tools.DirectEditManager;
@@ -38,7 +37,6 @@ import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
-import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementProvider;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.policies.EAttributeDirectEditPolicy;
 import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
@@ -52,7 +50,7 @@ import com.google.inject.Injector;
  * 
  */
 public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart
-		implements ITextAwareEditPart, IContextElementProvider, IEAttributeProvider, IPropertyChangeListener {
+		implements ITextAwareEditPart, IEAttributeProvider, IPropertyChangeListener {
 
 	private static final String PRIMARY_VIEW_LISTENER = "primaryViewListener";
 
@@ -126,10 +124,6 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart
 		return (SpecificationElement) super.resolveSemanticElement();
 	}
 
-	public EObject getContextObject() {
-		return resolveSemanticElement();
-	}
-
 	public Injector getInjector() {
 		return injector;
 	}
@@ -180,7 +174,7 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart
 
 	@Override
 	protected void setContext(Resource resource) {
-		resource.eAdapters().add(new ContextElementAdapter(this));
+		resource.eAdapters().add(new ContextElementAdapter(resolveSemanticElement()));
 
 	}
 

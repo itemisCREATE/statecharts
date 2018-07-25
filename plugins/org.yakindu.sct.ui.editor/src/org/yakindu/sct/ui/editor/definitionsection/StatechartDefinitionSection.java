@@ -88,7 +88,6 @@ import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
-import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementProvider;
 import org.yakindu.sct.ui.editor.StatechartImages;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningEditor;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
@@ -102,8 +101,7 @@ import com.google.inject.Injector;
  *
  */
 @SuppressWarnings("restriction")
-public class StatechartDefinitionSection extends Composite
-		implements IPersistableEditor, IPersistableElement, IContextElementProvider {
+public class StatechartDefinitionSection extends Composite implements IPersistableEditor, IPersistableElement {
 
 	protected static final String SHOW_SECTION_TOOLTIP = "Show definition section";
 	protected static final String HIDE_SECTION_TOOLTIP = "Hide definition section";
@@ -263,7 +261,7 @@ public class StatechartDefinitionSection extends Composite
 			public XtextResource createResource() {
 				XtextFakeResourceContext resource = new XtextFakeResourceContext(injector);
 				xtextResource = resource.getFakeResource();
-				xtextResource.eAdapters().add(new ContextElementAdapter(StatechartDefinitionSection.this));
+				xtextResource.eAdapters().add(new ContextElementAdapter(getContextObject()));
 				return xtextResource;
 			}
 		};
@@ -297,7 +295,7 @@ public class StatechartDefinitionSection extends Composite
 				SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION);
 		ISWTObservableValue uiProperty = WidgetProperties.text(new int[] { SWT.FocusOut }).observe(text);
 		IObservableValue modelPropertyObservable = modelProperty.observe(getContextObject());
-		context = new ValidatingEMFDatabindingContext((IContextElementProvider) editorPart,
+		context = new ValidatingEMFDatabindingContext((EObject)editorPart.getAdapter(EObject.class),
 				editorPart.getSite().getShell());
 		context.bindValue(uiProperty, modelPropertyObservable, null, null);
 	}
@@ -322,7 +320,6 @@ public class StatechartDefinitionSection extends Composite
 		return (TransactionalEditingDomain) editorPart.getAdapter(TransactionalEditingDomain.class);
 	}
 
-	@Override
 	public EObject getContextObject() {
 		return (EObject) editorPart.getAdapter(EObject.class);
 	}
@@ -601,7 +598,7 @@ public class StatechartDefinitionSection extends Composite
 			resizeFinishedJob.cancel();
 			resizeFinishedJob.schedule(DELAY);
 		}
-		
+
 	}
 
 	/**

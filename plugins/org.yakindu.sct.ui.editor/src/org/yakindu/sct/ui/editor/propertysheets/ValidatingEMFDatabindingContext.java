@@ -16,10 +16,10 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.databinding.EMFDataBindingContext;
 import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.common.ui.resources.FileModificationValidator;
 import org.eclipse.swt.widgets.Shell;
-import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementProvider;
 
 /**
  * Checks the file modification flag before updating the model.
@@ -29,16 +29,16 @@ import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementPr
  */
 public class ValidatingEMFDatabindingContext extends EMFDataBindingContext {
 
-	private IContextElementProvider elementProvider;
 	private Shell shell;
+	private EObject context;
 
-	public ValidatingEMFDatabindingContext(IContextElementProvider elementProvider, Shell shell) {
-		this.elementProvider = elementProvider;
+	public ValidatingEMFDatabindingContext(EObject context, Shell shell) {
+		this.context = context;
 		this.shell = shell;
 	}
 
 	protected IStatus isWriteable() {
-		IFile file = WorkspaceSynchronizer.getFile(elementProvider.getContextObject().eResource());
+		IFile file = WorkspaceSynchronizer.getFile(context.eResource());
 		return FileModificationValidator.getInstance().validateEdit(new IFile[] { file }, shell);
 
 	}

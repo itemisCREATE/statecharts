@@ -38,7 +38,6 @@ import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
-import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementProvider;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.policies.EAttributeDirectEditPolicy;
 import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
@@ -52,7 +51,7 @@ import com.google.inject.Injector;
  * 
  */
 public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLabelEditPart
-		implements ITextAwareEditPart, IContextElementProvider, IEAttributeProvider, IPropertyChangeListener {
+		implements ITextAwareEditPart, IEAttributeProvider, IPropertyChangeListener {
 
 	private static final String PRIMARY_VIEW_LISTENER = "primaryViewListener";
 
@@ -180,7 +179,7 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 
 	@Override
 	protected void setContext(Resource resource) {
-		resource.eAdapters().add(new ContextElementAdapter(this));
+		resource.eAdapters().add(new ContextElementAdapter(resolveSemanticElement()));
 	}
 
 	@Override
