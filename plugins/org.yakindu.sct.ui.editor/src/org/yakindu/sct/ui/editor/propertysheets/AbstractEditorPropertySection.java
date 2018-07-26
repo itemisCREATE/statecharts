@@ -45,7 +45,6 @@ import org.yakindu.base.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
-import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementProvider;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 
 import com.google.inject.Injector;
@@ -55,8 +54,7 @@ import com.google.inject.Injector;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public abstract class AbstractEditorPropertySection extends AbstractModelerPropertySection
-		implements IContextElementProvider {
+public abstract class AbstractEditorPropertySection extends AbstractModelerPropertySection {
 
 	public abstract void createControls(Composite parent);
 
@@ -98,7 +96,7 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 	protected void inputChanged() {
 		if (bindingContext != null)
 			bindingContext.dispose();
-		bindingContext = new ValidatingEMFDatabindingContext(this, form.getShell());
+		bindingContext = new ValidatingEMFDatabindingContext(getEObject(), form.getShell());
 		bindModel(bindingContext);
 	}
 

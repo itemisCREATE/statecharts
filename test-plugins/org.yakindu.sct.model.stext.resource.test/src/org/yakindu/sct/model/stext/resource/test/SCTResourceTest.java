@@ -45,7 +45,6 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
-import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementProvider;
 import org.yakindu.sct.model.stext.resource.StextResource;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.ExitEvent;
@@ -79,11 +78,12 @@ public class SCTResourceTest {
 		Injector injector = STextActivator.getInstance().getInjector(STextActivator.ORG_YAKINDU_SCT_MODEL_STEXT_STEXT);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		res = new StextResource(URI.createURI("test.test"));
-		res.eAdapters().add(new ContextElementAdapter(new IContextElementProvider() {
-			public EObject getContextObject() {
+		res.eAdapters().add(new ContextElementAdapter() {
+			@Override
+			public EObject getElement() {
 				return res.getContents().get(0);
 			}
-		}));
+		});
 		resourceSet.getResources().add(res);
 		injector.injectMembers(res);
 	}
