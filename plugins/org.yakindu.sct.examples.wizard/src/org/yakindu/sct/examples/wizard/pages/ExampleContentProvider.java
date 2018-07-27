@@ -10,9 +10,11 @@
  */
 package org.yakindu.sct.examples.wizard.pages;
 
-import java.text.Collator;
+import static org.yakindu.sct.examples.wizard.pages.ExampleCategory.CATEGORY_LABS;
+import static org.yakindu.sct.examples.wizard.pages.ExampleCategory.CATEGORY_PROFESSIONAL;
+import static org.yakindu.sct.examples.wizard.pages.ExampleCategory.CATEGORY_STANDARD;
+
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +24,6 @@ import org.eclipse.jface.viewers.Viewer;
 import org.yakindu.sct.examples.wizard.service.ExampleData;
 
 import com.google.common.collect.Lists;
-
 /**
  * 
  * @author t00manysecretss
@@ -30,9 +31,6 @@ import com.google.common.collect.Lists;
  */
 public class ExampleContentProvider implements ITreeContentProvider {
 
-	public static final String CATEGORY_PROFESSIONAL = "Professional Examples";
-	public static final String CATEGORY_LABS = "Labs Examples";
-	public static final String CATEGORY_STANDARD = "Standard Examples";
 	private Map<String, ExampleCategory> categories;
 
 	public ExampleContentProvider() {
@@ -70,13 +68,14 @@ public class ExampleContentProvider implements ITreeContentProvider {
 	public Object[] getElements(Object inputElement) {
 		List<ExampleCategory> values = Lists.newArrayList();
 		values.addAll(categories.values());
-		Collections.sort(values, new Comparator<ExampleCategory>() {
-			@Override
-			public int compare(ExampleCategory o1, ExampleCategory o2) {
-				return Collator.getInstance().compare(o1.getName(), o2.getName());
+		Collections.sort(values, (o1, o2) -> {
+			if (o1.getPriority() == o2.getPriority()) {
+				return 0;
+			} else if (o1.getPriority() < o2.getPriority()) {
+				return -1;
 			}
+			return 1;
 		});
-
 		return values.toArray();
 	}
 
@@ -84,11 +83,11 @@ public class ExampleContentProvider implements ITreeContentProvider {
 	public Object[] getChildren(Object parentElement) {
 		return ((ExampleCategory) parentElement).getChildren().toArray();
 	}
-	
+
 	@SuppressWarnings("unlikely-arg-type")
 	@Override
 	public Object getParent(Object element) {
-		if(element instanceof ExampleData) {
+		if (element instanceof ExampleData) {
 			return categories.get(((ExampleData) element).getCategory());
 		}
 		return null;
