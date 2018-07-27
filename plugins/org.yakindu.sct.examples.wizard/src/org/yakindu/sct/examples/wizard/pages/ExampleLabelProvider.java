@@ -16,7 +16,7 @@ import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.yakindu.sct.examples.wizard.service.ExampleData;
 import org.yakindu.sct.ui.editor.StatechartImages;
-import static org.yakindu.sct.examples.wizard.pages.ExampleContentProvider.*;
+import static org.yakindu.sct.examples.wizard.pages.ExampleCategory.*;
 /**
  * 
  * @author t00manysecretss

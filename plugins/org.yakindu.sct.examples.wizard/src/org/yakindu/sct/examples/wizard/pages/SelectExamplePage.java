@@ -10,8 +10,13 @@
  */
 package org.yakindu.sct.examples.wizard.pages;
 
+import static org.yakindu.sct.examples.wizard.pages.ExampleCategory.CATEGORY_LABS;
+import static org.yakindu.sct.examples.wizard.pages.ExampleCategory.CATEGORY_PROFESSIONAL;
+import static org.yakindu.sct.examples.wizard.pages.ExampleCategory.CATEGORY_STANDARD;
+
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -51,7 +56,6 @@ import org.yakindu.sct.examples.wizard.service.IExampleService;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-
 /**
  * 
  * @author t00manysecretss
@@ -187,7 +191,6 @@ public class SelectExamplePage extends WizardPage
 
 	protected void setInput(final IProgressMonitor monitor) {
 		final List<ExampleData> input = exampleService.getExamples(new NullProgressMonitor());
-
 		messageArea.hide();
 		viewer.setInput(input);
 		// explicit layouting required for Unix systems
@@ -236,8 +239,7 @@ public class SelectExamplePage extends WizardPage
 		viewer.addSelectionChangedListener(this);
 	}
 
-	protected void updateSelection(ExampleData data) {
-		selection = data;
+	protected void updateSelection(Comparable<?> data) {
 		setDetailPaneContent(data);
 		setPageComplete(true);
 		setErrorMessage(null);
@@ -245,8 +247,17 @@ public class SelectExamplePage extends WizardPage
 		viewer.refresh();
 	}
 
-	private void checkInstalledPlugins(ExampleData data) {
-		if (data.isProfessional() && Platform.getBundle(PRO_BUNDLE) == null) {
+	private void checkInstalledPlugins(Comparable<?> data) {
+		boolean proRequired = false;
+		if (data instanceof ExampleData) {
+			if (((ExampleData) data).isProfessional() && Platform.getBundle(PRO_BUNDLE) == null)
+				proRequired = true;
+		} else if (data instanceof ExampleCategory) {
+			if (CATEGORY_PROFESSIONAL.equals(((ExampleCategory) data).getName())
+					&& Platform.getBundle(PRO_BUNDLE) == null)
+				proRequired = true;
+		}
+		if (proRequired) {
 			messageArea.showProInstall();
 		} else {
 			messageArea.hide();
@@ -255,9 +266,29 @@ public class SelectExamplePage extends WizardPage
 		this.getControl().update();
 	}
 
-	protected void setDetailPaneContent(ExampleData exampleData) {
-		String url = exampleData.getProjectDir().getAbsolutePath() + File.separator + "index.html";
-		browser.setUrl(url);
+	protected void setDetailPaneContent(Comparable<?> data) {
+		String url = null;
+		if (data instanceof ExampleData) {
+			url = ((ExampleData) data).getProjectDir().getAbsolutePath() + File.separator + "index.html";
+		} else if (data instanceof ExampleCategory) {
+			url = getExampleCategoryDescriptionUr((ExampleCategory)data);
+//			url = ((ExampleCategory) data).getLocation().getAbsolutePath() + File.separator + "index.html";
+		}
+		if (url != null) {
+			browser.setUrl(url);
+		}
+	}
+
+	private String getExampleCategoryDescriptionUr(ExampleCategory data) {
+		String url2 = Platform.getInstallLocation().getURL().getPath();
+		URL url = Platform.getInstanceLocation().getURL();
+		switch(data.getName()) {
+			case CATEGORY_PROFESSIONAL: return "https://www.itemis.com/en/yakindu/state-machine/documentation/tutorials";
+			case CATEGORY_STANDARD: return "https://www.itemis.com/en/yakindu/state-machine/documentation/tutorials";
+			case CATEGORY_LABS: return "https://www.itemis.com/en/yakindu/state-machine/documentation/tutorials";
+		}
+		
+		return null;
 	}
 
 	protected void createDetailsPane(Composite parent) {
@@ -276,6 +307,9 @@ public class SelectExamplePage extends WizardPage
 		Object firstElement = ((StructuredSelection) event.getSelection()).getFirstElement();
 		if (firstElement instanceof ExampleData)
 			updateSelection((ExampleData) firstElement);
+		else if (firstElement instanceof ExampleCategory) {
+			updateSelection((ExampleCategory) firstElement);
+		}
 	}
 
 	@Override
