@@ -14,10 +14,9 @@ import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelP
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
-import org.yakindu.sct.examples.wizard.pages.ExampleContentProvider.Category;
 import org.yakindu.sct.examples.wizard.service.ExampleData;
 import org.yakindu.sct.ui.editor.StatechartImages;
-
+import static org.yakindu.sct.examples.wizard.pages.ExampleContentProvider.*;
 /**
  * 
  * @author t00manysecretss
@@ -29,8 +28,8 @@ public class ExampleLabelProvider extends LabelProvider implements IStyledLabelP
 	public StyledString getStyledText(Object element) {
 		if (element instanceof ExampleData) {
 			return new StyledString(((ExampleData) element).getTitle());
-		} else if (element instanceof Category) {
-			return new StyledString(((Category) element).getName());
+		} else if (element instanceof ExampleCategory) {
+			return new StyledString(((ExampleCategory) element).getName());
 		}
 		return null;
 	}
@@ -43,6 +42,16 @@ public class ExampleLabelProvider extends LabelProvider implements IStyledLabelP
 			} else if (((ExampleData) element).isLabs()){
 				return StatechartImages.LABS_LOGO.image();
 			} else {
+				return StatechartImages.LOGO.image();
+			}
+		}
+		if (element instanceof ExampleCategory) {
+			String categoryName = ((ExampleCategory) element).getName();
+			if(CATEGORY_PROFESSIONAL.equals(categoryName)) {
+				return StatechartImages.PRO_LOGO.image();
+			} else if (CATEGORY_LABS.equals(categoryName)) {
+				return StatechartImages.LABS_LOGO.image();
+			} else if (CATEGORY_STANDARD.equals(categoryName)) {
 				return StatechartImages.LOGO.image();
 			}
 		}

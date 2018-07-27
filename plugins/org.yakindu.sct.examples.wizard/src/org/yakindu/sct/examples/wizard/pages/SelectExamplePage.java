@@ -22,12 +22,11 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
-import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.wizard.WizardPage;
@@ -36,6 +35,7 @@ import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -60,13 +60,17 @@ import com.google.inject.Inject;
  */
 
 public class SelectExamplePage extends WizardPage
-		implements ExampleWizardConstants, ISelectionChangedListener, SelectionListener, IPropertyChangeListener {
+		implements
+			ExampleWizardConstants,
+			ISelectionChangedListener,
+			SelectionListener,
+			IPropertyChangeListener {
 
 	private static final String PRO_BUNDLE = "com.yakindu.sct.domain.c";
 	private static final String PRO_UPDATE_SITE = "https://info.itemis.com/yakindu/statecharts/pro/";
 	@Inject
 	private IExampleService exampleService;
-	private TableViewer viewer;
+	private TreeViewer viewer;
 	private ExampleData selection;
 	private Browser browser;
 	private MessageArea messageArea;
@@ -98,8 +102,11 @@ public class SelectExamplePage extends WizardPage
 		container.setLayout(layout);
 		createTreeViewer(container);
 		createDetailsPane(container);
-		container.setWeights(new int[] { 1, 2 });
+		container.setWeights(new int[]{1, 2});
 		setControl(container);
+		Rectangle bounds = getShell().getDisplay().getPrimaryMonitor().getBounds();
+		GridDataFactory.swtDefaults().hint((int) (bounds.width * 0.5), (int) (bounds.height * 0.5)).applyTo(container);
+		parent.layout();
 	}
 
 	private void createUpdateGroup(Composite root) {
@@ -189,7 +196,7 @@ public class SelectExamplePage extends WizardPage
 		filterAndSelectExampleToInstall(viewer, input);
 	}
 
-	protected void filterAndSelectExampleToInstall(TableViewer viewer, List<ExampleData> input) {
+	protected void filterAndSelectExampleToInstall(TreeViewer viewer, List<ExampleData> input) {
 		final ExampleData exampleToInstall = Iterables.find(input, new Predicate<ExampleData>() {
 			@Override
 			public boolean apply(ExampleData input) {
@@ -211,8 +218,8 @@ public class SelectExamplePage extends WizardPage
 					if (element instanceof ExampleData) {
 						return exampleIdToInstall.equals(((ExampleData) element).getId());
 					}
-					if (element instanceof ExampleContentProvider.Category) {
-						return ((ExampleContentProvider.Category) element).getChildren().contains(exampleToInstall);
+					if (element instanceof ExampleCategory) {
+						return ((ExampleCategory) element).getChildren().contains(exampleToInstall);
 					}
 					return true;
 				}
@@ -222,9 +229,9 @@ public class SelectExamplePage extends WizardPage
 	}
 
 	protected void createTreeViewer(Composite container) {
-		viewer = new TableViewer(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
+		viewer = new TreeViewer(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(viewer.getControl());
-		viewer.setContentProvider(new ArrayContentProvider());
+		viewer.setContentProvider(new ExampleContentProvider());
 		viewer.setLabelProvider(new DelegatingStyledCellLabelProvider(new ExampleLabelProvider()));
 		viewer.addSelectionChangedListener(this);
 	}
@@ -274,15 +281,15 @@ public class SelectExamplePage extends WizardPage
 	@Override
 	public void widgetSelected(SelectionEvent e) {
 		switch (messageArea.getState()) {
-		case DOWNLOAD:
-		case UPDATE:
-			revealExamples();
-			break;
-		case INSTALL:
-			Program.launch(PRO_UPDATE_SITE);
-			break;
-		default:
-			break;
+			case DOWNLOAD :
+			case UPDATE :
+				revealExamples();
+				break;
+			case INSTALL :
+				Program.launch(PRO_UPDATE_SITE);
+				break;
+			default :
+				break;
 		}
 	}
 

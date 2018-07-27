@@ -11,7 +11,6 @@
 package org.yakindu.sct.examples.wizard.pages;
 
 import java.text.Collator;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -31,30 +30,10 @@ import com.google.common.collect.Lists;
  */
 public class ExampleContentProvider implements ITreeContentProvider {
 
-	public static class Category {
-		private String name;
-		private List<ExampleData> children;;
-
-		public Category(String name) {
-			this.name = name;
-			children = new ArrayList<>();
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		public List<ExampleData> getChildren() {
-			return children;
-		}
-
-	}
-
-	private Map<String, Category> categories;
+	public static final String CATEGORY_PROFESSIONAL = "Professional Examples";
+	public static final String CATEGORY_LABS = "Labs Examples";
+	public static final String CATEGORY_STANDARD = "Standard Examples";
+	private Map<String, ExampleCategory> categories;
 
 	public ExampleContentProvider() {
 		categories = new LinkedHashMap<>();
@@ -70,42 +49,54 @@ public class ExampleContentProvider implements ITreeContentProvider {
 
 	protected void groupCategories(List<ExampleData> newInput) {
 		for (ExampleData exampleData : newInput) {
-			String[] category = exampleData.getCategory();
-			for (String string : category) {
-				if (!categories.containsKey(string)) {
-					categories.put(string, new Category(string));
-				}
-				categories.get(string).getChildren().add(exampleData);
+			if (exampleData.isProfessional()) {
+				addExampleToCategory(exampleData, CATEGORY_PROFESSIONAL);
+			} else if (exampleData.isLabs()) {
+				addExampleToCategory(exampleData, CATEGORY_LABS);
+			} else {
+				addExampleToCategory(exampleData, CATEGORY_STANDARD);
 			}
 		}
 	}
 
+	protected void addExampleToCategory(ExampleData exampleData, String category) {
+		if (!categories.containsKey(category)) {
+			categories.put(category, new ExampleCategory(category));
+		}
+		categories.get(category).getChildren().add(exampleData);
+	}
+
 	@Override
 	public Object[] getElements(Object inputElement) {
-		List<Category> values = Lists.newArrayList();
+		List<ExampleCategory> values = Lists.newArrayList();
 		values.addAll(categories.values());
-		Collections.sort(values, new Comparator<Category>() {
+		Collections.sort(values, new Comparator<ExampleCategory>() {
 			@Override
-			public int compare(Category o1, Category o2) {
+			public int compare(ExampleCategory o1, ExampleCategory o2) {
 				return Collator.getInstance().compare(o1.getName(), o2.getName());
 			}
 		});
+
 		return values.toArray();
 	}
 
 	@Override
 	public Object[] getChildren(Object parentElement) {
-		return ((Category) parentElement).getChildren().toArray();
+		return ((ExampleCategory) parentElement).getChildren().toArray();
 	}
-
+	
+	@SuppressWarnings("unlikely-arg-type")
 	@Override
 	public Object getParent(Object element) {
-		return categories.get((((ExampleData) element).getCategory()));
+		if(element instanceof ExampleData) {
+			return categories.get(((ExampleData) element).getCategory());
+		}
+		return null;
 	}
 
 	@Override
 	public boolean hasChildren(Object element) {
-		return element instanceof Category;
+		return element instanceof ExampleCategory;
 	}
 
 	@Override
