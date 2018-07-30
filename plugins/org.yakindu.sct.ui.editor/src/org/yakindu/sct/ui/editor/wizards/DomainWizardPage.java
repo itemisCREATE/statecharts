@@ -108,23 +108,18 @@ public class DomainWizardPage extends WizardPage {
 		}
 	}
 
-	private boolean visible = false;
+	private boolean domainSelected = false;
 
 	@Override
 	public void setVisible(boolean visible) {
-		this.visible = true;
+		if (visible)
+			this.domainSelected = true;
+		
 		super.setVisible(visible);
-		if (!visible) {
-			browser.setUrl("about:blank");
-		}
-	}
-
-	public boolean domainSelected() {
-		return visible;
 	}
 
 	public boolean isPageComplete() {
-		return super.isPageComplete() && visible;
+		return super.isPageComplete() && domainSelected;
 	}
 
 	public String getDomainID() {
