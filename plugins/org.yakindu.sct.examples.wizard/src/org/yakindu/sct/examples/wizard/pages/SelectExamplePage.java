@@ -252,8 +252,14 @@ public class SelectExamplePage extends WizardPage
 	}
 
 	protected void updateSelection(Comparable<?> data) {
+		if(data instanceof ExampleData) {
+			selection = (ExampleData) data;
+			setPageComplete(true);
+		} else {
+			selection = null;
+			setPageComplete(false);
+		}
 		setDetailPaneContent(data);
-		setPageComplete(true);
 		setErrorMessage(null);
 		checkInstalledPlugins(data);
 		viewer.refresh();
