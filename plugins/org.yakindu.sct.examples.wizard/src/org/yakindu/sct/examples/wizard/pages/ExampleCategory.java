@@ -1,9 +1,11 @@
 package org.yakindu.sct.examples.wizard.pages;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.yakindu.sct.examples.wizard.ExampleActivator;
+import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
 import org.yakindu.sct.examples.wizard.service.ExampleData;
 
 public class ExampleCategory implements Comparable<ExampleCategory>{
@@ -15,6 +17,8 @@ public class ExampleCategory implements Comparable<ExampleCategory>{
 	private String name;
 	private List<ExampleData> children;
 	private int priority;
+	private Path path;
+	
 	
 	public ExampleCategory(String name) {
 		this.name = name;
@@ -24,8 +28,15 @@ public class ExampleCategory implements Comparable<ExampleCategory>{
 			case CATEGORY_LABS: this.priority = 3; break;
 			default: this.priority = 4;
 		}
+		this.setPath(getStorageLocation());
 		children = new ArrayList<>();
 	}
+	
+	protected java.nio.file.Path getStorageLocation() {
+		return java.nio.file.Paths.get(ExampleActivator.getDefault().getPreferenceStore()
+				.getString(ExamplesPreferenceConstants.STORAGE_LOCATION));
+	}
+
 
 	public String getName() {
 		return name;
@@ -51,6 +62,14 @@ public class ExampleCategory implements Comparable<ExampleCategory>{
 
 	public void setPriority(int priority) {
 		this.priority = priority;
+	}
+
+	public Path getPath() {
+		return path;
+	}
+
+	public void setPath(Path path) {
+		this.path = path;
 	}
 
 }
