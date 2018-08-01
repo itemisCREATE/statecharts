@@ -40,7 +40,6 @@ import org.eclipse.ui.dialogs.IOverwriteQuery;
 import org.eclipse.ui.wizards.datatransfer.FileSystemStructureProvider;
 import org.eclipse.ui.wizards.datatransfer.ImportOperation;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
-import org.yakindu.sct.examples.wizard.pages.ExampleCategory;
 import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
 import org.yakindu.sct.examples.wizard.service.ExampleData;
 import org.yakindu.sct.examples.wizard.service.IExampleService;
