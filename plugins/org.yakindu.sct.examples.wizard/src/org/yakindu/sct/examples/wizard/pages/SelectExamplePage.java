@@ -73,7 +73,7 @@ public class SelectExamplePage extends WizardPage
 	private static final String PRO_UPDATE_SITE = "https://info.itemis.com/yakindu/statecharts/pro/";
 	private static final String PREVIEW_PAGES = "org.yakindu.sct.examples.pages";
 	private static final int WIZARD_SIZE_SCALE_FACOTR = 2;
-	private static final int WIZARD_SIZE_OFFSET = 200;
+	private static final int WIZARD_SIZE_OFFSET = 300;
 	
 	@Inject
 	private IExampleService exampleService;
