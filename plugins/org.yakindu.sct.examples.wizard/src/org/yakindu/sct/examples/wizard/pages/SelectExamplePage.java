@@ -9,14 +9,12 @@
  * 
  */
 package org.yakindu.sct.examples.wizard.pages;
-
 import static org.yakindu.sct.examples.wizard.pages.ExampleCategory.CATEGORY_LABS;
 import static org.yakindu.sct.examples.wizard.pages.ExampleCategory.CATEGORY_PROFESSIONAL;
 import static org.yakindu.sct.examples.wizard.pages.ExampleCategory.CATEGORY_STANDARD;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
-import java.net.URL;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -47,6 +45,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.program.Program;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Monitor;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
 import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
 import org.yakindu.sct.examples.wizard.service.ExampleData;
@@ -72,6 +71,9 @@ public class SelectExamplePage extends WizardPage
 
 	private static final String PRO_BUNDLE = "com.yakindu.sct.domain.c";
 	private static final String PRO_UPDATE_SITE = "https://info.itemis.com/yakindu/statecharts/pro/";
+	private static final int WIZARD_SIZE_SCALE_FACOTR = 2;
+	private static final int WIZARD_SIZE_OFFSET = 200;
+	
 	@Inject
 	private IExampleService exampleService;
 	private TreeViewer viewer;
@@ -97,6 +99,7 @@ public class SelectExamplePage extends WizardPage
 	}
 
 	public void createControl(Composite parent) {
+		getShell().setBounds(calculatePosition(WIZARD_SIZE_SCALE_FACOTR, WIZARD_SIZE_OFFSET));
 		Composite root = new Composite(parent, SWT.NONE);
 		root.setLayout(new GridLayout(1, true));
 		createUpdateGroup(root);
@@ -108,9 +111,17 @@ public class SelectExamplePage extends WizardPage
 		createDetailsPane(container);
 		container.setWeights(new int[]{1, 2});
 		setControl(container);
-		Rectangle bounds = getShell().getDisplay().getPrimaryMonitor().getBounds();
-		GridDataFactory.swtDefaults().hint((int) (bounds.width * 0.5), (int) (bounds.height * 0.5)).applyTo(container);
 		parent.layout();
+	}
+
+	private Rectangle calculatePosition(int scale, int offset) {
+		Monitor monitor = getShell().getDisplay().getActiveShell().getMonitor();
+		offset = offset * scale;
+		int width = (monitor.getBounds().width + offset) / scale;
+		int height = (monitor.getBounds().height + offset) / scale;
+		int x = monitor.getBounds().x + (width - offset) / scale;
+		int y = monitor.getBounds().y + (height - offset) / scale;
+		return new Rectangle(x, y, width, height);
 	}
 
 	private void createUpdateGroup(Composite root) {
@@ -271,8 +282,9 @@ public class SelectExamplePage extends WizardPage
 		if (data instanceof ExampleData) {
 			url = ((ExampleData) data).getProjectDir().getAbsolutePath() + File.separator + "index.html";
 		} else if (data instanceof ExampleCategory) {
-			url = getExampleCategoryDescriptionUr((ExampleCategory)data);
-//			url = ((ExampleCategory) data).getLocation().getAbsolutePath() + File.separator + "index.html";
+			url = getExampleCategoryDescriptionUr((ExampleCategory) data);
+			// url = ((ExampleCategory) data).getLocation().getAbsolutePath() +
+			// File.separator + "index.html";
 		}
 		if (url != null) {
 			browser.setUrl(url);
@@ -280,14 +292,15 @@ public class SelectExamplePage extends WizardPage
 	}
 
 	private String getExampleCategoryDescriptionUr(ExampleCategory data) {
-		String url2 = Platform.getInstallLocation().getURL().getPath();
-		URL url = Platform.getInstanceLocation().getURL();
-		switch(data.getName()) {
-			case CATEGORY_PROFESSIONAL: return "https://www.itemis.com/en/yakindu/state-machine/documentation/tutorials";
-			case CATEGORY_STANDARD: return "https://www.itemis.com/en/yakindu/state-machine/documentation/tutorials";
-			case CATEGORY_LABS: return "https://www.itemis.com/en/yakindu/state-machine/documentation/tutorials";
+		switch (data.getName()) {
+			case CATEGORY_PROFESSIONAL :
+				return "https://www.itemis.com/en/yakindu/state-machine/documentation/tutorials";
+			case CATEGORY_STANDARD :
+				return "https://www.itemis.com/en/yakindu/state-machine/documentation/tutorials";
+			case CATEGORY_LABS :
+				return "https://www.itemis.com/en/yakindu/state-machine/documentation/tutorials";
 		}
-		
+
 		return null;
 	}
 
