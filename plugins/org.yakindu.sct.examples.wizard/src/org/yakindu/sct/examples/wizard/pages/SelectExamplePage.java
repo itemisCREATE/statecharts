@@ -71,6 +71,7 @@ public class SelectExamplePage extends WizardPage
 
 	private static final String PRO_BUNDLE = "com.yakindu.sct.domain.c";
 	private static final String PRO_UPDATE_SITE = "https://info.itemis.com/yakindu/statecharts/pro/";
+	private static final String PREVIEW_PAGES = "org.yakindu.sct.examples.pages";
 	private static final int WIZARD_SIZE_SCALE_FACOTR = 2;
 	private static final int WIZARD_SIZE_OFFSET = 200;
 	
@@ -283,8 +284,6 @@ public class SelectExamplePage extends WizardPage
 			url = ((ExampleData) data).getProjectDir().getAbsolutePath() + File.separator + "index.html";
 		} else if (data instanceof ExampleCategory) {
 			url = getExampleCategoryDescriptionUr((ExampleCategory) data);
-			// url = ((ExampleCategory) data).getLocation().getAbsolutePath() +
-			// File.separator + "index.html";
 		}
 		if (url != null) {
 			browser.setUrl(url);
@@ -298,7 +297,7 @@ public class SelectExamplePage extends WizardPage
 			case CATEGORY_STANDARD :
 				return "https://www.itemis.com/en/yakindu/state-machine/documentation/tutorials";
 			case CATEGORY_LABS :
-				return "https://www.itemis.com/en/yakindu/state-machine/documentation/tutorials";
+				return ((ExampleCategory) data).getPath() + File.separator + PREVIEW_PAGES + File.separator +"labs.html";
 		}
 
 		return null;
