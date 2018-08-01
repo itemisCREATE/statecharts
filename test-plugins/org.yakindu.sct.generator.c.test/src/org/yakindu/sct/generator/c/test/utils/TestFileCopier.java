@@ -10,8 +10,11 @@
  */
 package org.yakindu.sct.generator.c.test.utils;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -34,7 +37,7 @@ public class TestFileCopier {
 	public interface ITestProjectFactory {
 		IProject createTestProject(IProject projectHandle, IProgressMonitor monitor) throws CoreException;
 	}
-	
+
 	public TestFileCopier(ITestProjectFactory projectFactory) {
 		this.projectFactory = projectFactory;
 	}
@@ -52,12 +55,18 @@ public class TestFileCopier {
 		copyFileFromBundle(bundle, sourcePath, targetPath.append(fileName));
 	}
 
-	protected void copyFileFromBundle(Bundle bundle, String sourcePath, String targetPath) {
-		copyFileFromBundle(bundle, sourcePath, new Path(targetPath));
-	}
-
-	protected void copyFileFromBundle(Bundle bundle, String sourcePath, IPath targetPath) {
-		copyFileFromBundle(bundle, new Path(sourcePath), targetPath);
+	public void copyFolderFromBundleToFolder(Bundle bundle, String sourcePath, String targetPath) {
+		try {
+			URL folder = bundle.getEntry(sourcePath);
+			File file = new File(FileLocator.resolve(folder).toURI());
+			if (file.exists() && file.isDirectory()) {
+				for (File f : file.listFiles()) {
+					copyFileFromBundleToFolder(bundle, new Path(sourcePath).append(f.getName()), new Path(targetPath));
+				}
+			}
+		} catch (URISyntaxException | IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	protected void copyFileFromBundle(Bundle bundle, IPath sourcePath, IPath targetPath) {
@@ -67,10 +76,6 @@ public class TestFileCopier {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-	}
-
-	protected void createFile(String path, InputStream source) {
-		createFile(new Path(path), source);
 	}
 
 	protected void createFile(IPath path, InputStream source) {
@@ -91,16 +96,14 @@ public class TestFileCopier {
 		}
 	}
 
-	protected IFolder getFolder(String path) {
-		return ensureContainerExists(ResourcesPlugin.getWorkspace().getRoot().getFolder(new Path(path)));
+	protected void ensureContainerExists(IContainer container) {
+		ensureProjectExists(container);
+		if (container instanceof IFolder) {
+			ensureFolderExists((IFolder) container);
+		}
 	}
-
-	protected IFolder getFolder(IPath path) {
-		return ensureContainerExists(ResourcesPlugin.getWorkspace().getRoot().getFolder(path));
-	}
-
-	protected <T extends IContainer> T ensureContainerExists(T container) {
-		IProgressMonitor monitor = new NullProgressMonitor();
+	
+	protected void ensureProjectExists(IContainer container) {
 		IProject project = container.getProject();
 		if (project.exists()) {
 			if (!project.isOpen()) {
@@ -108,31 +111,27 @@ public class TestFileCopier {
 			}
 		} else {
 			try {
-				testProject = projectFactory.createTestProject(project, monitor);
-				project.open(monitor);
+				testProject = projectFactory.createTestProject(project, new NullProgressMonitor());
+				project.open(new NullProgressMonitor());
 			} catch (CoreException e) {
 				throw new RuntimeException(e);
 			}
 		}
-		if (container instanceof IFolder) {
-			doEnsureFolderExists((IFolder) container, monitor);
-		}
-		return container;
 	}
 
-	private void doEnsureFolderExists(IFolder folder, IProgressMonitor monitor) {
+	protected void ensureFolderExists(IFolder folder) {
 		if (!folder.exists()) {
 			if (!folder.getParent().exists() && folder.getParent() instanceof IFolder) {
-				doEnsureFolderExists((IFolder) folder.getParent(), monitor);
+				ensureFolderExists((IFolder) folder.getParent());
 			}
 			try {
-				folder.create(true, true, monitor);
+				folder.create(true, true, new NullProgressMonitor());
 			} catch (CoreException e) {
 				throw new RuntimeException(e);
 			}
 		}
 	}
-	
+
 	public void cleanUp() {
 		try {
 			if (testProject != null) {
@@ -140,7 +139,7 @@ public class TestFileCopier {
 				testProject = null;
 			}
 		} catch (CoreException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 	}
 }
