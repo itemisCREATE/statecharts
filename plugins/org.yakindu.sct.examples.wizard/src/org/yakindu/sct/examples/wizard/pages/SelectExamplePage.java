@@ -241,6 +241,7 @@ public class SelectExamplePage extends WizardPage
 					return true;
 				}
 			});
+			viewer.expandAll();
 			viewer.setSelection(new StructuredSelection(exampleToInstall), true);
 		}
 	}

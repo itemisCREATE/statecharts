@@ -3,12 +3,21 @@ package org.yakindu.sct.examples.wizard.pages;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.yakindu.sct.examples.wizard.ExampleActivator;
 import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
 import org.yakindu.sct.examples.wizard.service.ExampleData;
 
+import com.google.common.collect.ImmutableMap;
+
 public class ExampleCategory implements Comparable<ExampleCategory>{
+	
+	private Map<String, Integer> priorities = ImmutableMap.of(//
+			CATEGORY_PROFESSIONAL, 1, //
+			CATEGORY_LABS, 2, //
+			CATEGORY_STANDARD, 3 //
+	);
 	
 	public static final String CATEGORY_PROFESSIONAL = "Professional Examples";
 	public static final String CATEGORY_LABS = "Labs Examples";
@@ -16,18 +25,11 @@ public class ExampleCategory implements Comparable<ExampleCategory>{
 	
 	private String name;
 	private List<ExampleData> children;
-	private int priority;
 	private Path path;
 	
 	
 	public ExampleCategory(String name) {
 		this.name = name;
-		switch (name) {
-			case CATEGORY_PROFESSIONAL: this.priority = 1; break;
-			case CATEGORY_STANDARD: this.priority = 2; break;
-			case CATEGORY_LABS: this.priority = 3; break;
-			default: this.priority = 4;
-		}
 		this.setPath(getStorageLocation());
 		children = new ArrayList<>();
 	}
@@ -52,16 +54,17 @@ public class ExampleCategory implements Comparable<ExampleCategory>{
 
 	@Override
 	public int compareTo(ExampleCategory o) {
-		// TODO Auto-generated method stub
-		return 0;
+		if (this.getPriority() == o.getPriority()) {
+			return 0;
+		} else if (this.getPriority() < o.getPriority()) {
+			return -1;
+		}
+		return 1;
 	}
 
 	public int getPriority() {
-		return priority;
-	}
-
-	public void setPriority(int priority) {
-		this.priority = priority;
+		Integer prio = priorities.get(name);
+		return prio == null ? 4 : prio;
 	}
 
 	public Path getPath() {

@@ -68,14 +68,7 @@ public class ExampleContentProvider implements ITreeContentProvider {
 	public Object[] getElements(Object inputElement) {
 		List<ExampleCategory> values = Lists.newArrayList();
 		values.addAll(categories.values());
-		Collections.sort(values, (o1, o2) -> {
-			if (o1.getPriority() == o2.getPriority()) {
-				return 0;
-			} else if (o1.getPriority() < o2.getPriority()) {
-				return -1;
-			}
-			return 1;
-		});
+		Collections.sort(values);
 		return values.toArray();
 	}
 
