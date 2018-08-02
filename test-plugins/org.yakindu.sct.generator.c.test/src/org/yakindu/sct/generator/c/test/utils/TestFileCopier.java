@@ -78,12 +78,12 @@ public class TestFileCopier {
 		}
 	}
 
-	protected void createFile(IPath path, InputStream source) {
+	public void createFile(IPath path, InputStream source) {
 		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
 		createFile(file, source);
 	}
 
-	protected void createFile(IFile file, InputStream source) {
+	public void createFile(IFile file, InputStream source) {
 		ensureContainerExists(file.getParent());
 		try {
 			if (file.exists()) {
