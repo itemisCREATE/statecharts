@@ -138,6 +138,8 @@ public class SelectExamplePage extends WizardPage
 		if (visible) {
 			initAsync();
 		} else {
+			setPageComplete(false);
+			selection = null;
 			viewer.setInput(null);
 			browser.setUrl("about:blank");
 		}
