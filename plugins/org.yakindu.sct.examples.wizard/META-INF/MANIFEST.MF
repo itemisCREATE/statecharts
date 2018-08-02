@@ -15,11 +15,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jgit,
  com.google.inject,
  com.google.guava,
- org.yakindu.sct.ui.editor,
- org.yakindu.base.xtext.utils.jface,
- org.eclipse.ui.navigator,
- org.yakindu.sct.ui
+ org.yakindu.sct.ui.editor
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Import-Package: org.apache.commons.io;version="2.2.0",
- org.eclipse.xtext.resource
+Import-Package: org.eclipse.xtext.resource
