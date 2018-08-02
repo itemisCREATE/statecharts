@@ -75,7 +75,8 @@ public class ExampleWizard extends Wizard implements INewWizard, ExampleWizardCo
 					@Override
 					public void run(IProgressMonitor monitor) throws InvocationTargetException {
 						if (overrideIfExists(selection)) {
-							exampleService.importExample(selection, monitor);
+							IProject project = exampleService.importExample(selection, monitor);
+							exampleService.showExample(project);
 						}
 					}
 				});
