@@ -12,7 +12,6 @@ package org.yakindu.sct.examples.wizard.service;
 
 import java.util.List;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 
@@ -30,9 +29,5 @@ public interface IExampleService {
 	public IStatus fetchAllExamples(IProgressMonitor monitor);
 
 	public List<ExampleData> getExamples(IProgressMonitor monitor);
-
-	public IProject importExample(ExampleData selection, IProgressMonitor monitor);
-	
-	public void showExample(IProject project);
 
 }

@@ -15,8 +15,8 @@ public class ExampleCategory implements Comparable<ExampleCategory>{
 	
 	private Map<String, Integer> priorities = ImmutableMap.of(//
 			CATEGORY_PROFESSIONAL, 1, //
-			CATEGORY_LABS, 2, //
-			CATEGORY_STANDARD, 3 //
+			CATEGORY_STANDARD, 2, //
+			CATEGORY_LABS, 3 //
 	);
 	
 	public static final String CATEGORY_PROFESSIONAL = "Professional Examples";

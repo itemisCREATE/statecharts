@@ -269,6 +269,16 @@ public class SelectExamplePage extends WizardPage
 	}
 
 	private void checkInstalledPlugins(Comparable<?> data) {
+		if (isProRequired(data)) {
+			messageArea.showProInstall();
+		} else {
+			messageArea.hide();
+		}
+		messageArea.getParent().layout(true);
+		this.getControl().update();
+	}
+
+	protected boolean isProRequired(Comparable<?> data) {
 		boolean proRequired = false;
 		if (data instanceof ExampleData) {
 			if (((ExampleData) data).isProfessional() && Platform.getBundle(PRO_BUNDLE) == null)
@@ -278,13 +288,7 @@ public class SelectExamplePage extends WizardPage
 					&& Platform.getBundle(PRO_BUNDLE) == null)
 				proRequired = true;
 		}
-		if (proRequired) {
-			messageArea.showProInstall();
-		} else {
-			messageArea.hide();
-		}
-		messageArea.getParent().layout(true);
-		this.getControl().update();
+		return proRequired;
 	}
 
 	protected void setDetailPaneContent(Comparable<?> data) {
