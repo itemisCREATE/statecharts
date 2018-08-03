@@ -21,13 +21,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IProjectDescription;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jgit.api.FetchCommand;
 import org.eclipse.jgit.api.Git;
@@ -36,13 +31,10 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.transport.FetchResult;
 import org.eclipse.jgit.transport.TrackingRefUpdate;
-import org.eclipse.ui.dialogs.IOverwriteQuery;
-import org.eclipse.ui.wizards.datatransfer.FileSystemStructureProvider;
-import org.eclipse.ui.wizards.datatransfer.ImportOperation;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
 import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
-import org.yakindu.sct.examples.wizard.service.ExampleData;
 import org.yakindu.sct.examples.wizard.service.IExampleService;
+import org.yakindu.sct.examples.wizard.service.data.ExampleData;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -104,11 +96,11 @@ public class GitRepositoryExampleService implements IExampleService {
 		}
 		return Status.OK_STATUS;
 	}
-	
-	protected String getPreference(String constant){
+
+	protected String getPreference(String constant) {
 		return ExampleActivator.getDefault().getPreferenceStore().getString(constant);
 	}
-	
+
 	protected IStatus cloneRepository(IProgressMonitor monitor) {
 		String repoURL = getPreference(ExamplesPreferenceConstants.REMOTE_LOCATION);
 		String remoteBranch = getPreference(ExamplesPreferenceConstants.REMOTE_BRANCH);
@@ -123,8 +115,7 @@ public class GitRepositoryExampleService implements IExampleService {
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
-			return new Status(IStatus.ERROR, ExampleActivator.PLUGIN_ID,
-					"Unable to clone repository " + repoURL + "!");
+			return new Status(IStatus.ERROR, ExampleActivator.PLUGIN_ID, "Unable to clone repository " + repoURL + "!");
 		} finally {
 			if (call != null)
 				call.close();
@@ -163,56 +154,14 @@ public class GitRepositoryExampleService implements IExampleService {
 			e.printStackTrace();
 		}
 	}
-	
+
 	protected boolean hasMetaData(java.nio.file.Path root) {
 		List<java.nio.file.Path> result = new ArrayList<>();
 		findMetaData(result, root);
 		return !result.isEmpty();
 	}
 
-	@Override
-	public void importExample(ExampleData edata, IProgressMonitor monitor) {
-		try {
-			IProjectDescription original = ResourcesPlugin.getWorkspace()
-					.loadProjectDescription(new Path(edata.getProjectDir().getAbsolutePath()).append("/.project"));
-			IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(edata.getProjectDir().getName());
-
-			IProjectDescription clone = ResourcesPlugin.getWorkspace()
-					.newProjectDescription(original.getName());
-			clone.setBuildSpec(original.getBuildSpec());
-			clone.setComment(original.getComment());
-			clone.setDynamicReferences(original
-					.getDynamicReferences());
-			clone.setNatureIds(original.getNatureIds());
-			clone.setReferencedProjects(original
-					.getReferencedProjects());
-			if(project.exists()){
-				return;
-			}
-			project.create(clone, monitor);
-			project.open(monitor);
-			
-			@SuppressWarnings("unchecked")
-			List<IFile> filesToImport = FileSystemStructureProvider.INSTANCE.getChildren(edata.getProjectDir());
-			ImportOperation io = new ImportOperation(project.getFullPath(), edata.getProjectDir(),
-					FileSystemStructureProvider.INSTANCE, new IOverwriteQuery() {
-
-						@Override
-						public String queryOverwrite(String pathString) {
-							return IOverwriteQuery.ALL;
-						}
-
-					}, filesToImport);
-			io.setOverwriteResources(true);
-			io.setCreateContainerStructure(false);
-			io.run(monitor);
-			project.refreshLocal(IProject.DEPTH_INFINITE, monitor);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void deleteFolder(java.nio.file.Path path) throws IOException {
+	protected void deleteFolder(java.nio.file.Path path) throws IOException {
 		if (!Files.exists(path))
 			return;
 		Files.walkFileTree(path, new SimpleFileVisitor<java.nio.file.Path>() {
@@ -247,5 +196,4 @@ public class GitRepositoryExampleService implements IExampleService {
 			return true;
 		}
 	}
-
 }

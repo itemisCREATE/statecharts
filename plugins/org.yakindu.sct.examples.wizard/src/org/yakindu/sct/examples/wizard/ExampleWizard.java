@@ -26,10 +26,11 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.yakindu.sct.examples.wizard.pages.SelectExamplePage;
-import org.yakindu.sct.examples.wizard.service.ExampleData;
+import org.yakindu.sct.examples.wizard.service.ExampleImporter;
+import org.yakindu.sct.examples.wizard.service.ExampleModelOpener;
 import org.yakindu.sct.examples.wizard.service.ExampleWizardConstants;
 import org.yakindu.sct.examples.wizard.service.ExampleWizardModule;
-import org.yakindu.sct.examples.wizard.service.IExampleService;
+import org.yakindu.sct.examples.wizard.service.data.ExampleData;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -43,9 +44,11 @@ import com.google.inject.Inject;
 public class ExampleWizard extends Wizard implements INewWizard, ExampleWizardConstants {
 
 	@Inject
-	private IExampleService exampleService;
-	@Inject
 	private SelectExamplePage page;
+	@Inject
+	private ExampleModelOpener opener;
+	@Inject
+	private ExampleImporter importer;
 
 	public ExampleWizard() {
 		super();
@@ -75,7 +78,8 @@ public class ExampleWizard extends Wizard implements INewWizard, ExampleWizardCo
 					@Override
 					public void run(IProgressMonitor monitor) throws InvocationTargetException {
 						if (overrideIfExists(selection)) {
-							exampleService.importExample(selection, monitor);
+							IProject project = importer.importExample(selection, monitor);
+							opener.openModelFiles(project);
 						}
 					}
 				});
