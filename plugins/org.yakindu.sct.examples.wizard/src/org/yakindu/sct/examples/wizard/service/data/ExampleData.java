@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.examples.wizard.service;
+package org.yakindu.sct.examples.wizard.service.data;
 
 import java.io.File;
 import java.text.Collator;
@@ -19,10 +19,13 @@ import java.util.Arrays;
  * @author t00manysecretss
  * 
  */
-public class ExampleData implements Comparable<ExampleData> {
+public class ExampleData implements Comparable<ExampleData>, IExampleData {
 
-	private static final String PRO_EXAMPLE = "professional";
-	private static final String LABS_EXAMPLE = "labs";
+	public static final String DESC_FILE = "index.html";
+
+	private static final String PRO_CATEGORY = "professional";
+	private static final String LABS_CATEGORY = "labs";
+	
 	private String id;
 	private String title;
 	private String[] category;
@@ -95,12 +98,19 @@ public class ExampleData implements Comparable<ExampleData> {
 		this.projectDir = projectDir;
 	}
 
+	@Override
 	public boolean isProfessional() {
-		return Arrays.asList(getCategory()).contains(PRO_EXAMPLE);
+		return Arrays.asList(getCategory()).contains(PRO_CATEGORY);
 	}
 	
+	@Override
 	public boolean isLabs() {
-		return Arrays.asList(getCategory()).contains(LABS_EXAMPLE);
+		return Arrays.asList(getCategory()).contains(LABS_CATEGORY);
+	}
+	
+	@Override
+	public String getDescriptionPath() {
+		return getProjectDir().getAbsolutePath() + File.separator + DESC_FILE;
 	}
 
 	@Override

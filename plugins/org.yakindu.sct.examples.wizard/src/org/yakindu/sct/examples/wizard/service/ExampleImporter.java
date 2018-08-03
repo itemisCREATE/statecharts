@@ -21,7 +21,13 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.ui.dialogs.IOverwriteQuery;
 import org.eclipse.ui.wizards.datatransfer.FileSystemStructureProvider;
 import org.eclipse.ui.wizards.datatransfer.ImportOperation;
+import org.yakindu.sct.examples.wizard.service.data.ExampleData;
 
+/**
+ * 
+ * @author t00manysecretss
+ * 
+ */
 public class ExampleImporter {
 
 	@SuppressWarnings("deprecation")

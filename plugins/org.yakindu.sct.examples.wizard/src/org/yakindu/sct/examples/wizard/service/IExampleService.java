@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.yakindu.sct.examples.wizard.service.data.ExampleData;
 
 /**
  * 

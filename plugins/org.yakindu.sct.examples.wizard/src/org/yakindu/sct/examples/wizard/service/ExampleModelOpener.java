@@ -23,18 +23,23 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
+import org.yakindu.sct.examples.wizard.service.data.ExampleData;
 
 import com.google.common.collect.Lists;
 
+/**
+ * 
+ * @author robin herrmann - Initial API and contribution
+ *
+ */
 public class ExampleModelOpener {
 
-	private static final String INDEX_HTML = "index.html";
 	private static final String SCT_FILE_EXTENSION = ".sct";
 
 	public void openModelFiles(IProject project) {
 		List<IFile> filesToOpen = Lists.newArrayList();
 
-		addIndexHtml(project, filesToOpen);
+		addExampleDesc(project, filesToOpen);
 		addStatecharts(project, filesToOpen);
 
 		if (filesToOpen != null) {
@@ -73,8 +78,8 @@ public class ExampleModelOpener {
 		}
 	}
 
-	protected void addIndexHtml(IProject project, List<IFile> filesToOpen) {
-		IResource indexFile = project.findMember(INDEX_HTML);
+	protected void addExampleDesc(IProject project, List<IFile> filesToOpen) {
+		IResource indexFile = project.findMember(ExampleData.DESC_FILE);
 		if (indexFile != null) {
 			filesToOpen.add((IFile) indexFile);
 		}

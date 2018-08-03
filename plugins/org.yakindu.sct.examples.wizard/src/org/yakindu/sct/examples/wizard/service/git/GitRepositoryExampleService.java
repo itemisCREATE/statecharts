@@ -33,8 +33,8 @@ import org.eclipse.jgit.transport.FetchResult;
 import org.eclipse.jgit.transport.TrackingRefUpdate;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
 import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
-import org.yakindu.sct.examples.wizard.service.ExampleData;
 import org.yakindu.sct.examples.wizard.service.IExampleService;
+import org.yakindu.sct.examples.wizard.service.data.ExampleData;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;

@@ -9,10 +9,6 @@
  * 
  */
 package org.yakindu.sct.examples.wizard.pages;
-import static org.yakindu.sct.examples.wizard.pages.ExampleCategory.CATEGORY_LABS;
-import static org.yakindu.sct.examples.wizard.pages.ExampleCategory.CATEGORY_PROFESSIONAL;
-import static org.yakindu.sct.examples.wizard.pages.ExampleCategory.CATEGORY_STANDARD;
-
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -48,9 +44,11 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Monitor;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
 import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
-import org.yakindu.sct.examples.wizard.service.ExampleData;
 import org.yakindu.sct.examples.wizard.service.ExampleWizardConstants;
 import org.yakindu.sct.examples.wizard.service.IExampleService;
+import org.yakindu.sct.examples.wizard.service.data.ExampleCategory;
+import org.yakindu.sct.examples.wizard.service.data.ExampleData;
+import org.yakindu.sct.examples.wizard.service.data.IExampleData;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -71,7 +69,7 @@ public class SelectExamplePage extends WizardPage
 
 	private static final String PRO_BUNDLE = "com.yakindu.sct.domain.c";
 	private static final String PRO_UPDATE_SITE = "https://info.itemis.com/yakindu/statecharts/pro/";
-	private static final String PREVIEW_PAGES = "org.yakindu.sct.examples.pages";
+	
 	private static final int WIZARD_SIZE_SCALE_FACOTR = 2;
 	private static final int WIZARD_SIZE_OFFSET = 300;
 	
@@ -254,8 +252,8 @@ public class SelectExamplePage extends WizardPage
 		viewer.addSelectionChangedListener(this);
 	}
 
-	protected void updateSelection(Comparable<?> data) {
-		if(data instanceof ExampleData) {
+	protected void updateSelection(IExampleData data) {
+		if (data instanceof ExampleData) {
 			selection = (ExampleData) data;
 			setPageComplete(true);
 		} else {
@@ -268,8 +266,8 @@ public class SelectExamplePage extends WizardPage
 		viewer.refresh();
 	}
 
-	private void checkInstalledPlugins(Comparable<?> data) {
-		if (isProRequired(data)) {
+	private void checkInstalledPlugins(IExampleData data) {
+		if (isProRequiredAndMissing(data)) {
 			messageArea.showProInstall();
 		} else {
 			messageArea.hide();
@@ -278,42 +276,17 @@ public class SelectExamplePage extends WizardPage
 		this.getControl().update();
 	}
 
-	protected boolean isProRequired(Comparable<?> data) {
-		boolean proRequired = false;
-		if (data instanceof ExampleData) {
-			if (((ExampleData) data).isProfessional() && Platform.getBundle(PRO_BUNDLE) == null)
-				proRequired = true;
-		} else if (data instanceof ExampleCategory) {
-			if (CATEGORY_PROFESSIONAL.equals(((ExampleCategory) data).getName())
-					&& Platform.getBundle(PRO_BUNDLE) == null)
-				proRequired = true;
-		}
-		return proRequired;
+	protected boolean isProRequiredAndMissing(IExampleData data) {
+		return data.isProfessional() && Platform.getBundle(PRO_BUNDLE) == null;
 	}
 
-	protected void setDetailPaneContent(Comparable<?> data) {
-		String url = null;
-		if (data instanceof ExampleData) {
-			url = ((ExampleData) data).getProjectDir().getAbsolutePath() + File.separator + "index.html";
-		} else if (data instanceof ExampleCategory) {
-			url = getExampleCategoryDescriptionUr((ExampleCategory) data);
+	protected void setDetailPaneContent(IExampleData data) {
+		String path = data.getDescriptionPath();
+		if (path != null && new File(path).exists()) {
+			browser.setUrl(path);
+		} else {
+			browser.setUrl("about:blank");
 		}
-		if (url != null) {
-			browser.setUrl(url);
-		}
-	}
-
-	private String getExampleCategoryDescriptionUr(ExampleCategory data) {
-		switch (data.getName()) {
-			case CATEGORY_PROFESSIONAL :
-				return "https://www.itemis.com/en/yakindu/state-machine/documentation/tutorials";
-			case CATEGORY_STANDARD :
-				return "https://www.itemis.com/en/yakindu/state-machine/documentation/tutorials";
-			case CATEGORY_LABS :
-				return ((ExampleCategory) data).getPath() + File.separator + PREVIEW_PAGES + File.separator +"labs.html";
-		}
-
-		return null;
 	}
 
 	protected void createDetailsPane(Composite parent) {
@@ -330,10 +303,8 @@ public class SelectExamplePage extends WizardPage
 	@Override
 	public void selectionChanged(SelectionChangedEvent event) {
 		Object firstElement = ((StructuredSelection) event.getSelection()).getFirstElement();
-		if (firstElement instanceof ExampleData)
-			updateSelection((ExampleData) firstElement);
-		else if (firstElement instanceof ExampleCategory) {
-			updateSelection((ExampleCategory) firstElement);
+		if (firstElement instanceof IExampleData) {
+			updateSelection((IExampleData) firstElement);
 		}
 	}
 

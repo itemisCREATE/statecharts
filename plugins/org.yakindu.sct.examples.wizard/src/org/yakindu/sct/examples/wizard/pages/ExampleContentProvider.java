@@ -10,9 +10,9 @@
  */
 package org.yakindu.sct.examples.wizard.pages;
 
-import static org.yakindu.sct.examples.wizard.pages.ExampleCategory.CATEGORY_LABS;
-import static org.yakindu.sct.examples.wizard.pages.ExampleCategory.CATEGORY_PROFESSIONAL;
-import static org.yakindu.sct.examples.wizard.pages.ExampleCategory.CATEGORY_STANDARD;
+import static org.yakindu.sct.examples.wizard.service.data.ExampleCategory.CATEGORY_LABS;
+import static org.yakindu.sct.examples.wizard.service.data.ExampleCategory.CATEGORY_PROFESSIONAL;
+import static org.yakindu.sct.examples.wizard.service.data.ExampleCategory.CATEGORY_STANDARD;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -21,7 +21,8 @@ import java.util.Map;
 
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
-import org.yakindu.sct.examples.wizard.service.ExampleData;
+import org.yakindu.sct.examples.wizard.service.data.ExampleCategory;
+import org.yakindu.sct.examples.wizard.service.data.ExampleData;
 
 import com.google.common.collect.Lists;
 /**

@@ -11,12 +11,15 @@
 package org.yakindu.sct.examples.wizard.pages;
 
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
+
+import static org.yakindu.sct.examples.wizard.service.data.ExampleCategory.*;
+
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
-import org.yakindu.sct.examples.wizard.service.ExampleData;
+import org.yakindu.sct.examples.wizard.service.data.ExampleCategory;
+import org.yakindu.sct.examples.wizard.service.data.ExampleData;
 import org.yakindu.sct.ui.editor.StatechartImages;
-import static org.yakindu.sct.examples.wizard.pages.ExampleCategory.*;
 /**
  * 
  * @author t00manysecretss

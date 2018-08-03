@@ -26,11 +26,11 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.yakindu.sct.examples.wizard.pages.SelectExamplePage;
-import org.yakindu.sct.examples.wizard.service.ExampleData;
 import org.yakindu.sct.examples.wizard.service.ExampleImporter;
 import org.yakindu.sct.examples.wizard.service.ExampleModelOpener;
 import org.yakindu.sct.examples.wizard.service.ExampleWizardConstants;
 import org.yakindu.sct.examples.wizard.service.ExampleWizardModule;
+import org.yakindu.sct.examples.wizard.service.data.ExampleData;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
