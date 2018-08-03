@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.yakindu.base.expressions.expressions.IntLiteral;
 import org.yakindu.base.expressions.interpreter.IOperationMockup;
 import org.yakindu.base.types.Operation;
 
@@ -26,16 +27,16 @@ import com.google.common.collect.Multimap;
 import com.google.inject.Singleton;
 
 /**
- * 
+ *
  * @author jonathan thoene - Initial contribution and API
- * 
+ *
  */
 @Singleton
 public class DefaultOperationMockup implements IOperationMockup {
-	
+
 	protected MockReturnMap mockReturn = new MockReturnMap();
 	protected Multimap<String, List<Object>> verifyCalls = ArrayListMultimap.create();
-	
+
 	@Override
 	public boolean canExecute(Operation definition, Object[] parameter) {
 		return true;
@@ -47,37 +48,44 @@ public class DefaultOperationMockup implements IOperationMockup {
 		return mockReturn.get(definition.getName(), asList(parameter));
 	}
 
-	public boolean wasCalled(String operation, List<Object> parameters, int times) {
-		Collection<List<Object>> calledParameters = verifyCalls.get(operation);
-		if (calledParameters != null && !calledParameters.isEmpty()) {
-			if (!calledParameters.contains(parameters) && !parameters.isEmpty()) {
-				return false;
-			} 
-		} else {
-			return false;
+	public boolean wasCalledAtLeast(String operation, List<Object> parameters, IntLiteral times) {
+		int t = 1;
+		if (times != null) {
+			t = times.getValue();
 		}
-		if (parameters.isEmpty()) {
-			if (calledParameters.size()< times) {
-				return false;
-			}
-		} else {
-			if (getCallCoutForParams(calledParameters, parameters) < times) {
-				return false;
-			}
-		}
-		return true;
+		return getOperationCallCount(operation, parameters) >= t;
 	}
-	
+
+	public boolean wasNotCalled(String operation, List<Object> parameters) {
+		return getOperationCallCount(operation, parameters) == 0;
+	}
+
+	public Collection<List<Object>> getOperationCalls(String operation) {
+		Collection<List<Object>> calledParameters = verifyCalls.get(operation);
+		return calledParameters;
+	}
+
+	public int getOperationCallCount(String operation, List<Object> parameters) {
+		Collection<List<Object>> operationCalls = getOperationCalls(operation);
+		if (operationCalls == null || operationCalls.isEmpty()) {
+			return 0;
+		}
+		if (parameters == null || parameters.isEmpty()) {
+			return operationCalls.size();
+		}
+		return getCallCountForParams(operationCalls, parameters);
+	}
+
 	public void mockReturnValue(String operation, List<Object> params, Object value) {
 		mockReturn.put(operation, params, value);
 	}
-	
+
 	public void reset() {
 		mockReturn = new MockReturnMap();
 		verifyCalls = ArrayListMultimap.create();
 	}
-	
-	protected int getCallCoutForParams(Collection<List<Object>> calledParameters, List<Object> parameters) {
+
+	protected int getCallCountForParams(Collection<List<Object>> calledParameters, List<Object> parameters) {
 		int times = 0;
 		for (List<Object> params : calledParameters) {
 			if (params.equals(parameters)) {
@@ -86,7 +94,7 @@ public class DefaultOperationMockup implements IOperationMockup {
 		}
 		return times;
 	}
-	
+
 	protected static class MockReturnMap {
 		Map<String, Map<List<Object>, Object>> mockReturn;
 
