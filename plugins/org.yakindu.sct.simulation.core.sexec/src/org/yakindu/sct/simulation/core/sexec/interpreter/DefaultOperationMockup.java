@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.yakindu.base.expressions.expressions.IntLiteral;
 import org.yakindu.base.expressions.interpreter.IOperationMockup;
 import org.yakindu.base.types.Operation;
 
@@ -47,8 +48,12 @@ public class DefaultOperationMockup implements IOperationMockup {
 		return mockReturn.get(definition.getName(), asList(parameter));
 	}
 
-	public boolean wasCalledAtLeast(String operation, List<Object> parameters, int times) {
-		return getOperationCallCount(operation, parameters) >= times;
+	public boolean wasCalledAtLeast(String operation, List<Object> parameters, IntLiteral times) {
+		int t = 1;
+		if (times != null) {
+			t = times.getValue();
+		}
+		return getOperationCallCount(operation, parameters) >= t;
 	}
 
 	public boolean wasNotCalled(String operation, List<Object> parameters) {
