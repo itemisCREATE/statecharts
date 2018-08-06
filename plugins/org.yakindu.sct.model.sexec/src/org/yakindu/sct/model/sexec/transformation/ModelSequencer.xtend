@@ -51,13 +51,6 @@ class ModelSequencer implements IModelSequencer {
 	}
 
 
-	def String test(int x) {
-		if (x<0) return "-"
-		else if (x>0) return "+"
-		
-		"0"
-	}
-	
 	override ExecutionFlow transform(Statechart sc, IValidationIssueAcceptor acceptor) {
 		
 		val ef = sc.create
