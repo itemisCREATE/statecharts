@@ -17,8 +17,11 @@ import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Event;
+import org.yakindu.base.types.GenericElement;
+import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.TypedElement;
+import org.yakindu.sct.model.sexec.*;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
@@ -211,6 +214,19 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SexecPackage.METHOD: {
+				Method method = (Method)theEObject;
+				T result = caseMethod(method);
+				if (result == null) result = caseOperation(method);
+				if (result == null) result = caseDeclaration(method);
+				if (result == null) result = caseGenericElement(method);
+				if (result == null) result = caseTypedElement(method);
+				if (result == null) result = casePackageMember(method);
+				if (result == null) result = caseNamedElement(method);
+				if (result == null) result = caseAnnotatableElement(method);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case SexecPackage.STATE_VECTOR: {
 				StateVector stateVector = (StateVector)theEObject;
 				T result = caseStateVector(stateVector);
@@ -344,6 +360,14 @@ public class SexecSwitch<T> extends Switch<T> {
 				T result = caseHistoryEntry(historyEntry);
 				if (result == null) result = caseStep(historyEntry);
 				if (result == null) result = caseNamedElement(historyEntry);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.RETURN: {
+				Return return_ = (Return)theEObject;
+				T result = caseReturn(return_);
+				if (result == null) result = caseStep(return_);
+				if (result == null) result = caseNamedElement(return_);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -558,6 +582,21 @@ public class SexecSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Method</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Method</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMethod(Method object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -629,6 +668,36 @@ public class SexecSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDeclaration(Declaration object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Generic Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Generic Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGenericElement(GenericElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Operation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Operation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOperation(Operation object) {
 		return null;
 	}
 
@@ -989,6 +1058,21 @@ public class SexecSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseHistoryEntry(HistoryEntry object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Return</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Return</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReturn(Return object) {
 		return null;
 	}
 

@@ -444,6 +444,11 @@ public class ExecutionFlowItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createReturn()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
 				 SexecFactory.eINSTANCE.createTraceNodeExecuted()));
 
 		newChildDescriptors.add
@@ -540,6 +545,11 @@ public class ExecutionFlowItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
 				 SexecFactory.eINSTANCE.createHistoryEntry()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createReturn()));
 
 		newChildDescriptors.add
 			(createChildParameter

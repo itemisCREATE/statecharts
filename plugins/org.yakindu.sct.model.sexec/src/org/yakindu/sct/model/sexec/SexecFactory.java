@@ -111,6 +111,15 @@ public interface SexecFactory extends EFactory {
 	Reaction createReaction();
 
 	/**
+	 * Returns a new object of class '<em>Method</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Method</em>'.
+	 * @generated
+	 */
+	Method createMethod();
+
+	/**
 	 * Returns a new object of class '<em>Mapped Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -298,6 +307,15 @@ public interface SexecFactory extends EFactory {
 	 * @generated
 	 */
 	HistoryEntry createHistoryEntry();
+
+	/**
+	 * Returns a new object of class '<em>Return</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Return</em>'.
+	 * @generated
+	 */
+	Return createReturn();
 
 	/**
 	 * Returns a new object of class '<em>Execution Synchronization</em>'.

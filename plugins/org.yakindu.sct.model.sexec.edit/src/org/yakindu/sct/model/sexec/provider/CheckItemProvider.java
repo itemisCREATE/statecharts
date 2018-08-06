@@ -233,6 +233,11 @@ public class CheckItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.CHECK__CONDITION,
+				 ExpressionsFactory.eINSTANCE.createPostFixUnaryExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.CHECK__CONDITION,
 				 ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
 
 		newChildDescriptors.add

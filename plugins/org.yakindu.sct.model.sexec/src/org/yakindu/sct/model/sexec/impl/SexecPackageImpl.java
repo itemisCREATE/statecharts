@@ -36,8 +36,10 @@ import org.yakindu.sct.model.sexec.ExitState;
 import org.yakindu.sct.model.sexec.HistoryEntry;
 import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.MappedElement;
+import org.yakindu.sct.model.sexec.Method;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.ReactionFired;
+import org.yakindu.sct.model.sexec.Return;
 import org.yakindu.sct.model.sexec.SaveHistory;
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.Sequence;
@@ -127,6 +129,13 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * @generated
 	 */
 	private EClass reactionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass methodEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -294,6 +303,13 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass returnEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass executionSynchronizationEClass = null;
 
 	/**
@@ -364,8 +380,10 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		isInited = true;
 
 		// Initialize simple dependencies
+		BasePackage.eINSTANCE.eClass();
 		ExpressionsPackage.eINSTANCE.eClass();
 		SGraphPackage.eINSTANCE.eClass();
+		TypesPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theSexecPackage.createPackageContents();
@@ -704,6 +722,24 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 */
 	public EAttribute getReaction_Transition() {
 		return (EAttribute)reactionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMethod() {
+		return methodEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMethod_Body() {
+		return (EReference)methodEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1206,6 +1242,24 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getReturn() {
+		return returnEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getReturn_Value() {
+		return (EReference)returnEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getExecutionSynchronization() {
 		return executionSynchronizationEClass;
 	}
@@ -1351,6 +1405,9 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		createEReference(reactionEClass, REACTION__EFFECT);
 		createEAttribute(reactionEClass, REACTION__TRANSITION);
 
+		methodEClass = createEClass(METHOD);
+		createEReference(methodEClass, METHOD__BODY);
+
 		stateVectorEClass = createEClass(STATE_VECTOR);
 		createEAttribute(stateVectorEClass, STATE_VECTOR__SIZE);
 		createEAttribute(stateVectorEClass, STATE_VECTOR__OFFSET);
@@ -1414,6 +1471,9 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		createEAttribute(historyEntryEClass, HISTORY_ENTRY__DEEP);
 		createEReference(historyEntryEClass, HISTORY_ENTRY__REGION);
 		createEReference(historyEntryEClass, HISTORY_ENTRY__HISTORY_STEP);
+
+		returnEClass = createEClass(RETURN);
+		createEReference(returnEClass, RETURN__VALUE);
 
 		traceEClass = createEClass(TRACE);
 
@@ -1487,6 +1547,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		executionSynchronizationEClass.getESuperTypes().add(this.getExecutionNode());
 		reactionEClass.getESuperTypes().add(this.getMappedElement());
 		reactionEClass.getESuperTypes().add(theBasePackage.getNamedElement());
+		methodEClass.getESuperTypes().add(theTypesPackage.getOperation());
 		timeEventEClass.getESuperTypes().add(theTypesPackage.getEvent());
 		stepEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		sequenceEClass.getESuperTypes().add(this.getStep());
@@ -1502,6 +1563,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		stateSwitchEClass.getESuperTypes().add(this.getStep());
 		saveHistoryEClass.getESuperTypes().add(this.getStep());
 		historyEntryEClass.getESuperTypes().add(this.getStep());
+		returnEClass.getESuperTypes().add(this.getStep());
 		traceEClass.getESuperTypes().add(this.getStep());
 		traceNodeExecutedEClass.getESuperTypes().add(this.getTrace());
 		reactionFiredEClass.getESuperTypes().add(this.getTrace());
@@ -1561,6 +1623,9 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		initEReference(getReaction_Check(), this.getCheck(), null, "check", null, 0, 1, Reaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getReaction_Effect(), this.getStep(), null, "effect", null, 0, 1, Reaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getReaction_Transition(), ecorePackage.getEBoolean(), "transition", null, 0, 1, Reaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(methodEClass, Method.class, "Method", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMethod_Body(), this.getSequence(), null, "body", null, 0, 1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stateVectorEClass, StateVector.class, "StateVector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getStateVector_Size(), ecorePackage.getEInt(), "size", "1", 0, 1, StateVector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1625,6 +1690,9 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		initEAttribute(getHistoryEntry_Deep(), ecorePackage.getEBoolean(), "deep", null, 0, 1, HistoryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getHistoryEntry_Region(), this.getExecutionRegion(), null, "region", null, 0, 1, HistoryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getHistoryEntry_HistoryStep(), this.getStep(), null, "historyStep", null, 0, 1, HistoryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(returnEClass, Return.class, "Return", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getReturn_Value(), theExpressionsPackage.getExpression(), null, "value", null, 0, 1, Return.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(traceEClass, Trace.class, "Trace", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -403,7 +403,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStep()
 	 * @generated
 	 */
-	int STEP = 13;
+	int STEP = 14;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.SequenceImpl <em>Sequence</em>}' class.
@@ -413,7 +413,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getSequence()
 	 * @generated
 	 */
-	int SEQUENCE = 14;
+	int SEQUENCE = 15;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.CheckImpl <em>Check</em>}' class.
@@ -423,7 +423,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCheck()
 	 * @generated
 	 */
-	int CHECK = 15;
+	int CHECK = 16;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.IfImpl <em>If</em>}' class.
@@ -433,7 +433,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getIf()
 	 * @generated
 	 */
-	int IF = 17;
+	int IF = 18;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionImpl <em>Execution</em>}' class.
@@ -443,7 +443,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExecution()
 	 * @generated
 	 */
-	int EXECUTION = 18;
+	int EXECUTION = 19;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.EnterStateImpl <em>Enter State</em>}' class.
@@ -453,7 +453,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getEnterState()
 	 * @generated
 	 */
-	int ENTER_STATE = 19;
+	int ENTER_STATE = 20;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExitStateImpl <em>Exit State</em>}' class.
@@ -463,7 +463,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExitState()
 	 * @generated
 	 */
-	int EXIT_STATE = 20;
+	int EXIT_STATE = 21;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.StateVectorImpl <em>State Vector</em>}' class.
@@ -473,7 +473,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStateVector()
 	 * @generated
 	 */
-	int STATE_VECTOR = 11;
+	int STATE_VECTOR = 12;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TimeEventImpl <em>Time Event</em>}' class.
@@ -483,7 +483,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTimeEvent()
 	 * @generated
 	 */
-	int TIME_EVENT = 12;
+	int TIME_EVENT = 13;
 
 	/**
 	 * The feature id for the '<em><b>Source Element</b></em>' reference.
@@ -1074,7 +1074,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCall()
 	 * @generated
 	 */
-	int CALL = 21;
+	int CALL = 22;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ScheduleTimeEventImpl <em>Schedule Time Event</em>}' class.
@@ -1084,7 +1084,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getScheduleTimeEvent()
 	 * @generated
 	 */
-	int SCHEDULE_TIME_EVENT = 22;
+	int SCHEDULE_TIME_EVENT = 23;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.UnscheduleTimeEventImpl <em>Unschedule Time Event</em>}' class.
@@ -1094,7 +1094,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getUnscheduleTimeEvent()
 	 * @generated
 	 */
-	int UNSCHEDULE_TIME_EVENT = 23;
+	int UNSCHEDULE_TIME_EVENT = 24;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.CheckRefImpl <em>Check Ref</em>}' class.
@@ -1104,7 +1104,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getCheckRef()
 	 * @generated
 	 */
-	int CHECK_REF = 16;
+	int CHECK_REF = 17;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.StateSwitchImpl <em>State Switch</em>}' class.
@@ -1114,7 +1114,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStateSwitch()
 	 * @generated
 	 */
-	int STATE_SWITCH = 24;
+	int STATE_SWITCH = 25;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.StateCaseImpl <em>State Case</em>}' class.
@@ -1124,7 +1124,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getStateCase()
 	 * @generated
 	 */
-	int STATE_CASE = 25;
+	int STATE_CASE = 26;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TraceImpl <em>Trace</em>}' class.
@@ -1134,7 +1134,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTrace()
 	 * @generated
 	 */
-	int TRACE = 28;
+	int TRACE = 30;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TraceNodeExecutedImpl <em>Trace Node Executed</em>}' class.
@@ -1144,7 +1144,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceNodeExecuted()
 	 * @generated
 	 */
-	int TRACE_NODE_EXECUTED = 29;
+	int TRACE_NODE_EXECUTED = 31;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ReactionFiredImpl <em>Reaction Fired</em>}' class.
@@ -1154,7 +1154,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getReactionFired()
 	 * @generated
 	 */
-	int REACTION_FIRED = 30;
+	int REACTION_FIRED = 32;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TraceStateEnteredImpl <em>Trace State Entered</em>}' class.
@@ -1164,7 +1164,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceStateEntered()
 	 * @generated
 	 */
-	int TRACE_STATE_ENTERED = 32;
+	int TRACE_STATE_ENTERED = 34;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TraceStateExitedImpl <em>Trace State Exited</em>}' class.
@@ -1174,7 +1174,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceStateExited()
 	 * @generated
 	 */
-	int TRACE_STATE_EXITED = 33;
+	int TRACE_STATE_EXITED = 35;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TraceBeginRunCycleImpl <em>Trace Begin Run Cycle</em>}' class.
@@ -1184,7 +1184,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceBeginRunCycle()
 	 * @generated
 	 */
-	int TRACE_BEGIN_RUN_CYCLE = 34;
+	int TRACE_BEGIN_RUN_CYCLE = 36;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TraceEndRunCycleImpl <em>Trace End Run Cycle</em>}' class.
@@ -1194,7 +1194,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceEndRunCycle()
 	 * @generated
 	 */
-	int TRACE_END_RUN_CYCLE = 35;
+	int TRACE_END_RUN_CYCLE = 37;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.SaveHistoryImpl <em>Save History</em>}' class.
@@ -1204,7 +1204,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getSaveHistory()
 	 * @generated
 	 */
-	int SAVE_HISTORY = 26;
+	int SAVE_HISTORY = 27;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.HistoryEntryImpl <em>History Entry</em>}' class.
@@ -1214,7 +1214,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getHistoryEntry()
 	 * @generated
 	 */
-	int HISTORY_ENTRY = 27;
+	int HISTORY_ENTRY = 28;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionSynchronizationImpl <em>Execution Synchronization</em>}' class.
@@ -1342,6 +1342,106 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int REACTION_FEATURE_COUNT = MAPPED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.MethodImpl <em>Method</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.MethodImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getMethod()
+	 * @generated
+	 */
+	int METHOD = 11;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD__TYPE = TypesPackage.OPERATION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD__TYPE_SPECIFIER = TypesPackage.OPERATION__TYPE_SPECIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD__NAME = TypesPackage.OPERATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD__ID = TypesPackage.OPERATION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD__ANNOTATIONS = TypesPackage.OPERATION__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD__TYPE_PARAMETERS = TypesPackage.OPERATION__TYPE_PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD__PARAMETERS = TypesPackage.OPERATION__PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Variadic</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD__VARIADIC = TypesPackage.OPERATION__VARIADIC;
+
+	/**
+	 * The feature id for the '<em><b>Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD__BODY = TypesPackage.OPERATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Method</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD_FEATURE_COUNT = TypesPackage.OPERATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Size</b></em>' attribute.
@@ -2080,7 +2180,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceReactionWillFire()
 	 * @generated
 	 */
-	int TRACE_REACTION_WILL_FIRE = 31;
+	int TRACE_REACTION_WILL_FIRE = 33;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2207,6 +2307,61 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int HISTORY_ENTRY_FEATURE_COUNT = STEP_FEATURE_COUNT + 4;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ReturnImpl <em>Return</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.ReturnImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getReturn()
+	 * @generated
+	 */
+	int RETURN = 29;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RETURN__NAME = STEP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RETURN__COMMENT = STEP__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RETURN__CALLER = STEP__CALLER;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RETURN__VALUE = STEP_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Return</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RETURN_FEATURE_COUNT = STEP_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2930,6 +3085,27 @@ public interface SexecPackage extends EPackage {
 	EAttribute getReaction_Transition();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.Method <em>Method</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Method</em>'.
+	 * @see org.yakindu.sct.model.sexec.Method
+	 * @generated
+	 */
+	EClass getMethod();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.Method#getBody <em>Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Body</em>'.
+	 * @see org.yakindu.sct.model.sexec.Method#getBody()
+	 * @see #getMethod()
+	 * @generated
+	 */
+	EReference getMethod_Body();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.MappedElement <em>Mapped Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3512,6 +3688,27 @@ public interface SexecPackage extends EPackage {
 	EReference getHistoryEntry_HistoryStep();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.Return <em>Return</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Return</em>'.
+	 * @see org.yakindu.sct.model.sexec.Return
+	 * @generated
+	 */
+	EClass getReturn();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.Return#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Value</em>'.
+	 * @see org.yakindu.sct.model.sexec.Return#getValue()
+	 * @see #getReturn()
+	 * @generated
+	 */
+	EReference getReturn_Value();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionSynchronization <em>Execution Synchronization</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3922,6 +4119,24 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute REACTION__TRANSITION = eINSTANCE.getReaction_Transition();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.MethodImpl <em>Method</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.MethodImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getMethod()
+		 * @generated
+		 */
+		EClass METHOD = eINSTANCE.getMethod();
+
+		/**
+		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference METHOD__BODY = eINSTANCE.getMethod_Body();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.MappedElementImpl <em>Mapped Element</em>}' class.
@@ -4408,6 +4623,24 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EReference HISTORY_ENTRY__HISTORY_STEP = eINSTANCE.getHistoryEntry_HistoryStep();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ReturnImpl <em>Return</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.ReturnImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getReturn()
+		 * @generated
+		 */
+		EClass RETURN = eINSTANCE.getReturn();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RETURN__VALUE = eINSTANCE.getReturn_Value();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionSynchronizationImpl <em>Execution Synchronization</em>}' class.

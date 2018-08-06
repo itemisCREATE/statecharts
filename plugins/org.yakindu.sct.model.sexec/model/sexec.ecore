@@ -72,6 +72,10 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="transition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Method" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Operation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//Sequence"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StateVector">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         defaultValueLiteral="1"/>
@@ -152,6 +156,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="region" eType="#//ExecutionRegion"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="historyStep" eType="#//Step"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Return" eSuperTypes="#//Step">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Trace" abstract="true" eSuperTypes="#//Step"/>
   <eClassifiers xsi:type="ecore:EClass" name="TraceNodeExecuted" eSuperTypes="#//Trace">
