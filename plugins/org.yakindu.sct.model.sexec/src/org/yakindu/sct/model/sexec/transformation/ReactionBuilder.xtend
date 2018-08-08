@@ -35,6 +35,16 @@ import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.DefaultTrigger
 import org.yakindu.sct.model.sgraph.Transition
+import org.yakindu.sct.model.sexec.Method
+import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.base.types.TypesFactory
+import org.yakindu.sct.model.sexec.If
+import org.yakindu.base.expressions.expressions.Expression
+import org.yakindu.base.types.Operation
+import org.yakindu.sct.model.sexec.Return
+import org.yakindu.base.expressions.expressions.Literal
+import org.yakindu.base.expressions.expressions.ExpressionsFactory
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 
 class ReactionBuilder {
 	@Inject extension SexecElementMapping mapping
@@ -43,6 +53,7 @@ class ReactionBuilder {
 	@Inject extension StatechartExtensions sct
 	@Inject extension TraceExtensions trace
 	@Inject extension BehaviorMapping behaviorMapping
+	@Inject extension ITypeSystem typeSystem
 	
 	def defineStatechartReaction(ExecutionFlow flow, Statechart sc) {
 		val sequence = sexec.factory.createSequence
@@ -63,16 +74,28 @@ class ReactionBuilder {
 		return flow
 	}
 
+
 	def defineRegularStateReactions(ExecutionFlow flow, Statechart sc) {
 		
 		val states = sc.allRegularStates
-		
+
+		// create the react sequences for all leaf states and final states		
 		states.filter(typeof(State)).filter(s | s.simple).forEach(s | defineCycle(s))
 		states.filter(typeof(FinalState)).forEach(s | defineCycle(s))
 		
+		// additionally create react methods for all regular states
+		// these methods are alternative to the react sequences. These methods avoid the redundancy that is 
+		// inherent to react sequences. React sequences are still created for all code generators that are 
+		// still not migrated to react methods.
+		states.forEach[s | s.declareReactMethod ]
+		states.forEach[s | s.defineReactMethod ]
+
 		return flow
 	}
+
 	
+
+
 
 	def definePseudoStateReactions(ExecutionFlow flow, Statechart sc) {
 		
@@ -166,6 +189,113 @@ class ReactionBuilder {
 	}
 
 
+	def declareReactMethod(RegularState state) {
+		
+		state.create => [
+			features.add( sexecFactory.createMethod => [
+				name = "react"
+				typeSpecifier = TypesFactory.eINSTANCE.createTypeSpecifier => [
+					type = typeSystem.getType(ITypeSystem::BOOLEAN);
+				]	
+			])
+		]
+
+	}	
+	
+
+	def defineReactMethod(RegularState state) {
+		
+		val execState = state.create
+		val reactMethod = execState.reactMethod
+				
+		if (state.statechart.interleaveLocalReactions) {
+			
+			val stateReactions = 
+				_sequence(
+					execState.createReactionSequence(
+						execState.createLocalReactionSequence(
+							_return(_false)
+						)
+					),
+					_return(_true)	
+				)
+							
+
+			if (state.parentState !== null) {
+				reactMethod.body =
+					_sequence( 
+						_if(_call(state.parentState.create.reactMethod))
+							._then( _return(_true) )
+							._else( stateReactions )			
+					)
+			} else {
+				reactMethod.body = stateReactions
+			}
+			
+			
+		} else {
+			
+			throw new RuntimeException("Non interleaved local reactions not supported");
+		}
+				
+		reactMethod.body.comment = 'The reactions of state ' + state.name + '.'
+		
+		return reactMethod
+	} 
+	
+	
+	def Method reactMethod(ExecutionState it) {
+		features.filter( typeof(Method) ).filter( m | m.name == "react").head
+	}
+	
+
+	def Sequence _sequence (Step... sequenceSteps) {
+		sexec.factory.createSequence => [
+			steps.addAll(sequenceSteps)
+		]
+	}		
+	
+	
+	def If _if (Expression cond) {
+		sexec.factory.createIf() => [
+			check = sexec.factory.createCheck => [
+				condition = cond
+			]	
+		]
+	}
+	
+	def If _then (If it, Step step) {
+		thenStep = step	
+		it
+	}
+	
+	def If _else (If it, Step step) {
+		elseStep = step
+		it
+	}
+	
+	
+	def ElementReferenceExpression _call(Operation op) {
+		ExpressionsFactory.eINSTANCE.createElementReferenceExpression => [ reference = op ]
+	}
+	
+	def Return _return(Expression exp) {
+		sexec.factory.createReturn => [ value = exp ]
+	}
+	
+	def PrimitiveValueExpression _true() { 
+		ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression => [
+			value = ExpressionsFactory.eINSTANCE.createBoolLiteral => [ value = true]	
+		]
+	}
+	 
+	def PrimitiveValueExpression _false() { 
+		ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression => [
+			value = ExpressionsFactory.eINSTANCE.createBoolLiteral => [ value = false]	
+		]
+	}
+	 
+	 
 	def Sequence defineCycle(RegularState state) {
 	
 		val execState = state.create
@@ -244,6 +374,9 @@ class ReactionBuilder {
 		
 		return cycle
 	}
+	
+	
+	
 	
 	def ExecutionFlow defineEntryReactions(Statechart statechart, ExecutionFlow r) {
 		statechart.allEntries.forEach(e|e.defineReaction)

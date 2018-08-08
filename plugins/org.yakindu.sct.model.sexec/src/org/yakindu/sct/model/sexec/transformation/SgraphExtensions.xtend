@@ -10,22 +10,23 @@
 */
 package org.yakindu.sct.model.sexec.transformation
 
-import org.yakindu.sct.model.sgraph.SGraphFactory
-import org.yakindu.sct.model.sgraph.RegularState
-import org.yakindu.sct.model.sgraph.FinalState
-import org.yakindu.sct.model.sgraph.State
-import org.yakindu.sct.model.sgraph.Region
-import org.yakindu.sct.model.sgraph.Entry
+import java.util.ArrayList
 import java.util.List
 import org.eclipse.emf.ecore.EObject
-import java.util.ArrayList
+import org.eclipse.xtext.EcoreUtil2
+import org.yakindu.base.types.AnnotatableElement
+import org.yakindu.base.types.Annotation
+import org.yakindu.sct.model.sgraph.Entry
 import org.yakindu.sct.model.sgraph.EntryKind
+import org.yakindu.sct.model.sgraph.FinalState
+import org.yakindu.sct.model.sgraph.Region
+import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.SGraphFactory
+import org.yakindu.sct.model.sgraph.State
+import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.stext.stext.EntryPointSpec
 import org.yakindu.sct.model.stext.stext.ExitPointSpec
-import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.base.types.Annotation
-import org.yakindu.base.types.AnnotatableElement
 
 class SgraphExtensions {
 	
@@ -48,6 +49,11 @@ class SgraphExtensions {
 	}
 
 
+	def parentState (EObject obj) {
+		EcoreUtil2.getAllContainers(obj).filter(typeof (RegularState)).head
+	} 
+
+	
 	def List<EObject> containers(EObject obj) {
 		val containerList = new ArrayList<EObject>()
 		collectContainers(obj, containerList)
