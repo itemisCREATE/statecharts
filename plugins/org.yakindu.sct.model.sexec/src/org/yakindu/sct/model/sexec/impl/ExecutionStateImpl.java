@@ -19,8 +19,19 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.yakindu.base.types.AnnotatableElement;
+import org.yakindu.base.types.Annotation;
+import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.Declaration;
+import org.yakindu.base.types.GenericElement;
+import org.yakindu.base.types.PackageMember;
+import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypeConstraint;
+import org.yakindu.base.types.TypeParameter;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.Sequence;
@@ -42,6 +53,14 @@ import org.yakindu.sct.model.sexec.Step;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getEnterSequences <em>Enter Sequences</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getExitSequence <em>Exit Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getInitSequence <em>Init Sequence</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getAnnotations <em>Annotations</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getConstraint <em>Constraint</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#isAbstract <em>Abstract</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#isVisible <em>Visible</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getSuperTypes <em>Super Types</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getTypeParameters <em>Type Parameters</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getFeatures <em>Features</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#isLeaf <em>Leaf</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getEntryAction <em>Entry Action</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getExitAction <em>Exit Action</em>}</li>
@@ -109,6 +128,106 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 	 * @ordered
 	 */
 	protected Sequence initSequence;
+
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAnnotations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Annotation> annotations;
+
+	/**
+	 * The cached value of the '{@link #getConstraint() <em>Constraint</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstraint()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypeConstraint> constraint;
+
+	/**
+	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean ABSTRACT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean abstract_ = ABSTRACT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isVisible() <em>Visible</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVisible()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean VISIBLE_EDEFAULT = true;
+
+	/**
+	 * The cached value of the '{@link #isVisible() <em>Visible</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVisible()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean visible = VISIBLE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSuperTypes() <em>Super Types</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSuperTypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Type> superTypes;
+
+	/**
+	 * The cached value of the '{@link #getTypeParameters() <em>Type Parameters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeParameters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypeParameter> typeParameters;
+
+	/**
+	 * The cached value of the '{@link #getFeatures() <em>Features</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFeatures()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Declaration> features;
 
 	/**
 	 * The default value of the '{@link #isLeaf() <em>Leaf</em>}' attribute.
@@ -387,6 +506,39 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Declaration> getAllFeatures() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Type getOriginType() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Annotation getAnnotationOfType(String typeName) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Sequence getExitSequence() {
 		return exitSequence;
 	}
@@ -471,6 +623,117 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getId() {
+		return getName();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Annotation> getAnnotations() {
+		if (annotations == null) {
+			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, SexecPackage.EXECUTION_STATE__ANNOTATIONS);
+		}
+		return annotations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<TypeConstraint> getConstraint() {
+		if (constraint == null) {
+			constraint = new EObjectContainmentEList<TypeConstraint>(TypeConstraint.class, this, SexecPackage.EXECUTION_STATE__CONSTRAINT);
+		}
+		return constraint;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isAbstract() {
+		return abstract_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAbstract(boolean newAbstract) {
+		boolean oldAbstract = abstract_;
+		abstract_ = newAbstract;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_STATE__ABSTRACT, oldAbstract, abstract_));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isVisible() {
+		return visible;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVisible(boolean newVisible) {
+		boolean oldVisible = visible;
+		visible = newVisible;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_STATE__VISIBLE, oldVisible, visible));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Type> getSuperTypes() {
+		if (superTypes == null) {
+			superTypes = new EObjectResolvingEList<Type>(Type.class, this, SexecPackage.EXECUTION_STATE__SUPER_TYPES);
+		}
+		return superTypes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<TypeParameter> getTypeParameters() {
+		if (typeParameters == null) {
+			typeParameters = new EObjectContainmentEList<TypeParameter>(TypeParameter.class, this, SexecPackage.EXECUTION_STATE__TYPE_PARAMETERS);
+		}
+		return typeParameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Declaration> getFeatures() {
+		if (features == null) {
+			features = new EObjectContainmentEList<Declaration>(Declaration.class, this, SexecPackage.EXECUTION_STATE__FEATURES);
+		}
+		return features;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -528,6 +791,14 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 				return basicSetExitSequence(null, msgs);
 			case SexecPackage.EXECUTION_STATE__INIT_SEQUENCE:
 				return basicSetInitSequence(null, msgs);
+			case SexecPackage.EXECUTION_STATE__ANNOTATIONS:
+				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
+			case SexecPackage.EXECUTION_STATE__CONSTRAINT:
+				return ((InternalEList<?>)getConstraint()).basicRemove(otherEnd, msgs);
+			case SexecPackage.EXECUTION_STATE__TYPE_PARAMETERS:
+				return ((InternalEList<?>)getTypeParameters()).basicRemove(otherEnd, msgs);
+			case SexecPackage.EXECUTION_STATE__FEATURES:
+				return ((InternalEList<?>)getFeatures()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_STATE__ENTRY_ACTION:
 				return basicSetEntryAction(null, msgs);
 			case SexecPackage.EXECUTION_STATE__EXIT_ACTION:
@@ -557,6 +828,22 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 				return getExitSequence();
 			case SexecPackage.EXECUTION_STATE__INIT_SEQUENCE:
 				return getInitSequence();
+			case SexecPackage.EXECUTION_STATE__ID:
+				return getId();
+			case SexecPackage.EXECUTION_STATE__ANNOTATIONS:
+				return getAnnotations();
+			case SexecPackage.EXECUTION_STATE__CONSTRAINT:
+				return getConstraint();
+			case SexecPackage.EXECUTION_STATE__ABSTRACT:
+				return isAbstract();
+			case SexecPackage.EXECUTION_STATE__VISIBLE:
+				return isVisible();
+			case SexecPackage.EXECUTION_STATE__SUPER_TYPES:
+				return getSuperTypes();
+			case SexecPackage.EXECUTION_STATE__TYPE_PARAMETERS:
+				return getTypeParameters();
+			case SexecPackage.EXECUTION_STATE__FEATURES:
+				return getFeatures();
 			case SexecPackage.EXECUTION_STATE__LEAF:
 				return isLeaf();
 			case SexecPackage.EXECUTION_STATE__ENTRY_ACTION:
@@ -595,6 +882,32 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 				return;
 			case SexecPackage.EXECUTION_STATE__INIT_SEQUENCE:
 				setInitSequence((Sequence)newValue);
+				return;
+			case SexecPackage.EXECUTION_STATE__ANNOTATIONS:
+				getAnnotations().clear();
+				getAnnotations().addAll((Collection<? extends Annotation>)newValue);
+				return;
+			case SexecPackage.EXECUTION_STATE__CONSTRAINT:
+				getConstraint().clear();
+				getConstraint().addAll((Collection<? extends TypeConstraint>)newValue);
+				return;
+			case SexecPackage.EXECUTION_STATE__ABSTRACT:
+				setAbstract((Boolean)newValue);
+				return;
+			case SexecPackage.EXECUTION_STATE__VISIBLE:
+				setVisible((Boolean)newValue);
+				return;
+			case SexecPackage.EXECUTION_STATE__SUPER_TYPES:
+				getSuperTypes().clear();
+				getSuperTypes().addAll((Collection<? extends Type>)newValue);
+				return;
+			case SexecPackage.EXECUTION_STATE__TYPE_PARAMETERS:
+				getTypeParameters().clear();
+				getTypeParameters().addAll((Collection<? extends TypeParameter>)newValue);
+				return;
+			case SexecPackage.EXECUTION_STATE__FEATURES:
+				getFeatures().clear();
+				getFeatures().addAll((Collection<? extends Declaration>)newValue);
 				return;
 			case SexecPackage.EXECUTION_STATE__LEAF:
 				setLeaf((Boolean)newValue);
@@ -635,6 +948,27 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 			case SexecPackage.EXECUTION_STATE__INIT_SEQUENCE:
 				setInitSequence((Sequence)null);
 				return;
+			case SexecPackage.EXECUTION_STATE__ANNOTATIONS:
+				getAnnotations().clear();
+				return;
+			case SexecPackage.EXECUTION_STATE__CONSTRAINT:
+				getConstraint().clear();
+				return;
+			case SexecPackage.EXECUTION_STATE__ABSTRACT:
+				setAbstract(ABSTRACT_EDEFAULT);
+				return;
+			case SexecPackage.EXECUTION_STATE__VISIBLE:
+				setVisible(VISIBLE_EDEFAULT);
+				return;
+			case SexecPackage.EXECUTION_STATE__SUPER_TYPES:
+				getSuperTypes().clear();
+				return;
+			case SexecPackage.EXECUTION_STATE__TYPE_PARAMETERS:
+				getTypeParameters().clear();
+				return;
+			case SexecPackage.EXECUTION_STATE__FEATURES:
+				getFeatures().clear();
+				return;
 			case SexecPackage.EXECUTION_STATE__LEAF:
 				setLeaf(LEAF_EDEFAULT);
 				return;
@@ -668,6 +1002,22 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 				return exitSequence != null;
 			case SexecPackage.EXECUTION_STATE__INIT_SEQUENCE:
 				return initSequence != null;
+			case SexecPackage.EXECUTION_STATE__ID:
+				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
+			case SexecPackage.EXECUTION_STATE__ANNOTATIONS:
+				return annotations != null && !annotations.isEmpty();
+			case SexecPackage.EXECUTION_STATE__CONSTRAINT:
+				return constraint != null && !constraint.isEmpty();
+			case SexecPackage.EXECUTION_STATE__ABSTRACT:
+				return abstract_ != ABSTRACT_EDEFAULT;
+			case SexecPackage.EXECUTION_STATE__VISIBLE:
+				return visible != VISIBLE_EDEFAULT;
+			case SexecPackage.EXECUTION_STATE__SUPER_TYPES:
+				return superTypes != null && !superTypes.isEmpty();
+			case SexecPackage.EXECUTION_STATE__TYPE_PARAMETERS:
+				return typeParameters != null && !typeParameters.isEmpty();
+			case SexecPackage.EXECUTION_STATE__FEATURES:
+				return features != null && !features.isEmpty();
 			case SexecPackage.EXECUTION_STATE__LEAF:
 				return leaf != LEAF_EDEFAULT;
 			case SexecPackage.EXECUTION_STATE__ENTRY_ACTION:
@@ -696,6 +1046,39 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 				default: return -1;
 			}
 		}
+		if (baseClass == AnnotatableElement.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == PackageMember.class) {
+			switch (derivedFeatureID) {
+				case SexecPackage.EXECUTION_STATE__ID: return TypesPackage.PACKAGE_MEMBER__ID;
+				case SexecPackage.EXECUTION_STATE__ANNOTATIONS: return TypesPackage.PACKAGE_MEMBER__ANNOTATIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == Type.class) {
+			switch (derivedFeatureID) {
+				case SexecPackage.EXECUTION_STATE__CONSTRAINT: return TypesPackage.TYPE__CONSTRAINT;
+				case SexecPackage.EXECUTION_STATE__ABSTRACT: return TypesPackage.TYPE__ABSTRACT;
+				case SexecPackage.EXECUTION_STATE__VISIBLE: return TypesPackage.TYPE__VISIBLE;
+				case SexecPackage.EXECUTION_STATE__SUPER_TYPES: return TypesPackage.TYPE__SUPER_TYPES;
+				default: return -1;
+			}
+		}
+		if (baseClass == GenericElement.class) {
+			switch (derivedFeatureID) {
+				case SexecPackage.EXECUTION_STATE__TYPE_PARAMETERS: return TypesPackage.GENERIC_ELEMENT__TYPE_PARAMETERS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ComplexType.class) {
+			switch (derivedFeatureID) {
+				case SexecPackage.EXECUTION_STATE__FEATURES: return TypesPackage.COMPLEX_TYPE__FEATURES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -717,6 +1100,39 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 				default: return -1;
 			}
 		}
+		if (baseClass == AnnotatableElement.class) {
+			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == PackageMember.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.PACKAGE_MEMBER__ID: return SexecPackage.EXECUTION_STATE__ID;
+				case TypesPackage.PACKAGE_MEMBER__ANNOTATIONS: return SexecPackage.EXECUTION_STATE__ANNOTATIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == Type.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.TYPE__CONSTRAINT: return SexecPackage.EXECUTION_STATE__CONSTRAINT;
+				case TypesPackage.TYPE__ABSTRACT: return SexecPackage.EXECUTION_STATE__ABSTRACT;
+				case TypesPackage.TYPE__VISIBLE: return SexecPackage.EXECUTION_STATE__VISIBLE;
+				case TypesPackage.TYPE__SUPER_TYPES: return SexecPackage.EXECUTION_STATE__SUPER_TYPES;
+				default: return -1;
+			}
+		}
+		if (baseClass == GenericElement.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.GENERIC_ELEMENT__TYPE_PARAMETERS: return SexecPackage.EXECUTION_STATE__TYPE_PARAMETERS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ComplexType.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.COMPLEX_TYPE__FEATURES: return SexecPackage.EXECUTION_STATE__FEATURES;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -730,7 +1146,11 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (leaf: ");
+		result.append(" (abstract: ");
+		result.append(abstract_);
+		result.append(", visible: ");
+		result.append(visible);
+		result.append(", leaf: ");
 		result.append(leaf);
 		result.append(')');
 		return result.toString();

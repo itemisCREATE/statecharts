@@ -37,6 +37,7 @@ import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.sexec.Reaction
+import org.yakindu.sct.model.sexec.Method
 
 class StepDepthComparator implements Comparator<Step> {
 	@Inject
@@ -56,6 +57,15 @@ class ExecutionScopeDepthComparator implements Comparator<ExecutionScope> {
 	}
 }
 
+class MethodDepthComparator implements Comparator<Method> {
+	@Inject
+	extension SExecExtensions
+
+	override compare(Method o1, Method o2) {
+		return o1.parentExecutionScope.scopeDepth - o2.parentExecutionScope.scopeDepth
+	}
+}
+
 /** Default implementation of the naming service for various identifiers used in the generated code. 
  * It is responsible for identifier construction depending on the thing to be named including different strategies 
  * which also include name shortening.
@@ -68,6 +78,7 @@ class DefaultNamingService implements INamingService {
 	@Inject extension IQualifiedNameProvider
 	@Inject extension StepDepthComparator stepDepthComparator
 	@Inject extension ExecutionScopeDepthComparator executionScopeDepthComparator
+	@Inject extension MethodDepthComparator methodDepthComparator
 	@Inject extension NamingHelper
 
 	@Inject private StextNameProvider provider
@@ -168,6 +179,7 @@ class DefaultNamingService implements INamingService {
 		var HashMap<NamedElement, String> map = new HashMap<NamedElement, String>
 		map.addShortStateNames(flow, maxLength, separator)
 		map.addShortFctNames(flow, maxLength, separator)
+		map.addShortMethodNames(flow, maxLength, separator)
 		map.addShortTimeEventNames(flow, maxLength, separator)
 		return map;
 	}
@@ -185,6 +197,14 @@ class DefaultNamingService implements INamingService {
 			map.putShortName(s, s.prefix(separator), s.suffix(separator), maxLength, separator)
 		}
 	}
+
+	def protected void addShortMethodNames(Map<NamedElement, String> map, ExecutionFlow flow, int maxLength,
+		char separator) {
+		for (s : flow.reactMethods.sortWith(methodDepthComparator)) {
+			map.putShortName(s, s.prefix(separator), s.suffix(separator), maxLength, separator)
+		}
+	}
+
 
 	def protected void addShortTimeEventNames(Map<NamedElement, String> map, ExecutionFlow flow, int maxLength,
 		char separator) {
@@ -244,6 +264,15 @@ class DefaultNamingService implements INamingService {
 	def protected suffix(Step it, char separator) {
 		""
 	}
+
+	def protected prefix(Method it, char separator) {
+		""
+	}
+
+	def protected suffix(Method it, char separator) {
+		""
+	}
+
 
 	def protected prefix(ExecutionState it, char separator) {
 		flow.name
@@ -371,6 +400,10 @@ class DefaultNamingService implements INamingService {
 
 	def protected dispatch String elementName(Vertex it) {
 		return vertexOrRegionName
+	}
+	
+	def protected dispatch String elementName(Method it) {
+		return name
 	}
 
 	def private vertexOrRegionName(NamedElement it) {

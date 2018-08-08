@@ -1538,6 +1538,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		executionNodeEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		executionStateEClass.getESuperTypes().add(this.getExecutionNode());
 		executionStateEClass.getESuperTypes().add(this.getExecutionScope());
+		executionStateEClass.getESuperTypes().add(theTypesPackage.getComplexType());
 		executionScopeEClass.getESuperTypes().add(this.getMappedElement());
 		executionScopeEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		executionRegionEClass.getESuperTypes().add(this.getExecutionScope());

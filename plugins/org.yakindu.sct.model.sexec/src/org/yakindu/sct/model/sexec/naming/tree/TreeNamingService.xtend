@@ -34,6 +34,7 @@ import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
+import org.yakindu.sct.model.sexec.Method
 
 /** New implementation of the naming service for various identifiers used in the generated code. 
  * It is responsible for identifier construction depending on the thing to be named including different strategies 
@@ -139,6 +140,8 @@ class TreeNamingService implements INamingService {
 		for (func : flow.allFunctions) {
 			addElement(func, func.prefix, func.suffix);
 		}
+		
+		flow.reactMethods.forEach[ m | m.addElement(m.prefix, m.suffix)]
 
 		// Create short name for time events of statechart
 		if (flow.sourceElement instanceof Statechart) {
@@ -296,6 +299,11 @@ class TreeNamingService implements INamingService {
 		return l;
 	}
 
+	def protected List<String> prefix(Method it) {
+		return new ArrayList<String>();
+	}
+
+
 	def protected List<String> suffix(ExecutionState it) {
 		return new ArrayList<String>();
 	}
@@ -305,6 +313,11 @@ class TreeNamingService implements INamingService {
 		// l.add(activeFlow.name);
 		return l;
 	}
+
+	def protected List<String> suffix(Method it) {
+		return new ArrayList<String>();
+	}
+
 
 	def protected List<String> suffix(TimeEventSpec it, NamedElement element) {
 		var l = new ArrayList<String>();

@@ -10,6 +10,8 @@
 */
 package org.yakindu.sct.model.sexec;
 
+import org.yakindu.base.types.ComplexType;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -29,7 +31,7 @@ package org.yakindu.sct.model.sexec;
  * @model
  * @generated
  */
-public interface ExecutionState extends ExecutionNode, ExecutionScope {
+public interface ExecutionState extends ExecutionNode, ExecutionScope, ComplexType {
 	/**
 	 * Returns the value of the '<em><b>Entry Action</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
