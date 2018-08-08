@@ -27,6 +27,9 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sexec.Method
+import org.yakindu.sct.model.sexec.ExecutionState
+import java.util.concurrent.ForkJoinPool
 
 class StatemachineSource implements IContentTemplate {
 	
@@ -345,6 +348,7 @@ class StatemachineSource implements IContentTemplate {
 		«enterSequenceFunctions.toPrototypes»
 		«exitSequenceFunctions.toPrototypes»
 		«reactFunctions.toPrototypes»
+		«reactMethods.toDeclarations»
 		static void «clearInEventsFctID»(«scHandleDecl»);
 		static void «clearOutEventsFctID»(«scHandleDecl»);
 	'''
@@ -357,11 +361,31 @@ class StatemachineSource implements IContentTemplate {
 		«ENDFOR»
 	'''
 	
+	def toPrototype(Method it) '''
+		static «typeSpecifier.targetLanguageName» «shortName»(const «scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR»);
+	'''
+	
+	def asStateFunction(Method it) {
+		name + "_" + state.shortName
+	}
+	
+	def ExecutionState state(Method it) {
+		if (eContainer instanceof ExecutionState) eContainer as ExecutionState
+		else null
+	}
+	
+	def toDeclarations(List<Method> steps) '''
+		«FOR s : steps»
+			«s.toPrototype»
+		«ENDFOR»
+	'''
+	
 	def toPrototypes(List<Step> steps) '''
 		«FOR s : steps»
 			«s.functionPrototype»
 		«ENDFOR»
 	'''
+	
 	
 	def dispatch functionPrototype(Check it) '''
 		static sc_boolean «shortName»(const «scHandleDecl»);
@@ -388,8 +412,23 @@ class StatemachineSource implements IContentTemplate {
 		«enterSequenceFunctions.toImplementation»
 		«exitSequenceFunctions.toImplementation»
 		«reactFunctions.toImplementation»
+		«reactMethods.toDefinitions»
 		
 	'''
+	 
+	 def toDefinitions(List<Method> methods) '''
+	 	«FOR m : methods»
+	 		«m.implementation»
+	 	«ENDFOR»
+	 '''
+	 
+	 
+	 def implementation(Method it) '''
+	 	«typeSpecifier.targetLanguageName» «shortName»(const «scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR») {
+	 		«body.code»
+	 	}
+	 '''
+	 
 	 
 	def toImplementation(List<Step> steps) '''
 		«FOR s : steps»

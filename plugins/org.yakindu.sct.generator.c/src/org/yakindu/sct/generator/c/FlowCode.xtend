@@ -33,6 +33,7 @@ import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.sexec.Return
 
 class FlowCode {
 	
@@ -155,4 +156,9 @@ class FlowCode {
 		«scHandle»->stateConfVector[«state.stateVector.offset»] = «null_state»;
 		«scHandle»->stateConfVectorPosition = «state.stateVector.offset»;
 	'''
+	
+	def dispatch CharSequence code(Return it) '''
+		return«IF value !== null» «value.code»«ENDIF»;
+	'''
+	
 }
