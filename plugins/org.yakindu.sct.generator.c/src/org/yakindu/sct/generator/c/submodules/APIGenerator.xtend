@@ -172,14 +172,14 @@ class APIGenerator {
 							result = (sc_boolean) («IF s.leaf»«scHandle»->stateConfVector[«s.stateVectorDefine»] == «s.stateName»
 							«ELSE»«scHandle»->stateConfVector[«s.stateVectorDefine»] >= «s.stateName»
 								&& «scHandle»->stateConfVector[«s.stateVectorDefine»] <= «s.subStates.last.stateName»«ENDIF»);
-								break;
-						«ENDFOR»
-						default:
-							result = bool_false;
 							break;
-					}
-					return result;
+					«ENDFOR»
+					default:
+						result = bool_false;
+						break;
 				}
+				return result;
+			}
 			'''
 	}
 
