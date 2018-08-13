@@ -1,59 +1,40 @@
 /**
- * Copyright (c) 2017 committers of YAKINDU and others.
+ * Copyright (c) 2018 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  * Contributors:
- *     committers of YAKINDU - initial API and implementation
+ * 	rbeckmann - initial API and implementation
+ * 
  */
-package org.yakindu.sct.generator.c.eventdriven
+package org.yakindu.sct.generator.c.submodules.eventdriven
 
 import com.google.inject.Inject
+import com.google.inject.Singleton
 import org.yakindu.sct.generator.c.extensions.EventNaming
-import org.yakindu.sct.generator.c.extensions.Naming
-import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.c.submodules.StatechartTypes
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
-import org.yakindu.sct.model.sexec.naming.INamingService
 
 /**
- * @author René Beckmann
+ * @author rbeckmann
+ *
  */
-class StatechartEventsHeader {
-	@Inject protected extension Naming
-	@Inject protected extension SExecExtensions
-	@Inject protected extension ICodegenTypeSystemAccess
-	@Inject protected extension INamingService
+@Singleton // Guice
+class EventDrivenStatechartTypes extends StatechartTypes {
+	@Inject protected extension EventNaming
 	
-	@Inject extension EventNaming eventNaming
-	
-	protected static final int BUFFER_SIZE = 20
-	
-	def content(ExecutionFlow it) {
-		if(!hasLocalEvents) {
-			return ''''''
-		}
+	override statemachineStructContent(ExecutionFlow it) {
 		'''
-		#ifndef «bufferSize»
-		#define «bufferSize» «BUFFER_SIZE»
-		#endif
-		#ifndef SC_INVALID_EVENT_VALUE
-		#define SC_INVALID_EVENT_VALUE 0
-		#endif
-		
-		«generateEventsEnum»
-		
-		«generateEventValueUnion»
-		
-		«generateEventStruct»
-		
-		«generateEventQueue»
+		«super.statemachineStructContent(it)»
+		«IF hasLocalEvents»
+		«eventQueueTypeName» internal_event_queue;
+		«ENDIF»
 		'''
 	}
 	
 	def generateEventsEnum(ExecutionFlow it) {
+		if(!hasLocalEvents) return ''''''
 		'''
 		/*
 		 * Enum of event names in the statechart.
@@ -68,19 +49,21 @@ class StatechartEventsHeader {
 	}
 	
 	def generateEventValueUnion(ExecutionFlow it) {
-		if(!hasLocalEventsWithValue) {
-			return ''''''
-		}
+		if(!isEventValueUnionNeeded) return ''''''
 		'''
 		/*
 		 * Union of all possible event value types.
 		 */
 		typedef union {
-			«FOR e : internalScope.getLocalEvents.filter[hasValue]»
-			«e.typeSpecifier.targetLanguageName» «eventEnumMemberName(e)»_value;
+			«FOR e : valueUnionEvents»
+			«e.typeSpecifier.targetLanguageName» «eventValueUnionMemberName(e)»;
 			«ENDFOR»
 		} «eventValueUnionName»;
 		'''
+	}
+	
+	def isEventValueUnionNeeded(ExecutionFlow it) {
+		!valueUnionEvents.empty
 	}
 	
 	def generateEventStruct(ExecutionFlow it) {
@@ -94,7 +77,7 @@ class StatechartEventsHeader {
 			sc_boolean has_value;
 			«eventValueUnionName» value;
 			«ENDIF»
-		} «eventStructTypeName»;
+		} «internalEventStructTypeName»;
 		'''
 	}
 
@@ -104,7 +87,7 @@ class StatechartEventsHeader {
 		 * Queue that holds the raised events.
 		 */
 		typedef struct «eventQueueTypeName»_s {
-			«eventStructTypeName» events[«bufferSize»];
+			«internalEventStructTypeName» events[«bufferSize»];
 			sc_integer pop_index;
 			sc_integer push_index;
 			sc_integer size;
@@ -112,7 +95,7 @@ class StatechartEventsHeader {
 		'''
 	}
 	
-	def generateHeaderDefineGuard(ExecutionFlow it) {
-		'''SCT_EVENTS_«name.toUpperCase»_H'''
+	def valueUnionEvents(ExecutionFlow it) {
+		localEvents.filter[hasValue]
 	}
 }
