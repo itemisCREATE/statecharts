@@ -119,7 +119,7 @@ Another realized search feature is to find references of model elements. You can
 * model elements in the project explorer
 * referenced object in syntax checking editors inside statechart models like the _Definition Section_ or _State Behavior_ editor 
 
-This will search for usages of the same element in the local statechart and display them in the "search view":search_and_nav_search_view. Using this method can help you to save time searching for usages of variables, events and operations inside your statechart.
+This will search for usages of the same element in the local statechart and display them in the "search view":#search_and_nav_search_view. Using this method can help you to save time searching for usages of variables, events and operations inside your statechart.
 
 The next section introduces the differences between the first method and this method.
 
