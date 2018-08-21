@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.base.types.typesystem;
 
@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -39,18 +40,18 @@ import com.google.common.collect.Lists;
 /**
  * Abstract base implementation if {@link ITypeSystem}. Provides convenience
  * methods to determine type compatibility.
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public abstract class AbstractTypeSystem implements ITypeSystem {
 
-	protected Map<String, Type> typeRegistry = new HashMap<String, Type>();
+	protected Map<String, Type> typeRegistry = new HashMap<>();
 	protected ListMultimap<Type, Type> extendsRegistry = ArrayListMultimap.create();
 	protected ListMultimap<Type, Operation> extensionOperationRegistry = ArrayListMultimap.create();
 	protected ListMultimap<Type, Property> extensionPropertyRegistry = ArrayListMultimap.create();
 
-	protected Map<Type, Type> conversionRegistry = new HashMap<Type, Type>();
+	protected Map<Type, Type> conversionRegistry = new HashMap<>();
 
 	protected abstract void initRegistries();
 
@@ -87,7 +88,7 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	 */
 	@Override
 	public List<Type> getSuperTypes(Type type) {
-		Set<Type> allSuperTypes = new LinkedHashSet<Type>();
+		Set<Type> allSuperTypes = new LinkedHashSet<>();
 		collectSupertypes(type, allSuperTypes);
 		return Lists.newArrayList(allSuperTypes);
 	}
@@ -98,13 +99,15 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	 * types.
 	 */
 	protected List<Type> getDirectSuperTypes(Type type) {
-		List<Type> superTypes = new ArrayList<Type>();
+		List<Type> superTypes = new ArrayList<>();
 		for (Entry<Type, Type> entry : extendsRegistry.entries()) {
 			if (isSame(type, entry.getKey())) {
 				superTypes.add(entry.getValue());
 			}
 		}
-		superTypes.addAll(type.getSuperTypes());
+		List<Type> collect = type.getSuperTypes().stream().map((typeSpecifier) -> typeSpecifier.getType())
+				.collect(Collectors.toList());
+		superTypes.addAll(collect);
 		if (type instanceof TypeParameter) {
 			TypeParameter typeParameter = (TypeParameter) type;
 			Type bound = typeParameter.getBound();
@@ -121,7 +124,7 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	 */
 	@Override
 	public boolean isSuperType(Type subtype, Type supertype) {
-		Set<Type> typehierachy = new LinkedHashSet<Type>();
+		Set<Type> typehierachy = new LinkedHashSet<>();
 		typehierachy.add(subtype);
 		collectSupertypes(subtype, typehierachy);
 		for (Type eObject : typehierachy) {
@@ -155,7 +158,7 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 
 	@Override
 	public Collection<Type> getConcreteTypes() {
-		List<Type> result = new ArrayList<Type>();
+		List<Type> result = new ArrayList<>();
 		for (Type type : getTypes()) {
 			if (!type.isAbstract())
 				result.add(type);
@@ -242,10 +245,10 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		if (isSuperType(type2, type1))
 			return type1;
 
-		Set<Type> typehierachy1 = new LinkedHashSet<Type>();
+		Set<Type> typehierachy1 = new LinkedHashSet<>();
 		collectSupertypes(type1, typehierachy1);
 
-		Set<Type> typehierachy2 = new LinkedHashSet<Type>();
+		Set<Type> typehierachy2 = new LinkedHashSet<>();
 		collectSupertypes(type2, typehierachy2);
 
 		for (Type type : typehierachy1) {

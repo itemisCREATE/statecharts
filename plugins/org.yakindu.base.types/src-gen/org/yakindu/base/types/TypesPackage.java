@@ -285,7 +285,7 @@ public interface TypesPackage extends EPackage {
 	int TYPE__VISIBLE = PACKAGE_MEMBER_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
+	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -814,7 +814,7 @@ public interface TypesPackage extends EPackage {
 	int PRIMITIVE_TYPE__VISIBLE = TYPE__VISIBLE;
 
 	/**
-	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
+	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -886,7 +886,7 @@ public interface TypesPackage extends EPackage {
 	int ENUMERATION_TYPE__VISIBLE = PRIMITIVE_TYPE__VISIBLE;
 
 	/**
-	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
+	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -987,7 +987,7 @@ public interface TypesPackage extends EPackage {
 	int COMPLEX_TYPE__VISIBLE = TYPE__VISIBLE;
 
 	/**
-	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
+	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1198,7 +1198,7 @@ public interface TypesPackage extends EPackage {
 	int TYPE_PARAMETER__VISIBLE = TYPE__VISIBLE;
 
 	/**
-	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
+	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1408,7 +1408,7 @@ public interface TypesPackage extends EPackage {
 	int TYPE_ALIAS__VISIBLE = TYPED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
+	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1583,7 +1583,7 @@ public interface TypesPackage extends EPackage {
 	int ANNOTATION_TYPE__VISIBLE = TYPE__VISIBLE;
 
 	/**
-	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
+	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1704,10 +1704,10 @@ public interface TypesPackage extends EPackage {
 	EAttribute getType_Visible();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.yakindu.base.types.Type#getSuperTypes <em>Super Types</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.types.Type#getSuperTypes <em>Super Types</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Super Types</em>'.
+	 * @return the meta object for the containment reference list '<em>Super Types</em>'.
 	 * @see org.yakindu.base.types.Type#getSuperTypes()
 	 * @see #getType()
 	 * @generated
@@ -2357,7 +2357,7 @@ public interface TypesPackage extends EPackage {
 		EAttribute TYPE__VISIBLE = eINSTANCE.getType_Visible();
 
 		/**
-		 * The meta object literal for the '<em><b>Super Types</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Super Types</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
