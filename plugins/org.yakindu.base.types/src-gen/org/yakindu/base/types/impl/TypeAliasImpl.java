@@ -143,14 +143,14 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	protected boolean visible = VISIBLE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getSuperTypes() <em>Super Types</em>}' reference list.
+	 * The cached value of the '{@link #getSuperTypes() <em>Super Types</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSuperTypes()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Type> superTypes;
+	protected EList<TypeSpecifier> superTypes;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -330,9 +330,9 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Type> getSuperTypes() {
+	public EList<TypeSpecifier> getSuperTypes() {
 		if (superTypes == null) {
-			superTypes = new EObjectResolvingEList<Type>(Type.class, this, TypesPackage.TYPE_ALIAS__SUPER_TYPES);
+			superTypes = new EObjectContainmentEList<TypeSpecifier>(TypeSpecifier.class, this, TypesPackage.TYPE_ALIAS__SUPER_TYPES);
 		}
 		return superTypes;
 	}
@@ -362,6 +362,8 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
 			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
 				return ((InternalEList<?>)getConstraint()).basicRemove(otherEnd, msgs);
+			case TypesPackage.TYPE_ALIAS__SUPER_TYPES:
+				return ((InternalEList<?>)getSuperTypes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -426,7 +428,7 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				return;
 			case TypesPackage.TYPE_ALIAS__SUPER_TYPES:
 				getSuperTypes().clear();
-				getSuperTypes().addAll((Collection<? extends Type>)newValue);
+				getSuperTypes().addAll((Collection<? extends TypeSpecifier>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

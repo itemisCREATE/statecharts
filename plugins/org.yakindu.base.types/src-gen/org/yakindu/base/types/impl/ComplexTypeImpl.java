@@ -19,6 +19,7 @@ import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeParameter;
+import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesPackage;
 
 /**
@@ -76,9 +77,10 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<TypeParameter> getTypeParameters() {
 		if (typeParameters == null) {
-			typeParameters = new EObjectContainmentEList<TypeParameter>(TypeParameter.class, this, TypesPackage.COMPLEX_TYPE__TYPE_PARAMETERS);
+			typeParameters = new EObjectContainmentEList<>(TypeParameter.class, this, TypesPackage.COMPLEX_TYPE__TYPE_PARAMETERS);
 		}
 		return typeParameters;
 	}
@@ -87,20 +89,22 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Declaration> getFeatures() {
 		if (features == null) {
-			features = new EObjectContainmentEList<Declaration>(Declaration.class, this, TypesPackage.COMPLEX_TYPE__FEATURES);
+			features = new EObjectContainmentEList<>(Declaration.class, this, TypesPackage.COMPLEX_TYPE__FEATURES);
 		}
 		return features;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated NOT
 	 */
+	@Override
 	public EList<Declaration> getAllFeatures() {
-		EList<Declaration> features = new BasicEList<Declaration>();
+		EList<Declaration> features = new BasicEList<>();
 		collectFeatures(this, features, new HashSet<Type>());
 		return features;
 	}
@@ -108,14 +112,14 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 	/**
 	 * Performs a simple search to collect all features of the type and all
 	 * super types.
-	 * 
+	 *
 	 */
 	protected void collectFeatures(Type type, List<Declaration> features, Set<Type> visited) {
 		if (type == null || visited.contains(type))
 			return;
 		if (type instanceof ComplexType) {
-			for (Type superType : ((ComplexType) type).getSuperTypes()) {
-				collectFeatures(superType, features, visited);
+			for (TypeSpecifier superType : ((ComplexType) type).getSuperTypes()) {
+				collectFeatures(superType.getType(), features, visited);
 			}
 			features.addAll(((ComplexType) type).getFeatures());
 		}
