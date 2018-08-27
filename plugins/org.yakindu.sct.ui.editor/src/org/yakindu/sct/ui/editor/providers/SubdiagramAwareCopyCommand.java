@@ -100,7 +100,11 @@ public class SubdiagramAwareCopyCommand extends CopyCommand implements ICommand 
 
 		// PATCH START
 		// add all sub diagrams of selected states
-		selection.addAll(getSubDiagrams(views));
+		List<Diagram> subDiagrams = getSubDiagrams(views);
+		selection.addAll(subDiagrams);
+		for (Diagram diagram : subDiagrams) {
+			selection.addAll(getInnerEdges(diagram.getChildren()));
+		}
 		// PATCH END
 
 		/* Copy the selection to the string */
