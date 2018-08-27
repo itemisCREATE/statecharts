@@ -42,6 +42,7 @@ import org.eclipse.swt.program.Program;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Monitor;
+import org.eclipse.swt.widgets.Shell;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
 import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
 import org.yakindu.sct.examples.wizard.service.ExampleWizardConstants;
@@ -114,13 +115,20 @@ public class SelectExamplePage extends WizardPage
 	}
 
 	private Rectangle calculatePosition(int scale, int offset) {
-		Monitor monitor = getShell().getDisplay().getActiveShell().getMonitor();
+		Monitor monitor = getMonitor();
 		offset = offset * scale;
 		int width = (monitor.getBounds().width + offset) / scale;
 		int height = (monitor.getBounds().height + offset) / scale;
 		int x = monitor.getBounds().x + (width - offset) / scale;
 		int y = monitor.getBounds().y + (height - offset) / scale;
 		return new Rectangle(x, y, width, height);
+	}
+
+	protected Monitor getMonitor() {
+		Shell shell = getShell();
+		Display display = shell.getDisplay();
+		Shell displayShell = display.getActiveShell();
+		return (displayShell != null ? displayShell : shell).getMonitor();
 	}
 
 	private void createUpdateGroup(Composite root) {
