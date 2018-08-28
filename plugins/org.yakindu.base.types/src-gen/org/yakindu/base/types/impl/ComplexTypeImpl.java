@@ -23,8 +23,9 @@ import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Complex Type</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Complex Type</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
@@ -48,7 +49,8 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 
 	/**
 	 * The cached value of the '{@link #getFeatures() <em>Features</em>}' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getFeatures()
 	 * @generated
 	 * @ordered
@@ -56,7 +58,8 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 	protected EList<Declaration> features;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected ComplexTypeImpl() {
@@ -64,7 +67,8 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -77,22 +81,21 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<TypeParameter> getTypeParameters() {
 		if (typeParameters == null) {
-			typeParameters = new EObjectContainmentEList<>(TypeParameter.class, this, TypesPackage.COMPLEX_TYPE__TYPE_PARAMETERS);
+			typeParameters = new EObjectContainmentEList<TypeParameter>(TypeParameter.class, this, TypesPackage.COMPLEX_TYPE__TYPE_PARAMETERS);
 		}
 		return typeParameters;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<Declaration> getFeatures() {
 		if (features == null) {
-			features = new EObjectContainmentEList<>(Declaration.class, this, TypesPackage.COMPLEX_TYPE__FEATURES);
+			features = new EObjectContainmentEList<Declaration>(Declaration.class, this, TypesPackage.COMPLEX_TYPE__FEATURES);
 		}
 		return features;
 	}
@@ -108,7 +111,7 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 		collectFeatures(this, features, new HashSet<Type>());
 		return features;
 	}
-
+	
 	/**
 	 * Performs a simple search to collect all features of the type and all
 	 * super types.
@@ -127,7 +130,8 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -142,7 +146,8 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -157,7 +162,8 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -177,7 +183,8 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -194,7 +201,8 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -240,4 +248,4 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
-} // ComplexTypeImpl
+} //ComplexTypeImpl

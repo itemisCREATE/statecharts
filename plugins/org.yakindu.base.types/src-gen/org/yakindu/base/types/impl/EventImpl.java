@@ -153,7 +153,7 @@ public class EventImpl extends DeclarationImpl implements Event {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (direction: ");
 		result.append(direction);
 		result.append(')');
