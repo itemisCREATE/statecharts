@@ -254,7 +254,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		if (isInited) return (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
 
 		// Obtain or create and register package
-		TypesPackageImpl theTypesPackage = (TypesPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TypesPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TypesPackageImpl());
+		Object registeredTypesPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		TypesPackageImpl theTypesPackage = registeredTypesPackage instanceof TypesPackageImpl ? (TypesPackageImpl)registeredTypesPackage : new TypesPackageImpl();
 
 		isInited = true;
 
@@ -270,7 +271,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		// Mark meta-data to indicate it can't be changed
 		theTypesPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(TypesPackage.eNS_URI, theTypesPackage);
 		return theTypesPackage;

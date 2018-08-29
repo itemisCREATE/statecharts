@@ -2,12 +2,18 @@
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.yakindu.base.types/src-gen" editDirectory="/org.yakindu.base.types.edit/src"
     modelPluginID="org.yakindu.base.types" modelName="Base" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="6.0" copyrightFields="false">
+    complianceLevel="8.0" copyrightFields="false">
   <foreignModel>base.ecore</foreignModel>
   <genPackages prefix="Base" basePackage="org.yakindu.base" disposableProviderFactory="true"
       ecorePackage="base.ecore#/">
     <genClasses ecoreClass="base.ecore#//NamedElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute base.ecore#//NamedElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="base.ecore#//DocumentedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute base.ecore#//DocumentedElement/documentation"/>
+    </genClasses>
+    <genClasses ecoreClass="base.ecore#//DomainElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute base.ecore#//DomainElement/domainID"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
