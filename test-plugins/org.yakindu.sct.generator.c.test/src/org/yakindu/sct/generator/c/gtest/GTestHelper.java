@@ -84,6 +84,7 @@ public class GTestHelper {
 		IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(getTargetPath());
 		File directory = resource.getLocation().toFile();
 		List<String> command = createCommand();
+		System.out.println(command);
 
 		getCommandExecutor().execute(command, directory);
 	}
