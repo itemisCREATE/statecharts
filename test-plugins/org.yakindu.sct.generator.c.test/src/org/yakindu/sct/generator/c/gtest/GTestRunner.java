@@ -144,12 +144,7 @@ public class GTestRunner extends Runner {
 	}
 
 	private Description createDescription(String testCase, String test) {
-		String name;
-		if (testCases.size() == 1) {
-			name = test;
-		} else {
-			name = testCase + "." + test;
-		}
+		String name = testCase + "." + test;
 		return Description.createTestDescription(testClass, name);
 	}
 
