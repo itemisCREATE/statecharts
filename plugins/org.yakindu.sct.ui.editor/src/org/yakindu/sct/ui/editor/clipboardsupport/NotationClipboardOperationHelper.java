@@ -300,54 +300,69 @@ public class NotationClipboardOperationHelper extends AbstractClipboardSupport {
 	 * they have no target.
 	 * 
 	 */
-	//FIXME: See Ticket #292 Copy&Paste should only copy selected Transitions if valid.
+	// FIXME: See Ticket #292 Copy&Paste should only copy selected Transitions
+	// if valid.
 	public void performPostPasteProcessing(Set pastedEObjects) {
 		for (Object object : pastedEObjects) {
-			if (object instanceof State) {
-				final State state = (State) object;
-				try {
-					new AbstractTransactionalCommand(
-							TransactionUtil.getEditingDomain(state),
-							"Remove invalid connections", null) {
-
-						@Override
-						protected CommandResult doExecuteWithResult(
-								IProgressMonitor monitor, IAdaptable info)
-								throws ExecutionException {
-
-							removeInvalidTransitions(state);
-							
-							return CommandResult.newOKCommandResult();
-						}
-						
-						private void removeInvalidTransitions(State state) {
-							
-							List<Transition> invalidTransitions = new LinkedList<Transition>();
-
-							for (Transition transition : state
-									.getOutgoingTransitions()) {
-								if (transition.getTarget() == null) {
-									invalidTransitions.add(transition);
-								}
-							}
-							
-							state.getOutgoingTransitions().removeAll(
-									invalidTransitions);
-						
-							for (Region region: state.getRegions()) {
-								for (Vertex vertex:region.getVertices()) {
-									if (vertex instanceof State) {
-										removeInvalidTransitions((State) vertex);
-									}
-								}
-							}
-						}
-						
-					}.execute(new NullProgressMonitor(), null);
-				} catch (ExecutionException e) {
-					e.printStackTrace();
-				}
+			if (object instanceof Region) {
+				removeInvalidOutgoingTransitions((Region) object);
 			}
+			if (object instanceof State) {
+				removeInvalidOutgoingTransitions((State) object);
+			}
+		}
+	}
+	
+	protected void removeInvalidOutgoingTransitions(Region region) {
+		for (Vertex vertex : region.getVertices()) {
+			if (vertex instanceof State) {
+				removeInvalidOutgoingTransitions((State) vertex);
+			}
+		}
+	}
+
+	protected void removeInvalidOutgoingTransitions(State state) {
+		try {
+			new AbstractTransactionalCommand(
+					TransactionUtil.getEditingDomain(state),
+					"Remove invalid connections", null) {
+
+				@Override
+				protected CommandResult doExecuteWithResult(
+						IProgressMonitor monitor, IAdaptable info)
+						throws ExecutionException {
+
+					removeInvalidTransitions(state);
+					
+					return CommandResult.newOKCommandResult();
+				}
+				
+				private void removeInvalidTransitions(State state) {
+					
+					List<Transition> invalidTransitions = new LinkedList<Transition>();
+
+					for (Transition transition : state
+							.getOutgoingTransitions()) {
+						if (transition.getTarget() == null) {
+							invalidTransitions.add(transition);
+						}
+					}
+					
+					state.getOutgoingTransitions().removeAll(
+							invalidTransitions);
+				
+					for (Region region: state.getRegions()) {
+						for (Vertex vertex:region.getVertices()) {
+							if (vertex instanceof State) {
+								removeInvalidTransitions((State) vertex);
+							}
+						}
+					}
+				}
+				
+			}.execute(new NullProgressMonitor(), null);
+		} catch (ExecutionException e) {
+			e.printStackTrace();
 		}
 	}
 
