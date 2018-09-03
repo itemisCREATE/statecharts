@@ -37,6 +37,8 @@ import org.yakindu.sct.generator.genmodel.test.util.AbstractSGenTest;
 import org.yakindu.sct.generator.genmodel.test.util.SGenInjectorProvider;
 import org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
+import org.yakindu.sct.model.sgen.FeatureParameter;
+import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 
@@ -191,9 +193,10 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 			fail("Model is of the wrong type");
 		} else {
 			GeneratorModel genModel = (GeneratorModel) model;
-			genModel.getEntries().get(0).getFeatures().get(0).getType().setDeprecated(true);
+			FeatureType type = genModel.getEntries().get(0).getFeatures().get(0).getType();
+			type.setDeprecated(true);
 			AssertableDiagnostics result = tester.validate(genModel);
-			result.assertAny(new MsgPredicate(DEPRECATED));
+			result.assertAny(new MsgPredicate(String.format(DEPRECATED, type.getName())));
 		}
 	}
 
@@ -209,9 +212,10 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 			fail("Model is of the wrong type");
 		} else {
 			GeneratorModel genModel = (GeneratorModel) model;
-			genModel.getEntries().get(0).getFeatures().get(0).getType().getParameters().get(0).setDeprecated(true);
+			FeatureParameter featureParameter = genModel.getEntries().get(0).getFeatures().get(0).getType().getParameters().get(0);
+			featureParameter.setDeprecated(true);
 			AssertableDiagnostics result = tester.validate(genModel);
-			result.assertAny(new MsgPredicate(DEPRECATED));
+			result.assertAny(new MsgPredicate(String.format(DEPRECATED, featureParameter.getName())));
 		}
 	}
 
