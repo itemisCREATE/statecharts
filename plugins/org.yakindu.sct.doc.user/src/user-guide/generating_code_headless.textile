@@ -114,7 +114,7 @@ Within the root folder of your YAKINDU Statechart Tools installation enter one o
 Windows:
 
 bc. 
-scc -d [pathToBasedir] -m project1/default.sgen,project2/default.sct
+scc -d [pathToBasedir] -m project1\default.sgen,project2\default.sct
 
 Linux:
 
