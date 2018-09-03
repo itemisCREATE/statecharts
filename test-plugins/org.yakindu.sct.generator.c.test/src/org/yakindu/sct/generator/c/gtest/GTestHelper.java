@@ -183,28 +183,13 @@ public class GTestHelper {
 		List<String> sourceFiles = getFilesToCompile();
 		getSourceFiles(sourceFiles);
 
-		List<String> command = new ArrayList<String>();
-		command.add(getCompilerCommand());
-		command.add("-o");
-		command.add(getFileName(getTestProgram()));
-		command.add("-O2");
-		if (gTestDirectory != null)
-			command.add("-I" + gTestDirectory + "/include");
-		for (String include : includes) {
-			command.add("-I" + include);
-		}
-		if (gTestDirectory != null)
-			command.add("-L" + gTestDirectory);
-		for (String sourceFile : sourceFiles) {
-			command.add(getFileName(sourceFile));
-		}
-		command.add("-lgtest");
-		command.add("-lgtest_main");
-		command.add("-lm");
-		command.add("-lstdc++");
-		command.add("-pthread");
-		// command.add("-pg");
-		return command;
+		return new CompileGTestCommand()
+			.compiler(getCompilerCommand())
+			.program(getFileName(getTestProgram()))
+			.includes(includes)
+			.sources(sourceFiles)
+			.directory(gTestDirectory)
+			.build();
 	}
 
 	/**
