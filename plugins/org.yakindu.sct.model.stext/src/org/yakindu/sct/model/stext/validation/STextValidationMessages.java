@@ -50,7 +50,7 @@ public interface STextValidationMessages {
 	public static final String REFERENCE_TO_VARIABLE = "Cannot reference a variable in a constant initialization.";
 	public static final String CONST_MUST_HAVE_VALUE_MSG = "A constant definition must specify an initial value.";
 	public static final String CONST_MUST_HAVE_VALUE_CODE = "ConstMustHaveAValue";
-	public static final String CONST_DECLARATION_WITH_READONLY = "The keyword '%s' has no effect on const definitions. Can be removed.";
+	public static final String DECLARATION_WITH_READONLY = "The keyword '%s' has no effect for '%s' definitions. Can be removed.";
 	public static final String REFERENCE_CONSTANT_BEFORE_DEFINED = "Cannot reference a constant from different scope or before it is defined.";
 	public static final String INTERNAL_DECLARATION_UNUSED = "Internal declaration is not used in statechart.";
 	public static final String DECLARATION_DEPRECATED = "The keyword '%s' is deprecated. Can be removed.";

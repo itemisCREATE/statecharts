@@ -267,8 +267,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		if (tokenText == null || tokenText.isEmpty())
 			return;
 		if (tokenText.contains(TypesPackage.Literals.PROPERTY__READONLY.getName()) && tokenText.contains(TypesPackage.Literals.PROPERTY__CONST.getName())) {
-			warning(String.format(STextValidationMessages.CONST_DECLARATION_WITH_READONLY,
-					TypesPackage.Literals.PROPERTY__READONLY.getName()), definition,
+			warning(String.format(STextValidationMessages.DECLARATION_WITH_READONLY,
+					TypesPackage.Literals.PROPERTY__READONLY.getName(), TypesPackage.Literals.PROPERTY__CONST.getName()), definition,
 					TypesPackage.Literals.PROPERTY__READONLY);
 		}
 	}
