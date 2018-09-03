@@ -618,6 +618,15 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	@Test
+	public void checkConstAndReadOnlyDefinitionExpression() {
+		String decl = "internal: const readonly v1:integer";
+		EObject model = super.parseExpression(decl, InternalScope.class.getSimpleName());
+		AssertableDiagnostics result = tester.validate(model);
+		result.assertDiagnosticsCount(1);
+		result.assertWarningContains(String.format(STextJavaValidator.CONST_DECLARATION_WITH_READONLY, "readonly"));
+	}
+
+	@Test
 	public void checkExternalValueDefinitionExpression() {
 		String decl = "internal: var external v1:integer";
 		EObject model = super.parseExpression(decl, InternalScope.class.getSimpleName());

@@ -255,6 +255,23 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			}
 		}
 	}
+	
+	@Check(CheckType.FAST)
+	public void checkConstAndReadOnlyDefinitionExpression(VariableDefinition definition) {
+		// applies only for readonly const definitions
+		if (!definition.isReadonly() && !definition.isConst())
+			return;
+		ICompositeNode definitionNode = NodeModelUtils.getNode(definition);
+		String tokenText = NodeModelUtils.getTokenText(definitionNode);
+
+		if (tokenText == null || tokenText.isEmpty())
+			return;
+		if (tokenText.contains(TypesPackage.Literals.PROPERTY__READONLY.getName()) && tokenText.contains(TypesPackage.Literals.PROPERTY__CONST.getName())) {
+			warning(String.format(STextValidationMessages.CONST_DECLARATION_WITH_READONLY,
+					TypesPackage.Literals.PROPERTY__READONLY.getName()), definition,
+					TypesPackage.Literals.PROPERTY__READONLY);
+		}
+	}
 
 	@Check(CheckType.FAST)
 	public void checkExternalValueDefinitionExpression(VariableDefinition definition) {
