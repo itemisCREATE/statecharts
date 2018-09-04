@@ -16,6 +16,7 @@ import static org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil.get
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.util.EList;
@@ -341,10 +342,13 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 
 		@SuppressWarnings("unchecked")
 		List<Edge> edges = figureCompartment.getDiagram().getEdges();
-		edges.stream().filter(
+		List<Edge> moveEdges = edges.stream().filter(
 				(edge) -> edge.getSource().getDiagram() == subdiagram && edge.getTarget().getDiagram() == subdiagram)
-				.forEach((edge) -> subdiagram.insertEdge(edge));
-		return subdiagram;
+				.collect(Collectors.toList());
+		for (Edge edge2 : moveEdges) {
+			subdiagram.insertEdge(edge2);
+		}
+		return subdiagram;	
 	}
 
 	protected boolean isHorizontal(View child) {
