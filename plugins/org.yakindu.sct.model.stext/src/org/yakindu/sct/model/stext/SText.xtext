@@ -67,7 +67,7 @@ enum Direction returns types::Direction:
 	LOCAL='local' | IN='in' | OUT='out';
 
 VariableDefinition:
-	{VariableDefinition} (const?='const'|'var') ((readonly?='readonly')? & (external?='external')?) name=IDWithKeywords ':' typeSpecifier=TypeSpecifier
+	{VariableDefinition} (const?='const'|'var') ((readonly?='readonly')?) name=IDWithKeywords ':' typeSpecifier=TypeSpecifier
 	('=' initialValue=Expression)?;  
 	
 TypeAliasDefinition:
@@ -179,7 +179,7 @@ IDWithKeywords:
 ;
 
 Keywords:
-	 'namespace' | 'interface' | 'internal' |'import' | 'event' | 'local' | 'in' | 'out' | 'const' | 'var' | 'readonly' | 'external' |
+	 'namespace' | 'interface' | 'internal' |'import' | 'event' | 'local' | 'in' | 'out' | 'const' | 'var' | 'readonly' | 
 	'operation' | 'default' | 'else' | 'raise' | 'valueof' | 'active';
 
 TriggerKeywords:

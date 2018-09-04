@@ -538,22 +538,13 @@ public interface TypesPackage extends EPackage {
 	int PROPERTY__READONLY = DECLARATION_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>External</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__EXTERNAL = DECLARATION_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Property</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 3;
+	int PROPERTY_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1789,17 +1780,6 @@ public interface TypesPackage extends EPackage {
 	EAttribute getProperty_Readonly();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.Property#isExternal <em>External</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>External</em>'.
-	 * @see org.yakindu.base.types.Property#isExternal()
-	 * @see #getProperty()
-	 * @generated
-	 */
-	EAttribute getProperty_External();
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Parameter <em>Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2425,14 +2405,6 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PROPERTY__READONLY = eINSTANCE.getProperty_Readonly();
-
-		/**
-		 * The meta object literal for the '<em><b>External</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PROPERTY__EXTERNAL = eINSTANCE.getProperty_External();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.ParameterImpl <em>Parameter</em>}' class.

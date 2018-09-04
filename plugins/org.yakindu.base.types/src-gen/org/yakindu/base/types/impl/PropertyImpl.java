@@ -22,7 +22,6 @@ import org.yakindu.base.types.TypesPackage;
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.PropertyImpl#isConst <em>Const</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.PropertyImpl#isReadonly <em>Readonly</em>}</li>
- *   <li>{@link org.yakindu.base.types.impl.PropertyImpl#isExternal <em>External</em>}</li>
  * </ul>
  *
  * @generated
@@ -64,25 +63,6 @@ public class PropertyImpl extends DeclarationImpl implements Property {
 	 * @ordered
 	 */
 	protected boolean readonly = READONLY_EDEFAULT;
-	/**
-	 * The default value of the '{@link #isExternal() <em>External</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isExternal()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean EXTERNAL_EDEFAULT = false;
-	/**
-	 * The cached value of the '{@link #isExternal() <em>External</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isExternal()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean external = EXTERNAL_EDEFAULT;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -149,27 +129,6 @@ public class PropertyImpl extends DeclarationImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isExternal() {
-		return external;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setExternal(boolean newExternal) {
-		boolean oldExternal = external;
-		external = newExternal;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.PROPERTY__EXTERNAL, oldExternal, external));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -177,8 +136,6 @@ public class PropertyImpl extends DeclarationImpl implements Property {
 				return isConst();
 			case TypesPackage.PROPERTY__READONLY:
 				return isReadonly();
-			case TypesPackage.PROPERTY__EXTERNAL:
-				return isExternal();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -196,9 +153,6 @@ public class PropertyImpl extends DeclarationImpl implements Property {
 				return;
 			case TypesPackage.PROPERTY__READONLY:
 				setReadonly((Boolean)newValue);
-				return;
-			case TypesPackage.PROPERTY__EXTERNAL:
-				setExternal((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -218,9 +172,6 @@ public class PropertyImpl extends DeclarationImpl implements Property {
 			case TypesPackage.PROPERTY__READONLY:
 				setReadonly(READONLY_EDEFAULT);
 				return;
-			case TypesPackage.PROPERTY__EXTERNAL:
-				setExternal(EXTERNAL_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -237,8 +188,6 @@ public class PropertyImpl extends DeclarationImpl implements Property {
 				return const_ != CONST_EDEFAULT;
 			case TypesPackage.PROPERTY__READONLY:
 				return readonly != READONLY_EDEFAULT;
-			case TypesPackage.PROPERTY__EXTERNAL:
-				return external != EXTERNAL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

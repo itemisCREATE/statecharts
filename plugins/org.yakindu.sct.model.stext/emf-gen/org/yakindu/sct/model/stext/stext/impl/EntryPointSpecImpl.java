@@ -150,7 +150,7 @@ public class EntryPointSpecImpl extends ReactionPropertyImpl implements EntryPoi
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (entrypoint: ");
 		result.append(entrypoint);
 		result.append(')');
