@@ -115,7 +115,6 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		parseExpression("var MyVar : integer = 97", rule);
 		parseExpression("var readonly MyVar : integer", rule);
 		parseExpression("var external MyVar : integer", rule);
-		parseExpression("var readonly external MyVar : integer", rule);
 		parseExpression("var external readonly MyVar : integer", rule);
 		parseExpression("var MyVar : integer = 3 * 3", rule);
 		parseExpression("var MyVar : string = null", rule);
