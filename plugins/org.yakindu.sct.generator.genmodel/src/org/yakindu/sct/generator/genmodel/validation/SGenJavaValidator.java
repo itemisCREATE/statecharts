@@ -69,7 +69,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	public static final String DUPLICATE_FEATURE = "Duplicate feature.";
 	public static final String UNKOWN_GENERATOR = "Unknown generator.";
 	public static final String UNKNOWN_CONTENT_TYPE = "Unknown content type '";
-	public static final String DEPRECATED = "Element '%s' is deprecated and will be removed in the next version.";
+	public static final String DEPRECATED = "Element '%s' is deprecated and will be removed in the next version. ";
 	public static final String EMPTY_SGEN = ".sgen file does not contain any entries.";
 	public static final String INVALID_DOMAIN_ID = "This generator can not be used for domain %s. Valid domains are %s";
 
@@ -256,14 +256,22 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	@Check
 	public void checkDeprecatedParameters(FeatureParameterValue value) {
 		if (value.getParameter().isDeprecated()) {
-			warning(String.format(DEPRECATED, value.getParameter().getName()), value, null);
+			String warning = String.format(DEPRECATED, value.getParameter().getName());
+			if (value.getParameter().getComment() != null) {
+				warning += value.getParameter().getComment();
+			}
+			warning(warning, value, null);
 		}
 	}
-	
+
 	@Check
 	public void checkDeprecatedFeatures(FeatureConfiguration configuration) {
 		if (configuration.getType().isDeprecated()) {
-			warning(String.format(DEPRECATED, configuration.getType().getName()), configuration, null);
+			String warning = String.format(DEPRECATED, configuration.getType().getName());
+			if (configuration.getType().getComment() != null) {
+				warning += configuration.getType().getComment();
+			}
+			warning(warning, configuration, null);
 		}
 	}
 
