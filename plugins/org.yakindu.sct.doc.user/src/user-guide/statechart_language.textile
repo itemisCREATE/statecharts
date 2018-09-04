@@ -567,13 +567,9 @@ Variables that are defined in a named interface have to be referenced using the 
 
 Variables are always typed, see section "&quot;Types&quot;":#sclang_types.
 
-Variables can be _readonly_ (constants):
+Variables can be _readonly_. For this variable the keyword @readonly@ is used. They are only readable by client code, but can also be written from within the statechart:
 
 bc. var readonly pi: real = 3.1415
-
-Variables can be referenced by the environment.
-
-bc. var external variable3: integer = 34
 
 ==<!-- End stext_keyword_var -->==
 
@@ -583,7 +579,7 @@ bc. var external variable3: integer = 34
 
 h3(#sclang_constants). Constants
 
-A variable can be immutable, i.e., *constant*. For this special variable the keyword @const@ is used:
+A variable can be immutable, i.e., *constant*. For this special variable the keyword @const@ is used. These variables can not be written by client code or from within the statechart:
 
 bc. const variable1: real
 
