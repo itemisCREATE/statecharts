@@ -713,15 +713,6 @@ public interface StextPackage extends EPackage {
 	int VARIABLE_DEFINITION__READONLY = TypesPackage.PROPERTY__READONLY;
 
 	/**
-	 * The feature id for the '<em><b>External</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_DEFINITION__EXTERNAL = TypesPackage.PROPERTY__EXTERNAL;
-
-	/**
 	 * The feature id for the '<em><b>Initial Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -913,7 +904,7 @@ public interface StextPackage extends EPackage {
 	int TYPE_ALIAS_DEFINITION__VISIBLE = TypesPackage.TYPE_ALIAS__VISIBLE;
 
 	/**
-	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
+	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

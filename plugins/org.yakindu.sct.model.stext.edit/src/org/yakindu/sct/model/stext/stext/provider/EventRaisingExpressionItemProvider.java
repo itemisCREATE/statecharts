@@ -240,6 +240,11 @@ public class EventRaisingExpressionItemProvider extends ExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
+				 ExpressionsFactory.eINSTANCE.createPostFixUnaryExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
 				 ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
 
 		newChildDescriptors.add
@@ -346,6 +351,11 @@ public class EventRaisingExpressionItemProvider extends ExpressionItemProvider
 			(createChildParameter
 				(StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
 				 ExpressionsFactory.eINSTANCE.createNumericalUnaryExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
+				 ExpressionsFactory.eINSTANCE.createPostFixUnaryExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
