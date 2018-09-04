@@ -465,7 +465,7 @@ Inside the composite state _answeringQuestions_, it is always possible to send a
 
 !images/docu_shallow_history_pause.png(Shallow history [4])!
 
-When the _continue_ event is triggered, the most recent active state inside of the composite state _answeringQuestions_ is activated again. The questionaire doesn't need to answer the previous questions again, it can simply resume.
+When the _continue_ event is triggered, the most recent active state inside of the composite state _answeringQuestions_ is activated again. The respondent doesn't need to answer the previous questions again, he can simply resume.
 
 !images/docu_shallow_history_continue.png(Shallow history [5])!
 
