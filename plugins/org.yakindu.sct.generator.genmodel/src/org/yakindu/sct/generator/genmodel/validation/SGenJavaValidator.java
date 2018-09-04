@@ -38,7 +38,6 @@ import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.generator.core.extensions.ILibraryDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
 import org.yakindu.sct.generator.core.library.IDefaultFeatureValueProvider;
-import org.yakindu.sct.model.sgen.DeprecatableElement;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
@@ -70,7 +69,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	public static final String DUPLICATE_FEATURE = "Duplicate feature.";
 	public static final String UNKOWN_GENERATOR = "Unknown generator.";
 	public static final String UNKNOWN_CONTENT_TYPE = "Unknown content type '";
-	public static final String DEPRECATED = "Element is depricated.";
+	public static final String DEPRECATED = "Element '%s' is deprecated and will be removed in the next version.";
 	public static final String EMPTY_SGEN = ".sgen file does not contain any entries.";
 	public static final String INVALID_DOMAIN_ID = "This generator can not be used for domain %s. Valid domains are %s";
 
@@ -255,12 +254,16 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	}
 
 	@Check
-	public void checkDeprecatedFeatures(GeneratorEntry entry) {
-		Iterable<FeatureConfiguration> features = entry.getFeatures();
-		Iterable<FeatureType> deprecatedFeatures = filter(transform(features, getFeatureType()), isDeprecated());
-		for (FeatureType feature : deprecatedFeatures) {
-			warning(String.format(DEPRECATED + " %s : %s", feature.getName(), feature.getComment()),
-					SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF, feature.getName());
+	public void checkDeprecatedParameters(FeatureParameterValue value) {
+		if (value.getParameter().isDeprecated()) {
+			warning(String.format(DEPRECATED, value.getParameter().getName()), value, null);
+		}
+	}
+	
+	@Check
+	public void checkDeprecatedFeatures(FeatureConfiguration configuration) {
+		if (configuration.getType().isDeprecated()) {
+			warning(String.format(DEPRECATED, configuration.getType().getName()), configuration, null);
 		}
 	}
 
@@ -268,8 +271,9 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	public void checkRequiredParameters(FeatureConfiguration configuration) {
 		GeneratorModel model = (GeneratorModel) EcoreUtil2.getRootContainer(configuration);
 
-		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
-		if(!generatorDescriptor.isPresent()) {
+		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions
+				.getGeneratorDescriptor(model.getGeneratorId());
+		if (!generatorDescriptor.isPresent()) {
 			return;
 		}
 		Iterable<ILibraryDescriptor> libraryDescriptors = LibraryExtensions
@@ -292,16 +296,6 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		}
 	}
 
-	@Check
-	public void checkDeprecatedParameters(GeneratorEntry entry) {
-		Iterable<FeatureParameter> deprecatedParameters = filter(
-				concat(transform(transform(entry.getFeatures(), getFeatureType()), getParameter())), isDeprecated());
-		for (FeatureParameter parameter : deprecatedParameters) {
-			warning(String.format(DEPRECATED + " %s : %s", parameter.getName(), parameter.getComment()),
-					SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF, parameter.getName());
-		}
-	}
-
 	private Function<NamedElement, String> getName() {
 		return new Function<NamedElement, String>() {
 
@@ -316,14 +310,6 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 
 			public boolean apply(FeatureParameter input) {
 				return !input.isOptional();
-			}
-		};
-	}
-
-	private Predicate<DeprecatableElement> isDeprecated() {
-		return new Predicate<DeprecatableElement>() {
-			public boolean apply(DeprecatableElement input) {
-				return input.isDeprecated();
 			}
 		};
 	}
@@ -372,14 +358,6 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 
 			public FeatureTypeLibrary apply(ILibraryDescriptor from) {
 				return (FeatureTypeLibrary) new ResourceSetImpl().getResource(from.getURI(), true).getContents().get(0);
-			}
-		};
-	}
-
-	private static Function<FeatureConfiguration, FeatureType> getFeatureType() {
-		return new Function<FeatureConfiguration, FeatureType>() {
-			public FeatureType apply(FeatureConfiguration input) {
-				return input.getType();
 			}
 		};
 	}
