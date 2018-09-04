@@ -104,8 +104,8 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	}
 
 	/**
-	 * VariableDefinition: {VariableDefinition} 'var' ((readonly?='readonly')? &
-	 * (external?='external')?) name=ID ':' type=[types::Type|FQN] ('='
+	 * VariableDefinition: {VariableDefinition} 'var' ((readonly?='readonly')?) 
+	 * name=ID ':' type=[types::Type|FQN] ('='
 	 * initialValue=Expression)?;
 	 */
 	@Test
@@ -114,8 +114,6 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		parseExpression("var MyVar : integer", rule);
 		parseExpression("var MyVar : integer = 97", rule);
 		parseExpression("var readonly MyVar : integer", rule);
-		parseExpression("var external MyVar : integer", rule);
-		parseExpression("var external readonly MyVar : integer", rule);
 		parseExpression("var MyVar : integer = 3 * 3", rule);
 		parseExpression("var MyVar : string = null", rule);
 	}
