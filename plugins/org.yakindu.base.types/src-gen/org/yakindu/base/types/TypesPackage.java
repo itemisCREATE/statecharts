@@ -385,13 +385,22 @@ public interface TypesPackage extends EPackage {
 	int DECLARATION__ANNOTATIONS = TYPED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARATION__STATIC = TYPED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Declaration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARATION_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 3;
+	int DECLARATION_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -437,6 +446,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION__ANNOTATIONS = DECLARATION__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__STATIC = DECLARATION__STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
@@ -518,6 +536,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY__ANNOTATIONS = DECLARATION__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__STATIC = DECLARATION__STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -710,6 +737,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int EVENT__ANNOTATIONS = DECLARATION__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT__STATIC = DECLARATION__STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Direction</b></em>' attribute.
@@ -1085,6 +1121,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATOR__ANNOTATIONS = DECLARATION__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATOR__STATIC = DECLARATION__STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Owning Enumeration</b></em>' container reference.
@@ -1734,6 +1779,17 @@ public interface TypesPackage extends EPackage {
 	EClass getDeclaration();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.Declaration#isStatic <em>Static</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Static</em>'.
+	 * @see org.yakindu.base.types.Declaration#isStatic()
+	 * @see #getDeclaration()
+	 * @generated
+	 */
+	EAttribute getDeclaration_Static();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Operation <em>Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2371,6 +2427,14 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass DECLARATION = eINSTANCE.getDeclaration();
+
+		/**
+		 * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DECLARATION__STATIC = eINSTANCE.getDeclaration_Static();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.OperationImpl <em>Operation</em>}' class.

@@ -22,7 +22,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//Type/superTypes"/>
       <genOperations ecoreOperation="types.ecore#//Type/getOriginType"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="types.ecore#//Declaration"/>
+    <genClasses image="false" ecoreClass="types.ecore#//Declaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Declaration/static"/>
+    </genClasses>
     <genClasses ecoreClass="types.ecore#//Operation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//Operation/parameters"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Operation/variadic"/>
