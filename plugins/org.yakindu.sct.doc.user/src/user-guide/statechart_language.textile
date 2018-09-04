@@ -127,8 +127,7 @@ A type system or _domain_ specifies which types are available. YAKINDU Statechar
 ==<div class="pro-feature">==
 
 YAKINDU Statechart Tools Professional Edition allows for additional domains to be installed. It includes domains for the following languages:
-* C
-* C++ (At the moment, this domain is in its beta phase only and not yet documented.)
+* C/C++
 
 ###. CHECK: YAKINDU Statechart Tools Professional Edition provides the following domains: C, C++ (beta).
 
