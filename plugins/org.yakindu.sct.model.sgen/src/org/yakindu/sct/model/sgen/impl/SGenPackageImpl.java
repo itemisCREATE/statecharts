@@ -146,7 +146,7 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link SGenPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -160,7 +160,8 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 		if (isInited) return (SGenPackage)EPackage.Registry.INSTANCE.getEPackage(SGenPackage.eNS_URI);
 
 		// Obtain or create and register package
-		SGenPackageImpl theSGenPackage = (SGenPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SGenPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SGenPackageImpl());
+		Object registeredSGenPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		SGenPackageImpl theSGenPackage = registeredSGenPackage instanceof SGenPackageImpl ? (SGenPackageImpl)registeredSGenPackage : new SGenPackageImpl();
 
 		isInited = true;
 
@@ -178,7 +179,6 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 		// Mark meta-data to indicate it can't be changed
 		theSGenPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(SGenPackage.eNS_URI, theSGenPackage);
 		return theSGenPackage;
