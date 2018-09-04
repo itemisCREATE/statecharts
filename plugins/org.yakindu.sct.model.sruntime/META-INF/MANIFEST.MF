@@ -2,6 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU SRuntime Model
 Bundle-SymbolicName: org.yakindu.sct.model.sruntime;singleton:=true
+Automatic-Module-Name: org.yakindu.sct.model.sruntime
 Bundle-Version: 3.4.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: statecharts.org

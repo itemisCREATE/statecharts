@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface EnumerationType extends PrimitiveType {
+public interface EnumerationType extends ComplexType {
 
 	/**
 	 * Returns the value of the '<em><b>Enumerator</b></em>' containment reference list.

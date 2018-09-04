@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.model.sexec.interpreter.test;
+package org.yakindu.sct.model.sexec.interpreter.test.util;
 
 import org.yakindu.sct.domain.generic.simulation.GenericSimulationModule;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
