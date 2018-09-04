@@ -338,6 +338,12 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 			}
 			subdiagram.insertChild(child);
 		}
+
+		@SuppressWarnings("unchecked")
+		List<Edge> edges = figureCompartment.getDiagram().getEdges();
+		edges.stream().filter(
+				(edge) -> edge.getSource().getDiagram() == subdiagram && edge.getTarget().getDiagram() == subdiagram)
+				.forEach((edge) -> subdiagram.insertEdge(edge));
 		return subdiagram;
 	}
 
