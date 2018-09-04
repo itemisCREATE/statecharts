@@ -18,7 +18,6 @@ package org.yakindu.base.types;
  * <ul>
  *   <li>{@link org.yakindu.base.types.Property#isConst <em>Const</em>}</li>
  *   <li>{@link org.yakindu.base.types.Property#isReadonly <em>Readonly</em>}</li>
- *   <li>{@link org.yakindu.base.types.Property#isExternal <em>External</em>}</li>
  * </ul>
  *
  * @see org.yakindu.base.types.TypesPackage#getProperty()
@@ -78,30 +77,4 @@ public interface Property extends Declaration {
 	 * @generated
 	 */
 	void setReadonly(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>External</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>External</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>External</em>' attribute.
-	 * @see #setExternal(boolean)
-	 * @see org.yakindu.base.types.TypesPackage#getProperty_External()
-	 * @model
-	 * @generated
-	 */
-	boolean isExternal();
-
-	/**
-	 * Sets the value of the '{@link org.yakindu.base.types.Property#isExternal <em>External</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>External</em>' attribute.
-	 * @see #isExternal()
-	 * @generated
-	 */
-	void setExternal(boolean value);
 } // Property
