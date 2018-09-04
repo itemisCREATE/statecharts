@@ -445,31 +445,30 @@ p=. Orthogonal states
 
 h3(#sclang_shallow_history_states). Shallow history states
 
-A *shallow history state* is a pseudo state that is placed inside the region of a composite state. It is used to remember the last active state inside a composite state. This makes it possible to jump back to the remembered state instead of starting at the inner initial state again.
+A *shallow history state* is a pseudo state that is placed inside the region of a composite.
+
+
 
 A history state saves the current state exactly when its containing region is left. A shallow history state saves the state of the current level only. If you need to save the status of multiple nested composite states, use a "deep history state":#sclang_deep_history_states.
 
 ==<div class="example">==
 
-###. FIXME: Re-create this example with nice names and even nicer drawings!
-
 The following example, showing the answering of a questionaire, explains this:
 
-!images/docu_shallowHistory01.jpg(Shallow history [1])!
+!images/docu_shallow_history_init.png(Shallow history [1])!
+!images/docu_shallow_history_nextQuestion1.png(Shallow history [2])!
+!images/docu_shallow_history_nextQuestion2.png(Shallow history [3])!
 
-p=. Shallow history &#91;1]
+Inside the composite state _answeringQuestions_, it is always possible to send a _pause_ event, which will enter the _init_ state. At this point, the previous state (=the last answered question) is saved into the shallow history state.
 
-Particularly interesting in this statechart are the _checkProgress_ and _goon_ events. The _checkProgress_ event jumps back to the *init* state while assigning the current progress count to the variable _temp_. The event _goon_ jumps to the shallow history state that was placed inside the composite state.
 
-!images/docu_shallowHistory02.jpg(Shallow history [2])!
 
-p=. Shallow history &#91;2]
+!images/docu_shallow_history_pause.png(Shallow history [4])!
 
-!images/docu_shallowHistory03.jpg(Shallow history [3])!
+When the _continue_ event is triggered, the most recent active state inside of the composite state _answeringQuestions_ is activated again. The questionaire doesn't need to answer the previous questions again, it can simply resume.
 
-p=. Shallow history &#91;3]
+!images/docu_shallow_history_continue.png(Shallow history [5])!
 
-When the _goon_ event is triggered, the most recent active state inside of the composite state *answeringQuestions* is activated again.
 
 ==</div>==
 
