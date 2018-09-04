@@ -58,7 +58,7 @@
     <eLiterals name="IN" value="1" literal="in"/>
     <eLiterals name="OUT" value="2" literal="out"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EnumerationType" eSuperTypes="#//PrimitiveType">
+  <eClassifiers xsi:type="ecore:EClass" name="EnumerationType" eSuperTypes="#//ComplexType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="enumerator" upperBound="-1"
         eType="#//Enumerator" containment="true" eOpposite="#//Enumerator/owningEnumeration"/>
   </eClassifiers>

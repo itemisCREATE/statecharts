@@ -176,8 +176,9 @@ public class TypesSwitch<T> extends Switch<T> {
 			case TypesPackage.ENUMERATION_TYPE: {
 				EnumerationType enumerationType = (EnumerationType)theEObject;
 				T result = caseEnumerationType(enumerationType);
-				if (result == null) result = casePrimitiveType(enumerationType);
+				if (result == null) result = caseComplexType(enumerationType);
 				if (result == null) result = caseType(enumerationType);
+				if (result == null) result = caseGenericElement(enumerationType);
 				if (result == null) result = casePackageMember(enumerationType);
 				if (result == null) result = caseNamedElement(enumerationType);
 				if (result == null) result = caseAnnotatableElement(enumerationType);
