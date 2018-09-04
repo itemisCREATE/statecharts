@@ -310,7 +310,7 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		String scope;
 		List<String> validEventNames = Arrays.asList(
 				new String[] { "namespace", "interface", "internal", "import", "event", "local", "in", "out", "const",
-						"var", "readonly", "external", "operation", "default", "else", "raise", "valueof", "active" });
+						"var", "readonly", "operation", "default", "else", "raise", "valueof", "active" });
 		for (String name : validEventNames) {
 			scope = "interface: in event " + name;
 			parseExpression(scope, StatechartSpecification.class.getSimpleName());
