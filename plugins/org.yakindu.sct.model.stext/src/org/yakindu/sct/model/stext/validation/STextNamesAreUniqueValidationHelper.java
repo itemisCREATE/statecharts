@@ -119,7 +119,7 @@ implements INamesAreUniqueValidationHelper {
 	}
 
 	protected boolean shouldValidateEClass(EClass eC) {
-		return !eC.isSuperTypeOf(SGraphPackage.Literals.STATECHART)
+		return !eC.isSuperTypeOf(SGraphPackage.Literals.STATECHART);
 	}
 
 	protected boolean inSameResource(IEObjectDescription one, IEObjectDescription two) {
