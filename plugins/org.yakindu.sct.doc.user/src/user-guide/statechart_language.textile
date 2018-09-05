@@ -127,7 +127,8 @@ A type system or _domain_ specifies which types are available. YAKINDU Statechar
 ==<div class="pro-feature">==
 
 YAKINDU Statechart Tools Professional Edition allows for additional domains to be installed. It includes domains for the following languages:
-* C/C++
+* C
+* C++
 
 ###. CHECK: YAKINDU Statechart Tools Professional Edition provides the following domains: C, C++ (beta).
 
@@ -566,7 +567,7 @@ Variables that are defined in a named interface have to be referenced using the 
 
 Variables are always typed, see section "&quot;Types&quot;":#sclang_types.
 
-Variables can be _readonly_. For this variable the keyword @readonly@ is used. They are only readable by client code, but can also be written from within the statechart:
+Variables can be made _readonly_ by client code. Such variables are marked by the @readonly@ keyword. Please note that the readonly restriction is imposed on the client code only. Readonly variables can still be modified from within the statechart.
 
 bc. var readonly pi: real = 3.1415
 
@@ -578,7 +579,7 @@ bc. var readonly pi: real = 3.1415
 
 h3(#sclang_constants). Constants
 
-A variable can be immutable, i.e., *constant*. For this special variable the keyword @const@ is used. These variables can not be written by client code or from within the statechart:
+A variable can be immutable, i.e., *constant*. Such variables are marked by the @const@ keyword and can neither be modified by the client code nor from within the statechart.
 
 bc. const variable1: real
 
