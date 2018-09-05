@@ -59,7 +59,7 @@ If you are familiar with Eclipse plugin development then you may want to checkou
 ### How to setup your developer workspace without Oomph
 1. Download Eclipse Oxygen from https://www.eclipse.org/downloads/
 2. Install the current Xtext release -> Help / Install new Software / select 'Oxygen - http://download.eclipse.org/releases/oxygen'
-2.1 Select Modeling / Xtext Complete SDK
+2.1 Select Modeling / Xtext Complete SDK 
 3. Select the Git perspective and clone the following Git Repository:
 https://github.com/Yakindu/statecharts.git
 Select 'Import projects' on the 'working directory' subfolder
@@ -69,6 +69,7 @@ Open the target file and click on the link for setting the target platform (take
 Rightclick on org.yakindu.base.expressions/Expressions.xtext => Run As.. => Generate Xtext Artifacts
 Rightclick on org.yakindu.sct.stext/SText.xtext => Run As.. => Generate Xtext Artifacts
 Rightclick org.yakindu.sct.generator.genmodel/SGen.xtext => Run As.. => Generate Xtext Artifacts
+6. Execute "Clean project" on the `org.yakindu.sct.model.sruntime` project
 
 
 After these steps all projects should compile without errors. To launch a runtime instance which has these projects as installed plugins, just right-click on a project => Run As => Eclipse Application
