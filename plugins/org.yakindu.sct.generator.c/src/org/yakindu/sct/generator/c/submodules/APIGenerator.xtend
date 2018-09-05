@@ -253,7 +253,7 @@ class APIGenerator {
 	}
 	
 	def protected CharSequence raiseTimeEventSignature(ExecutionFlow it) {
-		'''void «raiseTimeEventFctID»(const «type»* handle, sc_eventid evid)'''
+		'''void «raiseTimeEventFctID»(«scHandleDecl», sc_eventid evid)'''
 	}
 	
 }
