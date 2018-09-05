@@ -445,9 +445,7 @@ p=. Orthogonal states
 
 h3(#sclang_shallow_history_states). Shallow history states
 
-A *shallow history state* is a pseudo state that is placed inside the region of a composite.
-
-
+A *shallow history state* is a pseudo state that is placed inside the region of a composite. It is used to remember the last active state inside a composite state. This makes it possible to jump back to the remembered state instead of starting at the inner initial state again.
 
 A history state saves the current state exactly when its containing region is left. A shallow history state saves the state of the current level only. If you need to save the status of multiple nested composite states, use a "deep history state":#sclang_deep_history_states.
 
@@ -459,16 +457,13 @@ The following example, showing the answering of a questionaire, explains this:
 !images/docu_shallow_history_nextQuestion1.png(Shallow history [2])!
 !images/docu_shallow_history_nextQuestion2.png(Shallow history [3])!
 
-Inside the composite state _answeringQuestions_, it is always possible to send a _pause_ event, which will enter the _init_ state. At this point, the previous state (=the last answered question) is saved into the shallow history state.
-
-
+Inside the *answeringQuestions* composite state, it is always possible to send a _pause_ event, which will return to the *init* state. At this point, the previous state, i.e., the last-answered question, is saved to the shallow history state.
 
 !images/docu_shallow_history_pause.png(Shallow history [4])!
 
-When the _continue_ event is triggered, the most recent active state inside of the composite state _answeringQuestions_ is activated again. The respondent doesn't need to answer the previous questions again, he can simply resume.
+When the _continue_ event is triggered, the most recent active state inside of the composite state *answeringQuestions* is activated again. The respondent doesn't have to answer the previous questions again, he can simply resume.
 
 !images/docu_shallow_history_continue.png(Shallow history [5])!
-
 
 ==</div>==
 
