@@ -85,6 +85,7 @@ implements INamesAreUniqueValidationHelper {
 		if (existing != null) {
 			validateEqualName(description, existing, acceptor);
 		} else if (existingLowerCase != null) {
+			validateCapitonym(description, existingLowerCase, acceptor);
 		}
 		if (existingLastElement != null) {
 			duplicateLastElement(description, existingLastElement, acceptor);
