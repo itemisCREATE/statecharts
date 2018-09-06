@@ -26,6 +26,7 @@ import org.yakindu.sct.model.sruntime.SRuntimeFactory
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.base.types.typesystem.ITypeSystem.ANY
+import org.yakindu.base.types.EnumerationType
 
 /**
  * Execution context initializer which recursively builds composite slots for variables with complex types.
@@ -100,6 +101,14 @@ class ComplexTypeAwareContextInitializer extends DefaultExecutionContextInitiali
 				it.value = null
 			]
 		}
+	}
+	
+	def protected dispatch ExecutionSlot transformByType(EnumerationType type, TypedElement element,
+		InferenceResult inferenceResult) {
+		createExecutionVariable => [
+			it.type = type
+			it.init(element)
+		]
 	}
 
 	def protected dispatch ExecutionSlot transformByType(Type type, TypedElement element,
