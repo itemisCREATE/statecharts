@@ -21,7 +21,8 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.yakindu.sct.domain,
  org.eclipse.emf.workspace,
  org.yakindu.sct.model.stext.lib,
- org.eclipse.gmf.runtime.diagram.core
+ org.eclipse.gmf.runtime.diagram.core,
+ org.yakindu.sct.commons
 Import-Package: org.apache.commons.logging,
  org.apache.log4j;visibility:=reexport,
  org.eclipse.xtext.xbase.lib
