@@ -134,8 +134,13 @@ public class CustomCSSHelpHoverProvider extends HelpHoverProvider {
 					.getTooltipAffordanceString();
 			if (BrowserInformationControl.isAvailable(parent)) {
 				String font = "org.eclipse.jdt.ui.javadocfont";
+			
+				
+				boolean areHoverDocsScrollable = true;
+				
+				// resizable flag of BrowserInformationControl causes the scrollbar to be always enabled.
 				BrowserInformationControl iControl = new BrowserInformationControl(
-						parent, font, false) {
+						parent, font, areHoverDocsScrollable) {
 					@Override
 					public IInformationControlCreator getInformationPresenterControlCreator() {
 						return fInformationPresenterControlCreator;
