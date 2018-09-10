@@ -26,7 +26,7 @@ public class LabeledEditPartAppearancePropertySectionFilter extends ShapeEditPar
 
 	public boolean select(Object object) {
 		if (object instanceof BorderItemEditPart || object instanceof EntryEditPart || object instanceof ExitEditPart
-				|| object instanceof ChoiceEditPart || object instanceof SynchronizationEditPart)
+				|| object instanceof ChoiceEditPart)
 			return true;
 		return false;
 	}
