@@ -12,6 +12,8 @@ package org.yakindu.sct.generator.core.execution;
 
 import java.util.List;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.CheckMode;
@@ -28,6 +30,8 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+
+import static org.yakindu.sct.generator.core.GeneratorActivator.PLUGIN_ID;
 
 /**
  * 
@@ -51,16 +55,23 @@ public abstract class AbstractGeneratorEntryExecutor implements IGeneratorEntryE
 	protected abstract void execute(ISCTFileSystemAccess access, GeneratorEntry generatorEntry);
 
 	@Override
-	public void execute(GeneratorEntry entry) {
+	public IStatus execute(GeneratorEntry entry) {
+		IStatus status = Status.OK_STATUS;
+		
 		logStart(entry);
 		if (valid(entry)) {
 			try {
 				execute(factory.create(entry), entry);
 			} catch (Exception ex) {
 				logger.logError(ex);
+				status = new Status(IStatus.ERROR, PLUGIN_ID, ex.getMessage());
 			}
+		} else {
+			status = new Status(IStatus.ERROR, PLUGIN_ID,
+					"The referenced model (" + ((NamedElement) entry.getElementRef()).getName() + ") contains errors. See console log for more details.");
 		}
 		logEnd(entry);
+		return status;
 	}
 
 	protected void logStart(GeneratorEntry entry) {
@@ -93,7 +104,7 @@ public abstract class AbstractGeneratorEntryExecutor implements IGeneratorEntryE
 			}
 		});
 		if (!Iterables.isEmpty(errors)) {
-			logger.log("The referenced model(" + ((NamedElement) entry.getElementRef()).getName()
+			logger.log("The referenced model (" + ((NamedElement) entry.getElementRef()).getName()
 					+ ") contains errors and could not be generated:");
 			for (Issue issue : errors) {
 				logger.log(issue.getMessage());

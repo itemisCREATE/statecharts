@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.generator.core.execution;
 
+import org.eclipse.core.runtime.IStatus;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 /**
@@ -21,6 +22,6 @@ public interface IGeneratorEntryExecutor {
 
 	public static final String SKIP_VALIDATION = "skipValidation";
 	
-	public void execute(GeneratorEntry entry);
+	public IStatus execute(GeneratorEntry entry);
 
 }
