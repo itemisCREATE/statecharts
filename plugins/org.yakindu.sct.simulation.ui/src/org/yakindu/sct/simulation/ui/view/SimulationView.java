@@ -226,15 +226,15 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		if (viewerRefresher == null)
 			this.viewerRefresher = new ViewerRefresher();
 
-		if (input == null) {
-			viewerRefresher.cancel = true;
-		}
-
 		Display.getDefault().asyncExec(() -> {
+			if (input == null) {
+				viewerRefresher.cancel = true;
+			} else {
+				if (this.viewerRefresher.isCancel())
+					this.viewerRefresher.cancel = false;
+				new Thread(viewerRefresher).start();
+			}
 			this.viewer.setInput(input);
-			if (this.viewerRefresher.isCancel())
-				this.viewerRefresher.cancel = false;
-			new Thread(viewerRefresher).start();
 		});
 
 	}
@@ -242,13 +242,13 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	protected void handleDebugEvent(DebugEvent debugEvent) {
 		updateActions();
 		switch (debugEvent.getKind()) {
-			case DebugEvent.TERMINATE :
-				setViewerInput(null);
-				break;
-			case DebugEvent.SUSPEND :
-				break;
-			case DebugEvent.RESUME :
-				break;
+		case DebugEvent.TERMINATE:
+			setViewerInput(null);
+			break;
+		case DebugEvent.SUSPEND:
+			break;
+		case DebugEvent.RESUME:
+			break;
 		}
 		Display.getDefault().asyncExec(() -> {
 			if (debugEvent.getSource() != null) {
@@ -528,7 +528,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 				}
 			}
 		}
-		
+
 		protected void updateTimestamp(long timestamp) {
 			String formatDurationHMS = DurationFormatUtils.formatDuration(timestamp,
 					(timestamp == 0 ? "--:--:--.---" : "HH:mm:ss.SSS"), true);
