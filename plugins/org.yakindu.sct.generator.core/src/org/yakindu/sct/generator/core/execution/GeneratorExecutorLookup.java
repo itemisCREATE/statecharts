@@ -32,6 +32,8 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.util.Modules;
 
+import static org.yakindu.sct.generator.core.GeneratorActivator.PLUGIN_ID;
+
 /**
  *
  * @author andreas muelder - Initial contribution and API
@@ -49,7 +51,7 @@ public class GeneratorExecutorLookup {
 
 	public IStatus execute(GeneratorModel model) {
 		EList<GeneratorEntry> entries = model.getEntries();
-		ExecutionStatus executionStatus = new ExecutionStatus("org.yakindu.sct.generator.core", IStatus.OK, "", null);
+		ExecutionStatus executionStatus = new ExecutionStatus(PLUGIN_ID, IStatus.OK, "", null);
 		for (GeneratorEntry generatorEntry : entries) {
 			final IGeneratorEntryExecutor executor = createExecutor(generatorEntry, model.getGeneratorId());
 			IStatus status = executor.execute(generatorEntry);
@@ -91,18 +93,18 @@ public class GeneratorExecutorLookup {
 		}
 		return module;
 	}
-	
+
 	private static class ExecutionStatus extends MultiStatus {
 
 		public ExecutionStatus(String pluginId, int code, String message, Throwable exception) {
 			super(pluginId, code, message, exception);
 		}
-		
+
 		@Override
 		public String getMessage() {
 			Iterable<String> messages = Iterables.transform(Arrays.asList(getChildren()), c -> c.getMessage());
 			return String.join("\n", messages);
 		}
-		
+
 	}
 }
