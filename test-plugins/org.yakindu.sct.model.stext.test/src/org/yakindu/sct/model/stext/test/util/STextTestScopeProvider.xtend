@@ -99,6 +99,8 @@ class STextTestScopeProvider extends STextScopeProvider {
 		addToIndex(descriptions, createOperationWithMixedOptionalParameters)
 		addToIndex(descriptions, createOperationWithMixedOptionalAndVarargsParameters)
 		
+		addToIndex(descriptions, createComplexTypeWithOverloadedOperations)
+		
 		return new SimpleScope(descriptions)
 	}
 	
@@ -225,6 +227,30 @@ class STextTestScopeProvider extends STextScopeProvider {
 			ct.features += createOperation => [op |
 				op.name = "op2"
 				op.typeSpecifier = ct.typeParameters.get(1).toTypeSpecifier
+			]
+		]
+		complexType.addToResource
+		complexType
+	}
+	
+	/** 
+	 * ComplexTypeWithOverloadedOperations {
+	 *   integer overloaded(integer p);
+	 *   bool overloaded(bool p);
+	 * }
+	 */
+	def protected ComplexType createComplexTypeWithOverloadedOperations() {
+		val complexType = createComplexType => [ct |
+			ct.name = "ComplexTypeWithOverloadedOperations"
+			ct.features += createOperation => [op |
+				op.name = "overloaded"
+				op.parameters += createParameter("p", ts.getType(INTEGER))
+				op.typeSpecifier = ts.getType(INTEGER).toTypeSpecifier
+			]
+			ct.features += createOperation => [op |
+				op.name = "overloaded"
+				op.parameters += createParameter("p", ts.getType(BOOLEAN))
+				op.typeSpecifier = ts.getType(BOOLEAN).toTypeSpecifier
 			]
 		]
 		complexType.addToResource

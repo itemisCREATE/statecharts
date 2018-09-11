@@ -1079,4 +1079,19 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		expectError("r = cmo.genericOp(false, 2)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
 		expectError("b = cmo.genericOp(1.3, 2)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
 	}
+	
+	@Test
+	public void testOperationOverloading() {
+		String scopes = ""
+				+ "internal "
+				+ "var b : boolean "
+				+ "var i : integer "
+				+ "var owner: ComplexTypeWithOverloadedOperations ";
+		
+		expectNoErrors("i = owner.overloaded(1)", scopes);
+		assertTrue(isIntegerType(inferTypeResultForExpression("i = owner.overloaded(1)", scopes).getType()));
+
+		expectNoErrors("b = owner.overloaded(true)", scopes);
+		assertTrue(isBooleanType(inferTypeResultForExpression("b = owner.overloaded(true)", scopes).getType()));
+	}
 }
