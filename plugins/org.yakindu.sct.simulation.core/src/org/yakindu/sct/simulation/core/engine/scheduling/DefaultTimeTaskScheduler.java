@@ -116,7 +116,7 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 
 	@Override
 	public void unscheduleTimeTask(String eventName) {
-		Optional<TimeTask> timerTask = getTask(eventName);
+		Optional<TimeTask> timerTask = getActiveTask(eventName);
 		if (timerTask.isPresent())
 			timerTask.get().cancel();
 	}
@@ -146,8 +146,8 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 		}
 	}
 
-	protected Optional<TimeTask> getTask(final String eventName) {
-		return tasks.stream().filter((task) -> task.name.equals(eventName)).findFirst();
+	protected Optional<TimeTask> getActiveTask(final String eventName) {
+		return tasks.stream().filter((task) -> task.name.equals(eventName) && !task.isCanceled()).findFirst();
 	}
 
 	protected synchronized void processTasks() {
