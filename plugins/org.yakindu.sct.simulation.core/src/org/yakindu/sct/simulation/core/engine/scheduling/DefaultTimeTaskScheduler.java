@@ -117,8 +117,14 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 	@Override
 	public void unscheduleTimeTask(String eventName) {
 		Optional<TimeTask> timerTask = getActiveTask(eventName);
-		if (timerTask.isPresent())
+		if (timerTask.isPresent()) {
 			timerTask.get().cancel();
+			if (tasks.peek() == timerTask.get()) {
+				lock.lock();
+				topLevelElementCondition.signal();
+				lock.unlock();
+			}
+		}
 	}
 
 	protected void schedulePeriodicalTask(TimeTask task, long interval, long period) {
