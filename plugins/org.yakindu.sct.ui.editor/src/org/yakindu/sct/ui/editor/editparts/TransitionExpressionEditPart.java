@@ -94,6 +94,9 @@ public class TransitionExpressionEditPart extends PlugableExternalXtextLabelEdit
 	protected void refreshVisuals() {
 		super.refreshVisuals();
 		updateTooltip();
+		// initiate new layout pass to avoid text cropping
+		getFigure().getTextFigure().invalidate();
+		getFigure().getTextFigure().revalidate();
 	}
 
 	protected void updateTooltip() {
