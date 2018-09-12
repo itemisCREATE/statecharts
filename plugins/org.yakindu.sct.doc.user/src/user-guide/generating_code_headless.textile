@@ -215,6 +215,6 @@ Upon execution _scc_ searches for _.project_ files which are used to properly in
 
 h4(#hdls_troubleshooting_could_not_resolve_reference_to_eobject). [ERROR] Couldn't resolve reference to EObject
 
-This error usually denotes a configuration problem when using _scc_ in combination with the deep C integration feature. For example, if you are referring to imported C elements in your statechart madels, and the corresponding header files can no more be resolved on your CI build server, the linker is unable to find the referenced C elements and produces this error message. To overcome this problem, you might want to check if your settings in _C/C++ General -> Path and Symbols_ do not contain any paths that do not exist on your build environment. Also make sure that _scc_ can access these settings which are stored in the _.cproject_ file.
+This error usually denotes a configuration problem when using _scc_ in combination with the deep C integration feature. For example, if you are referring to imported C elements in your statechart models, and the corresponding header files can no more be resolved on your CI build server, the linker is unable to find the referenced C elements and produces this error message. To overcome this problem, you might want to check if your settings in _C/C++ General -> Path and Symbols_ do not contain any paths that do not exist on your build environment. Also make sure that _scc_ can access these settings which are stored in the _.cproject_ file.
 
 ==</div>==
