@@ -67,7 +67,7 @@ public class PreferenceInitializer extends DiagramPreferenceInitializer implemen
 		// Live validation
 		getPreferenceStore().setDefault(StatechartPreferenceConstants.PREF_LIVE_VALIDATION, true);
 		// Syntax coloring
-		getPreferenceStore().setDefault(StatechartPreferenceConstants.PREF_SYNTAX_COLORING, false);
+		getPreferenceStore().setDefault(StatechartPreferenceConstants.PREF_SYNTAX_COLORING, true);
 		//Font scaling
 		getPreferenceStore().setDefault(StatechartPreferenceConstants.PREF_FONT_SCALING, false);
 
