@@ -152,8 +152,8 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 		}
 	}
 
-	protected Optional<TimeTask> getActiveTask(final String eventName) {
-		return tasks.stream().filter((task) -> task.name.equals(eventName) && !task.isCanceled()).findFirst();
+	protected synchronized Optional<TimeTask> getActiveTask(final String eventName) {
+		return tasks.stream().filter((task) -> !task.isCanceled() && task.name.equals(eventName)).findFirst();
 	}
 
 	protected synchronized void processTasks() {
