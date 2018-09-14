@@ -32,17 +32,7 @@ public class DomainNavigatorItem extends PlatformObject {
 		Platform.getAdapterManager().registerAdapters(new IAdapterFactory() {
 
 			public Object getAdapter(Object adaptableObject, Class adapterType) {
-				if (adaptableObject instanceof DomainNavigatorItem) {
-					DomainNavigatorItem domainNavigatorItem = (DomainNavigatorItem) adaptableObject;
-					EObject eObject = domainNavigatorItem.getEObject();
-					if (adapterType == EObject.class) {
-						return eObject;
-					}
-					if (adapterType == IPropertySource.class) {
-						return domainNavigatorItem.getPropertySourceProvider()
-								.getPropertySource(eObject);
-					}
-				}
+				// always show empty property view of navigator content
 				return null;
 			}
 
