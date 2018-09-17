@@ -6,22 +6,61 @@ testclass ChildFirstOrthogonalReactions for statechart executionorder.ChildFirst
 	operation set_up() {
 		counter = 0
 	}
+		
 	
-	operation foo(id : string) : boolean {
-		return false
+	operation checkA(ret : boolean) : boolean {
+		cnt = cnt+1
+		a_check = cnt
+		return ret
+	}
+	
+	operation checkAA(ret : boolean) : boolean {
+		cnt = cnt+1
+		aa_check = cnt
+		return ret
+
+	}
+
+	operation checkAAA(ret : boolean) : boolean {
+		cnt = cnt+1
+		aaa_check = cnt
+		return ret
+	}
+
+	operation checkAAC(ret : boolean) : boolean {
+		cnt = cnt+1
+		aac_check = cnt
+		return ret
+	}
+	
+	operation checkAC(ret : boolean) : boolean {
+		cnt = cnt+1
+		ac_check = cnt
+		return ret
+	}
+	
+	operation checkC(ret : boolean) : boolean {
+		cnt = cnt+1
+		c_check = cnt
+		return ret
+	}
+	
+	operation nextCounter() : integer {
+		cnt = cnt+1
+		return cnt
 	}
 	
 	@Test operation executionOrder() {
 	
 		set_up
 			
-		mock check("A") returns ( foo(id) ) // (a_check = (counter+=1)) == checkFail )
-		mock check("AA") returns ( (aa_check = (counter+=1)) == checkFail )
-		mock check("AAA") returns ( (aaa_check = (counter+=1)) == checkFail )
-		mock check("AAC") returns ( (aac_check = (counter+=1)) == checkFail )
-		mock check("AC") returns ( (ac_check = (counter+=1)) == checkFail )
-		mock check("C") returns ( (c_check = (counter+=1)) == checkFail )
-		mock next() returns (counter+=1)
+		mock check("A")		returns ( checkA(false) )
+		mock check("AA")		returns ( checkAA(false) )
+		mock check("AAA")	returns ( checkAAA(no) )
+		mock check("AAC")	returns ( checkAAC(false) )
+		mock check("AC")		returns ( checkAC(false) )
+		mock check("C")		returns ( checkC(false) )
+		mock next()			returns ( nextCounter() )
 		
 		enter
 		proceed 1 cycle
@@ -50,14 +89,15 @@ testclass ChildFirstOrthogonalReactions for statechart executionorder.ChildFirst
 	@Test operation executionOrderWIthFirstLeafTransition() {
 		
 		set_up
+				
+		mock check("A")		returns ( checkA(false) )
+		mock check("AA")		returns ( checkAA(false) )
+		mock check("AAA")	returns ( checkAAA(true) )
+		mock check("AAC")	returns ( checkAAC(false) )
+		mock check("AC")		returns ( checkAC(false) )
+		mock check("C")		returns ( checkC(false) )
+		mock next()			returns ( nextCounter() )
 		
-		mock check("A") returns ( (a_check = (counter+=1)) == checkFail )
-		mock check("AA") returns ( (aa_check = (counter+=1)) == checkFail )
-		mock check("AAA") returns ( (aaa_check = (counter+=1)) == aaa_check)
-		mock check("AAC") returns ( (aac_check = (counter+=1)) == checkFail )
-		mock check("AC") returns ( (ac_check = (counter+=1)) == checkFail )
-		mock check("C") returns ( (c_check = (counter+=1)) == checkFail )
-		mock next() returns (counter+=1)
 		
 		enter
 		proceed 1 cycle
@@ -87,14 +127,14 @@ testclass ChildFirstOrthogonalReactions for statechart executionorder.ChildFirst
 	@Test operation executionOrderWIthFirstParentTransition() {
 		
 		set_up
-		
-		mock check("A") returns ( (a_check = (counter+=1)) == checkFail )
-		mock check("AA") returns ( (aa_check = (counter+=1)) == aa_check )
-		mock check("AAA") returns ( (aaa_check = (counter+=1)) == checkFail)
-		mock check("AAC") returns ( (aac_check = (counter+=1)) == checkFail )
-		mock check("AC") returns ( (ac_check = (counter+=1)) == checkFail )
-		mock check("C") returns ( (c_check = (counter+=1)) == checkFail )
-		mock next() returns ( counter+=1)
+				
+		mock check("A")		returns ( checkA(false) )
+		mock check("AA")		returns ( checkAA(true) )
+		mock check("AAA")	returns ( checkAAA(false) )
+		mock check("AAC")	returns ( checkAAC(false) )
+		mock check("AC")		returns ( checkAC(false) )
+		mock check("C")		returns ( checkC(false) )
+		mock next()			returns ( nextCounter() )
 		
 		enter
 		proceed 1 cycle
@@ -125,13 +165,13 @@ testclass ChildFirstOrthogonalReactions for statechart executionorder.ChildFirst
 		
 		set_up
 		
-		mock check("A") returns ( (a_check = (counter+=1)) == a_check )
-		mock check("AA") returns ( (aa_check = (counter+=1)) == checkFail )
-		mock check("AAA") returns ( (aaa_check = (counter+=1)) == checkFail)
-		mock check("AAC") returns ( (aac_check = (counter+=1)) == checkFail )
-		mock check("AC") returns ( (ac_check = (counter+=1)) == checkFail )
-		mock check("C") returns ( (c_check = (counter+=1)) == checkFail )
-		mock next() returns (counter+=1)
+		mock check("A")		returns ( checkA(true) )
+		mock check("AA")		returns ( checkAA(false) )
+		mock check("AAA")	returns ( checkAAA(false) )
+		mock check("AAC")	returns ( checkAAC(false) )
+		mock check("AC")		returns ( checkAC(false) )
+		mock check("C")		returns ( checkC(false) )
+		mock next()			returns ( nextCounter() )
 		
 		enter
 		proceed 1 cycle
@@ -162,13 +202,13 @@ testclass ChildFirstOrthogonalReactions for statechart executionorder.ChildFirst
 		
 		set_up
 		
-		mock check("A") returns ( (a_check = (counter+=1)) == checkFail )
-		mock check("AA") returns ( (aa_check = (counter+=1)) == checkFail )
-		mock check("AAA") returns ( (aaa_check = (counter+=1)) == checkFail)
-		mock check("AAC") returns ( (aac_check = (counter+=1)) == checkFail )
-		mock check("AC") returns ( (ac_check = (counter+=1)) == checkFail )
-		mock check("C") returns ( (c_check = (counter+=1)) == c_check )
-		mock next() returns (counter+=1)
+		mock check("A")		returns ( checkA(false) )
+		mock check("AA")		returns ( checkAA(false) )
+		mock check("AAA")	returns ( checkAAA(false) )
+		mock check("AAC")	returns ( checkAAC(false) )
+		mock check("AC")		returns ( checkAC(false) )
+		mock check("C")		returns ( checkC(true) )
+		mock next()			returns ( nextCounter() )
 		
 		enter
 		proceed 1 cycle
