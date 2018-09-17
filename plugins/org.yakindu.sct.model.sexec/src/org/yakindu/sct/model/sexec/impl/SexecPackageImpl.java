@@ -35,6 +35,8 @@ import org.yakindu.sct.model.sexec.ExecutionSynchronization;
 import org.yakindu.sct.model.sexec.ExitState;
 import org.yakindu.sct.model.sexec.HistoryEntry;
 import org.yakindu.sct.model.sexec.If;
+import org.yakindu.sct.model.sexec.LoaclVariableDefinition;
+import org.yakindu.sct.model.sexec.LocalVariableDefinition;
 import org.yakindu.sct.model.sexec.MappedElement;
 import org.yakindu.sct.model.sexec.Method;
 import org.yakindu.sct.model.sexec.Reaction;
@@ -48,6 +50,7 @@ import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sexec.StateCase;
 import org.yakindu.sct.model.sexec.StateSwitch;
 import org.yakindu.sct.model.sexec.StateVector;
+import org.yakindu.sct.model.sexec.Statement;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.TimeEvent;
 import org.yakindu.sct.model.sexec.Trace;
@@ -304,6 +307,20 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * @generated
 	 */
 	private EClass returnEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass localVariableDefinitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass statementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1260,6 +1277,51 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getLocalVariableDefinition() {
+		return localVariableDefinitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getLocalVariableDefinition_Variable() {
+		return (EReference)localVariableDefinitionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getLocalVariableDefinition_InitialValue() {
+		return (EReference)localVariableDefinitionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getStatement() {
+		return statementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStatement_Expression() {
+		return (EReference)statementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getExecutionSynchronization() {
 		return executionSynchronizationEClass;
 	}
@@ -1475,6 +1537,13 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		returnEClass = createEClass(RETURN);
 		createEReference(returnEClass, RETURN__VALUE);
 
+		localVariableDefinitionEClass = createEClass(LOCAL_VARIABLE_DEFINITION);
+		createEReference(localVariableDefinitionEClass, LOCAL_VARIABLE_DEFINITION__VARIABLE);
+		createEReference(localVariableDefinitionEClass, LOCAL_VARIABLE_DEFINITION__INITIAL_VALUE);
+
+		statementEClass = createEClass(STATEMENT);
+		createEReference(statementEClass, STATEMENT__EXPRESSION);
+
 		traceEClass = createEClass(TRACE);
 
 		traceNodeExecutedEClass = createEClass(TRACE_NODE_EXECUTED);
@@ -1536,9 +1605,9 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		executionFlowEClass.getESuperTypes().add(this.getExecutionNode());
 		executionNodeEClass.getESuperTypes().add(this.getMappedElement());
 		executionNodeEClass.getESuperTypes().add(theBasePackage.getNamedElement());
+		executionNodeEClass.getESuperTypes().add(theTypesPackage.getComplexType());
 		executionStateEClass.getESuperTypes().add(this.getExecutionNode());
 		executionStateEClass.getESuperTypes().add(this.getExecutionScope());
-		executionStateEClass.getESuperTypes().add(theTypesPackage.getComplexType());
 		executionScopeEClass.getESuperTypes().add(this.getMappedElement());
 		executionScopeEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		executionRegionEClass.getESuperTypes().add(this.getExecutionScope());
@@ -1565,6 +1634,8 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		saveHistoryEClass.getESuperTypes().add(this.getStep());
 		historyEntryEClass.getESuperTypes().add(this.getStep());
 		returnEClass.getESuperTypes().add(this.getStep());
+		localVariableDefinitionEClass.getESuperTypes().add(this.getStep());
+		statementEClass.getESuperTypes().add(this.getStep());
 		traceEClass.getESuperTypes().add(this.getStep());
 		traceNodeExecutedEClass.getESuperTypes().add(this.getTrace());
 		reactionFiredEClass.getESuperTypes().add(this.getTrace());
@@ -1694,6 +1765,13 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 		initEClass(returnEClass, Return.class, "Return", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getReturn_Value(), theExpressionsPackage.getExpression(), null, "value", null, 0, 1, Return.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(localVariableDefinitionEClass, LocalVariableDefinition.class, "LocalVariableDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLocalVariableDefinition_Variable(), theTypesPackage.getProperty(), null, "variable", null, 0, 1, LocalVariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLocalVariableDefinition_InitialValue(), theExpressionsPackage.getExpression(), null, "initialValue", null, 0, 1, LocalVariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(statementEClass, Statement.class, "Statement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getStatement_Expression(), theExpressionsPackage.getExpression(), null, "expression", null, 0, 1, Statement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(traceEClass, Trace.class, "Trace", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -31,7 +31,7 @@ import org.yakindu.base.types.ComplexType;
  * @model
  * @generated
  */
-public interface ExecutionState extends ExecutionNode, ExecutionScope, ComplexType {
+public interface ExecutionState extends ExecutionNode, ExecutionScope {
 	/**
 	 * Returns the value of the '<em><b>Entry Action</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

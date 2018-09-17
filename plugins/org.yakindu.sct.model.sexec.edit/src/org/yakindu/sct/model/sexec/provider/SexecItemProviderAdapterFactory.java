@@ -814,6 +814,52 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.LocalVariableDefinition} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected LocalVariableDefinitionItemProvider localVariableDefinitionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.LocalVariableDefinition}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createLocalVariableDefinitionAdapter() {
+		if (localVariableDefinitionItemProvider == null) {
+			localVariableDefinitionItemProvider = new LocalVariableDefinitionItemProvider(this);
+		}
+
+		return localVariableDefinitionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.Statement} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StatementItemProvider statementItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.Statement}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createStatementAdapter() {
+		if (statementItemProvider == null) {
+			statementItemProvider = new StatementItemProvider(this);
+		}
+
+		return statementItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.ExecutionSynchronization} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1033,6 +1079,8 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 		if (saveHistoryItemProvider != null) saveHistoryItemProvider.dispose();
 		if (historyEntryItemProvider != null) historyEntryItemProvider.dispose();
 		if (returnItemProvider != null) returnItemProvider.dispose();
+		if (localVariableDefinitionItemProvider != null) localVariableDefinitionItemProvider.dispose();
+		if (statementItemProvider != null) statementItemProvider.dispose();
 		if (traceNodeExecutedItemProvider != null) traceNodeExecutedItemProvider.dispose();
 		if (reactionFiredItemProvider != null) reactionFiredItemProvider.dispose();
 		if (traceReactionWillFireItemProvider != null) traceReactionWillFireItemProvider.dispose();

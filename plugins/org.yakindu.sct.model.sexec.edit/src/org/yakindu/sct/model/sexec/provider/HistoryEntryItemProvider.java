@@ -267,6 +267,16 @@ public class HistoryEntryItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.HISTORY_ENTRY__INITIAL_STEP,
+				 SexecFactory.eINSTANCE.createLocalVariableDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.HISTORY_ENTRY__INITIAL_STEP,
+				 SexecFactory.eINSTANCE.createStatement()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.HISTORY_ENTRY__INITIAL_STEP,
 				 SexecFactory.eINSTANCE.createTraceNodeExecuted()));
 
 		newChildDescriptors.add
@@ -368,6 +378,16 @@ public class HistoryEntryItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.HISTORY_ENTRY__HISTORY_STEP,
 				 SexecFactory.eINSTANCE.createReturn()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.HISTORY_ENTRY__HISTORY_STEP,
+				 SexecFactory.eINSTANCE.createLocalVariableDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.HISTORY_ENTRY__HISTORY_STEP,
+				 SexecFactory.eINSTANCE.createStatement()));
 
 		newChildDescriptors.add
 			(createChildParameter

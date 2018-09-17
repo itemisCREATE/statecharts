@@ -24,6 +24,17 @@ import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.base.types.AnnotatableElement;
+import org.yakindu.base.types.Annotation;
+import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.Declaration;
+import org.yakindu.base.types.GenericElement;
+import org.yakindu.base.types.PackageMember;
+import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypeConstraint;
+import org.yakindu.base.types.TypeParameter;
+import org.yakindu.base.types.TypeSpecifier;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionNode;
 import org.yakindu.sct.model.sexec.ExecutionRegion;
@@ -53,6 +64,14 @@ import org.yakindu.sct.model.sgraph.impl.ScopedElementImpl;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getEnterSequences <em>Enter Sequences</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getExitSequence <em>Exit Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getInitSequence <em>Init Sequence</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getAnnotations <em>Annotations</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getConstraint <em>Constraint</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#isAbstract <em>Abstract</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#isVisible <em>Visible</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getSuperTypes <em>Super Types</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getTypeParameters <em>Type Parameters</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getFeatures <em>Features</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getReactions <em>Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getSimpleName <em>Simple Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getReactSequence <em>React Sequence</em>}</li>
@@ -158,6 +177,106 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * @ordered
 	 */
 	protected Sequence initSequence;
+
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAnnotations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Annotation> annotations;
+
+	/**
+	 * The cached value of the '{@link #getConstraint() <em>Constraint</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstraint()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypeConstraint> constraint;
+
+	/**
+	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean ABSTRACT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean abstract_ = ABSTRACT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isVisible() <em>Visible</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVisible()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean VISIBLE_EDEFAULT = true;
+
+	/**
+	 * The cached value of the '{@link #isVisible() <em>Visible</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVisible()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean visible = VISIBLE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSuperTypes() <em>Super Types</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSuperTypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypeSpecifier> superTypes;
+
+	/**
+	 * The cached value of the '{@link #getTypeParameters() <em>Type Parameters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeParameters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypeParameter> typeParameters;
+
+	/**
+	 * The cached value of the '{@link #getFeatures() <em>Features</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFeatures()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Declaration> features;
 
 	/**
 	 * The cached value of the '{@link #getReactions() <em>Reactions</em>}' containment reference list.
@@ -584,6 +703,119 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * The id is the name of the execution flow.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getId() {
+		return getName();
+	}
+
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Annotation> getAnnotations() {
+		if (annotations == null) {
+			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, SexecPackage.EXECUTION_FLOW__ANNOTATIONS);
+		}
+		return annotations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<TypeConstraint> getConstraint() {
+		if (constraint == null) {
+			constraint = new EObjectContainmentEList<TypeConstraint>(TypeConstraint.class, this, SexecPackage.EXECUTION_FLOW__CONSTRAINT);
+		}
+		return constraint;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isAbstract() {
+		return abstract_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAbstract(boolean newAbstract) {
+		boolean oldAbstract = abstract_;
+		abstract_ = newAbstract;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__ABSTRACT, oldAbstract, abstract_));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isVisible() {
+		return visible;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVisible(boolean newVisible) {
+		boolean oldVisible = visible;
+		visible = newVisible;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__VISIBLE, oldVisible, visible));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<TypeSpecifier> getSuperTypes() {
+		if (superTypes == null) {
+			superTypes = new EObjectContainmentEList<TypeSpecifier>(TypeSpecifier.class, this, SexecPackage.EXECUTION_FLOW__SUPER_TYPES);
+		}
+		return superTypes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<TypeParameter> getTypeParameters() {
+		if (typeParameters == null) {
+			typeParameters = new EObjectContainmentEList<TypeParameter>(TypeParameter.class, this, SexecPackage.EXECUTION_FLOW__TYPE_PARAMETERS);
+		}
+		return typeParameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Declaration> getFeatures() {
+		if (features == null) {
+			features = new EObjectContainmentEList<Declaration>(Declaration.class, this, SexecPackage.EXECUTION_FLOW__FEATURES);
+		}
+		return features;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -783,6 +1015,39 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Declaration> getAllFeatures() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Type getOriginType() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Annotation getAnnotationOfType(String typeName) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Reaction> getReactions() {
 		if (reactions == null) {
 			reactions = new EObjectContainmentEList<Reaction>(Reaction.class, this, SexecPackage.EXECUTION_FLOW__REACTIONS);
@@ -936,6 +1201,16 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return basicSetExitSequence(null, msgs);
 			case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE:
 				return basicSetInitSequence(null, msgs);
+			case SexecPackage.EXECUTION_FLOW__ANNOTATIONS:
+				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
+			case SexecPackage.EXECUTION_FLOW__CONSTRAINT:
+				return ((InternalEList<?>)getConstraint()).basicRemove(otherEnd, msgs);
+			case SexecPackage.EXECUTION_FLOW__SUPER_TYPES:
+				return ((InternalEList<?>)getSuperTypes()).basicRemove(otherEnd, msgs);
+			case SexecPackage.EXECUTION_FLOW__TYPE_PARAMETERS:
+				return ((InternalEList<?>)getTypeParameters()).basicRemove(otherEnd, msgs);
+			case SexecPackage.EXECUTION_FLOW__FEATURES:
+				return ((InternalEList<?>)getFeatures()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_FLOW__REACTIONS:
 				return ((InternalEList<?>)getReactions()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE:
@@ -986,6 +1261,22 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return getExitSequence();
 			case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE:
 				return getInitSequence();
+			case SexecPackage.EXECUTION_FLOW__ID:
+				return getId();
+			case SexecPackage.EXECUTION_FLOW__ANNOTATIONS:
+				return getAnnotations();
+			case SexecPackage.EXECUTION_FLOW__CONSTRAINT:
+				return getConstraint();
+			case SexecPackage.EXECUTION_FLOW__ABSTRACT:
+				return isAbstract();
+			case SexecPackage.EXECUTION_FLOW__VISIBLE:
+				return isVisible();
+			case SexecPackage.EXECUTION_FLOW__SUPER_TYPES:
+				return getSuperTypes();
+			case SexecPackage.EXECUTION_FLOW__TYPE_PARAMETERS:
+				return getTypeParameters();
+			case SexecPackage.EXECUTION_FLOW__FEATURES:
+				return getFeatures();
 			case SexecPackage.EXECUTION_FLOW__REACTIONS:
 				return getReactions();
 			case SexecPackage.EXECUTION_FLOW__SIMPLE_NAME:
@@ -1046,6 +1337,32 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return;
 			case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE:
 				setInitSequence((Sequence)newValue);
+				return;
+			case SexecPackage.EXECUTION_FLOW__ANNOTATIONS:
+				getAnnotations().clear();
+				getAnnotations().addAll((Collection<? extends Annotation>)newValue);
+				return;
+			case SexecPackage.EXECUTION_FLOW__CONSTRAINT:
+				getConstraint().clear();
+				getConstraint().addAll((Collection<? extends TypeConstraint>)newValue);
+				return;
+			case SexecPackage.EXECUTION_FLOW__ABSTRACT:
+				setAbstract((Boolean)newValue);
+				return;
+			case SexecPackage.EXECUTION_FLOW__VISIBLE:
+				setVisible((Boolean)newValue);
+				return;
+			case SexecPackage.EXECUTION_FLOW__SUPER_TYPES:
+				getSuperTypes().clear();
+				getSuperTypes().addAll((Collection<? extends TypeSpecifier>)newValue);
+				return;
+			case SexecPackage.EXECUTION_FLOW__TYPE_PARAMETERS:
+				getTypeParameters().clear();
+				getTypeParameters().addAll((Collection<? extends TypeParameter>)newValue);
+				return;
+			case SexecPackage.EXECUTION_FLOW__FEATURES:
+				getFeatures().clear();
+				getFeatures().addAll((Collection<? extends Declaration>)newValue);
 				return;
 			case SexecPackage.EXECUTION_FLOW__REACTIONS:
 				getReactions().clear();
@@ -1120,6 +1437,27 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE:
 				setInitSequence((Sequence)null);
 				return;
+			case SexecPackage.EXECUTION_FLOW__ANNOTATIONS:
+				getAnnotations().clear();
+				return;
+			case SexecPackage.EXECUTION_FLOW__CONSTRAINT:
+				getConstraint().clear();
+				return;
+			case SexecPackage.EXECUTION_FLOW__ABSTRACT:
+				setAbstract(ABSTRACT_EDEFAULT);
+				return;
+			case SexecPackage.EXECUTION_FLOW__VISIBLE:
+				setVisible(VISIBLE_EDEFAULT);
+				return;
+			case SexecPackage.EXECUTION_FLOW__SUPER_TYPES:
+				getSuperTypes().clear();
+				return;
+			case SexecPackage.EXECUTION_FLOW__TYPE_PARAMETERS:
+				getTypeParameters().clear();
+				return;
+			case SexecPackage.EXECUTION_FLOW__FEATURES:
+				getFeatures().clear();
+				return;
 			case SexecPackage.EXECUTION_FLOW__REACTIONS:
 				getReactions().clear();
 				return;
@@ -1181,6 +1519,22 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return exitSequence != null;
 			case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE:
 				return initSequence != null;
+			case SexecPackage.EXECUTION_FLOW__ID:
+				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
+			case SexecPackage.EXECUTION_FLOW__ANNOTATIONS:
+				return annotations != null && !annotations.isEmpty();
+			case SexecPackage.EXECUTION_FLOW__CONSTRAINT:
+				return constraint != null && !constraint.isEmpty();
+			case SexecPackage.EXECUTION_FLOW__ABSTRACT:
+				return abstract_ != ABSTRACT_EDEFAULT;
+			case SexecPackage.EXECUTION_FLOW__VISIBLE:
+				return visible != VISIBLE_EDEFAULT;
+			case SexecPackage.EXECUTION_FLOW__SUPER_TYPES:
+				return superTypes != null && !superTypes.isEmpty();
+			case SexecPackage.EXECUTION_FLOW__TYPE_PARAMETERS:
+				return typeParameters != null && !typeParameters.isEmpty();
+			case SexecPackage.EXECUTION_FLOW__FEATURES:
+				return features != null && !features.isEmpty();
 			case SexecPackage.EXECUTION_FLOW__REACTIONS:
 				return reactions != null && !reactions.isEmpty();
 			case SexecPackage.EXECUTION_FLOW__SIMPLE_NAME:
@@ -1237,6 +1591,39 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				default: return -1;
 			}
 		}
+		if (baseClass == AnnotatableElement.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == PackageMember.class) {
+			switch (derivedFeatureID) {
+				case SexecPackage.EXECUTION_FLOW__ID: return TypesPackage.PACKAGE_MEMBER__ID;
+				case SexecPackage.EXECUTION_FLOW__ANNOTATIONS: return TypesPackage.PACKAGE_MEMBER__ANNOTATIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == Type.class) {
+			switch (derivedFeatureID) {
+				case SexecPackage.EXECUTION_FLOW__CONSTRAINT: return TypesPackage.TYPE__CONSTRAINT;
+				case SexecPackage.EXECUTION_FLOW__ABSTRACT: return TypesPackage.TYPE__ABSTRACT;
+				case SexecPackage.EXECUTION_FLOW__VISIBLE: return TypesPackage.TYPE__VISIBLE;
+				case SexecPackage.EXECUTION_FLOW__SUPER_TYPES: return TypesPackage.TYPE__SUPER_TYPES;
+				default: return -1;
+			}
+		}
+		if (baseClass == GenericElement.class) {
+			switch (derivedFeatureID) {
+				case SexecPackage.EXECUTION_FLOW__TYPE_PARAMETERS: return TypesPackage.GENERIC_ELEMENT__TYPE_PARAMETERS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ComplexType.class) {
+			switch (derivedFeatureID) {
+				case SexecPackage.EXECUTION_FLOW__FEATURES: return TypesPackage.COMPLEX_TYPE__FEATURES;
+				default: return -1;
+			}
+		}
 		if (baseClass == ExecutionNode.class) {
 			switch (derivedFeatureID) {
 				case SexecPackage.EXECUTION_FLOW__REACTIONS: return SexecPackage.EXECUTION_NODE__REACTIONS;
@@ -1279,6 +1666,39 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				default: return -1;
 			}
 		}
+		if (baseClass == AnnotatableElement.class) {
+			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == PackageMember.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.PACKAGE_MEMBER__ID: return SexecPackage.EXECUTION_FLOW__ID;
+				case TypesPackage.PACKAGE_MEMBER__ANNOTATIONS: return SexecPackage.EXECUTION_FLOW__ANNOTATIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == Type.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.TYPE__CONSTRAINT: return SexecPackage.EXECUTION_FLOW__CONSTRAINT;
+				case TypesPackage.TYPE__ABSTRACT: return SexecPackage.EXECUTION_FLOW__ABSTRACT;
+				case TypesPackage.TYPE__VISIBLE: return SexecPackage.EXECUTION_FLOW__VISIBLE;
+				case TypesPackage.TYPE__SUPER_TYPES: return SexecPackage.EXECUTION_FLOW__SUPER_TYPES;
+				default: return -1;
+			}
+		}
+		if (baseClass == GenericElement.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.GENERIC_ELEMENT__TYPE_PARAMETERS: return SexecPackage.EXECUTION_FLOW__TYPE_PARAMETERS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ComplexType.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.COMPLEX_TYPE__FEATURES: return SexecPackage.EXECUTION_FLOW__FEATURES;
+				default: return -1;
+			}
+		}
 		if (baseClass == ExecutionNode.class) {
 			switch (baseFeatureID) {
 				case SexecPackage.EXECUTION_NODE__REACTIONS: return SexecPackage.EXECUTION_FLOW__REACTIONS;
@@ -1303,6 +1723,10 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", abstract: ");
+		result.append(abstract_);
+		result.append(", visible: ");
+		result.append(visible);
 		result.append(", simpleName: ");
 		result.append(simpleName);
 		result.append(')');

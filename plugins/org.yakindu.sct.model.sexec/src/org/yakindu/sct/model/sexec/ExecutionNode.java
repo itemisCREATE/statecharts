@@ -12,6 +12,7 @@ package org.yakindu.sct.model.sexec;
 
 import org.eclipse.emf.common.util.EList;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.base.types.ComplexType;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,7 +33,7 @@ import org.yakindu.base.base.NamedElement;
  * @model
  * @generated
  */
-public interface ExecutionNode extends MappedElement, NamedElement {
+public interface ExecutionNode extends MappedElement, NamedElement, ComplexType {
 	/**
 	 * Returns the value of the '<em><b>Reactions</b></em>' containment reference list.
 	 * The list contents are of type {@link org.yakindu.sct.model.sexec.Reaction}.

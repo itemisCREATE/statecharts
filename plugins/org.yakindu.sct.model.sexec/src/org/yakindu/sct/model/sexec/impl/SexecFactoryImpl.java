@@ -126,6 +126,8 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 			case SexecPackage.SAVE_HISTORY: return createSaveHistory();
 			case SexecPackage.HISTORY_ENTRY: return createHistoryEntry();
 			case SexecPackage.RETURN: return createReturn();
+			case SexecPackage.LOCAL_VARIABLE_DEFINITION: return createLocalVariableDefinition();
+			case SexecPackage.STATEMENT: return createStatement();
 			case SexecPackage.TRACE_NODE_EXECUTED: return createTraceNodeExecuted();
 			case SexecPackage.REACTION_FIRED: return createReactionFired();
 			case SexecPackage.TRACE_REACTION_WILL_FIRE: return createTraceReactionWillFire();
@@ -456,6 +458,26 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	public Return createReturn() {
 		ReturnImpl return_ = new ReturnImpl();
 		return return_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LocalVariableDefinition createLocalVariableDefinition() {
+		LocalVariableDefinitionImpl localVariableDefinition = new LocalVariableDefinitionImpl();
+		return localVariableDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Statement createStatement() {
+		StatementImpl statement = new StatementImpl();
+		return statement;
 	}
 
 	/**

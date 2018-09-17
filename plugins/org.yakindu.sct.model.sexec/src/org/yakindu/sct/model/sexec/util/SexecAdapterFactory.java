@@ -241,6 +241,14 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 				return createReturnAdapter();
 			}
 			@Override
+			public Adapter caseLocalVariableDefinition(LocalVariableDefinition object) {
+				return createLocalVariableDefinitionAdapter();
+			}
+			@Override
+			public Adapter caseStatement(Statement object) {
+				return createStatementAdapter();
+			}
+			@Override
 			public Adapter caseTrace(Trace object) {
 				return createTraceAdapter();
 			}
@@ -879,6 +887,34 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createReturnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.LocalVariableDefinition <em>Local Variable Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.LocalVariableDefinition
+	 * @generated
+	 */
+	public Adapter createLocalVariableDefinitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.Statement <em>Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.Statement
+	 * @generated
+	 */
+	public Adapter createStatementAdapter() {
 		return null;
 	}
 

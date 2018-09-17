@@ -318,6 +318,24 @@ public interface SexecFactory extends EFactory {
 	Return createReturn();
 
 	/**
+	 * Returns a new object of class '<em>Local Variable Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Local Variable Definition</em>'.
+	 * @generated
+	 */
+	LocalVariableDefinition createLocalVariableDefinition();
+
+	/**
+	 * Returns a new object of class '<em>Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Statement</em>'.
+	 * @generated
+	 */
+	Statement createStatement();
+
+	/**
 	 * Returns a new object of class '<em>Execution Synchronization</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
