@@ -6,12 +6,13 @@
 #include "sc_timer_service.h"
 
 
+void checkDone(sc_boolean shouldBeDone);
+static GuardedExit statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static GuardedExit statechart;
-
+			
 class GuardedExitTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -27,7 +28,7 @@ class GuardedExitTest : public ::testing::Test{
 	}
 };
 
-void checkDone(bool shouldBeDone){
+void checkDone(sc_boolean shouldBeDone){
 	guardedExitIface_raise_e(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(guardedExit_isStateActive(&statechart, GuardedExit_main_region_B));
@@ -35,12 +36,14 @@ void checkDone(bool shouldBeDone){
 }
 
 TEST_F(GuardedExitTest, ExitTaken) {
+	
 	guardedExit_enter(&statechart);
 	EXPECT_TRUE(guardedExit_isStateActive(&statechart, GuardedExit_main_region_A));
 	EXPECT_TRUE(!guardedExitIface_get_guard(&statechart));
 	checkDone(false);
 }
 TEST_F(GuardedExitTest, ExitNotTaken) {
+	
 	guardedExit_enter(&statechart);
 	EXPECT_TRUE(guardedExit_isStateActive(&statechart, GuardedExit_main_region_A));
 	guardedExitIface_set_guard(&statechart,true);

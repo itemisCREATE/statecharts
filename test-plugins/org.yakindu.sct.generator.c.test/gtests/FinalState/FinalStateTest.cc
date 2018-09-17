@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static FinalState statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static FinalState statechart;
-
+			
 class FinalStateTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class FinalStateTest : public ::testing::Test{
 
 
 TEST_F(FinalStateTest, StatechartNameTest) {
+	
 	finalState_enter(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(finalState_isFinal(&statechart));

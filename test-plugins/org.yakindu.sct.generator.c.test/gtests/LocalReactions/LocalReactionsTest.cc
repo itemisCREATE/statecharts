@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static LocalReactions statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static LocalReactions statechart;
-
+			
 class LocalReactionsTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class LocalReactionsTest : public ::testing::Test{
 
 
 TEST_F(LocalReactionsTest, LocalReactionsTest) {
+	
 	localReactions_enter(&statechart);
 	EXPECT_TRUE(localReactions_isStateActive(&statechart, LocalReactions_main_region_A));
 	sc_timer_service_proceed_cycles(&timer_service, 1);

@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static Constants statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static Constants statechart;
-
+			
 class ConstantsTests : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class ConstantsTests : public ::testing::Test{
 
 
 TEST_F(ConstantsTests, constantDefinition) {
+	
 	constants_enter(&statechart);
 	EXPECT_TRUE(constants_isStateActive(&statechart, Constants_main_region_A));
 	EXPECT_TRUE(constantsIface_get_x(&statechart)== 10l);

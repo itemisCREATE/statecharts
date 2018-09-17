@@ -6,12 +6,13 @@
 #include "sc_timer_service.h"
 
 
+void assertNoLocalReaction();
+static ChildFirstExecutionHierarchy statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static ChildFirstExecutionHierarchy statechart;
-
+			
 class ChildFirstExecutionHierarchyTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -34,6 +35,7 @@ void assertNoLocalReaction(){
 }
 
 TEST_F(ChildFirstExecutionHierarchyTest, childShouldTakeTransition) {
+	
 	childFirstExecutionHierarchy_enter(&statechart);
 	EXPECT_TRUE(childFirstExecutionHierarchy_isStateActive(&statechart, ChildFirstExecutionHierarchy_ChildFirstExecutionHierarchy_r_A_r_AA_r_AAA));
 	childFirstExecutionHierarchyIface_raise_e(&statechart);
@@ -45,6 +47,7 @@ TEST_F(ChildFirstExecutionHierarchyTest, childShouldTakeTransition) {
 	assertNoLocalReaction();
 }
 TEST_F(ChildFirstExecutionHierarchyTest, parentShouldTakeTransition) {
+	
 	childFirstExecutionHierarchy_enter(&statechart);
 	EXPECT_TRUE(childFirstExecutionHierarchy_isStateActive(&statechart, ChildFirstExecutionHierarchy_ChildFirstExecutionHierarchy_r_A_r_AA_r_AAA));
 	childFirstExecutionHierarchyIface_set_disable_aaa(&statechart,true);
@@ -59,6 +62,7 @@ TEST_F(ChildFirstExecutionHierarchyTest, parentShouldTakeTransition) {
 	EXPECT_TRUE(childFirstExecutionHierarchyIface_get_aaa_local(&statechart));
 }
 TEST_F(ChildFirstExecutionHierarchyTest, grandparentShouldTakeTransition) {
+	
 	childFirstExecutionHierarchy_enter(&statechart);
 	EXPECT_TRUE(childFirstExecutionHierarchy_isStateActive(&statechart, ChildFirstExecutionHierarchy_ChildFirstExecutionHierarchy_r_A_r_AA_r_AAA));
 	childFirstExecutionHierarchyIface_set_disable_aa(&statechart,true);
@@ -74,6 +78,7 @@ TEST_F(ChildFirstExecutionHierarchyTest, grandparentShouldTakeTransition) {
 	EXPECT_TRUE(childFirstExecutionHierarchyIface_get_aaa_local(&statechart));
 }
 TEST_F(ChildFirstExecutionHierarchyTest, expectLocalReactrionsExecuteWithNoTransition) {
+	
 	childFirstExecutionHierarchy_enter(&statechart);
 	EXPECT_TRUE(childFirstExecutionHierarchy_isStateActive(&statechart, ChildFirstExecutionHierarchy_ChildFirstExecutionHierarchy_r_A_r_AA_r_AAA));
 	sc_timer_service_proceed_cycles(&timer_service, 1);

@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static Declarations statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static Declarations statechart;
-
+			
 class DeclarationsTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class DeclarationsTest : public ::testing::Test{
 
 
 TEST_F(DeclarationsTest, declarationsTest) {
+	
 	declarations_enter(&statechart);
 }
 

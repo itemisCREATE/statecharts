@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static EventDrivenInternalEvent statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static EventDrivenInternalEvent statechart;
-
+			
 class EventDrivenInternalEventTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class EventDrivenInternalEventTest : public ::testing::Test{
 
 
 TEST_F(EventDrivenInternalEventTest, checkInternlEventQueueing) {
+	
 	eventDrivenInternalEvent_enter(&statechart);
 	EXPECT_TRUE(eventDrivenInternalEvent_isStateActive(&statechart, EventDrivenInternalEvent_EventDrivenInternalEvent_r1_A));
 	EXPECT_TRUE(eventDrivenInternalEvent_isStateActive(&statechart, EventDrivenInternalEvent_EventDrivenInternalEvent_r2_C));

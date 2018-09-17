@@ -6,14 +6,12 @@
 #include "sc_timer_service.h"
 
 
-
+static NoLocalEvents statechart;
 
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static NoLocalEvents statechart;
-
+			
 class NoLocalEventsTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -31,6 +29,7 @@ class NoLocalEventsTest : public ::testing::Test{
 
 
 TEST_F(NoLocalEventsTest, test) {
+	
 	noLocalEvents_enter(&statechart);
 	EXPECT_TRUE(noLocalEvents_isStateActive(&statechart, NoLocalEvents_main_region_StateA));
 	noLocalEventsIface_raise_e(&statechart);

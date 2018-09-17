@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static BitExpressions statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static BitExpressions statechart;
-
+			
 class BitExpressionsTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class BitExpressionsTest : public ::testing::Test{
 
 
 TEST_F(BitExpressionsTest, BitExpressions) {
+	
 	bitExpressions_enter(&statechart);
 	EXPECT_TRUE(bitExpressions_isStateActive(&statechart, BitExpressions_main_region_StateA));
 	EXPECT_TRUE(bitExpressionsIface_get_myBit1(&statechart)== 5l);

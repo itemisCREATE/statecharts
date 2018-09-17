@@ -6,14 +6,12 @@
 #include "sc_timer_service.h"
 
 
-
+static LocalEvents statechart;
 
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static LocalEvents statechart;
-
+			
 class LocalEventsTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -31,6 +29,7 @@ class LocalEventsTest : public ::testing::Test{
 
 
 TEST_F(LocalEventsTest, test) {
+	
 	localEvents_enter(&statechart);
 	EXPECT_TRUE(localEvents_isStateActive(&statechart, LocalEvents_localEvents_r1_Comp1_r_A1));
 	EXPECT_TRUE(localEvents_isStateActive(&statechart, LocalEvents_localEvents_r2_Comp2_r_A2));

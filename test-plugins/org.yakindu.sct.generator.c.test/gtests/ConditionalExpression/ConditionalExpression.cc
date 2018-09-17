@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static ConditionalExpressions statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static ConditionalExpressions statechart;
-
+			
 class ConditionalExpression : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class ConditionalExpression : public ::testing::Test{
 
 
 TEST_F(ConditionalExpression, ConditionalExpressionTest) {
+	
 	conditionalExpressions_enter(&statechart);
 	EXPECT_TRUE(conditionalExpressions_isStateActive(&statechart, ConditionalExpressions_main_region_A));
 	EXPECT_TRUE(conditionalExpressionsIface_get_condition(&statechart)== 1l);

@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static NamedInterfaceAccess statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static NamedInterfaceAccess statechart;
-
+			
 class NamedInterfaceAccessTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class NamedInterfaceAccessTest : public ::testing::Test{
 
 
 TEST_F(NamedInterfaceAccessTest, SafeOpenSuccess) {
+	
 	namedInterfaceAccess_enter(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	namedInterfaceAccessIfaceUser_raise_numberPressed(&statechart, 3l);

@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static InternalEventLifeCycle statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static InternalEventLifeCycle statechart;
-
+			
 class InternalEventLifeCycleTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class InternalEventLifeCycleTest : public ::testing::Test{
 
 
 TEST_F(InternalEventLifeCycleTest, InternalEventLifeCycleTest) {
+	
 	internalEventLifeCycle_enter(&statechart);
 	EXPECT_TRUE(internalEventLifeCycle_isStateActive(&statechart, InternalEventLifeCycle_r1_A));
 	EXPECT_TRUE(internalEventLifeCycle_isStateActive(&statechart, InternalEventLifeCycle_r2_C));

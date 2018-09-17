@@ -9,20 +9,20 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
 @GTest(
 	statechartBundle = "org.yakindu.sct.test.models",
-	sourceFile = "gtests/NoLocalEvents/NoLocalEventsTest.cc",
-	program = "gtests/NoLocalEvents/NoLocalEvents",
-	model = "testmodels/SCTUnit/eventdriven/NoLocalEvents.sct",
+	sourceFile = "gtests/ParentFirstOrthogonalReactions/ParentFirstOrthogonalReactionsTest.cc",
+	program = "gtests/ParentFirstOrthogonalReactions/ParentFirstOrthogonalReactions",
+	model = "testmodels/SCTUnit/executionorder/ParentFirstOrthogonalReactions.sct",
 	additionalFilesToCopy = {
 		"libraryTarget/sc_timer_service.c",
 		"libraryTarget/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
-		"NoLocalEvents.c",
+		"ParentFirstOrthogonalReactions.c",
 		"sc_timer_service.c"
 	}
 )
 @RunWith(GTestRunner.class)
-public class NoLocalEventsTest {
+public class ParentFirstOrthogonalReactionsTest {
 
 	protected final GTestHelper helper = new GTestHelper(this);
 

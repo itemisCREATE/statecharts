@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static TransitionWithoutCondition statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static TransitionWithoutCondition statechart;
-
+			
 class TransitionWithoutConditionTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class TransitionWithoutConditionTest : public ::testing::Test{
 
 
 TEST_F(TransitionWithoutConditionTest, TransitionWithoutConditionTest) {
+	
 	transitionWithoutCondition_enter(&statechart);
 	EXPECT_TRUE(transitionWithoutCondition_isStateActive(&statechart, TransitionWithoutCondition_main_region_A));
 	sc_timer_service_proceed_cycles(&timer_service, 1);

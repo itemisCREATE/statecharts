@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static Guard statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static Guard statechart;
-
+			
 class GuardTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class GuardTest : public ::testing::Test{
 
 
 TEST_F(GuardTest, guardTest) {
+	
 	guard_enter(&statechart);
 	EXPECT_TRUE(guard_isStateActive(&statechart, Guard_main_region_A));
 	guardIface_raise_event1(&statechart);

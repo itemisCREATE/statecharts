@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static EnterState statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static EnterState statechart;
-
+			
 class EnterStateTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class EnterStateTest : public ::testing::Test{
 
 
 TEST_F(EnterStateTest, defaultEntry) {
+	
 	enterState_enter(&statechart);
 	EXPECT_TRUE(enterState_isStateActive(&statechart, EnterState_r_A));
 	enterStateIface_raise_e(&statechart);
@@ -36,6 +37,7 @@ TEST_F(EnterStateTest, defaultEntry) {
 	EXPECT_TRUE(enterState_isStateActive(&statechart, EnterState_r_B_r_E));
 }
 TEST_F(EnterStateTest, namedEntryThroughNamedTransition) {
+	
 	enterState_enter(&statechart);
 	EXPECT_TRUE(enterState_isStateActive(&statechart, EnterState_r_A));
 	enterStateIface_raise_f(&statechart);
@@ -43,6 +45,7 @@ TEST_F(EnterStateTest, namedEntryThroughNamedTransition) {
 	EXPECT_TRUE(enterState_isStateActive(&statechart, EnterState_r_B_r_F));
 }
 TEST_F(EnterStateTest, namedEntryThroughDefaultTransition) {
+	
 	enterState_enter(&statechart);
 	EXPECT_TRUE(enterState_isStateActive(&statechart, EnterState_r_A));
 	enterStateIface_raise_g(&statechart);

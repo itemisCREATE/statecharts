@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static IntegerExpressions statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static IntegerExpressions statechart;
-
+			
 class IntegerExpressionsTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class IntegerExpressionsTest : public ::testing::Test{
 
 
 TEST_F(IntegerExpressionsTest, integerExpressions) {
+	
 	integerExpressions_enter(&statechart);
 	EXPECT_TRUE(integerExpressions_isStateActive(&statechart, IntegerExpressions_main_region_StateA));
 	EXPECT_TRUE(integerExpressionsIface_get_myInt1(&statechart)== 10l);
@@ -52,6 +53,10 @@ TEST_F(IntegerExpressionsTest, integerExpressions) {
 	EXPECT_TRUE(integerExpressionsIface_get_plusAssign(&statechart)== 12l);
 	EXPECT_TRUE(integerExpressionsIface_get_minusAssign(&statechart)== - 8l );
 	EXPECT_TRUE(integerExpressionsIface_get_moduloAssign(&statechart)== 0l);
+	EXPECT_TRUE(integerExpressionsIface_get_decrementAssign(&statechart)== 0l);
+	EXPECT_TRUE(integerExpressionsIface_get_decrement(&statechart)== 1l);
+	EXPECT_TRUE(integerExpressionsIface_get_incrementAssign(&statechart)== 0l);
+	EXPECT_TRUE(integerExpressionsIface_get_increment(&statechart)== 1l);
 }
 
 

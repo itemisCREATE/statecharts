@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static PriorityValues statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static PriorityValues statechart;
-
+			
 class PriorityValuesTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class PriorityValuesTest : public ::testing::Test{
 
 
 TEST_F(PriorityValuesTest, transitionPriority) {
+	
 	priorityValues_enter(&statechart);
 	EXPECT_TRUE(priorityValues_isStateActive(&statechart, PriorityValues_main_region_A));
 	priorityValuesIface_raise_event1(&statechart);
@@ -36,6 +37,7 @@ TEST_F(PriorityValuesTest, transitionPriority) {
 	EXPECT_TRUE(priorityValues_isStateActive(&statechart, PriorityValues_main_region_C));
 }
 TEST_F(PriorityValuesTest, regionPriority) {
+	
 	priorityValues_enter(&statechart);
 	EXPECT_TRUE(priorityValues_isStateActive(&statechart, PriorityValues_someRegion_A));
 	priorityValuesIface_raise_event2(&statechart);

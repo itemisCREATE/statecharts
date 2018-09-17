@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static BooleanExpressions statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static BooleanExpressions statechart;
-
+			
 class BooleanExpressionsTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class BooleanExpressionsTest : public ::testing::Test{
 
 
 TEST_F(BooleanExpressionsTest, booleanExpressions) {
+	
 	booleanExpressions_enter(&statechart);
 	EXPECT_TRUE(booleanExpressions_isStateActive(&statechart, BooleanExpressions_main_region_StateA));
 	EXPECT_TRUE(booleanExpressionsIface_get_myBool1(&statechart)== true);

@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static StatechartLocalReactions statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static StatechartLocalReactions statechart;
-
+			
 class StatechartLocalReactionsTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,10 +29,12 @@ class StatechartLocalReactionsTest : public ::testing::Test{
 
 
 TEST_F(StatechartLocalReactionsTest, statechartLocalReactionsTest) {
+	
 	statechartLocalReactions_enter(&statechart);
 	EXPECT_TRUE(statechartLocalReactions_isStateActive(&statechart, StatechartLocalReactions_main_region_S1));
 	EXPECT_TRUE(statechartLocalReactions_isStateActive(&statechart, StatechartLocalReactions_region2_a));
-	while (statechartLocalReactionsIface_get_myInt(&statechart)< 10l) {
+	sc_integer cycles = 0l;
+	while (cycles< 10l) {
 		EXPECT_TRUE(statechartLocalReactions_isStateActive(&statechart, StatechartLocalReactions_region2_a));
 		if (statechartLocalReactionsIface_get_myInt(&statechart)%2l== 0l) {
 			EXPECT_TRUE(statechartLocalReactions_isStateActive(&statechart, StatechartLocalReactions_main_region_S1));
@@ -41,6 +43,8 @@ TEST_F(StatechartLocalReactionsTest, statechartLocalReactionsTest) {
 			EXPECT_TRUE(statechartLocalReactions_isStateActive(&statechart, StatechartLocalReactions_main_region_S2));
 		}
 		sc_timer_service_proceed_cycles(&timer_service, 1);
+		cycles += 1l;
+		EXPECT_TRUE((statechartLocalReactionsIface_get_myInt(&statechart)== cycles));
 	}
 }
 

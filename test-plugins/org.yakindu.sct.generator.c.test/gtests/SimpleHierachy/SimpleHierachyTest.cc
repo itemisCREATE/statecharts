@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static SimpleHierachy statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static SimpleHierachy statechart;
-
+			
 class SimpleHierachyTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class SimpleHierachyTest : public ::testing::Test{
 
 
 TEST_F(SimpleHierachyTest, simpleHierachyTest) {
+	
 	simpleHierachy_enter(&statechart);
 	EXPECT_TRUE(simpleHierachy_isStateActive(&statechart, SimpleHierachy_main_region_A));
 	simpleHierachyIface_raise_event1(&statechart);

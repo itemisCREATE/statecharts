@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
-	statechart StringExpressions {
+	statechart executionorder.ChildFirstOrthogonalReactions {
 		feature Outlet {
 			targetProject = "gtests"
-			targetFolder = "StringExpressions"
+			targetFolder = "ChildFirstOrthogonalReactions"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

@@ -6,12 +6,13 @@
 #include "sc_timer_service.h"
 
 
+void init(sc_boolean sndCycle);
+static OutEventLifeCycle statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static OutEventLifeCycle statechart;
-
+			
 class OutEventLifeCycleTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -27,7 +28,7 @@ class OutEventLifeCycleTest : public ::testing::Test{
 	}
 };
 
-void init(bool sndCycle){
+void init(sc_boolean sndCycle){
 	outEventLifeCycle_enter(&statechart);
 	outEventLifeCycleIface_raise_e(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
@@ -37,20 +38,24 @@ void init(bool sndCycle){
 }
 
 TEST_F(OutEventLifeCycleTest, availableAfterCycle) {
+	
 	outEventLifeCycle_enter(&statechart);
 	outEventLifeCycleIface_raise_e(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(outEventLifeCycleIface_israised_f(&statechart));
 }
 TEST_F(OutEventLifeCycleTest, availableWithinCycle) {
+	
 	init(false);
 	EXPECT_TRUE(outEventLifeCycleIface_get_f_available_in_cycle(&statechart));
 }
 TEST_F(OutEventLifeCycleTest, unvailableWithin2ndCycle) {
+	
 	init(true);
 	EXPECT_TRUE(!outEventLifeCycleIface_get_f_available_in_next_cycle(&statechart));
 }
 TEST_F(OutEventLifeCycleTest, unvailableAfter2ndCycle) {
+	
 	init(true);
 	EXPECT_TRUE(!outEventLifeCycleIface_israised_f(&statechart));
 }

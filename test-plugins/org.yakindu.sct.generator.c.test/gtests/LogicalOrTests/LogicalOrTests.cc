@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static LogicalOr statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static LogicalOr statechart;
-
+			
 class LogicalOrTests : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class LogicalOrTests : public ::testing::Test{
 
 
 TEST_F(LogicalOrTests, operandEvaluationOrder) {
+	
 	logicalOr_enter(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(logicalOrIface_get_x(&statechart)== 4l && logicalOrIface_get_b(&statechart)) << "logical or expression was executed in wrong order..." ;

@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static EntryChoice statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static EntryChoice statechart;
-
+			
 class EntryChoiceTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class EntryChoiceTest : public ::testing::Test{
 
 
 TEST_F(EntryChoiceTest, EntryChoiceTest) {
+	
 	entryChoice_enter(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	sc_timer_service_proceed_cycles(&timer_service, 1);

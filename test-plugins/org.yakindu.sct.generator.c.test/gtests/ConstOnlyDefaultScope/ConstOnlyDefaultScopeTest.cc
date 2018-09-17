@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static ConstOnlyDefaultScope statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static ConstOnlyDefaultScope statechart;
-
+			
 class ConstOnlyDefaultScopeTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,10 +29,12 @@ class ConstOnlyDefaultScopeTest : public ::testing::Test{
 
 
 TEST_F(ConstOnlyDefaultScopeTest, statechartEntry) {
+	
 	constOnlyDefaultScope_enter(&statechart);
 	EXPECT_TRUE(constOnlyDefaultScope_isStateActive(&statechart, ConstOnlyDefaultScope_ConstOnlyDefaultScope_main_region_A));
 }
 TEST_F(ConstOnlyDefaultScopeTest, stateTransition) {
+	
 	constOnlyDefaultScope_enter(&statechart);
 	constOnlyDefaultScopeIfaceA_raise_e(&statechart, 1l);
 	sc_timer_service_proceed_cycles(&timer_service, 1);

@@ -7,12 +7,12 @@
 #include "sc_timer_service.h"
 
 
+static EventDrivenTriggeredByEvent statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static EventDrivenTriggeredByEvent statechart;
-
+			
 class EventDrivenTriggeredByEventTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -30,6 +30,7 @@ class EventDrivenTriggeredByEventTest : public ::testing::Test{
 
 
 TEST_F(EventDrivenTriggeredByEventTest, internalEventTriggersRunCycle) {
+	
 	eventDrivenTriggeredByEvent_enter(&statechart);
 	EXPECT_TRUE(eventDrivenTriggeredByEvent_isStateActive(&statechart, EventDrivenTriggeredByEvent_EventDrivenTriggeredByEvent_main_region_A));
 	eventDrivenTriggeredByEventIface_raise_e(&statechart);
@@ -41,6 +42,7 @@ TEST_F(EventDrivenTriggeredByEventTest, internalEventTriggersRunCycle) {
 	eventDrivenTriggeredByEvent_exit(&statechart);
 }
 TEST_F(EventDrivenTriggeredByEventTest, proceedTimeDoesNotTriggerRunCycle) {
+	
 	eventDrivenTriggeredByEvent_enter(&statechart);
 	EXPECT_TRUE(eventDrivenTriggeredByEvent_isStateActive(&statechart, EventDrivenTriggeredByEvent_EventDrivenTriggeredByEvent_main_region_A));
 	sc_timer_service_proceed_time(&timer_service, 120000);

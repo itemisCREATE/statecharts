@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static StringExpressions statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static StringExpressions statechart;
-
+			
 class StringExpressionsTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class StringExpressionsTest : public ::testing::Test{
 
 
 TEST_F(StringExpressionsTest, StringExpressionsTest) {
+	
 	EXPECT_TRUE(strcmp(stringExpressionsIface_get_quotedStringX(&statechart), "\"X\"") == 0);
 	EXPECT_TRUE(strcmp(stringExpressionsIface_get_quotedStringY(&statechart), "\"Y\"") == 0);
 	stringExpressions_enter(&statechart);
