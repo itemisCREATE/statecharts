@@ -206,7 +206,8 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 
 	@Override
 	public void step() {
-		work();
+		Thread thread = new Thread(queueWorker);
+		thread.start();
 	}
 
 	@Override
