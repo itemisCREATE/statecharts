@@ -52,11 +52,11 @@ class APIGenerator {
 				
 			switch («scHandle»->stateConfVector[handle->stateConfVectorPosition])
 			{
-			«FOR state : states»
-				«IF state.reactSequence !== null»
+			«FOR state : states.filter[isLeaf]»
+				«IF state.reactMethod !== null»
 					case «state.stateName»:
 					{
-						«state.reactSequence.shortName»(«scHandle»);
+						«state.reactMethod.shortName»(«scHandle», bool_true);
 						break;
 					}
 				«ENDIF»
@@ -67,6 +67,30 @@ class APIGenerator {
 		}
 		
 	'''
+
+//	protected def CharSequence runCycleForLoop(ExecutionFlow it) '''
+//		for («scHandle»->stateConfVectorPosition = 0;
+//			«scHandle»->stateConfVectorPosition < «type.toUpperCase»_MAX_ORTHOGONAL_STATES;
+//			«scHandle»->stateConfVectorPosition++)
+//			{
+//				
+//			switch («scHandle»->stateConfVector[handle->stateConfVectorPosition])
+//			{
+//			«FOR state : states.filter[isLeaf]»
+//				«IF state.reactSequence !== null»
+//					case «state.stateName»:
+//					{
+//						«state.reactSequence.shortName»(«scHandle»);
+//						break;
+//					}
+//				«ENDIF»
+//			«ENDFOR»
+//			default:
+//				break;
+//			}
+//		}
+//		
+//	'''
 
 	def declareRunCycle(ExecutionFlow it) {
 		'''«runCycleSignature»;'''
