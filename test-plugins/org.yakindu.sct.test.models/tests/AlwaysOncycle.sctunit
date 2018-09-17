@@ -4,18 +4,31 @@ testclass AlwaysOncycle for statechart AlwaysOncycle {
  	operation alwaysOnCycleTest (){
 	 	enter
 		assert active (AlwaysOncycle.main_region.StateA)
-		while (value < 5) {
+		
+		var count : integer = 0
+		
+		while (count < 5) {
 			proceed 1 cycle
 			assert active (AlwaysOncycle.main_region.StateA)
+			count++
 		}
+		assert (value == 5)
+
 		proceed 1 cycle
 		assert active (AlwaysOncycle.main_region.StateB)
-		while (value < 5) {
+		assert value == 0
+		
+		count = 0
+		while (count < 5) {
 			proceed 1 cycle
 			assert active (AlwaysOncycle.main_region.StateB)
+			count++
 		}
+		assert (value == 5)
+
 		proceed 1 cycle
 		assert active (AlwaysOncycle.main_region.StateA)  
+		assert value == 0
 	}
 		
 }
