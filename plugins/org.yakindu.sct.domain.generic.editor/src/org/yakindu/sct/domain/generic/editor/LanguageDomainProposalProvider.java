@@ -14,10 +14,8 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.StyledString.Styler;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -28,7 +26,6 @@ import org.yakindu.base.types.Type;
 import org.yakindu.base.types.resource.TypedResourceDescriptionStrategy;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.ui.contentassist.STextProposalProvider;
-import org.yakindu.sct.model.stext.ui.internal.STextActivator;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
@@ -74,7 +71,9 @@ public abstract class LanguageDomainProposalProvider extends STextProposalProvid
 		return super.getStyledDisplayString(operation, qualifiedName, shortName);
 	}
 
-	protected abstract String getOperationSignatureUserDataKey();
+	protected String getOperationSignatureUserDataKey() {
+		return TypedResourceDescriptionStrategy.OPERATION_SIGNATURE;
+	}
 
 	protected StyledString computeStyledString(Type type, String qualifiedName, String shortName) {
 		String displayString = getDisplayString(type, qualifiedName, shortName);
@@ -96,18 +95,6 @@ public abstract class LanguageDomainProposalProvider extends STextProposalProvid
 		}
 		return new StyledString(displayString, null);
 	}
-
-	@Override
-	protected Image getIncludeImage() {
-		Image image = super.getIncludeImage();
-		if (image == null) {
-			final ImageDescriptor id = getImageDescriptor();
-			STextActivator.getInstance().getImageRegistry().put(ICONS_INCLUDE, id);
-		}
-		return STextActivator.getInstance().getImageRegistry().get(ICONS_INCLUDE);
-	}
-
-	protected abstract ImageDescriptor getImageDescriptor();
 
 	protected Styler getStyleForQualifiedNamePart(Type type) {
 		return new GreyoutStyler();
