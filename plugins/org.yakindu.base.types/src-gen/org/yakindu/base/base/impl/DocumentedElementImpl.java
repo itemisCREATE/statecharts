@@ -150,7 +150,7 @@ public class DocumentedElementImpl extends EObjectImpl implements DocumentedElem
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (documentation: ");
 		result.append(documentation);
 		result.append(')');

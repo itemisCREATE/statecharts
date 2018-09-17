@@ -73,7 +73,6 @@ public class TypeAliasItemProvider
 			addIdPropertyDescriptor(object);
 			addAbstractPropertyDescriptor(object);
 			addVisiblePropertyDescriptor(object);
-			addSuperTypesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -189,28 +188,6 @@ public class TypeAliasItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Super Types feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSuperTypesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Type_superTypes_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Type_superTypes_feature", "_UI_Type_type"),
-				 TypesPackage.Literals.TYPE__SUPER_TYPES,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -225,6 +202,7 @@ public class TypeAliasItemProvider
 			childrenFeatures.add(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER);
 			childrenFeatures.add(TypesPackage.Literals.PACKAGE_MEMBER__ANNOTATIONS);
 			childrenFeatures.add(TypesPackage.Literals.TYPE__CONSTRAINT);
+			childrenFeatures.add(TypesPackage.Literals.TYPE__SUPER_TYPES);
 		}
 		return childrenFeatures;
 	}
@@ -301,6 +279,7 @@ public class TypeAliasItemProvider
 			case TypesPackage.TYPE_ALIAS__TYPE_SPECIFIER:
 			case TypesPackage.TYPE_ALIAS__ANNOTATIONS:
 			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
+			case TypesPackage.TYPE_ALIAS__SUPER_TYPES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -342,6 +321,39 @@ public class TypeAliasItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.TYPE__CONSTRAINT,
 				 TypesFactory.eINSTANCE.createRangeConstraint()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.TYPE__SUPER_TYPES,
+				 TypesFactory.eINSTANCE.createTypeSpecifier()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.TYPE__SUPER_TYPES,
+				 TypesFactory.eINSTANCE.createArrayTypeSpecifier()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER ||
+			childFeature == TypesPackage.Literals.TYPE__SUPER_TYPES;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**

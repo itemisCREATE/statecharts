@@ -52,6 +52,8 @@ public class ResourceUnloadingTool {
 						final ResourceSet diagramResourceSet = openDiagramEditor.getEditingDomain().getResourceSet();
 						if (diagramResourceSet == resourceSet) {
 							final Resource diagramResource = getDiagramResource(diagramResourceSet, openEditorInput);
+							if(diagramResource == null)
+								continue;
 							resourcesToUnload.remove(diagramResource);
 							final Collection<?> imports = EMFCoreUtil.getImports(diagramResource);
 							resourcesToUnload.removeAll(imports);

@@ -17,6 +17,7 @@
     <parameters
         name="maxIdentifierLength"
         deprecated="true"
+        comment="Use '@CShortIdentifier' annotation instead. "
         optional="true"
         parameterType="INTEGER"/>
     <parameters

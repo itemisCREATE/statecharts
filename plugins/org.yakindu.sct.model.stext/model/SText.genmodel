@@ -32,7 +32,9 @@
     <genClasses ecoreClass="SText.ecore#//TransitionRoot">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//TransitionRoot/def"/>
     </genClasses>
-    <genClasses ecoreClass="SText.ecore#//StatechartSpecification"/>
+    <genClasses ecoreClass="SText.ecore#//StatechartSpecification">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//StatechartSpecification/annotations"/>
+    </genClasses>
     <genClasses ecoreClass="SText.ecore#//StateSpecification">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//StateSpecification/scope"/>
     </genClasses>
@@ -43,10 +45,7 @@
     <genClasses ecoreClass="SText.ecore#//InterfaceScope"/>
     <genClasses ecoreClass="SText.ecore#//InternalScope"/>
     <genClasses ecoreClass="SText.ecore#//ImportScope">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//ImportScope/imports"/>
-    </genClasses>
-    <genClasses ecoreClass="SText.ecore#//Import">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SText.ecore#//Import/importedNamespace"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute SText.ecore#//ImportScope/imports"/>
     </genClasses>
     <genClasses ecoreClass="SText.ecore#//EventDefinition"/>
     <genClasses ecoreClass="SText.ecore#//VariableDefinition">
@@ -97,5 +96,6 @@
     <genClasses ecoreClass="SText.ecore#//ActiveStateReferenceExpression">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SText.ecore#//ActiveStateReferenceExpression/value"/>
     </genClasses>
+    <genClasses ecoreClass="SText.ecore#//ArgumentedAnnotation"/>
   </genPackages>
 </genmodel:GenModel>

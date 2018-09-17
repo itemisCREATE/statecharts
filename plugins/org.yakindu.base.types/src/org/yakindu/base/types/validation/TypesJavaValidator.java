@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  * 	itemis AG - initial API and implementation
- *  
+ *
  */
 package org.yakindu.base.types.validation;
 
@@ -35,9 +35,9 @@ import com.google.inject.Inject;
 
 /**
  * Validation rules for types.ecore
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public class TypesJavaValidator extends org.eclipse.xtext.validation.AbstractDeclarativeValidator {
 
@@ -125,9 +125,9 @@ public class TypesJavaValidator extends org.eclipse.xtext.validation.AbstractDec
 
 	@Check
 	public void checkTypeNotExtendsItself(ComplexType type) {
-		EList<Type> superTypes = type.getSuperTypes();
-		for (Type superType : superTypes) {
-			if (superType.equals(type)) {
+		EList<TypeSpecifier> superTypes = type.getSuperTypes();
+		for (TypeSpecifier superType : superTypes) {
+			if (superType.getType().equals(type)) {
 				error(String.format(ERROR_CYCLE_DETECTED_MSG, type.getName()), type,
 						TypesPackage.Literals.TYPE__SUPER_TYPES, ERROR_CYCLE_DETECTED_CODE);
 			}
@@ -196,7 +196,7 @@ public class TypesJavaValidator extends org.eclipse.xtext.validation.AbstractDec
 
 	@Override
 	protected List<EPackage> getEPackages() {
-		List<EPackage> result = new ArrayList<EPackage>();
+		List<EPackage> result = new ArrayList<>();
 		result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.yakindu.org/base/types/2.0.0"));
 		return result;
 	}

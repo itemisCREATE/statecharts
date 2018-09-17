@@ -19,11 +19,13 @@ import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeParameter;
+import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Complex Type</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Complex Type</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
@@ -47,7 +49,8 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 
 	/**
 	 * The cached value of the '{@link #getFeatures() <em>Features</em>}' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getFeatures()
 	 * @generated
 	 * @ordered
@@ -55,7 +58,8 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 	protected EList<Declaration> features;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected ComplexTypeImpl() {
@@ -63,7 +67,8 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -84,7 +89,8 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EList<Declaration> getFeatures() {
@@ -96,26 +102,27 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated NOT
 	 */
+	@Override
 	public EList<Declaration> getAllFeatures() {
-		EList<Declaration> features = new BasicEList<Declaration>();
+		EList<Declaration> features = new BasicEList<>();
 		collectFeatures(this, features, new HashSet<Type>());
 		return features;
 	}
-
+	
 	/**
 	 * Performs a simple search to collect all features of the type and all
 	 * super types.
-	 * 
+	 *
 	 */
 	protected void collectFeatures(Type type, List<Declaration> features, Set<Type> visited) {
 		if (type == null || visited.contains(type))
 			return;
 		if (type instanceof ComplexType) {
-			for (Type superType : ((ComplexType) type).getSuperTypes()) {
-				collectFeatures(superType, features, visited);
+			for (TypeSpecifier superType : ((ComplexType) type).getSuperTypes()) {
+				collectFeatures(superType.getType(), features, visited);
 			}
 			features.addAll(((ComplexType) type).getFeatures());
 		}
@@ -123,7 +130,8 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -138,7 +146,8 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -153,7 +162,8 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -173,7 +183,8 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -190,7 +201,8 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -236,4 +248,4 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
-} // ComplexTypeImpl
+} //ComplexTypeImpl

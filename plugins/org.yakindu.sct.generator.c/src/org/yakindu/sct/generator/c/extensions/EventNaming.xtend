@@ -11,6 +11,7 @@
 package org.yakindu.sct.generator.c.extensions
 
 import com.google.inject.Inject
+import com.google.inject.Singleton
 import org.yakindu.base.types.Event
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
@@ -19,6 +20,7 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 /**
  * @author René Beckmann
  */
+@Singleton // Guice
 class EventNaming {
 	@Inject extension Naming
 	@Inject extension SExecExtensions
@@ -39,9 +41,13 @@ class EventNaming {
 	def eventValueUnionName(ExecutionFlow it) {
 		'''«module»_event_value'''.toString.toLowerCase
 	}
+	
+	def eventValueUnionMemberName(Event it) {
+		'''«eventEnumMemberName»_value'''
+	}
 
-	def eventStructTypeName(ExecutionFlow it) {
-		'''«name»_event'''.toString.toLowerCase
+	def internalEventStructTypeName(ExecutionFlow it) {
+		'''«name»_internal_event'''.toString.toLowerCase
 	}
 
 	def eventQueueTypeName(ExecutionFlow it) {
@@ -49,11 +55,11 @@ class EventNaming {
 	}
 
 	def eventInitFunction(ExecutionFlow it) {
-		'''«eventStructTypeName»_init'''
+		'''«internalEventStructTypeName»_init'''
 	}
 
 	def valueEventInitFunction(ExecutionFlow it) {
-		'''«eventStructTypeName»_value_init'''
+		'''«internalEventStructTypeName»_value_init'''
 	}
 
 	def eventQueueInitFunction(ExecutionFlow it) {

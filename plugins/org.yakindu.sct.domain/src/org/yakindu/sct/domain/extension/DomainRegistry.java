@@ -41,6 +41,7 @@ import org.yakindu.sct.domain.extension.impl.ModuleContribution;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.inject.Binder;
 import com.google.inject.Module;
 
 /**
@@ -250,6 +251,12 @@ public class DomainRegistry {
 					provider = (IModuleProvider) element.createExecutableExtension(MODULE_PROVIDER);
 				} catch (CoreException e) {
 					e.printStackTrace();
+					return new Module() {
+						@Override
+						public void configure(Binder binder) {
+							//Return empty module if provider is configured wrong
+						}
+					};
 				}
 			}
 			return provider.getModule(options);

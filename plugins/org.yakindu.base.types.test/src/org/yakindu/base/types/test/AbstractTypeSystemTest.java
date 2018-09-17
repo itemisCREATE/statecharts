@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.base.types.test;
 
@@ -22,12 +22,13 @@ import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeParameter;
+import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.typesystem.AbstractTypeSystem;
 
 /**
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public class AbstractTypeSystemTest extends AbstractTypeSystem {
 
@@ -42,14 +43,14 @@ public class AbstractTypeSystemTest extends AbstractTypeSystem {
 	private static final String COMPLEX_TYPE = "ComplexType";
 	private static final String SUPER_COMPLEX_TYPE = "SuperComplexType";
 	private static final String SUPER_SUPER_COMPLEX_TYPE = "SuperSuperComplexType";
-	
+
 	private static final String PRIMITIVE_TYPE = "PrimitiveType";
 	private static final String PRIMITIVE_BASE_TYPE = "PrimitiveBaseType";
-	
+
 	private static final String EXTENSION_OPERATION = "extensionOperation";
 	private static final String EXTENSION_OPERATION2 = "extensionOperation2";
 	private static final String EXTENSION_OPERATION3 = "extensionOperation3";
-	
+
 	private static final String EXTENSION_PROPERTY = "extensionProperty";
 	private static final String EXTENSION_PROPERTY2 = "extensionProperty2";
 	private static final String EXTENSION_PROPERTY3 = "extensionProperty3";
@@ -61,24 +62,24 @@ public class AbstractTypeSystemTest extends AbstractTypeSystem {
 	private Type simpleType;
 	private Type conversionType;
 	private Type conversionSubType;
-	
+
 	private TypeParameter typeParameter;
-	
+
 	private ComplexType complexType;
 	private ComplexType superComplexType;
 	private ComplexType superSuperComplexType;
-	
+
 	private PrimitiveType primitiveType;
 	private PrimitiveType primitiveBaseType;
-	
+
 	private Operation extensionOperation;
 	private Operation extensionOperation2;
 	private Operation extensionOperation3;
-	
+
 	private Property extensionProperty;
 	private Property extensionProperty2;
 	private Property extensionProperty3;
-	
+
 
 	@Override
 	protected void initRegistries() {
@@ -88,45 +89,51 @@ public class AbstractTypeSystemTest extends AbstractTypeSystem {
 		subType = createPrimitive(SUB_TYPE);
 		declareType(subType, SUB_TYPE);
 		declareSuperType(subType, superType);
-		
+
 		// SubType2 extends Supertype
 		subType2 = createPrimitive(SUB_TYPE2);
 		declareType(subType2, SUB_TYPE2);
 		declareSuperType(subType2,superType);
-		
+
 		// SuperSuperType extends SuperType
 		superSuperType = createPrimitive(SUPER_SUPER_TYPE);
 		declareType(superSuperType, SUPER_SUPER_TYPE);
 		declareSuperType(superType, superSuperType);
-		
+
 		// SimpleType
 		simpleType = createPrimitive(SIMPLE_TYPE);
 		declareType(simpleType, SIMPLE_TYPE);
-		
+
 		// simpleType can be converted into Conversiontype
 		conversionType = createPrimitive(CONVERSION_TYPE);
 		declareConversion(simpleType, conversionType);
 		conversionSubType = createPrimitive(CONVERSION_SUB_TYPE);
 		declareSuperType(conversionSubType, conversionType);
-		
+
 		// T with SuperType as bound (<T extends SuperType>)
 		typeParameter = createTypeParameter(TYPE_PARAMETER);
 		declareType(typeParameter, TYPE_PARAMETER);
 		typeParameter.setBound(superType);
-		
+
 		// Primitive type with baseType
 		primitiveBaseType = createPrimitive(PRIMITIVE_BASE_TYPE);
+		TypeSpecifier primitiveBaseTypeTS = TypesFactory.eINSTANCE.createTypeSpecifier();
+		primitiveBaseTypeTS.setType(primitiveBaseType);
 		primitiveType = createPrimitive(PRIMITIVE_TYPE);
 		declareType(primitiveType, PRIMITIVE_TYPE);
-		primitiveType.getSuperTypes().add(primitiveBaseType);
-		
+		primitiveType.getSuperTypes().add(primitiveBaseTypeTS);
+
 		// ComplexType extends SuperComplexType extends SuperSuperComplexType
 		superSuperComplexType = createComplexType(SUPER_SUPER_COMPLEX_TYPE);
+		TypeSpecifier superSuperComplexTypeTS = TypesFactory.eINSTANCE.createTypeSpecifier();
+		superSuperComplexTypeTS.setType(superSuperComplexType);
 		superComplexType = createComplexType(SUPER_COMPLEX_TYPE);
-		superComplexType.getSuperTypes().add(superSuperComplexType);
+		TypeSpecifier superComplexTypeTS = TypesFactory.eINSTANCE.createTypeSpecifier();
+		superComplexTypeTS.setType(superComplexType);
+		superComplexType.getSuperTypes().add(superSuperComplexTypeTS);
 		complexType = createComplexType(COMPLEX_TYPE);
-		complexType.getSuperTypes().add(superComplexType);
-		
+		complexType.getSuperTypes().add(superComplexTypeTS);
+
 		// extension operation
 		extensionOperation = createOperation(EXTENSION_OPERATION);
 		extensionOperation2 = createOperation(EXTENSION_OPERATION2);
@@ -134,7 +141,7 @@ public class AbstractTypeSystemTest extends AbstractTypeSystem {
 		extensionOperationRegistry.put(subType,extensionOperation);
 		extensionOperationRegistry.put(superType,extensionOperation2);
 		extensionOperationRegistry.put(superSuperType,extensionOperation3);
-		
+
 		// extension properties
 		extensionProperty = createProperty(EXTENSION_PROPERTY);
 		extensionProperty2 = createProperty(EXTENSION_PROPERTY2);
@@ -179,15 +186,15 @@ public class AbstractTypeSystemTest extends AbstractTypeSystem {
 		// super type from registry
 		assertEquals("Type system's extends registry not reflected in getSuperTypes() method", 2, getSuperTypes(subType).size());
 		assertTrue(isSame(superType, getSuperTypes(subType).get(0)));
-		
+
 		// super type as base type of primitive type
 		assertEquals("Primitive type's base type not reflected in getSuperTypes() method", 1, getSuperTypes(primitiveType).size());
 		assertTrue(isSame(primitiveBaseType, getSuperTypes(primitiveType).get(0)));
-		
+
 		// super type as complex type super type
 		assertEquals("Complex type's super types not reflected in getSuperTypes() method", 2, getSuperTypes(complexType).size());
 		assertTrue(isSame(superComplexType, getSuperTypes(complexType).get(0)));
-		
+
 		// super type as type parameter bound
 		assertEquals("Type parameter's bound type not reflected in getSuperTypes() method", 2, getSuperTypes(typeParameter).size());
 		assertTrue(isSame(superType, getSuperTypes(typeParameter).get(0)));
@@ -199,22 +206,22 @@ public class AbstractTypeSystemTest extends AbstractTypeSystem {
 		assertTrue("Direct super types from type system's extends registry not reflected in isSuperType() method", isSuperType(subType, superType));
 		assertTrue("Indirect super types from type system's extends registry not reflected in isSuperType() method", isSuperType(superType, superSuperType));
 		assertFalse(isSuperType(superType, subType));
-		
+
 		// super type as base type of primitive type
 		assertTrue("Primitive type's base type not reflected in isSuperType() method", isSuperType(primitiveType, primitiveBaseType));
 		assertFalse(isSuperType(primitiveBaseType, primitiveType));
-		
+
 		// super type as complex type super type
 		assertTrue("Complex type's direct super types not reflected in isSuperType() method", isSuperType(complexType, superComplexType));
 		assertTrue("Complex type's indirect super types not reflected in isSuperType() method", isSuperType(complexType, superSuperComplexType));
 		assertFalse(isSuperType(superComplexType, complexType));
-		
+
 		// super type as type parameter bound
 		assertTrue("Type parameter's bound type not reflected in isSuperType() method", isSuperType(typeParameter, superType));
 		assertTrue("Indirect super types from type system's extends registry not reflected in isSuperType() method", isSuperType(typeParameter, superSuperType));
 		assertFalse(isSuperType(typeParameter, simpleType));
 	}
-	
+
 	@Test
 	public void testHaveCommonType() throws Exception {
 		assertTrue(haveCommonType(subType, subType2));
@@ -237,7 +244,7 @@ public class AbstractTypeSystemTest extends AbstractTypeSystem {
 		assertTrue(isSame(conversionType, getCommonTypeWithConversion(conversionType, simpleType)));
 		assertTrue(isSame(conversionType, getCommonTypeWithConversion(conversionType, conversionSubType)));
 	}
-	
+
 	@Test
 	public void testGetOperationExtensions() {
 		assertEquals(3, getOperationExtensions(subType).size());
@@ -245,33 +252,33 @@ public class AbstractTypeSystemTest extends AbstractTypeSystem {
 		assertTrue(getOperationExtensions(subType).contains(extensionOperation2));
 		assertTrue(getOperationExtensions(subType).contains(extensionOperation3));
 	}
-	
+
 	@Test
 	public void testIsOperationExtension() {
 		assertTrue(isExtensionOperation(extensionOperation));
 		assertTrue(isExtensionOperation(extensionOperation2));
 		assertTrue(isExtensionOperation(extensionOperation3));
 	}
-	
+
 	@Test
 	public void testMultipleInheritance() {
 		// SubType extends SuperType
 		Type int16 = createPrimitive("int16");
 		declareType(int16, "int16");
-		
+
 		Type uint16 = createPrimitive("uint16");
 		declareType(uint16, "uint16");
-		
+
 		Type int8 = createPrimitive("int8");
 		declareType(int8, "int8");
-		
+
 		Type uint8 = createPrimitive("uint8");
 		declareType(uint8, "uint8");
-		
+
 		declareSuperType(int8, int16);
 		declareSuperType(uint8, int16);
-		
+
 		assertTrue(isSame(getType("int16"), getCommonType(int8, uint8)));
 	}
-	
+
 }

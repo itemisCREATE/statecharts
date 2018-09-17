@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.ui.editor.editor;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -177,14 +178,21 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 				IEditorInput otherInput = e.getEditorInput();
 				IEditorInput thisInput = this.getEditorInput();
 
-				return ID.equals(e.getId()) && !otherInput.equals(thisInput) && ((IFileEditorInput) otherInput)
-						.getFile().getLocationURI().equals(((IFileEditorInput) thisInput).getFile().getLocationURI());
+				return ID.equals(e.getId()) && !otherInput.equals(thisInput)
+						&& equalsLocationURI(otherInput, thisInput);
 			} catch (PartInitException e1) {
 				e1.printStackTrace();
 				return false;
 			}
 		}).map(e -> e.getEditor(false)).findFirst();
 		return editorWithSameResource;
+	}
+
+	protected boolean equalsLocationURI(IEditorInput otherInput, IEditorInput thisInput) {
+		URI otherLocationURI = ((IFileEditorInput) otherInput).getFile().getLocationURI();
+		URI thisLocationURI = ((IFileEditorInput) thisInput).getFile().getLocationURI();
+		// location URI can be null if project was deleted from workspace
+		return otherLocationURI != null && otherLocationURI.equals(thisLocationURI);
 	}
 
 	protected Injector getEditorInjector() {

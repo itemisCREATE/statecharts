@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.base.types.validation;
 
@@ -118,7 +118,11 @@ public class TypeValidator {
 
 	public boolean isNullOnComplexType(InferenceResult result1, InferenceResult result2) {
 		return result1.getType() instanceof ComplexType
-				&& registry.isSame(result2.getType(), registry.getType(ITypeSystem.NULL));
+				&& isNull(result2);
+	}
+
+	protected boolean isNull(InferenceResult result) {
+		return registry.isSame(result.getType(), registry.getType(ITypeSystem.NULL));
 	}
 
 	protected boolean isAnyType(Type type) {

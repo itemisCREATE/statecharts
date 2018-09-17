@@ -154,7 +154,7 @@ public class DiagramPartitioningUtil {
 	}
 
 	/**
-	 * Opens the {@link StatechartDiagramEditor} for a fiven {@link IFile}
+	 * Opens the {@link StatechartDiagramEditor} for a given {@link IFile}
 	 * 
 	 */
 	public static IEditorPart openEditor(IFile file) {

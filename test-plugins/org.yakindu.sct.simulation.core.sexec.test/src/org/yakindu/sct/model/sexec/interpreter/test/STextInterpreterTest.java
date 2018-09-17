@@ -22,6 +22,7 @@ import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.interpreter.IExpressionInterpreter;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
+import org.yakindu.sct.model.sexec.interpreter.test.util.SimulationInjectorProvider;
 import org.yakindu.sct.model.sruntime.CompositeSlot;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.model.sruntime.ExecutionEvent;

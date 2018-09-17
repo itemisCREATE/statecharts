@@ -564,15 +564,6 @@ public interface SGenPackage extends EPackage {
 	int PROPERTY_DEFINITION__READONLY = TypesPackage.PROPERTY__READONLY;
 
 	/**
-	 * The feature id for the '<em><b>External</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_DEFINITION__EXTERNAL = TypesPackage.PROPERTY__EXTERNAL;
-
-	/**
 	 * The feature id for the '<em><b>Initial Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

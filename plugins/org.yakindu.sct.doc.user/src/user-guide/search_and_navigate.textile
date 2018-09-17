@@ -1,7 +1,7 @@
 
 h1(#search_and_nav_searching_and_navigating_in_statecharts). Searching and navigating in statecharts
 
-The larger the model, the greater the need to quickly search for elements, for example, all states with a given name resp. name pattern, all occurrences of a certain variable, etc. This section explains how _YAKINDU Statechart Tools_ supports you in finding model elements and quickly navigating to them.
+The larger the model, the greater the need to quickly search for elements, for example, all states with a given name or name pattern, all occurrences of a certain variable, etc. This section explains how YAKINDU Statechart Tools supports you in finding model elements and quickly navigating to them.
 
 ###. FIXME (RKL): Describe how to find transitions!
 
@@ -10,36 +10,40 @@ The larger the model, the greater the need to quickly search for elements, for e
 
 h2(#search_and_nav_searching_via_search_dialog). Searching via search dialog
 
-One option, and the most complex one, is to use the search dialog. You can open the dialog using the shortcut @[Ctrl+H]@ or through selecting _Search → Search..._ in the main menu. 
-Doing this will open a dialog with several tabs as shown in the following screenshot:<br/>!images/search_and_nav_search_dialog.png(Search Dialog)!
+One option, and the most complex one, is to use the search dialog. You can open it using the @[Ctrl+H]@ shortcut or by selecting _Search → Search…_ in the main menu.
 
-The tab you want to use is _Statechart Search_. If you can not find this tab, you probably disabled this in the past by mistake. You can enable it again by pressing the _Customize..._ button and selecting _Statechart Search_ as you can see on the following figure:
+Doing so will open a dialog with several tabs, as shown in the following screenshot:<br/>!images/search_and_nav_search_dialog.png(Search Dialog)!
+
+The tab you want to use is _Statechart search_.
+
+bq.. *Please note:* If you cannot find this tab, you probably disabled it in the past by mistake. You can enable it again by clicking on the _Customize…_ button and selecting _Statechart Search_, as shown by the following figure:
+
 !images/search_and_nav_customize_dialog.png(Customize Dialog)!
 
+Switching to _Statechart search_ will show you a clean and easy to understand dialog, which can be extended using the _Show advanced settings_ check box for a more professional usage. The following subsection describes the possible settings.
 
-Switching to _Statechart Search_ will show you a clean and easily understandable dialog, which can be extended using the _Show advanced settings_ check box for a more professional usage. The possible settings will be described in the following subsection.
+bq.. *User tip:* Checking the _Remember last used page_ option in the _Customize_ dialog will help you to keep the focus on the _Statechart Search_ tab for further search processes.
 
-bq.. *User tip:*
 
-Checking the _Remember last used page_ option in the _Customize_ dialog will help you to keep the focus on the _Statechart Search_ tab for further search processes. 
 
- 
 h3(#search_and_nav_search_dialog_settings). Search dialog settings
 
-The _Statechart Search_ dialog has several options to control your search.
+The _Statechart search_ dialog has several options to control your search.
 
-!images/search_and_nav_model_search_dialog_extended.png(Advanced Search Dialog)!
+!images/search_and_nav_model_search_dialog_extended.png(Advanced search dialog)!
 
 The following table lists the various search options and explains what the search function does if the corresponding checkmark is set.
 
 |_. Setting |_. Description |
-| _Case sensitive_| Differentiate between upper-case and lower-case letters in the search string. If this option is not checked, upper-case letters and their corresponding lower-case letters are regarded the same. |
+| _Case sensitive_ | Differentiate between upper-case and lower-case letters in the search string. If this option is not checked, upper-case letters and their corresponding lower-case letters are regarded the same. |
 | _Regular expression_ | Interpret the search string as a "regular expression":https://en.wikipedia.org/wiki/Regular_expression. Please note that YAKINDU Statechart Tools supports Java regular expressions, as explained in the "java.util.regex.Pattern class API documentation":https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html. |
 | _Search for states/regions_ | Include states and regions with matching _names_ in the search result. |
 | _Search for declarations_ | Include matching declarations in the search result. _Declarations_ are statechart language elements in the definition section, such as variables, events, operations, and named interfaces. The search function will find all occurrences of matching elements. |
 | _Search for properties_ | Include elements with matching _properties_ in the search result. The following items are regarded as properties: <ul><li>_Documentation_ of model elements</li><li>_Behavior_ of states, i.e., local actions, etc.</li><li>_Text_ of text elements and notes !(inlinemediaobject)images/docu_editor_palette_070_symbol_note.png(editor palette symbol "Note")!</li></ul> |
 | _Scope: workspace_ | Perform the search operation on _all_ statecharts in the workspace. |
 | _Scope: selected resources_ | If a statechart editor has the focus, perform the search operation only on that statechart. If the _Project explorer_ view has the focus, perform the search operation on all statecharts in the selected resources. |
+
+###. CHECK: The documentation above refers to the Java 8 documentation as reference of Java regular expressions. Is this still appropriate?
 
 
 
@@ -104,7 +108,7 @@ The result section displays the matching statechart elements in a two-column, tr
 You can perform certain actions on the entries in the first column:
 
 |_.  |_. Action |_. Function |
-| !(inlinemediaobject)images/search_and_nav_letter_a.png(A)! | Click on the !(inlinemediaobject)images/search_and_nav_icon_collapse_children.png(collapse children)! button | "Closes" the node and collapses all child nodes. |
+| !(inlinemediaobject)images/search_and_nav_letter_a.png(A)! | Click on the !(inlinemediaobject)images/search_and_nav_icon_collapse_children.png(collapse children)! button | "closes" the node and collapses all child nodes. |
 | !(inlinemediaobject)images/search_and_nav_letter_b.png(B)! | Click on the !(inlinemediaobject)images/search_and_nav_icon_expand_children.png(expand children)! button | "Opens" the node and expands its immediate child nodes. |
 | !(inlinemediaobject)images/search_and_nav_letter_c.png(C)! | Double-click on a matching element | Navigates to the matching element in the statechart editor, as long a it is not a descendant of an _internal_ or _interface_ element. |
 | | Double-click on a non-matching path element | Closes an expanded node, opens a collapsed node. |
@@ -117,9 +121,9 @@ h2(#search_and_nav_finding_references). Finding references
 Another realized search feature is to find references of model elements. You can perform this search on choosing _Find references_ in the context menu of:
 * model elements in the editor
 * model elements in the project explorer
-* referenced object in syntax checking editors inside statechart models like the _Definition Section_ or _State Behavior_ editor 
+* referenced object in syntax-checking editors inside statechart models like the definition section or the state behavior editor 
 
-This will search for usages of the same element in the local statechart and display them in the "search view":search_and_nav_search_view. Using this method can help you to save time searching for usages of variables, events and operations inside your statechart.
+This will search for usages of the same element in the local statechart and display them in the "search view":#search_and_nav_search_view. Using this method can help you to save time searching for usages of variables, events and operations inside your statechart.
 
 The next section introduces the differences between the first method and this method.
 
@@ -128,7 +132,7 @@ The next section introduces the differences between the first method and this me
 
 h2(#search_and_nav_differences_1). Differences between "Find references" and "Search dialog"
 
-As written in the previous section, _Find references_ is searching for the usages of the exact same model element as selected, whereas in the _Search dialog_, you have to enter a search string which will find all occurrences of model elements that matched the search string.
+As stated in the previous section, _Find references_ is searching for the usages of the exact same model element as selected, whereas in the _Search dialog_, you have to enter a search string which will find all occurrences of model elements that match the search string.
 
 Finding occurrences of model elements matching the search string makes it possible to search in different statecharts at the same time, while finding references of a model element is limited to the statechart defining that model element. Depending on your search goals, one method could be more suitable than the other.
 
@@ -142,31 +146,31 @@ To clarify the difference between these methods, different search operations wer
 | _Find references_ on variable _test_ in the default (unnamed) interface| Finds two matches:<ul><li>Entry action in the *test* state using the _test_ variable</li><li>Definition of the _test_ variable in the unnamed interface</li></ul> |
 | _Find references_ on variable _test_ in named interface _first_| Finds one match:<ul><li>Definition of the _test_ variable in the named interface _first_</li></ul> |
 | _Find references_ on state *test* | Finds one match:<ul><li>The *test* state itself</li></ul> |
-| _Search Dialog_ with the same settings as in section "&quot;Search view&quot;":#search_and_nav_search_view and the search string _&quot;test&quot;_ | Finds four matches:<ul><li>Entry action in the *test* state using the _test_ variable</li><li>Definition of the _test_ variable in the unnamed interface</li><li>Definition of the _test_ variable in the named interface _first_</li><li>The *test* state</li></ul> |
-| _Search Dialog_ with the same settings as in section "&quot;Search view&quot;":#search_and_nav_search_view and the search string _&quot;first.test&quot;_ | Finds one match:<ul><li>Definition of the _test_ variable in the named interface _first_</li></ul> |
-| _Search Dialog_ with almost the same settings as in section "&quot;Search view&quot;":#search_and_nav_search_view, but with _Search for declarations_ deactivated, and with the search string _&quot;test&quot;_ | Finds match:<ul><li>The *test* state</li></ul> |
-| _Search Dialog_ with almost the same settings as in section "&quot;Search view&quot;":#search_and_nav_search_view, but with _Search for states/regions_ deactivated, and with the search string _&quot;test&quot;_ | Finds three matches:<ul><li>Entry action in the *test* state using the _test_ variable</li><li>Definition of the _test_ variable in the unnamed interface</li><li>Definition of the _test_ variable in the named interface _first_</li></ul> |
+| _Search Dialog_ with the same settings as in section "&quot;Search view&quot;":#search_and_nav_search_view and _&quot;test&quot;_ being the search string | Finds four matches:<ul><li>Entry action in the *test* state using the _test_ variable</li><li>Definition of the _test_ variable in the unnamed interface</li><li>Definition of the _test_ variable in the named interface _first_</li><li>The *test* state</li></ul> |
+| _Search Dialog_ with the same settings as in section "&quot;Search view&quot;":#search_and_nav_search_view and _&quot;test&quot;_ being the search string | Finds one match:<ul><li>Definition of the _test_ variable in the named interface _first_</li></ul> |
+| _Search Dialog_ with almost the same settings as in section "&quot;Search view&quot;":#search_and_nav_search_view, but with _Search for declarations_ deactivated and with _&quot;test&quot;_ being the search string | Finds match:<ul><li>The *test* state</li></ul> |
+| _Search Dialog_ with almost the same settings as in section "&quot;Search view&quot;":#search_and_nav_search_view, but with _Search for states/regions_ deactivated and with _&quot;test&quot;_ being the search string | Finds three matches:<ul><li>Entry action in the *test* state using the _test_ vwe should ariable</li><li>Definition of the _test_ variable in the unnamed interface</li><li>Definition of the _test_ variable in the named interface _first_</li></ul> |
 
 ###. FIXME: Why is the entry action not found in case 6?
 
 As can be seen in this case the search dialog has problems with searching references for the variable _test_ in the unnamed interface.
 
-###. FIXME: An explanation for the last sentence is missing.
+###. FIXME: We should not have such a sentence in the documentation. I don't understand what it means. It sounds like an error we should fix.
 
 
 
 
 h2(#search_and_nav_open_model_element). Open model element 
 
-_Open model element_ is another kind of searching method. It can be used to quickly navigate to states and regions. To access _Open model element_, use the shortcut @[Ctrl+Shift+Q]@ or select _Navigate → Open model element_ in the main menu.
+_Open model element_ is another kind of search method. It can be used to quickly navigate to states and regions. To access _Open model element_, use the @[Ctrl+Shift+Q]@ shortcut or select _Navigate → Open model element_ in the main menu.
 
-By doing so, the dialog shown in the next screenshot will open up.
+By doing so, the dialog shown in the next screenshot will open.
 
 !images/search_and_nav_open_model_element_dialog.png(Open model element)!
 
-It consists of one input element !(inlinemediaobject)images/search_and_nav_number_1.png(Searchbar)! and two output elements !(inlinemediaobject)images/search_and_nav_number_2.png(Result list)! / !(inlinemediaobject)images/search_and_nav_number_3.png(Result location)!.
+The dialog consists of a single input element !(inlinemediaobject)images/search_and_nav_number_1.png(Searchbar)! and two output elements !(inlinemediaobject)images/search_and_nav_number_2.png(Result list)! / !(inlinemediaobject)images/search_and_nav_number_3.png(Result location)!.
 
-A search operation done with _Open model element_ is equivalent to "&quot;Searching via search dialog&quot;":#search_and_nav_searching_via_search_dialog with the following setting:
+A search operation performed with _Open model element_ is equivalent to "&quot;Searching via search dialog&quot;":#search_and_nav_searching_via_search_dialog with the following setting:
 
 |_. Setting |_. Value |
 | _Search string_|same as in !images/search_and_nav_number_1.png(Searchbar)! |
@@ -178,11 +182,12 @@ A search operation done with _Open model element_ is equivalent to "&quot;Search
 | _Scope: Workspace_ | ✘ |
 | _Scope: Selected resource_ |✔ |
 
-Differences between _Open model element_ and _Search Dialog_ are slight, but noticeable. The results will promptly appear in !(inlinemediaobject)images/search_and_nav_number_2.png(Result list)! while typing your search string in !(inlinemediaobject)images/search_and_nav_number_1.png(Searchbar)!. The hierarchy for the selected result is displayed in !(inlinemediaobject)images/search_and_nav_number_3.png(Result location)! as a text instead of using a tree. 
+Differences between _Open model element_ and _Search dialog_ are subtle, but noticeable. The results will promptly appear in !(inlinemediaobject)images/search_and_nav_number_2.png(Result list)! while typing your search string in !(inlinemediaobject)images/search_and_nav_number_1.png(Searchbar)!. The hierarchy of a selected result is displayed in !(inlinemediaobject)images/search_and_nav_number_3.png(Result location)! as a text instead of using a tree.
 
-Navigating to a result can be done by double clicking the result or pressing _OK_ or @[Enter]@ on an selected match. 
+Navigating to a result can be done by double-clicking on the result. Or select the result and clicking on the _OK_ button or hit the @[Enter]@ key.
 
-After doing so, the match will be saved. On reopening the dialog, saved model elements that match the new search string will be displayed at the top of unsaved elements making it easier to navigate to them again at a later time.
-!images/search_and_nav_open_model_element_dialog_saved_elements.png(Saved Elements)!
+The _Open model element_ dialog remembers any matching search results. On reopening the dialog, remembered model elements matching the new search string will be displayed above any newly-found elements. This makes it easier to navigate to them again at a later time.
 
-Saved elements can be removed from history via selecting them and pressing @[Del]@ or right-click on a saved element and choosing _Remove from history_ in the context menu.
+!images/search_and_nav_open_model_element_dialog_saved_elements.png(Remembered elements)!
+
+Remembered elements can be removed from the history by selecting them and pressing the @[Del]@ key or by right-clicking on a remembered element and choosing _Remove from history_ in the context menu.
