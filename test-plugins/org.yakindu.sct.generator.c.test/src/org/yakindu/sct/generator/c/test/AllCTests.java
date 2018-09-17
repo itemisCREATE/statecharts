@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014-2018 committers of YAKINDU and others.
+ * Copyright (c) 2018 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,18 +15,13 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * Suite of all test cases that are specific to the C code generator and which are not defined by the 
- * set of cross target language tests.
+ * Suite of all test suites that are relevant for the C code generator. These are the generic cross target language tests
+ * and the C specific test cases.
  * 
  * @author terfloth
  */
 @RunWith(Suite.class)
-@SuiteClasses({
-	ActiveBeforeInit.class,
-	OperationsWithoutBracesCustom.class, 
-	InternalEventLifeCycleTest_Naming.class,
-	PedanticNoLocalEventsTest.class,
-	VariadicOperations.class
-})
-public class AllCSpecificTests {
+@SuiteClasses({AllTests.class, AllCSpecificTests.class})
+public class AllCTests {
+
 }

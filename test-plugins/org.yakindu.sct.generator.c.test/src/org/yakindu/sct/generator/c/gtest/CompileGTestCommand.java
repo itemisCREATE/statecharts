@@ -64,7 +64,7 @@ public class CompileGTestCommand {
 		if (dir != null)
 			command.add("-L" + dir);
 		for (String sourceFile : sources) {
-			command.add(getFileName(sourceFile));
+			command.add(getFileName(sourceFile ));
 		}
 		command.add("-lgtest");
 		command.add("-lgtest_main");
@@ -72,6 +72,8 @@ public class CompileGTestCommand {
 		command.add("-lstdc++");
 		command.add("-pthread");
 		// command.add("-pg");
+		
+		System.out.println(command);
 		return command;
 	}
 	
