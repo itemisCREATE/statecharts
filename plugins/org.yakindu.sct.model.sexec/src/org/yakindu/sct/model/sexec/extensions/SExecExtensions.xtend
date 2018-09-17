@@ -361,10 +361,13 @@ class SExecExtensions {
 	}
 	 
 	def List<Method> reactMethods(ExecutionFlow it) {
-		states.map( s | s.reactMethod)	
+		new ArrayList<Method>() => [ l | 
+			l.add(it.reactMethod()) 
+			l.addAll(it.states.map( s | s.reactMethod))
+		] 	
 	}
 	
-	def Method reactMethod(ExecutionState it) {
+	def Method reactMethod(ExecutionNode it) {
 		features.filter( typeof(Method) ).filter( m | m.name == "react").head
 	}
 	

@@ -8,13 +8,21 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.model.sexec.transformation
+package org.yakindu.sct.model.sexec.transformation.ng
 
 import com.google.inject.Inject
 import org.yakindu.base.types.validation.IValidationIssueAcceptor
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sexec.transformation.IModelSequencer
+import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
+import org.yakindu.sct.model.sexec.transformation.StructureMapping
+import org.yakindu.sct.model.sexec.transformation.BehaviorMapping
+import org.yakindu.sct.model.sexec.transformation.ReactionBuilder
+import org.yakindu.sct.model.sexec.transformation.SequenceBuilder
+import org.yakindu.sct.model.sexec.transformation.StateVectorBuilder
+import org.yakindu.sct.model.sexec.transformation.RetargetReferences
 
 class ModelSequencer implements IModelSequencer {
 	 
@@ -25,6 +33,9 @@ class ModelSequencer implements IModelSequencer {
 	@Inject extension SequenceBuilder seqBuilder
 	@Inject extension StateVectorBuilder svBuilder
 	@Inject extension RetargetReferences retageting
+	
+	@Inject extension ReactMethod reactMethod
+	
 	
 	/* ==========================================================================
 	 * TRANSFORMATION ROOT
@@ -43,6 +54,8 @@ class ModelSequencer implements IModelSequencer {
 		sc.mapPseudoStates(ef)
 		sc.mapRegions(ef)
 		sc.mapTimeEvents(ef)
+
+		ef.declareReactMethods
 
 		// calculate state vectors
 		ef.defineStateVector(sc)
@@ -68,11 +81,11 @@ class ModelSequencer implements IModelSequencer {
 		sc.mapEntries(ef)
 		sc.mapChoiceTransitions(ef)
 		sc.mapSyncTransitions(ef)
-		
+	
 		sc.defineEntryReactions(ef)
-		ef.defineRegularStateReactions(sc)
 		ef.definePseudoStateReactions(sc)
-		ef.defineStatechartReaction(sc)
+		
+		ef.defineReactMethods
 		
 		// retarget declaration refs
 		ef.retargetDeclRefs

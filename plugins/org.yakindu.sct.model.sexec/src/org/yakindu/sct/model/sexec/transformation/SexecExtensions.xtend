@@ -23,6 +23,7 @@ import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.EcoreUtil2
+import org.yakindu.sct.model.sexec.Reaction
 
 class SexecExtensions {
 	
@@ -103,6 +104,11 @@ class SexecExtensions {
 			s=s.superScope
 		}
 		return parents
+	}
+	
+	
+	def unchecked(Reaction it) {
+		return (check === null || check.condition === null )
 	}
 	
 	/**
