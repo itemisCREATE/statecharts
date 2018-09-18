@@ -7,7 +7,8 @@
          xmlns:artifact="antlib:org.eclipse.aether.ant">
 
     <!-- Runtime properties:
-         website.local.files: Generates website as local files
+         website.local.files: Generates website as local files (FIXME: Remove this feature)
+         preview: Generates website with "-preview" in HTML filenames to support Hubspot previews.
     -->
 
     <!-- Include platform-specific or machine-specific properties, if any. -->
@@ -49,8 +50,9 @@
     <!-- MyLyn Wikitext version: -->
     <property name="wikitext.version" value="3.0.20" />
 
-    <!-- YAKINDU Docs version: -->
+    <!-- YAKINDU Docs version and local directory: -->
     <property name="yakindu.docs.version" value="0.1.0-SNAPSHOT" />
+    <property name="yakindu.docs.dir" value="${lib.dir}/yakindu.docs" />
 
 
 
@@ -112,7 +114,6 @@
                             scope="compile" />
             </artifact:dependencies>
             <path refid="wikitext.classpath" />
-            <files dir="${lib.dir}/bin" layout="{groupId}/{artifactId}-{baseVersion}.{extension}" />
         </artifact:resolve>
 
         <!-- Sources of MyLyn Wikitext: -->
@@ -136,7 +137,6 @@
                             scope="compile" />
             </artifact:dependencies>
             <path refid="wikitext.textile.classpath" />
-            <files dir="${lib.dir}/bin" layout="{groupId}/{artifactId}-{baseVersion}.{extension}" />
         </artifact:resolve>
 
         <!-- Sources of MyLyn Wikitext's Textile support: -->
@@ -160,7 +160,6 @@
                             scope="compile" />
             </artifact:dependencies>
             <path refid="wikitext.ant.classpath" />
-            <files dir="${lib.dir}/bin" layout="{groupId}/{artifactId}-{baseVersion}.{extension}" />
         </artifact:resolve>
 
         <!-- Classpath for Wikitext: -->
@@ -169,6 +168,18 @@
             <path refid="wikitext.textile.classpath" />
             <path refid="wikitext.ant.classpath" />
         </path>
+
+        <!-- Repositories for YAKINDU Docs: -->
+        <artifact:remoterepos id="aether.repositories">
+            <artifact:remoterepo url="https://projects.itemis.de/nexus/content/repositories/OSR/"
+                                 id="releases"
+                                 releases="true"
+                                 snapshots="false" />
+            <artifact:remoterepo url="https://projects.itemis.de/nexus/content/repositories/OSS/"
+                                 id="snapshots"
+                                 releases="false"
+                                 snapshots="true" />
+        </artifact:remoterepos>
 
         <!-- Classpath for YAKINDU Docs: -->
         <artifact:resolve>
@@ -179,7 +190,6 @@
                             scope="compile" />
             </artifact:dependencies>
             <path refid="org.yakindu.docs.classpath" />
-            <files dir="${lib.dir}/bin" layout="{groupId}/{artifactId}-{baseVersion}.{extension}" />
         </artifact:resolve>
 
         <!-- YAKINDU Docs website template: -->
@@ -191,9 +201,11 @@
                             scope="compile"
                             classifier="website" />
             </artifact:dependencies>
-            <files dir="${lib.dir}/website" layout="{groupId}/{artifactId}-{baseVersion}-{classifier}.{extension}" />
+            <properties prefix="resolved" />
         </artifact:resolve>
 
+        <!-- Unpack the YAKINDU Docs website template: -->
+        <unjar src="${resolved.org.yakindu.docs:yakindu-docs-maven-plugin:jar:website}" dest="${yakindu.docs.dir}" />
     </target>
 
 
@@ -450,7 +462,8 @@
             <local name="index.textile" />
             <property name="index.textile" value="@{name}.textile" />
             <local name="index.html" />
-            <property name="index.html" value="@{name}.html" />
+            <property name="index.html" value="@{name}.html" unless:set="preview" />
+            <property name="index.html" value="@{name}-preview.html" if:set="preview" />
 
             <!-- Append those source files that make up the particular piece of documentation: -->
             <mkdir dir="${work.dir}" />
@@ -476,15 +489,15 @@
                   dir="${basedir}"
                   failonerror="true">
                 <arg value="--p1-file" />
-                <arg value="${src.dir}/website/p1.htmlf" />
+                <arg value="${yakindu.docs.dir}/website/p1.htmlf" />
                 <arg value="--contents-template-file" />
-                <arg value="${src.dir}/website/contents.htmlf" />
+                <arg value="${yakindu.docs.dir}/website/contents.htmlf" />
                 <arg value="--p2-file" />
-                <arg value="${src.dir}/website/p2.htmlf" />
+                <arg value="${yakindu.docs.dir}/website/p2.htmlf" />
                 <arg value="--toc-template-file" />
-                <arg value="${src.dir}/website/toc.htmlf" />
+                <arg value="${yakindu.docs.dir}/website/toc.htmlf" />
                 <arg value="--p3-file" />
-                <arg value="${src.dir}/website/p3.htmlf" />
+                <arg value="${yakindu.docs.dir}/website/p3.htmlf" />
                 <arg value="--input" />
                 <arg value="${work.dir}/${index.textile}" />
                 <arg value="--output" />
