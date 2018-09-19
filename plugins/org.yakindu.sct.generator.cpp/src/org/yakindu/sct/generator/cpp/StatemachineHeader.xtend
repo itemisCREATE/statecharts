@@ -123,6 +123,8 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			
 			«statesEnumDecl»
 			
+			static const sc_integer «statesCountConst» = «states.size»;
+			
 			«FOR s : it.scopes»«s.createPublicScope»«ENDFOR»
 			
 			«publicFunctionPrototypes»

@@ -399,4 +399,6 @@ class Naming {
 	def maxHistoryStates(ExecutionFlow it) '''«type.toUpperCase»_MAX_HISTORY_STATES'''
 
 	def maxParallelTimeEvents(ExecutionFlow it) '''«type.toUpperCase»_MAX_PARALLEL_TIME_EVENTS'''
+	
+	def numStates(ExecutionFlow it) '''«type.toUpperCase»_STATE_COUNT'''
 }
