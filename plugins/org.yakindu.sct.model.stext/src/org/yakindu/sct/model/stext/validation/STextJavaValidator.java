@@ -68,6 +68,7 @@ import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
@@ -83,6 +84,7 @@ import org.yakindu.sct.model.stext.extensions.STextExtensions;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
+import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
@@ -124,6 +126,8 @@ import com.google.inject.name.Named;
 		STextNamesAreUniqueValidator.class })
 public class STextJavaValidator extends AbstractSTextJavaValidator implements STextValidationMessages {
 
+	private static final String KEYWORD_ONCYCLE = "oncycle";
+	private static final String KEYWORD_ALWAYS = "always";
 	@Inject
 	private ITypeSystemInferrer typeInferrer;
 	@Inject
@@ -199,7 +203,63 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			warning(ISSUE_TRANSITION_WITHOUT_TRIGGER, trans, null, -1);
 		}
 	}
+	
+	@Check(CheckType.FAST)
+	public void checkAlwaysTransitionHasLowestPriority(RegularState state) {
+		Iterator<Transition> iterator = state.getOutgoingTransitions().iterator();
+		while (iterator.hasNext()) {
+			Transition transition = iterator.next();
+			Trigger trigger = transition.getTrigger();
+			// check default/else trigger
+			if (trigger instanceof DefaultTrigger && iterator.hasNext()) {
+				warning(String.format(ALWAYS_TRUE_TRANSITION_USED, transition.getSpecification()), transition, null,
+						-1);
+			} 
+			// check always/oncycle trigger
+			else if (trigger instanceof ReactionTrigger) {
+				ReactionTrigger reactTrigger = (ReactionTrigger) trigger;
+				EList<EventSpec> triggers = reactTrigger.getTriggers();
+				if (triggers.size() == 1 && reactTrigger.getGuard() == null) {
+					EventSpec eventSpec = triggers.get(0);
+					if (eventSpec instanceof AlwaysEvent && iterator.hasNext()) {
+						warning(String.format(ALWAYS_TRUE_TRANSITION_USED, getTransitionDeclaration(transition)),
+								transition, null, -1);
+					}
+				}
+			}
+		}
+	}
 
+	protected String getTransitionDeclaration(Transition transition) {
+		String specification = transition.getSpecification();
+		
+		if (KEYWORD_ALWAYS.contains(specification)) {
+			return KEYWORD_ALWAYS;
+		} else if (KEYWORD_ONCYCLE.contains(specification)) {
+			return KEYWORD_ONCYCLE;
+		}
+		return "";
+	}
+	
+	@Check(CheckType.FAST)
+	public void checkDefaultTriggerIsUsedInsteadOfAlways(Choice state) {
+		Iterator<Transition> iterator = state.getOutgoingTransitions().iterator();
+		while (iterator.hasNext()) {
+			Transition transition = iterator.next();
+			Trigger trigger = transition.getTrigger();
+			if (trigger instanceof ReactionTrigger) {
+				ReactionTrigger reactTrigger = (ReactionTrigger) trigger;
+				EList<EventSpec> triggers = reactTrigger.getTriggers();
+				if (triggers.size() == 1 && reactTrigger.getGuard() == null) {
+					if (triggers.get(0) instanceof AlwaysEvent) {
+						warning(String.format(USE_DEFAULT_TRIGGER_IN_CHOICES, transition.getSpecification()),
+								transition, null, -1);
+					}
+				}
+			}
+		}
+	}
+	
 	@Check(CheckType.FAST)
 	public void checkUnusedEntry(final Entry entry) {
 		if (entry.getParentRegion().getComposite() instanceof org.yakindu.sct.model.sgraph.State
