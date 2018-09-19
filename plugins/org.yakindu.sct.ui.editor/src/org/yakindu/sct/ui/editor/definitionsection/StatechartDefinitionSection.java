@@ -246,7 +246,7 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 		Injector embeddedEditorInjector = getEmbeddedStatechartSpecificationInjector();
 		EmbeddedEditorFactory instance = embeddedEditorInjector.getInstance(EmbeddedEditorFactory.class);
 		IEditedResourceProvider provider = getXtextResourceProvider(embeddedEditorInjector);
-		return instance.newEditor(provider).showErrorAndWarningAnnotations().withParent(this);
+		return instance.newEditor(provider).showAnnotations("org.eclipse.xtext.ui.editor.error", "org.eclipse.xtext.ui.editor.warning","org.eclipse.xtext.ui.editor.information").withParent(this);
 	}
 
 	protected Injector getEmbeddedStatechartSpecificationInjector() {
