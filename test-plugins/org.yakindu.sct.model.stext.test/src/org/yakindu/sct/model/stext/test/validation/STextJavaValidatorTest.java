@@ -39,9 +39,11 @@ import org.yakindu.base.expressions.validation.ExpressionsJavaValidator;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.ITypeSystem;
+import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -875,7 +877,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	@Test
 	public void transitionsWithNoTrigger() {
 	}
-
+	
 	@Test
 	public void testOptionalParameter() {
 		EObject model;
@@ -1056,5 +1058,31 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		assertIssueCount(diagnostics, 1);
 		assertWarning(diagnostics, EXIT_NEVER_USED + "'unusedExitPoint'");
 	}
+	
+	@Test
+	public void checkAlwaysTransitionHasLowestPriority() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "TransitionBlockingAlwaysTrueStates.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof RegularState) {
+				validator.validate(element, diagnostics, new HashMap<>());
+			}
+		}
+		assertIssueCount(diagnostics, 4);
+	}
 
+	@Test
+	public void checkDefaultTriggerIsUsedInsteadOfAlways() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "TransitionBlockingAlwaysTrueChoices.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Choice) {
+				validator.validate(element, diagnostics, new HashMap<>());
+			}
+		}
+		assertIssueCount(diagnostics, 2);
+	}
+	
 }
