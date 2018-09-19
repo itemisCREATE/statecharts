@@ -14,55 +14,53 @@
 	<groupId>org.yakindu.sct.plugins</groupId>
 	<packaging>eclipse-plugin</packaging>
 	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<artifactId>maven-antrun-plugin</artifactId>
-					<version>1.8</version>
-					<executions>
-						<execution>
-							<id>generate-help</id>
-							<phase>generate-sources</phase>
-							<configuration>
-								<target>
-									<property environment="env">
-										<env key="LANG" value="en_US" />
-									</property>
-								</target>
-								<tasks>
-									<ant dir="${project.basedir}" antfile="build.xml">
-									</ant>
-								</tasks>
-							</configuration>
-							<goals>
-								<goal>run</goal>
-							</goals>
-						</execution>
-						<execution>
-							<id>clean-help</id>
-							<phase> clean </phase>
-							<configuration>
-								<target>
-									<ant dir="${project.basedir}" antfile="build.xml"
-										target="clean">
-									</ant>
-								</target>
-							</configuration>
-							<goals>
-								<goal>run</goal>
-							</goals>
-						</execution>
-					</executions>
-					<dependencies>
-						<dependency>
-							<groupId>org.yakindu.docs</groupId>
-							<artifactId>yakindu-docs-maven-plugin</artifactId>
-							<version>0.0.1-SNAPSHOT</version>
-						</dependency>
-					</dependencies>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+		<plugins>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<id>generate-help</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<target>
+								<property environment="env">
+									<env key="LANG" value="en_US" />
+								</property>
+							</target>
+							<tasks>
+								<ant dir="${project.basedir}" antfile="build.xml">
+								</ant>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>clean-help</id>
+						<phase> clean </phase>
+						<configuration>
+							<target>
+								<ant dir="${project.basedir}" antfile="build.xml"
+									target="clean">
+								</ant>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.yakindu.docs</groupId>
+						<artifactId>yakindu-docs-maven-plugin</artifactId>
+						<version>0.0.1-SNAPSHOT</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
 	</build>
 
 	<pluginRepositories>
