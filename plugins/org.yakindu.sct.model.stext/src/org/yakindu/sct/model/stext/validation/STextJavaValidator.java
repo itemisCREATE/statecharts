@@ -207,13 +207,20 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	@Check(CheckType.FAST)
 	public void checkAlwaysTransitionHasLowestPriority(RegularState state) {
 		Iterator<Transition> iterator = state.getOutgoingTransitions().iterator();
+		Transition deadTransition = null;
 		while (iterator.hasNext()) {
 			Transition transition = iterator.next();
 			Trigger trigger = transition.getTrigger();
+			if (deadTransition != null) {
+				warning(String.format(DEAD_TRANSITION, getTransitionDeclaration(deadTransition)), transition, null, -1);
+			}
 			// check default/else trigger
 			if (trigger instanceof DefaultTrigger && iterator.hasNext()) {
 				warning(String.format(ALWAYS_TRUE_TRANSITION_USED, transition.getSpecification()), transition, null,
 						-1);
+				if(deadTransition == null) {
+					deadTransition = transition;
+				}
 			} 
 			// check always/oncycle trigger
 			else if (trigger instanceof ReactionTrigger) {
@@ -224,6 +231,9 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 					if (eventSpec instanceof AlwaysEvent && iterator.hasNext()) {
 						warning(String.format(ALWAYS_TRUE_TRANSITION_USED, getTransitionDeclaration(transition)),
 								transition, null, -1);
+						if(deadTransition == null) {
+							deadTransition = transition;
+						}
 					}
 				}
 			}
@@ -238,15 +248,19 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		} else if (KEYWORD_ONCYCLE.contains(specification)) {
 			return KEYWORD_ONCYCLE;
 		}
-		return "";
+		return specification;
 	}
 	
 	@Check(CheckType.FAST)
 	public void checkDefaultTriggerIsUsedInsteadOfAlways(Choice state) {
 		Iterator<Transition> iterator = state.getOutgoingTransitions().iterator();
+		Transition deadTransition = null;
 		while (iterator.hasNext()) {
 			Transition transition = iterator.next();
 			Trigger trigger = transition.getTrigger();
+			if (deadTransition != null) {
+				warning(String.format(DEAD_TRANSITION, getTransitionDeclaration(deadTransition)), transition, null, -1);
+			}
 			if (trigger instanceof ReactionTrigger) {
 				ReactionTrigger reactTrigger = (ReactionTrigger) trigger;
 				EList<EventSpec> triggers = reactTrigger.getTriggers();
@@ -254,9 +268,13 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 					if (triggers.get(0) instanceof AlwaysEvent) {
 						warning(String.format(USE_DEFAULT_TRIGGER_IN_CHOICES, transition.getSpecification()),
 								transition, null, -1);
+						if(deadTransition == null) {
+							deadTransition = transition;
+						}
 					}
 				}
 			}
+			
 		}
 	}
 	
