@@ -990,7 +990,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				countEntryPointSpecs++;
 			}
 			if(countEntryPointSpecs > 1) {
-				error(ONLY_ONE_ENTRY_POINT_IS_ALLOWED, transition, null, -1);
+				warning(ONLY_FIRST_ENTRY_POINT_WILL_BE_USED, transition, null, -1);
 				break;
 			}
 		}

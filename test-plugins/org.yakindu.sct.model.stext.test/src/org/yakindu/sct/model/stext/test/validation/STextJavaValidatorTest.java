@@ -776,7 +776,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 				validator.validate(element, diagnostics, new HashMap<>());
 			}
 		}
-		assertIssueCount(diagnostics, 4);
+		assertIssueCount(diagnostics, 5);
 	}
 
 	@Test
@@ -1068,7 +1068,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 			}
 		}
 		assertIssueCount(diagnostics, 1);
-		assertWarning(diagnostics, ONLY_ONE_ENTRY_POINT_IS_ALLOWED);
+		assertWarning(diagnostics, ONLY_FIRST_ENTRY_POINT_WILL_BE_USED);
 	}
 
 }
