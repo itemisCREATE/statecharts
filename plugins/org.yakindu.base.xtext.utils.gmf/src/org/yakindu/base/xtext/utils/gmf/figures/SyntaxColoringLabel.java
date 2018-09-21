@@ -10,6 +10,8 @@
  */
 package org.yakindu.base.xtext.utils.gmf.figures;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import org.eclipse.draw2d.ColorConstants;
@@ -35,6 +37,7 @@ import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
+import com.google.common.base.Objects;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -103,7 +106,29 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		}
 
 		public void setRanges(StyleRange[] ranges) {
-			this.ranges = ranges;
+			this.ranges = merge(ranges);
+		}
+
+		protected StyleRange[] merge(StyleRange[] ranges) {
+			List<StyleRange> result = new ArrayList<>();
+			for (StyleRange styleRange : ranges) {
+				if (result.isEmpty()) {
+					result.add(styleRange);
+					continue;
+				}
+				StyleRange lastRange = result.get(result.size() - 1);
+				if (equal(lastRange, styleRange)) {
+					lastRange.length += styleRange.length;
+				} else
+					result.add(styleRange);
+			}
+			return result.toArray(new StyleRange[] {});
+		}
+
+		protected boolean equal(StyleRange lastRange, StyleRange styleRange) {
+			return lastRange.fontStyle == styleRange.fontStyle
+					&& Objects.equal(lastRange.background, styleRange.background)
+					&& Objects.equal(lastRange.foreground, styleRange.foreground);
 		}
 
 		@Override
