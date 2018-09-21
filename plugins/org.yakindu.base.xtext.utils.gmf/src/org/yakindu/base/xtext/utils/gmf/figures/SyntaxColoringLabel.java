@@ -163,6 +163,12 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 				String originalDraw = draw;
 				int paintOffset = 0;
 				int lineOffset = getText().indexOf(originalDraw);
+				if(lineOffset == -1) {
+					//This may happen if the string is truncated with '..'
+					originalDraw = replaceTabs(originalDraw);
+					 super.paintText(g, originalDraw, x, y, bidiLevel);
+					 return;
+				}
 				try {
 					g.pushState();
 					g.setFont(getFont());
@@ -196,7 +202,7 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 				super.paintText(g, draw, x, y, bidiLevel);
 			}
 		}
-
+		
 		protected String replaceTabs(String draw) {
 			return draw.replaceAll("\t", "    ");
 		}
