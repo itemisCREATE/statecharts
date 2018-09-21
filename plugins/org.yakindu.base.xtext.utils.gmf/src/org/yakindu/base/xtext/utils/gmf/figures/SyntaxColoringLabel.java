@@ -213,7 +213,7 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 			if (zoomFactor != 1.0) {
 				FontData data = font.getFontData()[0];
 				FontDescriptor newFontDescriptor = FontDescriptor.createFrom(font)
-						.setHeight((int) (data.height * zoomFactor));
+						.setHeight((int) (data.getHeight() * zoomFactor));
 				font = newFontDescriptor.createFont(Display.getDefault());
 			}
 			if (gc.getFont() != font)
