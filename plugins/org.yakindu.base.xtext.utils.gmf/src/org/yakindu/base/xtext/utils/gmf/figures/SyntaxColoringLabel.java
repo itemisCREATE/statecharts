@@ -10,6 +10,8 @@
  */
 package org.yakindu.base.xtext.utils.gmf.figures;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import org.eclipse.draw2d.ColorConstants;
@@ -22,6 +24,7 @@ import org.eclipse.draw2d.TextUtilities;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
+import org.eclipse.gmf.runtime.draw2d.ui.internal.graphics.ScaledGraphics;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.MapModeUtil;
 import org.eclipse.gmf.runtime.draw2d.ui.text.FlowUtilitiesEx;
@@ -31,10 +34,12 @@ import org.eclipse.jface.resource.FontDescriptor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
+import com.google.common.base.Objects;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -44,6 +49,7 @@ import com.google.common.cache.LoadingCache;
  * @author andreas muelder - Initial contribution and API
  * 
  */
+@SuppressWarnings("restriction")
 public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionListener {
 
 	private static final MarginBorder NO_FOCUS_BORDER = new MarginBorder(new Insets(1, 1, 1, 1));
@@ -103,7 +109,29 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		}
 
 		public void setRanges(StyleRange[] ranges) {
-			this.ranges = ranges;
+			this.ranges = merge(ranges);
+		}
+
+		protected StyleRange[] merge(StyleRange[] ranges) {
+			List<StyleRange> result = new ArrayList<>();
+			for (StyleRange styleRange : ranges) {
+				if (result.isEmpty()) {
+					result.add(styleRange);
+					continue;
+				}
+				StyleRange lastRange = result.get(result.size() - 1);
+				if (equal(lastRange, styleRange)) {
+					lastRange.length += styleRange.length;
+				} else
+					result.add(styleRange);
+			}
+			return result.toArray(new StyleRange[] {});
+		}
+
+		protected boolean equal(StyleRange lastRange, StyleRange styleRange) {
+			return lastRange.fontStyle == styleRange.fontStyle
+					&& Objects.equal(lastRange.background, styleRange.background)
+					&& Objects.equal(lastRange.foreground, styleRange.foreground);
 		}
 
 		@Override
@@ -135,6 +163,12 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 				String originalDraw = draw;
 				int paintOffset = 0;
 				int lineOffset = getText().indexOf(originalDraw);
+				if(lineOffset == -1) {
+					//This may happen if the string is truncated with '..'
+					originalDraw = replaceTabs(originalDraw);
+					 super.paintText(g, originalDraw, x, y, bidiLevel);
+					 return;
+				}
 				try {
 					g.pushState();
 					g.setFont(getFont());
@@ -154,7 +188,11 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 								Math.min(endIndex > 0 ? endIndex : 0, draw.length()));
 						substring = replaceTabs(substring);
 						g.drawText(substring, x + paintOffset, y);
-						int offset = getTextExtend(g.getFont(), substring);
+						double zoomFactor = 1.0;
+						if (g instanceof ScaledGraphics) {
+							zoomFactor = g.getAbsoluteScale();
+						}
+						int offset = getTextExtend(g.getFont(), substring, zoomFactor);
 						paintOffset += offset;
 					}
 				} finally {
@@ -164,20 +202,27 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 				super.paintText(g, draw, x, y, bidiLevel);
 			}
 		}
-
+		
 		protected String replaceTabs(String draw) {
 			return draw.replaceAll("\t", "    ");
 		}
 
-		protected int getTextExtend(Font font, String string) {
-			// Can't use TextUtilities, wrong calculation of " "
-			// getTextUtilities().getStringExtents(string, font).width;
+		protected int getTextExtend(Font font, String string, double zoomFactor) {
 			if (string.isEmpty())
 				return 0;
+			if (zoomFactor != 1.0) {
+				FontData data = font.getFontData()[0];
+				FontDescriptor newFontDescriptor = FontDescriptor.createFrom(font)
+						.setHeight((int) (data.getHeight() * zoomFactor));
+				font = newFontDescriptor.createFont(Display.getDefault());
+			}
 			if (gc.getFont() != font)
 				gc.setFont(font);
 			int offset = gc.textExtent(string).x;
-			return offset;
+			if (zoomFactor != 1.0) {
+				font.dispose();
+			}
+			return (int) (offset / zoomFactor);
 		}
 
 		@Override
@@ -244,7 +289,7 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 					String substring = draw.substring(beginIndex > 0 ? beginIndex : 0,
 							Math.min(endIndex > 0 ? endIndex : 0, draw.length()));
 					Font font = SWT.BOLD == (range.fontStyle & SWT.BOLD) ? boldFont : getFont();
-					int offset = getTextExtend(font, substring);
+					int offset = getTextExtend(font, substring, 1.5);
 					paintOffset += offset;
 				}
 				d.width = Math.max(d.width, paintOffset);
