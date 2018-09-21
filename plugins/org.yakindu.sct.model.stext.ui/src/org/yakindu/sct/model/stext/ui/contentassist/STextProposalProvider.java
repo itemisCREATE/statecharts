@@ -391,7 +391,7 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	}
 	
 	@Override
-	public void complete_ID(EObject model, RuleCall ruleCall, ContentAssistContext context,
+	public void complete_IDWithKeywords(EObject model, RuleCall ruleCall, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		if (model instanceof TransitionReaction) {
 			SpecificationElement contextElement = utils.getContextElement(model);

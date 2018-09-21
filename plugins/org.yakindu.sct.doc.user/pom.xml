@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.yakindu.sct</groupId>
@@ -19,11 +21,11 @@
 				<executions>
 					<execution>
 						<id>generate-help</id>
-						<phase> generate-sources </phase>
+						<phase>generate-sources</phase>
 						<configuration>
 							<target>
 								<property environment="env">
-									<env key="LANG" value="en_US"/>
+									<env key="LANG" value="en_US" />
 								</property>
 							</target>
 							<tasks>
@@ -40,7 +42,8 @@
 						<phase> clean </phase>
 						<configuration>
 							<target>
-								<ant dir="${project.basedir}" antfile="build.xml" target="clean">
+								<ant dir="${project.basedir}" antfile="build.xml"
+									target="clean">
 								</ant>
 							</target>
 						</configuration>
