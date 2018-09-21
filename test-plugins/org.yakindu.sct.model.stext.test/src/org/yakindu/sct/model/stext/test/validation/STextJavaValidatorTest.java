@@ -1061,7 +1061,8 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	
 	@Test
 	public void checkAlwaysTransitionHasLowestPriority() {
-		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "TransitionBlockingAlwaysTrueStates.sct");
+		statechart = AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "TransitionBlockingAlwaysTrueStates.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
@@ -1069,11 +1070,11 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 				validator.validate(element, diagnostics, new HashMap<>());
 			}
 		}
-		assertIssueCount(diagnostics, 4);
+		assertIssueCount(diagnostics, 8);
 	}
 
 	@Test
-	public void checkDefaultTriggerIsUsedInsteadOfAlways() {
+	public void checkAlwaysAndDefaultTransitionInChoices() {
 		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "TransitionBlockingAlwaysTrueChoices.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
@@ -1082,7 +1083,20 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 				validator.validate(element, diagnostics, new HashMap<>());
 			}
 		}
-		assertIssueCount(diagnostics, 2);
+		assertIssueCount(diagnostics, 7);
+	}
+	
+	@Test
+	public void checkOnlyOneDefaultTransitionUsed() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "MultipleDefaultInChoices.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Choice) {
+				validator.validate(element, diagnostics, new HashMap<>());
+			}
+		}
+		assertIssueCount(diagnostics, 4);		
 	}
 	
 }

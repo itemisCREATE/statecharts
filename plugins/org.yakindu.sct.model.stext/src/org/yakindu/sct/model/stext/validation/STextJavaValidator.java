@@ -16,6 +16,7 @@ import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION;
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.PARENT_FIRST_ANNOTATION;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -128,6 +129,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 	private static final String KEYWORD_ONCYCLE = "oncycle";
 	private static final String KEYWORD_ALWAYS = "always";
+	
 	@Inject
 	private ITypeSystemInferrer typeInferrer;
 	@Inject
@@ -252,29 +254,70 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	}
 	
 	@Check(CheckType.FAST)
-	public void checkDefaultTriggerIsUsedInsteadOfAlways(Choice state) {
-		Iterator<Transition> iterator = state.getOutgoingTransitions().iterator();
+	public void checkAlwaysAndDefaultTransitionInChoices(Choice choice) {
 		Transition deadTransition = null;
-		while (iterator.hasNext()) {
-			Transition transition = iterator.next();
-			Trigger trigger = transition.getTrigger();
+		EList<Transition> outgoingTransitions = choice.getOutgoingTransitions();
+		int size = outgoingTransitions.size();
+		int deadTransitionIndex = 0;
+		for (int i = 0; i < size; i++) {
+			Transition transition = outgoingTransitions.get(i);
 			if (deadTransition != null) {
 				warning(String.format(DEAD_TRANSITION, getTransitionDeclaration(deadTransition)), transition, null, -1);
 			}
+			Trigger trigger = transition.getTrigger();
 			if (trigger instanceof ReactionTrigger) {
 				ReactionTrigger reactTrigger = (ReactionTrigger) trigger;
 				EList<EventSpec> triggers = reactTrigger.getTriggers();
 				if (triggers.size() == 1 && reactTrigger.getGuard() == null) {
 					if (triggers.get(0) instanceof AlwaysEvent) {
-						warning(String.format(USE_DEFAULT_TRIGGER_IN_CHOICES, transition.getSpecification()),
-								transition, null, -1);
-						if(deadTransition == null) {
+						if(i != size-1) {
+							warning(String.format(ALWAYS_TRUE_TRANSITION_USED, transition.getSpecification()), transition,
+									null, -1);
+						}
+						if (deadTransition == null) {
 							deadTransition = transition;
+							deadTransitionIndex = i;
 						}
 					}
 				}
 			}
-			
+		}
+		
+		// if we got a dead transition, we need to re-check if a default was used before
+		if(deadTransition != null) {
+			boolean defaultWasUsed = false;
+			for(int i = 0; i < deadTransitionIndex; i++) {
+				Transition transition = outgoingTransitions.get(i);
+				Trigger trigger = transition.getTrigger();
+				if(trigger instanceof DefaultTrigger || trigger ==null) {
+					warning(String.format(DEAD_TRANSITION, getTransitionDeclaration(deadTransition)), transition, null, -1);
+					defaultWasUsed = true;
+				}
+			}
+			if(defaultWasUsed) {
+				warning(String.format(ALWAYS_TRUE_TRANSITION_USED_IN_CHOICE, deadTransition.getSpecification()), deadTransition,
+						null, -1);
+			}
+		}
+	}
+	
+	@Check(CheckType.FAST)
+	public void checkOnlyOneDefaultTransitionUsed(Choice choice){
+		Iterator<Transition> iterator = choice.getOutgoingTransitions().iterator();
+		List<Transition> defaultTransitions = new ArrayList<Transition>();
+		while(iterator.hasNext()) {
+			Transition transition = iterator.next();
+			Trigger trigger = transition.getTrigger();
+			if(trigger instanceof DefaultTrigger || trigger ==null) {
+				defaultTransitions.add(transition);
+			}
+		}
+		int size = defaultTransitions.size();
+		if (size > 1) {
+			Iterator<Transition> iterator2 = defaultTransitions.iterator();
+			while (iterator2.hasNext()) {
+				warning(String.format(ONLY_ONE_DEFAULT_SHOULD_BE_USED, size), iterator2.next(), null, -1);
+			}
 		}
 	}
 	

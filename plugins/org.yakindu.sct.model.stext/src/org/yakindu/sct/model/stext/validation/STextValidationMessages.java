@@ -61,7 +61,9 @@ public interface STextValidationMessages {
 	public static final String CONTRADICTORY_ANNOTATIONS = "Some annotations (%s) have contradictory effects.";
 	public static final String BAD_EVENT_NAMES = "'%s' is already used as name of an internal event.";
 	public static final String SYNC_OUTGOING_TRIGGER = "Triggers and guards on a synchronization's outgoing transitions will be ignored.";
-	public static final String ALWAYS_TRUE_TRANSITION_USED = "So we should use a alternative message like: \"Transition with '%s' should be evaluate as the last transition of the state as following transitions won't be evaluated. Change the transition order (in the Properties view).";
+	public static final String ALWAYS_TRUE_TRANSITION_USED = "Transition with '%s' should be evaluate as the last transition of the state as following transitions won't be evaluated. Change the transition order (in the Properties view).";
+	public static final String ALWAYS_TRUE_TRANSITION_USED_IN_CHOICE ="Using %s transition conflicts with default/else transition.";
 	public static final String DEAD_TRANSITION = "Dead transition. This transition can not be taken due to previous transition with '%s' trigger.";
 	public static final String USE_DEFAULT_TRIGGER_IN_CHOICES = "Transition with '%s' effect blocking other transitions. Use 'default' or 'else' instead.";
+	public static final String ONLY_ONE_DEFAULT_SHOULD_BE_USED = "Only one default or else transition should be used. Currently used default and/or else transitions: %d.";
 }
