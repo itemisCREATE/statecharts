@@ -3,8 +3,8 @@
     xmlns:unless="ant:unless" xmlns:artifact="antlib:org.eclipse.aether.ant">
 
     <!-- Runtime properties:
-         website.local.files: Generates website as local files (FIXME: Remove this feature)
-         preview: Generates website with "-preview" in HTML filenames to support Hubspot previews.
+        website.local.files: Generates website as local files (FIXME: Remove this feature)
+        preview: Generates website with "-preview" in HTML filenames to support Hubspot previews.
     -->
 
     <!-- Include platform-specific or machine-specific properties, if any. -->
@@ -47,8 +47,8 @@
     <property name="wikitext.version" value="3.0.20"/>
 
     <!-- YAKINDU Docs version and local directory: -->
-    <property name="yakindu.docs.version" value="0.1.0-SNAPSHOT" />
-    <property name="yakindu.docs.dir" value="${lib.dir}/yakindu.docs" />
+    <property name="yakindu.docs.version" value="0.1.0-SNAPSHOT"/>
+    <property name="yakindu.docs.dir" value="${lib.dir}/yakindu.docs"/>
 
 
 
@@ -66,9 +66,9 @@
     </target>
 
     <!-- Aether Ant Tasks are used to access Maven dependencies from an Ant build. It is initialized by downloading
-             the Aether Ant Tasks JAR to the library folder, if needed. The downloaded JAR will not be removed by the
-             "clean" target. If the JAR is present, a typedef will make Aether Ant Tasks' elements available in the Ant
-             build file. -->
+        the Aether Ant Tasks JAR to the library folder, if needed. The downloaded JAR will not be removed by the
+        "clean" target. If the JAR is present, a typedef will make Aether Ant Tasks' elements available in the Ant
+        build file. -->
     <target name="init.aether"
         description="Initializes Aether Ant Tasks JAR by downloading the JAR and defining a type.">
         <condition property="target.exists">
@@ -107,13 +107,10 @@
         <!-- Sources of MyLyn Wikitext: -->
         <artifact:resolve>
             <artifact:dependencies>
-                <dependency groupId="org.eclipse.mylyn.docs"
-                            artifactId="org.eclipse.mylyn.wikitext"
-                            version="${wikitext.version}"
-                            scope="compile"
-                            classifier="sources" />
+                <dependency groupId="org.eclipse.mylyn.docs" artifactId="org.eclipse.mylyn.wikitext"
+                    version="${wikitext.version}" scope="compile" classifier="sources"/>
             </artifact:dependencies>
-            <files dir="${lib.dir}/src" layout="{groupId}/{artifactId}-{baseVersion}-{classifier}.{extension}" />
+            <files dir="${lib.dir}/src" layout="{groupId}/{artifactId}-{baseVersion}-{classifier}.{extension}"/>
         </artifact:resolve>
 
         <!-- Classpath for MyLyn Wikitext's Textile support: -->
@@ -128,13 +125,10 @@
         <!-- Sources of MyLyn Wikitext's Textile support: -->
         <artifact:resolve>
             <artifact:dependencies>
-                <dependency groupId="org.eclipse.mylyn.docs"
-                            artifactId="org.eclipse.mylyn.wikitext.textile"
-                            version="${wikitext.version}"
-                            scope="compile"
-                            classifier="sources" />
+                <dependency groupId="org.eclipse.mylyn.docs" artifactId="org.eclipse.mylyn.wikitext.textile"
+                    version="${wikitext.version}" scope="compile" classifier="sources"/>
             </artifact:dependencies>
-            <files dir="${lib.dir}/src" layout="{groupId}/{artifactId}-{baseVersion}-{classifier}.{extension}" />
+            <files dir="${lib.dir}/src" layout="{groupId}/{artifactId}-{baseVersion}-{classifier}.{extension}"/>
         </artifact:resolve>
 
         <!-- Classpath for MyLyn Wikitext's Ant support: -->
@@ -164,10 +158,8 @@
         <!-- Classpath for YAKINDU Docs: -->
         <artifact:resolve>
             <artifact:dependencies>
-                <dependency groupId="org.yakindu.docs"
-                            artifactId="yakindu-docs-maven-plugin"
-                            version="${yakindu.docs.version}"
-                            scope="compile" />
+                <dependency groupId="org.yakindu.docs" artifactId="yakindu-docs-maven-plugin"
+                    version="${yakindu.docs.version}" scope="compile"/>
             </artifact:dependencies>
             <path refid="org.yakindu.docs.classpath"/>
         </artifact:resolve>
@@ -175,17 +167,14 @@
         <!-- YAKINDU Docs website template: -->
         <artifact:resolve>
             <artifact:dependencies>
-                <dependency groupId="org.yakindu.docs"
-                            artifactId="yakindu-docs-maven-plugin"
-                            version="${yakindu.docs.version}"
-                            scope="compile"
-                            classifier="website" />
+                <dependency groupId="org.yakindu.docs" artifactId="yakindu-docs-maven-plugin"
+                    version="${yakindu.docs.version}" scope="compile" classifier="website"/>
             </artifact:dependencies>
-            <properties prefix="resolved" />
+            <properties prefix="resolved"/>
         </artifact:resolve>
 
         <!-- Unpack the YAKINDU Docs website template: -->
-        <unjar src="${resolved.org.yakindu.docs:yakindu-docs-maven-plugin:jar:website}" dest="${yakindu.docs.dir}" />
+        <unjar src="${resolved.org.yakindu.docs:yakindu-docs-maven-plugin:jar:website}" dest="${yakindu.docs.dir}"/>
     </target>
 
 
@@ -242,7 +231,7 @@
             </wikitext-to-eclipse-help>
 
             <!-- Files have been generated in the source directory, which is bad practice. Move them to the destination
-                 directory: -->
+                directory: -->
             <move todir="${help.dir}" flatten="no" verbose="no">
                 <fileset dir="${src.dir}">
                     <include name="**/*.html"/>
@@ -267,9 +256,8 @@
             </replaceregexp>
 
             <!-- Add CSS classes "eclipsehelp" and "body-container" to BODY element and
-                 nest a DIV child with CSS class "primary" into the BODY element. -->
-            <replaceregexp byline="true"
-                           match='&lt;body&gt;'
+                nest a DIV child with CSS class "primary" into the BODY element. -->
+            <replaceregexp byline="true" match='&lt;body&gt;'
                 replace='&lt;body class="eclipsehelp body-container"&gt;&lt;div class="primary"&gt;'>
                 <fileset dir="${help.dir}">
                     <include name="**/*.html"/>
@@ -348,17 +336,17 @@
     </target>
 
     <!-- Generates the documentation as various HTML files, each being composed of selected sections. Each part has a
-         name and a title, and consists of a set of source files. The generated documentation structure looks like this:
+        name and a title, and consists of a set of source files. The generated documentation structure looks like this:
 
-         website
+        website
         YSCT-installation.html
-             YSCT-user-guide.html
-             YSCT-tutorials.html
-             css/yakindu.css
-             css/ysct.css
-             js/yakindu.js
-                 …
-             images/…
+        YSCT-user-guide.html
+        YSCT-tutorials.html
+        css/yakindu.css
+        css/ysct.css
+        js/yakindu.js
+        …
+        images/…
     -->
 
     <target name="generate.website"
@@ -433,11 +421,11 @@
             <property name="work.dir" location="${website.dir}"/>
 
             <!-- The names of the concatenated documentation files: -->
-            <local name="index.textile" />
-            <property name="index.textile" value="@{name}.textile" />
-            <local name="index.html" />
-            <property name="index.html" value="@{name}.html" unless:set="preview" />
-            <property name="index.html" value="@{name}-preview.html" if:set="preview" />
+            <local name="index.textile"/>
+            <property name="index.textile" value="@{name}.textile"/>
+            <local name="index.html"/>
+            <property name="index.html" value="@{name}.html" unless:set="preview"/>
+            <property name="index.html" value="@{name}-preview.html" if:set="preview"/>
 
             <!-- Append those source files that make up the particular piece of documentation: -->
             <mkdir dir="${work.dir}"/>
@@ -452,28 +440,25 @@
                 <path refid="wikitext.all.classpath"/>
             </path>
             <java classname="org.yakindu.docs.wikitext.TextileToHubspotConverter"
-                  classpathref="converter.classpath"
-                  fork="true"
-                  dir="${basedir}"
-                  failonerror="true">
-                <arg value="--p1-file" />
-                <arg value="${yakindu.docs.dir}/website/p1.htmlf" />
-                <arg value="--contents-template-file" />
-                <arg value="${yakindu.docs.dir}/website/contents.htmlf" />
-                <arg value="--p2-file" />
-                <arg value="${yakindu.docs.dir}/website/p2.htmlf" />
-                <arg value="--toc-template-file" />
-                <arg value="${yakindu.docs.dir}/website/toc.htmlf" />
-                <arg value="--p3-file" />
-                <arg value="${yakindu.docs.dir}/website/p3.htmlf" />
-                <arg value="--input" />
-                <arg value="${work.dir}/${index.textile}" />
+                classpathref="converter.classpath" fork="true" dir="${basedir}" failonerror="true">
+                <arg value="--p1-file"/>
+                <arg value="${yakindu.docs.dir}/website/p1.htmlf"/>
+                <arg value="--contents-template-file"/>
+                <arg value="${yakindu.docs.dir}/website/contents.htmlf"/>
+                <arg value="--p2-file"/>
+                <arg value="${yakindu.docs.dir}/website/p2.htmlf"/>
+                <arg value="--toc-template-file"/>
+                <arg value="${yakindu.docs.dir}/website/toc.htmlf"/>
+                <arg value="--p3-file"/>
+                <arg value="${yakindu.docs.dir}/website/p3.htmlf"/>
+                <arg value="--input"/>
+                <arg value="${work.dir}/${index.textile}"/>
                 <arg value="--hubspot-template-file"/>
                 <arg value="${work.dir}/${index.html}"/>
                 <arg value="--hubspot-csv-file"/>
                 <arg value="${work.dir}/${index.html}.csv"/>
-                <arg value="--property" />
-                <arg value="${navigation.title}=@{title}" />
+                <arg value="--property"/>
+                <arg value="${navigation.title}=@{title}"/>
             </java>
 
             <!-- Replace "<pre><code>" durch "<pre class="prettyprint"><code>": -->
@@ -494,7 +479,7 @@
             </replaceregexp>
 
             <!-- If the generated code contains a table with the ID "updaterepositories", replace it by a
-                 "call-to-action" button on the website: -->
+                "call-to-action" button on the website: -->
             <replaceregexp byline="false" flags="s" replace="${website.calltoaction.download}">
                 <regexp pattern='&lt;table id="updaterepositories"&gt;.*&lt;/table&gt;'/>
                 <fileset dir="${work.dir}">
