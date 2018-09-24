@@ -62,6 +62,10 @@ class TimedStatemachineInterface implements IContentTemplate {
 		
 		inline TimedStatemachineInterface::~TimedStatemachineInterface() {}
 		
+		«IF !entry.namespace.nullOrEmpty»
+		}
+		«ENDIF»
+		
 		#endif /* «timedStatemachineInterface.define»_H_ */
 		'''
 	}

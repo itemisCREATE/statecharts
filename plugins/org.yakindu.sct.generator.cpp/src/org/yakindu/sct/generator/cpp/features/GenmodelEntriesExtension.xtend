@@ -61,6 +61,6 @@ class GenmodelEntriesExtension extends GenmodelEntries {
 	}
 	
 	def getNamespace(GeneratorEntry it) {
-		namespaceParameter.stringValue ?: ""
+		namespaceParameter?.stringValue ?: ""
 	}
 }
