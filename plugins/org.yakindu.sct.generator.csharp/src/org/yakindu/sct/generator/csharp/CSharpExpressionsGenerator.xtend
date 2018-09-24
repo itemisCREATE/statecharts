@@ -118,7 +118,7 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 		if (it.const) {
 			return getConstContext(it)
 		}
-		if (scope !== null) {
+		if (interfaceScope !== null) {
 			return interfaceScope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""
