@@ -784,6 +784,14 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 		}
 	}
 
+	/**
+	 * @author BeckmaR
+	 *
+	 *         Adapter for updating the name label on statechart name change
+	 *         event. Suppresses the nameLabel's ModificationEventListener to
+	 *         avoid a StackOverflowException. Shamelessly copied from
+	 *         {@link org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningEditor.BreadcrumbSynchronizer}
+	 */
 	protected class DefinitionSectionSynchronizer extends AdapterImpl {
 		@Override
 		public void notifyChanged(Notification notification) {
