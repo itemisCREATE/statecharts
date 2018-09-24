@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.definitionsection;
 
@@ -23,6 +23,8 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.databinding.IEMFValueProperty;
 import org.eclipse.emf.databinding.edit.EMFEditProperties;
 import org.eclipse.emf.ecore.EObject;
@@ -34,7 +36,6 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
-import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.databinding.swt.ISWTObservableValue;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
@@ -96,7 +97,7 @@ import org.yakindu.sct.ui.editor.propertysheets.ValidatingEMFDatabindingContext;
 import com.google.inject.Injector;
 
 /**
- * 
+ *
  * @author robert rudi - Initial contribution and API
  *
  */
@@ -135,6 +136,11 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 	private static IMemento memento;
 	private ValidatingEMFDatabindingContext context;
 
+	private DefinitionSectionSynchronizer synchronizer;
+	private Text nameLabel;
+
+	private boolean suppressModifyEvent = false;
+
 	public StatechartDefinitionSection(Composite parent, int style, DiagramPartitioningEditor editorPart) {
 		super(parent, style);
 		this.sash = (SashForm) parent;
@@ -144,6 +150,7 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 		this.embeddedEditor = createSpecificationEditor();
 		registerResizeListener();
 		GridLayoutFactory.fillDefaults().numColumns(2).spacing(0, 0).applyTo(this);
+		initSynchronizer(DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram()));
 	}
 
 	protected Label createSwitchControl() {
@@ -152,7 +159,7 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 		switchControl.setImage(sectionExpanded ? StatechartImages.COLLAPSE.image() : StatechartImages.EXPAND.image());
 		switchControl.setCursor(new Cursor(getDisplay(), SWT.CURSOR_HAND));
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.CENTER).indent(-1, -1).hint(MIN_SIZE[0], MIN_SIZE[1])
-				.applyTo(switchControl);
+		.applyTo(switchControl);
 		mouseListener = new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -174,8 +181,15 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 		return labelComposite;
 	}
 
+	protected void initSynchronizer(List<Diagram> diagramContainerHierachy) {
+		synchronizer = new DefinitionSectionSynchronizer();
+		for (Diagram diagram : diagramContainerHierachy) {
+			diagram.getElement().eAdapters().add(synchronizer);
+		}
+	}
+
 	protected void createNameLabel(Composite labelComposite) {
-		Text nameLabel = new Text(labelComposite, SWT.SINGLE | SWT.NORMAL);
+		nameLabel = new Text(labelComposite, SWT.SINGLE | SWT.NORMAL);
 		GridDataFactory.fillDefaults().indent(5, 1).grab(true, false).align(SWT.FILL, SWT.CENTER).applyTo(nameLabel);
 		nameLabel.setText(getStatechartName());
 		nameLabel.setEditable(isStatechart());
@@ -183,6 +197,9 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 		nameModificationListener = new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
+				if (suppressModifyEvent) {
+					return;
+				}
 				if (getContextObject() instanceof Statechart) {
 					getSash().setRedraw(false);
 					TransactionalEditingDomain domain = getTransactionalEditingDomain();
@@ -340,7 +357,7 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 		BooleanValueStyle inlineStyle = DiagramPartitioningUtil.getInlineDefinitionSectionStyle(diagram);
 		if (inlineStyle == null) {
 			inlineStyle = DiagramPartitioningUtil.createInlineDefinitionSectionStyle();
-			AddCommand command = new AddCommand(domain, (View) getDiagram(), NotationPackage.Literals.VIEW__STYLES,
+			AddCommand command = new AddCommand(domain, getDiagram(), NotationPackage.Literals.VIEW__STYLES,
 					inlineStyle);
 			domain.getCommandStack().execute(command);
 		}
@@ -553,7 +570,7 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 
 	/**
 	 * @author robert rudi - Initial contribution and API
-	 * 
+	 *
 	 */
 	protected class ResizeListener extends ControlAdapter {
 
@@ -603,7 +620,7 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 
 	/**
 	 * @author robert rudi - Initial contribution and API
-	 * 
+	 *
 	 */
 	protected class InlineIcon extends Composite implements MouseListener, MouseTrackListener, PaintListener {
 
@@ -685,7 +702,7 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 
 	/**
 	 * @author robert rudi - Initial contribution and API
-	 * 
+	 *
 	 */
 	protected class CollapsedBorder extends Canvas implements MouseListener, MouseTrackListener, PaintListener {
 
@@ -699,7 +716,7 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 			super(parent, style);
 			setText("Definition section", font);
 			GridDataFactory.fillDefaults().grab(false, false).span(2, 1).hint(0, parent.getBounds().height)
-					.applyTo(this);
+			.applyTo(this);
 			addPaintListener(this);
 			addMouseListener(this);
 			addMouseTrackListener(this);
@@ -764,6 +781,24 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 			arrowCursor.dispose();
 			font.dispose();
 			super.dispose();
+		}
+	}
+
+	protected class DefinitionSectionSynchronizer extends AdapterImpl {
+		@Override
+		public void notifyChanged(Notification notification) {
+			if (Notification.SET == notification.getEventType()) {
+				Object feature = notification.getFeature();
+				if (BasePackage.Literals.NAMED_ELEMENT__NAME.equals(feature)) {
+					suppressModifyEvent = true;
+					nameLabel.setText(notification.getNewStringValue());
+					suppressModifyEvent = false;
+				}
+			}
+		}
+		@Override
+		public boolean isAdapterForType(Object type) {
+			return type instanceof DefinitionSectionSynchronizer;
 		}
 	}
 }
