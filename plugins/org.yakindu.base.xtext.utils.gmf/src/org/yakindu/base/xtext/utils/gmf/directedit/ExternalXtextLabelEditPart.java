@@ -13,7 +13,6 @@ package org.yakindu.base.xtext.utils.gmf.directedit;
 
 import static org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants.REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR;
 
-import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
@@ -26,7 +25,6 @@ import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.tools.DragEditPartsTrackerEx;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
-import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.ShapeStyle;
 import org.eclipse.gmf.runtime.notation.View;
@@ -49,15 +47,15 @@ public abstract class ExternalXtextLabelEditPart extends LabelEditPart implement
 
 	protected abstract void setContext(Resource resource);
 
-	protected abstract void setLabelStyles();
+	protected abstract void setLabelStyles(String text);
 
 	public ExternalXtextLabelEditPart(final View view) {
 		super(view);
 	}
 
 	@Override
-	protected IFigure createFigure() {
-		final WrappingLabel label = new SyntaxColoringLabel();
+	protected SyntaxColoringLabel createFigure() {
+		final SyntaxColoringLabel label = new SyntaxColoringLabel();
 		label.setTextWrap(true);
 		label.setAlignment(PositionConstants.LEFT | PositionConstants.TOP);
 		return label;
@@ -70,6 +68,7 @@ public abstract class ExternalXtextLabelEditPart extends LabelEditPart implement
 
 	public void setLabelText(final String text) {
 		if(text != null && !text.equals(getFigure().getText())) {
+			setLabelStyles(text);
 			getFigure().setText(text);
 		}
 	}
@@ -80,7 +79,7 @@ public abstract class ExternalXtextLabelEditPart extends LabelEditPart implement
 		refreshFont();
 		refreshFontColor();
 		updateLabelText();
-		setLabelStyles();
+		setLabelStyles(getEditText());
 	}
 
 	@Override

@@ -13,7 +13,6 @@ package org.yakindu.base.xtext.utils.gmf.directedit;
 
 import static org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants.REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR;
 
-import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -43,7 +42,7 @@ public abstract class XtextLabelEditPart extends CompartmentEditPart implements 
 
 	protected abstract DirectEditManager createDirectEditManager();
 	
-	protected abstract void setLabelStyles();
+	protected abstract void setLabelStyles(String text);
 
 	protected abstract void setContext(Resource resource);
 
@@ -52,7 +51,7 @@ public abstract class XtextLabelEditPart extends CompartmentEditPart implements 
 	}
 
 	@Override
-	protected IFigure createFigure() {
+	protected SyntaxColoringLabel createFigure() {
 		final SyntaxColoringLabel label = new SyntaxColoringLabel();
 		label.setTextWrap(true);
 		label.setAlignment(PositionConstants.LEFT | PositionConstants.TOP);
@@ -72,7 +71,7 @@ public abstract class XtextLabelEditPart extends CompartmentEditPart implements 
 
 	@Override
 	protected void refreshVisuals() {
-		setLabelStyles();
+		setLabelStyles(getEditText());
 		super.refreshVisuals();
 		refreshFont();
 		refreshFontColor();

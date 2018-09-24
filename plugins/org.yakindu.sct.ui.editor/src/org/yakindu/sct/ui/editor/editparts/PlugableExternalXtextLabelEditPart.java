@@ -34,6 +34,7 @@ import org.yakindu.base.xtext.utils.gmf.directedit.ExternalXtextLabelEditPart;
 import org.yakindu.base.xtext.utils.gmf.directedit.IEAttributeProvider;
 import org.yakindu.base.xtext.utils.gmf.directedit.StyleRanges;
 import org.yakindu.base.xtext.utils.gmf.directedit.XtextDirectEditManager;
+import org.yakindu.base.xtext.utils.gmf.figures.SyntaxColoringLabel;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
@@ -153,9 +154,17 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 
 	@Override
 	protected void refreshVisuals() {
-		setLabelStyles();
+		setLabelStyles(getEditText());
 		updateLabelText();
 		super.refreshVisuals();
+	}
+
+	@Override
+	protected SyntaxColoringLabel createFigure() {
+		SyntaxColoringLabel label = super.createFigure();
+		label.setHighlight(DiagramActivator.getDefault().getPreferenceStore()
+				.getBoolean(StatechartPreferenceConstants.PREF_SYNTAX_COLORING));
+		return label;
 	}
 
 	@Override
@@ -166,15 +175,10 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 		getFigure().setText(label);
 	}
 
-	protected void setLabelStyles() {
-		if (DiagramActivator.getDefault().getPreferenceStore()
-				.getBoolean(StatechartPreferenceConstants.PREF_SYNTAX_COLORING)) {
-			StyleRanges styleRanges = injector.getInstance(StyleRanges.class);
-			List<StyleRange> result = styleRanges.getRanges(getEditText());
-			getFigure().setRanges(result.toArray(new StyleRange[] {}));
-		} else {
-			getFigure().setRanges(new StyleRange[] {});
-		}
+	protected void setLabelStyles(String text) {
+		StyleRanges styleRanges = injector.getInstance(StyleRanges.class);
+		List<StyleRange> result = styleRanges.getRanges(text);
+		getFigure().setRanges(result.toArray(new StyleRange[] {}));
 	}
 
 	@Override
@@ -185,7 +189,8 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		if (StatechartPreferenceConstants.PREF_SYNTAX_COLORING.equals(event.getProperty())) {
-			setLabelStyles();
+			getFigure().setHighlight((boolean) event.getNewValue());
+			setLabelStyles(getEditText());
 			getFigure().invalidateTree();
 			getFigure().revalidate();
 		} else if (StatechartPreferenceConstants.PREF_FONT_SCALING.equals(event.getProperty())) {

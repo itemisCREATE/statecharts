@@ -65,6 +65,14 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		setLayoutManager(textFlow, false);
 	}
 
+	public void setHighlight(boolean highlight) {
+		textFlow.setHighlight(highlight);
+	}
+
+	public boolean isHighlight() {
+		return textFlow.isHighlight();
+	}
+
 	public void setRanges(StyleRange[] ranges) {
 		textFlow.setRanges(ranges);
 	}
@@ -97,6 +105,15 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		private static final GC gc = new GC(dummy);
 		private Font boldFont;
 		private double zoom = 1.0;
+		private boolean highlight = true;
+
+		public void setHighlight(boolean highlight) {
+			this.highlight = highlight;
+		}
+
+		public boolean isHighlight() {
+			return highlight;
+		}
 
 		private StyleRange[] ranges = new StyleRange[0];
 
@@ -128,6 +145,10 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 
 		@Override
 		protected void paintText(Graphics g, String draw, int x, int y, int bidiLevel) {
+			if (!highlight) {
+				super.paintText(g, draw, x, y, bidiLevel);
+				return;
+			}
 			zoom = g.getAbsoluteScale();
 			if (ranges.length == 0) {
 				draw = replaceTabs(draw);

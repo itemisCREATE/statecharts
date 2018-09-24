@@ -33,6 +33,7 @@ import org.yakindu.base.xtext.utils.gmf.directedit.IEAttributeProvider;
 import org.yakindu.base.xtext.utils.gmf.directedit.StyleRanges;
 import org.yakindu.base.xtext.utils.gmf.directedit.XtextDirectEditManager;
 import org.yakindu.base.xtext.utils.gmf.directedit.XtextLabelEditPart;
+import org.yakindu.base.xtext.utils.gmf.figures.SyntaxColoringLabel;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
@@ -77,6 +78,14 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart
 	}
 
 	@Override
+	protected SyntaxColoringLabel createFigure() {
+		SyntaxColoringLabel label = super.createFigure();
+		label.setHighlight(DiagramActivator.getDefault().getPreferenceStore()
+				.getBoolean(StatechartPreferenceConstants.PREF_SYNTAX_COLORING));
+		return label;
+	}
+
+	@Override
 	protected void addNotationalListeners() {
 		super.addNotationalListeners();
 		addListenerFilter(PRIMARY_VIEW_LISTENER, this, getPrimaryView());
@@ -108,15 +117,10 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart
 		}
 	}
 
-	protected void setLabelStyles() {
-		if (DiagramActivator.getDefault().getPreferenceStore()
-				.getBoolean(StatechartPreferenceConstants.PREF_SYNTAX_COLORING)) {
-			StyleRanges styleRanges = injector.getInstance(StyleRanges.class);
-			List<StyleRange> result = styleRanges.getRanges(getEditText());
-			getFigure().setRanges(result.toArray(new StyleRange[] {}));
-		} else {
-			getFigure().setRanges(new StyleRange[] {});
-		}
+	protected void setLabelStyles(String text) {
+		StyleRanges styleRanges = injector.getInstance(StyleRanges.class);
+		List<StyleRange> result = styleRanges.getRanges(getEditText());
+		getFigure().setRanges(result.toArray(new StyleRange[] {}));
 	}
 
 	@Override
@@ -175,13 +179,13 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart
 	@Override
 	protected void setContext(Resource resource) {
 		resource.eAdapters().add(new ContextElementAdapter(resolveSemanticElement()));
-
 	}
 
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		if (StatechartPreferenceConstants.PREF_SYNTAX_COLORING.equals(event.getProperty())) {
-			setLabelStyles();
+			getFigure().setHighlight((boolean) event.getNewValue());
+			setLabelStyles(getEditText());
 			getFigure().invalidateTree();
 			getFigure().revalidate();
 		} else if (StatechartPreferenceConstants.PREF_FONT_SCALING.equals(event.getProperty())) {
