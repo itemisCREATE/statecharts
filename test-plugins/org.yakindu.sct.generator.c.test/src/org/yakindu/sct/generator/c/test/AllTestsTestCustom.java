@@ -16,6 +16,6 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({OperationsWithoutBracesCustom.class, VariadicOperations.class, ActiveBeforeInit.class,
-		InternalEventLifeCycleTest_Naming.class})
+	InternalEventLifeCycleTest_Naming.class, StateNumTest.class})
 public class AllTestsTestCustom {
 }
