@@ -31,6 +31,10 @@ class StatemachineInterface implements IContentTemplate {
 		#ifndef «statemachineInterface.define»_H_
 		#define «statemachineInterface.define»_H_
 		
+		«IF !entry.namespace.nullOrEmpty»
+		namespace «entry.namespace» {
+		«ENDIF»
+		
 		/*! \file Basic interface for state machines.
 		 */
 		class «statemachineInterface»
@@ -67,6 +71,10 @@ class StatemachineInterface implements IContentTemplate {
 		};
 		
 		inline StatemachineInterface::~StatemachineInterface() {}
+		
+		«IF !entry.namespace.nullOrEmpty»
+		}
+		«ENDIF»
 		
 		#endif /* «statemachineInterface.define»_H_ */
 		'''
