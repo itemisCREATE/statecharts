@@ -16,10 +16,12 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gef.EditPolicy;
+import org.eclipse.gef.editparts.ZoomListener;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.common.ui.services.parser.IParser;
 import org.eclipse.gmf.runtime.common.ui.services.parser.ParserOptions;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ITextAwareEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.render.editparts.RenderedDiagramRootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
@@ -52,7 +54,7 @@ import com.google.inject.Injector;
  * 
  */
 public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLabelEditPart
-		implements ITextAwareEditPart, IEAttributeProvider, IPropertyChangeListener {
+		implements ITextAwareEditPart, IEAttributeProvider, IPropertyChangeListener, ZoomListener {
 
 	private static final String PRIMARY_VIEW_LISTENER = "primaryViewListener";
 
@@ -64,12 +66,14 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 	public void activate() {
 		super.activate();
 		DiagramActivator.getDefault().getPreferenceStore().addPropertyChangeListener(this);
+		((RenderedDiagramRootEditPart) getRoot()).getZoomManager().addZoomListener(this);
 	}
 
 	@Override
 	public void deactivate() {
 		super.deactivate();
 		DiagramActivator.getDefault().getPreferenceStore().removePropertyChangeListener(this);
+		((RenderedDiagramRootEditPart) getRoot()).getZoomManager().removeZoomListener(this);
 	}
 
 	public PlugableExternalXtextLabelEditPart(View view, String target) {
@@ -154,8 +158,8 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 
 	@Override
 	protected void refreshVisuals() {
-		setLabelStyles(getEditText());
 		updateLabelText();
+		setLabelStyles(getEditText());
 		super.refreshVisuals();
 	}
 
@@ -196,6 +200,12 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 		} else if (StatechartPreferenceConstants.PREF_FONT_SCALING.equals(event.getProperty())) {
 			refreshVisuals();
 		}
+	}
+	
+	@Override
+	public void zoomChanged(double zoom) {
+		getFigure().invalidateTree();
+		getFigure().revalidate();
 	}
 
 	@Override
