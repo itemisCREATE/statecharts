@@ -213,11 +213,11 @@ class FlowOptimizer {
 
 
 	def inlineChecks(Method m) {
-		m.eAllContents.filter(CheckRef).toList.forEach( cr | cr.inline )
+		if (m !== null) m.eAllContents.filter(CheckRef).toList.forEach( cr | cr.inline )
 	}
 	
 	def inlineEffects(Method m) {
-		m.eAllContents.filter(Call).toList.forEach( call | call.inline )
+		if (m != null) m.eAllContents.filter(Call).toList.forEach( call | call.inline )
 	}
 	
 	
