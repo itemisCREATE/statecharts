@@ -57,7 +57,7 @@ import com.google.inject.Provider;
 
 /**
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 
@@ -79,12 +79,14 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	@Inject
 	private STextExtensions utils;
 
+	@Override
 	public void setCache(IResourceScopeCache cache) {
 		this.cache = cache;
 	}
 
 	public static final String FILE_EXTENSION = "sct";
 
+	@Override
 	public IScope getScope(Resource context, EReference reference, Predicate<IEObjectDescription> filter) {
 		IScope parentScope = super.getScope(context, reference, filter);
 		parentScope = new SimpleScope(parentScope, filterPropertiesOfLibrary(context, reference, filter).getAllElements());
@@ -121,7 +123,7 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 			});
 		return result;
 	}
-	
+
 	protected IScope filterPropertiesOfLibrary(Resource context, EReference reference, Predicate<IEObjectDescription> filter) {
 		return new FilteringScope(libraryScope.getScope(context, reference, filter), new Predicate<IEObjectDescription>() {
 			@Override
@@ -131,11 +133,12 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 		});
 	}
 
+	@Override
 	protected LinkedHashSet<URI> getImportedUris(final Resource resource) {
 		return cache.get(ImportUriGlobalScopeProvider.class.getName(), resource, new Provider<LinkedHashSet<URI>>() {
 			@Override
 			public LinkedHashSet<URI> get() {
-				final LinkedHashSet<URI> uniqueImportURIs = new LinkedHashSet<URI>(5);
+				final LinkedHashSet<URI> uniqueImportURIs = new LinkedHashSet<>(5);
 				IAcceptor<String> collector = createURICollector(resource, uniqueImportURIs);
 				Collection<ImportScope> importScopes = getImportScopes(resource);
 				for (ImportScope object : importScopes) {
@@ -146,7 +149,7 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 				}
 				Iterator<URI> uriIter = uniqueImportURIs.iterator();
 				while (uriIter.hasNext()) {
-					if (!EcoreUtil2.isValidUri(resource, uriIter.next()))
+					if (!EcoreUtil2.isValidUri(resource, uriIter.next().trimQuery()))
 						uriIter.remove();
 				}
 				return uniqueImportURIs;
@@ -171,7 +174,8 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	protected void collectPackageImports(Resource resource, String packageImport, IAcceptor<String> acceptor,
 			LinkedHashSet<URI> uniqueImportURIs) {
 		Optional<PackageImport> pkgImport = mapper.findPackageImport(resource, packageImport);
-		if (pkgImport.isPresent() && pkgImport.get().getUri() != null && URIConverter.INSTANCE.exists(pkgImport.get().getUri(), null)) {
+		if (pkgImport.isPresent() && pkgImport.get().getUri() != null
+				&& URIConverter.INSTANCE.exists(pkgImport.get().getUri().trimQuery(), null)) {
 			acceptor.accept(pkgImport.get().getUri().toString());
 		}
 	}
@@ -187,7 +191,7 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 		IResourceDescriptions descriptions = getResourceDescriptions(resource, uniqueImportURIs);
 		List<URI> urisAsList = Lists.newArrayList(uniqueImportURIs);
 		Collections.reverse(urisAsList);
-		List<IEObjectDescription> objectDescriptions = new ArrayList<IEObjectDescription>();
+		List<IEObjectDescription> objectDescriptions = new ArrayList<>();
 		for (URI uri : urisAsList) {
 			IScope scope = createLazyResourceScope(IScope.NULLSCOPE, uri, descriptions, type, filter, ignoreCase);
 			Iterables.addAll(objectDescriptions, scope.getAllElements());
