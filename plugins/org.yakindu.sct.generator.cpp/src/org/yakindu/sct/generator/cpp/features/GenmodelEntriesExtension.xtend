@@ -55,4 +55,12 @@ class GenmodelEntriesExtension extends GenmodelEntries {
 			return checkUnimplementedParamter.booleanValue
 		}
 	}
+	
+	def private getNamespaceParameter(GeneratorEntry it) {
+		generatorOptionsFeature?.getParameterValue(CPPFeatureConstants.PARAMETER_NAMESPACE)
+	}
+	
+	def getNamespace(GeneratorEntry it) {
+		namespaceParameter.stringValue ?: ""
+	}
 }
