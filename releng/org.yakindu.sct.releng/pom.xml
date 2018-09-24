@@ -540,6 +540,7 @@
 		<module>../../plugins/org.yakindu.sct.ui.navigator</module>
 		<module>../../plugins/org.yakindu.sct.generator.c</module>
 		<module>../../plugins/org.yakindu.sct.generator.cpp</module>
+		<module>../../plugins/org.yakindu.sct.generator.csharp</module>
 		<module>../../plugins/org.yakindu.sct.generator.java</module>
 		<module>../../plugins/org.yakindu.sct.refactoring</module>
 		<module>../../plugins/org.yakindu.sct.branding</module>
@@ -554,6 +555,7 @@
 		<module>../../features/org.yakindu.sct.generator.c-feature</module>
 		<module>../../features/org.yakindu.sct.generator.cpp-feature</module>
 		<module>../../features/org.yakindu.sct.generator.java-feature</module>
+		<module>../../features/org.yakindu.sct.generator.csharp-feature</module>
 
 	</modules>
 
