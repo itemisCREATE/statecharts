@@ -69,7 +69,9 @@ public abstract class ExternalXtextLabelEditPart extends LabelEditPart implement
 	}
 
 	public void setLabelText(final String text) {
-		getFigure().setText(text);
+		if(text != null && !text.equals(getFigure().getText())) {
+			getFigure().setText(text);
+		}
 	}
 
 	@Override

@@ -65,7 +65,9 @@ public abstract class XtextLabelEditPart extends CompartmentEditPart implements 
 	}
 
 	public void setLabelText(final String text) {
-		getFigure().setText(text);
+		if(text != null && !text.equals(getFigure().getText())) {
+			getFigure().setText(text);
+		}
 	}
 
 	@Override
