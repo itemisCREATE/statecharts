@@ -22,6 +22,7 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 
 /**
  * @author rbeckmann
+ * @author Axel Terfloth - terfloth@itemis.de 
  * 
  */
 
@@ -68,29 +69,6 @@ class APIGenerator {
 		
 	'''
 
-//	protected def CharSequence runCycleForLoop(ExecutionFlow it) '''
-//		for («scHandle»->stateConfVectorPosition = 0;
-//			«scHandle»->stateConfVectorPosition < «type.toUpperCase»_MAX_ORTHOGONAL_STATES;
-//			«scHandle»->stateConfVectorPosition++)
-//			{
-//				
-//			switch («scHandle»->stateConfVector[handle->stateConfVectorPosition])
-//			{
-//			«FOR state : states.filter[isLeaf]»
-//				«IF state.reactSequence !== null»
-//					case «state.stateName»:
-//					{
-//						«state.reactSequence.shortName»(«scHandle»);
-//						break;
-//					}
-//				«ENDIF»
-//			«ENDFOR»
-//			default:
-//				break;
-//			}
-//		}
-//		
-//	'''
 
 	def declareRunCycle(ExecutionFlow it) {
 		'''«runCycleSignature»;'''
