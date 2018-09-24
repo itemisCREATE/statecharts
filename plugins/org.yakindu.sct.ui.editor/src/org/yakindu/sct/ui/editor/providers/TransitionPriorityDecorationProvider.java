@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.ui.editor.providers;
 
+import org.eclipse.draw2d.Connection;
+import org.eclipse.draw2d.ConnectionLocator;
 import org.eclipse.draw2d.Label;
 import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.EditPart;
@@ -88,7 +90,8 @@ public class TransitionPriorityDecorationProvider extends AbstractPriorityDecora
 		public void createDecorators(IGraphicalEditPart editPart) {
 			PriorityFigure figure = new PriorityFigure(MapModeUtil.getMapMode(), getPriority(editPart));
 			figure.setSize(10, 10);
-			setDecoration(getDecoratorTarget().addConnectionDecoration(figure, 5, false));
+			getDecoratorTarget().addDecoration(figure,
+					new ConnectionLocator((Connection) editPart.getFigure(), ConnectionLocator.SOURCE), false);
 			figure.setToolTip(new Label("Transition Priority " + getPriority(editPart)));
 
 		}
