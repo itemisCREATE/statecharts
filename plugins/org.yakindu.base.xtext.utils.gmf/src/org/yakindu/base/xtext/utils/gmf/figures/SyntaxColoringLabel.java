@@ -24,7 +24,6 @@ import org.eclipse.draw2d.TextUtilities;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
-import org.eclipse.gmf.runtime.draw2d.ui.internal.graphics.ScaledGraphics;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.MapModeUtil;
 import org.eclipse.gmf.runtime.draw2d.ui.text.FlowUtilitiesEx;
@@ -49,7 +48,6 @@ import com.google.common.cache.LoadingCache;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-@SuppressWarnings("restriction")
 public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionListener {
 
 	private static final MarginBorder NO_FOCUS_BORDER = new MarginBorder(new Insets(1, 1, 1, 1));
@@ -101,6 +99,7 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		private static final Image dummy = new Image(Display.getDefault(), 1, 1);
 		private static final GC gc = new GC(dummy);
 		private Font boldFont;
+		private double zoom = 1.0;
 
 		private StyleRange[] ranges = new StyleRange[0];
 
@@ -154,6 +153,7 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 
 		@Override
 		protected void paintText(Graphics g, String draw, int x, int y, int bidiLevel) {
+			zoom = g.getAbsoluteScale();
 			if (ranges.length == 0) {
 				draw = replaceTabs(draw);
 				super.paintText(g, draw, x, y, bidiLevel);
@@ -163,11 +163,11 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 				String originalDraw = draw;
 				int paintOffset = 0;
 				int lineOffset = getText().indexOf(originalDraw);
-				if(lineOffset == -1) {
-					//This may happen if the string is truncated with '..'
+				if (lineOffset == -1) {
+					// This may happen if the string is truncated with '..'
 					originalDraw = replaceTabs(originalDraw);
-					 super.paintText(g, originalDraw, x, y, bidiLevel);
-					 return;
+					super.paintText(g, originalDraw, x, y, bidiLevel);
+					return;
 				}
 				try {
 					g.pushState();
@@ -188,11 +188,8 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 								Math.min(endIndex > 0 ? endIndex : 0, draw.length()));
 						substring = replaceTabs(substring);
 						g.drawText(substring, x + paintOffset, y);
-						double zoomFactor = 1.0;
-						if (g instanceof ScaledGraphics) {
-							zoomFactor = g.getAbsoluteScale();
-						}
-						int offset = getTextExtend(g.getFont(), substring, zoomFactor);
+
+						int offset = getTextExtend(g.getFont(), substring);
 						paintOffset += offset;
 					}
 				} finally {
@@ -202,27 +199,27 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 				super.paintText(g, draw, x, y, bidiLevel);
 			}
 		}
-		
+
 		protected String replaceTabs(String draw) {
 			return draw.replaceAll("\t", "    ");
 		}
 
-		protected int getTextExtend(Font font, String string, double zoomFactor) {
+		protected int getTextExtend(Font font, String string) {
 			if (string.isEmpty())
 				return 0;
-			if (zoomFactor != 1.0) {
+			if (zoom != 1.0) {
 				FontData data = font.getFontData()[0];
 				FontDescriptor newFontDescriptor = FontDescriptor.createFrom(font)
-						.setHeight((int) (data.getHeight() * zoomFactor));
+						.setHeight((int) (data.getHeight() * zoom));
 				font = newFontDescriptor.createFont(Display.getDefault());
 			}
 			if (gc.getFont() != font)
 				gc.setFont(font);
 			int offset = gc.textExtent(string).x;
-			if (zoomFactor != 1.0) {
+			if (zoom != 1.0) {
 				font.dispose();
 			}
-			return (int) (offset / zoomFactor);
+			return (int) (offset / zoom);
 		}
 
 		@Override
@@ -289,7 +286,7 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 					String substring = draw.substring(beginIndex > 0 ? beginIndex : 0,
 							Math.min(endIndex > 0 ? endIndex : 0, draw.length()));
 					Font font = SWT.BOLD == (range.fontStyle & SWT.BOLD) ? boldFont : getFont();
-					int offset = getTextExtend(font, substring, 1.5);
+					int offset = getTextExtend(font, substring);
 					paintOffset += offset;
 				}
 				d.width = Math.max(d.width, paintOffset);

@@ -20,4 +20,5 @@ Export-Package: org.yakindu.base.xtext.utils.gmf.commands,
  org.yakindu.base.xtext.utils.gmf.routing,
  org.yakindu.base.xtext.utils.gmf.viewers
 Bundle-ActivationPolicy: lazy
+Automatic-Module-Name: org.yakindu.base.xtext.utils.gmf
 
