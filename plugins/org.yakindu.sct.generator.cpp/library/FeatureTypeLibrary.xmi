@@ -32,6 +32,10 @@
         name="staticOperationCallback"
         optional="true"
         parameterType="BOOLEAN"/>
+    <parameters
+        name="namespace"
+        comment=""
+        optional="true"/>
   </types>
   <types name="Includes"
       optional="true">

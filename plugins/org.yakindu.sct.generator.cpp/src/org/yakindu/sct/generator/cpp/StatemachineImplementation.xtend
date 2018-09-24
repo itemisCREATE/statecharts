@@ -60,6 +60,10 @@ class StatemachineImplementation implements IContentTemplate {
 		
 		«usingNamespaces»
 		
+		«IF !entry.namespace.nullOrEmpty»
+		namespace «entry.namespace» {
+		«ENDIF»
+		
 		«constructorDefinition»
 		
 		«destructorDefinition»
@@ -91,6 +95,10 @@ class StatemachineImplementation implements IContentTemplate {
 		«functionImplementations»
 		
 		«additionalFunctions»
+		
+		«IF !entry.namespace.nullOrEmpty»
+		}
+		«ENDIF»
 	'''
 	}
 	

@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.generator.cpp.features;
 
@@ -26,15 +26,16 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public class CPPDefaultFeatureValueProvider extends AbstractDefaultFeatureValueProvider {
 
 	private static final String INVALID_IDENTIFIER_REGEX = "[^a-z&&[^A-Z&&[^0-9]]]";
 	private static final String VALID_IDENTIFIER_REGEX = "[_a-zA-Z][_a-zA-Z0-9]*";
 
+	@Override
 	public boolean isProviderFor(FeatureTypeLibrary library) {
 		return CPPFeatureConstants.LIBRARY_NAME.equals(library.getName());
 	}
@@ -64,9 +65,12 @@ public class CPPDefaultFeatureValueProvider extends AbstractDefaultFeatureValueP
 			parameterValue.setValue(true);
 		} else if (parameterValue.getParameter().getName().equals(CPPFeatureConstants.PARAMETER_API_CHECK_UNIMPLEMENTED_OCBS)) {
 			parameterValue.setValue(true);
-		} 
+		} else if (parameterValue.getParameter().getName().equals(CPPFeatureConstants.PARAMETER_NAMESPACE)) {
+			parameterValue.setValue("");
+		}
 	}
 
+	@Override
 	public IStatus validateParameterValue(FeatureParameterValue parameter) {
 		String parameterName = parameter.getParameter().getName();
 		if (ICFeatureConstants.PARAMETER_NAMING_MODULE_NAME.equals(parameterName)) {
@@ -95,6 +99,10 @@ public class CPPDefaultFeatureValueProvider extends AbstractDefaultFeatureValueP
 		} else if (CPPFeatureConstants.PARAMETER_API_CHECK_UNIMPLEMENTED_OCBS.equals(parameterName)) {
 			if (!parameter.getStringValue().matches(VALID_IDENTIFIER_REGEX)) {
 				return error ("Invalid check for unimplemented OCBs");
+			}
+		} else if (CPPFeatureConstants.PARAMETER_NAMESPACE.equals(parameterName)) {
+			if (!parameter.getStringValue().matches(VALID_IDENTIFIER_REGEX)) {
+				return error("Invalid namespace identifier");
 			}
 		}
 		return Status.OK_STATUS;

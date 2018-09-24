@@ -58,7 +58,9 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			
 			/*! \file Header of the state machine '«name»'.
 			*/
-			
+			«IF !entry.namespace.nullOrEmpty»
+			namespace «entry.namespace» {
+			«ENDIF»
 			«preStatechartDeclarations»
 			
 			/*! Define indices of states in the StateConfVector */
@@ -73,6 +75,10 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			«ENDIF»
 			
 			«postStatechartDeclarations»
+			
+			«IF !entry.namespace.nullOrEmpty»
+			}
+			«ENDIF»
 			
 			#endif /* «module().define»_H_ */
 		'''

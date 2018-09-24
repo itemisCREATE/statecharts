@@ -12,7 +12,7 @@ package org.yakindu.sct.generator.cpp
 import com.google.inject.Inject
 import org.yakindu.sct.generator.c.IContentTemplate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
-import org.yakindu.sct.generator.c.extensions.GenmodelEntries
+import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
@@ -22,7 +22,7 @@ class TimerInterface implements IContentTemplate {
 	extension CppNaming
 	
 	@Inject
-	extension GenmodelEntries
+	extension GenmodelEntriesExtension
 	
 	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations locations) {
 		'''
@@ -32,6 +32,10 @@ class TimerInterface implements IContentTemplate {
 		#define «timerInterface.define»_H_
 		
 		#include "sc_types.h"
+		
+		«IF !entry.namespace.nullOrEmpty»
+		namespace «entry.namespace» {
+		«ENDIF»
 		
 		//forward declaration of TimedStatemachineInterface to avoid cyclic dependency
 		class TimedStatemachineInterface;
@@ -59,6 +63,10 @@ class TimerInterface implements IContentTemplate {
 		};
 		
 		inline TimerInterface::~TimerInterface() {}
+		
+		«IF !entry.namespace.nullOrEmpty»
+		}
+		«ENDIF»
 		
 		#endif /* «timerInterface.define»_H_ */
 		'''

@@ -1,0 +1,23 @@
+GeneratorModel for yakindu::cpp {
+	statechart TimedTransitions {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "NamespaceTest"
+		}
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineEnterSequences = false 
+			inlineExitActions = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEntries = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+		}
+		
+		feature GeneratorOptions {
+			namespace = "Yakindu"
+		}
+	}
+}

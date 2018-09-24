@@ -17,6 +17,7 @@ The *GeneratorOptions* feature allows to change the behavior of the C++ generato
 
 * _innerFunctionVisibility_ (String, optional): This parameter is used to change the visibility of inner functions and variables. By default @private@ visibility is used. It can be changed to @protected@ to allow function overriding for a class which inherits from the generated state machine base class.
 * _staticOperationCallback_ (Boolean, optional): If this parameter is set to _true_, the callback function declaration for statechart operations is static and the functions are called statically by the state machine code.
+* _namespace_ (String, optional): If this parameter is set, the given name is used as the namespace of all generated classes, including the interfaces.
 
 ==<div class="example">==
 
