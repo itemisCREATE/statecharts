@@ -55,7 +55,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			#define «module().define»_H_
 			
 			«IF !namespace.nullOrEmpty»
-			namespace «namespace» {
+			namespace «namespace.replace(".", "::")» {
 			«ENDIF»
 			
 			«includes(artifactConfigs)»

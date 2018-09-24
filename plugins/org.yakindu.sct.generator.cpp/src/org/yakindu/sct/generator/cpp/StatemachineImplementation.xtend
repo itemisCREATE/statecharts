@@ -61,7 +61,7 @@ class StatemachineImplementation implements IContentTemplate {
 		«usingNamespaces»
 		
 		«IF !namespace.nullOrEmpty»
-		namespace «namespace» {
+		namespace «namespace.replace(".", "::")» {
 		«ENDIF»
 		
 		«constructorDefinition»
