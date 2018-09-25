@@ -979,5 +979,21 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 		return true;
 	}
+	
+	
+	@Check(CheckType.FAST)
+	public void checkOnlyOneEntryPointSpecIsUsed(Transition transition) {
+		EList<ReactionProperty> properties = transition.getProperties();
+		int countEntryPointSpecs = 0;
+		for(ReactionProperty property : properties) {
+			if(property instanceof EntryPointSpec) {
+				countEntryPointSpecs++;
+			}
+			if(countEntryPointSpecs > 1) {
+				warning(ONLY_FIRST_ENTRY_POINT_WILL_BE_USED, transition, null, -1);
+				break;
+			}
+		}
+	}
 
 }
