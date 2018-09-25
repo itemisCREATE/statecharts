@@ -60,8 +60,8 @@ class StatemachineImplementation implements IContentTemplate {
 		
 		«usingNamespaces»
 		
-		«IF !namespace.nullOrEmpty»
-		namespace «namespace.replace(".", "::")» {
+		«IF !statechart.namespace.nullOrEmpty»
+		namespace «statechart.namespace.replace(".", "::")» {
 		«ENDIF»
 		
 		«constructorDefinition»
@@ -96,7 +96,7 @@ class StatemachineImplementation implements IContentTemplate {
 		
 		«additionalFunctions»
 		
-		«IF !namespace.nullOrEmpty»
+		«IF !statechart.namespace.nullOrEmpty»
 		}
 		«ENDIF»
 	'''

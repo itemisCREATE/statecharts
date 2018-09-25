@@ -54,8 +54,8 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			#ifndef «module().define»_H_
 			#define «module().define»_H_
 			
-			«IF !namespace.nullOrEmpty»
-			namespace «namespace.replace(".", "::")» {
+			«IF !statechart.namespace.nullOrEmpty»
+			namespace «statechart.namespace.replace(".", "::")» {
 			«ENDIF»
 			
 			«includes(artifactConfigs)»
@@ -78,7 +78,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			
 			«postStatechartDeclarations»
 			
-			«IF !namespace.nullOrEmpty»
+			«IF !statechart.namespace.nullOrEmpty»
 			}
 			«ENDIF»
 			
