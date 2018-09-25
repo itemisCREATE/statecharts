@@ -60,11 +60,11 @@ class StatemachineImplementation implements IContentTemplate {
 		/*! \file Implementation of the state machine '«name»'
 		*/
 		
-		«usingNamespaces»
-		
 		«IF !statechart.namespace.nullOrEmpty»
 		namespace «statechart.namespace.replace(".", "::")» {
 		«ENDIF»
+		
+		«usingNamespaces»
 		
 		«constructorDefinition»
 		

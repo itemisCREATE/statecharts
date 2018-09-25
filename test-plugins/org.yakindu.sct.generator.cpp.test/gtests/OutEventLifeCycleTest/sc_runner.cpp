@@ -91,7 +91,7 @@ void SctUnitRunner::proceed_cycles(sc_integer cycles)
 		
 		if(next.is_runcycle) {
 			statemachine->runCycle();
-			elapsed_cycles++;
+			++elapsed_cycles;
 		}
 	}
 }
@@ -117,7 +117,7 @@ void SctUnitRunner::insert_timer(SctTimer timer)
 	
 	
 	/* Or we put it before some other timer that needs to be raised after this one */
-	for(i_timer = timer_queue.begin(); i_timer != timer_queue.end(); i_timer++) {
+	for(i_timer = timer_queue.begin(); i_timer != timer_queue.end(); ++i_timer) {
 		if(timer.compare(&(*i_timer)) < 0) {
 			timer_queue.insert(i_timer, timer);
 			return;

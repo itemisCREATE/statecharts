@@ -7,6 +7,8 @@
 
 namespace  {
 
+CKeywords* statechart;
+
 
 
 //! The timers are managed by a timer service. */
@@ -14,9 +16,6 @@ static SctUnitRunner * runner;
 
 class CKeywordsTest : public ::testing::Test{
 	protected:
-	
-	CKeywords* statechart;
-	
 	virtual void SetUp() {
 		statechart = new CKeywords();
 		statechart->init();
@@ -30,27 +29,27 @@ class CKeywordsTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
-	
-	
 };
 
-	TEST_F(CKeywordsTest, CKeywordsTest) {
-		
-		statechart->enter();
-		
-		EXPECT_TRUE(statechart->isStateActive(CKeywords::auto_char));
-		
-		statechart->getDefaultSCI()->raise_auto();
-		
-		runner->proceed_cycles(1);
-		
-		EXPECT_TRUE(statechart->isStateActive(CKeywords::auto_loop));
-		
-		EXPECT_TRUE(statechart->isStateActive(CKeywords::auto_loop_switch_case));
-		
-		EXPECT_TRUE(statechart->isStateActive(CKeywords::auto_loop_switch_case_enum_asm));
-		
-		
+
+TEST_F(CKeywordsTest, CKeywordsTest) {
+	
+	statechart->enter();
+	
+	EXPECT_TRUE(statechart->isStateActive(CKeywords::auto_char));
+	
+	statechart->getDefaultSCI()->raise_auto();
+	
+	runner->proceed_cycles(1);
+	
+	EXPECT_TRUE(statechart->isStateActive(CKeywords::auto_loop));
+	
+	EXPECT_TRUE(statechart->isStateActive(CKeywords::auto_loop_switch_case));
+	
+	EXPECT_TRUE(statechart->isStateActive(CKeywords::auto_loop_switch_case_enum_asm));
+	
+	
 }
+
 
 }

@@ -7,6 +7,8 @@
 
 namespace  {
 
+LogicalOr* statechart;
+
 
 
 //! The timers are managed by a timer service. */
@@ -14,9 +16,6 @@ static SctUnitRunner * runner;
 
 class LogicalOrTests : public ::testing::Test{
 	protected:
-	
-	LogicalOr* statechart;
-	
 	virtual void SetUp() {
 		statechart = new LogicalOr();
 		statechart->init();
@@ -30,19 +29,19 @@ class LogicalOrTests : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
-	
-	
 };
 
-	TEST_F(LogicalOrTests, operandEvaluationOrder) {
-		
-		statechart->enter();
-		
-		runner->proceed_cycles(1);
-		
-		EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 4l && statechart->getDefaultSCI()->get_b()) << "logical or expression was executed in wrong order..." ;
-		
-		
+
+TEST_F(LogicalOrTests, operandEvaluationOrder) {
+	
+	statechart->enter();
+	
+	runner->proceed_cycles(1);
+	
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 4l && statechart->getDefaultSCI()->get_b()) << "logical or expression was executed in wrong order..." ;
+	
+	
 }
+
 
 }
