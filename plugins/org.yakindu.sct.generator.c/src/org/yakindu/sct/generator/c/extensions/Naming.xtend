@@ -65,6 +65,13 @@ class Naming {
 		}
 		return entry.moduleName.toFirstUpper
 	}
+	
+	def module(Statechart it) {
+		if (entry.moduleName.nullOrEmpty) {
+			return name.asIdentifier.toFirstUpper
+		}
+		return entry.moduleName.toFirstUpper
+	}
 
 	def filterNullOrEmptyAndJoin(Iterable<CharSequence> it) {
 		filter[!it?.toString.nullOrEmpty].join('\n')
