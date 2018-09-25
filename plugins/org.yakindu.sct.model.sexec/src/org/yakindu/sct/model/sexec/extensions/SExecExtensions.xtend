@@ -364,6 +364,7 @@ class SExecExtensions {
 		new ArrayList<Method>() => [ l | 
 			l.add(it.reactMethod()) 
 			l.addAll(it.states.map( s | s.reactMethod))
+			l.removeIf( m | m === null)
 		] 	
 	}
 	
