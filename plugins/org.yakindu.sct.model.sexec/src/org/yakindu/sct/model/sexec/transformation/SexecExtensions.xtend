@@ -11,18 +11,18 @@
 package org.yakindu.sct.model.sexec.transformation
 
 import java.util.List
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.EcoreUtil2
 import org.yakindu.sct.model.sexec.EnterState
+import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.ExitState
+import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.SexecFactory
 import org.yakindu.sct.model.sexec.StateVector
 import org.yakindu.sct.model.sexec.Step
-import org.yakindu.sct.model.sexec.Sequence
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.EcoreUtil2
 
 class SexecExtensions {
 	

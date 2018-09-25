@@ -167,10 +167,6 @@ class SgraphExtensions {
 		if(sc !== null) {
 			return sc
 		}
-//		val ef = EcoreUtil2.getContainerOfType(element, typeof(ExecutionFlow))
-//		if(ef !== null) {
-//			return getStatechart(ef)
-//		}
 		null
 	}
 	
