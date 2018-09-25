@@ -10,22 +10,24 @@
 */
 package org.yakindu.sct.model.sexec.transformation
 
-import org.yakindu.sct.model.sgraph.SGraphFactory
-import org.yakindu.sct.model.sgraph.RegularState
-import org.yakindu.sct.model.sgraph.FinalState
-import org.yakindu.sct.model.sgraph.State
-import org.yakindu.sct.model.sgraph.Region
-import org.yakindu.sct.model.sgraph.Entry
+import java.util.ArrayList
 import java.util.List
 import org.eclipse.emf.ecore.EObject
-import java.util.ArrayList
+import org.eclipse.xtext.EcoreUtil2
+import org.yakindu.base.types.AnnotatableElement
+import org.yakindu.base.types.Annotation
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sgraph.Entry
 import org.yakindu.sct.model.sgraph.EntryKind
+import org.yakindu.sct.model.sgraph.FinalState
+import org.yakindu.sct.model.sgraph.Region
+import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.SGraphFactory
+import org.yakindu.sct.model.sgraph.State
+import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.stext.stext.EntryPointSpec
 import org.yakindu.sct.model.stext.stext.ExitPointSpec
-import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.base.types.Annotation
-import org.yakindu.base.types.AnnotatableElement
 
 class SgraphExtensions {
 	
@@ -152,16 +154,24 @@ class SgraphExtensions {
 	 * 		The parent statechart or null.
 	 */
 	def Statechart getStatechart(EObject element){
-		var Statechart ret = null
-		if (element !== null) {
-			if (element instanceof Statechart) {
-				return element as Statechart
-			}
-			else {
-				ret = getStatechart(element.eContainer)
+		if(element === null) {
+			return null
+		}
+		if(element instanceof ExecutionFlow) {
+			val ef = element as ExecutionFlow
+			if(ef.sourceElement instanceof Statechart) {
+				return (ef.sourceElement as Statechart)
 			}
 		}
-		return ret
+		val sc = EcoreUtil2.getContainerOfType(element, typeof(Statechart))
+		if(sc !== null) {
+			return sc
+		}
+//		val ef = EcoreUtil2.getContainerOfType(element, typeof(ExecutionFlow))
+//		if(ef !== null) {
+//			return getStatechart(ef)
+//		}
+		null
 	}
 	
 	/** 

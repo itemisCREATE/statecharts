@@ -33,11 +33,13 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 
 class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineHeader {
 
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
+	@Inject protected extension SgraphExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension INamingService
@@ -54,15 +56,16 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			#ifndef «module().define»_H_
 			#define «module().define»_H_
 			
-			«IF !statechart.namespace.nullOrEmpty»
-			namespace «statechart.namespace.replace(".", "::")» {
-			«ENDIF»
 			
 			«includes(artifactConfigs)»
 			
 			/*! \file Header of the state machine '«name»'.
 			*/
 			
+			«IF !statechart.namespace.nullOrEmpty»
+			namespace «statechart.namespace.replace(".", "::")» {
+			«ENDIF»
+
 			«preStatechartDeclarations»
 			
 			/*! Define indices of states in the StateConfVector */
