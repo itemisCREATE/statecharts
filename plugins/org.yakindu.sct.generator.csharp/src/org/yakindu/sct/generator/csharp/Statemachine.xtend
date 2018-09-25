@@ -39,12 +39,9 @@ class Statemachine {
 	@Inject protected extension FlowCode
 	@Inject protected extension StateVectorExtensions
 	
-	@Inject Beautifier beautifier
-	
 	def generateStatemachine(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		var filename = flow.statemachineClassName.csharp
-		var content = beautifier.format(filename, content(flow, entry))
-		fsa.generateFile(filename, content)
+		fsa.generateFile(filename, content(flow, entry))
 	}
 	
 	def protected content(ExecutionFlow flow, GeneratorEntry entry) '''

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
@@ -12,11 +12,11 @@ package org.yakindu.sct.generator.csharp.types
 
 import com.google.inject.Inject
 import org.yakindu.base.types.Type
+import org.yakindu.base.types.TypeSpecifier
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 
 import static org.yakindu.base.types.typesystem.ITypeSystem.*
-import org.yakindu.base.types.TypeSpecifier
 
 /**
  * @author andreas muelder
@@ -24,11 +24,11 @@ import org.yakindu.base.types.TypeSpecifier
 class CSharpTypeSystemAccess implements ICodegenTypeSystemAccess {
 
 	@Inject
-	private extension ITypeSystem ts
+	extension ITypeSystem ts
 
 	override String getTargetLanguageName(Type type) {
 		switch (type) {
-			case type === null || ts.isSame(type, getType(VOID)) : 'void'
+			case type === null || ts.isSame(type, getType(VOID)): 'void'
 			case ts.isSame(type, getType(REAL)): "double"
 			case ts.isSame(type, getType(INTEGER)): "long"
 			case ts.isSame(type, getType(BOOLEAN)): "bool"
@@ -36,9 +36,9 @@ class CSharpTypeSystemAccess implements ICodegenTypeSystemAccess {
 			default: "//" + this
 		};
 	}
-	
+
 	override getTargetLanguageName(TypeSpecifier typeSpecifier) {
 		return getTargetLanguageName(typeSpecifier?.type)
 	}
-	
+
 }
