@@ -16,10 +16,13 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gef.EditPolicy;
+import org.eclipse.gef.editparts.ZoomListener;
+import org.eclipse.gef.editparts.ZoomManager;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.common.ui.services.parser.IParser;
 import org.eclipse.gmf.runtime.common.ui.services.parser.ParserOptions;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ITextAwareEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.render.editparts.RenderedDiagramRootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
@@ -34,6 +37,7 @@ import org.yakindu.base.xtext.utils.gmf.directedit.ExternalXtextLabelEditPart;
 import org.yakindu.base.xtext.utils.gmf.directedit.IEAttributeProvider;
 import org.yakindu.base.xtext.utils.gmf.directedit.StyleRanges;
 import org.yakindu.base.xtext.utils.gmf.directedit.XtextDirectEditManager;
+import org.yakindu.base.xtext.utils.gmf.figures.SyntaxColoringLabel;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
@@ -51,7 +55,7 @@ import com.google.inject.Injector;
  * 
  */
 public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLabelEditPart
-		implements ITextAwareEditPart, IEAttributeProvider, IPropertyChangeListener {
+		implements ITextAwareEditPart, IEAttributeProvider, IPropertyChangeListener, ZoomListener {
 
 	private static final String PRIMARY_VIEW_LISTENER = "primaryViewListener";
 
@@ -63,12 +67,18 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 	public void activate() {
 		super.activate();
 		DiagramActivator.getDefault().getPreferenceStore().addPropertyChangeListener(this);
+		getZoomManager().addZoomListener(this);
+	}
+
+	protected ZoomManager getZoomManager() {
+		return ((RenderedDiagramRootEditPart) getRoot()).getZoomManager();
 	}
 
 	@Override
 	public void deactivate() {
 		super.deactivate();
 		DiagramActivator.getDefault().getPreferenceStore().removePropertyChangeListener(this);
+		getZoomManager().removeZoomListener(this);
 	}
 
 	public PlugableExternalXtextLabelEditPart(View view, String target) {
@@ -153,9 +163,18 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 
 	@Override
 	protected void refreshVisuals() {
-		setLabelStyles();
 		updateLabelText();
+		setLabelStyles(getEditText());
 		super.refreshVisuals();
+	}
+
+	@Override
+	protected SyntaxColoringLabel createFigure() {
+		SyntaxColoringLabel label = super.createFigure();
+		label.setHighlight(DiagramActivator.getDefault().getPreferenceStore()
+				.getBoolean(StatechartPreferenceConstants.PREF_SYNTAX_COLORING));
+		label.setZoom(getZoomManager().getZoom());
+		return label;
 	}
 
 	@Override
@@ -166,15 +185,10 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 		getFigure().setText(label);
 	}
 
-	protected void setLabelStyles() {
-		if (DiagramActivator.getDefault().getPreferenceStore()
-				.getBoolean(StatechartPreferenceConstants.PREF_SYNTAX_COLORING)) {
-			StyleRanges styleRanges = injector.getInstance(StyleRanges.class);
-			List<StyleRange> result = styleRanges.getRanges(getEditText());
-			getFigure().setRanges(result.toArray(new StyleRange[] {}));
-		} else {
-			getFigure().setRanges(new StyleRange[] {});
-		}
+	protected void setLabelStyles(String text) {
+		StyleRanges styleRanges = injector.getInstance(StyleRanges.class);
+		List<StyleRange> result = styleRanges.getRanges(text);
+		getFigure().setRanges(result.toArray(new StyleRange[] {}));
 	}
 
 	@Override
@@ -185,12 +199,20 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		if (StatechartPreferenceConstants.PREF_SYNTAX_COLORING.equals(event.getProperty())) {
-			setLabelStyles();
+			getFigure().setHighlight((boolean) event.getNewValue());
+			setLabelStyles(getEditText());
 			getFigure().invalidateTree();
 			getFigure().revalidate();
 		} else if (StatechartPreferenceConstants.PREF_FONT_SCALING.equals(event.getProperty())) {
 			refreshVisuals();
 		}
+	}
+	
+	@Override
+	public void zoomChanged(double zoom) {
+		getFigure().setZoom(zoom);
+		getFigure().invalidateTree();
+		getFigure().revalidate();
 	}
 
 	@Override

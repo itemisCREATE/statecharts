@@ -10,8 +10,6 @@
  */
 package org.yakindu.base.xtext.utils.gmf.figures;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import org.eclipse.draw2d.ColorConstants;
@@ -38,7 +36,6 @@ import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
-import com.google.common.base.Objects;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -66,6 +63,18 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		textFlow.setParent(getTextFigure());
 		getTextFigure().getChildren().set(0, textFlow);
 		setLayoutManager(textFlow, false);
+	}
+
+	public void setZoom(double zoom) {
+		textFlow.zoom = zoom;
+	}
+
+	public void setHighlight(boolean highlight) {
+		textFlow.setHighlight(highlight);
+	}
+
+	public boolean isHighlight() {
+		return textFlow.isHighlight();
 	}
 
 	public void setRanges(StyleRange[] ranges) {
@@ -100,6 +109,15 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		private static final GC gc = new GC(dummy);
 		private Font boldFont;
 		private double zoom = 1.0;
+		private boolean highlight = true;
+
+		public void setHighlight(boolean highlight) {
+			this.highlight = highlight;
+		}
+
+		public boolean isHighlight() {
+			return highlight;
+		}
 
 		private StyleRange[] ranges = new StyleRange[0];
 
@@ -108,29 +126,7 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		}
 
 		public void setRanges(StyleRange[] ranges) {
-			this.ranges = merge(ranges);
-		}
-
-		protected StyleRange[] merge(StyleRange[] ranges) {
-			List<StyleRange> result = new ArrayList<>();
-			for (StyleRange styleRange : ranges) {
-				if (result.isEmpty()) {
-					result.add(styleRange);
-					continue;
-				}
-				StyleRange lastRange = result.get(result.size() - 1);
-				if (equal(lastRange, styleRange)) {
-					lastRange.length += styleRange.length;
-				} else
-					result.add(styleRange);
-			}
-			return result.toArray(new StyleRange[] {});
-		}
-
-		protected boolean equal(StyleRange lastRange, StyleRange styleRange) {
-			return lastRange.fontStyle == styleRange.fontStyle
-					&& Objects.equal(lastRange.background, styleRange.background)
-					&& Objects.equal(lastRange.foreground, styleRange.foreground);
+			this.ranges = ranges;
 		}
 
 		@Override
@@ -153,7 +149,10 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 
 		@Override
 		protected void paintText(Graphics g, String draw, int x, int y, int bidiLevel) {
-			zoom = g.getAbsoluteScale();
+			if (!highlight) {
+				super.paintText(g, draw, x, y, bidiLevel);
+				return;
+			}
 			if (ranges.length == 0) {
 				draw = replaceTabs(draw);
 				super.paintText(g, draw, x, y, bidiLevel);
@@ -219,7 +218,7 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 			if (zoom != 1.0) {
 				font.dispose();
 			}
-			return (int) (offset / zoom);
+			return (int) Math.ceil((offset / zoom));
 		}
 
 		@Override
