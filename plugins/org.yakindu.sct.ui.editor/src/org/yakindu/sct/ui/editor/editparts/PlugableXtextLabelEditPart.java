@@ -123,7 +123,7 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart
 
 	protected void setLabelStyles(String text) {
 		StyleRanges styleRanges = injector.getInstance(StyleRanges.class);
-		List<StyleRange> result = styleRanges.getRanges(getEditText());
+		List<StyleRange> result = styleRanges.getRanges(text);
 		getFigure().setRanges(result.toArray(new StyleRange[] {}));
 	}
 
