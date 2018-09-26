@@ -447,8 +447,8 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 	@Override
 	public void dispose() {
 		saveState(memento);
-		disposeEmbeddedEditor();
 		removeSynchronizer();
+		disposeEmbeddedEditor();
 		super.dispose();
 	}
 
