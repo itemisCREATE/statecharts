@@ -17,6 +17,7 @@ cache:
   - $HOME/.m2
 env:
   global:
+  - SWT_GTK3=0
   - DISPLAY=:99.0
   - GTEST_DIR=${TRAVIS_BUILD_DIR}/googletest-release-1.8.0/googletest
   - LIBRARY_PATH=${TRAVIS_BUILD_DIR}/googletest-release-1.8.0/googletest/build:${TRAVIS_BUILD_DIR}/googletest-release-1.8.0/googlemock/build:$LIBRARY_PATH
