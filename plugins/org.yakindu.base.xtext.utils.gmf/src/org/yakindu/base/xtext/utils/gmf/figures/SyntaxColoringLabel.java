@@ -273,7 +273,6 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 			 * Add bold font size to label dimension
 			 */
 			protected Dimension getTextExtentsInternal(String draw, Font f) {
-				System.out.println("DRAW " + draw);
 				draw = replaceTabs(draw);
 				Dimension d = super.getTextExtents(draw, f).getCopy();
 				int paintOffset = 0;
