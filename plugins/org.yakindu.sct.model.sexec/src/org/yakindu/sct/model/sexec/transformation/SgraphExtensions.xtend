@@ -158,16 +158,11 @@ class SgraphExtensions {
 			return null
 		}
 		if(element instanceof ExecutionFlow) {
-			val ef = element as ExecutionFlow
-			if(ef.sourceElement instanceof Statechart) {
-				return (ef.sourceElement as Statechart)
+			if(element.sourceElement instanceof Statechart) {
+				return (element.sourceElement as Statechart)
 			}
 		}
-		val sc = EcoreUtil2.getContainerOfType(element, typeof(Statechart))
-		if(sc !== null) {
-			return sc
-		}
-		null
+		EcoreUtil2.getContainerOfType(element, typeof(Statechart))
 	}
 	
 	/** 
