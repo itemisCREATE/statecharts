@@ -65,6 +65,10 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		setLayoutManager(textFlow, false);
 	}
 
+	public void setZoom(double zoom) {
+		textFlow.zoom = zoom;
+	}
+
 	public void setHighlight(boolean highlight) {
 		textFlow.setHighlight(highlight);
 	}
@@ -149,7 +153,6 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 				super.paintText(g, draw, x, y, bidiLevel);
 				return;
 			}
-			zoom = g.getAbsoluteScale();
 			if (ranges.length == 0) {
 				draw = replaceTabs(draw);
 				super.paintText(g, draw, x, y, bidiLevel);
@@ -215,7 +218,7 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 			if (zoom != 1.0) {
 				font.dispose();
 			}
-			return (int) (offset / zoom);
+			return (int) Math.ceil((offset / zoom));
 		}
 
 		@Override
@@ -270,6 +273,7 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 			 * Add bold font size to label dimension
 			 */
 			protected Dimension getTextExtentsInternal(String draw, Font f) {
+				System.out.println("DRAW " + draw);
 				draw = replaceTabs(draw);
 				Dimension d = super.getTextExtents(draw, f).getCopy();
 				int paintOffset = 0;

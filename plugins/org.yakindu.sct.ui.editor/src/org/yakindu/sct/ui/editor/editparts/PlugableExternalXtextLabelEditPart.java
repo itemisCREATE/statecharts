@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.editparts.ZoomListener;
+import org.eclipse.gef.editparts.ZoomManager;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.common.ui.services.parser.IParser;
 import org.eclipse.gmf.runtime.common.ui.services.parser.ParserOptions;
@@ -66,14 +67,18 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 	public void activate() {
 		super.activate();
 		DiagramActivator.getDefault().getPreferenceStore().addPropertyChangeListener(this);
-		((RenderedDiagramRootEditPart) getRoot()).getZoomManager().addZoomListener(this);
+		getZoomManager().addZoomListener(this);
+	}
+
+	protected ZoomManager getZoomManager() {
+		return ((RenderedDiagramRootEditPart) getRoot()).getZoomManager();
 	}
 
 	@Override
 	public void deactivate() {
 		super.deactivate();
 		DiagramActivator.getDefault().getPreferenceStore().removePropertyChangeListener(this);
-		((RenderedDiagramRootEditPart) getRoot()).getZoomManager().removeZoomListener(this);
+		getZoomManager().removeZoomListener(this);
 	}
 
 	public PlugableExternalXtextLabelEditPart(View view, String target) {
@@ -168,6 +173,7 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 		SyntaxColoringLabel label = super.createFigure();
 		label.setHighlight(DiagramActivator.getDefault().getPreferenceStore()
 				.getBoolean(StatechartPreferenceConstants.PREF_SYNTAX_COLORING));
+		label.setZoom(getZoomManager().getZoom());
 		return label;
 	}
 
@@ -204,6 +210,7 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 	
 	@Override
 	public void zoomChanged(double zoom) {
+		getFigure().setZoom(zoom);
 		getFigure().invalidateTree();
 		getFigure().revalidate();
 	}
