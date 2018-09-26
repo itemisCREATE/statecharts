@@ -7,13 +7,12 @@
 
 namespace  {
 
+NoLocalEvents* statechart;
 
 
 
 //! The timers are managed by a timer service. */
 static SctUnitRunner * runner;
-
-NoLocalEvents* statechart;
 
 class NoLocalEventsTest : public ::testing::Test{
 	protected:

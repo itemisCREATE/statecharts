@@ -37,11 +37,14 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 
 class Naming {
 	@Inject @Named("Separator") protected String sep;
 
 	@Inject protected extension SExecExtensions
+	
+	@Inject protected extension SgraphExtensions
 
 	@Inject protected extension ICodegenTypeSystemAccess
 
@@ -60,6 +63,13 @@ class Naming {
 	}
 
 	def module(ExecutionFlow it) {
+		if (entry.moduleName.nullOrEmpty) {
+			return name.asIdentifier.toFirstUpper
+		}
+		return entry.moduleName.toFirstUpper
+	}
+	
+	def module(Statechart it) {
 		if (entry.moduleName.nullOrEmpty) {
 			return name.asIdentifier.toFirstUpper
 		}
@@ -201,19 +211,6 @@ class Naming {
 		while (ret !== null) {
 			if (ret instanceof ExecutionFlow) {
 				return ret as ExecutionFlow
-			} else {
-				ret = ret.eContainer;
-			}
-		}
-		return null;
-	}
-	
-	def Statechart statechart(EObject element) {
-		var ret = element;
-
-		while (ret !== null) {
-			if (ret instanceof Statechart) {
-				return ret as Statechart
 			} else {
 				ret = ret.eContainer;
 			}
