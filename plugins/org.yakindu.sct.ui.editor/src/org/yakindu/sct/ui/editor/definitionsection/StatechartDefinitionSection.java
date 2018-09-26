@@ -139,8 +139,6 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 	private DefinitionSectionSynchronizer synchronizer;
 	private Text nameLabel;
 
-	private boolean suppressModifyEvent = false;
-
 	public StatechartDefinitionSection(Composite parent, int style, DiagramPartitioningEditor editorPart) {
 		super(parent, style);
 		this.sash = (SashForm) parent;
