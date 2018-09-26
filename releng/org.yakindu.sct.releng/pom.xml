@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.yakindu.sct</groupId>
 	<artifactId>org.yakindu.sct.releng</artifactId>
@@ -64,7 +66,8 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!-- Avoid the generation of maven archive information in the META-INF folder -->
+				<!-- Avoid the generation of maven archive information in the META-INF 
+					folder -->
 				<plugin>
 					<groupId>org.eclipse.tycho</groupId>
 					<artifactId>tycho-packaging-plugin</artifactId>
@@ -379,6 +382,16 @@
 						<version>${xtext-version}</version>
 						<dependencies>
 							<dependency>
+								<groupId>org.eclipse.platform</groupId>
+								<artifactId>org.eclipse.equinox.common</artifactId>
+								<version>3.10.0</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.platform</groupId>
+								<artifactId>org.eclipse.core.runtime</artifactId>
+								<version>3.14.0</version>
+							</dependency>
+							<dependency>
 								<groupId>org.eclipse.jdt</groupId>
 								<artifactId>org.eclipse.jdt.core</artifactId>
 								<version>3.13.102</version>
@@ -401,6 +414,16 @@
 						<artifactId>xtext-maven-plugin</artifactId>
 						<version>${xtext-version}</version>
 						<dependencies>
+							<dependency>
+								<groupId>org.eclipse.platform</groupId>
+								<artifactId>org.eclipse.equinox.common</artifactId>
+								<version>3.10.0</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.platform</groupId>
+								<artifactId>org.eclipse.core.runtime</artifactId>
+								<version>3.14.0</version>
+							</dependency>
 							<dependency>
 								<groupId>org.eclipse.jdt</groupId>
 								<artifactId>org.eclipse.jdt.core</artifactId>
