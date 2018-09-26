@@ -1,3 +1,13 @@
+/**
+ *   Copyright (c) 2018 committers of YAKINDU Statechart Tools.
+ *   All rights reserved. This program and the accompanying materials
+ *   are made available under the terms of the Eclipse Public License v1.0
+ *   which accompanies this distribution, and is available at
+ *   http://www.eclipse.org/legal/epl-v10.html
+ *
+ *   Contributors:
+ * 		@author René Beckmann (beckmann@itemis.de)
+ */
 package org.yakindu.sct.model.stext.validation;
 
 import org.eclipse.emf.ecore.EObject;
@@ -6,7 +16,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 
-public abstract class StateNamesAreUniqueValidationHelper extends STextNamesAreUniqueValidationHelper {
+public class StateNamesAreUniqueValidationHelper extends STextNamesAreUniqueValidationHelper {
 	public static final String STATE_NAME_NOT_UNIQUE = "This state's name is not unique.";
 
 	protected void createDuplicateStateNameError(IEObjectDescription description, ValidationMessageAcceptor acceptor) {
@@ -30,6 +40,8 @@ public abstract class StateNamesAreUniqueValidationHelper extends STextNamesAreU
 		}
 	}
 
-	protected abstract boolean shouldValidate(IEObjectDescription desc);
+	protected boolean shouldValidate(IEObjectDescription desc) {
+		return true;
+	}
 
 }
