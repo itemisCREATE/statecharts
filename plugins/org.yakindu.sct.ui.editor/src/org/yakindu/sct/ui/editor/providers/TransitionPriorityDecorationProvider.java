@@ -90,10 +90,10 @@ public class TransitionPriorityDecorationProvider extends AbstractPriorityDecora
 		public void createDecorators(IGraphicalEditPart editPart) {
 			PriorityFigure figure = new PriorityFigure(MapModeUtil.getMapMode(), getPriority(editPart));
 			figure.setSize(12, 13);
-			getDecoratorTarget().addDecoration(figure,
-					new ConnectionLocator((Connection) editPart.getFigure(), ConnectionLocator.SOURCE), false);
+			setDecoration(getDecoratorTarget().addDecoration(figure,
+					new ConnectionLocator((Connection) editPart.getFigure(), ConnectionLocator.SOURCE), false));
+			
 			figure.setToolTip(new Label("Transition Priority " + getPriority(editPart)));
-
 		}
 
 		public int getPriority(IGraphicalEditPart editPart) {
