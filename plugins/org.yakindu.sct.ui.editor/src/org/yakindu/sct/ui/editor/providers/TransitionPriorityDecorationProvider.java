@@ -18,6 +18,7 @@ import org.eclipse.gef.EditPart;
 import org.eclipse.gef.editparts.AbstractConnectionEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.DecorationEditPolicy.DecoratorTarget;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditDomain;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecorator;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecoratorTarget;
@@ -90,10 +91,10 @@ public class TransitionPriorityDecorationProvider extends AbstractPriorityDecora
 		public void createDecorators(IGraphicalEditPart editPart) {
 			PriorityFigure figure = new PriorityFigure(MapModeUtil.getMapMode(), getPriority(editPart));
 			figure.setSize(12, 13);
-			getDecoratorTarget().addDecoration(figure,
-					new ConnectionLocator((Connection) editPart.getFigure(), ConnectionLocator.SOURCE), false);
+			setDecoration(getDecoratorTarget().addDecoration(figure,
+					new ConnectionLocator((Connection) editPart.getFigure(), ConnectionLocator.SOURCE), false));
+			
 			figure.setToolTip(new Label("Transition Priority " + getPriority(editPart)));
-
 		}
 
 		public int getPriority(IGraphicalEditPart editPart) {
