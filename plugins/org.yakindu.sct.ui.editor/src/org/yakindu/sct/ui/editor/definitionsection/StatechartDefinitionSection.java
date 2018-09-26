@@ -14,9 +14,10 @@ import static org.yakindu.sct.ui.editor.definitionsection.ContextScopeHandler.EM
 import static org.yakindu.sct.ui.editor.definitionsection.ContextScopeHandler.TEXT_EDITOR_SCOPE;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -191,20 +192,23 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 	protected void createNameLabel(Composite labelComposite) {
 		nameLabel = new Text(labelComposite, SWT.SINGLE | SWT.NORMAL);
 		GridDataFactory.fillDefaults().indent(5, 1).grab(true, false).align(SWT.FILL, SWT.CENTER).applyTo(nameLabel);
-		nameLabel.setText(getStatechartName());
+		Optional<String> name = getStatechartName();
+		if (name.isPresent()) {
+			nameLabel.setText(name.get());
+		}
 		nameLabel.setEditable(isStatechart());
 		nameLabel.setBackground(ColorConstants.white);
 		nameModificationListener = new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
-				Statechart sct = getStatechart();
-				if (sct != null) {
-					if (sct.getName().equals(nameLabel.getText())) {
+				Optional<Statechart> sct = getStatechart();
+				if (sct.isPresent()) {
+					if (Objects.equals(sct.get().getName(), nameLabel.getText())) {
 						return;
 					}
 					getSash().setRedraw(false);
 					TransactionalEditingDomain domain = getTransactionalEditingDomain();
-					SetCommand command = new SetCommand(domain, sct,
+					SetCommand command = new SetCommand(domain, sct.get(),
 							BasePackage.Literals.NAMED_ELEMENT__NAME, nameLabel.getText());
 					domain.getCommandStack().execute(command);
 					refresh(nameLabel.getParent());
@@ -215,10 +219,12 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 		nameLabel.addModifyListener(nameModificationListener);
 	}
 
-	protected String getStatechartName() {
+	protected Optional<String> getStatechartName() {
 		Statechart statechart = EcoreUtil2.getContainerOfType(getContextObject(), Statechart.class);
-		Assert.isNotNull(statechart);
-		return statechart.getName();
+		if (statechart == null) {
+			return Optional.empty();
+		}
+		return Optional.ofNullable(statechart.getName());
 	}
 
 	protected void createInlineIcon(Composite labelComposite) {
@@ -229,12 +235,8 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 		return getContextObject() instanceof Statechart;
 	}
 
-	protected Statechart getStatechart() {
-		if (isStatechart()) {
-			return (Statechart) getContextObject();
-		} else {
-			return null;
-		}
+	protected Optional<Statechart> getStatechart() {
+		return Optional.ofNullable(EcoreUtil2.getContainerOfType(getContextObject(), Statechart.class));
 	}
 
 	protected void createSeparator(Composite definitionSection) {
