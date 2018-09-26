@@ -150,7 +150,7 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 		this.embeddedEditor = createSpecificationEditor();
 		registerResizeListener();
 		GridLayoutFactory.fillDefaults().numColumns(2).spacing(0, 0).applyTo(this);
-		initSynchronizer(DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram()));
+		initSynchronizer();
 	}
 
 	protected Label createSwitchControl() {
@@ -181,11 +181,13 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 		return labelComposite;
 	}
 
-	protected void initSynchronizer(List<Diagram> diagramContainerHierachy) {
+	protected void initSynchronizer() {
 		synchronizer = new DefinitionSectionSynchronizer();
-		for (Diagram diagram : diagramContainerHierachy) {
-			diagram.getElement().eAdapters().add(synchronizer);
-		}
+		getContextObject().eAdapters().add(synchronizer);
+	}
+
+	protected void removeSynchronizer() {
+		getContextObject().eAdapters().remove(synchronizer);
 	}
 
 	protected void createNameLabel(Composite labelComposite) {
@@ -446,6 +448,7 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 	public void dispose() {
 		saveState(memento);
 		disposeEmbeddedEditor();
+		removeSynchronizer();
 		super.dispose();
 	}
 
@@ -789,15 +792,13 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 	 *
 	 *         Adapter for updating the name label on statechart name change
 	 *         event. Suppresses the nameLabel's ModificationEventListener to
-	 *         avoid a StackOverflowException. Shamelessly copied from
-	 *         {@link org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningEditor.BreadcrumbSynchronizer}
+	 *         avoid a StackOverflowException.
 	 */
 	protected class DefinitionSectionSynchronizer extends AdapterImpl {
 		@Override
 		public void notifyChanged(Notification notification) {
 			if (Notification.SET == notification.getEventType()) {
-				Object feature = notification.getFeature();
-				if (BasePackage.Literals.NAMED_ELEMENT__NAME.equals(feature)) {
+				if (BasePackage.Literals.NAMED_ELEMENT__NAME.equals(notification.getFeature())) {
 					suppressModifyEvent = true;
 					nameLabel.setText(notification.getNewStringValue());
 					suppressModifyEvent = false;
