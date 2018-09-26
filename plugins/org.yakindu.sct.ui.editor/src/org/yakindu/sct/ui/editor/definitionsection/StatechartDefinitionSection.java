@@ -199,13 +199,14 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 		nameModificationListener = new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
-				if (suppressModifyEvent) {
-					return;
-				}
-				if (getContextObject() instanceof Statechart) {
+				Statechart sct = getStatechart();
+				if (sct != null) {
+					if (sct.getName().equals(nameLabel.getText())) {
+						return;
+					}
 					getSash().setRedraw(false);
 					TransactionalEditingDomain domain = getTransactionalEditingDomain();
-					SetCommand command = new SetCommand(domain, getContextObject(),
+					SetCommand command = new SetCommand(domain, sct,
 							BasePackage.Literals.NAMED_ELEMENT__NAME, nameLabel.getText());
 					domain.getCommandStack().execute(command);
 					refresh(nameLabel.getParent());
@@ -228,6 +229,14 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 
 	protected boolean isStatechart() {
 		return getContextObject() instanceof Statechart;
+	}
+
+	protected Statechart getStatechart() {
+		if (isStatechart()) {
+			return (Statechart) getContextObject();
+		} else {
+			return null;
+		}
 	}
 
 	protected void createSeparator(Composite definitionSection) {
@@ -799,9 +808,7 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 		public void notifyChanged(Notification notification) {
 			if (Notification.SET == notification.getEventType()) {
 				if (BasePackage.Literals.NAMED_ELEMENT__NAME.equals(notification.getFeature())) {
-					suppressModifyEvent = true;
 					nameLabel.setText(notification.getNewStringValue());
-					suppressModifyEvent = false;
 				}
 			}
 		}
