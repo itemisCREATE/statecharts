@@ -800,8 +800,7 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 	 * @author BeckmaR
 	 *
 	 *         Adapter for updating the name label on statechart name change
-	 *         event. Suppresses the nameLabel's ModificationEventListener to
-	 *         avoid a StackOverflowException.
+	 *         event.
 	 */
 	protected class DefinitionSectionSynchronizer extends AdapterImpl {
 		@Override
