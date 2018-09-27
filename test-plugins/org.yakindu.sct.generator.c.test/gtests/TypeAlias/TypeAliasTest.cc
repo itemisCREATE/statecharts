@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static TypeAlias statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static TypeAlias statechart;
-
+			
 class TypeAliasTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class TypeAliasTest : public ::testing::Test{
 
 
 TEST_F(TypeAliasTest, TypeAliasTest) {
+	
 	typeAlias_enter(&statechart);
 	EXPECT_TRUE(typeAlias_isStateActive(&statechart, TypeAlias_main_region_Start));
 	EXPECT_TRUE(typeAliasIface_get_myVar(&statechart)== 1l);

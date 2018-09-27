@@ -109,19 +109,6 @@
                             scope="compile" />
             </artifact:dependencies>
             <path refid="wikitext.classpath" />
-            <files dir="${lib.dir}/bin" layout="{groupId}/{artifactId}-{baseVersion}.{extension}" />
-        </artifact:resolve>
-
-        <!-- Sources of MyLyn Wikitext: -->
-        <artifact:resolve>
-            <artifact:dependencies>
-                <dependency groupId="org.eclipse.mylyn.docs"
-                            artifactId="org.eclipse.mylyn.wikitext"
-                            version="${wikitext.version}"
-                            scope="compile"
-                            classifier="sources" />
-            </artifact:dependencies>
-            <files dir="${lib.dir}/src" layout="{groupId}/{artifactId}-{baseVersion}-{classifier}.{extension}" />
         </artifact:resolve>
 
         <!-- Classpath for MyLyn Wikitext's Textile support: -->
@@ -133,19 +120,6 @@
                             scope="compile" />
             </artifact:dependencies>
             <path refid="wikitext.textile.classpath" />
-            <files dir="${lib.dir}/bin" layout="{groupId}/{artifactId}-{baseVersion}.{extension}" />
-        </artifact:resolve>
-
-        <!-- Sources of MyLyn Wikitext's Textile support: -->
-        <artifact:resolve>
-            <artifact:dependencies>
-                <dependency groupId="org.eclipse.mylyn.docs"
-                            artifactId="org.eclipse.mylyn.wikitext.textile"
-                            version="${wikitext.version}"
-                            scope="compile"
-                            classifier="sources" />
-            </artifact:dependencies>
-            <files dir="${lib.dir}/src" layout="{groupId}/{artifactId}-{baseVersion}-{classifier}.{extension}" />
         </artifact:resolve>
 
         <!-- Classpath for MyLyn Wikitext's Ant support: -->
@@ -165,6 +139,18 @@
             <path refid="wikitext.textile.classpath" />
             <path refid="wikitext.ant.classpath" />
         </path>
+
+        <!-- Repositories for YAKINDU Docs: -->
+        <artifact:remoterepos id="aether.repositories">
+            <artifact:remoterepo url="https://projects.itemis.de/nexus/content/repositories/OSR/"
+                                 id="releases"
+                                 releases="true"
+                                 snapshots="false" />
+            <artifact:remoterepo url="https://projects.itemis.de/nexus/content/repositories/OSS/"
+                                 id="snapshots"
+                                 releases="false"
+                                 snapshots="true" />
+        </artifact:remoterepos>
 
         <!-- Classpath for YAKINDU Docs: -->
         <artifact:resolve>

@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static ValuedEvents statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static ValuedEvents statechart;
-
+			
 class ValuedEventsTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class ValuedEventsTest : public ::testing::Test{
 
 
 TEST_F(ValuedEventsTest, valuedEventsTest) {
+	
 	valuedEvents_enter(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(strcmp(valuedEventsIface_get_myString(&statechart), "sct") == 0);

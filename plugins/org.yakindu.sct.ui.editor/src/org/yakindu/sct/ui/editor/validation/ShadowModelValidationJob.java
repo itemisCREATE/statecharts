@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.validation;
 
@@ -38,9 +38,9 @@ import com.google.common.collect.Lists;
  * Copies the resource contents to a shadow model that is validated then. Does
  * not block UI during validation but consumes more memory since the whole model
  * is duplicated.
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public class ShadowModelValidationJob extends ValidationJob {
 
@@ -73,6 +73,7 @@ public class ShadowModelValidationJob extends ValidationJob {
 
 	protected List<Issue> doValidation(final IProgressMonitor monitor, final Resource shadowResource) {
 		return validator.validate(shadowResource, CheckMode.FAST_ONLY, new CancelIndicator() {
+			@Override
 			public boolean isCanceled() {
 				return monitor.isCanceled();
 			}

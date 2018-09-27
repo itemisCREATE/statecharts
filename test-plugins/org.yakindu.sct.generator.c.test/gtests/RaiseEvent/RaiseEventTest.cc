@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static RaiseEvent statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static RaiseEvent statechart;
-
+			
 class RaiseEventTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class RaiseEventTest : public ::testing::Test{
 
 
 TEST_F(RaiseEventTest, raiseEvent) {
+	
 	raiseEvent_enter(&statechart);
 	EXPECT_TRUE(raiseEvent_isStateActive(&statechart, RaiseEvent_second_region_SateA));
 	EXPECT_TRUE(raiseEvent_isStateActive(&statechart, RaiseEvent_main_region_StateA));

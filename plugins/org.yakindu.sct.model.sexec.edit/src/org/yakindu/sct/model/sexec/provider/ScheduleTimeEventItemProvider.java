@@ -233,6 +233,11 @@ public class ScheduleTimeEventItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createPostFixUnaryExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
 				 ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
 
 		newChildDescriptors.add

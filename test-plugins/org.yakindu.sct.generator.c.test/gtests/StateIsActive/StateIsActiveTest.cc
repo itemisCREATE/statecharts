@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static StateIsActive statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static StateIsActive statechart;
-
+			
 class StateIsActiveTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class StateIsActiveTest : public ::testing::Test{
 
 
 TEST_F(StateIsActiveTest, stateIsActive) {
+	
 	stateIsActive_enter(&statechart);
 	EXPECT_TRUE(stateIsActive_isStateActive(&statechart, StateIsActive_R1_R1A));
 	EXPECT_TRUE(stateIsActive_isStateActive(&statechart, StateIsActive_R2_R2A));

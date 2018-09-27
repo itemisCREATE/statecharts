@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static DeepHistory statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static DeepHistory statechart;
-
+			
 class DeepHistoryTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class DeepHistoryTest : public ::testing::Test{
 
 
 TEST_F(DeepHistoryTest, deepHistoryTest) {
+	
 	deepHistory_enter(&statechart);
 	deepHistoryIface_raise_event1(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);

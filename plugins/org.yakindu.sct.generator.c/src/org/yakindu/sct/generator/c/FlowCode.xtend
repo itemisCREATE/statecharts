@@ -33,6 +33,10 @@ import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.sexec.Return
+import org.yakindu.sct.model.sexec.LocalVariableDefinition
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.model.sexec.Statement
 
 class FlowCode {
 	
@@ -41,6 +45,8 @@ class FlowCode {
 	@Inject extension CExpressionsGenerator
 	@Inject extension INamingService
 	@Inject extension GenmodelEntries
+	@Inject protected extension ICodegenTypeSystemAccess
+	
  
  	@Inject GeneratorEntry entry
  
@@ -132,11 +138,11 @@ class FlowCode {
 		'''«IF condition !== null»«condition.sc_boolean_code»«ELSE»bool_true«ENDIF»'''
 	
 	def dispatch CharSequence code(CheckRef it)
-		'''«IF check !== null»«check.shortName»(«scHandle»)«ELSE»bool_true«ENDIF»'''
+		'''«IF check !== null»«check.shortName»(«scHandle») == bool_true«ELSE»bool_true«ENDIF»'''
 
 	def dispatch CharSequence code(If it) '''
 		«stepComment»
-		if («check.code» == bool_true)
+		if («check.code»)
 		{ 
 			«thenStep.code»
 		} «IF (elseStep !== null)» else
@@ -155,4 +161,17 @@ class FlowCode {
 		«scHandle»->stateConfVector[«state.stateVector.offset»] = «null_state»;
 		«scHandle»->stateConfVectorPosition = «state.stateVector.offset»;
 	'''
+	
+	def dispatch CharSequence code(Return it) '''
+		return«IF value !== null» «value.code»«ENDIF»;
+	'''
+	
+	def dispatch CharSequence code(LocalVariableDefinition it) '''
+		«variable.typeSpecifier.targetLanguageName» «variable.name»«IF initialValue !== null» = «initialValue.code»«ENDIF»;
+	'''
+	
+	def dispatch CharSequence code(Statement it) '''
+		«expression.code»;
+	'''
+	
 }

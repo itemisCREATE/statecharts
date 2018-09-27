@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static SimpleEvent statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static SimpleEvent statechart;
-
+			
 class SimpleEventTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class SimpleEventTest : public ::testing::Test{
 
 
 TEST_F(SimpleEventTest, simpleEventTest) {
+	
 	simpleEvent_enter(&statechart);
 	EXPECT_TRUE(simpleEvent_isStateActive(&statechart, SimpleEvent_main_region_A)) << "Expected A to be active" ;
 	EXPECT_TRUE(5l== 5l);

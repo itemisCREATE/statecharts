@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static NullCheck statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static NullCheck statechart;
-
+			
 class NullCheckTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class NullCheckTest : public ::testing::Test{
 
 
 TEST_F(NullCheckTest, SimpleNullCheckTest) {
+	
 	nullCheck_enter(&statechart);
 	EXPECT_TRUE(nullCheck_isStateActive(&statechart, NullCheck_main_region_A));
 	sc_timer_service_proceed_cycles(&timer_service, 1);

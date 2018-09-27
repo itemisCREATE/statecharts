@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static TriggerGuardExpressions statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static TriggerGuardExpressions statechart;
-
+			
 class TriggerGuardExpressionsTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class TriggerGuardExpressionsTest : public ::testing::Test{
 
 
 TEST_F(TriggerGuardExpressionsTest, trueGuard) {
+	
 	triggerGuardExpressions_enter(&statechart);
 	EXPECT_TRUE(triggerGuardExpressions_isStateActive(&statechart, TriggerGuardExpressions_main_region_A));
 	triggerGuardExpressionsIface_raise_e1(&statechart);
@@ -48,6 +49,7 @@ TEST_F(TriggerGuardExpressionsTest, trueGuard) {
 	EXPECT_TRUE(triggerGuardExpressions_isStateActive(&statechart, TriggerGuardExpressions_main_region_B));
 }
 TEST_F(TriggerGuardExpressionsTest, falseGuard) {
+	
 	triggerGuardExpressions_enter(&statechart);
 	EXPECT_TRUE(triggerGuardExpressions_isStateActive(&statechart, TriggerGuardExpressions_main_region_A));
 	triggerGuardExpressionsIface_set_b(&statechart,false);
