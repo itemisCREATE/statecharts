@@ -16,9 +16,9 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
-import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.serializer.ISerializer;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.validation.CompositeEValidator;
 import org.eclipse.xtext.validation.INamesAreUniqueValidationHelper;
 import org.yakindu.base.expressions.linking.OperationOverloadingLinkingService;
@@ -46,6 +46,7 @@ import com.google.inject.name.Names;
  * @author andreas muelder
  * @author axel terfloth
  */
+@SuppressWarnings("restriction")
 public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTextRuntimeModule {
 
 	@Override
@@ -54,6 +55,7 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 		binder.bind(IDefaultResourceDescriptionStrategy.class).to(SCTResourceDescriptionStrategy.class);
 		// https://github.com/Yakindu/statecharts/issues/1199
 		binder.bind(IReferableElementsUnloader.class).to(IReferableElementsUnloader.NullUnloader.class);
+		binder.bind(ITransientValueService.class).to(STextTransientValueService.class);
 	}
 
 	public Class<? extends INamesAreUniqueValidationHelper> bindNamesAreUniqueValidationHelper() {
@@ -106,11 +108,6 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 
 	public Class<? extends ITypeSystemInferrer> bindITypeSystemInferrer() {
 		return STextTypeInferrer.class;
-	}
-
-	@Override
-	public Class<? extends ITransientValueService> bindITransientValueService() {
-		return STextTransientValueService.class;
 	}
 
 	@Override

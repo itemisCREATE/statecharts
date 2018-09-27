@@ -255,7 +255,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			}
 		}
 	}
-	
+
 	@Check(CheckType.FAST)
 	public void checkConstAndReadOnlyDefinitionExpression(VariableDefinition definition) {
 		// applies only for readonly const definitions
@@ -395,7 +395,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 					Transition transition = transitionIt.next();
 					hasOutgoingTransition = STextValidationModelUtils.isDefaultExitTransition(transition)
 							|| STextValidationModelUtils.isNamedExitTransition(transition, exit.getName());
-				
+
 				}
 				if (!hasOutgoingTransition) {
 					error(EXIT_UNUSED, exit, null, -1);
@@ -413,7 +413,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				if (!equalsOutgoingTransition) {
 					warning(EXIT_NEVER_USED + "'" + exit.getName() + "'", exit, null, -1);
 				}
-				
+
 			} else {
 				boolean hasOutgoingTransition = false;
 				Iterator<Transition> transitionIt = state.getOutgoingTransitions().iterator();
@@ -499,7 +499,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			error(errorMsg, parentFirst, null, -1);
 		}
 	}
-	
+
 	@Check(CheckType.NORMAL)
 	public void checkUnboundEntryPoints(final org.yakindu.sct.model.sgraph.State state) {
 		if (state.isComposite()) {
@@ -860,7 +860,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		EList<String> imports = scope.getImports();
 		for (String packageImport : imports) {
 			Optional<PackageImport> pkImport = mapper.findPackageImport(scope.eResource(), packageImport);
-			if (!pkImport.isPresent() || !URIConverter.INSTANCE.exists(pkImport.get().getUri(), null)) {
+			if (!pkImport.isPresent() || !URIConverter.INSTANCE.exists(pkImport.get().getUri().trimQuery(), null)) {
 				error(String.format(IMPORT_NOT_RESOLVED_MSG, packageImport), scope,
 						StextPackage.Literals.IMPORT_SCOPE__IMPORTS, imports.indexOf(packageImport));
 			}
@@ -978,6 +978,22 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			return false;
 		}
 		return true;
+	}
+	
+	
+	@Check(CheckType.FAST)
+	public void checkOnlyOneEntryPointSpecIsUsed(Transition transition) {
+		EList<ReactionProperty> properties = transition.getProperties();
+		int countEntryPointSpecs = 0;
+		for(ReactionProperty property : properties) {
+			if(property instanceof EntryPointSpec) {
+				countEntryPointSpecs++;
+			}
+			if(countEntryPointSpecs > 1) {
+				warning(ONLY_FIRST_ENTRY_POINT_WILL_BE_USED, transition, null, -1);
+				break;
+			}
+		}
 	}
 
 }

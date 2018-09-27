@@ -58,23 +58,26 @@ public class UpdateVersion {
 	}
 
 	public static String getCurrentVersion() {
-		Path f = Paths.get(System.getProperty("user.dir") + "\\..\\..\\");
-		String currentVersion = "error";
+		Path searchPath = getSearchPath();
 		try {
-			currentVersion = FeatureXMLGetVersionVisitor.getVersion(f);
+			return FeatureXMLGetVersionVisitor.getVersion(searchPath);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
 
-		return currentVersion;
+		return "Error: Could not determine current version!";
+	}
+
+	protected static Path getSearchPath() {
+		return Paths.get(System.getProperty("user.dir")).getParent().getParent();
 	}
 
 	public static String ask4NewVersion(String currentVersion) {
 		InputStreamReader isr = new InputStreamReader(System.in);
 		BufferedReader br = new BufferedReader(isr);
 		String newVersion = "";
-		System.out
-				.print("Current Version is " + currentVersion + ". Please type the new version (without .qualifier!!).");
+		System.out.println(
+				"Current Version is " + currentVersion + ". Please type the new version (without .qualifier!!).");
 		try {
 			String input = br.readLine();
 			newVersion = input.trim() + QUALIFIER;
@@ -86,7 +89,7 @@ public class UpdateVersion {
 
 	public static void main(String[] args) {
 
-		Path f = Paths.get(System.getProperty("user.dir") + "\\..\\..\\");
+		Path f = getSearchPath();
 
 		String currentVersion = getCurrentVersion();
 		String newVersion = ask4NewVersion(currentVersion);

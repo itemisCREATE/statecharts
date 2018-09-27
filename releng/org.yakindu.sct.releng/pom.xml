@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.yakindu.sct</groupId>
 	<artifactId>org.yakindu.sct.releng</artifactId>
-	<version>3.4.0-SNAPSHOT</version>
+	<version>3.4.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
 	<properties>
-		<tycho-version>0.24.0</tycho-version>
-		<tycho-extras-version>0.24.0</tycho-extras-version>
+		<tycho-version>1.2.0</tycho-version>
+		<tycho-extras-version>1.2.0</tycho-extras-version>
 		<antrun-version>1.6</antrun-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<testFailureIgnore>false</testFailureIgnore>
@@ -64,7 +66,8 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!-- Avoid the generation of maven archive information in the META-INF folder -->
+				<!-- Avoid the generation of maven archive information in the META-INF 
+					folder -->
 				<plugin>
 					<groupId>org.eclipse.tycho</groupId>
 					<artifactId>tycho-packaging-plugin</artifactId>
@@ -223,7 +226,7 @@
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
-									<version>3.4.0-SNAPSHOT</version>
+									<version>3.4.1-SNAPSHOT</version>
 									<classifier>Mars</classifier>
 									<target></target>
 								</artifact>
@@ -256,7 +259,7 @@
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
-									<version>3.4.0-SNAPSHOT</version>
+									<version>3.4.1-SNAPSHOT</version>
 									<classifier>Neon</classifier>
 								</artifact>
 							</target>
@@ -288,7 +291,7 @@
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
-									<version>3.4.0-SNAPSHOT</version>
+									<version>3.4.1-SNAPSHOT</version>
 									<classifier>Oxygen</classifier>
 								</artifact>
 							</target>
@@ -350,9 +353,9 @@
 			</activation>
 			<properties>
 				<xtext-version>2.14.0</xtext-version>
-				<ecore-xtext-version>1.2.0</ecore-xtext-version>
-				<ecore-xcore-version>1.3.1</ecore-xcore-version>
-				<ecore-xcore-lib-version>1.1.100</ecore-xcore-lib-version>
+				<ecore-xtext-version>1.4.0</ecore-xtext-version>
+				<ecore-xcore-version>1.7.0</ecore-xcore-version>
+				<ecore-xcore-lib-version>1.3.0</ecore-xcore-lib-version>
 			</properties>
 			<build>
 				<plugins>
@@ -366,7 +369,7 @@
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
-									<version>3.4.0-SNAPSHOT</version>
+									<version>3.4.1-SNAPSHOT</version>
 									<classifier>Photon</classifier>
 								</artifact>
 							</target>
@@ -378,6 +381,16 @@
 						<artifactId>xtend-maven-plugin</artifactId>
 						<version>${xtext-version}</version>
 						<dependencies>
+							<dependency>
+								<groupId>org.eclipse.platform</groupId>
+								<artifactId>org.eclipse.equinox.common</artifactId>
+								<version>3.10.0</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.platform</groupId>
+								<artifactId>org.eclipse.core.runtime</artifactId>
+								<version>3.14.0</version>
+							</dependency>
 							<dependency>
 								<groupId>org.eclipse.jdt</groupId>
 								<artifactId>org.eclipse.jdt.core</artifactId>
@@ -401,6 +414,16 @@
 						<artifactId>xtext-maven-plugin</artifactId>
 						<version>${xtext-version}</version>
 						<dependencies>
+							<dependency>
+								<groupId>org.eclipse.platform</groupId>
+								<artifactId>org.eclipse.equinox.common</artifactId>
+								<version>3.10.0</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.platform</groupId>
+								<artifactId>org.eclipse.core.runtime</artifactId>
+								<version>3.14.0</version>
+							</dependency>
 							<dependency>
 								<groupId>org.eclipse.jdt</groupId>
 								<artifactId>org.eclipse.jdt.core</artifactId>
@@ -540,6 +563,7 @@
 		<module>../../plugins/org.yakindu.sct.ui.navigator</module>
 		<module>../../plugins/org.yakindu.sct.generator.c</module>
 		<module>../../plugins/org.yakindu.sct.generator.cpp</module>
+		<module>../../plugins/org.yakindu.sct.generator.csharp</module>
 		<module>../../plugins/org.yakindu.sct.generator.java</module>
 		<module>../../plugins/org.yakindu.sct.refactoring</module>
 		<module>../../plugins/org.yakindu.sct.branding</module>
@@ -554,6 +578,7 @@
 		<module>../../features/org.yakindu.sct.generator.c-feature</module>
 		<module>../../features/org.yakindu.sct.generator.cpp-feature</module>
 		<module>../../features/org.yakindu.sct.generator.java-feature</module>
+		<module>../../features/org.yakindu.sct.generator.csharp-feature</module>
 
 	</modules>
 

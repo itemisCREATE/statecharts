@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.EcoreUtil2
 import org.yakindu.base.types.AnnotatableElement
 import org.yakindu.base.types.Annotation
+import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgraph.Entry
 import org.yakindu.sct.model.sgraph.EntryKind
 import org.yakindu.sct.model.sgraph.FinalState
@@ -158,16 +159,15 @@ class SgraphExtensions {
 	 * 		The parent statechart or null.
 	 */
 	def Statechart getStatechart(EObject element){
-		var Statechart ret = null
-		if (element !== null) {
-			if (element instanceof Statechart) {
-				return element as Statechart
-			}
-			else {
-				ret = getStatechart(element.eContainer)
+		if(element === null) {
+			return null
+		}
+		if(element instanceof ExecutionFlow) {
+			if(element.sourceElement instanceof Statechart) {
+				return (element.sourceElement as Statechart)
 			}
 		}
-		return ret
+		EcoreUtil2.getContainerOfType(element, typeof(Statechart))
 	}
 	
 	/** 

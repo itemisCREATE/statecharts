@@ -1,5 +1,6 @@
 package org.yakindu.base.xtext.utils.gmf.directedit;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ITextAttributeProvider;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -42,7 +44,28 @@ public class StyleRanges {
 			range.fontStyle = attribute.getStyle();
 			ranges.add(range);
 		}
-		return ranges;
+		return merge(ranges);
+	}
+
+	protected List<StyleRange> merge(List<StyleRange> ranges) {
+		List<StyleRange> result = new ArrayList<>();
+		for (StyleRange styleRange : ranges) {
+			if (result.isEmpty()) {
+				result.add(styleRange);
+				continue;
+			}
+			StyleRange lastRange = result.get(result.size() - 1);
+			if (equal(lastRange, styleRange)) {
+				lastRange.length += styleRange.length;
+			} else
+				result.add(styleRange);
+		}
+		return result;
+	}
+
+	protected boolean equal(StyleRange lastRange, StyleRange styleRange) {
+		return lastRange.fontStyle == styleRange.fontStyle && Objects.equal(lastRange.background, styleRange.background)
+				&& Objects.equal(lastRange.foreground, styleRange.foreground);
 	}
 
 }

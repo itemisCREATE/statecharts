@@ -12,8 +12,10 @@ package org.yakindu.sct.ui.editor.propertysheets.filter;
 
 import org.eclipse.gmf.runtime.diagram.ui.properties.filters.ShapeEditPartPropertySectionFilter;
 import org.yakindu.sct.ui.editor.editparts.BorderItemEditPart;
+import org.yakindu.sct.ui.editor.editparts.ChoiceEditPart;
 import org.yakindu.sct.ui.editor.editparts.EntryEditPart;
 import org.yakindu.sct.ui.editor.editparts.ExitEditPart;
+import org.yakindu.sct.ui.editor.editparts.SynchronizationEditPart;
 
 /**
  * 
@@ -23,7 +25,8 @@ import org.yakindu.sct.ui.editor.editparts.ExitEditPart;
 public class LabeledEditPartAppearancePropertySectionFilter extends ShapeEditPartPropertySectionFilter {
 
 	public boolean select(Object object) {
-		if (object instanceof BorderItemEditPart || object instanceof EntryEditPart || object instanceof ExitEditPart)
+		if (object instanceof BorderItemEditPart || object instanceof EntryEditPart || object instanceof ExitEditPart
+				|| object instanceof ChoiceEditPart)
 			return true;
 		return false;
 	}

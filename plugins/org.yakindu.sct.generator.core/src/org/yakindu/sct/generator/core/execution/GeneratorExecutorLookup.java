@@ -10,8 +10,13 @@
  */
 package org.yakindu.sct.generator.core.execution;
 
+import static org.yakindu.sct.generator.core.GeneratorActivator.PLUGIN_ID;
+
+import java.util.Arrays;
 import java.util.Optional;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.emf.common.util.EList;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
@@ -22,6 +27,7 @@ import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -43,12 +49,15 @@ public class GeneratorExecutorLookup {
 		};
 	}
 
-	public void execute(GeneratorModel model) {
+	public IStatus execute(GeneratorModel model) {
 		EList<GeneratorEntry> entries = model.getEntries();
+		ExecutionStatus executionStatus = new ExecutionStatus();
 		for (GeneratorEntry generatorEntry : entries) {
 			final IGeneratorEntryExecutor executor = createExecutor(generatorEntry, model.getGeneratorId());
-			executor.execute(generatorEntry);
+			IStatus status = executor.execute(generatorEntry);
+			executionStatus.merge(status);
 		}
+		return executionStatus;
 	}
 
 	public IGeneratorEntryExecutor createExecutor(GeneratorEntry entry, String generatorId) {
@@ -83,5 +92,18 @@ public class GeneratorExecutorLookup {
 			((LazyCombiningModule) module).applyConfigurator(configurator);
 		}
 		return module;
+	}
+
+	private static class ExecutionStatus extends MultiStatus {
+
+		public ExecutionStatus() {
+			super(PLUGIN_ID, IStatus.OK, "", null);
+		}
+
+		@Override
+		public String getMessage() {
+			return String.join("\n", Iterables.transform(Arrays.asList(getChildren()), c -> c.getMessage()));
+		}
+
 	}
 }

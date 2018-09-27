@@ -776,7 +776,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 				validator.validate(element, diagnostics, new HashMap<>());
 			}
 		}
-		assertIssueCount(diagnostics, 4);
+		assertIssueCount(diagnostics, 5);
 	}
 
 	@Test
@@ -1055,6 +1055,20 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		}
 		assertIssueCount(diagnostics, 1);
 		assertWarning(diagnostics, EXIT_NEVER_USED + "'unusedExitPoint'");
+	}
+	
+	@Test
+	public void checkOnlyOneEntryPointSpecIsUsed() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "OnlyOneEntryPointSpecIsUsed.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Transition) {
+				validator.validate(element, diagnostics, new HashMap<>());
+			}
+		}
+		assertIssueCount(diagnostics, 1);
+		assertWarning(diagnostics, ONLY_FIRST_ENTRY_POINT_WILL_BE_USED);
 	}
 
 }

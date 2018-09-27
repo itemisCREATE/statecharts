@@ -46,8 +46,9 @@ public class PreferredSizeCompartmentEditPolicy extends ResizableEditPolicyEx {
 
 	protected void adjustRequest(ChangeBoundsRequest request) {
 		final IFigure figure = getPreferredSizeFigure();
-		final Dimension prefSize = figure.getPreferredSize().getCopy();
+		Dimension prefSize = figure.getPreferredSize().getCopy();
 		figure.translateToAbsolute(prefSize);
+		prefSize = prefSize.expand(2, 2);
 		Rectangle bounds = getHostFigure().getBounds().getCopy();
 		figure.translateToAbsolute(bounds);
 		bounds = request.getTransformedRectangle(bounds);
