@@ -13,6 +13,7 @@ package org.yakindu.sct.examples.wizard.pages;
 import static org.yakindu.sct.examples.wizard.service.data.ExampleCategory.CATEGORY_LABS;
 import static org.yakindu.sct.examples.wizard.service.data.ExampleCategory.CATEGORY_PROFESSIONAL;
 import static org.yakindu.sct.examples.wizard.service.data.ExampleCategory.CATEGORY_STANDARD;
+import static org.yakindu.sct.examples.wizard.service.data.ExampleCategory.CATEGORY_PLATFORM;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -52,7 +53,12 @@ public class ExampleContentProvider implements ITreeContentProvider {
 				addExampleToCategory(exampleData, CATEGORY_PROFESSIONAL);
 			} else if (exampleData.isLabs()) {
 				addExampleToCategory(exampleData, CATEGORY_LABS);
+			} else if (exampleData.isStandard()){
+				addExampleToCategory(exampleData, CATEGORY_STANDARD);
+			} else if(exampleData.isPlatform()) {
+				addExampleToCategory(exampleData, CATEGORY_PLATFORM);
 			} else {
+				// Fallback if no category was found
 				addExampleToCategory(exampleData, CATEGORY_STANDARD);
 			}
 		}
