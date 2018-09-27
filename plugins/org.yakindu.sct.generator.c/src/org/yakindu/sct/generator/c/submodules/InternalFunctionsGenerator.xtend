@@ -89,19 +89,6 @@ class InternalFunctionsGenerator {
 		static void «clearInEventsFctID»(«scHandleDecl»);
 		static void «clearOutEventsFctID»(«scHandleDecl»);
 	'''
-
-//	def functionPrototypes(ExecutionFlow it) '''
-//		/* prototypes of all internal functions */
-//		«checkFunctions.toPrototypes»
-//		«effectFunctions.toPrototypes»
-//		«entryActionFunctions.toPrototypes»
-//		«exitActionFunctions.toPrototypes»
-//		«enterSequenceFunctions.toPrototypes»
-//		«exitSequenceFunctions.toPrototypes»
-//		«reactFunctions.toPrototypes»
-//		static void «clearInEventsFctID»(«scHandleDecl»);
-//		static void «clearOutEventsFctID»(«scHandleDecl»);
-//	'''
 	
 	
 	def toDeclarations(List<Method> steps) '''
@@ -143,19 +130,6 @@ class InternalFunctionsGenerator {
 		«reactMethods.toDefinitions»
 		
 	'''
-
-//	def functionImplementations(ExecutionFlow it) '''
-//		/* implementations of all internal functions */
-//		
-//		«checkFunctions.toImplementation»
-//		«effectFunctions.toImplementation»
-//		«entryActionFunctions.toImplementation»
-//		«exitActionFunctions.toImplementation»
-//		«enterSequenceFunctions.toImplementation»
-//		«exitSequenceFunctions.toImplementation»
-//		«reactFunctions.toImplementation»
-//		
-//	'''
 
 
 	 def toDefinitions(List<Method> methods) '''
