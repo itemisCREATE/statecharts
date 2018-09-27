@@ -307,24 +307,22 @@ public class NotationClipboardOperationHelper extends AbstractClipboardSupport {
 			if (object instanceof Region) {
 				removeInvalidOutgoingTransitions((Region) object);
 			}
-			if (object instanceof State) {
-				removeInvalidOutgoingTransitions((State) object);
+			if (object instanceof Vertex) {
+				removeInvalidOutgoingTransitions((Vertex) object);
 			}
 		}
 	}
 	
 	protected void removeInvalidOutgoingTransitions(Region region) {
 		for (Vertex vertex : region.getVertices()) {
-			if (vertex instanceof State) {
-				removeInvalidOutgoingTransitions((State) vertex);
-			}
+			removeInvalidOutgoingTransitions(vertex);
 		}
 	}
 
-	protected void removeInvalidOutgoingTransitions(State state) {
+	protected void removeInvalidOutgoingTransitions(Vertex vertex) {
 		try {
 			new AbstractTransactionalCommand(
-					TransactionUtil.getEditingDomain(state),
+					TransactionUtil.getEditingDomain(vertex),
 					"Remove invalid connections", null) {
 
 				@Override
@@ -332,29 +330,30 @@ public class NotationClipboardOperationHelper extends AbstractClipboardSupport {
 						IProgressMonitor monitor, IAdaptable info)
 						throws ExecutionException {
 
-					removeInvalidTransitions(state);
+					removeInvalidTransitions(vertex);
 					
 					return CommandResult.newOKCommandResult();
 				}
 				
-				private void removeInvalidTransitions(State state) {
+				private void removeInvalidTransitions(Vertex vertex) {
 					
 					List<Transition> invalidTransitions = new LinkedList<Transition>();
 
-					for (Transition transition : state
+					for (Transition transition : vertex
 							.getOutgoingTransitions()) {
 						if (transition.getTarget() == null) {
 							invalidTransitions.add(transition);
 						}
 					}
 					
-					state.getOutgoingTransitions().removeAll(
+					vertex.getOutgoingTransitions().removeAll(
 							invalidTransitions);
-				
-					for (Region region: state.getRegions()) {
-						for (Vertex vertex:region.getVertices()) {
-							if (vertex instanceof State) {
-								removeInvalidTransitions((State) vertex);
+					
+					if (vertex instanceof State) {
+						State state = (State) vertex;
+						for (Region region : state.getRegions()) {
+							for (Vertex v : region.getVertices()) {
+								removeInvalidTransitions(v);
 							}
 						}
 					}
