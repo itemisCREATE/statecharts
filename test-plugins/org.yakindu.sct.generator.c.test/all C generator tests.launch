@@ -21,7 +21,7 @@
 <listEntry value="1"/>
 </listAttribute>
 <mapAttribute key="org.eclipse.debug.core.environmentVariables">
-<mapEntry key="GTEST_DIR" value="/Users/terfloth/Tools/gtest-1.7.0-bin"/>
+<mapEntry key="GTEST_DIR" value="/usr/local/Cellar/gtest"/>
 </mapAttribute>
 <listAttribute key="org.eclipse.debug.ui.favoriteGroups">
 <listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
