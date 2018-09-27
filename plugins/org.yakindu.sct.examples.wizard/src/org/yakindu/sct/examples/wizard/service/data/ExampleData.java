@@ -27,6 +27,7 @@ public class ExampleData implements Comparable<ExampleData>, IExampleData {
 	private static final String LABS_CATEGORY = "labs";
 	private static final String STANDARD_CATEGORY = "standard";
 	private static final String PLATFORM_CATEGORY = "platform";
+	private static final String HEADLESS_CATEGORY = "headless";
 	
 	private String id;
 	private String title;
@@ -116,6 +117,12 @@ public class ExampleData implements Comparable<ExampleData>, IExampleData {
 	
 	public boolean isPlatform() {
 		return Arrays.asList(getCategory()).contains(PLATFORM_CATEGORY);
+	}
+	
+
+	@Override
+	public boolean isHeadless() {
+		return Arrays.asList(getCategory()).contains(HEADLESS_CATEGORY);
 	}
 	
 	@Override

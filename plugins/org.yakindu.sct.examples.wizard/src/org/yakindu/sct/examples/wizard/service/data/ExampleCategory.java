@@ -38,6 +38,7 @@ public class ExampleCategory implements Comparable<ExampleCategory>, IExampleDat
 	public static final String CATEGORY_LABS = "Labs Examples";
 	public static final String CATEGORY_STANDARD = "Standard Examples";
 	public static final String CATEGORY_PLATFORM = "Platform Examples";
+	public static final String CATEGORY_HEADLESS = "Headless Examples";
 	
 	private static final String PREVIEW_PAGES = "org.yakindu.sct.examples.pages";
 	
@@ -45,6 +46,7 @@ public class ExampleCategory implements Comparable<ExampleCategory>, IExampleDat
 	private static final String PROFESSIONAL_DESC = "professional.html";
 	private static final String LABS_DESC = "labs.html";
 	private static final String PLATFORM_DESC = "platform.html";
+	private static final String HEADLESS_DESC = "headless.html";
 	
 	private String name;
 	private List<ExampleData> children = Lists.newArrayList();
@@ -88,6 +90,8 @@ public class ExampleCategory implements Comparable<ExampleCategory>, IExampleDat
 			return getStorageLocation() + File.separator + PREVIEW_PAGES + File.separator + LABS_DESC;
 		} else if (isPlatform()) {
 			return getStorageLocation() + File.separator + PREVIEW_PAGES + File.separator + PLATFORM_DESC;
+		} else if (isHeadless()) {
+			return getStorageLocation() + File.separator + PREVIEW_PAGES + File.separator + HEADLESS_DESC;
 		}
 		return getStorageLocation() + File.separator + PREVIEW_PAGES + File.separator + STANDARD_DESC;
 	}
@@ -105,6 +109,11 @@ public class ExampleCategory implements Comparable<ExampleCategory>, IExampleDat
 	@Override
 	public boolean isPlatform() {
 		return CATEGORY_PLATFORM.equals(getName());
+	}
+	
+	@Override
+	public boolean isHeadless() {
+		return CATEGORY_HEADLESS.equals(getName());
 	}
 	
 	protected java.nio.file.Path getStorageLocation() {

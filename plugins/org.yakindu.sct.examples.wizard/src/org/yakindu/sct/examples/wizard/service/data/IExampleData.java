@@ -24,4 +24,6 @@ public interface IExampleData {
 	boolean isLabs();
 	
 	boolean isPlatform();
+	
+	boolean isHeadless();
 }
