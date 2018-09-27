@@ -111,16 +111,12 @@ class ReactMethod {
 		val reactMethod = execState.reactMethod
 		val childFirst = state.statechart.isChildFirstExecution
 				
-		val shouldProcessParent = 
-			if (! childFirst) 
-				[StateVector sv | sv.offset == execState.stateVector.offset]
-			else
-				[StateVector sv | sv.offset + sv.size == execState.stateVector.offset + execState.stateVector.size]		
-		
 		val parentNode = if (state.parentState !== null) state.parentState.create else execState.flow
-		val processParent = parentNode !== null && shouldProcessParent.apply(parentNode.stateVector)
-		 				
-		
+		val processParent = 	   parentNode !== null 
+							&& (	    ( childFirst && parentNode.stateVector.offset + parentNode.stateVector.size == execState.stateVector.offset + execState.stateVector.size)
+							     || (!childFirst && parentNode.stateVector.offset == execState.stateVector.offset)
+							   )
+				 				
 		if (state.statechart.interleaveLocalReactions) {
 			
 			val tryTransitionParam = reactMethod.param('try_transition')
