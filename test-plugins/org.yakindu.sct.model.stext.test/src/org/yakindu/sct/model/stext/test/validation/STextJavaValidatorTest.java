@@ -1072,7 +1072,8 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 			}
 		}
 		assertIssueCount(diagnostics, 8);
-
+	}
+	
 	public void checkOnlyOneEntryPointSpecIsUsed() {
 		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "OnlyOneEntryPointSpecIsUsed.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
