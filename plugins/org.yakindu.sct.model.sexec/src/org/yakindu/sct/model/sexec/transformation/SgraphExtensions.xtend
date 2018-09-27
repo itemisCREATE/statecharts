@@ -50,6 +50,11 @@ class SgraphExtensions {
 	}
 
 
+	def parentState (EObject obj) {
+		EcoreUtil2.getAllContainers(obj).filter(typeof (RegularState)).head
+	} 
+
+	
 	def List<EObject> containers(EObject obj) {
 		val containerList = new ArrayList<EObject>()
 		collectContainers(obj, containerList)

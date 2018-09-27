@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static EmptyTransition statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static EmptyTransition statechart;
-
+			
 class EmptyTransitionTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class EmptyTransitionTest : public ::testing::Test{
 
 
 TEST_F(EmptyTransitionTest, EmptyTransitionTest) {
+	
 	emptyTransition_enter(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(!emptyTransition_isStateActive(&statechart, EmptyTransition_main_region_B));

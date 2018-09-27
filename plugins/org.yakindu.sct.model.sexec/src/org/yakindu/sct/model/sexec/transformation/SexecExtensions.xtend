@@ -19,6 +19,7 @@ import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.ExitState
+import org.yakindu.sct.model.sexec.Reaction
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.SexecFactory
 import org.yakindu.sct.model.sexec.StateVector
@@ -103,6 +104,11 @@ class SexecExtensions {
 			s=s.superScope
 		}
 		return parents
+	}
+	
+	
+	def unchecked(Reaction it) {
+		return (check === null || check.condition === null )
 	}
 	
 	/**

@@ -41,6 +41,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sexec.Method
 
 class SExecExtensions {
 	def <T extends EObject> T eContainerOfType(EObject eObject, Class<T> type) {
@@ -359,6 +360,19 @@ class SExecExtensions {
 		return funcs
 	}
 	 
+	def List<Method> reactMethods(ExecutionFlow it) {
+		new ArrayList<Method>() => [ l | 
+			l.add(it.reactMethod()) 
+			l.addAll(it.states.map( s | s.reactMethod))
+			l.removeIf( m | m === null)
+		] 	
+	}
+	
+	def Method reactMethod(ExecutionNode it) {
+		features.filter( typeof(Method) ).filter( m | m.name == "react").head
+	}
+	
+	
 	def List<Step> reactFunctions(ExecutionFlow it) {
 		val funcs = new ArrayList<Step>()
 		if (reactSequence.called) funcs.add(reactSequence) 

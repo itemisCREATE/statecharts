@@ -202,12 +202,8 @@ public class GTestHelper {
 	/**
 	 * @return
 	 */
-	private String getGTestDirectory() {
+	static public String getGTestDirectory() {
 		String gTestDirectory = System.getenv("GTEST_DIR");
-		// if (gTestDirectory == null) {
-		// throw new RuntimeException("GTEST_DIR environment variable not set");
-		// }
-		// System.out.println("GTEST_DIR = " + gTestDirectory);
 		return gTestDirectory;
 	}
 

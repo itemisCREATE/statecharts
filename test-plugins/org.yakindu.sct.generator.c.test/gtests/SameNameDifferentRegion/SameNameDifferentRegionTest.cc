@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static SameNameDifferentRegion statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static SameNameDifferentRegion statechart;
-
+			
 class SameNameDifferentRegionTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class SameNameDifferentRegionTest : public ::testing::Test{
 
 
 TEST_F(SameNameDifferentRegionTest, sameNameDifferenRegionTest) {
+	
 	sameNameDifferentRegion_enter(&statechart);
 	EXPECT_TRUE(sameNameDifferentRegion_isStateActive(&statechart, SameNameDifferentRegion_main_region_StateA));
 	sameNameDifferentRegionIface_raise_e1(&statechart);

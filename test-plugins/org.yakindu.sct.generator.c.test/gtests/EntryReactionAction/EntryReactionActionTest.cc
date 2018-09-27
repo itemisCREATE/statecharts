@@ -6,12 +6,13 @@
 #include "sc_timer_service.h"
 
 
+void init();
+static EntryReactionAction statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static EntryReactionAction statechart;
-
+			
 class EntryReactionActionTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -40,6 +41,7 @@ void init(){
 }
 
 TEST_F(EntryReactionActionTest, entryTransitionActionOnStatechartEnter) {
+	
 	entryReactionAction_enter(&statechart);
 	EXPECT_TRUE(entryReactionActionIface_get_enteredR1(&statechart));
 	EXPECT_TRUE(entryReactionActionIface_get_enteredR2(&statechart));
@@ -47,6 +49,7 @@ TEST_F(EntryReactionActionTest, entryTransitionActionOnStatechartEnter) {
 	EXPECT_TRUE(!entryReactionActionIface_get_enteredBother(&statechart));
 }
 TEST_F(EntryReactionActionTest, entryOnRTS) {
+	
 	init();
 	entryReactionActionIface_raise_b(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
@@ -56,6 +59,7 @@ TEST_F(EntryReactionActionTest, entryOnRTS) {
 	EXPECT_TRUE(entryReactionActionIface_get_enteredBother(&statechart));
 }
 TEST_F(EntryReactionActionTest, noEntryTransitionActionOnHistory) {
+	
 	init();
 	entryReactionActionIface_raise_d(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);

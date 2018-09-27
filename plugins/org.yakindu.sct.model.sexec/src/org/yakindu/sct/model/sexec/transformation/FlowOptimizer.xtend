@@ -33,8 +33,13 @@ import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sgraph.SGraphFactory
 import org.yakindu.sct.model.stext.stext.StextFactory
+import com.google.inject.Inject
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sexec.Method
 
 class FlowOptimizer {
+	
+	@Inject extension SExecExtensions sexec
 	
 	boolean _inlineReactions        def inlineReactions(boolean b)      {_inlineReactions = b}
 	boolean _inlineEntryActions     def inlineEntryActions(boolean b)   {_inlineEntryActions = b}
@@ -78,13 +83,21 @@ class FlowOptimizer {
 			flow.nodes.filter(typeof(ExecutionEntry)).forEach( node | node.reactSequence.inline )
 		}
 
-		flow
+		// always inline checks and effects into react methods.
+		flow.reactMethods.forEach[ inlineChecks ]
+		flow.reactMethods.forEach[ inlineEffects ]
+		
+		return flow
 	}
 	
 	
 	/** Replaces all true if steps by then step. */
 	def replaceTrueIfs(ExecutionFlow flow) {
-		flow.eAllContents.filter(typeof(If)).filter( i | i.check.alwaysTrue ).forEach( i | i.substituteBy(i.thenStep) );
+		flow.eAllContents.filter(typeof(If)).filter( i | i.check.alwaysTrue ).forEach[ i |
+			if (i.check instanceof CheckRef) (i.check as CheckRef).check = null
+			i.check = null	
+			i.substituteBy(i.thenStep)
+		];
 	}
 	
 	
@@ -197,6 +210,16 @@ class FlowOptimizer {
 		checks.forEach( c | c.inline )
 		state
 	}
+
+
+	def inlineChecks(Method m) {
+		if (m !== null) m.eAllContents.filter(CheckRef).toList.forEach( cr | cr.inline )
+	}
+	
+	def inlineEffects(Method m) {
+		if (m != null) m.eAllContents.filter(Call).toList.forEach( call | call.inline )
+	}
+	
 	
 	def inline(Check c) {
 		if ( c !== null ) {
@@ -211,6 +234,13 @@ class FlowOptimizer {
 		}
 		
 		c
+	}
+	
+	
+	def inline(CheckRef it) {
+		val clone = EcoreUtil::copy(check)
+		eContainer.substitute(it, clone)
+		it.check = null		
 	}
 	
 	
@@ -262,6 +292,14 @@ class FlowOptimizer {
 			}		
 		}
 		step
+	}
+	
+
+	def inline(Call it) {
+		val clone = step.stepCopy
+		if ( it.eContainer.substituteCall(it, clone) )
+			step = null
+		else System::out.println("Did not substitute '" + step + "' call from '"+ eContainer+"'.");
 	}
 	
 

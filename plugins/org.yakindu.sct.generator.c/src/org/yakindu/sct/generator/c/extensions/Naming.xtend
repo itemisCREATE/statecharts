@@ -37,7 +37,9 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
+
 
 class Naming {
 	@Inject @Named("Separator") protected String sep;
@@ -377,6 +379,8 @@ class Naming {
 		'''«name.asEscapedIdentifier»'''
 	}
 
+	def dispatch access(Method it) '''«shortName»'''
+	
 	def dispatch access(Enumerator it) {
 		'''«name.asEscapedIdentifier»'''
 	}
