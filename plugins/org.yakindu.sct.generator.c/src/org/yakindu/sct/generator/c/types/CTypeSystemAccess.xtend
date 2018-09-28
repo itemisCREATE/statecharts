@@ -40,7 +40,7 @@ class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 			case isSame(originalType, getType(REAL)): 'sc_real'
 			case isSame(originalType, getType(BOOLEAN)): 'sc_boolean'
 			case isSame(originalType, getType(STRING)): 'sc_string'
-			default: throw new IllegalArgumentException("Target language name could not be inferred for type " + type)
+			default: type.name
 		}
 	}
 	
