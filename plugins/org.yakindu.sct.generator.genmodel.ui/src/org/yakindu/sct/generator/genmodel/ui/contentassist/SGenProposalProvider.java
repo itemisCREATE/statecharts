@@ -125,10 +125,4 @@ public class SGenProposalProvider extends AbstractSGenProposalProvider {
 			textStyle.foreground = Display.getDefault().getSystemColor(SWT.COLOR_GRAY);
 		}
 	}
-
-	@Override
-	public void completeFeatureConfiguration_ParameterValues(EObject model, Assignment assignment,
-			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		super.completeFeatureConfiguration_ParameterValues(model, assignment, context, acceptor);
-	}
 }
