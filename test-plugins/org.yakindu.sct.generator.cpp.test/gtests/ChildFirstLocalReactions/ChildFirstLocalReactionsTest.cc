@@ -7,7 +7,7 @@
 
 namespace  {
 
-executionorder::ChildFirstLocalReactions* statechart;
+executionorder::childfirst::ChildFirstLocalReactions* statechart;
 
 sc_integer counter = 0l;
 
@@ -37,11 +37,11 @@ TEST_F(ChildFirstLocalReactionsTest, expectBottomUpLocalReactionOrder) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstLocalReactions::ChildFirstLocalReactions_r_A_r_AA_r_AAA));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::childfirst::ChildFirstLocalReactions::ChildFirstLocalReactions_r_A_r_AA_r_AAA));
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstLocalReactions::ChildFirstLocalReactions_r_A_r_AA_r_AAA));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::childfirst::ChildFirstLocalReactions::ChildFirstLocalReactions_r_A_r_AA_r_AAA));
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 1l);
 	
@@ -57,13 +57,13 @@ TEST_F(ChildFirstLocalReactionsTest, expectParentLocalReactionOnChildLocalTransi
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstLocalReactions::ChildFirstLocalReactions_r_A_r_AA_r_AAA));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::childfirst::ChildFirstLocalReactions::ChildFirstLocalReactions_r_A_r_AA_r_AAA));
 	
 	statechart->getDefaultSCI()->raise_e();
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstLocalReactions::ChildFirstLocalReactions_r_A_r_AA_r_AAB));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::childfirst::ChildFirstLocalReactions::ChildFirstLocalReactions_r_A_r_AA_r_AAB));
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 0l);
 	
@@ -79,7 +79,7 @@ TEST_F(ChildFirstLocalReactionsTest, expectGrandparentLocalReactionOnParentLocal
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstLocalReactions::ChildFirstLocalReactions_r_A_r_AA_r_AAA));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::childfirst::ChildFirstLocalReactions::ChildFirstLocalReactions_r_A_r_AA_r_AAA));
 	
 	statechart->getDefaultSCI()->set_disable_aaa(true);
 	
@@ -87,7 +87,7 @@ TEST_F(ChildFirstLocalReactionsTest, expectGrandparentLocalReactionOnParentLocal
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstLocalReactions::ChildFirstLocalReactions_r_A_r_AB));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::childfirst::ChildFirstLocalReactions::ChildFirstLocalReactions_r_A_r_AB));
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 1l);
 	
@@ -103,7 +103,7 @@ TEST_F(ChildFirstLocalReactionsTest, expectNoLocalReactionOnGrandparentTransitio
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstLocalReactions::ChildFirstLocalReactions_r_A_r_AA_r_AAA));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::childfirst::ChildFirstLocalReactions::ChildFirstLocalReactions_r_A_r_AA_r_AAA));
 	
 	statechart->getDefaultSCI()->set_disable_aaa(true);
 	
@@ -113,7 +113,7 @@ TEST_F(ChildFirstLocalReactionsTest, expectNoLocalReactionOnGrandparentTransitio
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstLocalReactions::ChildFirstLocalReactions_r_B));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::childfirst::ChildFirstLocalReactions::ChildFirstLocalReactions_r_B));
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 1l);
 	
