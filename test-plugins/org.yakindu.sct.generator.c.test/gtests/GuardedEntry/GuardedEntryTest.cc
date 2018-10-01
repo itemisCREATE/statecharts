@@ -6,12 +6,13 @@
 #include "sc_timer_service.h"
 
 
+void initEntryInTransition(sc_boolean guardVar, sc_boolean doneVar);
+static GuardedEntry statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static GuardedEntry statechart;
-
+			
 class GuardedEntryTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -27,7 +28,7 @@ class GuardedEntryTest : public ::testing::Test{
 	}
 };
 
-void initEntryInTransition(bool guardVar, bool doneVar){
+void initEntryInTransition(sc_boolean guardVar, sc_boolean doneVar){
 	guardedEntry_enter(&statechart);
 	EXPECT_TRUE(guardedEntry_isStateActive(&statechart, GuardedEntry_main_region_A));
 	guardedEntryIface_raise_e(&statechart);
@@ -41,23 +42,27 @@ void initEntryInTransition(bool guardVar, bool doneVar){
 }
 
 TEST_F(GuardedEntryTest, EntryNotTakenOnStatechartEnter) {
+	
 	EXPECT_TRUE(guardedEntryIface_get_guard(&statechart)== false);
 	guardedEntry_enter(&statechart);
 	EXPECT_TRUE(guardedEntry_isStateActive(&statechart, GuardedEntry_main_region_A));
 	EXPECT_TRUE(guardedEntryIface_get_done(&statechart)== false);
 }
 TEST_F(GuardedEntryTest, EntryTakenOnStatechartEnter) {
+	
 	guardedEntryIface_set_guard(&statechart,true);
 	guardedEntry_enter(&statechart);
 	EXPECT_TRUE(guardedEntry_isStateActive(&statechart, GuardedEntry_main_region_A));
 	EXPECT_TRUE(guardedEntryIface_get_done(&statechart)== true);
 }
 TEST_F(GuardedEntryTest, EntryTakenInTransition) {
-	initEntryInTransition(true,false);
+	
+	initEntryInTransition(true, false);
 	EXPECT_TRUE(guardedEntryIface_get_done(&statechart));
 }
 TEST_F(GuardedEntryTest, EntryNotTakenInTransition) {
-	initEntryInTransition(false,false);
+	
+	initEntryInTransition(false, false);
 	EXPECT_TRUE(!guardedEntryIface_get_done(&statechart));
 }
 

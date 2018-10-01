@@ -100,6 +100,8 @@ h4(#codegen_cpp_statemachine_class). Statemachine class
 
 The state machine source code is generated as a C++ class with the same name as the statechart. For example, if the statechart is named _DefaultSM_ the C++ class will also be called _DefaultSM_, and it will be generated in the source code file _DefaultSM.cpp_.
 
+If the statechart defines a _namespace_, this namespace will be used for the class as well.
+
 
 h4(#codegen_cpp_abstract_class_statemachineinterface). Abstract class StatemachineInterface
 

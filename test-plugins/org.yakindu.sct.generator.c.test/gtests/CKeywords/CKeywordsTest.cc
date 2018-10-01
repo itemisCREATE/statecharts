@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static CKeywords statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static CKeywords statechart;
-
+			
 class CKeywordsTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class CKeywordsTest : public ::testing::Test{
 
 
 TEST_F(CKeywordsTest, CKeywordsTest) {
+	
 	cKeywords_enter(&statechart);
 	EXPECT_TRUE(cKeywords_isStateActive(&statechart, CKeywords_auto_char));
 	cKeywordsIface_raise_auto(&statechart);

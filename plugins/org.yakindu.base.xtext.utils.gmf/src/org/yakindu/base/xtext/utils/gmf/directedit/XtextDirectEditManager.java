@@ -246,12 +246,14 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 				rect.width = Math.max(rect.width, LABEL_MIN_WIDTH);
 				if (!text.isDisposed() && text.getFont() != null && !text.getFont().isDisposed()) {
 					Dimension fontMetrics = TextUtilities.INSTANCE.getTextExtents("a", text.getFont()).getCopy();
+					double avChar = FigureUtilities.getFontMetrics(text.getFont()).getAverageCharWidth();
+					rect.width =  (int) Math.ceil(rect.width + avChar);
 					source.getFigure().translateToRelative(fontMetrics);
 					rect.height = Math.max(rect.height, fontMetrics.height);
 				}
 				source.getFigure().translateToAbsolute(rect);
 				if (!rect.equals(new Rectangle(text.getBounds()))) {
-					text.setBounds(rect.x, rect.y, rect.width, rect.height);
+					text.setBounds(rect.x, rect.y,rect.width, rect.height);
 				}
 			}
 		};

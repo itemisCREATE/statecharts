@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static ShallowHistoryWithDeepEntry statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static ShallowHistoryWithDeepEntry statechart;
-
+			
 class ShallowHistoryWithDeepEntryTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class ShallowHistoryWithDeepEntryTest : public ::testing::Test{
 
 
 TEST_F(ShallowHistoryWithDeepEntryTest, noDeepEntryWithinHistory) {
+	
 	shallowHistoryWithDeepEntry_enter(&statechart);
 	EXPECT_TRUE(shallowHistoryWithDeepEntry_isStateActive(&statechart, ShallowHistoryWithDeepEntry_main_region_Y));
 	shallowHistoryWithDeepEntryIface_raise_toZ(&statechart);
@@ -42,6 +43,7 @@ TEST_F(ShallowHistoryWithDeepEntryTest, noDeepEntryWithinHistory) {
 	EXPECT_TRUE(shallowHistoryWithDeepEntry_isStateActive(&statechart, ShallowHistoryWithDeepEntry_main_region_Z__region0_A));
 }
 TEST_F(ShallowHistoryWithDeepEntryTest, deepEntryWithinHistory) {
+	
 	shallowHistoryWithDeepEntry_enter(&statechart);
 	EXPECT_TRUE(shallowHistoryWithDeepEntry_isStateActive(&statechart, ShallowHistoryWithDeepEntry_main_region_Y));
 	shallowHistoryWithDeepEntryIface_raise_toZ(&statechart);
@@ -60,6 +62,7 @@ TEST_F(ShallowHistoryWithDeepEntryTest, deepEntryWithinHistory) {
 	EXPECT_TRUE(shallowHistoryWithDeepEntry_isStateActive(&statechart, ShallowHistoryWithDeepEntry_main_region_Z__region0_B));
 }
 TEST_F(ShallowHistoryWithDeepEntryTest, directDeepEntryIntoHistory) {
+	
 	shallowHistoryWithDeepEntry_enter(&statechart);
 	EXPECT_TRUE(shallowHistoryWithDeepEntry_isStateActive(&statechart, ShallowHistoryWithDeepEntry_main_region_Y));
 	shallowHistoryWithDeepEntryIface_raise_toC(&statechart);

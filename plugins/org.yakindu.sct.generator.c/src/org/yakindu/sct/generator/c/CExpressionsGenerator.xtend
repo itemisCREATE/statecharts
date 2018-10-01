@@ -41,6 +41,8 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sexec.Method
+import org.yakindu.base.types.Parameter
 
 class CExpressionsGenerator extends ExpressionsGenerator {
 
@@ -55,8 +57,13 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	
 	/* Referring to declared elements */
 	def dispatch CharSequence code(ElementReferenceExpression it) {
-		it.code(it.definition)
+		val target = it.definition
+		if ( target !== null)
+			it.code(target)
+		else 
+			it.code(it.reference)
 	}
+	
 
 	/* Expressions */
 	def dispatch CharSequence code(Expression it, Event target) '''«target.access»'''
@@ -68,14 +75,23 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch CharSequence code(ElementReferenceExpression it, VariableDefinition target) '''«target.access»'''
 
-	def dispatch CharSequence code(ElementReferenceExpression it,
-		OperationDefinition target) '''«target.access»(«scHandle»«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.
-		code»«ENDFOR»)'''
+	def dispatch CharSequence code(ElementReferenceExpression it, OperationDefinition target) 
+		'''«target.access»(«scHandle»«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.code»«ENDFOR»)'''
 
-	def dispatch CharSequence code(ElementReferenceExpression it,
-		Operation target) '''«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.code»«ENDFOR»)'''
 
-	def dispatch CharSequence code(ElementReferenceExpression it, Property target) '''«target.access»'''
+	def dispatch CharSequence code(ElementReferenceExpression it, Method target) 
+		'''«target.access»(«scHandle»«FOR arg : expressions BEFORE ', ' SEPARATOR ', '»«arg.code»«ENDFOR»)'''
+
+
+	def dispatch CharSequence code(ElementReferenceExpression it, Operation target) 
+		'''«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.code»«ENDFOR»)'''
+
+	def dispatch CharSequence code(ElementReferenceExpression it, Property target) 
+		'''«target.access»'''
+
+	def dispatch CharSequence code(ElementReferenceExpression it, Parameter target) 
+		'''«target.name»'''
+
 
 	def dispatch CharSequence code(EventRaisingExpression it) {eventRaisingCode(this)}
 
@@ -85,8 +101,13 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch CharSequence code(LogicalRelationExpression it) '''
 	«IF isSame(leftOperand.infer.type, getType(GenericTypeSystem.STRING))»
 		(strcmp(«leftOperand.code», «rightOperand.code») «operator.literal» 0)
-	«ELSE»«leftOperand.code» «operator.literal» «rightOperand.code»«ENDIF»'''
+	«ELSE»(«leftOperand.code») «operator.literal» («rightOperand.code»)«ENDIF»'''
 
+
+	def dispatch CharSequence code(LogicalAndExpression it) '''(«leftOperand.sc_boolean_code») && («rightOperand.sc_boolean_code»)'''
+	
+	def dispatch CharSequence code(LogicalOrExpression it) '''(«leftOperand.sc_boolean_code») || («rightOperand.sc_boolean_code»)'''
+	
 	override dispatch CharSequence code(AssignmentExpression it) {
 		if (it.operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal(it)) {
 			'''«varRef.code» = fmod(«varRef.code»,«expression.code»)'''
@@ -125,15 +146,19 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	override dispatch CharSequence code(BoolLiteral it) '''«IF value»«CGeneratorConstants.TRUE»«ELSE»«CGeneratorConstants.FALSE»«ENDIF»'''
 
 	// ensure we obtain an expression of type sc_boolean
-	def dispatch CharSequence sc_boolean_code(Expression it) '''«it.code»'''
+	def dispatch CharSequence sc_boolean_code(Expression it) '''«it.code» == «CGeneratorConstants.TRUE»'''
 
-	def dispatch CharSequence sc_boolean_code(LogicalOrExpression it) {ternaryGuard}
+	def dispatch CharSequence sc_boolean_code(LogicalOrExpression it) {code}
 
-	def dispatch CharSequence sc_boolean_code(LogicalAndExpression it) {ternaryGuard}
+	def dispatch CharSequence sc_boolean_code(LogicalAndExpression it) {code}
+	
+	def dispatch CharSequence sc_boolean_code(BoolLiteral it) {code}
 
-	def dispatch CharSequence sc_boolean_code(LogicalNotExpression it) {ternaryGuard}
+	def dispatch CharSequence sc_boolean_code(LogicalNotExpression it) '''«operand.code» == «CGeneratorConstants.FALSE»'''
 
-	def dispatch CharSequence sc_boolean_code(LogicalRelationExpression it) {ternaryGuard}
+	def dispatch CharSequence sc_boolean_code(LogicalRelationExpression it) {code}
+	
+	
 	
 	def CharSequence ternaryGuard(Expression it) '''(«it.code») ? «CGeneratorConstants.TRUE» : «CGeneratorConstants.FALSE»'''
 

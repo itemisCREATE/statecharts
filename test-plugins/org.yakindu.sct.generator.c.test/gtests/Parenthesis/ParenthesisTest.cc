@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static Parenthesis statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static Parenthesis statechart;
-
+			
 class ParenthesisTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class ParenthesisTest : public ::testing::Test{
 
 
 TEST_F(ParenthesisTest, simple) {
+	
 	parenthesis_enter(&statechart);
 	EXPECT_TRUE(parenthesis_isStateActive(&statechart, Parenthesis_mainRegion_A));
 	EXPECT_TRUE(parenthesisIface_get_erg(&statechart)== 8l);

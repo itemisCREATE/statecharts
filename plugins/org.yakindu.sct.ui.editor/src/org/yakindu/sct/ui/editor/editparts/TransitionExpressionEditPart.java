@@ -96,7 +96,7 @@ public class TransitionExpressionEditPart extends PlugableExternalXtextLabelEdit
 		getFigure().getTextFigure().invalidate();
 		getFigure().getTextFigure().revalidate();
 	}
-
+	
 	protected void updateTooltip() {
 		String documentation = (String) resolveSemanticElement().eGet(DOCUMENTED_ELEMENT__DOCUMENTATION);
 		if (getAttribute() == DOCUMENTED_ELEMENT__DOCUMENTATION)

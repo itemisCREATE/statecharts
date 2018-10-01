@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static HistoryWithExitPoint statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static HistoryWithExitPoint statechart;
-
+			
 class HistoryWithExitPointTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class HistoryWithExitPointTest : public ::testing::Test{
 
 
 TEST_F(HistoryWithExitPointTest, historyEntryAfterExit) {
+	
 	historyWithExitPoint_enter(&statechart);
 	EXPECT_TRUE(historyWithExitPoint_isStateActive(&statechart, HistoryWithExitPoint_mr_A_r_X1));
 	historyWithExitPointIface_raise_push(&statechart);

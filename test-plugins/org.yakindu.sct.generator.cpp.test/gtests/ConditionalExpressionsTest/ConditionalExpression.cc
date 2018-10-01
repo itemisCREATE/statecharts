@@ -7,6 +7,8 @@
 
 namespace  {
 
+ConditionalExpressions* statechart;
+
 
 
 //! The timers are managed by a timer service. */
@@ -14,9 +16,6 @@ static SctUnitRunner * runner;
 
 class ConditionalExpression : public ::testing::Test{
 	protected:
-	
-	ConditionalExpressions* statechart;
-	
 	virtual void SetUp() {
 		statechart = new ConditionalExpressions();
 		statechart->init();
@@ -30,27 +29,27 @@ class ConditionalExpression : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
-	
-	
 };
 
-	TEST_F(ConditionalExpression, ConditionalExpressionTest) {
-		
-		statechart->enter();
-		
-		EXPECT_TRUE(statechart->isStateActive(ConditionalExpressions::main_region_A));
-		
-		EXPECT_TRUE(statechart->getDefaultSCI()->get_condition()== 1l);
-		
-		statechart->getDefaultSCI()->raise_e();
-		
-		runner->proceed_cycles(1);
-		
-		EXPECT_TRUE(statechart->isStateActive(ConditionalExpressions::main_region_B));
-		
-		EXPECT_TRUE(statechart->getDefaultSCI()->get_condition()== 2l);
-		
-		
+
+TEST_F(ConditionalExpression, ConditionalExpressionTest) {
+	
+	statechart->enter();
+	
+	EXPECT_TRUE(statechart->isStateActive(ConditionalExpressions::main_region_A));
+	
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_condition()== 1l);
+	
+	statechart->getDefaultSCI()->raise_e();
+	
+	runner->proceed_cycles(1);
+	
+	EXPECT_TRUE(statechart->isStateActive(ConditionalExpressions::main_region_B));
+	
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_condition()== 2l);
+	
+	
 }
+
 
 }

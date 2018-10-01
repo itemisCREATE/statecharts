@@ -7,6 +7,8 @@
 
 namespace  {
 
+TransitionWithoutCondition* statechart;
+
 
 
 //! The timers are managed by a timer service. */
@@ -14,9 +16,6 @@ static SctUnitRunner * runner;
 
 class TransitionWithoutConditionTest : public ::testing::Test{
 	protected:
-	
-	TransitionWithoutCondition* statechart;
-	
 	virtual void SetUp() {
 		statechart = new TransitionWithoutCondition();
 		statechart->init();
@@ -30,21 +29,21 @@ class TransitionWithoutConditionTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
-	
-	
 };
 
-	TEST_F(TransitionWithoutConditionTest, TransitionWithoutConditionTest) {
-		
-		statechart->enter();
-		
-		EXPECT_TRUE(statechart->isStateActive(TransitionWithoutCondition::main_region_A));
-		
-		runner->proceed_cycles(1);
-		
-		EXPECT_TRUE(statechart->isStateActive(TransitionWithoutCondition::main_region_B));
-		
-		
+
+TEST_F(TransitionWithoutConditionTest, TransitionWithoutConditionTest) {
+	
+	statechart->enter();
+	
+	EXPECT_TRUE(statechart->isStateActive(TransitionWithoutCondition::main_region_A));
+	
+	runner->proceed_cycles(1);
+	
+	EXPECT_TRUE(statechart->isStateActive(TransitionWithoutCondition::main_region_B));
+	
+	
 }
+
 
 }

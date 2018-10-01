@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  * 	itemis AG - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.model.stext.ui.contentassist;
 
@@ -56,7 +56,6 @@ import org.yakindu.sct.model.stext.extensions.STextExtensions;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
-import org.yakindu.sct.model.stext.stext.EntryPointSpec;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.SimpleScope;
@@ -65,7 +64,6 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TransitionReaction;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
-import org.yakindu.sct.model.stext.stext.impl.EntryPointSpecImpl;
 import org.yakindu.sct.model.stext.ui.internal.STextActivator;
 
 import com.google.common.base.Function;
@@ -73,7 +71,7 @@ import com.google.inject.Inject;
 
 /**
  * Several filters to make proposals more useful.
- * 
+ *
  * @author muehlbrandt
  */
 public class STextProposalProvider extends AbstractSTextProposalProvider {
@@ -91,8 +89,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	private IPackageImport2URIMapper mapper;
 
 	@Inject
-	private STextExtensions utils; 
-	
+	private STextExtensions utils;
+
 	public static class StrikeThroughStyler extends Styler {
 
 		@Override
@@ -111,14 +109,14 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 
 	/**
 	 * Validates if a keyword should be viewed by the proposal view.
-	 * 
+	 *
 	 * Builds dependent on the ContentAssistContext a list with keywords which
 	 * shouldn't be displayed by the proposal view.
 	 */
 	@Override
 	public void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
 			ICompletionProposalAcceptor acceptor) {
-		List<Keyword> suppressKeywords = new ArrayList<Keyword>();
+		List<Keyword> suppressKeywords = new ArrayList<>();
 
 		EObject rootModel = contentAssistContext.getRootModel();
 		if (rootModel instanceof TransitionSpecification) {
@@ -171,7 +169,7 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	protected void suppressKeywords(List<Keyword> suppressKeywords, StatechartSpecification model) {
 		suppressKeywords.addAll(getKeywords(grammarAccess.getExitEventAccess().getGroup().eContents()));
 		suppressKeywords.addAll(getKeywords(grammarAccess.getEntryEventAccess().getGroup().eContents()));
-		EList<EObject> importKeyWordList = new BasicEList<EObject>();
+		EList<EObject> importKeyWordList = new BasicEList<>();
 		importKeyWordList.add(grammarAccess.getImportScopeAccess().getImportKeyword_1());
 		suppressKeywords.addAll(getKeywords(importKeyWordList));
 	}
@@ -186,7 +184,7 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	protected void suppressKeywords(List<Keyword> suppressKeywords, FeatureCall featureCall) {
 		if (!(featureCall.getFeature() instanceof Operation)) {
 			suppressKeywords
-					.add(grammarAccess.getFeatureCallAccess().getOperationCallLeftParenthesisKeyword_1_3_0_0_0());
+			.add(grammarAccess.getFeatureCallAccess().getOperationCallLeftParenthesisKeyword_1_3_0_0_0());
 		}
 	}
 
@@ -204,7 +202,7 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	}
 
 	protected List<Keyword> getKeywords(EList<EObject> list) {
-		final List<Keyword> keywords = new ArrayList<Keyword>();
+		final List<Keyword> keywords = new ArrayList<>();
 		for (EObject eObject : list) {
 			if (eObject instanceof Keyword) {
 				keywords.add((Keyword) eObject);
@@ -215,6 +213,7 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		return keywords;
 	}
 
+	@Override
 	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(String ruleName,
 			ContentAssistContext contentAssistContext) {
 		return new DefaultProposalCreator(contentAssistContext, ruleName, getQualifiedNameConverter()) {
@@ -278,14 +277,15 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		for (PackageImport pkgImport : allImports) {
 
 			ConfigurableCompletionProposal doCreateProposal = doCreateProposal("\"" + pkgImport.getName() + "\"",
-					computePackageStyledString(pkgImport), getIncludeImage(), pkgImport.getUri().isFile() ? -1 : 1,
-					context);
+					computePackageStyledString(pkgImport), getIncludeImage(pkgImport),
+					pkgImport.getUri().isFile() ? -1 : 1,
+							context);
 
 			stringProposalDelegate.accept(doCreateProposal);
 		}
 	}
 
-	protected Image getIncludeImage() {
+	protected Image getIncludeImage(PackageImport pkgImport) {
 		final ImageRegistry imageRegistry = STextActivator.getInstance().getImageRegistry();
 		return imageRegistry.get(ICONS_INCLUDE);
 	}
@@ -389,9 +389,9 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 				proposalText + " - " + ruleCall.getRule().getName(), null, context);
 		priorityOptimizer.accept(proposal);
 	}
-	
+
 	@Override
-	public void complete_ID(EObject model, RuleCall ruleCall, ContentAssistContext context,
+	public void complete_IDWithKeywords(EObject model, RuleCall ruleCall, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		if (model instanceof TransitionReaction) {
 			SpecificationElement contextElement = utils.getContextElement(model);
@@ -443,7 +443,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 			}
 		}
 	}
-	
+
+	@Override
 	public void completeActiveStateReferenceExpression_Value(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		lookupCrossReference(((CrossReference) assignment.getTerminal()), context, acceptor);
@@ -459,7 +460,7 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	/**
 	 * The acceptor delegate creates a Dummy EObject of type Keyword for the User
 	 * Help Hover integration
-	 * 
+	 *
 	 */
 	public class AcceptorDelegate implements ICompletionProposalAcceptor {
 
@@ -469,6 +470,7 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 			this.delegate = delegate;
 		}
 
+		@Override
 		public void accept(ICompletionProposal proposal) {
 			if (proposal instanceof ConfigurableCompletionProposal) {
 				Keyword keyword = XtextFactory.eINSTANCE.createKeyword();
@@ -479,6 +481,7 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 			delegate.accept(proposal);
 		}
 
+		@Override
 		public boolean canAcceptMoreProposals() {
 			return delegate.canAcceptMoreProposals();
 		}

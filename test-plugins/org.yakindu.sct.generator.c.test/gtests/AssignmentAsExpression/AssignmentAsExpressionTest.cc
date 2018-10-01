@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static AssignmentAsExpression statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static AssignmentAsExpression statechart;
-
+			
 class AssignmentAsExpressionTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class AssignmentAsExpressionTest : public ::testing::Test{
 
 
 TEST_F(AssignmentAsExpressionTest, simpleAssignment) {
+	
 	assignmentAsExpression_enter(&statechart);
 	EXPECT_TRUE(assignmentAsExpression_isStateActive(&statechart, AssignmentAsExpression_main_region_Add));
 	EXPECT_TRUE(assignmentAsExpressionIface_get_b(&statechart)== 5l);
