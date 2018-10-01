@@ -41,6 +41,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.types.Operation;
@@ -272,15 +273,22 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	@Override
 	public void completeImportScope_Imports(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		StringProposalDelegate stringProposalDelegate = new StringProposalDelegate(acceptor, context);
+		PrefixMatcher newMatcher = new PrefixMatcher() {
+			@Override
+			public boolean isCandidateMatchingPrefix(String name, String prefix) {
+				String strippedName = name;
+				if (name.startsWith("^") && !prefix.startsWith("^")) {
+					strippedName = name.substring(1);
+				}
+				return context.getMatcher().isCandidateMatchingPrefix(strippedName, prefix);
+			}
+		};
+		ContentAssistContext myContext = context.copy().setMatcher(newMatcher).toContext();
+		StringProposalDelegate stringProposalDelegate = new StringProposalDelegate(acceptor, myContext);
 		Set<PackageImport> allImports = mapper.getAllImports(model.eResource());
 		for (PackageImport pkgImport : allImports) {
-
-			ConfigurableCompletionProposal doCreateProposal = doCreateProposal("\"" + pkgImport.getName() + "\"",
-					computePackageStyledString(pkgImport), getIncludeImage(pkgImport),
-					pkgImport.getUri().isFile() ? -1 : 1,
-							context);
-
+			ICompletionProposal doCreateProposal = createCompletionProposal("\"" + pkgImport.getName() + "\"",
+					computePackageStyledString(pkgImport), getIncludeImage(pkgImport), myContext);
 			stringProposalDelegate.accept(doCreateProposal);
 		}
 	}
