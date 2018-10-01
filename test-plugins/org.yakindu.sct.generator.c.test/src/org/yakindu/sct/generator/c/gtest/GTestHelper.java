@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *    Andreas Unger - initial API and implementation
+ *    Andreas Unger - initial API and implementation 
  ****************************************************************************/
 
 package org.yakindu.sct.generator.c.gtest;
@@ -39,7 +39,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
 /**
  * @author Andreas Unger - Initial contribution and API
  * @author Markus Mühlbrandt
- *
+ * 
  */
 public class GTestHelper {
 
@@ -72,7 +72,7 @@ public class GTestHelper {
 	public GTestHelper(Object owner, Compiler compiler) {
 		this.owner = owner;
 		this.compiler = compiler;
-
+		
 		this.copier = new TestFileCopier((p, m) -> {
 			p.create(m);
 			return p;
@@ -113,12 +113,12 @@ public class GTestHelper {
 	}
 
 	protected List<String> getFilesToCopy() {
-		return new ArrayList<>(
+		return new ArrayList<String>(
 				Arrays.asList(owner.getClass().getAnnotation(GTest.class).additionalFilesToCopy()));
 	}
 
 	protected List<String> getFilesToCompile() {
-		return new ArrayList<>(
+		return new ArrayList<String>(
 				Arrays.asList(owner.getClass().getAnnotation(GTest.class).additionalFilesToCompile()));
 	}
 
@@ -177,24 +177,19 @@ public class GTestHelper {
 	protected List<String> createCommand() {
 		String gTestDirectory = getGTestDirectory();
 
-		List<String> includes = new ArrayList<>();
+		List<String> includes = new ArrayList<String>();
 		getIncludes(includes);
 
 		List<String> sourceFiles = getFilesToCompile();
 		getSourceFiles(sourceFiles);
 
-		CompileGTestCommand gTestCommand = new CompileGTestCommand()
-				.compiler(getCompilerCommand())
-				.program(getFileName(getTestProgram()))
-				.includes(includes)
-				.sources(sourceFiles)
-				.directory(gTestDirectory);
-		if (this.compiler == Compiler.GPLUSPLUS) {
-			gTestCommand.standard("c++98");
-			gTestCommand.pedantic(true);
-		}
-
-		return gTestCommand.build();
+		return new CompileGTestCommand()
+			.compiler(getCompilerCommand())
+			.program(getFileName(getTestProgram()))
+			.includes(includes)
+			.sources(sourceFiles)
+			.directory(gTestDirectory)
+			.build();
 	}
 
 	/**
@@ -258,7 +253,7 @@ public class GTestHelper {
 	protected IPath getTargetProjectPath() {
 		return new Path(getTestBundleAnnotation());
 	}
-
+	
 
 	protected Bundle getTestBundle() {
 		Bundle bundle = getAnnotatedTestBundle();
@@ -279,6 +274,6 @@ public class GTestHelper {
 		return null;
 	}
 
-
+	
 
 }
