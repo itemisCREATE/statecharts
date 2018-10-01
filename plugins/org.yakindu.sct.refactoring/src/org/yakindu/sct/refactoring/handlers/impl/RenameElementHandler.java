@@ -92,9 +92,8 @@ public class RenameElementHandler extends AbstractRefactoringHandler<NamedElemen
 					CancelIndicator.NullImpl);
 			Stream<Issue> errors = issues.stream().filter(issue -> issue.getSeverity() == Severity.ERROR);
 
-			boolean hasDefinitionSectionErrors = errors.count() > 0;
 			RenameDialog dialog = new RenameDialog(window.getShell(), "Rename..", "Please enter new name: ",
-					element.getName(), new NameUniquenessValidator(element), hasDefinitionSectionErrors);
+					element.getName(), new NameUniquenessValidator(element), errors.count() > 0);
 
 			if (dialog.open() == Window.OK) {
 				String newName = dialog.getNewName();
