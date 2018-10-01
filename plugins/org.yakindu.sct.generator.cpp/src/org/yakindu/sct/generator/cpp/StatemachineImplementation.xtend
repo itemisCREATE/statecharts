@@ -50,6 +50,7 @@ class StatemachineImplementation implements IContentTemplate {
 	
 	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
 		this.entry = entry
+		val namespace = statechartNamespace
 	'''	
 		«entry.licenseText»
 		
@@ -60,8 +61,10 @@ class StatemachineImplementation implements IContentTemplate {
 		/*! \file Implementation of the state machine '«name»'
 		*/
 		
-		«IF !statechart.namespace.nullOrEmpty»
-		namespace «statechart.namespace.replace(".", "::")» {
+		«IF !namespace.nullOrEmpty»
+		«FOR ns : namespace»
+		namespace «ns» {
+		«ENDFOR»
 		«ENDIF»
 		
 		«usingNamespaces»
@@ -98,8 +101,10 @@ class StatemachineImplementation implements IContentTemplate {
 		
 		«additionalFunctions»
 		
-		«IF !statechart.namespace.nullOrEmpty»
+		«IF !namespace.nullOrEmpty»
+		«FOR ns : namespace»
 		}
+		«ENDFOR»
 		«ENDIF»
 	'''
 	}

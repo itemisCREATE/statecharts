@@ -50,6 +50,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		this.entry = entry
+		val namespace = statechartNamespace
 		'''
 			«entry.licenseText»
 			
@@ -62,8 +63,10 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			/*! \file Header of the state machine '«name»'.
 			*/
 			
-			«IF !statechart.namespace.nullOrEmpty»
-			namespace «statechart.namespace.replace(".", "::")» {
+			«IF !namespace.nullOrEmpty»
+			«FOR ns : namespace»
+			namespace «ns» {
+			«ENDFOR»
 			«ENDIF»
 
 			«preStatechartDeclarations»
@@ -81,8 +84,10 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			
 			«postStatechartDeclarations»
 			
-			«IF !statechart.namespace.nullOrEmpty»
+			«IF !namespace.nullOrEmpty»
+			«FOR ns : namespace»
 			}
+			«ENDFOR»
 			«ENDIF»
 			
 			#endif /* «module().define»_H_ */
