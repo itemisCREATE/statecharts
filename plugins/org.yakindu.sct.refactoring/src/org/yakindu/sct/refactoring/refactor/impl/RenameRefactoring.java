@@ -61,6 +61,11 @@ public class RenameRefactoring extends AbstractRefactoring<NamedElement> {
 		NamedElement element = getContextObject();
 		Collection<Setting> usages = EcoreUtil.UsageCrossReferencer.find(element, getResource().getResourceSet());
 		element.setName(newName);
+		
+		renameReferences(element, usages);
+	}
+
+	private void renameReferences(NamedElement element, Collection<Setting> usages) {
 		for (EStructuralFeature.Setting setting : usages) {
 			if (setting.getEStructuralFeature().isChangeable() && !setting.getEStructuralFeature().isMany()) {
 				EObject holder = setting.getEObject();
