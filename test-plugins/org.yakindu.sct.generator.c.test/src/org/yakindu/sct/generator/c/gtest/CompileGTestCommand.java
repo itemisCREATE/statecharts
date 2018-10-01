@@ -24,6 +24,8 @@ public class CompileGTestCommand {
 	private List<String> sources = Lists.newArrayList();
 	private String compiler;
 	private String program;
+	private boolean pedantic;
+	private String standard;
 
 	public CompileGTestCommand directory(String dir) {
 		this.dir = dir;
@@ -50,14 +52,28 @@ public class CompileGTestCommand {
 		return this;
 	}
 
+	public CompileGTestCommand pedantic(boolean pedantic) {
+		this.pedantic = pedantic;
+		return this;
+	}
+
+	public CompileGTestCommand standard(String standard) {
+		this.standard = standard;
+		return this;
+	}
+
 	public List<String> build() {
 		List<String> command = new ArrayList<>();
 		command.add(compiler);
 		command.add("-o");
 		command.add(getFileName(program));
 		command.add("-O2");
-		command.add("-std=c++98");
-		command.add("-pedantic-errors");
+		if (standard != null) {
+			command.add("-std=" + standard);
+		}
+		if (pedantic) {
+			command.add("-pedantic-errors");
+		}
 		if (dir != null)
 			command.add("-I" + dir + "/include");
 		for (String include : includes) {
