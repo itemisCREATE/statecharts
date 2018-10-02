@@ -243,6 +243,21 @@ public class StateCaseItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.STATE_CASE__STEP,
+				 SexecFactory.eINSTANCE.createReturn()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.STATE_CASE__STEP,
+				 SexecFactory.eINSTANCE.createLocalVariableDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.STATE_CASE__STEP,
+				 SexecFactory.eINSTANCE.createStatement()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.STATE_CASE__STEP,
 				 SexecFactory.eINSTANCE.createTraceNodeExecuted()));
 
 		newChildDescriptors.add

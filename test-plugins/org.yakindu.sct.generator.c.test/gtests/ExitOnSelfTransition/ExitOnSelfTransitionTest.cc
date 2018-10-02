@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static ExitOnSelfTransition statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static ExitOnSelfTransition statechart;
-
+			
 class ExitOnSelfTransitionTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class ExitOnSelfTransitionTest : public ::testing::Test{
 
 
 TEST_F(ExitOnSelfTransitionTest, ExitOnSelfTransitionTest) {
+	
 	exitOnSelfTransition_enter(&statechart);
 	EXPECT_TRUE(exitOnSelfTransition_isStateActive(&statechart, ExitOnSelfTransition_main_region_A));
 	EXPECT_TRUE(exitOnSelfTransitionIface_get_entryCount(&statechart)== 1l);

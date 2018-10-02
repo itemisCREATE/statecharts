@@ -23,6 +23,7 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -31,6 +32,7 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.diagram.core.DiagramEditingDomainFactory;
+import org.eclipse.gmf.runtime.emf.core.util.CrossReferenceAdapter;
 import org.eclipse.gmf.runtime.emf.core.util.EMFCoreUtil;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 
@@ -67,6 +69,7 @@ public class SharedEditingDomainFactory extends DiagramEditingDomainFactory
 
 	protected void setup(TransactionalEditingDomain editingDomain) {
 		editingDomain.setID(DOMAIN_ID);
+		replaceCrossReferenceAdapterWithNonResolvingAdapter(editingDomain);
 		new WorkspaceSynchronizer(editingDomain, new WorkspaceSynchronizer.Delegate() {
 
 			public boolean handleResourceDeleted(Resource resource) {
@@ -179,6 +182,24 @@ public class SharedEditingDomainFactory extends DiagramEditingDomainFactory
 				}
 			}
 		}
+	}
+	protected void replaceCrossReferenceAdapterWithNonResolvingAdapter(final TransactionalEditingDomain domain) {
+		final CrossReferenceAdapter adapter = getCrossReferenceAdapter(domain);
+		if (null != adapter) {
+			adapter.unsetTarget(domain.getResourceSet());
+			domain.getResourceSet().eAdapters().remove(adapter);
+			domain.getResourceSet().eAdapters().add(new CrossReferenceAdapter(false));
+		}
+	}
+
+	protected CrossReferenceAdapter getCrossReferenceAdapter(final TransactionalEditingDomain domain) {
+		final EList<Adapter> eAdapters = domain.getResourceSet().eAdapters();
+		for (final Adapter adapter : eAdapters) {
+			if (adapter instanceof CrossReferenceAdapter) {
+				return (CrossReferenceAdapter) adapter;
+			}
+		}
+		return null;
 	}
 
 	

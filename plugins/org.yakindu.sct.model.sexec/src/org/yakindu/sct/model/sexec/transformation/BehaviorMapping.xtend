@@ -482,7 +482,7 @@ class BehaviorMapping {
 	}
 	
 	
-	private def Sequence lcaDoSequence(Region region, ExecutionFlow flow) {
+	protected def Step lcaDoSequence(Region region, ExecutionFlow flow) {
 		
 		if ( region === null ) return null
 

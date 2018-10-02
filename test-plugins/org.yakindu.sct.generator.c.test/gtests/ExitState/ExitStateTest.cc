@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static ExitState statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static ExitState statechart;
-
+			
 class ExitStateTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class ExitStateTest : public ::testing::Test{
 
 
 TEST_F(ExitStateTest, defaultExit) {
+	
 	exitState_enter(&statechart);
 	EXPECT_TRUE(exitState_isStateActive(&statechart, ExitState_r_A));
 	exitStateIface_raise_e(&statechart);
@@ -36,6 +37,7 @@ TEST_F(ExitStateTest, defaultExit) {
 	EXPECT_TRUE(exitState_isStateActive(&statechart, ExitState_r_E));
 }
 TEST_F(ExitStateTest, namedExitThroughNamedTransition) {
+	
 	exitState_enter(&statechart);
 	EXPECT_TRUE(exitState_isStateActive(&statechart, ExitState_r_A));
 	exitStateIface_raise_f(&statechart);
@@ -43,6 +45,7 @@ TEST_F(ExitStateTest, namedExitThroughNamedTransition) {
 	EXPECT_TRUE(exitState_isStateActive(&statechart, ExitState_r_F));
 }
 TEST_F(ExitStateTest, namedExitThroughDefaultTransition) {
+	
 	exitState_enter(&statechart);
 	EXPECT_TRUE(exitState_isStateActive(&statechart, ExitState_r_A));
 	exitStateIface_raise_g(&statechart);
@@ -50,6 +53,7 @@ TEST_F(ExitStateTest, namedExitThroughDefaultTransition) {
 	EXPECT_TRUE(exitState_isStateActive(&statechart, ExitState_r_E));
 }
 TEST_F(ExitStateTest, remainInA) {
+	
 	exitState_enter(&statechart);
 	EXPECT_TRUE(exitState_isStateActive(&statechart, ExitState_r_A));
 	sc_timer_service_proceed_cycles(&timer_service, 1);

@@ -22,6 +22,7 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 
 /**
  * @author rbeckmann
+ * @author Axel Terfloth - terfloth@itemis.de 
  * 
  */
 
@@ -52,11 +53,11 @@ class APIGenerator {
 				
 			switch («scHandle»->stateConfVector[handle->stateConfVectorPosition])
 			{
-			«FOR state : states»
-				«IF state.reactSequence !== null»
+			«FOR state : states.filter[isLeaf]»
+				«IF state.reactMethod !== null»
 					case «state.stateName»:
 					{
-						«state.reactSequence.shortName»(«scHandle»);
+						«state.reactMethod.shortName»(«scHandle», bool_true);
 						break;
 					}
 				«ENDIF»
@@ -67,6 +68,7 @@ class APIGenerator {
 		}
 		
 	'''
+
 
 	def declareRunCycle(ExecutionFlow it) {
 		'''«runCycleSignature»;'''

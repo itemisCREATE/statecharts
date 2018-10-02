@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static FeatureCalls statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static FeatureCalls statechart;
-
+			
 class FeatureCallsTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class FeatureCallsTest : public ::testing::Test{
 
 
 TEST_F(FeatureCallsTest, FeatureCalls) {
+	
 	featureCalls_enter(&statechart);
 	EXPECT_TRUE(featureCalls_isStateActive(&statechart, FeatureCalls_main_region_A));
 	sc_timer_service_proceed_cycles(&timer_service, 1);

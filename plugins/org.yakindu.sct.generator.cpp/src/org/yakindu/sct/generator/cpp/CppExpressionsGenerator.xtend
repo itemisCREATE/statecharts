@@ -23,6 +23,8 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.base.expressions.expressions.Expression
+import org.yakindu.base.expressions.expressions.LogicalNotExpression
 
 class CppExpressionsGenerator extends CExpressionsGenerator {
 
@@ -52,5 +54,13 @@ class CppExpressionsGenerator extends CExpressionsGenerator {
 	override dispatch CharSequence code(BoolLiteral it) '''«IF value»true«ELSE»false«ENDIF»'''
 	
 	override dispatch CharSequence code(StringLiteral it) '''(sc_string) «super._code(it)»'''
+	
+	/** Don't use bool_true for C++ code */
+	override dispatch CharSequence sc_boolean_code(Expression it) {code}
+	
+	/** Don't use bool_false for C++ code */
+	override dispatch CharSequence sc_boolean_code(LogicalNotExpression it) {code}
+	
+	
 
 }

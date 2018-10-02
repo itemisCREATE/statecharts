@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_WbIqMFgXEeeNwJt_ornpOA" specification="namespace executionorder&#xA;&#xA;@ChildFirstExecution&#xA;&#xA;interface:&#xA;&#xA;var a_local : integer = 0&#xA;var c_local : integer = 0&#xA;var aa_local : integer = 0&#xA;var ac_local : integer = 0&#xA;var aaa_local : integer = 0 &#xA;var aac_local : integer = 0&#xA;&#xA;var a_check : integer = 0&#xA;var aa_check : integer = 0&#xA;var aaa_check : integer = 0&#xA;var aac_check : integer = 0&#xA;var ac_check : integer = 0&#xA;var c_check : integer = 0&#xA;&#xA;&#xA;var sm_local : integer = 0&#xA;&#xA;operation next() : integer&#xA;operation check(id:string) : boolean&#xA;&#xA;internal :&#xA;&#xA;always / sm_local = next&#xA;" namespace="executionorder" name="ChildFirstOrthogonalReactions">
+  <sgraph:Statechart xmi:id="_WbIqMFgXEeeNwJt_ornpOA" specification="namespace executionorder&#xA;&#xA;@ChildFirstExecution&#xA;&#xA;interface:&#xA;&#xA;var a_local : integer = 0&#xA;var c_local : integer = 0&#xA;var aa_local : integer = 0&#xA;var ac_local : integer = 0&#xA;var aaa_local : integer = 0 &#xA;var aac_local : integer = 0&#xA;&#xA;var a_check : integer = 0&#xA;var aa_check : integer = 0&#xA;var aaa_check : integer = 0&#xA;var aac_check : integer = 0&#xA;var ac_check : integer = 0&#xA;var c_check : integer = 0&#xA;&#xA;&#xA;var sm_local : integer = 0&#xA;&#xA;var cnt : integer = 0&#xA;&#xA;operation check(value:string) : boolean&#xA;operation next() : integer&#xA;&#xA;internal :&#xA;&#xA;always / sm_local = next&#xA;" namespace="executionorder" name="ChildFirstOrthogonalReactions">
     <regions xmi:id="_WbJ4UlgXEeeNwJt_ornpOA" name="r">
       <vertices xsi:type="sgraph:Entry" xmi:id="_WbZv8VgXEeeNwJt_ornpOA">
         <outgoingTransitions xmi:id="_WbcMMlgXEeeNwJt_ornpOA" target="_Wba-EVgXEeeNwJt_ornpOA"/>
@@ -25,7 +25,7 @@
               <vertices xsi:type="sgraph:Entry" xmi:id="_8MjkjlyrEeexYulqhdY-Pw">
                 <outgoingTransitions xmi:id="_8Mjkj1yrEeexYulqhdY-Pw" specification="" target="_8MjkkFyrEeexYulqhdY-Pw"/>
               </vertices>
-              <vertices xsi:type="sgraph:State" xmi:id="_8MjkkFyrEeexYulqhdY-Pw" specification="always / aac_local = next" name="AAC" incomingTransitions="_8Mjkj1yrEeexYulqhdY-Pw">
+              <vertices xsi:type="sgraph:State" xmi:id="_8MjkkFyrEeexYulqhdY-Pw" specification="always / aac_local =  next" name="AAC" incomingTransitions="_8Mjkj1yrEeexYulqhdY-Pw">
                 <outgoingTransitions xmi:id="_On9hAF12EeeJ_JhPFJUluA" specification="[check('AAC')]" target="_lgGeMFgXEeeNwJt_ornpOA"/>
               </vertices>
             </regions>
@@ -35,7 +35,7 @@
           <vertices xsi:type="sgraph:Entry" xmi:id="_96dQzlyrEeexYulqhdY-Pw">
             <outgoingTransitions xmi:id="_96dQz1yrEeexYulqhdY-Pw" specification="" target="_96d3wFyrEeexYulqhdY-Pw"/>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_96d3wFyrEeexYulqhdY-Pw" specification="always / ac_local = next" name="AC" incomingTransitions="_96dQz1yrEeexYulqhdY-Pw">
+          <vertices xsi:type="sgraph:State" xmi:id="_96d3wFyrEeexYulqhdY-Pw" specification="always / ac_local =  next" name="AC" incomingTransitions="_96dQz1yrEeexYulqhdY-Pw">
             <outgoingTransitions xmi:id="_YneeIF12EeeJ_JhPFJUluA" specification="[check('AC')]" target="_lgGeMFgXEeeNwJt_ornpOA"/>
           </vertices>
         </regions>
@@ -244,7 +244,7 @@
           <styles xsi:type="notation:ShapeStyle" xmi:id="_Wba-FVgXEeeNwJt_ornpOA" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_Wba-FlgXEeeNwJt_ornpOA"/>
           <styles xsi:type="notation:BooleanValueStyle" xmi:id="_WbcMMFgXEeeNwJt_ornpOA" name="isHorizontal" booleanValue="true"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_WbcMMVgXEeeNwJt_ornpOA" x="50" y="125" width="677" height="352"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_WbcMMVgXEeeNwJt_ornpOA" x="50" y="125" width="730" height="305"/>
         </children>
         <children xmi:id="_lgHsUFgXEeeNwJt_ornpOA" type="State" element="_lgGeMFgXEeeNwJt_ornpOA">
           <children xsi:type="notation:DecorationNode" xmi:id="_lgITYFgXEeeNwJt_ornpOA" type="StateName">
@@ -342,6 +342,7 @@
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_WbdaUVgXEeeNwJt_ornpOA" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_WbdaU1gXEeeNwJt_ornpOA" fontName="Verdana"/>
       <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_WbdaUlgXEeeNwJt_ornpOA" points="[7, 3, -83, -337]$[0, 3, -90, -337]$[0, 161, -90, -179]"/>
+      <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_GOyo4LWuEeiVUKO5-clsQw" id="(0.463448275862069,0.5783333333333334)"/>
     </edges>
     <edges xmi:id="_eudLQlgXEeeNwJt_ornpOA" type="Transition" element="_euckT1gXEeeNwJt_ornpOA" source="_lIf2hVgXEeeNwJt_ornpOA" target="_lIf2jlgXEeeNwJt_ornpOA">
       <children xsi:type="notation:DecorationNode" xmi:id="_eudLQ1gXEeeNwJt_ornpOA" type="TransitionExpression">
@@ -371,7 +372,7 @@
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_n4kKYVgXEeeNwJt_ornpOA" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_n4kxcFgXEeeNwJt_ornpOA" fontName="Verdana"/>
       <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_n4kKYlgXEeeNwJt_ornpOA" points="[64, 11, -186, -46]$[222, 11, -28, -46]"/>
-      <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_n4mmoFgXEeeNwJt_ornpOA" id="(0.8835341365461847,0.046822742474916385)"/>
+      <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_n4mmoFgXEeeNwJt_ornpOA" id="(0.8189447444952223,0.05415830546265328)"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_n4mmoVgXEeeNwJt_ornpOA" id="(0.8,0.49056603773584906)"/>
     </edges>
     <edges xmi:id="_p3YngFgXEeeNwJt_ornpOA" type="Transition" element="_p3XZYFgXEeeNwJt_ornpOA" source="_lIf2pFgXEeeNwJt_ornpOA" target="_lgHsUFgXEeeNwJt_ornpOA">

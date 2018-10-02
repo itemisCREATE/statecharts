@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static TriggerExpressionPrecedence statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static TriggerExpressionPrecedence statechart;
-
+			
 class TriggerExpressionPrecedenceTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class TriggerExpressionPrecedenceTest : public ::testing::Test{
 
 
 TEST_F(TriggerExpressionPrecedenceTest, unsatisfiedTriggerAndFGuardFalseOrFalse) {
+	
 	triggerExpressionPrecedence_enter(&statechart);
 	triggerExpressionPrecedenceIface_set_c1(&statechart,false);
 	triggerExpressionPrecedenceIface_set_c2(&statechart,false);
@@ -36,6 +37,7 @@ TEST_F(TriggerExpressionPrecedenceTest, unsatisfiedTriggerAndFGuardFalseOrFalse)
 	EXPECT_TRUE(!triggerExpressionPrecedenceIface_get_e1_transition(&statechart));
 }
 TEST_F(TriggerExpressionPrecedenceTest, unsatisfiedTriggerAndFGuardTrueOrFalse) {
+	
 	triggerExpressionPrecedence_enter(&statechart);
 	triggerExpressionPrecedenceIface_set_c1(&statechart,true);
 	triggerExpressionPrecedenceIface_set_c2(&statechart,false);
@@ -43,6 +45,7 @@ TEST_F(TriggerExpressionPrecedenceTest, unsatisfiedTriggerAndFGuardTrueOrFalse) 
 	EXPECT_TRUE(!triggerExpressionPrecedenceIface_get_e1_transition(&statechart));
 }
 TEST_F(TriggerExpressionPrecedenceTest, unsatisfiedTriggerAndFGuardFalseOrTrue) {
+	
 	triggerExpressionPrecedence_enter(&statechart);
 	triggerExpressionPrecedenceIface_set_c1(&statechart,false);
 	triggerExpressionPrecedenceIface_set_c2(&statechart,true);
@@ -50,6 +53,7 @@ TEST_F(TriggerExpressionPrecedenceTest, unsatisfiedTriggerAndFGuardFalseOrTrue) 
 	EXPECT_TRUE(!triggerExpressionPrecedenceIface_get_e1_transition(&statechart));
 }
 TEST_F(TriggerExpressionPrecedenceTest, unsatisfiedTriggerAndFGuardTrueOrTrue) {
+	
 	triggerExpressionPrecedence_enter(&statechart);
 	triggerExpressionPrecedenceIface_set_c1(&statechart,true);
 	triggerExpressionPrecedenceIface_set_c2(&statechart,true);

@@ -10,6 +10,8 @@
 */
 package org.yakindu.sct.model.sexec;
 
+import org.yakindu.base.types.ComplexType;
+
 
 /**
  * <!-- begin-user-doc -->

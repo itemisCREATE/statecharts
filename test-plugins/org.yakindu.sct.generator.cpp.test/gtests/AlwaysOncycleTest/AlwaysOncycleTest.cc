@@ -7,6 +7,8 @@
 
 namespace  {
 
+AlwaysOncycle* statechart;
+
 
 
 //! The timers are managed by a timer service. */
@@ -14,9 +16,6 @@ static SctUnitRunner * runner;
 
 class AlwaysOncycleTest : public ::testing::Test{
 	protected:
-	
-	AlwaysOncycle* statechart;
-	
 	virtual void SetUp() {
 		statechart = new AlwaysOncycle();
 		statechart->init();
@@ -30,35 +29,35 @@ class AlwaysOncycleTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
-	
-	
 };
 
-	TEST_F(AlwaysOncycleTest, alwaysOnCycleTest) {
-		
-		statechart->enter();
-		
-		EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateA));
-		
-		while (statechart->getDefaultSCI()->get_value()< 5l) {
-			runner->proceed_cycles(1);
-			EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateA));
-		}
-		
+
+TEST_F(AlwaysOncycleTest, alwaysOnCycleTest) {
+	
+	statechart->enter();
+	
+	EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateA));
+	
+	while (statechart->getDefaultSCI()->get_value()< 5l) {
 		runner->proceed_cycles(1);
-		
+		EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateA));
+	}
+	
+	runner->proceed_cycles(1);
+	
+	EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateB));
+	
+	while (statechart->getDefaultSCI()->get_value()< 5l) {
+		runner->proceed_cycles(1);
 		EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateB));
-		
-		while (statechart->getDefaultSCI()->get_value()< 5l) {
-			runner->proceed_cycles(1);
-			EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateB));
-		}
-		
-		runner->proceed_cycles(1);
-		
-		EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateA));
-		
-		
+	}
+	
+	runner->proceed_cycles(1);
+	
+	EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateA));
+	
+	
 }
+
 
 }

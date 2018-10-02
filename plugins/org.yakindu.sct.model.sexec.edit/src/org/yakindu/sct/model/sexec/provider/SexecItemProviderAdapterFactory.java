@@ -285,6 +285,29 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.Method} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MethodItemProvider methodItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.Method}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createMethodAdapter() {
+		if (methodItemProvider == null) {
+			methodItemProvider = new MethodItemProvider(this);
+		}
+
+		return methodItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.MappedElement} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -768,6 +791,75 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.Return} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ReturnItemProvider returnItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.Return}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createReturnAdapter() {
+		if (returnItemProvider == null) {
+			returnItemProvider = new ReturnItemProvider(this);
+		}
+
+		return returnItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.LocalVariableDefinition} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected LocalVariableDefinitionItemProvider localVariableDefinitionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.LocalVariableDefinition}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createLocalVariableDefinitionAdapter() {
+		if (localVariableDefinitionItemProvider == null) {
+			localVariableDefinitionItemProvider = new LocalVariableDefinitionItemProvider(this);
+		}
+
+		return localVariableDefinitionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.Statement} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StatementItemProvider statementItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.Statement}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createStatementAdapter() {
+		if (statementItemProvider == null) {
+			statementItemProvider = new StatementItemProvider(this);
+		}
+
+		return statementItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.ExecutionSynchronization} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -969,6 +1061,7 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 		if (executionChoiceItemProvider != null) executionChoiceItemProvider.dispose();
 		if (executionSynchronizationItemProvider != null) executionSynchronizationItemProvider.dispose();
 		if (reactionItemProvider != null) reactionItemProvider.dispose();
+		if (methodItemProvider != null) methodItemProvider.dispose();
 		if (stateVectorItemProvider != null) stateVectorItemProvider.dispose();
 		if (timeEventItemProvider != null) timeEventItemProvider.dispose();
 		if (sequenceItemProvider != null) sequenceItemProvider.dispose();
@@ -985,6 +1078,9 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 		if (stateCaseItemProvider != null) stateCaseItemProvider.dispose();
 		if (saveHistoryItemProvider != null) saveHistoryItemProvider.dispose();
 		if (historyEntryItemProvider != null) historyEntryItemProvider.dispose();
+		if (returnItemProvider != null) returnItemProvider.dispose();
+		if (localVariableDefinitionItemProvider != null) localVariableDefinitionItemProvider.dispose();
+		if (statementItemProvider != null) statementItemProvider.dispose();
 		if (traceNodeExecutedItemProvider != null) traceNodeExecutedItemProvider.dispose();
 		if (reactionFiredItemProvider != null) reactionFiredItemProvider.dispose();
 		if (traceReactionWillFireItemProvider != null) traceReactionWillFireItemProvider.dispose();

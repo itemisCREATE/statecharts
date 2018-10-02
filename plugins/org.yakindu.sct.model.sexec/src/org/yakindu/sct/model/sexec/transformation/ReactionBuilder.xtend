@@ -18,7 +18,6 @@ import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionNode
 import org.yakindu.sct.model.sexec.ExecutionState
-import org.yakindu.sct.model.sexec.Reaction
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.StateVector
 import org.yakindu.sct.model.sexec.Step
@@ -32,9 +31,9 @@ import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Synchronization
+import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.DefaultTrigger
-import org.yakindu.sct.model.sgraph.Transition
 
 class ReactionBuilder {
 	@Inject extension SexecElementMapping mapping
@@ -70,6 +69,7 @@ class ReactionBuilder {
 		states.filter(typeof(State)).filter(s | s.simple).forEach(s | defineCycle(s))
 		states.filter(typeof(FinalState)).forEach(s | defineCycle(s))
 		
+
 		return flow
 	}
 	
@@ -158,11 +158,6 @@ class ReactionBuilder {
 		} 
 		
 		return false
-	}
-	
-	
-	def unchecked(Reaction it) {
-		return (check === null || check.condition === null )
 	}
 
 

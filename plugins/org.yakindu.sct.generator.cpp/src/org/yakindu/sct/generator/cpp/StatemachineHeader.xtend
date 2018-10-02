@@ -33,11 +33,13 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 
 class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineHeader {
 
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
+	@Inject protected extension SgraphExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension INamingService
@@ -48,17 +50,25 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		this.entry = entry
+		val namespace = statechartNamespace
 		'''
 			«entry.licenseText»
 			
 			#ifndef «module().define»_H_
 			#define «module().define»_H_
 			
+			
 			«includes(artifactConfigs)»
 			
 			/*! \file Header of the state machine '«name»'.
 			*/
 			
+			«IF !namespace.nullOrEmpty»
+			«FOR ns : namespace»
+			namespace «ns» {
+			«ENDFOR»
+			«ENDIF»
+
 			«preStatechartDeclarations»
 			
 			/*! Define indices of states in the StateConfVector */
@@ -73,6 +83,12 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			«ENDIF»
 			
 			«postStatechartDeclarations»
+			
+			«IF !namespace.nullOrEmpty»
+			«FOR ns : namespace»
+			}
+			«ENDFOR»
+			«ENDIF»
 			
 			#endif /* «module().define»_H_ */
 		'''

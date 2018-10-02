@@ -7,6 +7,8 @@
 
 namespace  {
 
+PriorityValues* statechart;
+
 
 
 //! The timers are managed by a timer service. */
@@ -14,9 +16,6 @@ static SctUnitRunner * runner;
 
 class PriorityValuesTest : public ::testing::Test{
 	protected:
-	
-	PriorityValues* statechart;
-	
 	virtual void SetUp() {
 		statechart = new PriorityValues();
 		statechart->init();
@@ -30,39 +29,39 @@ class PriorityValuesTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
-	
-	
 };
 
-	TEST_F(PriorityValuesTest, transitionPriority) {
-		
-		statechart->enter();
-		
-		EXPECT_TRUE(statechart->isStateActive(PriorityValues::main_region_A));
-		
-		statechart->getDefaultSCI()->raise_event1();
-		
-		runner->proceed_cycles(1);
-		
-		EXPECT_TRUE(statechart->isStateActive(PriorityValues::main_region_C));
-		
-		
+
+TEST_F(PriorityValuesTest, transitionPriority) {
+	
+	statechart->enter();
+	
+	EXPECT_TRUE(statechart->isStateActive(PriorityValues::main_region_A));
+	
+	statechart->getDefaultSCI()->raise_event1();
+	
+	runner->proceed_cycles(1);
+	
+	EXPECT_TRUE(statechart->isStateActive(PriorityValues::main_region_C));
+	
+	
 }
-	TEST_F(PriorityValuesTest, regionPriority) {
-		
-		statechart->enter();
-		
-		EXPECT_TRUE(statechart->isStateActive(PriorityValues::someRegion_A));
-		
-		statechart->getDefaultSCI()->raise_event2();
-		
-		runner->proceed_cycles(1);
-		
-		EXPECT_TRUE(statechart->isStateActive(PriorityValues::someRegion_B));
-		
-		EXPECT_TRUE(!statechart->isStateActive(PriorityValues::main_region_E));
-		
-		
+TEST_F(PriorityValuesTest, regionPriority) {
+	
+	statechart->enter();
+	
+	EXPECT_TRUE(statechart->isStateActive(PriorityValues::someRegion_A));
+	
+	statechart->getDefaultSCI()->raise_event2();
+	
+	runner->proceed_cycles(1);
+	
+	EXPECT_TRUE(statechart->isStateActive(PriorityValues::someRegion_B));
+	
+	EXPECT_TRUE(!statechart->isStateActive(PriorityValues::main_region_E));
+	
+	
 }
+
 
 }
