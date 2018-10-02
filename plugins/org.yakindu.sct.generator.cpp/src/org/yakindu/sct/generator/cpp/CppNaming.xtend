@@ -54,6 +54,10 @@ class CppNaming extends Naming {
 	def statemachineInterface() {
 		'StatemachineInterface'
 	}
+	
+	def statesCountConst() {
+		'numStates'
+	}
 
 	def orthogonalStatesConst() {
 		'maxOrthogonalStates'

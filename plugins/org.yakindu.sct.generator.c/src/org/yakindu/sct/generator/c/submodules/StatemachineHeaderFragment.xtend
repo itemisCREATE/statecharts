@@ -52,6 +52,10 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 	
 	override defines(ExecutionFlow it, GeneratorEntry entry , IGenArtifactConfigurations artifactConfigs) {
 		'''
+		/*! Define number of states in the state enum */
+		
+		#define «numStates» «states.size»
+		
 		/*! Define dimension of the state configuration vector for orthogonal states. */
 		#define «maxOrthogonalStates» «stateVector.size»
 		«IF hasHistory»
