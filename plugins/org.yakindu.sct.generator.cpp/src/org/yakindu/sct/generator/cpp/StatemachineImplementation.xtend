@@ -260,11 +260,11 @@ class StatemachineImplementation implements IContentTemplate {
 				
 			switch (stateConfVector[stateConfVectorPosition])
 			{
-			«FOR state : states»
-				«IF state.reactSequence !== null»
+			«FOR state : states.filter[isLeaf]»
+				«IF state.reactMethod !== null»
 				case «state.shortName.asEscapedIdentifier» :
 				{
-					«state.reactSequence.shortName»();
+					«state.reactMethod.shortName»(true);
 					break;
 				}
 				«ENDIF»
