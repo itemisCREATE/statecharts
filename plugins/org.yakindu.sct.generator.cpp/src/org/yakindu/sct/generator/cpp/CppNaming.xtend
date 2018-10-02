@@ -12,6 +12,7 @@
 package org.yakindu.sct.generator.cpp
 
 import com.google.inject.Inject
+import java.util.List
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Parameter
 import org.yakindu.sct.generator.c.extensions.Naming
@@ -29,6 +30,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 
 /**
  * @author Markus Mühlbrands - Initial contribution and API
@@ -37,6 +39,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 class CppNaming extends Naming {
 
 	@Inject protected extension SExecExtensions
+	@Inject protected extension SgraphExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension INamingService
 	@Inject protected extension GenmodelEntriesExtension
@@ -207,5 +210,17 @@ class CppNaming extends Naming {
 			typeSpecifier.targetLanguageName + ' value'
 		else
 			''
+	}
+	
+	def List<String> statechartNamespace(ExecutionFlow it) {
+		val sct = statechart
+		if(sct === null) {
+			return emptyList
+		}
+		var ns = sct.namespace
+		if(ns === null || ns == "") {
+			return emptyList
+		}
+		return newArrayList(ns.replace(".", "::").replace("/", "::").split("::").filter[!nullOrEmpty])
 	}
 }

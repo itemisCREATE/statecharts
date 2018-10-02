@@ -1,4 +1,4 @@
-testclass ChildFirstLocalReactions for statechart executionorder.ChildFirstLocalReactions {
+testclass ChildFirstLocalReactions for statechart executionorder.childfirst.ChildFirstLocalReactions {
 	
 	var counter : integer = 0
 		
@@ -6,10 +6,10 @@ testclass ChildFirstLocalReactions for statechart executionorder.ChildFirstLocal
 	 @Test operation expectBottomUpLocalReactionOrder() {
 
 	 	enter
-	 	assert active(executionorder.ChildFirstLocalReactions.r.A.r.AA.r.AAA)
+	 	assert active(executionorder.childfirst.ChildFirstLocalReactions.r.A.r.AA.r.AAA)
 	 	
 	 	proceed 1 cycle
-	 	assert active(executionorder.ChildFirstLocalReactions.r.A.r.AA.r.AAA)
+	 	assert active(executionorder.childfirst.ChildFirstLocalReactions.r.A.r.AA.r.AAA)
 	 	
 
 		assert aaa_local == 1
@@ -23,12 +23,12 @@ testclass ChildFirstLocalReactions for statechart executionorder.ChildFirstLocal
 	@Test operation expectParentLocalReactionOnChildLocalTransition() {
 		
 		enter
-	 	assert active(executionorder.ChildFirstLocalReactions.r.A.r.AA.r.AAA)
+	 	assert active(executionorder.childfirst.ChildFirstLocalReactions.r.A.r.AA.r.AAA)
 	 	
 	 	raise e
 	 	proceed 1 cycle
 	 	
-	 	assert active(executionorder.ChildFirstLocalReactions.r.A.r.AA.r.AAB) 
+	 	assert active(executionorder.childfirst.ChildFirstLocalReactions.r.A.r.AA.r.AAB) 
 		assert aaa_local == 0
 		assert aa_local == 1
 		assert a_local == 2
@@ -40,13 +40,13 @@ testclass ChildFirstLocalReactions for statechart executionorder.ChildFirstLocal
 	@Test operation expectGrandparentLocalReactionOnParentLocalTransition() {
 				
 		enter
-	 	assert active(executionorder.ChildFirstLocalReactions.r.A.r.AA.r.AAA)
+	 	assert active(executionorder.childfirst.ChildFirstLocalReactions.r.A.r.AA.r.AAA)
 	 	
 	 	disable_aaa = true
 	 	raise e
 	 	proceed 1 cycle
 	 	
-	 	assert active(executionorder.ChildFirstLocalReactions.r.A.r.AB) 
+	 	assert active(executionorder.childfirst.ChildFirstLocalReactions.r.A.r.AB) 
 		assert aaa_local == 1
 		assert aa_local == 0
 		assert a_local == 2
@@ -57,14 +57,14 @@ testclass ChildFirstLocalReactions for statechart executionorder.ChildFirstLocal
 	@Test operation expectNoLocalReactionOnGrandparentTransition() {
 		
 		enter
-	 	assert active(executionorder.ChildFirstLocalReactions.r.A.r.AA.r.AAA)
+	 	assert active(executionorder.childfirst.ChildFirstLocalReactions.r.A.r.AA.r.AAA)
 	 	
 	 	disable_aaa = true
 	 	disable_aa = true
 	 	raise e
 	 	proceed 1 cycle
 	 	
-	 	assert active(executionorder.ChildFirstLocalReactions.r.B) 
+	 	assert active(executionorder.childfirst.ChildFirstLocalReactions.r.B) 
 		assert aaa_local == 1
 		assert aa_local == 2
 		assert a_local == 0
