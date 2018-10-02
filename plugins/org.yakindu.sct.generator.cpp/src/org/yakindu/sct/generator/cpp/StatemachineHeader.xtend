@@ -448,7 +448,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 	'''
 	
 	def toPrototype(Method it) '''
-		static «typeSpecifier.targetLanguageName» «shortName»(«scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR»);
+		«typeSpecifier.targetLanguageName» «shortName»(«FOR p : parameters SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR»);
 	'''
 	
 	def toPrototypes(List<Step> steps) '''
