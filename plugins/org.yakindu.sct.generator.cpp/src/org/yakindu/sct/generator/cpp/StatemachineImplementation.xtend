@@ -31,6 +31,8 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Method
 
 class StatemachineImplementation implements IContentTemplate {
 	
@@ -449,9 +451,23 @@ class StatemachineImplementation implements IContentTemplate {
 		«exitActionFunctions.toImplementation»
 		«enterSequenceFunctions.toImplementation»
 		«exitSequenceFunctions.toImplementation»
-		«reactFunctions.toImplementation»
+		«reactFunctions.filter[ f | ! (f.eContainer instanceof ExecutionState)].toList.toImplementation»
+		«reactMethods.toDefinitions»
 		
 	'''
+	
+	 def toDefinitions(List<Method> methods) '''
+	 	«FOR m : methods»
+	 		«m.implementation»
+	 		
+	 	«ENDFOR»
+	 '''
+	 
+	 def implementation(Method it) '''
+	 	static «typeSpecifier.targetLanguageName» «shortName»(«scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR») {
+	 		«body.code»
+	 	}
+	 '''
 	 
 	def toImplementation(List<Step> steps) '''
 		«FOR s : steps»
