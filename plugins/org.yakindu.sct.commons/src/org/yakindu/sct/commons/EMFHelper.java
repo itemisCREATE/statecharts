@@ -11,12 +11,12 @@
 package org.yakindu.sct.commons;
 
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 
@@ -49,6 +49,18 @@ public class EMFHelper {
 	}
 
 	public static IFile getIFileFromEMFUri(URI uri) {
-		return ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uri.toPlatformString(true)));
+		if (uri.isPlatformResource()) {
+			String platformString = uri.toPlatformString(true);
+			return (IFile) ResourcesPlugin.getWorkspace().getRoot().findMember(platformString);
+		} else if (uri.isFile()) {
+			File file = new File(uri.toFileString());
+			if (!file.exists())
+				return null;
+			IFile[] files = ResourcesPlugin.getWorkspace().getRoot().findFilesForLocationURI(file.toURI());
+			if (files.length == 1) {
+				return files[0];
+			}
+		}
+		return null;
 	}
 }
