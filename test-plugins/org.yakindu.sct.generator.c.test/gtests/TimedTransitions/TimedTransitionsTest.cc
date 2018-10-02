@@ -7,12 +7,12 @@
 #include "sc_timer_service.h"
 
 
+static TimedTransitions statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static TimedTransitions statechart;
-
+			
 class TimedTransitionsTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -30,6 +30,7 @@ class TimedTransitionsTest : public ::testing::Test{
 
 
 TEST_F(TimedTransitionsTest, Timer01) {
+	
 	timedTransitions_enter(&statechart);
 	EXPECT_TRUE(timedTransitions_isStateActive(&statechart, TimedTransitions_main_region_Start));
 	sc_timer_service_proceed_time(&timer_service, 2030);

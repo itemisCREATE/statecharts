@@ -16,10 +16,15 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.AnnotatableElement;
+import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Event;
+import org.yakindu.base.types.GenericElement;
+import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PackageMember;
+import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypedElement;
+import org.yakindu.sct.model.sexec.*;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
@@ -160,6 +165,10 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 				return createReactionAdapter();
 			}
 			@Override
+			public Adapter caseMethod(Method object) {
+				return createMethodAdapter();
+			}
+			@Override
 			public Adapter caseStateVector(StateVector object) {
 				return createStateVectorAdapter();
 			}
@@ -228,6 +237,18 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 				return createHistoryEntryAdapter();
 			}
 			@Override
+			public Adapter caseReturn(Return object) {
+				return createReturnAdapter();
+			}
+			@Override
+			public Adapter caseLocalVariableDefinition(LocalVariableDefinition object) {
+				return createLocalVariableDefinitionAdapter();
+			}
+			@Override
+			public Adapter caseStatement(Statement object) {
+				return createStatementAdapter();
+			}
+			@Override
 			public Adapter caseTrace(Trace object) {
 				return createTraceAdapter();
 			}
@@ -268,10 +289,6 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 				return createNamedElementAdapter();
 			}
 			@Override
-			public Adapter caseTypedElement(TypedElement object) {
-				return createTypedElementAdapter();
-			}
-			@Override
 			public Adapter caseAnnotatableElement(AnnotatableElement object) {
 				return createAnnotatableElementAdapter();
 			}
@@ -280,8 +297,28 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 				return createPackageMemberAdapter();
 			}
 			@Override
+			public Adapter caseType(Type object) {
+				return createTypeAdapter();
+			}
+			@Override
+			public Adapter caseGenericElement(GenericElement object) {
+				return createGenericElementAdapter();
+			}
+			@Override
+			public Adapter caseComplexType(ComplexType object) {
+				return createComplexTypeAdapter();
+			}
+			@Override
+			public Adapter caseTypedElement(TypedElement object) {
+				return createTypedElementAdapter();
+			}
+			@Override
 			public Adapter caseDeclaration(Declaration object) {
 				return createDeclarationAdapter();
+			}
+			@Override
+			public Adapter caseOperation(Operation object) {
+				return createOperationAdapter();
 			}
 			@Override
 			public Adapter caseEvent(Event object) {
@@ -434,6 +471,20 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.Method <em>Method</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.Method
+	 * @generated
+	 */
+	public Adapter createMethodAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.yakindu.base.base.NamedElement <em>Named Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -486,6 +537,20 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPackageMemberAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.Type <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.types.Type
+	 * @generated
+	 */
+	public Adapter createTypeAdapter() {
 		return null;
 	}
 
@@ -812,6 +877,48 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.Return <em>Return</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.Return
+	 * @generated
+	 */
+	public Adapter createReturnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.LocalVariableDefinition <em>Local Variable Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.LocalVariableDefinition
+	 * @generated
+	 */
+	public Adapter createLocalVariableDefinitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.Statement <em>Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.Statement
+	 * @generated
+	 */
+	public Adapter createStatementAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.ExecutionSynchronization <em>Execution Synchronization</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -892,6 +999,48 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDeclarationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.GenericElement <em>Generic Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.types.GenericElement
+	 * @generated
+	 */
+	public Adapter createGenericElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.ComplexType <em>Complex Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.types.ComplexType
+	 * @generated
+	 */
+	public Adapter createComplexTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.Operation <em>Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.types.Operation
+	 * @generated
+	 */
+	public Adapter createOperationAdapter() {
 		return null;
 	}
 

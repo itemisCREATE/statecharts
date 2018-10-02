@@ -26,11 +26,6 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.eclipse.jdt.core.javabuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
 			<name>org.eclipse.ui.externaltools.ExternalToolBuilder</name>
 			<arguments>
 				<dictionary>
@@ -48,7 +43,6 @@
 		<nature>org.eclipse.pde.PluginNature</nature>
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
 		<nature>org.yakindu.sct.builder.SCTNature</nature>
-		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
 	<filteredResources>
 		<filter>

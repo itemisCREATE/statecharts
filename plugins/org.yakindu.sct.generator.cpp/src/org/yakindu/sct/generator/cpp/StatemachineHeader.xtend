@@ -16,6 +16,7 @@ import org.eclipse.xtend2.lib.StringConcatenation
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.generator.c.IncludeProvider
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.Check
@@ -23,6 +24,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.Statechart
@@ -31,30 +33,42 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 
-class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader {
+class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineHeader {
 
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
+	@Inject protected extension SgraphExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension INamingService
+	@Inject protected extension IncludeProvider
+	@Inject protected extension StatechartExtensions
 
 	protected GeneratorEntry entry
 
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		this.entry = entry
+		val namespace = statechartNamespace
 		'''
 			«entry.licenseText»
 			
 			#ifndef «module().define»_H_
 			#define «module().define»_H_
 			
+			
 			«includes(artifactConfigs)»
 			
 			/*! \file Header of the state machine '«name»'.
 			*/
 			
+			«IF !namespace.nullOrEmpty»
+			«FOR ns : namespace»
+			namespace «ns» {
+			«ENDFOR»
+			«ENDIF»
+
 			«preStatechartDeclarations»
 			
 			/*! Define indices of states in the StateConfVector */
@@ -70,9 +84,38 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 			
 			«postStatechartDeclarations»
 			
+			«IF !namespace.nullOrEmpty»
+			«FOR ns : namespace»
+			}
+			«ENDFOR»
+			«ENDIF»
+			
 			#endif /* «module().define»_H_ */
 		'''
 	}
+	
+	def statesEnumDecl(ExecutionFlow it) '''
+		/*! Enumeration of all states */ 
+		typedef enum
+		{
+			«null_state»,
+			«FOR state : states SEPARATOR ","»
+				«state.stateName»
+			«ENDFOR»
+		} «statesEnumType»;
+	'''
+	
+	def final includes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
+		'''
+		«FOR i : getIncludes(newArrayList, artifactConfigs)»
+		  «i»
+		«ENDFOR»
+		'''
+	}
+	
+	def preStatechartDeclarations(ExecutionFlow it) ''''''
+
+	def postStatechartDeclarations(ExecutionFlow it) ''''''
 	
 	def protected generateClass(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
 		'''
@@ -266,7 +309,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		'''
 	}
 
-	override statemachineTypeDecl(ExecutionFlow it) '''
+	def statemachineTypeDecl(ExecutionFlow it) '''
 		//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
 		static const sc_ushort «orthogonalStatesConst» = «stateVector.size»;
 		«IF hasHistory»
@@ -334,7 +377,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		virtual void «raiseTimeEventFctID»(sc_eventid event);
 	'''
 
-	override dispatch functionPrototypes(EventDefinition it) '''
+	def dispatch functionPrototypes(EventDefinition it) '''
 		«IF direction == Direction::LOCAL»
 			/*! Raises the in event '«name»' that is defined in the «scope.scopeDescription». */
 			void «asRaiser»(«valueParams»);
@@ -363,7 +406,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		«ENDIF»
 	'''
 
-	override dispatch functionPrototypes(VariableDefinition it) '''
+	def dispatch functionPrototypes(VariableDefinition it) '''
 		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */
 		«IF const»const «ENDIF»«typeSpecifier.targetLanguageName» «it.asGetter»() const;
 		
@@ -373,6 +416,8 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 			
 		«ENDIF»
 	'''
+	
+	def dispatch functionPrototypes(Declaration it) ''''''
 
 	/* ===================================================================================
 	 * Handling declaration of function prototypes

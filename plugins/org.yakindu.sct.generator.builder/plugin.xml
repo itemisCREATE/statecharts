@@ -77,7 +77,7 @@
 	    nameFilter="*.sgen">
 	    <action
            class="org.yakindu.sct.generator.builder.action.GenerateModelAction"
-           enablesFor="1"
+           enablesFor="+"
            id="org.yakindu.sct.generator.ui.generateaction"
            label="Generate Code Artifacts"
            menubarPath="additions">

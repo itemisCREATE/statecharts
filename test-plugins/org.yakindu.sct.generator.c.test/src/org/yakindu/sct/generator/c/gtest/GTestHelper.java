@@ -12,25 +12,17 @@
 package org.yakindu.sct.generator.c.gtest;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
@@ -39,6 +31,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.yakindu.sct.generator.builder.EclipseContextGeneratorExecutorLookup;
+import org.yakindu.sct.generator.c.test.utils.TestFileCopier;
 import org.yakindu.sct.generator.core.execution.GeneratorExecutorLookup;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -70,6 +63,7 @@ public class GTestHelper {
 
 	private final Object owner;
 	protected Compiler compiler;
+	protected TestFileCopier copier;
 
 	public GTestHelper(Object owner) {
 		this(owner, Compiler.GCC);
@@ -78,6 +72,11 @@ public class GTestHelper {
 	public GTestHelper(Object owner, Compiler compiler) {
 		this.owner = owner;
 		this.compiler = compiler;
+		
+		this.copier = new TestFileCopier((p, m) -> {
+			p.create(m);
+			return p;
+		});
 	}
 
 	public void compile() {
@@ -93,10 +92,10 @@ public class GTestHelper {
 		IPath targetPath = getTargetPath();
 
 		// copy model to JUnit workspace
-		copyFileFromBundleToFolder(getModelBundle(), getModelPath(), targetPath);
+		copier.copyFileFromBundleToFolder(getModelBundle(), getModelPath(), targetPath);
 
 		String sgenFileName = getSgenFileName(getTestProgram());
-		copyFileFromBundleToFolder(getTestBundle(), sgenFileName, targetPath);
+		copier.copyFileFromBundleToFolder(getTestBundle(), sgenFileName, targetPath);
 
 		GeneratorModel model = getGeneratorModel(sgenFileName);
 		model.getEntries().get(0).setElementRef(getStatechart());
@@ -171,7 +170,7 @@ public class GTestHelper {
 		List<String> testDataFiles = getFilesToCopy();
 		getTestDataFiles(testDataFiles);
 		for (String file : testDataFiles) {
-			copyFileFromBundleToFolder(getTestBundle(), file, targetPath);
+			copier.copyFileFromBundleToFolder(getTestBundle(), file, targetPath);
 		}
 	}
 
@@ -184,28 +183,13 @@ public class GTestHelper {
 		List<String> sourceFiles = getFilesToCompile();
 		getSourceFiles(sourceFiles);
 
-		List<String> command = new ArrayList<String>();
-		command.add(getCompilerCommand());
-		command.add("-o");
-		command.add(getFileName(getTestProgram()));
-		command.add("-O2");
-		if (gTestDirectory != null)
-			command.add("-I" + gTestDirectory + "/include");
-		for (String include : includes) {
-			command.add("-I" + include);
-		}
-		if (gTestDirectory != null)
-			command.add("-L" + gTestDirectory);
-		for (String sourceFile : sourceFiles) {
-			command.add(getFileName(sourceFile));
-		}
-		command.add("-lgtest");
-		command.add("-lgtest_main");
-		command.add("-lm");
-		command.add("-lstdc++");
-		command.add("-pthread");
-		// command.add("-pg");
-		return command;
+		return new CompileGTestCommand()
+			.compiler(getCompilerCommand())
+			.program(getFileName(getTestProgram()))
+			.includes(includes)
+			.sources(sourceFiles)
+			.directory(gTestDirectory)
+			.build();
 	}
 
 	/**
@@ -218,12 +202,8 @@ public class GTestHelper {
 	/**
 	 * @return
 	 */
-	private String getGTestDirectory() {
+	static public String getGTestDirectory() {
 		String gTestDirectory = System.getenv("GTEST_DIR");
-		// if (gTestDirectory == null) {
-		// throw new RuntimeException("GTEST_DIR environment variable not set");
-		// }
-		// System.out.println("GTEST_DIR = " + gTestDirectory);
 		return gTestDirectory;
 	}
 
@@ -273,36 +253,7 @@ public class GTestHelper {
 	protected IPath getTargetProjectPath() {
 		return new Path(getTestBundleAnnotation());
 	}
-
-	protected void copyFileFromBundleToFolder(Bundle bundle, String sourcePath, String targetPath) {
-		copyFileFromBundleToFolder(bundle, new Path(sourcePath), new Path(targetPath));
-	}
-
-	protected void copyFileFromBundleToFolder(Bundle bundle, String sourcePath, IPath targetPath) {
-		copyFileFromBundleToFolder(bundle, new Path(sourcePath), targetPath);
-	}
-
-	protected void copyFileFromBundleToFolder(Bundle bundle, IPath sourcePath, IPath targetPath) {
-		String fileName = sourcePath.lastSegment();
-		copyFileFromBundle(bundle, sourcePath, targetPath.append(fileName));
-	}
-
-	protected void copyFileFromBundle(Bundle bundle, String sourcePath, String targetPath) {
-		copyFileFromBundle(bundle, sourcePath, new Path(targetPath));
-	}
-
-	protected void copyFileFromBundle(Bundle bundle, String sourcePath, IPath targetPath) {
-		copyFileFromBundle(bundle, new Path(sourcePath), targetPath);
-	}
-
-	protected void copyFileFromBundle(Bundle bundle, IPath sourcePath, IPath targetPath) {
-		try {
-			InputStream is = FileLocator.openStream(bundle, sourcePath, false);
-			createFile(targetPath, is);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
+	
 
 	protected Bundle getTestBundle() {
 		Bundle bundle = getAnnotatedTestBundle();
@@ -323,85 +274,6 @@ public class GTestHelper {
 		return null;
 	}
 
-	protected void copyFileFromBundle(String sourcePath, IFile targetFile) {
-		copyFileFromBundle(new Path(sourcePath), targetFile);
-	}
-
-	protected void copyFileFromBundle(IPath sourcePath, IFile targetFile) {
-		try {
-			InputStream is = FileLocator.openStream(getTestBundle(), sourcePath, false);
-			createFile(targetFile, is);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	protected void createFile(String path, InputStream source) {
-		createFile(new Path(path), source);
-	}
-
-	protected void createFile(IPath path, InputStream source) {
-		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
-		createFile(file, source);
-	}
-
-	protected void createFile(IFile file, InputStream source) {
-		ensureContainerExists(file.getParent());
-		try {
-			if (file.exists()) {
-				file.setContents(source, true, false, new NullProgressMonitor());
-			} else {
-				file.create(source, true, new NullProgressMonitor());
-			}
-		} catch (CoreException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	protected IFolder getFolder(String path) {
-		return ensureContainerExists(ResourcesPlugin.getWorkspace().getRoot().getFolder(new Path(path)));
-	}
-
-	protected IFolder getFolder(IPath path) {
-		return ensureContainerExists(ResourcesPlugin.getWorkspace().getRoot().getFolder(path));
-	}
-
-	protected <T extends IContainer> T ensureContainerExists(T container) {
-		IProgressMonitor monitor = new NullProgressMonitor();
-		IProject project = container.getProject();
-		if (project.exists()) {
-			if (!project.isOpen()) {
-				throw new RuntimeException("Project " + project.getName() + " closed");
-			}
-		} else {
-			try {
-				createTestProject(project, monitor);
-				project.open(monitor);
-			} catch (CoreException e) {
-				throw new RuntimeException(e);
-			}
-		}
-		if (container instanceof IFolder) {
-			doEnsureFolderExists((IFolder) container, monitor);
-		}
-		return container;
-	}
-
-	protected void createTestProject(IProject projectHandle, IProgressMonitor monitor) throws CoreException {
-		projectHandle.create(monitor);
-	}
-
-	private void doEnsureFolderExists(IFolder folder, IProgressMonitor monitor) {
-		if (!folder.exists()) {
-			if (!folder.getParent().exists() && folder.getParent() instanceof IFolder) {
-				doEnsureFolderExists((IFolder) folder.getParent(), monitor);
-			}
-			try {
-				folder.create(true, true, monitor);
-			} catch (CoreException e) {
-				throw new RuntimeException(e);
-			}
-		}
-	}
+	
 
 }

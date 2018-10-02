@@ -15,10 +15,13 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.TYPE_INTEGER;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.findState;
 import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createEntry;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createExit;
 import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createRegion;
 import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createState;
 import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createStatechart;
+import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createSynchronization;
 import static org.yakindu.sct.model.sexec.transformation.test.util.SGraphTestFactory._createTransition;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createAlwaysEventSpec;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createEntryAction;
@@ -50,21 +53,26 @@ import org.yakindu.base.expressions.expressions.MultiplicativeOperator;
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression;
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
+import org.yakindu.sct.model.sexec.Call;
+import org.yakindu.sct.model.sexec.ExecutionEntry;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.Sequence;
+import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.TimeEvent;
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
+import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
@@ -565,6 +573,70 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 				.getCheck().getCondition();
 		assertBoolLiteral(true, pve.getValue());
 
+	}
+	
+	@Test
+	public void testExitStateNotTakesTransitionToSyncNode() {
+		Statechart sc = _createStatechart("sc");
+		{
+			Region main = _createRegion("main", sc);
+			{
+				State s = _createState("S", main);
+				{
+					Region r1 = _createRegion("r1", s);
+					{
+						Entry en1 = _createEntry(EntryKind.INITIAL, "", r1);
+						State d = _createState("D", r1);
+						{
+							Region r3 = _createRegion("r3", d);
+							Entry en2 = _createEntry(EntryKind.INITIAL, "", r3);
+							State a = _createState("A", r3);
+							Exit ex = _createExit("", r3);
+							_createTransition(en2, a);
+							_createTransition(a, ex);
+						}
+						_createState("C", r1);
+						_createTransition(en1, d);
+					}
+					Region r2 = _createRegion("r2", s);
+					{
+						Entry en3 = _createEntry(EntryKind.INITIAL, "", r2);
+						State b = _createState("B", r2);
+						_createTransition(en3, b);
+					}
+				}
+				Synchronization sync = _createSynchronization(main);
+				State e = _createState("E", main);
+				
+				// the transition from D to Sync which should NOT be connected with Exit
+				_createTransition(findState(sc, "D"), sync);
+				// the transition from D to C which should be connected with Exit
+				_createTransition(findState(sc, "D"), findState(sc, "C"));
+				
+				_createTransition(findState(sc, "B"), sync);
+				_createTransition(sync, e);
+			}
+		}
+		
+		ExecutionFlow flow = sequencer.transform(sc);
+		
+		// find expected reaction for exit node
+		ExecutionState _d = flow.getStates().get(1);
+		assertEquals("sc.main.S.r1.D", _d.getName());
+		Reaction reaction_D_C = _d.getReactions().get(1);
+		assertTrue(reaction_D_C.isTransition());
+		Transition tr1 = ((Transition)reaction_D_C.getSourceElement());
+		assertEquals(findState(sc, "C"), tr1.getTarget());
+		
+		// assert exit node reaction to be the expected one
+		ExecutionEntry _ex = (ExecutionEntry) flow.getNodes().get(3);
+		assertEquals("sc.main.S.r1.D.r3._exit_Default", _ex.getName());
+		assertNotNull(_ex.getReactSequence());
+		Step exitStep = ((Call)_ex.getReactSequence().getSteps().get(0)).getStep();
+		assertNotNull(exitStep);
+		
+		assertEquals(reaction_D_C, exitStep.eContainer());
+		
 	}
 
 }

@@ -30,11 +30,13 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
+import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 
 class StatemachineImplementation implements IContentTemplate {
 	
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
+	@Inject protected extension SgraphExtensions
 	@Inject protected extension FlowCode
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension ICodegenTypeSystemAccess
@@ -48,6 +50,7 @@ class StatemachineImplementation implements IContentTemplate {
 	
 	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
 		this.entry = entry
+		val namespace = statechartNamespace
 	'''	
 		«entry.licenseText»
 		
@@ -57,6 +60,12 @@ class StatemachineImplementation implements IContentTemplate {
 		
 		/*! \file Implementation of the state machine '«name»'
 		*/
+		
+		«IF !namespace.nullOrEmpty»
+		«FOR ns : namespace»
+		namespace «ns» {
+		«ENDFOR»
+		«ENDIF»
 		
 		«usingNamespaces»
 		
@@ -91,6 +100,12 @@ class StatemachineImplementation implements IContentTemplate {
 		«functionImplementations»
 		
 		«additionalFunctions»
+		
+		«IF !namespace.nullOrEmpty»
+		«FOR ns : namespace»
+		}
+		«ENDFOR»
+		«ENDIF»
 	'''
 	}
 	

@@ -16,7 +16,10 @@
       <category name="YAKINDU SCT"/>
    </feature>
    <feature url="features/org.yakindu.base_0.0.0.jar" id="org.yakindu.base" version="0.0.0">
-      <category name="YAKINDU BASE"/>
+      <category name="YAKINDU SCT"/>
+   </feature>
+   <feature url="features/org.yakindu.sct.generator.csharp_0.0.0.jar" id="org.yakindu.sct.generator.csharp" version="0.0.0">
+      <category name="YAKINDU SCT"/>
    </feature>
    <category-def name="YAKINDU SCT" label="YAKINDU SCT">
       <description>
@@ -26,11 +29,6 @@
    <category-def name="YAKINDU SCT Test" label="YAKINDU SCT Test">
       <description>
          Tests of YAKINDU
-      </description>
-   </category-def>
-   <category-def name="YAKINDU BASE" label="YAKINDU BASE">
-      <description>
-         YAKINDU Base features
       </description>
    </category-def>
 </site>

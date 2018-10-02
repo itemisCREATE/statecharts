@@ -45,14 +45,17 @@ import com.google.inject.name.Named;
 
 public class STextExpressionParser implements IExpressionParser {
 
-	public static class LinkingException extends RuntimeException{
+	public static class LinkingException extends RuntimeException {
 		private static final long serialVersionUID = 1L;
+
 		public LinkingException(String msg) {
 			super(msg);
 		}
 	}
-	public static class SyntaxException extends RuntimeException{
+
+	public static class SyntaxException extends RuntimeException {
 		private static final long serialVersionUID = 1L;
+
 		public SyntaxException(String msg) {
 			super(msg);
 		}
@@ -64,7 +67,7 @@ public class STextExpressionParser implements IExpressionParser {
 	private ILinker linker;
 	@Inject
 	private Injector injector;
-	
+
 	@Inject
 	@Named(DomainRegistry.DOMAIN_ID)
 	private String domainId;
@@ -72,11 +75,12 @@ public class STextExpressionParser implements IExpressionParser {
 	public StextResource getResource() {
 		final StextResource resource = new StextResource();
 		injector.injectMembers(resource);
-		resource.eAdapters().add(new ContextElementAdapter(new ContextElementAdapter.IContextElementProvider() {
-			public EObject getContextObject() {
+		resource.eAdapters().add(new ContextElementAdapter() {
+			@Override
+			public EObject getElement() {
 				return (EObject) EcoreUtil.getObjectByType(resource.getContents(), SGraphPackage.Literals.STATECHART);
 			}
-		}));
+		});
 		ResourceSet set = new ResourceSetImpl();
 		set.getResources().add(resource);
 		return resource;

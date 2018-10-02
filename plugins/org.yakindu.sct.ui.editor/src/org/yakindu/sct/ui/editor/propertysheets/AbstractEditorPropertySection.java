@@ -45,7 +45,6 @@ import org.yakindu.base.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
-import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementProvider;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 
 import com.google.inject.Injector;
@@ -55,8 +54,7 @@ import com.google.inject.Injector;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public abstract class AbstractEditorPropertySection extends AbstractModelerPropertySection
-		implements IContextElementProvider {
+public abstract class AbstractEditorPropertySection extends AbstractModelerPropertySection {
 
 	public abstract void createControls(Composite parent);
 
@@ -75,10 +73,6 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 	@Override
 	public void refresh() {
 		super.refresh();
-		if (bindingContext != null)
-			bindingContext.dispose();
-		bindingContext = new ValidatingEMFDatabindingContext(this, form.getShell());
-		bindModel(bindingContext);
 	}
 
 	@Override
@@ -88,6 +82,22 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 			bindingContext.dispose();
 		if (toolkit != null)
 			toolkit.dispose();
+	}
+
+	@Override
+	protected void setEObject(EObject newValue) {
+		EObject oldValue = getEObject();
+		super.setEObject(newValue);
+		if (newValue != null && newValue != oldValue) {
+			inputChanged();
+		}
+	}
+	
+	protected void inputChanged() {
+		if (bindingContext != null)
+			bindingContext.dispose();
+		bindingContext = new ValidatingEMFDatabindingContext(getEObject(), form.getShell());
+		bindModel(bindingContext);
 	}
 
 	@Override
@@ -114,7 +124,8 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 
 	protected void enableXtext(Control styledText, Injector injector) {
 		final StyledTextXtextAdapter xtextAdapter = new StyledTextXtextAdapter(injector);
-		xtextAdapter.getFakeResourceContext().getFakeResource().eAdapters().add(new ContextElementAdapter(this));
+		xtextAdapter.getFakeResourceContext().getFakeResource().eAdapters()
+				.add(new ContextElementAdapter(getEObject()));
 		xtextAdapter.adapt((StyledText) styledText);
 
 		initContextMenu(styledText);

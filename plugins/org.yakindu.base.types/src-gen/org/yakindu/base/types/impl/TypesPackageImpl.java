@@ -254,7 +254,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		if (isInited) return (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
 
 		// Obtain or create and register package
-		TypesPackageImpl theTypesPackage = (TypesPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TypesPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TypesPackageImpl());
+		Object registeredTypesPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		TypesPackageImpl theTypesPackage = registeredTypesPackage instanceof TypesPackageImpl ? (TypesPackageImpl)registeredTypesPackage : new TypesPackageImpl();
 
 		isInited = true;
 
@@ -270,7 +271,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		// Mark meta-data to indicate it can't be changed
 		theTypesPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(TypesPackage.eNS_URI, theTypesPackage);
 		return theTypesPackage;
@@ -356,6 +356,15 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDeclaration_Static() {
+		return (EAttribute)declarationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -404,15 +413,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 */
 	public EAttribute getProperty_Readonly() {
 		return (EAttribute)propertyEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getProperty_External() {
-		return (EAttribute)propertyEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -844,6 +844,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		createEReference(typeEClass, TYPE__SUPER_TYPES);
 
 		declarationEClass = createEClass(DECLARATION);
+		createEAttribute(declarationEClass, DECLARATION__STATIC);
 
 		operationEClass = createEClass(OPERATION);
 		createEReference(operationEClass, OPERATION__PARAMETERS);
@@ -852,7 +853,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		propertyEClass = createEClass(PROPERTY);
 		createEAttribute(propertyEClass, PROPERTY__CONST);
 		createEAttribute(propertyEClass, PROPERTY__READONLY);
-		createEAttribute(propertyEClass, PROPERTY__EXTERNAL);
 
 		parameterEClass = createEClass(PARAMETER);
 		createEReference(parameterEClass, PARAMETER__OWNING_OPERATION);
@@ -964,7 +964,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		parameterEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		parameterEClass.getESuperTypes().add(this.getAnnotatableElement());
 		eventEClass.getESuperTypes().add(this.getDeclaration());
-		enumerationTypeEClass.getESuperTypes().add(this.getPrimitiveType());
+		enumerationTypeEClass.getESuperTypes().add(this.getComplexType());
 		primitiveTypeEClass.getESuperTypes().add(this.getType());
 		complexTypeEClass.getESuperTypes().add(this.getType());
 		complexTypeEClass.getESuperTypes().add(this.getGenericElement());
@@ -988,11 +988,12 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEReference(getType_Constraint(), this.getTypeConstraint(), null, "constraint", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getType_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getType_Visible(), ecorePackage.getEBoolean(), "visible", "true", 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getType_SuperTypes(), this.getType(), null, "superTypes", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getType_SuperTypes(), this.getTypeSpecifier(), null, "superTypes", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(typeEClass, this.getType(), "getOriginType", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(declarationEClass, Declaration.class, "Declaration", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDeclaration_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, Declaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOperation_Parameters(), this.getParameter(), this.getParameter_OwningOperation(), "parameters", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1003,7 +1004,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEClass(propertyEClass, Property.class, "Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getProperty_Const(), ecorePackage.getEBoolean(), "const", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getProperty_Readonly(), ecorePackage.getEBoolean(), "readonly", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getProperty_External(), ecorePackage.getEBoolean(), "external", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getParameter_OwningOperation(), this.getOperation(), this.getOperation_Parameters(), "owningOperation", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

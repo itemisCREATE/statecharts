@@ -19,7 +19,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.yakindu.base.types.TypesFactory;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
@@ -150,7 +150,30 @@ public class ImportScopeItemProvider extends StatechartScopeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.IMPORT_SCOPE__IMPORTS,
-				 TypesFactory.eINSTANCE.createPackage()));
+				 ""));
+	}
+
+		/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == SGraphPackage.Literals.SCOPE__DECLARATIONS ||
+			childFeature == SGraphPackage.Literals.SCOPE__MEMBERS;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

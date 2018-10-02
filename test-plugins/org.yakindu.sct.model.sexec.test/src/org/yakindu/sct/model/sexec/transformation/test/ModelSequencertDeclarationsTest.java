@@ -52,6 +52,8 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
+
+import com.google.common.collect.Sets;
 public class ModelSequencertDeclarationsTest extends ModelSequencerTest {
 
 	/**
@@ -60,7 +62,7 @@ public class ModelSequencertDeclarationsTest extends ModelSequencerTest {
 	@Test
 	public void testScopeName() {
 		InterfaceScope scope = _createInterfaceScope("abc", null);
-		assertEquals(scope.getName(), ((InterfaceScope) structureMapping.mapScope(scope)).getName());
+		assertEquals(scope.getName(), ((InterfaceScope) structureMapping.mapScope(scope, Sets.newHashSet())).getName());
 	}
 
 	/**
@@ -69,7 +71,7 @@ public class ModelSequencertDeclarationsTest extends ModelSequencerTest {
 	@Test
 	public void testMapEmptyInternalScope() {
 		InternalScope scope = _createInternalScope(null);
-		Scope _scope = structureMapping.mapScope(scope);
+		Scope _scope = structureMapping.mapScope(scope, Sets.newHashSet());
 
 		assertTrue(_scope instanceof InternalScope);
 	}
@@ -83,7 +85,7 @@ public class ModelSequencertDeclarationsTest extends ModelSequencerTest {
 		EventDefinition e2 = _createEventDefinition("e2", scope);
 		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, scope);
 
-		Scope _scope = structureMapping.mapScope(scope);
+		Scope _scope = structureMapping.mapScope(scope, Sets.newHashSet());
 
 		assertTrue(_scope instanceof InterfaceScope);
 		assertEquals(3, _scope.getDeclarations().size());

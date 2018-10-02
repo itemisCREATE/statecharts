@@ -111,12 +111,13 @@ public class CreationWizard extends Wizard implements INewWizard {
 	}
 
 	protected void initDomainWizardPage() {
-		domainWizardPage = new DomainWizardPage("DomainWizard");
-		domainWizardPage.setTitle("Select Statechart Domain");
-		domainWizardPage.setDescription("Select the domain you want to create a statechart for.");
-		domainWizardPage.setImageDescriptor(StatechartImages.LOGO.imageDescriptor());
-		if (DomainRegistry.getDomains().size() > 1)
+		if (DomainRegistry.getDomains().size() > 1) {
+			domainWizardPage = new DomainWizardPage("DomainWizard");
+			domainWizardPage.setTitle("Select Statechart Domain");
+			domainWizardPage.setDescription("Select the domain you want to create a statechart for.");
+			domainWizardPage.setImageDescriptor(StatechartImages.LOGO.imageDescriptor());
 			addPage(domainWizardPage);
+		}
 	}
 
 	public static class DiagramCreationDesccription {

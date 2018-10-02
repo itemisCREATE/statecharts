@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.generator.genmodel.ui.contentassist;
 
+import java.util.Optional;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
@@ -35,12 +37,12 @@ public class SGenProposalProvider extends AbstractSGenProposalProvider {
 
 		GeneratorModel generatorModel = EcoreUtil2.getContainerOfType(model,
 				GeneratorModel.class);
-		IGeneratorDescriptor descriptor = GeneratorExtensions
+		Optional<IGeneratorDescriptor> descriptor = GeneratorExtensions
 				.getGeneratorDescriptor(generatorModel.getGeneratorId());
-		if (descriptor == null)
+		if (!descriptor.isPresent())
 			return;
 		ICompletionProposal proposal = createCompletionProposal(
-				descriptor.getContentType(), context);
+				descriptor.get().getContentType(), context);
 		acceptor.accept(proposal);
 	}
 

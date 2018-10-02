@@ -40,7 +40,7 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ITypeSystemInferrer
 
-	private var List<TimeEvent> timeEvents;
+	var List<TimeEvent> timeEvents;
 
 	def private getTimeEvents(TimeEvent it) {
 		if (timeEvents === null) {
@@ -118,7 +118,7 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 		if (it.const) {
 			return getConstContext(it)
 		}
-		if (scope !== null) {
+		if (interfaceScope !== null) {
 			return interfaceScope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""

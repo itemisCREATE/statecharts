@@ -154,7 +154,7 @@ public class DiagramPartitioningUtil {
 	}
 
 	/**
-	 * Opens the {@link StatechartDiagramEditor} for a fiven {@link IFile}
+	 * Opens the {@link StatechartDiagramEditor} for a given {@link IFile}
 	 * 
 	 */
 	public static IEditorPart openEditor(IFile file) {
@@ -212,7 +212,9 @@ public class DiagramPartitioningUtil {
 		EditPart firstPrimary = null;
 		for (Iterator<EditPart> it = editParts.iterator(); it.hasNext();) {
 			EditPart nextPart = it.next();
-			diagramPart.getDiagramGraphicalViewer().appendSelection(nextPart);
+			if (nextPart.isSelectable()) {
+				diagramPart.getDiagramGraphicalViewer().appendSelection(nextPart);
+			}
 			if (firstPrimary == null && nextPart instanceof IPrimaryEditPart) {
 				firstPrimary = nextPart;
 			}

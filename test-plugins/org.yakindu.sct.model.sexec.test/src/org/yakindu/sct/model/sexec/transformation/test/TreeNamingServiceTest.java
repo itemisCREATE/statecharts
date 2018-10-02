@@ -189,7 +189,7 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 
 		// these names are shorter than 15 characters because there are more
 		// elements containing these names, e.g. state actions
-		List<String> expectedNames = new ArrayList<>(Arrays.asList("mgn_SA", "mgn_StteB", "s_SA", "t_SA", "t_SA_AR_SA",
+		List<String> expectedNames = new ArrayList<>(Arrays.asList("mrgn_StA", "mrgn_StteB", "s_SA", "t_SA", "t_SA_AR_SA",
 				"t_SA_AR_StB", "s_SA_AR_SA", "s_SA_AR_StB"));
 
 		ExecutionFlow flow = optimizer.transform(sequencer.transform(toTest));

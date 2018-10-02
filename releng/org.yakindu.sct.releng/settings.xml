@@ -8,11 +8,16 @@
 	<offline />
 	<pluginGroups />
 	<servers>
-		<server>
-			<id>nexus-projects.itemis.de</id>
-			<username>${P2_SERVER_USER}</username>
-			<password>${P2_SERVER_PASSWORD}</password>
-		</server>
+        <server>
+            <id>nexus-projects.itemis.de</id>
+            <username>${P2_SERVER_USER}</username>
+            <password>${P2_SERVER_PASSWORD}</password>
+        </server>
+        <server>
+            <id>yakindu-commons</id>
+            <username>${P2_SERVER_USER}</username>
+            <password>${P2_SERVER_PASSWORD}</password>
+        </server>
 	</servers>
 	<proxies />
 	<profiles />

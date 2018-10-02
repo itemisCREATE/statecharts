@@ -10,12 +10,14 @@
  */
 package org.yakindu.sct.generator.core.execution;
 
+import static org.yakindu.sct.generator.core.GeneratorActivator.PLUGIN_ID;
+
+import java.util.Arrays;
+import java.util.Optional;
+
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.yakindu.base.types.typesystem.AbstractTypeSystem;
-import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.domain.extension.IModuleConfigurator;
@@ -25,6 +27,7 @@ import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -46,42 +49,29 @@ public class GeneratorExecutorLookup {
 		};
 	}
 
-	public void execute(GeneratorModel model) {
+	public IStatus execute(GeneratorModel model) {
 		EList<GeneratorEntry> entries = model.getEntries();
+		ExecutionStatus executionStatus = new ExecutionStatus();
 		for (GeneratorEntry generatorEntry : entries) {
 			final IGeneratorEntryExecutor executor = createExecutor(generatorEntry, model.getGeneratorId());
-			executor.execute(generatorEntry);
+			IStatus status = executor.execute(generatorEntry);
+			executionStatus.merge(status);
 		}
+		return executionStatus;
 	}
 
 	public IGeneratorEntryExecutor createExecutor(GeneratorEntry entry, String generatorId) {
-		IGeneratorDescriptor description = GeneratorExtensions.getGeneratorDescriptor(generatorId);
-		if (description == null)
+		Optional<IGeneratorDescriptor> description = GeneratorExtensions.getGeneratorDescriptor(generatorId);
+		if (!description.isPresent())
 			throw new RuntimeException("No generator registered for ID: " + generatorId);
 		if (entry.getElementRef() == null || entry.getElementRef().eResource() == null) {
 			throw new RuntimeException("Could not resolve reference to model ");
 		}
-		final IGeneratorEntryExecutor executor = description.createExecutor();
+		final IGeneratorEntryExecutor executor = description.get().createExecutor();
 		if (executor == null)
 			throw new RuntimeException("Failed to create generator instance for ID:" + generatorId);
-		Injector injector = createInjector(entry, description, generatorId);
+		Injector injector = createInjector(entry, description.get(), generatorId);
 		injector.injectMembers(executor);
-		ITypeSystem typeSystem = injector.getInstance(ITypeSystem.class);
-		if (typeSystem instanceof AbstractTypeSystem) {
-			ResourceSet set = entry.getElementRef().eResource().getResourceSet();
-			Resource typeSystemResource = ((AbstractTypeSystem) typeSystem).getResource();
-			if (set != null && typeSystemResource != null && !set.getResources().contains(typeSystemResource)) {
-				set.getResources().add(typeSystemResource);
-
-				// XXX: avoid resolving the whole resource set, because there might
-				// be models with different domains, we have to ensure that just the
-				// models related to the current entry are resolved
-				EcoreUtil.resolveAll(entry);
-				EcoreUtil.resolveAll(entry.getElementRef());
-				EcoreUtil.resolveAll(typeSystemResource);
-			}
-		}
-
 		return executor;
 	}
 
@@ -102,5 +92,18 @@ public class GeneratorExecutorLookup {
 			((LazyCombiningModule) module).applyConfigurator(configurator);
 		}
 		return module;
+	}
+
+	private static class ExecutionStatus extends MultiStatus {
+
+		public ExecutionStatus() {
+			super(PLUGIN_ID, IStatus.OK, "", null);
+		}
+
+		@Override
+		public String getMessage() {
+			return String.join("\n", Iterables.transform(Arrays.asList(getChildren()), c -> c.getMessage()));
+		}
+
 	}
 }

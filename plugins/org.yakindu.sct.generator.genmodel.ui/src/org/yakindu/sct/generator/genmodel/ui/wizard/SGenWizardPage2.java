@@ -13,6 +13,7 @@ package org.yakindu.sct.generator.genmodel.ui.wizard;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.TreeMap;
 
 import org.eclipse.core.resources.IFile;
@@ -106,7 +107,7 @@ public class SGenWizardPage2 extends WizardPage {
 		super.setVisible(visible);
 		refreshInput();
 	}
-	
+
 	private void createObjectTree(Composite container) {
 		lblNewLabel = new Label(container, SWT.NONE);
 		lblNewLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
@@ -231,13 +232,16 @@ public class SGenWizardPage2 extends WizardPage {
 			return super.getImage(element);
 		}
 	}
-	
+
 	protected static class SGenWorkspaceLabelProvider extends AbstractWorkspaceLabelProvider {
 
 		protected Image createImageForFile(IFile file) {
 			String generatorID = FileExtensions.getGeneratorForFileExtension(file.getFileExtension());
-			IGeneratorDescriptor genDesc = GeneratorExtensions.getGeneratorDescriptor(generatorID);
-			return PathToImageResolver.toImage(genDesc.getImagePath());
+			Optional<IGeneratorDescriptor> genDesc = GeneratorExtensions.getGeneratorDescriptor(generatorID);
+			if (genDesc.isPresent()) {
+				return PathToImageResolver.toImage(genDesc.get().getImagePath());
+			}
+			return null;
 		}
 
 	}

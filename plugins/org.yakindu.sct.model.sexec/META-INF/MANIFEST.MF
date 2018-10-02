@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Execution Model
 Bundle-SymbolicName: org.yakindu.sct.model.sexec;singleton:=true
-Bundle-Version: 3.4.0.qualifier
+Bundle-Version: 3.4.1.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: statecharts.org
 Bundle-Localization: plugin
@@ -13,6 +13,7 @@ Export-Package: org.yakindu.sct.model.sexec,
  org.yakindu.sct.model.sexec.naming,
  org.yakindu.sct.model.sexec.naming.tree,
  org.yakindu.sct.model.sexec.transformation,
+ org.yakindu.sct.model.sexec.transformation.ng,
  org.yakindu.sct.model.sexec.util
 Require-Bundle: com.google.inject,
  org.eclipse.core.runtime,

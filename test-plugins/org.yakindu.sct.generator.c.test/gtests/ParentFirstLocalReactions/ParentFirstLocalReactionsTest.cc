@@ -5,14 +5,14 @@
 
 #include "sc_timer_service.h"
 
-static long counter = 0l;
+static sc_integer counter = 0l;
+
+static ParentFirstLocalReactions statechart;
 
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static ParentFirstLocalReactions statechart;
-
+			
 class ParentFirstLocalReactionsTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -30,6 +30,7 @@ class ParentFirstLocalReactionsTest : public ::testing::Test{
 
 
 TEST_F(ParentFirstLocalReactionsTest, expectBottomUpLocalReactionOrder) {
+	
 	parentFirstLocalReactions_enter(&statechart);
 	EXPECT_TRUE(parentFirstLocalReactions_isStateActive(&statechart, ParentFirstLocalReactions_ParentFirstLocalReactions_r_A_r_AA_r_AAA));
 	sc_timer_service_proceed_cycles(&timer_service, 1);
@@ -40,6 +41,7 @@ TEST_F(ParentFirstLocalReactionsTest, expectBottomUpLocalReactionOrder) {
 	EXPECT_TRUE(parentFirstLocalReactionsIface_get_aaa_local(&statechart)== 4l);
 }
 TEST_F(ParentFirstLocalReactionsTest, expectParentLocalReactionOnChildLocalTransition) {
+	
 	parentFirstLocalReactions_enter(&statechart);
 	EXPECT_TRUE(parentFirstLocalReactions_isStateActive(&statechart, ParentFirstLocalReactions_ParentFirstLocalReactions_r_A_r_AA_r_AAA));
 	parentFirstLocalReactionsIface_raise_e(&statechart);
@@ -53,6 +55,7 @@ TEST_F(ParentFirstLocalReactionsTest, expectParentLocalReactionOnChildLocalTrans
 	EXPECT_TRUE(parentFirstLocalReactionsIface_get_aaa_local(&statechart)== 0l);
 }
 TEST_F(ParentFirstLocalReactionsTest, expectGrandparentLocalReactionOnParentLocalTransition) {
+	
 	parentFirstLocalReactions_enter(&statechart);
 	EXPECT_TRUE(parentFirstLocalReactions_isStateActive(&statechart, ParentFirstLocalReactions_ParentFirstLocalReactions_r_A_r_AA_r_AAA));
 	parentFirstLocalReactionsIface_set_disable_a(&statechart,true);
@@ -65,6 +68,7 @@ TEST_F(ParentFirstLocalReactionsTest, expectGrandparentLocalReactionOnParentLoca
 	EXPECT_TRUE(parentFirstLocalReactionsIface_get_aaa_local(&statechart)== 0l);
 }
 TEST_F(ParentFirstLocalReactionsTest, expectNoLocalReactionOnGrandparentTransition) {
+	
 	parentFirstLocalReactions_enter(&statechart);
 	EXPECT_TRUE(parentFirstLocalReactions_isStateActive(&statechart, ParentFirstLocalReactions_ParentFirstLocalReactions_r_A_r_AA_r_AAA));
 	parentFirstLocalReactionsIface_set_disable_aaa(&statechart,true);

@@ -56,11 +56,12 @@ import com.google.common.base.Predicates;
 /**
  * @author andreas muelder - Initial contribution and API
  * @author axel terfloth - extensions to predicates
- * 
+ *
  */
 public class ContextPredicateProvider {
 
 	public static class TypePredicate implements Predicate<IEObjectDescription> {
+		@Override
 		public boolean apply(IEObjectDescription input) {
 			EClass eClass = input.getEClass();
 			return TypesPackage.Literals.TYPE.isSuperTypeOf(eClass)
@@ -69,28 +70,29 @@ public class ContextPredicateProvider {
 	}
 
 	public static class FeaturedTypePredicate implements Predicate<IEObjectDescription> {
+		@Override
 		public boolean apply(IEObjectDescription input) {
 			EClass eClass = input.getEClass();
-			
-			return (SGraphPackage.Literals.SCOPE.isSuperTypeOf(eClass)); 
+
+			return (SGraphPackage.Literals.SCOPE.isSuperTypeOf(eClass));
 		}
 	}
 
 	protected static EClass getVariableType(IEObjectDescription ieod) {
-		 EObject eObj = ieod.getEObjectOrProxy();
-		 if (eObj != null && (! eObj.eIsProxy()) ) {
-			 EObject eTS = (EObject) eObj.eGet(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER, false);
-			 if (eTS != null && (! eTS.eIsProxy())) {
-				 EObject eT = (EObject) eObj.eGet(TypesPackage.Literals.TYPE_SPECIFIER__TYPE, false);
-				 if (eT != null) {
-					 return eT.eClass();
-				 }
-			 }
-		 }
-		 return TypesPackage.Literals.TYPE;
+		EObject eObj = ieod.getEObjectOrProxy();
+		if (eObj != null && (! eObj.eIsProxy()) ) {
+			EObject eTS = (EObject) eObj.eGet(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER, false);
+			if (eTS != null && (! eTS.eIsProxy())) {
+				EObject eT = (EObject) eObj.eGet(TypesPackage.Literals.TYPE_SPECIFIER__TYPE, false);
+				if (eT != null) {
+					return eT.eClass();
+				}
+			}
+		}
+		return TypesPackage.Literals.TYPE;
 	}
-	
-	
+
+
 	public static class EventPredicate extends FeaturedTypePredicate {
 		@Override
 		public boolean apply(IEObjectDescription input) {
@@ -137,24 +139,25 @@ public class ContextPredicateProvider {
 
 	public static class EmptyPredicate implements Predicate<IEObjectDescription> {
 
+		@Override
 		public boolean apply(IEObjectDescription input) {
 			return true;
 		}
 
 	}
 
-	private static final EmptyPredicate EMPTY_PREDICATE = new EmptyPredicate();
-	private static final VariablePredicate VARIABLES = new VariablePredicate();
-	private static final EventPredicate EVENTS = new EventPredicate();
-	private static final VariableOperationPredicate VARIABLES_AND_OPERATIONS = new VariableOperationPredicate();
-	private static final VariableOperationEventEnumeratorPredicate VARIABLES_OPERATIONS_EVENTS_ENUMERATORS = new VariableOperationEventEnumeratorPredicate();
-	private static final TypePredicate TYPES = new TypePredicate();
-	private static final Predicate<IEObjectDescription> ALL = Predicates.<IEObjectDescription> alwaysTrue();
+	protected static final EmptyPredicate EMPTY_PREDICATE = new EmptyPredicate();
+	protected static final VariablePredicate VARIABLES = new VariablePredicate();
+	protected static final EventPredicate EVENTS = new EventPredicate();
+	protected static final VariableOperationPredicate VARIABLES_AND_OPERATIONS = new VariableOperationPredicate();
+	protected static final VariableOperationEventEnumeratorPredicate VARIABLES_OPERATIONS_EVENTS_ENUMERATORS = new VariableOperationEventEnumeratorPredicate();
+	protected static final TypePredicate TYPES = new TypePredicate();
+	protected static final Predicate<IEObjectDescription> ALL = Predicates.<IEObjectDescription> alwaysTrue();
 
 	protected final Map<Pair<EClass, EReference>, Predicate<IEObjectDescription>> filter;
 
 	public ContextPredicateProvider() {
-		filter = new HashMap<Pair<EClass, EReference>, Predicate<IEObjectDescription>>();
+		filter = new HashMap<>();
 		initMap();
 	}
 

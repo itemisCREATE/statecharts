@@ -6,12 +6,16 @@
 #include "sc_timer_service.h"
 
 
+void initForEventE(sc_boolean valueForC);
+void initForEventF(sc_boolean valueForC);
+void initForEventG(sc_boolean valueForC);
+void initForEventH(sc_boolean valueForC);
+static Choice statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static Choice statechart;
-
+			
 class ChoiceTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -27,28 +31,28 @@ class ChoiceTest : public ::testing::Test{
 	}
 };
 
-void initForEventE(bool valueForC){
+void initForEventE(sc_boolean valueForC){
 	choice_enter(&statechart);
 	EXPECT_TRUE(choice_isStateActive(&statechart, Choice_main_region_A));
 	choiceIface_set_c(&statechart,valueForC);
 	choiceIface_raise_e(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 }
-void initForEventF(bool valueForC){
+void initForEventF(sc_boolean valueForC){
 	choice_enter(&statechart);
 	EXPECT_TRUE(choice_isStateActive(&statechart, Choice_main_region_A));
 	choiceIface_set_c(&statechart,valueForC);
 	choiceIface_raise_f(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 }
-void initForEventG(bool valueForC){
+void initForEventG(sc_boolean valueForC){
 	choice_enter(&statechart);
 	EXPECT_TRUE(choice_isStateActive(&statechart, Choice_main_region_A));
 	choiceIface_set_c(&statechart,valueForC);
 	choiceIface_raise_g(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 }
-void initForEventH(bool valueForC){
+void initForEventH(sc_boolean valueForC){
 	choice_enter(&statechart);
 	EXPECT_TRUE(choice_isStateActive(&statechart, Choice_main_region_A));
 	choiceIface_set_c(&statechart,valueForC);
@@ -57,30 +61,37 @@ void initForEventH(bool valueForC){
 }
 
 TEST_F(ChoiceTest, elseChoiceUsingNonDefaultTransition) {
+	
 	initForEventE(true);
 	EXPECT_TRUE(choice_isStateActive(&statechart, Choice_main_region_C));
 }
 TEST_F(ChoiceTest, elseChoiceUsingDefaultTransition) {
+	
 	initForEventE(false);
 	EXPECT_TRUE(choice_isStateActive(&statechart, Choice_main_region_B));
 }
 TEST_F(ChoiceTest, defaultChoiceUsingNonDefaultTransition) {
+	
 	initForEventG(true);
 	EXPECT_TRUE(choice_isStateActive(&statechart, Choice_main_region_C));
 }
 TEST_F(ChoiceTest, defaultChoiceUsingDefaultTransition) {
+	
 	initForEventG(false);
 	EXPECT_TRUE(choice_isStateActive(&statechart, Choice_main_region_B));
 }
 TEST_F(ChoiceTest, uncheckedChoiceUsingNonDefaultTransition) {
+	
 	initForEventF(true);
 	EXPECT_TRUE(choice_isStateActive(&statechart, Choice_main_region_C));
 }
 TEST_F(ChoiceTest, uncheckedChoiceUsingDefaultTransition) {
+	
 	initForEventF(false);
 	EXPECT_TRUE(choice_isStateActive(&statechart, Choice_main_region_B));
 }
 TEST_F(ChoiceTest, alwaysTrueTransitionInChoice) {
+	
 	initForEventH(true);
 	EXPECT_TRUE(choice_isStateActive(&statechart, Choice_main_region_C));
 }

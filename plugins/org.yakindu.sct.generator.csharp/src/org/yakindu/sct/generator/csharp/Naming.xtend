@@ -102,7 +102,7 @@ class Naming implements CSharpKeywords {
 		} else {
 			return "SCInterface";
 		}
-	}
+	} 
 
 	def dispatch getSymbol(VariableDefinition it) {
 		name.asEscapedIdentifier

@@ -127,13 +127,21 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 		if (injector != null) {
 			textControl = new StyledText(parent, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
 			((StyledText) textControl).setAlwaysShowScrollBars(false);
-			enableXtext(textControl, injector);
 			createHelpWidget(parent, textControl, HelpContextIds.SC_PROPERTIES_STATECHART_EXPRESSION);
 		} else {
 			textControl = getToolkit().createText(parent, "", SWT.MULTI);
 		}
 		GridDataFactory.fillDefaults().span(2, 1).applyTo(lblDocumentation);
 		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize()).applyTo(textControl);
+	}
+
+	@Override
+	protected void inputChanged() {
+		Injector injector = getInjector(Statechart.class.getName());
+		if (injector != null) {
+			enableXtext(textControl, injector);
+		}
+		super.inputChanged();
 	}
 
 	@Override
@@ -168,7 +176,7 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 	protected void bindDocumentationControl(EMFDataBindingContext context) {
 		IEMFValueProperty property = EMFEditProperties.value(TransactionUtil.getEditingDomain(eObject),
 				BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION);
-		ISWTObservableValue observe = WidgetProperties.text(new int[]{SWT.FocusOut, SWT.DefaultSelection})
+		ISWTObservableValue observe = WidgetProperties.text(new int[] { SWT.FocusOut, SWT.DefaultSelection })
 				.observe(documentation);
 		context.bindValue(observe, property.observe(eObject));
 	}
@@ -191,7 +199,7 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 	protected void bindNameControl(EMFDataBindingContext context) {
 		IEMFValueProperty property = EMFEditProperties.value(TransactionUtil.getEditingDomain(eObject),
 				BasePackage.Literals.NAMED_ELEMENT__NAME);
-		ISWTObservableValue observe = WidgetProperties.text(new int[]{SWT.FocusOut, SWT.DefaultSelection})
+		ISWTObservableValue observe = WidgetProperties.text(new int[] { SWT.FocusOut, SWT.DefaultSelection })
 				.observe(txtName);
 		context.bindValue(observe, property.observe(eObject));
 	}

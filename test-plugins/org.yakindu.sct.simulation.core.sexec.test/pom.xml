@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.yakindu.sct</groupId>
 		<artifactId>org.yakindu.sct.releng</artifactId>
-		<version>3.4.0-SNAPSHOT</version>
+		<version>3.4.1-SNAPSHOT</version>
 		<relativePath>../../releng/org.yakindu.sct.releng/pom.xml</relativePath>
 	</parent>
 	<artifactId>org.yakindu.sct.simulation.core.sexec.test</artifactId>
@@ -19,18 +19,9 @@
 				<artifactId>tycho-surefire-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
-
 					<includes>
 						<include>**/AllTests.class</include>
-						<include>**/CoreFunctionTest.class</include>
-						<include>**/STextInterpreterTest.class</include>
 					</includes>
-
-					<excludes>
-						<exclude>**/util/TestModels.class</exclude>
-						<!-- It's toooo slow in the interpreter -->
-						<exclude>**/PerformanceTestTest.class</exclude>
-					</excludes>
 					<useUIHarness>false</useUIHarness>
 					<useUIThread>false</useUIThread>
 					<testFailureIgnore>${testFailureIgnore}</testFailureIgnore>

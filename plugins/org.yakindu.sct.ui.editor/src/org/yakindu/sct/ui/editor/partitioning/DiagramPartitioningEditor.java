@@ -17,6 +17,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
@@ -116,6 +117,14 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor
 					+ "This is not supported. Please import the file into a project instead.");
 		}
 		super.init(site, input);
+	}
+	
+	public void doSetInput(IEditorInput input, boolean releaseEditorContents) throws CoreException {
+		try {
+			super.doSetInput(input, releaseEditorContents);
+		} catch (Exception ex) {
+			throw new RuntimeException(ex);
+		}
 	}
 
 	@SuppressWarnings("rawtypes")

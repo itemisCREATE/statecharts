@@ -10,6 +10,13 @@
  */
 package org.yakindu.sct.model.stext.scoping;
 
+import static org.yakindu.sct.model.stext.scoping.SharedEditingDomainFactory.DOMAIN_ID;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -21,7 +28,6 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import static org.yakindu.sct.model.stext.scoping.SharedEditingDomainFactory.*;
 
 /**
  * 
@@ -39,6 +45,7 @@ public class ImportedResourceCache {
 	}
 
 	public IResourceDescription get(final URI uri) {
+		refreshFile(uri);
 		try {
 			return (IResourceDescription) getEditingDomain()
 					.runExclusive(new RunnableWithResult.Impl<IResourceDescription>() {
@@ -64,6 +71,24 @@ public class ImportedResourceCache {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	/**
+	 * Refresh local file to avoid deadlock with scheduling rule XtextBuilder ->
+	 * Editing Domain runexclusive
+	 */
+	protected void refreshFile(final URI uri) {
+		String platformString = uri.toPlatformString(true);
+		if (platformString == null)
+			return;
+		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(platformString));
+		if (file.isAccessible() && !file.isSynchronized(IResource.DEPTH_INFINITE)) {
+			try {
+				file.refreshLocal(IResource.DEPTH_INFINITE, null);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

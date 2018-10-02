@@ -6,12 +6,13 @@
 #include "sc_timer_service.h"
 
 
+void init();
+static HistoryWithoutInitialStep statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static HistoryWithoutInitialStep statechart;
-
+			
 class HistoryWithoutInitialStepTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -35,6 +36,7 @@ void init(){
 }
 
 TEST_F(HistoryWithoutInitialStepTest, enterThroughInitialEntry) {
+	
 	init();
 	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&statechart, HistoryWithoutInitialStep_main_region_B_r1_C));
 	historyWithoutInitialStepIface_raise_next(&statechart);
@@ -42,6 +44,7 @@ TEST_F(HistoryWithoutInitialStepTest, enterThroughInitialEntry) {
 	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&statechart, HistoryWithoutInitialStep_main_region_B_r1_D));
 }
 TEST_F(HistoryWithoutInitialStepTest, enterCThroughHistory) {
+	
 	init();
 	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&statechart, HistoryWithoutInitialStep_main_region_B_r1_C));
 	historyWithoutInitialStepIface_raise_toA(&statechart);
@@ -52,6 +55,7 @@ TEST_F(HistoryWithoutInitialStepTest, enterCThroughHistory) {
 	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&statechart, HistoryWithoutInitialStep_main_region_B_r1_C));
 }
 TEST_F(HistoryWithoutInitialStepTest, enterDThroughHistory) {
+	
 	init();
 	historyWithoutInitialStepIface_raise_next(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);

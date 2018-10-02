@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static InEventLifeCycle statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static InEventLifeCycle statechart;
-
+			
 class InEventLifeCycleTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class InEventLifeCycleTest : public ::testing::Test{
 
 
 TEST_F(InEventLifeCycleTest, eventLifeCycle) {
+	
 	inEventLifeCycle_enter(&statechart);
 	inEventLifeCycleIface_raise_e(&statechart);
 	EXPECT_TRUE(inEventLifeCycleIface_get_i(&statechart)== 0l);

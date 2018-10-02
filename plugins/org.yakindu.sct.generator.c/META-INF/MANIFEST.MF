@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU C Generator
 Bundle-SymbolicName: org.yakindu.sct.generator.c;singleton:=true
-Bundle-Version: 3.4.0.qualifier
+Bundle-Version: 3.4.1.qualifier
 Require-Bundle: org.yakindu.sct.model.sexec,
  org.yakindu.sct.model.stext,
  org.yakindu.sct.generator.core,
@@ -14,5 +14,8 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.yakindu.sct.generator.c,
  org.yakindu.sct.generator.c.extensions,
  org.yakindu.sct.generator.c.features,
+ org.yakindu.sct.generator.c.files,
+ org.yakindu.sct.generator.c.submodules,
+ org.yakindu.sct.generator.c.submodules.eventdriven,
  org.yakindu.sct.generator.c.types
 Bundle-Vendor: statecharts.org

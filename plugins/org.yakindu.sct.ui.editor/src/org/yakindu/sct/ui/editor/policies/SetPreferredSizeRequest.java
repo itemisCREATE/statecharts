@@ -15,6 +15,7 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.render.editparts.RenderedDiagramRootEditPart;
 
 /**
  * Extends {@link ChangeBoundsRequest} to calculate the preferred size delta.
@@ -27,10 +28,13 @@ public class SetPreferredSizeRequest extends ChangeBoundsRequest {
 	public SetPreferredSizeRequest(IGraphicalEditPart host) {
 		super(RequestConstants.REQ_RESIZE);
 		setEditParts(host);
+		double zoom = ((RenderedDiagramRootEditPart) host.getRoot()).getZoomManager().getZoom();
 		IFigure figure = host.getFigure();
-		Dimension prefSize = figure.getLayoutManager().getPreferredSize(figure, -1, -1);
-		Dimension currentSize = figure.getSize();
-		setSizeDelta(new Dimension(prefSize.width - currentSize.width, prefSize.height - currentSize.height));
+		Dimension prefSize = figure.getLayoutManager().getPreferredSize(figure, -1, -1).getCopy().scale(zoom);
+		Dimension currentSize = figure.getSize().scale(zoom);
+		Dimension newDimension = new Dimension(prefSize.width - currentSize.width,
+				prefSize.height - currentSize.height);
+		setSizeDelta(newDimension);
 	}
 
 }

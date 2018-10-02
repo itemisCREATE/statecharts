@@ -209,6 +209,21 @@ public class SequenceItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.SEQUENCE__STEPS,
+				 SexecFactory.eINSTANCE.createReturn()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SEQUENCE__STEPS,
+				 SexecFactory.eINSTANCE.createLocalVariableDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SEQUENCE__STEPS,
+				 SexecFactory.eINSTANCE.createStatement()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SEQUENCE__STEPS,
 				 SexecFactory.eINSTANCE.createTraceNodeExecuted()));
 
 		newChildDescriptors.add

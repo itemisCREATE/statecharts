@@ -10,6 +10,10 @@
  */
 package org.yakindu.sct.generator.builder.action;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
@@ -50,15 +54,15 @@ public class GenerateModelAction implements IObjectActionDelegate {
 	}
 
 	public void run(IAction action) {
-		IFile file = unwrap();
-
-		if (hasError(file)) {
-			Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-			ErrorDialog.openError(shell, "Generator Error", "Cannot execute Generator",
-					new Status(IStatus.ERROR, GeneratorActivator.PLUGIN_ID, "The file contains errors"));
-			return;
-		}
-		generatorExecutor.executeGenerator(file);
+		unwrap().forEach(file -> {
+			if (hasError(file)) {
+				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+				ErrorDialog.openError(shell, "Generator Error", "Cannot execute Generator",
+						new Status(IStatus.ERROR, GeneratorActivator.PLUGIN_ID, "The file contains errors"));
+			} else {
+				generatorExecutor.executeGenerator(file);
+			}
+		});
 	}
 
 	private boolean hasError(IFile file) {
@@ -99,14 +103,12 @@ public class GenerateModelAction implements IObjectActionDelegate {
 		return false;
 	}
 
-	private IFile unwrap() {
+	private List<IFile> unwrap() {
 		if (selection instanceof StructuredSelection) {
-			Object firstElement = ((StructuredSelection) selection).getFirstElement();
-			if (firstElement instanceof IFile) {
-				return (IFile) firstElement;
-			}
+			List<Object> list = ((StructuredSelection) selection).toList();
+			return list.stream().filter(e -> e instanceof IFile).map(e -> (IFile) e).collect(Collectors.toList());
 		}
-		return null;
+		return Collections.emptyList();
 	}
 
 	public void selectionChanged(IAction action, ISelection selection) {

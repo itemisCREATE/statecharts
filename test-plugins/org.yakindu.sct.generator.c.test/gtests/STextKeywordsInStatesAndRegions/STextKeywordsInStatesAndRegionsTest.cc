@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static STextKeywordsInStatesAndRegions statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static STextKeywordsInStatesAndRegions statechart;
-
+			
 class STextKeywordsInStatesAndRegionsTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class STextKeywordsInStatesAndRegionsTest : public ::testing::Test{
 
 
 TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
+	
 	sTextKeywordsInStatesAndRegions_enter(&statechart);
 	EXPECT_TRUE(sTextKeywordsInStatesAndRegions_isStateActive(&statechart, STextKeywordsInStatesAndRegions_default_namespace));
 	EXPECT_TRUE(sTextKeywordsInStatesAndRegions_isStateActive(&statechart, STextKeywordsInStatesAndRegions_operation_interface));

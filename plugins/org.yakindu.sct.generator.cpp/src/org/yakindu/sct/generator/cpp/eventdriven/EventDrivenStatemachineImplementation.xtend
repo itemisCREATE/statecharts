@@ -45,6 +45,15 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 		'''using namespace «eventNamespaceName»;'''
 	}
 	
+	override protected initialisationList(ExecutionFlow it) {
+		'''
+			«IF timed»«timerInstance»(null),«ENDIF»
+			stateConfVectorPosition(0)«FOR s : getInterfaces»,
+			«s.instance»(this)«IF s.hasOperations && !entry.useStaticOPC»,
+			«s.OCB_Instance»(null)«ENDIF»«ENDFOR»
+		'''
+	}
+	
 	
 	override raiseTimeEventFunction(ExecutionFlow it) '''
 		void «module»::«raiseTimeEventFctID»(sc_eventid evid)
@@ -97,28 +106,7 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 			return nextEvent;
 		}
 		'''
-	}
-	
-	override constructorDefinition(ExecutionFlow it) {
-	val List<String> toInit = newArrayList
-	toInit.addAll(getInterfaces.map[instance].map[i|'''«i»(this)'''])
-	'''
-		«module»::«module»() :
-			«FOR init : toInit SEPARATOR ","»
-				«init»
-			«ENDFOR»
-		{
-			«constructorBody(it)»
-		}
-	'''
-	}
-	
-	override constructorBody(ExecutionFlow it)
-		'''
-		«super.constructorBody(it)»
-		
-		'''
-	
+	}	
 	
 	def generateInterfaceDispatchFunctions(ExecutionFlow it) {
 		'''

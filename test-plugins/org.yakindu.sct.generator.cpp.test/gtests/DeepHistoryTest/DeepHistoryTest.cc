@@ -7,6 +7,8 @@
 
 namespace  {
 
+DeepHistory* statechart;
+
 
 
 //! The timers are managed by a timer service. */
@@ -14,9 +16,6 @@ static SctUnitRunner * runner;
 
 class DeepHistoryTest : public ::testing::Test{
 	protected:
-	
-	DeepHistory* statechart;
-	
 	virtual void SetUp() {
 		statechart = new DeepHistory();
 		statechart->init();
@@ -30,51 +29,51 @@ class DeepHistoryTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
-	
-	
 };
 
-	TEST_F(DeepHistoryTest, deepHistoryTest) {
-		
-		statechart->enter();
-		
-		statechart->getDefaultSCI()->raise_event1();
-		
-		runner->proceed_cycles(1);
-		
-		statechart->getDefaultSCI()->raise_event3();
-		
-		runner->proceed_cycles(1);
-		
-		statechart->getDefaultSCI()->raise_event5();
-		
-		runner->proceed_cycles(1);
-		
-		statechart->getDefaultSCI()->raise_event7();
-		
-		runner->proceed_cycles(1);
-		
-		EXPECT_TRUE(!statechart->isStateActive(DeepHistory::mainRegion_State1));
-		
-		EXPECT_TRUE(statechart->isStateActive(DeepHistory::mainRegion_State2__region0_State4__region0_State7__region0_State9));
-		
-		statechart->getDefaultSCI()->raise_event2();
-		
-		runner->proceed_cycles(1);
-		
-		EXPECT_TRUE(statechart->isStateActive(DeepHistory::mainRegion_State1));
-		
-		EXPECT_TRUE(!statechart->isStateActive(DeepHistory::mainRegion_State2__region0_State4__region0_State7__region0_State9));
-		
-		statechart->getDefaultSCI()->raise_event1();
-		
-		runner->proceed_cycles(1);
-		
-		EXPECT_TRUE(!statechart->isStateActive(DeepHistory::mainRegion_State1));
-		
-		EXPECT_TRUE(statechart->isStateActive(DeepHistory::mainRegion_State2__region0_State4__region0_State7__region0_State9));
-		
-		
+
+TEST_F(DeepHistoryTest, deepHistoryTest) {
+	
+	statechart->enter();
+	
+	statechart->getDefaultSCI()->raise_event1();
+	
+	runner->proceed_cycles(1);
+	
+	statechart->getDefaultSCI()->raise_event3();
+	
+	runner->proceed_cycles(1);
+	
+	statechart->getDefaultSCI()->raise_event5();
+	
+	runner->proceed_cycles(1);
+	
+	statechart->getDefaultSCI()->raise_event7();
+	
+	runner->proceed_cycles(1);
+	
+	EXPECT_TRUE(!statechart->isStateActive(DeepHistory::mainRegion_State1));
+	
+	EXPECT_TRUE(statechart->isStateActive(DeepHistory::mainRegion_State2__region0_State4__region0_State7__region0_State9));
+	
+	statechart->getDefaultSCI()->raise_event2();
+	
+	runner->proceed_cycles(1);
+	
+	EXPECT_TRUE(statechart->isStateActive(DeepHistory::mainRegion_State1));
+	
+	EXPECT_TRUE(!statechart->isStateActive(DeepHistory::mainRegion_State2__region0_State4__region0_State7__region0_State9));
+	
+	statechart->getDefaultSCI()->raise_event1();
+	
+	runner->proceed_cycles(1);
+	
+	EXPECT_TRUE(!statechart->isStateActive(DeepHistory::mainRegion_State1));
+	
+	EXPECT_TRUE(statechart->isStateActive(DeepHistory::mainRegion_State2__region0_State4__region0_State7__region0_State9));
+	
+	
 }
+
 
 }

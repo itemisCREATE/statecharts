@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static CastExpressions statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static CastExpressions statechart;
-
+			
 class CastExpressionsTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class CastExpressionsTest : public ::testing::Test{
 
 
 TEST_F(CastExpressionsTest, CastExpressionTest) {
+	
 	castExpressions_enter(&statechart);
 	EXPECT_TRUE(castExpressionsIface_get_realValue(&statechart)== 5l);
 	EXPECT_TRUE(castExpressionsIface_get_intValue(&statechart)== 5l);

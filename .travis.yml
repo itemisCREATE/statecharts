@@ -17,6 +17,7 @@ cache:
   - $HOME/.m2
 env:
   global:
+  - SWT_GTK3=0
   - DISPLAY=:99.0
   - GTEST_DIR=${TRAVIS_BUILD_DIR}/googletest-release-1.8.0/googletest
   - LIBRARY_PATH=${TRAVIS_BUILD_DIR}/googletest-release-1.8.0/googletest/build:${TRAVIS_BUILD_DIR}/googletest-release-1.8.0/googlemock/build:$LIBRARY_PATH
@@ -26,9 +27,9 @@ env:
   # via the "travis encrypt" command using the project repo's public key
   - secure: "e6AtFe0HJAHRdmzp4uXx4b+xZaEUUd2jeYiLdIkYuRa84op9iSzCmPj5uT3Vkvqps5snBrDx47Wl1EO9rl+Z91WYp1JgTT5Ek37SKj/ikhJ0HfAYBycU/MRTMO5wXEfwL29G0gjygzFxlUe7t/Y92M/VsvlEQ9nHrtqJ4hQA968="
   matrix:
-  - TARGET=Mars.target
   - TARGET=Neon.target
   - TARGET=Oxygen.target
+  - TARGET=Photon.target
 before_script:
  - wget https://github.com/google/googletest/archive/release-1.8.0.zip
  - unzip release-1.8.0.zip
@@ -46,17 +47,3 @@ before_install:
 script:
 - cd releng/org.yakindu.sct.releng
 - mvn clean verify -P$TARGET,tests
-- cd ../org.yakindu.sct.repository/target
-- zip -r updatesite.zip repository
-- cd $TRAVIS_BUILD_DIR
-deploy:
-  skip_cleanup: true
-  provider: releases
-  api_key: 
-   secure: f48bN42ninJcN0yp8T9DU7ay9aQVjbEcxEvD/UCEMBNBOnBFgomtFGa0jFMtbIwQk6Vx5yYcs0dDtNWqPsoq6v5m9eihVujhLx456yhzpin03kjydSQipjTbpZjsw+yUHx79QfqAIjGsAilU3uWVTBhTXEjEm0DFuJvOYgpuJA8=
-  file: releng/org.yakindu.sct.repository/target/updatesite.zip
-  on:
-    tags: Yakindu/statecharts
-    condition: "$TRAVIS_TAG =~ ^release.*$"
-notifications:
-   slack: itemis:GpMT4EcgEk90uVGX2BZS1XB3

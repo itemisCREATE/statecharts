@@ -140,7 +140,7 @@ public class StatechartNavigatorContentProvider implements ICommonContentProvide
 				// Check if object has a corresponding View
 				if (!(objects[i] instanceof View)) {
 					EObject eObject = (EObject) objects[i];
-					navigatorItem.setView(getReferencigView(eObject));
+					navigatorItem.setView(getReferenceView(eObject));
 				}
 				result.add(navigatorItem);
 			}
@@ -148,7 +148,7 @@ public class StatechartNavigatorContentProvider implements ICommonContentProvide
 		return result.toArray();
 	}
 
-	private View getReferencigView(EObject eObject) {
+	private View getReferenceView(EObject eObject) {
 		
 		CrossReferenceAdapter refAdapter = (CrossReferenceAdapter) CrossReferenceAdapter
 				.getExistingCrossReferenceAdapter(eObject.eResource());

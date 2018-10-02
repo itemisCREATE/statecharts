@@ -618,21 +618,12 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	@Test
-	public void checkReadOnlyValueDefinitionExpression() {
-		String decl = "internal: var readonly v1:integer";
+	public void checkConstAndReadOnlyDefinitionExpression() {
+		String decl = "internal: const readonly v1:integer = 0";
 		EObject model = super.parseExpression(decl, InternalScope.class.getSimpleName());
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertDiagnosticsCount(1);
-		result.assertWarningContains(String.format(STextJavaValidator.DECLARATION_DEPRECATED, "readonly"));
-	}
-
-	@Test
-	public void checkExternalValueDefinitionExpression() {
-		String decl = "internal: var external v1:integer";
-		EObject model = super.parseExpression(decl, InternalScope.class.getSimpleName());
-		AssertableDiagnostics result = tester.validate(model);
-		result.assertDiagnosticsCount(1);
-		result.assertWarningContains(String.format(STextJavaValidator.DECLARATION_DEPRECATED, "external"));
+		result.assertWarningContains(String.format(STextJavaValidator.DECLARATION_WITH_READONLY, "readonly", "const"));
 	}
 
 	@Test
@@ -785,7 +776,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 				validator.validate(element, diagnostics, new HashMap<>());
 			}
 		}
-		assertIssueCount(diagnostics, 4);
+		assertIssueCount(diagnostics, 5);
 	}
 
 	@Test
@@ -807,6 +798,15 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	@Test
 	public void checkExitTransitionExists() {
 		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "NoExitTransition.sct");
+
+		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics, EXIT_UNUSED);
+	}
+	
+	@Test
+	public void checkExitTransitionExistsNoSync() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "NoExitTransitionToSync.sct");
 
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
 		assertIssueCount(diagnostics, 1);
@@ -1055,6 +1055,20 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		}
 		assertIssueCount(diagnostics, 1);
 		assertWarning(diagnostics, EXIT_NEVER_USED + "'unusedExitPoint'");
+	}
+	
+	@Test
+	public void checkOnlyOneEntryPointSpecIsUsed() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "OnlyOneEntryPointSpecIsUsed.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Transition) {
+				validator.validate(element, diagnostics, new HashMap<>());
+			}
+		}
+		assertIssueCount(diagnostics, 1);
+		assertWarning(diagnostics, ONLY_FIRST_ENTRY_POINT_WILL_BE_USED);
 	}
 
 }

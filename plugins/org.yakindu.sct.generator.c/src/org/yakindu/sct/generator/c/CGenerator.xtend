@@ -15,6 +15,10 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations.GenArtifactConfiguration
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
+import org.yakindu.sct.generator.c.files.StatemachineHeader
+import org.yakindu.sct.generator.c.files.StatemachineRequiredHeader
+import org.yakindu.sct.generator.c.files.StatemachineSource
+import org.yakindu.sct.generator.c.files.Types
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 import org.yakindu.sct.model.sexec.ExecutionFlow

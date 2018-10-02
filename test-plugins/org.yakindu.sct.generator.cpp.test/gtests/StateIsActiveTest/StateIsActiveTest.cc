@@ -7,6 +7,8 @@
 
 namespace  {
 
+StateIsActive* statechart;
+
 
 
 //! The timers are managed by a timer service. */
@@ -14,9 +16,6 @@ static SctUnitRunner * runner;
 
 class StateIsActiveTest : public ::testing::Test{
 	protected:
-	
-	StateIsActive* statechart;
-	
 	virtual void SetUp() {
 		statechart = new StateIsActive();
 		statechart->init();
@@ -30,29 +29,29 @@ class StateIsActiveTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
-	
-	
 };
 
-	TEST_F(StateIsActiveTest, stateIsActive) {
-		
-		statechart->enter();
-		
-		EXPECT_TRUE(statechart->isStateActive(StateIsActive::R1_R1A));
-		
-		EXPECT_TRUE(statechart->isStateActive(StateIsActive::R2_R2A));
-		
-		statechart->getDefaultSCI()->raise_event1();
-		
-		runner->proceed_cycles(1);
-		
-		runner->proceed_cycles(1);
-		
-		EXPECT_TRUE(statechart->isStateActive(StateIsActive::R1_R1B));
-		
-		EXPECT_TRUE(statechart->isStateActive(StateIsActive::R2_R2B));
-		
-		
+
+TEST_F(StateIsActiveTest, stateIsActive) {
+	
+	statechart->enter();
+	
+	EXPECT_TRUE(statechart->isStateActive(StateIsActive::R1_R1A));
+	
+	EXPECT_TRUE(statechart->isStateActive(StateIsActive::R2_R2A));
+	
+	statechart->getDefaultSCI()->raise_event1();
+	
+	runner->proceed_cycles(1);
+	
+	runner->proceed_cycles(1);
+	
+	EXPECT_TRUE(statechart->isStateActive(StateIsActive::R1_R1B));
+	
+	EXPECT_TRUE(statechart->isStateActive(StateIsActive::R2_R2B));
+	
+	
 }
+
 
 }

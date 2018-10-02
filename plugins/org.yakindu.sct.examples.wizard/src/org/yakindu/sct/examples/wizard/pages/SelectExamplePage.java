@@ -9,7 +9,6 @@
  * 
  */
 package org.yakindu.sct.examples.wizard.pages;
-
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -22,12 +21,11 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
-import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.wizard.WizardPage;
@@ -36,22 +34,26 @@ import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.program.Program;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Monitor;
+import org.eclipse.swt.widgets.Shell;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
 import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
-import org.yakindu.sct.examples.wizard.service.ExampleData;
 import org.yakindu.sct.examples.wizard.service.ExampleWizardConstants;
 import org.yakindu.sct.examples.wizard.service.IExampleService;
+import org.yakindu.sct.examples.wizard.service.data.ExampleCategory;
+import org.yakindu.sct.examples.wizard.service.data.ExampleData;
+import org.yakindu.sct.examples.wizard.service.data.IExampleData;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-
 /**
  * 
  * @author t00manysecretss
@@ -60,13 +62,21 @@ import com.google.inject.Inject;
  */
 
 public class SelectExamplePage extends WizardPage
-		implements ExampleWizardConstants, ISelectionChangedListener, SelectionListener, IPropertyChangeListener {
+		implements
+			ExampleWizardConstants,
+			ISelectionChangedListener,
+			SelectionListener,
+			IPropertyChangeListener {
 
 	private static final String PRO_BUNDLE = "com.yakindu.sct.domain.c";
 	private static final String PRO_UPDATE_SITE = "https://info.itemis.com/yakindu/statecharts/pro/";
+	
+	private static final int WIZARD_SIZE_SCALE_FACOTR = 2;
+	private static final int WIZARD_SIZE_OFFSET = 300;
+	
 	@Inject
 	private IExampleService exampleService;
-	private TableViewer viewer;
+	private TreeViewer viewer;
 	private ExampleData selection;
 	private Browser browser;
 	private MessageArea messageArea;
@@ -89,6 +99,7 @@ public class SelectExamplePage extends WizardPage
 	}
 
 	public void createControl(Composite parent) {
+		getShell().setBounds(calculatePosition(WIZARD_SIZE_SCALE_FACOTR, WIZARD_SIZE_OFFSET));
 		Composite root = new Composite(parent, SWT.NONE);
 		root.setLayout(new GridLayout(1, true));
 		createUpdateGroup(root);
@@ -98,8 +109,26 @@ public class SelectExamplePage extends WizardPage
 		container.setLayout(layout);
 		createTreeViewer(container);
 		createDetailsPane(container);
-		container.setWeights(new int[] { 1, 2 });
+		container.setWeights(new int[]{1, 2});
 		setControl(container);
+		parent.layout();
+	}
+
+	private Rectangle calculatePosition(int scale, int offset) {
+		Monitor monitor = getMonitor();
+		offset = offset * scale;
+		int width = (monitor.getBounds().width + offset) / scale;
+		int height = (monitor.getBounds().height + offset) / scale;
+		int x = monitor.getBounds().x + (width - offset) / scale;
+		int y = monitor.getBounds().y + (height - offset) / scale;
+		return new Rectangle(x, y, width, height);
+	}
+
+	protected Monitor getMonitor() {
+		Shell shell = getShell();
+		Display display = shell.getDisplay();
+		Shell displayShell = display.getActiveShell();
+		return (displayShell != null ? displayShell : shell).getMonitor();
 	}
 
 	private void createUpdateGroup(Composite root) {
@@ -115,6 +144,8 @@ public class SelectExamplePage extends WizardPage
 		if (visible) {
 			initAsync();
 		} else {
+			setPageComplete(false);
+			selection = null;
 			viewer.setInput(null);
 			browser.setUrl("about:blank");
 		}
@@ -180,7 +211,6 @@ public class SelectExamplePage extends WizardPage
 
 	protected void setInput(final IProgressMonitor monitor) {
 		final List<ExampleData> input = exampleService.getExamples(new NullProgressMonitor());
-
 		messageArea.hide();
 		viewer.setInput(input);
 		// explicit layouting required for Unix systems
@@ -189,7 +219,7 @@ public class SelectExamplePage extends WizardPage
 		filterAndSelectExampleToInstall(viewer, input);
 	}
 
-	protected void filterAndSelectExampleToInstall(TableViewer viewer, List<ExampleData> input) {
+	protected void filterAndSelectExampleToInstall(TreeViewer viewer, List<ExampleData> input) {
 		final ExampleData exampleToInstall = Iterables.find(input, new Predicate<ExampleData>() {
 			@Override
 			public boolean apply(ExampleData input) {
@@ -211,35 +241,41 @@ public class SelectExamplePage extends WizardPage
 					if (element instanceof ExampleData) {
 						return exampleIdToInstall.equals(((ExampleData) element).getId());
 					}
-					if (element instanceof ExampleContentProvider.Category) {
-						return ((ExampleContentProvider.Category) element).getChildren().contains(exampleToInstall);
+					if (element instanceof ExampleCategory) {
+						return ((ExampleCategory) element).getChildren().contains(exampleToInstall);
 					}
 					return true;
 				}
 			});
+			viewer.expandAll();
 			viewer.setSelection(new StructuredSelection(exampleToInstall), true);
 		}
 	}
 
 	protected void createTreeViewer(Composite container) {
-		viewer = new TableViewer(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
+		viewer = new TreeViewer(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(viewer.getControl());
-		viewer.setContentProvider(new ArrayContentProvider());
+		viewer.setContentProvider(new ExampleContentProvider());
 		viewer.setLabelProvider(new DelegatingStyledCellLabelProvider(new ExampleLabelProvider()));
 		viewer.addSelectionChangedListener(this);
 	}
 
-	protected void updateSelection(ExampleData data) {
-		selection = data;
+	protected void updateSelection(IExampleData data) {
+		if (data instanceof ExampleData) {
+			selection = (ExampleData) data;
+			setPageComplete(true);
+		} else {
+			selection = null;
+			setPageComplete(false);
+		}
 		setDetailPaneContent(data);
-		setPageComplete(true);
 		setErrorMessage(null);
 		checkInstalledPlugins(data);
 		viewer.refresh();
 	}
 
-	private void checkInstalledPlugins(ExampleData data) {
-		if (data.isProfessional() && Platform.getBundle(PRO_BUNDLE) == null) {
+	private void checkInstalledPlugins(IExampleData data) {
+		if (isProRequiredAndMissing(data)) {
 			messageArea.showProInstall();
 		} else {
 			messageArea.hide();
@@ -248,9 +284,17 @@ public class SelectExamplePage extends WizardPage
 		this.getControl().update();
 	}
 
-	protected void setDetailPaneContent(ExampleData exampleData) {
-		String url = exampleData.getProjectDir().getAbsolutePath() + File.separator + "index.html";
-		browser.setUrl(url);
+	protected boolean isProRequiredAndMissing(IExampleData data) {
+		return data.isProfessional() && Platform.getBundle(PRO_BUNDLE) == null;
+	}
+
+	protected void setDetailPaneContent(IExampleData data) {
+		String path = data.getDescriptionPath();
+		if (path != null && new File(path).exists()) {
+			browser.setUrl(path);
+		} else {
+			browser.setUrl("about:blank");
+		}
 	}
 
 	protected void createDetailsPane(Composite parent) {
@@ -267,22 +311,23 @@ public class SelectExamplePage extends WizardPage
 	@Override
 	public void selectionChanged(SelectionChangedEvent event) {
 		Object firstElement = ((StructuredSelection) event.getSelection()).getFirstElement();
-		if (firstElement instanceof ExampleData)
-			updateSelection((ExampleData) firstElement);
+		if (firstElement instanceof IExampleData) {
+			updateSelection((IExampleData) firstElement);
+		}
 	}
 
 	@Override
 	public void widgetSelected(SelectionEvent e) {
 		switch (messageArea.getState()) {
-		case DOWNLOAD:
-		case UPDATE:
-			revealExamples();
-			break;
-		case INSTALL:
-			Program.launch(PRO_UPDATE_SITE);
-			break;
-		default:
-			break;
+			case DOWNLOAD :
+			case UPDATE :
+				revealExamples();
+				break;
+			case INSTALL :
+				Program.launch(PRO_UPDATE_SITE);
+				break;
+			default :
+				break;
 		}
 	}
 

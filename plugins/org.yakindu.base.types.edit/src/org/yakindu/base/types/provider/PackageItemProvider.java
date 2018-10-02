@@ -225,7 +225,7 @@ public class PackageItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.PACKAGE__MEMBER,
-				 TypesFactory.eINSTANCE.createPrimitiveType()));
+				 TypesFactory.eINSTANCE.createComplexType()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -235,7 +235,7 @@ public class PackageItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.PACKAGE__MEMBER,
-				 TypesFactory.eINSTANCE.createComplexType()));
+				 TypesFactory.eINSTANCE.createPrimitiveType()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -107,6 +107,7 @@ public class GeneratorModelItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(SGenPackage.Literals.GENERATOR_MODEL__ENTRIES);
+			childrenFeatures.add(SGenPackage.Literals.GENERATOR_MODEL__PROPERTIES);
 		}
 		return childrenFeatures;
 	}
@@ -165,6 +166,7 @@ public class GeneratorModelItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case SGenPackage.GENERATOR_MODEL__ENTRIES:
+			case SGenPackage.GENERATOR_MODEL__PROPERTIES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -186,6 +188,11 @@ public class GeneratorModelItemProvider
 			(createChildParameter
 				(SGenPackage.Literals.GENERATOR_MODEL__ENTRIES,
 				 SGenFactory.eINSTANCE.createGeneratorEntry()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGenPackage.Literals.GENERATOR_MODEL__PROPERTIES,
+				 SGenFactory.eINSTANCE.createPropertyDefinition()));
 	}
 
 	/**

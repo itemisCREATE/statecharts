@@ -22,6 +22,7 @@ public interface STextValidationMessages {
 	public static final String CHOICE_ONE_OUTGOING_DEFAULT_TRANSITION = "A choice should have one outgoing default transition.";
 	public static final String FEATURE_CALL_HAS_NO_EFFECT = "FeatureCall has no effect.";
 	public static final String ENTRY_EXIT_TRIGGER_NOT_ALLOWED = "Entry/Exit trigger not allowed.";
+	public static final String ONLY_FIRST_ENTRY_POINT_WILL_BE_USED = "Remove multiple entry points. Only the first will be used.";
 	public static final String LOCAL_REACTIONS_NOT_ALLOWED = "Local reactions not allowed.";
 	public static final String FEATURE_CALL_TO_SCOPE = "FEATURE_CALL_TO_SCOPE.";
 	public static final String ONLY_ONE_INTERFACE = "Only one default/unnamed interface is allowed.";
@@ -50,6 +51,7 @@ public interface STextValidationMessages {
 	public static final String REFERENCE_TO_VARIABLE = "Cannot reference a variable in a constant initialization.";
 	public static final String CONST_MUST_HAVE_VALUE_MSG = "A constant definition must specify an initial value.";
 	public static final String CONST_MUST_HAVE_VALUE_CODE = "ConstMustHaveAValue";
+	public static final String DECLARATION_WITH_READONLY = "The keyword '%s' has no effect for '%s' definitions. Can be removed.";
 	public static final String REFERENCE_CONSTANT_BEFORE_DEFINED = "Cannot reference a constant from different scope or before it is defined.";
 	public static final String INTERNAL_DECLARATION_UNUSED = "Internal declaration is not used in statechart.";
 	public static final String DECLARATION_DEPRECATED = "The keyword '%s' is deprecated. Can be removed.";

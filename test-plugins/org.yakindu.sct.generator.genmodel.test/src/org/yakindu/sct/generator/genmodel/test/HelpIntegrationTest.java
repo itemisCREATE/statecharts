@@ -14,7 +14,9 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -139,11 +141,12 @@ public class HelpIntegrationTest {
 	}
 	
 	private Iterable<IEObjectDescription> getAllElements(String generatorId) {
-		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions
+		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions
 				.getGeneratorDescriptor(generatorId);
-		
+		if(!generatorDescriptor.isPresent())
+			return Collections.emptyList();
 		Iterable<ILibraryDescriptor> libraryDescriptor = LibraryExtensions
-				.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
+				.getLibraryDescriptors(generatorDescriptor.get().getLibraryIDs());
 		
 		Iterable<IEObjectDescription> allElements = Lists.newArrayList();
 		for (ILibraryDescriptor desc : libraryDescriptor) {

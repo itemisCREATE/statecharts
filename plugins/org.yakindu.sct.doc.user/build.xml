@@ -49,9 +49,6 @@
     <!-- MyLyn Wikitext version: -->
     <property name="wikitext.version" value="3.0.20" />
 
-    <!-- Compiled Java classes go here: -->
-    <property name="bin.dir" value="bin" />
-
 
 
     <!-- Remove generated stuff. The "lib" directory will not be deleted. Remove it manually, if you have to. -->
@@ -64,7 +61,6 @@
                 <include name="${epub.dir}/**" />
             </fileset>
             <fileset dir="${src-merged.dir}" />
-            <fileset dir="${bin.dir}" />
         </delete>
     </target>
 
@@ -113,19 +109,6 @@
                             scope="compile" />
             </artifact:dependencies>
             <path refid="wikitext.classpath" />
-            <files dir="${lib.dir}/bin" layout="{groupId}/{artifactId}-{baseVersion}.{extension}" />
-        </artifact:resolve>
-
-        <!-- Sources of MyLyn Wikitext: -->
-        <artifact:resolve>
-            <artifact:dependencies>
-                <dependency groupId="org.eclipse.mylyn.docs"
-                            artifactId="org.eclipse.mylyn.wikitext"
-                            version="${wikitext.version}"
-                            scope="compile"
-                            classifier="sources" />
-            </artifact:dependencies>
-            <files dir="${lib.dir}/src" layout="{groupId}/{artifactId}-{baseVersion}-{classifier}.{extension}" />
         </artifact:resolve>
 
         <!-- Classpath for MyLyn Wikitext's Textile support: -->
@@ -137,19 +120,6 @@
                             scope="compile" />
             </artifact:dependencies>
             <path refid="wikitext.textile.classpath" />
-            <files dir="${lib.dir}/bin" layout="{groupId}/{artifactId}-{baseVersion}.{extension}" />
-        </artifact:resolve>
-
-        <!-- Sources of MyLyn Wikitext's Textile support: -->
-        <artifact:resolve>
-            <artifact:dependencies>
-                <dependency groupId="org.eclipse.mylyn.docs"
-                            artifactId="org.eclipse.mylyn.wikitext.textile"
-                            version="${wikitext.version}"
-                            scope="compile"
-                            classifier="sources" />
-            </artifact:dependencies>
-            <files dir="${lib.dir}/src" layout="{groupId}/{artifactId}-{baseVersion}-{classifier}.{extension}" />
         </artifact:resolve>
 
         <!-- Classpath for MyLyn Wikitext's Ant support: -->
@@ -169,6 +139,29 @@
             <path refid="wikitext.textile.classpath" />
             <path refid="wikitext.ant.classpath" />
         </path>
+
+        <!-- Repositories for YAKINDU Docs: -->
+        <artifact:remoterepos id="aether.repositories">
+            <artifact:remoterepo url="https://projects.itemis.de/nexus/content/repositories/OSR/"
+                                 id="releases"
+                                 releases="true"
+                                 snapshots="false" />
+            <artifact:remoterepo url="https://projects.itemis.de/nexus/content/repositories/OSS/"
+                                 id="snapshots"
+                                 releases="false"
+                                 snapshots="true" />
+        </artifact:remoterepos>
+
+        <!-- Classpath for YAKINDU Docs: -->
+        <artifact:resolve>
+            <artifact:dependencies>
+                <dependency groupId="org.yakindu.docs"
+                            artifactId="yakindu-docs-maven-plugin"
+                            version="0.0.1-SNAPSHOT"
+                            scope="compile" />
+            </artifact:dependencies>
+            <path refid="org.yakindu.docs.classpath" />
+        </artifact:resolve>
 
     </target>
 
@@ -352,23 +345,9 @@
              images/…
     -->
 
-    <target name="compile.wikitext.converter"
-            description="Compiles the Wikitext converter that turns Textile into our Hubspot HTML"
-            depends="init.wikitext">
-        <mkdir dir="${bin.dir}" />
-        <javac srcdir="${src.dir}/main/java"
-               destdir="${bin.dir}"
-               classpathref="wikitext.all.classpath"
-               debug="true"
-               fork="true"
-               optimize="false"
-               includeantruntime="false">
-        </javac>
-    </target>
-
     <target name="generate.website"
             description="Generates the documentation as various HTML files for the website, each being composed of selected sections. Use -Dwebsite.local.files=true to generate the website as local files for preview."
-            depends="init.wikitext, compile.wikitext.converter">
+            depends="init.wikitext">
 
         <sequential>
             <taskdef classpathref="wikitext.all.classpath" resource="org/eclipse/mylyn/wikitext/ant/tasks.properties" />
@@ -457,10 +436,10 @@
 
             <!-- Convert textile source files to Hubspot HTML: -->
             <path id="converter.classpath">
-                <pathelement location="${bin.dir}" />
+                <path refid="org.yakindu.docs.classpath" />
                 <path refid="wikitext.all.classpath" />
             </path>
-            <java classname="org.yakindu.sct.doc.user.wikitext.TextileToHubspotConverter"
+            <java classname="org.yakindu.docs.wikitext.TextileToHubspotConverter"
                   classpathref="converter.classpath"
                   fork="true"
                   dir="${basedir}"

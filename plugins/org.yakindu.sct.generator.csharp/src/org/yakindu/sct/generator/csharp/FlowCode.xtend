@@ -26,7 +26,7 @@ class FlowCode {
 	@Inject extension CSharpExpressionsGenerator
 	@Inject extension SExecExtensions
 	
-	private var List<TimeEvent> timeEvents;
+	var List<TimeEvent> timeEvents;
 	
 	def stepComment(Step it) '''
 		«IF comment !== null && ! comment.empty»

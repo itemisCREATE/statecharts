@@ -17,6 +17,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.databinding.EMFDataBindingContext;
 import org.eclipse.emf.databinding.IEMFValueProperty;
 import org.eclipse.emf.databinding.edit.EMFEditProperties;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.jface.databinding.swt.ISWTObservableValue;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
@@ -58,7 +59,6 @@ public class TransitionPropertySection extends AbstractTwoColumnEditorPropertySe
 		if (injector != null) {
 			textControl = new StyledText(parent, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
 			((StyledText) textControl).setAlwaysShowScrollBars(false);
-			enableXtext(textControl, injector);
 			createHelpWidget(parent, textControl, HelpContextIds.SC_PROPERTIES_TRANSITION_EXPRESSION);
 		} else {
 			textControl = getToolkit().createText(parent, "", SWT.MULTI);
@@ -67,16 +67,26 @@ public class TransitionPropertySection extends AbstractTwoColumnEditorPropertySe
 	}
 
 	@Override
-	protected void createRightColumnControls(Composite parent) {
-	    createDocumentationControl(parent);
+	protected void inputChanged() {
+		Injector injector = getInjector(Transition.class.getName());
+		if (injector != null) {
+			enableXtext(textControl, injector);
+		}
+		super.inputChanged();
 	}
-	
+
+	@Override
+	protected void createRightColumnControls(Composite parent) {
+		createDocumentationControl(parent);
+	}
+
 	@Override
 	protected void createDocumentationControl(Composite parent) {
-        Label lblDocumentation = getToolkit().createLabel(parent, "Documentation: ");
-        documentation = getToolkit().createText(parent, "", SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
-        GridDataFactory.fillDefaults().span(2, 1).applyTo(lblDocumentation);
-        GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize()).minSize(100, documentation.getLineHeight() * 3).applyTo(documentation);
+		Label lblDocumentation = getToolkit().createLabel(parent, "Documentation: ");
+		documentation = getToolkit().createText(parent, "", SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
+		GridDataFactory.fillDefaults().span(2, 1).applyTo(lblDocumentation);
+		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize())
+				.minSize(100, documentation.getLineHeight() * 3).applyTo(documentation);
 	}
 
 	@Override
@@ -95,8 +105,8 @@ public class TransitionPropertySection extends AbstractTwoColumnEditorPropertySe
 
 		IEMFValueProperty property = EMFEditProperties.value(TransactionUtil.getEditingDomain(eObject),
 				BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION);
-		ISWTObservableValue observe = WidgetProperties.text(new int[] { SWT.FocusOut, SWT.DefaultSelection }).observe(
-		        documentation);
+		ISWTObservableValue observe = WidgetProperties.text(new int[] { SWT.FocusOut, SWT.DefaultSelection })
+				.observe(documentation);
 		context.bindValue(observe, property.observe(eObject));
 
 	}

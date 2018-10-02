@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.yakindu.sct.model.sexec.*;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
@@ -107,6 +108,7 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 			case SexecPackage.EXECUTION_CHOICE: return createExecutionChoice();
 			case SexecPackage.EXECUTION_SYNCHRONIZATION: return createExecutionSynchronization();
 			case SexecPackage.REACTION: return createReaction();
+			case SexecPackage.METHOD: return createMethod();
 			case SexecPackage.STATE_VECTOR: return createStateVector();
 			case SexecPackage.TIME_EVENT: return createTimeEvent();
 			case SexecPackage.SEQUENCE: return createSequence();
@@ -123,6 +125,9 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 			case SexecPackage.STATE_CASE: return createStateCase();
 			case SexecPackage.SAVE_HISTORY: return createSaveHistory();
 			case SexecPackage.HISTORY_ENTRY: return createHistoryEntry();
+			case SexecPackage.RETURN: return createReturn();
+			case SexecPackage.LOCAL_VARIABLE_DEFINITION: return createLocalVariableDefinition();
+			case SexecPackage.STATEMENT: return createStatement();
 			case SexecPackage.TRACE_NODE_EXECUTED: return createTraceNodeExecuted();
 			case SexecPackage.REACTION_FIRED: return createReactionFired();
 			case SexecPackage.TRACE_REACTION_WILL_FIRE: return createTraceReactionWillFire();
@@ -223,6 +228,16 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	public Reaction createReaction() {
 		ReactionImpl reaction = new ReactionImpl();
 		return reaction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Method createMethod() {
+		MethodImpl method = new MethodImpl();
+		return method;
 	}
 
 	/**
@@ -433,6 +448,36 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	public HistoryEntry createHistoryEntry() {
 		HistoryEntryImpl historyEntry = new HistoryEntryImpl();
 		return historyEntry;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Return createReturn() {
+		ReturnImpl return_ = new ReturnImpl();
+		return return_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LocalVariableDefinition createLocalVariableDefinition() {
+		LocalVariableDefinitionImpl localVariableDefinition = new LocalVariableDefinitionImpl();
+		return localVariableDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Statement createStatement() {
+		StatementImpl statement = new StatementImpl();
+		return statement;
 	}
 
 	/**

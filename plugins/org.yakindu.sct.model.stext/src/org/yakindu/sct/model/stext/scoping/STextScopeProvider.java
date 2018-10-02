@@ -145,12 +145,11 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 			scope = Scopes.scopeFor(typeSystem.getPropertyExtensions(ownerType));
 			scope = Scopes.scopeFor(typeSystem.getOperationExtensions(ownerType), scope);
 		}
-
-		if (ownerType instanceof ComplexType) {
-			return addScopeForComplexType((ComplexType) ownerType, scope, predicate);
-		}
 		if (ownerType instanceof EnumerationType) {
 			return addScopeForEnumType((EnumerationType) ownerType, scope, predicate);
+		}
+		if (ownerType instanceof ComplexType) {
+			return addScopeForComplexType((ComplexType) ownerType, scope, predicate);
 		}
 		return scope;
 	}

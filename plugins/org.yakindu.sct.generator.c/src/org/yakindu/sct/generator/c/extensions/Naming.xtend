@@ -37,11 +37,16 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sexec.Method
+import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
+
 
 class Naming {
 	@Inject @Named("Separator") protected String sep;
 
 	@Inject protected extension SExecExtensions
+	
+	@Inject protected extension SgraphExtensions
 
 	@Inject protected extension ICodegenTypeSystemAccess
 
@@ -60,6 +65,13 @@ class Naming {
 	}
 
 	def module(ExecutionFlow it) {
+		if (entry.moduleName.nullOrEmpty) {
+			return name.asIdentifier.toFirstUpper
+		}
+		return entry.moduleName.toFirstUpper
+	}
+	
+	def module(Statechart it) {
 		if (entry.moduleName.nullOrEmpty) {
 			return name.asIdentifier.toFirstUpper
 		}
@@ -91,7 +103,7 @@ class Naming {
 	}
 	
 	def statesEnumType(ExecutionFlow it) {
-		flow.type + 'States'
+		containerType + 'States'
 	}
 	
 	def protected String entryStatemachinePrefix() {
@@ -99,15 +111,15 @@ class Naming {
 	}
 
 	def dispatch String type(InterfaceScope it) {
-		flow.type + 'Iface' + (if(name.nullOrEmpty) '' else name).asIdentifier.toFirstUpper
+		containerType + 'Iface' + (if(name.nullOrEmpty) '' else name).asIdentifier.toFirstUpper
 	}
 
 	def dispatch String type(InternalScope it) {
-		flow.type + 'Internal'
+		containerType + 'Internal'
 	}
 
 	def dispatch String type(Scope it) {
-		flow.type + 'TimeEvents'
+		containerType + 'TimeEvents'
 	}
 
 	def dispatch String type(ExecutionFlow it) {
@@ -122,6 +134,13 @@ class Naming {
 			return name.asIdentifier.toFirstUpper
 		}
 		return entryStatemachinePrefix.toFirstUpper
+	}
+	
+	def String getContainerType(EObject it) {
+		if (flow !== null) {
+			return flow.type
+		}
+		return statechart.type
 	}
 
 	def dispatch instance(InterfaceScope it) {
@@ -201,19 +220,6 @@ class Naming {
 		return null;
 	}
 	
-	def Statechart statechart(EObject element) {
-		var ret = element;
-
-		while (ret !== null) {
-			if (ret instanceof Statechart) {
-				return ret as Statechart
-			} else {
-				ret = ret.eContainer;
-			}
-		}
-		return null;
-	}
-	
 	def bool() {
 		"sc_boolean"
 	}
@@ -234,7 +240,7 @@ class Naming {
 	def dispatch scopeTypeDeclMember(Declaration it) ''''''
 
 	def constantName(VariableDefinition it) {
-		(flow.type + separator + scope.type + separator + name.asEscapedIdentifier).toUpperCase
+		(containerType + separator + scope.type + separator + name.asEscapedIdentifier).toUpperCase
 	}
 
 	def raiseTimeEventFctID(ExecutionFlow it) {
@@ -353,7 +359,7 @@ class Naming {
 
 	def dispatch scopeDescription(InternalScope it) '''internal scope'''
 
-	def scHandleDecl(EObject it) { flow.type + '* ' + scHandle }
+	def scHandleDecl(EObject it) { containerType + '* ' + scHandle }
 
 	def scHandle() { 'handle' }
 
@@ -373,6 +379,8 @@ class Naming {
 		'''«name.asEscapedIdentifier»'''
 	}
 
+	def dispatch access(Method it) '''«shortName»'''
+	
 	def dispatch access(Enumerator it) {
 		'''«name.asEscapedIdentifier»'''
 	}

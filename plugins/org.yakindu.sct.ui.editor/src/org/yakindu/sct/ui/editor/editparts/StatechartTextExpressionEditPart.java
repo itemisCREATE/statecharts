@@ -18,11 +18,9 @@ import static org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles.CO
 import org.eclipse.gef.editpolicies.RootComponentEditPolicy;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.FontData;
 import org.yakindu.base.xtext.utils.gmf.figures.SyntaxColoringLabel;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.policies.ContextSensitiveHelpPolicy;
-import org.yakindu.sct.ui.editor.utils.FontScalingUtil;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 
 /**

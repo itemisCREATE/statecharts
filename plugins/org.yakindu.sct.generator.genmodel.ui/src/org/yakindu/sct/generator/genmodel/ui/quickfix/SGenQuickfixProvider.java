@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.generator.genmodel.ui.quickfix;
 
+import java.util.Optional;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -59,10 +61,11 @@ public class SGenQuickfixProvider extends DefaultQuickfixProvider {
 	private FeatureConfiguration getDefaultFeatureConfiguration(final Issue issue, EObject element) {
 		GeneratorModel model = (GeneratorModel) EcoreUtil2.getRootContainer(element);
 
-		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
-
+		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
+		if(!generatorDescriptor.isPresent())
+			return null;
 		Iterable<ILibraryDescriptor> libraryDescriptor = LibraryExtensions
-				.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
+				.getLibraryDescriptors(generatorDescriptor.get().getLibraryIDs());
 		for (ILibraryDescriptor desc : libraryDescriptor) {
 			ResourceSet set = new ResourceSetImpl();
 			Resource resource = set.getResource(desc.getURI(), true);

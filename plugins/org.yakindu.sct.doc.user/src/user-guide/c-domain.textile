@@ -13,7 +13,9 @@ The YAKINDU Statechart Tools Professional Edition comes with a _Deep C/C++ Integ
 
 Making your self-defined C/C++ types, structs, and unions available in your YAKINDU statecharts saves you a lot of time and hassle that would otherwise be needed to map data from your C-type variables to statechart variables and vice versa.
 
-The C Domain offers one more feature: The annotation @ShortCIdentifiers@ changes the naming scheme used by the code generator and activates more checks in the statechart validation to ensure that no identifiers produced by the code generator are longer than 31 characters. 
+The C/C++ domain offers one more feature: The @ShortCIdentifiers@ annotation changes the naming scheme used by the code generator and activates more checks in the statechart validation to ensure that no identifiers produced by the code generator are longer than 31 characters. 
+
+
 
 
 h2(#cdom_what_can_you_do_with_deep_ccpp_integration). What can you do with Deep C/C++ Integration?
@@ -54,8 +56,8 @@ h2(#cdom_how_to_use_deep_ccpp_integration). How to use Deep C/C++ Integration
 
 Using Deep C/C++ Integration is pretty straightforward:
 
-# Your YAKINDU Statechart Tools license must include the C domain.
-# You have to use a "C domain" statechart or change the domain of an existing statechart.
+# Your YAKINDU Statechart Tools license must include the C/C++ domain.
+# You have to use a "C/C++ domain" statechart or change the domain of an existing statechart.
 # The Eclipse project your statechart is in must be a "CDT project":https://help.eclipse.org/oxygen/index.jsp?topic=%2Forg.eclipse.cdt.doc.user%2Fconcepts%2Fcdt_c_projects.htm.
 
 The subsequent sections will explain how to use Deep C/C++ Integration in practice, using a sample project. In this example, we will define some geometry types like _Point_ or _Triangle_ in C/C++ header files and demonstrate how to make them available and use them in a statechart model. While this example covers C constructs only, there is no extra effort involved in using C++ features – with one exception: Your project must be a C/C++ or a pure C++ project.
@@ -772,9 +774,9 @@ static void statechart_enact_main_region_Check(Statechart* handle)
 
 h2(#cdom_annotations_short_identifiers). The @ShortCIdentifiers annotation
 
-It is possible to add annotations to a statechart's specification to alter their or the code generator's behavior, see "Statechart Annotations":../user-guide/statechart_language.textile#sclang_annotations.
+It is possible to add annotations to a statechart's specification to alter their or the code generator's behavior, see "Statechart Annotations":../user-guide/statechart_language.html#sclang_annotations.
 
-The C Domain offers one more annotation: @ShortCIdentifiers helps you to keep the generated code compliant to rules which require C identifiers not to be longer than 31 characters (or rather, to be uniquely identified by the first 31 characters). To achieve this, instead of aggressively shortening names which are part of a statechart's API, YAKINDU Statechart Tools gives feedback about the names that will be generated and warns if any user input results in C Code that is non-compliant with the 31 character rule. This puts the user in charge of the naming scheme and keeps the resulting C identifiers predictable.
+The C/C++ domain offers one more annotation: @ShortCIdentifiers helps you to keep the generated code compliant to rules which require C identifiers not to be longer than 31 characters (or rather, to be uniquely identified by the first 31 characters). To achieve this, instead of aggressively shortening names which are part of a statechart's API, YAKINDU Statechart Tools gives feedback about the names that will be generated and warns if any user input results in C code that is non-compliant with the 31 character rule. This puts the user in charge of the naming scheme and keeps the resulting C identifiers predictable.
 
 This is mainly done by:
 

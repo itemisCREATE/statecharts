@@ -54,7 +54,6 @@ public class PropertyItemProvider
 
 			addConstPropertyDescriptor(object);
 			addReadonlyPropertyDescriptor(object);
-			addExternalPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -95,28 +94,6 @@ public class PropertyItemProvider
 				 getString("_UI_Property_readonly_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Property_readonly_feature", "_UI_Property_type"),
 				 TypesPackage.Literals.PROPERTY__READONLY,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the External feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addExternalPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Property_external_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Property_external_feature", "_UI_Property_type"),
-				 TypesPackage.Literals.PROPERTY__EXTERNAL,
 				 true,
 				 false,
 				 false,
@@ -171,7 +148,6 @@ public class PropertyItemProvider
 		switch (notification.getFeatureID(Property.class)) {
 			case TypesPackage.PROPERTY__CONST:
 			case TypesPackage.PROPERTY__READONLY:
-			case TypesPackage.PROPERTY__EXTERNAL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

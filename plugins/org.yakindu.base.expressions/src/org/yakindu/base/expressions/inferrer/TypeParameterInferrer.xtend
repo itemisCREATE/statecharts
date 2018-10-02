@@ -171,7 +171,7 @@ class TypeParameterInferrer {
 	 */
 	def protected InferenceResult buildInferenceResult(InferenceResult oldInferenceResult,
 		Map<TypeParameter, InferenceResult> inferredTypeParameterTypes, IValidationIssueAcceptor acceptor) {
-		val oldInferredType = oldInferenceResult.type
+		val oldInferredType = oldInferenceResult?.type
 		if (oldInferredType instanceof TypeParameter) {
 			// get already inferred type from type parameter map
 			val mappedType = inferredTypeParameterTypes.get(oldInferredType);

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU SText UI
 Bundle-Vendor: statecharts.org
-Bundle-Version: 3.4.0.qualifier
+Bundle-Version: 3.4.1.qualifier
 Bundle-SymbolicName: org.yakindu.sct.model.stext.ui;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.yakindu.sct.model.stext;visibility:=reexport,
@@ -46,6 +46,7 @@ Export-Package: org.yakindu.sct.model.stext.ui;
    org.antlr.runtime,
    org.eclipse.xtext.ui.editor.contentassist.antlr.internal,
    org.yakindu.sct.model.stext.services",
+ org.yakindu.sct.model.stext.ui.document,
  org.yakindu.sct.model.stext.ui.help,
  org.yakindu.sct.model.stext.ui.hyperlink,
  org.yakindu.sct.model.stext.ui.internal;uses:="org.eclipse.ui.plugin,org.osgi.framework,com.google.inject",
