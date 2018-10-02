@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2018 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ *
+ */
 package org.yakindu.sct.commons;
 
 import java.io.File;
@@ -18,7 +28,7 @@ public class PathHelper {
 			return file.getAbsolutePath();
 		}
 	}
-	
+
 	public Path toPath(String pathString) {
 		if (pathString == null) {
 			return null;
@@ -31,21 +41,21 @@ public class PathHelper {
 			return path;
 		}
 	}
-
+	
 	public Path toPath(URI uri) {
 		return toPath(uri.toFileString());
 	}
-	
+
 	public Path toPath(IFile file) {
 		return toPath(file.getLocation().toOSString());
 	}
-	
+
 	public boolean pathsEqual(String p1, String p2) {
 		Path path1 = toPath(p1);
 		Path path2 = toPath(p2);
 		return pathsEqual(path1, path2);
 	}
-	
+
 	public boolean pathsEqual(Path p1, Path p2) {
 		return Objects.equals(p1, p2);
 	}
