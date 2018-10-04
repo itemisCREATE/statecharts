@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.model.stext.scoping;
 
-import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
