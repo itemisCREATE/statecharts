@@ -70,7 +70,8 @@ public class ContextPredicateProvider {
 			input -> TypesPackage.Literals.PROPERTY.isSuperTypeOf(input.getEClass()));
 
 	protected static final Predicate<IEObjectDescription> EVENTS = or(FEATURE,
-			input -> TypesPackage.Literals.EVENT.isSuperTypeOf(input.getEClass()));
+			input -> TypesPackage.Literals.EVENT.isSuperTypeOf(input.getEClass())
+					|| (TypesPackage.Literals.DECLARATION.isSuperTypeOf(input.getEClass())));
 
 	protected static final Predicate<IEObjectDescription> OPERATIONS = or(FEATURE,
 			input -> TypesPackage.Literals.OPERATION.isSuperTypeOf(input.getEClass()));
@@ -120,7 +121,7 @@ public class ContextPredicateProvider {
 				or(VARIABLES, OPERATIONS, EVENTS, ENUMERATIONS));
 		filter.put(key(REGULAR_EVENT_SPEC), EVENTS);
 		filter.put(key(EVENT_VALUE_REFERENCE_EXPRESSION), EVENTS);
-		filter.put(key(REACTION_EFFECT), or(VARIABLES, OPERATIONS, ENUMERATIONS));
+		filter.put(key(REACTION_EFFECT), or(VARIABLES, OPERATIONS, EVENTS, ENUMERATIONS));
 		filter.put(key(TRANSITION_SPECIFICATION), EVENTS);
 		filter.put(key(LOCAL_REACTION), or(VARIABLES, OPERATIONS, EVENTS, ENUMERATIONS));
 		filter.put(key(TRANSITION_REACTION), or(VARIABLES, OPERATIONS));
