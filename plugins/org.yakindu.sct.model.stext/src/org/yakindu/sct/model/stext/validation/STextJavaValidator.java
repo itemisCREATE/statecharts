@@ -30,7 +30,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.EcoreUtil2;
@@ -266,9 +265,11 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 		if (tokenText == null || tokenText.isEmpty())
 			return;
-		if (tokenText.contains(TypesPackage.Literals.PROPERTY__READONLY.getName()) && tokenText.contains(TypesPackage.Literals.PROPERTY__CONST.getName())) {
+		if (tokenText.contains(TypesPackage.Literals.PROPERTY__READONLY.getName())
+				&& tokenText.contains(TypesPackage.Literals.PROPERTY__CONST.getName())) {
 			warning(String.format(STextValidationMessages.DECLARATION_WITH_READONLY,
-					TypesPackage.Literals.PROPERTY__READONLY.getName(), TypesPackage.Literals.PROPERTY__CONST.getName()), definition,
+					TypesPackage.Literals.PROPERTY__READONLY.getName(),
+					TypesPackage.Literals.PROPERTY__CONST.getName()), definition,
 					TypesPackage.Literals.PROPERTY__READONLY);
 		}
 	}
@@ -550,7 +551,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 							boolean usingEntry = false;
 							for (Region region : state.getRegions()) {
 								EList<Vertex> vertices = region.getVertices();
-								for(Vertex vertice : vertices) {
+								for (Vertex vertice : vertices) {
 									if (vertice instanceof Entry) {
 										if (spec.getEntrypoint().equals(vertice.getName())) {
 											usingEntry = true;
@@ -744,16 +745,16 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				&& !(call.getFeature() instanceof Operation)) {
 			if (call.getFeature() instanceof Property) {
 				error("Access to property '" + nameProvider.getFullyQualifiedName(call.getFeature())
-				+ "' has no effect.", call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE,
-				INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
+						+ "' has no effect.", call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE,
+						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			} else if (call.getFeature() instanceof Event) {
 				error("Access to event '" + nameProvider.getFullyQualifiedName(call.getFeature()) + "' has no effect.",
 						call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE, INSIGNIFICANT_INDEX,
 						FEATURE_CALL_HAS_NO_EFFECT);
 			} else {
 				error("Access to feature '" + nameProvider.getFullyQualifiedName(call.getFeature())
-				+ "' has no effect.", call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE,
-				INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
+						+ "' has no effect.", call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE,
+						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			}
 		}
 	}
@@ -860,7 +861,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		EList<String> imports = scope.getImports();
 		for (String packageImport : imports) {
 			Optional<PackageImport> pkImport = mapper.findPackageImport(scope.eResource(), packageImport);
-			if (!pkImport.isPresent() || !URIConverter.INSTANCE.exists(pkImport.get().getUri().trimQuery(), null)) {
+			if (!pkImport.isPresent() || !getResource(scope).getResourceSet().getURIConverter()
+					.exists(pkImport.get().getUri().trimQuery(), null)) {
 				error(String.format(IMPORT_NOT_RESOLVED_MSG, packageImport), scope,
 						StextPackage.Literals.IMPORT_SCOPE__IMPORTS, imports.indexOf(packageImport));
 			}
@@ -871,19 +873,19 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		if (!(refExp.getReference() instanceof Operation)) {
 			if (refExp.getReference() instanceof Property) {
 				error("Access to property '" + nameProvider.getFullyQualifiedName(refExp.getReference())
-				+ "' has no effect.", refExp,
-				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
-				FEATURE_CALL_HAS_NO_EFFECT);
+						+ "' has no effect.", refExp,
+						ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
+						FEATURE_CALL_HAS_NO_EFFECT);
 			} else if (refExp.getReference() instanceof Event) {
 				error("Access to event '" + nameProvider.getFullyQualifiedName(refExp.getReference())
-				+ "' has no effect.", refExp,
-				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
-				FEATURE_CALL_HAS_NO_EFFECT);
+						+ "' has no effect.", refExp,
+						ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
+						FEATURE_CALL_HAS_NO_EFFECT);
 			} else {
 				error("Access to feature '" + nameProvider.getFullyQualifiedName(refExp.getReference())
-				+ "' has no effect.", refExp,
-				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
-				FEATURE_CALL_HAS_NO_EFFECT);
+						+ "' has no effect.", refExp,
+						ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
+						FEATURE_CALL_HAS_NO_EFFECT);
 			}
 		}
 	}
@@ -891,7 +893,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	protected boolean isDefault(Trigger trigger) {
 		return trigger == null || trigger instanceof DefaultTrigger
 				|| ((trigger instanceof ReactionTrigger) && ((ReactionTrigger) trigger).getTriggers().size() == 0
-				&& ((ReactionTrigger) trigger).getGuard() == null);
+						&& ((ReactionTrigger) trigger).getGuard() == null);
 	}
 
 	@Override
@@ -979,17 +981,16 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 		return true;
 	}
-	
-	
+
 	@Check(CheckType.FAST)
 	public void checkOnlyOneEntryPointSpecIsUsed(Transition transition) {
 		EList<ReactionProperty> properties = transition.getProperties();
 		int countEntryPointSpecs = 0;
-		for(ReactionProperty property : properties) {
-			if(property instanceof EntryPointSpec) {
+		for (ReactionProperty property : properties) {
+			if (property instanceof EntryPointSpec) {
 				countEntryPointSpecs++;
 			}
-			if(countEntryPointSpecs > 1) {
+			if (countEntryPointSpecs > 1) {
 				warning(ONLY_FIRST_ENTRY_POINT_WILL_BE_USED, transition, null, -1);
 				break;
 			}
