@@ -34,6 +34,8 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Method
 
 class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineHeader {
 
@@ -434,12 +436,23 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 		«exitActionFunctions.toPrototypes»
 		«enterSequenceFunctions.toPrototypes»
 		«exitSequenceFunctions.toPrototypes»
-		«reactFunctions.toPrototypes»
+		«reactFunctions.filter[ f | ! (f.eContainer instanceof ExecutionState)].toList.toPrototypes»
+		«reactMethods.toDeclarations»
 		void clearInEvents();
 		void clearOutEvents();
 		
 	'''
-
+	
+	def toDeclarations(List<Method> steps) '''
+		«FOR s : steps»
+			«s.toPrototype»
+		«ENDFOR»
+	'''
+	
+	def toPrototype(Method it) '''
+		«typeSpecifier.targetLanguageName» «shortName»(«FOR p : parameters SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR»);
+	'''
+	
 	def toPrototypes(List<Step> steps) '''
 		«FOR s : steps»
 			«s.functionPrototype»
