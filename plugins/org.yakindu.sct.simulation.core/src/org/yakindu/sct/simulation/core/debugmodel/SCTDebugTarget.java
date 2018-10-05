@@ -45,19 +45,22 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 	private boolean suspended = false;
 
 	private final NamedElement element;
-
+	private String name;
 	protected ISimulationEngine engine;
-
 	private IExecutionControl executionControl;
-
 	private AdapterImpl updater;
 
 	public SCTDebugTarget(ILaunch launch, NamedElement element, ISimulationEngine engine) throws CoreException {
+		this(launch, element,element.getName(), engine);
+	}
+	
+	public SCTDebugTarget(ILaunch launch, NamedElement element, String name, ISimulationEngine engine) throws CoreException {
 		super(null, element.eResource().getURI().toPlatformString(true));
 		Assert.isNotNull(element);
 		this.launch = launch;
 		this.element = element;
 		this.engine = engine;
+		this.name = name;
 	}
 
 	public void init() {
@@ -88,7 +91,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 	}
 
 	public String getName() throws DebugException {
-		return element.getName();
+		return name;
 	}
 
 	public boolean supportsBreakpoint(IBreakpoint breakpoint) {
