@@ -35,8 +35,7 @@ import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
  * 
  */
 public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfigurationDelegate
-		implements
-			ILaunchConfigurationDelegate {
+		implements ILaunchConfigurationDelegate {
 
 	public String FILE_NAME = "filename";
 	public String DEFAULT_FILE_NAME = "";
@@ -68,8 +67,13 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 	}
 
 	protected SCTDebugTarget createDebugTarget(ILaunch launch, Statechart statechart) throws CoreException {
+		return createDebugTarget(launch, statechart, statechart.getName());
+	}
+
+	protected SCTDebugTarget createDebugTarget(ILaunch launch, Statechart statechart, String name)
+			throws CoreException {
 		Assert.isNotNull(statechart);
-		return new SCTDebugTarget(launch, statechart, createExecutionContainer(launch, statechart));
+		return new SCTDebugTarget(launch, statechart, name, createExecutionContainer(launch, statechart));
 	}
 
 	protected Statechart loadStatechart(String filename) {
@@ -81,7 +85,7 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 			throws CoreException {
 		String filename = configuration.getAttribute(FILE_NAME, "");
 		IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(filename);
-		return new IProject[]{resource.getProject()};
+		return new IProject[] { resource.getProject() };
 
 	}
 
