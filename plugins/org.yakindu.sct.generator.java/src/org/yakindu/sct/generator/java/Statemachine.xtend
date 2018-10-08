@@ -31,6 +31,8 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Method
 
 class Statemachine {
 	
@@ -614,10 +616,10 @@ class Statemachine {
 			clearOutEvents();
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 				switch (stateVector[nextStateIndex]) {
-				«FOR state : flow.states»
-					«IF state.reactSequence!==null»
+				«FOR state : flow.states.filter[isLeaf]»
+					«IF state.reactMethod !== null»
 						case «state.stateName.asEscapedIdentifier»:
-							«state.reactSequence.functionName»();
+							«state.reactMethod.shortName»(true);
 							break;
 				«ENDIF»
 				«ENDFOR»
@@ -659,8 +661,22 @@ class Statemachine {
 		«exitActionFunctions.toImplementation»
 		«enterSequenceFunctions.toImplementation»
 		«exitSequenceFunctions.toImplementation»
-		«reactFunctions.toImplementation»
+		«reactFunctions.filter[ f | ! (f.eContainer instanceof ExecutionState)].toList.toImplementation»
+		«reactMethods.toDefinitions»
 	'''
+	
+	def toDefinitions(List<Method> methods) '''
+	 	«FOR m : methods»
+	 		«m.implementation»
+	 		
+	 	«ENDFOR»
+	 '''
+	 
+	 def implementation(Method it) '''
+	 	private «typeSpecifier.targetLanguageName» «shortName»(«FOR p : parameters SEPARATOR ', '»«IF p.varArgs»...«ELSE»«p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR») {
+	 		«body.code»
+	 	}
+	 '''
 	
 	def toImplementation(List<Step> steps) '''
 		«FOR s : steps»

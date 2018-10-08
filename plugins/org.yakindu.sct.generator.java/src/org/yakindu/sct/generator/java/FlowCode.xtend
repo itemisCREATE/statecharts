@@ -11,6 +11,7 @@
 package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
+import java.util.List
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.CheckRef
@@ -19,16 +20,18 @@ import org.yakindu.sct.model.sexec.Execution
 import org.yakindu.sct.model.sexec.ExitState
 import org.yakindu.sct.model.sexec.HistoryEntry
 import org.yakindu.sct.model.sexec.If
+import org.yakindu.sct.model.sexec.LocalVariableDefinition
 import org.yakindu.sct.model.sexec.Reaction
+import org.yakindu.sct.model.sexec.Return
 import org.yakindu.sct.model.sexec.SaveHistory
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.StateSwitch
+import org.yakindu.sct.model.sexec.Statement
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
-import java.util.List
-import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sexec.naming.INamingService
 
 class FlowCode {
@@ -145,4 +148,17 @@ class FlowCode {
 		}
 		return timeEvents
 	}
+	
+	def dispatch CharSequence code(Return it) '''
+		return«IF value !== null» «value.code»«ENDIF»;
+	'''
+	
+	def dispatch CharSequence code(LocalVariableDefinition it) '''
+		«variable.typeSpecifier.type» «variable.name»«IF initialValue !== null» = «initialValue.code»«ENDIF»;
+	'''
+	
+	def dispatch CharSequence code(Statement it) 
+	'''
+		«expression.code»
+	'''
 }

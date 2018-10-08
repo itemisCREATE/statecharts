@@ -35,6 +35,8 @@ import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.base.types.Parameter
+import org.yakindu.sct.model.sexec.Statement
 
 class JavaExpressionsGenerator extends ExpressionsGenerator {
 
@@ -63,6 +65,8 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 			var property = varRef.definition as Property
 			if (eContainer instanceof Expression) {
 				return '''«property.getContext»«property.assign»(«assignCmdArgument(property)»)'''
+			} else if (eContainer instanceof Statement){
+				return '''«property.getContext»«property.name» = «assignCmdArgument(property)»;'''
 			} else {
 				return '''«property.getContext»«property.setter»(«assignCmdArgument(property)»)'''
 			}
@@ -121,7 +125,23 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def protected dispatch String code(ElementReferenceExpression it) {
-		(it.reference as Declaration).codeDeclaration(it).toString
+		code(it, it.reference).toString
+	}
+	
+	def protected dispatch String code(ElementReferenceExpression it, Declaration target){
+		target.codeDeclaration(it).toString
+	}
+	
+	def protected dispatch String code(ElementReferenceExpression it, Property target){
+		target.name	
+	}
+	
+	def protected dispatch String code(ElementReferenceExpression it, EObject target){
+		it.reference.code.toString
+	}
+	
+	def protected dispatch String code(Parameter it){
+		'''«name»'''
 	}
 
 	def protected dispatch String code(FeatureCall it) {
@@ -209,5 +229,4 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 		}
 		return false // default
 	}
-
 }
