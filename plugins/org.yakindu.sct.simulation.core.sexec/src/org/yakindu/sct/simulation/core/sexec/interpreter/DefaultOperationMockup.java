@@ -20,6 +20,7 @@ import java.util.Map;
 
 import org.yakindu.base.expressions.expressions.IntLiteral;
 import org.yakindu.base.expressions.interpreter.IOperationMockup;
+import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Operation;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -38,12 +39,12 @@ public class DefaultOperationMockup implements IOperationMockup {
 	protected Multimap<String, List<Object>> verifyCalls = ArrayListMultimap.create();
 
 	@Override
-	public boolean canExecute(Operation definition, Object[] parameter) {
+	public boolean canExecute(Declaration owner, Operation definition, Object[] parameter) {
 		return true;
 	}
 
 	@Override
-	public Object execute(Operation definition, Object[] parameter) {
+	public Object execute(Declaration owner, Operation definition, Object[] parameter) {
 		verifyCalls.put(definition.getName(), asList(parameter));
 		return mockReturn.get(definition.getName(), asList(parameter));
 	}

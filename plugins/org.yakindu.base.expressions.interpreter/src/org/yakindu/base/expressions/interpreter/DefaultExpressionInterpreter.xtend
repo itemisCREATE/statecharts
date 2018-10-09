@@ -52,6 +52,7 @@ import org.yakindu.sct.model.sruntime.ReferenceSlot
 import com.google.inject.Singleton
 import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
 import java.util.Set
+import org.yakindu.base.types.Declaration
 
 /**
  * 
@@ -270,9 +271,9 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	def executeElementReferenceExpression(ElementReferenceExpression expression) {
 		val parameter = expression.expressions.map(it|execute)
 		if (expression.operationCall || expression.reference instanceof Operation) {
-			val operationDelegate = operationDelegates.findFirst[canExecute(expression.reference as Operation, parameter.toArray)]
+			val operationDelegate = operationDelegates.findFirst[canExecute(null, expression.reference as Operation, parameter.toArray)]
 			if (operationDelegate !== null) {
-				return (expression.reference as Operation).execute(parameter.toArray, operationDelegate)
+				return (expression.reference as Operation).execute(null, parameter.toArray, operationDelegate)
 			}
 		}
 		// for enumeration types return the literal value
@@ -303,9 +304,9 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 			val parameter = call.expressions.map(it|execute)
 			if (call.feature instanceof Operation) {
 				val Operation operation = call.feature as Operation
-				val operationDelegate = operationDelegates.findFirst[canExecute(operation, parameter.toArray)]
+				val operationDelegate = operationDelegates.findFirst[canExecute((call.owner as ElementReferenceExpression).reference as Declaration, operation, parameter.toArray)]
 				if (operationDelegate !== null) {
-					return operation.execute(parameter, operationDelegate)
+					return operation.execute((call.owner as ElementReferenceExpression).reference as Declaration, parameter, operationDelegate)
 				}
 			}
 		} else if (call.feature instanceof Enumerator) {
@@ -334,8 +335,8 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 		return evaluate(operator, result);
 	}
 
-	def execute(Operation it, List<Object> params, IOperationMockup operationDelegate) {
-		operationDelegate.execute(it, params)
+	def execute(Operation it, Declaration owner, List<Object> params, IOperationMockup operationDelegate) {
+		operationDelegate.execute(owner, it, params)
 	}
 
 }
