@@ -65,7 +65,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 		if (varRef.definition instanceof Property) {
 			var property = varRef.definition as Property
 			if (property.eContainer instanceof LocalVariableDefinition) {
-				return '''«property.getContext»«property.name» = «assignCmdArgument(property)»;'''
+				return '''«property.getContext»«property.name» = «assignCmdArgument(property)»'''
 			} else {
 				if (eContainer instanceof Expression) {
 					return '''«property.getContext»«property.assign»(«assignCmdArgument(property)»)'''
