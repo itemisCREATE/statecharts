@@ -16,6 +16,7 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sexec.Method
 
 class Naming implements CSharpKeywords {
 
@@ -182,5 +183,7 @@ class Naming implements CSharpKeywords {
 	}
 
 	def functionName(Step it) { shortName }
+	
+	def functionName(Method it) { shortName }
 
 }
