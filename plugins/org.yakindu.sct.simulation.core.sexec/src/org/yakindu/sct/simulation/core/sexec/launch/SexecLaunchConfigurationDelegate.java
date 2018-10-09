@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.simulation.core.sexec.launch;
 
+import java.util.Set;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
@@ -40,6 +42,9 @@ public class SexecLaunchConfigurationDelegate extends AbstractSCTLaunchConfigura
 
 	@Inject
 	private ISimulationEngineFactory factory;
+	
+	@Inject
+	private Set<IOperationMockup> mockups;
 
 	@Override
 	protected ISimulationEngine createExecutionContainer(final ILaunch launch, Statechart statechart) {
@@ -48,12 +53,14 @@ public class SexecLaunchConfigurationDelegate extends AbstractSCTLaunchConfigura
 			Injector injector = getInjector(statechart, launch);
 			IFile file = WorkspaceSynchronizer.getFile(statechart.eResource());
 			injector.injectMembers(this);
-			IOperationMockup mockup = injector.getInstance(IOperationMockup.class);
-			if (mockup instanceof JavaOperationMockup) {
-				IProject project = file.getProject();
-				String classes = launch.getLaunchConfiguration().getAttribute(ISCTLaunchParameters.OPERATION_CLASS, "");
-				String[] split = classes.split(",");
-				((JavaOperationMockup) mockup).initOperationCallbacks(project, split);
+			
+			for (IOperationMockup mockup : mockups) {
+				if (mockup instanceof JavaOperationMockup) {
+					IProject project = file.getProject();
+					String classes = launch.getLaunchConfiguration().getAttribute(ISCTLaunchParameters.OPERATION_CLASS, "");
+					String[] split = classes.split(",");
+					((JavaOperationMockup) mockup).initOperationCallbacks(project, split);
+				}
 			}
 			return factory.createExecutionContainer(statechart, launch);
 		} catch (CoreException e) {
