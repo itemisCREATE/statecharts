@@ -743,7 +743,7 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 					exitSequence_main_region_StateA();
 					enterSequence_main_region_StateB_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -757,7 +757,7 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {

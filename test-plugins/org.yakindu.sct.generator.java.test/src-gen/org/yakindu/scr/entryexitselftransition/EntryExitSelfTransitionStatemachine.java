@@ -269,7 +269,7 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 					entryAction_main_region_A();
 					enterSequence_main_region_A__region0_C_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -287,7 +287,7 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 					exitSequence_main_region_A__region0_B();
 					enterSequence_main_region_A__region0_C_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -305,7 +305,7 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 					exitSequence_main_region_A();
 					enterSequence_main_region_A_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}

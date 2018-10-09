@@ -1414,7 +1414,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 					
 					enterSequence_goto_boolean_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -1436,7 +1436,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 						exitSequence_goto_boolean();
 						enterSequence_goto_void_try();
 					} else {
-						did_transition = false;;
+						did_transition = false;
 					}
 				}
 			}
@@ -1451,7 +1451,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1464,7 +1464,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		
 		if (try_transition) {
 			if (goto_void_react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1477,7 +1477,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		
 		if (try_transition) {
 			if (goto_void_volatile_transient_react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1494,7 +1494,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 					exitSequence_goto_void_volatile_state();
 					enterSequence_goto_void_volatile_transient_this();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}

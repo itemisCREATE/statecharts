@@ -249,7 +249,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 					exitSequence_main_region_StateA();
 					enterSequence_main_region_StateB_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -263,7 +263,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -279,7 +279,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 				exitSequence_second_region_StateC();
 				enterSequence_second_region_StateD_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -291,7 +291,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}

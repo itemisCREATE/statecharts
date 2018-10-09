@@ -196,7 +196,7 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}

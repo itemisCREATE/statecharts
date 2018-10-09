@@ -501,7 +501,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 					exitSequence_mainRegion_State1();
 					enterSequence_mainRegion_State2_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -519,7 +519,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 					exitSequence_mainRegion_State2();
 					enterSequence_mainRegion_State1_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -537,7 +537,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 					exitSequence_mainRegion_State2__region0_State3();
 					enterSequence_mainRegion_State2__region0_State4_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -555,7 +555,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 					exitSequence_mainRegion_State2__region0_State4();
 					enterSequence_mainRegion_State2__region0_State5_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -573,7 +573,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 					exitSequence_mainRegion_State2__region0_State4__region0_State6();
 					enterSequence_mainRegion_State2__region0_State4__region0_State7_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -591,7 +591,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 					exitSequence_mainRegion_State2__region0_State4__region0_State7();
 					enterSequence_mainRegion_State2__region0_State4__region0_State6_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -609,7 +609,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 					exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8();
 					enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -627,7 +627,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 					exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9();
 					enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -641,7 +641,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 		
 		if (try_transition) {
 			if (mainRegion_State2_react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {

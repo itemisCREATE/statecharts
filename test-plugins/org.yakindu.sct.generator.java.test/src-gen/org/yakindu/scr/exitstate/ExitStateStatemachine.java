@@ -262,7 +262,7 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -287,7 +287,7 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 							exitSequence_r_A_r_B();
 							react_r_A_r__exit_Default();
 						} else {
-							did_transition = false;;
+							did_transition = false;
 						}
 					}
 				}
@@ -303,7 +303,7 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -316,7 +316,7 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {

@@ -349,7 +349,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 						exitSequence_main_region_A();
 						react_main_region_B_r1_he();
 					} else {
-						did_transition = false;;
+						did_transition = false;
 					}
 				}
 			}
@@ -368,7 +368,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 					exitSequence_main_region_B();
 					enterSequence_main_region_A_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -386,7 +386,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 					exitSequence_main_region_B_r1_C();
 					enterSequence_main_region_B_r1_D_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -404,7 +404,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 					exitSequence_main_region_B_r1_D();
 					enterSequence_main_region_B_r1_E_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -422,7 +422,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 					exitSequence_main_region_B_r1_E();
 					enterSequence_main_region_B_r1_C_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -436,7 +436,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		
 		if (try_transition) {
 			if (main_region_B_r1_E_react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {

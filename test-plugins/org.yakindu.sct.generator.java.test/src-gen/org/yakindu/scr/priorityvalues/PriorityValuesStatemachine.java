@@ -287,7 +287,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 					exitSequence_someRegion_A();
 					enterSequence_someRegion_B_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -301,7 +301,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -329,7 +329,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 							exitSequence_main_region_A();
 							enterSequence_main_region_E_default();
 						} else {
-							did_transition = false;;
+							did_transition = false;
 						}
 					}
 				}
@@ -344,7 +344,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -355,7 +355,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -366,7 +366,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -377,7 +377,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}

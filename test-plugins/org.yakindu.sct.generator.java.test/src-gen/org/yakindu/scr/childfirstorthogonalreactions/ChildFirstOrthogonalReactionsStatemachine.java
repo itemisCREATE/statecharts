@@ -662,7 +662,7 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 				exitSequence_ChildFirstOrthogonalReactions_r_A();
 				enterSequence_ChildFirstOrthogonalReactions_r_B_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -679,7 +679,7 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 				exitSequence_ChildFirstOrthogonalReactions_r_A();
 				enterSequence_ChildFirstOrthogonalReactions_r_B_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -696,7 +696,7 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 				exitSequence_ChildFirstOrthogonalReactions_r_A();
 				enterSequence_ChildFirstOrthogonalReactions_r_B_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -713,13 +713,13 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 				exitSequence_ChildFirstOrthogonalReactions_r_A();
 				enterSequence_ChildFirstOrthogonalReactions_r_B_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
 			sCInterface.setAac_local(sCInterface.operationCallback.next());
 			
-			did_transition = childFirstOrthogonalReactions_r_A_r_AA_react(try_transition);;
+			did_transition = childFirstOrthogonalReactions_r_A_r_AA_react(try_transition);
 		}
 		return did_transition;
 	}
@@ -732,13 +732,13 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 				exitSequence_ChildFirstOrthogonalReactions_r_A();
 				enterSequence_ChildFirstOrthogonalReactions_r_B_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
 			sCInterface.setAc_local(sCInterface.operationCallback.next());
 			
-			did_transition = childFirstOrthogonalReactions_r_A_react(try_transition);;
+			did_transition = childFirstOrthogonalReactions_r_A_react(try_transition);
 		}
 		return did_transition;
 	}
@@ -747,7 +747,7 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -763,13 +763,13 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 				enterSequence_ChildFirstOrthogonalReactions_r2_D_default();
 				react(false);
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
 			sCInterface.setC_local(sCInterface.operationCallback.next());
 			
-			did_transition = react(try_transition);;
+			did_transition = react(try_transition);
 		}
 		return did_transition;
 	}
@@ -778,10 +778,10 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
-			did_transition = react(try_transition);;
+			did_transition = react(try_transition);
 		}
 		return did_transition;
 	}

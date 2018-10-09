@@ -352,7 +352,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -366,7 +366,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -383,7 +383,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 					exitSequence_main_region_B_r1_C1();
 					enterSequence_main_region_B_r1_C2_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -401,7 +401,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 					exitSequence_main_region_B();
 					react_main_region__sync0();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -418,7 +418,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 				exitSequence_main_region_B_r2_D1();
 				enterSequence_main_region_B_r2_D2_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -434,7 +434,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 				exitSequence_main_region_B();
 				react_main_region__sync0();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {

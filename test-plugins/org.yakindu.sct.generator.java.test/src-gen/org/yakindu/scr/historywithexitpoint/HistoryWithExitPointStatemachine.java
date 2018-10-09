@@ -277,7 +277,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -298,7 +298,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 						exitSequence_mr_A_r_X1();
 						react_mr_A_r_exit_to_B();
 					} else {
-						did_transition = false;;
+						did_transition = false;
 					}
 				}
 			}
@@ -321,7 +321,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 						exitSequence_mr_A_r_X2();
 						react_mr_A_r_exit_to_B();
 					} else {
-						did_transition = false;;
+						did_transition = false;
 					}
 				}
 			}
@@ -340,7 +340,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 					exitSequence_mr_B();
 					enterSequence_mr_A_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}

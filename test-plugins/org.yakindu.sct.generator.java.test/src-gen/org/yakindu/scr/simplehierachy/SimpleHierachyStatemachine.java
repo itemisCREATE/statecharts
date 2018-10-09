@@ -196,7 +196,7 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -210,7 +210,7 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -223,7 +223,7 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 		
 		if (try_transition) {
 			if (main_region_B_react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {

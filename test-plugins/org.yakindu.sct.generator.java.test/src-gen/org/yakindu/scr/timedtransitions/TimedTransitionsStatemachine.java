@@ -231,7 +231,7 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 					exitSequence_main_region_Start();
 					enterSequence_main_region_End_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -245,7 +245,7 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {

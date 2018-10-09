@@ -663,7 +663,7 @@ public class ParentFirstOrthogonalReactionsStatemachine implements IParentFirstO
 					exitSequence_ParentFirstOrthogonalReactions_r_A();
 					enterSequence_ParentFirstOrthogonalReactions_r_B_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -682,7 +682,7 @@ public class ParentFirstOrthogonalReactionsStatemachine implements IParentFirstO
 					exitSequence_ParentFirstOrthogonalReactions_r_A();
 					enterSequence_ParentFirstOrthogonalReactions_r_B_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -701,7 +701,7 @@ public class ParentFirstOrthogonalReactionsStatemachine implements IParentFirstO
 					exitSequence_ParentFirstOrthogonalReactions_r_A();
 					enterSequence_ParentFirstOrthogonalReactions_r_B_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -719,7 +719,7 @@ public class ParentFirstOrthogonalReactionsStatemachine implements IParentFirstO
 				exitSequence_ParentFirstOrthogonalReactions_r_A();
 				enterSequence_ParentFirstOrthogonalReactions_r_B_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -736,7 +736,7 @@ public class ParentFirstOrthogonalReactionsStatemachine implements IParentFirstO
 				exitSequence_ParentFirstOrthogonalReactions_r_A();
 				enterSequence_ParentFirstOrthogonalReactions_r_B_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -750,7 +750,7 @@ public class ParentFirstOrthogonalReactionsStatemachine implements IParentFirstO
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -766,7 +766,7 @@ public class ParentFirstOrthogonalReactionsStatemachine implements IParentFirstO
 				exitSequence_ParentFirstOrthogonalReactions_r2_C();
 				enterSequence_ParentFirstOrthogonalReactions_r2_D_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -779,7 +779,7 @@ public class ParentFirstOrthogonalReactionsStatemachine implements IParentFirstO
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}

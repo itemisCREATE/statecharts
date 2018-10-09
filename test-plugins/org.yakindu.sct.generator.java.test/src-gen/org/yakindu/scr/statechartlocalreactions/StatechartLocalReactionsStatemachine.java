@@ -237,7 +237,7 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}

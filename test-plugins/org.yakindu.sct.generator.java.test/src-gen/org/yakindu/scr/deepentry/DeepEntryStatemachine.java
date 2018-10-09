@@ -541,7 +541,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -554,7 +554,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		
 		if (try_transition) {
 			if (r_A_react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -570,7 +570,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 				exitSequence_r2_B();
 				enterSequence_r2_C_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -587,7 +587,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 					exitSequence_r2_B_r_BA();
 					enterSequence_r2_B_r_BB_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -601,7 +601,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		
 		if (try_transition) {
 			if (r2_B_r_BA_react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -614,7 +614,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		
 		if (try_transition) {
 			if (r2_B_react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -630,7 +630,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 				exitSequence_r2_C();
 				enterSequence_r2_B_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -642,7 +642,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -654,7 +654,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		
 		if (try_transition) {
 			if (r3_D_react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -667,7 +667,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		
 		if (try_transition) {
 			if (r3_D_r_DA_react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {

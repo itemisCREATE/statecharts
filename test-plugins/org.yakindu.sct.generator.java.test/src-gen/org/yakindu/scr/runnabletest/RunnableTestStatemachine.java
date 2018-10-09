@@ -446,7 +446,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -463,7 +463,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 					exitSequence_main_region_Composite_s1_s2();
 					enterSequence_main_region__final__default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -487,7 +487,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 						
 						enterSequence_main_region_Composite_s1_s2_inner_region_s1_default();
 					} else {
-						did_transition = false;;
+						did_transition = false;
 					}
 				}
 			}
@@ -506,7 +506,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 					exitSequence_main_region_Composite_s1_s2_inner_region_s2();
 					enterSequence_main_region_Composite_s1_s2_inner_region_s1_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}

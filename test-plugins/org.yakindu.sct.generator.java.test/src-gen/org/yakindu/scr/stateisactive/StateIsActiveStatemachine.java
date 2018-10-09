@@ -222,7 +222,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 					exitSequence_R1_R1A();
 					enterSequence_R1_R1B_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -236,7 +236,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -252,7 +252,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 				exitSequence_R2_R2A();
 				enterSequence_R2_R2B_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -264,7 +264,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}

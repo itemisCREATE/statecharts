@@ -267,7 +267,7 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 							exitSequence_r_A();
 							enterSequence_r_B_g();
 						} else {
-							did_transition = false;;
+							did_transition = false;
 						}
 					}
 				}
@@ -283,7 +283,7 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -296,7 +296,7 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 		
 		if (try_transition) {
 			if (r_B_react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -309,7 +309,7 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 		
 		if (try_transition) {
 			if (r_B_react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {

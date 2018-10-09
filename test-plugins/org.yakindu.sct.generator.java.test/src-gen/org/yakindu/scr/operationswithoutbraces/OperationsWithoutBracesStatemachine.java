@@ -290,7 +290,7 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -308,7 +308,7 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 					exitSequence_main_region_B();
 					enterSequence_main_region_C_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -326,7 +326,7 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 					exitSequence_main_region_C();
 					enterSequence_main_region_D_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -340,7 +340,7 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -356,7 +356,7 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 				exitSequence_another_region_A();
 				enterSequence_another_region_B_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -372,7 +372,7 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 				exitSequence_another_region_B();
 				enterSequence_another_region_C_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -388,7 +388,7 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 				exitSequence_another_region_C();
 				enterSequence_another_region_D_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -400,7 +400,7 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}

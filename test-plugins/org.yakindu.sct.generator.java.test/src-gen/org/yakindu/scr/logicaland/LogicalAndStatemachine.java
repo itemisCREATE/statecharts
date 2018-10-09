@@ -179,7 +179,7 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 					
 					enterSequence_main_region_A_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}

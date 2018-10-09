@@ -310,7 +310,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 						exitSequence_main_region_A();
 						enterSequence_main_region_B_default();
 					} else {
-						did_transition = false;;
+						did_transition = false;
 					}
 				}
 			}
@@ -329,7 +329,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 					exitSequence_main_region_B();
 					enterSequence_main_region_A_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -347,7 +347,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 					exitSequence_main_region_B_r1_C1();
 					enterSequence_main_region_B_r1_C2_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -361,7 +361,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		
 		if (try_transition) {
 			if (main_region_B_react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -377,7 +377,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 				exitSequence_main_region_B_r2_D1();
 				enterSequence_main_region_B_r2_D2_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -389,7 +389,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}

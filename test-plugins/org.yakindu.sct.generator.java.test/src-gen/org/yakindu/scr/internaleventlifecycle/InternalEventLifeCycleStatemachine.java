@@ -249,7 +249,7 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 					exitSequence_r1_A();
 					enterSequence_r1_B_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -270,7 +270,7 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 					exitSequence_r1_B();
 					enterSequence_r1_A_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -287,7 +287,7 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 				exitSequence_r2_C();
 				enterSequence_r2_D_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -305,7 +305,7 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 				
 				enterSequence_r2_C_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {

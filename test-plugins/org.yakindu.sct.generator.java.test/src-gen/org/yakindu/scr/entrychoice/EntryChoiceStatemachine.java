@@ -128,7 +128,7 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {

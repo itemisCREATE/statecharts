@@ -253,7 +253,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 					exitSequence_main_region_Start();
 					enterSequence_main_region_Mid_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -271,7 +271,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 					exitSequence_main_region_Mid();
 					enterSequence_main_region_Mid2_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -289,7 +289,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 					exitSequence_main_region_Mid2();
 					enterSequence_main_region_End_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -303,7 +303,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {

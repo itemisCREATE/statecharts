@@ -909,7 +909,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 					
 					enterSequence_auto_loop_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -923,7 +923,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -936,7 +936,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		
 		if (try_transition) {
 			if (auto_loop_react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -949,7 +949,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		
 		if (try_transition) {
 			if (auto_loop_switch_case_react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {

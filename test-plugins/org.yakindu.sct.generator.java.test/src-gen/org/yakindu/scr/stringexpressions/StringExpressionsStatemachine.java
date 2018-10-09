@@ -730,7 +730,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 					
 					react_main_region__choice_0();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -744,7 +744,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -763,7 +763,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 					
 					react_main_region__choice_3();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -783,7 +783,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 					
 					react_main_region__choice_7();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -803,7 +803,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 					
 					react_main_region__choice_11();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -817,7 +817,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {

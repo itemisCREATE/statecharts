@@ -434,7 +434,7 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 					
 					enterSequence_ParentFirstExecutionHierarchy_r_B_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -455,7 +455,7 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 					
 					enterSequence_ParentFirstExecutionHierarchy_r_B_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -476,7 +476,7 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 					
 					enterSequence_ParentFirstExecutionHierarchy_r_B_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -495,7 +495,7 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 					exitSequence_ParentFirstExecutionHierarchy_r_B();
 					enterSequence_ParentFirstExecutionHierarchy_r_A_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}

@@ -257,7 +257,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 					
 					enterSequence_EventDrivenTriggeredByTimeEvent_r_B_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -278,7 +278,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 					
 					enterSequence_EventDrivenTriggeredByTimeEvent_r_A_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}

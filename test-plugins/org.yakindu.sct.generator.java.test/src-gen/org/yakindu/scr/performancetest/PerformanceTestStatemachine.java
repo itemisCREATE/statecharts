@@ -796,7 +796,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 					exitSequence_mr_A();
 					enterSequence_mr_B_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -810,7 +810,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -827,7 +827,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 					exitSequence_mr_B_r1_X();
 					react_mr_B_r1__choice_0();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -845,7 +845,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 					exitSequence_mr_B_r1_Y();
 					react_mr_B_r1__choice_0();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -863,7 +863,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 					exitSequence_mr_B_r1_Z();
 					react_mr_B_r1__choice_0();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -881,7 +881,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 					exitSequence_mr_B_r1_V();
 					react_mr_B_r1__choice_0();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -899,7 +899,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 					exitSequence_mr_B_r1_W();
 					react_mr_B_r1__choice_0();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -921,7 +921,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 						exitSequence_mr_B();
 						react_mr__sync0();
 					} else {
-						did_transition = false;;
+						did_transition = false;
 					}
 				}
 			}
@@ -940,7 +940,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 					exitSequence_mr_B_r1_T();
 					react_mr_B_r1__choice_0();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -958,7 +958,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 					exitSequence_mr_B_r1_U();
 					react_mr_B_r1__choice_0();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -975,7 +975,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 				exitSequence_mr_B_r2_S();
 				enterSequence_mr_B_r2_T_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -991,7 +991,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 				exitSequence_mr_B_r2_T();
 				enterSequence_mr_B_r2_U_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1011,7 +1011,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 					exitSequence_mr_B_r2_U();
 					enterSequence_mr_B_r2_W_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -1032,7 +1032,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 					exitSequence_mr_B_r2_V();
 					enterSequence_mr_B_r2_S_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -1049,7 +1049,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 				exitSequence_mr_B();
 				react_mr__sync0();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {

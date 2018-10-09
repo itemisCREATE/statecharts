@@ -265,7 +265,7 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 					
 					enterSequence_r1_B_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -279,7 +279,7 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -294,7 +294,7 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 			if (sCInterface.f) {

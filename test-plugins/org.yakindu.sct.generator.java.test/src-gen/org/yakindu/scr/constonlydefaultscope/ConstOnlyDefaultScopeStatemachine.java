@@ -220,7 +220,7 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 						exitSequence_ConstOnlyDefaultScope_main_region_A();
 						enterSequence_ConstOnlyDefaultScope_main_region_C_default();
 					} else {
-						did_transition = false;;
+						did_transition = false;
 					}
 				}
 			}
@@ -235,7 +235,7 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -248,7 +248,7 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {

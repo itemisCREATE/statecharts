@@ -205,7 +205,7 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 						exitSequence_ConstOnlyInternalScope_main_region_A();
 						enterSequence_ConstOnlyInternalScope_main_region_C_default();
 					} else {
-						did_transition = false;;
+						did_transition = false;
 					}
 				}
 			}
@@ -220,7 +220,7 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -233,7 +233,7 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {

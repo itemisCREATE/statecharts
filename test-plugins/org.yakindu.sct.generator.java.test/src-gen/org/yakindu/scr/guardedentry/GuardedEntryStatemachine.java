@@ -213,7 +213,7 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -231,7 +231,7 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 					exitSequence_main_region_B();
 					enterSequence_main_region_A_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}

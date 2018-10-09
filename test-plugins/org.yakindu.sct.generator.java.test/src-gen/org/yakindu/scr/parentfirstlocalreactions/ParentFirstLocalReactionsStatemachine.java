@@ -456,7 +456,7 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 					exitSequence_ParentFirstLocalReactions_r_A();
 					enterSequence_ParentFirstLocalReactions_r_B_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -475,7 +475,7 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 					exitSequence_ParentFirstLocalReactions_r_A_r_AA();
 					enterSequence_ParentFirstLocalReactions_r_A_r_AB_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -494,7 +494,7 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 					exitSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAA();
 					enterSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAB_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -509,7 +509,7 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		
 		if (try_transition) {
 			if (parentFirstLocalReactions_r_A_r_AA_react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -522,7 +522,7 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		
 		if (try_transition) {
 			if (parentFirstLocalReactions_r_A_react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -535,7 +535,7 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {

@@ -366,7 +366,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 							
 							enterSequence_main_region_s1_default();
 						} else {
-							did_transition = false;;
+							did_transition = false;
 						}
 					}
 				}
@@ -386,7 +386,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 					exitSequence_main_region_s2();
 					enterSequence_main_region_s1_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -400,7 +400,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {

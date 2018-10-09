@@ -235,7 +235,7 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 					exitSequence_main_region_B();
 					enterSequence_main_region_C_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -249,7 +249,7 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {

@@ -321,7 +321,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 						enterSequence_main_region_Z__region0_B__region0_C_default();
 						historyVector[0] = stateVector[0];
 					} else {
-						did_transition = false;;
+						did_transition = false;
 					}
 				}
 			}
@@ -340,7 +340,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 					exitSequence_main_region_Z();
 					enterSequence_main_region_Y_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -359,7 +359,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 					enterSequence_main_region_Z__region0_B__region0_C_default();
 					historyVector[0] = stateVector[0];
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -373,7 +373,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		
 		if (try_transition) {
 			if (main_region_Z_react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -390,7 +390,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 					exitSequence_main_region_Z__region0_B();
 					enterSequence_main_region_Z__region0_A_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}

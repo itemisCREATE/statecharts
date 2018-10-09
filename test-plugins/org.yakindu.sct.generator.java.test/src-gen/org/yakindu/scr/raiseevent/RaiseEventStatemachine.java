@@ -248,7 +248,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 					exitSequence_main_region_StateA();
 					enterSequence_main_region_StateB_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -262,7 +262,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -278,7 +278,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 				exitSequence_second_region_SateA();
 				enterSequence_second_region_StateB_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -290,7 +290,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}

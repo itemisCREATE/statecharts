@@ -313,7 +313,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 					exitSequence_main_region_B();
 					enterSequence_main_region_C_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -331,7 +331,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 					exitSequence_main_region_C();
 					enterSequence_main_region_D_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -345,7 +345,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {

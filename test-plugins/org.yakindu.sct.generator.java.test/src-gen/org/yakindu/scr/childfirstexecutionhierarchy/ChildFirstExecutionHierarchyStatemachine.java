@@ -434,13 +434,13 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 				enterSequence_ChildFirstExecutionHierarchy_r_B_default();
 				react(false);
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
 			sCInterface.setA_local(true);
 			
-			did_transition = react(try_transition);;
+			did_transition = react(try_transition);
 		}
 		return did_transition;
 	}
@@ -456,13 +456,13 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 				enterSequence_ChildFirstExecutionHierarchy_r_B_default();
 				react(false);
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
 			sCInterface.setAa_local(true);
 			
-			did_transition = childFirstExecutionHierarchy_r_A_react(try_transition);;
+			did_transition = childFirstExecutionHierarchy_r_A_react(try_transition);
 		}
 		return did_transition;
 	}
@@ -478,13 +478,13 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 				enterSequence_ChildFirstExecutionHierarchy_r_B_default();
 				react(false);
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
 			sCInterface.setAaa_local(true);
 			
-			did_transition = childFirstExecutionHierarchy_r_A_r_AA_react(try_transition);;
+			did_transition = childFirstExecutionHierarchy_r_A_r_AA_react(try_transition);
 		}
 		return did_transition;
 	}
@@ -498,11 +498,11 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 				enterSequence_ChildFirstExecutionHierarchy_r_A_default();
 				react(false);
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
-			did_transition = react(try_transition);;
+			did_transition = react(try_transition);
 		}
 		return did_transition;
 	}

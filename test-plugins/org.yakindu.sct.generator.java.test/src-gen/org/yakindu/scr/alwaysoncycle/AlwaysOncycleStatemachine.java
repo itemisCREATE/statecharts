@@ -204,7 +204,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 					exitSequence_main_region_StateA();
 					enterSequence_main_region_StateB_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -223,7 +223,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 					exitSequence_main_region_StateB();
 					enterSequence_main_region_StateA_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}

@@ -600,7 +600,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -618,7 +618,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 				
 				enterSequence_integer_region_C_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -636,7 +636,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 				
 				enterSequence_integer_region_D_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -648,7 +648,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -665,7 +665,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 				
 				enterSequence_boolean_region_C_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -683,7 +683,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 				
 				enterSequence_boolean_region_D_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -695,7 +695,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -712,7 +712,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 				
 				enterSequence_real_region_C_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -730,7 +730,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 				
 				enterSequence_real_region_D_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -742,7 +742,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -759,7 +759,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 				
 				enterSequence_string_region_C_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -777,7 +777,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 				
 				enterSequence_string_region_D_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -789,7 +789,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}

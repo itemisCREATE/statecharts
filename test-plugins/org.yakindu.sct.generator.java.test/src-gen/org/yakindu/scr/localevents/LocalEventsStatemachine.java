@@ -463,7 +463,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -481,7 +481,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 					exitSequence_localEvents_r1_Comp1_r_A1();
 					enterSequence_localEvents_r1_Comp1_r_C1_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -504,7 +504,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 					
 					enterSequence_localEvents_r1_Comp1_r_D1_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -518,7 +518,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		
 		if (try_transition) {
 			if (localEvents_r1_Comp1_react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -530,7 +530,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 			sCInterface.setCycleCount2(sCInterface.getCycleCount2() + 1);
@@ -547,7 +547,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 					exitSequence_localEvents_r2_Comp2_r_A2();
 					enterSequence_localEvents_r2_Comp2_r_B2_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -565,7 +565,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 					exitSequence_localEvents_r2_Comp2_r_B2();
 					enterSequence_localEvents_r2_Comp2_r_C2_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -583,7 +583,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 					exitSequence_localEvents_r2_Comp2_r_C2();
 					enterSequence_localEvents_r2_Comp2_r_D2_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -597,7 +597,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		
 		if (try_transition) {
 			if (localEvents_r2_Comp2_react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {

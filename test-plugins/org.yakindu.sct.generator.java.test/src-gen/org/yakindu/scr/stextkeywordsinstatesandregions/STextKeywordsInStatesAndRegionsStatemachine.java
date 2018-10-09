@@ -1219,7 +1219,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		
 		if (try_transition) {
 			if (react(try_transition)==false) {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1235,7 +1235,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 				exitSequence_operation_interface();
 				enterSequence_operation_internal_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1247,7 +1247,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -1262,7 +1262,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 				exitSequence_namespace_event();
 				enterSequence_namespace_local_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1274,7 +1274,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -1289,7 +1289,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 				exitSequence_local_in();
 				enterSequence_local_out_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1301,7 +1301,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -1316,7 +1316,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 				exitSequence_interface_var();
 				enterSequence_interface_readonly_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1328,7 +1328,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -1343,7 +1343,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 				exitSequence_internal_external();
 				enterSequence_internal_operation_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1355,7 +1355,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -1370,7 +1370,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 				exitSequence_event_default();
 				enterSequence_event_else_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1382,7 +1382,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -1397,7 +1397,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 				exitSequence_in_entry();
 				enterSequence_in_exit_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1409,7 +1409,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -1424,7 +1424,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 				exitSequence_out_always();
 				enterSequence_out_oncycle_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1436,7 +1436,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -1451,7 +1451,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 				exitSequence_var_raise();
 				enterSequence_var_valueof_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1463,7 +1463,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -1478,7 +1478,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 				exitSequence_readonly_active();
 				enterSequence_readonly_namespace_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1490,7 +1490,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -1505,7 +1505,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 				exitSequence_external_interface();
 				enterSequence_external_internal_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1517,7 +1517,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -1532,7 +1532,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 				exitSequence_else_event();
 				enterSequence_else_local_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1544,7 +1544,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -1559,7 +1559,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 				exitSequence_entry_in();
 				enterSequence_entry_out_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1571,7 +1571,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -1586,7 +1586,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 				exitSequence_exit_var();
 				enterSequence_exit_readonly_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1598,7 +1598,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -1613,7 +1613,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 				exitSequence_always_external();
 				enterSequence_always_operation_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1625,7 +1625,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -1640,7 +1640,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 				exitSequence_oncycle_default();
 				enterSequence_oncycle_else_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1652,7 +1652,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -1667,7 +1667,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 				exitSequence_raise_entry();
 				enterSequence_raise_exit_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1679,7 +1679,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -1694,7 +1694,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 				exitSequence_valueof_always();
 				enterSequence_valueof_oncycle_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1706,7 +1706,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}
@@ -1721,7 +1721,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 				exitSequence_active_raise();
 				enterSequence_active_valueof_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -1733,7 +1733,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
 		}

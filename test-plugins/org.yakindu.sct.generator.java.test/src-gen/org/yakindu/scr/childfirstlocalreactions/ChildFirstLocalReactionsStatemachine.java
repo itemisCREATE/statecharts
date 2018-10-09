@@ -456,13 +456,13 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 				enterSequence_childfirst_ChildFirstLocalReactions_r_B_default();
 				react(false);
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
 			sCInterface.setA_local((sCInterface.assignCnt(sCInterface.getCnt() + 1)));
 			
-			did_transition = react(try_transition);;
+			did_transition = react(try_transition);
 		}
 		return did_transition;
 	}
@@ -476,13 +476,13 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 				enterSequence_childfirst_ChildFirstLocalReactions_r_A_r_AB_default();
 				childfirst_ChildFirstLocalReactions_r_A_react(false);
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
 			sCInterface.setAa_local((sCInterface.assignCnt(sCInterface.getCnt() + 1)));
 			
-			did_transition = childfirst_ChildFirstLocalReactions_r_A_react(try_transition);;
+			did_transition = childfirst_ChildFirstLocalReactions_r_A_react(try_transition);
 		}
 		return did_transition;
 	}
@@ -496,13 +496,13 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 				enterSequence_childfirst_ChildFirstLocalReactions_r_A_r_AA_r_AAB_default();
 				childfirst_ChildFirstLocalReactions_r_A_r_AA_react(false);
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
 			sCInterface.setAaa_local((sCInterface.assignCnt(sCInterface.getCnt() + 1)));
 			
-			did_transition = childfirst_ChildFirstLocalReactions_r_A_r_AA_react(try_transition);;
+			did_transition = childfirst_ChildFirstLocalReactions_r_A_r_AA_react(try_transition);
 		}
 		return did_transition;
 	}
@@ -511,10 +511,10 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
-			did_transition = childfirst_ChildFirstLocalReactions_r_A_r_AA_react(try_transition);;
+			did_transition = childfirst_ChildFirstLocalReactions_r_A_r_AA_react(try_transition);
 		}
 		return did_transition;
 	}
@@ -523,10 +523,10 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
-			did_transition = childfirst_ChildFirstLocalReactions_r_A_react(try_transition);;
+			did_transition = childfirst_ChildFirstLocalReactions_r_A_react(try_transition);
 		}
 		return did_transition;
 	}
@@ -535,10 +535,10 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			did_transition = false;;
+			did_transition = false;
 		}
 		if (did_transition==false) {
-			did_transition = react(try_transition);;
+			did_transition = react(try_transition);
 		}
 		return did_transition;
 	}

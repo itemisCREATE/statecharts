@@ -332,7 +332,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 								exitSequence_main_region_A();
 								react_main_region__choice_3();
 							} else {
-								did_transition = false;;
+								did_transition = false;
 							}
 						}
 					}

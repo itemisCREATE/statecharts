@@ -358,7 +358,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 					exitSequence_region_1_Idle();
 					enterSequence_region_1_Number1Pressed_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -380,7 +380,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 						exitSequence_region_1_Number1Pressed();
 						enterSequence_region_1_Idle_default();
 					} else {
-						did_transition = false;;
+						did_transition = false;
 					}
 				}
 			}
@@ -403,7 +403,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 						exitSequence_region_1_Number2Pressed();
 						enterSequence_region_1_Idle_default();
 					} else {
-						did_transition = false;;
+						did_transition = false;
 					}
 				}
 			}
@@ -422,7 +422,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 					exitSequence_region_1_Number3Pressed();
 					enterSequence_region_1_Idle_default();
 				} else {
-					did_transition = false;;
+					did_transition = false;
 				}
 			}
 		}
@@ -439,7 +439,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 				exitSequence__region1_Closed();
 				enterSequence__region1_Open_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
@@ -455,7 +455,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 				exitSequence__region1_Open();
 				enterSequence__region1_Closed_default();
 			} else {
-				did_transition = false;;
+				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
