@@ -18,6 +18,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.impl.EReferenceImpl;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.service.OperationCanceledManager;
@@ -100,6 +101,7 @@ implements INamesAreUniqueValidationHelper {
 			createDuplicateNameError(doublet, common, acceptor);
 		}
 	}
+	
 
 	protected void validateCapitonym(IEObjectDescription description, IEObjectDescription doublet,
 			ValidationMessageAcceptor acceptor) {
@@ -138,6 +140,20 @@ implements INamesAreUniqueValidationHelper {
 			EStructuralFeature feature) {
 		return getDuplicateNameErrorMessage(description, eClass, feature)
 				+ ". Names differ only in case, which can lead to compilation problems.";
+	}
+	
+	
+	@Override
+	protected void createDuplicateNameError(IEObjectDescription description, EClass clusterType,
+			ValidationMessageAcceptor acceptor) {
+		EObject object = description.getEObjectOrProxy();
+		EStructuralFeature feature = getNameFeature(object);
+		String errorMsg = getDuplicateNameErrorMessage(description, clusterType, feature);
+
+		if (errorMsg.contains("''")) {
+			errorMsg = errorMsg.replace("Duplicate Entry ''", "Duplicate unnamed Entry");
+		}
+		acceptor.acceptError(errorMsg, object, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, getErrorCode());
 	}
 
 	protected EClass checkForCommonSuperClass(IEObjectDescription one, IEObjectDescription two) {
