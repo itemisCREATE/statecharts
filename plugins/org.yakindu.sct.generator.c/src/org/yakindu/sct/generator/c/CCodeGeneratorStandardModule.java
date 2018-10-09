@@ -52,7 +52,7 @@ public class CCodeGeneratorStandardModule implements IGeneratorModule {
 		binder.bind(String.class).annotatedWith(Names.named("Separator")).toInstance(getSeparator(entry));
 
 		Multibinder<IncludeProvider> includeBinder = Multibinder.newSetBinder(binder, IncludeProvider.class);
-		includeBinder.addBinding().to(StandardIncludeProvider.class);
+		includeBinder.addBinding().to(ScTypesIncludeProvider.class);
 	}
 
 	protected void bindTracingProperty(GeneratorEntry entry, Binder binder) {

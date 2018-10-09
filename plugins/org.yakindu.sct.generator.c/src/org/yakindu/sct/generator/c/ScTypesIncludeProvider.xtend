@@ -15,7 +15,8 @@ import java.util.List
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.model.sexec.ExecutionFlow
 
-class StandardIncludeProvider implements IncludeProvider {
+class ScTypesIncludeProvider implements IncludeProvider {
+	
 	@Inject protected extension Naming cNaming
 	
 	override getIncludes(ExecutionFlow it, List<CharSequence> includes, extension IGenArtifactConfigurations artifactConfigs) {

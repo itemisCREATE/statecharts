@@ -18,6 +18,7 @@ import org.yakindu.sct.generator.c.DefaultGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.IncludeProvider;
 import org.yakindu.sct.generator.c.SimpleGenArtifactConfigurations;
+import org.yakindu.sct.generator.c.ScTypesIncludeProvider;
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries;
 import org.yakindu.sct.generator.c.extensions.Naming;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
@@ -62,7 +63,8 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		binder.bind(Naming.class).to(CppNaming.class);
 		bindEventDrivenClasses(entry, binder);
 		bindIGenArtifactConfigurations(entry, binder);
-		addIncludeProvider(binder, StandardCppIncludeProvider.class);
+		addIncludeProvider(binder, ScTypesIncludeProvider.class);
+		addIncludeProvider(binder, CppInterfaceIncludeProvider.class);
 	}
 
 	protected void addIncludeProvider(Binder binder, Class<? extends IncludeProvider> provider) {
