@@ -102,7 +102,7 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 		else {
 			return '''«definition.code»'''
 		}
-		}
+	}
 
 	def dispatch CharSequence code(FeatureCall it) '''
 		«IF feature instanceof Operation»
