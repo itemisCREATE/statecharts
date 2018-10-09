@@ -24,6 +24,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.yakindu.base.base.DomainElement;
@@ -72,6 +76,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	public static final String DEPRECATED = "Element '%s' is deprecated and will be removed in the next version. ";
 	public static final String EMPTY_SGEN = ".sgen file does not contain any entries.";
 	public static final String INVALID_DOMAIN_ID = "This generator can not be used for domain %s. Valid domains are %s";
+	public static final String DUPLICATE_ELEMENT = "The %s '%s' exists multiple times. Please rename or remove duplicates.";
 
 	public static final String CODE_REQUIRED_FEATURE = "code_req_feature.";
 
@@ -83,6 +88,10 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	protected TypeValidator typeValidator;
 	@Inject
 	protected ITypeSystem typesystem;
+	@Inject
+	protected IScopeProvider scopeProvider;
+	@Inject
+	protected IQualifiedNameProvider nameProvider;
 
 	@Check
 	public void checkDomainCompatibility(GeneratorModel model) {
@@ -126,6 +135,22 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		}
 		if (!contentType.equals(descriptor.get().getContentType())) {
 			error(UNKNOWN_CONTENT_TYPE + contentType + "'", SGenPackage.Literals.GENERATOR_ENTRY__CONTENT_TYPE);
+		}
+	}
+	
+	@Check
+	public void checkDuplicateElementRef(GeneratorEntry entry) {
+		EObject elementRef = entry.getElementRef();
+		if (elementRef == null) {
+			return;
+		}
+		QualifiedName elementName = nameProvider.getFullyQualifiedName(elementRef);
+		if (elementName == null) {
+			return;
+		}
+		IScope scope = scopeProvider.getScope(entry, SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF);
+		if (Iterables.size(Iterables.filter(scope.getAllElements(), (e) -> elementName.equals(e.getQualifiedName()))) > 1) {
+			warning(String.format(DUPLICATE_ELEMENT, entry.getContentType(), elementName), SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF);
 		}
 	}
 

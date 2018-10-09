@@ -304,8 +304,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	}
 	
 	protected StyledString getPackageImportStyleString(URI uri) {
-		String headerFilePath = uri.isPlatform() ? uri.toPlatformString(true) : uri.toFileString();
-		StyledString secondPart = new StyledString(" - " + headerFilePath, new GreyoutStyler());
+		String filePath = uri.isPlatform() ? uri.toPlatformString(true) : uri.toFileString();
+		StyledString secondPart = new StyledString(" - " + filePath, new GreyoutStyler());
 		return secondPart;
 	}
 	
