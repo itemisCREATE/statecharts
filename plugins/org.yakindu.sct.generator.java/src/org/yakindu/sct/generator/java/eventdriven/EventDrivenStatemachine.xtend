@@ -136,10 +136,10 @@ class EventDrivenStatemachine extends Statemachine {
 		protected void singleCycle() {
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 				switch (stateVector[nextStateIndex]) {
-				«FOR state : states»
-					«IF state.reactSequence !== null»
+				«FOR state : flow.states.filter[isLeaf]»
+					«IF state.reactMethod !== null»
 						case «state.stateName.asEscapedIdentifier»:
-							«state.reactSequence.functionName»();
+							«state.reactMethod.shortName»(true);
 							break;
 				«ENDIF»
 				«ENDFOR»
