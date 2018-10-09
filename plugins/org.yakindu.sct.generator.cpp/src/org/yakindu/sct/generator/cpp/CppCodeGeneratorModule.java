@@ -39,6 +39,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 
 import com.google.inject.Binder;
+import com.google.inject.multibindings.Multibinder;
 import com.google.inject.name.Names;
 
 /**
@@ -59,9 +60,14 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		binder.bind(INamingService.class).to(CppNamingService.class);
 		binder.bind(ITypeSystemInferrer.class).to(STextTypeInferrer.class);
 		binder.bind(Naming.class).to(CppNaming.class);
-		binder.bind(IncludeProvider.class).to(StandardCppIncludeProvider.class);
 		bindEventDrivenClasses(entry, binder);
 		bindIGenArtifactConfigurations(entry, binder);
+		addIncludeProvider(binder, StandardCppIncludeProvider.class);
+	}
+
+	protected void addIncludeProvider(Binder binder, Class<? extends IncludeProvider> provider) {
+		Multibinder<IncludeProvider> includeBinder = Multibinder.newSetBinder(binder, IncludeProvider.class);
+		includeBinder.addBinding().to(provider);
 	}
 
 	protected void bindIGenArtifactConfigurations(GeneratorEntry entry, Binder binder) {
@@ -81,7 +87,7 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 			binder.bind(StatemachineImplementation.class).to(EventDrivenStatemachineImplementation.class);
 			binder.bind(CppExpressionsGenerator.class).to(EventDrivenExpressionCode.class);
 			binder.bind(EventCode.class).to(EventDrivenEventCode.class);
-			binder.bind(StandardCppIncludeProvider.class).to(EventDrivenCppIncludeProvider.class);
+			addIncludeProvider(binder, EventDrivenCppIncludeProvider.class);
 		}
 	}
 
