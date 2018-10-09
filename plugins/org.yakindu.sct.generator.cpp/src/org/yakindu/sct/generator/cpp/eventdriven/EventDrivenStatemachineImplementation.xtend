@@ -11,7 +11,6 @@
 package org.yakindu.sct.generator.cpp.eventdriven
 
 import com.google.inject.Inject
-import java.util.List
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.cpp.StatemachineImplementation
 import org.yakindu.sct.model.sexec.ExecutionFlow

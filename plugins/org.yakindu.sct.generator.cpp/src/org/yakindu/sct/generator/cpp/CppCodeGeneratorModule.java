@@ -26,7 +26,7 @@ import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.extensions.AnnotationExtensions;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
-import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenCppIncludeProvider;
+import org.yakindu.sct.generator.cpp.eventdriven.CppEventDrivenIncludeProvider;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenEventCode;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenExpressionCode;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineHeader;
@@ -89,7 +89,7 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 			binder.bind(StatemachineImplementation.class).to(EventDrivenStatemachineImplementation.class);
 			binder.bind(CppExpressionsGenerator.class).to(EventDrivenExpressionCode.class);
 			binder.bind(EventCode.class).to(EventDrivenEventCode.class);
-			addIncludeProvider(binder, EventDrivenCppIncludeProvider.class);
+			addIncludeProvider(binder, CppEventDrivenIncludeProvider.class);
 		}
 	}
 

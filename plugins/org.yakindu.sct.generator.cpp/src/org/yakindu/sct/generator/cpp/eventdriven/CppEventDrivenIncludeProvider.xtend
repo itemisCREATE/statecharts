@@ -8,18 +8,30 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.generator.c
+package org.yakindu.sct.generator.cpp.eventdriven
 
 import com.google.inject.Inject
-import org.yakindu.sct.generator.c.extensions.Naming
+import java.util.List
+import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.generator.c.IncludeProvider
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 
-class ScTypesIncludeProvider implements IncludeProvider {
+/**
+ * @author robert rudi
+ * 
+ * Adds required include for the C++ event driven case.
+ */
+class CppEventDrivenIncludeProvider implements IncludeProvider {
 	
-	@Inject protected extension Naming cNaming
+	@Inject protected extension SExecExtensions
 	
 	override getIncludes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
-		newArrayList('''#include "«(typesModule.h).relativeTo(module.h)»"''')
+		val List<CharSequence> includes = newArrayList
+		if (hasLocalEvents) {
+			includes += "#include <deque>"
+		}
+		includes
 	}
 	
 }

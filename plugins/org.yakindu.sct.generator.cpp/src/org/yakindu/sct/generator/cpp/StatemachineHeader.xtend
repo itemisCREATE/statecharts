@@ -112,7 +112,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 	def final includes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
 		'''
 		«FOR provider : includeProviders»
-			«FOR i : provider.getIncludes(it, newArrayList, artifactConfigs)»
+			«FOR i : provider.getIncludes(it, artifactConfigs)»
 				«i»
 			«ENDFOR»
 		«ENDFOR»

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
@@ -22,11 +22,12 @@ class CppInterfaceIncludeProvider implements IncludeProvider {
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
 
-	override getIncludes(ExecutionFlow it, List<CharSequence> includes,
-		extension IGenArtifactConfigurations artifactConfigs) {
+	override getIncludes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
+		val List<CharSequence> includes = newArrayList
 		includes += '''#include "«(statemachineInterface.h).relativeTo(module.h)»"'''
 		if (timed)
 			includes += '''#include "«(timedStatemachineInterface.h).relativeTo(module.h)»"'''
+			
 		includes
 	}
 
