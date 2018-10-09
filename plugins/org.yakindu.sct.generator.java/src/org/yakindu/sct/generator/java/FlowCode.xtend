@@ -157,8 +157,8 @@ class FlowCode {
 		«variable.typeSpecifier.type» «variable.name»«IF initialValue !== null» = «initialValue.code»«ENDIF»;
 	'''
 	
-	def dispatch CharSequence code(Statement it) 
-	'''
-		«expression.code»
-	'''
+	def dispatch CharSequence code(Statement it) {
+		expression.code
+	}
+
 }
