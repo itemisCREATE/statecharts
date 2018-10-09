@@ -212,33 +212,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		sCInterface.setZ(value);
 	}
 	
-	private boolean check_r2_B_tr0_tr0() {
-		return sCInterface.f;
-	}
-	
-	private boolean check_r2_B_r_BA_tr0_tr0() {
-		return sCInterface.e;
-	}
-	
-	private boolean check_r2_C_tr0_tr0() {
-		return sCInterface.f;
-	}
-	
-	private void effect_r2_B_tr0() {
-		exitSequence_r2_B();
-		enterSequence_r2_C_default();
-	}
-	
-	private void effect_r2_B_r_BA_tr0() {
-		exitSequence_r2_B_r_BA();
-		enterSequence_r2_B_r_BB_default();
-	}
-	
-	private void effect_r2_C_tr0() {
-		exitSequence_r2_C();
-		enterSequence_r2_B_default();
-	}
-	
 	/* Entry action for state 'A'. */
 	private void entryAction_r_A() {
 		sCInterface.setX(sCInterface.getX() + 1);
@@ -516,39 +489,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		}
 	}
 	
-	/* The reactions of state B. */
-	private void react_r_A_r_B() {
-	}
-	
-	/* The reactions of state BAA. */
-	private void react_r2_B_r_BA_r_BAA() {
-		if (check_r2_B_tr0_tr0()) {
-			effect_r2_B_tr0();
-		} else {
-			if (check_r2_B_r_BA_tr0_tr0()) {
-				effect_r2_B_r_BA_tr0();
-			}
-		}
-	}
-	
-	/* The reactions of state BB. */
-	private void react_r2_B_r_BB() {
-		if (check_r2_B_tr0_tr0()) {
-			effect_r2_B_tr0();
-		}
-	}
-	
-	/* The reactions of state C. */
-	private void react_r2_C() {
-		if (check_r2_C_tr0_tr0()) {
-			effect_r2_C_tr0();
-		}
-	}
-	
-	/* The reactions of state DAA. */
-	private void react_r3_D_r_DA_r_DAA() {
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_r__entry_Default() {
 		entryAction_r_A();
@@ -592,6 +532,149 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		}
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean r_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean r_A_r_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (r_A_react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean r2_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.f) {
+				exitSequence_r2_B();
+				enterSequence_r2_C_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean r2_B_r_BA_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (r2_B_react(try_transition)==false) {
+				if (sCInterface.e) {
+					exitSequence_r2_B_r_BA();
+					enterSequence_r2_B_r_BB_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean r2_B_r_BA_r_BAA_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (r2_B_r_BA_react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean r2_B_r_BB_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (r2_B_react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean r2_C_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.f) {
+				exitSequence_r2_C();
+				enterSequence_r2_B_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean r3_D_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean r3_D_r_DA_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (r3_D_react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean r3_D_r_DA_r_DAA_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (r3_D_r_DA_react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -600,19 +683,19 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case r_A_r_B:
-				react_r_A_r_B();
+				r_A_r_B_react(true);
 				break;
 			case r2_B_r_BA_r_BAA:
-				react_r2_B_r_BA_r_BAA();
+				r2_B_r_BA_r_BAA_react(true);
 				break;
 			case r2_B_r_BB:
-				react_r2_B_r_BB();
+				r2_B_r_BB_react(true);
 				break;
 			case r2_C:
-				react_r2_C();
+				r2_C_react(true);
 				break;
 			case r3_D_r_DA_r_DAA:
-				react_r3_D_r_DA_r_DAA();
+				r3_D_r_DA_r_DAA_react(true);
 				break;
 			default:
 				// $NullState$

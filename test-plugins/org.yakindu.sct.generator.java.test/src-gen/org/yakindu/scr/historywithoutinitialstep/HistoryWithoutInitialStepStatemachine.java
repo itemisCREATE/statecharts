@@ -156,60 +156,6 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		sCInterface.raiseNext();
 	}
 	
-	private boolean check_main_region_A_tr0_tr0() {
-		return sCInterface.toB;
-	}
-	
-	private boolean check_main_region_A_tr1_tr1() {
-		return sCInterface.toHistory;
-	}
-	
-	private boolean check_main_region_B_tr0_tr0() {
-		return sCInterface.toA;
-	}
-	
-	private boolean check_main_region_B_r1_C_tr0_tr0() {
-		return sCInterface.next;
-	}
-	
-	private boolean check_main_region_B_r1_D_tr0_tr0() {
-		return sCInterface.next;
-	}
-	
-	private boolean check_main_region_B_r1_E_tr0_tr0() {
-		return sCInterface.next;
-	}
-	
-	private void effect_main_region_A_tr0() {
-		exitSequence_main_region_A();
-		enterSequence_main_region_B_default();
-	}
-	
-	private void effect_main_region_A_tr1() {
-		exitSequence_main_region_A();
-		react_main_region_B_r1_he();
-	}
-	
-	private void effect_main_region_B_tr0() {
-		exitSequence_main_region_B();
-		enterSequence_main_region_A_default();
-	}
-	
-	private void effect_main_region_B_r1_C_tr0() {
-		exitSequence_main_region_B_r1_C();
-		enterSequence_main_region_B_r1_D_default();
-	}
-	
-	private void effect_main_region_B_r1_D_tr0() {
-		exitSequence_main_region_B_r1_D();
-		enterSequence_main_region_B_r1_E_default();
-	}
-	
-	private void effect_main_region_B_r1_E_tr0() {
-		exitSequence_main_region_B_r1_E();
-		enterSequence_main_region_B_r1_C_default();
-	}
-	
 	/* 'default' enter sequence for state A */
 	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
@@ -363,50 +309,6 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		}
 	}
 	
-	/* The reactions of state A. */
-	private void react_main_region_A() {
-		if (check_main_region_A_tr0_tr0()) {
-			effect_main_region_A_tr0();
-		} else {
-			if (check_main_region_A_tr1_tr1()) {
-				effect_main_region_A_tr1();
-			}
-		}
-	}
-	
-	/* The reactions of state C. */
-	private void react_main_region_B_r1_C() {
-		if (check_main_region_B_tr0_tr0()) {
-			effect_main_region_B_tr0();
-		} else {
-			if (check_main_region_B_r1_C_tr0_tr0()) {
-				effect_main_region_B_r1_C_tr0();
-			}
-		}
-	}
-	
-	/* The reactions of state D. */
-	private void react_main_region_B_r1_D() {
-		if (check_main_region_B_tr0_tr0()) {
-			effect_main_region_B_tr0();
-		} else {
-			if (check_main_region_B_r1_D_tr0_tr0()) {
-				effect_main_region_B_r1_D_tr0();
-			}
-		}
-	}
-	
-	/* The reactions of state F. */
-	private void react_main_region_B_r1_E__region0_F() {
-		if (check_main_region_B_tr0_tr0()) {
-			effect_main_region_B_tr0();
-		} else {
-			if (check_main_region_B_r1_E_tr0_tr0()) {
-				effect_main_region_B_r1_E_tr0();
-			}
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_main_region__entry_Default() {
 		enterSequence_main_region_A_default();
@@ -430,6 +332,118 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		enterSequence_main_region_B_r1_E__region0_F_default();
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean main_region_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.toB) {
+					exitSequence_main_region_A();
+					enterSequence_main_region_B_default();
+				} else {
+					if (sCInterface.toHistory) {
+						exitSequence_main_region_A();
+						react_main_region_B_r1_he();
+					} else {
+						did_transition = false;;
+					}
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.toA) {
+					exitSequence_main_region_B();
+					enterSequence_main_region_A_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_B_r1_C_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (main_region_B_react(try_transition)==false) {
+				if (sCInterface.next) {
+					exitSequence_main_region_B_r1_C();
+					enterSequence_main_region_B_r1_D_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_B_r1_D_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (main_region_B_react(try_transition)==false) {
+				if (sCInterface.next) {
+					exitSequence_main_region_B_r1_D();
+					enterSequence_main_region_B_r1_E_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_B_r1_E_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (main_region_B_react(try_transition)==false) {
+				if (sCInterface.next) {
+					exitSequence_main_region_B_r1_E();
+					enterSequence_main_region_B_r1_C_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_B_r1_E__region0_F_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (main_region_B_r1_E_react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -438,16 +452,16 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_A:
-				react_main_region_A();
+				main_region_A_react(true);
 				break;
 			case main_region_B_r1_C:
-				react_main_region_B_r1_C();
+				main_region_B_r1_C_react(true);
 				break;
 			case main_region_B_r1_D:
-				react_main_region_B_r1_D();
+				main_region_B_r1_D_react(true);
 				break;
 			case main_region_B_r1_E__region0_F:
-				react_main_region_B_r1_E__region0_F();
+				main_region_B_r1_E__region0_F_react(true);
 				break;
 			default:
 				// $NullState$

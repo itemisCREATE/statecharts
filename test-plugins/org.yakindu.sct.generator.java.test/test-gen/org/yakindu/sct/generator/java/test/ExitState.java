@@ -43,6 +43,7 @@ public class ExitState {
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.r_E));
 	}
+	
 	@Test
 	public void namedExitThroughNamedTransition() {
 		statemachine.enter();
@@ -51,6 +52,7 @@ public class ExitState {
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.r_F));
 	}
+	
 	@Test
 	public void namedExitThroughDefaultTransition() {
 		statemachine.enter();
@@ -59,6 +61,7 @@ public class ExitState {
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.r_E));
 	}
+	
 	@Test
 	public void remainInA() {
 		statemachine.enter();

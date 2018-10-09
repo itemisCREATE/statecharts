@@ -133,51 +133,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		sCInterface.raiseEvent2();
 	}
 	
-	private boolean check_someRegion_A_tr0_tr0() {
-		return sCInterface.event2;
-	}
-	
-	private boolean check_main_region_A_tr0_tr0() {
-		return sCInterface.event1;
-	}
-	
-	private boolean check_main_region_A_tr1_tr1() {
-		return sCInterface.event1;
-	}
-	
-	private boolean check_main_region_A_tr2_tr2() {
-		return sCInterface.event1;
-	}
-	
-	private boolean check_main_region_A_tr3_tr3() {
-		return (sCInterface.event2) && (!isStateActive(State.someRegion_B));
-	}
-	
-	private void effect_someRegion_A_tr0() {
-		exitSequence_someRegion_A();
-		enterSequence_someRegion_B_default();
-	}
-	
-	private void effect_main_region_A_tr0() {
-		exitSequence_main_region_A();
-		enterSequence_main_region_C_default();
-	}
-	
-	private void effect_main_region_A_tr1() {
-		exitSequence_main_region_A();
-		enterSequence_main_region_B_default();
-	}
-	
-	private void effect_main_region_A_tr2() {
-		exitSequence_main_region_A();
-		enterSequence_main_region_D_default();
-	}
-	
-	private void effect_main_region_A_tr3() {
-		exitSequence_main_region_A();
-		enterSequence_main_region_E_default();
-	}
-	
 	/* 'default' enter sequence for state A */
 	private void enterSequence_someRegion_A_default() {
 		nextStateIndex = 0;
@@ -309,52 +264,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		}
 	}
 	
-	/* The reactions of state A. */
-	private void react_someRegion_A() {
-		if (check_someRegion_A_tr0_tr0()) {
-			effect_someRegion_A_tr0();
-		}
-	}
-	
-	/* The reactions of state B. */
-	private void react_someRegion_B() {
-	}
-	
-	/* The reactions of state A. */
-	private void react_main_region_A() {
-		if (check_main_region_A_tr0_tr0()) {
-			effect_main_region_A_tr0();
-		} else {
-			if (check_main_region_A_tr1_tr1()) {
-				effect_main_region_A_tr1();
-			} else {
-				if (check_main_region_A_tr2_tr2()) {
-					effect_main_region_A_tr2();
-				} else {
-					if (check_main_region_A_tr3_tr3()) {
-						effect_main_region_A_tr3();
-					}
-				}
-			}
-		}
-	}
-	
-	/* The reactions of state B. */
-	private void react_main_region_B() {
-	}
-	
-	/* The reactions of state C. */
-	private void react_main_region_C() {
-	}
-	
-	/* The reactions of state D. */
-	private void react_main_region_D() {
-	}
-	
-	/* The reactions of state E. */
-	private void react_main_region_E() {
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_someRegion__entry_Default() {
 		enterSequence_someRegion_A_default();
@@ -365,6 +274,116 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		enterSequence_main_region_A_default();
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean someRegion_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.event2) {
+					exitSequence_someRegion_A();
+					enterSequence_someRegion_B_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean someRegion_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.event1) {
+				exitSequence_main_region_A();
+				enterSequence_main_region_C_default();
+			} else {
+				if (sCInterface.event1) {
+					exitSequence_main_region_A();
+					enterSequence_main_region_B_default();
+				} else {
+					if (sCInterface.event1) {
+						exitSequence_main_region_A();
+						enterSequence_main_region_D_default();
+					} else {
+						if ((sCInterface.event2) && (!isStateActive(State.someRegion_B))) {
+							exitSequence_main_region_A();
+							enterSequence_main_region_E_default();
+						} else {
+							did_transition = false;;
+						}
+					}
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_C_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_D_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_E_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -373,25 +392,25 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case someRegion_A:
-				react_someRegion_A();
+				someRegion_A_react(true);
 				break;
 			case someRegion_B:
-				react_someRegion_B();
+				someRegion_B_react(true);
 				break;
 			case main_region_A:
-				react_main_region_A();
+				main_region_A_react(true);
 				break;
 			case main_region_B:
-				react_main_region_B();
+				main_region_B_react(true);
 				break;
 			case main_region_C:
-				react_main_region_C();
+				main_region_C_react(true);
 				break;
 			case main_region_D:
-				react_main_region_D();
+				main_region_D_react(true);
 				break;
 			case main_region_E:
-				react_main_region_E();
+				main_region_E_react(true);
 				break;
 			default:
 				// $NullState$

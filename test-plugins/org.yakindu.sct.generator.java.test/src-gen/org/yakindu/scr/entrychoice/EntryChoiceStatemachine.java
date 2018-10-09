@@ -77,10 +77,6 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 		}
 	}
 	
-	private boolean check_main_region__choice_0_tr0_tr0() {
-		return true;
-	}
-	
 	private void effect_main_region__choice_0_tr0() {
 		enterSequence_main_region_A_default();
 	}
@@ -113,10 +109,6 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 		}
 	}
 	
-	/* The reactions of state A. */
-	private void react_main_region_A() {
-	}
-	
 	/* The reactions of state null. */
 	private void react_main_region__choice_0() {
 		effect_main_region__choice_0_tr0();
@@ -127,6 +119,23 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 		react_main_region__choice_0();
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean main_region_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -135,7 +144,7 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_A:
-				react_main_region_A();
+				main_region_A_react(true);
 				break;
 			default:
 				// $NullState$

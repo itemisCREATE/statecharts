@@ -127,23 +127,8 @@ public class DynamicChoiceStatemachine implements IDynamicChoiceStatemachine {
 		sCInterface.setNumber(value);
 	}
 	
-	private boolean check_main_region_Start_tr0_tr0() {
-		return true;
-	}
-	
 	private boolean check_main_region__choice_0_tr0_tr0() {
 		return sCInterface.getNumber()==2;
-	}
-	
-	private boolean check_main_region__choice_0_tr1() {
-		return true;
-	}
-	
-	private void effect_main_region_Start_tr0() {
-		exitSequence_main_region_Start();
-		sCInterface.setNumber(sCInterface.getNumber() + 1);
-		
-		react_main_region__choice_0();
 	}
 	
 	private void effect_main_region__choice_0_tr0() {
@@ -218,19 +203,6 @@ public class DynamicChoiceStatemachine implements IDynamicChoiceStatemachine {
 		}
 	}
 	
-	/* The reactions of state Start. */
-	private void react_main_region_Start() {
-		effect_main_region_Start_tr0();
-	}
-	
-	/* The reactions of state A. */
-	private void react_main_region_A() {
-	}
-	
-	/* The reactions of state B. */
-	private void react_main_region_B() {
-	}
-	
 	/* The reactions of state null. */
 	private void react_main_region__choice_0() {
 		if (check_main_region__choice_0_tr0_tr0()) {
@@ -245,6 +217,52 @@ public class DynamicChoiceStatemachine implements IDynamicChoiceStatemachine {
 		enterSequence_main_region_Start_default();
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean main_region_Start_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				exitSequence_main_region_Start();
+				sCInterface.setNumber(sCInterface.getNumber() + 1);
+				
+				react_main_region__choice_0();
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -253,13 +271,13 @@ public class DynamicChoiceStatemachine implements IDynamicChoiceStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_Start:
-				react_main_region_Start();
+				main_region_Start_react(true);
 				break;
 			case main_region_A:
-				react_main_region_A();
+				main_region_A_react(true);
 				break;
 			case main_region_B:
-				react_main_region_B();
+				main_region_B_react(true);
 				break;
 			default:
 				// $NullState$

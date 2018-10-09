@@ -265,177 +265,6 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		sCInterface.raiseE2();
 	}
 	
-	private boolean check_operation_interface_tr0_tr0() {
-		return (sCInterface.e1) && (isStateActive(State.default_namespace));
-	}
-	
-	private boolean check_namespace_event_tr0_tr0() {
-		return (sCInterface.e2) && (isStateActive(State.operation_internal));
-	}
-	
-	private boolean check_local_in_tr0_tr0() {
-		return (sCInterface.e1) && (isStateActive(State.namespace_local));
-	}
-	
-	private boolean check_interface_var_tr0_tr0() {
-		return (sCInterface.e2) && (isStateActive(State.local_out));
-	}
-	
-	private boolean check_internal_external_tr0_tr0() {
-		return (sCInterface.e1) && (isStateActive(State.interface_readonly));
-	}
-	
-	private boolean check_event_default_tr0_tr0() {
-		return (sCInterface.e2) && (isStateActive(State.internal_operation));
-	}
-	
-	private boolean check_in_entry_tr0_tr0() {
-		return (sCInterface.e1) && (isStateActive(State.event_else));
-	}
-	
-	private boolean check_out_always_tr0_tr0() {
-		return (sCInterface.e2) && (isStateActive(State.in_exit));
-	}
-	
-	private boolean check_var_raise_tr0_tr0() {
-		return (sCInterface.e1) && (isStateActive(State.out_oncycle));
-	}
-	
-	private boolean check_readonly_active_tr0_tr0() {
-		return (sCInterface.e2) && (isStateActive(State.var_valueof));
-	}
-	
-	private boolean check_external_interface_tr0_tr0() {
-		return (sCInterface.e1) && (isStateActive(State.readonly_namespace));
-	}
-	
-	private boolean check_else_event_tr0_tr0() {
-		return (sCInterface.e2) && (isStateActive(State.external_internal));
-	}
-	
-	private boolean check_entry_in_tr0_tr0() {
-		return (sCInterface.e1) && (isStateActive(State.else_local));
-	}
-	
-	private boolean check_exit_var_tr0_tr0() {
-		return (sCInterface.e2) && (isStateActive(State.entry_out));
-	}
-	
-	private boolean check_always_external_tr0_tr0() {
-		return (sCInterface.e1) && (isStateActive(State.exit_readonly));
-	}
-	
-	private boolean check_oncycle_default_tr0_tr0() {
-		return (sCInterface.e2) && (isStateActive(State.always_operation));
-	}
-	
-	private boolean check_raise_entry_tr0_tr0() {
-		return (sCInterface.e1) && (isStateActive(State.oncycle_else));
-	}
-	
-	private boolean check_valueof_always_tr0_tr0() {
-		return (sCInterface.e2) && (isStateActive(State.raise_exit));
-	}
-	
-	private boolean check_active_raise_tr0_tr0() {
-		return (sCInterface.e1) && (isStateActive(State.valueof_oncycle));
-	}
-	
-	private void effect_operation_interface_tr0() {
-		exitSequence_operation_interface();
-		enterSequence_operation_internal_default();
-	}
-	
-	private void effect_namespace_event_tr0() {
-		exitSequence_namespace_event();
-		enterSequence_namespace_local_default();
-	}
-	
-	private void effect_local_in_tr0() {
-		exitSequence_local_in();
-		enterSequence_local_out_default();
-	}
-	
-	private void effect_interface_var_tr0() {
-		exitSequence_interface_var();
-		enterSequence_interface_readonly_default();
-	}
-	
-	private void effect_internal_external_tr0() {
-		exitSequence_internal_external();
-		enterSequence_internal_operation_default();
-	}
-	
-	private void effect_event_default_tr0() {
-		exitSequence_event_default();
-		enterSequence_event_else_default();
-	}
-	
-	private void effect_in_entry_tr0() {
-		exitSequence_in_entry();
-		enterSequence_in_exit_default();
-	}
-	
-	private void effect_out_always_tr0() {
-		exitSequence_out_always();
-		enterSequence_out_oncycle_default();
-	}
-	
-	private void effect_var_raise_tr0() {
-		exitSequence_var_raise();
-		enterSequence_var_valueof_default();
-	}
-	
-	private void effect_readonly_active_tr0() {
-		exitSequence_readonly_active();
-		enterSequence_readonly_namespace_default();
-	}
-	
-	private void effect_external_interface_tr0() {
-		exitSequence_external_interface();
-		enterSequence_external_internal_default();
-	}
-	
-	private void effect_else_event_tr0() {
-		exitSequence_else_event();
-		enterSequence_else_local_default();
-	}
-	
-	private void effect_entry_in_tr0() {
-		exitSequence_entry_in();
-		enterSequence_entry_out_default();
-	}
-	
-	private void effect_exit_var_tr0() {
-		exitSequence_exit_var();
-		enterSequence_exit_readonly_default();
-	}
-	
-	private void effect_always_external_tr0() {
-		exitSequence_always_external();
-		enterSequence_always_operation_default();
-	}
-	
-	private void effect_oncycle_default_tr0() {
-		exitSequence_oncycle_default();
-		enterSequence_oncycle_else_default();
-	}
-	
-	private void effect_raise_entry_tr0() {
-		exitSequence_raise_entry();
-		enterSequence_raise_exit_default();
-	}
-	
-	private void effect_valueof_always_tr0() {
-		exitSequence_valueof_always();
-		enterSequence_valueof_oncycle_default();
-	}
-	
-	private void effect_active_raise_tr0() {
-		exitSequence_active_raise();
-		enterSequence_active_valueof_default();
-	}
-	
 	/* 'default' enter sequence for state namespace */
 	private void enterSequence_default_namespace_default() {
 		nextStateIndex = 0;
@@ -1281,219 +1110,6 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		}
 	}
 	
-	/* The reactions of state namespace. */
-	private void react_default_namespace() {
-	}
-	
-	/* The reactions of state interface. */
-	private void react_operation_interface() {
-		if (check_operation_interface_tr0_tr0()) {
-			effect_operation_interface_tr0();
-		}
-	}
-	
-	/* The reactions of state internal. */
-	private void react_operation_internal() {
-	}
-	
-	/* The reactions of state event. */
-	private void react_namespace_event() {
-		if (check_namespace_event_tr0_tr0()) {
-			effect_namespace_event_tr0();
-		}
-	}
-	
-	/* The reactions of state local. */
-	private void react_namespace_local() {
-	}
-	
-	/* The reactions of state in. */
-	private void react_local_in() {
-		if (check_local_in_tr0_tr0()) {
-			effect_local_in_tr0();
-		}
-	}
-	
-	/* The reactions of state out. */
-	private void react_local_out() {
-	}
-	
-	/* The reactions of state var. */
-	private void react_interface_var() {
-		if (check_interface_var_tr0_tr0()) {
-			effect_interface_var_tr0();
-		}
-	}
-	
-	/* The reactions of state readonly. */
-	private void react_interface_readonly() {
-	}
-	
-	/* The reactions of state external. */
-	private void react_internal_external() {
-		if (check_internal_external_tr0_tr0()) {
-			effect_internal_external_tr0();
-		}
-	}
-	
-	/* The reactions of state operation. */
-	private void react_internal_operation() {
-	}
-	
-	/* The reactions of state default. */
-	private void react_event_default() {
-		if (check_event_default_tr0_tr0()) {
-			effect_event_default_tr0();
-		}
-	}
-	
-	/* The reactions of state else. */
-	private void react_event_else() {
-	}
-	
-	/* The reactions of state entry. */
-	private void react_in_entry() {
-		if (check_in_entry_tr0_tr0()) {
-			effect_in_entry_tr0();
-		}
-	}
-	
-	/* The reactions of state exit. */
-	private void react_in_exit() {
-	}
-	
-	/* The reactions of state always. */
-	private void react_out_always() {
-		if (check_out_always_tr0_tr0()) {
-			effect_out_always_tr0();
-		}
-	}
-	
-	/* The reactions of state oncycle. */
-	private void react_out_oncycle() {
-	}
-	
-	/* The reactions of state raise. */
-	private void react_var_raise() {
-		if (check_var_raise_tr0_tr0()) {
-			effect_var_raise_tr0();
-		}
-	}
-	
-	/* The reactions of state valueof. */
-	private void react_var_valueof() {
-	}
-	
-	/* The reactions of state active. */
-	private void react_readonly_active() {
-		if (check_readonly_active_tr0_tr0()) {
-			effect_readonly_active_tr0();
-		}
-	}
-	
-	/* The reactions of state namespace. */
-	private void react_readonly_namespace() {
-	}
-	
-	/* The reactions of state interface. */
-	private void react_external_interface() {
-		if (check_external_interface_tr0_tr0()) {
-			effect_external_interface_tr0();
-		}
-	}
-	
-	/* The reactions of state internal. */
-	private void react_external_internal() {
-	}
-	
-	/* The reactions of state event. */
-	private void react_else_event() {
-		if (check_else_event_tr0_tr0()) {
-			effect_else_event_tr0();
-		}
-	}
-	
-	/* The reactions of state local. */
-	private void react_else_local() {
-	}
-	
-	/* The reactions of state in. */
-	private void react_entry_in() {
-		if (check_entry_in_tr0_tr0()) {
-			effect_entry_in_tr0();
-		}
-	}
-	
-	/* The reactions of state out. */
-	private void react_entry_out() {
-	}
-	
-	/* The reactions of state var. */
-	private void react_exit_var() {
-		if (check_exit_var_tr0_tr0()) {
-			effect_exit_var_tr0();
-		}
-	}
-	
-	/* The reactions of state readonly. */
-	private void react_exit_readonly() {
-	}
-	
-	/* The reactions of state external. */
-	private void react_always_external() {
-		if (check_always_external_tr0_tr0()) {
-			effect_always_external_tr0();
-		}
-	}
-	
-	/* The reactions of state operation. */
-	private void react_always_operation() {
-	}
-	
-	/* The reactions of state default. */
-	private void react_oncycle_default() {
-		if (check_oncycle_default_tr0_tr0()) {
-			effect_oncycle_default_tr0();
-		}
-	}
-	
-	/* The reactions of state else. */
-	private void react_oncycle_else() {
-	}
-	
-	/* The reactions of state entry. */
-	private void react_raise_entry() {
-		if (check_raise_entry_tr0_tr0()) {
-			effect_raise_entry_tr0();
-		}
-	}
-	
-	/* The reactions of state exit. */
-	private void react_raise_exit() {
-	}
-	
-	/* The reactions of state always. */
-	private void react_valueof_always() {
-		if (check_valueof_always_tr0_tr0()) {
-			effect_valueof_always_tr0();
-		}
-	}
-	
-	/* The reactions of state oncycle. */
-	private void react_valueof_oncycle() {
-	}
-	
-	/* The reactions of state raise. */
-	private void react_active_raise() {
-		if (check_active_raise_tr0_tr0()) {
-			effect_active_raise_tr0();
-		}
-	}
-	
-	/* The reactions of state valueof. */
-	private void react_active_valueof() {
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_default__entry_Default() {
 		enterSequence_default_namespace_default();
@@ -1594,6 +1210,536 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		enterSequence_active_raise_default();
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean default_namespace_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean operation_interface_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if ((sCInterface.e1) && (isStateActive(State.default_namespace))) {
+				exitSequence_operation_interface();
+				enterSequence_operation_internal_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean operation_internal_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean namespace_event_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if ((sCInterface.e2) && (isStateActive(State.operation_internal))) {
+				exitSequence_namespace_event();
+				enterSequence_namespace_local_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean namespace_local_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean local_in_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if ((sCInterface.e1) && (isStateActive(State.namespace_local))) {
+				exitSequence_local_in();
+				enterSequence_local_out_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean local_out_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean interface_var_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if ((sCInterface.e2) && (isStateActive(State.local_out))) {
+				exitSequence_interface_var();
+				enterSequence_interface_readonly_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean interface_readonly_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean internal_external_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if ((sCInterface.e1) && (isStateActive(State.interface_readonly))) {
+				exitSequence_internal_external();
+				enterSequence_internal_operation_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean internal_operation_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean event_default_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if ((sCInterface.e2) && (isStateActive(State.internal_operation))) {
+				exitSequence_event_default();
+				enterSequence_event_else_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean event_else_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean in_entry_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if ((sCInterface.e1) && (isStateActive(State.event_else))) {
+				exitSequence_in_entry();
+				enterSequence_in_exit_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean in_exit_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean out_always_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if ((sCInterface.e2) && (isStateActive(State.in_exit))) {
+				exitSequence_out_always();
+				enterSequence_out_oncycle_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean out_oncycle_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean var_raise_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if ((sCInterface.e1) && (isStateActive(State.out_oncycle))) {
+				exitSequence_var_raise();
+				enterSequence_var_valueof_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean var_valueof_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean readonly_active_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if ((sCInterface.e2) && (isStateActive(State.var_valueof))) {
+				exitSequence_readonly_active();
+				enterSequence_readonly_namespace_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean readonly_namespace_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean external_interface_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if ((sCInterface.e1) && (isStateActive(State.readonly_namespace))) {
+				exitSequence_external_interface();
+				enterSequence_external_internal_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean external_internal_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean else_event_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if ((sCInterface.e2) && (isStateActive(State.external_internal))) {
+				exitSequence_else_event();
+				enterSequence_else_local_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean else_local_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean entry_in_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if ((sCInterface.e1) && (isStateActive(State.else_local))) {
+				exitSequence_entry_in();
+				enterSequence_entry_out_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean entry_out_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean exit_var_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if ((sCInterface.e2) && (isStateActive(State.entry_out))) {
+				exitSequence_exit_var();
+				enterSequence_exit_readonly_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean exit_readonly_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean always_external_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if ((sCInterface.e1) && (isStateActive(State.exit_readonly))) {
+				exitSequence_always_external();
+				enterSequence_always_operation_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean always_operation_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean oncycle_default_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if ((sCInterface.e2) && (isStateActive(State.always_operation))) {
+				exitSequence_oncycle_default();
+				enterSequence_oncycle_else_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean oncycle_else_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean raise_entry_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if ((sCInterface.e1) && (isStateActive(State.oncycle_else))) {
+				exitSequence_raise_entry();
+				enterSequence_raise_exit_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean raise_exit_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean valueof_always_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if ((sCInterface.e2) && (isStateActive(State.raise_exit))) {
+				exitSequence_valueof_always();
+				enterSequence_valueof_oncycle_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean valueof_oncycle_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean active_raise_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if ((sCInterface.e1) && (isStateActive(State.valueof_oncycle))) {
+				exitSequence_active_raise();
+				enterSequence_active_valueof_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean active_valueof_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -1602,121 +1748,121 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case default_namespace:
-				react_default_namespace();
+				default_namespace_react(true);
 				break;
 			case operation_interface:
-				react_operation_interface();
+				operation_interface_react(true);
 				break;
 			case operation_internal:
-				react_operation_internal();
+				operation_internal_react(true);
 				break;
 			case namespace_event:
-				react_namespace_event();
+				namespace_event_react(true);
 				break;
 			case namespace_local:
-				react_namespace_local();
+				namespace_local_react(true);
 				break;
 			case local_in:
-				react_local_in();
+				local_in_react(true);
 				break;
 			case local_out:
-				react_local_out();
+				local_out_react(true);
 				break;
 			case interface_var:
-				react_interface_var();
+				interface_var_react(true);
 				break;
 			case interface_readonly:
-				react_interface_readonly();
+				interface_readonly_react(true);
 				break;
 			case internal_external:
-				react_internal_external();
+				internal_external_react(true);
 				break;
 			case internal_operation:
-				react_internal_operation();
+				internal_operation_react(true);
 				break;
 			case event_default:
-				react_event_default();
+				event_default_react(true);
 				break;
 			case event_else:
-				react_event_else();
+				event_else_react(true);
 				break;
 			case in_entry:
-				react_in_entry();
+				in_entry_react(true);
 				break;
 			case in_exit:
-				react_in_exit();
+				in_exit_react(true);
 				break;
 			case out_always:
-				react_out_always();
+				out_always_react(true);
 				break;
 			case out_oncycle:
-				react_out_oncycle();
+				out_oncycle_react(true);
 				break;
 			case var_raise:
-				react_var_raise();
+				var_raise_react(true);
 				break;
 			case var_valueof:
-				react_var_valueof();
+				var_valueof_react(true);
 				break;
 			case readonly_active:
-				react_readonly_active();
+				readonly_active_react(true);
 				break;
 			case readonly_namespace:
-				react_readonly_namespace();
+				readonly_namespace_react(true);
 				break;
 			case external_interface:
-				react_external_interface();
+				external_interface_react(true);
 				break;
 			case external_internal:
-				react_external_internal();
+				external_internal_react(true);
 				break;
 			case else_event:
-				react_else_event();
+				else_event_react(true);
 				break;
 			case else_local:
-				react_else_local();
+				else_local_react(true);
 				break;
 			case entry_in:
-				react_entry_in();
+				entry_in_react(true);
 				break;
 			case entry_out:
-				react_entry_out();
+				entry_out_react(true);
 				break;
 			case exit_var:
-				react_exit_var();
+				exit_var_react(true);
 				break;
 			case exit_readonly:
-				react_exit_readonly();
+				exit_readonly_react(true);
 				break;
 			case always_external:
-				react_always_external();
+				always_external_react(true);
 				break;
 			case always_operation:
-				react_always_operation();
+				always_operation_react(true);
 				break;
 			case oncycle_default:
-				react_oncycle_default();
+				oncycle_default_react(true);
 				break;
 			case oncycle_else:
-				react_oncycle_else();
+				oncycle_else_react(true);
 				break;
 			case raise_entry:
-				react_raise_entry();
+				raise_entry_react(true);
 				break;
 			case raise_exit:
-				react_raise_exit();
+				raise_exit_react(true);
 				break;
 			case valueof_always:
-				react_valueof_always();
+				valueof_always_react(true);
 				break;
 			case valueof_oncycle:
-				react_valueof_oncycle();
+				valueof_oncycle_react(true);
 				break;
 			case active_raise:
-				react_active_raise();
+				active_raise_react(true);
 				break;
 			case active_valueof:
-				react_active_valueof();
+				active_valueof_react(true);
 				break;
 			default:
 				// $NullState$

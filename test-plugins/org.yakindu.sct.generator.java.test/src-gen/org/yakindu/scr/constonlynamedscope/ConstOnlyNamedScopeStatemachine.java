@@ -136,24 +136,6 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 		sCInterface.raiseE(value);
 	}
 	
-	private boolean check_ConstOnlyNamedScope_main_region_A_tr0_tr0() {
-		return (sCInterface.e) && (sCInterface.getEValue()==sCIA.getB());
-	}
-	
-	private boolean check_ConstOnlyNamedScope_main_region_A_tr1_tr1() {
-		return (sCInterface.e) && (sCInterface.getEValue()==sCIA.getC());
-	}
-	
-	private void effect_ConstOnlyNamedScope_main_region_A_tr0() {
-		exitSequence_ConstOnlyNamedScope_main_region_A();
-		enterSequence_ConstOnlyNamedScope_main_region_B_default();
-	}
-	
-	private void effect_ConstOnlyNamedScope_main_region_A_tr1() {
-		exitSequence_ConstOnlyNamedScope_main_region_A();
-		enterSequence_ConstOnlyNamedScope_main_region_C_default();
-	}
-	
 	/* 'default' enter sequence for state A */
 	private void enterSequence_ConstOnlyNamedScope_main_region_A_default() {
 		nextStateIndex = 0;
@@ -212,28 +194,62 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 		}
 	}
 	
-	/* The reactions of state A. */
-	private void react_ConstOnlyNamedScope_main_region_A() {
-		if (check_ConstOnlyNamedScope_main_region_A_tr0_tr0()) {
-			effect_ConstOnlyNamedScope_main_region_A_tr0();
-		} else {
-			if (check_ConstOnlyNamedScope_main_region_A_tr1_tr1()) {
-				effect_ConstOnlyNamedScope_main_region_A_tr1();
-			}
-		}
-	}
-	
-	/* The reactions of state B. */
-	private void react_ConstOnlyNamedScope_main_region_B() {
-	}
-	
-	/* The reactions of state C. */
-	private void react_ConstOnlyNamedScope_main_region_C() {
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_ConstOnlyNamedScope_main_region__entry_Default() {
 		enterSequence_ConstOnlyNamedScope_main_region_A_default();
+	}
+	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean constOnlyNamedScope_main_region_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if ((sCInterface.e) && (sCInterface.getEValue()==sCIA.getB())) {
+					exitSequence_ConstOnlyNamedScope_main_region_A();
+					enterSequence_ConstOnlyNamedScope_main_region_B_default();
+				} else {
+					if ((sCInterface.e) && (sCInterface.getEValue()==sCIA.getC())) {
+						exitSequence_ConstOnlyNamedScope_main_region_A();
+						enterSequence_ConstOnlyNamedScope_main_region_C_default();
+					} else {
+						did_transition = false;;
+					}
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean constOnlyNamedScope_main_region_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean constOnlyNamedScope_main_region_C_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
 	}
 	
 	public void runCycle() {
@@ -244,13 +260,13 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case constOnlyNamedScope_main_region_A:
-				react_ConstOnlyNamedScope_main_region_A();
+				constOnlyNamedScope_main_region_A_react(true);
 				break;
 			case constOnlyNamedScope_main_region_B:
-				react_ConstOnlyNamedScope_main_region_B();
+				constOnlyNamedScope_main_region_B_react(true);
 				break;
 			case constOnlyNamedScope_main_region_C:
-				react_ConstOnlyNamedScope_main_region_C();
+				constOnlyNamedScope_main_region_C_react(true);
 				break;
 			default:
 				// $NullState$

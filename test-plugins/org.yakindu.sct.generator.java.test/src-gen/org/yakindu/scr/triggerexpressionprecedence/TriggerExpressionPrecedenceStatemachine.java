@@ -192,28 +192,6 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 		sCInterface.setE2_transition(value);
 	}
 	
-	private boolean check_TriggerExpressionPrecedence_main_region_A_tr0_tr0() {
-		return (sCInterface.e1) && (sCInterface.getC1() || sCInterface.getC2());
-	}
-	
-	private boolean check_TriggerExpressionPrecedence_main_region_A_tr1_tr1() {
-		return sCInterface.e2;
-	}
-	
-	private void effect_TriggerExpressionPrecedence_main_region_A_tr0() {
-		exitSequence_TriggerExpressionPrecedence_main_region_A();
-		sCInterface.setE1_transition(true);
-		
-		enterSequence_TriggerExpressionPrecedence_main_region_A_default();
-	}
-	
-	private void effect_TriggerExpressionPrecedence_main_region_A_tr1() {
-		exitSequence_TriggerExpressionPrecedence_main_region_A();
-		sCInterface.setE2_transition(true);
-		
-		enterSequence_TriggerExpressionPrecedence_main_region_A_default();
-	}
-	
 	/* 'default' enter sequence for state A */
 	private void enterSequence_TriggerExpressionPrecedence_main_region_A_default() {
 		nextStateIndex = 0;
@@ -242,20 +220,40 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 		}
 	}
 	
-	/* The reactions of state A. */
-	private void react_TriggerExpressionPrecedence_main_region_A() {
-		if (check_TriggerExpressionPrecedence_main_region_A_tr0_tr0()) {
-			effect_TriggerExpressionPrecedence_main_region_A_tr0();
-		} else {
-			if (check_TriggerExpressionPrecedence_main_region_A_tr1_tr1()) {
-				effect_TriggerExpressionPrecedence_main_region_A_tr1();
-			}
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_TriggerExpressionPrecedence_main_region__entry_Default() {
 		enterSequence_TriggerExpressionPrecedence_main_region_A_default();
+	}
+	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean triggerExpressionPrecedence_main_region_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if ((sCInterface.e1) && (sCInterface.getC1() || sCInterface.getC2())) {
+					exitSequence_TriggerExpressionPrecedence_main_region_A();
+					sCInterface.setE1_transition(true);
+					
+					enterSequence_TriggerExpressionPrecedence_main_region_A_default();
+				} else {
+					if (sCInterface.e2) {
+						exitSequence_TriggerExpressionPrecedence_main_region_A();
+						sCInterface.setE2_transition(true);
+						
+						enterSequence_TriggerExpressionPrecedence_main_region_A_default();
+					} else {
+						did_transition = false;;
+					}
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
 	}
 	
 	public void runCycle() {
@@ -266,7 +264,7 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case triggerExpressionPrecedence_main_region_A:
-				react_TriggerExpressionPrecedence_main_region_A();
+				triggerExpressionPrecedence_main_region_A_react(true);
 				break;
 			default:
 				// $NullState$

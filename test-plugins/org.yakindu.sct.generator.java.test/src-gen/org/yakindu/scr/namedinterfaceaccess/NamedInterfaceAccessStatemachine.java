@@ -207,78 +207,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		return sCIUser;
 	}
 	
-	private boolean check_region_1_Idle_tr0_tr0() {
-		return (sCIUser.numberPressed) && (sCIUser.getNumberPressedValue()==getNumber1());
-	}
-	
-	private boolean check_region_1_Number1Pressed_tr0_tr0() {
-		return (sCIUser.numberPressed) && (sCIUser.getNumberPressedValue()==getNumber2());
-	}
-	
-	private boolean check_region_1_Number1Pressed_tr1_tr1() {
-		return sCIUser.numberPressed;
-	}
-	
-	private boolean check_region_1_Number2Pressed_tr0_tr0() {
-		return (sCIUser.numberPressed) && (sCIUser.getNumberPressedValue()==getNumber3());
-	}
-	
-	private boolean check_region_1_Number2Pressed_tr1_tr1() {
-		return sCIUser.numberPressed;
-	}
-	
-	private boolean check_region_1_Number3Pressed_tr0_tr0() {
-		return sCIUser.numberPressed;
-	}
-	
-	private boolean check__region1_Closed_tr0_tr0() {
-		return sCISafe.open;
-	}
-	
-	private boolean check__region1_Open_tr0_tr0() {
-		return sCISafe.close;
-	}
-	
-	private void effect_region_1_Idle_tr0() {
-		exitSequence_region_1_Idle();
-		enterSequence_region_1_Number1Pressed_default();
-	}
-	
-	private void effect_region_1_Number1Pressed_tr0() {
-		exitSequence_region_1_Number1Pressed();
-		enterSequence_region_1_Number2Pressed_default();
-	}
-	
-	private void effect_region_1_Number1Pressed_tr1() {
-		exitSequence_region_1_Number1Pressed();
-		enterSequence_region_1_Idle_default();
-	}
-	
-	private void effect_region_1_Number2Pressed_tr0() {
-		exitSequence_region_1_Number2Pressed();
-		enterSequence_region_1_Number3Pressed_default();
-	}
-	
-	private void effect_region_1_Number2Pressed_tr1() {
-		exitSequence_region_1_Number2Pressed();
-		enterSequence_region_1_Idle_default();
-	}
-	
-	private void effect_region_1_Number3Pressed_tr0() {
-		exitSequence_region_1_Number3Pressed();
-		enterSequence_region_1_Idle_default();
-	}
-	
-	private void effect__region1_Closed_tr0() {
-		exitSequence__region1_Closed();
-		enterSequence__region1_Open_default();
-	}
-	
-	private void effect__region1_Open_tr0() {
-		exitSequence__region1_Open();
-		enterSequence__region1_Closed_default();
-	}
-	
 	/* Entry action for state 'Idle'. */
 	private void entryAction_region_1_Idle() {
 		sCISafe.raiseClose();
@@ -407,56 +335,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		}
 	}
 	
-	/* The reactions of state Idle. */
-	private void react_region_1_Idle() {
-		if (check_region_1_Idle_tr0_tr0()) {
-			effect_region_1_Idle_tr0();
-		}
-	}
-	
-	/* The reactions of state Number1Pressed. */
-	private void react_region_1_Number1Pressed() {
-		if (check_region_1_Number1Pressed_tr0_tr0()) {
-			effect_region_1_Number1Pressed_tr0();
-		} else {
-			if (check_region_1_Number1Pressed_tr1_tr1()) {
-				effect_region_1_Number1Pressed_tr1();
-			}
-		}
-	}
-	
-	/* The reactions of state Number2Pressed. */
-	private void react_region_1_Number2Pressed() {
-		if (check_region_1_Number2Pressed_tr0_tr0()) {
-			effect_region_1_Number2Pressed_tr0();
-		} else {
-			if (check_region_1_Number2Pressed_tr1_tr1()) {
-				effect_region_1_Number2Pressed_tr1();
-			}
-		}
-	}
-	
-	/* The reactions of state Number3Pressed. */
-	private void react_region_1_Number3Pressed() {
-		if (check_region_1_Number3Pressed_tr0_tr0()) {
-			effect_region_1_Number3Pressed_tr0();
-		}
-	}
-	
-	/* The reactions of state Closed. */
-	private void react__region1_Closed() {
-		if (check__region1_Closed_tr0_tr0()) {
-			effect__region1_Closed_tr0();
-		}
-	}
-	
-	/* The reactions of state Open. */
-	private void react__region1_Open() {
-		if (check__region1_Open_tr0_tr0()) {
-			effect__region1_Open_tr0();
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_region_1__entry_Default() {
 		enterSequence_region_1_Idle_default();
@@ -467,6 +345,124 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		enterSequence__region1_Closed_default();
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean region_1_Idle_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if ((sCIUser.numberPressed) && (sCIUser.getNumberPressedValue()==getNumber1())) {
+					exitSequence_region_1_Idle();
+					enterSequence_region_1_Number1Pressed_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean region_1_Number1Pressed_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if ((sCIUser.numberPressed) && (sCIUser.getNumberPressedValue()==getNumber2())) {
+					exitSequence_region_1_Number1Pressed();
+					enterSequence_region_1_Number2Pressed_default();
+				} else {
+					if (sCIUser.numberPressed) {
+						exitSequence_region_1_Number1Pressed();
+						enterSequence_region_1_Idle_default();
+					} else {
+						did_transition = false;;
+					}
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean region_1_Number2Pressed_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if ((sCIUser.numberPressed) && (sCIUser.getNumberPressedValue()==getNumber3())) {
+					exitSequence_region_1_Number2Pressed();
+					enterSequence_region_1_Number3Pressed_default();
+				} else {
+					if (sCIUser.numberPressed) {
+						exitSequence_region_1_Number2Pressed();
+						enterSequence_region_1_Idle_default();
+					} else {
+						did_transition = false;;
+					}
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean region_1_Number3Pressed_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCIUser.numberPressed) {
+					exitSequence_region_1_Number3Pressed();
+					enterSequence_region_1_Idle_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean _region1_Closed_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCISafe.open) {
+				exitSequence__region1_Closed();
+				enterSequence__region1_Open_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean _region1_Open_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCISafe.close) {
+				exitSequence__region1_Open();
+				enterSequence__region1_Closed_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -475,22 +471,22 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case region_1_Idle:
-				react_region_1_Idle();
+				region_1_Idle_react(true);
 				break;
 			case region_1_Number1Pressed:
-				react_region_1_Number1Pressed();
+				region_1_Number1Pressed_react(true);
 				break;
 			case region_1_Number2Pressed:
-				react_region_1_Number2Pressed();
+				region_1_Number2Pressed_react(true);
 				break;
 			case region_1_Number3Pressed:
-				react_region_1_Number3Pressed();
+				region_1_Number3Pressed_react(true);
 				break;
 			case _region1_Closed:
-				react__region1_Closed();
+				_region1_Closed_react(true);
 				break;
 			case _region1_Open:
-				react__region1_Open();
+				_region1_Open_react(true);
 				break;
 			default:
 				// $NullState$

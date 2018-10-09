@@ -133,24 +133,6 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		sCInterface.raiseE2();
 	}
 	
-	private boolean check_main_region_StateA_tr0_tr0() {
-		return sCInterface.e2;
-	}
-	
-	private boolean check_second_region_SateA_tr0_tr0() {
-		return sCInterface.e1;
-	}
-	
-	private void effect_main_region_StateA_tr0() {
-		exitSequence_main_region_StateA();
-		enterSequence_main_region_StateB_default();
-	}
-	
-	private void effect_second_region_SateA_tr0() {
-		exitSequence_second_region_SateA();
-		enterSequence_second_region_StateB_default();
-	}
-	
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
 		sCInterface.raiseE1();
@@ -243,28 +225,6 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		}
 	}
 	
-	/* The reactions of state StateA. */
-	private void react_main_region_StateA() {
-		if (check_main_region_StateA_tr0_tr0()) {
-			effect_main_region_StateA_tr0();
-		}
-	}
-	
-	/* The reactions of state StateB. */
-	private void react_main_region_StateB() {
-	}
-	
-	/* The reactions of state SateA. */
-	private void react_second_region_SateA() {
-		if (check_second_region_SateA_tr0_tr0()) {
-			effect_second_region_SateA_tr0();
-		}
-	}
-	
-	/* The reactions of state StateB. */
-	private void react_second_region_StateB() {
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_main_region__entry_Default() {
 		enterSequence_main_region_StateA_default();
@@ -275,6 +235,68 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		enterSequence_second_region_SateA_default();
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean main_region_StateA_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.e2) {
+					exitSequence_main_region_StateA();
+					enterSequence_main_region_StateB_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_StateB_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean second_region_SateA_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.e1) {
+				exitSequence_second_region_SateA();
+				enterSequence_second_region_StateB_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean second_region_StateB_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -283,16 +305,16 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_StateA:
-				react_main_region_StateA();
+				main_region_StateA_react(true);
 				break;
 			case main_region_StateB:
-				react_main_region_StateB();
+				main_region_StateB_react(true);
 				break;
 			case second_region_SateA:
-				react_second_region_SateA();
+				second_region_SateA_react(true);
 				break;
 			case second_region_StateB:
-				react_second_region_StateB();
+				second_region_StateB_react(true);
 				break;
 			default:
 				// $NullState$

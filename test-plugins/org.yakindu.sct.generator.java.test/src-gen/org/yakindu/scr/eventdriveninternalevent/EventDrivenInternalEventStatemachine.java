@@ -20,6 +20,25 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			runCycle();
 		}
 		
+		private boolean e;
+		
+		private long eValue;
+		
+		public boolean isRaisedE() {
+			return e;
+		}
+		
+		protected void raiseE(long value) {
+			e = true;
+			eValue = value;
+		}
+		
+		public long getEValue() {
+			if (! e ) 
+				throw new IllegalStateException("Illegal event value access. Event E is not raised!");
+			return eValue;
+		}
+		
 		private long x;
 		
 		public long getX() {
@@ -54,6 +73,11 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			start = false;
 			reset = false;
 		}
+		protected void clearOutEvents() {
+		
+		e = false;
+		}
+		
 	}
 	
 	protected SCInterfaceImpl sCInterface;
@@ -141,6 +165,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	* This method resets the outgoing events.
 	*/
 	protected void clearOutEvents() {
+		sCInterface.clearOutEvents();
 	}
 	
 	/**
@@ -200,6 +225,14 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		sCInterface.raiseReset();
 	}
 	
+	public boolean isRaisedE() {
+		return sCInterface.isRaisedE();
+	}
+	
+	public long getEValue() {
+		return sCInterface.getEValue();
+	}
+	
 	public long getX() {
 		return sCInterface.getX();
 	}
@@ -222,98 +255,6 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	
 	public void setI2_sequence(long value) {
 		sCInterface.setI2_sequence(value);
-	}
-	
-	private boolean check__lr0() {
-		return true;
-	}
-	
-	private boolean check_EventDrivenInternalEvent_r1_A_lr0_lr0() {
-		return sCInterface.start;
-	}
-	
-	private boolean check_EventDrivenInternalEvent_r1_A_tr0_tr0() {
-		return i2;
-	}
-	
-	private boolean check_EventDrivenInternalEvent_r1_B_lr0_lr0() {
-		return (i2) && (sCInterface.getI2_sequence()<10);
-	}
-	
-	private boolean check_EventDrivenInternalEvent_r1_B_tr0_tr0() {
-		return sCInterface.reset;
-	}
-	
-	private boolean check_EventDrivenInternalEvent_r2_C_tr0_tr0() {
-		return i1;
-	}
-	
-	private boolean check_EventDrivenInternalEvent_r2_D_lr0_lr0() {
-		return (i1) && (sCInterface.getI1_sequence()<10);
-	}
-	
-	private boolean check_EventDrivenInternalEvent_r2_D_tr0_tr0() {
-		return sCInterface.reset;
-	}
-	
-	private boolean check_EventDrivenInternalEvent_check_VALID_tr0_tr0() {
-		return (sCInterface.start && i1) || (sCInterface.start && i2) || (i1 && i2);
-	}
-	
-	private boolean check_EventDrivenInternalEvent_check_MULTIPLEEVENTS_tr0_tr0() {
-		return sCInterface.reset;
-	}
-	
-	private void effect__lr0() {
-		sCInterface.setX(sCInterface.getX() + 1);
-	}
-	
-	private void effect_EventDrivenInternalEvent_r1_A_lr0_lr0() {
-		raiseI1();
-	}
-	
-	private void effect_EventDrivenInternalEvent_r1_A_tr0() {
-		exitSequence_EventDrivenInternalEvent_r1_A();
-		sCInterface.setI2_sequence(sCInterface.x);
-		
-		enterSequence_EventDrivenInternalEvent_r1_B_default();
-	}
-	
-	private void effect_EventDrivenInternalEvent_r1_B_lr0_lr0() {
-		sCInterface.setI2_sequence(sCInterface.getI2_sequence() + 1);
-	}
-	
-	private void effect_EventDrivenInternalEvent_r1_B_tr0() {
-		exitSequence_EventDrivenInternalEvent_r1_B();
-		enterSequence_EventDrivenInternalEvent_r1_A_default();
-	}
-	
-	private void effect_EventDrivenInternalEvent_r2_C_tr0() {
-		exitSequence_EventDrivenInternalEvent_r2_C();
-		sCInterface.setI1_sequence(sCInterface.x);
-		
-		raiseI2();
-		
-		enterSequence_EventDrivenInternalEvent_r2_D_default();
-	}
-	
-	private void effect_EventDrivenInternalEvent_r2_D_lr0_lr0() {
-		sCInterface.setI1_sequence(sCInterface.getI1_sequence() + 1);
-	}
-	
-	private void effect_EventDrivenInternalEvent_r2_D_tr0() {
-		exitSequence_EventDrivenInternalEvent_r2_D();
-		enterSequence_EventDrivenInternalEvent_r2_C_default();
-	}
-	
-	private void effect_EventDrivenInternalEvent_check_VALID_tr0() {
-		exitSequence_EventDrivenInternalEvent_check_VALID();
-		enterSequence_EventDrivenInternalEvent_check_MULTIPLEEVENTS_default();
-	}
-	
-	private void effect_EventDrivenInternalEvent_check_MULTIPLEEVENTS_tr0() {
-		exitSequence_EventDrivenInternalEvent_check_MULTIPLEEVENTS();
-		enterSequence_EventDrivenInternalEvent_check_VALID_default();
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -445,62 +386,6 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		}
 	}
 	
-	/* The reactions of state A. */
-	private void react_EventDrivenInternalEvent_r1_A() {
-		effect__lr0();
-		if (check_EventDrivenInternalEvent_r1_A_tr0_tr0()) {
-			effect_EventDrivenInternalEvent_r1_A_tr0();
-		} else {
-			if (check_EventDrivenInternalEvent_r1_A_lr0_lr0()) {
-				effect_EventDrivenInternalEvent_r1_A_lr0_lr0();
-			}
-		}
-	}
-	
-	/* The reactions of state B. */
-	private void react_EventDrivenInternalEvent_r1_B() {
-		effect__lr0();
-		if (check_EventDrivenInternalEvent_r1_B_tr0_tr0()) {
-			effect_EventDrivenInternalEvent_r1_B_tr0();
-		} else {
-			if (check_EventDrivenInternalEvent_r1_B_lr0_lr0()) {
-				effect_EventDrivenInternalEvent_r1_B_lr0_lr0();
-			}
-		}
-	}
-	
-	/* The reactions of state C. */
-	private void react_EventDrivenInternalEvent_r2_C() {
-		if (check_EventDrivenInternalEvent_r2_C_tr0_tr0()) {
-			effect_EventDrivenInternalEvent_r2_C_tr0();
-		}
-	}
-	
-	/* The reactions of state D. */
-	private void react_EventDrivenInternalEvent_r2_D() {
-		if (check_EventDrivenInternalEvent_r2_D_tr0_tr0()) {
-			effect_EventDrivenInternalEvent_r2_D_tr0();
-		} else {
-			if (check_EventDrivenInternalEvent_r2_D_lr0_lr0()) {
-				effect_EventDrivenInternalEvent_r2_D_lr0_lr0();
-			}
-		}
-	}
-	
-	/* The reactions of state VALID. */
-	private void react_EventDrivenInternalEvent_check_VALID() {
-		if (check_EventDrivenInternalEvent_check_VALID_tr0_tr0()) {
-			effect_EventDrivenInternalEvent_check_VALID_tr0();
-		}
-	}
-	
-	/* The reactions of state MULTIPLEEVENTS. */
-	private void react_EventDrivenInternalEvent_check_MULTIPLEEVENTS() {
-		if (check_EventDrivenInternalEvent_check_MULTIPLEEVENTS_tr0_tr0()) {
-			effect_EventDrivenInternalEvent_check_MULTIPLEEVENTS_tr0();
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_EventDrivenInternalEvent_r1__entry_Default() {
 		enterSequence_EventDrivenInternalEvent_r1_A_default();
@@ -514,6 +399,127 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	/* Default react sequence for initial entry  */
 	private void react_EventDrivenInternalEvent_check__entry_Default() {
 		enterSequence_EventDrivenInternalEvent_check_VALID_default();
+	}
+	
+	private boolean react(boolean try_transition) {
+		sCInterface.setX(sCInterface.getX() + 1);
+		
+		return false;
+	}
+	
+	private boolean eventDrivenInternalEvent_r1_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (i2) {
+					exitSequence_EventDrivenInternalEvent_r1_A();
+					sCInterface.setI2_sequence(sCInterface.x);
+					
+					enterSequence_EventDrivenInternalEvent_r1_B_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+			if (sCInterface.start) {
+				raiseI1();
+			}
+		}
+		return did_transition;
+	}
+	
+	private boolean eventDrivenInternalEvent_r1_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.reset) {
+					exitSequence_EventDrivenInternalEvent_r1_B();
+					enterSequence_EventDrivenInternalEvent_r1_A_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+			if ((i2) && (sCInterface.getI2_sequence()<10)) {
+				sCInterface.setI2_sequence(sCInterface.getI2_sequence() + 1);
+			}
+		}
+		return did_transition;
+	}
+	
+	private boolean eventDrivenInternalEvent_r2_C_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (i1) {
+				exitSequence_EventDrivenInternalEvent_r2_C();
+				sCInterface.setI1_sequence(sCInterface.x);
+				
+				raiseI2();
+				
+				enterSequence_EventDrivenInternalEvent_r2_D_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean eventDrivenInternalEvent_r2_D_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.reset) {
+				exitSequence_EventDrivenInternalEvent_r2_D();
+				enterSequence_EventDrivenInternalEvent_r2_C_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+			if ((i1) && (sCInterface.getI1_sequence()<10)) {
+				sCInterface.setI1_sequence(sCInterface.getI1_sequence() + 1);
+			}
+		}
+		return did_transition;
+	}
+	
+	private boolean eventDrivenInternalEvent_check_VALID_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if ((sCInterface.start && i1) || (sCInterface.start && i2) || (i1 && i2)) {
+				exitSequence_EventDrivenInternalEvent_check_VALID();
+				enterSequence_EventDrivenInternalEvent_check_MULTIPLEEVENTS_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean eventDrivenInternalEvent_check_MULTIPLEEVENTS_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.reset) {
+				exitSequence_EventDrivenInternalEvent_check_MULTIPLEEVENTS();
+				enterSequence_EventDrivenInternalEvent_check_VALID_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
 	}
 	
 	public void runCycle() {
@@ -536,22 +542,22 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case eventDrivenInternalEvent_r1_A:
-				react_EventDrivenInternalEvent_r1_A();
+				eventDrivenInternalEvent_r1_A_react(true);
 				break;
 			case eventDrivenInternalEvent_r1_B:
-				react_EventDrivenInternalEvent_r1_B();
+				eventDrivenInternalEvent_r1_B_react(true);
 				break;
 			case eventDrivenInternalEvent_r2_C:
-				react_EventDrivenInternalEvent_r2_C();
+				eventDrivenInternalEvent_r2_C_react(true);
 				break;
 			case eventDrivenInternalEvent_r2_D:
-				react_EventDrivenInternalEvent_r2_D();
+				eventDrivenInternalEvent_r2_D_react(true);
 				break;
 			case eventDrivenInternalEvent_check_VALID:
-				react_EventDrivenInternalEvent_check_VALID();
+				eventDrivenInternalEvent_check_VALID_react(true);
 				break;
 			case eventDrivenInternalEvent_check_MULTIPLEEVENTS:
-				react_EventDrivenInternalEvent_check_MULTIPLEEVENTS();
+				eventDrivenInternalEvent_check_MULTIPLEEVENTS_react(true);
 				break;
 			default:
 				// $NullState$

@@ -290,60 +290,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		sCInterface.setS2_entered(value);
 	}
 	
-	private boolean check__lr0() {
-		return timeEvents[2];
-	}
-	
-	private boolean check__lr1() {
-		return true;
-	}
-	
-	private boolean check_main_region_Composite_s1_s2_tr0_tr0() {
-		return timeEvents[0];
-	}
-	
-	private boolean check_main_region_Composite_s1_s2_inner_region_s1_tr0_tr0() {
-		return sCInterface.ev_in;
-	}
-	
-	private boolean check_main_region_Composite_s1_s2_inner_region_s1_tr1_tr1() {
-		return timeEvents[1];
-	}
-	
-	private boolean check_main_region_Composite_s1_s2_inner_region_s2_tr0_tr0() {
-		return sCInterface.ev_in;
-	}
-	
-	private void effect__lr0() {
-		sCInterface.operationCallback.displayTime();
-	}
-	
-	private void effect__lr1() {
-		sCInterface.setCycles(sCInterface.getCycles() + 1);
-	}
-	
-	private void effect_main_region_Composite_s1_s2_tr0() {
-		exitSequence_main_region_Composite_s1_s2();
-		enterSequence_main_region__final__default();
-	}
-	
-	private void effect_main_region_Composite_s1_s2_inner_region_s1_tr0() {
-		exitSequence_main_region_Composite_s1_s2_inner_region_s1();
-		enterSequence_main_region_Composite_s1_s2_inner_region_s2_default();
-	}
-	
-	private void effect_main_region_Composite_s1_s2_inner_region_s1_tr1() {
-		exitSequence_main_region_Composite_s1_s2_inner_region_s1();
-		sCInterface.setAfterCalls(sCInterface.getAfterCalls() + 1);
-		
-		enterSequence_main_region_Composite_s1_s2_inner_region_s1_default();
-	}
-	
-	private void effect_main_region_Composite_s1_s2_inner_region_s2_tr0() {
-		exitSequence_main_region_Composite_s1_s2_inner_region_s2();
-		enterSequence_main_region_Composite_s1_s2_inner_region_s1_default();
-	}
-	
 	/* Entry action for statechart 'RunnableTest'. */
 	private void entryAction() {
 		timer.setTimer(this, 2, 1 * 1000, true);
@@ -476,48 +422,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		}
 	}
 	
-	/* The reactions of state null. */
-	private void react_main_region__final_() {
-		if (check__lr0()) {
-			effect__lr0();
-		}
-		effect__lr1();
-	}
-	
-	/* The reactions of state s1. */
-	private void react_main_region_Composite_s1_s2_inner_region_s1() {
-		if (check__lr0()) {
-			effect__lr0();
-		}
-		effect__lr1();
-		if (check_main_region_Composite_s1_s2_tr0_tr0()) {
-			effect_main_region_Composite_s1_s2_tr0();
-		} else {
-			if (check_main_region_Composite_s1_s2_inner_region_s1_tr0_tr0()) {
-				effect_main_region_Composite_s1_s2_inner_region_s1_tr0();
-			} else {
-				if (check_main_region_Composite_s1_s2_inner_region_s1_tr1_tr1()) {
-					effect_main_region_Composite_s1_s2_inner_region_s1_tr1();
-				}
-			}
-		}
-	}
-	
-	/* The reactions of state s2. */
-	private void react_main_region_Composite_s1_s2_inner_region_s2() {
-		if (check__lr0()) {
-			effect__lr0();
-		}
-		effect__lr1();
-		if (check_main_region_Composite_s1_s2_tr0_tr0()) {
-			effect_main_region_Composite_s1_s2_tr0();
-		} else {
-			if (check_main_region_Composite_s1_s2_inner_region_s2_tr0_tr0()) {
-				effect_main_region_Composite_s1_s2_inner_region_s2_tr0();
-			}
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_main_region__entry_Default() {
 		enterSequence_main_region_Composite_s1_s2_default();
@@ -528,6 +432,89 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		enterSequence_main_region_Composite_s1_s2_inner_region_s1_default();
 	}
 	
+	private boolean react(boolean try_transition) {
+		if (timeEvents[2]) {
+			sCInterface.operationCallback.displayTime();
+		}
+		sCInterface.setCycles(sCInterface.getCycles() + 1);
+		
+		return false;
+	}
+	
+	private boolean main_region__final__react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_Composite_s1_s2_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (timeEvents[0]) {
+					exitSequence_main_region_Composite_s1_s2();
+					enterSequence_main_region__final__default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_Composite_s1_s2_inner_region_s1_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (main_region_Composite_s1_s2_react(try_transition)==false) {
+				if (sCInterface.ev_in) {
+					exitSequence_main_region_Composite_s1_s2_inner_region_s1();
+					enterSequence_main_region_Composite_s1_s2_inner_region_s2_default();
+				} else {
+					if (timeEvents[1]) {
+						exitSequence_main_region_Composite_s1_s2_inner_region_s1();
+						sCInterface.setAfterCalls(sCInterface.getAfterCalls() + 1);
+						
+						enterSequence_main_region_Composite_s1_s2_inner_region_s1_default();
+					} else {
+						did_transition = false;;
+					}
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_Composite_s1_s2_inner_region_s2_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (main_region_Composite_s1_s2_react(try_transition)==false) {
+				if (sCInterface.ev_in) {
+					exitSequence_main_region_Composite_s1_s2_inner_region_s2();
+					enterSequence_main_region_Composite_s1_s2_inner_region_s1_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -536,13 +523,13 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region__final_:
-				react_main_region__final_();
+				main_region__final__react(true);
 				break;
 			case main_region_Composite_s1_s2_inner_region_s1:
-				react_main_region_Composite_s1_s2_inner_region_s1();
+				main_region_Composite_s1_s2_inner_region_s1_react(true);
 				break;
 			case main_region_Composite_s1_s2_inner_region_s2:
-				react_main_region_Composite_s1_s2_inner_region_s2();
+				main_region_Composite_s1_s2_inner_region_s2_react(true);
 				break;
 			default:
 				// $NullState$

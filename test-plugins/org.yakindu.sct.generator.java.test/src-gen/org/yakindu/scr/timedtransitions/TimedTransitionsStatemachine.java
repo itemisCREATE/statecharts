@@ -142,31 +142,6 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		timeEvents[eventID] = true;
 	}
 	
-	private boolean check__lr0() {
-		return timeEvents[1];
-	}
-	
-	private boolean check__lr1() {
-		return true;
-	}
-	
-	private boolean check_main_region_Start_tr0_tr0() {
-		return timeEvents[0];
-	}
-	
-	private void effect__lr0() {
-		setX(getX() + 1);
-	}
-	
-	private void effect__lr1() {
-		setY(getY() + 1);
-	}
-	
-	private void effect_main_region_Start_tr0() {
-		exitSequence_main_region_Start();
-		enterSequence_main_region_End_default();
-	}
-	
 	/* Entry action for statechart 'TimedTransitions'. */
 	private void entryAction() {
 		timer.setTimer(this, 1, 1 * 1000, true);
@@ -233,28 +208,49 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		}
 	}
 	
-	/* The reactions of state Start. */
-	private void react_main_region_Start() {
-		if (check__lr0()) {
-			effect__lr0();
-		}
-		effect__lr1();
-		if (check_main_region_Start_tr0_tr0()) {
-			effect_main_region_Start_tr0();
-		}
-	}
-	
-	/* The reactions of state End. */
-	private void react_main_region_End() {
-		if (check__lr0()) {
-			effect__lr0();
-		}
-		effect__lr1();
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_main_region__entry_Default() {
 		enterSequence_main_region_Start_default();
+	}
+	
+	private boolean react(boolean try_transition) {
+		if (timeEvents[1]) {
+			setX(getX() + 1);
+		}
+		setY(getY() + 1);
+		
+		return false;
+	}
+	
+	private boolean main_region_Start_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (timeEvents[0]) {
+					exitSequence_main_region_Start();
+					enterSequence_main_region_End_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_End_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
 	}
 	
 	public void runCycle() {
@@ -265,10 +261,10 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_Start:
-				react_main_region_Start();
+				main_region_Start_react(true);
 				break;
 			case main_region_End:
-				react_main_region_End();
+				main_region_End_react(true);
 				break;
 			default:
 				// $NullState$

@@ -43,6 +43,7 @@ public class EnterState {
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.r_B_r_E));
 	}
+	
 	@Test
 	public void namedEntryThroughNamedTransition() {
 		statemachine.enter();
@@ -51,6 +52,7 @@ public class EnterState {
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.r_B_r_F));
 	}
+	
 	@Test
 	public void namedEntryThroughDefaultTransition() {
 		statemachine.enter();

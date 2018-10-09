@@ -43,6 +43,7 @@ public class EntryReactionAction {
 		assertTrue(statemachine.getEnteredBdefault());
 		assertTrue(!statemachine.getEnteredBother());
 	}
+	
 	@Test
 	public void entryOnRTS() {
 		init();
@@ -53,6 +54,7 @@ public class EntryReactionAction {
 		assertTrue(!statemachine.getEnteredBdefault());
 		assertTrue(statemachine.getEnteredBother());
 	}
+	
 	@Test
 	public void noEntryTransitionActionOnHistory() {
 		init();
@@ -63,6 +65,7 @@ public class EntryReactionAction {
 		assertTrue(!statemachine.getEnteredBdefault());
 		assertTrue(!statemachine.getEnteredBother());
 	}
+	
 	public void init() {
 		statemachine.enter();
 		statemachine.getSCInterface().raiseB();

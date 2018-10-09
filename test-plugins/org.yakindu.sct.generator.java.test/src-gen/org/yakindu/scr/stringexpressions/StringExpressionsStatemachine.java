@@ -296,156 +296,52 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		sCInterface.setGuardStringEqual(value);
 	}
 	
-	private boolean check_main_region_AssignmentChecked_tr0_tr0() {
-		return sCInterface.e;
-	}
-	
-	private boolean check_main_region_VarToVarCompareSucceeded_tr0_tr0() {
-		return sCInterface.e;
-	}
-	
-	private boolean check_main_region_VarToConstCompareSucceeded_tr0_tr0() {
-		return sCInterface.e;
-	}
-	
-	private boolean check_main_region_ConstToVarCompareSucceeded_tr0_tr0() {
-		return sCInterface.e;
-	}
-	
 	private boolean check_main_region__choice_0_tr1_tr1() {
 		return sCInterface.e;
-	}
-	
-	private boolean check_main_region__choice_0_tr0() {
-		return true;
 	}
 	
 	private boolean check_main_region__choice_1_tr1_tr1() {
 		return (sCInterface.e) && ((sCInterface.getStringA()== null?sCInterface.getStringA2() ==null :sCInterface.getStringA().equals(sCInterface.getStringA2())));
 	}
 	
-	private boolean check_main_region__choice_1_tr0() {
-		return true;
-	}
-	
 	private boolean check_main_region__choice_2_tr1_tr1() {
 		return (sCInterface.e) && ((sCInterface.getStringA()== null?sCInterface.getStringB() !=null : !sCInterface.getStringA().equals(sCInterface.getStringB())));
-	}
-	
-	private boolean check_main_region__choice_2_tr0() {
-		return true;
 	}
 	
 	private boolean check_main_region__choice_3_tr0_tr0() {
 		return sCInterface.e;
 	}
 	
-	private boolean check_main_region__choice_3_tr1() {
-		return true;
-	}
-	
 	private boolean check_main_region__choice_4_tr1_tr1() {
 		return (sCInterface.e) && ((sCInterface.getStringA()== null?"A" ==null :sCInterface.getStringA().equals("A")));
-	}
-	
-	private boolean check_main_region__choice_4_tr0() {
-		return true;
 	}
 	
 	private boolean check_main_region__choice_5_tr1_tr1() {
 		return (sCInterface.e) && ((sCInterface.getStringA()== null?"B" !=null : !sCInterface.getStringA().equals("B")));
 	}
 	
-	private boolean check_main_region__choice_5_tr0() {
-		return true;
-	}
-	
-	private boolean check_main_region__choice_6_tr0() {
-		return true;
-	}
-	
 	private boolean check_main_region__choice_7_tr0_tr0() {
 		return sCInterface.e;
-	}
-	
-	private boolean check_main_region__choice_7_tr1() {
-		return true;
 	}
 	
 	private boolean check_main_region__choice_8_tr1_tr1() {
 		return (sCInterface.e) && (("A"== null?sCInterface.getStringA() ==null :"A".equals(sCInterface.getStringA())));
 	}
 	
-	private boolean check_main_region__choice_8_tr0() {
-		return true;
-	}
-	
 	private boolean check_main_region__choice_9_tr1_tr1() {
 		return (sCInterface.e) && (("A"== null?sCInterface.getStringB() !=null : !"A".equals(sCInterface.getStringB())));
-	}
-	
-	private boolean check_main_region__choice_9_tr0() {
-		return true;
-	}
-	
-	private boolean check_main_region__choice_10_tr0() {
-		return true;
 	}
 	
 	private boolean check_main_region__choice_11_tr0_tr0() {
 		return sCInterface.e;
 	}
 	
-	private boolean check_main_region__choice_11_tr1() {
-		return true;
-	}
-	
 	private boolean check_main_region__choice_12_tr1_tr1() {
 		return (sCInterface.e) && (("A"== null?"A" ==null :"A".equals("A")));
 	}
 	
-	private boolean check_main_region__choice_12_tr0() {
-		return true;
-	}
-	
 	private boolean check_main_region__choice_13_tr1_tr1() {
 		return (sCInterface.e) && (("A"== null?"B" !=null : !"A".equals("B")));
-	}
-	
-	private boolean check_main_region__choice_13_tr0() {
-		return true;
-	}
-	
-	private boolean check_main_region__choice_14_tr0() {
-		return true;
-	}
-	
-	private void effect_main_region_AssignmentChecked_tr0() {
-		exitSequence_main_region_AssignmentChecked();
-		sCInterface.setStringVarEqual((sCInterface.stringA== null?sCInterface.stringA2 ==null :sCInterface.stringA.equals(sCInterface.stringA2)));
-		
-		react_main_region__choice_0();
-	}
-	
-	private void effect_main_region_VarToVarCompareSucceeded_tr0() {
-		exitSequence_main_region_VarToVarCompareSucceeded();
-		sCInterface.setStringVarEqual((sCInterface.stringA== null?"A" ==null :sCInterface.stringA.equals("A")));
-		
-		react_main_region__choice_3();
-	}
-	
-	private void effect_main_region_VarToConstCompareSucceeded_tr0() {
-		exitSequence_main_region_VarToConstCompareSucceeded();
-		sCInterface.setStringVarEqual(("A"== null?sCInterface.stringA ==null :"A".equals(sCInterface.stringA)));
-		
-		react_main_region__choice_7();
-	}
-	
-	private void effect_main_region_ConstToVarCompareSucceeded_tr0() {
-		exitSequence_main_region_ConstToVarCompareSucceeded();
-		sCInterface.setStringVarEqual(("A"== null?"A" ==null :"A".equals("A")));
-		
-		react_main_region__choice_11();
 	}
 	
 	private void effect_main_region__choice_0_tr1() {
@@ -691,42 +587,6 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		}
 	}
 	
-	/* The reactions of state AssignmentChecked. */
-	private void react_main_region_AssignmentChecked() {
-		if (check_main_region_AssignmentChecked_tr0_tr0()) {
-			effect_main_region_AssignmentChecked_tr0();
-		}
-	}
-	
-	/* The reactions of state Failed. */
-	private void react_main_region_Failed() {
-	}
-	
-	/* The reactions of state VarToVarCompareSucceeded. */
-	private void react_main_region_VarToVarCompareSucceeded() {
-		if (check_main_region_VarToVarCompareSucceeded_tr0_tr0()) {
-			effect_main_region_VarToVarCompareSucceeded_tr0();
-		}
-	}
-	
-	/* The reactions of state VarToConstCompareSucceeded. */
-	private void react_main_region_VarToConstCompareSucceeded() {
-		if (check_main_region_VarToConstCompareSucceeded_tr0_tr0()) {
-			effect_main_region_VarToConstCompareSucceeded_tr0();
-		}
-	}
-	
-	/* The reactions of state ConstToVarCompareSucceeded. */
-	private void react_main_region_ConstToVarCompareSucceeded() {
-		if (check_main_region_ConstToVarCompareSucceeded_tr0_tr0()) {
-			effect_main_region_ConstToVarCompareSucceeded_tr0();
-		}
-	}
-	
-	/* The reactions of state ConstToConstCompareSucceeded. */
-	private void react_main_region_ConstToConstCompareSucceeded() {
-	}
-	
 	/* The reactions of state null. */
 	private void react_main_region__choice_0() {
 		if (check_main_region__choice_0_tr1_tr1()) {
@@ -855,6 +715,116 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		enterSequence_main_region_AssignmentChecked_default();
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean main_region_AssignmentChecked_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.e) {
+					exitSequence_main_region_AssignmentChecked();
+					sCInterface.setStringVarEqual((sCInterface.stringA== null?sCInterface.stringA2 ==null :sCInterface.stringA.equals(sCInterface.stringA2)));
+					
+					react_main_region__choice_0();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_Failed_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_VarToVarCompareSucceeded_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.e) {
+					exitSequence_main_region_VarToVarCompareSucceeded();
+					sCInterface.setStringVarEqual((sCInterface.stringA== null?"A" ==null :sCInterface.stringA.equals("A")));
+					
+					react_main_region__choice_3();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_VarToConstCompareSucceeded_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.e) {
+					exitSequence_main_region_VarToConstCompareSucceeded();
+					sCInterface.setStringVarEqual(("A"== null?sCInterface.stringA ==null :"A".equals(sCInterface.stringA)));
+					
+					react_main_region__choice_7();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_ConstToVarCompareSucceeded_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.e) {
+					exitSequence_main_region_ConstToVarCompareSucceeded();
+					sCInterface.setStringVarEqual(("A"== null?"A" ==null :"A".equals("A")));
+					
+					react_main_region__choice_11();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_ConstToConstCompareSucceeded_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -863,22 +833,22 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_AssignmentChecked:
-				react_main_region_AssignmentChecked();
+				main_region_AssignmentChecked_react(true);
 				break;
 			case main_region_Failed:
-				react_main_region_Failed();
+				main_region_Failed_react(true);
 				break;
 			case main_region_VarToVarCompareSucceeded:
-				react_main_region_VarToVarCompareSucceeded();
+				main_region_VarToVarCompareSucceeded_react(true);
 				break;
 			case main_region_VarToConstCompareSucceeded:
-				react_main_region_VarToConstCompareSucceeded();
+				main_region_VarToConstCompareSucceeded_react(true);
 				break;
 			case main_region_ConstToVarCompareSucceeded:
-				react_main_region_ConstToVarCompareSucceeded();
+				main_region_ConstToVarCompareSucceeded_react(true);
 				break;
 			case main_region_ConstToConstCompareSucceeded:
-				react_main_region_ConstToConstCompareSucceeded();
+				main_region_ConstToConstCompareSucceeded_react(true);
 				break;
 			default:
 				// $NullState$

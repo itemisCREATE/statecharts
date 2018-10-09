@@ -211,51 +211,6 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		sCInterface.setEnteredBother(value);
 	}
 	
-	private boolean check_EntryReactionAction_r2_B_tr0_tr0() {
-		return sCInterface.d;
-	}
-	
-	private boolean check_EntryReactionAction_r2_B_r_BA_tr0_tr0() {
-		return sCInterface.b;
-	}
-	
-	private boolean check_EntryReactionAction_r2_B_r_BB_tr0_tr0() {
-		return sCInterface.b;
-	}
-	
-	private boolean check_EntryReactionAction_r2_D_tr0_tr0() {
-		return sCInterface.b;
-	}
-	
-	private boolean check_EntryReactionAction_r2_D_tr1_tr1() {
-		return sCInterface.d;
-	}
-	
-	private void effect_EntryReactionAction_r2_B_tr0() {
-		exitSequence_EntryReactionAction_r2_B();
-		enterSequence_EntryReactionAction_r2_D_default();
-	}
-	
-	private void effect_EntryReactionAction_r2_B_r_BA_tr0() {
-		exitSequence_EntryReactionAction_r2_B_r_BA();
-		enterSequence_EntryReactionAction_r2_B_r_BB_default();
-	}
-	
-	private void effect_EntryReactionAction_r2_B_r_BB_tr0() {
-		exitSequence_EntryReactionAction_r2_B_r_BB();
-		enterSequence_EntryReactionAction_r2_B_r_BA_default();
-	}
-	
-	private void effect_EntryReactionAction_r2_D_tr0() {
-		exitSequence_EntryReactionAction_r2_D();
-		enterSequence_EntryReactionAction_r2_B_other();
-	}
-	
-	private void effect_EntryReactionAction_r2_D_tr1() {
-		exitSequence_EntryReactionAction_r2_D();
-		enterSequence_EntryReactionAction_r2_B_default();
-	}
-	
 	/* 'default' enter sequence for state B */
 	private void enterSequence_EntryReactionAction_r2_B_default() {
 		enterSequence_EntryReactionAction_r2_B_r_default();
@@ -399,43 +354,6 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		}
 	}
 	
-	/* The reactions of state BA. */
-	private void react_EntryReactionAction_r2_B_r_BA() {
-		if (check_EntryReactionAction_r2_B_tr0_tr0()) {
-			effect_EntryReactionAction_r2_B_tr0();
-		} else {
-			if (check_EntryReactionAction_r2_B_r_BA_tr0_tr0()) {
-				effect_EntryReactionAction_r2_B_r_BA_tr0();
-			}
-		}
-	}
-	
-	/* The reactions of state BB. */
-	private void react_EntryReactionAction_r2_B_r_BB() {
-		if (check_EntryReactionAction_r2_B_tr0_tr0()) {
-			effect_EntryReactionAction_r2_B_tr0();
-		} else {
-			if (check_EntryReactionAction_r2_B_r_BB_tr0_tr0()) {
-				effect_EntryReactionAction_r2_B_r_BB_tr0();
-			}
-		}
-	}
-	
-	/* The reactions of state D. */
-	private void react_EntryReactionAction_r2_D() {
-		if (check_EntryReactionAction_r2_D_tr0_tr0()) {
-			effect_EntryReactionAction_r2_D_tr0();
-		} else {
-			if (check_EntryReactionAction_r2_D_tr1_tr1()) {
-				effect_EntryReactionAction_r2_D_tr1();
-			}
-		}
-	}
-	
-	/* The reactions of state A. */
-	private void react_EntryReactionAction_r1_A() {
-	}
-	
 	/* Default react sequence for initial entry default */
 	private void react_EntryReactionAction_r2_default() {
 		sCInterface.setEnteredR2(true);
@@ -469,6 +387,98 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		enterSequence_EntryReactionAction_r1_A_default();
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean entryReactionAction_r2_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.d) {
+					exitSequence_EntryReactionAction_r2_B();
+					enterSequence_EntryReactionAction_r2_D_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean entryReactionAction_r2_B_r_BA_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (entryReactionAction_r2_B_react(try_transition)==false) {
+				if (sCInterface.b) {
+					exitSequence_EntryReactionAction_r2_B_r_BA();
+					enterSequence_EntryReactionAction_r2_B_r_BB_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean entryReactionAction_r2_B_r_BB_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (entryReactionAction_r2_B_react(try_transition)==false) {
+				if (sCInterface.b) {
+					exitSequence_EntryReactionAction_r2_B_r_BB();
+					enterSequence_EntryReactionAction_r2_B_r_BA_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean entryReactionAction_r2_D_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.b) {
+					exitSequence_EntryReactionAction_r2_D();
+					enterSequence_EntryReactionAction_r2_B_other();
+				} else {
+					if (sCInterface.d) {
+						exitSequence_EntryReactionAction_r2_D();
+						enterSequence_EntryReactionAction_r2_B_default();
+					} else {
+						did_transition = false;;
+					}
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean entryReactionAction_r1_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -477,16 +487,16 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case entryReactionAction_r2_B_r_BA:
-				react_EntryReactionAction_r2_B_r_BA();
+				entryReactionAction_r2_B_r_BA_react(true);
 				break;
 			case entryReactionAction_r2_B_r_BB:
-				react_EntryReactionAction_r2_B_r_BB();
+				entryReactionAction_r2_B_r_BB_react(true);
 				break;
 			case entryReactionAction_r2_D:
-				react_EntryReactionAction_r2_D();
+				entryReactionAction_r2_D_react(true);
 				break;
 			case entryReactionAction_r1_A:
-				react_EntryReactionAction_r1_A();
+				entryReactionAction_r1_A_react(true);
 				break;
 			default:
 				// $NullState$

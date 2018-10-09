@@ -140,6 +140,16 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 			this.sm_local = value;
 		}
 		
+		private long cnt;
+		
+		public long getCnt() {
+			return cnt;
+		}
+		
+		public void setCnt(long value) {
+			this.cnt = value;
+		}
+		
 	}
 	
 	protected SCInterfaceImpl sCInterface;
@@ -202,6 +212,8 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		sCInterface.setC_check(0);
 		
 		sCInterface.setSm_local(0);
+		
+		sCInterface.setCnt(0);
 	}
 	
 	public void enter() {
@@ -382,115 +394,12 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		sCInterface.setSm_local(value);
 	}
 	
-	private boolean check__lr0() {
-		return true;
+	public long getCnt() {
+		return sCInterface.getCnt();
 	}
 	
-	private boolean check_ChildFirstOrthogonalReactions_r_A_lr0_lr0() {
-		return true;
-	}
-	
-	private boolean check_ChildFirstOrthogonalReactions_r_A_tr0_tr0() {
-		return sCInterface.operationCallback.check("A");
-	}
-	
-	private boolean check_ChildFirstOrthogonalReactions_r_A_r_AA_lr0_lr0() {
-		return true;
-	}
-	
-	private boolean check_ChildFirstOrthogonalReactions_r_A_r_AA_tr0_tr0() {
-		return sCInterface.operationCallback.check("AA");
-	}
-	
-	private boolean check_ChildFirstOrthogonalReactions_r_A_r_AA_r_AAA_lr0_lr0() {
-		return true;
-	}
-	
-	private boolean check_ChildFirstOrthogonalReactions_r_A_r_AA_r_AAA_tr0_tr0() {
-		return sCInterface.operationCallback.check("AAA");
-	}
-	
-	private boolean check_ChildFirstOrthogonalReactions_r_A_r_AA__region1_AAC_lr0_lr0() {
-		return true;
-	}
-	
-	private boolean check_ChildFirstOrthogonalReactions_r_A_r_AA__region1_AAC_tr0_tr0() {
-		return sCInterface.operationCallback.check("AAC");
-	}
-	
-	private boolean check_ChildFirstOrthogonalReactions_r_A_r2_AC_lr0_lr0() {
-		return true;
-	}
-	
-	private boolean check_ChildFirstOrthogonalReactions_r_A_r2_AC_tr0_tr0() {
-		return sCInterface.operationCallback.check("AC");
-	}
-	
-	private boolean check_ChildFirstOrthogonalReactions_r2_C_lr0_lr0() {
-		return true;
-	}
-	
-	private boolean check_ChildFirstOrthogonalReactions_r2_C_tr0_tr0() {
-		return sCInterface.operationCallback.check("C");
-	}
-	
-	private void effect__lr0() {
-		sCInterface.setSm_local(sCInterface.operationCallback.next());
-	}
-	
-	private void effect_ChildFirstOrthogonalReactions_r_A_lr0_lr0() {
-		sCInterface.setA_local(sCInterface.operationCallback.next());
-	}
-	
-	private void effect_ChildFirstOrthogonalReactions_r_A_tr0() {
-		exitSequence_ChildFirstOrthogonalReactions_r_A();
-		enterSequence_ChildFirstOrthogonalReactions_r_B_default();
-	}
-	
-	private void effect_ChildFirstOrthogonalReactions_r_A_r_AA_lr0_lr0() {
-		sCInterface.setAa_local(sCInterface.operationCallback.next());
-	}
-	
-	private void effect_ChildFirstOrthogonalReactions_r_A_r_AA_tr0() {
-		exitSequence_ChildFirstOrthogonalReactions_r_A();
-		enterSequence_ChildFirstOrthogonalReactions_r_B_default();
-	}
-	
-	private void effect_ChildFirstOrthogonalReactions_r_A_r_AA_r_AAA_lr0_lr0() {
-		sCInterface.setAaa_local(sCInterface.operationCallback.next());
-	}
-	
-	private void effect_ChildFirstOrthogonalReactions_r_A_r_AA_r_AAA_tr0() {
-		exitSequence_ChildFirstOrthogonalReactions_r_A();
-		enterSequence_ChildFirstOrthogonalReactions_r_B_default();
-	}
-	
-	private void effect_ChildFirstOrthogonalReactions_r_A_r_AA__region1_AAC_lr0_lr0() {
-		sCInterface.setAac_local(sCInterface.operationCallback.next());
-	}
-	
-	private void effect_ChildFirstOrthogonalReactions_r_A_r_AA__region1_AAC_tr0() {
-		exitSequence_ChildFirstOrthogonalReactions_r_A();
-		enterSequence_ChildFirstOrthogonalReactions_r_B_default();
-	}
-	
-	private void effect_ChildFirstOrthogonalReactions_r_A_r2_AC_lr0_lr0() {
-		sCInterface.setAc_local(sCInterface.operationCallback.next());
-	}
-	
-	private void effect_ChildFirstOrthogonalReactions_r_A_r2_AC_tr0() {
-		exitSequence_ChildFirstOrthogonalReactions_r_A();
-		enterSequence_ChildFirstOrthogonalReactions_r_B_default();
-	}
-	
-	private void effect_ChildFirstOrthogonalReactions_r2_C_lr0_lr0() {
-		sCInterface.setC_local(sCInterface.operationCallback.next());
-	}
-	
-	private void effect_ChildFirstOrthogonalReactions_r2_C_tr0() {
-		exitSequence_ChildFirstOrthogonalReactions_r2_C();
-		enterSequence_ChildFirstOrthogonalReactions_r2_D_default();
-		effect__lr0();
+	public void setCnt(long value) {
+		sCInterface.setCnt(value);
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -709,62 +618,6 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		}
 	}
 	
-	/* The reactions of state AAA. */
-	private void react_ChildFirstOrthogonalReactions_r_A_r_AA_r_AAA() {
-		if (check_ChildFirstOrthogonalReactions_r_A_r_AA_r_AAA_tr0_tr0()) {
-			effect_ChildFirstOrthogonalReactions_r_A_r_AA_r_AAA_tr0();
-		} else {
-			effect_ChildFirstOrthogonalReactions_r_A_r_AA_r_AAA_lr0_lr0();
-		}
-	}
-	
-	/* The reactions of state AAC. */
-	private void react_ChildFirstOrthogonalReactions_r_A_r_AA__region1_AAC() {
-		if (check_ChildFirstOrthogonalReactions_r_A_r_AA__region1_AAC_tr0_tr0()) {
-			effect_ChildFirstOrthogonalReactions_r_A_r_AA__region1_AAC_tr0();
-		} else {
-			effect_ChildFirstOrthogonalReactions_r_A_r_AA__region1_AAC_lr0_lr0();
-			if (check_ChildFirstOrthogonalReactions_r_A_r_AA_tr0_tr0()) {
-				effect_ChildFirstOrthogonalReactions_r_A_r_AA_tr0();
-			} else {
-				effect_ChildFirstOrthogonalReactions_r_A_r_AA_lr0_lr0();
-			}
-		}
-	}
-	
-	/* The reactions of state AC. */
-	private void react_ChildFirstOrthogonalReactions_r_A_r2_AC() {
-		if (check_ChildFirstOrthogonalReactions_r_A_r2_AC_tr0_tr0()) {
-			effect_ChildFirstOrthogonalReactions_r_A_r2_AC_tr0();
-		} else {
-			effect_ChildFirstOrthogonalReactions_r_A_r2_AC_lr0_lr0();
-			if (check_ChildFirstOrthogonalReactions_r_A_tr0_tr0()) {
-				effect_ChildFirstOrthogonalReactions_r_A_tr0();
-			} else {
-				effect_ChildFirstOrthogonalReactions_r_A_lr0_lr0();
-			}
-		}
-	}
-	
-	/* The reactions of state B. */
-	private void react_ChildFirstOrthogonalReactions_r_B() {
-	}
-	
-	/* The reactions of state C. */
-	private void react_ChildFirstOrthogonalReactions_r2_C() {
-		if (check_ChildFirstOrthogonalReactions_r2_C_tr0_tr0()) {
-			effect_ChildFirstOrthogonalReactions_r2_C_tr0();
-		} else {
-			effect_ChildFirstOrthogonalReactions_r2_C_lr0_lr0();
-			effect__lr0();
-		}
-	}
-	
-	/* The reactions of state D. */
-	private void react_ChildFirstOrthogonalReactions_r2_D() {
-		effect__lr0();
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_ChildFirstOrthogonalReactions_r__entry_Default() {
 		enterSequence_ChildFirstOrthogonalReactions_r_A_default();
@@ -795,6 +648,144 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		enterSequence_ChildFirstOrthogonalReactions_r2_C_default();
 	}
 	
+	private boolean react(boolean try_transition) {
+		sCInterface.setSm_local(sCInterface.operationCallback.next());
+		
+		return false;
+	}
+	
+	private boolean childFirstOrthogonalReactions_r_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.operationCallback.check("A")) {
+				exitSequence_ChildFirstOrthogonalReactions_r_A();
+				enterSequence_ChildFirstOrthogonalReactions_r_B_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+			sCInterface.setA_local(sCInterface.operationCallback.next());
+		}
+		return did_transition;
+	}
+	
+	private boolean childFirstOrthogonalReactions_r_A_r_AA_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.operationCallback.check("AA")) {
+				exitSequence_ChildFirstOrthogonalReactions_r_A();
+				enterSequence_ChildFirstOrthogonalReactions_r_B_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+			sCInterface.setAa_local(sCInterface.operationCallback.next());
+		}
+		return did_transition;
+	}
+	
+	private boolean childFirstOrthogonalReactions_r_A_r_AA_r_AAA_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.operationCallback.check("AAA")) {
+				exitSequence_ChildFirstOrthogonalReactions_r_A();
+				enterSequence_ChildFirstOrthogonalReactions_r_B_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+			sCInterface.setAaa_local(sCInterface.operationCallback.next());
+		}
+		return did_transition;
+	}
+	
+	private boolean childFirstOrthogonalReactions_r_A_r_AA__region1_AAC_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.operationCallback.check("AAC")) {
+				exitSequence_ChildFirstOrthogonalReactions_r_A();
+				enterSequence_ChildFirstOrthogonalReactions_r_B_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+			sCInterface.setAac_local(sCInterface.operationCallback.next());
+			
+			did_transition = childFirstOrthogonalReactions_r_A_r_AA_react(try_transition);;
+		}
+		return did_transition;
+	}
+	
+	private boolean childFirstOrthogonalReactions_r_A_r2_AC_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.operationCallback.check("AC")) {
+				exitSequence_ChildFirstOrthogonalReactions_r_A();
+				enterSequence_ChildFirstOrthogonalReactions_r_B_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+			sCInterface.setAc_local(sCInterface.operationCallback.next());
+			
+			did_transition = childFirstOrthogonalReactions_r_A_react(try_transition);;
+		}
+		return did_transition;
+	}
+	
+	private boolean childFirstOrthogonalReactions_r_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean childFirstOrthogonalReactions_r2_C_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.operationCallback.check("C")) {
+				exitSequence_ChildFirstOrthogonalReactions_r2_C();
+				enterSequence_ChildFirstOrthogonalReactions_r2_D_default();
+				react(false);
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+			sCInterface.setC_local(sCInterface.operationCallback.next());
+			
+			did_transition = react(try_transition);;
+		}
+		return did_transition;
+	}
+	
+	private boolean childFirstOrthogonalReactions_r2_D_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+			did_transition = react(try_transition);;
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -803,22 +794,22 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case childFirstOrthogonalReactions_r_A_r_AA_r_AAA:
-				react_ChildFirstOrthogonalReactions_r_A_r_AA_r_AAA();
+				childFirstOrthogonalReactions_r_A_r_AA_r_AAA_react(true);
 				break;
 			case childFirstOrthogonalReactions_r_A_r_AA__region1_AAC:
-				react_ChildFirstOrthogonalReactions_r_A_r_AA__region1_AAC();
+				childFirstOrthogonalReactions_r_A_r_AA__region1_AAC_react(true);
 				break;
 			case childFirstOrthogonalReactions_r_A_r2_AC:
-				react_ChildFirstOrthogonalReactions_r_A_r2_AC();
+				childFirstOrthogonalReactions_r_A_r2_AC_react(true);
 				break;
 			case childFirstOrthogonalReactions_r_B:
-				react_ChildFirstOrthogonalReactions_r_B();
+				childFirstOrthogonalReactions_r_B_react(true);
 				break;
 			case childFirstOrthogonalReactions_r2_C:
-				react_ChildFirstOrthogonalReactions_r2_C();
+				childFirstOrthogonalReactions_r2_C_react(true);
 				break;
 			case childFirstOrthogonalReactions_r2_D:
-				react_ChildFirstOrthogonalReactions_r2_D();
+				childFirstOrthogonalReactions_r2_D_react(true);
 				break;
 			default:
 				// $NullState$

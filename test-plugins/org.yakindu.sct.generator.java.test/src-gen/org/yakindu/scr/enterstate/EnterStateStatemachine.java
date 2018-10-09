@@ -134,33 +134,6 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 		sCInterface.raiseG();
 	}
 	
-	private boolean check_r_A_tr0_tr0() {
-		return sCInterface.e;
-	}
-	
-	private boolean check_r_A_tr1_tr1() {
-		return sCInterface.f;
-	}
-	
-	private boolean check_r_A_tr2_tr2() {
-		return sCInterface.g;
-	}
-	
-	private void effect_r_A_tr0() {
-		exitSequence_r_A();
-		enterSequence_r_B_default();
-	}
-	
-	private void effect_r_A_tr1() {
-		exitSequence_r_A();
-		enterSequence_r_B_f();
-	}
-	
-	private void effect_r_A_tr2() {
-		exitSequence_r_A();
-		enterSequence_r_B_g();
-	}
-	
 	/* 'default' enter sequence for state A */
 	private void enterSequence_r_A_default() {
 		nextStateIndex = 0;
@@ -258,29 +231,6 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 		}
 	}
 	
-	/* The reactions of state A. */
-	private void react_r_A() {
-		if (check_r_A_tr0_tr0()) {
-			effect_r_A_tr0();
-		} else {
-			if (check_r_A_tr1_tr1()) {
-				effect_r_A_tr1();
-			} else {
-				if (check_r_A_tr2_tr2()) {
-					effect_r_A_tr2();
-				}
-			}
-		}
-	}
-	
-	/* The reactions of state E. */
-	private void react_r_B_r_E() {
-	}
-	
-	/* The reactions of state F. */
-	private void react_r_B_r_F() {
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_r__entry_Default() {
 		enterSequence_r_A_default();
@@ -296,6 +246,77 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 		enterSequence_r_B_r_F_default();
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean r_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.e) {
+					exitSequence_r_A();
+					enterSequence_r_B_default();
+				} else {
+					if (sCInterface.f) {
+						exitSequence_r_A();
+						enterSequence_r_B_f();
+					} else {
+						if (sCInterface.g) {
+							exitSequence_r_A();
+							enterSequence_r_B_g();
+						} else {
+							did_transition = false;;
+						}
+					}
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean r_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean r_B_r_E_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (r_B_react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean r_B_r_F_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (r_B_react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -304,13 +325,13 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case r_A:
-				react_r_A();
+				r_A_react(true);
 				break;
 			case r_B_r_E:
-				react_r_B_r_E();
+				r_B_r_E_react(true);
 				break;
 			case r_B_r_F:
-				react_r_B_r_F();
+				r_B_r_F_react(true);
 				break;
 			default:
 				// $NullState$

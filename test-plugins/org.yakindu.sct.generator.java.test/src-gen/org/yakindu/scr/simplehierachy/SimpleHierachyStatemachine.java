@@ -109,15 +109,6 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 		sCInterface.raiseEvent1();
 	}
 	
-	private boolean check_main_region_A_tr0_tr0() {
-		return sCInterface.event1;
-	}
-	
-	private void effect_main_region_A_tr0() {
-		exitSequence_main_region_A();
-		enterSequence_main_region_B_default();
-	}
-	
 	/* 'default' enter sequence for state A */
 	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
@@ -182,17 +173,6 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 		}
 	}
 	
-	/* The reactions of state A. */
-	private void react_main_region_A() {
-		if (check_main_region_A_tr0_tr0()) {
-			effect_main_region_A_tr0();
-		}
-	}
-	
-	/* The reactions of state B1. */
-	private void react_main_region_B_subregion1_B1() {
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_main_region__entry_Default() {
 		enterSequence_main_region_A_default();
@@ -203,6 +183,54 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 		enterSequence_main_region_B_subregion1_B1_default();
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean main_region_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.event1) {
+					exitSequence_main_region_A();
+					enterSequence_main_region_B_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_B_subregion1_B1_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (main_region_B_react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -211,10 +239,10 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_A:
-				react_main_region_A();
+				main_region_A_react(true);
 				break;
 			case main_region_B_subregion1_B1:
-				react_main_region_B_subregion1_B1();
+				main_region_B_subregion1_B1_react(true);
 				break;
 			default:
 				// $NullState$

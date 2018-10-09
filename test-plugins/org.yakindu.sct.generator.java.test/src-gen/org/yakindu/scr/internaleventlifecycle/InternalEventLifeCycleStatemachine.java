@@ -140,52 +140,6 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		sCInterface.raiseF();
 	}
 	
-	private boolean check_r1_A_lr0_lr0() {
-		return sCInterface.e;
-	}
-	
-	private boolean check_r1_A_tr0_tr0() {
-		return i2;
-	}
-	
-	private boolean check_r1_B_tr0_tr0() {
-		return sCInterface.e;
-	}
-	
-	private boolean check_r2_C_tr0_tr0() {
-		return i1;
-	}
-	
-	private boolean check_r2_D_tr0_tr0() {
-		return sCInterface.f;
-	}
-	
-	private void effect_r1_A_lr0_lr0() {
-		raiseI1();
-	}
-	
-	private void effect_r1_A_tr0() {
-		exitSequence_r1_A();
-		enterSequence_r1_B_default();
-	}
-	
-	private void effect_r1_B_tr0() {
-		exitSequence_r1_B();
-		enterSequence_r1_A_default();
-	}
-	
-	private void effect_r2_C_tr0() {
-		exitSequence_r2_C();
-		enterSequence_r2_D_default();
-	}
-	
-	private void effect_r2_D_tr0() {
-		exitSequence_r2_D();
-		raiseI2();
-		
-		enterSequence_r2_C_default();
-	}
-	
 	/* 'default' enter sequence for state A */
 	private void enterSequence_r1_A_default() {
 		nextStateIndex = 0;
@@ -272,38 +226,6 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		}
 	}
 	
-	/* The reactions of state A. */
-	private void react_r1_A() {
-		if (check_r1_A_tr0_tr0()) {
-			effect_r1_A_tr0();
-		} else {
-			if (check_r1_A_lr0_lr0()) {
-				effect_r1_A_lr0_lr0();
-			}
-		}
-	}
-	
-	/* The reactions of state B. */
-	private void react_r1_B() {
-		if (check_r1_B_tr0_tr0()) {
-			effect_r1_B_tr0();
-		}
-	}
-	
-	/* The reactions of state C. */
-	private void react_r2_C() {
-		if (check_r2_C_tr0_tr0()) {
-			effect_r2_C_tr0();
-		}
-	}
-	
-	/* The reactions of state D. */
-	private void react_r2_D() {
-		if (check_r2_D_tr0_tr0()) {
-			effect_r2_D_tr0();
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_r1__entry_Default() {
 		enterSequence_r1_A_default();
@@ -314,6 +236,83 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		enterSequence_r2_C_default();
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean r1_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (i2) {
+					exitSequence_r1_A();
+					enterSequence_r1_B_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+			if (sCInterface.e) {
+				raiseI1();
+			}
+		}
+		return did_transition;
+	}
+	
+	private boolean r1_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.e) {
+					exitSequence_r1_B();
+					enterSequence_r1_A_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean r2_C_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (i1) {
+				exitSequence_r2_C();
+				enterSequence_r2_D_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean r2_D_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.f) {
+				exitSequence_r2_D();
+				raiseI2();
+				
+				enterSequence_r2_C_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -322,16 +321,16 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case r1_A:
-				react_r1_A();
+				r1_A_react(true);
 				break;
 			case r1_B:
-				react_r1_B();
+				r1_B_react(true);
 				break;
 			case r2_C:
-				react_r2_C();
+				r2_C_react(true);
 				break;
 			case r2_D:
-				react_r2_D();
+				r2_D_react(true);
 				break;
 			default:
 				// $NullState$

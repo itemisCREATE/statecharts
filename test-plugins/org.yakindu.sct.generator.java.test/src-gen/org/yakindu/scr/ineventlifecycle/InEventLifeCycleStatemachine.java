@@ -121,14 +121,6 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 		sCInterface.setI(value);
 	}
 	
-	private boolean check_main_region_A_lr0_lr0() {
-		return sCInterface.e;
-	}
-	
-	private void effect_main_region_A_lr0_lr0() {
-		sCInterface.setI(sCInterface.getI() + 1);
-	}
-	
 	/* 'default' enter sequence for state A */
 	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
@@ -157,16 +149,29 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 		}
 	}
 	
-	/* The reactions of state A. */
-	private void react_main_region_A() {
-		if (check_main_region_A_lr0_lr0()) {
-			effect_main_region_A_lr0_lr0();
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_main_region__entry_Default() {
 		enterSequence_main_region_A_default();
+	}
+	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean main_region_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+			if (sCInterface.e) {
+				sCInterface.setI(sCInterface.getI() + 1);
+			}
+		}
+		return did_transition;
 	}
 	
 	public void runCycle() {
@@ -177,7 +182,7 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_A:
-				react_main_region_A();
+				main_region_A_react(true);
 				break;
 			default:
 				// $NullState$

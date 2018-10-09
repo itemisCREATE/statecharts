@@ -150,33 +150,6 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		sCInterface.setMyString(value);
 	}
 	
-	private boolean check_main_region_Start_tr0_tr0() {
-		return sCInterface.getMyVar()==1;
-	}
-	
-	private boolean check_main_region_Mid_tr0_tr0() {
-		return (sCInterface.getMyString()== null?"TypeSystem" ==null :sCInterface.getMyString().equals("TypeSystem"));
-	}
-	
-	private boolean check_main_region_Mid2_tr0_tr0() {
-		return sCInterface.myEvent;
-	}
-	
-	private void effect_main_region_Start_tr0() {
-		exitSequence_main_region_Start();
-		enterSequence_main_region_Mid_default();
-	}
-	
-	private void effect_main_region_Mid_tr0() {
-		exitSequence_main_region_Mid();
-		enterSequence_main_region_Mid2_default();
-	}
-	
-	private void effect_main_region_Mid2_tr0() {
-		exitSequence_main_region_Mid2();
-		enterSequence_main_region_End_default();
-	}
-	
 	/* Entry action for state 'Start'. */
 	private void entryAction_main_region_Start() {
 		sCInterface.setMyVar(1);
@@ -262,34 +235,80 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		}
 	}
 	
-	/* The reactions of state Start. */
-	private void react_main_region_Start() {
-		if (check_main_region_Start_tr0_tr0()) {
-			effect_main_region_Start_tr0();
-		}
-	}
-	
-	/* The reactions of state Mid. */
-	private void react_main_region_Mid() {
-		if (check_main_region_Mid_tr0_tr0()) {
-			effect_main_region_Mid_tr0();
-		}
-	}
-	
-	/* The reactions of state Mid2. */
-	private void react_main_region_Mid2() {
-		if (check_main_region_Mid2_tr0_tr0()) {
-			effect_main_region_Mid2_tr0();
-		}
-	}
-	
-	/* The reactions of state End. */
-	private void react_main_region_End() {
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_main_region__entry_Default() {
 		enterSequence_main_region_Start_default();
+	}
+	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean main_region_Start_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.getMyVar()==1) {
+					exitSequence_main_region_Start();
+					enterSequence_main_region_Mid_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_Mid_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if ((sCInterface.getMyString()== null?"TypeSystem" ==null :sCInterface.getMyString().equals("TypeSystem"))) {
+					exitSequence_main_region_Mid();
+					enterSequence_main_region_Mid2_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_Mid2_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.myEvent) {
+					exitSequence_main_region_Mid2();
+					enterSequence_main_region_End_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_End_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
 	}
 	
 	public void runCycle() {
@@ -300,16 +319,16 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_Start:
-				react_main_region_Start();
+				main_region_Start_react(true);
 				break;
 			case main_region_Mid:
-				react_main_region_Mid();
+				main_region_Mid_react(true);
 				break;
 			case main_region_Mid2:
-				react_main_region_Mid2();
+				main_region_Mid2_react(true);
 				break;
 			case main_region_End:
-				react_main_region_End();
+				main_region_End_react(true);
 				break;
 			default:
 				// $NullState$

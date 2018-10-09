@@ -584,15 +584,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		sCInterface.setDecrementAssign(value);
 	}
 	
-	private boolean check_main_region_StateA_tr0_tr0() {
-		return sCInterface.e1;
-	}
-	
-	private void effect_main_region_StateA_tr0() {
-		exitSequence_main_region_StateA();
-		enterSequence_main_region_StateB_default();
-	}
-	
 	/* Entry action for state 'StateA'. */
 	private void entryAction_main_region_StateA() {
 		sCInterface.setMyInt1(10);
@@ -686,20 +677,44 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		}
 	}
 	
-	/* The reactions of state StateA. */
-	private void react_main_region_StateA() {
-		if (check_main_region_StateA_tr0_tr0()) {
-			effect_main_region_StateA_tr0();
-		}
-	}
-	
-	/* The reactions of state StateB. */
-	private void react_main_region_StateB() {
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_main_region__entry_Default() {
 		enterSequence_main_region_StateA_default();
+	}
+	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean main_region_StateA_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.e1) {
+					exitSequence_main_region_StateA();
+					enterSequence_main_region_StateB_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_StateB_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
 	}
 	
 	public void runCycle() {
@@ -710,10 +725,10 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_StateA:
-				react_main_region_StateA();
+				main_region_StateA_react(true);
 				break;
 			case main_region_StateB:
-				react_main_region_StateB();
+				main_region_StateB_react(true);
 				break;
 			default:
 				// $NullState$

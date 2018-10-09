@@ -294,94 +294,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		sCInterface.setMyString(value);
 	}
 	
-	private boolean check_integer_region_B_tr0_tr0() {
-		return sCInterface.integerEvent;
-	}
-	
-	private boolean check_integer_region_C_tr0_tr0() {
-		return sCInterface.integerEvent;
-	}
-	
-	private boolean check_boolean_region_B_tr0_tr0() {
-		return sCInterface.booleanEvent;
-	}
-	
-	private boolean check_boolean_region_C_tr0_tr0() {
-		return sCInterface.booleanEvent;
-	}
-	
-	private boolean check_real_region_B_tr0_tr0() {
-		return sCInterface.realEvent;
-	}
-	
-	private boolean check_real_region_C_tr0_tr0() {
-		return sCInterface.realEvent;
-	}
-	
-	private boolean check_string_region_B_tr0_tr0() {
-		return sCInterface.stringEvent;
-	}
-	
-	private boolean check_string_region_C_tr0_tr0() {
-		return sCInterface.stringEvent;
-	}
-	
-	private void effect_integer_region_B_tr0() {
-		exitSequence_integer_region_B();
-		sCInterface.setMyInt(sCInterface.getIntegerEventValue());
-		
-		enterSequence_integer_region_C_default();
-	}
-	
-	private void effect_integer_region_C_tr0() {
-		exitSequence_integer_region_C();
-		sCInterface.setMyInt(sCInterface.getIntegerEventValue());
-		
-		enterSequence_integer_region_D_default();
-	}
-	
-	private void effect_boolean_region_B_tr0() {
-		exitSequence_boolean_region_B();
-		sCInterface.setMyBool(sCInterface.getBooleanEventValue());
-		
-		enterSequence_boolean_region_C_default();
-	}
-	
-	private void effect_boolean_region_C_tr0() {
-		exitSequence_boolean_region_C();
-		sCInterface.setMyBool(sCInterface.getBooleanEventValue());
-		
-		enterSequence_boolean_region_D_default();
-	}
-	
-	private void effect_real_region_B_tr0() {
-		exitSequence_real_region_B();
-		sCInterface.setMyReal(sCInterface.getRealEventValue());
-		
-		enterSequence_real_region_C_default();
-	}
-	
-	private void effect_real_region_C_tr0() {
-		exitSequence_real_region_C();
-		sCInterface.setMyReal(sCInterface.getRealEventValue());
-		
-		enterSequence_real_region_D_default();
-	}
-	
-	private void effect_string_region_B_tr0() {
-		exitSequence_string_region_B();
-		sCInterface.setMyString(sCInterface.getStringEventValue());
-		
-		enterSequence_string_region_C_default();
-	}
-	
-	private void effect_string_region_C_tr0() {
-		exitSequence_string_region_C();
-		sCInterface.setMyString(sCInterface.getStringEventValue());
-		
-		enterSequence_string_region_D_default();
-	}
-	
 	/* Entry action for state 'A'. */
 	private void entryAction_main_region1_A() {
 		sCInterface.raiseIntegerEvent(2 * 21);
@@ -654,82 +566,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		}
 	}
 	
-	/* The reactions of state A. */
-	private void react_main_region1_A() {
-	}
-	
-	/* The reactions of state B. */
-	private void react_integer_region_B() {
-		if (check_integer_region_B_tr0_tr0()) {
-			effect_integer_region_B_tr0();
-		}
-	}
-	
-	/* The reactions of state C. */
-	private void react_integer_region_C() {
-		if (check_integer_region_C_tr0_tr0()) {
-			effect_integer_region_C_tr0();
-		}
-	}
-	
-	/* The reactions of state D. */
-	private void react_integer_region_D() {
-	}
-	
-	/* The reactions of state B. */
-	private void react_boolean_region_B() {
-		if (check_boolean_region_B_tr0_tr0()) {
-			effect_boolean_region_B_tr0();
-		}
-	}
-	
-	/* The reactions of state C. */
-	private void react_boolean_region_C() {
-		if (check_boolean_region_C_tr0_tr0()) {
-			effect_boolean_region_C_tr0();
-		}
-	}
-	
-	/* The reactions of state D. */
-	private void react_boolean_region_D() {
-	}
-	
-	/* The reactions of state B. */
-	private void react_real_region_B() {
-		if (check_real_region_B_tr0_tr0()) {
-			effect_real_region_B_tr0();
-		}
-	}
-	
-	/* The reactions of state C. */
-	private void react_real_region_C() {
-		if (check_real_region_C_tr0_tr0()) {
-			effect_real_region_C_tr0();
-		}
-	}
-	
-	/* The reactions of state D. */
-	private void react_real_region_D() {
-	}
-	
-	/* The reactions of state B. */
-	private void react_string_region_B() {
-		if (check_string_region_B_tr0_tr0()) {
-			effect_string_region_B_tr0();
-		}
-	}
-	
-	/* The reactions of state C. */
-	private void react_string_region_C() {
-		if (check_string_region_C_tr0_tr0()) {
-			effect_string_region_C_tr0();
-		}
-	}
-	
-	/* The reactions of state D. */
-	private void react_string_region_D() {
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_main_region1__entry_Default() {
 		enterSequence_main_region1_A_default();
@@ -755,6 +591,211 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		enterSequence_string_region_B_default();
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean main_region1_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean integer_region_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.integerEvent) {
+				exitSequence_integer_region_B();
+				sCInterface.setMyInt(sCInterface.getIntegerEventValue());
+				
+				enterSequence_integer_region_C_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean integer_region_C_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.integerEvent) {
+				exitSequence_integer_region_C();
+				sCInterface.setMyInt(sCInterface.getIntegerEventValue());
+				
+				enterSequence_integer_region_D_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean integer_region_D_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean boolean_region_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.booleanEvent) {
+				exitSequence_boolean_region_B();
+				sCInterface.setMyBool(sCInterface.getBooleanEventValue());
+				
+				enterSequence_boolean_region_C_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean boolean_region_C_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.booleanEvent) {
+				exitSequence_boolean_region_C();
+				sCInterface.setMyBool(sCInterface.getBooleanEventValue());
+				
+				enterSequence_boolean_region_D_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean boolean_region_D_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean real_region_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.realEvent) {
+				exitSequence_real_region_B();
+				sCInterface.setMyReal(sCInterface.getRealEventValue());
+				
+				enterSequence_real_region_C_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean real_region_C_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.realEvent) {
+				exitSequence_real_region_C();
+				sCInterface.setMyReal(sCInterface.getRealEventValue());
+				
+				enterSequence_real_region_D_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean real_region_D_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean string_region_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.stringEvent) {
+				exitSequence_string_region_B();
+				sCInterface.setMyString(sCInterface.getStringEventValue());
+				
+				enterSequence_string_region_C_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean string_region_C_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.stringEvent) {
+				exitSequence_string_region_C();
+				sCInterface.setMyString(sCInterface.getStringEventValue());
+				
+				enterSequence_string_region_D_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean string_region_D_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -763,43 +804,43 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region1_A:
-				react_main_region1_A();
+				main_region1_A_react(true);
 				break;
 			case integer_region_B:
-				react_integer_region_B();
+				integer_region_B_react(true);
 				break;
 			case integer_region_C:
-				react_integer_region_C();
+				integer_region_C_react(true);
 				break;
 			case integer_region_D:
-				react_integer_region_D();
+				integer_region_D_react(true);
 				break;
 			case boolean_region_B:
-				react_boolean_region_B();
+				boolean_region_B_react(true);
 				break;
 			case boolean_region_C:
-				react_boolean_region_C();
+				boolean_region_C_react(true);
 				break;
 			case boolean_region_D:
-				react_boolean_region_D();
+				boolean_region_D_react(true);
 				break;
 			case real_region_B:
-				react_real_region_B();
+				real_region_B_react(true);
 				break;
 			case real_region_C:
-				react_real_region_C();
+				real_region_C_react(true);
 				break;
 			case real_region_D:
-				react_real_region_D();
+				real_region_D_react(true);
 				break;
 			case string_region_B:
-				react_string_region_B();
+				string_region_B_react(true);
 				break;
 			case string_region_C:
-				react_string_region_C();
+				string_region_C_react(true);
 				break;
 			case string_region_D:
-				react_string_region_D();
+				string_region_D_react(true);
 				break;
 			default:
 				// $NullState$

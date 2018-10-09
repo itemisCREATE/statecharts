@@ -113,24 +113,6 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		sCInterface.raiseEvent1();
 	}
 	
-	private boolean check_R1_R1A_tr0_tr0() {
-		return isStateActive(State.r2_R2B);
-	}
-	
-	private boolean check_R2_R2A_tr0_tr0() {
-		return sCInterface.event1;
-	}
-	
-	private void effect_R1_R1A_tr0() {
-		exitSequence_R1_R1A();
-		enterSequence_R1_R1B_default();
-	}
-	
-	private void effect_R2_R2A_tr0() {
-		exitSequence_R2_R2A();
-		enterSequence_R2_R2B_default();
-	}
-	
 	/* 'default' enter sequence for state R1A */
 	private void enterSequence_R1_R1A_default() {
 		nextStateIndex = 0;
@@ -217,28 +199,6 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		}
 	}
 	
-	/* The reactions of state R1A. */
-	private void react_R1_R1A() {
-		if (check_R1_R1A_tr0_tr0()) {
-			effect_R1_R1A_tr0();
-		}
-	}
-	
-	/* The reactions of state R1B. */
-	private void react_R1_R1B() {
-	}
-	
-	/* The reactions of state R2A. */
-	private void react_R2_R2A() {
-		if (check_R2_R2A_tr0_tr0()) {
-			effect_R2_R2A_tr0();
-		}
-	}
-	
-	/* The reactions of state R2B. */
-	private void react_R2_R2B() {
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_R1__entry_Default() {
 		enterSequence_R1_R1A_default();
@@ -249,6 +209,68 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		enterSequence_R2_R2A_default();
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean r1_R1A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (isStateActive(State.r2_R2B)) {
+					exitSequence_R1_R1A();
+					enterSequence_R1_R1B_default();
+				} else {
+					did_transition = false;;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean r1_R1B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean r2_R2A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.event1) {
+				exitSequence_R2_R2A();
+				enterSequence_R2_R2B_default();
+			} else {
+				did_transition = false;;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean r2_R2B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -257,16 +279,16 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case r1_R1A:
-				react_R1_R1A();
+				r1_R1A_react(true);
 				break;
 			case r1_R1B:
-				react_R1_R1B();
+				r1_R1B_react(true);
 				break;
 			case r2_R2A:
-				react_R2_R2A();
+				r2_R2A_react(true);
 				break;
 			case r2_R2B:
-				react_R2_R2B();
+				r2_R2B_react(true);
 				break;
 			default:
 				// $NullState$
