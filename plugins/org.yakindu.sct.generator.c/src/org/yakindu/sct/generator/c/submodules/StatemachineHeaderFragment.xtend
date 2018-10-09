@@ -29,13 +29,16 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.generator.c.IHeaderFragment
+import java.util.Set
 
 /**
  * @author rbeckmann
  *
  */
 class StatemachineHeaderFragment implements IHeaderFragment {
-	@Inject protected extension IncludeProvider
+	
+	@Inject protected Set<IncludeProvider> includeProviders
+	
 	@Inject protected extension Naming cNaming
 	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
@@ -153,8 +156,10 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 
 	def final includes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
 		'''
-		«FOR i : getIncludes(newArrayList, artifactConfigs)»
-		  «i»
+		«FOR provider : includeProviders»
+			«FOR i : provider.getIncludes(it, artifactConfigs)»
+				«i»
+			«ENDFOR»
 		«ENDFOR»
 		'''
 	}	
