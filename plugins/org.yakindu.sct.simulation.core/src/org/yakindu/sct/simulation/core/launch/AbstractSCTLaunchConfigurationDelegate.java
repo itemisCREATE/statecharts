@@ -29,6 +29,8 @@ import org.yakindu.sct.model.sgraph.resource.ResourceUtil;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 
+import com.google.inject.Inject;
+
 /**
  * 
  * @author andreas muelder - Initial contribution and API
@@ -41,6 +43,9 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 	public String DEFAULT_FILE_NAME = "";
 
 	protected abstract ISimulationEngine createExecutionContainer(ILaunch launch, Statechart statechart);
+
+	@Inject(optional = true)
+	private ILaunchConfigurationDelegate delegate;
 
 	@Override
 	public boolean preLaunchCheck(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor)
@@ -61,6 +66,8 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 		try {
 			target.init();
 			target.start();
+			if (delegate != null)
+				delegate.launch(configuration, mode, launch, monitor);
 		} catch (InitializationException e) {
 			// handled in AbstractExecutionFlowSimulationEngine
 		}
