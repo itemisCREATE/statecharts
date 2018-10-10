@@ -9,8 +9,7 @@
 		<version>3.4.1-SNAPSHOT</version>
 		<relativePath>../../pom.xml</relativePath>
 	</parent>
-	<artifactId>org.yakindu.base.xtext.utils.jface</artifactId>
-	<packaging>eclipse-feature</packaging>
-	<groupId>org.yakindu.sct.features</groupId>
-	<name>org.yakindu.xtext.utils.jface-feature</name>
+	<artifactId>org.palladiosimulator.yakindu.statecharts.utils.repository</artifactId>
+	<packaging>eclipse-repository</packaging>
+
 </project>
