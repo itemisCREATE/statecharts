@@ -271,7 +271,7 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	def executeElementReferenceExpression(ElementReferenceExpression expression) {
 		val parameter = expression.expressions.map(it|execute)
 		if (expression.operationCall || expression.reference instanceof Operation) {
-			val operationDelegate = operationDelegates.findFirst[canExecute(null, expression.reference as Operation, parameter.toArray)]
+			val operationDelegate = operationDelegates?.findFirst[canExecute(null, expression.reference as Operation, parameter.toArray)]
 			if (operationDelegate !== null) {
 				return (expression.reference as Operation).execute(null, parameter.toArray, operationDelegate)
 			}
@@ -304,7 +304,7 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 			val parameter = call.expressions.map(it|execute)
 			if (call.feature instanceof Operation) {
 				val Operation operation = call.feature as Operation
-				val operationDelegate = operationDelegates.findFirst[canExecute((call.owner as ElementReferenceExpression).reference as Declaration, operation, parameter.toArray)]
+				val operationDelegate = operationDelegates?.findFirst[canExecute((call.owner as ElementReferenceExpression).reference as Declaration, operation, parameter.toArray)]
 				if (operationDelegate !== null) {
 					return operation.execute((call.owner as ElementReferenceExpression).reference as Declaration, parameter, operationDelegate)
 				}
