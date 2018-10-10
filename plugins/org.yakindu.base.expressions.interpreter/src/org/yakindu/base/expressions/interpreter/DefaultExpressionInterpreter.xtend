@@ -304,9 +304,9 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 			val parameter = call.expressions.map(it|execute)
 			if (call.feature instanceof Operation) {
 				val Operation operation = call.feature as Operation
-				val operationDelegate = operationDelegates?.findFirst[canExecute((call.owner as ElementReferenceExpression).reference as Declaration, operation, parameter.toArray)]
+				val operationDelegate = operationDelegates?.findFirst[canExecute(call.getOwnerDeclaration, operation, parameter.toArray)]
 				if (operationDelegate !== null) {
-					return operation.execute((call.owner as ElementReferenceExpression).reference as Declaration, parameter, operationDelegate)
+					return operation.execute(call.getOwnerDeclaration, parameter, operationDelegate)
 				}
 			}
 		} else if (call.feature instanceof Enumerator) {
@@ -329,7 +329,20 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 		println("No feature found for " + call.feature + " -> returning null")
 		return null;
 	}
-
+	
+	/**
+	 * TODO: this works only for call depth = 1
+	 */
+	def getOwnerDeclaration(FeatureCall call) {
+		val owner = call.owner
+		if (owner instanceof ElementReferenceExpression) {
+			if (owner.reference instanceof Declaration) {
+				return owner.reference as Declaration
+			}
+		}
+		return null
+	}
+	
 	def executeUnaryCoreFunction(Expression statement, String operator) {
 		var result = statement.execute()
 		return evaluate(operator, result);
