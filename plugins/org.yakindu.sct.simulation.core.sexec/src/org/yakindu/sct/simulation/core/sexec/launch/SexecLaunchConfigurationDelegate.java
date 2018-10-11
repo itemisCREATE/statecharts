@@ -27,8 +27,12 @@ import org.yakindu.sct.simulation.core.launch.AbstractSCTLaunchConfigurationDele
 import org.yakindu.sct.simulation.core.sexec.container.ISimulationEngineFactory;
 import org.yakindu.sct.simulation.core.sexec.interpreter.JavaOperationMockup;
 
+import com.google.inject.Binder;
+import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Module;
+import com.google.inject.util.Modules;
 
 /**
  * 
@@ -42,7 +46,7 @@ public class SexecLaunchConfigurationDelegate extends AbstractSCTLaunchConfigura
 
 	@Inject
 	private ISimulationEngineFactory factory;
-	
+
 	@Inject
 	private Set<IOperationMockup> mockups;
 
@@ -53,11 +57,12 @@ public class SexecLaunchConfigurationDelegate extends AbstractSCTLaunchConfigura
 			Injector injector = getInjector(statechart, launch);
 			IFile file = WorkspaceSynchronizer.getFile(statechart.eResource());
 			injector.injectMembers(this);
-			
+
 			for (IOperationMockup mockup : mockups) {
 				if (mockup instanceof JavaOperationMockup) {
 					IProject project = file.getProject();
-					String classes = launch.getLaunchConfiguration().getAttribute(ISCTLaunchParameters.OPERATION_CLASS, "");
+					String classes = launch.getLaunchConfiguration().getAttribute(ISCTLaunchParameters.OPERATION_CLASS,
+							"");
 					String[] split = classes.split(",");
 					((JavaOperationMockup) mockup).initOperationCallbacks(project, split);
 				}
@@ -70,6 +75,12 @@ public class SexecLaunchConfigurationDelegate extends AbstractSCTLaunchConfigura
 	}
 
 	protected Injector getInjector(Statechart statechart, ILaunch launch) {
-		return DomainRegistry.getDomain(statechart).getInjector(IDomain.FEATURE_SIMULATION, false);
+		Module module = DomainRegistry.getDomain(statechart).getModule(IDomain.FEATURE_SIMULATION);
+		return Guice.createInjector(Modules.combine(module, new Module() {
+			@Override
+			public void configure(Binder binder) {
+				binder.bind(ILaunch.class).toInstance(launch);
+			}
+		}));
 	}
 }
