@@ -36,6 +36,7 @@ import org.yakindu.sct.simulation.core.sexec.interpreter.JavaOperationMockup;
 import org.yakindu.sct.simulation.core.sexec.interpreter.StextExpressionInterpreter;
 
 import com.google.inject.Binder;
+import com.google.inject.multibindings.Multibinder;
 import com.google.inject.name.Names;
 
 /**
@@ -50,6 +51,13 @@ public class GenericSimulationModule extends AbstractGenericModule {
 		super.configure(binder);
 		binder.bind(Boolean.class).annotatedWith(Names.named(IModelSequencer.ADD_TRACES)).toInstance(Boolean.TRUE);
 		binder.bind(ITypeSystem.class).toInstance(getTypeSystem());
+		
+		bindOperationMockups(binder);
+	}
+
+	protected void bindOperationMockups(Binder binder) {
+		Multibinder<IOperationMockup> mockupBinder = Multibinder.newSetBinder(binder, IOperationMockup.class);
+		mockupBinder.addBinding().to(JavaOperationMockup.class);
 	}
 
 	protected ITypeSystem getTypeSystem() {
@@ -66,10 +74,6 @@ public class GenericSimulationModule extends AbstractGenericModule {
 
 	public Class<? extends IModelSequencer> bindIModelSequencer() {
 		return ModelSequencer.class;
-	}
-
-	public Class<? extends IOperationMockup> bindIOperationMockup() {
-		return JavaOperationMockup.class;
 	}
 
 	public Class<? extends ExecutionContext> bindExecutionContext() {

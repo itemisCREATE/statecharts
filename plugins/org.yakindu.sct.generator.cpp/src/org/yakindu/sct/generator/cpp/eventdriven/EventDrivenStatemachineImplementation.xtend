@@ -11,7 +11,6 @@
 package org.yakindu.sct.generator.cpp.eventdriven
 
 import com.google.inject.Inject
-import java.util.List
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.cpp.StatemachineImplementation
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -43,6 +42,15 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 	override protected usingNamespaces(ExecutionFlow it) {
 		if(!hasLocalEvents) return ''''''
 		'''using namespace «eventNamespaceName»;'''
+	}
+	
+	override protected initialisationList(ExecutionFlow it) {
+		'''
+			«IF timed»«timerInstance»(null),«ENDIF»
+			stateConfVectorPosition(0)«FOR s : getInterfaces»,
+			«s.instance»(this)«IF s.hasOperations && !entry.useStaticOPC»,
+			«s.OCB_Instance»(null)«ENDIF»«ENDFOR»
+		'''
 	}
 	
 	
@@ -97,28 +105,7 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 			return nextEvent;
 		}
 		'''
-	}
-	
-	override constructorDefinition(ExecutionFlow it) {
-	val List<String> toInit = newArrayList
-	toInit.addAll(getInterfaces.map[instance].map[i|'''«i»(this)'''])
-	'''
-		«module»::«module»() :
-			«FOR init : toInit SEPARATOR ","»
-				«init»
-			«ENDFOR»
-		{
-			«constructorBody(it)»
-		}
-	'''
-	}
-	
-	override constructorBody(ExecutionFlow it)
-		'''
-		«super.constructorBody(it)»
-		
-		'''
-	
+	}	
 	
 	def generateInterfaceDispatchFunctions(ExecutionFlow it) {
 		'''

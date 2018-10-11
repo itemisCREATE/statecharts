@@ -25,6 +25,8 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -39,6 +41,8 @@ public class ImportedResourceCache {
 
 	@Inject
 	private IResourceServiceProvider.Registry serviceProviderRegistry;
+	@Inject
+	private DefaultResourceDescriptionStrategy delegateStrategy;
 
 	protected TransactionalEditingDomain getEditingDomain() {
 		return TransactionalEditingDomain.Registry.INSTANCE.getEditingDomain(DOMAIN_ID);
@@ -56,8 +60,10 @@ public class ImportedResourceCache {
 							if (resource != null) {
 								IResourceServiceProvider serviceProvider = serviceProviderRegistry
 										.getResourceServiceProvider(uri);
-								if (serviceProvider == null)
+								if (serviceProvider == null) {
+									setResult(new DefaultResourceDescription(resource, delegateStrategy));
 									return;
+								}
 								final Manager resourceDescriptionManager = serviceProvider
 										.getResourceDescriptionManager();
 								if (resourceDescriptionManager == null)

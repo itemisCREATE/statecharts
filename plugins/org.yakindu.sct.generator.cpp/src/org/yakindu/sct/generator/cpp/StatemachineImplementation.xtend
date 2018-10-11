@@ -31,6 +31,8 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Method
 
 class StatemachineImplementation implements IContentTemplate {
 	
@@ -50,6 +52,7 @@ class StatemachineImplementation implements IContentTemplate {
 	
 	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
 		this.entry = entry
+		val namespace = statechartNamespace
 	'''	
 		«entry.licenseText»
 		
@@ -60,8 +63,10 @@ class StatemachineImplementation implements IContentTemplate {
 		/*! \file Implementation of the state machine '«name»'
 		*/
 		
-		«IF !statechart.namespace.nullOrEmpty»
-		namespace «statechart.namespace.replace(".", "::")» {
+		«IF !namespace.nullOrEmpty»
+		«FOR ns : namespace»
+		namespace «ns» {
+		«ENDFOR»
 		«ENDIF»
 		
 		«usingNamespaces»
@@ -98,8 +103,10 @@ class StatemachineImplementation implements IContentTemplate {
 		
 		«additionalFunctions»
 		
-		«IF !statechart.namespace.nullOrEmpty»
+		«IF !namespace.nullOrEmpty»
+		«FOR ns : namespace»
 		}
+		«ENDFOR»
 		«ENDIF»
 	'''
 	}
@@ -253,11 +260,11 @@ class StatemachineImplementation implements IContentTemplate {
 				
 			switch (stateConfVector[stateConfVectorPosition])
 			{
-			«FOR state : states»
-				«IF state.reactSequence !== null»
+			«FOR state : states.filter[isLeaf]»
+				«IF state.reactMethod !== null»
 				case «state.shortName.asEscapedIdentifier» :
 				{
-					«state.reactSequence.shortName»();
+					«state.reactMethod.shortName»(true);
 					break;
 				}
 				«ENDIF»
@@ -444,9 +451,23 @@ class StatemachineImplementation implements IContentTemplate {
 		«exitActionFunctions.toImplementation»
 		«enterSequenceFunctions.toImplementation»
 		«exitSequenceFunctions.toImplementation»
-		«reactFunctions.toImplementation»
+		«reactFunctions.filter[ f | ! (f.eContainer instanceof ExecutionState)].toList.toImplementation»
+		«reactMethods.toDefinitions»
 		
 	'''
+	
+	 def toDefinitions(List<Method> methods) '''
+	 	«FOR m : methods»
+	 		«m.implementation»
+	 		
+	 	«ENDFOR»
+	 '''
+	 
+	 def implementation(Method it) '''
+	 	«typeSpecifier.targetLanguageName» «execution_flow.module»::«shortName»(«FOR p : parameters SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR») {
+	 		«body.code»
+	 	}
+	 '''
 	 
 	def toImplementation(List<Step> steps) '''
 		«FOR s : steps»

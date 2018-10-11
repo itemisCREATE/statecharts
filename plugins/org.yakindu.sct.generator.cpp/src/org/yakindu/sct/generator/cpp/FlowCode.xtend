@@ -19,10 +19,13 @@ import org.yakindu.sct.model.sexec.Execution
 import org.yakindu.sct.model.sexec.ExitState
 import org.yakindu.sct.model.sexec.HistoryEntry
 import org.yakindu.sct.model.sexec.If
+import org.yakindu.sct.model.sexec.LocalVariableDefinition
+import org.yakindu.sct.model.sexec.Return
 import org.yakindu.sct.model.sexec.SaveHistory
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.StateSwitch
+import org.yakindu.sct.model.sexec.Statement
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
@@ -119,5 +122,17 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	override dispatch CharSequence code(ExitState it) '''
 		stateConfVector[«state.stateVector.offset»] = «null_state»;
 		stateConfVectorPosition = «state.stateVector.offset»;
+	'''
+	
+	override dispatch CharSequence code(Return it) '''
+		return«IF value !== null» «value.code»«ENDIF»;
+	'''
+	
+	override dispatch CharSequence code(LocalVariableDefinition it) '''
+		«variable.typeSpecifier.targetLanguageName» «variable.name»«IF initialValue !== null» = «initialValue.code»«ENDIF»;
+	'''
+	
+	override dispatch CharSequence code(Statement it) '''
+		«expression.code»;
 	'''
 }

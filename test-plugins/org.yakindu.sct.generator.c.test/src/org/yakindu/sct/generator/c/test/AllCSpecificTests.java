@@ -15,18 +15,19 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * Suite of all test cases that are specific to the C code generator and which are not defined by the 
+ * Suite of all test cases that are specific to the C code generator and which are not defined by the
  * set of cross target language tests.
- * 
+ *
  * @author terfloth
  */
 @RunWith(Suite.class)
 @SuiteClasses({
 	ActiveBeforeInit.class,
-	OperationsWithoutBracesCustom.class, 
+	OperationsWithoutBracesCustom.class,
 	InternalEventLifeCycleTest_Naming.class,
 	PedanticNoLocalEventsTest.class,
-	VariadicOperations.class
+		VariadicOperations.class,
+		StateNumTest.class
 })
 public class AllCSpecificTests {
 }

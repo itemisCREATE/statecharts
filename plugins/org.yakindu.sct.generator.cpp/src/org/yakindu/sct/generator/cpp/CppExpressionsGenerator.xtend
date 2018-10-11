@@ -25,6 +25,7 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.LogicalNotExpression
+import org.yakindu.sct.model.sexec.Method
 
 class CppExpressionsGenerator extends CExpressionsGenerator {
 
@@ -45,7 +46,11 @@ class CppExpressionsGenerator extends CExpressionsGenerator {
 
 	override dispatch CharSequence code(
 		ActiveStateReferenceExpression it) '''«flow.stateActiveFctID»(«value.shortName»)'''
-
+		
+	override dispatch CharSequence code(ElementReferenceExpression it, Method target){
+		'''«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.code»«ENDFOR»)'''
+	}
+	
 	/* Feature Call */
 	override dispatch CharSequence code(FeatureCall it,
 		OperationDefinition target) '''«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.code»«ENDFOR»)'''

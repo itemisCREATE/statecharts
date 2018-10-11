@@ -34,8 +34,13 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Method
+import java.util.Set
 
 class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineHeader {
+
+	@Inject protected Set<IncludeProvider> includeProviders
 
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
@@ -43,13 +48,13 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension INamingService
-	@Inject protected extension IncludeProvider
 	@Inject protected extension StatechartExtensions
 
 	protected GeneratorEntry entry
 
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		this.entry = entry
+		val namespace = statechartNamespace
 		'''
 			«entry.licenseText»
 			
@@ -62,8 +67,10 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			/*! \file Header of the state machine '«name»'.
 			*/
 			
-			«IF !statechart.namespace.nullOrEmpty»
-			namespace «statechart.namespace.replace(".", "::")» {
+			«IF !namespace.nullOrEmpty»
+			«FOR ns : namespace»
+			namespace «ns» {
+			«ENDFOR»
 			«ENDIF»
 
 			«preStatechartDeclarations»
@@ -81,8 +88,10 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			
 			«postStatechartDeclarations»
 			
-			«IF !statechart.namespace.nullOrEmpty»
+			«IF !namespace.nullOrEmpty»
+			«FOR ns : namespace»
 			}
+			«ENDFOR»
 			«ENDIF»
 			
 			#endif /* «module().define»_H_ */
@@ -102,8 +111,10 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 	
 	def final includes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
 		'''
-		«FOR i : getIncludes(newArrayList, artifactConfigs)»
-		  «i»
+		«FOR provider : includeProviders»
+			«FOR i : provider.getIncludes(it, artifactConfigs)»
+				«i»
+			«ENDFOR»
 		«ENDFOR»
 		'''
 	}
@@ -133,6 +144,8 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			~«module»();
 			
 			«statesEnumDecl»
+			
+			static const sc_integer «statesCountConst» = «states.size»;
 			
 			«FOR s : it.scopes»«s.createPublicScope»«ENDFOR»
 			
@@ -427,12 +440,23 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 		«exitActionFunctions.toPrototypes»
 		«enterSequenceFunctions.toPrototypes»
 		«exitSequenceFunctions.toPrototypes»
-		«reactFunctions.toPrototypes»
+		«reactFunctions.filter[ f | ! (f.eContainer instanceof ExecutionState)].toList.toPrototypes»
+		«reactMethods.toDeclarations»
 		void clearInEvents();
 		void clearOutEvents();
 		
 	'''
-
+	
+	def toDeclarations(List<Method> steps) '''
+		«FOR s : steps»
+			«s.toPrototype»
+		«ENDFOR»
+	'''
+	
+	def toPrototype(Method it) '''
+		«typeSpecifier.targetLanguageName» «shortName»(«FOR p : parameters SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR»);
+	'''
+	
 	def toPrototypes(List<Step> steps) '''
 		«FOR s : steps»
 			«s.functionPrototype»
