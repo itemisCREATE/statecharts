@@ -157,7 +157,7 @@ class Statemachine {
 			«IF flow.hasHistory»
 			for (int i = 0; i < «flow.historyVector.size»; i++) {
 				historyVector[i] = State.NullState;
-			
+			}
 			«ENDIF»
 			clearEvents();
 			clearOutEvents();
