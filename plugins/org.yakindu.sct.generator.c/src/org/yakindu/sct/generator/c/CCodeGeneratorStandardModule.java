@@ -32,6 +32,7 @@ import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 import com.google.inject.Binder;
+import com.google.inject.multibindings.Multibinder;
 import com.google.inject.name.Names;
 
 public class CCodeGeneratorStandardModule implements IGeneratorModule {
@@ -43,13 +44,15 @@ public class CCodeGeneratorStandardModule implements IGeneratorModule {
 		binder.bind(GeneratorEntry.class).toInstance(entry);
 		binder.bind(IExecutionFlowGenerator.class).to(CGenerator.class);
 		binder.bind(ICodegenTypeSystemAccess.class).to(CTypeSystemAccess.class);
-		binder.bind(IncludeProvider.class).to(StandardIncludeProvider.class);
 		binder.bind(INamingService.class).to(CNamingService.class);
 		binder.bind(StatemachineSource.class).toProvider(SourceContentFragmentProvider.class);
 		binder.bind(StatemachineHeader.class).toProvider(HeaderContentFragmentProvider.class);
 		bindIGenArtifactConfigurations(entry, binder);
 		bindTracingProperty(entry, binder);
 		binder.bind(String.class).annotatedWith(Names.named("Separator")).toInstance(getSeparator(entry));
+
+		Multibinder<IncludeProvider> includeBinder = Multibinder.newSetBinder(binder, IncludeProvider.class);
+		includeBinder.addBinding().to(ScTypesIncludeProvider.class);
 	}
 
 	protected void bindTracingProperty(GeneratorEntry entry, Binder binder) {

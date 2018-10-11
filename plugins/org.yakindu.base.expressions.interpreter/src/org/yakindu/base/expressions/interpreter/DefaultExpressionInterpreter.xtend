@@ -51,6 +51,8 @@ import org.yakindu.sct.model.sruntime.ExecutionVariable
 import org.yakindu.sct.model.sruntime.ReferenceSlot
 import com.google.inject.Singleton
 import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
+import java.util.Set
+import org.yakindu.base.types.Declaration
 
 /**
  * 
@@ -65,8 +67,10 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	protected extension ITypeSystem ts;
 	@Inject
 	protected extension IExecutionSlotResolver resolver
+	
 	@Inject(optional=true)
-	protected IOperationMockup operationDelegate
+	protected Set<IOperationMockup> operationDelegates
+	
 	@Inject(optional=true)
 	protected ExecutionContext context
 
@@ -265,11 +269,11 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	}
 
 	def executeElementReferenceExpression(ElementReferenceExpression expression) {
-		var parameter = expression.expressions.map(it|execute)
+		val parameter = expression.expressions.map(it|execute)
 		if (expression.operationCall || expression.reference instanceof Operation) {
-			if (operationDelegate !== null &&
-				operationDelegate.canExecute(expression.reference as Operation, parameter.toArray)) {
-				return (expression.reference as Operation).execute(parameter.toArray)
+			val operationDelegate = operationDelegates?.findFirst[canExecute(null, expression.reference as Operation, parameter.toArray)]
+			if (operationDelegate !== null) {
+				return (expression.reference as Operation).execute(null, parameter.toArray, operationDelegate)
 			}
 		}
 		// for enumeration types return the literal value
@@ -297,15 +301,16 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 
 	def executeFeatureCall(FeatureCall call) {
 		if (call.operationCall || call.feature instanceof Operation) {
-			var parameter = call.expressions.map(it|execute)
+			val parameter = call.expressions.map(it|execute)
 			if (call.feature instanceof Operation) {
-				var Operation operation = call.feature as Operation
-				if (operationDelegate !== null && operationDelegate.canExecute(operation, parameter)) {
-					return operation.execute(parameter)
+				val Operation operation = call.feature as Operation
+				val operationDelegate = operationDelegates?.findFirst[canExecute(call.getOwnerDeclaration, operation, parameter.toArray)]
+				if (operationDelegate !== null) {
+					return operation.execute(call.getOwnerDeclaration, parameter, operationDelegate)
 				}
 			}
-		} else if (call.getFeature() instanceof Enumerator) {
-			return new Long((call.getFeature() as Enumerator).literalValue)
+		} else if (call.feature instanceof Enumerator) {
+			return new Long((call.feature as Enumerator).literalValue)
 		}
 		var slot = context.resolve(call)
 		if (slot instanceof ExecutionVariable) {
@@ -324,14 +329,27 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 		println("No feature found for " + call.feature + " -> returning null")
 		return null;
 	}
-
+	
+	/**
+	 * TODO: this works only for call depth = 1
+	 */
+	def getOwnerDeclaration(FeatureCall call) {
+		val owner = call.owner
+		if (owner instanceof ElementReferenceExpression) {
+			if (owner.reference instanceof Declaration) {
+				return owner.reference as Declaration
+			}
+		}
+		return null
+	}
+	
 	def executeUnaryCoreFunction(Expression statement, String operator) {
 		var result = statement.execute()
 		return evaluate(operator, result);
 	}
 
-	def execute(Operation it, List<Object> params) {
-		operationDelegate.execute(it, params)
+	def execute(Operation it, Declaration owner, List<Object> params, IOperationMockup operationDelegate) {
+		operationDelegate.execute(owner, it, params)
 	}
 
 }

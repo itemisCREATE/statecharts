@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.yakindu.base.expressions.interpreter.IExecutionSlotResolver;
 import org.yakindu.base.expressions.interpreter.IOperationMockup;
+import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Operation;
 import org.yakindu.sct.commons.WorkspaceClassLoaderFactory;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
@@ -63,7 +64,7 @@ public class JavaOperationMockup implements IOperationMockup {
 	}
 
 	@Override
-	public boolean canExecute(Operation definition, Object[] parameter) {
+	public boolean canExecute(Declaration owner, Operation definition, Object[] parameter) {
 		for (Object callback : callbacks) {
 			Class<?> current = callback.getClass();
 			while (current != Object.class) {
@@ -80,7 +81,7 @@ public class JavaOperationMockup implements IOperationMockup {
 		return false;
 	}
 
-	public Object execute(Operation definition, Object[] parameter) {
+	public Object execute(Declaration owner, Operation definition, Object[] parameter) {
 		List<Object> targets = callbacks;
 		if (definition.eContainer() instanceof InterfaceScope) {
 			String className = ((InterfaceScope) definition.eContainer()).getName();

@@ -36,8 +36,11 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Method
+import java.util.Set
 
 class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineHeader {
+
+	@Inject protected Set<IncludeProvider> includeProviders
 
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
@@ -45,7 +48,6 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension INamingService
-	@Inject protected extension IncludeProvider
 	@Inject protected extension StatechartExtensions
 
 	protected GeneratorEntry entry
@@ -109,8 +111,10 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 	
 	def final includes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
 		'''
-		«FOR i : getIncludes(newArrayList, artifactConfigs)»
-		  «i»
+		«FOR provider : includeProviders»
+			«FOR i : provider.getIncludes(it, artifactConfigs)»
+				«i»
+			«ENDFOR»
 		«ENDFOR»
 		'''
 	}
