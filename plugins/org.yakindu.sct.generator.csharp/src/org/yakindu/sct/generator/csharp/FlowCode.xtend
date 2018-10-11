@@ -22,12 +22,14 @@ import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 
 class FlowCode {
 	
 	@Inject extension Naming
 	@Inject extension CSharpExpressionsGenerator
 	@Inject extension SExecExtensions
+	@Inject extension ICodegenTypeSystemAccess;
 	
 	var List<TimeEvent> timeEvents;
 	
@@ -151,7 +153,7 @@ class FlowCode {
 	}
 	
 	def dispatch CharSequence code(LocalVariableDefinition it) '''
-		«variable.typeSpecifier.type» «variable.name»«IF initialValue !== null» = «initialValue.code»«ENDIF»;
+		«variable.type.targetLanguageName» «variable.name»«IF initialValue !== null» = «initialValue.code»«ENDIF»;
 	'''
 	
 	def dispatch CharSequence code(Statement it) 
