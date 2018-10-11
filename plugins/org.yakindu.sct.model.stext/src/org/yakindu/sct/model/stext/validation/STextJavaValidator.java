@@ -284,18 +284,12 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		
 		// if we got a dead transition, we need to re-check if a default was used before
 		if(deadTransition != null) {
-			boolean defaultWasUsed = false;
 			for(int i = 0; i < deadTransitionIndex; i++) {
 				Transition transition = outgoingTransitions.get(i);
 				Trigger trigger = transition.getTrigger();
 				if(trigger instanceof DefaultTrigger || trigger ==null) {
 					warning(String.format(DEAD_TRANSITION, getTransitionDeclaration(deadTransition)), transition, null, -1);
-					defaultWasUsed = true;
 				}
-			}
-			if(defaultWasUsed) {
-				warning(String.format(ALWAYS_TRUE_TRANSITION_USED_IN_CHOICE, deadTransition.getSpecification()), deadTransition,
-						null, -1);
 			}
 		}
 	}
