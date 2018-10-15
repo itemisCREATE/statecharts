@@ -127,7 +127,7 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		String rule = EventDefinition.class.getSimpleName();
 		parseExpression("event event1", rule);
 		parseExpression("event event1 : integer", rule);
-		parseExpression("local event event1 : boolean", rule);
+		parseExpression("event event1 : boolean", rule);
 		parseExpression("in event event1 : integer", rule);
 		parseExpression("out event event1 : integer", rule);
 		parseExpression("event event1 : integer", rule);
