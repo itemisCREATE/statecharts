@@ -846,7 +846,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		Statechart statechart = AbstractTestModelsUtil
 				.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnusedInternalDeclarations.sct");
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
-		assertIssueCount(diagnostics, 5);
+		assertIssueCount(diagnostics, 3);
 		assertWarning(diagnostics, INTERNAL_DECLARATION_UNUSED);
 	}
 
