@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_zeb_4DqeEeW2x7dgG-q-Eg" specification="internal:&#xD;&#xA;event usedEvent : integer&#xD;&#xA;event unusedEvent: integer&#xD;&#xA;var usedVariable : integer&#xD;&#xA;var unusedVariable : integer&#xD;&#xA;operation usedOperation() : integer&#xD;&#xA;operation nusedOperation() : integer&#xD;&#xA;&#xD;&#xA;" name="UnusedInternalDeclarations">
+  <sgraph:Statechart xmi:id="_zeb_4DqeEeW2x7dgG-q-Eg" specification="internal:&#xD;&#xA;event usedEvent : integer&#xD;&#xA;event unusedEvent: integer&#xD;&#xA;var usedVariable : integer&#xD;&#xA;var unusedVariable : integer&#xD;&#xA;operation usedOperation() : integer&#xD;&#xA;operation unusedOperation() : integer&#xD;&#xA;&#xD;&#xA;" name="UnusedInternalDeclarations">
     <regions xmi:id="_zed1EjqeEeW2x7dgG-q-Eg" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_zeitkjqeEeW2x7dgG-q-Eg">
         <outgoingTransitions xmi:id="_zelJ0TqeEeW2x7dgG-q-Eg" target="_zejUpzqeEeW2x7dgG-q-Eg"/>
