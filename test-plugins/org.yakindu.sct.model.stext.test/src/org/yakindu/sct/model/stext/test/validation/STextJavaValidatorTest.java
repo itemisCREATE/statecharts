@@ -626,15 +626,6 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		result.assertWarningContains(String.format(STextJavaValidator.DECLARATION_WITH_READONLY, "readonly", "const"));
 	}
 
-	@Test
-	public void checkDeprecatedLocalEventDefinition() {
-		String decl = "internal: local event e1";
-		EObject model = super.parseExpression(decl, InternalScope.class.getSimpleName());
-		AssertableDiagnostics result = tester.validate(model);
-		result.assertDiagnosticsCount(1);
-		result.assertWarningContains(String.format(STextJavaValidator.DECLARATION_DEPRECATED, "local"));
-	}
-
 	/**
 	 * checks that each @Check method of {@link STextJavaValidator} has a @Test
 	 * method in this class with the same name

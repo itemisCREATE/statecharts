@@ -783,21 +783,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	}
 
 	@Check(CheckType.FAST)
-	public void checkDeprecatedLocalEventDefinition(EventDefinition event) {
-		// applies only for local event definitions
-		if (event.eContainer() instanceof InternalScope && event.getDirection() == Direction.LOCAL) {
-			ICompositeNode definitionNode = NodeModelUtils.getNode(event);
-			String tokenText = NodeModelUtils.getTokenText(definitionNode);
-			if (tokenText == null || tokenText.isEmpty())
-				return;
-			if (tokenText.contains(Direction.LOCAL.getLiteral())) {
-				warning(String.format(STextValidationMessages.DECLARATION_DEPRECATED, Direction.LOCAL.getLiteral()),
-						event, TypesPackage.Literals.EVENT__DIRECTION);
-			}
-		}
-	}
-
-	@Check(CheckType.FAST)
 	public void checkExitPointSpecWithTrigger(Transition t) {
 		if (!STextValidationModelUtils.getExitPointSpecs(t.getProperties()).isEmpty() && t.getTrigger() != null
 				&& t.getSource() instanceof org.yakindu.sct.model.sgraph.State) {
