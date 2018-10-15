@@ -35,6 +35,7 @@ import org.yakindu.base.expressions.scoping.ExpressionsScopeProvider;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypedElement;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult;
 import org.yakindu.base.types.typesystem.ITypeSystem;
@@ -120,6 +121,7 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 	}
 
 	public IScope scope_FeatureCall_feature(final FeatureCall context, EReference reference) {
+		IScope scope = IScope.NULLSCOPE;
 
 		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference);
 
@@ -127,13 +129,16 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 		EObject element = null;
 		if (owner instanceof ElementReferenceExpression) {
 			element = ((ElementReferenceExpression) owner).getReference();
+			EObject eContainer = context.eContainer();
+			if(eContainer == element) {
+				return scope;
+			}
 		} else if (owner instanceof FeatureCall) {
 			element = ((FeatureCall) owner).getFeature();
 		} else {
 			return getDelegate().getScope(context, reference);
 		}
 
-		IScope scope = IScope.NULLSCOPE;
 		InferenceResult result = typeInferrer.infer(owner);
 		Type ownerType = result != null ? result.getType() : null;
 
