@@ -49,6 +49,7 @@ import org.yakindu.sct.model.stext.extensions.STextExtensions;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
+import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
@@ -130,7 +131,7 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 		if (owner instanceof ElementReferenceExpression) {
 			element = ((ElementReferenceExpression) owner).getReference();
 			EObject eContainer = context.eContainer();
-			if(eContainer == element) {
+			if(eContainer instanceof VariableDefinition && element instanceof VariableDefinition) {
 				return scope;
 			}
 		} else if (owner instanceof FeatureCall) {
