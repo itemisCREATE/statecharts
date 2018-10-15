@@ -2,7 +2,7 @@
 <feature
       id="org.yakindu.sct"
       label="YAKINDU Statechart Tools"
-      version="3.4.1.qualifier"
+      version="3.4.2.qualifier"
       provider-name="statecharts.org"
       plugin="org.yakindu.sct.branding">
 
@@ -23,7 +23,7 @@
    </url>
 
    <requires>
-      <import feature="org.yakindu.base" version="3.4.1.qualifier"/>
+      <import feature="org.yakindu.base" version="3.4.2.qualifier"/>
       <import plugin="com.google.guava" version="12.0.0" match="greaterOrEqual"/>
       <import plugin="com.google.inject" version="3.0.0" match="compatible"/>
       <import plugin="com.google.inject.multibindings" version="3.0.0" match="compatible"/>
