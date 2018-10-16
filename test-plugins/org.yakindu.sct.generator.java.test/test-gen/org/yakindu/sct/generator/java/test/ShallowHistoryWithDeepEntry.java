@@ -49,6 +49,7 @@ public class ShallowHistoryWithDeepEntry {
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.main_region_Z__region0_A));
 	}
+	
 	@Test
 	public void deepEntryWithinHistory() {
 		statemachine.enter();
@@ -68,6 +69,7 @@ public class ShallowHistoryWithDeepEntry {
 		assertTrue(statemachine.isStateActive(State.main_region_Z__region0_B__region0_C));
 		assertTrue(statemachine.isStateActive(State.main_region_Z__region0_B));
 	}
+	
 	@Test
 	public void directDeepEntryIntoHistory() {
 		statemachine.enter();

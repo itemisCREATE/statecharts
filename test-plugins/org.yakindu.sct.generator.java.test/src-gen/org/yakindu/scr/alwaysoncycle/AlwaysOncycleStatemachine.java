@@ -130,40 +130,6 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		sCInterface.setV2(value);
 	}
 	
-	private boolean check_main_region_StateA_lr1_lr1() {
-		return true;
-	}
-	
-	private boolean check_main_region_StateA_tr0_tr0() {
-		return sCInterface.getValue()==5;
-	}
-	
-	private boolean check_main_region_StateB_lr0_lr0() {
-		return true;
-	}
-	
-	private boolean check_main_region_StateB_tr0_tr0() {
-		return sCInterface.getValue()==5;
-	}
-	
-	private void effect_main_region_StateA_lr1_lr1() {
-		sCInterface.setValue(sCInterface.getValue() + 1);
-	}
-	
-	private void effect_main_region_StateA_tr0() {
-		exitSequence_main_region_StateA();
-		enterSequence_main_region_StateB_default();
-	}
-	
-	private void effect_main_region_StateB_lr0_lr0() {
-		sCInterface.setValue(sCInterface.getValue() + 1);
-	}
-	
-	private void effect_main_region_StateB_tr0() {
-		exitSequence_main_region_StateB();
-		enterSequence_main_region_StateA_default();
-	}
-	
 	/* Entry action for state 'StateA'. */
 	private void entryAction_main_region_StateA() {
 		sCInterface.setValue(0);
@@ -220,27 +186,51 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		}
 	}
 	
-	/* The reactions of state StateA. */
-	private void react_main_region_StateA() {
-		if (check_main_region_StateA_tr0_tr0()) {
-			effect_main_region_StateA_tr0();
-		} else {
-			effect_main_region_StateA_lr1_lr1();
-		}
-	}
-	
-	/* The reactions of state StateB. */
-	private void react_main_region_StateB() {
-		if (check_main_region_StateB_tr0_tr0()) {
-			effect_main_region_StateB_tr0();
-		} else {
-			effect_main_region_StateB_lr0_lr0();
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_main_region__entry_Default() {
 		enterSequence_main_region_StateA_default();
+	}
+	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean main_region_StateA_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.getValue()==5) {
+					exitSequence_main_region_StateA();
+					enterSequence_main_region_StateB_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+			sCInterface.setValue(sCInterface.getValue() + 1);
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_StateB_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.getValue()==5) {
+					exitSequence_main_region_StateB();
+					enterSequence_main_region_StateA_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+			sCInterface.setValue(sCInterface.getValue() + 1);
+		}
+		return did_transition;
 	}
 	
 	public void runCycle() {
@@ -251,10 +241,10 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_StateA:
-				react_main_region_StateA();
+				main_region_StateA_react(true);
 				break;
 			case main_region_StateB:
-				react_main_region_StateB();
+				main_region_StateB_react(true);
 				break;
 			default:
 				// $NullState$

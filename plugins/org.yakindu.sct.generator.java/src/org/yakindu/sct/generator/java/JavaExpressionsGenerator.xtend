@@ -35,6 +35,9 @@ import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.base.types.Parameter
+import org.yakindu.sct.model.sexec.Statement
+import org.yakindu.sct.model.sexec.LocalVariableDefinition
 
 class JavaExpressionsGenerator extends ExpressionsGenerator {
 
@@ -61,10 +64,14 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	override dispatch String code(AssignmentExpression it) {
 		if (varRef.definition instanceof Property) {
 			var property = varRef.definition as Property
-			if (eContainer instanceof Expression) {
-				return '''«property.getContext»«property.assign»(«assignCmdArgument(property)»)'''
+			if (property.eContainer instanceof LocalVariableDefinition) {
+				return '''«property.getContext»«property.name» = «assignCmdArgument(property)»'''
 			} else {
-				return '''«property.getContext»«property.setter»(«assignCmdArgument(property)»)'''
+				if (eContainer instanceof Expression) {
+					return '''«property.getContext»«property.assign»(«assignCmdArgument(property)»)'''
+				} else {
+					return '''«property.getContext»«property.setter»(«assignCmdArgument(property)»)'''
+				}
 			}
 		}
 	}
@@ -121,7 +128,12 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def protected dispatch String code(ElementReferenceExpression it) {
-		(it.reference as Declaration).codeDeclaration(it).toString
+		if(it.reference instanceof Parameter) {
+			(it.reference as Parameter).name
+		}
+		else {
+			(it.reference as Declaration).codeDeclaration(it).toString
+		}
 	}
 
 	def protected dispatch String code(FeatureCall it) {
@@ -150,6 +162,9 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def dispatch String code(Property it) {
+		if(eContainer instanceof LocalVariableDefinition){
+			return it.name
+		}
 		getContext + getter
 	}
 
@@ -209,5 +224,4 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 		}
 		return false // default
 	}
-
 }

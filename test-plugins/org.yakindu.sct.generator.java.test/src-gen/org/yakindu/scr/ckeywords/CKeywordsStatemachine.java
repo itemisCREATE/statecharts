@@ -647,17 +647,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		sCInterface.setWhile(value);
 	}
 	
-	private boolean check_auto_char_tr0_tr0() {
-		return (sCInterface.auto) && (sCInterface.getCase());
-	}
-	
-	private void effect_auto_char_tr0() {
-		exitSequence_auto_char();
-		sCInterface.setDo(sCInterface.getDo() + 1);
-		
-		enterSequence_auto_loop_default();
-	}
-	
 	/* Entry action for state 'char'. */
 	private void entryAction_auto_char() {
 		sCInterface.setCase(true);
@@ -880,17 +869,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 	}
 	
-	/* The reactions of state char. */
-	private void react_auto_char() {
-		if (check_auto_char_tr0_tr0()) {
-			effect_auto_char_tr0();
-		}
-	}
-	
-	/* The reactions of state asm. */
-	private void react_auto_loop_switch_case_enum_asm() {
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_auto__entry_Default() {
 		enterSequence_auto_char_default();
@@ -916,6 +894,69 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean auto_char_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if ((sCInterface.auto) && (sCInterface.getCase())) {
+					exitSequence_auto_char();
+					sCInterface.setDo(sCInterface.getDo() + 1);
+					
+					enterSequence_auto_loop_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean auto_loop_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean auto_loop_switch_case_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (auto_loop_react(try_transition)==false) {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean auto_loop_switch_case_enum_asm_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (auto_loop_switch_case_react(try_transition)==false) {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -924,10 +965,10 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case auto_char:
-				react_auto_char();
+				auto_char_react(true);
 				break;
 			case auto_loop_switch_case_enum_asm:
-				react_auto_loop_switch_case_enum_asm();
+				auto_loop_switch_case_enum_asm_react(true);
 				break;
 			default:
 				// $NullState$

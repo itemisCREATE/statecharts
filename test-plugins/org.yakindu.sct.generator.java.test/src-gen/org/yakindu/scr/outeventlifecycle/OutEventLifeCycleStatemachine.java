@@ -169,33 +169,6 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 		sCInterface.setF_available_in_next_cycle(value);
 	}
 	
-	private boolean check_r1_A_tr0_tr0() {
-		return sCInterface.e;
-	}
-	
-	private boolean check_r1_B_lr0_lr0() {
-		return sCInterface.f;
-	}
-	
-	private boolean check_r2_B_lr0_lr0() {
-		return sCInterface.f;
-	}
-	
-	private void effect_r1_A_tr0() {
-		exitSequence_r1_A();
-		sCInterface.raiseF();
-		
-		enterSequence_r1_B_default();
-	}
-	
-	private void effect_r1_B_lr0_lr0() {
-		sCInterface.setF_available_in_next_cycle(true);
-	}
-	
-	private void effect_r2_B_lr0_lr0() {
-		sCInterface.setF_available_in_cycle(true);
-	}
-	
 	/* 'default' enter sequence for state A */
 	private void enterSequence_r1_A_default() {
 		nextStateIndex = 0;
@@ -267,27 +240,6 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 		}
 	}
 	
-	/* The reactions of state A. */
-	private void react_r1_A() {
-		if (check_r1_A_tr0_tr0()) {
-			effect_r1_A_tr0();
-		}
-	}
-	
-	/* The reactions of state B. */
-	private void react_r1_B() {
-		if (check_r1_B_lr0_lr0()) {
-			effect_r1_B_lr0_lr0();
-		}
-	}
-	
-	/* The reactions of state B. */
-	private void react_r2_B() {
-		if (check_r2_B_lr0_lr0()) {
-			effect_r2_B_lr0_lr0();
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_r1__entry_Default() {
 		enterSequence_r1_A_default();
@@ -298,6 +250,60 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 		enterSequence_r2_B_default();
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean r1_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.e) {
+					exitSequence_r1_A();
+					sCInterface.raiseF();
+					
+					enterSequence_r1_B_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean r1_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+			if (sCInterface.f) {
+				sCInterface.setF_available_in_next_cycle(true);
+			}
+		}
+		return did_transition;
+	}
+	
+	private boolean r2_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;
+		}
+		if (did_transition==false) {
+			if (sCInterface.f) {
+				sCInterface.setF_available_in_cycle(true);
+			}
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -306,13 +312,13 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case r1_A:
-				react_r1_A();
+				r1_A_react(true);
 				break;
 			case r1_B:
-				react_r1_B();
+				r1_B_react(true);
 				break;
 			case r2_B:
-				react_r2_B();
+				r2_B_react(true);
 				break;
 			default:
 				// $NullState$

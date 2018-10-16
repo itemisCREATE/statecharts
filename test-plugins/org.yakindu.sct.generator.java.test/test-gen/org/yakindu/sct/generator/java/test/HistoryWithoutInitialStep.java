@@ -43,6 +43,7 @@ public class HistoryWithoutInitialStep {
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_D));
 	}
+	
 	@Test
 	public void enterCThroughHistory() {
 		init();
@@ -54,6 +55,7 @@ public class HistoryWithoutInitialStep {
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
 	}
+	
 	@Test
 	public void enterDThroughHistory() {
 		init();
@@ -67,6 +69,7 @@ public class HistoryWithoutInitialStep {
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_D));
 	}
+	
 	public void init() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));

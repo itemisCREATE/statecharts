@@ -18,6 +18,9 @@ import org.yakindu.sct.generator.java.eventdriven.EventDrivenStatemachine;
 import org.yakindu.sct.generator.java.types.JavaTypeSystemAccess;
 import org.yakindu.sct.generator.java.types.OldJavaTypeSystemAccess;
 import org.yakindu.sct.model.sexec.naming.INamingService;
+import org.yakindu.sct.model.sexec.transformation.BehaviorMapping;
+import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
+import org.yakindu.sct.model.sexec.transformation.ng.ModelSequencer;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 import com.google.inject.Binder;
@@ -33,7 +36,6 @@ public class JavaGeneratorModule implements IGeneratorModule {
 
 	@Override
 	public void configure(GeneratorEntry entry, Binder binder) {
-
 		configureGeneratorRoot(entry, binder);
 		configureForExecutionStyle(entry, binder);
 		configureServices(entry, binder);
@@ -41,6 +43,8 @@ public class JavaGeneratorModule implements IGeneratorModule {
 
 
 	public void configureGeneratorRoot(GeneratorEntry entry, Binder binder) {
+		binder.bind(IModelSequencer.class).to(ModelSequencer.class);
+		binder.bind(BehaviorMapping.class).to(org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping.class);
 		binder.bind(IExecutionFlowGenerator.class).to(JavaGenerator.class);
 	}
 

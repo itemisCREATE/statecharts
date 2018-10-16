@@ -141,13 +141,26 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		}
 	}
 	
-	/* The reactions of state A. */
-	private void react_mainRegion_A() {
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_mainRegion__entry_Default() {
 		enterSequence_mainRegion_A_default();
+	}
+	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean mainRegion_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
 	}
 	
 	public void runCycle() {
@@ -158,7 +171,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case mainRegion_A:
-				react_mainRegion_A();
+				mainRegion_A_react(true);
 				break;
 			default:
 				// $NullState$

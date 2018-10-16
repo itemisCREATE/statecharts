@@ -58,7 +58,7 @@ GeneratorModel for yakindu::java {
 
 
 
-	statechart executionorder.ChildFirstLocalReactions {
+	statechart executionorder.childfirst.ChildFirstLocalReactions {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"

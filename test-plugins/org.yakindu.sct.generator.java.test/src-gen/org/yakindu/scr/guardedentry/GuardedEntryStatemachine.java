@@ -144,24 +144,6 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 		sCInterface.setDone(value);
 	}
 	
-	private boolean check_main_region_A_tr0_tr0() {
-		return sCInterface.e;
-	}
-	
-	private boolean check_main_region_B_tr0_tr0() {
-		return sCInterface.e;
-	}
-	
-	private void effect_main_region_A_tr0() {
-		exitSequence_main_region_A();
-		enterSequence_main_region_B_default();
-	}
-	
-	private void effect_main_region_B_tr0() {
-		exitSequence_main_region_B();
-		enterSequence_main_region_A_default();
-	}
-	
 	/* Entry action for state 'A'. */
 	private void entryAction_main_region_A() {
 		if (sCInterface.getGuard()) {
@@ -213,23 +195,49 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 		}
 	}
 	
-	/* The reactions of state A. */
-	private void react_main_region_A() {
-		if (check_main_region_A_tr0_tr0()) {
-			effect_main_region_A_tr0();
-		}
-	}
-	
-	/* The reactions of state B. */
-	private void react_main_region_B() {
-		if (check_main_region_B_tr0_tr0()) {
-			effect_main_region_B_tr0();
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_main_region__entry_Default() {
 		enterSequence_main_region_A_default();
+	}
+	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean main_region_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.e) {
+					exitSequence_main_region_A();
+					enterSequence_main_region_B_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.e) {
+					exitSequence_main_region_B();
+					enterSequence_main_region_A_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
 	}
 	
 	public void runCycle() {
@@ -240,10 +248,10 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_A:
-				react_main_region_A();
+				main_region_A_react(true);
 				break;
 			case main_region_B:
-				react_main_region_B();
+				main_region_B_react(true);
 				break;
 			default:
 				// $NullState$

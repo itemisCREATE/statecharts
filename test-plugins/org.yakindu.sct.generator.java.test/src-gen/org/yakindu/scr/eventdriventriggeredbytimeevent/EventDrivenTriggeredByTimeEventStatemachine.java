@@ -125,7 +125,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	
 	/**
 	* Set the {@link ITimer} for the state machine. It must be set
-	* externally on a timed state machine before a run cycle can be correct
+	* externally on a timed state machine before a run cycle can be correctly
 	* executed.
 	* 
 	* @param timer
@@ -166,44 +166,6 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	
 	public void setTransition_count(long value) {
 		sCInterface.setTransition_count(value);
-	}
-	
-	private boolean check_EventDrivenTriggeredByTimeEvent_r_A_lr0_lr0() {
-		return true;
-	}
-	
-	private boolean check_EventDrivenTriggeredByTimeEvent_r_A_tr0_tr0() {
-		return timeEvents[0];
-	}
-	
-	private boolean check_EventDrivenTriggeredByTimeEvent_r_B_lr0_lr0() {
-		return true;
-	}
-	
-	private boolean check_EventDrivenTriggeredByTimeEvent_r_B_tr0_tr0() {
-		return timeEvents[1];
-	}
-	
-	private void effect_EventDrivenTriggeredByTimeEvent_r_A_lr0_lr0() {
-		sCInterface.setX(sCInterface.getX() + 1);
-	}
-	
-	private void effect_EventDrivenTriggeredByTimeEvent_r_A_tr0() {
-		exitSequence_EventDrivenTriggeredByTimeEvent_r_A();
-		sCInterface.setTransition_count(sCInterface.getTransition_count() + 1);
-		
-		enterSequence_EventDrivenTriggeredByTimeEvent_r_B_default();
-	}
-	
-	private void effect_EventDrivenTriggeredByTimeEvent_r_B_lr0_lr0() {
-		sCInterface.setX(sCInterface.getX() + 1);
-	}
-	
-	private void effect_EventDrivenTriggeredByTimeEvent_r_B_tr0() {
-		exitSequence_EventDrivenTriggeredByTimeEvent_r_B();
-		sCInterface.setTransition_count(sCInterface.getTransition_count() + 1);
-		
-		enterSequence_EventDrivenTriggeredByTimeEvent_r_A_default();
 	}
 	
 	/* Entry action for state 'A'. */
@@ -275,52 +237,74 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		}
 	}
 	
-	/* The reactions of state A. */
-	private void react_EventDrivenTriggeredByTimeEvent_r_A() {
-		if (check_EventDrivenTriggeredByTimeEvent_r_A_tr0_tr0()) {
-			effect_EventDrivenTriggeredByTimeEvent_r_A_tr0();
-		} else {
-			effect_EventDrivenTriggeredByTimeEvent_r_A_lr0_lr0();
-		}
-	}
-	
-	/* The reactions of state B. */
-	private void react_EventDrivenTriggeredByTimeEvent_r_B() {
-		if (check_EventDrivenTriggeredByTimeEvent_r_B_tr0_tr0()) {
-			effect_EventDrivenTriggeredByTimeEvent_r_B_tr0();
-		} else {
-			effect_EventDrivenTriggeredByTimeEvent_r_B_lr0_lr0();
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_EventDrivenTriggeredByTimeEvent_r__entry_Default() {
 		enterSequence_EventDrivenTriggeredByTimeEvent_r_A_default();
+	}
+	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean eventDrivenTriggeredByTimeEvent_r_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (timeEvents[0]) {
+					exitSequence_EventDrivenTriggeredByTimeEvent_r_A();
+					sCInterface.setTransition_count(sCInterface.getTransition_count() + 1);
+					
+					enterSequence_EventDrivenTriggeredByTimeEvent_r_B_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+			sCInterface.setX(sCInterface.getX() + 1);
+		}
+		return did_transition;
+	}
+	
+	private boolean eventDrivenTriggeredByTimeEvent_r_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (timeEvents[1]) {
+					exitSequence_EventDrivenTriggeredByTimeEvent_r_B();
+					sCInterface.setTransition_count(sCInterface.getTransition_count() + 1);
+					
+					enterSequence_EventDrivenTriggeredByTimeEvent_r_A_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+			sCInterface.setX(sCInterface.getX() + 1);
+		}
+		return did_transition;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
-	
 		clearOutEvents();
-		singleCycle();
-		clearEvents();
-		
-	}
-	
-	protected void singleCycle() {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case eventDrivenTriggeredByTimeEvent_r_A:
-				react_EventDrivenTriggeredByTimeEvent_r_A();
+				eventDrivenTriggeredByTimeEvent_r_A_react(true);
 				break;
 			case eventDrivenTriggeredByTimeEvent_r_B:
-				react_EventDrivenTriggeredByTimeEvent_r_B();
+				eventDrivenTriggeredByTimeEvent_r_B_react(true);
 				break;
 			default:
 				// $NullState$
 			}
 		}
+		clearEvents();
 	}
 }

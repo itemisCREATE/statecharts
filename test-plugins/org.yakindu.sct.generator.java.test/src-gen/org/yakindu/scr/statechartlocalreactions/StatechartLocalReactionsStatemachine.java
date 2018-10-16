@@ -115,40 +115,6 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 		sCInterface.setMyInt(value);
 	}
 	
-	private boolean check__lr0() {
-		return true;
-	}
-	
-	private boolean check__lr1() {
-		return sCInterface.getMyInt()==100;
-	}
-	
-	private boolean check_main_region_S1_tr0_tr0() {
-		return true;
-	}
-	
-	private boolean check_main_region_S2_tr0_tr0() {
-		return true;
-	}
-	
-	private void effect__lr0() {
-		sCInterface.setMyInt(sCInterface.getMyInt() + 1);
-	}
-	
-	private void effect__lr1() {
-		sCInterface.setMyInt(0);
-	}
-	
-	private void effect_main_region_S1_tr0() {
-		exitSequence_main_region_S1();
-		enterSequence_main_region_S2_default();
-	}
-	
-	private void effect_main_region_S2_tr0() {
-		exitSequence_main_region_S2();
-		enterSequence_main_region_S1_default();
-	}
-	
 	/* 'default' enter sequence for state S1 */
 	private void enterSequence_main_region_S1_default() {
 		nextStateIndex = 0;
@@ -220,28 +186,6 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 		}
 	}
 	
-	/* The reactions of state S1. */
-	private void react_main_region_S1() {
-		effect__lr0();
-		if (check__lr1()) {
-			effect__lr1();
-		}
-		effect_main_region_S1_tr0();
-	}
-	
-	/* The reactions of state S2. */
-	private void react_main_region_S2() {
-		effect__lr0();
-		if (check__lr1()) {
-			effect__lr1();
-		}
-		effect_main_region_S2_tr0();
-	}
-	
-	/* The reactions of state a. */
-	private void react_region2_a() {
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_main_region__entry_Default() {
 		enterSequence_main_region_S1_default();
@@ -252,6 +196,54 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 		enterSequence_region2_a_default();
 	}
 	
+	private boolean react(boolean try_transition) {
+		sCInterface.setMyInt(sCInterface.getMyInt() + 1);
+		
+		if (sCInterface.getMyInt()==100) {
+			sCInterface.setMyInt(0);
+		}
+		return false;
+	}
+	
+	private boolean main_region_S1_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				exitSequence_main_region_S1();
+				enterSequence_main_region_S2_default();
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_S2_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				exitSequence_main_region_S2();
+				enterSequence_main_region_S1_default();
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean region2_a_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -260,13 +252,13 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_S1:
-				react_main_region_S1();
+				main_region_S1_react(true);
 				break;
 			case main_region_S2:
-				react_main_region_S2();
+				main_region_S2_react(true);
 				break;
 			case region2_a:
-				react_region2_a();
+				region2_a_react(true);
 				break;
 			default:
 				// $NullState$

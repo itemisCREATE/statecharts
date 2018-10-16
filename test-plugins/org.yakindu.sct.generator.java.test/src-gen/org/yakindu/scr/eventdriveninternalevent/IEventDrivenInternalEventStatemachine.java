@@ -10,6 +10,10 @@ public interface IEventDrivenInternalEventStatemachine extends IStatemachine {
 		
 		public void raiseReset();
 		
+		public boolean isRaisedE();
+		
+		public long getEValue();
+		
 		public long getX();
 		
 		public void setX(long value);

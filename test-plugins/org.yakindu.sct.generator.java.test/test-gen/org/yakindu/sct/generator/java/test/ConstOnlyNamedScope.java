@@ -40,6 +40,7 @@ public class ConstOnlyNamedScope {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.constOnlyNamedScope_main_region_A));
 	}
+	
 	@Test
 	public void stateTransition() {
 		statemachine.enter();

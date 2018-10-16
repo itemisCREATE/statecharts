@@ -39,17 +39,20 @@ public class StatechartActive {
 	public void inactiveBeforeEnter() {
 		assertTrue(!statemachine.isActive());
 	}
+	
 	@Test
 	public void activeAfterEnter() {
 		statemachine.enter();
 		assertTrue(statemachine.isActive());
 	}
+	
 	@Test
 	public void inactiveAfterExit() {
 		statemachine.enter();
 		statemachine.exit();
 		assertTrue(!statemachine.isActive());
 	}
+	
 	@Test
 	public void activeAfterReenter() {
 		statemachine.enter();

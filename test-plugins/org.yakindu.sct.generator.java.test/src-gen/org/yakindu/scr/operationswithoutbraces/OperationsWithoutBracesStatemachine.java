@@ -121,60 +121,6 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		return sCInterface;
 	}
 	
-	private boolean check_main_region_A_tr0_tr0() {
-		return (true) && (!sCInterface.operationCallback.myBoolOp());
-	}
-	
-	private boolean check_main_region_B_tr0_tr0() {
-		return (true) && (sCInterface.operationCallback.myIntOp()==0);
-	}
-	
-	private boolean check_main_region_C_tr0_tr0() {
-		return (true) && (sCInterface.operationCallback.myRealOp()==0.0);
-	}
-	
-	private boolean check_another_region_A_tr0_tr0() {
-		return (true) && (!sCInterface.operationCallback.myBoolOp());
-	}
-	
-	private boolean check_another_region_B_tr0_tr0() {
-		return (true) && (sCInterface.operationCallback.myIntOp()==0);
-	}
-	
-	private boolean check_another_region_C_tr0_tr0() {
-		return (true) && (sCInterface.operationCallback.myRealOp()==0.0);
-	}
-	
-	private void effect_main_region_A_tr0() {
-		exitSequence_main_region_A();
-		enterSequence_main_region_B_default();
-	}
-	
-	private void effect_main_region_B_tr0() {
-		exitSequence_main_region_B();
-		enterSequence_main_region_C_default();
-	}
-	
-	private void effect_main_region_C_tr0() {
-		exitSequence_main_region_C();
-		enterSequence_main_region_D_default();
-	}
-	
-	private void effect_another_region_A_tr0() {
-		exitSequence_another_region_A();
-		enterSequence_another_region_B_default();
-	}
-	
-	private void effect_another_region_B_tr0() {
-		exitSequence_another_region_B();
-		enterSequence_another_region_C_default();
-	}
-	
-	private void effect_another_region_C_tr0() {
-		exitSequence_another_region_C();
-		enterSequence_another_region_D_default();
-	}
-	
 	/* 'default' enter sequence for state A */
 	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
@@ -321,56 +267,6 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		}
 	}
 	
-	/* The reactions of state A. */
-	private void react_main_region_A() {
-		if (check_main_region_A_tr0_tr0()) {
-			effect_main_region_A_tr0();
-		}
-	}
-	
-	/* The reactions of state B. */
-	private void react_main_region_B() {
-		if (check_main_region_B_tr0_tr0()) {
-			effect_main_region_B_tr0();
-		}
-	}
-	
-	/* The reactions of state C. */
-	private void react_main_region_C() {
-		if (check_main_region_C_tr0_tr0()) {
-			effect_main_region_C_tr0();
-		}
-	}
-	
-	/* The reactions of state D. */
-	private void react_main_region_D() {
-	}
-	
-	/* The reactions of state A. */
-	private void react_another_region_A() {
-		if (check_another_region_A_tr0_tr0()) {
-			effect_another_region_A_tr0();
-		}
-	}
-	
-	/* The reactions of state B. */
-	private void react_another_region_B() {
-		if (check_another_region_B_tr0_tr0()) {
-			effect_another_region_B_tr0();
-		}
-	}
-	
-	/* The reactions of state C. */
-	private void react_another_region_C() {
-		if (check_another_region_C_tr0_tr0()) {
-			effect_another_region_C_tr0();
-		}
-	}
-	
-	/* The reactions of state D. */
-	private void react_another_region_D() {
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_main_region__entry_Default() {
 		enterSequence_main_region_A_default();
@@ -381,6 +277,136 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		enterSequence_another_region_A_default();
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean main_region_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if ((true) && (!sCInterface.operationCallback.myBoolOp())) {
+					exitSequence_main_region_A();
+					enterSequence_main_region_B_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if ((true) && (sCInterface.operationCallback.myIntOp()==0)) {
+					exitSequence_main_region_B();
+					enterSequence_main_region_C_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_C_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if ((true) && (sCInterface.operationCallback.myRealOp()==0.0)) {
+					exitSequence_main_region_C();
+					enterSequence_main_region_D_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_D_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean another_region_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if ((true) && (!sCInterface.operationCallback.myBoolOp())) {
+				exitSequence_another_region_A();
+				enterSequence_another_region_B_default();
+			} else {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean another_region_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if ((true) && (sCInterface.operationCallback.myIntOp()==0)) {
+				exitSequence_another_region_B();
+				enterSequence_another_region_C_default();
+			} else {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean another_region_C_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if ((true) && (sCInterface.operationCallback.myRealOp()==0.0)) {
+				exitSequence_another_region_C();
+				enterSequence_another_region_D_default();
+			} else {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean another_region_D_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -389,28 +415,28 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_A:
-				react_main_region_A();
+				main_region_A_react(true);
 				break;
 			case main_region_B:
-				react_main_region_B();
+				main_region_B_react(true);
 				break;
 			case main_region_C:
-				react_main_region_C();
+				main_region_C_react(true);
 				break;
 			case main_region_D:
-				react_main_region_D();
+				main_region_D_react(true);
 				break;
 			case another_region_A:
-				react_another_region_A();
+				another_region_A_react(true);
 				break;
 			case another_region_B:
-				react_another_region_B();
+				another_region_B_react(true);
 				break;
 			case another_region_C:
-				react_another_region_C();
+				another_region_C_react(true);
 				break;
 			case another_region_D:
-				react_another_region_D();
+				another_region_D_react(true);
 				break;
 			default:
 				// $NullState$

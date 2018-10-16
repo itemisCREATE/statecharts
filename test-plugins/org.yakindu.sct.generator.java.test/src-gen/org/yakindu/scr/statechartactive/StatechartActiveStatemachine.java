@@ -105,13 +105,26 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 		}
 	}
 	
-	/* The reactions of state A. */
-	private void react_r_A() {
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_r__entry_Default() {
 		enterSequence_r_A_default();
+	}
+	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean r_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
 	}
 	
 	public void runCycle() {
@@ -122,7 +135,7 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case r_A:
-				react_r_A();
+				r_A_react(true);
 				break;
 			default:
 				// $NullState$

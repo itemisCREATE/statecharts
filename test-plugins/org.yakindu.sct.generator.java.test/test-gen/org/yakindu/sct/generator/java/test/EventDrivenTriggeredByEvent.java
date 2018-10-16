@@ -45,6 +45,7 @@ public class EventDrivenTriggeredByEvent {
 		assertTrue(statemachine.getX() == 0l);
 		statemachine.exit();
 	}
+	
 	@Test
 	public void proceedTimeDoesNotTriggerRunCycle() {
 		statemachine.enter();
