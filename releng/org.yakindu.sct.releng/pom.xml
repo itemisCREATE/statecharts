@@ -16,6 +16,8 @@
 		<antrun-version>1.6</antrun-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<testFailureIgnore>false</testFailureIgnore>
+		<jarSignerUrl>https://macbuilds2.itemis.de/jarsigner</jarSignerUrl>
+		<signerVersion>1.1.5</signerVersion>
 	</properties>
 	<build>
 		<plugins>
@@ -486,30 +488,18 @@
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
-			<pluginRepositories>
-				<pluginRepository>
-					<id>nexus-projects.itemis.de</id>
-					<url>https://projects.itemis.de/nexus/content/groups/maven-plugins/</url>
-					<releases>
-						<enabled>true</enabled>
-					</releases>
-					<snapshots>
-						<enabled>true</enabled>
-					</snapshots>
-				</pluginRepository>
-			</pluginRepositories>
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>de.itemis.signing</groupId>
-						<artifactId>itemis-jarsigner</artifactId>
-						<version>0.0.4</version>
+						<groupId>org.eclipse.cbi.maven.plugins</groupId>
+						<artifactId>eclipse-jarsigner-plugin</artifactId>
+						<version>${signerVersion}</version>
 						<configuration>
-							<sshKey>${ssh.key}</sshKey>
+							<signerUrl>${jarSignerUrl}</signerUrl>
+							<excludeInnerJars>false</excludeInnerJars>
 						</configuration>
 						<executions>
 							<execution>
-								<id>sign</id>
 								<goals>
 									<goal>sign</goal>
 								</goals>
