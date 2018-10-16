@@ -1,0 +1,10 @@
+testclass BitwiseExecutionOrder for statechart BitwiseExecutionOrder {
+	
+	@Test
+	operation test() {
+		enter
+		proceed 1 cycle
+		assert is_final
+		exit
+	}
+}

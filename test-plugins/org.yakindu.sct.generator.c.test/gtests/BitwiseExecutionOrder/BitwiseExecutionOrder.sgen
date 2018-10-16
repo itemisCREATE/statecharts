@@ -1,0 +1,10 @@
+GeneratorModel for yakindu::c {
+
+	statechart BitwiseExecutionOrder {
+
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "BitwiseExecutionOrder"
+		}
+	}
+}
