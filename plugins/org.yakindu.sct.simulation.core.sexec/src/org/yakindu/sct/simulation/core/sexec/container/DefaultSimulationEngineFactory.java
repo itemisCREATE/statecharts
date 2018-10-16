@@ -41,9 +41,9 @@ import com.google.inject.Injector;
 public class DefaultSimulationEngineFactory implements ISimulationEngineFactory {
 
 	@Inject
-	private Injector injector;
+	protected Injector injector;
 	@Inject
-	private StatechartAnnotations annotations;
+	protected StatechartAnnotations annotations;
 
 	public ISimulationEngine createExecutionContainer(Statechart statechart, ILaunch launch) throws CoreException {
 		ISimulationEngine controller = createController(statechart);
