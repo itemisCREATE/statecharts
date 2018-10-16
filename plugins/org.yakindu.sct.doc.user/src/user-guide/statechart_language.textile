@@ -152,6 +152,13 @@ p=. Parallel regions
 Regions typically contain "states":#sclang_states and "transitions":#sclang_transitions. A state in turn can contain one or more regions, turning it into a "composite state":#sclang_composite_states (contains one region) or a "orthogonal state":#sclang_orthogonal_states (contains two or more regions).
 
 
+h4(#sclang_regions_and_priorities). Regions and priorities
+
+Regions are not really executed in parallel, but rather according to their _priorities_. Within an orthogonal state, regions are executed either from left to right or from top to bottom, depending on how they are visually arranged.
+
+On the statechart's top level, however, regions can be arranged at will. Still they are executed in a specific order that is configured in the statechart's properties. Please see the section on "orthogonal states":#sclang_orthogonal_states for an example.
+
+
 
 h3(#sclang_states). States
 
@@ -427,7 +434,9 @@ See the sections on "entry point":#sclang_entry_points, "exit point":#sclang_exi
 
 h3(#sclang_orthogonal_states). Orthogonal states
 
-An *orthogonal state* is basically a "composite state":#sclang_composite_states with more than one region. These regions are executed virtually concurrently. *Please note* the word _virtually_! YAKINDU Statechart Tools does not guarantee in any way that orthogonal regions are _really_ executed concurrently. At the moment, no code generator utilizes threads to achieve this. Orthogonal states should rather be understood as a manner to have two or more sub-statecharts working together, however, they are executed _one after the other other_ in every cycle, and in a defined order: top to bottom, left to right. The same applies to multiple regions in the statechart itself. Please consult section "&quot;Raising and processing an event&quot;":#sclang_raising_and_processing_an_event for further information on region priorities and their meanings for the statechart execution.
+An *orthogonal state* is basically a "composite state":#sclang_composite_states with more than one region. These regions are executed virtually concurrently.
+
+bq. *Please note* the word _virtually_! YAKINDU Statechart Tools does not guarantee in any way that orthogonal regions are _really_ executed concurrently. At the moment, no code generator utilizes threads to achieve this. Orthogonal states should rather be understood as a manner to have two or more sub-statecharts working together. However, they are executed _one after the other other_ in every cycle and in a defined order: top to bottom, left to right. The same applies if there are multiple top-level regions in the statechart. Please consult section "&quot;Raising and processing an event&quot;":#sclang_raising_and_processing_an_event for further information on region priorities and their meaning for statechart execution.
 
 ###. CHECK Are there still no code generators taking advantage of threads and executing regions in parallel?
 
