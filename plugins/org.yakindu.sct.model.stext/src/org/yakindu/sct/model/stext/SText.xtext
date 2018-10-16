@@ -64,7 +64,7 @@ EventDefinition:
 	(direction=Direction)? 'event' name=(ID | Keywords) (':' typeSpecifier=TypeSpecifier)?;
 
 enum Direction returns types::Direction:
-	LOCAL='local' | IN='in' | OUT='out';
+	IN='in' | OUT='out';
 
 VariableDefinition:
 	{VariableDefinition} (const?='const'|'var') ((readonly?='readonly')?) name=IDWithKeywords ':' typeSpecifier=TypeSpecifier
