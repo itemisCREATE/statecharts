@@ -413,7 +413,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	public void testBitwiseExecutionOrder() {
 		// Execution order in C, C++, Java: And -> Xor -> Or
 		executeWithDefaultScope("intVar = 3|4^5&1");
-		assertEquals(7, getIntValue());
+		assertEquals(7L, getIntValue());
 		
 	}
 
