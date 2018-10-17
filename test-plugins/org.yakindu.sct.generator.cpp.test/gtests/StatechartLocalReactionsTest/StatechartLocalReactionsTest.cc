@@ -40,7 +40,9 @@ TEST_F(StatechartLocalReactionsTest, statechartLocalReactionsTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(StatechartLocalReactions::region2_a));
 	
-	while (statechart->getDefaultSCI()->get_myInt()< 10l) {
+	sc_integer cycles = 0l;
+	
+	while (cycles< 10l) {
 		EXPECT_TRUE(statechart->isStateActive(StatechartLocalReactions::region2_a));
 		if (statechart->getDefaultSCI()->get_myInt()%2l== 0l) {
 			EXPECT_TRUE(statechart->isStateActive(StatechartLocalReactions::main_region_S1));
@@ -49,6 +51,8 @@ TEST_F(StatechartLocalReactionsTest, statechartLocalReactionsTest) {
 			EXPECT_TRUE(statechart->isStateActive(StatechartLocalReactions::main_region_S2));
 		}
 		runner->proceed_cycles(1);
+		cycles += 1l;
+		EXPECT_TRUE((statechart->getDefaultSCI()->get_myInt()== cycles));
 	}
 	
 	

@@ -9,6 +9,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	AlwaysOncycleTest.class,
 	AssignmentAsExpressionTest.class,
 	BitExpressionsTest.class,
+	BitwiseExecutionOrderTest.class,
 	BooleanExpressionsTest.class,
 	CastExpressionsTest.class,
 	ChoiceTest.class,
