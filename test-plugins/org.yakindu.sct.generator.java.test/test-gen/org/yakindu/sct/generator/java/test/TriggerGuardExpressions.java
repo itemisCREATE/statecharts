@@ -55,6 +55,7 @@ public class TriggerGuardExpressions {
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 	}
+	
 	@Test
 	public void falseGuard() {
 		statemachine.enter();

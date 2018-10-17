@@ -10,6 +10,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	AlwaysOncycle.class,
 	AssignmentAsExpression.class,
 	BitExpressions.class,
+	BitwiseExecutionOrder.class,
 	BooleanExpressions.class,
 	CastExpressions.class,
 	Choice.class,

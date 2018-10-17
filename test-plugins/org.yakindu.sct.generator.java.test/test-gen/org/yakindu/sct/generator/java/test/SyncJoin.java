@@ -75,6 +75,7 @@ public class SyncJoin {
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 	}
+	
 	@Test
 	public void syncJoin_D2_Waits() {
 		statemachine.enter();
@@ -103,6 +104,7 @@ public class SyncJoin {
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C2));
 		assertTrue(statemachine.isStateActive(State.main_region_B_r2_D2));
 	}
+	
 	@Test
 	public void doubleEntryActionBug() {
 		statemachine.enter();

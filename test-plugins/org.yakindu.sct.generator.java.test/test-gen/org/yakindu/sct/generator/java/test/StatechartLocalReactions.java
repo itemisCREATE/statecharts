@@ -40,7 +40,8 @@ public class StatechartLocalReactions {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_S1));
 		assertTrue(statemachine.isStateActive(State.region2_a));
-		while (statemachine.getMyInt() < 10l) {
+		long cycles = 0l;
+		while (cycles < 10l) {
 			assertTrue(statemachine.isStateActive(State.region2_a));
 			if (statemachine.getMyInt()%2l == 0l) {
 				assertTrue(statemachine.isStateActive(State.main_region_S1));
@@ -49,6 +50,8 @@ public class StatechartLocalReactions {
 				assertTrue(statemachine.isStateActive(State.main_region_S2));
 			}
 			timer.cycleLeap(1);
+			cycles += 1l;
+			assertTrue((statemachine.getMyInt() == cycles));
 		}
 	}
 }
