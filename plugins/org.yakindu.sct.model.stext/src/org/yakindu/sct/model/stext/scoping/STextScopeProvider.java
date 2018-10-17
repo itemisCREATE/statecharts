@@ -35,8 +35,7 @@ import org.yakindu.base.expressions.scoping.ExpressionsScopeProvider;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Type;
-import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
-import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult;
+import org.yakindu.base.types.TypedElement;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -62,8 +61,6 @@ import com.google.inject.Inject;
  */
 public class STextScopeProvider extends ExpressionsScopeProvider {
 
-	@Inject
-	private ITypeSystemInferrer typeInferrer;
 	@Inject
 	private ITypeSystem typeSystem;
 	@Inject
@@ -132,23 +129,24 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 		} else {
 			return getDelegate().getScope(context, reference);
 		}
-
 		IScope scope = IScope.NULLSCOPE;
-		InferenceResult result = typeInferrer.infer(owner);
-		Type ownerType = result != null ? result.getType() : null;
-
 		if (element instanceof Scope) {
 			scope = Scopes.scopeFor(((Scope) element).getDeclarations());
 			return new FilteringScope(scope, predicate);
-		} else if (ownerType != null) {
-			scope = Scopes.scopeFor(typeSystem.getPropertyExtensions(ownerType));
-			scope = Scopes.scopeFor(typeSystem.getOperationExtensions(ownerType), scope);
-		}
-		if (ownerType instanceof EnumerationType) {
-			return addScopeForEnumType((EnumerationType) ownerType, scope, predicate);
-		}
-		if (ownerType instanceof ComplexType) {
-			return addScopeForComplexType((ComplexType) ownerType, scope, predicate);
+		} else if (element instanceof TypedElement) {
+			TypedElement typedElement = (TypedElement) element;
+			Type elementType = typedElement.getType().getOriginType();
+			
+			if (elementType != null) {
+				scope = Scopes.scopeFor(typeSystem.getPropertyExtensions(elementType));
+				scope = Scopes.scopeFor(typeSystem.getOperationExtensions(elementType), scope);
+			}
+			if (elementType instanceof EnumerationType) {
+				return addScopeForEnumType((EnumerationType) elementType, scope, predicate);
+			}
+			if (elementType instanceof ComplexType) {
+				return addScopeForComplexType((ComplexType) elementType, scope, predicate);
+			}
 		}
 		return scope;
 	}
