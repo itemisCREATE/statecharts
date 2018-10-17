@@ -14,8 +14,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.linking.lazy.LazyLinkingResource.CyclicLinkingException;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
@@ -29,6 +31,7 @@ import org.yakindu.base.types.validation.TypeValidator;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -80,16 +83,39 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 		this.acceptor = (acceptor != null ? acceptor : new ListBasedValidationIssueAcceptor());
 		InferenceResult result = inferTypeDispatch(object);
 		typeCache.invalidateAll();
+		inferring.clear();
 		return result;
 	}
+	
+	protected Set<EObject> inferring = Sets.newHashSet();
 
 	protected InferenceResult inferTypeDispatch(EObject object) {
-		if (object == null || object.eIsProxy())
+		if (object == null || object.eIsProxy() || inferring.contains(object))
 			return null;
 		try {
+			inferring.add(object);
 			return typeCache.get(object);
 		} catch (Exception e) {
 			// Ignore invalid expressions and recursions
+		} catch (Error err) {
+			// rethrow CyclicLinkingException to avoid error dialogs popping up
+			CyclicLinkingException cle = unwrapCyclicLinkingException(err);
+			if (cle != null) {
+				throw cle;
+			}
+		} finally {
+			inferring.remove(object);
+		}
+		return null;
+	}
+	
+	protected CyclicLinkingException unwrapCyclicLinkingException(Error err) {
+		Throwable cause = err.getCause();
+		while (cause != null) {
+			if (cause instanceof CyclicLinkingException) {
+				return (CyclicLinkingException) cause;
+			}
+			cause = cause.getCause();
 		}
 		return null;
 	}
