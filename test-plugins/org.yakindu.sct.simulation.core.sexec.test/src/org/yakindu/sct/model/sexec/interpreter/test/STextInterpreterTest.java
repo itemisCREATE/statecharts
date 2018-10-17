@@ -408,6 +408,14 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		executeWithDefaultScope("intVar= 9 | 12");
 		assertEquals(13L, getIntValue());
 	}
+	
+	@Test
+	public void testBitwiseExecutionOrder() {
+		// Execution order in C, C++, Java: And -> Xor -> Or
+		executeWithDefaultScope("intVar = 3|4^5&1");
+		assertEquals(7, getIntValue());
+		
+	}
 
 	@Test
 	public void testIntBitComplement() {
