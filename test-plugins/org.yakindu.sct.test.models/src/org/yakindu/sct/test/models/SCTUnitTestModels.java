@@ -30,6 +30,7 @@ public class SCTUnitTestModels extends AbstractTestModelsUtil {
 	public static final String ALWAYS_ONCYCLE = "AlwaysOncycle.sct";
 	public static final String ASSIGNMENT_AS_EXPRESSION = "AssignmentAsExpression.sct";
 	public static final String BIT_EXPRESSIONS = "BitExpressions.sct";
+	public static final String BITWISE_EXECUTION_ORDER = "BitwiseExecutionOrder.sct";
 	public static final String BOOLEAN_EXPRESSIONS = "BooleanExpressions.sct";
 	public static final String CAST_EXPRESSIONS = "CastExpressions.sct";
 	public static final String CHOICE = "Choice.sct";

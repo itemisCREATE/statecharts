@@ -1,8 +1,8 @@
-GeneratorModel for yakindu::c {
+GeneratorModel for yakindu::cpp {
 	statechart BitwiseExecutionOrder {
 		feature Outlet {
 			targetProject = "gtests"
-			targetFolder = "BitwiseExecutionOrder"
+			targetFolder = "BitExpressionsTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false
