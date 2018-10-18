@@ -86,7 +86,6 @@ public class STextUiModule extends org.yakindu.sct.model.stext.ui.AbstractSTextU
 	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
-		binder.bind(String.class).annotatedWith(Names.named("stylesheet")).toInstance("/HoverStyleSheet.css");
 		binder.bind(String.class).annotatedWith(Names.named("domain.id")).toInstance("org.yakindu.sct.domain");
 		binder.bind(XtextDocument.class).to(TransactionalXtextDocument.class);
 		binder.bind(TaskMarkerCreator.class).to(SCTTaskMarkerCreator.class);

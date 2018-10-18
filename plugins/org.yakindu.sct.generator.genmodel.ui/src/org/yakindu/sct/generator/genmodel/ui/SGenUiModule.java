@@ -44,12 +44,6 @@ public class SGenUiModule extends org.yakindu.sct.generator.genmodel.ui.Abstract
 	public SGenUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}
-	
-	@Override
-	public void configure(Binder binder) {
-		super.configure(binder);
-		binder.bind(String.class).annotatedWith(Names.named("stylesheet")).toInstance("/HoverStyleSheet.css");
-	}
 
 	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
 		return SGenSemanticHighlightingCalculator.class;

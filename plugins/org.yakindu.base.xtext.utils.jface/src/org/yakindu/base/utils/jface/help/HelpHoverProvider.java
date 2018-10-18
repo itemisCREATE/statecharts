@@ -107,9 +107,7 @@ public class HelpHoverProvider extends DefaultEObjectHoverProvider {
 	@Named("org.eclipse.xtext.ui.editor.hover.XtextEditorHover.font")
 	protected String fontSymbolicName = "org.eclipse.jdt.ui.javadocfont"; //$NON-NLS-1$ 
 
-	@Inject
-	@Named("stylesheet")
-	protected String styleSheetFileName;
+	protected String styleSheetFileName = "HoverStyleSheet.css";
 
 	protected HoverControlCreator hoverControlCreator;
 	protected PresenterControlCreator presenterControlCreator;
