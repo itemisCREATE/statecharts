@@ -34,12 +34,21 @@ import org.yakindu.sct.generator.genmodel.ui.highlighting.SGenSemanticHighlighti
 import org.yakindu.sct.generator.genmodel.ui.templates.SGenTemplateProposalProvider;
 import org.yakindu.sct.generator.genmodel.ui.ws.DefaultSCTWorkspaceAccess;
 
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
+
 /**
  * Use this class to register components to be used within the IDE.
  */
 public class SGenUiModule extends org.yakindu.sct.generator.genmodel.ui.AbstractSGenUiModule {
 	public SGenUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
+	}
+	
+	@Override
+	public void configure(Binder binder) {
+		super.configure(binder);
+		binder.bind(String.class).annotatedWith(Names.named("stylesheet")).toInstance("/HoverStyleSheet.css");
 	}
 
 	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
