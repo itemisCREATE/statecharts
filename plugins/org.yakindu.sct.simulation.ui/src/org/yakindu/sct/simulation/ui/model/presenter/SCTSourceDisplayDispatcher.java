@@ -11,6 +11,7 @@
 package org.yakindu.sct.simulation.ui.model.presenter;
 
 import org.eclipse.debug.core.DebugEvent;
+import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.debug.core.Launch;
@@ -57,8 +58,20 @@ public class SCTSourceDisplayDispatcher implements ISourceDisplay, IDebugEventSe
 			activeSourceDisplay = new SCTSourceDisplay(
 					(ISimulationEngine) newTarget.getAdapter(ISimulationEngine.class));
 		}
-		activeSourceDisplay.displaySource(newTarget, page, forceSourceLookup);
-		activeDebugTarget = newTarget;
+		
+		// terminate simulation if project has been deleted
+		try {
+			activeSourceDisplay.displaySource(newTarget, page, forceSourceLookup);
+			activeDebugTarget = newTarget;
+		} catch (RuntimeException e) {
+			if(element instanceof SCTDebugTarget) {
+				try {
+					((SCTDebugTarget) element).terminate();
+				} catch (DebugException e2) {
+					throw e;
+				}
+			}
+		}
 	}
 
 	protected SCTDebugTarget unwrapTarget(Object element) {
