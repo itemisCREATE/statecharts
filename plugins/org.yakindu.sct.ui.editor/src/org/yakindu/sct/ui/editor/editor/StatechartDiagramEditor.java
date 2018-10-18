@@ -18,6 +18,7 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
@@ -449,5 +450,13 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		SpecificationElement contextObject = (SpecificationElement) getContextObject();
 		return super.isDirty() || (definitionSection != null && (definitionSection.getDefinition() != null
 				&& !definitionSection.getDefinition().equals(contextObject.getSpecification())));
+	}
+	
+	@Override
+	public void doSave(IProgressMonitor progressMonitor) {
+		if (definitionSection != null) {
+			definitionSection.validateEmbeddedEditorContext();
+		}
+		super.doSave(progressMonitor);
 	}
 }

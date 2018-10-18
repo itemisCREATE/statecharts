@@ -493,6 +493,12 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 		}
 		nameModificationListener = null;
 	}
+	
+	public void validateEmbeddedEditorContext() {
+		if(embeddedEditor == null || embeddedEditor.getDocument() == null || embeddedEditor.getDocument().getValidationJob() == null) 
+			return;
+		embeddedEditor.getDocument().getValidationJob().schedule();
+	}
 
 	public SashForm getSash() {
 		return this.sash;
