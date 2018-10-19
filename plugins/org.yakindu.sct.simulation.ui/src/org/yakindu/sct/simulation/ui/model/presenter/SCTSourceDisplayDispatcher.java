@@ -60,18 +60,8 @@ public class SCTSourceDisplayDispatcher implements ISourceDisplay, IDebugEventSe
 		}
 		
 		// terminate simulation if project has been deleted
-		try {
-			activeSourceDisplay.displaySource(newTarget, page, forceSourceLookup);
-			activeDebugTarget = newTarget;
-		} catch (RuntimeException e) {
-			if(element instanceof SCTDebugTarget) {
-				try {
-					((SCTDebugTarget) element).terminate();
-				} catch (DebugException e2) {
-					throw e;
-				}
-			}
-		}
+		activeSourceDisplay.displaySource(newTarget, page, forceSourceLookup);
+		activeDebugTarget = newTarget;
 	}
 
 	protected SCTDebugTarget unwrapTarget(Object element) {
