@@ -10,25 +10,15 @@
  */
 package org.yakindu.base.utils.jface.help;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.internal.text.html.BrowserInformationControl;
-import org.eclipse.jface.internal.text.html.HTMLPrinter;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.AbstractReusableInformationControlCreator;
 import org.eclipse.jface.text.DefaultInformationControl;
 import org.eclipse.jface.text.IInformationControl;
 import org.eclipse.jface.text.IInformationControlCreator;
-import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
@@ -37,8 +27,6 @@ import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hover.html.IXtextBrowserInformationControl;
-import org.yakindu.base.xtext.utils.jface.JFaceUtilsActivator;
-
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
@@ -55,27 +43,18 @@ public class HelpHoverProvider extends DefaultEObjectHoverProvider {
 	@Named("org.eclipse.xtext.ui.editor.hover.XtextEditorHover.font")
 	protected String fontSymbolicName = "org.eclipse.jdt.ui.javadocfont";
 
-	protected String styleSheetFileName = "HoverStyleSheet.css";
-
 	protected CustomHoverControlCreator hoverControlCreator;
 	protected PresenterControlCreator presenterControlCreator;
 
+	@Inject(optional = true)
+	protected IStylesheetProvider styleSheetProvider;
+	
 	protected String loadStyleSheet() {
-		URL styleSheetURL = JFaceUtilsActivator.getInstance().getBundle().getEntry(styleSheetFileName);
-
-		if (styleSheetURL != null) {
-			try {
-				InputStreamReader inputStreamReader = new InputStreamReader(styleSheetURL.openStream());
-				BufferedReader reader = new BufferedReader(inputStreamReader);
-				String ret = reader.lines().collect(Collectors.joining("\n"));
-				reader.close();
-				inputStreamReader.close();
-				return ret;
-			} catch (IOException e) {
-				return null;
-			}
+		if (styleSheetProvider == null) {
+			return null;
+		} else {
+			return styleSheetProvider.getCSS();
 		}
-		return null;
 	}
 
 	@Override
