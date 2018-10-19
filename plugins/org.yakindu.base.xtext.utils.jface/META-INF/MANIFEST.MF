@@ -56,3 +56,4 @@ Export-Package: org.yakindu.base.utils.jface.help;
  org.yakindu.base.xtext.utils.jface.viewers.util;uses:="org.eclipse.emf.ecore.resource,org.eclipse.ui,org.eclipse.core.resources"
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
+Bundle-Activator: org.yakindu.base.xtext.utils.jface.JFaceUtilsActivator
