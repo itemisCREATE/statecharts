@@ -46,6 +46,9 @@ public class HelpHoverProvider extends DefaultEObjectHoverProvider {
 	protected CustomHoverControlCreator hoverControlCreator;
 	protected PresenterControlCreator presenterControlCreator;
 
+	@Inject
+	protected OpenInHelpAction openExternalDocumentationAction;
+	
 	@Inject(optional = true)
 	protected IStylesheetProvider styleSheetProvider;
 	
@@ -124,15 +127,20 @@ public class HelpHoverProvider extends DefaultEObjectHoverProvider {
 	public class CustomPresenterControlCreator extends PresenterControlCreator {
 
 		protected void configureControl(IXtextBrowserInformationControl control, ToolBarManager tbm, String font) {
-			OpenInHelpAction openHelpAction = new OpenInHelpAction();
-			openHelpAction.setEnabled(true);
-			tbm.add(openHelpAction);
+			openExternalDocumentationAction.setEnabled(true);
+			tbm.add(openExternalDocumentationAction);
 			tbm.update(true);
 		};
 
 	}
 
-	protected static final class OpenInHelpAction extends Action {
+	public static final class OpenInHelpAction extends Action {
+
+		public static final String CONTEXTID = "openhelp.contextid";
+		
+		@Inject(optional = true)
+		@Named(CONTEXTID)
+		protected String contextId;
 
 		public OpenInHelpAction() {
 			setText("Open user guide");
@@ -143,7 +151,11 @@ public class HelpHoverProvider extends DefaultEObjectHoverProvider {
 		@Override
 		public void run() {
 			final IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench().getHelpSystem();
-			helpSystem.displayHelp("org.yakindu.sct.ui.editor.stext_keyword");
+			if (contextId == null) {
+				helpSystem.displayHelp();
+			} else {
+				helpSystem.displayHelp(contextId);
+			}
 		};
 	}
 }

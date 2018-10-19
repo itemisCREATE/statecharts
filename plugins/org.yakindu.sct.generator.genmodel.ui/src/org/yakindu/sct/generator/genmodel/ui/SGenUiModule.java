@@ -27,6 +27,7 @@ import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.ui.shared.Access;
 import org.yakindu.base.utils.jface.help.CrossRefObjectTextHover;
 import org.yakindu.base.utils.jface.help.HelpHoverProvider;
+import org.yakindu.base.utils.jface.help.HelpHoverProvider.OpenInHelpAction;
 import org.yakindu.sct.generator.core.filesystem.ISCTWorkspaceAccess;
 import org.yakindu.sct.generator.genmodel.ui.help.SGenUserHelpDocumentationProvider;
 import org.yakindu.sct.generator.genmodel.ui.highlighting.SGenHighlightingConfiguration;
@@ -34,12 +35,21 @@ import org.yakindu.sct.generator.genmodel.ui.highlighting.SGenSemanticHighlighti
 import org.yakindu.sct.generator.genmodel.ui.templates.SGenTemplateProposalProvider;
 import org.yakindu.sct.generator.genmodel.ui.ws.DefaultSCTWorkspaceAccess;
 
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
+
 /**
  * Use this class to register components to be used within the IDE.
  */
 public class SGenUiModule extends org.yakindu.sct.generator.genmodel.ui.AbstractSGenUiModule {
 	public SGenUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
+	}
+	
+	@Override
+	public void configure(Binder binder) {
+		super.configure(binder);
+		binder.bind(String.class).annotatedWith(Names.named(OpenInHelpAction.CONTEXTID)).toInstance("org.yakindu.sct.ui.editor.sgen_feature");
 	}
 
 	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
