@@ -34,9 +34,6 @@ import org.yakindu.sct.generator.genmodel.ui.highlighting.SGenSemanticHighlighti
 import org.yakindu.sct.generator.genmodel.ui.templates.SGenTemplateProposalProvider;
 import org.yakindu.sct.generator.genmodel.ui.ws.DefaultSCTWorkspaceAccess;
 
-import com.google.inject.Binder;
-import com.google.inject.name.Names;
-
 /**
  * Use this class to register components to be used within the IDE.
  */
