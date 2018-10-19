@@ -18,7 +18,6 @@
         <link toc="help/user-guide/code_generation_cpp-toc.xml"/>
         <link toc="help/user-guide/code_generation_java-toc.xml"/>
         <link toc="help/user-guide/code_generation_statechart_image-toc.xml"/>
-        <link toc="help/user-guide/code_generation_custom-toc.xml"/>
         <link toc="help/user-guide/generating_code_headless-toc.xml"/>
     </topic>
     <link toc="help/user-guide/sctunit-toc.xml"/>

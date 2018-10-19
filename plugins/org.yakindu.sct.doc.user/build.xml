@@ -195,7 +195,6 @@
                 <include name="user-guide/code_generation_cpp.textile" />
                 <include name="user-guide/code_generation_java.textile" />
                 <include name="user-guide/code_generation_statechart_image.textile" />
-                <include name="user-guide/code_generation_custom.textile" />
                 <include name="user-guide/generating_code_headless.textile" />
                 <include name="user-guide/sctunit.textile" />
                 <include name="user-guide/search_and_navigate.textile" />
@@ -205,7 +204,7 @@
             <!-- Check whether we have all the expected textile source files – no more, no less: -->
             <fail message="Number of textile source file(s) doesn't match.">
                 <condition>
-                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="16" />
+                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="15" />
                 </condition>
             </fail>
 
@@ -382,7 +381,6 @@
                         <file name="user-guide/code_generation_cpp.textile" />
                         <file name="user-guide/code_generation_java.textile" />
                         <file name="user-guide/code_generation_statechart_image.textile" />
-                        <file name="user-guide/code_generation_custom.textile" />
                         <file name="user-guide/generating_code_headless.textile" />
                         <file name="user-guide/sctunit.textile" />
                         <file name="user-guide/search_and_navigate.textile" />
