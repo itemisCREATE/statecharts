@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.editor;
 
@@ -82,22 +82,23 @@ import com.google.inject.Key;
  */
 @SuppressWarnings("restriction")
 public class StatechartDiagramEditor extends DiagramPartitioningEditor implements IGotoMarker {
-
+	
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
-
+	
 	protected static final int INITIAL_PALETTE_SIZE = 175;
-
+	
 	private KeyHandler keyHandler;
 	private DirtyStateListener domainAdapter;
 	private LiveValidationListener validationListener;
 	private IValidationIssueStore issueStore;
-
+	
 	private StatechartDefinitionSection definitionSection;
-
+	
 	public StatechartDiagramEditor() {
 		super(true);
 	}
-
+	
+	@Override
 	public boolean isEditable() {
 		DomainStatus domainStatus = getDomainStatus();
 		if (domainStatus == null || domainStatus.getSeverity() == Severity.ERROR) {
@@ -105,7 +106,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		}
 		return super.isEditable();
 	}
-
+	
 	protected DomainStatus getDomainStatus() {
 		EObject element = getDiagram().getElement();
 		DomainElement domainElement = EcoreUtil2.getContainerOfType(element, DomainElement.class);
@@ -115,7 +116,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		}
 		return null;
 	}
-
+	
 	@Override
 	protected void createBreadcrumbViewer(Composite parent) {
 		DomainStatus domainStatus = getDomainStatus();
@@ -124,13 +125,13 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		}
 		super.createBreadcrumbViewer(parent);
 	}
-
+	
 	protected void createStatusLabel(Composite parent, DomainStatus domainStatus) {
 		DomainStatusLabel label = new DomainStatusLabel(domainStatus, parent);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(label);
 		parent.pack(true);
 	}
-
+	
 	protected Object createOutline(Class<?> type) {
 		Injector editorInjector = getEditorInjector();
 		boolean outlineBindingExists = null != editorInjector.getExistingBinding(Key.get(ISCTOutlineFactory.class));
@@ -141,14 +142,14 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		ISCTOutlineFactory outlineFactory = editorInjector.getInstance(ISCTOutlineFactory.class);
 		return outlineFactory.createOutline(this);
 	}
-
+	
 	@Override
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		super.init(site, input);
 		checkXtextNature();
 		registerValidationListener();
 	}
-
+	
 	protected void registerValidationListener() {
 		issueStore = getIssueStore();
 		validationListener = getEditorInjector().getInstance(LiveValidationListener.class);
@@ -157,7 +158,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		getEditingDomain().addResourceSetListener(validationListener);
 		validationListener.scheduleValidation();
 	}
-
+	
 	protected IValidationIssueStore getIssueStore() {
 		Optional<IEditorPart> editorWithSameResource = getEditorWithSameResource();
 		if (editorWithSameResource.isPresent()) {
@@ -169,16 +170,16 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			return newStore;
 		}
 	}
-
+	
 	protected Optional<IEditorPart> getEditorWithSameResource() {
 		ArrayList<IEditorReference> currentEditors = Lists.newArrayList(
 				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getEditorReferences());
-
+		
 		Optional<IEditorPart> editorWithSameResource = currentEditors.stream().filter(e -> {
 			try {
 				IEditorInput otherInput = e.getEditorInput();
 				IEditorInput thisInput = this.getEditorInput();
-
+				
 				return ID.equals(e.getId()) && !otherInput.equals(thisInput)
 						&& equalsLocationURI(otherInput, thisInput);
 			} catch (PartInitException e1) {
@@ -188,20 +189,20 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		}).map(e -> e.getEditor(false)).findFirst();
 		return editorWithSameResource;
 	}
-
+	
 	protected boolean equalsLocationURI(IEditorInput otherInput, IEditorInput thisInput) {
 		URI otherLocationURI = ((IFileEditorInput) otherInput).getFile().getLocationURI();
 		URI thisLocationURI = ((IFileEditorInput) thisInput).getFile().getLocationURI();
 		// location URI can be null if project was deleted from workspace
 		return otherLocationURI != null && otherLocationURI.equals(thisLocationURI);
 	}
-
+	
 	protected Injector getEditorInjector() {
 		IDomain domain = DomainRegistry.getDomain(getDiagram().getElement());
 		Injector injector = domain.getInjector(IDomain.FEATURE_EDITOR);
 		return injector;
 	}
-
+	
 	protected void checkXtextNature() {
 		IFileEditorInput editorInput = (IFileEditorInput) getEditorInput();
 		IProject project = editorInput.getFile().getProject();
@@ -210,7 +211,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			addNature(project);
 		}
 	}
-
+	
 	public void addNature(IProject project) {
 		try {
 			IProjectDescription description = project.getDescription();
@@ -224,7 +225,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
 	protected TransactionalEditingDomain createEditingDomain() {
 		TransactionalEditingDomain domain = DiagramPartitioningUtil.getSharedDomain();
@@ -232,23 +233,24 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		domain.addResourceSetListener(domainAdapter);
 		return domain;
 	}
-
+	
+	@Override
 	public void gotoMarker(IMarker marker) {
 		MarkerNavigationService.getInstance().gotoMarker(this, marker);
 	}
-
+	
 	@Override
 	protected PreferencesHint getPreferencesHint() {
 		return DiagramActivator.DIAGRAM_PREFERENCES_HINT;
 	}
-
+	
 	@Override
 	protected void createGraphicalViewer(Composite parent) {
 		super.createGraphicalViewer(parent);
 		IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench().getHelpSystem();
 		helpSystem.setHelp(getGraphicalViewer().getControl(), HelpContextIds.SC_EDITOR_GRAPHICAL_VIEWER);
 	}
-
+	
 	@Override
 	protected void configureGraphicalViewer() {
 		super.configureGraphicalViewer();
@@ -256,22 +258,22 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		createContentProposalViewerKeyHandler();
 		super.constructPaletteViewer();
 	}
-
+	
 	// Disable the animated zoom, it is too slow for bigger models
 	protected void disableAnimatedZoom() {
 		AnimatableZoomManager zoomManager = (AnimatableZoomManager) getGraphicalViewer()
 				.getProperty(ZoomManager.class.toString());
 		zoomManager.setZoomAnimationStyle(ZoomManager.ANIMATE_NEVER);
 	}
-
+	
 	protected void createContentProposalViewerKeyHandler() {
 		ContentProposalViewerKeyHandler contentProposalHandler = new ContentProposalViewerKeyHandler(
 				getGraphicalViewer());
 		contentProposalHandler
-				.setParent(new DiagramGraphicalViewerKeyHandler(getGraphicalViewer()).setParent(getKeyHandler()));
+		.setParent(new DiagramGraphicalViewerKeyHandler(getGraphicalViewer()).setParent(getKeyHandler()));
 		getGraphicalViewer().setKeyHandler(contentProposalHandler);
 	}
-
+	
 	/**
 	 * Overrides the GMF key handler to fix key binding for zooming and to remove
 	 * unused key bindings.
@@ -280,33 +282,33 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	protected KeyHandler getKeyHandler() {
 		if (keyHandler == null) {
 			keyHandler = new KeyHandler();
-
+			
 			registerZoomActions();
-
+			
 			// Zoom in - Unix - Numpad plus
 			getKeyHandler().put(KeyStroke.getPressed('+', SWT.KEYPAD_ADD, SWT.MOD1),
 					getActionRegistry().getAction(GEFActionConstants.ZOOM_IN));
-
+			
 			// Zoom in - Unix - Numpad minus
 			getKeyHandler().put(KeyStroke.getPressed('-', SWT.KEYPAD_SUBTRACT, SWT.MOD1),
 					getActionRegistry().getAction(GEFActionConstants.ZOOM_OUT));
-
+			
 			// Zoom out - all OS - German and English keyboard layout
 			getKeyHandler().put(KeyStroke.getPressed('-', 0x2d, SWT.MOD1),
 					getActionRegistry().getAction(GEFActionConstants.ZOOM_OUT));
-
+			
 			// Zoom in - all OS - English keyboard layout
 			getKeyHandler().put(KeyStroke.getPressed('=', 0x3d, SWT.MOD1),
 					getActionRegistry().getAction(GEFActionConstants.ZOOM_IN));
-
+			
 			// Zoom in - Unix - German layout ([CTRL++] propagates char '+')
 			getKeyHandler().put(KeyStroke.getPressed('+', 0x2b, SWT.MOD1),
 					getActionRegistry().getAction(GEFActionConstants.ZOOM_IN));
-
+			
 			// Zoom in - Windows - German layout ([CTRL++] propagates char 0x1d)
 			getKeyHandler().put(KeyStroke.getPressed((char) 0x1d, 0x2b, SWT.MOD1),
 					getActionRegistry().getAction(GEFActionConstants.ZOOM_IN));
-
+			
 			// Zoom original - all OS
 			getKeyHandler().put(/* CTRL + '0' */
 					KeyStroke.getPressed('0', 0x30, SWT.MOD1), new Action() {
@@ -315,7 +317,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 							resetZoom();
 						}
 					});
-
+			
 			// Zoom original - all OS - Numpad 0
 			getKeyHandler().put(/* CTRL + '0' */
 					KeyStroke.getPressed('0', SWT.KEYPAD_0, SWT.MOD1), new Action() {
@@ -324,7 +326,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 							resetZoom();
 						}
 					});
-
+			
 			// Test Error - for AERI testing only
 			// DOWN: stateMask=0x50000 CTRL ALT, keyCode=0x6c 'l', character=0xc
 			// ' '
@@ -332,41 +334,41 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 				@Override
 				public void run() {
 					DiagramActivator.getDefault().getLog()
-							.log(new Status(IStatus.ERROR, DiagramActivator.PLUGIN_ID, "AERI Testing error"));
+					.log(new Status(IStatus.ERROR, DiagramActivator.PLUGIN_ID, "AERI Testing error"));
 				}
 			});
-
+			
 		}
 		return keyHandler;
 	}
-
+	
 	protected void resetZoom() {
 		ZoomManager manager = (ZoomManager) getGraphicalViewer().getProperty(ZoomManager.class.toString());
 		if (manager != null)
 			manager.setZoom(1.0d);
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	protected void registerZoomActions() {
 		IAction action;
 		action = new ZoomInAction(getZoomManager());
 		action.setText(""); //$NON-NLS-1$ // no text necessary since this
-							// is not a visible action
+		// is not a visible action
 		getActionRegistry().registerAction(action);
 		getSelectionActions().add(action.getId());
-
+		
 		action = new ZoomOutAction(getZoomManager());
 		action.setText(""); //$NON-NLS-1$ // no text necessary since this
-							// is not a visible action
+		// is not a visible action
 		getActionRegistry().registerAction(action);
 		getSelectionActions().add(action.getId());
 	}
-
+	
 	@Override
 	public String getContributorId() {
 		return ID;
 	}
-
+	
 	@Override
 	public void dispose() {
 		if (definitionSection != null && !definitionSection.isDisposed())
@@ -383,12 +385,12 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			domainAdapter.dispose();
 		super.dispose();
 	}
-
+	
 	@Override
 	protected int getInitialPaletteSize() {
 		return INITIAL_PALETTE_SIZE;
 	}
-
+	
 	@Override
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class type) {
 		if (IContentOutlinePage.class.equals(type)) {
@@ -406,31 +408,31 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		}
 		return super.getAdapter(type);
 	}
-
+	
 	@Override
 	protected void createTextEditor(Composite parent) {
 		if (isStatechart()) {
 			definitionSection = new StatechartDefinitionSection(parent, SWT.BORDER, this);
 		}
 	}
-
+	
 	@Override
 	public void createPartControl(Composite parent) {
 		super.createPartControl(parent);
 		toggleDefinitionSection();
 	}
-
+	
 	public void toggleDefinitionSection() {
 		if (definitionSection != null && !definitionSection.isDisposed() && isStatechart()) {
 			definitionSection.updateStyle();
 			definitionSection.restoreSashWidths();
 		}
 	}
-
+	
 	protected boolean isStatechart() {
 		return getContextObject() instanceof Statechart;
 	}
-
+	
 	@Override
 	public EObject getContextObject() {
 		if(getDiagram() == null || getDiagram().getElement() == null)
@@ -438,11 +440,11 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		EObject element = getDiagram().getElement();
 		return element;
 	}
-
+	
 	protected TransactionalEditingDomain getTransactionalEditingDomain() {
 		return TransactionUtil.getEditingDomain(getDiagram());
 	}
-
+	
 	@Override
 	public boolean isDirty() {
 		if (getDiagram() == null || !(getContextObject() instanceof SpecificationElement))
@@ -451,7 +453,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		return super.isDirty() || (definitionSection != null && (definitionSection.getDefinition() != null
 				&& !definitionSection.getDefinition().equals(contextObject.getSpecification())));
 	}
-	
+
 	@Override
 	public void doSave(IProgressMonitor progressMonitor) {
 		if (definitionSection != null) {
