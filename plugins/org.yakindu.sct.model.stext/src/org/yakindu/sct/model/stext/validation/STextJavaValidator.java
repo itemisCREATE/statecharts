@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.EcoreUtil2;
@@ -40,7 +41,9 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ComposedChecks;
@@ -83,6 +86,7 @@ import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
 import org.yakindu.sct.model.stext.extensions.STextExtensions;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
+import org.yakindu.sct.model.stext.scoping.ImportedResourceCache;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
@@ -145,6 +149,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	private IPackageImport2URIMapper mapper;
 	@Inject
 	protected STextExtensions utils;
+	@Inject
+	private ImportedResourceCache resourceDescriptionCache;
 
 	@Check(CheckType.FAST)
 	public void checkExpression(VariableDefinition expression) {
@@ -222,7 +228,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				if(deadTransition == null) {
 					deadTransition = transition;
 				}
-			} 
+			}
 			// check always/oncycle trigger
 			else if (trigger instanceof ReactionTrigger) {
 				ReactionTrigger reactTrigger = (ReactionTrigger) trigger;
@@ -297,7 +303,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	@Check(CheckType.FAST)
 	public void checkOnlyOneDefaultTransitionUsed(Choice choice){
 		Iterator<Transition> iterator = choice.getOutgoingTransitions().iterator();
-		List<Transition> defaultTransitions = new ArrayList<Transition>();
+		List<Transition> defaultTransitions = new ArrayList<>();
 		while(iterator.hasNext()) {
 			Transition transition = iterator.next();
 			Trigger trigger = transition.getTrigger();
@@ -860,16 +866,16 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				&& !(call.getFeature() instanceof Operation)) {
 			if (call.getFeature() instanceof Property) {
 				error("Access to property '" + nameProvider.getFullyQualifiedName(call.getFeature())
-						+ "' has no effect.", call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE,
-						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
+				+ "' has no effect.", call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE,
+				INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			} else if (call.getFeature() instanceof Event) {
 				error("Access to event '" + nameProvider.getFullyQualifiedName(call.getFeature()) + "' has no effect.",
 						call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE, INSIGNIFICANT_INDEX,
 						FEATURE_CALL_HAS_NO_EFFECT);
 			} else {
 				error("Access to feature '" + nameProvider.getFullyQualifiedName(call.getFeature())
-						+ "' has no effect.", call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE,
-						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
+				+ "' has no effect.", call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE,
+				INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			}
 		}
 	}
@@ -966,6 +972,23 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				error(String.format(IMPORT_NOT_RESOLVED_MSG, packageImport), scope,
 						StextPackage.Literals.IMPORT_SCOPE__IMPORTS, imports.indexOf(packageImport));
 			}
+			else {
+				IResourceDescription iResourceDescription = resourceDescriptionCache.get(pkImport.get().getUri());
+				if (iResourceDescription instanceof DefaultResourceDescription) {
+					Resource resource = ((DefaultResourceDescription) iResourceDescription).getResource();
+					if (!(resource.getWarnings().isEmpty() && resource.getErrors().isEmpty())) {
+						StringBuilder b = new StringBuilder("The resource contains errors.\r\n");
+						for (Diagnostic e : resource.getErrors()) {
+							b.append("\nError: ").append(e.getMessage());
+						}
+						for (Diagnostic e : resource.getWarnings()) {
+							b.append("\nWarning: ").append(e.getMessage());
+						}
+						error(b.toString(), scope, StextPackage.Literals.IMPORT_SCOPE__IMPORTS,
+								imports.indexOf(packageImport));
+					}
+				}
+			}
 		}
 	}
 
@@ -973,19 +996,19 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		if (!(refExp.getReference() instanceof Operation)) {
 			if (refExp.getReference() instanceof Property) {
 				error("Access to property '" + nameProvider.getFullyQualifiedName(refExp.getReference())
-						+ "' has no effect.", refExp,
-						ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
-						FEATURE_CALL_HAS_NO_EFFECT);
+				+ "' has no effect.", refExp,
+				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
+				FEATURE_CALL_HAS_NO_EFFECT);
 			} else if (refExp.getReference() instanceof Event) {
 				error("Access to event '" + nameProvider.getFullyQualifiedName(refExp.getReference())
-						+ "' has no effect.", refExp,
-						ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
-						FEATURE_CALL_HAS_NO_EFFECT);
+				+ "' has no effect.", refExp,
+				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
+				FEATURE_CALL_HAS_NO_EFFECT);
 			} else {
 				error("Access to feature '" + nameProvider.getFullyQualifiedName(refExp.getReference())
-						+ "' has no effect.", refExp,
-						ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
-						FEATURE_CALL_HAS_NO_EFFECT);
+				+ "' has no effect.", refExp,
+				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
+				FEATURE_CALL_HAS_NO_EFFECT);
 			}
 		}
 	}
@@ -993,7 +1016,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	protected boolean isDefault(Trigger trigger) {
 		return trigger == null || trigger instanceof DefaultTrigger
 				|| ((trigger instanceof ReactionTrigger) && ((ReactionTrigger) trigger).getTriggers().size() == 0
-						&& ((ReactionTrigger) trigger).getGuard() == null);
+				&& ((ReactionTrigger) trigger).getGuard() == null);
 	}
 
 	@Override
