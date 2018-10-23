@@ -15,6 +15,7 @@ import com.google.inject.Singleton
 import org.yakindu.sct.generator.c.extensions.EventNaming
 import org.yakindu.sct.generator.c.submodules.InternalFunctionsGenerator
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.generator.c.CGeneratorConstants
 
 /**
  * @author rbeckmann
@@ -29,18 +30,18 @@ class EventDrivenInternalFunctionsGenerator extends InternalFunctionsGenerator {
 		«super.functionPrototypes(it)»
 		«IF hasLocalEvents»
 		static void «eventQueueInitFunction»(«eventQueueTypeName» * eq);
-		static sc_integer «eventQueueSizeFunction»(«eventQueueTypeName» * eq);
+		static «CGeneratorConstants.INT_TYPE» «eventQueueSizeFunction»(«eventQueueTypeName» * eq);
 		static «internalEventStructTypeName» «eventQueuePopFunction»(«eventQueueTypeName» * eq);
-		static sc_boolean «eventQueuePushFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» ev);
+		static «CGeneratorConstants.BOOL_TYPE» «eventQueuePushFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» ev);
 
-		static void «functionPrefix»dispatch_event(«scHandleDecl», const «internalEventStructTypeName» * event);
+		static void «dispatchEvent»(«scHandleDecl», const «internalEventStructTypeName» * event);
 
 		static void «eventInitFunction»(«internalEventStructTypeName» * ev, «eventEnumName» name);
-		static void «functionPrefix»add_event_to_queue(«scHandleDecl», «eventEnumName» name);
+		static void «addToQueue»(«scHandleDecl», «eventEnumName» name);
 		«IF hasLocalEventsWithValue»
 
 		static void «valueEventInitFunction»(«internalEventStructTypeName» * ev, «eventEnumName» name, void * value);
-		static void «functionPrefix»add_value_event_to_queue(«scHandleDecl», «eventEnumName» name, void * value);
+		static void «addToQueueValue»(«scHandleDecl», «eventEnumName» name, void * value);
 		«ENDIF»
 		«ENDIF»
 		'''

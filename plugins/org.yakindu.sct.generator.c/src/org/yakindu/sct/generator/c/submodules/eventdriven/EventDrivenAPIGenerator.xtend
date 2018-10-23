@@ -16,6 +16,10 @@ import org.yakindu.sct.generator.c.extensions.EventNaming
 import org.yakindu.sct.generator.c.submodules.APIGenerator
 import org.yakindu.sct.model.sexec.ExecutionFlow
 
+import static org.yakindu.sct.generator.c.CGeneratorConstants.INTPTR_TYPE
+import static org.yakindu.sct.generator.c.CGeneratorConstants.BOOL_TYPE
+import static org.yakindu.sct.generator.c.CGeneratorConstants.TRUE
+
 /**
  * @author rbeckmann
  *
@@ -28,7 +32,7 @@ class EventDrivenAPIGenerator extends APIGenerator {
 		'''
 		«super.initFunctionBody(it)»
 		«IF hasLocalEvents»
-		«eventQueueInitFunction»(&(handle->internal_event_queue));
+		«eventQueueInitFunction»(&(«scHandle»->«internalQueue»));
 		«ENDIF»
 		'''
 	}
@@ -45,10 +49,10 @@ class EventDrivenAPIGenerator extends APIGenerator {
 					«internalEventStructTypeName» currentEvent = «eventQueuePopFunction»(&(«scHandle»->internal_event_queue));
 					
 					do {
-						«functionPrefix»dispatch_event(«scHandle», &currentEvent);
+						«dispatchEvent»(«scHandle», &currentEvent);
 						«runCycleForLoop»
 						«clearInEventsFctID»(«scHandle»);
-					} while((currentEvent = «eventQueuePopFunction»(&(«scHandle»->internal_event_queue))).name != «invalidEventEnumName»);
+					} while((currentEvent = «eventQueuePopFunction»(&(«scHandle»->«internalQueue»))).name != «invalidEventEnumName»);
 					
 				}
 			'''
@@ -59,13 +63,13 @@ class EventDrivenAPIGenerator extends APIGenerator {
 		«IF timed»
 			«raiseTimeEventSignature»
 			{
-				if ( ((sc_intptr_t)evid) >= ((sc_intptr_t)&(«scHandle»->timeEvents))
-					&&  ((sc_intptr_t)evid) < ((sc_intptr_t)&(«scHandle»->timeEvents)) + sizeof(«timeEventScope.type»))
-					{
-					*(sc_boolean*)evid = bool_true;
+				if ( ((«INTPTR_TYPE»)evid) >= ((«INTPTR_TYPE»)&(«scHandle»->timeEvents))
+					&&  ((«INTPTR_TYPE»)evid) < ((«INTPTR_TYPE»)&(«scHandle»->timeEvents)) + sizeof(«timeEventScope.type»))
+				{
+					*(«BOOL_TYPE»*)evid = «TRUE»;
 					
 					«runCycleFctID»(«scHandle»);
-				}		
+				}
 			}
 		«ENDIF»
 		'''

@@ -23,6 +23,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 
 /**
  * @author rbeckmann
@@ -49,9 +50,9 @@ class StatechartTypes {
 	
 	def statemachineStructContent(ExecutionFlow it) {
 		'''
-		«statesEnumType» stateConfVector[«type.toUpperCase»_MAX_ORTHOGONAL_STATES];
-		«IF hasHistory»«statesEnumType» historyVector[«type.toUpperCase»_MAX_HISTORY_STATES];«ENDIF»
-		sc_ushort stateConfVectorPosition; 
+		«statesEnumType» «STATEVECTOR»[«maxOrthogonalStates»];
+		«IF hasHistory»«statesEnumType» «HISTORYVECTOR»[«maxHistoryStates»];«ENDIF»
+		«USHORT_TYPE» «STATEVECTOR_POS»; 
 		
 		«FOR iScope : scopes.filter[!typeRelevantDeclarations.empty]»
 			«iScope.type» «iScope.instance»;

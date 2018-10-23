@@ -81,4 +81,24 @@ class EventNaming {
 	def bufferSize(ExecutionFlow it) {
 		'''«name»_eventqueue_buffersize'''.toString.toUpperCase
 	}
+	
+	def invalidEvent() {
+		"SC_INVALID_EVENT_VALUE"
+	}
+	
+	def internalQueue() {
+		"internal_event_queue"
+	}
+	
+	def dispatchEvent(ExecutionFlow it) {
+		'''«functionPrefix»dispatch_event'''
+	}
+	
+	def addToQueue(ExecutionFlow it) {
+		'''«functionPrefix»add_event_to_queue'''
+	}
+	
+	def addToQueueValue(ExecutionFlow it) {
+		'''«functionPrefix»add_value_event_to_queue'''
+	}
 }
