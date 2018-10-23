@@ -17,6 +17,9 @@ import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
+
 class Types implements IContentTemplate {
 
 	@Inject extension CppNaming
@@ -32,21 +35,21 @@ class Types implements IContentTemplate {
 		// #include <cstdint>
 		#include <stdint.h>
 		
-		#ifndef sc_string
-		#define sc_string      char*
+		#ifndef «STRING_TYPE»
+		#define «STRING_TYPE»      char*
 		#endif
 		
-		typedef int_fast16_t   sc_short;
-		typedef uint_fast16_t  sc_ushort;
-		typedef int32_t        sc_integer;
-		typedef int16_t		   sc_errorCode;
-		typedef double         sc_real;
-		typedef bool           sc_boolean;
+		typedef int_fast16_t   «SHORT_TYPE»;
+		typedef uint_fast16_t  «USHORT_TYPE»;
+		typedef int32_t        «INT_TYPE»;
+		typedef int16_t		   «ERROR_TYPE»;
+		typedef double         «REAL_TYPE»;
+		typedef bool           «BOOL_TYPE»;
 		
-		typedef intptr_t       sc_eventid;
+		typedef intptr_t       «EVENT_TYPE»;
 		
-		#ifndef «CppNaming::NULL_STRING»
-		#define «CppNaming::NULL_STRING» 0
+		#ifndef «NULL_STRING»
+		#define «NULL_STRING» 0
 		#endif
 		
 		/* Error codes and mask can be used to check unimplemented operation callbacks. They can be activated in the API feature within the .sgen file.*/
