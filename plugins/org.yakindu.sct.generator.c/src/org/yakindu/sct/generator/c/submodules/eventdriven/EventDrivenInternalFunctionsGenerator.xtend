@@ -34,14 +34,14 @@ class EventDrivenInternalFunctionsGenerator extends InternalFunctionsGenerator {
 		static «internalEventStructTypeName» «eventQueuePopFunction»(«eventQueueTypeName» * eq);
 		static «CGeneratorConstants.BOOL_TYPE» «eventQueuePushFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» ev);
 
-		static void «dispatchEvent»(«scHandleDecl», const «internalEventStructTypeName» * event);
+		static void «dispatchEventFctID»(«scHandleDecl», const «internalEventStructTypeName» * event);
 
 		static void «eventInitFunction»(«internalEventStructTypeName» * ev, «eventEnumName» name);
-		static void «addToQueue»(«scHandleDecl», «eventEnumName» name);
+		static void «addToQueueFctID»(«scHandleDecl», «eventEnumName» name);
 		«IF hasLocalEventsWithValue»
 
 		static void «valueEventInitFunction»(«internalEventStructTypeName» * ev, «eventEnumName» name, void * value);
-		static void «addToQueueValue»(«scHandleDecl», «eventEnumName» name, void * value);
+		static void «addToQueueValueFctID»(«scHandleDecl», «eventEnumName» name, void * value);
 		«ENDIF»
 		«ENDIF»
 		'''

@@ -44,7 +44,7 @@ class EventDrivenExpressionCode extends CppExpressionsGenerator {
 	}
 	
 	def CharSequence raiseInternalEvent(EventRaisingExpression it) {
-		'''internalEventQueue.push_back(«eventObjectPointer»)'''
+		'''«internalQueue».push_back(«eventObjectPointer»)'''
 	}
 	
 	def eventObjectPointer(EventRaisingExpression it) {

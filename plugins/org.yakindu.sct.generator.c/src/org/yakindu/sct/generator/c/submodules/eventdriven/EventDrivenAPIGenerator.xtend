@@ -49,7 +49,7 @@ class EventDrivenAPIGenerator extends APIGenerator {
 					«internalEventStructTypeName» currentEvent = «eventQueuePopFunction»(&(«scHandle»->internal_event_queue));
 					
 					do {
-						«dispatchEvent»(«scHandle», &currentEvent);
+						«dispatchEventFctID»(«scHandle», &currentEvent);
 						«runCycleForLoop»
 						«clearInEventsFctID»(«scHandle»);
 					} while((currentEvent = «eventQueuePopFunction»(&(«scHandle»->«internalQueue»))).name != «invalidEventEnumName»);

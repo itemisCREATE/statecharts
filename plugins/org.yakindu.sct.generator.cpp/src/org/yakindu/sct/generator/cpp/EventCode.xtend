@@ -17,6 +17,8 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+
 /**
  * @author René Beckmann
  */
@@ -77,7 +79,7 @@ class EventCode {
 	
 	protected def CharSequence generateDefaultInterfaceEventRaised(ExecutionFlow it, EventDefinition event, StatechartScope scope)
 		'''
-			sc_boolean «module»::«event.asRaised»() const
+			«BOOL_TYPE» «module»::«event.asRaised»() const
 			{
 				return «scope.instance».«event.asRaised»();
 			}
@@ -86,7 +88,7 @@ class EventCode {
 	
 	protected def CharSequence generateInterfaceEventRaised(ExecutionFlow it, EventDefinition event, StatechartScope scope)
 		'''
-			sc_boolean «module»::«scope.interfaceName»::«event.asRaised»() const
+			«BOOL_TYPE» «module»::«scope.interfaceName»::«event.asRaised»() const
 			{
 				return «event.localAccess»;
 			}

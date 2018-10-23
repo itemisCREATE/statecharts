@@ -50,7 +50,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 	'''
 	
 	def dispatchEventFunction(ExecutionFlow it) '''
-		static void «dispatchEvent»(«scHandleDecl», const «internalEventStructTypeName» * event) {
+		static void «dispatchEventFctID»(«scHandleDecl», const «internalEventStructTypeName» * event) {
 			switch(event->name) {
 				«FOR s : scopes.filter(StatechartScope)»
 					«FOR e : s.declarations.filter(EventDefinition).filter[direction == Direction::LOCAL]»
@@ -71,7 +71,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 	'''
 	
 	def addToEventQueueFunction(ExecutionFlow it) '''
-	static void «addToQueue»(«scHandleDecl», «eventEnumName» name)
+	static void «addToQueueFctID»(«scHandleDecl», «eventEnumName» name)
 	{
 		«internalEventStructTypeName» event;
 		«eventInitFunction»(&event, name);
@@ -81,7 +81,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 	
 	def addToEventQueueValueFunction(ExecutionFlow it) '''
 	«IF hasLocalEventsWithValue»
-	static void «addToQueueValue»(«scHandleDecl», «eventEnumName» name, void * value)
+	static void «addToQueueValueFctID»(«scHandleDecl», «eventEnumName» name, void * value)
 	{
 		«internalEventStructTypeName» event;
 		«valueEventInitFunction»(&event, name, value);

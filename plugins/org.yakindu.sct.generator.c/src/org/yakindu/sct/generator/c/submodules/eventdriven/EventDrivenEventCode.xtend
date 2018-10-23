@@ -41,9 +41,9 @@ class EventDrivenEventCode extends EventCode {
 			«event.definition.event.access» = «TRUE»«ELSE»
 			«IF value !== null»
 			«event.definition.event.typeSpecifier.targetLanguageName» «valueVarName» = «exp.code(value)»;
-			«flow.addToQueueValue»(«scHandle», «event.definition.event.eventEnumMemberName», &«valueVarName»)
+			«flow.addToQueueValueFctID»(«scHandle», «event.definition.event.eventEnumMemberName», &«valueVarName»)
 			«ELSE»
-			«flow.addToQueue»(«scHandle», «event.definition.event.eventEnumMemberName»)«ENDIF»«ENDIF»'''
+			«flow.addToQueueFctID»(«scHandle», «event.definition.event.eventEnumMemberName»)«ENDIF»«ENDIF»'''
 	}
 	
 	override interfaceIncomingEventRaiserBody(ExecutionFlow it, EventDefinition event) '''
