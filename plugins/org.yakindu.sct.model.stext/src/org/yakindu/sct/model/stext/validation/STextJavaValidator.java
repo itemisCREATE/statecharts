@@ -963,7 +963,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	}
 
 	@Check
-	public void checkImportExists(ImportScope scope) {
+	public void checkImportsValid(ImportScope scope) {
 		EList<String> imports = scope.getImports();
 		for (String packageImport : imports) {
 			Optional<PackageImport> pkImport = mapper.findPackageImport(scope.eResource(), packageImport);
@@ -977,7 +977,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				if (iResourceDescription instanceof DefaultResourceDescription) {
 					Resource resource = ((DefaultResourceDescription) iResourceDescription).getResource();
 					if (!(resource.getWarnings().isEmpty() && resource.getErrors().isEmpty())) {
-						StringBuilder b = new StringBuilder("The resource contains errors.\r\n");
+						StringBuilder b = new StringBuilder("The resource contains errors.\n");
 						for (Diagnostic e : resource.getErrors()) {
 							b.append("\nError: ").append(e.getMessage());
 						}
