@@ -56,7 +56,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 					«FOR e : s.declarations.filter(EventDefinition).filter[direction == Direction::LOCAL]»
 					case «e.eventEnumMemberName»:
 					{
-						«e.access» = «TRUE»
+						«e.access» = «TRUE»;
 						«IF e.hasValue»
 						«e.valueAccess» = event->value.«e.eventValueUnionMemberName»;
 						«ENDIF»
