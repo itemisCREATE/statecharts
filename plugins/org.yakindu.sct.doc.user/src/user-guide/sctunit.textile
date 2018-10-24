@@ -1036,7 +1036,7 @@ In order to use the SCTUnit code generators effectively, you should already be f
 
 h3(#sctunit_creating_a_generation_model). Creating a generation model
 
-The first step is to create a _generation model (SGen)_ for the SCTUnit test, similar to explanation in section "&quot;Generating state machine code&quot;":../user-guide/code_generation_custom.html#setting_up_a_code_generator_project.
+The first step is to create a _generation model (SGen)_ for the SCTUnit test, similar to explanation in section "&quot;Generating state machine code&quot;":../user-guide/code_generation_intro.html#setting_up_a_code_generator_project.
 
 # In the main menu, select _File → New → Other…_. The _New_ dialog opens.
 # In the _New_ dialog, select _YAKINDU SCT → Code generator model_.
