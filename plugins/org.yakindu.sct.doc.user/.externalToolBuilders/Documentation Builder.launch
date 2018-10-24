@@ -10,7 +10,7 @@
 <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.eclipse.ant.ui.AntClasspathProvider"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.yakindu.sct.doc.user"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.ant.ui.AntClasspathProvider"/>
-<booleanAttribute key="org.eclipse.ui.externaltools.ATTR_BUILDER_ENABLED" value="true"/>
+<booleanAttribute key="org.eclipse.ui.externaltools.ATTR_BUILDER_ENABLED" value="false"/>
 <stringAttribute key="org.eclipse.ui.externaltools.ATTR_BUILD_SCOPE" value="${working_set:&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;resources&gt;&#10;&lt;item path=&quot;/org.yakindu.sct.doc.user/css&quot; type=&quot;2&quot;/&gt;&#10;&lt;item path=&quot;/org.yakindu.sct.doc.user/src/testcases&quot; type=&quot;2&quot;/&gt;&#10;&lt;item path=&quot;/org.yakindu.sct.doc.user/src/tutorials&quot; type=&quot;2&quot;/&gt;&#10;&lt;item path=&quot;/org.yakindu.sct.doc.user/src/user-guide&quot; type=&quot;2&quot;/&gt;&#10;&lt;item path=&quot;/org.yakindu.sct.doc.user/src/website&quot; type=&quot;2&quot;/&gt;&#10;&lt;/resources&gt;}"/>
 <stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="${workspace_loc:/org.yakindu.sct.doc.user/build.xml}"/>
 <stringAttribute key="org.eclipse.ui.externaltools.ATTR_RUN_BUILD_KINDS" value="incremental,auto,clean"/>
