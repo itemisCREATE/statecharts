@@ -23,6 +23,9 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.generator.c.ISourceFragment
 
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.sct.generator.c.CGeneratorConstants
+
 /**
  * @author René Beckmann
  */
@@ -47,15 +50,15 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 	'''
 	
 	def dispatchEventFunction(ExecutionFlow it) '''
-		static void «functionPrefix»dispatch_event(«scHandleDecl», const «internalEventStructTypeName» * event) {
+		static void «dispatchEventFctID»(«scHandleDecl», const «internalEventStructTypeName» * event) {
 			switch(event->name) {
 				«FOR s : scopes.filter(StatechartScope)»
 					«FOR e : s.declarations.filter(EventDefinition).filter[direction == Direction::LOCAL]»
 					case «e.eventEnumMemberName»:
 					{
-						«e.access» = bool_true;
+						«e.access» = «TRUE»;
 						«IF e.hasValue»
-						«e.valueAccess» = event->value.«e.eventEnumMemberName»_value;
+						«e.valueAccess» = event->value.«e.eventValueUnionMemberName»;
 						«ENDIF»
 						break;
 					}
@@ -68,21 +71,21 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 	'''
 	
 	def addToEventQueueFunction(ExecutionFlow it) '''
-	static void «functionPrefix»add_event_to_queue(«scHandleDecl», «eventEnumName» name)
+	static void «addToQueueFctID»(«scHandleDecl», «eventEnumName» name)
 	{
 		«internalEventStructTypeName» event;
 		«eventInitFunction»(&event, name);
-		«eventQueuePushFunction»(&(handle->internal_event_queue), event);
+		«eventQueuePushFunction»(&(handle->«internalQueue»), event);
 	}
 	'''
 	
 	def addToEventQueueValueFunction(ExecutionFlow it) '''
 	«IF hasLocalEventsWithValue»
-	static void «functionPrefix»add_value_event_to_queue(«scHandleDecl», «eventEnumName» name, void * value) 
+	static void «addToQueueValueFctID»(«scHandleDecl», «eventEnumName» name, void * value)
 	{
 		«internalEventStructTypeName» event;
 		«valueEventInitFunction»(&event, name, value);
-		«eventQueuePushFunction»(&(handle->internal_event_queue), event);
+		«eventQueuePushFunction»(&(handle->«internalQueue»), event);
 	}
 	«ENDIF»
 	'''
@@ -93,7 +96,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 			{
 				ev->name = name;
 				«IF hasLocalEventsWithValue»
-					ev->has_value = false;
+					ev->has_value = «CGeneratorConstants.FALSE»;
 				«ENDIF»
 			}
 			«IF hasLocalEventsWithValue»
@@ -101,7 +104,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 				static void «valueEventInitFunction»(«internalEventStructTypeName» * ev, «eventEnumName» name, void * value)
 				{
 					ev->name = name;
-					ev->has_value = true;
+					ev->has_value = «CGeneratorConstants.TRUE»;
 					
 					switch(name)
 					{
@@ -127,7 +130,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 				eq->size = 0;
 			}
 			
-			static sc_integer «eventQueueSizeFunction»(«eventQueueTypeName» * eq)
+			static «INT_TYPE» «eventQueueSizeFunction»(«eventQueueTypeName» * eq)
 			{
 				return eq->size;
 			}
@@ -152,10 +155,10 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 				return event;
 			}
 			
-			static sc_boolean «eventQueuePushFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» ev)
+			static «BOOL_TYPE» «eventQueuePushFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» ev)
 			{
 				if(«eventQueueSizeFunction»(eq) == «bufferSize») {
-					return false;
+					return «CGeneratorConstants.FALSE»;
 				}
 				else {
 					eq->events[eq->push_index] = ev;
@@ -168,7 +171,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 					}
 					eq->size++;
 					
-					return true;
+					return «CGeneratorConstants.TRUE»;
 				}
 			}
 		'''

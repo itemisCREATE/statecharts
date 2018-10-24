@@ -42,7 +42,7 @@ class EventCode {
 		«IF event.hasValue»
 		«event.valueAccess» = value;
 		«ENDIF»
-		«event.access» = bool_true;
+		«event.access» = «CGeneratorConstants.TRUE»;
 	'''
 	
 	def interfaceOutgoingEventGetter(ExecutionFlow it, EventDefinition event) '''
@@ -67,7 +67,7 @@ class EventCode {
 		
 	def eventRaiserSignature(ExecutionFlow it, EventDefinition event) '''void «event.asRaiser»(«scHandleDecl»«event.valueParams»)'''
 	
-	def eventGetterSignature(ExecutionFlow it, EventDefinition event) '''sc_boolean «event.asRaised»(const «scHandleDecl»)'''
+	def eventGetterSignature(ExecutionFlow it, EventDefinition event) '''«CGeneratorConstants.BOOL_TYPE» «event.asRaised»(const «scHandleDecl»)'''
 	
 	def eventValueGetterSignature(ExecutionFlow it, EventDefinition event) '''«event.typeSpecifier.targetLanguageName» «event.asGetter»(const «scHandleDecl»)'''
 }

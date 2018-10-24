@@ -16,6 +16,9 @@ import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
+
 class StatemachineInterface implements IContentTemplate {
 	
 	@Inject
@@ -41,32 +44,32 @@ class StatemachineInterface implements IContentTemplate {
 				
 				/*! Initializes the state machine. Used to initialize internal variables etc.
 				*/
-				virtual «IF entry.checkUnimplementedOCBs»sc_errorCode«ELSE»void«ENDIF» init() = 0;
+				virtual «IF entry.checkUnimplementedOCBs»«ERROR_TYPE»«ELSE»void«ENDIF» «initFctID»() = 0;
 			
 				/*! Enters the state machine. Sets the state machine into a defined state.
 				*/
-				virtual void enter() = 0;
+				virtual void «enterFctID»() = 0;
 			
 				/*! Exits the state machine. Leaves the state machine with a defined state.
 				*/
-				virtual void exit() = 0;
+				virtual void «exitFctID»() = 0;
 			
 				/*! Start a run-to-completion cycle.
 				*/
-				virtual void runCycle() = 0;
+				virtual void «runCycleFctID»() = 0;
 				
 				/*! Checks whether the state machine is active. 
 			 	    A state machine is active if it has been entered. It is inactive if it has not been entered at all or if it has been exited.
 			 	*/	
-				virtual	sc_boolean isActive() const = 0;
+				virtual	«BOOL_TYPE» «isActiveFctID»() const = 0;
 				
 				/*! Checks if all active states are final. 
 			 		If there are no active states then the state machine is considered being inactive. In this case this method returns false.
 			 	*/
-				virtual sc_boolean isFinal() const = 0;
+				virtual «BOOL_TYPE» «isFinalFctID»() const = 0;
 		};
 		
-		inline StatemachineInterface::~StatemachineInterface() {}
+		inline «statemachineInterface»::~«statemachineInterface»() {}
 		
 		#endif /* «statemachineInterface.define»_H_ */
 		'''

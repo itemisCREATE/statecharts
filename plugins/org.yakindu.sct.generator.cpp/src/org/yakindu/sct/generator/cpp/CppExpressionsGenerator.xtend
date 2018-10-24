@@ -27,6 +27,8 @@ import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.LogicalNotExpression
 import org.yakindu.sct.model.sexec.Method
 
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+
 class CppExpressionsGenerator extends CExpressionsGenerator {
 
 	@Inject protected extension CppNaming
@@ -58,7 +60,7 @@ class CppExpressionsGenerator extends CExpressionsGenerator {
 	/* Literals */
 	override dispatch CharSequence code(BoolLiteral it) '''«IF value»true«ELSE»false«ENDIF»'''
 	
-	override dispatch CharSequence code(StringLiteral it) '''(sc_string) «super._code(it)»'''
+	override dispatch CharSequence code(StringLiteral it) '''(«STRING_TYPE») «super._code(it)»'''
 	
 	/** Don't use bool_true for C++ code */
 	override dispatch CharSequence sc_boolean_code(Expression it) {code}

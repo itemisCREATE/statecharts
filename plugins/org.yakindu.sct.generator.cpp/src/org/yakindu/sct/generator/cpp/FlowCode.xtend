@@ -30,6 +30,8 @@ import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+
 class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	
 	@Inject extension CppNaming naming
@@ -39,12 +41,12 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	
 	override dispatch CharSequence code(SaveHistory it) '''
 		«stepComment»
-		historyVector[«region.historyVector.offset»] = stateConfVector[«region.stateVector.offset»];
+		«HISTORYVECTOR»[«region.historyVector.offset»] = «STATEVECTOR»[«region.stateVector.offset»];
 	'''
 	
 	override dispatch CharSequence code(HistoryEntry it) '''
 		«stepComment»
-		if (historyVector[«region.historyVector.offset»] != «null_state»)
+		if («HISTORYVECTOR»[«region.historyVector.offset»] != «null_state»)
 		{
 			«historyStep.code»
 		} «IF initialStep !== null»else
@@ -56,10 +58,10 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	override dispatch CharSequence code(StateSwitch it) '''
 		«stepComment»
 		«IF historyRegion !== null»
-			switch(historyVector[ «historyRegion.historyVector.offset» ])
+			switch(«HISTORYVECTOR»[ «historyRegion.historyVector.offset» ])
 			{
 		«ELSE»
-			switch(stateConfVector[ «stateConfigurationIdx» ])
+			switch(«STATEVECTOR»[ «stateConfigurationIdx» ])
 			{
 		«ENDIF»
 			«FOR caseid : cases»
@@ -75,12 +77,12 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 
 	override dispatch CharSequence code(ScheduleTimeEvent it) '''
 		«stepComment»
-		«timerInstance»->setTimer(this, (sc_eventid)(&«timeEventsInstance»[«timeEvent.indexOf»]), «timeValue.code», «IF timeEvent.periodic»true«ELSE»false«ENDIF»);
+		«timerInstance»->«SET_TIMER»(this, (sc_eventid)(&«timeEventsInstance»[«timeEvent.indexOf»]), «timeValue.code», «IF timeEvent.periodic»true«ELSE»false«ENDIF»);
 	'''
 
 	override dispatch CharSequence code(UnscheduleTimeEvent it) '''
 		«stepComment»
-		«timerInstance»->unsetTimer(this, (sc_eventid)(&«timeEventsInstance»[«timeEvent.indexOf»]));
+		«timerInstance»->«UNSET_TIMER»(this, (sc_eventid)(&«timeEventsInstance»[«timeEvent.indexOf»]));
 	'''
 	
 	override dispatch CharSequence code(Execution it) 
@@ -115,13 +117,13 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	'''
 	
 	override dispatch CharSequence code(EnterState it) '''
-		stateConfVector[«state.stateVector.offset»] = «state.shortName»;
-		stateConfVectorPosition = «state.stateVector.offset»;
+		«STATEVECTOR»[«state.stateVector.offset»] = «state.shortName»;
+		«STATEVECTOR_POS» = «state.stateVector.offset»;
 	'''
 
 	override dispatch CharSequence code(ExitState it) '''
-		stateConfVector[«state.stateVector.offset»] = «null_state»;
-		stateConfVectorPosition = «state.stateVector.offset»;
+		«STATEVECTOR»[«state.stateVector.offset»] = «null_state»;
+		«STATEVECTOR_POS» = «state.stateVector.offset»;
 	'''
 	
 	override dispatch CharSequence code(Return it) '''

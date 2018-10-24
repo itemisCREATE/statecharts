@@ -50,15 +50,15 @@ The mandatory *Outlet* feature specifies the project and folder the statechart i
 bq. *Please note:* The image generator supports the *Outlet* feature's _targetProject_ and _targetFolder_ parameters only.
 
 
-==<!-- Start-pro sgen_feature_renderer -->==
+==<!-- Start sgen_feature_renderer -->==
 
 h4(#codegen_statechart_images_renderer_feature). Renderer feature
 
 The mandatory *Renderer* feature controls the rendering of the images.
 
-* _format_ (String, required): Format of the generated images. Supported image formats are listed in section "&quot;Exporting_a_statechart_as_an_image_file&quot;":../user-guide/editing_statecharts.html#edit_exporting_a_statechart_as_an_image_file.
+* _format_ (String, required): Format of the generated images. YAKINDU Statechart Tools supports the following formats:<br/><table><tbody><tr><th>Image format</th><th>Description</th></tr><tr><td>BMP, PNG</td><td>Lossless pixel image formats</td></tr><tr><td>JPG, JPEG</td><td>Lossy pixel image format</td></tr><tr><td>SVG</td><td>Scalable Vector Graphics</td></tr><tr><td>PDF</td><td>Portable Document Format</td></tr></tbody></table>
 
-==<!-- End-pro sgen_feature_renderer -->==
+==<!-- End sgen_feature_renderer -->==
 
 ==</div>==
 
