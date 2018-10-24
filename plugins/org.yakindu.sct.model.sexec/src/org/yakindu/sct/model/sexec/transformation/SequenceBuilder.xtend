@@ -386,9 +386,6 @@ class SequenceBuilder {
 			exitScopes.fold(caseSeq,
 				[cs, exitScope|
 					{
-						println(s.name + "/" + exitScope.name)
-						println(s.stateVector.size + "/" + s.stateVector.offset)
-						println(exitScope.stateVector.size + "/" + exitScope.stateVector.offset)
 						if (exitScope instanceof ExecutionState && s.stateVector.last == exitScope.stateVector.last) {
 							val execState = exitScope as ExecutionState
 							if(execState.exitAction !== null) cs.steps.add(execState.exitAction.newCall)
