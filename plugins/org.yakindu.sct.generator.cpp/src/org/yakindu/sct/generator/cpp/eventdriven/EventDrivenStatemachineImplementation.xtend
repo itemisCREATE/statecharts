@@ -19,9 +19,8 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 
-/*
- * To restore the event queue for in events, revert commit 235659d
- */
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
 /**
  * @author René Beckmann - Initial contribution and API
  */
@@ -46,63 +45,65 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 	
 	override protected initialisationList(ExecutionFlow it) {
 		'''
-			«IF timed»«timerInstance»(null),«ENDIF»
-			stateConfVectorPosition(0)«FOR s : getInterfaces»,
+			«IF timed»«timerInstance»(«NULL_STRING»),«ENDIF»
+			«STATEVECTOR_POS»(0)«FOR s : getInterfaces»,
 			«s.instance»(this)«IF s.hasOperations && !entry.useStaticOPC»,
-			«s.OCB_Instance»(null)«ENDIF»«ENDFOR»
+			«s.OCB_Instance»(«NULL_STRING»)«ENDIF»«ENDFOR»
 		'''
 	}
 	
 	
 	override raiseTimeEventFunction(ExecutionFlow it) '''
-		void «module»::«raiseTimeEventFctID»(sc_eventid evid)
+		void «module»::«raiseTimeEventFctID»(«EVENT_TYPE» evid)
 		{
-			if ((evid >= (sc_eventid)«timeEventsInstance») && (evid < (sc_eventid)(&«timeEventsInstance»[«timeEventsCountConst»])))
+			if ((evid >= («EVENT_TYPE»)«timeEventsInstance») && (evid < («EVENT_TYPE»)(&«timeEventsInstance»[«timeEventsCountConst»])))
 			{
-				*(sc_boolean*)evid = true;
-				runCycle();
+				*(«BOOL_TYPE»*)evid = true;
+				«runCycleFctID»();
 			}
 		}
 	'''
 	
 	override runCycleFunction(ExecutionFlow it) {
+		val cE = "currentEvent"
 		if(!hasLocalEvents) {
 			return super.runCycleFunction(it)
 		}
 		'''
-			void «module»::runCycle()
+			void «module»::«runCycleFctID»()
 			{
-				clearOutEvents();
+				«clearOutEventsFctID»();
 				
-				SctEvent * currentEvent = getNextEvent();
+				«SCT_EVENT» * «cE» = «nextEventFctID»();
 				
 				do
 				{
 					/* Set event flags as usual */
-					dispatch_event(currentEvent);
+					«dispatchEventFctID»(«cE»);
 					
 					«runCycleFunctionForLoop»
 					
 					/* Delete event from memory */
-					delete currentEvent;
-					clearInEvents();
-				} while((currentEvent = getNextEvent()));
+					delete «cE»;
+					«clearInEventsFctID»();
+				} while((«cE» = «nextEventFctID»()));
 			}
 		'''
 	}
 	
 	def getNextEventFunction(ExecutionFlow it) {
+		val nE = "nextEvent"
 		'''
-		SctEvent* «module»::getNextEvent()
+		«SCT_EVENT»* «module»::«nextEventFctID»()
 		{
-			SctEvent* nextEvent = 0;
+			«SCT_EVENT»* «nE» = 0;
 			
-			if(!internalEventQueue.empty()) {
-				nextEvent = internalEventQueue.front();
-				internalEventQueue.pop_front();
+			if(!«internalQueue».empty()) {
+				«nE» = «internalQueue».front();
+				«internalQueue».pop_front();
 			}
 			
-			return nextEvent;
+			return «nE»;
 		}
 		'''
 	}	
@@ -118,16 +119,17 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 	def dispatch generateInterfaceDispatchFunction(ExecutionFlow it, ImportScope s) {}
 
 	def dispatch generateInterfaceDispatchFunction(ExecutionFlow it, Scope s) {
+		val ev = "event"
 		'''
-			void «module»::«s.interfaceName»::dispatch_event(SctEvent * event)
+			void «module»::«s.interfaceName»::«dispatchEventFctID»(«SCT_EVENT» * «ev»)
 			{
-				switch(event->name)
+				switch(«ev»->name)
 				{
 					«FOR e : s.localEvents»
 						case «e.eventEnumMemberName»:
 						{
 							«IF e.hasValue»
-								«e.eventClassName» * e = static_cast<«e.eventClassName»*>(event);
+								«e.eventClassName» * e = static_cast<«e.eventClassName»*>(«ev»);
 								if(e != 0) {
 									internal_«e.asRaiser»(e->value);
 								}
@@ -145,13 +147,14 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 	}
 
 	def generateInternalDispatchEventFunction(ExecutionFlow it) {
+		val ev = "event"
 		'''	
-			void «module»::dispatch_event(SctEvent * event)
+			void «module»::«dispatchEventFctID»(«SCT_EVENT» * «ev»)
 			{
-				if(event == 0) {
+				if(«ev» == 0) {
 					return;
 				}
-				switch(event->name)
+				switch(«ev»->name)
 				{
 					«FOR s : scopes.filter(StatechartScope)»
 						«IF !(s instanceof ImportScope)»
@@ -161,7 +164,7 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 									case «e.eventEnumMemberName»:
 								«ENDFOR»
 								{
-									«s.instance».dispatch_event(event);
+									«s.instance».«dispatchEventFctID»(«ev»);
 									break;
 								}
 							«ENDIF»

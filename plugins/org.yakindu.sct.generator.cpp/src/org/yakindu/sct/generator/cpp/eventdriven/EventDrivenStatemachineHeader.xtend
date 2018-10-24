@@ -18,6 +18,8 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 
+import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
+
 /**
  * @author René Beckmann - Initial contribution and API
  * @author Axel Terfloth - updates
@@ -38,21 +40,21 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 		'''
 			«super.generatePrivateClassmembers(it)»
 			«IF hasLocalEvents»
-			std::deque<«eventNamespaceName»::SctEvent*> internalEventQueue;
+			std::deque<«eventNamespaceName»::«SCT_EVENT»*> «internalQueue»;
 			
-			«eventNamespaceName»::SctEvent* getNextEvent();
+			«eventNamespaceName»::«SCT_EVENT»* «nextEventFctID»();
 			
-			void dispatch_event(«eventNamespaceName»::SctEvent * event);
+			void «dispatchEventFctID»(«eventNamespaceName»::«SCT_EVENT» * event);
 			«ENDIF»
 		'''
 	}
 	
-	override CharSequence protectedInnerClassMembers(StatechartScope scope) {
+	override CharSequence protectedInnerClassMembers(StatechartScope it) {
 		'''
-		«super.protectedInnerClassMembers(scope)»
-		«scope.execution_flow.module()» * parent;
-		«IF scope.flow.hasLocalEvents»
-		void dispatch_event(«scope.flow.eventNamespaceName»::SctEvent * event);
+		«super.protectedInnerClassMembers(it)»
+		«execution_flow.module()» * parent;
+		«IF it.flow.hasLocalEvents»
+		void «it.flow.dispatchEventFctID»(«it.flow.eventNamespaceName»::«SCT_EVENT» * event);
 		«ENDIF»
 		'''
 	}

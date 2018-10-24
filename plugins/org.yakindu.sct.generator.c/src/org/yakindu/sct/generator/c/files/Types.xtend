@@ -40,15 +40,15 @@ class Types implements IContentTemplate {
 		
 		#define sc_string		char*
 		 
-		typedef bool			sc_boolean;
-		typedef int_fast16_t	sc_short;
-		typedef uint_fast16_t	sc_ushort;
-		typedef int32_t			sc_integer;
-		typedef uint32_t		sc_uinteger;
+		typedef bool			«CGeneratorConstants::BOOL_TYPE»;
+		typedef int_fast16_t	«CGeneratorConstants::SHORT_TYPE»;
+		typedef uint_fast16_t	«CGeneratorConstants::USHORT_TYPE»;
+		typedef int32_t			«CGeneratorConstants::INT_TYPE»;
+		typedef uint32_t		«CGeneratorConstants::UINT_TYPE»;
 		
-		typedef double			sc_real;
+		typedef double			«CGeneratorConstants::REAL_TYPE»;
 		
-		typedef void*			sc_eventid;
+		typedef void*			«CGeneratorConstants::EVENT_TYPE»;
 		
 		typedef intptr_t		sc_intptr_t;
 		
@@ -56,11 +56,11 @@ class Types implements IContentTemplate {
 		}
 		#endif
 		
-		#ifndef «Naming::NULL_STRING»
+		#ifndef «CGeneratorConstants::NULL_STRING»
 			#ifdef __cplusplus
-				#define «Naming::NULL_STRING» 0
+				#define «CGeneratorConstants::NULL_STRING» 0
 			#else
-				#define «Naming::NULL_STRING» ((void *)0)
+				#define «CGeneratorConstants::NULL_STRING» ((void *)0)
 			#endif
 		#endif
 		
