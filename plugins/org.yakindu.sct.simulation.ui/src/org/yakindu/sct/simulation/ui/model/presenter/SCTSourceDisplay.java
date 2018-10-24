@@ -58,7 +58,9 @@ public class SCTSourceDisplay implements ISourceDisplay {
 	public void displaySource(Object element, IWorkbenchPage page, boolean forceSourceLookup) {
 		debugElement = (DebugElement) element;
 		IEditorPart editor = openEditor(debugElement, page);
-		displaySource(editor);
+		if(editor != null) {
+			displaySource(editor);
+		}
 	}
 
 	public void displaySource(IEditorPart editor) {
@@ -137,7 +139,7 @@ public class SCTSourceDisplay implements ISourceDisplay {
 			}
 		}
 		// No editor found
-		throw new RuntimeException("No editor found for semantic element " + semanticObject);
+		return null;
 	}
 
 }
