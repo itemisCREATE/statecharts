@@ -8,6 +8,7 @@ encoding//testmodels/SCTUnit/DynamicChoice.sct=UTF-8
 encoding//testmodels/SCTUnit/EmptyTransition.sct=UTF-8
 encoding//testmodels/SCTUnit/EnterState.sct=UTF-8
 encoding//testmodels/SCTUnit/ExitOnSelfTransition.sct=UTF-8
+encoding//testmodels/SCTUnit/ExitSequence.sct=UTF-8
 encoding//testmodels/SCTUnit/ExitState.sct=UTF-8
 encoding//testmodels/SCTUnit/FinalState.sct=UTF-8
 encoding//testmodels/SCTUnit/FloatModulo.sct=UTF-8

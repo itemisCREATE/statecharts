@@ -1,8 +1,8 @@
-GeneratorModel for yakindu::c {
-	statechart executionorder.childfirst.ChildFirstLocalReactions {
+GeneratorModel for yakindu::cpp {
+	statechart ExitSequence {
 		feature Outlet {
 			targetProject = "gtests"
-			targetFolder = "ChildFirstLocalReactions"
+			targetFolder = "ExitStateTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false
