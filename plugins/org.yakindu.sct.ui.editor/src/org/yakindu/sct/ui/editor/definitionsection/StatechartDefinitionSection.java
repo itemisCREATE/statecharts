@@ -816,7 +816,11 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 		public void notifyChanged(Notification notification) {
 			if (Notification.SET == notification.getEventType()) {
 				if (BasePackage.Literals.NAMED_ELEMENT__NAME.equals(notification.getFeature())) {
-					nameLabel.setText(notification.getNewStringValue());
+					String newText = notification.getNewStringValue();
+					String oldText = nameLabel.getText();
+					if (!oldText.equals(newText)) {
+						nameLabel.setText(newText);
+					}
 				}
 			}
 		}
