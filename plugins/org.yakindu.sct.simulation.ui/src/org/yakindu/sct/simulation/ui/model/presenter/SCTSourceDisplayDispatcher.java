@@ -59,7 +59,6 @@ public class SCTSourceDisplayDispatcher implements ISourceDisplay, IDebugEventSe
 					(ISimulationEngine) newTarget.getAdapter(ISimulationEngine.class));
 		}
 		
-		// terminate simulation if project has been deleted
 		activeSourceDisplay.displaySource(newTarget, page, forceSourceLookup);
 		activeDebugTarget = newTarget;
 	}
