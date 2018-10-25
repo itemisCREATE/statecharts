@@ -247,24 +247,11 @@ class ReactionBuilder {
 	
 	def defineReaction(Entry e) {
 
-		// first get the mapped control flow element the entry
+		// first get the mapped control flow element for the entry
 		val execEntry = e.create
 		
 		// if the entry defines a transition then we will derive the entry transition sequence
-		var Sequence entryTransSeq = null
-		val entryTransitionEffect = e?.transition?.effect		
-		val target = e.target.create
-		val targetEnterSequence = if (target !== null && e.outgoingTransitions.size > 0) { e.outgoingTransitions.mapToStateConfigurationEnterSequence } else null
-			
-		if ( entryTransitionEffect !== null || targetEnterSequence !== null) {
-			entryTransSeq = sexecFactory.createSequence
-			if (entryTransitionEffect !== null) {
-				entryTransSeq.steps += entryTransitionEffect.mapEffect	
-			}
-			if (targetEnterSequence !== null) {
-				entryTransSeq.steps += targetEnterSequence
-			}
-		}	
+		var Sequence entryTransSeq = e.createEntrySequence
 		
 		// we add behavior to the already created react sequence from defineStateEnterSequence(Entry) 
 		val seq = execEntry.reactSequence
@@ -281,6 +268,9 @@ class ReactionBuilder {
 			entryStep.deep = false
 			entryStep.region = (e.eContainer as Region).create
 			
+			// if history does not have outgoing transition => take the default entry as fall-back
+			if (entryTransSeq === null) entryTransSeq = e.parentRegion.entry.createEntrySequence
+			
 			if (entryTransSeq !== null) entryStep.initialStep = entryTransSeq
 			
 			entryStep.historyStep = (e.eContainer as Region).create.shallowEnterSequence.newCall
@@ -293,12 +283,32 @@ class ReactionBuilder {
 			entryStep.region = (e.eContainer as Region).create
 			entryStep.deep = true
 			
-			if (entryTransSeq !== null) entryStep.initialStep = entryTransSeq
+			// if history does not have outgoing transition => take the default entry as fall-back
+			if (entryTransSeq === null) entryTransSeq = e.parentRegion.entry.createEntrySequence
 			
+			if (entryTransSeq !== null) entryStep.initialStep = entryTransSeq
 			
 			entryStep.historyStep =  (e.eContainer as Region).create.deepEnterSequence.newCall
 
 			seq.steps += entryStep
 		}
+	}
+	
+	def protected createEntrySequence(Entry e) {
+		var Sequence entryTransSeq = null
+		val entryTransitionEffect = e?.transition?.effect		
+		val target = e.target.create
+		val targetEnterSequence = if (target !== null && e.outgoingTransitions.size > 0) { e.outgoingTransitions.mapToStateConfigurationEnterSequence } else null
+			
+		if ( entryTransitionEffect !== null || targetEnterSequence !== null) {
+			entryTransSeq = sexecFactory.createSequence
+			if (entryTransitionEffect !== null) {
+				entryTransSeq.steps += entryTransitionEffect.mapEffect	
+			}
+			if (targetEnterSequence !== null) {
+				entryTransSeq.steps += targetEnterSequence
+			}
+		}
+		entryTransSeq
 	}
 }
