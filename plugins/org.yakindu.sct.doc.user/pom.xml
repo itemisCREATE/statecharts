@@ -49,13 +49,15 @@
 						</goals>
 					</execution>
 				</executions>
+                <!--
 				<dependencies>
 					<dependency>
 						<groupId>org.yakindu.docs</groupId>
 						<artifactId>yakindu-docs-maven-plugin</artifactId>
-						<version>0.0.1-SNAPSHOT</version>
+						<version>0.1.0</version>
 					</dependency>
 				</dependencies>
+                 -->
 			</plugin>
 		</plugins>
 	</build>
