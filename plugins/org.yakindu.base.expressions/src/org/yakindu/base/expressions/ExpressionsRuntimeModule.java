@@ -11,8 +11,10 @@
 package org.yakindu.base.expressions;
 
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
+import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider;
 import org.yakindu.base.expressions.inferrer.ExpressionsTypeInferrer;
 import org.yakindu.base.expressions.linking.LinkingDiagnosticMessageProvider;
+import org.yakindu.base.expressions.parser.SyntaxErrorMessageProvider;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
@@ -26,6 +28,8 @@ public class ExpressionsRuntimeModule extends org.yakindu.base.expressions.Abstr
 		super.configure(binder);
 		binder.bind(ITypeSystem.class).toInstance(getTypeSystem());
 		binder.bind(ILinkingDiagnosticMessageProvider.class).to(LinkingDiagnosticMessageProvider.class);
+		binder.bind(ISyntaxErrorMessageProvider.class).to(SyntaxErrorMessageProvider.class);
+		
 	}
 
 	protected ITypeSystem getTypeSystem() {
