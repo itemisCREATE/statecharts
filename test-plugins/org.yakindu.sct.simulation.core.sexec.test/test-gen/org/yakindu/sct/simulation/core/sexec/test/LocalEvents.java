@@ -13,35 +13,30 @@ import com.google.inject.Inject;
 import static org.junit.Assert.*;
 
 /**
- * Unit TestCase for Constants
+ * Unit TestCase for localEvents
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
-public class ConstantsTests extends AbstractExecutionFlowTest {
+public class LocalEvents extends AbstractExecutionFlowTest {
 	
 	@Before
 	public void setup() throws Exception{
-		ExecutionFlow flow = models.loadExecutionFlowFromResource("Constants.sct");
+		ExecutionFlow flow = models.loadExecutionFlowFromResource("eventdriven/LocalEvents.sct");
 		initInterpreter(flow);
 	}
 	@Test
-	public void constantDefinition() throws Exception {
+	public void test() throws Exception {
 		interpreter.enter();
-		assertTrue(isStateActive("A"));
-		assertTrue(getInteger("x") == 10l);
-		assertTrue(getInteger("y") == 20l);
-		assertTrue(getString("Named.y").equals("Hello World"));
+		assertTrue(isStateActive("A1"));
+		assertTrue(isStateActive("A2"));
 		raiseEvent("e");
-		timer.timeLeap(getCyclePeriod());
-		assertTrue(getInteger("result") == 20l);
-		raiseEvent("e");
-		timer.timeLeap(getCyclePeriod());
-		assertTrue(isStateActive("C"));
-		assertTrue(getInteger("result") == 100l);
-		raiseEvent("e2", getInteger("x"));
-		timer.timeLeap(getCyclePeriod());
-		assertTrue(getInteger("result") == 1000l);
-		assertTrue(isStateActive("A"));
+		assertTrue(isStateActive("D1"));
+		assertTrue(isStateActive("D2"));
+		assertTrue(getInteger("cycleCountSm") == 5l);
+		assertTrue(getInteger("cycleCount1") == 5l);
+		assertTrue(getInteger("cycleCount2") == 5l);
+		assertTrue(getInteger("checksum") == 3l);
+		interpreter.exit();
 	}
 }

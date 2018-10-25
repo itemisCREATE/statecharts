@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for EventDrivenTriggeredByTimeEvent
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class EventDrivenTriggeredByTimeEvent extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("eventdriven/EventDrivenTriggeredByTimeEvent.sct");
@@ -28,22 +30,22 @@ public class EventDrivenTriggeredByTimeEvent extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
 		assertTrue(getInteger("x") == 0l);
-		/*not implemented - sorry :(*/
+		timer.timeLeap(999);
 		assertTrue(isStateActive("A"));
 		assertTrue(getInteger("x") == 0l);
-		/*not implemented - sorry :(*/
+		timer.timeLeap(1);
 		assertTrue(isStateActive("B"));
 		assertTrue(getInteger("x") == 0l);
 		assertTrue(getInteger("transition_count") == 1l);
-		/*not implemented - sorry :(*/
+		timer.timeLeap(1000);
 		assertTrue(isStateActive("A"));
 		assertTrue(getInteger("x") == 0l);
 		assertTrue(getInteger("transition_count") == 2l);
-		/*not implemented - sorry :(*/
+		timer.timeLeap(999000);
 		assertTrue(isStateActive("B"));
 		assertTrue(getInteger("x") == 0l);
 		assertTrue(getInteger("transition_count") == 1001l);
-		/*not implemented - sorry :(*/
+		timer.timeLeap(999000);
 		assertTrue(isStateActive("A"));
 		assertTrue(getInteger("x") == 0l);
 		assertTrue(getInteger("transition_count") == 2000l);

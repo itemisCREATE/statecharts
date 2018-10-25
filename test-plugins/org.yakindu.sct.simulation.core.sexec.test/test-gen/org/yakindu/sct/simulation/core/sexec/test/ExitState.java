@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for ExitState
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class ExitState extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("ExitState.sct");
@@ -28,7 +30,7 @@ public class ExitState extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
 		raiseEvent("e");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("E"));
 	}
 	@Test
@@ -36,7 +38,7 @@ public class ExitState extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
 		raiseEvent("f");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("F"));
 	}
 	@Test
@@ -44,14 +46,14 @@ public class ExitState extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
 		raiseEvent("g");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("E"));
 	}
 	@Test
 	public void remainInA() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("A"));
 	}
 }

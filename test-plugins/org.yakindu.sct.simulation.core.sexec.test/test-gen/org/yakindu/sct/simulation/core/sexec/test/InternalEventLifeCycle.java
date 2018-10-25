@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for InternalEventLifeCycle
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class InternalEventLifeCycle extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("InternalEventLifeCycle.sct");
@@ -29,17 +31,17 @@ public class InternalEventLifeCycle extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("A"));
 		assertTrue(isStateActive("C"));
 		raiseEvent("e");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("A"));
 		assertTrue(isStateActive("D"));
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("A"));
 		assertTrue(isStateActive("D"));
 		raiseEvent("f");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("A"));
 		assertTrue(isStateActive("C"));
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("A"));
 		assertTrue(isStateActive("C"));
 	}

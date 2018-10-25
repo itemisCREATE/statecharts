@@ -13,35 +13,23 @@ import com.google.inject.Inject;
 import static org.junit.Assert.*;
 
 /**
- * Unit TestCase for Constants
+ * Unit TestCase for BitwiseExecutionOrder
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
-public class ConstantsTests extends AbstractExecutionFlowTest {
+public class BitwiseExecutionOrder extends AbstractExecutionFlowTest {
 	
 	@Before
 	public void setup() throws Exception{
-		ExecutionFlow flow = models.loadExecutionFlowFromResource("Constants.sct");
+		ExecutionFlow flow = models.loadExecutionFlowFromResource("BitwiseExecutionOrder.sct");
 		initInterpreter(flow);
 	}
 	@Test
-	public void constantDefinition() throws Exception {
+	public void test() throws Exception {
 		interpreter.enter();
-		assertTrue(isStateActive("A"));
-		assertTrue(getInteger("x") == 10l);
-		assertTrue(getInteger("y") == 20l);
-		assertTrue(getString("Named.y").equals("Hello World"));
-		raiseEvent("e");
 		timer.timeLeap(getCyclePeriod());
-		assertTrue(getInteger("result") == 20l);
-		raiseEvent("e");
-		timer.timeLeap(getCyclePeriod());
-		assertTrue(isStateActive("C"));
-		assertTrue(getInteger("result") == 100l);
-		raiseEvent("e2", getInteger("x"));
-		timer.timeLeap(getCyclePeriod());
-		assertTrue(getInteger("result") == 1000l);
-		assertTrue(isStateActive("A"));
+		assertTrue(interpreter.isFinal());
+		interpreter.exit();
 	}
 }

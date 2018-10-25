@@ -27,7 +27,7 @@ testsuite AllTests {
 	EventDrivenInternalEvent,
 	EventDrivenTriggeredByEvent,
 	EventDrivenTriggeredByTimeEvent,
-//	EventDrivenOutEvents,
+	EventDrivenOutEvents,
 	ExitOnSelfTransition, 
 	ExitState,
 	FeatureCalls,

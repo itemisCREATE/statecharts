@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for ParentFirstExecutionHierarchy
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class ParentFirstExecutionHierarchy extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("executionorder/ParentFirstExecutionHierarchy.sct");
@@ -30,7 +32,7 @@ public class ParentFirstExecutionHierarchy extends AbstractExecutionFlowTest {
 		setBoolean("disable_a", true);
 		setBoolean("disable_aa", true);
 		raiseEvent("e");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("B"));
 		assertTrue(!getBoolean("a_reacted"));
 		assertTrue(!getBoolean("aa_reacted"));
@@ -45,7 +47,7 @@ public class ParentFirstExecutionHierarchy extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("AAA"));
 		setBoolean("disable_a", true);
 		raiseEvent("e");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("B"));
 		assertTrue(!getBoolean("a_reacted"));
 		assertTrue(getBoolean("aa_reacted"));
@@ -59,7 +61,7 @@ public class ParentFirstExecutionHierarchy extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		assertTrue(isStateActive("AAA"));
 		raiseEvent("e");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("B"));
 		assertTrue(getBoolean("a_reacted"));
 		assertTrue(!getBoolean("aa_reacted"));
@@ -70,7 +72,7 @@ public class ParentFirstExecutionHierarchy extends AbstractExecutionFlowTest {
 	public void expectLocalReactrionsExecuteWithNoTransition() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("AAA"));
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("AAA"));
 		assertTrue(getBoolean("a_local"));
 		assertTrue(getBoolean("aa_local"));

@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for SyncJoin
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class SyncJoin extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("SyncJoin.sct");
@@ -30,37 +32,37 @@ public class SyncJoin extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("C1"));
 		assertTrue(isStateActive("D1"));
 		raiseEvent("e");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("C2"));
 		assertTrue(isStateActive("D1"));
 		raiseEvent("jc");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("C2"));
 		assertTrue(isStateActive("D1"));
 		raiseEvent("jd");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("C2"));
 		assertTrue(isStateActive("D1"));
 		raiseEvent("jc");
 		raiseEvent("jd");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("C2"));
 		assertTrue(isStateActive("D1"));
 		raiseEvent("f");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("C2"));
 		assertTrue(isStateActive("D2"));
 		raiseEvent("jc");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("C2"));
 		assertTrue(isStateActive("D2"));
 		raiseEvent("jd");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("C2"));
 		assertTrue(isStateActive("D2"));
 		raiseEvent("jc");
 		raiseEvent("jd");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("A"));
 	}
 	@Test
@@ -70,24 +72,24 @@ public class SyncJoin extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("C1"));
 		assertTrue(isStateActive("D1"));
 		raiseEvent("f");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("C1"));
 		assertTrue(isStateActive("D2"));
 		raiseEvent("jc");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("C1"));
 		assertTrue(isStateActive("D2"));
 		raiseEvent("jd");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("C1"));
 		assertTrue(isStateActive("D2"));
 		raiseEvent("jc");
 		raiseEvent("jd");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("C1"));
 		assertTrue(isStateActive("D2"));
 		raiseEvent("e");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("C2"));
 		assertTrue(isStateActive("D2"));
 	}
@@ -96,10 +98,10 @@ public class SyncJoin extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		raiseEvent("e");
 		raiseEvent("f");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		raiseEvent("jc");
 		raiseEvent("jd");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("A"));
 		assertTrue(getInteger("x") == 1l);
 	}
