@@ -453,11 +453,13 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 
 		if (element != null && (!(element instanceof Event))) {
-			String elementName = "";
+			String elementName;
 			if (element instanceof NamedElement) {
 				elementName = "'" + ((NamedElement) element).getName() + "' ";
+			} else {
+				elementName = "Could not find event declaration.";
 			}
-			error(elementName + "is no event.", StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE, 0,
+			error(elementName, StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE, 0,
 					VALUE_OF_REQUIRES_EVENT);
 		}
 	}
