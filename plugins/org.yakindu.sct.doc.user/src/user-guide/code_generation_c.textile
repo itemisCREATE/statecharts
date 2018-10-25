@@ -1,8 +1,6 @@
 
 p. 
 
-==<div style="counter-reset: h1 7 h2 4">==
-
 h2(#codegen_c_code_generator). C code generator
 
 h3(#codegen_c_code_generator_features). C code generator features
@@ -614,5 +612,3 @@ org_yakindu_sct_examples_c_trafficlight::~org_yakindu_sct_examples_c_trafficligh
 }
 
 p. 
-
-==</div>==

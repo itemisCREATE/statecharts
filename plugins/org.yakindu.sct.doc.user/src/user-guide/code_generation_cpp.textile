@@ -1,8 +1,6 @@
 
 p. 
 
-==<div style="counter-reset: h1 7 h2 5">==
-
 h2(#codegen_cpp_code_generator). C++ code generator
 
 h3(#codegen_cpp_code_generator_features). C++ code generator features
@@ -532,4 +530,3 @@ int main(int argc, char *argv[]) {
 
 p. 
 
-==</div>==

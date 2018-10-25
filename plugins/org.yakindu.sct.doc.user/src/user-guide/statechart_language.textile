@@ -1,8 +1,6 @@
 
 p. 
 
-==<div style="counter-reset: h1 5">==
-
 h1(#sclang_statechart_language_reference). Statechart language reference
 
 The statechart language is used to describe statecharts. It consists both of graphical and of textual elements.
@@ -1581,5 +1579,3 @@ p(#sclang_fig_expressions_grammar).
 !images/docu_grammar_010_expressions.png(Expressions grammar)!
 
 p=. Expressions grammar
-
-==</div>==

@@ -1,8 +1,6 @@
 
 p. 
 
-==<div style="counter-reset: h1 3">==
-
 h1(#simu_simulating_statecharts). Simulating statecharts
 
 Simulating a statechart model means to execute it, raise events manually, have time-based and other events being triggered automatically, and observe the model's behavior.
@@ -458,7 +456,5 @@ h4(#advsim_deleting_a_snapshot). Deleting a snapshot
 
 * To delete one or more snapshots, select the snapshots to be deleted, then click on the _remove_ button !(inlinemediaobject)images/advsim_button_remove_red.png(Button: Remove)!.
 * To delete _all_ snapshots, click on the _remove all_ button !(inlinemediaobject)images/advsim_button_remove_all.png(Button: Remove all)!.
-
-==</div>==
 
 ==</div>==

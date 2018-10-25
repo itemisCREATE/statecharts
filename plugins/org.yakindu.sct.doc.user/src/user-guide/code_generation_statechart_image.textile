@@ -1,8 +1,6 @@
 
 p. 
 
-==<div style="counter-reset: h1 7 h2 7">==
-
 ==<div class="pro-feature">==
 
 h2(#codegen_statechart_images_generator). Statechart image generator
@@ -59,7 +57,5 @@ The mandatory *Renderer* feature controls the rendering of the images.
 * _format_ (String, required): Format of the generated images. Supported image formats are listed in section "&quot;Exporting_a_statechart_as_an_image_file&quot;":../user-guide/editing_statecharts.html#edit_exporting_a_statechart_as_an_image_file.
 
 ==<!-- End-pro sgen_feature_renderer -->==
-
-==</div>==
 
 ==</div>==

@@ -1,9 +1,12 @@
 
 p. 
 
-==<div style="counter-reset: h1 7">==
-
 h1(#sctunit_test-driven_statechart_development_with_sctunit). Test-driven statechart development with SCTUnit
+
+Learn more about test-driven statechart modelling and how to use SCTUnit to develop your statechart model step by step using a test-driven approach.
+
+
+
 
 h2(#sctunit_brief_introduction_to_test-driven_development). Brief introduction to test-driven development
 
@@ -1084,5 +1087,3 @@ h3. The generated Java test class
 The Java source code generated from SCTUnit test classes or test suites takes the form of JUnit tests and can be integrated in CI environments, for example.
 
 In Eclipse, you can execute such a generated JUnit test by right-clicking on the corresponding _.java_ file and selecting _Run As → JUnit Test_ in the context menu.
-
-==</div>==

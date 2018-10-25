@@ -1,8 +1,6 @@
 
 p. 
 
-==<div style="counter-reset: h1 7 h2 8">==
-
 h2(#codegen_custom_code_generators). Custom code generators
 
 Although YAKINDU Statechart Tools are shipped with powerful code generators for C, C++, and Java, it may be necessary to create a custom code generator to support a variety of use cases. One reason for a custom code generator could be to support additional programming languages – in this case we would be happy to receive a contribution! – or to generate code for an existing framework.
@@ -121,5 +119,3 @@ p=. Simplified SGraph meta model
 * *Exit* is a __Pseudostate__. It is defined as the point where a region is left.
 * *Synchronization* is a __Pseudostate__. It is equivalent to a __Fork__ and to a __Join__.
 * *Transition* is defined as a directed relationship between two vertices.
-
-==</div>==

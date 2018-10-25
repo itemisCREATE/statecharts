@@ -1,6 +1,4 @@
 
-==<div style="counter-reset: h1 6">==
-
 h1(#codegen_generating_state_machine_code). Generating state machine code
 
 Ultimately, you will need your state machine not only as a nice graphical statechart model, but rather in the form of executable code that you can integrate with your software project as a component. You will want to send events to the state machine, receive events from it, retrieve information regarding the currently active state (or states), set and get state machine variables, and have the state machine invoke specific behaviour that is external to it.
@@ -352,5 +350,3 @@ For example, the command to call the headless generator might look like this:
 bc. scc -m myGenmodel.sct -v version=2.0;isBeta=false
 
 The name/value pairs specified by the @-v@ option would override the corresponding default values of the properties in the generator model. In this case, the properties _version_ and _isBeta_ would be set to the values "2.0" and "false", respectively. The variables _projectName_ and _generateTimerServce_ would maintain their default values as specified in the SGen file.
-
-==</div>==
