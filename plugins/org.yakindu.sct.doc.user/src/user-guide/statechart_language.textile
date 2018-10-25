@@ -126,7 +126,7 @@ A type system or _domain_ specifies which types are available. YAKINDU Statechar
 
 YAKINDU Statechart Tools Professional Edition allows for additional domains to be installed. It includes domains for the following languages:
 * C
-* C++ (At the moment, this domain is in its beta phase only and not yet documented.)
+* C++
 
 ###. CHECK: YAKINDU Statechart Tools Professional Edition provides the following domains: C, C++ (beta).
 
@@ -449,25 +449,19 @@ A history state saves the current state exactly when its containing region is le
 
 ==<div class="example">==
 
-###. FIXME: Re-create this example with nice names and even nicer drawings!
-
 The following example, showing the answering of a questionaire, explains this:
 
-!images/docu_shallowHistory01.jpg(Shallow history [1])!
+!images/docu_shallow_history_init.png(Shallow history [1])!
+!images/docu_shallow_history_nextQuestion1.png(Shallow history [2])!
+!images/docu_shallow_history_nextQuestion2.png(Shallow history [3])!
 
-p=. Shallow history &#91;1]
+Inside the *answeringQuestions* composite state, it is always possible to send a _pause_ event, which will return to the *init* state. At this point, the previous state, i.e., the last-answered question, is saved to the shallow history state.
 
-Particularly interesting in this statechart are the _checkProgress_ and _goon_ events. The _checkProgress_ event jumps back to the *init* state while assigning the current progress count to the variable _temp_. The event _goon_ jumps to the shallow history state that was placed inside the composite state.
+!images/docu_shallow_history_pause.png(Shallow history [4])!
 
-!images/docu_shallowHistory02.jpg(Shallow history [2])!
+When the _continue_ event is triggered, the most recent active state inside of the composite state *answeringQuestions* is activated again. The respondent doesn't have to answer the previous questions again, he can simply resume.
 
-p=. Shallow history &#91;2]
-
-!images/docu_shallowHistory03.jpg(Shallow history [3])!
-
-p=. Shallow history &#91;3]
-
-When the _goon_ event is triggered, the most recent active state inside of the composite state *answeringQuestions* is activated again.
+!images/docu_shallow_history_continue.png(Shallow history [5])!
 
 ==</div>==
 
@@ -565,13 +559,9 @@ Variables that are defined in a named interface have to be referenced using the 
 
 Variables are always typed, see section "&quot;Types&quot;":#sclang_types.
 
-Variables can be _readonly_ (constants):
+Variables can be _readonly_ by client code. Such variables are marked by the @readonly@ keyword. Please note that the readonly restriction is imposed on the client code only. Readonly variables can still be modified from within the statechart.
 
 bc. var readonly pi: real = 3.1415
-
-Variables can be referenced by the environment.
-
-bc. var external variable3: integer = 34
 
 ==<!-- End stext_keyword_var -->==
 
@@ -581,7 +571,7 @@ bc. var external variable3: integer = 34
 
 h3(#sclang_constants). Constants
 
-A variable can be immutable, i.e., *constant*. For this special variable the keyword @const@ is used:
+A variable can be immutable, i.e., *constant*. Such variables are marked by the @const@ keyword. They can neither be modified by the client code nor from within the statechart.
 
 bc. const variable1: real
 

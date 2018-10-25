@@ -16,7 +16,7 @@ The *IdentifierSettings* feature allows the configuration of module names and id
 * _maxIdentifierLength_ (Integer, optional): *DEPRECATED*. Maximum number of characters of an identifier. Default: 31 characters, which is complying with the ANSI C99 standard.
 * _separator_ (String, optional): Character to replace whitespace and otherwise illegal characters in names.
 
-Please note that the option _maxIdentifierLength_ that existed in older versions of YAKINDU Statechart Tools was removed in favor of a statechart annotation that is only available in the C Domain bundled with YAKINDU Statechart Tools Professional Edition, see "@ShortIdentifiers":../user-guide/c_domain.textile#cdom_annotations_short_identifiers .
+Please note that the _maxIdentifierLength_ option, which existed in older versions of YAKINDU Statechart Tools, has been removed in favor of a statechart annotation that is only available in the C/C++ domain bundled with YAKINDU Statechart Tools Professional Edition, see "@ShortIdentifiers":../user-guide/c_domain.textile#cdom_annotations_short_identifiers.
 
 ==<div class="example">==
 

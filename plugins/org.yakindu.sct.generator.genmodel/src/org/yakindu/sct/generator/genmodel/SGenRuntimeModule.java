@@ -11,11 +11,13 @@
 package org.yakindu.sct.generator.genmodel;
 
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.serializer.tokens.ICrossReferenceSerializer;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.generator.genmodel.naming.GenModelQualifiedNameProvider;
+import org.yakindu.sct.generator.genmodel.scoping.SGenGlobalScopeProvider;
 import org.yakindu.sct.generator.genmodel.serializer.SGenCrossReferenceSerializer;
 import org.yakindu.sct.generator.genmodel.typesystem.SGenTypeInferrer;
 
@@ -46,4 +48,9 @@ public class SGenRuntimeModule extends org.yakindu.sct.generator.genmodel.Abstra
 	public Class<? extends ICrossReferenceSerializer> bindICrossReferenceSerializer() {
 		return SGenCrossReferenceSerializer.class;
 	}
+	
+	@Override
+	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
+		return SGenGlobalScopeProvider.class;
+	};
 }

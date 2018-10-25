@@ -40,6 +40,7 @@ public class ConstOnlyDefaultScope {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.constOnlyDefaultScope_main_region_A));
 	}
+	
 	@Test
 	public void stateTransition() {
 		statemachine.enter();

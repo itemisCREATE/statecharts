@@ -43,7 +43,7 @@ public class SCTFileEditorOpener implements IURIEditorOpener {
 			IFile fileToOpen = toFile(uri);
 			if (fileToOpen != null) {
 				IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-						.openEditor(new FileEditorInput(fileToOpen), StatechartDiagramEditor.ID);
+						.openEditor(new FileEditorInput(fileToOpen), getEditorID());
 
 				if (editor instanceof DiagramEditor) {
 					DiagramEditor diagramEditor = (DiagramEditor) editor;
@@ -72,6 +72,10 @@ public class SCTFileEditorOpener implements IURIEditorOpener {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	protected String getEditorID() {
+		return StatechartDiagramEditor.ID;
 	}
 
 	@Override

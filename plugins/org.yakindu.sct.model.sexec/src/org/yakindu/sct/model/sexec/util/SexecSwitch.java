@@ -15,10 +15,15 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.AnnotatableElement;
+import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Event;
+import org.yakindu.base.types.GenericElement;
+import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PackageMember;
+import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypedElement;
+import org.yakindu.sct.model.sexec.*;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
@@ -128,7 +133,12 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = caseExecutionScope(executionFlow);
 				if (result == null) result = caseExecutionNode(executionFlow);
 				if (result == null) result = caseMappedElement(executionFlow);
+				if (result == null) result = caseComplexType(executionFlow);
+				if (result == null) result = caseType(executionFlow);
+				if (result == null) result = caseGenericElement(executionFlow);
+				if (result == null) result = casePackageMember(executionFlow);
 				if (result == null) result = caseNamedElement(executionFlow);
+				if (result == null) result = caseAnnotatableElement(executionFlow);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -136,7 +146,12 @@ public class SexecSwitch<T> extends Switch<T> {
 				ExecutionNode executionNode = (ExecutionNode)theEObject;
 				T result = caseExecutionNode(executionNode);
 				if (result == null) result = caseMappedElement(executionNode);
+				if (result == null) result = caseComplexType(executionNode);
+				if (result == null) result = caseType(executionNode);
+				if (result == null) result = caseGenericElement(executionNode);
+				if (result == null) result = casePackageMember(executionNode);
 				if (result == null) result = caseNamedElement(executionNode);
+				if (result == null) result = caseAnnotatableElement(executionNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -146,7 +161,12 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = caseExecutionNode(executionState);
 				if (result == null) result = caseExecutionScope(executionState);
 				if (result == null) result = caseMappedElement(executionState);
+				if (result == null) result = caseComplexType(executionState);
+				if (result == null) result = caseType(executionState);
+				if (result == null) result = caseGenericElement(executionState);
+				if (result == null) result = casePackageMember(executionState);
 				if (result == null) result = caseNamedElement(executionState);
+				if (result == null) result = caseAnnotatableElement(executionState);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -172,7 +192,12 @@ public class SexecSwitch<T> extends Switch<T> {
 				T result = caseExecutionEntry(executionEntry);
 				if (result == null) result = caseExecutionNode(executionEntry);
 				if (result == null) result = caseMappedElement(executionEntry);
+				if (result == null) result = caseComplexType(executionEntry);
+				if (result == null) result = caseType(executionEntry);
+				if (result == null) result = caseGenericElement(executionEntry);
+				if (result == null) result = casePackageMember(executionEntry);
 				if (result == null) result = caseNamedElement(executionEntry);
+				if (result == null) result = caseAnnotatableElement(executionEntry);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -181,7 +206,12 @@ public class SexecSwitch<T> extends Switch<T> {
 				T result = caseExecutionExit(executionExit);
 				if (result == null) result = caseExecutionNode(executionExit);
 				if (result == null) result = caseMappedElement(executionExit);
+				if (result == null) result = caseComplexType(executionExit);
+				if (result == null) result = caseType(executionExit);
+				if (result == null) result = caseGenericElement(executionExit);
+				if (result == null) result = casePackageMember(executionExit);
 				if (result == null) result = caseNamedElement(executionExit);
+				if (result == null) result = caseAnnotatableElement(executionExit);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -190,7 +220,12 @@ public class SexecSwitch<T> extends Switch<T> {
 				T result = caseExecutionChoice(executionChoice);
 				if (result == null) result = caseExecutionNode(executionChoice);
 				if (result == null) result = caseMappedElement(executionChoice);
+				if (result == null) result = caseComplexType(executionChoice);
+				if (result == null) result = caseType(executionChoice);
+				if (result == null) result = caseGenericElement(executionChoice);
+				if (result == null) result = casePackageMember(executionChoice);
 				if (result == null) result = caseNamedElement(executionChoice);
+				if (result == null) result = caseAnnotatableElement(executionChoice);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -199,7 +234,12 @@ public class SexecSwitch<T> extends Switch<T> {
 				T result = caseExecutionSynchronization(executionSynchronization);
 				if (result == null) result = caseExecutionNode(executionSynchronization);
 				if (result == null) result = caseMappedElement(executionSynchronization);
+				if (result == null) result = caseComplexType(executionSynchronization);
+				if (result == null) result = caseType(executionSynchronization);
+				if (result == null) result = caseGenericElement(executionSynchronization);
+				if (result == null) result = casePackageMember(executionSynchronization);
 				if (result == null) result = caseNamedElement(executionSynchronization);
+				if (result == null) result = caseAnnotatableElement(executionSynchronization);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -208,6 +248,19 @@ public class SexecSwitch<T> extends Switch<T> {
 				T result = caseReaction(reaction);
 				if (result == null) result = caseMappedElement(reaction);
 				if (result == null) result = caseNamedElement(reaction);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.METHOD: {
+				Method method = (Method)theEObject;
+				T result = caseMethod(method);
+				if (result == null) result = caseOperation(method);
+				if (result == null) result = caseDeclaration(method);
+				if (result == null) result = caseGenericElement(method);
+				if (result == null) result = caseTypedElement(method);
+				if (result == null) result = casePackageMember(method);
+				if (result == null) result = caseNamedElement(method);
+				if (result == null) result = caseAnnotatableElement(method);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -344,6 +397,30 @@ public class SexecSwitch<T> extends Switch<T> {
 				T result = caseHistoryEntry(historyEntry);
 				if (result == null) result = caseStep(historyEntry);
 				if (result == null) result = caseNamedElement(historyEntry);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.RETURN: {
+				Return return_ = (Return)theEObject;
+				T result = caseReturn(return_);
+				if (result == null) result = caseStep(return_);
+				if (result == null) result = caseNamedElement(return_);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.LOCAL_VARIABLE_DEFINITION: {
+				LocalVariableDefinition localVariableDefinition = (LocalVariableDefinition)theEObject;
+				T result = caseLocalVariableDefinition(localVariableDefinition);
+				if (result == null) result = caseStep(localVariableDefinition);
+				if (result == null) result = caseNamedElement(localVariableDefinition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.STATEMENT: {
+				Statement statement = (Statement)theEObject;
+				T result = caseStatement(statement);
+				if (result == null) result = caseStep(statement);
+				if (result == null) result = caseNamedElement(statement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -558,6 +635,21 @@ public class SexecSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Method</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Method</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMethod(Method object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -618,6 +710,21 @@ public class SexecSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseType(Type object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -629,6 +736,51 @@ public class SexecSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDeclaration(Declaration object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Generic Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Generic Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGenericElement(GenericElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Complex Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Complex Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseComplexType(ComplexType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Operation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Operation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOperation(Operation object) {
 		return null;
 	}
 
@@ -989,6 +1141,51 @@ public class SexecSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseHistoryEntry(HistoryEntry object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Return</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Return</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReturn(Return object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Local Variable Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Local Variable Definition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLocalVariableDefinition(LocalVariableDefinition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStatement(Statement object) {
 		return null;
 	}
 

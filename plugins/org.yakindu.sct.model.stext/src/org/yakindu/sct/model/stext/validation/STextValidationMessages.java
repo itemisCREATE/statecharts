@@ -22,6 +22,7 @@ public interface STextValidationMessages {
 	public static final String CHOICE_ONE_OUTGOING_DEFAULT_TRANSITION = "A choice should have one outgoing default transition.";
 	public static final String FEATURE_CALL_HAS_NO_EFFECT = "FeatureCall has no effect.";
 	public static final String ENTRY_EXIT_TRIGGER_NOT_ALLOWED = "Entry/Exit trigger not allowed.";
+	public static final String ONLY_FIRST_ENTRY_POINT_WILL_BE_USED = "Remove multiple entry points. Only the first will be used.";
 	public static final String LOCAL_REACTIONS_NOT_ALLOWED = "Local reactions not allowed.";
 	public static final String FEATURE_CALL_TO_SCOPE = "FEATURE_CALL_TO_SCOPE.";
 	public static final String ONLY_ONE_INTERFACE = "Only one default/unnamed interface is allowed.";
@@ -50,9 +51,9 @@ public interface STextValidationMessages {
 	public static final String REFERENCE_TO_VARIABLE = "Cannot reference a variable in a constant initialization.";
 	public static final String CONST_MUST_HAVE_VALUE_MSG = "A constant definition must specify an initial value.";
 	public static final String CONST_MUST_HAVE_VALUE_CODE = "ConstMustHaveAValue";
+	public static final String DECLARATION_WITH_READONLY = "The keyword '%s' has no effect for '%s' definitions. Can be removed.";
 	public static final String REFERENCE_CONSTANT_BEFORE_DEFINED = "Cannot reference a constant from different scope or before it is defined.";
 	public static final String INTERNAL_DECLARATION_UNUSED = "Internal declaration is not used in statechart.";
-	public static final String DECLARATION_DEPRECATED = "The keyword '%s' is deprecated. Can be removed.";
 	public static final String VALUE_OF_REQUIRES_EVENT = "valueof() expression requires event as argument.";
 	public static final String IMPORT_NOT_RESOLVED_MSG = "Import '%s' cannot be resolved.";
 	public static final String IMPORT_NOT_RESOLVED_CODE = "ImportNotResolved";
@@ -60,4 +61,8 @@ public interface STextValidationMessages {
 	public static final String CONTRADICTORY_ANNOTATIONS = "Some annotations (%s) have contradictory effects.";
 	public static final String BAD_EVENT_NAMES = "'%s' is already used as name of an internal event.";
 	public static final String SYNC_OUTGOING_TRIGGER = "Triggers and guards on a synchronization's outgoing transitions will be ignored.";
+	public static final String ALWAYS_TRUE_TRANSITION_USED = "Transition with '%s' should be evaluate as the last transition of the state as following transitions won't be evaluated. Change the transition order (in the Properties view).";
+	public static final String DEAD_TRANSITION = "Dead transition. This transition can not be taken due to previous transition with '%s' trigger.";
+	public static final String USE_DEFAULT_TRIGGER_IN_CHOICES = "Transition with '%s' effect blocking other transitions. Use 'default' or 'else' instead.";
+	public static final String ONLY_ONE_DEFAULT_SHOULD_BE_USED = "Only one default or else transition should be used. Currently used default and/or else transitions: %d.";
 }

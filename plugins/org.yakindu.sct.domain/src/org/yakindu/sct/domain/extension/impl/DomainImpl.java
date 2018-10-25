@@ -16,6 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import org.yakindu.base.base.BasePackage;
+import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.DomainStatus;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.domain.extension.IDomainDocumentationProvider;
@@ -163,10 +165,17 @@ public class DomainImpl implements IDomain {
 	public Module getModule(String feature, String... options) {
 		List<Module> modules = new ArrayList<>();
 		for (ModuleContribution module : this.modules) {
-			if (feature.equals(module.getFeature())) {
+			if (feature.equals(module.getFeature()) || "all".equals(module.getFeature())) {
 				modules.add(module.getModuleProvider().getModule(options));
 			}
 		}
+
+		if (modules.size() == 0) {
+			// If no overriding modules are contributed for this feature use the defaults
+			return DomainRegistry.getDomain(BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral())
+					.getModule(feature, options);
+		}
+
 		Module result = new LazyCombiningModule(modules);
 		return result;
 

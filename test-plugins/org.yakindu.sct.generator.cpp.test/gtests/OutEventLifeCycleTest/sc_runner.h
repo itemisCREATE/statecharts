@@ -10,10 +10,6 @@
 #include "sc_types.h"
 #include "StatemachineInterface.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 class SctUnitRunner {
 	public:
 		SctUnitRunner(StatemachineInterface * statemachine, bool event_driven, sc_integer cycle_period);
@@ -49,10 +45,6 @@ class SctUnitRunner::SctTimer {
 		sc_integer priority;
 		sc_boolean is_runcycle;
 };
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* SC_TIMER_SERVICE_H_ */
 

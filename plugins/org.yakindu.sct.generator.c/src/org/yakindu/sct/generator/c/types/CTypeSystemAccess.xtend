@@ -21,6 +21,7 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 
 import static org.yakindu.base.types.typesystem.ITypeSystem.*
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 
 /**
  * @author andreas muelder
@@ -36,11 +37,11 @@ class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 		val originalType = type?.originType
 		switch (originalType) {
 			case originalType === null || isSame(originalType, getType(VOID)) : 'void'
-			case isSame(originalType, getType(INTEGER)): 'sc_integer'
-			case isSame(originalType, getType(REAL)): 'sc_real'
-			case isSame(originalType, getType(BOOLEAN)): 'sc_boolean'
-			case isSame(originalType, getType(STRING)): 'sc_string'
-			default: throw new IllegalArgumentException("Target language name could not be inferred for type " + type)
+			case isSame(originalType, getType(INTEGER)): INT_TYPE
+			case isSame(originalType, getType(REAL)): REAL_TYPE
+			case isSame(originalType, getType(BOOLEAN)): BOOL_TYPE
+			case isSame(originalType, getType(STRING)): STRING_TYPE
+			default: type.name
 		}
 	}
 	

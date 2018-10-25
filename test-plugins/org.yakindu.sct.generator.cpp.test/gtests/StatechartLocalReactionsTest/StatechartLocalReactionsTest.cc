@@ -7,6 +7,8 @@
 
 namespace  {
 
+StatechartLocalReactions* statechart;
+
 
 
 //! The timers are managed by a timer service. */
@@ -14,9 +16,6 @@ static SctUnitRunner * runner;
 
 class StatechartLocalReactionsTest : public ::testing::Test{
 	protected:
-	
-	StatechartLocalReactions* statechart;
-	
 	virtual void SetUp() {
 		statechart = new StatechartLocalReactions();
 		statechart->init();
@@ -30,30 +29,34 @@ class StatechartLocalReactionsTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
-	
-	
 };
 
-	TEST_F(StatechartLocalReactionsTest, statechartLocalReactionsTest) {
-		
-		statechart->enter();
-		
-		EXPECT_TRUE(statechart->isStateActive(StatechartLocalReactions::main_region_S1));
-		
+
+TEST_F(StatechartLocalReactionsTest, statechartLocalReactionsTest) {
+	
+	statechart->enter();
+	
+	EXPECT_TRUE(statechart->isStateActive(StatechartLocalReactions::main_region_S1));
+	
+	EXPECT_TRUE(statechart->isStateActive(StatechartLocalReactions::region2_a));
+	
+	sc_integer cycles = 0l;
+	
+	while (cycles< 10l) {
 		EXPECT_TRUE(statechart->isStateActive(StatechartLocalReactions::region2_a));
-		
-		while (statechart->getDefaultSCI()->get_myInt()< 10l) {
-			EXPECT_TRUE(statechart->isStateActive(StatechartLocalReactions::region2_a));
-			if (statechart->getDefaultSCI()->get_myInt()%2l== 0l) {
-				EXPECT_TRUE(statechart->isStateActive(StatechartLocalReactions::main_region_S1));
-			}
-			else {
-				EXPECT_TRUE(statechart->isStateActive(StatechartLocalReactions::main_region_S2));
-			}
-			runner->proceed_cycles(1);
+		if (statechart->getDefaultSCI()->get_myInt()%2l== 0l) {
+			EXPECT_TRUE(statechart->isStateActive(StatechartLocalReactions::main_region_S1));
 		}
-		
-		
+		else {
+			EXPECT_TRUE(statechart->isStateActive(StatechartLocalReactions::main_region_S2));
+		}
+		runner->proceed_cycles(1);
+		cycles += 1l;
+		EXPECT_TRUE((statechart->getDefaultSCI()->get_myInt()== cycles));
+	}
+	
+	
 }
+
 
 }

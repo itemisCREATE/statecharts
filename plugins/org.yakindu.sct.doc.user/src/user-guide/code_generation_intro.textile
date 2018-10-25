@@ -25,8 +25,6 @@ Additionally, you can install a couple of code generators from the "YAKINDU Labs
 
 bq. *Please note:* Code generators in YAKINDU Labs are still in their beta phase and might well contain some rough edges. If you encounter any problems, please let us know!
 
-If these code generators don't suit your needs, you are free to develop your very own "custom code generator":../user-guide/code_generation_generators.html#codegen_custom_code_generators.
-
 
 
 

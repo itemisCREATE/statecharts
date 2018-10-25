@@ -11,6 +11,7 @@
  */
 package org.yakindu.sct.model.sgraph.util;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 
@@ -24,14 +25,14 @@ import org.eclipse.emf.ecore.EObject;
 
 public class ContextElementAdapter extends AdapterImpl {
 
-	public interface IContextElementProvider {
-		public EObject getContextObject();
+	private EObject eObject;
+
+	public ContextElementAdapter() {
 	}
-
-	private final IContextElementProvider provider;
-
-	public ContextElementAdapter(IContextElementProvider provider) {
-		this.provider = provider;
+	
+	public ContextElementAdapter(EObject eObject) {
+		Assert.isNotNull(eObject);
+		this.eObject = eObject;
 	}
 
 	@Override
@@ -40,6 +41,10 @@ public class ContextElementAdapter extends AdapterImpl {
 	}
 
 	public EObject getElement() {
-		return provider.getContextObject();
+		return eObject;
+	}
+
+	public void setElement(EObject object) {
+		this.eObject = object;
 	}
 }

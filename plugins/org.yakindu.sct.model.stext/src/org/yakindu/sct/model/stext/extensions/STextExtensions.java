@@ -38,7 +38,7 @@ public class STextExtensions {
 	public Statechart getStatechart(EObject context) {
 		final ContextElementAdapter provider = getContextElementAdapter(context.eResource());
 
-		if (provider == null) {
+		if (provider == null || provider.getElement() == null || provider.getElement().eResource() == null) {
 			return EcoreUtil2.getContainerOfType(context, Statechart.class);
 		} else {
 			return (Statechart) EcoreUtil.getObjectByType(provider.getElement().eResource().getContents(),

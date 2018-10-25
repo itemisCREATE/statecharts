@@ -118,7 +118,7 @@ The _Simulation_ view is used to manually raise events and to inspect and modify
 
 The _Simulation_ view groups events and variables by their _interfaces_. The unnamed interface appears as _default_ in the interface list. Click on the small triangle left from an interface's name to show or hide that interface's contents, i.e., events and variables.
 
-The simulation view also displays _time events_, provided the statechart uses time constructs like _after_ or _every_. Press or release the _"show time events"_ button !(inlinemediaobject)images/symbol_event_time_016.png(symbol: "show time events")! to toggle between displaying and not displaying time events. You can click on a time event to raise it, i.e., you don't have to wait for 24 hours to elapse in real time until the _"after 24 * 60 * 60 s"_ transition fires.
+The simulation view also displays _time events_, provided the statechart uses time constructs like _after_ or _every_. Press or release the _"show time events"_ button !(inlinemediaobject)images/symbol_event_time.png(symbol: "show time events")! to toggle between displaying and not displaying time events. You can click on a time event to raise it, i.e., you don't have to wait for 24 hours to elapse in real time until the _"after 24 * 60 * 60 s"_ transition fires.
 
 You can have multiple simulation instances running at the same time. They may simulate the same or different statecharts. Use the simulation view's drop-down menu to switch between simulation instances.
 

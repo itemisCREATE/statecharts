@@ -129,51 +129,6 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		sCInterface.raiseF();
 	}
 	
-	private boolean check_main_region_A_tr0_tr0() {
-		return sCInterface.e;
-	}
-	
-	private boolean check_main_region_A_tr1_tr1() {
-		return sCInterface.f;
-	}
-	
-	private boolean check_main_region_B_tr0_tr0() {
-		return sCInterface.e;
-	}
-	
-	private boolean check_main_region_B_r1_C1_tr0_tr0() {
-		return sCInterface.f;
-	}
-	
-	private boolean check_main_region_B_r2_D1_tr0_tr0() {
-		return sCInterface.f;
-	}
-	
-	private void effect_main_region_A_tr0() {
-		exitSequence_main_region_A();
-		react_main_region__sync0();
-	}
-	
-	private void effect_main_region_A_tr1() {
-		exitSequence_main_region_A();
-		enterSequence_main_region_B_default();
-	}
-	
-	private void effect_main_region_B_tr0() {
-		exitSequence_main_region_B();
-		enterSequence_main_region_A_default();
-	}
-	
-	private void effect_main_region_B_r1_C1_tr0() {
-		exitSequence_main_region_B_r1_C1();
-		enterSequence_main_region_B_r1_C2_default();
-	}
-	
-	private void effect_main_region_B_r2_D1_tr0() {
-		exitSequence_main_region_B_r2_D1();
-		enterSequence_main_region_B_r2_D2_default();
-	}
-	
 	/* 'default' enter sequence for state A */
 	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
@@ -317,46 +272,6 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		}
 	}
 	
-	/* The reactions of state A. */
-	private void react_main_region_A() {
-		if (check_main_region_A_tr0_tr0()) {
-			effect_main_region_A_tr0();
-		} else {
-			if (check_main_region_A_tr1_tr1()) {
-				effect_main_region_A_tr1();
-			}
-		}
-	}
-	
-	/* The reactions of state C1. */
-	private void react_main_region_B_r1_C1() {
-		if (check_main_region_B_tr0_tr0()) {
-			effect_main_region_B_tr0();
-		} else {
-			if (check_main_region_B_r1_C1_tr0_tr0()) {
-				effect_main_region_B_r1_C1_tr0();
-			}
-		}
-	}
-	
-	/* The reactions of state C2. */
-	private void react_main_region_B_r1_C2() {
-		if (check_main_region_B_tr0_tr0()) {
-			effect_main_region_B_tr0();
-		}
-	}
-	
-	/* The reactions of state D1. */
-	private void react_main_region_B_r2_D1() {
-		if (check_main_region_B_r2_D1_tr0_tr0()) {
-			effect_main_region_B_r2_D1_tr0();
-		}
-	}
-	
-	/* The reactions of state D2. */
-	private void react_main_region_B_r2_D2() {
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_main_region__entry_Default() {
 		enterSequence_main_region_A_default();
@@ -378,6 +293,109 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		enterSequence_main_region_B_r2_D2_default();
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean main_region_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.e) {
+					exitSequence_main_region_A();
+					react_main_region__sync0();
+				} else {
+					if (sCInterface.f) {
+						exitSequence_main_region_A();
+						enterSequence_main_region_B_default();
+					} else {
+						did_transition = false;
+					}
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.e) {
+					exitSequence_main_region_B();
+					enterSequence_main_region_A_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_B_r1_C1_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (main_region_B_react(try_transition)==false) {
+				if (sCInterface.f) {
+					exitSequence_main_region_B_r1_C1();
+					enterSequence_main_region_B_r1_C2_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_B_r1_C2_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (main_region_B_react(try_transition)==false) {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_B_r2_D1_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (sCInterface.f) {
+				exitSequence_main_region_B_r2_D1();
+				enterSequence_main_region_B_r2_D2_default();
+			} else {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_B_r2_D2_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			did_transition = false;
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -386,19 +404,19 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_A:
-				react_main_region_A();
+				main_region_A_react(true);
 				break;
 			case main_region_B_r1_C1:
-				react_main_region_B_r1_C1();
+				main_region_B_r1_C1_react(true);
 				break;
 			case main_region_B_r1_C2:
-				react_main_region_B_r1_C2();
+				main_region_B_r1_C2_react(true);
 				break;
 			case main_region_B_r2_D1:
-				react_main_region_B_r2_D1();
+				main_region_B_r2_D1_react(true);
 				break;
 			case main_region_B_r2_D2:
-				react_main_region_B_r2_D2();
+				main_region_B_r2_D2_react(true);
 				break;
 			default:
 				// $NullState$

@@ -11,16 +11,14 @@
 package org.yakindu.sct.refactoring.refactor.impl;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.base.NamedElement;
-import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
-import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 
@@ -61,44 +59,20 @@ public class RenameRefactoring extends AbstractRefactoring<NamedElement> {
 	@Override
 	protected void internalExecute() {
 		NamedElement element = getContextObject();
-		Collection<EObject> elementReferers = findReferers(element);
+		Collection<Setting> usages = EcoreUtil.UsageCrossReferencer.find(element, getResource().getResourceSet());
 		element.setName(newName);
-		for (EObject referer : elementReferers) {
-			if (referer instanceof FeatureCall) {
-				FeatureCall featureCall = (FeatureCall) referer;
-				featureCall.setFeature(element);
-			} else if (referer instanceof ElementReferenceExpression) {
-				ElementReferenceExpression expr = (ElementReferenceExpression) referer;
-				expr.setReference(element);
-			}
-		}
+		
+		renameReferences(element, usages);
 	}
 
-	private Collection<EObject> findReferers(EObject referedElement) {
-		Collection<EObject> result = new HashSet<EObject>();
-
-		Resource res = getResource();
-		EList<EObject> contents = res.getContents();
-		result = searchForReferers(referedElement, contents);
-
-		return result;
-	}
-
-	private Collection<EObject> searchForReferers(EObject referedElement, EList<EObject> contents) {
-		Collection<EObject> result = new HashSet<EObject>();
-		for (EObject content : contents) {
-			for (EObject crossRef : content.eCrossReferences()) {
-				if (crossRef.eIsProxy()) {
-					crossRef = EcoreUtil.resolve(crossRef, content);
-				}
-				if (EcoreUtil.equals(crossRef, referedElement)) {
-					result.add(content);
-				}
+	private void renameReferences(NamedElement element, Collection<Setting> usages) {
+		for (EStructuralFeature.Setting setting : usages) {
+			if (setting.getEStructuralFeature().isChangeable() && !setting.getEStructuralFeature().isMany()) {
+				EObject holder = setting.getEObject();
+				EStructuralFeature f = setting.getEStructuralFeature();
+				holder.eSet(f, element);
 			}
-			result.addAll(searchForReferers(referedElement, content.eContents()));
-
 		}
-		return result;
 	}
 
 	@Override

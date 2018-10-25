@@ -15,10 +15,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeConstraint;
+import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesPackage;
 
 /**
@@ -89,14 +89,14 @@ public class TypeImpl extends PackageMemberImpl implements Type {
 	protected boolean visible = VISIBLE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getSuperTypes() <em>Super Types</em>}' reference list.
+	 * The cached value of the '{@link #getSuperTypes() <em>Super Types</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSuperTypes()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Type> superTypes;
+	protected EList<TypeSpecifier> superTypes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -177,9 +177,9 @@ public class TypeImpl extends PackageMemberImpl implements Type {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Type> getSuperTypes() {
+	public EList<TypeSpecifier> getSuperTypes() {
 		if (superTypes == null) {
-			superTypes = new EObjectResolvingEList<Type>(Type.class, this, TypesPackage.TYPE__SUPER_TYPES);
+			superTypes = new EObjectContainmentEList<TypeSpecifier>(TypeSpecifier.class, this, TypesPackage.TYPE__SUPER_TYPES);
 		}
 		return superTypes;
 	}
@@ -204,6 +204,8 @@ public class TypeImpl extends PackageMemberImpl implements Type {
 		switch (featureID) {
 			case TypesPackage.TYPE__CONSTRAINT:
 				return ((InternalEList<?>)getConstraint()).basicRemove(otherEnd, msgs);
+			case TypesPackage.TYPE__SUPER_TYPES:
+				return ((InternalEList<?>)getSuperTypes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -249,7 +251,7 @@ public class TypeImpl extends PackageMemberImpl implements Type {
 				return;
 			case TypesPackage.TYPE__SUPER_TYPES:
 				getSuperTypes().clear();
-				getSuperTypes().addAll((Collection<? extends Type>)newValue);
+				getSuperTypes().addAll((Collection<? extends TypeSpecifier>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

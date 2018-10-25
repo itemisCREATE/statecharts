@@ -72,7 +72,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link BasePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -86,7 +86,8 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		if (isInited) return (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
 
 		// Obtain or create and register package
-		BasePackageImpl theBasePackage = (BasePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof BasePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new BasePackageImpl());
+		Object registeredBasePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		BasePackageImpl theBasePackage = registeredBasePackage instanceof BasePackageImpl ? (BasePackageImpl)registeredBasePackage : new BasePackageImpl();
 
 		isInited = true;
 
@@ -99,7 +100,6 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		// Mark meta-data to indicate it can't be changed
 		theBasePackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(BasePackage.eNS_URI, theBasePackage);
 		return theBasePackage;

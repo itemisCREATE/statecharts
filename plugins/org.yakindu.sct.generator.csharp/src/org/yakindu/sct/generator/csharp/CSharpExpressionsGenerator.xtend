@@ -32,6 +32,8 @@ import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.base.types.Parameter
+import org.yakindu.sct.model.sexec.Method
 
 class CSharpExpressionsGenerator extends ExpressionsGenerator {
 
@@ -40,7 +42,7 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ITypeSystemInferrer
 
-	private var List<TimeEvent> timeEvents;
+	var List<TimeEvent> timeEvents;
 
 	def private getTimeEvents(TimeEvent it) {
 		if (timeEvents === null) {
@@ -91,12 +93,16 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 		value.definition.context + value.definition.event.valueIdentifier
 	}
 
-	def dispatch CharSequence code(ElementReferenceExpression it) '''
-		«IF it.reference instanceof OperationDefinition»
-			«reference.code»(«FOR arg : expressions SEPARATOR ", "»«arg.code»«ENDFOR»)
-		«ELSE»
-			«definition.code»«ENDIF»
-	'''
+	def dispatch CharSequence code(ElementReferenceExpression it){
+		if(it.reference instanceof OperationDefinition) {
+			return '''«reference.code»(«FOR arg : expressions SEPARATOR ", "»«arg.code»«ENDFOR»)'''
+		} else if (it.reference instanceof Parameter) {
+			return '''«(it.reference as Parameter).name»'''
+		}
+		else {
+			return '''«definition.code»'''
+		}
+	}
 
 	def dispatch CharSequence code(FeatureCall it) '''
 		«IF feature instanceof Operation»
@@ -118,7 +124,7 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 		if (it.const) {
 			return getConstContext(it)
 		}
-		if (scope !== null) {
+		if (interfaceScope !== null) {
 			return interfaceScope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""
@@ -144,6 +150,12 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 			return interfaceScope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""
+	}
+	
+	def dispatch CharSequence code(Method it){
+		'''
+		«name»(«FOR params : it.parameters»«params.varArgs.booleanValue»«ENDFOR»)
+		'''
 	}
 
 	def dispatch CharSequence getContext(EObject it) {

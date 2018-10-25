@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.ui.editor.editor;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
@@ -59,7 +61,6 @@ import org.yakindu.sct.domain.extension.DomainStatus.Severity;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementProvider;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.definitionsection.StatechartDefinitionSection;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningEditor;
@@ -80,7 +81,7 @@ import com.google.inject.Key;
  * @author robert rudi
  */
 @SuppressWarnings("restriction")
-public class StatechartDiagramEditor extends DiagramPartitioningEditor implements IGotoMarker, IContextElementProvider {
+public class StatechartDiagramEditor extends DiagramPartitioningEditor implements IGotoMarker {
 
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
 
@@ -178,14 +179,21 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 				IEditorInput otherInput = e.getEditorInput();
 				IEditorInput thisInput = this.getEditorInput();
 
-				return ID.equals(e.getId()) && !otherInput.equals(thisInput) && ((IFileEditorInput) otherInput)
-						.getFile().getLocationURI().equals(((IFileEditorInput) thisInput).getFile().getLocationURI());
+				return ID.equals(e.getId()) && !otherInput.equals(thisInput)
+						&& equalsLocationURI(otherInput, thisInput);
 			} catch (PartInitException e1) {
 				e1.printStackTrace();
 				return false;
 			}
 		}).map(e -> e.getEditor(false)).findFirst();
 		return editorWithSameResource;
+	}
+
+	protected boolean equalsLocationURI(IEditorInput otherInput, IEditorInput thisInput) {
+		URI otherLocationURI = ((IFileEditorInput) otherInput).getFile().getLocationURI();
+		URI thisLocationURI = ((IFileEditorInput) thisInput).getFile().getLocationURI();
+		// location URI can be null if project was deleted from workspace
+		return otherLocationURI != null && otherLocationURI.equals(thisLocationURI);
 	}
 
 	protected Injector getEditorInjector() {
@@ -442,5 +450,13 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		SpecificationElement contextObject = (SpecificationElement) getContextObject();
 		return super.isDirty() || (definitionSection != null && (definitionSection.getDefinition() != null
 				&& !definitionSection.getDefinition().equals(contextObject.getSpecification())));
+	}
+	
+	@Override
+	public void doSave(IProgressMonitor progressMonitor) {
+		if (definitionSection != null) {
+			definitionSection.validateEmbeddedEditorContext();
+		}
+		super.doSave(progressMonitor);
 	}
 }

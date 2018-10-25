@@ -16,6 +16,7 @@ import static com.google.common.collect.Iterables.transform;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IStatus;
@@ -23,6 +24,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.yakindu.base.base.DomainElement;
@@ -37,7 +42,6 @@ import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.generator.core.extensions.ILibraryDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
 import org.yakindu.sct.generator.core.library.IDefaultFeatureValueProvider;
-import org.yakindu.sct.model.sgen.DeprecatableElement;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
@@ -69,9 +73,10 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	public static final String DUPLICATE_FEATURE = "Duplicate feature.";
 	public static final String UNKOWN_GENERATOR = "Unknown generator.";
 	public static final String UNKNOWN_CONTENT_TYPE = "Unknown content type '";
-	public static final String DEPRECATED = "Element is depricated.";
+	public static final String DEPRECATED = "Element '%s' is deprecated and will be removed in the next version. ";
 	public static final String EMPTY_SGEN = ".sgen file does not contain any entries.";
 	public static final String INVALID_DOMAIN_ID = "This generator can not be used for domain %s. Valid domains are %s";
+	public static final String DUPLICATE_ELEMENT = "The %s '%s' exists multiple times. Please rename or remove duplicates.";
 
 	public static final String CODE_REQUIRED_FEATURE = "code_req_feature.";
 
@@ -83,11 +88,19 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	protected TypeValidator typeValidator;
 	@Inject
 	protected ITypeSystem typesystem;
+	@Inject
+	protected IScopeProvider scopeProvider;
+	@Inject
+	protected IQualifiedNameProvider nameProvider;
 
 	@Check
 	public void checkDomainCompatibility(GeneratorModel model) {
-		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
-		Set<String> validDomains = generatorDescriptor.getValidDomains();
+		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions
+				.getGeneratorDescriptor(model.getGeneratorId());
+		if (!generatorDescriptor.isPresent()) {
+			return;
+		}
+		Set<String> validDomains = generatorDescriptor.get().getValidDomains();
 		EList<GeneratorEntry> entries = model.getEntries();
 		for (GeneratorEntry generatorEntry : entries) {
 			EObject reference = generatorEntry.getElementRef();
@@ -112,15 +125,32 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	@Check
 	public void checkContentType(GeneratorEntry entry) {
 		GeneratorModel generatorModel = EcoreUtil2.getContainerOfType(entry, GeneratorModel.class);
-		IGeneratorDescriptor descriptor = GeneratorExtensions.getGeneratorDescriptor(generatorModel.getGeneratorId());
-		if (descriptor == null)
+		Optional<IGeneratorDescriptor> descriptor = GeneratorExtensions
+				.getGeneratorDescriptor(generatorModel.getGeneratorId());
+		if (!descriptor.isPresent())
 			return;
 		String contentType = entry.getContentType();
 		if (contentType == null || contentType.trim().length() == 0) {
 			return;
 		}
-		if (!contentType.equals(descriptor.getContentType())) {
+		if (!contentType.equals(descriptor.get().getContentType())) {
 			error(UNKNOWN_CONTENT_TYPE + contentType + "'", SGenPackage.Literals.GENERATOR_ENTRY__CONTENT_TYPE);
+		}
+	}
+	
+	@Check
+	public void checkDuplicateElementRef(GeneratorEntry entry) {
+		EObject elementRef = entry.getElementRef();
+		if (elementRef == null) {
+			return;
+		}
+		QualifiedName elementName = nameProvider.getFullyQualifiedName(elementRef);
+		if (elementName == null) {
+			return;
+		}
+		IScope scope = scopeProvider.getScope(entry, SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF);
+		if (Iterables.size(Iterables.filter(scope.getAllElements(), (e) -> elementName.equals(e.getQualifiedName()))) > 1) {
+			warning(String.format(DUPLICATE_ELEMENT, entry.getContentType(), elementName), SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF);
 		}
 	}
 
@@ -154,10 +184,13 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 			return;
 		GeneratorModel model = (GeneratorModel) EcoreUtil2.getRootContainer(value);
 
-		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
-
+		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions
+				.getGeneratorDescriptor(model.getGeneratorId());
+		if (!generatorDescriptor.isPresent()) {
+			return;
+		}
 		IDefaultFeatureValueProvider provider = LibraryExtensions.getDefaultFeatureValueProvider(
-				generatorDescriptor.getLibraryIDs(), value.getParameter().getFeatureType().getLibrary());
+				generatorDescriptor.get().getLibraryIDs(), value.getParameter().getFeatureType().getLibrary());
 		injector.injectMembers(provider);
 		IStatus status = provider.validateParameterValue(value);
 		createMarker(status);
@@ -175,8 +208,8 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 
 	@Check
 	public void checkGeneratorExists(GeneratorModel model) {
-		IGeneratorDescriptor descriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
-		if (descriptor == null) {
+		Optional<IGeneratorDescriptor> descriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
+		if (!descriptor.isPresent()) {
 			error(String.format(UNKOWN_GENERATOR + " %s!", model.getGeneratorId()),
 					SGenPackage.Literals.GENERATOR_MODEL__GENERATOR_ID);
 		}
@@ -222,10 +255,13 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	public void checkRequiredFeatures(GeneratorEntry entry) {
 		GeneratorModel model = (GeneratorModel) EcoreUtil2.getRootContainer(entry);
 
-		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
-
+		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions
+				.getGeneratorDescriptor(model.getGeneratorId());
+		if (!generatorDescriptor.isPresent()) {
+			return;
+		}
 		Iterable<ILibraryDescriptor> libraryDescriptors = LibraryExtensions
-				.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
+				.getLibraryDescriptors(generatorDescriptor.get().getLibraryIDs());
 
 		Iterable<FeatureType> requiredFeatures = filter(
 				concat(transform(transform(libraryDescriptors, getFeatureTypeLibrary()), getFeatureTypes())),
@@ -243,12 +279,24 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	}
 
 	@Check
-	public void checkDeprecatedFeatures(GeneratorEntry entry) {
-		Iterable<FeatureConfiguration> features = entry.getFeatures();
-		Iterable<FeatureType> deprecatedFeatures = filter(transform(features, getFeatureType()), isDeprecated());
-		for (FeatureType feature : deprecatedFeatures) {
-			warning(String.format(DEPRECATED + " %s : %s", feature.getName(), feature.getComment()),
-					SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF, feature.getName());
+	public void checkDeprecatedParameters(FeatureParameterValue value) {
+		if (value.getParameter().isDeprecated()) {
+			String warning = String.format(DEPRECATED, value.getParameter().getName());
+			if (value.getParameter().getComment() != null) {
+				warning += value.getParameter().getComment();
+			}
+			warning(warning, value, null);
+		}
+	}
+
+	@Check
+	public void checkDeprecatedFeatures(FeatureConfiguration configuration) {
+		if (configuration.getType().isDeprecated()) {
+			String warning = String.format(DEPRECATED, configuration.getType().getName());
+			if (configuration.getType().getComment() != null) {
+				warning += configuration.getType().getComment();
+			}
+			warning(warning, configuration, null);
 		}
 	}
 
@@ -256,10 +304,13 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	public void checkRequiredParameters(FeatureConfiguration configuration) {
 		GeneratorModel model = (GeneratorModel) EcoreUtil2.getRootContainer(configuration);
 
-		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
-
+		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions
+				.getGeneratorDescriptor(model.getGeneratorId());
+		if (!generatorDescriptor.isPresent()) {
+			return;
+		}
 		Iterable<ILibraryDescriptor> libraryDescriptors = LibraryExtensions
-				.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
+				.getLibraryDescriptors(generatorDescriptor.get().getLibraryIDs());
 
 		Iterable<String> requiredParameters = transform(filter(concat(transform(
 				filter(concat(transform(transform(libraryDescriptors, getFeatureTypeLibrary()), getFeatureTypes())),
@@ -278,16 +329,6 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		}
 	}
 
-	@Check
-	public void checkDeprecatedParameters(GeneratorEntry entry) {
-		Iterable<FeatureParameter> deprecatedParameters = filter(
-				concat(transform(transform(entry.getFeatures(), getFeatureType()), getParameter())), isDeprecated());
-		for (FeatureParameter parameter : deprecatedParameters) {
-			warning(String.format(DEPRECATED + " %s : %s", parameter.getName(), parameter.getComment()),
-					SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF, parameter.getName());
-		}
-	}
-
 	private Function<NamedElement, String> getName() {
 		return new Function<NamedElement, String>() {
 
@@ -302,14 +343,6 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 
 			public boolean apply(FeatureParameter input) {
 				return !input.isOptional();
-			}
-		};
-	}
-
-	private Predicate<DeprecatableElement> isDeprecated() {
-		return new Predicate<DeprecatableElement>() {
-			public boolean apply(DeprecatableElement input) {
-				return input.isDeprecated();
 			}
 		};
 	}
@@ -358,14 +391,6 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 
 			public FeatureTypeLibrary apply(ILibraryDescriptor from) {
 				return (FeatureTypeLibrary) new ResourceSetImpl().getResource(from.getURI(), true).getContents().get(0);
-			}
-		};
-	}
-
-	private static Function<FeatureConfiguration, FeatureType> getFeatureType() {
-		return new Function<FeatureConfiguration, FeatureType>() {
-			public FeatureType apply(FeatureConfiguration input) {
-				return input.getType();
 			}
 		};
 	}

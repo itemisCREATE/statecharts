@@ -22,6 +22,7 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sexec.Method
 
 class Naming {
 
@@ -95,6 +96,10 @@ class Naming {
 
 	def dispatch identifier(EventDefinition it) {
 		escaped.asIdentifier
+	}
+	
+	def dispatch identifier(Method it){
+		'''«shortName»'''
 	}
 
 	def String getValueIdentifier(Event it) {

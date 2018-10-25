@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static ReadOnlyVariable statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static ReadOnlyVariable statechart;
-
+			
 class ReadOnlyVariableTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class ReadOnlyVariableTest : public ::testing::Test{
 
 
 TEST_F(ReadOnlyVariableTest, ReadOnlyVariableTest) {
+	
 	readOnlyVariable_enter(&statechart);
 	EXPECT_TRUE(readOnlyVariable_isStateActive(&statechart, ReadOnlyVariable_main_region_StateA));
 	EXPECT_TRUE(readOnlyVariableIface_get_myInt(&statechart)== 0l);

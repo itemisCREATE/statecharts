@@ -64,6 +64,7 @@ public class DeclarationItemProvider extends ItemProviderAdapter implements IEdi
 			addTypePropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
 			addIdPropertyDescriptor(object);
+			addStaticPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -135,6 +136,28 @@ public class DeclarationItemProvider extends ItemProviderAdapter implements IEdi
 	}
 
 	/**
+	 * This adds a property descriptor for the Static feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addStaticPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Declaration_static_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Declaration_static_feature", "_UI_Declaration_type"),
+				 TypesPackage.Literals.DECLARATION__STATIC,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -191,6 +214,7 @@ public class DeclarationItemProvider extends ItemProviderAdapter implements IEdi
 		switch (notification.getFeatureID(Declaration.class)) {
 			case TypesPackage.DECLARATION__NAME:
 			case TypesPackage.DECLARATION__ID:
+			case TypesPackage.DECLARATION__STATIC:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TypesPackage.DECLARATION__TYPE_SPECIFIER:

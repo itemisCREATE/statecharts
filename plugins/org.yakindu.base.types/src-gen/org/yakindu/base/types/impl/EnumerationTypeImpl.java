@@ -27,7 +27,7 @@ import org.yakindu.base.types.TypesPackage;
  *
  * @generated
  */
-public class EnumerationTypeImpl extends PrimitiveTypeImpl implements EnumerationType {
+public class EnumerationTypeImpl extends ComplexTypeImpl implements EnumerationType {
 	/**
 	 * The cached value of the '{@link #getEnumerator() <em>Enumerator</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

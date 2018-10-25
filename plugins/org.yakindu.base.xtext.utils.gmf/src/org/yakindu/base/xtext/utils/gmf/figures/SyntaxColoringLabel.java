@@ -31,6 +31,7 @@ import org.eclipse.jface.resource.FontDescriptor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
@@ -64,6 +65,18 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		setLayoutManager(textFlow, false);
 	}
 
+	public void setZoom(double zoom) {
+		textFlow.zoom = zoom;
+	}
+
+	public void setHighlight(boolean highlight) {
+		textFlow.setHighlight(highlight);
+	}
+
+	public boolean isHighlight() {
+		return textFlow.isHighlight();
+	}
+
 	public void setRanges(StyleRange[] ranges) {
 		textFlow.setRanges(ranges);
 	}
@@ -95,6 +108,16 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		private static final Image dummy = new Image(Display.getDefault(), 1, 1);
 		private static final GC gc = new GC(dummy);
 		private Font boldFont;
+		private double zoom = 1.0;
+		private boolean highlight = true;
+
+		public void setHighlight(boolean highlight) {
+			this.highlight = highlight;
+		}
+
+		public boolean isHighlight() {
+			return highlight;
+		}
 
 		private StyleRange[] ranges = new StyleRange[0];
 
@@ -126,6 +149,10 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 
 		@Override
 		protected void paintText(Graphics g, String draw, int x, int y, int bidiLevel) {
+			if (!highlight) {
+				super.paintText(g, draw, x, y, bidiLevel);
+				return;
+			}
 			if (ranges.length == 0) {
 				draw = replaceTabs(draw);
 				super.paintText(g, draw, x, y, bidiLevel);
@@ -135,6 +162,12 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 				String originalDraw = draw;
 				int paintOffset = 0;
 				int lineOffset = getText().indexOf(originalDraw);
+				if (lineOffset == -1) {
+					// This may happen if the string is truncated with '..'
+					originalDraw = replaceTabs(originalDraw);
+					super.paintText(g, originalDraw, x, y, bidiLevel);
+					return;
+				}
 				try {
 					g.pushState();
 					g.setFont(getFont());
@@ -154,6 +187,7 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 								Math.min(endIndex > 0 ? endIndex : 0, draw.length()));
 						substring = replaceTabs(substring);
 						g.drawText(substring, x + paintOffset, y);
+
 						int offset = getTextExtend(g.getFont(), substring);
 						paintOffset += offset;
 					}
@@ -170,12 +204,21 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		}
 
 		protected int getTextExtend(Font font, String string) {
-			// Can't use TextUtilities, wrong calculation of " "
-			// getTextUtilities().getStringExtents(string, font).width;
+			if (string.isEmpty())
+				return 0;
+			if (zoom != 1.0) {
+				FontData data = font.getFontData()[0];
+				FontDescriptor newFontDescriptor = FontDescriptor.createFrom(font)
+						.setHeight((int) (data.getHeight() * zoom));
+				font = newFontDescriptor.createFont(Display.getDefault());
+			}
 			if (gc.getFont() != font)
 				gc.setFont(font);
 			int offset = gc.textExtent(string).x;
-			return offset;
+			if (zoom != 1.0) {
+				font.dispose();
+			}
+			return (int) Math.ceil((offset / zoom));
 		}
 
 		@Override
@@ -230,6 +273,7 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 			 * Add bold font size to label dimension
 			 */
 			protected Dimension getTextExtentsInternal(String draw, Font f) {
+				draw = replaceTabs(draw);
 				Dimension d = super.getTextExtents(draw, f).getCopy();
 				int paintOffset = 0;
 				int lineOffset = getText().indexOf(draw);

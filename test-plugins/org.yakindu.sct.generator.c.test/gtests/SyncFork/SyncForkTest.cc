@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static SyncFork statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static SyncFork statechart;
-
+			
 class SyncForkTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class SyncForkTest : public ::testing::Test{
 
 
 TEST_F(SyncForkTest, syncForkTest) {
+	
 	syncFork_enter(&statechart);
 	EXPECT_TRUE(syncFork_isStateActive(&statechart, SyncFork_main_region_A));
 	syncForkIface_raise_f(&statechart);

@@ -6,12 +6,12 @@
 #include "sc_timer_service.h"
 
 
+static SyncJoin statechart;
+
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
-
-static SyncJoin statechart;
-
+			
 class SyncJoinTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -29,6 +29,7 @@ class SyncJoinTest : public ::testing::Test{
 
 
 TEST_F(SyncJoinTest, syncJoin_C2_Waits) {
+	
 	syncJoin_enter(&statechart);
 	EXPECT_TRUE(syncJoin_isStateActive(&statechart, SyncJoin_main_region_B));
 	EXPECT_TRUE(syncJoin_isStateActive(&statechart, SyncJoin_main_region_B_r1_C1));
@@ -68,6 +69,7 @@ TEST_F(SyncJoinTest, syncJoin_C2_Waits) {
 	EXPECT_TRUE(syncJoin_isStateActive(&statechart, SyncJoin_main_region_A));
 }
 TEST_F(SyncJoinTest, syncJoin_D2_Waits) {
+	
 	syncJoin_enter(&statechart);
 	EXPECT_TRUE(syncJoin_isStateActive(&statechart, SyncJoin_main_region_B));
 	EXPECT_TRUE(syncJoin_isStateActive(&statechart, SyncJoin_main_region_B_r1_C1));
@@ -95,6 +97,7 @@ TEST_F(SyncJoinTest, syncJoin_D2_Waits) {
 	EXPECT_TRUE(syncJoin_isStateActive(&statechart, SyncJoin_main_region_B_r2_D2));
 }
 TEST_F(SyncJoinTest, doubleEntryActionBug) {
+	
 	syncJoin_enter(&statechart);
 	syncJoinIface_raise_e(&statechart);
 	syncJoinIface_raise_f(&statechart);

@@ -221,78 +221,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		sCInterface.raiseEvent9();
 	}
 	
-	private boolean check_mainRegion_State1_tr0_tr0() {
-		return sCInterface.event1;
-	}
-	
-	private boolean check_mainRegion_State2_tr0_tr0() {
-		return sCInterface.event2;
-	}
-	
-	private boolean check_mainRegion_State2__region0_a_tr0_tr0() {
-		return sCInterface.event3;
-	}
-	
-	private boolean check_mainRegion_State2__region0_State4_tr0_tr0() {
-		return sCInterface.event4;
-	}
-	
-	private boolean check_mainRegion_State2__region0_State4__region0_State6_tr0_tr0() {
-		return sCInterface.event5;
-	}
-	
-	private boolean check_mainRegion_State2__region0_State4__region0_State7_tr0_tr0() {
-		return sCInterface.event6;
-	}
-	
-	private boolean check_mainRegion_State2__region0_State4__region0_State7__region0_State8_tr0_tr0() {
-		return sCInterface.event7;
-	}
-	
-	private boolean check_mainRegion_State2__region0_State4__region0_State7__region0_State9_tr0_tr0() {
-		return sCInterface.event8;
-	}
-	
-	private void effect_mainRegion_State1_tr0() {
-		exitSequence_mainRegion_State1();
-		enterSequence_mainRegion_State2_default();
-	}
-	
-	private void effect_mainRegion_State2_tr0() {
-		exitSequence_mainRegion_State2();
-		enterSequence_mainRegion_State1_default();
-	}
-	
-	private void effect_mainRegion_State2__region0_a_tr0() {
-		exitSequence_mainRegion_State2__region0_a();
-		enterSequence_mainRegion_State2__region0_State4_default();
-	}
-	
-	private void effect_mainRegion_State2__region0_State4_tr0() {
-		exitSequence_mainRegion_State2__region0_State4();
-		enterSequence_mainRegion_State2__region0_State5_default();
-	}
-	
-	private void effect_mainRegion_State2__region0_State4__region0_State6_tr0() {
-		exitSequence_mainRegion_State2__region0_State4__region0_State6();
-		enterSequence_mainRegion_State2__region0_State4__region0_State7_default();
-	}
-	
-	private void effect_mainRegion_State2__region0_State4__region0_State7_tr0() {
-		exitSequence_mainRegion_State2__region0_State4__region0_State7();
-		enterSequence_mainRegion_State2__region0_State4__region0_State6_default();
-	}
-	
-	private void effect_mainRegion_State2__region0_State4__region0_State7__region0_State8_tr0() {
-		exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8();
-		enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9_default();
-	}
-	
-	private void effect_mainRegion_State2__region0_State4__region0_State7__region0_State9_tr0() {
-		exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9();
-		enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8_default();
-	}
-	
 	/* 'default' enter sequence for state State1 */
 	private void enterSequence_mainRegion_State1_default() {
 		nextStateIndex = 0;
@@ -561,84 +489,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		}
 	}
 	
-	/* The reactions of state State1. */
-	private void react_mainRegion_State1() {
-		if (check_mainRegion_State1_tr0_tr0()) {
-			effect_mainRegion_State1_tr0();
-		}
-	}
-	
-	/* The reactions of state a. */
-	private void react_mainRegion_State2__region0_a() {
-		if (check_mainRegion_State2_tr0_tr0()) {
-			effect_mainRegion_State2_tr0();
-		} else {
-			if (check_mainRegion_State2__region0_a_tr0_tr0()) {
-				effect_mainRegion_State2__region0_a_tr0();
-			}
-		}
-	}
-	
-	/* The reactions of state State6. */
-	private void react_mainRegion_State2__region0_State4__region0_State6() {
-		if (check_mainRegion_State2_tr0_tr0()) {
-			effect_mainRegion_State2_tr0();
-		} else {
-			if (check_mainRegion_State2__region0_State4_tr0_tr0()) {
-				effect_mainRegion_State2__region0_State4_tr0();
-			} else {
-				if (check_mainRegion_State2__region0_State4__region0_State6_tr0_tr0()) {
-					effect_mainRegion_State2__region0_State4__region0_State6_tr0();
-				}
-			}
-		}
-	}
-	
-	/* The reactions of state State8. */
-	private void react_mainRegion_State2__region0_State4__region0_State7__region0_State8() {
-		if (check_mainRegion_State2_tr0_tr0()) {
-			effect_mainRegion_State2_tr0();
-		} else {
-			if (check_mainRegion_State2__region0_State4_tr0_tr0()) {
-				effect_mainRegion_State2__region0_State4_tr0();
-			} else {
-				if (check_mainRegion_State2__region0_State4__region0_State7_tr0_tr0()) {
-					effect_mainRegion_State2__region0_State4__region0_State7_tr0();
-				} else {
-					if (check_mainRegion_State2__region0_State4__region0_State7__region0_State8_tr0_tr0()) {
-						effect_mainRegion_State2__region0_State4__region0_State7__region0_State8_tr0();
-					}
-				}
-			}
-		}
-	}
-	
-	/* The reactions of state State9. */
-	private void react_mainRegion_State2__region0_State4__region0_State7__region0_State9() {
-		if (check_mainRegion_State2_tr0_tr0()) {
-			effect_mainRegion_State2_tr0();
-		} else {
-			if (check_mainRegion_State2__region0_State4_tr0_tr0()) {
-				effect_mainRegion_State2__region0_State4_tr0();
-			} else {
-				if (check_mainRegion_State2__region0_State4__region0_State7_tr0_tr0()) {
-					effect_mainRegion_State2__region0_State4__region0_State7_tr0();
-				} else {
-					if (check_mainRegion_State2__region0_State4__region0_State7__region0_State9_tr0_tr0()) {
-						effect_mainRegion_State2__region0_State4__region0_State7__region0_State9_tr0();
-					}
-				}
-			}
-		}
-	}
-	
-	/* The reactions of state State5. */
-	private void react_mainRegion_State2__region0_State5() {
-		if (check_mainRegion_State2_tr0_tr0()) {
-			effect_mainRegion_State2_tr0();
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_mainRegion__entry_Default() {
 		enterSequence_mainRegion_State1_default();
@@ -664,6 +514,167 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		}
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean mainRegion_State1_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.event1) {
+					exitSequence_mainRegion_State1();
+					enterSequence_mainRegion_State2_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean mainRegion_State2_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.event2) {
+					exitSequence_mainRegion_State2();
+					enterSequence_mainRegion_State1_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean mainRegion_State2__region0_a_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (mainRegion_State2_react(try_transition)==false) {
+				if (sCInterface.event3) {
+					exitSequence_mainRegion_State2__region0_a();
+					enterSequence_mainRegion_State2__region0_State4_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean mainRegion_State2__region0_State4_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (mainRegion_State2_react(try_transition)==false) {
+				if (sCInterface.event4) {
+					exitSequence_mainRegion_State2__region0_State4();
+					enterSequence_mainRegion_State2__region0_State5_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean mainRegion_State2__region0_State4__region0_State6_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (mainRegion_State2__region0_State4_react(try_transition)==false) {
+				if (sCInterface.event5) {
+					exitSequence_mainRegion_State2__region0_State4__region0_State6();
+					enterSequence_mainRegion_State2__region0_State4__region0_State7_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean mainRegion_State2__region0_State4__region0_State7_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (mainRegion_State2__region0_State4_react(try_transition)==false) {
+				if (sCInterface.event6) {
+					exitSequence_mainRegion_State2__region0_State4__region0_State7();
+					enterSequence_mainRegion_State2__region0_State4__region0_State6_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean mainRegion_State2__region0_State4__region0_State7__region0_State8_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (mainRegion_State2__region0_State4__region0_State7_react(try_transition)==false) {
+				if (sCInterface.event7) {
+					exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8();
+					enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean mainRegion_State2__region0_State4__region0_State7__region0_State9_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (mainRegion_State2__region0_State4__region0_State7_react(try_transition)==false) {
+				if (sCInterface.event8) {
+					exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9();
+					enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean mainRegion_State2__region0_State5_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (mainRegion_State2_react(try_transition)==false) {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -672,22 +683,22 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case mainRegion_State1:
-				react_mainRegion_State1();
+				mainRegion_State1_react(true);
 				break;
 			case mainRegion_State2__region0_a:
-				react_mainRegion_State2__region0_a();
+				mainRegion_State2__region0_a_react(true);
 				break;
 			case mainRegion_State2__region0_State4__region0_State6:
-				react_mainRegion_State2__region0_State4__region0_State6();
+				mainRegion_State2__region0_State4__region0_State6_react(true);
 				break;
 			case mainRegion_State2__region0_State4__region0_State7__region0_State8:
-				react_mainRegion_State2__region0_State4__region0_State7__region0_State8();
+				mainRegion_State2__region0_State4__region0_State7__region0_State8_react(true);
 				break;
 			case mainRegion_State2__region0_State4__region0_State7__region0_State9:
-				react_mainRegion_State2__region0_State4__region0_State7__region0_State9();
+				mainRegion_State2__region0_State4__region0_State7__region0_State9_react(true);
 				break;
 			case mainRegion_State2__region0_State5:
-				react_mainRegion_State2__region0_State5();
+				mainRegion_State2__region0_State5_react(true);
 				break;
 			default:
 				// $NullState$

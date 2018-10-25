@@ -22,6 +22,7 @@ import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.interpreter.IExpressionInterpreter;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
+import org.yakindu.sct.model.sexec.interpreter.test.util.SimulationInjectorProvider;
 import org.yakindu.sct.model.sruntime.CompositeSlot;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.model.sruntime.ExecutionEvent;
@@ -406,6 +407,14 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	public void testIntOr() {
 		executeWithDefaultScope("intVar= 9 | 12");
 		assertEquals(13L, getIntValue());
+	}
+	
+	@Test
+	public void testBitwiseExecutionOrder() {
+		// Execution order in C, C++, Java: And -> Xor -> Or
+		executeWithDefaultScope("intVar = 3|4^5&1");
+		assertEquals(7L, getIntValue());
+		
 	}
 
 	@Test

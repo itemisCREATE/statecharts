@@ -1,10 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: YAKINDU Base Types
+Bundle-Name: %pluginName
 Bundle-SymbolicName: org.yakindu.base.types;singleton:=true
-Bundle-Version: 3.4.0.qualifier
+Automatic-Module-Name: org.yakindu.base.types
+Bundle-Version: 3.4.2.qualifier
 Bundle-ClassPath: .
-Bundle-Vendor: statecharts.org
+Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.yakindu.base.base,
@@ -27,7 +28,9 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xtend.lib,
  com.google.guava,
  org.eclipse.xtext.util,
- org.eclipse.xtext
+ org.eclipse.xtext,
+ org.apache.commons.lang,
+ org.eclipse.emf.edit
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j
 

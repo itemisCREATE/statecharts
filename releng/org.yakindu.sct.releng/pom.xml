@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.yakindu.sct</groupId>
 	<artifactId>org.yakindu.sct.releng</artifactId>
-	<version>3.4.0-SNAPSHOT</version>
+	<version>3.4.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
 	<properties>
-		<tycho-version>0.24.0</tycho-version>
-		<tycho-extras-version>0.24.0</tycho-extras-version>
+		<tycho-version>1.2.0</tycho-version>
+		<tycho-extras-version>1.2.0</tycho-extras-version>
 		<antrun-version>1.6</antrun-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<testFailureIgnore>false</testFailureIgnore>
+		<jarSignerUrl>https://macbuilds2.itemis.de/jarsigner</jarSignerUrl>
+		<signerVersion>1.1.5</signerVersion>
 	</properties>
 	<build>
 		<plugins>
@@ -64,7 +68,8 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!-- Avoid the generation of maven archive information in the META-INF folder -->
+				<!-- Avoid the generation of maven archive information in the META-INF 
+					folder -->
 				<plugin>
 					<groupId>org.eclipse.tycho</groupId>
 					<artifactId>tycho-packaging-plugin</artifactId>
@@ -185,55 +190,6 @@
 	</build>
 	<profiles>
 		<profile>
-			<id>Mars.target</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<xtext-version>2.9.1</xtext-version>
-				<ecore-xtext-version>1.2.0</ecore-xtext-version>
-				<ecore-xcore-version>1.3.1</ecore-xcore-version>
-				<ecore-xcore-lib-version>1.1.100</ecore-xcore-lib-version>
-			</properties>
-
-			<pluginRepositories>
-				<pluginRepository>
-					<id>yakindu-commons</id>
-					<url>https://projects.itemis.de/nexus/content/groups/OS/</url>
-					<releases>
-						<enabled>true</enabled>
-					</releases>
-					<snapshots>
-						<enabled>true</enabled>
-					</snapshots>
-				</pluginRepository>
-			</pluginRepositories>
-
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>target-platform-configuration</artifactId>
-						<version>${tycho-version}</version>
-						<configuration>
-
-							<includePackedArtifacts>true</includePackedArtifacts>
-							<pomDependencies>consider</pomDependencies>
-							<target>
-								<artifact>
-									<groupId>org.yakindu.base</groupId>
-									<artifactId>org.yakindu.base.target</artifactId>
-									<version>3.4.0-SNAPSHOT</version>
-									<classifier>Mars</classifier>
-									<target></target>
-								</artifact>
-							</target>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
 			<id>Neon.target</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
@@ -256,11 +212,77 @@
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
-									<version>3.4.0-SNAPSHOT</version>
+									<version>3.4.2-SNAPSHOT</version>
 									<classifier>Neon</classifier>
 								</artifact>
 							</target>
 						</configuration>
+					</plugin>
+					<!-- Workaround for https://github.com/eclipse/xtext/issues/1231 -->
+					<plugin>
+						<groupId>org.eclipse.xtend</groupId>
+						<artifactId>xtend-maven-plugin</artifactId>
+						<version>${xtext-version}</version>
+						<dependencies>
+							<dependency>
+								<groupId>org.eclipse.platform</groupId>
+								<artifactId>org.eclipse.equinox.common</artifactId>
+								<version>3.8.0</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.platform</groupId>
+								<artifactId>org.eclipse.core.runtime</artifactId>
+								<version>3.12.0</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.jdt</groupId>
+								<artifactId>org.eclipse.jdt.core</artifactId>
+								<version>3.12.3</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.jdt</groupId>
+								<artifactId>org.eclipse.jdt.compiler.apt</artifactId>
+								<version>1.2.100</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.jdt</groupId>
+								<artifactId>org.eclipse.jdt.compiler.tool</artifactId>
+								<version>1.1.100</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+					<!-- Workaround for https://github.com/eclipse/xtext/issues/1231 -->
+					<plugin>
+						<groupId>org.eclipse.xtext</groupId>
+						<artifactId>xtext-maven-plugin</artifactId>
+						<version>${xtext-version}</version>
+						<dependencies>
+							<dependency>
+								<groupId>org.eclipse.platform</groupId>
+								<artifactId>org.eclipse.equinox.common</artifactId>
+								<version>3.8.0</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.platform</groupId>
+								<artifactId>org.eclipse.core.runtime</artifactId>
+								<version>3.12.0</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.jdt</groupId>
+								<artifactId>org.eclipse.jdt.core</artifactId>
+								<version>3.12.3</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.jdt</groupId>
+								<artifactId>org.eclipse.jdt.compiler.apt</artifactId>
+								<version>1.2.100</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.jdt</groupId>
+								<artifactId>org.eclipse.jdt.compiler.tool</artifactId>
+								<version>1.1.100</version>
+							</dependency>
+						</dependencies>
 					</plugin>
 				</plugins>
 			</build>
@@ -288,7 +310,7 @@
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
-									<version>3.4.0-SNAPSHOT</version>
+									<version>3.4.2-SNAPSHOT</version>
 									<classifier>Oxygen</classifier>
 								</artifact>
 							</target>
@@ -300,6 +322,16 @@
 						<artifactId>xtend-maven-plugin</artifactId>
 						<version>${xtext-version}</version>
 						<dependencies>
+							<dependency>
+								<groupId>org.eclipse.platform</groupId>
+								<artifactId>org.eclipse.equinox.common</artifactId>
+								<version>3.9.0</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.platform</groupId>
+								<artifactId>org.eclipse.core.runtime</artifactId>
+								<version>3.13.0</version>
+							</dependency>
 							<dependency>
 								<groupId>org.eclipse.jdt</groupId>
 								<artifactId>org.eclipse.jdt.core</artifactId>
@@ -323,6 +355,16 @@
 						<artifactId>xtext-maven-plugin</artifactId>
 						<version>${xtext-version}</version>
 						<dependencies>
+							<dependency>
+								<groupId>org.eclipse.platform</groupId>
+								<artifactId>org.eclipse.equinox.common</artifactId>
+								<version>3.9.0</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.platform</groupId>
+								<artifactId>org.eclipse.core.runtime</artifactId>
+								<version>3.13.0</version>
+							</dependency>
 							<dependency>
 								<groupId>org.eclipse.jdt</groupId>
 								<artifactId>org.eclipse.jdt.core</artifactId>
@@ -350,9 +392,9 @@
 			</activation>
 			<properties>
 				<xtext-version>2.14.0</xtext-version>
-				<ecore-xtext-version>1.2.0</ecore-xtext-version>
-				<ecore-xcore-version>1.3.1</ecore-xcore-version>
-				<ecore-xcore-lib-version>1.1.100</ecore-xcore-lib-version>
+				<ecore-xtext-version>1.4.0</ecore-xtext-version>
+				<ecore-xcore-version>1.7.0</ecore-xcore-version>
+				<ecore-xcore-lib-version>1.3.0</ecore-xcore-lib-version>
 			</properties>
 			<build>
 				<plugins>
@@ -366,7 +408,7 @@
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
-									<version>3.4.0-SNAPSHOT</version>
+									<version>3.4.2-SNAPSHOT</version>
 									<classifier>Photon</classifier>
 								</artifact>
 							</target>
@@ -379,19 +421,29 @@
 						<version>${xtext-version}</version>
 						<dependencies>
 							<dependency>
+								<groupId>org.eclipse.platform</groupId>
+								<artifactId>org.eclipse.equinox.common</artifactId>
+								<version>3.10.0</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.platform</groupId>
+								<artifactId>org.eclipse.core.runtime</artifactId>
+								<version>3.14.0</version>
+							</dependency>
+							<dependency>
 								<groupId>org.eclipse.jdt</groupId>
 								<artifactId>org.eclipse.jdt.core</artifactId>
-								<version>3.13.102</version>
+								<version>3.14.0</version>
 							</dependency>
 							<dependency>
 								<groupId>org.eclipse.jdt</groupId>
 								<artifactId>org.eclipse.jdt.compiler.apt</artifactId>
-								<version>1.3.110</version>
+								<version>1.3.200</version>
 							</dependency>
 							<dependency>
 								<groupId>org.eclipse.jdt</groupId>
 								<artifactId>org.eclipse.jdt.compiler.tool</artifactId>
-								<version>1.2.101</version>
+								<version>1.2.200</version>
 							</dependency>
 						</dependencies>
 					</plugin>
@@ -402,19 +454,29 @@
 						<version>${xtext-version}</version>
 						<dependencies>
 							<dependency>
+								<groupId>org.eclipse.platform</groupId>
+								<artifactId>org.eclipse.equinox.common</artifactId>
+								<version>3.10.0</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.platform</groupId>
+								<artifactId>org.eclipse.core.runtime</artifactId>
+								<version>3.14.0</version>
+							</dependency>
+							<dependency>
 								<groupId>org.eclipse.jdt</groupId>
 								<artifactId>org.eclipse.jdt.core</artifactId>
-								<version>3.13.102</version>
+								<version>3.14.0</version>
 							</dependency>
 							<dependency>
 								<groupId>org.eclipse.jdt</groupId>
 								<artifactId>org.eclipse.jdt.compiler.apt</artifactId>
-								<version>1.3.110</version>
+								<version>1.3.200</version>
 							</dependency>
 							<dependency>
 								<groupId>org.eclipse.jdt</groupId>
 								<artifactId>org.eclipse.jdt.compiler.tool</artifactId>
-								<version>1.2.101</version>
+								<version>1.2.200</version>
 							</dependency>
 						</dependencies>
 					</plugin>
@@ -426,30 +488,18 @@
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
-			<pluginRepositories>
-				<pluginRepository>
-					<id>nexus-projects.itemis.de</id>
-					<url>https://projects.itemis.de/nexus/content/groups/maven-plugins/</url>
-					<releases>
-						<enabled>true</enabled>
-					</releases>
-					<snapshots>
-						<enabled>true</enabled>
-					</snapshots>
-				</pluginRepository>
-			</pluginRepositories>
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>de.itemis.signing</groupId>
-						<artifactId>itemis-jarsigner</artifactId>
-						<version>0.0.4</version>
+						<groupId>org.eclipse.cbi.maven.plugins</groupId>
+						<artifactId>eclipse-jarsigner-plugin</artifactId>
+						<version>${signerVersion}</version>
 						<configuration>
-							<sshKey>${ssh.key}</sshKey>
+							<signerUrl>${jarSignerUrl}</signerUrl>
+							<excludeInnerJars>false</excludeInnerJars>
 						</configuration>
 						<executions>
 							<execution>
-								<id>sign</id>
 								<goals>
 									<goal>sign</goal>
 								</goals>
@@ -540,6 +590,7 @@
 		<module>../../plugins/org.yakindu.sct.ui.navigator</module>
 		<module>../../plugins/org.yakindu.sct.generator.c</module>
 		<module>../../plugins/org.yakindu.sct.generator.cpp</module>
+		<module>../../plugins/org.yakindu.sct.generator.csharp</module>
 		<module>../../plugins/org.yakindu.sct.generator.java</module>
 		<module>../../plugins/org.yakindu.sct.refactoring</module>
 		<module>../../plugins/org.yakindu.sct.branding</module>
@@ -554,6 +605,7 @@
 		<module>../../features/org.yakindu.sct.generator.c-feature</module>
 		<module>../../features/org.yakindu.sct.generator.cpp-feature</module>
 		<module>../../features/org.yakindu.sct.generator.java-feature</module>
+		<module>../../features/org.yakindu.sct.generator.csharp-feature</module>
 
 	</modules>
 
@@ -567,6 +619,10 @@
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>signing</id>
+			<url>https://repo.eclipse.org/content/repositories/cbi-releases/</url>
 		</pluginRepository>
 	</pluginRepositories>
 

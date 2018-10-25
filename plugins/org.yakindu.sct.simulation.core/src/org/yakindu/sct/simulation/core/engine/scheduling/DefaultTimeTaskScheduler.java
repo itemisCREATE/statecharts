@@ -116,9 +116,15 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 
 	@Override
 	public void unscheduleTimeTask(String eventName) {
-		Optional<TimeTask> timerTask = getTask(eventName);
-		if (timerTask.isPresent())
+		Optional<TimeTask> timerTask = getActiveTask(eventName);
+		if (timerTask.isPresent()) {
 			timerTask.get().cancel();
+			if (tasks.peek() == timerTask.get()) {
+				lock.lock();
+				topLevelElementCondition.signal();
+				lock.unlock();
+			}
+		}
 	}
 
 	protected void schedulePeriodicalTask(TimeTask task, long interval, long period) {
@@ -146,8 +152,8 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 		}
 	}
 
-	protected Optional<TimeTask> getTask(final String eventName) {
-		return tasks.stream().filter((task) -> task.name.equals(eventName)).findFirst();
+	protected synchronized Optional<TimeTask> getActiveTask(final String eventName) {
+		return tasks.stream().filter((task) -> !task.isCanceled() && task.name.equals(eventName)).findFirst();
 	}
 
 	protected synchronized void processTasks() {
@@ -200,7 +206,9 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 
 	@Override
 	public void step() {
-		work();
+		if (suspended) {
+			timeLeapToNextEvent();
+		}
 	}
 
 	@Override

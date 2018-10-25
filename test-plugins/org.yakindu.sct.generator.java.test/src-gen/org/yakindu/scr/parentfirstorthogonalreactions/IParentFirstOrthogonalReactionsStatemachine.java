@@ -58,6 +58,10 @@ public interface IParentFirstOrthogonalReactionsStatemachine extends IStatemachi
 		
 		public void setSm_local(long value);
 		
+		public long getCnt();
+		
+		public void setCnt(long value);
+		
 		public void setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback);
 	
 	}

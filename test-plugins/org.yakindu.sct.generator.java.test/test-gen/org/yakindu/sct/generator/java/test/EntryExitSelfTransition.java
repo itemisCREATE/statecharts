@@ -45,6 +45,7 @@ public class EntryExitSelfTransition {
 		assertTrue(statemachine.isStateActive(State.main_region_A__region0_C));
 		statemachine.exit();
 	}
+	
 	@Test
 	public void selfTransitionFromChildState() {
 		init();
@@ -60,6 +61,7 @@ public class EntryExitSelfTransition {
 		assertTrue(statemachine.getExits() == 1l);
 		statemachine.exit();
 	}
+	
 	public void init() {
 		statemachine.enter();
 		timer.cycleLeap(1);

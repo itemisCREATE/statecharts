@@ -33,6 +33,12 @@ import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.sexec.Return
+import org.yakindu.sct.model.sexec.LocalVariableDefinition
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.model.sexec.Statement
+
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 
 class FlowCode {
 	
@@ -41,6 +47,8 @@ class FlowCode {
 	@Inject extension CExpressionsGenerator
 	@Inject extension INamingService
 	@Inject extension GenmodelEntries
+	@Inject protected extension ICodegenTypeSystemAccess
+	
  
  	@Inject GeneratorEntry entry
  
@@ -59,24 +67,24 @@ class FlowCode {
 	
 	def dispatch CharSequence code(TraceStateEntered it) '''
 		«IF entry.tracingEnterState»
-		«flow.type.toFirstLower»_stateEntered(«scHandle», «it.state.stateName»);
+		«flow.enterStateTracingFctID»(«scHandle», «it.state.stateName»);
 		«ENDIF»
 	'''
 	
 	def dispatch CharSequence code(TraceStateExited it) '''
 		«IF entry.tracingExitState»
-		«flow.type.toFirstLower»_stateExited(«scHandle», «it.state.stateName»);
+		«flow.exitStateTracingFctID»(«scHandle», «it.state.stateName»);
 		«ENDIF»
 	'''
 
 	def dispatch CharSequence code(SaveHistory it) '''
 		«stepComment»
-		«scHandle»->historyVector[«region.historyVector.offset»] = «scHandle»->stateConfVector[«region.stateVector.offset»];
+		«scHandle»->«HISTORYVECTOR»[«region.historyVector.offset»] = «scHandle»->«STATEVECTOR»[«region.stateVector.offset»];
 	'''
 	
 	def dispatch CharSequence code(HistoryEntry it) '''
 		«stepComment»
-		if («scHandle»->historyVector[«region.historyVector.offset»] != «null_state»)
+		if («scHandle»->«HISTORYVECTOR»[«region.historyVector.offset»] != «null_state»)
 		{
 			«historyStep.code»
 		} «IF initialStep !== null»else
@@ -88,10 +96,10 @@ class FlowCode {
 	def dispatch CharSequence code(StateSwitch it) '''
 		«stepComment»
 		«IF historyRegion !== null»
-			switch(«scHandle»->historyVector[ «historyRegion.historyVector.offset» ])
+			switch(«scHandle»->«HISTORYVECTOR»[ «historyRegion.historyVector.offset» ])
 			{
 		«ELSE»
-			switch(«scHandle»->stateConfVector[ «stateConfigurationIdx» ])
+			switch(«scHandle»->«STATEVECTOR»[ «stateConfigurationIdx» ])
 			{
 		«ENDIF»
 			«FOR caseid : cases»
@@ -107,12 +115,12 @@ class FlowCode {
 
 	def dispatch CharSequence code(ScheduleTimeEvent it) '''
 		«stepComment»
-		«flow.type.toFirstLower»_setTimer(«scHandle», (sc_eventid) &(«scHandle»->timeEvents.«timeEvent.shortName»_raised) , «timeValue.code», «IF timeEvent.periodic»bool_true«ELSE»bool_false«ENDIF»);
+		«flow.setTimerFctID»(«scHandle», («EVENT_TYPE») &(«scHandle»->timeEvents.«timeEvent.shortName»_raised) , «timeValue.code», «IF timeEvent.periodic»bool_true«ELSE»bool_false«ENDIF»);
 	'''
 
 	def dispatch CharSequence code(UnscheduleTimeEvent it) '''
 		«stepComment»
-		«flow.type.toFirstLower»_unsetTimer(«scHandle», (sc_eventid) &(«scHandle»->timeEvents.«timeEvent.shortName»_raised) );		
+		«flow.unsetTimerFctID»(«scHandle», («EVENT_TYPE») &(«scHandle»->timeEvents.«timeEvent.shortName»_raised) );		
 	'''
 
 	def dispatch CharSequence code(Execution it)
@@ -129,14 +137,14 @@ class FlowCode {
 	'''	
 
 	def dispatch CharSequence code(Check it)
-		'''«IF condition !== null»«condition.sc_boolean_code»«ELSE»bool_true«ENDIF»'''
+		'''«IF condition !== null»«condition.sc_boolean_code»«ELSE»«CGeneratorConstants.TRUE»«ENDIF»'''
 	
 	def dispatch CharSequence code(CheckRef it)
-		'''«IF check !== null»«check.shortName»(«scHandle»)«ELSE»bool_true«ENDIF»'''
+		'''«IF check !== null»«check.shortName»(«scHandle») == «CGeneratorConstants.TRUE»«ELSE»«CGeneratorConstants.TRUE»«ENDIF»'''
 
 	def dispatch CharSequence code(If it) '''
 		«stepComment»
-		if («check.code» == bool_true)
+		if («check.code»)
 		{ 
 			«thenStep.code»
 		} «IF (elseStep !== null)» else
@@ -147,12 +155,25 @@ class FlowCode {
 	'''
 	
 	def dispatch CharSequence code(EnterState it) '''
-		«scHandle»->stateConfVector[«state.stateVector.offset»] = «state.stateName»;
-		«scHandle»->stateConfVectorPosition = «state.stateVector.offset»;
+		«scHandle»->«STATEVECTOR»[«state.stateVector.offset»] = «state.stateName»;
+		«scHandle»->«STATEVECTOR_POS» = «state.stateVector.offset»;
 	'''
 
 	def dispatch CharSequence code(ExitState it) '''
-		«scHandle»->stateConfVector[«state.stateVector.offset»] = «null_state»;
-		«scHandle»->stateConfVectorPosition = «state.stateVector.offset»;
+		«scHandle»->«STATEVECTOR»[«state.stateVector.offset»] = «null_state»;
+		«scHandle»->«STATEVECTOR_POS» = «state.stateVector.offset»;
 	'''
+	
+	def dispatch CharSequence code(Return it) '''
+		return«IF value !== null» «value.code»«ENDIF»;
+	'''
+	
+	def dispatch CharSequence code(LocalVariableDefinition it) '''
+		«variable.typeSpecifier.targetLanguageName» «variable.name»«IF initialValue !== null» = «initialValue.code»«ENDIF»;
+	'''
+	
+	def dispatch CharSequence code(Statement it) '''
+		«expression.code»;
+	'''
+	
 }

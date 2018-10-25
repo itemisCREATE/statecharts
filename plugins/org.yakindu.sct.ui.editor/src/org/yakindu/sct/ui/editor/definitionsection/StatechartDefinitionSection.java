@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.definitionsection;
 
@@ -14,27 +14,31 @@ import static org.yakindu.sct.ui.editor.definitionsection.ContextScopeHandler.EM
 import static org.yakindu.sct.ui.editor.definitionsection.ContextScopeHandler.TEXT_EDITOR_SCOPE;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.databinding.IEMFValueProperty;
 import org.eclipse.emf.databinding.edit.EMFEditProperties;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
-import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.databinding.swt.ISWTObservableValue;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
@@ -88,7 +92,6 @@ import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
-import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementProvider;
 import org.yakindu.sct.ui.editor.StatechartImages;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningEditor;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
@@ -97,13 +100,12 @@ import org.yakindu.sct.ui.editor.propertysheets.ValidatingEMFDatabindingContext;
 import com.google.inject.Injector;
 
 /**
- * 
+ *
  * @author robert rudi - Initial contribution and API
  *
  */
 @SuppressWarnings("restriction")
-public class StatechartDefinitionSection extends Composite
-		implements IPersistableEditor, IPersistableElement, IContextElementProvider {
+public class StatechartDefinitionSection extends Composite implements IPersistableEditor, IPersistableElement {
 
 	protected static final String SHOW_SECTION_TOOLTIP = "Show definition section";
 	protected static final String HIDE_SECTION_TOOLTIP = "Hide definition section";
@@ -137,6 +139,9 @@ public class StatechartDefinitionSection extends Composite
 	private static IMemento memento;
 	private ValidatingEMFDatabindingContext context;
 
+	private DefinitionSectionSynchronizer synchronizer;
+	private Text nameLabel;
+
 	public StatechartDefinitionSection(Composite parent, int style, DiagramPartitioningEditor editorPart) {
 		super(parent, style);
 		this.sash = (SashForm) parent;
@@ -146,6 +151,7 @@ public class StatechartDefinitionSection extends Composite
 		this.embeddedEditor = createSpecificationEditor();
 		registerResizeListener();
 		GridLayoutFactory.fillDefaults().numColumns(2).spacing(0, 0).applyTo(this);
+		initSynchronizer();
 	}
 
 	protected Label createSwitchControl() {
@@ -154,7 +160,7 @@ public class StatechartDefinitionSection extends Composite
 		switchControl.setImage(sectionExpanded ? StatechartImages.COLLAPSE.image() : StatechartImages.EXPAND.image());
 		switchControl.setCursor(new Cursor(getDisplay(), SWT.CURSOR_HAND));
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.CENTER).indent(-1, -1).hint(MIN_SIZE[0], MIN_SIZE[1])
-				.applyTo(switchControl);
+		.applyTo(switchControl);
 		mouseListener = new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -176,19 +182,35 @@ public class StatechartDefinitionSection extends Composite
 		return labelComposite;
 	}
 
+	protected void initSynchronizer() {
+		synchronizer = new DefinitionSectionSynchronizer();
+		getContextObject().eAdapters().add(synchronizer);
+	}
+
+	protected void removeSynchronizer() {
+		getContextObject().eAdapters().remove(synchronizer);
+	}
+
 	protected void createNameLabel(Composite labelComposite) {
-		Text nameLabel = new Text(labelComposite, SWT.SINGLE | SWT.NORMAL);
+		nameLabel = new Text(labelComposite, SWT.SINGLE | SWT.NORMAL);
 		GridDataFactory.fillDefaults().indent(5, 1).grab(true, false).align(SWT.FILL, SWT.CENTER).applyTo(nameLabel);
-		nameLabel.setText(getStatechartName());
+		Optional<String> name = getStatechartName();
+		if (name.isPresent()) {
+			nameLabel.setText(name.get());
+		}
 		nameLabel.setEditable(isStatechart());
 		nameLabel.setBackground(ColorConstants.white);
 		nameModificationListener = new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
-				if (getContextObject() instanceof Statechart) {
+				Optional<Statechart> sct = getStatechart();
+				if (sct.isPresent()) {
+					if (Objects.equals(sct.get().getName(), nameLabel.getText())) {
+						return;
+					}
 					getSash().setRedraw(false);
 					TransactionalEditingDomain domain = getTransactionalEditingDomain();
-					SetCommand command = new SetCommand(domain, getContextObject(),
+					SetCommand command = new SetCommand(domain, sct.get(),
 							BasePackage.Literals.NAMED_ELEMENT__NAME, nameLabel.getText());
 					domain.getCommandStack().execute(command);
 					refresh(nameLabel.getParent());
@@ -199,10 +221,12 @@ public class StatechartDefinitionSection extends Composite
 		nameLabel.addModifyListener(nameModificationListener);
 	}
 
-	protected String getStatechartName() {
+	protected Optional<String> getStatechartName() {
 		Statechart statechart = EcoreUtil2.getContainerOfType(getContextObject(), Statechart.class);
-		Assert.isNotNull(statechart);
-		return statechart.getName();
+		if (statechart == null) {
+			return Optional.empty();
+		}
+		return Optional.ofNullable(statechart.getName());
 	}
 
 	protected void createInlineIcon(Composite labelComposite) {
@@ -211,6 +235,10 @@ public class StatechartDefinitionSection extends Composite
 
 	protected boolean isStatechart() {
 		return getContextObject() instanceof Statechart;
+	}
+
+	protected Optional<Statechart> getStatechart() {
+		return Optional.ofNullable(EcoreUtil2.getContainerOfType(getContextObject(), Statechart.class));
 	}
 
 	protected void createSeparator(Composite definitionSection) {
@@ -261,9 +289,10 @@ public class StatechartDefinitionSection extends Composite
 
 			@Override
 			public XtextResource createResource() {
-				XtextFakeResourceContext resource = new XtextFakeResourceContext(injector);
+				IProject activeProject = WorkspaceSynchronizer.getFile(getContextObject().eResource()).getProject();
+				XtextFakeResourceContext resource = new XtextFakeResourceContext(injector, activeProject);
 				xtextResource = resource.getFakeResource();
-				xtextResource.eAdapters().add(new ContextElementAdapter(StatechartDefinitionSection.this));
+				xtextResource.eAdapters().add(new ContextElementAdapter(getContextObject()));
 				return xtextResource;
 			}
 		};
@@ -297,7 +326,7 @@ public class StatechartDefinitionSection extends Composite
 				SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION);
 		ISWTObservableValue uiProperty = WidgetProperties.text(new int[] { SWT.FocusOut }).observe(text);
 		IObservableValue modelPropertyObservable = modelProperty.observe(getContextObject());
-		context = new ValidatingEMFDatabindingContext((IContextElementProvider) editorPart,
+		context = new ValidatingEMFDatabindingContext((EObject)editorPart.getAdapter(EObject.class),
 				editorPart.getSite().getShell());
 		context.bindValue(uiProperty, modelPropertyObservable, null, null);
 	}
@@ -322,7 +351,6 @@ public class StatechartDefinitionSection extends Composite
 		return (TransactionalEditingDomain) editorPart.getAdapter(TransactionalEditingDomain.class);
 	}
 
-	@Override
 	public EObject getContextObject() {
 		return (EObject) editorPart.getAdapter(EObject.class);
 	}
@@ -343,7 +371,7 @@ public class StatechartDefinitionSection extends Composite
 		BooleanValueStyle inlineStyle = DiagramPartitioningUtil.getInlineDefinitionSectionStyle(diagram);
 		if (inlineStyle == null) {
 			inlineStyle = DiagramPartitioningUtil.createInlineDefinitionSectionStyle();
-			AddCommand command = new AddCommand(domain, (View) getDiagram(), NotationPackage.Literals.VIEW__STYLES,
+			AddCommand command = new AddCommand(domain, getDiagram(), NotationPackage.Literals.VIEW__STYLES,
 					inlineStyle);
 			domain.getCommandStack().execute(command);
 		}
@@ -431,6 +459,7 @@ public class StatechartDefinitionSection extends Composite
 	@Override
 	public void dispose() {
 		saveState(memento);
+		removeSynchronizer();
 		disposeEmbeddedEditor();
 		super.dispose();
 	}
@@ -463,6 +492,12 @@ public class StatechartDefinitionSection extends Composite
 			}
 		}
 		nameModificationListener = null;
+	}
+	
+	public void validateEmbeddedEditorContext() {
+		if(embeddedEditor == null || embeddedEditor.getDocument() == null || embeddedEditor.getDocument().getValidationJob() == null) 
+			return;
+		embeddedEditor.getDocument().getValidationJob().schedule();
 	}
 
 	public SashForm getSash() {
@@ -519,8 +554,10 @@ public class StatechartDefinitionSection extends Composite
 
 	protected void setMementoProperties(IMemento memento) {
 		String sectionProperty = getSectionProperty(getContextObject());
-		memento.putInteger(sectionProperty + MEM_FIRST_WEIGHT, previousWidths[0]);
-		memento.putInteger(sectionProperty + MEM_SECOND_WEIGHT, previousWidths[1]);
+		if (previousWidths.length >= 2) {
+			memento.putInteger(sectionProperty + MEM_FIRST_WEIGHT, previousWidths[0]);
+			memento.putInteger(sectionProperty + MEM_SECOND_WEIGHT, previousWidths[1]);
+		}
 		memento.putBoolean(sectionProperty + MEM_EXPANDED, sectionExpanded);
 	}
 
@@ -556,7 +593,7 @@ public class StatechartDefinitionSection extends Composite
 
 	/**
 	 * @author robert rudi - Initial contribution and API
-	 * 
+	 *
 	 */
 	protected class ResizeListener extends ControlAdapter {
 
@@ -601,12 +638,12 @@ public class StatechartDefinitionSection extends Composite
 			resizeFinishedJob.cancel();
 			resizeFinishedJob.schedule(DELAY);
 		}
-		
+
 	}
 
 	/**
 	 * @author robert rudi - Initial contribution and API
-	 * 
+	 *
 	 */
 	protected class InlineIcon extends Composite implements MouseListener, MouseTrackListener, PaintListener {
 
@@ -688,7 +725,7 @@ public class StatechartDefinitionSection extends Composite
 
 	/**
 	 * @author robert rudi - Initial contribution and API
-	 * 
+	 *
 	 */
 	protected class CollapsedBorder extends Canvas implements MouseListener, MouseTrackListener, PaintListener {
 
@@ -702,7 +739,7 @@ public class StatechartDefinitionSection extends Composite
 			super(parent, style);
 			setText("Definition section", font);
 			GridDataFactory.fillDefaults().grab(false, false).span(2, 1).hint(0, parent.getBounds().height)
-					.applyTo(this);
+			.applyTo(this);
 			addPaintListener(this);
 			addMouseListener(this);
 			addMouseTrackListener(this);
@@ -767,6 +804,31 @@ public class StatechartDefinitionSection extends Composite
 			arrowCursor.dispose();
 			font.dispose();
 			super.dispose();
+		}
+	}
+
+	/**
+	 * @author BeckmaR
+	 *
+	 *         Adapter for updating the name label on statechart name change
+	 *         event.
+	 */
+	protected class DefinitionSectionSynchronizer extends AdapterImpl {
+		@Override
+		public void notifyChanged(Notification notification) {
+			if (Notification.SET == notification.getEventType()) {
+				if (BasePackage.Literals.NAMED_ELEMENT__NAME.equals(notification.getFeature())) {
+					String newText = notification.getNewStringValue();
+					String oldText = nameLabel.getText();
+					if (!oldText.equals(newText)) {
+						nameLabel.setText(newText);
+					}
+				}
+			}
+		}
+		@Override
+		public boolean isAdapterForType(Object type) {
+			return type instanceof DefinitionSectionSynchronizer;
 		}
 	}
 }

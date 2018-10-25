@@ -16,7 +16,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.yakindu.sct.examples.wizard.service.ExampleData;
+import org.yakindu.sct.examples.wizard.service.data.ExampleData;
 
 import com.google.gson.Gson;
 

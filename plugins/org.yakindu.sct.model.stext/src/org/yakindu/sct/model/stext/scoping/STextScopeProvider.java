@@ -45,7 +45,6 @@ import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.extensions.STextExtensions;
-import org.yakindu.sct.model.stext.scoping.ContextPredicateProvider.EmptyPredicate;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
@@ -145,12 +144,11 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 			scope = Scopes.scopeFor(typeSystem.getPropertyExtensions(ownerType));
 			scope = Scopes.scopeFor(typeSystem.getOperationExtensions(ownerType), scope);
 		}
-
-		if (ownerType instanceof ComplexType) {
-			return addScopeForComplexType((ComplexType) ownerType, scope, predicate);
-		}
 		if (ownerType instanceof EnumerationType) {
 			return addScopeForEnumType((EnumerationType) ownerType, scope, predicate);
+		}
+		if (ownerType instanceof ComplexType) {
+			return addScopeForComplexType((ComplexType) ownerType, scope, predicate);
 		}
 		return scope;
 	}
@@ -175,7 +173,7 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 		EReference ref = reference;
 		while (container != null) {
 			predicate = predicateProvider.getPredicate(container.eClass(), ref);
-			if (!(predicate instanceof EmptyPredicate)) {
+			if (!(predicate == ContextPredicateProvider.EMPTY_PREDICATE)) {
 				break;
 			}
 			ref = (EReference) container.eContainingFeature();

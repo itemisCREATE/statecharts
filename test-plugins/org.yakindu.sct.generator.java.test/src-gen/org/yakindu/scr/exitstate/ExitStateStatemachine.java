@@ -134,18 +134,6 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		sCInterface.raiseG();
 	}
 	
-	private boolean check_r_A_r_B_tr0_tr0() {
-		return sCInterface.g;
-	}
-	
-	private boolean check_r_A_r_B_tr1_tr1() {
-		return sCInterface.f;
-	}
-	
-	private boolean check_r_A_r_B_tr2_tr2() {
-		return sCInterface.e;
-	}
-	
 	private void effect_r_A_tr0() {
 		exitSequence_r_A();
 		enterSequence_r_E_default();
@@ -154,21 +142,6 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	private void effect_r_A_tr1() {
 		exitSequence_r_A();
 		enterSequence_r_F_default();
-	}
-	
-	private void effect_r_A_r_B_tr0() {
-		exitSequence_r_A_r_B();
-		react_r_A_r_g();
-	}
-	
-	private void effect_r_A_r_B_tr1() {
-		exitSequence_r_A_r_B();
-		react_r_A_r_f();
-	}
-	
-	private void effect_r_A_r_B_tr2() {
-		exitSequence_r_A_r_B();
-		react_r_A_r__exit_Default();
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -255,29 +228,6 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		}
 	}
 	
-	/* The reactions of state B. */
-	private void react_r_A_r_B() {
-		if (check_r_A_r_B_tr0_tr0()) {
-			effect_r_A_r_B_tr0();
-		} else {
-			if (check_r_A_r_B_tr1_tr1()) {
-				effect_r_A_r_B_tr1();
-			} else {
-				if (check_r_A_r_B_tr2_tr2()) {
-					effect_r_A_r_B_tr2();
-				}
-			}
-		}
-	}
-	
-	/* The reactions of state E. */
-	private void react_r_E() {
-	}
-	
-	/* The reactions of state F. */
-	private void react_r_F() {
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_r__entry_Default() {
 		enterSequence_r_A_default();
@@ -303,6 +253,77 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		effect_r_A_tr0();
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean r_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean r_A_r_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (r_A_react(try_transition)==false) {
+				if (sCInterface.g) {
+					exitSequence_r_A_r_B();
+					react_r_A_r_g();
+				} else {
+					if (sCInterface.f) {
+						exitSequence_r_A_r_B();
+						react_r_A_r_f();
+					} else {
+						if (sCInterface.e) {
+							exitSequence_r_A_r_B();
+							react_r_A_r__exit_Default();
+						} else {
+							did_transition = false;
+						}
+					}
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean r_E_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean r_F_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -311,13 +332,13 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case r_A_r_B:
-				react_r_A_r_B();
+				r_A_r_B_react(true);
 				break;
 			case r_E:
-				react_r_E();
+				r_E_react(true);
 				break;
 			case r_F:
-				react_r_F();
+				r_F_react(true);
 				break;
 			default:
 				// $NullState$

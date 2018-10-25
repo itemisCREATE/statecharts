@@ -29,19 +29,23 @@ import org.yakindu.sct.model.sgraph.resource.ResourceUtil;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 
+import com.google.inject.Inject;
+
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
 public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfigurationDelegate
-		implements
-			ILaunchConfigurationDelegate {
+		implements ILaunchConfigurationDelegate {
 
 	public String FILE_NAME = "filename";
 	public String DEFAULT_FILE_NAME = "";
 
 	protected abstract ISimulationEngine createExecutionContainer(ILaunch launch, Statechart statechart);
+
+	@Inject(optional = true)
+	private ILaunchConfigurationDelegate delegate;
 
 	@Override
 	public boolean preLaunchCheck(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor)
@@ -62,14 +66,21 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 		try {
 			target.init();
 			target.start();
+			if (delegate != null)
+				delegate.launch(configuration, mode, launch, monitor);
 		} catch (InitializationException e) {
 			// handled in AbstractExecutionFlowSimulationEngine
 		}
 	}
 
 	protected SCTDebugTarget createDebugTarget(ILaunch launch, Statechart statechart) throws CoreException {
+		return createDebugTarget(launch, statechart, statechart.getName());
+	}
+
+	protected SCTDebugTarget createDebugTarget(ILaunch launch, Statechart statechart, String name)
+			throws CoreException {
 		Assert.isNotNull(statechart);
-		return new SCTDebugTarget(launch, statechart, createExecutionContainer(launch, statechart));
+		return new SCTDebugTarget(launch, statechart, name, createExecutionContainer(launch, statechart));
 	}
 
 	protected Statechart loadStatechart(String filename) {
@@ -81,7 +92,7 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 			throws CoreException {
 		String filename = configuration.getAttribute(FILE_NAME, "");
 		IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(filename);
-		return new IProject[]{resource.getProject()};
+		return new IProject[] { resource.getProject() };
 
 	}
 

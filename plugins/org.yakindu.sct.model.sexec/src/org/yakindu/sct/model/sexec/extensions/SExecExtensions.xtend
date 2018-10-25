@@ -11,7 +11,6 @@
 package org.yakindu.sct.model.sexec.extensions
 
 import java.util.ArrayList
-import java.util.HashSet
 import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.EcoreUtil2
@@ -34,6 +33,7 @@ import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sgraph.Scope
+import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.InterfaceScope
@@ -41,6 +41,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sexec.Method
 
 class SExecExtensions {
 	def <T extends EObject> T eContainerOfType(EObject eObject, Class<T> type) {
@@ -188,13 +189,30 @@ class SExecExtensions {
 	def hasIncomingEvents(Scope it) {
 		!incomingEvents.empty
 	}
+	
+	def hasIncomingEventsWithValue(Scope it) {
+		!incomingEvents.filter[hasValue].empty
+	}
+	
+	def hasIncomingEventsWithValue(ExecutionFlow it) {
+		!interfaces.filter[hasIncomingEventsWithValue].empty
+	}
 		
 	def List<EventDefinition> getIncomingEvents(Scope it) {
-		declarations.filter(typeof(EventDefinition)).filter[isInEvent].toList
+		declarations.filter(EventDefinition).filter[isInEvent].toList
+	}
+	
+	def List<EventDefinition> getIncomingEvents(ExecutionFlow it) {
+		interfaces.map[incomingEvents].flatten.toList
 	}
 	
 	def List<EventDefinition> getLocalEvents(Scope it) {
-		declarations.filter(typeof(EventDefinition)).filter[isLocalEvent].toList
+		if(it === null) return emptyList
+		declarations.filter(EventDefinition).filter[isLocalEvent].toList
+	}
+	
+	def List<EventDefinition> getLocalEvents(ExecutionFlow it) {
+		internalScope.localEvents
 	}
 	
 	def boolean isLocalEvent(EventDefinition it) {
@@ -212,7 +230,7 @@ class SExecExtensions {
 	def getInterfaceScopes(ExecutionFlow it) {
 		scopes.filter(InterfaceScope)
 	}
-	
+
 	def Iterable<InternalScope> getInternalScopes(ExecutionFlow it) {
 		return scopes.filter(InternalScope)
 	}
@@ -342,6 +360,19 @@ class SExecExtensions {
 		return funcs
 	}
 	 
+	def List<Method> reactMethods(ExecutionFlow it) {
+		new ArrayList<Method>() => [ l | 
+			l.add(it.reactMethod()) 
+			l.addAll(it.states.map( s | s.reactMethod))
+			l.removeIf( m | m === null)
+		] 	
+	}
+	
+	def Method reactMethod(ExecutionNode it) {
+		features.filter( typeof(Method) ).filter( m | m.name == "react").head
+	}
+	
+	
 	def List<Step> reactFunctions(ExecutionFlow it) {
 		val funcs = new ArrayList<Step>()
 		if (reactSequence.called) funcs.add(reactSequence) 

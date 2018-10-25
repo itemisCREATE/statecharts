@@ -150,7 +150,7 @@ public class DomainElementImpl extends EObjectImpl implements DomainElement {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (domainID: ");
 		result.append(domainID);
 		result.append(')');

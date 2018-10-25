@@ -14,15 +14,19 @@ import org.yakindu.base.expressions.interpreter.IOperationMockup;
 import org.yakindu.sct.domain.generic.simulation.GenericSimulationModule;
 import org.yakindu.sct.simulation.core.sexec.interpreter.DefaultOperationMockup;
 
+import com.google.inject.Binder;
+import com.google.inject.multibindings.Multibinder;
+
 /**
  * 
  * @author jonathan thoene - Initial contribution and API
  * 
  */
-public class InterpreterTestModule extends GenericSimulationModule{
-	
+public class InterpreterTestModule extends GenericSimulationModule {
+
 	@Override
-	public Class<? extends IOperationMockup> bindIOperationMockup() {
-		return DefaultOperationMockup.class;
+	protected void bindOperationMockups(Binder binder) {
+		Multibinder<IOperationMockup> mockupBinder = Multibinder.newSetBinder(binder, IOperationMockup.class);
+		mockupBinder.addBinding().to(DefaultOperationMockup.class);
 	}
 }

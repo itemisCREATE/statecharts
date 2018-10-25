@@ -37,6 +37,7 @@ import org.yakindu.base.types.TypesUtil;
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getAnnotations <em>Annotations</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#isStatic <em>Static</em>}</li>
  * </ul>
  *
  * @generated
@@ -91,6 +92,26 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	 * @ordered
 	 */
 	protected EList<Annotation> annotations;
+
+	/**
+	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStatic()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean STATIC_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isStatic() <em>Static</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStatic()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean static_ = STATIC_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -210,6 +231,27 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isStatic() {
+		return static_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStatic(boolean newStatic) {
+		boolean oldStatic = static_;
+		static_ = newStatic;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.DECLARATION__STATIC, oldStatic, static_));
+	}
+
+	/**
 	 * <!-- begin-user-doc --> 
 	 * <!-- end-user-doc -->
 	 * 
@@ -244,6 +286,8 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 				return getId();
 			case TypesPackage.DECLARATION__ANNOTATIONS:
 				return getAnnotations();
+			case TypesPackage.DECLARATION__STATIC:
+				return isStatic();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -267,6 +311,9 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 				getAnnotations().clear();
 				getAnnotations().addAll((Collection<? extends Annotation>)newValue);
 				return;
+			case TypesPackage.DECLARATION__STATIC:
+				setStatic((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -287,6 +334,9 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 				return;
 			case TypesPackage.DECLARATION__ANNOTATIONS:
 				getAnnotations().clear();
+				return;
+			case TypesPackage.DECLARATION__STATIC:
+				setStatic(STATIC_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -310,6 +360,8 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 			case TypesPackage.DECLARATION__ANNOTATIONS:
 				return annotations != null && !annotations.isEmpty();
+			case TypesPackage.DECLARATION__STATIC:
+				return static_ != STATIC_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -379,9 +431,11 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", static: ");
+		result.append(static_);
 		result.append(')');
 		return result.toString();
 	}

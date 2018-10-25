@@ -14,7 +14,9 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -55,7 +57,6 @@ public class HelpIntegrationTest {
 	private static final String YAKINDU_JAVA = "yakindu::java";
 	private static final String YAKINDU_C = "yakindu::c";
 	private static final String YAKINDU_CPP = "yakindu::cpp";
-	private static final String YAKINDU_GENERIC = "yakindu::generic";
 		
 	@Inject
 	private SGenUserHelpDocumentationProvider documentationProvider;
@@ -78,17 +79,12 @@ public class HelpIntegrationTest {
 	public void checkCppGeneratorFeatureDocumentation() {
 		checkGeneratorFeatureDocumentation(YAKINDU_CPP);
 	}
-
-	@Test
-	public void checkGenericGeneratorFeatureDocumentation() {
-		checkGeneratorFeatureDocumentation(YAKINDU_GENERIC);
-	}
 	
 	@Test
 	public void checkDocumentedFeaturesExist() {
 		List<String> features = getDocumentedFeatures();
 		ArrayList<String> generators = new ArrayList<String>(
-				Arrays.asList(YAKINDU_JAVA, YAKINDU_C, YAKINDU_CPP, YAKINDU_GENERIC));
+				Arrays.asList(YAKINDU_JAVA, YAKINDU_C, YAKINDU_CPP));
 		for (String generator : generators) {
 			Iterable<IEObjectDescription> allElements = getAllElements(generator);
 			for (IEObjectDescription desc : allElements) {
@@ -139,11 +135,12 @@ public class HelpIntegrationTest {
 	}
 	
 	private Iterable<IEObjectDescription> getAllElements(String generatorId) {
-		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions
+		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions
 				.getGeneratorDescriptor(generatorId);
-		
+		if(!generatorDescriptor.isPresent())
+			return Collections.emptyList();
 		Iterable<ILibraryDescriptor> libraryDescriptor = LibraryExtensions
-				.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
+				.getLibraryDescriptors(generatorDescriptor.get().getLibraryIDs());
 		
 		Iterable<IEObjectDescription> allElements = Lists.newArrayList();
 		for (ILibraryDescriptor desc : libraryDescriptor) {

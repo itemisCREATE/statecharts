@@ -16,8 +16,9 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
-import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
+import org.eclipse.xtext.serializer.ISerializer;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.validation.CompositeEValidator;
 import org.eclipse.xtext.validation.INamesAreUniqueValidationHelper;
 import org.yakindu.base.expressions.linking.OperationOverloadingLinkingService;
@@ -31,6 +32,7 @@ import org.yakindu.sct.model.stext.resource.SCTResourceDescriptionStrategy;
 import org.yakindu.sct.model.stext.resource.StextResource;
 import org.yakindu.sct.model.stext.scoping.STextGlobalScopeProvider;
 import org.yakindu.sct.model.stext.serialization.STextTransientValueService;
+import org.yakindu.sct.model.stext.serializer.SCTSerializer;
 import org.yakindu.sct.model.stext.terminals.STextValueConverterService;
 import org.yakindu.sct.model.stext.validation.STextNamesAreUniqueValidationHelper;
 
@@ -44,6 +46,7 @@ import com.google.inject.name.Names;
  * @author andreas muelder
  * @author axel terfloth
  */
+@SuppressWarnings("restriction")
 public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTextRuntimeModule {
 
 	@Override
@@ -52,6 +55,7 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 		binder.bind(IDefaultResourceDescriptionStrategy.class).to(SCTResourceDescriptionStrategy.class);
 		// https://github.com/Yakindu/statecharts/issues/1199
 		binder.bind(IReferableElementsUnloader.class).to(IReferableElementsUnloader.NullUnloader.class);
+		binder.bind(ITransientValueService.class).to(STextTransientValueService.class);
 	}
 
 	public Class<? extends INamesAreUniqueValidationHelper> bindNamesAreUniqueValidationHelper() {
@@ -107,13 +111,13 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 	}
 
 	@Override
-	public Class<? extends ITransientValueService> bindITransientValueService() {
-		return STextTransientValueService.class;
+	public Class<? extends ILinkingService> bindILinkingService() {
+		return OperationOverloadingLinkingService.class;
 	}
 
 	@Override
-	public Class<? extends ILinkingService> bindILinkingService() {
-		return OperationOverloadingLinkingService.class;
+	public Class<? extends ISerializer> bindISerializer() {
+		return SCTSerializer.class;
 	}
 
 }

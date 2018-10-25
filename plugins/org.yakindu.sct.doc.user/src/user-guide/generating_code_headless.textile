@@ -47,11 +47,6 @@ usage: scc [-d <path>] [-h] [-m <path(s)>] [-v <arg>]
 p. 
 
 
-h4(#hdls_integrating_custom_code_generators). Integrating custom code generators
-
-YAKINDU Statechart Tools supports custom code generators as described in section "&quot;Custom code generators&quot;":../user-guide/code_generation_custom.html#codegen_custom_code_generators. These custom generators can also be executed by use of the headless code generator infrastructure. To do so, the custom code generator has to be installed as an Eclipse plugin within the distribution directory. The custom code generator will be used whenever a generator model (_.sgen_ file) is loaded by the headless generator infrastructure and references the custom code generator ID.
-
-
 
 h3(#hdls_generating_code). Generating code
 
@@ -112,7 +107,7 @@ Within the root folder of your YAKINDU Statechart Tools installation enter one o
 Windows:
 
 bc. 
-scc -d [pathToBasedir] -m project1/default.sgen,project2/default.sct
+scc -d [pathToBasedir] -m project1\default.sgen,project2\default.sct
 
 Linux:
 

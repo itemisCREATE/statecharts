@@ -12,6 +12,7 @@
 package org.yakindu.sct.generator.cpp
 
 import com.google.inject.Inject
+import java.util.List
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Parameter
 import org.yakindu.sct.generator.c.extensions.Naming
@@ -29,6 +30,9 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
+import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 
 /**
  * @author Markus Mühlbrands - Initial contribution and API
@@ -37,6 +41,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 class CppNaming extends Naming {
 
 	@Inject protected extension SExecExtensions
+	@Inject protected extension SgraphExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension INamingService
 	@Inject protected extension GenmodelEntriesExtension
@@ -49,39 +54,43 @@ class CppNaming extends Naming {
 	}
 
 	def statemachineInterface() {
-		'StatemachineInterface'
+		SM_INTERFACE
+	}
+	
+	def statesCountConst() {
+		STATES_COUNT
 	}
 
 	def orthogonalStatesConst() {
-		'maxOrthogonalStates'
+		MAX_ORTHOGONAL_STATES
 	}
 
 	def historyStatesConst() {
-		'maxHistoryStates'
+		MAX_HISTORY_STATES
 	}
 
 	def timedStatemachineInterface() {
-		'TimedStatemachineInterface'
+		SM_TIMED_INTERFACE
 	}
 
 	def timerInterface() {
-		'TimerInterface'
+		TIMER_INTERFACE
 	}
 
 	def timerInstance() {
-		'timer'
+		TIMER
 	}
 
 	def timeEventsCountConst() {
-		'timeEventsCount'
+		TIME_EVENTS_COUNT
 	}
 
 	def timeEventsCountparallelConst() {
-		'parallelTimeEventsCount'
+		PARALLEL_TIME_EVENTS_COUNT
 	}
 
 	def timeEventsInstance() {
-		'timeEvents'
+		TIME_EVENTS
 	}
 	
 	override dispatch scopeTypeDeclMember(VariableDefinition it) '''
@@ -146,7 +155,27 @@ class CppNaming extends Naming {
 	override asFunction(OperationDefinition it) {
 		name.asEscapedIdentifier
 	}
-
+	
+	override enterFctID(ExecutionFlow it) {
+		ENTER
+	}
+	
+	override exitFctID(ExecutionFlow it) {
+		EXIT
+	}
+	
+	override initFctID(ExecutionFlow it) {
+		INIT
+	}
+	
+	override runCycleFctID(ExecutionFlow it) {
+		RUN_CYCLE
+	}
+	
+	override isActiveFctID(ExecutionFlow it) {
+		IS_ACTIVE
+	}
+	
 	override asRaiser(EventDefinition it) {
 		'raise_' + name.asIdentifier.toFirstLower
 	}
@@ -168,11 +197,15 @@ class CppNaming extends Naming {
 	}
 
 	override raiseTimeEventFctID(ExecutionFlow it) {
-		"raiseTimeEvent"
+		RAISE_TIME_EVENT
 	}
 
 	override isStateActiveFctID(ExecutionFlow it) {
-		"isStateActive"
+		IS_STATE_ACTIVE
+	}
+	
+	override isFinalFctID(ExecutionFlow it) {
+		IS_FINAL
 	}
 
 	override dispatch access(OperationDefinition it) {
@@ -207,5 +240,17 @@ class CppNaming extends Naming {
 			typeSpecifier.targetLanguageName + ' value'
 		else
 			''
+	}
+	
+	def List<String> statechartNamespace(ExecutionFlow it) {
+		val sct = statechart
+		if(sct === null) {
+			return emptyList
+		}
+		var ns = sct.namespace
+		if(ns === null || ns == "") {
+			return emptyList
+		}
+		return newArrayList(ns.replace(".", "::").replace("/", "::").split("::").filter[!nullOrEmpty])
 	}
 }

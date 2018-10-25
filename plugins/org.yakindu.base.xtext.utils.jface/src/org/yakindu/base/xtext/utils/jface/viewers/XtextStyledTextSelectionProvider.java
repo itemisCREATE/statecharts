@@ -45,7 +45,7 @@ public class XtextStyledTextSelectionProvider implements ISelectionProvider {
 	public ISelection getSelection() {
 		if (styledText.isDisposed())
 			return StructuredSelection.EMPTY;
-		int offset = styledText.getCaretOffset() - 1;
+		int offset = Math.max(styledText.getCaretOffset() - 1, 0);
 		XtextResource fakeResource = xtextResource;
 		IParseResult parseResult = fakeResource.getParseResult();
 		if (parseResult == null)

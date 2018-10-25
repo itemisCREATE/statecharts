@@ -30,11 +30,17 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
+import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Method
 
 class StatemachineImplementation implements IContentTemplate {
 	
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
+	@Inject protected extension SgraphExtensions
 	@Inject protected extension FlowCode
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension ICodegenTypeSystemAccess
@@ -48,6 +54,7 @@ class StatemachineImplementation implements IContentTemplate {
 	
 	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
 		this.entry = entry
+		val namespace = statechartNamespace
 	'''	
 		«entry.licenseText»
 		
@@ -57,6 +64,12 @@ class StatemachineImplementation implements IContentTemplate {
 		
 		/*! \file Implementation of the state machine '«name»'
 		*/
+		
+		«IF !namespace.nullOrEmpty»
+		«FOR ns : namespace»
+		namespace «ns» {
+		«ENDFOR»
+		«ENDIF»
 		
 		«usingNamespaces»
 		
@@ -91,6 +104,12 @@ class StatemachineImplementation implements IContentTemplate {
 		«functionImplementations»
 		
 		«additionalFunctions»
+		
+		«IF !namespace.nullOrEmpty»
+		«FOR ns : namespace»
+		}
+		«ENDFOR»
+		«ENDIF»
 	'''
 	}
 	
@@ -119,17 +138,17 @@ class StatemachineImplementation implements IContentTemplate {
 	
 	def protected initialisationList(ExecutionFlow it) {
 		'''
-			«IF timed»«timerInstance»(null),«ENDIF»
-			stateConfVectorPosition(0)«FOR s : getInterfaces»,
+			«IF timed»«timerInstance»(«NULL_STRING»),«ENDIF»
+			«STATEVECTOR_POS»(0)«FOR s : getInterfaces»,
 			«s.instance»()«IF s.hasOperations && !entry.useStaticOPC»,
-			«s.OCB_Instance»(null)«ENDIF»«ENDFOR»
+			«s.OCB_Instance»(«NULL_STRING»)«ENDIF»«ENDFOR»
 		'''
 	}
 	
 	def protected initialisationListCopy(ExecutionFlow it) {
 		'''
 			«IF timed»«timerInstance»(rhs.«timerInstance»),«ENDIF»
-			stateConfVectorPosition(rhs.stateConfVectorPosition)«FOR s : getInterfaces»,
+			«STATEVECTOR_POS»(rhs.«STATEVECTOR_POS»)«FOR s : getInterfaces»,
 			«s.instance»(rhs.«s.instance»)«IF s.hasOperations && !entry.useStaticOPC»,
 			«s.OCB_Instance»(rhs.«s.OCB_Instance»)«ENDIF»«ENDFOR»
 		'''	
@@ -138,8 +157,8 @@ class StatemachineImplementation implements IContentTemplate {
 	protected def CharSequence constructorBody(ExecutionFlow it)
 		'''
 		«IF hasHistory»
-			for (sc_ushort i = 0; i < «historyStatesConst»; ++i)
-				historyVector[i] = «null_state»;
+			for («USHORT_TYPE» i = 0; i < «historyStatesConst»; ++i)
+				«HISTORYVECTOR»[i] = «null_state»;
 				
 		«ENDIF»
 		'''
@@ -152,24 +171,24 @@ class StatemachineImplementation implements IContentTemplate {
 	'''
 	
 	def initFunction(ExecutionFlow it) '''
-		«IF entry.checkUnimplementedOCBs»sc_errorCode«ELSE»void«ENDIF» «module»::init()
+		«IF entry.checkUnimplementedOCBs»«ERROR_TYPE»«ELSE»void«ENDIF» «module»::«initFctID»()
 		{
 			«IF entry.checkUnimplementedOCBs»
-			sc_errorCode errorCode = 0;
+			«ERROR_TYPE» errorCode = 0;
 			
 			«unimplementedOCBErrors»«ENDIF»
-			for (sc_ushort i = 0; i < «orthogonalStatesConst»; ++i)
-				stateConfVector[i] = «null_state»;
+			for («USHORT_TYPE» i = 0; i < «orthogonalStatesConst»; ++i)
+				«STATEVECTOR»[i] = «null_state»;
 			
 			«IF hasHistory»
 			for (sc_ushort i = 0; i < «historyStatesConst»; ++i)
-				historyVector[i] = «null_state»;
+				«HISTORYVECTOR»[i] = «null_state»;
 			
 			«ENDIF»
-			stateConfVectorPosition = 0;
+			«STATEVECTOR_POS» = 0;
 		
-			clearInEvents();
-			clearOutEvents();
+			«clearInEventsFctID»();
+			«clearOutEventsFctID»();
 			
 			«initSequence.code»
 			«IF entry.checkUnimplementedOCBs»
@@ -179,21 +198,21 @@ class StatemachineImplementation implements IContentTemplate {
 	'''
 	
 	def enterFunction(ExecutionFlow it) '''
-		void «module»::enter()
+		void «module»::«enterFctID»()
 		{
 			«enterSequences.defaultSequence.code»
 		}
 	'''
 	
 	def exitFunction(ExecutionFlow it) '''
-		void «module»::exit()
+		void «module»::«exitFctID»()
 		{
 			«exitSequence.code»
 		}
 	'''
 	
 	def clearInEventsFunction(ExecutionFlow it) '''
-		void «module»::clearInEvents()
+		void «module»::«clearInEventsFctID»()
 		{
 			«FOR scope : it.scopes»
 				«FOR event : scope.incomingEvents»
@@ -214,7 +233,7 @@ class StatemachineImplementation implements IContentTemplate {
 	'''
 	
 	def clearOutEventsFunction(ExecutionFlow it) '''
-		void «module»::clearOutEvents()
+		void «module»::«clearOutEventsFctID»()
 		{
 			«FOR scope : it.scopes»
 				«FOR event : scope.outgoingEvents»
@@ -225,29 +244,29 @@ class StatemachineImplementation implements IContentTemplate {
 	'''
 	
 	def runCycleFunction(ExecutionFlow it) '''
-		void «module»::runCycle()
+		void «module»::«runCycleFctID»()
 		{
 			
-			clearOutEvents();
+			«clearOutEventsFctID»();
 			«runCycleFunctionForLoop»			
-			clearInEvents();
+			«clearInEventsFctID»();
 		}
 	'''
 	
 	def runCycleFunctionForLoop(ExecutionFlow it) {
 		'''
-		for (stateConfVectorPosition = 0;
-			stateConfVectorPosition < «orthogonalStatesConst»;
-			stateConfVectorPosition++)
+		for («STATEVECTOR_POS» = 0;
+			«STATEVECTOR_POS» < «orthogonalStatesConst»;
+			«STATEVECTOR_POS»++)
 			{
 				
-			switch (stateConfVector[stateConfVectorPosition])
+			switch («STATEVECTOR»[«STATEVECTOR_POS»])
 			{
-			«FOR state : states»
-				«IF state.reactSequence !== null»
+			«FOR state : states.filter[isLeaf]»
+				«IF state.reactMethod !== null»
 				case «state.shortName.asEscapedIdentifier» :
 				{
-					«state.reactSequence.shortName»();
+					«state.reactMethod.shortName»(true);
 					break;
 				}
 				«ENDIF»
@@ -262,12 +281,12 @@ class StatemachineImplementation implements IContentTemplate {
 	def timedStatemachineFunctions(ExecutionFlow it) '''
 		«IF timed»
 			
-			void «module»::setTimer(«timerInterface»* timerInterface)
+			void «module»::«SET_TIMER»(«timerInterface»* timerInterface)
 			{
 				this->«timerInstance» = timerInterface;
 			}
 			
-			«timerInterface»* «module»::getTimer()
+			«timerInterface»* «module»::«GET_TIMER»()
 			{
 				return «timerInstance»;
 			}
@@ -277,25 +296,25 @@ class StatemachineImplementation implements IContentTemplate {
 	'''
 	
 	def raiseTimeEventFunction(ExecutionFlow it) '''
-		void «module»::«raiseTimeEventFctID»(sc_eventid evid)
+		void «module»::«raiseTimeEventFctID»(«EVENT_TYPE» evid)
 		{
-			if ((evid >= (sc_eventid)«timeEventsInstance») && (evid < (sc_eventid)(&«timeEventsInstance»[«timeEventsCountConst»])))
+			if ((evid >= («EVENT_TYPE»)«timeEventsInstance») && (evid < («EVENT_TYPE»)(&«timeEventsInstance»[«timeEventsCountConst»])))
 			{
-				*(sc_boolean*)evid = true;
+				*(«BOOL_TYPE»*)evid = true;
 			}				
 		}
 	'''
 	
 	def isStateActiveFunction(ExecutionFlow it) '''
-		sc_boolean «module»::«stateActiveFctID»(«statesEnumType» state) const
+		«BOOL_TYPE» «module»::«stateActiveFctID»(«statesEnumType» state) const
 		{
 			switch (state)
 			{
 				«FOR s : states»
 				case «s.shortName.asEscapedIdentifier» : 
-					return (sc_boolean) («IF s.leaf»stateConfVector[«s.stateVectorDefine»] == «s.shortName.asEscapedIdentifier»
-					«ELSE»stateConfVector[«s.stateVectorDefine»] >= «s.shortName.asEscapedIdentifier»
-						&& stateConfVector[«s.stateVectorDefine»] <= «s.subStates.last.shortName.asEscapedIdentifier»«ENDIF»);
+					return («BOOL_TYPE») («IF s.leaf»«STATEVECTOR»[«s.stateVectorDefine»] == «s.shortName.asEscapedIdentifier»
+					«ELSE»«STATEVECTOR»[«s.stateVectorDefine»] >= «s.shortName.asEscapedIdentifier»
+						&& «STATEVECTOR»[«s.stateVectorDefine»] <= «s.subStates.last.shortName.asEscapedIdentifier»«ENDIF»);
 				«ENDFOR»
 				default: return false;
 			}
@@ -304,9 +323,9 @@ class StatemachineImplementation implements IContentTemplate {
 	
 	
 	def isActiveFunction(ExecutionFlow it) '''
-		sc_boolean «module»::isActive() const
+		«BOOL_TYPE» «module»::«isActiveFctID»() const
 		{
-			return «FOR i : 0 ..< stateVector.size SEPARATOR '||'»stateConfVector[«i»] != «null_state»«ENDFOR»;
+			return «FOR i : 0 ..< stateVector.size SEPARATOR '||'»«STATEVECTOR»[«i»] != «null_state»«ENDFOR»;
 		}
 	'''
 	
@@ -318,7 +337,7 @@ class StatemachineImplementation implements IContentTemplate {
 			 * Always returns 'false' since this state machine can never become final.
 			 */
 			«ENDIF»
-			sc_boolean «module»::isFinal() const
+			«BOOL_TYPE» «module»::«isFinalFctID»() const
 			{
 		''' +
 		// only if the impact vector is completely covered by final states the state machine 
@@ -348,18 +367,18 @@ class StatemachineImplementation implements IContentTemplate {
 	'''
 	
 	def checkInternalOCB(StatechartScope it) '''
-		if (this->«OCB_Instance» == null) { 
+		if (this->«OCB_Instance» == «NULL_STRING») { 
 			errorCode |= «ErrorCode.OCB_INTERNAL_INIT.name»;
 		}
 	'''
 	
 	def checkInterfaceOCB(StatechartScope it) '''
 		«IF defaultInterface»
-			if (this->«OCB_Instance» == null) { 
+			if (this->«OCB_Instance» == «NULL_STRING») { 
 				errorCode |=  «ErrorCode.OCB_DEFAULT_INIT.name»;
 			}
 		«ELSE»
-			if (this->«OCB_Instance» == null) { 
+			if (this->«OCB_Instance» == «NULL_STRING») { 
 				errorCode |= «ErrorCode.OCB_NAMED_INIT.name»;
 			}
 		«ENDIF»
@@ -434,9 +453,23 @@ class StatemachineImplementation implements IContentTemplate {
 		«exitActionFunctions.toImplementation»
 		«enterSequenceFunctions.toImplementation»
 		«exitSequenceFunctions.toImplementation»
-		«reactFunctions.toImplementation»
+		«reactFunctions.filter[ f | ! (f.eContainer instanceof ExecutionState)].toList.toImplementation»
+		«reactMethods.toDefinitions»
 		
 	'''
+	
+	 def toDefinitions(List<Method> methods) '''
+	 	«FOR m : methods»
+	 		«m.implementation»
+	 		
+	 	«ENDFOR»
+	 '''
+	 
+	 def implementation(Method it) '''
+	 	«typeSpecifier.targetLanguageName» «execution_flow.module»::«shortName»(«FOR p : parameters SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR») {
+	 		«body.code»
+	 	}
+	 '''
 	 
 	def toImplementation(List<Step> steps) '''
 		«FOR s : steps»
@@ -446,7 +479,7 @@ class StatemachineImplementation implements IContentTemplate {
 	
 	def dispatch functionImplementation(Check it) '''
 		«stepComment»
-		sc_boolean «execution_flow.module»::«shortName»()
+		«BOOL_TYPE» «execution_flow.module»::«shortName»()
 		{
 			return «code»;
 		}

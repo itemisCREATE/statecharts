@@ -37,11 +37,16 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sexec.Method
+import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 
 class Naming {
 	@Inject @Named("Separator") protected String sep;
 
 	@Inject protected extension SExecExtensions
+	
+	@Inject protected extension SgraphExtensions
 
 	@Inject protected extension ICodegenTypeSystemAccess
 
@@ -53,13 +58,18 @@ class Naming {
 	
 	@Inject extension GenmodelEntries
 
-	public static final String NULL_STRING = "null";
-
 	def getFullyQualifiedName(State state) {
 		provider.getFullyQualifiedName(state).toString.asEscapedIdentifier
 	}
 
 	def module(ExecutionFlow it) {
+		if (entry.moduleName.nullOrEmpty) {
+			return name.asIdentifier.toFirstUpper
+		}
+		return entry.moduleName.toFirstUpper
+	}
+	
+	def module(Statechart it) {
 		if (entry.moduleName.nullOrEmpty) {
 			return name.asIdentifier.toFirstUpper
 		}
@@ -83,7 +93,7 @@ class Naming {
 	}
 
 	def typesModule(ExecutionFlow it) {
-		'sc_types'
+		TYPES_MODULE
 	}
 
 	def timerType(ExecutionFlow it) {
@@ -91,7 +101,7 @@ class Naming {
 	}
 	
 	def statesEnumType(ExecutionFlow it) {
-		flow.type + 'States'
+		containerType + 'States'
 	}
 	
 	def protected String entryStatemachinePrefix() {
@@ -99,15 +109,15 @@ class Naming {
 	}
 
 	def dispatch String type(InterfaceScope it) {
-		flow.type + 'Iface' + (if(name.nullOrEmpty) '' else name).asIdentifier.toFirstUpper
+		containerType + 'Iface' + (if(name.nullOrEmpty) '' else name).asIdentifier.toFirstUpper
 	}
 
 	def dispatch String type(InternalScope it) {
-		flow.type + 'Internal'
+		containerType + 'Internal'
 	}
 
 	def dispatch String type(Scope it) {
-		flow.type + 'TimeEvents'
+		containerType + 'TimeEvents'
 	}
 
 	def dispatch String type(ExecutionFlow it) {
@@ -172,11 +182,11 @@ class Naming {
 	}
 
 	def clearInEventsFctID(ExecutionFlow it) {
-		"clearInEvents"
+		CLEAR_IN_EVENTS
 	}
 
 	def clearOutEventsFctID(ExecutionFlow it) {
-		"clearOutEvents"
+		CLEAR_OUT_EVENTS
 	}
 
 	def dispatch String null_state(ExecutionFlow it) {
@@ -208,30 +218,13 @@ class Naming {
 		return null;
 	}
 	
-	def Statechart statechart(EObject element) {
-		var ret = element;
-
-		while (ret !== null) {
-			if (ret instanceof Statechart) {
-				return ret as Statechart
-			} else {
-				ret = ret.eContainer;
-			}
-		}
-		return null;
-	}
-	
-	def bool() {
-		"sc_boolean"
-	}
-	
 	def dispatch scopeTypeDeclMember(EventDefinition it) '''
-		«bool» «eventRaisedFlag»;
+		«BOOL_TYPE» «eventRaisedFlag»;
 		«IF type !== null && type.name != 'void'»«typeSpecifier.targetLanguageName» «eventValueVariable»;«ENDIF»
 	'''
 
 	def dispatch scopeTypeDeclMember(TimeEvent it) '''
-		«bool» «timeEventRaisedFlag»;
+		«BOOL_TYPE» «timeEventRaisedFlag»;
 	'''
 
 	def dispatch scopeTypeDeclMember(VariableDefinition it) '''
@@ -241,39 +234,39 @@ class Naming {
 	def dispatch scopeTypeDeclMember(Declaration it) ''''''
 
 	def constantName(VariableDefinition it) {
-		(flow.type + separator + scope.type + separator + name.asEscapedIdentifier).toUpperCase
+		(containerType + separator + scope.type + separator + name.asEscapedIdentifier).toUpperCase
 	}
 
 	def raiseTimeEventFctID(ExecutionFlow it) {
-		functionPrefix + "raiseTimeEvent"
+		functionPrefix + RAISE_TIME_EVENT
 	}
 
 	def isStateActiveFctID(ExecutionFlow it) {
-		functionPrefix + "isStateActive"
+		functionPrefix + IS_STATE_ACTIVE
 	}
 
 	def isActiveFctID(ExecutionFlow it) {
-		functionPrefix + "isActive"
+		functionPrefix + IS_ACTIVE
 	}
 
 	def isFinalFctID(ExecutionFlow it) {
-		functionPrefix + "isFinal"
+		functionPrefix + IS_FINAL
 	}
 	
 	def initFctID(ExecutionFlow it) {
-		functionPrefix + "init"
+		functionPrefix + INIT
 	}
 	
 	def enterFctID(ExecutionFlow it) {
-		functionPrefix + "enter"
+		functionPrefix + ENTER
 	}
 
 	def exitFctID(ExecutionFlow it) {
-		functionPrefix + "exit"
+		functionPrefix + EXIT
 	}
 	
 	def runCycleFctID(ExecutionFlow it) {
-		functionPrefix + "runCycle"
+		functionPrefix + RUN_CYCLE
 	}
 	
 	def eventValueVariable(EventDefinition it) {
@@ -289,19 +282,19 @@ class Naming {
 	}
 	
 	def setTimerFctID(ExecutionFlow it) {
-		functionPrefix + "setTimer"
+		functionPrefix + SET_TIMER
 	}
 	
 	def unsetTimerFctID(ExecutionFlow it) {
-		functionPrefix + "unsetTimer"
+		functionPrefix + UNSET_TIMER
 	}
 	
 	def enterStateTracingFctID(ExecutionFlow it) {
-		functionPrefix + "stateEntered"
+		functionPrefix + STATE_ENTERED
 	}
 	
 	def exitStateTracingFctID(ExecutionFlow it) {
-		functionPrefix + "stateExited"
+		functionPrefix + STATE_EXITED
 	}
  
 	def asRaiser(EventDefinition it) {
@@ -360,9 +353,9 @@ class Naming {
 
 	def dispatch scopeDescription(InternalScope it) '''internal scope'''
 
-	def scHandleDecl(EObject it) { flow.type + '* ' + scHandle }
+	def scHandleDecl(EObject it) { containerType + '* ' + scHandle }
 
-	def scHandle() { 'handle' }
+	def scHandle() { HANDLE }
 
 	def valueParams(EventDefinition it) {
 		if(hasValue) ', ' + typeSpecifier.targetLanguageName + ' value' else ''
@@ -380,6 +373,8 @@ class Naming {
 		'''«name.asEscapedIdentifier»'''
 	}
 
+	def dispatch access(Method it) '''«shortName»'''
+	
 	def dispatch access(Enumerator it) {
 		'''«name.asEscapedIdentifier»'''
 	}
@@ -399,4 +394,6 @@ class Naming {
 	def maxHistoryStates(ExecutionFlow it) '''«type.toUpperCase»_MAX_HISTORY_STATES'''
 
 	def maxParallelTimeEvents(ExecutionFlow it) '''«type.toUpperCase»_MAX_PARALLEL_TIME_EVENTS'''
+	
+	def numStates(ExecutionFlow it) '''«type.toUpperCase»_STATE_COUNT'''
 }

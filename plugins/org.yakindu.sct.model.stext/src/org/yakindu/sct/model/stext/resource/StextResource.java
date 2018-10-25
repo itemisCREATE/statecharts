@@ -50,15 +50,12 @@ public class StextResource extends AbstractSCTResource {
 		StringBuilder builder = new StringBuilder();
 		if (statechart.getNamespace() != null) {
 			builder.append("namespace " + statechart.getNamespace());
-			builder.append(NEW_LINE);
 		}
 		for (Annotation annotation : statechart.getAnnotations()) {
 			builder.append(serialize(annotation));
-			builder.append(NEW_LINE);
 		}
 		for (Scope scope : statechart.getScopes()) {
 			builder.append(serialize(scope));
-			builder.append(NEW_LINE);
 		}
 		statechart.setSpecification(builder.toString());
 	}
@@ -82,7 +79,7 @@ public class StextResource extends AbstractSCTResource {
 		builder.append(serialize(reaction.getTrigger()));
 		if (reaction.getEffect() != null) {
 			builder.append(" / ");
-			builder.append(serialize(reaction.getEffect()));
+			builder.append(serialize(reaction.getEffect()).trim());
 		}
 		if (reaction.getProperties().size() > 0) {
 			builder.append(" # ");

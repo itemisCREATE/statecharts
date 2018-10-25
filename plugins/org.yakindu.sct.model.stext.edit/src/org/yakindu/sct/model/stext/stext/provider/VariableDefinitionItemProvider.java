@@ -239,6 +239,11 @@ public class VariableDefinitionItemProvider extends PropertyItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+				 ExpressionsFactory.eINSTANCE.createPostFixUnaryExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
 				 ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
 
 		newChildDescriptors.add

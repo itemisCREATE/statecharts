@@ -4,7 +4,11 @@
 #include "ConstOnlyDefaultScope.h"
 #include "sc_runner.h"
 #include "sc_types.h"
-			
+
+namespace  {
+
+declarations::ConstOnlyDefaultScope* statechart;
+
 
 
 //! The timers are managed by a timer service. */
@@ -12,11 +16,8 @@ static SctUnitRunner * runner;
 
 class ConstOnlyDefaultScopeTest : public ::testing::Test{
 	protected:
-	
-	ConstOnlyDefaultScope* statechart;
-	
 	virtual void SetUp() {
-		statechart = new ConstOnlyDefaultScope();
+		statechart = new declarations::ConstOnlyDefaultScope();
 		statechart->init();
 		runner = new SctUnitRunner(
 			statechart,
@@ -28,27 +29,29 @@ class ConstOnlyDefaultScopeTest : public ::testing::Test{
 		delete statechart;
 		delete runner;
 	}
-	
-	
 };
 
-	TEST_F(ConstOnlyDefaultScopeTest, statechartEntry) {
-		
-		statechart->enter();
-		
-		EXPECT_TRUE(statechart->isStateActive(ConstOnlyDefaultScope::ConstOnlyDefaultScope_main_region_A));
-		
-		
+
+TEST_F(ConstOnlyDefaultScopeTest, statechartEntry) {
+	
+	statechart->enter();
+	
+	EXPECT_TRUE(statechart->isStateActive(declarations::ConstOnlyDefaultScope::ConstOnlyDefaultScope_main_region_A));
+	
+	
 }
-	TEST_F(ConstOnlyDefaultScopeTest, stateTransition) {
-		
-		statechart->enter();
-		
-		statechart->getSCI_A()->raise_e(1l);
-		
-		runner->proceed_cycles(1);
-		
-		EXPECT_TRUE(statechart->isStateActive(ConstOnlyDefaultScope::ConstOnlyDefaultScope_main_region_B));
-		
-		
+TEST_F(ConstOnlyDefaultScopeTest, stateTransition) {
+	
+	statechart->enter();
+	
+	statechart->getSCI_A()->raise_e(1l);
+	
+	runner->proceed_cycles(1);
+	
+	EXPECT_TRUE(statechart->isStateActive(declarations::ConstOnlyDefaultScope::ConstOnlyDefaultScope_main_region_B));
+	
+	
+}
+
+
 }

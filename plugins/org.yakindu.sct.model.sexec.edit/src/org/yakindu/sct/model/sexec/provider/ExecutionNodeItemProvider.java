@@ -22,9 +22,12 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.types.TypesFactory;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sexec.ExecutionNode;
 import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sexec.SexecPackage;
+import org.yakindu.sct.model.sgraph.SGraphFactory;
 
 /**
  * This is the item provider adapter for a {@link org.yakindu.sct.model.sexec.ExecutionNode} object.
@@ -56,6 +59,9 @@ public class ExecutionNodeItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
+			addIdPropertyDescriptor(object);
+			addAbstractPropertyDescriptor(object);
+			addVisiblePropertyDescriptor(object);
 			addSimpleNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -79,6 +85,72 @@ public class ExecutionNodeItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Id feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIdPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_PackageMember_id_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_PackageMember_id_feature", "_UI_PackageMember_type"),
+				 TypesPackage.Literals.PACKAGE_MEMBER__ID,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Abstract feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAbstractPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Type_abstract_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Type_abstract_feature", "_UI_Type_type"),
+				 TypesPackage.Literals.TYPE__ABSTRACT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Visible feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addVisiblePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Type_visible_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Type_visible_feature", "_UI_Type_type"),
+				 TypesPackage.Literals.TYPE__VISIBLE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -117,6 +189,11 @@ public class ExecutionNodeItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(TypesPackage.Literals.PACKAGE_MEMBER__ANNOTATIONS);
+			childrenFeatures.add(TypesPackage.Literals.TYPE__CONSTRAINT);
+			childrenFeatures.add(TypesPackage.Literals.TYPE__SUPER_TYPES);
+			childrenFeatures.add(TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS);
+			childrenFeatures.add(TypesPackage.Literals.COMPLEX_TYPE__FEATURES);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_NODE__REACTIONS);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_NODE__REACT_SEQUENCE);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_NODE__LOCAL_REACT_SEQUENCE);
@@ -175,9 +252,17 @@ public class ExecutionNodeItemProvider
 
 		switch (notification.getFeatureID(ExecutionNode.class)) {
 			case SexecPackage.EXECUTION_NODE__NAME:
+			case SexecPackage.EXECUTION_NODE__ID:
+			case SexecPackage.EXECUTION_NODE__ABSTRACT:
+			case SexecPackage.EXECUTION_NODE__VISIBLE:
 			case SexecPackage.EXECUTION_NODE__SIMPLE_NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case SexecPackage.EXECUTION_NODE__ANNOTATIONS:
+			case SexecPackage.EXECUTION_NODE__CONSTRAINT:
+			case SexecPackage.EXECUTION_NODE__SUPER_TYPES:
+			case SexecPackage.EXECUTION_NODE__TYPE_PARAMETERS:
+			case SexecPackage.EXECUTION_NODE__FEATURES:
 			case SexecPackage.EXECUTION_NODE__REACTIONS:
 			case SexecPackage.EXECUTION_NODE__REACT_SEQUENCE:
 			case SexecPackage.EXECUTION_NODE__LOCAL_REACT_SEQUENCE:
@@ -197,6 +282,71 @@ public class ExecutionNodeItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PACKAGE_MEMBER__ANNOTATIONS,
+				 TypesFactory.eINSTANCE.createAnnotation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.TYPE__CONSTRAINT,
+				 TypesFactory.eINSTANCE.createTypeConstraint()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.TYPE__CONSTRAINT,
+				 TypesFactory.eINSTANCE.createRangeConstraint()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.TYPE__SUPER_TYPES,
+				 TypesFactory.eINSTANCE.createTypeSpecifier()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.TYPE__SUPER_TYPES,
+				 TypesFactory.eINSTANCE.createArrayTypeSpecifier()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS,
+				 TypesFactory.eINSTANCE.createTypeParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 SexecFactory.eINSTANCE.createMethod()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 SexecFactory.eINSTANCE.createTimeEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 SGraphFactory.eINSTANCE.createImportDeclaration()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createOperation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createProperty()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createEnumerator()));
 
 		newChildDescriptors.add
 			(createChildParameter

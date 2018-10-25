@@ -2,12 +2,13 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Commons
 Bundle-SymbolicName: org.yakindu.sct.commons
-Bundle-Version: 3.4.0.qualifier
+Bundle-Version: 3.4.2.qualifier
 Bundle-Vendor: statecharts.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.core.resources,
  org.eclipse.core.runtime,
  org.eclipse.jdt.core,
  com.google.guava,
- org.eclipse.jdt.launching
+ org.eclipse.jdt.launching,
+ org.eclipse.emf.ecore
 Export-Package: org.yakindu.sct.commons

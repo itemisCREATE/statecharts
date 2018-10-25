@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Xtext GMF Integration (XGI)
 Bundle-SymbolicName: org.yakindu.base.xtext.utils.gmf
-Bundle-Version: 3.4.0.qualifier
+Bundle-Version: 3.4.2.qualifier
 Bundle-Vendor: statecharts.org
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xtext.ui,
@@ -20,4 +20,5 @@ Export-Package: org.yakindu.base.xtext.utils.gmf.commands,
  org.yakindu.base.xtext.utils.gmf.routing,
  org.yakindu.base.xtext.utils.gmf.viewers
 Bundle-ActivationPolicy: lazy
+Automatic-Module-Name: org.yakindu.base.xtext.utils.gmf
 

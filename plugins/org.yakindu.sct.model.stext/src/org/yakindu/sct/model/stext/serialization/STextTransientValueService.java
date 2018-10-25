@@ -12,18 +12,20 @@ package org.yakindu.sct.model.stext.serialization;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
+import org.eclipse.xtext.serializer.sequencer.TransientValueService;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 
 /**
  * @author robert rudi - Initial contribution and API
  * 
  */
-public class STextTransientValueService extends DefaultTransientValueService {
+@SuppressWarnings("restriction")
+public class STextTransientValueService extends TransientValueService {
 
 	@Override
-	public boolean isTransient(EObject owner, EStructuralFeature feature, int index) {
-		return (owner instanceof LocalReaction) ? false : super.isTransient(owner, feature, index);
+	public ValueTransient isValueTransient(EObject semanticObject, EStructuralFeature feature) {
+		return (semanticObject instanceof LocalReaction) ? ValueTransient.NO
+				: super.isValueTransient(semanticObject, feature);
 	}
 
 }

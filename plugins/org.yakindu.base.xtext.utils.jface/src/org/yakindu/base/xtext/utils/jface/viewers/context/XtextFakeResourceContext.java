@@ -44,19 +44,22 @@ public class XtextFakeResourceContext {
 	@Inject
 	private XtextResource fakeResource;
 	@Inject
-	private @Named(Constants.FILE_EXTENSIONS)
-	String fakeResourceFileExtension;
+	private @Named(Constants.FILE_EXTENSIONS) String fakeResourceFileExtension;
+
+	private IProject activeProject;
 
 	public XtextFakeResourceContext(Injector injector) {
-		injector.injectMembers(this);
+		this(injector, ActiveEditorTracker.getLastActiveEditorProject());
+	}
 
+	public XtextFakeResourceContext(Injector injector, IProject activeProject) {
+		this.activeProject = activeProject;
+		injector.injectMembers(this);
 		// create resource set
 		createXtextFakeResourceSet();
-
 		// initialize fake resource (which was injected and thus does not has to
 		// be created)
 		initXtextFakeResource();
-
 		// initialize the resource set (the fake resource has to be added)
 		initXtextFakeResourceSet();
 	}
@@ -79,8 +82,7 @@ public class XtextFakeResourceContext {
 		// add the fake resource (add an uri to it, first)
 		IProject activeProject = getActiveProject();
 		// fallback to avoid dependency on open editor
-		String activeProjectName = activeProject != null ? activeProject
-				.getName() : "fakeResource";
+		String activeProjectName = activeProject != null ? activeProject.getName() : "fakeResource";
 		fakeResource.setURI(createFakeResourceUri(activeProjectName));
 		try {
 			fakeResource.load(new StringInputStream(""), Collections.EMPTY_MAP);
@@ -98,8 +100,7 @@ public class XtextFakeResourceContext {
 	}
 
 	private URI createFakeResourceUri(String activeProject) {
-		return createFakeResourceBaseFragment(activeProject)
-				.appendFileExtension(fakeResourceFileExtension);
+		return createFakeResourceBaseFragment(activeProject).appendFileExtension(fakeResourceFileExtension);
 	}
 
 	protected String getFileExtension() {
@@ -107,11 +108,10 @@ public class XtextFakeResourceContext {
 	}
 
 	protected IProject getActiveProject() {
-		return ActiveEditorTracker.getLastActiveEditorProject();
+		return activeProject;
 	}
 
-	public void updateFakeResourceContext(
-			IXtextFakeContextResourcesProvider contextProvider) {
+	public void updateFakeResourceContext(IXtextFakeContextResourcesProvider contextProvider) {
 
 		// remove any other resources that may have been created earlier
 		// unloading them (to remove all adapters)

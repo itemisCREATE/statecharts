@@ -292,72 +292,6 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 		sCInterface.setAaa_local(value);
 	}
 	
-	private boolean check_ParentFirstExecutionHierarchy_r_A_lr1_lr1() {
-		return true;
-	}
-	
-	private boolean check_ParentFirstExecutionHierarchy_r_A_tr0_tr0() {
-		return (sCInterface.e) && (!sCInterface.getDisable_a());
-	}
-	
-	private boolean check_ParentFirstExecutionHierarchy_r_A_r_AA_lr0_lr0() {
-		return true;
-	}
-	
-	private boolean check_ParentFirstExecutionHierarchy_r_A_r_AA_tr0_tr0() {
-		return (sCInterface.e) && (!sCInterface.getDisable_aa());
-	}
-	
-	private boolean check_ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA_lr0_lr0() {
-		return true;
-	}
-	
-	private boolean check_ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA_tr0_tr0() {
-		return (sCInterface.e) && (!sCInterface.getDisable_aaa());
-	}
-	
-	private boolean check_ParentFirstExecutionHierarchy_r_B_tr0_tr0() {
-		return sCInterface.e;
-	}
-	
-	private void effect_ParentFirstExecutionHierarchy_r_A_lr1_lr1() {
-		sCInterface.setA_local(true);
-	}
-	
-	private void effect_ParentFirstExecutionHierarchy_r_A_tr0() {
-		exitSequence_ParentFirstExecutionHierarchy_r_A();
-		sCInterface.setA_reacted(true);
-		
-		enterSequence_ParentFirstExecutionHierarchy_r_B_default();
-	}
-	
-	private void effect_ParentFirstExecutionHierarchy_r_A_r_AA_lr0_lr0() {
-		sCInterface.setAa_local(true);
-	}
-	
-	private void effect_ParentFirstExecutionHierarchy_r_A_r_AA_tr0() {
-		exitSequence_ParentFirstExecutionHierarchy_r_A();
-		sCInterface.setAa_reacted(true);
-		
-		enterSequence_ParentFirstExecutionHierarchy_r_B_default();
-	}
-	
-	private void effect_ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA_lr0_lr0() {
-		sCInterface.setAaa_local(true);
-	}
-	
-	private void effect_ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA_tr0() {
-		exitSequence_ParentFirstExecutionHierarchy_r_A();
-		sCInterface.setAaa_reacted(true);
-		
-		enterSequence_ParentFirstExecutionHierarchy_r_B_default();
-	}
-	
-	private void effect_ParentFirstExecutionHierarchy_r_B_tr0() {
-		exitSequence_ParentFirstExecutionHierarchy_r_B();
-		enterSequence_ParentFirstExecutionHierarchy_r_A_default();
-	}
-	
 	/* Entry action for state 'A'. */
 	private void entryAction_ParentFirstExecutionHierarchy_r_A() {
 		sCInterface.setA_reacted(false);
@@ -470,32 +404,6 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 		}
 	}
 	
-	/* The reactions of state AAA. */
-	private void react_ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA() {
-		if (check_ParentFirstExecutionHierarchy_r_A_tr0_tr0()) {
-			effect_ParentFirstExecutionHierarchy_r_A_tr0();
-		} else {
-			effect_ParentFirstExecutionHierarchy_r_A_lr1_lr1();
-			if (check_ParentFirstExecutionHierarchy_r_A_r_AA_tr0_tr0()) {
-				effect_ParentFirstExecutionHierarchy_r_A_r_AA_tr0();
-			} else {
-				effect_ParentFirstExecutionHierarchy_r_A_r_AA_lr0_lr0();
-				if (check_ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA_tr0_tr0()) {
-					effect_ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA_tr0();
-				} else {
-					effect_ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA_lr0_lr0();
-				}
-			}
-		}
-	}
-	
-	/* The reactions of state B. */
-	private void react_ParentFirstExecutionHierarchy_r_B() {
-		if (check_ParentFirstExecutionHierarchy_r_B_tr0_tr0()) {
-			effect_ParentFirstExecutionHierarchy_r_B_tr0();
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_ParentFirstExecutionHierarchy_r__entry_Default() {
 		enterSequence_ParentFirstExecutionHierarchy_r_A_default();
@@ -511,6 +419,91 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 		enterSequence_ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA_default();
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean parentFirstExecutionHierarchy_r_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if ((sCInterface.e) && (!sCInterface.getDisable_a())) {
+					exitSequence_ParentFirstExecutionHierarchy_r_A();
+					sCInterface.setA_reacted(true);
+					
+					enterSequence_ParentFirstExecutionHierarchy_r_B_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+			sCInterface.setA_local(true);
+		}
+		return did_transition;
+	}
+	
+	private boolean parentFirstExecutionHierarchy_r_A_r_AA_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (parentFirstExecutionHierarchy_r_A_react(try_transition)==false) {
+				if ((sCInterface.e) && (!sCInterface.getDisable_aa())) {
+					exitSequence_ParentFirstExecutionHierarchy_r_A();
+					sCInterface.setAa_reacted(true);
+					
+					enterSequence_ParentFirstExecutionHierarchy_r_B_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+			sCInterface.setAa_local(true);
+		}
+		return did_transition;
+	}
+	
+	private boolean parentFirstExecutionHierarchy_r_A_r_AA_r_AAA_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (parentFirstExecutionHierarchy_r_A_r_AA_react(try_transition)==false) {
+				if ((sCInterface.e) && (!sCInterface.getDisable_aaa())) {
+					exitSequence_ParentFirstExecutionHierarchy_r_A();
+					sCInterface.setAaa_reacted(true);
+					
+					enterSequence_ParentFirstExecutionHierarchy_r_B_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+			sCInterface.setAaa_local(true);
+		}
+		return did_transition;
+	}
+	
+	private boolean parentFirstExecutionHierarchy_r_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.e) {
+					exitSequence_ParentFirstExecutionHierarchy_r_B();
+					enterSequence_ParentFirstExecutionHierarchy_r_A_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -519,10 +512,10 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case parentFirstExecutionHierarchy_r_A_r_AA_r_AAA:
-				react_ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA();
+				parentFirstExecutionHierarchy_r_A_r_AA_r_AAA_react(true);
 				break;
 			case parentFirstExecutionHierarchy_r_B:
-				react_ParentFirstExecutionHierarchy_r_B();
+				parentFirstExecutionHierarchy_r_B_react(true);
 				break;
 			default:
 				// $NullState$

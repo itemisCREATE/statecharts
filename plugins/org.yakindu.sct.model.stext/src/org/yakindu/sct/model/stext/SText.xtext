@@ -64,10 +64,10 @@ EventDefinition:
 	(direction=Direction)? 'event' name=(ID | Keywords) (':' typeSpecifier=TypeSpecifier)?;
 
 enum Direction returns types::Direction:
-	LOCAL='local' | IN='in' | OUT='out';
+	IN='in' | OUT='out';
 
 VariableDefinition:
-	{VariableDefinition} (const?='const'|'var') ((readonly?='readonly')? & (external?='external')?) name=IDWithKeywords ':' typeSpecifier=TypeSpecifier
+	{VariableDefinition} (const?='const'|'var') ((readonly?='readonly')?) name=IDWithKeywords ':' typeSpecifier=TypeSpecifier
 	('=' initialValue=Expression)?;  
 	
 TypeAliasDefinition:
@@ -116,10 +116,10 @@ TransitionProperty returns sgraph::ReactionProperty:
 	EntryPointSpec | ExitPointSpec;
 
 EntryPointSpec:
-	'>' entrypoint=ID;
+	'>' entrypoint=IDWithKeywords;
 
 ExitPointSpec:
-	exitpoint=ID '>';
+	exitpoint=IDWithKeywords '>';
 
 EventSpec:
 	RegularEventSpec | TimeEventSpec | BuiltinEventSpec;
@@ -179,12 +179,13 @@ IDWithKeywords:
 ;
 
 Keywords:
-	 'namespace' | 'interface' | 'internal' |'import' | 'event' | 'local' | 'in' | 'out' | 'const' | 'var' | 'readonly' | 'external' |
-	'operation' | 'default' | 'else' | 'raise' | 'valueof' | 'active';
+	 'namespace' | 'interface' | 'internal' |'import' | 'event' | 'local' | 'in' | 'out' | 'const' | 'var' | 'readonly' | 
+	'operation' | 'default' | 'else' | 'raise' | 'valueof' | 'active' | 's' | 'ms' | 'us' | 'ns';
 
 TriggerKeywords:
 	 'every' | 'always' | 'oncycle' | 'after' | 'exit' | 'entry'
 ;
+
 
 FQN:
 	IDWithKeywords ('.' IDWithKeywords)*;

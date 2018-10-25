@@ -1,5 +1,5 @@
 GeneratorModel for yakindu::cpp {
-	statechart executionorder.ChildFirstLocalReactions {
+	statechart executionorder.childfirst.ChildFirstLocalReactions {
 		feature Outlet {
 			targetProject = "gtests"
 			targetFolder = "ChildFirstLocalReactions"

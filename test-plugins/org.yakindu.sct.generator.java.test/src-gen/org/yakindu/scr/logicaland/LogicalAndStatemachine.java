@@ -131,17 +131,6 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 		sCInterface.setB(value);
 	}
 	
-	private boolean check_main_region_A_tr0_tr0() {
-		return sCInterface.getX()==1;
-	}
-	
-	private void effect_main_region_A_tr0() {
-		exitSequence_main_region_A();
-		sCInterface.setB(((sCInterface.assignX(sCInterface.getX() + 1))==2 && (sCInterface.assignX(sCInterface.getX() * 2))==4));
-		
-		enterSequence_main_region_A_default();
-	}
-	
 	/* 'default' enter sequence for state A */
 	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
@@ -170,16 +159,33 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 		}
 	}
 	
-	/* The reactions of state A. */
-	private void react_main_region_A() {
-		if (check_main_region_A_tr0_tr0()) {
-			effect_main_region_A_tr0();
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_main_region__entry_Default() {
 		enterSequence_main_region_A_default();
+	}
+	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean main_region_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.getX()==1) {
+					exitSequence_main_region_A();
+					sCInterface.setB(((sCInterface.assignX(sCInterface.getX() + 1))==2 && (sCInterface.assignX(sCInterface.getX() * 2))==4));
+					
+					enterSequence_main_region_A_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
 	}
 	
 	public void runCycle() {
@@ -190,7 +196,7 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_A:
-				react_main_region_A();
+				main_region_A_react(true);
 				break;
 			default:
 				// $NullState$

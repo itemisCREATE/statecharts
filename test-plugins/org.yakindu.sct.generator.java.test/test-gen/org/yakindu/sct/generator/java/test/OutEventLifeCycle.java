@@ -42,21 +42,25 @@ public class OutEventLifeCycle {
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isRaisedF());
 	}
+	
 	@Test
 	public void availableWithinCycle() {
 		init(false);
 		assertTrue(statemachine.getF_available_in_cycle());
 	}
+	
 	@Test
 	public void unvailableWithin2ndCycle() {
 		init(true);
 		assertTrue(!statemachine.getF_available_in_next_cycle());
 	}
+	
 	@Test
 	public void unvailableAfter2ndCycle() {
 		init(true);
 		assertTrue(!statemachine.isRaisedF());
 	}
+	
 	public void init(boolean sndCycle) {
 		statemachine.enter();
 		statemachine.getSCInterface().raiseE();

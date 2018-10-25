@@ -40,6 +40,7 @@ public class ConstOnlyInternalScope {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.constOnlyInternalScope_main_region_A));
 	}
+	
 	@Test
 	public void stateTransition() {
 		statemachine.enter();

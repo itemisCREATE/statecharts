@@ -104,8 +104,8 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	}
 
 	/**
-	 * VariableDefinition: {VariableDefinition} 'var' ((readonly?='readonly')? &
-	 * (external?='external')?) name=ID ':' type=[types::Type|FQN] ('='
+	 * VariableDefinition: {VariableDefinition} 'var' ((readonly?='readonly')?) 
+	 * name=ID ':' type=[types::Type|FQN] ('='
 	 * initialValue=Expression)?;
 	 */
 	@Test
@@ -114,9 +114,6 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		parseExpression("var MyVar : integer", rule);
 		parseExpression("var MyVar : integer = 97", rule);
 		parseExpression("var readonly MyVar : integer", rule);
-		parseExpression("var external MyVar : integer", rule);
-		parseExpression("var readonly external MyVar : integer", rule);
-		parseExpression("var external readonly MyVar : integer", rule);
 		parseExpression("var MyVar : integer = 3 * 3", rule);
 		parseExpression("var MyVar : string = null", rule);
 	}
@@ -130,7 +127,7 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		String rule = EventDefinition.class.getSimpleName();
 		parseExpression("event event1", rule);
 		parseExpression("event event1 : integer", rule);
-		parseExpression("local event event1 : boolean", rule);
+		parseExpression("event event1 : boolean", rule);
 		parseExpression("in event event1 : integer", rule);
 		parseExpression("out event event1 : integer", rule);
 		parseExpression("event event1 : integer", rule);
@@ -313,7 +310,7 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		String scope;
 		List<String> validEventNames = Arrays.asList(
 				new String[] { "namespace", "interface", "internal", "import", "event", "local", "in", "out", "const",
-						"var", "readonly", "external", "operation", "default", "else", "raise", "valueof", "active" });
+						"var", "readonly", "operation", "default", "else", "raise", "valueof", "active" });
 		for (String name : validEventNames) {
 			scope = "interface: in event " + name;
 			parseExpression(scope, StatechartSpecification.class.getSimpleName());

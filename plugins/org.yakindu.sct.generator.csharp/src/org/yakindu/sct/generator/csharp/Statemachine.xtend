@@ -19,6 +19,8 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
@@ -39,12 +41,9 @@ class Statemachine {
 	@Inject protected extension FlowCode
 	@Inject protected extension StateVectorExtensions
 	
-	@Inject Beautifier beautifier
-	
 	def generateStatemachine(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		var filename = flow.statemachineClassName.csharp
-		var content = beautifier.format(filename, content(flow, entry))
-		fsa.generateFile(filename, content)
+		fsa.generateFile(filename, content(flow, entry))
 	}
 	
 	def protected content(ExecutionFlow flow, GeneratorEntry entry) '''
@@ -158,7 +157,7 @@ class Statemachine {
 			«IF flow.hasHistory»
 			for (int i = 0; i < «flow.historyVector.size»; i++) {
 				historyVector[i] = State.NullState;
-			
+			}
 			«ENDIF»
 			clearEvents();
 			clearOutEvents();
@@ -534,10 +533,10 @@ class Statemachine {
 			for (nextStateIndex = 0; nextStateIndex < stateVector.Length; nextStateIndex++) {
 				
 				switch (stateVector[nextStateIndex]) {
-					«FOR state : flow.states»
-					«IF state.reactSequence!==null»
+					«FOR state : flow.states.filter[isLeaf]»
+					«IF state.reactMethod !== null» 
 						case State.«state.stateName.asEscapedIdentifier»:
-							«state.reactSequence.functionName»();
+							«state.reactMethod.functionName.asEscapedIdentifier»(true);
 							break;
 					«ENDIF»
 				«ENDFOR»
@@ -577,8 +576,22 @@ class Statemachine {
 		«exitActionFunctions.toImplementation»
 		«enterSequenceFunctions.toImplementation»
 		«exitSequenceFunctions.toImplementation»
-		«reactFunctions.toImplementation»
+		«reactFunctions.filter[ f | ! (f.eContainer instanceof ExecutionState)].toList.toImplementation»
+		«reactMethods.toDefinitions»
 	'''
+	
+	def toDefinitions(List<Method> methods) '''
+	 	«FOR m : methods»
+	 		«m.implementation»
+	 		
+	 	«ENDFOR»
+	 '''
+	 
+	 def implementation(Method it) '''
+	 	«typeSpecifier.targetLanguageName» «functionName.asEscapedIdentifier»(«FOR p : parameters SEPARATOR ', '»«IF p.varArgs»...«ELSE»«p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR») {
+	 		«body.code»
+	 	}
+	 '''
 	
 	def toImplementation(List<Step> steps) '''
 		«FOR s : steps»

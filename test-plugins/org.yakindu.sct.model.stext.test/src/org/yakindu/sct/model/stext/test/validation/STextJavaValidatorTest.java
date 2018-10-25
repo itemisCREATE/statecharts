@@ -39,9 +39,11 @@ import org.yakindu.base.expressions.validation.ExpressionsJavaValidator;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.ITypeSystem;
+import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -618,30 +620,12 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	@Test
-	public void checkReadOnlyValueDefinitionExpression() {
-		String decl = "internal: var readonly v1:integer";
+	public void checkConstAndReadOnlyDefinitionExpression() {
+		String decl = "internal: const readonly v1:integer = 0";
 		EObject model = super.parseExpression(decl, InternalScope.class.getSimpleName());
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertDiagnosticsCount(1);
-		result.assertWarningContains(String.format(STextJavaValidator.DECLARATION_DEPRECATED, "readonly"));
-	}
-
-	@Test
-	public void checkExternalValueDefinitionExpression() {
-		String decl = "internal: var external v1:integer";
-		EObject model = super.parseExpression(decl, InternalScope.class.getSimpleName());
-		AssertableDiagnostics result = tester.validate(model);
-		result.assertDiagnosticsCount(1);
-		result.assertWarningContains(String.format(STextJavaValidator.DECLARATION_DEPRECATED, "external"));
-	}
-
-	@Test
-	public void checkDeprecatedLocalEventDefinition() {
-		String decl = "internal: local event e1";
-		EObject model = super.parseExpression(decl, InternalScope.class.getSimpleName());
-		AssertableDiagnostics result = tester.validate(model);
-		result.assertDiagnosticsCount(1);
-		result.assertWarningContains(String.format(STextJavaValidator.DECLARATION_DEPRECATED, "local"));
+		result.assertWarningContains(String.format(STextJavaValidator.DECLARATION_WITH_READONLY, "readonly", "const"));
 	}
 
 	/**
@@ -785,7 +769,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 				validator.validate(element, diagnostics, new HashMap<>());
 			}
 		}
-		assertIssueCount(diagnostics, 4);
+		assertIssueCount(diagnostics, 5);
 	}
 
 	@Test
@@ -864,7 +848,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		Statechart statechart = AbstractTestModelsUtil
 				.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnusedInternalDeclarations.sct");
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
-		assertIssueCount(diagnostics, 5);
+		assertIssueCount(diagnostics, 3);
 		assertWarning(diagnostics, INTERNAL_DECLARATION_UNUSED);
 	}
 
@@ -884,7 +868,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	@Test
 	public void transitionsWithNoTrigger() {
 	}
-
+	
 	@Test
 	public void testOptionalParameter() {
 		EObject model;
@@ -1065,5 +1049,60 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		assertIssueCount(diagnostics, 1);
 		assertWarning(diagnostics, EXIT_NEVER_USED + "'unusedExitPoint'");
 	}
+	
+	@Test
 
+	public void checkAlwaysTransitionHasLowestPriority() {
+		statechart = AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "TransitionBlockingAlwaysTrueStates.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof RegularState) {
+				validator.validate(element, diagnostics, new HashMap<>());
+			}
+		}
+		assertIssueCount(diagnostics, 8);
+	}
+	
+	@Test
+	public void checkOnlyOneEntryPointSpecIsUsed() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "OnlyOneEntryPointSpecIsUsed.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Transition) {
+				validator.validate(element, diagnostics, new HashMap<>());
+			}
+		}
+		assertIssueCount(diagnostics, 1);
+		assertWarning(diagnostics, ONLY_FIRST_ENTRY_POINT_WILL_BE_USED);
+	}
+
+	@Test
+	public void checkAlwaysAndDefaultTransitionInChoices() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "TransitionBlockingAlwaysTrueChoices.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Choice) {
+				validator.validate(element, diagnostics, new HashMap<>());
+			}
+		}
+		assertIssueCount(diagnostics, 7);
+	}
+	
+	@Test
+	public void checkOnlyOneDefaultTransitionUsed() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "MultipleDefaultInChoices.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Choice) {
+				validator.validate(element, diagnostics, new HashMap<>());
+			}
+		}
+		assertIssueCount(diagnostics, 4);		
+	}
+	
 }

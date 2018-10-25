@@ -51,6 +51,7 @@ public class ParentFirstExecutionHierarchy {
 		assertTrue(statemachine.getAa_local());
 		assertTrue(!statemachine.getAaa_local());
 	}
+	
 	@Test
 	public void parentShouldTakeTransition() {
 		statemachine.enter();
@@ -66,6 +67,7 @@ public class ParentFirstExecutionHierarchy {
 		assertTrue(!statemachine.getAa_local());
 		assertTrue(!statemachine.getAaa_local());
 	}
+	
 	@Test
 	public void grandparentShouldTakeTransition() {
 		statemachine.enter();
@@ -78,6 +80,7 @@ public class ParentFirstExecutionHierarchy {
 		assertTrue(!statemachine.getAaa_reacted());
 		assertNoLocalReaction();
 	}
+	
 	@Test
 	public void expectLocalReactrionsExecuteWithNoTransition() {
 		statemachine.enter();
@@ -88,6 +91,7 @@ public class ParentFirstExecutionHierarchy {
 		assertTrue(statemachine.getAa_local());
 		assertTrue(statemachine.getAaa_local());
 	}
+	
 	public void assertNoLocalReaction() {
 		assertTrue(!statemachine.getA_local());
 		assertTrue(!statemachine.getAa_local());

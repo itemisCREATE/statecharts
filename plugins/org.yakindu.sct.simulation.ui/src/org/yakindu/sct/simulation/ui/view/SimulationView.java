@@ -166,16 +166,12 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 				IDebugTarget target = ((IDebugTarget) element);
 				boolean isTerminated = target.isTerminated();
 				boolean isSuspended = target.isSuspended();
-
-				if (target.getLaunch().getDebugTarget() != null)
-					try {
-						return target.getLaunch().getDebugTarget().getName() + " ["
-								+ (isTerminated ? "terminated" : isSuspended ? "suspended" : "active") + "]";
-					} catch (DebugException e) {
-						return "unkown state";
-					}
-				else
-					return "No simulation running";
+				try {
+					return target.getName() + " ["
+							+ (isTerminated ? "terminated" : isSuspended ? "suspended" : "active") + "]";
+				} catch (DebugException e) {
+					return "unkown state";
+				}
 			}
 		});
 
@@ -226,15 +222,15 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		if (viewerRefresher == null)
 			this.viewerRefresher = new ViewerRefresher();
 
-		if (input == null) {
-			viewerRefresher.cancel = true;
-		}
-
 		Display.getDefault().asyncExec(() -> {
+			if (input == null) {
+				viewerRefresher.cancel = true;
+			} else {
+				if (this.viewerRefresher.isCancel())
+					this.viewerRefresher.cancel = false;
+				new Thread(viewerRefresher).start();
+			}
 			this.viewer.setInput(input);
-			if (this.viewerRefresher.isCancel())
-				this.viewerRefresher.cancel = false;
-			new Thread(viewerRefresher).start();
 		});
 
 	}
@@ -242,13 +238,13 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	protected void handleDebugEvent(DebugEvent debugEvent) {
 		updateActions();
 		switch (debugEvent.getKind()) {
-			case DebugEvent.TERMINATE :
-				setViewerInput(null);
-				break;
-			case DebugEvent.SUSPEND :
-				break;
-			case DebugEvent.RESUME :
-				break;
+		case DebugEvent.TERMINATE:
+			setViewerInput(null);
+			break;
+		case DebugEvent.SUSPEND:
+			break;
+		case DebugEvent.RESUME:
+			break;
 		}
 		Display.getDefault().asyncExec(() -> {
 			if (debugEvent.getSource() != null) {
@@ -416,11 +412,14 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 
 				@Override
 				public void run() {
-					if (debugTarget instanceof IStep) {
-						try {
-							((IStep) debugTarget).stepOver();
-						} catch (DebugException e) {
-							e.printStackTrace();
+					IDebugTarget[] debugTargets = debugTarget.getLaunch().getDebugTargets();
+					for (IDebugTarget current : debugTargets) {
+						if (current instanceof IStep) {
+							try {
+								((IStep) current).stepOver();
+							} catch (DebugException e) {
+								e.printStackTrace();
+							}
 						}
 					}
 				}
@@ -441,7 +440,10 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 				@Override
 				public void run() {
 					try {
-						debugTarget.terminate();
+						IDebugTarget[] debugTargets = debugTarget.getLaunch().getDebugTargets();
+						for (IDebugTarget current : debugTargets) {
+							current.terminate();
+						}
 					} catch (DebugException e) {
 						e.printStackTrace();
 					}
@@ -463,7 +465,10 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 				@Override
 				public void run() {
 					try {
-						debugTarget.suspend();
+						IDebugTarget[] debugTargets = debugTarget.getLaunch().getDebugTargets();
+						for (IDebugTarget current : debugTargets) {
+							current.suspend();
+						}
 					} catch (DebugException e) {
 						e.printStackTrace();
 					}
@@ -485,7 +490,10 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 				@Override
 				public void run() {
 					try {
-						debugTarget.resume();
+						IDebugTarget[] debugTargets = debugTarget.getLaunch().getDebugTargets();
+						for (IDebugTarget current : debugTargets) {
+							current.resume();
+						}
 					} catch (DebugException e) {
 						e.printStackTrace();
 					}
@@ -528,7 +536,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 				}
 			}
 		}
-		
+
 		protected void updateTimestamp(long timestamp) {
 			String formatDurationHMS = DurationFormatUtils.formatDuration(timestamp,
 					(timestamp == 0 ? "--:--:--.---" : "HH:mm:ss.SSS"), true);

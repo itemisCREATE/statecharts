@@ -29,7 +29,7 @@ class SGenProposalCreator {
 			 var defaultConfiguration  = defaultProvider.createDefaultFeatureConfiguration(featureType,context)
 			'''
 			feature «featureType.name» {
-				«FOR param :featureType.parameters»
+				«FOR param :featureType.parameters.filter[!isDeprecated]»
 				«param.name» = «defaultConfiguration.value(param)»
 				«ENDFOR»
 			}

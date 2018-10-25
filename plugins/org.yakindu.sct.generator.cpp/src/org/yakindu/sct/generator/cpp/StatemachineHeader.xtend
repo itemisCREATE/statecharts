@@ -16,6 +16,7 @@ import org.eclipse.xtend2.lib.StringConcatenation
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.generator.c.IncludeProvider
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.Check
@@ -23,6 +24,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.Statechart
@@ -31,30 +33,48 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Method
+import java.util.Set
 
-class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader {
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+
+class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineHeader {
+
+	@Inject protected Set<IncludeProvider> includeProviders
 
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
+	@Inject protected extension SgraphExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension INamingService
+	@Inject protected extension StatechartExtensions
 
 	protected GeneratorEntry entry
 
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		this.entry = entry
+		val namespace = statechartNamespace
 		'''
 			«entry.licenseText»
 			
 			#ifndef «module().define»_H_
 			#define «module().define»_H_
 			
+			
 			«includes(artifactConfigs)»
 			
 			/*! \file Header of the state machine '«name»'.
 			*/
 			
+			«IF !namespace.nullOrEmpty»
+			«FOR ns : namespace»
+			namespace «ns» {
+			«ENDFOR»
+			«ENDIF»
+
 			«preStatechartDeclarations»
 			
 			/*! Define indices of states in the StateConfVector */
@@ -70,9 +90,40 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 			
 			«postStatechartDeclarations»
 			
+			«IF !namespace.nullOrEmpty»
+			«FOR ns : namespace»
+			}
+			«ENDFOR»
+			«ENDIF»
+			
 			#endif /* «module().define»_H_ */
 		'''
 	}
+	
+	def statesEnumDecl(ExecutionFlow it) '''
+		/*! Enumeration of all states */ 
+		typedef enum
+		{
+			«null_state»,
+			«FOR state : states SEPARATOR ","»
+				«state.stateName»
+			«ENDFOR»
+		} «statesEnumType»;
+	'''
+	
+	def final includes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
+		'''
+		«FOR provider : includeProviders»
+			«FOR i : provider.getIncludes(it, artifactConfigs)»
+				«i»
+			«ENDFOR»
+		«ENDFOR»
+		'''
+	}
+	
+	def preStatechartDeclarations(ExecutionFlow it) ''''''
+
+	def postStatechartDeclarations(ExecutionFlow it) ''''''
 	
 	def protected generateClass(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
 		'''
@@ -96,19 +147,21 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 			
 			«statesEnumDecl»
 			
+			static const «INT_TYPE» «statesCountConst» = «states.size»;
+			
 			«FOR s : it.scopes»«s.createPublicScope»«ENDFOR»
 			
 			«publicFunctionPrototypes»
 			
 			/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
-			sc_boolean «stateActiveFctID»(«statesEnumType» state) const;
+			«BOOL_TYPE» «stateActiveFctID»(«statesEnumType» state) const;
 			
 			«IF timed»
 				//! number of time events used by the state machine.
-				static const sc_integer «timeEventsCountConst» = «timeEvents.size»;
+				static const «INT_TYPE» «timeEventsCountConst» = «timeEvents.size»;
 				
 				//! number of time events that can be active at once.
-				static const sc_integer «timeEventsCountparallelConst» = «(it.sourceElement as Statechart).maxNumberOfParallelTimeEvents»;
+				static const «INT_TYPE» «timeEventsCountparallelConst» = «(it.sourceElement as Statechart).maxNumberOfParallelTimeEvents»;
 			«ENDIF»
 			«IF entry.innerClassVisibility == "public"»
 			
@@ -266,22 +319,22 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		'''
 	}
 
-	override statemachineTypeDecl(ExecutionFlow it) '''
+	def statemachineTypeDecl(ExecutionFlow it) '''
 		//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
-		static const sc_ushort «orthogonalStatesConst» = «stateVector.size»;
+		static const «USHORT_TYPE» «orthogonalStatesConst» = «stateVector.size»;
 		«IF hasHistory»
 		//! dimension of the state configuration vector for history states
-		static const sc_ushort «historyStatesConst» = «historyVector.size»;«ENDIF»
+		static const «USHORT_TYPE» «historyStatesConst» = «historyVector.size»;«ENDIF»
 		
 		«IF timed»
 			«timerInterface»* «timerInstance»;
-			sc_boolean «timeEventsInstance»[«timeEventsCountConst»];
+			«BOOL_TYPE» «timeEventsInstance»[«timeEventsCountConst»];
 		«ENDIF»
 		
-		«statesEnumType» stateConfVector[«orthogonalStatesConst»];
+		«statesEnumType» «STATEVECTOR»[«orthogonalStatesConst»];
 		
-		«IF hasHistory»«statesEnumType» historyVector[«historyStatesConst»];«ENDIF»
-		sc_ushort stateConfVectorPosition;
+		«IF hasHistory»«statesEnumType» «HISTORYVECTOR»[«historyStatesConst»];«ENDIF»
+		«USHORT_TYPE» «STATEVECTOR_POS»;
 		
 		«FOR s : getInterfaces»
 			«s.interfaceName» «s.instance»;
@@ -303,44 +356,44 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		 */
 		virtual «IF entry.checkUnimplementedOCBs»sc_errorCode«ELSE»void«ENDIF» init();
 		
-		virtual void enter();
+		virtual void «ENTER»();
 		
-		virtual void exit();
+		virtual void «EXIT»();
 		
-		virtual void runCycle();
+		virtual void «RUN_CYCLE»();
 		
 		/*!
 		* Checks if the state machine is active (until 2.4.1 this method was used for states).
 		* A state machine is active if it has been entered. It is inactive if it has not been entered at all or if it has been exited.
 		*/
-		virtual sc_boolean isActive() const;
+		virtual sc_boolean «IS_ACTIVE»() const;
 		
 		
 		/*!
 		* Checks if all active states are final. 
 		* If there are no active states then the state machine is considered being inactive. In this case this method returns false.
 		*/
-		virtual sc_boolean isFinal() const;
+		virtual sc_boolean «IS_FINAL»() const;
 	'''
 
 	def timedStatemachineFunctions(ExecutionFlow it) '''
 		/*
 		 * Functions inherited from TimedStatemachineInterface
 		 */
-		virtual void setTimer(«timerInterface»* timerInterface);
+		virtual void «SET_TIMER»(«timerInterface»* timerInterface);
 		
 		virtual «timerInterface»* getTimer();
 		
-		virtual void «raiseTimeEventFctID»(sc_eventid event);
+		virtual void «raiseTimeEventFctID»(«EVENT_TYPE» event);
 	'''
 
-	override dispatch functionPrototypes(EventDefinition it) '''
+	def dispatch functionPrototypes(EventDefinition it) '''
 		«IF direction == Direction::LOCAL»
 			/*! Raises the in event '«name»' that is defined in the «scope.scopeDescription». */
 			void «asRaiser»(«valueParams»);
 			
 			/*! Checks if the out event '«name»' that is defined in the «scope.scopeDescription» has been raised. */
-			sc_boolean «asRaised»() const;
+			«BOOL_TYPE» «asRaised»() const;
 			
 			«IF hasValue»
 				/*! Gets the value of the out event '«name»' that is defined in the «scope.scopeDescription». */
@@ -353,7 +406,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 			
 		«ELSE»
 			/*! Checks if the out event '«name»' that is defined in the «scope.scopeDescription» has been raised. */
-			sc_boolean «asRaised»() const;
+			«BOOL_TYPE» «asRaised»() const;
 			
 			«IF hasValue»
 				/*! Gets the value of the out event '«name»' that is defined in the «scope.scopeDescription». */
@@ -363,7 +416,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		«ENDIF»
 	'''
 
-	override dispatch functionPrototypes(VariableDefinition it) '''
+	def dispatch functionPrototypes(VariableDefinition it) '''
 		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */
 		«IF const»const «ENDIF»«typeSpecifier.targetLanguageName» «it.asGetter»() const;
 		
@@ -373,6 +426,8 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 			
 		«ENDIF»
 	'''
+	
+	def dispatch functionPrototypes(Declaration it) ''''''
 
 	/* ===================================================================================
 	 * Handling declaration of function prototypes
@@ -387,12 +442,23 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		«exitActionFunctions.toPrototypes»
 		«enterSequenceFunctions.toPrototypes»
 		«exitSequenceFunctions.toPrototypes»
-		«reactFunctions.toPrototypes»
-		void clearInEvents();
-		void clearOutEvents();
+		«reactFunctions.filter[ f | ! (f.eContainer instanceof ExecutionState)].toList.toPrototypes»
+		«reactMethods.toDeclarations»
+		void «clearInEventsFctID»();
+		void «clearOutEventsFctID»();
 		
 	'''
-
+	
+	def toDeclarations(List<Method> steps) '''
+		«FOR s : steps»
+			«s.toPrototype»
+		«ENDFOR»
+	'''
+	
+	def toPrototype(Method it) '''
+		«typeSpecifier.targetLanguageName» «shortName»(«FOR p : parameters SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR»);
+	'''
+	
 	def toPrototypes(List<Step> steps) '''
 		«FOR s : steps»
 			«s.functionPrototype»
@@ -400,7 +466,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 	'''
 
 	def dispatch functionPrototype(Check it) '''
-		sc_boolean «shortName»();
+		«BOOL_TYPE» «shortName»();
 	'''
 
 	def dispatch functionPrototype(Step it) '''

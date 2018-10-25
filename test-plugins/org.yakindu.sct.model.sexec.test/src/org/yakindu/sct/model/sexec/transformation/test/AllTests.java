@@ -16,6 +16,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ 
+		DefaultNamingServiceTest.class,
 		FlowOptimizer_ExecutionEntryTest.class, 
 		HistoryTest.class,
 		LocalReactionTest.class,
@@ -32,8 +33,7 @@ import org.junit.runners.Suite.SuiteClasses;
 		StatechartEnterExistActionTest.class,
 		StatechartExtensionsTest.class,
 		StringTreeNodeTest.class,
-		//TreeNamingServiceTest.class,
-		//DefaultNamingServiceTest.class,
+		TreeNamingServiceTest.class,
 		NullCallTest.class
 		})
 public class AllTests {

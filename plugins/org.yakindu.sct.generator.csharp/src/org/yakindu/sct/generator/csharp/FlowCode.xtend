@@ -1,6 +1,7 @@
 package org.yakindu.sct.generator.csharp
 
 import com.google.inject.Inject
+import java.util.List
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.CheckRef
@@ -9,24 +10,28 @@ import org.yakindu.sct.model.sexec.Execution
 import org.yakindu.sct.model.sexec.ExitState
 import org.yakindu.sct.model.sexec.HistoryEntry
 import org.yakindu.sct.model.sexec.If
+import org.yakindu.sct.model.sexec.LocalVariableDefinition
 import org.yakindu.sct.model.sexec.Reaction
+import org.yakindu.sct.model.sexec.Return
 import org.yakindu.sct.model.sexec.SaveHistory
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.StateSwitch
+import org.yakindu.sct.model.sexec.Statement
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
-import java.util.List
-import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 
 class FlowCode {
 	
 	@Inject extension Naming
 	@Inject extension CSharpExpressionsGenerator
 	@Inject extension SExecExtensions
+	@Inject extension ICodegenTypeSystemAccess;
 	
-	private var List<TimeEvent> timeEvents;
+	var List<TimeEvent> timeEvents;
 	
 	def stepComment(Step it) '''
 		«IF comment !== null && ! comment.empty»
@@ -122,7 +127,7 @@ class FlowCode {
 	
 	def dispatch CharSequence code(HistoryEntry it) '''
 		«stepComment»
-		if (historyVector[«region.historyVector.offset»] != State.$NullState$) {
+		if (historyVector[«region.historyVector.offset»] != State.NullState) {
 			«historyStep.code»
 		} «IF initialStep !== null»else {
 			«initialStep.code»
@@ -140,4 +145,17 @@ class FlowCode {
 		}
 		return timeEvents
 	}
+	
+	def dispatch CharSequence code(Return it) {
+	 '''
+		return«IF value !== null» «value.code»«ENDIF»;
+	'''
+	}
+	
+	def dispatch CharSequence code(LocalVariableDefinition it) '''
+		«variable.type.targetLanguageName» «variable.name»«IF initialValue !== null» = «initialValue.code»«ENDIF»;
+	'''
+	
+	def dispatch CharSequence code(Statement it) 
+		'''«expression.code»;'''
 }

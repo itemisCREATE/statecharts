@@ -40,14 +40,17 @@ public class PerformanceTests {
 	public void test_100_000() {
 		performance(100000l);
 	}
+	
 	@Test
 	public void test_1_000_000() {
 		performance(1000000l);
 	}
+	
 	@Test
 	public void test_10_000_000() {
 		performance(10000000l);
 	}
+	
 	public void performance(long perf) {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.mr_A));
