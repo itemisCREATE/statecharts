@@ -388,7 +388,6 @@
                         <file name="user-guide/code_generation_cpp.textile"/>
                         <file name="user-guide/code_generation_java.textile"/>
                         <file name="user-guide/code_generation_statechart_image.textile"/>
-                        <file name="user-guide/code_generation_custom.textile"/>
                         <file name="user-guide/generating_code_headless.textile"/>
                         <file name="user-guide/sctunit.textile"/>
                         <file name="user-guide/search_and_navigate.textile"/>

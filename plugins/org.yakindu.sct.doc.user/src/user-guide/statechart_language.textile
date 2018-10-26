@@ -559,7 +559,7 @@ Variables that are defined in a named interface have to be referenced using the 
 
 Variables are always typed, see section "&quot;Types&quot;":#sclang_types.
 
-Variables can be _readonly_ by client code. Such variables are marked by the @readonly@ keyword. Please note that the readonly restriction is imposed on the client code only. Readonly variables can still be modified from within the statechart.
+Variables can be marked by the @readonly@ keyword, which has the effect that client code can only read them. Please note that this restriction is imposed on the client code only. Readonly variables can still be modified from within the statechart.
 
 bc. var readonly pi: real = 3.1415
 
