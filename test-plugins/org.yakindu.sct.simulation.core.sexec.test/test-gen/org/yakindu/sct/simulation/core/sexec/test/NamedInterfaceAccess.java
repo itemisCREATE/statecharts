@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for NamedInterfaceAccess
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class NamedInterfaceAccess extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("NamedInterfaceAccess.sct");
@@ -26,13 +28,13 @@ public class NamedInterfaceAccess extends AbstractExecutionFlowTest {
 	@Test
 	public void safeOpenSuccess() throws Exception {
 		interpreter.enter();
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		raiseEvent("User.numberPressed", 3l);
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		raiseEvent("User.numberPressed", 7l);
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		raiseEvent("User.numberPressed", 5l);
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isRaised("Safe.open"));
 	}
 }

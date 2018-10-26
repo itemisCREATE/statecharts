@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for HistoryWithExitPoint
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class HistoryWithExitPoint extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("HistoryWithExitPoint.sct");
@@ -28,19 +30,19 @@ public class HistoryWithExitPoint extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		assertTrue(isStateActive("X1"));
 		raiseEvent("push");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("B"));
 		raiseEvent("back");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("X1"));
 		raiseEvent("next");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("X2"));
 		raiseEvent("push");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("B"));
 		raiseEvent("back");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("X2"));
 	}
 }

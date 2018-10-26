@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for EntryReactionAction
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class EntryReactionAction extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("entries/EntryReactionAction.sct");
@@ -35,7 +37,7 @@ public class EntryReactionAction extends AbstractExecutionFlowTest {
 	public void entryOnRTS() throws Exception {
 		init();
 		raiseEvent("b");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(!getBoolean("enteredR1"));
 		assertTrue(!getBoolean("enteredR2"));
 		assertTrue(!getBoolean("enteredBdefault"));
@@ -45,7 +47,7 @@ public class EntryReactionAction extends AbstractExecutionFlowTest {
 	public void noEntryTransitionActionOnHistory() throws Exception {
 		init();
 		raiseEvent("d");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(!getBoolean("enteredR1"));
 		assertTrue(!getBoolean("enteredR2"));
 		assertTrue(!getBoolean("enteredBdefault"));
@@ -54,9 +56,9 @@ public class EntryReactionAction extends AbstractExecutionFlowTest {
 	public void init() throws Exception {
 		interpreter.enter();
 		raiseEvent("b");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		raiseEvent("d");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		setBoolean("enteredR1", false);
 		setBoolean("enteredR2", false);
 		setBoolean("enteredBdefault", false);

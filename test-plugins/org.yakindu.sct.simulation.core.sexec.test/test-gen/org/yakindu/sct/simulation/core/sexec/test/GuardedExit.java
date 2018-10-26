@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for GuardedExit
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class GuardedExit extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("GuardedExit.sct");
@@ -39,8 +41,8 @@ public class GuardedExit extends AbstractExecutionFlowTest {
 	}
 	public void checkDone(boolean shouldBeDone) throws Exception {
 		raiseEvent("e");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("B"));
-		assertTrue(shouldBeDone ? getBoolean("done")  : !getBoolean("done"));
+		assertTrue(shouldBeDone ? getBoolean("done") : !getBoolean("done"));
 	}
 }

@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for SyncFork
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class SyncFork extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("SyncFork.sct");
@@ -28,20 +30,20 @@ public class SyncFork extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
 		raiseEvent("f");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("B"));
 		assertTrue(isStateActive("C1"));
 		assertTrue(isStateActive("D1"));
 		raiseEvent("f");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("B"));
 		assertTrue(isStateActive("C2"));
 		assertTrue(isStateActive("D2"));
 		raiseEvent("e");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("A"));
 		raiseEvent("f");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("B"));
 		assertTrue(isStateActive("C1"));
 		assertTrue(isStateActive("D1"));

@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for BitExpressions
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class BitExpressions extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("BitExpressions.sct");
@@ -30,7 +32,7 @@ public class BitExpressions extends AbstractExecutionFlowTest {
 		assertTrue(getInteger("myBit1") == 5l);
 		assertTrue(getInteger("myBit2") == 7l);
 		raiseEvent("e1");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("StateB"));
 		assertTrue(getInteger("leftBitshift") == 10l);
 		assertTrue(getInteger("rightBitshift") == 2l);

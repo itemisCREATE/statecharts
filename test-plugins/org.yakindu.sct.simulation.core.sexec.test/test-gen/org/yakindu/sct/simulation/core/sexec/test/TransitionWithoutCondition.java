@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for TransitionWithoutCondition
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class TransitionWithoutCondition extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("TransitionWithoutCondition.sct");
@@ -27,7 +29,7 @@ public class TransitionWithoutCondition extends AbstractExecutionFlowTest {
 	public void transitionWithoutConditionTest() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("B"));
 	}
 }
