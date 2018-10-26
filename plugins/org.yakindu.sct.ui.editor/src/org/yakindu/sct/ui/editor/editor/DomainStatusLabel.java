@@ -28,6 +28,11 @@ import org.eclipse.ui.PlatformUI;
 import org.yakindu.sct.domain.extension.DomainStatus;
 import org.yakindu.sct.domain.extension.DomainStatus.Severity;
 
+import com.yakindu.licmgmt.IEclipseLicenseService;
+import com.yakindu.licmgmt.ILicenseService;
+import com.yakindu.licmgmt.LicenseException;
+import com.yakindu.licmgmt.ui.IEclipseLicenseUIService;
+
 /**
  * 
  * @author andreas muelder - Initial contribution and API
@@ -59,7 +64,12 @@ public class DomainStatusLabel extends Composite {
 		link.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Program.launch(LICENCE_LINK);
+				try {
+					IEclipseLicenseUIService.INSTANCE.openHandleInvalidLicenseDialog(IEclipseLicenseService.INSTANCE.getLicenseManager("com_yakindu_sct_professional", "18.10"));
+				} catch (LicenseException e1) {
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 	}
