@@ -34,7 +34,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	EventDrivenInternalEventTest.class,
 	EventDrivenTriggeredByEventTest.class,
 	EventDrivenTriggeredByTimeEventTest.class,
-	EventDrivenOutEventsTest.class,
+//	EventDrivenOutEventsTest.class,
 	ExitOnSelfTransitionTest.class,
 	ExitStateTest.class,
 	FeatureCallsTest.class,
