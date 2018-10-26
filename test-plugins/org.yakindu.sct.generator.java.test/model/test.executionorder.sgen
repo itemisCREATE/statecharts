@@ -35,21 +35,21 @@ GeneratorModel for sctunit::java {
 	}
 
 
-//	test ChildFirstOrthogonalReactions {
-//		feature Naming {
-//			basePackage = "org.yakindu.sct.generator.java.test"
-//		}
-//
-//		feature Outlet {
-//			targetProject = "org.yakindu.sct.generator.java.test"
-//			targetFolder = "test-gen"
-//		}
-//		
-//		feature StatechartNaming {
-//			basePackage = "org.yakindu.scr"
-//			libraryTargetFolder = "src-gen"
-//		}
-//	}
+	test ChildFirstOrthogonalReactions {
+		feature Naming {
+			basePackage = "org.yakindu.sct.generator.java.test"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
+	}
 
 
 
@@ -86,21 +86,21 @@ GeneratorModel for sctunit::java {
 		}
 	}
 
-//	test ParentFirstOrthogonalReactions {
-//		feature Naming {
-//			basePackage = "org.yakindu.sct.generator.java.test"
-//		}
-//
-//		feature Outlet {
-//			targetProject = "org.yakindu.sct.generator.java.test"
-//			targetFolder = "test-gen"
-//		}
-//		
-//		feature StatechartNaming {
-//			basePackage = "org.yakindu.scr"
-//			libraryTargetFolder = "src-gen"
-//		}
-//	}
+	test ParentFirstOrthogonalReactions {
+		feature Naming {
+			basePackage = "org.yakindu.sct.generator.java.test"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
+	}
 
 
 
