@@ -168,9 +168,9 @@ class ReactionBuilder {
 		val shouldExecuteParent = if (! state.statechart.childFirstExecution) 
 								[StateVector sv | sv.offset == execState.stateVector.offset]
 							else
-								[StateVector sv | sv.offset + sv.size == execState.stateVector.offset + execState.stateVector.size]
+								[StateVector sv | sv.last == execState.impactVector.last]
 								
-		val parents = state.parentStates.map(p|p.create as ExecutionState).filter(p| shouldExecuteParent.apply(p.stateVector) )
+		val parents = state.parentStates.map(p|p.create as ExecutionState).filter(p| p == execState || shouldExecuteParent.apply(p.stateVector) )
 		
 		var parentNodes = parents.map(p|p as ExecutionNode).toList
 		

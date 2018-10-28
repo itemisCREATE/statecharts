@@ -96,6 +96,19 @@ class SexecExtensions {
 		sv.offset
 	}
 	
+	/**
+	 * Returns a states impact state vector. 
+	 * 
+	 * A regular states state vector defines the range of the state configuration vector where the state or its's sub states are stored if they are active.
+	 * Nevertheless a state may have a larger impact on a state configuration vector if sibling states in the same region cover a larger range. 
+	 * In these cases these additional positions are 'nulled' if the state is active. So a states impact vector is its regions state vector. 
+	 * This impact vector is also used to determine when parent behavior must be executed.
+	 */
+	def impactVector(ExecutionState it) { superScope.stateVector}
+
+
+	
+	
 	def parentScopes(ExecutionScope scope) {
 		val parents = <ExecutionScope>newArrayList
 		var s = scope
