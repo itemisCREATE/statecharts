@@ -1,9 +1,12 @@
 
 p. 
 
-==<div style="counter-reset: h1 2">==
-
 h1(#edit_editing_statecharts). Editing statecharts
+
+This section explains how you can edit statecharts using YAKINDU Statechart Tools.
+
+
+
 
 h2(#edit_creating_and_deleting_statecharts). Creating and deleting statecharts
 
@@ -933,5 +936,3 @@ p(#edit_fig_preferences_simulation).
 p=. Preferences: Simulation
 
 Set your color preferences for the statechart simulator on this preference page.
-
-==</div>==

@@ -294,7 +294,8 @@ body.eclipsehelp {
     height: 20px;
     width: 30px;
     border-right: 1px solid #fff;
-    background: url(http://info.itemis.com/hubfs/Corporate_Website/itemis-cta-iconset.png?t=1504179064344) no-repeat -660px -46px transparent;
+    background: url(http://info.itemis.com/hubfs/Corporate_Website/itemis-cta-iconset.png?t=1504179064344) no-repeat -660px
+        -46px transparent;
     background-size: 800px 600px;
 }
 
@@ -355,4 +356,28 @@ h1:hover .permalink, h2:hover .permalink, h3:hover .permalink, h4:hover .permali
     opacity: 1;
     visibility: visible;
     text-decoration: none;
+}
+
+.inline-navigation-previous {
+    background-color: #f3f4f5;
+    display: block;
+    float: left;
+    width: 48%;
+    padding: 1.5%;
+}
+
+.inline-navigation-previous:before {
+    content: "← ";
+}
+
+.inline-navigation-next {
+    background-color: #f3f4f5;
+    display: block;
+    float: right;
+    width: 48%;
+    padding: 1.5%;
+}
+
+.inline-navigation-next:before {
+    content: "→ ";
 }

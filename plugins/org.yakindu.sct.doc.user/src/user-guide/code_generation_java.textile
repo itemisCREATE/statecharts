@@ -1,8 +1,6 @@
 
 p. 
 
-==<div style="counter-reset: h1 7 h2 6">==
-
 h2(#codegen_java_code_generator). Java code generator
 
 h3(#codegen_java_code_generator_features). Java code generator features
@@ -925,5 +923,3 @@ When the simulation is executed, the variable _result_ gets the value 2.
 !images/docu_java_simulating_operation_020_run_configuration.png(Configuring an operations class)!
 
 p=. Configuring an operations class
-
-==</div>==
