@@ -593,6 +593,16 @@ This statement raises the _operate_ event, defined in the state machine's defaul
 
 Example 2:
 
+bc. raise valueChanged : 3
+
+This statement raises the valueChanged event, defined in the state machine's default interface, which is of type _integer_. Raising a typed event without a payload is not allowed.
+
+==</div>==
+
+==<div class="example">==
+
+Example 3:
+
 bc. raise user.click
 
 This statement raises the _click_ event, defined in the state machine's _user_ interface.
