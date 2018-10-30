@@ -84,7 +84,7 @@ then
     checklink --broken --dir-redirects \
 	--recursive --depth 1 \
 	--exclude "${commonExcludes}"'|http://github.com/Yakindu/statecharts.*' \
-	${sandboxWebsite} \
+	${website} \
         2>&1 | tee log.txt
 else
     echo "Unknown target: ${target}"
