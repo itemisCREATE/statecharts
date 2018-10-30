@@ -735,7 +735,65 @@ GeneratorModel for sctunit::cpp {
 		
 		feature Outlet{ 
 			targetProject = targetProject
-			targetFolder = "gtests/ExitStateTest"	
+			targetFolder = "gtests/ExitSequenceTest"	
+			libraryTargetFolder = "libraryTarget"		
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  true
+		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
+		feature SGenModel {
+			GenerateSGen =  true
+		}
+	}
+	
+	test EventDriven {
+		
+		feature Outlet{ 
+			targetProject = targetProject
+			targetFolder = "gtests/EventDrivenTest"	
+			libraryTargetFolder = "libraryTarget"		
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  true
+		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
+		feature SGenModel {
+			GenerateSGen =  true
+		}
+	}
+	
+	test EventDrivenOutEvents {
+		
+		feature Outlet{ 
+			targetProject = targetProject
+			targetFolder = "gtests/EventDrivenOutEventsTest"	
 			libraryTargetFolder = "libraryTarget"		
 		}		
 		

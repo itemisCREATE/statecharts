@@ -1,8 +1,8 @@
-GeneratorModel for yakindu::c {
-	statechart ExitSequence {
+GeneratorModel for yakindu::cpp {
+	statechart EventDrivenOutEvents {
 		feature Outlet {
 			targetProject = "gtests"
-			targetFolder = "ExitState"
+			targetFolder = "EventDrivenOutEventsTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

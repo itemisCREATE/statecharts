@@ -233,6 +233,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		switch (stateVector[0]) {
 		case main_region_StateA_inner1_State1A:
 			exitSequence_main_region_StateA_inner1_exitSequence_main_region_StateA_inner1_State1A();
+			exitAction_main_region_StateA();
 			break;
 		case main_region_StateA_inner1_State1B_inner2a_State2A:
 			exitSequence_main_region_StateA_inner1_State1B_inner2a_exitSequence_main_region_StateA_inner1_State1B_inner2a_State2A();
@@ -344,6 +345,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 			}
 		}
 		if (did_transition==false) {
+			did_transition = main_region_StateA_react(try_transition);
 		}
 		return did_transition;
 	}

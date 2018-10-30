@@ -10,20 +10,20 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper.Compiler;
 
 @GTest(
 	statechartBundle = "org.yakindu.sct.test.models",
-	sourceFile = "gtests/ExitSequenceTest/ExitSequenceTest.cc",
-	program = "gtests/ExitSequenceTest/ExitSequence",
-	model = "testmodels/SCTUnit/ExitSequence.sct",
+	sourceFile = "gtests/EventDrivenOutEventsTest/EventDrivenOutEventsTest.cc",
+	program = "gtests/EventDrivenOutEventsTest/EventDrivenOutEvents",
+	model = "testmodels/SCTUnit/EventDrivenOutEvents.sct",
 	additionalFilesToCopy = {
 		"libraryTarget/sc_runner.h",
 		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
-		"ExitSequence.cpp",
+		"EventDrivenOutEvents.cpp",
 		"sc_runner.cpp"
 	}
 )
 @RunWith(GTestRunner.class)
-public class ExitSequenceTest {
+public class EventDrivenOutEventsTest {
 protected final GTestHelper helper = new GTestHelper(this, Compiler.GPLUSPLUS);
 
 	@Before

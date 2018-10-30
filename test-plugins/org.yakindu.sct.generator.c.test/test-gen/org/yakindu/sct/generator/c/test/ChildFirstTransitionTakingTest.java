@@ -9,20 +9,20 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
 @GTest(
 	statechartBundle = "org.yakindu.sct.test.models",
-	sourceFile = "gtests/ExitSequenceTest/ExitSequenceTest.cc",
-	program = "gtests/ExitSequenceTest/ExitSequence",
-	model = "testmodels/SCTUnit/ExitSequence.sct",
+	sourceFile = "gtests/ChildFirstOrthogonalReactions/ChildFirstTransitionTakingTest.cc",
+	program = "gtests/ChildFirstOrthogonalReactions/ChildFirstTransitionTaking",
+	model = "testmodels/SCTUnit/executionorder/ChildFirstTransitionTaking.sct",
 	additionalFilesToCopy = {
 		"libraryTarget/sc_timer_service.c",
 		"libraryTarget/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
-		"ExitSequence.c",
+		"ChildFirstTransitionTaking.c",
 		"sc_timer_service.c"
 	}
 )
 @RunWith(GTestRunner.class)
-public class ExitSequenceTest {
+public class ChildFirstTransitionTakingTest {
 
 	protected final GTestHelper helper = new GTestHelper(this);
 
