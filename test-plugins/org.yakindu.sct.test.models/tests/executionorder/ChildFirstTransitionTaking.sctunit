@@ -1,0 +1,26 @@
+testclass ChildFirstTransitionTaking for statechart executionorder.ChildFirstTransitionTaking {
+	@Test
+	operation testFrom1A() {
+		enter
+		assert active(executionorder.ChildFirstTransitionTaking.main_region.StateA.inner1.State1A)
+		raise go
+		assert active(executionorder.ChildFirstTransitionTaking.main_region.StateA.inner1.State1A)
+		raise e
+		assert active(executionorder.ChildFirstTransitionTaking.main_region.StateB)
+		exit
+	}
+
+	@Test
+	operation testFrom1B() {
+		enter
+		assert active(executionorder.ChildFirstTransitionTaking.main_region.StateA.inner1.State1A)
+		guard = true
+		raise go
+		assert active(executionorder.ChildFirstTransitionTaking.main_region.StateA.inner1.State1B.inner2a.State2A)
+		assert active(executionorder.ChildFirstTransitionTaking.main_region.StateA.inner1.State1B.inner2b.State2B)
+		raise e
+		assert active(executionorder.ChildFirstTransitionTaking.main_region.StateB)
+		exit
+	}
+	
+}
