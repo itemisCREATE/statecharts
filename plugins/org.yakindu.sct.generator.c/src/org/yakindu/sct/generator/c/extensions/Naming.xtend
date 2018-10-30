@@ -39,7 +39,7 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
-
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 
 class Naming {
 	@Inject @Named("Separator") protected String sep;
@@ -57,8 +57,6 @@ class Naming {
 	@Inject protected extension INamingService
 	
 	@Inject extension GenmodelEntries
-
-	public static final String NULL_STRING = "null";
 
 	def getFullyQualifiedName(State state) {
 		provider.getFullyQualifiedName(state).toString.asEscapedIdentifier
@@ -95,7 +93,7 @@ class Naming {
 	}
 
 	def typesModule(ExecutionFlow it) {
-		'sc_types'
+		TYPES_MODULE
 	}
 
 	def timerType(ExecutionFlow it) {
@@ -184,11 +182,11 @@ class Naming {
 	}
 
 	def clearInEventsFctID(ExecutionFlow it) {
-		"clearInEvents"
+		CLEAR_IN_EVENTS
 	}
 
 	def clearOutEventsFctID(ExecutionFlow it) {
-		"clearOutEvents"
+		CLEAR_OUT_EVENTS
 	}
 
 	def dispatch String null_state(ExecutionFlow it) {
@@ -220,17 +218,13 @@ class Naming {
 		return null;
 	}
 	
-	def bool() {
-		"sc_boolean"
-	}
-	
 	def dispatch scopeTypeDeclMember(EventDefinition it) '''
-		«bool» «eventRaisedFlag»;
+		«BOOL_TYPE» «eventRaisedFlag»;
 		«IF type !== null && type.name != 'void'»«typeSpecifier.targetLanguageName» «eventValueVariable»;«ENDIF»
 	'''
 
 	def dispatch scopeTypeDeclMember(TimeEvent it) '''
-		«bool» «timeEventRaisedFlag»;
+		«BOOL_TYPE» «timeEventRaisedFlag»;
 	'''
 
 	def dispatch scopeTypeDeclMember(VariableDefinition it) '''
@@ -244,35 +238,35 @@ class Naming {
 	}
 
 	def raiseTimeEventFctID(ExecutionFlow it) {
-		functionPrefix + "raiseTimeEvent"
+		functionPrefix + RAISE_TIME_EVENT
 	}
 
 	def isStateActiveFctID(ExecutionFlow it) {
-		functionPrefix + "isStateActive"
+		functionPrefix + IS_STATE_ACTIVE
 	}
 
 	def isActiveFctID(ExecutionFlow it) {
-		functionPrefix + "isActive"
+		functionPrefix + IS_ACTIVE
 	}
 
 	def isFinalFctID(ExecutionFlow it) {
-		functionPrefix + "isFinal"
+		functionPrefix + IS_FINAL
 	}
 	
 	def initFctID(ExecutionFlow it) {
-		functionPrefix + "init"
+		functionPrefix + INIT
 	}
 	
 	def enterFctID(ExecutionFlow it) {
-		functionPrefix + "enter"
+		functionPrefix + ENTER
 	}
 
 	def exitFctID(ExecutionFlow it) {
-		functionPrefix + "exit"
+		functionPrefix + EXIT
 	}
 	
 	def runCycleFctID(ExecutionFlow it) {
-		functionPrefix + "runCycle"
+		functionPrefix + RUN_CYCLE
 	}
 	
 	def eventValueVariable(EventDefinition it) {
@@ -288,19 +282,19 @@ class Naming {
 	}
 	
 	def setTimerFctID(ExecutionFlow it) {
-		functionPrefix + "setTimer"
+		functionPrefix + SET_TIMER
 	}
 	
 	def unsetTimerFctID(ExecutionFlow it) {
-		functionPrefix + "unsetTimer"
+		functionPrefix + UNSET_TIMER
 	}
 	
 	def enterStateTracingFctID(ExecutionFlow it) {
-		functionPrefix + "stateEntered"
+		functionPrefix + STATE_ENTERED
 	}
 	
 	def exitStateTracingFctID(ExecutionFlow it) {
-		functionPrefix + "stateExited"
+		functionPrefix + STATE_EXITED
 	}
  
 	def asRaiser(EventDefinition it) {
@@ -361,7 +355,7 @@ class Naming {
 
 	def scHandleDecl(EObject it) { containerType + '* ' + scHandle }
 
-	def scHandle() { 'handle' }
+	def scHandle() { HANDLE }
 
 	def valueParams(EventDefinition it) {
 		if(hasValue) ', ' + typeSpecifier.targetLanguageName + ' value' else ''

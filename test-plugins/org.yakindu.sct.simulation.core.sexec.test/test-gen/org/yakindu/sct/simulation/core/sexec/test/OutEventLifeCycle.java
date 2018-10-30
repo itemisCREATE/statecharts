@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for OutEventLifeCycle
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class OutEventLifeCycle extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("OutEventLifeCycle.sct");
@@ -27,7 +29,7 @@ public class OutEventLifeCycle extends AbstractExecutionFlowTest {
 	public void availableAfterCycle() throws Exception {
 		interpreter.enter();
 		raiseEvent("e");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isRaised("f"));
 	}
 	@Test
@@ -48,9 +50,9 @@ public class OutEventLifeCycle extends AbstractExecutionFlowTest {
 	public void init(boolean sndCycle) throws Exception {
 		interpreter.enter();
 		raiseEvent("e");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		if (sndCycle) {
-			interpreter.runCycle();
+			timer.timeLeap(getCyclePeriod());
 		}
 	}
 }

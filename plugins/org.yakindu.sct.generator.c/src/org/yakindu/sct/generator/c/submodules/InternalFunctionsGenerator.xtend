@@ -27,6 +27,9 @@ import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.ExecutionState
+import static org.yakindu.sct.generator.c.CGeneratorConstants.TRUE;
+import static org.yakindu.sct.generator.c.CGeneratorConstants.FALSE;
+import static org.yakindu.sct.generator.c.CGeneratorConstants.BOOL_TYPE;
 
 /**
  * @author rbeckmann
@@ -49,17 +52,17 @@ class InternalFunctionsGenerator {
 		{
 			«FOR scope : it.scopes»
 				«FOR event : scope.incomingEvents»
-				«event.access» = bool_false;
+				«event.access» = «FALSE»;
 				«ENDFOR»
 			«ENDFOR»
 			«IF hasInternalScope»
 				«FOR event : internalScope.events»
-				«event.access» = bool_false;
+				«event.access» = «FALSE»;
 				«ENDFOR»
 			«ENDIF»
 			«IF timed»
 				«FOR event : timeEventScope.events»
-				«event.access» = bool_false;
+				«event.access» = «FALSE»;
 				«ENDFOR»
 			«ENDIF»
 		}
@@ -70,7 +73,7 @@ class InternalFunctionsGenerator {
 		{
 			«FOR scope : it.scopes»
 				«FOR event : scope.outgoingEvents»
-				«event.access» = bool_false;
+				«event.access» = «FALSE»;
 				«ENDFOR»
 			«ENDFOR»
 		}
@@ -110,7 +113,7 @@ class InternalFunctionsGenerator {
 	'''
 	
 	def dispatch functionPrototype(Check it) '''
-		static sc_boolean «shortName»(const «scHandleDecl»);
+		static «BOOL_TYPE» «shortName»(const «scHandleDecl»);
 	'''
 	
 	def dispatch functionPrototype(Step it) '''
@@ -153,7 +156,7 @@ class InternalFunctionsGenerator {
 	
 	def dispatch functionImplementation(Check it) '''
 		«stepComment»
-		static sc_boolean «shortName»(const «scHandleDecl»)
+		static «BOOL_TYPE» «shortName»(const «scHandleDecl»)
 		{
 			return «code»;
 		}

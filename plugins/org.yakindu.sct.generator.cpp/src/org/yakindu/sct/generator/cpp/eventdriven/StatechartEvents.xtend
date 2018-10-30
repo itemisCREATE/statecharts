@@ -21,6 +21,8 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
 
+import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
+
 /**
  * @author René Beckmann - Initial contribution and API
  */
@@ -41,8 +43,8 @@ class StatechartEvents {
 		'''
 		#ifndef «generateHeaderDefineGuard»
 		#define «generateHeaderDefineGuard»
-		#ifndef SC_INVALID_EVENT_VALUE
-		#define SC_INVALID_EVENT_VALUE 0
+		#ifndef «invalidEvent»
+		#define «invalidEvent» 0
 		#endif
 		
 		namespace «eventNamespaceName»
@@ -71,7 +73,7 @@ class StatechartEvents {
 		
 		'''
 		typedef enum  {
-			«invalidEventEnumName(it)» = SC_INVALID_EVENT_VALUE,
+			«invalidEventEnumName(it)» = «invalidEvent»,
 			«FOR e : enumMembers SEPARATOR ","»
 				«e»
 			«ENDFOR»
@@ -85,24 +87,24 @@ class StatechartEvents {
 	
 	def generateEventBaseClasses(ExecutionFlow it) {
 		'''
-		class SctEvent
+		class «SCT_EVENT»
 		{
 			public:
-				SctEvent(«eventEnumName» name) : name(name){}
-				virtual ~SctEvent(){}
+				«SCT_EVENT»(«eventEnumName» name) : name(name){}
+				virtual ~«SCT_EVENT»(){}
 				const «eventEnumName» name;
 				
 		};
 				
 		template <typename T>
-		class TypedSctEvent : public SctEvent
+		class «TYPED_SCT_EVENT» : public «SCT_EVENT»
 		{
 			public:
-				TypedSctEvent(«eventEnumName» name, T value) :
-					SctEvent(name),
+				«TYPED_SCT_EVENT»(«eventEnumName» name, T value) :
+					«SCT_EVENT»(name),
 					value(value)
 					{}
-				virtual ~TypedSctEvent(){}
+				virtual ~«TYPED_SCT_EVENT»(){}
 				const T value;
 		};
 		'''
@@ -131,21 +133,21 @@ class StatechartEvents {
 	def generateTypedEventClass(EventDefinition it, ExecutionFlow flow) {
 		val type = typeSpecifier.targetLanguageName
 		'''
-		class «eventClassName» : public TypedSctEvent<«type»>
+		class «eventClassName» : public «TYPED_SCT_EVENT»<«type»>
 		{
 			public:
 				«eventClassName»(«flow.eventEnumName» name, «type» value) :
-					TypedSctEvent(name, value) {};
+					«TYPED_SCT_EVENT»(name, value) {};
 		};
 		'''
 	}
 	
 	def generateNormalEventClass(EventDefinition it, ExecutionFlow flow) {
 		'''
-		class «eventClassName» : public SctEvent
+		class «eventClassName» : public «SCT_EVENT»
 		{
 			public:
-				«eventClassName»(«flow.eventEnumName» name) : SctEvent(name){};
+				«eventClassName»(«flow.eventEnumName» name) : «SCT_EVENT»(name){};
 		};
 		'''
 	}
@@ -153,9 +155,9 @@ class StatechartEvents {
 	def getBaseClass(EventDefinition it) {
 		'''
 		«IF hasValue»
-		TypedSctEvent
+		«TYPED_SCT_EVENT»
 		«ELSE»
-		SctEvent
+		«SCT_EVENT»
 		«ENDIF»
 		'''
 	}

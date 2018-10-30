@@ -19,6 +19,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 
 /**
  * @author rbeckmann
@@ -46,18 +47,18 @@ class APIGenerator {
 	}
 
 	protected def CharSequence runCycleForLoop(ExecutionFlow it) '''
-		for («scHandle»->stateConfVectorPosition = 0;
-			«scHandle»->stateConfVectorPosition < «type.toUpperCase»_MAX_ORTHOGONAL_STATES;
-			«scHandle»->stateConfVectorPosition++)
+		for («scHandle»->«STATEVECTOR_POS» = 0;
+			«scHandle»->«STATEVECTOR_POS» < «maxOrthogonalStates»;
+			«scHandle»->«STATEVECTOR_POS»++)
 			{
 				
-			switch («scHandle»->stateConfVector[handle->stateConfVectorPosition])
+			switch («scHandle»->«STATEVECTOR»[«scHandle»->«STATEVECTOR_POS»])
 			{
 			«FOR state : states.filter[isLeaf]»
 				«IF state.reactMethod !== null»
 					case «state.stateName»:
 					{
-						«state.reactMethod.shortName»(«scHandle», bool_true);
+						«state.reactMethod.shortName»(«scHandle», «TRUE»);
 						break;
 					}
 				«ENDIF»
@@ -89,27 +90,27 @@ class APIGenerator {
 	
 	protected def CharSequence initFunctionBody(ExecutionFlow it) {
 		'''
-				sc_integer i;
+			«INT_TYPE» i;
 			
-				for (i = 0; i < «type.toUpperCase»_MAX_ORTHOGONAL_STATES; ++i)
+			for (i = 0; i < «maxOrthogonalStates»; ++i)
+			{
+				«scHandle»->«STATEVECTOR»[i] = «null_state»;
+			}
+			
+			«IF hasHistory»
+				for (i = 0; i < «maxHistoryStates»; ++i)
 				{
-					«scHandle»->stateConfVector[i] = «null_state»;
+					«scHandle»->«HISTORYVECTOR»[i] = «null_state»;
 				}
-				
-				«IF hasHistory»
-					for (i = 0; i < «type.toUpperCase»_MAX_HISTORY_STATES; ++i)
-					{
-						«scHandle»->historyVector[i] = «null_state»;
-					}
-				«ENDIF»
-				
-				«scHandle»->stateConfVectorPosition = 0;
+			«ENDIF»
 			
-				«clearInEventsFctID»(handle);
-				«clearOutEventsFctID»(handle);
+			«scHandle»->«STATEVECTOR_POS» = 0;
 			
-				«initSequence.code»
-			'''
+			«clearInEventsFctID»(«scHandle»);
+			«clearOutEventsFctID»(«scHandle»);
+
+			«initSequence.code»
+		'''
 	}
 	
 	def protected CharSequence initSignature(ExecutionFlow it) {
@@ -141,12 +142,12 @@ class APIGenerator {
 		'''
 			«isActiveSignature»
 			{
-				sc_boolean result = bool_false;
-				int i;
+				«BOOL_TYPE» result = «FALSE»;
+				«INT_TYPE» i;
 				
-				for(i = 0; i < «type.toUpperCase»_MAX_ORTHOGONAL_STATES; i++)
+				for(i = 0; i < «maxOrthogonalStates»; i++)
 				{
-					result = result || «scHandle»->stateConfVector[i] != «null_state»;
+					result = result || «scHandle»->«STATEVECTOR»[i] != «null_state»;
 				}
 				
 				return result;
@@ -159,25 +160,25 @@ class APIGenerator {
 	}
 	
 	def protected CharSequence isActiveSignature(ExecutionFlow it) {
-		'''sc_boolean «isActiveFctID»(const «scHandleDecl»)'''
+		'''«BOOL_TYPE» «isActiveFctID»(const «scHandleDecl»)'''
 	}
 
 	def isStateActive(ExecutionFlow it) {
 		'''
 			«isStateActiveSignature»
 			{
-				sc_boolean result = bool_false;
+				«BOOL_TYPE» result = «FALSE»;
 				switch (state)
 				{
 					«FOR s : states»
 						case «s.stateName» :
-							result = (sc_boolean) («IF s.leaf»«scHandle»->stateConfVector[«s.stateVectorDefine»] == «s.stateName»
-							«ELSE»«scHandle»->stateConfVector[«s.stateVectorDefine»] >= «s.stateName»
-								&& «scHandle»->stateConfVector[«s.stateVectorDefine»] <= «s.subStates.last.stateName»«ENDIF»);
+							result = («BOOL_TYPE») («IF s.leaf»«scHandle»->«STATEVECTOR»[«s.stateVectorDefine»] == «s.stateName»
+							«ELSE»«scHandle»->«STATEVECTOR»[«s.stateVectorDefine»] >= «s.stateName»
+								&& «scHandle»->«STATEVECTOR»[«s.stateVectorDefine»] <= «s.subStates.last.stateName»«ENDIF»);
 							break;
 					«ENDFOR»
 					default:
-						result = bool_false;
+						result = «FALSE»;
 						break;
 				}
 				return result;
@@ -190,7 +191,7 @@ class APIGenerator {
 	}
 	
 	def protected CharSequence isStateActiveSignature(ExecutionFlow it) {
-		'''sc_boolean «stateActiveFctID»(const «scHandleDecl», «statesEnumType» state)'''
+		'''«BOOL_TYPE» «stateActiveFctID»(const «scHandleDecl», «statesEnumType» state)'''
 	}
 
 	def isFinal(ExecutionFlow it) {
@@ -207,8 +208,8 @@ class APIGenerator {
 		''' +
 		// only if the impact vector is completely covered by final states the state machine
 		// can become final
-		{if (fsiv.isCompletelyCovered) {'''	return «FOR i : 0 ..<fsiv.size SEPARATOR ' && '»(«FOR fs : fsiv.get(i) SEPARATOR ' || '»«scHandle»->stateConfVector[«i»] == «IF fs.stateVector.offset == i»«fs.stateName»«ELSE»«null_state»«ENDIF»«ENDFOR»)«ENDFOR»;
-				'''} else {'''   return bool_false;'''} }		
+		{if (fsiv.isCompletelyCovered) {'''	return «FOR i : 0 ..<fsiv.size SEPARATOR ' && '»(«FOR fs : fsiv.get(i) SEPARATOR ' || '»«scHandle»->«STATEVECTOR»[«i»] == «IF fs.stateVector.offset == i»«fs.stateName»«ELSE»«null_state»«ENDIF»«ENDFOR»)«ENDFOR»;
+				'''} else {'''   return «FALSE»;'''} }		
 		+ Strings.newLine + '''}'''
 	}
 
@@ -217,7 +218,7 @@ class APIGenerator {
 	}
 	
 	def protected CharSequence isFinalSignature(ExecutionFlow it) {
-		'''sc_boolean «isFinalFctID»(const «scHandleDecl»)'''
+		'''«BOOL_TYPE» «isFinalFctID»(const «scHandleDecl»)'''
 	}
 	
 	def exit(ExecutionFlow it) {
@@ -241,10 +242,10 @@ class APIGenerator {
 		'''
 			«raiseTimeEventSignature»
 			{
-				if ( ((sc_intptr_t)evid) >= ((sc_intptr_t)&(«scHandle»->timeEvents))
-					&&  ((sc_intptr_t)evid) < ((sc_intptr_t)&(«scHandle»->timeEvents)) + sizeof(«timeEventScope.type»))
+				if ( ((«INTPTR_TYPE»)evid) >= ((«INTPTR_TYPE»)&(«scHandle»->timeEvents))
+					&&  ((«INTPTR_TYPE»)evid) < ((«INTPTR_TYPE»)&(«scHandle»->timeEvents)) + sizeof(«timeEventScope.type»))
 					{
-					*(sc_boolean*)evid = bool_true;
+					*(«BOOL_TYPE»*)evid = «TRUE»;
 				}		
 			}
 		'''
@@ -255,7 +256,7 @@ class APIGenerator {
 	}
 	
 	def protected CharSequence raiseTimeEventSignature(ExecutionFlow it) {
-		'''void «raiseTimeEventFctID»(«scHandleDecl», sc_eventid evid)'''
+		'''void «raiseTimeEventFctID»(«scHandleDecl», «EVENT_TYPE» evid)'''
 	}
 	
 }

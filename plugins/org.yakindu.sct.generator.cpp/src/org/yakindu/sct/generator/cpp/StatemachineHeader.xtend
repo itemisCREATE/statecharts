@@ -38,6 +38,8 @@ import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Method
 import java.util.Set
 
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+
 class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineHeader {
 
 	@Inject protected Set<IncludeProvider> includeProviders
@@ -145,21 +147,21 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			
 			«statesEnumDecl»
 			
-			static const sc_integer «statesCountConst» = «states.size»;
+			static const «INT_TYPE» «statesCountConst» = «states.size»;
 			
 			«FOR s : it.scopes»«s.createPublicScope»«ENDFOR»
 			
 			«publicFunctionPrototypes»
 			
 			/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
-			sc_boolean «stateActiveFctID»(«statesEnumType» state) const;
+			«BOOL_TYPE» «stateActiveFctID»(«statesEnumType» state) const;
 			
 			«IF timed»
 				//! number of time events used by the state machine.
-				static const sc_integer «timeEventsCountConst» = «timeEvents.size»;
+				static const «INT_TYPE» «timeEventsCountConst» = «timeEvents.size»;
 				
 				//! number of time events that can be active at once.
-				static const sc_integer «timeEventsCountparallelConst» = «(it.sourceElement as Statechart).maxNumberOfParallelTimeEvents»;
+				static const «INT_TYPE» «timeEventsCountparallelConst» = «(it.sourceElement as Statechart).maxNumberOfParallelTimeEvents»;
 			«ENDIF»
 			«IF entry.innerClassVisibility == "public"»
 			
@@ -319,20 +321,20 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 
 	def statemachineTypeDecl(ExecutionFlow it) '''
 		//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
-		static const sc_ushort «orthogonalStatesConst» = «stateVector.size»;
+		static const «USHORT_TYPE» «orthogonalStatesConst» = «stateVector.size»;
 		«IF hasHistory»
 		//! dimension of the state configuration vector for history states
-		static const sc_ushort «historyStatesConst» = «historyVector.size»;«ENDIF»
+		static const «USHORT_TYPE» «historyStatesConst» = «historyVector.size»;«ENDIF»
 		
 		«IF timed»
 			«timerInterface»* «timerInstance»;
-			sc_boolean «timeEventsInstance»[«timeEventsCountConst»];
+			«BOOL_TYPE» «timeEventsInstance»[«timeEventsCountConst»];
 		«ENDIF»
 		
-		«statesEnumType» stateConfVector[«orthogonalStatesConst»];
+		«statesEnumType» «STATEVECTOR»[«orthogonalStatesConst»];
 		
-		«IF hasHistory»«statesEnumType» historyVector[«historyStatesConst»];«ENDIF»
-		sc_ushort stateConfVectorPosition;
+		«IF hasHistory»«statesEnumType» «HISTORYVECTOR»[«historyStatesConst»];«ENDIF»
+		«USHORT_TYPE» «STATEVECTOR_POS»;
 		
 		«FOR s : getInterfaces»
 			«s.interfaceName» «s.instance»;
@@ -354,35 +356,35 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 		 */
 		virtual «IF entry.checkUnimplementedOCBs»sc_errorCode«ELSE»void«ENDIF» init();
 		
-		virtual void enter();
+		virtual void «ENTER»();
 		
-		virtual void exit();
+		virtual void «EXIT»();
 		
-		virtual void runCycle();
+		virtual void «RUN_CYCLE»();
 		
 		/*!
 		* Checks if the state machine is active (until 2.4.1 this method was used for states).
 		* A state machine is active if it has been entered. It is inactive if it has not been entered at all or if it has been exited.
 		*/
-		virtual sc_boolean isActive() const;
+		virtual sc_boolean «IS_ACTIVE»() const;
 		
 		
 		/*!
 		* Checks if all active states are final. 
 		* If there are no active states then the state machine is considered being inactive. In this case this method returns false.
 		*/
-		virtual sc_boolean isFinal() const;
+		virtual sc_boolean «IS_FINAL»() const;
 	'''
 
 	def timedStatemachineFunctions(ExecutionFlow it) '''
 		/*
 		 * Functions inherited from TimedStatemachineInterface
 		 */
-		virtual void setTimer(«timerInterface»* timerInterface);
+		virtual void «SET_TIMER»(«timerInterface»* timerInterface);
 		
 		virtual «timerInterface»* getTimer();
 		
-		virtual void «raiseTimeEventFctID»(sc_eventid event);
+		virtual void «raiseTimeEventFctID»(«EVENT_TYPE» event);
 	'''
 
 	def dispatch functionPrototypes(EventDefinition it) '''
@@ -391,7 +393,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			void «asRaiser»(«valueParams»);
 			
 			/*! Checks if the out event '«name»' that is defined in the «scope.scopeDescription» has been raised. */
-			sc_boolean «asRaised»() const;
+			«BOOL_TYPE» «asRaised»() const;
 			
 			«IF hasValue»
 				/*! Gets the value of the out event '«name»' that is defined in the «scope.scopeDescription». */
@@ -404,7 +406,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			
 		«ELSE»
 			/*! Checks if the out event '«name»' that is defined in the «scope.scopeDescription» has been raised. */
-			sc_boolean «asRaised»() const;
+			«BOOL_TYPE» «asRaised»() const;
 			
 			«IF hasValue»
 				/*! Gets the value of the out event '«name»' that is defined in the «scope.scopeDescription». */
@@ -442,8 +444,8 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 		«exitSequenceFunctions.toPrototypes»
 		«reactFunctions.filter[ f | ! (f.eContainer instanceof ExecutionState)].toList.toPrototypes»
 		«reactMethods.toDeclarations»
-		void clearInEvents();
-		void clearOutEvents();
+		void «clearInEventsFctID»();
+		void «clearOutEventsFctID»();
 		
 	'''
 	
@@ -464,7 +466,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 	'''
 
 	def dispatch functionPrototype(Check it) '''
-		sc_boolean «shortName»();
+		«BOOL_TYPE» «shortName»();
 	'''
 
 	def dispatch functionPrototype(Step it) '''

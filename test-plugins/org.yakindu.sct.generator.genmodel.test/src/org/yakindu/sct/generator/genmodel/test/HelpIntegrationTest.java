@@ -57,7 +57,6 @@ public class HelpIntegrationTest {
 	private static final String YAKINDU_JAVA = "yakindu::java";
 	private static final String YAKINDU_C = "yakindu::c";
 	private static final String YAKINDU_CPP = "yakindu::cpp";
-	private static final String YAKINDU_GENERIC = "yakindu::generic";
 		
 	@Inject
 	private SGenUserHelpDocumentationProvider documentationProvider;
@@ -80,17 +79,12 @@ public class HelpIntegrationTest {
 	public void checkCppGeneratorFeatureDocumentation() {
 		checkGeneratorFeatureDocumentation(YAKINDU_CPP);
 	}
-
-	@Test
-	public void checkGenericGeneratorFeatureDocumentation() {
-		checkGeneratorFeatureDocumentation(YAKINDU_GENERIC);
-	}
 	
 	@Test
 	public void checkDocumentedFeaturesExist() {
 		List<String> features = getDocumentedFeatures();
 		ArrayList<String> generators = new ArrayList<String>(
-				Arrays.asList(YAKINDU_JAVA, YAKINDU_C, YAKINDU_CPP, YAKINDU_GENERIC));
+				Arrays.asList(YAKINDU_JAVA, YAKINDU_C, YAKINDU_CPP));
 		for (String generator : generators) {
 			Iterable<IEObjectDescription> allElements = getAllElements(generator);
 			for (IEObjectDescription desc : allElements) {

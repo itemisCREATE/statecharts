@@ -554,8 +554,10 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 
 	protected void setMementoProperties(IMemento memento) {
 		String sectionProperty = getSectionProperty(getContextObject());
-		memento.putInteger(sectionProperty + MEM_FIRST_WEIGHT, previousWidths[0]);
-		memento.putInteger(sectionProperty + MEM_SECOND_WEIGHT, previousWidths[1]);
+		if (previousWidths.length >= 2) {
+			memento.putInteger(sectionProperty + MEM_FIRST_WEIGHT, previousWidths[0]);
+			memento.putInteger(sectionProperty + MEM_SECOND_WEIGHT, previousWidths[1]);
+		}
 		memento.putBoolean(sectionProperty + MEM_EXPANDED, sectionExpanded);
 	}
 
@@ -816,7 +818,11 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 		public void notifyChanged(Notification notification) {
 			if (Notification.SET == notification.getEventType()) {
 				if (BasePackage.Literals.NAMED_ELEMENT__NAME.equals(notification.getFeature())) {
-					nameLabel.setText(notification.getNewStringValue());
+					String newText = notification.getNewStringValue();
+					String oldText = nameLabel.getText();
+					if (!oldText.equals(newText)) {
+						nameLabel.setText(newText);
+					}
 				}
 			}
 		}

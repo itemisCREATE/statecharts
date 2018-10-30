@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for StatechartLocalReactions
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class StatechartLocalReactions extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("StatechartLocalReactions.sct");
@@ -28,7 +30,8 @@ public class StatechartLocalReactions extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		assertTrue(isStateActive("S1"));
 		assertTrue(isStateActive("a"));
-		while(getInteger("myInt") < 10l) {
+		long cycles = 0l;
+		while(cycles < 10l) {
 			assertTrue(isStateActive("a"));
 			if (getInteger("myInt")%2l == 0l) {
 				assertTrue(isStateActive("S1"));
@@ -36,7 +39,9 @@ public class StatechartLocalReactions extends AbstractExecutionFlowTest {
 			else {
 				assertTrue(isStateActive("S2"));
 			}
-			interpreter.runCycle();
+			timer.timeLeap(getCyclePeriod());
+			cycles += 1l;
+			assertTrue((getInteger("myInt") == cycles));
 		}
 	}
 }

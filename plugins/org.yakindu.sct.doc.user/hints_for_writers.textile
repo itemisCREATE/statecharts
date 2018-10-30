@@ -101,3 +101,13 @@ bc..
  As of this writing (winter 2016/2017), component C is the only one to support system S.
 
 p. Searching the documentation for all occurences of @###. CHECK:@ is very easy. It is advisable to include the transitional statement on the same line as @###. CHECK:@, because this way you can simply "grep" all textile source files for the string @###. CHECK:@ and immediately see all the transitional claims that are made. In the most simple case all you need to do is browse them, verify that nothing has changed, and you are done. Only if some statement is no longer true you actually have to go to the corresponding documentation file and update it. Don't forget to also update the CHECK comment accordingly!
+
+
+
+
+h2. Creating screenshots with fade-out effect
+
+* In the toolbox, double-click on the rectangular selection icon. The "tool options" dialog opens.
+* Activate "Feather edges", and set the radius to 30.0.
+* Activate "Rounded corners", and set the radius to 2.0.
+* Now select a rectangular portion of your image, paste it elsewhere, and notice the fade-out effect.

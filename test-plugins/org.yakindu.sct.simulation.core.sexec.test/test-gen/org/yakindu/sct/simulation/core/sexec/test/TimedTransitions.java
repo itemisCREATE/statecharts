@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for TimedTransitions
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class TimedTransitions extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("TimedTransitions.sct");
@@ -27,8 +29,8 @@ public class TimedTransitions extends AbstractExecutionFlowTest {
 	public void timer01() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("Start"));
-		/*not implemented - sorry :(*/
-		interpreter.runCycle();
+		timer.timeLeap(2030);
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("End"));
 	}
 }

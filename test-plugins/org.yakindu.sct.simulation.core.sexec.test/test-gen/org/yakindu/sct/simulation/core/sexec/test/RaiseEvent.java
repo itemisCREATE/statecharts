@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for RaiseEvent
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class RaiseEvent extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("RaiseEvent.sct");
@@ -29,8 +31,8 @@ public class RaiseEvent extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("SateA"));
 		assertTrue(isStateActive("StateA"));
 		raiseEvent("e2");
-		interpreter.runCycle();
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("StateB"));
 		assertTrue(isStateActive("StateB"));
 	}

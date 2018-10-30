@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for TriggerExpressionPrecedence
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class TriggerExpressionPrecedence extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("expressions/TriggerExpressionPrecedence.sct");
@@ -28,7 +30,7 @@ public class TriggerExpressionPrecedence extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		setBoolean("c1", false);
 		setBoolean("c2", false);
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(!getBoolean("e1_transition"));
 	}
 	@Test
@@ -36,7 +38,7 @@ public class TriggerExpressionPrecedence extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		setBoolean("c1", true);
 		setBoolean("c2", false);
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(!getBoolean("e1_transition"));
 	}
 	@Test
@@ -44,7 +46,7 @@ public class TriggerExpressionPrecedence extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		setBoolean("c1", false);
 		setBoolean("c2", true);
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(!getBoolean("e1_transition"));
 	}
 	@Test
@@ -52,7 +54,7 @@ public class TriggerExpressionPrecedence extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		setBoolean("c1", true);
 		setBoolean("c2", true);
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(!getBoolean("e1_transition"));
 	}
 }

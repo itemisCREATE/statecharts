@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for CastExpressions
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class CastExpressions extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("CastExpressions.sct");
@@ -28,9 +30,9 @@ public class CastExpressions extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		assertTrue(getReal("realValue") == 5l);
 		assertTrue(getInteger("intValue") == 5l);
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(getReal("realValue") == 15l);
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("C"));
 		assertTrue(getReal("realValue") == 757l);
 	}

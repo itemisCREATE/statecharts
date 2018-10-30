@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for StateIsActive
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class StateIsActive extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("StateIsActive.sct");
@@ -29,8 +31,8 @@ public class StateIsActive extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("R1A"));
 		assertTrue(isStateActive("R2A"));
 		raiseEvent("Event1");
-		interpreter.runCycle();
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("R1B"));
 		assertTrue(isStateActive("R2B"));
 	}
