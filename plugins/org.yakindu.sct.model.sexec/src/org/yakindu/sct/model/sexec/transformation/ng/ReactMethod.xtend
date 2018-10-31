@@ -314,18 +314,7 @@ class ReactMethod {
 		]
 	}
 	 
-	 
-	def shouldExecuteParent(RegularState state) {
-		val execState = state.create
-	
-		if (! state.statechart.childFirstExecution) 
-			[StateVector sv | sv.offset == execState.stateVector.offset]
-		else
-			[StateVector sv | sv.offset + sv.size == execState.stateVector.offset + execState.stateVector.size]		
-	} 
-	
-	
-		
+	 		
 	def Sequence createLocalReactionSequence(ExecutionNode state) {	
 
 		 _sequence(
