@@ -104,7 +104,12 @@ class SexecExtensions {
 	 * In these cases these additional positions are 'nulled' if the state is active. So a states impact vector is its regions state vector. 
 	 * This impact vector is also used to determine when parent behavior must be executed.
 	 */
-	def impactVector(ExecutionState it) { superScope.stateVector}
+	def dispatch impactVector(ExecutionState it) { superScope.stateVector}
+
+	/** 
+	 * The impact vector of any other execution scope is the native stateVector of that scope.
+	 */
+	def dispatch impactVector(ExecutionScope it) { stateVector}
 
 
 	
