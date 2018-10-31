@@ -26,8 +26,6 @@ public class ChildFirstOrthogonalReactions {
 	private ChildFirstOrthogonalReactionsStatemachine statemachine;	
 	private VirtualTimer timer;
 	
-	protected long counter = 0l;
-	protected long checkFail = - 1l ;
 	
 	@Before
 	public void childFirstOrthogonalReactions_setUp() {
@@ -45,10 +43,6 @@ public class ChildFirstOrthogonalReactions {
 		statemachine = null;
 		
 		timer = null;
-	}
-	
-	public void set_up() {
-		counter = 0l;
 	}
 	
 	public boolean checkA(boolean ret) {
@@ -94,7 +88,6 @@ public class ChildFirstOrthogonalReactions {
 	
 	@Test
 	public void executionOrder() {
-		set_up();
 		when(defaultMock.check("A")).thenAnswer(new Answer<Boolean>() {
 			@Override
 			public Boolean answer(InvocationOnMock invocation) {
@@ -163,7 +156,6 @@ public class ChildFirstOrthogonalReactions {
 	
 	@Test
 	public void executionOrderWIthFirstLeafTransition() {
-		set_up();
 		when(defaultMock.check("A")).thenAnswer(new Answer<Boolean>() {
 			@Override
 			public Boolean answer(InvocationOnMock invocation) {
@@ -232,7 +224,6 @@ public class ChildFirstOrthogonalReactions {
 	
 	@Test
 	public void executionOrderWIthFirstParentTransition() {
-		set_up();
 		when(defaultMock.check("A")).thenAnswer(new Answer<Boolean>() {
 			@Override
 			public Boolean answer(InvocationOnMock invocation) {
@@ -301,7 +292,6 @@ public class ChildFirstOrthogonalReactions {
 	
 	@Test
 	public void executionOrderWIthFirstGrandParentTransition() {
-		set_up();
 		when(defaultMock.check("A")).thenAnswer(new Answer<Boolean>() {
 			@Override
 			public Boolean answer(InvocationOnMock invocation) {
@@ -370,7 +360,6 @@ public class ChildFirstOrthogonalReactions {
 	
 	@Test
 	public void executionOrderWithLastLeafTransition() {
-		set_up();
 		when(defaultMock.check("A")).thenAnswer(new Answer<Boolean>() {
 			@Override
 			public Boolean answer(InvocationOnMock invocation) {

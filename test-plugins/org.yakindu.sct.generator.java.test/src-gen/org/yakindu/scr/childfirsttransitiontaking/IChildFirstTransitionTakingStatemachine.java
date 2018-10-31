@@ -10,9 +10,13 @@ public interface IChildFirstTransitionTakingStatemachine extends IStatemachine {
 		
 		public void raiseGo();
 		
-		public boolean getGuard();
+		public long getCLocalReaction();
 		
-		public void setGuard(boolean value);
+		public void setCLocalReaction(long value);
+		
+		public long getCaLocalReaction();
+		
+		public void setCaLocalReaction(long value);
 		
 	}
 	
