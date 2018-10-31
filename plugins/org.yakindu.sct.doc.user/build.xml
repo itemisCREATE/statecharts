@@ -47,7 +47,7 @@
     <property name="wikitext.version" value="3.0.20"/>
 
     <!-- YAKINDU Docs version and local directory: -->
-    <property name="yakindu.docs.version" value="0.1.0"/>
+    <property name="yakindu.docs.version" value="0.1.1"/>
     <property name="yakindu.docs.dir" value="${lib.dir}/yakindu.docs"/>
 
 
