@@ -1,26 +1,84 @@
 testclass ChildFirstTransitionTaking for statechart executionorder.ChildFirstTransitionTaking {
+
 	@Test
-	operation testFrom1A() {
+	operation testParentTransitionFromSimpleState() {
+		
 		enter
-		assert active(executionorder.ChildFirstTransitionTaking.main_region.StateA.inner1.State1A)
-		raise go
-		assert active(executionorder.ChildFirstTransitionTaking.main_region.StateA.inner1.State1A)
+		assert active(executionorder.ChildFirstTransitionTaking.r1.A.r1.AA)
+		
 		raise e
-		assert active(executionorder.ChildFirstTransitionTaking.main_region.StateB)
+		assert active(executionorder.ChildFirstTransitionTaking.r1.B)
 		exit
 	}
 
 	@Test
-	operation testFrom1B() {
+	operation testParentTransitionFromOrthogonalChildState() {
+		
 		enter
-		assert active(executionorder.ChildFirstTransitionTaking.main_region.StateA.inner1.State1A)
-		guard = true
+		assert active(executionorder.ChildFirstTransitionTaking.r1.A.r1.AA)
+		
 		raise go
-		assert active(executionorder.ChildFirstTransitionTaking.main_region.StateA.inner1.State1B.inner2a.State2A)
-		assert active(executionorder.ChildFirstTransitionTaking.main_region.StateA.inner1.State1B.inner2b.State2B)
+		assert active(executionorder.ChildFirstTransitionTaking.r1.A.r1.AB.r1.ABA)
+		assert active(executionorder.ChildFirstTransitionTaking.r1.A.r1.AB.r2.ABB)
+		
 		raise e
-		assert active(executionorder.ChildFirstTransitionTaking.main_region.StateB)
+		assert active(executionorder.ChildFirstTransitionTaking.r1.B)
+		
 		exit
 	}
 	
+	
+	@Test
+	operation testParentLocalReactionOnTransition() {
+		enter
+		assert active(executionorder.ChildFirstTransitionTaking.r1.A.r1.AA)
+
+		raise go
+		assert active(executionorder.ChildFirstTransitionTaking.r1.A.r1.AB.r1.ABA)
+		assert active(executionorder.ChildFirstTransitionTaking.r1.A.r1.AB.r2.ABB)
+		
+		raise go
+		assert active(executionorder.ChildFirstTransitionTaking.r1.A.r1.AA)
+		
+		exit
+	}
+	
+	
+	
+	/**
+	 * The transitions triggered by the 'go' event should always cause the local reactions of 
+	 * CA and C to be executed. 
+	 * 
+	 * Additionally the invocation of local reactions above the transition scope must be the same 
+	 * for all sibling states of a region independent of their orthogonality. 
+	 */
+	@Test operation testLocalReactionsOnTransitionsParentScope() {
+		
+		enter
+		assert active ( executionorder.ChildFirstTransitionTaking.r2.C.r.CA.r.CAA )
+		assert cLocalReaction == 0
+		assert caLocalReaction == 0
+		
+		raise go
+		assert active ( executionorder.ChildFirstTransitionTaking.r2.C.r.CA.r.CAB )
+		assert cLocalReaction == 1
+		assert caLocalReaction == 1
+
+		raise go
+		assert active ( executionorder.ChildFirstTransitionTaking.r2.C.r.CA.r.CAA )
+		assert cLocalReaction == 2
+		assert caLocalReaction == 2
+		
+		
+		raise e
+		assert active ( executionorder.ChildFirstTransitionTaking.r2.C.r.CB )
+		assert cLocalReaction == 3
+		assert caLocalReaction == 2
+		
+		raise e
+		assert active ( executionorder.ChildFirstTransitionTaking.r2.C.r.CA )
+		assert cLocalReaction == 4
+		assert caLocalReaction == 2
+		
+	}
 }
