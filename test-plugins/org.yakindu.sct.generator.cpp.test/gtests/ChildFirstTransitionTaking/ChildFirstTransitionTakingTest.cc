@@ -32,43 +32,101 @@ class ChildFirstTransitionTakingTest : public ::testing::Test{
 };
 
 
-TEST_F(ChildFirstTransitionTakingTest, testFrom1A) {
+TEST_F(ChildFirstTransitionTakingTest, testParentTransitionFromSimpleState) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_main_region_StateA_inner1_State1A));
-	
-	statechart->getDefaultSCI()->raise_go();
-	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_main_region_StateA_inner1_State1A));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AA));
 	
 	statechart->getDefaultSCI()->raise_e();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_main_region_StateB));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_B));
 	
 	statechart->exit();
 	
 	
 }
-TEST_F(ChildFirstTransitionTakingTest, testFrom1B) {
+TEST_F(ChildFirstTransitionTakingTest, testParentTransitionFromOrthogonalChildState) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_main_region_StateA_inner1_State1A));
-	
-	statechart->getDefaultSCI()->set_guard(true);
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AA));
 	
 	statechart->getDefaultSCI()->raise_go();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_main_region_StateA_inner1_State1B_inner2a_State2A));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AB_r1_ABA));
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_main_region_StateA_inner1_State1B_inner2b_State2B));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AB_r2_ABB));
 	
 	statechart->getDefaultSCI()->raise_e();
 	
-	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_main_region_StateB));
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_B));
 	
 	statechart->exit();
+	
+	
+}
+TEST_F(ChildFirstTransitionTakingTest, testParentLocalReactionOnTransition) {
+	
+	statechart->enter();
+	
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AA));
+	
+	statechart->getDefaultSCI()->raise_go();
+	
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AB_r1_ABA));
+	
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AB_r2_ABB));
+	
+	statechart->getDefaultSCI()->raise_go();
+	
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r1_A_r1_AA));
+	
+	statechart->exit();
+	
+	
+}
+TEST_F(ChildFirstTransitionTakingTest, testLocalReactionsOnTransitionsParentScope) {
+	
+	statechart->enter();
+	
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r2_C_r_CA_r_CAA));
+	
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_cLocalReaction()== 0l);
+	
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_caLocalReaction()== 0l);
+	
+	statechart->getDefaultSCI()->raise_go();
+	
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r2_C_r_CA_r_CAB));
+	
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_cLocalReaction()== 1l);
+	
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_caLocalReaction()== 1l);
+	
+	statechart->getDefaultSCI()->raise_go();
+	
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r2_C_r_CA_r_CAA));
+	
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_cLocalReaction()== 2l);
+	
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_caLocalReaction()== 2l);
+	
+	statechart->getDefaultSCI()->raise_e();
+	
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r2_C_r_CB));
+	
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_cLocalReaction()== 3l);
+	
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_caLocalReaction()== 2l);
+	
+	statechart->getDefaultSCI()->raise_e();
+	
+	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r2_C_r_CA));
+	
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_cLocalReaction()== 4l);
+	
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_caLocalReaction()== 2l);
 	
 	
 }
