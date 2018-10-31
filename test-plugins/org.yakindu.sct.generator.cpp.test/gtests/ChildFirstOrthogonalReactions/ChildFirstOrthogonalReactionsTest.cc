@@ -12,7 +12,6 @@ using ::testing::_;
 
 namespace  {
 
-void set_up();
 sc_boolean checkA(sc_boolean ret);
 sc_boolean checkAA(sc_boolean ret);
 sc_boolean checkAAA(sc_boolean ret);
@@ -22,8 +21,6 @@ sc_boolean checkC(sc_boolean ret);
 sc_integer nextCounter();
 executionorder::ChildFirstOrthogonalReactions* statechart;
 
-sc_integer counter = 0l;
-sc_integer checkFail = - 1l ;
 
 class CheckMock{
 	typedef sc_boolean (CheckMock::*functiontype)(const sc_string);
@@ -185,13 +182,6 @@ class ChildFirstOrthogonalReactionsTest : public ::testing::Test{
 	}
 };
 
-void set_up(){
-	counter = 0l;
-	
-	
-	checkMock->reset();
-	nextMock->reset();
-}
 sc_boolean checkA(sc_boolean ret){
 	statechart->getDefaultSCI()->set_cnt(statechart->getDefaultSCI()->get_cnt()+1l);
 	
@@ -280,8 +270,6 @@ TEST_F(ChildFirstOrthogonalReactionsTest, executionOrder) {
 	
 	MockDefault defaultMock;
 	statechart->setDefaultSCI_OCB(&defaultMock);
-	set_up();
-	
 	checkMock->setCheckBehavior("A",&CheckMock::check1);
 	
 	checkMock->setCheckBehavior("AA",&CheckMock::check2);
@@ -342,8 +330,6 @@ TEST_F(ChildFirstOrthogonalReactionsTest, executionOrderWIthFirstLeafTransition)
 	
 	MockDefault defaultMock;
 	statechart->setDefaultSCI_OCB(&defaultMock);
-	set_up();
-	
 	checkMock->setCheckBehavior("A",&CheckMock::check1);
 	
 	checkMock->setCheckBehavior("AA",&CheckMock::check2);
@@ -404,8 +390,6 @@ TEST_F(ChildFirstOrthogonalReactionsTest, executionOrderWIthFirstParentTransitio
 	
 	MockDefault defaultMock;
 	statechart->setDefaultSCI_OCB(&defaultMock);
-	set_up();
-	
 	checkMock->setCheckBehavior("A",&CheckMock::check1);
 	
 	checkMock->setCheckBehavior("AA",&CheckMock::check8);
@@ -466,8 +450,6 @@ TEST_F(ChildFirstOrthogonalReactionsTest, executionOrderWIthFirstGrandParentTran
 	
 	MockDefault defaultMock;
 	statechart->setDefaultSCI_OCB(&defaultMock);
-	set_up();
-	
 	checkMock->setCheckBehavior("A",&CheckMock::check9);
 	
 	checkMock->setCheckBehavior("AA",&CheckMock::check2);
@@ -528,8 +510,6 @@ TEST_F(ChildFirstOrthogonalReactionsTest, executionOrderWithLastLeafTransition) 
 	
 	MockDefault defaultMock;
 	statechart->setDefaultSCI_OCB(&defaultMock);
-	set_up();
-	
 	checkMock->setCheckBehavior("A",&CheckMock::check1);
 	
 	checkMock->setCheckBehavior("AA",&CheckMock::check2);
