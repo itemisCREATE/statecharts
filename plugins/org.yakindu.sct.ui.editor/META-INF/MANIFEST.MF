@@ -47,8 +47,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xtend.lib,
  com.google.guava,
  org.yakindu.sct.domain,
- org.yakindu.sct.model.stext.lib,
- com.yakindu.licmgmt.ui;bundle-version="3.0.0"
+ org.yakindu.sct.model.stext.lib
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.yakindu.sct.ui.editor,
