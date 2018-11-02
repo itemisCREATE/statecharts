@@ -1,0 +1,156 @@
+testclass ChildFirstTransitionsinSubchart for statechart executionorder.ChildFirstTransitionsInSubchart {
+
+	var counter : integer = 0
+	const checkFail : integer = -1
+	
+	operation set_up() {
+		counter = 0
+	}
+		
+	
+	operation checkA(ret : boolean) : boolean {
+		cnt = cnt+1
+		a_check = cnt
+		return ret
+	}
+	
+	operation checkAA(ret : boolean) : boolean {
+		cnt = cnt+1
+		aa_check = cnt
+		return ret
+
+	}
+
+	operation checkAB(ret : boolean) : boolean {
+		cnt = cnt+1
+		ab_check = cnt
+		return ret
+	}
+
+	operation checkAC(ret : boolean) : boolean {
+		cnt = cnt+1
+		ac_check = cnt
+		return ret
+	}
+
+	operation checkAD(ret : boolean) : boolean {
+		cnt = cnt+1
+		ad_check = cnt
+		return ret
+	}
+	
+	operation checkC(ret : boolean) : boolean {
+		cnt = cnt+1
+		c_check = cnt
+		return ret
+	}
+	
+
+	operation nextCounter() : integer {
+		cnt = cnt+1
+		return cnt
+	}
+	
+	/** This test case checks the evaluation order of the of transition triggers and 
+	 * local reactions without performing a state transition.
+	 */
+	@Test operation executionOrderWithNoTransitionInOrthogonalSubstates() {
+	
+		set_up
+			
+		mock check("A")		returns ( checkA(false) )
+		mock check("AA")		returns ( checkAA(false) )
+		mock check("AB")		returns ( checkAB(no) )
+		mock check("AC")		returns ( checkAC(false) )
+		mock check("AD")		returns ( checkAD(false) )
+		mock check("C")		returns ( checkC(false) )
+		mock next()			returns ( nextCounter() )
+		
+		enter
+		proceed 1 cycle
+		
+		assert aa_check == 1
+		assert aa_local == 2
+
+		assert ac_check == 3
+		assert ac_local == 4
+
+		assert a_check == 5
+		assert a_local == 6
+
+		assert c_check == 7	
+		assert c_local == 8
+		
+		assert sm_local == 9
+	}
+
+
+	@Test operation executionOrderWithTransitionInOneSubRegion() {
+	
+		set_up
+			
+		mock check("A")		returns ( checkA(false) )
+		mock check("AA")		returns ( checkAA(true) )
+		mock check("AB")		returns ( checkAB(no) )
+		mock check("AC")		returns ( checkAC(false) )
+		mock check("AD")		returns ( checkAD(false) )
+		mock check("C")		returns ( checkC(false) )
+		mock next()			returns ( nextCounter() )
+		
+		enter
+		proceed 1 cycle
+		
+		assert aa_check == 1
+		assert aa_local == 0
+
+		assert a_local == 4
+
+		assert ac_check == 2
+		assert ac_local == 3
+
+		assert a_check == 0
+		assert a_local == 4
+
+		assert c_check == 5	
+		assert c_local == 6
+		
+		assert sm_local == 7
+	}
+
+
+	@Test operation executionOrderWithTransitionInAllSubRegion() {
+	
+		set_up
+			
+		mock check("A")		returns ( checkA(false) )
+		mock check("AA")		returns ( checkAA(true) )
+		mock check("AB")		returns ( checkAB(no) )
+		mock check("AC")		returns ( checkAC(true) )
+		mock check("AD")		returns ( checkAD(false) )
+		mock check("C")		returns ( checkC(false) )
+		mock next()			returns ( nextCounter() )
+		
+		enter
+		proceed 1 cycle
+		
+		assert aa_check == 1
+		assert aa_local == 0
+
+		assert a_local == 3
+
+		assert ac_check == 2
+		assert ac_local == 0
+
+		assert a_check == 0
+		assert a_local == 3
+
+		assert c_check == 4	
+		assert c_local == 5
+		
+		assert sm_local == 6
+	}
+
+
+}
+
+
