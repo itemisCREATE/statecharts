@@ -494,8 +494,7 @@ class BehaviorMapping {
 				[ExecutionScope parentScope, ExecutionScope execScope | false ]
 			else
 				[ExecutionScope parentScope, ExecutionScope execScope | 
-					parentScope.stateVector.offset + parentScope.stateVector.size 
-					== execScope.stateVector.offset + execScope.stateVector.size
+					parentScope === execScope || parentScope.stateVector.last == execScope.impactVector.last
 				]
 		 
 		

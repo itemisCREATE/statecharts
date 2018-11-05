@@ -367,26 +367,28 @@ class SequenceBuilder {
 			val exitScopes = s.parentScopes
 			exitScopes.removeAll(region.parentScopes)
 			exitScopes.remove(s)
-			exitScopes.fold(caseSeq,
-				[cs, exitScope|
-					{
-						if (exitScope instanceof ExecutionRegion && (exitScope as ExecutionRegion).historyVector !== null) {
-							// val execRegion = exitScope as ExecutionRegion
-							// cs.steps += execRegion.newSaveHistory
-						}
-						cs
-					}])
+			
+//			// TODO: remove as it has no effect
+//			exitScopes.fold(caseSeq,
+//				[cs, exitScope|
+//					{
+//						if (exitScope instanceof ExecutionRegion && (exitScope as ExecutionRegion).historyVector !== null) {
+//							// val execRegion = exitScope as ExecutionRegion
+//							// cs.steps += execRegion.newSaveHistory
+//						}
+//						cs
+//					}])
 
 			//Leave leaf
 			if (s.exitSequence !== null) {
 				caseSeq.steps += s.exitSequence.newCall
 			}
-
+			
 			// include exitAction calls up to the direct child level.
 			exitScopes.fold(caseSeq,
 				[cs, exitScope|
 					{
-						if (exitScope instanceof ExecutionState && s.stateVector.last == exitScope.stateVector.last) {
+						if (exitScope instanceof ExecutionState && s.impactVector.last == exitScope.stateVector.last) {
 							val execState = exitScope as ExecutionState
 							if(execState.exitAction !== null) cs.steps.add(execState.exitAction.newCall)
 							if(_addTraceSteps) cs.steps.add(execState.newTraceStateExited)
@@ -400,6 +402,7 @@ class SequenceBuilder {
 
 		return sSwitch
 	}
+
 
 	def defineStatechartExitSequence(ExecutionFlow flow, Statechart sc) {
 		val exitSequence = sexec.factory.createSequence

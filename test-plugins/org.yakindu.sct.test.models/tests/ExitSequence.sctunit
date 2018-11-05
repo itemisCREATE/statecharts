@@ -1,0 +1,25 @@
+testclass ExitSequence for statechart ExitSequence {
+	
+	@Test
+	operation testFrom1A() {
+		enter
+		assert (canary == 0)
+		raise e
+		assert (canary == 0)
+		assert active(main_region.StateA.inner1.State1A)
+		exit
+		assert (canary == 1)
+	}
+	
+	@Test
+	operation testFrom1B() {
+		enter
+		assert (canary == 0)
+		guard = true
+		raise e
+		assert (canary == 0)
+		assert active(main_region.StateA.inner1.State1B)
+		exit
+		assert (canary == 1)
+	}
+}

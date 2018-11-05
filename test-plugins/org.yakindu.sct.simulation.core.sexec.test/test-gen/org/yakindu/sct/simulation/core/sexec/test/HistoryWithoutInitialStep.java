@@ -57,6 +57,14 @@ public class HistoryWithoutInitialStep extends AbstractExecutionFlowTest {
 		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("D"));
 	}
+	@Test
+	public void enterThroughHistoryWithoutInit() throws Exception {
+		interpreter.enter();
+		assertTrue(isStateActive("A"));
+		raiseEvent("toHistory");
+		timer.timeLeap(getCyclePeriod());
+		assertTrue(isStateActive("C"));
+	}
 	public void init() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
