@@ -22,7 +22,7 @@ import org.eclipse.core.runtime.Path;
 import com.google.common.collect.Lists;
 
 public class CompileGTestCommand {
-
+	
 	private String dir;
 	private List<String> includes = Lists.newArrayList();
 	private List<String> sources = Lists.newArrayList();
@@ -30,49 +30,49 @@ public class CompileGTestCommand {
 	private String program;
 	private String makefileDir;
 	private String mainLib;
-	
+
 	public CompileGTestCommand directory(String dir) {
 		this.dir = dir;
 		return this;
 	}
-	
+
 	public CompileGTestCommand includes(List<String> includes) {
 		this.includes = includes;
 		return this;
 	}
-	
+
 	public CompileGTestCommand sources(List<String> sources) {
 		this.sources  = sources;
 		return this;
 	}
-	
+
 	public CompileGTestCommand compiler(String compiler) {
 		this.compiler = compiler;
 		return this;
 	}
-	
+
 	public CompileGTestCommand program(String program) {
 		this.program = program;
 		return this;
 	}
-
+	
 	public CompileGTestCommand makefileDir(String makefileDir) {
 		this.makefileDir = makefileDir;
 		return this;
 	}
-	
+
 	public CompileGTestCommand mainLib(String mainLib) {
 		this.mainLib = mainLib;
 		return this;
 	}
-	
+
 	public List<String> build() {
 		List<String> command = new ArrayList<>();
 		if (makefileDir != null) {
 			try {
 				generateMakefile();
 				command.add("make");
-				command.add("-j");
+				command.add("-j4");
 				System.out.println(command);
 				return command;
 			} catch (IOException e) {
@@ -82,7 +82,7 @@ public class CompileGTestCommand {
 		command.add(compiler);
 		command.add("-o");
 		command.add(getFileName(program));
-		command.add("-O0");
+		command.add("-O1");
 		if (dir != null)
 			command.add("-I" + dir + "/include");
 		for (String include : includes) {
@@ -103,38 +103,38 @@ public class CompileGTestCommand {
 		command.add("-lstdc++");
 		command.add("-pthread");
 		// command.add("-pg");
-		
+
 		System.out.println(command);
 		return command;
 	}
-	
+
 	protected void generateMakefile() throws IOException {
 		MakefileGenerator makefile = new MakefileGenerator(Paths.get(makefileDir, "Makefile"));
 		Map<String, String> oFiles = new HashMap<>();
 		for (String sourceFile : sources) {
 			oFiles.put(sourceFile, objectFileName(sourceFile));
 		}
-		
-		makefile.addJob("all", oFiles.values(), linkingCommand(oFiles.values()));
 
+		makefile.addJob("all", oFiles.values(), linkingCommand(oFiles.values()));
+		
 		for (String sourceFile : sources) {
 			makefile.addJob(oFiles.get(sourceFile), compileCommand(sourceFile, oFiles.get(sourceFile)));
 		}
-
+		
 		makefile.generate();
 	}
-
+	
 	/*
 	 * Used for Makefile generating
 	 */
 	protected String objectFileName(String sourceFilename) {
 		return sourceFilename.replace(".", "") + ".o";
 	}
-
+	
 	protected String linkingCommand(Iterable<String> objectFiles) {
 		StringBuilder command = new StringBuilder();
-		command.append("g++");
-		command.append(" -o ").append(getFileName(program)).append(" -O2");
+		command.append(compiler);
+		command.append(" -o ").append(getFileName(program));
 		for (String o : objectFiles) {
 			command.append(" ").append(o);
 		}
@@ -150,17 +150,13 @@ public class CompileGTestCommand {
 		command.append(" -lm -lstdc++ -pthread");
 		return command.toString();
 	}
-
+	
 	protected String compileCommand(String sourceFile, String objectFile) {
 		StringBuilder command = new StringBuilder();
-		String gcc = "gcc";
-		if (!sourceFile.endsWith(".c")) {
-			gcc = "g++";
-		}
-		command.append(gcc).append(" -c").append(" -o ").append(objectFile).append(" ").append(sourceFile);
+		command.append(compiler).append(" -c").append(" -o ").append(objectFile).append(" -O1 ").append(sourceFile);
 		return command.toString();
 	}
-	
+
 	protected String getFileName(String path) {
 		return new Path(path).lastSegment();
 	}
