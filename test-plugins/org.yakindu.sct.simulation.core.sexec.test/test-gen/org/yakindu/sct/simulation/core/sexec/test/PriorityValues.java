@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for PriorityValues
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class PriorityValues extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("PriorityValues.sct");
@@ -28,7 +30,7 @@ public class PriorityValues extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
 		raiseEvent("event1");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("C"));
 	}
 	@Test
@@ -36,7 +38,7 @@ public class PriorityValues extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
 		raiseEvent("event2");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("B"));
 		assertTrue(!isStateActive("E"));
 	}

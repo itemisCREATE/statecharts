@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for EntryChoice
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class EntryChoice extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("EntryChoice.sct");
@@ -26,8 +28,8 @@ public class EntryChoice extends AbstractExecutionFlowTest {
 	@Test
 	public void entryChoiceTest() throws Exception {
 		interpreter.enter();
-		interpreter.runCycle();
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("A"));
 	}
 }

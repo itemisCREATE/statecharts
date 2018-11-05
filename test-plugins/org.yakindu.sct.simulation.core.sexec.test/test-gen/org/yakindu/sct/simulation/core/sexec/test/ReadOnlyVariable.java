@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for ReadOnlyVariable
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class ReadOnlyVariable extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("ReadOnlyVariable.sct");
@@ -35,7 +37,7 @@ public class ReadOnlyVariable extends AbstractExecutionFlowTest {
 		assertTrue(getString("A.myString").equals("testString"));
 		assertTrue(getBoolean("A.myBool") == true);
 		assertTrue(getReal("A.myReal") == 1.1);
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("StateB"));
 		assertTrue(getInteger("myInt") == 100l);
 		assertTrue(getString("myString").equals("fail"));

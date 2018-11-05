@@ -1,15 +1,16 @@
 
 h1{%EARLY_SEPARATOR%}. 
 
-==<div style="counter-reset: h1 4">==
-
 ==<div class="pro-feature">==
 
 h1(#scxml_integration). SCXML Domain
 
-h2(#scxml_introduction). Introduction
+YAKINDU Statechart Tools Professional Edition comes with an _SCXML domain_ which allows to generate SCXML code from your statechart, as well as to simulate and test it in a way that is compliant to the SCXML execution semantics. 
 
-The YAKINDU Statechart Tools Professional Edition comes with an _SCXML domain_ which allows to generate SCXML code from your statechart as well as to simulate and test it in a way that is compliant to the SCXML execution semantics. 
+
+
+
+h2(#scxml_introduction). Introduction
 
 SCXML, short for State Chart XML, is a statechart interchange format. It is based on XML and has been "standardized by the W3C":https://www.w3.org/TR/scxml/. This standardization makes statecharts highly portable and independent of a particular implementation. The prerequisite is of course that the respective execution environment corresponds to the SCXML specification.
 
@@ -28,12 +29,13 @@ bc.
 
 ==</div>==
 
-
 The XML defines all the states, transitions, events and variables used in the state machine. Besides the state machine’s structural elements, the SCXML standard also defines the execution semantics of that state machine. And this is one of the biggest advantages of SCXML – the same statechart model can run on different SCXML engines on different platforms and it always behaves in exactly the same way – as long as the engines conform to the specified execution semantics.
 
 SCXML is supported on nearly all platforms. For Java, Apache Commons SCXML is the most popular SCXML Engine. There are even SCXML engines written in JavaScript to be used in web applications, like SCION. Another very popular platform that uses SCXML for Human Machine Interfaces is the SCXML Interpreter for Qt.
 
 To use the SCXML domain, just select it on the domain selection page when creating a new statechart. Alternatively, you can select it in the statechart's property view. When using the SCXML domain, everything will by fully compliant with the SCXML standard. We adapted the built-in simulation engine to reflect the SCXML execution semantics, and of course the SCTUnit framework also supports the SCXML standard. Thus, you can be sure that your SCTUnit test results exactly reflect the behavior of the SCXML engine of your choice.
+
+
 
 
 h2(#scxml_codegen). SCXML code generation
@@ -63,10 +65,11 @@ This example will generate the XML file into the "gen" folder of your "scxml.exa
 
 You can also omit the _targetProject_ attribute and specify a path on your file system. The path can be absolute or relative to the generator model location.
 
+
+
+
 h2(#scxml_simulation). Simulating and testing SCXML statecharts
 
 Statecharts with the SCXML domain can also be simulated in the same way standard statecharts are simulated. The only difference is that the YAKINDU simulation engine will use the Apache Commons SCXML engine under the hood. This ensures that the simulation shows the same behavior as when using the SCXML model in other contexts. The same holds for using our test framework _SCTUnit_ with an SCXML statechart.
-
-==</div>==
 
 ==</div>==

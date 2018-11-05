@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for ShallowHistory
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class ShallowHistory extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("ShallowHistory.sct");
@@ -27,33 +29,33 @@ public class ShallowHistory extends AbstractExecutionFlowTest {
 	public void shallowHistoryTest() throws Exception {
 		interpreter.enter();
 		raiseEvent("event1");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		raiseEvent("event3");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		raiseEvent("event5");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		raiseEvent("event7");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(!isStateActive("State1"));
 		assertTrue(isStateActive("State9"));
 		raiseEvent("event6");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(!isStateActive("State9"));
 		assertTrue(isStateActive("State6"));
 		raiseEvent("event5");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(!isStateActive("State8"));
 		assertTrue(isStateActive("State9"));
 		raiseEvent("event2");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(!isStateActive("State9"));
 		assertTrue(isStateActive("State1"));
 		raiseEvent("event1");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("State6"));
 		assertTrue(!isStateActive("State1"));
 		raiseEvent("event5");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(!isStateActive("State6"));
 		assertTrue(isStateActive("State9"));
 	}

@@ -13,9 +13,13 @@
 
 prefix="http://localhost:8082/"
 target="eclipsehelp"
+productionWebsite="https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide/ \
+                   https://www.itemis.com/en/yakindu/state-machine/documentation/tutorials/"
+sandboxWebsite="http://761475.hs-sites.com/en/yakindu/state-machine/documentation/user-guide/ \
+                http://761475.hs-sites.com/en/yakindu/state-machine/documentation/tutorials/"
 
 usage() {
-    echo "Usage: $0 { --eclipsehelp | --web | --help }"
+    echo "Usage: $0 { --eclipsehelp | --web  | --sandbox | --help }"
     exit $1
 }
 
@@ -29,6 +33,12 @@ do
             ;;
 	-w | --web)
             target="web"
+	    website="${productionWebsite}"
+	    shift
+            ;;
+	-s | --sandbox)
+            target="sandbox"
+	    website="${sandboxWebsite}"
 	    shift
             ;;
 	-h | --help)
@@ -69,13 +79,12 @@ then
 	${prefix}user-guide/statechart_language.html \
 	${prefix}tutorials/tutorials.html \
 	2>&1 | tee log.txt
-elif [ "${target}" == "web" ]
+elif [ "${target}" == "web" -o "${target}" == "sandbox" ]
 then
     checklink --broken --dir-redirects \
 	--recursive --depth 1 \
 	--exclude "${commonExcludes}"'|http://github.com/Yakindu/statecharts.*' \
-	https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide/ \
-	https://www.itemis.com/en/yakindu/state-machine/documentation/tutorials/ \
+	${website} \
         2>&1 | tee log.txt
 else
     echo "Unknown target: ${target}"

@@ -31,6 +31,14 @@ GeneratorModel for sctunit::interpreter {
 			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
 		}
 	}
+	
+	test BitwiseExecutionOrder {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test"
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
+		}
+	}
 
 	test BooleanExpressions {
 
@@ -160,8 +168,24 @@ GeneratorModel for sctunit::interpreter {
 		}
 	}
 
+	test ExitSequence {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test"
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
+		}
+	}
+
 	test FeatureCalls {
 
+		feature Outlet {
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test"
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
+		}
+	}
+	
+	test FloatModulo {
+		
 		feature Outlet {
 			targetProject = "org.yakindu.sct.simulation.core.sexec.test"
 			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
@@ -247,6 +271,14 @@ GeneratorModel for sctunit::interpreter {
 			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
 		}
 	}
+	
+	test LocalEvents {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test"
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
+		}
+	}
 
 	test LogicalAndTests {
 
@@ -280,13 +312,13 @@ GeneratorModel for sctunit::interpreter {
 		}
 	}
 
-//	test OperationsTest {
-//
-//		feature Outlet {
-//			targetProject = "org.yakindu.sct.simulation.core.sexec.test"
-//			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
-//		}
-//	}
+	test OperationsTest {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test"
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
+		}
+	}
 
 //	test OperationsWithoutBraces {
 //

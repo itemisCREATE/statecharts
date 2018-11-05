@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for HistoryWithoutInitialStep
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class HistoryWithoutInitialStep extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("HistoryWithoutInitialStep.sct");
@@ -28,7 +30,7 @@ public class HistoryWithoutInitialStep extends AbstractExecutionFlowTest {
 		init();
 		assertTrue(isStateActive("C"));
 		raiseEvent("next");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("D"));
 	}
 	@Test
@@ -36,29 +38,37 @@ public class HistoryWithoutInitialStep extends AbstractExecutionFlowTest {
 		init();
 		assertTrue(isStateActive("C"));
 		raiseEvent("toA");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("A"));
 		raiseEvent("toHistory");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("C"));
 	}
 	@Test
 	public void enterDThroughHistory() throws Exception {
 		init();
 		raiseEvent("next");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("D"));
 		raiseEvent("toA");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("A"));
 		raiseEvent("toHistory");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("D"));
+	}
+	@Test
+	public void enterThroughHistoryWithoutInit() throws Exception {
+		interpreter.enter();
+		assertTrue(isStateActive("A"));
+		raiseEvent("toHistory");
+		timer.timeLeap(getCyclePeriod());
+		assertTrue(isStateActive("C"));
 	}
 	public void init() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
 		raiseEvent("toB");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 	}
 }

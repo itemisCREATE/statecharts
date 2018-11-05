@@ -1,8 +1,6 @@
 
 p. 
 
-==<div style="counter-reset: h1 5">==
-
 h1(#sclang_statechart_language_reference). Statechart language reference
 
 The statechart language is used to describe statecharts. It consists both of graphical and of textual elements.
@@ -445,7 +443,7 @@ p=. Orthogonal states
 
 h3(#sclang_shallow_history_states). Shallow history states
 
-A *shallow history state* is a pseudo state that is placed inside the region of a composite. It is used to remember the last active state inside a composite state. This makes it possible to jump back to the remembered state instead of starting at the inner initial state again.
+A *shallow history state* is a pseudo state that is placed inside the region of a composite state. It is used to remember the last active state inside a composite state. This makes it possible to jump back to the remembered state instead of starting at the inner initial state again.
 
 A history state saves the current state exactly when its containing region is left. A shallow history state saves the state of the current level only. If you need to save the status of multiple nested composite states, use a "deep history state":#sclang_deep_history_states.
 
@@ -561,7 +559,7 @@ Variables that are defined in a named interface have to be referenced using the 
 
 Variables are always typed, see section "&quot;Types&quot;":#sclang_types.
 
-Variables can be made _readonly_ by client code. Such variables are marked by the @readonly@ keyword. Please note that the readonly restriction is imposed on the client code only. Readonly variables can still be modified from within the statechart.
+Variables can be marked by the @readonly@ keyword, which has the effect that client code can only read them. Please note that this restriction is imposed on the client code only. Readonly variables can still be modified from within the statechart.
 
 bc. var readonly pi: real = 3.1415
 
@@ -573,7 +571,7 @@ bc. var readonly pi: real = 3.1415
 
 h3(#sclang_constants). Constants
 
-A variable can be immutable, i.e., *constant*. Such variables are marked by the @const@ keyword and can neither be modified by the client code nor from within the statechart.
+A variable can be immutable, i.e., *constant*. Such variables are marked by the @const@ keyword. They can neither be modified by the client code nor from within the statechart.
 
 bc. const variable1: real
 
@@ -1571,5 +1569,3 @@ p(#sclang_fig_expressions_grammar).
 !images/docu_grammar_010_expressions.png(Expressions grammar)!
 
 p=. Expressions grammar
-
-==</div>==

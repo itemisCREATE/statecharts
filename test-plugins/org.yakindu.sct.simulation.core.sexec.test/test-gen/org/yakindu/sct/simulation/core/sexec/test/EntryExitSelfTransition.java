@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for EntryExitSelfTransition
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class EntryExitSelfTransition extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("EntryExitSelfTransition.sct");
@@ -27,7 +29,7 @@ public class EntryExitSelfTransition extends AbstractExecutionFlowTest {
 	public void selfTransitionToChildState() throws Exception {
 		init();
 		raiseEvent("e");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(getInteger("entries") == 1l);
 		assertTrue(getInteger("exits") == 1l);
 		assertTrue(isStateActive("C"));
@@ -37,12 +39,12 @@ public class EntryExitSelfTransition extends AbstractExecutionFlowTest {
 	public void selfTransitionFromChildState() throws Exception {
 		init();
 		raiseEvent("e1");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(getInteger("entries") == 0l);
 		assertTrue(getInteger("exits") == 0l);
 		assertTrue(isStateActive("C"));
 		raiseEvent("e1");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("B"));
 		assertTrue(getInteger("entries") == 1l);
 		assertTrue(getInteger("exits") == 1l);
@@ -50,7 +52,7 @@ public class EntryExitSelfTransition extends AbstractExecutionFlowTest {
 	}
 	public void init() throws Exception {
 		interpreter.enter();
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(getInteger("entries") == 1l);
 		assertTrue(isStateActive("B"));
 		setInteger("entries", 0l);

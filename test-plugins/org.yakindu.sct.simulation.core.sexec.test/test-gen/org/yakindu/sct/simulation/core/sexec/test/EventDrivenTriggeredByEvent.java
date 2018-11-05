@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for EventDrivenTriggeredByEvent
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class EventDrivenTriggeredByEvent extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("eventdriven/EventDrivenTriggeredByEvent.sct");
@@ -39,7 +41,7 @@ public class EventDrivenTriggeredByEvent extends AbstractExecutionFlowTest {
 	public void proceedTimeDoesNotTriggerRunCycle() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
-		/*not implemented - sorry :(*/
+		timer.timeLeap(120000);
 		assertTrue(getInteger("x") == 0l);
 		interpreter.exit();
 	}

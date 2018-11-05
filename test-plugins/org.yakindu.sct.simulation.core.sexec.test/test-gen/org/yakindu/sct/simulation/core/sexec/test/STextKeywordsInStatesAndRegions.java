@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for STextKeywordsInStatesAndRegions
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class STextKeywordsInStatesAndRegions extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("STextKeywordsInStatesAndRegions.sct");
@@ -47,7 +49,7 @@ public class STextKeywordsInStatesAndRegions extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("always"));
 		assertTrue(isStateActive("raise"));
 		raiseEvent("e1");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("namespace"));
 		assertTrue(isStateActive("internal"));
 		assertTrue(isStateActive("event"));
@@ -69,7 +71,7 @@ public class STextKeywordsInStatesAndRegions extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("always"));
 		assertTrue(isStateActive("raise"));
 		raiseEvent("e2");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("namespace"));
 		assertTrue(isStateActive("internal"));
 		assertTrue(isStateActive("local"));
@@ -91,7 +93,7 @@ public class STextKeywordsInStatesAndRegions extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("always"));
 		assertTrue(isStateActive("raise"));
 		raiseEvent("e1");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("namespace"));
 		assertTrue(isStateActive("internal"));
 		assertTrue(isStateActive("local"));
@@ -113,7 +115,7 @@ public class STextKeywordsInStatesAndRegions extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("always"));
 		assertTrue(isStateActive("raise"));
 		raiseEvent("e2");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("namespace"));
 		assertTrue(isStateActive("internal"));
 		assertTrue(isStateActive("local"));
@@ -135,7 +137,7 @@ public class STextKeywordsInStatesAndRegions extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("always"));
 		assertTrue(isStateActive("raise"));
 		raiseEvent("e1");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("namespace"));
 		assertTrue(isStateActive("internal"));
 		assertTrue(isStateActive("local"));
@@ -157,7 +159,7 @@ public class STextKeywordsInStatesAndRegions extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("always"));
 		assertTrue(isStateActive("raise"));
 		raiseEvent("e2");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("namespace"));
 		assertTrue(isStateActive("internal"));
 		assertTrue(isStateActive("local"));
@@ -179,7 +181,7 @@ public class STextKeywordsInStatesAndRegions extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("always"));
 		assertTrue(isStateActive("raise"));
 		raiseEvent("e1");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("namespace"));
 		assertTrue(isStateActive("internal"));
 		assertTrue(isStateActive("local"));
@@ -201,7 +203,7 @@ public class STextKeywordsInStatesAndRegions extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("always"));
 		assertTrue(isStateActive("raise"));
 		raiseEvent("e2");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("namespace"));
 		assertTrue(isStateActive("internal"));
 		assertTrue(isStateActive("local"));
@@ -223,7 +225,7 @@ public class STextKeywordsInStatesAndRegions extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("always"));
 		assertTrue(isStateActive("raise"));
 		raiseEvent("e1");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("namespace"));
 		assertTrue(isStateActive("internal"));
 		assertTrue(isStateActive("local"));
@@ -245,7 +247,7 @@ public class STextKeywordsInStatesAndRegions extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("always"));
 		assertTrue(isStateActive("raise"));
 		raiseEvent("e2");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("namespace"));
 		assertTrue(isStateActive("internal"));
 		assertTrue(isStateActive("local"));
@@ -267,7 +269,7 @@ public class STextKeywordsInStatesAndRegions extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("always"));
 		assertTrue(isStateActive("raise"));
 		raiseEvent("e1");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("namespace"));
 		assertTrue(isStateActive("internal"));
 		assertTrue(isStateActive("local"));
@@ -289,7 +291,7 @@ public class STextKeywordsInStatesAndRegions extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("always"));
 		assertTrue(isStateActive("raise"));
 		raiseEvent("e2");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("namespace"));
 		assertTrue(isStateActive("internal"));
 		assertTrue(isStateActive("local"));
@@ -311,7 +313,7 @@ public class STextKeywordsInStatesAndRegions extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("always"));
 		assertTrue(isStateActive("raise"));
 		raiseEvent("e1");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("namespace"));
 		assertTrue(isStateActive("internal"));
 		assertTrue(isStateActive("local"));
@@ -333,7 +335,7 @@ public class STextKeywordsInStatesAndRegions extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("always"));
 		assertTrue(isStateActive("raise"));
 		raiseEvent("e2");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("namespace"));
 		assertTrue(isStateActive("internal"));
 		assertTrue(isStateActive("local"));
@@ -355,7 +357,7 @@ public class STextKeywordsInStatesAndRegions extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("always"));
 		assertTrue(isStateActive("raise"));
 		raiseEvent("e1");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("namespace"));
 		assertTrue(isStateActive("internal"));
 		assertTrue(isStateActive("local"));
@@ -377,7 +379,7 @@ public class STextKeywordsInStatesAndRegions extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("always"));
 		assertTrue(isStateActive("raise"));
 		raiseEvent("e2");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("namespace"));
 		assertTrue(isStateActive("internal"));
 		assertTrue(isStateActive("local"));
@@ -399,7 +401,7 @@ public class STextKeywordsInStatesAndRegions extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("always"));
 		assertTrue(isStateActive("raise"));
 		raiseEvent("e1");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("namespace"));
 		assertTrue(isStateActive("internal"));
 		assertTrue(isStateActive("local"));
@@ -421,7 +423,7 @@ public class STextKeywordsInStatesAndRegions extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("always"));
 		assertTrue(isStateActive("raise"));
 		raiseEvent("e2");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("namespace"));
 		assertTrue(isStateActive("internal"));
 		assertTrue(isStateActive("local"));
@@ -443,7 +445,7 @@ public class STextKeywordsInStatesAndRegions extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("oncycle"));
 		assertTrue(isStateActive("raise"));
 		raiseEvent("e1");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("namespace"));
 		assertTrue(isStateActive("internal"));
 		assertTrue(isStateActive("local"));
@@ -465,7 +467,7 @@ public class STextKeywordsInStatesAndRegions extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("oncycle"));
 		assertTrue(isStateActive("valueof"));
 		raiseEvent("e2");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("namespace"));
 		assertTrue(isStateActive("internal"));
 		assertTrue(isStateActive("local"));
