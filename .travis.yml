@@ -51,7 +51,6 @@ before_script:
  - cd ccache-3.5
  - ./configure
  - make
- - make install
  - cp ccache ..
  - cd ..
  - ln -s ccache gcc
