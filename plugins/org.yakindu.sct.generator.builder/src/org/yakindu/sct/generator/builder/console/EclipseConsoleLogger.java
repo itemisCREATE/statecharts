@@ -50,16 +50,18 @@ public class EclipseConsoleLogger implements IConsoleLogger {
 
 	private MessageConsole getConsole() {
 		ConsolePlugin plugin = ConsolePlugin.getDefault();
-		IConsoleManager conMan = plugin.getConsoleManager();
-		IConsole[] existing = conMan.getConsoles();
+		IConsoleManager consoleManager = plugin.getConsoleManager();
+		IConsole[] existing = consoleManager.getConsoles();
 		for (int i = 0; i < existing.length; i++) {
 			if (SCT_GENERATOR_CONSOLE.equals(existing[i].getName())) {
-				return (MessageConsole) existing[i];
+				MessageConsole console = (MessageConsole) existing[i];
+				consoleManager.showConsoleView(console);
 			}
 		}
-		MessageConsole myConsole = new MessageConsole(SCT_GENERATOR_CONSOLE, null);
-		conMan.addConsoles(new IConsole[] { myConsole });
-		return myConsole;
+		MessageConsole newConsole = new MessageConsole(SCT_GENERATOR_CONSOLE, null);
+		consoleManager.addConsoles(new IConsole[] { newConsole });
+		consoleManager.showConsoleView(newConsole);
+		return newConsole;
 	}
 
 	public void close() {
