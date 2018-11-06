@@ -6,10 +6,11 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.ui.editor.editparts;
 
+import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
@@ -23,22 +24,31 @@ import org.eclipse.gef.commands.UnexecutableCommand;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ConstrainedToolbarLayoutEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
+import org.eclipse.gmf.runtime.diagram.ui.l10n.DiagramColorRegistry;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.preference.PreferenceConverter;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.RGB;
+import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.editor.figures.RegionFigure;
 import org.yakindu.sct.ui.editor.editparts.tracker.NonRevealingDragEditPartsTrackerEx;
 import org.yakindu.sct.ui.editor.policies.PreferredSizeHandlerEditPolicy;
 import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
+import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 
 /**
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
-public class RegionEditPart extends ShapeNodeEditPart {
+public class RegionEditPart extends ShapeNodeEditPart implements IPropertyChangeListener {
 
 	public RegionEditPart(View view) {
 		super(view);
@@ -76,6 +86,34 @@ public class RegionEditPart extends ShapeNodeEditPart {
 			}
 		}
 		return super.getTargetEditPart(request);
+	}
+
+	@Override
+	protected void refreshBackgroundColor() {
+		IPreferenceStore store = DiagramActivator.getDefault().getPreferenceStore();
+		RGB color = PreferenceConverter.getColor(store, StatechartPreferenceConstants.PREF_REGION_BACKGROUND);
+		setBackgroundColor(DiagramColorRegistry.getInstance().getColor(color));
+	}
+	
+	@Override
+	protected void setBackgroundColor(Color c) {
+		super.setBackgroundColor(c);
+		Figure figure = getPrimaryShape();
+		figure.setBackgroundColor(c);
+	}
+
+	@Override
+	protected void refreshForegroundColor() {
+		IPreferenceStore store = DiagramActivator.getDefault().getPreferenceStore();
+		RGB color = PreferenceConverter.getColor(store, StatechartPreferenceConstants.PREF_REGION_LINE);
+		setForegroundColor(DiagramColorRegistry.getInstance().getColor(color));
+	}
+
+	@Override
+	protected void setForegroundColor(Color color) {
+		super.setForegroundColor(color);
+		Figure figure = getPrimaryShape();
+		figure.setForegroundColor(color);
 	}
 
 	@Override
@@ -126,5 +164,26 @@ public class RegionEditPart extends ShapeNodeEditPart {
 			return FigureUtilities.RGBToInteger(StatechartColorConstants.REGION_BG_COLOR.getRGB());
 		}
 		return super.getPreferredValue(feature);
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent event) {
+		if (StatechartPreferenceConstants.PREF_REGION_BACKGROUND.equals(event.getProperty())) {
+			refreshVisuals();
+		} else if (StatechartPreferenceConstants.PREF_REGION_LINE.equals(event.getProperty())) {
+			refreshVisuals();
+		}
+	}
+	
+	@Override
+	public void activate() {
+		DiagramActivator.getDefault().getPreferenceStore().addPropertyChangeListener(this);
+		super.activate();
+	}
+
+	@Override
+	public void deactivate() {
+		DiagramActivator.getDefault().getPreferenceStore().removePropertyChangeListener(this);
+		super.deactivate();
 	}
 }
