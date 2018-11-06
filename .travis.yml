@@ -58,6 +58,8 @@ before_script:
  - ln -s ccache cc
  - ln -s ccache c++
  - export PATH=$PWD:$PATH
+# Display ccache usage statistics before build
+ - ccache -s
  - cd $TRAVIS_BUILD_DIR
 before_install:
 - sh -e /etc/init.d/xvfb start - sleep 10
