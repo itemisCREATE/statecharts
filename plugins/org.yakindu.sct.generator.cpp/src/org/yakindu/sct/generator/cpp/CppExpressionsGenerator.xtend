@@ -72,7 +72,7 @@ class CppExpressionsGenerator extends CExpressionsGenerator {
 	
 	override dispatch CharSequence code(LogicalRelationExpression it) '''
 	«IF isSame(leftOperand.infer.type, getType(GenericTypeSystem.STRING))»
-		«leftOperand.code» == «rightOperand.code»
+		(strcmp(«leftOperand.code», «rightOperand.code») «operator.literal» 0)
 	«ELSE»(«leftOperand.code») «operator.literal» («rightOperand.code»)«ENDIF»'''
 	
 
