@@ -178,7 +178,6 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		suppressKeywords.addAll(getKeywords(grammarAccess.getLocalReactionAccess().getGroup().eContents()));
 		suppressKeywords.addAll(getKeywords(grammarAccess.getAlwaysEventAccess().getGroup().eContents()));
 		suppressKeywords.addAll(getKeywords(grammarAccess.getTimeEventTypeAccess().getAlternatives().eContents()));
-		suppressKeywords.add(grammarAccess.getDirectionAccess().getLOCALLocalKeyword_0_0());
 	}
 	
 	protected void suppressKeywords(List<Keyword> suppressKeywords, FeatureCall featureCall) {
@@ -196,9 +195,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	}
 	
 	protected void suppressKeywords(List<Keyword> suppressKeywords, InternalScope model) {
-		suppressKeywords.add(grammarAccess.getDirectionAccess().getLOCALLocalKeyword_0_0());
-		suppressKeywords.add(grammarAccess.getDirectionAccess().getINInKeyword_1_0());
-		suppressKeywords.add(grammarAccess.getDirectionAccess().getOUTOutKeyword_2_0());
+		suppressKeywords.add(grammarAccess.getDirectionAccess().getINInKeyword_0_0());
+		suppressKeywords.add(grammarAccess.getDirectionAccess().getOUTOutKeyword_1_0());
 	}
 	
 	protected List<Keyword> getKeywords(EList<EObject> list) {
@@ -304,8 +302,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	}
 	
 	protected StyledString getPackageImportStyleString(URI uri) {
-		String headerFilePath = uri.isPlatform() ? uri.toPlatformString(true) : uri.toFileString();
-		StyledString secondPart = new StyledString(" - " + headerFilePath, new GreyoutStyler());
+		String filePath = uri.isPlatform() ? uri.toPlatformString(true) : uri.toFileString();
+		StyledString secondPart = new StyledString(" - " + filePath, new GreyoutStyler());
 		return secondPart;
 	}
 	

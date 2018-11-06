@@ -1,8 +1,6 @@
 
 p. 
 
-==<div style="counter-reset: h1 0">==
-
 h1(#overview_what_are_yakindu_statechart_tools). What are YAKINDU Statechart Tools?
 
 YAKINDU Statechart Tools (YAKINDU SCT) is a modular toolkit for developing, simulating, and generating executable "_finite-state machines (FSM)_":https://en.wikipedia.org/wiki/Finite-state_machine or simply _state machines_. State machines are useful for the model-driven development of so-called event-discrete systems, i.e., systems that are always in exactly one state of a finite number of states. State machines are particularly well-suited for embedded systems, but they are in no way restricted to them.
@@ -57,5 +55,3 @@ h2(#overview_who_is_using_yakindu_statechart_tools). Who is using YAKINDU Statec
 Initially YAKINDU Statechart Tools have been designed for the embedded systems industry: automotive, system controls, vending machines etc. However, YAKINDU Statechart Tools are bringing the benefits of finite-state machines (FSM) and Harel statecharts to everyone who needs to design, simulate and develop behavior. People can use YAKINDU Statechart Tools to generate Java, C, or C++ code.
 
 ###. CHECK: Does YSCT provide code generators for C, C++, and Java?
-
-==</div>==

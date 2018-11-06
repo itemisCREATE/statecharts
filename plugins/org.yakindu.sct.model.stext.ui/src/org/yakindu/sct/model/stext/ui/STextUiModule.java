@@ -35,11 +35,12 @@ import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.ui.tasks.TaskMarkerCreator;
 import org.eclipse.xtext.ui.tasks.TaskMarkerTypeProvider;
 import org.yakindu.base.utils.jface.help.CrossRefObjectTextHover;
+import org.yakindu.base.utils.jface.help.HelpHoverProvider;
+import org.yakindu.base.utils.jface.help.HelpHoverProvider.OpenInHelpAction;
 import org.yakindu.sct.model.stext.ui.contentassist.AsyncContentAssistContextFactory;
 import org.yakindu.sct.model.stext.ui.contentassist.AsyncXtextContentAssistProcessor;
 import org.yakindu.sct.model.stext.ui.contentassist.STextStatefulFactory;
 import org.yakindu.sct.model.stext.ui.document.TransactionalXtextDocument;
-import org.yakindu.sct.model.stext.ui.help.CustomCSSHelpHoverProvider;
 import org.yakindu.sct.model.stext.ui.help.STextUserHelpDocumentationProvider;
 import org.yakindu.sct.model.stext.ui.highlighting.SCTHighlightingConfiguration;
 import org.yakindu.sct.model.stext.ui.hyperlink.PackageImportHyperlinkHelper;
@@ -80,14 +81,14 @@ public class STextUiModule extends org.yakindu.sct.model.stext.ui.AbstractSTextU
 	}
 
 	public Class<? extends IEObjectHoverProvider> bindIEObjectHoverProvider() {
-		return CustomCSSHelpHoverProvider.class;
+		return HelpHoverProvider.class;
 	}
 
 	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
-		binder.bind(String.class).annotatedWith(Names.named("stylesheet")).toInstance("/StextHoverStyleSheet.css");
 		binder.bind(String.class).annotatedWith(Names.named("domain.id")).toInstance("org.yakindu.sct.domain");
+		binder.bind(String.class).annotatedWith(Names.named(OpenInHelpAction.CONTEXTID)).toInstance("org.yakindu.sct.ui.editor.stext_keyword");
 		binder.bind(XtextDocument.class).to(TransactionalXtextDocument.class);
 		binder.bind(TaskMarkerCreator.class).to(SCTTaskMarkerCreator.class);
 		binder.bind(TaskMarkerTypeProvider.class).to(SCTTaskMarkerTypeProvider.class);

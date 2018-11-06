@@ -165,13 +165,13 @@ public class DomainImpl implements IDomain {
 	public Module getModule(String feature, String... options) {
 		List<Module> modules = new ArrayList<>();
 		for (ModuleContribution module : this.modules) {
-			if (feature.equals(module.getFeature())) {
+			if (feature.equals(module.getFeature()) || "all".equals(module.getFeature())) {
 				modules.add(module.getModuleProvider().getModule(options));
 			}
 		}
 
 		if (modules.size() == 0) {
-			//If no overriding modules are contributed for this feature use the defaults
+			// If no overriding modules are contributed for this feature use the defaults
 			return DomainRegistry.getDomain(BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral())
 					.getModule(feature, options);
 		}

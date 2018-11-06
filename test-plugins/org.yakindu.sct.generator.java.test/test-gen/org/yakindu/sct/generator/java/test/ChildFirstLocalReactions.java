@@ -47,6 +47,7 @@ public class ChildFirstLocalReactions {
 		assertTrue(statemachine.getA_local() == 3l);
 		assertTrue(statemachine.getSm_local() == 4l);
 	}
+	
 	@Test
 	public void expectParentLocalReactionOnChildLocalTransition() {
 		statemachine.enter();
@@ -59,6 +60,7 @@ public class ChildFirstLocalReactions {
 		assertTrue(statemachine.getA_local() == 2l);
 		assertTrue(statemachine.getSm_local() == 3l);
 	}
+	
 	@Test
 	public void expectGrandparentLocalReactionOnParentLocalTransition() {
 		statemachine.enter();
@@ -72,6 +74,7 @@ public class ChildFirstLocalReactions {
 		assertTrue(statemachine.getA_local() == 2l);
 		assertTrue(statemachine.getSm_local() == 3l);
 	}
+	
 	@Test
 	public void expectNoLocalReactionOnGrandparentTransition() {
 		statemachine.enter();

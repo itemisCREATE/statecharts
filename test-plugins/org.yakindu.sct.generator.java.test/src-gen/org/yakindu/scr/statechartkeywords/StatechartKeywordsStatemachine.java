@@ -336,14 +336,6 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		this.operationCallback = operationCallback;
 	}
 	
-	private boolean check__lr0() {
-		return timeEvents[0];
-	}
-	
-	private void effect__lr0() {
-		setTimerVariable(getTimerVariable() + 1);
-	}
-	
 	/* Entry action for statechart 'StatechartKeywords'. */
 	private void entryAction() {
 		timer.setTimer(this, 0, 1 * 1000, true);
@@ -382,16 +374,29 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		}
 	}
 	
-	/* The reactions of state Timer. */
-	private void react_main_region_Timer() {
-		if (check__lr0()) {
-			effect__lr0();
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_main_region__entry_Default() {
 		enterSequence_main_region_Timer_default();
+	}
+	
+	private boolean react(boolean try_transition) {
+		if (timeEvents[0]) {
+			setTimerVariable(getTimerVariable() + 1);
+		}
+		return false;
+	}
+	
+	private boolean main_region_Timer_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
 	}
 	
 	public void runCycle() {
@@ -402,7 +407,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_Timer:
-				react_main_region_Timer();
+				main_region_Timer_react(true);
 				break;
 			default:
 				// $NullState$

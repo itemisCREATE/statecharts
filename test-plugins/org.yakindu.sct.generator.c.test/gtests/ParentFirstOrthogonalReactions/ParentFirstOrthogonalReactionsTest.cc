@@ -8,10 +8,7 @@
 #include "ParentFirstOrthogonalReactionsRequired.h"
 #include "sc_timer_service.h"
 
-static sc_integer counter = 0l;
-static sc_integer checkFail = - 1l ;
 
-void setUp();
 sc_boolean checkA(sc_boolean ret);
 sc_boolean checkAA(sc_boolean ret);
 sc_boolean checkAAA(sc_boolean ret);
@@ -170,11 +167,6 @@ class ParentFirstOrthogonalReactionsTest : public ::testing::Test{
 	}
 };
 
-void setUp(){
-	counter = 0l;
-	nextMock->reset();
-	checkMock->reset();
-}
 sc_boolean checkA(sc_boolean ret){
 	parentFirstOrthogonalReactionsIface_set_cnt(&statechart,parentFirstOrthogonalReactionsIface_get_cnt(&statechart)+1l);
 	parentFirstOrthogonalReactionsIface_set_a_check(&statechart,parentFirstOrthogonalReactionsIface_get_cnt(&statechart));
@@ -234,7 +226,6 @@ TEST_F(ParentFirstOrthogonalReactionsTest, executionOrder) {
 	checkMock = new CheckMock();
 	checkMock->initializeBehavior();
 	
-	setUp();
 	checkMock->setCheckBehavior("A",&CheckMock::check1);
 	checkMock->setCheckBehavior("AA",&CheckMock::check2);
 	checkMock->setCheckBehavior("AAA",&CheckMock::check3);
@@ -270,7 +261,6 @@ TEST_F(ParentFirstOrthogonalReactionsTest, executionOrderWIthFirstLeafTransition
 	checkMock = new CheckMock();
 	checkMock->initializeBehavior();
 	
-	setUp();
 	checkMock->setCheckBehavior("A",&CheckMock::check1);
 	checkMock->setCheckBehavior("AA",&CheckMock::check2);
 	checkMock->setCheckBehavior("AAA",&CheckMock::check7);
@@ -306,7 +296,6 @@ TEST_F(ParentFirstOrthogonalReactionsTest, executionOrderWIthFirstParentTransiti
 	checkMock = new CheckMock();
 	checkMock->initializeBehavior();
 	
-	setUp();
 	checkMock->setCheckBehavior("A",&CheckMock::check1);
 	checkMock->setCheckBehavior("AA",&CheckMock::check8);
 	checkMock->setCheckBehavior("AAA",&CheckMock::check3);
@@ -342,7 +331,6 @@ TEST_F(ParentFirstOrthogonalReactionsTest, executionOrderWIthFirstGrandParentTra
 	checkMock = new CheckMock();
 	checkMock->initializeBehavior();
 	
-	setUp();
 	checkMock->setCheckBehavior("A",&CheckMock::check9);
 	checkMock->setCheckBehavior("AA",&CheckMock::check2);
 	checkMock->setCheckBehavior("AAA",&CheckMock::check3);
@@ -378,7 +366,6 @@ TEST_F(ParentFirstOrthogonalReactionsTest, executionOrderWithLastLeafTransition)
 	checkMock = new CheckMock();
 	checkMock->initializeBehavior();
 	
-	setUp();
 	checkMock->setCheckBehavior("A",&CheckMock::check1);
 	checkMock->setCheckBehavior("AA",&CheckMock::check2);
 	checkMock->setCheckBehavior("AAA",&CheckMock::check3);

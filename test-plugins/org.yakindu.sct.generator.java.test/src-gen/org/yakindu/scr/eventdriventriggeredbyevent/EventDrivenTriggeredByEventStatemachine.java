@@ -124,7 +124,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 	
 	/**
 	* Set the {@link ITimer} for the state machine. It must be set
-	* externally on a timed state machine before a run cycle can be correct
+	* externally on a timed state machine before a run cycle can be correctly
 	* executed.
 	* 
 	* @param timer
@@ -161,48 +161,6 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 	
 	public void setX(long value) {
 		sCInterface.setX(value);
-	}
-	
-	private boolean check_EventDrivenTriggeredByEvent_main_region_A_lr0_lr0() {
-		return true;
-	}
-	
-	private boolean check_EventDrivenTriggeredByEvent_main_region_A_tr0_tr0() {
-		return sCInterface.e;
-	}
-	
-	private boolean check_EventDrivenTriggeredByEvent_main_region_B_lr0_lr0() {
-		return true;
-	}
-	
-	private boolean check_EventDrivenTriggeredByEvent_main_region_B_lr1_lr1() {
-		return timeEvents[0];
-	}
-	
-	private boolean check_EventDrivenTriggeredByEvent_main_region_B_tr0_tr0() {
-		return sCInterface.e;
-	}
-	
-	private void effect_EventDrivenTriggeredByEvent_main_region_A_lr0_lr0() {
-		sCInterface.setX(sCInterface.getX() + 1);
-	}
-	
-	private void effect_EventDrivenTriggeredByEvent_main_region_A_tr0() {
-		exitSequence_EventDrivenTriggeredByEvent_main_region_A();
-		enterSequence_EventDrivenTriggeredByEvent_main_region_B_default();
-	}
-	
-	private void effect_EventDrivenTriggeredByEvent_main_region_B_lr0_lr0() {
-		sCInterface.setX(sCInterface.getX() + 1);
-	}
-	
-	private void effect_EventDrivenTriggeredByEvent_main_region_B_lr1_lr1() {
-		sCInterface.setX(sCInterface.getX() + 0);
-	}
-	
-	private void effect_EventDrivenTriggeredByEvent_main_region_B_tr0() {
-		exitSequence_EventDrivenTriggeredByEvent_main_region_B();
-		enterSequence_EventDrivenTriggeredByEvent_main_region_A_default();
 	}
 	
 	/* Entry action for state 'B'. */
@@ -261,55 +219,74 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 		}
 	}
 	
-	/* The reactions of state A. */
-	private void react_EventDrivenTriggeredByEvent_main_region_A() {
-		if (check_EventDrivenTriggeredByEvent_main_region_A_tr0_tr0()) {
-			effect_EventDrivenTriggeredByEvent_main_region_A_tr0();
-		} else {
-			effect_EventDrivenTriggeredByEvent_main_region_A_lr0_lr0();
-		}
-	}
-	
-	/* The reactions of state B. */
-	private void react_EventDrivenTriggeredByEvent_main_region_B() {
-		if (check_EventDrivenTriggeredByEvent_main_region_B_tr0_tr0()) {
-			effect_EventDrivenTriggeredByEvent_main_region_B_tr0();
-		} else {
-			effect_EventDrivenTriggeredByEvent_main_region_B_lr0_lr0();
-			if (check_EventDrivenTriggeredByEvent_main_region_B_lr1_lr1()) {
-				effect_EventDrivenTriggeredByEvent_main_region_B_lr1_lr1();
-			}
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_EventDrivenTriggeredByEvent_main_region__entry_Default() {
 		enterSequence_EventDrivenTriggeredByEvent_main_region_A_default();
+	}
+	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean eventDrivenTriggeredByEvent_main_region_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.e) {
+					exitSequence_EventDrivenTriggeredByEvent_main_region_A();
+					enterSequence_EventDrivenTriggeredByEvent_main_region_B_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+			sCInterface.setX(sCInterface.getX() + 1);
+		}
+		return did_transition;
+	}
+	
+	private boolean eventDrivenTriggeredByEvent_main_region_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.e) {
+					exitSequence_EventDrivenTriggeredByEvent_main_region_B();
+					enterSequence_EventDrivenTriggeredByEvent_main_region_A_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+			sCInterface.setX(sCInterface.getX() + 1);
+			
+			if (timeEvents[0]) {
+				sCInterface.setX(sCInterface.getX() + 0);
+			}
+		}
+		return did_transition;
 	}
 	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
-	
 		clearOutEvents();
-		singleCycle();
-		clearEvents();
-		
-	}
-	
-	protected void singleCycle() {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case eventDrivenTriggeredByEvent_main_region_A:
-				react_EventDrivenTriggeredByEvent_main_region_A();
+				eventDrivenTriggeredByEvent_main_region_A_react(true);
 				break;
 			case eventDrivenTriggeredByEvent_main_region_B:
-				react_EventDrivenTriggeredByEvent_main_region_B();
+				eventDrivenTriggeredByEvent_main_region_B_react(true);
 				break;
 			default:
 				// $NullState$
 			}
 		}
+		clearEvents();
 	}
 }

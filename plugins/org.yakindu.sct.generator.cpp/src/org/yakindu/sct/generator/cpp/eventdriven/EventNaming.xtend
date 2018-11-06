@@ -17,23 +17,25 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 
+import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
+
 /**
  * @author René Beckmann - Initial contribution and API
  */
-class EventNaming {
+class EventNaming extends org.yakindu.sct.generator.c.extensions.EventNaming {
 	@Inject extension CppNaming
 	@Inject extension SExecExtensions
 	@Inject extension INamingService
 	
-	def invalidEventEnumName(ExecutionFlow it) {
+	override invalidEventEnumName(ExecutionFlow it) {
 		'''«module»_invalid_event'''.toString.toLowerCase
 	}
 	
-	def eventEnumMemberName(Event it) {
+	override eventEnumMemberName(Event it) {
 		'''«scope.interfaceName»_«name.asIdentifier»'''
 	}
 	
-	def eventEnumName(ExecutionFlow it) {
+	override eventEnumName(ExecutionFlow it) {
 		'''«module»EventName'''
 	}
 	
@@ -42,10 +44,30 @@ class EventNaming {
 	}
 	
 	def eventClassName(Event it) {
-		'''SctEvent_«scope.interfaceName»_«it.name.asIdentifier»'''
+		'''«SCT_EVENT»_«scope.interfaceName»_«it.name.asIdentifier»'''
 	}
 	
 	def eventNamespaceName(ExecutionFlow it) {
 		'''«name.toLowerCase»_events'''
+	}
+	
+	override internalQueue() {
+		"internalEventQueue"
+	}
+	
+	override nextEventFctID(ExecutionFlow it) {
+		NEXT_EVENT
+	}
+	
+	override dispatchEventFctID(ExecutionFlow it) {
+		"dispatch_event"
+	}
+	
+	override addToQueueFctID(ExecutionFlow it) {
+		super.addToQueueFctID(it)
+	}
+	
+	override addToQueueValueFctID(ExecutionFlow it) {
+		super.addToQueueValueFctID(it)
 	}
 }

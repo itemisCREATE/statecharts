@@ -119,6 +119,35 @@ GeneratorModel for sctunit::cpp {
 		}
 	}
 	
+	test BitwiseExecutionOrder{
+		
+		feature Outlet{ 
+			targetProject = targetProject
+			targetFolder = "gtests/BitExpressionsTest"
+			libraryTargetFolder = "libraryTarget"			
+		}			
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  true
+		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
+		feature SGenModel {
+			GenerateSGen =  true
+		}
+	}
+	
 	test BooleanExpressions{
 		
 		feature Outlet{ 
@@ -678,6 +707,93 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = targetProject
 			targetFolder = "gtests/ExitStateTest"	
+			libraryTargetFolder = "libraryTarget"		
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  true
+		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
+		feature SGenModel {
+			GenerateSGen =  true
+		}
+	}
+	
+	test ExitSequence{
+		
+		feature Outlet{ 
+			targetProject = targetProject
+			targetFolder = "gtests/ExitSequenceTest"	
+			libraryTargetFolder = "libraryTarget"		
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  true
+		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
+		feature SGenModel {
+			GenerateSGen =  true
+		}
+	}
+	
+	test EventDriven {
+		
+		feature Outlet{ 
+			targetProject = targetProject
+			targetFolder = "gtests/EventDrivenTest"	
+			libraryTargetFolder = "libraryTarget"		
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  true
+		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
+		feature SGenModel {
+			GenerateSGen =  true
+		}
+	}
+	
+	test EventDrivenOutEvents {
+		
+		feature Outlet{ 
+			targetProject = targetProject
+			targetFolder = "gtests/EventDrivenOutEventsTest"	
 			libraryTargetFolder = "libraryTarget"		
 		}		
 		

@@ -10,13 +10,11 @@
  */
 package org.yakindu.sct.model.stext.scoping;
 
-import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.NullImpl;
 
 import com.google.inject.ImplementedBy;
 
@@ -25,7 +23,7 @@ import com.google.inject.ImplementedBy;
  * @author Andreas Mülder - Initial contribution and API
  *
  */
-@ImplementedBy(NullImpl.class)
+@ImplementedBy(PackageImport2URIMultiMapper.class)
 public interface IPackageImport2URIMapper {
 
 	public Optional<PackageImport> findPackageImport(Resource context, String packageImport);
@@ -112,18 +110,4 @@ public interface IPackageImport2URIMapper {
 		}
 
 	}
-
-	public static class NullImpl implements IPackageImport2URIMapper {
-
-		@Override
-		public Optional<PackageImport> findPackageImport(Resource context, String packageImport) {
-			return Optional.empty();
-		}
-
-		@Override
-		public Set<PackageImport> getAllImports(Resource context) {
-			return Collections.emptySet();
-		}
-	}
-
 }

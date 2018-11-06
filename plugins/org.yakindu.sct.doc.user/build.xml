@@ -1,53 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project default="generate.all"
-         basedir="."
-         name="org.yakindu.sct.doc.user"
-         xmlns:if="ant:if"
-         xmlns:unless="ant:unless"
-         xmlns:artifact="antlib:org.eclipse.aether.ant">
+<project default="generate.all" basedir="." name="org.yakindu.sct.doc.user" xmlns:if="ant:if"
+    xmlns:unless="ant:unless" xmlns:artifact="antlib:org.eclipse.aether.ant">
 
     <!-- Runtime properties:
-         website.local.files: Generates website as local files
+        website.local.files: Generates website as local files (FIXME: Remove this feature)
+        preview: Generates website with "-preview" in HTML filenames to support Hubspot previews.
     -->
 
     <!-- Include platform-specific or machine-specific properties, if any. -->
-    <property file="local.properties" />
+    <property file="local.properties"/>
 
     <!-- The documentation source files located beneath this directory.
-         They may be structured into folders of arbitrary depth. -->
-    <property name="src.dir" value="src" />
+        They may be structured into folders of arbitrary depth. -->
+    <property name="src.dir" value="src"/>
 
     <!-- CSS files are located here. -->
-    <property name="css.dir" value="css" />
+    <property name="css.dir" value="css"/>
 
     <!-- Root CSS file to be referenced by the generated HTML files. -->
-    <property name="css.root.file" value="style.css" />
+    <property name="css.root.file" value="style.css"/>
 
     <!-- Javascript files are located here. -->
-    <property name="js.dir" value="js" />
+    <property name="js.dir" value="js"/>
 
     <!-- Image files reside in subdirectories with the following name: -->
-    <property name="img.dir" value="images" />
+    <property name="img.dir" value="images"/>
 
     <!-- Target directories for various output formats: -->
-    <property name="help.dir" value="help" />
-    <property name="website.dir" value="website" />
-    <property name="pdf.dir" value="pdf" />
-    <property name="epub.dir" value="epub" />
+    <property name="help.dir" value="help"/>
+    <property name="website.dir" value="website"/>
+    <property name="pdf.dir" value="pdf"/>
+    <property name="epub.dir" value="epub"/>
 
     <!-- Libraries used by various Ant tasks are located here: -->
-    <property name="lib.dir" location="${basedir}/lib" />
+    <property name="lib.dir" location="${basedir}/lib"/>
 
     <!-- Aether Ant Tasks configuration -->
-    <property name="aether.jar.version" value="1.0.1.v20141111" />
+    <property name="aether.jar.version" value="1.0.1.v20141111"/>
     <property name="aether.jar.checksum"
-              value="195ea2e75242b2a4919463e8e95f57bd3cfcfeb3920879fca5b680255dba4a22b9ec0d53138e608d3be94d80a444aa9b7b8522e5bf01660f0dfb4688dae998dd" />
+        value="195ea2e75242b2a4919463e8e95f57bd3cfcfeb3920879fca5b680255dba4a22b9ec0d53138e608d3be94d80a444aa9b7b8522e5bf01660f0dfb4688dae998dd"/>
     <property name="aether.jar.src"
-              value="http://search.maven.org/remotecontent?filepath=org/eclipse/aether/aether-ant-tasks/${aether.jar.version}/aether-ant-tasks-${aether.jar.version}-uber.jar" />
-    <property name="aether.jar.file" value="${lib.dir}/aether-ant-tasks-uber.jar" />
+        value="http://search.maven.org/remotecontent?filepath=org/eclipse/aether/aether-ant-tasks/${aether.jar.version}/aether-ant-tasks-${aether.jar.version}-uber.jar"/>
+    <property name="aether.jar.file" value="${lib.dir}/aether-ant-tasks-uber.jar"/>
 
     <!-- MyLyn Wikitext version: -->
-    <property name="wikitext.version" value="3.0.20" />
+    <property name="wikitext.version" value="3.0.20"/>
+
+    <!-- YAKINDU Docs version and local directory: -->
+    <property name="yakindu.docs.version" value="0.1.1"/>
+    <property name="yakindu.docs.dir" value="${lib.dir}/yakindu.docs"/>
 
 
 
@@ -55,46 +56,40 @@
     <target name="clean">
         <delete includeemptydirs="true" failonerror="false">
             <fileset dir="${basedir}" defaultexcludes="false">
-                <include name="${help.dir}/**" />
-                <include name="${website.dir}/**" />
-                <include name="${pdf.dir}/**" />
-                <include name="${epub.dir}/**" />
+                <include name="${help.dir}/**"/>
+                <include name="${website.dir}/**"/>
+                <include name="${pdf.dir}/**"/>
+                <include name="${epub.dir}/**"/>
             </fileset>
-            <fileset dir="${src-merged.dir}" />
+            <fileset dir="${src-merged.dir}"/>
         </delete>
     </target>
 
     <!-- Aether Ant Tasks are used to access Maven dependencies from an Ant build. It is initialized by downloading
-             the Aether Ant Tasks JAR to the library folder, if needed. The downloaded JAR will not be removed by the
-             "clean" target. If the JAR is present, a typedef will make Aether Ant Tasks' elements available in the Ant
-             build file. -->
+        the Aether Ant Tasks JAR to the library folder, if needed. The downloaded JAR will not be removed by the
+        "clean" target. If the JAR is present, a typedef will make Aether Ant Tasks' elements available in the Ant
+        build file. -->
     <target name="init.aether"
-            description="Initializes Aether Ant Tasks JAR by downloading the JAR and defining a type.">
+        description="Initializes Aether Ant Tasks JAR by downloading the JAR and defining a type.">
         <condition property="target.exists">
-            <available file="${aether.jar.file}" />
+            <available file="${aether.jar.file}"/>
         </condition>
         <sequential unless:set="target.exists">
-            <mkdir dir="${lib.dir}" />
-            <get src="${aether.jar.src}"
-                 dest="${aether.jar.file}"
-                 skipexisting="true"
-                 usetimestamp="true"
-                 verbose="true" />
+            <mkdir dir="${lib.dir}"/>
+            <get src="${aether.jar.src}" dest="${aether.jar.file}" skipexisting="true" usetimestamp="true"
+                verbose="true"/>
             <fail message="Checksum mismatch for ${aether.jar.file}. Please delete it and rerun ant to redownload.">
                 <condition>
                     <not>
-                        <checksum file="${aether.jar.file}"
-                                  algorithm="SHA-512"
-                                  property="${aether.jar.checksum}"
-                                  verifyproperty="checksum.matches" />
+                        <checksum file="${aether.jar.file}" algorithm="SHA-512"
+                            property="${aether.jar.checksum}" verifyproperty="checksum.matches"/>
                     </not>
                 </condition>
             </fail>
         </sequential>
-        <path id="aether-ant-tasks.classpath" path="${aether.jar.file}" />
-        <typedef resource="org/eclipse/aether/ant/antlib.xml"
-                 uri="antlib:org.eclipse.aether.ant"
-                 classpathref="aether-ant-tasks.classpath" />
+        <path id="aether-ant-tasks.classpath" path="${aether.jar.file}"/>
+        <typedef resource="org/eclipse/aether/ant/antlib.xml" uri="antlib:org.eclipse.aether.ant"
+            classpathref="aether-ant-tasks.classpath"/>
     </target>
 
     <!-- Resolves the Wikitext dependencies: -->
@@ -103,265 +98,275 @@
         <!-- Classpath for MyLyn Wikitext: -->
         <artifact:resolve>
             <artifact:dependencies>
-                <dependency groupId="org.eclipse.mylyn.docs"
-                            artifactId="org.eclipse.mylyn.wikitext"
-                            version="${wikitext.version}"
-                            scope="compile" />
+                <dependency groupId="org.eclipse.mylyn.docs" artifactId="org.eclipse.mylyn.wikitext"
+                    version="${wikitext.version}" scope="compile"/>
             </artifact:dependencies>
-            <path refid="wikitext.classpath" />
+            <path refid="wikitext.classpath"/>
+        </artifact:resolve>
+
+        <!-- Sources of MyLyn Wikitext: -->
+        <artifact:resolve>
+            <artifact:dependencies>
+                <dependency groupId="org.eclipse.mylyn.docs" artifactId="org.eclipse.mylyn.wikitext"
+                    version="${wikitext.version}" scope="compile" classifier="sources"/>
+            </artifact:dependencies>
+            <files dir="${lib.dir}/src" layout="{groupId}/{artifactId}-{baseVersion}-{classifier}.{extension}"/>
         </artifact:resolve>
 
         <!-- Classpath for MyLyn Wikitext's Textile support: -->
         <artifact:resolve>
             <artifact:dependencies>
-                <dependency groupId="org.eclipse.mylyn.docs"
-                            artifactId="org.eclipse.mylyn.wikitext.textile"
-                            version="${wikitext.version}"
-                            scope="compile" />
+                <dependency groupId="org.eclipse.mylyn.docs" artifactId="org.eclipse.mylyn.wikitext.textile"
+                    version="${wikitext.version}" scope="compile"/>
             </artifact:dependencies>
-            <path refid="wikitext.textile.classpath" />
+            <path refid="wikitext.textile.classpath"/>
+        </artifact:resolve>
+
+        <!-- Sources of MyLyn Wikitext's Textile support: -->
+        <artifact:resolve>
+            <artifact:dependencies>
+                <dependency groupId="org.eclipse.mylyn.docs" artifactId="org.eclipse.mylyn.wikitext.textile"
+                    version="${wikitext.version}" scope="compile" classifier="sources"/>
+            </artifact:dependencies>
+            <files dir="${lib.dir}/src" layout="{groupId}/{artifactId}-{baseVersion}-{classifier}.{extension}"/>
         </artifact:resolve>
 
         <!-- Classpath for MyLyn Wikitext's Ant support: -->
         <artifact:resolve>
             <artifact:dependencies>
-                <dependency groupId="org.eclipse.mylyn.docs"
-                            artifactId="org.eclipse.mylyn.wikitext.ant"
-                            version="${wikitext.version}"
-                            scope="compile" />
+                <dependency groupId="org.eclipse.mylyn.docs" artifactId="org.eclipse.mylyn.wikitext.ant"
+                    version="${wikitext.version}" scope="compile"/>
             </artifact:dependencies>
-            <path refid="wikitext.ant.classpath" />
+            <path refid="wikitext.ant.classpath"/>
         </artifact:resolve>
 
         <!-- Classpath for Wikitext: -->
         <path id="wikitext.all.classpath">
-            <path refid="wikitext.classpath" />
-            <path refid="wikitext.textile.classpath" />
-            <path refid="wikitext.ant.classpath" />
+            <path refid="wikitext.classpath"/>
+            <path refid="wikitext.textile.classpath"/>
+            <path refid="wikitext.ant.classpath"/>
         </path>
 
         <!-- Repositories for YAKINDU Docs: -->
         <artifact:remoterepos id="aether.repositories">
             <artifact:remoterepo url="https://projects.itemis.de/nexus/content/repositories/OSR/"
-                                 id="releases"
-                                 releases="true"
-                                 snapshots="false" />
+                id="releases" releases="true" snapshots="false"/>
             <artifact:remoterepo url="https://projects.itemis.de/nexus/content/repositories/OSS/"
-                                 id="snapshots"
-                                 releases="false"
-                                 snapshots="true" />
+                id="snapshots" releases="false" snapshots="true" updates="always"/>
         </artifact:remoterepos>
 
         <!-- Classpath for YAKINDU Docs: -->
         <artifact:resolve>
             <artifact:dependencies>
-                <dependency groupId="org.yakindu.docs"
-                            artifactId="yakindu-docs-maven-plugin"
-                            version="0.0.1-SNAPSHOT"
-                            scope="compile" />
+                <dependency groupId="org.yakindu.docs" artifactId="yakindu-docs-maven-plugin"
+                    version="${yakindu.docs.version}" scope="compile"/>
             </artifact:dependencies>
-            <path refid="org.yakindu.docs.classpath" />
+            <path refid="org.yakindu.docs.classpath"/>
         </artifact:resolve>
 
+        <!-- YAKINDU Docs website template: -->
+        <artifact:resolve>
+            <artifact:dependencies>
+                <dependency groupId="org.yakindu.docs" artifactId="yakindu-docs-maven-plugin"
+                    version="${yakindu.docs.version}" scope="compile" classifier="website"/>
+            </artifact:dependencies>
+            <properties prefix="resolved"/>
+        </artifact:resolve>
+
+        <!-- Unpack the YAKINDU Docs website template: -->
+        <unjar src="${resolved.org.yakindu.docs:yakindu-docs-maven-plugin:jar:website}" dest="${yakindu.docs.dir}"/>
     </target>
 
 
     <!-- Generates the documentation in all supported formats. -->
-    <target name="generate.all"
-            description="Generates the documentation in all supported formats."
-            depends="generate.eclipsehelp, generate.website" />
+    <target name="generate.all" description="Generates the documentation in all supported formats."
+        depends="generate.eclipsehelp, generate.website"/>
 
 
     <!-- Generates the documentation as Eclipse help. -->
     <target name="generate.eclipsehelp"
-            description="Generates the documentation as separate Eclipse help (HTML) files from their respective textile (wikitext) sources."
-            depends="init.wikitext">
+        description="Generates the documentation as separate Eclipse help (HTML) files from their respective textile (wikitext) sources."
+        depends="init.wikitext">
 
         <sequential>
-            <taskdef classpathref="wikitext.all.classpath" resource="org/eclipse/mylyn/wikitext/ant/tasks.properties" />
+            <taskdef classpathref="wikitext.all.classpath"
+                resource="org/eclipse/mylyn/wikitext/ant/tasks.properties"/>
 
             <!-- Textile source files to turn into HTML: -->
             <fileset id="fileset.eclipsehelp" dir="${src.dir}">
-                <include name="tutorials/tutorials.textile" />
-                <include name="user-guide/overview.textile" />
-                <include name="user-guide/installation.textile" />
-                <include name="user-guide/editing_statecharts.textile" />
-                <include name="user-guide/simulating_statecharts.textile" />
-                <include name="user-guide/c-domain.textile" />
+                <include name="tutorials/tutorials.textile"/>
+                <include name="user-guide/overview.textile"/>
+                <include name="user-guide/installation.textile"/>
+                <include name="user-guide/editing_statecharts.textile"/>
+                <include name="user-guide/simulating_statecharts.textile"/>
+                <include name="user-guide/c-domain.textile"/>
+                <include name="user-guide/scxml_domain.textile" />
                 <!-- include name="user-guide/typescript-domain.textile" / -->
-                <include name="user-guide/statechart_language.textile" />
-                <include name="user-guide/code_generation_intro.textile" />
-                <include name="user-guide/code_generation_c.textile" />
-                <include name="user-guide/code_generation_cpp.textile" />
-                <include name="user-guide/code_generation_java.textile" />
-                <include name="user-guide/code_generation_statechart_image.textile" />
-                <include name="user-guide/code_generation_custom.textile" />
-                <include name="user-guide/generating_code_headless.textile" />
-                <include name="user-guide/sctunit.textile" />
-                <include name="user-guide/search_and_navigate.textile" />
+                <include name="user-guide/statechart_language.textile"/>
+                <include name="user-guide/code_generation_intro.textile"/>
+                <include name="user-guide/code_generation_c.textile"/>
+                <include name="user-guide/code_generation_cpp.textile"/>
+                <include name="user-guide/code_generation_java.textile"/>
+                <include name="user-guide/code_generation_statechart_image.textile"/>
+                <include name="user-guide/generating_code_headless.textile"/>
+                <include name="user-guide/sctunit.textile"/>
+                <include name="user-guide/search_and_navigate.textile"/>
                 <!-- <include name="user-guide/glossary.textile" /> -->
             </fileset>
 
             <!-- Check whether we have all the expected textile source files – no more, no less: -->
             <fail message="Number of textile source file(s) doesn't match.">
                 <condition>
-                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="16" />
+                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="16"/>
                 </condition>
             </fail>
 
             <!-- Convert textile source files to HTML: -->
-            <wikitext-to-eclipse-help markupLanguage="Textile"
-                                      multipleOutputFiles="false"
-                                      navigationImages="true"
-                                      formatoutput="true"
-                                      validate="true"
-                                      failOnValidationError="true"
-                                      failOnValidationWarning="true"
-                                      sourceEncoding="UTF-8"
-                                      title="YAKINDU Statechart Tools"
-                                      helpPrefix="${help.dir}">
-                <fileset refid="fileset.eclipsehelp" />
-                <stylesheet url="../${css.dir}/${css.root.file}" />
+            <wikitext-to-eclipse-help markupLanguage="Textile" multipleOutputFiles="false"
+                navigationImages="true" formatoutput="true" validate="true" failOnValidationError="true"
+                failOnValidationWarning="true" sourceEncoding="UTF-8" title="YAKINDU Statechart Tools"
+                helpPrefix="${help.dir}">
+                <fileset refid="fileset.eclipsehelp"/>
+                <stylesheet url="../${css.dir}/${css.root.file}"/>
             </wikitext-to-eclipse-help>
 
             <!-- Files have been generated in the source directory, which is bad practice. Move them to the destination
-                 directory: -->
+                directory: -->
             <move todir="${help.dir}" flatten="no" verbose="no">
                 <fileset dir="${src.dir}">
-                    <include name="**/*.html" />
-                    <include name="**/*-toc.xml" />
+                    <include name="**/*.html"/>
+                    <include name="**/*-toc.xml"/>
                 </fileset>
             </move>
 
             <!-- Add HTML META element for Internet Explorer :-( -->
-            <replaceregexp byline="false"
-                           match='(\s*)(&lt;title&gt;)'
-                           replace='\1&lt;meta http-equiv="X-UA-Compatible" content="IE=edge"/&gt;\1\2'>
+            <replaceregexp byline="false" match='(\s*)(&lt;title&gt;)'
+                replace='\1&lt;meta http-equiv="X-UA-Compatible" content="IE=edge"/&gt;\1\2'>
                 <fileset dir="${help.dir}">
-                    <include name="**/*.html" />
+                    <include name="**/*.html"/>
                 </fileset>
             </replaceregexp>
 
             <!-- Add HTML META element to support viewport scaling -->
-            <replaceregexp byline="false"
-                           match='(\s*)(&lt;title&gt;)'
-                           replace='\1&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"/&gt;\1\2'>
+            <replaceregexp byline="false" match='(\s*)(&lt;title&gt;)'
+                replace='\1&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"/&gt;\1\2'>
                 <fileset dir="${help.dir}">
-                    <include name="**/*.html" />
+                    <include name="**/*.html"/>
                 </fileset>
             </replaceregexp>
 
             <!-- Add CSS classes "eclipsehelp" and "body-container" to BODY element and
-                 nest a DIV child with CSS class "primary" into the BODY element. -->
-            <replaceregexp byline="true"
-                           match='&lt;body&gt;'
-                           replace='&lt;body class="eclipsehelp body-container"&gt;&lt;div class="primary"&gt;'>
+                nest a DIV child with CSS class "primary" into the BODY element. -->
+            <replaceregexp byline="true" match='&lt;body&gt;'
+                replace='&lt;body class="eclipsehelp body-container"&gt;&lt;div class="primary"&gt;'>
                 <fileset dir="${help.dir}">
-                    <include name="**/*.html" />
+                    <include name="**/*.html"/>
                 </fileset>
             </replaceregexp>
             <replaceregexp byline="true" match='&lt;/body&gt;' replace='&lt;/div&gt;&lt;/body&gt;'>
                 <fileset dir="${help.dir}">
-                    <include name="**/*.html" />
+                    <include name="**/*.html"/>
                 </fileset>
             </replaceregexp>
 
             <!-- Remove H1 headings produced by "early separators" -->
-            <replaceregexp byline="false"
-                           flags="g"
-                           match='&lt;h1 id=".+" style="%EARLY_SEPARATOR%"&gt;.*&lt;/h1&gt;'
-                           replace=''>
+            <replaceregexp byline="false" flags="g"
+                match='&lt;h1 id=".+" style="%EARLY_SEPARATOR%"&gt;.*&lt;/h1&gt;' replace=''>
                 <fileset dir="${help.dir}">
-                    <include name="**/*.html" />
+                    <include name="**/*.html"/>
                 </fileset>
             </replaceregexp>
 
             <!-- Fix DIV elements -->
-            <replaceregexp byline="false" flags="g" match='&lt;p&gt;&lt;div(.*)&gt;&lt;/p&gt;' replace='&lt;div\1&gt;'>
+            <replaceregexp byline="false" flags="g" match='&lt;p&gt;&lt;div(.*)&gt;&lt;/p&gt;'
+                replace='&lt;div\1&gt;'>
                 <fileset dir="${help.dir}">
-                    <include name="**/*.html" />
+                    <include name="**/*.html"/>
                 </fileset>
             </replaceregexp>
-            <replaceregexp byline="false" flags="g" match='&lt;p&gt;&lt;/div&gt;&lt;/p&gt;' replace='&lt;/div&gt;'>
+            <replaceregexp byline="false" flags="g" match='&lt;p&gt;&lt;/div&gt;&lt;/p&gt;'
+                replace='&lt;/div&gt;'>
                 <fileset dir="${help.dir}">
-                    <include name="**/*.html" />
+                    <include name="**/*.html"/>
                 </fileset>
             </replaceregexp>
 
             <!-- Validate the generated and modified HTML: -->
             <xmlvalidate failonerror="yes" lenient="yes" warn="no">
-                <fileset dir="${help.dir}" includes="**/*.html" />
-                <attribute name="http://xml.org/sax/features/validation" value="false" />
-                <attribute name="http://apache.org/xml/features/validation/schema" value="false" />
-                <attribute name="http://apache.org/xml/features/validation/schema-full-checking" value="false" />
-                <attribute name="http://apache.org/xml/features/validation/warn-on-undeclared-elemdef" value="false" />
-                <attribute name="http://apache.org/xml/features/validation/dynamic" value="false" />
-                <attribute name="http://apache.org/xml/features/nonvalidating/load-dtd-grammar" value="false" />
-                <attribute name="http://apache.org/xml/features/nonvalidating/load-external-dtd" value="false" />
-                <attribute name="http://xml.org/sax/features/namespaces" value="false" />
-                <attribute name="http://xml.org/sax/features/external-general-entities" value="false" />
-                <attribute name="http://xml.org/sax/features/external-parameter-entities" value="false" />
-                <attribute name="http://xml.org/sax/features/resolve-dtd-uris" value="false" />
-                <attribute name="http://xml.org/sax/features/use-entity-resolver2" value="false" />
-                <attribute name="http://xml.org/sax/features/namespace-prefixes" value="false" />
-                <attribute name="http://xml.org/sax/features/namespaces" value="false" />
+                <fileset dir="${help.dir}" includes="**/*.html"/>
+                <attribute name="http://xml.org/sax/features/validation" value="false"/>
+                <attribute name="http://apache.org/xml/features/validation/schema" value="false"/>
+                <attribute name="http://apache.org/xml/features/validation/schema-full-checking" value="false"/>
+                <attribute name="http://apache.org/xml/features/validation/warn-on-undeclared-elemdef"
+                    value="false"/>
+                <attribute name="http://apache.org/xml/features/validation/dynamic" value="false"/>
+                <attribute name="http://apache.org/xml/features/nonvalidating/load-dtd-grammar" value="false"/>
+                <attribute name="http://apache.org/xml/features/nonvalidating/load-external-dtd" value="false"/>
+                <attribute name="http://xml.org/sax/features/namespaces" value="false"/>
+                <attribute name="http://xml.org/sax/features/external-general-entities" value="false"/>
+                <attribute name="http://xml.org/sax/features/external-parameter-entities" value="false"/>
+                <attribute name="http://xml.org/sax/features/resolve-dtd-uris" value="false"/>
+                <attribute name="http://xml.org/sax/features/use-entity-resolver2" value="false"/>
+                <attribute name="http://xml.org/sax/features/namespace-prefixes" value="false"/>
+                <attribute name="http://xml.org/sax/features/namespaces" value="false"/>
             </xmlvalidate>
 
             <!-- Copy the CSS files to the destination directory: -->
             <copy todir="${help.dir}/${css.dir}">
                 <fileset dir="${css.dir}">
-                    <include name="*" />
+                    <include name="*"/>
                 </fileset>
             </copy>
 
             <!-- Copy the Javascript files to the destination directory: -->
             <copy todir="${help.dir}/${js.dir}">
                 <fileset dir="${js.dir}">
-                    <include name="*" />
+                    <include name="*"/>
                 </fileset>
             </copy>
 
             <!-- Copy the image files to the destination directory: -->
             <copy todir="${help.dir}">
                 <fileset dir="src">
-                    <include name="**/${img.dir}/*" />
-                    <exclude name="**/${img.dir}/*.xcf" />
+                    <include name="**/${img.dir}/*"/>
+                    <exclude name="**/${img.dir}/*.xcf"/>
                 </fileset>
             </copy>
         </sequential>
     </target>
 
     <!-- Generates the documentation as various HTML files, each being composed of selected sections. Each part has a
-         name and a title, and consists of a set of source files. The generated documentation structure looks like this:
+        name and a title, and consists of a set of source files. The generated documentation structure looks like this:
 
-         website
-             YSCT-installation.html
-             YSCT-user-guide.html
-             YSCT-tutorials.html
-             css/yakindu.css
-             css/ysct.css
-             js/yakindu.js
-                 …
-             images/…
+        website
+        YSCT-installation.html
+        YSCT-user-guide.html
+        YSCT-tutorials.html
+        css/yakindu.css
+        css/ysct.css
+        js/yakindu.js
+        …
+        images/…
     -->
 
     <target name="generate.website"
-            description="Generates the documentation as various HTML files for the website, each being composed of selected sections. Use -Dwebsite.local.files=true to generate the website as local files for preview."
-            depends="init.wikitext">
+        description="Generates the documentation as various HTML files for the website, each being composed of selected sections. Use -Dwebsite.local.files=true to generate the website as local files for preview."
+        depends="init.wikitext">
 
         <sequential>
-            <taskdef classpathref="wikitext.all.classpath" resource="org/eclipse/mylyn/wikitext/ant/tasks.properties" />
+            <taskdef classpathref="wikitext.all.classpath"
+                resource="org/eclipse/mylyn/wikitext/ant/tasks.properties"/>
 
             <!-- Tutorials -->
             <create-website-part name="YSCT-tutorials" title="Tutorials">
                 <textile-files>
                     <filelist dir="${src.dir}">
-                        <file name="tutorials/tutorials.textile" />
+                        <file name="tutorials/tutorials.textile"/>
                     </filelist>
                 </textile-files>
                 <image-files>
                     <fileset dir="${src.dir}">
-                        <include name="tutorials/images/**/*" />
+                        <include name="tutorials/images/**/*"/>
                     </fileset>
                 </image-files>
             </create-website-part>
@@ -370,28 +375,28 @@
             <create-website-part name="YSCT-user-guide" title="User Guide">
                 <textile-files>
                     <filelist dir="${src.dir}">
-                        <file name="user-guide/overview.textile" />
-                        <file name="user-guide/installation.textile" />
-                        <file name="user-guide/editing_statecharts.textile" />
-                        <file name="user-guide/simulating_statecharts.textile" />
-                        <file name="user-guide/c-domain.textile" />
-                        <!-- file name="user-guide/typescript-domain.textile" /-->
-                        <file name="user-guide/statechart_language.textile" />
-                        <file name="user-guide/code_generation_intro.textile" />
-                        <file name="user-guide/code_generation_c.textile" />
-                        <file name="user-guide/code_generation_cpp.textile" />
-                        <file name="user-guide/code_generation_java.textile" />
-                        <file name="user-guide/code_generation_statechart_image.textile" />
-                        <file name="user-guide/code_generation_custom.textile" />
-                        <file name="user-guide/generating_code_headless.textile" />
-                        <file name="user-guide/sctunit.textile" />
-                        <file name="user-guide/search_and_navigate.textile" />
+                        <file name="user-guide/overview.textile"/>
+                        <file name="user-guide/installation.textile"/>
+                        <file name="user-guide/editing_statecharts.textile"/>
+                        <file name="user-guide/simulating_statecharts.textile"/>
+                        <file name="user-guide/c-domain.textile"/>
+                        <file name="user-guide/scxml_domain.textile" />
+                        <!-- file name="user-guide/typescript-domain.textile" / -->
+                        <file name="user-guide/statechart_language.textile"/>
+                        <file name="user-guide/code_generation_intro.textile"/>
+                        <file name="user-guide/code_generation_c.textile"/>
+                        <file name="user-guide/code_generation_cpp.textile"/>
+                        <file name="user-guide/code_generation_java.textile"/>
+                        <file name="user-guide/code_generation_statechart_image.textile"/>
+                        <file name="user-guide/generating_code_headless.textile"/>
+                        <file name="user-guide/sctunit.textile"/>
+                        <file name="user-guide/search_and_navigate.textile"/>
                         <!-- file name="user-guide/glossary.textile" / -->
                     </filelist>
                 </textile-files>
                 <image-files>
                     <fileset dir="${src.dir}">
-                        <include name="user-guide/images/**/*" />
+                        <include name="user-guide/images/**/*"/>
                     </fileset>
                 </image-files>
             </create-website-part>
@@ -403,141 +408,128 @@
 
     <!-- Creates a certain part of the HTML documentation for the website. -->
     <macrodef name="create-website-part"
-              description="Creates a certain part of the HTML documentation for the website.">
-        <attribute name="name" />
-        <attribute name="title" />
-        <element name="textile-files" />
-        <element name="image-files" />
+        description="Creates a certain part of the HTML documentation for the website.">
+        <attribute name="name"/>
+        <attribute name="title"/>
+        <element name="textile-files"/>
+        <element name="image-files"/>
 
         <sequential>
 
             <!-- The directory for this particular part of the HTML documentation: -->
-            <local name="work.dir" />
-            <property name="work.dir" location="${website.dir}" />
+            <local name="work.dir"/>
+            <property name="work.dir" location="${website.dir}"/>
 
             <!-- The names of the concatenated documentation files: -->
-            <local name="index.textile" />
-            <property name="index.textile" value="@{name}.textile" />
-            <local name="index.html" />
-            <property name="index.html" value="@{name}.html" />
+            <local name="index.textile"/>
+            <property name="index.textile" value="@{name}.textile"/>
+            <local name="index.html"/>
+            <property name="index.html" value="@{name}.html" unless:set="preview"/>
+            <property name="index.html" value="@{name}-preview.html" if:set="preview"/>
 
             <!-- Append those source files that make up the particular piece of documentation: -->
-            <mkdir dir="${work.dir}" />
-            <concat destfile="${work.dir}/${index.textile}"
-                    append="false"
-                    overwrite="true"
-                    encoding="UTF-8"
-                    outputencoding="UTF-8"
-                    fixlastline="true"
-                    binary="false"
-                    ignoreempty="true">
-                <textile-files />
+            <mkdir dir="${work.dir}"/>
+            <concat destfile="${work.dir}/${index.textile}" append="false" overwrite="true" encoding="UTF-8"
+                outputencoding="UTF-8" fixlastline="true" binary="false" ignoreempty="true">
+                <textile-files/>
             </concat>
 
             <!-- Convert textile source files to Hubspot HTML: -->
             <path id="converter.classpath">
-                <path refid="org.yakindu.docs.classpath" />
-                <path refid="wikitext.all.classpath" />
+                <path refid="org.yakindu.docs.classpath"/>
+                <path refid="wikitext.all.classpath"/>
             </path>
             <java classname="org.yakindu.docs.wikitext.TextileToHubspotConverter"
-                  classpathref="converter.classpath"
-                  fork="true"
-                  dir="${basedir}"
-                  failonerror="true">
-                <arg value="--p1-file" />
-                <arg value="${src.dir}/website/p1.htmlf" />
-                <arg value="--contents-template-file" />
-                <arg value="${src.dir}/website/contents.htmlf" />
-                <arg value="--p2-file" />
-                <arg value="${src.dir}/website/p2.htmlf" />
-                <arg value="--toc-template-file" />
-                <arg value="${src.dir}/website/toc.htmlf" />
-                <arg value="--p3-file" />
-                <arg value="${src.dir}/website/p3.htmlf" />
-                <arg value="--input" />
-                <arg value="${work.dir}/${index.textile}" />
-                <arg value="--output" />
-                <arg value="${work.dir}/${index.html}" />
-                <arg value="--property" />
-                <arg value="${navigation.title}=@{title}" />
+                classpathref="converter.classpath" fork="true" dir="${basedir}" failonerror="true">
+                <arg value="--p1-file"/>
+                <arg value="${yakindu.docs.dir}/website/p1.htmlf"/>
+                <arg value="--contents-template-file"/>
+                <arg value="${yakindu.docs.dir}/website/contents.htmlf"/>
+                <arg value="--p2-file"/>
+                <arg value="${yakindu.docs.dir}/website/p2.htmlf"/>
+                <arg value="--toc-template-file"/>
+                <arg value="${yakindu.docs.dir}/website/toc.htmlf"/>
+                <arg value="--p3-file"/>
+                <arg value="${yakindu.docs.dir}/website/p3.htmlf"/>
+                <arg value="--input"/>
+                <arg value="${work.dir}/${index.textile}"/>
+                <arg value="--hubspot-template-file"/>
+                <arg value="${work.dir}/${index.html}"/>
+                <arg value="--hubspot-csv-file"/>
+                <arg value="${work.dir}/${index.html}.csv"/>
+                <arg value="--property"/>
+                <arg value="${navigation.title}=@{title}"/>
             </java>
 
             <!-- Replace "<pre><code>" durch "<pre class="prettyprint"><code>": -->
-            <replaceregexp byline="false"
-                           flags="g"
-                           match='&lt;pre&gt;&lt;code&gt;'
-                           replace='&lt;pre class="prettyprint"&gt;&lt;code&gt;'>
+            <replaceregexp byline="false" flags="g" match='&lt;pre&gt;&lt;code&gt;'
+                replace='&lt;pre class="prettyprint"&gt;&lt;code&gt;'>
                 <fileset dir="${work.dir}">
-                    <include name="${index.html}" />
+                    <include name="${index.html}"/>
                 </fileset>
             </replaceregexp>
 
             <!-- Replace relative image links by absolute ones for the website, unless we are generating local files: -->
-            <replaceregexp byline="false"
-                           flags="g"
-                           match='src="images/'
-                           replace='src="http://info.itemis.com/hubfs/yakindu/statechart-tools/documentation/images/'
-                           unless:set="website.local.files">
+            <replaceregexp byline="false" flags="g" match='src="images/'
+                replace='src="http://info.itemis.com/hubfs/yakindu/statechart-tools/documentation/images/'
+                unless:set="website.local.files">
                 <fileset dir="${work.dir}">
-                    <include name="${index.html}" />
+                    <include name="${index.html}"/>
                 </fileset>
             </replaceregexp>
 
             <!-- If the generated code contains a table with the ID "updaterepositories", replace it by a
-                 "call-to-action" button on the website: -->
+                "call-to-action" button on the website: -->
             <replaceregexp byline="false" flags="s" replace="${website.calltoaction.download}">
-                <regexp pattern='&lt;table id="updaterepositories"&gt;.*&lt;/table&gt;' />
+                <regexp pattern='&lt;table id="updaterepositories"&gt;.*&lt;/table&gt;'/>
                 <fileset dir="${work.dir}">
-                    <include name="${index.html}" />
+                    <include name="${index.html}"/>
                 </fileset>
             </replaceregexp>
 
             <!-- Fix links: -->
             <adjust-website-document-links document.dir.name="tutorials"
-                                           work.dir="${work.dir}"
-                                           html.file="${index.html}" />
+                work.dir="${work.dir}" html.file="${index.html}"/>
             <adjust-website-document-links document.dir.name="user-guide"
-                                           work.dir="${work.dir}"
-                                           html.file="${index.html}" />
+                work.dir="${work.dir}" html.file="${index.html}"/>
 
             <!-- Fix "pro-feature" elements -->
-            <replaceregexp byline="false"
-                           flags="g"
-                           match='&lt;p&gt;&lt;div class="pro-feature"&gt;&lt;/p&gt;'
-                           replace='&lt;div class="pro-feature"&gt;'>
+            <replaceregexp byline="false" flags="g"
+                match='&lt;p&gt;&lt;div class="pro-feature"&gt;&lt;/p&gt;' replace='&lt;div class="pro-feature"&gt;'>
                 <fileset dir="${work.dir}">
-                    <include name="${index.html}" />
+                    <include name="${index.html}"/>
                 </fileset>
             </replaceregexp>
-            <replaceregexp byline="false" flags="g" match='&lt;p&gt;&lt;/div&gt;&lt;/p&gt;' replace='&lt;/div&gt;'>
+            <replaceregexp byline="false" flags="g" match='&lt;p&gt;&lt;/div&gt;&lt;/p&gt;'
+                replace='&lt;/div&gt;'>
                 <fileset dir="${work.dir}">
-                    <include name="${index.html}" />
+                    <include name="${index.html}"/>
                 </fileset>
             </replaceregexp>
 
             <!-- Copy the CSS files to the destination directory: -->
             <copy todir="${work.dir}/${css.dir}">
                 <fileset dir="${css.dir}">
-                    <include name="*" />
+                    <include name="*"/>
                 </fileset>
             </copy>
 
             <!-- Copy the Javascript files to the destination directory: -->
             <copy todir="${work.dir}/${js.dir}">
                 <fileset dir="${js.dir}">
-                    <include name="*" />
+                    <include name="*"/>
                 </fileset>
             </copy>
 
             <!-- Copy the image files to the destination directory: -->
             <copy todir="${work.dir}/${img.dir}" flatten="yes">
-                <image-files />
+                <image-files/>
             </copy>
 
             <!-- The textile source file is no longer needed in the website directory. Remove it: -->
             <delete includeemptydirs="true" failonerror="false">
                 <fileset dir="${website.dir}" defaultexcludes="false">
-                    <include name="${index.textile}" />
+                    <include name="${index.textile}"/>
                 </fileset>
             </delete>
         </sequential>
@@ -546,28 +538,24 @@
 
     <!-- Adjusts links in the generated HTML document for either the website or a local equivalent. -->
     <macrodef name="adjust-website-document-links"
-              description="Adjusts links in the generated HTML document for either the website or a local equivalent.">
-        <attribute name="work.dir" />
-        <attribute name="html.file" />
-        <attribute name="document.dir.name" />
+        description="Adjusts links in the generated HTML document for either the website or a local equivalent.">
+        <attribute name="work.dir"/>
+        <attribute name="html.file"/>
+        <attribute name="document.dir.name"/>
 
         <sequential>
-            <replaceregexp byline="false"
-                           flags="g"
-                           match='&lt;a href="(\.\./@{document.dir.name})/.+\.html(.*)"&gt;'
-                           replace='&lt;a href="\1/\2"&gt;'
-                           unless:set="website.local.files">
+            <replaceregexp byline="false" flags="g"
+                match='&lt;a href="(\.\./@{document.dir.name})/.+\.html(.*)"&gt;' replace='&lt;a href="\1/\2"&gt;'
+                unless:set="website.local.files">
                 <fileset dir="@{work.dir}">
-                    <include name="@{html.file}" />
+                    <include name="@{html.file}"/>
                 </fileset>
             </replaceregexp>
-            <replaceregexp byline="false"
-                           flags="g"
-                           match='&lt;a href="\.\.(/@{document.dir.name})/.+\.html(.*)"&gt;'
-                           replace='&lt;a href="YSCT-@{document.dir.name}.html\2"&gt;'
-                           if:set="website.local.files">
+            <replaceregexp byline="false" flags="g"
+                match='&lt;a href="\.\.(/@{document.dir.name})/.+\.html(.*)"&gt;'
+                replace='&lt;a href="YSCT-@{document.dir.name}.html\2"&gt;' if:set="website.local.files">
                 <fileset dir="@{work.dir}">
-                    <include name="@{html.file}" />
+                    <include name="@{html.file}"/>
                 </fileset>
             </replaceregexp>
 

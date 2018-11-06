@@ -16,6 +16,7 @@ import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION;
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.PARENT_FIRST_ANNOTATION;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -30,7 +31,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.EcoreUtil2;
@@ -68,6 +68,7 @@ import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
@@ -83,6 +84,7 @@ import org.yakindu.sct.model.stext.extensions.STextExtensions;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
+import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
@@ -124,6 +126,9 @@ import com.google.inject.name.Named;
 		STextNamesAreUniqueValidator.class })
 public class STextJavaValidator extends AbstractSTextJavaValidator implements STextValidationMessages {
 
+	private static final String KEYWORD_ONCYCLE = "oncycle";
+	private static final String KEYWORD_ALWAYS = "always";
+	
 	@Inject
 	private ITypeSystemInferrer typeInferrer;
 	@Inject
@@ -199,7 +204,116 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			warning(ISSUE_TRANSITION_WITHOUT_TRIGGER, trans, null, -1);
 		}
 	}
+	
+	@Check(CheckType.FAST)
+	public void checkAlwaysTransitionHasLowestPriority(RegularState state) {
+		Iterator<Transition> iterator = state.getOutgoingTransitions().iterator();
+		Transition deadTransition = null;
+		while (iterator.hasNext()) {
+			Transition transition = iterator.next();
+			Trigger trigger = transition.getTrigger();
+			if (deadTransition != null) {
+				warning(String.format(DEAD_TRANSITION, getTransitionDeclaration(deadTransition)), transition, null, -1);
+			}
+			// check default/else trigger
+			if (trigger instanceof DefaultTrigger && iterator.hasNext()) {
+				warning(String.format(ALWAYS_TRUE_TRANSITION_USED, transition.getSpecification()), transition, null,
+						-1);
+				if(deadTransition == null) {
+					deadTransition = transition;
+				}
+			} 
+			// check always/oncycle trigger
+			else if (trigger instanceof ReactionTrigger) {
+				ReactionTrigger reactTrigger = (ReactionTrigger) trigger;
+				EList<EventSpec> triggers = reactTrigger.getTriggers();
+				if (triggers.size() == 1 && reactTrigger.getGuard() == null) {
+					EventSpec eventSpec = triggers.get(0);
+					if (eventSpec instanceof AlwaysEvent && iterator.hasNext()) {
+						warning(String.format(ALWAYS_TRUE_TRANSITION_USED, getTransitionDeclaration(transition)),
+								transition, null, -1);
+						if(deadTransition == null) {
+							deadTransition = transition;
+						}
+					}
+				}
+			}
+		}
+	}
 
+	protected String getTransitionDeclaration(Transition transition) {
+		String specification = transition.getSpecification();
+		
+		if (KEYWORD_ALWAYS.contains(specification)) {
+			return KEYWORD_ALWAYS;
+		} else if (KEYWORD_ONCYCLE.contains(specification)) {
+			return KEYWORD_ONCYCLE;
+		}
+		return specification;
+	}
+	
+	@Check(CheckType.FAST)
+	public void checkAlwaysAndDefaultTransitionInChoices(Choice choice) {
+		Transition deadTransition = null;
+		EList<Transition> outgoingTransitions = choice.getOutgoingTransitions();
+		int size = outgoingTransitions.size();
+		int deadTransitionIndex = 0;
+		for (int i = 0; i < size; i++) {
+			Transition transition = outgoingTransitions.get(i);
+			if (deadTransition != null) {
+				warning(String.format(DEAD_TRANSITION, getTransitionDeclaration(deadTransition)), transition, null, -1);
+			}
+			Trigger trigger = transition.getTrigger();
+			if (trigger instanceof ReactionTrigger) {
+				ReactionTrigger reactTrigger = (ReactionTrigger) trigger;
+				EList<EventSpec> triggers = reactTrigger.getTriggers();
+				if (triggers.size() == 1 && reactTrigger.getGuard() == null) {
+					if (triggers.get(0) instanceof AlwaysEvent) {
+						if(i != size-1) {
+							warning(String.format(ALWAYS_TRUE_TRANSITION_USED, transition.getSpecification()), transition,
+									null, -1);
+						}
+						if (deadTransition == null) {
+							deadTransition = transition;
+							deadTransitionIndex = i;
+						}
+					}
+				}
+			}
+		}
+		
+		// if we got a dead transition, we need to re-check if a default was used before
+		if(deadTransition != null) {
+			for(int i = 0; i < deadTransitionIndex; i++) {
+				Transition transition = outgoingTransitions.get(i);
+				Trigger trigger = transition.getTrigger();
+				if(trigger instanceof DefaultTrigger || trigger ==null) {
+					warning(String.format(DEAD_TRANSITION, getTransitionDeclaration(deadTransition)), transition, null, -1);
+				}
+			}
+		}
+	}
+	
+	@Check(CheckType.FAST)
+	public void checkOnlyOneDefaultTransitionUsed(Choice choice){
+		Iterator<Transition> iterator = choice.getOutgoingTransitions().iterator();
+		List<Transition> defaultTransitions = new ArrayList<Transition>();
+		while(iterator.hasNext()) {
+			Transition transition = iterator.next();
+			Trigger trigger = transition.getTrigger();
+			if(trigger instanceof DefaultTrigger || trigger ==null) {
+				defaultTransitions.add(transition);
+			}
+		}
+		int size = defaultTransitions.size();
+		if (size > 1) {
+			Iterator<Transition> iterator2 = defaultTransitions.iterator();
+			while (iterator2.hasNext()) {
+				warning(String.format(ONLY_ONE_DEFAULT_SHOULD_BE_USED, size), iterator2.next(), null, -1);
+			}
+		}
+	}
+	
 	@Check(CheckType.FAST)
 	public void checkUnusedEntry(final Entry entry) {
 		if (entry.getParentRegion().getComposite() instanceof org.yakindu.sct.model.sgraph.State
@@ -266,9 +380,11 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 		if (tokenText == null || tokenText.isEmpty())
 			return;
-		if (tokenText.contains(TypesPackage.Literals.PROPERTY__READONLY.getName()) && tokenText.contains(TypesPackage.Literals.PROPERTY__CONST.getName())) {
+		if (tokenText.contains(TypesPackage.Literals.PROPERTY__READONLY.getName())
+				&& tokenText.contains(TypesPackage.Literals.PROPERTY__CONST.getName())) {
 			warning(String.format(STextValidationMessages.DECLARATION_WITH_READONLY,
-					TypesPackage.Literals.PROPERTY__READONLY.getName(), TypesPackage.Literals.PROPERTY__CONST.getName()), definition,
+					TypesPackage.Literals.PROPERTY__READONLY.getName(),
+					TypesPackage.Literals.PROPERTY__CONST.getName()), definition,
 					TypesPackage.Literals.PROPERTY__READONLY);
 		}
 	}
@@ -550,7 +666,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 							boolean usingEntry = false;
 							for (Region region : state.getRegions()) {
 								EList<Vertex> vertices = region.getVertices();
-								for(Vertex vertice : vertices) {
+								for (Vertex vertice : vertices) {
 									if (vertice instanceof Entry) {
 										if (spec.getEntrypoint().equals(vertice.getName())) {
 											usingEntry = true;
@@ -744,16 +860,16 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				&& !(call.getFeature() instanceof Operation)) {
 			if (call.getFeature() instanceof Property) {
 				error("Access to property '" + nameProvider.getFullyQualifiedName(call.getFeature())
-				+ "' has no effect.", call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE,
-				INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
+						+ "' has no effect.", call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE,
+						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			} else if (call.getFeature() instanceof Event) {
 				error("Access to event '" + nameProvider.getFullyQualifiedName(call.getFeature()) + "' has no effect.",
 						call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE, INSIGNIFICANT_INDEX,
 						FEATURE_CALL_HAS_NO_EFFECT);
 			} else {
 				error("Access to feature '" + nameProvider.getFullyQualifiedName(call.getFeature())
-				+ "' has no effect.", call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE,
-				INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
+						+ "' has no effect.", call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE,
+						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			}
 		}
 	}
@@ -778,21 +894,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 		if (event.eContainer() instanceof InternalScope && event.getDirection() != Direction.LOCAL) {
 			error(IN_OUT_DECLARATIONS, TypesPackage.Literals.EVENT__DIRECTION);
-		}
-	}
-
-	@Check(CheckType.FAST)
-	public void checkDeprecatedLocalEventDefinition(EventDefinition event) {
-		// applies only for local event definitions
-		if (event.eContainer() instanceof InternalScope && event.getDirection() == Direction.LOCAL) {
-			ICompositeNode definitionNode = NodeModelUtils.getNode(event);
-			String tokenText = NodeModelUtils.getTokenText(definitionNode);
-			if (tokenText == null || tokenText.isEmpty())
-				return;
-			if (tokenText.contains(Direction.LOCAL.getLiteral())) {
-				warning(String.format(STextValidationMessages.DECLARATION_DEPRECATED, Direction.LOCAL.getLiteral()),
-						event, TypesPackage.Literals.EVENT__DIRECTION);
-			}
 		}
 	}
 
@@ -860,7 +961,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		EList<String> imports = scope.getImports();
 		for (String packageImport : imports) {
 			Optional<PackageImport> pkImport = mapper.findPackageImport(scope.eResource(), packageImport);
-			if (!pkImport.isPresent() || !URIConverter.INSTANCE.exists(pkImport.get().getUri().trimQuery(), null)) {
+			if (!pkImport.isPresent() || !getResource(scope).getResourceSet().getURIConverter()
+					.exists(pkImport.get().getUri().trimQuery(), null)) {
 				error(String.format(IMPORT_NOT_RESOLVED_MSG, packageImport), scope,
 						StextPackage.Literals.IMPORT_SCOPE__IMPORTS, imports.indexOf(packageImport));
 			}
@@ -871,19 +973,19 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		if (!(refExp.getReference() instanceof Operation)) {
 			if (refExp.getReference() instanceof Property) {
 				error("Access to property '" + nameProvider.getFullyQualifiedName(refExp.getReference())
-				+ "' has no effect.", refExp,
-				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
-				FEATURE_CALL_HAS_NO_EFFECT);
+						+ "' has no effect.", refExp,
+						ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
+						FEATURE_CALL_HAS_NO_EFFECT);
 			} else if (refExp.getReference() instanceof Event) {
 				error("Access to event '" + nameProvider.getFullyQualifiedName(refExp.getReference())
-				+ "' has no effect.", refExp,
-				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
-				FEATURE_CALL_HAS_NO_EFFECT);
+						+ "' has no effect.", refExp,
+						ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
+						FEATURE_CALL_HAS_NO_EFFECT);
 			} else {
 				error("Access to feature '" + nameProvider.getFullyQualifiedName(refExp.getReference())
-				+ "' has no effect.", refExp,
-				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
-				FEATURE_CALL_HAS_NO_EFFECT);
+						+ "' has no effect.", refExp,
+						ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
+						FEATURE_CALL_HAS_NO_EFFECT);
 			}
 		}
 	}
@@ -891,7 +993,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	protected boolean isDefault(Trigger trigger) {
 		return trigger == null || trigger instanceof DefaultTrigger
 				|| ((trigger instanceof ReactionTrigger) && ((ReactionTrigger) trigger).getTriggers().size() == 0
-				&& ((ReactionTrigger) trigger).getGuard() == null);
+						&& ((ReactionTrigger) trigger).getGuard() == null);
 	}
 
 	@Override
@@ -979,17 +1081,16 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 		return true;
 	}
-	
-	
+
 	@Check(CheckType.FAST)
 	public void checkOnlyOneEntryPointSpecIsUsed(Transition transition) {
 		EList<ReactionProperty> properties = transition.getProperties();
 		int countEntryPointSpecs = 0;
-		for(ReactionProperty property : properties) {
-			if(property instanceof EntryPointSpec) {
+		for (ReactionProperty property : properties) {
+			if (property instanceof EntryPointSpec) {
 				countEntryPointSpecs++;
 			}
-			if(countEntryPointSpecs > 1) {
+			if (countEntryPointSpecs > 1) {
 				warning(ONLY_FIRST_ENTRY_POINT_WILL_BE_USED, transition, null, -1);
 				break;
 			}

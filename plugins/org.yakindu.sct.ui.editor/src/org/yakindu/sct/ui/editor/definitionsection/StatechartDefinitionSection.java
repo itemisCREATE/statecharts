@@ -18,6 +18,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -32,6 +33,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
@@ -287,7 +289,8 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 
 			@Override
 			public XtextResource createResource() {
-				XtextFakeResourceContext resource = new XtextFakeResourceContext(injector);
+				IProject activeProject = WorkspaceSynchronizer.getFile(getContextObject().eResource()).getProject();
+				XtextFakeResourceContext resource = new XtextFakeResourceContext(injector, activeProject);
 				xtextResource = resource.getFakeResource();
 				xtextResource.eAdapters().add(new ContextElementAdapter(getContextObject()));
 				return xtextResource;
@@ -490,6 +493,12 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 		}
 		nameModificationListener = null;
 	}
+	
+	public void validateEmbeddedEditorContext() {
+		if(embeddedEditor == null || embeddedEditor.getDocument() == null || embeddedEditor.getDocument().getValidationJob() == null) 
+			return;
+		embeddedEditor.getDocument().getValidationJob().schedule();
+	}
 
 	public SashForm getSash() {
 		return this.sash;
@@ -545,8 +554,10 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 
 	protected void setMementoProperties(IMemento memento) {
 		String sectionProperty = getSectionProperty(getContextObject());
-		memento.putInteger(sectionProperty + MEM_FIRST_WEIGHT, previousWidths[0]);
-		memento.putInteger(sectionProperty + MEM_SECOND_WEIGHT, previousWidths[1]);
+		if (previousWidths.length >= 2) {
+			memento.putInteger(sectionProperty + MEM_FIRST_WEIGHT, previousWidths[0]);
+			memento.putInteger(sectionProperty + MEM_SECOND_WEIGHT, previousWidths[1]);
+		}
 		memento.putBoolean(sectionProperty + MEM_EXPANDED, sectionExpanded);
 	}
 
@@ -807,7 +818,11 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 		public void notifyChanged(Notification notification) {
 			if (Notification.SET == notification.getEventType()) {
 				if (BasePackage.Literals.NAMED_ELEMENT__NAME.equals(notification.getFeature())) {
-					nameLabel.setText(notification.getNewStringValue());
+					String newText = notification.getNewStringValue();
+					String oldText = nameLabel.getText();
+					if (!oldText.equals(newText)) {
+						nameLabel.setText(newText);
+					}
 				}
 			}
 		}

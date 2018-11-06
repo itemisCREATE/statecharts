@@ -58,15 +58,19 @@ public interface IChildFirstOrthogonalReactionsStatemachine extends IStatemachin
 		
 		public void setSm_local(long value);
 		
+		public long getCnt();
+		
+		public void setCnt(long value);
+		
 		public void setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback);
 	
 	}
 	
 	public interface SCInterfaceOperationCallback {
 	
-		public long next();
+		public boolean check(String value);
 		
-		public boolean check(String id);
+		public long next();
 		
 	}
 	

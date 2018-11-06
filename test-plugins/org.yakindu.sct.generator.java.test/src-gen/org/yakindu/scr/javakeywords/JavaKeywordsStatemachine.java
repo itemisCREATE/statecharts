@@ -1013,44 +1013,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		sCInterface.setVolatile(value);
 	}
 	
-	private boolean check_goto_abstract_tr0_tr0() {
-		return (sCInterface.whileEvent) && (true);
-	}
-	
-	private boolean check_goto_boolean_tr0_tr0() {
-		return sCInterface.whileEvent;
-	}
-	
-	private boolean check_goto_boolean_tr1_tr1() {
-		return sCInterface.ev;
-	}
-	
-	private boolean check_goto_void_volatile_state_tr0_tr0() {
-		return sCInterface.ev;
-	}
-	
-	private void effect_goto_abstract_tr0() {
-		exitSequence_goto_abstract();
-		sCInterface.setNative(false);
-		
-		enterSequence_goto_boolean_default();
-	}
-	
-	private void effect_goto_boolean_tr0() {
-		exitSequence_goto_boolean();
-		enterSequence_goto_void_default();
-	}
-	
-	private void effect_goto_boolean_tr1() {
-		exitSequence_goto_boolean();
-		enterSequence_goto_void_try();
-	}
-	
-	private void effect_goto_void_volatile_state_tr0() {
-		exitSequence_goto_void_volatile_state();
-		enterSequence_goto_void_volatile_transient_this();
-	}
-	
 	/* Entry action for state 'abstract'. */
 	private void entryAction_goto_abstract() {
 		sCInterface.setAbstract(true);
@@ -1402,35 +1364,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 	}
 	
-	/* The reactions of state abstract. */
-	private void react_goto_abstract() {
-		if (check_goto_abstract_tr0_tr0()) {
-			effect_goto_abstract_tr0();
-		}
-	}
-	
-	/* The reactions of state boolean. */
-	private void react_goto_boolean() {
-		if (check_goto_boolean_tr0_tr0()) {
-			effect_goto_boolean_tr0();
-		} else {
-			if (check_goto_boolean_tr1_tr1()) {
-				effect_goto_boolean_tr1();
-			}
-		}
-	}
-	
-	/* The reactions of state false. */
-	private void react_goto_void_volatile_transient_throw_false() {
-	}
-	
-	/* The reactions of state state. */
-	private void react_goto_void_volatile_state() {
-		if (check_goto_void_volatile_state_tr0_tr0()) {
-			effect_goto_void_volatile_state_tr0();
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_goto__entry_Default() {
 		enterSequence_goto_abstract_default();
@@ -1466,6 +1399,110 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		enterSequence_goto_void_volatile_transient_default();
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean goto_abstract_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if ((sCInterface.whileEvent) && (true)) {
+					exitSequence_goto_abstract();
+					sCInterface.setNative(false);
+					
+					enterSequence_goto_boolean_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean goto_boolean_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.whileEvent) {
+					exitSequence_goto_boolean();
+					enterSequence_goto_void_default();
+				} else {
+					if (sCInterface.ev) {
+						exitSequence_goto_boolean();
+						enterSequence_goto_void_try();
+					} else {
+						did_transition = false;
+					}
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean goto_void_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean goto_void_volatile_transient_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (goto_void_react(try_transition)==false) {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean goto_void_volatile_transient_throw_false_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (goto_void_volatile_transient_react(try_transition)==false) {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean goto_void_volatile_state_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (goto_void_react(try_transition)==false) {
+				if (sCInterface.ev) {
+					exitSequence_goto_void_volatile_state();
+					enterSequence_goto_void_volatile_transient_this();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -1474,16 +1511,16 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case goto_abstract:
-				react_goto_abstract();
+				goto_abstract_react(true);
 				break;
 			case goto_boolean:
-				react_goto_boolean();
+				goto_boolean_react(true);
 				break;
 			case goto_void_volatile_transient_throw_false:
-				react_goto_void_volatile_transient_throw_false();
+				goto_void_volatile_transient_throw_false_react(true);
 				break;
 			case goto_void_volatile_state:
-				react_goto_void_volatile_state();
+				goto_void_volatile_state_react(true);
 				break;
 			default:
 				// $NullState$

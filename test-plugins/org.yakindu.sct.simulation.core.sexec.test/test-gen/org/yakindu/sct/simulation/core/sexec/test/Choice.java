@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for Choice
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class Choice extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("Choice.sct");
@@ -63,27 +65,27 @@ public class Choice extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("A"));
 		setBoolean("c", valueForC);
 		raiseEvent("e");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 	}
 	public void initForEventF(boolean valueForC) throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
 		setBoolean("c", valueForC);
 		raiseEvent("f");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 	}
 	public void initForEventG(boolean valueForC) throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
 		setBoolean("c", valueForC);
 		raiseEvent("g");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 	}
 	public void initForEventH(boolean valueForC) throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
 		setBoolean("c", valueForC);
 		raiseEvent("h");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 	}
 }

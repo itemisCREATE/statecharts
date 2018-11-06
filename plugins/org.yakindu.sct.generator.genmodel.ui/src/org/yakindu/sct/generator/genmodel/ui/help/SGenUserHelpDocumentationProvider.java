@@ -20,7 +20,9 @@ import java.util.WeakHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.help.HelpSystem;
 import org.eclipse.help.IToc;
 import org.eclipse.help.ITopic;
@@ -30,6 +32,7 @@ import org.yakindu.base.utils.jface.help.AbstractUserHelpDocumentationProvider;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureType;
+import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
  * 
@@ -66,6 +69,9 @@ public class SGenUserHelpDocumentationProvider extends AbstractUserHelpDocumenta
 			if (type != null) {
 				return getFeatureTypeDocumentation(type.getName());
 			}
+		} else if (o instanceof Statechart) {
+			URI uri = EcoreUtil.getURI(o);
+			return uri.isPlatform() ? uri.toPlatformString(true) : uri.toFileString();
 		}
 		return EMPTY_DOCUMENTATION;
 	}

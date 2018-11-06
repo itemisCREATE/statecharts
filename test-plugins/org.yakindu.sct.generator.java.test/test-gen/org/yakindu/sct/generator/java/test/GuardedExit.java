@@ -42,6 +42,7 @@ public class GuardedExit {
 		assertTrue(!statemachine.getGuard());
 		checkDone(false);
 	}
+	
 	@Test
 	public void exitNotTaken() {
 		statemachine.enter();
@@ -49,6 +50,7 @@ public class GuardedExit {
 		statemachine.getSCInterface().setGuard(true);
 		checkDone(true);
 	}
+	
 	public void checkDone(boolean shouldBeDone) {
 		statemachine.getSCInterface().raiseE();
 		timer.cycleLeap(1);

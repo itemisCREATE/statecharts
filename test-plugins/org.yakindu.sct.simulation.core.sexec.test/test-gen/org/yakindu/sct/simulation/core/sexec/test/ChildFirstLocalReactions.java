@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for ChildFirstLocalReactions
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class ChildFirstLocalReactions extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("executionorder/ChildFirstLocalReactions.sct");
@@ -27,7 +29,7 @@ public class ChildFirstLocalReactions extends AbstractExecutionFlowTest {
 	public void expectBottomUpLocalReactionOrder() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("AAA"));
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("AAA"));
 		assertTrue(getInteger("aaa_local") == 1l);
 		assertTrue(getInteger("aa_local") == 2l);
@@ -39,7 +41,7 @@ public class ChildFirstLocalReactions extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		assertTrue(isStateActive("AAA"));
 		raiseEvent("e");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("AAB"));
 		assertTrue(getInteger("aaa_local") == 0l);
 		assertTrue(getInteger("aa_local") == 1l);
@@ -52,7 +54,7 @@ public class ChildFirstLocalReactions extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("AAA"));
 		setBoolean("disable_aaa", true);
 		raiseEvent("e");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("AB"));
 		assertTrue(getInteger("aaa_local") == 1l);
 		assertTrue(getInteger("aa_local") == 0l);
@@ -66,7 +68,7 @@ public class ChildFirstLocalReactions extends AbstractExecutionFlowTest {
 		setBoolean("disable_aaa", true);
 		setBoolean("disable_aa", true);
 		raiseEvent("e");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("B"));
 		assertTrue(getInteger("aaa_local") == 1l);
 		assertTrue(getInteger("aa_local") == 2l);

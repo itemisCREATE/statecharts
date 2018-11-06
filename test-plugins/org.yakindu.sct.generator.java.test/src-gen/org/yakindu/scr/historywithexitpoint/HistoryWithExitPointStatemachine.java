@@ -138,54 +138,9 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		sCInterface.raiseNext();
 	}
 	
-	private boolean check_mr_A_r_X1_tr0_tr0() {
-		return sCInterface.next;
-	}
-	
-	private boolean check_mr_A_r_X1_tr1_tr1() {
-		return sCInterface.push;
-	}
-	
-	private boolean check_mr_A_r_X2_tr0_tr0() {
-		return sCInterface.next;
-	}
-	
-	private boolean check_mr_A_r_X2_tr1_tr1() {
-		return sCInterface.push;
-	}
-	
-	private boolean check_mr_B_tr0_tr0() {
-		return sCInterface.back;
-	}
-	
 	private void effect_mr_A_tr0() {
 		exitSequence_mr_A();
 		enterSequence_mr_B_default();
-	}
-	
-	private void effect_mr_A_r_X1_tr0() {
-		exitSequence_mr_A_r_X1();
-		enterSequence_mr_A_r_X2_default();
-	}
-	
-	private void effect_mr_A_r_X1_tr1() {
-		exitSequence_mr_A_r_X1();
-		react_mr_A_r_exit_to_B();
-	}
-	
-	private void effect_mr_A_r_X2_tr0() {
-		exitSequence_mr_A_r_X2();
-		enterSequence_mr_A_r_X1_default();
-	}
-	
-	private void effect_mr_A_r_X2_tr1() {
-		exitSequence_mr_A_r_X2();
-		react_mr_A_r_exit_to_B();
-	}
-	
-	private void effect_mr_B_tr0() {
-		exitSequence_mr_B();
-		enterSequence_mr_A_default();
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -293,35 +248,6 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		}
 	}
 	
-	/* The reactions of state X1. */
-	private void react_mr_A_r_X1() {
-		if (check_mr_A_r_X1_tr0_tr0()) {
-			effect_mr_A_r_X1_tr0();
-		} else {
-			if (check_mr_A_r_X1_tr1_tr1()) {
-				effect_mr_A_r_X1_tr1();
-			}
-		}
-	}
-	
-	/* The reactions of state X2. */
-	private void react_mr_A_r_X2() {
-		if (check_mr_A_r_X2_tr0_tr0()) {
-			effect_mr_A_r_X2_tr0();
-		} else {
-			if (check_mr_A_r_X2_tr1_tr1()) {
-				effect_mr_A_r_X2_tr1();
-			}
-		}
-	}
-	
-	/* The reactions of state B. */
-	private void react_mr_B() {
-		if (check_mr_B_tr0_tr0()) {
-			effect_mr_B_tr0();
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_mr__entry_Default() {
 		enterSequence_mr_A_default();
@@ -342,6 +268,87 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		effect_mr_A_tr0();
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean mr_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean mr_A_r_X1_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (mr_A_react(try_transition)==false) {
+				if (sCInterface.next) {
+					exitSequence_mr_A_r_X1();
+					enterSequence_mr_A_r_X2_default();
+				} else {
+					if (sCInterface.push) {
+						exitSequence_mr_A_r_X1();
+						react_mr_A_r_exit_to_B();
+					} else {
+						did_transition = false;
+					}
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean mr_A_r_X2_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (mr_A_react(try_transition)==false) {
+				if (sCInterface.next) {
+					exitSequence_mr_A_r_X2();
+					enterSequence_mr_A_r_X1_default();
+				} else {
+					if (sCInterface.push) {
+						exitSequence_mr_A_r_X2();
+						react_mr_A_r_exit_to_B();
+					} else {
+						did_transition = false;
+					}
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean mr_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.back) {
+					exitSequence_mr_B();
+					enterSequence_mr_A_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -350,13 +357,13 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case mr_A_r_X1:
-				react_mr_A_r_X1();
+				mr_A_r_X1_react(true);
 				break;
 			case mr_A_r_X2:
-				react_mr_A_r_X2();
+				mr_A_r_X2_react(true);
 				break;
 			case mr_B:
-				react_mr_B();
+				mr_B_react(true);
 				break;
 			default:
 				// $NullState$

@@ -166,5 +166,9 @@ public class AbstractExecutionFlowSimulationEngine extends AbstractSimulationEng
 	public ITimeTaskScheduler getTimeTaskScheduler() {
 		return this.timeTaskScheduler;
 	}
+	
+	public IExecutionFlowInterpreter getInterpreter() {
+		return interpreter;
+	}
 
 }

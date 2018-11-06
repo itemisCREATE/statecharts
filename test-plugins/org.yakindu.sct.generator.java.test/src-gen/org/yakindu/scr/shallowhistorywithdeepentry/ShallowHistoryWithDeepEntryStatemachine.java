@@ -153,53 +153,6 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		sCInterface.raiseToA();
 	}
 	
-	private boolean check_main_region_Y_tr0_tr0() {
-		return sCInterface.toZ;
-	}
-	
-	private boolean check_main_region_Y_tr1_tr1() {
-		return sCInterface.toC;
-	}
-	
-	private boolean check_main_region_Z_tr0_tr0() {
-		return sCInterface.toY;
-	}
-	
-	private boolean check_main_region_Z__region0_A_tr0_tr0() {
-		return sCInterface.toC;
-	}
-	
-	private boolean check_main_region_Z__region0_B__region0_C_tr0_tr0() {
-		return sCInterface.toA;
-	}
-	
-	private void effect_main_region_Y_tr0() {
-		exitSequence_main_region_Y();
-		enterSequence_main_region_Z_default();
-	}
-	
-	private void effect_main_region_Y_tr1() {
-		exitSequence_main_region_Y();
-		enterSequence_main_region_Z__region0_B__region0_C_default();
-		historyVector[0] = stateVector[0];
-	}
-	
-	private void effect_main_region_Z_tr0() {
-		exitSequence_main_region_Z();
-		enterSequence_main_region_Y_default();
-	}
-	
-	private void effect_main_region_Z__region0_A_tr0() {
-		exitSequence_main_region_Z__region0_A();
-		enterSequence_main_region_Z__region0_B__region0_C_default();
-		historyVector[0] = stateVector[0];
-	}
-	
-	private void effect_main_region_Z__region0_B__region0_C_tr0() {
-		exitSequence_main_region_Z__region0_B();
-		enterSequence_main_region_Z__region0_A_default();
-	}
-	
 	/* 'default' enter sequence for state Y */
 	private void enterSequence_main_region_Y_default() {
 		nextStateIndex = 0;
@@ -330,39 +283,6 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		}
 	}
 	
-	/* The reactions of state Y. */
-	private void react_main_region_Y() {
-		if (check_main_region_Y_tr0_tr0()) {
-			effect_main_region_Y_tr0();
-		} else {
-			if (check_main_region_Y_tr1_tr1()) {
-				effect_main_region_Y_tr1();
-			}
-		}
-	}
-	
-	/* The reactions of state A. */
-	private void react_main_region_Z__region0_A() {
-		if (check_main_region_Z_tr0_tr0()) {
-			effect_main_region_Z_tr0();
-		} else {
-			if (check_main_region_Z__region0_A_tr0_tr0()) {
-				effect_main_region_Z__region0_A_tr0();
-			}
-		}
-	}
-	
-	/* The reactions of state C. */
-	private void react_main_region_Z__region0_B__region0_C() {
-		if (check_main_region_Z_tr0_tr0()) {
-			effect_main_region_Z_tr0();
-		} else {
-			if (check_main_region_Z__region0_B__region0_C_tr0_tr0()) {
-				effect_main_region_Z__region0_B__region0_C_tr0();
-			}
-		}
-	}
-	
 	/* Default react sequence for initial entry  */
 	private void react_main_region__entry_Default() {
 		enterSequence_main_region_Y_default();
@@ -383,6 +303,102 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		enterSequence_main_region_Z__region0_B__region0_C_default();
 	}
 	
+	private boolean react(boolean try_transition) {
+		return false;
+	}
+	
+	private boolean main_region_Y_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.toZ) {
+					exitSequence_main_region_Y();
+					enterSequence_main_region_Z_default();
+				} else {
+					if (sCInterface.toC) {
+						exitSequence_main_region_Y();
+						enterSequence_main_region_Z__region0_B__region0_C_default();
+						historyVector[0] = stateVector[0];
+					} else {
+						did_transition = false;
+					}
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_Z_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (react(try_transition)==false) {
+				if (sCInterface.toY) {
+					exitSequence_main_region_Z();
+					enterSequence_main_region_Y_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_Z__region0_A_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (main_region_Z_react(try_transition)==false) {
+				if (sCInterface.toC) {
+					exitSequence_main_region_Z__region0_A();
+					enterSequence_main_region_Z__region0_B__region0_C_default();
+					historyVector[0] = stateVector[0];
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_Z__region0_B_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (main_region_Z_react(try_transition)==false) {
+				did_transition = false;
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
+	private boolean main_region_Z__region0_B__region0_C_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (main_region_Z__region0_B_react(try_transition)==false) {
+				if (sCInterface.toA) {
+					exitSequence_main_region_Z__region0_B();
+					enterSequence_main_region_Z__region0_A_default();
+				} else {
+					did_transition = false;
+				}
+			}
+		}
+		if (did_transition==false) {
+		}
+		return did_transition;
+	}
+	
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
@@ -391,13 +407,13 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
 			case main_region_Y:
-				react_main_region_Y();
+				main_region_Y_react(true);
 				break;
 			case main_region_Z__region0_A:
-				react_main_region_Z__region0_A();
+				main_region_Z__region0_A_react(true);
 				break;
 			case main_region_Z__region0_B__region0_C:
-				react_main_region_Z__region0_B__region0_C();
+				main_region_Z__region0_B__region0_C_react(true);
 				break;
 			default:
 				// $NullState$

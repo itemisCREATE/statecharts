@@ -206,8 +206,9 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 
 	@Override
 	public void step() {
-		Thread thread = new Thread(queueWorker);
-		thread.start();
+		if (suspended) {
+			timeLeapToNextEvent();
+		}
 	}
 
 	@Override

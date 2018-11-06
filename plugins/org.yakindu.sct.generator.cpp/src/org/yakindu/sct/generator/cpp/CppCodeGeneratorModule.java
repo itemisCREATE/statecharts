@@ -18,6 +18,7 @@ import org.yakindu.sct.generator.c.DefaultGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.IncludeProvider;
 import org.yakindu.sct.generator.c.SimpleGenArtifactConfigurations;
+import org.yakindu.sct.generator.c.ScTypesIncludeProvider;
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries;
 import org.yakindu.sct.generator.c.extensions.Naming;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
@@ -25,17 +26,21 @@ import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.extensions.AnnotationExtensions;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
-import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenCppIncludeProvider;
+import org.yakindu.sct.generator.cpp.eventdriven.CppEventDrivenIncludeProvider;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenEventCode;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenExpressionCode;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineHeader;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineImplementation;
 import org.yakindu.sct.model.sexec.naming.INamingService;
+import org.yakindu.sct.model.sexec.transformation.BehaviorMapping;
+import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
+import org.yakindu.sct.model.sexec.transformation.ng.ModelSequencer;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 
 import com.google.inject.Binder;
+import com.google.inject.multibindings.Multibinder;
 import com.google.inject.name.Names;
 
 /**
@@ -47,6 +52,8 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 
 	@Override
 	public void configure(GeneratorEntry entry, Binder binder) {
+		binder.bind(IModelSequencer.class).to(ModelSequencer.class);
+		binder.bind(BehaviorMapping.class).to(org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping.class);
 		binder.bind(GeneratorEntry.class).toInstance(entry);
 		binder.bind(String.class).annotatedWith(Names.named("Separator")).toInstance(getSeparator(entry));
 		binder.bind(IExecutionFlowGenerator.class).to(CppGenerator.class);
@@ -54,9 +61,15 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		binder.bind(INamingService.class).to(CppNamingService.class);
 		binder.bind(ITypeSystemInferrer.class).to(STextTypeInferrer.class);
 		binder.bind(Naming.class).to(CppNaming.class);
-		binder.bind(IncludeProvider.class).to(StandardCppIncludeProvider.class);
 		bindEventDrivenClasses(entry, binder);
 		bindIGenArtifactConfigurations(entry, binder);
+		addIncludeProvider(binder, ScTypesIncludeProvider.class);
+		addIncludeProvider(binder, CppInterfaceIncludeProvider.class);
+	}
+
+	protected void addIncludeProvider(Binder binder, Class<? extends IncludeProvider> provider) {
+		Multibinder<IncludeProvider> includeBinder = Multibinder.newSetBinder(binder, IncludeProvider.class);
+		includeBinder.addBinding().to(provider);
 	}
 
 	protected void bindIGenArtifactConfigurations(GeneratorEntry entry, Binder binder) {
@@ -76,7 +89,7 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 			binder.bind(StatemachineImplementation.class).to(EventDrivenStatemachineImplementation.class);
 			binder.bind(CppExpressionsGenerator.class).to(EventDrivenExpressionCode.class);
 			binder.bind(EventCode.class).to(EventDrivenEventCode.class);
-			binder.bind(StandardCppIncludeProvider.class).to(EventDrivenCppIncludeProvider.class);
+			addIncludeProvider(binder, CppEventDrivenIncludeProvider.class);
 		}
 	}
 

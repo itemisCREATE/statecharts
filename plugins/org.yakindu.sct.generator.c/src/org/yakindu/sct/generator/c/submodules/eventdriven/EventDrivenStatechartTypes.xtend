@@ -16,6 +16,10 @@ import org.yakindu.sct.generator.c.extensions.EventNaming
 import org.yakindu.sct.generator.c.submodules.StatechartTypes
 import org.yakindu.sct.model.sexec.ExecutionFlow
 
+import static org.yakindu.sct.generator.c.CGeneratorConstants.INT_TYPE
+import static org.yakindu.sct.generator.c.CGeneratorConstants.BOOL_TYPE
+
+
 /**
  * @author rbeckmann
  *
@@ -28,7 +32,7 @@ class EventDrivenStatechartTypes extends StatechartTypes {
 		'''
 		«super.statemachineStructContent(it)»
 		«IF hasLocalEvents»
-		«eventQueueTypeName» internal_event_queue;
+		«eventQueueTypeName» «internalQueue»;
 		«ENDIF»
 		'''
 	}
@@ -40,7 +44,7 @@ class EventDrivenStatechartTypes extends StatechartTypes {
 		 * Enum of event names in the statechart.
 		 */
 		typedef enum  {
-			«invalidEventEnumName(it)» = SC_INVALID_EVENT_VALUE,
+			«invalidEventEnumName(it)» = «invalidEvent»,
 			«FOR e : internalScope.getLocalEvents SEPARATOR ","»
 				«eventEnumMemberName(e)»
 			«ENDFOR»
@@ -74,7 +78,7 @@ class EventDrivenStatechartTypes extends StatechartTypes {
 		typedef struct {
 			«eventEnumName» name;
 			«IF hasLocalEventsWithValue»
-			sc_boolean has_value;
+			«BOOL_TYPE» has_value;
 			«eventValueUnionName» value;
 			«ENDIF»
 		} «internalEventStructTypeName»;
@@ -88,9 +92,9 @@ class EventDrivenStatechartTypes extends StatechartTypes {
 		 */
 		typedef struct «eventQueueTypeName»_s {
 			«internalEventStructTypeName» events[«bufferSize»];
-			sc_integer pop_index;
-			sc_integer push_index;
-			sc_integer size;
+			«INT_TYPE» pop_index;
+			«INT_TYPE» push_index;
+			«INT_TYPE» size;
 		} «eventQueueTypeName»;
 		'''
 	}

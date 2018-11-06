@@ -1,11 +1,14 @@
 
 h1{%EARLY_SEPARATOR%}. 
 
-==<div style="counter-reset: h1 4">==
-
 ==<div class="pro-feature">==
 
 h1(#cdom_deep_c_integration). Deep C/C++ Integration: Integrating your C/C++ source code with your state machines
+
+The Deep C/C++ Integration feature allows using C/C++ types, variables, and operations directly within the statechart model.
+
+
+
 
 h2(#cdom_introduction). Introduction
 
@@ -925,7 +928,5 @@ In C it is possible to define structs, unions and enums without a _typedef_. The
 h3(#cdom_please_get_in_touch_with_us). Please get in touch with us
 
 Please note that the preceding list of restrictions might not be complete. If you discover any further problems, please do not hesitate to contact us! Your feedback is highly appreciated!
-
-==</div>==
 
 ==</div>==

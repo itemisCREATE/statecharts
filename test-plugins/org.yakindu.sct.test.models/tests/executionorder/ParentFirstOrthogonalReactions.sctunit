@@ -1,13 +1,5 @@
 testclass ParentFirstOrthogonalReactions for statechart executionorder.ParentFirstOrthogonalReactions {
-	
-	var counter : integer = 0
-	const checkFail : integer = -1
-	
-	operation setUp() {
-		counter = 0
-	}
-	
-	
+		
 	operation checkA(ret : boolean) : boolean {
 		cnt = cnt+1
 		a_check = cnt
@@ -53,7 +45,6 @@ testclass ParentFirstOrthogonalReactions for statechart executionorder.ParentFir
 	
 	@Test operation executionOrder() {
 	
-		setUp
 			
 		mock check("A")		returns ( checkA(false) )
 		mock check("AA")		returns ( checkAA(false) )
@@ -91,7 +82,6 @@ testclass ParentFirstOrthogonalReactions for statechart executionorder.ParentFir
 
 	@Test operation executionOrderWIthFirstLeafTransition() {
 		
-		setUp
 		
 		mock check("A")		returns ( checkA(false) )
 		mock check("AA")		returns ( checkAA(false) )
@@ -128,7 +118,6 @@ testclass ParentFirstOrthogonalReactions for statechart executionorder.ParentFir
 
 	@Test operation executionOrderWIthFirstParentTransition() {
 		
-		setUp
 		
 		mock check("A")		returns ( checkA(false) )
 		mock check("AA")		returns ( checkAA(true) )
@@ -165,7 +154,6 @@ testclass ParentFirstOrthogonalReactions for statechart executionorder.ParentFir
 
 	@Test operation executionOrderWIthFirstGrandParentTransition() {
 		
-		setUp
 		
 		mock check("A")		returns ( checkA(true) )
 		mock check("AA")		returns ( checkAA(false) )
@@ -202,7 +190,6 @@ testclass ParentFirstOrthogonalReactions for statechart executionorder.ParentFir
 
 	@Test operation executionOrderWithLastLeafTransition() {
 		
-		setUp
 		
 		mock check("A")		returns ( checkA(false) )
 		mock check("AA")		returns ( checkAA(false) )

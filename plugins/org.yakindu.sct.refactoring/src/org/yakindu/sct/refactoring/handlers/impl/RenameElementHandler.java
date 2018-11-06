@@ -233,6 +233,8 @@ public class RenameElementHandler extends AbstractRefactoringHandler<NamedElemen
 		private Text text;
 		private String dialogTitle;
 		private String dialogMessage;
+		
+		private String newName = "";
 
 		public RenameDialog(Shell parentShell, String dialogTitle, String dialogMessage, String initialValue,
 				IInputValidator validator, boolean hasDefinitionSectionErrors) {
@@ -242,6 +244,8 @@ public class RenameElementHandler extends AbstractRefactoringHandler<NamedElemen
 			this.validator = validator;
 			this.modelContainsErrors = hasDefinitionSectionErrors;
 		}
+		
+		
 
 		@Override
 		protected Control createDialogArea(Composite parent) {
@@ -279,7 +283,13 @@ public class RenameElementHandler extends AbstractRefactoringHandler<NamedElemen
 			});
 			validate();
 		}
-
+		
+		@Override
+		protected void okPressed() {
+			this.newName = text.getText();
+			super.okPressed();
+		}
+		
 		protected void validate() {
 			setErrorMessage(validator.isValid(text.getText()));
 		}
@@ -322,9 +332,9 @@ public class RenameElementHandler extends AbstractRefactoringHandler<NamedElemen
 		}
 
 		public String getNewName() {
-			return text.getText();
-
+			return newName;
 		}
+		
 	}
 
 }

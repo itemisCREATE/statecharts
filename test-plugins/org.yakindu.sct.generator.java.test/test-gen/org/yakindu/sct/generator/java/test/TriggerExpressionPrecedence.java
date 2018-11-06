@@ -43,6 +43,7 @@ public class TriggerExpressionPrecedence {
 		timer.cycleLeap(1);
 		assertTrue(!statemachine.getE1_transition());
 	}
+	
 	@Test
 	public void unsatisfiedTriggerAndFGuardTrueOrFalse() {
 		statemachine.enter();
@@ -51,6 +52,7 @@ public class TriggerExpressionPrecedence {
 		timer.cycleLeap(1);
 		assertTrue(!statemachine.getE1_transition());
 	}
+	
 	@Test
 	public void unsatisfiedTriggerAndFGuardFalseOrTrue() {
 		statemachine.enter();
@@ -59,6 +61,7 @@ public class TriggerExpressionPrecedence {
 		timer.cycleLeap(1);
 		assertTrue(!statemachine.getE1_transition());
 	}
+	
 	@Test
 	public void unsatisfiedTriggerAndFGuardTrueOrTrue() {
 		statemachine.enter();

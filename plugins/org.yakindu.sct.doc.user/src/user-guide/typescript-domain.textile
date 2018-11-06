@@ -1,8 +1,6 @@
 
 h1{%EARLY_SEPARATOR%}. 
 
-==<div class="pro-feature">==
-
 h1(#tsdom-using-typescript-in-statecharts). Using TypeScript in statecharts
 
 h2(#tsdom-introduction). Introduction
@@ -187,4 +185,3 @@ In the context of Angular, the generated statechart is a _service_. To integrate
 
 # Customize the _app.module.ts_ file as follows:<br/>!images/tsdomain_ngmodule.png(NgModel customization)!
 # Customize the _app.comonent.ts_ file as follows:<br/>!images/tsdomain_ngcomponent.png(NgComponent customization)!
-==</div>==

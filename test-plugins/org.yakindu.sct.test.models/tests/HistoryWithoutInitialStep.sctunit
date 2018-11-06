@@ -39,6 +39,15 @@ testclass HistoryWithoutInitialStep for statechart HistoryWithoutInitialStep {
 		proceed 1 cycle
 		assert active(HistoryWithoutInitialStep.main_region.B.r1.D)
 	}
+	
+	@Test
+	operation enterThroughHistoryWithoutInit(){
+		enter
+		assert active(HistoryWithoutInitialStep.main_region.A) 
+		raise toHistory
+		proceed 1 cycle
+		assert active(HistoryWithoutInitialStep.main_region.B.r1.C)
+	}
 		
 	operation init(){
 		enter

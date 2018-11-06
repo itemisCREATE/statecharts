@@ -34,15 +34,15 @@ LogicalAndExpression returns Expression:
 	LogicalAndOperator rightOperand=LogicalNotExpression)*;
 
 LogicalNotExpression returns Expression:
-	BitwiseXorExpression | {LogicalNotExpression} LogicalNotOperator
-	operand=BitwiseXorExpression;
-
-BitwiseXorExpression returns Expression:
-	BitwiseOrExpression ({BitwiseXorExpression.leftOperand=current} BitwiseXOrOperator
-	rightOperand=BitwiseOrExpression)*;
+	BitwiseOrExpression | {LogicalNotExpression} LogicalNotOperator
+	operand=BitwiseOrExpression;
 
 BitwiseOrExpression returns Expression:
-	BitwiseAndExpression ({BitwiseOrExpression.leftOperand=current} BitwiseOrOperator
+	BitwiseXorExpression ({BitwiseOrExpression.leftOperand=current} BitwiseOrOperator
+	rightOperand=BitwiseXorExpression)*;
+
+BitwiseXorExpression returns Expression:
+	BitwiseAndExpression ({BitwiseXorExpression.leftOperand=current} BitwiseXOrOperator
 	rightOperand=BitwiseAndExpression)*;
 
 BitwiseAndExpression returns Expression:

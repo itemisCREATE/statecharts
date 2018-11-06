@@ -54,7 +54,6 @@ public interface STextValidationMessages {
 	public static final String DECLARATION_WITH_READONLY = "The keyword '%s' has no effect for '%s' definitions. Can be removed.";
 	public static final String REFERENCE_CONSTANT_BEFORE_DEFINED = "Cannot reference a constant from different scope or before it is defined.";
 	public static final String INTERNAL_DECLARATION_UNUSED = "Internal declaration is not used in statechart.";
-	public static final String DECLARATION_DEPRECATED = "The keyword '%s' is deprecated. Can be removed.";
 	public static final String VALUE_OF_REQUIRES_EVENT = "valueof() expression requires event as argument.";
 	public static final String IMPORT_NOT_RESOLVED_MSG = "Import '%s' cannot be resolved.";
 	public static final String IMPORT_NOT_RESOLVED_CODE = "ImportNotResolved";
@@ -62,4 +61,8 @@ public interface STextValidationMessages {
 	public static final String CONTRADICTORY_ANNOTATIONS = "Some annotations (%s) have contradictory effects.";
 	public static final String BAD_EVENT_NAMES = "'%s' is already used as name of an internal event.";
 	public static final String SYNC_OUTGOING_TRIGGER = "Triggers and guards on a synchronization's outgoing transitions will be ignored.";
+	public static final String ALWAYS_TRUE_TRANSITION_USED = "Transition with '%s' should be evaluate as the last transition of the state as following transitions won't be evaluated. Change the transition order (in the Properties view).";
+	public static final String DEAD_TRANSITION = "Dead transition. This transition can not be taken due to previous transition with '%s' trigger.";
+	public static final String USE_DEFAULT_TRIGGER_IN_CHOICES = "Transition with '%s' effect blocking other transitions. Use 'default' or 'else' instead.";
+	public static final String ONLY_ONE_DEFAULT_SHOULD_BE_USED = "Only one default or else transition should be used. Currently used default and/or else transitions: %d.";
 }

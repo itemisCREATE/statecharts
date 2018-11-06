@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for AssignmentAsExpression
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class AssignmentAsExpression extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("AssignmentAsExpression.sct");
@@ -29,29 +31,29 @@ public class AssignmentAsExpression extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("Add"));
 		assertTrue(getInteger("b") == 5l);
 		assertTrue(getInteger("a") == 9l);
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("Subtract"));
 		assertTrue(getInteger("d") == 6l);
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("Multiply"));
 		assertTrue(getInteger("e") == 15l);
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("Divide"));
 		assertTrue(getInteger("g") == 1l);
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("Modulo"));
 		assertTrue(getInteger("i") == 1l);
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("Shift"));
 		assertTrue(getInteger("j") == 16l);
 		assertTrue(getInteger("k") == 4l);
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("boolean And"));
 		assertTrue(getInteger("l") == 1l);
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("boolean Or"));
 		assertTrue(getInteger("p") == 15l);
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("boolean Xor"));
 		assertTrue(getInteger("u") == 12l);
 		interpreter.exit();

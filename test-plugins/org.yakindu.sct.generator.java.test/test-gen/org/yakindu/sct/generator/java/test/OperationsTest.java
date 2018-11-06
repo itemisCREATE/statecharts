@@ -121,6 +121,7 @@ public class OperationsTest {
 		verify(defaultMock, atLeastOnce()).unnamedOperation5a(anyString());
 		 
 	}
+	
 	@Test
 	public void operationsNotCalled() {
 		when(defaultMock.alwaysTrue()).thenAnswer(new Answer<Boolean>() {

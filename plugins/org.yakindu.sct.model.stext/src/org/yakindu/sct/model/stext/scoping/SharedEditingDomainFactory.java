@@ -83,13 +83,13 @@ public class SharedEditingDomainFactory extends DiagramEditingDomainFactory
 			}
 
 			public boolean handleResourceChanged(Resource resource) {
-				if (resource instanceof AbstractSCTResource) {
-					// do not unload GMF resources as it might be the one
-					// underlying the currently opened editor
-					return true;
-				}
 				unloadWithReferences(resource);
 				try {
+					if (resource instanceof AbstractSCTResource) {
+						// do not unload GMF resources as it might be the one
+						// underlying the currently opened editor
+						return true;
+					}
 					resource.load(resource.getResourceSet().getLoadOptions());
 				} catch (IOException e) {
 					e.printStackTrace();

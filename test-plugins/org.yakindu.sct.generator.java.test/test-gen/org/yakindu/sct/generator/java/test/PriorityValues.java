@@ -43,6 +43,7 @@ public class PriorityValues {
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.main_region_C));
 	}
+	
 	@Test
 	public void regionPriority() {
 		statemachine.enter();

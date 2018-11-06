@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.yakindu.sct</groupId>
 	<artifactId>org.yakindu.sct.releng</artifactId>
-	<version>3.4.1-SNAPSHOT</version>
+	<version>3.4.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
@@ -16,6 +16,8 @@
 		<antrun-version>1.6</antrun-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<testFailureIgnore>false</testFailureIgnore>
+		<jarSignerUrl>https://macbuilds2.itemis.de/jarsigner</jarSignerUrl>
+		<signerVersion>1.1.5</signerVersion>
 	</properties>
 	<build>
 		<plugins>
@@ -210,7 +212,7 @@
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
-									<version>3.4.1-SNAPSHOT</version>
+									<version>3.4.2-SNAPSHOT</version>
 									<classifier>Neon</classifier>
 								</artifact>
 							</target>
@@ -308,7 +310,7 @@
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
-									<version>3.4.1-SNAPSHOT</version>
+									<version>3.4.2-SNAPSHOT</version>
 									<classifier>Oxygen</classifier>
 								</artifact>
 							</target>
@@ -406,7 +408,7 @@
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
-									<version>3.4.1-SNAPSHOT</version>
+									<version>3.4.2-SNAPSHOT</version>
 									<classifier>Photon</classifier>
 								</artifact>
 							</target>
@@ -486,30 +488,18 @@
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
-			<pluginRepositories>
-				<pluginRepository>
-					<id>nexus-projects.itemis.de</id>
-					<url>https://projects.itemis.de/nexus/content/groups/maven-plugins/</url>
-					<releases>
-						<enabled>true</enabled>
-					</releases>
-					<snapshots>
-						<enabled>true</enabled>
-					</snapshots>
-				</pluginRepository>
-			</pluginRepositories>
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>de.itemis.signing</groupId>
-						<artifactId>itemis-jarsigner</artifactId>
-						<version>0.0.4</version>
+						<groupId>org.eclipse.cbi.maven.plugins</groupId>
+						<artifactId>eclipse-jarsigner-plugin</artifactId>
+						<version>${signerVersion}</version>
 						<configuration>
-							<sshKey>${ssh.key}</sshKey>
+							<signerUrl>${jarSignerUrl}</signerUrl>
+							<excludeInnerJars>false</excludeInnerJars>
 						</configuration>
 						<executions>
 							<execution>
-								<id>sign</id>
 								<goals>
 									<goal>sign</goal>
 								</goals>
@@ -629,6 +619,10 @@
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>signing</id>
+			<url>https://repo.eclipse.org/content/repositories/cbi-releases/</url>
 		</pluginRepository>
 	</pluginRepositories>
 

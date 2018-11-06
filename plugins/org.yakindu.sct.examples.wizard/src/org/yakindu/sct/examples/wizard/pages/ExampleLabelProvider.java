@@ -44,9 +44,11 @@ public class ExampleLabelProvider extends LabelProvider implements IStyledLabelP
 				return StatechartImages.PRO_LOGO.image();
 			} else if (((ExampleData) element).isLabs()){
 				return StatechartImages.LABS_LOGO.image();
-			} else {
+			} else if (((ExampleData) element).isPlatform()){
+				// TODO: Define image for platform example
 				return StatechartImages.LOGO.image();
 			}
+			return StatechartImages.LOGO.image();
 		}
 		if (element instanceof ExampleCategory) {
 			String categoryName = ((ExampleCategory) element).getName();
@@ -55,6 +57,12 @@ public class ExampleLabelProvider extends LabelProvider implements IStyledLabelP
 			} else if (CATEGORY_LABS.equals(categoryName)) {
 				return StatechartImages.LABS_LOGO.image();
 			} else if (CATEGORY_STANDARD.equals(categoryName)) {
+				return StatechartImages.LOGO.image();
+			} else if (CATEGORY_PLATFORM.equals(categoryName)) {
+				// TODO: Define image for platform example
+				return StatechartImages.LOGO.image();
+			} else if (CATEGORY_HEADLESS.equals(categoryName)) {
+				// TODO: Define image for headless example
 				return StatechartImages.LOGO.image();
 			}
 		}

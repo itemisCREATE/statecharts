@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for ExitOnSelfTransition
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class ExitOnSelfTransition extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("ExitOnSelfTransition.sct");
@@ -30,11 +32,11 @@ public class ExitOnSelfTransition extends AbstractExecutionFlowTest {
 		assertTrue(getInteger("entryCount") == 1l);
 		assertTrue(getInteger("exitCount") == 0l);
 		raiseEvent("e");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(getInteger("entryCount") == 2l);
 		assertTrue(getInteger("exitCount") == 1l);
 		raiseEvent("f");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(getInteger("entryCount") == 2l);
 		assertTrue(getInteger("exitCount") == 2l);
 	}

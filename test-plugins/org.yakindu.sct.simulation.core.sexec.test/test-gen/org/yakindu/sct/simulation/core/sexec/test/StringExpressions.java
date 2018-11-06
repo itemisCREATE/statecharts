@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for StringExpressions
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class StringExpressions extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("StringExpressions.sct");
@@ -30,28 +32,28 @@ public class StringExpressions extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		assertTrue(isStateActive("AssignmentChecked"));
 		raiseEvent("e");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("VarToVarCompareSucceeded"));
 		assertTrue(getBoolean("guardStringEqual"));
 		assertTrue(getBoolean("guardStringNotEqual"));
 		assertTrue(getBoolean("stringVarEqual"));
 		assertTrue(getBoolean("stringVarNotEqual"));
 		raiseEvent("e");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("VarToConstCompareSucceeded"));
 		assertTrue(getBoolean("guardStringEqual"));
 		assertTrue(getBoolean("guardStringNotEqual"));
 		assertTrue(getBoolean("stringVarEqual"));
 		assertTrue(getBoolean("stringVarNotEqual"));
 		raiseEvent("e");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("ConstToVarCompareSucceeded"));
 		assertTrue(getBoolean("guardStringEqual"));
 		assertTrue(getBoolean("guardStringNotEqual"));
 		assertTrue(getBoolean("stringVarEqual"));
 		assertTrue(getBoolean("stringVarNotEqual"));
 		raiseEvent("e");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("ConstToConstCompareSucceeded"));
 		assertTrue(getBoolean("guardStringEqual"));
 		assertTrue(getBoolean("guardStringNotEqual"));
