@@ -75,13 +75,13 @@ import org.yakindu.sct.ui.editor.providers.SemanticHints;
  *
  */
 public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart, IPropertyChangeListener {
-
+	
 	private EditPart figureCompartmentEditPart;
-
+	
 	public StateEditPart(View view) {
 		super(view);
 	}
-
+	
 	/**
 	 * Delegates all {@link CreateViewAndElementRequest}s to the figure
 	 * compartment.
@@ -97,10 +97,10 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 				return figureCompartmentEditPart;
 			}
 		}
-
+		
 		return super.getTargetEditPart(request);
 	}
-
+	
 	@Override
 	protected void refreshBackgroundColor() {
 		if (!hasCustomColor()) {
@@ -111,14 +111,32 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 			super.refreshBackgroundColor();
 		}
 	}
-
+	
 	@Override
 	protected void setBackgroundColor(Color c) {
 		super.setBackgroundColor(c);
 		Figure figure = getPrimaryShape();
 		figure.setBackgroundColor(c);
 	}
-
+	
+	@Override
+	protected void refreshForegroundColor() {
+		if (!hasCustomColor()) {
+			IPreferenceStore store = DiagramActivator.getDefault().getPreferenceStore();
+			RGB color = PreferenceConverter.getColor(store, StatechartPreferenceConstants.PREF_STATE_LINE);
+			setForegroundColor(DiagramColorRegistry.getInstance().getColor(color));
+		} else {
+			super.refreshBackgroundColor();
+		}
+	}
+	
+	@Override
+	protected void setForegroundColor(Color c) {
+		super.setForegroundColor(c);
+		Figure figure = getPrimaryShape();
+		figure.setForegroundColor(c);
+	}
+	
 	protected boolean hasCustomColor() {
 		Object model = getModel();
 		if (model != null && model instanceof View) {
@@ -126,9 +144,6 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 			FillStyle decoFillStyle = (FillStyle) ((DecorationNode) child)
 					.getStyle(NotationPackage.eINSTANCE.getFillStyle());
 			FillStyle nodeFillStyle = (FillStyle) ((View) model).getStyle(NotationPackage.eINSTANCE.getFillStyle());
-			RGB figureRGB = getPrimaryShape().getBackgroundColor().getRGB();
-			RGB decoRGB = FigureUtilities.integerToRGB(decoFillStyle.getFillColor());
-			RGB nodeRGB = FigureUtilities.integerToRGB(nodeFillStyle.getFillColor());
 			if (decoFillStyle.getFillColor() == 16777215 && nodeFillStyle.getFillColor() != 16777215) {
 				return false;
 			}
@@ -136,7 +151,7 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 		}
 		return false;
 	}
-
+	
 	protected Node getChild(String type) {
 		Object model = getModel();
 		if (!(model instanceof View)) {
@@ -153,7 +168,7 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 		}
 		return null;
 	}
-
+	
 	private boolean areInsertableChildren(List<?> editParts) {
 		for (Object object : editParts) {
 			if (!(object instanceof RegionEditPart)) {
@@ -162,7 +177,7 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 		}
 		return true;
 	}
-
+	
 	@Override
 	protected NodeFigure createNodeFigure() {
 		NodeFigure figure = new DefaultSizeNodeFigure(getDefaultSize()) {
@@ -174,22 +189,22 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 						getBounds().width - (insets.right + insets.left),
 						getBounds().height - (insets.bottom + insets.top));
 			}
-
+			
 		};
 		figure.setLayoutManager(new StackLayout());
 		figure.setMinimumSize(getDefaultSize());
 		figure.add(createPrimaryShape());
 		return figure;
 	}
-
+	
 	protected Dimension getDefaultSize() {
 		return MapModeUtils.getDefaultSizeDimension(getMapMode());
 	}
-
+	
 	public StateFigure createPrimaryShape() {
 		return new StateFigure(getMapMode());
 	}
-
+	
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
@@ -198,13 +213,13 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 		installEditPolicy(EnlargeContainerEditPolicy.ROLE, new EnlargeContainerEditPolicy());
 		installEditPolicy(EditPolicy.GRAPHICAL_NODE_ROLE, new FeedbackGraphicalNodeEditPolicy());
 	}
-
+	
 	@Override
 	protected void refreshVisuals() {
 		refreshCompartmentLayout();
 		super.refreshVisuals();
 	}
-
+	
 	private void refreshCompartmentLayout() {
 		if (getTextCompartment().isCollapsed()) {
 			getPrimaryShape().setConstraint(getPrimaryShape().getTextCompartmentPane(), getCollapsedData());
@@ -220,34 +235,34 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 			getPrimaryShape().setConstraint(getPrimaryShape().getFigureCompartmentPane(), getExpandedData());
 		}
 	}
-
+	
 	private boolean figureCompartmentVisible() {
 		BooleanValueStyle inlineStyle = DiagramPartitioningUtil.getInlineStyle(getNotationView());
 		return resolveSemanticElement().getRegions().size() > 0
 				&& (inlineStyle == null || inlineStyle.isBooleanValue());
 	}
-
+	
 	private GridData getExpandedData() {
 		return GridDataFactory.fillDefaults().grab(true, true).getData();
 	}
-
+	
 	private GridData getCollapsedData() {
 		return GridDataFactory.fillDefaults().grab(false, false).getData();
 	}
-
+	
 	private Compartment getTextCompartment() {
 		return (Compartment) ViewUtil.getChildBySemanticHint(getNotationView(), SemanticHints.STATE_TEXT_COMPARTMENT);
 	}
-
+	
 	@Override
 	public IFigure getContentPane() {
 		return getPrimaryShape().getFigureCompartmentPane();
 	}
-
+	
 	public StateFigure getPrimaryShape() {
 		return (StateFigure) getFigure().getChildren().get(0);
 	}
-
+	
 	@Override
 	protected void addChildVisual(EditPart childEditPart, int index) {
 		if (childEditPart instanceof StateFigureCompartmentEditPart) {
@@ -265,7 +280,7 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 			super.addChildVisual(childEditPart, index);
 		}
 	}
-
+	
 	@Override
 	protected void removeChildVisual(EditPart childEditPart) {
 		if (childEditPart instanceof StateFigureCompartmentEditPart) {
@@ -280,20 +295,20 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 			super.removeChildVisual(childEditPart);
 		}
 	}
-
+	
 	@Override
 	protected void addNotationalListeners() {
 		super.addNotationalListeners();
 		addListenerFilter("TextCompartmentView", this,
 				ViewUtil.getChildBySemanticHint(getNotationView(), SemanticHints.STATE_TEXT_COMPARTMENT));
 	}
-
+	
 	@Override
 	protected void removeNotationalListeners() {
 		super.removeNotationalListeners();
 		removeListenerFilter("TextCompartmentView");
 	}
-
+	
 	/**
 	 * Returns the default background color for states
 	 */
@@ -308,17 +323,17 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 		}
 		return super.getPreferredValue(feature);
 	}
-
+	
 	@Override
 	public State resolveSemanticElement() {
 		return (State) super.resolveSemanticElement();
 	}
-
+	
 	@Override
 	public DragTracker getDragTracker(Request request) {
 		return new NonRevealingDragEditPartsTrackerEx(this);
 	}
-
+	
 	@Override
 	protected void handleNotificationEvent(Notification notification) {
 		if (notification.getFeature() == NotationPackage.Literals.BOOLEAN_VALUE_STYLE__BOOLEAN_VALUE) {
@@ -337,24 +352,26 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 			super.handleNotificationEvent(notification);
 		}
 	}
-
+	
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		if (StatechartPreferenceConstants.PREF_STATE_BACKGROUND.equals(event.getProperty())) {
 			refreshVisuals();
+		} else if (StatechartPreferenceConstants.PREF_STATE_LINE.equals(event.getProperty())) {
+			refreshVisuals();
 		}
 	}
-
+	
 	@Override
 	public void activate() {
 		DiagramActivator.getDefault().getPreferenceStore().addPropertyChangeListener(this);
 		super.activate();
 	}
-
+	
 	@Override
 	public void deactivate() {
 		DiagramActivator.getDefault().getPreferenceStore().removePropertyChangeListener(this);
 		super.deactivate();
 	}
-
+	
 }
