@@ -36,32 +36,38 @@ public class EclipseConsoleLogger implements IConsoleLogger {
 	private MessageConsoleStream info;
 	private MessageConsoleStream error;
 
+	private MessageConsole console;
+
 	public EclipseConsoleLogger() {
 		init();
 	}
 
 	public void init() {
 		if (Platform.isRunning()) {
-			info = getConsole().newMessageStream();
-			error = getConsole().newMessageStream();
+			console = getConsole();
+			info = console.newMessageStream();
+			error = console.newMessageStream();
 			error.setActivateOnWrite(true);
 		}
 	}
 
-	private MessageConsole getConsole() {
-		ConsolePlugin plugin = ConsolePlugin.getDefault();
-		IConsoleManager consoleManager = plugin.getConsoleManager();
+	protected MessageConsole getConsole() {
+		IConsoleManager consoleManager = getConsoleManager();
 		IConsole[] existing = consoleManager.getConsoles();
 		for (int i = 0; i < existing.length; i++) {
 			if (SCT_GENERATOR_CONSOLE.equals(existing[i].getName())) {
-				MessageConsole console = (MessageConsole) existing[i];
-				consoleManager.showConsoleView(console);
+				return (MessageConsole) existing[i];
 			}
 		}
-		MessageConsole newConsole = new MessageConsole(SCT_GENERATOR_CONSOLE, null);
-		consoleManager.addConsoles(new IConsole[] { newConsole });
-		consoleManager.showConsoleView(newConsole);
-		return newConsole;
+		MessageConsole console = new MessageConsole(SCT_GENERATOR_CONSOLE, null);
+		consoleManager.addConsoles(new IConsole[] { console });
+		return console;
+	}
+
+	protected IConsoleManager getConsoleManager() {
+		ConsolePlugin plugin = ConsolePlugin.getDefault();
+		IConsoleManager consoleManager = plugin.getConsoleManager();
+		return consoleManager;
 	}
 
 	public void close() {
@@ -76,6 +82,7 @@ public class EclipseConsoleLogger implements IConsoleLogger {
 	@Override
 	public void logError(Throwable t) {
 		if (error != null && !error.isClosed() && PlatformUI.isWorkbenchRunning()) {
+			getConsoleManager().showConsoleView(console);
 			PrintWriter printWriter = new PrintWriter(error);
 			t.printStackTrace(printWriter);
 			printWriter.flush();
@@ -88,6 +95,7 @@ public class EclipseConsoleLogger implements IConsoleLogger {
 	@Override
 	public void log(String line) {
 		if (info != null && !info.isClosed() && PlatformUI.isWorkbenchRunning()) {
+			getConsoleManager().showConsoleView(console);
 			info.println(line);
 		}
 
