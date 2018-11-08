@@ -271,10 +271,35 @@
             icon="icons/obj16/logo-16.png"
             id="org.yakindu.sct.ui.editor.StatechartDiagramWizard"
             name="Statechart Model"
+            preferredPerspectives="org.yakindu.sct.ui.ModelingPerspective,org.eclipse.cdt.ui.CPerspective,org.yakindu.sct.ui.SimulationPerspective">
             project="false">
       </wizard>
    </extension>
-   
+  <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.yakindu.sct.ui.ModelingPerspective">
+         <newWizardShortcut
+               id="org.yakindu.sct.ui.editor.StatechartDiagramWizard">
+         </newWizardShortcut>
+      </perspectiveExtension>
+      <perspectiveExtension
+            targetID="org.yakindu.sct.ui.SimulationPerspective">
+         <newWizardShortcut
+               id="org.yakindu.sct.ui.editor.StatechartDiagramWizard">
+         </newWizardShortcut>
+      </perspectiveExtension>
+      <perspectiveExtension
+            targetID="org.eclipse.cdt.ui.CPerspective">
+         <newWizardShortcut
+               id="org.yakindu.sct.ui.editor.StatechartDiagramWizard">
+         </newWizardShortcut>
+         <newWizardShortcut
+               id="org.yakindu.sct.generator.genmodel.ui.SGenNewFileWizard">
+         </newWizardShortcut>
+      </perspectiveExtension>
+   </extension>
+  
 <!-- Palette Provider -->
 <extension
      point="org.eclipse.gmf.runtime.diagram.ui.paletteProviders">

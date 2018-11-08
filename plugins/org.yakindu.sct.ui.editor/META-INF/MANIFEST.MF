@@ -72,5 +72,6 @@ Export-Package: org.yakindu.sct.ui.editor,
  org.yakindu.sct.ui.editor.validation,
  org.yakindu.sct.ui.editor.wizards
 Bundle-Vendor: statecharts.org
-Import-Package: org.eclipse.xtext.ui.codetemplates.ui.contentassist
+Import-Package: org.eclipse.cdt.core,
+ org.eclipse.xtext.ui.codetemplates.ui.contentassist
 

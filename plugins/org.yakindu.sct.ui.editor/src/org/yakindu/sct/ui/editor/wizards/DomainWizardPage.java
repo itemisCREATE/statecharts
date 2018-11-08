@@ -13,6 +13,12 @@ package org.yakindu.sct.ui.editor.wizards;
 import java.net.URL;
 import java.util.List;
 
+import org.eclipse.cdt.core.CProjectNature;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -24,6 +30,7 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
@@ -35,6 +42,7 @@ import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.ui.editor.DiagramActivator;
+import org.yakindu.sct.ui.wizards.ModelCreationWizardPage;
 
 /**
  * 
@@ -94,8 +102,9 @@ public class DomainWizardPage extends WizardPage {
 			}
 		});
 		setControl(composite);
-		trySelectDefaultDomain();
 	}
+
+	private boolean domainSelected = false;
 
 	private void trySelectDefaultDomain() {
 		try {
@@ -108,13 +117,68 @@ public class DomainWizardPage extends WizardPage {
 		}
 	}
 
-	private boolean domainSelected = false;
+	
+	private void trySelectCDomain() {
+		try {
+			for(IDomain domainDescriptor: DomainRegistry.getDomains()) {
+				if(domainDescriptor.getDomainID().equals("com.yakindu.domain.c")) {
+					domainCombo.setSelection(new StructuredSelection(domainDescriptor));
+					return;
+				}
+			}
+			// set default domain, if no other has been found
+			trySelectDefaultDomain();
+		} catch (IllegalArgumentException e) {
+			trySelectDefaultDomain();
+		}
+	}
+
+	private void trySelectDomain() {
+		IProject project = null;
+		String nature = null;
+
+		IWizardPage page = getWizard().getPages()[0];
+		if (page instanceof ModelCreationWizardPage) {
+			IPath filePath = ((ModelCreationWizardPage) page).getFilePath();
+			String segment = null;
+			if (filePath != null) {
+				segment = filePath.segment(0);
+			}
+			if (segment != null) {
+				IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+				project = myWorkspaceRoot.getProject(segment);
+			}
+		}
+
+		nature = tryToGetNature(project);
+		switch (nature) {
+		case CProjectNature.C_NATURE_ID:
+			trySelectCDomain();
+			break;
+		default:
+			trySelectDefaultDomain();
+			break;
+		}
+
+		this.domainSelected = true;
+	}
+
+	private String tryToGetNature(IProject project) {
+		try {
+			if(project.hasNature(CProjectNature.C_NATURE_ID)) {
+				return CProjectNature.C_NATURE_ID;
+			}
+		} catch (CoreException e) {
+		}
+		// Add other natures here
+		
+		return null;
+	}
 
 	@Override
 	public void setVisible(boolean visible) {
 		if (visible)
-			this.domainSelected = true;
-		
+			trySelectDomain();
 		super.setVisible(visible);
 	}
 
