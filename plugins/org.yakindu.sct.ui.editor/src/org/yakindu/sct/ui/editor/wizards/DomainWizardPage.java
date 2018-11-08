@@ -135,7 +135,7 @@ public class DomainWizardPage extends WizardPage {
 
 	private void trySelectDomain() {
 		IProject project = null;
-		String nature = null;
+		String nature = "";
 
 		IWizardPage page = getWizard().getPages()[0];
 		if (page instanceof ModelCreationWizardPage) {
@@ -172,7 +172,7 @@ public class DomainWizardPage extends WizardPage {
 		}
 		// Add other natures here
 		
-		return null;
+		return "";
 	}
 
 	@Override
