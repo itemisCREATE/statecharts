@@ -36,15 +36,15 @@ import org.eclipse.ui.dialogs.PreferencesUtil;
 public class MessageArea extends Composite {
 
 	private static final String DOWNLOAD_LINK = "http://www.statecharts.org/examples.html";
-	protected static final String PREF_PAGE_ID = "com.yakindu.sct.examples";
-	protected static final String DISPLAY_ID = "com.yakindu.sct.examples";
+	private static final String PREF_PAGE_ID = "com.yakindu.sct.examples";
+	private static final String DISPLAY_ID = "com.yakindu.sct.examples";
 	private Label imageLabel;
 	private Link textLabel;
 	public Button button;
 	private Group group;
 
 	public static enum State {
-		DOWNLOAD, UPDATE, INSTALL, ERROR, HIDE
+		DOWNLOAD, UPDATE, INSTALL, INVALID_CONFIG, ERROR, HIDE
 	}
 
 	private State state = State.HIDE;
@@ -67,9 +67,7 @@ public class MessageArea extends Composite {
 				if (DOWNLOAD_LINK.equals(e.text)) {
 					Program.launch(DOWNLOAD_LINK);
 				} else {
-					PreferenceDialog dialog = PreferencesUtil.createPreferenceDialogOn(getShell(), PREF_PAGE_ID,
-							new String[] { DISPLAY_ID }, null);
-					dialog.setSelectedNode("DISPLAY_ID");
+					PreferenceDialog dialog = createPreferencePageDialog();
 					dialog.open();
 				}
 			}
@@ -78,6 +76,13 @@ public class MessageArea extends Composite {
 		button = new Button(group, SWT.FLAT);
 		button.setText("Download");
 		GridDataFactory.fillDefaults().grab(false, false).align(SWT.END, SWT.CENTER).applyTo(button);
+	}
+	
+	public PreferenceDialog createPreferencePageDialog() {
+		PreferenceDialog dialog = PreferencesUtil.createPreferenceDialogOn(getShell(), PREF_PAGE_ID,
+				new String[] { DISPLAY_ID }, null);
+		dialog.setSelectedNode("DISPLAY_ID");
+		return dialog;
 	}
 
 	public void showNoExamplesFound() {
@@ -94,10 +99,40 @@ public class MessageArea extends Composite {
 	public void showUpdateAvailable() {
 		state = State.UPDATE;
 		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_QUESTION));
+		// FIXME: unfortunate wording; determining if new updates exist means fetching the git repo. Therefore, we don't really download anything here.
 		textLabel.setText("Updates available. Do you want to download the new examples?");
 		textLabel.pack();
 		button.setText("Update");
 		button.setVisible(true);
+		show();
+	}
+	
+	public void showInvalidConfigurationError() {
+		state = State.INVALID_CONFIG;
+		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_ERROR));
+		textLabel.setText("Invalid configuration");
+		textLabel.pack();
+		button.setText("Open preference page");
+		button.setVisible(true);
+		show();
+	}
+	
+	public void showRemoteBranchNotFound() {
+		state = State.INVALID_CONFIG;
+		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_ERROR));
+		textLabel.setText("Remote Branch not found");
+		textLabel.pack();
+		button.setText("Open preference page");
+		button.setVisible(true);
+		show();
+	}
+	
+	public void showRepoContainsConflicts() {
+		state = State.ERROR;
+		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_ERROR));
+		textLabel.setText("Repo contains conflicts!");
+		textLabel.pack();
+		button.setVisible(false);
 		show();
 	}
 	
@@ -141,4 +176,6 @@ public class MessageArea extends Composite {
 	public State getState() {
 		return state;
 	}
+
+
 }
