@@ -80,7 +80,7 @@ public class MessageArea extends Composite {
 		GridDataFactory.fillDefaults().grab(false, false).align(SWT.END, SWT.CENTER).applyTo(button);
 	}
 
-	public void showDownload() {
+	public void showNoExamplesFound() {
 		state = State.DOWNLOAD;
 		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_INFORMATION));
 		textLabel.setText(
@@ -91,7 +91,7 @@ public class MessageArea extends Composite {
 		show();
 	}
 
-	public void showUpdate() {
+	public void showUpdateAvailable() {
 		state = State.UPDATE;
 		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_QUESTION));
 		textLabel.setText("Updates available. Do you want to download the new examples?");
@@ -101,7 +101,7 @@ public class MessageArea extends Composite {
 		show();
 	}
 	
-	public void showProInstall() {
+	public void showProRequired() {
 		state = State.INSTALL;
 		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_INFORMATION));
 		textLabel.setText("This example requires YAKINDU Statechart Tools Professional Edition. Do you want to download it?");
@@ -111,7 +111,7 @@ public class MessageArea extends Composite {
 		show();
 	}
 
-	public void showError() {
+	public void showUnableToDownloadError() {
 		state = State.ERROR;
 		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_ERROR));
 		textLabel.setText(

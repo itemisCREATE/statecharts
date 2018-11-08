@@ -184,7 +184,7 @@ public class SelectExamplePage extends WizardPage
 			Display.getDefault().syncExec(new Runnable() {
 				@Override
 				public void run() {
-					messageArea.showDownload();
+					messageArea.showNoExamplesFound();
 					messageArea.getParent().layout(true);
 				}
 			});
@@ -194,7 +194,7 @@ public class SelectExamplePage extends WizardPage
 				@Override
 				public void run() {
 					setInput(monitor);
-					messageArea.showUpdate();
+					messageArea.showUpdateAvailable();
 					messageArea.getParent().layout(true);
 				}
 			});
@@ -276,7 +276,7 @@ public class SelectExamplePage extends WizardPage
 
 	private void checkInstalledPlugins(IExampleData data) {
 		if (isProRequiredAndMissing(data)) {
-			messageArea.showProInstall();
+			messageArea.showProRequired();
 		} else {
 			messageArea.hide();
 		}
@@ -343,7 +343,7 @@ public class SelectExamplePage extends WizardPage
 							if (status.isOK()) {
 								SelectExamplePage.this.setInput(monitor);
 							} else {
-								messageArea.showError();
+								messageArea.showUnableToDownloadError();
 							}
 						}
 					});
