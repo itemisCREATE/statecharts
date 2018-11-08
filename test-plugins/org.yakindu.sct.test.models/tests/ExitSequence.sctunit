@@ -1,25 +1,305 @@
+/* */
+
+/**
+ * This test case class checks if state exists are processed in a proper order for different composite state constelations.
+ */
 testclass ExitSequence for statechart ExitSequence {
 	
-	@Test
-	operation testFrom1A() {
+	
+	@Test operation exitStatechartFromLeafSlimState() {
+
 		enter
-		assert (canary == 0)
-		raise e
-		assert (canary == 0)
-		assert active(main_region.StateA.inner1.State1A)
+		assert active(main_region.A.r.AA)
+		assert (a_exit == 0)
+		assert (aa_exit == 0)
+		assert (ab_exit == 0)
+		assert (aba_exit == 0)
+		assert (abb_exit == 0)
+		assert (ac_exit == 0)
+		assert (aca_exit == 0)
+		assert (acaa_exit == 0)
+		assert (acaa_exit == 0)
+		assert (ad_exit == 0)
+		assert (ada_exit == 0)
+		assert (adb_exit == 0)
+		assert (adc_exit == 0)
+		
+		
 		exit
-		assert (canary == 1)
+		assert !active(main_region.A)
+		assert (a_exit == 2)
+		assert (aa_exit == 1)
+		assert (ab_exit == 0)
+		assert (aba_exit == 0)
+		assert (abb_exit == 0)
+		assert (ac_exit == 0)
+		assert (aca_exit == 0)
+		assert (acaa_exit == 0)
+		assert (acaa_exit == 0)
+		assert (ad_exit == 0)
+		assert (ada_exit == 0)
+		assert (adb_exit == 0)
+		assert (adc_exit == 0)
+	}
+
+
+	@Test operation exitLeafSlimStateByTransition() {
+
+		enter
+		raise e
+		assert active(main_region.A.r.AB)
+		assert (a_exit == 0)
+		assert (aa_exit == 1)
+		assert (ab_exit == 0)
+		assert (aba_exit == 0)
+		assert (abb_exit == 0)
+		assert (ac_exit == 0)
+		assert (aca_exit == 0)
+		assert (acaa_exit == 0)
+		assert (acaa_exit == 0)
+		assert (ad_exit == 0)
+		assert (ada_exit == 0)
+		assert (adb_exit == 0)
+		assert (adc_exit == 0)
+	}
+
+
+	@Test operation exitLeafSlimStateByTransitionFromParent() {
+
+		enter
+		raise f
+		assert active(main_region.A.r.AA)
+		assert (a_exit == 2)
+		assert (aa_exit == 1)
+		assert (ab_exit == 0)
+		assert (aba_exit == 0)
+		assert (abb_exit == 0)
+		assert (ac_exit == 0)
+		assert (aca_exit == 0)
+		assert (acaa_exit == 0)
+		assert (acaa_exit == 0)
+		assert (ad_exit == 0)
+		assert (ada_exit == 0)
+		assert (adb_exit == 0)
+		assert (adc_exit == 0)
 	}
 	
-	@Test
-	operation testFrom1B() {
+	
+	@Test operation exitStatechartFromLeafSlimOrthogonalState() {
+
 		enter
-		assert (canary == 0)
-		guard = true
 		raise e
-		assert (canary == 0)
-		assert active(main_region.StateA.inner1.State1B)
+		assert active(main_region.A.r.AB)
+		
 		exit
-		assert (canary == 1)
+		assert !active(main_region.A)
+		assert (a_exit == 5)
+		assert (aa_exit == 1)
+		assert (ab_exit == 4)
+		assert (aba_exit == 2)
+		assert (abb_exit == 3)
+		assert (ac_exit == 0)
+		assert (aca_exit == 0)
+		assert (acaa_exit == 0)
+		assert (acaa_exit == 0)
+		assert (ad_exit == 0)
+		assert (ada_exit == 0)
+		assert (adb_exit == 0)
+		assert (adc_exit == 0)
 	}
+
+
+	@Test operation exitLeafSlimOrthogonaleStateByTransition() {
+
+		enter
+		raise e
+		raise e
+		assert active(main_region.A.r.AC)
+		
+		assert (a_exit == 0)
+		assert (aa_exit == 1)
+		assert (ab_exit == 4)
+		assert (aba_exit == 2)
+		assert (abb_exit == 3)
+		assert (ac_exit == 0)
+		assert (aca_exit == 0)
+		assert (acaa_exit == 0)
+		assert (acaa_exit == 0)
+		assert (ad_exit == 0)
+		assert (ada_exit == 0)
+		assert (adb_exit == 0)
+		assert (adc_exit == 0)
+	}
+
+
+	@Test operation exitLeafSlimOrthogonalStateByTransitionFromParent() {
+
+		enter
+		raise e
+		assert active(main_region.A.r.AB)
+		
+		raise f
+		assert active(main_region.A.r.AA)
+		assert (a_exit == 5)
+		assert (aa_exit == 1)
+		assert (ab_exit == 4)
+		assert (aba_exit == 2)
+		assert (abb_exit == 3)
+		assert (ac_exit == 0)
+		assert (aca_exit == 0)
+		assert (acaa_exit == 0)
+		assert (ad_exit == 0)
+		assert (ada_exit == 0)
+		assert (adb_exit == 0)
+		assert (adc_exit == 0)
+	}
+	
+	
+	@Test operation exitStatechartFromLeafSlimDeepState() {
+
+		enter
+		raise e
+		raise e
+		assert active(main_region.A.r.AC)
+		
+		exit
+		assert !active(main_region.A)
+		assert (a_exit == 8)
+		assert (aa_exit == 1)
+		assert (ab_exit == 4)
+		assert (aba_exit == 2)
+		assert (abb_exit == 3)
+		assert (ac_exit == 7)
+		assert (aca_exit == 6)
+		assert (acaa_exit == 5)
+		assert (ad_exit == 0)
+		assert (ada_exit == 0)
+		assert (adb_exit == 0)
+		assert (adc_exit == 0)
+	}
+
+
+	@Test operation exitLeafSlimDeepStateByTransition() {
+
+		enter
+		raise e
+		raise e
+		raise e
+		assert active(main_region.A.r.AD)
+		
+		assert (a_exit == 0)
+		assert (aa_exit == 1)
+		assert (ab_exit == 4)
+		assert (aba_exit == 2)
+		assert (abb_exit == 3)
+		assert (ac_exit == 7)
+		assert (aca_exit == 6)
+		assert (acaa_exit == 5)
+		assert (ad_exit == 0)
+		assert (ada_exit == 0)
+		assert (adb_exit == 0)
+		assert (adc_exit == 0)
+	}
+
+
+	@Test operation exitLeafSlimDeepStateByTransitionFromParent() {
+
+		enter
+		raise e
+		raise e
+		assert active(main_region.A.r.AC)
+		
+		raise f
+		assert active(main_region.A.r.AA)
+		assert (a_exit == 8)
+		assert (aa_exit == 1)
+		assert (ab_exit == 4)
+		assert (aba_exit == 2)
+		assert (abb_exit == 3)
+		assert (ac_exit == 7)
+		assert (aca_exit == 6)
+		assert (acaa_exit == 5)
+		assert (ad_exit == 0)
+		assert (ada_exit == 0)
+		assert (adb_exit == 0)
+		assert (adc_exit == 0)
+	}
+
+	
+	@Test operation exitStatechartFromFatState() {
+
+		enter
+		raise e
+		raise e
+		raise e
+		assert active(main_region.A.r.AD)
+		
+		exit
+		assert !active(main_region.A)
+		assert (a_exit == 12)
+		assert (aa_exit == 1)
+		assert (ab_exit == 4)
+		assert (aba_exit == 2)
+		assert (abb_exit == 3)
+		assert (ac_exit == 7)
+		assert (aca_exit == 6)
+		assert (acaa_exit == 5)
+		assert (ad_exit == 11)
+		assert (ada_exit == 8)
+		assert (adb_exit == 9)
+		assert (adc_exit == 10)
+	}
+
+
+	@Test operation exitFatStateByTransition() {
+
+		enter
+		raise e
+		raise e
+		raise e
+		assert active(main_region.A.r.AD)
+		
+		raise e
+		assert active(main_region.A.r.AA)
+		assert (a_exit == 0)
+		assert (aa_exit == 1)
+		assert (ab_exit == 4)
+		assert (aba_exit == 2)
+		assert (abb_exit == 3)
+		assert (ac_exit == 7)
+		assert (aca_exit == 6)
+		assert (acaa_exit == 5)
+		assert (ad_exit == 11)
+		assert (ada_exit == 8)
+		assert (adb_exit == 9)
+		assert (adc_exit == 10)
+	}
+
+
+	@Test operation exitFatStateByTransitionFromParent() {
+
+		enter
+		raise e
+		raise e
+		raise e
+		assert active(main_region.A.r.AD)
+		
+		raise f
+		assert active(main_region.A.r.AA)
+		assert (a_exit == 12)
+		assert (aa_exit == 1)
+		assert (ab_exit == 4)
+		assert (aba_exit == 2)
+		assert (abb_exit == 3)
+		assert (ac_exit == 7)
+		assert (aca_exit == 6)
+		assert (acaa_exit == 5)
+		assert (ad_exit == 11)
+		assert (ada_exit == 8)
+		assert (adb_exit == 9)
+		assert (adc_exit == 10)
+	}
+	
+	
+
 }
