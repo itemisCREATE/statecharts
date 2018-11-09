@@ -70,6 +70,15 @@ public class HistoryWithoutInitialStep {
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_D));
 	}
 	
+	@Test
+	public void enterThroughHistoryWithoutInit() {
+		statemachine.enter();
+		assertTrue(statemachine.isStateActive(State.main_region_A));
+		statemachine.getSCInterface().raiseToHistory();
+		timer.cycleLeap(1);
+		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
+	}
+	
 	public void init() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
