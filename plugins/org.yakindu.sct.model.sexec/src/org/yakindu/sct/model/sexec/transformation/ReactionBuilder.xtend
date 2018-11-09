@@ -170,7 +170,7 @@ class ReactionBuilder {
 							else
 								[StateVector sv | sv.last == execState.impactVector.last]
 								
-		val parents = state.parentStates.map(p|p.create as ExecutionState).filter(p| p == execState || shouldExecuteParent.apply(p.stateVector) )
+		val parents = state.parentStates.map(p|p.create as ExecutionState).filter(p| p == execState || shouldExecuteParent.apply(p.impactVector) ) 
 		
 		var parentNodes = parents.map(p|p as ExecutionNode).toList
 		

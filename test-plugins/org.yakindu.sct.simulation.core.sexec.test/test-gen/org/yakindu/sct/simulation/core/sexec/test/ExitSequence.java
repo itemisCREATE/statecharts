@@ -26,24 +26,263 @@ public class ExitSequence extends AbstractExecutionFlowTest {
 		initInterpreter(flow);
 	}
 	@Test
-	public void testFrom1A() throws Exception {
+	public void exitStatechartFromLeafSlimState() throws Exception {
 		interpreter.enter();
-		assertTrue((getInteger("canary") == 0l));
-		raiseEvent("e");
-		assertTrue((getInteger("canary") == 0l));
-		assertTrue(isStateActive("State1A"));
+		assertTrue(isStateActive("AA"));
+		assertTrue((getInteger("a_exit") == 0l));
+		assertTrue((getInteger("aa_exit") == 0l));
+		assertTrue((getInteger("ab_exit") == 0l));
+		assertTrue((getInteger("aba_exit") == 0l));
+		assertTrue((getInteger("abb_exit") == 0l));
+		assertTrue((getInteger("ac_exit") == 0l));
+		assertTrue((getInteger("aca_exit") == 0l));
+		assertTrue((getInteger("acaa_exit") == 0l));
+		assertTrue((getInteger("acaa_exit") == 0l));
+		assertTrue((getInteger("ad_exit") == 0l));
+		assertTrue((getInteger("ada_exit") == 0l));
+		assertTrue((getInteger("adb_exit") == 0l));
+		assertTrue((getInteger("adc_exit") == 0l));
 		interpreter.exit();
-		assertTrue((getInteger("canary") == 1l));
+		assertTrue(!isStateActive("A"));
+		assertTrue((getInteger("a_exit") == 2l));
+		assertTrue((getInteger("aa_exit") == 1l));
+		assertTrue((getInteger("ab_exit") == 0l));
+		assertTrue((getInteger("aba_exit") == 0l));
+		assertTrue((getInteger("abb_exit") == 0l));
+		assertTrue((getInteger("ac_exit") == 0l));
+		assertTrue((getInteger("aca_exit") == 0l));
+		assertTrue((getInteger("acaa_exit") == 0l));
+		assertTrue((getInteger("acaa_exit") == 0l));
+		assertTrue((getInteger("ad_exit") == 0l));
+		assertTrue((getInteger("ada_exit") == 0l));
+		assertTrue((getInteger("adb_exit") == 0l));
+		assertTrue((getInteger("adc_exit") == 0l));
 	}
 	@Test
-	public void testFrom1B() throws Exception {
+	public void exitLeafSlimStateByTransition() throws Exception {
 		interpreter.enter();
-		assertTrue((getInteger("canary") == 0l));
-		setBoolean("guard", true);
 		raiseEvent("e");
-		assertTrue((getInteger("canary") == 0l));
-		assertTrue(isStateActive("State1B"));
+		assertTrue(isStateActive("AB"));
+		assertTrue((getInteger("a_exit") == 0l));
+		assertTrue((getInteger("aa_exit") == 1l));
+		assertTrue((getInteger("ab_exit") == 0l));
+		assertTrue((getInteger("aba_exit") == 0l));
+		assertTrue((getInteger("abb_exit") == 0l));
+		assertTrue((getInteger("ac_exit") == 0l));
+		assertTrue((getInteger("aca_exit") == 0l));
+		assertTrue((getInteger("acaa_exit") == 0l));
+		assertTrue((getInteger("acaa_exit") == 0l));
+		assertTrue((getInteger("ad_exit") == 0l));
+		assertTrue((getInteger("ada_exit") == 0l));
+		assertTrue((getInteger("adb_exit") == 0l));
+		assertTrue((getInteger("adc_exit") == 0l));
+	}
+	@Test
+	public void exitLeafSlimStateByTransitionFromParent() throws Exception {
+		interpreter.enter();
+		raiseEvent("f");
+		assertTrue(isStateActive("AA"));
+		assertTrue((getInteger("a_exit") == 2l));
+		assertTrue((getInteger("aa_exit") == 1l));
+		assertTrue((getInteger("ab_exit") == 0l));
+		assertTrue((getInteger("aba_exit") == 0l));
+		assertTrue((getInteger("abb_exit") == 0l));
+		assertTrue((getInteger("ac_exit") == 0l));
+		assertTrue((getInteger("aca_exit") == 0l));
+		assertTrue((getInteger("acaa_exit") == 0l));
+		assertTrue((getInteger("acaa_exit") == 0l));
+		assertTrue((getInteger("ad_exit") == 0l));
+		assertTrue((getInteger("ada_exit") == 0l));
+		assertTrue((getInteger("adb_exit") == 0l));
+		assertTrue((getInteger("adc_exit") == 0l));
+	}
+	@Test
+	public void exitStatechartFromLeafSlimOrthogonalState() throws Exception {
+		interpreter.enter();
+		raiseEvent("e");
+		assertTrue(isStateActive("AB"));
 		interpreter.exit();
-		assertTrue((getInteger("canary") == 1l));
+		assertTrue(!isStateActive("A"));
+		assertTrue((getInteger("a_exit") == 5l));
+		assertTrue((getInteger("aa_exit") == 1l));
+		assertTrue((getInteger("ab_exit") == 4l));
+		assertTrue((getInteger("aba_exit") == 2l));
+		assertTrue((getInteger("abb_exit") == 3l));
+		assertTrue((getInteger("ac_exit") == 0l));
+		assertTrue((getInteger("aca_exit") == 0l));
+		assertTrue((getInteger("acaa_exit") == 0l));
+		assertTrue((getInteger("acaa_exit") == 0l));
+		assertTrue((getInteger("ad_exit") == 0l));
+		assertTrue((getInteger("ada_exit") == 0l));
+		assertTrue((getInteger("adb_exit") == 0l));
+		assertTrue((getInteger("adc_exit") == 0l));
+	}
+	@Test
+	public void exitLeafSlimOrthogonaleStateByTransition() throws Exception {
+		interpreter.enter();
+		raiseEvent("e");
+		raiseEvent("e");
+		assertTrue(isStateActive("AC"));
+		assertTrue((getInteger("a_exit") == 0l));
+		assertTrue((getInteger("aa_exit") == 1l));
+		assertTrue((getInteger("ab_exit") == 4l));
+		assertTrue((getInteger("aba_exit") == 2l));
+		assertTrue((getInteger("abb_exit") == 3l));
+		assertTrue((getInteger("ac_exit") == 0l));
+		assertTrue((getInteger("aca_exit") == 0l));
+		assertTrue((getInteger("acaa_exit") == 0l));
+		assertTrue((getInteger("acaa_exit") == 0l));
+		assertTrue((getInteger("ad_exit") == 0l));
+		assertTrue((getInteger("ada_exit") == 0l));
+		assertTrue((getInteger("adb_exit") == 0l));
+		assertTrue((getInteger("adc_exit") == 0l));
+	}
+	@Test
+	public void exitLeafSlimOrthogonalStateByTransitionFromParent() throws Exception {
+		interpreter.enter();
+		raiseEvent("e");
+		assertTrue(isStateActive("AB"));
+		raiseEvent("f");
+		assertTrue(isStateActive("AA"));
+		assertTrue((getInteger("a_exit") == 5l));
+		assertTrue((getInteger("aa_exit") == 1l));
+		assertTrue((getInteger("ab_exit") == 4l));
+		assertTrue((getInteger("aba_exit") == 2l));
+		assertTrue((getInteger("abb_exit") == 3l));
+		assertTrue((getInteger("ac_exit") == 0l));
+		assertTrue((getInteger("aca_exit") == 0l));
+		assertTrue((getInteger("acaa_exit") == 0l));
+		assertTrue((getInteger("ad_exit") == 0l));
+		assertTrue((getInteger("ada_exit") == 0l));
+		assertTrue((getInteger("adb_exit") == 0l));
+		assertTrue((getInteger("adc_exit") == 0l));
+	}
+	@Test
+	public void exitStatechartFromLeafSlimDeepState() throws Exception {
+		interpreter.enter();
+		raiseEvent("e");
+		raiseEvent("e");
+		assertTrue(isStateActive("AC"));
+		interpreter.exit();
+		assertTrue(!isStateActive("A"));
+		assertTrue((getInteger("a_exit") == 8l));
+		assertTrue((getInteger("aa_exit") == 1l));
+		assertTrue((getInteger("ab_exit") == 4l));
+		assertTrue((getInteger("aba_exit") == 2l));
+		assertTrue((getInteger("abb_exit") == 3l));
+		assertTrue((getInteger("ac_exit") == 7l));
+		assertTrue((getInteger("aca_exit") == 6l));
+		assertTrue((getInteger("acaa_exit") == 5l));
+		assertTrue((getInteger("ad_exit") == 0l));
+		assertTrue((getInteger("ada_exit") == 0l));
+		assertTrue((getInteger("adb_exit") == 0l));
+		assertTrue((getInteger("adc_exit") == 0l));
+	}
+	@Test
+	public void exitLeafSlimDeepStateByTransition() throws Exception {
+		interpreter.enter();
+		raiseEvent("e");
+		raiseEvent("e");
+		raiseEvent("e");
+		assertTrue(isStateActive("AD"));
+		assertTrue((getInteger("a_exit") == 0l));
+		assertTrue((getInteger("aa_exit") == 1l));
+		assertTrue((getInteger("ab_exit") == 4l));
+		assertTrue((getInteger("aba_exit") == 2l));
+		assertTrue((getInteger("abb_exit") == 3l));
+		assertTrue((getInteger("ac_exit") == 7l));
+		assertTrue((getInteger("aca_exit") == 6l));
+		assertTrue((getInteger("acaa_exit") == 5l));
+		assertTrue((getInteger("ad_exit") == 0l));
+		assertTrue((getInteger("ada_exit") == 0l));
+		assertTrue((getInteger("adb_exit") == 0l));
+		assertTrue((getInteger("adc_exit") == 0l));
+	}
+	@Test
+	public void exitLeafSlimDeepStateByTransitionFromParent() throws Exception {
+		interpreter.enter();
+		raiseEvent("e");
+		raiseEvent("e");
+		assertTrue(isStateActive("AC"));
+		raiseEvent("f");
+		assertTrue(isStateActive("AA"));
+		assertTrue((getInteger("a_exit") == 8l));
+		assertTrue((getInteger("aa_exit") == 1l));
+		assertTrue((getInteger("ab_exit") == 4l));
+		assertTrue((getInteger("aba_exit") == 2l));
+		assertTrue((getInteger("abb_exit") == 3l));
+		assertTrue((getInteger("ac_exit") == 7l));
+		assertTrue((getInteger("aca_exit") == 6l));
+		assertTrue((getInteger("acaa_exit") == 5l));
+		assertTrue((getInteger("ad_exit") == 0l));
+		assertTrue((getInteger("ada_exit") == 0l));
+		assertTrue((getInteger("adb_exit") == 0l));
+		assertTrue((getInteger("adc_exit") == 0l));
+	}
+	@Test
+	public void exitStatechartFromFatState() throws Exception {
+		interpreter.enter();
+		raiseEvent("e");
+		raiseEvent("e");
+		raiseEvent("e");
+		assertTrue(isStateActive("AD"));
+		interpreter.exit();
+		assertTrue(!isStateActive("A"));
+		assertTrue((getInteger("a_exit") == 12l));
+		assertTrue((getInteger("aa_exit") == 1l));
+		assertTrue((getInteger("ab_exit") == 4l));
+		assertTrue((getInteger("aba_exit") == 2l));
+		assertTrue((getInteger("abb_exit") == 3l));
+		assertTrue((getInteger("ac_exit") == 7l));
+		assertTrue((getInteger("aca_exit") == 6l));
+		assertTrue((getInteger("acaa_exit") == 5l));
+		assertTrue((getInteger("ad_exit") == 11l));
+		assertTrue((getInteger("ada_exit") == 8l));
+		assertTrue((getInteger("adb_exit") == 9l));
+		assertTrue((getInteger("adc_exit") == 10l));
+	}
+	@Test
+	public void exitFatStateByTransition() throws Exception {
+		interpreter.enter();
+		raiseEvent("e");
+		raiseEvent("e");
+		raiseEvent("e");
+		assertTrue(isStateActive("AD"));
+		raiseEvent("e");
+		assertTrue(isStateActive("AA"));
+		assertTrue((getInteger("a_exit") == 0l));
+		assertTrue((getInteger("aa_exit") == 1l));
+		assertTrue((getInteger("ab_exit") == 4l));
+		assertTrue((getInteger("aba_exit") == 2l));
+		assertTrue((getInteger("abb_exit") == 3l));
+		assertTrue((getInteger("ac_exit") == 7l));
+		assertTrue((getInteger("aca_exit") == 6l));
+		assertTrue((getInteger("acaa_exit") == 5l));
+		assertTrue((getInteger("ad_exit") == 11l));
+		assertTrue((getInteger("ada_exit") == 8l));
+		assertTrue((getInteger("adb_exit") == 9l));
+		assertTrue((getInteger("adc_exit") == 10l));
+	}
+	@Test
+	public void exitFatStateByTransitionFromParent() throws Exception {
+		interpreter.enter();
+		raiseEvent("e");
+		raiseEvent("e");
+		raiseEvent("e");
+		assertTrue(isStateActive("AD"));
+		raiseEvent("f");
+		assertTrue(isStateActive("AA"));
+		assertTrue((getInteger("a_exit") == 12l));
+		assertTrue((getInteger("aa_exit") == 1l));
+		assertTrue((getInteger("ab_exit") == 4l));
+		assertTrue((getInteger("aba_exit") == 2l));
+		assertTrue((getInteger("abb_exit") == 3l));
+		assertTrue((getInteger("ac_exit") == 7l));
+		assertTrue((getInteger("aca_exit") == 6l));
+		assertTrue((getInteger("acaa_exit") == 5l));
+		assertTrue((getInteger("ad_exit") == 11l));
+		assertTrue((getInteger("ada_exit") == 8l));
+		assertTrue((getInteger("adb_exit") == 9l));
+		assertTrue((getInteger("adc_exit") == 10l));
 	}
 }

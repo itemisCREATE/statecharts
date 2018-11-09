@@ -29,7 +29,7 @@ class BehaviorMapping extends org.yakindu.sct.model.sexec.transformation.Behavio
 				[ExecutionScope parentScope, ExecutionScope execScope | false ]
 			else
 				[ExecutionScope parentScope, ExecutionScope execScope | 
-					parentScope === execScope || parentScope.stateVector.last == execScope.impactVector.last
+					parentScope === execScope || parentScope.impactVector.last == execScope.impactVector.last
 				]
 		
 		val parent = if (region.parentStates.head !== null) {

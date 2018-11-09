@@ -37,7 +37,7 @@ testsuite AllTests {
 	FloatModulo,
 	Guard, 
 	GuardedEntry, 
-	Guard, 
+	Guard,
 	HistoryWithExitPoint,
 	HistoryWithoutInitialStep,
 	InEventLifeCycle, 

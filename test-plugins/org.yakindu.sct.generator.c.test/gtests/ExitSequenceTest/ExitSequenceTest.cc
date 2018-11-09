@@ -28,26 +28,265 @@ class ExitSequenceTest : public ::testing::Test{
 };
 
 
-TEST_F(ExitSequenceTest, testFrom1A) {
+TEST_F(ExitSequenceTest, exitStatechartFromLeafSlimState) {
 	
 	exitSequence_enter(&statechart);
-	EXPECT_TRUE((exitSequenceIface_get_canary(&statechart)== 0l));
-	exitSequenceIface_raise_e(&statechart);
-	EXPECT_TRUE((exitSequenceIface_get_canary(&statechart)== 0l));
-	EXPECT_TRUE(exitSequence_isStateActive(&statechart, ExitSequence_main_region_StateA_inner1_State1A));
+	EXPECT_TRUE(exitSequence_isStateActive(&statechart, ExitSequence_main_region_A_r_AA));
+	EXPECT_TRUE((exitSequenceIface_get_a_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_aa_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_ab_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_aba_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_abb_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_ac_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_aca_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_acaa_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_acaa_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_ad_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_ada_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_adb_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_adc_exit(&statechart)== 0l));
 	exitSequence_exit(&statechart);
-	EXPECT_TRUE((exitSequenceIface_get_canary(&statechart)== 1l));
+	EXPECT_TRUE(!exitSequence_isStateActive(&statechart, ExitSequence_main_region_A));
+	EXPECT_TRUE((exitSequenceIface_get_a_exit(&statechart)== 2l));
+	EXPECT_TRUE((exitSequenceIface_get_aa_exit(&statechart)== 1l));
+	EXPECT_TRUE((exitSequenceIface_get_ab_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_aba_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_abb_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_ac_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_aca_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_acaa_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_acaa_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_ad_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_ada_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_adb_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_adc_exit(&statechart)== 0l));
 }
-TEST_F(ExitSequenceTest, testFrom1B) {
+TEST_F(ExitSequenceTest, exitLeafSlimStateByTransition) {
 	
 	exitSequence_enter(&statechart);
-	EXPECT_TRUE((exitSequenceIface_get_canary(&statechart)== 0l));
-	exitSequenceIface_set_guard(&statechart,true);
 	exitSequenceIface_raise_e(&statechart);
-	EXPECT_TRUE((exitSequenceIface_get_canary(&statechart)== 0l));
-	EXPECT_TRUE(exitSequence_isStateActive(&statechart, ExitSequence_main_region_StateA_inner1_State1B));
+	EXPECT_TRUE(exitSequence_isStateActive(&statechart, ExitSequence_main_region_A_r_AB));
+	EXPECT_TRUE((exitSequenceIface_get_a_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_aa_exit(&statechart)== 1l));
+	EXPECT_TRUE((exitSequenceIface_get_ab_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_aba_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_abb_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_ac_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_aca_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_acaa_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_acaa_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_ad_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_ada_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_adb_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_adc_exit(&statechart)== 0l));
+}
+TEST_F(ExitSequenceTest, exitLeafSlimStateByTransitionFromParent) {
+	
+	exitSequence_enter(&statechart);
+	exitSequenceIface_raise_f(&statechart);
+	EXPECT_TRUE(exitSequence_isStateActive(&statechart, ExitSequence_main_region_A_r_AA));
+	EXPECT_TRUE((exitSequenceIface_get_a_exit(&statechart)== 2l));
+	EXPECT_TRUE((exitSequenceIface_get_aa_exit(&statechart)== 1l));
+	EXPECT_TRUE((exitSequenceIface_get_ab_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_aba_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_abb_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_ac_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_aca_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_acaa_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_acaa_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_ad_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_ada_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_adb_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_adc_exit(&statechart)== 0l));
+}
+TEST_F(ExitSequenceTest, exitStatechartFromLeafSlimOrthogonalState) {
+	
+	exitSequence_enter(&statechart);
+	exitSequenceIface_raise_e(&statechart);
+	EXPECT_TRUE(exitSequence_isStateActive(&statechart, ExitSequence_main_region_A_r_AB));
 	exitSequence_exit(&statechart);
-	EXPECT_TRUE((exitSequenceIface_get_canary(&statechart)== 1l));
+	EXPECT_TRUE(!exitSequence_isStateActive(&statechart, ExitSequence_main_region_A));
+	EXPECT_TRUE((exitSequenceIface_get_a_exit(&statechart)== 5l));
+	EXPECT_TRUE((exitSequenceIface_get_aa_exit(&statechart)== 1l));
+	EXPECT_TRUE((exitSequenceIface_get_ab_exit(&statechart)== 4l));
+	EXPECT_TRUE((exitSequenceIface_get_aba_exit(&statechart)== 2l));
+	EXPECT_TRUE((exitSequenceIface_get_abb_exit(&statechart)== 3l));
+	EXPECT_TRUE((exitSequenceIface_get_ac_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_aca_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_acaa_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_acaa_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_ad_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_ada_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_adb_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_adc_exit(&statechart)== 0l));
+}
+TEST_F(ExitSequenceTest, exitLeafSlimOrthogonaleStateByTransition) {
+	
+	exitSequence_enter(&statechart);
+	exitSequenceIface_raise_e(&statechart);
+	exitSequenceIface_raise_e(&statechart);
+	EXPECT_TRUE(exitSequence_isStateActive(&statechart, ExitSequence_main_region_A_r_AC));
+	EXPECT_TRUE((exitSequenceIface_get_a_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_aa_exit(&statechart)== 1l));
+	EXPECT_TRUE((exitSequenceIface_get_ab_exit(&statechart)== 4l));
+	EXPECT_TRUE((exitSequenceIface_get_aba_exit(&statechart)== 2l));
+	EXPECT_TRUE((exitSequenceIface_get_abb_exit(&statechart)== 3l));
+	EXPECT_TRUE((exitSequenceIface_get_ac_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_aca_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_acaa_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_acaa_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_ad_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_ada_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_adb_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_adc_exit(&statechart)== 0l));
+}
+TEST_F(ExitSequenceTest, exitLeafSlimOrthogonalStateByTransitionFromParent) {
+	
+	exitSequence_enter(&statechart);
+	exitSequenceIface_raise_e(&statechart);
+	EXPECT_TRUE(exitSequence_isStateActive(&statechart, ExitSequence_main_region_A_r_AB));
+	exitSequenceIface_raise_f(&statechart);
+	EXPECT_TRUE(exitSequence_isStateActive(&statechart, ExitSequence_main_region_A_r_AA));
+	EXPECT_TRUE((exitSequenceIface_get_a_exit(&statechart)== 5l));
+	EXPECT_TRUE((exitSequenceIface_get_aa_exit(&statechart)== 1l));
+	EXPECT_TRUE((exitSequenceIface_get_ab_exit(&statechart)== 4l));
+	EXPECT_TRUE((exitSequenceIface_get_aba_exit(&statechart)== 2l));
+	EXPECT_TRUE((exitSequenceIface_get_abb_exit(&statechart)== 3l));
+	EXPECT_TRUE((exitSequenceIface_get_ac_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_aca_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_acaa_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_ad_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_ada_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_adb_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_adc_exit(&statechart)== 0l));
+}
+TEST_F(ExitSequenceTest, exitStatechartFromLeafSlimDeepState) {
+	
+	exitSequence_enter(&statechart);
+	exitSequenceIface_raise_e(&statechart);
+	exitSequenceIface_raise_e(&statechart);
+	EXPECT_TRUE(exitSequence_isStateActive(&statechart, ExitSequence_main_region_A_r_AC));
+	exitSequence_exit(&statechart);
+	EXPECT_TRUE(!exitSequence_isStateActive(&statechart, ExitSequence_main_region_A));
+	EXPECT_TRUE((exitSequenceIface_get_a_exit(&statechart)== 8l));
+	EXPECT_TRUE((exitSequenceIface_get_aa_exit(&statechart)== 1l));
+	EXPECT_TRUE((exitSequenceIface_get_ab_exit(&statechart)== 4l));
+	EXPECT_TRUE((exitSequenceIface_get_aba_exit(&statechart)== 2l));
+	EXPECT_TRUE((exitSequenceIface_get_abb_exit(&statechart)== 3l));
+	EXPECT_TRUE((exitSequenceIface_get_ac_exit(&statechart)== 7l));
+	EXPECT_TRUE((exitSequenceIface_get_aca_exit(&statechart)== 6l));
+	EXPECT_TRUE((exitSequenceIface_get_acaa_exit(&statechart)== 5l));
+	EXPECT_TRUE((exitSequenceIface_get_ad_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_ada_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_adb_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_adc_exit(&statechart)== 0l));
+}
+TEST_F(ExitSequenceTest, exitLeafSlimDeepStateByTransition) {
+	
+	exitSequence_enter(&statechart);
+	exitSequenceIface_raise_e(&statechart);
+	exitSequenceIface_raise_e(&statechart);
+	exitSequenceIface_raise_e(&statechart);
+	EXPECT_TRUE(exitSequence_isStateActive(&statechart, ExitSequence_main_region_A_r_AD));
+	EXPECT_TRUE((exitSequenceIface_get_a_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_aa_exit(&statechart)== 1l));
+	EXPECT_TRUE((exitSequenceIface_get_ab_exit(&statechart)== 4l));
+	EXPECT_TRUE((exitSequenceIface_get_aba_exit(&statechart)== 2l));
+	EXPECT_TRUE((exitSequenceIface_get_abb_exit(&statechart)== 3l));
+	EXPECT_TRUE((exitSequenceIface_get_ac_exit(&statechart)== 7l));
+	EXPECT_TRUE((exitSequenceIface_get_aca_exit(&statechart)== 6l));
+	EXPECT_TRUE((exitSequenceIface_get_acaa_exit(&statechart)== 5l));
+	EXPECT_TRUE((exitSequenceIface_get_ad_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_ada_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_adb_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_adc_exit(&statechart)== 0l));
+}
+TEST_F(ExitSequenceTest, exitLeafSlimDeepStateByTransitionFromParent) {
+	
+	exitSequence_enter(&statechart);
+	exitSequenceIface_raise_e(&statechart);
+	exitSequenceIface_raise_e(&statechart);
+	EXPECT_TRUE(exitSequence_isStateActive(&statechart, ExitSequence_main_region_A_r_AC));
+	exitSequenceIface_raise_f(&statechart);
+	EXPECT_TRUE(exitSequence_isStateActive(&statechart, ExitSequence_main_region_A_r_AA));
+	EXPECT_TRUE((exitSequenceIface_get_a_exit(&statechart)== 8l));
+	EXPECT_TRUE((exitSequenceIface_get_aa_exit(&statechart)== 1l));
+	EXPECT_TRUE((exitSequenceIface_get_ab_exit(&statechart)== 4l));
+	EXPECT_TRUE((exitSequenceIface_get_aba_exit(&statechart)== 2l));
+	EXPECT_TRUE((exitSequenceIface_get_abb_exit(&statechart)== 3l));
+	EXPECT_TRUE((exitSequenceIface_get_ac_exit(&statechart)== 7l));
+	EXPECT_TRUE((exitSequenceIface_get_aca_exit(&statechart)== 6l));
+	EXPECT_TRUE((exitSequenceIface_get_acaa_exit(&statechart)== 5l));
+	EXPECT_TRUE((exitSequenceIface_get_ad_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_ada_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_adb_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_adc_exit(&statechart)== 0l));
+}
+TEST_F(ExitSequenceTest, exitStatechartFromFatState) {
+	
+	exitSequence_enter(&statechart);
+	exitSequenceIface_raise_e(&statechart);
+	exitSequenceIface_raise_e(&statechart);
+	exitSequenceIface_raise_e(&statechart);
+	EXPECT_TRUE(exitSequence_isStateActive(&statechart, ExitSequence_main_region_A_r_AD));
+	exitSequence_exit(&statechart);
+	EXPECT_TRUE(!exitSequence_isStateActive(&statechart, ExitSequence_main_region_A));
+	EXPECT_TRUE((exitSequenceIface_get_a_exit(&statechart)== 12l));
+	EXPECT_TRUE((exitSequenceIface_get_aa_exit(&statechart)== 1l));
+	EXPECT_TRUE((exitSequenceIface_get_ab_exit(&statechart)== 4l));
+	EXPECT_TRUE((exitSequenceIface_get_aba_exit(&statechart)== 2l));
+	EXPECT_TRUE((exitSequenceIface_get_abb_exit(&statechart)== 3l));
+	EXPECT_TRUE((exitSequenceIface_get_ac_exit(&statechart)== 7l));
+	EXPECT_TRUE((exitSequenceIface_get_aca_exit(&statechart)== 6l));
+	EXPECT_TRUE((exitSequenceIface_get_acaa_exit(&statechart)== 5l));
+	EXPECT_TRUE((exitSequenceIface_get_ad_exit(&statechart)== 11l));
+	EXPECT_TRUE((exitSequenceIface_get_ada_exit(&statechart)== 8l));
+	EXPECT_TRUE((exitSequenceIface_get_adb_exit(&statechart)== 9l));
+	EXPECT_TRUE((exitSequenceIface_get_adc_exit(&statechart)== 10l));
+}
+TEST_F(ExitSequenceTest, exitFatStateByTransition) {
+	
+	exitSequence_enter(&statechart);
+	exitSequenceIface_raise_e(&statechart);
+	exitSequenceIface_raise_e(&statechart);
+	exitSequenceIface_raise_e(&statechart);
+	EXPECT_TRUE(exitSequence_isStateActive(&statechart, ExitSequence_main_region_A_r_AD));
+	exitSequenceIface_raise_e(&statechart);
+	EXPECT_TRUE(exitSequence_isStateActive(&statechart, ExitSequence_main_region_A_r_AA));
+	EXPECT_TRUE((exitSequenceIface_get_a_exit(&statechart)== 0l));
+	EXPECT_TRUE((exitSequenceIface_get_aa_exit(&statechart)== 1l));
+	EXPECT_TRUE((exitSequenceIface_get_ab_exit(&statechart)== 4l));
+	EXPECT_TRUE((exitSequenceIface_get_aba_exit(&statechart)== 2l));
+	EXPECT_TRUE((exitSequenceIface_get_abb_exit(&statechart)== 3l));
+	EXPECT_TRUE((exitSequenceIface_get_ac_exit(&statechart)== 7l));
+	EXPECT_TRUE((exitSequenceIface_get_aca_exit(&statechart)== 6l));
+	EXPECT_TRUE((exitSequenceIface_get_acaa_exit(&statechart)== 5l));
+	EXPECT_TRUE((exitSequenceIface_get_ad_exit(&statechart)== 11l));
+	EXPECT_TRUE((exitSequenceIface_get_ada_exit(&statechart)== 8l));
+	EXPECT_TRUE((exitSequenceIface_get_adb_exit(&statechart)== 9l));
+	EXPECT_TRUE((exitSequenceIface_get_adc_exit(&statechart)== 10l));
+}
+TEST_F(ExitSequenceTest, exitFatStateByTransitionFromParent) {
+	
+	exitSequence_enter(&statechart);
+	exitSequenceIface_raise_e(&statechart);
+	exitSequenceIface_raise_e(&statechart);
+	exitSequenceIface_raise_e(&statechart);
+	EXPECT_TRUE(exitSequence_isStateActive(&statechart, ExitSequence_main_region_A_r_AD));
+	exitSequenceIface_raise_f(&statechart);
+	EXPECT_TRUE(exitSequence_isStateActive(&statechart, ExitSequence_main_region_A_r_AA));
+	EXPECT_TRUE((exitSequenceIface_get_a_exit(&statechart)== 12l));
+	EXPECT_TRUE((exitSequenceIface_get_aa_exit(&statechart)== 1l));
+	EXPECT_TRUE((exitSequenceIface_get_ab_exit(&statechart)== 4l));
+	EXPECT_TRUE((exitSequenceIface_get_aba_exit(&statechart)== 2l));
+	EXPECT_TRUE((exitSequenceIface_get_abb_exit(&statechart)== 3l));
+	EXPECT_TRUE((exitSequenceIface_get_ac_exit(&statechart)== 7l));
+	EXPECT_TRUE((exitSequenceIface_get_aca_exit(&statechart)== 6l));
+	EXPECT_TRUE((exitSequenceIface_get_acaa_exit(&statechart)== 5l));
+	EXPECT_TRUE((exitSequenceIface_get_ad_exit(&statechart)== 11l));
+	EXPECT_TRUE((exitSequenceIface_get_ada_exit(&statechart)== 8l));
+	EXPECT_TRUE((exitSequenceIface_get_adb_exit(&statechart)== 9l));
+	EXPECT_TRUE((exitSequenceIface_get_adc_exit(&statechart)== 10l));
 }
 
 

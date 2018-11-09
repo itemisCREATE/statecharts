@@ -113,7 +113,7 @@ class ReactMethod {
 				
 		val parentNode = if (state.parentState !== null) state.parentState.create else execState.flow
 		val processParent = 	   parentNode !== null 
-							&& (	    ( childFirst && parentNode.stateVector.last == execState.impactVector.last)
+							&& (	    ( childFirst && parentNode.impactVector.last == execState.impactVector.last)
 							     || (!childFirst && parentNode.stateVector.offset == execState.stateVector.offset)
 							   )
 				 				
