@@ -102,6 +102,20 @@ TEST_F(HistoryWithoutInitialStepTest, enterDThroughHistory) {
 	
 	
 }
+TEST_F(HistoryWithoutInitialStepTest, enterThroughHistoryWithoutInit) {
+	
+	statechart->enter();
+	
+	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_A));
+	
+	statechart->getDefaultSCI()->raise_toHistory();
+	
+	runner->proceed_cycles(1);
+	
+	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_B_r1_C));
+	
+	
+}
 
 
 }
