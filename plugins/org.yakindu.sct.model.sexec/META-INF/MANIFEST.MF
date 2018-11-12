@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Execution Model
 Bundle-SymbolicName: org.yakindu.sct.model.sexec;singleton:=true
-Bundle-Version: 3.4.2.qualifier
+Bundle-Version: 3.4.3.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: statecharts.org
 Bundle-Localization: plugin
