@@ -939,7 +939,7 @@ h3(#cdom_constructors). Constructors
 Using the C/C++ domain allows you to import classes defined in a C++ header file, and use them as types. This means that you can instantiate objects of these types just like in regular C++ code. However, YAKINDU Statechart Tools currently does not support constructors, so there are certain limitations:
 
 * If the class has a default constructor with no arguments, you can just declare the variable as usual in the statechart: @var o: MyClass@. The constructor of the generated statechart class will then automatically call the default constructor of @MyClass@ to instantiate the object.
-* If the class does not have a default constructor, this will fail. In this case, you should declare a pointer instead: @var o: pointer<MyClass>@ - this way, the constructor of the statechart does nothing at all. Instead, you can then assign a proper value to it, ideally _after_ you call the statechart's @init@-function, and _before_ you call the @enter@-function. This ensures that everything will be set up correctly once the statechart does something.
+* If the class does not have a default constructor, this will fail. In this case, you should declare a pointer instead: @var o: pointer<MyClass>@ - this way, the constructor of the statechart does nothing at all. Instead, you can then assign a proper value to it, ideally _after_ you call the statechart's @init@-function, and _before_ you call the @enter@-function. This ensures correct initialization before the statechart is running.
 
 h3(#cdom_please_get_in_touch_with_us). Please get in touch with us
 
