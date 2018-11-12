@@ -923,7 +923,16 @@ In C it is possible to define structs, unions and enums without a _typedef_. The
 
 ###. CHECK: C domain: Are "struct", "union", and "enum" types still only supported if used in a typedef
 
+h3(#cdom_function_calling_simulation). Evaluation of functions in the simulation
 
+Using the C/C++ domain, it is possible to call functions that are declared in header files. The generated code will do this correctly, but the simulation will not actually evaluate the functions, for multiple reasons:
+
+* Parsing and interpreting C-Code completely and correctly with all possible side effects is very hard and we could never guarantee that YAKINDU Statechart Tools does the right thing in the simulation.
+* Even if we could do that, the Compiler can link against one of many possible implementations of the same declaration, and choosing the correct one would be pretty hard, too.
+
+Due to this, we decided not to implement this feature, and doing so is currently not on our roadmap.
+
+However, when using our testing framework SCTUnit, you have the option to mock these functions, and these mocks are then called during testing.
 
 h3(#cdom_please_get_in_touch_with_us). Please get in touch with us
 
