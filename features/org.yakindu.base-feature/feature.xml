@@ -2,7 +2,7 @@
 <feature
       id="org.yakindu.base"
       label="YAKINDU Statechart Tools Base"
-      version="3.4.2.qualifier"
+      version="3.4.3.qualifier"
       provider-name="statecharts.org">
 
    <description url="http://www.statecharts.org">
