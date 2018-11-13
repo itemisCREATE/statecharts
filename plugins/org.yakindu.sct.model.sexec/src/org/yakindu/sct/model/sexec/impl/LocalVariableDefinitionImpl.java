@@ -7,6 +7,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.Property;
 import org.yakindu.sct.model.sexec.LocalVariableDefinition;
 import org.yakindu.sct.model.sexec.SexecPackage;
@@ -44,7 +45,7 @@ public class LocalVariableDefinitionImpl extends StepImpl implements LocalVariab
 	 * @generated
 	 * @ordered
 	 */
-	protected org.yakindu.base.types.Expression initialValue;
+	protected Expression initialValue;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -113,7 +114,7 @@ public class LocalVariableDefinitionImpl extends StepImpl implements LocalVariab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.yakindu.base.types.Expression getInitialValue() {
+	public Expression getInitialValue() {
 		return initialValue;
 	}
 
@@ -122,8 +123,8 @@ public class LocalVariableDefinitionImpl extends StepImpl implements LocalVariab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetInitialValue(org.yakindu.base.types.Expression newInitialValue, NotificationChain msgs) {
-		org.yakindu.base.types.Expression oldInitialValue = initialValue;
+	public NotificationChain basicSetInitialValue(Expression newInitialValue, NotificationChain msgs) {
+		Expression oldInitialValue = initialValue;
 		initialValue = newInitialValue;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.LOCAL_VARIABLE_DEFINITION__INITIAL_VALUE, oldInitialValue, newInitialValue);
@@ -137,7 +138,7 @@ public class LocalVariableDefinitionImpl extends StepImpl implements LocalVariab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInitialValue(org.yakindu.base.types.Expression newInitialValue) {
+	public void setInitialValue(Expression newInitialValue) {
 		if (newInitialValue != initialValue) {
 			NotificationChain msgs = null;
 			if (initialValue != null)
@@ -195,7 +196,7 @@ public class LocalVariableDefinitionImpl extends StepImpl implements LocalVariab
 				setVariable((Property)newValue);
 				return;
 			case SexecPackage.LOCAL_VARIABLE_DEFINITION__INITIAL_VALUE:
-				setInitialValue((org.yakindu.base.types.Expression)newValue);
+				setInitialValue((Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -213,7 +214,7 @@ public class LocalVariableDefinitionImpl extends StepImpl implements LocalVariab
 				setVariable((Property)null);
 				return;
 			case SexecPackage.LOCAL_VARIABLE_DEFINITION__INITIAL_VALUE:
-				setInitialValue((org.yakindu.base.types.Expression)null);
+				setInitialValue((Expression)null);
 				return;
 		}
 		super.eUnset(featureID);

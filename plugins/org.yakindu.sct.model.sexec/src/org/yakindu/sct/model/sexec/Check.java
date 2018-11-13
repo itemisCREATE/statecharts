@@ -11,6 +11,7 @@
 package org.yakindu.sct.model.sexec;
 
 import org.eclipse.emf.common.util.EList;
+import org.yakindu.base.types.Expression;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,12 +40,12 @@ public interface Check extends Step {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Condition</em>' containment reference.
-	 * @see #setCondition(org.yakindu.base.types.Expression)
+	 * @see #setCondition(Expression)
 	 * @see org.yakindu.sct.model.sexec.SexecPackage#getCheck_Condition()
 	 * @model containment="true"
 	 * @generated
 	 */
-	org.yakindu.base.types.Expression getCondition();
+	Expression getCondition();
 
 	/**
 	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.Check#getCondition <em>Condition</em>}' containment reference.
@@ -54,7 +55,7 @@ public interface Check extends Step {
 	 * @see #getCondition()
 	 * @generated
 	 */
-	void setCondition(org.yakindu.base.types.Expression value);
+	void setCondition(Expression value);
 
 	/**
 	 * Returns the value of the '<em><b>Refs</b></em>' reference list.

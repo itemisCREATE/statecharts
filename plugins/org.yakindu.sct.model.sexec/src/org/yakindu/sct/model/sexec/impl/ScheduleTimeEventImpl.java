@@ -15,6 +15,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.yakindu.base.types.Expression;
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sexec.TimeEvent;
@@ -52,7 +53,7 @@ public class ScheduleTimeEventImpl extends StepImpl implements ScheduleTimeEvent
 	 * @generated
 	 * @ordered
 	 */
-	protected org.yakindu.base.types.Expression timeValue;
+	protected Expression timeValue;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -116,7 +117,7 @@ public class ScheduleTimeEventImpl extends StepImpl implements ScheduleTimeEvent
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.yakindu.base.types.Expression getTimeValue() {
+	public Expression getTimeValue() {
 		return timeValue;
 	}
 
@@ -125,8 +126,8 @@ public class ScheduleTimeEventImpl extends StepImpl implements ScheduleTimeEvent
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTimeValue(org.yakindu.base.types.Expression newTimeValue, NotificationChain msgs) {
-		org.yakindu.base.types.Expression oldTimeValue = timeValue;
+	public NotificationChain basicSetTimeValue(Expression newTimeValue, NotificationChain msgs) {
+		Expression oldTimeValue = timeValue;
 		timeValue = newTimeValue;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.SCHEDULE_TIME_EVENT__TIME_VALUE, oldTimeValue, newTimeValue);
@@ -140,7 +141,7 @@ public class ScheduleTimeEventImpl extends StepImpl implements ScheduleTimeEvent
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTimeValue(org.yakindu.base.types.Expression newTimeValue) {
+	public void setTimeValue(Expression newTimeValue) {
 		if (newTimeValue != timeValue) {
 			NotificationChain msgs = null;
 			if (timeValue != null)
@@ -197,7 +198,7 @@ public class ScheduleTimeEventImpl extends StepImpl implements ScheduleTimeEvent
 				setTimeEvent((TimeEvent)newValue);
 				return;
 			case SexecPackage.SCHEDULE_TIME_EVENT__TIME_VALUE:
-				setTimeValue((org.yakindu.base.types.Expression)newValue);
+				setTimeValue((Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -215,7 +216,7 @@ public class ScheduleTimeEventImpl extends StepImpl implements ScheduleTimeEvent
 				setTimeEvent((TimeEvent)null);
 				return;
 			case SexecPackage.SCHEDULE_TIME_EVENT__TIME_VALUE:
-				setTimeValue((org.yakindu.base.types.Expression)null);
+				setTimeValue((Expression)null);
 				return;
 		}
 		super.eUnset(featureID);

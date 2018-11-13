@@ -10,6 +10,8 @@
 */
 package org.yakindu.sct.model.sexec;
 
+import org.yakindu.base.types.Expression;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Execution</b></em>'.
@@ -36,12 +38,12 @@ public interface Execution extends Step {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Statement</em>' containment reference.
-	 * @see #setStatement(org.yakindu.base.types.Expression)
+	 * @see #setStatement(Expression)
 	 * @see org.yakindu.sct.model.sexec.SexecPackage#getExecution_Statement()
 	 * @model containment="true"
 	 * @generated
 	 */
-	org.yakindu.base.types.Expression getStatement();
+	Expression getStatement();
 
 	/**
 	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.Execution#getStatement <em>Statement</em>}' containment reference.
@@ -51,6 +53,6 @@ public interface Execution extends Step {
 	 * @see #getStatement()
 	 * @generated
 	 */
-	void setStatement(org.yakindu.base.types.Expression value);
+	void setStatement(Expression value);
 
 } // Execution
