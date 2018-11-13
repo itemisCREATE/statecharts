@@ -11,7 +11,6 @@
 package org.yakindu.sct.model.sgen;
 
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.base.expressions.expressions.Expression;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '
@@ -88,12 +87,12 @@ public interface FeatureParameterValue extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Expression</em>' containment reference.
-	 * @see #setExpression(Expression)
+	 * @see #setExpression(org.yakindu.base.types.Expression)
 	 * @see org.yakindu.sct.model.sgen.SGenPackage#getFeatureParameterValue_Expression()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Expression getExpression();
+	org.yakindu.base.types.Expression getExpression();
 
 	/**
 	 * Sets the value of the '{@link org.yakindu.sct.model.sgen.FeatureParameterValue#getExpression <em>Expression</em>}' containment reference.
@@ -103,7 +102,7 @@ public interface FeatureParameterValue extends EObject {
 	 * @see #getExpression()
 	 * @generated
 	 */
-	void setExpression(Expression value);
+	void setExpression(org.yakindu.base.types.Expression value);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

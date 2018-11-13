@@ -2,8 +2,6 @@
  */
 package org.yakindu.sct.model.sexec;
 
-import org.yakindu.base.expressions.expressions.Expression;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Return</b></em>'.
@@ -30,12 +28,12 @@ public interface Return extends Step {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' reference.
-	 * @see #setValue(Expression)
+	 * @see #setValue(org.yakindu.base.types.Expression)
 	 * @see org.yakindu.sct.model.sexec.SexecPackage#getReturn_Value()
 	 * @model
 	 * @generated
 	 */
-	Expression getValue();
+	org.yakindu.base.types.Expression getValue();
 
 	/**
 	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.Return#getValue <em>Value</em>}' reference.
@@ -45,6 +43,6 @@ public interface Return extends Step {
 	 * @see #getValue()
 	 * @generated
 	 */
-	void setValue(Expression value);
+	void setValue(org.yakindu.base.types.Expression value);
 
 } // Return

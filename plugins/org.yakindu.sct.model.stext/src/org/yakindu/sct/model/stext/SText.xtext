@@ -128,7 +128,7 @@ EventSpec:
 RegularEventSpec:
 	event=SimpleFeatureCall;
 
-SimpleFeatureCall returns exp::Expression:
+SimpleFeatureCall returns types::Expression:
 	SimpleElementReferenceExpression ({exp::FeatureCall.owner=current} '.' feature=[ecore::EObject]
 	(=> operationCall?='('
 	(arguments+=Argument(',' arguments+=Argument)*)?
@@ -158,16 +158,16 @@ ExitEvent:
 AlwaysEvent:
 	{AlwaysEvent} ('always' | 'oncycle');
 
-EventRaisingExpression returns exp::Expression:
+EventRaisingExpression returns types::Expression:
 	{EventRaisingExpression} 'raise' event=FeatureCall (':' value=Expression)?;
 
-EventValueReferenceExpression returns exp::Expression:
+EventValueReferenceExpression returns types::Expression:
 	{EventValueReferenceExpression} 'valueof' '(' value=FeatureCall ')';
 
-ActiveStateReferenceExpression returns exp::Expression:
+ActiveStateReferenceExpression returns types::Expression:
 	{ActiveStateReferenceExpression} 'active' '(' value=[sgraph::State|FQN] ')';
 
-PrimaryExpression returns exp::Expression:
+PrimaryExpression returns types::Expression:
 	PrimitiveValueExpression | FeatureCall | ActiveStateReferenceExpression | EventValueReferenceExpression |
 	ParenthesizedExpression;
 

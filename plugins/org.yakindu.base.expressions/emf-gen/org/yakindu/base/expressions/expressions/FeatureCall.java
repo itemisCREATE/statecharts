@@ -4,6 +4,7 @@ package org.yakindu.base.expressions.expressions;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.yakindu.base.types.Expression;
 
 /**
  * <!-- begin-user-doc -->
@@ -106,7 +107,7 @@ public interface FeatureCall extends ArgumentExpression {
 
 	/**
 	 * Returns the value of the '<em><b>Array Selector</b></em>' containment reference list.
-	 * The list contents are of type {@link org.yakindu.base.expressions.expressions.Expression}.
+	 * The list contents are of type {@link org.yakindu.base.types.Expression}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Array Selector</em>' containment reference list isn't clear,

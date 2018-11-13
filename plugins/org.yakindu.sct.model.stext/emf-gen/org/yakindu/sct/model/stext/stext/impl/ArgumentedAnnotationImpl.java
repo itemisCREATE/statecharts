@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.expressions.expressions.Argument;
 import org.yakindu.base.expressions.expressions.ArgumentExpression;
-import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
+import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.impl.AnnotationImpl;
 import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.model.stext.stext.StextPackage;
@@ -176,7 +176,7 @@ public class ArgumentedAnnotationImpl extends AnnotationImpl implements Argument
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == Expression.class) {
+		if (baseClass == org.yakindu.base.types.Expression.class) {
 			switch (derivedFeatureID) {
 				default: return -1;
 			}
@@ -197,7 +197,7 @@ public class ArgumentedAnnotationImpl extends AnnotationImpl implements Argument
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == Expression.class) {
+		if (baseClass == org.yakindu.base.types.Expression.class) {
 			switch (baseFeatureID) {
 				default: return -1;
 			}

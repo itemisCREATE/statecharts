@@ -4,14 +4,9 @@ package org.yakindu.sct.model.sexec.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.yakindu.base.expressions.expressions.Expression;
-
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sexec.Statement;
 
@@ -37,7 +32,7 @@ public class StatementImpl extends StepImpl implements Statement {
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression expression;
+	protected org.yakindu.base.types.Expression expression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -63,7 +58,7 @@ public class StatementImpl extends StepImpl implements Statement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression getExpression() {
+	public org.yakindu.base.types.Expression getExpression() {
 		return expression;
 	}
 
@@ -72,8 +67,8 @@ public class StatementImpl extends StepImpl implements Statement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetExpression(Expression newExpression, NotificationChain msgs) {
-		Expression oldExpression = expression;
+	public NotificationChain basicSetExpression(org.yakindu.base.types.Expression newExpression, NotificationChain msgs) {
+		org.yakindu.base.types.Expression oldExpression = expression;
 		expression = newExpression;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.STATEMENT__EXPRESSION, oldExpression, newExpression);
@@ -87,7 +82,7 @@ public class StatementImpl extends StepImpl implements Statement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setExpression(Expression newExpression) {
+	public void setExpression(org.yakindu.base.types.Expression newExpression) {
 		if (newExpression != expression) {
 			NotificationChain msgs = null;
 			if (expression != null)
@@ -138,7 +133,7 @@ public class StatementImpl extends StepImpl implements Statement {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case SexecPackage.STATEMENT__EXPRESSION:
-				setExpression((Expression)newValue);
+				setExpression((org.yakindu.base.types.Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -153,7 +148,7 @@ public class StatementImpl extends StepImpl implements Statement {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case SexecPackage.STATEMENT__EXPRESSION:
-				setExpression((Expression)null);
+				setExpression((org.yakindu.base.types.Expression)null);
 				return;
 		}
 		super.eUnset(featureID);

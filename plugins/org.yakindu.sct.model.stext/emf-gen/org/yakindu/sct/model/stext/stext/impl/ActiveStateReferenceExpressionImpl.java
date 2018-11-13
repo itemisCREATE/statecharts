@@ -6,7 +6,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.yakindu.base.expressions.expressions.impl.ExpressionImpl;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
 import org.yakindu.sct.model.stext.stext.StextPackage;
@@ -24,7 +23,7 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  *
  * @generated
  */
-public class ActiveStateReferenceExpressionImpl extends ExpressionImpl implements ActiveStateReferenceExpression {
+public class ActiveStateReferenceExpressionImpl extends org.yakindu.base.types.impl.ExpressionImpl implements ActiveStateReferenceExpression {
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' reference.
 	 * <!-- begin-user-doc -->

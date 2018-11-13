@@ -7,8 +7,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.yakindu.base.expressions.expressions.Expression;
-import org.yakindu.base.expressions.expressions.impl.ExpressionImpl;
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
@@ -25,7 +23,7 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  *
  * @generated
  */
-public class EventValueReferenceExpressionImpl extends ExpressionImpl implements EventValueReferenceExpression {
+public class EventValueReferenceExpressionImpl extends org.yakindu.base.types.impl.ExpressionImpl implements EventValueReferenceExpression {
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -34,7 +32,7 @@ public class EventValueReferenceExpressionImpl extends ExpressionImpl implements
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression value;
+	protected org.yakindu.base.types.Expression value;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -60,7 +58,7 @@ public class EventValueReferenceExpressionImpl extends ExpressionImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression getValue() {
+	public org.yakindu.base.types.Expression getValue() {
 		return value;
 	}
 
@@ -69,8 +67,8 @@ public class EventValueReferenceExpressionImpl extends ExpressionImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetValue(Expression newValue, NotificationChain msgs) {
-		Expression oldValue = value;
+	public NotificationChain basicSetValue(org.yakindu.base.types.Expression newValue, NotificationChain msgs) {
+		org.yakindu.base.types.Expression oldValue = value;
 		value = newValue;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE, oldValue, newValue);
@@ -84,7 +82,7 @@ public class EventValueReferenceExpressionImpl extends ExpressionImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(Expression newValue) {
+	public void setValue(org.yakindu.base.types.Expression newValue) {
 		if (newValue != value) {
 			NotificationChain msgs = null;
 			if (value != null)
@@ -135,7 +133,7 @@ public class EventValueReferenceExpressionImpl extends ExpressionImpl implements
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StextPackage.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE:
-				setValue((Expression)newValue);
+				setValue((org.yakindu.base.types.Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -150,7 +148,7 @@ public class EventValueReferenceExpressionImpl extends ExpressionImpl implements
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StextPackage.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE:
-				setValue((Expression)null);
+				setValue((org.yakindu.base.types.Expression)null);
 				return;
 		}
 		super.eUnset(featureID);

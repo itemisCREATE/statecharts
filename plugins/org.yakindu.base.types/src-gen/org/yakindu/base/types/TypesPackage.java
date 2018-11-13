@@ -1673,6 +1673,25 @@ public interface TypesPackage extends EPackage {
 	int ANNOTATION_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.types.impl.ExpressionImpl <em>Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.types.impl.ExpressionImpl
+	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getExpression()
+	 * @generated
+	 */
+	int EXPRESSION = 24;
+
+	/**
+	 * The number of structural features of the '<em>Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.Direction <em>Direction</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1680,7 +1699,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getDirection()
 	 * @generated
 	 */
-	int DIRECTION = 24;
+	int DIRECTION = 25;
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Package <em>Package</em>}'.
@@ -2319,6 +2338,16 @@ public interface TypesPackage extends EPackage {
 	EReference getAnnotationType_Targets();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.types.Expression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Expression</em>'.
+	 * @see org.yakindu.base.types.Expression
+	 * @generated
+	 */
+	EClass getExpression();
+
+	/**
 	 * Returns the meta object for enum '{@link org.yakindu.base.types.Direction <em>Direction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2877,6 +2906,16 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ANNOTATION_TYPE__TARGETS = eINSTANCE.getAnnotationType_Targets();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.types.impl.ExpressionImpl <em>Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.types.impl.ExpressionImpl
+		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getExpression()
+		 * @generated
+		 */
+		EClass EXPRESSION = eINSTANCE.getExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.Direction <em>Direction</em>}' enum.

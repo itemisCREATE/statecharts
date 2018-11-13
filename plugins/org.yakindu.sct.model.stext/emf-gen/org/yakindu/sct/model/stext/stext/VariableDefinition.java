@@ -2,7 +2,6 @@
  */
 package org.yakindu.sct.model.stext.stext;
 
-import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.types.Property;
 
 /**
@@ -31,12 +30,12 @@ public interface VariableDefinition extends Property {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Initial Value</em>' containment reference.
-	 * @see #setInitialValue(Expression)
+	 * @see #setInitialValue(org.yakindu.base.types.Expression)
 	 * @see org.yakindu.sct.model.stext.stext.StextPackage#getVariableDefinition_InitialValue()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Expression getInitialValue();
+	org.yakindu.base.types.Expression getInitialValue();
 
 	/**
 	 * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.VariableDefinition#getInitialValue <em>Initial Value</em>}' containment reference.
@@ -46,6 +45,6 @@ public interface VariableDefinition extends Property {
 	 * @see #getInitialValue()
 	 * @generated
 	 */
-	void setInitialValue(Expression value);
+	void setInitialValue(org.yakindu.base.types.Expression value);
 
 } // VariableDefinition

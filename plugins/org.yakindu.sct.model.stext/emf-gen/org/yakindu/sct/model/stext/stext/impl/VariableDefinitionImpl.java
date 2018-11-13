@@ -7,7 +7,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.types.impl.PropertyImpl;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
@@ -34,7 +33,7 @@ public class VariableDefinitionImpl extends PropertyImpl implements VariableDefi
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression initialValue;
+	protected org.yakindu.base.types.Expression initialValue;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -60,7 +59,7 @@ public class VariableDefinitionImpl extends PropertyImpl implements VariableDefi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression getInitialValue() {
+	public org.yakindu.base.types.Expression getInitialValue() {
 		return initialValue;
 	}
 
@@ -69,8 +68,8 @@ public class VariableDefinitionImpl extends PropertyImpl implements VariableDefi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetInitialValue(Expression newInitialValue, NotificationChain msgs) {
-		Expression oldInitialValue = initialValue;
+	public NotificationChain basicSetInitialValue(org.yakindu.base.types.Expression newInitialValue, NotificationChain msgs) {
+		org.yakindu.base.types.Expression oldInitialValue = initialValue;
 		initialValue = newInitialValue;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.VARIABLE_DEFINITION__INITIAL_VALUE, oldInitialValue, newInitialValue);
@@ -84,7 +83,7 @@ public class VariableDefinitionImpl extends PropertyImpl implements VariableDefi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInitialValue(Expression newInitialValue) {
+	public void setInitialValue(org.yakindu.base.types.Expression newInitialValue) {
 		if (newInitialValue != initialValue) {
 			NotificationChain msgs = null;
 			if (initialValue != null)
@@ -135,7 +134,7 @@ public class VariableDefinitionImpl extends PropertyImpl implements VariableDefi
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StextPackage.VARIABLE_DEFINITION__INITIAL_VALUE:
-				setInitialValue((Expression)newValue);
+				setInitialValue((org.yakindu.base.types.Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -150,7 +149,7 @@ public class VariableDefinitionImpl extends PropertyImpl implements VariableDefi
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StextPackage.VARIABLE_DEFINITION__INITIAL_VALUE:
-				setInitialValue((Expression)null);
+				setInitialValue((org.yakindu.base.types.Expression)null);
 				return;
 		}
 		super.eUnset(featureID);

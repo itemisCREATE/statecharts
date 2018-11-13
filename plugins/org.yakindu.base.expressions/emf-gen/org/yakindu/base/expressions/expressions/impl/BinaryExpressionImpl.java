@@ -9,8 +9,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.yakindu.base.expressions.expressions.BinaryExpression;
-import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
+import org.yakindu.base.types.impl.ExpressionImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,7 +35,7 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression leftOperand;
+	protected org.yakindu.base.types.Expression leftOperand;
 
 	/**
 	 * The cached value of the '{@link #getRightOperand() <em>Right Operand</em>}' containment reference.
@@ -45,7 +45,7 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression rightOperand;
+	protected org.yakindu.base.types.Expression rightOperand;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -71,7 +71,7 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression getLeftOperand() {
+	public org.yakindu.base.types.Expression getLeftOperand() {
 		return leftOperand;
 	}
 
@@ -80,8 +80,8 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetLeftOperand(Expression newLeftOperand, NotificationChain msgs) {
-		Expression oldLeftOperand = leftOperand;
+	public NotificationChain basicSetLeftOperand(org.yakindu.base.types.Expression newLeftOperand, NotificationChain msgs) {
+		org.yakindu.base.types.Expression oldLeftOperand = leftOperand;
 		leftOperand = newLeftOperand;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.BINARY_EXPRESSION__LEFT_OPERAND, oldLeftOperand, newLeftOperand);
@@ -95,7 +95,7 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLeftOperand(Expression newLeftOperand) {
+	public void setLeftOperand(org.yakindu.base.types.Expression newLeftOperand) {
 		if (newLeftOperand != leftOperand) {
 			NotificationChain msgs = null;
 			if (leftOperand != null)
@@ -114,7 +114,7 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression getRightOperand() {
+	public org.yakindu.base.types.Expression getRightOperand() {
 		return rightOperand;
 	}
 
@@ -123,8 +123,8 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetRightOperand(Expression newRightOperand, NotificationChain msgs) {
-		Expression oldRightOperand = rightOperand;
+	public NotificationChain basicSetRightOperand(org.yakindu.base.types.Expression newRightOperand, NotificationChain msgs) {
+		org.yakindu.base.types.Expression oldRightOperand = rightOperand;
 		rightOperand = newRightOperand;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.BINARY_EXPRESSION__RIGHT_OPERAND, oldRightOperand, newRightOperand);
@@ -138,7 +138,7 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRightOperand(Expression newRightOperand) {
+	public void setRightOperand(org.yakindu.base.types.Expression newRightOperand) {
 		if (newRightOperand != rightOperand) {
 			NotificationChain msgs = null;
 			if (rightOperand != null)
@@ -202,10 +202,10 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ExpressionsPackage.BINARY_EXPRESSION__LEFT_OPERAND:
-				setLeftOperand((Expression)newValue);
+				setLeftOperand((org.yakindu.base.types.Expression)newValue);
 				return;
 			case ExpressionsPackage.BINARY_EXPRESSION__RIGHT_OPERAND:
-				setRightOperand((Expression)newValue);
+				setRightOperand((org.yakindu.base.types.Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -220,10 +220,10 @@ public abstract class BinaryExpressionImpl extends ExpressionImpl implements Bin
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ExpressionsPackage.BINARY_EXPRESSION__LEFT_OPERAND:
-				setLeftOperand((Expression)null);
+				setLeftOperand((org.yakindu.base.types.Expression)null);
 				return;
 			case ExpressionsPackage.BINARY_EXPRESSION__RIGHT_OPERAND:
-				setRightOperand((Expression)null);
+				setRightOperand((org.yakindu.base.types.Expression)null);
 				return;
 		}
 		super.eUnset(featureID);

@@ -546,6 +546,15 @@ public interface SGenPackage extends EPackage {
 	int PROPERTY_DEFINITION__ANNOTATIONS = TypesPackage.PROPERTY__ANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DEFINITION__STATIC = TypesPackage.PROPERTY__STATIC;
+
+	/**
 	 * The feature id for the '<em><b>Const</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

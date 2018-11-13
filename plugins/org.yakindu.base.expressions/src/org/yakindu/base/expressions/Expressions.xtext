@@ -14,89 +14,89 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 import "http://www.yakindu.org/base/types/2.0.0" as types
 import "http://www.yakindu.org/base/expressions/Expressions"
 
-Expression:
+Expression returns types::Expression:
 	AssignmentExpression;
 
-AssignmentExpression returns Expression:
+AssignmentExpression returns types::Expression:
 	ConditionalExpression ({AssignmentExpression.varRef=current} operator=AssignmentOperator
 	expression=ConditionalExpression)*;
 
-ConditionalExpression returns Expression:
+ConditionalExpression returns types::Expression:
 	LogicalOrExpression ({ConditionalExpression.condition=current} '?' trueCase=LogicalOrExpression ':'
 	falseCase=LogicalOrExpression)?;
 
-LogicalOrExpression returns Expression:
+LogicalOrExpression returns types::Expression:
 	LogicalAndExpression ({LogicalOrExpression.leftOperand=current} LogicalOrOperator
 	rightOperand=LogicalAndExpression)*;
 
-LogicalAndExpression returns Expression:
+LogicalAndExpression returns types::Expression:
 	LogicalNotExpression ({LogicalAndExpression.leftOperand=current}
 	LogicalAndOperator rightOperand=LogicalNotExpression)*;
 
-LogicalNotExpression returns Expression:
+LogicalNotExpression returns types::Expression:
 	BitwiseOrExpression | {LogicalNotExpression} LogicalNotOperator
 	operand=BitwiseOrExpression;
 
-BitwiseOrExpression returns Expression:
+BitwiseOrExpression returns types::Expression:
 	BitwiseXorExpression ({BitwiseOrExpression.leftOperand=current} BitwiseOrOperator
 	rightOperand=BitwiseXorExpression)*;
 
-BitwiseXorExpression returns Expression:
+BitwiseXorExpression returns types::Expression:
 	BitwiseAndExpression ({BitwiseXorExpression.leftOperand=current} BitwiseXOrOperator
 	rightOperand=BitwiseAndExpression)*;
 
-BitwiseAndExpression returns Expression:
+BitwiseAndExpression returns types::Expression:
 	LogicalRelationExpression ({BitwiseAndExpression.leftOperand=current} BitwiseAndOperator
 	rightOperand=LogicalRelationExpression)*;
 
-LogicalRelationExpression returns Expression:
+LogicalRelationExpression returns types::Expression:
 	ShiftExpression
 	({LogicalRelationExpression.leftOperand=current} operator=RelationalOperator
 	rightOperand=ShiftExpression)*;
 
-ShiftExpression returns Expression:
+ShiftExpression returns types::Expression:
 	NumericalAddSubtractExpression ({ShiftExpression.leftOperand=current} operator=ShiftOperator
 	rightOperand=NumericalAddSubtractExpression)*;
 
-NumericalAddSubtractExpression returns Expression:
+NumericalAddSubtractExpression returns types::Expression:
 	NumericalMultiplyDivideExpression
 	=>({NumericalAddSubtractExpression.leftOperand=current}
 	operator=AdditiveOperator
 	rightOperand=NumericalMultiplyDivideExpression)*;
 
-NumericalMultiplyDivideExpression returns Expression:
+NumericalMultiplyDivideExpression returns types::Expression:
 	NumericalUnaryExpression
 	=>({NumericalMultiplyDivideExpression.leftOperand=current}
 	operator=MultiplicativeOperator
 	rightOperand=NumericalUnaryExpression)*;
 
-NumericalUnaryExpression returns Expression:
+NumericalUnaryExpression returns types::Expression:
 	PostFixUnaryExpression | {NumericalUnaryExpression} operator=UnaryOperator operand=PostFixUnaryExpression;
 
-PostFixUnaryExpression returns Expression:
+PostFixUnaryExpression returns types::Expression:
 	TypeCastExpression ({PostFixUnaryExpression.operand=current} operator=PostFixOperator)*;
 
-TypeCastExpression returns Expression:
+TypeCastExpression returns types::Expression:
 	PrimaryExpression (({TypeCastExpression.operand=current} 'as') type=[types::Type|QID])*;
 
-PrimaryExpression returns Expression:
+PrimaryExpression returns types::Expression:
 	PrimitiveValueExpression
 	| FeatureCall
 	| ParenthesizedExpression;
 
-PrimitiveValueExpression returns Expression:
+PrimitiveValueExpression returns types::Expression:
 	{PrimitiveValueExpression} value=Literal;
 
 
 
-FeatureCall returns Expression:
+FeatureCall returns types::Expression:
 	ElementReferenceExpression ({FeatureCall.owner=current} '.' feature=[ecore::EObject]
 	(=> operationCall?= '('(arguments+=Argument (',' arguments+=Argument)*)?')'
 		|
 	=> (arrayAccess ?= '[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression ']')* 
 	)?)*;
 
-ElementReferenceExpression returns Expression:
+ElementReferenceExpression returns types::Expression:
 	{ElementReferenceExpression} reference=[ecore::EObject|ID]
 	(=> operationCall?='('	(arguments+=Argument (',' arguments+=Argument)*)?	')' 
 		|
@@ -107,7 +107,7 @@ Argument:
 	(parameter=[types::Parameter] '=')?  value=ConditionalExpression
 ;
 
-ParenthesizedExpression returns Expression:
+ParenthesizedExpression returns types::Expression:
 	{ParenthesizedExpression} '(' expression=Expression ')';
 
 TypeSpecifier returns types::TypeSpecifier:

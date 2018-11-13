@@ -10,8 +10,6 @@
 */
 package org.yakindu.sct.model.sexec;
 
-import org.yakindu.base.expressions.expressions.Expression;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Schedule Time Event</b></em>'.
@@ -65,12 +63,12 @@ public interface ScheduleTimeEvent extends Step {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Time Value</em>' containment reference.
-	 * @see #setTimeValue(Expression)
+	 * @see #setTimeValue(org.yakindu.base.types.Expression)
 	 * @see org.yakindu.sct.model.sexec.SexecPackage#getScheduleTimeEvent_TimeValue()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Expression getTimeValue();
+	org.yakindu.base.types.Expression getTimeValue();
 
 	/**
 	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.ScheduleTimeEvent#getTimeValue <em>Time Value</em>}' containment reference.
@@ -80,6 +78,6 @@ public interface ScheduleTimeEvent extends Step {
 	 * @see #getTimeValue()
 	 * @generated
 	 */
-	void setTimeValue(Expression value);
+	void setTimeValue(org.yakindu.base.types.Expression value);
 
 } // ScheduleTimeEvent

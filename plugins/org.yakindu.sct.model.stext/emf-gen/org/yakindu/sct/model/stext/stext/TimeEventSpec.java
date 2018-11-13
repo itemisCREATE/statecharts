@@ -2,8 +2,6 @@
  */
 package org.yakindu.sct.model.stext.stext;
 
-import org.yakindu.base.expressions.expressions.Expression;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Time Event Spec</b></em>'.
@@ -61,12 +59,12 @@ public interface TimeEventSpec extends EventSpec {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' containment reference.
-	 * @see #setValue(Expression)
+	 * @see #setValue(org.yakindu.base.types.Expression)
 	 * @see org.yakindu.sct.model.stext.stext.StextPackage#getTimeEventSpec_Value()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Expression getValue();
+	org.yakindu.base.types.Expression getValue();
 
 	/**
 	 * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.TimeEventSpec#getValue <em>Value</em>}' containment reference.
@@ -76,7 +74,7 @@ public interface TimeEventSpec extends EventSpec {
 	 * @see #getValue()
 	 * @generated
 	 */
-	void setValue(Expression value);
+	void setValue(org.yakindu.base.types.Expression value);
 
 	/**
 	 * Returns the value of the '<em><b>Unit</b></em>' attribute.

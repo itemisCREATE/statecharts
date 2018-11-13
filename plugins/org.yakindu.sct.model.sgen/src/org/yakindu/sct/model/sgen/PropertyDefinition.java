@@ -2,8 +2,6 @@
  */
 package org.yakindu.sct.model.sgen;
 
-import org.yakindu.base.expressions.expressions.Expression;
-
 import org.yakindu.base.types.Property;
 
 /**
@@ -32,12 +30,12 @@ public interface PropertyDefinition extends Property {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Initial Value</em>' containment reference.
-	 * @see #setInitialValue(Expression)
+	 * @see #setInitialValue(org.yakindu.base.types.Expression)
 	 * @see org.yakindu.sct.model.sgen.SGenPackage#getPropertyDefinition_InitialValue()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Expression getInitialValue();
+	org.yakindu.base.types.Expression getInitialValue();
 
 	/**
 	 * Sets the value of the '{@link org.yakindu.sct.model.sgen.PropertyDefinition#getInitialValue <em>Initial Value</em>}' containment reference.
@@ -47,6 +45,6 @@ public interface PropertyDefinition extends Property {
 	 * @see #getInitialValue()
 	 * @generated
 	 */
-	void setInitialValue(Expression value);
+	void setInitialValue(org.yakindu.base.types.Expression value);
 
 } // PropertyDefinition

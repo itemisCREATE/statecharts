@@ -3,14 +3,9 @@
 package org.yakindu.sct.model.sexec.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.yakindu.base.expressions.expressions.Expression;
-
 import org.yakindu.sct.model.sexec.Return;
 import org.yakindu.sct.model.sexec.SexecPackage;
 
@@ -36,7 +31,7 @@ public class ReturnImpl extends StepImpl implements Return {
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression value;
+	protected org.yakindu.base.types.Expression value;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -62,10 +57,10 @@ public class ReturnImpl extends StepImpl implements Return {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression getValue() {
+	public org.yakindu.base.types.Expression getValue() {
 		if (value != null && value.eIsProxy()) {
 			InternalEObject oldValue = (InternalEObject)value;
-			value = (Expression)eResolveProxy(oldValue);
+			value = (org.yakindu.base.types.Expression)eResolveProxy(oldValue);
 			if (value != oldValue) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SexecPackage.RETURN__VALUE, oldValue, value));
@@ -79,7 +74,7 @@ public class ReturnImpl extends StepImpl implements Return {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression basicGetValue() {
+	public org.yakindu.base.types.Expression basicGetValue() {
 		return value;
 	}
 
@@ -88,8 +83,8 @@ public class ReturnImpl extends StepImpl implements Return {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(Expression newValue) {
-		Expression oldValue = value;
+	public void setValue(org.yakindu.base.types.Expression newValue) {
+		org.yakindu.base.types.Expression oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.RETURN__VALUE, oldValue, value));
@@ -119,7 +114,7 @@ public class ReturnImpl extends StepImpl implements Return {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case SexecPackage.RETURN__VALUE:
-				setValue((Expression)newValue);
+				setValue((org.yakindu.base.types.Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -134,7 +129,7 @@ public class ReturnImpl extends StepImpl implements Return {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case SexecPackage.RETURN__VALUE:
-				setValue((Expression)null);
+				setValue((org.yakindu.base.types.Expression)null);
 				return;
 		}
 		super.eUnset(featureID);

@@ -2,8 +2,6 @@
  */
 package org.yakindu.sct.model.stext.stext;
 
-import org.yakindu.base.expressions.expressions.Expression;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Regular Event Spec</b></em>'.
@@ -30,12 +28,12 @@ public interface RegularEventSpec extends EventSpec {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Event</em>' containment reference.
-	 * @see #setEvent(Expression)
+	 * @see #setEvent(org.yakindu.base.types.Expression)
 	 * @see org.yakindu.sct.model.stext.stext.StextPackage#getRegularEventSpec_Event()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Expression getEvent();
+	org.yakindu.base.types.Expression getEvent();
 
 	/**
 	 * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.RegularEventSpec#getEvent <em>Event</em>}' containment reference.
@@ -45,6 +43,6 @@ public interface RegularEventSpec extends EventSpec {
 	 * @see #getEvent()
 	 * @generated
 	 */
-	void setEvent(Expression value);
+	void setEvent(org.yakindu.base.types.Expression value);
 
 } // RegularEventSpec

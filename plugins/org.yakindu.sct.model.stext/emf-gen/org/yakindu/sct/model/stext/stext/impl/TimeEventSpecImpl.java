@@ -7,7 +7,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.TimeEventType;
@@ -57,7 +56,7 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec {
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression value;
+	protected org.yakindu.base.types.Expression value;
 
 	/**
 	 * The default value of the '{@link #getUnit() <em>Unit</em>}' attribute.
@@ -124,7 +123,7 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression getValue() {
+	public org.yakindu.base.types.Expression getValue() {
 		return value;
 	}
 
@@ -133,8 +132,8 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetValue(Expression newValue, NotificationChain msgs) {
-		Expression oldValue = value;
+	public NotificationChain basicSetValue(org.yakindu.base.types.Expression newValue, NotificationChain msgs) {
+		org.yakindu.base.types.Expression oldValue = value;
 		value = newValue;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.TIME_EVENT_SPEC__VALUE, oldValue, newValue);
@@ -148,7 +147,7 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(Expression newValue) {
+	public void setValue(org.yakindu.base.types.Expression newValue) {
 		if (newValue != value) {
 			NotificationChain msgs = null;
 			if (value != null)
@@ -227,7 +226,7 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec {
 				setType((TimeEventType)newValue);
 				return;
 			case StextPackage.TIME_EVENT_SPEC__VALUE:
-				setValue((Expression)newValue);
+				setValue((org.yakindu.base.types.Expression)newValue);
 				return;
 			case StextPackage.TIME_EVENT_SPEC__UNIT:
 				setUnit((TimeUnit)newValue);
@@ -248,7 +247,7 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec {
 				setType(TYPE_EDEFAULT);
 				return;
 			case StextPackage.TIME_EVENT_SPEC__VALUE:
-				setValue((Expression)null);
+				setValue((org.yakindu.base.types.Expression)null);
 				return;
 			case StextPackage.TIME_EVENT_SPEC__UNIT:
 				setUnit(UNIT_EDEFAULT);
@@ -284,7 +283,7 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (type: ");
 		result.append(type);
 		result.append(", unit: ");

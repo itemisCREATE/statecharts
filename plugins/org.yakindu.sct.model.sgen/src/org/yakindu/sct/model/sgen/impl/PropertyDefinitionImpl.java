@@ -4,16 +4,10 @@ package org.yakindu.sct.model.sgen.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.yakindu.base.expressions.expressions.Expression;
-
 import org.yakindu.base.types.impl.PropertyImpl;
-
 import org.yakindu.sct.model.sgen.PropertyDefinition;
 import org.yakindu.sct.model.sgen.SGenPackage;
 
@@ -39,7 +33,7 @@ public class PropertyDefinitionImpl extends PropertyImpl implements PropertyDefi
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression initialValue;
+	protected org.yakindu.base.types.Expression initialValue;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -65,7 +59,7 @@ public class PropertyDefinitionImpl extends PropertyImpl implements PropertyDefi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression getInitialValue() {
+	public org.yakindu.base.types.Expression getInitialValue() {
 		return initialValue;
 	}
 
@@ -74,8 +68,8 @@ public class PropertyDefinitionImpl extends PropertyImpl implements PropertyDefi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetInitialValue(Expression newInitialValue, NotificationChain msgs) {
-		Expression oldInitialValue = initialValue;
+	public NotificationChain basicSetInitialValue(org.yakindu.base.types.Expression newInitialValue, NotificationChain msgs) {
+		org.yakindu.base.types.Expression oldInitialValue = initialValue;
 		initialValue = newInitialValue;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SGenPackage.PROPERTY_DEFINITION__INITIAL_VALUE, oldInitialValue, newInitialValue);
@@ -89,7 +83,7 @@ public class PropertyDefinitionImpl extends PropertyImpl implements PropertyDefi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInitialValue(Expression newInitialValue) {
+	public void setInitialValue(org.yakindu.base.types.Expression newInitialValue) {
 		if (newInitialValue != initialValue) {
 			NotificationChain msgs = null;
 			if (initialValue != null)
@@ -140,7 +134,7 @@ public class PropertyDefinitionImpl extends PropertyImpl implements PropertyDefi
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case SGenPackage.PROPERTY_DEFINITION__INITIAL_VALUE:
-				setInitialValue((Expression)newValue);
+				setInitialValue((org.yakindu.base.types.Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -155,7 +149,7 @@ public class PropertyDefinitionImpl extends PropertyImpl implements PropertyDefi
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case SGenPackage.PROPERTY_DEFINITION__INITIAL_VALUE:
-				setInitialValue((Expression)null);
+				setInitialValue((org.yakindu.base.types.Expression)null);
 				return;
 		}
 		super.eUnset(featureID);

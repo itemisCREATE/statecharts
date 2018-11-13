@@ -2,9 +2,6 @@
  */
 package org.yakindu.sct.model.sexec;
 
-import org.eclipse.emf.ecore.EObject;
-
-import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.types.Property;
 
 /**
@@ -60,12 +57,12 @@ public interface LocalVariableDefinition extends Step {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Initial Value</em>' containment reference.
-	 * @see #setInitialValue(Expression)
+	 * @see #setInitialValue(org.yakindu.base.types.Expression)
 	 * @see org.yakindu.sct.model.sexec.SexecPackage#getLocalVariableDefinition_InitialValue()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Expression getInitialValue();
+	org.yakindu.base.types.Expression getInitialValue();
 
 	/**
 	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.LocalVariableDefinition#getInitialValue <em>Initial Value</em>}' containment reference.
@@ -75,6 +72,6 @@ public interface LocalVariableDefinition extends Step {
 	 * @see #getInitialValue()
 	 * @generated
 	 */
-	void setInitialValue(Expression value);
+	void setInitialValue(org.yakindu.base.types.Expression value);
 
 } // LocalVariableDefinition

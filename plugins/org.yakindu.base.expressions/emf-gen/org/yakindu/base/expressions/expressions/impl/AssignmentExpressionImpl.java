@@ -9,8 +9,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentOperator;
-import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
+import org.yakindu.base.types.impl.ExpressionImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,7 +36,7 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression varRef;
+	protected org.yakindu.base.types.Expression varRef;
 
 	/**
 	 * The default value of the '{@link #getOperator() <em>Operator</em>}' attribute.
@@ -66,7 +66,7 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression expression;
+	protected org.yakindu.base.types.Expression expression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -92,7 +92,7 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression getVarRef() {
+	public org.yakindu.base.types.Expression getVarRef() {
 		return varRef;
 	}
 
@@ -101,8 +101,8 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetVarRef(Expression newVarRef, NotificationChain msgs) {
-		Expression oldVarRef = varRef;
+	public NotificationChain basicSetVarRef(org.yakindu.base.types.Expression newVarRef, NotificationChain msgs) {
+		org.yakindu.base.types.Expression oldVarRef = varRef;
 		varRef = newVarRef;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.ASSIGNMENT_EXPRESSION__VAR_REF, oldVarRef, newVarRef);
@@ -116,7 +116,7 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setVarRef(Expression newVarRef) {
+	public void setVarRef(org.yakindu.base.types.Expression newVarRef) {
 		if (newVarRef != varRef) {
 			NotificationChain msgs = null;
 			if (varRef != null)
@@ -156,7 +156,7 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression getExpression() {
+	public org.yakindu.base.types.Expression getExpression() {
 		return expression;
 	}
 
@@ -165,8 +165,8 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetExpression(Expression newExpression, NotificationChain msgs) {
-		Expression oldExpression = expression;
+	public NotificationChain basicSetExpression(org.yakindu.base.types.Expression newExpression, NotificationChain msgs) {
+		org.yakindu.base.types.Expression oldExpression = expression;
 		expression = newExpression;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.ASSIGNMENT_EXPRESSION__EXPRESSION, oldExpression, newExpression);
@@ -180,7 +180,7 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setExpression(Expression newExpression) {
+	public void setExpression(org.yakindu.base.types.Expression newExpression) {
 		if (newExpression != expression) {
 			NotificationChain msgs = null;
 			if (expression != null)
@@ -237,13 +237,13 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ExpressionsPackage.ASSIGNMENT_EXPRESSION__VAR_REF:
-				setVarRef((Expression)newValue);
+				setVarRef((org.yakindu.base.types.Expression)newValue);
 				return;
 			case ExpressionsPackage.ASSIGNMENT_EXPRESSION__OPERATOR:
 				setOperator((AssignmentOperator)newValue);
 				return;
 			case ExpressionsPackage.ASSIGNMENT_EXPRESSION__EXPRESSION:
-				setExpression((Expression)newValue);
+				setExpression((org.yakindu.base.types.Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -258,13 +258,13 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ExpressionsPackage.ASSIGNMENT_EXPRESSION__VAR_REF:
-				setVarRef((Expression)null);
+				setVarRef((org.yakindu.base.types.Expression)null);
 				return;
 			case ExpressionsPackage.ASSIGNMENT_EXPRESSION__OPERATOR:
 				setOperator(OPERATOR_EDEFAULT);
 				return;
 			case ExpressionsPackage.ASSIGNMENT_EXPRESSION__EXPRESSION:
-				setExpression((Expression)null);
+				setExpression((org.yakindu.base.types.Expression)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -297,7 +297,7 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (operator: ");
 		result.append(operator);
 		result.append(')');

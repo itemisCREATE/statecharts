@@ -15,9 +15,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
-import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.util.ArgumentSorter;
+import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.Operation;
 
 /**
@@ -75,7 +75,7 @@ public class ElementReferenceExpressionImpl extends ArgumentExpressionImpl imple
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Expression> arraySelector;
+	protected EList<org.yakindu.base.types.Expression> arraySelector;
 
 	/**
 	 * The default value of the '{@link #isArrayAccess() <em>Array Access</em>}' attribute.
@@ -180,9 +180,9 @@ public class ElementReferenceExpressionImpl extends ArgumentExpressionImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Expression> getArraySelector() {
+	public EList<org.yakindu.base.types.Expression> getArraySelector() {
 		if (arraySelector == null) {
-			arraySelector = new EObjectContainmentEList<Expression>(Expression.class, this, ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR);
+			arraySelector = new EObjectContainmentEList<org.yakindu.base.types.Expression>(org.yakindu.base.types.Expression.class, this, ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR);
 		}
 		return arraySelector;
 	}
@@ -260,7 +260,7 @@ public class ElementReferenceExpressionImpl extends ArgumentExpressionImpl imple
 				return;
 			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR:
 				getArraySelector().clear();
-				getArraySelector().addAll((Collection<? extends Expression>)newValue);
+				getArraySelector().addAll((Collection<? extends org.yakindu.base.types.Expression>)newValue);
 				return;
 			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARRAY_ACCESS:
 				setArrayAccess((Boolean)newValue);
@@ -322,7 +322,7 @@ public class ElementReferenceExpressionImpl extends ArgumentExpressionImpl imple
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (operationCall: ");
 		result.append(operationCall);
 		result.append(", arrayAccess: ");

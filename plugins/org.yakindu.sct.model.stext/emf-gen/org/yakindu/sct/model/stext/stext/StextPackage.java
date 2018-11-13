@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 
@@ -1467,7 +1466,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_RAISING_EXPRESSION__EVENT = ExpressionsPackage.EXPRESSION_FEATURE_COUNT + 0;
+	int EVENT_RAISING_EXPRESSION__EVENT = TypesPackage.EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -1476,7 +1475,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_RAISING_EXPRESSION__VALUE = ExpressionsPackage.EXPRESSION_FEATURE_COUNT + 1;
+	int EVENT_RAISING_EXPRESSION__VALUE = TypesPackage.EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Event Raising Expression</em>' class.
@@ -1485,7 +1484,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_RAISING_EXPRESSION_FEATURE_COUNT = ExpressionsPackage.EXPRESSION_FEATURE_COUNT + 2;
+	int EVENT_RAISING_EXPRESSION_FEATURE_COUNT = TypesPackage.EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.EventValueReferenceExpressionImpl <em>Event Value Reference Expression</em>}' class.
@@ -1504,7 +1503,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_VALUE_REFERENCE_EXPRESSION__VALUE = ExpressionsPackage.EXPRESSION_FEATURE_COUNT + 0;
+	int EVENT_VALUE_REFERENCE_EXPRESSION__VALUE = TypesPackage.EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Event Value Reference Expression</em>' class.
@@ -1513,7 +1512,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_VALUE_REFERENCE_EXPRESSION_FEATURE_COUNT = ExpressionsPackage.EXPRESSION_FEATURE_COUNT + 1;
+	int EVENT_VALUE_REFERENCE_EXPRESSION_FEATURE_COUNT = TypesPackage.EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.ActiveStateReferenceExpressionImpl <em>Active State Reference Expression</em>}' class.
@@ -1532,7 +1531,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVE_STATE_REFERENCE_EXPRESSION__VALUE = ExpressionsPackage.EXPRESSION_FEATURE_COUNT + 0;
+	int ACTIVE_STATE_REFERENCE_EXPRESSION__VALUE = TypesPackage.EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Active State Reference Expression</em>' class.
@@ -1541,7 +1540,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVE_STATE_REFERENCE_EXPRESSION_FEATURE_COUNT = ExpressionsPackage.EXPRESSION_FEATURE_COUNT + 1;
+	int ACTIVE_STATE_REFERENCE_EXPRESSION_FEATURE_COUNT = TypesPackage.EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.ArgumentedAnnotationImpl <em>Argumented Annotation</em>}' class.

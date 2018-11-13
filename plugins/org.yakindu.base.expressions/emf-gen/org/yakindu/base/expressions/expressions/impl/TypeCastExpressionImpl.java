@@ -7,10 +7,10 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.types.Type;
+import org.yakindu.base.types.impl.ExpressionImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,7 +35,7 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression operand;
+	protected org.yakindu.base.types.Expression operand;
 
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
@@ -71,7 +71,7 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression getOperand() {
+	public org.yakindu.base.types.Expression getOperand() {
 		return operand;
 	}
 
@@ -80,8 +80,8 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOperand(Expression newOperand, NotificationChain msgs) {
-		Expression oldOperand = operand;
+	public NotificationChain basicSetOperand(org.yakindu.base.types.Expression newOperand, NotificationChain msgs) {
+		org.yakindu.base.types.Expression oldOperand = operand;
 		operand = newOperand;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.TYPE_CAST_EXPRESSION__OPERAND, oldOperand, newOperand);
@@ -95,7 +95,7 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOperand(Expression newOperand) {
+	public void setOperand(org.yakindu.base.types.Expression newOperand) {
 		if (newOperand != operand) {
 			NotificationChain msgs = null;
 			if (operand != null)
@@ -187,7 +187,7 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ExpressionsPackage.TYPE_CAST_EXPRESSION__OPERAND:
-				setOperand((Expression)newValue);
+				setOperand((org.yakindu.base.types.Expression)newValue);
 				return;
 			case ExpressionsPackage.TYPE_CAST_EXPRESSION__TYPE:
 				setType((Type)newValue);
@@ -205,7 +205,7 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ExpressionsPackage.TYPE_CAST_EXPRESSION__OPERAND:
-				setOperand((Expression)null);
+				setOperand((org.yakindu.base.types.Expression)null);
 				return;
 			case ExpressionsPackage.TYPE_CAST_EXPRESSION__TYPE:
 				setType((Type)null);

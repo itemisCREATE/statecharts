@@ -10,8 +10,8 @@
 */
 package org.yakindu.sct.model.sexec.transformation
 
-import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
+import org.yakindu.base.types.Expression
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.stext.stext.StextFactory
 
