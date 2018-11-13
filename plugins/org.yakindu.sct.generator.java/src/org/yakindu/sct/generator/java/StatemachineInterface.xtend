@@ -85,7 +85,7 @@ class StatemachineInterface {
 	
 	def protected imports(ExecutionFlow flow, GeneratorEntry entry) {
 		val Set<String> imports = new TreeSet
-		imports.add('''«entry.basePackageName».«iTimerCallback»''')
+		imports.add('''«entry.basePackageName».«iStatemachine»''')
 		if(entry.createInterfaceObserver && flow.hasOutgoingEvents) {
 			imports.add("java.util.List")
 		}
