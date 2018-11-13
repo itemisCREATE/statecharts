@@ -17,8 +17,11 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ComposedChecks;
@@ -35,12 +38,14 @@ import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor;
 import org.yakindu.base.types.validation.TypesJavaValidator;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -61,6 +66,13 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 		// containment hierarchy
 		if (!(expression.eContainer() instanceof Expression))
 			typeInferrer.infer(expression, this);
+	}
+	
+	@Check(CheckType.FAST)
+	public void checkExpression(Property expression) {
+		if (expression.getType() == null || expression.getType().eIsProxy())
+			return;
+		typeInferrer.infer(expression, this);
 	}
 
 	public void accept(ValidationIssue issue) {
@@ -211,6 +223,62 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 						element.eClass()), null, element.getAnnotations().indexOf(annotation),
 						ERROR_WRONG_ANNOTATION_TARGET_CODE);
 			}
+		}
+	}
+	
+	public static final String CONST_MUST_HAVE_VALUE_MSG = "A constant definition must specify an initial value.";
+	public static final String CONST_MUST_HAVE_VALUE_CODE = "ConstMustHaveAValue";
+	public static final String REFERENCE_TO_VARIABLE = "Cannot reference a variable in a constant initialization.";
+	
+	@Check(CheckType.FAST)
+	public void checkValueDefinitionExpression(Property property) {
+		// applies only to constants
+		if (!property.isConst())
+			return;
+		Expression initialValue = property.getInitialValue();
+		if (initialValue == null) {
+			error(CONST_MUST_HAVE_VALUE_MSG, property, null, CONST_MUST_HAVE_VALUE_CODE);
+			return;
+		}
+		List<Expression> toCheck = Lists.newArrayList(initialValue);
+		TreeIterator<EObject> eAllContents = initialValue.eAllContents();
+		while (eAllContents.hasNext()) {
+			EObject next = eAllContents.next();
+			if (next instanceof Expression)
+				toCheck.add((Expression) next);
+		}
+		for (Expression expression : toCheck) {
+			EObject referencedObject = null;
+			if (expression instanceof FeatureCall)
+				referencedObject = ((FeatureCall) expression).getFeature();
+			else if (expression instanceof ElementReferenceExpression)
+				referencedObject = ((ElementReferenceExpression) expression).getReference();
+			if (referencedObject instanceof Property) {
+				if (!((Property) referencedObject).isConst()) {
+					error(REFERENCE_TO_VARIABLE, TypesPackage.Literals.PROPERTY__INITIAL_VALUE);
+				}
+			}
+		}
+	}
+	
+	public static final String DECLARATION_WITH_READONLY = "The keyword '%s' has no effect for '%s' definitions. Can be removed.";
+	
+	@Check(CheckType.FAST)
+	public void checkConstAndReadOnlyDefinitionExpression(Property definition) {
+		// applies only for readonly const definitions
+		if (!definition.isReadonly() && !definition.isConst())
+			return;
+		ICompositeNode definitionNode = NodeModelUtils.getNode(definition);
+		String tokenText = NodeModelUtils.getTokenText(definitionNode);
+
+		if (tokenText == null || tokenText.isEmpty())
+			return;
+		if (tokenText.contains(TypesPackage.Literals.PROPERTY__READONLY.getName())
+				&& tokenText.contains(TypesPackage.Literals.PROPERTY__CONST.getName())) {
+			warning(String.format(DECLARATION_WITH_READONLY,
+					TypesPackage.Literals.PROPERTY__READONLY.getName(),
+					TypesPackage.Literals.PROPERTY__CONST.getName()), definition,
+					TypesPackage.Literals.PROPERTY__READONLY);
 		}
 	}
 }

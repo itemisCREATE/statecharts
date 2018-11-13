@@ -7,6 +7,8 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.yakindu.base.types.Expression;
+import org.yakindu.base.types.impl.ExpressionImpl;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
@@ -24,7 +26,7 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  *
  * @generated
  */
-public class EventRaisingExpressionImpl extends org.yakindu.base.types.impl.ExpressionImpl implements EventRaisingExpression {
+public class EventRaisingExpressionImpl extends ExpressionImpl implements EventRaisingExpression {
 	/**
 	 * The cached value of the '{@link #getEvent() <em>Event</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -33,7 +35,7 @@ public class EventRaisingExpressionImpl extends org.yakindu.base.types.impl.Expr
 	 * @generated
 	 * @ordered
 	 */
-	protected org.yakindu.base.types.Expression event;
+	protected Expression event;
 
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
@@ -43,7 +45,7 @@ public class EventRaisingExpressionImpl extends org.yakindu.base.types.impl.Expr
 	 * @generated
 	 * @ordered
 	 */
-	protected org.yakindu.base.types.Expression value;
+	protected Expression value;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,7 +71,7 @@ public class EventRaisingExpressionImpl extends org.yakindu.base.types.impl.Expr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.yakindu.base.types.Expression getEvent() {
+	public Expression getEvent() {
 		return event;
 	}
 
@@ -78,8 +80,8 @@ public class EventRaisingExpressionImpl extends org.yakindu.base.types.impl.Expr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetEvent(org.yakindu.base.types.Expression newEvent, NotificationChain msgs) {
-		org.yakindu.base.types.Expression oldEvent = event;
+	public NotificationChain basicSetEvent(Expression newEvent, NotificationChain msgs) {
+		Expression oldEvent = event;
 		event = newEvent;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.EVENT_RAISING_EXPRESSION__EVENT, oldEvent, newEvent);
@@ -93,7 +95,7 @@ public class EventRaisingExpressionImpl extends org.yakindu.base.types.impl.Expr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setEvent(org.yakindu.base.types.Expression newEvent) {
+	public void setEvent(Expression newEvent) {
 		if (newEvent != event) {
 			NotificationChain msgs = null;
 			if (event != null)
@@ -112,7 +114,7 @@ public class EventRaisingExpressionImpl extends org.yakindu.base.types.impl.Expr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.yakindu.base.types.Expression getValue() {
+	public Expression getValue() {
 		return value;
 	}
 
@@ -121,8 +123,8 @@ public class EventRaisingExpressionImpl extends org.yakindu.base.types.impl.Expr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetValue(org.yakindu.base.types.Expression newValue, NotificationChain msgs) {
-		org.yakindu.base.types.Expression oldValue = value;
+	public NotificationChain basicSetValue(Expression newValue, NotificationChain msgs) {
+		Expression oldValue = value;
 		value = newValue;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.EVENT_RAISING_EXPRESSION__VALUE, oldValue, newValue);
@@ -136,7 +138,7 @@ public class EventRaisingExpressionImpl extends org.yakindu.base.types.impl.Expr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(org.yakindu.base.types.Expression newValue) {
+	public void setValue(Expression newValue) {
 		if (newValue != value) {
 			NotificationChain msgs = null;
 			if (value != null)
@@ -191,10 +193,10 @@ public class EventRaisingExpressionImpl extends org.yakindu.base.types.impl.Expr
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StextPackage.EVENT_RAISING_EXPRESSION__EVENT:
-				setEvent((org.yakindu.base.types.Expression)newValue);
+				setEvent((Expression)newValue);
 				return;
 			case StextPackage.EVENT_RAISING_EXPRESSION__VALUE:
-				setValue((org.yakindu.base.types.Expression)newValue);
+				setValue((Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -209,10 +211,10 @@ public class EventRaisingExpressionImpl extends org.yakindu.base.types.impl.Expr
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StextPackage.EVENT_RAISING_EXPRESSION__EVENT:
-				setEvent((org.yakindu.base.types.Expression)null);
+				setEvent((Expression)null);
 				return;
 			case StextPackage.EVENT_RAISING_EXPRESSION__VALUE:
-				setValue((org.yakindu.base.types.Expression)null);
+				setValue((Expression)null);
 				return;
 		}
 		super.eUnset(featureID);

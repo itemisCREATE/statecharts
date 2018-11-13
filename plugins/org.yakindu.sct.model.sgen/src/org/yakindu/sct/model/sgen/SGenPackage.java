@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.yakindu.base.base.BasePackage;
-import org.yakindu.base.types.TypesPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -491,106 +490,6 @@ public interface SGenPackage extends EPackage {
 	int DEPRECATABLE_ELEMENT_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.impl.PropertyDefinitionImpl <em>Property Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sgen.impl.PropertyDefinitionImpl
-	 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getPropertyDefinition()
-	 * @generated
-	 */
-	int PROPERTY_DEFINITION = 9;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_DEFINITION__TYPE = TypesPackage.PROPERTY__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_DEFINITION__TYPE_SPECIFIER = TypesPackage.PROPERTY__TYPE_SPECIFIER;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_DEFINITION__NAME = TypesPackage.PROPERTY__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_DEFINITION__ID = TypesPackage.PROPERTY__ID;
-
-	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_DEFINITION__ANNOTATIONS = TypesPackage.PROPERTY__ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_DEFINITION__STATIC = TypesPackage.PROPERTY__STATIC;
-
-	/**
-	 * The feature id for the '<em><b>Const</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_DEFINITION__CONST = TypesPackage.PROPERTY__CONST;
-
-	/**
-	 * The feature id for the '<em><b>Readonly</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_DEFINITION__READONLY = TypesPackage.PROPERTY__READONLY;
-
-	/**
-	 * The feature id for the '<em><b>Initial Value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_DEFINITION__INITIAL_VALUE = TypesPackage.PROPERTY_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Property Definition</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_DEFINITION_FEATURE_COUNT = TypesPackage.PROPERTY_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.ParameterTypes <em>Parameter Types</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -598,7 +497,7 @@ public interface SGenPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getParameterTypes()
 	 * @generated
 	 */
-	int PARAMETER_TYPES = 10;
+	int PARAMETER_TYPES = 9;
 
 
 	/**
@@ -934,27 +833,6 @@ public interface SGenPackage extends EPackage {
 	EAttribute getDeprecatableElement_Comment();
 
 	/**
-	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgen.PropertyDefinition <em>Property Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Property Definition</em>'.
-	 * @see org.yakindu.sct.model.sgen.PropertyDefinition
-	 * @generated
-	 */
-	EClass getPropertyDefinition();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sgen.PropertyDefinition#getInitialValue <em>Initial Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Initial Value</em>'.
-	 * @see org.yakindu.sct.model.sgen.PropertyDefinition#getInitialValue()
-	 * @see #getPropertyDefinition()
-	 * @generated
-	 */
-	EReference getPropertyDefinition_InitialValue();
-
-	/**
 	 * Returns the meta object for enum '{@link org.yakindu.sct.model.sgen.ParameterTypes <em>Parameter Types</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1251,24 +1129,6 @@ public interface SGenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DEPRECATABLE_ELEMENT__COMMENT = eINSTANCE.getDeprecatableElement_Comment();
-
-		/**
-		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.impl.PropertyDefinitionImpl <em>Property Definition</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.yakindu.sct.model.sgen.impl.PropertyDefinitionImpl
-		 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getPropertyDefinition()
-		 * @generated
-		 */
-		EClass PROPERTY_DEFINITION = eINSTANCE.getPropertyDefinition();
-
-		/**
-		 * The meta object literal for the '<em><b>Initial Value</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PROPERTY_DEFINITION__INITIAL_VALUE = eINSTANCE.getPropertyDefinition_InitialValue();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.ParameterTypes <em>Parameter Types</em>}' enum.

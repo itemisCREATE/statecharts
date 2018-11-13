@@ -25,11 +25,12 @@ import org.yakindu.base.expressions.expressions.Literal;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.interpreter.IExpressionInterpreter;
+import org.yakindu.base.types.Expression;
+import org.yakindu.base.types.Property;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorModel;
-import org.yakindu.sct.model.sgen.PropertyDefinition;
 import org.yakindu.sct.model.sgen.SGenPackage;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.model.sruntime.ExecutionVariable;
@@ -70,7 +71,7 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 * @generated
 	 * @ordered
 	 */
-	protected org.yakindu.base.types.Expression expression;
+	protected Expression expression;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -140,7 +141,7 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.yakindu.base.types.Expression getExpression() {
+	public Expression getExpression() {
 		return expression;
 	}
 
@@ -149,8 +150,8 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetExpression(org.yakindu.base.types.Expression newExpression, NotificationChain msgs) {
-		org.yakindu.base.types.Expression oldExpression = expression;
+	public NotificationChain basicSetExpression(Expression newExpression, NotificationChain msgs) {
+		Expression oldExpression = expression;
 		expression = newExpression;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SGenPackage.FEATURE_PARAMETER_VALUE__EXPRESSION, oldExpression, newExpression);
@@ -164,7 +165,7 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setExpression(org.yakindu.base.types.Expression newExpression) {
+	public void setExpression(Expression newExpression) {
 		if (newExpression != expression) {
 			NotificationChain msgs = null;
 			if (expression != null)
@@ -259,8 +260,8 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 		}
 		ExecutionContext context = new ExecutionContextImpl();
 		GeneratorModel generatorModel = (GeneratorModel) EcoreUtil.getRootContainer(this);
-		EList<PropertyDefinition> properties = generatorModel.getProperties();
-		for (PropertyDefinition propertyDefinition : properties) {
+		EList<Property> properties = generatorModel.getProperties();
+		for (Property propertyDefinition : properties) {
 			ExecutionVariable variable = SRuntimeFactory.eINSTANCE.createExecutionVariable();
 			variable.setName(propertyDefinition.getName());
 			variable.setFqName(propertyDefinition.getName());
@@ -347,7 +348,7 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 				setParameter((FeatureParameter)newValue);
 				return;
 			case SGenPackage.FEATURE_PARAMETER_VALUE__EXPRESSION:
-				setExpression((org.yakindu.base.types.Expression)newValue);
+				setExpression((Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -364,7 +365,7 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 				setParameter((FeatureParameter)null);
 				return;
 			case SGenPackage.FEATURE_PARAMETER_VALUE__EXPRESSION:
-				setExpression((org.yakindu.base.types.Expression)null);
+				setExpression((Expression)null);
 				return;
 		}
 		super.eUnset(featureID);

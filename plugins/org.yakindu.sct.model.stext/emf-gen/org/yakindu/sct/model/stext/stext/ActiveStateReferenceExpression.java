@@ -2,6 +2,7 @@
  */
 package org.yakindu.sct.model.stext.stext;
 
+import org.yakindu.base.types.Expression;
 import org.yakindu.sct.model.sgraph.State;
 
 /**
@@ -20,7 +21,7 @@ import org.yakindu.sct.model.sgraph.State;
  * @model
  * @generated
  */
-public interface ActiveStateReferenceExpression extends org.yakindu.base.types.Expression {
+public interface ActiveStateReferenceExpression extends Expression {
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' reference.
 	 * <!-- begin-user-doc -->

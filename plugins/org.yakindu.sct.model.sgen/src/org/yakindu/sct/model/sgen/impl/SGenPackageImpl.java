@@ -30,7 +30,6 @@ import org.yakindu.sct.model.sgen.GeneratorConfiguration;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgen.ParameterTypes;
-import org.yakindu.sct.model.sgen.PropertyDefinition;
 import org.yakindu.sct.model.sgen.SGenFactory;
 import org.yakindu.sct.model.sgen.SGenPackage;
 
@@ -103,13 +102,6 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 	 * @generated
 	 */
 	private EClass deprecatableElementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass propertyDefinitionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -468,24 +460,6 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getPropertyDefinition() {
-		return propertyDefinitionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getPropertyDefinition_InitialValue() {
-		return (EReference)propertyDefinitionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EEnum getParameterTypes() {
 		return parameterTypesEEnum;
 	}
@@ -558,9 +532,6 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 		createEAttribute(deprecatableElementEClass, DEPRECATABLE_ELEMENT__DEPRECATED);
 		createEAttribute(deprecatableElementEClass, DEPRECATABLE_ELEMENT__COMMENT);
 
-		propertyDefinitionEClass = createEClass(PROPERTY_DEFINITION);
-		createEReference(propertyDefinitionEClass, PROPERTY_DEFINITION__INITIAL_VALUE);
-
 		// Create enums
 		parameterTypesEEnum = createEEnum(PARAMETER_TYPES);
 	}
@@ -589,8 +560,8 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
 		TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
+		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -601,13 +572,12 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 		featureTypeEClass.getESuperTypes().add(this.getDeprecatableElement());
 		featureParameterEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		featureParameterEClass.getESuperTypes().add(this.getDeprecatableElement());
-		propertyDefinitionEClass.getESuperTypes().add(theTypesPackage.getProperty());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(generatorModelEClass, GeneratorModel.class, "GeneratorModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGeneratorModel_Entries(), this.getGeneratorEntry(), null, "entries", null, 0, -1, GeneratorModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGeneratorModel_GeneratorId(), ecorePackage.getEString(), "generatorId", null, 0, 1, GeneratorModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getGeneratorModel_Properties(), this.getPropertyDefinition(), null, "properties", null, 0, -1, GeneratorModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGeneratorModel_Properties(), theTypesPackage.getProperty(), null, "properties", null, 0, -1, GeneratorModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(generatorConfigurationEClass, GeneratorConfiguration.class, "GeneratorConfiguration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGeneratorConfiguration_Configurations(), this.getFeatureConfiguration(), null, "configurations", null, 0, -1, GeneratorConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -668,9 +638,6 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 		initEClass(deprecatableElementEClass, DeprecatableElement.class, "DeprecatableElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDeprecatableElement_Deprecated(), ecorePackage.getEBoolean(), "deprecated", "false", 1, 1, DeprecatableElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDeprecatableElement_Comment(), ecorePackage.getEString(), "comment", null, 0, 1, DeprecatableElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(propertyDefinitionEClass, PropertyDefinition.class, "PropertyDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPropertyDefinition_InitialValue(), theTypesPackage.getExpression(), null, "initialValue", null, 0, 1, PropertyDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(parameterTypesEEnum, ParameterTypes.class, "ParameterTypes");

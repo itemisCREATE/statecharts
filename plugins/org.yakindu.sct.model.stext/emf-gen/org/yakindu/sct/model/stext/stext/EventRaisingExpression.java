@@ -2,6 +2,8 @@
  */
 package org.yakindu.sct.model.stext.stext;
 
+import org.yakindu.base.types.Expression;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Event Raising Expression</b></em>'.
@@ -19,7 +21,7 @@ package org.yakindu.sct.model.stext.stext;
  * @model
  * @generated
  */
-public interface EventRaisingExpression extends org.yakindu.base.types.Expression {
+public interface EventRaisingExpression extends Expression {
 	/**
 	 * Returns the value of the '<em><b>Event</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -29,12 +31,12 @@ public interface EventRaisingExpression extends org.yakindu.base.types.Expressio
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Event</em>' containment reference.
-	 * @see #setEvent(org.yakindu.base.types.Expression)
+	 * @see #setEvent(Expression)
 	 * @see org.yakindu.sct.model.stext.stext.StextPackage#getEventRaisingExpression_Event()
 	 * @model containment="true"
 	 * @generated
 	 */
-	org.yakindu.base.types.Expression getEvent();
+	Expression getEvent();
 
 	/**
 	 * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.EventRaisingExpression#getEvent <em>Event</em>}' containment reference.
@@ -44,7 +46,7 @@ public interface EventRaisingExpression extends org.yakindu.base.types.Expressio
 	 * @see #getEvent()
 	 * @generated
 	 */
-	void setEvent(org.yakindu.base.types.Expression value);
+	void setEvent(Expression value);
 
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
@@ -55,12 +57,12 @@ public interface EventRaisingExpression extends org.yakindu.base.types.Expressio
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' containment reference.
-	 * @see #setValue(org.yakindu.base.types.Expression)
+	 * @see #setValue(Expression)
 	 * @see org.yakindu.sct.model.stext.stext.StextPackage#getEventRaisingExpression_Value()
 	 * @model containment="true"
 	 * @generated
 	 */
-	org.yakindu.base.types.Expression getValue();
+	Expression getValue();
 
 	/**
 	 * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.EventRaisingExpression#getValue <em>Value</em>}' containment reference.
@@ -70,6 +72,6 @@ public interface EventRaisingExpression extends org.yakindu.base.types.Expressio
 	 * @see #getValue()
 	 * @generated
 	 */
-	void setValue(org.yakindu.base.types.Expression value);
+	void setValue(Expression value);
 
 } // EventRaisingExpression

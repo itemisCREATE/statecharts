@@ -596,15 +596,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getVariableDefinition_InitialValue() {
-		return (EReference)variableDefinitionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getOperationDefinition() {
 		return operationDefinitionEClass;
 	}
@@ -1005,7 +996,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		eventDefinitionEClass = createEClass(EVENT_DEFINITION);
 
 		variableDefinitionEClass = createEClass(VARIABLE_DEFINITION);
-		createEReference(variableDefinitionEClass, VARIABLE_DEFINITION__INITIAL_VALUE);
 
 		operationDefinitionEClass = createEClass(OPERATION_DEFINITION);
 
@@ -1174,7 +1164,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		initEClass(eventDefinitionEClass, EventDefinition.class, "EventDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(variableDefinitionEClass, VariableDefinition.class, "VariableDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVariableDefinition_InitialValue(), theTypesPackage.getExpression(), null, "initialValue", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(operationDefinitionEClass, OperationDefinition.class, "OperationDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

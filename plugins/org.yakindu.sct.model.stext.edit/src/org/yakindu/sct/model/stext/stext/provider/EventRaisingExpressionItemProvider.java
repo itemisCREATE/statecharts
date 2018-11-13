@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
+import org.yakindu.base.types.provider.ExpressionItemProvider;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.StextPackage;
@@ -31,7 +32,7 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class EventRaisingExpressionItemProvider extends org.yakindu.base.types.provider.ExpressionItemProvider
+public class EventRaisingExpressionItemProvider extends ExpressionItemProvider
 {
   /**
 	 * This constructs an instance from a factory and a notifier.

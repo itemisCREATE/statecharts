@@ -381,12 +381,16 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		return getResultFor(NULL);
 	}
 
-	public InferenceResult doInfer(Property p) {
-		InferenceResult type = inferTypeDispatch(p.getTypeSpecifier());
-		assertNotType(type, VARIABLE_VOID_TYPE, getResultFor(VOID));
-		return type;
+	public InferenceResult doInfer(Property e) {
+		InferenceResult result = inferTypeDispatch(e.getTypeSpecifier());
+		assertNotType(result, VARIABLE_VOID_TYPE, getResultFor(VOID));
+		if (e.getInitialValue() == null)
+			return result;
+		InferenceResult result2 = inferTypeDispatch(e.getInitialValue());
+		assertAssignable(result, result2, String.format(PROPERTY_INITIAL_VALUE, result2, result));
+		return result;
 	}
-
+	
 	public InferenceResult doInfer(Operation e) {
 		return e.getTypeSpecifier() == null ? getResultFor(VOID) : inferTypeDispatch(e.getTypeSpecifier());
 	}

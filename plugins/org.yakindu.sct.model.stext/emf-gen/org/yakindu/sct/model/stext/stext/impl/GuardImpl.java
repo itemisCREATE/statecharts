@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.yakindu.base.types.Expression;
 import org.yakindu.sct.model.stext.stext.Guard;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
@@ -33,7 +34,7 @@ public class GuardImpl extends MinimalEObjectImpl.Container implements Guard {
 	 * @generated
 	 * @ordered
 	 */
-	protected org.yakindu.base.types.Expression expression;
+	protected Expression expression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -59,7 +60,7 @@ public class GuardImpl extends MinimalEObjectImpl.Container implements Guard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.yakindu.base.types.Expression getExpression() {
+	public Expression getExpression() {
 		return expression;
 	}
 
@@ -68,8 +69,8 @@ public class GuardImpl extends MinimalEObjectImpl.Container implements Guard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetExpression(org.yakindu.base.types.Expression newExpression, NotificationChain msgs) {
-		org.yakindu.base.types.Expression oldExpression = expression;
+	public NotificationChain basicSetExpression(Expression newExpression, NotificationChain msgs) {
+		Expression oldExpression = expression;
 		expression = newExpression;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.GUARD__EXPRESSION, oldExpression, newExpression);
@@ -83,7 +84,7 @@ public class GuardImpl extends MinimalEObjectImpl.Container implements Guard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setExpression(org.yakindu.base.types.Expression newExpression) {
+	public void setExpression(Expression newExpression) {
 		if (newExpression != expression) {
 			NotificationChain msgs = null;
 			if (expression != null)
@@ -134,7 +135,7 @@ public class GuardImpl extends MinimalEObjectImpl.Container implements Guard {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StextPackage.GUARD__EXPRESSION:
-				setExpression((org.yakindu.base.types.Expression)newValue);
+				setExpression((Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -149,7 +150,7 @@ public class GuardImpl extends MinimalEObjectImpl.Container implements Guard {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StextPackage.GUARD__EXPRESSION:
-				setExpression((org.yakindu.base.types.Expression)null);
+				setExpression((Expression)null);
 				return;
 		}
 		super.eUnset(featureID);

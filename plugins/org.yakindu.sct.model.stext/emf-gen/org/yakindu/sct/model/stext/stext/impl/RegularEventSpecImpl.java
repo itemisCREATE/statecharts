@@ -7,6 +7,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.yakindu.base.types.Expression;
 import org.yakindu.sct.model.stext.stext.RegularEventSpec;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
@@ -32,7 +33,7 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
 	 * @generated
 	 * @ordered
 	 */
-	protected org.yakindu.base.types.Expression event;
+	protected Expression event;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -58,7 +59,7 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.yakindu.base.types.Expression getEvent() {
+	public Expression getEvent() {
 		return event;
 	}
 
@@ -67,8 +68,8 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetEvent(org.yakindu.base.types.Expression newEvent, NotificationChain msgs) {
-		org.yakindu.base.types.Expression oldEvent = event;
+	public NotificationChain basicSetEvent(Expression newEvent, NotificationChain msgs) {
+		Expression oldEvent = event;
 		event = newEvent;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.REGULAR_EVENT_SPEC__EVENT, oldEvent, newEvent);
@@ -82,7 +83,7 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setEvent(org.yakindu.base.types.Expression newEvent) {
+	public void setEvent(Expression newEvent) {
 		if (newEvent != event) {
 			NotificationChain msgs = null;
 			if (event != null)
@@ -133,7 +134,7 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StextPackage.REGULAR_EVENT_SPEC__EVENT:
-				setEvent((org.yakindu.base.types.Expression)newValue);
+				setEvent((Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -148,7 +149,7 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StextPackage.REGULAR_EVENT_SPEC__EVENT:
-				setEvent((org.yakindu.base.types.Expression)null);
+				setEvent((Expression)null);
 				return;
 		}
 		super.eUnset(featureID);

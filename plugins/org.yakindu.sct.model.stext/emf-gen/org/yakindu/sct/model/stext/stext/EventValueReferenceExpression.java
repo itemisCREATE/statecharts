@@ -2,6 +2,8 @@
  */
 package org.yakindu.sct.model.stext.stext;
 
+import org.yakindu.base.types.Expression;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Event Value Reference Expression</b></em>'.
@@ -18,7 +20,7 @@ package org.yakindu.sct.model.stext.stext;
  * @model
  * @generated
  */
-public interface EventValueReferenceExpression extends org.yakindu.base.types.Expression {
+public interface EventValueReferenceExpression extends Expression {
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -28,12 +30,12 @@ public interface EventValueReferenceExpression extends org.yakindu.base.types.Ex
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' containment reference.
-	 * @see #setValue(org.yakindu.base.types.Expression)
+	 * @see #setValue(Expression)
 	 * @see org.yakindu.sct.model.stext.stext.StextPackage#getEventValueReferenceExpression_Value()
 	 * @model containment="true"
 	 * @generated
 	 */
-	org.yakindu.base.types.Expression getValue();
+	Expression getValue();
 
 	/**
 	 * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.EventValueReferenceExpression#getValue <em>Value</em>}' containment reference.
@@ -43,6 +45,6 @@ public interface EventValueReferenceExpression extends org.yakindu.base.types.Ex
 	 * @see #getValue()
 	 * @generated
 	 */
-	void setValue(org.yakindu.base.types.Expression value);
+	void setValue(Expression value);
 
 } // EventValueReferenceExpression

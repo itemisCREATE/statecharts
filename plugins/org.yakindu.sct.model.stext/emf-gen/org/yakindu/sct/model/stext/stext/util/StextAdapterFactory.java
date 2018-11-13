@@ -12,6 +12,7 @@ import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Event;
+import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PackageMember;
@@ -332,7 +333,7 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 				return createEffectAdapter();
 			}
 			@Override
-			public Adapter caseExpression(org.yakindu.base.types.Expression object) {
+			public Adapter caseExpression(Expression object) {
 				return createExpressionAdapter();
 			}
 			@Override

@@ -19,6 +19,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+import org.yakindu.base.types.provider.ExpressionItemProvider;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
 /**
@@ -27,7 +28,7 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ActiveStateReferenceExpressionItemProvider extends org.yakindu.base.types.provider.ExpressionItemProvider
+public class ActiveStateReferenceExpressionItemProvider extends ExpressionItemProvider
 {
   /**
 	 * This constructs an instance from a factory and a notifier.

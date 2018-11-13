@@ -3,6 +3,7 @@
 package org.yakindu.sct.model.stext.stext;
 
 import org.eclipse.emf.ecore.EObject;
+import org.yakindu.base.types.Expression;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,12 +31,12 @@ public interface Guard extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Expression</em>' containment reference.
-	 * @see #setExpression(org.yakindu.base.types.Expression)
+	 * @see #setExpression(Expression)
 	 * @see org.yakindu.sct.model.stext.stext.StextPackage#getGuard_Expression()
 	 * @model containment="true"
 	 * @generated
 	 */
-	org.yakindu.base.types.Expression getExpression();
+	Expression getExpression();
 
 	/**
 	 * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.Guard#getExpression <em>Expression</em>}' containment reference.
@@ -45,6 +46,6 @@ public interface Guard extends EObject {
 	 * @see #getExpression()
 	 * @generated
 	 */
-	void setExpression(org.yakindu.base.types.Expression value);
+	void setExpression(Expression value);
 
 } // Guard

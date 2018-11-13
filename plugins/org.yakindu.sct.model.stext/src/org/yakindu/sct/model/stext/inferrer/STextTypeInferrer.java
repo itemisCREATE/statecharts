@@ -30,7 +30,6 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Guard;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
-import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -38,21 +37,10 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition;
  */
 public class STextTypeInferrer extends ExpressionsTypeInferrer {
 
-	public static final String VARIABLE_DEFINITION = "Cannot assign a value of type %s to a variable of type %s.";
 	public static final String EVENT_DEFINITION = "Cannot assign a value of type %s to an event of type %s.";
 	public static final String GUARD = "The evaluation result of a guard expression must be of type boolean.";
 	public static final String TIME_SPEC = "The evaluation result of a time expression must be of type integer.";
 	public static final String MISSING_VALUE = "Need to assign a value to an event of type %s.";
-
-	public InferenceResult doInfer(VariableDefinition e) {
-		InferenceResult result = inferTypeDispatch(e.getTypeSpecifier());
-		assertNotType(result, VARIABLE_VOID_TYPE, getResultFor(VOID));
-		if (e.getInitialValue() == null)
-			return result;
-		InferenceResult result2 = inferTypeDispatch(e.getInitialValue());
-		assertAssignable(result, result2, String.format(VARIABLE_DEFINITION, result2, result));
-		return result;
-	}
 
 	public InferenceResult doInfer(Event e) {
 		// if an event is used within an expression, the type is boolean and the

@@ -565,13 +565,22 @@ public interface TypesPackage extends EPackage {
 	int PROPERTY__READONLY = DECLARATION_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Initial Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__INITIAL_VALUE = DECLARATION_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Property</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 2;
+	int PROPERTY_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1873,6 +1882,17 @@ public interface TypesPackage extends EPackage {
 	EAttribute getProperty_Readonly();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.types.Property#getInitialValue <em>Initial Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Initial Value</em>'.
+	 * @see org.yakindu.base.types.Property#getInitialValue()
+	 * @see #getProperty()
+	 * @generated
+	 */
+	EReference getProperty_InitialValue();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Parameter <em>Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2516,6 +2536,14 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PROPERTY__READONLY = eINSTANCE.getProperty_Readonly();
+
+		/**
+		 * The meta object literal for the '<em><b>Initial Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY__INITIAL_VALUE = eINSTANCE.getProperty_InitialValue();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.ParameterImpl <em>Parameter</em>}' class.

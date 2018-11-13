@@ -29,9 +29,9 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.validation.Check;
-import org.eclipse.xtext.validation.CheckType;
 import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult;
@@ -50,7 +50,6 @@ import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgen.ParameterTypes;
-import org.yakindu.sct.model.sgen.PropertyDefinition;
 import org.yakindu.sct.model.sgen.SGenPackage;
 
 import com.google.common.base.Function;
@@ -114,8 +113,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		}
 	}
 
-	@Check(CheckType.FAST)
-	public void checkInitialValue(PropertyDefinition property) {
+	public void checkInitialValue(Property property) {
 		if (property.getType() == null || property.getType().eIsProxy())
 			return;
 		InferenceResult expressionResult = inferrer.infer(property.getInitialValue(), this);
@@ -137,7 +135,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 			error(UNKNOWN_CONTENT_TYPE + contentType + "'", SGenPackage.Literals.GENERATOR_ENTRY__CONTENT_TYPE);
 		}
 	}
-	
+
 	@Check
 	public void checkDuplicateElementRef(GeneratorEntry entry) {
 		EObject elementRef = entry.getElementRef();
@@ -149,8 +147,10 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 			return;
 		}
 		IScope scope = scopeProvider.getScope(entry, SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF);
-		if (Iterables.size(Iterables.filter(scope.getAllElements(), (e) -> elementName.equals(e.getQualifiedName()))) > 1) {
-			warning(String.format(DUPLICATE_ELEMENT, entry.getContentType(), elementName), SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF);
+		if (Iterables
+				.size(Iterables.filter(scope.getAllElements(), (e) -> elementName.equals(e.getQualifiedName()))) > 1) {
+			warning(String.format(DUPLICATE_ELEMENT, entry.getContentType(), elementName),
+					SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF);
 		}
 	}
 

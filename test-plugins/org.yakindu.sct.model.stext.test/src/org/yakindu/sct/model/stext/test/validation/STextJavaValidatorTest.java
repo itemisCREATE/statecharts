@@ -796,7 +796,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		assertIssueCount(diagnostics, 1);
 		assertError(diagnostics, EXIT_UNUSED);
 	}
-	
+
 	@Test
 	public void checkExitTransitionExistsNoSync() {
 		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "NoExitTransitionToSync.sct");
@@ -830,8 +830,8 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 				.loadStatechart(VALIDATION_TESTMODEL_DIR + "ConstWithVariable.sct");
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
 		assertIssueCount(diagnostics, 3); //
-		assertError(diagnostics, REFERENCE_TO_VARIABLE);
-		assertError(diagnostics, CONST_MUST_HAVE_VALUE_MSG);
+		assertError(diagnostics, ExpressionsJavaValidator.REFERENCE_TO_VARIABLE);
+		assertError(diagnostics, ExpressionsJavaValidator.CONST_MUST_HAVE_VALUE_MSG);
 	}
 
 	@Test
@@ -868,7 +868,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	@Test
 	public void transitionsWithNoTrigger() {
 	}
-	
+
 	@Test
 	public void testOptionalParameter() {
 		EObject model;
@@ -1049,7 +1049,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		assertIssueCount(diagnostics, 1);
 		assertWarning(diagnostics, EXIT_NEVER_USED + "'unusedExitPoint'");
 	}
-	
+
 	@Test
 
 	public void checkAlwaysTransitionHasLowestPriority() {
@@ -1064,10 +1064,11 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		}
 		assertIssueCount(diagnostics, 8);
 	}
-	
+
 	@Test
 	public void checkOnlyOneEntryPointSpecIsUsed() {
-		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "OnlyOneEntryPointSpecIsUsed.sct");
+		statechart = AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "OnlyOneEntryPointSpecIsUsed.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
@@ -1081,7 +1082,8 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 	@Test
 	public void checkAlwaysAndDefaultTransitionInChoices() {
-		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "TransitionBlockingAlwaysTrueChoices.sct");
+		statechart = AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "TransitionBlockingAlwaysTrueChoices.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
@@ -1091,7 +1093,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		}
 		assertIssueCount(diagnostics, 7);
 	}
-	
+
 	@Test
 	public void checkOnlyOneDefaultTransitionUsed() {
 		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "MultipleDefaultInChoices.sct");
@@ -1102,7 +1104,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 				validator.validate(element, diagnostics, new HashMap<>());
 			}
 		}
-		assertIssueCount(diagnostics, 4);		
+		assertIssueCount(diagnostics, 4);
 	}
-	
+
 }

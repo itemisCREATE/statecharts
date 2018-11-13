@@ -33,6 +33,7 @@
     <genClasses ecoreClass="types.ecore#//Property">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Property/const"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Property/readonly"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//Property/initialValue"/>
     </genClasses>
     <genClasses ecoreClass="types.ecore#//Parameter">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference types.ecore#//Parameter/owningOperation"/>

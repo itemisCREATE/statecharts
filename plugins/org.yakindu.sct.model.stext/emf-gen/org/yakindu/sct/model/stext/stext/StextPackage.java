@@ -736,7 +736,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_DEFINITION__INITIAL_VALUE = TypesPackage.PROPERTY_FEATURE_COUNT + 0;
+	int VARIABLE_DEFINITION__INITIAL_VALUE = TypesPackage.PROPERTY__INITIAL_VALUE;
 
 	/**
 	 * The number of structural features of the '<em>Variable Definition</em>' class.
@@ -745,7 +745,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_DEFINITION_FEATURE_COUNT = TypesPackage.PROPERTY_FEATURE_COUNT + 1;
+	int VARIABLE_DEFINITION_FEATURE_COUNT = TypesPackage.PROPERTY_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.OperationDefinitionImpl <em>Operation Definition</em>}' class.
@@ -1829,17 +1829,6 @@ public interface StextPackage extends EPackage {
 	EClass getVariableDefinition();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.stext.stext.VariableDefinition#getInitialValue <em>Initial Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Initial Value</em>'.
-	 * @see org.yakindu.sct.model.stext.stext.VariableDefinition#getInitialValue()
-	 * @see #getVariableDefinition()
-	 * @generated
-	 */
-	EReference getVariableDefinition_InitialValue();
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.OperationDefinition <em>Operation Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2458,14 +2447,6 @@ public interface StextPackage extends EPackage {
 		 * @generated
 		 */
 		EClass VARIABLE_DEFINITION = eINSTANCE.getVariableDefinition();
-
-		/**
-		 * The meta object literal for the '<em><b>Initial Value</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference VARIABLE_DEFINITION__INITIAL_VALUE = eINSTANCE.getVariableDefinition_InitialValue();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.OperationDefinitionImpl <em>Operation Definition</em>}' class.

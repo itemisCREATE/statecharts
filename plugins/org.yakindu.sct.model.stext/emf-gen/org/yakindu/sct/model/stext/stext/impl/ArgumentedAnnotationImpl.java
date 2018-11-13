@@ -176,7 +176,7 @@ public class ArgumentedAnnotationImpl extends AnnotationImpl implements Argument
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == org.yakindu.base.types.Expression.class) {
+		if (baseClass == Expression.class) {
 			switch (derivedFeatureID) {
 				default: return -1;
 			}
@@ -197,7 +197,7 @@ public class ArgumentedAnnotationImpl extends AnnotationImpl implements Argument
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == org.yakindu.base.types.Expression.class) {
+		if (baseClass == Expression.class) {
 			switch (baseFeatureID) {
 				default: return -1;
 			}
