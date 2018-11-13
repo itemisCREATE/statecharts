@@ -112,7 +112,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 			}
 		}
 	}
-
+	@Check
 	public void checkInitialValue(Property property) {
 		if (property.getType() == null || property.getType().eIsProxy())
 			return;
