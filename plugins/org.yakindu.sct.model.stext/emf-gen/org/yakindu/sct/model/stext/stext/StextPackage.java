@@ -903,15 +903,6 @@ public interface StextPackage extends EPackage {
 	int TYPE_ALIAS_DEFINITION__ANNOTATIONS = TypesPackage.TYPE_ALIAS__ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_ALIAS_DEFINITION__CONSTRAINT = TypesPackage.TYPE_ALIAS__CONSTRAINT;
-
-	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

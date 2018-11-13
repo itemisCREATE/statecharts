@@ -73,10 +73,6 @@
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//PackageMember/id"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//PackageMember/annotations"/>
     </genClasses>
-    <genClasses ecoreClass="types.ecore#//RangeConstraint">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//RangeConstraint/lowerBound"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//RangeConstraint/upperBound"/>
-    </genClasses>
     <genClasses ecoreClass="types.ecore#//Domain">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Domain/domainID"/>
     </genClasses>

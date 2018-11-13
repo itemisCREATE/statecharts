@@ -28,7 +28,6 @@ import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
-import org.yakindu.base.types.RangeConstraint;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypeParameter;
@@ -239,12 +238,6 @@ public class TypesSwitch<T> extends Switch<T> {
 				T result = casePackageMember(packageMember);
 				if (result == null) result = caseNamedElement(packageMember);
 				if (result == null) result = caseAnnotatableElement(packageMember);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TypesPackage.RANGE_CONSTRAINT: {
-				RangeConstraint rangeConstraint = (RangeConstraint)theEObject;
-				T result = caseRangeConstraint(rangeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -563,21 +556,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePackageMember(PackageMember object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Range Constraint</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Range Constraint</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRangeConstraint(RangeConstraint object) {
 		return null;
 	}
 

@@ -152,15 +152,6 @@ public interface TypesFactory extends EFactory {
 	PackageMember createPackageMember();
 
 	/**
-	 * Returns a new object of class '<em>Range Constraint</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Range Constraint</em>'.
-	 * @generated
-	 */
-	RangeConstraint createRangeConstraint();
-
-	/**
 	 * Returns a new object of class '<em>Domain</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

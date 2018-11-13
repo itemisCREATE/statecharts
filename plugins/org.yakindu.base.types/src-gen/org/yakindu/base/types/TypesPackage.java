@@ -1242,43 +1242,6 @@ public interface TypesPackage extends EPackage {
 	int GENERIC_ELEMENT_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.base.types.impl.RangeConstraintImpl <em>Range Constraint</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.types.impl.RangeConstraintImpl
-	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getRangeConstraint()
-	 * @generated
-	 */
-	int RANGE_CONSTRAINT = 16;
-
-	/**
-	 * The feature id for the '<em><b>Lower Bound</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RANGE_CONSTRAINT__LOWER_BOUND = 0;
-
-	/**
-	 * The feature id for the '<em><b>Upper Bound</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RANGE_CONSTRAINT__UPPER_BOUND = 1;
-
-	/**
-	 * The number of structural features of the '<em>Range Constraint</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RANGE_CONSTRAINT_FEATURE_COUNT = 2;
-
-	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.DomainImpl <em>Domain</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1286,7 +1249,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getDomain()
 	 * @generated
 	 */
-	int DOMAIN = 17;
+	int DOMAIN = 16;
 
 	/**
 	 * The feature id for the '<em><b>Domain ID</b></em>' attribute.
@@ -1314,7 +1277,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getTypeAlias()
 	 * @generated
 	 */
-	int TYPE_ALIAS = 18;
+	int TYPE_ALIAS = 17;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1405,7 +1368,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getAnnotation()
 	 * @generated
 	 */
-	int ANNOTATION = 19;
+	int ANNOTATION = 18;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1442,7 +1405,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getAnnotatableElement()
 	 * @generated
 	 */
-	int ANNOTATABLE_ELEMENT = 20;
+	int ANNOTATABLE_ELEMENT = 19;
 
 	/**
 	 * The number of structural features of the '<em>Annotatable Element</em>' class.
@@ -1461,7 +1424,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getArrayTypeSpecifier()
 	 * @generated
 	 */
-	int ARRAY_TYPE_SPECIFIER = 21;
+	int ARRAY_TYPE_SPECIFIER = 20;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1507,7 +1470,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getAnnotationType()
 	 * @generated
 	 */
-	int ANNOTATION_TYPE = 22;
+	int ANNOTATION_TYPE = 21;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1598,7 +1561,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getExpression()
 	 * @generated
 	 */
-	int EXPRESSION = 23;
+	int EXPRESSION = 22;
 
 	/**
 	 * The number of structural features of the '<em>Expression</em>' class.
@@ -1617,7 +1580,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getDirection()
 	 * @generated
 	 */
-	int DIRECTION = 24;
+	int DIRECTION = 23;
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Package <em>Package</em>}'.
@@ -2086,38 +2049,6 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPackageMember_Annotations();
-
-	/**
-	 * Returns the meta object for class '{@link org.yakindu.base.types.RangeConstraint <em>Range Constraint</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Range Constraint</em>'.
-	 * @see org.yakindu.base.types.RangeConstraint
-	 * @generated
-	 */
-	EClass getRangeConstraint();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.RangeConstraint#getLowerBound <em>Lower Bound</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Lower Bound</em>'.
-	 * @see org.yakindu.base.types.RangeConstraint#getLowerBound()
-	 * @see #getRangeConstraint()
-	 * @generated
-	 */
-	EAttribute getRangeConstraint_LowerBound();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.RangeConstraint#getUpperBound <em>Upper Bound</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Upper Bound</em>'.
-	 * @see org.yakindu.base.types.RangeConstraint#getUpperBound()
-	 * @see #getRangeConstraint()
-	 * @generated
-	 */
-	EAttribute getRangeConstraint_UpperBound();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Domain <em>Domain</em>}'.
@@ -2670,32 +2601,6 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PACKAGE_MEMBER__ANNOTATIONS = eINSTANCE.getPackageMember_Annotations();
-
-		/**
-		 * The meta object literal for the '{@link org.yakindu.base.types.impl.RangeConstraintImpl <em>Range Constraint</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.yakindu.base.types.impl.RangeConstraintImpl
-		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getRangeConstraint()
-		 * @generated
-		 */
-		EClass RANGE_CONSTRAINT = eINSTANCE.getRangeConstraint();
-
-		/**
-		 * The meta object literal for the '<em><b>Lower Bound</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute RANGE_CONSTRAINT__LOWER_BOUND = eINSTANCE.getRangeConstraint_LowerBound();
-
-		/**
-		 * The meta object literal for the '<em><b>Upper Bound</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute RANGE_CONSTRAINT__UPPER_BOUND = eINSTANCE.getRangeConstraint_UpperBound();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.DomainImpl <em>Domain</em>}' class.
