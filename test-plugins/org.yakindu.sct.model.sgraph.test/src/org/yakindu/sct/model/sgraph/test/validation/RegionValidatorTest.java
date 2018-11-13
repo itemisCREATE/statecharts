@@ -79,6 +79,12 @@ public class RegionValidatorTest extends AbstractSGraphValidatorTest {
 		Statechart statechart = loadStatechart("EntryTransitionToParentState.sct");
 		tester.validate(statechart).assertError(REGION_ENTRY_TARGET_MUST_BE_CHILD_CODE);
 	}
+	
+	@Test
+	public void historyWithoutOutgoingTransitionNeedsDefaultEntry() {
+		Statechart statechart = loadStatechart("HistoryWithoutDefaultEntry.sct");
+		tester.validate(statechart).assertWarning(REGION_NEEDS_DEFAULT_ENTRY_WHEN_HISTORY_HAS_NO_OUTGOING_CODE);
+	}
 
 	@Override
 	protected Statechart loadStatechart(String path) {
