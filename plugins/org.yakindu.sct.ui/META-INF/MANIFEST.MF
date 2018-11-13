@@ -16,3 +16,4 @@ Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.ui,
  org.yakindu.sct.ui.perspectives,
  org.yakindu.sct.ui.wizards
+Automatic-Module-Name: org.yakindu.sct.ui

@@ -8,3 +8,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.yakindu.base.types,
  org.junit,
  com.google.guava
+Automatic-Module-Name: org.yakindu.base.types.test

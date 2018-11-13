@@ -223,22 +223,14 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 	}
 
 	private void nameLengthTest(int maxLength) {
-		int num_statecharts = statecharts.size();
-		long cumulated_time = 0L;
 		for (Statechart statechart : statecharts) {
-
 			// Transform statechart
 			ExecutionFlow flow = sequencer.transform(statechart);
 			flow = optimizer.transform(flow);
-
 			List<String> names = new ArrayList<>();
-
 			executionflowNamingService.setMaxLength(maxLength);
 			executionflowNamingService.setSeparator('_');
-
-			long t0 = System.currentTimeMillis();
 			executionflowNamingService.initializeNamingService(flow);
-			cumulated_time += System.currentTimeMillis() - t0;
 			for (ExecutionState state : flow.getStates()) {
 				String name = executionflowNamingService.getShortName(state);
 				assertEquals(names.contains(name), false);

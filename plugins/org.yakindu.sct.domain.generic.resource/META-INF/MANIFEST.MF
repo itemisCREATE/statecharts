@@ -12,3 +12,4 @@ Require-Bundle: org.yakindu.sct.domain,
  org.eclipse.xtext.ui
 Export-Package: org.yakindu.sct.domain.generic.resource
 Import-Package: org.eclipse.xtext.ui.shared
+Automatic-Module-Name: org.yakindu.sct.domain.generic.resource

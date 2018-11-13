@@ -3,11 +3,10 @@ package org.yakindu.sct.generator.cpp.test;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.yakindu.sct.generator.c.gtest.GTest;
-import org.yakindu.sct.generator.c.gtest.GTestRunner;
-import org.yakindu.sct.generator.c.gtest.GTestHelper;
-import org.yakindu.sct.generator.c.gtest.GTestHelper.Compiler;
 import org.yakindu.sct.generator.c.gtest.GMockHelper;
+import org.yakindu.sct.generator.c.gtest.GTest;
+import org.yakindu.sct.generator.c.gtest.GTestHelper;
+import org.yakindu.sct.generator.c.gtest.GTestRunner;
 
 @GTest(
 	statechartBundle = "org.yakindu.sct.test.models",

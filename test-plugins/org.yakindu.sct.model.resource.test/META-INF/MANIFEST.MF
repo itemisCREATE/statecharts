@@ -13,3 +13,4 @@ Require-Bundle: org.junit,
  org.yakindu.sct.domain.generic.resource
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: statecharts.org
+Automatic-Module-Name: org.yakindu.sct.model.resource.test

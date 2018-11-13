@@ -16,3 +16,4 @@ Export-Package: org.yakindu.sct.domain,
  org.yakindu.sct.domain.extension,
  org.yakindu.sct.domain.extension.impl
 Bundle-ClassPath: .
+Automatic-Module-Name: org.yakindu.sct.domain

@@ -21,15 +21,15 @@ import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
-import org.yakindu.sct.model.sexec.Method
-import org.yakindu.sct.model.sexec.ExecutionState
-import static org.yakindu.sct.generator.c.CGeneratorConstants.TRUE;
-import static org.yakindu.sct.generator.c.CGeneratorConstants.FALSE;
-import static org.yakindu.sct.generator.c.CGeneratorConstants.BOOL_TYPE;
+
+import static org.yakindu.sct.generator.c.CGeneratorConstants.BOOL_TYPE
+import static org.yakindu.sct.generator.c.CGeneratorConstants.FALSE
 
 /**
  * @author rbeckmann

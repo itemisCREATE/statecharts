@@ -13,3 +13,4 @@ Require-Bundle: org.yakindu.sct.simulation.core,
  org.yakindu.base.expressions.interpreter
 Import-Package: com.google.inject.multibindings;version="1.3.0"
 Export-Package: org.yakindu.sct.domain.generic.simulation
+Automatic-Module-Name: org.yakindu.sct.domain.generic.simulation

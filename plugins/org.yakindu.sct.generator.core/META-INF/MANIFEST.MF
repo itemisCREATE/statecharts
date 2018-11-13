@@ -61,3 +61,4 @@ Export-Package: org.yakindu.sct.generator.core;
    org.yakindu.sct.generator.core.library",
  org.yakindu.sct.generator.core.templates;uses:="org.eclipse.emf.ecore,org.yakindu.base.expressions.expressions",
  org.yakindu.sct.generator.core.types;uses:="org.yakindu.base.types"
+Automatic-Module-Name: org.yakindu.sct.generator.core

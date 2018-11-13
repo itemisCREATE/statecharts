@@ -14,3 +14,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.domain.generic
 Service-Component: OSGI-INF/component.xml
+Automatic-Module-Name: org.yakindu.sct.domain.generic

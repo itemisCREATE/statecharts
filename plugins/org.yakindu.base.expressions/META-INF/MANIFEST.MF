@@ -40,3 +40,4 @@ Export-Package: org.yakindu.base.expressions,
  org.yakindu.base.expressions.terminals,
  org.yakindu.base.expressions.validation
 Bundle-ClassPath: .
+Automatic-Module-Name: org.yakindu.base.expressions

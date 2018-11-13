@@ -35,7 +35,7 @@ import org.yakindu.sct.model.stext.naming.StextNameProvider
  */
 class NamingHelper {
 	
-	@Inject private StextNameProvider provider
+	@Inject StextNameProvider provider
 
 	def dispatch String fqElementName(ExecutionState it, char separator) {
 		provider.getFullyQualifiedName(it).skipFirst(2).toString(separator.toString)

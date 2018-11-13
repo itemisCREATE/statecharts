@@ -38,4 +38,5 @@ Export-Package: org.yakindu.sct.simulation.ui,
  org.yakindu.sct.simulation.ui.view,
  org.yakindu.sct.simulation.ui.view.actions,
  org.yakindu.sct.simulation.ui.view.decorator
+Automatic-Module-Name: org.yakindu.sct.simulation.ui
 
