@@ -38,6 +38,7 @@ import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryExpression;
+import org.yakindu.base.types.Expression;
 
 /**
  * <!-- begin-user-doc -->
@@ -770,7 +771,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseExpression(org.yakindu.base.types.Expression object) {
+	public T caseExpression(Expression object) {
 		return null;
 	}
 

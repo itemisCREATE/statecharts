@@ -139,7 +139,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="FeatureCall" eSuperTypes="#//ArgumentExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Declaration"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationCall" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="arraySelector" upperBound="-1"
         eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"

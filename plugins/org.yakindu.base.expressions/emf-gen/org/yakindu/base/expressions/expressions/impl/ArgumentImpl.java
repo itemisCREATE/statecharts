@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.yakindu.base.expressions.expressions.Argument;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
+import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.Parameter;
 
 /**
@@ -45,7 +46,7 @@ public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argume
 	 * @generated
 	 * @ordered
 	 */
-	protected org.yakindu.base.types.Expression value;
+	protected Expression value;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -109,7 +110,7 @@ public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argume
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.yakindu.base.types.Expression getValue() {
+	public Expression getValue() {
 		return value;
 	}
 
@@ -118,8 +119,8 @@ public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argume
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetValue(org.yakindu.base.types.Expression newValue, NotificationChain msgs) {
-		org.yakindu.base.types.Expression oldValue = value;
+	public NotificationChain basicSetValue(Expression newValue, NotificationChain msgs) {
+		Expression oldValue = value;
 		value = newValue;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.ARGUMENT__VALUE, oldValue, newValue);
@@ -133,7 +134,7 @@ public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argume
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(org.yakindu.base.types.Expression newValue) {
+	public void setValue(Expression newValue) {
 		if (newValue != value) {
 			NotificationChain msgs = null;
 			if (value != null)
@@ -190,7 +191,7 @@ public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argume
 				setParameter((Parameter)newValue);
 				return;
 			case ExpressionsPackage.ARGUMENT__VALUE:
-				setValue((org.yakindu.base.types.Expression)newValue);
+				setValue((Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -208,7 +209,7 @@ public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argume
 				setParameter((Parameter)null);
 				return;
 			case ExpressionsPackage.ARGUMENT__VALUE:
-				setValue((org.yakindu.base.types.Expression)null);
+				setValue((Expression)null);
 				return;
 		}
 		super.eUnset(featureID);

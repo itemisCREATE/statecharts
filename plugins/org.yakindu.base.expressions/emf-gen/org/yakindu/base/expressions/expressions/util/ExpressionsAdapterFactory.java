@@ -39,6 +39,7 @@ import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryExpression;
+import org.yakindu.base.types.Expression;
 
 /**
  * <!-- begin-user-doc -->
@@ -225,7 +226,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 				return createArgumentAdapter();
 			}
 			@Override
-			public Adapter caseExpression(org.yakindu.base.types.Expression object) {
+			public Adapter caseExpression(Expression object) {
 				return createExpressionAdapter();
 			}
 			@Override

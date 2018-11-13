@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
+import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.impl.ExpressionImpl;
 
@@ -35,7 +36,7 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 	 * @generated
 	 * @ordered
 	 */
-	protected org.yakindu.base.types.Expression operand;
+	protected Expression operand;
 
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
@@ -71,7 +72,7 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.yakindu.base.types.Expression getOperand() {
+	public Expression getOperand() {
 		return operand;
 	}
 
@@ -80,8 +81,8 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOperand(org.yakindu.base.types.Expression newOperand, NotificationChain msgs) {
-		org.yakindu.base.types.Expression oldOperand = operand;
+	public NotificationChain basicSetOperand(Expression newOperand, NotificationChain msgs) {
+		Expression oldOperand = operand;
 		operand = newOperand;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.TYPE_CAST_EXPRESSION__OPERAND, oldOperand, newOperand);
@@ -95,7 +96,7 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOperand(org.yakindu.base.types.Expression newOperand) {
+	public void setOperand(Expression newOperand) {
 		if (newOperand != operand) {
 			NotificationChain msgs = null;
 			if (operand != null)
@@ -187,7 +188,7 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ExpressionsPackage.TYPE_CAST_EXPRESSION__OPERAND:
-				setOperand((org.yakindu.base.types.Expression)newValue);
+				setOperand((Expression)newValue);
 				return;
 			case ExpressionsPackage.TYPE_CAST_EXPRESSION__TYPE:
 				setType((Type)newValue);
@@ -205,7 +206,7 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ExpressionsPackage.TYPE_CAST_EXPRESSION__OPERAND:
-				setOperand((org.yakindu.base.types.Expression)null);
+				setOperand((Expression)null);
 				return;
 			case ExpressionsPackage.TYPE_CAST_EXPRESSION__TYPE:
 				setType((Type)null);

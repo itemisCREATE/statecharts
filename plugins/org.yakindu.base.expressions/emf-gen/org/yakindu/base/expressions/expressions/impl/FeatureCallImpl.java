@@ -9,7 +9,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -17,6 +16,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.expressions.util.ArgumentSorter;
+import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.Operation;
 
@@ -46,7 +46,7 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	 * @generated
 	 * @ordered
 	 */
-	protected org.yakindu.base.types.Expression owner;
+	protected Expression owner;
 
 	/**
 	 * The cached value of the '{@link #getFeature() <em>Feature</em>}' reference.
@@ -56,7 +56,7 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	 * @generated
 	 * @ordered
 	 */
-	protected EObject feature;
+	protected Declaration feature;
 
 	/**
 	 * The default value of the '{@link #isOperationCall() <em>Operation Call</em>}' attribute.
@@ -86,7 +86,7 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<org.yakindu.base.types.Expression> arraySelector;
+	protected EList<Expression> arraySelector;
 
 	/**
 	 * The default value of the '{@link #isArrayAccess() <em>Array Access</em>}' attribute.
@@ -132,7 +132,7 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.yakindu.base.types.Expression getOwner() {
+	public Expression getOwner() {
 		return owner;
 	}
 
@@ -141,8 +141,8 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOwner(org.yakindu.base.types.Expression newOwner, NotificationChain msgs) {
-		org.yakindu.base.types.Expression oldOwner = owner;
+	public NotificationChain basicSetOwner(Expression newOwner, NotificationChain msgs) {
+		Expression oldOwner = owner;
 		owner = newOwner;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.FEATURE_CALL__OWNER, oldOwner, newOwner);
@@ -156,7 +156,7 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOwner(org.yakindu.base.types.Expression newOwner) {
+	public void setOwner(Expression newOwner) {
 		if (newOwner != owner) {
 			NotificationChain msgs = null;
 			if (owner != null)
@@ -175,10 +175,10 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EObject getFeature() {
+	public Declaration getFeature() {
 		if (feature != null && feature.eIsProxy()) {
 			InternalEObject oldFeature = (InternalEObject)feature;
-			feature = eResolveProxy(oldFeature);
+			feature = (Declaration)eResolveProxy(oldFeature);
 			if (feature != oldFeature) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExpressionsPackage.FEATURE_CALL__FEATURE, oldFeature, feature));
@@ -192,7 +192,7 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EObject basicGetFeature() {
+	public Declaration basicGetFeature() {
 		return feature;
 	}
 
@@ -201,8 +201,8 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFeature(EObject newFeature) {
-		EObject oldFeature = feature;
+	public void setFeature(Declaration newFeature) {
+		Declaration oldFeature = feature;
 		feature = newFeature;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.FEATURE_CALL__FEATURE, oldFeature, feature));
@@ -234,9 +234,9 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<org.yakindu.base.types.Expression> getArraySelector() {
+	public EList<Expression> getArraySelector() {
 		if (arraySelector == null) {
-			arraySelector = new EObjectContainmentEList<org.yakindu.base.types.Expression>(org.yakindu.base.types.Expression.class, this, ExpressionsPackage.FEATURE_CALL__ARRAY_SELECTOR);
+			arraySelector = new EObjectContainmentEList<Expression>(Expression.class, this, ExpressionsPackage.FEATURE_CALL__ARRAY_SELECTOR);
 		}
 		return arraySelector;
 	}
@@ -311,17 +311,17 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ExpressionsPackage.FEATURE_CALL__OWNER:
-				setOwner((org.yakindu.base.types.Expression)newValue);
+				setOwner((Expression)newValue);
 				return;
 			case ExpressionsPackage.FEATURE_CALL__FEATURE:
-				setFeature((EObject)newValue);
+				setFeature((Declaration)newValue);
 				return;
 			case ExpressionsPackage.FEATURE_CALL__OPERATION_CALL:
 				setOperationCall((Boolean)newValue);
 				return;
 			case ExpressionsPackage.FEATURE_CALL__ARRAY_SELECTOR:
 				getArraySelector().clear();
-				getArraySelector().addAll((Collection<? extends org.yakindu.base.types.Expression>)newValue);
+				getArraySelector().addAll((Collection<? extends Expression>)newValue);
 				return;
 			case ExpressionsPackage.FEATURE_CALL__ARRAY_ACCESS:
 				setArrayAccess((Boolean)newValue);
@@ -339,10 +339,10 @@ public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCa
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ExpressionsPackage.FEATURE_CALL__OWNER:
-				setOwner((org.yakindu.base.types.Expression)null);
+				setOwner((Expression)null);
 				return;
 			case ExpressionsPackage.FEATURE_CALL__FEATURE:
-				setFeature((EObject)null);
+				setFeature((Declaration)null);
 				return;
 			case ExpressionsPackage.FEATURE_CALL__OPERATION_CALL:
 				setOperationCall(OPERATION_CALL_EDEFAULT);

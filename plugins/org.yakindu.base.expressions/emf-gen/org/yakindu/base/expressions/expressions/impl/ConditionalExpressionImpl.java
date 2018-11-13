@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.yakindu.base.expressions.expressions.ConditionalExpression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
+import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.impl.ExpressionImpl;
 
 /**
@@ -35,7 +36,7 @@ public class ConditionalExpressionImpl extends ExpressionImpl implements Conditi
 	 * @generated
 	 * @ordered
 	 */
-	protected org.yakindu.base.types.Expression condition;
+	protected Expression condition;
 
 	/**
 	 * The cached value of the '{@link #getTrueCase() <em>True Case</em>}' containment reference.
@@ -45,7 +46,7 @@ public class ConditionalExpressionImpl extends ExpressionImpl implements Conditi
 	 * @generated
 	 * @ordered
 	 */
-	protected org.yakindu.base.types.Expression trueCase;
+	protected Expression trueCase;
 
 	/**
 	 * The cached value of the '{@link #getFalseCase() <em>False Case</em>}' containment reference.
@@ -55,7 +56,7 @@ public class ConditionalExpressionImpl extends ExpressionImpl implements Conditi
 	 * @generated
 	 * @ordered
 	 */
-	protected org.yakindu.base.types.Expression falseCase;
+	protected Expression falseCase;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -81,7 +82,7 @@ public class ConditionalExpressionImpl extends ExpressionImpl implements Conditi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.yakindu.base.types.Expression getCondition() {
+	public Expression getCondition() {
 		return condition;
 	}
 
@@ -90,8 +91,8 @@ public class ConditionalExpressionImpl extends ExpressionImpl implements Conditi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetCondition(org.yakindu.base.types.Expression newCondition, NotificationChain msgs) {
-		org.yakindu.base.types.Expression oldCondition = condition;
+	public NotificationChain basicSetCondition(Expression newCondition, NotificationChain msgs) {
+		Expression oldCondition = condition;
 		condition = newCondition;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.CONDITIONAL_EXPRESSION__CONDITION, oldCondition, newCondition);
@@ -105,7 +106,7 @@ public class ConditionalExpressionImpl extends ExpressionImpl implements Conditi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCondition(org.yakindu.base.types.Expression newCondition) {
+	public void setCondition(Expression newCondition) {
 		if (newCondition != condition) {
 			NotificationChain msgs = null;
 			if (condition != null)
@@ -124,7 +125,7 @@ public class ConditionalExpressionImpl extends ExpressionImpl implements Conditi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.yakindu.base.types.Expression getTrueCase() {
+	public Expression getTrueCase() {
 		return trueCase;
 	}
 
@@ -133,8 +134,8 @@ public class ConditionalExpressionImpl extends ExpressionImpl implements Conditi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTrueCase(org.yakindu.base.types.Expression newTrueCase, NotificationChain msgs) {
-		org.yakindu.base.types.Expression oldTrueCase = trueCase;
+	public NotificationChain basicSetTrueCase(Expression newTrueCase, NotificationChain msgs) {
+		Expression oldTrueCase = trueCase;
 		trueCase = newTrueCase;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.CONDITIONAL_EXPRESSION__TRUE_CASE, oldTrueCase, newTrueCase);
@@ -148,7 +149,7 @@ public class ConditionalExpressionImpl extends ExpressionImpl implements Conditi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTrueCase(org.yakindu.base.types.Expression newTrueCase) {
+	public void setTrueCase(Expression newTrueCase) {
 		if (newTrueCase != trueCase) {
 			NotificationChain msgs = null;
 			if (trueCase != null)
@@ -167,7 +168,7 @@ public class ConditionalExpressionImpl extends ExpressionImpl implements Conditi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.yakindu.base.types.Expression getFalseCase() {
+	public Expression getFalseCase() {
 		return falseCase;
 	}
 
@@ -176,8 +177,8 @@ public class ConditionalExpressionImpl extends ExpressionImpl implements Conditi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetFalseCase(org.yakindu.base.types.Expression newFalseCase, NotificationChain msgs) {
-		org.yakindu.base.types.Expression oldFalseCase = falseCase;
+	public NotificationChain basicSetFalseCase(Expression newFalseCase, NotificationChain msgs) {
+		Expression oldFalseCase = falseCase;
 		falseCase = newFalseCase;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.CONDITIONAL_EXPRESSION__FALSE_CASE, oldFalseCase, newFalseCase);
@@ -191,7 +192,7 @@ public class ConditionalExpressionImpl extends ExpressionImpl implements Conditi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFalseCase(org.yakindu.base.types.Expression newFalseCase) {
+	public void setFalseCase(Expression newFalseCase) {
 		if (newFalseCase != falseCase) {
 			NotificationChain msgs = null;
 			if (falseCase != null)
@@ -250,13 +251,13 @@ public class ConditionalExpressionImpl extends ExpressionImpl implements Conditi
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ExpressionsPackage.CONDITIONAL_EXPRESSION__CONDITION:
-				setCondition((org.yakindu.base.types.Expression)newValue);
+				setCondition((Expression)newValue);
 				return;
 			case ExpressionsPackage.CONDITIONAL_EXPRESSION__TRUE_CASE:
-				setTrueCase((org.yakindu.base.types.Expression)newValue);
+				setTrueCase((Expression)newValue);
 				return;
 			case ExpressionsPackage.CONDITIONAL_EXPRESSION__FALSE_CASE:
-				setFalseCase((org.yakindu.base.types.Expression)newValue);
+				setFalseCase((Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -271,13 +272,13 @@ public class ConditionalExpressionImpl extends ExpressionImpl implements Conditi
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ExpressionsPackage.CONDITIONAL_EXPRESSION__CONDITION:
-				setCondition((org.yakindu.base.types.Expression)null);
+				setCondition((Expression)null);
 				return;
 			case ExpressionsPackage.CONDITIONAL_EXPRESSION__TRUE_CASE:
-				setTrueCase((org.yakindu.base.types.Expression)null);
+				setTrueCase((Expression)null);
 				return;
 			case ExpressionsPackage.CONDITIONAL_EXPRESSION__FALSE_CASE:
-				setFalseCase((org.yakindu.base.types.Expression)null);
+				setFalseCase((Expression)null);
 				return;
 		}
 		super.eUnset(featureID);

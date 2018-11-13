@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.UnaryExpression;
+import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.impl.ExpressionImpl;
 
 /**
@@ -34,7 +35,7 @@ public abstract class UnaryExpressionImpl extends ExpressionImpl implements Unar
 	 * @generated
 	 * @ordered
 	 */
-	protected org.yakindu.base.types.Expression operand;
+	protected Expression operand;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -60,7 +61,7 @@ public abstract class UnaryExpressionImpl extends ExpressionImpl implements Unar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.yakindu.base.types.Expression getOperand() {
+	public Expression getOperand() {
 		return operand;
 	}
 
@@ -69,8 +70,8 @@ public abstract class UnaryExpressionImpl extends ExpressionImpl implements Unar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOperand(org.yakindu.base.types.Expression newOperand, NotificationChain msgs) {
-		org.yakindu.base.types.Expression oldOperand = operand;
+	public NotificationChain basicSetOperand(Expression newOperand, NotificationChain msgs) {
+		Expression oldOperand = operand;
 		operand = newOperand;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.UNARY_EXPRESSION__OPERAND, oldOperand, newOperand);
@@ -84,7 +85,7 @@ public abstract class UnaryExpressionImpl extends ExpressionImpl implements Unar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOperand(org.yakindu.base.types.Expression newOperand) {
+	public void setOperand(Expression newOperand) {
 		if (newOperand != operand) {
 			NotificationChain msgs = null;
 			if (operand != null)
@@ -146,7 +147,7 @@ public abstract class UnaryExpressionImpl extends ExpressionImpl implements Unar
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ExpressionsPackage.UNARY_EXPRESSION__OPERAND:
-				setOperand((org.yakindu.base.types.Expression)newValue);
+				setOperand((Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -161,7 +162,7 @@ public abstract class UnaryExpressionImpl extends ExpressionImpl implements Unar
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ExpressionsPackage.UNARY_EXPRESSION__OPERAND:
-				setOperand((org.yakindu.base.types.Expression)null);
+				setOperand((Expression)null);
 				return;
 		}
 		super.eUnset(featureID);

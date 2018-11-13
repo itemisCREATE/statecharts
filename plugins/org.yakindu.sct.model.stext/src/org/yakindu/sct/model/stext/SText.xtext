@@ -125,7 +125,7 @@ RegularEventSpec:
 	event=SimpleFeatureCall;
 
 SimpleFeatureCall returns types::Expression:
-	SimpleElementReferenceExpression ({exp::FeatureCall.owner=current} '.' feature=[ecore::EObject]
+	SimpleElementReferenceExpression ({exp::FeatureCall.owner=current} '.' feature=[types::Declaration]
 	(=> operationCall?='('
 	(arguments+=Argument(',' arguments+=Argument)*)?
 	')')?)*;

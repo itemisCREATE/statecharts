@@ -75,7 +75,7 @@ public class ElementReferenceExpressionImpl extends ArgumentExpressionImpl imple
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<org.yakindu.base.types.Expression> arraySelector;
+	protected EList<Expression> arraySelector;
 
 	/**
 	 * The default value of the '{@link #isArrayAccess() <em>Array Access</em>}' attribute.
@@ -180,9 +180,9 @@ public class ElementReferenceExpressionImpl extends ArgumentExpressionImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<org.yakindu.base.types.Expression> getArraySelector() {
+	public EList<Expression> getArraySelector() {
 		if (arraySelector == null) {
-			arraySelector = new EObjectContainmentEList<org.yakindu.base.types.Expression>(org.yakindu.base.types.Expression.class, this, ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR);
+			arraySelector = new EObjectContainmentEList<Expression>(Expression.class, this, ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR);
 		}
 		return arraySelector;
 	}
@@ -260,7 +260,7 @@ public class ElementReferenceExpressionImpl extends ArgumentExpressionImpl imple
 				return;
 			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR:
 				getArraySelector().clear();
-				getArraySelector().addAll((Collection<? extends org.yakindu.base.types.Expression>)newValue);
+				getArraySelector().addAll((Collection<? extends Expression>)newValue);
 				return;
 			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARRAY_ACCESS:
 				setArrayAccess((Boolean)newValue);
