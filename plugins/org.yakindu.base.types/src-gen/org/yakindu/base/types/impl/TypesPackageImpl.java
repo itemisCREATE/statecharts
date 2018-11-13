@@ -35,7 +35,6 @@ import org.yakindu.base.types.Property;
 import org.yakindu.base.types.RangeConstraint;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
-import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypedElement;
@@ -129,12 +128,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	private EClass enumeratorEClass = null;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass typeConstraintEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -320,20 +313,12 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getType_Constraint() {
-		return (EReference)typeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EAttribute getType_Abstract() {
-		return (EAttribute)typeEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -342,7 +327,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	public EAttribute getType_Visible() {
-		return (EAttribute)typeEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)typeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -351,7 +336,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	public EReference getType_SuperTypes() {
-		return (EReference)typeEClass.getEStructuralFeatures().get(3);
+		return (EReference)typeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -611,22 +596,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getTypeConstraint() {
-		return typeConstraintEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getTypeConstraint_Value() {
-		return (EAttribute)typeConstraintEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -873,7 +842,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		createEReference(packageEClass, PACKAGE__IMPORT);
 
 		typeEClass = createEClass(TYPE);
-		createEReference(typeEClass, TYPE__CONSTRAINT);
 		createEAttribute(typeEClass, TYPE__ABSTRACT);
 		createEAttribute(typeEClass, TYPE__VISIBLE);
 		createEReference(typeEClass, TYPE__SUPER_TYPES);
@@ -918,9 +886,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		enumeratorEClass = createEClass(ENUMERATOR);
 		createEReference(enumeratorEClass, ENUMERATOR__OWNING_ENUMERATION);
 		createEAttribute(enumeratorEClass, ENUMERATOR__LITERAL_VALUE);
-
-		typeConstraintEClass = createEClass(TYPE_CONSTRAINT);
-		createEAttribute(typeConstraintEClass, TYPE_CONSTRAINT__VALUE);
 
 		typeParameterEClass = createEClass(TYPE_PARAMETER);
 		createEReference(typeParameterEClass, TYPE_PARAMETER__BOUND);
@@ -1012,7 +977,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		genericElementEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		packageMemberEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		packageMemberEClass.getESuperTypes().add(this.getAnnotatableElement());
-		rangeConstraintEClass.getESuperTypes().add(this.getTypeConstraint());
 		typeAliasEClass.getESuperTypes().add(this.getTypedElement());
 		typeAliasEClass.getESuperTypes().add(this.getType());
 		arrayTypeSpecifierEClass.getESuperTypes().add(this.getTypeSpecifier());
@@ -1024,7 +988,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEReference(getPackage_Import(), this.getPackage(), null, "import", null, 0, -1, org.yakindu.base.types.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getType_Constraint(), this.getTypeConstraint(), null, "constraint", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getType_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getType_Visible(), ecorePackage.getEBoolean(), "visible", "true", 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getType_SuperTypes(), this.getTypeSpecifier(), null, "superTypes", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1075,9 +1038,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEClass(enumeratorEClass, Enumerator.class, "Enumerator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEnumerator_OwningEnumeration(), this.getEnumerationType(), this.getEnumerationType_Enumerator(), "owningEnumeration", null, 0, 1, Enumerator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEnumerator_LiteralValue(), ecorePackage.getEInt(), "literalValue", null, 0, 1, Enumerator.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-
-		initEClass(typeConstraintEClass, TypeConstraint.class, "TypeConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTypeConstraint_Value(), ecorePackage.getEJavaObject(), "value", null, 0, 1, TypeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeParameterEClass, TypeParameter.class, "TypeParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypeParameter_Bound(), this.getType(), null, "bound", null, 0, 1, TypeParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

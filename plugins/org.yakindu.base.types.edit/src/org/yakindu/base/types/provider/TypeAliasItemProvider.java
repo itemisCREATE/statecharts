@@ -201,7 +201,6 @@ public class TypeAliasItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER);
 			childrenFeatures.add(TypesPackage.Literals.PACKAGE_MEMBER__ANNOTATIONS);
-			childrenFeatures.add(TypesPackage.Literals.TYPE__CONSTRAINT);
 			childrenFeatures.add(TypesPackage.Literals.TYPE__SUPER_TYPES);
 		}
 		return childrenFeatures;
@@ -278,7 +277,6 @@ public class TypeAliasItemProvider
 				return;
 			case TypesPackage.TYPE_ALIAS__TYPE_SPECIFIER:
 			case TypesPackage.TYPE_ALIAS__ANNOTATIONS:
-			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
 			case TypesPackage.TYPE_ALIAS__SUPER_TYPES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -311,16 +309,6 @@ public class TypeAliasItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.PACKAGE_MEMBER__ANNOTATIONS,
 				 TypesFactory.eINSTANCE.createAnnotation()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.TYPE__CONSTRAINT,
-				 TypesFactory.eINSTANCE.createTypeConstraint()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.TYPE__CONSTRAINT,
-				 TypesFactory.eINSTANCE.createRangeConstraint()));
 
 		newChildDescriptors.add
 			(createChildParameter

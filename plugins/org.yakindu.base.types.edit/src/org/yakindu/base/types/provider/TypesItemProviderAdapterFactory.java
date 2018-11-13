@@ -331,29 +331,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.TypeConstraint} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected TypeConstraintItemProvider typeConstraintItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.base.types.TypeConstraint}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createTypeConstraintAdapter() {
-		if (typeConstraintItemProvider == null) {
-			typeConstraintItemProvider = new TypeConstraintItemProvider(this);
-		}
-
-		return typeConstraintItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.TypeParameter} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -670,7 +647,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		if (primitiveTypeItemProvider != null) primitiveTypeItemProvider.dispose();
 		if (complexTypeItemProvider != null) complexTypeItemProvider.dispose();
 		if (enumeratorItemProvider != null) enumeratorItemProvider.dispose();
-		if (typeConstraintItemProvider != null) typeConstraintItemProvider.dispose();
 		if (typeParameterItemProvider != null) typeParameterItemProvider.dispose();
 		if (genericElementItemProvider != null) genericElementItemProvider.dispose();
 		if (packageMemberItemProvider != null) packageMemberItemProvider.dispose();

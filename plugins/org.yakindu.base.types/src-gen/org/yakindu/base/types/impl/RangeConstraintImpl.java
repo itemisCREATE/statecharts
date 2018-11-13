@@ -5,6 +5,7 @@ package org.yakindu.base.types.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.yakindu.base.types.RangeConstraint;
 import org.yakindu.base.types.TypesPackage;
 
@@ -22,7 +23,7 @@ import org.yakindu.base.types.TypesPackage;
  *
  * @generated
  */
-public class RangeConstraintImpl extends TypeConstraintImpl implements RangeConstraint {
+public class RangeConstraintImpl extends EObjectImpl implements RangeConstraint {
 	/**
 	 * The default value of the '{@link #getLowerBound() <em>Lower Bound</em>}' attribute.
 	 * <!-- begin-user-doc -->

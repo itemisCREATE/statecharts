@@ -16,7 +16,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference types.ecore#//Package/import"/>
     </genClasses>
     <genClasses ecoreClass="types.ecore#//Type">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//Type/constraint"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Type/abstract"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Type/visible"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//Type/superTypes"/>
@@ -63,9 +62,6 @@
     <genClasses ecoreClass="types.ecore#//Enumerator">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference types.ecore#//Enumerator/owningEnumeration"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Enumerator/literalValue"/>
-    </genClasses>
-    <genClasses ecoreClass="types.ecore#//TypeConstraint">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//TypeConstraint/value"/>
     </genClasses>
     <genClasses ecoreClass="types.ecore#//TypeParameter">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference types.ecore#//TypeParameter/bound"/>
