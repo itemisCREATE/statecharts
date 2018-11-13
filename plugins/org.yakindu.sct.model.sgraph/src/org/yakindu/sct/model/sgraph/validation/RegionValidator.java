@@ -110,28 +110,28 @@ public class RegionValidator extends AbstractSGraphValidator {
 
 	}
 	
-	private static final String REGION_NEED_DEFAULT_ENTRY_WHEN_HISTORY_HAS_NO_OUTGOING_MSG = "The region should have a default entry pointing to the initial state.";
-	public static final String REGION_NEED_DEFAULT_ENTRY_WHEN_HISTORY_HAS_NO_OUTGOING_CODE = "region.HistoryWithoutOutgoingNeedsDefaultEntry";
+	private static final String REGION_NEEDS_DEFAULT_ENTRY_WHEN_HISTORY_HAS_NO_OUTGOING_MSG = "The region should have a default entry pointing to the initial state.";
+	public static final String REGION_NEEDS_DEFAULT_ENTRY_WHEN_HISTORY_HAS_NO_OUTGOING_CODE = "region.HistoryWithoutOutgoingNeedsDefaultEntry";
 	
 	@Check(CheckType.FAST)
 	public void checkDefaultEntryExistsWhenHistoryHasNoOutgoingTransition(Region region) {
-		Stream<Entry> entries = region.getVertices().stream().filter(Entry.class::isInstance).map(Entry.class::cast);
-		if (existsHistoryWithoutOutgoing(entries) && !existsDefault(entries)) {
-			warning(REGION_NEED_DEFAULT_ENTRY_WHEN_HISTORY_HAS_NO_OUTGOING_MSG, region, null, -1,
-					REGION_NEED_DEFAULT_ENTRY_WHEN_HISTORY_HAS_NO_OUTGOING_CODE);
+		if (existsHistoryWithoutOutgoingTransition(region) && !existsDefaultEntry(region)) {
+			warning(REGION_NEEDS_DEFAULT_ENTRY_WHEN_HISTORY_HAS_NO_OUTGOING_MSG, region, null, -1,
+					REGION_NEEDS_DEFAULT_ENTRY_WHEN_HISTORY_HAS_NO_OUTGOING_CODE);
 		}
 	}
 
-	private boolean existsDefault(Stream<Entry> entries) {
+	protected boolean existsDefaultEntry(Region region) {
+		Stream<Entry> entries = region.getVertices().stream().filter(Entry.class::isInstance).map(Entry.class::cast);
 		return entries.filter(v -> v.getKind() == EntryKind.INITIAL).anyMatch(v -> v.isDefault());
 	}
 
-	private boolean existsHistoryWithoutOutgoing(Stream<Entry> entries) {
+	protected boolean existsHistoryWithoutOutgoingTransition(Region region) {
+		Stream<Entry> entries = region.getVertices().stream().filter(Entry.class::isInstance).map(Entry.class::cast);
 		return entries.filter(v -> v.getKind() == EntryKind.SHALLOW_HISTORY || v.getKind() == EntryKind.DEEP_HISTORY)
 				.anyMatch(v -> v.getOutgoingTransitions().isEmpty());
 	}
 
-	
 	protected boolean isChildOrSibling(Vertex source, Vertex target) {
 		TreeIterator<EObject> iter = source.getParentRegion().eAllContents();
 		while (iter.hasNext()) {
