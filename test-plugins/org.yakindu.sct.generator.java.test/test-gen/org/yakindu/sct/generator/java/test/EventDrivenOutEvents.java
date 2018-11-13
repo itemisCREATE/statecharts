@@ -20,7 +20,9 @@ public class EventDrivenOutEvents {
 	@Before
 	public void eventDrivenOutEvents_setUp() {
 		statemachine = new EventDrivenOutEventsStatemachine();
+		
 		statemachine.init();
+		
 	}
 
 	@After

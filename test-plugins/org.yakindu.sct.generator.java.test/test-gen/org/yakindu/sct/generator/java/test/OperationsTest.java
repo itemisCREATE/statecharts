@@ -40,7 +40,9 @@ public class OperationsTest {
 		statemachine.setInternalOperationCallback(internalMock);
 		interface1Mock = mock(SCIInterface1OperationCallback.class);
 		statemachine.getSCIInterface1().setSCIInterface1OperationCallback(interface1Mock);
+		
 		statemachine.init();
+		
 	}
 
 	@After
