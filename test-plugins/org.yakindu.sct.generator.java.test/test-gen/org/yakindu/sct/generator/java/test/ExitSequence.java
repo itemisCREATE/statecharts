@@ -20,7 +20,9 @@ public class ExitSequence {
 	@Before
 	public void exitSequence_setUp() {
 		statemachine = new ExitSequenceStatemachine();
+		
 		statemachine.init();
+		
 	}
 
 	@After

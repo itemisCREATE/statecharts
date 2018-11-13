@@ -23,7 +23,9 @@ public class EventDrivenTriggeredByTimeEvent {
 		statemachine = new EventDrivenTriggeredByTimeEventStatemachine();
 		timer = new VirtualTimer(200);
 		statemachine.setTimer(timer);
+		
 		statemachine.init();
+		
 	}
 
 	@After

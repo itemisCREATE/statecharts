@@ -34,7 +34,9 @@ public class OperationsWithoutBraces {
 		timer.schedulePeriodicalTask(new CycleTimeEventTask(statemachine), 200, 200);
 		defaultMock = mock(SCInterfaceOperationCallback.class);
 		statemachine.getSCInterface().setSCInterfaceOperationCallback(defaultMock);
+		
 		statemachine.init();
+		
 	}
 
 	@After

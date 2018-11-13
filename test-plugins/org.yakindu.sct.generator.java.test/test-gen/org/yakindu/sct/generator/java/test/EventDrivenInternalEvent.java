@@ -20,7 +20,9 @@ public class EventDrivenInternalEvent {
 	@Before
 	public void eventDrivenInternalEvent_setUp() {
 		statemachine = new EventDrivenInternalEventStatemachine();
+		
 		statemachine.init();
+		
 	}
 
 	@After
