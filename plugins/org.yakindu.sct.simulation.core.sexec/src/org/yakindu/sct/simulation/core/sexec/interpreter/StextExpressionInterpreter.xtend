@@ -14,11 +14,10 @@ import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
-import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.interpreter.DefaultExpressionInterpreter
-import org.yakindu.base.expressions.interpreter.IExecutionSlotResolver
 import org.yakindu.base.types.Event
+import org.yakindu.base.types.Expression
 import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression

@@ -19,20 +19,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.yakindu.base.types.AnnotatableElement;
-import org.yakindu.base.types.Annotation;
-import org.yakindu.base.types.ComplexType;
-import org.yakindu.base.types.Declaration;
-import org.yakindu.base.types.GenericElement;
-import org.yakindu.base.types.PackageMember;
-import org.yakindu.base.types.Type;
-import org.yakindu.base.types.TypeConstraint;
-import org.yakindu.base.types.TypeParameter;
-import org.yakindu.base.types.TypeSpecifier;
-import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.Sequence;
@@ -750,7 +738,7 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (leaf: ");
 		result.append(leaf);
 		result.append(')');

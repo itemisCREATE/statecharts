@@ -29,7 +29,6 @@ import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Type;
-import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesPackage;
@@ -49,7 +48,6 @@ import org.yakindu.sct.model.sexec.SexecPackage;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getAnnotations <em>Annotations</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#isVisible <em>Visible</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getSuperTypes <em>Super Types</em>}</li>
@@ -103,16 +101,6 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * @ordered
 	 */
 	protected EList<Annotation> annotations;
-
-	/**
-	 * The cached value of the '{@link #getConstraint() <em>Constraint</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getConstraint()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<TypeConstraint> constraint;
 
 	/**
 	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
@@ -293,18 +281,6 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, SexecPackage.EXECUTION_NODE__ANNOTATIONS);
 		}
 		return annotations;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<TypeConstraint> getConstraint() {
-		if (constraint == null) {
-			constraint = new EObjectContainmentEList<TypeConstraint>(TypeConstraint.class, this, SexecPackage.EXECUTION_NODE__CONSTRAINT);
-		}
-		return constraint;
 	}
 
 	/**
@@ -547,8 +523,6 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 		switch (featureID) {
 			case SexecPackage.EXECUTION_NODE__ANNOTATIONS:
 				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
-			case SexecPackage.EXECUTION_NODE__CONSTRAINT:
-				return ((InternalEList<?>)getConstraint()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_NODE__SUPER_TYPES:
 				return ((InternalEList<?>)getSuperTypes()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_NODE__TYPE_PARAMETERS:
@@ -579,8 +553,6 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 				return getId();
 			case SexecPackage.EXECUTION_NODE__ANNOTATIONS:
 				return getAnnotations();
-			case SexecPackage.EXECUTION_NODE__CONSTRAINT:
-				return getConstraint();
 			case SexecPackage.EXECUTION_NODE__ABSTRACT:
 				return isAbstract();
 			case SexecPackage.EXECUTION_NODE__VISIBLE:
@@ -618,10 +590,6 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 			case SexecPackage.EXECUTION_NODE__ANNOTATIONS:
 				getAnnotations().clear();
 				getAnnotations().addAll((Collection<? extends Annotation>)newValue);
-				return;
-			case SexecPackage.EXECUTION_NODE__CONSTRAINT:
-				getConstraint().clear();
-				getConstraint().addAll((Collection<? extends TypeConstraint>)newValue);
 				return;
 			case SexecPackage.EXECUTION_NODE__ABSTRACT:
 				setAbstract((Boolean)newValue);
@@ -672,9 +640,6 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 			case SexecPackage.EXECUTION_NODE__ANNOTATIONS:
 				getAnnotations().clear();
 				return;
-			case SexecPackage.EXECUTION_NODE__CONSTRAINT:
-				getConstraint().clear();
-				return;
 			case SexecPackage.EXECUTION_NODE__ABSTRACT:
 				setAbstract(ABSTRACT_EDEFAULT);
 				return;
@@ -720,8 +685,6 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 			case SexecPackage.EXECUTION_NODE__ANNOTATIONS:
 				return annotations != null && !annotations.isEmpty();
-			case SexecPackage.EXECUTION_NODE__CONSTRAINT:
-				return constraint != null && !constraint.isEmpty();
 			case SexecPackage.EXECUTION_NODE__ABSTRACT:
 				return abstract_ != ABSTRACT_EDEFAULT;
 			case SexecPackage.EXECUTION_NODE__VISIBLE:
@@ -771,7 +734,6 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 		}
 		if (baseClass == Type.class) {
 			switch (derivedFeatureID) {
-				case SexecPackage.EXECUTION_NODE__CONSTRAINT: return TypesPackage.TYPE__CONSTRAINT;
 				case SexecPackage.EXECUTION_NODE__ABSTRACT: return TypesPackage.TYPE__ABSTRACT;
 				case SexecPackage.EXECUTION_NODE__VISIBLE: return TypesPackage.TYPE__VISIBLE;
 				case SexecPackage.EXECUTION_NODE__SUPER_TYPES: return TypesPackage.TYPE__SUPER_TYPES;
@@ -820,7 +782,6 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 		}
 		if (baseClass == Type.class) {
 			switch (baseFeatureID) {
-				case TypesPackage.TYPE__CONSTRAINT: return SexecPackage.EXECUTION_NODE__CONSTRAINT;
 				case TypesPackage.TYPE__ABSTRACT: return SexecPackage.EXECUTION_NODE__ABSTRACT;
 				case TypesPackage.TYPE__VISIBLE: return SexecPackage.EXECUTION_NODE__VISIBLE;
 				case TypesPackage.TYPE__SUPER_TYPES: return SexecPackage.EXECUTION_NODE__SUPER_TYPES;
@@ -851,7 +812,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
 		result.append(", abstract: ");

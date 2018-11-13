@@ -11,7 +11,9 @@
 package org.yakindu.base.expressions.interpreter
 
 import com.google.inject.Inject
+import com.google.inject.Singleton
 import java.util.List
+import java.util.Set
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression
@@ -21,7 +23,6 @@ import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ConditionalExpression
 import org.yakindu.base.expressions.expressions.DoubleLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
-import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.IntLiteral
@@ -34,12 +35,15 @@ import org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
 import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression
+import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.ShiftExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
+import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Enumerator
+import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.typesystem.GenericTypeSystem
@@ -49,10 +53,6 @@ import org.yakindu.sct.model.sruntime.ExecutionContext
 import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.sruntime.ExecutionVariable
 import org.yakindu.sct.model.sruntime.ReferenceSlot
-import com.google.inject.Singleton
-import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
-import java.util.Set
-import org.yakindu.base.types.Declaration
 
 /**
  * 

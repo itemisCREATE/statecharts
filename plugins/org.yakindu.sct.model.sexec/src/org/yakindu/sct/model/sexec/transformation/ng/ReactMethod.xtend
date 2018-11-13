@@ -13,10 +13,10 @@ package org.yakindu.sct.model.sexec.transformation.ng
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
-import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.RelationalOperator
+import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.Property
@@ -32,7 +32,6 @@ import org.yakindu.sct.model.sexec.LocalVariableDefinition
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Return
 import org.yakindu.sct.model.sexec.Sequence
-import org.yakindu.sct.model.sexec.StateVector
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions

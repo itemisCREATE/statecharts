@@ -74,8 +74,5 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgen.ecore#//DeprecatableElement/deprecated"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgen.ecore#//DeprecatableElement/comment"/>
     </genClasses>
-    <genClasses ecoreClass="sgen.ecore#//PropertyDefinition">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgen.ecore#//PropertyDefinition/initialValue"/>
-    </genClasses>
   </genPackages>
 </genmodel:GenModel>

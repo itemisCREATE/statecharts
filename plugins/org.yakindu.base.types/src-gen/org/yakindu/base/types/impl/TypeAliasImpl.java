@@ -20,7 +20,6 @@ import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
-import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.TypesUtil;
@@ -37,7 +36,6 @@ import org.yakindu.base.types.TypesUtil;
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getAnnotations <em>Annotations</em>}</li>
- *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#isVisible <em>Visible</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getSuperTypes <em>Super Types</em>}</li>
@@ -93,15 +91,6 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	 * @ordered
 	 */
 	protected EList<Annotation> annotations;
-
-	/**
-	 * The cached value of the '{@link #getConstraint() <em>Constraint</em>}' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getConstraint()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<TypeConstraint> constraint;
 
 	/**
 	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
@@ -277,17 +266,6 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TypeConstraint> getConstraint() {
-		if (constraint == null) {
-			constraint = new EObjectContainmentEList<TypeConstraint>(TypeConstraint.class, this, TypesPackage.TYPE_ALIAS__CONSTRAINT);
-		}
-		return constraint;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean isAbstract() {
 		return abstract_;
 	}
@@ -359,8 +337,6 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				return basicSetTypeSpecifier(null, msgs);
 			case TypesPackage.TYPE_ALIAS__ANNOTATIONS:
 				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
-			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
-				return ((InternalEList<?>)getConstraint()).basicRemove(otherEnd, msgs);
 			case TypesPackage.TYPE_ALIAS__SUPER_TYPES:
 				return ((InternalEList<?>)getSuperTypes()).basicRemove(otherEnd, msgs);
 		}
@@ -385,8 +361,6 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				return getId();
 			case TypesPackage.TYPE_ALIAS__ANNOTATIONS:
 				return getAnnotations();
-			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
-				return getConstraint();
 			case TypesPackage.TYPE_ALIAS__ABSTRACT:
 				return isAbstract();
 			case TypesPackage.TYPE_ALIAS__VISIBLE:
@@ -414,10 +388,6 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 			case TypesPackage.TYPE_ALIAS__ANNOTATIONS:
 				getAnnotations().clear();
 				getAnnotations().addAll((Collection<? extends Annotation>)newValue);
-				return;
-			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
-				getConstraint().clear();
-				getConstraint().addAll((Collection<? extends TypeConstraint>)newValue);
 				return;
 			case TypesPackage.TYPE_ALIAS__ABSTRACT:
 				setAbstract((Boolean)newValue);
@@ -449,9 +419,6 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 			case TypesPackage.TYPE_ALIAS__ANNOTATIONS:
 				getAnnotations().clear();
 				return;
-			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
-				getConstraint().clear();
-				return;
 			case TypesPackage.TYPE_ALIAS__ABSTRACT:
 				setAbstract(ABSTRACT_EDEFAULT);
 				return;
@@ -482,8 +449,6 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 			case TypesPackage.TYPE_ALIAS__ANNOTATIONS:
 				return annotations != null && !annotations.isEmpty();
-			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
-				return constraint != null && !constraint.isEmpty();
 			case TypesPackage.TYPE_ALIAS__ABSTRACT:
 				return abstract_ != ABSTRACT_EDEFAULT;
 			case TypesPackage.TYPE_ALIAS__VISIBLE:
@@ -520,7 +485,6 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 		}
 		if (baseClass == Type.class) {
 			switch (derivedFeatureID) {
-				case TypesPackage.TYPE_ALIAS__CONSTRAINT: return TypesPackage.TYPE__CONSTRAINT;
 				case TypesPackage.TYPE_ALIAS__ABSTRACT: return TypesPackage.TYPE__ABSTRACT;
 				case TypesPackage.TYPE_ALIAS__VISIBLE: return TypesPackage.TYPE__VISIBLE;
 				case TypesPackage.TYPE_ALIAS__SUPER_TYPES: return TypesPackage.TYPE__SUPER_TYPES;
@@ -556,7 +520,6 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 		}
 		if (baseClass == Type.class) {
 			switch (baseFeatureID) {
-				case TypesPackage.TYPE__CONSTRAINT: return TypesPackage.TYPE_ALIAS__CONSTRAINT;
 				case TypesPackage.TYPE__ABSTRACT: return TypesPackage.TYPE_ALIAS__ABSTRACT;
 				case TypesPackage.TYPE__VISIBLE: return TypesPackage.TYPE_ALIAS__VISIBLE;
 				case TypesPackage.TYPE__SUPER_TYPES: return TypesPackage.TYPE_ALIAS__SUPER_TYPES;

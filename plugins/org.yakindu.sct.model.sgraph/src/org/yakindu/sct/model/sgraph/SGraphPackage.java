@@ -1248,6 +1248,15 @@ public interface SGraphPackage extends EPackage {
 	int IMPORT_DECLARATION__ANNOTATIONS = TypesPackage.DECLARATION__ANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_DECLARATION__STATIC = TypesPackage.DECLARATION__STATIC;
+
+	/**
 	 * The feature id for the '<em><b>Declaration</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

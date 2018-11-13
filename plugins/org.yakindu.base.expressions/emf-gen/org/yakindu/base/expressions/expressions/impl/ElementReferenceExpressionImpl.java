@@ -15,9 +15,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
-import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.util.ArgumentSorter;
+import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.Operation;
 
 /**
@@ -322,7 +322,7 @@ public class ElementReferenceExpressionImpl extends ArgumentExpressionImpl imple
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (operationCall: ");
 		result.append(operationCall);
 		result.append(", arrayAccess: ");

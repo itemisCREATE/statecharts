@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.types.Expression;
 import org.yakindu.sct.model.stext.expressions.STextExpressionParser.LinkingException;
 import org.yakindu.sct.model.stext.scoping.ContextPredicateProvider;
 import org.yakindu.sct.model.stext.stext.LocalReaction;

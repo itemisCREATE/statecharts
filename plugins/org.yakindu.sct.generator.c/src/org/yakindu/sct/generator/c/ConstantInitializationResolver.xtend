@@ -10,10 +10,10 @@
 */
 package org.yakindu.sct.generator.c
 
-import org.yakindu.base.expressions.expressions.Expression
-import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.types.Expression
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class ConstantInitializationResolver extends CExpressionsGenerator {
 	

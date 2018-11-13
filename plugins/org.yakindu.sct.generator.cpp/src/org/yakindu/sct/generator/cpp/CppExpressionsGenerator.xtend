@@ -14,12 +14,11 @@ package org.yakindu.sct.generator.cpp
 import com.google.inject.Inject
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
-import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.LogicalNotExpression
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
-import org.yakindu.base.types.typesystem.GenericTypeSystem
+import org.yakindu.base.types.Expression
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.c.CExpressionsGenerator
 import org.yakindu.sct.model.sexec.Method

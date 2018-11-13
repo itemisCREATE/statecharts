@@ -3,7 +3,6 @@
 package org.yakindu.base.expressions.expressions.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.yakindu.base.expressions.expressions.BinaryLiteral;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 

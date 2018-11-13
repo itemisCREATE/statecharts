@@ -33,7 +33,6 @@ import org.yakindu.base.expressions.expressions.BoolLiteral;
 import org.yakindu.base.expressions.expressions.ConditionalExpression;
 import org.yakindu.base.expressions.expressions.DoubleLiteral;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
-import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.expressions.FloatLiteral;
 import org.yakindu.base.expressions.expressions.HexLiteral;
@@ -53,8 +52,11 @@ import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
+import org.yakindu.base.types.Annotation;
+import org.yakindu.base.types.AnnotationType;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
+import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
@@ -381,10 +383,14 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		return getResultFor(NULL);
 	}
 
-	public InferenceResult doInfer(Property p) {
-		InferenceResult type = inferTypeDispatch(p.getTypeSpecifier());
-		assertNotType(type, VARIABLE_VOID_TYPE, getResultFor(VOID));
-		return type;
+	public InferenceResult doInfer(Property e) {
+		InferenceResult result = inferTypeDispatch(e.getTypeSpecifier());
+		assertNotType(result, VARIABLE_VOID_TYPE, getResultFor(VOID));
+		if (e.getInitialValue() == null)
+			return result;
+		InferenceResult result2 = inferTypeDispatch(e.getInitialValue());
+		assertAssignable(result, result2, String.format(PROPERTY_INITIAL_VALUE, result2, result));
+		return result;
 	}
 
 	public InferenceResult doInfer(Operation e) {
@@ -411,4 +417,22 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		}
 		return inferTypeDispatch(specifier.getType());
 	}
+
+	public InferenceResult doInfer(Annotation ad) {
+		EList<Expression> arguments = ad.getArguments();
+		inferAnnotationProperty(ad.getType(), arguments);
+		return getResultFor(VOID);
+	}
+
+	protected void inferAnnotationProperty(AnnotationType type, EList<Expression> arguments) {
+		EList<Property> properties = type.getProperties();
+		if (properties.size() == arguments.size()) {
+			for (int i = 0; i < properties.size(); i++) {
+				InferenceResult type1 = inferTypeDispatch(properties.get(i));
+				InferenceResult type2 = inferTypeDispatch(arguments.get(i));
+				assertCompatible(type1, type2, String.format(INCOMPATIBLE_TYPES, type1, type2));
+			}
+		}
+	}
+
 }

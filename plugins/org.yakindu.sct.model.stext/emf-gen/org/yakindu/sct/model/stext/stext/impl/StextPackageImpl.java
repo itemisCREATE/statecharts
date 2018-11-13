@@ -14,7 +14,6 @@ import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
-import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
 import org.yakindu.sct.model.stext.stext.DefRoot;
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
@@ -310,13 +309,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass argumentedAnnotationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EEnum timeEventTypeEEnum = null;
 
 	/**
@@ -354,7 +346,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link StextPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -368,7 +360,8 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		if (isInited) return (StextPackage)EPackage.Registry.INSTANCE.getEPackage(StextPackage.eNS_URI);
 
 		// Obtain or create and register package
-		StextPackageImpl theStextPackage = (StextPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof StextPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new StextPackageImpl());
+		Object registeredStextPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		StextPackageImpl theStextPackage = registeredStextPackage instanceof StextPackageImpl ? (StextPackageImpl)registeredStextPackage : new StextPackageImpl();
 
 		isInited = true;
 
@@ -387,7 +380,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		// Mark meta-data to indicate it can't be changed
 		theStextPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(StextPackage.eNS_URI, theStextPackage);
 		return theStextPackage;
@@ -589,15 +581,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 */
 	public EClass getVariableDefinition() {
 		return variableDefinitionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getVariableDefinition_InitialValue() {
-		return (EReference)variableDefinitionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -920,15 +903,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getArgumentedAnnotation() {
-		return argumentedAnnotationEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EEnum getTimeEventType() {
 		return timeEventTypeEEnum;
 	}
@@ -1005,7 +979,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		eventDefinitionEClass = createEClass(EVENT_DEFINITION);
 
 		variableDefinitionEClass = createEClass(VARIABLE_DEFINITION);
-		createEReference(variableDefinitionEClass, VARIABLE_DEFINITION__INITIAL_VALUE);
 
 		operationDefinitionEClass = createEClass(OPERATION_DEFINITION);
 
@@ -1063,8 +1036,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		activeStateReferenceExpressionEClass = createEClass(ACTIVE_STATE_REFERENCE_EXPRESSION);
 		createEReference(activeStateReferenceExpressionEClass, ACTIVE_STATE_REFERENCE_EXPRESSION__VALUE);
 
-		argumentedAnnotationEClass = createEClass(ARGUMENTED_ANNOTATION);
-
 		// Create enums
 		timeEventTypeEEnum = createEEnum(TIME_EVENT_TYPE);
 		timeUnitEEnum = createEEnum(TIME_UNIT);
@@ -1095,9 +1066,8 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 
 		// Obtain other dependent packages
 		SGraphPackage theSGraphPackage = (SGraphPackage)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI);
-		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
 		TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
-		ExpressionsPackage theExpressionsPackage = (ExpressionsPackage)EPackage.Registry.INSTANCE.getEPackage(ExpressionsPackage.eNS_URI);
+		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -1132,11 +1102,9 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		reactionTriggerEClass.getESuperTypes().add(theSGraphPackage.getTrigger());
 		defaultTriggerEClass.getESuperTypes().add(theSGraphPackage.getTrigger());
 		reactionEffectEClass.getESuperTypes().add(theSGraphPackage.getEffect());
-		eventRaisingExpressionEClass.getESuperTypes().add(theExpressionsPackage.getExpression());
-		eventValueReferenceExpressionEClass.getESuperTypes().add(theExpressionsPackage.getExpression());
-		activeStateReferenceExpressionEClass.getESuperTypes().add(theExpressionsPackage.getExpression());
-		argumentedAnnotationEClass.getESuperTypes().add(theTypesPackage.getAnnotation());
-		argumentedAnnotationEClass.getESuperTypes().add(theExpressionsPackage.getArgumentExpression());
+		eventRaisingExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
+		eventValueReferenceExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
+		activeStateReferenceExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1154,7 +1122,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		initEReference(getTransitionRoot_Def(), this.getTransitionSpecification(), null, "def", null, 0, 1, TransitionRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(statechartSpecificationEClass, StatechartSpecification.class, "StatechartSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStatechartSpecification_Annotations(), this.getArgumentedAnnotation(), null, "annotations", null, 0, -1, StatechartSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStatechartSpecification_Annotations(), theTypesPackage.getAnnotation(), null, "annotations", null, 0, -1, StatechartSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stateSpecificationEClass, StateSpecification.class, "StateSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStateSpecification_Scope(), theSGraphPackage.getScope(), null, "scope", null, 0, 1, StateSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1174,7 +1142,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		initEClass(eventDefinitionEClass, EventDefinition.class, "EventDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(variableDefinitionEClass, VariableDefinition.class, "VariableDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVariableDefinition_InitialValue(), theExpressionsPackage.getExpression(), null, "initialValue", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(operationDefinitionEClass, OperationDefinition.class, "OperationDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1185,7 +1152,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		initEClass(transitionReactionEClass, TransitionReaction.class, "TransitionReaction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(guardEClass, Guard.class, "Guard", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getGuard_Expression(), theExpressionsPackage.getExpression(), null, "expression", null, 0, 1, Guard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGuard_Expression(), theTypesPackage.getExpression(), null, "expression", null, 0, 1, Guard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(entryPointSpecEClass, EntryPointSpec.class, "EntryPointSpec", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEntryPointSpec_Entrypoint(), ecorePackage.getEString(), "entrypoint", null, 0, 1, EntryPointSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1196,11 +1163,11 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		initEClass(eventSpecEClass, EventSpec.class, "EventSpec", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(regularEventSpecEClass, RegularEventSpec.class, "RegularEventSpec", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRegularEventSpec_Event(), theExpressionsPackage.getExpression(), null, "event", null, 0, 1, RegularEventSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRegularEventSpec_Event(), theTypesPackage.getExpression(), null, "event", null, 0, 1, RegularEventSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(timeEventSpecEClass, TimeEventSpec.class, "TimeEventSpec", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTimeEventSpec_Type(), this.getTimeEventType(), "type", null, 0, 1, TimeEventSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTimeEventSpec_Value(), theExpressionsPackage.getExpression(), null, "value", null, 0, 1, TimeEventSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTimeEventSpec_Value(), theTypesPackage.getExpression(), null, "value", null, 0, 1, TimeEventSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTimeEventSpec_Unit(), this.getTimeUnit(), "unit", null, 0, 1, TimeEventSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(builtinEventSpecEClass, BuiltinEventSpec.class, "BuiltinEventSpec", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1220,19 +1187,17 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		initEClass(defaultTriggerEClass, DefaultTrigger.class, "DefaultTrigger", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(reactionEffectEClass, ReactionEffect.class, "ReactionEffect", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getReactionEffect_Actions(), theExpressionsPackage.getExpression(), null, "actions", null, 0, -1, ReactionEffect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getReactionEffect_Actions(), theTypesPackage.getExpression(), null, "actions", null, 0, -1, ReactionEffect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(eventRaisingExpressionEClass, EventRaisingExpression.class, "EventRaisingExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEventRaisingExpression_Event(), theExpressionsPackage.getExpression(), null, "event", null, 0, 1, EventRaisingExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEventRaisingExpression_Value(), theExpressionsPackage.getExpression(), null, "value", null, 0, 1, EventRaisingExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEventRaisingExpression_Event(), theTypesPackage.getExpression(), null, "event", null, 0, 1, EventRaisingExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEventRaisingExpression_Value(), theTypesPackage.getExpression(), null, "value", null, 0, 1, EventRaisingExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(eventValueReferenceExpressionEClass, EventValueReferenceExpression.class, "EventValueReferenceExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEventValueReferenceExpression_Value(), theExpressionsPackage.getExpression(), null, "value", null, 0, 1, EventValueReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEventValueReferenceExpression_Value(), theTypesPackage.getExpression(), null, "value", null, 0, 1, EventValueReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(activeStateReferenceExpressionEClass, ActiveStateReferenceExpression.class, "ActiveStateReferenceExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getActiveStateReferenceExpression_Value(), theSGraphPackage.getState(), null, "value", null, 0, 1, ActiveStateReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(argumentedAnnotationEClass, ArgumentedAnnotation.class, "ArgumentedAnnotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(timeEventTypeEEnum, TimeEventType.class, "TimeEventType");

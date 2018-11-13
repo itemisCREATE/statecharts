@@ -265,7 +265,6 @@ public class ExecutionFlowItemProvider
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__EXIT_SEQUENCE);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__INIT_SEQUENCE);
 			childrenFeatures.add(TypesPackage.Literals.PACKAGE_MEMBER__ANNOTATIONS);
-			childrenFeatures.add(TypesPackage.Literals.TYPE__CONSTRAINT);
 			childrenFeatures.add(TypesPackage.Literals.TYPE__SUPER_TYPES);
 			childrenFeatures.add(TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS);
 			childrenFeatures.add(TypesPackage.Literals.COMPLEX_TYPE__FEATURES);
@@ -345,7 +344,6 @@ public class ExecutionFlowItemProvider
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 			case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE:
 			case SexecPackage.EXECUTION_FLOW__ANNOTATIONS:
-			case SexecPackage.EXECUTION_FLOW__CONSTRAINT:
 			case SexecPackage.EXECUTION_FLOW__SUPER_TYPES:
 			case SexecPackage.EXECUTION_FLOW__TYPE_PARAMETERS:
 			case SexecPackage.EXECUTION_FLOW__FEATURES:
@@ -400,16 +398,6 @@ public class ExecutionFlowItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.PACKAGE_MEMBER__ANNOTATIONS,
 				 TypesFactory.eINSTANCE.createAnnotation()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.TYPE__CONSTRAINT,
-				 TypesFactory.eINSTANCE.createTypeConstraint()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.TYPE__CONSTRAINT,
-				 TypesFactory.eINSTANCE.createRangeConstraint()));
 
 		newChildDescriptors.add
 			(createChildParameter

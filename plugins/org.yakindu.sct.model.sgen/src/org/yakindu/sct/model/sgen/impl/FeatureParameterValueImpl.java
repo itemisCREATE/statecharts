@@ -19,18 +19,18 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.expressions.expressions.BoolLiteral;
-import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.expressions.expressions.IntLiteral;
 import org.yakindu.base.expressions.expressions.Literal;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.interpreter.IExpressionInterpreter;
+import org.yakindu.base.types.Expression;
+import org.yakindu.base.types.Property;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorModel;
-import org.yakindu.sct.model.sgen.PropertyDefinition;
 import org.yakindu.sct.model.sgen.SGenPackage;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.model.sruntime.ExecutionVariable;
@@ -260,8 +260,8 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 		}
 		ExecutionContext context = new ExecutionContextImpl();
 		GeneratorModel generatorModel = (GeneratorModel) EcoreUtil.getRootContainer(this);
-		EList<PropertyDefinition> properties = generatorModel.getProperties();
-		for (PropertyDefinition propertyDefinition : properties) {
+		EList<Property> properties = generatorModel.getProperties();
+		for (Property propertyDefinition : properties) {
 			ExecutionVariable variable = SRuntimeFactory.eINSTANCE.createExecutionVariable();
 			variable.setName(propertyDefinition.getName());
 			variable.setFqName(propertyDefinition.getName());

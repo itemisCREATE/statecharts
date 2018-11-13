@@ -40,7 +40,6 @@ import org.yakindu.sct.generator.genmodel.resource.FeatureResourceDescription;
 import org.yakindu.sct.generator.genmodel.typesystem.BuiltinDeclarations;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.GeneratorModel;
-import org.yakindu.sct.model.sgen.PropertyDefinition;
 import org.yakindu.sct.model.sgen.SGenPackage;
 
 import com.google.common.base.Predicate;
@@ -87,7 +86,7 @@ public class SGenScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	protected IScope getElementReferenceScope(EObject context) {
 		GeneratorModel generatorModel = (GeneratorModel) EcoreUtil.getRootContainer(context);
-		EList<PropertyDefinition> properties = generatorModel.getProperties();
+		EList<Property> properties = generatorModel.getProperties();
 		List<Property> all = buildInDeclarations.getDeclarations();
 		return Scopes.scopeFor(properties, Scopes.scopeFor(all));
 	}
