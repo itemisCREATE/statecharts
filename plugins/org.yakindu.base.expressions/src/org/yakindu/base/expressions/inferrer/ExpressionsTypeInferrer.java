@@ -52,6 +52,8 @@ import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
+import org.yakindu.base.types.Annotation;
+import org.yakindu.base.types.AnnotationType;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Expression;
@@ -390,7 +392,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		assertAssignable(result, result2, String.format(PROPERTY_INITIAL_VALUE, result2, result));
 		return result;
 	}
-	
+
 	public InferenceResult doInfer(Operation e) {
 		return e.getTypeSpecifier() == null ? getResultFor(VOID) : inferTypeDispatch(e.getTypeSpecifier());
 	}
@@ -415,4 +417,22 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		}
 		return inferTypeDispatch(specifier.getType());
 	}
+
+	public InferenceResult doInfer(Annotation ad) {
+		EList<Expression> arguments = ad.getArguments();
+		inferAnnotationProperty(ad.getType(), arguments);
+		return getResultFor(VOID);
+	}
+
+	protected void inferAnnotationProperty(AnnotationType type, EList<Expression> arguments) {
+		EList<Property> properties = type.getProperties();
+		if (properties.size() == arguments.size()) {
+			for (int i = 0; i < properties.size(); i++) {
+				InferenceResult type1 = inferTypeDispatch(properties.get(i));
+				InferenceResult type2 = inferTypeDispatch(arguments.get(i));
+				assertCompatible(type1, type2, String.format(INCOMPATIBLE_TYPES, type1, type2));
+			}
+		}
+	}
+
 }

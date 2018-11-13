@@ -14,18 +14,14 @@ import static org.yakindu.base.types.typesystem.ITypeSystem.BOOLEAN;
 import static org.yakindu.base.types.typesystem.ITypeSystem.INTEGER;
 import static org.yakindu.base.types.typesystem.ITypeSystem.VOID;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.inferrer.ExpressionsTypeInferrer;
-import org.yakindu.base.types.AnnotationType;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Expression;
-import org.yakindu.base.types.Property;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
-import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Guard;
@@ -109,22 +105,4 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 	public InferenceResult doInfer(ActiveStateReferenceExpression e) {
 		return getResultFor(BOOLEAN);
 	}
-
-	public InferenceResult doInfer(ArgumentedAnnotation ad) {
-		EList<Expression> arguments = ad.getExpressions();
-		inferAnnotationProperty(ad.getType(), arguments);
-		return getResultFor(VOID);
-	}
-
-	protected void inferAnnotationProperty(AnnotationType type, EList<Expression> arguments) {
-		EList<Property> properties = type.getProperties();
-		if (properties.size() == arguments.size()) {
-			for (int i = 0; i < properties.size(); i++) {
-				InferenceResult type1 = inferTypeDispatch(properties.get(i));
-				InferenceResult type2 = inferTypeDispatch(arguments.get(i));
-				assertCompatible(type1, type2, String.format(INCOMPATIBLE_TYPES, type1, type2));
-			}
-		}
-	}
-
 }

@@ -2,6 +2,7 @@
  */
 package org.yakindu.base.types;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -14,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.Annotation#getType <em>Type</em>}</li>
+ *   <li>{@link org.yakindu.base.types.Annotation#getArguments <em>Arguments</em>}</li>
  * </ul>
  *
  * @see org.yakindu.base.types.TypesPackage#getAnnotation()
@@ -46,5 +48,21 @@ public interface Annotation extends EObject {
 	 * @generated
 	 */
 	void setType(AnnotationType value);
+
+	/**
+	 * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
+	 * The list contents are of type {@link org.yakindu.base.types.Expression}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Arguments</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Arguments</em>' containment reference list.
+	 * @see org.yakindu.base.types.TypesPackage#getAnnotation_Arguments()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Expression> getArguments();
 
 } // Annotation

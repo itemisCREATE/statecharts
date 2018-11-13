@@ -1543,43 +1543,6 @@ public interface StextPackage extends EPackage {
 	int ACTIVE_STATE_REFERENCE_EXPRESSION_FEATURE_COUNT = TypesPackage.EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.ArgumentedAnnotationImpl <em>Argumented Annotation</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.stext.stext.impl.ArgumentedAnnotationImpl
-	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getArgumentedAnnotation()
-	 * @generated
-	 */
-	int ARGUMENTED_ANNOTATION = 35;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARGUMENTED_ANNOTATION__TYPE = TypesPackage.ANNOTATION__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARGUMENTED_ANNOTATION__ARGUMENTS = TypesPackage.ANNOTATION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Argumented Annotation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARGUMENTED_ANNOTATION_FEATURE_COUNT = TypesPackage.ANNOTATION_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.TimeEventType <em>Time Event Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1587,7 +1550,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTimeEventType()
 	 * @generated
 	 */
-	int TIME_EVENT_TYPE = 36;
+	int TIME_EVENT_TYPE = 35;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.TimeUnit <em>Time Unit</em>}' enum.
@@ -1597,7 +1560,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTimeUnit()
 	 * @generated
 	 */
-	int TIME_UNIT = 37;
+	int TIME_UNIT = 36;
 
 
 	/**
@@ -2193,16 +2156,6 @@ public interface StextPackage extends EPackage {
 	EReference getActiveStateReferenceExpression_Value();
 
 	/**
-	 * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.ArgumentedAnnotation <em>Argumented Annotation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Argumented Annotation</em>'.
-	 * @see org.yakindu.sct.model.stext.stext.ArgumentedAnnotation
-	 * @generated
-	 */
-	EClass getArgumentedAnnotation();
-
-	/**
 	 * Returns the meta object for enum '{@link org.yakindu.sct.model.stext.stext.TimeEventType <em>Time Event Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2769,16 +2722,6 @@ public interface StextPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ACTIVE_STATE_REFERENCE_EXPRESSION__VALUE = eINSTANCE.getActiveStateReferenceExpression_Value();
-
-		/**
-		 * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.ArgumentedAnnotationImpl <em>Argumented Annotation</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.yakindu.sct.model.stext.stext.impl.ArgumentedAnnotationImpl
-		 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getArgumentedAnnotation()
-		 * @generated
-		 */
-		EClass ARGUMENTED_ANNOTATION = eINSTANCE.getArgumentedAnnotation();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.TimeEventType <em>Time Event Type</em>}' enum.

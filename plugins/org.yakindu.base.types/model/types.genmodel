@@ -87,6 +87,7 @@
     <genClasses ecoreClass="types.ecore#//TypeAlias"/>
     <genClasses ecoreClass="types.ecore#//Annotation">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference types.ecore#//Annotation/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference types.ecore#//Annotation/arguments"/>
     </genClasses>
     <genClasses image="false" ecoreClass="types.ecore#//AnnotatableElement">
       <genOperations ecoreOperation="types.ecore#//AnnotatableElement/getAnnotations"/>

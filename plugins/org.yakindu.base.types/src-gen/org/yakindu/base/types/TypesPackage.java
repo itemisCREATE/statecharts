@@ -1508,13 +1508,22 @@ public interface TypesPackage extends EPackage {
 	int ANNOTATION__TYPE = 0;
 
 	/**
+	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION__ARGUMENTS = 1;
+
+	/**
 	 * The number of structural features of the '<em>Annotation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_FEATURE_COUNT = 1;
+	int ANNOTATION_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.AnnotatableElement <em>Annotatable Element</em>}' class.
@@ -2295,6 +2304,17 @@ public interface TypesPackage extends EPackage {
 	EReference getAnnotation_Type();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.types.Annotation#getArguments <em>Arguments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Arguments</em>'.
+	 * @see org.yakindu.base.types.Annotation#getArguments()
+	 * @see #getAnnotation()
+	 * @generated
+	 */
+	EReference getAnnotation_Arguments();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.AnnotatableElement <em>Annotatable Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2880,6 +2900,14 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ANNOTATION__TYPE = eINSTANCE.getAnnotation_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Arguments</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ANNOTATION__ARGUMENTS = eINSTANCE.getAnnotation_Arguments();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.AnnotatableElement <em>Annotatable Element</em>}' class.

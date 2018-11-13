@@ -104,6 +104,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="TypeAlias" eSuperTypes="#//TypedElement #//Type"/>
   <eClassifiers xsi:type="ecore:EClass" name="Annotation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//AnnotationType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="#//Expression" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AnnotatableElement" abstract="true"
       interface="true">

@@ -6,9 +6,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.yakindu.base.base.NamedElement;
-import org.yakindu.base.expressions.expressions.ArgumentExpression;
 import org.yakindu.base.types.AnnotatableElement;
-import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Expression;
@@ -27,7 +25,6 @@ import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
-import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
 import org.yakindu.sct.model.stext.stext.DefRoot;
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
@@ -385,15 +382,6 @@ public class StextSwitch<T> extends Switch<T> {
 				ActiveStateReferenceExpression activeStateReferenceExpression = (ActiveStateReferenceExpression)theEObject;
 				T result = caseActiveStateReferenceExpression(activeStateReferenceExpression);
 				if (result == null) result = caseExpression(activeStateReferenceExpression);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StextPackage.ARGUMENTED_ANNOTATION: {
-				ArgumentedAnnotation argumentedAnnotation = (ArgumentedAnnotation)theEObject;
-				T result = caseArgumentedAnnotation(argumentedAnnotation);
-				if (result == null) result = caseAnnotation(argumentedAnnotation);
-				if (result == null) result = caseArgumentExpression(argumentedAnnotation);
-				if (result == null) result = caseExpression(argumentedAnnotation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -927,21 +915,6 @@ public class StextSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Argumented Annotation</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Argumented Annotation</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseArgumentedAnnotation(ArgumentedAnnotation object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Scoped Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1208,36 +1181,6 @@ public class StextSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseExpression(Expression object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Annotation</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Annotation</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAnnotation(Annotation object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Argument Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Argument Expression</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseArgumentExpression(ArgumentExpression object) {
 		return null;
 	}
 

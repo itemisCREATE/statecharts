@@ -111,11 +111,6 @@ public class VariableDefinitionItemProvider extends PropertyItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.PACKAGE_MEMBER__ANNOTATIONS,
-				 StextFactory.eINSTANCE.createArgumentedAnnotation()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(TypesPackage.Literals.PROPERTY__INITIAL_VALUE,
 				 StextFactory.eINSTANCE.createEventRaisingExpression()));
 
@@ -128,11 +123,6 @@ public class VariableDefinitionItemProvider extends PropertyItemProvider {
 			(createChildParameter
 				(TypesPackage.Literals.PROPERTY__INITIAL_VALUE,
 				 StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.PROPERTY__INITIAL_VALUE,
-				 StextFactory.eINSTANCE.createArgumentedAnnotation()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -228,29 +218,6 @@ public class VariableDefinitionItemProvider extends PropertyItemProvider {
 			(createChildParameter
 				(TypesPackage.Literals.PROPERTY__INITIAL_VALUE,
 				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == TypesPackage.Literals.PACKAGE_MEMBER__ANNOTATIONS ||
-			childFeature == TypesPackage.Literals.PROPERTY__INITIAL_VALUE;
-
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**

@@ -85,7 +85,6 @@ import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
-import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
 import org.yakindu.sct.model.stext.stext.EntryPointSpec;
@@ -657,15 +656,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			if (!STextValidationModelUtils.getRegionsWithoutDefaultEntry(Collections.singletonList(region)).isEmpty()) {
 				error(REGION_UNBOUND_DEFAULT_ENTRY_POINT, region, null, -1);
 			}
-		}
-	}
-
-	@Check(CheckType.FAST)
-	public void checkAnnotationArguments(ArgumentedAnnotation annotation) {
-		if (annotation.getType() != null
-				&& annotation.getExpressions().size() != annotation.getType().getProperties().size()) {
-			error(String.format(ERROR_WRONG_NUMBER_OF_ARGUMENTS_MSG, annotation.getType().getProperties()), null,
-					ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
 		}
 	}
 

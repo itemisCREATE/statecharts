@@ -94,6 +94,5 @@
     <genClasses ecoreClass="SText.ecore#//ActiveStateReferenceExpression">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SText.ecore#//ActiveStateReferenceExpression/value"/>
     </genClasses>
-    <genClasses ecoreClass="SText.ecore#//ArgumentedAnnotation"/>
   </genPackages>
 </genmodel:GenModel>

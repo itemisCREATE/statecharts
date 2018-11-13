@@ -30,7 +30,7 @@ TransitionRoot:
 
 StatechartSpecification:
 	{StatechartSpecification} ('namespace' namespace=FQN)?
-	(annotations+=ArgumentedAnnotation)*
+	(annotations+=Annotation)*
 	(scopes+=StatechartScope)*;
 
 StateSpecification:
@@ -78,12 +78,8 @@ OperationDefinition:
 	'operation' name=IDWithKeywords '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')' (':'
 	typeSpecifier=TypeSpecifier)?;
 	
-ArgumentedAnnotation:
-	'@' type=[types::AnnotationType|QID] ('('(arguments+=SimpleArgument (',' arguments+=SimpleArgument)*)? ')')?
-;
-
-SimpleArgument returns exp::Argument:
-	{exp::Argument} value=ConditionalExpression
+Annotation returns types::Annotation:
+	'@' type=[types::AnnotationType|QID] ('('(arguments+=ConditionalExpression (',' arguments+=ConditionalExpression)*)? ')')?
 ;
 
 Parameter returns types::Parameter:

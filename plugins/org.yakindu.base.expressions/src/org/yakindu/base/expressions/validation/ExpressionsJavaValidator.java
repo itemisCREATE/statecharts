@@ -281,4 +281,13 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 					TypesPackage.Literals.PROPERTY__READONLY);
 		}
 	}
+	
+	@Check(CheckType.FAST)
+	public void checkAnnotationArguments(Annotation annotation) {
+		if (annotation.getType() != null
+				&& annotation.getArguments().size() != annotation.getType().getProperties().size()) {
+			error(String.format(ERROR_WRONG_NUMBER_OF_ARGUMENTS_MSG, annotation.getType().getProperties()), null,
+					ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
+		}
+	}
 }
