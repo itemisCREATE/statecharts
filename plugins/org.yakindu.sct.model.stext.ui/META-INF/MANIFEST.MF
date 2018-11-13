@@ -55,3 +55,4 @@ Export-Package: org.yakindu.sct.model.stext.ui;
  org.yakindu.sct.model.stext.ui.quickfix;uses:="org.eclipse.xtext.ui.editor.quickfix",
  org.yakindu.sct.model.stext.ui.tasks
 Bundle-Activator: org.yakindu.sct.model.stext.ui.internal.STextActivator
+Automatic-Module-Name: org.yakindu.sct.model.stext.ui

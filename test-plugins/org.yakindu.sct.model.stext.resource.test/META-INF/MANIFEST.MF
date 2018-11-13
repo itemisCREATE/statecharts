@@ -10,3 +10,4 @@ Require-Bundle: org.junit,
  org.yakindu.sct.model.stext.ui,
  org.yakindu.sct.domain.generic.resource
 Bundle-Vendor: statecharts.org
+Automatic-Module-Name: org.yakindu.sct.model.stext.resource.test

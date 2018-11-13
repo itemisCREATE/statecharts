@@ -18,7 +18,6 @@ import org.yakindu.sct.generator.c.CNamingService
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
-import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 
@@ -27,9 +26,6 @@ import static org.yakindu.sct.generator.cpp.CppKeywords.*
 class CppNamingService extends CNamingService {
 
 	@Inject extension SExecExtensions
-
-	@Inject
-	GeneratorEntry entry
 
 	override protected prefix(Step it, char separator) {
 		switch (it) {

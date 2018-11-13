@@ -21,12 +21,9 @@ import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.yakindu.base.types.TypesFactory;
-import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sexec.SexecPackage;
-import org.yakindu.sct.model.sgraph.SGraphFactory;
 
 /**
  * This is the item provider adapter for a {@link org.yakindu.sct.model.sexec.ExecutionState} object.

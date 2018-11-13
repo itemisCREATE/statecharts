@@ -20,3 +20,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.model.resource,
  org.yakindu.sct.model.resource.tasks
+Automatic-Module-Name: org.yakindu.sct.model.resource

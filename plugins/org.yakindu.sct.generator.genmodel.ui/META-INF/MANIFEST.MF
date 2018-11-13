@@ -43,3 +43,4 @@ Export-Package: org.yakindu.sct.generator.genmodel.ui,
  org.yakindu.sct.generator.genmodel.ui.contentassist.antlr.internal
 Bundle-Activator: org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator
 Bundle-ActivationPolicy: lazy
+Automatic-Module-Name: org.yakindu.sct.generator.genmodel.ui

@@ -73,4 +73,5 @@ Export-Package: org.yakindu.sct.ui.editor,
  org.yakindu.sct.ui.editor.wizards
 Bundle-Vendor: statecharts.org
 Import-Package: org.eclipse.xtext.ui.codetemplates.ui.contentassist
+Automatic-Module-Name: org.yakindu.sct.ui.editor
 

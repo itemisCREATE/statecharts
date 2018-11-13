@@ -24,16 +24,16 @@ class TreeServiceNamesValidator {
 	
 	@Inject protected extension ShortStringUtils
 	
-	def public boolean validate() {
+	def boolean validate() {
 		val Set<String> set = newHashSet
-		
-		if(names === null) {
+
+		if (names === null) {
 			return false
 		} else {
-			for(name : names) {
+			for (name : names) {
 				val s = name.join
-				
-				if(!set.add(s)) {
+
+				if (!set.add(s)) {
 					return false
 				}
 			}

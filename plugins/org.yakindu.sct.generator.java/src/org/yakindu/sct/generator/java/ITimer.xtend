@@ -44,51 +44,52 @@ class ITimer {
 			fsa.generateFile(entry.basePackagePath + '/' + iTimer.java, content(entry))
 		}
 	}
-	def public content(GeneratorEntry entry) {
-		content(entry.licenseText, entry.basePackageName)		
+
+	def content(GeneratorEntry entry) {
+		content(entry.licenseText, entry.basePackageName)
 	}
 	
-	def public content(String licenceText, String basePackage) {
+	def content(String licenceText, String basePackage) {
 		'''
-		«licenceText»
-		package «basePackage»;
-
-		/**
-		 * Interface a timer has to implement. Use to implement your own timer
-		 * service.
-		 * 
-		 */
-		public interface ITimer {
-		
+			«licenceText»
+			package «basePackage»;
+			
 			/**
-			 * Starts the timing for a given time event id.
+			 * Interface a timer has to implement. Use to implement your own timer
+			 * service.
 			 * 
-			 * @param callback
-			 * 			  : The target callback where the time event has to be raised.
-			 * 
-			 * @param eventID
-			 *            : The eventID the timer should use if timed out.
-			 *            
-			 * @param time
-			 *            : Time in milliseconds after the given time event should be
-			 *            triggered
-			 *            
-			 * @param isPeriodic
-			 * 			  : Set to true if the time event should be triggered periodically
 			 */
-			public void setTimer(ITimerCallback callback, int eventID, long time, boolean isPeriodic);
-		
-			/**
-			 * Unset a time event.
-			 * 
-			 * @param callback
-			 * 			: The target callback for which the time event has to be unset.
-			 * 
-			 * @param eventID
-			 * 			: The time event id.
-			 */
-			public void unsetTimer(ITimerCallback callback, int eventID);
-		}
+			public interface ITimer {
+			
+				/**
+				 * Starts the timing for a given time event id.
+				 * 
+				 * @param callback
+				 * 			  : The target callback where the time event has to be raised.
+				 * 
+				 * @param eventID
+				 *            : The eventID the timer should use if timed out.
+				 *            
+				 * @param time
+				 *            : Time in milliseconds after the given time event should be
+				 *            triggered
+				 *            
+				 * @param isPeriodic
+				 * 			  : Set to true if the time event should be triggered periodically
+				 */
+				public void setTimer(ITimerCallback callback, int eventID, long time, boolean isPeriodic);
+			
+				/**
+				 * Unset a time event.
+				 * 
+				 * @param callback
+				 * 			: The target callback for which the time event has to be unset.
+				 * 
+				 * @param eventID
+				 * 			: The time event id.
+				 */
+				public void unsetTimer(ITimerCallback callback, int eventID);
+			}
 		'''
 	}
 }

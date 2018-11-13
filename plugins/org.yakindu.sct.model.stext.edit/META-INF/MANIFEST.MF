@@ -10,3 +10,4 @@ Require-Bundle: org.yakindu.base.types.edit,
  org.yakindu.sct.model.sgraph.edit,
  org.eclipse.core.runtime,
  org.yakindu.base.expressions.edit
+Automatic-Module-Name: org.yakindu.sct.model.stext.edit
