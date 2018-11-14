@@ -15,3 +15,4 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: statecharts.org
 Export-Package: org.yakindu.sct.model.sgraph.test.util
+Automatic-Module-Name: org.yakindu.sct.model.sgraph.test

@@ -47,3 +47,4 @@ Export-Package: org.yakindu.sct.model.stext,
  org.yakindu.sct.model.stext.validation,
  org.yakindu.sct.model.stext.serializer
 Bundle-ClassPath: .
+Automatic-Module-Name: org.yakindu.sct.model.stext

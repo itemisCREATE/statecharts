@@ -23,3 +23,4 @@ Require-Bundle: org.junit,
 Export-Package: org.yakindu.sct.generator.c.gtest,
  org.yakindu.sct.generator.c.test,
  org.yakindu.sct.generator.c.test.utils
+Automatic-Module-Name: org.yakindu.sct.generator.c.test

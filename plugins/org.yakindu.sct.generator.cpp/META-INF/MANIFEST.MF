@@ -13,3 +13,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.yakindu.sct.generator.cpp,
  org.yakindu.sct.generator.cpp.eventdriven
 Bundle-Vendor: statecharts.org
+Automatic-Module-Name: org.yakindu.sct.generator.cpp

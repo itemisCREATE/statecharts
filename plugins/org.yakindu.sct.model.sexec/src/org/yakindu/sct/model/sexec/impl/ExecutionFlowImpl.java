@@ -31,7 +31,6 @@ import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Type;
-import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesPackage;
@@ -66,7 +65,6 @@ import org.yakindu.sct.model.sgraph.impl.ScopedElementImpl;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getInitSequence <em>Init Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getAnnotations <em>Annotations</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#isVisible <em>Visible</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getSuperTypes <em>Super Types</em>}</li>
@@ -197,16 +195,6 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * @ordered
 	 */
 	protected EList<Annotation> annotations;
-
-	/**
-	 * The cached value of the '{@link #getConstraint() <em>Constraint</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getConstraint()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<TypeConstraint> constraint;
 
 	/**
 	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
@@ -729,18 +717,6 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TypeConstraint> getConstraint() {
-		if (constraint == null) {
-			constraint = new EObjectContainmentEList<TypeConstraint>(TypeConstraint.class, this, SexecPackage.EXECUTION_FLOW__CONSTRAINT);
-		}
-		return constraint;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean isAbstract() {
 		return abstract_;
 	}
@@ -1203,8 +1179,6 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return basicSetInitSequence(null, msgs);
 			case SexecPackage.EXECUTION_FLOW__ANNOTATIONS:
 				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
-			case SexecPackage.EXECUTION_FLOW__CONSTRAINT:
-				return ((InternalEList<?>)getConstraint()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_FLOW__SUPER_TYPES:
 				return ((InternalEList<?>)getSuperTypes()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_FLOW__TYPE_PARAMETERS:
@@ -1265,8 +1239,6 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return getId();
 			case SexecPackage.EXECUTION_FLOW__ANNOTATIONS:
 				return getAnnotations();
-			case SexecPackage.EXECUTION_FLOW__CONSTRAINT:
-				return getConstraint();
 			case SexecPackage.EXECUTION_FLOW__ABSTRACT:
 				return isAbstract();
 			case SexecPackage.EXECUTION_FLOW__VISIBLE:
@@ -1341,10 +1313,6 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__ANNOTATIONS:
 				getAnnotations().clear();
 				getAnnotations().addAll((Collection<? extends Annotation>)newValue);
-				return;
-			case SexecPackage.EXECUTION_FLOW__CONSTRAINT:
-				getConstraint().clear();
-				getConstraint().addAll((Collection<? extends TypeConstraint>)newValue);
 				return;
 			case SexecPackage.EXECUTION_FLOW__ABSTRACT:
 				setAbstract((Boolean)newValue);
@@ -1440,9 +1408,6 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__ANNOTATIONS:
 				getAnnotations().clear();
 				return;
-			case SexecPackage.EXECUTION_FLOW__CONSTRAINT:
-				getConstraint().clear();
-				return;
 			case SexecPackage.EXECUTION_FLOW__ABSTRACT:
 				setAbstract(ABSTRACT_EDEFAULT);
 				return;
@@ -1523,8 +1488,6 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 			case SexecPackage.EXECUTION_FLOW__ANNOTATIONS:
 				return annotations != null && !annotations.isEmpty();
-			case SexecPackage.EXECUTION_FLOW__CONSTRAINT:
-				return constraint != null && !constraint.isEmpty();
 			case SexecPackage.EXECUTION_FLOW__ABSTRACT:
 				return abstract_ != ABSTRACT_EDEFAULT;
 			case SexecPackage.EXECUTION_FLOW__VISIBLE:
@@ -1605,7 +1568,6 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 		}
 		if (baseClass == Type.class) {
 			switch (derivedFeatureID) {
-				case SexecPackage.EXECUTION_FLOW__CONSTRAINT: return TypesPackage.TYPE__CONSTRAINT;
 				case SexecPackage.EXECUTION_FLOW__ABSTRACT: return TypesPackage.TYPE__ABSTRACT;
 				case SexecPackage.EXECUTION_FLOW__VISIBLE: return TypesPackage.TYPE__VISIBLE;
 				case SexecPackage.EXECUTION_FLOW__SUPER_TYPES: return TypesPackage.TYPE__SUPER_TYPES;
@@ -1680,7 +1642,6 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 		}
 		if (baseClass == Type.class) {
 			switch (baseFeatureID) {
-				case TypesPackage.TYPE__CONSTRAINT: return SexecPackage.EXECUTION_FLOW__CONSTRAINT;
 				case TypesPackage.TYPE__ABSTRACT: return SexecPackage.EXECUTION_FLOW__ABSTRACT;
 				case TypesPackage.TYPE__VISIBLE: return SexecPackage.EXECUTION_FLOW__VISIBLE;
 				case TypesPackage.TYPE__SUPER_TYPES: return SexecPackage.EXECUTION_FLOW__SUPER_TYPES;
@@ -1720,7 +1681,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
 		result.append(", abstract: ");

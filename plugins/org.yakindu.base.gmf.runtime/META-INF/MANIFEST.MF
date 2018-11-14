@@ -26,3 +26,4 @@ Export-Package: org.yakindu.base.gmf.runtime.commands,
  org.yakindu.base.gmf.runtime.palette,
  org.yakindu.base.gmf.runtime.parsers,
  org.yakindu.base.gmf.runtime.util
+Automatic-Module-Name: org.yakindu.base.gmf.runtime

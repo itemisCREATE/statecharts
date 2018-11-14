@@ -10,7 +10,7 @@
  */
 package org.yakindu.base.expressions.interpreter;
 
-import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.types.Expression;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
 
 import com.google.inject.ImplementedBy;

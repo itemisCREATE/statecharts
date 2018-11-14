@@ -24,3 +24,4 @@ Export-Package: org.yakindu.sct.generator.builder,
  org.yakindu.sct.generator.builder.console,
  org.yakindu.sct.generator.builder.efs,
  org.yakindu.sct.generator.builder.nature
+Automatic-Module-Name: org.yakindu.sct.generator.builder

@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.Literal;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
+import org.yakindu.base.types.impl.ExpressionImpl;
 
 /**
  * <!-- begin-user-doc -->

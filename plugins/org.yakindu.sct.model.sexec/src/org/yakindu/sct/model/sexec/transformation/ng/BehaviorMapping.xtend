@@ -5,10 +5,10 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
+import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgraph.Region
-import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 
 class BehaviorMapping extends org.yakindu.sct.model.sexec.transformation.BehaviorMapping {
 

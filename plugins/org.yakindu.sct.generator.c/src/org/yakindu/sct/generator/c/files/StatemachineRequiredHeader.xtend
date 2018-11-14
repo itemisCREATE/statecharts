@@ -12,7 +12,6 @@ package org.yakindu.sct.generator.c.files
 
 import com.google.inject.Inject
 import org.yakindu.base.types.Declaration
-import org.yakindu.sct.generator.c.CGeneratorConstants
 import org.yakindu.sct.generator.c.IContentTemplate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries

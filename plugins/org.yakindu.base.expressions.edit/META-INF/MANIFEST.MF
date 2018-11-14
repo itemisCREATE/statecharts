@@ -15,3 +15,4 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-ActivationPolicy: lazy
 Import-Package: org.yakindu.base.base.provider,
  org.yakindu.base.types.provider
+Automatic-Module-Name: org.yakindu.base.expressions.edit

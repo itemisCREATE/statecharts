@@ -190,7 +190,6 @@ public class ExecutionNodeItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.PACKAGE_MEMBER__ANNOTATIONS);
-			childrenFeatures.add(TypesPackage.Literals.TYPE__CONSTRAINT);
 			childrenFeatures.add(TypesPackage.Literals.TYPE__SUPER_TYPES);
 			childrenFeatures.add(TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS);
 			childrenFeatures.add(TypesPackage.Literals.COMPLEX_TYPE__FEATURES);
@@ -259,7 +258,6 @@ public class ExecutionNodeItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case SexecPackage.EXECUTION_NODE__ANNOTATIONS:
-			case SexecPackage.EXECUTION_NODE__CONSTRAINT:
 			case SexecPackage.EXECUTION_NODE__SUPER_TYPES:
 			case SexecPackage.EXECUTION_NODE__TYPE_PARAMETERS:
 			case SexecPackage.EXECUTION_NODE__FEATURES:
@@ -287,16 +285,6 @@ public class ExecutionNodeItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.PACKAGE_MEMBER__ANNOTATIONS,
 				 TypesFactory.eINSTANCE.createAnnotation()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.TYPE__CONSTRAINT,
-				 TypesFactory.eINSTANCE.createTypeConstraint()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.TYPE__CONSTRAINT,
-				 TypesFactory.eINSTANCE.createRangeConstraint()));
 
 		newChildDescriptors.add
 			(createChildParameter

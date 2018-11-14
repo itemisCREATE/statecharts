@@ -16,7 +16,6 @@ import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
-import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.LogicalAndExpression
 import org.yakindu.base.expressions.expressions.LogicalNotExpression
@@ -26,7 +25,9 @@ import org.yakindu.base.expressions.expressions.MultiplicativeOperator
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Event
+import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
+import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
@@ -34,6 +35,7 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.c.submodules.EventCode
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
+import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
@@ -41,8 +43,6 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.sexec.Method
-import org.yakindu.base.types.Parameter
 
 class CExpressionsGenerator extends ExpressionsGenerator {
 

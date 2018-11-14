@@ -7,9 +7,10 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression;
+import org.yakindu.base.types.Expression;
+import org.yakindu.base.types.impl.ExpressionImpl;
 
 /**
  * <!-- begin-user-doc -->

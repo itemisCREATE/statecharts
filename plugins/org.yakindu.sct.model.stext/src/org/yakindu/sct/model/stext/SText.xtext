@@ -30,7 +30,7 @@ TransitionRoot:
 
 StatechartSpecification:
 	{StatechartSpecification} ('namespace' namespace=FQN)?
-	(annotations+=ArgumentedAnnotation)*
+	(annotations+=Annotation)*
 	(scopes+=StatechartScope)*;
 
 StateSpecification:
@@ -78,12 +78,8 @@ OperationDefinition:
 	'operation' name=IDWithKeywords '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')' (':'
 	typeSpecifier=TypeSpecifier)?;
 	
-ArgumentedAnnotation:
-	'@' type=[types::AnnotationType|QID] ('('(arguments+=SimpleArgument (',' arguments+=SimpleArgument)*)? ')')?
-;
-
-SimpleArgument returns exp::Argument:
-	{exp::Argument} value=ConditionalExpression
+Annotation returns types::Annotation:
+	'@' type=[types::AnnotationType|QID] ('('(arguments+=ConditionalExpression (',' arguments+=ConditionalExpression)*)? ')')?
 ;
 
 Parameter returns types::Parameter:
@@ -128,8 +124,8 @@ EventSpec:
 RegularEventSpec:
 	event=SimpleFeatureCall;
 
-SimpleFeatureCall returns exp::Expression:
-	SimpleElementReferenceExpression ({exp::FeatureCall.owner=current} '.' feature=[ecore::EObject]
+SimpleFeatureCall returns types::Expression:
+	SimpleElementReferenceExpression ({exp::FeatureCall.owner=current} '.' feature=[types::Declaration]
 	(=> operationCall?='('
 	(arguments+=Argument(',' arguments+=Argument)*)?
 	')')?)*;
@@ -158,16 +154,16 @@ ExitEvent:
 AlwaysEvent:
 	{AlwaysEvent} ('always' | 'oncycle');
 
-EventRaisingExpression returns exp::Expression:
+EventRaisingExpression returns types::Expression:
 	{EventRaisingExpression} 'raise' event=FeatureCall (':' value=Expression)?;
 
-EventValueReferenceExpression returns exp::Expression:
+EventValueReferenceExpression returns types::Expression:
 	{EventValueReferenceExpression} 'valueof' '(' value=FeatureCall ')';
 
-ActiveStateReferenceExpression returns exp::Expression:
+ActiveStateReferenceExpression returns types::Expression:
 	{ActiveStateReferenceExpression} 'active' '(' value=[sgraph::State|FQN] ')';
 
-PrimaryExpression returns exp::Expression:
+PrimaryExpression returns types::Expression:
 	PrimitiveValueExpression | FeatureCall | ActiveStateReferenceExpression | EventValueReferenceExpression |
 	ParenthesizedExpression;
 

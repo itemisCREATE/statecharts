@@ -1,13 +1,5 @@
-/** 
- * Copyright (c) 2015 committers of YAKINDU and others. 
- * All rights reserved. This program and the accompanying materials 
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at 
- * http://www.eclipse.org/legal/epl-v10.html 
- * Contributors:
- * committers of YAKINDU - initial API and implementation
- *
-*/
+/**
+ */
 package org.yakindu.base.types.provider;
 
 
@@ -16,27 +8,24 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
-import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.yakindu.base.types.TypeConstraint;
-import org.yakindu.base.types.TypesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.base.types.TypeConstraint} object.
+ * This is the item provider adapter for a {@link org.yakindu.base.types.Expression} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class TypeConstraintItemProvider
+public class ExpressionItemProvider 
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -50,7 +39,7 @@ public class TypeConstraintItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeConstraintItemProvider(AdapterFactory adapterFactory) {
+	public ExpressionItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -65,42 +54,8 @@ public class TypeConstraintItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addValuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Value feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addValuePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_TypeConstraint_value_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TypeConstraint_value_feature", "_UI_TypeConstraint_type"),
-				 TypesPackage.Literals.TYPE_CONSTRAINT__VALUE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This returns TypeConstraint.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/TypeConstraint"));
 	}
 
 	/**
@@ -111,12 +66,9 @@ public class TypeConstraintItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		Object labelValue = ((TypeConstraint)object).getValue();
-		String label = labelValue == null ? null : labelValue.toString();
-		return label == null || label.length() == 0 ?
-			getString("_UI_TypeConstraint_type") :
-			getString("_UI_TypeConstraint_type") + " " + label;
+		return getString("_UI_Expression_type");
 	}
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -128,12 +80,6 @@ public class TypeConstraintItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(TypeConstraint.class)) {
-			case TypesPackage.TYPE_CONSTRAINT__VALUE:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 

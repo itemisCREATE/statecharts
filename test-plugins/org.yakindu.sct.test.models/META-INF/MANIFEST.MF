@@ -15,3 +15,4 @@ Require-Bundle: org.yakindu.sct.model.sexec,
  org.yakindu.sct.domain.generic,
  org.yakindu.sct.domain.generic.generator
 Export-Package: org.yakindu.sct.test.models
+Automatic-Module-Name: org.yakindu.sct.test.models

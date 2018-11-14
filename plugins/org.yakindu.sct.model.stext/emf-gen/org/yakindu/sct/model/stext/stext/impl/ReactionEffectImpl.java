@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.types.Expression;
 import org.yakindu.sct.model.sgraph.impl.EffectImpl;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.StextPackage;

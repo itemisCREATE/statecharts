@@ -22,3 +22,4 @@ Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.domain.generic,
  org.eclipse.xtext.junit4
 Export-Package: org.yakindu.sct.model.sexec.transformation.test
+Automatic-Module-Name: org.yakindu.sct.model.sexec.test

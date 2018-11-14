@@ -18,9 +18,7 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.provider.OperationItemProvider;
-import org.yakindu.sct.model.stext.stext.StextFactory;
 
 /**
  * This is the item provider adapter for a {@link org.yakindu.sct.model.stext.stext.OperationDefinition} object.
@@ -105,11 +103,6 @@ public class OperationDefinitionItemProvider extends OperationItemProvider
   protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object)
   {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.PACKAGE_MEMBER__ANNOTATIONS,
-				 StextFactory.eINSTANCE.createArgumentedAnnotation()));
 	}
 
   /**

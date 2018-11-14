@@ -20,7 +20,7 @@ import com.google.inject.Injector;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-@SuppressWarnings("deprecation") // Use new API when Mars support is dropped
+@SuppressWarnings("deprecation")
 public class SGraphTestInjectorProvider implements IInjectorProvider {
 
 	public Injector getInjector() {

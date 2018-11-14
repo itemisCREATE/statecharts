@@ -150,7 +150,7 @@ public class NumericalMultiplyDivideExpressionImpl extends BinaryExpressionImpl 
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (operator: ");
 		result.append(operator);
 		result.append(')');

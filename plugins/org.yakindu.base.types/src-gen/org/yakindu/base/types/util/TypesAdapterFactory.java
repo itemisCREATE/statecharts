@@ -22,16 +22,15 @@ import org.yakindu.base.types.Domain;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Event;
+import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
-import org.yakindu.base.types.RangeConstraint;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
-import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypedElement;
@@ -143,10 +142,6 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 				return createEnumeratorAdapter();
 			}
 			@Override
-			public Adapter caseTypeConstraint(TypeConstraint object) {
-				return createTypeConstraintAdapter();
-			}
-			@Override
 			public Adapter caseTypeParameter(TypeParameter object) {
 				return createTypeParameterAdapter();
 			}
@@ -157,10 +152,6 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter casePackageMember(PackageMember object) {
 				return createPackageMemberAdapter();
-			}
-			@Override
-			public Adapter caseRangeConstraint(RangeConstraint object) {
-				return createRangeConstraintAdapter();
 			}
 			@Override
 			public Adapter caseDomain(Domain object) {
@@ -185,6 +176,10 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseAnnotationType(AnnotationType object) {
 				return createAnnotationTypeAdapter();
+			}
+			@Override
+			public Adapter caseExpression(Expression object) {
+				return createExpressionAdapter();
 			}
 			@Override
 			public Adapter caseNamedElement(NamedElement object) {
@@ -429,19 +424,6 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.TypeConstraint <em>Type Constraint</em>}'.
-	 * <!-- begin-user-doc --> This default implementation returns null so that
-	 * we can easily ignore cases; it's useful to ignore a case when inheritance
-	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.base.types.TypeConstraint
-	 * @generated
-	 */
-	public Adapter createTypeConstraintAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.TypeParameter <em>Type Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -480,20 +462,6 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPackageMemberAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.RangeConstraint <em>Range Constraint</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.base.types.RangeConstraint
-	 * @generated
-	 */
-	public Adapter createRangeConstraintAdapter() {
 		return null;
 	}
 
@@ -578,6 +546,20 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAnnotationTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.Expression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.types.Expression
+	 * @generated
+	 */
+	public Adapter createExpressionAdapter() {
 		return null;
 	}
 

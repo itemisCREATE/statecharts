@@ -57,3 +57,4 @@ Export-Package: org.yakindu.base.utils.jface.help;
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
 Bundle-Activator: org.yakindu.base.xtext.utils.jface.JFaceUtilsActivator
+Automatic-Module-Name: org.yakindu.base.xtext.utils.jface

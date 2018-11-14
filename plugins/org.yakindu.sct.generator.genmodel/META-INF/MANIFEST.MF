@@ -34,3 +34,4 @@ Export-Package: org.yakindu.sct.generator.genmodel,
  org.yakindu.sct.generator.genmodel.services,
  org.yakindu.sct.generator.genmodel.validation,
  org.yakindu.sct.generator.genmodel.formatting
+Automatic-Module-Name: org.yakindu.sct.generator.genmodel

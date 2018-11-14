@@ -21,16 +21,15 @@ import org.yakindu.base.types.Domain;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Event;
+import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
-import org.yakindu.base.types.RangeConstraint;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
-import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypedElement;
@@ -217,12 +216,6 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.TYPE_CONSTRAINT: {
-				TypeConstraint typeConstraint = (TypeConstraint)theEObject;
-				T result = caseTypeConstraint(typeConstraint);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case TypesPackage.TYPE_PARAMETER: {
 				TypeParameter typeParameter = (TypeParameter)theEObject;
 				T result = caseTypeParameter(typeParameter);
@@ -245,13 +238,6 @@ public class TypesSwitch<T> extends Switch<T> {
 				T result = casePackageMember(packageMember);
 				if (result == null) result = caseNamedElement(packageMember);
 				if (result == null) result = caseAnnotatableElement(packageMember);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TypesPackage.RANGE_CONSTRAINT: {
-				RangeConstraint rangeConstraint = (RangeConstraint)theEObject;
-				T result = caseRangeConstraint(rangeConstraint);
-				if (result == null) result = caseTypeConstraint(rangeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -298,6 +284,12 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = casePackageMember(annotationType);
 				if (result == null) result = caseNamedElement(annotationType);
 				if (result == null) result = caseAnnotatableElement(annotationType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.EXPRESSION: {
+				Expression expression = (Expression)theEObject;
+				T result = caseExpression(expression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -523,20 +515,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Constraint</em>'.
-	 * <!-- begin-user-doc --> This implementation
-	 * returns null; returning a non-null result will terminate the switch. <!--
-	 * end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Constraint</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTypeConstraint(TypeConstraint object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Type Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -578,21 +556,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePackageMember(PackageMember object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Range Constraint</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Range Constraint</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRangeConstraint(RangeConstraint object) {
 		return null;
 	}
 
@@ -683,6 +646,21 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAnnotationType(AnnotationType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExpression(Expression object) {
 		return null;
 	}
 

@@ -27,10 +27,8 @@ import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
-import org.yakindu.base.types.RangeConstraint;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
-import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesFactory;
@@ -91,11 +89,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.PRIMITIVE_TYPE: return createPrimitiveType();
 			case TypesPackage.COMPLEX_TYPE: return createComplexType();
 			case TypesPackage.ENUMERATOR: return createEnumerator();
-			case TypesPackage.TYPE_CONSTRAINT: return createTypeConstraint();
 			case TypesPackage.TYPE_PARAMETER: return createTypeParameter();
 			case TypesPackage.GENERIC_ELEMENT: return createGenericElement();
 			case TypesPackage.PACKAGE_MEMBER: return createPackageMember();
-			case TypesPackage.RANGE_CONSTRAINT: return createRangeConstraint();
 			case TypesPackage.DOMAIN: return createDomain();
 			case TypesPackage.TYPE_ALIAS: return createTypeAlias();
 			case TypesPackage.ANNOTATION: return createAnnotation();
@@ -251,16 +247,6 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeConstraint createTypeConstraint() {
-		TypeConstraintImpl typeConstraint = new TypeConstraintImpl();
-		return typeConstraint;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public TypeParameter createTypeParameter() {
 		TypeParameterImpl typeParameter = new TypeParameterImpl();
 		return typeParameter;
@@ -284,16 +270,6 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	public PackageMember createPackageMember() {
 		PackageMemberImpl packageMember = new PackageMemberImpl();
 		return packageMember;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public RangeConstraint createRangeConstraint() {
-		RangeConstraintImpl rangeConstraint = new RangeConstraintImpl();
-		return rangeConstraint;
 	}
 
 	/**

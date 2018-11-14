@@ -79,7 +79,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getPackageMember()
 	 * @generated
 	 */
-	int PACKAGE_MEMBER = 16;
+	int PACKAGE_MEMBER = 15;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -258,22 +258,13 @@ public interface TypesPackage extends EPackage {
 	int TYPE__ANNOTATIONS = PACKAGE_MEMBER__ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE__CONSTRAINT = PACKAGE_MEMBER_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE__ABSTRACT = PACKAGE_MEMBER_FEATURE_COUNT + 1;
+	int TYPE__ABSTRACT = PACKAGE_MEMBER_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Visible</b></em>' attribute.
@@ -282,7 +273,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE__VISIBLE = PACKAGE_MEMBER_FEATURE_COUNT + 2;
+	int TYPE__VISIBLE = PACKAGE_MEMBER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
@@ -291,7 +282,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE__SUPER_TYPES = PACKAGE_MEMBER_FEATURE_COUNT + 3;
+	int TYPE__SUPER_TYPES = PACKAGE_MEMBER_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Type</em>' class.
@@ -300,7 +291,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_FEATURE_COUNT = PACKAGE_MEMBER_FEATURE_COUNT + 4;
+	int TYPE_FEATURE_COUNT = PACKAGE_MEMBER_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -565,13 +556,22 @@ public interface TypesPackage extends EPackage {
 	int PROPERTY__READONLY = DECLARATION_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Initial Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__INITIAL_VALUE = DECLARATION_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Property</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 2;
+	int PROPERTY_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -794,7 +794,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getGenericElement()
 	 * @generated
 	 */
-	int GENERIC_ELEMENT = 15;
+	int GENERIC_ELEMENT = 14;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.ComplexTypeImpl <em>Complex Type</em>}' class.
@@ -832,15 +832,6 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPLEX_TYPE__ANNOTATIONS = TYPE__ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_TYPE__CONSTRAINT = TYPE__CONSTRAINT;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -922,15 +913,6 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATION_TYPE__ANNOTATIONS = COMPLEX_TYPE__ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION_TYPE__CONSTRAINT = COMPLEX_TYPE__CONSTRAINT;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1021,15 +1003,6 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int PRIMITIVE_TYPE__ANNOTATIONS = TYPE__ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRIMITIVE_TYPE__CONSTRAINT = TYPE__CONSTRAINT;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1160,34 +1133,6 @@ public interface TypesPackage extends EPackage {
 
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.base.types.impl.TypeConstraintImpl <em>Type Constraint</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.types.impl.TypeConstraintImpl
-	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getTypeConstraint()
-	 * @generated
-	 */
-	int TYPE_CONSTRAINT = 13;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_CONSTRAINT__VALUE = 0;
-
-	/**
-	 * The number of structural features of the '<em>Type Constraint</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_CONSTRAINT_FEATURE_COUNT = 1;
-
-	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.TypeParameterImpl <em>Type Parameter</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1195,7 +1140,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getTypeParameter()
 	 * @generated
 	 */
-	int TYPE_PARAMETER = 14;
+	int TYPE_PARAMETER = 13;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1223,15 +1168,6 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_PARAMETER__ANNOTATIONS = TYPE__ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_PARAMETER__CONSTRAINT = TYPE__CONSTRAINT;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1306,52 +1242,6 @@ public interface TypesPackage extends EPackage {
 	int GENERIC_ELEMENT_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.base.types.impl.RangeConstraintImpl <em>Range Constraint</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.types.impl.RangeConstraintImpl
-	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getRangeConstraint()
-	 * @generated
-	 */
-	int RANGE_CONSTRAINT = 17;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RANGE_CONSTRAINT__VALUE = TYPE_CONSTRAINT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Lower Bound</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RANGE_CONSTRAINT__LOWER_BOUND = TYPE_CONSTRAINT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Upper Bound</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RANGE_CONSTRAINT__UPPER_BOUND = TYPE_CONSTRAINT_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Range Constraint</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RANGE_CONSTRAINT_FEATURE_COUNT = TYPE_CONSTRAINT_FEATURE_COUNT + 2;
-
-	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.DomainImpl <em>Domain</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1359,7 +1249,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getDomain()
 	 * @generated
 	 */
-	int DOMAIN = 18;
+	int DOMAIN = 16;
 
 	/**
 	 * The feature id for the '<em><b>Domain ID</b></em>' attribute.
@@ -1387,7 +1277,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getTypeAlias()
 	 * @generated
 	 */
-	int TYPE_ALIAS = 19;
+	int TYPE_ALIAS = 17;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1435,22 +1325,13 @@ public interface TypesPackage extends EPackage {
 	int TYPE_ALIAS__ANNOTATIONS = TYPED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_ALIAS__CONSTRAINT = TYPED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__ABSTRACT = TYPED_ELEMENT_FEATURE_COUNT + 4;
+	int TYPE_ALIAS__ABSTRACT = TYPED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Visible</b></em>' attribute.
@@ -1459,7 +1340,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__VISIBLE = TYPED_ELEMENT_FEATURE_COUNT + 5;
+	int TYPE_ALIAS__VISIBLE = TYPED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
@@ -1468,7 +1349,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__SUPER_TYPES = TYPED_ELEMENT_FEATURE_COUNT + 6;
+	int TYPE_ALIAS__SUPER_TYPES = TYPED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Type Alias</em>' class.
@@ -1477,7 +1358,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 7;
+	int TYPE_ALIAS_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.AnnotationImpl <em>Annotation</em>}' class.
@@ -1487,7 +1368,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getAnnotation()
 	 * @generated
 	 */
-	int ANNOTATION = 20;
+	int ANNOTATION = 18;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1499,13 +1380,22 @@ public interface TypesPackage extends EPackage {
 	int ANNOTATION__TYPE = 0;
 
 	/**
+	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION__ARGUMENTS = 1;
+
+	/**
 	 * The number of structural features of the '<em>Annotation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_FEATURE_COUNT = 1;
+	int ANNOTATION_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.AnnotatableElement <em>Annotatable Element</em>}' class.
@@ -1515,7 +1405,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getAnnotatableElement()
 	 * @generated
 	 */
-	int ANNOTATABLE_ELEMENT = 21;
+	int ANNOTATABLE_ELEMENT = 19;
 
 	/**
 	 * The number of structural features of the '<em>Annotatable Element</em>' class.
@@ -1534,7 +1424,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getArrayTypeSpecifier()
 	 * @generated
 	 */
-	int ARRAY_TYPE_SPECIFIER = 22;
+	int ARRAY_TYPE_SPECIFIER = 20;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1580,7 +1470,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getAnnotationType()
 	 * @generated
 	 */
-	int ANNOTATION_TYPE = 23;
+	int ANNOTATION_TYPE = 21;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1608,15 +1498,6 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int ANNOTATION_TYPE__ANNOTATIONS = TYPE__ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_TYPE__CONSTRAINT = TYPE__CONSTRAINT;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1673,6 +1554,25 @@ public interface TypesPackage extends EPackage {
 	int ANNOTATION_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.types.impl.ExpressionImpl <em>Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.types.impl.ExpressionImpl
+	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getExpression()
+	 * @generated
+	 */
+	int EXPRESSION = 22;
+
+	/**
+	 * The number of structural features of the '<em>Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.Direction <em>Direction</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1680,7 +1580,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getDirection()
 	 * @generated
 	 */
-	int DIRECTION = 24;
+	int DIRECTION = 23;
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Package <em>Package</em>}'.
@@ -1723,17 +1623,6 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getType();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.types.Type#getConstraint <em>Constraint</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Constraint</em>'.
-	 * @see org.yakindu.base.types.Type#getConstraint()
-	 * @see #getType()
-	 * @generated
-	 */
-	EReference getType_Constraint();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.Type#isAbstract <em>Abstract</em>}'.
@@ -1852,6 +1741,17 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getProperty_Readonly();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.types.Property#getInitialValue <em>Initial Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Initial Value</em>'.
+	 * @see org.yakindu.base.types.Property#getInitialValue()
+	 * @see #getProperty()
+	 * @generated
+	 */
+	EReference getProperty_InitialValue();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Parameter <em>Parameter</em>}'.
@@ -2077,27 +1977,6 @@ public interface TypesPackage extends EPackage {
 	EAttribute getEnumerator_LiteralValue();
 
 	/**
-	 * Returns the meta object for class '{@link org.yakindu.base.types.TypeConstraint <em>Type Constraint</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Type Constraint</em>'.
-	 * @see org.yakindu.base.types.TypeConstraint
-	 * @generated
-	 */
-	EClass getTypeConstraint();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.TypeConstraint#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see org.yakindu.base.types.TypeConstraint#getValue()
-	 * @see #getTypeConstraint()
-	 * @generated
-	 */
-	EAttribute getTypeConstraint_Value();
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.TypeParameter <em>Type Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2172,38 +2051,6 @@ public interface TypesPackage extends EPackage {
 	EReference getPackageMember_Annotations();
 
 	/**
-	 * Returns the meta object for class '{@link org.yakindu.base.types.RangeConstraint <em>Range Constraint</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Range Constraint</em>'.
-	 * @see org.yakindu.base.types.RangeConstraint
-	 * @generated
-	 */
-	EClass getRangeConstraint();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.RangeConstraint#getLowerBound <em>Lower Bound</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Lower Bound</em>'.
-	 * @see org.yakindu.base.types.RangeConstraint#getLowerBound()
-	 * @see #getRangeConstraint()
-	 * @generated
-	 */
-	EAttribute getRangeConstraint_LowerBound();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.RangeConstraint#getUpperBound <em>Upper Bound</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Upper Bound</em>'.
-	 * @see org.yakindu.base.types.RangeConstraint#getUpperBound()
-	 * @see #getRangeConstraint()
-	 * @generated
-	 */
-	EAttribute getRangeConstraint_UpperBound();
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Domain <em>Domain</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2254,6 +2101,17 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAnnotation_Type();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.types.Annotation#getArguments <em>Arguments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Arguments</em>'.
+	 * @see org.yakindu.base.types.Annotation#getArguments()
+	 * @see #getAnnotation()
+	 * @generated
+	 */
+	EReference getAnnotation_Arguments();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.AnnotatableElement <em>Annotatable Element</em>}'.
@@ -2317,6 +2175,16 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAnnotationType_Targets();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.types.Expression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Expression</em>'.
+	 * @see org.yakindu.base.types.Expression
+	 * @generated
+	 */
+	EClass getExpression();
 
 	/**
 	 * Returns the meta object for enum '{@link org.yakindu.base.types.Direction <em>Direction</em>}'.
@@ -2385,14 +2253,6 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TYPE = eINSTANCE.getType();
-
-		/**
-		 * The meta object literal for the '<em><b>Constraint</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TYPE__CONSTRAINT = eINSTANCE.getType_Constraint();
 
 		/**
 		 * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
@@ -2487,6 +2347,14 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PROPERTY__READONLY = eINSTANCE.getProperty_Readonly();
+
+		/**
+		 * The meta object literal for the '<em><b>Initial Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY__INITIAL_VALUE = eINSTANCE.getProperty_InitialValue();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.ParameterImpl <em>Parameter</em>}' class.
@@ -2673,24 +2541,6 @@ public interface TypesPackage extends EPackage {
 		EAttribute ENUMERATOR__LITERAL_VALUE = eINSTANCE.getEnumerator_LiteralValue();
 
 		/**
-		 * The meta object literal for the '{@link org.yakindu.base.types.impl.TypeConstraintImpl <em>Type Constraint</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.yakindu.base.types.impl.TypeConstraintImpl
-		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getTypeConstraint()
-		 * @generated
-		 */
-		EClass TYPE_CONSTRAINT = eINSTANCE.getTypeConstraint();
-
-		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TYPE_CONSTRAINT__VALUE = eINSTANCE.getTypeConstraint_Value();
-
-		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.TypeParameterImpl <em>Type Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2753,32 +2603,6 @@ public interface TypesPackage extends EPackage {
 		EReference PACKAGE_MEMBER__ANNOTATIONS = eINSTANCE.getPackageMember_Annotations();
 
 		/**
-		 * The meta object literal for the '{@link org.yakindu.base.types.impl.RangeConstraintImpl <em>Range Constraint</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.yakindu.base.types.impl.RangeConstraintImpl
-		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getRangeConstraint()
-		 * @generated
-		 */
-		EClass RANGE_CONSTRAINT = eINSTANCE.getRangeConstraint();
-
-		/**
-		 * The meta object literal for the '<em><b>Lower Bound</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute RANGE_CONSTRAINT__LOWER_BOUND = eINSTANCE.getRangeConstraint_LowerBound();
-
-		/**
-		 * The meta object literal for the '<em><b>Upper Bound</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute RANGE_CONSTRAINT__UPPER_BOUND = eINSTANCE.getRangeConstraint_UpperBound();
-
-		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.DomainImpl <em>Domain</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2823,6 +2647,14 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ANNOTATION__TYPE = eINSTANCE.getAnnotation_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Arguments</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ANNOTATION__ARGUMENTS = eINSTANCE.getAnnotation_Arguments();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.AnnotatableElement <em>Annotatable Element</em>}' class.
@@ -2877,6 +2709,16 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ANNOTATION_TYPE__TARGETS = eINSTANCE.getAnnotationType_Targets();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.types.impl.ExpressionImpl <em>Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.types.impl.ExpressionImpl
+		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getExpression()
+		 * @generated
+		 */
+		EClass EXPRESSION = eINSTANCE.getExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.Direction <em>Direction</em>}' enum.

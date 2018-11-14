@@ -11,3 +11,4 @@ Require-Bundle: org.yakindu.sct.domain,
  org.yakindu.sct.model.sexec,
  org.yakindu.sct.model.stext
 Export-Package: org.yakindu.sct.domain.generic.generator
+Automatic-Module-Name: org.yakindu.sct.domain.generic.generator

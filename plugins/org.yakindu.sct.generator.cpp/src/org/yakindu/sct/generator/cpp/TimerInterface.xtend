@@ -17,7 +17,6 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
 
 class TimerInterface implements IContentTemplate {
 	

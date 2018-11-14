@@ -20,3 +20,4 @@ Export-Package: org.yakindu.sct.generator.c,
  org.yakindu.sct.generator.c.submodules.eventdriven,
  org.yakindu.sct.generator.c.types
 Bundle-Vendor: statecharts.org
+Automatic-Module-Name: org.yakindu.sct.generator.c

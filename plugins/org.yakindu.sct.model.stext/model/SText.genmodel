@@ -48,9 +48,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute SText.ecore#//ImportScope/imports"/>
     </genClasses>
     <genClasses ecoreClass="SText.ecore#//EventDefinition"/>
-    <genClasses ecoreClass="SText.ecore#//VariableDefinition">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//VariableDefinition/initialValue"/>
-    </genClasses>
+    <genClasses ecoreClass="SText.ecore#//VariableDefinition"/>
     <genClasses ecoreClass="SText.ecore#//OperationDefinition"/>
     <genClasses ecoreClass="SText.ecore#//TypeAliasDefinition"/>
     <genClasses ecoreClass="SText.ecore#//LocalReaction"/>
@@ -96,6 +94,5 @@
     <genClasses ecoreClass="SText.ecore#//ActiveStateReferenceExpression">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SText.ecore#//ActiveStateReferenceExpression/value"/>
     </genClasses>
-    <genClasses ecoreClass="SText.ecore#//ArgumentedAnnotation"/>
   </genPackages>
 </genmodel:GenModel>

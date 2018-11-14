@@ -3,7 +3,8 @@
 package org.yakindu.base.expressions.expressions;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
+import org.yakindu.base.types.Declaration;
+import org.yakindu.base.types.Expression;
 
 /**
  * <!-- begin-user-doc -->
@@ -61,12 +62,12 @@ public interface FeatureCall extends ArgumentExpression {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Feature</em>' reference.
-	 * @see #setFeature(EObject)
+	 * @see #setFeature(Declaration)
 	 * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getFeatureCall_Feature()
 	 * @model
 	 * @generated
 	 */
-	EObject getFeature();
+	Declaration getFeature();
 
 	/**
 	 * Sets the value of the '{@link org.yakindu.base.expressions.expressions.FeatureCall#getFeature <em>Feature</em>}' reference.
@@ -76,7 +77,7 @@ public interface FeatureCall extends ArgumentExpression {
 	 * @see #getFeature()
 	 * @generated
 	 */
-	void setFeature(EObject value);
+	void setFeature(Declaration value);
 
 	/**
 	 * Returns the value of the '<em><b>Operation Call</b></em>' attribute.
@@ -106,7 +107,7 @@ public interface FeatureCall extends ArgumentExpression {
 
 	/**
 	 * Returns the value of the '<em><b>Array Selector</b></em>' containment reference list.
-	 * The list contents are of type {@link org.yakindu.base.expressions.expressions.Expression}.
+	 * The list contents are of type {@link org.yakindu.base.types.Expression}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Array Selector</em>' containment reference list isn't clear,

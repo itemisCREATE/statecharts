@@ -10,3 +10,4 @@ Require-Bundle: org.yakindu.base.types;visibility:=reexport,
  org.yakindu.base.expressions,
  org.yakindu.sct.model.sruntime;visibility:=reexport
 Export-Package: org.yakindu.base.expressions.interpreter
+Automatic-Module-Name: org.yakindu.base.expressions.interpreter

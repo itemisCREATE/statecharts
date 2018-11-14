@@ -18,6 +18,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
 import org.yakindu.base.expressions.interpreter.IExpressionInterpreter;
+import org.yakindu.base.types.Annotation;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -26,14 +27,13 @@ import org.yakindu.sct.model.sruntime.ExecutionEvent;
 import org.yakindu.sct.model.sruntime.ExecutionVariable;
 import org.yakindu.sct.model.sruntime.SRuntimeFactory;
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations;
-import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler;
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.TimeTask;
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.TimeTask.Priority;
+import org.yakindu.sct.simulation.core.sexec.container.EventDrivenSimulationEngine.EventDrivenCycleAdapter;
 import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IEventRaiser;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
-import org.yakindu.sct.simulation.core.sexec.container.EventDrivenSimulationEngine.EventDrivenCycleAdapter;
 import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 
@@ -45,7 +45,7 @@ import com.google.inject.Inject;
  *
  */
 public abstract class AbstractExecutionFlowTest {
-	
+
 	public static final long DEFAULT_CYCLE_PERIOD = 200;
 	@Inject
 	protected ITimeTaskScheduler timer;
@@ -88,15 +88,14 @@ public abstract class AbstractExecutionFlowTest {
 				context.eAdapters().add(new EventDrivenCycleAdapter(interpreter));
 			} else {
 				Long cyclePeriod = DEFAULT_CYCLE_PERIOD;
-				ArgumentedAnnotation cycleBased = (ArgumentedAnnotation) statechart
-						.getAnnotationOfType(CYCLE_BASED_ANNOTATION);
+				Annotation cycleBased = statechart.getAnnotationOfType(CYCLE_BASED_ANNOTATION);
 				if (cycleBased != null) {
-					cyclePeriod = (Long) stmtInterpreter.evaluate(cycleBased.getExpressions().get(0),
+					cyclePeriod = (Long) stmtInterpreter.evaluate(cycleBased.getArguments().get(0),
 							SRuntimeFactory.eINSTANCE.createExecutionContext());
 				}
 
 				TimeTask cycleTask = new TimeTask("$cycle", () -> {
-						interpreter.runCycle();
+					interpreter.runCycle();
 				}, Priority.LOW);
 				timer.scheduleTimeTask(cycleTask, true, cyclePeriod);
 			}
@@ -170,7 +169,7 @@ public abstract class AbstractExecutionFlowTest {
 			ExecutionEvent event = context().getEvent(eventName);
 			event.setValue(value);
 			event.setRaised(true);
-		} else {			
+		} else {
 			if (interpreter instanceof IEventRaiser) {
 				((IEventRaiser) interpreter).raise(context().getEvent(eventName), value);
 			} else {
@@ -178,7 +177,6 @@ public abstract class AbstractExecutionFlowTest {
 				context().getEvent(eventName).setRaised(true);
 			}
 		}
-
 
 	}
 
@@ -192,11 +190,10 @@ public abstract class AbstractExecutionFlowTest {
 	}
 
 	protected long getCyclePeriod() {
-		ArgumentedAnnotation annotation = (ArgumentedAnnotation) ((Statechart) flow.getSourceElement())
-				.getAnnotationOfType(CYCLE_BASED_ANNOTATION);
+		Annotation annotation = ((Statechart) flow.getSourceElement()).getAnnotationOfType(CYCLE_BASED_ANNOTATION);
 		long cyclePeriod = 200;
 		if (annotation != null) {
-			cyclePeriod = (Long) stmtInterpreter.evaluate(annotation.getExpressions().get(0), context);
+			cyclePeriod = (Long) stmtInterpreter.evaluate(annotation.getArguments().get(0), context);
 
 		}
 		return cyclePeriod;
