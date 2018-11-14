@@ -176,11 +176,11 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	}
 
 	protected Type declareComplex(String name) {
-		ComplexType primitive = TypesFactory.eINSTANCE.createComplexType();
-		primitive.setName(name);
-		declareType(primitive, name);
-		resource.getContents().add(primitive);
-		return primitive;
+		ComplexType complex = TypesFactory.eINSTANCE.createComplexType();
+		complex.setName(name);
+		declareType(complex, name);
+		resource.getContents().add(complex);
+		return complex;
 	}
 	
 	protected void declareType(Type type, String name) {
