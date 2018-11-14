@@ -24,7 +24,7 @@ public class ClassTemplate {
 	def public CharSequence generate() {
 		'''
 		«classComment»
-		«generateVisibility» «classType» «className» «extend»«implement»{
+		«generateVisibility»«classType» «className» «extend»«implement»{
 			«classContent»
 		}
 		'''
