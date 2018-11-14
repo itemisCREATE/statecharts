@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.generator.genmodel.ui.wizard;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -163,13 +165,27 @@ public class SGenWizardPage2 extends WizardPage {
 		lblNewLabel.setText("Choose: " + getSelectedGenerator().getContentType());
 		((WorkspaceTreeContentProvider) resourceTree.getContentProvider())
 				.setFileExtension(FileExtensions.getFileExtension(getSelectedGenerator().getId()));
-		resourceTree.setInput(getSelectedProject());
+		resourceTree.setInput(getRelevantProjects());
 	}
 
-	protected IProject getSelectedProject() {
+	protected List<IProject> getRelevantProjects() {
+		List<IProject> relevantProjects = Lists.newArrayList();
 		IPath containerPath = fileSelectionPage.getFilePath();
 		IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder(containerPath);
-		return folder.getProject();
+		IProject project = folder.getProject();
+		relevantProjects.add(project);
+		relevantProjects.addAll(getReferencedProjects(project));
+		return relevantProjects;
+	}
+	
+	protected List<IProject> getReferencedProjects(IProject project) {
+		try {
+			IProject[] referencedProjects = project.getReferencedProjects();
+			return Arrays.asList(referencedProjects);
+		} catch (CoreException e) {
+			e.printStackTrace();
+			return Collections.emptyList();
+		}
 	}
 
 	public List<EObject> getSelectedElements() {
