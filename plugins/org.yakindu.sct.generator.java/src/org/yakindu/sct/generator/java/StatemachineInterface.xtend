@@ -10,8 +10,6 @@
 package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
-import java.util.Set
-import java.util.TreeSet
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Parameter
@@ -32,7 +30,6 @@ import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
 
 class StatemachineInterface {
 
-	@Inject Set<JavaIncludeProvider> includeProviders;
 	@Inject extension Naming
 	@Inject extension JavaNamingService
 	@Inject extension GenmodelEntries
@@ -59,7 +56,13 @@ class StatemachineInterface {
 			«entry.licenseText»
 			package «flow.getImplementationPackageName(entry)»;
 			
-			«imports(flow, entry)»
+			«IF entry.createInterfaceObserver && flow.hasOutgoingEvents»
+				import java.util.List;
+			«ENDIF»
+			import «entry.basePackageName».«iStatemachine»;
+			«IF flow.timed»
+				import «entry.basePackageName».«iTimerCallback»;
+			«ENDIF»
 			
 			public interface «flow.statemachineInterfaceName» extends «flow.statemachineInterfaceExtensions» {
 			
@@ -80,24 +83,6 @@ class StatemachineInterface {
 		VariableDefinition variable) {
 		'''	public static final «variable.typeSpecifier.targetLanguageName» «variable.identifier» = «variable.initialValue.code»;
 
-		'''
-	}
-	
-	def protected imports(ExecutionFlow flow, GeneratorEntry entry) {
-		val Set<String> imports = new TreeSet
-		imports.add('''«entry.basePackageName».«iStatemachine»''')
-		if(entry.createInterfaceObserver && flow.hasOutgoingEvents) {
-			imports.add("java.util.List")
-		}
-		if(flow.timed) {
-			imports.add('''«entry.basePackageName».«iTimerCallback»''')
-		}
-		imports.addAll(includeProviders.map([i | i.getImports(flow)]).flatten.map[toString])
-		
-		'''
-		«FOR i : imports»
-		import «i»;
-		«ENDFOR»
 		'''
 	}
 
