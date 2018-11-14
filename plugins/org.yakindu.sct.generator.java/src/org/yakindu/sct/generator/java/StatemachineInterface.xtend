@@ -10,6 +10,7 @@
 package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
+import java.util.Set
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Parameter
@@ -17,6 +18,8 @@ import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.java.templates.ClassTemplate
+import org.yakindu.sct.generator.java.templates.FileTemplate
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
@@ -29,7 +32,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
 
 class StatemachineInterface {
-
+	@Inject protected Set<JavaIncludeProvider> includeProviders
 	@Inject extension Naming
 	@Inject extension JavaNamingService
 	@Inject extension GenmodelEntries
@@ -39,10 +42,14 @@ class StatemachineInterface {
 	@Inject extension JavaExpressionsGenerator
 
 	@Inject ICoreLibraryHelper outletFeatureHelper
+	
+	protected ExecutionFlow flow
+	protected GeneratorEntry entry
 
 	def generateStatemachineInterface(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-		var filename = flow.getImplementationPackagePath(entry) + '/' + flow.statemachineInterfaceName.java
-		var content = content(flow, entry)
+		this.entry = entry
+		this.flow = flow
+		val filename = flow.getImplementationPackagePath(entry) + '/' + flow.statemachineInterfaceName.java
 		if (outletFeatureHelper.getApiTargetFolderValue(entry) !== null) {
 			// generate into API target folder in case one is specified, as it is an interface
 			fsa.generateFile(filename, API_TARGET_FOLDER_OUTPUT, content)
@@ -51,37 +58,39 @@ class StatemachineInterface {
 		}
 	}
 
-	def protected content(ExecutionFlow flow, GeneratorEntry entry) {
-		'''
-			«entry.licenseText»
-			package «flow.getImplementationPackageName(entry)»;
-			
-			«IF entry.createInterfaceObserver && flow.hasOutgoingEvents»
-				import java.util.List;
-			«ENDIF»
-			import «entry.basePackageName».«iStatemachine»;
-			«IF flow.timed»
-				import «entry.basePackageName».«iTimerCallback»;
-			«ENDIF»
-			
-			public interface «flow.statemachineInterfaceName» extends «flow.statemachineInterfaceExtensions» {
-			
-				«IF flow.internalScope !== null»
-			«var constants = flow.internalScope.declarations.filter(VariableDefinition).filter[const]»
-					«FOR constant : constants»
-				«constant.constantFieldDeclaration()»
-					«ENDFOR»
-				«ENDIF»
-				«FOR scope : flow.scopes»
-					«scope.createScope(entry)»
-				«ENDFOR»
-			}
-		'''
+	def protected content() {
+		FileTemplate
+			.create
+			.fileComment(entry.licenseText)
+			.packageName(flow.getImplementationPackageName(entry))
+			.addImport("java.util.List", entry.createInterfaceObserver && flow.hasOutgoingEvents)
+			.addImport(entry.basePackageName.dot(iTimerCallback), flow.timed)
+			.addImport(entry.basePackageName.dot(iStatemachine))
+			.addImports(includeProviders.map[getImports(flow)].flatten)
+			.classTemplate(
+				ClassTemplate
+					.create
+					.classType("interface")
+					.className(flow.statemachineInterfaceName)
+					.superClass(flow.statemachineInterfaceExtensions)
+					.classContent(
+						'''
+						«IF flow.hasInternalScope»
+							«FOR constant : flow.internalScope.declarations.filter(VariableDefinition).filter[const]»
+								«constant.constantFieldDeclaration()»
+							«ENDFOR»
+						«ENDIF»
+						«FOR scope : flow.scopes»
+							«scope.createScope(entry)»
+						«ENDFOR»
+						'''
+					) 
+			).generate
 	}
 
 	def protected constantFieldDeclaration(
 		VariableDefinition variable) {
-		'''	public static final «variable.typeSpecifier.targetLanguageName» «variable.identifier» = «variable.initialValue.code»;
+		'''public static final «variable.typeSpecifier.targetLanguageName» «variable.identifier» = «variable.initialValue.code»;
 
 		'''
 	}

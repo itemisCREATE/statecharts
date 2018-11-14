@@ -3,7 +3,7 @@ package org.yakindu.sct.generator.java.templates
 import java.util.ArrayList
 import java.util.List
 
-abstract class ClassTemplate {
+public class ClassTemplate {
 	protected CharSequence classComment = ""
 	protected CharSequence visibility = "public"
 	protected CharSequence classType = "class"
@@ -13,6 +13,13 @@ abstract class ClassTemplate {
 	protected CharSequence classContent = ""
 	protected boolean isStatic = false
 	protected boolean isAbstract = false
+	
+	protected new() {
+	}
+	
+	def public static ClassTemplate create() {
+		return new ClassTemplate
+	}
 	
 	def public CharSequence generate() {
 		'''
@@ -74,9 +81,17 @@ abstract class ClassTemplate {
 	}
 	
 	def protected final CharSequence generateVisibility() {
+		var vis = ""
 		if(visibility != "") {
-			'''«visibility» '''
+			vis += visibility + " "
 		}
+		if(isStatic) {
+			vis += "static "
+		}
+		if(isAbstract) {
+			vis += "abstract "
+		}
+		vis
 	}
 	
 	def protected final CharSequence extend() {

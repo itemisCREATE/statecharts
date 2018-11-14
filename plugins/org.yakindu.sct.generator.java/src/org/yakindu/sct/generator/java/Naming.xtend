@@ -56,6 +56,10 @@ class Naming {
 	def java(String it) {
 		it + ".java"
 	}
+	
+	def dot(String a, String b) {
+		a + "." + b
+	}
 
 	def asPrivate(String it) {
 		"private " + it

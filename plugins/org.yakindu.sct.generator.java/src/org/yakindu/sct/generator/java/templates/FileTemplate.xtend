@@ -10,6 +10,10 @@ class FileTemplate {
 	
 	protected Set<CharSequence> imports = new TreeSet
 	
+	def static public FileTemplate create() {
+		return new FileTemplate()
+	}
+	
 	def public CharSequence generate() {
 		'''
 		«fileComment»
@@ -20,6 +24,8 @@ class FileTemplate {
 		«classTemplate.generate()»
 		'''
 	}
+	
+	protected new() {}
 	
 	def public FileTemplate fileComment(CharSequence fileComment) {
 		this.fileComment = fileComment
@@ -37,7 +43,14 @@ class FileTemplate {
 	}
 	
 	def public FileTemplate addImport(CharSequence imp) {
-		this.imports += imp
+		this.imports += imp 
+		this
+	}
+	
+	def public FileTemplate addImport(CharSequence imp, boolean condition) {
+		if(condition) {
+			addImport(imp)
+		}
 		this
 	}
 	
