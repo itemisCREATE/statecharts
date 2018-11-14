@@ -22,8 +22,7 @@ import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
  */
 public enum CoreGenerator {
 
-	Java("yakindu::java"), C("yakindu::c"), Cpp("yakindu::cpp"), GenericJava("yakindu::generic"), Xpand(
-			"yakindu::xpand");
+	C("yakindu::c"), Cpp("yakindu::cpp"), Java("yakindu::java");
 
 	private String id;
 
@@ -45,12 +44,6 @@ public enum CoreGenerator {
 		if (Cpp.id.equals(id)) {
 			return Cpp;
 		}
-		if (GenericJava.id.equals(id)) {
-			return GenericJava;
-		}
-		if (Xpand.id.equals(id)) {
-			return Xpand;
-		}
 		throw new IllegalArgumentException(String.format("No such generator id '%s'", id));
 	}
 
@@ -61,23 +54,21 @@ public enum CoreGenerator {
 	public static final Comparator<IGeneratorDescriptor> generatorOrder = new Comparator<IGeneratorDescriptor>() {
 
 		public int compare(IGeneratorDescriptor o1, IGeneratorDescriptor o2) {
-			int a = 0;
-			int b = 0;
-			try {
-				a = CoreGenerator.parseId(o1.getId()).ordinal();
-			} catch (IllegalArgumentException e) {
-				a = Integer.MAX_VALUE;
-			}
-			try {
-				b = CoreGenerator.parseId(o2.getId()).ordinal();
-			} catch (IllegalArgumentException e) {
-				b = Integer.MAX_VALUE;
-			}
+			int a = getPrio(o1);
+			int b = getPrio(o2);
 			int result = Integer.valueOf(a).compareTo(b);
 			if (result == 0) {
-				result = o1.getName().compareTo(o2.getName());
+				result = o2.getName().compareTo(o1.getName());
 			}
 			return result;
+		}
+
+		private int getPrio(IGeneratorDescriptor o1) {
+			try {
+				return CoreGenerator.parseId(o1.getId()).ordinal();
+			} catch (IllegalArgumentException e) {
+				return Integer.MAX_VALUE;
+			}
 		}
 	};
 
