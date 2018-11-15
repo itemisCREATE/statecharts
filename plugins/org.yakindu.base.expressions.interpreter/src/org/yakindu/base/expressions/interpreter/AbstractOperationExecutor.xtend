@@ -53,7 +53,7 @@ abstract class AbstractOperationExecutor implements IOperationExecutor {
 
 	def executeArguments(List<Argument> arguments, ExecutionContext context, Operation operation) {
 		val orderedExpressions = ArgumentSorter.getOrderedExpressions(arguments, operation)
-		orderedExpressions.map(it|evaluate(context))
+		orderedExpressions.map(it|evaluate(context)).toArray
 	}
 
 }

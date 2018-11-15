@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.simulation.core.sexec.interpreter;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -46,7 +47,7 @@ public class DefaultOperationMockup extends AbstractOperationExecutor implements
 	@Override
 	public Object execute(ArgumentExpression expression, ExecutionContext context) {
 		Operation definition = getOperation(expression);
-		List<Object> arguments = executeArguments(expression.getArguments(), context, definition);
+		List<Object> arguments = Arrays.asList(executeArguments(expression.getArguments(), context, definition));
 		verifyCalls.put(definition.getName(), arguments);
 		return mockReturn.get(definition.getName(), arguments);
 	}
