@@ -10,10 +10,11 @@
  */
 package org.yakindu.base.expressions.interpreter
 
+import com.google.common.collect.Sets
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import java.util.List
 import java.util.Set
+import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression
@@ -40,7 +41,6 @@ import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.ShiftExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
-import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Expression
@@ -60,17 +60,17 @@ import org.yakindu.sct.model.sruntime.ReferenceSlot
  * @authos axel terfloth - additions
  * 
  */
- @Singleton
+@Singleton
 class DefaultExpressionInterpreter extends AbstractExpressionInterpreter implements IExpressionInterpreter {
 
 	@Inject
 	protected extension ITypeSystem ts;
 	@Inject
 	protected extension IExecutionSlotResolver resolver
-	
+
 	@Inject(optional=true)
-	protected Set<IOperationMockup> operationDelegates
-	
+	protected Set<IOperationExecutor> operationExecutors = Sets.newHashSet
+
 	@Inject(optional=true)
 	protected ExecutionContext context
 
@@ -122,10 +122,10 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	def dispatch Object execute(NumericalUnaryExpression expression) {
 		executeUnaryCoreFunction(expression.operand, expression.operator.getName())
 	}
-	
+
 	def dispatch Object execute(PostFixUnaryExpression it) {
 		var result = operand.execute
-		context.resolve(operand).value =  evaluate(operator.getName(), result)
+		context.resolve(operand).value = evaluate(operator.getName(), result)
 		result
 	}
 
@@ -269,12 +269,8 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	}
 
 	def executeElementReferenceExpression(ElementReferenceExpression expression) {
-		val parameter = expression.expressions.map(it|execute)
-		if (expression.operationCall || expression.reference instanceof Operation) {
-			val operationDelegate = operationDelegates?.findFirst[canExecute(null, expression.reference as Operation, parameter.toArray)]
-			if (operationDelegate !== null) {
-				return (expression.reference as Operation).execute(null, parameter.toArray, operationDelegate)
-			}
+		if (expression.reference instanceof Operation) {
+			return expression.executeOperation
 		}
 		// for enumeration types return the literal value
 		if (expression.reference instanceof Enumerator) {
@@ -301,13 +297,8 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 
 	def executeFeatureCall(FeatureCall call) {
 		if (call.operationCall || call.feature instanceof Operation) {
-			val parameter = call.expressions.map(it|execute)
 			if (call.feature instanceof Operation) {
-				val Operation operation = call.feature as Operation
-				val operationDelegate = operationDelegates?.findFirst[canExecute(call.getOwnerDeclaration, operation, parameter.toArray)]
-				if (operationDelegate !== null) {
-					return operation.execute(call.getOwnerDeclaration, parameter, operationDelegate)
-				}
+				return call.executeOperation
 			}
 		} else if (call.feature instanceof Enumerator) {
 			return new Long((call.feature as Enumerator).literalValue)
@@ -329,27 +320,14 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 		println("No feature found for " + call.feature + " -> returning null")
 		return null;
 	}
-	
-	/**
-	 * TODO: this works only for call depth = 1
-	 */
-	def getOwnerDeclaration(FeatureCall call) {
-		val owner = call.owner
-		if (owner instanceof ElementReferenceExpression) {
-			if (owner.reference instanceof Declaration) {
-				return owner.reference as Declaration
-			}
-		}
-		return null
-	}
-	
+
 	def executeUnaryCoreFunction(Expression statement, String operator) {
 		var result = statement.execute()
 		return evaluate(operator, result);
 	}
 
-	def execute(Operation it, Declaration owner, List<Object> params, IOperationMockup operationDelegate) {
-		operationDelegate.execute(owner, it, params)
+	def executeOperation(ArgumentExpression expression) {
+		operationExecutors.findFirst[it.canExecute(expression)]?.execute(expression, context)
 	}
 
 }
