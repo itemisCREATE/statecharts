@@ -14,7 +14,6 @@ import com.google.common.collect.Sets
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.Set
-import org.yakindu.base.base.NamedElement
 import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.AssignmentOperator
@@ -320,19 +319,6 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 
 		println("No feature found for " + call.feature + " -> returning null")
 		return null;
-	}
-
-	/**
-	 * TODO: this works only for call depth = 1
-	 */
-	def getOwnerDeclaration(FeatureCall call) {
-		val owner = call.owner
-		if (owner instanceof ElementReferenceExpression) {
-			if (owner.reference instanceof NamedElement) {
-				return owner.reference as NamedElement
-			}
-		}
-		return null
 	}
 
 	def executeUnaryCoreFunction(Expression statement, String operator) {
