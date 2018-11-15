@@ -10,8 +10,9 @@
  */
 package org.yakindu.base.expressions.interpreter;
 
-import org.yakindu.base.types.Declaration;
+import org.yakindu.base.expressions.expressions.ArgumentExpression;
 import org.yakindu.base.types.Operation;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
 
 /**
  * Called during simulation when an {@link Operation} is executed. Allows to
@@ -20,36 +21,36 @@ import org.yakindu.base.types.Operation;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public interface IOperationMockup {
+public interface IOperationExecutor {
 	/**
 	 * Called before an operation is executed
 	 * 
-	 * @return true if the implementation provides a mockup for the given
+	 * @return true if the implementation provides an implementation for the given
 	 *         definition, false otherwise
 	 */
-	public boolean canExecute(Declaration owner, Operation definition, Object[] parameter);
+	public boolean canExecute(ArgumentExpression expression);
 
 	/**
 	 * Called when the operation is executed
 	 * 
 	 * @return the operations return value, maybe null
 	 */
-	public Object execute(Declaration owner, Operation definition, Object[] parameter);
-	
+	public Object execute(ArgumentExpression expression, ExecutionContext context);
+
 	/**
 	 * @author Johannes Dicks - Initial contribution and API
 	 */
-	public static final class NullOperationMock implements IOperationMockup{
+	public static final class NullOperationMock implements IOperationExecutor {
 
 		@Override
-		public boolean canExecute(Declaration owner, Operation definition, Object[] parameter) {
+		public boolean canExecute(ArgumentExpression expression) {
 			return false;
 		}
 
 		@Override
-		public Object execute(Declaration owner, Operation definition, Object[] parameter) {
+		public Object execute(ArgumentExpression expression, ExecutionContext context) {
 			return null;
 		}
 	}
-	
+
 }

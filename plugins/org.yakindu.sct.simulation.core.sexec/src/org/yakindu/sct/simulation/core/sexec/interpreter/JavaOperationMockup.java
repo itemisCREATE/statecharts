@@ -17,11 +17,13 @@ import java.util.stream.Collectors;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.yakindu.base.expressions.expressions.ArgumentExpression;
+import org.yakindu.base.expressions.interpreter.AbstractOperationExecutor;
 import org.yakindu.base.expressions.interpreter.IExecutionSlotResolver;
-import org.yakindu.base.expressions.interpreter.IOperationMockup;
-import org.yakindu.base.types.Declaration;
+import org.yakindu.base.expressions.interpreter.IOperationExecutor;
 import org.yakindu.base.types.Operation;
 import org.yakindu.sct.commons.WorkspaceClassLoaderFactory;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 
 import com.google.common.collect.Lists;
@@ -29,15 +31,15 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
- * Implementation of {@link IOperationMockup} interface that delegates simulator
- * operation calls to Java classes. These classes can be specified in the run
- * configuration tab.
+ * Implementation of {@link IOperationExecutor} interface that delegates
+ * simulator operation calls to Java classes. These classes can be specified in
+ * the run configuration tab.
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
 @Singleton
-public class JavaOperationMockup implements IOperationMockup {
+public class JavaOperationMockup extends AbstractOperationExecutor implements IOperationExecutor {
 
 	@Inject
 	protected IExecutionSlotResolver resolver;
@@ -64,13 +66,13 @@ public class JavaOperationMockup implements IOperationMockup {
 	}
 
 	@Override
-	public boolean canExecute(Declaration owner, Operation definition, Object[] parameter) {
+	public boolean canExecute(ArgumentExpression expression) {
 		for (Object callback : callbacks) {
 			Class<?> current = callback.getClass();
 			while (current != Object.class) {
 				Method[] methods = current.getDeclaredMethods();
 				for (Method method : methods) {
-					if (hasSignatureMatch(definition, method)) {
+					if (hasSignatureMatch(getOperation(expression), method)) {
 						return true;
 					}
 				}
@@ -81,7 +83,8 @@ public class JavaOperationMockup implements IOperationMockup {
 		return false;
 	}
 
-	public Object execute(Declaration owner, Operation definition, Object[] parameter) {
+	public Object execute(ArgumentExpression expression, ExecutionContext context) {
+		Operation definition = getOperation(expression);
 		List<Object> targets = callbacks;
 		if (definition.eContainer() instanceof InterfaceScope) {
 			String className = ((InterfaceScope) definition.eContainer()).getName();
@@ -94,7 +97,7 @@ public class JavaOperationMockup implements IOperationMockup {
 				definition.getParameters().size(), definition.getParameters().size(),
 				targets.size() > 0 ? targets : callbacks);
 		try {
-			return dispatcher.invoke(parameter);
+			return dispatcher.invoke(executeArguments(expression.getArguments(), context, definition));
 		} catch (Exception ex) {
 			throw new WrappedException("Error during invocation of operation '" + definition.getName()
 					+ "' with params " + definition.getParameters() + " '", ex);
