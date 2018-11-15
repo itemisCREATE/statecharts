@@ -142,7 +142,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	def protected codeDeclaration(Declaration it, ArgumentExpression exp) {
 		switch it {
 			Operation:
-				return operationCall(it, exp.expressions)
+				return operationCall(it, exp)
 			Property case exp.isAssignmentContained:
 				return getStaticContext + identifier
 			Property case exp.isPropertyContained:
@@ -152,8 +152,8 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 		}
 	}
 
-	def protected String operationCall(Operation it, List<Expression> args) {
-		'''«code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)'''
+	def protected String operationCall(Operation it, ArgumentExpression exp) {
+		'''«code»(«FOR arg : exp.expressions SEPARATOR ", "»«arg.code»«ENDFOR»)'''
 	}
 
 	def dispatch String code(Declaration it) {

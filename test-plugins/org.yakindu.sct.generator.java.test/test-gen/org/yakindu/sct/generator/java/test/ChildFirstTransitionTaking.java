@@ -20,7 +20,9 @@ public class ChildFirstTransitionTaking {
 	@Before
 	public void childFirstTransitionTaking_setUp() {
 		statemachine = new ChildFirstTransitionTakingStatemachine();
+		
 		statemachine.init();
+		
 	}
 
 	@After
