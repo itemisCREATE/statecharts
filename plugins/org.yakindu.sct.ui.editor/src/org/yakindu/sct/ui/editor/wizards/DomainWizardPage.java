@@ -94,8 +94,9 @@ public class DomainWizardPage extends WizardPage {
 			}
 		});
 		setControl(composite);
-		trySelectDefaultDomain();
 	}
+
+	private boolean domainSelected = false;
 
 	private void trySelectDefaultDomain() {
 		try {
@@ -108,13 +109,11 @@ public class DomainWizardPage extends WizardPage {
 		}
 	}
 
-	private boolean domainSelected = false;
-
 	@Override
 	public void setVisible(boolean visible) {
 		if (visible)
+			trySelectDefaultDomain();
 			this.domainSelected = true;
-		
 		super.setVisible(visible);
 	}
 
