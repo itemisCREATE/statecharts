@@ -270,7 +270,7 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 
 	def executeElementReferenceExpression(ElementReferenceExpression expression) {
 		if (expression.reference instanceof Operation) {
-			expression.executeOperation
+			return expression.executeOperation
 		}
 		// for enumeration types return the literal value
 		if (expression.reference instanceof Enumerator) {
@@ -298,7 +298,7 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	def executeFeatureCall(FeatureCall call) {
 		if (call.operationCall || call.feature instanceof Operation) {
 			if (call.feature instanceof Operation) {
-				call.executeOperation
+				return call.executeOperation
 			}
 		} else if (call.feature instanceof Enumerator) {
 			return new Long((call.feature as Enumerator).literalValue)
