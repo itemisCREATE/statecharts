@@ -270,7 +270,9 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 
 	def executeElementReferenceExpression(ElementReferenceExpression expression) {
 		if (expression.reference instanceof Operation) {
-			return expression.executeOperation
+			val executor = operationExecutors.findFirst[it.canExecute(expression)]
+			if (executor !== null)
+				return executor.executeOperation(expression)
 		}
 		// for enumeration types return the literal value
 		if (expression.reference instanceof Enumerator) {
@@ -298,7 +300,10 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	def executeFeatureCall(FeatureCall call) {
 		if (call.operationCall || call.feature instanceof Operation) {
 			if (call.feature instanceof Operation) {
-				return call.executeOperation
+				val executor = operationExecutors.findFirst[it.canExecute(call)]
+				if (executor !== null) {
+					return executor.executeOperation(call)
+				}
 			}
 		} else if (call.feature instanceof Enumerator) {
 			return new Long((call.feature as Enumerator).literalValue)
@@ -326,8 +331,8 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 		return evaluate(operator, result);
 	}
 
-	def executeOperation(ArgumentExpression expression) {
-		operationExecutors.findFirst[it.canExecute(expression)]?.execute(expression, context)
+	def executeOperation(IOperationExecutor executor, ArgumentExpression expression) {
+		executor.execute(expression, context)
 	}
 
 }
