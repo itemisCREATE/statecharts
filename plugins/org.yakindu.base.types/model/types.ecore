@@ -38,8 +38,6 @@
         defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
-        eType="#//Annotation" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypedElement" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type" changeable="false"
@@ -86,8 +84,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="PackageMember" eSuperTypes="base.ecore#//NamedElement #//AnnotatableElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true" derived="true" iD="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
-        eType="#//Annotation" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Domain">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="domainID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -98,12 +94,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
         eType="#//Expression" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AnnotatableElement" abstract="true"
-      interface="true">
-    <eOperations name="getAnnotations" upperBound="-1" eType="#//Annotation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AnnotatableElement">
     <eOperations name="getAnnotationOfType" eType="#//Annotation">
       <eParameters name="typeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="#//Annotation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotationInfo" eType="#//AnnotatableElement"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArrayTypeSpecifier" eSuperTypes="#//TypeSpecifier">
     <eOperations name="getElementType" eType="#//Type"/>

@@ -195,22 +195,31 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_FLOW__INIT_SEQUENCE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_FLOW__ID = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 8;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__ANNOTATIONS = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 9;
+	int EXECUTION_FLOW__ANNOTATIONS = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_FLOW__ANNOTATION_INFO = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_FLOW__ID = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -219,7 +228,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__ABSTRACT = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 10;
+	int EXECUTION_FLOW__ABSTRACT = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Visible</b></em>' attribute.
@@ -228,7 +237,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__VISIBLE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 11;
+	int EXECUTION_FLOW__VISIBLE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
@@ -237,7 +246,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__SUPER_TYPES = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 12;
+	int EXECUTION_FLOW__SUPER_TYPES = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
@@ -246,7 +255,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__TYPE_PARAMETERS = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 13;
+	int EXECUTION_FLOW__TYPE_PARAMETERS = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Features</b></em>' containment reference list.
@@ -255,7 +264,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__FEATURES = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 14;
+	int EXECUTION_FLOW__FEATURES = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Reactions</b></em>' containment reference list.
@@ -264,7 +273,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__REACTIONS = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 15;
+	int EXECUTION_FLOW__REACTIONS = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Simple Name</b></em>' attribute.
@@ -273,7 +282,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__SIMPLE_NAME = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 16;
+	int EXECUTION_FLOW__SIMPLE_NAME = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>React Sequence</b></em>' containment reference.
@@ -282,7 +291,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__REACT_SEQUENCE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 17;
+	int EXECUTION_FLOW__REACT_SEQUENCE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Local React Sequence</b></em>' containment reference.
@@ -291,7 +300,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__LOCAL_REACT_SEQUENCE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 18;
+	int EXECUTION_FLOW__LOCAL_REACT_SEQUENCE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>States</b></em>' containment reference list.
@@ -300,7 +309,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__STATES = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 19;
+	int EXECUTION_FLOW__STATES = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 20;
 
 	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
@@ -309,7 +318,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__NODES = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 20;
+	int EXECUTION_FLOW__NODES = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 21;
 
 	/**
 	 * The feature id for the '<em><b>Regions</b></em>' containment reference list.
@@ -318,7 +327,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__REGIONS = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 21;
+	int EXECUTION_FLOW__REGIONS = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 22;
 
 	/**
 	 * The feature id for the '<em><b>History Vector</b></em>' containment reference.
@@ -327,7 +336,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__HISTORY_VECTOR = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 22;
+	int EXECUTION_FLOW__HISTORY_VECTOR = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 23;
 
 	/**
 	 * The feature id for the '<em><b>Entry Action</b></em>' containment reference.
@@ -336,7 +345,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__ENTRY_ACTION = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 23;
+	int EXECUTION_FLOW__ENTRY_ACTION = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 24;
 
 	/**
 	 * The feature id for the '<em><b>Exit Action</b></em>' containment reference.
@@ -345,7 +354,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__EXIT_ACTION = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 24;
+	int EXECUTION_FLOW__EXIT_ACTION = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 25;
 
 	/**
 	 * The feature id for the '<em><b>Static Init Sequence</b></em>' containment reference.
@@ -354,7 +363,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__STATIC_INIT_SEQUENCE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 25;
+	int EXECUTION_FLOW__STATIC_INIT_SEQUENCE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 26;
 
 	/**
 	 * The number of structural features of the '<em>Execution Flow</em>' class.
@@ -363,7 +372,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW_FEATURE_COUNT = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 26;
+	int EXECUTION_FLOW_FEATURE_COUNT = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 27;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl <em>Execution Node</em>}' class.
@@ -394,22 +403,31 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_NODE__NAME = MAPPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_NODE__ID = MAPPED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_NODE__ANNOTATIONS = MAPPED_ELEMENT_FEATURE_COUNT + 2;
+	int EXECUTION_NODE__ANNOTATIONS = MAPPED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_NODE__ANNOTATION_INFO = MAPPED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_NODE__ID = MAPPED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -418,7 +436,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_NODE__ABSTRACT = MAPPED_ELEMENT_FEATURE_COUNT + 3;
+	int EXECUTION_NODE__ABSTRACT = MAPPED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Visible</b></em>' attribute.
@@ -427,7 +445,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_NODE__VISIBLE = MAPPED_ELEMENT_FEATURE_COUNT + 4;
+	int EXECUTION_NODE__VISIBLE = MAPPED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
@@ -436,7 +454,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_NODE__SUPER_TYPES = MAPPED_ELEMENT_FEATURE_COUNT + 5;
+	int EXECUTION_NODE__SUPER_TYPES = MAPPED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
@@ -445,7 +463,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_NODE__TYPE_PARAMETERS = MAPPED_ELEMENT_FEATURE_COUNT + 6;
+	int EXECUTION_NODE__TYPE_PARAMETERS = MAPPED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Features</b></em>' containment reference list.
@@ -454,7 +472,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_NODE__FEATURES = MAPPED_ELEMENT_FEATURE_COUNT + 7;
+	int EXECUTION_NODE__FEATURES = MAPPED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Reactions</b></em>' containment reference list.
@@ -463,7 +481,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_NODE__REACTIONS = MAPPED_ELEMENT_FEATURE_COUNT + 8;
+	int EXECUTION_NODE__REACTIONS = MAPPED_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Simple Name</b></em>' attribute.
@@ -472,7 +490,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_NODE__SIMPLE_NAME = MAPPED_ELEMENT_FEATURE_COUNT + 9;
+	int EXECUTION_NODE__SIMPLE_NAME = MAPPED_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>React Sequence</b></em>' containment reference.
@@ -481,7 +499,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_NODE__REACT_SEQUENCE = MAPPED_ELEMENT_FEATURE_COUNT + 10;
+	int EXECUTION_NODE__REACT_SEQUENCE = MAPPED_ELEMENT_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Local React Sequence</b></em>' containment reference.
@@ -490,7 +508,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_NODE__LOCAL_REACT_SEQUENCE = MAPPED_ELEMENT_FEATURE_COUNT + 11;
+	int EXECUTION_NODE__LOCAL_REACT_SEQUENCE = MAPPED_ELEMENT_FEATURE_COUNT + 12;
 
 	/**
 	 * The number of structural features of the '<em>Execution Node</em>' class.
@@ -499,7 +517,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_NODE_FEATURE_COUNT = MAPPED_ELEMENT_FEATURE_COUNT + 12;
+	int EXECUTION_NODE_FEATURE_COUNT = MAPPED_ELEMENT_FEATURE_COUNT + 13;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl <em>Execution State</em>}' class.
@@ -630,15 +648,6 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_STATE__NAME = EXECUTION_NODE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_STATE__ID = EXECUTION_NODE__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -646,6 +655,24 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int EXECUTION_STATE__ANNOTATIONS = EXECUTION_NODE__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_STATE__ANNOTATION_INFO = EXECUTION_NODE__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_STATE__ID = EXECUTION_NODE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1065,15 +1092,6 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_ENTRY__NAME = EXECUTION_NODE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_ENTRY__ID = EXECUTION_NODE__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1081,6 +1099,24 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int EXECUTION_ENTRY__ANNOTATIONS = EXECUTION_NODE__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_ENTRY__ANNOTATION_INFO = EXECUTION_NODE__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_ENTRY__ID = EXECUTION_NODE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1201,15 +1237,6 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_EXIT__NAME = EXECUTION_NODE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_EXIT__ID = EXECUTION_NODE__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1217,6 +1244,24 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int EXECUTION_EXIT__ANNOTATIONS = EXECUTION_NODE__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_EXIT__ANNOTATION_INFO = EXECUTION_NODE__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_EXIT__ID = EXECUTION_NODE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1337,15 +1382,6 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_CHOICE__NAME = EXECUTION_NODE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_CHOICE__ID = EXECUTION_NODE__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1353,6 +1389,24 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int EXECUTION_CHOICE__ANNOTATIONS = EXECUTION_NODE__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_CHOICE__ANNOTATION_INFO = EXECUTION_NODE__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_CHOICE__ID = EXECUTION_NODE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1623,15 +1677,6 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_SYNCHRONIZATION__NAME = EXECUTION_NODE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_SYNCHRONIZATION__ID = EXECUTION_NODE__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1639,6 +1684,24 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int EXECUTION_SYNCHRONIZATION__ANNOTATIONS = EXECUTION_NODE__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_SYNCHRONIZATION__ANNOTATION_INFO = EXECUTION_NODE__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_SYNCHRONIZATION__ID = EXECUTION_NODE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1822,15 +1885,6 @@ public interface SexecPackage extends EPackage {
 	int METHOD__NAME = TypesPackage.OPERATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int METHOD__ID = TypesPackage.OPERATION__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1838,6 +1892,24 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int METHOD__ANNOTATIONS = TypesPackage.OPERATION__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD__ANNOTATION_INFO = TypesPackage.OPERATION__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD__ID = TypesPackage.OPERATION__ID;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -1948,15 +2020,6 @@ public interface SexecPackage extends EPackage {
 	int TIME_EVENT__NAME = TypesPackage.EVENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIME_EVENT__ID = TypesPackage.EVENT__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1964,6 +2027,24 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int TIME_EVENT__ANNOTATIONS = TypesPackage.EVENT__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_EVENT__ANNOTATION_INFO = TypesPackage.EVENT__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_EVENT__ID = TypesPackage.EVENT__ID;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.

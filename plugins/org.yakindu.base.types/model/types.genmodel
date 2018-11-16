@@ -38,7 +38,6 @@
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference types.ecore#//Parameter/owningOperation"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Parameter/varArgs"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Parameter/optional"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//Parameter/annotations"/>
     </genClasses>
     <genClasses ecoreClass="types.ecore#//TypedElement">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference types.ecore#//TypedElement/type"/>
@@ -71,7 +70,6 @@
     </genClasses>
     <genClasses ecoreClass="types.ecore#//PackageMember">
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//PackageMember/id"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//PackageMember/annotations"/>
     </genClasses>
     <genClasses ecoreClass="types.ecore#//Domain">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Domain/domainID"/>
@@ -82,7 +80,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference types.ecore#//Annotation/arguments"/>
     </genClasses>
     <genClasses image="false" ecoreClass="types.ecore#//AnnotatableElement">
-      <genOperations ecoreOperation="types.ecore#//AnnotatableElement/getAnnotations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//AnnotatableElement/annotations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//AnnotatableElement/annotationInfo"/>
       <genOperations ecoreOperation="types.ecore#//AnnotatableElement/getAnnotationOfType">
         <genParameters ecoreParameter="types.ecore#//AnnotatableElement/getAnnotationOfType/typeName"/>
       </genOperations>
