@@ -1,9 +1,11 @@
 /**
- * Copyright (c) 2018 itemis AG - All rights Reserved
- * Unauthorized copying of this file, via any medium is strictly prohibited
- * 
+ * Copyright (c) 2018 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
- * Tobias Angele - Itemis AG
+ * 	committers of YAKINDU - initial API and implementation
  * 
  */
 package org.yakindu.base.expressions.linking;
@@ -19,7 +21,7 @@ public class LinkingDiagnosticMessageProvider extends org.eclipse.xtext.linking.
 		String linkText = "";
 		try {
 			linkText = context.getLinkText();
-		} catch (IllegalNodeException e){
+		} catch (IllegalNodeException e) {
 			linkText = e.getNode().getText();
 		}
 		String message = "Could not find declaration of '" + linkText + "'";
