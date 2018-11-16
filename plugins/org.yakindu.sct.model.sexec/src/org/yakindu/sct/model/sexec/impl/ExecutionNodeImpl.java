@@ -46,8 +46,9 @@ import org.yakindu.sct.model.sexec.SexecPackage;
  * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getAnnotations <em>Annotations</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getAnnotationInfo <em>Annotation Info</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#isVisible <em>Visible</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getSuperTypes <em>Super Types</em>}</li>
@@ -83,16 +84,6 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String ID_EDEFAULT = null;
-
-	/**
 	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -101,6 +92,26 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * @ordered
 	 */
 	protected EList<Annotation> annotations;
+
+	/**
+	 * The cached value of the '{@link #getAnnotationInfo() <em>Annotation Info</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAnnotationInfo()
+	 * @generated
+	 * @ordered
+	 */
+	protected AnnotatableElement annotationInfo;
+
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
 
 	/**
 	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
@@ -281,6 +292,49 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, SexecPackage.EXECUTION_NODE__ANNOTATIONS);
 		}
 		return annotations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AnnotatableElement getAnnotationInfo() {
+		return annotationInfo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetAnnotationInfo(AnnotatableElement newAnnotationInfo, NotificationChain msgs) {
+		AnnotatableElement oldAnnotationInfo = annotationInfo;
+		annotationInfo = newAnnotationInfo;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_NODE__ANNOTATION_INFO, oldAnnotationInfo, newAnnotationInfo);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAnnotationInfo(AnnotatableElement newAnnotationInfo) {
+		if (newAnnotationInfo != annotationInfo) {
+			NotificationChain msgs = null;
+			if (annotationInfo != null)
+				msgs = ((InternalEObject)annotationInfo).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_NODE__ANNOTATION_INFO, null, msgs);
+			if (newAnnotationInfo != null)
+				msgs = ((InternalEObject)newAnnotationInfo).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_NODE__ANNOTATION_INFO, null, msgs);
+			msgs = basicSetAnnotationInfo(newAnnotationInfo, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_NODE__ANNOTATION_INFO, newAnnotationInfo, newAnnotationInfo));
 	}
 
 	/**
@@ -523,6 +577,8 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 		switch (featureID) {
 			case SexecPackage.EXECUTION_NODE__ANNOTATIONS:
 				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
+			case SexecPackage.EXECUTION_NODE__ANNOTATION_INFO:
+				return basicSetAnnotationInfo(null, msgs);
 			case SexecPackage.EXECUTION_NODE__SUPER_TYPES:
 				return ((InternalEList<?>)getSuperTypes()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_NODE__TYPE_PARAMETERS:
@@ -549,10 +605,12 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 		switch (featureID) {
 			case SexecPackage.EXECUTION_NODE__NAME:
 				return getName();
-			case SexecPackage.EXECUTION_NODE__ID:
-				return getId();
 			case SexecPackage.EXECUTION_NODE__ANNOTATIONS:
 				return getAnnotations();
+			case SexecPackage.EXECUTION_NODE__ANNOTATION_INFO:
+				return getAnnotationInfo();
+			case SexecPackage.EXECUTION_NODE__ID:
+				return getId();
 			case SexecPackage.EXECUTION_NODE__ABSTRACT:
 				return isAbstract();
 			case SexecPackage.EXECUTION_NODE__VISIBLE:
@@ -590,6 +648,9 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 			case SexecPackage.EXECUTION_NODE__ANNOTATIONS:
 				getAnnotations().clear();
 				getAnnotations().addAll((Collection<? extends Annotation>)newValue);
+				return;
+			case SexecPackage.EXECUTION_NODE__ANNOTATION_INFO:
+				setAnnotationInfo((AnnotatableElement)newValue);
 				return;
 			case SexecPackage.EXECUTION_NODE__ABSTRACT:
 				setAbstract((Boolean)newValue);
@@ -640,6 +701,9 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 			case SexecPackage.EXECUTION_NODE__ANNOTATIONS:
 				getAnnotations().clear();
 				return;
+			case SexecPackage.EXECUTION_NODE__ANNOTATION_INFO:
+				setAnnotationInfo((AnnotatableElement)null);
+				return;
 			case SexecPackage.EXECUTION_NODE__ABSTRACT:
 				setAbstract(ABSTRACT_EDEFAULT);
 				return;
@@ -681,10 +745,12 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 		switch (featureID) {
 			case SexecPackage.EXECUTION_NODE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case SexecPackage.EXECUTION_NODE__ID:
-				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 			case SexecPackage.EXECUTION_NODE__ANNOTATIONS:
 				return annotations != null && !annotations.isEmpty();
+			case SexecPackage.EXECUTION_NODE__ANNOTATION_INFO:
+				return annotationInfo != null;
+			case SexecPackage.EXECUTION_NODE__ID:
+				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 			case SexecPackage.EXECUTION_NODE__ABSTRACT:
 				return abstract_ != ABSTRACT_EDEFAULT;
 			case SexecPackage.EXECUTION_NODE__VISIBLE:
@@ -722,13 +788,14 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 		}
 		if (baseClass == AnnotatableElement.class) {
 			switch (derivedFeatureID) {
+				case SexecPackage.EXECUTION_NODE__ANNOTATIONS: return TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS;
+				case SexecPackage.EXECUTION_NODE__ANNOTATION_INFO: return TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO;
 				default: return -1;
 			}
 		}
 		if (baseClass == PackageMember.class) {
 			switch (derivedFeatureID) {
 				case SexecPackage.EXECUTION_NODE__ID: return TypesPackage.PACKAGE_MEMBER__ID;
-				case SexecPackage.EXECUTION_NODE__ANNOTATIONS: return TypesPackage.PACKAGE_MEMBER__ANNOTATIONS;
 				default: return -1;
 			}
 		}
@@ -770,13 +837,14 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 		}
 		if (baseClass == AnnotatableElement.class) {
 			switch (baseFeatureID) {
+				case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS: return SexecPackage.EXECUTION_NODE__ANNOTATIONS;
+				case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO: return SexecPackage.EXECUTION_NODE__ANNOTATION_INFO;
 				default: return -1;
 			}
 		}
 		if (baseClass == PackageMember.class) {
 			switch (baseFeatureID) {
 				case TypesPackage.PACKAGE_MEMBER__ID: return SexecPackage.EXECUTION_NODE__ID;
-				case TypesPackage.PACKAGE_MEMBER__ANNOTATIONS: return SexecPackage.EXECUTION_NODE__ANNOTATIONS;
 				default: return -1;
 			}
 		}

@@ -444,15 +444,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getParameter_Annotations() {
-		return (EReference)parameterEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -646,15 +637,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPackageMember_Annotations() {
-		return (EReference)packageMemberEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getDomain() {
 		return domainEClass;
 	}
@@ -711,6 +693,24 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 */
 	public EClass getAnnotatableElement() {
 		return annotatableElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAnnotatableElement_Annotations() {
+		return (EReference)annotatableElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAnnotatableElement_AnnotationInfo() {
+		return (EReference)annotatableElementEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -827,7 +827,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		createEReference(parameterEClass, PARAMETER__OWNING_OPERATION);
 		createEAttribute(parameterEClass, PARAMETER__VAR_ARGS);
 		createEAttribute(parameterEClass, PARAMETER__OPTIONAL);
-		createEReference(parameterEClass, PARAMETER__ANNOTATIONS);
 
 		typedElementEClass = createEClass(TYPED_ELEMENT);
 		createEReference(typedElementEClass, TYPED_ELEMENT__TYPE);
@@ -860,7 +859,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		packageMemberEClass = createEClass(PACKAGE_MEMBER);
 		createEAttribute(packageMemberEClass, PACKAGE_MEMBER__ID);
-		createEReference(packageMemberEClass, PACKAGE_MEMBER__ANNOTATIONS);
 
 		domainEClass = createEClass(DOMAIN);
 		createEAttribute(domainEClass, DOMAIN__DOMAIN_ID);
@@ -872,6 +870,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		createEReference(annotationEClass, ANNOTATION__ARGUMENTS);
 
 		annotatableElementEClass = createEClass(ANNOTATABLE_ELEMENT);
+		createEReference(annotatableElementEClass, ANNOTATABLE_ELEMENT__ANNOTATIONS);
+		createEReference(annotatableElementEClass, ANNOTATABLE_ELEMENT__ANNOTATION_INFO);
 
 		arrayTypeSpecifierEClass = createEClass(ARRAY_TYPE_SPECIFIER);
 		createEAttribute(arrayTypeSpecifierEClass, ARRAY_TYPE_SPECIFIER__SIZE);
@@ -973,7 +973,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEReference(getParameter_OwningOperation(), this.getOperation(), this.getOperation_Parameters(), "owningOperation", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParameter_VarArgs(), ecorePackage.getEBoolean(), "varArgs", "false", 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParameter_Optional(), ecorePackage.getEBoolean(), "optional", "false", 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getParameter_Annotations(), this.getAnnotation(), null, "annotations", null, 0, -1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typedElementEClass, TypedElement.class, "TypedElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypedElement_Type(), this.getType(), null, "type", null, 0, 1, TypedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -1008,7 +1007,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		initEClass(packageMemberEClass, PackageMember.class, "PackageMember", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPackageMember_Id(), ecorePackage.getEString(), "id", null, 0, 1, PackageMember.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getPackageMember_Annotations(), this.getAnnotation(), null, "annotations", null, 0, -1, PackageMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(domainEClass, Domain.class, "Domain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDomain_DomainID(), ecorePackage.getEString(), "domainID", null, 0, 1, Domain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1019,9 +1017,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEReference(getAnnotation_Type(), this.getAnnotationType(), null, "type", null, 0, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAnnotation_Arguments(), this.getExpression(), null, "arguments", null, 0, -1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(annotatableElementEClass, AnnotatableElement.class, "AnnotatableElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		addEOperation(annotatableElementEClass, this.getAnnotation(), "getAnnotations", 0, -1, IS_UNIQUE, IS_ORDERED);
+		initEClass(annotatableElementEClass, AnnotatableElement.class, "AnnotatableElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAnnotatableElement_Annotations(), this.getAnnotation(), null, "annotations", null, 0, -1, AnnotatableElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAnnotatableElement_AnnotationInfo(), this.getAnnotatableElement(), null, "annotationInfo", null, 0, 1, AnnotatableElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(annotatableElementEClass, this.getAnnotation(), "getAnnotationOfType", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "typeName", 0, 1, IS_UNIQUE, IS_ORDERED);

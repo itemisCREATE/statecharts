@@ -6,35 +6,37 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.yakindu.base.base.impl.NamedElementImpl;
+
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Annotation;
-import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.TypesPackage;
-import org.yakindu.base.types.TypesUtil;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Package Member</b></em>'.
+ * An implementation of the model object '<em><b>Annotatable Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.yakindu.base.types.impl.PackageMemberImpl#getAnnotations <em>Annotations</em>}</li>
- *   <li>{@link org.yakindu.base.types.impl.PackageMemberImpl#getAnnotationInfo <em>Annotation Info</em>}</li>
- *   <li>{@link org.yakindu.base.types.impl.PackageMemberImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.AnnotatableElementImpl#getAnnotations <em>Annotations</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.AnnotatableElementImpl#getAnnotationInfo <em>Annotation Info</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class PackageMemberImpl extends NamedElementImpl implements PackageMember {
+public class AnnotatableElementImpl extends EObjectImpl implements AnnotatableElement {
 	/**
 	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -56,21 +58,11 @@ public class PackageMemberImpl extends NamedElementImpl implements PackageMember
 	protected AnnotatableElement annotationInfo;
 
 	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String ID_EDEFAULT = null;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected PackageMemberImpl() {
+	protected AnnotatableElementImpl() {
 		super();
 	}
 
@@ -81,10 +73,9 @@ public class PackageMemberImpl extends NamedElementImpl implements PackageMember
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TypesPackage.Literals.PACKAGE_MEMBER;
+		return TypesPackage.Literals.ANNOTATABLE_ELEMENT;
 	}
 
-	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -92,7 +83,7 @@ public class PackageMemberImpl extends NamedElementImpl implements PackageMember
 	 */
 	public EList<Annotation> getAnnotations() {
 		if (annotations == null) {
-			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, TypesPackage.PACKAGE_MEMBER__ANNOTATIONS);
+			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS);
 		}
 		return annotations;
 	}
@@ -115,7 +106,7 @@ public class PackageMemberImpl extends NamedElementImpl implements PackageMember
 		AnnotatableElement oldAnnotationInfo = annotationInfo;
 		annotationInfo = newAnnotationInfo;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.PACKAGE_MEMBER__ANNOTATION_INFO, oldAnnotationInfo, newAnnotationInfo);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO, oldAnnotationInfo, newAnnotationInfo);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -130,14 +121,14 @@ public class PackageMemberImpl extends NamedElementImpl implements PackageMember
 		if (newAnnotationInfo != annotationInfo) {
 			NotificationChain msgs = null;
 			if (annotationInfo != null)
-				msgs = ((InternalEObject)annotationInfo).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.PACKAGE_MEMBER__ANNOTATION_INFO, null, msgs);
+				msgs = ((InternalEObject)annotationInfo).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO, null, msgs);
 			if (newAnnotationInfo != null)
-				msgs = ((InternalEObject)newAnnotationInfo).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.PACKAGE_MEMBER__ANNOTATION_INFO, null, msgs);
+				msgs = ((InternalEObject)newAnnotationInfo).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO, null, msgs);
 			msgs = basicSetAnnotationInfo(newAnnotationInfo, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.PACKAGE_MEMBER__ANNOTATION_INFO, newAnnotationInfo, newAnnotationInfo));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO, newAnnotationInfo, newAnnotationInfo));
 	}
 
 	/**
@@ -159,22 +150,12 @@ public class PackageMemberImpl extends NamedElementImpl implements PackageMember
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TypesPackage.PACKAGE_MEMBER__ANNOTATIONS:
+			case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS:
 				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
-			case TypesPackage.PACKAGE_MEMBER__ANNOTATION_INFO:
+			case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO:
 				return basicSetAnnotationInfo(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	@Override
-	public String getId() {
-		return TypesUtil.computeQID(this);
 	}
 
 	/**
@@ -185,12 +166,10 @@ public class PackageMemberImpl extends NamedElementImpl implements PackageMember
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypesPackage.PACKAGE_MEMBER__ANNOTATIONS:
+			case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS:
 				return getAnnotations();
-			case TypesPackage.PACKAGE_MEMBER__ANNOTATION_INFO:
+			case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO:
 				return getAnnotationInfo();
-			case TypesPackage.PACKAGE_MEMBER__ID:
-				return getId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -204,11 +183,11 @@ public class PackageMemberImpl extends NamedElementImpl implements PackageMember
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypesPackage.PACKAGE_MEMBER__ANNOTATIONS:
+			case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS:
 				getAnnotations().clear();
 				getAnnotations().addAll((Collection<? extends Annotation>)newValue);
 				return;
-			case TypesPackage.PACKAGE_MEMBER__ANNOTATION_INFO:
+			case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO:
 				setAnnotationInfo((AnnotatableElement)newValue);
 				return;
 		}
@@ -223,10 +202,10 @@ public class PackageMemberImpl extends NamedElementImpl implements PackageMember
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypesPackage.PACKAGE_MEMBER__ANNOTATIONS:
+			case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS:
 				getAnnotations().clear();
 				return;
-			case TypesPackage.PACKAGE_MEMBER__ANNOTATION_INFO:
+			case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO:
 				setAnnotationInfo((AnnotatableElement)null);
 				return;
 		}
@@ -241,48 +220,12 @@ public class PackageMemberImpl extends NamedElementImpl implements PackageMember
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypesPackage.PACKAGE_MEMBER__ANNOTATIONS:
+			case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS:
 				return annotations != null && !annotations.isEmpty();
-			case TypesPackage.PACKAGE_MEMBER__ANNOTATION_INFO:
+			case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO:
 				return annotationInfo != null;
-			case TypesPackage.PACKAGE_MEMBER__ID:
-				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 		}
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == AnnotatableElement.class) {
-			switch (derivedFeatureID) {
-				case TypesPackage.PACKAGE_MEMBER__ANNOTATIONS: return TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS;
-				case TypesPackage.PACKAGE_MEMBER__ANNOTATION_INFO: return TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO;
-				default: return -1;
-			}
-		}
-		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == AnnotatableElement.class) {
-			switch (baseFeatureID) {
-				case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS: return TypesPackage.PACKAGE_MEMBER__ANNOTATIONS;
-				case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO: return TypesPackage.PACKAGE_MEMBER__ANNOTATION_INFO;
-				default: return -1;
-			}
-		}
-		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-} //PackageMemberImpl
+} //AnnotatableElementImpl

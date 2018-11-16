@@ -24,10 +24,9 @@ StateRoot:
 
 TransitionRoot:
 	'@@transition@@' def=TransitionSpecification;
-// ---- start rules ----
+	// ---- start rules ----
 // Define the starting points used by the statechart integration. These rules hook in the concrete rules of the specific grammar.
 //
-
 StatechartSpecification:
 	{StatechartSpecification} ('namespace' namespace=FQN)?
 	(annotations+=Annotation)*
@@ -46,44 +45,41 @@ StatechartScope:
 	InterfaceScope | InternalScope | ImportScope;
 
 InterfaceScope:
-	{InterfaceScope} 'interface' (name=IDWithKeywords)? ':' (members+=InterfaceScopeDeclaration)*;
+	{InterfaceScope} 'interface' (name=IDWithKeywords)? ':' (members+=ScopeDeclaration)*;
 
-InterfaceScopeDeclaration returns types::Declaration:
-	EventDefinition | VariableDefinition | TypeAliasDefinition | OperationDefinition;
+ScopeDeclaration returns types::AnnotatableElement:
+	{types::AnnotatableElement} annotations+=Annotation*
+	(
+		{VariableDefinition.annotationInfo=current} 
+		(const?='const' | 'var') ((readonly?='readonly')?) name=IDWithKeywords
+		':'	typeSpecifier=TypeSpecifier ('=' initialValue=Expression)?
+	|
+		{EventDefinition.annotationInfo=current}
+		(direction=Direction)? 'event' name=(ID | Keywords) (':' typeSpecifier=TypeSpecifier)?
+	|
+		{TypeAliasDefinition.annotationInfo=current} 
+		'alias' name=IDWithKeywords ':' typeSpecifier=TypeSpecifier
+	|
+		{OperationDefinition.annotationInfo=current}
+		'operation' name=IDWithKeywords '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')' 
+		(':' typeSpecifier=TypeSpecifier)?
+	);
 
 InternalScope:
-	{InternalScope} 'internal' ':' (members+=(InternalScopeDeclaration | LocalReaction))*
-;
-InternalScopeDeclaration returns types::Declaration:
-	EventDefinition | VariableDefinition | OperationDefinition | TypeAliasDefinition
-;
-ImportScope:
-	 {ImportScope} 'import' ':' imports+=STRING*;
+	{InternalScope} 'internal' ':' (members+=(ScopeDeclaration | LocalReaction))*;
 
-EventDefinition:
-	(direction=Direction)? 'event' name=(ID | Keywords) (':' typeSpecifier=TypeSpecifier)?;
+ImportScope:
+	{ImportScope} 'import' ':' imports+=STRING*;
 
 enum Direction returns types::Direction:
 	IN='in' | OUT='out';
 
-VariableDefinition:
-	{VariableDefinition} (const?='const'|'var') ((readonly?='readonly')?) name=IDWithKeywords ':' typeSpecifier=TypeSpecifier
-	('=' initialValue=Expression)?;  
-	
-TypeAliasDefinition:
-	{TypeAliasDefinition} 'alias' name=IDWithKeywords ':' typeSpecifier=TypeSpecifier;
-
-OperationDefinition:
-	{OperationDefinition} 
-	'operation' name=IDWithKeywords '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')' (':'
-	typeSpecifier=TypeSpecifier)?;
-	
 Annotation returns types::Annotation:
-	'@' type=[types::AnnotationType|QID] ('('(arguments+=ConditionalExpression (',' arguments+=ConditionalExpression)*)? ')')?
-;
+	'@' type=[types::AnnotationType|QID] ('(' (arguments+=ConditionalExpression (','
+	arguments+=ConditionalExpression)*)? ')')?;
 
 Parameter returns types::Parameter:
-	 name=IDWithKeywords (varArgs?='...')? ':' typeSpecifier=TypeSpecifier;
+	name=IDWithKeywords (varArgs?='...')? ':' typeSpecifier=TypeSpecifier;
 
 LocalReaction:
 	(trigger=ReactionTrigger) => ('/' effect=ReactionEffect);
@@ -120,21 +116,16 @@ ExitPointSpec:
 EventSpec:
 	RegularEventSpec | TimeEventSpec | BuiltinEventSpec;
 
-// Use SimpleFeatureCall for eventSpec to avoid guard ambiguity with array access
+	// Use SimpleFeatureCall for eventSpec to avoid guard ambiguity with array access
 RegularEventSpec:
 	event=SimpleFeatureCall;
 
 SimpleFeatureCall returns types::Expression:
-	SimpleElementReferenceExpression ({exp::FeatureCall.owner=current} '.' feature=[types::Declaration]
-	(=> operationCall?='('
-	(arguments+=Argument(',' arguments+=Argument)*)?
-	')')?)*;
+	SimpleElementReferenceExpression ({exp::FeatureCall.owner=current} '.' feature=[types::Declaration] (=>
+	operationCall?='(' (arguments+=Argument (',' arguments+=Argument)*)? ')')?)*;
 
 SimpleElementReferenceExpression returns exp::ElementReferenceExpression:
-	reference=[ecore::EObject|ID]
-	(=> operationCall?='('
-	(arguments+=Argument (',' arguments+=Argument)*)?
-	')')?;
+	reference=[ecore::EObject|ID] (=> operationCall?='(' (arguments+=Argument (',' arguments+=Argument)*)? ')')?;
 
 TimeEventSpec:
 	type=TimeEventType value=ConditionalExpression unit=TimeUnit;
@@ -171,17 +162,14 @@ enum TimeUnit:
 	second='s' | millisecond='ms' | microsecond='us' | nanosecond='ns';
 
 IDWithKeywords:
-	ID | TriggerKeywords | Keywords
-;
+	ID | TriggerKeywords | Keywords;
 
 Keywords:
-	 'namespace' | 'interface' | 'internal' |'import' | 'event' | 'local' | 'in' | 'out' | 'const' | 'var' | 'readonly' | 
-	'operation' | 'default' | 'else' | 'raise' | 'valueof' | 'active' | 's' | 'ms' | 'us' | 'ns';
+	'namespace' | 'interface' | 'internal' | 'import' | 'event' | 'local' | 'in' | 'out' | 'const' | 'var' | 'readonly'
+	| 'operation' | 'default' | 'else' | 'raise' | 'valueof' | 'active' | 's' | 'ms' | 'us' | 'ns';
 
 TriggerKeywords:
-	 'every' | 'always' | 'oncycle' | 'after' | 'exit' | 'entry'
-;
-
+	'every' | 'always' | 'oncycle' | 'after' | 'exit' | 'entry';
 
 FQN:
 	IDWithKeywords ('.' IDWithKeywords)*;

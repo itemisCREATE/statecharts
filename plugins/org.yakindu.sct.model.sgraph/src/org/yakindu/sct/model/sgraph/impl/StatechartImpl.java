@@ -30,6 +30,7 @@ import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Annotation;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactiveElement;
@@ -54,6 +55,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getDomainID <em>Domain ID</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getAnnotations <em>Annotations</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getAnnotationInfo <em>Annotation Info</em>}</li>
  * </ul>
  *
  * @generated
@@ -169,6 +171,16 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	 * @ordered
 	 */
 	protected EList<Annotation> annotations;
+
+	/**
+	 * The cached value of the '{@link #getAnnotationInfo() <em>Annotation Info</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAnnotationInfo()
+	 * @generated
+	 * @ordered
+	 */
+	protected AnnotatableElement annotationInfo;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -321,9 +333,52 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	 */
 	public EList<Annotation> getAnnotations() {
 		if (annotations == null) {
-			annotations = new EObjectContainmentEList.Resolving<Annotation>(Annotation.class, this, SGraphPackage.STATECHART__ANNOTATIONS);
+			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, SGraphPackage.STATECHART__ANNOTATIONS);
 		}
 		return annotations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AnnotatableElement getAnnotationInfo() {
+		return annotationInfo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetAnnotationInfo(AnnotatableElement newAnnotationInfo, NotificationChain msgs) {
+		AnnotatableElement oldAnnotationInfo = annotationInfo;
+		annotationInfo = newAnnotationInfo;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SGraphPackage.STATECHART__ANNOTATION_INFO, oldAnnotationInfo, newAnnotationInfo);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAnnotationInfo(AnnotatableElement newAnnotationInfo) {
+		if (newAnnotationInfo != annotationInfo) {
+			NotificationChain msgs = null;
+			if (annotationInfo != null)
+				msgs = ((InternalEObject)annotationInfo).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SGraphPackage.STATECHART__ANNOTATION_INFO, null, msgs);
+			if (newAnnotationInfo != null)
+				msgs = ((InternalEObject)newAnnotationInfo).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SGraphPackage.STATECHART__ANNOTATION_INFO, null, msgs);
+			msgs = basicSetAnnotationInfo(newAnnotationInfo, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.STATECHART__ANNOTATION_INFO, newAnnotationInfo, newAnnotationInfo));
 	}
 
 	/**
@@ -371,6 +426,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				return ((InternalEList<?>)getRegions()).basicRemove(otherEnd, msgs);
 			case SGraphPackage.STATECHART__ANNOTATIONS:
 				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
+			case SGraphPackage.STATECHART__ANNOTATION_INFO:
+				return basicSetAnnotationInfo(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -398,6 +455,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				return getDomainID();
 			case SGraphPackage.STATECHART__ANNOTATIONS:
 				return getAnnotations();
+			case SGraphPackage.STATECHART__ANNOTATION_INFO:
+				return getAnnotationInfo();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -434,6 +493,9 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				getAnnotations().clear();
 				getAnnotations().addAll((Collection<? extends Annotation>)newValue);
 				return;
+			case SGraphPackage.STATECHART__ANNOTATION_INFO:
+				setAnnotationInfo((AnnotatableElement)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -466,6 +528,9 @@ public class StatechartImpl extends SpecificationElementImpl implements
 			case SGraphPackage.STATECHART__ANNOTATIONS:
 				getAnnotations().clear();
 				return;
+			case SGraphPackage.STATECHART__ANNOTATION_INFO:
+				setAnnotationInfo((AnnotatableElement)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -493,6 +558,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				return DOMAIN_ID_EDEFAULT == null ? domainID != null : !DOMAIN_ID_EDEFAULT.equals(domainID);
 			case SGraphPackage.STATECHART__ANNOTATIONS:
 				return annotations != null && !annotations.isEmpty();
+			case SGraphPackage.STATECHART__ANNOTATION_INFO:
+				return annotationInfo != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -542,6 +609,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 		}
 		if (baseClass == AnnotatableElement.class) {
 			switch (derivedFeatureID) {
+				case SGraphPackage.STATECHART__ANNOTATIONS: return TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS;
+				case SGraphPackage.STATECHART__ANNOTATION_INFO: return TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO;
 				default: return -1;
 			}
 		}
@@ -593,6 +662,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 		}
 		if (baseClass == AnnotatableElement.class) {
 			switch (baseFeatureID) {
+				case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS: return SGraphPackage.STATECHART__ANNOTATIONS;
+				case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO: return SGraphPackage.STATECHART__ANNOTATION_INFO;
 				default: return -1;
 			}
 		}

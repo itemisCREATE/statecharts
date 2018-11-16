@@ -36,9 +36,7 @@
     <genClasses ecoreClass="sgraph.ecore#//Choice">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//Choice/kind"/>
     </genClasses>
-    <genClasses ecoreClass="sgraph.ecore#//Statechart">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Statechart/annotations"/>
-    </genClasses>
+    <genClasses ecoreClass="sgraph.ecore#//Statechart"/>
     <genClasses ecoreClass="sgraph.ecore#//Entry">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//Entry/kind"/>
     </genClasses>

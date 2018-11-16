@@ -21,6 +21,7 @@ import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sexec.SexecPackage;
@@ -488,6 +489,9 @@ public class ExecutionStateItemProvider
 		Object childObject = child;
 
 		boolean qualify =
+			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
+			childFeature == TypesPackage.Literals.COMPLEX_TYPE__FEATURES ||
+			childFeature == TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS ||
 			childFeature == SexecPackage.Literals.EXECUTION_NODE__REACT_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_NODE__LOCAL_REACT_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCES ||

@@ -91,22 +91,31 @@ public interface TypesPackage extends EPackage {
 	int PACKAGE_MEMBER__NAME = BasePackage.NAMED_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE_MEMBER__ID = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE_MEMBER__ANNOTATIONS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int PACKAGE_MEMBER__ANNOTATIONS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE_MEMBER__ANNOTATION_INFO = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE_MEMBER__ID = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Package Member</em>' class.
@@ -115,7 +124,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE_MEMBER_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int PACKAGE_MEMBER_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -127,15 +136,6 @@ public interface TypesPackage extends EPackage {
 	int PACKAGE__NAME = PACKAGE_MEMBER__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__ID = PACKAGE_MEMBER__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -143,6 +143,24 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int PACKAGE__ANNOTATIONS = PACKAGE_MEMBER__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__ANNOTATION_INFO = PACKAGE_MEMBER__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__ID = PACKAGE_MEMBER__ID;
 
 	/**
 	 * The feature id for the '<em><b>Domain ID</b></em>' attribute.
@@ -240,15 +258,6 @@ public interface TypesPackage extends EPackage {
 	int TYPE__NAME = PACKAGE_MEMBER__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE__ID = PACKAGE_MEMBER__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -256,6 +265,24 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE__ANNOTATIONS = PACKAGE_MEMBER__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE__ANNOTATION_INFO = PACKAGE_MEMBER__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE__ID = PACKAGE_MEMBER__ID;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -358,22 +385,31 @@ public interface TypesPackage extends EPackage {
 	int DECLARATION__NAME = TYPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DECLARATION__ID = TYPED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARATION__ANNOTATIONS = TYPED_ELEMENT_FEATURE_COUNT + 2;
+	int DECLARATION__ANNOTATIONS = TYPED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARATION__ANNOTATION_INFO = TYPED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARATION__ID = TYPED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -382,7 +418,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARATION__STATIC = TYPED_ELEMENT_FEATURE_COUNT + 3;
+	int DECLARATION__STATIC = TYPED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Declaration</em>' class.
@@ -391,7 +427,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARATION_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 4;
+	int DECLARATION_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -421,15 +457,6 @@ public interface TypesPackage extends EPackage {
 	int OPERATION__NAME = DECLARATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__ID = DECLARATION__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -437,6 +464,24 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION__ANNOTATIONS = DECLARATION__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__ANNOTATION_INFO = DECLARATION__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__ID = DECLARATION__ID;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -511,15 +556,6 @@ public interface TypesPackage extends EPackage {
 	int PROPERTY__NAME = DECLARATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__ID = DECLARATION__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -527,6 +563,24 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY__ANNOTATIONS = DECLARATION__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__ANNOTATION_INFO = DECLARATION__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__ID = DECLARATION__ID;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -601,13 +655,31 @@ public interface TypesPackage extends EPackage {
 	int PARAMETER__NAME = TYPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER__ANNOTATIONS = TYPED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER__ANNOTATION_INFO = TYPED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Owning Operation</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER__OWNING_OPERATION = TYPED_ELEMENT_FEATURE_COUNT + 1;
+	int PARAMETER__OWNING_OPERATION = TYPED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Var Args</b></em>' attribute.
@@ -616,7 +688,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER__VAR_ARGS = TYPED_ELEMENT_FEATURE_COUNT + 2;
+	int PARAMETER__VAR_ARGS = TYPED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Optional</b></em>' attribute.
@@ -625,16 +697,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER__OPTIONAL = TYPED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER__ANNOTATIONS = TYPED_ELEMENT_FEATURE_COUNT + 4;
+	int PARAMETER__OPTIONAL = TYPED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Parameter</em>' class.
@@ -643,7 +706,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 5;
+	int PARAMETER_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 6;
 
 
 	/**
@@ -721,15 +784,6 @@ public interface TypesPackage extends EPackage {
 	int EVENT__NAME = DECLARATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT__ID = DECLARATION__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -737,6 +791,24 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int EVENT__ANNOTATIONS = DECLARATION__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT__ANNOTATION_INFO = DECLARATION__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT__ID = DECLARATION__ID;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -816,15 +888,6 @@ public interface TypesPackage extends EPackage {
 	int COMPLEX_TYPE__NAME = TYPE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_TYPE__ID = TYPE__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -832,6 +895,24 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPLEX_TYPE__ANNOTATIONS = TYPE__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_TYPE__ANNOTATION_INFO = TYPE__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_TYPE__ID = TYPE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -897,15 +978,6 @@ public interface TypesPackage extends EPackage {
 	int ENUMERATION_TYPE__NAME = COMPLEX_TYPE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION_TYPE__ID = COMPLEX_TYPE__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -913,6 +985,24 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATION_TYPE__ANNOTATIONS = COMPLEX_TYPE__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION_TYPE__ANNOTATION_INFO = COMPLEX_TYPE__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION_TYPE__ID = COMPLEX_TYPE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -987,15 +1077,6 @@ public interface TypesPackage extends EPackage {
 	int PRIMITIVE_TYPE__NAME = TYPE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRIMITIVE_TYPE__ID = TYPE__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1003,6 +1084,24 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int PRIMITIVE_TYPE__ANNOTATIONS = TYPE__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE__ANNOTATION_INFO = TYPE__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE__ID = TYPE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1078,15 +1177,6 @@ public interface TypesPackage extends EPackage {
 	int ENUMERATOR__NAME = DECLARATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATOR__ID = DECLARATION__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1094,6 +1184,24 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATOR__ANNOTATIONS = DECLARATION__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATOR__ANNOTATION_INFO = DECLARATION__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATOR__ID = DECLARATION__ID;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -1152,15 +1260,6 @@ public interface TypesPackage extends EPackage {
 	int TYPE_PARAMETER__NAME = TYPE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_PARAMETER__ID = TYPE__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1168,6 +1267,24 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_PARAMETER__ANNOTATIONS = TYPE__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_PARAMETER__ANNOTATION_INFO = TYPE__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_PARAMETER__ID = TYPE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1307,22 +1424,31 @@ public interface TypesPackage extends EPackage {
 	int TYPE_ALIAS__NAME = TYPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_ALIAS__ID = TYPED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__ANNOTATIONS = TYPED_ELEMENT_FEATURE_COUNT + 2;
+	int TYPE_ALIAS__ANNOTATIONS = TYPED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS__ANNOTATION_INFO = TYPED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS__ID = TYPED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1331,7 +1457,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__ABSTRACT = TYPED_ELEMENT_FEATURE_COUNT + 3;
+	int TYPE_ALIAS__ABSTRACT = TYPED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Visible</b></em>' attribute.
@@ -1340,7 +1466,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__VISIBLE = TYPED_ELEMENT_FEATURE_COUNT + 4;
+	int TYPE_ALIAS__VISIBLE = TYPED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
@@ -1349,7 +1475,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__SUPER_TYPES = TYPED_ELEMENT_FEATURE_COUNT + 5;
+	int TYPE_ALIAS__SUPER_TYPES = TYPED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Type Alias</em>' class.
@@ -1358,7 +1484,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 6;
+	int TYPE_ALIAS_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.AnnotationImpl <em>Annotation</em>}' class.
@@ -1398,14 +1524,32 @@ public interface TypesPackage extends EPackage {
 	int ANNOTATION_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.base.types.AnnotatableElement <em>Annotatable Element</em>}' class.
+	 * The meta object id for the '{@link org.yakindu.base.types.impl.AnnotatableElementImpl <em>Annotatable Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.types.AnnotatableElement
+	 * @see org.yakindu.base.types.impl.AnnotatableElementImpl
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getAnnotatableElement()
 	 * @generated
 	 */
 	int ANNOTATABLE_ELEMENT = 19;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATABLE_ELEMENT__ANNOTATIONS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATABLE_ELEMENT__ANNOTATION_INFO = 1;
 
 	/**
 	 * The number of structural features of the '<em>Annotatable Element</em>' class.
@@ -1414,7 +1558,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATABLE_ELEMENT_FEATURE_COUNT = 0;
+	int ANNOTATABLE_ELEMENT_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.ArrayTypeSpecifierImpl <em>Array Type Specifier</em>}' class.
@@ -1482,15 +1626,6 @@ public interface TypesPackage extends EPackage {
 	int ANNOTATION_TYPE__NAME = TYPE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_TYPE__ID = TYPE__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1498,6 +1633,24 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int ANNOTATION_TYPE__ANNOTATIONS = TYPE__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_TYPE__ANNOTATION_INFO = TYPE__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_TYPE__ID = TYPE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1797,17 +1950,6 @@ public interface TypesPackage extends EPackage {
 	EAttribute getParameter_Optional();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.types.Parameter#getAnnotations <em>Annotations</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Annotations</em>'.
-	 * @see org.yakindu.base.types.Parameter#getAnnotations()
-	 * @see #getParameter()
-	 * @generated
-	 */
-	EReference getParameter_Annotations();
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.TypedElement <em>Typed Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2040,17 +2182,6 @@ public interface TypesPackage extends EPackage {
 	EAttribute getPackageMember_Id();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.types.PackageMember#getAnnotations <em>Annotations</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Annotations</em>'.
-	 * @see org.yakindu.base.types.PackageMember#getAnnotations()
-	 * @see #getPackageMember()
-	 * @generated
-	 */
-	EReference getPackageMember_Annotations();
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Domain <em>Domain</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2122,6 +2253,28 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getAnnotatableElement();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.types.AnnotatableElement#getAnnotations <em>Annotations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Annotations</em>'.
+	 * @see org.yakindu.base.types.AnnotatableElement#getAnnotations()
+	 * @see #getAnnotatableElement()
+	 * @generated
+	 */
+	EReference getAnnotatableElement_Annotations();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.types.AnnotatableElement#getAnnotationInfo <em>Annotation Info</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Annotation Info</em>'.
+	 * @see org.yakindu.base.types.AnnotatableElement#getAnnotationInfo()
+	 * @see #getAnnotatableElement()
+	 * @generated
+	 */
+	EReference getAnnotatableElement_AnnotationInfo();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.ArrayTypeSpecifier <em>Array Type Specifier</em>}'.
@@ -2391,14 +2544,6 @@ public interface TypesPackage extends EPackage {
 		EAttribute PARAMETER__OPTIONAL = eINSTANCE.getParameter_Optional();
 
 		/**
-		 * The meta object literal for the '<em><b>Annotations</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PARAMETER__ANNOTATIONS = eINSTANCE.getParameter_Annotations();
-
-		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.TypedElement <em>Typed Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2595,14 +2740,6 @@ public interface TypesPackage extends EPackage {
 		EAttribute PACKAGE_MEMBER__ID = eINSTANCE.getPackageMember_Id();
 
 		/**
-		 * The meta object literal for the '<em><b>Annotations</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PACKAGE_MEMBER__ANNOTATIONS = eINSTANCE.getPackageMember_Annotations();
-
-		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.DomainImpl <em>Domain</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2657,14 +2794,30 @@ public interface TypesPackage extends EPackage {
 		EReference ANNOTATION__ARGUMENTS = eINSTANCE.getAnnotation_Arguments();
 
 		/**
-		 * The meta object literal for the '{@link org.yakindu.base.types.AnnotatableElement <em>Annotatable Element</em>}' class.
+		 * The meta object literal for the '{@link org.yakindu.base.types.impl.AnnotatableElementImpl <em>Annotatable Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.yakindu.base.types.AnnotatableElement
+		 * @see org.yakindu.base.types.impl.AnnotatableElementImpl
 		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getAnnotatableElement()
 		 * @generated
 		 */
 		EClass ANNOTATABLE_ELEMENT = eINSTANCE.getAnnotatableElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Annotations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ANNOTATABLE_ELEMENT__ANNOTATIONS = eINSTANCE.getAnnotatableElement_Annotations();
+
+		/**
+		 * The meta object literal for the '<em><b>Annotation Info</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ANNOTATABLE_ELEMENT__ANNOTATION_INFO = eINSTANCE.getAnnotatableElement_AnnotationInfo();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.ArrayTypeSpecifierImpl <em>Array Type Specifier</em>}' class.
