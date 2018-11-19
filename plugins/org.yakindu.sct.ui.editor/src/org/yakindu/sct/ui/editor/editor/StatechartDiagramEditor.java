@@ -204,6 +204,8 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	protected void checkXtextNature() {
 		IFileEditorInput editorInput = (IFileEditorInput) getEditorInput();
+		if (editorInput == null || editorInput.getFile() == null)
+			return;
 		IProject project = editorInput.getFile().getProject();
 		if (project != null && !XtextProjectHelper.hasNature(project) && project.isAccessible()
 				&& !project.isHidden()) {
@@ -433,7 +435,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	@Override
 	public EObject getContextObject() {
-		if(getDiagram() == null || getDiagram().getElement() == null)
+		if (getDiagram() == null || getDiagram().getElement() == null)
 			return null;
 		EObject element = getDiagram().getElement();
 		return element;
@@ -451,7 +453,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		return super.isDirty() || (definitionSection != null && (definitionSection.getDefinition() != null
 				&& !definitionSection.getDefinition().equals(contextObject.getSpecification())));
 	}
-	
+
 	@Override
 	public void doSave(IProgressMonitor progressMonitor) {
 		if (definitionSection != null) {
