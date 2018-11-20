@@ -25,7 +25,9 @@ public class Guard {
 		statemachine = new GuardStatemachine();
 		timer = new VirtualTimer(200);
 		timer.schedulePeriodicalTask(new CycleTimeEventTask(statemachine), 200, 200);
+		
 		statemachine.init();
+		
 	}
 
 	@After

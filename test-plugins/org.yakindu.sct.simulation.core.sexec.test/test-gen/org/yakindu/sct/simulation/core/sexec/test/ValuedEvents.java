@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for ValuedEvents
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class ValuedEvents extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("ValuedEvents.sct");
@@ -26,13 +28,13 @@ public class ValuedEvents extends AbstractExecutionFlowTest {
 	@Test
 	public void valuedEventsTest() throws Exception {
 		interpreter.enter();
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(getString("myString").equals("sct"));
 		raiseEvent("integerEvent", 23l);
 		raiseEvent("booleanEvent", false);
 		raiseEvent("realEvent", 20l);
 		raiseEvent("stringEvent", "tool");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("D"));
 		assertTrue(isStateActive("D"));
 		assertTrue(isStateActive("D"));

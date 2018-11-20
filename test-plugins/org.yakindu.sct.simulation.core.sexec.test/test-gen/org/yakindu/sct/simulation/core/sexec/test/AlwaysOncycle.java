@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for AlwaysOncycle
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class AlwaysOncycle extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("AlwaysOncycle.sct");
@@ -27,17 +29,25 @@ public class AlwaysOncycle extends AbstractExecutionFlowTest {
 	public void alwaysOnCycleTest() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("StateA"));
-		while(getInteger("value") < 5l) {
-			interpreter.runCycle();
+		long count = 0l;
+		while(count < 5l) {
+			timer.timeLeap(getCyclePeriod());
 			assertTrue(isStateActive("StateA"));
+			count++;
 		}
-		interpreter.runCycle();
+		assertTrue((getInteger("value") == 5l));
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("StateB"));
-		while(getInteger("value") < 5l) {
-			interpreter.runCycle();
+		assertTrue(getInteger("value") == 0l);
+		count = 0l;
+		while(count < 5l) {
+			timer.timeLeap(getCyclePeriod());
 			assertTrue(isStateActive("StateB"));
+			count++;
 		}
-		interpreter.runCycle();
+		assertTrue((getInteger("value") == 5l));
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("StateA"));
+		assertTrue(getInteger("value") == 0l);
 	}
 }

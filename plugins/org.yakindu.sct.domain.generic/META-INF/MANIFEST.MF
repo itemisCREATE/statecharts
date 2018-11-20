@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Generic Domain
 Bundle-SymbolicName: org.yakindu.sct.domain.generic;singleton:=true
-Bundle-Version: 3.4.2.qualifier
+Bundle-Version: 3.4.3.qualifier
 Bundle-Activator: org.yakindu.sct.domain.generic.GenericDomainActivator
 Bundle-Vendor: statecharts.org
 Require-Bundle: org.eclipse.core.runtime,
@@ -14,3 +14,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.domain.generic
 Service-Component: OSGI-INF/component.xml
+Automatic-Module-Name: org.yakindu.sct.domain.generic

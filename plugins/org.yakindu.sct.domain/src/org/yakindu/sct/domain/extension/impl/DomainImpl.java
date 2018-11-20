@@ -170,7 +170,7 @@ public class DomainImpl implements IDomain {
 			}
 		}
 
-		if (modules.size() == 0) {
+		if (modules.size() == 0 && !FEATURE_GENERATOR.equals(feature)) {
 			// If no overriding modules are contributed for this feature use the defaults
 			return DomainRegistry.getDomain(BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral())
 					.getModule(feature, options);

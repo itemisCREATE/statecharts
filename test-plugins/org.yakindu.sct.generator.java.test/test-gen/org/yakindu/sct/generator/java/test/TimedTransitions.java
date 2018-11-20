@@ -26,7 +26,9 @@ public class TimedTransitions {
 		timer = new VirtualTimer(200);
 		timer.schedulePeriodicalTask(new CycleTimeEventTask(statemachine), 200, 200);
 		statemachine.setTimer(timer);
+		
 		statemachine.init();
+		
 	}
 
 	@After

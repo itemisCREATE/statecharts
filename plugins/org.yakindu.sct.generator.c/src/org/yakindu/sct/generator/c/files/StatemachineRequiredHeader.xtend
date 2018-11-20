@@ -24,6 +24,8 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+
 class StatemachineRequiredHeader implements IContentTemplate {
 
 	@Inject extension Naming cNaming
@@ -84,17 +86,17 @@ class StatemachineRequiredHeader implements IContentTemplate {
 		/*! 
 			This function will be called for each time event that is relevant for a state when a state will be entered.
 			\param evid An unique identifier of the event.
-			\time_ms The time in milli seconds
+			\time_ms The time in milliseconds
 			\periodic Indicates the the time event must be raised periodically until the timer is unset 
 		*/
-		extern void «setTimerFctID»(«scHandleDecl», const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
+		extern void «setTimerFctID»(«scHandleDecl», const «EVENT_TYPE» evid, const «INT_TYPE» time_ms, const «BOOL_TYPE» periodic);
 
 		/*! This function has to unset timers for the time events that are required by the state machine. */
 		/*! 
-			This function will be called for each time event taht is relevant for a state when a state will be left.
+			This function will be called for each time event that is relevant for a state when a state will be left.
 			\param evid An unique identifier of the event.
 		*/
-		extern void «unsetTimerFctID»(«scHandleDecl», const sc_eventid evid);
+		extern void «unsetTimerFctID»(«scHandleDecl», const «EVENT_TYPE» evid);
 		«ENDIF»
 		
 		

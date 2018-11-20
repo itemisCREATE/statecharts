@@ -16,7 +16,6 @@ import java.util.ArrayList
 import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.DoubleLiteral
-import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.IntLiteral
@@ -24,6 +23,7 @@ import org.yakindu.base.expressions.expressions.MultiplicativeOperator
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
+import org.yakindu.base.types.Expression
 import org.yakindu.base.types.typesystem.ITypeValueProvider
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionRegion
@@ -40,7 +40,6 @@ import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.TimeUnit
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 
 class SequenceBuilder {
@@ -367,26 +366,28 @@ class SequenceBuilder {
 			val exitScopes = s.parentScopes
 			exitScopes.removeAll(region.parentScopes)
 			exitScopes.remove(s)
-			exitScopes.fold(caseSeq,
-				[cs, exitScope|
-					{
-						if (exitScope instanceof ExecutionRegion && (exitScope as ExecutionRegion).historyVector !== null) {
-							// val execRegion = exitScope as ExecutionRegion
-							// cs.steps += execRegion.newSaveHistory
-						}
-						cs
-					}])
+			
+//			// TODO: remove as it has no effect
+//			exitScopes.fold(caseSeq,
+//				[cs, exitScope|
+//					{
+//						if (exitScope instanceof ExecutionRegion && (exitScope as ExecutionRegion).historyVector !== null) {
+//							// val execRegion = exitScope as ExecutionRegion
+//							// cs.steps += execRegion.newSaveHistory
+//						}
+//						cs
+//					}])
 
 			//Leave leaf
 			if (s.exitSequence !== null) {
 				caseSeq.steps += s.exitSequence.newCall
 			}
-
+			
 			// include exitAction calls up to the direct child level.
 			exitScopes.fold(caseSeq,
 				[cs, exitScope|
 					{
-						if (exitScope instanceof ExecutionState && s.stateVector.last == exitScope.stateVector.last) {
+						if (exitScope instanceof ExecutionState && s.impactVector.last == exitScope.impactVector.last) {
 							val execState = exitScope as ExecutionState
 							if(execState.exitAction !== null) cs.steps.add(execState.exitAction.newCall)
 							if(_addTraceSteps) cs.steps.add(execState.newTraceStateExited)
@@ -400,6 +401,7 @@ class SequenceBuilder {
 
 		return sSwitch
 	}
+
 
 	def defineStatechartExitSequence(ExecutionFlow flow, Statechart sc) {
 		val exitSequence = sexec.factory.createSequence

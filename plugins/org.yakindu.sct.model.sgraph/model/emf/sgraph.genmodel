@@ -16,7 +16,9 @@
       <genEnumLiterals ecoreEnumLiteral="sgraph.ecore#//ChoiceKind/dynamic"/>
       <genEnumLiterals ecoreEnumLiteral="sgraph.ecore#//ChoiceKind/static"/>
     </genEnums>
-    <genClasses image="false" ecoreClass="sgraph.ecore#//Pseudostate"/>
+    <genClasses image="false" ecoreClass="sgraph.ecore#//Pseudostate">
+      <genOperations ecoreOperation="sgraph.ecore#//Pseudostate/isDefault"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="sgraph.ecore#//Vertex">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference sgraph.ecore#//Vertex/parentRegion"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sgraph.ecore#//Vertex/incomingTransitions"/>
@@ -34,9 +36,7 @@
     <genClasses ecoreClass="sgraph.ecore#//Choice">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//Choice/kind"/>
     </genClasses>
-    <genClasses ecoreClass="sgraph.ecore#//Statechart">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Statechart/annotations"/>
-    </genClasses>
+    <genClasses ecoreClass="sgraph.ecore#//Statechart"/>
     <genClasses ecoreClass="sgraph.ecore#//Entry">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//Entry/kind"/>
     </genClasses>

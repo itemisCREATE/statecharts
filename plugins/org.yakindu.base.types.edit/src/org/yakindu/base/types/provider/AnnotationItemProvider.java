@@ -48,6 +48,7 @@ public class AnnotationItemProvider extends ItemProviderAdapter implements IEdit
 			super.getPropertyDescriptors(object);
 
 			addTypePropertyDescriptor(object);
+			addArgumentsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -66,6 +67,28 @@ public class AnnotationItemProvider extends ItemProviderAdapter implements IEdit
 				 getString("_UI_Annotation_type_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Annotation_type_feature", "_UI_Annotation_type"),
 				 TypesPackage.Literals.ANNOTATION__TYPE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Arguments feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addArgumentsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Annotation_arguments_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Annotation_arguments_feature", "_UI_Annotation_type"),
+				 TypesPackage.Literals.ANNOTATION__ARGUMENTS,
 				 true,
 				 false,
 				 true,

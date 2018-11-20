@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for IntegerExpressions
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class IntegerExpressions extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("IntegerExpressions.sct");
@@ -30,7 +32,7 @@ public class IntegerExpressions extends AbstractExecutionFlowTest {
 		assertTrue(getInteger("myInt1") == 10l);
 		assertTrue(getInteger("myInt2") == 5l);
 		raiseEvent("e1");
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue(getBoolean("less") == false);
 		assertTrue(getBoolean("greater") == true);
 		assertTrue(getBoolean("equalOrLess") == false);
@@ -48,5 +50,9 @@ public class IntegerExpressions extends AbstractExecutionFlowTest {
 		assertTrue(getInteger("plusAssign") == 12l);
 		assertTrue(getInteger("minusAssign") == - 8l );
 		assertTrue(getInteger("moduloAssign") == 0l);
+		assertTrue(getInteger("decrementAssign") == 0l);
+		assertTrue(getInteger("decrement") == 1l);
+		assertTrue(getInteger("incrementAssign") == 0l);
+		assertTrue(getInteger("increment") == 1l);
 	}
 }

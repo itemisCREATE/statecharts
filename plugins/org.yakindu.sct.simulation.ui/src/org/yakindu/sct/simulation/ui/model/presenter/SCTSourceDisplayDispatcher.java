@@ -57,6 +57,7 @@ public class SCTSourceDisplayDispatcher implements ISourceDisplay, IDebugEventSe
 			activeSourceDisplay = new SCTSourceDisplay(
 					(ISimulationEngine) newTarget.getAdapter(ISimulationEngine.class));
 		}
+		
 		activeSourceDisplay.displaySource(newTarget, page, forceSourceLookup);
 		activeDebugTarget = newTarget;
 	}

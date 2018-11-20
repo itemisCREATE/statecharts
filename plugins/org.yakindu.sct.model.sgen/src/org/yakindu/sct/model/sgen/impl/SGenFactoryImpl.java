@@ -28,7 +28,6 @@ import org.yakindu.sct.model.sgen.GeneratorConfiguration;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgen.ParameterTypes;
-import org.yakindu.sct.model.sgen.PropertyDefinition;
 import org.yakindu.sct.model.sgen.SGenFactory;
 import org.yakindu.sct.model.sgen.SGenPackage;
 import org.yakindu.sct.model.sgen.util.BuiltinExpressionsInterpreter;
@@ -98,7 +97,6 @@ public class SGenFactoryImpl extends EFactoryImpl implements SGenFactory {
 			case SGenPackage.FEATURE_PARAMETER_VALUE: return createFeatureParameterValue();
 			case SGenPackage.FEATURE_TYPE_LIBRARY: return createFeatureTypeLibrary();
 			case SGenPackage.DEPRECATABLE_ELEMENT: return createDeprecatableElement();
-			case SGenPackage.PROPERTY_DEFINITION: return createPropertyDefinition();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -223,16 +221,6 @@ public class SGenFactoryImpl extends EFactoryImpl implements SGenFactory {
 	public DeprecatableElement createDeprecatableElement() {
 		DeprecatableElementImpl deprecatableElement = new DeprecatableElementImpl();
 		return deprecatableElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public PropertyDefinition createPropertyDefinition() {
-		PropertyDefinitionImpl propertyDefinition = new PropertyDefinitionImpl();
-		return propertyDefinition;
 	}
 
 	/**

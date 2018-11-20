@@ -3,7 +3,7 @@
 package org.yakindu.sct.model.stext.stext;
 
 import org.eclipse.emf.common.util.EList;
-import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.types.Expression;
 import org.yakindu.sct.model.sgraph.Effect;
 
 /**
@@ -25,7 +25,7 @@ import org.yakindu.sct.model.sgraph.Effect;
 public interface ReactionEffect extends Effect {
 	/**
 	 * Returns the value of the '<em><b>Actions</b></em>' containment reference list.
-	 * The list contents are of type {@link org.yakindu.base.expressions.expressions.Expression}.
+	 * The list contents are of type {@link org.yakindu.base.types.Expression}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Actions</em>' containment reference list isn't clear,

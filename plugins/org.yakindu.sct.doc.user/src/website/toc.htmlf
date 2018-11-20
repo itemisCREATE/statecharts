@@ -1,7 +1,0 @@
-                {% if dynamic_page_hubdb_row.hs_path == "${h1.id}" %}
-                    <li class="active-branch"><span title="${h1.title}">${h1.title}</span>
-                        <ol>${h2.toc}</ol>
-                    </li>
-                {% else %}
-                    <li><a href="./${h1.id}" title="${h1.title}">${h1.title}</a></li>
-                {% endif %}

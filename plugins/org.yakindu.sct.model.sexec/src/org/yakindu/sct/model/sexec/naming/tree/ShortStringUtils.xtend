@@ -18,31 +18,31 @@ import java.util.Map
  *
  */
 class ShortStringUtils {
-	def public List<ShortString> getLongestElement(List<List<ShortString>> names) {
+	def List<ShortString> getLongestElement(List<List<ShortString>> names) {
 		names.sortBy[getLength].last
 	}
 	
-	def public getLength(List<ShortString> list) {
-		list.map[shortenedSize].reduce[a, b | a + b]
+	def getLength(List<ShortString> list) {
+		list.map[shortenedSize].reduce[a, b|a + b]
 	}
 	
-	def public int getMaxLength(List<List<ShortString>> names) {
+	def int getMaxLength(List<List<ShortString>> names) {
 		return names.map[getLength].max
 	}
 	
-	def public String join(List<ShortString> name) {
+	def String join(List<ShortString> name) {
 		val sb = new StringBuilder
-		
+
 		name.forEach[sb.append(toString)]
-		
+
 		sb.toString
 	}
 	
-	def public ShortString toShortString(StringTreeNode node, Map<StringTreeNode, ShortString> map) {
-		if(!map.containsKey(node)) {
+	def ShortString toShortString(StringTreeNode node, Map<StringTreeNode, ShortString> map) {
+		if (!map.containsKey(node)) {
 			map.put(node, new ShortString(node.data, node.getRoot.weight - node.weight + 1))
 		}
 		map.get(node)
-		
+
 	}
 }

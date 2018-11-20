@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for EventDrivenInternalEvent
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class EventDrivenInternalEvent extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("eventdriven/EventDrivenInternalEvent.sct");
@@ -30,7 +32,6 @@ public class EventDrivenInternalEvent extends AbstractExecutionFlowTest {
 		assertTrue(isStateActive("C"));
 		assertTrue(isStateActive("VALID"));
 		raiseEvent("start");
-		interpreter.runCycle();
 		assertTrue(isStateActive("B"));
 		assertTrue(isStateActive("D"));
 		assertTrue(isStateActive("VALID"));

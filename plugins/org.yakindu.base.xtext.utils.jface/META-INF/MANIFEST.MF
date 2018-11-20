@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Xtext JFace Integration (XJI)
 Bundle-SymbolicName: org.yakindu.base.xtext.utils.jface;singleton:=true
-Bundle-Version: 3.4.2.qualifier
+Bundle-Version: 3.4.3.qualifier
 Bundle-Vendor: statecharts.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.core.runtime,
@@ -57,3 +57,4 @@ Export-Package: org.yakindu.base.utils.jface.help;
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
 Bundle-Activator: org.yakindu.base.xtext.utils.jface.JFaceUtilsActivator
+Automatic-Module-Name: org.yakindu.base.xtext.utils.jface

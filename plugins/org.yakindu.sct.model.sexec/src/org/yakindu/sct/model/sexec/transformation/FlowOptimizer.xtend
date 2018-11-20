@@ -217,7 +217,7 @@ class FlowOptimizer {
 	}
 	
 	def inlineEffects(Method m) {
-		if (m != null) m.eAllContents.filter(Call).toList.forEach( call | call.inline )
+		if (m !== null) m.eAllContents.filter(Call).toList.forEach( call | call.inline )
 	}
 	
 	

@@ -52,7 +52,6 @@ import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
-import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.expressions.PostFixUnaryExpression;
@@ -61,6 +60,7 @@ import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Direction;
 import org.yakindu.base.types.Event;
+import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.TypesPackage;
@@ -89,7 +89,6 @@ import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImpor
 import org.yakindu.sct.model.stext.scoping.ImportedResourceCache;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
-import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
 import org.yakindu.sct.model.stext.stext.EntryPointSpec;
@@ -132,7 +131,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 	private static final String KEYWORD_ONCYCLE = "oncycle";
 	private static final String KEYWORD_ALWAYS = "always";
-	
+
 	@Inject
 	private ITypeSystemInferrer typeInferrer;
 	@Inject
@@ -151,13 +150,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	protected STextExtensions utils;
 	@Inject
 	private ImportedResourceCache resourceDescriptionCache;
-
-	@Check(CheckType.FAST)
-	public void checkExpression(VariableDefinition expression) {
-		if (expression.getType() == null || expression.getType().eIsProxy())
-			return;
-		typeInferrer.infer(expression, this);
-	}
 
 	@Check(CheckType.FAST)
 	public void checkExpression(TimeEventSpec expression) {
@@ -210,7 +202,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			warning(ISSUE_TRANSITION_WITHOUT_TRIGGER, trans, null, -1);
 		}
 	}
-	
+
 	@Check(CheckType.FAST)
 	public void checkAlwaysTransitionHasLowestPriority(RegularState state) {
 		Iterator<Transition> iterator = state.getOutgoingTransitions().iterator();
@@ -225,7 +217,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			if (trigger instanceof DefaultTrigger && iterator.hasNext()) {
 				warning(String.format(ALWAYS_TRUE_TRANSITION_USED, transition.getSpecification()), transition, null,
 						-1);
-				if(deadTransition == null) {
+				if (deadTransition == null) {
 					deadTransition = transition;
 				}
 			}
@@ -238,7 +230,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 					if (eventSpec instanceof AlwaysEvent && iterator.hasNext()) {
 						warning(String.format(ALWAYS_TRUE_TRANSITION_USED, getTransitionDeclaration(transition)),
 								transition, null, -1);
-						if(deadTransition == null) {
+						if (deadTransition == null) {
 							deadTransition = transition;
 						}
 					}
@@ -249,7 +241,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 	protected String getTransitionDeclaration(Transition transition) {
 		String specification = transition.getSpecification();
-		
+
 		if (KEYWORD_ALWAYS.contains(specification)) {
 			return KEYWORD_ALWAYS;
 		} else if (KEYWORD_ONCYCLE.contains(specification)) {
@@ -257,7 +249,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 		return specification;
 	}
-	
+
 	@Check(CheckType.FAST)
 	public void checkAlwaysAndDefaultTransitionInChoices(Choice choice) {
 		Transition deadTransition = null;
@@ -275,9 +267,9 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				EList<EventSpec> triggers = reactTrigger.getTriggers();
 				if (triggers.size() == 1 && reactTrigger.getGuard() == null) {
 					if (triggers.get(0) instanceof AlwaysEvent) {
-						if(i != size-1) {
-							warning(String.format(ALWAYS_TRUE_TRANSITION_USED, transition.getSpecification()), transition,
-									null, -1);
+						if (i != size - 1) {
+							warning(String.format(ALWAYS_TRUE_TRANSITION_USED, transition.getSpecification()),
+									transition, null, -1);
 						}
 						if (deadTransition == null) {
 							deadTransition = transition;
@@ -287,27 +279,28 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				}
 			}
 		}
-		
+
 		// if we got a dead transition, we need to re-check if a default was used before
-		if(deadTransition != null) {
-			for(int i = 0; i < deadTransitionIndex; i++) {
+		if (deadTransition != null) {
+			for (int i = 0; i < deadTransitionIndex; i++) {
 				Transition transition = outgoingTransitions.get(i);
 				Trigger trigger = transition.getTrigger();
-				if(trigger instanceof DefaultTrigger || trigger ==null) {
-					warning(String.format(DEAD_TRANSITION, getTransitionDeclaration(deadTransition)), transition, null, -1);
+				if (trigger instanceof DefaultTrigger || trigger == null) {
+					warning(String.format(DEAD_TRANSITION, getTransitionDeclaration(deadTransition)), transition, null,
+							-1);
 				}
 			}
 		}
 	}
-	
+
 	@Check(CheckType.FAST)
-	public void checkOnlyOneDefaultTransitionUsed(Choice choice){
+	public void checkOnlyOneDefaultTransitionUsed(Choice choice) {
 		Iterator<Transition> iterator = choice.getOutgoingTransitions().iterator();
 		List<Transition> defaultTransitions = new ArrayList<>();
 		while(iterator.hasNext()) {
 			Transition transition = iterator.next();
 			Trigger trigger = transition.getTrigger();
-			if(trigger instanceof DefaultTrigger || trigger ==null) {
+			if (trigger instanceof DefaultTrigger || trigger == null) {
 				defaultTransitions.add(transition);
 			}
 		}
@@ -319,7 +312,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			}
 		}
 	}
-	
+
 	@Check(CheckType.FAST)
 	public void checkUnusedEntry(final Entry entry) {
 		if (entry.getParentRegion().getComposite() instanceof org.yakindu.sct.model.sgraph.State
@@ -346,56 +339,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	}
 
 	@Check(CheckType.FAST)
-	public void checkValueDefinitionExpression(VariableDefinition definition) {
-		// applies only to constants
-		if (!definition.isConst())
-			return;
-		Expression initialValue = definition.getInitialValue();
-		if (initialValue == null) {
-			error(CONST_MUST_HAVE_VALUE_MSG, definition, null, CONST_MUST_HAVE_VALUE_CODE);
-			return;
-		}
-		List<Expression> toCheck = Lists.newArrayList(initialValue);
-		TreeIterator<EObject> eAllContents = initialValue.eAllContents();
-		while (eAllContents.hasNext()) {
-			EObject next = eAllContents.next();
-			if (next instanceof Expression)
-				toCheck.add((Expression) next);
-		}
-		for (Expression expression : toCheck) {
-			EObject referencedObject = null;
-			if (expression instanceof FeatureCall)
-				referencedObject = ((FeatureCall) expression).getFeature();
-			else if (expression instanceof ElementReferenceExpression)
-				referencedObject = ((ElementReferenceExpression) expression).getReference();
-			if (referencedObject instanceof VariableDefinition) {
-				if (!((VariableDefinition) referencedObject).isConst()) {
-					error(REFERENCE_TO_VARIABLE, StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE);
-				}
-			}
-		}
-	}
-
-	@Check(CheckType.FAST)
-	public void checkConstAndReadOnlyDefinitionExpression(VariableDefinition definition) {
-		// applies only for readonly const definitions
-		if (!definition.isReadonly() && !definition.isConst())
-			return;
-		ICompositeNode definitionNode = NodeModelUtils.getNode(definition);
-		String tokenText = NodeModelUtils.getTokenText(definitionNode);
-
-		if (tokenText == null || tokenText.isEmpty())
-			return;
-		if (tokenText.contains(TypesPackage.Literals.PROPERTY__READONLY.getName())
-				&& tokenText.contains(TypesPackage.Literals.PROPERTY__CONST.getName())) {
-			warning(String.format(STextValidationMessages.DECLARATION_WITH_READONLY,
-					TypesPackage.Literals.PROPERTY__READONLY.getName(),
-					TypesPackage.Literals.PROPERTY__CONST.getName()), definition,
-					TypesPackage.Literals.PROPERTY__READONLY);
-		}
-	}
-
-	@Check(CheckType.FAST)
 	public void checkUnusedVariablesInInternalScope(InternalScope internalScope) {
 		EList<Declaration> internalScopeDeclarations = internalScope.getDeclarations();
 
@@ -413,10 +356,9 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				boolean internalDeclarationUsed = false;
 				for (ElementReferenceExpression elementReference : allUsedElementReferences) {
 					if (elementReference.getReference().eContainer() instanceof InternalScope) {
-						if (elementReference.getReference() instanceof VariableDefinition) {
-							if (((VariableDefinition) elementReference.getReference()).getName()
-									.equals(internalDeclaration.getName())
-									&& internalDeclaration instanceof VariableDefinition) {
+						if (elementReference.getReference() instanceof Property) {
+							if (((Property) elementReference.getReference()).getName()
+									.equals(internalDeclaration.getName()) && internalDeclaration instanceof Property) {
 								internalDeclarationUsed = true;
 								break;
 							}
@@ -494,7 +436,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 					if (referencedObject instanceof VariableDefinition) {
 						if (!defined.contains(nameProvider.getFullyQualifiedName(referencedObject)))
 							error(REFERENCE_CONSTANT_BEFORE_DEFINED, definition,
-									StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE);
+									TypesPackage.Literals.PROPERTY__INITIAL_VALUE);
 					}
 				}
 				defined.add(nameProvider.getFullyQualifiedName(definition));
@@ -720,15 +662,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			if (!STextValidationModelUtils.getRegionsWithoutDefaultEntry(Collections.singletonList(region)).isEmpty()) {
 				error(REGION_UNBOUND_DEFAULT_ENTRY_POINT, region, null, -1);
 			}
-		}
-	}
-
-	@Check(CheckType.FAST)
-	public void checkAnnotationArguments(ArgumentedAnnotation annotation) {
-		if (annotation.getType() != null
-				&& annotation.getExpressions().size() != annotation.getType().getProperties().size()) {
-			error(String.format(ERROR_WRONG_NUMBER_OF_ARGUMENTS_MSG, annotation.getType().getProperties()), null,
-					ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
 		}
 	}
 

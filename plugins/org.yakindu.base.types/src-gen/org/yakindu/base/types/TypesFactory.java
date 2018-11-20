@@ -125,15 +125,6 @@ public interface TypesFactory extends EFactory {
 	Enumerator createEnumerator();
 
 	/**
-	 * Returns a new object of class '<em>Type Constraint</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type Constraint</em>'.
-	 * @generated
-	 */
-	TypeConstraint createTypeConstraint();
-
-	/**
 	 * Returns a new object of class '<em>Type Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -161,15 +152,6 @@ public interface TypesFactory extends EFactory {
 	PackageMember createPackageMember();
 
 	/**
-	 * Returns a new object of class '<em>Range Constraint</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Range Constraint</em>'.
-	 * @generated
-	 */
-	RangeConstraint createRangeConstraint();
-
-	/**
 	 * Returns a new object of class '<em>Domain</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -195,6 +177,15 @@ public interface TypesFactory extends EFactory {
 	 * @generated
 	 */
 	Annotation createAnnotation();
+
+	/**
+	 * Returns a new object of class '<em>Annotatable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Annotatable Element</em>'.
+	 * @generated
+	 */
+	AnnotatableElement createAnnotatableElement();
 
 	/**
 	 * Returns a new object of class '<em>Array Type Specifier</em>'.

@@ -18,14 +18,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.Argument;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
-import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.StextFactory;
-import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.test.util.AbstractTypeInferrerTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.model.stext.test.util.STextTestScopeProvider;
@@ -700,48 +699,48 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 	@Test
 	// VariableDefinition is a statement, not an expression
 	public void testVariableDefinitionSuccess() {
-		assertTrue(isBooleanType(inferType("var boolVar : boolean = !true", VariableDefinition.class.getSimpleName())));
-		assertTrue(isIntegerType(inferType("var intVar : integer = 5", VariableDefinition.class.getSimpleName())));
-		assertTrue(isRealType(inferType("var realVar : real = 0.5", VariableDefinition.class.getSimpleName())));
-		assertTrue(isRealType(inferType("var realVar : real = 5", VariableDefinition.class.getSimpleName()))); // coercion
-		assertTrue(isStringType(inferType("var stringVar : string = 'test'", VariableDefinition.class.getSimpleName())));
+		assertTrue(isBooleanType(inferType("var boolVar : boolean = !true", "ScopeDeclaration")));
+		assertTrue(isIntegerType(inferType("var intVar : integer = 5", "ScopeDeclaration")));
+		assertTrue(isRealType(inferType("var realVar : real = 0.5", "ScopeDeclaration")));
+		assertTrue(isRealType(inferType("var realVar : real = 5", "ScopeDeclaration"))); // coercion
+		assertTrue(isStringType(inferType("var stringVar : string = 'test'", "ScopeDeclaration")));
 	}
 
 	@Test
 	// VariableDefinition is a statement, not an expression
 	public void testVariableDefinitionFailure() {
-		expectIssue(inferType("var boolVar : boolean = 5", VariableDefinition.class.getSimpleName(), interfaceScope()),
+		expectIssue(inferType("var boolVar : boolean = 5", "ScopeDeclaration", interfaceScope()),
 				"Cannot assign a value of type integer to a variable of type boolean.");
 		expectIssue(
-				inferType("var boolVar : boolean = 0.5", VariableDefinition.class.getSimpleName(), interfaceScope()),
+				inferType("var boolVar : boolean = 0.5", "ScopeDeclaration", interfaceScope()),
 				"Cannot assign a value of type real to a variable of type boolean.");
 		expectIssue(
-				inferType("var boolVar : boolean = 'text'", VariableDefinition.class.getSimpleName(), interfaceScope()),
+				inferType("var boolVar : boolean = 'text'", "ScopeDeclaration", interfaceScope()),
 				"Cannot assign a value of type string to a variable of type boolean.");
 		expectIssue(
-				inferType("var intVar : integer = true", VariableDefinition.class.getSimpleName(), interfaceScope()),
+				inferType("var intVar : integer = true", "ScopeDeclaration", interfaceScope()),
 				"Cannot assign a value of type boolean to a variable of type integer.");
 		expectIssue(
-				inferType("var intVar : integer = 0.5", VariableDefinition.class.getSimpleName(), interfaceScope()),
+				inferType("var intVar : integer = 0.5", "ScopeDeclaration", interfaceScope()),
 				"Cannot assign a value of type real to a variable of type integer.");
 		expectIssue(
-				inferType("var intVar : integer = 'text'", VariableDefinition.class.getSimpleName(), interfaceScope()),
+				inferType("var intVar : integer = 'text'", "ScopeDeclaration", interfaceScope()),
 				"Cannot assign a value of type string to a variable of type integer.");
 
-		expectIssue(inferType("var realVar : real = true", VariableDefinition.class.getSimpleName(), interfaceScope()),
+		expectIssue(inferType("var realVar : real = true", "ScopeDeclaration", interfaceScope()),
 				"Cannot assign a value of type boolean to a variable of type real.");
 		expectIssue(
-				inferType("var realVar : real = 'text'", VariableDefinition.class.getSimpleName(), interfaceScope()),
+				inferType("var realVar : real = 'text'", "ScopeDeclaration", interfaceScope()),
 				"Cannot assign a value of type string to a variable of type real.");
 
 		expectIssue(
-				inferType("var stringVar : string = true", VariableDefinition.class.getSimpleName(), interfaceScope()),
+				inferType("var stringVar : string = true", "ScopeDeclaration", interfaceScope()),
 				"Cannot assign a value of type boolean to a variable of type string.");
 		expectIssue(
-				inferType("var stringVar : string = 5", VariableDefinition.class.getSimpleName(), interfaceScope()),
+				inferType("var stringVar : string = 5", "ScopeDeclaration", interfaceScope()),
 				"Cannot assign a value of type integer to a variable of type string.");
 		expectIssue(
-				inferType("var stringVar : string = 0.5", VariableDefinition.class.getSimpleName(), interfaceScope()),
+				inferType("var stringVar : string = 0.5", "ScopeDeclaration", interfaceScope()),
 				"Cannot assign a value of type real to a variable of type string.");
 	}
 

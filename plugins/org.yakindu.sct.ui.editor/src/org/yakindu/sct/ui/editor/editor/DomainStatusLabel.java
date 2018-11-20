@@ -20,7 +20,6 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.RowLayout;
-import org.eclipse.swt.program.Program;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Link;
 import org.eclipse.ui.ISharedImages;
@@ -36,7 +35,6 @@ import org.yakindu.sct.domain.extension.DomainStatus.Severity;
 public class DomainStatusLabel extends Composite {
 
 	private static final Font DOMAIN_STATUS_FONT = new Font(null, new FontData("Verdana", 10, SWT.BOLD));
-	private static final String LICENCE_LINK = "http://www.statecharts.org/licences?source=product";
 
 	private CLabel label;
 	private Link link;
@@ -59,7 +57,7 @@ public class DomainStatusLabel extends Composite {
 		link.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Program.launch(LICENCE_LINK);
+				status.handleLink();
 			}
 		});
 	}

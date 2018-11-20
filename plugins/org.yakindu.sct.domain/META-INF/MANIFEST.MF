@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Domain
 Bundle-SymbolicName: org.yakindu.sct.domain;singleton:=true
-Bundle-Version: 3.4.2.qualifier
+Bundle-Version: 3.4.3.qualifier
 Bundle-Activator: org.yakindu.sct.domain.DomainActivator
 Bundle-Vendor: statecharts.org
 Require-Bundle: org.eclipse.core.runtime,
@@ -16,3 +16,4 @@ Export-Package: org.yakindu.sct.domain,
  org.yakindu.sct.domain.extension,
  org.yakindu.sct.domain.extension.impl
 Bundle-ClassPath: .
+Automatic-Module-Name: org.yakindu.sct.domain

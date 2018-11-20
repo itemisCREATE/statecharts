@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU SGraph Tests
 Bundle-SymbolicName: org.yakindu.sct.model.sgraph.test
-Bundle-Version: 3.4.2.qualifier
+Bundle-Version: 3.4.3.qualifier
 Require-Bundle: org.yakindu.sct.model.sgraph,
  org.junit,
  org.eclipse.ui,
@@ -15,3 +15,4 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: statecharts.org
 Export-Package: org.yakindu.sct.model.sgraph.test.util
+Automatic-Module-Name: org.yakindu.sct.model.sgraph.test

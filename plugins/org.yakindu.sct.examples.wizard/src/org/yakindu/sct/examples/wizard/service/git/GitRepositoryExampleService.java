@@ -11,6 +11,7 @@
 package org.yakindu.sct.examples.wizard.service.git;
 
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
@@ -24,11 +25,18 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.jgit.api.CheckoutCommand;
 import org.eclipse.jgit.api.FetchCommand;
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.ListBranchCommand;
+import org.eclipse.jgit.api.ListBranchCommand.ListMode;
 import org.eclipse.jgit.api.PullResult;
+import org.eclipse.jgit.api.errors.CheckoutConflictException;
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.api.errors.InvalidRefNameException;
+import org.eclipse.jgit.api.errors.RefNotFoundException;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
+import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.transport.FetchResult;
 import org.eclipse.jgit.transport.TrackingRefUpdate;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
@@ -58,6 +66,10 @@ public class GitRepositoryExampleService implements IExampleService {
 		return java.nio.file.Paths.get(ExampleActivator.getDefault().getPreferenceStore()
 				.getString(ExamplesPreferenceConstants.STORAGE_LOCATION));
 	}
+	
+	private enum BranchType {
+		LOCAL, REMOTE
+	}
 
 	@Override
 	public boolean exists() {
@@ -82,10 +94,11 @@ public class GitRepositoryExampleService implements IExampleService {
 
 	protected IStatus updateRepository(IProgressMonitor monitor) {
 		String repoURL = getPreference(ExamplesPreferenceConstants.REMOTE_LOCATION);
+
+		java.nio.file.Path storageLocation = getStorageLocation();
 		try {
-			java.nio.file.Path storageLocation = getStorageLocation();
-			PullResult result = Git.open(storageLocation.toFile()).pull()
-					.setProgressMonitor(new EclipseGitProgressTransformer(monitor)).call();
+			Git git = Git.open(storageLocation.toFile());
+			PullResult result = git.pull().setProgressMonitor(new EclipseGitProgressTransformer(monitor)).call();
 			if (!result.isSuccessful()) {
 				return new Status(IStatus.ERROR, ExampleActivator.PLUGIN_ID,
 						"Unable to update repository " + repoURL + "!");
@@ -150,6 +163,9 @@ public class GitRepositoryExampleService implements IExampleService {
 				}
 			}
 			stream.close();
+		} catch (AccessDeniedException e) {
+			// TODO causes UI freeze
+			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -180,20 +196,48 @@ public class GitRepositoryExampleService implements IExampleService {
 	}
 
 	@Override
-	public boolean isUpToDate(IProgressMonitor monitor) {
+	public IExampleService.UpdateResult fetchNewUpdates(IProgressMonitor monitor) {
 		java.nio.file.Path storageLocation = getStorageLocation();
+		String remoteBranch = getPreference(ExamplesPreferenceConstants.REMOTE_BRANCH);
+
 		try {
-			FetchCommand fetch = Git.open(storageLocation.toFile()).fetch();
-			FetchResult result = fetch.setProgressMonitor(new EclipseGitProgressTransformer(monitor)).setDryRun(true)
-					.call();
-			Collection<TrackingRefUpdate> trackingRefUpdates = result.getTrackingRefUpdates();
-			return trackingRefUpdates.size() == 0;
+			Git git = Git.open(storageLocation.toFile());
+			FetchCommand fetch = git.fetch();
+			FetchResult result = fetch.setProgressMonitor(new EclipseGitProgressTransformer(monitor)).call();
+			
+			if (doesBranchExist(git, BranchType.REMOTE, remoteBranch)) {
+				CheckoutCommand checkout = git.checkout();
+				checkout.setName(remoteBranch);
+				checkout.setCreateBranch(!doesBranchExist(git, BranchType.LOCAL, remoteBranch));
+				try {
+					checkout.call();
+				} catch (CheckoutConflictException e) {
+					return IExampleService.UpdateResult.REPO_CONTAINS_CONFLICTS;			
+				}
+			} else {
+				return IExampleService.UpdateResult.REMOTE_BRANCH_NOT_FOUND;
+			}
+			if (result.getTrackingRefUpdates().isEmpty()) {
+				return IExampleService.UpdateResult.NO_UPDATES;
+			} else {
+				return IExampleService.UpdateResult.UPDATE_AVAILABLE;
+			}
 		} catch (RepositoryNotFoundException ex) {
 			// This is the case when the examples are imported manually
-			return true;
+			return IExampleService.UpdateResult.NO_UPDATES;
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			return true;
+			return IExampleService.UpdateResult.NO_UPDATES;
+		}
+	}
+	
+	private boolean doesBranchExist(Git git, BranchType type, String remoteBranch) throws GitAPIException {
+		if (type == GitRepositoryExampleService.BranchType.LOCAL) {
+			return git.branchList().setListMode(ListMode.ALL).call().stream()
+					.anyMatch(branch -> branch.getName().equals("refs/heads/" + remoteBranch));
+		} else {
+			return git.branchList().setListMode(ListMode.REMOTE).call().stream()
+					.anyMatch(branch -> branch.getName().equals("refs/remotes/origin/" + remoteBranch));
 		}
 	}
 }

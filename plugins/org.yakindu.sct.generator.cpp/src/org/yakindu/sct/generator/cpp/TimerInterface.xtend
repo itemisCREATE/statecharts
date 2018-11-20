@@ -16,6 +16,8 @@ import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+
 class TimerInterface implements IContentTemplate {
 	
 	@Inject
@@ -46,11 +48,11 @@ class TimerInterface implements IContentTemplate {
 			
 				/*! Starts the timing for a time event.
 				 */ 
-				virtual void setTimer(«timedStatemachineInterface»* statemachine, sc_eventid event, sc_integer time_ms, sc_boolean isPeriodic) = 0;
+				virtual void «SET_TIMER»(«timedStatemachineInterface»* statemachine, «EVENT_TYPE» event, «INT_TYPE» time_ms, «BOOL_TYPE» isPeriodic) = 0;
 				
 				/*! Unsets the given time event.
 				 */
-				virtual void unsetTimer(«timedStatemachineInterface»* statemachine, sc_eventid event) = 0;
+				virtual void «UNSET_TIMER»(«timedStatemachineInterface»* statemachine, «EVENT_TYPE» event) = 0;
 			
 				/*! Cancel timer service. Use this to end possible timing threads and free
 				 	 memory resources.
@@ -58,7 +60,7 @@ class TimerInterface implements IContentTemplate {
 				virtual void cancel() = 0;
 		};
 		
-		inline TimerInterface::~TimerInterface() {}
+		inline «timerInterface»::~«timerInterface»() {}
 		
 		#endif /* «timerInterface.define»_H_ */
 		'''

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU SText Model
 Bundle-Vendor: statecharts.org
-Bundle-Version: 3.4.2.qualifier
+Bundle-Version: 3.4.3.qualifier
 Bundle-SymbolicName: org.yakindu.sct.model.stext;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
@@ -47,3 +47,4 @@ Export-Package: org.yakindu.sct.model.stext,
  org.yakindu.sct.model.stext.validation,
  org.yakindu.sct.model.stext.serializer
 Bundle-ClassPath: .
+Automatic-Module-Name: org.yakindu.sct.model.stext

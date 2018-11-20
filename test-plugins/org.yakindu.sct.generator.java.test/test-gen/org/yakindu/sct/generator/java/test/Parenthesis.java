@@ -25,7 +25,9 @@ public class Parenthesis {
 		statemachine = new ParenthesisStatemachine();
 		timer = new VirtualTimer(200);
 		timer.schedulePeriodicalTask(new CycleTimeEventTask(statemachine), 200, 200);
+		
 		statemachine.init();
+		
 	}
 
 	@After

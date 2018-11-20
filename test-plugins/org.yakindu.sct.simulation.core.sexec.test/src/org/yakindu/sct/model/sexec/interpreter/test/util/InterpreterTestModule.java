@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.model.sexec.interpreter.test.util;
 
-import org.yakindu.base.expressions.interpreter.IOperationMockup;
+import org.yakindu.base.expressions.interpreter.IOperationExecutor;
 import org.yakindu.sct.domain.generic.simulation.GenericSimulationModule;
 import org.yakindu.sct.simulation.core.sexec.interpreter.DefaultOperationMockup;
 
@@ -26,7 +26,7 @@ public class InterpreterTestModule extends GenericSimulationModule {
 
 	@Override
 	protected void bindOperationMockups(Binder binder) {
-		Multibinder<IOperationMockup> mockupBinder = Multibinder.newSetBinder(binder, IOperationMockup.class);
+		Multibinder<IOperationExecutor> mockupBinder = Multibinder.newSetBinder(binder, IOperationExecutor.class);
 		mockupBinder.addBinding().to(DefaultOperationMockup.class);
 	}
 }

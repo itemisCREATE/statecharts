@@ -24,7 +24,7 @@ import static org.yakindu.base.types.typesystem.ITypeSystem.*
 class JavaTypeSystemAccess implements ICodegenTypeSystemAccess {
 
 	@Inject
-	private extension ITypeSystem ts
+	protected extension ITypeSystem ts
 
 	override String getTargetLanguageName(Type type) {
 		val originalType = type?.originType

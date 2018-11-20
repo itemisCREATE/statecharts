@@ -1,12 +1,5 @@
 testclass ChildFirstOrthogonalReactions for statechart executionorder.ChildFirstOrthogonalReactions {
-	
-	var counter : integer = 0
-	const checkFail : integer = -1
-	
-	operation set_up() {
-		counter = 0
-	}
-		
+			
 	
 	operation checkA(ret : boolean) : boolean {
 		cnt = cnt+1
@@ -50,9 +43,11 @@ testclass ChildFirstOrthogonalReactions for statechart executionorder.ChildFirst
 		return cnt
 	}
 	
+	/** This test case checks the evaluation order of the of transition triggers and 
+	 * local reactions without performing a state transition.
+	 */
 	@Test operation executionOrder() {
 	
-		set_up
 			
 		mock check("A")		returns ( checkA(false) )
 		mock check("AA")		returns ( checkAA(false) )
@@ -88,7 +83,6 @@ testclass ChildFirstOrthogonalReactions for statechart executionorder.ChildFirst
 
 	@Test operation executionOrderWIthFirstLeafTransition() {
 		
-		set_up
 				
 		mock check("A")		returns ( checkA(false) )
 		mock check("AA")		returns ( checkAA(false) )
@@ -126,7 +120,6 @@ testclass ChildFirstOrthogonalReactions for statechart executionorder.ChildFirst
 
 	@Test operation executionOrderWIthFirstParentTransition() {
 		
-		set_up
 				
 		mock check("A")		returns ( checkA(false) )
 		mock check("AA")		returns ( checkAA(true) )
@@ -163,7 +156,6 @@ testclass ChildFirstOrthogonalReactions for statechart executionorder.ChildFirst
 
 	@Test operation executionOrderWIthFirstGrandParentTransition() {
 		
-		set_up
 		
 		mock check("A")		returns ( checkA(true) )
 		mock check("AA")		returns ( checkAA(false) )
@@ -200,7 +192,6 @@ testclass ChildFirstOrthogonalReactions for statechart executionorder.ChildFirst
 
 	@Test operation executionOrderWithLastLeafTransition() {
 		
-		set_up
 		
 		mock check("A")		returns ( checkA(false) )
 		mock check("AA")		returns ( checkAA(false) )

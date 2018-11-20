@@ -1,8 +1,6 @@
 
 p. 
 
-==<div style="counter-reset: h1 3">==
-
 h1(#simu_simulating_statecharts). Simulating statecharts
 
 Simulating a statechart model means to execute it, raise events manually, have time-based and other events being triggered automatically, and observe the model's behavior.
@@ -243,7 +241,10 @@ h3(#advsim_breakpoints). Breakpoints
 
 Breakpoints allow for automatically suspending the simulation when a certain element of the state machine is activated. Optionally, a halting condition can be specified to better control the behavior of a breakpoint. Breakpoints can be set on transitions or states. If a state or transition with a breakpoint is reached, the simulation pauses, and the current state of variable values can be examined in the simulation view. It is possible to change variable values and to trigger events that will be raised when the simulation run is manually resumed.
 
+"Figure &quot;Transition vs. state breakpoints&quot;":#advsim_fig_breakpoint_transition_vs_state depicts at which point of execution a breakpoint pauses the simulation.
 
+p(#advsim_fig_breakpoint_transition_vs_state). 
+!(shadowless)images/advsim_030_breakpoint_010_transition_vs_state.png(Transition vs. state breakpoints)!
 
 h3(#advsim_executing_in_debug_mode). Executing in debug mode
 
@@ -458,7 +459,5 @@ h4(#advsim_deleting_a_snapshot). Deleting a snapshot
 
 * To delete one or more snapshots, select the snapshots to be deleted, then click on the _remove_ button !(inlinemediaobject)images/advsim_button_remove_red.png(Button: Remove)!.
 * To delete _all_ snapshots, click on the _remove all_ button !(inlinemediaobject)images/advsim_button_remove_all.png(Button: Remove all)!.
-
-==</div>==
 
 ==</div>==

@@ -10,7 +10,8 @@ import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTe
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 /**
  * Unit TestCase for LogicalOr
  */
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class LogicalOrTests extends AbstractExecutionFlowTest {
+	
 	@Before
 	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("LogicalOr.sct");
@@ -26,7 +28,7 @@ public class LogicalOrTests extends AbstractExecutionFlowTest {
 	@Test
 	public void operandEvaluationOrder() throws Exception {
 		interpreter.enter();
-		interpreter.runCycle();
+		timer.timeLeap(getCyclePeriod());
 		assertTrue("logical or expression was executed in wrong order...",getInteger("x") == 4l && getBoolean("b"));
 	}
 }

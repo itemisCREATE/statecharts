@@ -58,7 +58,7 @@ GeneratorModel for yakindu::java {
 
 
 
-	statechart executionorder.childfirst.ChildFirstLocalReactions {
+	statechart executionorder.ChildFirstLocalReactions {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
@@ -144,6 +144,34 @@ GeneratorModel for yakindu::java {
 	}
 
 	statechart executionorder.ParentFirstOrthogonalReactions {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+		
+		feature Naming {
+			basePackage =  "org.yakindu.scr" 
+		}
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+	
+	statechart executionorder.ChildFirstTransitionTaking {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"

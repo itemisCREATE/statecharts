@@ -58,7 +58,9 @@ public class SCTSourceDisplay implements ISourceDisplay {
 	public void displaySource(Object element, IWorkbenchPage page, boolean forceSourceLookup) {
 		debugElement = (DebugElement) element;
 		IEditorPart editor = openEditor(debugElement, page);
-		displaySource(editor);
+		if(editor != null) {
+			displaySource(editor);
+		}
 	}
 
 	public void displaySource(IEditorPart editor) {
@@ -77,12 +79,12 @@ public class SCTSourceDisplay implements ISourceDisplay {
 		}
 		support.lockEditor();
 		notationHandler.setHighlightingSupport(support);
-		notationHandler.display(container.getExecutionContext());
+		if (container != null) {
+			notationHandler.display(container.getExecutionContext());
+		}
 	}
 
 	public void terminate(boolean release) {
-		container = null;
-		debugElement = null;
 		Collection<IDynamicNotationHandler> values = handler.values();
 		for (IDynamicNotationHandler notationHandler : values) {
 			notationHandler.terminate();
@@ -90,6 +92,8 @@ public class SCTSourceDisplay implements ISourceDisplay {
 				notationHandler.getHighlightingSupport().releaseEditor();
 		}
 		handler.clear();
+		container = null;
+		debugElement = null;
 	}
 
 	public IEditorPart openEditor(DebugElement debugElement, IWorkbenchPage page) {
@@ -137,7 +141,7 @@ public class SCTSourceDisplay implements ISourceDisplay {
 			}
 		}
 		// No editor found
-		throw new RuntimeException("No editor found for semantic element " + semanticObject);
+		return null;
 	}
 
 }

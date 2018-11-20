@@ -1,8 +1,6 @@
 
 p. 
 
-==<div style="counter-reset: h1 7 h2 9">==
-
 h2(#hdls_headless_code_generation). Headless code generation
 
 State machine code is fully derived from a statechart model, and section "Generating state machine code":../user-guide/code_generation_intro.html#codegen_generating_state_machine_code explains how to interactively run a code generator. Since release 2.9.0, YAKINDU Statechart Tools additionally provides a headless code generator infrastructure. This allows for code generation without a user interface which in turn allows to integrate code generation into continuous integration (CI) build environments.
@@ -47,11 +45,6 @@ usage: scc [-d <path>] [-h] [-m <path(s)>] [-v <arg>]
  -v,--variables <arg>   A list of comma-separated key/value pairs to override variables in SGen models. Example: 
                        -v key1=value1,key2=value2
 p. 
-
-
-h4(#hdls_integrating_custom_code_generators). Integrating custom code generators
-
-YAKINDU Statechart Tools supports custom code generators as described in section "&quot;Custom code generators&quot;":../user-guide/code_generation_custom.html#codegen_custom_code_generators. These custom generators can also be executed by use of the headless code generator infrastructure. To do so, the custom code generator has to be installed as an Eclipse plugin within the distribution directory. The custom code generator will be used whenever a generator model (_.sgen_ file) is loaded by the headless generator infrastructure and references the custom code generator ID.
 
 
 
@@ -209,12 +202,13 @@ plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.1.400.v20160518-1444
 
 Replace the path in the _headless.ini_ file with the path from _eclipse.ini_. After saving _headless.ini_, _scc_ should work.
 
-h4(#hdls_troubleshooting_could_not_find_project_file). [ERROR] Cannot find any .project files
 
-Upon execution _scc_ searches for _.project_ files which are used to properly interpret generation target locations as specified in the _sgen_ files. These _.project_ files are hidden files that contain some meta information about your projects in your YAKINDU Statechart Tools workspace. If _scc_ does not find these files you might have copied your models to another folder and missed to also copy these files.
+h4(#hdls_troubleshooting_cannot_not_find_project_files). [ERROR] Cannot find any .project files
 
-h4(#hdls_troubleshooting_could_not_resolve_reference_to_eobject). [ERROR] Couldn't resolve reference to EObject
+Upon execution _scc_ searches for _.project_ files which are used to properly interpret generation target locations as specified in the _sgen_ files. These _.project_ files are hidden files that contain some meta information about your projects in your YAKINDU Statechart Tools workspace. If _scc_ does not find these files you might have copied your models to another folder and missed to also copy these
+ files.
+
+
+h4(#hdls_troubleshooting_couldnt_resolve_reference_to_eobject). [ERROR] Couldn't resolve reference to EObject
 
 This error usually denotes a configuration problem when using _scc_ in combination with the deep C integration feature. For example, if you are referring to imported C elements in your statechart models, and the corresponding header files can no more be resolved on your CI build server, the linker is unable to find the referenced C elements and produces this error message. To overcome this problem, you might want to check if your settings in _C/C++ General -> Path and Symbols_ do not contain any paths that do not exist on your build environment. Also make sure that _scc_ can access these settings which are stored in the _.cproject_ file.
-
-==</div>==

@@ -25,6 +25,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 import com.google.inject.Binder;
 import com.google.inject.Scopes;
+import com.google.inject.multibindings.Multibinder;
 
 /**
  *
@@ -39,6 +40,7 @@ public class JavaGeneratorModule implements IGeneratorModule {
 		configureGeneratorRoot(entry, binder);
 		configureForExecutionStyle(entry, binder);
 		configureServices(entry, binder);
+		Multibinder.newSetBinder(binder, JavaIncludeProvider.class);
 	}
 
 

@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.yakindu.base.types.TypesFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.provider.ScopedElementItemProvider;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
@@ -179,7 +180,7 @@ public class StatechartSpecificationItemProvider extends ScopedElementItemProvid
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.STATECHART_SPECIFICATION__ANNOTATIONS,
-				 StextFactory.eINSTANCE.createArgumentedAnnotation()));
+				 TypesFactory.eINSTANCE.createAnnotation()));
 	}
 
   /**

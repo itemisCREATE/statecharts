@@ -2,6 +2,8 @@
  */
 package org.yakindu.base.types;
 
+import org.eclipse.emf.ecore.EObject;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -20,7 +22,7 @@ package org.yakindu.base.types;
  * @model
  * @generated
  */
-public interface RangeConstraint extends TypeConstraint {
+public interface RangeConstraint extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Lower Bound</b></em>' attribute.
 	 * <!-- begin-user-doc -->

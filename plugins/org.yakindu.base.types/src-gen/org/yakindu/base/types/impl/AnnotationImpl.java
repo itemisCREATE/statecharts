@@ -2,13 +2,19 @@
  */
 package org.yakindu.base.types.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.AnnotationType;
+import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.TypesPackage;
 
 /**
@@ -20,6 +26,7 @@ import org.yakindu.base.types.TypesPackage;
  * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.AnnotationImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.AnnotationImpl#getArguments <em>Arguments</em>}</li>
  * </ul>
  *
  * @generated
@@ -34,6 +41,16 @@ public class AnnotationImpl extends EObjectImpl implements Annotation {
 	 * @ordered
 	 */
 	protected AnnotationType type;
+
+	/**
+	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getArguments()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Expression> arguments;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -97,12 +114,40 @@ public class AnnotationImpl extends EObjectImpl implements Annotation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Expression> getArguments() {
+		if (arguments == null) {
+			arguments = new EObjectContainmentEList<Expression>(Expression.class, this, TypesPackage.ANNOTATION__ARGUMENTS);
+		}
+		return arguments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TypesPackage.ANNOTATION__ARGUMENTS:
+				return ((InternalEList<?>)getArguments()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TypesPackage.ANNOTATION__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case TypesPackage.ANNOTATION__ARGUMENTS:
+				return getArguments();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -112,11 +157,16 @@ public class AnnotationImpl extends EObjectImpl implements Annotation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TypesPackage.ANNOTATION__TYPE:
 				setType((AnnotationType)newValue);
+				return;
+			case TypesPackage.ANNOTATION__ARGUMENTS:
+				getArguments().clear();
+				getArguments().addAll((Collection<? extends Expression>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -133,6 +183,9 @@ public class AnnotationImpl extends EObjectImpl implements Annotation {
 			case TypesPackage.ANNOTATION__TYPE:
 				setType((AnnotationType)null);
 				return;
+			case TypesPackage.ANNOTATION__ARGUMENTS:
+				getArguments().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -147,6 +200,8 @@ public class AnnotationImpl extends EObjectImpl implements Annotation {
 		switch (featureID) {
 			case TypesPackage.ANNOTATION__TYPE:
 				return type != null;
+			case TypesPackage.ANNOTATION__ARGUMENTS:
+				return arguments != null && !arguments.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

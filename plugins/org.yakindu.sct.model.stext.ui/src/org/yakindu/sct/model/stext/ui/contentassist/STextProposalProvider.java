@@ -159,10 +159,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	
 	// context States
 	protected void suppressKeywords(List<Keyword> suppressKeywords, SimpleScope model) {
-		suppressKeywords.addAll(getKeywords(grammarAccess.getVariableDefinitionAccess().getGroup().eContents()));
-		suppressKeywords.addAll(getKeywords(grammarAccess.getEventDefinitionAccess().getGroup().eContents()));
+		suppressKeywords.addAll(getKeywords(grammarAccess.getInternalScopeAccess().getGroup().eContents()));
 		suppressKeywords.addAll(getKeywords(grammarAccess.getDirectionAccess().getAlternatives().eContents()));
-		suppressKeywords.addAll(getKeywords(grammarAccess.getOperationDefinitionAccess().getGroup().eContents()));
 	}
 	
 	// context Statechart

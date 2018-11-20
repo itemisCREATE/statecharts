@@ -13,18 +13,14 @@ package org.yakindu.sct.model.sgraph.test.validation;
 import static org.junit.Assert.assertEquals;
 import static org.yakindu.sct.model.sgraph.validation.EntryValidator.*;
 
-import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.junit.Test;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
-import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
-import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.test.util.SGraphJavaValidatorTester;
 import org.yakindu.sct.model.sgraph.validation.EntryValidator;
-import org.yakindu.sct.model.sgraph.validation.RegionValidator;
 
 import com.google.inject.Inject;
 
@@ -130,8 +126,6 @@ public class EntryValidatorTest extends AbstractSGraphValidatorTest {
 		tester.validate(entry).assertError(ENTRY_TRANSITIONS_NO_MULTIPLE_OUT_CODE);
 	}
 
-
-
 	@Test
 	public void disallowTrigger() {
 		State state = createState();
@@ -142,6 +136,4 @@ public class EntryValidatorTest extends AbstractSGraphValidatorTest {
 		trans.setTrigger(sTextFactory.createReactionTrigger());
 		tester.validate(entry).assertError(ENTRY_TRANSITIONS_NO_TRIGGER_ON_OUT_CODE);
 	}
-
-	
 }

@@ -15,17 +15,20 @@ import com.google.inject.Inject
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.expressions.LogicalNotExpression
+import org.yakindu.base.expressions.expressions.LogicalRelationExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
+import org.yakindu.base.types.Expression
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.c.CExpressionsGenerator
+import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.yakindu.base.expressions.expressions.Expression
-import org.yakindu.base.expressions.expressions.LogicalNotExpression
-import org.yakindu.sct.model.sexec.Method
+
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 
 class CppExpressionsGenerator extends CExpressionsGenerator {
 
@@ -58,13 +61,17 @@ class CppExpressionsGenerator extends CExpressionsGenerator {
 	/* Literals */
 	override dispatch CharSequence code(BoolLiteral it) '''«IF value»true«ELSE»false«ENDIF»'''
 	
-	override dispatch CharSequence code(StringLiteral it) '''(sc_string) «super._code(it)»'''
+	override dispatch CharSequence code(StringLiteral it) '''(«STRING_TYPE») «super._code(it)»'''
 	
 	/** Don't use bool_true for C++ code */
 	override dispatch CharSequence sc_boolean_code(Expression it) {code}
 	
 	/** Don't use bool_false for C++ code */
 	override dispatch CharSequence sc_boolean_code(LogicalNotExpression it) {code}
+	
+	override dispatch CharSequence code(LogicalRelationExpression it) 
+	'''((«leftOperand.code») «operator.literal» («rightOperand.code»))'''
+	
 	
 	
 

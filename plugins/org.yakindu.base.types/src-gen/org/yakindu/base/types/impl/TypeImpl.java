@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.types.Type;
-import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesPackage;
 
@@ -29,7 +28,6 @@ import org.yakindu.base.types.TypesPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.yakindu.base.types.impl.TypeImpl#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeImpl#isVisible <em>Visible</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeImpl#getSuperTypes <em>Super Types</em>}</li>
@@ -38,16 +36,6 @@ import org.yakindu.base.types.TypesPackage;
  * @generated
  */
 public class TypeImpl extends PackageMemberImpl implements Type {
-	/**
-	 * The cached value of the '{@link #getConstraint() <em>Constraint</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getConstraint()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<TypeConstraint> constraint;
-
 	/**
 	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -115,18 +103,6 @@ public class TypeImpl extends PackageMemberImpl implements Type {
 	@Override
 	protected EClass eStaticClass() {
 		return TypesPackage.Literals.TYPE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<TypeConstraint> getConstraint() {
-		if (constraint == null) {
-			constraint = new EObjectContainmentEList<TypeConstraint>(TypeConstraint.class, this, TypesPackage.TYPE__CONSTRAINT);
-		}
-		return constraint;
 	}
 
 	/**
@@ -202,8 +178,6 @@ public class TypeImpl extends PackageMemberImpl implements Type {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TypesPackage.TYPE__CONSTRAINT:
-				return ((InternalEList<?>)getConstraint()).basicRemove(otherEnd, msgs);
 			case TypesPackage.TYPE__SUPER_TYPES:
 				return ((InternalEList<?>)getSuperTypes()).basicRemove(otherEnd, msgs);
 		}
@@ -218,8 +192,6 @@ public class TypeImpl extends PackageMemberImpl implements Type {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypesPackage.TYPE__CONSTRAINT:
-				return getConstraint();
 			case TypesPackage.TYPE__ABSTRACT:
 				return isAbstract();
 			case TypesPackage.TYPE__VISIBLE:
@@ -239,10 +211,6 @@ public class TypeImpl extends PackageMemberImpl implements Type {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypesPackage.TYPE__CONSTRAINT:
-				getConstraint().clear();
-				getConstraint().addAll((Collection<? extends TypeConstraint>)newValue);
-				return;
 			case TypesPackage.TYPE__ABSTRACT:
 				setAbstract((Boolean)newValue);
 				return;
@@ -265,9 +233,6 @@ public class TypeImpl extends PackageMemberImpl implements Type {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypesPackage.TYPE__CONSTRAINT:
-				getConstraint().clear();
-				return;
 			case TypesPackage.TYPE__ABSTRACT:
 				setAbstract(ABSTRACT_EDEFAULT);
 				return;
@@ -289,8 +254,6 @@ public class TypeImpl extends PackageMemberImpl implements Type {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypesPackage.TYPE__CONSTRAINT:
-				return constraint != null && !constraint.isEmpty();
 			case TypesPackage.TYPE__ABSTRACT:
 				return abstract_ != ABSTRACT_EDEFAULT;
 			case TypesPackage.TYPE__VISIBLE:

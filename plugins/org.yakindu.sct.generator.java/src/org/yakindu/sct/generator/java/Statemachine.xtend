@@ -35,7 +35,7 @@ import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Method
 
 class Statemachine {
-	
+	@Inject protected Set<JavaIncludeProvider> includeProviders
 	@Inject protected extension Naming
 	@Inject protected extension JavaNamingService
 	@Inject protected extension GenmodelEntries
@@ -87,7 +87,7 @@ class Statemachine {
 	
 	def protected imports(ExecutionFlow it, GeneratorEntry entry) {
 		// we need a sorted set for the imports
-		val Set<String> importSet = new TreeSet<String>()	
+		val Set<String> importSet = new TreeSet
 		
 		if (entry.createInterfaceObserver && hasOutgoingEvents) {
 			importSet += "java.util.List"
@@ -96,6 +96,10 @@ class Statemachine {
 		
 		if (timed) {
 			importSet += "" + entry.getBasePackageName() + ".ITimer"
+		}
+		
+		for(JavaIncludeProvider jip : includeProviders) {
+			importSet += jip.getImports(it).map[toString]
 		}
 		
 		return importSet

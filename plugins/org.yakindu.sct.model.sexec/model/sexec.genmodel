@@ -22,6 +22,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionNode/reactions"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sexec.ecore#//ExecutionNode/simpleName"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionNode/reactSequence"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionNode/localReactSequence"/>
     </genClasses>
     <genClasses ecoreClass="sexec.ecore#//ExecutionState">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sexec.ecore#//ExecutionState/leaf"/>
@@ -50,6 +51,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//Reaction/check"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//Reaction/effect"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sexec.ecore#//Reaction/transition"/>
+    </genClasses>
+    <genClasses ecoreClass="sexec.ecore#//Method">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//Method/body"/>
     </genClasses>
     <genClasses ecoreClass="sexec.ecore#//StateVector">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sexec.ecore#//StateVector/size"/>
@@ -114,6 +118,16 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sexec.ecore#//HistoryEntry/deep"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//HistoryEntry/region"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//HistoryEntry/historyStep"/>
+    </genClasses>
+    <genClasses ecoreClass="sexec.ecore#//Return">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//Return/value"/>
+    </genClasses>
+    <genClasses ecoreClass="sexec.ecore#//LocalVariableDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//LocalVariableDefinition/variable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//LocalVariableDefinition/initialValue"/>
+    </genClasses>
+    <genClasses ecoreClass="sexec.ecore#//Statement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//Statement/expression"/>
     </genClasses>
     <genClasses image="false" ecoreClass="sexec.ecore#//Trace"/>
     <genClasses ecoreClass="sexec.ecore#//TraceNodeExecuted">

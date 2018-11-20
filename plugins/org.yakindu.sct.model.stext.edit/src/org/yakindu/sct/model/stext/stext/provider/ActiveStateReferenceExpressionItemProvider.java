@@ -19,7 +19,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.yakindu.base.expressions.expressions.provider.ExpressionItemProvider;
+import org.yakindu.base.types.provider.ExpressionItemProvider;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
 /**

@@ -88,7 +88,7 @@ class StringTreeNode {
 		return s;
 	}
 
-	def public StringTreeNode addStringList(List<String> sList) {
+	def StringTreeNode addStringList(List<String> sList) {
 		/*
 		 * Adds an array of strings.
 		 * If the first element is found within own children's data,
@@ -108,7 +108,6 @@ class StringTreeNode {
 
 		var firstString = sList.get(0) ?: ""; // first element to search in own children. If not found, create new one.
 		var rest = sList.subList(1, sList.size()); // the rest of the array that the child's addStringList function is called with
-
 		for (child : children) // search for child that fits
 		{
 			if (child.getData().equals(firstString)) {
@@ -126,7 +125,7 @@ class StringTreeNode {
 	/** The weight is the number of children, plus their weight recursively.
 	 * 	The tree's root has the maximum weight, while a leaf node's weight is zero.
 	 */
-	def public int getWeight() {
+	def int getWeight() {
 		var weight = children.size()
 
 		for (c : children) {
@@ -136,7 +135,7 @@ class StringTreeNode {
 		return weight;
 	}
 
-	def public List<StringTreeNode> getEndNodes() {
+	def List<StringTreeNode> getEndNodes() {
 		/*
 		 * returns a list of nodes that are string ending nodes (node.isEnd() == true)
 		 */
@@ -151,15 +150,15 @@ class StringTreeNode {
 		return endNodes;
 	}
 
-	def public StringTreeNode getRoot() {
-		if(isRoot) {
+	def StringTreeNode getRoot() {
+		if (isRoot) {
 			this
 		} else {
 			parent.getRoot()
 		}
 	}
 
-	def public void compress() {
+	def void compress() {
 		/*
 		 * Compresses branches.
 		 * All nodes 'X' that have only one child 'A' append 'A's data to their own, delete  'A' and
@@ -196,11 +195,11 @@ class StringTreeNode {
 
 	}
 
-	def public boolean isRoot() {
+	def boolean isRoot() {
 		this.parent === null;
 	}
 
-	def public boolean isEnd() {
+	def boolean isEnd() {
 		this.children.size() == 0 && this.data.equals("")
 	}
 }

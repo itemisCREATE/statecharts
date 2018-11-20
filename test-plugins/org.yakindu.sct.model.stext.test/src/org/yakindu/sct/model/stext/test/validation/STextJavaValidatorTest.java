@@ -34,8 +34,8 @@ import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.validation.ExpressionsJavaValidator;
+import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.ITypeSystem;
@@ -830,8 +830,8 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 				.loadStatechart(VALIDATION_TESTMODEL_DIR + "ConstWithVariable.sct");
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
 		assertIssueCount(diagnostics, 3); //
-		assertError(diagnostics, REFERENCE_TO_VARIABLE);
-		assertError(diagnostics, CONST_MUST_HAVE_VALUE_MSG);
+		assertError(diagnostics, ExpressionsJavaValidator.REFERENCE_TO_VARIABLE);
+		assertError(diagnostics, ExpressionsJavaValidator.CONST_MUST_HAVE_VALUE_MSG);
 	}
 	
 	@Test
@@ -1049,9 +1049,8 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		assertIssueCount(diagnostics, 1);
 		assertWarning(diagnostics, EXIT_NEVER_USED + "'unusedExitPoint'");
 	}
-
-	@Test
 	
+	@Test
 	public void checkAlwaysTransitionHasLowestPriority() {
 		statechart = AbstractTestModelsUtil
 				.loadStatechart(VALIDATION_TESTMODEL_DIR + "TransitionBlockingAlwaysTrueStates.sct");
@@ -1067,7 +1066,8 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 	@Test
 	public void checkOnlyOneEntryPointSpecIsUsed() {
-		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "OnlyOneEntryPointSpecIsUsed.sct");
+		statechart = AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "OnlyOneEntryPointSpecIsUsed.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
@@ -1081,7 +1081,8 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	
 	@Test
 	public void checkAlwaysAndDefaultTransitionInChoices() {
-		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "TransitionBlockingAlwaysTrueChoices.sct");
+		statechart = AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "TransitionBlockingAlwaysTrueChoices.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();

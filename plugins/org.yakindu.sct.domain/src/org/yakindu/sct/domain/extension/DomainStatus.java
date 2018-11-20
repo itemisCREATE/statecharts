@@ -21,19 +21,25 @@ public class DomainStatus {
 	public static enum Severity {
 		OK, ERROR, WARNING, INFO
 	}
+	
+	public static interface ILinkHandler {
+		void handleLink();
+	}
 
 	private Severity status;
 	private String message;
 	private String shortMessage;
+	private ILinkHandler linkHandler;
 	
 	public DomainStatus(Severity status, String message) {
-		this(status, message, message);
+		this(status, message, message, ()->{});
 	}
 	
-	public DomainStatus(Severity status, String message, String shortMessage) {
+	public DomainStatus(Severity status, String message, String shortMessage, ILinkHandler linkHandler) {
 		this.status = status;
 		this.message = message;
 		this.shortMessage = shortMessage;
+		this.linkHandler = linkHandler;
 	}
 
 	public DomainStatus(Severity status) {
@@ -50,6 +56,10 @@ public class DomainStatus {
 	
 	public String getShortMessage() {
 		return shortMessage;
+	}
+	
+	public void handleLink() {
+		this.linkHandler.handleLink();
 	}
 
 }

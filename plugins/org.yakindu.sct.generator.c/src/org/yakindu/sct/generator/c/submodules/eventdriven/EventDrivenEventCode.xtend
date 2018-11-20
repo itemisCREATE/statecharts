@@ -19,6 +19,7 @@ import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
+import static org.yakindu.sct.generator.c.CGeneratorConstants.TRUE
 
 /**
  * @author rbeckmann
@@ -37,21 +38,21 @@ class EventDrivenEventCode extends EventCode {
 			«IF value !== null»
 				«event.definition.event.valueAccess» = «exp.code(value)»;
 			«ENDIF»
-			«event.definition.event.access» = bool_true«ELSE»
+			«event.definition.event.access» = «TRUE»«ELSE»
 			«IF value !== null»
 			«event.definition.event.typeSpecifier.targetLanguageName» «valueVarName» = «exp.code(value)»;
-			«functionPrefix(flow)»add_value_event_to_queue(«scHandle», «event.definition.event.eventEnumMemberName», &«valueVarName»)
+			«flow.addToQueueValueFctID»(«scHandle», «event.definition.event.eventEnumMemberName», &«valueVarName»)
 			«ELSE»
-			«functionPrefix(flow)»add_event_to_queue(«scHandle», «event.definition.event.eventEnumMemberName»)«ENDIF»«ENDIF»'''
+			«flow.addToQueueFctID»(«scHandle», «event.definition.event.eventEnumMemberName»)«ENDIF»«ENDIF»'''
 	}
 	
 	override interfaceIncomingEventRaiserBody(ExecutionFlow it, EventDefinition event) '''
 			«IF event.hasValue»
 			«event.valueAccess» = value;
 			«ENDIF»
-			«event.access» = bool_true;
+			«event.access» = «TRUE»;
 			
-			«functionPrefix»runCycle(«scHandle»);
+			«runCycleFctID»(«scHandle»);
 	'''
 	
 	

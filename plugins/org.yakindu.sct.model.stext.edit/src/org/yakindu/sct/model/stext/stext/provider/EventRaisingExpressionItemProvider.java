@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
-import org.yakindu.base.expressions.expressions.provider.ExpressionItemProvider;
+import org.yakindu.base.types.provider.ExpressionItemProvider;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.StextPackage;
@@ -170,11 +170,6 @@ public class EventRaisingExpressionItemProvider extends ExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
-				 StextFactory.eINSTANCE.createArgumentedAnnotation()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
 				 ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
 
 		newChildDescriptors.add
@@ -281,11 +276,6 @@ public class EventRaisingExpressionItemProvider extends ExpressionItemProvider
 			(createChildParameter
 				(StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
 				 StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
-				 StextFactory.eINSTANCE.createArgumentedAnnotation()));
 
 		newChildDescriptors.add
 			(createChildParameter

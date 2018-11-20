@@ -16,13 +16,22 @@ GeneratorModel for sctunit::interpreter {
 		}			
 	}
 	
-//	test ChildFirstOrthogonalReactions {
-//		
-//		feature Outlet{ 
-//			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
-//			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
-//		}			
-//	}
+	test ChildFirstOrthogonalReactions {
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
+		}			
+	}
+	
+	
+	test ChildFirstTransitionTaking {
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
+		}			
+	}
 	
 	
 	test ParentFirstExecutionHierarchy {
@@ -41,13 +50,13 @@ GeneratorModel for sctunit::interpreter {
 		}			
 	}
 	
-//	test ParentFirstOrthogonalReactions {
-//		
-//		feature Outlet{ 
-//			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
-//			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
-//		}			
-//	}
+	test ParentFirstOrthogonalReactions {
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
+		}			
+	}
 	
 	
 	

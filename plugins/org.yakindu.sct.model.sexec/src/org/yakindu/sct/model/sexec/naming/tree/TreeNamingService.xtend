@@ -198,12 +198,12 @@ class TreeNamingService implements INamingService {
 		parentRegion.vertices.toList.indexOf(it).toString
 	}
 
-	override public setMaxLength(int length) {
+	override setMaxLength(int length) {
 		maxLength = length
 		shortener.maxLength = length
 	}
 
-	override public setSeparator(char sep) {
+	override setSeparator(char sep) {
 		// Check if Prefix is ok		
 		var String sepString = sep + ""
 		if (!(sepString.matches(VALID_IDENTIFIER_REGEX))) {

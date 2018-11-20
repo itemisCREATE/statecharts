@@ -35,8 +35,8 @@ class EventDrivenStatemachineHeaderFragment implements IHeaderFragment {
 		#ifndef «bufferSize»
 		#define «bufferSize» «CGeneratorConstants.EVENT_QUEUE_BUFFER_SIZE»
 		#endif
-		#ifndef SC_INVALID_EVENT_VALUE
-		#define SC_INVALID_EVENT_VALUE 0
+		#ifndef «invalidEvent»
+		#define «invalidEvent» 0
 		#endif
 		'''
 	}

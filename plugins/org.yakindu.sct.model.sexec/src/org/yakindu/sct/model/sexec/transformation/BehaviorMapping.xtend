@@ -19,8 +19,8 @@ import java.util.Set
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.expressions.expressions.BoolLiteral
-import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
+import org.yakindu.base.types.Expression
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.Execution
 import org.yakindu.sct.model.sexec.ExecutionChoice
@@ -494,8 +494,7 @@ class BehaviorMapping {
 				[ExecutionScope parentScope, ExecutionScope execScope | false ]
 			else
 				[ExecutionScope parentScope, ExecutionScope execScope | 
-					parentScope.stateVector.offset + parentScope.stateVector.size 
-					== execScope.stateVector.offset + execScope.stateVector.size
+					parentScope === execScope || parentScope.impactVector.last == execScope.impactVector.last
 				]
 		 
 		
