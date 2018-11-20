@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.TreeMap;
 
@@ -71,11 +72,11 @@ import com.google.common.collect.Lists;
  */
 public class SGenWizardPage2 extends WizardPage {
 
-	private final static Map<String, CoreGenerator> PROJECT_NATURES = new TreeMap<String, CoreGenerator>();
+	private final static Map<String, CoreGenerator> NATURE_TO_GENERATOR = new TreeMap<String, CoreGenerator>();
 	static {
-		PROJECT_NATURES.put("org.eclipse.cdt.core.cnature", CoreGenerator.C);
-		PROJECT_NATURES.put("org.eclipse.cdt.core.ccnature", CoreGenerator.Cpp);
-		PROJECT_NATURES.put(JavaCore.NATURE_ID, CoreGenerator.Java);
+		NATURE_TO_GENERATOR.put("org.eclipse.cdt.core.cnature", CoreGenerator.C);
+		NATURE_TO_GENERATOR.put("org.eclipse.cdt.core.ccnature", CoreGenerator.Cpp);
+		NATURE_TO_GENERATOR.put(JavaCore.NATURE_ID, CoreGenerator.Java);
 	}
 
 	private ComboViewer generatorCombo;
@@ -154,11 +155,32 @@ public class SGenWizardPage2 extends WizardPage {
 		Collections.sort(descriptors, CoreGenerator.generatorOrder);
 		generatorCombo.setInput(descriptors);
 		generatorCombo.getCombo().select(0);
+		Optional<CoreGenerator> preferredByNature = getGeneratorForNature(getContextProject());
+		if (preferredByNature.isPresent()) {
+			Optional<IGeneratorDescriptor> desc = descriptors.stream()
+					.filter(d -> d.getId().equals(preferredByNature.get().getId())).findFirst();
+			if (desc.isPresent()) {
+				generatorCombo.getCombo().select(descriptors.indexOf(desc.get()));
+			}
+		}
 		generatorCombo.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent event) {
 				refreshInput();
 			}
 		});
+	}
+
+	private Optional<CoreGenerator> getGeneratorForNature(IProject project) {
+		for (Entry<String, CoreGenerator> entry : NATURE_TO_GENERATOR.entrySet()) {
+			try {
+				if (project.hasNature(entry.getKey())) {
+					return Optional.of(entry.getValue());
+				}
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}
+		return Optional.empty();
 	}
 
 	protected void refreshInput() {
@@ -170,12 +192,17 @@ public class SGenWizardPage2 extends WizardPage {
 
 	protected List<IProject> getRelevantProjects() {
 		List<IProject> relevantProjects = Lists.newArrayList();
-		IPath containerPath = fileSelectionPage.getFilePath();
-		IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder(containerPath);
-		IProject project = folder.getProject();
+		IProject project = getContextProject();
 		relevantProjects.add(project);
 		relevantProjects.addAll(getReferencedProjects(project));
 		return relevantProjects;
+	}
+
+	protected IProject getContextProject() {
+		IPath containerPath = fileSelectionPage.getFilePath();
+		IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder(containerPath);
+		IProject project = folder.getProject();
+		return project;
 	}
 	
 	protected List<IProject> getReferencedProjects(IProject project) {
