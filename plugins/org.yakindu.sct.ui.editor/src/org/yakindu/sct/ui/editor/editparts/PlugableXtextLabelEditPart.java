@@ -20,8 +20,8 @@ import org.eclipse.gef.editparts.ZoomManager;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.common.ui.services.parser.IParser;
 import org.eclipse.gmf.runtime.common.ui.services.parser.ParserOptions;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramRootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ITextAwareEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.render.editparts.RenderedDiagramRootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
@@ -75,7 +75,7 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart
 	}
 
 	protected ZoomManager getZoomManager() {
-		return ((RenderedDiagramRootEditPart) getRoot()).getZoomManager();
+		return ((DiagramRootEditPart) getRoot()).getZoomManager();
 	}
 
 	@Override
