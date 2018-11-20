@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Execution Model Tests
 Bundle-SymbolicName: org.yakindu.sct.model.sexec.test
-Bundle-Version: 3.4.2.qualifier
+Bundle-Version: 3.4.3.qualifier
 Bundle-Vendor: statecharts.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.core.runtime,
@@ -22,3 +22,4 @@ Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.domain.generic,
  org.eclipse.xtext.junit4
 Export-Package: org.yakindu.sct.model.sexec.transformation.test
+Automatic-Module-Name: org.yakindu.sct.model.sexec.test

@@ -9,6 +9,7 @@
  * 
  */
 package org.yakindu.sct.examples.wizard.pages;
+
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -19,6 +20,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.jface.preference.PreferenceDialog;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
@@ -43,6 +45,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.dialogs.PreferencesUtil;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
 import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
 import org.yakindu.sct.examples.wizard.service.ExampleWizardConstants;
@@ -54,6 +57,7 @@ import org.yakindu.sct.examples.wizard.service.data.IExampleData;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+
 /**
  * 
  * @author t00manysecretss
@@ -62,18 +66,14 @@ import com.google.inject.Inject;
  */
 
 public class SelectExamplePage extends WizardPage
-		implements
-			ExampleWizardConstants,
-			ISelectionChangedListener,
-			SelectionListener,
-			IPropertyChangeListener {
+		implements ExampleWizardConstants, ISelectionChangedListener, SelectionListener, IPropertyChangeListener {
 
 	private static final String PRO_BUNDLE = "com.yakindu.sct.domain.c";
 	private static final String PRO_UPDATE_SITE = "https://info.itemis.com/yakindu/statecharts/pro/";
-	
+
 	private static final int WIZARD_SIZE_SCALE_FACOTR = 2;
 	private static final int WIZARD_SIZE_OFFSET = 300;
-	
+
 	@Inject
 	private IExampleService exampleService;
 	private TreeViewer viewer;
@@ -109,7 +109,7 @@ public class SelectExamplePage extends WizardPage
 		container.setLayout(layout);
 		createTreeViewer(container);
 		createDetailsPane(container);
-		container.setWeights(new int[]{1, 2});
+		container.setWeights(new int[] { 1, 2 });
 		setControl(container);
 		parent.layout();
 	}
@@ -149,74 +149,65 @@ public class SelectExamplePage extends WizardPage
 			viewer.setInput(null);
 			browser.setUrl("about:blank");
 		}
-
 	}
 
 	private boolean revealExamplesAutomatically() {
-		return (exampleIdToInstall != null) && (!exampleService.exists() || !exampleService.isUpToDate(null));
+		return (exampleIdToInstall != null) && (!exampleService.exists() || exampleService.fetchNewUpdates(null).equals(IExampleService.UpdateResult.NO_UPDATES));
 	}
 
 	private void initAsync() {
 		try {
-			getWizard().getContainer().run(true, false, new IRunnableWithProgress() {
-				@Override
-				public void run(final IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-					init(monitor);
-				}
-			});
-
-			if (revealExamplesAutomatically()) {
-				Display.getCurrent().asyncExec(new Runnable() {
-					@Override
-					public void run() {
-						messageArea.button.setEnabled(false);
-						revealExamples();
-					}
-				});
-			}
+			getWizard().getContainer().run(true, false, (final IProgressMonitor monitor) -> init(monitor));
 		} catch (InvocationTargetException | InterruptedException e) {
 			e.printStackTrace();
+		}
+		if (revealExamplesAutomatically()) {
+			Display.getCurrent().asyncExec(() -> {
+				messageArea.button.setEnabled(false);
+				revealExamples();
+			});
 		}
 	}
 
 	private void init(final IProgressMonitor monitor) {
-		if (!exampleService.exists()) {
-			Display.getDefault().syncExec(new Runnable() {
-				@Override
-				public void run() {
-					messageArea.showDownload();
-					messageArea.getParent().layout(true);
-				}
-			});
-		} else if (!exampleService.isUpToDate(monitor)) {
-			Display.getDefault().syncExec(new Runnable() {
-
-				@Override
-				public void run() {
-					setInput(monitor);
-					messageArea.showUpdate();
-					messageArea.getParent().layout(true);
-				}
-			});
-		} else {
-			Display.getDefault().syncExec(new Runnable() {
-				@Override
-				public void run() {
-					setInput(monitor);
-				}
-			});
+		Runnable runnable = () -> {
+			explicitLayoutingForUnixSystems();
+			messageArea.showNoExamplesFound();
+		};
+		
+		if (exampleService.exists()) {
+			Display.getDefault().syncExec(() -> setInput(monitor));
+			switch (exampleService.fetchNewUpdates(monitor)) {
+			case REPO_CONTAINS_CONFLICTS:
+				runnable = () -> messageArea.showRepoContainsConflicts();
+				break;
+			case REMOTE_BRANCH_NOT_FOUND:
+				runnable = () -> messageArea.showRemoteBranchNotFound();
+				break;
+			case INVALID_CONFIGURATION:
+				runnable = () -> messageArea.showInvalidConfigurationError();
+				break;
+			case UPDATE_AVAILABLE:
+				runnable = () -> messageArea.showUpdateAvailable();
+				break;
+			case NO_UPDATES:
+				runnable = () -> {};
+				break;
+			}
 		}
-
+		Display.getDefault().syncExec(runnable);
 	}
 
 	protected void setInput(final IProgressMonitor monitor) {
 		final List<ExampleData> input = exampleService.getExamples(new NullProgressMonitor());
 		messageArea.hide();
 		viewer.setInput(input);
-		// explicit layouting required for Unix systems
-		viewer.getControl().getParent().getParent().layout(true);
-
+		explicitLayoutingForUnixSystems();
 		filterAndSelectExampleToInstall(viewer, input);
+	}
+	
+	private void explicitLayoutingForUnixSystems() {
+		viewer.getControl().getParent().getParent().layout(true);
 	}
 
 	protected void filterAndSelectExampleToInstall(TreeViewer viewer, List<ExampleData> input) {
@@ -276,7 +267,7 @@ public class SelectExamplePage extends WizardPage
 
 	private void checkInstalledPlugins(IExampleData data) {
 		if (isProRequiredAndMissing(data)) {
-			messageArea.showProInstall();
+			messageArea.showProRequired();
 		} else {
 			messageArea.hide();
 		}
@@ -315,41 +306,37 @@ public class SelectExamplePage extends WizardPage
 			updateSelection((IExampleData) firstElement);
 		}
 	}
-
+	
 	@Override
 	public void widgetSelected(SelectionEvent e) {
 		switch (messageArea.getState()) {
-			case DOWNLOAD :
-			case UPDATE :
-				revealExamples();
-				break;
-			case INSTALL :
-				Program.launch(PRO_UPDATE_SITE);
-				break;
-			default :
-				break;
+		case INVALID_CONFIG:
+			messageArea.createPreferencePageDialog().open();
+			break;
+		case DOWNLOAD:
+		case UPDATE:
+			revealExamples();
+			break;
+		case INSTALL:
+			Program.launch(PRO_UPDATE_SITE);
+			break;
+		default:
+			break;
 		}
 	}
 
 	protected void revealExamples() {
 		try {
-			getWizard().getContainer().run(true, true, new IRunnableWithProgress() {
-				@Override
-				public void run(final IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-					final IStatus status = exampleService.fetchAllExamples(monitor);
-					Display.getDefault().asyncExec(new Runnable() {
-						@Override
-						public void run() {
-							if (status.isOK()) {
-								SelectExamplePage.this.setInput(monitor);
-							} else {
-								messageArea.showError();
-							}
-						}
-					});
-				}
+			getWizard().getContainer().run(true, true, (monitor) -> {
+				final IStatus status = exampleService.fetchAllExamples(monitor);
+				Display.getDefault().asyncExec(() -> {
+					if (status.isOK()) {
+						SelectExamplePage.this.setInput(monitor);
+					} else {
+						messageArea.showUnableToDownloadError();
+					}
+				});
 			});
-
 		} catch (InvocationTargetException | InterruptedException e1) {
 			e1.printStackTrace();
 		}

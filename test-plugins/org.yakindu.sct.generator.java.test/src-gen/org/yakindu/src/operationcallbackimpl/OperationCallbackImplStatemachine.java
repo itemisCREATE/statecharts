@@ -1,7 +1,5 @@
 package org.yakindu.src.operationcallbackimpl;
 
-import org.yakindu.scr.conditionalexpressions.ConditionalExpressionsStatemachine.State;
-
 public class OperationCallbackImplStatemachine implements IOperationCallbackImplStatemachine {
 
 	protected class SCInterfaceImpl implements SCInterface {

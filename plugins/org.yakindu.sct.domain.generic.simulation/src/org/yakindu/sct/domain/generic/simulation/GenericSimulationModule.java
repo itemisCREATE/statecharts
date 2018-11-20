@@ -15,7 +15,7 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.yakindu.base.expressions.interpreter.IExpressionInterpreter;
-import org.yakindu.base.expressions.interpreter.IOperationMockup;
+import org.yakindu.base.expressions.interpreter.IOperationExecutor;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
@@ -56,7 +56,7 @@ public class GenericSimulationModule extends AbstractGenericModule {
 	}
 
 	protected void bindOperationMockups(Binder binder) {
-		Multibinder<IOperationMockup> mockupBinder = Multibinder.newSetBinder(binder, IOperationMockup.class);
+		Multibinder<IOperationExecutor> mockupBinder = Multibinder.newSetBinder(binder, IOperationExecutor.class);
 		mockupBinder.addBinding().to(JavaOperationMockup.class);
 	}
 

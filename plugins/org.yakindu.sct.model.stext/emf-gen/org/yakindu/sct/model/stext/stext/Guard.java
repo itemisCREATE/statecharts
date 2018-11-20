@@ -3,7 +3,7 @@
 package org.yakindu.sct.model.stext.stext;
 
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.types.Expression;
 
 /**
  * <!-- begin-user-doc -->

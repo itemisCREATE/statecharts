@@ -25,7 +25,9 @@ public class Choice {
 		statemachine = new ChoiceStatemachine();
 		timer = new VirtualTimer(200);
 		timer.schedulePeriodicalTask(new CycleTimeEventTask(statemachine), 200, 200);
+		
 		statemachine.init();
+		
 	}
 
 	@After

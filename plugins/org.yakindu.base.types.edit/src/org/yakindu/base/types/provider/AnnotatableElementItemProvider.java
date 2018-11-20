@@ -1,6 +1,6 @@
 /**
  */
-package org.yakindu.sct.model.sgen.provider;
+package org.yakindu.base.types.provider;
 
 
 import java.util.Collection;
@@ -13,30 +13,40 @@ import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
+import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.IItemPropertySource;
+import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
+import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.yakindu.base.expressions.expressions.ExpressionsFactory;
-
-import org.yakindu.base.types.provider.PropertyItemProvider;
-
-import org.yakindu.sct.model.sgen.PropertyDefinition;
-import org.yakindu.sct.model.sgen.SGenPackage;
+import org.yakindu.base.types.AnnotatableElement;
+import org.yakindu.base.types.TypesFactory;
+import org.yakindu.base.types.TypesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.sct.model.sgen.PropertyDefinition} object.
+ * This is the item provider adapter for a {@link org.yakindu.base.types.AnnotatableElement} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class PropertyDefinitionItemProvider extends PropertyItemProvider {
+public class AnnotatableElementItemProvider 
+	extends ItemProviderAdapter
+	implements
+		IEditingDomainItemProvider,
+		IStructuredItemContentProvider,
+		ITreeItemContentProvider,
+		IItemLabelProvider,
+		IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PropertyDefinitionItemProvider(AdapterFactory adapterFactory) {
+	public AnnotatableElementItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -67,7 +77,8 @@ public class PropertyDefinitionItemProvider extends PropertyItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(SGenPackage.Literals.PROPERTY_DEFINITION__INITIAL_VALUE);
+			childrenFeatures.add(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS);
+			childrenFeatures.add(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO);
 		}
 		return childrenFeatures;
 	}
@@ -86,17 +97,6 @@ public class PropertyDefinitionItemProvider extends PropertyItemProvider {
 	}
 
 	/**
-	 * This returns PropertyDefinition.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/PropertyDefinition"));
-	}
-
-	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -104,10 +104,7 @@ public class PropertyDefinitionItemProvider extends PropertyItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((PropertyDefinition)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_PropertyDefinition_type") :
-			getString("_UI_PropertyDefinition_type") + " " + label;
+		return getString("_UI_AnnotatableElement_type");
 	}
 
 
@@ -122,8 +119,9 @@ public class PropertyDefinitionItemProvider extends PropertyItemProvider {
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(PropertyDefinition.class)) {
-			case SGenPackage.PROPERTY_DEFINITION__INITIAL_VALUE:
+		switch (notification.getFeatureID(AnnotatableElement.class)) {
+			case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS:
+			case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -143,98 +141,83 @@ public class PropertyDefinitionItemProvider extends PropertyItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGenPackage.Literals.PROPERTY_DEFINITION__INITIAL_VALUE,
-				 ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS,
+				 TypesFactory.eINSTANCE.createAnnotation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGenPackage.Literals.PROPERTY_DEFINITION__INITIAL_VALUE,
-				 ExpressionsFactory.eINSTANCE.createConditionalExpression()));
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createPackageMember()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGenPackage.Literals.PROPERTY_DEFINITION__INITIAL_VALUE,
-				 ExpressionsFactory.eINSTANCE.createLogicalOrExpression()));
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createPackage()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGenPackage.Literals.PROPERTY_DEFINITION__INITIAL_VALUE,
-				 ExpressionsFactory.eINSTANCE.createLogicalAndExpression()));
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGenPackage.Literals.PROPERTY_DEFINITION__INITIAL_VALUE,
-				 ExpressionsFactory.eINSTANCE.createLogicalNotExpression()));
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGenPackage.Literals.PROPERTY_DEFINITION__INITIAL_VALUE,
-				 ExpressionsFactory.eINSTANCE.createBitwiseXorExpression()));
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createProperty()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGenPackage.Literals.PROPERTY_DEFINITION__INITIAL_VALUE,
-				 ExpressionsFactory.eINSTANCE.createBitwiseOrExpression()));
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGenPackage.Literals.PROPERTY_DEFINITION__INITIAL_VALUE,
-				 ExpressionsFactory.eINSTANCE.createBitwiseAndExpression()));
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createEvent()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGenPackage.Literals.PROPERTY_DEFINITION__INITIAL_VALUE,
-				 ExpressionsFactory.eINSTANCE.createLogicalRelationExpression()));
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createComplexType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGenPackage.Literals.PROPERTY_DEFINITION__INITIAL_VALUE,
-				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createEnumerationType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGenPackage.Literals.PROPERTY_DEFINITION__INITIAL_VALUE,
-				 ExpressionsFactory.eINSTANCE.createNumericalAddSubtractExpression()));
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createPrimitiveType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGenPackage.Literals.PROPERTY_DEFINITION__INITIAL_VALUE,
-				 ExpressionsFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createEnumerator()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGenPackage.Literals.PROPERTY_DEFINITION__INITIAL_VALUE,
-				 ExpressionsFactory.eINSTANCE.createNumericalUnaryExpression()));
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createTypeParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGenPackage.Literals.PROPERTY_DEFINITION__INITIAL_VALUE,
-				 ExpressionsFactory.eINSTANCE.createPostFixUnaryExpression()));
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createTypeAlias()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGenPackage.Literals.PROPERTY_DEFINITION__INITIAL_VALUE,
-				 ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createAnnotatableElement()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGenPackage.Literals.PROPERTY_DEFINITION__INITIAL_VALUE,
-				 ExpressionsFactory.eINSTANCE.createFeatureCall()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGenPackage.Literals.PROPERTY_DEFINITION__INITIAL_VALUE,
-				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGenPackage.Literals.PROPERTY_DEFINITION__INITIAL_VALUE,
-				 ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGenPackage.Literals.PROPERTY_DEFINITION__INITIAL_VALUE,
-				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createAnnotationType()));
 	}
 
 	/**
@@ -245,7 +228,7 @@ public class PropertyDefinitionItemProvider extends PropertyItemProvider {
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-		return SgenEditPlugin.INSTANCE;
+		return TypesEditPlugin.INSTANCE;
 	}
 
 }

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU GMF Runtime Commons
 Bundle-SymbolicName: org.yakindu.base.gmf.runtime
-Bundle-Version: 3.4.2.qualifier
+Bundle-Version: 3.4.3.qualifier
 Bundle-Vendor: statecharts.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.gmf.runtime.diagram.ui.properties,
@@ -26,3 +26,4 @@ Export-Package: org.yakindu.base.gmf.runtime.commands,
  org.yakindu.base.gmf.runtime.palette,
  org.yakindu.base.gmf.runtime.parsers,
  org.yakindu.base.gmf.runtime.util
+Automatic-Module-Name: org.yakindu.base.gmf.runtime

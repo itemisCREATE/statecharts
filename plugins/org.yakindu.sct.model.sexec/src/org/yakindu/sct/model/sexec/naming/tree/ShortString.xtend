@@ -49,7 +49,7 @@ class ShortString {
 		costFactor = factor
 	}
 
-	def public getOriginalString() {
+	def getOriginalString() {
 		originalString
 	}
 
@@ -58,7 +58,7 @@ class ShortString {
 		originalString.length
 	}
 
-	def public reset() {
+	def reset() {
 		// Reset cut_array so that the shortened String is equal to the original String.
 		saveCurrentToPrevious();
 		for (var i = 0; i < size; i++) {
@@ -73,7 +73,7 @@ class ShortString {
 		}
 	}
 
-	def public rollback() {
+	def rollback() {
 		// return to previous state
 		for (var i = 0; i < size; i++) {
 			cutArray.set(i, previous_cutArray.get(i));
@@ -84,7 +84,7 @@ class ShortString {
 		shortenedString
 	}
 
-	def public String getShortenedString() {
+	def String getShortenedString() {
 		// return the current version of the shortened string according to cutArray
 		var sb = new StringBuilder();
 
@@ -97,7 +97,7 @@ class ShortString {
 		sb.toString;
 	}
 
-	def public int getShortenedSize() {
+	def int getShortenedSize() {
 		var length = 0;
 		for (var i = 0; i < size; i++) {
 			if (cutArray.get(i) != 0) {
@@ -108,12 +108,12 @@ class ShortString {
 		return length;
 	}
 
-	def public int getCutRatioFactor() {
+	def int getCutRatioFactor() {
 		// factor that takes into account how much of the string is already cut, so that cutting away more characters get's more expensive
 		return 10 + (getCutRatio() * 10) as int;
 	}
 
-	def public int getCutCost() {
+	def int getCutCost() {
 		// returns the current cutting cost of the ShortString by iterating over the cutArray and accumulating cost per index
 		if (1.0 - getCutRatio() < 0.001) {
 			return Integer.MAX_VALUE;
@@ -129,7 +129,7 @@ class ShortString {
 		return cost * getCutRatioFactor * costFactor;
 	}
 
-	def public int getBaseCutCost(int index) {
+	def int getBaseCutCost(int index) {
 		// returns the cut cost of this char, independent of its cut state.
 		var cost = 0;
 
@@ -153,7 +153,7 @@ class ShortString {
 		return cost;
 	}
 
-	def public removeCheapestChar() {
+	def removeCheapestChar() {
 		// of all possible characters that aren't cut yet, remove the one with the lowest cutting cost.
 		// saveCurrentToPrevious(); - done in removeIndex(i);
 		var cheapestOperation_cost = Integer.MAX_VALUE;
@@ -171,12 +171,12 @@ class ShortString {
 		removeIndex(cheapestOperation_index);
 	}
 
-	def public float getCutRatio() {
+	def float getCutRatio() {
 		// returns the ratio of characters that are cut.
 		1 - ((getShortenedSize as float) / (size as float))
 	}
 
-	def public removeIndex(int index) {
+	def removeIndex(int index) {
 		saveCurrentToPrevious();
 		if (index < size) {
 			cutArray.set(index, 0);

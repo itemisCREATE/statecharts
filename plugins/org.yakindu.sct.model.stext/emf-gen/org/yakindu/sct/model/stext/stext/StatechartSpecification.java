@@ -3,6 +3,7 @@
 package org.yakindu.sct.model.stext.stext;
 
 import org.eclipse.emf.common.util.EList;
+import org.yakindu.base.types.Annotation;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 
 /**
@@ -25,7 +26,7 @@ public interface StatechartSpecification extends ScopedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
-	 * The list contents are of type {@link org.yakindu.sct.model.stext.stext.ArgumentedAnnotation}.
+	 * The list contents are of type {@link org.yakindu.base.types.Annotation}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Annotations</em>' containment reference list isn't clear,
@@ -37,5 +38,5 @@ public interface StatechartSpecification extends ScopedElement {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ArgumentedAnnotation> getAnnotations();
+	EList<Annotation> getAnnotations();
 } // StatechartSpecification

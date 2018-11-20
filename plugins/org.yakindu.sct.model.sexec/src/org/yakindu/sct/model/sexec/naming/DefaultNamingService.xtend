@@ -81,10 +81,10 @@ class DefaultNamingService implements INamingService {
 	@Inject extension MethodDepthComparator methodDepthComparator
 	@Inject extension NamingHelper
 
-	@Inject private StextNameProvider provider
+	@Inject StextNameProvider provider
 
 	// from public class org.yakindu.sct.generator.c.features.CDefaultFeatureValueProvider extends		
-	private static final String VALID_IDENTIFIER_REGEX = "[_a-zA-Z][_a-zA-Z0-9]*";
+	static final String VALID_IDENTIFIER_REGEX = "[_a-zA-Z][_a-zA-Z0-9]*";
 
 	val protected int maxLength = 0
 
@@ -369,12 +369,7 @@ class DefaultNamingService implements INamingService {
 	}
 
 	def protected dispatch String elementName(Reaction it) {
-		var String prefix;
-		if (it.transition) {
-			prefix = it.eContainer.elementName
-		}
 		provider.getFullyQualifiedName(it).skipFirst(2).toString(separator.toString)
-
 	}
 
 	def protected dispatch String elementName(ExecutionScope it) {
@@ -450,10 +445,10 @@ class DefaultNamingService implements INamingService {
 		replaceAll('[aeiou]', '')
 	}
 
-	override public setMaxLength(int length) {
+	override setMaxLength(int length) {
 	}
 
-	override public setSeparator(char sep) {
+	override setSeparator(char sep) {
 		// Check if Prefix is ok		
 		var String sepString = sep + ""
 		if (!(sepString.matches(VALID_IDENTIFIER_REGEX))) {
@@ -462,12 +457,11 @@ class DefaultNamingService implements INamingService {
 		separator = sep
 	}
 
-	override public getMaxLength() {
+	override getMaxLength() {
 		return maxLength
 	}
 
-	override public getSeparator() {
+	override getSeparator() {
 		return separator
 	}
-
 }

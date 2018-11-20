@@ -18,13 +18,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.types.Expression;
 import org.yakindu.sct.model.stext.expressions.STextExpressionParser.LinkingException;
 import org.yakindu.sct.model.stext.scoping.ContextPredicateProvider;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
-import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 
@@ -238,7 +237,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 				 * filter.put(key(VARIABLE_DEFINITION, TYPED_ELEMENT__TYPE),
 				 * TYPES)
 				 */
-				{ "var x : integer", VariableDefinition.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "var x : integer", "ScopeDeclaration", INTERNAL_SCOPE, true }, //
 				/* filter.put(key(REGULAR_EVENT_SPEC), EVENTS) */
 				{ "e1 / myInt = 0", LocalReaction.class.getSimpleName(), INTERNAL_SCOPE, true }, //
 				//{ "myOpp(4) / myInt = 10", LocalReaction.class.getSimpleName(), INTERNAL_SCOPE, true }, // context predicates can't validate this expression. This will be done in the SText validation instead.

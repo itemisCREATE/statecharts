@@ -25,16 +25,13 @@ import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.expressions.STextExpressionParser.SyntaxException;
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
-import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
-import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionReaction;
-import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 
@@ -110,7 +107,7 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	 */
 	@Test
 	public void testVariableDefinition() {
-		String rule = VariableDefinition.class.getSimpleName();
+		String rule = "ScopeDeclaration";
 		parseExpression("var MyVar : integer", rule);
 		parseExpression("var MyVar : integer = 97", rule);
 		parseExpression("var readonly MyVar : integer", rule);
@@ -124,7 +121,7 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	 */
 	@Test
 	public void testEventDefinition() {
-		String rule = EventDefinition.class.getSimpleName();
+		String rule = "ScopeDeclaration";
 		parseExpression("event event1", rule);
 		parseExpression("event event1 : integer", rule);
 		parseExpression("event event1 : boolean", rule);
@@ -142,7 +139,7 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	 */
 	@Test
 	public void testOperationDefinition() {
-		String rule = OperationDefinition.class.getSimpleName();
+		String rule = "ScopeDeclaration";
 		parseExpression("operation myOpp()", rule);
 		parseExpression("operation myOpp() : boolean", rule);
 		parseExpression("operation myOpp(param1: integer)", rule);

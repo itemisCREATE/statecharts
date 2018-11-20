@@ -3,8 +3,12 @@
 package org.yakindu.sct.model.stext.stext.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.impl.TypeAliasImpl;
@@ -183,11 +187,21 @@ public class TypeAliasDefinitionImpl extends TypeAliasImpl implements TypeAliasD
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (static: ");
 		result.append(static_);
 		result.append(')');
 		return result.toString();
+	}
+	
+	@Override
+	public EList<Annotation> getAnnotations() {
+		EList<Annotation> result = new BasicEList<Annotation>();
+		result.addAll(super.getAnnotations());
+		if(getAnnotationInfo() != null) {
+			result.addAll(getAnnotationInfo().getAnnotations());
+		}
+		return ECollections.unmodifiableEList(result);
 	}
 
 

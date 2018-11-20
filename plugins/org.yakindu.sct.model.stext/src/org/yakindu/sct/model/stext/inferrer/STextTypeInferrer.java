@@ -14,23 +14,18 @@ import static org.yakindu.base.types.typesystem.ITypeSystem.BOOLEAN;
 import static org.yakindu.base.types.typesystem.ITypeSystem.INTEGER;
 import static org.yakindu.base.types.typesystem.ITypeSystem.VOID;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
-import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.inferrer.ExpressionsTypeInferrer;
-import org.yakindu.base.types.AnnotationType;
 import org.yakindu.base.types.Event;
-import org.yakindu.base.types.Property;
+import org.yakindu.base.types.Expression;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
-import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Guard;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
-import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -38,21 +33,10 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition;
  */
 public class STextTypeInferrer extends ExpressionsTypeInferrer {
 
-	public static final String VARIABLE_DEFINITION = "Cannot assign a value of type %s to a variable of type %s.";
 	public static final String EVENT_DEFINITION = "Cannot assign a value of type %s to an event of type %s.";
 	public static final String GUARD = "The evaluation result of a guard expression must be of type boolean.";
 	public static final String TIME_SPEC = "The evaluation result of a time expression must be of type integer.";
 	public static final String MISSING_VALUE = "Need to assign a value to an event of type %s.";
-
-	public InferenceResult doInfer(VariableDefinition e) {
-		InferenceResult result = inferTypeDispatch(e.getTypeSpecifier());
-		assertNotType(result, VARIABLE_VOID_TYPE, getResultFor(VOID));
-		if (e.getInitialValue() == null)
-			return result;
-		InferenceResult result2 = inferTypeDispatch(e.getInitialValue());
-		assertAssignable(result, result2, String.format(VARIABLE_DEFINITION, result2, result));
-		return result;
-	}
 
 	public InferenceResult doInfer(Event e) {
 		// if an event is used within an expression, the type is boolean and the
@@ -121,22 +105,4 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 	public InferenceResult doInfer(ActiveStateReferenceExpression e) {
 		return getResultFor(BOOLEAN);
 	}
-
-	public InferenceResult doInfer(ArgumentedAnnotation ad) {
-		EList<Expression> arguments = ad.getExpressions();
-		inferAnnotationProperty(ad.getType(), arguments);
-		return getResultFor(VOID);
-	}
-
-	protected void inferAnnotationProperty(AnnotationType type, EList<Expression> arguments) {
-		EList<Property> properties = type.getProperties();
-		if (properties.size() == arguments.size()) {
-			for (int i = 0; i < properties.size(); i++) {
-				InferenceResult type1 = inferTypeDispatch(properties.get(i));
-				InferenceResult type2 = inferTypeDispatch(arguments.get(i));
-				assertCompatible(type1, type2, String.format(INCOMPATIBLE_TYPES, type1, type2));
-			}
-		}
-	}
-
 }

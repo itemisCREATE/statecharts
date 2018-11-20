@@ -18,7 +18,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
-import org.yakindu.base.expressions.interpreter.IOperationMockup;
+import org.yakindu.base.expressions.interpreter.IOperationExecutor;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -48,7 +48,7 @@ public class SexecLaunchConfigurationDelegate extends AbstractSCTLaunchConfigura
 	private ISimulationEngineFactory factory;
 
 	@Inject
-	private Set<IOperationMockup> mockups;
+	private Set<IOperationExecutor> mockups;
 
 	@Override
 	protected ISimulationEngine createExecutionContainer(final ILaunch launch, Statechart statechart) {
@@ -58,7 +58,7 @@ public class SexecLaunchConfigurationDelegate extends AbstractSCTLaunchConfigura
 			IFile file = WorkspaceSynchronizer.getFile(statechart.eResource());
 			injector.injectMembers(this);
 
-			for (IOperationMockup mockup : mockups) {
+			for (IOperationExecutor mockup : mockups) {
 				if (mockup instanceof JavaOperationMockup) {
 					IProject project = file.getProject();
 					String classes = launch.getLaunchConfiguration().getAttribute(ISCTLaunchParameters.OPERATION_CLASS,

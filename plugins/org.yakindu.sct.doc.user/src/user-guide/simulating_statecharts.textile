@@ -241,7 +241,10 @@ h3(#advsim_breakpoints). Breakpoints
 
 Breakpoints allow for automatically suspending the simulation when a certain element of the state machine is activated. Optionally, a halting condition can be specified to better control the behavior of a breakpoint. Breakpoints can be set on transitions or states. If a state or transition with a breakpoint is reached, the simulation pauses, and the current state of variable values can be examined in the simulation view. It is possible to change variable values and to trigger events that will be raised when the simulation run is manually resumed.
 
+"Figure &quot;Transition vs. state breakpoints&quot;":#advsim_fig_breakpoint_transition_vs_state depicts at which point of execution a breakpoint pauses the simulation.
 
+p(#advsim_fig_breakpoint_transition_vs_state). 
+!(shadowless)images/advsim_030_breakpoint_010_transition_vs_state.png(Transition vs. state breakpoints)!
 
 h3(#advsim_executing_in_debug_mode). Executing in debug mode
 

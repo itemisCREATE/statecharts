@@ -11,7 +11,6 @@
 package org.yakindu.sct.model.sexec.interpreter.test.util;
 
 import org.eclipse.xtext.junit4.IInjectorProvider;
-import org.yakindu.sct.domain.generic.simulation.GenericSimulationModule;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

@@ -2,7 +2,11 @@
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.impl.EventImpl;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.StextPackage;
@@ -32,6 +36,16 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition {
 	@Override
 	protected EClass eStaticClass() {
 		return StextPackage.Literals.EVENT_DEFINITION;
+	}
+	
+	@Override
+	public EList<Annotation> getAnnotations() {
+		EList<Annotation> result = new BasicEList<Annotation>();
+		result.addAll(super.getAnnotations());
+		if(getAnnotationInfo() != null) {
+			result.addAll(getAnnotationInfo().getAnnotations());
+		}
+		return ECollections.unmodifiableEList(result);
 	}
 
 } //EventDefinitionImpl

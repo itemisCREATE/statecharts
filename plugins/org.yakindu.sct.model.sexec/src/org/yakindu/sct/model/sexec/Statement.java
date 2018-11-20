@@ -2,7 +2,7 @@
  */
 package org.yakindu.sct.model.sexec;
 
-import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.types.Expression;
 
 /**
  * <!-- begin-user-doc -->

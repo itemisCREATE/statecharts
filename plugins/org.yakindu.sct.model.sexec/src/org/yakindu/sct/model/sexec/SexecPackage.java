@@ -195,31 +195,31 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_FLOW__INIT_SEQUENCE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_FLOW__ID = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 8;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__ANNOTATIONS = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 9;
+	int EXECUTION_FLOW__ANNOTATIONS = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
-	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__CONSTRAINT = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 10;
+	int EXECUTION_FLOW__ANNOTATION_INFO = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_FLOW__ID = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -403,31 +403,31 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_NODE__NAME = MAPPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_NODE__ID = MAPPED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_NODE__ANNOTATIONS = MAPPED_ELEMENT_FEATURE_COUNT + 2;
+	int EXECUTION_NODE__ANNOTATIONS = MAPPED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_NODE__CONSTRAINT = MAPPED_ELEMENT_FEATURE_COUNT + 3;
+	int EXECUTION_NODE__ANNOTATION_INFO = MAPPED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_NODE__ID = MAPPED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -648,15 +648,6 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_STATE__NAME = EXECUTION_NODE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_STATE__ID = EXECUTION_NODE__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -666,13 +657,22 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_STATE__ANNOTATIONS = EXECUTION_NODE__ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE__CONSTRAINT = EXECUTION_NODE__CONSTRAINT;
+	int EXECUTION_STATE__ANNOTATION_INFO = EXECUTION_NODE__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_STATE__ID = EXECUTION_NODE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1092,15 +1092,6 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_ENTRY__NAME = EXECUTION_NODE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_ENTRY__ID = EXECUTION_NODE__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1110,13 +1101,22 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_ENTRY__ANNOTATIONS = EXECUTION_NODE__ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_ENTRY__CONSTRAINT = EXECUTION_NODE__CONSTRAINT;
+	int EXECUTION_ENTRY__ANNOTATION_INFO = EXECUTION_NODE__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_ENTRY__ID = EXECUTION_NODE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1237,15 +1237,6 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_EXIT__NAME = EXECUTION_NODE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_EXIT__ID = EXECUTION_NODE__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1255,13 +1246,22 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_EXIT__ANNOTATIONS = EXECUTION_NODE__ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_EXIT__CONSTRAINT = EXECUTION_NODE__CONSTRAINT;
+	int EXECUTION_EXIT__ANNOTATION_INFO = EXECUTION_NODE__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_EXIT__ID = EXECUTION_NODE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1382,15 +1382,6 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_CHOICE__NAME = EXECUTION_NODE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_CHOICE__ID = EXECUTION_NODE__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1400,13 +1391,22 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_CHOICE__ANNOTATIONS = EXECUTION_NODE__ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CHOICE__CONSTRAINT = EXECUTION_NODE__CONSTRAINT;
+	int EXECUTION_CHOICE__ANNOTATION_INFO = EXECUTION_NODE__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_CHOICE__ID = EXECUTION_NODE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1677,15 +1677,6 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_SYNCHRONIZATION__NAME = EXECUTION_NODE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_SYNCHRONIZATION__ID = EXECUTION_NODE__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1695,13 +1686,22 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_SYNCHRONIZATION__ANNOTATIONS = EXECUTION_NODE__ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_SYNCHRONIZATION__CONSTRAINT = EXECUTION_NODE__CONSTRAINT;
+	int EXECUTION_SYNCHRONIZATION__ANNOTATION_INFO = EXECUTION_NODE__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_SYNCHRONIZATION__ID = EXECUTION_NODE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1885,15 +1885,6 @@ public interface SexecPackage extends EPackage {
 	int METHOD__NAME = TypesPackage.OPERATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int METHOD__ID = TypesPackage.OPERATION__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1901,6 +1892,24 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int METHOD__ANNOTATIONS = TypesPackage.OPERATION__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD__ANNOTATION_INFO = TypesPackage.OPERATION__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD__ID = TypesPackage.OPERATION__ID;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -2011,15 +2020,6 @@ public interface SexecPackage extends EPackage {
 	int TIME_EVENT__NAME = TypesPackage.EVENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIME_EVENT__ID = TypesPackage.EVENT__ID;
-
-	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2027,6 +2027,24 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int TIME_EVENT__ANNOTATIONS = TypesPackage.EVENT__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_EVENT__ANNOTATION_INFO = TypesPackage.EVENT__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_EVENT__ID = TypesPackage.EVENT__ID;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.

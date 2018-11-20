@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Java Generator Tests
 Bundle-SymbolicName: org.yakindu.sct.generator.java.test
-Bundle-Version: 3.4.2.qualifier
+Bundle-Version: 3.4.3.qualifier
 Require-Bundle: org.yakindu.sct.test.models,
  org.yakindu.sct.generator.java,
  org.junit,
@@ -20,3 +20,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: statecharts.org
 Bundle-ClassPath: lib/mockito-all-2.0.2-beta.jar,
  .
+Automatic-Module-Name: org.yakindu.sct.generator.java.test

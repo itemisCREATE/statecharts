@@ -10,9 +10,6 @@
 */
 package org.yakindu.sct.model.sexec;
 
-import org.yakindu.base.types.ComplexType;
-
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Execution State</b></em>'.

@@ -47,6 +47,9 @@ public class DefaultResourceChangeToIssueProcessor implements IResourceChangeToI
 	public ResourceDeltaToIssueResult process(IResourceChangeEvent event, Resource connectedResource,
 			Multimap<String, SCTIssue> visibleIssues) {
 		final IFile file = WorkspaceSynchronizer.getFile(connectedResource);
+		if (file == null) {
+		    return null;
+		}
 		final IResourceDelta deltaForFile = getDeltaForFile(event, file);
 		if (deltaForFile == null) {
 			return null;

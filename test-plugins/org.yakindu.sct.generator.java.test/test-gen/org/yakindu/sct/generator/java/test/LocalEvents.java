@@ -20,7 +20,9 @@ public class LocalEvents {
 	@Before
 	public void localEvents_setUp() {
 		statemachine = new LocalEventsStatemachine();
+		
 		statemachine.init();
+		
 	}
 
 	@After

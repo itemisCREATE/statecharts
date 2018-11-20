@@ -116,7 +116,6 @@ public class TypeItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypesPackage.Literals.TYPE__CONSTRAINT);
 			childrenFeatures.add(TypesPackage.Literals.TYPE__SUPER_TYPES);
 		}
 		return childrenFeatures;
@@ -176,7 +175,6 @@ public class TypeItemProvider
 			case TypesPackage.TYPE__VISIBLE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case TypesPackage.TYPE__CONSTRAINT:
 			case TypesPackage.TYPE__SUPER_TYPES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -194,16 +192,6 @@ public class TypeItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.TYPE__CONSTRAINT,
-				 TypesFactory.eINSTANCE.createTypeConstraint()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.TYPE__CONSTRAINT,
-				 TypesFactory.eINSTANCE.createRangeConstraint()));
 
 		newChildDescriptors.add
 			(createChildParameter

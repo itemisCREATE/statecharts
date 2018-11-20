@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Generator Model UI
 Bundle-Vendor: statecharts.org
-Bundle-Version: 3.4.2.qualifier
+Bundle-Version: 3.4.3.qualifier
 Bundle-SymbolicName: org.yakindu.sct.generator.genmodel.ui; singleton:=true
 Require-Bundle: org.yakindu.sct.generator.genmodel;visibility:=reexport,
  org.eclipse.xtext.ui,
@@ -43,3 +43,4 @@ Export-Package: org.yakindu.sct.generator.genmodel.ui,
  org.yakindu.sct.generator.genmodel.ui.contentassist.antlr.internal
 Bundle-Activator: org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator
 Bundle-ActivationPolicy: lazy
+Automatic-Module-Name: org.yakindu.sct.generator.genmodel.ui

@@ -55,7 +55,7 @@ public class CompileGTestCommand {
 		this.program = program;
 		return this;
 	}
-	
+
 	public CompileGTestCommand makefileDir(String makefileDir) {
 		this.makefileDir = makefileDir;
 		return this;
@@ -80,6 +80,7 @@ public class CompileGTestCommand {
 			}
 		}
 		command.add(compiler);
+		command.add("-g");
 		command.add("-o");
 		command.add(getFileName(program));
 		command.add("-O1");

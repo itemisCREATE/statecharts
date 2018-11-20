@@ -11,7 +11,7 @@
 package org.yakindu.sct.model.sgen;
 
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.types.Expression;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '

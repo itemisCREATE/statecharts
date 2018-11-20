@@ -32,7 +32,7 @@ class JavaNamingService extends DefaultNamingService {
 
 	@Inject extension SExecExtensions
 
-	private Set<String> derivedIdentifiers = new HashSet
+	Set<String> derivedIdentifiers = new HashSet
 
 	override protected prefix(Step it, char separator) {
 		switch (it) {

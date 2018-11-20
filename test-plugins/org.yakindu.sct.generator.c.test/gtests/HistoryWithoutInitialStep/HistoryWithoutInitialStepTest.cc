@@ -67,5 +67,13 @@ TEST_F(HistoryWithoutInitialStepTest, enterDThroughHistory) {
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&statechart, HistoryWithoutInitialStep_main_region_B_r1_D));
 }
+TEST_F(HistoryWithoutInitialStepTest, enterThroughHistoryWithoutInit) {
+	
+	historyWithoutInitialStep_enter(&statechart);
+	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&statechart, HistoryWithoutInitialStep_main_region_A));
+	historyWithoutInitialStepIface_raise_toHistory(&statechart);
+	sc_timer_service_proceed_cycles(&timer_service, 1);
+	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&statechart, HistoryWithoutInitialStep_main_region_B_r1_C));
+}
 
 

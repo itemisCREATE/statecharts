@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU C++ Generator
 Bundle-SymbolicName: org.yakindu.sct.generator.cpp;singleton:=true
-Bundle-Version: 3.4.2.qualifier
+Bundle-Version: 3.4.3.qualifier
 Require-Bundle: org.yakindu.sct.model.sexec,
  org.yakindu.sct.model.stext,
  org.yakindu.sct.generator.core,
@@ -13,3 +13,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.yakindu.sct.generator.cpp,
  org.yakindu.sct.generator.cpp.eventdriven
 Bundle-Vendor: statecharts.org
+Automatic-Module-Name: org.yakindu.sct.generator.cpp

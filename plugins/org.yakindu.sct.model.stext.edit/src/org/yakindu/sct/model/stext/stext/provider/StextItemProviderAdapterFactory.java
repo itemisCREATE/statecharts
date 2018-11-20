@@ -919,29 +919,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
 	}
 
   /**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ArgumentedAnnotation} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ArgumentedAnnotationItemProvider argumentedAnnotationItemProvider;
-
-		/**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ArgumentedAnnotation}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createArgumentedAnnotationAdapter() {
-		if (argumentedAnnotationItemProvider == null) {
-			argumentedAnnotationItemProvider = new ArgumentedAnnotationItemProvider(this);
-		}
-
-		return argumentedAnnotationItemProvider;
-	}
-
-		/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1084,7 +1061,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
 		if (eventRaisingExpressionItemProvider != null) eventRaisingExpressionItemProvider.dispose();
 		if (eventValueReferenceExpressionItemProvider != null) eventValueReferenceExpressionItemProvider.dispose();
 		if (activeStateReferenceExpressionItemProvider != null) activeStateReferenceExpressionItemProvider.dispose();
-		if (argumentedAnnotationItemProvider != null) argumentedAnnotationItemProvider.dispose();
 	}
 
 }

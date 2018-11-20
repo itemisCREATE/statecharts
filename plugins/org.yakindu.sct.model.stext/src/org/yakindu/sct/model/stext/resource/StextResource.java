@@ -22,7 +22,6 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
-import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.model.stext.stext.StateSpecification;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionReaction;
@@ -105,7 +104,7 @@ public class StextResource extends AbstractSCTResource {
 		}
 
 		statechart.getAnnotations().clear();
-		EList<ArgumentedAnnotation> annotations = rootASTElement.getAnnotations();
+		EList<Annotation> annotations = rootASTElement.getAnnotations();
 		if (annotations != null) {
 			statechart.getAnnotations().addAll(annotations);
 		}

@@ -44,11 +44,11 @@ class ITimerCallback {
 		}
 	}
 	
-	def public content(GeneratorEntry entry) {
-		content(entry.licenseText, entry.basePackageName)		
+	def content(GeneratorEntry entry) {
+		content(entry.licenseText, entry.basePackageName)
 	}
 	
-	def public content(String licenseText, String basePackageName) {
+	def content(String licenseText, String basePackageName) {
 		'''
 			«licenseText»
 			package «basePackageName»;

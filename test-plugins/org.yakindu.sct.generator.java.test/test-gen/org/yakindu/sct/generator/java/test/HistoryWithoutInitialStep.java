@@ -25,7 +25,9 @@ public class HistoryWithoutInitialStep {
 		statemachine = new HistoryWithoutInitialStepStatemachine();
 		timer = new VirtualTimer(200);
 		timer.schedulePeriodicalTask(new CycleTimeEventTask(statemachine), 200, 200);
+		
 		statemachine.init();
+		
 	}
 
 	@After
@@ -68,6 +70,15 @@ public class HistoryWithoutInitialStep {
 		statemachine.getSCInterface().raiseToHistory();
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_D));
+	}
+	
+	@Test
+	public void enterThroughHistoryWithoutInit() {
+		statemachine.enter();
+		assertTrue(statemachine.isStateActive(State.main_region_A));
+		statemachine.getSCInterface().raiseToHistory();
+		timer.cycleLeap(1);
+		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
 	}
 	
 	public void init() {

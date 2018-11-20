@@ -19,14 +19,17 @@ public class ChildFirstLocalReactions {
 	private ChildFirstLocalReactionsStatemachine statemachine;	
 	private VirtualTimer timer;
 	
-	protected long counter = 0l;
+	protected long counter;
 	
 	@Before
 	public void childFirstLocalReactions_setUp() {
 		statemachine = new ChildFirstLocalReactionsStatemachine();
 		timer = new VirtualTimer(200);
 		timer.schedulePeriodicalTask(new CycleTimeEventTask(statemachine), 200, 200);
+		
 		statemachine.init();
+		
+		counter = 0l;
 	}
 
 	@After

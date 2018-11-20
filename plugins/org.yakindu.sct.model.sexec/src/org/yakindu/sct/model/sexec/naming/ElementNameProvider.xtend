@@ -29,10 +29,10 @@ import java.util.ArrayList
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 
 class ElementNameProvider {
-	@Inject private StextNameProvider provider
+	@Inject StextNameProvider provider
 	@Inject protected extension SExecExtensions
 
-	def public List<String> elementNameSegments(NamedElement e) {
+	def List<String> elementNameSegments(NamedElement e) {
 		val name = elementName(e);
 		var ArrayList<String> l;
 		if (name !== null) {

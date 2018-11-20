@@ -24,6 +24,7 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.stext.StextPackage;
@@ -56,7 +57,7 @@ public class SCTUnitClassifierTest {
 			StextPackage.Literals.IMPORT_SCOPE, StextPackage.Literals.STATECHART_SCOPE,
 			SGraphPackage.Literals.IMPORT_DECLARATION, SGraphPackage.Literals.SCOPE,
 			SGraphPackage.Literals.SCOPE_MEMBER, StextPackage.Literals.TRANSITION_REACTION,
-			SGraphPackage.Literals.REACTION_PROPERTY, StextPackage.Literals.ARGUMENTED_ANNOTATION,
+			SGraphPackage.Literals.REACTION_PROPERTY, TypesPackage.Literals.ANNOTATION,
 			ExpressionsPackage.Literals.BINARY_LITERAL);
 
 	@Test

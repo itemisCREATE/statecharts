@@ -10,18 +10,19 @@
  */
 package org.yakindu.sct.simulation.core.sexec.interpreter;
 
-import static java.util.Arrays.asList;
-
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.yakindu.base.expressions.expressions.ArgumentExpression;
 import org.yakindu.base.expressions.expressions.IntLiteral;
-import org.yakindu.base.expressions.interpreter.IOperationMockup;
-import org.yakindu.base.types.Declaration;
+import org.yakindu.base.expressions.interpreter.AbstractOperationExecutor;
+import org.yakindu.base.expressions.interpreter.IOperationExecutor;
 import org.yakindu.base.types.Operation;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
@@ -33,20 +34,22 @@ import com.google.inject.Singleton;
  *
  */
 @Singleton
-public class DefaultOperationMockup implements IOperationMockup {
+public class DefaultOperationMockup extends AbstractOperationExecutor implements IOperationExecutor {
 
 	protected MockReturnMap mockReturn = new MockReturnMap();
 	protected Multimap<String, List<Object>> verifyCalls = ArrayListMultimap.create();
 
 	@Override
-	public boolean canExecute(Declaration owner, Operation definition, Object[] parameter) {
+	public boolean canExecute(ArgumentExpression expression) {
 		return true;
 	}
 
 	@Override
-	public Object execute(Declaration owner, Operation definition, Object[] parameter) {
-		verifyCalls.put(definition.getName(), asList(parameter));
-		return mockReturn.get(definition.getName(), asList(parameter));
+	public Object execute(ArgumentExpression expression, ExecutionContext context) {
+		Operation definition = getOperation(expression);
+		List<Object> arguments = Arrays.asList(executeArguments(expression.getArguments(), context, definition));
+		verifyCalls.put(definition.getName(), arguments);
+		return mockReturn.get(definition.getName(), arguments);
 	}
 
 	public boolean wasCalledAtLeast(String operation, List<Object> parameters, IntLiteral times) {
