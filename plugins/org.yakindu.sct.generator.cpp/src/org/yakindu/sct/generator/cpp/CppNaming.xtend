@@ -93,6 +93,14 @@ class CppNaming extends Naming {
 		TIME_EVENTS
 	}
 	
+	override enterStateTracingFctID(ExecutionFlow it) {
+		STATE_ENTERED
+	}
+	
+	override exitStateTracingFctID(ExecutionFlow it) {
+		STATE_EXITED
+	}
+	
 	override dispatch scopeTypeDeclMember(VariableDefinition it) '''
 		«IF type.name != 'void'»«IF const»static const «ENDIF»«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
 	'''
