@@ -59,7 +59,6 @@ class StatemachineSourceFragment implements ISourceFragment {
 			#include "«(module.client.h).relativeTo(module.c)»"
 		«ENDIF»
 		
-		#include <stdlib.h>
 		«IF hasStringComparison»
 		#include <string.h>
 		«ENDIF»
