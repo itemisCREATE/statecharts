@@ -5,8 +5,8 @@
 
 #include "sc_timer_service.h"
 
-
 static StringExpressions statechart;
+
 
 
 //! The timers are managed by a timer service. */

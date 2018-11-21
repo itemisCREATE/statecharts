@@ -70,6 +70,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	SimpleEventTest.class,
 	SimpleHierachyTest.class,
 	StatechartActiveTest.class,
+	StatechartEntryExitActions.class,
 	StatechartLocalReactionsTest.class,
 	StateIsActiveTest.class,
 	StaticChoiceTest.class,

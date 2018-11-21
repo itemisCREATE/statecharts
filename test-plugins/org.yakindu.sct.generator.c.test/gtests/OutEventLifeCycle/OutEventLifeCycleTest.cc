@@ -5,10 +5,10 @@
 
 #include "sc_timer_service.h"
 
-
-void init(sc_boolean sndCycle);
 static OutEventLifeCycle statechart;
 
+
+void init(sc_boolean sndCycle);
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;

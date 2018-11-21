@@ -5,10 +5,10 @@
 
 #include "sc_timer_service.h"
 
-
-void checkDone(sc_boolean shouldBeDone);
 static GuardedExit statechart;
 
+
+void checkDone(sc_boolean shouldBeDone);
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;

@@ -5,13 +5,13 @@
 
 #include "sc_timer_service.h"
 
+static Choice statechart;
+
 
 void initForEventE(sc_boolean valueForC);
 void initForEventF(sc_boolean valueForC);
 void initForEventG(sc_boolean valueForC);
 void initForEventH(sc_boolean valueForC);
-static Choice statechart;
-
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;
