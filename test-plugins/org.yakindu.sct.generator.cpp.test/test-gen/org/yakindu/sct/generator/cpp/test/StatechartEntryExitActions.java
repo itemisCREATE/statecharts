@@ -7,25 +7,24 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 import org.yakindu.sct.generator.c.gtest.GTestHelper.Compiler;
-import org.yakindu.sct.generator.c.gtest.GMockHelper;
 
 @GTest(
 	statechartBundle = "org.yakindu.sct.test.models",
-	sourceFile = "gtests/OperationsTest/OperationsTest.cc",
-	program = "gtests/OperationsTest/Operations",
-	model = "testmodels/SCTUnit/Operations.sct",
+	sourceFile = "gtests/StatechartEntryExitActions/StatechartEntryExitActions.cc",
+	program = "gtests/StatechartEntryExitActions/StatechartEntryAndExitActions",
+	model = "testmodels/SCTUnit/statechartactions/StatechartEntryAndExitActions.sct",
 	additionalFilesToCopy = {
 		"libraryTarget/sc_runner.h",
 		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
-		"Operations.cpp",
+		"StatechartEntryAndExitActions.cpp",
 		"sc_runner.cpp"
 	}
 )
 @RunWith(GTestRunner.class)
-public class OperationsTest {
-protected final GTestHelper helper = new GMockHelper(this);
+public class StatechartEntryExitActions {
+protected final GTestHelper helper = new GTestHelper(this, Compiler.GPLUSPLUS);
 
 	@Before
 	public void setUp() {
