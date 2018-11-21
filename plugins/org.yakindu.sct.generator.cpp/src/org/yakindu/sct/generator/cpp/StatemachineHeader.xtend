@@ -368,7 +368,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 		«ENDFOR»
 		
 		«IF entry.tracingUsed»
-			«tracingModule»* «Tracing_Instance»;
+			«tracingModule»* «tracingInstance»;
 		«ENDIF»
 	'''
 	

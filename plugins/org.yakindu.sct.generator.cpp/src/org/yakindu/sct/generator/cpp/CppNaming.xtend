@@ -120,7 +120,7 @@ class CppNaming extends Naming {
 		it.instance + "_OCB"
 	}
 	
-	def Tracing_Instance(ExecutionFlow it) {
+	def tracingInstance(ExecutionFlow it) {
 		"iface_TR"
 	}
 

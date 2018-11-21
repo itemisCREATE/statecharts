@@ -84,13 +84,13 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	
 	override dispatch CharSequence code(TraceStateEntered it) '''
 		«IF entry.tracingEnterState»
-		«flow.Tracing_Instance»->«flow.enterStateTracingFctID»(«flow.module»::«it.state.stateName»);
+		«flow.tracingInstance»->«flow.enterStateTracingFctID»(«flow.module»::«it.state.stateName»);
 		«ENDIF»
 	'''
 	
 	override dispatch CharSequence code(TraceStateExited it) '''
 		«IF entry.tracingExitState»
-		«flow.Tracing_Instance»->«flow.exitStateTracingFctID»(«flow.module»::«it.state.stateName»);
+		«flow.tracingInstance»->«flow.exitStateTracingFctID»(«flow.module»::«it.state.stateName»);
 		«ENDIF»
 	'''
 
