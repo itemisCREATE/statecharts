@@ -119,6 +119,10 @@ class CppNaming extends Naming {
 	def OCB_Instance(Scope it) {
 		it.instance + "_OCB"
 	}
+	
+	def Tracing_Instance(ExecutionFlow it) {
+		"iface_TR"
+	}
 
 	def dispatch String getInterfaceName(Scope it) '''
 		no interfaceName for «it»
@@ -240,6 +244,10 @@ class CppNaming extends Naming {
 			typeSpecifier.targetLanguageName + ' value'
 		else
 			''
+	}
+	
+	def tracingModule(ExecutionFlow it) {
+		module + '_TR'
 	}
 	
 	def List<String> statechartNamespace(ExecutionFlow it) {

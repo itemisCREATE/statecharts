@@ -88,6 +88,10 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 				«scopes.filter(typeof(StatechartScope)).map[createInlineOCB_Destructor].filterNullOrEmptyAndJoin»
 			«ENDIF»
 			
+			«IF entry.tracingUsed»
+				«createInlineTR_Destructor»
+			«ENDIF»
+			
 			«postStatechartDeclarations»
 			
 			«IF !namespace.nullOrEmpty»
@@ -151,6 +155,8 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			
 			«FOR s : it.scopes»«s.createPublicScope»«ENDFOR»
 			
+			«IF entry.tracingUsed»«createTracingScope»«ENDIF»
+			
 			«publicFunctionPrototypes»
 			
 			/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
@@ -167,6 +173,22 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			
 			«generateInnerClasses»
 			«ENDIF»
+		'''
+	}
+	
+	def createTracingScope(ExecutionFlow it) {
+		'''
+		class «tracingModule»
+		{
+			public:
+			virtual ~«tracingModule»() = 0;
+			
+			«IF entry.tracingEnterState»virtual void «enterStateTracingFctID»(«module»::«statesEnumType» state) = 0;«ENDIF»
+			
+			«IF entry.tracingExitState»virtual void «exitStateTracingFctID»(«module»::«statesEnumType» state) = 0;«ENDIF»
+		};
+		
+		void set«tracingModule»(«tracingModule»* tracingcallback);
 		'''
 	}
 	
@@ -234,6 +256,10 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 		return ''''''
 	}
 
+	def createInlineTR_Destructor(ExecutionFlow it) {
+		'''inline «module»::«tracingModule»::~«tracingModule»() {}'''
+	}
+	
 	def protected createPublicScope(Scope scope) {
 		switch scope {
 			InterfaceScope: scope.createPublicScope
@@ -340,6 +366,10 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			«s.interfaceName» «s.instance»;
 			«IF s.hasOperations && !entry.useStaticOPC»«s.interfaceOCBName»* «s.OCB_Instance»;«ENDIF»
 		«ENDFOR»
+		
+		«IF entry.tracingUsed»
+			«tracingModule»* «Tracing_Instance»;
+		«ENDIF»
 	'''
 	
 	def protected publicFunctionPrototypes(ExecutionFlow it) '''

@@ -96,4 +96,8 @@ class GenmodelEntries {
 		}
 		return false
 	}
+	
+	def tracingUsed(GeneratorEntry it) {
+		return (tracingEnterState || tracingExitState)
+	}
 }

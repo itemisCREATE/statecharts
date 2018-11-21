@@ -405,6 +405,11 @@ class StatemachineImplementation implements IContentTemplate {
 				}
 			«ENDIF»
 		«ENDFOR»
+		«IF entry.tracingUsed»
+		void «module»::set«tracingModule»(«tracingModule»* tracingcallback) {
+			«Tracing_Instance» = tracingcallback;
+		}
+		«ENDIF»
 	'''
 	
 	def generateVariables(ExecutionFlow it, StatechartScope scope)
