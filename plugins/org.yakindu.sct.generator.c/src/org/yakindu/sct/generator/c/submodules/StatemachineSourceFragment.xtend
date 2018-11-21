@@ -60,7 +60,9 @@ class StatemachineSourceFragment implements ISourceFragment {
 		«ENDIF»
 		
 		#include <stdlib.h>
+		«IF hasStringComparison»
 		#include <string.h>
+		«ENDIF»
 		«IF modOnReal»#include <math.h>«ENDIF»
 		/*! \file Implementation of the state machine '«name»'
 		*/
