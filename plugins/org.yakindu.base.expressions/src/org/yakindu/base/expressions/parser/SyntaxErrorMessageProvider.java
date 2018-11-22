@@ -25,12 +25,10 @@ public class SyntaxErrorMessageProvider extends org.eclipse.xtext.parser.antlr.S
 		}
 		
 		RecognitionException recognitionException = context.getRecognitionException();
-		String message = "";
+		String message = "Failed to parse Expression.";
 		boolean lexicalAnalysisFailed = recognitionException == null;
 		
-		if (lexicalAnalysisFailed) {
-			message = "Failed to parse Expression.";
-		} else {
+		if (!lexicalAnalysisFailed) {
 			message = "Failed to parse Expression '" + recognitionException.token.getText() + "'.";
 		}
 		return new SyntaxErrorMessage(message, SYNTAX_DIAGNOSTIC);
