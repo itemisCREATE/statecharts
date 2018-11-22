@@ -11,8 +11,8 @@ h4(#codegen_c_identifiersettings_feature). IdentifierSettings feature
 
 The *IdentifierSettings* feature allows the configuration of module names and identifier character length:
 
-* _moduleName_ (String, optional): Name for header and implementation. Default: statechart name.
-* _statemachinePrefix_ (Boolean, optional): Prefix that is prepended to function, state, and type names.
+* _moduleName_ (String, optional): Name for header and implementation. By default, the name of the statechart is used.
+* _statemachinePrefix_ (String, optional): Prefix that is prepended to function, state, and type names. By default, the name of the statechart is used.
 * _maxIdentifierLength_ (Integer, optional): *DEPRECATED*. Maximum number of characters of an identifier. Default: 31 characters, which is complying with the ANSI C99 standard.
 * _separator_ (String, optional): Character to replace whitespace and otherwise illegal characters in names.
 
