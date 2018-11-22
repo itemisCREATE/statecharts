@@ -1,4 +1,5 @@
 package org.yakindu.scr.eventdriveninternalevent;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
