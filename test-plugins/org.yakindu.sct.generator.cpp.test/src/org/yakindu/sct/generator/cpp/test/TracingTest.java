@@ -16,7 +16,7 @@ public class TracingTest {
 		@Override
 		protected void getTestDataFiles(Collection<String> files) {
 			super.getTestDataFiles(files);
-			files.add("gtests/TracingTest/TracingInterfaceImpl.h");
+			files.add("gtests/TracingTest/TraceObserverImpl.h");
 		}
 
 		@Override

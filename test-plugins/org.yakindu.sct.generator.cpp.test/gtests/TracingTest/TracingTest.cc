@@ -12,15 +12,15 @@
 #include <string>
 #include "gtest/gtest.h"
 #include "Tracing.h"
-#include "TracingInterfaceImpl.h"
+#include "TraceObserverImpl.h"
 
 
 TEST(Tracing, Tracing) {
 	Tracing* statechart = new Tracing();
-	TracingInterfaceImpl* tracingcallback = new TracingInterfaceImpl();
+	TraceObserverImpl* tracingcallback = new TraceObserverImpl();
 	
 	statechart->init();
-	statechart->setTracing_TR(tracingcallback);
+	statechart->setTraceObserver(tracingcallback);
 	statechart->enter();
 	EXPECT_TRUE(tracingcallback->isEntered());
 	statechart->runCycle();
