@@ -407,8 +407,12 @@ class StatemachineImplementation implements IContentTemplate {
 			«ENDIF»
 		«ENDFOR»
 		«IF entry.tracingUsed»
-		void «module»::set«tracingModule»(«tracingModule»* tracingcallback) {
+		void «module»::set«traceObserverModule»(«traceObserverModule»<«statesEnumType»>* tracingcallback) {
 			«tracingInstance» = tracingcallback;
+		}
+		
+		«traceObserverModule»<«module»::«statesEnumType»>* «module»::get«traceObserverModule»() {
+			return «tracingInstance»;
 		}
 		«ENDIF»
 	'''

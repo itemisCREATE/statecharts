@@ -88,10 +88,6 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 				«scopes.filter(typeof(StatechartScope)).map[createInlineOCB_Destructor].filterNullOrEmptyAndJoin»
 			«ENDIF»
 			
-			«IF entry.tracingUsed»
-				«createInlineTR_Destructor»
-			«ENDIF»
-			
 			«postStatechartDeclarations»
 			
 			«IF !namespace.nullOrEmpty»
@@ -155,8 +151,6 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			
 			«FOR s : it.scopes»«s.createPublicScope»«ENDFOR»
 			
-			«IF entry.tracingUsed»«createTracingScope»«ENDIF»
-			
 			«publicFunctionPrototypes»
 			
 			/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
@@ -176,21 +170,12 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 		'''
 	}
 	
-	def createTracingScope(ExecutionFlow it) {
+	def tracedStatemachineFunctions(ExecutionFlow it)
 		'''
-		class «tracingModule»
-		{
-			public:
-			virtual ~«tracingModule»() = 0;
-			
-			«IF entry.tracingEnterState»virtual void «enterStateTracingFctID»(«module»::«statesEnumType» state) = 0;«ENDIF»
-			
-			«IF entry.tracingExitState»virtual void «exitStateTracingFctID»(«module»::«statesEnumType» state) = 0;«ENDIF»
-		};
+		void set«traceObserverModule»(«traceObserverModule»<«statesEnumType»>* tracingcallback);
 		
-		void set«tracingModule»(«tracingModule»* tracingcallback);
+		«traceObserverModule»<«statesEnumType»>* get«traceObserverModule»();
 		'''
-	}
 	
 	def protected generateProtectedClassmembers(ExecutionFlow it) {
 		'''
@@ -256,10 +241,6 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 		return ''''''
 	}
 
-	def createInlineTR_Destructor(ExecutionFlow it) {
-		'''inline «module»::«tracingModule»::~«tracingModule»() {}'''
-	}
-	
 	def protected createPublicScope(Scope scope) {
 		switch scope {
 			InterfaceScope: scope.createPublicScope
@@ -368,7 +349,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 		«ENDFOR»
 		
 		«IF entry.tracingUsed»
-			«tracingModule»* «tracingInstance»;
+			«traceObserverModule»<«statesEnumType»>* «tracingInstance»;
 		«ENDIF»
 	'''
 	
@@ -377,6 +358,9 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 		
 		«IF timed»
 			«timedStatemachineFunctions»
+		«ENDIF»
+		«IF entry.tracingUsed»
+			«tracedStatemachineFunctions»
 		«ENDIF»
 	'''
 

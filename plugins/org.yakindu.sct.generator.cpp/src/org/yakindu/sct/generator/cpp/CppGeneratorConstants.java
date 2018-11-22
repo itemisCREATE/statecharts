@@ -31,4 +31,5 @@ public abstract class CppGeneratorConstants {
 	public static final String SM_INTERFACE = "StatemachineInterface";
 	public static final String SM_TIMED_INTERFACE = "TimedStatemachineInterface";
 	public static final String TIMER_INTERFACE = "TimerInterface";
+	public static final String TRACE_OBSERVER = "TraceObserver";
 }

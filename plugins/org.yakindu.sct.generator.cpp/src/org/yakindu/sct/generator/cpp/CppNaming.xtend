@@ -101,6 +101,10 @@ class CppNaming extends Naming {
 		STATE_EXITED
 	}
 	
+	def traceObserverModule() {
+		TRACE_OBSERVER
+	}
+	
 	override dispatch scopeTypeDeclMember(VariableDefinition it) '''
 		«IF type.name != 'void'»«IF const»static const «ENDIF»«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
 	'''
@@ -129,7 +133,7 @@ class CppNaming extends Naming {
 	}
 	
 	def tracingInstance(ExecutionFlow it) {
-		"iface_TR"
+		"iface" + traceObserverModule
 	}
 
 	def dispatch String getInterfaceName(Scope it) '''
@@ -252,10 +256,6 @@ class CppNaming extends Naming {
 			typeSpecifier.targetLanguageName + ' value'
 		else
 			''
-	}
-	
-	def tracingModule(ExecutionFlow it) {
-		module + '_TR'
 	}
 	
 	def List<String> statechartNamespace(ExecutionFlow it) {
