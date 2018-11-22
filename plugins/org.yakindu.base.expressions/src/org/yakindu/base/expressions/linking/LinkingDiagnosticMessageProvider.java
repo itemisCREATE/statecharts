@@ -24,7 +24,13 @@ public class LinkingDiagnosticMessageProvider extends org.eclipse.xtext.linking.
 		} catch (IllegalNodeException e) {
 			linkText = e.getNode().getText();
 		}
-		String message = "Could not find declaration of '" + linkText + "'";
+
+		String format = "Could not find declaration of %s '%s'";
+		String type = context.getReference().getEReferenceType().getName();
+		String message = String.format(format, "", linkText);
+		if (!type.equals("EObject")) {
+			message = String.format(format, type, linkText);
+		}
 		return new DiagnosticMessage(message, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC);
 	}
 }
