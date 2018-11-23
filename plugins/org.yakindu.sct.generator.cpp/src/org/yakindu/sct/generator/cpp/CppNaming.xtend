@@ -105,6 +105,14 @@ class CppNaming extends Naming {
 		TRACE_OBSERVER
 	}
 	
+	def scTracing() {
+		SM_TRACING
+	}
+	
+	def YSCNamespace() {
+		YSC_NAMESPACE
+	}
+	
 	override dispatch scopeTypeDeclMember(VariableDefinition it) '''
 		«IF type.name != 'void'»«IF const»static const «ENDIF»«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
 	'''

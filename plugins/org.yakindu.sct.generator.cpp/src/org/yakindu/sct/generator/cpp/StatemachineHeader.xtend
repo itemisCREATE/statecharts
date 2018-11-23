@@ -172,9 +172,9 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 	
 	def tracedStatemachineFunctions(ExecutionFlow it)
 		'''
-		void set«traceObserverModule»(«traceObserverModule»<«statesEnumType»>* tracingcallback);
+		void set«traceObserverModule»(«YSCNamespace»::«traceObserverModule»<«statesEnumType»>* tracingcallback);
 		
-		«traceObserverModule»<«statesEnumType»>* get«traceObserverModule»();
+		«YSCNamespace»::«traceObserverModule»<«statesEnumType»>* get«traceObserverModule»();
 		'''
 	
 	def protected generateProtectedClassmembers(ExecutionFlow it) {
@@ -349,7 +349,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 		«ENDFOR»
 		
 		«IF entry.tracingUsed»
-			«traceObserverModule»<«statesEnumType»>* «tracingInstance»;
+			«YSCNamespace»::«traceObserverModule»<«statesEnumType»>* «tracingInstance»;
 		«ENDIF»
 	'''
 	

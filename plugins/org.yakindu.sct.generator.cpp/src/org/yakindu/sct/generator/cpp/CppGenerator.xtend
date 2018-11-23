@@ -76,7 +76,7 @@ class CppGenerator implements IExecutionFlowGenerator {
 		locations.configure(flow.module.cpp, entry.sourceOutput, statemachineSourceContent)
 		
 		if (entry.tracingUsed) {
-			locations.configure(traceObserverModule.h, entry.libraryOutput, tracingContent);
+			locations.configure(scTracing.h, entry.libraryOutput, tracingContent);
 		}
 	}
 

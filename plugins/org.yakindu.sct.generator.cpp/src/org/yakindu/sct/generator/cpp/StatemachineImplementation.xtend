@@ -139,10 +139,10 @@ class StatemachineImplementation implements IContentTemplate {
 	def protected initialisationList(ExecutionFlow it) {
 		'''
 			«IF timed»«timerInstance»(«NULL_STRING»),«ENDIF»
-			«IF entry.tracingUsed»«tracingInstance»(0),«ENDIF»
 			«STATEVECTOR_POS»(0)«FOR s : getInterfaces»,
 			«s.instance»()«IF s.hasOperations && !entry.useStaticOPC»,
-			«s.OCB_Instance»(«NULL_STRING»)«ENDIF»«ENDFOR»
+			«s.OCB_Instance»(«NULL_STRING»)«ENDIF»«ENDFOR»«IF entry.tracingUsed»,
+			«tracingInstance»(0)«ENDIF»
 		'''
 	}
 	
@@ -408,11 +408,11 @@ class StatemachineImplementation implements IContentTemplate {
 		«ENDFOR»
 		«IF entry.tracingUsed»
 		
-		void «module»::set«traceObserverModule»(«traceObserverModule»<«statesEnumType»>* tracingcallback) {
+		void «module»::set«traceObserverModule»(«YSCNamespace»::«traceObserverModule»<«statesEnumType»>* tracingcallback) {
 			«tracingInstance» = tracingcallback;
 		}
 		
-		«traceObserverModule»<«module»::«statesEnumType»>* «module»::get«traceObserverModule»() {
+		«YSCNamespace»::«traceObserverModule»<«module»::«statesEnumType»>* «module»::get«traceObserverModule»() {
 			return «tracingInstance»;
 		}
 		«ENDIF»

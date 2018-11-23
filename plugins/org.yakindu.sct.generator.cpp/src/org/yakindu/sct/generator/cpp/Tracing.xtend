@@ -18,6 +18,7 @@ class Tracing implements IContentTemplate {
 		#ifndef «traceObserverModule.define»_H_
 		#define «traceObserverModule.define»_H_
 		
+		namespace «YSCNamespace»{
 		template<typename T>
 		class «traceObserverModule»
 		{
@@ -28,6 +29,7 @@ class Tracing implements IContentTemplate {
 		
 			virtual void stateExited(T state) = 0;
 		};
+		}
 		
 		#endif /* «traceObserverModule.define» */
 		

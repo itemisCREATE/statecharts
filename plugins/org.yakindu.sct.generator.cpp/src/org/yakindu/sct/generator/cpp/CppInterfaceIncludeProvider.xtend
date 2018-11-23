@@ -33,7 +33,7 @@ class CppInterfaceIncludeProvider implements IncludeProvider {
 			includes +=  include((timedStatemachineInterface.h).relativeTo(module.h))
 		}
 		if (entry.tracingUsed) {
-			includes += include((traceObserverModule.h).relativeTo(module.h))
+			includes += include((scTracing.h).relativeTo(module.h))
 		}
 			
 		includes
