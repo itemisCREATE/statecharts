@@ -145,7 +145,7 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 		if(operand instanceof ElementReferenceExpression) {
 			EObject reference = ((ElementReferenceExpression) operand).getReference();
 			if(reference instanceof Property && ((Property) reference).isConst()) {		
-					error(ERROR_POST_FIX_TO_CONST_MSG, exp, null, ERROR_POST_FIX_TO_CONST_CODE);
+				error(ERROR_POST_FIX_TO_CONST_MSG, exp, null, ERROR_POST_FIX_TO_CONST_CODE);
 			}
 		}
 	}
