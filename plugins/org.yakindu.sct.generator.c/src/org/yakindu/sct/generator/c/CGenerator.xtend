@@ -65,7 +65,7 @@ class CGenerator implements IExecutionFlowGenerator {
 		locations.configure(flow.typesModule.h, entry.libraryOutput, types, getSkipLibraryFiles(entry))
 		locations.configure(flow.module.h, entry.headerOutput, statemachineHeader)
 		locations.configure(flow.module.c, entry.sourceOutput, statemachineSource)
-		if (flow.timed || !flow.operations.empty || entry.tracingEnterState || entry.tracingExitState) {
+		if (flow.timed || !flow.operations.empty || entry.tracingUsed) {
 			locations.configure(flow.module.client.h, entry.headerOutput, statemachineRequiredHeader)
 		}
 	}

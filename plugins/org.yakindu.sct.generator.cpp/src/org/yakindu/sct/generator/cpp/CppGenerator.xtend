@@ -23,6 +23,7 @@ import org.yakindu.sct.model.sgraph.Statechart
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.*
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 
 /**
  * This is the CPP code generators main class. 
@@ -37,9 +38,11 @@ class CppGenerator implements IExecutionFlowGenerator {
 	@Inject extension StatemachineInterface statemachineInterfaceContent
 	@Inject extension StatemachineHeader statemachineHeaderContent
 	@Inject extension StatemachineImplementation statemachineSourceContent
+	@Inject extension Tracing tracingContent
 	@Inject extension SExecExtensions
 	@Inject extension CppNaming
 	@Inject extension ICoreLibraryHelper
+	@Inject extension GenmodelEntries
 
 	@Inject
 	IGenArtifactConfigurations locations
@@ -71,6 +74,10 @@ class CppGenerator implements IExecutionFlowGenerator {
 
 		locations.configure(flow.module.h, entry.headerOutput, statemachineHeaderContent)
 		locations.configure(flow.module.cpp, entry.sourceOutput, statemachineSourceContent)
+		
+		if (entry.tracingUsed) {
+			locations.configure(scTracing.h, entry.libraryOutput, tracingContent);
+		}
 	}
 
 	def isEventDriven(ExecutionFlow it) {

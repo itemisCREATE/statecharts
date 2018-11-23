@@ -71,7 +71,25 @@ bc. feature API {
 
 ==<!-- End sgen_feature_api -->==
 
+h4(#codegen_cpp_tracing_feature). Tracing feature
 
+The *Tracing* feature enables the generation of virtual tracing callback functions, which needs to be implemented:
+
+* _enterState_ (boolean, optional): Specifies whether to generate a callback function that is used to notify about state-entering events.
+* _exitState_ (boolean, optional): Specifies whether to generate a callback that is used to notify about state-exiting events.
+
+==<div class="example">==
+
+Example:
+
+bc. feature Tracing {
+    enterState = true
+    exitState  = true
+}
+
+==</div>==
+
+==<!-- End sgen_feature_tracing -->==
 
 h3(#codegen_cpp_specification_of_cpp_code). Specification of C++ code
 
