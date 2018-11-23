@@ -16,6 +16,7 @@ import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorMsg
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.warningMsg;
 import static org.junit.Assert.assertEquals;
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_ASSIGNMENT_TO_CONST_MSG;
+import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_POST_FIX_TO_CONST_MSG;
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_LEFT_HAND_ASSIGNMENT_MSG;
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE;
 import static org.yakindu.base.types.validation.TypesJavaValidator.ERROR_OPTIONAL_MUST_BE_LAST_CODE;
@@ -813,6 +814,14 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
 		assertIssueCount(diagnostics, 2);
 		assertError(diagnostics, ERROR_ASSIGNMENT_TO_CONST_MSG);
+	}
+	
+	@Test
+	public void checkPostFixUnaryExpressionToFinalVariable() {
+		Statechart statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "IncrementOrDecrementOnConst.sct");
+		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
+		assertIssueCount(diagnostics, 2);
+		assertError(diagnostics, ERROR_POST_FIX_TO_CONST_MSG);
 	}
 
 	@Test
