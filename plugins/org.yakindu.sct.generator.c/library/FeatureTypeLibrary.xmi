@@ -35,6 +35,7 @@
     <parameters
         name="exitState"
         comment="Whether to generate a callback that is used when a state is entered."
+		optional="true"
         parameterType="BOOLEAN"/>
   </types>
   <types name="Includes"
