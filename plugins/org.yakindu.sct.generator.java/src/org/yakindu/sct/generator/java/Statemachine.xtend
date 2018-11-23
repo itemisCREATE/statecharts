@@ -69,7 +69,7 @@ class Statemachine {
 			«flow.clearOutEventsFunction»
 			«flow.stateActiveFunction»
 			«flow.timingFunctions»
-			«flow.interfaceAccessors»
+			«flow.interfaceAccessors(entry)»
 			«flow.internalScopeFunctions»
 			«flow.defaultInterfaceFunctions(entry)»
 			«flow.functionImplementations»
@@ -102,6 +102,10 @@ class Statemachine {
 			importSet += jip.getImports(it).map[toString]
 		}
 		
+		if (tracingUsed(entry)) {
+			importSet += entry.getBasePackageName() + "." + traceInterface
+		}
+		
 		return importSet
 	}
 	
@@ -128,6 +132,10 @@ class Statemachine {
 		
 		private int nextStateIndex;
 		
+		«IF tracingUsed(entry)»
+		private «traceInterface»<State> «traceInstance»;
+		
+		«ENDIF»
 		«IF flow.timed»
 		private ITimer timer;
 		
@@ -357,13 +365,16 @@ class Statemachine {
 		«ENDIF»
 	'''
 	
-	def protected interfaceAccessors(ExecutionFlow flow) '''
+	def protected interfaceAccessors(ExecutionFlow flow, GeneratorEntry entry) '''
 		«FOR scope : flow.interfaceScopes»
 			public «scope.interfaceName» get«scope.interfaceName»() {
 				return «scope.interfaceName.toFirstLower()»;
 			}
 
 		«ENDFOR»
+		«IF tracingUsed(entry)»
+		«generateTraceAccessors(entry)»
+		«ENDIF»
 	'''
 	
 	def protected toImplementation(InterfaceScope scope, GeneratorEntry entry) '''
@@ -390,6 +401,16 @@ class Statemachine {
 		}
 
 		'''
+	
+	def generateTraceAccessors(GeneratorEntry entry) '''
+			public void set«traceInstance.toFirstUpper»(«traceInterface»<State> ifaceTraceObserver) {
+				this.«traceInstance» = ifaceTraceObserver;
+			}
+			
+			public «traceInterface»<State> get«traceInstance.toFirstUpper»() {
+				return «traceInstance»;
+			}
+	'''
 	
 	protected def generateClearOutEvents(InterfaceScope scope) '''
 		protected void clearOutEvents() {

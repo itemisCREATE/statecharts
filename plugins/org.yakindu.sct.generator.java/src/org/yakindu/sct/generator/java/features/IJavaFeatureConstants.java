@@ -42,6 +42,12 @@ public interface IJavaFeatureConstants {
 	
 	public static final String USE_JAVA_INT_FOR_INTEGER = "UseJavaIntForInteger";
 	
+	public static final String FEATURE_TRACING = "Tracing";
+
+	public static final String PARAMETER_TRACING_ENTER_STATE = "enterState";
+	
+	public static final String PARAMETER_TRACING_EXIT_STATE = "exitState";
+	
 	/* Constants related to the RunnableWrapper feature */
 	
 	public static final String FEATURE_RUNNABLE_WRAPPER = "RunnableWrapper";
