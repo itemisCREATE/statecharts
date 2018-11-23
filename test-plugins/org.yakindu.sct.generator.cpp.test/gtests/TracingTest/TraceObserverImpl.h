@@ -10,7 +10,7 @@
 
 #include "Tracing.h"
 
-class TraceObserverImpl : public TraceObserver<Tracing::TracingStates>{
+class TraceObserverImpl : public ysc::TraceObserver<Tracing::TracingStates>{
 public:
 	TraceObserverImpl();
 	virtual ~TraceObserverImpl();
