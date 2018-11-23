@@ -5,9 +5,9 @@
 
 #include "sc_timer_service.h"
 
-static sc_integer counter = 0l;
-
 static ChildFirstLocalReactions statechart;
+
+static sc_integer counter = 0l;
 
 
 //! The timers are managed by a timer service. */

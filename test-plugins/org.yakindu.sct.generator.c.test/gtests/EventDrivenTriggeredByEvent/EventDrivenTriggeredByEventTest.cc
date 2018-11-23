@@ -6,8 +6,8 @@
 #include "EventDrivenTriggeredByEventRequired.h"
 #include "sc_timer_service.h"
 
-
 static EventDrivenTriggeredByEvent statechart;
+
 
 
 //! The timers are managed by a timer service. */

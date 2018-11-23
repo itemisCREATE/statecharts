@@ -71,6 +71,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	SimpleEvent.class,
 	SimpleHierachy.class,
 	StatechartActive.class,
+	StatechartEntryExitActions.class,
 	StatechartLocalReactions.class,
 	StateIsActive.class,
 	StaticChoice.class,

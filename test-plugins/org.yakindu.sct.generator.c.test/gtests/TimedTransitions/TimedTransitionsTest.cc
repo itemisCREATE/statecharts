@@ -6,8 +6,8 @@
 #include "TimedTransitionsRequired.h"
 #include "sc_timer_service.h"
 
-
 static TimedTransitions statechart;
+
 
 
 //! The timers are managed by a timer service. */

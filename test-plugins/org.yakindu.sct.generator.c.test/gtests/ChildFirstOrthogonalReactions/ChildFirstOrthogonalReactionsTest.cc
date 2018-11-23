@@ -8,6 +8,8 @@
 #include "ChildFirstOrthogonalReactionsRequired.h"
 #include "sc_timer_service.h"
 
+static ChildFirstOrthogonalReactions statechart;
+
 
 sc_boolean checkA(sc_boolean ret);
 sc_boolean checkAA(sc_boolean ret);
@@ -16,8 +18,6 @@ sc_boolean checkAAC(sc_boolean ret);
 sc_boolean checkAC(sc_boolean ret);
 sc_boolean checkC(sc_boolean ret);
 sc_integer nextCounter();
-static ChildFirstOrthogonalReactions statechart;
-
 class CheckMock{
 	typedef sc_boolean (CheckMock::*functiontype)(const sc_string);
 	struct parameters {
