@@ -20,8 +20,12 @@ import org.yakindu.base.types.Event
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.java.templates.ClassTemplate
+import org.yakindu.sct.generator.java.templates.FileTemplate
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
@@ -31,8 +35,6 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
-import org.yakindu.sct.model.sexec.ExecutionState
-import org.yakindu.sct.model.sexec.Method
 
 class Statemachine {
 	@Inject protected Set<JavaIncludeProvider> includeProviders
@@ -45,37 +47,51 @@ class Statemachine {
 	@Inject protected extension FlowCode
 	@Inject protected extension StateVectorExtensions
 	
+	protected ExecutionFlow flow
+	protected GeneratorEntry entry
+		
 	def generateStatemachine(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
+		this.flow = flow
+		this.entry = entry
 		var filename = flow.getImplementationPackagePath(entry) + '/' + flow.statemachineClassName.java
-		var content = content(flow, entry)
 		fsa.generateFile(filename, content)
 	}
 	
-	def protected content(ExecutionFlow flow, GeneratorEntry entry) '''
-		«entry.licenseText»
-		package «flow.getImplementationPackageName(entry)»;
-		«flow.createImports(entry)»
-		
-		public class «flow.statemachineClassName» implements «flow.statemachineInterfaceName» {
-
-			«flow.createFieldDeclarations(entry)»
-			«flow.createConstructor»
-			«flow.initFunction»
-			«flow.enterFunction»
-			«flow.exitFunction»
-			«flow.activeFunction»
-			«flow.finalFunction»
-			«flow.clearInEventsFunction»
-			«flow.clearOutEventsFunction»
-			«flow.stateActiveFunction»
-			«flow.timingFunctions»
-			«flow.interfaceAccessors»
-			«flow.internalScopeFunctions»
-			«flow.defaultInterfaceFunctions(entry)»
-			«flow.functionImplementations»
-			«flow.runCycleFunction»
-		}
-	'''
+	def protected content() { 
+		FileTemplate
+			.create
+			.fileComment(entry.licenseText)
+			.packageName(getImplementationPackageName(flow, entry))
+			.addImports(imports(flow, entry))
+			.addImports(includeProviders.map[getImports(flow)].flatten)
+			.classTemplate(
+				ClassTemplate
+					.create
+					.className(flow.statemachineClassName)
+					.addInterface(flow.statemachineInterfaceName)
+					.classContent(
+						'''
+						«flow.createFieldDeclarations(entry)»
+						«flow.createConstructor»
+						«flow.initFunction»
+						«flow.enterFunction»
+						«flow.exitFunction»
+						«flow.activeFunction»
+						«flow.finalFunction»
+						«flow.clearInEventsFunction»
+						«flow.clearOutEventsFunction»
+						«flow.stateActiveFunction»
+						«flow.timingFunctions»
+						«flow.interfaceAccessors»
+						«flow.internalScopeFunctions»
+						«flow.defaultInterfaceFunctions(entry)»
+						«flow.functionImplementations»
+						«flow.runCycleFunction»
+						'''
+					)
+			)
+			.generate
+	}
 	
 	
 	
@@ -85,9 +101,9 @@ class Statemachine {
 		«ENDFOR»
 	'''
 	
-	def protected imports(ExecutionFlow it, GeneratorEntry entry) {
+	def protected Set<CharSequence> imports(ExecutionFlow it, GeneratorEntry entry) {
 		// we need a sorted set for the imports
-		val Set<String> importSet = new TreeSet
+		val Set<CharSequence> importSet = new TreeSet
 		
 		if (entry.createInterfaceObserver && hasOutgoingEvents) {
 			importSet += "java.util.List"
