@@ -29,11 +29,15 @@ class ITracing {
 			// use default target folder path in case no library or API target folder is specified (the file will be overwritten there)
 			fsa.generateFile(entry.basePackagePath + '/' + traceInterface.java, content(entry))
 		}
-//		fsa.generateFile(entry.basePackagePath + '/' + traceInterface.java, content(entry))
+	}
+	
+	def content(GeneratorEntry entry) {
+		content(entry.licenseText, entry.basePackageName)
 	}
 
-	def private content(GeneratorEntry entry) '''
-	package tracingjava;
+	def private content(String licenceText, String basePackage) '''
+	«licenceText»
+	package «basePackage»;
 	
 	public interface «traceInterface»<T> {
 		abstract void stateEntered(T state);
