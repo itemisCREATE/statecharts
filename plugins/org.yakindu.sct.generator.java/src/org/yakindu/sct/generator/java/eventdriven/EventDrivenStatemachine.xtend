@@ -25,7 +25,7 @@ class EventDrivenStatemachine extends Statemachine {
 	/** Adds imports for the internal event queue if neccessary. */
 	override protected imports(ExecutionFlow it, GeneratorEntry entry) {
 
-		val Set<String> importSet = super.imports(it, entry);	
+		val Set<CharSequence> importSet = super.imports(it, entry);	
 		
 		if (hasLocalEvents) {
 			importSet += "java.util.Queue"
