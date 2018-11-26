@@ -16,6 +16,7 @@ import org.yakindu.sct.model.sgen.FeatureParameterValue
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
 import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.*
+import org.yakindu.sct.generator.core.library.impl.CoreLibraryDefaultFeatureValueProvider
 
 class GenmodelEntries {
 
@@ -73,7 +74,7 @@ class GenmodelEntries {
 		if (licenseTextParameter !== null) {
 			return "/** " + licenseTextParameter.stringValue.trim + " */"
 		}
-		return null
+		return "/** " + CoreLibraryDefaultFeatureValueProvider.DEFAULT_LICENCE_TEXT + " */"
 	}
 
 	def getBasePackageName(GeneratorEntry it) {
