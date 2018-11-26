@@ -10,8 +10,12 @@
  */
 package org.yakindu.sct.generator.cpp;
 
+import static org.yakindu.sct.generator.c.features.ICFeatureConstants.FEATURE_TRACING;
+import static org.yakindu.sct.generator.c.features.ICFeatureConstants.PARAMETER_TRACING_ENTER_STATE;
+import static org.yakindu.sct.generator.c.features.ICFeatureConstants.PARAMETER_TRACING_EXIT_STATE;
 import static org.yakindu.sct.generator.cpp.features.CPPFeatureConstants.FEATURE_INCLUDES;
 import static org.yakindu.sct.generator.cpp.features.CPPFeatureConstants.PARAMETER_INCLUDES_USE_RELATIVE_PATHS;
+import static org.yakindu.sct.model.sexec.transformation.IModelSequencer.ADD_TRACES;
 
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.sct.generator.c.DefaultGenArtifactConfigurations;
@@ -61,10 +65,21 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		binder.bind(INamingService.class).to(CppNamingService.class);
 		binder.bind(ITypeSystemInferrer.class).to(STextTypeInferrer.class);
 		binder.bind(Naming.class).to(CppNaming.class);
+		bindTracingProperty(entry, binder);
 		bindEventDrivenClasses(entry, binder);
 		bindIGenArtifactConfigurations(entry, binder);
 		addIncludeProvider(binder, ScTypesIncludeProvider.class);
 		addIncludeProvider(binder, CppInterfaceIncludeProvider.class);
+	}
+	
+	protected void bindTracingProperty(GeneratorEntry entry, Binder binder) {
+		FeatureParameterValue traceEnterFeature = entry.getFeatureParameterValue(FEATURE_TRACING,
+				PARAMETER_TRACING_ENTER_STATE);
+		FeatureParameterValue traceExitFeature = entry.getFeatureParameterValue(FEATURE_TRACING,
+				PARAMETER_TRACING_EXIT_STATE);
+		boolean traceEnter = traceEnterFeature != null ? traceEnterFeature.getBooleanValue() : false;
+		boolean traceExit = traceExitFeature != null ? traceEnterFeature.getBooleanValue() : false;
+		binder.bind(Boolean.class).annotatedWith(Names.named(ADD_TRACES)).toInstance(traceEnter || traceExit);
 	}
 
 	protected void addIncludeProvider(Binder binder, Class<? extends IncludeProvider> provider) {

@@ -41,7 +41,7 @@ class StatemachineRequiredHeader implements IContentTemplate {
 		#define «module.client.define»_H_
 
 		#include "«(typesModule.h).relativeTo(module.client.h)»"
-		«IF timed || operations.size > 0 || entry.tracingEnterState || entry.tracingExitState»
+		«IF timed || operations.size > 0 || entry.tracingUsed»
 		#include "«(module.h).relativeTo(module.client.h)»"
 		«ENDIF»
 
@@ -100,7 +100,7 @@ class StatemachineRequiredHeader implements IContentTemplate {
 		«ENDIF»
 		
 		
-		«IF entry.tracingEnterState || entry.tracingExitState»
+		«IF entry.tracingUsed»
 		/*!
 		 * Tracing callback functions
 		 */

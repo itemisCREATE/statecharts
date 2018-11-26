@@ -5,8 +5,8 @@
 
 #include "sc_timer_service.h"
 
-
 static STextKeywordsInStatesAndRegions statechart;
+
 
 
 //! The timers are managed by a timer service. */

@@ -8,8 +8,8 @@
 #include "OperationsRequired.h"
 #include "sc_timer_service.h"
 
-
 static Operations statechart;
+
 
 class AlwaysTrueMock{
 	typedef sc_boolean (AlwaysTrueMock::*functiontype)();
