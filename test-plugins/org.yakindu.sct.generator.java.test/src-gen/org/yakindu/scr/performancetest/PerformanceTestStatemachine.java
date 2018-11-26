@@ -123,13 +123,18 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
-		entryAction();
+		timer.setTimer(this, 0, 2000, true);
+		
+		timer.setTimer(this, 1, 6200, true);
+		
 		enterSequence_mr_default();
 	}
 	
 	public void exit() {
 		exitSequence_mr();
-		exitAction();
+		timer.unsetTimer(this, 0);
+		
+		timer.unsetTimer(this, 1);
 	}
 	
 	/**
@@ -337,23 +342,9 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		enterSequence_mr_B_r1_S_default();
 	}
 	
-	/* Entry action for statechart 'PerformanceTest'. */
-	private void entryAction() {
-		timer.setTimer(this, 0, 2000, true);
-		
-		timer.setTimer(this, 1, 6200, true);
-	}
-	
 	/* Entry action for state 'A'. */
 	private void entryAction_mr_A() {
 		sCInterface.setA(sCInterface.getA() + 1);
-	}
-	
-	/* Exit action for state 'PerformanceTest'. */
-	private void exitAction() {
-		timer.unsetTimer(this, 0);
-		
-		timer.unsetTimer(this, 1);
 	}
 	
 	/* 'default' enter sequence for state A */

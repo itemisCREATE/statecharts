@@ -237,13 +237,14 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
-		entryAction();
+		timer.setTimer(this, 0, 1 * 1000, true);
+		
 		enterSequence_main_region_default();
 	}
 	
 	public void exit() {
 		exitSequence_main_region();
-		exitAction();
+		timer.unsetTimer(this, 0);
 	}
 	
 	/**
@@ -334,16 +335,6 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	public void setInternalOperationCallback(
 			InternalOperationCallback operationCallback) {
 		this.operationCallback = operationCallback;
-	}
-	
-	/* Entry action for statechart 'StatechartKeywords'. */
-	private void entryAction() {
-		timer.setTimer(this, 0, 1 * 1000, true);
-	}
-	
-	/* Exit action for state 'StatechartKeywords'. */
-	private void exitAction() {
-		timer.unsetTimer(this, 0);
 	}
 	
 	/* 'default' enter sequence for state Timer */
