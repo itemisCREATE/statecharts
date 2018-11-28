@@ -11,22 +11,14 @@
 package org.yakindu.sct.model.stext.scoping;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Optional;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -37,7 +29,6 @@ import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
 import org.eclipse.xtext.scoping.impl.SelectableBasedScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
-import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.resource.TypedResourceDescriptionStrategy;
@@ -45,10 +36,6 @@ import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.extensions.STextExtensions;
-import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
-import org.yakindu.sct.model.stext.stext.ImportScope;
-import org.yakindu.sct.model.stext.stext.StatechartSpecification;
-import org.yakindu.sct.model.stext.stext.StextPackage;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -74,11 +61,11 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	@Inject
 	private STextLibraryGlobalScopeProvider libraryScope;
 	@Inject
-	private IPackageImport2URIMapper mapper;
-	@Inject
 	private ImportedResourceCache resourceDescriptionCache;
 	@Inject
 	private STextExtensions utils;
+	@Inject
+	private ImportUriProvider importUriProvider;
 
 	@Override
 	public void setCache(IResourceScopeCache cache) {
@@ -136,65 +123,16 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 					}
 				});
 	}
-
+	
 	@Override
 	protected LinkedHashSet<URI> getImportedUris(final Resource resource) {
 		return cache.get(ImportUriGlobalScopeProvider.class.getName(), resource, new Provider<LinkedHashSet<URI>>() {
+
 			@Override
 			public LinkedHashSet<URI> get() {
-				final LinkedHashSet<URI> uniqueImportURIs = new LinkedHashSet<>(5);
-				IAcceptor<String> collector = createURICollector(resource, uniqueImportURIs);
-				Collection<ImportScope> importScopes = getImportScopes(resource);
-				for (ImportScope object : importScopes) {
-					EList<String> imports = object.getImports();
-					for (String packageImport : imports) {
-						collectPackageImports(resource, packageImport, collector, uniqueImportURIs);
-					}
-				}
-				Iterator<URI> uriIter = uniqueImportURIs.iterator();
-				while (uriIter.hasNext()) {
-					if (!isValidUri(resource, uriIter.next().trimQuery()))
-						uriIter.remove();
-				}
-				return uniqueImportURIs;
-			}
-
-			private Collection<ImportScope> getImportScopes(final Resource resource) {
-				StatechartSpecification specification = (StatechartSpecification) EcoreUtil
-						.getObjectByType(resource.getContents(), StextPackage.Literals.STATECHART_SPECIFICATION);
-				if (specification != null) {
-					return EcoreUtil.getObjectsByType(specification.getScopes(), StextPackage.Literals.IMPORT_SCOPE);
-				} else {
-					Statechart statechart = utils.getStatechart(resource);
-					if (statechart == null) {
-						return new LinkedHashSet<>();
-					}
-					return EcoreUtil.getObjectsByType(statechart.getScopes(), StextPackage.Literals.IMPORT_SCOPE);
-				}
+				return importUriProvider.get(resource);
 			}
 		});
-	}
-
-	protected boolean isValidUri(Resource context, URI uri) {
-		boolean validURI = EcoreUtil2.isValidUri(context, uri);
-		if (!validURI) {
-			return getConverter().exists(uri, null);
-		}
-		return true;
-	}
-
-	protected void collectPackageImports(Resource resource, String packageImport, IAcceptor<String> acceptor,
-			LinkedHashSet<URI> uniqueImportURIs) {
-		Optional<PackageImport> pkgImport = mapper.findPackageImport(resource, packageImport);
-		if (pkgImport.isPresent() && pkgImport.get().getUri() != null
-				&& getConverter().exists(pkgImport.get().getUri().trimQuery(), null)) {
-			acceptor.accept(pkgImport.get().getUri().toString());
-		}
-	}
-
-	protected URIConverter getConverter() {
-		return TransactionalEditingDomain.Registry.INSTANCE.getEditingDomain(SharedEditingDomainFactory.DOMAIN_ID)
-				.getResourceSet().getURIConverter();
 	}
 
 	/**
