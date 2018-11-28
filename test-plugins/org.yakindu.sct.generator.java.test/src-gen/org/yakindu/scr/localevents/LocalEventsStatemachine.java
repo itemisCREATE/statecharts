@@ -1,4 +1,5 @@
 package org.yakindu.scr.localevents;
+
 import java.util.LinkedList;
 import java.util.Queue;
 

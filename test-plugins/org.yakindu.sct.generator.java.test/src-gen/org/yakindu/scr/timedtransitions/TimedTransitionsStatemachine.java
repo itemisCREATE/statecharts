@@ -1,4 +1,5 @@
 package org.yakindu.scr.timedtransitions;
+
 import org.yakindu.scr.ITimer;
 
 public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachine {

@@ -96,7 +96,7 @@ class Statemachine {
 	
 	
 	def protected createImports(ExecutionFlow flow, GeneratorEntry entry) '''
-		«FOR importEntry : flow.imports(entry)»
+		«FOR importEntry : flow.imports(entry) BEFORE System.lineSeparator»
 			import «importEntry»;
 		«ENDFOR»
 	'''
