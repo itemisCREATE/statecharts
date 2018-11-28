@@ -42,7 +42,6 @@ import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor;
 import org.yakindu.base.types.validation.TypesJavaValidator;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -133,6 +132,20 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 			if (((Property) referencedObject).isConst()) {
 				error(ERROR_ASSIGNMENT_TO_CONST_MSG, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF,
 						ERROR_ASSIGNMENT_TO_CONST_CODE);
+			}
+		}
+	}
+	
+	public static final String ERROR_POST_FIX_TO_CONST_CODE = "PostFixToConst";
+	public static final String ERROR_POST_FIX_TO_CONST_MSG = "Increment or decrement to constant not allowed.";
+	
+	@Check(CheckType.FAST)
+	public void checkPostFixUnaryExpressionToFinalVariable(PostFixUnaryExpression exp) {
+		Expression operand = exp.getOperand();
+		if(operand instanceof ElementReferenceExpression) {
+			EObject reference = ((ElementReferenceExpression) operand).getReference();
+			if(reference instanceof Property && ((Property) reference).isConst()) {		
+				error(ERROR_POST_FIX_TO_CONST_MSG, exp, null, ERROR_POST_FIX_TO_CONST_CODE);
 			}
 		}
 	}

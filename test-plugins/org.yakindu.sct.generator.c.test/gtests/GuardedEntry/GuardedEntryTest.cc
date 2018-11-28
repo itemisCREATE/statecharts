@@ -5,10 +5,10 @@
 
 #include "sc_timer_service.h"
 
-
-void initEntryInTransition(sc_boolean guardVar, sc_boolean doneVar);
 static GuardedEntry statechart;
 
+
+void initEntryInTransition(sc_boolean guardVar, sc_boolean doneVar);
 
 //! The timers are managed by a timer service. */
 static sc_unit_timer_service_t timer_service;

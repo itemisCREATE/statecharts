@@ -15,6 +15,6 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({OperationsWithoutBracesTestCustom.class, UnimplementedOCBTest.class, StateNumTest.class})
+@SuiteClasses({OperationsWithoutBracesTestCustom.class, UnimplementedOCBTest.class, StateNumTest.class, TracingTest.class})
 public class AllTestsTestCustom {
 }

@@ -1,4 +1,5 @@
 package org.yakindu.scr.statechartkeywords;
+
 import java.util.LinkedList;
 import java.util.List;
 import org.yakindu.scr.ITimer;

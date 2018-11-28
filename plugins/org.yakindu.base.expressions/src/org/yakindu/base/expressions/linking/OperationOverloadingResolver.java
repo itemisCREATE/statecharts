@@ -101,7 +101,8 @@ public class OperationOverloadingResolver {
 		for (int i = 0; i < argumentTypes.size(); i++) {
 			Type type1 = argumentTypes.get(i);
 			Type type2 = parameterTypes.get(i);
-			if (!typeSystem.isSuperType(type2, type1))
+			
+			if (!typeSystem.isConvertableTo(type1, type2) && !typeSystem.isSuperType(type2, type1))
 				return false;
 		}
 		return true;

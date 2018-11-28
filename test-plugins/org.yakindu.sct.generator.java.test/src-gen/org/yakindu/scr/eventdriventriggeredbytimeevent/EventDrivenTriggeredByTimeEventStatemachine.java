@@ -1,4 +1,5 @@
 package org.yakindu.scr.eventdriventriggeredbytimeevent;
+
 import org.yakindu.scr.ITimer;
 
 public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDrivenTriggeredByTimeEventStatemachine {

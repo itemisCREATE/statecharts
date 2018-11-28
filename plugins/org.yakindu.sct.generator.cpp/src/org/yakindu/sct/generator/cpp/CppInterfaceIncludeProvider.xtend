@@ -16,19 +16,30 @@ import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.IncludeProvider
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries
+import org.yakindu.sct.model.sgen.GeneratorEntry
 
 class CppInterfaceIncludeProvider implements IncludeProvider {
 
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
+	@Inject extension GenmodelEntries
+	@Inject extension GeneratorEntry entry
 
 	override getIncludes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
 		val List<CharSequence> includes = newArrayList
-		includes += '''#include "«(statemachineInterface.h).relativeTo(module.h)»"'''
-		if (timed)
-			includes += '''#include "«(timedStatemachineInterface.h).relativeTo(module.h)»"'''
+		includes += include((statemachineInterface.h).relativeTo(module.h))
+		if (timed) {
+			includes +=  include((timedStatemachineInterface.h).relativeTo(module.h))
+		}
+		if (entry.tracingUsed) {
+			includes += include((scTracing.h).relativeTo(module.h))
+		}
 			
 		includes
 	}
-
+		
+	def include(CharSequence it)'''
+	#include "«it»"
+	'''
 }

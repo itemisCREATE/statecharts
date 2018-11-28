@@ -15,6 +15,7 @@ addons:
 cache:
   directories:
   - $HOME/.m2
+  - $HOME/.ccache
 env:
   global:
   - SWT_GTK3=0
@@ -42,8 +43,28 @@ before_script:
  - cd ../..
  - export GMOCK_HOME=`pwd`
  - cd $TRAVIS_BUILD_DIR
+  # Install ccache
+ - mkdir ccache
+ - cd ccache
+ - wget https://www.samba.org/ftp/ccache/ccache-3.5.tar.gz
+ - tar -xzvf ccache-3.5.tar.gz
+ - cd ccache-3.5
+ - ./configure
+ - make
+ - cp ccache ..
+ - cd ..
+ - ln -s ccache gcc
+ - ln -s ccache g++
+ - ln -s ccache cc
+ - ln -s ccache c++
+ - export PATH=$PWD:$PATH
+# Display ccache usage statistics before build
+ - ccache -s
+ - cd $TRAVIS_BUILD_DIR
 before_install:
 - sh -e /etc/init.d/xvfb start - sleep 10
 script:
 - cd releng/org.yakindu.sct.releng
 - mvn clean verify -P$TARGET,tests
+# Display ccache usage statistics
+- ccache -s

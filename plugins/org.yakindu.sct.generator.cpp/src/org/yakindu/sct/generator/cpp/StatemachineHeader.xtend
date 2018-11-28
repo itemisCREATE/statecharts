@@ -170,6 +170,13 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 		'''
 	}
 	
+	def tracedStatemachineFunctions(ExecutionFlow it)
+		'''
+		void set«traceObserverModule»(«YSCNamespace»::«traceObserverModule»<«statesEnumType»>* tracingcallback);
+		
+		«YSCNamespace»::«traceObserverModule»<«statesEnumType»>* get«traceObserverModule»();
+		'''
+	
 	def protected generateProtectedClassmembers(ExecutionFlow it) {
 		'''
 			«IF entry.innerClassVisibility == "protected"»
@@ -340,6 +347,10 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			«s.interfaceName» «s.instance»;
 			«IF s.hasOperations && !entry.useStaticOPC»«s.interfaceOCBName»* «s.OCB_Instance»;«ENDIF»
 		«ENDFOR»
+		
+		«IF entry.tracingUsed»
+			«YSCNamespace»::«traceObserverModule»<«statesEnumType»>* «tracingInstance»;
+		«ENDIF»
 	'''
 	
 	def protected publicFunctionPrototypes(ExecutionFlow it) '''
@@ -347,6 +358,9 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 		
 		«IF timed»
 			«timedStatemachineFunctions»
+		«ENDIF»
+		«IF entry.tracingUsed»
+			«tracedStatemachineFunctions»
 		«ENDIF»
 	'''
 
