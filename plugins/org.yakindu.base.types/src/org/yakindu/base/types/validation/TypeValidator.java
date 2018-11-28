@@ -118,6 +118,11 @@ public class TypeValidator {
 			IValidationIssueAcceptor acceptor) {
 		if (subResult == null || superResult == null)
 			return;
+		
+		if (registry.isConvertableTo(subResult.getType(), superResult.getType())) {
+			return;
+		}
+		
 		if (!registry.isSuperType(subResult.getType(), superResult.getType())) {
 			msg = msg != null ? msg : String.format(ASSERT_COMPATIBLE, subResult, superResult);
 			acceptor.accept(new ValidationIssue(Severity.ERROR, msg, NOT_COMPATIBLE_CODE));
