@@ -694,6 +694,16 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	@Test
+	public void checkNotRaisedOutEvent() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "NeverRaisedOutEvent.sct");
+
+		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
+		assertIssueCount(diagnostics, 2);
+		assertWarning(diagnostics, String.format(OUT_EVENT_NEVER_RAISED, "NameOfOutEvent"));
+		assertWarning(diagnostics, String.format(OUT_EVENT_NEVER_RAISED, "booleanOutEvent"));
+	}
+	
+	@Test
 	public void checkTransitionPropertySpec() {
 		// Test source state isn't composite
 		statechart = AbstractTestModelsUtil
@@ -867,6 +877,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 	@Test
 	public void transitionsWithNoTrigger() {
+		// TODO
 	}
 
 	@Test

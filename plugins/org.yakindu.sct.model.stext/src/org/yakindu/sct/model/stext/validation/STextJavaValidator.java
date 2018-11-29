@@ -52,6 +52,7 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.expressions.PostFixUnaryExpression;
+import org.yakindu.base.expressions.expressions.impl.ElementReferenceExpressionImpl;
 import org.yakindu.base.expressions.validation.ExpressionsJavaValidator;
 import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.Declaration;
@@ -106,6 +107,7 @@ import org.yakindu.sct.model.stext.stext.RegularEventSpec;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
+import org.yakindu.sct.model.stext.stext.impl.EventValueReferenceExpressionImpl;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -164,6 +166,68 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				error(GUARD_CONTAINS_ASSIGNMENT, guard, null);
 			}
 		}
+	}
+
+	@Check(CheckType.FAST)
+	public void checkNotRaisedOutEvent(EventDefinition event) {
+		if (event.eIsProxy() || event.getDirection() != Direction.OUT
+				|| !(event.eContainer() instanceof InterfaceScope)) {
+			return;
+		}
+
+		Statechart statechart = utils.getStatechart(event);
+		List<EventRaisingExpression> eventRaisingExpressions = EcoreUtil2.getAllContentsOfType(statechart,
+				EventRaisingExpression.class);
+
+		List<ReactionTrigger> triggers = EcoreUtil2.getAllContentsOfType(statechart, ReactionTrigger.class);
+
+		boolean isRaisedInStatechart = eventRaisingExpressions.stream()
+				.anyMatch(exp -> EcoreUtil.equals(event, getRaisedEvent(exp)));
+		boolean isUsedAsReactionTrigger = false;
+		boolean isUsedInsideReactionGuards = false;
+		for (ReactionTrigger trigger : triggers) {
+			
+			if (trigger.getGuard() != null) {
+				if (trigger.getGuard().getExpression() instanceof EventValueReferenceExpressionImpl) {
+					EventValueReferenceExpression valueRef = (EventValueReferenceExpression) trigger.getGuard().getExpression();
+					
+					if (valueRef.getValue() instanceof ElementReferenceExpression) {
+						ElementReferenceExpression refExp = (ElementReferenceExpressionImpl) valueRef.getValue();
+						
+						EObject reference = refExp.getReference();
+						if (reference instanceof EventDefinition) {
+							EventDefinition eventDefinition = (EventDefinition) reference;
+							
+							// event names are unique
+							isUsedInsideReactionGuards = eventDefinition.getName().equals(event.getName());
+						}
+					}
+				}
+			} else if (trigger.eContainer() instanceof Transition) {
+				Transition transition = (Transition) trigger.eContainer();
+
+				// event names are unique
+				isUsedAsReactionTrigger = transition.getSpecification().trim().equals(event.getName());
+			}
+		}
+
+		if ((isUsedAsReactionTrigger || isUsedInsideReactionGuards) && !isRaisedInStatechart) {
+			warning(String.format(OUT_EVENT_NEVER_RAISED, event.getName()), null, -1);
+		}
+	}
+
+	private EventDefinition getRaisedEvent(EventRaisingExpression exp) {
+		Expression eventExp = exp.getEvent();
+
+		if (eventExp instanceof FeatureCall) {
+			FeatureCall featureCall = (FeatureCall) eventExp;
+			return (EventDefinition) featureCall.getFeature();
+		}
+		if (eventExp instanceof ElementReferenceExpression) {
+			ElementReferenceExpression referenceExpression = (ElementReferenceExpression) eventExp;
+			return (EventDefinition) referenceExpression.getReference();
+		}
+		return null;
 	}
 
 	@Check(CheckType.FAST)
@@ -744,6 +808,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	}
 
 	protected EObject unwrap(Expression eventExpression) {
+		// TODO: refactor to use generics
 		EObject element = null;
 		if (eventExpression instanceof ElementReferenceExpression) {
 			element = ((ElementReferenceExpression) eventExpression).getReference();
