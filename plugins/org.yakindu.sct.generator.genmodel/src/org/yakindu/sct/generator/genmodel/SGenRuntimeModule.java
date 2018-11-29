@@ -10,9 +10,13 @@
  */
 package org.yakindu.sct.generator.genmodel;
 
+import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.yakindu.base.expressions.linking.LinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.serializer.tokens.ICrossReferenceSerializer;
+import org.yakindu.base.expressions.parser.SyntaxErrorMessageProvider;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
@@ -29,7 +33,9 @@ public class SGenRuntimeModule extends org.yakindu.sct.generator.genmodel.Abstra
 	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
+		binder.bind(ILinkingDiagnosticMessageProvider.class).to(LinkingDiagnosticMessageProvider.class);
 		binder.bind(ITypeSystem.class).toInstance(getTypeSystem());
+		binder.bind(ISyntaxErrorMessageProvider.class).to(SyntaxErrorMessageProvider.class);
 	}
 
 	protected ITypeSystem getTypeSystem() {
