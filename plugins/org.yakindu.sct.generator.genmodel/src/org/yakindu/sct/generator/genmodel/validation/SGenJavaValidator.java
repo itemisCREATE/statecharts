@@ -275,9 +275,15 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 			if (reference instanceof DomainElement) {
 				String domainID = ((DomainElement) reference).getDomainID();
 				if (!validDomains.isEmpty() && !validDomains.contains(domainID)) {
-//					error(String.format(INVALID_DOMAIN_ID, domainID, Arrays.toString(validDomains.toArray())),
-//							generatorEntry, SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF);
-					error(String.format(INVALID_DOMAIN_ID, domainID, Arrays.toString(validDomains.toArray())), generatorEntry, SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF, CODE_REQUIRED_DOMAIN, "Change domain to:");
+					String issueData = null;
+					for (String validDomain : validDomains) {
+						if(issueData == null) {
+							issueData = validDomain;
+						} else {
+							issueData = issueData + ";" + validDomain;
+						}
+					}
+					error(String.format(INVALID_DOMAIN_ID, domainID, Arrays.toString(validDomains.toArray())), generatorEntry, SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF, CODE_REQUIRED_DOMAIN, issueData);
 				}
 			}
 		}

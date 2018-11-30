@@ -80,13 +80,18 @@ public class SGenQuickfixProvider extends DefaultQuickfixProvider {
 	
 	@Fix(SGenJavaValidator.CODE_REQUIRED_DOMAIN)
 	public void changeToValidDomain(final Issue issue, IssueResolutionAcceptor acceptor) {
-		System.out.println("found");
-		acceptor.accept(issue, "Add feature " + issue.getData()[0], "Adds the feature " + issue.getData()[0], null,
+		String[] validDomains = issue.getData()[0].split(";");
+		for(String validDomain : validDomains) {
+			addAcceptor(issue, acceptor, validDomain);
+		}
+	}
+	
+	private void addAcceptor(final Issue issue,IssueResolutionAcceptor acceptor, String validDomain) {
+		acceptor.accept(issue, "Change to: " + validDomain, "Available domain: " + validDomain, null,
 				new ISemanticModification() {
 
 					@Override
 					public void apply(EObject element, IModificationContext context) throws Exception {
-						System.out.println("found2");
 						if (element instanceof GeneratorEntry) {
 							EObject elementRef = ((GeneratorEntry) element).getElementRef();
 							if (elementRef instanceof Statechart) {
@@ -101,8 +106,7 @@ public class SGenQuickfixProvider extends DefaultQuickfixProvider {
 											Statechart realStatechart = (Statechart) DiagramPartitioningUtil
 													.getSharedDomain().getResourceSet()
 													.getEObject(EcoreUtil.getURI(elementRef), true);
-											(realStatechart).setDomainID("com.yakindu.domain.scxml");
-											System.out.println("found3");
+											(realStatechart).setDomainID(validDomain);
 										} catch (Exception ex) {
 											return CommandResult.newErrorCommandResult(ex);
 										}
@@ -127,8 +131,9 @@ public class SGenQuickfixProvider extends DefaultQuickfixProvider {
 					}
 				});
 
+		
 	}
-	
+
 	public static void executeCommand(IUndoableOperation command, Resource resource, boolean serialize) {
 		IOperationHistory history = OperationHistoryFactory.getOperationHistory();
 
