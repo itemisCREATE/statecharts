@@ -29,8 +29,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.notation.Diagram;
@@ -90,34 +90,37 @@ public class SGenQuickfixProvider extends DefaultQuickfixProvider {
 						if (element instanceof GeneratorEntry) {
 							EObject elementRef = ((GeneratorEntry) element).getElementRef();
 							if (elementRef instanceof Statechart) {
-								Diagram diagram = getDiagramfromStatechart((Statechart) elementRef);
-								TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(diagram);
 								TransactionalEditingDomain sharedDomain = DiagramPartitioningUtil.getSharedDomain();
-								Resource eResource = elementRef.eResource();
-								URI uri = eResource.getURI();
-									AbstractTransactionalCommand refactoringCommand = new AbstractTransactionalCommand(sharedDomain,
-											"Domain change command", Collections.EMPTY_LIST) {
+								AbstractTransactionalCommand refactoringCommand = new AbstractTransactionalCommand(
+										sharedDomain, "Domain change command", Collections.EMPTY_LIST) {
 
-										@Override
-										protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info)
-												throws ExecutionException {
-											try {
-												((Statechart) elementRef).setDomainID("com.yakindu.domain.scxml");
-												System.out.println("found3");
-											} catch (Exception ex) {
-												return CommandResult.newErrorCommandResult(ex);
-											}
-											return CommandResult.newOKCommandResult();
+									@Override
+									protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
+											IAdaptable info) throws ExecutionException {
+										try {
+											Statechart realStatechart = (Statechart) DiagramPartitioningUtil
+													.getSharedDomain().getResourceSet()
+													.getEObject(EcoreUtil.getURI(elementRef), true);
+											(realStatechart).setDomainID("com.yakindu.domain.scxml");
+											System.out.println("found3");
+										} catch (Exception ex) {
+											return CommandResult.newErrorCommandResult(ex);
 										}
+										return CommandResult.newOKCommandResult();
+									}
 
-										@Override
-										protected IStatus doUndo(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-											return Status.CANCEL_STATUS;
-										}
+									@Override
+									protected IStatus doUndo(IProgressMonitor monitor, IAdaptable info)
+											throws ExecutionException {
+										return Status.CANCEL_STATUS;
+									}
 
-									};
-									executeCommand(refactoringCommand, eResource, true);
-
+								};
+								try {
+									refactoringCommand.execute(new NullProgressMonitor(), null);
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								}
 							}
 						}
 
