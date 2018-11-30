@@ -165,8 +165,6 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	
 	// context Statechart
 	protected void suppressKeywords(List<Keyword> suppressKeywords, StatechartSpecification model) {
-		suppressKeywords.addAll(getKeywords(grammarAccess.getExitEventAccess().getGroup().eContents()));
-		suppressKeywords.addAll(getKeywords(grammarAccess.getEntryEventAccess().getGroup().eContents()));
 		EList<EObject> importKeyWordList = new BasicEList<>();
 		importKeyWordList.add(grammarAccess.getImportScopeAccess().getImportKeyword_1());
 		suppressKeywords.addAll(getKeywords(importKeyWordList));
