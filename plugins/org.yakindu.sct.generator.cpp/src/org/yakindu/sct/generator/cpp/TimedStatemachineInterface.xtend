@@ -57,6 +57,11 @@ class TimedStatemachineInterface implements IContentTemplate {
 				/*! Callback method if a time event occurred.
 				*/
 				virtual void «raiseTimeEventFctID»(«EVENT_TYPE» event) = 0;
+				
+				/*! Method to retrieve the number of time events that can be 
+					active at once in this state machine.
+				*/
+				virtual «INT_TYPE» «numTimeEventsFctID»() = 0;
 		};
 		
 		inline «timedStatemachineInterface»::~«timedStatemachineInterface»() {}

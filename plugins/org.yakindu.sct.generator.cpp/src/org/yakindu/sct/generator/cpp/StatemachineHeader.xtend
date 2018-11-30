@@ -399,6 +399,8 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 		virtual «timerInterface»* getTimer();
 		
 		virtual void «raiseTimeEventFctID»(«EVENT_TYPE» event);
+		
+		virtual «INT_TYPE» «numTimeEventsFctID»();
 	'''
 
 	def dispatch functionPrototypes(EventDefinition it) '''
