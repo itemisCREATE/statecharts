@@ -14,8 +14,16 @@ import com.google.inject.Inject
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations.GenArtifactConfiguration
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
+import org.yakindu.sct.generator.cpp.files.StatemachineHeader
+import org.yakindu.sct.generator.cpp.files.StatemachineImplementation
+import org.yakindu.sct.generator.cpp.files.StatemachineInterface
+import org.yakindu.sct.generator.cpp.files.TimedStatemachineInterface
+import org.yakindu.sct.generator.cpp.files.TimerInterface
+import org.yakindu.sct.generator.cpp.files.Tracing
+import org.yakindu.sct.generator.cpp.files.Types
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
@@ -23,7 +31,6 @@ import org.yakindu.sct.model.sgraph.Statechart
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.*
-import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 
 /**
  * This is the CPP code generators main class. 
