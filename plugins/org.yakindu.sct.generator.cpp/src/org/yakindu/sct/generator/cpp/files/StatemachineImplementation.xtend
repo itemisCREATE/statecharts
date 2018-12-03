@@ -428,13 +428,13 @@ class StatemachineImplementation implements IContentTemplate {
 	def generateVariables(ExecutionFlow it, StatechartScope scope)
 		'''
 			«FOR variable : scope.variableDefinitions»
-				«variable.typeSpecifier.targetLanguageName» «module»::«scope.interfaceName»::«variable.asGetter»() const
+				«IF variable.isConstString»const «ENDIF»«variable.typeSpecifier.targetLanguageName» «module»::«scope.interfaceName»::«variable.asGetter»() const
 				{
 					return «variable.localAccess»;
 				}
 				
 				«IF scope.defaultInterface»
-					«variable.typeSpecifier.targetLanguageName» «module»::«variable.asGetter»() const
+					«IF variable.isConstString»const «ENDIF»«variable.typeSpecifier.targetLanguageName» «module»::«variable.asGetter»() const
 					{
 						return «variable.access»;
 					}

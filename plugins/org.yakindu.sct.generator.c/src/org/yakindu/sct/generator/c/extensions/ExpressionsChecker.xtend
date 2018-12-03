@@ -20,6 +20,7 @@ import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.c.CExpressionsGenerator
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class ExpressionsChecker {
 
@@ -43,5 +44,13 @@ class ExpressionsChecker {
 	def protected comparesString(LogicalRelationExpression it) {
 		isSame(infer(it.leftOperand).type, getType(ITypeSystem.STRING)) || 
 			isSame(infer(it.rightOperand).type, getType(ITypeSystem.STRING))
+	}
+	
+	def isConstString(VariableDefinition it) {
+		const && isStringType
+	}
+	
+	def protected isStringType(VariableDefinition it) {
+		isSame(typeSpecifier.type ,getType(ITypeSystem.STRING))
 	}
 }
