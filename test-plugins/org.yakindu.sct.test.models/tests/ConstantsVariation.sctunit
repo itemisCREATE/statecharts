@@ -1,0 +1,23 @@
+testclass ConstantsVariationTests for statechart ConstantsVariation {
+	@Test
+	operation constantDefinition(){ 
+		enter
+		assert active(ConstantsVariation.main_region.StateA)
+		//After initialization, constant values must be set
+		assert b2 == true
+		assert named.b == true
+		
+		assert i2 == 5
+		assert named.i == 5
+		
+		assert r2 == 5
+		assert named.r == 5
+		
+		assert str2 == "String"
+		assert named.str == "String"
+		
+		proceed 1 cycle
+		assert is_final
+	} 
+}
+	
