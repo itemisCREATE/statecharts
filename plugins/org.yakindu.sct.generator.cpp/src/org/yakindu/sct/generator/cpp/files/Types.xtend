@@ -8,12 +8,14 @@
  * 	Markus Mühlbrnadt - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.cpp
+package org.yakindu.sct.generator.cpp.files
 
 import com.google.inject.Inject
 import org.yakindu.sct.generator.c.IContentTemplate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
+import org.yakindu.sct.generator.cpp.CppNaming
+import org.yakindu.sct.generator.cpp.ErrorCode
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
@@ -53,20 +55,20 @@ class Types implements IContentTemplate {
 		#endif
 		
 		/* Error codes and mask can be used to check unimplemented operation callbacks. They can be activated in the API feature within the .sgen file.*/
-		#ifndef «ErrorCode.OCB_INIT_MASK.name»
-		#define «ErrorCode.OCB_INIT_MASK.name» «ErrorCode.OCB_INIT_MASK.value»
+		#ifndef «ErrorCode.OCB_INIT_MASK.getName()»
+		#define «ErrorCode.OCB_INIT_MASK.getName» «ErrorCode.OCB_INIT_MASK.value»
 		#endif
 
-		#ifndef «ErrorCode.OCB_DEFAULT_INIT.name»
-		#define «ErrorCode.OCB_DEFAULT_INIT.name» («ErrorCode.OCB_INIT_MASK.name» | «ErrorCode.OCB_DEFAULT_INIT.value»)
+		#ifndef «ErrorCode.OCB_DEFAULT_INIT.getName»
+		#define «ErrorCode.OCB_DEFAULT_INIT.getName» («ErrorCode.OCB_INIT_MASK.getName» | «ErrorCode.OCB_DEFAULT_INIT.value»)
 		#endif
 
-		#ifndef «ErrorCode.OCB_NAMED_INIT.name»
-		#define «ErrorCode.OCB_NAMED_INIT.name» («ErrorCode.OCB_INIT_MASK.name» | «ErrorCode.OCB_NAMED_INIT.value»)
+		#ifndef «ErrorCode.OCB_NAMED_INIT.getName»
+		#define «ErrorCode.OCB_NAMED_INIT.getName» («ErrorCode.OCB_INIT_MASK.getName» | «ErrorCode.OCB_NAMED_INIT.value»)
 		#endif
 
-		#ifndef «ErrorCode.OCB_INTERNAL_INIT.name»
-		#define «ErrorCode.OCB_INTERNAL_INIT.name» («ErrorCode.OCB_INIT_MASK.name» | «ErrorCode.OCB_INTERNAL_INIT.value»)
+		#ifndef «ErrorCode.OCB_INTERNAL_INIT.getName»
+		#define «ErrorCode.OCB_INTERNAL_INIT.getName» («ErrorCode.OCB_INIT_MASK.getName» | «ErrorCode.OCB_INTERNAL_INIT.value»)
 		#endif			
 		
 		#endif /* «typesModule.define»_H_ */

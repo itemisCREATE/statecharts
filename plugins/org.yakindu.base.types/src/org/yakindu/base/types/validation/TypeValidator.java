@@ -64,6 +64,10 @@ public class TypeValidator {
 				|| isNullOnComplexType(result2, result1)) {
 			return;
 		}
+		
+		if (registry.isConvertableTo(result1.getType(), result2.getType())) {
+			return;
+		}
 
 		if (!registry.haveCommonType(result1.getType(), result2.getType())) {
 			msg = msg != null ? msg : String.format(ASSERT_COMPATIBLE, result1, result2);
@@ -81,6 +85,10 @@ public class TypeValidator {
 		}
 
 		if (isAnyType(varResult.getType())) {
+			return;
+		}
+		
+		if (registry.isConvertableTo(valueResult.getType(), varResult.getType())) {
 			return;
 		}
 
@@ -110,6 +118,11 @@ public class TypeValidator {
 			IValidationIssueAcceptor acceptor) {
 		if (subResult == null || superResult == null)
 			return;
+		
+		if (registry.isConvertableTo(subResult.getType(), superResult.getType())) {
+			return;
+		}
+		
 		if (!registry.isSuperType(subResult.getType(), superResult.getType())) {
 			msg = msg != null ? msg : String.format(ASSERT_COMPATIBLE, subResult, superResult);
 			acceptor.accept(new ValidationIssue(Severity.ERROR, msg, NOT_COMPATIBLE_CODE));

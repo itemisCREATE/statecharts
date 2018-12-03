@@ -13,15 +13,19 @@ package org.yakindu.sct.model.stext;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.linking.ILinker;
+import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
+import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.validation.CompositeEValidator;
 import org.eclipse.xtext.validation.INamesAreUniqueValidationHelper;
+import org.yakindu.base.expressions.linking.LinkingDiagnosticMessageProvider;
 import org.yakindu.base.expressions.linking.OperationOverloadingLinkingService;
+import org.yakindu.base.expressions.parser.SyntaxErrorMessageProvider;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
@@ -56,6 +60,8 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 		// https://github.com/Yakindu/statecharts/issues/1199
 		binder.bind(IReferableElementsUnloader.class).to(IReferableElementsUnloader.NullUnloader.class);
 		binder.bind(ITransientValueService.class).to(STextTransientValueService.class);
+		binder.bind(ILinkingDiagnosticMessageProvider.class).to(LinkingDiagnosticMessageProvider.class);
+		binder.bind(ISyntaxErrorMessageProvider.class).to(SyntaxErrorMessageProvider.class);
 	}
 
 	public Class<? extends INamesAreUniqueValidationHelper> bindNamesAreUniqueValidationHelper() {
