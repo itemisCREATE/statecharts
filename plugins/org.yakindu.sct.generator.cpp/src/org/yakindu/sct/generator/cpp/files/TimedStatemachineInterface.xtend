@@ -7,12 +7,13 @@
   Contributors:
   	Markus Mühlbrandt - Initial contribution and API
  */
-package org.yakindu.sct.generator.cpp
+package org.yakindu.sct.generator.cpp.files
 
 import com.google.inject.Inject
 import org.yakindu.sct.generator.c.IContentTemplate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
+import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
