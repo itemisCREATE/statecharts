@@ -41,8 +41,9 @@ abstract class AbstractOperationExecutor implements IOperationExecutor {
 		val owner = owner
 		if (owner instanceof ElementReferenceExpression) {
 			return owner.reference as NamedElement
-		} else
-			owner.owner
+		} else if (owner instanceof FeatureCall) {
+			return owner.feature as NamedElement
+		}
 	}
 
 	def dispatch NamedElement getOwner(ElementReferenceExpression it) {

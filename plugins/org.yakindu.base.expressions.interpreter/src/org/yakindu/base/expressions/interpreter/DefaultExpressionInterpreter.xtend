@@ -53,6 +53,9 @@ import org.yakindu.sct.model.sruntime.ExecutionContext
 import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.sruntime.ExecutionVariable
 import org.yakindu.sct.model.sruntime.ReferenceSlot
+import java.util.Stack
+import org.eclipse.emf.ecore.EObject
+import org.yakindu.sct.model.sruntime.ExecutionSlot
 
 /**
  * 
@@ -298,32 +301,54 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	}
 
 	def executeFeatureCall(FeatureCall call) {
-		if (call.operationCall || call.feature instanceof Operation) {
-			if (call.feature instanceof Operation) {
-				val executor = operationExecutors.findFirst[it.canExecute(call)]
-				if (executor !== null) {
-					return executor.executeOperation(call)
-				}
-			}
-		} else if (call.feature instanceof Enumerator) {
-			return new Long((call.feature as Enumerator).literalValue)
+		var current = call
+		val Stack<FeatureCall> callStack = new Stack
+		callStack.add(0, call)
+		while (!(current.owner instanceof ElementReferenceExpression)) {
+			current = current.owner as FeatureCall
+			callStack.add(0, current)
 		}
-		var slot = context.resolve(call)
-		if (slot instanceof ExecutionVariable) {
-			return slot.getValue
+		var slot = context.resolve(current.owner)
+		var result = null as Object
+		for (FeatureCall c : callStack) {
+			slot = context.resolve(c)
+			result = executeFeatureCall(c, c.feature, slot)
 		}
-		if (slot instanceof CompositeSlot) {
-			return slot
+		return result
+	}
+	
+	def dispatch executeFeatureCall(FeatureCall call, EObject feature, ExecutionSlot slot) {
+		// fall-back
+		println("No implementation found for " + call.feature + " -> returning null")
+		null
+	}
+	
+	def dispatch executeFeatureCall(FeatureCall call, EObject feature, ExecutionVariable slot) {
+		slot.value
+	}
+	
+	def dispatch executeFeatureCall(FeatureCall call, EObject feature, CompositeSlot slot) {
+		slot
+	}
+	
+	def dispatch executeFeatureCall(FeatureCall call, EObject feature, ExecutionEvent slot) {
+		if (call.feature instanceof Operation) {
+			(slot as ExecutionEvent).raised = true
 		}
-		if (slot instanceof ExecutionEvent) {
-			if (call.feature instanceof Operation) {
-				(slot as ExecutionEvent).raised = true
-			}
-			return (slot as ExecutionEvent).raised
+		return (slot as ExecutionEvent).raised
+	}
+	
+	def dispatch executeFeatureCall(FeatureCall call, Operation feature, ExecutionSlot slot) {
+		val executor = operationExecutors.findFirst[it.canExecute(call)]
+		if (executor !== null) {
+			val result = executor.executeOperation(call)
+			slot.value = result
+			return result
 		}
-
-		println("No feature found for " + call.feature + " -> returning null")
-		return null;
+	}
+	
+	def dispatch executeFeatureCall(FeatureCall call, Enumerator feature, ExecutionSlot slot) {
+		return new Long(feature.literalValue)
 	}
 
 	def executeUnaryCoreFunction(Expression statement, String operator) {
