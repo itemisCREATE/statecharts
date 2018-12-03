@@ -127,6 +127,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 	private static final String KEYWORD_ONCYCLE = "oncycle";
 	private static final String KEYWORD_ALWAYS = "always";
+	private static final String KEYWORD_DEFAULT = "default";
+	private static final String KEYWORD_ELSE = "else";
 
 	@Inject
 	private ITypeSystemInferrer typeInferrer;
@@ -232,14 +234,32 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			}
 		}
 	}
+	
+	@Check(CheckType.FAST)
+	public void checkDefaultAndElseIsNotUsedOnRegularState(RegularState state) {
+		EList<Transition> outgoingTransitions = state.getOutgoingTransitions();
+		for(Transition transition : outgoingTransitions) {
+			String transitionDeclaration = getTransitionDeclaration(transition);
+			if(transitionDeclaration.equals(KEYWORD_ALWAYS) || transitionDeclaration.equals(KEYWORD_ONCYCLE)) {
+				return;
+			}
+			warning(String.format(DEFAULT_AND_ELSE_TRANSITION_ON_REGULAR_STATE, transitionDeclaration), transition,null, -1);
+		}
+	}
 
 	protected String getTransitionDeclaration(Transition transition) {
 		String specification = transition.getSpecification();
-
-		if (KEYWORD_ALWAYS.contains(specification)) {
+		if(specification == null) {
+			return "";
+		}
+		if (specification.contains(KEYWORD_ALWAYS)) {
 			return KEYWORD_ALWAYS;
-		} else if (KEYWORD_ONCYCLE.contains(specification)) {
+		} else if (specification.contains(KEYWORD_ONCYCLE)) {
 			return KEYWORD_ONCYCLE;
+		} else if (specification.contains(KEYWORD_DEFAULT)) {
+			return KEYWORD_DEFAULT;
+		} else if (specification.contains(KEYWORD_ELSE)) {
+			return KEYWORD_ELSE;
 		}
 		return specification;
 	}

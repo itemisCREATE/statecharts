@@ -1115,5 +1115,20 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		}
 		assertIssueCount(diagnostics, 4);
 	}
+	
+	@Test 
+	public void checkDefaultAndElseIsNotUsedOnRegularState() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "DefaultAndElseOnRegularState.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Choice) {
+				validator.validate(element, diagnostics, new HashMap<>());
+			}
+		}
+		assertIssueCount(diagnostics, 2);	
+		assertWarning(diagnostics, String.format(DEFAULT_AND_ELSE_TRANSITION_ON_REGULAR_STATE, "else"));
+		assertWarning(diagnostics, String.format(DEFAULT_AND_ELSE_TRANSITION_ON_REGULAR_STATE, "default"));		
+	}
 
 }
