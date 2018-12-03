@@ -53,7 +53,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	 * @ordered
 	 */
 	protected TypeSpecifier typeSpecifier;
-
+	
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -63,7 +63,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	 * @ordered
 	 */
 	protected static final String NAME_EDEFAULT = null;
-
+	
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -73,7 +73,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
+	
 	/**
 	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -83,7 +83,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	 * @ordered
 	 */
 	protected EList<Annotation> annotations;
-
+	
 	/**
 	 * The cached value of the '{@link #getAnnotationInfo() <em>Annotation Info</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -93,7 +93,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	 * @ordered
 	 */
 	protected AnnotatableElement annotationInfo;
-
+	
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -103,7 +103,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	 * @ordered
 	 */
 	protected static final String ID_EDEFAULT = null;
-
+	
 	/**
 	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -113,7 +113,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	 * @ordered
 	 */
 	protected static final boolean STATIC_EDEFAULT = false;
-
+	
 	/**
 	 * The cached value of the '{@link #isStatic() <em>Static</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -123,7 +123,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	 * @ordered
 	 */
 	protected boolean static_ = STATIC_EDEFAULT;
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -132,7 +132,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	protected DeclarationImpl() {
 		super();
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -142,17 +142,18 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	protected EClass eStaticClass() {
 		return TypesPackage.Literals.DECLARATION;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Type getType() {
 		Type type = basicGetType();
 		return type != null && type.eIsProxy() ? (Type)eResolveProxy((InternalEObject)type) : type;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -164,16 +165,17 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		}
 		return null;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypeSpecifier getTypeSpecifier() {
 		return typeSpecifier;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -188,12 +190,13 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		}
 		return msgs;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTypeSpecifier(TypeSpecifier newTypeSpecifier) {
 		if (newTypeSpecifier != typeSpecifier) {
 			NotificationChain msgs = null;
@@ -207,49 +210,53 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.DECLARATION__TYPE_SPECIFIER, newTypeSpecifier, newTypeSpecifier));
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.DECLARATION__NAME, oldName, name));
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Annotation> getAnnotations() {
 		if (annotations == null) {
-			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, TypesPackage.DECLARATION__ANNOTATIONS);
+			annotations = new EObjectContainmentEList<>(Annotation.class, this, TypesPackage.DECLARATION__ANNOTATIONS);
 		}
 		return annotations;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AnnotatableElement getAnnotationInfo() {
 		return annotationInfo;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -264,12 +271,13 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		}
 		return msgs;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAnnotationInfo(AnnotatableElement newAnnotationInfo) {
 		if (newAnnotationInfo != annotationInfo) {
 			NotificationChain msgs = null;
@@ -283,36 +291,39 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.DECLARATION__ANNOTATION_INFO, newAnnotationInfo, newAnnotationInfo));
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isStatic() {
 		return static_;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStatic(boolean newStatic) {
 		boolean oldStatic = static_;
 		static_ = newStatic;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.DECLARATION__STATIC, oldStatic, static_));
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc --> 
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated NOT
 	 */
+	@Override
 	public Annotation getAnnotationOfType(final String typeName) {
-		EList<Annotation> annotations = getAnnotations();
+		EList<Annotation> annotations = getAnnotationInfo().getAnnotations();
 		for (Annotation annotation : annotations) {
 			if (typeName.equals(annotation.getType().getName())) {
 				return annotation;
@@ -320,7 +331,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		}
 		return null;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -347,7 +358,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -376,7 +387,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		}
 		super.eSet(featureID, newValue);
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -403,7 +414,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		}
 		super.eUnset(featureID);
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -429,7 +440,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		}
 		return super.eIsSet(featureID);
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -458,7 +469,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -487,7 +498,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -496,7 +507,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
-
+		
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
@@ -505,7 +516,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		result.append(')');
 		return result.toString();
 	}
-	
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -515,7 +526,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	public String getId() {
 		return TypesUtil.computeQID(this);
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -533,5 +544,5 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
-
+	
 } //DeclarationImpl
