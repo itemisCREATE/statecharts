@@ -432,7 +432,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 
 	def dispatch functionPrototypes(VariableDefinition it) '''
 		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */
-		«IF const»const «ENDIF»«typeSpecifier.targetLanguageName» «it.asGetter»() const;
+		«typeSpecifier.targetLanguageName» «it.asGetter»() const;
 		
 		«IF !readonly && !const»
 			/*! Sets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */

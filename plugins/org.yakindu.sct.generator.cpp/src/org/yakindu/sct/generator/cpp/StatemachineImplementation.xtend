@@ -362,7 +362,7 @@ class StatemachineImplementation implements IContentTemplate {
 	def unimplementedOCBErrors(ExecutionFlow it)'''
 		«FOR iface : getInterfaces.filter[hasOperations && !entry.useStaticOPC]»
 			«IF iface instanceof InternalScope»
-				«checkInternalOCB(iface)»			
+				«checkInternalOCB(iface)»
 			«ELSEIF iface instanceof InterfaceScope»
 				«checkInterfaceOCB(iface)»
 			«ENDIF»
@@ -423,13 +423,13 @@ class StatemachineImplementation implements IContentTemplate {
 	def generateVariables(ExecutionFlow it, StatechartScope scope)
 		'''
 			«FOR variable : scope.variableDefinitions»
-				«IF variable.const»const «ENDIF»«variable.typeSpecifier.targetLanguageName» «module»::«scope.interfaceName»::«variable.asGetter»() const
+				«variable.typeSpecifier.targetLanguageName» «module»::«scope.interfaceName»::«variable.asGetter»() const
 				{
 					return «variable.localAccess»;
 				}
 				
 				«IF scope.defaultInterface»
-					«IF variable.const»const «ENDIF»«variable.typeSpecifier.targetLanguageName» «module»::«variable.asGetter»() const
+					«variable.typeSpecifier.targetLanguageName» «module»::«variable.asGetter»() const
 					{
 						return «variable.access»;
 					}
