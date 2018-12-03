@@ -752,7 +752,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 			}
 		}
 
-		assertIssueCount(diagnostics, 4);
+		assertIssueCount(diagnostics, 5);
 		assertError(diagnostics, TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT);
 		assertError(diagnostics, REGION_UNBOUND_DEFAULT_ENTRY_POINT);
 
@@ -1071,7 +1071,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 				validator.validate(element, diagnostics, new HashMap<>());
 			}
 		}
-		assertIssueCount(diagnostics, 8);
+		assertIssueCount(diagnostics, 10);
 	}
 
 	@Test
@@ -1122,13 +1122,11 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
-			if (element instanceof Choice) {
+			if (element instanceof RegularState) {
 				validator.validate(element, diagnostics, new HashMap<>());
 			}
 		}
 		assertIssueCount(diagnostics, 2);	
-		assertWarning(diagnostics, String.format(DEFAULT_AND_ELSE_TRANSITION_ON_REGULAR_STATE, "else"));
-		assertWarning(diagnostics, String.format(DEFAULT_AND_ELSE_TRANSITION_ON_REGULAR_STATE, "default"));		
 	}
 
 }

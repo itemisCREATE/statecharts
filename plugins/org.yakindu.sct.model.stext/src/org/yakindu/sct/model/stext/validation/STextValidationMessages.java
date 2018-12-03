@@ -61,5 +61,5 @@ public interface STextValidationMessages {
 	public static final String DEAD_TRANSITION = "Dead transition. This transition can not be taken due to previous transition with '%s' trigger.";
 	public static final String USE_DEFAULT_TRIGGER_IN_CHOICES = "Transition with '%s' effect blocking other transitions. Use 'default' or 'else' instead.";
 	public static final String ONLY_ONE_DEFAULT_SHOULD_BE_USED = "Only one default or else transition should be used. Currently used default and/or else transitions: %d.";
-	public static final String DEFAULT_AND_ELSE_TRANSITION_ON_REGULAR_STATE = "'%s' transition should only be used for choices.";
+	public static final String DEFAULT_AND_ELSE_TRANSITION_ON_REGULAR_STATE = "'Default' and 'else' transitions should only be used for choices. Use 'always' or 'oncycle' instead.";
 }
