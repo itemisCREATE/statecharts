@@ -267,7 +267,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		if (!generatorDescriptor.isPresent()) {
 			return;
 		}
-		//DIFFERENT_DOMAIN_REQUIRED
+		// DIFFERENT_DOMAIN_REQUIRED
 		Set<String> validDomains = generatorDescriptor.get().getValidDomains();
 		EList<GeneratorEntry> entries = model.getEntries();
 		for (GeneratorEntry generatorEntry : entries) {
@@ -275,13 +275,15 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 			if (reference instanceof DomainElement) {
 				String domainID = ((DomainElement) reference).getDomainID();
 				if (!validDomains.isEmpty() && !validDomains.contains(domainID)) {
-					error(String.format(INVALID_DOMAIN_ID, domainID, Arrays.toString(validDomains.toArray())), generatorEntry, SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF, CODE_REQUIRED_DOMAIN, comineDomainsToString(validDomains));
+					error(String.format(INVALID_DOMAIN_ID, domainID, Arrays.toString(validDomains.toArray())),
+							generatorEntry, SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF, CODE_REQUIRED_DOMAIN,
+							combineDomainsToString(validDomains));
 				}
 			}
 		}
 	}
 
-	private String comineDomainsToString(Set<String> validDomains) {
+	private String combineDomainsToString(Set<String> validDomains) {
 		String issueData = null;
 		for (String validDomain : validDomains) {
 			if(issueData == null) {
