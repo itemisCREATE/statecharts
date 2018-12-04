@@ -134,7 +134,7 @@ public class ImportScopeImpl extends StatechartScopeImpl implements ImportScope 
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuilder result = new StringBuilder(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (imports: ");
 		result.append(imports);
 		result.append(')');

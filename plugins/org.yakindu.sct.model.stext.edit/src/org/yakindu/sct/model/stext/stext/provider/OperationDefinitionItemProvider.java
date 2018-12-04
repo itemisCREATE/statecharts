@@ -18,7 +18,11 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.provider.OperationItemProvider;
+import org.yakindu.sct.model.sgraph.SGraphFactory;
+import org.yakindu.sct.model.stext.stext.OperationDefinition;
+import org.yakindu.sct.model.stext.stext.StextFactory;
 
 /**
  * This is the item provider adapter for a {@link org.yakindu.sct.model.stext.stext.OperationDefinition} object.
@@ -103,9 +107,68 @@ public class OperationDefinitionItemProvider extends OperationItemProvider
   protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object)
   {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 StextFactory.eINSTANCE.createStatechartSpecification()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 StextFactory.eINSTANCE.createEventDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 StextFactory.eINSTANCE.createVariableDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 StextFactory.eINSTANCE.createOperationDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 StextFactory.eINSTANCE.createTypeAliasDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 SGraphFactory.eINSTANCE.createStatechart()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 SGraphFactory.eINSTANCE.createImportDeclaration()));
 	}
 
   /**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
+			childFeature == TypesPackage.Literals.OPERATION__PARAMETERS ||
+			childFeature == TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
+	}
+
+		/**
 	 * Return the resource locator for this item provider's resources.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
