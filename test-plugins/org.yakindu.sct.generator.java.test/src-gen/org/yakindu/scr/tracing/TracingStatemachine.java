@@ -1,8 +1,9 @@
 package org.yakindu.scr.tracing;
-import org.yakindu.scr.ITracing;
+
+import java.util.List;
+import org.yakindu.scr.ITracingListener;
 
 public class TracingStatemachine implements ITracingStatemachine {
-
 	protected class SCInterfaceImpl implements SCInterface {
 	
 	}
@@ -21,7 +22,7 @@ public class TracingStatemachine implements ITracingStatemachine {
 	
 	private int nextStateIndex;
 	
-	private ITracing<State> ifaceTraceObserver;
+	private List <ITracingListener<State>> ifaceTraceObservers;
 	
 	public TracingStatemachine() {
 		sCInterface = new SCInterfaceImpl();
@@ -92,16 +93,26 @@ public class TracingStatemachine implements ITracingStatemachine {
 		return sCInterface;
 	}
 	
-	public void setIfaceTraceObserver(ITracing<State> ifaceTraceObserver) {
-		this.ifaceTraceObserver = ifaceTraceObserver;
+	public void addIfaceTraceObserver(ITracingListener<State> ifaceTraceObserver) {
+		if(!(this.ifaceTraceObservers.contains(ifaceTraceObserver))) {
+			this.ifaceTraceObservers.add(ifaceTraceObserver);
+		}
 	}
 	
-	public ITracing<State> getIfaceTraceObserver() {
-		return ifaceTraceObserver;
+	public void removeIfaceTraceObserver(ITracingListener<State> ifaceTraceObserver) {
+		if(this.ifaceTraceObservers.contains(ifaceTraceObserver)) {
+			this.ifaceTraceObservers.remove(ifaceTraceObserver);
+		}
+	}
+	
+	public List<ITracingListener<State>> getIfaceTraceObservers() {
+		return ifaceTraceObservers;
 	}
 	/* 'default' enter sequence for state StateA */
 	private void enterSequence_main_region_StateA_default() {
-		ifaceTraceObserver.stateEntered(State.main_region_StateA);
+		for(ITracingListener<State> ifaceTraceObserver : ifaceTraceObservers) {
+			ifaceTraceObserver.onStateEntered(State.main_region_StateA);
+		}
 		
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_StateA;
@@ -109,7 +120,9 @@ public class TracingStatemachine implements ITracingStatemachine {
 	
 	/* Default enter sequence for state null */
 	private void enterSequence_main_region__final__default() {
-		ifaceTraceObserver.stateEntered(State.main_region__final_);
+		for(ITracingListener<State> ifaceTraceObserver : ifaceTraceObservers) {
+			ifaceTraceObserver.onStateEntered(State.main_region__final_);
+		}
 		
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region__final_;
@@ -125,7 +138,9 @@ public class TracingStatemachine implements ITracingStatemachine {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 		
-		ifaceTraceObserver.stateExited(State.main_region_StateA);
+		for(ITracingListener<State> ifaceTraceObserver : ifaceTraceObservers) {
+			ifaceTraceObserver.onStateExited(State.main_region_StateA);
+		}
 	}
 	
 	/* Default exit sequence for final state. */
@@ -133,7 +148,9 @@ public class TracingStatemachine implements ITracingStatemachine {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 		
-		ifaceTraceObserver.stateExited(State.main_region__final_);
+		for(ITracingListener<State> ifaceTraceObserver : ifaceTraceObservers) {
+			ifaceTraceObserver.onStateExited(State.main_region__final_);
+		}
 	}
 	
 	/* Default exit sequence for region main region */
