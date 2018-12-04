@@ -98,14 +98,6 @@ class Statemachine {
 			.generate
 	}
 	
-	
-	
-	def protected createImports(ExecutionFlow flow, GeneratorEntry entry) '''
-		«FOR importEntry : flow.imports(entry) BEFORE System.lineSeparator»
-			import «importEntry»;
-		«ENDFOR»
-	'''
-	
 	def protected Set<CharSequence> imports(ExecutionFlow it, GeneratorEntry entry) {
 		// we need a sorted set for the imports
 		val Set<CharSequence> importSet = new TreeSet
