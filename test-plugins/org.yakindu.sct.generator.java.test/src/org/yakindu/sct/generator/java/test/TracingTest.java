@@ -12,7 +12,7 @@ public class TracingTest {
 	public void testTracing() {
 		TracingStatemachine sm = new TracingStatemachine();
 		TracingImpl<State> ifaceTraceObserver = new TracingImpl<State>();
-		sm.setIfaceTraceObserver(ifaceTraceObserver);
+		sm.addIfaceTraceObserver(ifaceTraceObserver);
 		sm.init();
 		sm.enter();
 		assertTrue(ifaceTraceObserver.isEntered());
