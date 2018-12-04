@@ -11,7 +11,7 @@ class StringExpressionsTest : public ::testing::Test
 {
 public:
 	/* All operations from the SCTUnit test class. */
-	void StringExpressionsTest();
+	void stringExpressionsTest();
 	void setTimer(StringExpressions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 	void unsetTimer(StringExpressions* handle, const sc_eventid evid);
 protected:
@@ -37,7 +37,7 @@ void StringExpressionsTest::SetUp()
 	
 	tc = this;
 }
-void StringExpressionsTest::StringExpressionsTest()
+void StringExpressionsTest::stringExpressionsTest()
 {
 	EXPECT_TRUE(strcmp(stringExpressionsIface_get_quotedStringX(&statechart), "\"X\"") == 0);
 	EXPECT_TRUE(strcmp(stringExpressionsIface_get_quotedStringY(&statechart), "\"Y\"") == 0);
@@ -84,7 +84,7 @@ void StringExpressionsTest::unsetTimer(StringExpressions* handle, const sc_event
 }
 
 TEST_F(StringExpressionsTest, StringExpressionsTest) {
-	StringExpressionsTest();
+	stringExpressionsTest();
 }
 
 

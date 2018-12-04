@@ -11,7 +11,7 @@ class DynamicChoiceTest : public ::testing::Test
 {
 public:
 	/* All operations from the SCTUnit test class. */
-	void DynamicChoiceTest();
+	void dynamicChoiceTest();
 	void setTimer(DynamicChoice* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 	void unsetTimer(DynamicChoice* handle, const sc_eventid evid);
 protected:
@@ -37,7 +37,7 @@ void DynamicChoiceTest::SetUp()
 	
 	tc = this;
 }
-void DynamicChoiceTest::DynamicChoiceTest()
+void DynamicChoiceTest::dynamicChoiceTest()
 {
 	dynamicChoice_enter(&statechart);
 	EXPECT_TRUE(dynamicChoice_isStateActive(&statechart, DynamicChoice_main_region_Start));
@@ -56,7 +56,7 @@ void DynamicChoiceTest::unsetTimer(DynamicChoice* handle, const sc_eventid evid)
 }
 
 TEST_F(DynamicChoiceTest, DynamicChoiceTest) {
-	DynamicChoiceTest();
+	dynamicChoiceTest();
 }
 
 

@@ -11,7 +11,7 @@ class ReadOnlyVariableTest : public ::testing::Test
 {
 public:
 	/* All operations from the SCTUnit test class. */
-	void ReadOnlyVariableTest();
+	void readOnlyVariableTest();
 	void setTimer(ReadOnlyVariable* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 	void unsetTimer(ReadOnlyVariable* handle, const sc_eventid evid);
 protected:
@@ -37,7 +37,7 @@ void ReadOnlyVariableTest::SetUp()
 	
 	tc = this;
 }
-void ReadOnlyVariableTest::ReadOnlyVariableTest()
+void ReadOnlyVariableTest::readOnlyVariableTest()
 {
 	readOnlyVariable_enter(&statechart);
 	EXPECT_TRUE(readOnlyVariable_isStateActive(&statechart, ReadOnlyVariable_main_region_StateA));
@@ -72,7 +72,7 @@ void ReadOnlyVariableTest::unsetTimer(ReadOnlyVariable* handle, const sc_eventid
 }
 
 TEST_F(ReadOnlyVariableTest, ReadOnlyVariableTest) {
-	ReadOnlyVariableTest();
+	readOnlyVariableTest();
 }
 
 

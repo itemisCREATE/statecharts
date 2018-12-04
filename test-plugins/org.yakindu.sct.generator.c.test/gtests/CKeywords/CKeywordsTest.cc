@@ -11,7 +11,7 @@ class CKeywordsTest : public ::testing::Test
 {
 public:
 	/* All operations from the SCTUnit test class. */
-	void CKeywordsTest();
+	void cKeywordsTest();
 	void setTimer(CKeywords* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 	void unsetTimer(CKeywords* handle, const sc_eventid evid);
 protected:
@@ -37,7 +37,7 @@ void CKeywordsTest::SetUp()
 	
 	tc = this;
 }
-void CKeywordsTest::CKeywordsTest()
+void CKeywordsTest::cKeywordsTest()
 {
 	cKeywords_enter(&statechart);
 	EXPECT_TRUE(cKeywords_isStateActive(&statechart, CKeywords_auto_char));
@@ -59,7 +59,7 @@ void CKeywordsTest::unsetTimer(CKeywords* handle, const sc_eventid evid){
 }
 
 TEST_F(CKeywordsTest, CKeywordsTest) {
-	CKeywordsTest();
+	cKeywordsTest();
 }
 
 

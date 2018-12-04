@@ -11,7 +11,7 @@ class EntryChoiceTest : public ::testing::Test
 {
 public:
 	/* All operations from the SCTUnit test class. */
-	void EntryChoiceTest();
+	void entryChoiceTest();
 	void setTimer(EntryChoice* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 	void unsetTimer(EntryChoice* handle, const sc_eventid evid);
 protected:
@@ -37,7 +37,7 @@ void EntryChoiceTest::SetUp()
 	
 	tc = this;
 }
-void EntryChoiceTest::EntryChoiceTest()
+void EntryChoiceTest::entryChoiceTest()
 {
 	entryChoice_enter(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
@@ -56,7 +56,7 @@ void EntryChoiceTest::unsetTimer(EntryChoice* handle, const sc_eventid evid){
 }
 
 TEST_F(EntryChoiceTest, EntryChoiceTest) {
-	EntryChoiceTest();
+	entryChoiceTest();
 }
 
 

@@ -11,7 +11,7 @@ class TypeAliasTest : public ::testing::Test
 {
 public:
 	/* All operations from the SCTUnit test class. */
-	void TypeAliasTest();
+	void typeAliasTest();
 	void setTimer(TypeAlias* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 	void unsetTimer(TypeAlias* handle, const sc_eventid evid);
 protected:
@@ -37,7 +37,7 @@ void TypeAliasTest::SetUp()
 	
 	tc = this;
 }
-void TypeAliasTest::TypeAliasTest()
+void TypeAliasTest::typeAliasTest()
 {
 	typeAlias_enter(&statechart);
 	EXPECT_TRUE(typeAlias_isStateActive(&statechart, TypeAlias_main_region_Start));
@@ -63,7 +63,7 @@ void TypeAliasTest::unsetTimer(TypeAlias* handle, const sc_eventid evid){
 }
 
 TEST_F(TypeAliasTest, TypeAliasTest) {
-	TypeAliasTest();
+	typeAliasTest();
 }
 
 

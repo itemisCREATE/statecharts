@@ -11,7 +11,7 @@ class FeatureCallsTest : public ::testing::Test
 {
 public:
 	/* All operations from the SCTUnit test class. */
-	void FeatureCalls();
+	void featureCalls();
 	void setTimer(FeatureCalls* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 	void unsetTimer(FeatureCalls* handle, const sc_eventid evid);
 protected:
@@ -37,7 +37,7 @@ void FeatureCallsTest::SetUp()
 	
 	tc = this;
 }
-void FeatureCallsTest::FeatureCalls()
+void FeatureCallsTest::featureCalls()
 {
 	featureCalls_enter(&statechart);
 	EXPECT_TRUE(featureCalls_isStateActive(&statechart, FeatureCalls_main_region_A));
@@ -56,7 +56,7 @@ void FeatureCallsTest::unsetTimer(FeatureCalls* handle, const sc_eventid evid){
 }
 
 TEST_F(FeatureCallsTest, FeatureCalls) {
-	FeatureCalls();
+	featureCalls();
 }
 
 

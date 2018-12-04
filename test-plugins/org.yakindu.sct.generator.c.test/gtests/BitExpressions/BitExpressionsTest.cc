@@ -11,7 +11,7 @@ class BitExpressionsTest : public ::testing::Test
 {
 public:
 	/* All operations from the SCTUnit test class. */
-	void BitExpressions();
+	void bitExpressions();
 	void setTimer(BitExpressions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 	void unsetTimer(BitExpressions* handle, const sc_eventid evid);
 protected:
@@ -37,7 +37,7 @@ void BitExpressionsTest::SetUp()
 	
 	tc = this;
 }
-void BitExpressionsTest::BitExpressions()
+void BitExpressionsTest::bitExpressions()
 {
 	bitExpressions_enter(&statechart);
 	EXPECT_TRUE(bitExpressions_isStateActive(&statechart, BitExpressions_main_region_StateA));
@@ -65,7 +65,7 @@ void BitExpressionsTest::unsetTimer(BitExpressions* handle, const sc_eventid evi
 }
 
 TEST_F(BitExpressionsTest, BitExpressions) {
-	BitExpressions();
+	bitExpressions();
 }
 
 

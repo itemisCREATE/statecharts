@@ -11,7 +11,7 @@ class LocalReactionsTest : public ::testing::Test
 {
 public:
 	/* All operations from the SCTUnit test class. */
-	void LocalReactionsTest();
+	void localReactionsTest();
 	void setTimer(LocalReactions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 	void unsetTimer(LocalReactions* handle, const sc_eventid evid);
 protected:
@@ -37,7 +37,7 @@ void LocalReactionsTest::SetUp()
 	
 	tc = this;
 }
-void LocalReactionsTest::LocalReactionsTest()
+void LocalReactionsTest::localReactionsTest()
 {
 	localReactions_enter(&statechart);
 	EXPECT_TRUE(localReactions_isStateActive(&statechart, LocalReactions_main_region_A));
@@ -56,7 +56,7 @@ void LocalReactionsTest::unsetTimer(LocalReactions* handle, const sc_eventid evi
 }
 
 TEST_F(LocalReactionsTest, LocalReactionsTest) {
-	LocalReactionsTest();
+	localReactionsTest();
 }
 
 

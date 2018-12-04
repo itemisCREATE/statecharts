@@ -11,7 +11,7 @@ class StaticChoiceTest : public ::testing::Test
 {
 public:
 	/* All operations from the SCTUnit test class. */
-	void StaticChoiceTest();
+	void staticChoiceTest();
 	void setTimer(StaticChoice* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 	void unsetTimer(StaticChoice* handle, const sc_eventid evid);
 protected:
@@ -37,7 +37,7 @@ void StaticChoiceTest::SetUp()
 	
 	tc = this;
 }
-void StaticChoiceTest::StaticChoiceTest()
+void StaticChoiceTest::staticChoiceTest()
 {
 	staticChoice_enter(&statechart);
 	EXPECT_TRUE(staticChoice_isStateActive(&statechart, StaticChoice_main_region_Start));
@@ -55,7 +55,7 @@ void StaticChoiceTest::unsetTimer(StaticChoice* handle, const sc_eventid evid){
 }
 
 TEST_F(StaticChoiceTest, StaticChoiceTest) {
-	StaticChoiceTest();
+	staticChoiceTest();
 }
 
 

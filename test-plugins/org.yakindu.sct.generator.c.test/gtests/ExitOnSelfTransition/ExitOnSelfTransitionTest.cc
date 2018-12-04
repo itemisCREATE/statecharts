@@ -11,7 +11,7 @@ class ExitOnSelfTransitionTest : public ::testing::Test
 {
 public:
 	/* All operations from the SCTUnit test class. */
-	void ExitOnSelfTransitionTest();
+	void exitOnSelfTransitionTest();
 	void setTimer(ExitOnSelfTransition* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 	void unsetTimer(ExitOnSelfTransition* handle, const sc_eventid evid);
 protected:
@@ -37,7 +37,7 @@ void ExitOnSelfTransitionTest::SetUp()
 	
 	tc = this;
 }
-void ExitOnSelfTransitionTest::ExitOnSelfTransitionTest()
+void ExitOnSelfTransitionTest::exitOnSelfTransitionTest()
 {
 	exitOnSelfTransition_enter(&statechart);
 	EXPECT_TRUE(exitOnSelfTransition_isStateActive(&statechart, ExitOnSelfTransition_main_region_A));
@@ -64,7 +64,7 @@ void ExitOnSelfTransitionTest::unsetTimer(ExitOnSelfTransition* handle, const sc
 }
 
 TEST_F(ExitOnSelfTransitionTest, ExitOnSelfTransitionTest) {
-	ExitOnSelfTransitionTest();
+	exitOnSelfTransitionTest();
 }
 
 

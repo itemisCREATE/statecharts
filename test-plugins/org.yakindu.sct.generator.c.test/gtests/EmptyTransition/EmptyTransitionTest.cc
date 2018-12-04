@@ -11,7 +11,7 @@ class EmptyTransitionTest : public ::testing::Test
 {
 public:
 	/* All operations from the SCTUnit test class. */
-	void EmptyTransitionTest();
+	void emptyTransitionTest();
 	void setTimer(EmptyTransition* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 	void unsetTimer(EmptyTransition* handle, const sc_eventid evid);
 protected:
@@ -37,7 +37,7 @@ void EmptyTransitionTest::SetUp()
 	
 	tc = this;
 }
-void EmptyTransitionTest::EmptyTransitionTest()
+void EmptyTransitionTest::emptyTransitionTest()
 {
 	emptyTransition_enter(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
@@ -56,7 +56,7 @@ void EmptyTransitionTest::unsetTimer(EmptyTransition* handle, const sc_eventid e
 }
 
 TEST_F(EmptyTransitionTest, EmptyTransitionTest) {
-	EmptyTransitionTest();
+	emptyTransitionTest();
 }
 
 

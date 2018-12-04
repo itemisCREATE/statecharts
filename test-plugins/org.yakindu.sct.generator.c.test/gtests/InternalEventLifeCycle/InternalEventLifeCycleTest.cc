@@ -11,7 +11,7 @@ class InternalEventLifeCycleTest : public ::testing::Test
 {
 public:
 	/* All operations from the SCTUnit test class. */
-	void InternalEventLifeCycleTest();
+	void internalEventLifeCycleTest();
 	void setTimer(InternalEventLifeCycle* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 	void unsetTimer(InternalEventLifeCycle* handle, const sc_eventid evid);
 protected:
@@ -37,7 +37,7 @@ void InternalEventLifeCycleTest::SetUp()
 	
 	tc = this;
 }
-void InternalEventLifeCycleTest::InternalEventLifeCycleTest()
+void InternalEventLifeCycleTest::internalEventLifeCycleTest()
 {
 	internalEventLifeCycle_enter(&statechart);
 	EXPECT_TRUE(internalEventLifeCycle_isStateActive(&statechart, InternalEventLifeCycle_r1_A));
@@ -69,7 +69,7 @@ void InternalEventLifeCycleTest::unsetTimer(InternalEventLifeCycle* handle, cons
 }
 
 TEST_F(InternalEventLifeCycleTest, InternalEventLifeCycleTest) {
-	InternalEventLifeCycleTest();
+	internalEventLifeCycleTest();
 }
 
 

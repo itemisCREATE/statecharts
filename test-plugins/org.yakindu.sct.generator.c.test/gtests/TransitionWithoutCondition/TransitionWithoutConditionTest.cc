@@ -11,7 +11,7 @@ class TransitionWithoutConditionTest : public ::testing::Test
 {
 public:
 	/* All operations from the SCTUnit test class. */
-	void TransitionWithoutConditionTest();
+	void transitionWithoutConditionTest();
 	void setTimer(TransitionWithoutCondition* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 	void unsetTimer(TransitionWithoutCondition* handle, const sc_eventid evid);
 protected:
@@ -37,7 +37,7 @@ void TransitionWithoutConditionTest::SetUp()
 	
 	tc = this;
 }
-void TransitionWithoutConditionTest::TransitionWithoutConditionTest()
+void TransitionWithoutConditionTest::transitionWithoutConditionTest()
 {
 	transitionWithoutCondition_enter(&statechart);
 	EXPECT_TRUE(transitionWithoutCondition_isStateActive(&statechart, TransitionWithoutCondition_main_region_A));
@@ -56,7 +56,7 @@ void TransitionWithoutConditionTest::unsetTimer(TransitionWithoutCondition* hand
 }
 
 TEST_F(TransitionWithoutConditionTest, TransitionWithoutConditionTest) {
-	TransitionWithoutConditionTest();
+	transitionWithoutConditionTest();
 }
 
 
