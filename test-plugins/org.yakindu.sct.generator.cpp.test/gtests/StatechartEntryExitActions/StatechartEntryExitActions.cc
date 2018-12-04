@@ -88,6 +88,5 @@ TEST_F(StatechartEntryExitActions, exitActionsAreExecutedOnEnteringStatechart) {
 	
 }
 
-
 }
 
