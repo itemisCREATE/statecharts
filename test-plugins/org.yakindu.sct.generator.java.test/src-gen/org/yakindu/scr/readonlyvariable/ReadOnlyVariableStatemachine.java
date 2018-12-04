@@ -1,7 +1,7 @@
 package org.yakindu.scr.readonlyvariable;
 
-public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachine {
 
+public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private long myInt;

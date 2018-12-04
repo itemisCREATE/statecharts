@@ -5,7 +5,6 @@ import org.yakindu.scr.IStatemachine;
 import org.yakindu.scr.ITimerCallback;
 
 public interface IRunnableTestStatemachine extends ITimerCallback,IStatemachine {
-
 	public interface SCInterface {
 	
 		public boolean isRaisedEv_out();

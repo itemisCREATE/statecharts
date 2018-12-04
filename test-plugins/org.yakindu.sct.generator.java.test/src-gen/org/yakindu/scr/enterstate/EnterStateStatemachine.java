@@ -1,7 +1,7 @@
 package org.yakindu.scr.enterstate;
 
-public class EnterStateStatemachine implements IEnterStateStatemachine {
 
+public class EnterStateStatemachine implements IEnterStateStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;

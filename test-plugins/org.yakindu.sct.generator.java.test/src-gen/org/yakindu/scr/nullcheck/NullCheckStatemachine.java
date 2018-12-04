@@ -1,7 +1,7 @@
 package org.yakindu.scr.nullcheck;
 
-public class NullCheckStatemachine implements INullCheckStatemachine {
 
+public class NullCheckStatemachine implements INullCheckStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {

@@ -1,7 +1,7 @@
 package org.yakindu.scr.declarations;
 
-public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 
+public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean evA;

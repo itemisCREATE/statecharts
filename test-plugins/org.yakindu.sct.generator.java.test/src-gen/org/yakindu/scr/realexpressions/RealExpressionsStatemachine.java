@@ -1,7 +1,7 @@
 package org.yakindu.scr.realexpressions;
 
-public class RealExpressionsStatemachine implements IRealExpressionsStatemachine {
 
+public class RealExpressionsStatemachine implements IRealExpressionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e1;

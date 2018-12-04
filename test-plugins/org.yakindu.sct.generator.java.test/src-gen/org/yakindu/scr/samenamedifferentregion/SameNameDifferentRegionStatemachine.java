@@ -1,7 +1,7 @@
 package org.yakindu.scr.samenamedifferentregion;
 
-public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRegionStatemachine {
 
+public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRegionStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e1;

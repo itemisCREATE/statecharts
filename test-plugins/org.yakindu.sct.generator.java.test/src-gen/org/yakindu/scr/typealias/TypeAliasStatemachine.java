@@ -1,7 +1,7 @@
 package org.yakindu.scr.typealias;
 
-public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 
+public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean myEvent;

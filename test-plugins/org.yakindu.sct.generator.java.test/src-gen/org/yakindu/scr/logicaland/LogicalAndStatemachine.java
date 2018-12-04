@@ -1,7 +1,7 @@
 package org.yakindu.scr.logicaland;
 
-public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 
+public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private long x;

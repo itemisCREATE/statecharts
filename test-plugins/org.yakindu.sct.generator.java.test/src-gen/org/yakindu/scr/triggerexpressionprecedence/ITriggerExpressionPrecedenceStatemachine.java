@@ -3,7 +3,6 @@ package org.yakindu.scr.triggerexpressionprecedence;
 import org.yakindu.scr.IStatemachine;
 
 public interface ITriggerExpressionPrecedenceStatemachine extends IStatemachine {
-
 	public interface SCInterface {
 	
 		public void raiseE1();

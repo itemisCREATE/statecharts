@@ -1,7 +1,7 @@
 package org.yakindu.scr.ineventlifecycle;
 
-public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachine {
 
+public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;

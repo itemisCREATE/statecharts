@@ -1,7 +1,7 @@
 package org.yakindu.scr.historywithoutinitialstep;
 
-public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutInitialStepStatemachine {
 
+public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutInitialStepStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean toA;

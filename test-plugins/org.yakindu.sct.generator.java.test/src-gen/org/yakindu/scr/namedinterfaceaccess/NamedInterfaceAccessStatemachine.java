@@ -1,7 +1,7 @@
 package org.yakindu.scr.namedinterfaceaccess;
 
-public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessStatemachine {
 
+public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessStatemachine {
 	protected class SCISafeImpl implements SCISafe {
 	
 		private boolean open;

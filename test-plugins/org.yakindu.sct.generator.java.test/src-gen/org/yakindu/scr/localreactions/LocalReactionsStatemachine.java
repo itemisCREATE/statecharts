@@ -1,7 +1,7 @@
 package org.yakindu.scr.localreactions;
 
-public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 
+public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private long x;

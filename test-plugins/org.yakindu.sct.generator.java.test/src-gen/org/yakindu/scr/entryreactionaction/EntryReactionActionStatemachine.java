@@ -1,7 +1,7 @@
 package org.yakindu.scr.entryreactionaction;
 
-public class EntryReactionActionStatemachine implements IEntryReactionActionStatemachine {
 
+public class EntryReactionActionStatemachine implements IEntryReactionActionStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean b;
