@@ -7,14 +7,17 @@
  *   Contributors:
  *   	Markus Muehlbrandt - Initial contribution and API
  */
-package org.yakindu.sct.generator.java
+package org.yakindu.sct.generator.java.files
 
 import com.google.inject.Inject
 import org.eclipse.xtext.generator.IFileSystemAccess
-import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*;
-import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
+import org.yakindu.sct.generator.java.GenmodelEntries
+import org.yakindu.sct.generator.java.Naming
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sgen.GeneratorEntry
+
+import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
 
 class ITimerCallback {
 

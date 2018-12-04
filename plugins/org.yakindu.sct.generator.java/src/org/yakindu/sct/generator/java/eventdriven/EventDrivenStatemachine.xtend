@@ -12,7 +12,7 @@ package org.yakindu.sct.generator.java.eventdriven
 
 import java.util.Set
 import org.yakindu.base.types.typesystem.GenericTypeSystem
-import org.yakindu.sct.generator.java.Statemachine
+import org.yakindu.sct.generator.java.files.Statemachine
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition

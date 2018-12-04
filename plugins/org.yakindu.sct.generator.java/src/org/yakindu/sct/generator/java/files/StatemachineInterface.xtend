@@ -7,7 +7,7 @@
  *   Contributors:
  *   	Markus Muehlbrandt - Initial contribution and API
  */
-package org.yakindu.sct.generator.java
+package org.yakindu.sct.generator.java.files
 
 import com.google.inject.Inject
 import java.util.Set
@@ -18,6 +18,11 @@ import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.java.GenmodelEntries
+import org.yakindu.sct.generator.java.JavaExpressionsGenerator
+import org.yakindu.sct.generator.java.JavaIncludeProvider
+import org.yakindu.sct.generator.java.JavaNamingService
+import org.yakindu.sct.generator.java.Naming
 import org.yakindu.sct.generator.java.templates.ClassTemplate
 import org.yakindu.sct.generator.java.templates.FileTemplate
 import org.yakindu.sct.model.sexec.ExecutionFlow

@@ -15,6 +15,7 @@ import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.extensions.AnnotationExtensions;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.generator.java.eventdriven.EventDrivenStatemachine;
+import org.yakindu.sct.generator.java.files.Statemachine;
 import org.yakindu.sct.generator.java.types.JavaTypeSystemAccess;
 import org.yakindu.sct.generator.java.types.OldJavaTypeSystemAccess;
 import org.yakindu.sct.model.sexec.naming.INamingService;
@@ -34,7 +35,7 @@ import com.google.inject.multibindings.Multibinder;
  *
  */
 public class JavaGeneratorModule implements IGeneratorModule {
-
+	
 	@Override
 	public void configure(GeneratorEntry entry, Binder binder) {
 		configureGeneratorRoot(entry, binder);
@@ -42,22 +43,22 @@ public class JavaGeneratorModule implements IGeneratorModule {
 		configureServices(entry, binder);
 		Multibinder.newSetBinder(binder, JavaIncludeProvider.class);
 	}
-
-
+	
+	
 	public void configureGeneratorRoot(GeneratorEntry entry, Binder binder) {
 		binder.bind(IModelSequencer.class).to(ModelSequencer.class);
 		binder.bind(BehaviorMapping.class).to(org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping.class);
 		binder.bind(IExecutionFlowGenerator.class).to(JavaGenerator.class);
 	}
-
+	
 	public void configureForExecutionStyle(GeneratorEntry entry, Binder binder) {
 		if ((new AnnotationExtensions()).isEventDriven(entry)) {
 			binder.bind(Statemachine.class).to(EventDrivenStatemachine.class);
 		}
 	}
-
+	
 	public void configureServices(GeneratorEntry entry, Binder binder) {
-
+		
 		final GenmodelEntries entries = new GenmodelEntries();
 		if (entries.useJavaInt(entry)) {
 			binder.bind(ICodegenTypeSystemAccess.class).to(OldJavaTypeSystemAccess.class);
@@ -66,5 +67,5 @@ public class JavaGeneratorModule implements IGeneratorModule {
 		}
 		binder.bind(INamingService.class).to(JavaNamingService.class).in(Scopes.SINGLETON);
 	}
-
+	
 }
