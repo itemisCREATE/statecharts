@@ -23,6 +23,7 @@ import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.Trigger;
+import org.yakindu.sct.model.stext.stext.*;
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
@@ -154,6 +155,7 @@ public class StextSwitch<T> extends Switch<T> {
 				StatechartSpecification statechartSpecification = (StatechartSpecification)theEObject;
 				T result = caseStatechartSpecification(statechartSpecification);
 				if (result == null) result = caseScopedElement(statechartSpecification);
+				if (result == null) result = caseAnnotatableElement(statechartSpecification);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
