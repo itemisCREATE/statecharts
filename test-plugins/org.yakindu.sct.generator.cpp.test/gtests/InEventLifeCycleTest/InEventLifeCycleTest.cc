@@ -46,5 +46,5 @@ TEST_F(InEventLifeCycleTest, eventLifeCycle) {
 	
 }
 
-	}
+}
 

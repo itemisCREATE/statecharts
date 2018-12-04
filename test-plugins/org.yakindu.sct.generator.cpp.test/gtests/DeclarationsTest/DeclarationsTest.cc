@@ -38,5 +38,5 @@ TEST_F(DeclarationsTest, declarationsTest) {
 	
 }
 
-	}
+}
 

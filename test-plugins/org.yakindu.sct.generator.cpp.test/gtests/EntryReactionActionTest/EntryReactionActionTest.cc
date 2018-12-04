@@ -104,5 +104,5 @@ TEST_F(EntryReactionActionTest, noEntryTransitionActionOnHistory) {
 	
 }
 
-	}
+}
 

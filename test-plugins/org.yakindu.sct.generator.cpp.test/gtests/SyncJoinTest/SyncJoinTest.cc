@@ -186,5 +186,5 @@ TEST_F(SyncJoinTest, doubleEntryActionBug) {
 	
 }
 
-	}
+}
 

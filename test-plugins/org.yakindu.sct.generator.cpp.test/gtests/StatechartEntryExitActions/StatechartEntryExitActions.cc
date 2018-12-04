@@ -88,5 +88,9 @@ TEST_F(StatechartEntryExitActions, exitActionsAreExecutedOnEnteringStatechart) {
 	
 }
 
+<<<<<<< HEAD
 	}
+=======
+}
+>>>>>>> refs/heads/master
 

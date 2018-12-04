@@ -116,5 +116,5 @@ TEST_F(HistoryWithoutInitialStepTest, enterThroughHistoryWithoutInit) {
 	
 }
 
-	}
+}
 

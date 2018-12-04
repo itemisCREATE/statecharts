@@ -92,5 +92,5 @@ TEST_F(EntryExitSelfTransitionTest, SelfTransitionFromChildState) {
 	
 }
 
-	}
+}
 

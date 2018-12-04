@@ -1,7 +1,7 @@
 package org.yakindu.scr.statechartentryandexitactions;
 
-public class StatechartEntryAndExitActionsStatemachine implements IStatechartEntryAndExitActionsStatemachine {
 
+public class StatechartEntryAndExitActionsStatemachine implements IStatechartEntryAndExitActionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private long x;

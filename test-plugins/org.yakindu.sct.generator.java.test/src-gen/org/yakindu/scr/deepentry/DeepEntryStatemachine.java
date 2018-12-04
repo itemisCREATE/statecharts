@@ -1,7 +1,7 @@
 package org.yakindu.scr.deepentry;
 
-public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 
+public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;

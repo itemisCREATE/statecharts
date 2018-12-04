@@ -1,7 +1,7 @@
 package org.yakindu.scr.childfirstexecutionhierarchy;
 
-public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExecutionHierarchyStatemachine {
 
+public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExecutionHierarchyStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;

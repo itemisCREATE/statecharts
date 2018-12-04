@@ -88,5 +88,5 @@ TEST_F(TriggerExpressionPrecedenceTest, unsatisfiedTriggerAndFGuardTrueOrTrue) {
 	
 }
 
-	}
+}
 

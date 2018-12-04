@@ -98,5 +98,5 @@ TEST_F(ShallowHistoryTest, shallowHistoryTest) {
 	
 }
 
-	}
+}
 

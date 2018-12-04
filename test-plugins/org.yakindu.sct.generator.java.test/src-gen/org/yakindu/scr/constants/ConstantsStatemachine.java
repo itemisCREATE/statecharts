@@ -1,7 +1,7 @@
 package org.yakindu.scr.constants;
 
-public class ConstantsStatemachine implements IConstantsStatemachine {
 
+public class ConstantsStatemachine implements IConstantsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;

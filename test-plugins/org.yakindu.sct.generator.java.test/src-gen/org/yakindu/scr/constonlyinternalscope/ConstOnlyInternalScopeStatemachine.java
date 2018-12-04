@@ -1,7 +1,7 @@
 package org.yakindu.scr.constonlyinternalscope;
 
-public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalScopeStatemachine {
 
+public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalScopeStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;

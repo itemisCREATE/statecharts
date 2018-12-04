@@ -1,7 +1,7 @@
 package org.yakindu.scr.priorityvalues;
 
-public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 
+public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean event1;

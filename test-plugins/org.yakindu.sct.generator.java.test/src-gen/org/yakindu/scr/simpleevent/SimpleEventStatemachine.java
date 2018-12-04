@@ -1,7 +1,7 @@
 package org.yakindu.scr.simpleevent;
 
-public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 
+public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean event1;

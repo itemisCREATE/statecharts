@@ -62,5 +62,5 @@ TEST_F(BitExpressionsTest, BitExpressions) {
 	
 }
 
-	}
+}
 

@@ -96,5 +96,5 @@ TEST_F(GuardedEntryTest, EntryNotTakenInTransition) {
 	
 }
 
-	}
+}
 

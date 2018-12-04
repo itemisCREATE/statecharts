@@ -958,5 +958,5 @@ TEST_F(STextKeywordsInStatesAndRegionsTest, activeCheckWithSTextNamedStates) {
 	
 }
 
-	}
+}
 

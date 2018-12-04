@@ -1,7 +1,7 @@
 package org.yakindu.scr.logicalor;
 
-public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 
+public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private long x;

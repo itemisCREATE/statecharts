@@ -1,7 +1,7 @@
 package org.yakindu.scr.conditionalexpressions;
 
-public class ConditionalExpressionsStatemachine implements IConditionalExpressionsStatemachine {
 
+public class ConditionalExpressionsStatemachine implements IConditionalExpressionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;

@@ -76,5 +76,5 @@ TEST_F(ReadOnlyVariableTest, ReadOnlyVariableTest) {
 	
 }
 
-	}
+}
 

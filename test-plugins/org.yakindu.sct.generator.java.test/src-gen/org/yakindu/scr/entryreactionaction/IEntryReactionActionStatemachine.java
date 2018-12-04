@@ -3,7 +3,6 @@ package org.yakindu.scr.entryreactionaction;
 import org.yakindu.scr.IStatemachine;
 
 public interface IEntryReactionActionStatemachine extends IStatemachine {
-
 	public interface SCInterface {
 	
 		public void raiseB();

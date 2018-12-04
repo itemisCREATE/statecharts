@@ -1,7 +1,7 @@
 package org.yakindu.scr.guard;
 
-public class GuardStatemachine implements IGuardStatemachine {
 
+public class GuardStatemachine implements IGuardStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean event1;

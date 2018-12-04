@@ -99,7 +99,7 @@
       <eParameters name="typeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
-        eType="#//Annotation" containment="true"/>
+        eType="#//Annotation" transient="true" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="annotationInfo" eType="#//AnnotatableElement"
         containment="true"/>
   </eClassifiers>

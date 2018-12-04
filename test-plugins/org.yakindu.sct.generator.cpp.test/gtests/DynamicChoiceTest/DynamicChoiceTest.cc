@@ -44,5 +44,5 @@ TEST_F(DynamicChoiceTest, DynamicChoiceTest) {
 	
 }
 
-	}
+}
 

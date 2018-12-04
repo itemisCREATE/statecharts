@@ -68,5 +68,5 @@ TEST_F(ConstantsTests, constantDefinition) {
 	
 }
 
-	}
+}
 

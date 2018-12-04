@@ -1488,5 +1488,5 @@ TEST_F(OperationsTest, operationsNotCalled) {
 	unnamedOperation5aMock->reset();
 }
 
-	}
+}
 

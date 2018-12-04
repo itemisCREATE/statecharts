@@ -82,5 +82,5 @@ TEST_F(OutEventLifeCycleTest, unvailableAfter2ndCycle) {
 	
 }
 
-	}
+}
 

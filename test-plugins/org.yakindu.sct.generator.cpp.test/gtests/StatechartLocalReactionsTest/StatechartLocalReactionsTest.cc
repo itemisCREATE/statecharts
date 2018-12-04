@@ -57,5 +57,5 @@ TEST_F(StatechartLocalReactionsTest, statechartLocalReactionsTest) {
 	
 }
 
-	}
+}
 

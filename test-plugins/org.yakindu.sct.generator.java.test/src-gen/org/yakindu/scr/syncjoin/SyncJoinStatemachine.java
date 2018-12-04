@@ -1,7 +1,7 @@
 package org.yakindu.scr.syncjoin;
 
-public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 
+public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;

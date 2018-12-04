@@ -42,5 +42,5 @@ TEST_F(LogicalAndTests, operandEvaluationOrder) {
 	
 }
 
-	}
+}
 

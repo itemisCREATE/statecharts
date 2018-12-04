@@ -58,5 +58,5 @@ TEST_F(TypeAliasTest, TypeAliasTest) {
 	
 }
 
-	}
+}
 

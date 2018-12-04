@@ -124,5 +124,5 @@ TEST_F(ShallowHistoryWithDeepEntryTest, directDeepEntryIntoHistory) {
 	
 }
 
-	}
+}
 

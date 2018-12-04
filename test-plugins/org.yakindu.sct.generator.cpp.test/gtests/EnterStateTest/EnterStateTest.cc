@@ -74,5 +74,5 @@ TEST_F(EnterStateTest, namedEntryThroughDefaultTransition) {
 	
 }
 
-	}
+}
 

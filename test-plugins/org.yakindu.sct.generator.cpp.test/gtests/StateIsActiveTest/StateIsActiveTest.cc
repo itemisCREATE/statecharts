@@ -52,5 +52,5 @@ TEST_F(StateIsActiveTest, stateIsActive) {
 	
 }
 
-	}
+}
 

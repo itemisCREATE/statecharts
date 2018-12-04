@@ -144,5 +144,5 @@ TEST_F(ChoiceTest, alwaysTrueTransitionInChoice) {
 	
 }
 
-	}
+}
 

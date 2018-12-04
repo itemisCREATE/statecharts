@@ -528,5 +528,5 @@ TEST_F(ExitSequenceTest, exitFatStateByTransitionFromParent) {
 	
 }
 
-	}
+}
 

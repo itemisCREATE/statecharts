@@ -1,7 +1,7 @@
 package org.yakindu.scr.variadicfunctions;
 
-public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemachine {
 
+public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private SCInterfaceOperationCallback operationCallback;

@@ -1,7 +1,7 @@
 package org.yakindu.scr.exitstate;
 
-public class ExitStateStatemachine implements IExitStateStatemachine {
 
+public class ExitStateStatemachine implements IExitStateStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;

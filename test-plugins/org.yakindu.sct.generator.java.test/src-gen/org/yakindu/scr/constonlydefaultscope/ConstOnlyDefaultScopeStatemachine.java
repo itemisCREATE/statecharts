@@ -1,7 +1,7 @@
 package org.yakindu.scr.constonlydefaultscope;
 
-public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScopeStatemachine {
 
+public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScopeStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		public long getB() {

@@ -1,7 +1,7 @@
 package org.yakindu.scr.entrychoice;
 
-public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 
+public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {

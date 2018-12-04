@@ -54,5 +54,5 @@ TEST_F(NamedInterfaceAccessTest, SafeOpenSuccess) {
 	
 }
 
-	}
+}
 

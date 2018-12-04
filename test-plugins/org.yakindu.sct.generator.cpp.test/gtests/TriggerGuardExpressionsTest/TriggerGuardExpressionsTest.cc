@@ -100,5 +100,5 @@ TEST_F(TriggerGuardExpressionsTest, falseGuard) {
 	
 }
 
-	}
+}
 

@@ -70,5 +70,5 @@ TEST_F(HistoryWithExitPointTest, historyEntryAfterExit) {
 	
 }
 
-	}
+}
 

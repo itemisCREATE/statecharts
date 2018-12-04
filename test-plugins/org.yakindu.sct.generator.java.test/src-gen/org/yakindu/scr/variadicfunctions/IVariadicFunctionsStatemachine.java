@@ -3,7 +3,6 @@ package org.yakindu.scr.variadicfunctions;
 import org.yakindu.scr.IStatemachine;
 
 public interface IVariadicFunctionsStatemachine extends IStatemachine {
-
 	public interface SCInterface {
 	
 		public void setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback);

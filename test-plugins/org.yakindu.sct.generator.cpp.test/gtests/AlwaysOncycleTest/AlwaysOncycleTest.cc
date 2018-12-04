@@ -72,5 +72,5 @@ TEST_F(AlwaysOncycleTest, alwaysOnCycleTest) {
 	
 }
 
-	}
+}
 

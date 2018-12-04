@@ -1,7 +1,7 @@
 package org.yakindu.scr.guardedexit;
 
-public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 
+public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;
