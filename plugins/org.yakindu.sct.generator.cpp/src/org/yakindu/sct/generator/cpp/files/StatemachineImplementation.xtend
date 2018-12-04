@@ -299,6 +299,10 @@ class StatemachineImplementation implements IContentTemplate {
 				return «timerInstance»;
 			}
 			
+			«INT_TYPE» «module»::«numTimeEventsFctID»() {
+				return «timeEventsCountparallelConst»;
+			}
+			
 			«raiseTimeEventFunction»
 		«ENDIF»
 	'''
