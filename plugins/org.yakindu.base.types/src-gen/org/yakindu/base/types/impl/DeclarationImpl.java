@@ -242,7 +242,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	@Override
 	public EList<Annotation> getAnnotations() {
 		if (annotations == null) {
-			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, TypesPackage.DECLARATION__ANNOTATIONS);
+			annotations = new EObjectContainmentEList<>(Annotation.class, this, TypesPackage.DECLARATION__ANNOTATIONS);
 		}
 		return annotations;
 	}
