@@ -1,7 +1,7 @@
 package org.yakindu.scr.guardedentry;
 
-public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 
+public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;

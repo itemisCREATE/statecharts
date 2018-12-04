@@ -1,7 +1,7 @@
 package org.yakindu.scr.triggerguardexpressions;
 
-public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpressionsStatemachine {
 
+public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpressionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e1;

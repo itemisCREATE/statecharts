@@ -1,7 +1,7 @@
 package org.yakindu.scr.syncfork;
 
-public class SyncForkStatemachine implements ISyncForkStatemachine {
 
+public class SyncForkStatemachine implements ISyncForkStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;

@@ -1,7 +1,7 @@
 package org.yakindu.scr.alwaysoncycle;
 
-public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 
+public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private long value;

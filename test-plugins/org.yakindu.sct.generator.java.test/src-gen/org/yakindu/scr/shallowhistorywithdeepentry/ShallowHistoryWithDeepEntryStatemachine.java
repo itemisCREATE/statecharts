@@ -1,7 +1,7 @@
 package org.yakindu.scr.shallowhistorywithdeepentry;
 
-public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryWithDeepEntryStatemachine {
 
+public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryWithDeepEntryStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean toZ;

@@ -3,7 +3,6 @@ package org.yakindu.scr.eventdriveninternalevent;
 import org.yakindu.scr.IStatemachine;
 
 public interface IEventDrivenInternalEventStatemachine extends IStatemachine {
-
 	public interface SCInterface {
 	
 		public void raiseStart();

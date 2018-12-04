@@ -1,7 +1,7 @@
 package org.yakindu.scr.stextkeywordsinstatesandregions;
 
-public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywordsInStatesAndRegionsStatemachine {
 
+public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywordsInStatesAndRegionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e1;

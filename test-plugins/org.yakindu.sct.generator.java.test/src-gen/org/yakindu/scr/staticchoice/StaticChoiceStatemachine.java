@@ -1,7 +1,7 @@
 package org.yakindu.scr.staticchoice;
 
-public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 
+public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean reset;

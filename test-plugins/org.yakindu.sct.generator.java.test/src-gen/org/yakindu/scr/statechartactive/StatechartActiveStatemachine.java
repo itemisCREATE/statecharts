@@ -1,7 +1,7 @@
 package org.yakindu.scr.statechartactive;
 
-public class StatechartActiveStatemachine implements IStatechartActiveStatemachine {
 
+public class StatechartActiveStatemachine implements IStatechartActiveStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {

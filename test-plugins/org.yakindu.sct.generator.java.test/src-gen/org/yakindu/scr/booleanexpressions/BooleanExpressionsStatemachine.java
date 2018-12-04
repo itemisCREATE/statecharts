@@ -1,7 +1,7 @@
 package org.yakindu.scr.booleanexpressions;
 
-public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatemachine {
 
+public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e1;

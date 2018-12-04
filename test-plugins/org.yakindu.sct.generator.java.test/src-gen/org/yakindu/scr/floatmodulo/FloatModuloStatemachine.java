@@ -1,7 +1,7 @@
 package org.yakindu.scr.floatmodulo;
 
-public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 
+public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private double r;

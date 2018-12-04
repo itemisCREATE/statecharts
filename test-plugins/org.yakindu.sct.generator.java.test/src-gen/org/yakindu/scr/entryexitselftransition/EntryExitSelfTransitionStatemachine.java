@@ -1,7 +1,7 @@
 package org.yakindu.scr.entryexitselftransition;
 
-public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransitionStatemachine {
 
+public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransitionStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;

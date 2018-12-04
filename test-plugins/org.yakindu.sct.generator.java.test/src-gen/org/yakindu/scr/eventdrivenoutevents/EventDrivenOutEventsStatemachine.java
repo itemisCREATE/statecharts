@@ -1,7 +1,7 @@
 package org.yakindu.scr.eventdrivenoutevents;
 
-public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsStatemachine {
 
+public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e1;

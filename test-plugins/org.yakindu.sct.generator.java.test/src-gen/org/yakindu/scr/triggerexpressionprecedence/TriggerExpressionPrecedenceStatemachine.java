@@ -1,7 +1,7 @@
 package org.yakindu.scr.triggerexpressionprecedence;
 
-public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressionPrecedenceStatemachine {
 
+public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressionPrecedenceStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e1;
