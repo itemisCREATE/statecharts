@@ -1,8 +1,8 @@
 package org.yakindu.scr.tracing;
 
-import org.yakindu.scr.ITracing;
+import org.yakindu.scr.ITracingListener;
 
-public class TracingImpl<T> implements ITracing<T>{
+public class TracingImpl<T> implements ITracingListener<T>{
 
 	private boolean entered = false;
 	private boolean exited = false;
@@ -17,12 +17,12 @@ public class TracingImpl<T> implements ITracing<T>{
 
 
 	@Override
-	public void stateEntered(T state) {
+	public void onStateEntered(T state) {
 		entered = true;
 	}
 
 	@Override
-	public void stateExited(T state) {
+	public void onStateExited(T state) {
 		exited = true;
 	}
 
