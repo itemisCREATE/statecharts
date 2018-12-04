@@ -102,9 +102,10 @@ class Statemachine {
 	def protected Set<CharSequence> imports(ExecutionFlow it, GeneratorEntry entry) {
 		// we need a sorted set for the imports
 		val Set<CharSequence> importSet = new TreeSet
+		val String JavaList = "java.util.List"
 		
 		if (entry.createInterfaceObserver && hasOutgoingEvents) {
-			importSet += "java.util.List"
+			importSet += JavaList
 			importSet += "java.util.LinkedList"
 		}
 		
@@ -118,6 +119,9 @@ class Statemachine {
 		
 		if (tracingUsed(entry)) {
 			importSet += entry.getBasePackageName() + "." + traceInterface
+			if(!(importSet.contains(JavaList))){
+				importSet += JavaList
+			}
 		}
 		
 		return importSet
@@ -147,7 +151,7 @@ class Statemachine {
 		private int nextStateIndex;
 		
 		«IF tracingUsed(entry)»
-		private «traceInterface»<State> «traceInstance»;
+		private List <«traceInterface»<State>> «traceInstances»;
 		
 		«ENDIF»
 		«IF flow.timed»
@@ -417,12 +421,20 @@ class Statemachine {
 		'''
 	
 	def generateTraceAccessors(GeneratorEntry entry) '''
-			public void set«traceInstance.toFirstUpper»(«traceInterface»<State> ifaceTraceObserver) {
-				this.«traceInstance» = ifaceTraceObserver;
+			public void add«traceSingleInstance.toFirstUpper»(«traceInterface»<State> «traceSingleInstance») {
+				if(!(this.«traceInstances».contains(«traceSingleInstance»))) {
+					this.«traceInstances».add(«traceSingleInstance»);
+				}
 			}
 			
-			public «traceInterface»<State> get«traceInstance.toFirstUpper»() {
-				return «traceInstance»;
+			public void remove«traceSingleInstance.toFirstUpper»(«traceInterface»<State> «traceSingleInstance») {
+				if(this.«traceInstances».contains(«traceSingleInstance»)) {
+					this.«traceInstances».remove(«traceSingleInstance»);
+				}
+			}
+			
+			public List<«traceInterface»<State>> get«traceInstances.toFirstUpper»() {
+				return «traceInstances»;
 			}
 	'''
 	

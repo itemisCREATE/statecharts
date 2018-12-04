@@ -38,7 +38,7 @@ class JavaGenerator implements IExecutionFlowGenerator {
 	@Inject extension ITimerCallback
 	@Inject extension ITimer
 	@Inject extension TimerService
-	@Inject extension ITracing
+	@Inject extension ITracingListener
 	@Inject extension RuntimeService
 	@Inject extension StatemachineInterface
 	@Inject extension Statemachine

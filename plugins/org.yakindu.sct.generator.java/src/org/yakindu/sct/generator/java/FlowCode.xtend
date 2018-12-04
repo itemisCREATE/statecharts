@@ -60,18 +60,22 @@ class FlowCode {
 		//ERROR: FlowCode for Step '«getClass().name»' not defined
 	'''
 	
-	// ignore all trace steps not explicitly supported
+	// ignore all trace steps not explicitly suppotrrted
 	def dispatch CharSequence code(Trace it)''''''
 	
 	def dispatch CharSequence code(TraceStateEntered it) '''
 		«IF entry.tracingEnterState»
-		«traceInstance».«stateEnteredTraceFunctionID»(State.«it.state.stateName»);
+		for(«traceInterface»<State> «traceSingleInstance» : «traceInstances») {
+			«traceSingleInstance».«stateEnteredTraceFunctionID»(State.«it.state.stateName»);
+		}
 		«ENDIF»
 	'''
 	
 	def dispatch CharSequence code(TraceStateExited it) '''
 		«IF entry.tracingExitState»
-		«traceInstance».«stateExitedTraceFunctionID»(State.«it.state.stateName»);
+		for(«traceInterface»<State> «traceSingleInstance» : «traceInstances») {
+			«traceSingleInstance».«stateExitedTraceFunctionID»(State.«it.state.stateName»);
+		}
 		«ENDIF»
 	'''
 	

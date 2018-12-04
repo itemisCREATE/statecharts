@@ -1,3 +1,13 @@
+/** 
+ * Copyright (c) 2015 committers of YAKINDU and others. 
+ * All rights reserved. This program and the accompanying materials 
+ * are made available under the terms of the Eclipse Public License v1.0 
+ * which accompanies this distribution, and is available at 
+ * http://www.eclipse.org/legal/epl-v10.html 
+ * Contributors:
+ * committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
@@ -7,7 +17,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
 
-class ITracing {
+class ITracingListener {
 	@Inject extension Naming
 	@Inject extension GenmodelEntries
 	
@@ -39,9 +49,22 @@ class ITracing {
 	«licenceText»
 	package «basePackage»;
 	
+	/**
+	 * Tracing interface for state machines.
+	 * Must be implemented if tracing feature is used.
+	 * Multiple listeners can be added to and removed from the state machine.
+	 */
 	public interface «traceInterface»<T> {
-		abstract void stateEntered(T state);
-		abstract void stateExited(T state);
+		
+		/**
+		 * «stateEnteredTraceFunctionID.toFirstUpper» will be called if any state has been entered.
+		 */
+		void «stateEnteredTraceFunctionID»(T state);
+		
+		/**
+		* «stateExitedTraceFunctionID.toFirstUpper» will be called if any state has been exited.
+		*/
+		void «stateExitedTraceFunctionID»(T state);
 	}
 	'''
 }

@@ -74,19 +74,23 @@ class Naming {
 	}
 	
 	def traceInterface() {
-		"ITracing"
+		"ITracingListener"
 	}
 	
-	def traceInstance() {
+	def traceSingleInstance() {
 		"ifaceTraceObserver"
 	}
 	
+	def traceInstances() {
+		"ifaceTraceObservers"
+	}
+	
 	def stateEnteredTraceFunctionID() {
-		"stateEntered"
+		"onStateEntered"
 	}
 	
 	def stateExitedTraceFunctionID() {
-		"stateExited"
+		"onStateExited"
 	}
 
 	def dispatch String statemachineName(String name) {
