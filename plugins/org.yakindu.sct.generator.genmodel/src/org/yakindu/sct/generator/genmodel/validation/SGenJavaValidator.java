@@ -277,23 +277,12 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 				if (!validDomains.isEmpty() && !validDomains.contains(domainID)) {
 					error(String.format(INVALID_DOMAIN_ID, domainID, Arrays.toString(validDomains.toArray())),
 							generatorEntry, SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF, CODE_REQUIRED_DOMAIN,
-							combineDomainsToString(validDomains));
+							String.join(",", validDomains));
 				}
 			}
 		}
 	}
 
-	private String combineDomainsToString(Set<String> validDomains) {
-		String issueData = null;
-		for (String validDomain : validDomains) {
-			if(issueData == null) {
-				issueData = validDomain;
-			} else {
-				issueData = issueData + ";" + validDomain;
-			}
-		}
-		return issueData;
-	}
 	@Check
 	public void checkDeprecatedParameters(FeatureParameterValue value) {
 		if (value.getParameter().isDeprecated()) {

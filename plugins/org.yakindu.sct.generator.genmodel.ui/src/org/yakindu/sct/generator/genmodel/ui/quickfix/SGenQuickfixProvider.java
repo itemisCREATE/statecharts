@@ -75,7 +75,7 @@ public class SGenQuickfixProvider extends DefaultQuickfixProvider {
 	
 	@Fix(SGenJavaValidator.CODE_REQUIRED_DOMAIN)
 	public void changeToValidDomain(final Issue issue, IssueResolutionAcceptor acceptor) {
-		String[] validDomains = issue.getData()[0].split(";");
+		String[] validDomains = issue.getData()[0].split(",");
 		for(String validDomain : validDomains) {
 			addAcceptor(issue, acceptor, validDomain);
 		}
@@ -86,32 +86,12 @@ public class SGenQuickfixProvider extends DefaultQuickfixProvider {
 			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				if (element instanceof GeneratorEntry) {
-					EObject elementRef = ((GeneratorEntry) element).getElementRef();
-					if (elementRef instanceof Statechart) {
+					EObject referencedStatechart = ((GeneratorEntry) element).getElementRef();
+					if (referencedStatechart instanceof Statechart) {
 						TransactionalEditingDomain sharedDomain = DiagramPartitioningUtil.getSharedDomain();
-						AbstractTransactionalCommand refactoringCommand = new AbstractTransactionalCommand(sharedDomain,
-								CHANGE_DOMAIN_COMMAND, Collections.EMPTY_LIST) {
-
-							@Override
-							protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info)
-									throws ExecutionException {
-								try {
-									Statechart realStatechart = (Statechart) DiagramPartitioningUtil.getSharedDomain()
-											.getResourceSet().getEObject(EcoreUtil.getURI(elementRef), true);
-									(realStatechart).setDomainID(validDomain);
-								} catch (Exception ex) {
-									return CommandResult.newErrorCommandResult(ex);
-								}
-								return CommandResult.newOKCommandResult();
-							}
-
-							@Override
-							protected IStatus doUndo(IProgressMonitor monitor, IAdaptable info)
-									throws ExecutionException {
-								return Status.CANCEL_STATUS;
-							}
-
-						};
+						DomainChangeCommand refactoringCommand = new DomainChangeCommand(sharedDomain,
+								CHANGE_DOMAIN_COMMAND, Collections.EMPTY_LIST, validDomain,
+								(Statechart) referencedStatechart);
 						try {
 							refactoringCommand.execute(new NullProgressMonitor(), null);
 						} catch (Exception ex) {
