@@ -142,7 +142,8 @@ public class OperationItemProvider extends DeclarationItemProvider {
 			builder.append(sep);
 			builder.append(parameter.getName());
 			builder.append(" : ");
-			String typeName = parameter.getType().getName();
+			Type paramType = parameter.getType();
+			String typeName = (paramType != null) ? paramType.getName() : "<some type>";
 			builder.append(typeName);
 			sep = ", ";
 		}
@@ -226,6 +227,7 @@ public class OperationItemProvider extends DeclarationItemProvider {
 
 		boolean qualify =
 			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
+			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES ||
 			childFeature == TypesPackage.Literals.OPERATION__PARAMETERS ||
 			childFeature == TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS;
 

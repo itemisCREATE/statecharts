@@ -15,7 +15,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="superTypes" upperBound="-1"
         eType="#//TypeSpecifier" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Declaration" abstract="true" eSuperTypes="#//TypedElement base.ecore#//NamedElement #//PackageMember">
+  <eClassifiers xsi:type="ecore:EClass" name="Declaration" abstract="true" eSuperTypes="#//TypedElement base.ecore#//NamedElement #//PackageMember #//MetaComposite">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//Declaration #//GenericElement">
@@ -114,4 +114,8 @@
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MetaComposite">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metaFeatures" upperBound="-1"
+        eType="#//Declaration" containment="true"/>
+  </eClassifiers>
 </ecore:EPackage>

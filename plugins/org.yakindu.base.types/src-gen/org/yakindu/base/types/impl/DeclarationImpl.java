@@ -18,6 +18,7 @@ import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.Declaration;
+import org.yakindu.base.types.MetaComposite;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeSpecifier;
@@ -38,6 +39,7 @@ import org.yakindu.base.types.TypesUtil;
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getAnnotationInfo <em>Annotation Info</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getMetaFeatures <em>Meta Features</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#isStatic <em>Static</em>}</li>
  * </ul>
  *
@@ -103,6 +105,16 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	 * @ordered
 	 */
 	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getMetaFeatures() <em>Meta Features</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMetaFeatures()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Declaration> metaFeatures;
 
 	/**
 	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
@@ -342,6 +354,8 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 				return getAnnotationInfo();
 			case TypesPackage.DECLARATION__ID:
 				return getId();
+			case TypesPackage.DECLARATION__META_FEATURES:
+				return getMetaFeatures();
 			case TypesPackage.DECLARATION__STATIC:
 				return isStatic();
 		}
@@ -370,6 +384,10 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 			case TypesPackage.DECLARATION__ANNOTATION_INFO:
 				setAnnotationInfo((AnnotatableElement)newValue);
 				return;
+			case TypesPackage.DECLARATION__META_FEATURES:
+				getMetaFeatures().clear();
+				getMetaFeatures().addAll((Collection<? extends Declaration>)newValue);
+				return;
 			case TypesPackage.DECLARATION__STATIC:
 				setStatic((Boolean)newValue);
 				return;
@@ -396,6 +414,9 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 				return;
 			case TypesPackage.DECLARATION__ANNOTATION_INFO:
 				setAnnotationInfo((AnnotatableElement)null);
+				return;
+			case TypesPackage.DECLARATION__META_FEATURES:
+				getMetaFeatures().clear();
 				return;
 			case TypesPackage.DECLARATION__STATIC:
 				setStatic(STATIC_EDEFAULT);
@@ -424,6 +445,8 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 				return annotationInfo != null;
 			case TypesPackage.DECLARATION__ID:
 				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
+			case TypesPackage.DECLARATION__META_FEATURES:
+				return metaFeatures != null && !metaFeatures.isEmpty();
 			case TypesPackage.DECLARATION__STATIC:
 				return static_ != STATIC_EDEFAULT;
 		}
@@ -456,6 +479,12 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 				default: return -1;
 			}
 		}
+		if (baseClass == MetaComposite.class) {
+			switch (derivedFeatureID) {
+				case TypesPackage.DECLARATION__META_FEATURES: return TypesPackage.META_COMPOSITE__META_FEATURES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -485,6 +514,12 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 				default: return -1;
 			}
 		}
+		if (baseClass == MetaComposite.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.META_COMPOSITE__META_FEATURES: return TypesPackage.DECLARATION__META_FEATURES;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -497,7 +532,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuilder result = new StringBuilder(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
 		result.append(", static: ");
@@ -521,6 +556,18 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Declaration> getMetaFeatures() {
+		if (metaFeatures == null) {
+			metaFeatures = new EObjectContainmentEList<Declaration>(Declaration.class, this, TypesPackage.DECLARATION__META_FEATURES);
+		}
+		return metaFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -530,6 +577,8 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
 			case TypesPackage.DECLARATION__ANNOTATION_INFO:
 				return basicSetAnnotationInfo(null, msgs);
+			case TypesPackage.DECLARATION__META_FEATURES:
+				return ((InternalEList<?>)getMetaFeatures()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
