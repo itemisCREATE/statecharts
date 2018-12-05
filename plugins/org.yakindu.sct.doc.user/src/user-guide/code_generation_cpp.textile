@@ -550,3 +550,42 @@ int main(int argc, char *argv[]) {
 
 p. 
 
+h4(#codegen_cpp_trace-observed_state_machine). Trace-observed state machine
+
+p. By using the tracing feature the execution of the state machine can be observed. In detail, entered and exited states can be traced. Therefore, additional operation callbacks _onStateEntered_ and _onStateExited_ are generated in the _sCTracingObserver.h_ file. 
+
+p. The _TraceObserver_ class can be implemented as following: 
+
+bc.. 
+class TraceObserverImpl : public ysc::TraceObserver<SomeStatemachine::SomeStatemachineStates>{
+public:
+	TraceObserverImpl();
+	virtual ~TraceObserverImpl();
+	void stateEntered(SomeStatemachine::SomeStatemachineStates state);
+	void stateExited(SomeStatemachine::SomeStatemachineStates state);
+};
+TraceObserverImpl::TraceObserverImpl() {}
+TraceObserverImpl::~TraceObserverImpl() {}
+
+void TraceObserverImpl::stateEntered(SomeStatemachine::SomeStatemachineStates state) {
+	// observe any entered state
+}
+void TraceObserverImpl::stateExited(SomeStatemachine::SomeStatemachineStates state) {
+	// observe any exited state
+}
+
+p. 
+Finally, the state observer has to be added to the state machine. This is shown in a simple example for some undefined state machine:
+
+bc.. 
+int main() {
+	SomeStatemachine* sm = new SomeStatemachine();
+	TraceObserverImpl* observer = new SomeStatemachine();
+	
+	sm->setTraceObserver(observer);
+	
+	sm->init();
+	sm->enter();
+	
+	sm->runCycle();
+}
