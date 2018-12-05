@@ -1,7 +1,7 @@
 package org.yakindu.scr.deephistory;
 
-public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 
+public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean event1;

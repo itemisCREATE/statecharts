@@ -1,7 +1,7 @@
 package org.yakindu.scr.dynamicchoice;
 
-public class DynamicChoiceStatemachine implements IDynamicChoiceStatemachine {
 
+public class DynamicChoiceStatemachine implements IDynamicChoiceStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean reset;

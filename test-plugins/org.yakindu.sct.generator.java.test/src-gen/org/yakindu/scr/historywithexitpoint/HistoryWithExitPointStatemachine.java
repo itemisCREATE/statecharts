@@ -1,7 +1,7 @@
 package org.yakindu.scr.historywithexitpoint;
 
-public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointStatemachine {
 
+public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean push;

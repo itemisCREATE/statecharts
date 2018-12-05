@@ -1,7 +1,7 @@
 package org.yakindu.scr.featurecalls;
 
-public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 
+public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 	protected class SCIMyInterfaceImpl implements SCIMyInterface {
 	
 		private boolean event1;

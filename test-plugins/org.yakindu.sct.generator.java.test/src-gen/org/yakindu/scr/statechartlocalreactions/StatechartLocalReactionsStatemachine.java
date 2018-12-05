@@ -1,7 +1,7 @@
 package org.yakindu.scr.statechartlocalreactions;
 
-public class StatechartLocalReactionsStatemachine implements IStatechartLocalReactionsStatemachine {
 
+public class StatechartLocalReactionsStatemachine implements IStatechartLocalReactionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private long myInt;

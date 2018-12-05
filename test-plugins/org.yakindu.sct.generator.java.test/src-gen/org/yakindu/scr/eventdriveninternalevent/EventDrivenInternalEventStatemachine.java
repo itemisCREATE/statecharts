@@ -1,9 +1,9 @@
 package org.yakindu.scr.eventdriveninternalevent;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class EventDrivenInternalEventStatemachine implements IEventDrivenInternalEventStatemachine {
-
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean start;

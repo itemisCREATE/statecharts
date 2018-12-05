@@ -1,7 +1,7 @@
 package org.yakindu.scr.bitexpressions;
 
-public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 
+public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e1;

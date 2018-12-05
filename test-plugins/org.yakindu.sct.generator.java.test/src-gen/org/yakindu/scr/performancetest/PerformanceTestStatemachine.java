@@ -1,8 +1,8 @@
 package org.yakindu.scr.performancetest;
+
 import org.yakindu.scr.ITimer;
 
 public class PerformanceTestStatemachine implements IPerformanceTestStatemachine {
-
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e1;

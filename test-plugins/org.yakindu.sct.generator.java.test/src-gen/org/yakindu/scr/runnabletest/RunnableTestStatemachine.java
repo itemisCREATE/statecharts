@@ -1,10 +1,10 @@
 package org.yakindu.scr.runnabletest;
+
 import java.util.LinkedList;
 import java.util.List;
 import org.yakindu.scr.ITimer;
 
 public class RunnableTestStatemachine implements IRunnableTestStatemachine {
-
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private List<SCInterfaceListener> listeners = new LinkedList<SCInterfaceListener>();

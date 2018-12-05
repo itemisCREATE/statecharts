@@ -7,12 +7,13 @@
   Contributors:
   	Markus Mühlbrandt - Initial contribution and API
  */
-package org.yakindu.sct.generator.cpp
+package org.yakindu.sct.generator.cpp.files
 
 import com.google.inject.Inject
 import org.yakindu.sct.generator.c.IContentTemplate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
+import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
@@ -57,6 +58,11 @@ class TimedStatemachineInterface implements IContentTemplate {
 				/*! Callback method if a time event occurred.
 				*/
 				virtual void «raiseTimeEventFctID»(«EVENT_TYPE» event) = 0;
+				
+				/*! Method to retrieve the number of time events that can be 
+					active at once in this state machine.
+				*/
+				virtual «INT_TYPE» «numTimeEventsFctID»() = 0;
 		};
 		
 		inline «timedStatemachineInterface»::~«timedStatemachineInterface»() {}

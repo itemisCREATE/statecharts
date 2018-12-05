@@ -1,7 +1,7 @@
 package org.yakindu.scr.finalstate;
 
-public class FinalStateStatemachine implements IFinalStateStatemachine {
 
+public class FinalStateStatemachine implements IFinalStateStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {

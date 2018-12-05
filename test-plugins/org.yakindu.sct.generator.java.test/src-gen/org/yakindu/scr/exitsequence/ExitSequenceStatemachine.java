@@ -1,7 +1,7 @@
 package org.yakindu.scr.exitsequence;
 
-public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 
+public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;

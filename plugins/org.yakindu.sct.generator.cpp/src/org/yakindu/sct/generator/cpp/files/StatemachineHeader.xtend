@@ -8,22 +8,27 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.cpp
+package org.yakindu.sct.generator.cpp.files
 
 import com.google.inject.Inject
 import java.util.List
+import java.util.Set
 import org.eclipse.xtend2.lib.StringConcatenation
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.IncludeProvider
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
@@ -33,10 +38,6 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
-import org.yakindu.sct.model.sexec.ExecutionState
-import org.yakindu.sct.model.sexec.Method
-import java.util.Set
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 
@@ -70,11 +71,11 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			*/
 			
 			«IF !namespace.nullOrEmpty»
-			«FOR ns : namespace»
-			namespace «ns» {
-			«ENDFOR»
+				«FOR ns : namespace»
+					namespace «ns» {
+				«ENDFOR»
 			«ENDIF»
-
+			
 			«preStatechartDeclarations»
 			
 			/*! Define indices of states in the StateConfVector */
@@ -91,9 +92,9 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			«postStatechartDeclarations»
 			
 			«IF !namespace.nullOrEmpty»
-			«FOR ns : namespace»
-			}
-			«ENDFOR»
+				«FOR ns : namespace»
+					}
+				«ENDFOR»
 			«ENDIF»
 			
 			#endif /* «module().define»_H_ */
@@ -113,11 +114,11 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 	
 	def final includes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
 		'''
-		«FOR provider : includeProviders»
-			«FOR i : provider.getIncludes(it, artifactConfigs)»
-				«i»
+			«FOR provider : includeProviders»
+				«FOR i : provider.getIncludes(it, artifactConfigs)»
+					«i»
+				«ENDFOR»
 			«ENDFOR»
-		«ENDFOR»
 		'''
 	}
 	
@@ -164,8 +165,8 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 				static const «INT_TYPE» «timeEventsCountparallelConst» = «(it.sourceElement as Statechart).maxNumberOfParallelTimeEvents»;
 			«ENDIF»
 			«IF entry.innerClassVisibility == "public"»
-			
-			«generateInnerClasses»
+				
+				«generateInnerClasses»
 			«ENDIF»
 		'''
 	}
@@ -175,12 +176,12 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 		void set«traceObserverModule»(«YSCNamespace»::«traceObserverModule»<«statesEnumType»>* tracingcallback);
 		
 		«YSCNamespace»::«traceObserverModule»<«statesEnumType»>* get«traceObserverModule»();
-		'''
+	'''
 	
 	def protected generateProtectedClassmembers(ExecutionFlow it) {
 		'''
 			«IF entry.innerClassVisibility == "protected"»
-			«generateInnerClasses»
+				«generateInnerClasses»
 			«ENDIF»
 		'''
 	}
@@ -188,8 +189,8 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 	def protected generateInnerClasses(ExecutionFlow it) {
 		'''
 			«IF (timed || hasOperationCallbacks)»
-			«copyConstructorDecl»
-			«assignmentOperatorDecl»
+				«copyConstructorDecl»
+				«assignmentOperatorDecl»
 			«ENDIF»
 			
 			«FOR s : scopes.filter(typeof(InternalScope))»«s.createInterface»«ENDFOR»
@@ -216,7 +217,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 	def protected generatePrivateClassmembers(ExecutionFlow it) {
 		'''
 			«IF entry.innerClassVisibility == "private"»
-			«generateInnerClasses»
+				«generateInnerClasses»
 			«ENDIF»
 		'''
 	}
@@ -286,12 +287,12 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 	
 	protected def CharSequence protectedInnerClassMembers(StatechartScope scope)
 		'''
-			friend class «scope.execution_flow.module()»;
-			«FOR d : scope.declarations»
-				«d.privateFunctionPrototypes»
-				«d.scopeTypeDeclMember»
-			«ENDFOR»
-		'''
+		friend class «scope.execution_flow.module()»;
+		«FOR d : scope.declarations»
+			«d.privateFunctionPrototypes»
+			«d.scopeTypeDeclMember»
+		«ENDFOR»
+	'''
 	
 
 	def dispatch privateFunctionPrototypes(Declaration it) {
@@ -330,7 +331,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 		//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
 		static const «USHORT_TYPE» «orthogonalStatesConst» = «stateVector.size»;
 		«IF hasHistory»
-		//! dimension of the state configuration vector for history states
+			//! dimension of the state configuration vector for history states
 		static const «USHORT_TYPE» «historyStatesConst» = «historyVector.size»;«ENDIF»
 		
 		«IF timed»
@@ -399,6 +400,8 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 		virtual «timerInterface»* getTimer();
 		
 		virtual void «raiseTimeEventFctID»(«EVENT_TYPE» event);
+		
+		virtual «INT_TYPE» «numTimeEventsFctID»();
 	'''
 
 	def dispatch functionPrototypes(EventDefinition it) '''

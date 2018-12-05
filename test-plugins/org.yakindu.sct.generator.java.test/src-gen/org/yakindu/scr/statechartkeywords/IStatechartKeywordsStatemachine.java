@@ -5,7 +5,6 @@ import org.yakindu.scr.IStatemachine;
 import org.yakindu.scr.ITimerCallback;
 
 public interface IStatechartKeywordsStatemachine extends ITimerCallback,IStatemachine {
-
 	public interface SCIIf {
 	
 		public boolean isRaisedOperationCallback();

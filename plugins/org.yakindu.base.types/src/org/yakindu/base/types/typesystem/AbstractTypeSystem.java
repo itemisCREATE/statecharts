@@ -318,4 +318,9 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	public boolean isExtensionProperty(Property prop) {
 		return extensionPropertyRegistry.containsValue(prop);
 	}
+	
+	@Override
+	public boolean isConvertableTo(Type type1, Type type2) {
+		return isSame(getConversionType(type1), type2);
+	}
 }

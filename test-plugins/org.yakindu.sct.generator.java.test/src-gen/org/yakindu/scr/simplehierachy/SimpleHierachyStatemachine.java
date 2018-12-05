@@ -1,7 +1,7 @@
 package org.yakindu.scr.simplehierachy;
 
-public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 
+public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean event1;

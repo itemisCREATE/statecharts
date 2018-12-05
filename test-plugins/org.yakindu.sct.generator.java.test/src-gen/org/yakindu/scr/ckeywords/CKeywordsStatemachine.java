@@ -1,7 +1,7 @@
 package org.yakindu.scr.ckeywords;
 
-public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 
+public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean auto;

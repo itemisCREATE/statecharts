@@ -1,7 +1,7 @@
 package org.yakindu.scr.stringexpressions;
 
-public class StringExpressionsStatemachine implements IStringExpressionsStatemachine {
 
+public class StringExpressionsStatemachine implements IStringExpressionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;

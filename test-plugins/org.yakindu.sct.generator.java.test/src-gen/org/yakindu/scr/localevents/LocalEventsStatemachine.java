@@ -1,9 +1,9 @@
 package org.yakindu.scr.localevents;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class LocalEventsStatemachine implements ILocalEventsStatemachine {
-
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;

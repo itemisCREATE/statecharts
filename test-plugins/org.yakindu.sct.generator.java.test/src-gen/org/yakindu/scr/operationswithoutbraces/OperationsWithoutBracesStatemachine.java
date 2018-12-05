@@ -1,7 +1,7 @@
 package org.yakindu.scr.operationswithoutbraces;
 
-public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBracesStatemachine {
 
+public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBracesStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private SCInterfaceOperationCallback operationCallback;

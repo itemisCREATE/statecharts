@@ -1,7 +1,7 @@
 package org.yakindu.scr.transitionwithoutcondition;
 
-public class TransitionWithoutConditionStatemachine implements ITransitionWithoutConditionStatemachine {
 
+public class TransitionWithoutConditionStatemachine implements ITransitionWithoutConditionStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {

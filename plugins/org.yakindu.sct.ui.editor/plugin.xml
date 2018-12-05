@@ -953,25 +953,7 @@
  <extension
        point="org.eclipse.ui.perspectiveExtensions">
     <perspectiveExtension
-          targetID="org.yakindu.sct.ui.ModelingPerspective">
-       <newWizardShortcut
-             id="org.yakindu.sct.ui.editor.StatechartDiagramWizard">
-       </newWizardShortcut>
-       <newWizardShortcut
-             id="org.yakindu.sct.generator.genmodel.ui.SGenNewFileWizard">
-       </newWizardShortcut>
-    </perspectiveExtension>
-    <perspectiveExtension
-          targetID="org.yakindu.sct.ui.SimulationPerspective">
-       <newWizardShortcut
-             id="org.yakindu.sct.ui.editor.StatechartDiagramWizard">
-       </newWizardShortcut>
-       <newWizardShortcut
-             id="org.yakindu.sct.generator.genmodel.ui.SGenNewFileWizard">
-       </newWizardShortcut>
-    </perspectiveExtension>
-    <perspectiveExtension
-          targetID="org.eclipse.cdt.ui.CPerspective">
+          targetID="*">
        <newWizardShortcut
              id="org.yakindu.sct.ui.editor.StatechartDiagramWizard">
        </newWizardShortcut>

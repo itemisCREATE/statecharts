@@ -1,7 +1,7 @@
 package org.yakindu.scr.parentfirstlocalreactions;
 
-public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalReactionsStatemachine {
 
+public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalReactionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;

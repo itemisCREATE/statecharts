@@ -1,10 +1,10 @@
 package org.yakindu.scr.statechartkeywords;
+
 import java.util.LinkedList;
 import java.util.List;
 import org.yakindu.scr.ITimer;
 
 public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatemachine {
-
 	protected class SCIIfImpl implements SCIIf {
 	
 		private List<SCIIfListener> listeners = new LinkedList<SCIIfListener>();

@@ -1,7 +1,7 @@
 package org.yakindu.scr.parenthesis;
 
-public class ParenthesisStatemachine implements IParenthesisStatemachine {
 
+public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private long erg;

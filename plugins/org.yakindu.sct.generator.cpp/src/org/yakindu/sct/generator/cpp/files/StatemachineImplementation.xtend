@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.cpp
+package org.yakindu.sct.generator.cpp.files
 
 import com.google.inject.Inject
 import java.util.List
@@ -16,13 +16,21 @@ import org.yakindu.sct.generator.c.IContentTemplate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.cpp.CppExpressionsGenerator
+import org.yakindu.sct.generator.cpp.CppNaming
+import org.yakindu.sct.generator.cpp.ErrorCode
+import org.yakindu.sct.generator.cpp.EventCode
+import org.yakindu.sct.generator.cpp.FlowCode
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
@@ -32,9 +40,6 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import static org.eclipse.xtext.util.Strings.*
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
-import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
-import org.yakindu.sct.model.sexec.ExecutionState
-import org.yakindu.sct.model.sexec.Method
 
 class StatemachineImplementation implements IContentTemplate {
 	
@@ -294,6 +299,10 @@ class StatemachineImplementation implements IContentTemplate {
 				return «timerInstance»;
 			}
 			
+			«INT_TYPE» «module»::«numTimeEventsFctID»() {
+				return «timeEventsCountparallelConst»;
+			}
+			
 			«raiseTimeEventFunction»
 		«ENDIF»
 	'''
@@ -371,18 +380,18 @@ class StatemachineImplementation implements IContentTemplate {
 	
 	def checkInternalOCB(StatechartScope it) '''
 		if (this->«OCB_Instance» == «NULL_STRING») { 
-			errorCode |= «ErrorCode.OCB_INTERNAL_INIT.name»;
+			errorCode |= «ErrorCode.OCB_INTERNAL_INIT.getName()»;
 		}
 	'''
 	
 	def checkInterfaceOCB(StatechartScope it) '''
 		«IF defaultInterface»
 			if (this->«OCB_Instance» == «NULL_STRING») { 
-				errorCode |=  «ErrorCode.OCB_DEFAULT_INIT.name»;
+				errorCode |=  «ErrorCode.OCB_DEFAULT_INIT.getName()»;
 			}
 		«ELSE»
 			if (this->«OCB_Instance» == «NULL_STRING») { 
-				errorCode |= «ErrorCode.OCB_NAMED_INIT.name»;
+				errorCode |= «ErrorCode.OCB_NAMED_INIT.getName()»;
 			}
 		«ENDIF»
 	'''

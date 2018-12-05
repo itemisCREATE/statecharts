@@ -1,7 +1,7 @@
 package org.yakindu.scr.operations;
 
-public class OperationsStatemachine implements IOperationsStatemachine {
 
+public class OperationsStatemachine implements IOperationsStatemachine {
 	protected class SCIInterface1Impl implements SCIInterface1 {
 	
 		private SCIInterface1OperationCallback operationCallback;
