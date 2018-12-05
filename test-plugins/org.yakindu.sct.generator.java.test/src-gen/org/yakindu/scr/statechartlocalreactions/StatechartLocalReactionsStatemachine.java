@@ -49,7 +49,8 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 		enterSequence_region2_default();

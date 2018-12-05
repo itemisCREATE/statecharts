@@ -107,7 +107,8 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_EntryReactionAction_r2_default();
 		enterSequence_EntryReactionAction_r1_default();

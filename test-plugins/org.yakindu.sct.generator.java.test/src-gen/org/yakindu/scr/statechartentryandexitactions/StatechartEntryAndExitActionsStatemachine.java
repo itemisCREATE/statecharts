@@ -49,6 +49,7 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 	
 	private int nextStateIndex;
 	
+	
 	public StatechartEntryAndExitActionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -70,7 +71,8 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		sCInterface.setX(2);
 		
@@ -81,6 +83,22 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 		enterSequence_StatechartEntryAndExitActions_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case statechartEntryAndExitActions_main_region_A:
+				statechartEntryAndExitActions_main_region_A_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_StatechartEntryAndExitActions_main_region();
 		sCInterface.setX(8);
@@ -208,20 +226,4 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case statechartEntryAndExitActions_main_region_A:
-				statechartEntryAndExitActions_main_region_A_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }
