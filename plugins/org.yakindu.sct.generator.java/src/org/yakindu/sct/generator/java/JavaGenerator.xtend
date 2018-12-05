@@ -44,6 +44,7 @@ class JavaGenerator implements IExecutionFlowGenerator {
 	@Inject extension ITimerCallback
 	@Inject extension ITimer
 	@Inject extension TimerService
+	@Inject extension ITracingListener
 	@Inject extension RuntimeService
 	@Inject extension StatemachineInterface
 	@Inject extension Statemachine
@@ -78,6 +79,10 @@ class JavaGenerator implements IExecutionFlowGenerator {
 		
 		if (entry.hasFeatureEventRunnable) {
 			flow.generateEventBasedRunnableWrapper(entry, fsa)
+		}
+		
+		if (entry.tracingUsed) {
+			flow.generateTracing(entry, fsa)
 		}
 	}
 }

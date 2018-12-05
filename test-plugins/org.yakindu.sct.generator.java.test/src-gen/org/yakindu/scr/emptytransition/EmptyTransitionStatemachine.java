@@ -1,7 +1,7 @@
 package org.yakindu.scr.emptytransition;
 
-public class EmptyTransitionStatemachine implements IEmptyTransitionStatemachine {
 
+public class EmptyTransitionStatemachine implements IEmptyTransitionStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {

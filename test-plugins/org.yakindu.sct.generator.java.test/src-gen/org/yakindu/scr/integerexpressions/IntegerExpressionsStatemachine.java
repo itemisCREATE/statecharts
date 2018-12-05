@@ -1,7 +1,7 @@
 package org.yakindu.scr.integerexpressions;
 
-public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatemachine {
 
+public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e1;

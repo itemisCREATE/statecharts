@@ -1,7 +1,7 @@
 package org.yakindu.scr.childfirstorthogonalreactions;
 
-public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrthogonalReactionsStatemachine {
 
+public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrthogonalReactionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private SCInterfaceOperationCallback operationCallback;

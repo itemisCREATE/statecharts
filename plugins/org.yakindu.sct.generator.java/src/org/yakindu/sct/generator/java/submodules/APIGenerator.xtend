@@ -3,11 +3,13 @@ package org.yakindu.sct.generator.java.submodules
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.yakindu.sct.generator.java.FlowCode
+import org.yakindu.sct.generator.java.GenmodelEntries
 import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
+import org.yakindu.sct.model.sgen.GeneratorEntry
 
 @Singleton
 class APIGenerator {
@@ -16,6 +18,7 @@ class APIGenerator {
 	@Inject protected extension SExecExtensions
 	@Inject protected extension FlowCode
 	@Inject protected extension StateVectorExtensions
+	@Inject protected extension GenmodelEntries
 	
 	def init(ExecutionFlow flow) '''
 		public void init() {
@@ -39,11 +42,11 @@ class APIGenerator {
 				«ENDIF»
 			«ENDFOR»
 			for (int i = 0; i < «flow.stateVector.size»; i++) {
-				stateVector[i] = State.$NullState$;
+				stateVector[i] = State.«nullStateName»;
 			}
 			«IF flow.hasHistory»
 			for (int i = 0; i < «flow.historyVector.size»; i++) {
-				historyVector[i] = State.$NullState$;
+				historyVector[i] = State.«nullStateName»;
 			}
 			«ENDIF»
 			clearEvents();
@@ -190,12 +193,33 @@ class APIGenerator {
 
 	'''
 	
-	def interfaceAccessors(ExecutionFlow flow) '''
+	def interfaceAccessors(ExecutionFlow flow, GeneratorEntry entry) '''
 		«FOR scope : flow.interfaceScopes»
 			public «scope.interfaceName» get«scope.interfaceName»() {
 				return «scope.interfaceName.toFirstLower()»;
 			}
 
 		«ENDFOR»
+		«IF tracingUsed(entry)»
+		«generateTraceAccessors(entry)»
+		«ENDIF»
+	'''
+	
+	def protected generateTraceAccessors(GeneratorEntry entry) '''
+			public void add«traceSingleInstance.toFirstUpper»(«traceInterface»<State> «traceSingleInstance») {
+				if(!(this.«traceInstances».contains(«traceSingleInstance»))) {
+					this.«traceInstances».add(«traceSingleInstance»);
+				}
+			}
+			
+			public void remove«traceSingleInstance.toFirstUpper»(«traceInterface»<State> «traceSingleInstance») {
+				if(this.«traceInstances».contains(«traceSingleInstance»)) {
+					this.«traceInstances».remove(«traceSingleInstance»);
+				}
+			}
+			
+			public List<«traceInterface»<State>> get«traceInstances.toFirstUpper»() {
+				return «traceInstances»;
+			}
 	'''
 }

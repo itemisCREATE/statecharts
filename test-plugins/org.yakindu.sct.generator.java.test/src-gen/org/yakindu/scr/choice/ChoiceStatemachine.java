@@ -1,7 +1,7 @@
 package org.yakindu.scr.choice;
 
-public class ChoiceStatemachine implements IChoiceStatemachine {
 
+public class ChoiceStatemachine implements IChoiceStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;

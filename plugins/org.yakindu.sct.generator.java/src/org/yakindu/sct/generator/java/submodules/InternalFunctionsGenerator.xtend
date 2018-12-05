@@ -5,6 +5,7 @@ import com.google.inject.Singleton
 import java.util.List
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.java.FlowCode
+import org.yakindu.sct.generator.java.GenmodelEntries
 import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
 import org.yakindu.sct.model.sexec.Check
@@ -25,6 +26,7 @@ class InternalFunctionsGenerator {
 	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension FlowCode
+	@Inject protected extension GenmodelEntries
 	
 	@Inject protected extension JavaCommons
 	@Inject protected extension InterfaceFunctionsGenerator
@@ -87,6 +89,11 @@ class InternalFunctionsGenerator {
 		private final State[] stateVector = new State[«flow.stateVector.size»];
 		
 		private int nextStateIndex;
+		
+		«IF tracingUsed(entry)»
+		private List <«traceInterface»<State>> «traceInstances» = new LinkedList <«traceInterface»<State>>();
+		
+		«ENDIF»
 		
 		«IF flow.timed»
 		private ITimer timer;

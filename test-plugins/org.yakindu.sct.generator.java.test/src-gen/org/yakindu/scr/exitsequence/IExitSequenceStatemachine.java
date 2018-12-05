@@ -3,7 +3,6 @@ package org.yakindu.scr.exitsequence;
 import org.yakindu.scr.IStatemachine;
 
 public interface IExitSequenceStatemachine extends IStatemachine {
-
 	public interface SCInterface {
 	
 		public void raiseE();

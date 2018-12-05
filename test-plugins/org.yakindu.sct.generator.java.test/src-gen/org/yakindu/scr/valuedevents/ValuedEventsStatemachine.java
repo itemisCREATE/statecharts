@@ -1,7 +1,7 @@
 package org.yakindu.scr.valuedevents;
 
-public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 
+public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean integerEvent;

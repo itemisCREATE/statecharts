@@ -1,7 +1,7 @@
 package org.yakindu.scr.assignmentasexpression;
 
-public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressionStatemachine {
 
+public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressionStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private long a;

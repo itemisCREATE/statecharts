@@ -1,7 +1,7 @@
 package org.yakindu.scr.outeventlifecycle;
 
-public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemachine {
 
+public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;

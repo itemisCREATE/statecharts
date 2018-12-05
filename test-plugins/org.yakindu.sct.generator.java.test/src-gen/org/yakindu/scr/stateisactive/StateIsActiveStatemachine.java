@@ -1,7 +1,7 @@
 package org.yakindu.scr.stateisactive;
 
-public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 
+public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean event1;

@@ -93,7 +93,7 @@ class Statemachine {
 		«flow.clearOutEvents»
 		«flow.isStateActive»
 		«flow.timingFunctions»
-		«flow.interfaceAccessors»
+		«flow.interfaceAccessors(entry)»
 		«flow.internalScopeFunctions»
 		«flow.defaultInterfaceFunctions(entry)»
 		«flow.functionImplementations»
@@ -103,10 +103,12 @@ class Statemachine {
 	def protected Set<CharSequence> imports(ExecutionFlow it, GeneratorEntry entry) {
 		// we need a sorted set for the imports
 		val Set<CharSequence> importSet = new TreeSet
+		val String JavaList = "java.util.List"
+		val String JavaLinkedList = "java.util.LinkedList"
 		
 		if (entry.createInterfaceObserver && hasOutgoingEvents) {
-			importSet += "java.util.List"
-			importSet += "java.util.LinkedList"
+			importSet += JavaList
+			importSet += JavaLinkedList
 		}
 		
 		if (timed) {
@@ -117,6 +119,11 @@ class Statemachine {
 			importSet += jip.getImports(it).map[toString]
 		}
 		
+		if (tracingUsed(entry)) {
+			importSet += entry.getBasePackageName() + "." + traceInterface
+			importSet += JavaList
+			importSet += JavaLinkedList
+		}
 		return importSet
 	}
 }

@@ -1,7 +1,7 @@
 package org.yakindu.scr.castexpressions;
 
-public class CastExpressionsStatemachine implements ICastExpressionsStatemachine {
 
+public class CastExpressionsStatemachine implements ICastExpressionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private double realValue;

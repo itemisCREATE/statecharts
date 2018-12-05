@@ -1,7 +1,7 @@
 package org.yakindu.scr.shallowhistory;
 
-public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 
+public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean event1;

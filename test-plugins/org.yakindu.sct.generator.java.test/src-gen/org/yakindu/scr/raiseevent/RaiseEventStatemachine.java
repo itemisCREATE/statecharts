@@ -1,7 +1,7 @@
 package org.yakindu.scr.raiseevent;
 
-public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 
+public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e1;

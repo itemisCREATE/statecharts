@@ -1,7 +1,7 @@
 package org.yakindu.scr.constonlynamedscope;
 
-public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStatemachine {
 
+public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;

@@ -30,9 +30,13 @@ import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.Statement
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sexec.Trace
+import org.yakindu.sct.model.sexec.TraceStateEntered
+import org.yakindu.sct.model.sexec.TraceStateExited
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sgen.GeneratorEntry
 
 class FlowCode {
 	
@@ -40,6 +44,9 @@ class FlowCode {
 	@Inject extension INamingService
 	@Inject extension JavaExpressionsGenerator
 	@Inject extension SExecExtensions
+	@Inject extension GenmodelEntries
+	
+	@Inject GeneratorEntry entry
 	
 	var List<TimeEvent> timeEvents;
 	
@@ -51,6 +58,25 @@ class FlowCode {
 	
 	def dispatch code(Step it) '''
 		//ERROR: FlowCode for Step '«getClass().name»' not defined
+	'''
+	
+	// ignore all trace steps not explicitly suppotrrted
+	def dispatch CharSequence code(Trace it)''''''
+	
+	def dispatch CharSequence code(TraceStateEntered it) '''
+		«IF entry.tracingEnterState»
+		for(«traceInterface»<State> «traceSingleInstance» : «traceInstances») {
+			«traceSingleInstance».«stateEnteredTraceFunctionID»(State.«it.state.stateName»);
+		}
+		«ENDIF»
+	'''
+	
+	def dispatch CharSequence code(TraceStateExited it) '''
+		«IF entry.tracingExitState»
+		for(«traceInterface»<State> «traceSingleInstance» : «traceInstances») {
+			«traceSingleInstance».«stateExitedTraceFunctionID»(State.«it.state.stateName»);
+		}
+		«ENDIF»
 	'''
 	
 	def dispatch CharSequence code(StateSwitch it) '''
@@ -130,7 +156,7 @@ class FlowCode {
 	
 	def dispatch CharSequence code(HistoryEntry it) '''
 		«stepComment»
-		if (historyVector[«region.historyVector.offset»] != State.«getNullStateName()» {
+		if (historyVector[«region.historyVector.offset»] != State.«getNullStateName()») {
 			«historyStep.code»
 		} «IF initialStep !== null»else {
 			«initialStep.code»

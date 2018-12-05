@@ -3,7 +3,6 @@ package org.yakindu.scr.operations;
 import org.yakindu.scr.IStatemachine;
 
 public interface IOperationsStatemachine extends IStatemachine {
-
 	public interface InternalOperationCallback {
 	
 		public void internalOperation1();

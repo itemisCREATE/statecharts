@@ -1,7 +1,7 @@
 package org.yakindu.scr.childfirsttransitiontaking;
 
-public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransitionTakingStatemachine {
 
+public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransitionTakingStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;
