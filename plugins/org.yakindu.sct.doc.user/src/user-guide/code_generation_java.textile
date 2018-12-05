@@ -110,6 +110,27 @@ bc. feature GeneralFeatures {
 ==<!-- End sgen_feature_generalfeatures -->==
 
 
+==<!-- Start sgen_feature_tracing -->==
+
+h4(#codegen_c_tracing_feature). Tracing feature
+
+The *Tracing* feature enables the generation of tracing callback functions:
+
+* _enterState_ (boolean, optional): Specifies whether to generate a callback function that is used to notify about state-entering events.
+* _exitState_ (boolean, optional): Specifies whether to generate a callback that is used to notify about state-exiting events.
+
+==<div class="example">==
+
+Example:
+
+bc. feature Tracing {
+    enterState = true
+    exitState  = true
+}
+
+==</div>==
+
+==<!-- End sgen_feature_tracing -->==
 
 
 h3(#codegen_java_specification_of_java_code). Specification of Java code

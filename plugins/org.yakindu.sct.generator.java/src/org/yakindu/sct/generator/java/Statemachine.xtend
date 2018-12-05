@@ -82,7 +82,7 @@ class Statemachine {
 						«flow.clearOutEventsFunction»
 						«flow.stateActiveFunction»
 						«flow.timingFunctions»
-						«flow.interfaceAccessors»
+						«flow.interfaceAccessors(entry)»
 						«flow.internalScopeFunctions»
 						«flow.defaultInterfaceFunctions(entry)»
 						«flow.functionImplementations»
@@ -93,8 +93,6 @@ class Statemachine {
 			.generate
 	}
 	
-	
-	
 	def protected createImports(ExecutionFlow flow, GeneratorEntry entry) '''
 		«FOR importEntry : flow.imports(entry) BEFORE System.lineSeparator»
 			import «importEntry»;
@@ -104,10 +102,12 @@ class Statemachine {
 	def protected Set<CharSequence> imports(ExecutionFlow it, GeneratorEntry entry) {
 		// we need a sorted set for the imports
 		val Set<CharSequence> importSet = new TreeSet
+		val String JavaList = "java.util.List"
+		val String JavaLinkedList = "java.util.LinkedList"
 		
 		if (entry.createInterfaceObserver && hasOutgoingEvents) {
-			importSet += "java.util.List"
-			importSet += "java.util.LinkedList"
+			importSet += JavaList
+			importSet += JavaLinkedList
 		}
 		
 		if (timed) {
@@ -118,6 +118,11 @@ class Statemachine {
 			importSet += jip.getImports(it).map[toString]
 		}
 		
+		if (tracingUsed(entry)) {
+			importSet += entry.getBasePackageName() + "." + traceInterface
+			importSet += JavaList
+			importSet += JavaLinkedList
+		}
 		return importSet
 	}
 	
@@ -144,6 +149,10 @@ class Statemachine {
 		
 		private int nextStateIndex;
 		
+		«IF tracingUsed(entry)»
+		private List <«traceInterface»<State>> «traceInstances» = new LinkedList <«traceInterface»<State>>();
+		
+		«ENDIF»
 		«IF flow.timed»
 		private ITimer timer;
 		
@@ -373,13 +382,16 @@ class Statemachine {
 		«ENDIF»
 	'''
 	
-	def protected interfaceAccessors(ExecutionFlow flow) '''
+	def protected interfaceAccessors(ExecutionFlow flow, GeneratorEntry entry) '''
 		«FOR scope : flow.interfaceScopes»
 			public «scope.interfaceName» get«scope.interfaceName»() {
 				return «scope.interfaceName.toFirstLower()»;
 			}
 
 		«ENDFOR»
+		«IF tracingUsed(entry)»
+		«generateTraceAccessors(entry)»
+		«ENDIF»
 	'''
 	
 	def protected toImplementation(InterfaceScope scope, GeneratorEntry entry) '''
@@ -406,6 +418,24 @@ class Statemachine {
 		}
 
 		'''
+	
+	def generateTraceAccessors(GeneratorEntry entry) '''
+			public void add«traceSingleInstance.toFirstUpper»(«traceInterface»<State> «traceSingleInstance») {
+				if(!(this.«traceInstances».contains(«traceSingleInstance»))) {
+					this.«traceInstances».add(«traceSingleInstance»);
+				}
+			}
+			
+			public void remove«traceSingleInstance.toFirstUpper»(«traceInterface»<State> «traceSingleInstance») {
+				if(this.«traceInstances».contains(«traceSingleInstance»)) {
+					this.«traceInstances».remove(«traceSingleInstance»);
+				}
+			}
+			
+			public List<«traceInterface»<State>> get«traceInstances.toFirstUpper»() {
+				return «traceInstances»;
+			}
+	'''
 	
 	protected def generateClearOutEvents(InterfaceScope scope) '''
 		protected void clearOutEvents() {
