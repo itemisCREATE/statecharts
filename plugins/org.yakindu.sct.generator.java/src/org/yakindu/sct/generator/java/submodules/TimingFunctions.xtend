@@ -20,7 +20,7 @@ class TimingFunctions {
 		«IF flow.timed»
 			/**
 			* Set the {@link ITimer} for the state machine. It must be set
-			* externally on a timed state machine before a run cycle can be correct
+			* externally on a timed state machine before a run cycle can be correctly
 			* executed.
 			* 
 			* @param timer

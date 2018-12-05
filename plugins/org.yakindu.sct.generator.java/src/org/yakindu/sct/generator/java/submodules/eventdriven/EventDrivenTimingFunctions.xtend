@@ -21,7 +21,7 @@ class EventDrivenTimingFunctions extends TimingFunctions {
 		«IF flow.timed»
 			/**
 			* Set the {@link ITimer} for the state machine. It must be set
-			* externally on a timed state machine before a run cycle can be correct
+			* externally on a timed state machine before a run cycle can be correctly
 			* executed.
 			* 
 			* @param timer
@@ -41,6 +41,7 @@ class EventDrivenTimingFunctions extends TimingFunctions {
 			
 			public void timeElapsed(int eventID) {
 				timeEvents[eventID] = true;
+				runCycle();
 			}
 
 		«ENDIF»
