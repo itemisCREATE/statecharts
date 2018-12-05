@@ -240,11 +240,11 @@ class Statemachine {
 				«ENDIF»
 			«ENDFOR»
 			for (int i = 0; i < «flow.stateVector.size»; i++) {
-				stateVector[i] = State.$NullState$;
+				stateVector[i] = State.«nullStateName»;
 			}
 			«IF flow.hasHistory»
 			for (int i = 0; i < «flow.historyVector.size»; i++) {
-				historyVector[i] = State.$NullState$;
+				historyVector[i] = State.«nullStateName»;
 			}
 			«ENDIF»
 			clearEvents();
