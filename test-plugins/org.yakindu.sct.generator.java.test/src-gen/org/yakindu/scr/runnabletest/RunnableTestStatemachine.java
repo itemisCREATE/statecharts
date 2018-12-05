@@ -155,7 +155,8 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
@@ -244,7 +245,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	
 	/**
 	* Set the {@link ITimer} for the state machine. It must be set
-	* externally on a timed state machine before a run cycle can be correct
+	* externally on a timed state machine before a run cycle can be correctly
 	* executed.
 	* 
 	* @param timer
@@ -264,6 +265,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	
 	public void timeElapsed(int eventID) {
 		timeEvents[eventID] = true;
+		runCycle();
 	}
 	
 	public SCInterface getSCInterface() {

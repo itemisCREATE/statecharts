@@ -161,7 +161,8 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region1_default();
 		enterSequence_integer_region_default();
