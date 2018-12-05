@@ -12,6 +12,7 @@ import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.GenericElement;
+import org.yakindu.base.types.MetaComposite;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Property;
@@ -24,6 +25,7 @@ import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.Trigger;
+import org.yakindu.sct.model.stext.stext.*;
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
@@ -280,6 +282,10 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter casePackageMember(PackageMember object) {
 				return createPackageMemberAdapter();
+			}
+			@Override
+			public Adapter caseMetaComposite(MetaComposite object) {
+				return createMetaCompositeAdapter();
 			}
 			@Override
 			public Adapter caseDeclaration(Declaration object) {
@@ -976,6 +982,20 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPackageMemberAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.MetaComposite <em>Meta Composite</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.types.MetaComposite
+	 * @generated
+	 */
+	public Adapter createMetaCompositeAdapter() {
 		return null;
 	}
 

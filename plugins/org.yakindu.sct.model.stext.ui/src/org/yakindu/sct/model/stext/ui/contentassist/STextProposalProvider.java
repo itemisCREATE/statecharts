@@ -181,7 +181,7 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	protected void suppressKeywords(List<Keyword> suppressKeywords, FeatureCall featureCall) {
 		if (!(featureCall.getFeature() instanceof Operation)) {
 			suppressKeywords
-			.add(grammarAccess.getFeatureCallAccess().getOperationCallLeftParenthesisKeyword_1_3_0_0_0());
+			.add(grammarAccess.getFeatureCallAccess().getOperationCallLeftParenthesisKeyword_1_2_0_0_0());
 		}
 	}
 	

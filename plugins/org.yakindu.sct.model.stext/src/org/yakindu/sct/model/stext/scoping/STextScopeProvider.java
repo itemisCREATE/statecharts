@@ -30,10 +30,12 @@ import org.eclipse.xtext.scoping.impl.ImportScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
+import org.yakindu.base.expressions.expressions.MetaCall;
 import org.yakindu.base.expressions.scoping.ExpressionsScopeProvider;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Expression;
+import org.yakindu.base.types.MetaComposite;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult;
@@ -152,6 +154,37 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 		}
 		return scope;
 	}
+
+	
+	public IScope scope_FeatureCall_feature(final MetaCall context, EReference reference) {
+
+		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference);
+
+		Expression owner = context.getOwner();
+		EObject element = null;
+		if (owner instanceof ElementReferenceExpression) {
+			element = ((ElementReferenceExpression) owner).getReference();
+		} else if (owner instanceof FeatureCall) {
+			element = ((FeatureCall) owner).getFeature();
+		} else {
+			return getDelegate().getScope(context, reference);
+		}
+
+		IScope scope = IScope.NULLSCOPE;
+
+		if (element instanceof MetaComposite ) {
+			MetaComposite feature = (MetaComposite)element;
+
+			if (feature.getMetaFeatures().size() > 0) {
+				scope = Scopes.scopeFor(feature.getMetaFeatures(), scope);
+				scope = new FilteringScope(scope, predicate);
+			}
+		}
+
+		return scope;
+	}
+
+
 
 	protected IScope addScopeForEnumType(EnumerationType element, IScope scope,
 			final Predicate<IEObjectDescription> predicate) {
