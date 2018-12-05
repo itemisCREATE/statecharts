@@ -1,5 +1,6 @@
 package org.yakindu.scr.tracing;
 
+import java.util.LinkedList;
 import java.util.List;
 import org.yakindu.scr.ITracingListener;
 
@@ -22,7 +23,7 @@ public class TracingStatemachine implements ITracingStatemachine {
 	
 	private int nextStateIndex;
 	
-	private List <ITracingListener<State>> ifaceTraceObservers;
+	private List <ITracingListener<State>> ifaceTraceObservers = new LinkedList <ITracingListener<State>>();
 	
 	public TracingStatemachine() {
 		sCInterface = new SCInterfaceImpl();
