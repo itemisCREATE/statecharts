@@ -86,6 +86,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public ShallowHistoryStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -110,6 +111,37 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 		enterSequence_mainRegion_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case mainRegion_State1:
+				mainRegion_State1_react(true);
+				break;
+			case mainRegion_State2__region0_State3:
+				mainRegion_State2__region0_State3_react(true);
+				break;
+			case mainRegion_State2__region0_State4__region0_State6:
+				mainRegion_State2__region0_State4__region0_State6_react(true);
+				break;
+			case mainRegion_State2__region0_State4__region0_State7__region0_State8:
+				mainRegion_State2__region0_State4__region0_State7__region0_State8_react(true);
+				break;
+			case mainRegion_State2__region0_State4__region0_State7__region0_State9:
+				mainRegion_State2__region0_State4__region0_State7__region0_State9_react(true);
+				break;
+			case mainRegion_State2__region0_State5:
+				mainRegion_State2__region0_State5_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_mainRegion();
 	}
@@ -649,35 +681,4 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case mainRegion_State1:
-				mainRegion_State1_react(true);
-				break;
-			case mainRegion_State2__region0_State3:
-				mainRegion_State2__region0_State3_react(true);
-				break;
-			case mainRegion_State2__region0_State4__region0_State6:
-				mainRegion_State2__region0_State4__region0_State6_react(true);
-				break;
-			case mainRegion_State2__region0_State4__region0_State7__region0_State8:
-				mainRegion_State2__region0_State4__region0_State7__region0_State8_react(true);
-				break;
-			case mainRegion_State2__region0_State4__region0_State7__region0_State9:
-				mainRegion_State2__region0_State4__region0_State7__region0_State9_react(true);
-				break;
-			case mainRegion_State2__region0_State5:
-				mainRegion_State2__region0_State5_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

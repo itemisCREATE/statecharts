@@ -7,7 +7,7 @@
   Contributors:
   	Markus Muehlbrandt - Initial contribution and API
  */
-package org.yakindu.sct.generator.java
+package org.yakindu.sct.generator.java.files
 
 import com.google.inject.Inject
 import org.eclipse.xtext.generator.IFileSystemAccess
@@ -19,10 +19,10 @@ import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
 class IStatemachine {
 	
 	@Inject
-	extension Naming 
+	extension org.yakindu.sct.generator.java.Naming 
 	
 	@Inject
-	extension GenmodelEntries
+	extension org.yakindu.sct.generator.java.GenmodelEntries
 	
 	@Inject ICoreLibraryHelper outletFeatureHelper
 	 
@@ -46,46 +46,46 @@ class IStatemachine {
 	
 	def private content(GeneratorEntry entry) {
 		'''
-		«entry.licenseText»
-		package «entry.getBasePackageName()»;
-
-		/**
-		 * Basic interface for state machines.
-		 */
-		public interface IStatemachine {
-		
+			«entry.licenseText»
+			package «entry.getBasePackageName()»;
+			
 			/**
-			 * Initializes the state machine. Used to initialize internal variables etc.
+			 * Basic interface for state machines.
 			 */
-			public void init();
-		
-			/**
-			 * Enters the state machine. Sets the state machine into a defined state.
-			 */
-			public void enter();
-		
-			/**
-			 * Exits the state machine. Leaves the state machine with a defined state.
-			 */
-			public void exit();
-		
-			/**
-			 * Checks whether the state machine is active. 
-			 * A state machine is active if it has been entered. It is inactive if it has not been entered at all or if it has been exited.
-			 */
-			public boolean isActive();
-		
-			/**
-			 * Checks whether all active states are final. 
-			 * If there are no active states then the state machine is considered being incative. In this case this method returns <code>false</code>.
-			 */
-			public boolean isFinal();
-		
-			/**
-			* Start a run-to-completion cycle.
-			*/
-			public void runCycle();
-		}
+			public interface IStatemachine {
+			
+				/**
+				 * Initializes the state machine. Used to initialize internal variables etc.
+				 */
+				public void init();
+			
+				/**
+				 * Enters the state machine. Sets the state machine into a defined state.
+				 */
+				public void enter();
+			
+				/**
+				 * Exits the state machine. Leaves the state machine with a defined state.
+				 */
+				public void exit();
+			
+				/**
+				 * Checks whether the state machine is active. 
+				 * A state machine is active if it has been entered. It is inactive if it has not been entered at all or if it has been exited.
+				 */
+				public boolean isActive();
+			
+				/**
+				 * Checks whether all active states are final. 
+				 * If there are no active states then the state machine is considered being incative. In this case this method returns <code>false</code>.
+				 */
+				public boolean isFinal();
+			
+				/**
+				* Start a run-to-completion cycle.
+				*/
+				public void runCycle();
+			}
 		'''
 	}
 }

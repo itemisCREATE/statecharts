@@ -29,6 +29,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public ParenthesisStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -51,6 +52,22 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		enterSequence_mainRegion_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case mainRegion_A:
+				mainRegion_A_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_mainRegion();
 	}
@@ -163,20 +180,4 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case mainRegion_A:
-				mainRegion_A_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

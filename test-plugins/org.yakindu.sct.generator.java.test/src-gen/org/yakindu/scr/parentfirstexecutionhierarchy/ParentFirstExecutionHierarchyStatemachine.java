@@ -121,6 +121,7 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 	
 	private int nextStateIndex;
 	
+	
 	public ParentFirstExecutionHierarchyStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -159,6 +160,25 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 		enterSequence_ParentFirstExecutionHierarchy_r_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case parentFirstExecutionHierarchy_r_A_r_AA_r_AAA:
+				parentFirstExecutionHierarchy_r_A_r_AA_r_AAA_react(true);
+				break;
+			case parentFirstExecutionHierarchy_r_B:
+				parentFirstExecutionHierarchy_r_B_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_ParentFirstExecutionHierarchy_r();
 	}
@@ -504,23 +524,4 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case parentFirstExecutionHierarchy_r_A_r_AA_r_AAA:
-				parentFirstExecutionHierarchy_r_A_r_AA_r_AAA_react(true);
-				break;
-			case parentFirstExecutionHierarchy_r_B:
-				parentFirstExecutionHierarchy_r_B_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

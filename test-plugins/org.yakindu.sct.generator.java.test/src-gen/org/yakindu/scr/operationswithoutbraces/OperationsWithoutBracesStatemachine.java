@@ -32,6 +32,7 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 	
 	private int nextStateIndex;
 	
+	
 	public OperationsWithoutBracesStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -58,6 +59,43 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		enterSequence_another_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_A:
+				main_region_A_react(true);
+				break;
+			case main_region_B:
+				main_region_B_react(true);
+				break;
+			case main_region_C:
+				main_region_C_react(true);
+				break;
+			case main_region_D:
+				main_region_D_react(true);
+				break;
+			case another_region_A:
+				another_region_A_react(true);
+				break;
+			case another_region_B:
+				another_region_B_react(true);
+				break;
+			case another_region_C:
+				another_region_C_react(true);
+				break;
+			case another_region_D:
+				another_region_D_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 		exitSequence_another_region();
@@ -407,41 +445,4 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
-				main_region_A_react(true);
-				break;
-			case main_region_B:
-				main_region_B_react(true);
-				break;
-			case main_region_C:
-				main_region_C_react(true);
-				break;
-			case main_region_D:
-				main_region_D_react(true);
-				break;
-			case another_region_A:
-				another_region_A_react(true);
-				break;
-			case another_region_B:
-				another_region_B_react(true);
-				break;
-			case another_region_C:
-				another_region_C_react(true);
-				break;
-			case another_region_D:
-				another_region_D_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

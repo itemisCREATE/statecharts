@@ -72,6 +72,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	
 	private int nextStateIndex;
 	
+	
 	public ChildFirstTransitionTakingStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -97,6 +98,49 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		enterSequence_ChildFirstTransitionTaking_r2_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case childFirstTransitionTaking_r1_A_r1_AA:
+				childFirstTransitionTaking_r1_A_r1_AA_react(true);
+				break;
+			case childFirstTransitionTaking_r1_A_r1_AB_r1_ABA:
+				childFirstTransitionTaking_r1_A_r1_AB_r1_ABA_react(true);
+				break;
+			case childFirstTransitionTaking_r1_A_r1_AB_r2_ABB:
+				childFirstTransitionTaking_r1_A_r1_AB_r2_ABB_react(true);
+				break;
+			case childFirstTransitionTaking_r1_B:
+				childFirstTransitionTaking_r1_B_react(true);
+				break;
+			case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA:
+				childFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA_react(true);
+				break;
+			case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB:
+				childFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB_react(true);
+				break;
+			case childFirstTransitionTaking_r2_C_r_CA_r_CAB:
+				childFirstTransitionTaking_r2_C_r_CA_r_CAB_react(true);
+				break;
+			case childFirstTransitionTaking_r2_C_r_CB_r1_CBA:
+				childFirstTransitionTaking_r2_C_r_CB_r1_CBA_react(true);
+				break;
+			case childFirstTransitionTaking_r2_C_r_CB_r2_CBB:
+				childFirstTransitionTaking_r2_C_r_CB_r2_CBB_react(true);
+				break;
+			case childFirstTransitionTaking_r2_C_r_CB_r3_CBC:
+				childFirstTransitionTaking_r2_C_r_CB_r3_CBC_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_ChildFirstTransitionTaking_r1();
 		exitSequence_ChildFirstTransitionTaking_r2();
@@ -968,47 +1012,4 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case childFirstTransitionTaking_r1_A_r1_AA:
-				childFirstTransitionTaking_r1_A_r1_AA_react(true);
-				break;
-			case childFirstTransitionTaking_r1_A_r1_AB_r1_ABA:
-				childFirstTransitionTaking_r1_A_r1_AB_r1_ABA_react(true);
-				break;
-			case childFirstTransitionTaking_r1_A_r1_AB_r2_ABB:
-				childFirstTransitionTaking_r1_A_r1_AB_r2_ABB_react(true);
-				break;
-			case childFirstTransitionTaking_r1_B:
-				childFirstTransitionTaking_r1_B_react(true);
-				break;
-			case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA:
-				childFirstTransitionTaking_r2_C_r_CA_r_CAA_r1_CAAA_react(true);
-				break;
-			case childFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB:
-				childFirstTransitionTaking_r2_C_r_CA_r_CAA_r2_CAAB_react(true);
-				break;
-			case childFirstTransitionTaking_r2_C_r_CA_r_CAB:
-				childFirstTransitionTaking_r2_C_r_CA_r_CAB_react(true);
-				break;
-			case childFirstTransitionTaking_r2_C_r_CB_r1_CBA:
-				childFirstTransitionTaking_r2_C_r_CB_r1_CBA_react(true);
-				break;
-			case childFirstTransitionTaking_r2_C_r_CB_r2_CBB:
-				childFirstTransitionTaking_r2_C_r_CB_r2_CBB_react(true);
-				break;
-			case childFirstTransitionTaking_r2_C_r_CB_r3_CBC:
-				childFirstTransitionTaking_r2_C_r_CB_r3_CBC_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

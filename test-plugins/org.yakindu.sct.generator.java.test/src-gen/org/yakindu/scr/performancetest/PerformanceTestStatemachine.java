@@ -88,6 +88,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	
 	private int nextStateIndex;
 	
+	
 	private ITimer timer;
 	
 	private final boolean[] timeEvents = new boolean[2];
@@ -130,6 +131,61 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		enterSequence_mr_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case mr_A:
+				mr_A_react(true);
+				break;
+			case mr_B_r1_X:
+				mr_B_r1_X_react(true);
+				break;
+			case mr_B_r1_Y:
+				mr_B_r1_Y_react(true);
+				break;
+			case mr_B_r1_Z:
+				mr_B_r1_Z_react(true);
+				break;
+			case mr_B_r1_V:
+				mr_B_r1_V_react(true);
+				break;
+			case mr_B_r1_W:
+				mr_B_r1_W_react(true);
+				break;
+			case mr_B_r1_S:
+				mr_B_r1_S_react(true);
+				break;
+			case mr_B_r1_T:
+				mr_B_r1_T_react(true);
+				break;
+			case mr_B_r1_U:
+				mr_B_r1_U_react(true);
+				break;
+			case mr_B_r2_S:
+				mr_B_r2_S_react(true);
+				break;
+			case mr_B_r2_T:
+				mr_B_r2_T_react(true);
+				break;
+			case mr_B_r2_U:
+				mr_B_r2_U_react(true);
+				break;
+			case mr_B_r2_V:
+				mr_B_r2_V_react(true);
+				break;
+			case mr_B_r2_W:
+				mr_B_r2_W_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_mr();
 		timer.unsetTimer(this, 0);
@@ -1048,59 +1104,4 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case mr_A:
-				mr_A_react(true);
-				break;
-			case mr_B_r1_X:
-				mr_B_r1_X_react(true);
-				break;
-			case mr_B_r1_Y:
-				mr_B_r1_Y_react(true);
-				break;
-			case mr_B_r1_Z:
-				mr_B_r1_Z_react(true);
-				break;
-			case mr_B_r1_V:
-				mr_B_r1_V_react(true);
-				break;
-			case mr_B_r1_W:
-				mr_B_r1_W_react(true);
-				break;
-			case mr_B_r1_S:
-				mr_B_r1_S_react(true);
-				break;
-			case mr_B_r1_T:
-				mr_B_r1_T_react(true);
-				break;
-			case mr_B_r1_U:
-				mr_B_r1_U_react(true);
-				break;
-			case mr_B_r2_S:
-				mr_B_r2_S_react(true);
-				break;
-			case mr_B_r2_T:
-				mr_B_r2_T_react(true);
-				break;
-			case mr_B_r2_U:
-				mr_B_r2_U_react(true);
-				break;
-			case mr_B_r2_V:
-				mr_B_r2_V_react(true);
-				break;
-			case mr_B_r2_W:
-				mr_B_r2_W_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

@@ -49,6 +49,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	private boolean myBool;
 	
 	protected void setMyBool(boolean value) {
@@ -94,6 +95,31 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_B:
+				main_region_B_react(true);
+				break;
+			case main_region_C:
+				main_region_C_react(true);
+				break;
+			case main_region_D:
+				main_region_D_react(true);
+				break;
+			case main_region_A:
+				main_region_A_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -367,29 +393,4 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_B:
-				main_region_B_react(true);
-				break;
-			case main_region_C:
-				main_region_C_react(true);
-				break;
-			case main_region_D:
-				main_region_D_react(true);
-				break;
-			case main_region_A:
-				main_region_A_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

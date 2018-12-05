@@ -92,6 +92,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	private ITimer timer;
 	
 	private final boolean[] timeEvents = new boolean[2];
@@ -133,6 +134,28 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_s1:
+				main_region_s1_react(true);
+				break;
+			case main_region_s2:
+				main_region_s2_react(true);
+				break;
+			case main_region__final_:
+				main_region__final__react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 		timer.unsetTimer(this, 1);
@@ -399,26 +422,4 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_s1:
-				main_region_s1_react(true);
-				break;
-			case main_region_s2:
-				main_region_s2_react(true);
-				break;
-			case main_region__final_:
-				main_region__final__react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

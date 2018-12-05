@@ -172,6 +172,7 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 	
 	private int nextStateIndex;
 	
+	
 	public ChildFirstOrthogonalReactionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -225,6 +226,37 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		enterSequence_ChildFirstOrthogonalReactions_r2_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case childFirstOrthogonalReactions_r_A_r_AA_r_AAA:
+				childFirstOrthogonalReactions_r_A_r_AA_r_AAA_react(true);
+				break;
+			case childFirstOrthogonalReactions_r_A_r_AA__region1_AAC:
+				childFirstOrthogonalReactions_r_A_r_AA__region1_AAC_react(true);
+				break;
+			case childFirstOrthogonalReactions_r_A_r2_AC:
+				childFirstOrthogonalReactions_r_A_r2_AC_react(true);
+				break;
+			case childFirstOrthogonalReactions_r_B:
+				childFirstOrthogonalReactions_r_B_react(true);
+				break;
+			case childFirstOrthogonalReactions_r2_C:
+				childFirstOrthogonalReactions_r2_C_react(true);
+				break;
+			case childFirstOrthogonalReactions_r2_D:
+				childFirstOrthogonalReactions_r2_D_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_ChildFirstOrthogonalReactions_r();
 		exitSequence_ChildFirstOrthogonalReactions_r2();
@@ -786,35 +818,4 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case childFirstOrthogonalReactions_r_A_r_AA_r_AAA:
-				childFirstOrthogonalReactions_r_A_r_AA_r_AAA_react(true);
-				break;
-			case childFirstOrthogonalReactions_r_A_r_AA__region1_AAC:
-				childFirstOrthogonalReactions_r_A_r_AA__region1_AAC_react(true);
-				break;
-			case childFirstOrthogonalReactions_r_A_r2_AC:
-				childFirstOrthogonalReactions_r_A_r2_AC_react(true);
-				break;
-			case childFirstOrthogonalReactions_r_B:
-				childFirstOrthogonalReactions_r_B_react(true);
-				break;
-			case childFirstOrthogonalReactions_r2_C:
-				childFirstOrthogonalReactions_r2_C_react(true);
-				break;
-			case childFirstOrthogonalReactions_r2_D:
-				childFirstOrthogonalReactions_r2_D_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

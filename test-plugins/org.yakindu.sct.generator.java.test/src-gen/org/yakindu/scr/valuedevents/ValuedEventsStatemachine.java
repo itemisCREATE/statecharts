@@ -137,6 +137,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public ValuedEventsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -169,6 +170,58 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		enterSequence_string_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region1_A:
+				main_region1_A_react(true);
+				break;
+			case integer_region_B:
+				integer_region_B_react(true);
+				break;
+			case integer_region_C:
+				integer_region_C_react(true);
+				break;
+			case integer_region_D:
+				integer_region_D_react(true);
+				break;
+			case boolean_region_B:
+				boolean_region_B_react(true);
+				break;
+			case boolean_region_C:
+				boolean_region_C_react(true);
+				break;
+			case boolean_region_D:
+				boolean_region_D_react(true);
+				break;
+			case real_region_B:
+				real_region_B_react(true);
+				break;
+			case real_region_C:
+				real_region_C_react(true);
+				break;
+			case real_region_D:
+				real_region_D_react(true);
+				break;
+			case string_region_B:
+				string_region_B_react(true);
+				break;
+			case string_region_C:
+				string_region_C_react(true);
+				break;
+			case string_region_D:
+				string_region_D_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region1();
 		exitSequence_integer_region();
@@ -796,56 +849,4 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region1_A:
-				main_region1_A_react(true);
-				break;
-			case integer_region_B:
-				integer_region_B_react(true);
-				break;
-			case integer_region_C:
-				integer_region_C_react(true);
-				break;
-			case integer_region_D:
-				integer_region_D_react(true);
-				break;
-			case boolean_region_B:
-				boolean_region_B_react(true);
-				break;
-			case boolean_region_C:
-				boolean_region_C_react(true);
-				break;
-			case boolean_region_D:
-				boolean_region_D_react(true);
-				break;
-			case real_region_B:
-				real_region_B_react(true);
-				break;
-			case real_region_C:
-				real_region_C_react(true);
-				break;
-			case real_region_D:
-				real_region_D_react(true);
-				break;
-			case string_region_B:
-				string_region_B_react(true);
-				break;
-			case string_region_C:
-				string_region_C_react(true);
-				break;
-			case string_region_D:
-				string_region_D_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

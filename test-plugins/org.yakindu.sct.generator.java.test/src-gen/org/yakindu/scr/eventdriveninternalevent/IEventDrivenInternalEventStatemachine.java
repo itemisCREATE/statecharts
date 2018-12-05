@@ -1,5 +1,7 @@
 package org.yakindu.scr.eventdriveninternalevent;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import org.yakindu.scr.IStatemachine;
 
 public interface IEventDrivenInternalEventStatemachine extends IStatemachine {

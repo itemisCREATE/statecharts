@@ -40,6 +40,7 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public FloatModuloStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -64,6 +65,25 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_StateA:
+				main_region_StateA_react(true);
+				break;
+			case main_region__final_:
+				main_region__final__react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -255,23 +275,4 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_StateA:
-				main_region_StateA_react(true);
-				break;
-			case main_region__final_:
-				main_region__final__react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

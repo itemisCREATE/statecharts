@@ -31,6 +31,7 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	
 	private int nextStateIndex;
 	
+	
 	public StatechartLocalReactionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -54,6 +55,28 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 		enterSequence_region2_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_S1:
+				main_region_S1_react(true);
+				break;
+			case main_region_S2:
+				main_region_S2_react(true);
+				break;
+			case region2_a:
+				region2_a_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 		exitSequence_region2();
@@ -244,26 +267,4 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_S1:
-				main_region_S1_react(true);
-				break;
-			case main_region_S2:
-				main_region_S2_react(true);
-				break;
-			case region2_a:
-				region2_a_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

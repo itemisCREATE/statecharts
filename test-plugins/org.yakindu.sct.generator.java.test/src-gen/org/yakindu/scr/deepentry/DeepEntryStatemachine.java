@@ -75,6 +75,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public DeepEntryStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -106,6 +107,34 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		enterSequence_r3_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case r_A_r_B:
+				r_A_r_B_react(true);
+				break;
+			case r2_B_r_BA_r_BAA:
+				r2_B_r_BA_r_BAA_react(true);
+				break;
+			case r2_B_r_BB:
+				r2_B_r_BB_react(true);
+				break;
+			case r2_C:
+				r2_C_react(true);
+				break;
+			case r3_D_r_DA_r_DAA:
+				r3_D_r_DA_r_DAA_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_r();
 		exitSequence_r2();
@@ -675,32 +704,4 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case r_A_r_B:
-				r_A_r_B_react(true);
-				break;
-			case r2_B_r_BA_r_BAA:
-				r2_B_r_BA_r_BAA_react(true);
-				break;
-			case r2_B_r_BB:
-				r2_B_r_BB_react(true);
-				break;
-			case r2_C:
-				r2_C_react(true);
-				break;
-			case r3_D_r_DA_r_DAA:
-				r3_D_r_DA_r_DAA_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

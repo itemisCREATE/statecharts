@@ -53,6 +53,7 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 	
 	private int nextStateIndex;
 	
+	
 	public ConstOnlyDefaultScopeStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 		sCIA = new SCIAImpl();
@@ -75,6 +76,28 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		enterSequence_ConstOnlyDefaultScope_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case constOnlyDefaultScope_main_region_A:
+				constOnlyDefaultScope_main_region_A_react(true);
+				break;
+			case constOnlyDefaultScope_main_region_B:
+				constOnlyDefaultScope_main_region_B_react(true);
+				break;
+			case constOnlyDefaultScope_main_region_C:
+				constOnlyDefaultScope_main_region_C_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_ConstOnlyDefaultScope_main_region();
 	}
@@ -256,26 +279,4 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case constOnlyDefaultScope_main_region_A:
-				constOnlyDefaultScope_main_region_A_react(true);
-				break;
-			case constOnlyDefaultScope_main_region_B:
-				constOnlyDefaultScope_main_region_B_react(true);
-				break;
-			case constOnlyDefaultScope_main_region_C:
-				constOnlyDefaultScope_main_region_C_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

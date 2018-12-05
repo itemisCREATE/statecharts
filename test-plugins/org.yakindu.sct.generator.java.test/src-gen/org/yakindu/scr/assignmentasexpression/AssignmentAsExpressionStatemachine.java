@@ -297,6 +297,7 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 	
 	private int nextStateIndex;
 	
+	
 	public AssignmentAsExpressionStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -363,6 +364,46 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_Add:
+				main_region_Add_react(true);
+				break;
+			case main_region_Multiply:
+				main_region_Multiply_react(true);
+				break;
+			case main_region_Divide:
+				main_region_Divide_react(true);
+				break;
+			case main_region_Modulo:
+				main_region_Modulo_react(true);
+				break;
+			case main_region_Shift:
+				main_region_Shift_react(true);
+				break;
+			case main_region_boolean_And:
+				main_region_boolean_And_react(true);
+				break;
+			case main_region_boolean_Or:
+				main_region_boolean_Or_react(true);
+				break;
+			case main_region_boolean_Xor:
+				main_region_boolean_Xor_react(true);
+				break;
+			case main_region_Subtract:
+				main_region_Subtract_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -949,44 +990,4 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_Add:
-				main_region_Add_react(true);
-				break;
-			case main_region_Multiply:
-				main_region_Multiply_react(true);
-				break;
-			case main_region_Divide:
-				main_region_Divide_react(true);
-				break;
-			case main_region_Modulo:
-				main_region_Modulo_react(true);
-				break;
-			case main_region_Shift:
-				main_region_Shift_react(true);
-				break;
-			case main_region_boolean_And:
-				main_region_boolean_And_react(true);
-				break;
-			case main_region_boolean_Or:
-				main_region_boolean_Or_react(true);
-				break;
-			case main_region_boolean_Xor:
-				main_region_boolean_Xor_react(true);
-				break;
-			case main_region_Subtract:
-				main_region_Subtract_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

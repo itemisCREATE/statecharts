@@ -79,6 +79,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
 	
 	private boolean activate_b;
@@ -116,6 +117,51 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		enterSequence_localEvents_r2_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+	
+		clearOutEvents();
+		singleCycle();
+		clearEvents();
+		
+		// process queued events
+		while (internalEventQueue.size() > 0) {
+			internalEventQueue.poll().run();
+			clearEvents();
+		}
+	}
+	
+	protected void singleCycle() {
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case localEvents_r1_Comp1_r_A1:
+				localEvents_r1_Comp1_r_A1_react(true);
+				break;
+			case localEvents_r1_Comp1_r_C1:
+				localEvents_r1_Comp1_r_C1_react(true);
+				break;
+			case localEvents_r1_Comp1_r_D1:
+				localEvents_r1_Comp1_r_D1_react(true);
+				break;
+			case localEvents_r2_Comp2_r_A2:
+				localEvents_r2_Comp2_r_A2_react(true);
+				break;
+			case localEvents_r2_Comp2_r_B2:
+				localEvents_r2_Comp2_r_B2_react(true);
+				break;
+			case localEvents_r2_Comp2_r_C2:
+				localEvents_r2_Comp2_r_C2_react(true);
+				break;
+			case localEvents_r2_Comp2_r_D2:
+				localEvents_r2_Comp2_r_D2_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+	}
 	public void exit() {
 		exitSequence_localEvents_r1();
 		exitSequence_localEvents_r2();
@@ -605,49 +651,4 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-	
-		clearOutEvents();
-		singleCycle();
-		clearEvents();
-		
-		// process queued events
-		while (internalEventQueue.size() > 0) {
-			internalEventQueue.poll().run();
-			clearEvents();
-		}
-	}
-	
-	protected void singleCycle() {
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case localEvents_r1_Comp1_r_A1:
-				localEvents_r1_Comp1_r_A1_react(true);
-				break;
-			case localEvents_r1_Comp1_r_C1:
-				localEvents_r1_Comp1_r_C1_react(true);
-				break;
-			case localEvents_r1_Comp1_r_D1:
-				localEvents_r1_Comp1_r_D1_react(true);
-				break;
-			case localEvents_r2_Comp2_r_A2:
-				localEvents_r2_Comp2_r_A2_react(true);
-				break;
-			case localEvents_r2_Comp2_r_B2:
-				localEvents_r2_Comp2_r_B2_react(true);
-				break;
-			case localEvents_r2_Comp2_r_C2:
-				localEvents_r2_Comp2_r_C2_react(true);
-				break;
-			case localEvents_r2_Comp2_r_D2:
-				localEvents_r2_Comp2_r_D2_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-	}
 }

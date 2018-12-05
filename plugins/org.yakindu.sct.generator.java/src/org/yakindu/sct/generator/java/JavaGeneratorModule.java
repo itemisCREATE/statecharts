@@ -16,8 +16,16 @@ import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.extensions.AnnotationExtensions;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
-import org.yakindu.sct.generator.java.eventdriven.EventDrivenStatemachine;
+import org.yakindu.sct.generator.java.eventdriven.JavaEventDrivenIncludeProvider;
 import org.yakindu.sct.generator.java.features.IJavaFeatureConstants;
+import org.yakindu.sct.generator.java.submodules.APIGenerator;
+import org.yakindu.sct.generator.java.submodules.EventCode;
+import org.yakindu.sct.generator.java.submodules.InterfaceFunctionsGenerator;
+import org.yakindu.sct.generator.java.submodules.InternalFunctionsGenerator;
+import org.yakindu.sct.generator.java.submodules.eventdriven.EventDrivenAPIGenerator;
+import org.yakindu.sct.generator.java.submodules.eventdriven.EventDrivenEventCode;
+import org.yakindu.sct.generator.java.submodules.eventdriven.EventDrivenInterfaceFunctionsGenerator;
+import org.yakindu.sct.generator.java.submodules.eventdriven.EventDrivenInternalFunctionsGenerator;
 import org.yakindu.sct.generator.java.types.JavaTypeSystemAccess;
 import org.yakindu.sct.generator.java.types.OldJavaTypeSystemAccess;
 import org.yakindu.sct.model.sexec.naming.INamingService;
@@ -40,13 +48,15 @@ import com.google.inject.name.Names;
  */
 public class JavaGeneratorModule implements IGeneratorModule {
 
+	protected Multibinder<JavaIncludeProvider> includeProviderBinder;
+	
 	@Override
 	public void configure(GeneratorEntry entry, Binder binder) {
+		includeProviderBinder = Multibinder.newSetBinder(binder, JavaIncludeProvider.class);
 		configureGeneratorRoot(entry, binder);
 		configureForExecutionStyle(entry, binder);
 		configureServices(entry, binder);
 		bindTracingProperty(entry, binder);
-		Multibinder.newSetBinder(binder, JavaIncludeProvider.class);
 	}
 
 
@@ -59,7 +69,12 @@ public class JavaGeneratorModule implements IGeneratorModule {
 
 	public void configureForExecutionStyle(GeneratorEntry entry, Binder binder) {
 		if ((new AnnotationExtensions()).isEventDriven(entry)) {
-			binder.bind(Statemachine.class).to(EventDrivenStatemachine.class);
+			includeProviderBinder.addBinding().to(JavaEventDrivenIncludeProvider.class);
+			binder.bind(APIGenerator.class).to(EventDrivenAPIGenerator.class);
+			binder.bind(EventCode.class).to(EventDrivenEventCode.class);
+			binder.bind(InterfaceFunctionsGenerator.class).to(EventDrivenInterfaceFunctionsGenerator.class);
+			binder.bind(InternalFunctionsGenerator.class).to(EventDrivenInternalFunctionsGenerator.class);
+
 		}
 	}
 
@@ -73,7 +88,7 @@ public class JavaGeneratorModule implements IGeneratorModule {
 		}
 		binder.bind(INamingService.class).to(JavaNamingService.class).in(Scopes.SINGLETON);
 	}
-	
+
 	protected void bindTracingProperty(GeneratorEntry entry, Binder binder) {
 		FeatureParameterValue traceEnterFeature = entry.getFeatureParameterValue(IJavaFeatureConstants.FEATURE_TRACING,
 				IJavaFeatureConstants.PARAMETER_TRACING_ENTER_STATE);
@@ -83,5 +98,4 @@ public class JavaGeneratorModule implements IGeneratorModule {
 		boolean traceExit = traceExitFeature != null ? traceEnterFeature.getBooleanValue() : false;
 		binder.bind(Boolean.class).annotatedWith(Names.named(ADD_TRACES)).toInstance(traceEnter || traceExit);
 	}
-
 }

@@ -83,6 +83,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	
 	private int nextStateIndex;
 	
+	
 	private long number1;
 	
 	protected void setNumber1(long value) {
@@ -141,6 +142,37 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		enterSequence__region1_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case region_1_Idle:
+				region_1_Idle_react(true);
+				break;
+			case region_1_Number1Pressed:
+				region_1_Number1Pressed_react(true);
+				break;
+			case region_1_Number2Pressed:
+				region_1_Number2Pressed_react(true);
+				break;
+			case region_1_Number3Pressed:
+				region_1_Number3Pressed_react(true);
+				break;
+			case _region1_Closed:
+				_region1_Closed_react(true);
+				break;
+			case _region1_Open:
+				_region1_Open_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_region_1();
 		exitSequence__region1();
@@ -463,35 +495,4 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case region_1_Idle:
-				region_1_Idle_react(true);
-				break;
-			case region_1_Number1Pressed:
-				region_1_Number1Pressed_react(true);
-				break;
-			case region_1_Number2Pressed:
-				region_1_Number2Pressed_react(true);
-				break;
-			case region_1_Number3Pressed:
-				region_1_Number3Pressed_react(true);
-				break;
-			case _region1_Closed:
-				_region1_Closed_react(true);
-				break;
-			case _region1_Open:
-				_region1_Open_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

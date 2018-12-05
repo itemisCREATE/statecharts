@@ -299,6 +299,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public CKeywordsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -374,6 +375,25 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		enterSequence_auto_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case auto_char:
+				auto_char_react(true);
+				break;
+			case auto_loop_switch_case_enum_asm:
+				auto_loop_switch_case_enum_asm_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_auto();
 	}
@@ -957,23 +977,4 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case auto_char:
-				auto_char_react(true);
-				break;
-			case auto_loop_switch_case_enum_asm:
-				auto_loop_switch_case_enum_asm_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

@@ -98,6 +98,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	
 	private int nextStateIndex;
 	
+	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
 	
 	private boolean i1;
@@ -131,6 +132,48 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		enterSequence_EventDrivenInternalEvent_check_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+	
+		clearOutEvents();
+		singleCycle();
+		clearEvents();
+		
+		// process queued events
+		while (internalEventQueue.size() > 0) {
+			internalEventQueue.poll().run();
+			clearEvents();
+		}
+	}
+	
+	protected void singleCycle() {
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case eventDrivenInternalEvent_r1_A:
+				eventDrivenInternalEvent_r1_A_react(true);
+				break;
+			case eventDrivenInternalEvent_r1_B:
+				eventDrivenInternalEvent_r1_B_react(true);
+				break;
+			case eventDrivenInternalEvent_r2_C:
+				eventDrivenInternalEvent_r2_C_react(true);
+				break;
+			case eventDrivenInternalEvent_r2_D:
+				eventDrivenInternalEvent_r2_D_react(true);
+				break;
+			case eventDrivenInternalEvent_check_VALID:
+				eventDrivenInternalEvent_check_VALID_react(true);
+				break;
+			case eventDrivenInternalEvent_check_MULTIPLEEVENTS:
+				eventDrivenInternalEvent_check_MULTIPLEEVENTS_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+	}
 	public void exit() {
 		exitSequence_EventDrivenInternalEvent_r1();
 		exitSequence_EventDrivenInternalEvent_r2();
@@ -522,46 +565,4 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-	
-		clearOutEvents();
-		singleCycle();
-		clearEvents();
-		
-		// process queued events
-		while (internalEventQueue.size() > 0) {
-			internalEventQueue.poll().run();
-			clearEvents();
-		}
-	}
-	
-	protected void singleCycle() {
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case eventDrivenInternalEvent_r1_A:
-				eventDrivenInternalEvent_r1_A_react(true);
-				break;
-			case eventDrivenInternalEvent_r1_B:
-				eventDrivenInternalEvent_r1_B_react(true);
-				break;
-			case eventDrivenInternalEvent_r2_C:
-				eventDrivenInternalEvent_r2_C_react(true);
-				break;
-			case eventDrivenInternalEvent_r2_D:
-				eventDrivenInternalEvent_r2_D_react(true);
-				break;
-			case eventDrivenInternalEvent_check_VALID:
-				eventDrivenInternalEvent_check_VALID_react(true);
-				break;
-			case eventDrivenInternalEvent_check_MULTIPLEEVENTS:
-				eventDrivenInternalEvent_check_MULTIPLEEVENTS_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-	}
 }

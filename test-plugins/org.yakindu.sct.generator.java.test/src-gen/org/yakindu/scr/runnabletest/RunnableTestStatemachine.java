@@ -121,6 +121,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	private ITimer timer;
 	
 	private final boolean[] timeEvents = new boolean[3];
@@ -164,6 +165,28 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region__final_:
+				main_region__final__react(true);
+				break;
+			case main_region_Composite_s1_s2_inner_region_s1:
+				main_region_Composite_s1_s2_inner_region_s1_react(true);
+				break;
+			case main_region_Composite_s1_s2_inner_region_s2:
+				main_region_Composite_s1_s2_inner_region_s2_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 		timer.unsetTimer(this, 2);
@@ -506,26 +529,4 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region__final_:
-				main_region__final__react(true);
-				break;
-			case main_region_Composite_s1_s2_inner_region_s1:
-				main_region_Composite_s1_s2_inner_region_s1_react(true);
-				break;
-			case main_region_Composite_s1_s2_inner_region_s2:
-				main_region_Composite_s1_s2_inner_region_s2_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

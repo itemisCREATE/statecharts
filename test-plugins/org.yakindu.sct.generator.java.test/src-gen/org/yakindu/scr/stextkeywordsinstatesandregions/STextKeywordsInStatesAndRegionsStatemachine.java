@@ -73,6 +73,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	
 	private int nextStateIndex;
 	
+	
 	public STextKeywordsInStatesAndRegionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -113,6 +114,136 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		enterSequence_active_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case default_namespace:
+				default_namespace_react(true);
+				break;
+			case operation_interface:
+				operation_interface_react(true);
+				break;
+			case operation_internal:
+				operation_internal_react(true);
+				break;
+			case namespace_event:
+				namespace_event_react(true);
+				break;
+			case namespace_local:
+				namespace_local_react(true);
+				break;
+			case local_in:
+				local_in_react(true);
+				break;
+			case local_out:
+				local_out_react(true);
+				break;
+			case interface_var:
+				interface_var_react(true);
+				break;
+			case interface_readonly:
+				interface_readonly_react(true);
+				break;
+			case internal_external:
+				internal_external_react(true);
+				break;
+			case internal_operation:
+				internal_operation_react(true);
+				break;
+			case event_default:
+				event_default_react(true);
+				break;
+			case event_else:
+				event_else_react(true);
+				break;
+			case in_entry:
+				in_entry_react(true);
+				break;
+			case in_exit:
+				in_exit_react(true);
+				break;
+			case out_always:
+				out_always_react(true);
+				break;
+			case out_oncycle:
+				out_oncycle_react(true);
+				break;
+			case var_raise:
+				var_raise_react(true);
+				break;
+			case var_valueof:
+				var_valueof_react(true);
+				break;
+			case readonly_active:
+				readonly_active_react(true);
+				break;
+			case readonly_namespace:
+				readonly_namespace_react(true);
+				break;
+			case external_interface:
+				external_interface_react(true);
+				break;
+			case external_internal:
+				external_internal_react(true);
+				break;
+			case else_event:
+				else_event_react(true);
+				break;
+			case else_local:
+				else_local_react(true);
+				break;
+			case entry_in:
+				entry_in_react(true);
+				break;
+			case entry_out:
+				entry_out_react(true);
+				break;
+			case exit_var:
+				exit_var_react(true);
+				break;
+			case exit_readonly:
+				exit_readonly_react(true);
+				break;
+			case always_external:
+				always_external_react(true);
+				break;
+			case always_operation:
+				always_operation_react(true);
+				break;
+			case oncycle_default:
+				oncycle_default_react(true);
+				break;
+			case oncycle_else:
+				oncycle_else_react(true);
+				break;
+			case raise_entry:
+				raise_entry_react(true);
+				break;
+			case raise_exit:
+				raise_exit_react(true);
+				break;
+			case valueof_always:
+				valueof_always_react(true);
+				break;
+			case valueof_oncycle:
+				valueof_oncycle_react(true);
+				break;
+			case active_raise:
+				active_raise_react(true);
+				break;
+			case active_valueof:
+				active_valueof_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_default();
 		exitSequence_operation();
@@ -1740,134 +1871,4 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case default_namespace:
-				default_namespace_react(true);
-				break;
-			case operation_interface:
-				operation_interface_react(true);
-				break;
-			case operation_internal:
-				operation_internal_react(true);
-				break;
-			case namespace_event:
-				namespace_event_react(true);
-				break;
-			case namespace_local:
-				namespace_local_react(true);
-				break;
-			case local_in:
-				local_in_react(true);
-				break;
-			case local_out:
-				local_out_react(true);
-				break;
-			case interface_var:
-				interface_var_react(true);
-				break;
-			case interface_readonly:
-				interface_readonly_react(true);
-				break;
-			case internal_external:
-				internal_external_react(true);
-				break;
-			case internal_operation:
-				internal_operation_react(true);
-				break;
-			case event_default:
-				event_default_react(true);
-				break;
-			case event_else:
-				event_else_react(true);
-				break;
-			case in_entry:
-				in_entry_react(true);
-				break;
-			case in_exit:
-				in_exit_react(true);
-				break;
-			case out_always:
-				out_always_react(true);
-				break;
-			case out_oncycle:
-				out_oncycle_react(true);
-				break;
-			case var_raise:
-				var_raise_react(true);
-				break;
-			case var_valueof:
-				var_valueof_react(true);
-				break;
-			case readonly_active:
-				readonly_active_react(true);
-				break;
-			case readonly_namespace:
-				readonly_namespace_react(true);
-				break;
-			case external_interface:
-				external_interface_react(true);
-				break;
-			case external_internal:
-				external_internal_react(true);
-				break;
-			case else_event:
-				else_event_react(true);
-				break;
-			case else_local:
-				else_local_react(true);
-				break;
-			case entry_in:
-				entry_in_react(true);
-				break;
-			case entry_out:
-				entry_out_react(true);
-				break;
-			case exit_var:
-				exit_var_react(true);
-				break;
-			case exit_readonly:
-				exit_readonly_react(true);
-				break;
-			case always_external:
-				always_external_react(true);
-				break;
-			case always_operation:
-				always_operation_react(true);
-				break;
-			case oncycle_default:
-				oncycle_default_react(true);
-				break;
-			case oncycle_else:
-				oncycle_else_react(true);
-				break;
-			case raise_entry:
-				raise_entry_react(true);
-				break;
-			case raise_exit:
-				raise_exit_react(true);
-				break;
-			case valueof_always:
-				valueof_always_react(true);
-				break;
-			case valueof_oncycle:
-				valueof_oncycle_react(true);
-				break;
-			case active_raise:
-				active_raise_react(true);
-				break;
-			case active_valueof:
-				active_valueof_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }
