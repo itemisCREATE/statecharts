@@ -15,6 +15,7 @@ import org.yakindu.base.types.Direction
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.java.GenmodelEntries
 import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -29,6 +30,7 @@ class StatemachineFunctionsGenerator {
 	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension ITypeSystem
+	@Inject protected extension GenmodelEntries
 	
 	def createConstructor(ExecutionFlow flow) '''
 		public «flow.statemachineClassName»() {
@@ -81,5 +83,35 @@ class StatemachineFunctionsGenerator {
 				«ENDIF»
 			«ENDFOR»
 		«ENDIF»
+	'''
+	
+	def interfaceAccessors(ExecutionFlow flow, GeneratorEntry entry) '''
+		«FOR scope : flow.interfaceScopes»
+			public «scope.interfaceName» get«scope.interfaceName»() {
+				return «scope.interfaceName.toFirstLower()»;
+			}
+
+		«ENDFOR»
+		«IF tracingUsed(entry)»
+		«generateTraceAccessors(entry)»
+		«ENDIF»
+	'''
+	
+	def protected generateTraceAccessors(GeneratorEntry entry) '''
+			public void add«traceSingleInstance.toFirstUpper»(«traceInterface»<State> «traceSingleInstance») {
+				if(!(this.«traceInstances».contains(«traceSingleInstance»))) {
+					this.«traceInstances».add(«traceSingleInstance»);
+				}
+			}
+			
+			public void remove«traceSingleInstance.toFirstUpper»(«traceInterface»<State> «traceSingleInstance») {
+				if(this.«traceInstances».contains(«traceSingleInstance»)) {
+					this.«traceInstances».remove(«traceSingleInstance»);
+				}
+			}
+			
+			public List<«traceInterface»<State>> get«traceInstances.toFirstUpper»() {
+				return «traceInstances»;
+			}
 	'''
 }
