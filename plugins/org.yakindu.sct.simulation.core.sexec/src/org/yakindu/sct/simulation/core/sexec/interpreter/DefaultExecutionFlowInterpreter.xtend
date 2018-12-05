@@ -153,6 +153,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	override runCycle() {
+		// TODO Should not care about cycle adapter here - move to simulation engine where it is defined.  
 		val cycleAdapter = EcoreUtil.getExistingAdapter(executionContext, EventDrivenCycleAdapter) as EventDrivenCycleAdapter
 		try {
 			if(cycleAdapter !== null )
