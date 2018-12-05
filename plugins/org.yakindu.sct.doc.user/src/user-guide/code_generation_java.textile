@@ -870,18 +870,18 @@ public class StatemachineRunner {
 		SomeStatemachine sm = new SomeStatemachine();
 		
 		// create multiple observer
-		TracingImpl<State> ifaceTraceObserver1 = new TracingImpl<State>();
-		TracingImpl<State> ifaceTraceObserver2 = new TracingImpl<State>();
+		TracingImpl<State> traceObserver1 = new TracingImpl<State>();
+		TracingImpl<State> traceObserver2 = new TracingImpl<State>();
 		
 		// add observer to the statemachine
-		sm.addIfaceTraceObserver(ifaceTraceObserver1);
-		sm.addIfaceTraceObserver(ifaceTraceObserver2);
+		sm.addTraceObserver(traceObserver1);
+		sm.addTraceObserver(traceObserver2);
 		
 		sm.init();
 		sm.enter();
 		
 		// remove observer if it is not needed anymore
-		sm.removeIfaceTraceObserver(ifaceTraceObserver2);
+		sm.removeTraceObserver(traceObserver2);
 		
 		sm.runCycle();
 	}
