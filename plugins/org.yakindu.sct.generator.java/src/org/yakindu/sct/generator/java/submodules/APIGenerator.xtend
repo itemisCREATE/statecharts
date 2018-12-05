@@ -104,12 +104,12 @@ class APIGenerator {
 
 			{if (finalStateImpactVector.isCompletelyCovered) {
 			'''	return «FOR i : 0 ..<finalStateImpactVector.size SEPARATOR ' && '»(«FOR fs : finalStateImpactVector.get(i) SEPARATOR ' || '»stateVector[«i»] == «
-								IF fs.stateVector.offset == i
-									»State.«fs.stateName.asEscapedIdentifier»«
-								ELSE
-									»State.«nullStateName»«
-								ENDIF»«
-							ENDFOR»)«ENDFOR»;
+							IF fs.stateVector.offset == i
+								»State.«fs.stateName.asEscapedIdentifier»«
+							ELSE
+								»State.«nullStateName»«
+							ENDIF»«
+						ENDFOR»)«ENDFOR»;
 		'''} else {
 		'''	return false;
 		'''} }
@@ -174,7 +174,8 @@ class APIGenerator {
 		public void enter() {
 			if (!initialized) {
 				throw new IllegalStateException(
-						"The state machine needs to be initialized first by calling the init() function.");
+					"The state machine needs to be initialized first by calling the init() function."
+				);
 			}
 			«IF timed»
 			if (timer == null) {

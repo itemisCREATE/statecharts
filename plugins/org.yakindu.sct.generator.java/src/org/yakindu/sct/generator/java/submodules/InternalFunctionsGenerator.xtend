@@ -70,10 +70,10 @@ class InternalFunctionsGenerator {
 	
 	def createFieldDeclarations(ExecutionFlow flow, GeneratorEntry entry) '''
 		«FOR scope : flow.interfaceScopes»
-		«scope.toImplementation(entry)»
-		protected «scope.interfaceImplName» «scope.interfaceName.asEscapedIdentifier»;
-		
-	«ENDFOR»
+			«scope.toImplementation(entry)»
+			protected «scope.interfaceImplName» «scope.interfaceName.asEscapedIdentifier»;
+			
+		«ENDFOR»
 		private boolean initialized = false;
 
 		public enum State {
@@ -84,21 +84,21 @@ class InternalFunctionsGenerator {
 		};
 
 		«IF flow.hasHistory»
-		private State[] historyVector = new State[«flow.historyVector.size»];
+			private State[] historyVector = new State[«flow.historyVector.size»];
 		«ENDIF»
 		private final State[] stateVector = new State[«flow.stateVector.size»];
 		
 		private int nextStateIndex;
 		
 		«IF tracingUsed(entry)»
-		private List <«traceInterface»<State>> «traceInstances» = new LinkedList <«traceInterface»<State>>();
-		
+			private List <«traceInterface»<State>> «traceInstances» = new LinkedList <«traceInterface»<State>>();
+			
 		«ENDIF»
 		
 		«IF flow.timed»
-		private ITimer timer;
-		
-		private final boolean[] timeEvents = new boolean[«flow.timeEvents.size»];
+			private ITimer timer;
+			
+			private final boolean[] timeEvents = new boolean[«flow.timeEvents.size»];
 		«ENDIF»
 		«flow.internalEventFields»		
 		«FOR variable : flow.internalScopeVariables SEPARATOR newLine AFTER newLine»

@@ -36,13 +36,13 @@ class StatemachineFunctionsGenerator {
 			«FOR event : scope.eventDefinitions»
 				«IF event.direction == Direction::IN»
 					«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-					public void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
-						«scope.interfaceName.asEscapedIdentifier».raise«event.name.asName»(value);
-					}
+						public void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
+							«scope.interfaceName.asEscapedIdentifier».raise«event.name.asName»(value);
+						}
 					«ELSE»
-					public void raise«event.name.asName»() {
-						«scope.interfaceName.asEscapedIdentifier».raise«event.name.asName»();
-					}
+						public void raise«event.name.asName»() {
+							«scope.interfaceName.asEscapedIdentifier».raise«event.name.asName»();
+						}
 					«ENDIF»
 
 				«ENDIF»
@@ -60,16 +60,16 @@ class StatemachineFunctionsGenerator {
 				«ENDIF»
 			«ENDFOR»
 			«FOR variable : scope.variableDefinitions»
-					public «variable.typeSpecifier.targetLanguageName» «variable.getter()» {
-						return «scope.interfaceName.asEscapedIdentifier».«variable.getter()»;
+				public «variable.typeSpecifier.targetLanguageName» «variable.getter()» {
+					return «scope.interfaceName.asEscapedIdentifier».«variable.getter()»;
+				}
+				
+				«IF !variable.const && !variable.readonly»
+					public void «variable.setter»(«variable.typeSpecifier.targetLanguageName» value) {
+						«scope.interfaceName.asEscapedIdentifier».«variable.setter»(value);
 					}
-					
-					«IF !variable.const && !variable.readonly»
-						public void «variable.setter»(«variable.typeSpecifier.targetLanguageName» value) {
-							«scope.interfaceName.asEscapedIdentifier».«variable.setter»(value);
-						}
 
-					«ENDIF»
+				«ENDIF»
 			«ENDFOR»
 		«ENDIF»
 	'''
