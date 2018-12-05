@@ -42,7 +42,8 @@ public class TracingStatemachine implements ITracingStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
@@ -114,19 +115,19 @@ public class TracingStatemachine implements ITracingStatemachine {
 		return sCInterface;
 	}
 	
-	public void addIfaceTraceObserver(ITracingListener<State> ifaceTraceObserver) {
+	public void addTraceObserver(ITracingListener<State> ifaceTraceObserver) {
 		if(!(this.ifaceTraceObservers.contains(ifaceTraceObserver))) {
 			this.ifaceTraceObservers.add(ifaceTraceObserver);
 		}
 	}
 	
-	public void removeIfaceTraceObserver(ITracingListener<State> ifaceTraceObserver) {
+	public void removeTraceObserver(ITracingListener<State> ifaceTraceObserver) {
 		if(this.ifaceTraceObservers.contains(ifaceTraceObserver)) {
 			this.ifaceTraceObservers.remove(ifaceTraceObserver);
 		}
 	}
 	
-	public List<ITracingListener<State>> getIfaceTraceObservers() {
+	public List<ITracingListener<State>> getTraceObserver() {
 		return ifaceTraceObservers;
 	}
 	/* 'default' enter sequence for state StateA */
