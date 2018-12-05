@@ -46,6 +46,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	
 	private int nextStateIndex;
 	
+	
 	public HistoryWithExitPointStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -70,6 +71,28 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		enterSequence_mr_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case mr_A_r_X1:
+				mr_A_r_X1_react(true);
+				break;
+			case mr_A_r_X2:
+				mr_A_r_X2_react(true);
+				break;
+			case mr_B:
+				mr_B_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_mr();
 	}
@@ -349,26 +372,4 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case mr_A_r_X1:
-				mr_A_r_X1_react(true);
-				break;
-			case mr_A_r_X2:
-				mr_A_r_X2_react(true);
-				break;
-			case mr_B:
-				mr_B_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

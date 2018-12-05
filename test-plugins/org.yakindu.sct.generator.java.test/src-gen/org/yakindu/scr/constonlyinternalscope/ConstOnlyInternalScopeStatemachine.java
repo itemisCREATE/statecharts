@@ -39,6 +39,7 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 	
 	private int nextStateIndex;
 	
+	
 	protected long getB() {
 		return b;
 	}
@@ -68,6 +69,28 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 		enterSequence_ConstOnlyInternalScope_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case constOnlyInternalScope_main_region_A:
+				constOnlyInternalScope_main_region_A_react(true);
+				break;
+			case constOnlyInternalScope_main_region_B:
+				constOnlyInternalScope_main_region_B_react(true);
+				break;
+			case constOnlyInternalScope_main_region_C:
+				constOnlyInternalScope_main_region_C_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_ConstOnlyInternalScope_main_region();
 	}
@@ -241,26 +264,4 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case constOnlyInternalScope_main_region_A:
-				constOnlyInternalScope_main_region_A_react(true);
-				break;
-			case constOnlyInternalScope_main_region_B:
-				constOnlyInternalScope_main_region_B_react(true);
-				break;
-			case constOnlyInternalScope_main_region_C:
-				constOnlyInternalScope_main_region_C_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

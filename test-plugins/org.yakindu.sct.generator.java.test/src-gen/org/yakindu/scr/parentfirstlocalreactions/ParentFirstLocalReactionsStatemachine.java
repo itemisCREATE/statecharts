@@ -117,6 +117,7 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 	
 	private int nextStateIndex;
 	
+	
 	public ParentFirstLocalReactionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -153,6 +154,31 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		enterSequence_ParentFirstLocalReactions_r_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case parentFirstLocalReactions_r_A_r_AA_r_AAA:
+				parentFirstLocalReactions_r_A_r_AA_r_AAA_react(true);
+				break;
+			case parentFirstLocalReactions_r_A_r_AA_r_AAB:
+				parentFirstLocalReactions_r_A_r_AA_r_AAB_react(true);
+				break;
+			case parentFirstLocalReactions_r_A_r_AB:
+				parentFirstLocalReactions_r_A_r_AB_react(true);
+				break;
+			case parentFirstLocalReactions_r_B:
+				parentFirstLocalReactions_r_B_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_ParentFirstLocalReactions_r();
 	}
@@ -543,29 +569,4 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case parentFirstLocalReactions_r_A_r_AA_r_AAA:
-				parentFirstLocalReactions_r_A_r_AA_r_AAA_react(true);
-				break;
-			case parentFirstLocalReactions_r_A_r_AA_r_AAB:
-				parentFirstLocalReactions_r_A_r_AA_r_AAB_react(true);
-				break;
-			case parentFirstLocalReactions_r_A_r_AB:
-				parentFirstLocalReactions_r_A_r_AB_react(true);
-				break;
-			case parentFirstLocalReactions_r_B:
-				parentFirstLocalReactions_r_B_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

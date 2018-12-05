@@ -481,6 +481,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public JavaKeywordsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -592,6 +593,31 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		enterSequence_goto_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case goto_abstract:
+				goto_abstract_react(true);
+				break;
+			case goto_boolean:
+				goto_boolean_react(true);
+				break;
+			case goto_void_volatile_transient_throw_false:
+				goto_void_volatile_transient_throw_false_react(true);
+				break;
+			case goto_void_volatile_state:
+				goto_void_volatile_state_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_goto();
 	}
@@ -1503,29 +1529,4 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case goto_abstract:
-				goto_abstract_react(true);
-				break;
-			case goto_boolean:
-				goto_boolean_react(true);
-				break;
-			case goto_void_volatile_transient_throw_false:
-				goto_void_volatile_transient_throw_false_react(true);
-				break;
-			case goto_void_volatile_state:
-				goto_void_volatile_state_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

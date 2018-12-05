@@ -51,6 +51,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public TypeAliasStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -75,6 +76,31 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_Start:
+				main_region_Start_react(true);
+				break;
+			case main_region_Mid:
+				main_region_Mid_react(true);
+				break;
+			case main_region_Mid2:
+				main_region_Mid2_react(true);
+				break;
+			case main_region_End:
+				main_region_End_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -311,29 +337,4 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_Start:
-				main_region_Start_react(true);
-				break;
-			case main_region_Mid:
-				main_region_Mid_react(true);
-				break;
-			case main_region_Mid2:
-				main_region_Mid2_react(true);
-				break;
-			case main_region_End:
-				main_region_End_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

@@ -41,6 +41,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	
 	private int nextStateIndex;
 	
+	
 	private ITimer timer;
 	
 	private final boolean[] timeEvents = new boolean[2];
@@ -74,6 +75,25 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		enterSequence_EventDrivenTriggeredByTimeEvent_r_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case eventDrivenTriggeredByTimeEvent_r_A:
+				eventDrivenTriggeredByTimeEvent_r_A_react(true);
+				break;
+			case eventDrivenTriggeredByTimeEvent_r_B:
+				eventDrivenTriggeredByTimeEvent_r_B_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_EventDrivenTriggeredByTimeEvent_r();
 	}
@@ -288,23 +308,4 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case eventDrivenTriggeredByTimeEvent_r_A:
-				eventDrivenTriggeredByTimeEvent_r_A_react(true);
-				break;
-			case eventDrivenTriggeredByTimeEvent_r_B:
-				eventDrivenTriggeredByTimeEvent_r_B_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

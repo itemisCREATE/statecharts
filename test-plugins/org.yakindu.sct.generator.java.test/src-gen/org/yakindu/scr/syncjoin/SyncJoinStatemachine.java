@@ -64,6 +64,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public SyncJoinStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -86,6 +87,34 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_A:
+				main_region_A_react(true);
+				break;
+			case main_region_B_r1_C1:
+				main_region_B_r1_C1_react(true);
+				break;
+			case main_region_B_r1_C2:
+				main_region_B_r1_C2_react(true);
+				break;
+			case main_region_B_r2_D1:
+				main_region_B_r2_D1_react(true);
+				break;
+			case main_region_B_r2_D2:
+				main_region_B_r2_D2_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -442,32 +471,4 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
-				main_region_A_react(true);
-				break;
-			case main_region_B_r1_C1:
-				main_region_B_r1_C1_react(true);
-				break;
-			case main_region_B_r1_C2:
-				main_region_B_r1_C2_react(true);
-				break;
-			case main_region_B_r2_D1:
-				main_region_B_r2_D1_react(true);
-				break;
-			case main_region_B_r2_D2:
-				main_region_B_r2_D2_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

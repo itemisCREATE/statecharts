@@ -53,6 +53,7 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 	
 	private int nextStateIndex;
 	
+	
 	public ConstOnlyNamedScopeStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 		sCIA = new SCIAImpl();
@@ -75,6 +76,28 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 		enterSequence_ConstOnlyNamedScope_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case constOnlyNamedScope_main_region_A:
+				constOnlyNamedScope_main_region_A_react(true);
+				break;
+			case constOnlyNamedScope_main_region_B:
+				constOnlyNamedScope_main_region_B_react(true);
+				break;
+			case constOnlyNamedScope_main_region_C:
+				constOnlyNamedScope_main_region_C_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_ConstOnlyNamedScope_main_region();
 	}
@@ -252,26 +275,4 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case constOnlyNamedScope_main_region_A:
-				constOnlyNamedScope_main_region_A_react(true);
-				break;
-			case constOnlyNamedScope_main_region_B:
-				constOnlyNamedScope_main_region_B_react(true);
-				break;
-			case constOnlyNamedScope_main_region_C:
-				constOnlyNamedScope_main_region_C_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

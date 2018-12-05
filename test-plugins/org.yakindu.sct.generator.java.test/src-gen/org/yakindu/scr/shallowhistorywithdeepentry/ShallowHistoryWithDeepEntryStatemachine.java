@@ -54,6 +54,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 	
 	private int nextStateIndex;
 	
+	
 	public ShallowHistoryWithDeepEntryStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -78,6 +79,28 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_Y:
+				main_region_Y_react(true);
+				break;
+			case main_region_Z__region0_A:
+				main_region_Z__region0_A_react(true);
+				break;
+			case main_region_Z__region0_B__region0_C:
+				main_region_Z__region0_B__region0_C_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -399,26 +422,4 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_Y:
-				main_region_Y_react(true);
-				break;
-			case main_region_Z__region0_A:
-				main_region_Z__region0_A_react(true);
-				break;
-			case main_region_Z__region0_B__region0_C:
-				main_region_Z__region0_B__region0_C_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

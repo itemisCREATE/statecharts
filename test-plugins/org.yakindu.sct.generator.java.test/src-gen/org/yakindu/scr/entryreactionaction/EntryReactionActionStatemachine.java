@@ -80,6 +80,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	
 	private int nextStateIndex;
 	
+	
 	public EntryReactionActionStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -112,6 +113,31 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		enterSequence_EntryReactionAction_r1_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case entryReactionAction_r2_B_r_BA:
+				entryReactionAction_r2_B_r_BA_react(true);
+				break;
+			case entryReactionAction_r2_B_r_BB:
+				entryReactionAction_r2_B_r_BB_react(true);
+				break;
+			case entryReactionAction_r2_D:
+				entryReactionAction_r2_D_react(true);
+				break;
+			case entryReactionAction_r1_A:
+				entryReactionAction_r1_A_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_EntryReactionAction_r2();
 		exitSequence_EntryReactionAction_r1();
@@ -479,29 +505,4 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case entryReactionAction_r2_B_r_BA:
-				entryReactionAction_r2_B_r_BA_react(true);
-				break;
-			case entryReactionAction_r2_B_r_BB:
-				entryReactionAction_r2_B_r_BB_react(true);
-				break;
-			case entryReactionAction_r2_D:
-				entryReactionAction_r2_D_react(true);
-				break;
-			case entryReactionAction_r1_A:
-				entryReactionAction_r1_A_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

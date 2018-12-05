@@ -123,6 +123,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	
 	private int nextStateIndex;
 	
+	
 	public StringExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -161,6 +162,37 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_AssignmentChecked:
+				main_region_AssignmentChecked_react(true);
+				break;
+			case main_region_Failed:
+				main_region_Failed_react(true);
+				break;
+			case main_region_VarToVarCompareSucceeded:
+				main_region_VarToVarCompareSucceeded_react(true);
+				break;
+			case main_region_VarToConstCompareSucceeded:
+				main_region_VarToConstCompareSucceeded_react(true);
+				break;
+			case main_region_ConstToVarCompareSucceeded:
+				main_region_ConstToVarCompareSucceeded_react(true);
+				break;
+			case main_region_ConstToConstCompareSucceeded:
+				main_region_ConstToConstCompareSucceeded_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -825,35 +857,4 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_AssignmentChecked:
-				main_region_AssignmentChecked_react(true);
-				break;
-			case main_region_Failed:
-				main_region_Failed_react(true);
-				break;
-			case main_region_VarToVarCompareSucceeded:
-				main_region_VarToVarCompareSucceeded_react(true);
-				break;
-			case main_region_VarToConstCompareSucceeded:
-				main_region_VarToConstCompareSucceeded_react(true);
-				break;
-			case main_region_ConstToVarCompareSucceeded:
-				main_region_ConstToVarCompareSucceeded_react(true);
-				break;
-			case main_region_ConstToConstCompareSucceeded:
-				main_region_ConstToConstCompareSucceeded_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

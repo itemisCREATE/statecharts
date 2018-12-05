@@ -65,6 +65,7 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 	
 	private int nextStateIndex;
 	
+	
 	public OutEventLifeCycleStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -90,6 +91,28 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 		enterSequence_r2_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case r1_A:
+				r1_A_react(true);
+				break;
+			case r1_B:
+				r1_B_react(true);
+				break;
+			case r2_B:
+				r2_B_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_r1();
 		exitSequence_r2();
@@ -304,26 +327,4 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case r1_A:
-				r1_A_react(true);
-				break;
-			case r1_B:
-				r1_B_react(true);
-				break;
-			case r2_B:
-				r2_B_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }
