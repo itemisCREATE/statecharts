@@ -204,6 +204,11 @@ public class UnaryExpressionItemProvider extends ExpressionItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.UNARY_EXPRESSION__OPERAND,
+				 ExpressionsFactory.eINSTANCE.createMetaCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.UNARY_EXPRESSION__OPERAND,
 				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
 
 		newChildDescriptors.add

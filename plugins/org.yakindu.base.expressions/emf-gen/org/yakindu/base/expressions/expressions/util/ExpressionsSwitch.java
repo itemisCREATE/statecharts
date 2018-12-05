@@ -5,6 +5,7 @@ package org.yakindu.base.expressions.expressions.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.yakindu.base.expressions.expressions.*;
 import org.yakindu.base.expressions.expressions.Argument;
 import org.yakindu.base.expressions.expressions.ArgumentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
@@ -305,6 +306,15 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 				T result = caseFeatureCall(featureCall);
 				if (result == null) result = caseArgumentExpression(featureCall);
 				if (result == null) result = caseExpression(featureCall);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ExpressionsPackage.META_CALL: {
+				MetaCall metaCall = (MetaCall)theEObject;
+				T result = caseMetaCall(metaCall);
+				if (result == null) result = caseFeatureCall(metaCall);
+				if (result == null) result = caseArgumentExpression(metaCall);
+				if (result == null) result = caseExpression(metaCall);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -697,6 +707,21 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseFeatureCall(FeatureCall object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Meta Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Meta Call</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMetaCall(MetaCall object) {
 		return null;
 	}
 

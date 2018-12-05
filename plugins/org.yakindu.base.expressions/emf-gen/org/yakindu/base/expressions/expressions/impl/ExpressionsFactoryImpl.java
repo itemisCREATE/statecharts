@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.yakindu.base.expressions.expressions.*;
 import org.yakindu.base.expressions.expressions.AdditiveOperator;
 import org.yakindu.base.expressions.expressions.Argument;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
@@ -116,6 +117,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 			case ExpressionsPackage.POST_FIX_UNARY_EXPRESSION: return createPostFixUnaryExpression();
 			case ExpressionsPackage.PRIMITIVE_VALUE_EXPRESSION: return createPrimitiveValueExpression();
 			case ExpressionsPackage.FEATURE_CALL: return createFeatureCall();
+			case ExpressionsPackage.META_CALL: return createMetaCall();
 			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION: return createElementReferenceExpression();
 			case ExpressionsPackage.PARENTHESIZED_EXPRESSION: return createParenthesizedExpression();
 			case ExpressionsPackage.TYPE_CAST_EXPRESSION: return createTypeCastExpression();
@@ -415,6 +417,16 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	public FeatureCall createFeatureCall() {
 		FeatureCallImpl featureCall = new FeatureCallImpl();
 		return featureCall;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MetaCall createMetaCall() {
+		MetaCallImpl metaCall = new MetaCallImpl();
+		return metaCall;
 	}
 
 	/**

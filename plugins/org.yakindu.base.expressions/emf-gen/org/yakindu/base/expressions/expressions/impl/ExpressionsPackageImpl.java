@@ -36,6 +36,7 @@ import org.yakindu.base.expressions.expressions.LogicalNotExpression;
 import org.yakindu.base.expressions.expressions.LogicalOperator;
 import org.yakindu.base.expressions.expressions.LogicalOrExpression;
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression;
+import org.yakindu.base.expressions.expressions.MetaCall;
 import org.yakindu.base.expressions.expressions.MultiplicativeOperator;
 import org.yakindu.base.expressions.expressions.NullLiteral;
 import org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression;
@@ -234,6 +235,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass metaCallEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass elementReferenceExpressionEClass = null;
 
 	/**
@@ -376,7 +384,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 *
+	 * 
 	 * <p>This method is used to initialize {@link ExpressionsPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -390,8 +398,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		if (isInited) return (ExpressionsPackage)EPackage.Registry.INSTANCE.getEPackage(ExpressionsPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object registeredExpressionsPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		ExpressionsPackageImpl theExpressionsPackage = registeredExpressionsPackage instanceof ExpressionsPackageImpl ? (ExpressionsPackageImpl)registeredExpressionsPackage : new ExpressionsPackageImpl();
+		ExpressionsPackageImpl theExpressionsPackage = (ExpressionsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ExpressionsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ExpressionsPackageImpl());
 
 		isInited = true;
 
@@ -408,6 +415,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		// Mark meta-data to indicate it can't be changed
 		theExpressionsPackage.freeze();
 
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(ExpressionsPackage.eNS_URI, theExpressionsPackage);
 		return theExpressionsPackage;
@@ -832,6 +840,15 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getMetaCall() {
+		return metaCallEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getElementReferenceExpression() {
 		return elementReferenceExpressionEClass;
 	}
@@ -1217,6 +1234,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		createEReference(featureCallEClass, FEATURE_CALL__ARRAY_SELECTOR);
 		createEAttribute(featureCallEClass, FEATURE_CALL__ARRAY_ACCESS);
 
+		metaCallEClass = createEClass(META_CALL);
+
 		elementReferenceExpressionEClass = createEClass(ELEMENT_REFERENCE_EXPRESSION);
 		createEReference(elementReferenceExpressionEClass, ELEMENT_REFERENCE_EXPRESSION__REFERENCE);
 		createEAttribute(elementReferenceExpressionEClass, ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL);
@@ -1304,6 +1323,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		postFixUnaryExpressionEClass.getESuperTypes().add(this.getUnaryExpression());
 		primitiveValueExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 		featureCallEClass.getESuperTypes().add(this.getArgumentExpression());
+		metaCallEClass.getESuperTypes().add(this.getFeatureCall());
 		elementReferenceExpressionEClass.getESuperTypes().add(this.getArgumentExpression());
 		parenthesizedExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 		typeCastExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
@@ -1399,6 +1419,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		initEAttribute(getFeatureCall_OperationCall(), ecorePackage.getEBoolean(), "operationCall", null, 0, 1, FeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFeatureCall_ArraySelector(), theTypesPackage.getExpression(), null, "arraySelector", null, 0, -1, FeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFeatureCall_ArrayAccess(), ecorePackage.getEBoolean(), "arrayAccess", null, 0, 1, FeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(metaCallEClass, MetaCall.class, "MetaCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(elementReferenceExpressionEClass, ElementReferenceExpression.class, "ElementReferenceExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getElementReferenceExpression_Reference(), ecorePackage.getEObject(), null, "reference", null, 0, 1, ElementReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
