@@ -580,7 +580,7 @@ Finally, the state observer has to be added to the state machine. This is shown 
 bc.. 
 int main() {
 	SomeStatemachine* sm = new SomeStatemachine();
-	TraceObserverImpl* observer = new TraceObserverImpl();
+	TraceObserverImpl* observer = new TraceObserverImpl(); 
 	
 	sm->setTraceObserver(observer);
 	
