@@ -752,7 +752,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 			}
 		}
 
-		assertIssueCount(diagnostics, 4);
+		assertIssueCount(diagnostics, 5);
 		assertError(diagnostics, TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT);
 		assertError(diagnostics, REGION_UNBOUND_DEFAULT_ENTRY_POINT);
 
@@ -1071,7 +1071,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 				validator.validate(element, diagnostics, new HashMap<>());
 			}
 		}
-		assertIssueCount(diagnostics, 8);
+		assertIssueCount(diagnostics, 10);
 	}
 
 	@Test
@@ -1114,6 +1114,19 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 			}
 		}
 		assertIssueCount(diagnostics, 4);
+	}
+	
+	@Test 
+	public void checkDefaultAndElseIsNotUsedOnRegularState() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "DefaultAndElseOnRegularState.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof RegularState) {
+				validator.validate(element, diagnostics, new HashMap<>());
+			}
+		}
+		assertIssueCount(diagnostics, 2);	
 	}
 
 }

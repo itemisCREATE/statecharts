@@ -232,6 +232,17 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			}
 		}
 	}
+	
+	@Check(CheckType.FAST)
+	public void checkDefaultAndElseIsNotUsedOnRegularState(RegularState state) {
+		EList<Transition> outgoingTransitions = state.getOutgoingTransitions();
+		for(Transition transition : outgoingTransitions) {
+			Trigger trigger = transition.getTrigger();
+			if(trigger instanceof DefaultTrigger) {
+				warning(DEFAULT_AND_ELSE_TRANSITION_ON_REGULAR_STATE, transition, null, -1);
+			}
+		}
+	}
 
 	protected String getTransitionDeclaration(Transition transition) {
 		String specification = transition.getSpecification();
