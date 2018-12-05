@@ -103,10 +103,11 @@ class Statemachine {
 		// we need a sorted set for the imports
 		val Set<CharSequence> importSet = new TreeSet
 		val String JavaList = "java.util.List"
+		val String JavaLinkedList = "java.util.LinkedList"
 		
 		if (entry.createInterfaceObserver && hasOutgoingEvents) {
 			importSet += JavaList
-			importSet += "java.util.LinkedList"
+			importSet += JavaLinkedList
 		}
 		
 		if (timed) {
@@ -119,11 +120,9 @@ class Statemachine {
 		
 		if (tracingUsed(entry)) {
 			importSet += entry.getBasePackageName() + "." + traceInterface
-			if(!(importSet.contains(JavaList))){
-				importSet += JavaList
-			}
+			importSet += JavaList
+			importSet += JavaLinkedList
 		}
-		
 		return importSet
 	}
 	
@@ -151,7 +150,7 @@ class Statemachine {
 		private int nextStateIndex;
 		
 		«IF tracingUsed(entry)»
-		private List <«traceInterface»<State>> «traceInstances»;
+		private List <«traceInterface»<State>> «traceInstances» = new LinkedList <«traceInterface»<State>>();
 		
 		«ENDIF»
 		«IF flow.timed»
