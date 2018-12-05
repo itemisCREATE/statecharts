@@ -18,6 +18,7 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.java.GenmodelEntries
 import org.yakindu.sct.generator.java.JavaIncludeProvider
+import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
@@ -28,11 +29,13 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 class EventCode {
 	@Inject protected Set<JavaIncludeProvider> includeProviders
 	@Inject protected extension Naming
+	@Inject protected extension JavaNamingService
 	@Inject protected extension GenmodelEntries
 	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension ITypeSystem
-	@Inject protected extension JavaCommons
+	
+	@Inject protected extension FieldDeclarationGenerator
 	
 	def generateEventDefinition(EventDefinition event, GeneratorEntry entry, InterfaceScope scope) '''
 		private boolean «event.identifier»;
@@ -100,5 +103,10 @@ class EventCode {
 			}
 		«ENDIF»
 
+	'''
+	
+	def getIllegalAccessValidation(EventDefinition it) '''
+		if (! «name.asEscapedIdentifier» ) 
+			throw new IllegalStateException("Illegal event value access. Event «name.asEscapedName» is not raised!");
 	'''
 }

@@ -31,7 +31,7 @@ class InterfaceFunctionsGenerator {
 	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	
-	@Inject protected extension JavaCommons
+	@Inject protected extension FieldDeclarationGenerator
 	@Inject protected extension EventCode
 	
 	def toImplementation(InterfaceScope scope, GeneratorEntry entry) '''

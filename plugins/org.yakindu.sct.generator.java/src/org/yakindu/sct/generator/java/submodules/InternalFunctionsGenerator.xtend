@@ -37,7 +37,7 @@ class InternalFunctionsGenerator {
 	@Inject protected extension FlowCode
 	@Inject protected extension GenmodelEntries
 	
-	@Inject protected extension JavaCommons
+	@Inject protected extension FieldDeclarationGenerator
 	@Inject protected extension InterfaceFunctionsGenerator
 	
 	def clearInEvents(ExecutionFlow flow) '''
