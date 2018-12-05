@@ -80,7 +80,7 @@ class Statemachine {
 			.create
 			.fileComment(entry.licenseText)
 			.packageName(getImplementationPackageName(flow, entry))
-			.addImports(imports(flow, entry))
+			.addImports(imports)
 			.addImports(includeProviders.map[getImports(flow)].flatten)
 			.classTemplate(
 				ClassTemplate
@@ -115,23 +115,23 @@ class Statemachine {
 		'''
 	}
 	
-	def protected Set<CharSequence> imports(ExecutionFlow it, GeneratorEntry entry) {
+	def protected Set<CharSequence> imports() {
 		// we need a sorted set for the imports
 		val Set<CharSequence> importSet = new TreeSet
 		val String JavaList = "java.util.List"
 		val String JavaLinkedList = "java.util.LinkedList"
 		
-		if (entry.createInterfaceObserver && hasOutgoingEvents) {
+		if (entry.createInterfaceObserver && flow.hasOutgoingEvents) {
 			importSet += JavaList
 			importSet += JavaLinkedList
 		}
 		
-		if (timed) {
+		if (flow.timed) {
 			importSet += "" + entry.getBasePackageName() + ".ITimer"
 		}
 		
 		for(JavaIncludeProvider jip : includeProviders) {
-			importSet += jip.getImports(it).map[toString]
+			importSet += jip.getImports(flow).map[toString]
 		}
 		
 		if (tracingUsed(entry)) {
