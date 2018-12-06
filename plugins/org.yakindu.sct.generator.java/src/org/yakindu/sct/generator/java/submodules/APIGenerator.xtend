@@ -211,7 +211,7 @@ class APIGenerator {
 
 		«ENDFOR»
 		«IF tracingUsed(entry)»
-		«generateTraceAccessors(entry)»
+			«generateTraceAccessors(entry)»
 		«ENDIF»
 	'''
 	
@@ -226,10 +226,6 @@ class APIGenerator {
 			if(this.«traceInstances».contains(«traceSingleInstance»)) {
 				this.«traceInstances».remove(«traceSingleInstance»);
 			}
-		}
-		
-		public List<«traceInterface»<State>> get«traceAccessorFunctionID.toFirstUpper»() {
-			return «traceInstances»;
 		}
 	'''
 }
