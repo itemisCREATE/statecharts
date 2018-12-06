@@ -126,10 +126,6 @@ public class TracingStatemachine implements ITracingStatemachine {
 			this.ifaceTraceObservers.remove(ifaceTraceObserver);
 		}
 	}
-	
-	public List<ITracingListener<State>> getTraceObserver() {
-		return ifaceTraceObservers;
-	}
 	/* 'default' enter sequence for state StateA */
 	private void enterSequence_main_region_StateA_default() {
 		for(ITracingListener<State> ifaceTraceObserver : ifaceTraceObservers) {
