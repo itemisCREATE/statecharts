@@ -58,7 +58,8 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_someRegion_default();
 		enterSequence_main_region_default();

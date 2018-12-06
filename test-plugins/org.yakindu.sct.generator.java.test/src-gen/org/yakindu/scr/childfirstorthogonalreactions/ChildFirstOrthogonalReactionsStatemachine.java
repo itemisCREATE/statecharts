@@ -220,7 +220,8 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_ChildFirstOrthogonalReactions_r_default();
 		enterSequence_ChildFirstOrthogonalReactions_r2_default();

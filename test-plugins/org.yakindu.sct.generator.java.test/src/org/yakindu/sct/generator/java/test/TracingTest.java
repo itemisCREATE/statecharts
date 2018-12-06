@@ -11,21 +11,21 @@ public class TracingTest {
 	@Test
 	public void testTracing() {
 		TracingStatemachine sm = new TracingStatemachine();
-		TracingImpl<State> ifaceTraceObserver1 = new TracingImpl<State>();
-		TracingImpl<State> ifaceTraceObserver2 = new TracingImpl<State>();
-		TracingImpl<State> ifaceTraceObserver3 = new TracingImpl<State>();
-		sm.addIfaceTraceObserver(ifaceTraceObserver1);
-		sm.addIfaceTraceObserver(ifaceTraceObserver2);
-		sm.addIfaceTraceObserver(ifaceTraceObserver3);
+		TracingImpl<State> traceObserver1 = new TracingImpl<State>();
+		TracingImpl<State> traceObserver2 = new TracingImpl<State>();
+		TracingImpl<State> traceObserver3 = new TracingImpl<State>();
+		sm.addTraceObserver(traceObserver1);
+		sm.addTraceObserver(traceObserver2);
+		sm.addTraceObserver(traceObserver3);
 		sm.init();
 		sm.enter();
-		assertTrue(ifaceTraceObserver1.isEntered());
-		assertTrue(ifaceTraceObserver2.isEntered());
-		assertTrue(ifaceTraceObserver3.isEntered());
-		sm.removeIfaceTraceObserver(ifaceTraceObserver2);
+		assertTrue(traceObserver1.isEntered());
+		assertTrue(traceObserver2.isEntered());
+		assertTrue(traceObserver3.isEntered());
+		sm.removeTraceObserver(traceObserver2);
 		sm.runCycle();
-		assertTrue(ifaceTraceObserver1.isExited());
-		assertTrue(ifaceTraceObserver3.isExited());
+		assertTrue(traceObserver1.isExited());
+		assertTrue(traceObserver3.isExited());
 		assertTrue(sm.isFinal());
 	}
 }

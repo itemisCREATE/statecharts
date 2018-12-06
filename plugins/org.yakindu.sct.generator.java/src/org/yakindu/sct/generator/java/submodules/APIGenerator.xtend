@@ -211,25 +211,21 @@ class APIGenerator {
 
 		«ENDFOR»
 		«IF tracingUsed(entry)»
-		«generateTraceAccessors(entry)»
+			«generateTraceAccessors(entry)»
 		«ENDIF»
 	'''
 	
 	def protected generateTraceAccessors(GeneratorEntry entry) '''
-			public void add«traceSingleInstance.toFirstUpper»(«traceInterface»<State> «traceSingleInstance») {
-				if(!(this.«traceInstances».contains(«traceSingleInstance»))) {
-					this.«traceInstances».add(«traceSingleInstance»);
-				}
+		public void add«traceAccessorFunctionID.toFirstUpper»(«traceInterface»<State> «traceSingleInstance») {
+			if(!(this.«traceInstances».contains(«traceSingleInstance»))) {
+				this.«traceInstances».add(«traceSingleInstance»);
 			}
-			
-			public void remove«traceSingleInstance.toFirstUpper»(«traceInterface»<State> «traceSingleInstance») {
-				if(this.«traceInstances».contains(«traceSingleInstance»)) {
-					this.«traceInstances».remove(«traceSingleInstance»);
-				}
+		}
+		
+		public void remove«traceAccessorFunctionID.toFirstUpper»(«traceInterface»<State> «traceSingleInstance») {
+			if(this.«traceInstances».contains(«traceSingleInstance»)) {
+				this.«traceInstances».remove(«traceSingleInstance»);
 			}
-			
-			public List<«traceInterface»<State>> get«traceInstances.toFirstUpper»() {
-				return «traceInstances»;
-			}
+		}
 	'''
 }

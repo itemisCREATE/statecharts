@@ -220,7 +220,8 @@ public class ParentFirstOrthogonalReactionsStatemachine implements IParentFirstO
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_ParentFirstOrthogonalReactions_r_default();
 		enterSequence_ParentFirstOrthogonalReactions_r2_default();

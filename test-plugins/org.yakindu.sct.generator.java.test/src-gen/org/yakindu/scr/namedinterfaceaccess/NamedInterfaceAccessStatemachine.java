@@ -136,7 +136,8 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_region_1_default();
 		enterSequence__region1_default();

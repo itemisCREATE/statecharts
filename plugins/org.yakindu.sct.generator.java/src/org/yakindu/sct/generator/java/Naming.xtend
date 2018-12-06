@@ -77,6 +77,10 @@ class Naming {
 		"ITracingListener"
 	}
 	
+	def traceAccessorFunctionID() {
+		"traceObserver"
+	}
+	
 	def traceSingleInstance() {
 		"ifaceTraceObserver"
 	}
