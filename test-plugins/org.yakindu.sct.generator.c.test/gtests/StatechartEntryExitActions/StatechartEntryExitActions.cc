@@ -12,9 +12,7 @@ class StatechartEntryExitActions : public ::testing::Test
 public:
 	/* All operations from the SCTUnit test class. */
 	void entryActionsAreExecutedOnEnteringStatechart();
-	void entryActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue();
 	void exitActionsAreExecutedOnEnteringStatechart();
-	void exitActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue();
 	void setTimer(StatechartEntryAndExitActions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 	void unsetTimer(StatechartEntryAndExitActions* handle, const sc_eventid evid);
 protected:
@@ -24,8 +22,6 @@ protected:
 
 static StatechartEntryExitActions * tc;
 
-void entryActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue();
-void exitActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue();
 
 void StatechartEntryExitActions::SetUp()
 {
@@ -51,27 +47,11 @@ void StatechartEntryExitActions::entryActionsAreExecutedOnEnteringStatechart()
 	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 5l);
 	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_y(&statechart)== 3l);
 }
-void StatechartEntryExitActions::entryActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue()
-{
-	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 0l);
-	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_y(&statechart)== 0l);
-	statechartEntryAndExitActionsIface_set_b(&statechart,false);
-	statechartEntryAndExitActions_enter(&statechart);
-	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 2l);
-	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_y(&statechart)== 3l);
-}
 void StatechartEntryExitActions::exitActionsAreExecutedOnEnteringStatechart()
 {
 	statechartEntryAndExitActions_enter(&statechart);
 	statechartEntryAndExitActions_exit(&statechart);
 	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 6l);
-	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_y(&statechart)== 2l);
-}
-void StatechartEntryExitActions::exitActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue()
-{
-	statechartEntryAndExitActions_enter(&statechart);
-	statechartEntryAndExitActions_exit(&statechart);
-	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 8l);
 	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_y(&statechart)== 2l);
 }
 
