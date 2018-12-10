@@ -276,46 +276,46 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 
 	def executeElementReferenceExpression(ElementReferenceExpression expression) {
 		val executionSlot = context.resolve(expression)
-		return executeArgumentExpression(expression, expression.reference, executionSlot)
+		return doExecute(expression.reference, executionSlot, expression)
 	}
 
 	def dispatch Object execute(FeatureCall call) {
 		executeFeatureCall(call)
 	}
 
-	def executeFeatureCall(FeatureCall it) {
+	def executeFeatureCall(FeatureCall call) {
 		var result = null as Object
 		var slot = null as ExecutionSlot
-		for (ArgumentExpression c : toCallStack) {
-			slot = context.resolve(c)
-			result = executeArgumentExpression(c, c.featureOrReference, slot)
+		for (ArgumentExpression exp : call.toCallStack) {
+			slot = context.resolve(exp)
+			result = doExecute(exp.featureOrReference, slot, exp)
 		}
 		return result
 	}
 	
-	def dispatch executeArgumentExpression(ArgumentExpression exp, EObject feature, Void slot) {
+	def dispatch doExecute(EObject feature, Void slot, ArgumentExpression exp) {
 		// fall-back
 		println("No implementation found for " + exp + " -> returning null")
 		null
 	}
 	
-	def dispatch executeArgumentExpression(ArgumentExpression exp, EObject feature, ExecutionVariable slot) {
+	def dispatch doExecute(EObject feature, ExecutionVariable slot, ArgumentExpression exp) {
 		slot.value
 	}
 	
-	def dispatch executeArgumentExpression(ArgumentExpression exp, EObject feature, CompositeSlot slot) {
+	def dispatch doExecute(EObject feature, CompositeSlot slot, ArgumentExpression exp) {
 		slot
 	}
 	
-	def dispatch executeArgumentExpression(ArgumentExpression exp, EObject feature, ExecutionEvent slot) {
-		return slot.raised
+	def dispatch doExecute(EObject feature, ExecutionEvent slot, ArgumentExpression exp) {
+		slot.raised
 	}
 	
-	def dispatch executeArgumentExpression(ArgumentExpression exp, Operation feature, ExecutionEvent slot) {
+	def dispatch doExecute(Operation feature, ExecutionEvent slot, ArgumentExpression exp) {
 		slot.raised = true
 	}
 	
-	def dispatch executeArgumentExpression(ArgumentExpression exp, Operation feature, ExecutionSlot slot) {
+	def dispatch doExecute(Operation feature, ExecutionSlot slot, ArgumentExpression exp) {
 		val executor = operationExecutors.findFirst[canExecute(exp)]
 		if (executor !== null) {
 			val result = executor.executeOperation(exp)
@@ -324,8 +324,8 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 		}
 	}
 	
-	def dispatch executeArgumentExpression(ArgumentExpression exp, Enumerator feature, Void slot) {
-		return new Long(feature.literalValue)
+	def dispatch doExecute(Enumerator feature, Void slot, ArgumentExpression exp) {
+		new Long(feature.literalValue)
 	}
 
 	def executeUnaryCoreFunction(Expression statement, String operator) {
