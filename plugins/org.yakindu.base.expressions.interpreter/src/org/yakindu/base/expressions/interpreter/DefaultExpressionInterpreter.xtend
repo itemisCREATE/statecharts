@@ -347,7 +347,7 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 		}
 	}
 	
-	def dispatch executeFeatureCall(FeatureCall call, Enumerator feature, ExecutionSlot slot) {
+	def dispatch executeFeatureCall(FeatureCall call, Enumerator feature, Void slot) {
 		return new Long(feature.literalValue)
 	}
 
