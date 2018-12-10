@@ -18,7 +18,6 @@ public class ChildFirstLocalReactions {
 	private ChildFirstLocalReactionsStatemachine statemachine;	
 	private VirtualTimer timer;
 	
-	protected long counter;
 	
 	@Before
 	public void childFirstLocalReactions_setUp() {
@@ -28,7 +27,6 @@ public class ChildFirstLocalReactions {
 		
 		statemachine.init();
 		
-		counter = 0l;
 	}
 
 	@After
