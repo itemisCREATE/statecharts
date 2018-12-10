@@ -18,6 +18,7 @@ import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.IncludeProvider
+import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
@@ -52,6 +53,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension INamingService
 	@Inject protected extension StatechartExtensions
+	@Inject protected extension ExpressionsChecker
 
 	protected GeneratorEntry entry
 
@@ -435,7 +437,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 
 	def dispatch functionPrototypes(VariableDefinition it) '''
 		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */
-		«IF const»const «ENDIF»«typeSpecifier.targetLanguageName» «it.asGetter»() const;
+		«IF isConstString»const «ENDIF»«typeSpecifier.targetLanguageName» «it.asGetter»() const;
 		
 		«IF !readonly && !const»
 			/*! Sets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */
