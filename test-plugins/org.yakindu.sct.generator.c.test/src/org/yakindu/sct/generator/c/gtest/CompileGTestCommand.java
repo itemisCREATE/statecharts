@@ -84,6 +84,9 @@ public class CompileGTestCommand {
 		command.add("-o");
 		command.add(getFileName(program));
 		command.add("-O1");
+		command.add("-Wall");
+		command.add("-Wextra");
+		command.add("-Werror");
 		if (dir != null)
 			command.add("-I" + dir + "/include");
 		for (String include : includes) {
