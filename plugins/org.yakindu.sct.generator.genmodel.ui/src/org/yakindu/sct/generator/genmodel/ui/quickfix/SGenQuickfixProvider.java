@@ -10,13 +10,24 @@
  */
 package org.yakindu.sct.generator.genmodel.ui.quickfix;
 
+import java.util.Collections;
 import java.util.Optional;
 
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.gmf.runtime.common.core.command.CommandResult;
+import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
@@ -36,6 +47,8 @@ import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
+import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 
 /**
  * 
@@ -43,6 +56,8 @@ import org.yakindu.sct.model.sgen.GeneratorModel;
  * 
  */
 public class SGenQuickfixProvider extends DefaultQuickfixProvider {
+	
+	public static final String CHANGE_DOMAIN_COMMAND = "Domain change command";
 
 	@Fix(SGenJavaValidator.CODE_REQUIRED_FEATURE)
 	public void AddRequiredFeature(final Issue issue, IssueResolutionAcceptor acceptor) {
@@ -57,7 +72,38 @@ public class SGenQuickfixProvider extends DefaultQuickfixProvider {
 					}
 				});
 	}
+	
+	@Fix(SGenJavaValidator.CODE_REQUIRED_DOMAIN)
+	public void changeToValidDomain(final Issue issue, IssueResolutionAcceptor acceptor) {
+		String[] validDomains = issue.getData()[0].split(",");
+		for(String validDomain : validDomains) {
+			addAcceptor(issue, acceptor, validDomain);
+		}
+	}
+	
+	private void addAcceptor(final Issue issue, IssueResolutionAcceptor acceptor, String validDomain) {
+		acceptor.accept(issue, validDomain, null, null, new ISemanticModification() {
+			@Override
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				if (element instanceof GeneratorEntry) {
+					EObject referencedStatechart = ((GeneratorEntry) element).getElementRef();
+					if (referencedStatechart instanceof Statechart) {
+						TransactionalEditingDomain sharedDomain = DiagramPartitioningUtil.getSharedDomain();
+						DomainChangeCommand refactoringCommand = new DomainChangeCommand(sharedDomain,
+								CHANGE_DOMAIN_COMMAND, Collections.EMPTY_LIST, validDomain,
+								(Statechart) referencedStatechart);
+						try {
+							refactoringCommand.execute(new NullProgressMonitor(), null);
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+					}
+				}
 
+			}
+		});
+	}
+	
 	private FeatureConfiguration getDefaultFeatureConfiguration(final Issue issue, EObject element) {
 		GeneratorModel model = (GeneratorModel) EcoreUtil2.getRootContainer(element);
 

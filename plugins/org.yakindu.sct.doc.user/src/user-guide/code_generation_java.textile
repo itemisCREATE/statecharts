@@ -827,6 +827,65 @@ public static void main(String[] args) {
     statemachine.runCycle();
 }
 
+p. 
+
+h4(#codegen_java_trace-observed_state_machine). Trace-observed state machine
+
+p. By using the tracing feature the execution of the state machine can be observed. In detail, entered and exited states can be traced. Therefore, additional operation callbacks _onStateEntered_ and _onStateExited_ are generated in the _ITracingListener_ interface:
+
+bc.. 
+/**
+ * Tracing interface for state machines.
+ * Must be implemented if tracing feature is used.
+ * Multiple listeners can be added to and removed from the state machine.
+ */
+public interface ITracingListener<T> {
+	
+	/**
+	 * OnStateEntered will be called if any state has been entered.
+	 */
+	void onStateEntered(T state);
+	
+	/**
+	* OnStateExited will be called if any state has been exited.
+	*/
+	void onStateExited(T state);
+}
+
+p. With additional generated API in the generated state machine, listeners can be added to and removed from the state machine. Therefore, an implementation of the _ITracingListener_ interface is required. A minimum implementation could be done like this:
+
+bc.. 
+public class TracingImpl<T> implements ITracingListener<T>{
+	@Override
+	public void onStateEntered(T state) {}
+	@Override
+	public void onStateExited(T state) {}
+}
+
+p. If the tracing feature is enabled, one or more listeners can be added:
+
+bc.. 
+public class StatemachineRunner {
+	public void runStatemachine() {
+		SomeStatemachine sm = new SomeStatemachine();
+		
+		// create multiple observer
+		TracingImpl<State> traceObserver1 = new TracingImpl<State>();
+		TracingImpl<State> traceObserver2 = new TracingImpl<State>();
+		
+		// add observer to the statemachine
+		sm.addTraceObserver(traceObserver1);
+		sm.addTraceObserver(traceObserver2);
+		
+		sm.init();
+		sm.enter();
+		
+		// remove observer if it is not needed anymore
+		sm.removeTraceObserver(traceObserver2);
+		
+		sm.runCycle();
+	}
+}
 
 
 h4(#codegen_java_integrating_generated_code). Integrating generated code

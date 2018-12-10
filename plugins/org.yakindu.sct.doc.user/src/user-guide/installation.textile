@@ -545,12 +545,11 @@ p=. Configuring automatic update
 
 h2(#inst_installing_a_yakindu_statechart_tools_license). Installing a YAKINDU Statechart Tools license
 
-The YAKINDU Statechart Tools Standard Edition for non-commercial use does not require any license to be installed.
+YAKINDU Statechart Tools Professional and Standard Edition come with an evaluation license that is valid for 30 days. If you want to continue working with YAKINDU Statechart Tools Professional or Standard Edition beyond that period of time you have to "*acquire a license*":https://www.itemis.com/en/yakindu/statechart-tools/licences/.
 
-The YAKINDU Statechart Tools Professional Edition trial version comes with an evaluation license that is valid for 30 days. If you want to continue working with YAKINDU Statechart Tools Professional Edition beyond that period of time or if you want to work with YAKINDU Statechart Tools Standard Edition for commercial purposes you have to "acquire a license":https://www.itemis.com/en/yakindu/statechart-tools/licences/.
+We offer academic licenses for the Professional Edition and non-commercial licenses for the Standard Edition which are both free of charge, but both require a license file, valid for one year. If you think you meet the requirements for these licenses, you can apply for them "*on our website*":https://www.itemis.com/en/yakindu/statechart-tools/licences/.
 
-The license manager documentation describes how you can install a license file or configure a license server for floating licenses. To access that documentation, select _Help → Help Contents_ from YAKINDU Statechart Tools' main menu, then open the _YAKINDU License Management_ documentation.
-
+The license manager documentation describes how you can install a license file or configure a license server for floating licenses. To access that documentation, select Help → Help Contents from YAKINDU Statechart Tools’ main menu, then open the YAKINDU License Management documentation. 
 
 
 
