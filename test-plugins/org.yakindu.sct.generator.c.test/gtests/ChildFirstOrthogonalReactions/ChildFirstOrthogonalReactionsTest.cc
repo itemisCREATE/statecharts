@@ -43,64 +43,64 @@ sc_boolean checkAC(sc_boolean ret);
 sc_boolean checkC(sc_boolean ret);
 sc_integer nextCounter();
 class CheckMock{
-	typedef sc_boolean (CheckMock::*functiontype)(const sc_string);
+	typedef sc_boolean (CheckMock::*functiontype)();
 	struct parameters {
 		const sc_string value;
-		sc_boolean (CheckMock::*behavior)(const sc_string);
+		sc_boolean (CheckMock::*behavior)();
 		inline bool operator==(const parameters& other) {
 			return (this->value == other.value);
 		}
 	};
 	public:
 	std::list<CheckMock::parameters> mocks;
-	sc_boolean (CheckMock::*checkBehaviorDefault)(const sc_string);
+	sc_boolean (CheckMock::*checkBehaviorDefault)();
 
-	sc_boolean check1(const sc_string value){
+	sc_boolean check1(){
 		return (tc->checkA(false));
 	}
 
-	sc_boolean check2(const sc_string value){
+	sc_boolean check2(){
 		return (tc->checkAA(false));
 	}
 
-	sc_boolean check3(const sc_string value){
+	sc_boolean check3(){
 		return (tc->checkAAA(false));
 	}
 
-	sc_boolean check4(const sc_string value){
+	sc_boolean check4(){
 		return (tc->checkAAC(false));
 	}
 
-	sc_boolean check5(const sc_string value){
+	sc_boolean check5(){
 		return (tc->checkAC(false));
 	}
 
-	sc_boolean check6(const sc_string value){
+	sc_boolean check6(){
 		return (tc->checkC(false));
 	}
 
-	sc_boolean check7(const sc_string value){
+	sc_boolean check7(){
 		return (tc->checkAAA(true));
 	}
 
-	sc_boolean check8(const sc_string value){
+	sc_boolean check8(){
 		return (tc->checkAA(true));
 	}
 
-	sc_boolean check9(const sc_string value){
+	sc_boolean check9(){
 		return (tc->checkA(true));
 	}
 
-	sc_boolean check10(const sc_string value){
+	sc_boolean check10(){
 		return (tc->checkC(true));
 	}
 
-	sc_boolean checkDefault(const sc_string value){
+	sc_boolean checkDefault(){
 		sc_boolean defaultValue = null;
 		return (defaultValue);
 	}
 
-	void setCheckBehavior(const sc_string value,sc_boolean (CheckMock::*func)(const sc_string)){
+	void setCheckBehavior(const sc_string value,sc_boolean (CheckMock::*func)()){
 		parameters p;
 		p.value = value;
 		p.behavior = func;
@@ -124,7 +124,7 @@ class CheckMock{
 		}
 	}
 	
-	void setDefaultBehavior(sc_boolean (CheckMock::*defaultBehavior)(const sc_string)){
+	void setDefaultBehavior(sc_boolean (CheckMock::*defaultBehavior)()){
 		checkBehaviorDefault = defaultBehavior;
 		mocks.clear();
 	}
@@ -389,7 +389,7 @@ TEST_F(ChildFirstOrthogonalReactionsTest, executionOrderWithLastLeafTransition) 
 
 
 sc_boolean childFirstOrthogonalReactionsIface_check(const ChildFirstOrthogonalReactions* statechart, const sc_string value) {
-	return (checkMock->*(checkMock->getBehavior(value)))(value);
+	return (checkMock->*(checkMock->getBehavior(value)))();
 }
 sc_integer childFirstOrthogonalReactionsIface_next(const ChildFirstOrthogonalReactions* statechart) {
 	return (nextMock->*(nextMock->getBehavior()))();
