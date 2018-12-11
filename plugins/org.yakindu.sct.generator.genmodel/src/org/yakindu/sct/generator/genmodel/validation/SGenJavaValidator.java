@@ -64,7 +64,7 @@ import com.google.inject.Injector;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SGenJavaValidator extends AbstractSGenJavaValidator {
+public class SGenJavaValidator extends AbstractSGenValidator {
 
 	public static final String MISSING_REQUIRED_PARAMETER = "Missing required parameter.";
 	public static final String MISSING_REQUIRED_FEATURE = "Missing required feature.";

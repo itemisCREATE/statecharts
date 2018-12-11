@@ -28,19 +28,21 @@ Require-Bundle: org.yakindu.sct.generator.genmodel;visibility:=reexport,
  org.yakindu.sct.ui,
  org.yakindu.sct.doc.user,
  org.yakindu.sct.generator.builder,
- org.yakindu.base.expressions.ui
+ org.yakindu.base.expressions.ui,
+ org.eclipse.xtext.xtext.ide
 Import-Package: org.apache.commons.logging,
  org.apache.log4j,
  org.eclipse.jdt.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: org.yakindu.sct.generator.genmodel.ui,
+Export-Package: org.yakindu.sct.generator.genmodel.ide,
+ org.yakindu.sct.generator.genmodel.ide.contentassist.antlr,
+ org.yakindu.sct.generator.genmodel.ide.contentassist.antlr.internal,
+ org.yakindu.sct.generator.genmodel.ui,
  org.yakindu.sct.generator.genmodel.ui.contentassist,
- org.yakindu.sct.generator.genmodel.ui.contentassist.antlr,
  org.yakindu.sct.generator.genmodel.ui.help,
  org.yakindu.sct.generator.genmodel.ui.internal,
  org.yakindu.sct.generator.genmodel.ui.quickfix,
- org.yakindu.sct.generator.genmodel.ui.wizard,
- org.yakindu.sct.generator.genmodel.ui.contentassist.antlr.internal
-Bundle-Activator: org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator
+ org.yakindu.sct.generator.genmodel.ui.wizard
+Bundle-Activator: org.yakindu.sct.generator.genmodel.ui.internal.GenmodelActivator
 Bundle-ActivationPolicy: lazy
 Automatic-Module-Name: org.yakindu.sct.generator.genmodel.ui

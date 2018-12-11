@@ -6,9 +6,16 @@
  * http://www.eclipse.org/legal/epl-v10.html 
  * Contributors:
  * committers of YAKINDU - initial API and implementation
- *
-*/
-package org.yakindu.sct.generator.genmodel.serializer;
+ */
+package org.yakindu.sct.generator.genmodel
 
-public class SGenSemanticSequencer extends AbstractSGenSemanticSequencer {
+/** 
+ * Initialization support for running Xtext languages 
+ * without equinox extension registry
+ */
+class SGenStandaloneSetup extends SGenStandaloneSetupGenerated {
+	
+	def static void doSetup() {
+		new SGenStandaloneSetup().createInjectorAndDoEMFRegistration()
+	}
 }
