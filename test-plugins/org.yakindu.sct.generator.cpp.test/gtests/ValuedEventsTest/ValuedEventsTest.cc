@@ -45,7 +45,7 @@ TEST_F(ValuedEventsTest, valuedEventsTest) {
 	
 	statechart->getDefaultSCI()->raise_realEvent( 20l);
 	
-	statechart->getDefaultSCI()->raise_stringEvent( "tool");
+	statechart->getDefaultSCI()->raise_stringEvent((sc_string) "tool");
 	
 	runner->proceed_cycles(1);
 	
