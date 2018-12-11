@@ -206,28 +206,7 @@ public class CompileGTestCommand {
 	
 	protected String compileCommand(String sourceFile, String objectFile) {
 		StringBuilder command = new StringBuilder();
-		command.append(compiler).append(" -c").append(" -o ").append(objectFile).append(" -O1 ");
-		if(compiler.contains("g++") && !sourceFile.endsWith("cc")) {
-			if(wPedantic) {
-				command.append(" -pedantic ");
-				command.append(" -pedantic-errors ");
-			}
-			
-			if(wAll) {
-				command.append(" -Wall ");
-			}
-			if(wExtra) {
-				command.append(" -Wextra ");
-			}
-			if(wError) {
-				command.append(" -Werror ");
-				
-			}
-			if(wConversion) {
-				command.append(" -Wconversion ");
-			}
-		}
-		command.append(sourceFile);
+		command.append(compiler).append(" -c").append(" -o ").append(objectFile).append(" -O1 ").append(sourceFile);
 		if (dir != null)
 			command.append(" -I" + dir + "/include");
 		for (String include : includes) {
