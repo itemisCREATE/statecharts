@@ -12,7 +12,6 @@ package org.yakindu.sct.domain.generic.editor;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.util.Modules2;
 import org.yakindu.sct.domain.extension.IModuleProvider;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -69,7 +68,7 @@ public class EditorModuleProvider implements IModuleProvider {
 	}
 
 	protected Module getLanguageRuntimeModule() {
-		return Modules2.mixin(new STextRuntimeModule(), new STextIdeModule());
+		return Modules.override(new STextIdeModule()).with(new STextRuntimeModule());
 	}
 
 }

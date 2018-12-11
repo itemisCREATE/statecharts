@@ -25,7 +25,7 @@ public class AsyncContentAssistContextFactory extends DefaultContentAssistantFac
 	@Override
 	protected ContentAssistant createAssistant() {
 		try {
-			//Async ContentAssist is only available since Oxygen
+			// Async ContentAssist is only available since Oxygen
 			Constructor<ContentAssistant> asyncConstructor = ContentAssistant.class.getConstructor(Boolean.TYPE);
 			return asyncConstructor.newInstance(true);
 		} catch (Exception e) {
