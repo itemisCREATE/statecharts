@@ -194,7 +194,7 @@ public class GTestHelper {
 				.includes(includes)
 				.sources(sourceFiles)
 				.directory(gTestDirectory)
-				//.makefileDir(targetPath.toString())
+				.makefileDir(targetPath.toString())
 				.mainLib(getMainLib());
 		 if(compiler == Compiler.GPLUSPLUS) {
 			 gTestCommand
