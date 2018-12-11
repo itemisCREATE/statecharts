@@ -6,8 +6,6 @@
 
 namespace  {
 
-void entryActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue();
-void exitActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue();
 statechartactions::StatechartEntryAndExitActions* statechart;
 
 
@@ -32,32 +30,6 @@ class StatechartEntryExitActions : public ::testing::Test{
 	}
 };
 
-void entryActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue(){
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 0l);
-	
-	statechart->getDefaultSCI()->set_b(false);
-	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 2l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 3l);
-	
-	
-}
-void exitActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue(){
-	statechart->enter();
-	
-	statechart->exit();
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 8l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 2l);
-	
-	
-}
 
 TEST_F(StatechartEntryExitActions, entryActionsAreExecutedOnEnteringStatechart) {
 	
