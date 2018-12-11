@@ -24,8 +24,7 @@ Require-Bundle: org.yakindu.sct.model.stext;visibility:=reexport,
  org.eclipse.compare,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend.lib;resolution:=optional,
- org.eclipse.xtext.ui.codetemplates.ui,
- org.eclipse.xtext.xtext.ide
+ org.eclipse.xtext.ui.codetemplates.ui
 Import-Package: org.apache.log4j,
  org.apache.commons.logging
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
