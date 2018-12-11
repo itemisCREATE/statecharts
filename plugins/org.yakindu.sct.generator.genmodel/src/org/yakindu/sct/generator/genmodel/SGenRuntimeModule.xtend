@@ -20,10 +20,12 @@ import org.yakindu.base.expressions.parser.SyntaxErrorMessageProvider
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.generator.genmodel.formatting.SGenFormatter
 import org.yakindu.sct.generator.genmodel.naming.GenModelQualifiedNameProvider
 import org.yakindu.sct.generator.genmodel.scoping.SGenGlobalScopeProvider
 import org.yakindu.sct.generator.genmodel.serializer.SGenCrossReferenceSerializer
 import org.yakindu.sct.generator.genmodel.typesystem.SGenTypeInferrer
+import org.yakindu.sct.generator.genmodel.valueconverter.SGenValueConverter
 
 class SGenRuntimeModule extends AbstractSGenRuntimeModule {
 
@@ -54,4 +56,13 @@ class SGenRuntimeModule extends AbstractSGenRuntimeModule {
 	override Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return SGenGlobalScopeProvider
 	}
+	
+	override bindIValueConverterService() {
+		SGenValueConverter
+	}
+	
+	override bindIFormatter() {
+		SGenFormatter
+	}
+	
 }

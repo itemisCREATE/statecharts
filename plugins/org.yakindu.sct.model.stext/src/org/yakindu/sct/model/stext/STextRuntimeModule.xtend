@@ -38,6 +38,7 @@ import org.yakindu.sct.model.stext.serialization.STextTransientValueService
 import org.yakindu.sct.model.stext.serializer.SCTSerializer
 import org.yakindu.sct.model.stext.terminals.STextValueConverterService
 import org.yakindu.sct.model.stext.validation.STextNamesAreUniqueValidationHelper
+import org.yakindu.sct.model.stext.formatting.STextFormatter
 
 /** 
  * Use this class to register components to be used at runtime / without the
@@ -121,4 +122,9 @@ class STextRuntimeModule extends AbstractSTextRuntimeModule {
 	override bindISerializer() {
 		SCTSerializer
 	}
+	
+	override bindIFormatter() {
+		STextFormatter
+	}
+	
 }
