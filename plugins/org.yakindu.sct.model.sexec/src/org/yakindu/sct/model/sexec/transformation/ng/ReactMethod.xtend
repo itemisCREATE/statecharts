@@ -68,7 +68,7 @@ class ReactMethod {
 	 */	
 	def defineReactMethods(ExecutionFlow it) {
 
-		flow.defineReactMethod
+		if (flow.reactMethod !== null) flow.defineReactMethod
 		states.forEach[s | s.defineReactMethod ]
 		
 	}
@@ -92,6 +92,15 @@ class ReactMethod {
 		]
 	}
 
+	def dispatch ExecutionNode declareReactMethod(ExecutionFlow node) {
+		node => [
+			features.add( sexecFactory.createMethod => [ m |
+				m.name = "react"
+				m._type(_bool)
+			])
+		]
+	}
+
 	
 	def defineReactMethod(ExecutionFlow it) {
 		reactMethod => [ body = 
@@ -111,7 +120,7 @@ class ReactMethod {
 		val childFirst = state.statechart.isChildFirstExecution
 				
 		val parentNode = if (state.parentState !== null) state.parentState.create else execState.flow
-		val processParent = 	   parentNode !== null 
+		val processParent = 	   parentNode !== null
 							&& (	    ( childFirst && parentNode.impactVector.last == execState.impactVector.last)
 							     || (!childFirst && parentNode.stateVector.offset == execState.stateVector.offset)
 							   )
@@ -129,7 +138,7 @@ class ReactMethod {
 					_if(tryTransitionParam._ref)
 						._then (
 							if (processParent && !childFirst) 
-								_if(_call(parentNode.reactMethod)._with(tryTransitionParam._ref)._equals(_false))
+								_if(parentNode.callReact(tryTransitionParam)._equals(_false))
 									._then ( 
 										execState.createReactionSequence(
 											didTransitionVariable._assign(_false)) 
@@ -139,14 +148,16 @@ class ReactMethod {
 									didTransitionVariable._assign(_false))
 						),
 								
-					_if(didTransitionVariable._ref._equals(_false))
-						._then(
-							_sequence(
-								execState.createLocalReactionSequence => [
-									if (processParent && childFirst) 
-										_step(didTransitionVariable._assign(_call(parentNode.reactMethod)._with(_ref(tryTransitionParam))))	
-								])		
-						),
+					if ( execState.localReactions.size > 0 || (processParent && childFirst ))
+						_if(didTransitionVariable._ref._equals(_false))
+							._then(
+								_sequence(
+									execState.createLocalReactionSequence => [
+										if (processParent && childFirst) 
+											_step(didTransitionVariable._assign(parentNode.callReact(tryTransitionParam)))	
+									])		
+							)
+					else _sequence(), // empty sequence ...
 						
 					_return(didTransitionVariable._ref)
 				)
@@ -164,6 +175,13 @@ class ReactMethod {
 	} 
 	
 
+
+	def dispatch callReact(ExecutionState state, EObject try_transition)  { _call(state.reactMethod)._with(_ref(try_transition)) }
+
+	def dispatch callReact(ExecutionFlow flow, Object try_transition)  { _call(flow.reactMethod) }
+	
+	
+	
 	def _step(Sequence it, Step step) {
 		steps.add(step)
 		return steps
@@ -348,5 +366,9 @@ class ReactMethod {
 		return cycle
 	}
 	
+	
+	def localReactions(ExecutionNode it) {
+		reactions.filter[ r | ! r.transition ].toList	
+	}
 	
 }
