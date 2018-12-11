@@ -37,25 +37,25 @@ TEST_F(ExitOnSelfTransitionTest, ExitOnSelfTransitionTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ExitOnSelfTransition::main_region_A));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_entryCount()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_entryCount()== 1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 0);
 	
 	statechart->getDefaultSCI()->raise_e();
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_entryCount()== 2l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_entryCount()== 2);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 1);
 	
 	statechart->getDefaultSCI()->raise_f();
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_entryCount()== 2l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_entryCount()== 2);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 2l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 2);
 	
 	
 }

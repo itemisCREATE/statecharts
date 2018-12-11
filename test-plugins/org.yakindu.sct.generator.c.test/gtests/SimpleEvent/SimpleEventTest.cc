@@ -41,7 +41,7 @@ void SimpleEventTest::simpleEventTest()
 {
 	simpleEvent_enter(&statechart);
 	EXPECT_TRUE(simpleEvent_isStateActive(&statechart, SimpleEvent_main_region_A)) << "Expected A to be active" ;
-	EXPECT_TRUE(5l== 5l);
+	EXPECT_TRUE(5== 5);
 	simpleEventIface_raise_event1(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(simpleEvent_isStateActive(&statechart, SimpleEvent_main_region_B)) << "Expected B to be active" ;

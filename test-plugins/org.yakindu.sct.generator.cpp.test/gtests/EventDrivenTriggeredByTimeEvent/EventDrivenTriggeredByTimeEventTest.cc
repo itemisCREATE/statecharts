@@ -38,45 +38,45 @@ TEST_F(EventDrivenTriggeredByTimeEventTest, timeEventTriggersRunCycle) {
 	
 	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_A));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0);
 	
 	runner->proceed_time(999);
 	
 	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_A));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0);
 	
 	runner->proceed_time(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_B));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_transition_count()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_transition_count()== 1);
 	
 	runner->proceed_time(1000);
 	
 	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_A));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_transition_count()== 2l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_transition_count()== 2);
 	
 	runner->proceed_time(999000);
 	
 	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_B));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_transition_count()== 1001l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_transition_count()== 1001);
 	
 	runner->proceed_time(999000);
 	
 	EXPECT_TRUE(statechart->isStateActive(eventdriven::EventDrivenTriggeredByTimeEvent::EventDrivenTriggeredByTimeEvent_r_A));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_transition_count()== 2000l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_transition_count()== 2000);
 	
 	statechart->exit();
 	

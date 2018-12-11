@@ -39,11 +39,11 @@ TEST_F(ValuedEventsTest, valuedEventsTest) {
 	
 	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), "sct") == 0);
 	
-	statechart->getDefaultSCI()->raise_integerEvent( 23l);
+	statechart->getDefaultSCI()->raise_integerEvent( 23);
 	
 	statechart->getDefaultSCI()->raise_booleanEvent( false);
 	
-	statechart->getDefaultSCI()->raise_realEvent( 20l);
+	statechart->getDefaultSCI()->raise_realEvent( 20);
 	
 	statechart->getDefaultSCI()->raise_stringEvent((sc_string) "tool");
 	
@@ -57,11 +57,11 @@ TEST_F(ValuedEventsTest, valuedEventsTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ValuedEvents::real_region_D));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_myInt()== 23l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_myInt()== 23);
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myBool()== false);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_myReal()== 20l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_myReal()== 20);
 	
 	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), "tool") == 0);
 	

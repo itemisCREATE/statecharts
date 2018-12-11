@@ -41,8 +41,8 @@ void IntegerExpressionsTest::integerExpressions()
 {
 	integerExpressions_enter(&statechart);
 	EXPECT_TRUE(integerExpressions_isStateActive(&statechart, IntegerExpressions_main_region_StateA));
-	EXPECT_TRUE(integerExpressionsIface_get_myInt1(&statechart)== 10l);
-	EXPECT_TRUE(integerExpressionsIface_get_myInt2(&statechart)== 5l);
+	EXPECT_TRUE(integerExpressionsIface_get_myInt1(&statechart)== 10);
+	EXPECT_TRUE(integerExpressionsIface_get_myInt2(&statechart)== 5);
 	integerExpressionsIface_raise_e1(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(integerExpressionsIface_get_less(&statechart)== false);
@@ -51,21 +51,21 @@ void IntegerExpressionsTest::integerExpressions()
 	EXPECT_TRUE(integerExpressionsIface_get_equalOrGreater(&statechart)== true);
 	EXPECT_TRUE(integerExpressionsIface_get_equal(&statechart)== false);
 	EXPECT_TRUE(integerExpressionsIface_get_notEqual(&statechart)== true);
-	EXPECT_TRUE(integerExpressionsIface_get_plus(&statechart)== 15l);
-	EXPECT_TRUE(integerExpressionsIface_get_minus(&statechart)== 5l);
-	EXPECT_TRUE(integerExpressionsIface_get_multiply(&statechart)== 50l);
-	EXPECT_TRUE(integerExpressionsIface_get_division(&statechart)== 2l);
-	EXPECT_TRUE(integerExpressionsIface_get_modulo(&statechart)== 0l);
-	EXPECT_TRUE(integerExpressionsIface_get_negat(&statechart)== - 10l );
-	EXPECT_TRUE(integerExpressionsIface_get_multiAssign(&statechart)== 20l);
-	EXPECT_TRUE(integerExpressionsIface_get_divAssign(&statechart)== 2l);
-	EXPECT_TRUE(integerExpressionsIface_get_plusAssign(&statechart)== 12l);
-	EXPECT_TRUE(integerExpressionsIface_get_minusAssign(&statechart)== - 8l );
-	EXPECT_TRUE(integerExpressionsIface_get_moduloAssign(&statechart)== 0l);
-	EXPECT_TRUE(integerExpressionsIface_get_decrementAssign(&statechart)== 0l);
-	EXPECT_TRUE(integerExpressionsIface_get_decrement(&statechart)== 1l);
-	EXPECT_TRUE(integerExpressionsIface_get_incrementAssign(&statechart)== 0l);
-	EXPECT_TRUE(integerExpressionsIface_get_increment(&statechart)== 1l);
+	EXPECT_TRUE(integerExpressionsIface_get_plus(&statechart)== 15);
+	EXPECT_TRUE(integerExpressionsIface_get_minus(&statechart)== 5);
+	EXPECT_TRUE(integerExpressionsIface_get_multiply(&statechart)== 50);
+	EXPECT_TRUE(integerExpressionsIface_get_division(&statechart)== 2);
+	EXPECT_TRUE(integerExpressionsIface_get_modulo(&statechart)== 0);
+	EXPECT_TRUE(integerExpressionsIface_get_negat(&statechart)== - 10 );
+	EXPECT_TRUE(integerExpressionsIface_get_multiAssign(&statechart)== 20);
+	EXPECT_TRUE(integerExpressionsIface_get_divAssign(&statechart)== 2);
+	EXPECT_TRUE(integerExpressionsIface_get_plusAssign(&statechart)== 12);
+	EXPECT_TRUE(integerExpressionsIface_get_minusAssign(&statechart)== - 8 );
+	EXPECT_TRUE(integerExpressionsIface_get_moduloAssign(&statechart)== 0);
+	EXPECT_TRUE(integerExpressionsIface_get_decrementAssign(&statechart)== 0);
+	EXPECT_TRUE(integerExpressionsIface_get_decrement(&statechart)== 1);
+	EXPECT_TRUE(integerExpressionsIface_get_incrementAssign(&statechart)== 0);
+	EXPECT_TRUE(integerExpressionsIface_get_increment(&statechart)== 1);
 }
 
 void IntegerExpressionsTest::setTimer(IntegerExpressions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){

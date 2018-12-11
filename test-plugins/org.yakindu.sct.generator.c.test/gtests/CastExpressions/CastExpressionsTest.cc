@@ -40,13 +40,13 @@ void CastExpressionsTest::SetUp()
 void CastExpressionsTest::CastExpressionTest()
 {
 	castExpressions_enter(&statechart);
-	EXPECT_TRUE(castExpressionsIface_get_realValue(&statechart)== 5l);
-	EXPECT_TRUE(castExpressionsIface_get_intValue(&statechart)== 5l);
+	EXPECT_TRUE(castExpressionsIface_get_realValue(&statechart)== 5);
+	EXPECT_TRUE(castExpressionsIface_get_intValue(&statechart)== 5);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(castExpressionsIface_get_realValue(&statechart)== 15l);
+	EXPECT_TRUE(castExpressionsIface_get_realValue(&statechart)== 15);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(castExpressions_isStateActive(&statechart, CastExpressions_main_region_C));
-	EXPECT_TRUE(castExpressionsIface_get_realValue(&statechart)== 757l);
+	EXPECT_TRUE(castExpressionsIface_get_realValue(&statechart)== 757);
 }
 
 void CastExpressionsTest::setTimer(CastExpressions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){

@@ -37,37 +37,37 @@ TEST_F(AlwaysOncycleTest, alwaysOnCycleTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateA));
 	
-	sc_integer count = 0l;
+	sc_integer count = 0;
 	
-	while (count< 5l) {
+	while (count< 5) {
 		runner->proceed_cycles(1);
 		EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateA));
 		count++;
 	}
 	
-	EXPECT_TRUE((statechart->getDefaultSCI()->get_value()== 5l));
+	EXPECT_TRUE((statechart->getDefaultSCI()->get_value()== 5));
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateB));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_value()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_value()== 0);
 	
-	count = 0l;
+	count = 0;
 	
-	while (count< 5l) {
+	while (count< 5) {
 		runner->proceed_cycles(1);
 		EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateB));
 		count++;
 	}
 	
-	EXPECT_TRUE((statechart->getDefaultSCI()->get_value()== 5l));
+	EXPECT_TRUE((statechart->getDefaultSCI()->get_value()== 5));
 	
 	runner->proceed_cycles(1);
 	
 	EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateA));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_value()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_value()== 0);
 	
 	
 }

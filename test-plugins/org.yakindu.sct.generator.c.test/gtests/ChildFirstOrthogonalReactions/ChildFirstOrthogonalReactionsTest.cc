@@ -196,43 +196,43 @@ void ChildFirstOrthogonalReactionsTest::SetUp()
 }
 sc_boolean ChildFirstOrthogonalReactionsTest::checkA(sc_boolean ret)
 {
-	childFirstOrthogonalReactionsIface_set_cnt(&statechart,childFirstOrthogonalReactionsIface_get_cnt(&statechart)+1l);
+	childFirstOrthogonalReactionsIface_set_cnt(&statechart,childFirstOrthogonalReactionsIface_get_cnt(&statechart)+1);
 	childFirstOrthogonalReactionsIface_set_a_check(&statechart,childFirstOrthogonalReactionsIface_get_cnt(&statechart));
 	return ret;
 }
 sc_boolean ChildFirstOrthogonalReactionsTest::checkAA(sc_boolean ret)
 {
-	childFirstOrthogonalReactionsIface_set_cnt(&statechart,childFirstOrthogonalReactionsIface_get_cnt(&statechart)+1l);
+	childFirstOrthogonalReactionsIface_set_cnt(&statechart,childFirstOrthogonalReactionsIface_get_cnt(&statechart)+1);
 	childFirstOrthogonalReactionsIface_set_aa_check(&statechart,childFirstOrthogonalReactionsIface_get_cnt(&statechart));
 	return ret;
 }
 sc_boolean ChildFirstOrthogonalReactionsTest::checkAAA(sc_boolean ret)
 {
-	childFirstOrthogonalReactionsIface_set_cnt(&statechart,childFirstOrthogonalReactionsIface_get_cnt(&statechart)+1l);
+	childFirstOrthogonalReactionsIface_set_cnt(&statechart,childFirstOrthogonalReactionsIface_get_cnt(&statechart)+1);
 	childFirstOrthogonalReactionsIface_set_aaa_check(&statechart,childFirstOrthogonalReactionsIface_get_cnt(&statechart));
 	return ret;
 }
 sc_boolean ChildFirstOrthogonalReactionsTest::checkAAC(sc_boolean ret)
 {
-	childFirstOrthogonalReactionsIface_set_cnt(&statechart,childFirstOrthogonalReactionsIface_get_cnt(&statechart)+1l);
+	childFirstOrthogonalReactionsIface_set_cnt(&statechart,childFirstOrthogonalReactionsIface_get_cnt(&statechart)+1);
 	childFirstOrthogonalReactionsIface_set_aac_check(&statechart,childFirstOrthogonalReactionsIface_get_cnt(&statechart));
 	return ret;
 }
 sc_boolean ChildFirstOrthogonalReactionsTest::checkAC(sc_boolean ret)
 {
-	childFirstOrthogonalReactionsIface_set_cnt(&statechart,childFirstOrthogonalReactionsIface_get_cnt(&statechart)+1l);
+	childFirstOrthogonalReactionsIface_set_cnt(&statechart,childFirstOrthogonalReactionsIface_get_cnt(&statechart)+1);
 	childFirstOrthogonalReactionsIface_set_ac_check(&statechart,childFirstOrthogonalReactionsIface_get_cnt(&statechart));
 	return ret;
 }
 sc_boolean ChildFirstOrthogonalReactionsTest::checkC(sc_boolean ret)
 {
-	childFirstOrthogonalReactionsIface_set_cnt(&statechart,childFirstOrthogonalReactionsIface_get_cnt(&statechart)+1l);
+	childFirstOrthogonalReactionsIface_set_cnt(&statechart,childFirstOrthogonalReactionsIface_get_cnt(&statechart)+1);
 	childFirstOrthogonalReactionsIface_set_c_check(&statechart,childFirstOrthogonalReactionsIface_get_cnt(&statechart));
 	return ret;
 }
 sc_integer ChildFirstOrthogonalReactionsTest::nextCounter()
 {
-	childFirstOrthogonalReactionsIface_set_cnt(&statechart,childFirstOrthogonalReactionsIface_get_cnt(&statechart)+1l);
+	childFirstOrthogonalReactionsIface_set_cnt(&statechart,childFirstOrthogonalReactionsIface_get_cnt(&statechart)+1);
 	return childFirstOrthogonalReactionsIface_get_cnt(&statechart);
 }
 void ChildFirstOrthogonalReactionsTest::executionOrder()
@@ -246,19 +246,19 @@ void ChildFirstOrthogonalReactionsTest::executionOrder()
 	nextMock->setDefaultBehavior(&NextMock::next1);
 	childFirstOrthogonalReactions_enter(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aaa_check(&statechart)== 1l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aaa_local(&statechart)== 2l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aac_check(&statechart)== 3l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aac_local(&statechart)== 4l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aa_check(&statechart)== 5l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aa_local(&statechart)== 6l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_ac_check(&statechart)== 7l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_ac_local(&statechart)== 8l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_a_check(&statechart)== 9l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_a_local(&statechart)== 10l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_c_check(&statechart)== 11l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_c_local(&statechart)== 12l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_sm_local(&statechart)== 13l);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aaa_check(&statechart)== 1);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aaa_local(&statechart)== 2);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aac_check(&statechart)== 3);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aac_local(&statechart)== 4);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aa_check(&statechart)== 5);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aa_local(&statechart)== 6);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_ac_check(&statechart)== 7);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_ac_local(&statechart)== 8);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_a_check(&statechart)== 9);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_a_local(&statechart)== 10);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_c_check(&statechart)== 11);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_c_local(&statechart)== 12);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_sm_local(&statechart)== 13);
 }
 void ChildFirstOrthogonalReactionsTest::executionOrderWIthFirstLeafTransition()
 {
@@ -271,19 +271,19 @@ void ChildFirstOrthogonalReactionsTest::executionOrderWIthFirstLeafTransition()
 	nextMock->setDefaultBehavior(&NextMock::next1);
 	childFirstOrthogonalReactions_enter(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aaa_check(&statechart)== 1l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aaa_local(&statechart)== 0l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aac_check(&statechart)== 0l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aac_local(&statechart)== 0l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aa_check(&statechart)== 0l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aa_local(&statechart)== 0l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_ac_check(&statechart)== 0l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_ac_local(&statechart)== 0l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_a_check(&statechart)== 0l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_a_local(&statechart)== 0l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_c_check(&statechart)== 2l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_c_local(&statechart)== 3l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_sm_local(&statechart)== 4l);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aaa_check(&statechart)== 1);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aaa_local(&statechart)== 0);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aac_check(&statechart)== 0);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aac_local(&statechart)== 0);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aa_check(&statechart)== 0);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aa_local(&statechart)== 0);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_ac_check(&statechart)== 0);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_ac_local(&statechart)== 0);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_a_check(&statechart)== 0);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_a_local(&statechart)== 0);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_c_check(&statechart)== 2);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_c_local(&statechart)== 3);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_sm_local(&statechart)== 4);
 }
 void ChildFirstOrthogonalReactionsTest::executionOrderWIthFirstParentTransition()
 {
@@ -296,19 +296,19 @@ void ChildFirstOrthogonalReactionsTest::executionOrderWIthFirstParentTransition(
 	nextMock->setDefaultBehavior(&NextMock::next1);
 	childFirstOrthogonalReactions_enter(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aaa_check(&statechart)== 1l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aaa_local(&statechart)== 2l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aac_check(&statechart)== 3l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aac_local(&statechart)== 4l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aa_check(&statechart)== 5l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aa_local(&statechart)== 0l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_ac_check(&statechart)== 0l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_ac_local(&statechart)== 0l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_a_check(&statechart)== 0l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_a_local(&statechart)== 0l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_c_check(&statechart)== 6l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_c_local(&statechart)== 7l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_sm_local(&statechart)== 8l);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aaa_check(&statechart)== 1);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aaa_local(&statechart)== 2);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aac_check(&statechart)== 3);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aac_local(&statechart)== 4);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aa_check(&statechart)== 5);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aa_local(&statechart)== 0);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_ac_check(&statechart)== 0);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_ac_local(&statechart)== 0);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_a_check(&statechart)== 0);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_a_local(&statechart)== 0);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_c_check(&statechart)== 6);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_c_local(&statechart)== 7);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_sm_local(&statechart)== 8);
 }
 void ChildFirstOrthogonalReactionsTest::executionOrderWIthFirstGrandParentTransition()
 {
@@ -321,19 +321,19 @@ void ChildFirstOrthogonalReactionsTest::executionOrderWIthFirstGrandParentTransi
 	nextMock->setDefaultBehavior(&NextMock::next1);
 	childFirstOrthogonalReactions_enter(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aaa_check(&statechart)== 1l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aaa_local(&statechart)== 2l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aac_check(&statechart)== 3l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aac_local(&statechart)== 4l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aa_check(&statechart)== 5l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aa_local(&statechart)== 6l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_ac_check(&statechart)== 7l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_ac_local(&statechart)== 8l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_a_check(&statechart)== 9l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_a_local(&statechart)== 0l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_c_check(&statechart)== 10l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_c_local(&statechart)== 11l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_sm_local(&statechart)== 12l);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aaa_check(&statechart)== 1);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aaa_local(&statechart)== 2);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aac_check(&statechart)== 3);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aac_local(&statechart)== 4);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aa_check(&statechart)== 5);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aa_local(&statechart)== 6);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_ac_check(&statechart)== 7);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_ac_local(&statechart)== 8);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_a_check(&statechart)== 9);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_a_local(&statechart)== 0);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_c_check(&statechart)== 10);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_c_local(&statechart)== 11);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_sm_local(&statechart)== 12);
 }
 void ChildFirstOrthogonalReactionsTest::executionOrderWithLastLeafTransition()
 {
@@ -346,19 +346,19 @@ void ChildFirstOrthogonalReactionsTest::executionOrderWithLastLeafTransition()
 	nextMock->setDefaultBehavior(&NextMock::next1);
 	childFirstOrthogonalReactions_enter(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aaa_check(&statechart)== 1l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aaa_local(&statechart)== 2l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aac_check(&statechart)== 3l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aac_local(&statechart)== 4l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aa_check(&statechart)== 5l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aa_local(&statechart)== 6l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_ac_check(&statechart)== 7l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_ac_local(&statechart)== 8l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_a_check(&statechart)== 9l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_a_local(&statechart)== 10l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_c_check(&statechart)== 11l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_c_local(&statechart)== 0l);
-	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_sm_local(&statechart)== 12l);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aaa_check(&statechart)== 1);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aaa_local(&statechart)== 2);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aac_check(&statechart)== 3);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aac_local(&statechart)== 4);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aa_check(&statechart)== 5);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_aa_local(&statechart)== 6);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_ac_check(&statechart)== 7);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_ac_local(&statechart)== 8);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_a_check(&statechart)== 9);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_a_local(&statechart)== 10);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_c_check(&statechart)== 11);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_c_local(&statechart)== 0);
+	EXPECT_TRUE(childFirstOrthogonalReactionsIface_get_sm_local(&statechart)== 12);
 }
 
 void ChildFirstOrthogonalReactionsTest::setTimer(ChildFirstOrthogonalReactions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){

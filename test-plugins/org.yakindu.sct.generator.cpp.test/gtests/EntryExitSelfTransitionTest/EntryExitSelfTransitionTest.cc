@@ -36,11 +36,11 @@ void init(){
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_entries()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_entries()== 1);
 	
 	EXPECT_TRUE(statechart->isStateActive(EntryExitSelfTransition::main_region_A__region0_B));
 	
-	statechart->getDefaultSCI()->set_entries(0l);
+	statechart->getDefaultSCI()->set_entries(0);
 	
 	
 }
@@ -53,9 +53,9 @@ TEST_F(EntryExitSelfTransitionTest, SelfTransitionToChildState) {
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_entries()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_entries()== 1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_exits()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_exits()== 1);
 	
 	EXPECT_TRUE(statechart->isStateActive(EntryExitSelfTransition::main_region_A__region0_C));
 	
@@ -71,9 +71,9 @@ TEST_F(EntryExitSelfTransitionTest, SelfTransitionFromChildState) {
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_entries()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_entries()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_exits()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_exits()== 0);
 	
 	EXPECT_TRUE(statechart->isStateActive(EntryExitSelfTransition::main_region_A__region0_C));
 	
@@ -83,9 +83,9 @@ TEST_F(EntryExitSelfTransitionTest, SelfTransitionFromChildState) {
 	
 	EXPECT_TRUE(statechart->isStateActive(EntryExitSelfTransition::main_region_A__region0_B));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_entries()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_entries()== 1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_exits()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_exits()== 1);
 	
 	statechart->exit();
 	

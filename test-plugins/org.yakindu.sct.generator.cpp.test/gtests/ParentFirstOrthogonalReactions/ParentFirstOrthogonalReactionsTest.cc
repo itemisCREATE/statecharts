@@ -182,7 +182,7 @@ class ParentFirstOrthogonalReactionsTest : public ::testing::Test{
 };
 
 sc_boolean checkA(sc_boolean ret){
-	statechart->getDefaultSCI()->set_cnt(statechart->getDefaultSCI()->get_cnt()+1l);
+	statechart->getDefaultSCI()->set_cnt(statechart->getDefaultSCI()->get_cnt()+1);
 	
 	statechart->getDefaultSCI()->set_a_check(statechart->getDefaultSCI()->get_cnt());
 	
@@ -191,7 +191,7 @@ sc_boolean checkA(sc_boolean ret){
 	
 }
 sc_boolean checkAA(sc_boolean ret){
-	statechart->getDefaultSCI()->set_cnt(statechart->getDefaultSCI()->get_cnt()+1l);
+	statechart->getDefaultSCI()->set_cnt(statechart->getDefaultSCI()->get_cnt()+1);
 	
 	statechart->getDefaultSCI()->set_aa_check(statechart->getDefaultSCI()->get_cnt());
 	
@@ -200,7 +200,7 @@ sc_boolean checkAA(sc_boolean ret){
 	
 }
 sc_boolean checkAAA(sc_boolean ret){
-	statechart->getDefaultSCI()->set_cnt(statechart->getDefaultSCI()->get_cnt()+1l);
+	statechart->getDefaultSCI()->set_cnt(statechart->getDefaultSCI()->get_cnt()+1);
 	
 	statechart->getDefaultSCI()->set_aaa_check(statechart->getDefaultSCI()->get_cnt());
 	
@@ -209,7 +209,7 @@ sc_boolean checkAAA(sc_boolean ret){
 	
 }
 sc_boolean checkAAC(sc_boolean ret){
-	statechart->getDefaultSCI()->set_cnt(statechart->getDefaultSCI()->get_cnt()+1l);
+	statechart->getDefaultSCI()->set_cnt(statechart->getDefaultSCI()->get_cnt()+1);
 	
 	statechart->getDefaultSCI()->set_aac_check(statechart->getDefaultSCI()->get_cnt());
 	
@@ -218,7 +218,7 @@ sc_boolean checkAAC(sc_boolean ret){
 	
 }
 sc_boolean checkAC(sc_boolean ret){
-	statechart->getDefaultSCI()->set_cnt(statechart->getDefaultSCI()->get_cnt()+1l);
+	statechart->getDefaultSCI()->set_cnt(statechart->getDefaultSCI()->get_cnt()+1);
 	
 	statechart->getDefaultSCI()->set_ac_check(statechart->getDefaultSCI()->get_cnt());
 	
@@ -227,7 +227,7 @@ sc_boolean checkAC(sc_boolean ret){
 	
 }
 sc_boolean checkC(sc_boolean ret){
-	statechart->getDefaultSCI()->set_cnt(statechart->getDefaultSCI()->get_cnt()+1l);
+	statechart->getDefaultSCI()->set_cnt(statechart->getDefaultSCI()->get_cnt()+1);
 	
 	statechart->getDefaultSCI()->set_c_check(statechart->getDefaultSCI()->get_cnt());
 	
@@ -236,7 +236,7 @@ sc_boolean checkC(sc_boolean ret){
 	
 }
 sc_integer nextCounter(){
-	statechart->getDefaultSCI()->set_cnt(statechart->getDefaultSCI()->get_cnt()+1l);
+	statechart->getDefaultSCI()->set_cnt(statechart->getDefaultSCI()->get_cnt()+1);
 	
 	return statechart->getDefaultSCI()->get_cnt();
 	
@@ -269,31 +269,31 @@ TEST_F(ParentFirstOrthogonalReactionsTest, executionOrder) {
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_check()== 2l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_check()== 2);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 3l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 3);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_check()== 4l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_check()== 4);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 5l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 5);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_check()== 6l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_check()== 6);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 7l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 7);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aac_check()== 8l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aac_check()== 8);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aac_local()== 9l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aac_local()== 9);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_ac_check()== 10l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_ac_check()== 10);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_ac_local()== 11l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_ac_local()== 11);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_c_check()== 12l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_c_check()== 12);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_c_local()== 13l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_c_local()== 13);
 	
 	
 	checkMock->reset();
@@ -325,31 +325,31 @@ TEST_F(ParentFirstOrthogonalReactionsTest, executionOrderWIthFirstLeafTransition
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_check()== 2l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_check()== 2);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 3l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 3);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_check()== 4l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_check()== 4);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 5l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 5);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_check()== 6l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_check()== 6);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aac_check()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aac_check()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aac_local()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aac_local()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_ac_check()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_ac_check()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_ac_local()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_ac_local()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_c_check()== 7l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_c_check()== 7);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_c_local()== 8l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_c_local()== 8);
 	
 	
 	checkMock->reset();
@@ -381,31 +381,31 @@ TEST_F(ParentFirstOrthogonalReactionsTest, executionOrderWIthFirstParentTransiti
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_check()== 2l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_check()== 2);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 3l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 3);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_check()== 4l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_check()== 4);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_check()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_check()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aac_check()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aac_check()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aac_local()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aac_local()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_ac_check()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_ac_check()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_ac_local()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_ac_local()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_c_check()== 5l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_c_check()== 5);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_c_local()== 6l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_c_local()== 6);
 	
 	
 	checkMock->reset();
@@ -437,31 +437,31 @@ TEST_F(ParentFirstOrthogonalReactionsTest, executionOrderWIthFirstGrandParentTra
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_check()== 2l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_check()== 2);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_check()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_check()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_check()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_check()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aac_check()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aac_check()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aac_local()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aac_local()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_ac_check()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_ac_check()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_ac_local()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_ac_local()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_c_check()== 3l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_c_check()== 3);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_c_local()== 4l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_c_local()== 4);
 	
 	
 	checkMock->reset();
@@ -493,31 +493,31 @@ TEST_F(ParentFirstOrthogonalReactionsTest, executionOrderWithLastLeafTransition)
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_check()== 2l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_check()== 2);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 3l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 3);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_check()== 4l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_check()== 4);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 5l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 5);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_check()== 6l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_check()== 6);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 7l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 7);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aac_check()== 8l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aac_check()== 8);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aac_local()== 9l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aac_local()== 9);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_ac_check()== 10l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_ac_check()== 10);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_ac_local()== 11l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_ac_local()== 11);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_c_check()== 12l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_c_check()== 12);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_c_local()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_c_local()== 0);
 	
 	
 	checkMock->reset();

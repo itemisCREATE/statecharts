@@ -40,8 +40,8 @@ void DeepEntryTest::SetUp()
 void DeepEntryTest::enterToSubstate()
 {
 	deepEntry_enter(&statechart);
-	sc_integer vergleich = 4l;
-	EXPECT_TRUE(vergleich== 4l);
+	sc_integer vergleich = 4;
+	EXPECT_TRUE(vergleich== 4);
 	deepEntry_exit(&statechart);
 }
 

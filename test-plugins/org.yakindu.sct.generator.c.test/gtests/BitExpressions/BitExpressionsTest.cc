@@ -41,17 +41,17 @@ void BitExpressionsTest::bitExpressions()
 {
 	bitExpressions_enter(&statechart);
 	EXPECT_TRUE(bitExpressions_isStateActive(&statechart, BitExpressions_main_region_StateA));
-	EXPECT_TRUE(bitExpressionsIface_get_myBit1(&statechart)== 5l);
-	EXPECT_TRUE(bitExpressionsIface_get_myBit2(&statechart)== 7l);
+	EXPECT_TRUE(bitExpressionsIface_get_myBit1(&statechart)== 5);
+	EXPECT_TRUE(bitExpressionsIface_get_myBit2(&statechart)== 7);
 	bitExpressionsIface_raise_e1(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(bitExpressions_isStateActive(&statechart, BitExpressions_main_region_StateB));
-	EXPECT_TRUE(bitExpressionsIface_get_leftBitshift(&statechart)== 10l);
-	EXPECT_TRUE(bitExpressionsIface_get_rightBitshift(&statechart)== 2l);
-	EXPECT_TRUE(bitExpressionsIface_get_complementBitshift(&statechart)== - 6l );
-	EXPECT_TRUE(bitExpressionsIface_get_bitwiseAnd(&statechart)== 5l);
-	EXPECT_TRUE(bitExpressionsIface_get_bitwiseOr(&statechart)== 7l);
-	EXPECT_TRUE(bitExpressionsIface_get_bitwiseXor(&statechart)== 2l);
+	EXPECT_TRUE(bitExpressionsIface_get_leftBitshift(&statechart)== 10);
+	EXPECT_TRUE(bitExpressionsIface_get_rightBitshift(&statechart)== 2);
+	EXPECT_TRUE(bitExpressionsIface_get_complementBitshift(&statechart)== - 6 );
+	EXPECT_TRUE(bitExpressionsIface_get_bitwiseAnd(&statechart)== 5);
+	EXPECT_TRUE(bitExpressionsIface_get_bitwiseOr(&statechart)== 7);
+	EXPECT_TRUE(bitExpressionsIface_get_bitwiseXor(&statechart)== 2);
 }
 
 void BitExpressionsTest::setTimer(BitExpressions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){

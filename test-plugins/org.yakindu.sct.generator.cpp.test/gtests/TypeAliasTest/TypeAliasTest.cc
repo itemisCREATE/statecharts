@@ -37,7 +37,7 @@ TEST_F(TypeAliasTest, TypeAliasTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(TypeAlias::main_region_Start));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_myVar()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_myVar()== 1);
 	
 	runner->proceed_cycles(1);
 	

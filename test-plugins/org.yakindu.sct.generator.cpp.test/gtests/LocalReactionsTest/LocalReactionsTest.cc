@@ -39,7 +39,7 @@ TEST_F(LocalReactionsTest, LocalReactionsTest) {
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 1);
 	
 	
 }

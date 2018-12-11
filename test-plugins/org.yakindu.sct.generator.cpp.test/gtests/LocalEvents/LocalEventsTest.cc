@@ -45,13 +45,13 @@ TEST_F(LocalEventsTest, test) {
 	
 	EXPECT_TRUE(statechart->isStateActive(eventdriven::LocalEvents::localEvents_r2_Comp2_r_D2));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_cycleCountSm()== 5l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_cycleCountSm()== 5);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_cycleCount1()== 5l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_cycleCount1()== 5);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_cycleCount2()== 5l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_cycleCount2()== 5);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_checksum()== 3l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_checksum()== 3);
 	
 	statechart->exit();
 	

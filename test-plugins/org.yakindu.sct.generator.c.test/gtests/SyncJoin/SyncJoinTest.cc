@@ -117,7 +117,7 @@ void SyncJoinTest::doubleEntryActionBug()
 	syncJoinIface_raise_jd(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(syncJoin_isStateActive(&statechart, SyncJoin_main_region_A));
-	EXPECT_TRUE(syncJoinIface_get_x(&statechart)== 1l);
+	EXPECT_TRUE(syncJoinIface_get_x(&statechart)== 1);
 }
 
 void SyncJoinTest::setTimer(SyncJoin* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){

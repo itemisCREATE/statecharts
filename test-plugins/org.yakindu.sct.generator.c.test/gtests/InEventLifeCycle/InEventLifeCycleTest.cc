@@ -41,9 +41,9 @@ void InEventLifeCycleTest::eventLifeCycle()
 {
 	inEventLifeCycle_enter(&statechart);
 	inEventLifeCycleIface_raise_e(&statechart);
-	EXPECT_TRUE(inEventLifeCycleIface_get_i(&statechart)== 0l);
+	EXPECT_TRUE(inEventLifeCycleIface_get_i(&statechart)== 0);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(inEventLifeCycleIface_get_i(&statechart)== 1l);
+	EXPECT_TRUE(inEventLifeCycleIface_get_i(&statechart)== 1);
 }
 
 void InEventLifeCycleTest::setTimer(InEventLifeCycle* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){

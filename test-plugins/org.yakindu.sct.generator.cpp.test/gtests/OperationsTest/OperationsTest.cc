@@ -1275,7 +1275,7 @@ TEST_F(OperationsTest, operationsCalled) {
 	
 	EXPECT_TRUE(internalOperation1Mock->calledAtLeastOnce());
 	
-	EXPECT_TRUE(internalOperation2Mock->calledAtLeastOnce(4l));
+	EXPECT_TRUE(internalOperation2Mock->calledAtLeastOnce(4));
 	
 	EXPECT_TRUE(internalOperation3Mock->calledAtLeastOnce());
 	
@@ -1283,7 +1283,7 @@ TEST_F(OperationsTest, operationsCalled) {
 	
 	EXPECT_TRUE(internalOperation4Mock->calledAtLeastOnce());
 	
-	EXPECT_TRUE(internalOperation4aMock->calledAtLeastOnce(5l));
+	EXPECT_TRUE(internalOperation4aMock->calledAtLeastOnce(5));
 	
 	EXPECT_TRUE(internalOperation5Mock->calledAtLeastOnce());
 	
@@ -1297,7 +1297,7 @@ TEST_F(OperationsTest, operationsCalled) {
 	
 	EXPECT_TRUE(interface1InterfaceOperation1Mock->calledAtLeastOnce());
 	
-	EXPECT_TRUE(interface1InterfaceOperation2Mock->calledAtLeastOnce(4l));
+	EXPECT_TRUE(interface1InterfaceOperation2Mock->calledAtLeastOnce(4));
 	
 	EXPECT_TRUE(interface1InterfaceOperation3Mock->calledAtLeastOnce());
 	
@@ -1305,7 +1305,7 @@ TEST_F(OperationsTest, operationsCalled) {
 	
 	EXPECT_TRUE(interface1InterfaceOperation4Mock->calledAtLeastOnce());
 	
-	EXPECT_TRUE(interface1InterfaceOperation4aMock->calledAtLeastOnce(5l));
+	EXPECT_TRUE(interface1InterfaceOperation4aMock->calledAtLeastOnce(5));
 	
 	EXPECT_TRUE(interface1InterfaceOperation5Mock->calledAtLeastOnce());
 	
@@ -1319,7 +1319,7 @@ TEST_F(OperationsTest, operationsCalled) {
 	
 	EXPECT_TRUE(unnamedInterfaceOperation1Mock->calledAtLeastOnce());
 	
-	EXPECT_TRUE(unnamedInterfaceOperation2Mock->calledAtLeastOnce(4l));
+	EXPECT_TRUE(unnamedInterfaceOperation2Mock->calledAtLeastOnce(4));
 	
 	EXPECT_TRUE(unnamedOperation3Mock->calledAtLeastOnce());
 	
@@ -1327,7 +1327,7 @@ TEST_F(OperationsTest, operationsCalled) {
 	
 	EXPECT_TRUE(unnamedOperation4Mock->calledAtLeastOnce());
 	
-	EXPECT_TRUE(unnamedOperation4aMock->calledAtLeastOnce(5l));
+	EXPECT_TRUE(unnamedOperation4aMock->calledAtLeastOnce(5));
 	
 	EXPECT_TRUE(unnamedOperation5Mock->calledAtLeastOnce());
 	
@@ -1402,7 +1402,7 @@ TEST_F(OperationsTest, operationsNotCalled) {
 	
 	EXPECT_FALSE(internalOperation1Mock->calledAtLeastOnce());
 	
-	EXPECT_FALSE(internalOperation2Mock->calledAtLeastOnce(4l));
+	EXPECT_FALSE(internalOperation2Mock->calledAtLeastOnce(4));
 	
 	EXPECT_FALSE(internalOperation3Mock->calledAtLeastOnce());
 	
@@ -1410,7 +1410,7 @@ TEST_F(OperationsTest, operationsNotCalled) {
 	
 	EXPECT_FALSE(internalOperation4Mock->calledAtLeastOnce());
 	
-	EXPECT_FALSE(internalOperation4aMock->calledAtLeastOnce(5l));
+	EXPECT_FALSE(internalOperation4aMock->calledAtLeastOnce(5));
 	
 	EXPECT_FALSE(internalOperation5Mock->calledAtLeastOnce());
 	
@@ -1424,7 +1424,7 @@ TEST_F(OperationsTest, operationsNotCalled) {
 	
 	EXPECT_FALSE(interface1InterfaceOperation1Mock->calledAtLeastOnce());
 	
-	EXPECT_FALSE(interface1InterfaceOperation2Mock->calledAtLeastOnce(4l));
+	EXPECT_FALSE(interface1InterfaceOperation2Mock->calledAtLeastOnce(4));
 	
 	EXPECT_FALSE(interface1InterfaceOperation3Mock->calledAtLeastOnce());
 	
@@ -1432,7 +1432,7 @@ TEST_F(OperationsTest, operationsNotCalled) {
 	
 	EXPECT_FALSE(interface1InterfaceOperation4Mock->calledAtLeastOnce());
 	
-	EXPECT_FALSE(interface1InterfaceOperation4aMock->calledAtLeastOnce(5l));
+	EXPECT_FALSE(interface1InterfaceOperation4aMock->calledAtLeastOnce(5));
 	
 	EXPECT_FALSE(interface1InterfaceOperation5Mock->calledAtLeastOnce());
 	
@@ -1446,7 +1446,7 @@ TEST_F(OperationsTest, operationsNotCalled) {
 	
 	EXPECT_FALSE(unnamedInterfaceOperation1Mock->calledAtLeastOnce());
 	
-	EXPECT_FALSE(unnamedInterfaceOperation2Mock->calledAtLeastOnce(4l));
+	EXPECT_FALSE(unnamedInterfaceOperation2Mock->calledAtLeastOnce(4));
 	
 	EXPECT_FALSE(unnamedOperation3Mock->calledAtLeastOnce());
 	
@@ -1454,7 +1454,7 @@ TEST_F(OperationsTest, operationsNotCalled) {
 	
 	EXPECT_FALSE(unnamedOperation4Mock->calledAtLeastOnce());
 	
-	EXPECT_FALSE(unnamedOperation4aMock->calledAtLeastOnce(5l));
+	EXPECT_FALSE(unnamedOperation4aMock->calledAtLeastOnce(5));
 	
 	EXPECT_FALSE(unnamedOperation5Mock->calledAtLeastOnce());
 	

@@ -42,17 +42,17 @@ void StatechartLocalReactionsTest::statechartLocalReactionsTest()
 	statechartLocalReactions_enter(&statechart);
 	EXPECT_TRUE(statechartLocalReactions_isStateActive(&statechart, StatechartLocalReactions_main_region_S1));
 	EXPECT_TRUE(statechartLocalReactions_isStateActive(&statechart, StatechartLocalReactions_region2_a));
-	sc_integer cycles = 0l;
-	while (cycles< 10l) {
+	sc_integer cycles = 0;
+	while (cycles< 10) {
 		EXPECT_TRUE(statechartLocalReactions_isStateActive(&statechart, StatechartLocalReactions_region2_a));
-		if (statechartLocalReactionsIface_get_myInt(&statechart)%2l== 0l) {
+		if (statechartLocalReactionsIface_get_myInt(&statechart)%2== 0) {
 			EXPECT_TRUE(statechartLocalReactions_isStateActive(&statechart, StatechartLocalReactions_main_region_S1));
 		}
 		else {
 			EXPECT_TRUE(statechartLocalReactions_isStateActive(&statechart, StatechartLocalReactions_main_region_S2));
 		}
 		sc_timer_service_proceed_cycles(&timer_service, 1);
-		cycles += 1l;
+		cycles += 1;
 		EXPECT_TRUE((statechartLocalReactionsIface_get_myInt(&statechart)== cycles));
 	}
 }

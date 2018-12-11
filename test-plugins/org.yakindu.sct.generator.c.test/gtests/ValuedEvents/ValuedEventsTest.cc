@@ -42,18 +42,18 @@ void ValuedEventsTest::valuedEventsTest()
 	valuedEvents_enter(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(strcmp(valuedEventsIface_get_myString(&statechart), "sct") == 0);
-	valuedEventsIface_raise_integerEvent(&statechart, 23l);
+	valuedEventsIface_raise_integerEvent(&statechart, 23);
 	valuedEventsIface_raise_booleanEvent(&statechart, false);
-	valuedEventsIface_raise_realEvent(&statechart, 20l);
+	valuedEventsIface_raise_realEvent(&statechart, 20);
 	valuedEventsIface_raise_stringEvent(&statechart, "tool");
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(valuedEvents_isStateActive(&statechart, ValuedEvents_integer_region_D));
 	EXPECT_TRUE(valuedEvents_isStateActive(&statechart, ValuedEvents_string_region_D));
 	EXPECT_TRUE(valuedEvents_isStateActive(&statechart, ValuedEvents_boolean_region_D));
 	EXPECT_TRUE(valuedEvents_isStateActive(&statechart, ValuedEvents_real_region_D));
-	EXPECT_TRUE(valuedEventsIface_get_myInt(&statechart)== 23l);
+	EXPECT_TRUE(valuedEventsIface_get_myInt(&statechart)== 23);
 	EXPECT_TRUE(valuedEventsIface_get_myBool(&statechart)== false);
-	EXPECT_TRUE(valuedEventsIface_get_myReal(&statechart)== 20l);
+	EXPECT_TRUE(valuedEventsIface_get_myReal(&statechart)== 20);
 	EXPECT_TRUE(strcmp(valuedEventsIface_get_myString(&statechart), "tool") == 0);
 }
 

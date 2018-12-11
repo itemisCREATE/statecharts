@@ -37,11 +37,11 @@ TEST_F(InEventLifeCycleTest, eventLifeCycle) {
 	
 	statechart->getDefaultSCI()->raise_e();
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_i()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_i()== 0);
 	
 	runner->proceed_cycles(1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_i()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_i()== 1);
 	
 	
 }

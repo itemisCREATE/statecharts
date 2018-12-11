@@ -35,9 +35,9 @@ TEST_F(DeepEntryTest, enterToSubstate) {
 	
 	statechart->enter();
 	
-	sc_integer vergleich = 4l;
+	sc_integer vergleich = 4;
 	
-	EXPECT_TRUE(vergleich== 4l);
+	EXPECT_TRUE(vergleich== 4);
 	
 	statechart->exit();
 	
