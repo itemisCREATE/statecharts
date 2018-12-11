@@ -64,7 +64,10 @@ before_script:
 before_install:
 - sh -e /etc/init.d/xvfb start - sleep 10
 script:
+# Check files for existing comments (must be on first line)
 - ./noFileComment.sh "*.java" 'src-gen|xtend|xtend-gen|/target/|test-gen'
+- ./noFileComment.sh "*.xtend" 'src-gen|/xtend/|xtend-gen|/target/|test-gen'
+# Proceed with actual build
 - cd releng/org.yakindu.sct.releng
 - mvn clean verify -P$TARGET,tests
 # Display ccache usage statistics
