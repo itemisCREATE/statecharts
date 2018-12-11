@@ -1,4 +1,3 @@
-
 /**
  * Copyright (c) 2017 itemis AG and others.
  * All rights reserved. This program and the accompanying materials
@@ -34,6 +33,7 @@ public class TestCompletenessAssertions {
 	public void assertAllChecksHaveTests(Class<?> validatorClass, Class<?> validatorTestClass) {
 		Iterable<Method> methods = Lists.newArrayList(validatorClass.getDeclaredMethods());
 		methods = Iterables.filter(methods, new Predicate<Method>() {
+			@Override
 			public boolean apply(Method input) {
 				return input.getAnnotation(Check.class) != null;
 			}

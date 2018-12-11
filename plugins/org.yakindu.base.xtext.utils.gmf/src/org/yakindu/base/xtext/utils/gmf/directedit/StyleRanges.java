@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2018 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ *
+ */
 package org.yakindu.base.xtext.utils.gmf.directedit;
 
 import java.util.ArrayList;
@@ -20,14 +30,14 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class StyleRanges {
-
+	
 	@Inject
 	private Provider<DocumentTokenSource> tokenSourceProvider;
 	@Inject
 	private ITextAttributeProvider attributeProvider;
 	@Inject
 	private DefaultAntlrTokenToAttributeIdMapper tokenTypeMapper;
-
+	
 	public List<StyleRange> getRanges(String expression) {
 		final List<StyleRange> ranges = Lists.newArrayList();
 		DocumentEvent event = new DocumentEvent();
@@ -46,7 +56,7 @@ public class StyleRanges {
 		}
 		return merge(ranges);
 	}
-
+	
 	protected List<StyleRange> merge(List<StyleRange> ranges) {
 		List<StyleRange> result = new ArrayList<>();
 		for (StyleRange styleRange : ranges) {
@@ -62,10 +72,10 @@ public class StyleRanges {
 		}
 		return result;
 	}
-
+	
 	protected boolean equal(StyleRange lastRange, StyleRange styleRange) {
 		return lastRange.fontStyle == styleRange.fontStyle && Objects.equal(lastRange.background, styleRange.background)
 				&& Objects.equal(lastRange.foreground, styleRange.foreground);
 	}
-
+	
 }

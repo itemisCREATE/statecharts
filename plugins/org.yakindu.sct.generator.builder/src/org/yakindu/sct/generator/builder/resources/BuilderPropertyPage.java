@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2018 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ *
+ */
 package org.yakindu.sct.generator.builder.resources;
 
 import java.util.Iterator;
@@ -41,34 +51,35 @@ import org.yakindu.sct.generator.builder.BuilderActivator;
  * @author johannes dicks - Initial contribution and API
  */
 public class BuilderPropertyPage extends PropertyPage {
-
+	
 	private DefaultResourceBlacklist blacklist;
 	private TableViewer blackListViewer;
 	private List<IResource> values;
-
+	
 	public BuilderPropertyPage() {
 		super();
 		blacklist = new DefaultResourceBlacklist();
 	}
-
+	
+	@Override
 	protected Control createContents(Composite parent) {
 		Group group = createGroup(parent);
 		createBlacklist(group);
 		return group;
 	}
-
+	
 	protected void createBlacklist(final Composite parent) {
 		blackListViewer = createBlackListViewer(parent);
-
+		
 		Composite btnComposite = new Composite(parent, SWT.None);
 		btnComposite.setLayout(new GridLayout(1, false));
 		GridDataFactory.fillDefaults().grab(false, true).align(GridData.CENTER, GridData.BEGINNING)
-				.applyTo(btnComposite);
+		.applyTo(btnComposite);
 		addAddBtn(btnComposite);
 		addRemoveBtn(btnComposite);
-
+		
 	}
-
+	
 	protected Group createGroup(final Composite blacklistComposite) {
 		Group group = new Group(blacklistComposite, SWT.None);
 		group.setText("Exclude generator models");
@@ -76,7 +87,7 @@ public class BuilderPropertyPage extends PropertyPage {
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(group);
 		return group;
 	}
-
+	
 	protected TableViewer createBlackListViewer(Composite group) {
 		TableViewer result = new TableViewer(group, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL);
 		result.getTable().setLinesVisible(true);
@@ -87,7 +98,7 @@ public class BuilderPropertyPage extends PropertyPage {
 		result.setInput(values);
 		return result;
 	}
-
+	
 	protected void addAddBtn(final Composite btnComposite) {
 		Button add = new Button(btnComposite, SWT.FLAT);
 		GridDataFactory.fillDefaults().grab(true, false).hint(100, SWT.DEFAULT).applyTo(add);
@@ -98,17 +109,17 @@ public class BuilderPropertyPage extends PropertyPage {
 				super.widgetSelected(e);
 				ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(btnComposite.getShell(),
 						new WorkbenchLabelProvider(), new BaseWorkbenchContentProvider());
-
+				
 				dialog.setValidator(new CheaderBlacklistSelectionStatusValidator());
-
+				
 				dialog.setTitle("Add blacklist item");
 				dialog.setMessage("Select a blacklist item:");
 				dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
 				dialog.addFilter(new CHeaderViewerFilter(getActualProject()));
-
+				
 				if (!values.isEmpty())
 					dialog.setInitialSelection(values.get(values.size() - 1));
-
+				
 				dialog.setDialogBoundsSettings(BuilderActivator.getDefault().getDialogSettings(),
 						Dialog.DIALOG_PERSISTLOCATION);
 				dialog.open();
@@ -123,9 +134,9 @@ public class BuilderPropertyPage extends PropertyPage {
 				}
 			}
 		});
-
+		
 	}
-
+	
 	protected void addRemoveBtn(Composite btnComposite) {
 		Button remove = new Button(btnComposite, SWT.FLAT);
 		GridDataFactory.fillDefaults().grab(true, false).hint(100, SWT.DEFAULT).applyTo(remove);
@@ -147,27 +158,29 @@ public class BuilderPropertyPage extends PropertyPage {
 			}
 		});
 	}
-
+	
+	@Override
 	protected void performDefaults() {
 		super.performDefaults();
 		values.clear();
 		blackListViewer.refresh();
 	}
-
+	
+	@Override
 	public boolean performOk() {
 		IProject project = getActualProject();
 		@SuppressWarnings("unchecked")
 		List<IResource> input = (List<IResource>) blackListViewer.getInput();
 		boolean save = blacklist.save(project, input);
 		return save;
-
+		
 	}
-
+	
 	private IProject getActualProject() {
 		// cast necessary for Luna, in Mars&Neon getAdapter is generic
-		return (IProject) getElement().getAdapter(IProject.class);
+		return getElement().getAdapter(IProject.class);
 	}
-
+	
 	protected final class CheaderBlacklistSelectionStatusValidator implements ISelectionStatusValidator {
 		@Override
 		public IStatus validate(Object[] selection) {
@@ -184,14 +197,14 @@ public class BuilderPropertyPage extends PropertyPage {
 			return Status.OK_STATUS;
 		}
 	}
-
+	
 	protected final class CHeaderViewerFilter extends ViewerFilter {
 		private IResource actualProject;
-
+		
 		public CHeaderViewerFilter(IResource project) {
 			this.actualProject = project;
 		}
-
+		
 		@Override
 		public boolean select(Viewer viewer, Object parentElement, Object element) {
 			// just show files of the current project
@@ -209,33 +222,33 @@ public class BuilderPropertyPage extends PropertyPage {
 					return false;
 				}
 			}
-
+			
 			return true;
 		}
-
+		
 	}
 	protected String getFileExtension() {
 		return "sgen";
 	}
-
+	
 	protected static class ResourceLabelProvider extends LabelProvider {
-
+		
 		@Override
 		public String getText(Object element) {
 			if (element instanceof IResource) {
 				IResource iResource = (IResource) element;
 				return iResource.getFullPath().toPortableString();
 			}
-
+			
 			return super.getText(element);
 		}
-
+		
 		@Override
 		public Image getImage(Object element) {
 			ISharedImages sharedImages = PlatformUI.getWorkbench().getSharedImages();
 			return element instanceof IFile
 					? sharedImages.getImage(ISharedImages.IMG_OBJ_FILE)
-					: sharedImages.getImage(ISharedImages.IMG_OBJ_FOLDER);
+							: sharedImages.getImage(ISharedImages.IMG_OBJ_FOLDER);
 		}
 	}
 }
