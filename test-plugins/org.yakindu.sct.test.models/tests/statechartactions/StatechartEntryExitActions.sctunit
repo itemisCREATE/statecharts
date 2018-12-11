@@ -11,18 +11,6 @@ testclass StatechartEntryExitActions for statechart statechartactions.Statechart
 		assert y == 3 		
 	}
 
-// Unused - commented out
-//	operation entryActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue() {
-//		
-//		assert x == 0
-//		assert y == 0
-//		b = false
-//		
-//		enter
-//		assert x == 2 
-//		assert y == 3 		
-//	}
-
 	@Test operation exitActionsAreExecutedOnEnteringStatechart() {
 
 		enter		
@@ -30,15 +18,4 @@ testclass StatechartEntryExitActions for statechart statechartactions.Statechart
 		assert x == 6
 		assert y == 2 		
 	}
-
-// Unused - commented out
-//	operation exitActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue() {
-//		
-//		enter		
-//		exit
-//		assert x == 8
-//		assert y == 2 		
-//	}
-
-
 }
