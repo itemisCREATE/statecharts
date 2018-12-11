@@ -48,10 +48,10 @@ import org.yakindu.base.types.validation.TypesJavaValidator
  */
 @ComposedChecks(validators=#[TypesJavaValidator])
 class ExpressionsValidator extends AbstractExpressionsValidator implements IValidationIssueAcceptor {
-	
+
 	@Inject ITypeSystemInferrer typeInferrer
 
-	@Check 
+	@Check
 	def void checkExpression(Expression expression) {
 		// Only infer root expressions since inferType infers the expression
 		// containment hierarchy
@@ -210,11 +210,15 @@ class ExpressionsValidator extends AbstractExpressionsValidator implements IVali
 		var EList<Annotation> annotations = element.getAnnotations()
 		for (Annotation annotation : annotations) {
 			var EList<EObject> targets = annotation.getType().getTargets()
-			var boolean found = Iterables.any(targets, [EObject input|return ((input as EClass)).isInstance(element)])
-			if (!found) {
-				error(
-					String.format(ERROR_WRONG_ANNOTATION_TARGET_MSG, annotation.getType().getName(), element.eClass()),
-					null, element.getAnnotations().indexOf(annotation), ERROR_WRONG_ANNOTATION_TARGET_CODE)
+			if (!targets.empty) {
+				var boolean found = Iterables.any(
+					targets, [EObject input|return ((input as EClass)).isInstance(element)])
+				if (!found) {
+					error(
+						String.format(ERROR_WRONG_ANNOTATION_TARGET_MSG, annotation.getType().getName(),
+							element.eClass()), null, element.getAnnotations().indexOf(annotation),
+						ERROR_WRONG_ANNOTATION_TARGET_CODE)
+				}
 			}
 		}
 	}
@@ -223,7 +227,7 @@ class ExpressionsValidator extends AbstractExpressionsValidator implements IVali
 	public static final String CONST_MUST_HAVE_VALUE_CODE = "ConstMustHaveAValue"
 	public static final String REFERENCE_TO_VARIABLE = "Cannot reference a variable in a constant initialization."
 
-	@Check(CheckType.FAST) 
+	@Check(CheckType.FAST)
 	def void checkValueDefinitionExpression(Property property) {
 		// applies only to constants
 		if(!property.isConst()) return;
@@ -254,7 +258,7 @@ class ExpressionsValidator extends AbstractExpressionsValidator implements IVali
 
 	public static final String DECLARATION_WITH_READONLY = "The keyword '%s' has no effect for '%s' definitions. Can be removed."
 
-	@Check(CheckType.FAST) 
+	@Check(CheckType.FAST)
 	def void checkConstAndReadOnlyDefinitionExpression(Property definition) {
 		// applies only for readonly const definitions
 		if(!definition.isReadonly() && !definition.isConst()) return;
@@ -270,7 +274,7 @@ class ExpressionsValidator extends AbstractExpressionsValidator implements IVali
 		}
 	}
 
-	@Check(CheckType.FAST) 
+	@Check(CheckType.FAST)
 	def void checkAnnotationArguments(Annotation annotation) {
 		if (annotation.getType() !== null &&
 			annotation.getArguments().size() !== annotation.getType().getProperties().size()) {

@@ -22,7 +22,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.ui.internal.StextActivator;
-import org.yakindu.sct.model.stext.validation.STextJavaValidator;
+import org.yakindu.sct.model.stext.validation.STextValidator;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 
 import com.google.common.collect.Iterables;
@@ -37,13 +37,13 @@ import com.google.inject.Injector;
 public class TestModelsContainErrorsTest {
 
 	@Inject
-	private STextJavaValidator validator;
+	private STextValidator validator;
 	@Inject
 	private Injector injector;
 
 	private Statechart statechart;
 
-	private ValidatorTester<STextJavaValidator> tester;
+	private ValidatorTester<STextValidator> tester;
 
 	public TestModelsContainErrorsTest(Statechart statechart) {
 		StextActivator.getInstance().getInjector(StextActivator.ORG_YAKINDU_SCT_MODEL_STEXT_STEXT).injectMembers(this);
@@ -52,7 +52,7 @@ public class TestModelsContainErrorsTest {
 
 	@Before
 	public void setup() {
-		tester = new ValidatorTester<STextJavaValidator>(validator, injector);
+		tester = new ValidatorTester<STextValidator>(validator, injector);
 	}
 
 	@After

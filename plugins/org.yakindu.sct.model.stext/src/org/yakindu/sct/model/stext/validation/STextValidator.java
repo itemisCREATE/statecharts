@@ -123,7 +123,7 @@ import com.google.inject.name.Named;
  */
 @ComposedChecks(validators = { SGraphJavaValidator.class, ExpressionsValidator.class,
 		STextNamesAreUniqueValidator.class })
-public class STextJavaValidator extends AbstractSTextValidator implements STextValidationMessages {
+public class STextValidator extends AbstractSTextValidator implements STextValidationMessages {
 
 	private static final String KEYWORD_ONCYCLE = "oncycle";
 	private static final String KEYWORD_ALWAYS = "always";
