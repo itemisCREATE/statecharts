@@ -6,7 +6,6 @@
 
 static ChildFirstLocalReactions statechart;
 
-static sc_integer counter = 0l;
 
 class ChildFirstLocalReactionsTest : public ::testing::Test
 {

@@ -1,8 +1,5 @@
 testclass ParentFirstLocalReactions for statechart executionorder.ParentFirstLocalReactions {
 	
-	var counter : integer = 0
-		
-	
 	 @Test operation expectBottomUpLocalReactionOrder() {
 
 	 	enter

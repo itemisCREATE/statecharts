@@ -8,7 +8,6 @@ namespace  {
 
 executionorder::ParentFirstLocalReactions* statechart;
 
-sc_integer counter = 0l;
 
 
 //! The timers are managed by a timer service. */
