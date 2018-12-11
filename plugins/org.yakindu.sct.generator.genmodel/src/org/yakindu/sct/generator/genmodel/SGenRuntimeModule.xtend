@@ -10,8 +10,14 @@
 package org.yakindu.sct.generator.genmodel
 
 import com.google.inject.Binder
+import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider
+import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider
+import org.eclipse.xtext.scoping.IGlobalScopeProvider
+import org.eclipse.xtext.serializer.tokens.ICrossReferenceSerializer
 import org.yakindu.base.expressions.linking.LinkingDiagnosticMessageProvider
 import org.yakindu.base.expressions.parser.SyntaxErrorMessageProvider
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.genmodel.naming.GenModelQualifiedNameProvider
@@ -21,7 +27,7 @@ import org.yakindu.sct.generator.genmodel.typesystem.SGenTypeInferrer
 
 class SGenRuntimeModule extends AbstractSGenRuntimeModule {
 
-	def bindILinkingDiagnosticMessageProvider() {
+	def Class<? extends ILinkingDiagnosticMessageProvider> bindILinkingDiagnosticMessageProvider() {
 		LinkingDiagnosticMessageProvider
 	}
 
@@ -29,23 +35,23 @@ class SGenRuntimeModule extends AbstractSGenRuntimeModule {
 		binder.bind(ITypeSystem).toInstance(GenericTypeSystem.getInstance())
 	}
 
-	def bindISyntaxErrorMessageProvider() {
+	def Class<? extends ISyntaxErrorMessageProvider> bindISyntaxErrorMessageProvider() {
 		SyntaxErrorMessageProvider
 	}
 
-	def bindITypeSystemInferrer() {
-		SGenTypeInferrer
+	def Class<? extends ITypeSystemInferrer> bindITypeSystemInferrer() {
+		return SGenTypeInferrer
 	}
 
-	override bindIQualifiedNameProvider() {
-		GenModelQualifiedNameProvider
+	override Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
+		return GenModelQualifiedNameProvider
 	}
 
-	def bindICrossReferenceSerializer() {
-		SGenCrossReferenceSerializer
+	def Class<? extends ICrossReferenceSerializer> bindICrossReferenceSerializer() {
+		return SGenCrossReferenceSerializer
 	}
 
-	override bindIGlobalScopeProvider() {
-		SGenGlobalScopeProvider
+	override Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
+		return SGenGlobalScopeProvider
 	}
 }

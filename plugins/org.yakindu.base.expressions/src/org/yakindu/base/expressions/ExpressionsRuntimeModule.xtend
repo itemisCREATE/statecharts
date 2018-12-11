@@ -9,6 +9,7 @@
  */
 package org.yakindu.base.expressions
 
+import com.google.inject.Binder
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider
 import org.yakindu.base.expressions.inferrer.ExpressionsTypeInferrer
@@ -17,18 +18,19 @@ import org.yakindu.base.expressions.parser.SyntaxErrorMessageProvider
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
-import com.google.inject.Binder
 
-class ExpressionsRuntimeModule extends org.yakindu.base.expressions.AbstractExpressionsRuntimeModule {
-	override void configure(Binder binder) {
-		super.configure(binder)
-		binder.bind(ITypeSystem).toInstance(getTypeSystem())
-		binder.bind(ILinkingDiagnosticMessageProvider).to(LinkingDiagnosticMessageProvider)
-		binder.bind(ISyntaxErrorMessageProvider).to(SyntaxErrorMessageProvider)
+class ExpressionsRuntimeModule extends AbstractExpressionsRuntimeModule {
+
+	def configureITypeSystem(Binder binder) {
+		binder.bind(ITypeSystem).toInstance(GenericTypeSystem.getInstance())
 	}
 
-	def protected ITypeSystem getTypeSystem() {
-		return GenericTypeSystem.getInstance()
+	def Class<? extends ILinkingDiagnosticMessageProvider> bindILinkingDiagnosticMessageProvider() {
+		LinkingDiagnosticMessageProvider
+	}
+
+	def Class<? extends ISyntaxErrorMessageProvider> bindISyntaxErrorMessageProvider() {
+		SyntaxErrorMessageProvider
 	}
 
 	def Class<? extends ITypeSystemInferrer> bindITypeSystemInferrer() {

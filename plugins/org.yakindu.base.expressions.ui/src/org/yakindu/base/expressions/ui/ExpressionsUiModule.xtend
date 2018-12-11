@@ -10,10 +10,8 @@
 package org.yakindu.base.expressions.ui
 
 import org.eclipse.ui.plugin.AbstractUIPlugin
-import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory
 import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory
 import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory
-import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider
 import org.eclipse.xtext.ui.shared.Access
@@ -21,32 +19,33 @@ import org.eclipse.xtext.ui.shared.Access
 /** 
  * Use this class to register components to be used within the IDE.
  */
-class ExpressionsUiModule extends org.yakindu.base.expressions.ui.AbstractExpressionsUiModule {
+class ExpressionsUiModule extends AbstractExpressionsUiModule {
+
 	new(AbstractUIPlugin plugin) {
 		super(plugin)
 	}
 
-	override com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> provideIAllContainersState() {
-		if (Access.getJdtHelper().get().isJavaCoreAvailable()) {
-			return Access.getJavaProjectsState()
+	override provideIAllContainersState() {
+		return if (Access.getJdtHelper().get().isJavaCoreAvailable()) {
+			Access.getJavaProjectsState()
 		} else {
-			return Access.getWorkspaceProjectsState()
+			Access.getWorkspaceProjectsState()
 		}
 	}
 
-	override Class<? extends IResourceSetProvider> bindIResourceSetProvider() {
-		if (Access.getJdtHelper().get().isJavaCoreAvailable()) {
-			return XtextResourceSetProvider
+	override bindIResourceSetProvider() {
+		return if (Access.getJdtHelper().get().isJavaCoreAvailable()) {
+			XtextResourceSetProvider
 		} else {
-			return SimpleResourceSetProvider
+			SimpleResourceSetProvider
 		}
 	}
 
-	override Class<? extends IResourceForEditorInputFactory> bindIResourceForEditorInputFactory() {
-		if (Access.getJdtHelper().get().isJavaCoreAvailable()) {
-			return JavaClassPathResourceForIEditorInputFactory
+	override bindIResourceForEditorInputFactory() {
+		return if (Access.getJdtHelper().get().isJavaCoreAvailable()) {
+			JavaClassPathResourceForIEditorInputFactory
 		} else {
-			return ResourceForIEditorInputFactory
+			ResourceForIEditorInputFactory
 		}
 	}
 }

@@ -11,13 +11,26 @@ package org.yakindu.sct.model.stext.ui
 
 import com.google.inject.Binder
 import com.google.inject.name.Names
+import org.eclipse.jface.text.ITextHover
+import org.eclipse.jface.text.contentassist.IContentAssistProcessor
 import org.eclipse.ui.plugin.AbstractUIPlugin
+import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
+import org.eclipse.xtext.tasks.ITaskFinder
+import org.eclipse.xtext.ui.editor.contentassist.IContentAssistantFactory
+import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover
+import org.eclipse.xtext.ui.editor.hover.IEObjectHover
+import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider
 import org.eclipse.xtext.ui.editor.hover.ProblemAnnotationHover
+import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper
 import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory
 import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory
+import org.eclipse.xtext.ui.editor.model.XtextDocument
+import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration
 import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider
 import org.eclipse.xtext.ui.shared.Access
+import org.eclipse.xtext.ui.tasks.TaskMarkerCreator
+import org.eclipse.xtext.ui.tasks.TaskMarkerTypeProvider
 import org.yakindu.base.utils.jface.help.CrossRefObjectTextHover
 import org.yakindu.base.utils.jface.help.HelpHoverProvider
 import org.yakindu.base.utils.jface.help.HelpHoverProvider.OpenInHelpAction
@@ -39,20 +52,20 @@ class STextUiModule extends AbstractSTextUiModule {
 		super(plugin)
 	}
 
-	def bindIEObjectDocumentationProvider() {
-		STextUserHelpDocumentationProvider
+	def Class<? extends IEObjectDocumentationProvider> bindIEObjectDocumentationProvider() {
+		return STextUserHelpDocumentationProvider
 	}
 
-	def bindDispatchingEObjectTextHover() {
-		CrossRefObjectTextHover
+	def Class<? extends DispatchingEObjectTextHover> bindDispatchingEObjectTextHover() {
+		return CrossRefObjectTextHover
 	}
 
-	override bindIEObjectHover() {
-		CrossRefObjectTextHover
+	override Class<? extends IEObjectHover> bindIEObjectHover() {
+		return CrossRefObjectTextHover
 	}
 
-	def bindIEObjectHoverProvider() {
-		HelpHoverProvider
+	def Class<? extends IEObjectHoverProvider> bindIEObjectHoverProvider() {
+		return HelpHoverProvider
 	}
 
 	def configureHelpAction(Binder binder) {
@@ -64,15 +77,15 @@ class STextUiModule extends AbstractSTextUiModule {
 		binder.bind(String).annotatedWith(Names.named("domain.id")).toInstance("org.yakindu.sct.domain")
 	}
 
-	def bindXtextDocument() {
+	def Class<? extends XtextDocument> bindXtextDocument() {
 		TransactionalXtextDocument
 	}
 
-	def bindTaskMarkerCreator() {
+	def Class<? extends TaskMarkerCreator> bindTaskMarkerCreator() {
 		SCTTaskMarkerCreator
 	}
 
-	def bindTaskMarkerTypeProvider() {
+	def Class<? extends TaskMarkerTypeProvider> bindTaskMarkerTypeProvider() {
 		SCTTaskMarkerTypeProvider
 	}
 
@@ -100,27 +113,27 @@ class STextUiModule extends AbstractSTextUiModule {
 		}
 	}
 
-	override bindITextHover() {
+	override Class<? extends ITextHover> bindITextHover() {
 		return ProblemAnnotationHover
 	}
 
-	def bindIHighlightingConfiguration() {
-		SCTHighlightingConfiguration
+	def Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return SCTHighlightingConfiguration
 	}
 
-	def bindITaskFinder() {
-		STextTaskFinder
+	def Class<? extends ITaskFinder> bindITaskFinder() {
+		return STextTaskFinder
 	}
 
-	def bindIHyperlinkHelper() {
-		PackageImportHyperlinkHelper
+	def Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
+		return PackageImportHyperlinkHelper
 	}
 
-	override bindIContentAssistantFactory() {
-		AsyncContentAssistContextFactory
+	override Class<? extends IContentAssistantFactory> bindIContentAssistantFactory() {
+		return AsyncContentAssistContextFactory
 	}
 
-	override bindIContentAssistProcessor() {
+	override Class<? extends IContentAssistProcessor> bindIContentAssistProcessor() {
 		return AsyncXtextContentAssistProcessor
 	}
 }

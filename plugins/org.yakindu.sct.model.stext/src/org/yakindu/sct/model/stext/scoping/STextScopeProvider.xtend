@@ -57,10 +57,14 @@ import com.google.inject.Inject
  */
 class STextScopeProvider extends ExpressionsScopeProvider {
 
-	@Inject ITypeSystemInferrer typeInferrer
-	@Inject ITypeSystem typeSystem
-	@Inject IQualifiedNameProvider nameProvider
-	@Inject ContextPredicateProvider predicateProvider
+	@Inject 
+	ITypeSystemInferrer typeInferrer
+	@Inject 
+	ITypeSystem typeSystem
+	@Inject 
+	IQualifiedNameProvider nameProvider
+	@Inject 
+	ContextPredicateProvider predicateProvider
 	@Inject
 	protected STextExtensions utils
 

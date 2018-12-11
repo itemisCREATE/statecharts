@@ -49,7 +49,7 @@ public class ResourceModuleProvider implements IModuleProvider {
 	}
 
 	protected Module getLanguageRuntimeModule() {
-		return Modules2.mixin(new STextRuntimeModule(), new STextIdeModule());
+		return new STextRuntimeModule();
 	}
 
 	protected boolean isHeadless(String[] options) {

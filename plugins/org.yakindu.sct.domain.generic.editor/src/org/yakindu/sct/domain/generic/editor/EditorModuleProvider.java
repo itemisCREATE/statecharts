@@ -68,7 +68,7 @@ public class EditorModuleProvider implements IModuleProvider {
 	}
 
 	protected Module getLanguageRuntimeModule() {
-		return Modules.override(new STextIdeModule()).with(new STextRuntimeModule());
+		return new STextRuntimeModule();
 	}
 
 }

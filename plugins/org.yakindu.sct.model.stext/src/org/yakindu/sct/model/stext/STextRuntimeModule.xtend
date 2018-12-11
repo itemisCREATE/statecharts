@@ -11,14 +11,20 @@ package org.yakindu.sct.model.stext
 
 import com.google.inject.Binder
 import com.google.inject.name.Names
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.Constants
+import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader
+import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy
 import org.eclipse.xtext.scoping.IScopeProvider
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService
 import org.eclipse.xtext.validation.CompositeEValidator
+import org.eclipse.xtext.validation.INamesAreUniqueValidationHelper
 import org.yakindu.base.expressions.linking.LinkingDiagnosticMessageProvider
 import org.yakindu.base.expressions.linking.OperationOverloadingLinkingService
 import org.yakindu.base.expressions.parser.SyntaxErrorMessageProvider
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sgraph.resource.SCTLinker
@@ -39,13 +45,14 @@ import org.yakindu.sct.model.stext.validation.STextNamesAreUniqueValidationHelpe
  * @author andreas muelder
  * @author axel terfloth
  */
-@SuppressWarnings("restriction") class STextRuntimeModule extends AbstractSTextRuntimeModule {
+class STextRuntimeModule extends AbstractSTextRuntimeModule {
 
-	def bindITransientValueServiceSerializer() {
+	@SuppressWarnings("restriction")
+	def Class<? extends ITransientValueService> bindITransientValueServiceSerializer() {
 		STextTransientValueService
 	}
 
-	def bindIDefaultResourceDescriptionStrategy() {
+	def Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
 		SCTResourceDescriptionStrategy
 	}
 
@@ -57,20 +64,20 @@ import org.yakindu.sct.model.stext.validation.STextNamesAreUniqueValidationHelpe
 		binder.bind(ITypeSystem).toInstance(GenericTypeSystem.getInstance())
 	}
 
-	def ISyntaxErrorMessageProvider() {
+	def Class<? extends SyntaxErrorMessageProvider> ISyntaxErrorMessageProvider() {
 		SyntaxErrorMessageProvider
 	}
 
-	def bindILinkingDiagnosticMessageProvider() {
+	def Class<? extends ILinkingDiagnosticMessageProvider> bindILinkingDiagnosticMessageProvider() {
 		LinkingDiagnosticMessageProvider
 	}
 
 	// https://github.com/Yakindu/statecharts/issues/1199
-	def bindIReferableElementsUnloader() {
+	def Class<? extends IReferableElementsUnloader> bindIReferableElementsUnloader() {
 		IReferableElementsUnloader.NullUnloader
 	}
 
-	def bindNamesAreUniqueValidationHelper() {
+	def Class<? extends INamesAreUniqueValidationHelper> bindNamesAreUniqueValidationHelper() {
 		STextNamesAreUniqueValidationHelper
 	}
 
@@ -82,7 +89,7 @@ import org.yakindu.sct.model.stext.validation.STextNamesAreUniqueValidationHelpe
 		SCTLinker
 	}
 
-	def bindResource() {
+	def Class<? extends Resource> bindResource() {
 		StextResource
 	}
 
@@ -103,7 +110,7 @@ import org.yakindu.sct.model.stext.validation.STextNamesAreUniqueValidationHelpe
 			StextImportAwareScopeProvider)
 	}
 
-	def bindITypeSystemInferrer() {
+	def Class<? extends ITypeSystemInferrer> bindITypeSystemInferrer() {
 		STextTypeInferrer
 	}
 
