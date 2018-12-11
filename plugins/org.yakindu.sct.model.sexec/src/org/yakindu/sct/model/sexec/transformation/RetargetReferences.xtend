@@ -87,7 +87,7 @@ class RetargetReferences {
 	def dispatch Declaration replaced(EObject ne) {
 		var err = if (ne === null) "Replace called with null" else {
 			"Replace with unknown EObject (" + ne.class.simpleName + ") called: " 
-			+ ne.fullyQualifiedName + " in " + ne.eResource.URI.toString
+			+ ne.fullyQualifiedName + " in " + ne.eResource?.URI?.toString
 		}
 		
 		try {
