@@ -198,7 +198,7 @@ public class GTestHelper {
 				.mainLib(getMainLib());
 		 if(compiler == Compiler.GPLUSPLUS) {
 			 gTestCommand
-			 	.wPedantic()
+//			 	.wPedantic()
 			 	.wAll()				
 			 	.wExtra()
 			 	.wError()
