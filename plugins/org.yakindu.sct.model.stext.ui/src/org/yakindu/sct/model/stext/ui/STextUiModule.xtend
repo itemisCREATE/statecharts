@@ -31,10 +31,8 @@ import org.yakindu.sct.model.stext.ui.tasks.SCTTaskMarkerCreator
 import org.yakindu.sct.model.stext.ui.tasks.SCTTaskMarkerTypeProvider
 import org.yakindu.sct.model.stext.ui.tasks.STextTaskFinder
 
-/** 
- * Use this class to register components to be used within the IDE.
- */
-@SuppressWarnings("restriction") class STextUiModule extends AbstractSTextUiModule {
+class STextUiModule extends AbstractSTextUiModule {
+	
 	public static final String STEXT_LANGUAGE_NAME = "org.yakindu.sct.model.stext.SText"
 
 	new(AbstractUIPlugin plugin) {
