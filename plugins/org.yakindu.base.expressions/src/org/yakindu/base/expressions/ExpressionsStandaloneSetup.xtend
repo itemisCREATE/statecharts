@@ -6,16 +6,15 @@
  * http://www.eclipse.org/legal/epl-v10.html 
  * Contributors:
  * committers of YAKINDU - initial API and implementation
- *
-*/
-package org.yakindu.sct.model.stext.ui.outline;
-
-import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
-
-/**
- * customization of the default outline structure
- * 
  */
-public class STextOutlineTreeProvider extends DefaultOutlineTreeProvider {
-	
+package org.yakindu.base.expressions
+
+/** 
+ * Initialization support for running Xtext languages 
+ * without equinox extension registry
+ */
+class ExpressionsStandaloneSetup extends ExpressionsStandaloneSetupGenerated {
+	def static void doSetup() {
+		new ExpressionsStandaloneSetup().createInjectorAndDoEMFRegistration()
+	}
 }

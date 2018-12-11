@@ -6,20 +6,15 @@
  * http://www.eclipse.org/legal/epl-v10.html 
  * Contributors:
  * committers of YAKINDU - initial API and implementation
- *
-*/
+ */
+package org.yakindu.sct.model.stext
 
-package org.yakindu.sct.model.stext;
-
-/**
+/** 
  * Initialization support for running Xtext languages 
  * without equinox extension registry
  */
-public class STextStandaloneSetup extends STextStandaloneSetupGenerated{
-
-	public static void doSetup() {
-		new STextStandaloneSetup().createInjectorAndDoEMFRegistration();
+class STextStandaloneSetup extends STextStandaloneSetupGenerated {
+	def static void doSetup() {
+		new STextStandaloneSetup().createInjectorAndDoEMFRegistration()
 	}
-	
 }
-

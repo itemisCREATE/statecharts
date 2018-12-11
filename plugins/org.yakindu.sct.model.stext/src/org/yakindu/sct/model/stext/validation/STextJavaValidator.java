@@ -52,7 +52,7 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.expressions.PostFixUnaryExpression;
-import org.yakindu.base.expressions.validation.ExpressionsJavaValidator;
+import org.yakindu.base.expressions.validation.ExpressionsValidator;
 import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Direction;
@@ -121,9 +121,9 @@ import com.google.inject.name.Named;
  * @author muelder
  *
  */
-@ComposedChecks(validators = { SGraphJavaValidator.class, ExpressionsJavaValidator.class,
+@ComposedChecks(validators = { SGraphJavaValidator.class, ExpressionsValidator.class,
 		STextNamesAreUniqueValidator.class })
-public class STextJavaValidator extends AbstractSTextJavaValidator implements STextValidationMessages {
+public class STextJavaValidator extends AbstractSTextValidator implements STextValidationMessages {
 
 	private static final String KEYWORD_ONCYCLE = "oncycle";
 	private static final String KEYWORD_ALWAYS = "always";
@@ -232,13 +232,13 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			}
 		}
 	}
-	
+
 	@Check(CheckType.FAST)
 	public void checkDefaultAndElseIsNotUsedOnRegularState(RegularState state) {
 		EList<Transition> outgoingTransitions = state.getOutgoingTransitions();
-		for(Transition transition : outgoingTransitions) {
+		for (Transition transition : outgoingTransitions) {
 			Trigger trigger = transition.getTrigger();
-			if(trigger instanceof DefaultTrigger) {
+			if (trigger instanceof DefaultTrigger) {
 				warning(DEFAULT_AND_ELSE_TRANSITION_ON_REGULAR_STATE, transition, null, -1);
 			}
 		}
@@ -404,14 +404,13 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		} else if (eventExpr instanceof FeatureCall) {
 			element = ((FeatureCall) eventExpr).getFeature();
 		}
-		
+
 		if (element != null && (!(element instanceof Event))) {
-			String msg =  "Could not find event declaration.";
+			String msg = "Could not find event declaration.";
 			if (element instanceof NamedElement) {
-				msg = "'" +((NamedElement) element).getName()+ "' is no event.";
+				msg = "'" + ((NamedElement) element).getName() + "' is no event.";
 			}
-			error(msg , StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE, 0,
-					VALUE_OF_REQUIRES_EVENT);
+			error(msg, StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE, 0, VALUE_OF_REQUIRES_EVENT);
 		}
 	}
 

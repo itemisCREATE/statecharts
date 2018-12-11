@@ -21,7 +21,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.stext.ui.internal.STextActivator;
+import org.yakindu.sct.model.stext.ui.internal.StextActivator;
 import org.yakindu.sct.model.stext.validation.STextJavaValidator;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 
@@ -46,7 +46,7 @@ public class TestModelsContainErrorsTest {
 	private ValidatorTester<STextJavaValidator> tester;
 
 	public TestModelsContainErrorsTest(Statechart statechart) {
-		STextActivator.getInstance().getInjector(STextActivator.ORG_YAKINDU_SCT_MODEL_STEXT_STEXT).injectMembers(this);
+		StextActivator.getInstance().getInjector(StextActivator.ORG_YAKINDU_SCT_MODEL_STEXT_STEXT).injectMembers(this);
 		this.statechart = statechart;
 	}
 

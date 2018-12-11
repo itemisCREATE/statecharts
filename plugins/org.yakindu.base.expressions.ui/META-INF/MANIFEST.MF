@@ -17,14 +17,14 @@ Require-Bundle: org.yakindu.base.expressions;visibility:=reexport,
  org.eclipse.xtext.ui.codetemplates.ui,
  org.eclipse.compare,
  org.yakindu.base.types,
- org.eclipse.xtext.xbase.lib
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib;resolution:=optional,
+ org.eclipse.xtext.xtext.ide
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: org.yakindu.base.expressions.ui.quickfix,
- org.yakindu.base.expressions.ui.contentassist,
- org.yakindu.base.expressions.ui.contentassist.antlr,
- org.yakindu.base.expressions.ui.internal,
- org.yakindu.base.expressions.ui.contentassist.antlr.internal
+Export-Package: org.yakindu.base.expressions.ui.internal,
+ org.yakindu.base.expressions.ui.quickfix,
+ org.yakindu.base.expressions.ui.contentassist
 Bundle-Activator: org.yakindu.base.expressions.ui.internal.ExpressionsActivator
 Automatic-Module-Name: org.yakindu.base.expressions.ui

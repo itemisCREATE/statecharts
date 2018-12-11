@@ -15,10 +15,10 @@ import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorCod
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorMsg;
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.warningMsg;
 import static org.junit.Assert.assertEquals;
-import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_ASSIGNMENT_TO_CONST_MSG;
-import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_POST_FIX_TO_CONST_MSG;
-import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_LEFT_HAND_ASSIGNMENT_MSG;
-import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE;
+import static org.yakindu.base.expressions.validation.ExpressionsValidator.ERROR_ASSIGNMENT_TO_CONST_MSG;
+import static org.yakindu.base.expressions.validation.ExpressionsValidator.ERROR_POST_FIX_TO_CONST_MSG;
+import static org.yakindu.base.expressions.validation.ExpressionsValidator.ERROR_LEFT_HAND_ASSIGNMENT_MSG;
+import static org.yakindu.base.expressions.validation.ExpressionsValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE;
 import static org.yakindu.base.types.validation.TypesJavaValidator.ERROR_OPTIONAL_MUST_BE_LAST_CODE;
 import static org.yakindu.base.types.validation.TypesJavaValidator.ERROR_VAR_ARGS_LAST_CODE;
 import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
@@ -35,7 +35,7 @@ import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.yakindu.base.expressions.validation.ExpressionsJavaValidator;
+import org.yakindu.base.expressions.validation.ExpressionsValidator;
 import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
@@ -417,7 +417,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		validationResult.assertOK();
 		model = super.parseExpression("5++", Expression.class.getSimpleName(), interfaceScope());
 		validationResult = tester.validate(model);
-		validationResult.assertError(ExpressionsJavaValidator.POSTFIX_ONLY_ON_VARIABLES_CODE);
+		validationResult.assertError(ExpressionsValidator.POSTFIX_ONLY_ON_VARIABLES_CODE);
 
 	}
 
@@ -839,8 +839,8 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 				.loadStatechart(VALIDATION_TESTMODEL_DIR + "ConstWithVariable.sct");
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
 		assertIssueCount(diagnostics, 3); //
-		assertError(diagnostics, ExpressionsJavaValidator.REFERENCE_TO_VARIABLE);
-		assertError(diagnostics, ExpressionsJavaValidator.CONST_MUST_HAVE_VALUE_MSG);
+		assertError(diagnostics, ExpressionsValidator.REFERENCE_TO_VARIABLE);
+		assertError(diagnostics, ExpressionsValidator.CONST_MUST_HAVE_VALUE_MSG);
 	}
 
 	@Test

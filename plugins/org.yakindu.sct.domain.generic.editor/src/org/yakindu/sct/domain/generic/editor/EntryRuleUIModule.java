@@ -11,8 +11,8 @@
 package org.yakindu.sct.domain.generic.editor;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.service.AbstractGenericModule;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.IContentAssistParser;
 import org.yakindu.sct.model.stext.parser.EntryRuleAntlrSTextParser;
 import org.yakindu.sct.model.stext.ui.contentassist.EntryRuleContentAssistParser;
 

@@ -1,3 +1,4 @@
 /bin/
 /target/
+/xtend-gen/
 plugin.xml_gen
