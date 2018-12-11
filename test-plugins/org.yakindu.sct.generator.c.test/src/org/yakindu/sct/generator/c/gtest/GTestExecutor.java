@@ -1,4 +1,3 @@
-package org.yakindu.sct.generator.c.gtest;
 /****************************************************************************
  * Copyright (c) 2008, 2012 Andreas Unger and others.
  * All rights reserved. This program and the accompanying materials
@@ -7,8 +6,9 @@ package org.yakindu.sct.generator.c.gtest;
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *    Andreas Unger - initial API and implementation 
+ *    Andreas Unger - initial API and implementation
  ****************************************************************************/
+package org.yakindu.sct.generator.c.gtest;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -24,30 +24,30 @@ import org.junit.runner.Description;
 /**
  * @author Andreas Unger
  * @author Thomas Kutz - hook methods for subclassing in different contexts
- * 
+ *
  */
 public class GTestExecutor {
-	
-	private static final Pattern TEST_OUTPUT_PATTERN = Pattern.compile("\\[\\s*(\\w+)\\s*\\] (\\w+)\\.(\\w+)");
-	
-	private Class<?> testClass;
 
+	private static final Pattern TEST_OUTPUT_PATTERN = Pattern.compile("\\[\\s*(\\w+)\\s*\\] (\\w+)\\.(\\w+)");
+
+	private Class<?> testClass;
+	
 	public GTestExecutor(Class<?> testClass) {
 		this.testClass = testClass;
 	}
-	
+
 	public void execute(IFile programFile) throws IOException, InterruptedException {
 		IContainer programContainer = programFile.getParent();
 		if (!programContainer.isAccessible()) {
 			throw new RuntimeException(
 					"Test program container " + programContainer.getLocation().toOSString() + " inaccessible");
 		}
-
+		
 		File directory = programContainer.getLocation().toFile();
 		Process process = new ProcessBuilder(programFile.getLocation().toOSString()).redirectErrorStream(true)
 				.directory(directory).start();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
+		
 		boolean started = false;
 		boolean running = false;
 		StringBuilder message = new StringBuilder();
@@ -88,26 +88,26 @@ public class GTestExecutor {
 				}
 			}
 		}
-
+		
 		process.waitFor();
-
+		
 		if (started) {
 			throw new RuntimeException("Test quit unexpectedly (exit status " + process.exitValue() + "):\n" + message);
 		}
 	}
-	
+
 	protected void testStarted(Description desc) {
 		// hook to be overridden in subclass
 	}
-	
+
 	protected void testFinished(Description desc) {
 		// hook to be overridden in subclass
 	}
-	
+
 	protected void testFailed(Description desc, String message) {
 		// hook to be overridden in subclass
 	}
-
+	
 	private TestOutput parseTestOutput(String s) {
 		Matcher matcher = TEST_OUTPUT_PATTERN.matcher(s);
 		if (matcher.find()) {
@@ -126,35 +126,35 @@ public class GTestExecutor {
 		}
 		return null;
 	}
-
+	
 	private class TestOutput {
-
+		
 		public static final int RUN = 0;
 		public static final int OK = 1;
 		public static final int FAILED = 2;
-
+		
 		private int status;
-
+		
 		private String testCaseName;
 		private String testName;
-
+		
 		public TestOutput(int status, String testCaseName, String testName) {
 			this.status = status;
 			this.testCaseName = testCaseName;
 			this.testName = testName;
 		}
-
+		
 		/**
 		 * @return the status
 		 */
 		public int getStatus() {
 			return status;
 		}
-
+		
 		public Description toDescription() {
 			String name = testCaseName + "." + testName;
 			return Description.createTestDescription(testClass, name);
 		}
-
+		
 	}
 }

@@ -1,4 +1,4 @@
-//copied from  org.eclipse.egit.core;
+/*copied from  org.eclipse.egit.core;*/
 package org.yakindu.sct.examples.wizard.service.git;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -7,18 +7,18 @@ import org.eclipse.jgit.lib.ProgressMonitor;
 
 /** Create a new Git to Eclipse progress monitor. */
 public class EclipseGitProgressTransformer implements ProgressMonitor {
-
+	
 	private final IProgressMonitor root;
-
+	
 	private SubMonitor mainTask;
 	private SubMonitor subTask;
-
-	private String msg;
-
-	private int lastWorked;
-
-	private int totalWork;
 	
+	private String msg;
+	
+	private int lastWorked;
+	
+	private int totalWork;
+
 	/**
 	 * Create a new progress monitor.
 	 *
@@ -28,19 +28,19 @@ public class EclipseGitProgressTransformer implements ProgressMonitor {
 	public EclipseGitProgressTransformer(final IProgressMonitor eclipseMonitor) {
 		root = eclipseMonitor;
 	}
-
+	
 	@Override
 	public void start(final int totalTasks) {
 		// the number of sub tasks is 5 in case of a download operation, but we are always called with totalTasks=2
 		mainTask = SubMonitor.convert(root, 5);
 	}
-
+	
 	@Override
 	public void beginTask(final String name, final int total) {
 		msg = name;
 		lastWorked = 0;
 		totalWork = total;
-		
+
 		SubMonitor sub;
 		if (mainTask != null) {
 			// fork a new child from main task to have accumulated progress bar update
@@ -48,7 +48,7 @@ public class EclipseGitProgressTransformer implements ProgressMonitor {
 		} else {
 			sub = SubMonitor.convert(root);
 		}
-		
+
 		if (totalWork == UNKNOWN) {
 			subTask = SubMonitor.convert(sub, IProgressMonitor.UNKNOWN);
 		} else {
@@ -56,12 +56,12 @@ public class EclipseGitProgressTransformer implements ProgressMonitor {
 		}
 		subTask.subTask(msg);
 	}
-
+	
 	@Override
 	public void update(final int work) {
 		if (subTask == null)
 			return;
-
+		
 		final int cmp = lastWorked + work;
 		if (totalWork == UNKNOWN && cmp > 0) {
 			if (lastWorked != cmp)
@@ -74,7 +74,7 @@ public class EclipseGitProgressTransformer implements ProgressMonitor {
 			m.append(": ");  //$NON-NLS-1$
 			while (m.length() < 25)
 				m.append(' ');
-
+			
 			final String twstr = String.valueOf(totalWork);
 			String cmpstr = String.valueOf(cmp);
 			while (cmpstr.length() < twstr.length())
@@ -90,13 +90,13 @@ public class EclipseGitProgressTransformer implements ProgressMonitor {
 			m.append("/"); //$NON-NLS-1$
 			m.append(twstr);
 			m.append(")"); //$NON-NLS-1$
-
+			
 			subTask.subTask(m.toString());
 		}
 		lastWorked = cmp;
 		subTask.worked(work);
 	}
-
+	
 	@Override
 	public void endTask() {
 		if (subTask != null) {
@@ -107,7 +107,7 @@ public class EclipseGitProgressTransformer implements ProgressMonitor {
 			}
 		}
 	}
-
+	
 	@Override
 	public boolean isCancelled() {
 		if (subTask != null)

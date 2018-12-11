@@ -1,4 +1,3 @@
-
 /*******************************************************************************
  * Copyright (c) 2000, 2010 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
@@ -115,16 +114,19 @@ public class StyledTextCellEditor extends CellEditor {
 	/*
 	 * (non-Javadoc) Method declared on CellEditor.
 	 */
+	@Override
 	protected Control createControl(Composite parent) {
 		text = createStyledText(parent);
 		text.setAlwaysShowScrollBars(false);
 		text.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 				handleDefaultSelection(e);
 			}
 		});
 		text.addKeyListener(new KeyAdapter() {
 			// hook key pressed - see PR 14201
+			@Override
 			public void keyPressed(KeyEvent e) {
 				keyReleaseOccured(e);
 
@@ -139,6 +141,7 @@ public class StyledTextCellEditor extends CellEditor {
 			}
 		});
 		text.addTraverseListener(new TraverseListener() {
+			@Override
 			public void keyTraversed(TraverseEvent e) {
 				if (e.detail == SWT.TRAVERSE_ESCAPE || e.detail == SWT.TRAVERSE_RETURN) {
 					e.doit = false;
@@ -150,6 +153,7 @@ public class StyledTextCellEditor extends CellEditor {
 		// changes
 		// may have occurred
 		text.addMouseListener(new MouseAdapter() {
+			@Override
 			public void mouseUp(MouseEvent e) {
 				checkSelection();
 				checkDeleteable();
@@ -157,6 +161,7 @@ public class StyledTextCellEditor extends CellEditor {
 			}
 		});
 		text.addFocusListener(new FocusAdapter() {
+			@Override
 			public void focusLost(FocusEvent e) {
 				StyledTextCellEditor.this.focusLost();
 			}
@@ -212,6 +217,7 @@ public class StyledTextCellEditor extends CellEditor {
 	 * 
 	 * @return the text string
 	 */
+	@Override
 	protected Object doGetValue() {
 		return text.getText();
 	}
@@ -219,6 +225,7 @@ public class StyledTextCellEditor extends CellEditor {
 	/*
 	 * (non-Javadoc) Method declared on CellEditor.
 	 */
+	@Override
 	protected void doSetFocus() {
 		if (text != null) {
 			text.setFocus();
@@ -236,6 +243,7 @@ public class StyledTextCellEditor extends CellEditor {
 	 * @param value
 	 *            a text string (type <code>String</code>)
 	 */
+	@Override
 	protected void doSetValue(Object value) {
 		Assert.isTrue(text != null && (value instanceof String));
 		text.removeModifyListener(getModifyListener());
@@ -272,6 +280,7 @@ public class StyledTextCellEditor extends CellEditor {
 	/**
 	 * Since a text editor field is scrollable we don't set a minimumSize.
 	 */
+	@Override
 	public LayoutData getLayoutData() {
 		LayoutData data = new LayoutData();
 		data.minimumWidth = 0;
@@ -284,6 +293,7 @@ public class StyledTextCellEditor extends CellEditor {
 	private ModifyListener getModifyListener() {
 		if (modifyListener == null) {
 			modifyListener = new ModifyListener() {
+				@Override
 				public void modifyText(ModifyEvent e) {
 					editOccured(e);
 				}
@@ -312,6 +322,7 @@ public class StyledTextCellEditor extends CellEditor {
 	 * <code>CellEditor</code> method returns <code>true</code> if the current
 	 * selection is not empty.
 	 */
+	@Override
 	public boolean isCopyEnabled() {
 		if (text == null || text.isDisposed()) {
 			return false;
@@ -324,6 +335,7 @@ public class StyledTextCellEditor extends CellEditor {
 	 * <code>CellEditor</code> method returns <code>true</code> if the current
 	 * selection is not empty.
 	 */
+	@Override
 	public boolean isCutEnabled() {
 		if (text == null || text.isDisposed()) {
 			return false;
@@ -336,6 +348,7 @@ public class StyledTextCellEditor extends CellEditor {
 	 * <code>CellEditor</code> method returns <code>true</code> if there is a
 	 * selection or if the caret is not positioned at the end of the text.
 	 */
+	@Override
 	public boolean isDeleteEnabled() {
 		if (text == null || text.isDisposed()) {
 			return false;
@@ -352,6 +365,7 @@ public class StyledTextCellEditor extends CellEditor {
 	 * The <code>TextCellEditor</code> implementation of this
 	 * <code>CellEditor</code> method always returns <code>true</code>.
 	 */
+	@Override
 	public boolean isPasteEnabled() {
 		if (text == null || text.isDisposed()) {
 			return false;
@@ -384,6 +398,7 @@ public class StyledTextCellEditor extends CellEditor {
 	 * @return <code>true</code> if select all is possible, <code>false</code>
 	 *         otherwise
 	 */
+	@Override
 	public boolean isSelectAllEnabled() {
 		if (text == null || text.isDisposed()) {
 			return false;
@@ -404,6 +419,7 @@ public class StyledTextCellEditor extends CellEditor {
 	 * @param keyEvent
 	 *            the key event
 	 */
+	@Override
 	protected void keyReleaseOccured(KeyEvent keyEvent) {
 		if (keyEvent.character == '\r') { // Return key
 			// Enter is handled in handleDefaultSelection.
@@ -431,6 +447,7 @@ public class StyledTextCellEditor extends CellEditor {
 	 * <code>CellEditor</code> method copies the current selection to the
 	 * clipboard.
 	 */
+	@Override
 	public void performCopy() {
 		text.copy();
 	}
@@ -440,6 +457,7 @@ public class StyledTextCellEditor extends CellEditor {
 	 * <code>CellEditor</code> method cuts the current selection to the
 	 * clipboard.
 	 */
+	@Override
 	public void performCut() {
 		text.cut();
 		checkSelection();
@@ -452,6 +470,7 @@ public class StyledTextCellEditor extends CellEditor {
 	 * <code>CellEditor</code> method deletes the current selection or, if there
 	 * is no selection, the character next character from the current position.
 	 */
+	@Override
 	public void performDelete() {
 		if (text.getSelectionCount() > 0) {
 			// remove the contents of the current selection
@@ -478,6 +497,7 @@ public class StyledTextCellEditor extends CellEditor {
 	 * <code>CellEditor</code> method pastes the the clipboard contents over the
 	 * current selection.
 	 */
+	@Override
 	public void performPaste() {
 		text.paste();
 		checkSelection();
@@ -489,6 +509,7 @@ public class StyledTextCellEditor extends CellEditor {
 	 * The <code>TextCellEditor</code> implementation of this
 	 * <code>CellEditor</code> method selects all of the current text.
 	 */
+	@Override
 	public void performSelectAll() {
 		text.selectAll();
 		checkSelection();
@@ -504,6 +525,7 @@ public class StyledTextCellEditor extends CellEditor {
 	 * 
 	 * @since 3.4
 	 */
+	@Override
 	protected boolean dependsOnExternalFocusListener() {
 		return getClass() != StyledTextCellEditor.class;
 	}

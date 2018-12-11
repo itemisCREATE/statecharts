@@ -1,4 +1,3 @@
-
 /**
  * Copyright (c) 2017 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
@@ -31,6 +30,7 @@ public class SctIssueCreator implements ISctIssueCreator {
 		return create(delegate,id);
 	}
 
+	@Override
 	public SCTIssue create(Issue delegate, String id) {
 		final SCTIssue issue = new SCTIssue(delegate, id);
 		return issue;

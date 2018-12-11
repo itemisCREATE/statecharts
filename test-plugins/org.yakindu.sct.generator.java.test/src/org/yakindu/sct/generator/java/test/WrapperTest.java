@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2018 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ *
+ */
 package org.yakindu.sct.generator.java.test;
 
 import static org.junit.Assert.assertTrue;
@@ -12,36 +22,36 @@ import org.yakindu.scr.wrappertest.SynchronizedWrapperTestStatemachine;
 import org.yakindu.scr.wrappertest.WrapperTestStatemachine.State;
 
 public class WrapperTest {
-
+	
 	private static final int CYCLE_TIME = 250;
-
+	
 	protected int operationCallbacks;
-
+	
 	@Before
 	public void setup() {
 		operationCallbacks = 0;
 	}
-
+	
 	@Test
 	public void synchronizedStatemachineWrapperTest() throws InterruptedException {
-
+		
 		int waitTimeSeconds = 10;
 		SynchronizedWrapperTestStatemachine sm = new SynchronizedWrapperTestStatemachine();
-
+		
 		sm.getSCInterface().setSCInterfaceOperationCallback(new SCInterfaceOperationCallback() {
-
+			
 			@Override
 			public void displayTime() {
 				operationCallbacks++;
 			}
 		});
-
+		
 		CustomTimerService timer = new CustomTimerService();
 		sm.setTimer(timer);
 		sm.init();
 		sm.enter();
 		RuntimeService.getInstance().registerStatemachine(sm, CYCLE_TIME);
-
+		
 		sleep(waitTimeSeconds);
 		RuntimeService.getInstance().cancelTimer();
 		assertTrue(sm.isStateActive(State.main_region__final_));
@@ -49,23 +59,23 @@ public class WrapperTest {
 		assertTrue((waitTimeSeconds - operationCallbacks) <= 1);
 		assertTrue((timer.getTimerCallbackCount(0) - sm.getSCInterface().getAfterCalls()) <= 1);
 	}
-
+	
 	@Test
 	public void runnableStatemachineWrapperTest() throws InterruptedException {
-		
-		int waitTimeSeconds = 11;
-		
-		RunnableTestStatemachineRunnable sm = new RunnableTestStatemachineRunnable();
 
+		int waitTimeSeconds = 11;
+
+		RunnableTestStatemachineRunnable sm = new RunnableTestStatemachineRunnable();
+		
 		sm.getSCInterface().setSCInterfaceOperationCallback(
 				new org.yakindu.scr.runnabletest.IRunnableTestStatemachine.SCInterfaceOperationCallback() {
-
+					
 					@Override
 					public void displayTime() {
 						operationCallbacks++;
 					}
 				});
-
+		
 		CustomTimerService timer = new CustomTimerService();
 		sm.setTimer(timer);
 		sm.init();
@@ -79,12 +89,12 @@ public class WrapperTest {
 		assertTrue((waitTimeSeconds - operationCallbacks) <= 1);
 		assertTrue((timer.getTimerCallbackCount(1) - sm.getSCInterface().getAfterCalls()) <= 1);
 	}
-
+	
 	@After
 	public void tearDown() {
 		RuntimeService.getInstance().cancelTimer();
 	}
-
+	
 	private void sleep(long time) throws InterruptedException {
 		Thread.sleep(time * 1000);
 	}
