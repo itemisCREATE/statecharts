@@ -138,7 +138,7 @@ class ReactMethod {
 					_if(tryTransitionParam._ref)
 						._then (
 							if (processParent && !childFirst) 
-								_if(parentNode.callReact(tryTransitionParam)._equals(_false))
+								_if(parentNode.callReact(_ref(tryTransitionParam))._equals(_false))
 									._then ( 
 										execState.createReactionSequence(
 											didTransitionVariable._assign(_false)) 
@@ -154,7 +154,7 @@ class ReactMethod {
 								_sequence(
 									execState.createLocalReactionSequence => [
 										if (processParent && childFirst) 
-											_step(didTransitionVariable._assign(parentNode.callReact(tryTransitionParam)))	
+											_step(didTransitionVariable._assign(parentNode.callReact(_ref(tryTransitionParam))))	
 									])		
 							)
 					else _sequence(), // empty sequence ...
@@ -176,9 +176,9 @@ class ReactMethod {
 	
 
 
-	def dispatch callReact(ExecutionState state, EObject try_transition)  { _call(state.reactMethod)._with(_ref(try_transition)) }
+	def dispatch callReact(ExecutionState state, Expression p)  { _call(state.reactMethod)._with(p) }
 
-	def dispatch callReact(ExecutionFlow flow, Object try_transition)  { _call(flow.reactMethod) }
+	def dispatch callReact(ExecutionFlow flow, Expression p)  { _call(flow.reactMethod) }
 	
 	
 	
