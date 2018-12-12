@@ -380,18 +380,18 @@ class StatemachineImplementation implements IContentTemplate {
 	
 	def checkInternalOCB(StatechartScope it) '''
 		if (this->«OCB_Instance» == «NULL_STRING») { 
-			errorCode |= «ErrorCode.OCB_INTERNAL_INIT.getName()»;
+			errorCode |= (short) «ErrorCode.OCB_INTERNAL_INIT.getName()»;
 		}
 	'''
 	
 	def checkInterfaceOCB(StatechartScope it) '''
 		«IF defaultInterface»
 			if (this->«OCB_Instance» == «NULL_STRING») { 
-				errorCode |=  «ErrorCode.OCB_DEFAULT_INIT.getName()»;
+				errorCode |=  (short) «ErrorCode.OCB_DEFAULT_INIT.getName()»;
 			}
 		«ELSE»
 			if (this->«OCB_Instance» == «NULL_STRING») { 
-				errorCode |= «ErrorCode.OCB_NAMED_INIT.getName()»;
+				errorCode |= (short) «ErrorCode.OCB_NAMED_INIT.getName()»;
 			}
 		«ENDIF»
 	'''
