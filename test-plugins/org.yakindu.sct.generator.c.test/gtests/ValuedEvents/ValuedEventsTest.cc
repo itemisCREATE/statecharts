@@ -45,7 +45,7 @@ void ValuedEventsTest::valuedEventsTest()
 	valuedEventsIface_raise_integerEvent(&statechart, 23);
 	valuedEventsIface_raise_booleanEvent(&statechart, false);
 	valuedEventsIface_raise_realEvent(&statechart, 20);
-	valuedEventsIface_raise_stringEvent(&statechart, "tool");
+	valuedEventsIface_raise_stringEvent(&statechart, (sc_string)"tool");
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(valuedEvents_isStateActive(&statechart, ValuedEvents_integer_region_D));
 	EXPECT_TRUE(valuedEvents_isStateActive(&statechart, ValuedEvents_string_region_D));
