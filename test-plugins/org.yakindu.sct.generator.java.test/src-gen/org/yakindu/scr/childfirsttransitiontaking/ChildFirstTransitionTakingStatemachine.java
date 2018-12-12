@@ -773,7 +773,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		enterSequence_ChildFirstTransitionTaking_r2_C_r_CB_r3_CBC_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -787,8 +787,6 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 			} else {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -835,8 +833,6 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -863,8 +859,6 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -877,7 +871,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		if (did_transition==false) {
 			sCInterface.setCLocalReaction(sCInterface.getCLocalReaction() + 1);
 			
-			did_transition = react(try_transition);
+			did_transition = react();
 		}
 		return did_transition;
 	}
@@ -925,8 +919,6 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		
 		if (try_transition) {
 			did_transition = false;
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -985,8 +977,6 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		if (try_transition) {
 			did_transition = false;
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -995,8 +985,6 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		
 		if (try_transition) {
 			did_transition = false;
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

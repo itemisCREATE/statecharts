@@ -212,7 +212,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		enterSequence_main_region_StateA_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -220,7 +220,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.getValue()==5) {
 					exitSequence_main_region_StateA();
 					enterSequence_main_region_StateB_default();
@@ -239,7 +239,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.getValue()==5) {
 					exitSequence_main_region_StateB();
 					enterSequence_main_region_StateA_default();

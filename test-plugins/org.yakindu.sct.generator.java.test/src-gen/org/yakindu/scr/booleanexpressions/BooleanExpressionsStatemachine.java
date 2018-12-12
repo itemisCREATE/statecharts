@@ -274,9 +274,9 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 	
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
-		sCInterface.setAnd(sCInterface.myBool1 && sCInterface.myBool2);
+		sCInterface.setAnd((sCInterface.myBool1 && sCInterface.myBool2));
 		
-		sCInterface.setOr(sCInterface.myBool1 || sCInterface.myBool2);
+		sCInterface.setOr((sCInterface.myBool1 || sCInterface.myBool2));
 		
 		sCInterface.setNot(!sCInterface.myBool1);
 		
@@ -335,7 +335,7 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 		enterSequence_main_region_StateA_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -343,7 +343,7 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e1) {
 					exitSequence_main_region_StateA();
 					enterSequence_main_region_StateB_default();
@@ -352,8 +352,6 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -361,11 +359,9 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

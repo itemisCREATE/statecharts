@@ -378,7 +378,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		enterSequence__region1_Closed_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -386,16 +386,14 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
-				if ((sCIUser.numberPressed) && (sCIUser.getNumberPressedValue()==getNumber1())) {
+			if (react()==false) {
+				if (((sCIUser.numberPressed) && (sCIUser.getNumberPressedValue()==getNumber1()))) {
 					exitSequence_region_1_Idle();
 					enterSequence_region_1_Number1Pressed_default();
 				} else {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -404,8 +402,8 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
-				if ((sCIUser.numberPressed) && (sCIUser.getNumberPressedValue()==getNumber2())) {
+			if (react()==false) {
+				if (((sCIUser.numberPressed) && (sCIUser.getNumberPressedValue()==getNumber2()))) {
 					exitSequence_region_1_Number1Pressed();
 					enterSequence_region_1_Number2Pressed_default();
 				} else {
@@ -418,8 +416,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -427,8 +423,8 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
-				if ((sCIUser.numberPressed) && (sCIUser.getNumberPressedValue()==getNumber3())) {
+			if (react()==false) {
+				if (((sCIUser.numberPressed) && (sCIUser.getNumberPressedValue()==getNumber3()))) {
 					exitSequence_region_1_Number2Pressed();
 					enterSequence_region_1_Number3Pressed_default();
 				} else {
@@ -441,8 +437,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -450,7 +444,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCIUser.numberPressed) {
 					exitSequence_region_1_Number3Pressed();
 					enterSequence_region_1_Idle_default();
@@ -458,8 +452,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -475,8 +467,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -490,8 +480,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 			} else {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

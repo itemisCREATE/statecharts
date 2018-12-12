@@ -263,7 +263,7 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		enterSequence_r2_C_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -271,7 +271,7 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (i2) {
 					exitSequence_r1_A();
 					enterSequence_r1_B_default();
@@ -292,7 +292,7 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_r1_B();
 					enterSequence_r1_A_default();
@@ -300,8 +300,6 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -316,8 +314,6 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 			} else {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -334,8 +330,6 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 			} else {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

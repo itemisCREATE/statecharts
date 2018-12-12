@@ -241,7 +241,7 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 		enterSequence_main_region_Start_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -249,14 +249,12 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_Start();
 				sCInterface.setNumber(sCInterface.getNumber() + 1);
 				
 				react_main_region__choice_0();
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -265,11 +263,9 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -278,11 +274,9 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

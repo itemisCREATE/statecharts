@@ -212,12 +212,12 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 	
 	/* Entry action for state 'B'. */
 	private void entryAction_main_region_B() {
-		sCInterface.setResult(SCINamed.two * SCInterface.x);
+		sCInterface.setResult((SCINamed.two * SCInterface.x));
 	}
 	
 	/* Entry action for state 'C'. */
 	private void entryAction_main_region_C() {
-		sCInterface.setResult(sCInterface.result * IConstantsStatemachine.internalConstant);
+		sCInterface.setResult((sCInterface.result * IConstantsStatemachine.internalConstant));
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -285,7 +285,7 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		enterSequence_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -293,7 +293,7 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
@@ -302,8 +302,6 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -311,7 +309,7 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_C_default();
@@ -320,8 +318,6 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -329,18 +325,16 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e2) {
 					exitSequence_main_region_C();
-					sCInterface.setResult(sCInterface.getE2Value() * SCInterface.x * SCINamed.two * IConstantsStatemachine.internalConstant);
+					sCInterface.setResult((((sCInterface.getE2Value() * SCInterface.x) * SCINamed.two) * IConstantsStatemachine.internalConstant));
 					
 					enterSequence_main_region_A_default();
 				} else {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

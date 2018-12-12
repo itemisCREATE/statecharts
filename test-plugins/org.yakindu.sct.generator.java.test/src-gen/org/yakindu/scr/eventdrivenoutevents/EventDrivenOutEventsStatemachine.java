@@ -263,7 +263,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		enterSequence_second_region_StateC_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -271,7 +271,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e1) {
 					exitSequence_main_region_StateA();
 					enterSequence_main_region_StateB_default();
@@ -280,8 +280,6 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -289,11 +287,9 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -309,8 +305,6 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -319,8 +313,6 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		
 		if (try_transition) {
 			did_transition = false;
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

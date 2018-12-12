@@ -445,7 +445,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		enterSequence_EventDrivenInternalEvent_check_VALID_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		sCInterface.setX(sCInterface.getX() + 1);
 		
 		return false;
@@ -455,7 +455,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (i2) {
 					exitSequence_EventDrivenInternalEvent_r1_A();
 					sCInterface.setI2_sequence(sCInterface.x);
@@ -478,7 +478,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.reset) {
 					exitSequence_EventDrivenInternalEvent_r1_B();
 					enterSequence_EventDrivenInternalEvent_r1_A_default();
@@ -488,7 +488,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			}
 		}
 		if (did_transition==false) {
-			if ((i2) && (sCInterface.getI2_sequence()<10)) {
+			if (((i2) && (sCInterface.getI2_sequence()<10))) {
 				sCInterface.setI2_sequence(sCInterface.getI2_sequence() + 1);
 			}
 		}
@@ -510,8 +510,6 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -527,7 +525,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			}
 		}
 		if (did_transition==false) {
-			if ((i1) && (sCInterface.getI1_sequence()<10)) {
+			if (((i1) && (sCInterface.getI1_sequence()<10))) {
 				sCInterface.setI1_sequence(sCInterface.getI1_sequence() + 1);
 			}
 		}
@@ -538,14 +536,12 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if ((sCInterface.start && i1) || (sCInterface.start && i2) || (i1 && i2)) {
+			if (((((sCInterface.start && i1)) || ((sCInterface.start && i2))) || ((i1 && i2)))) {
 				exitSequence_EventDrivenInternalEvent_check_VALID();
 				enterSequence_EventDrivenInternalEvent_check_MULTIPLEEVENTS_default();
 			} else {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -560,8 +556,6 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			} else {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

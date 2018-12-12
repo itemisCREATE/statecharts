@@ -323,7 +323,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		enterSequence_main_region_B_r2_D2_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -331,7 +331,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_main_region_A();
 					react_main_region__sync0();
@@ -345,8 +345,6 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -354,7 +352,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_A_default();
@@ -362,8 +360,6 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -381,8 +377,6 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -393,8 +387,6 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 			if (main_region_B_react(try_transition)==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -410,8 +402,6 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -420,8 +410,6 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		
 		if (try_transition) {
 			did_transition = false;
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

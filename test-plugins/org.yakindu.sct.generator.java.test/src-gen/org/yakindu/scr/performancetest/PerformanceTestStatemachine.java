@@ -821,7 +821,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		enterSequence_mr_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		sCInterface.setC(sCInterface.getC() + 1);
 		
 		if (timeEvents[0]) {
@@ -839,7 +839,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e1) {
 					exitSequence_mr_A();
 					enterSequence_mr_B_default();
@@ -848,8 +848,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -857,11 +855,9 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -879,8 +875,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -896,8 +890,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -915,8 +907,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -932,8 +922,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -951,8 +939,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -965,7 +951,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 					exitSequence_mr_B_r1_S();
 					react_mr_B_r1__choice_0();
 				} else {
-					if (true && isStateActive(State.mr_B_r2_W) && sCInterface.e3) {
+					if (((true && isStateActive(State.mr_B_r2_W)) && sCInterface.e3)) {
 						exitSequence_mr_B();
 						react_mr__sync0();
 					} else {
@@ -973,8 +959,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 					}
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -992,8 +976,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -1010,8 +992,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -1026,8 +1006,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -1041,8 +1019,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 			} else {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -1063,8 +1039,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -1084,8 +1058,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -1093,14 +1065,12 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.e3 && isStateActive(State.mr_B_r1_S) && true) {
+			if (((sCInterface.e3 && isStateActive(State.mr_B_r1_S)) && true)) {
 				exitSequence_mr_B();
 				react_mr__sync0();
 			} else {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

@@ -468,7 +468,7 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		enterSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAA_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		sCInterface.setSm_local((sCInterface.assignCnt(sCInterface.getCnt() + 1)));
 		
 		return false;
@@ -478,8 +478,8 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
-				if ((sCInterface.e) && (!sCInterface.getDisable_a())) {
+			if (react()==false) {
+				if (((sCInterface.e) && (!sCInterface.getDisable_a()))) {
 					exitSequence_ParentFirstLocalReactions_r_A();
 					enterSequence_ParentFirstLocalReactions_r_B_default();
 				} else {
@@ -498,7 +498,7 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		
 		if (try_transition) {
 			if (parentFirstLocalReactions_r_A_react(try_transition)==false) {
-				if ((sCInterface.e) && (!sCInterface.getDisable_aa())) {
+				if (((sCInterface.e) && (!sCInterface.getDisable_aa()))) {
 					exitSequence_ParentFirstLocalReactions_r_A_r_AA();
 					enterSequence_ParentFirstLocalReactions_r_A_r_AB_default();
 				} else {
@@ -517,7 +517,7 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		
 		if (try_transition) {
 			if (parentFirstLocalReactions_r_A_r_AA_react(try_transition)==false) {
-				if ((sCInterface.e) && (!sCInterface.getDisable_aaa())) {
+				if (((sCInterface.e) && (!sCInterface.getDisable_aaa()))) {
 					exitSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAA();
 					enterSequence_ParentFirstLocalReactions_r_A_r_AA_r_AAB_default();
 				} else {
@@ -539,8 +539,6 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -552,8 +550,6 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -561,11 +557,9 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

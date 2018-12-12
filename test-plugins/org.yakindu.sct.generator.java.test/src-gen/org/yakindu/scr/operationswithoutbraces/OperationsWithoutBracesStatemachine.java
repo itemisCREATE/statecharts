@@ -316,7 +316,7 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		enterSequence_another_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -324,16 +324,14 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
-				if ((true) && (!sCInterface.operationCallback.myBoolOp())) {
+			if (react()==false) {
+				if (((true) && (!sCInterface.operationCallback.myBoolOp()))) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -342,16 +340,14 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
-				if ((true) && (sCInterface.operationCallback.myIntOp()==0)) {
+			if (react()==false) {
+				if (((true) && (sCInterface.operationCallback.myIntOp()==0))) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_C_default();
 				} else {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -360,16 +356,14 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
-				if ((true) && (sCInterface.operationCallback.myRealOp()==0.0)) {
+			if (react()==false) {
+				if (((true) && (sCInterface.operationCallback.myRealOp()==0.0))) {
 					exitSequence_main_region_C();
 					enterSequence_main_region_D_default();
 				} else {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -378,11 +372,9 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -391,14 +383,12 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if ((true) && (!sCInterface.operationCallback.myBoolOp())) {
+			if (((true) && (!sCInterface.operationCallback.myBoolOp()))) {
 				exitSequence_another_region_A();
 				enterSequence_another_region_B_default();
 			} else {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -407,14 +397,12 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if ((true) && (sCInterface.operationCallback.myIntOp()==0)) {
+			if (((true) && (sCInterface.operationCallback.myIntOp()==0))) {
 				exitSequence_another_region_B();
 				enterSequence_another_region_C_default();
 			} else {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -423,14 +411,12 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if ((true) && (sCInterface.operationCallback.myRealOp()==0.0)) {
+			if (((true) && (sCInterface.operationCallback.myRealOp()==0.0))) {
 				exitSequence_another_region_C();
 				enterSequence_another_region_D_default();
 			} else {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -440,8 +426,6 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		
 		if (try_transition) {
 			did_transition = false;
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

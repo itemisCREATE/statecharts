@@ -919,7 +919,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		enterSequence_main_region_A_r_AD_r3_ADC_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -935,7 +935,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 			}
 		}
 		if (did_transition==false) {
-			did_transition = react(try_transition);
+			did_transition = react();
 		}
 		return did_transition;
 	}
@@ -981,8 +981,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		
 		if (try_transition) {
 			did_transition = false;
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -1065,8 +1063,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		if (try_transition) {
 			did_transition = false;
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -1075,8 +1071,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		
 		if (try_transition) {
 			did_transition = false;
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
