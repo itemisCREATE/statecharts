@@ -16,13 +16,14 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
+import org.yakindu.sct.generator.c.gtest.GTestHelper.Compiler;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
 @GTest(sourceFile = "gtests/OperationsWithoutBracesTest/OperationsWithoutBracesTestCustom.cc", program = "gtests/OperationsWithoutBracesTest/OperationsWithoutBraces", model = "testmodels/SCTUnit/OperationsWithoutBraces.sct", statechartBundle = "org.yakindu.sct.test.models")
 @RunWith(GTestRunner.class)
 public class OperationsWithoutBracesTestCustom {
 
-	protected final GTestHelper helper = new GTestHelper(this) {
+	protected final GTestHelper helper = new GTestHelper(this, Compiler.GPLUSPLUS) {
 
 		@Override
 		protected void getTestDataFiles(Collection<String> files) {
