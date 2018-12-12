@@ -243,7 +243,7 @@ class APIGenerator {
 			«raiseTimeEventSignature»
 			{
 				if ( ((«INTPTR_TYPE»)evid) >= ((«INTPTR_TYPE»)&(«scHandle»->timeEvents))
-					&&  ((«INTPTR_TYPE»)evid) < ((«INTPTR_TYPE»)&(«scHandle»->timeEvents)) + sizeof(«timeEventScope.type»))
+					&&  ((«INTPTR_TYPE»)evid) < ((«INTPTR_TYPE»)&(«scHandle»->timeEvents)) + (unsigned)sizeof(«timeEventScope.type»))
 					{
 					*(«BOOL_TYPE»*)evid = «TRUE»;
 				}		
