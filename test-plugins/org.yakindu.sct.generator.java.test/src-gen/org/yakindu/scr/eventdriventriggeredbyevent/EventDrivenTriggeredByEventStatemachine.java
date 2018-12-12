@@ -186,7 +186,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 	
 	/* Entry action for state 'B'. */
 	private void entryAction_EventDrivenTriggeredByEvent_main_region_B() {
-		timer.setTimer(this, 0, 100000 * 1000, false);
+		timer.setTimer(this, 0, (100000 * 1000), false);
 	}
 	
 	/* Exit action for state 'B'. */
@@ -245,7 +245,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 		enterSequence_EventDrivenTriggeredByEvent_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -253,7 +253,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_EventDrivenTriggeredByEvent_main_region_A();
 					enterSequence_EventDrivenTriggeredByEvent_main_region_B_default();
@@ -272,7 +272,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_EventDrivenTriggeredByEvent_main_region_B();
 					enterSequence_EventDrivenTriggeredByEvent_main_region_A_default();

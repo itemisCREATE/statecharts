@@ -361,7 +361,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		enterSequence_main_region_B_r1_E__region0_F_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -369,7 +369,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.toB) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
@@ -383,8 +383,6 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -392,7 +390,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.toA) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_A_default();
@@ -400,8 +398,6 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -419,8 +415,6 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -436,8 +430,6 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -455,8 +447,6 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -467,8 +457,6 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 			if (main_region_B_r1_E_react(try_transition)==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

@@ -915,7 +915,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -923,8 +923,8 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
-				if ((sCInterface.auto) && (sCInterface.getCase())) {
+			if (react()==false) {
+				if (((sCInterface.auto) && (sCInterface.getCase()))) {
 					exitSequence_auto_char();
 					sCInterface.setDo(sCInterface.getDo() + 1);
 					
@@ -934,8 +934,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -943,11 +941,9 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -960,8 +956,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -972,8 +966,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			if (auto_loop_switch_case_react(try_transition)==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

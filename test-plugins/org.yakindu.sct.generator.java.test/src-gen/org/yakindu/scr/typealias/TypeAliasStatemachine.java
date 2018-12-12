@@ -267,7 +267,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		enterSequence_main_region_Start_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -275,7 +275,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.getMyVar()==1) {
 					exitSequence_main_region_Start();
 					enterSequence_main_region_Mid_default();
@@ -284,8 +284,6 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -293,7 +291,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if ((sCInterface.getMyString()== null?"TypeSystem" ==null :sCInterface.getMyString().equals("TypeSystem"))) {
 					exitSequence_main_region_Mid();
 					enterSequence_main_region_Mid2_default();
@@ -302,8 +300,6 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -311,7 +307,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.myEvent) {
 					exitSequence_main_region_Mid2();
 					enterSequence_main_region_End_default();
@@ -320,8 +316,6 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -329,11 +323,9 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

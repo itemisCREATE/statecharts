@@ -190,7 +190,7 @@ public class TracingStatemachine implements ITracingStatemachine {
 		enterSequence_main_region_StateA_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -204,7 +204,7 @@ public class TracingStatemachine implements ITracingStatemachine {
 			enterSequence_main_region__final__default();
 		}
 		if (did_transition==false) {
-			did_transition = react(try_transition);
+			did_transition = react();
 		}
 		return did_transition;
 	}
@@ -216,7 +216,7 @@ public class TracingStatemachine implements ITracingStatemachine {
 			did_transition = false;
 		}
 		if (did_transition==false) {
-			did_transition = react(try_transition);
+			did_transition = react();
 		}
 		return did_transition;
 	}

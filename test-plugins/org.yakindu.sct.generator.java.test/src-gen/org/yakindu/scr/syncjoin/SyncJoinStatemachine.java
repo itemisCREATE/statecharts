@@ -369,7 +369,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		enterSequence_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -377,16 +377,14 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
-				if (sCInterface.e || sCInterface.f) {
+			if (react()==false) {
+				if ((sCInterface.e || sCInterface.f)) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -395,11 +393,9 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -417,8 +413,6 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -427,15 +421,13 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		
 		if (try_transition) {
 			if (main_region_B_react(try_transition)==false) {
-				if (sCInterface.jc && isStateActive(State.main_region_B_r2_D2) && sCInterface.jd) {
+				if (((sCInterface.jc && isStateActive(State.main_region_B_r2_D2)) && sCInterface.jd)) {
 					exitSequence_main_region_B();
 					react_main_region__sync0();
 				} else {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -451,8 +443,6 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -460,14 +450,12 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.jd && isStateActive(State.main_region_B_r1_C2) && sCInterface.jc) {
+			if (((sCInterface.jd && isStateActive(State.main_region_B_r1_C2)) && sCInterface.jc)) {
 				exitSequence_main_region_B();
 				react_main_region__sync0();
 			} else {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

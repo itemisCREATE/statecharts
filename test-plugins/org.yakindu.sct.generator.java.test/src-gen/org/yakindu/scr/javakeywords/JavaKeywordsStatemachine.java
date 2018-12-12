@@ -1426,7 +1426,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		enterSequence_goto_void_volatile_transient_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -1434,8 +1434,8 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
-				if ((sCInterface.whileEvent) && (true)) {
+			if (react()==false) {
+				if (((sCInterface.whileEvent) && (true))) {
 					exitSequence_goto_abstract();
 					sCInterface.setNative(false);
 					
@@ -1445,8 +1445,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -1454,7 +1452,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.whileEvent) {
 					exitSequence_goto_boolean();
 					enterSequence_goto_void_default();
@@ -1468,8 +1466,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -1477,11 +1473,9 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -1494,8 +1488,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -1506,8 +1498,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			if (goto_void_volatile_transient_react(try_transition)==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -1524,8 +1514,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

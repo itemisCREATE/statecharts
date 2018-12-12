@@ -236,7 +236,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		enterSequence_R2_R2A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -244,7 +244,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (isStateActive(State.r2_R2B)) {
 					exitSequence_R1_R1A();
 					enterSequence_R1_R1B_default();
@@ -253,8 +253,6 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -262,11 +260,9 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -282,8 +278,6 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -292,8 +286,6 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		
 		if (try_transition) {
 			did_transition = false;
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

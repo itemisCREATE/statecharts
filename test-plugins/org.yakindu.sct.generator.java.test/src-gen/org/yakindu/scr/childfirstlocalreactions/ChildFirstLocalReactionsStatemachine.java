@@ -468,7 +468,7 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		enterSequence_ChildFirstLocalReactions_r_A_r_AA_r_AAA_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		sCInterface.setSm_local((sCInterface.assignCnt(sCInterface.getCnt() + 1)));
 		
 		return false;
@@ -478,10 +478,10 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if ((sCInterface.e) && (!sCInterface.getDisable_a())) {
+			if (((sCInterface.e) && (!sCInterface.getDisable_a()))) {
 				exitSequence_ChildFirstLocalReactions_r_A();
 				enterSequence_ChildFirstLocalReactions_r_B_default();
-				react(false);
+				react();
 			} else {
 				did_transition = false;
 			}
@@ -489,7 +489,7 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		if (did_transition==false) {
 			sCInterface.setA_local((sCInterface.assignCnt(sCInterface.getCnt() + 1)));
 			
-			did_transition = react(try_transition);
+			did_transition = react();
 		}
 		return did_transition;
 	}
@@ -498,7 +498,7 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if ((sCInterface.e) && (!sCInterface.getDisable_aa())) {
+			if (((sCInterface.e) && (!sCInterface.getDisable_aa()))) {
 				exitSequence_ChildFirstLocalReactions_r_A_r_AA();
 				enterSequence_ChildFirstLocalReactions_r_A_r_AB_default();
 				childFirstLocalReactions_r_A_react(false);
@@ -518,7 +518,7 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if ((sCInterface.e) && (!sCInterface.getDisable_aaa())) {
+			if (((sCInterface.e) && (!sCInterface.getDisable_aaa()))) {
 				exitSequence_ChildFirstLocalReactions_r_A_r_AA_r_AAA();
 				enterSequence_ChildFirstLocalReactions_r_A_r_AA_r_AAB_default();
 				childFirstLocalReactions_r_A_r_AA_react(false);
@@ -565,7 +565,7 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 			did_transition = false;
 		}
 		if (did_transition==false) {
-			did_transition = react(try_transition);
+			did_transition = react();
 		}
 		return did_transition;
 	}

@@ -204,7 +204,7 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 		enterSequence_main_region_B_subregion1_B1_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -212,7 +212,7 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.event1) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
@@ -221,8 +221,6 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -230,11 +228,9 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -246,8 +242,6 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 			if (main_region_B_react(try_transition)==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

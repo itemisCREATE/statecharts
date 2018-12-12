@@ -147,7 +147,7 @@ public class FinalStateStatemachine implements IFinalStateStatemachine {
 		enterSequence_main_region_myState_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -155,12 +155,10 @@ public class FinalStateStatemachine implements IFinalStateStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_myState();
 				enterSequence_main_region__final__default();
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -169,11 +167,9 @@ public class FinalStateStatemachine implements IFinalStateStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

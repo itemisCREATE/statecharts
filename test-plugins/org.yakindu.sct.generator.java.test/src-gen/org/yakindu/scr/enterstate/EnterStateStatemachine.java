@@ -270,7 +270,7 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 		enterSequence_r_B_r_F_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -278,7 +278,7 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_r_A();
 					enterSequence_r_B_default();
@@ -297,8 +297,6 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -306,11 +304,9 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -323,8 +319,6 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -335,8 +329,6 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 			if (r_B_react(try_transition)==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

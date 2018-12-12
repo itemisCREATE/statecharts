@@ -414,7 +414,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		enterSequence_EntryReactionAction_r1_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -422,7 +422,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.d) {
 					exitSequence_EntryReactionAction_r2_B();
 					enterSequence_EntryReactionAction_r2_D_default();
@@ -430,8 +430,6 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -449,8 +447,6 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -467,8 +463,6 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -476,7 +470,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.b) {
 					exitSequence_EntryReactionAction_r2_D();
 					enterSequence_EntryReactionAction_r2_B_other();
@@ -490,8 +484,6 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -500,8 +492,6 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		
 		if (try_transition) {
 			did_transition = false;
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

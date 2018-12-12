@@ -562,7 +562,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		}
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -570,11 +570,9 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -586,8 +584,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 			if (r_A_react(try_transition)==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -602,8 +598,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 			} else {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -621,8 +615,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -634,8 +626,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -646,8 +636,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 			if (r2_B_react(try_transition)==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -663,8 +651,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -673,8 +659,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		
 		if (try_transition) {
 			did_transition = false;
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -687,8 +671,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -699,8 +681,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 			if (r3_D_r_DA_react(try_transition)==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

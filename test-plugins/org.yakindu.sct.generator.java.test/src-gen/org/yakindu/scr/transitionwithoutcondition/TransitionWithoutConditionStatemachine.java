@@ -149,7 +149,7 @@ public class TransitionWithoutConditionStatemachine implements ITransitionWithou
 		enterSequence_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -157,12 +157,10 @@ public class TransitionWithoutConditionStatemachine implements ITransitionWithou
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_A();
 				enterSequence_main_region_B_default();
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -171,11 +169,9 @@ public class TransitionWithoutConditionStatemachine implements ITransitionWithou
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

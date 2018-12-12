@@ -161,7 +161,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
-		timer.setTimer(this, 2, 1 * 1000, true);
+		timer.setTimer(this, 2, (1 * 1000), true);
 		
 		enterSequence_main_region_default();
 	}
@@ -317,7 +317,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	
 	/* Entry action for state 'Composite_s1_s2'. */
 	private void entryAction_main_region_Composite_s1_s2() {
-		timer.setTimer(this, 0, 10 * 1000, false);
+		timer.setTimer(this, 0, (10 * 1000), false);
 	}
 	
 	/* Entry action for state 's1'. */
@@ -447,7 +447,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		enterSequence_main_region_Composite_s1_s2_inner_region_s1_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		if (timeEvents[2]) {
 			sCInterface.operationCallback.displayTime();
 		}
@@ -460,11 +460,9 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -473,7 +471,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (timeEvents[0]) {
 					exitSequence_main_region_Composite_s1_s2();
 					enterSequence_main_region__final__default();
@@ -481,8 +479,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -507,8 +503,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -524,8 +518,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

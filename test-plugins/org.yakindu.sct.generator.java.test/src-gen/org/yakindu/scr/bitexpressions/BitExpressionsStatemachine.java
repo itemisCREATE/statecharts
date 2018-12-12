@@ -294,17 +294,17 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
-		sCInterface.setLeftBitshift(sCInterface.myBit1 << 1);
+		sCInterface.setLeftBitshift((sCInterface.myBit1 << 1));
 		
-		sCInterface.setRightBitshift(sCInterface.myBit1 >> 1);
+		sCInterface.setRightBitshift((sCInterface.myBit1 >> 1));
 		
 		sCInterface.setComplementBitshift(~sCInterface.myBit1);
 		
-		sCInterface.setBitwiseAnd(sCInterface.myBit1 & sCInterface.myBit2);
+		sCInterface.setBitwiseAnd((sCInterface.myBit1 & sCInterface.myBit2));
 		
-		sCInterface.setBitwiseOr(sCInterface.myBit1 | sCInterface.myBit2);
+		sCInterface.setBitwiseOr((sCInterface.myBit1 | sCInterface.myBit2));
 		
-		sCInterface.setBitwiseXor(sCInterface.myBit1 ^ sCInterface.myBit2);
+		sCInterface.setBitwiseXor((sCInterface.myBit1 ^ sCInterface.myBit2));
 	}
 	
 	/* 'default' enter sequence for state StateA */
@@ -357,7 +357,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		enterSequence_main_region_StateA_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -365,7 +365,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e1) {
 					exitSequence_main_region_StateA();
 					enterSequence_main_region_StateB_default();
@@ -374,8 +374,6 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -383,11 +381,9 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

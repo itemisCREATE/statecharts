@@ -276,7 +276,7 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 		enterSequence_main_region_A__region0_B_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -284,7 +284,7 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_main_region_A();
 					entryAction_main_region_A();
@@ -293,8 +293,6 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -312,8 +310,6 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -329,8 +325,6 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

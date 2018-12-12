@@ -310,7 +310,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		enterSequence_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -318,7 +318,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.event2) {
 					exitSequence_someRegion_A();
 					enterSequence_someRegion_B_default();
@@ -327,8 +327,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -336,11 +334,9 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -361,7 +357,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 						exitSequence_main_region_A();
 						enterSequence_main_region_D_default();
 					} else {
-						if ((sCInterface.event2) && (!isStateActive(State.someRegion_B))) {
+						if (((sCInterface.event2) && (!isStateActive(State.someRegion_B)))) {
 							exitSequence_main_region_A();
 							enterSequence_main_region_E_default();
 						} else {
@@ -370,8 +366,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 					}
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -382,8 +376,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		if (try_transition) {
 			did_transition = false;
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -392,8 +384,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		
 		if (try_transition) {
 			did_transition = false;
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -404,8 +394,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		if (try_transition) {
 			did_transition = false;
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -414,8 +402,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		
 		if (try_transition) {
 			did_transition = false;
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

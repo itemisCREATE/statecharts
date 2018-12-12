@@ -681,7 +681,7 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		enterSequence_ChildFirstOrthogonalReactions_r2_C_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		sCInterface.setSm_local(sCInterface.operationCallback.next());
 		
 		return false;
@@ -782,8 +782,6 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		if (try_transition) {
 			did_transition = false;
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -794,7 +792,7 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 			if (sCInterface.operationCallback.check("C")) {
 				exitSequence_ChildFirstOrthogonalReactions_r2_C();
 				enterSequence_ChildFirstOrthogonalReactions_r2_D_default();
-				react(false);
+				react();
 			} else {
 				did_transition = false;
 			}
@@ -802,7 +800,7 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		if (did_transition==false) {
 			sCInterface.setC_local(sCInterface.operationCallback.next());
 			
-			did_transition = react(try_transition);
+			did_transition = react();
 		}
 		return did_transition;
 	}
@@ -814,7 +812,7 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 			did_transition = false;
 		}
 		if (did_transition==false) {
-			did_transition = react(try_transition);
+			did_transition = react();
 		}
 		return did_transition;
 	}

@@ -547,7 +547,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		}
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -555,7 +555,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.event1) {
 					exitSequence_mainRegion_State1();
 					enterSequence_mainRegion_State2_default();
@@ -564,8 +564,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -573,7 +571,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.event2) {
 					exitSequence_mainRegion_State2();
 					enterSequence_mainRegion_State1_default();
@@ -581,8 +579,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -600,8 +596,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -617,8 +611,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -636,8 +628,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -653,8 +643,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -672,8 +660,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -690,8 +676,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -702,8 +686,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 			if (mainRegion_State2_react(try_transition)==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

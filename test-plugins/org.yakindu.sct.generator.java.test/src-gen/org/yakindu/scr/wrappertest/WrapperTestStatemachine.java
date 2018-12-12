@@ -130,7 +130,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
-		timer.setTimer(this, 1, 1 * 1000, true);
+		timer.setTimer(this, 1, (1 * 1000), true);
 		
 		enterSequence_main_region_default();
 	}
@@ -353,7 +353,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		enterSequence_main_region_s1_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		if (timeEvents[1]) {
 			sCInterface.operationCallback.displayTime();
 		}
@@ -366,7 +366,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.getCycles()==40) {
 					exitSequence_main_region_s1();
 					enterSequence_main_region__final__default();
@@ -387,8 +387,6 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -396,7 +394,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.ev_in) {
 					exitSequence_main_region_s2();
 					enterSequence_main_region_s1_default();
@@ -405,8 +403,6 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -414,11 +410,9 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
