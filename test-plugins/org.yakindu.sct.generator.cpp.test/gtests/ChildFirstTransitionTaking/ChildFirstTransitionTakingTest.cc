@@ -91,41 +91,41 @@ TEST_F(ChildFirstTransitionTakingTest, testLocalReactionsOnTransitionsParentScop
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r2_C_r_CA_r_CAA));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_cLocalReaction()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_cLocalReaction()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_caLocalReaction()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_caLocalReaction()== 0);
 	
 	statechart->getDefaultSCI()->raise_go();
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r2_C_r_CA_r_CAB));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_cLocalReaction()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_cLocalReaction()== 1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_caLocalReaction()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_caLocalReaction()== 1);
 	
 	statechart->getDefaultSCI()->raise_go();
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r2_C_r_CA_r_CAA));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_cLocalReaction()== 2l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_cLocalReaction()== 2);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_caLocalReaction()== 2l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_caLocalReaction()== 2);
 	
 	statechart->getDefaultSCI()->raise_e();
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r2_C_r_CB));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_cLocalReaction()== 3l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_cLocalReaction()== 3);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_caLocalReaction()== 2l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_caLocalReaction()== 2);
 	
 	statechart->getDefaultSCI()->raise_e();
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstTransitionTaking::ChildFirstTransitionTaking_r2_C_r_CA));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_cLocalReaction()== 4l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_cLocalReaction()== 4);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_caLocalReaction()== 2l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_caLocalReaction()== 2);
 	
 	
 }

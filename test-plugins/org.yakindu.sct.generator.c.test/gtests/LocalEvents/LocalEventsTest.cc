@@ -45,10 +45,10 @@ void LocalEventsTest::test()
 	localEventsIface_raise_e(&statechart);
 	EXPECT_TRUE(localEvents_isStateActive(&statechart, LocalEvents_localEvents_r1_Comp1_r_D1));
 	EXPECT_TRUE(localEvents_isStateActive(&statechart, LocalEvents_localEvents_r2_Comp2_r_D2));
-	EXPECT_TRUE(localEventsIface_get_cycleCountSm(&statechart)== 5l);
-	EXPECT_TRUE(localEventsIface_get_cycleCount1(&statechart)== 5l);
-	EXPECT_TRUE(localEventsIface_get_cycleCount2(&statechart)== 5l);
-	EXPECT_TRUE(localEventsIface_get_checksum(&statechart)== 3l);
+	EXPECT_TRUE(localEventsIface_get_cycleCountSm(&statechart)== 5);
+	EXPECT_TRUE(localEventsIface_get_cycleCount1(&statechart)== 5);
+	EXPECT_TRUE(localEventsIface_get_cycleCount2(&statechart)== 5);
+	EXPECT_TRUE(localEventsIface_get_checksum(&statechart)== 3);
 	localEvents_exit(&statechart);
 }
 

@@ -46,7 +46,7 @@ void ConstOnlyInternalScopeTest::statechartEntry()
 void ConstOnlyInternalScopeTest::stateTransition()
 {
 	constOnlyInternalScope_enter(&statechart);
-	constOnlyInternalScopeIface_raise_e(&statechart, 1l);
+	constOnlyInternalScopeIface_raise_e(&statechart, 1);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(constOnlyInternalScope_isStateActive(&statechart, ConstOnlyInternalScope_ConstOnlyInternalScope_main_region_B));
 }

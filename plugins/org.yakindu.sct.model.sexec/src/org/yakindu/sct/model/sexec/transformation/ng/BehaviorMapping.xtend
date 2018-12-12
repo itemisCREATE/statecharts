@@ -40,7 +40,7 @@ class BehaviorMapping extends org.yakindu.sct.model.sexec.transformation.Behavio
 
 
 		if (shouldExecuteParent.apply(parent, execRegion)) {
-			_call(parent.reactMethod)._with(_false)._statement
+			parent.callReact(_false)._statement
 		}
 	}
 	

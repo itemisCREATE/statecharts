@@ -181,7 +181,7 @@ TEST_F(SyncJoinTest, doubleEntryActionBug) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_A));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 1);
 	
 	
 }

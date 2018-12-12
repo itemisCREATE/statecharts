@@ -42,7 +42,7 @@ void LocalReactionsTest::localReactionsTest()
 	localReactions_enter(&statechart);
 	EXPECT_TRUE(localReactions_isStateActive(&statechart, LocalReactions_main_region_A));
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(localReactionsIface_get_x(&statechart)== 1l);
+	EXPECT_TRUE(localReactionsIface_get_x(&statechart)== 1);
 }
 
 void LocalReactionsTest::setTimer(LocalReactions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){

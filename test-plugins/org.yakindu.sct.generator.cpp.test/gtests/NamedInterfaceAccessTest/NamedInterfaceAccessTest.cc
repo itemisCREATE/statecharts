@@ -37,15 +37,15 @@ TEST_F(NamedInterfaceAccessTest, SafeOpenSuccess) {
 	
 	runner->proceed_cycles(1);
 	
-	statechart->getSCI_User()->raise_numberPressed(3l);
+	statechart->getSCI_User()->raise_numberPressed(3);
 	
 	runner->proceed_cycles(1);
 	
-	statechart->getSCI_User()->raise_numberPressed(7l);
+	statechart->getSCI_User()->raise_numberPressed(7);
 	
 	runner->proceed_cycles(1);
 	
-	statechart->getSCI_User()->raise_numberPressed(5l);
+	statechart->getSCI_User()->raise_numberPressed(5);
 	
 	runner->proceed_cycles(1);
 	

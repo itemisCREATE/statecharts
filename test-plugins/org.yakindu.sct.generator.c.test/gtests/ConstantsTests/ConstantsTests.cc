@@ -41,19 +41,19 @@ void ConstantsTests::constantDefinition()
 {
 	constants_enter(&statechart);
 	EXPECT_TRUE(constants_isStateActive(&statechart, Constants_main_region_A));
-	EXPECT_TRUE(constantsIface_get_x(&statechart)== 10l);
-	EXPECT_TRUE(constantsIface_get_y(&statechart)== 20l);
+	EXPECT_TRUE(constantsIface_get_x(&statechart)== 10);
+	EXPECT_TRUE(constantsIface_get_y(&statechart)== 20);
 	EXPECT_TRUE(strcmp(constantsIfaceNamed_get_y(&statechart) , "Hello World") == 0);
 	constantsIface_raise_e(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(constantsIface_get_result(&statechart)== 20l);
+	EXPECT_TRUE(constantsIface_get_result(&statechart)== 20);
 	constantsIface_raise_e(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(constants_isStateActive(&statechart, Constants_main_region_C));
-	EXPECT_TRUE(constantsIface_get_result(&statechart)== 100l);
+	EXPECT_TRUE(constantsIface_get_result(&statechart)== 100);
 	constantsIface_raise_e2(&statechart, constantsIface_get_x(&statechart));
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(constantsIface_get_result(&statechart)== 1000l);
+	EXPECT_TRUE(constantsIface_get_result(&statechart)== 1000);
 	EXPECT_TRUE(constants_isStateActive(&statechart, Constants_main_region_A));
 }
 

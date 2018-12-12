@@ -41,13 +41,13 @@ TEST_F(ConstantsVariationTests, constantDefinition) {
 	
 	EXPECT_TRUE(statechart->getSCI_Named()->get_b()== true);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_i2()== 5l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_i2()== 5);
 	
-	EXPECT_TRUE(statechart->getSCI_Named()->get_i()== 5l);
+	EXPECT_TRUE(statechart->getSCI_Named()->get_i()== 5);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_r2()== 5l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_r2()== 5);
 	
-	EXPECT_TRUE(statechart->getSCI_Named()->get_r()== 5l);
+	EXPECT_TRUE(statechart->getSCI_Named()->get_r()== 5);
 	
 	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_str2(), "String") == 0);
 	

@@ -41,11 +41,11 @@ void NamedInterfaceAccessTest::SafeOpenSuccess()
 {
 	namedInterfaceAccess_enter(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	namedInterfaceAccessIfaceUser_raise_numberPressed(&statechart, 3l);
+	namedInterfaceAccessIfaceUser_raise_numberPressed(&statechart, 3);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	namedInterfaceAccessIfaceUser_raise_numberPressed(&statechart, 7l);
+	namedInterfaceAccessIfaceUser_raise_numberPressed(&statechart, 7);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	namedInterfaceAccessIfaceUser_raise_numberPressed(&statechart, 5l);
+	namedInterfaceAccessIfaceUser_raise_numberPressed(&statechart, 5);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(namedInterfaceAccessIfaceSafe_israised_open(&statechart));
 }

@@ -41,26 +41,26 @@ void AlwaysOncycleTest::alwaysOnCycleTest()
 {
 	alwaysOncycle_enter(&statechart);
 	EXPECT_TRUE(alwaysOncycle_isStateActive(&statechart, AlwaysOncycle_main_region_StateA));
-	sc_integer count = 0l;
-	while (count< 5l) {
+	sc_integer count = 0;
+	while (count< 5) {
 		sc_timer_service_proceed_cycles(&timer_service, 1);
 		EXPECT_TRUE(alwaysOncycle_isStateActive(&statechart, AlwaysOncycle_main_region_StateA));
 		count++;
 	}
-	EXPECT_TRUE((alwaysOncycleIface_get_value(&statechart)== 5l));
+	EXPECT_TRUE((alwaysOncycleIface_get_value(&statechart)== 5));
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(alwaysOncycle_isStateActive(&statechart, AlwaysOncycle_main_region_StateB));
-	EXPECT_TRUE(alwaysOncycleIface_get_value(&statechart)== 0l);
-	count = 0l;
-	while (count< 5l) {
+	EXPECT_TRUE(alwaysOncycleIface_get_value(&statechart)== 0);
+	count = 0;
+	while (count< 5) {
 		sc_timer_service_proceed_cycles(&timer_service, 1);
 		EXPECT_TRUE(alwaysOncycle_isStateActive(&statechart, AlwaysOncycle_main_region_StateB));
 		count++;
 	}
-	EXPECT_TRUE((alwaysOncycleIface_get_value(&statechart)== 5l));
+	EXPECT_TRUE((alwaysOncycleIface_get_value(&statechart)== 5));
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(alwaysOncycle_isStateActive(&statechart, AlwaysOncycle_main_region_StateA));
-	EXPECT_TRUE(alwaysOncycleIface_get_value(&statechart)== 0l);
+	EXPECT_TRUE(alwaysOncycleIface_get_value(&statechart)== 0);
 }
 
 void AlwaysOncycleTest::setTimer(AlwaysOncycle* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){

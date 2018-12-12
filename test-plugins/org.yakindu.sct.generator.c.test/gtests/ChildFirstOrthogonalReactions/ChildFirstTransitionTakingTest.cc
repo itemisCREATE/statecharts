@@ -74,24 +74,24 @@ void ChildFirstTransitionTakingTest::testLocalReactionsOnTransitionsParentScope(
 {
 	childFirstTransitionTaking_enter(&statechart);
 	EXPECT_TRUE(childFirstTransitionTaking_isStateActive(&statechart, ChildFirstTransitionTaking_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA));
-	EXPECT_TRUE(childFirstTransitionTakingIface_get_cLocalReaction(&statechart)== 0l);
-	EXPECT_TRUE(childFirstTransitionTakingIface_get_caLocalReaction(&statechart)== 0l);
+	EXPECT_TRUE(childFirstTransitionTakingIface_get_cLocalReaction(&statechart)== 0);
+	EXPECT_TRUE(childFirstTransitionTakingIface_get_caLocalReaction(&statechart)== 0);
 	childFirstTransitionTakingIface_raise_go(&statechart);
 	EXPECT_TRUE(childFirstTransitionTaking_isStateActive(&statechart, ChildFirstTransitionTaking_ChildFirstTransitionTaking_r2_C_r_CA_r_CAB));
-	EXPECT_TRUE(childFirstTransitionTakingIface_get_cLocalReaction(&statechart)== 1l);
-	EXPECT_TRUE(childFirstTransitionTakingIface_get_caLocalReaction(&statechart)== 1l);
+	EXPECT_TRUE(childFirstTransitionTakingIface_get_cLocalReaction(&statechart)== 1);
+	EXPECT_TRUE(childFirstTransitionTakingIface_get_caLocalReaction(&statechart)== 1);
 	childFirstTransitionTakingIface_raise_go(&statechart);
 	EXPECT_TRUE(childFirstTransitionTaking_isStateActive(&statechart, ChildFirstTransitionTaking_ChildFirstTransitionTaking_r2_C_r_CA_r_CAA));
-	EXPECT_TRUE(childFirstTransitionTakingIface_get_cLocalReaction(&statechart)== 2l);
-	EXPECT_TRUE(childFirstTransitionTakingIface_get_caLocalReaction(&statechart)== 2l);
+	EXPECT_TRUE(childFirstTransitionTakingIface_get_cLocalReaction(&statechart)== 2);
+	EXPECT_TRUE(childFirstTransitionTakingIface_get_caLocalReaction(&statechart)== 2);
 	childFirstTransitionTakingIface_raise_e(&statechart);
 	EXPECT_TRUE(childFirstTransitionTaking_isStateActive(&statechart, ChildFirstTransitionTaking_ChildFirstTransitionTaking_r2_C_r_CB));
-	EXPECT_TRUE(childFirstTransitionTakingIface_get_cLocalReaction(&statechart)== 3l);
-	EXPECT_TRUE(childFirstTransitionTakingIface_get_caLocalReaction(&statechart)== 2l);
+	EXPECT_TRUE(childFirstTransitionTakingIface_get_cLocalReaction(&statechart)== 3);
+	EXPECT_TRUE(childFirstTransitionTakingIface_get_caLocalReaction(&statechart)== 2);
 	childFirstTransitionTakingIface_raise_e(&statechart);
 	EXPECT_TRUE(childFirstTransitionTaking_isStateActive(&statechart, ChildFirstTransitionTaking_ChildFirstTransitionTaking_r2_C_r_CA));
-	EXPECT_TRUE(childFirstTransitionTakingIface_get_cLocalReaction(&statechart)== 4l);
-	EXPECT_TRUE(childFirstTransitionTakingIface_get_caLocalReaction(&statechart)== 2l);
+	EXPECT_TRUE(childFirstTransitionTakingIface_get_cLocalReaction(&statechart)== 4);
+	EXPECT_TRUE(childFirstTransitionTakingIface_get_caLocalReaction(&statechart)== 2);
 }
 
 void ChildFirstTransitionTakingTest::setTimer(ChildFirstTransitionTaking* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){

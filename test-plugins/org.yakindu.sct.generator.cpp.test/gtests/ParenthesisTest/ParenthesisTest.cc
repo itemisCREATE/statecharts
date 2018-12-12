@@ -37,7 +37,7 @@ TEST_F(ParenthesisTest, simple) {
 	
 	EXPECT_TRUE(statechart->isStateActive(Parenthesis::mainRegion_A));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_erg()== 8l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_erg()== 8);
 	
 	
 }

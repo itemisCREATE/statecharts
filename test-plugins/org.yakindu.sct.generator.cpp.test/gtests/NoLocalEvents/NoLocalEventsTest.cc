@@ -45,13 +45,13 @@ TEST_F(NoLocalEventsTest, test) {
 	
 	EXPECT_TRUE(statechart->isStateActive(NoLocalEvents::main_region_StateA));
 	
-	EXPECT_TRUE((statechart->getDefaultSCI()->get_x()== 0l));
+	EXPECT_TRUE((statechart->getDefaultSCI()->get_x()== 0));
 	
-	statechart->getDefaultSCI()->raise_i( 42l);
+	statechart->getDefaultSCI()->raise_i( 42);
 	
 	EXPECT_TRUE(statechart->isStateActive(NoLocalEvents::main_region_StateB));
 	
-	EXPECT_TRUE((statechart->getDefaultSCI()->get_x()== 42l));
+	EXPECT_TRUE((statechart->getDefaultSCI()->get_x()== 42));
 	
 	statechart->exit();
 	

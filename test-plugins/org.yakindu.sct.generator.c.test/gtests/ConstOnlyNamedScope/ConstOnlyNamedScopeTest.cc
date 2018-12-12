@@ -46,7 +46,7 @@ void ConstOnlyNamedScopeTest::statechartEntry()
 void ConstOnlyNamedScopeTest::stateTransition()
 {
 	constOnlyNamedScope_enter(&statechart);
-	constOnlyNamedScopeIface_raise_e(&statechart, 1l);
+	constOnlyNamedScopeIface_raise_e(&statechart, 1);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(constOnlyNamedScope_isStateActive(&statechart, ConstOnlyNamedScope_ConstOnlyNamedScope_main_region_B));
 }

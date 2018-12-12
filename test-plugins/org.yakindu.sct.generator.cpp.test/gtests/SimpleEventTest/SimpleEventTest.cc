@@ -37,7 +37,7 @@ TEST_F(SimpleEventTest, simpleEventTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SimpleEvent::main_region_A)) << "Expected A to be active" ;
 	
-	EXPECT_TRUE(5l== 5l);
+	EXPECT_TRUE(5== 5);
 	
 	statechart->getDefaultSCI()->raise_event1();
 	

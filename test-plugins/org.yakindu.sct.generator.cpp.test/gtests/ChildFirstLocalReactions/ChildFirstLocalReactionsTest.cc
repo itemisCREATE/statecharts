@@ -41,13 +41,13 @@ TEST_F(ChildFirstLocalReactionsTest, expectBottomUpLocalReactionOrder) {
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstLocalReactions::ChildFirstLocalReactions_r_A_r_AA_r_AAA));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 2l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 2);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 3l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 3);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 4l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 4);
 	
 	
 }
@@ -63,13 +63,13 @@ TEST_F(ChildFirstLocalReactionsTest, expectParentLocalReactionOnChildLocalTransi
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstLocalReactions::ChildFirstLocalReactions_r_A_r_AA_r_AAB));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 2l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 2);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 3l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 3);
 	
 	
 }
@@ -87,13 +87,13 @@ TEST_F(ChildFirstLocalReactionsTest, expectGrandparentLocalReactionOnParentLocal
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstLocalReactions::ChildFirstLocalReactions_r_A_r_AB));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 2l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 2);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 3l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 3);
 	
 	
 }
@@ -113,13 +113,13 @@ TEST_F(ChildFirstLocalReactionsTest, expectNoLocalReactionOnGrandparentTransitio
 	
 	EXPECT_TRUE(statechart->isStateActive(executionorder::ChildFirstLocalReactions::ChildFirstLocalReactions_r_B));
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aaa_local()== 1);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 2l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_aa_local()== 2);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_a_local()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 3l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_sm_local()== 3);
 	
 	
 }

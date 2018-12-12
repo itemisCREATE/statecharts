@@ -41,7 +41,7 @@ void TypeAliasTest::typeAliasTest()
 {
 	typeAlias_enter(&statechart);
 	EXPECT_TRUE(typeAlias_isStateActive(&statechart, TypeAlias_main_region_Start));
-	EXPECT_TRUE(typeAliasIface_get_myVar(&statechart)== 1l);
+	EXPECT_TRUE(typeAliasIface_get_myVar(&statechart)== 1);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(typeAlias_isStateActive(&statechart, TypeAlias_main_region_Mid));
 	EXPECT_TRUE(strcmp(typeAliasIface_get_myString(&statechart), "TypeSystem") == 0);

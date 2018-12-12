@@ -33,17 +33,17 @@ class StatechartEntryExitActions : public ::testing::Test{
 
 TEST_F(StatechartEntryExitActions, entryActionsAreExecutedOnEnteringStatechart) {
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 0);
 	
 	statechart->getDefaultSCI()->set_b(true);
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 5l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 5);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 3l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 3);
 	
 	
 }
@@ -53,9 +53,9 @@ TEST_F(StatechartEntryExitActions, exitActionsAreExecutedOnEnteringStatechart) {
 	
 	statechart->exit();
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 6l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 6);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 2l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 2);
 	
 	
 }

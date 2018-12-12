@@ -47,8 +47,8 @@ void EventDrivenInternalEventTest::checkInternlEventQueueing()
 	EXPECT_TRUE(eventDrivenInternalEvent_isStateActive(&statechart, EventDrivenInternalEvent_EventDrivenInternalEvent_r1_B));
 	EXPECT_TRUE(eventDrivenInternalEvent_isStateActive(&statechart, EventDrivenInternalEvent_EventDrivenInternalEvent_r2_D));
 	EXPECT_TRUE(eventDrivenInternalEvent_isStateActive(&statechart, EventDrivenInternalEvent_EventDrivenInternalEvent_check_VALID));
-	EXPECT_TRUE(eventDrivenInternalEventIface_get_i1_sequence(&statechart)== 2l);
-	EXPECT_TRUE(eventDrivenInternalEventIface_get_i2_sequence(&statechart)== 3l);
+	EXPECT_TRUE(eventDrivenInternalEventIface_get_i1_sequence(&statechart)== 2);
+	EXPECT_TRUE(eventDrivenInternalEventIface_get_i2_sequence(&statechart)== 3);
 	eventDrivenInternalEvent_exit(&statechart);
 }
 

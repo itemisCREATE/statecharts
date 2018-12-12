@@ -45,10 +45,10 @@ void NoLocalEventsTest::test()
 	EXPECT_TRUE(noLocalEvents_isStateActive(&statechart, NoLocalEvents_main_region_StateB));
 	noLocalEventsIface_raise_e(&statechart);
 	EXPECT_TRUE(noLocalEvents_isStateActive(&statechart, NoLocalEvents_main_region_StateA));
-	EXPECT_TRUE((noLocalEventsIface_get_x(&statechart)== 0l));
-	noLocalEventsIface_raise_i(&statechart, 42l);
+	EXPECT_TRUE((noLocalEventsIface_get_x(&statechart)== 0));
+	noLocalEventsIface_raise_i(&statechart, 42);
 	EXPECT_TRUE(noLocalEvents_isStateActive(&statechart, NoLocalEvents_main_region_StateB));
-	EXPECT_TRUE((noLocalEventsIface_get_x(&statechart)== 42l));
+	EXPECT_TRUE((noLocalEventsIface_get_x(&statechart)== 42));
 	noLocalEvents_exit(&statechart);
 }
 

@@ -43,7 +43,7 @@ TEST_F(ConstOnlyDefaultScopeTest, stateTransition) {
 	
 	statechart->enter();
 	
-	statechart->getSCI_A()->raise_e(1l);
+	statechart->getSCI_A()->raise_e(1);
 	
 	runner->proceed_cycles(1);
 	

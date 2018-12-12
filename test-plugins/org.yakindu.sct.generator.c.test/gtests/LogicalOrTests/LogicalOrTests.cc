@@ -41,7 +41,7 @@ void LogicalOrTests::operandEvaluationOrder()
 {
 	logicalOr_enter(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(logicalOrIface_get_x(&statechart)== 4l && logicalOrIface_get_b(&statechart)) << "logical or expression was executed in wrong order..." ;
+	EXPECT_TRUE(logicalOrIface_get_x(&statechart)== 4 && logicalOrIface_get_b(&statechart)) << "logical or expression was executed in wrong order..." ;
 }
 
 void LogicalOrTests::setTimer(LogicalOr* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){

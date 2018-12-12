@@ -41,11 +41,11 @@ void ConditionalExpression::ConditionalExpressionTest()
 {
 	conditionalExpressions_enter(&statechart);
 	EXPECT_TRUE(conditionalExpressions_isStateActive(&statechart, ConditionalExpressions_main_region_A));
-	EXPECT_TRUE(conditionalExpressionsIface_get_condition(&statechart)== 1l);
+	EXPECT_TRUE(conditionalExpressionsIface_get_condition(&statechart)== 1);
 	conditionalExpressionsIface_raise_e(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(conditionalExpressions_isStateActive(&statechart, ConditionalExpressions_main_region_B));
-	EXPECT_TRUE(conditionalExpressionsIface_get_condition(&statechart)== 2l);
+	EXPECT_TRUE(conditionalExpressionsIface_get_condition(&statechart)== 2);
 }
 
 void ConditionalExpression::setTimer(ConditionalExpressions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){

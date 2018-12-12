@@ -40,19 +40,19 @@ void StatechartEntryExitActions::SetUp()
 }
 void StatechartEntryExitActions::entryActionsAreExecutedOnEnteringStatechart()
 {
-	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 0l);
-	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_y(&statechart)== 0l);
+	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 0);
+	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_y(&statechart)== 0);
 	statechartEntryAndExitActionsIface_set_b(&statechart,true);
 	statechartEntryAndExitActions_enter(&statechart);
-	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 5l);
-	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_y(&statechart)== 3l);
+	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 5);
+	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_y(&statechart)== 3);
 }
 void StatechartEntryExitActions::exitActionsAreExecutedOnEnteringStatechart()
 {
 	statechartEntryAndExitActions_enter(&statechart);
 	statechartEntryAndExitActions_exit(&statechart);
-	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 6l);
-	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_y(&statechart)== 2l);
+	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 6);
+	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_y(&statechart)== 2);
 }
 
 void StatechartEntryExitActions::setTimer(StatechartEntryAndExitActions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){

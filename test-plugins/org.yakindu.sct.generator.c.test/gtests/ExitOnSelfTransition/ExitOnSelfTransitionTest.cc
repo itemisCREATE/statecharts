@@ -41,16 +41,16 @@ void ExitOnSelfTransitionTest::exitOnSelfTransitionTest()
 {
 	exitOnSelfTransition_enter(&statechart);
 	EXPECT_TRUE(exitOnSelfTransition_isStateActive(&statechart, ExitOnSelfTransition_main_region_A));
-	EXPECT_TRUE(exitOnSelfTransitionIface_get_entryCount(&statechart)== 1l);
-	EXPECT_TRUE(exitOnSelfTransitionIface_get_exitCount(&statechart)== 0l);
+	EXPECT_TRUE(exitOnSelfTransitionIface_get_entryCount(&statechart)== 1);
+	EXPECT_TRUE(exitOnSelfTransitionIface_get_exitCount(&statechart)== 0);
 	exitOnSelfTransitionIface_raise_e(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(exitOnSelfTransitionIface_get_entryCount(&statechart)== 2l);
-	EXPECT_TRUE(exitOnSelfTransitionIface_get_exitCount(&statechart)== 1l);
+	EXPECT_TRUE(exitOnSelfTransitionIface_get_entryCount(&statechart)== 2);
+	EXPECT_TRUE(exitOnSelfTransitionIface_get_exitCount(&statechart)== 1);
 	exitOnSelfTransitionIface_raise_f(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(exitOnSelfTransitionIface_get_entryCount(&statechart)== 2l);
-	EXPECT_TRUE(exitOnSelfTransitionIface_get_exitCount(&statechart)== 2l);
+	EXPECT_TRUE(exitOnSelfTransitionIface_get_entryCount(&statechart)== 2);
+	EXPECT_TRUE(exitOnSelfTransitionIface_get_exitCount(&statechart)== 2);
 }
 
 void ExitOnSelfTransitionTest::setTimer(ExitOnSelfTransition* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){

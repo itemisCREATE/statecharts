@@ -41,33 +41,33 @@ void AssignmentAsExpressionTest::simpleAssignment()
 {
 	assignmentAsExpression_enter(&statechart);
 	EXPECT_TRUE(assignmentAsExpression_isStateActive(&statechart, AssignmentAsExpression_main_region_Add));
-	EXPECT_TRUE(assignmentAsExpressionIface_get_b(&statechart)== 5l);
-	EXPECT_TRUE(assignmentAsExpressionIface_get_a(&statechart)== 9l);
+	EXPECT_TRUE(assignmentAsExpressionIface_get_b(&statechart)== 5);
+	EXPECT_TRUE(assignmentAsExpressionIface_get_a(&statechart)== 9);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(assignmentAsExpression_isStateActive(&statechart, AssignmentAsExpression_main_region_Subtract));
-	EXPECT_TRUE(assignmentAsExpressionIface_get_d(&statechart)== 6l);
+	EXPECT_TRUE(assignmentAsExpressionIface_get_d(&statechart)== 6);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(assignmentAsExpression_isStateActive(&statechart, AssignmentAsExpression_main_region_Multiply));
-	EXPECT_TRUE(assignmentAsExpressionIface_get_e(&statechart)== 15l);
+	EXPECT_TRUE(assignmentAsExpressionIface_get_e(&statechart)== 15);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(assignmentAsExpression_isStateActive(&statechart, AssignmentAsExpression_main_region_Divide));
-	EXPECT_TRUE(assignmentAsExpressionIface_get_g(&statechart)== 1l);
+	EXPECT_TRUE(assignmentAsExpressionIface_get_g(&statechart)== 1);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(assignmentAsExpression_isStateActive(&statechart, AssignmentAsExpression_main_region_Modulo));
-	EXPECT_TRUE(assignmentAsExpressionIface_get_i(&statechart)== 1l);
+	EXPECT_TRUE(assignmentAsExpressionIface_get_i(&statechart)== 1);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(assignmentAsExpression_isStateActive(&statechart, AssignmentAsExpression_main_region_Shift));
-	EXPECT_TRUE(assignmentAsExpressionIface_get_j(&statechart)== 16l);
-	EXPECT_TRUE(assignmentAsExpressionIface_get_k(&statechart)== 4l);
+	EXPECT_TRUE(assignmentAsExpressionIface_get_j(&statechart)== 16);
+	EXPECT_TRUE(assignmentAsExpressionIface_get_k(&statechart)== 4);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(assignmentAsExpression_isStateActive(&statechart, AssignmentAsExpression_main_region_boolean_And));
-	EXPECT_TRUE(assignmentAsExpressionIface_get_l(&statechart)== 1l);
+	EXPECT_TRUE(assignmentAsExpressionIface_get_l(&statechart)== 1);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(assignmentAsExpression_isStateActive(&statechart, AssignmentAsExpression_main_region_boolean_Or));
-	EXPECT_TRUE(assignmentAsExpressionIface_get_p(&statechart)== 15l);
+	EXPECT_TRUE(assignmentAsExpressionIface_get_p(&statechart)== 15);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(assignmentAsExpression_isStateActive(&statechart, AssignmentAsExpression_main_region_boolean_Xor));
-	EXPECT_TRUE(assignmentAsExpressionIface_get_u(&statechart)== 12l);
+	EXPECT_TRUE(assignmentAsExpressionIface_get_u(&statechart)== 12);
 	assignmentAsExpression_exit(&statechart);
 }
 

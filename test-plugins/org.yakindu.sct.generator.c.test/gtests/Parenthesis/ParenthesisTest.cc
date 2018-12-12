@@ -41,7 +41,7 @@ void ParenthesisTest::simple()
 {
 	parenthesis_enter(&statechart);
 	EXPECT_TRUE(parenthesis_isStateActive(&statechart, Parenthesis_mainRegion_A));
-	EXPECT_TRUE(parenthesisIface_get_erg(&statechart)== 8l);
+	EXPECT_TRUE(parenthesisIface_get_erg(&statechart)== 8);
 }
 
 void ParenthesisTest::setTimer(Parenthesis* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){

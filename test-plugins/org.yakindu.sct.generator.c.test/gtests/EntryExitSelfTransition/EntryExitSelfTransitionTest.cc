@@ -45,8 +45,8 @@ void EntryExitSelfTransitionTest::SelfTransitionToChildState()
 	tc->init();
 	entryExitSelfTransitionIface_raise_e(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(entryExitSelfTransitionIface_get_entries(&statechart)== 1l);
-	EXPECT_TRUE(entryExitSelfTransitionIface_get_exits(&statechart)== 1l);
+	EXPECT_TRUE(entryExitSelfTransitionIface_get_entries(&statechart)== 1);
+	EXPECT_TRUE(entryExitSelfTransitionIface_get_exits(&statechart)== 1);
 	EXPECT_TRUE(entryExitSelfTransition_isStateActive(&statechart, EntryExitSelfTransition_main_region_A__region0_C));
 	entryExitSelfTransition_exit(&statechart);
 }
@@ -55,23 +55,23 @@ void EntryExitSelfTransitionTest::SelfTransitionFromChildState()
 	tc->init();
 	entryExitSelfTransitionIface_raise_e1(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(entryExitSelfTransitionIface_get_entries(&statechart)== 0l);
-	EXPECT_TRUE(entryExitSelfTransitionIface_get_exits(&statechart)== 0l);
+	EXPECT_TRUE(entryExitSelfTransitionIface_get_entries(&statechart)== 0);
+	EXPECT_TRUE(entryExitSelfTransitionIface_get_exits(&statechart)== 0);
 	EXPECT_TRUE(entryExitSelfTransition_isStateActive(&statechart, EntryExitSelfTransition_main_region_A__region0_C));
 	entryExitSelfTransitionIface_raise_e1(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(entryExitSelfTransition_isStateActive(&statechart, EntryExitSelfTransition_main_region_A__region0_B));
-	EXPECT_TRUE(entryExitSelfTransitionIface_get_entries(&statechart)== 1l);
-	EXPECT_TRUE(entryExitSelfTransitionIface_get_exits(&statechart)== 1l);
+	EXPECT_TRUE(entryExitSelfTransitionIface_get_entries(&statechart)== 1);
+	EXPECT_TRUE(entryExitSelfTransitionIface_get_exits(&statechart)== 1);
 	entryExitSelfTransition_exit(&statechart);
 }
 void EntryExitSelfTransitionTest::init()
 {
 	entryExitSelfTransition_enter(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(entryExitSelfTransitionIface_get_entries(&statechart)== 1l);
+	EXPECT_TRUE(entryExitSelfTransitionIface_get_entries(&statechart)== 1);
 	EXPECT_TRUE(entryExitSelfTransition_isStateActive(&statechart, EntryExitSelfTransition_main_region_A__region0_B));
-	entryExitSelfTransitionIface_set_entries(&statechart,0l);
+	entryExitSelfTransitionIface_set_entries(&statechart,0);
 }
 
 void EntryExitSelfTransitionTest::setTimer(EntryExitSelfTransition* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){
