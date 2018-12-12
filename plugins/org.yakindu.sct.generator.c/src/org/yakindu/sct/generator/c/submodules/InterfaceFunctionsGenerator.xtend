@@ -16,6 +16,7 @@ import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 
 /**
  * @author rbeckmann
@@ -27,6 +28,7 @@ class InterfaceFunctionsGenerator {
 	@Inject protected extension Naming
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension EventCode
+	@Inject protected extension ExpressionsChecker
 	
 	def interfaceFunctions(ExecutionFlow it) '''
 		«FOR scope : interfaceScopes»
@@ -42,7 +44,7 @@ class InterfaceFunctionsGenerator {
 			«ENDFOR»
 			
 			«FOR variable : scope.variableDefinitions»
-				«IF variable.const»const «ENDIF»«variable.typeSpecifier.targetLanguageName» «variable.asGetter»(const «scHandleDecl»)
+				«IF variable.isConstString»const «ENDIF»«variable.typeSpecifier.targetLanguageName» «variable.asGetter»(const «scHandleDecl»)
 				{
 					return «variable.access»;
 				}
