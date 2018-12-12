@@ -3,8 +3,6 @@
 package org.yakindu.sct.generator.genmodel.ide
 
 
-/**
- * Use this class to register ide components.
- */
-class SGenIdeModule extends AbstractSGenIdeModule {
+//Not used
+class SGenIdeModule {
 }

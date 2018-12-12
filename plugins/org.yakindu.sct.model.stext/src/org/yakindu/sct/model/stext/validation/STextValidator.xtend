@@ -29,7 +29,6 @@ import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.xtext.Constants
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.naming.IQualifiedNameProvider
@@ -127,9 +126,6 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 	STextGrammarAccess grammarAccess
 	@Inject 
 	IQualifiedNameProvider nameProvider
-	@Inject 
-	@Named(Constants.LANGUAGE_NAME)
-	String languageName
 	@Inject(optional=true)
 	@Named(DomainRegistry.DOMAIN_ID)
 	String domainID=BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral()
@@ -142,20 +138,19 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 	def void checkExpression(TimeEventSpec expression) {
 		typeInferrer.infer(expression, this) 
 	}
+
 	@Check(CheckType.FAST)
 	def void checkExpression(Guard expression) {
 		typeInferrer.infer(expression, this) 
 	}
+
 	@Check(CheckType.FAST)
 	def void checkNoAssignmentInGuard(Guard guard) {
-		var TreeIterator<EObject> eAllContents=guard.eAllContents() 
-		while (eAllContents.hasNext()) {
-			var EObject e=eAllContents.next() 
-			if (e instanceof AssignmentExpression) {
-				error(GUARD_CONTAINS_ASSIGNMENT, guard, null) 
-			}
+		if(!guard.eAllContents.filter(AssignmentExpression).empty){
+			error(GUARD_CONTAINS_ASSIGNMENT, guard, null) 
 		}
 	}
+
 	@Check(CheckType.FAST)
 	def void transitionsWithNoTrigger(Transition trans) {
 		if (trans.getSource() instanceof Entry || trans.getSource() instanceof Choice || trans.getSource() instanceof Synchronization || 
