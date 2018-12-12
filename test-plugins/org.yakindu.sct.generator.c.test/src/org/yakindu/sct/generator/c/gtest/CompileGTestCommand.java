@@ -35,6 +35,7 @@ public class CompileGTestCommand {
 	private boolean wExtra = false;
 	private boolean wError = false;
 	private boolean wConversion = false;
+	private boolean wnoUnusedParameter = false;
 	
 	public CompileGTestCommand directory(String dir) {
 		this.dir = dir;
@@ -68,6 +69,11 @@ public class CompileGTestCommand {
 	
 	public CompileGTestCommand wConversion() {
 		this.wConversion = true;
+		return this;
+	}
+	
+	public CompileGTestCommand wnoUnusedParameter() {
+		this.wnoUnusedParameter = true;
 		return this;
 	}
 
@@ -114,6 +120,9 @@ public class CompileGTestCommand {
 		command.add("-o");
 		command.add(getFileName(program));
 		command.add("-O1");
+		if(wnoUnusedParameter) {
+			command.add("-Wno-unused-parameter");
+		}
 		if(wPedantic) {
 			command.add("-pedantic");
 			command.add("-pedantic-errors");
