@@ -196,13 +196,14 @@ public class GTestHelper {
 				.directory(gTestDirectory)
 				//.makefileDir(targetPath.toString())
 				.mainLib(getMainLib())
-//			 	.wPedantic()
+				//.wPedantic()
 			 	.wAll()				
 			 	.wExtra()
 			 	.wError()
 			 	.wConversion();
 		 if(compiler == Compiler.GCC) {
 			 gTestCommand.wnoUnusedParameter(); // ignore unused parameter flag
+			 gTestCommand.wnoUnusedFunction(); // ignore unused functions flag
 		 }
 		return gTestCommand.build();
 	}
