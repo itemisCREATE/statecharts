@@ -38,12 +38,12 @@ TraceObserverImpl::TraceObserverImpl() {
 TraceObserverImpl::~TraceObserverImpl() {}
 
 void TraceObserverImpl::stateEntered(Tracing::TracingStates state) {
-	if (state == Tracing::TracingStates::main_region_StateA) {
+	if (state != null) {
 		entered = true;
 	}
 }
 void TraceObserverImpl::stateExited(Tracing::TracingStates state) {
-	if (state == Tracing::TracingStates::main_region_StateA) {
+	if (state != null) {
 		exited = true;
 	}
 }
