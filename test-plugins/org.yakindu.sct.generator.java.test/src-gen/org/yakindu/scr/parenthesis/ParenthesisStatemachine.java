@@ -127,7 +127,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	
 	/* Entry action for state 'A'. */
 	private void entryAction_mainRegion_A() {
-		sCInterface.setErg(4 * (3 - 1));
+		sCInterface.setErg((4 * ((3 - 1))));
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -164,7 +164,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		enterSequence_mainRegion_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -172,11 +172,9 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

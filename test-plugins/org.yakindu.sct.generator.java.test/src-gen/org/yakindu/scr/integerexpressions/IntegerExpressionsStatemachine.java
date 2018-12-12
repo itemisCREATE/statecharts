@@ -626,15 +626,15 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		
 		sCInterface.setNotEqual((sCInterface.myInt1!=sCInterface.myInt2));
 		
-		sCInterface.setPlus(sCInterface.myInt1 + sCInterface.myInt2);
+		sCInterface.setPlus((sCInterface.myInt1 + sCInterface.myInt2));
 		
-		sCInterface.setMinus(sCInterface.myInt1 - sCInterface.myInt2);
+		sCInterface.setMinus((sCInterface.myInt1 - sCInterface.myInt2));
 		
-		sCInterface.setMultiply(sCInterface.myInt1 * sCInterface.myInt2);
+		sCInterface.setMultiply((sCInterface.myInt1 * sCInterface.myInt2));
 		
-		sCInterface.setDivision(sCInterface.myInt1 / sCInterface.myInt2);
+		sCInterface.setDivision((sCInterface.myInt1 / sCInterface.myInt2));
 		
-		sCInterface.setModulo(sCInterface.myInt1 % sCInterface.myInt2);
+		sCInterface.setModulo((sCInterface.myInt1 % sCInterface.myInt2));
 		
 		sCInterface.setNegat(-sCInterface.myInt1);
 		
@@ -703,7 +703,7 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		enterSequence_main_region_StateA_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -711,7 +711,7 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e1) {
 					exitSequence_main_region_StateA();
 					enterSequence_main_region_StateB_default();
@@ -720,8 +720,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -729,11 +727,9 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

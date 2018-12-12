@@ -66,7 +66,7 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
-		timer.setTimer(this, 1, 1 * 1000, true);
+		timer.setTimer(this, 1, (1 * 1000), true);
 		
 		enterSequence_main_region_default();
 	}
@@ -166,7 +166,7 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	
 	/* Entry action for state 'Start'. */
 	private void entryAction_main_region_Start() {
-		timer.setTimer(this, 0, 2 * 1000, false);
+		timer.setTimer(this, 0, (2 * 1000), false);
 	}
 	
 	/* Exit action for state 'Start'. */
@@ -225,7 +225,7 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		enterSequence_main_region_Start_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		if (timeEvents[1]) {
 			setX(getX() + 1);
 		}
@@ -238,7 +238,7 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (timeEvents[0]) {
 					exitSequence_main_region_Start();
 					enterSequence_main_region_End_default();
@@ -247,8 +247,6 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -256,11 +254,9 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

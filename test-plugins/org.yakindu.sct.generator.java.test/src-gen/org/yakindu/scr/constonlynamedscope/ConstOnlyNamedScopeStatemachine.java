@@ -223,7 +223,7 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 		enterSequence_ConstOnlyNamedScope_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -231,12 +231,12 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
-				if ((sCInterface.e) && (sCInterface.getEValue()==sCIA.getB())) {
+			if (react()==false) {
+				if (((sCInterface.e) && (sCInterface.getEValue()==sCIA.getB()))) {
 					exitSequence_ConstOnlyNamedScope_main_region_A();
 					enterSequence_ConstOnlyNamedScope_main_region_B_default();
 				} else {
-					if ((sCInterface.e) && (sCInterface.getEValue()==sCIA.getC())) {
+					if (((sCInterface.e) && (sCInterface.getEValue()==sCIA.getC()))) {
 						exitSequence_ConstOnlyNamedScope_main_region_A();
 						enterSequence_ConstOnlyNamedScope_main_region_C_default();
 					} else {
@@ -245,8 +245,6 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -254,11 +252,9 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -267,11 +263,9 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

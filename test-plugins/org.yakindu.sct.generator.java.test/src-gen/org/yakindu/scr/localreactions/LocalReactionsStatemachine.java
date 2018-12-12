@@ -158,7 +158,7 @@ public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 		enterSequence_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -166,7 +166,7 @@ public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
 		}

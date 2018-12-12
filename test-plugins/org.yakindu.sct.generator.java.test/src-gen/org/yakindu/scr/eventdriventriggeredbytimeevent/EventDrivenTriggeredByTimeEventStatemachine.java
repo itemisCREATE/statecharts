@@ -191,12 +191,12 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	
 	/* Entry action for state 'A'. */
 	private void entryAction_EventDrivenTriggeredByTimeEvent_r_A() {
-		timer.setTimer(this, 0, 1 * 1000, false);
+		timer.setTimer(this, 0, (1 * 1000), false);
 	}
 	
 	/* Entry action for state 'B'. */
 	private void entryAction_EventDrivenTriggeredByTimeEvent_r_B() {
-		timer.setTimer(this, 1, 1 * 1000, false);
+		timer.setTimer(this, 1, (1 * 1000), false);
 	}
 	
 	/* Exit action for state 'A'. */
@@ -263,7 +263,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		enterSequence_EventDrivenTriggeredByTimeEvent_r_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -271,7 +271,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (timeEvents[0]) {
 					exitSequence_EventDrivenTriggeredByTimeEvent_r_A();
 					sCInterface.setTransition_count(sCInterface.getTransition_count() + 1);
@@ -292,7 +292,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (timeEvents[1]) {
 					exitSequence_EventDrivenTriggeredByTimeEvent_r_B();
 					sCInterface.setTransition_count(sCInterface.getTransition_count() + 1);

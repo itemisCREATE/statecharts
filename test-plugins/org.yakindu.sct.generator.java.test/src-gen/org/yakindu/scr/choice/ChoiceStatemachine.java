@@ -331,7 +331,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		enterSequence_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -339,7 +339,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_main_region_A();
 					react_main_region__choice_0();
@@ -363,8 +363,6 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -372,12 +370,10 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_B();
 				enterSequence_main_region_A_default();
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -386,12 +382,10 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_C();
 				enterSequence_main_region_A_default();
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

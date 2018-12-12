@@ -440,7 +440,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		enterSequence_ChildFirstExecutionHierarchy_r_A_r_AA_r_AAA_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -448,12 +448,12 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if ((sCInterface.e) && (!sCInterface.getDisable_a())) {
+			if (((sCInterface.e) && (!sCInterface.getDisable_a()))) {
 				exitSequence_ChildFirstExecutionHierarchy_r_A();
 				sCInterface.setA_reacted(true);
 				
 				enterSequence_ChildFirstExecutionHierarchy_r_B_default();
-				react(false);
+				react();
 			} else {
 				did_transition = false;
 			}
@@ -461,7 +461,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		if (did_transition==false) {
 			sCInterface.setA_local(true);
 			
-			did_transition = react(try_transition);
+			did_transition = react();
 		}
 		return did_transition;
 	}
@@ -470,12 +470,12 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if ((sCInterface.e) && (!sCInterface.getDisable_aa())) {
+			if (((sCInterface.e) && (!sCInterface.getDisable_aa()))) {
 				exitSequence_ChildFirstExecutionHierarchy_r_A();
 				sCInterface.setAa_reacted(true);
 				
 				enterSequence_ChildFirstExecutionHierarchy_r_B_default();
-				react(false);
+				react();
 			} else {
 				did_transition = false;
 			}
@@ -492,12 +492,12 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if ((sCInterface.e) && (!sCInterface.getDisable_aaa())) {
+			if (((sCInterface.e) && (!sCInterface.getDisable_aaa()))) {
 				exitSequence_ChildFirstExecutionHierarchy_r_A();
 				sCInterface.setAaa_reacted(true);
 				
 				enterSequence_ChildFirstExecutionHierarchy_r_B_default();
-				react(false);
+				react();
 			} else {
 				did_transition = false;
 			}
@@ -517,13 +517,13 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 			if (sCInterface.e) {
 				exitSequence_ChildFirstExecutionHierarchy_r_B();
 				enterSequence_ChildFirstExecutionHierarchy_r_A_default();
-				react(false);
+				react();
 			} else {
 				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
-			did_transition = react(try_transition);
+			did_transition = react();
 		}
 		return did_transition;
 	}

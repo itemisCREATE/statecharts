@@ -222,7 +222,7 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 		enterSequence_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -230,7 +230,7 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
@@ -239,8 +239,6 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -248,7 +246,7 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_A_default();
@@ -256,8 +254,6 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

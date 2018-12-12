@@ -292,7 +292,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		effect_mr_A_tr0();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -300,11 +300,9 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -327,8 +325,6 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -350,8 +346,6 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -359,7 +353,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.back) {
 					exitSequence_mr_B();
 					enterSequence_mr_A_default();
@@ -367,8 +361,6 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

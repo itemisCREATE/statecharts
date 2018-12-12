@@ -228,7 +228,7 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 		enterSequence_main_region_StateB_r1_StateA_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -236,7 +236,7 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e1) {
 					exitSequence_main_region_StateA();
 					enterSequence_main_region_StateB_default();
@@ -245,8 +245,6 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -254,11 +252,9 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -276,8 +272,6 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -288,8 +282,6 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 			if (main_region_StateB_react(try_transition)==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

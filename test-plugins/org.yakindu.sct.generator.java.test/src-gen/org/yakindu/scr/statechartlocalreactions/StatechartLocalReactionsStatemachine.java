@@ -220,7 +220,7 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 		enterSequence_region2_a_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		sCInterface.setMyInt(sCInterface.getMyInt() + 1);
 		
 		if (sCInterface.getMyInt()==100) {
@@ -233,12 +233,10 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_S1();
 				enterSequence_main_region_S2_default();
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -247,12 +245,10 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_S2();
 				enterSequence_main_region_S1_default();
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -262,8 +258,6 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 		
 		if (try_transition) {
 			did_transition = false;
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

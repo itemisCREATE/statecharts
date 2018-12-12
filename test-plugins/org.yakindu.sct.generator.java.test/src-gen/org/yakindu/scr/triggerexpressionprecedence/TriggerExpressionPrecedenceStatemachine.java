@@ -243,7 +243,7 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 		enterSequence_TriggerExpressionPrecedence_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -251,8 +251,8 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
-				if ((sCInterface.e1) && (sCInterface.getC1() || sCInterface.getC2())) {
+			if (react()==false) {
+				if (((sCInterface.e1) && ((sCInterface.getC1() || sCInterface.getC2())))) {
 					exitSequence_TriggerExpressionPrecedence_main_region_A();
 					sCInterface.setE1_transition(true);
 					
@@ -268,8 +268,6 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 					}
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

@@ -157,13 +157,13 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		
 		sCInterface.setI(2);
 		
-		sCInterface.setR(sCInterface.r % sCInterface.r);
+		sCInterface.setR((sCInterface.r % sCInterface.r));
 		
 		sCInterface.setR(3.4);
 		
 		sCInterface.setI(2);
 		
-		sCInterface.setI(sCInterface.i % sCInterface.i);
+		sCInterface.setI((sCInterface.i % sCInterface.i));
 		
 		sCInterface.setR(3.4);
 		
@@ -175,7 +175,7 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		
 		sCInterface.setI(2);
 		
-		sCInterface.setR(sCInterface.r % sCInterface.i);
+		sCInterface.setR((sCInterface.r % sCInterface.i));
 		
 		sCInterface.setR(3.4);
 		
@@ -187,13 +187,13 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		
 		sCInterface.setI(2);
 		
-		sCInterface.setR(sCInterface.i % sCInterface.r);
+		sCInterface.setR((sCInterface.i % sCInterface.r));
 		
 		sCInterface.setR(3.4);
 		
 		sCInterface.setI(2);
 		
-		sCInterface.setR(sCInterface.i % sCInterface.i);
+		sCInterface.setR((sCInterface.i % sCInterface.i));
 	}
 	
 	/* 'default' enter sequence for state StateA */
@@ -245,7 +245,7 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		enterSequence_main_region_StateA_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -253,12 +253,10 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_StateA();
 				enterSequence_main_region__final__default();
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -267,11 +265,9 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

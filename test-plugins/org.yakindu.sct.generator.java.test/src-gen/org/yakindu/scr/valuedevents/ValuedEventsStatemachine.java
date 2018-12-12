@@ -350,11 +350,11 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	
 	/* Entry action for state 'A'. */
 	private void entryAction_main_region1_A() {
-		sCInterface.raiseIntegerEvent(2 * 21);
+		sCInterface.raiseIntegerEvent((2 * 21));
 		
 		sCInterface.raiseRealEvent(10);
 		
-		sCInterface.raiseBooleanEvent(true || false);
+		sCInterface.raiseBooleanEvent((true || false));
 		
 		sCInterface.raiseStringEvent("sct");
 	}
@@ -645,7 +645,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		enterSequence_string_region_B_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -653,11 +653,9 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -675,8 +673,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -693,8 +689,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -703,8 +697,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		
 		if (try_transition) {
 			did_transition = false;
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -722,8 +714,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -740,8 +730,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -750,8 +738,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		
 		if (try_transition) {
 			did_transition = false;
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -769,8 +755,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -787,8 +771,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -797,8 +779,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		
 		if (try_transition) {
 			did_transition = false;
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -816,8 +796,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -834,8 +812,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -844,8 +820,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		
 		if (try_transition) {
 			did_transition = false;
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}

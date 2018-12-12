@@ -128,7 +128,7 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 		enterSequence_r_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -136,11 +136,9 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
