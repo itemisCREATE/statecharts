@@ -66,6 +66,7 @@ import org.yakindu.sct.model.stext.stext.TransitionSpecification
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.ui.internal.StextActivator
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover
+import com.google.common.collect.ImmutableList
 
 /** 
  * Several filters to make proposals more useful.
@@ -78,7 +79,7 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 	protected STextGrammarAccess grammarAccess
 	ComposedAdapterFactory composedAdapterFactory = new ComposedAdapterFactory(
 		ComposedAdapterFactory.Descriptor.Registry.INSTANCE)
-	
+	 
 	@Inject 
 	@ContentProposalLabelProvider 
 	ILabelProvider labelProvider
@@ -229,7 +230,7 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 	override void complete_BOOL(EObject model, RuleCall ruleCall, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
 		var ICompletionProposalAcceptor priorityOptimizer = getCustomAcceptor(model, "boolean", acceptor)
-		for (String s : #["true", "false", "yes", "no"]) {
+		for (String s : ImmutableList.of("true", "false", "yes", "no")) {
 			var ICompletionProposal proposal = createCompletionProposal(s, '''«s» - «ruleCall.getRule().getName()»''',
 				null, context)
 			priorityOptimizer.accept(proposal)
@@ -270,7 +271,7 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 		var StyledString secondPart = new StyledString(''' - «filePath»''', new GreyoutStyler())
 		return secondPart
 	}
-
+//
 	def protected ICompletionProposalAcceptor getCustomAcceptor(EObject model, String typeName,
 		ICompletionProposalAcceptor acceptor) {
 		var ICompletionProposalAcceptor priorityOptimizer = acceptor
