@@ -18,14 +18,16 @@ import org.yakindu.sct.generator.core.extensions.AnnotationExtensions;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.generator.java.eventdriven.JavaEventDrivenIncludeProvider;
 import org.yakindu.sct.generator.java.features.IJavaFeatureConstants;
-import org.yakindu.sct.generator.java.submodules.APIGenerator;
 import org.yakindu.sct.generator.java.submodules.EventCode;
 import org.yakindu.sct.generator.java.submodules.InterfaceFunctionsGenerator;
 import org.yakindu.sct.generator.java.submodules.InternalFunctionsGenerator;
-import org.yakindu.sct.generator.java.submodules.eventdriven.EventDrivenAPIGenerator;
+import org.yakindu.sct.generator.java.submodules.TimingFunctions;
 import org.yakindu.sct.generator.java.submodules.eventdriven.EventDrivenEventCode;
 import org.yakindu.sct.generator.java.submodules.eventdriven.EventDrivenInterfaceFunctionsGenerator;
 import org.yakindu.sct.generator.java.submodules.eventdriven.EventDrivenInternalFunctionsGenerator;
+import org.yakindu.sct.generator.java.submodules.eventdriven.EventDrivenTimingFunctions;
+import org.yakindu.sct.generator.java.submodules.eventdriven.lifecycle.EventDrivenRunCycle;
+import org.yakindu.sct.generator.java.submodules.lifecycle.RunCycle;
 import org.yakindu.sct.generator.java.types.JavaTypeSystemAccess;
 import org.yakindu.sct.generator.java.types.OldJavaTypeSystemAccess;
 import org.yakindu.sct.model.sexec.naming.INamingService;
@@ -70,11 +72,11 @@ public class JavaGeneratorModule implements IGeneratorModule {
 	public void configureForExecutionStyle(GeneratorEntry entry, Binder binder) {
 		if ((new AnnotationExtensions()).isEventDriven(entry)) {
 			includeProviderBinder.addBinding().to(JavaEventDrivenIncludeProvider.class);
-			binder.bind(APIGenerator.class).to(EventDrivenAPIGenerator.class);
+			binder.bind(TimingFunctions.class).to(EventDrivenTimingFunctions.class);
 			binder.bind(EventCode.class).to(EventDrivenEventCode.class);
 			binder.bind(InterfaceFunctionsGenerator.class).to(EventDrivenInterfaceFunctionsGenerator.class);
 			binder.bind(InternalFunctionsGenerator.class).to(EventDrivenInternalFunctionsGenerator.class);
-
+			binder.bind(RunCycle.class).to(EventDrivenRunCycle.class);
 		}
 	}
 

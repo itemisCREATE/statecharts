@@ -142,7 +142,7 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	
 	/**
 	* Set the {@link ITimer} for the state machine. It must be set
-	* externally on a timed state machine before a run cycle can be correct
+	* externally on a timed state machine before a run cycle can be correctly
 	* executed.
 	* 
 	* @param timer
@@ -162,6 +162,7 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	
 	public void timeElapsed(int eventID) {
 		timeEvents[eventID] = true;
+		runCycle();
 	}
 	
 	/* Entry action for state 'Start'. */

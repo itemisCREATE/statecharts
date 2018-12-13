@@ -11,6 +11,9 @@ Bundle-Vendor: statecharts.org
 Export-Package: org.yakindu.sct.generator.java,
  org.yakindu.sct.generator.java.features,
  org.yakindu.sct.generator.java.files,
+ org.yakindu.sct.generator.java.submodules,
+ org.yakindu.sct.generator.java.submodules.eventdriven,
+ org.yakindu.sct.generator.java.submodules.lifecycle,
  org.yakindu.sct.generator.java.types
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8

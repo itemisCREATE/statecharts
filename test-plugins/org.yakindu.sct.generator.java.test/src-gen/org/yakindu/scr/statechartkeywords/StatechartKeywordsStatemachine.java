@@ -314,7 +314,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	
 	/**
 	* Set the {@link ITimer} for the state machine. It must be set
-	* externally on a timed state machine before a run cycle can be correct
+	* externally on a timed state machine before a run cycle can be correctly
 	* executed.
 	* 
 	* @param timer
@@ -334,6 +334,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	
 	public void timeElapsed(int eventID) {
 		timeEvents[eventID] = true;
+		runCycle();
 	}
 	
 	public SCIIf getSCIIf() {

@@ -21,11 +21,18 @@ import org.yakindu.sct.generator.java.GenmodelEntries
 import org.yakindu.sct.generator.java.JavaIncludeProvider
 import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
-import org.yakindu.sct.generator.java.submodules.APIGenerator
 import org.yakindu.sct.generator.java.submodules.EventCode
 import org.yakindu.sct.generator.java.submodules.InterfaceFunctionsGenerator
 import org.yakindu.sct.generator.java.submodules.InternalFunctionsGenerator
 import org.yakindu.sct.generator.java.submodules.StatemachineFunctionsGenerator
+import org.yakindu.sct.generator.java.submodules.eventdriven.EventDrivenTimingFunctions
+import org.yakindu.sct.generator.java.submodules.lifecycle.Enter
+import org.yakindu.sct.generator.java.submodules.lifecycle.Exit
+import org.yakindu.sct.generator.java.submodules.lifecycle.Init
+import org.yakindu.sct.generator.java.submodules.lifecycle.IsActive
+import org.yakindu.sct.generator.java.submodules.lifecycle.IsFinal
+import org.yakindu.sct.generator.java.submodules.lifecycle.IsStateActive
+import org.yakindu.sct.generator.java.submodules.lifecycle.RunCycle
 import org.yakindu.sct.generator.java.templates.ClassTemplate
 import org.yakindu.sct.generator.java.templates.FileTemplate
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -44,11 +51,19 @@ class Statemachine {
 	@Inject protected extension FlowCode
 	@Inject protected extension StateVectorExtensions
 	
-	@Inject protected extension APIGenerator
 	@Inject protected extension EventCode
 	@Inject protected extension InterfaceFunctionsGenerator
 	@Inject protected extension InternalFunctionsGenerator
 	@Inject protected extension StatemachineFunctionsGenerator
+	@Inject protected extension EventDrivenTimingFunctions
+	
+	@Inject protected extension Init
+	@Inject protected extension Enter
+	@Inject protected extension Exit
+	@Inject protected extension RunCycle
+	@Inject protected extension IsActive
+	@Inject protected extension IsStateActive
+	@Inject protected extension IsFinal
 	
 	protected ExecutionFlow flow
 	protected GeneratorEntry entry
@@ -65,7 +80,7 @@ class Statemachine {
 			.create
 			.fileComment(entry.licenseText)
 			.packageName(getImplementationPackageName(flow, entry))
-			.addImports(imports(flow, entry))
+			.addImports(imports)
 			.addImports(includeProviders.map[getImports(flow)].flatten)
 			.classTemplate(
 				ClassTemplate
@@ -100,23 +115,23 @@ class Statemachine {
 		'''
 	}
 	
-	def protected Set<CharSequence> imports(ExecutionFlow it, GeneratorEntry entry) {
+	def protected Set<CharSequence> imports() {
 		// we need a sorted set for the imports
 		val Set<CharSequence> importSet = new TreeSet
 		val String JavaList = "java.util.List"
 		val String JavaLinkedList = "java.util.LinkedList"
 		
-		if (entry.createInterfaceObserver && hasOutgoingEvents) {
+		if (entry.createInterfaceObserver && flow.hasOutgoingEvents) {
 			importSet += JavaList
 			importSet += JavaLinkedList
 		}
 		
-		if (timed) {
+		if (flow.timed) {
 			importSet += "" + entry.getBasePackageName() + ".ITimer"
 		}
 		
 		for(JavaIncludeProvider jip : includeProviders) {
-			importSet += jip.getImports(it).map[toString]
+			importSet += jip.getImports(flow).map[toString]
 		}
 		
 		if (tracingUsed(entry)) {
