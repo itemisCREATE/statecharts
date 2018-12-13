@@ -25,6 +25,8 @@ import org.yakindu.sct.generator.c.CExpressionsGenerator
 import org.yakindu.sct.model.sexec.Execution
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.generator.c.CGeneratorConstants
+import org.yakindu.sct.generator.c.types.CTypeSystemAccess
 
 class ExpressionsChecker {
 
@@ -32,6 +34,7 @@ class ExpressionsChecker {
 	
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ITypeSystemInferrer
+	@Inject protected extension CTypeSystemAccess
 
 	def modOnReal(ExecutionFlow it) {
 		!eAllContents.filter(NumericalMultiplyDivideExpression).filter[operator == MultiplicativeOperator.MOD].filter [
@@ -70,7 +73,8 @@ class ExpressionsChecker {
 		if (expression instanceof ElementReferenceExpression) {
 			val ref = expression.reference
 			if (ref instanceof VariableDefinition) {
-				return '''(«ref.typeSpecifier.type»)'''
+				val originalType = ref.typeSpecifier.type
+				return '''(«getTargetLanguageName(originalType)»)'''
 			}
 		}
 	}
