@@ -12,7 +12,6 @@ package org.yakindu.base.expressions.interpreter
 
 import com.google.inject.Inject
 import java.beans.Expression
-import java.util.Stack
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.util.SimpleAttributeResolver
@@ -20,6 +19,7 @@ import org.yakindu.base.base.NamedElement
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
@@ -37,6 +37,9 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 
 	@Inject
 	protected extension IQualifiedNameProvider nameProvider
+	
+	@Inject
+	protected extension ExpressionExtensions
 
 	def dispatch ExecutionSlot resolve(ExecutionContext context, FeatureCall e) {
 		return resolveByFeature(context, e, e.feature)
@@ -67,27 +70,13 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 	}
 
 	def ExecutionSlot resolveCompositeSlot(ExecutionContext context, FeatureCall e) {
-		var current = e
-		val Stack<FeatureCall> callStack = new Stack
-		callStack.add(0, e)
-		while (!(current.owner instanceof ElementReferenceExpression)) {
-			current = current.owner as FeatureCall
-			callStack.add(0, current)
+		var ExecutionSlot featureSlot = resolve(context, e.owner)
+		if (featureSlot === null) {
+			throw new IllegalStateException(
+				"Value of '" + e.feature.name  + "' in expression '" + getExpressionText(e) +
+					"' has not been set.") // could not find starting slot for feature call
 		}
-		// first: get the root slot where to start the search
-		var ExecutionSlot featureSlot = resolve(context, current.owner)
-
-		
-		// second: go through all calls and traverse execution context hierarchy accordingly
-		for (FeatureCall call : callStack) {
-			if (featureSlot === null) {
-				throw new IllegalStateException(
-					"Value of '" + current.feature.name  + "' in expression '" + getExpressionText(e) +
-						"' has not been set.") // could not find starting slot for feature call
-			}
-			featureSlot = resolveFromSlot(featureSlot, call)
-		}
-		return featureSlot
+		return resolveFromSlot(featureSlot, e)
 	}
 	
 	def dispatch String getExpressionText(FeatureCall call) {

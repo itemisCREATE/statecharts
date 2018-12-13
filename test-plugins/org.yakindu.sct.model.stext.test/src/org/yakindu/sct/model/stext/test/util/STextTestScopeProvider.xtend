@@ -173,6 +173,7 @@ class STextTestScopeProvider extends STextScopeProvider {
 		val complexType = factory.createComplexType => [
 			name = "ComplexType"
 			features += createProperty("x", INTEGER)
+			features += createProperty("y", it)
 		]
 		complexType.addToResource
 		complexType
