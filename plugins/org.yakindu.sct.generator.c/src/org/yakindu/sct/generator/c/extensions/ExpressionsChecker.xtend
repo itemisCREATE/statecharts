@@ -27,6 +27,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.generator.c.CGeneratorConstants
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess
+import org.yakindu.base.expressions.expressions.FeatureCall
 
 class ExpressionsChecker {
 
@@ -69,13 +70,17 @@ class ExpressionsChecker {
 	}
 	
 		
-	def CharSequence castToReciever(Expression expression) {
-		if (expression instanceof ElementReferenceExpression) {
-			val ref = expression.reference
-			if (ref instanceof VariableDefinition) {
-				val originalType = ref.typeSpecifier.type
-				return '''(«getTargetLanguageName(originalType)»)'''
-			}
+	def CharSequence castToReciever(ElementReferenceExpression it) {
+		if (reference instanceof VariableDefinition) {
+			val originalType = infer(reference)
+			return '''(«getTargetLanguageName(originalType.type)»)'''
+		}
+	}
+	
+	def CharSequence castToReciever(FeatureCall it) {
+		if(feature instanceof VariableDefinition) {
+			val originalType = infer(feature)
+			return '''(«getTargetLanguageName(originalType.type)»)'''			
 		}
 	}
 	
