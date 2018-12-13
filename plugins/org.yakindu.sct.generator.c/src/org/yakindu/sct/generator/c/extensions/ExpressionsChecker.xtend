@@ -70,21 +70,21 @@ class ExpressionsChecker {
 	}
 	
 		
-	def CharSequence castToReciever(ElementReferenceExpression it) {
+	def dispatch CharSequence castToReciever(ElementReferenceExpression it) {
 		if (reference instanceof VariableDefinition) {
 			val originalType = infer(reference)
 			return '''(«getTargetLanguageName(originalType.type)»)'''
 		}
 	}
 	
-	def CharSequence castToReciever(FeatureCall it) {
+	def dispatch CharSequence castToReciever(FeatureCall it) {
 		if(feature instanceof VariableDefinition) {
 			val originalType = infer(feature)
 			return '''(«getTargetLanguageName(originalType.type)»)'''			
 		}
 	}
 	
-	def CharSequence castToReciever(EObject obj) {
+	def dispatch CharSequence castToReciever(EObject obj) {
 		val eContainer = obj.eContainer
 		if (eContainer instanceof Execution) {
 			val statement = eContainer.statement
