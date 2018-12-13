@@ -195,14 +195,15 @@ public class GTestHelper {
 				.sources(sourceFiles)
 				.directory(gTestDirectory)
 				//.makefileDir(targetPath.toString())
-				.mainLib(getMainLib());
-		 if(compiler == Compiler.GPLUSPLUS) {
-			 gTestCommand
-//			 	.wPedantic()
+				.mainLib(getMainLib())
+				//.wPedantic()
 			 	.wAll()				
 			 	.wExtra()
 			 	.wError()
 			 	.wConversion();
+		 if(compiler == Compiler.GCC) {
+			 gTestCommand.wnoUnusedParameter(); // ignore unused parameter flag
+			 gTestCommand.wnoUnusedFunction(); // ignore unused functions flag
 		 }
 		return gTestCommand.build();
 	}

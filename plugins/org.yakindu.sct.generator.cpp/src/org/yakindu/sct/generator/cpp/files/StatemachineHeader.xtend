@@ -341,6 +341,10 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			«BOOL_TYPE» «timeEventsInstance»[«timeEventsCountConst»];
 		«ENDIF»
 		
+		«IF entry.tracingUsed»
+			«YSCNamespace»::«traceObserverModule»<«statesEnumType»>* «tracingInstance»;
+		«ENDIF»
+		
 		«statesEnumType» «STATEVECTOR»[«orthogonalStatesConst»];
 		
 		«IF hasHistory»«statesEnumType» «HISTORYVECTOR»[«historyStatesConst»];«ENDIF»
@@ -350,10 +354,6 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			«s.interfaceName» «s.instance»;
 			«IF s.hasOperations && !entry.useStaticOPC»«s.interfaceOCBName»* «s.OCB_Instance»;«ENDIF»
 		«ENDFOR»
-		
-		«IF entry.tracingUsed»
-			«YSCNamespace»::«traceObserverModule»<«statesEnumType»>* «tracingInstance»;
-		«ENDIF»
 	'''
 	
 	def protected publicFunctionPrototypes(ExecutionFlow it) '''
