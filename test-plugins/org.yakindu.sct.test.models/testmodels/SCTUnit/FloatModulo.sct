@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_bRxaMJ09Eeexs_XA1t2DVA" specification="interface:&#xA;var r:real = 3.4&#xA;var i:integer = 2" name="FloatModulo">
+  <sgraph:Statechart xmi:id="_bRxaMJ09Eeexs_XA1t2DVA" specification="interface:&#xA;var r:real = 3.4&#xA;var i:integer = 2&#xA;&#xA;interface A:&#xA;var r:real = 3.4&#xA;var i:integer = 2" name="FloatModulo">
     <regions xmi:id="_bRzPYp09Eeexs_XA1t2DVA" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_bR_coJ09Eeexs_XA1t2DVA">
         <outgoingTransitions xmi:id="_bSCf8Z09Eeexs_XA1t2DVA" target="_bSAqwZ09Eeexs_XA1t2DVA"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_bSAqwZ09Eeexs_XA1t2DVA" specification="entry / &#xD;&#xA;r %=r; &#xD;&#xA;r = 3.4;&#xD;&#xA;i = 2;&#xD;&#xA;&#xD;&#xA;r = r % r;&#xD;&#xA;r = 3.4;&#xD;&#xA;i = 2;&#xD;&#xA;&#xD;&#xA;i = i % i;&#xD;&#xA;r = 3.4;&#xD;&#xA;i = 2;&#xD;&#xA;&#xD;&#xA;i %= i;&#xD;&#xA;r = 3.4;&#xD;&#xA;i = 2;&#xD;&#xA;&#xD;&#xA;r = r % i;&#xD;&#xA;r = 3.4;&#xD;&#xA;i = 2;&#xD;&#xA;&#xD;&#xA;r %= i;&#xD;&#xA;r = 3.4;&#xD;&#xA;i = 2;&#xD;&#xA;&#xD;&#xA;r = i % r;&#xD;&#xA;r = 3.4;&#xD;&#xA;i = 2;&#xD;&#xA;&#xD;&#xA;r = i % i&#xD;&#xA;" name="StateA" incomingTransitions="_bSCf8Z09Eeexs_XA1t2DVA">
+      <vertices xsi:type="sgraph:State" xmi:id="_bSAqwZ09Eeexs_XA1t2DVA" specification="entry / &#xD;&#xA;r %=r; &#xD;&#xA;r = 3.4;&#xD;&#xA;i = 2;&#xD;&#xA;&#xD;&#xA;r = r % r;&#xD;&#xA;r = 3.4;&#xD;&#xA;i = 2;&#xD;&#xA;&#xD;&#xA;i = i % i;&#xD;&#xA;r = 3.4;&#xD;&#xA;i = 2;&#xD;&#xA;&#xD;&#xA;i %= i;&#xD;&#xA;r = 3.4;&#xD;&#xA;i = 2;&#xD;&#xA;&#xD;&#xA;r = r % i;&#xD;&#xA;r = 3.4;&#xD;&#xA;i = 2;&#xD;&#xA;&#xD;&#xA;r %= i;&#xD;&#xA;r = 3.4;&#xD;&#xA;i = 2;&#xD;&#xA;&#xD;&#xA;r = i % r;&#xD;&#xA;r = 3.4;&#xD;&#xA;i = 2;&#xD;&#xA;&#xD;&#xA;r = i % i;&#xD;&#xA;&#xD;&#xA;// check for feature call&#xD;&#xA;&#xD;&#xA;A.r %=A.r; &#xD;&#xA;A.r = 3.4;&#xD;&#xA;A.i = 2;&#xD;&#xA;&#xD;&#xA;A.r = A.r % A.r;&#xD;&#xA;A.r = 3.4;&#xD;&#xA;A.i = 2;&#xD;&#xA;&#xD;&#xA;A.i = A.i % A.i;&#xD;&#xA;A.r = 3.4;&#xD;&#xA;A.i = 2;&#xD;&#xA;&#xD;&#xA;A.i %= A.i;&#xD;&#xA;A.r = 3.4;&#xD;&#xA;A.i = 2;&#xD;&#xA;&#xD;&#xA;A.r = A.r % A.i;&#xD;&#xA;A.r = 3.4;&#xD;&#xA;A.i = 2;&#xD;&#xA;&#xD;&#xA;A.r %= A.i;&#xD;&#xA;A.r = 3.4;&#xD;&#xA;A.i = 2;&#xD;&#xA;&#xD;&#xA;A.r = A.i % A.r;&#xD;&#xA;A.r = 3.4;&#xD;&#xA;A.i = 2;&#xD;&#xA;&#xD;&#xA;A.r = A.i % A.i&#xD;&#xA;&#xD;&#xA;" name="StateA" incomingTransitions="_bSCf8Z09Eeexs_XA1t2DVA">
         <outgoingTransitions xmi:id="_6UFmQJ0-Eeexs_XA1t2DVA" specification="always" target="_5pnF4J0-Eeexs_XA1t2DVA"/>
       </vertices>
       <vertices xsi:type="sgraph:FinalState" xmi:id="_5pnF4J0-Eeexs_XA1t2DVA" incomingTransitions="_6UFmQJ0-Eeexs_XA1t2DVA"/>
@@ -45,15 +45,15 @@
           <styles xsi:type="notation:ShapeStyle" xmi:id="_bSAqxZ09Eeexs_XA1t2DVA" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_bSAqxp09Eeexs_XA1t2DVA"/>
           <styles xsi:type="notation:BooleanValueStyle" xmi:id="_bSB44Z09Eeexs_XA1t2DVA" name="isHorizontal" booleanValue="true"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_bSCf8J09Eeexs_XA1t2DVA" x="40" y="80" width="81" height="465"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_bSCf8J09Eeexs_XA1t2DVA" x="40" y="80" width="239" height="1079"/>
         </children>
         <children xsi:type="notation:Shape" xmi:id="_5ppiIJ0-Eeexs_XA1t2DVA" type="FinalState" element="_5pnF4J0-Eeexs_XA1t2DVA" fontName="Verdana" lineColor="4210752">
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_5ppiIZ0-Eeexs_XA1t2DVA" x="172" y="234"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_5ppiIZ0-Eeexs_XA1t2DVA" x="329" y="232"/>
         </children>
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_bR-OhJ09Eeexs_XA1t2DVA"/>
       </children>
       <styles xsi:type="notation:ShapeStyle" xmi:id="_bR25wZ09Eeexs_XA1t2DVA" fontName="Verdana" fillColor="15790320" lineColor="12632256"/>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_bR-1kJ09Eeexs_XA1t2DVA" x="220" y="10" width="400" height="598"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_bR-1kJ09Eeexs_XA1t2DVA" x="220" y="10" width="400" height="1214"/>
     </children>
     <children xsi:type="notation:Shape" xmi:id="_bSEVI509Eeexs_XA1t2DVA" type="StatechartText" fontName="Verdana" lineColor="4210752">
       <children xsi:type="notation:DecorationNode" xmi:id="_bSE8MJ09Eeexs_XA1t2DVA" type="StatechartName">
@@ -74,6 +74,7 @@
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_bSDuEZ09Eeexs_XA1t2DVA" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_bSDuE509Eeexs_XA1t2DVA" fontName="Verdana"/>
       <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_bSDuEp09Eeexs_XA1t2DVA" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+      <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_FzIBkP7hEeidIvJYv3U9oA" id="(0.1623931623931624,0.21415270018621974)"/>
     </edges>
     <edges xmi:id="_6UG0YJ0-Eeexs_XA1t2DVA" type="Transition" element="_6UFmQJ0-Eeexs_XA1t2DVA" source="_bSAqxJ09Eeexs_XA1t2DVA" target="_5ppiIJ0-Eeexs_XA1t2DVA">
       <children xsi:type="notation:DecorationNode" xmi:id="_6UHbcJ0-Eeexs_XA1t2DVA" type="TransitionExpression">
@@ -83,7 +84,8 @@
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_6UG0YZ0-Eeexs_XA1t2DVA" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_6UG0Y50-Eeexs_XA1t2DVA" fontName="Verdana"/>
       <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_6UG0Yp0-Eeexs_XA1t2DVA" points="[6, 9, -60, -93]$[67, 109, 1, 7]"/>
-      <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_6UIpkJ0-Eeexs_XA1t2DVA" id="(0.9285714285714286,0.23921568627450981)"/>
+      <sourceAnchor xsi:type="notation:IdentityAnchor" xmi:id="_6UIpkJ0-Eeexs_XA1t2DVA" id="(0.30158730158730157,0.10245737028517181)"/>
+      <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_IultIP7hEeidIvJYv3U9oA" id="(0.5,0.5)"/>
     </edges>
   </notation:Diagram>
 </xmi:XMI>

@@ -32,6 +32,7 @@ import org.yakindu.base.types.Property
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.c.submodules.EventCode
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
@@ -54,6 +55,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	@Inject protected extension INamingService
 	
 	@Inject protected extension EventCode
+	@Inject protected extension ExpressionsChecker
 	
 	/* Referring to declared elements */
 	def dispatch CharSequence code(ElementReferenceExpression it) {
@@ -110,14 +112,14 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	
 	override dispatch CharSequence code(AssignmentExpression it) {
 		if (it.operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal(it)) {
-			'''«varRef.code» = fmod(«varRef.code»,«expression.code»)'''
+			'''«varRef.code» = «varRef.castToReciever»fmod(«varRef.code»,«expression.code»)'''
 		} else
 			super._code(it)
 	}
 
 	def dispatch CharSequence code(NumericalMultiplyDivideExpression expression) {
 		if (expression.operator == MultiplicativeOperator.MOD && haveCommonTypeReal(expression)) {
-			'''fmod(«expression.leftOperand.code.toString.trim»,«expression.rightOperand.code»)'''
+			'''«expression.eContainer.castToReciever»fmod(«expression.leftOperand.code.toString.trim»,«expression.rightOperand.code»)'''
 		} else {
 			super._code(expression);
 		}
@@ -161,11 +163,4 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	
 	
 	def CharSequence ternaryGuard(Expression it) '''(«it.code») ? «CGeneratorConstants.TRUE» : «CGeneratorConstants.FALSE»'''
-
-	def boolean haveCommonTypeReal(Expression expression) {
-		if(isSame(getCommonType((infer(expression).getType), getType(ITypeSystem.INTEGER)),
-			getType(ITypeSystem.INTEGER))) return false
-		return true
-	}
-
 }
