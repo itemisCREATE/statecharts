@@ -186,9 +186,7 @@ void ParentFirstOrthogonalReactionsTest::SetUp()
 	);
 	
 	checkMock = new CheckMock();
-	checkMock = new CheckMock();
 	checkMock->initializeBehavior();
-	nextMock = new NextMock();
 	nextMock = new NextMock();
 	nextMock->initializeBehavior();
 	
