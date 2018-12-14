@@ -320,8 +320,8 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 		if (executor !== null) {
 			val result = executor.executeOperation(exp)
 			slot.value = result
-			return result
 		}
+		return slot.value
 	}
 	
 	def dispatch doExecute(Enumerator feature, Void slot, ArgumentExpression exp) {
