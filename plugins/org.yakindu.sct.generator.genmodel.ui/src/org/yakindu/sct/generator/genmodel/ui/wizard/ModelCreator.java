@@ -22,7 +22,7 @@ import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.generator.core.extensions.ILibraryDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
 import org.yakindu.sct.generator.core.library.IDefaultFeatureValueProvider;
-import org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator;
+import org.yakindu.sct.generator.genmodel.ui.internal.GenmodelActivator;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
@@ -77,7 +77,7 @@ public class ModelCreator {
 				.getLibraryDescriptors(descriptor.getLibraryIDs());
 		for (ILibraryDescriptor desc : libraryDescriptor) {
 			IDefaultFeatureValueProvider defaultProvider = desc.createFeatureValueProvider(
-					SGenActivator.getInstance().getInjector(SGenActivator.ORG_YAKINDU_SCT_GENERATOR_GENMODEL_SGEN));
+					GenmodelActivator.getInstance().getInjector(GenmodelActivator.ORG_YAKINDU_SCT_GENERATOR_GENMODEL_SGEN));
 			if (defaultProvider != null && defaultProvider.isProviderFor(featureType.getLibrary())) {
 				return defaultProvider.createDefaultFeatureConfiguration(featureType, object);
 			}

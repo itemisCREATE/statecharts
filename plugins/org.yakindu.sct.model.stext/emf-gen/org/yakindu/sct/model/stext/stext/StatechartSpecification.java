@@ -2,9 +2,7 @@
  */
 package org.yakindu.sct.model.stext.stext;
 
-import org.eclipse.emf.common.util.EList;
 import org.yakindu.base.types.AnnotatableElement;
-import org.yakindu.base.types.Annotation;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 
 /**
