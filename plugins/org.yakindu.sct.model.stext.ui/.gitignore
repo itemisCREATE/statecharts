@@ -2,3 +2,4 @@
 /target/
 /xtend-gen/
 plugin.xml_gen
+*.MF_gen
