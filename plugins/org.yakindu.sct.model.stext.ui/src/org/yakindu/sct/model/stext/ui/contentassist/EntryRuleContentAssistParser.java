@@ -13,11 +13,10 @@ package org.yakindu.sct.model.stext.ui.contentassist;
 import java.lang.reflect.Method;
 import java.util.Collection;
 
-import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
 import org.yakindu.sct.model.stext.parser.IParserConstants;
-import org.yakindu.sct.model.stext.ui.contentassist.antlr.STextParser;
-import org.yakindu.sct.model.stext.ui.contentassist.antlr.internal.InternalSTextParser;
+import org.yakindu.sct.model.stext.ide.contentassist.antlr.STextParser;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -38,10 +37,9 @@ public class EntryRuleContentAssistParser extends STextParser implements IParser
 		if (entryRule == null)
 			return super.getFollowElements(parser);
 		try {
-			InternalSTextParser typedParser = (InternalSTextParser) parser;
-			Method method = typedParser.getClass().getMethod(ENTRY_RULE + entryRule);
-			method.invoke(typedParser);
-			return typedParser.getFollowElements();
+			Method method = parser.getClass().getMethod(ENTRY_RULE + entryRule);
+			method.invoke(parser);
+			return parser.getFollowElements();
 		} catch (Exception ex) {
 			throw new RuntimeException(ex);
 		}

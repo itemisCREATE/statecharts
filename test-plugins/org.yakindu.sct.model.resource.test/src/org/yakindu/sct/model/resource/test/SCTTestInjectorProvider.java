@@ -15,7 +15,7 @@ import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.yakindu.sct.model.stext.STextRuntimeModule;
 import org.yakindu.sct.model.stext.ui.STextUiModule;
-import org.yakindu.sct.model.stext.ui.internal.STextActivator;
+import org.yakindu.sct.model.stext.ui.internal.StextActivator;
 
 import com.google.inject.Injector;
 import com.google.inject.Module;
@@ -31,7 +31,7 @@ public class SCTTestInjectorProvider implements IInjectorProvider {
 
 		Module with2 = Modules.override(new STextRuntimeModule()).with(new SharedStateModule());
 
-		Module with3 = Modules.override(with2).with((Module) new STextUiModule(STextActivator.getInstance()));
+		Module with3 = Modules.override(with2).with((Module) new STextUiModule(StextActivator.getInstance()));
 
 		return createInjector(with3);
 	}

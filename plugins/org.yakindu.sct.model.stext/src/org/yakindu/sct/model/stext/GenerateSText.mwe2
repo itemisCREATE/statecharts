@@ -1,99 +1,63 @@
 module org.yakindu.sct.model.stext.Stext
 
 import org.eclipse.emf.mwe.utils.*
-import org.eclipse.xtext.generator.*
-import org.eclipse.xtext.ui.generator.*
+import org.eclipse.xtext.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.model.project.*
 
-var grammarURI = "classpath:/org/yakindu/sct/model/stext/SText.xtext"
-var file.extensions = "stext"
+var fileExtensions = "stext"
 var projectName = "org.yakindu.sct.model.stext"
 var runtimeProject = "../${projectName}"
+var rootPath = ".."
 
 Workflow {
-    bean = StandaloneSetup {
-	    scanClassPath = true
+	bean = StandaloneSetup {
+		scanClassPath = true
 		platformUri = "${runtimeProject}/.."
 		registerGenModelFile = "platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.genmodel"
 		registerGenModelFile = "platform:/resource/org.yakindu.sct.model.stext/model/SText.genmodel"
 		registerGenModelFile = "platform:/resource/org.yakindu.base.types/model/base.genmodel"
 		registerGenModelFile = "platform:/resource/org.yakindu.base.types/model/types.genmodel"
 		registerGenModelFile = "platform:/resource/org.yakindu.base.expressions/model/Expressions.genmodel"
-		registerEcoreFile ="platform:/resource/org.yakindu.base.types/model/base.ecore"
-		registerEcoreFile ="platform:/resource/org.yakindu.base.types/model/types.ecore"
-		registerEcoreFile ="platform:/resource/org.yakindu.base.expressions/model/Expressions.ecore"
-		registerEcoreFile ="platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore"
-		registerEcoreFile ="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore"
+		registerEcoreFile = "platform:/resource/org.yakindu.base.types/model/base.ecore"
+		registerEcoreFile = "platform:/resource/org.yakindu.base.types/model/types.ecore"
+		registerEcoreFile = "platform:/resource/org.yakindu.base.expressions/model/Expressions.ecore"
+		registerEcoreFile = "platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore"
+		registerEcoreFile = "platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore"
 	}
 
-	component = DirectoryCleaner {
-		directory = "${runtimeProject}/src-gen"
-	}
-
-	component = DirectoryCleaner {
-		directory = "${runtimeProject}.ui/src-gen"
-	}
-
-	component = Generator {
-		pathRtProject = runtimeProject
-		pathUiProject = "${runtimeProject}.ui"
-		projectNameRt = projectName
-		projectNameUi = "${projectName}.ui"
-		language = {
-			uri = grammarURI
-			fileExtensions = file.extensions
-
-			// Java API to access grammar elements (required by several other fragments)
-			fragment = grammarAccess.GrammarAccessFragment {
-				xmlVersion = "1.0"
+	component = XtextGenerator {
+		configuration = {
+			project = StandardProjectConfig {
+				baseName = projectName
+				rootPath = rootPath
+				eclipsePlugin = {
+					enabled = true
+				}
+				createEclipseMetaData = true
+				genericIde = {
+					name = "${projectName}.ui"
+					srcGen = "${rootPath}/${projectName}.ui/src-gen"
+					enabled = true
+					manifest = {
+						merge = false
+					}
+				}
 			}
-
-			// the serialization component
-			fragment = serializer.SerializerFragment {
+			code = {
+				encoding = "UTF-8"
+				lineDelimiter = "\r\n"
+				fileHeader = "/*\n * (c) by committers of YAKINDU */"
+			}
+		}
+		language = StandardLanguage {
+			name = "org.yakindu.sct.model.stext.SText"
+			fileExtensions = fileExtensions
+			serializer = {
 				generateStub = false
 			}
-
-			// a custom ResourceFactory for use with EMF 
-			fragment = resourceFactory.ResourceFactoryFragment {
-				fileExtensions = file.extensions
+			generator = {
+				generateStub = false
 			}
-
-			// The antlr parser generator fragment.
-			fragment = parser.antlr.XtextAntlrGeneratorFragment {
-			}
-			
-			// java-based API for validation 
-			fragment = validation.JavaValidatorFragment {
-			}
-
-			// scoping and exporting API 
-			fragment = scoping.ImportNamespacesScopingFragment {}
-			fragment = exporting.QualifiedNamesFragment {}
-			fragment = builder.BuilderIntegrationFragment {}
-
-			// formatter API 
-			fragment = formatting.FormatterFragment {}
-
-			// labeling API 
-			fragment = labeling.LabelProviderFragment {}
-
-			// outline API 
-			fragment = outline.OutlineTreeProviderFragment {}
-			fragment = outline.QuickOutlineFragment {}
-
-			// quickfix API 
-			fragment = quickfix.QuickfixProviderFragment {}
-
-			// content assist API  
-			fragment = contentAssist.JavaBasedContentAssistFragment {}
-			
-			// rename refactoring  
-			fragment = refactoring.RefactorElementNameFragment {}
-
-			// generates a more lightweight Antlr parser and lexer tailored for content assist  
-			fragment = parser.antlr.XtextAntlrUiGeneratorFragment {}
-
-			// generates junit test support classes into Generator#pathTestProject
-			fragment = junit.Junit4Fragment {}
 		}
 	}
 }
