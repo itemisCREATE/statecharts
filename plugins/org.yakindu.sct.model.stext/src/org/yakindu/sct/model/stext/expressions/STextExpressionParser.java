@@ -92,7 +92,7 @@ public class STextExpressionParser implements IExpressionParser {
 
 	public EObject parseExpression(String expression, String ruleName, String specification) {
 		StextResource resource = getResource();
-		resource.setURI(URI.createURI(getUri(), true));
+		resource.setURI(URI.createPlatformResourceURI(getUri(), true));
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
 		parserRule.setName(ruleName);
 		IParseResult result = parser.parse(parserRule, new StringReader(expression));
