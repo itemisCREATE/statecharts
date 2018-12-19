@@ -1,12 +1,6 @@
 
 package org.yakindu.sct.generator.java.test;
 
-import static org.mockito.Mockito.*;
-import static org.mockito.Matchers.*;
-import static org.hamcrest.CoreMatchers.*;
-import org.yakindu.scr.deepentry.IDeepEntryStatemachine.*;	
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.deepentry.DeepEntryStatemachine;
