@@ -83,6 +83,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	TriggerExpressionPrecedence.class,
 	ValuedEvents.class,
 	TypeAlias.class,
+	StatemachineKeywords.class,
 	TimedTransitions.class
 	})
 public class AllTests {

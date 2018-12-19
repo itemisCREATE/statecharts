@@ -28,6 +28,32 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 	
 	protected SCInterfaceImpl sCInterface;
 	
+	protected class SCIAImpl implements SCIA {
+	
+		private double r;
+		
+		public double getR() {
+			return r;
+		}
+		
+		public void setR(double value) {
+			this.r = value;
+		}
+		
+		private long i;
+		
+		public long getI() {
+			return i;
+		}
+		
+		public void setI(long value) {
+			this.i = value;
+		}
+		
+	}
+	
+	protected SCIAImpl sCIA;
+	
 	private boolean initialized = false;
 	
 	public enum State {
@@ -43,6 +69,7 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 	
 	public FloatModuloStatemachine() {
 		sCInterface = new SCInterfaceImpl();
+		sCIA = new SCIAImpl();
 	}
 	
 	public void init() {
@@ -55,6 +82,10 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		sCInterface.setR(3.4);
 		
 		sCInterface.setI(2);
+		
+		sCIA.setR(3.4);
+		
+		sCIA.setI(2);
 	}
 	
 	public void enter() {
@@ -133,6 +164,10 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		return sCInterface;
 	}
 	
+	public SCIA getSCIA() {
+		return sCIA;
+	}
+	
 	public double getR() {
 		return sCInterface.getR();
 	}
@@ -194,6 +229,50 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		sCInterface.setI(2);
 		
 		sCInterface.setR((sCInterface.i % sCInterface.i));
+		
+		sCIA.setR(sCIA.getR() % (sCIA.r));
+		
+		sCIA.setR(3.4);
+		
+		sCIA.setI(2);
+		
+		sCIA.setR((sCIA.r % sCIA.r));
+		
+		sCIA.setR(3.4);
+		
+		sCIA.setI(2);
+		
+		sCIA.setI((sCIA.i % sCIA.i));
+		
+		sCIA.setR(3.4);
+		
+		sCIA.setI(2);
+		
+		sCIA.setI(sCIA.getI() % (sCIA.i));
+		
+		sCIA.setR(3.4);
+		
+		sCIA.setI(2);
+		
+		sCIA.setR((sCIA.r % sCIA.i));
+		
+		sCIA.setR(3.4);
+		
+		sCIA.setI(2);
+		
+		sCIA.setR(sCIA.getR() % (sCIA.i));
+		
+		sCIA.setR(3.4);
+		
+		sCIA.setI(2);
+		
+		sCIA.setR((sCIA.i % sCIA.r));
+		
+		sCIA.setR(3.4);
+		
+		sCIA.setI(2);
+		
+		sCIA.setR((sCIA.i % sCIA.i));
 	}
 	
 	/* 'default' enter sequence for state StateA */
