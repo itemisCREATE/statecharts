@@ -1257,12 +1257,12 @@ TEST_F(OperationsTest, operationsCalled) {
 	unnamedOperation5Mock = new UnnamedOperation5Mock();
 	unnamedOperation5aMock = new UnnamedOperation5aMock();
 	
+	MockInterface1 interface1Mock;
 	MockDefault defaultMock;
 	MockInternal internalMock;
-	MockInterface1 interface1Mock;
+	statechart->setSCI_Interface1_OCB(&interface1Mock);
 	statechart->setDefaultSCI_OCB(&defaultMock);
 	statechart->setInternalSCI_OCB(&internalMock);
-	statechart->setSCI_Interface1_OCB(&interface1Mock);
 	alwaysTrueMock->setDefaultBehavior(&AlwaysTrueMock::alwaysTrue1);
 	
 	statechart->enter();
@@ -1388,12 +1388,12 @@ TEST_F(OperationsTest, operationsNotCalled) {
 	unnamedOperation5Mock = new UnnamedOperation5Mock();
 	unnamedOperation5aMock = new UnnamedOperation5aMock();
 	
+	MockInterface1 interface1Mock;
 	MockDefault defaultMock;
 	MockInternal internalMock;
-	MockInterface1 interface1Mock;
+	statechart->setSCI_Interface1_OCB(&interface1Mock);
 	statechart->setDefaultSCI_OCB(&defaultMock);
 	statechart->setInternalSCI_OCB(&internalMock);
-	statechart->setSCI_Interface1_OCB(&interface1Mock);
 	alwaysTrueMock->setDefaultBehavior(&AlwaysTrueMock::alwaysTrue1);
 	
 	statechart->enter();

@@ -9,6 +9,16 @@ namespace  {
 StatechartKeywords* statechart;
 
 
+class MockIf : public StatechartKeywords::SCI_If_OCB {
+	public:
+	void myOperation() {
+	}
+};
+class MockInternal : public StatechartKeywords::InternalSCI_OCB {
+	public:
+	void myOperation() {
+	}
+};
 
 //! The timers are managed by a timer service. */
 static TimedSctUnitRunner * runner;
@@ -34,6 +44,10 @@ class StatemachineKeywords : public ::testing::Test{
 
 TEST_F(StatemachineKeywords, statemachineKeywords) {
 	
+	MockIf ifMock;
+	MockInternal internalMock;
+	statechart->setSCI_If_OCB(&ifMock);
+	statechart->setInternalSCI_OCB(&internalMock);
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(StatechartKeywords::main_region_Timer));
