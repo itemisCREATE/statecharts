@@ -68,9 +68,6 @@
     <genClasses ecoreClass="types.ecore#//GenericElement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//GenericElement/typeParameters"/>
     </genClasses>
-    <genClasses ecoreClass="types.ecore#//PackageMember">
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//PackageMember/id"/>
-    </genClasses>
     <genClasses ecoreClass="types.ecore#//Domain">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Domain/domainID"/>
     </genClasses>
