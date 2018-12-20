@@ -316,20 +316,13 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 			return;
 		}
 		var Collection<Setting> usages = EcoreUtil.UsageCrossReferencer.find(event, event.eResource().getResourceSet());
-		
-		var boolean isRaised = false;
-		for (Setting setting : usages) {
-			if (setting.getEObject().eContainer instanceof EventRaisingExpression) {
-				isRaised = true;
-			}
-		}
-		
+		var boolean isRaised = usages.findFirst[setting | setting.getEObject().eContainer instanceof EventRaisingExpression] !== null;
 		if (!isRaised) {
-			for (Setting setting : usages) {
-				if (setting.EObject instanceof ElementReferenceExpression || setting.EObject instanceof FeatureCall) {
-					warning(String.format(OUT_EVENT_NEVER_RAISED, event.fullyQualifiedName), setting.EObject, null, -1);
-				}
-			}
+			usages.filter[ setting |
+				setting.EObject instanceof ElementReferenceExpression || setting.EObject instanceof FeatureCall
+			].forEach[ setting |
+				warning(String.format(OUT_EVENT_NEVER_RAISED, event.fullyQualifiedName), setting.EObject, null, -1)
+			]
 		}
 	}
 	

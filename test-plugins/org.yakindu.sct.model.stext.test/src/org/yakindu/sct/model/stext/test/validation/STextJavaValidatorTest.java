@@ -663,6 +663,8 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		
 		// used inside reaction guard
 		assertWarning(diagnostics, String.format(OUT_EVENT_NEVER_RAISED, "A"));
+		assertWarning(diagnostics, String.format(OUT_EVENT_NEVER_RAISED, "X.C"));
+		
 		assertIssueCount(diagnostics, 4);
 	}
 
