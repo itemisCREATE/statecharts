@@ -16,8 +16,8 @@ import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorMsg
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.warningMsg;
 import static org.junit.Assert.assertEquals;
 import static org.yakindu.base.expressions.validation.ExpressionsValidator.ERROR_ASSIGNMENT_TO_CONST_MSG;
-import static org.yakindu.base.expressions.validation.ExpressionsValidator.ERROR_POST_FIX_TO_CONST_MSG;
 import static org.yakindu.base.expressions.validation.ExpressionsValidator.ERROR_LEFT_HAND_ASSIGNMENT_MSG;
+import static org.yakindu.base.expressions.validation.ExpressionsValidator.ERROR_POST_FIX_TO_CONST_MSG;
 import static org.yakindu.base.expressions.validation.ExpressionsValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE;
 import static org.yakindu.base.types.validation.TypesJavaValidator.ERROR_OPTIONAL_MUST_BE_LAST_CODE;
 import static org.yakindu.base.types.validation.TypesJavaValidator.ERROR_VAR_ARGS_LAST_CODE;
@@ -65,8 +65,8 @@ import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.model.stext.test.util.StextTestFactory;
 import org.yakindu.sct.model.stext.test.util.TestCompletenessAssertions;
 import org.yakindu.sct.model.stext.test.util.TypesTestFactory;
-import org.yakindu.sct.model.stext.validation.STextValidator;
 import org.yakindu.sct.model.stext.validation.STextValidationMessages;
+import org.yakindu.sct.model.stext.validation.STextValidator;
 import org.yakindu.sct.test.models.AbstractTestModelsUtil;
 
 import com.google.inject.Inject;
@@ -651,6 +651,19 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 		assertIssueCount(diagnostics, 1);
 		assertWarning(diagnostics, ENTRY_UNUSED);
+	}
+	
+	@Test
+	public void checkNotRaisedOutEvent() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "NeverRaisedOutEvent.sct");
+		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
+	
+		// used as transition trigger and inside reaction guard
+		assertWarning(diagnostics, String.format(OUT_EVENT_NEVER_RAISED, "B"));
+		
+		// used inside reaction guard
+		assertWarning(diagnostics, String.format(OUT_EVENT_NEVER_RAISED, "A"));
+		assertIssueCount(diagnostics, 3);
 	}
 
 	@Test

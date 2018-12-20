@@ -42,6 +42,7 @@ public interface STextValidationMessages {
 	public static final String REGION_UNBOUND_DEFAULT_ENTRY_POINT = "Region must have a 'default' entry.";
 	public static final String REGION_UNBOUND_NAMED_ENTRY_POINT = "Region should have a named entry to support transitions entry specification: ";
 	public static final String ENTRY_UNUSED = "The named entry is not used by incoming transitions.";
+	public static final String OUT_EVENT_NEVER_RAISED = "Out event '%s' is never raised in this statechart. The transition trigger is therefore never active.";
 	public static final String ENTRY_NOT_EXIST = "The named entry does not exist: ";
 	public static final String EXIT_UNUSED = "This exit is not connected to any outgoing transitions.";
 	public static final String EXIT_NEVER_USED = "The named exit is not used: ";

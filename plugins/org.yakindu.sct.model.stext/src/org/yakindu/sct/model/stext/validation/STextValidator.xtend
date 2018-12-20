@@ -15,6 +15,7 @@ import com.google.common.collect.Sets
 import com.google.inject.Inject
 import com.google.inject.name.Named
 import java.util.ArrayList
+import java.util.Collection
 import java.util.Collections
 import java.util.Iterator
 import java.util.LinkedList
@@ -27,6 +28,7 @@ import org.eclipse.emf.common.util.TreeIterator
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.EStructuralFeature
+import org.eclipse.emf.ecore.EStructuralFeature.Setting
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.EcoreUtil2
@@ -307,6 +309,28 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 			}
 		}
 	}
+	
+	@Check(CheckType.FAST)
+	def void checkNotRaisedOutEvent(EventDefinition event) {
+		var Collection<Setting> usages = EcoreUtil.UsageCrossReferencer.find(event, event.eResource().getResourceSet());
+		
+		var boolean isRaised = false;
+		for (Setting setting : usages) {
+			if (!(setting.EObject instanceof Scope) && //
+				(setting.getEObject().eContainer instanceof EventRaisingExpression)) {
+				isRaised = true;
+			}
+		}
+		
+		if (!isRaised) {
+			for (Setting setting : usages) {
+				if (!(setting.EObject instanceof Scope) && (setting.EObject instanceof ElementReferenceExpression)) {
+					warning(String.format(OUT_EVENT_NEVER_RAISED, event.getName()), setting.EObject, null, -1);
+				}
+			}
+		}
+	}
+	
 	@Check(CheckType.FAST)
 	def void checkUnusedVariablesInInternalScope(InternalScope internalScope) {
 		var EList<Declaration> internalScopeDeclarations=internalScope.getDeclarations() 
