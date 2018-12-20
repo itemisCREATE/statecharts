@@ -22,7 +22,7 @@ import org.yakindu.base.base.DomainElement;
  * @model
  * @generated
  */
-public interface Package extends DomainElement, Declaration {
+public interface Package extends Declaration, DomainElement {
 	/**
 	 * Returns the value of the '<em><b>Member</b></em>' containment reference list.
 	 * The list contents are of type {@link org.yakindu.base.types.Declaration}.

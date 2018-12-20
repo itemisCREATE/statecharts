@@ -16,7 +16,6 @@ import org.yakindu.base.base.impl.NamedElementImpl;
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.Declaration;
-import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.TypesUtil;
 

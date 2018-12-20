@@ -11,18 +11,17 @@
 package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
+import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Property
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.stext.naming.StextNameProvider
-import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.sexec.Method
 
 class Naming {
 
@@ -118,15 +117,19 @@ class Naming {
 		"I" + statemachineClassName
 	}
 
-	def dispatch identifier(VariableDefinition it) {
+	def dispatch identifier(Property it) {
 		escaped.asIdentifier
 	}
 
-	def dispatch identifier(EventDefinition it) {
+	def dispatch identifier(Event it) {
 		escaped.asIdentifier
 	}
 	
 	def dispatch identifier(Method it){
+		'''«shortName»'''
+	}
+	
+	def dispatch identifier(Declaration it){
 		'''«shortName»'''
 	}
 

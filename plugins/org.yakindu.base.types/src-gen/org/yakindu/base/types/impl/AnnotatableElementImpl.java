@@ -129,12 +129,18 @@ public class AnnotatableElementImpl extends EObjectImpl implements AnnotatableEl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 *
+	 * @generated NOT
 	 */
-	public Annotation getAnnotationOfType(String typeName) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	@Override
+	public Annotation getAnnotationOfType(final String typeName) {
+		EList<Annotation> annotations = getAnnotationInfo().getAnnotations();
+		for (Annotation annotation : annotations) {
+			if (typeName.equals(annotation.getType().getName())) {
+				return annotation;
+			}
+		}
+		return null;
 	}
 
 	/**

@@ -19,7 +19,7 @@ package org.yakindu.base.types;
  * @model
  * @generated
  */
-public interface Enumerator extends Declaration, TypedElement {
+public interface Enumerator extends TypedDeclaration {
 
 	/**
 	 * Returns the value of the '<em><b>Owning Enumeration</b></em>' container reference.

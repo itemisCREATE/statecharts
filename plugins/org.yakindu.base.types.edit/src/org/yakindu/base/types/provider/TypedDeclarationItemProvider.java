@@ -1,13 +1,5 @@
-/** 
- * Copyright (c) 2015 committers of YAKINDU and others. 
- * All rights reserved. This program and the accompanying materials 
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at 
- * http://www.eclipse.org/legal/epl-v10.html 
- * Contributors:
- * committers of YAKINDU - initial API and implementation
- *
-*/
+/**
+ */
 package org.yakindu.base.types.provider;
 
 
@@ -20,25 +12,24 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.yakindu.base.types.TypeAlias;
+import org.yakindu.base.types.TypedDeclaration;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.base.types.TypeAlias} object.
+ * This is the item provider adapter for a {@link org.yakindu.base.types.TypedDeclaration} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class TypeAliasItemProvider 
-	extends TypeItemProvider {
+public class TypedDeclarationItemProvider extends DeclarationItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeAliasItemProvider(AdapterFactory adapterFactory) {
+	public TypedDeclarationItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -111,42 +102,30 @@ public class TypeAliasItemProvider
 	}
 
 	/**
-	 * This returns TypeAlias.gif.
+	 * This returns TypedDeclaration.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/TypeAlias"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/TypedDeclaration"));
 	}
 
 	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	@Override
 	public String getText(Object object) {
-		TypeAlias alias = (TypeAlias) object;
-		String label = ((TypeAlias)object).getName();
-		
-		StringBuilder builder=null;
-		if(label != null){
-			builder = new StringBuilder(label);
-			if(alias.getOriginType() != null){
-				builder.append(" : ");
-				builder.append(alias.getOriginType().getName());
-			}
-		}
-		else{
-			builder = new StringBuilder();
-			builder.append(getString("_UI_TypeAlias_type"));
-		}
-		return builder.toString();
+		String label = ((TypedDeclaration)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_TypedDeclaration_type") :
+			getString("_UI_TypedDeclaration_type") + " " + label;
 	}
-	
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -159,8 +138,8 @@ public class TypeAliasItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(TypeAlias.class)) {
-			case TypesPackage.TYPE_ALIAS__TYPE_SPECIFIER:
+		switch (notification.getFeatureID(TypedDeclaration.class)) {
+			case TypesPackage.TYPED_DECLARATION__TYPE_SPECIFIER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -187,29 +166,6 @@ public class TypeAliasItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER,
 				 TypesFactory.eINSTANCE.createArrayTypeSpecifier()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == TypesPackage.Literals.TYPE__SUPER_TYPES ||
-			childFeature == TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER;
-
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

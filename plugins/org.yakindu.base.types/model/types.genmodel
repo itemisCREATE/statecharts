@@ -93,5 +93,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference types.ecore#//AnnotationType/targets"/>
     </genClasses>
     <genClasses image="false" ecoreClass="types.ecore#//Expression"/>
+    <genClasses ecoreClass="types.ecore#//TypedDeclaration"/>
   </genPackages>
 </genmodel:GenModel>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="types" nsURI="http://www.yakindu.org/base/types/2.0.0" nsPrefix="types">
-  <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="base.ecore#//DomainElement #//Declaration">
+  <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//Declaration base.ecore#//DomainElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="member" upperBound="-1"
         eType="#//Declaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="import" upperBound="-1"
@@ -20,14 +20,14 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true" iD="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//Declaration #//GenericElement #//TypedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//TypedDeclaration #//GenericElement">
     <eOperations name="getVarArgIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//Parameter" containment="true" eOpposite="#//Parameter/owningOperation"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="variadic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//TypedElement #//Declaration">
+  <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//TypedDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="const" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="readonly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initialValue" eType="#//Expression"
@@ -52,7 +52,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeArguments" upperBound="-1"
         eType="#//TypeSpecifier" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="#//Declaration #//TypedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="#//TypedDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//Direction"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Direction">
@@ -70,7 +70,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="features" upperBound="-1"
         eType="#//Declaration" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Enumerator" eSuperTypes="#//Declaration #//TypedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Enumerator" eSuperTypes="#//TypedDeclaration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningEnumeration" eType="#//EnumerationType"
         eOpposite="#//EnumerationType/enumerator"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="literalValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
@@ -86,7 +86,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Domain">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="domainID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TypeAlias" eSuperTypes="#//TypedElement #//Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeAlias" eSuperTypes="#//Type #//TypedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Annotation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//AnnotationType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
@@ -112,4 +112,5 @@
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypedDeclaration" eSuperTypes="#//Declaration #//TypedElement"/>
 </ecore:EPackage>

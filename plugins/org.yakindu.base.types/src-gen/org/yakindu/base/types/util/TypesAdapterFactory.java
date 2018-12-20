@@ -32,6 +32,7 @@ import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
+import org.yakindu.base.types.TypedDeclaration;
 import org.yakindu.base.types.TypedElement;
 import org.yakindu.base.types.TypesPackage;
 
@@ -177,12 +178,16 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 				return createExpressionAdapter();
 			}
 			@Override
-			public Adapter caseDomainElement(DomainElement object) {
-				return createDomainElementAdapter();
+			public Adapter caseTypedDeclaration(TypedDeclaration object) {
+				return createTypedDeclarationAdapter();
 			}
 			@Override
 			public Adapter caseNamedElement(NamedElement object) {
 				return createNamedElementAdapter();
+			}
+			@Override
+			public Adapter caseDomainElement(DomainElement object) {
+				return createDomainElementAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -541,6 +546,20 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.TypedDeclaration <em>Typed Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.types.TypedDeclaration
+	 * @generated
+	 */
+	public Adapter createTypedDeclarationAdapter() {
 		return null;
 	}
 

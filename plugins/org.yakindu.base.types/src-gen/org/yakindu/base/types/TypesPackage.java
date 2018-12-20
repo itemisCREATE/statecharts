@@ -72,87 +72,6 @@ public interface TypesPackage extends EPackage {
 	int PACKAGE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Domain ID</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__DOMAIN_ID = BasePackage.DOMAIN_ELEMENT__DOMAIN_ID;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__NAME = BasePackage.DOMAIN_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__ANNOTATIONS = BasePackage.DOMAIN_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__ANNOTATION_INFO = BasePackage.DOMAIN_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__STATIC = BasePackage.DOMAIN_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__ID = BasePackage.DOMAIN_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Member</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__MEMBER = BasePackage.DOMAIN_ELEMENT_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Import</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__IMPORT = BasePackage.DOMAIN_ELEMENT_FEATURE_COUNT + 6;
-
-	/**
-	 * The number of structural features of the '<em>Package</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE_FEATURE_COUNT = BasePackage.DOMAIN_ELEMENT_FEATURE_COUNT + 7;
-
-	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.TypeImpl <em>Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -273,6 +192,87 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
+	int PACKAGE__NAME = DECLARATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__ANNOTATIONS = DECLARATION__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__ANNOTATION_INFO = DECLARATION__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__STATIC = DECLARATION__STATIC;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__ID = DECLARATION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Domain ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__DOMAIN_ID = DECLARATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Member</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__MEMBER = DECLARATION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Import</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__IMPORT = DECLARATION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Package</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
 	int TYPE__NAME = DECLARATION__NAME;
 
 	/**
@@ -348,13 +348,23 @@ public interface TypesPackage extends EPackage {
 	int TYPE_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.types.impl.TypedDeclarationImpl <em>Typed Declaration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.types.impl.TypedDeclarationImpl
+	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getTypedDeclaration()
+	 * @generated
+	 */
+	int TYPED_DECLARATION = 22;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__NAME = DECLARATION__NAME;
+	int TYPED_DECLARATION__NAME = DECLARATION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -363,7 +373,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__ANNOTATIONS = DECLARATION__ANNOTATIONS;
+	int TYPED_DECLARATION__ANNOTATIONS = DECLARATION__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
@@ -372,7 +382,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__ANNOTATION_INFO = DECLARATION__ANNOTATION_INFO;
+	int TYPED_DECLARATION__ANNOTATION_INFO = DECLARATION__ANNOTATION_INFO;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -381,7 +391,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__STATIC = DECLARATION__STATIC;
+	int TYPED_DECLARATION__STATIC = DECLARATION__STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -390,16 +400,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__ID = DECLARATION__ID;
-
-	/**
-	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__TYPE_PARAMETERS = DECLARATION_FEATURE_COUNT + 0;
+	int TYPED_DECLARATION__ID = DECLARATION__ID;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -408,7 +409,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__TYPE = DECLARATION_FEATURE_COUNT + 1;
+	int TYPED_DECLARATION__TYPE = DECLARATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
@@ -417,7 +418,88 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__TYPE_SPECIFIER = DECLARATION_FEATURE_COUNT + 2;
+	int TYPED_DECLARATION__TYPE_SPECIFIER = DECLARATION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Typed Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_DECLARATION_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__NAME = TYPED_DECLARATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__ANNOTATIONS = TYPED_DECLARATION__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__ANNOTATION_INFO = TYPED_DECLARATION__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__STATIC = TYPED_DECLARATION__STATIC;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__ID = TYPED_DECLARATION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__TYPE = TYPED_DECLARATION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__TYPE_SPECIFIER = TYPED_DECLARATION__TYPE_SPECIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__TYPE_PARAMETERS = TYPED_DECLARATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -426,7 +508,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__PARAMETERS = DECLARATION_FEATURE_COUNT + 3;
+	int OPERATION__PARAMETERS = TYPED_DECLARATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Variadic</b></em>' attribute.
@@ -435,7 +517,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__VARIADIC = DECLARATION_FEATURE_COUNT + 4;
+	int OPERATION__VARIADIC = TYPED_DECLARATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Operation</em>' class.
@@ -444,7 +526,106 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 5;
+	int OPERATION_FEATURE_COUNT = TYPED_DECLARATION_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__NAME = TYPED_DECLARATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__ANNOTATIONS = TYPED_DECLARATION__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__ANNOTATION_INFO = TYPED_DECLARATION__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__STATIC = TYPED_DECLARATION__STATIC;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__ID = TYPED_DECLARATION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__TYPE = TYPED_DECLARATION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__TYPE_SPECIFIER = TYPED_DECLARATION__TYPE_SPECIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Const</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__CONST = TYPED_DECLARATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Readonly</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__READONLY = TYPED_DECLARATION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Initial Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__INITIAL_VALUE = TYPED_DECLARATION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_FEATURE_COUNT = TYPED_DECLARATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -472,105 +653,6 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPED_ELEMENT_FEATURE_COUNT = 2;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__TYPE = TYPED_ELEMENT__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__TYPE_SPECIFIER = TYPED_ELEMENT__TYPE_SPECIFIER;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__NAME = TYPED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__ANNOTATIONS = TYPED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__ANNOTATION_INFO = TYPED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__STATIC = TYPED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__ID = TYPED_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Const</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__CONST = TYPED_ELEMENT_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Readonly</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__READONLY = TYPED_ELEMENT_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Initial Value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__INITIAL_VALUE = TYPED_ELEMENT_FEATURE_COUNT + 7;
-
-	/**
-	 * The number of structural features of the '<em>Property</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -708,7 +790,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__NAME = DECLARATION__NAME;
+	int EVENT__NAME = TYPED_DECLARATION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -717,7 +799,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__ANNOTATIONS = DECLARATION__ANNOTATIONS;
+	int EVENT__ANNOTATIONS = TYPED_DECLARATION__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
@@ -726,7 +808,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__ANNOTATION_INFO = DECLARATION__ANNOTATION_INFO;
+	int EVENT__ANNOTATION_INFO = TYPED_DECLARATION__ANNOTATION_INFO;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -735,7 +817,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__STATIC = DECLARATION__STATIC;
+	int EVENT__STATIC = TYPED_DECLARATION__STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -744,7 +826,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__ID = DECLARATION__ID;
+	int EVENT__ID = TYPED_DECLARATION__ID;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -753,7 +835,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__TYPE = DECLARATION_FEATURE_COUNT + 0;
+	int EVENT__TYPE = TYPED_DECLARATION__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
@@ -762,7 +844,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__TYPE_SPECIFIER = DECLARATION_FEATURE_COUNT + 1;
+	int EVENT__TYPE_SPECIFIER = TYPED_DECLARATION__TYPE_SPECIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Direction</b></em>' attribute.
@@ -771,7 +853,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__DIRECTION = DECLARATION_FEATURE_COUNT + 2;
+	int EVENT__DIRECTION = TYPED_DECLARATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Event</em>' class.
@@ -780,7 +862,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 3;
+	int EVENT_FEATURE_COUNT = TYPED_DECLARATION_FEATURE_COUNT + 1;
 
 
 	/**
@@ -1128,7 +1210,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATOR__NAME = DECLARATION__NAME;
+	int ENUMERATOR__NAME = TYPED_DECLARATION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1137,7 +1219,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATOR__ANNOTATIONS = DECLARATION__ANNOTATIONS;
+	int ENUMERATOR__ANNOTATIONS = TYPED_DECLARATION__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
@@ -1146,7 +1228,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATOR__ANNOTATION_INFO = DECLARATION__ANNOTATION_INFO;
+	int ENUMERATOR__ANNOTATION_INFO = TYPED_DECLARATION__ANNOTATION_INFO;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -1155,7 +1237,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATOR__STATIC = DECLARATION__STATIC;
+	int ENUMERATOR__STATIC = TYPED_DECLARATION__STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1164,7 +1246,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATOR__ID = DECLARATION__ID;
+	int ENUMERATOR__ID = TYPED_DECLARATION__ID;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1173,7 +1255,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATOR__TYPE = DECLARATION_FEATURE_COUNT + 0;
+	int ENUMERATOR__TYPE = TYPED_DECLARATION__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
@@ -1182,7 +1264,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATOR__TYPE_SPECIFIER = DECLARATION_FEATURE_COUNT + 1;
+	int ENUMERATOR__TYPE_SPECIFIER = TYPED_DECLARATION__TYPE_SPECIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Owning Enumeration</b></em>' container reference.
@@ -1191,7 +1273,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATOR__OWNING_ENUMERATION = DECLARATION_FEATURE_COUNT + 2;
+	int ENUMERATOR__OWNING_ENUMERATION = TYPED_DECLARATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Literal Value</b></em>' attribute.
@@ -1200,7 +1282,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATOR__LITERAL_VALUE = DECLARATION_FEATURE_COUNT + 3;
+	int ENUMERATOR__LITERAL_VALUE = TYPED_DECLARATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Enumerator</em>' class.
@@ -1209,7 +1291,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATOR_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 4;
+	int ENUMERATOR_FEATURE_COUNT = TYPED_DECLARATION_FEATURE_COUNT + 2;
 
 
 	/**
@@ -1378,31 +1460,13 @@ public interface TypesPackage extends EPackage {
 	int TYPE_ALIAS = 16;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_ALIAS__TYPE = TYPED_ELEMENT__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_ALIAS__TYPE_SPECIFIER = TYPED_ELEMENT__TYPE_SPECIFIER;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__NAME = TYPED_ELEMENT_FEATURE_COUNT + 0;
+	int TYPE_ALIAS__NAME = TYPE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1411,7 +1475,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__ANNOTATIONS = TYPED_ELEMENT_FEATURE_COUNT + 1;
+	int TYPE_ALIAS__ANNOTATIONS = TYPE__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
@@ -1420,7 +1484,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__ANNOTATION_INFO = TYPED_ELEMENT_FEATURE_COUNT + 2;
+	int TYPE_ALIAS__ANNOTATION_INFO = TYPE__ANNOTATION_INFO;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -1429,7 +1493,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__STATIC = TYPED_ELEMENT_FEATURE_COUNT + 3;
+	int TYPE_ALIAS__STATIC = TYPE__STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1438,7 +1502,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__ID = TYPED_ELEMENT_FEATURE_COUNT + 4;
+	int TYPE_ALIAS__ID = TYPE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1447,7 +1511,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__ABSTRACT = TYPED_ELEMENT_FEATURE_COUNT + 5;
+	int TYPE_ALIAS__ABSTRACT = TYPE__ABSTRACT;
 
 	/**
 	 * The feature id for the '<em><b>Visible</b></em>' attribute.
@@ -1456,7 +1520,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__VISIBLE = TYPED_ELEMENT_FEATURE_COUNT + 6;
+	int TYPE_ALIAS__VISIBLE = TYPE__VISIBLE;
 
 	/**
 	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
@@ -1465,7 +1529,25 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__SUPER_TYPES = TYPED_ELEMENT_FEATURE_COUNT + 7;
+	int TYPE_ALIAS__SUPER_TYPES = TYPE__SUPER_TYPES;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS__TYPE = TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS__TYPE_SPECIFIER = TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Type Alias</em>' class.
@@ -1474,7 +1556,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 8;
+	int TYPE_ALIAS_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.AnnotationImpl <em>Annotation</em>}' class.
@@ -1732,7 +1814,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getDirection()
 	 * @generated
 	 */
-	int DIRECTION = 22;
+	int DIRECTION = 23;
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Package <em>Package</em>}'.
@@ -2329,6 +2411,16 @@ public interface TypesPackage extends EPackage {
 	EClass getExpression();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.types.TypedDeclaration <em>Typed Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Typed Declaration</em>'.
+	 * @see org.yakindu.base.types.TypedDeclaration
+	 * @generated
+	 */
+	EClass getTypedDeclaration();
+
+	/**
 	 * Returns the meta object for enum '{@link org.yakindu.base.types.Direction <em>Direction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2851,6 +2943,16 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass EXPRESSION = eINSTANCE.getExpression();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.types.impl.TypedDeclarationImpl <em>Typed Declaration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.types.impl.TypedDeclarationImpl
+		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getTypedDeclaration()
+		 * @generated
+		 */
+		EClass TYPED_DECLARATION = eINSTANCE.getTypedDeclaration();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.Direction <em>Direction</em>}' enum.

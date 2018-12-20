@@ -35,6 +35,7 @@ import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
+import org.yakindu.base.types.TypedDeclaration;
 import org.yakindu.base.types.TypedElement;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
@@ -189,6 +190,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	private EClass expressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass typedDeclarationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -755,6 +763,15 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTypedDeclaration() {
+		return typedDeclarationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getDirection() {
 		return directionEEnum;
 	}
@@ -863,6 +880,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		expressionEClass = createEClass(EXPRESSION);
 
+		typedDeclarationEClass = createEClass(TYPED_DECLARATION);
+
 		// Create enums
 		directionEEnum = createEEnum(DIRECTION);
 	}
@@ -897,33 +916,31 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		packageEClass.getESuperTypes().add(theBasePackage.getDomainElement());
 		packageEClass.getESuperTypes().add(this.getDeclaration());
+		packageEClass.getESuperTypes().add(theBasePackage.getDomainElement());
 		typeEClass.getESuperTypes().add(this.getDeclaration());
 		declarationEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		declarationEClass.getESuperTypes().add(this.getAnnotatableElement());
-		operationEClass.getESuperTypes().add(this.getDeclaration());
+		operationEClass.getESuperTypes().add(this.getTypedDeclaration());
 		operationEClass.getESuperTypes().add(this.getGenericElement());
-		operationEClass.getESuperTypes().add(this.getTypedElement());
-		propertyEClass.getESuperTypes().add(this.getTypedElement());
-		propertyEClass.getESuperTypes().add(this.getDeclaration());
+		propertyEClass.getESuperTypes().add(this.getTypedDeclaration());
 		parameterEClass.getESuperTypes().add(this.getTypedElement());
 		parameterEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		parameterEClass.getESuperTypes().add(this.getAnnotatableElement());
-		eventEClass.getESuperTypes().add(this.getDeclaration());
-		eventEClass.getESuperTypes().add(this.getTypedElement());
+		eventEClass.getESuperTypes().add(this.getTypedDeclaration());
 		enumerationTypeEClass.getESuperTypes().add(this.getComplexType());
 		primitiveTypeEClass.getESuperTypes().add(this.getType());
 		complexTypeEClass.getESuperTypes().add(this.getType());
 		complexTypeEClass.getESuperTypes().add(this.getGenericElement());
-		enumeratorEClass.getESuperTypes().add(this.getDeclaration());
-		enumeratorEClass.getESuperTypes().add(this.getTypedElement());
+		enumeratorEClass.getESuperTypes().add(this.getTypedDeclaration());
 		typeParameterEClass.getESuperTypes().add(this.getType());
 		genericElementEClass.getESuperTypes().add(theBasePackage.getNamedElement());
-		typeAliasEClass.getESuperTypes().add(this.getTypedElement());
 		typeAliasEClass.getESuperTypes().add(this.getType());
+		typeAliasEClass.getESuperTypes().add(this.getTypedElement());
 		arrayTypeSpecifierEClass.getESuperTypes().add(this.getTypeSpecifier());
 		annotationTypeEClass.getESuperTypes().add(this.getType());
+		typedDeclarationEClass.getESuperTypes().add(this.getDeclaration());
+		typedDeclarationEClass.getESuperTypes().add(this.getTypedElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(packageEClass, org.yakindu.base.types.Package.class, "Package", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1014,6 +1031,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEReference(getAnnotationType_Targets(), ecorePackage.getEObject(), null, "targets", null, 0, -1, AnnotationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(expressionEClass, Expression.class, "Expression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(typedDeclarationEClass, TypedDeclaration.class, "TypedDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(directionEEnum, Direction.class, "Direction");
