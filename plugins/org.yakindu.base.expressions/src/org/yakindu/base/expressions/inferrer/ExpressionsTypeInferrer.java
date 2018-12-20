@@ -154,17 +154,16 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		InferenceResult result1 = inferTypeDispatch(e.getLeftOperand());
 		InferenceResult result2 = inferTypeDispatch(e.getRightOperand());
 		assertCompatible(result1, result2, String.format(COMPARSION_OPERATOR, e.getOperator(), result1, result2));
-		InferenceResult result = getResultFor(BOOLEAN);
-		return result;
+		return getResultFor(BOOLEAN);
 	}
 
 	public InferenceResult doInfer(NumericalAddSubtractExpression e) {
 		InferenceResult result1 = inferTypeDispatch(e.getLeftOperand());
 		InferenceResult result2 = inferTypeDispatch(e.getRightOperand());
-		assertCompatible(result1, result2, String.format(ARITHMETIC_OPERATORS, e.getOperator(), result1, result2));
+ 		assertCompatible(result1, result2, String.format(ARITHMETIC_OPERATORS, e.getOperator(), result1, result2));
 		assertIsSubType(result1, getResultFor(REAL),
 				String.format(ARITHMETIC_OPERATORS, e.getOperator(), result1, result2));
-		return getCommonType(inferTypeDispatch(e.getLeftOperand()), inferTypeDispatch(e.getRightOperand()));
+		return getCommonType(result1, result2);
 	}
 
 	public InferenceResult doInfer(NumericalMultiplyDivideExpression e) {
