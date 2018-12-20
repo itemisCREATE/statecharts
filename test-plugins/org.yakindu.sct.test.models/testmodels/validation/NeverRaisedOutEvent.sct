@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_aKA3YO5oEeihz_CAVk651A" specification="@EventDriven&#xD;&#xA;@ChildFirstExecution&#xD;&#xA;interface :&#xD;&#xA;&#xD;&#xA;out event B &#xD;&#xA;out event A : boolean &#xD;&#xA;&#xD;&#xA;  interface X:&#xD;&#xA;&#xD;&#xA;out event B &#xD;&#xA;&#xD;&#xA;out event unused " name="default">
+  <sgraph:Statechart xmi:id="_aKA3YO5oEeihz_CAVk651A" specification="@EventDriven&#xD;&#xA;@ChildFirstExecution&#xD;&#xA;interface :&#xD;&#xA;&#xD;&#xA;out event B &#xD;&#xA;out event A : boolean &#xD;&#xA;&#xD;&#xA;  interface X:&#xD;&#xA;&#xD;&#xA;out event B &#xD;&#xA;out event C&#xD;&#xA;out  event unused  " name="default">
     <regions xmi:id="_aKA3Zu5oEeihz_CAVk651A" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_aKL2ge5oEeihz_CAVk651A">
         <outgoingTransitions xmi:id="_aKNrue5oEeihz_CAVk651A" target="_aKL2je5oEeihz_CAVk651A"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_aKL2je5oEeihz_CAVk651A" specification="" name="StateA" incomingTransitions="_aKNrue5oEeihz_CAVk651A">
+      <vertices xsi:type="sgraph:State" xmi:id="_aKL2je5oEeihz_CAVk651A" specification="entry/ raise X.B" name="StateA" incomingTransitions="_aKNrue5oEeihz_CAVk651A">
         <outgoingTransitions xmi:id="_gWC_kPO9EeioQdn36vzJiw" specification="B" target="_f5pXcPO9EeioQdn36vzJiw"/>
-        <outgoingTransitions xmi:id="__caIsPO_Eeiuxec3mP0Ueg" specification="[B || valueof(A)]" target="_96RAgPO_Eeiuxec3mP0Ueg"/>
+        <outgoingTransitions xmi:id="__caIsPO_Eeiuxec3mP0Ueg" specification="[B || X.C || valueof(A)]" target="_96RAgPO_Eeiuxec3mP0Ueg"/>
         <outgoingTransitions xmi:id="_7riOoARTEemMvpNJ7hokWw" specification="X.B" target="_6zLqUARTEemMvpNJ7hokWw"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_f5pXcPO9EeioQdn36vzJiw" specification="" name="StateB" incomingTransitions="_gWC_kPO9EeioQdn36vzJiw"/>
@@ -141,7 +141,7 @@
     <edges xmi:id="__caIsfO_Eeiuxec3mP0Ueg" type="Transition" element="__caIsPO_Eeiuxec3mP0Ueg" source="_aKL2kO5oEeihz_CAVk651A" target="_96Y8UPO_Eeiuxec3mP0Ueg">
       <children xsi:type="notation:DecorationNode" xmi:id="__caItfO_Eeiuxec3mP0Ueg" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="__caItvO_Eeiuxec3mP0Ueg"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="__caIt_O_Eeiuxec3mP0Ueg" x="23" y="-18"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="__caIt_O_Eeiuxec3mP0Ueg" x="65" y="-20"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="__caIsvO_Eeiuxec3mP0Ueg" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="__caItPO_Eeiuxec3mP0Ueg" fontName="Verdana"/>

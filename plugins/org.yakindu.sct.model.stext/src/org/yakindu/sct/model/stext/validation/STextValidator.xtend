@@ -127,7 +127,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 	@Inject 
 	STextGrammarAccess grammarAccess
 	@Inject 
-	IQualifiedNameProvider nameProvider
+	extension IQualifiedNameProvider nameProvider
 	@Inject(optional=true)
 	@Named(DomainRegistry.DOMAIN_ID)
 	String domainID=BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral()
@@ -312,7 +312,6 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 	
 	@Check(CheckType.FAST)
 	def void checkNotRaisedOutEvent(EventDefinition event) {
-		
 		if (event.direction != Direction.OUT) {
 			return;
 		}
@@ -327,8 +326,8 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 		
 		if (!isRaised) {
 			for (Setting setting : usages) {
-				if (setting.EObject instanceof ElementReferenceExpression) {
-					warning(String.format(OUT_EVENT_NEVER_RAISED, event.getName()), setting.EObject, null, -1);
+				if (setting.EObject instanceof ElementReferenceExpression || setting.EObject instanceof FeatureCall) {
+					warning(String.format(OUT_EVENT_NEVER_RAISED, event.fullyQualifiedName), setting.EObject, null, -1);
 				}
 			}
 		}
