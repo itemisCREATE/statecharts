@@ -316,15 +316,14 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 		
 		var boolean isRaised = false;
 		for (Setting setting : usages) {
-			if (!(setting.EObject instanceof Scope) && //
-				(setting.getEObject().eContainer instanceof EventRaisingExpression)) {
+			if (setting.getEObject().eContainer instanceof EventRaisingExpression) {
 				isRaised = true;
 			}
 		}
 		
 		if (!isRaised) {
 			for (Setting setting : usages) {
-				if (!(setting.EObject instanceof Scope) && (setting.EObject instanceof ElementReferenceExpression)) {
+				if (setting.EObject instanceof ElementReferenceExpression) {
 					warning(String.format(OUT_EVENT_NEVER_RAISED, event.getName()), setting.EObject, null, -1);
 				}
 			}
