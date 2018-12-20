@@ -312,6 +312,10 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 	
 	@Check(CheckType.FAST)
 	def void checkNotRaisedOutEvent(EventDefinition event) {
+		
+		if (event.direction != Direction.OUT) {
+			return;
+		}
 		var Collection<Setting> usages = EcoreUtil.UsageCrossReferencer.find(event, event.eResource().getResourceSet());
 		
 		var boolean isRaised = false;
