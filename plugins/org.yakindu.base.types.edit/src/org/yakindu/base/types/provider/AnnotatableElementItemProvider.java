@@ -147,11 +147,6 @@ public class AnnotatableElementItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 TypesFactory.eINSTANCE.createPackageMember()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 TypesFactory.eINSTANCE.createPackage()));
 
 		newChildDescriptors.add

@@ -21,7 +21,6 @@ import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Operation;
-import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypedElement;
 import org.yakindu.sct.model.sexec.*;
@@ -42,9 +41,12 @@ import org.yakindu.sct.model.sexec.ExecutionSynchronization;
 import org.yakindu.sct.model.sexec.ExitState;
 import org.yakindu.sct.model.sexec.HistoryEntry;
 import org.yakindu.sct.model.sexec.If;
+import org.yakindu.sct.model.sexec.LocalVariableDefinition;
 import org.yakindu.sct.model.sexec.MappedElement;
+import org.yakindu.sct.model.sexec.Method;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.ReactionFired;
+import org.yakindu.sct.model.sexec.Return;
 import org.yakindu.sct.model.sexec.SaveHistory;
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.Sequence;
@@ -52,6 +54,7 @@ import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sexec.StateCase;
 import org.yakindu.sct.model.sexec.StateSwitch;
 import org.yakindu.sct.model.sexec.StateVector;
+import org.yakindu.sct.model.sexec.Statement;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.TimeEvent;
 import org.yakindu.sct.model.sexec.Trace;
@@ -293,8 +296,8 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 				return createAnnotatableElementAdapter();
 			}
 			@Override
-			public Adapter casePackageMember(PackageMember object) {
-				return createPackageMemberAdapter();
+			public Adapter caseDeclaration(Declaration object) {
+				return createDeclarationAdapter();
 			}
 			@Override
 			public Adapter caseType(Type object) {
@@ -311,10 +314,6 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTypedElement(TypedElement object) {
 				return createTypedElementAdapter();
-			}
-			@Override
-			public Adapter caseDeclaration(Declaration object) {
-				return createDeclarationAdapter();
 			}
 			@Override
 			public Adapter caseOperation(Operation object) {
@@ -499,20 +498,6 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.TypedElement <em>Typed Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.base.types.TypedElement
-	 * @generated
-	 */
-	public Adapter createTypedElementAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.AnnotatableElement <em>Annotatable Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -527,16 +512,16 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.PackageMember <em>Package Member</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.TypedElement <em>Typed Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.yakindu.base.types.PackageMember
+	 * @see org.yakindu.base.types.TypedElement
 	 * @generated
 	 */
-	public Adapter createPackageMemberAdapter() {
+	public Adapter createTypedElementAdapter() {
 		return null;
 	}
 

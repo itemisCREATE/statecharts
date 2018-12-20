@@ -17,8 +17,11 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
@@ -151,6 +154,16 @@ public class ComplexTypeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createPackage()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
 				 TypesFactory.eINSTANCE.createOperation()));
 
 		newChildDescriptors.add
@@ -166,7 +179,37 @@ public class ComplexTypeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createComplexType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createEnumerationType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createPrimitiveType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
 				 TypesFactory.eINSTANCE.createEnumerator()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createTypeParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createTypeAlias()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createAnnotationType()));
 	}
 
 	/**

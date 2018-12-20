@@ -194,87 +194,7 @@ public class StatechartSpecificationItemProvider extends ScopedElementItemProvid
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 StextFactory.eINSTANCE.createEventDefinition()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 StextFactory.eINSTANCE.createVariableDefinition()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 StextFactory.eINSTANCE.createOperationDefinition()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 StextFactory.eINSTANCE.createTypeAliasDefinition()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 TypesFactory.eINSTANCE.createPackageMember()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 TypesFactory.eINSTANCE.createPackage()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 TypesFactory.eINSTANCE.createType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 TypesFactory.eINSTANCE.createOperation()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 TypesFactory.eINSTANCE.createProperty()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 TypesFactory.eINSTANCE.createParameter()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 TypesFactory.eINSTANCE.createEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 TypesFactory.eINSTANCE.createComplexType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 TypesFactory.eINSTANCE.createEnumerationType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 TypesFactory.eINSTANCE.createPrimitiveType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 TypesFactory.eINSTANCE.createEnumerator()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 TypesFactory.eINSTANCE.createTypeParameter()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 TypesFactory.eINSTANCE.createTypeAlias()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -284,17 +204,7 @@ public class StatechartSpecificationItemProvider extends ScopedElementItemProvid
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 TypesFactory.eINSTANCE.createAnnotationType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 SGraphFactory.eINSTANCE.createStatechart()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 SGraphFactory.eINSTANCE.createImportDeclaration()));
 	}
 
   /**

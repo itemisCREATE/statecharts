@@ -59,9 +59,32 @@ public class OperationItemProvider extends DeclarationItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addTypePropertyDescriptor(object);
 			addVariadicPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Type feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTypePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TypedElement_type_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TypedElement_type_feature", "_UI_TypedElement_type"),
+				 TypesPackage.Literals.TYPED_ELEMENT__TYPE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -98,6 +121,7 @@ public class OperationItemProvider extends DeclarationItemProvider {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS);
+			childrenFeatures.add(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER);
 			childrenFeatures.add(TypesPackage.Literals.OPERATION__PARAMETERS);
 		}
 		return childrenFeatures;
@@ -184,6 +208,7 @@ public class OperationItemProvider extends DeclarationItemProvider {
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TypesPackage.OPERATION__TYPE_PARAMETERS:
+			case TypesPackage.OPERATION__TYPE_SPECIFIER:
 			case TypesPackage.OPERATION__PARAMETERS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -206,6 +231,16 @@ public class OperationItemProvider extends DeclarationItemProvider {
 			(createChildParameter
 				(TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS,
 				 TypesFactory.eINSTANCE.createTypeParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER,
+				 TypesFactory.eINSTANCE.createTypeSpecifier()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER,
+				 TypesFactory.eINSTANCE.createArrayTypeSpecifier()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -376,7 +376,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link ExpressionsPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -390,7 +390,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		if (isInited) return (ExpressionsPackage)EPackage.Registry.INSTANCE.getEPackage(ExpressionsPackage.eNS_URI);
 
 		// Obtain or create and register package
-		ExpressionsPackageImpl theExpressionsPackage = (ExpressionsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ExpressionsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ExpressionsPackageImpl());
+		Object registeredExpressionsPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		ExpressionsPackageImpl theExpressionsPackage = registeredExpressionsPackage instanceof ExpressionsPackageImpl ? (ExpressionsPackageImpl)registeredExpressionsPackage : new ExpressionsPackageImpl();
 
 		isInited = true;
 
@@ -407,7 +408,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		// Mark meta-data to indicate it can't be changed
 		theExpressionsPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(ExpressionsPackage.eNS_URI, theExpressionsPackage);
 		return theExpressionsPackage;

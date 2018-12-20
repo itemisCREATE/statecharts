@@ -219,6 +219,11 @@ public class ScopeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SGraphPackage.Literals.SCOPE__DECLARATIONS,
+				 TypesFactory.eINSTANCE.createPackage()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__DECLARATIONS,
 				 TypesFactory.eINSTANCE.createOperation()));
 
 		newChildDescriptors.add
@@ -230,6 +235,16 @@ public class ScopeItemProvider
 			(createChildParameter
 				(SGraphPackage.Literals.SCOPE__DECLARATIONS,
 				 TypesFactory.eINSTANCE.createEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__DECLARATIONS,
+				 TypesFactory.eINSTANCE.createComplexType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__DECLARATIONS,
+				 TypesFactory.eINSTANCE.createEnumerationType()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -319,11 +334,6 @@ public class ScopeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SGraphPackage.Literals.SCOPE__MEMBERS,
-				 TypesFactory.eINSTANCE.createPackageMember()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGraphPackage.Literals.SCOPE__MEMBERS,
 				 TypesFactory.eINSTANCE.createPackage()));
 
 		newChildDescriptors.add
@@ -400,6 +410,11 @@ public class ScopeItemProvider
 			(createChildParameter
 				(SGraphPackage.Literals.SCOPE__MEMBERS,
 				 TypesFactory.eINSTANCE.createAnnotation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createAnnotatableElement()));
 
 		newChildDescriptors.add
 			(createChildParameter

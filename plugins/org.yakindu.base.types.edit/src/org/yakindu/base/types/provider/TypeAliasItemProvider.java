@@ -70,6 +70,7 @@ public class TypeAliasItemProvider
 
 			addTypePropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
+			addStaticPropertyDescriptor(object);
 			addIdPropertyDescriptor(object);
 			addAbstractPropertyDescriptor(object);
 			addVisiblePropertyDescriptor(object);
@@ -122,6 +123,28 @@ public class TypeAliasItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Static feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addStaticPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Declaration_static_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Declaration_static_feature", "_UI_Declaration_type"),
+				 TypesPackage.Literals.DECLARATION__STATIC,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Id feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -132,9 +155,9 @@ public class TypeAliasItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_PackageMember_id_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_PackageMember_id_feature", "_UI_PackageMember_type"),
-				 TypesPackage.Literals.PACKAGE_MEMBER__ID,
+				 getString("_UI_Declaration_id_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Declaration_id_feature", "_UI_Declaration_type"),
+				 TypesPackage.Literals.DECLARATION__ID,
 				 false,
 				 false,
 				 false,
@@ -271,6 +294,7 @@ public class TypeAliasItemProvider
 
 		switch (notification.getFeatureID(TypeAlias.class)) {
 			case TypesPackage.TYPE_ALIAS__NAME:
+			case TypesPackage.TYPE_ALIAS__STATIC:
 			case TypesPackage.TYPE_ALIAS__ID:
 			case TypesPackage.TYPE_ALIAS__ABSTRACT:
 			case TypesPackage.TYPE_ALIAS__VISIBLE:
@@ -311,11 +335,6 @@ public class TypeAliasItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS,
 				 TypesFactory.eINSTANCE.createAnnotation()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 TypesFactory.eINSTANCE.createPackageMember()));
 
 		newChildDescriptors.add
 			(createChildParameter

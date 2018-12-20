@@ -7,6 +7,7 @@
 package org.yakindu.base.types;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Type extends PackageMember {
+public interface Type extends Declaration {
 
 	/**
 	 * Returns the value of the '<em><b>Abstract</b></em>' attribute.

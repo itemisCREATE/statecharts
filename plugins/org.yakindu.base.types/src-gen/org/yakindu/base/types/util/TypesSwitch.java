@@ -24,7 +24,6 @@ import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Operation;
-import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
@@ -91,8 +90,8 @@ public class TypesSwitch<T> extends Switch<T> {
 			case TypesPackage.PACKAGE: {
 				org.yakindu.base.types.Package package_ = (org.yakindu.base.types.Package)theEObject;
 				T result = casePackage(package_);
-				if (result == null) result = casePackageMember(package_);
 				if (result == null) result = caseDomainElement(package_);
+				if (result == null) result = caseDeclaration(package_);
 				if (result == null) result = caseNamedElement(package_);
 				if (result == null) result = caseAnnotatableElement(package_);
 				if (result == null) result = defaultCase(theEObject);
@@ -101,7 +100,7 @@ public class TypesSwitch<T> extends Switch<T> {
 			case TypesPackage.TYPE: {
 				Type type = (Type)theEObject;
 				T result = caseType(type);
-				if (result == null) result = casePackageMember(type);
+				if (result == null) result = caseDeclaration(type);
 				if (result == null) result = caseNamedElement(type);
 				if (result == null) result = caseAnnotatableElement(type);
 				if (result == null) result = defaultCase(theEObject);
@@ -110,8 +109,6 @@ public class TypesSwitch<T> extends Switch<T> {
 			case TypesPackage.DECLARATION: {
 				Declaration declaration = (Declaration)theEObject;
 				T result = caseDeclaration(declaration);
-				if (result == null) result = caseTypedElement(declaration);
-				if (result == null) result = casePackageMember(declaration);
 				if (result == null) result = caseNamedElement(declaration);
 				if (result == null) result = caseAnnotatableElement(declaration);
 				if (result == null) result = defaultCase(theEObject);
@@ -123,7 +120,6 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseDeclaration(operation);
 				if (result == null) result = caseGenericElement(operation);
 				if (result == null) result = caseTypedElement(operation);
-				if (result == null) result = casePackageMember(operation);
 				if (result == null) result = caseNamedElement(operation);
 				if (result == null) result = caseAnnotatableElement(operation);
 				if (result == null) result = defaultCase(theEObject);
@@ -132,9 +128,8 @@ public class TypesSwitch<T> extends Switch<T> {
 			case TypesPackage.PROPERTY: {
 				Property property = (Property)theEObject;
 				T result = caseProperty(property);
-				if (result == null) result = caseDeclaration(property);
 				if (result == null) result = caseTypedElement(property);
-				if (result == null) result = casePackageMember(property);
+				if (result == null) result = caseDeclaration(property);
 				if (result == null) result = caseNamedElement(property);
 				if (result == null) result = caseAnnotatableElement(property);
 				if (result == null) result = defaultCase(theEObject);
@@ -166,7 +161,6 @@ public class TypesSwitch<T> extends Switch<T> {
 				T result = caseEvent(event);
 				if (result == null) result = caseDeclaration(event);
 				if (result == null) result = caseTypedElement(event);
-				if (result == null) result = casePackageMember(event);
 				if (result == null) result = caseNamedElement(event);
 				if (result == null) result = caseAnnotatableElement(event);
 				if (result == null) result = defaultCase(theEObject);
@@ -178,7 +172,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseComplexType(enumerationType);
 				if (result == null) result = caseType(enumerationType);
 				if (result == null) result = caseGenericElement(enumerationType);
-				if (result == null) result = casePackageMember(enumerationType);
+				if (result == null) result = caseDeclaration(enumerationType);
 				if (result == null) result = caseNamedElement(enumerationType);
 				if (result == null) result = caseAnnotatableElement(enumerationType);
 				if (result == null) result = defaultCase(theEObject);
@@ -188,7 +182,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				PrimitiveType primitiveType = (PrimitiveType)theEObject;
 				T result = casePrimitiveType(primitiveType);
 				if (result == null) result = caseType(primitiveType);
-				if (result == null) result = casePackageMember(primitiveType);
+				if (result == null) result = caseDeclaration(primitiveType);
 				if (result == null) result = caseNamedElement(primitiveType);
 				if (result == null) result = caseAnnotatableElement(primitiveType);
 				if (result == null) result = defaultCase(theEObject);
@@ -199,7 +193,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				T result = caseComplexType(complexType);
 				if (result == null) result = caseType(complexType);
 				if (result == null) result = caseGenericElement(complexType);
-				if (result == null) result = casePackageMember(complexType);
+				if (result == null) result = caseDeclaration(complexType);
 				if (result == null) result = caseNamedElement(complexType);
 				if (result == null) result = caseAnnotatableElement(complexType);
 				if (result == null) result = defaultCase(theEObject);
@@ -210,7 +204,6 @@ public class TypesSwitch<T> extends Switch<T> {
 				T result = caseEnumerator(enumerator);
 				if (result == null) result = caseDeclaration(enumerator);
 				if (result == null) result = caseTypedElement(enumerator);
-				if (result == null) result = casePackageMember(enumerator);
 				if (result == null) result = caseNamedElement(enumerator);
 				if (result == null) result = caseAnnotatableElement(enumerator);
 				if (result == null) result = defaultCase(theEObject);
@@ -220,7 +213,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				TypeParameter typeParameter = (TypeParameter)theEObject;
 				T result = caseTypeParameter(typeParameter);
 				if (result == null) result = caseType(typeParameter);
-				if (result == null) result = casePackageMember(typeParameter);
+				if (result == null) result = caseDeclaration(typeParameter);
 				if (result == null) result = caseNamedElement(typeParameter);
 				if (result == null) result = caseAnnotatableElement(typeParameter);
 				if (result == null) result = defaultCase(theEObject);
@@ -230,14 +223,6 @@ public class TypesSwitch<T> extends Switch<T> {
 				GenericElement genericElement = (GenericElement)theEObject;
 				T result = caseGenericElement(genericElement);
 				if (result == null) result = caseNamedElement(genericElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TypesPackage.PACKAGE_MEMBER: {
-				PackageMember packageMember = (PackageMember)theEObject;
-				T result = casePackageMember(packageMember);
-				if (result == null) result = caseNamedElement(packageMember);
-				if (result == null) result = caseAnnotatableElement(packageMember);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -252,7 +237,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				T result = caseTypeAlias(typeAlias);
 				if (result == null) result = caseTypedElement(typeAlias);
 				if (result == null) result = caseType(typeAlias);
-				if (result == null) result = casePackageMember(typeAlias);
+				if (result == null) result = caseDeclaration(typeAlias);
 				if (result == null) result = caseNamedElement(typeAlias);
 				if (result == null) result = caseAnnotatableElement(typeAlias);
 				if (result == null) result = defaultCase(theEObject);
@@ -281,7 +266,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				AnnotationType annotationType = (AnnotationType)theEObject;
 				T result = caseAnnotationType(annotationType);
 				if (result == null) result = caseType(annotationType);
-				if (result == null) result = casePackageMember(annotationType);
+				if (result == null) result = caseDeclaration(annotationType);
 				if (result == null) result = caseNamedElement(annotationType);
 				if (result == null) result = caseAnnotatableElement(annotationType);
 				if (result == null) result = defaultCase(theEObject);
@@ -541,21 +526,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseGenericElement(GenericElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Package Member</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Package Member</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePackageMember(PackageMember object) {
 		return null;
 	}
 

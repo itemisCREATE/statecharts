@@ -24,7 +24,6 @@ import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Operation;
-import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
@@ -92,7 +91,6 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.ENUMERATOR: return createEnumerator();
 			case TypesPackage.TYPE_PARAMETER: return createTypeParameter();
 			case TypesPackage.GENERIC_ELEMENT: return createGenericElement();
-			case TypesPackage.PACKAGE_MEMBER: return createPackageMember();
 			case TypesPackage.DOMAIN: return createDomain();
 			case TypesPackage.TYPE_ALIAS: return createTypeAlias();
 			case TypesPackage.ANNOTATION: return createAnnotation();
@@ -262,16 +260,6 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	public GenericElement createGenericElement() {
 		GenericElementImpl genericElement = new GenericElementImpl();
 		return genericElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public PackageMember createPackageMember() {
-		PackageMemberImpl packageMember = new PackageMemberImpl();
-		return packageMember;
 	}
 
 	/**

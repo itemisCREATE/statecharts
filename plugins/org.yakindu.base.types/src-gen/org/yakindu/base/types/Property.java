@@ -25,7 +25,7 @@ package org.yakindu.base.types;
  * @model
  * @generated
  */
-public interface Property extends Declaration {
+public interface Property extends TypedElement, Declaration {
 
 	/**
 	 * Returns the value of the '<em><b>Const</b></em>' attribute.

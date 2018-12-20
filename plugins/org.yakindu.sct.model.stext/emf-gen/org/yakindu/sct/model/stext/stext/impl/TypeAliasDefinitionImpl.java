@@ -8,6 +8,8 @@ import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.TypesPackage;
@@ -23,12 +25,31 @@ import org.yakindu.sct.model.stext.stext.TypeAliasDefinition;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.yakindu.sct.model.stext.stext.impl.TypeAliasDefinitionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.TypeAliasDefinitionImpl#isStatic <em>Static</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class TypeAliasDefinitionImpl extends TypeAliasImpl implements TypeAliasDefinition {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 	/**
 	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -72,6 +93,27 @@ public class TypeAliasDefinitionImpl extends TypeAliasImpl implements TypeAliasD
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.TYPE_ALIAS_DEFINITION__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isStatic() {
 		return static_;
 	}
@@ -96,6 +138,8 @@ public class TypeAliasDefinitionImpl extends TypeAliasImpl implements TypeAliasD
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case StextPackage.TYPE_ALIAS_DEFINITION__NAME:
+				return getName();
 			case StextPackage.TYPE_ALIAS_DEFINITION__STATIC:
 				return isStatic();
 		}
@@ -110,6 +154,9 @@ public class TypeAliasDefinitionImpl extends TypeAliasImpl implements TypeAliasD
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case StextPackage.TYPE_ALIAS_DEFINITION__NAME:
+				setName((String)newValue);
+				return;
 			case StextPackage.TYPE_ALIAS_DEFINITION__STATIC:
 				setStatic((Boolean)newValue);
 				return;
@@ -125,6 +172,9 @@ public class TypeAliasDefinitionImpl extends TypeAliasImpl implements TypeAliasD
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case StextPackage.TYPE_ALIAS_DEFINITION__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case StextPackage.TYPE_ALIAS_DEFINITION__STATIC:
 				setStatic(STATIC_EDEFAULT);
 				return;
@@ -140,6 +190,8 @@ public class TypeAliasDefinitionImpl extends TypeAliasImpl implements TypeAliasD
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case StextPackage.TYPE_ALIAS_DEFINITION__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case StextPackage.TYPE_ALIAS_DEFINITION__STATIC:
 				return static_ != STATIC_EDEFAULT;
 		}
@@ -153,6 +205,12 @@ public class TypeAliasDefinitionImpl extends TypeAliasImpl implements TypeAliasD
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case StextPackage.TYPE_ALIAS_DEFINITION__NAME: return BasePackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
 		if (baseClass == Declaration.class) {
 			switch (derivedFeatureID) {
 				case StextPackage.TYPE_ALIAS_DEFINITION__STATIC: return TypesPackage.DECLARATION__STATIC;
@@ -169,6 +227,12 @@ public class TypeAliasDefinitionImpl extends TypeAliasImpl implements TypeAliasD
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case BasePackage.NAMED_ELEMENT__NAME: return StextPackage.TYPE_ALIAS_DEFINITION__NAME;
+				default: return -1;
+			}
+		}
 		if (baseClass == Declaration.class) {
 			switch (baseFeatureID) {
 				case TypesPackage.DECLARATION__STATIC: return StextPackage.TYPE_ALIAS_DEFINITION__STATIC;
@@ -187,8 +251,10 @@ public class TypeAliasDefinitionImpl extends TypeAliasImpl implements TypeAliasD
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (static: ");
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", static: ");
 		result.append(static_);
 		result.append(')');
 		return result.toString();

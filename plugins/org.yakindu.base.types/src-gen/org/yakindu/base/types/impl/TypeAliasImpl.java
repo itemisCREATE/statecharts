@@ -17,7 +17,7 @@ import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Annotation;
-import org.yakindu.base.types.PackageMember;
+import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypeSpecifier;
@@ -36,6 +36,7 @@ import org.yakindu.base.types.TypesUtil;
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getAnnotationInfo <em>Annotation Info</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#isVisible <em>Visible</em>}</li>
@@ -57,7 +58,8 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -66,7 +68,8 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -92,6 +95,26 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	 * @ordered
 	 */
 	protected AnnotatableElement annotationInfo;
+
+	/**
+	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStatic()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean STATIC_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isStatic() <em>Static</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStatic()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean static_ = STATIC_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -232,7 +255,8 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getName() {
@@ -240,7 +264,8 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setName(String newName) {
@@ -310,10 +335,20 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Annotation getAnnotationOfType(String typeName) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	public boolean isStatic() {
+		return static_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStatic(boolean newStatic) {
+		boolean oldStatic = static_;
+		static_ = newStatic;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE_ALIAS__STATIC, oldStatic, static_));
 	}
 
 	/**
@@ -381,6 +416,17 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Annotation getAnnotationOfType(String typeName) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -417,6 +463,8 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				return getAnnotations();
 			case TypesPackage.TYPE_ALIAS__ANNOTATION_INFO:
 				return getAnnotationInfo();
+			case TypesPackage.TYPE_ALIAS__STATIC:
+				return isStatic();
 			case TypesPackage.TYPE_ALIAS__ID:
 				return getId();
 			case TypesPackage.TYPE_ALIAS__ABSTRACT:
@@ -449,6 +497,9 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				return;
 			case TypesPackage.TYPE_ALIAS__ANNOTATION_INFO:
 				setAnnotationInfo((AnnotatableElement)newValue);
+				return;
+			case TypesPackage.TYPE_ALIAS__STATIC:
+				setStatic((Boolean)newValue);
 				return;
 			case TypesPackage.TYPE_ALIAS__ABSTRACT:
 				setAbstract((Boolean)newValue);
@@ -483,6 +534,9 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 			case TypesPackage.TYPE_ALIAS__ANNOTATION_INFO:
 				setAnnotationInfo((AnnotatableElement)null);
 				return;
+			case TypesPackage.TYPE_ALIAS__STATIC:
+				setStatic(STATIC_EDEFAULT);
+				return;
 			case TypesPackage.TYPE_ALIAS__ABSTRACT:
 				setAbstract(ABSTRACT_EDEFAULT);
 				return;
@@ -513,6 +567,8 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				return annotations != null && !annotations.isEmpty();
 			case TypesPackage.TYPE_ALIAS__ANNOTATION_INFO:
 				return annotationInfo != null;
+			case TypesPackage.TYPE_ALIAS__STATIC:
+				return static_ != STATIC_EDEFAULT;
 			case TypesPackage.TYPE_ALIAS__ID:
 				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 			case TypesPackage.TYPE_ALIAS__ABSTRACT:
@@ -544,9 +600,10 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				default: return -1;
 			}
 		}
-		if (baseClass == PackageMember.class) {
+		if (baseClass == Declaration.class) {
 			switch (derivedFeatureID) {
-				case TypesPackage.TYPE_ALIAS__ID: return TypesPackage.PACKAGE_MEMBER__ID;
+				case TypesPackage.TYPE_ALIAS__STATIC: return TypesPackage.DECLARATION__STATIC;
+				case TypesPackage.TYPE_ALIAS__ID: return TypesPackage.DECLARATION__ID;
 				default: return -1;
 			}
 		}
@@ -580,9 +637,10 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				default: return -1;
 			}
 		}
-		if (baseClass == PackageMember.class) {
+		if (baseClass == Declaration.class) {
 			switch (baseFeatureID) {
-				case TypesPackage.PACKAGE_MEMBER__ID: return TypesPackage.TYPE_ALIAS__ID;
+				case TypesPackage.DECLARATION__STATIC: return TypesPackage.TYPE_ALIAS__STATIC;
+				case TypesPackage.DECLARATION__ID: return TypesPackage.TYPE_ALIAS__ID;
 				default: return -1;
 			}
 		}

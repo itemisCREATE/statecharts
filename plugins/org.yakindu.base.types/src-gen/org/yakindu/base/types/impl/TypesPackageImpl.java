@@ -28,7 +28,6 @@ import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Operation;
-import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
@@ -147,13 +146,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass packageMemberEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass domainEClass = null;
 
 	/**
@@ -247,7 +239,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		if (isInited) return (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
 
 		// Obtain or create and register package
-		TypesPackageImpl theTypesPackage = (TypesPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TypesPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TypesPackageImpl());
+		Object registeredTypesPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		TypesPackageImpl theTypesPackage = registeredTypesPackage instanceof TypesPackageImpl ? (TypesPackageImpl)registeredTypesPackage : new TypesPackageImpl();
 
 		isInited = true;
 
@@ -263,7 +256,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		// Mark meta-data to indicate it can't be changed
 		theTypesPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(TypesPackage.eNS_URI, theTypesPackage);
 		return theTypesPackage;
@@ -347,6 +339,15 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 */
 	public EAttribute getDeclaration_Static() {
 		return (EAttribute)declarationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDeclaration_Id() {
+		return (EAttribute)declarationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -619,24 +620,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getPackageMember() {
-		return packageMemberEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPackageMember_Id() {
-		return (EAttribute)packageMemberEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getDomain() {
 		return domainEClass;
 	}
@@ -813,6 +796,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		declarationEClass = createEClass(DECLARATION);
 		createEAttribute(declarationEClass, DECLARATION__STATIC);
+		createEAttribute(declarationEClass, DECLARATION__ID);
 
 		operationEClass = createEClass(OPERATION);
 		createEReference(operationEClass, OPERATION__PARAMETERS);
@@ -856,9 +840,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		genericElementEClass = createEClass(GENERIC_ELEMENT);
 		createEReference(genericElementEClass, GENERIC_ELEMENT__TYPE_PARAMETERS);
-
-		packageMemberEClass = createEClass(PACKAGE_MEMBER);
-		createEAttribute(packageMemberEClass, PACKAGE_MEMBER__ID);
 
 		domainEClass = createEClass(DOMAIN);
 		createEAttribute(domainEClass, DOMAIN__DOMAIN_ID);
@@ -916,28 +897,29 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		packageEClass.getESuperTypes().add(this.getPackageMember());
 		packageEClass.getESuperTypes().add(theBasePackage.getDomainElement());
-		typeEClass.getESuperTypes().add(this.getPackageMember());
-		declarationEClass.getESuperTypes().add(this.getTypedElement());
+		packageEClass.getESuperTypes().add(this.getDeclaration());
+		typeEClass.getESuperTypes().add(this.getDeclaration());
 		declarationEClass.getESuperTypes().add(theBasePackage.getNamedElement());
-		declarationEClass.getESuperTypes().add(this.getPackageMember());
+		declarationEClass.getESuperTypes().add(this.getAnnotatableElement());
 		operationEClass.getESuperTypes().add(this.getDeclaration());
 		operationEClass.getESuperTypes().add(this.getGenericElement());
+		operationEClass.getESuperTypes().add(this.getTypedElement());
+		propertyEClass.getESuperTypes().add(this.getTypedElement());
 		propertyEClass.getESuperTypes().add(this.getDeclaration());
 		parameterEClass.getESuperTypes().add(this.getTypedElement());
 		parameterEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		parameterEClass.getESuperTypes().add(this.getAnnotatableElement());
 		eventEClass.getESuperTypes().add(this.getDeclaration());
+		eventEClass.getESuperTypes().add(this.getTypedElement());
 		enumerationTypeEClass.getESuperTypes().add(this.getComplexType());
 		primitiveTypeEClass.getESuperTypes().add(this.getType());
 		complexTypeEClass.getESuperTypes().add(this.getType());
 		complexTypeEClass.getESuperTypes().add(this.getGenericElement());
 		enumeratorEClass.getESuperTypes().add(this.getDeclaration());
+		enumeratorEClass.getESuperTypes().add(this.getTypedElement());
 		typeParameterEClass.getESuperTypes().add(this.getType());
 		genericElementEClass.getESuperTypes().add(theBasePackage.getNamedElement());
-		packageMemberEClass.getESuperTypes().add(theBasePackage.getNamedElement());
-		packageMemberEClass.getESuperTypes().add(this.getAnnotatableElement());
 		typeAliasEClass.getESuperTypes().add(this.getTypedElement());
 		typeAliasEClass.getESuperTypes().add(this.getType());
 		arrayTypeSpecifierEClass.getESuperTypes().add(this.getTypeSpecifier());
@@ -945,7 +927,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(packageEClass, org.yakindu.base.types.Package.class, "Package", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPackage_Member(), this.getPackageMember(), null, "member", null, 0, -1, org.yakindu.base.types.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPackage_Member(), this.getDeclaration(), null, "member", null, 0, -1, org.yakindu.base.types.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPackage_Import(), this.getPackage(), null, "import", null, 0, -1, org.yakindu.base.types.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -957,6 +939,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		initEClass(declarationEClass, Declaration.class, "Declaration", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDeclaration_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, Declaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDeclaration_Id(), ecorePackage.getEString(), "id", null, 0, 1, Declaration.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOperation_Parameters(), this.getParameter(), this.getParameter_OwningOperation(), "parameters", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1004,9 +987,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		initEClass(genericElementEClass, GenericElement.class, "GenericElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGenericElement_TypeParameters(), this.getTypeParameter(), null, "typeParameters", null, 0, -1, GenericElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(packageMemberEClass, PackageMember.class, "PackageMember", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPackageMember_Id(), ecorePackage.getEString(), "id", null, 0, 1, PackageMember.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(domainEClass, Domain.class, "Domain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDomain_DomainID(), ecorePackage.getEString(), "domainID", null, 0, 1, Domain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

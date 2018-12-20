@@ -23,6 +23,7 @@
     </genClasses>
     <genClasses image="false" ecoreClass="types.ecore#//Declaration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Declaration/static"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Declaration/id"/>
     </genClasses>
     <genClasses ecoreClass="types.ecore#//Operation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//Operation/parameters"/>

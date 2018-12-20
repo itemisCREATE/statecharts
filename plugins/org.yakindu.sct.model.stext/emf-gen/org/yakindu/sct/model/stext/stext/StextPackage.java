@@ -585,6 +585,24 @@ public interface StextPackage extends EPackage {
 	int EVENT_DEFINITION = 12;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_DEFINITION__NAME = TypesPackage.EVENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_DEFINITION__STATIC = TypesPackage.EVENT__STATIC;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -601,51 +619,6 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int EVENT_DEFINITION__TYPE_SPECIFIER = TypesPackage.EVENT__TYPE_SPECIFIER;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_DEFINITION__NAME = TypesPackage.EVENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_DEFINITION__ANNOTATIONS = TypesPackage.EVENT__ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_DEFINITION__ANNOTATION_INFO = TypesPackage.EVENT__ANNOTATION_INFO;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_DEFINITION__ID = TypesPackage.EVENT__ID;
-
-	/**
-	 * The feature id for the '<em><b>Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_DEFINITION__STATIC = TypesPackage.EVENT__STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Direction</b></em>' attribute.
@@ -676,6 +649,24 @@ public interface StextPackage extends EPackage {
 	int VARIABLE_DEFINITION = 13;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DEFINITION__NAME = TypesPackage.PROPERTY__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DEFINITION__STATIC = TypesPackage.PROPERTY__STATIC;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -692,51 +683,6 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_DEFINITION__TYPE_SPECIFIER = TypesPackage.PROPERTY__TYPE_SPECIFIER;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_DEFINITION__NAME = TypesPackage.PROPERTY__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_DEFINITION__ANNOTATIONS = TypesPackage.PROPERTY__ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_DEFINITION__ANNOTATION_INFO = TypesPackage.PROPERTY__ANNOTATION_INFO;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_DEFINITION__ID = TypesPackage.PROPERTY__ID;
-
-	/**
-	 * The feature id for the '<em><b>Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_DEFINITION__STATIC = TypesPackage.PROPERTY__STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -785,24 +731,6 @@ public interface StextPackage extends EPackage {
 	int OPERATION_DEFINITION = 14;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_DEFINITION__TYPE = TypesPackage.OPERATION__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_DEFINITION__TYPE_SPECIFIER = TypesPackage.OPERATION__TYPE_SPECIFIER;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -810,33 +738,6 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION_DEFINITION__NAME = TypesPackage.OPERATION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_DEFINITION__ANNOTATIONS = TypesPackage.OPERATION__ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_DEFINITION__ANNOTATION_INFO = TypesPackage.OPERATION__ANNOTATION_INFO;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_DEFINITION__ID = TypesPackage.OPERATION__ID;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -855,6 +756,24 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION_DEFINITION__TYPE_PARAMETERS = TypesPackage.OPERATION__TYPE_PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_DEFINITION__TYPE = TypesPackage.OPERATION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_DEFINITION__TYPE_SPECIFIER = TypesPackage.OPERATION__TYPE_SPECIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -912,42 +831,6 @@ public interface StextPackage extends EPackage {
 	int TYPE_ALIAS_DEFINITION__TYPE_SPECIFIER = TypesPackage.TYPE_ALIAS__TYPE_SPECIFIER;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_ALIAS_DEFINITION__NAME = TypesPackage.TYPE_ALIAS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_ALIAS_DEFINITION__ANNOTATIONS = TypesPackage.TYPE_ALIAS__ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_ALIAS_DEFINITION__ANNOTATION_INFO = TypesPackage.TYPE_ALIAS__ANNOTATION_INFO;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_ALIAS_DEFINITION__ID = TypesPackage.TYPE_ALIAS__ID;
-
-	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -975,13 +858,22 @@ public interface StextPackage extends EPackage {
 	int TYPE_ALIAS_DEFINITION__SUPER_TYPES = TypesPackage.TYPE_ALIAS__SUPER_TYPES;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS_DEFINITION__NAME = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS_DEFINITION__STATIC = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 0;
+	int TYPE_ALIAS_DEFINITION__STATIC = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Type Alias Definition</em>' class.
@@ -990,7 +882,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS_DEFINITION_FEATURE_COUNT = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 1;
+	int TYPE_ALIAS_DEFINITION_FEATURE_COUNT = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.LocalReactionImpl <em>Local Reaction</em>}' class.
