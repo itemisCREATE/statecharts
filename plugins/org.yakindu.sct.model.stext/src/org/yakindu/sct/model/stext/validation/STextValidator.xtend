@@ -15,6 +15,7 @@ import com.google.common.collect.Sets
 import com.google.inject.Inject
 import com.google.inject.name.Named
 import java.util.ArrayList
+import java.util.Collection
 import java.util.Collections
 import java.util.Iterator
 import java.util.LinkedList
@@ -27,6 +28,7 @@ import org.eclipse.emf.common.util.TreeIterator
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.EStructuralFeature
+import org.eclipse.emf.ecore.EStructuralFeature.Setting
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.EcoreUtil2
@@ -125,7 +127,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 	@Inject 
 	STextGrammarAccess grammarAccess
 	@Inject 
-	IQualifiedNameProvider nameProvider
+	extension IQualifiedNameProvider nameProvider
 	@Inject(optional=true)
 	@Named(DomainRegistry.DOMAIN_ID)
 	String domainID=BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral()
@@ -307,6 +309,23 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 			}
 		}
 	}
+	
+	@Check(CheckType.FAST)
+	def void checkNotRaisedOutEvent(EventDefinition event) {
+		if (event.direction != Direction.OUT) {
+			return;
+		}
+		var Collection<Setting> usages = EcoreUtil.UsageCrossReferencer.find(event, event.eResource().getResourceSet());
+		var isRaised = usages.exists[setting | setting.getEObject().eContainer instanceof EventRaisingExpression]
+		if (!isRaised) {
+			usages.filter[ setting |
+				setting.EObject instanceof ElementReferenceExpression || setting.EObject instanceof FeatureCall
+			].forEach[ setting |
+				warning(String.format(OUT_EVENT_NEVER_RAISED, event.fullyQualifiedName), setting.EObject, null, -1)
+			]
+		}
+	}
+	
 	@Check(CheckType.FAST)
 	def void checkUnusedVariablesInInternalScope(InternalScope internalScope) {
 		var EList<Declaration> internalScopeDeclarations=internalScope.getDeclarations() 
