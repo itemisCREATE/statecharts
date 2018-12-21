@@ -316,7 +316,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 			return;
 		}
 		var Collection<Setting> usages = EcoreUtil.UsageCrossReferencer.find(event, event.eResource().getResourceSet());
-		var boolean isRaised = usages.findFirst[setting | setting.getEObject().eContainer instanceof EventRaisingExpression] !== null;
+		var isRaised = usages.exists[setting | setting.getEObject().eContainer instanceof EventRaisingExpression]
 		if (!isRaised) {
 			usages.filter[ setting |
 				setting.EObject instanceof ElementReferenceExpression || setting.EObject instanceof FeatureCall
