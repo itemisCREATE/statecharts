@@ -7,7 +7,7 @@
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_aKL2je5oEeihz_CAVk651A" specification="entry/ raise X.B" name="StateA" incomingTransitions="_aKNrue5oEeihz_CAVk651A">
         <outgoingTransitions xmi:id="_gWC_kPO9EeioQdn36vzJiw" specification="B" target="_f5pXcPO9EeioQdn36vzJiw"/>
-        <outgoingTransitions xmi:id="__caIsPO_Eeiuxec3mP0Ueg" specification="[B || X.C || valueof(A)]" target="_96RAgPO_Eeiuxec3mP0Ueg"/>
+        <outgoingTransitions xmi:id="__caIsPO_Eeiuxec3mP0Ueg" specification="[X.C || valueof(A)]" target="_96RAgPO_Eeiuxec3mP0Ueg"/>
         <outgoingTransitions xmi:id="_7riOoARTEemMvpNJ7hokWw" specification="X.B" target="_6zLqUARTEemMvpNJ7hokWw"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_f5pXcPO9EeioQdn36vzJiw" specification="" name="StateB" incomingTransitions="_gWC_kPO9EeioQdn36vzJiw"/>

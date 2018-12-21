@@ -658,14 +658,14 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "NeverRaisedOutEvent.sct");
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
 	
-		// used as transition trigger and inside reaction guard
+		// used as transition trigger
 		assertWarning(diagnostics, String.format(OUT_EVENT_NEVER_RAISED, "B"));
 		
 		// used inside reaction guard
 		assertWarning(diagnostics, String.format(OUT_EVENT_NEVER_RAISED, "A"));
 		assertWarning(diagnostics, String.format(OUT_EVENT_NEVER_RAISED, "X.C"));
 		
-		assertIssueCount(diagnostics, 4);
+		assertIssueCount(diagnostics, 3);
 	}
 
 	@Test
