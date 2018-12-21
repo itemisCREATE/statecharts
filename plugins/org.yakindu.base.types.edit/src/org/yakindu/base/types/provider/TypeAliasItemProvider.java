@@ -19,6 +19,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypesFactory;
@@ -31,7 +32,7 @@ import org.yakindu.base.types.TypesPackage;
  * @generated
  */
 public class TypeAliasItemProvider 
-	extends TypeItemProvider {
+	extends TypedDeclarationItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -53,29 +54,52 @@ public class TypeAliasItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addTypePropertyDescriptor(object);
+			addAbstractPropertyDescriptor(object);
+			addVisiblePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Type feature.
+	 * This adds a property descriptor for the Abstract feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTypePropertyDescriptor(Object object) {
+	protected void addAbstractPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_TypedElement_type_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TypedElement_type_feature", "_UI_TypedElement_type"),
-				 TypesPackage.Literals.TYPED_ELEMENT__TYPE,
+				 getString("_UI_Type_abstract_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Type_abstract_feature", "_UI_Type_type"),
+				 TypesPackage.Literals.TYPE__ABSTRACT,
 				 true,
 				 false,
-				 true,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Visible feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addVisiblePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Type_visible_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Type_visible_feature", "_UI_Type_type"),
+				 TypesPackage.Literals.TYPE__VISIBLE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -92,7 +116,7 @@ public class TypeAliasItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER);
+			childrenFeatures.add(TypesPackage.Literals.TYPE__SUPER_TYPES);
 		}
 		return childrenFeatures;
 	}
@@ -160,7 +184,11 @@ public class TypeAliasItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(TypeAlias.class)) {
-			case TypesPackage.TYPE_ALIAS__TYPE_SPECIFIER:
+			case TypesPackage.TYPE_ALIAS__ABSTRACT:
+			case TypesPackage.TYPE_ALIAS__VISIBLE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case TypesPackage.TYPE_ALIAS__SUPER_TYPES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -180,12 +208,12 @@ public class TypeAliasItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER,
+				(TypesPackage.Literals.TYPE__SUPER_TYPES,
 				 TypesFactory.eINSTANCE.createTypeSpecifier()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER,
+				(TypesPackage.Literals.TYPE__SUPER_TYPES,
 				 TypesFactory.eINSTANCE.createArrayTypeSpecifier()));
 	}
 
@@ -201,8 +229,8 @@ public class TypeAliasItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == TypesPackage.Literals.TYPE__SUPER_TYPES ||
-			childFeature == TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER;
+			childFeature == TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER ||
+			childFeature == TypesPackage.Literals.TYPE__SUPER_TYPES;
 
 		if (qualify) {
 			return getString

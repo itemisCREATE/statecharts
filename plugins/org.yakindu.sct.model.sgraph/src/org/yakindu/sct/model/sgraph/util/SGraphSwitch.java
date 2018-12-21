@@ -278,6 +278,7 @@ public class SGraphSwitch<T> extends Switch<T> {
 				T result = caseImportDeclaration(importDeclaration);
 				if (result == null) result = caseDeclaration(importDeclaration);
 				if (result == null) result = caseNamedElement(importDeclaration);
+				if (result == null) result = caseAnnotatableElement(importDeclaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

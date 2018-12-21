@@ -15,6 +15,7 @@ import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
+import org.yakindu.base.types.TypedDeclaration;
 import org.yakindu.base.types.TypedElement;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Reaction;
@@ -205,9 +206,11 @@ public class StextSwitch<T> extends Switch<T> {
 				EventDefinition eventDefinition = (EventDefinition)theEObject;
 				T result = caseEventDefinition(eventDefinition);
 				if (result == null) result = caseEvent(eventDefinition);
+				if (result == null) result = caseTypedDeclaration(eventDefinition);
 				if (result == null) result = caseDeclaration(eventDefinition);
 				if (result == null) result = caseTypedElement(eventDefinition);
 				if (result == null) result = caseNamedElement(eventDefinition);
+				if (result == null) result = caseAnnotatableElement(eventDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -215,9 +218,11 @@ public class StextSwitch<T> extends Switch<T> {
 				VariableDefinition variableDefinition = (VariableDefinition)theEObject;
 				T result = caseVariableDefinition(variableDefinition);
 				if (result == null) result = caseProperty(variableDefinition);
+				if (result == null) result = caseTypedDeclaration(variableDefinition);
 				if (result == null) result = caseDeclaration(variableDefinition);
 				if (result == null) result = caseTypedElement(variableDefinition);
 				if (result == null) result = caseNamedElement(variableDefinition);
+				if (result == null) result = caseAnnotatableElement(variableDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -225,10 +230,12 @@ public class StextSwitch<T> extends Switch<T> {
 				OperationDefinition operationDefinition = (OperationDefinition)theEObject;
 				T result = caseOperationDefinition(operationDefinition);
 				if (result == null) result = caseOperation(operationDefinition);
-				if (result == null) result = caseDeclaration(operationDefinition);
+				if (result == null) result = caseTypedDeclaration(operationDefinition);
 				if (result == null) result = caseGenericElement(operationDefinition);
+				if (result == null) result = caseDeclaration(operationDefinition);
 				if (result == null) result = caseTypedElement(operationDefinition);
 				if (result == null) result = caseNamedElement(operationDefinition);
+				if (result == null) result = caseAnnotatableElement(operationDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -236,10 +243,12 @@ public class StextSwitch<T> extends Switch<T> {
 				TypeAliasDefinition typeAliasDefinition = (TypeAliasDefinition)theEObject;
 				T result = caseTypeAliasDefinition(typeAliasDefinition);
 				if (result == null) result = caseTypeAlias(typeAliasDefinition);
+				if (result == null) result = caseTypedDeclaration(typeAliasDefinition);
+				if (result == null) result = caseType(typeAliasDefinition);
 				if (result == null) result = caseDeclaration(typeAliasDefinition);
 				if (result == null) result = caseTypedElement(typeAliasDefinition);
-				if (result == null) result = caseType(typeAliasDefinition);
 				if (result == null) result = caseNamedElement(typeAliasDefinition);
+				if (result == null) result = caseAnnotatableElement(typeAliasDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -963,6 +972,21 @@ public class StextSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypedElement(TypedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Typed Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Typed Declaration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypedDeclaration(TypedDeclaration object) {
 		return null;
 	}
 

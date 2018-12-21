@@ -1466,7 +1466,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__NAME = TYPE__NAME;
+	int TYPE_ALIAS__NAME = TYPED_DECLARATION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1475,7 +1475,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__ANNOTATIONS = TYPE__ANNOTATIONS;
+	int TYPE_ALIAS__ANNOTATIONS = TYPED_DECLARATION__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
@@ -1484,7 +1484,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__ANNOTATION_INFO = TYPE__ANNOTATION_INFO;
+	int TYPE_ALIAS__ANNOTATION_INFO = TYPED_DECLARATION__ANNOTATION_INFO;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -1493,7 +1493,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__STATIC = TYPE__STATIC;
+	int TYPE_ALIAS__STATIC = TYPED_DECLARATION__STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1502,34 +1502,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__ID = TYPE__ID;
-
-	/**
-	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_ALIAS__ABSTRACT = TYPE__ABSTRACT;
-
-	/**
-	 * The feature id for the '<em><b>Visible</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_ALIAS__VISIBLE = TYPE__VISIBLE;
-
-	/**
-	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_ALIAS__SUPER_TYPES = TYPE__SUPER_TYPES;
+	int TYPE_ALIAS__ID = TYPED_DECLARATION__ID;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1538,7 +1511,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__TYPE = TYPE_FEATURE_COUNT + 0;
+	int TYPE_ALIAS__TYPE = TYPED_DECLARATION__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
@@ -1547,7 +1520,34 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__TYPE_SPECIFIER = TYPE_FEATURE_COUNT + 1;
+	int TYPE_ALIAS__TYPE_SPECIFIER = TYPED_DECLARATION__TYPE_SPECIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS__ABSTRACT = TYPED_DECLARATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Visible</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS__VISIBLE = TYPED_DECLARATION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS__SUPER_TYPES = TYPED_DECLARATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Type Alias</em>' class.
@@ -1556,7 +1556,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
+	int TYPE_ALIAS_FEATURE_COUNT = TYPED_DECLARATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.AnnotationImpl <em>Annotation</em>}' class.

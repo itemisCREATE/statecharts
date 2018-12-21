@@ -13,5 +13,5 @@ package org.yakindu.base.types;
  * @model
  * @generated
  */
-public interface TypeAlias extends Type, TypedElement {
+public interface TypeAlias extends TypedDeclaration, Type {
 } // TypeAlias

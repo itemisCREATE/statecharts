@@ -240,9 +240,10 @@ public class TypesSwitch<T> extends Switch<T> {
 			case TypesPackage.TYPE_ALIAS: {
 				TypeAlias typeAlias = (TypeAlias)theEObject;
 				T result = caseTypeAlias(typeAlias);
+				if (result == null) result = caseTypedDeclaration(typeAlias);
 				if (result == null) result = caseType(typeAlias);
-				if (result == null) result = caseTypedElement(typeAlias);
 				if (result == null) result = caseDeclaration(typeAlias);
+				if (result == null) result = caseTypedElement(typeAlias);
 				if (result == null) result = caseNamedElement(typeAlias);
 				if (result == null) result = caseAnnotatableElement(typeAlias);
 				if (result == null) result = defaultCase(theEObject);
