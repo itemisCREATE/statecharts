@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 committers of YAKINDU and others.
+ * Copyright (c) 2012-2018 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -40,7 +40,11 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import static org.eclipse.xtext.util.Strings.*
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
+import org.yakindu.sct.generator.c.types.CLiterals
 
+/**
+ * @author axel terfloth
+ */
 class StatemachineImplementation implements IContentTemplate {
 	
 	@Inject protected extension CppNaming
@@ -54,6 +58,7 @@ class StatemachineImplementation implements IContentTemplate {
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension EventCode
 	@Inject protected extension ExpressionsChecker
+	@Inject protected extension CLiterals
 	
 	protected GeneratorEntry entry
 	
@@ -145,10 +150,10 @@ class StatemachineImplementation implements IContentTemplate {
 	
 	def protected initialisationList(ExecutionFlow it) {
 		'''
-			«IF timed»«timerInstance»(«NULL_STRING»),«ENDIF»
+			«IF timed»«timerInstance»(«NULL_LITERAL»),«ENDIF»
 			«STATEVECTOR_POS»(0)«FOR s : getInterfaces»,
 			«s.instance»()«IF s.hasOperations && !entry.useStaticOPC»,
-			«s.OCB_Instance»(«NULL_STRING»)«ENDIF»«ENDFOR»«IF entry.tracingUsed»,
+			«s.OCB_Instance»(«NULL_LITERAL»)«ENDIF»«ENDFOR»«IF entry.tracingUsed»,
 			«tracingInstance»(0)«ENDIF»
 		'''
 	}
@@ -379,18 +384,18 @@ class StatemachineImplementation implements IContentTemplate {
 	'''
 	
 	def checkInternalOCB(StatechartScope it) '''
-		if (this->«OCB_Instance» == «NULL_STRING») { 
+		if (this->«OCB_Instance» == «NULL_LITERAL») { 
 			errorCode |= (short) «ErrorCode.OCB_INTERNAL_INIT.getName()»;
 		}
 	'''
 	
 	def checkInterfaceOCB(StatechartScope it) '''
 		«IF defaultInterface»
-			if (this->«OCB_Instance» == «NULL_STRING») { 
+			if (this->«OCB_Instance» == «NULL_LITERAL») { 
 				errorCode |=  (short) «ErrorCode.OCB_DEFAULT_INIT.getName()»;
 			}
 		«ELSE»
-			if (this->«OCB_Instance» == «NULL_STRING») { 
+			if (this->«OCB_Instance» == «NULL_LITERAL») { 
 				errorCode |= (short) «ErrorCode.OCB_NAMED_INIT.getName()»;
 			}
 		«ENDIF»
