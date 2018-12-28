@@ -1,5 +1,5 @@
 /** 
- * Copyright (c) 2017 committers of YAKINDU and others. 
+ * Copyright (c) 2017-2018 committers of YAKINDU and others. 
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0 
  * which accompanies this distribution, and is available at 
@@ -44,7 +44,11 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.generator.c.types.CLiterals
 
+/**
+ * @author axel terfloth
+ */
 class CExpressionsGenerator extends ExpressionsGenerator {
 
 	@Inject protected extension Naming
@@ -53,6 +57,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ITypeSystemInferrer
 	@Inject protected extension INamingService
+	@Inject protected extension CLiterals
 	
 	@Inject protected extension EventCode
 	@Inject protected extension ExpressionsChecker
@@ -145,10 +150,10 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch CharSequence code(FeatureCall it, Enumerator target) '''«target.access»'''
 
 	/* Literals */
-	override dispatch CharSequence code(BoolLiteral it) '''«IF value»«CGeneratorConstants.TRUE»«ELSE»«CGeneratorConstants.FALSE»«ENDIF»'''
+	override dispatch CharSequence code(BoolLiteral it) '''«IF value»«TRUE_LITERAL»«ELSE»«FALSE_LITERAL»«ENDIF»'''
 
 	// ensure we obtain an expression of type sc_boolean
-	def dispatch CharSequence sc_boolean_code(Expression it) '''«it.code» == «CGeneratorConstants.TRUE»'''
+	def dispatch CharSequence sc_boolean_code(Expression it) '''«it.code» == «TRUE_LITERAL»'''
 
 	def dispatch CharSequence sc_boolean_code(LogicalOrExpression it) {code}
 
@@ -156,11 +161,11 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	
 	def dispatch CharSequence sc_boolean_code(BoolLiteral it) {code}
 
-	def dispatch CharSequence sc_boolean_code(LogicalNotExpression it) '''«operand.code» == «CGeneratorConstants.FALSE»'''
+	def dispatch CharSequence sc_boolean_code(LogicalNotExpression it) '''«operand.code» == «FALSE_LITERAL»'''
 
 	def dispatch CharSequence sc_boolean_code(LogicalRelationExpression it) {code}
 	
 	
 	
-	def CharSequence ternaryGuard(Expression it) '''(«it.code») ? «CGeneratorConstants.TRUE» : «CGeneratorConstants.FALSE»'''
+	def CharSequence ternaryGuard(Expression it) '''(«it.code») ? «TRUE_LITERAL» : «FALSE_LITERAL»'''
 }
