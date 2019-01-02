@@ -63,7 +63,11 @@ class Types implements IContentTemplate {
 		
 		#ifndef «NULL_LITERAL»
 			#ifdef __cplusplus
-				#define «NULL_LITERAL» 0
+				#if __cplusplus >= 201103L || (defined(_MSC_VER) && _MSC_VER >= 1900)
+			  		#define «NULL_LITERAL» nullptr
+				#else
+					#define «NULL_LITERAL» 0
+				#endif
 			#else
 				#define «NULL_LITERAL» ((void *)0)
 			#endif

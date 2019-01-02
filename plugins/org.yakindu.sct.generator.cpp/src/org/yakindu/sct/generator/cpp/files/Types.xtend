@@ -53,7 +53,15 @@ class Types implements IContentTemplate {
 		typedef intptr_t       «EVENT_TYPE»;
 		
 		#ifndef «NULL_LITERAL»
-		#define «NULL_LITERAL» NULL
+			#ifdef __cplusplus
+				#if __cplusplus >= 201103L || (defined(_MSC_VER) && _MSC_VER >= 1900)
+			  		#define «NULL_LITERAL» nullptr
+				#else
+					#define «NULL_LITERAL» 0
+				#endif
+			#else
+				#define «NULL_LITERAL» ((void *)0)
+			#endif
 		#endif
 		
 		/* Error codes and mask can be used to check unimplemented operation callbacks. They can be activated in the API feature within the .sgen file.*/
