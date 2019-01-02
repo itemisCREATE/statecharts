@@ -24,7 +24,7 @@ class AlwaysTrueMock{
 	}
 
 	sc_boolean alwaysTrueDefault(){
-		sc_boolean defaultValue = null;
+		sc_boolean defaultValue = false;
 		return (defaultValue);
 	}
 
@@ -1109,31 +1109,31 @@ class MockInternal : public Operations::InternalSCI_OCB {
 	}
 	sc_boolean InternalOperation2(sc_integer param1) {
 		internalOperation2Mock->InternalOperation2(param1);
-		return null;
+		return false;
 	}
 	sc_real internalOperation3() {
 		internalOperation3Mock->internalOperation3();
-		return null;
+		return 0.0;
 	}
 	sc_real internalOperation3a(sc_real param1) {
 		internalOperation3aMock->internalOperation3a(param1);
-		return null;
+		return 0.0;
 	}
 	sc_integer internalOperation4() {
 		internalOperation4Mock->internalOperation4();
-		return null;
+		return 0;
 	}
 	sc_integer internalOperation4a(sc_integer param1) {
 		internalOperation4aMock->internalOperation4a(param1);
-		return null;
+		return 0;
 	}
 	sc_string internalOperation5() {
 		internalOperation5Mock->internalOperation5();
-		return null;
+		return "";
 	}
 	sc_string internalOperation5a(sc_string param1) {
 		internalOperation5aMock->internalOperation5a(param1);
-		return null;
+		return "";
 	}
 };
 class MockInterface1 : public Operations::SCI_Interface1_OCB {
@@ -1143,31 +1143,31 @@ class MockInterface1 : public Operations::SCI_Interface1_OCB {
 	}
 	sc_boolean InterfaceOperation2(sc_integer param1) {
 		interface1InterfaceOperation2Mock->InterfaceOperation2(param1);
-		return null;
+		return false;
 	}
 	sc_real interfaceOperation3() {
 		interface1InterfaceOperation3Mock->interfaceOperation3();
-		return null;
+		return 0.0;
 	}
 	sc_real interfaceOperation3a(sc_real param1) {
 		interface1InterfaceOperation3aMock->interfaceOperation3a(param1);
-		return null;
+		return 0.0;
 	}
 	sc_integer interfaceOperation4() {
 		interface1InterfaceOperation4Mock->interfaceOperation4();
-		return null;
+		return 0;
 	}
 	sc_integer interfaceOperation4a(sc_integer param1) {
 		interface1InterfaceOperation4aMock->interfaceOperation4a(param1);
-		return null;
+		return 0;
 	}
 	sc_string interfaceOperation5() {
 		interface1InterfaceOperation5Mock->interfaceOperation5();
-		return null;
+		return "";
 	}
 	sc_string interfaceOperation5a(sc_string param1) {
 		interface1InterfaceOperation5aMock->interfaceOperation5a(param1);
-		return null;
+		return "";
 	}
 };
 class MockDefault : public Operations::DefaultSCI_OCB {
@@ -1177,31 +1177,31 @@ class MockDefault : public Operations::DefaultSCI_OCB {
 	}
 	sc_boolean UnnamedInterfaceOperation2(sc_integer param1) {
 		unnamedInterfaceOperation2Mock->UnnamedInterfaceOperation2(param1);
-		return null;
+		return false;
 	}
 	sc_real unnamedOperation3() {
 		unnamedOperation3Mock->unnamedOperation3();
-		return null;
+		return 0.0;
 	}
 	sc_real unnamedOperation3a(sc_real param1) {
 		unnamedOperation3aMock->unnamedOperation3a(param1);
-		return null;
+		return 0.0;
 	}
 	sc_integer unnamedOperation4() {
 		unnamedOperation4Mock->unnamedOperation4();
-		return null;
+		return 0;
 	}
 	sc_integer unnamedOperation4a(sc_integer param1) {
 		unnamedOperation4aMock->unnamedOperation4a(param1);
-		return null;
+		return 0;
 	}
 	sc_string unnamedOperation5() {
 		unnamedOperation5Mock->unnamedOperation5();
-		return null;
+		return "";
 	}
 	sc_string unnamedOperation5a(sc_string param1) {
 		unnamedOperation5aMock->unnamedOperation5a(param1);
-		return null;
+		return "";
 	}
 	sc_boolean alwaysTrue() {
 		return (alwaysTrueMock->*(alwaysTrueMock->getBehavior()))();
