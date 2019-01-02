@@ -1273,11 +1273,11 @@ sc_integer operationsInternal_internalOperation4a(const Operations* statechart, 
 }
 sc_string operationsInternal_internalOperation5(const Operations* statechart) {
 	internalOperation5Mock->internalOperation5();
-	return "";
+	return sc_null;
 }
 sc_string operationsInternal_internalOperation5a(const Operations* statechart, const sc_string param1) {
 	internalOperation5aMock->internalOperation5a(param1);
-	return "";
+	return sc_null;
 }
 void operationsIfaceInterface1_interfaceOperation1(const Operations* statechart) {
 	interface1InterfaceOperation1Mock->interfaceOperation1();
@@ -1304,11 +1304,11 @@ sc_integer operationsIfaceInterface1_interfaceOperation4a(const Operations* stat
 }
 sc_string operationsIfaceInterface1_interfaceOperation5(const Operations* statechart) {
 	interface1InterfaceOperation5Mock->interfaceOperation5();
-	return "";
+	return sc_null;
 }
 sc_string operationsIfaceInterface1_interfaceOperation5a(const Operations* statechart, const sc_string param1) {
 	interface1InterfaceOperation5aMock->interfaceOperation5a(param1);
-	return "";
+	return sc_null;
 }
 void operationsIface_unnamedInterfaceOperation1(const Operations* statechart) {
 	unnamedInterfaceOperation1Mock->unnamedInterfaceOperation1();
@@ -1335,11 +1335,11 @@ sc_integer operationsIface_unnamedOperation4a(const Operations* statechart, cons
 }
 sc_string operationsIface_unnamedOperation5(const Operations* statechart) {
 	unnamedOperation5Mock->unnamedOperation5();
-	return "";
+	return sc_null;
 }
 sc_string operationsIface_unnamedOperation5a(const Operations* statechart, const sc_string param1) {
 	unnamedOperation5aMock->unnamedOperation5a(param1);
-	return "";
+	return sc_null;
 }
 sc_boolean operationsIface_alwaysTrue(const Operations* statechart) {
 	return (alwaysTrueMock->*(alwaysTrueMock->getBehavior()))();
