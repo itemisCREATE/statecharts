@@ -1129,11 +1129,11 @@ class MockInternal : public Operations::InternalSCI_OCB {
 	}
 	sc_string internalOperation5() {
 		internalOperation5Mock->internalOperation5();
-		return "";
+		return sc_null;
 	}
 	sc_string internalOperation5a(sc_string param1) {
 		internalOperation5aMock->internalOperation5a(param1);
-		return "";
+		return sc_null;
 	}
 };
 class MockInterface1 : public Operations::SCI_Interface1_OCB {
@@ -1163,11 +1163,11 @@ class MockInterface1 : public Operations::SCI_Interface1_OCB {
 	}
 	sc_string interfaceOperation5() {
 		interface1InterfaceOperation5Mock->interfaceOperation5();
-		return "";
+		return sc_null;
 	}
 	sc_string interfaceOperation5a(sc_string param1) {
 		interface1InterfaceOperation5aMock->interfaceOperation5a(param1);
-		return "";
+		return sc_null;
 	}
 };
 class MockDefault : public Operations::DefaultSCI_OCB {
@@ -1197,11 +1197,11 @@ class MockDefault : public Operations::DefaultSCI_OCB {
 	}
 	sc_string unnamedOperation5() {
 		unnamedOperation5Mock->unnamedOperation5();
-		return "";
+		return sc_null;
 	}
 	sc_string unnamedOperation5a(sc_string param1) {
 		unnamedOperation5aMock->unnamedOperation5a(param1);
-		return "";
+		return sc_null;
 	}
 	sc_boolean alwaysTrue() {
 		return (alwaysTrueMock->*(alwaysTrueMock->getBehavior()))();
