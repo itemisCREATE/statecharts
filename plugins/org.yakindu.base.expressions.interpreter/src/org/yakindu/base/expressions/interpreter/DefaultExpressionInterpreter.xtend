@@ -326,6 +326,10 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	def dispatch doExecute(Enumerator feature, Void slot, ArgumentExpression exp) {
 		new Long(feature.literalValue)
 	}
+	
+	def dispatch doExecute(Type feature, Void slot, ArgumentExpression exp) {
+		null
+	}
 
 	def executeUnaryCoreFunction(Expression statement, String operator) {
 		var result = statement.execute()
