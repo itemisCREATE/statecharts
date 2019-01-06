@@ -13,6 +13,7 @@ package org.yakindu.sct.model.sexec.transformation.test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+import org.yakindu.sct.model.sexec.transformation.test.validation.SExecValidationTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({ 
@@ -34,7 +35,8 @@ import org.junit.runners.Suite.SuiteClasses;
 		StatechartExtensionsTest.class,
 		StringTreeNodeTest.class,
 		TreeNamingServiceTest.class,
-		NullCallTest.class
+		NullCallTest.class,
+		SExecValidationTest.class
 		})
 public class AllTests {
 

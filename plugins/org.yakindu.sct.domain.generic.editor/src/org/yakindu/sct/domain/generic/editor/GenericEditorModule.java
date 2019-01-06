@@ -11,15 +11,18 @@
 package org.yakindu.sct.domain.generic.editor;
 
 import org.eclipse.xtext.service.AbstractGenericModule;
+import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.ui.editor.validation.IValidationIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.validation.IResourceValidator;
+import org.yakindu.sct.model.sexec.validation.SExecValidator;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTDiagnosticConverterImpl;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerCreator;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerTypeProvider;
 import org.yakindu.sct.model.stext.resource.SCTResourceValidatorImpl;
+import org.yakindu.sct.model.stext.validation.STextValidator;
 import org.yakindu.sct.refactoring.proposals.RefactoringProposalProvider;
 import org.yakindu.sct.ui.editor.editor.proposals.SmartEditProposalProvider;
 import org.yakindu.sct.ui.editor.proposals.IEditProposalProvider;
@@ -61,6 +64,11 @@ public class GenericEditorModule extends AbstractGenericModule {
 
 	public Class<? extends MarkerTypeProvider> bindMarkerTypeProvider() {
 		return SCTMarkerTypeProvider.class;
+	}
+	
+	@SingletonBinding(eager = true)
+	public Class<? extends STextValidator> bindSTextValidator() {
+		return SExecValidator.class;
 	}
 
 }

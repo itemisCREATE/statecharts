@@ -15,7 +15,8 @@ Export-Package: org.yakindu.sct.model.sexec,
  org.yakindu.sct.model.sexec.naming.tree,
  org.yakindu.sct.model.sexec.transformation,
  org.yakindu.sct.model.sexec.transformation.ng,
- org.yakindu.sct.model.sexec.util
+ org.yakindu.sct.model.sexec.util,
+ org.yakindu.sct.model.sexec.validation
 Require-Bundle: com.google.inject,
  org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
@@ -24,5 +25,6 @@ Require-Bundle: com.google.inject,
  org.yakindu.base.types;visibility:=reexport,
  org.yakindu.base.expressions;visibility:=reexport,
  org.yakindu.sct.model.stext,
- org.yakindu.sct.model.sgraph;visibility:=reexport
+ org.yakindu.sct.model.sgraph;visibility:=reexport,
+ org.yakindu.sct.domain
 Bundle-ActivationPolicy: lazy
