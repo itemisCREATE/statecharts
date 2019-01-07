@@ -22,6 +22,7 @@ import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
+import org.yakindu.sct.generator.cpp.templates.ClassDeclaration
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionState
@@ -56,7 +57,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 	@Inject protected extension ExpressionsChecker
 
 	protected GeneratorEntry entry
-
+	
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		this.entry = entry
 		val namespace = statechartNamespace
@@ -85,7 +86,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 				#define «state.stateVectorDefine» «state.stateVector.offset»
 			«ENDFOR»
 			
-			«generateClass(artifactConfigs)»
+			«generateClass(artifactConfigs).generate»
 			
 			«IF !entry.useStaticOPC»
 				«scopes.filter(typeof(StatechartScope)).map[createInlineOCB_Destructor].filterNullOrEmptyAndJoin»
@@ -129,48 +130,39 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 	def postStatechartDeclarations(ExecutionFlow it) ''''''
 	
 	def protected generateClass(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
-		'''
-			class «module» : «interfaceExtensions»
-			{
-				public:
-					«generatePublicClassmembers»
-				protected:
-					«generateProtectedClassmembers»
-				private:
-					«generatePrivateClassmembers»
-			};
-		'''
+		val classDecl = new ClassDeclaration
+		classDecl.name(module)
+		interfaceExtensions.forEach[classDecl.superType(it)]
+		generatePublicClassmembers(it, classDecl)
+		classDecl.member(entry.innerClassVisibility, generateInnerClasses)
+		classDecl
 	}
 
-	def protected generatePublicClassmembers(ExecutionFlow it) {
-		'''
-			«module»();
-			
-			~«module»();
-			
-			«statesEnumDecl»
-			
-			static const «INT_TYPE» «statesCountConst» = «states.size»;
-			
-			«FOR s : it.scopes»«s.createPublicScope»«ENDFOR»
-			
-			«publicFunctionPrototypes»
-			
-			/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
-			«BOOL_TYPE» «stateActiveFctID»(«statesEnumType» state) const;
-			
-			«IF timed»
-				//! number of time events used by the state machine.
-				static const «INT_TYPE» «timeEventsCountConst» = «timeEvents.size»;
+	def protected generatePublicClassmembers(ExecutionFlow it, ClassDeclaration classDecl) {
+		classDecl
+			.constructorDeclaration(false, #[])
+			.destructorDeclaration(false)
+			.publicMember('''
+				«statesEnumDecl»
 				
-				//! number of time events that can be active at once.
-				static const «INT_TYPE» «timeEventsCountparallelConst» = «(it.sourceElement as Statechart).maxNumberOfParallelTimeEvents»;
-			«ENDIF»
-			«IF entry.innerClassVisibility == "public"»
+				static const «INT_TYPE» «statesCountConst» = «states.size»;
 				
-				«generateInnerClasses»
-			«ENDIF»
-		'''
+				«FOR s : it.scopes»«s.createPublicScope»«ENDFOR»
+				
+				«publicFunctionPrototypes»
+				
+				/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
+				«BOOL_TYPE» «stateActiveFctID»(«statesEnumType» state) const;
+				
+				«IF timed»
+					//! number of time events used by the state machine.
+					static const «INT_TYPE» «timeEventsCountConst» = «timeEvents.size»;
+					
+					//! number of time events that can be active at once.
+					static const «INT_TYPE» «timeEventsCountparallelConst» = «(it.sourceElement as Statechart).maxNumberOfParallelTimeEvents»;
+				«ENDIF»
+			''')
+		
 	}
 	
 	def tracedStatemachineFunctions(ExecutionFlow it)
@@ -179,23 +171,16 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 		
 		«YSCNamespace»::«traceObserverModule»<«statesEnumType»>* get«traceObserverModule»();
 	'''
-	
-	def protected generateProtectedClassmembers(ExecutionFlow it) {
-		'''
-			«IF entry.innerClassVisibility == "protected"»
-				«generateInnerClasses»
-			«ENDIF»
-		'''
-	}
 
 	def protected generateInnerClasses(ExecutionFlow it) {
+		// TODO: Why is anything except the scopes generated in here? 
 		'''
 			«IF (timed || hasOperationCallbacks)»
 				«copyConstructorDecl»
 				«assignmentOperatorDecl»
 			«ENDIF»
 			
-			«FOR s : scopes.filter(typeof(InternalScope))»«s.createInterface»«ENDFOR»
+			«FOR s : scopes.filter(typeof(InternalScope))»«s.createInterface(new ClassDeclaration).generate»«ENDFOR»
 			
 			«statemachineTypeDecl»
 			
@@ -215,24 +200,16 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			«module»& operator=(const «module»&);
 		'''
 	}
-	
-	def protected generatePrivateClassmembers(ExecutionFlow it) {
-		'''
-			«IF entry.innerClassVisibility == "private"»
-				«generateInnerClasses»
-			«ENDIF»
-		'''
-	}
 
 	def protected getInterfaceExtensions(ExecutionFlow flow) {
 
-		var String interfaces = "";
+		var interfaces = #[];
 
 		if (flow.timed) {
-			interfaces = interfaces + "public " + timedStatemachineInterface + ", "
+			interfaces += "public " + timedStatemachineInterface
 		}
 
-		interfaces = interfaces + "public " + statemachineInterface
+		interfaces += "public " + statemachineInterface
 
 		return interfaces;
 	}
@@ -252,7 +229,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 	}
 
 	def protected createPublicScope(InterfaceScope scope) '''
-		«scope.createInterface»
+		«scope.createInterface(new ClassDeclaration).generate»
 		«««		«scope.createListenerInterface(entry)»
 		«scope.createOCBInterface»
 		
@@ -272,20 +249,14 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 		'''
 	}
 
-	def protected createInterface(StatechartScope scope) '''
-		//! Inner class for «scope.simpleName» interface scope.
-		class «scope.interfaceName»
-		{
-			
-			public:
-				«FOR d : scope.declarations»
-					«d.functionPrototypes»
-				«ENDFOR»
-				
-			«entry.innerClassVisibility»:
-				«protectedInnerClassMembers(scope)»
-		};
-	'''
+	def protected createInterface(StatechartScope scope, ClassDeclaration scopeDecl) {
+		scopeDecl
+			.name(scope.interfaceName)
+			.comment("//! Inner class for «scope.simpleName» interface scope.")
+		
+		scope.declarations.map[functionPrototypes].forEach[scopeDecl.publicMember(it)]
+		scopeDecl.member(entry.innerClassVisibility, protectedInnerClassMembers(scope))
+	}
 	
 	protected def CharSequence protectedInnerClassMembers(StatechartScope scope)
 		'''

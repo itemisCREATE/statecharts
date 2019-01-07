@@ -29,6 +29,13 @@ import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.extensions.AnnotationExtensions;
+import org.yakindu.sct.generator.core.submodules.lifecycle.Enter;
+import org.yakindu.sct.generator.core.submodules.lifecycle.Exit;
+import org.yakindu.sct.generator.core.submodules.lifecycle.Init;
+import org.yakindu.sct.generator.core.submodules.lifecycle.IsActive;
+import org.yakindu.sct.generator.core.submodules.lifecycle.IsFinal;
+import org.yakindu.sct.generator.core.submodules.lifecycle.IsStateActive;
+import org.yakindu.sct.generator.core.submodules.lifecycle.RunCycle;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.generator.cpp.eventdriven.CppEventDrivenIncludeProvider;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenEventCode;
@@ -37,6 +44,8 @@ import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineHeader;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineImplementation;
 import org.yakindu.sct.generator.cpp.files.StatemachineHeader;
 import org.yakindu.sct.generator.cpp.files.StatemachineImplementation;
+import org.yakindu.sct.generator.cpp.submodules.eventdriven.EventDrivenRunCycle;
+import org.yakindu.sct.generator.cpp.submodules.lifecycle.LifecycleFunctions;
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sexec.transformation.BehaviorMapping;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
@@ -56,6 +65,8 @@ import com.google.inject.name.Names;
  */
 public class CppCodeGeneratorModule implements IGeneratorModule {
 	
+	AnnotationExtensions annotations = new AnnotationExtensions();
+	
 	@Override
 	public void configure(GeneratorEntry entry, Binder binder) {
 		binder.bind(IModelSequencer.class).to(ModelSequencer.class);
@@ -68,7 +79,11 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		binder.bind(ITypeSystemInferrer.class).to(STextTypeInferrer.class);
 		binder.bind(Naming.class).to(CppNaming.class);
 		bindTracingProperty(entry, binder);
-		bindEventDrivenClasses(entry, binder);
+		if ((new AnnotationExtensions()).isEventDriven(entry)) {
+			bindEventDrivenClasses(entry, binder);
+		} else {
+			bindDefaultClasses(entry, binder);
+		}
 		bindIGenArtifactConfigurations(entry, binder);
 		addIncludeProvider(binder, ScTypesIncludeProvider.class);
 		addIncludeProvider(binder, CppInterfaceIncludeProvider.class);
@@ -101,13 +116,30 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 	}
 	
 	protected void bindEventDrivenClasses(GeneratorEntry entry, Binder binder) {
-		if ((new AnnotationExtensions()).isEventDriven(entry)) {
-			binder.bind(StatemachineHeader.class).to(EventDrivenStatemachineHeader.class);
-			binder.bind(StatemachineImplementation.class).to(EventDrivenStatemachineImplementation.class);
-			binder.bind(CppExpressionsGenerator.class).to(EventDrivenExpressionCode.class);
-			binder.bind(EventCode.class).to(EventDrivenEventCode.class);
-			addIncludeProvider(binder, CppEventDrivenIncludeProvider.class);
-		}
+		binder.bind(StatemachineHeader.class).to(EventDrivenStatemachineHeader.class);
+		binder.bind(StatemachineImplementation.class).to(EventDrivenStatemachineImplementation.class);
+		binder.bind(CppExpressionsGenerator.class).to(EventDrivenExpressionCode.class);
+		binder.bind(EventCode.class).to(EventDrivenEventCode.class);
+
+		binder.bind(Init.class).to(LifecycleFunctions.class);
+		binder.bind(Enter.class).to(LifecycleFunctions.class);
+		binder.bind(Exit.class).to(LifecycleFunctions.class);
+		binder.bind(IsActive.class).to(LifecycleFunctions.class);
+		binder.bind(IsFinal.class).to(LifecycleFunctions.class);
+		binder.bind(IsStateActive.class).to(LifecycleFunctions.class);
+		binder.bind(RunCycle.class).to(EventDrivenRunCycle.class);
+
+		addIncludeProvider(binder, CppEventDrivenIncludeProvider.class);
+	}
+
+	protected void bindDefaultClasses(GeneratorEntry entry, Binder binder) {
+		binder.bind(Init.class).to(LifecycleFunctions.class);
+		binder.bind(Enter.class).to(LifecycleFunctions.class);
+		binder.bind(Exit.class).to(LifecycleFunctions.class);
+		binder.bind(IsActive.class).to(LifecycleFunctions.class);
+		binder.bind(IsFinal.class).to(LifecycleFunctions.class);
+		binder.bind(IsStateActive.class).to(LifecycleFunctions.class);
+		binder.bind(RunCycle.class).to(LifecycleFunctions.class);
 	}
 	
 	protected String getSeparator(GeneratorEntry entry) {

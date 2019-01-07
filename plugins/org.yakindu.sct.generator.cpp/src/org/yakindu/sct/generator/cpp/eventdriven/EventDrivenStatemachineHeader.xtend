@@ -19,6 +19,8 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
+import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.generator.cpp.templates.ClassDeclaration
 
 /**
  * @author René Beckmann - Initial contribution and API
@@ -27,6 +29,7 @@ import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
 class EventDrivenStatemachineHeader extends StatemachineHeader {
 	@Inject extension EventNaming
 	@Inject extension StatechartEvents events
+	@Inject extension EventDrivenPredicate
 	
 	override preStatechartDeclarations(ExecutionFlow it) {
 		'''
@@ -36,30 +39,28 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 		'''
 	}
 	
-	override protected generatePrivateClassmembers(ExecutionFlow it) {
-		'''
-			«super.generatePrivateClassmembers(it)»
-			«IF hasLocalEvents»
-			std::deque<«eventNamespaceName»::«SCT_EVENT»*> «internalQueue»;
-			
-			«eventNamespaceName»::«SCT_EVENT»* «nextEventFctID»();
-			
-			void «dispatchEventFctID»(«eventNamespaceName»::«SCT_EVENT» * event);
-			«ENDIF»
-		'''
+	override protected generateClass(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
+		val classDecl = super.generateClass(it, artifactConfigs)
+		if(needsInternalEventQueue) 
+			classDecl.privateMember('''std::deque<«eventNamespaceName»::«SCT_EVENT»*> «internalQueue»;''')
+		if(needsNextEventFunction) 
+			classDecl.privateMember('''«eventNamespaceName»::«SCT_EVENT»* «nextEventFctID»();''')
+		if(needsDispatchEventFunction) 
+			classDecl.privateMember('''void «dispatchEventFctID»(«eventNamespaceName»::«SCT_EVENT» * event);''')
+		classDecl
 	}
 	
 	override CharSequence protectedInnerClassMembers(StatechartScope it) {
 		'''
 		«super.protectedInnerClassMembers(it)»
 		«execution_flow.module()» * parent;
-		«IF it.flow.hasLocalEvents»
+		«IF needsDispatchEventFunction(flow)»
 		void «it.flow.dispatchEventFctID»(«it.flow.eventNamespaceName»::«SCT_EVENT» * event);
 		«ENDIF»
 		'''
 	}
 	
-	override protected createInterface(StatechartScope it) {
+	override protected createInterface(StatechartScope it, ClassDeclaration scopeDecl) {
 		val List<String> toInit = newArrayList
 		for( e : declarations.filter(EventDefinition)) {
 			toInit.add('''«e.name.asIdentifier.raised»(false)''')
@@ -68,25 +69,16 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 			}
 		}
 		toInit.add("parent(parent)")
-		return '''
-			//! Inner class for «simpleName» interface scope.
-			class «interfaceName»
-			{
-				public:
-					«interfaceName»(«execution_flow.module()» * parent):
-						«FOR init : toInit SEPARATOR ","»
-							«init»
-						«ENDFOR»
-					{}
-					
-					«FOR d : declarations»
-						«d.functionPrototypes»
-					«ENDFOR»
-					
-				«entry.innerClassVisibility»:
-					«protectedInnerClassMembers»
-			};
-		'''
+		scopeDecl.publicMember(
+			'''
+			«interfaceName»(«execution_flow.module()» * parent):
+				«FOR init : toInit SEPARATOR ","»
+					«init»
+				«ENDFOR»
+			{}
+			'''
+		)
+		super.createInterface(it, scopeDecl)
 	}
 	
 	override dispatch privateFunctionPrototypes(EventDefinition it) {

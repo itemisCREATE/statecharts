@@ -53,45 +53,7 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 			«s.OCB_Instance»(«NULL_STRING»)«ENDIF»«ENDFOR»
 		'''
 	}
-	
-	
-	override raiseTimeEventFunction(ExecutionFlow it) '''
-		void «module»::«raiseTimeEventFctID»(«EVENT_TYPE» evid)
-		{
-			if ((evid >= («EVENT_TYPE»)«timeEventsInstance») && (evid < («EVENT_TYPE»)(&«timeEventsInstance»[«timeEventsCountConst»])))
-			{
-				*(«BOOL_TYPE»*)evid = true;
-				«runCycleFctID»();
-			}
-		}
-	'''
-	
-	override runCycleFunction(ExecutionFlow it) {
-		val cE = "currentEvent"
-		if(!hasLocalEvents) {
-			return super.runCycleFunction(it)
-		}
-		'''
-			void «module»::«runCycleFctID»()
-			{
-				«clearOutEventsFctID»();
-				
-				«SCT_EVENT» * «cE» = «nextEventFctID»();
-				
-				do
-				{
-					/* Set event flags as usual */
-					«dispatchEventFctID»(«cE»);
-					
-					«runCycleFunctionForLoop»
-					
-					/* Delete event from memory */
-					delete «cE»;
-					«clearInEventsFctID»();
-				} while((«cE» = «nextEventFctID»()));
-			}
-		'''
-	}
+
 	
 	def getNextEventFunction(ExecutionFlow it) {
 		val nE = "nextEvent"
