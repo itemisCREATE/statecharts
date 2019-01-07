@@ -178,7 +178,11 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	}
 
 	def Object cast(Object value, Type type) {
-		typeCast(value, type.originType)
+		if (type !== null) {
+			typeCast(value, type.originType)
+ 		} else {
+	 		value
+ 		}
 	}
 
 	def protected dispatch Object typeCast(Long value, Type type) {
