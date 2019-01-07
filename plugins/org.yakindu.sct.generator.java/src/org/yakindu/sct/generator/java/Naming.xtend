@@ -72,6 +72,30 @@ class Naming {
 	def String getInternalOperationCallbackName(InternalScope it) {
 		"InternalOperationCallback"
 	}
+	
+	def traceInterface() {
+		"ITracingListener"
+	}
+	
+	def traceAccessorFunctionID() {
+		"traceObserver"
+	}
+	
+	def traceSingleInstance() {
+		"ifaceTraceObserver"
+	}
+	
+	def traceInstances() {
+		"ifaceTraceObservers"
+	}
+	
+	def stateEnteredTraceFunctionID() {
+		"onStateEntered"
+	}
+	
+	def stateExitedTraceFunctionID() {
+		"onStateExited"
+	}
 
 	def dispatch String statemachineName(String name) {
 		// remove whitespaces;

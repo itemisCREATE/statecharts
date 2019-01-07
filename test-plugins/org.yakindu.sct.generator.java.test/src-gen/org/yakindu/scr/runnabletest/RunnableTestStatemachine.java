@@ -5,7 +5,6 @@ import java.util.List;
 import org.yakindu.scr.ITimer;
 
 public class RunnableTestStatemachine implements IRunnableTestStatemachine {
-
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private List<SCInterfaceListener> listeners = new LinkedList<SCInterfaceListener>();
@@ -122,6 +121,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	private ITimer timer;
 	
 	private final boolean[] timeEvents = new boolean[3];
@@ -155,18 +155,42 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
-		entryAction();
+		timer.setTimer(this, 2, (1 * 1000), true);
+		
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region__final_:
+				main_region__final__react(true);
+				break;
+			case main_region_Composite_s1_s2_inner_region_s1:
+				main_region_Composite_s1_s2_inner_region_s1_react(true);
+				break;
+			case main_region_Composite_s1_s2_inner_region_s2:
+				main_region_Composite_s1_s2_inner_region_s2_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
-		exitAction();
+		timer.unsetTimer(this, 2);
 	}
 	
 	/**
@@ -221,7 +245,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	
 	/**
 	* Set the {@link ITimer} for the state machine. It must be set
-	* externally on a timed state machine before a run cycle can be correct
+	* externally on a timed state machine before a run cycle can be correctly
 	* executed.
 	* 
 	* @param timer
@@ -241,6 +265,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	
 	public void timeElapsed(int eventID) {
 		timeEvents[eventID] = true;
+		runCycle();
 	}
 	
 	public SCInterface getSCInterface() {
@@ -291,14 +316,9 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		sCInterface.setS2_entered(value);
 	}
 	
-	/* Entry action for statechart 'RunnableTest'. */
-	private void entryAction() {
-		timer.setTimer(this, 2, 1 * 1000, true);
-	}
-	
 	/* Entry action for state 'Composite_s1_s2'. */
 	private void entryAction_main_region_Composite_s1_s2() {
-		timer.setTimer(this, 0, 10 * 1000, false);
+		timer.setTimer(this, 0, (10 * 1000), false);
 	}
 	
 	/* Entry action for state 's1'. */
@@ -311,11 +331,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	/* Entry action for state 's2'. */
 	private void entryAction_main_region_Composite_s1_s2_inner_region_s2() {
 		sCInterface.setS2_entered(sCInterface.getS2_entered() + 1);
-	}
-	
-	/* Exit action for state 'RunnableTest'. */
-	private void exitAction() {
-		timer.unsetTimer(this, 2);
 	}
 	
 	/* Exit action for state 'Composite_s1_s2'. */
@@ -433,7 +448,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		enterSequence_main_region_Composite_s1_s2_inner_region_s1_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		if (timeEvents[2]) {
 			sCInterface.operationCallback.displayTime();
 		}
@@ -446,11 +461,9 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -459,7 +472,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (timeEvents[0]) {
 					exitSequence_main_region_Composite_s1_s2();
 					enterSequence_main_region__final__default();
@@ -467,8 +480,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -493,8 +504,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -511,31 +520,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region__final_:
-				main_region__final__react(true);
-				break;
-			case main_region_Composite_s1_s2_inner_region_s1:
-				main_region_Composite_s1_s2_inner_region_s1_react(true);
-				break;
-			case main_region_Composite_s1_s2_inner_region_s2:
-				main_region_Composite_s1_s2_inner_region_s2_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

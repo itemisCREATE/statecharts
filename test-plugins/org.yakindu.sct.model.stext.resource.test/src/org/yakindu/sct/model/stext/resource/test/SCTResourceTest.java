@@ -56,7 +56,7 @@ import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.TimeEventType;
 import org.yakindu.sct.model.stext.stext.TimeUnit;
-import org.yakindu.sct.model.stext.ui.internal.STextActivator;
+import org.yakindu.sct.model.stext.ui.internal.StextActivator;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 
 import com.google.inject.Injector;
@@ -75,7 +75,7 @@ public class SCTResourceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		Injector injector = STextActivator.getInstance().getInjector(STextActivator.ORG_YAKINDU_SCT_MODEL_STEXT_STEXT);
+		Injector injector = StextActivator.getInstance().getInjector(StextActivator.ORG_YAKINDU_SCT_MODEL_STEXT_STEXT);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		res = new StextResource(URI.createURI("test.test"));
 		res.eAdapters().add(new ContextElementAdapter() {

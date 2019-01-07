@@ -15,7 +15,7 @@ import static com.google.inject.util.Modules.override;
 
 import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.yakindu.sct.generator.genmodel.ui.SGenUiModule;
-import org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator;
+import org.yakindu.sct.generator.genmodel.ui.internal.GenmodelActivator;
 
 import com.google.inject.Injector;
 import com.google.inject.Module;
@@ -31,7 +31,7 @@ public class SGenInjectorProvider implements IInjectorProvider {
 		return createInjector(override(
 				override(new SGenTestRuntimeModule()).with(
 						getSharedStateModule())).with(
-				new SGenUiModule(SGenActivator.getInstance())));
+				new SGenUiModule(GenmodelActivator.getInstance())));
 	}
 
 	protected Module getSharedStateModule() {

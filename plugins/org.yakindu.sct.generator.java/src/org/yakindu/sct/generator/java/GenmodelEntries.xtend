@@ -131,4 +131,28 @@ class GenmodelEntries {
 		}
 		return false
 	}
+	
+	def private getTracingFeature(GeneratorEntry it) {
+		getFeatureConfiguration(IJavaFeatureConstants::FEATURE_TRACING)
+	}
+	
+	def getTracingEnterState(GeneratorEntry it){
+		val enterStateParameter = tracingFeature?.getParameterValue(IJavaFeatureConstants::PARAMETER_TRACING_ENTER_STATE)
+		if (enterStateParameter !== null) {
+			return enterStateParameter.booleanValue
+		}
+		return false
+	}
+	
+	def getTracingExitState(GeneratorEntry it){
+		val exitStateParameter = tracingFeature?.getParameterValue(IJavaFeatureConstants::PARAMETER_TRACING_EXIT_STATE)
+		if (exitStateParameter !== null) {
+			return exitStateParameter.booleanValue
+		}
+		return false
+	}
+	
+	def tracingUsed(GeneratorEntry it) {
+		return (tracingEnterState || tracingExitState)
+	}
 }

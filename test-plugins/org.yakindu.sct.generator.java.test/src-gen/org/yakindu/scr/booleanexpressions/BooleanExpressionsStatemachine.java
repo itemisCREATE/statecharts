@@ -1,7 +1,7 @@
 package org.yakindu.scr.booleanexpressions;
 
-public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatemachine {
 
+public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e1;
@@ -99,6 +99,7 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 	
 	private int nextStateIndex;
 	
+	
 	public BooleanExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -128,11 +129,31 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_StateA:
+				main_region_StateA_react(true);
+				break;
+			case main_region_StateB:
+				main_region_StateB_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -253,9 +274,9 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 	
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
-		sCInterface.setAnd(sCInterface.myBool1 && sCInterface.myBool2);
+		sCInterface.setAnd((sCInterface.myBool1 && sCInterface.myBool2));
 		
-		sCInterface.setOr(sCInterface.myBool1 || sCInterface.myBool2);
+		sCInterface.setOr((sCInterface.myBool1 || sCInterface.myBool2));
 		
 		sCInterface.setNot(!sCInterface.myBool1);
 		
@@ -314,7 +335,7 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 		enterSequence_main_region_StateA_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -322,7 +343,7 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e1) {
 					exitSequence_main_region_StateA();
 					enterSequence_main_region_StateB_default();
@@ -331,8 +352,6 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -340,32 +359,11 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_StateA:
-				main_region_StateA_react(true);
-				break;
-			case main_region_StateB:
-				main_region_StateB_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

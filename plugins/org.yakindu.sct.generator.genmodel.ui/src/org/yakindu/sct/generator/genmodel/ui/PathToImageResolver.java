@@ -15,7 +15,7 @@ import java.net.URL;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.graphics.Image;
-import org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator;
+import org.yakindu.sct.generator.genmodel.ui.internal.GenmodelActivator;
 
 /**
  * 
@@ -27,7 +27,7 @@ public class PathToImageResolver {
 	public static Image toImage(URL path) {
 		if (path == null)
 			return null;
-		ImageRegistry imageRegistry = SGenActivator.getInstance().getImageRegistry();
+		ImageRegistry imageRegistry = GenmodelActivator.getInstance().getImageRegistry();
 		Image image = imageRegistry.get(path.toString());
 		if (image == null)
 			imageRegistry.put(path.toString(), ImageDescriptor.createFromURL(path).createImage());

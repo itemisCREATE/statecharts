@@ -468,7 +468,7 @@ public abstract class AbstractSCTResource extends XMIResourceImpl {
 	}
 
 	// copied from xtext LazyLinkingResource
-	protected static class DiagnosticMessageContext
+	public static class DiagnosticMessageContext
 			implements ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext {
 
 		private final Triple<EObject, EReference, INode> triple;

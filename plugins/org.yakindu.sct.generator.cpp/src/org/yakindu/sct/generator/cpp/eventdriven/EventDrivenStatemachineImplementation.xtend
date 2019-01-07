@@ -12,7 +12,7 @@ package org.yakindu.sct.generator.cpp.eventdriven
 
 import com.google.inject.Inject
 import org.yakindu.base.types.Direction
-import org.yakindu.sct.generator.cpp.StatemachineImplementation
+import org.yakindu.sct.generator.cpp.files.StatemachineImplementation
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
@@ -21,6 +21,7 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
+
 /**
  * @author René Beckmann - Initial contribution and API
  */

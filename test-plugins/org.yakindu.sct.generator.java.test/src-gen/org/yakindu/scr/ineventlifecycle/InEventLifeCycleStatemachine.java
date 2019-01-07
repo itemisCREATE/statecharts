@@ -1,7 +1,7 @@
 package org.yakindu.scr.ineventlifecycle;
 
-public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachine {
 
+public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;
@@ -38,6 +38,7 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 	
 	private int nextStateIndex;
 	
+	
 	public InEventLifeCycleStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -55,11 +56,28 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_A:
+				main_region_A_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -154,7 +172,7 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 		enterSequence_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -162,7 +180,7 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
 		}
@@ -174,20 +192,4 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
-				main_region_A_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

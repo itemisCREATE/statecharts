@@ -1,7 +1,7 @@
 package org.yakindu.scr.constonlydefaultscope;
 
-public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScopeStatemachine {
 
+public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScopeStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		public long getB() {
@@ -53,6 +53,7 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 	
 	private int nextStateIndex;
 	
+	
 	public ConstOnlyDefaultScopeStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 		sCIA = new SCIAImpl();
@@ -70,11 +71,34 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_ConstOnlyDefaultScope_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case constOnlyDefaultScope_main_region_A:
+				constOnlyDefaultScope_main_region_A_react(true);
+				break;
+			case constOnlyDefaultScope_main_region_B:
+				constOnlyDefaultScope_main_region_B_react(true);
+				break;
+			case constOnlyDefaultScope_main_region_C:
+				constOnlyDefaultScope_main_region_C_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_ConstOnlyDefaultScope_main_region();
 	}
@@ -203,7 +227,7 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		enterSequence_ConstOnlyDefaultScope_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -211,12 +235,12 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
-				if ((sCIA.e) && (sCIA.getEValue()==sCInterface.getB())) {
+			if (react()==false) {
+				if (((sCIA.e) && (sCIA.getEValue()==sCInterface.getB()))) {
 					exitSequence_ConstOnlyDefaultScope_main_region_A();
 					enterSequence_ConstOnlyDefaultScope_main_region_B_default();
 				} else {
-					if ((sCIA.e) && (sCIA.getEValue()==sCInterface.getC())) {
+					if (((sCIA.e) && (sCIA.getEValue()==sCInterface.getC()))) {
 						exitSequence_ConstOnlyDefaultScope_main_region_A();
 						enterSequence_ConstOnlyDefaultScope_main_region_C_default();
 					} else {
@@ -225,8 +249,6 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -234,11 +256,9 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -247,35 +267,11 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case constOnlyDefaultScope_main_region_A:
-				constOnlyDefaultScope_main_region_A_react(true);
-				break;
-			case constOnlyDefaultScope_main_region_B:
-				constOnlyDefaultScope_main_region_B_react(true);
-				break;
-			case constOnlyDefaultScope_main_region_C:
-				constOnlyDefaultScope_main_region_C_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

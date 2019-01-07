@@ -1,7 +1,7 @@
 package org.yakindu.scr.staticchoice;
 
-public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 
+public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean reset;
@@ -40,6 +40,7 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public StaticChoiceStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -57,11 +58,34 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_Start:
+				main_region_Start_react(true);
+				break;
+			case main_region_B:
+				main_region_B_react(true);
+				break;
+			case main_region_A:
+				main_region_A_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -217,7 +241,7 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 		enterSequence_main_region_Start_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -225,14 +249,12 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_Start();
 				sCInterface.setNumber(sCInterface.getNumber() + 1);
 				
 				react_main_region__choice_0();
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -241,11 +263,9 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -254,35 +274,11 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_Start:
-				main_region_Start_react(true);
-				break;
-			case main_region_B:
-				main_region_B_react(true);
-				break;
-			case main_region_A:
-				main_region_A_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

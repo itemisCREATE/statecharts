@@ -25,7 +25,6 @@
 							</includes>
 							<excludes>
 								<exclude>.gitignore</exclude>
-								<exclude>.svn/</exclude>
 							</excludes>
 						</fileset>
 					</filesets>

@@ -1,7 +1,7 @@
 package org.yakindu.scr.parenthesis;
 
-public class ParenthesisStatemachine implements IParenthesisStatemachine {
 
+public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private long erg;
@@ -29,6 +29,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public ParenthesisStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -46,11 +47,28 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_mainRegion_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case mainRegion_A:
+				mainRegion_A_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_mainRegion();
 	}
@@ -109,7 +127,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	
 	/* Entry action for state 'A'. */
 	private void entryAction_mainRegion_A() {
-		sCInterface.setErg(4 * (3 - 1));
+		sCInterface.setErg((4 * ((3 - 1))));
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -146,7 +164,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		enterSequence_mainRegion_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -154,29 +172,11 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case mainRegion_A:
-				mainRegion_A_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

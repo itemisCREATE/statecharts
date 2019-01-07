@@ -1,7 +1,7 @@
 package org.yakindu.scr.assignmentasexpression;
 
-public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressionStatemachine {
 
+public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressionStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private long a;
@@ -297,6 +297,7 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 	
 	private int nextStateIndex;
 	
+	
 	public AssignmentAsExpressionStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -358,11 +359,52 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_Add:
+				main_region_Add_react(true);
+				break;
+			case main_region_Multiply:
+				main_region_Multiply_react(true);
+				break;
+			case main_region_Divide:
+				main_region_Divide_react(true);
+				break;
+			case main_region_Modulo:
+				main_region_Modulo_react(true);
+				break;
+			case main_region_Shift:
+				main_region_Shift_react(true);
+				break;
+			case main_region_boolean_And:
+				main_region_boolean_And_react(true);
+				break;
+			case main_region_boolean_Or:
+				main_region_boolean_Or_react(true);
+				break;
+			case main_region_boolean_Xor:
+				main_region_boolean_Xor_react(true);
+				break;
+			case main_region_Subtract:
+				main_region_Subtract_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -613,22 +655,22 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 	
 	/* Entry action for state 'Add'. */
 	private void entryAction_main_region_Add() {
-		sCInterface.setA((sCInterface.assignB(5)) + 4);
+		sCInterface.setA(((sCInterface.assignB(5)) + 4));
 	}
 	
 	/* Entry action for state 'Multiply'. */
 	private void entryAction_main_region_Multiply() {
-		sCInterface.setE(sCInterface.getE() * ((sCInterface.assignF(sCInterface.getF() * 5)) * 3));
+		sCInterface.setE(sCInterface.getE() * (((sCInterface.assignF(sCInterface.getF() * 5)) * 3)));
 	}
 	
 	/* Entry action for state 'Divide'. */
 	private void entryAction_main_region_Divide() {
-		sCInterface.setG(sCInterface.getG() / ((sCInterface.assignH(sCInterface.getH() / 2)) / 4));
+		sCInterface.setG(sCInterface.getG() / (((sCInterface.assignH(sCInterface.getH() / 2)) / 4)));
 	}
 	
 	/* Entry action for state 'Modulo'. */
 	private void entryAction_main_region_Modulo() {
-		sCInterface.setI(sCInterface.getI() % ((sCInterface.assignI1(sCInterface.getI1() % 4)) % 4));
+		sCInterface.setI(sCInterface.getI() % (((sCInterface.assignI1(sCInterface.getI1() % 4)) % 4)));
 	}
 	
 	/* Entry action for state 'Shift'. */
@@ -655,7 +697,7 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 	
 	/* Entry action for state 'Subtract'. */
 	private void entryAction_main_region_Subtract() {
-		sCInterface.setD(sCInterface.getD() - ((sCInterface.assignC(sCInterface.getC() - 5)) - 1));
+		sCInterface.setD(sCInterface.getD() - (((sCInterface.assignC(sCInterface.getC() - 5)) - 1)));
 	}
 	
 	/* 'default' enter sequence for state Add */
@@ -820,7 +862,7 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		enterSequence_main_region_Add_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -828,12 +870,10 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_Add();
 				enterSequence_main_region_Subtract_default();
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -842,12 +882,10 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_Multiply();
 				enterSequence_main_region_Divide_default();
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -856,12 +894,10 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_Divide();
 				enterSequence_main_region_Modulo_default();
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -870,12 +906,10 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_Modulo();
 				enterSequence_main_region_Shift_default();
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -884,12 +918,10 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_Shift();
 				enterSequence_main_region_boolean_And_default();
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -898,12 +930,10 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_boolean_And();
 				enterSequence_main_region_boolean_Or_default();
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -912,12 +942,10 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_boolean_Or();
 				enterSequence_main_region_boolean_Xor_default();
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -926,11 +954,9 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -939,54 +965,12 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_Subtract();
 				enterSequence_main_region_Multiply_default();
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_Add:
-				main_region_Add_react(true);
-				break;
-			case main_region_Multiply:
-				main_region_Multiply_react(true);
-				break;
-			case main_region_Divide:
-				main_region_Divide_react(true);
-				break;
-			case main_region_Modulo:
-				main_region_Modulo_react(true);
-				break;
-			case main_region_Shift:
-				main_region_Shift_react(true);
-				break;
-			case main_region_boolean_And:
-				main_region_boolean_And_react(true);
-				break;
-			case main_region_boolean_Or:
-				main_region_boolean_Or_react(true);
-				break;
-			case main_region_boolean_Xor:
-				main_region_boolean_Xor_react(true);
-				break;
-			case main_region_Subtract:
-				main_region_Subtract_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

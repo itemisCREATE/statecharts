@@ -1,7 +1,7 @@
 package org.yakindu.scr.logicalor;
 
-public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 
+public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private long x;
@@ -43,6 +43,7 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public LogicalOrStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -62,11 +63,28 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_A:
+				main_region_A_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -164,7 +182,7 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 		enterSequence_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -172,10 +190,10 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.getX()==1) {
 					exitSequence_main_region_A();
-					sCInterface.setB(((sCInterface.assignX(sCInterface.getX() + 1))!=2 || (sCInterface.assignX(sCInterface.getX() * 2))==4));
+					sCInterface.setB((((sCInterface.assignX(sCInterface.getX() + 1))!=2 || (sCInterface.assignX(sCInterface.getX() * 2))==4)));
 					
 					enterSequence_main_region_A_default();
 				} else {
@@ -183,25 +201,7 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
-				main_region_A_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

@@ -21,8 +21,8 @@ import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.sct.generator.c.DefaultGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.IncludeProvider;
-import org.yakindu.sct.generator.c.SimpleGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.ScTypesIncludeProvider;
+import org.yakindu.sct.generator.c.SimpleGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries;
 import org.yakindu.sct.generator.c.extensions.Naming;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
@@ -35,6 +35,8 @@ import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenEventCode;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenExpressionCode;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineHeader;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineImplementation;
+import org.yakindu.sct.generator.cpp.files.StatemachineHeader;
+import org.yakindu.sct.generator.cpp.files.StatemachineImplementation;
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sexec.transformation.BehaviorMapping;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
@@ -53,7 +55,7 @@ import com.google.inject.name.Names;
  *
  */
 public class CppCodeGeneratorModule implements IGeneratorModule {
-
+	
 	@Override
 	public void configure(GeneratorEntry entry, Binder binder) {
 		binder.bind(IModelSequencer.class).to(ModelSequencer.class);
@@ -71,7 +73,7 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		addIncludeProvider(binder, ScTypesIncludeProvider.class);
 		addIncludeProvider(binder, CppInterfaceIncludeProvider.class);
 	}
-	
+
 	protected void bindTracingProperty(GeneratorEntry entry, Binder binder) {
 		FeatureParameterValue traceEnterFeature = entry.getFeatureParameterValue(FEATURE_TRACING,
 				PARAMETER_TRACING_ENTER_STATE);
@@ -81,12 +83,12 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		boolean traceExit = traceExitFeature != null ? traceEnterFeature.getBooleanValue() : false;
 		binder.bind(Boolean.class).annotatedWith(Names.named(ADD_TRACES)).toInstance(traceEnter || traceExit);
 	}
-
+	
 	protected void addIncludeProvider(Binder binder, Class<? extends IncludeProvider> provider) {
 		Multibinder<IncludeProvider> includeBinder = Multibinder.newSetBinder(binder, IncludeProvider.class);
 		includeBinder.addBinding().to(provider);
 	}
-
+	
 	protected void bindIGenArtifactConfigurations(GeneratorEntry entry, Binder binder) {
 		FeatureParameterValue useRelativePathParam = entry.getFeatureParameterValue(FEATURE_INCLUDES,
 				PARAMETER_INCLUDES_USE_RELATIVE_PATHS);
@@ -97,7 +99,7 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 			binder.bind(IGenArtifactConfigurations.class).to(SimpleGenArtifactConfigurations.class);
 		}
 	}
-
+	
 	protected void bindEventDrivenClasses(GeneratorEntry entry, Binder binder) {
 		if ((new AnnotationExtensions()).isEventDriven(entry)) {
 			binder.bind(StatemachineHeader.class).to(EventDrivenStatemachineHeader.class);
@@ -107,7 +109,7 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 			addIncludeProvider(binder, CppEventDrivenIncludeProvider.class);
 		}
 	}
-
+	
 	protected String getSeparator(GeneratorEntry entry) {
 		GenmodelEntries entries = new GenmodelEntries();
 		String separator = entries.getSeparator(entry);
@@ -117,5 +119,5 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 			return separator;
 		}
 	}
-
+	
 }

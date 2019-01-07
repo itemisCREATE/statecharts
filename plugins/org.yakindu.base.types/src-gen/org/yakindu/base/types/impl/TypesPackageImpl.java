@@ -1048,7 +1048,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEReference(getAnnotation_Arguments(), this.getExpression(), null, "arguments", null, 0, -1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(annotatableElementEClass, AnnotatableElement.class, "AnnotatableElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAnnotatableElement_Annotations(), this.getAnnotation(), null, "annotations", null, 0, -1, AnnotatableElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAnnotatableElement_Annotations(), this.getAnnotation(), null, "annotations", null, 0, -1, AnnotatableElement.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAnnotatableElement_AnnotationInfo(), this.getAnnotatableElement(), null, "annotationInfo", null, 0, 1, AnnotatableElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(annotatableElementEClass, this.getAnnotation(), "getAnnotationOfType", 0, 1, IS_UNIQUE, IS_ORDERED);

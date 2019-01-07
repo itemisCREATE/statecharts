@@ -113,6 +113,11 @@ public class VariableDefinitionItemProvider extends PropertyItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 StextFactory.eINSTANCE.createStatechartSpecification()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 StextFactory.eINSTANCE.createEventDefinition()));
 
 		newChildDescriptors.add
@@ -138,31 +143,6 @@ public class VariableDefinitionItemProvider extends PropertyItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 SGraphFactory.eINSTANCE.createImportDeclaration()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
-				 StextFactory.eINSTANCE.createEventDefinition()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
-				 StextFactory.eINSTANCE.createVariableDefinition()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
-				 StextFactory.eINSTANCE.createOperationDefinition()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
-				 StextFactory.eINSTANCE.createTypeAliasDefinition()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 SGraphFactory.eINSTANCE.createImportDeclaration()));
 
 		newChildDescriptors.add
@@ -263,11 +243,6 @@ public class VariableDefinitionItemProvider extends PropertyItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.PROPERTY__INITIAL_VALUE,
-				 ExpressionsFactory.eINSTANCE.createMetaCall()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.PROPERTY__INITIAL_VALUE,
 				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
 
 		newChildDescriptors.add
@@ -279,29 +254,6 @@ public class VariableDefinitionItemProvider extends PropertyItemProvider {
 			(createChildParameter
 				(TypesPackage.Literals.PROPERTY__INITIAL_VALUE,
 				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
-			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES;
-
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**

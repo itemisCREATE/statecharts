@@ -156,6 +156,7 @@ public class StextSwitch<T> extends Switch<T> {
 				StatechartSpecification statechartSpecification = (StatechartSpecification)theEObject;
 				T result = caseStatechartSpecification(statechartSpecification);
 				if (result == null) result = caseScopedElement(statechartSpecification);
+				if (result == null) result = caseAnnotatableElement(statechartSpecification);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

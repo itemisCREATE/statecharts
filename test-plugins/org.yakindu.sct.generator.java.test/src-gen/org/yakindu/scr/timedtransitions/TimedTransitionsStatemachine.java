@@ -3,7 +3,6 @@ package org.yakindu.scr.timedtransitions;
 import org.yakindu.scr.ITimer;
 
 public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachine {
-
 	private boolean initialized = false;
 	
 	public enum State {
@@ -15,6 +14,7 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	private ITimer timer;
 	
@@ -60,18 +60,39 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
-		entryAction();
+		timer.setTimer(this, 1, (1 * 1000), true);
+		
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_Start:
+				main_region_Start_react(true);
+				break;
+			case main_region_End:
+				main_region_End_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
-		exitAction();
+		timer.unsetTimer(this, 1);
 	}
 	
 	/**
@@ -121,7 +142,7 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	
 	/**
 	* Set the {@link ITimer} for the state machine. It must be set
-	* externally on a timed state machine before a run cycle can be correct
+	* externally on a timed state machine before a run cycle can be correctly
 	* executed.
 	* 
 	* @param timer
@@ -141,21 +162,12 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	
 	public void timeElapsed(int eventID) {
 		timeEvents[eventID] = true;
-	}
-	
-	/* Entry action for statechart 'TimedTransitions'. */
-	private void entryAction() {
-		timer.setTimer(this, 1, 1 * 1000, true);
+		runCycle();
 	}
 	
 	/* Entry action for state 'Start'. */
 	private void entryAction_main_region_Start() {
-		timer.setTimer(this, 0, 2 * 1000, false);
-	}
-	
-	/* Exit action for state 'TimedTransitions'. */
-	private void exitAction() {
-		timer.unsetTimer(this, 1);
+		timer.setTimer(this, 0, (2 * 1000), false);
 	}
 	
 	/* Exit action for state 'Start'. */
@@ -214,7 +226,7 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		enterSequence_main_region_Start_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		if (timeEvents[1]) {
 			setX(getX() + 1);
 		}
@@ -227,7 +239,7 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (timeEvents[0]) {
 					exitSequence_main_region_Start();
 					enterSequence_main_region_End_default();
@@ -236,8 +248,6 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -245,32 +255,11 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_Start:
-				main_region_Start_react(true);
-				break;
-			case main_region_End:
-				main_region_End_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

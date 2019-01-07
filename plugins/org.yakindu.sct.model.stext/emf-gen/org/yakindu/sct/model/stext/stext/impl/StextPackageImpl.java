@@ -480,15 +480,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getStatechartSpecification_Annotations() {
-		return (EReference)statechartSpecificationEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getStateSpecification() {
 		return stateSpecificationEClass;
 	}
@@ -959,7 +950,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		createEReference(transitionRootEClass, TRANSITION_ROOT__DEF);
 
 		statechartSpecificationEClass = createEClass(STATECHART_SPECIFICATION);
-		createEReference(statechartSpecificationEClass, STATECHART_SPECIFICATION__ANNOTATIONS);
 
 		stateSpecificationEClass = createEClass(STATE_SPECIFICATION);
 		createEReference(stateSpecificationEClass, STATE_SPECIFICATION__SCOPE);
@@ -1078,6 +1068,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		stateRootEClass.getESuperTypes().add(this.getDefRoot());
 		transitionRootEClass.getESuperTypes().add(this.getDefRoot());
 		statechartSpecificationEClass.getESuperTypes().add(theSGraphPackage.getScopedElement());
+		statechartSpecificationEClass.getESuperTypes().add(theTypesPackage.getAnnotatableElement());
 		statechartScopeEClass.getESuperTypes().add(theSGraphPackage.getScope());
 		interfaceScopeEClass.getESuperTypes().add(this.getStatechartScope());
 		interfaceScopeEClass.getESuperTypes().add(theBasePackage.getNamedElement());
@@ -1122,7 +1113,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		initEReference(getTransitionRoot_Def(), this.getTransitionSpecification(), null, "def", null, 0, 1, TransitionRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(statechartSpecificationEClass, StatechartSpecification.class, "StatechartSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStatechartSpecification_Annotations(), theTypesPackage.getAnnotation(), null, "annotations", null, 0, -1, StatechartSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stateSpecificationEClass, StateSpecification.class, "StateSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStateSpecification_Scope(), theSGraphPackage.getScope(), null, "scope", null, 0, 1, StateSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

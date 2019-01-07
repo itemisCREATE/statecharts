@@ -14,6 +14,12 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator
 import org.yakindu.sct.generator.java.features.CycleBasedWrapperFeature
 import org.yakindu.sct.generator.java.features.EventBasedRunnableFeature
+import org.yakindu.sct.generator.java.files.IStatemachine
+import org.yakindu.sct.generator.java.files.ITimer
+import org.yakindu.sct.generator.java.files.ITimerCallback
+import org.yakindu.sct.generator.java.files.Statemachine
+import org.yakindu.sct.generator.java.files.StatemachineInterface
+import org.yakindu.sct.generator.java.files.TimerService
 import org.yakindu.sct.generator.java.wrappers.CycleBasedSynchronizedWrapper
 import org.yakindu.sct.generator.java.wrappers.EventBasedRunnableWrapper
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -38,6 +44,7 @@ class JavaGenerator implements IExecutionFlowGenerator {
 	@Inject extension ITimerCallback
 	@Inject extension ITimer
 	@Inject extension TimerService
+	@Inject extension ITracingListener
 	@Inject extension RuntimeService
 	@Inject extension StatemachineInterface
 	@Inject extension Statemachine
@@ -72,6 +79,10 @@ class JavaGenerator implements IExecutionFlowGenerator {
 		
 		if (entry.hasFeatureEventRunnable) {
 			flow.generateEventBasedRunnableWrapper(entry, fsa)
+		}
+		
+		if (entry.tracingUsed) {
+			flow.generateTracing(entry, fsa)
 		}
 	}
 }

@@ -1,7 +1,7 @@
 package org.yakindu.scr.bitexpressions;
 
-public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 
+public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e1;
@@ -109,6 +109,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public BitExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -140,11 +141,31 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_StateA:
+				main_region_StateA_react(true);
+				break;
+			case main_region_StateB:
+				main_region_StateB_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -273,17 +294,17 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
-		sCInterface.setLeftBitshift(sCInterface.myBit1 << 1);
+		sCInterface.setLeftBitshift((sCInterface.myBit1 << 1));
 		
-		sCInterface.setRightBitshift(sCInterface.myBit1 >> 1);
+		sCInterface.setRightBitshift((sCInterface.myBit1 >> 1));
 		
 		sCInterface.setComplementBitshift(~sCInterface.myBit1);
 		
-		sCInterface.setBitwiseAnd(sCInterface.myBit1 & sCInterface.myBit2);
+		sCInterface.setBitwiseAnd((sCInterface.myBit1 & sCInterface.myBit2));
 		
-		sCInterface.setBitwiseOr(sCInterface.myBit1 | sCInterface.myBit2);
+		sCInterface.setBitwiseOr((sCInterface.myBit1 | sCInterface.myBit2));
 		
-		sCInterface.setBitwiseXor(sCInterface.myBit1 ^ sCInterface.myBit2);
+		sCInterface.setBitwiseXor((sCInterface.myBit1 ^ sCInterface.myBit2));
 	}
 	
 	/* 'default' enter sequence for state StateA */
@@ -336,7 +357,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		enterSequence_main_region_StateA_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -344,7 +365,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e1) {
 					exitSequence_main_region_StateA();
 					enterSequence_main_region_StateB_default();
@@ -353,8 +374,6 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -362,32 +381,11 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_StateA:
-				main_region_StateA_react(true);
-				break;
-			case main_region_StateB:
-				main_region_StateB_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

@@ -1,7 +1,7 @@
 package org.yakindu.scr.stringexpressions;
 
-public class StringExpressionsStatemachine implements IStringExpressionsStatemachine {
 
+public class StringExpressionsStatemachine implements IStringExpressionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;
@@ -123,6 +123,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	
 	private int nextStateIndex;
 	
+	
 	public StringExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -156,11 +157,43 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_AssignmentChecked:
+				main_region_AssignmentChecked_react(true);
+				break;
+			case main_region_Failed:
+				main_region_Failed_react(true);
+				break;
+			case main_region_VarToVarCompareSucceeded:
+				main_region_VarToVarCompareSucceeded_react(true);
+				break;
+			case main_region_VarToConstCompareSucceeded:
+				main_region_VarToConstCompareSucceeded_react(true);
+				break;
+			case main_region_ConstToVarCompareSucceeded:
+				main_region_ConstToVarCompareSucceeded_react(true);
+				break;
+			case main_region_ConstToConstCompareSucceeded:
+				main_region_ConstToConstCompareSucceeded_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -301,11 +334,11 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 	
 	private boolean check_main_region__choice_1_tr1_tr1() {
-		return (sCInterface.e) && ((sCInterface.getStringA()== null?sCInterface.getStringA2() ==null :sCInterface.getStringA().equals(sCInterface.getStringA2())));
+		return ((sCInterface.e) && ((sCInterface.getStringA()== null?sCInterface.getStringA2() ==null :sCInterface.getStringA().equals(sCInterface.getStringA2()))));
 	}
 	
 	private boolean check_main_region__choice_2_tr1_tr1() {
-		return (sCInterface.e) && ((sCInterface.getStringA()== null?sCInterface.getStringB() !=null : !sCInterface.getStringA().equals(sCInterface.getStringB())));
+		return ((sCInterface.e) && ((sCInterface.getStringA()== null?sCInterface.getStringB() !=null : !sCInterface.getStringA().equals(sCInterface.getStringB()))));
 	}
 	
 	private boolean check_main_region__choice_3_tr0_tr0() {
@@ -313,11 +346,11 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 	
 	private boolean check_main_region__choice_4_tr1_tr1() {
-		return (sCInterface.e) && ((sCInterface.getStringA()== null?"A" ==null :sCInterface.getStringA().equals("A")));
+		return ((sCInterface.e) && ((sCInterface.getStringA()== null?"A" ==null :sCInterface.getStringA().equals("A"))));
 	}
 	
 	private boolean check_main_region__choice_5_tr1_tr1() {
-		return (sCInterface.e) && ((sCInterface.getStringA()== null?"B" !=null : !sCInterface.getStringA().equals("B")));
+		return ((sCInterface.e) && ((sCInterface.getStringA()== null?"B" !=null : !sCInterface.getStringA().equals("B"))));
 	}
 	
 	private boolean check_main_region__choice_7_tr0_tr0() {
@@ -325,11 +358,11 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 	
 	private boolean check_main_region__choice_8_tr1_tr1() {
-		return (sCInterface.e) && (("A"== null?sCInterface.getStringA() ==null :"A".equals(sCInterface.getStringA())));
+		return ((sCInterface.e) && (("A"== null?sCInterface.getStringA() ==null :"A".equals(sCInterface.getStringA()))));
 	}
 	
 	private boolean check_main_region__choice_9_tr1_tr1() {
-		return (sCInterface.e) && (("A"== null?sCInterface.getStringB() !=null : !"A".equals(sCInterface.getStringB())));
+		return ((sCInterface.e) && (("A"== null?sCInterface.getStringB() !=null : !"A".equals(sCInterface.getStringB()))));
 	}
 	
 	private boolean check_main_region__choice_11_tr0_tr0() {
@@ -337,11 +370,11 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 	
 	private boolean check_main_region__choice_12_tr1_tr1() {
-		return (sCInterface.e) && (("A"== null?"A" ==null :"A".equals("A")));
+		return ((sCInterface.e) && (("A"== null?"A" ==null :"A".equals("A"))));
 	}
 	
 	private boolean check_main_region__choice_13_tr1_tr1() {
-		return (sCInterface.e) && (("A"== null?"B" !=null : !"A".equals("B")));
+		return ((sCInterface.e) && (("A"== null?"B" !=null : !"A".equals("B"))));
 	}
 	
 	private void effect_main_region__choice_0_tr1() {
@@ -715,7 +748,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		enterSequence_main_region_AssignmentChecked_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -723,7 +756,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_main_region_AssignmentChecked();
 					sCInterface.setStringVarEqual((sCInterface.stringA== null?sCInterface.stringA2 ==null :sCInterface.stringA.equals(sCInterface.stringA2)));
@@ -734,8 +767,6 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -743,11 +774,9 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -756,7 +785,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_main_region_VarToVarCompareSucceeded();
 					sCInterface.setStringVarEqual((sCInterface.stringA== null?"A" ==null :sCInterface.stringA.equals("A")));
@@ -767,8 +796,6 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -776,7 +803,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_main_region_VarToConstCompareSucceeded();
 					sCInterface.setStringVarEqual(("A"== null?sCInterface.stringA ==null :"A".equals(sCInterface.stringA)));
@@ -787,8 +814,6 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -796,7 +821,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_main_region_ConstToVarCompareSucceeded();
 					sCInterface.setStringVarEqual(("A"== null?"A" ==null :"A".equals("A")));
@@ -807,8 +832,6 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -816,44 +839,11 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_AssignmentChecked:
-				main_region_AssignmentChecked_react(true);
-				break;
-			case main_region_Failed:
-				main_region_Failed_react(true);
-				break;
-			case main_region_VarToVarCompareSucceeded:
-				main_region_VarToVarCompareSucceeded_react(true);
-				break;
-			case main_region_VarToConstCompareSucceeded:
-				main_region_VarToConstCompareSucceeded_react(true);
-				break;
-			case main_region_ConstToVarCompareSucceeded:
-				main_region_ConstToVarCompareSucceeded_react(true);
-				break;
-			case main_region_ConstToConstCompareSucceeded:
-				main_region_ConstToConstCompareSucceeded_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

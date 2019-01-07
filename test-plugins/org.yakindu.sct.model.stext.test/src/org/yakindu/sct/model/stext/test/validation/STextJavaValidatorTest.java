@@ -15,10 +15,10 @@ import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorCod
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorMsg;
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.warningMsg;
 import static org.junit.Assert.assertEquals;
-import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_ASSIGNMENT_TO_CONST_MSG;
-import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_POST_FIX_TO_CONST_MSG;
-import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_LEFT_HAND_ASSIGNMENT_MSG;
-import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE;
+import static org.yakindu.base.expressions.validation.ExpressionsValidator.ERROR_ASSIGNMENT_TO_CONST_MSG;
+import static org.yakindu.base.expressions.validation.ExpressionsValidator.ERROR_LEFT_HAND_ASSIGNMENT_MSG;
+import static org.yakindu.base.expressions.validation.ExpressionsValidator.ERROR_POST_FIX_TO_CONST_MSG;
+import static org.yakindu.base.expressions.validation.ExpressionsValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE;
 import static org.yakindu.base.types.validation.TypesJavaValidator.ERROR_OPTIONAL_MUST_BE_LAST_CODE;
 import static org.yakindu.base.types.validation.TypesJavaValidator.ERROR_VAR_ARGS_LAST_CODE;
 import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
@@ -35,7 +35,7 @@ import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.yakindu.base.expressions.validation.ExpressionsJavaValidator;
+import org.yakindu.base.expressions.validation.ExpressionsValidator;
 import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
@@ -65,8 +65,8 @@ import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.model.stext.test.util.StextTestFactory;
 import org.yakindu.sct.model.stext.test.util.TestCompletenessAssertions;
 import org.yakindu.sct.model.stext.test.util.TypesTestFactory;
-import org.yakindu.sct.model.stext.validation.STextJavaValidator;
 import org.yakindu.sct.model.stext.validation.STextValidationMessages;
+import org.yakindu.sct.model.stext.validation.STextValidator;
 import org.yakindu.sct.test.models.AbstractTestModelsUtil;
 
 import com.google.inject.Inject;
@@ -83,7 +83,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	TestCompletenessAssertions checkAvailable;
 
 	/**
-	 * @see STextJavaValidator#checkVariableDefinition(org.yakindu.sct.model.stext.stext.VariableDefinition)
+	 * @see STextValidator#checkVariableDefinition(org.yakindu.sct.model.stext.stext.VariableDefinition)
 	 */
 	@Test
 	public void checkVariableDefinition() {
@@ -94,7 +94,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 	/**
 	 *
-	 * @see STextJavaValidator#checkAssignmentExpression(org.yakindu.sct.model.stext.stext.AssignmentExpression)
+	 * @see STextValidator#checkAssignmentExpression(org.yakindu.sct.model.stext.stext.AssignmentExpression)
 	 */
 	@Test
 	public void checkAssignmentExpression() {
@@ -103,7 +103,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 		EObject expression = super.parseExpression("i += (i+=3) +4", Expression.class.getSimpleName(), context);
 		AssertableDiagnostics validationResult = tester.validate(expression);
-		validationResult.assertErrorContains(STextJavaValidator.ASSIGNMENT_EXPRESSION);
+		validationResult.assertErrorContains(STextValidator.ASSIGNMENT_EXPRESSION);
 
 		expression = super.parseExpression("i += (j+=3) +4", Expression.class.getSimpleName(), context);
 		validationResult = tester.validate(expression);
@@ -114,7 +114,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	public void checkTimeEventSpecValueExpression() {
 		EObject expression = super.parseExpression("after true s", ReactionTrigger.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(expression);
-		validationResult.assertErrorContains(STextJavaValidator.TIME_EXPRESSION);
+		validationResult.assertErrorContains(STextValidator.TIME_EXPRESSION);
 	}
 
 	@Test
@@ -162,7 +162,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	/**
-	 * @see STextJavaValidator#checkOperationArguments_FeatureCall(org.yakindu.sct.model.stext.stext.FeatureCall)
+	 * @see STextValidator#checkOperationArguments_FeatureCall(org.yakindu.sct.model.stext.stext.FeatureCall)
 	 */
 	@Test
 	public void checkOperationArguments_FeatureCall() {
@@ -173,7 +173,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	/**
-	 * @see STextJavaValidator#checkOperationArguments_TypedElementReferenceExpression(TypedElementReferenceExpression)
+	 * @see STextValidator#checkOperationArguments_TypedElementReferenceExpression(TypedElementReferenceExpression)
 	 */
 	@Test
 	public void checkOperationArguments_TypedElementReferenceExpression() {
@@ -184,7 +184,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	/**
-	 * @see STextJavaValidator#checkVarArgParameterIsLast(Operation)
+	 * @see STextValidator#checkVarArgParameterIsLast(Operation)
 	 */
 	@Test
 	public void checkVarArgParameterIsLast() {
@@ -284,14 +284,14 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	/**
-	 * @see STextJavaValidator#checkAnnotationArguments(org.yakindu.sct.model.stext.stext.AnnotationDefinition)
+	 * @see STextValidator#checkAnnotationArguments(org.yakindu.sct.model.stext.stext.AnnotationDefinition)
 	 */
 	@Test
 	public void checkAnnotationArguments() {
 		String scope = "@CycleBased";
 		EObject model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(model);
-		validationResult.assertError(STextJavaValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
+		validationResult.assertError(STextValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
 		;
 
 		scope = "@EventDriven";
@@ -301,7 +301,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	/**
-	 * @see STextJavaValidator#checkAnnotationTarget(org.yakindu.base.types.AnnotatableElement)
+	 * @see STextValidator#checkAnnotationTarget(org.yakindu.base.types.AnnotatableElement)
 	 */
 	@Test
 	public void checkAnnotationTarget() {
@@ -359,13 +359,13 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	/**
-	 * @see STextJavaValidator#checkGuardHasBooleanExpression(org.yakindu.sct.model.stext.stext.ReactionTrigger)
+	 * @see STextValidator#checkGuardHasBooleanExpression(org.yakindu.sct.model.stext.stext.ReactionTrigger)
 	 */
 	@Test
 	public void checkGuard() {
 		EObject expression = super.parseExpression("[3 * 3]", ReactionTrigger.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(expression);
-		validationResult.assertErrorContains(STextJavaValidator.GUARD_EXPRESSION);
+		validationResult.assertErrorContains(STextValidator.GUARD_EXPRESSION);
 
 		String scope = "internal: var myInt : integer var myBool : boolean = true";
 		expression = super.parseExpression("[myInt <= 5 || !myBool ]", ReactionTrigger.class.getSimpleName(), scope);
@@ -378,7 +378,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		String scope = "internal: var myInt : integer var myBool : boolean = true";
 		EObject expression = super.parseExpression("[myBool = false]", ReactionTrigger.class.getSimpleName(), scope);
 		AssertableDiagnostics validationResult = tester.validate(expression);
-		validationResult.assertErrorContains(STextJavaValidator.GUARD_CONTAINS_ASSIGNMENT);
+		validationResult.assertErrorContains(STextValidator.GUARD_CONTAINS_ASSIGNMENT);
 
 		expression = super.parseExpression("[myInt = 5]", ReactionTrigger.class.getSimpleName(), scope);
 		validationResult = tester.validate(expression);
@@ -386,17 +386,17 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		while (diag.hasNext()) {
 			Diagnostic d = diag.next();
 			if (d.getMessage().equals(GUARD_EXPRESSION)) {
-				assertEquals(STextJavaValidator.GUARD_EXPRESSION, d.getMessage());
+				assertEquals(STextValidator.GUARD_EXPRESSION, d.getMessage());
 			} else {
-				assertEquals(STextJavaValidator.GUARD_CONTAINS_ASSIGNMENT, d.getMessage());
+				assertEquals(STextValidator.GUARD_CONTAINS_ASSIGNMENT, d.getMessage());
 			}
 		}
 
 	}
 
 	/**
-	 * @see STextJavaValidator#checkFeatureCall(org.yakindu.sct.model.stext.stext.FeatureCall)
-	 * @see STextJavaValidator#checkFeatureCall(TypedElementReferenceExpression)
+	 * @see STextValidator#checkFeatureCall(org.yakindu.sct.model.stext.stext.FeatureCall)
+	 * @see STextValidator#checkFeatureCall(TypedElementReferenceExpression)
 	 */
 	@Test
 	public void checkFeatureCall() {
@@ -417,13 +417,13 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		validationResult.assertOK();
 		model = super.parseExpression("5++", Expression.class.getSimpleName(), interfaceScope());
 		validationResult = tester.validate(model);
-		validationResult.assertError(ExpressionsJavaValidator.POSTFIX_ONLY_ON_VARIABLES_CODE);
+		validationResult.assertError(ExpressionsValidator.POSTFIX_ONLY_ON_VARIABLES_CODE);
 
 	}
 
 	/**
 	 *
-	 * @see STextJavaValidator#checkReactionTrigger(org.yakindu.sct.model.stext.stext.ReactionTrigger)
+	 * @see STextValidator#checkReactionTrigger(org.yakindu.sct.model.stext.stext.ReactionTrigger)
 	 */
 	@Test
 	public void checkReactionTrigger() {
@@ -489,7 +489,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	/**
-	 * @see STextJavaValidator#checkReactionEffectActions(org.yakindu.sct.model.stext.stext.ReactionEffect)
+	 * @see STextValidator#checkReactionEffectActions(org.yakindu.sct.model.stext.stext.ReactionEffect)
 	 */
 	@Test
 	public void checkReactionEffectActions() {
@@ -527,7 +527,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	/**
-	 * @see STextJavaValidator#checkEventDefinition(org.yakindu.sct.model.stext.stext.EventDefinition)
+	 * @see STextValidator#checkEventDefinition(org.yakindu.sct.model.stext.stext.EventDefinition)
 	 */
 	@Test
 	public void checkEventDefinition() {
@@ -540,7 +540,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		model = super.parseExpression("internal: in event Event1", InternalScope.class.getSimpleName());
 		result = tester.validate(model);
 		result.assertDiagnosticsCount(1);
-		result.assertErrorContains(STextJavaValidator.IN_OUT_DECLARATIONS);
+		result.assertErrorContains(STextValidator.IN_OUT_DECLARATIONS);
 		// No out declarations in internal scope
 		model = super.parseExpression("internal: out event Event1", InternalScope.class.getSimpleName());
 		result = tester.validate(model);
@@ -549,7 +549,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	/**
-	 * @see STextJavaValidator#checkInterfaceScope(Statechart)
+	 * @see STextValidator#checkInterfaceScope(Statechart)
 	 */
 	@Test
 	public void checkInterfaceScope() {
@@ -561,7 +561,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	/**
-	 * @see STextJavaValidator#checkChoiceWithoutDefaultTransition(org.yakindu.sct.model.sgraph.Choice)
+	 * @see STextValidator#checkChoiceWithoutDefaultTransition(org.yakindu.sct.model.sgraph.Choice)
 	 */
 	@Test
 	public void checkChoiceWithoutDefaultTransition() {
@@ -569,7 +569,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	/**
-	 * @see STextJavaValidator#checkUnresolvableProxies(Statechart)
+	 * @see STextValidator#checkUnresolvableProxies(Statechart)
 	 */
 	@Test
 	public void checkUnresolvableProxies() {
@@ -577,7 +577,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	/**
-	 * @see STextJavaValidator#checkcheckSyntaxErrors(Statechart)
+	 * @see STextValidator#checkcheckSyntaxErrors(Statechart)
 	 */
 	@Test
 	public void checkSyntaxErrors() {
@@ -626,16 +626,16 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		EObject model = super.parseExpression(decl, InternalScope.class.getSimpleName());
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertDiagnosticsCount(1);
-		result.assertWarningContains(String.format(STextJavaValidator.DECLARATION_WITH_READONLY, "readonly", "const"));
+		result.assertWarningContains(String.format(STextValidator.DECLARATION_WITH_READONLY, "readonly", "const"));
 	}
 
 	/**
-	 * checks that each @Check method of {@link STextJavaValidator} has a @Test
+	 * checks that each @Check method of {@link STextValidator} has a @Test
 	 * method in this class with the same name
 	 */
 	@Test
 	public void testAllChecksHaveTests() throws Exception {
-		checkAvailable.assertAllChecksHaveTests(STextJavaValidator.class, this.getClass());
+		checkAvailable.assertAllChecksHaveTests(STextValidator.class, this.getClass());
 	}
 
 	@Test
@@ -651,6 +651,21 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 		assertIssueCount(diagnostics, 1);
 		assertWarning(diagnostics, ENTRY_UNUSED);
+	}
+	
+	@Test
+	public void checkNotRaisedOutEvent() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "NeverRaisedOutEvent.sct");
+		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
+	
+		// used as transition trigger
+		assertWarning(diagnostics, String.format(OUT_EVENT_NEVER_RAISED, "B"));
+		
+		// used inside reaction guard
+		assertWarning(diagnostics, String.format(OUT_EVENT_NEVER_RAISED, "A"));
+		assertWarning(diagnostics, String.format(OUT_EVENT_NEVER_RAISED, "X.C"));
+		
+		assertIssueCount(diagnostics, 3);
 	}
 
 	@Test
@@ -752,7 +767,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 			}
 		}
 
-		assertIssueCount(diagnostics, 4);
+		assertIssueCount(diagnostics, 5);
 		assertError(diagnostics, TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT);
 		assertError(diagnostics, REGION_UNBOUND_DEFAULT_ENTRY_POINT);
 
@@ -839,8 +854,8 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 				.loadStatechart(VALIDATION_TESTMODEL_DIR + "ConstWithVariable.sct");
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
 		assertIssueCount(diagnostics, 3); //
-		assertError(diagnostics, ExpressionsJavaValidator.REFERENCE_TO_VARIABLE);
-		assertError(diagnostics, ExpressionsJavaValidator.CONST_MUST_HAVE_VALUE_MSG);
+		assertError(diagnostics, ExpressionsValidator.REFERENCE_TO_VARIABLE);
+		assertError(diagnostics, ExpressionsValidator.CONST_MUST_HAVE_VALUE_MSG);
 	}
 
 	@Test
@@ -1071,7 +1086,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 				validator.validate(element, diagnostics, new HashMap<>());
 			}
 		}
-		assertIssueCount(diagnostics, 8);
+		assertIssueCount(diagnostics, 10);
 	}
 
 	@Test
@@ -1114,6 +1129,19 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 			}
 		}
 		assertIssueCount(diagnostics, 4);
+	}
+	
+	@Test 
+	public void checkDefaultAndElseIsNotUsedOnRegularState() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "DefaultAndElseOnRegularState.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof RegularState) {
+				validator.validate(element, diagnostics, new HashMap<>());
+			}
+		}
+		assertIssueCount(diagnostics, 2);	
 	}
 
 }

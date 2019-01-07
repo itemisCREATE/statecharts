@@ -3,7 +3,6 @@ package org.yakindu.scr.childfirstorthogonalreactions;
 import org.yakindu.scr.IStatemachine;
 
 public interface IChildFirstOrthogonalReactionsStatemachine extends IStatemachine {
-
 	public interface SCInterface {
 	
 		public long getA_local();

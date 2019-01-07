@@ -227,13 +227,22 @@ public interface StextPackage extends EPackage {
 	int STATECHART_SPECIFICATION__ANNOTATIONS = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATECHART_SPECIFICATION__ANNOTATION_INFO = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Statechart Specification</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART_SPECIFICATION_FEATURE_COUNT = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 1;
+	int STATECHART_SPECIFICATION_FEATURE_COUNT = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.StateSpecificationImpl <em>State Specification</em>}' class.
@@ -630,15 +639,6 @@ public interface StextPackage extends EPackage {
 	int EVENT_DEFINITION__ID = TypesPackage.EVENT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_DEFINITION__META_FEATURES = TypesPackage.EVENT__META_FEATURES;
-
-	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -728,15 +728,6 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_DEFINITION__ID = TypesPackage.PROPERTY__ID;
-
-	/**
-	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_DEFINITION__META_FEATURES = TypesPackage.PROPERTY__META_FEATURES;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -846,15 +837,6 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION_DEFINITION__ID = TypesPackage.OPERATION__ID;
-
-	/**
-	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_DEFINITION__META_FEATURES = TypesPackage.OPERATION__META_FEATURES;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -993,22 +975,13 @@ public interface StextPackage extends EPackage {
 	int TYPE_ALIAS_DEFINITION__SUPER_TYPES = TypesPackage.TYPE_ALIAS__SUPER_TYPES;
 
 	/**
-	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_ALIAS_DEFINITION__META_FEATURES = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS_DEFINITION__STATIC = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 1;
+	int TYPE_ALIAS_DEFINITION__STATIC = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Type Alias Definition</em>' class.
@@ -1017,7 +990,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS_DEFINITION_FEATURE_COUNT = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 2;
+	int TYPE_ALIAS_DEFINITION_FEATURE_COUNT = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.LocalReactionImpl <em>Local Reaction</em>}' class.
@@ -1731,17 +1704,6 @@ public interface StextPackage extends EPackage {
 	EClass getStatechartSpecification();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.stext.stext.StatechartSpecification#getAnnotations <em>Annotations</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Annotations</em>'.
-	 * @see org.yakindu.sct.model.stext.stext.StatechartSpecification#getAnnotations()
-	 * @see #getStatechartSpecification()
-	 * @generated
-	 */
-	EReference getStatechartSpecification_Annotations();
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.StateSpecification <em>State Specification</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2351,14 +2313,6 @@ public interface StextPackage extends EPackage {
 		 * @generated
 		 */
 		EClass STATECHART_SPECIFICATION = eINSTANCE.getStatechartSpecification();
-
-		/**
-		 * The meta object literal for the '<em><b>Annotations</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference STATECHART_SPECIFICATION__ANNOTATIONS = eINSTANCE.getStatechartSpecification_Annotations();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.StateSpecificationImpl <em>State Specification</em>}' class.

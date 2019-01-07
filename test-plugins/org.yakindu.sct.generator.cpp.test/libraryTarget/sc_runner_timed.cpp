@@ -22,6 +22,7 @@ TimedSctUnitRunner::TimedSctUnitRunner(
 {
 	if(!event_driven) {
 		SctTimer runCycle(
+			0,
 			cycle_period,
 			true,
 			0,
@@ -58,8 +59,7 @@ void TimedSctUnitRunner::proceed_time(sc_integer time_ms)
 				if(next.is_runcycle) {
 					statemachine->runCycle();
 				} else {
-					TimedStatemachineInterface * tsi = dynamic_cast<TimedStatemachineInterface*>(statemachine);
-					tsi->raiseTimeEvent(next.pt_evid);
+					next.tsi->raiseTimeEvent(next.pt_evid);
 				}
 				processed_timer = true;
 			}
@@ -94,28 +94,27 @@ void TimedSctUnitRunner::proceed_cycles(sc_integer cycles)
 		
 		if(next.is_runcycle) {
 			statemachine->runCycle();
-			elapsed_cycles++;
+			++elapsed_cycles;
 		} else {
-			TimedStatemachineInterface * tsi = dynamic_cast<TimedStatemachineInterface*>(statemachine);
-			tsi->raiseTimeEvent(next.pt_evid);
+			next.tsi->raiseTimeEvent(next.pt_evid);
 		}
 	}
 }
 void TimedSctUnitRunner::setTimer(TimedStatemachineInterface* statemachine, sc_eventid event, sc_integer time_ms, sc_boolean isPeriodic)
 {
-	SctTimer timer(time_ms, isPeriodic, event, 0, false);
+	SctTimer timer(statemachine, time_ms, isPeriodic, event, 0, false);
 	insert_timer(timer);
 }
 
 void TimedSctUnitRunner::unsetTimer(TimedStatemachineInterface* statemachine, sc_eventid event)
 {
 	std::list<SctTimer>::iterator i_timer = timer_queue.begin();
-	while(i_timer != timer_queue.end()) {
+	while(i_timer != timer_queue.end() && i_timer->tsi == statemachine) {
 		if(i_timer->pt_evid == event) {
 			timer_queue.erase(i_timer);
 			return;
 		}
-		i_timer++;
+		++i_timer;
 	}
 }
 
@@ -140,7 +139,7 @@ void TimedSctUnitRunner::insert_timer(SctTimer timer)
 	
 	
 	/* Or we put it before some other timer that needs to be raised after this one */
-	for(i_timer = timer_queue.begin(); i_timer != timer_queue.end(); i_timer++) {
+	for(i_timer = timer_queue.begin(); i_timer != timer_queue.end(); ++i_timer) {
 		if(timer.compare(&(*i_timer)) < 0) {
 			timer_queue.insert(i_timer, timer);
 			return;
@@ -152,12 +151,14 @@ void TimedSctUnitRunner::insert_timer(SctTimer timer)
 }
 
 TimedSctUnitRunner::SctTimer::SctTimer(
+		TimedStatemachineInterface * tsi,
 		sc_integer time_ms,
 		bool periodic,
 		sc_eventid evid,
 		sc_integer priority,
 		sc_boolean is_runcycle
 		) :
+		tsi(tsi),
 		rel_time_ms(time_ms),
 		abs_time_ms(0),
 		periodic(periodic),

@@ -3,7 +3,6 @@ package org.yakindu.scr.typealias;
 import org.yakindu.scr.IStatemachine;
 
 public interface ITypeAliasStatemachine extends IStatemachine {
-
 	public interface SCInterface {
 	
 		public void raiseMyEvent();

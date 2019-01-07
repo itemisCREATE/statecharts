@@ -117,11 +117,11 @@ class CppNaming extends Naming {
 		«IF type.name != 'void'»«IF const»static const «ENDIF»«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
 	'''
 
-	def protected signature(OperationDefinition it) '''
+	def public signature(OperationDefinition it) '''
 	«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»(«FOR parameter : parameters SEPARATOR ', '»«IF parameter.isVarArgs»...«ELSE»«parameter.typeSpecifier.
 		targetLanguageName» «parameter.identifier»«ENDIF»«ENDFOR»)'''
 
-	def protected OCB_InterfaceSetterDeclaration(StatechartScope scope, boolean fqn) '''
+	def public OCB_InterfaceSetterDeclaration(StatechartScope scope, boolean fqn) '''
 	void «IF fqn»«scope.flow.module»::«ENDIF»set«scope.interfaceOCBName»(«scope.interfaceOCBName»* operationCallback)'''
 
 	def protected identifier(Parameter parameter) {
@@ -230,6 +230,10 @@ class CppNaming extends Naming {
 	
 	override isFinalFctID(ExecutionFlow it) {
 		IS_FINAL
+	}
+	
+	def numTimeEventsFctID(ExecutionFlow it) {
+		"getNumberOfParallelTimeEvents"
 	}
 
 	override dispatch access(OperationDefinition it) {

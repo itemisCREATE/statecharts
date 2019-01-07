@@ -1,7 +1,7 @@
 package org.yakindu.scr.nullcheck;
 
-public class NullCheckStatemachine implements INullCheckStatemachine {
 
+public class NullCheckStatemachine implements INullCheckStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {
@@ -13,6 +13,7 @@ public class NullCheckStatemachine implements INullCheckStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	public NullCheckStatemachine() {
 	}
@@ -29,11 +30,31 @@ public class NullCheckStatemachine implements INullCheckStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_A:
+				main_region_A_react(true);
+				break;
+			case main_region_B:
+				main_region_B_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -128,7 +149,7 @@ public class NullCheckStatemachine implements INullCheckStatemachine {
 		enterSequence_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -136,7 +157,7 @@ public class NullCheckStatemachine implements INullCheckStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (null==null) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
@@ -145,8 +166,6 @@ public class NullCheckStatemachine implements INullCheckStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -154,32 +173,11 @@ public class NullCheckStatemachine implements INullCheckStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
-				main_region_A_react(true);
-				break;
-			case main_region_B:
-				main_region_B_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

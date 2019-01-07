@@ -30,7 +30,14 @@ public class CompileGTestCommand {
 	private String program;
 	private String makefileDir;
 	private String mainLib;
-
+	private boolean wPedantic = false;
+	private boolean wAll = false;
+	private boolean wExtra = false;
+	private boolean wError = false;
+	private boolean wConversion = false;
+	private boolean wnoUnusedParameter = false;
+	private boolean wnoUnusedFunction = false;
+	
 	public CompileGTestCommand directory(String dir) {
 		this.dir = dir;
 		return this;
@@ -38,6 +45,41 @@ public class CompileGTestCommand {
 
 	public CompileGTestCommand includes(List<String> includes) {
 		this.includes = includes;
+		return this;
+	}
+	
+	public CompileGTestCommand wPedantic() {
+		this.wPedantic = true;
+		return this;
+	}
+		
+	public CompileGTestCommand wAll() {
+		this.wAll = true;
+		return this;
+	}
+	
+	public CompileGTestCommand wExtra() {
+		this.wExtra = true;
+		return this;
+	}
+	
+	public CompileGTestCommand wError() {
+		this.wError = true;
+		return this;
+	}
+	
+	public CompileGTestCommand wConversion() {
+		this.wConversion = true;
+		return this;
+	}
+	
+	public CompileGTestCommand wnoUnusedParameter() {
+		this.wnoUnusedParameter = true;
+		return this;
+	}
+	
+	public CompileGTestCommand wnoUnusedFunction() {
+		this.wnoUnusedFunction = true;
 		return this;
 	}
 
@@ -66,7 +108,7 @@ public class CompileGTestCommand {
 		return this;
 	}
 
-	public List<String> build() {
+	public List<String> build(String...compilerFlags) {
 		List<String> command = new ArrayList<>();
 		if (makefileDir != null) {
 			try {
@@ -84,6 +126,33 @@ public class CompileGTestCommand {
 		command.add("-o");
 		command.add(getFileName(program));
 		command.add("-O1");
+		if(wnoUnusedParameter) {
+			command.add("-Wno-unused-parameter");
+		}	
+		if(wnoUnusedFunction) {
+			command.add("-Wno-unused-function");
+		}
+		if(wPedantic) {
+			command.add("-pedantic");
+			command.add("-pedantic-errors");
+		}
+		if(wAll) {
+			command.add("-Wall");
+		}
+		if(wExtra) {
+			command.add("-Wextra");
+		}
+		if(wError) {
+			command.add("-Werror");
+			
+		}
+		if(wConversion) {
+			command.add("-Wconversion");
+		}
+		
+		for(String compilerFlag:compilerFlags) {
+			command.add(compilerFlag);
+		}
 		if (dir != null)
 			command.add("-I" + dir + "/include");
 		for (String include : includes) {

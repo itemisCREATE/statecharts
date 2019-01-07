@@ -1,7 +1,7 @@
 package org.yakindu.scr.statechartentryandexitactions;
 
-public class StatechartEntryAndExitActionsStatemachine implements IStatechartEntryAndExitActionsStatemachine {
 
+public class StatechartEntryAndExitActionsStatemachine implements IStatechartEntryAndExitActionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private long x;
@@ -49,6 +49,7 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 	
 	private int nextStateIndex;
 	
+	
 	public StatechartEntryAndExitActionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -70,7 +71,8 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		sCInterface.setX(2);
 		
@@ -81,6 +83,22 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 		enterSequence_StatechartEntryAndExitActions_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case statechartEntryAndExitActions_main_region_A:
+				statechartEntryAndExitActions_main_region_A_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_StatechartEntryAndExitActions_main_region();
 		sCInterface.setX(8);
@@ -191,7 +209,7 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 		enterSequence_StatechartEntryAndExitActions_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -199,29 +217,11 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case statechartEntryAndExitActions_main_region_A:
-				statechartEntryAndExitActions_main_region_A_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

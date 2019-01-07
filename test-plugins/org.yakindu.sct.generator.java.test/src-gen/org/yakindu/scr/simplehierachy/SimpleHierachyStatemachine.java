@@ -1,7 +1,7 @@
 package org.yakindu.scr.simplehierachy;
 
-public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 
+public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean event1;
@@ -30,6 +30,7 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public SimpleHierachyStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -46,11 +47,31 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_A:
+				main_region_A_react(true);
+				break;
+			case main_region_B_subregion1_B1:
+				main_region_B_subregion1_B1_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -183,7 +204,7 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 		enterSequence_main_region_B_subregion1_B1_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -191,7 +212,7 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.event1) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
@@ -200,8 +221,6 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -209,11 +228,9 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -226,28 +243,7 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
-				main_region_A_react(true);
-				break;
-			case main_region_B_subregion1_B1:
-				main_region_B_subregion1_B1_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

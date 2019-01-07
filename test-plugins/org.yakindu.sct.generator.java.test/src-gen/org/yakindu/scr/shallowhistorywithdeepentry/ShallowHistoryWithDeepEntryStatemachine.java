@@ -1,7 +1,7 @@
 package org.yakindu.scr.shallowhistorywithdeepentry;
 
-public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryWithDeepEntryStatemachine {
 
+public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryWithDeepEntryStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean toZ;
@@ -54,6 +54,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 	
 	private int nextStateIndex;
 	
+	
 	public ShallowHistoryWithDeepEntryStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -73,11 +74,34 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_Y:
+				main_region_Y_react(true);
+				break;
+			case main_region_Z__region0_A:
+				main_region_Z__region0_A_react(true);
+				break;
+			case main_region_Z__region0_B__region0_C:
+				main_region_Z__region0_B__region0_C_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -303,7 +327,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		enterSequence_main_region_Z__region0_B__region0_C_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -311,7 +335,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.toZ) {
 					exitSequence_main_region_Y();
 					enterSequence_main_region_Z_default();
@@ -326,8 +350,6 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -335,7 +357,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.toY) {
 					exitSequence_main_region_Z();
 					enterSequence_main_region_Y_default();
@@ -343,8 +365,6 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -363,8 +383,6 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -375,8 +393,6 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 			if (main_region_Z_react(try_transition)==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -394,31 +410,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_Y:
-				main_region_Y_react(true);
-				break;
-			case main_region_Z__region0_A:
-				main_region_Z__region0_A_react(true);
-				break;
-			case main_region_Z__region0_B__region0_C:
-				main_region_Z__region0_B__region0_C_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

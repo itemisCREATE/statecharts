@@ -1,7 +1,7 @@
 package org.yakindu.scr.readonlyvariable;
 
-public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachine {
 
+public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private long myInt;
@@ -106,6 +106,7 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 	
 	private int nextStateIndex;
 	
+	
 	public ReadOnlyVariableStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 		sCIA = new SCIAImpl();
@@ -138,11 +139,31 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_StateB:
+				main_region_StateB_react(true);
+				break;
+			case main_region_StateA:
+				main_region_StateA_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -281,7 +302,7 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 		enterSequence_main_region_StateA_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -289,11 +310,9 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -302,33 +321,12 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_StateA();
 				enterSequence_main_region_StateB_default();
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_StateB:
-				main_region_StateB_react(true);
-				break;
-			case main_region_StateA:
-				main_region_StateA_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }
