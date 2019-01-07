@@ -126,12 +126,6 @@ public class CompileGTestCommand {
 		command.add("-o");
 		command.add(getFileName(program));
 		command.add("-O1");
-		if(wnoUnusedParameter) {
-			command.add("-Wno-unused-parameter");
-		}	
-		if(wnoUnusedFunction) {
-			command.add("-Wno-unused-function");
-		}
 		if(wPedantic) {
 			command.add("-pedantic");
 			command.add("-pedantic-errors");
@@ -148,6 +142,12 @@ public class CompileGTestCommand {
 		}
 		if(wConversion) {
 			command.add("-Wconversion");
+		}
+		if(wnoUnusedParameter) {
+			command.add("-Wno-unused-parameter");
+		}	
+		if(wnoUnusedFunction) {
+			command.add("-Wno-unused-function");
 		}
 		
 		for(String compilerFlag:compilerFlags) {
