@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 committers of YAKINDU and others.
+ * Copyright (c) 2017-2018 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -21,12 +21,15 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
+import org.yakindu.sct.generator.c.types.CLiterals
 
 /**
  * @author René Beckmann - Initial contribution and API
+ * @author axel terfloth
  */
 class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 	@Inject extension EventNaming eventNaming
+	@Inject extension CLiterals
 	
 	override additionalFunctions(ExecutionFlow it) {
 		if(!hasLocalEvents) return ''''''
@@ -46,11 +49,11 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 	
 	override protected initialisationList(ExecutionFlow it) {
 		'''
-			«IF timed»«timerInstance»(«NULL_STRING»),«ENDIF»
+			«IF timed»«timerInstance»(«NULL_LITERAL»),«ENDIF»
 			«IF entry.tracingUsed»«tracingInstance»(0),«ENDIF»
 			«STATEVECTOR_POS»(0)«FOR s : getInterfaces»,
 			«s.instance»(this)«IF s.hasOperations && !entry.useStaticOPC»,
-			«s.OCB_Instance»(«NULL_STRING»)«ENDIF»«ENDFOR»
+			«s.OCB_Instance»(«NULL_LITERAL»)«ENDIF»«ENDFOR»
 		'''
 	}
 	

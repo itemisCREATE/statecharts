@@ -96,7 +96,7 @@ class CheckMock{
 	}
 
 	sc_boolean checkDefault(){
-		sc_boolean defaultValue = null;
+		sc_boolean defaultValue = false;
 		return (defaultValue);
 	}
 
@@ -150,7 +150,7 @@ class NextMock{
 	}
 
 	sc_integer nextDefault(){
-		sc_integer defaultValue = null;
+		sc_integer defaultValue = 0;
 		return (defaultValue);
 	}
 
