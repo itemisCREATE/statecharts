@@ -90,7 +90,7 @@ PrimitiveValueExpression returns types::Expression:
 
 
 FeatureCall returns types::Expression:
-	ElementReferenceExpression ((({FeatureCall.owner=current} '.') | ({MetaCall.owner=current} '::')) feature=[types::Declaration]
+	ElementReferenceExpression ((({FeatureCall.owner=current} '.') | ({MetaCall.owner=current} '.@')) feature=[types::Declaration]
 	(=> operationCall?= '('(arguments+=Argument (',' arguments+=Argument)*)?')'
 		|
 	=> (arrayAccess ?= '[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression ']')* 
