@@ -1966,15 +1966,6 @@ public interface SexecPackage extends EPackage {
 	int METHOD__ID = TypesPackage.OPERATION__ID;
 
 	/**
-	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int METHOD__TYPE_PARAMETERS = TypesPackage.OPERATION__TYPE_PARAMETERS;
-
-	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1991,6 +1982,15 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int METHOD__TYPE_SPECIFIER = TypesPackage.OPERATION__TYPE_SPECIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD__TYPE_PARAMETERS = TypesPackage.OPERATION__TYPE_PARAMETERS;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.

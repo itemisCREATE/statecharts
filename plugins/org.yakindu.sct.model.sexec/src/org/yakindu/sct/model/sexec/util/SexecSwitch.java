@@ -21,6 +21,7 @@ import org.yakindu.base.types.Event;
 import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypedDeclaration;
 import org.yakindu.base.types.TypedElement;
 import org.yakindu.sct.model.sexec.*;
 import org.yakindu.sct.model.sexec.Call;
@@ -258,8 +259,9 @@ public class SexecSwitch<T> extends Switch<T> {
 				Method method = (Method)theEObject;
 				T result = caseMethod(method);
 				if (result == null) result = caseOperation(method);
-				if (result == null) result = caseDeclaration(method);
+				if (result == null) result = caseTypedDeclaration(method);
 				if (result == null) result = caseGenericElement(method);
+				if (result == null) result = caseDeclaration(method);
 				if (result == null) result = caseTypedElement(method);
 				if (result == null) result = caseNamedElement(method);
 				if (result == null) result = caseAnnotatableElement(method);
@@ -276,6 +278,7 @@ public class SexecSwitch<T> extends Switch<T> {
 				TimeEvent timeEvent = (TimeEvent)theEObject;
 				T result = caseTimeEvent(timeEvent);
 				if (result == null) result = caseEvent(timeEvent);
+				if (result == null) result = caseTypedDeclaration(timeEvent);
 				if (result == null) result = caseDeclaration(timeEvent);
 				if (result == null) result = caseTypedElement(timeEvent);
 				if (result == null) result = caseNamedElement(timeEvent);
@@ -692,6 +695,21 @@ public class SexecSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypedElement(TypedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Typed Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Typed Declaration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypedDeclaration(TypedDeclaration object) {
 		return null;
 	}
 
