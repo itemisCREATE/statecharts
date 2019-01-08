@@ -42,7 +42,7 @@ import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenEventCode;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenExpressionCode;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineImplementation;
 import org.yakindu.sct.generator.cpp.files.StatemachineImplementation;
-import org.yakindu.sct.generator.cpp.providers.IDeclarationProvider;
+import org.yakindu.sct.generator.cpp.providers.ISourceProvider;
 import org.yakindu.sct.generator.cpp.providers.OCBDestructorProvider;
 import org.yakindu.sct.generator.cpp.providers.StatemachineClassDeclaration;
 import org.yakindu.sct.generator.cpp.providers.StatevectorDefineProvider;
@@ -75,12 +75,12 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 	
 	protected AnnotationExtensions annotations = new AnnotationExtensions();
 	protected Multibinder<IncludeProvider> includeBinder;
-	protected Multibinder<IDeclarationProvider> declarationProviderBinder;
+	protected Multibinder<ISourceProvider> declarationProviderBinder;
 	
 	@Override
 	public void configure(GeneratorEntry entry, Binder binder) {
 		includeBinder = Multibinder.newSetBinder(binder, IncludeProvider.class);
-		declarationProviderBinder = Multibinder.newSetBinder(binder, IDeclarationProvider.class);
+		declarationProviderBinder = Multibinder.newSetBinder(binder, ISourceProvider.class);
 
 		binder.bind(IModelSequencer.class).to(ModelSequencer.class);
 		binder.bind(BehaviorMapping.class).to(org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping.class);
@@ -117,7 +117,7 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		includeBinder.addBinding().to(provider);
 	}
 	
-	protected void addDeclarationProvider(Binder binder, Class<? extends IDeclarationProvider> provider) {
+	protected void addDeclarationProvider(Binder binder, Class<? extends ISourceProvider> provider) {
 		declarationProviderBinder.addBinding().to(provider);
 	}
 	

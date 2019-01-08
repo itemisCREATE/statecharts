@@ -18,9 +18,8 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InternalScope
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.sct.generator.cpp.providers.IDeclarationProvider
 
-class StatemachineClassDeclaration implements IDeclarationProvider {
+class StatemachineClassDeclaration implements ISourceProvider {
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
 	@Inject protected extension SgraphExtensions

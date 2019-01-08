@@ -5,7 +5,7 @@ import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.model.sexec.ExecutionFlow
 
-class StatevectorDefineProvider implements IDeclarationProvider {
+class StatevectorDefineProvider implements ISourceProvider {
 	@Inject protected extension CppNaming
 	
 	override get(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {

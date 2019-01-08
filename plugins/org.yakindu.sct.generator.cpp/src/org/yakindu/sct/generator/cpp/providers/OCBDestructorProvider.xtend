@@ -14,7 +14,7 @@ import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.StatechartScope
 
-class OCBDestructorProvider implements IDeclarationProvider {
+class OCBDestructorProvider implements ISourceProvider {
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
 	@Inject protected extension SgraphExtensions

@@ -16,7 +16,6 @@ import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
-import org.yakindu.sct.generator.cpp.providers.IDeclarationProvider
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
@@ -24,11 +23,12 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
 
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
+import org.yakindu.sct.generator.cpp.providers.ISourceProvider
 
 /**
  * @author René Beckmann - Initial contribution and API
  */
-class StatechartEvents implements IDeclarationProvider {
+class StatechartEvents implements ISourceProvider {
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
