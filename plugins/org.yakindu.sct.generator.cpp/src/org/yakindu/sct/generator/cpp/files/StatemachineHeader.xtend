@@ -18,19 +18,19 @@ import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
+import org.yakindu.sct.generator.cpp.providers.IDeclarationProvider
 import org.yakindu.sct.generator.cpp.submodules.InterfaceFunctions
-import org.yakindu.sct.generator.cpp.submodules.StatemachineClassDeclaration
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.model.stext.stext.StatechartScope
 
 class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineHeader {
 
 	@Inject protected Set<IncludeProvider> includeProviders
+	@Inject protected Set<IDeclarationProvider> declarationProviders
 
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
@@ -42,7 +42,6 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 	@Inject protected extension ExpressionsChecker
 	
 	@Inject protected extension InterfaceFunctions
-	@Inject protected extension StatemachineClassDeclaration
 
 	protected GeneratorEntry entry
 	
@@ -67,20 +66,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 				«ENDFOR»
 			«ENDIF»
 			
-			«preStatechartDeclarations»
-			
-			/*! Define indices of states in the StateConfVector */
-			«FOR state : states»
-				#define «state.stateVectorDefine» «state.stateVector.offset»
-			«ENDFOR»
-			
-			«generateClass(artifactConfigs).generate»
-			
-			«IF !entry.useStaticOPC»
-				«scopes.filter(StatechartScope).map[createInlineOCBDestructor].filter[!nullOrEmpty].join("\n")»
-			«ENDIF»
-			
-			«postStatechartDeclarations»
+			«declarations(flow, artifactConfigs)»
 			
 			«IF !namespace.nullOrEmpty»
 				«FOR ns : namespace»
@@ -89,6 +75,14 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			«ENDIF»
 			
 			#endif /* «module().define»_H_ */
+		'''
+	}
+	
+	def declarations(ExecutionFlow flow, IGenArtifactConfigurations config) {
+		'''
+		«FOR decl : declarationProviders»
+		«decl.get(flow, config)»
+		«ENDFOR»
 		'''
 	}
 	
@@ -101,8 +95,4 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			«ENDFOR»
 		'''
 	}
-	
-	def preStatechartDeclarations(ExecutionFlow it) ''''''
-
-	def postStatechartDeclarations(ExecutionFlow it) ''''''
 }

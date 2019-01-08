@@ -8,13 +8,15 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.generator.cpp.eventdriven
+package org.yakindu.sct.generator.cpp.providers.eventdriven
 
 import com.google.inject.Inject
 import org.yakindu.base.types.Direction
+import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
+import org.yakindu.sct.generator.cpp.providers.IDeclarationProvider
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
@@ -26,37 +28,41 @@ import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
 /**
  * @author René Beckmann - Initial contribution and API
  */
-class StatechartEvents {
+class StatechartEvents implements IDeclarationProvider {
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension INamingService
 	
-	@Inject extension EventNaming eventNaming
+	@Inject extension org.yakindu.sct.generator.cpp.eventdriven.EventNaming eventNaming
 	
-	protected GeneratorEntry entry
+	@Inject protected GeneratorEntry entry
 	protected ExecutionFlow flow
+	
+	override get(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
+		content
+	}
 	
 	def content(ExecutionFlow it) {
 		if(!hasLocalEvents) return ''''''
 		'''
-		#ifndef «generateHeaderDefineGuard»
-		#define «generateHeaderDefineGuard»
-		#ifndef «invalidEvent»
-		#define «invalidEvent» 0
-		#endif
-		
-		namespace «eventNamespaceName»
-		{
-		«generateEventsEnum»
-		
-		«generateEventBaseClasses»
-		
-		«generateEvents»
-		
-		}
-		#endif /* «generateHeaderDefineGuard» */
+			#ifndef «generateHeaderDefineGuard»
+			#define «generateHeaderDefineGuard»
+			#ifndef «invalidEvent»
+			#define «invalidEvent» 0
+			#endif
+			
+			namespace «eventNamespaceName»
+			{
+			«generateEventsEnum»
+			
+			«generateEventBaseClasses»
+			
+			«generateEvents»
+			
+			}
+			#endif /* «generateHeaderDefineGuard» */
 		'''
 	}
 	
@@ -72,12 +78,12 @@ class StatechartEvents {
 		}
 		
 		'''
-		typedef enum  {
-			«invalidEventEnumName(it)» = «invalidEvent»,
-			«FOR e : enumMembers SEPARATOR ","»
-				«e»
-			«ENDFOR»
-		} «eventEnumName»;
+			typedef enum  {
+				«invalidEventEnumName(it)» = «invalidEvent»,
+				«FOR e : enumMembers SEPARATOR ","»
+					«e»
+				«ENDFOR»
+			} «eventEnumName»;
 		'''
 	}
 	
@@ -87,78 +93,78 @@ class StatechartEvents {
 	
 	def generateEventBaseClasses(ExecutionFlow it) {
 		'''
-		class «SCT_EVENT»
-		{
-			public:
-				«SCT_EVENT»(«eventEnumName» name) : name(name){}
-				virtual ~«SCT_EVENT»(){}
-				const «eventEnumName» name;
-				
-		};
-				
-		template <typename T>
-		class «TYPED_SCT_EVENT» : public «SCT_EVENT»
-		{
-			public:
-				«TYPED_SCT_EVENT»(«eventEnumName» name, T value) :
-					«SCT_EVENT»(name),
-					value(value)
-					{}
-				virtual ~«TYPED_SCT_EVENT»(){}
-				const T value;
-		};
+			class «SCT_EVENT»
+			{
+				public:
+					«SCT_EVENT»(«eventEnumName» name) : name(name){}
+					virtual ~«SCT_EVENT»(){}
+					const «eventEnumName» name;
+					
+			};
+					
+			template <typename T>
+			class «TYPED_SCT_EVENT» : public «SCT_EVENT»
+			{
+				public:
+					«TYPED_SCT_EVENT»(«eventEnumName» name, T value) :
+						«SCT_EVENT»(name),
+						value(value)
+						{}
+					virtual ~«TYPED_SCT_EVENT»(){}
+					const T value;
+			};
 		'''
 	}
 	
 	def generateEvents(ExecutionFlow it) {
 		'''
-		«FOR s : scopes»
-			«FOR e : s.declarations.filter(EventDefinition).filter[direction == Direction::LOCAL]»
-				«generateEventClass(e, it)»
+			«FOR s : scopes»
+				«FOR e : s.declarations.filter(EventDefinition).filter[direction == Direction::LOCAL]»
+					«generateEventClass(e, it)»
+				«ENDFOR»
 			«ENDFOR»
-		«ENDFOR»
 		'''
 	}
 	
 	def generateEventClass(EventDefinition it, ExecutionFlow flow) {
 		'''
-		«IF hasValue»
-		«generateTypedEventClass(flow)»
-		«ELSE»
-		«generateNormalEventClass(flow)»
-		«ENDIF»
+			«IF hasValue»
+				«generateTypedEventClass(flow)»
+			«ELSE»
+				«generateNormalEventClass(flow)»
+			«ENDIF»
 		'''
 	}
 	
 	def generateTypedEventClass(EventDefinition it, ExecutionFlow flow) {
 		val type = typeSpecifier.targetLanguageName
 		'''
-		class «eventClassName» : public «TYPED_SCT_EVENT»<«type»>
-		{
-			public:
-				«eventClassName»(«flow.eventEnumName» name, «type» value) :
-					«TYPED_SCT_EVENT»(name, value) {};
-		};
+			class «eventClassName» : public «TYPED_SCT_EVENT»<«type»>
+			{
+				public:
+					«eventClassName»(«flow.eventEnumName» name, «type» value) :
+						«TYPED_SCT_EVENT»(name, value) {};
+			};
 		'''
 	}
 	
 	def generateNormalEventClass(EventDefinition it, ExecutionFlow flow) {
 		'''
-		class «eventClassName» : public «SCT_EVENT»
-		{
-			public:
-				«eventClassName»(«flow.eventEnumName» name) : «SCT_EVENT»(name){};
-		};
+			class «eventClassName» : public «SCT_EVENT»
+			{
+				public:
+					«eventClassName»(«flow.eventEnumName» name) : «SCT_EVENT»(name){};
+			};
 		'''
 	}
 	
 	def getBaseClass(EventDefinition it) {
 		'''
-		«IF hasValue»
-		«TYPED_SCT_EVENT»
-		«ELSE»
-		«SCT_EVENT»
-		«ENDIF»
+			«IF hasValue»
+				«TYPED_SCT_EVENT»
+			«ELSE»
+				«SCT_EVENT»
+			«ENDIF»
 		'''
 	}
 }

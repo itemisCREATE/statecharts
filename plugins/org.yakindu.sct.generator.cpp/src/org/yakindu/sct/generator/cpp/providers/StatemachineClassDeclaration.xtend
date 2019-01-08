@@ -1,4 +1,4 @@
-package org.yakindu.sct.generator.cpp.submodules
+package org.yakindu.sct.generator.cpp.providers
 
 import com.google.inject.Inject
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
@@ -18,8 +18,9 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InternalScope
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.sct.generator.cpp.providers.IDeclarationProvider
 
-class StatemachineClassDeclaration {
+class StatemachineClassDeclaration implements IDeclarationProvider {
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
 	@Inject protected extension SgraphExtensions
@@ -31,11 +32,15 @@ class StatemachineClassDeclaration {
 	
 	@Inject protected GeneratorEntry entry
 	
-	@Inject protected extension InternalFunctions
-	@Inject protected extension InterfaceFunctions
-	@Inject protected extension TimingFunctions
-	@Inject protected extension TracingFunctions
+	@Inject protected extension org.yakindu.sct.generator.cpp.submodules.InternalFunctions
+	@Inject protected extension org.yakindu.sct.generator.cpp.submodules.InterfaceFunctions
+	@Inject protected extension org.yakindu.sct.generator.cpp.submodules.TimingFunctions
+	@Inject protected extension org.yakindu.sct.generator.cpp.submodules.TracingFunctions
 	@Inject protected extension LifecycleFunctions
+	
+	override get(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
+		generateClass(it, artifactConfigs).generate
+	}
 	
 	def generateClass(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
 		val classDecl = new ClassDeclaration
@@ -64,25 +69,25 @@ class StatemachineClassDeclaration {
 			.constructorDeclaration()
 			.destructorDeclaration()
 			.publicMember('''
-				«statesEnumDecl»
+			«statesEnumDecl»
+			
+			static const «INT_TYPE» «statesCountConst» = «states.size»;
+			
+			«FOR s : it.scopes»«s.createPublicScope»«ENDFOR»
+			
+			«publicFunctionPrototypes»
+			
+			/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
+			«BOOL_TYPE» «stateActiveFctID»(«statesEnumType» state) const;
+			
+			«IF timed»
+				//! number of time events used by the state machine.
+				static const «INT_TYPE» «timeEventsCountConst» = «timeEvents.size»;
 				
-				static const «INT_TYPE» «statesCountConst» = «states.size»;
-				
-				«FOR s : it.scopes»«s.createPublicScope»«ENDFOR»
-				
-				«publicFunctionPrototypes»
-				
-				/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
-				«BOOL_TYPE» «stateActiveFctID»(«statesEnumType» state) const;
-				
-				«IF timed»
-					//! number of time events used by the state machine.
-					static const «INT_TYPE» «timeEventsCountConst» = «timeEvents.size»;
-					
-					//! number of time events that can be active at once.
-					static const «INT_TYPE» «timeEventsCountparallelConst» = «(it.sourceElement as Statechart).maxNumberOfParallelTimeEvents»;
-				«ENDIF»
-			''')
+				//! number of time events that can be active at once.
+				static const «INT_TYPE» «timeEventsCountparallelConst» = «(it.sourceElement as Statechart).maxNumberOfParallelTimeEvents»;
+			«ENDIF»
+		''')
 		
 	}
 	

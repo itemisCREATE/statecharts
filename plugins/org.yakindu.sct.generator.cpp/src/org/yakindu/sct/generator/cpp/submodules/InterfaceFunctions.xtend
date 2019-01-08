@@ -221,11 +221,4 @@ class InterfaceFunctions {
 	'''
 	
 	def dispatch functionPrototypes(Declaration it) ''''''
-	
-	def String createInlineOCBDestructor(StatechartScope it) {
-		if (hasOperations) {
-			return '''inline «flow.module»::«interfaceOCBName»::~«interfaceOCBName»() {}'''
-		}
-		return ""
-	}
 }
