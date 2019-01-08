@@ -56,4 +56,8 @@ class EventDrivenPredicate {
 	def boolean isQueued(EventDefinition it) {
 		isEventDriven && isLocalEvent
 	}
+	
+	def boolean needsEventNamespace(ExecutionFlow it) {
+		isEventDriven && flow.hasLocalEvents
+	}
 }

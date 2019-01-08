@@ -11,6 +11,8 @@
 package org.yakindu.sct.generator.cpp.files
 
 import com.google.inject.Inject
+import com.google.inject.name.Named
+import java.util.Set
 import org.yakindu.sct.generator.c.IContentTemplate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
@@ -27,6 +29,7 @@ import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.EventCode
 import org.yakindu.sct.generator.cpp.FlowCode
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
+import org.yakindu.sct.generator.cpp.providers.ISourceProvider
 import org.yakindu.sct.generator.cpp.submodules.InterfaceFunctions
 import org.yakindu.sct.generator.cpp.submodules.InternalFunctions
 import org.yakindu.sct.generator.cpp.submodules.TimingFunctions
@@ -42,6 +45,7 @@ import static org.eclipse.xtext.util.Strings.*
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 
 class StatemachineImplementation implements IContentTemplate {
+	@Inject @Named("Impl") protected Set<ISourceProvider> sourceProviders
 	
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
@@ -90,39 +94,10 @@ class StatemachineImplementation implements IContentTemplate {
 		«ENDFOR»
 		«ENDIF»
 		
-		«usingNamespaces»
+		«FOR sourceProvider : sourceProviders»
+		«sourceProvider.get(it, artifactConfigs)»
 		
-		«constructorDefinition»
-		
-		«destructorDefinition»
-		
-		«constantDefinitions»
-		
-		«init»
-		
-		«enter»
-		
-		«exit»
-		
-		«isActive»
-		
-		«isFinal»
-		
-		«runCycle»
-		
-		«clearInEventsFunction»
-		
-		«clearOutEventsFunction»
-
-		«timedStatemachineFunctions»
-
-		«isStateActive»
-		
-		«interfaceFunctions»
-		
-		«functionImplementations»
-		
-		«additionalFunctions»
+		«ENDFOR»
 		
 		«IF !namespace.nullOrEmpty»
 		«FOR ns : namespace»

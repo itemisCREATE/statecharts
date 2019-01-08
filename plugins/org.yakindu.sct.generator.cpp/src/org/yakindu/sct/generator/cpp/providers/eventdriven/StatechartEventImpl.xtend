@@ -1,59 +1,59 @@
-/**
- * Copyright (c) 2017 committers of YAKINDU and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     committers of YAKINDU - initial API and implementation
- */
-package org.yakindu.sct.generator.cpp.eventdriven
+package org.yakindu.sct.generator.cpp.providers.eventdriven
 
 import com.google.inject.Inject
 import org.yakindu.base.types.Direction
-import org.yakindu.sct.generator.cpp.files.StatemachineImplementation
+import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.cpp.CppExpressionsGenerator
+import org.yakindu.sct.generator.cpp.CppNaming
+import org.yakindu.sct.generator.cpp.EventCode
+import org.yakindu.sct.generator.cpp.FlowCode
+import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenPredicate
+import org.yakindu.sct.generator.cpp.eventdriven.EventNaming
+import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
+import org.yakindu.sct.generator.cpp.providers.ISourceProvider
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
+import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 
-import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
 
-/**
- * @author René Beckmann - Initial contribution and API
- */
-class EventDrivenStatemachineImplementation extends StatemachineImplementation {
+class StatechartEventImpl implements ISourceProvider {
+	@Inject protected extension EventDrivenPredicate
+	
+	@Inject protected extension CppNaming
+	@Inject protected extension SExecExtensions
+	@Inject protected extension SgraphExtensions
+	@Inject protected extension FlowCode
+	@Inject protected extension GenmodelEntriesExtension
+	@Inject protected extension ICodegenTypeSystemAccess
+	@Inject protected extension INamingService
+	@Inject protected extension CppExpressionsGenerator
+	@Inject protected extension StateVectorExtensions
+	@Inject protected extension EventCode
+	@Inject protected extension ExpressionsChecker
 	@Inject extension EventNaming eventNaming
 	
-	override additionalFunctions(ExecutionFlow it) {
-		if(!hasLocalEvents) return ''''''
+	override get(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
 		'''
+		«IF needsNextEventFunction»
 		«nextEventFunction»
 		
+		«ENDIF»
+		«IF needsDispatchEventFunction»
 		«generateInternalDispatchEventFunction»
 		
 		«generateInterfaceDispatchFunctions»
+		«ENDIF»
 		'''
 	}
-	
-	override protected usingNamespaces(ExecutionFlow it) {
-		if(!hasLocalEvents) return ''''''
-		'''using namespace «eventNamespaceName»;'''
-	}
-	
-	override protected initialisationList(ExecutionFlow it) {
-		'''
-			«IF timed»«timerInstance»(«NULL_STRING»),«ENDIF»
-			«IF entry.tracingUsed»«tracingInstance»(0),«ENDIF»
-			«STATEVECTOR_POS»(0)«FOR s : getInterfaces»,
-			«s.instance»(this)«IF s.hasOperations && !entry.useStaticOPC»,
-			«s.OCB_Instance»(«NULL_STRING»)«ENDIF»«ENDFOR»
-		'''
-	}
-
 	
 	def getNextEventFunction(ExecutionFlow it) {
 		val nE = "nextEvent"
@@ -140,4 +140,5 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 			}
 		'''
 	}
+	
 }

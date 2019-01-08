@@ -11,6 +11,7 @@
 package org.yakindu.sct.generator.cpp.files
 
 import com.google.inject.Inject
+import com.google.inject.name.Named
 import java.util.Set
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.IncludeProvider
@@ -18,6 +19,7 @@ import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
+import org.yakindu.sct.generator.cpp.providers.ISourceProvider
 import org.yakindu.sct.generator.cpp.submodules.InterfaceFunctions
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
@@ -25,12 +27,11 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.generator.cpp.providers.ISourceProvider
 
 class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineHeader {
 
 	@Inject protected Set<IncludeProvider> includeProviders
-	@Inject protected Set<ISourceProvider> declarationProviders
+	@Inject @Named("Header") protected Set<ISourceProvider> declarationProviders
 
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
