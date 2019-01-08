@@ -22,6 +22,7 @@ import org.yakindu.base.expressions.expressions.LogicalNotExpression
 import org.yakindu.base.expressions.expressions.LogicalOrExpression
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
 import org.yakindu.base.expressions.expressions.MultiplicativeOperator
+import org.yakindu.base.expressions.expressions.NullLiteral
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Event
@@ -35,6 +36,7 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.generator.c.submodules.EventCode
+import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
@@ -44,7 +46,6 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.generator.c.types.CLiterals
 
 /**
  * @author axel terfloth
@@ -151,6 +152,8 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 
 	/* Literals */
 	override dispatch CharSequence code(BoolLiteral it) '''«IF value»«TRUE_LITERAL»«ELSE»«FALSE_LITERAL»«ENDIF»'''
+	
+	override dispatch CharSequence code(NullLiteral it) '''«NULL_LITERAL»'''
 
 	// ensure we obtain an expression of type sc_boolean
 	def dispatch CharSequence sc_boolean_code(Expression it) '''«it.code» == «TRUE_LITERAL»'''
@@ -164,7 +167,6 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch CharSequence sc_boolean_code(LogicalNotExpression it) '''«operand.code» == «FALSE_LITERAL»'''
 
 	def dispatch CharSequence sc_boolean_code(LogicalRelationExpression it) {code}
-	
 	
 	
 	def CharSequence ternaryGuard(Expression it) '''(«it.code») ? «TRUE_LITERAL» : «FALSE_LITERAL»'''
