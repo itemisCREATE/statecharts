@@ -45,6 +45,32 @@ class LifecycleFunctions implements Init, Enter, RunCycle, IsActive, IsStateActi
 	
 	@Inject protected GeneratorEntry entry
 	
+	def IStatemachineFunctions() '''
+		/*
+		 * Functions inherited from StatemachineInterface
+		 */
+		virtual «IF entry.checkUnimplementedOCBs»sc_errorCode«ELSE»void«ENDIF» init();
+		
+		virtual void «ENTER»();
+		
+		virtual void «EXIT»();
+		
+		virtual void «RUN_CYCLE»();
+		
+		/*!
+		* Checks if the state machine is active (until 2.4.1 this method was used for states).
+		* A state machine is active if it has been entered. It is inactive if it has not been entered at all or if it has been exited.
+		*/
+		virtual sc_boolean «IS_ACTIVE»() const;
+		
+		
+		/*!
+		* Checks if all active states are final. 
+		* If there are no active states then the state machine is considered being inactive. In this case this method returns false.
+		*/
+		virtual sc_boolean «IS_FINAL»() const;
+	'''
+	
 	override init(ExecutionFlow it) '''
 		«IF entry.checkUnimplementedOCBs»«ERROR_TYPE»«ELSE»void«ENDIF» «module»::«initFctID»()
 		{

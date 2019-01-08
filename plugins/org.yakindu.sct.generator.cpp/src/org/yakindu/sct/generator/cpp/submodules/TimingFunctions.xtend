@@ -61,4 +61,17 @@ class TimingFunctions {
 			}				
 		}
 	'''
+	
+	def timedStatemachineFunctionPrototypes(ExecutionFlow it) '''
+		/*
+		 * Functions inherited from TimedStatemachineInterface
+		 */
+		virtual void «SET_TIMER»(«timerInterface»* timerInterface);
+		
+		virtual «timerInterface»* getTimer();
+		
+		virtual void «raiseTimeEventFctID»(«EVENT_TYPE» event);
+		
+		virtual «INT_TYPE» «numTimeEventsFctID»();
+	'''
 }

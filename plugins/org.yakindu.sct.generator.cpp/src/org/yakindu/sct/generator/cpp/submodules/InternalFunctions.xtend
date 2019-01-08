@@ -116,4 +116,44 @@ class InternalFunctions {
 			«ENDFOR»
 		}
 	'''
+	
+	def prototypes(ExecutionFlow it) '''
+		// prototypes of all internal functions
+		
+		«checkFunctions.toPrototypes»
+		«effectFunctions.toPrototypes»
+		«entryActionFunctions.toPrototypes»
+		«exitActionFunctions.toPrototypes»
+		«enterSequenceFunctions.toPrototypes»
+		«exitSequenceFunctions.toPrototypes»
+		«reactFunctions.filter[ f | ! (f.eContainer instanceof ExecutionState)].toList.toPrototypes»
+		«reactMethods.toDeclarations»
+		void «clearInEventsFctID»();
+		void «clearOutEventsFctID»();
+		
+	'''
+	
+	def toDeclarations(List<Method> steps) '''
+		«FOR s : steps»
+			«s.toPrototype»
+		«ENDFOR»
+	'''
+	
+	def toPrototype(Method it) '''
+		«typeSpecifier.targetLanguageName» «shortName»(«FOR p : parameters SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR»);
+	'''
+	
+	def toPrototypes(List<Step> steps) '''
+		«FOR s : steps»
+			«s.functionPrototype»
+		«ENDFOR»
+	'''
+
+	def dispatch functionPrototype(Check it) '''
+		«BOOL_TYPE» «shortName»();
+	'''
+
+	def dispatch functionPrototype(Step it) '''
+		void «shortName»();
+	'''
 }

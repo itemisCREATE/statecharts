@@ -44,7 +44,13 @@ import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineHeader;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineImplementation;
 import org.yakindu.sct.generator.cpp.files.StatemachineHeader;
 import org.yakindu.sct.generator.cpp.files.StatemachineImplementation;
+import org.yakindu.sct.generator.cpp.submodules.InterfaceFunctions;
+import org.yakindu.sct.generator.cpp.submodules.StatemachineClassDeclaration;
+import org.yakindu.sct.generator.cpp.submodules.TimingFunctions;
+import org.yakindu.sct.generator.cpp.submodules.eventdriven.EventDrivenInterfaceFunctions;
 import org.yakindu.sct.generator.cpp.submodules.eventdriven.EventDrivenRunCycle;
+import org.yakindu.sct.generator.cpp.submodules.eventdriven.EventDrivenStatemachineClassDeclaration;
+import org.yakindu.sct.generator.cpp.submodules.eventdriven.EventDrivenTimingFunctions;
 import org.yakindu.sct.generator.cpp.submodules.lifecycle.LifecycleFunctions;
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sexec.transformation.BehaviorMapping;
@@ -127,7 +133,11 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		binder.bind(IsActive.class).to(LifecycleFunctions.class);
 		binder.bind(IsFinal.class).to(LifecycleFunctions.class);
 		binder.bind(IsStateActive.class).to(LifecycleFunctions.class);
+		
 		binder.bind(RunCycle.class).to(EventDrivenRunCycle.class);
+		binder.bind(StatemachineClassDeclaration.class).to(EventDrivenStatemachineClassDeclaration.class);
+		binder.bind(InterfaceFunctions.class).to(EventDrivenInterfaceFunctions.class);
+		binder.bind(TimingFunctions.class).to(EventDrivenTimingFunctions.class);
 
 		addIncludeProvider(binder, CppEventDrivenIncludeProvider.class);
 	}

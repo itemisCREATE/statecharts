@@ -51,26 +51,50 @@ class ClassDeclaration {
 		this
 	}
 	
-	def ClassDeclaration constructorDeclaration(boolean virtual, List<CharSequence> parameters) {
+	def ClassDeclaration constructorDeclaration(boolean virtual, boolean pure, List<CharSequence> parameters) {
 		publicMembers.add(
-			'''«IF virtual»virtual «ENDIF»«name»(«FOR p : parameters»«p»«ENDFOR»);'''
+			'''«IF virtual || pure»virtual «ENDIF»«name»(«FOR p : parameters»«p»«ENDFOR»)«IF pure» = 0«ENDIF»;'''
+		)
+		this
+	}
+	
+	def ClassDeclaration constructorDeclaration(boolean virtual, List<CharSequence> parameters) {
+		constructorDeclaration(virtual, false, parameters)
+	}
+	
+	
+	def ClassDeclaration constructorDeclaration(List<CharSequence> parameters) {
+		constructorDeclaration(false, parameters)
+	}
+	
+	def ClassDeclaration constructorDeclaration() {
+		constructorDeclaration(false, emptyList)
+	}
+	
+	def ClassDeclaration destructorDeclaration(boolean virtual, boolean pure) {
+		publicMembers.add(
+			'''«IF virtual || pure»virtual «ENDIF»~«name»()«IF pure» = 0«ENDIF»;'''
 		)
 		this
 	}
 	
 	def ClassDeclaration destructorDeclaration(boolean virtual) {
-		publicMembers.add(
-			'''«IF virtual»virtual «ENDIF»~«name»();'''
-		)
-		this
+		destructorDeclaration(virtual, false)
+	}
+	
+	def ClassDeclaration destructorDeclaration() {
+		destructorDeclaration(false, false)
 	}
 	
 	def generate() {
+		if(name === null || name == "") {
+			return ""
+		}
 		'''
 		«IF comment !== null && comment != ""»
 		«comment»
 		«ENDIF»
-		class «name»«IF !superTypes.empty» : «FOR sT : superTypes SEPARATOR ", "»sT«ENDFOR»«ENDIF»
+		class «name»«IF !superTypes.empty» : «FOR sT : superTypes SEPARATOR ", "»«sT»«ENDFOR»«ENDIF»
 		{
 			«IF !publicMembers.empty»
 			public:
