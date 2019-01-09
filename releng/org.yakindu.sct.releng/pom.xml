@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.yakindu.sct</groupId>
 	<artifactId>org.yakindu.sct.releng</artifactId>
-	<version>3.4.3-SNAPSHOT</version>
+	<version>3.5.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
@@ -212,7 +212,7 @@
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
-									<version>3.4.3-SNAPSHOT</version>
+									<version>3.5.0-SNAPSHOT</version>
 									<classifier>Neon</classifier>
 								</artifact>
 							</target>
@@ -310,7 +310,7 @@
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
-									<version>3.4.3-SNAPSHOT</version>
+									<version>3.5.0-SNAPSHOT</version>
 									<classifier>Oxygen</classifier>
 								</artifact>
 							</target>
@@ -408,7 +408,7 @@
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
-									<version>3.4.3-SNAPSHOT</version>
+									<version>3.5.0-SNAPSHOT</version>
 									<classifier>Photon</classifier>
 								</artifact>
 							</target>

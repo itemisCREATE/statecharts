@@ -20,12 +20,14 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.sct.generator.c.types.CLiterals
 
 @GeneratorContribution(StatemachineImplementation.SOURCE_TARGET)
 class ConstructorProvider implements ISourceFragment {
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
 	@Inject protected extension GenmodelEntriesExtension
+	@Inject protected extension CLiterals
 	
 	@Inject protected GeneratorEntry entry
 	
@@ -53,10 +55,10 @@ class ConstructorProvider implements ISourceFragment {
 	
 	def protected initialisationList(ExecutionFlow it) {
 		'''
-			«IF timed»«timerInstance»(«NULL_STRING»),«ENDIF»
+			«IF timed»«timerInstance»(«NULL_LITERAL»),«ENDIF»
 			«STATEVECTOR_POS»(0)«FOR s : getInterfaces»,
 			«s.instance»()«IF s.hasOperations && !entry.useStaticOPC»,
-			«s.OCB_Instance»(«NULL_STRING»)«ENDIF»«ENDFOR»«IF entry.tracingUsed»,
+			«s.OCB_Instance»(«NULL_LITERAL»)«ENDIF»«ENDFOR»«IF entry.tracingUsed»,
 			«tracingInstance»(0)«ENDIF»
 		'''
 	}

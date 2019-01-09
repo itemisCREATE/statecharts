@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 committers of YAKINDU and others.
+ * Copyright (c) 2013-2018 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -21,11 +21,13 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
+import org.yakindu.sct.generator.c.types.CLiterals
 
 class Types implements IContentTemplate {
 
 	@Inject extension CppNaming
 	@Inject extension GenmodelEntries
+	@Inject extension CLiterals
 
 	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations locations) '''
 		«entry.licenseText»
@@ -50,8 +52,16 @@ class Types implements IContentTemplate {
 		
 		typedef intptr_t       «EVENT_TYPE»;
 		
-		#ifndef «NULL_STRING»
-		#define «NULL_STRING» 0
+		#ifndef «NULL_LITERAL»
+			#ifdef __cplusplus
+				#if __cplusplus >= 201103L || (defined(_MSC_VER) && _MSC_VER >= 1900)
+			  		#define «NULL_LITERAL» nullptr
+				#else
+					#define «NULL_LITERAL» 0
+				#endif
+			#else
+				#define «NULL_LITERAL» ((void *)0)
+			#endif
 		#endif
 		
 		/* Error codes and mask can be used to check unimplemented operation callbacks. They can be activated in the API feature within the .sgen file.*/

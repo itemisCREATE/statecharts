@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 committers of YAKINDU and others.
+ * Copyright (c) 2017-2018 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -24,16 +24,18 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.generator.c.ISourceFragment
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.sct.generator.c.CGeneratorConstants
+import org.yakindu.sct.generator.c.types.CLiterals
 
 /**
  * @author René Beckmann
+ * @author axel terfloth
  */
 class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 	@Inject extension SExecExtensions
 	@Inject extension Naming
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject extension EventNaming
+	@Inject protected extension CLiterals
 	
 	override implementations(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) '''
 		«IF hasLocalEvents»
@@ -56,7 +58,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 					«FOR e : s.declarations.filter(EventDefinition).filter[direction == Direction::LOCAL]»
 					case «e.eventEnumMemberName»:
 					{
-						«e.access» = «TRUE»;
+						«e.access» = «TRUE_LITERAL»;
 						«IF e.hasValue»
 						«e.valueAccess» = event->value.«e.eventValueUnionMemberName»;
 						«ENDIF»
@@ -96,7 +98,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 			{
 				ev->name = name;
 				«IF hasLocalEventsWithValue»
-					ev->has_value = «CGeneratorConstants.FALSE»;
+					ev->has_value = «FALSE_LITERAL»;
 				«ENDIF»
 			}
 			«IF hasLocalEventsWithValue»
@@ -104,7 +106,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 				static void «valueEventInitFunction»(«internalEventStructTypeName» * ev, «eventEnumName» name, void * value)
 				{
 					ev->name = name;
-					ev->has_value = «CGeneratorConstants.TRUE»;
+					ev->has_value = «TRUE_LITERAL»;
 					
 					switch(name)
 					{
@@ -158,7 +160,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 			static «BOOL_TYPE» «eventQueuePushFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» ev)
 			{
 				if(«eventQueueSizeFunction»(eq) == «bufferSize») {
-					return «CGeneratorConstants.FALSE»;
+					return «FALSE_LITERAL»;
 				}
 				else {
 					eq->events[eq->push_index] = ev;
@@ -171,7 +173,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 					}
 					eq->size++;
 					
-					return «CGeneratorConstants.TRUE»;
+					return «TRUE_LITERAL»;
 				}
 			}
 		'''

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018 committers of YAKINDU and others.
+ * Copyright (c) 2017-2018 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -27,6 +27,7 @@ import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
+import org.yakindu.sct.generator.c.types.CLiterals
 
 @GeneratorContribution(StatemachineImplementation.SOURCE_TARGET)
 class StatechartEventImpl implements ISourceFragment {
@@ -35,6 +36,7 @@ class StatechartEventImpl implements ISourceFragment {
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
 	@Inject extension EventNaming eventNaming
+	@Inject extension CLiterals
 	
 	override get(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
 		'''

@@ -11,7 +11,7 @@
 package org.yakindu.sct.generator.cpp.submodules.lifecycle
 
 import com.google.inject.Inject
-import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
+import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.generator.core.submodules.lifecycle.Enter
 import org.yakindu.sct.generator.core.submodules.lifecycle.Exit
 import org.yakindu.sct.generator.core.submodules.lifecycle.Init
@@ -19,18 +19,14 @@ import org.yakindu.sct.generator.core.submodules.lifecycle.IsActive
 import org.yakindu.sct.generator.core.submodules.lifecycle.IsFinal
 import org.yakindu.sct.generator.core.submodules.lifecycle.IsStateActive
 import org.yakindu.sct.generator.core.submodules.lifecycle.RunCycle
-import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.CppExpressionsGenerator
 import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.ErrorCode
-import org.yakindu.sct.generator.cpp.EventCode
-import org.yakindu.sct.generator.cpp.FlowCode
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
-import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
@@ -43,15 +39,11 @@ class LifecycleFunctions implements Init, Enter, RunCycle, IsActive, IsStateActi
 	
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
-	@Inject protected extension SgraphExtensions
-	@Inject protected extension FlowCode
 	@Inject protected extension GenmodelEntriesExtension
-	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension INamingService
 	@Inject protected extension CppExpressionsGenerator
 	@Inject protected extension StateVectorExtensions
-	@Inject protected extension EventCode
-	@Inject protected extension ExpressionsChecker
+	@Inject protected extension CLiterals
 	
 	@Inject protected GeneratorEntry entry
 	
@@ -210,18 +202,18 @@ class LifecycleFunctions implements Init, Enter, RunCycle, IsActive, IsStateActi
 	'''
 	
 	def checkInternalOCB(StatechartScope it) '''
-		if (this->«OCB_Instance» == «NULL_STRING») { 
+		if (this->«OCB_Instance» == «NULL_LITERAL») { 
 			errorCode |= (short) «ErrorCode.OCB_INTERNAL_INIT.getName()»;
 		}
 	'''
 	
 	def checkInterfaceOCB(StatechartScope it) '''
 		«IF defaultInterface»
-			if (this->«OCB_Instance» == «NULL_STRING») { 
+			if (this->«OCB_Instance» == «NULL_LITERAL») { 
 				errorCode |=  (short) «ErrorCode.OCB_DEFAULT_INIT.getName()»;
 			}
 		«ELSE»
-			if (this->«OCB_Instance» == «NULL_STRING») { 
+			if (this->«OCB_Instance» == «NULL_LITERAL») { 
 				errorCode |= (short) «ErrorCode.OCB_NAMED_INIT.getName()»;
 			}
 		«ENDIF»
