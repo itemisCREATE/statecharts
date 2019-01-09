@@ -11,8 +11,10 @@
 package org.yakindu.sct.generator.cpp.providers.eventdriven
 
 import com.google.inject.Inject
+import java.util.List
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenPredicate
 import org.yakindu.sct.generator.cpp.eventdriven.EventNaming
@@ -27,7 +29,6 @@ import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
-import org.yakindu.sct.generator.c.types.CLiterals
 
 @GeneratorContribution(StatemachineImplementation.SOURCE_TARGET)
 class StatechartEventImpl implements ISourceFragment {
@@ -63,10 +64,18 @@ class StatechartEventImpl implements ISourceFragment {
 		{
 			«SCT_EVENT»* «nE» = 0;
 			
-			if(!«internalQueue».empty()) {
-				«nE» = «internalQueue».front();
-				«internalQueue».pop_front();
-			}
+			«IF needsInternalEventQueue»
+				if(!«internalQueue».empty()) {
+					«nE» = «internalQueue».front();
+					«internalQueue».pop_front();
+				}
+			«ENDIF»
+			«IF needsInEventQueue»
+				«IF needsInternalEventQueue»else «ENDIF»if(!«inEventQueue».empty()) {
+					«nE» = «inEventQueue».front();
+					«inEventQueue».pop_front();
+				}
+			«ENDIF»
 			
 			return «nE»;
 		}
@@ -90,7 +99,7 @@ class StatechartEventImpl implements ISourceFragment {
 			{
 				switch(«ev»->name)
 				{
-					«FOR e : s.localEvents»
+					«FOR e : s.queuedEvents»
 						case «e.eventEnumMemberName»:
 						{
 							«IF e.hasValue»
@@ -123,9 +132,9 @@ class StatechartEventImpl implements ISourceFragment {
 				{
 					«FOR s : scopes.filter(StatechartScope)»
 						«IF !(s instanceof ImportScope)»
-							«val localEvents = s.declarations.filter(EventDefinition).filter[direction == Direction.LOCAL]»
-							«IF localEvents.size > 0»
-								«FOR e : localEvents»
+							«val events = s.queuedEvents»
+							«IF events.size > 0»
+								«FOR e : events»
 									case «e.eventEnumMemberName»:
 								«ENDFOR»
 								{
@@ -140,6 +149,11 @@ class StatechartEventImpl implements ISourceFragment {
 				}
 			}
 		'''
+	}
+	
+	def List<EventDefinition> queuedEvents(Scope it) {
+		if(it === null) return emptyList
+		declarations.filter(EventDefinition).filter[isQueued].toList
 	}
 	
 }

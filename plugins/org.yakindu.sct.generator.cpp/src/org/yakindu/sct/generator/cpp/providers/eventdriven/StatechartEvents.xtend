@@ -15,6 +15,7 @@ import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.CppNaming
+import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenPredicate
 import org.yakindu.sct.generator.cpp.eventdriven.EventNaming
 import org.yakindu.sct.generator.cpp.files.StatemachineHeader
 import org.yakindu.sct.generator.cpp.providers.GeneratorContribution
@@ -34,6 +35,7 @@ class StatechartEvents implements ISourceFragment {
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
+	@Inject protected extension EventDrivenPredicate
 	
 	@Inject extension EventNaming eventNaming
 	
@@ -45,7 +47,7 @@ class StatechartEvents implements ISourceFragment {
 	}
 	
 	override isNeeded(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
-		hasLocalEvents
+		needsEventClasses
 	}
 	
 	override orderPriority(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
@@ -77,8 +79,8 @@ class StatechartEvents implements ISourceFragment {
 	def generateEventsEnum(ExecutionFlow it) {
 		val enumMembers = scopes
 			.map[declarations.filter(EventDefinition)] // map list of declarations to scope
-			.reduce[i1, i2 | i1 + i2] // reduce multiple lists of declarations into one
-			.filter[direction == Direction::LOCAL]
+			.flatten
+			.filter[isQueued]
 			.map[eventEnumMemberName] // generate enumMemberNames for each
 			.toList
 		if(timed) {
@@ -127,7 +129,7 @@ class StatechartEvents implements ISourceFragment {
 	def generateEvents(ExecutionFlow it) {
 		'''
 			«FOR s : scopes»
-				«FOR e : s.declarations.filter(EventDefinition).filter[direction == Direction::LOCAL]»
+				«FOR e : s.declarations.filter(EventDefinition).filter[isQueued]»
 					«generateEventClass(e, it)»
 				«ENDFOR»
 			«ENDFOR»

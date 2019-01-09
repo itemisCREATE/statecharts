@@ -11,7 +11,9 @@
 package org.yakindu.sct.generator.cpp.providers
 
 import com.google.inject.Inject
+import java.util.List
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.generator.cpp.files.StatemachineImplementation
@@ -20,7 +22,6 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.sct.generator.c.types.CLiterals
 
 @GeneratorContribution(StatemachineImplementation.SOURCE_TARGET)
 class ConstructorProvider implements ISourceFragment {
@@ -45,8 +46,7 @@ class ConstructorProvider implements ISourceFragment {
 	
 	def constructorDefinition(ExecutionFlow it){
 	'''
-		«module»::«module»():
-			«initialisationList»
+		«module»::«module»() «initialisationList.generate»
 		{
 			«constructorBody(it)»
 		}
@@ -54,22 +54,30 @@ class ConstructorProvider implements ISourceFragment {
 	}
 	
 	def protected initialisationList(ExecutionFlow it) {
-		'''
-			«IF timed»«timerInstance»(«NULL_LITERAL»),«ENDIF»
-			«STATEVECTOR_POS»(0)«FOR s : getInterfaces»,
-			«s.instance»()«IF s.hasOperations && !entry.useStaticOPC»,
-			«s.OCB_Instance»(«NULL_LITERAL»)«ENDIF»«ENDFOR»«IF entry.tracingUsed»,
-			«tracingInstance»(0)«ENDIF»
-		'''
+		val List<Pair<String, String>> toInit = newArrayList
+		if(timed) toInit.add(timerInstance, NULL_LITERAL)
+		toInit.add(STATEVECTOR_POS, "0")
+		interfaces.forEach[
+			toInit.add(instance, "")
+			if(hasOperations && !entry.useStaticOPC) {
+				toInit.add(OCB_Instance, NULL_LITERAL)
+			}
+		]
+		if(entry.tracingUsed) toInit.add(tracingInstance, "0")
+		toInit
 	}
 	
 	def protected initialisationListCopy(ExecutionFlow it) {
-		'''
-			«IF timed»«timerInstance»(rhs.«timerInstance»),«ENDIF»
-			«STATEVECTOR_POS»(rhs.«STATEVECTOR_POS»)«FOR s : getInterfaces»,
-			«s.instance»(rhs.«s.instance»)«IF s.hasOperations && !entry.useStaticOPC»,
-			«s.OCB_Instance»(rhs.«s.OCB_Instance»)«ENDIF»«ENDFOR»
-		'''	
+		val List<Pair<String, String>> toInit = newArrayList
+		if(timed) toInit.add(timerInstance, '''rhs.«timerInstance»''')
+		toInit.add(STATEVECTOR_POS, '''rhs.«STATEVECTOR_POS»''')
+		interfaces.forEach[
+			toInit.add(instance, '''rhs.«instance»''')
+			if(hasOperations && !entry.useStaticOPC) {
+				toInit.add(OCB_Instance, '''rhs.«OCB_Instance»''')
+			}
+		]
+		toInit
 	}
 	
 	protected def CharSequence constructorBody(ExecutionFlow it)
@@ -87,5 +95,17 @@ class ConstructorProvider implements ISourceFragment {
 		{
 		}
 	'''
+	
+	def protected generate(List<Pair<String,String>> values) {
+		values.join(" :\n", ",\n", "", ['''«it.key»(«it.value»)'''])
+	}
+	
+	def protected Pair<String, String> pair(String a, String b) {
+		return new Pair<String, String>(a, b)
+	}
+	
+	def protected void add(List<Pair<String, String>> l, String a, String b) {
+		l.add(pair(a, b))
+	}
 	
 }

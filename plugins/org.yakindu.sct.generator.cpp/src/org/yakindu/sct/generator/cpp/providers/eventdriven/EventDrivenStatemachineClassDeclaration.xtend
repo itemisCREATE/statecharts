@@ -20,6 +20,7 @@ import org.yakindu.sct.generator.cpp.providers.StatemachineClassDeclaration
 import org.yakindu.sct.model.sexec.ExecutionFlow
 
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
+import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 
 @GeneratorContribution(StatemachineHeader.HEADER_TARGET)
 class EventDrivenStatemachineClassDeclaration extends StatemachineClassDeclaration {
@@ -35,6 +36,10 @@ class EventDrivenStatemachineClassDeclaration extends StatemachineClassDeclarati
 			classDecl.privateMember('''«eventNamespaceName»::«SCT_EVENT»* «nextEventFctID»();''')
 		if(needsDispatchEventFunction) 
 			classDecl.privateMember('''void «dispatchEventFctID»(«eventNamespaceName»::«SCT_EVENT» * event);''')
+		if(needsInEventQueue) {
+			classDecl.privateMember('''std::deque<«eventNamespaceName»::«SCT_EVENT»*> «inEventQueue»;''')
+			classDecl.privateMember('''«BOOL_TYPE» «runCycleGuard»;''')
+		}
 		classDecl
 	}
 	
