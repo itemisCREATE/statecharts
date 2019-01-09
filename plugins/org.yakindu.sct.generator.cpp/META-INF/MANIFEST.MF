@@ -3,13 +3,10 @@ Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU C++ Generator
 Bundle-SymbolicName: org.yakindu.sct.generator.cpp;singleton:=true
 Bundle-Version: 3.4.3.qualifier
-Require-Bundle: org.yakindu.sct.model.sexec,
- org.yakindu.sct.model.stext,
- org.yakindu.sct.generator.core,
+Require-Bundle: org.yakindu.sct.model.stext,
  org.yakindu.sct.generator.genmodel,
  org.yakindu.sct.generator.c,
- org.yakindu.sct.model.stext.lib,
- com.google.guava
+ org.yakindu.sct.model.stext.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.yakindu.sct.generator.cpp,
  org.yakindu.sct.generator.cpp.eventdriven,
