@@ -15,6 +15,7 @@ The *GeneratorOptions* feature allows to change the behavior of the C++ generato
 
 * _innerFunctionVisibility_ (String, optional): This parameter is used to change the visibility of inner functions and variables. By default @private@ visibility is used. It can be changed to @protected@ to allow function overriding for a class which inherits from the generated state machine base class.
 * _staticOperationCallback_ (Boolean, optional): If this parameter is set to _true_, the callback function declaration for statechart operations is static and the functions are called statically by the state machine code.
+* _inEventQueue_ (Boolean, optional): If set to _true_, this activates a queue for in events (only for event driven statecharts). This is useful for multi-threaded environments, because you can raise another in event while a run cycle is running without interfering with the current run cycle.
 
 ==<div class="example">==
 

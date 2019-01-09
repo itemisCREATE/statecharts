@@ -48,7 +48,7 @@ class EventDrivenPredicate {
 	}
 	
 	def boolean needsQueues(ExecutionFlow it) {
-		needsInternalEventQueue
+		needsInternalEventQueue || needsInEventQueue
 	}
 	
 	def boolean needsDispatchEventFunction(ExecutionFlow it) {
@@ -63,11 +63,15 @@ class EventDrivenPredicate {
 		isEventDriven && flow.hasLocalEvents
 	}
 	
+	def boolean needsInEventQueue(ExecutionFlow it) {
+		isEventDriven && entry.inEventQueue
+	}
+	
 	def boolean isQueued(EventDefinition it) {
-		isEventDriven && isLocalEvent
+		isEventDriven && (isLocalEvent || (isInEvent && entry.inEventQueue))
 	}
 	
 	def boolean needsEventNamespace(ExecutionFlow it) {
-		isEventDriven && flow.hasLocalEvents
+		isEventDriven && (flow.hasLocalEvents || (flow.hasInEvents && entry.inEventQueue))
 	}
 }
