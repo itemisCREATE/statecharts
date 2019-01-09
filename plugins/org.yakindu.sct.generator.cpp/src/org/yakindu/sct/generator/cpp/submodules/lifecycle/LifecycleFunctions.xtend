@@ -34,10 +34,12 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
+import org.yakindu.sct.generator.cpp.FlowCode
 
 class LifecycleFunctions implements Init, Enter, RunCycle, IsActive, IsStateActive, Exit, IsFinal {
 	
 	@Inject protected extension CppNaming
+	@Inject protected extension FlowCode
 	@Inject protected extension SExecExtensions
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension INamingService
