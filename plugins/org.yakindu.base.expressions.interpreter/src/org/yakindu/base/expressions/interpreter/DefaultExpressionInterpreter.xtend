@@ -178,7 +178,11 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	}
 
 	def Object cast(Object value, Type type) {
-		typeCast(value, type.originType)
+		if (type !== null) {
+			typeCast(value, type.originType)
+ 		} else {
+	 		value
+ 		}
 	}
 
 	def protected dispatch Object typeCast(Long value, Type type) {
@@ -325,6 +329,10 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	
 	def dispatch doExecute(Enumerator feature, Void slot, ArgumentExpression exp) {
 		new Long(feature.literalValue)
+	}
+	
+	def dispatch doExecute(Type feature, Void slot, ArgumentExpression exp) {
+		null
 	}
 
 	def executeUnaryCoreFunction(Expression statement, String operator) {

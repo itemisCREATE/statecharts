@@ -12,15 +12,10 @@ package org.yakindu.sct.generator.c;
 
 /**
  * @author rbeckmann
+ * @author axel terfloth
  *
  */
 public abstract class CGeneratorConstants {
-	/*
-	 * VALUES
-	 */
-	public static final String TRUE = "bool_true";
-	public static final String FALSE = "bool_false";
-	public static final String NULL_STRING = "null";
 	
 	/*
 	 * TYPES

@@ -20,6 +20,7 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.sct.generator.c.types.CLiterals
 
 /**
  * @author rbeckmann
@@ -34,6 +35,7 @@ class APIGenerator {
 	@Inject protected extension Naming
 	@Inject protected extension SExecExtensions
 	@Inject protected extension StateVectorExtensions
+	@Inject protected extension CLiterals
 
 	def runCycle(ExecutionFlow it) {
 		'''
@@ -58,7 +60,7 @@ class APIGenerator {
 				«IF state.reactMethod !== null»
 					case «state.stateName»:
 					{
-						«state.reactMethod.shortName»(«scHandle», «TRUE»);
+						«state.reactMethod.shortName»(«scHandle», «TRUE_LITERAL»);
 						break;
 					}
 				«ENDIF»
@@ -142,7 +144,7 @@ class APIGenerator {
 		'''
 			«isActiveSignature»
 			{
-				«BOOL_TYPE» result = «FALSE»;
+				«BOOL_TYPE» result = «FALSE_LITERAL»;
 				«INT_TYPE» i;
 				
 				for(i = 0; i < «maxOrthogonalStates»; i++)
@@ -167,7 +169,7 @@ class APIGenerator {
 		'''
 			«isStateActiveSignature»
 			{
-				«BOOL_TYPE» result = «FALSE»;
+				«BOOL_TYPE» result = «FALSE_LITERAL»;
 				switch (state)
 				{
 					«FOR s : states»
@@ -178,7 +180,7 @@ class APIGenerator {
 							break;
 					«ENDFOR»
 					default:
-						result = «FALSE»;
+						result = «FALSE_LITERAL»;
 						break;
 				}
 				return result;
@@ -209,7 +211,7 @@ class APIGenerator {
 		// only if the impact vector is completely covered by final states the state machine
 		// can become final
 		{if (fsiv.isCompletelyCovered) {'''	return «FOR i : 0 ..<fsiv.size SEPARATOR ' && '»(«FOR fs : fsiv.get(i) SEPARATOR ' || '»«scHandle»->«STATEVECTOR»[«i»] == «IF fs.stateVector.offset == i»«fs.stateName»«ELSE»«null_state»«ENDIF»«ENDFOR»)«ENDFOR»;
-				'''} else {'''   return «FALSE»;'''} }		
+				'''} else {'''   return «FALSE_LITERAL»;'''} }		
 		+ Strings.newLine + '''}'''
 	}
 
@@ -245,7 +247,7 @@ class APIGenerator {
 				if ( ((«INTPTR_TYPE»)evid) >= ((«INTPTR_TYPE»)&(«scHandle»->timeEvents))
 					&&  ((«INTPTR_TYPE»)evid) < ((«INTPTR_TYPE»)&(«scHandle»->timeEvents)) + (unsigned)sizeof(«timeEventScope.type»))
 					{
-					*(«BOOL_TYPE»*)evid = «TRUE»;
+					*(«BOOL_TYPE»*)evid = «TRUE_LITERAL»;
 				}		
 			}
 		'''

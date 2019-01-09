@@ -38,12 +38,12 @@ TraceObserverImpl::TraceObserverImpl() {
 TraceObserverImpl::~TraceObserverImpl() {}
 
 void TraceObserverImpl::stateEntered(Tracing::TracingStates state) {
-	if (state != null) {
+	if (state != sc_null) {
 		entered = true;
 	}
 }
 void TraceObserverImpl::stateExited(Tracing::TracingStates state) {
-	if (state != null) {
+	if (state != sc_null) {
 		exited = true;
 	}
 }
