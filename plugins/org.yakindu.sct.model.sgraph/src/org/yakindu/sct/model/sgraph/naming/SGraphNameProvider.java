@@ -21,6 +21,7 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.Strings;
+import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.CompositeElement;
@@ -211,6 +212,18 @@ public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider 
 	}
 
 	public QualifiedName qualifiedName(Declaration ele) {
+		QualifiedName name = null;
+		if (!Strings.isEmpty(ele.getName())) {
+			name = nameConverter.toQualifiedName(ele.getName());
+		}
+		QualifiedName namespace = getNamespace(ele);
+		if (namespace != null && name != null) {
+			name = namespace.append(name);
+		}
+		return name;
+	}
+	
+	public QualifiedName qualifiedName(ComplexType ele) {
 		QualifiedName name = null;
 		if (!Strings.isEmpty(ele.getName())) {
 			name = nameConverter.toQualifiedName(ele.getName());

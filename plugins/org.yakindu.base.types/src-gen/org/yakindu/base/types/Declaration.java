@@ -59,7 +59,7 @@ public interface Declaration extends NamedElement, AnnotatableElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see org.yakindu.base.types.TypesPackage#getDeclaration_Id()
-	 * @model id="true" transient="true" changeable="false" volatile="true"
+	 * @model id="true" transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	String getId();
