@@ -4,7 +4,6 @@
 			<repository location="http://download.eclipse.org/releases/latest/"/>
 			<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
 			<unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
-			<unit id="org.eclipse.cdt.sdk.feature.group" version="0.0.0"/>
 			<unit id="org.eclipse.emf.ecore.xcore.sdk.feature.group" version="0.0.0"/>
 			<unit id="org.eclipse.epp.logging.aeri.feature.feature.group" version="0.0.0"/>
 			<unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="0.0.0"/>
