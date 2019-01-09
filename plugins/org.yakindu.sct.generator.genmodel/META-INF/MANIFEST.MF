@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Generator Model
 Bundle-Vendor: statecharts.org
-Bundle-Version: 3.4.2.qualifier
+Bundle-Version: 3.5.0.qualifier
 Bundle-SymbolicName: org.yakindu.sct.generator.genmodel;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
@@ -20,7 +20,9 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.yakindu.sct.generator.core;visibility:=reexport,
  org.yakindu.sct.model.sgen;visibility:=reexport,
  org.yakindu.base.types,
- org.yakindu.base.expressions.interpreter
+ org.yakindu.base.expressions.interpreter,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib
 Import-Package: org.apache.log4j,
  org.apache.commons.logging,
  org.eclipse.xtext.xbase.lib
@@ -34,3 +36,4 @@ Export-Package: org.yakindu.sct.generator.genmodel,
  org.yakindu.sct.generator.genmodel.services,
  org.yakindu.sct.generator.genmodel.validation,
  org.yakindu.sct.generator.genmodel.formatting
+Automatic-Module-Name: org.yakindu.sct.generator.genmodel

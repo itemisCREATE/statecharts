@@ -66,6 +66,10 @@ class FlowOptimizer {
 			flow.inlineReactionEffects		
 		}
 		
+		// always inline entry and exit actions defined on the statechart level.
+		flow.entryAction.inline
+		flow.exitAction.inline
+		
 		if (_inlineEntryActions)  flow.states.forEach( state | state.entryAction.inline )
 		if (_inlineExitActions)   flow.states.forEach( state | state.exitAction.inline )
 		if (_inlineEnterSequences) flow.states.forEach( state | state.enterSequences.forEach( s | s.inline ))
@@ -217,7 +221,7 @@ class FlowOptimizer {
 	}
 	
 	def inlineEffects(Method m) {
-		if (m != null) m.eAllContents.filter(Call).toList.forEach( call | call.inline )
+		if (m !== null) m.eAllContents.filter(Call).toList.forEach( call | call.inline )
 	}
 	
 	

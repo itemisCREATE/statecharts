@@ -37,7 +37,7 @@ testsuite AllTests {
 	FloatModulo,
 	Guard, 
 	GuardedEntry, 
-	Guard, 
+	Guard,
 	HistoryWithExitPoint,
 	HistoryWithoutInitialStep,
 	InEventLifeCycle, 
@@ -63,7 +63,8 @@ testsuite AllTests {
 	ShallowHistoryWithDeepEntry, 	
 	SimpleEvent,
 	SimpleHierachy,
-	StatechartActive, 
+	StatechartActive,
+    StatechartEntryExitActions, 
 	StatechartLocalReactions,
 	StateIsActive, 
 	StaticChoice,
@@ -75,9 +76,7 @@ testsuite AllTests {
 	TriggerGuardExpressions,
 	TriggerExpressionPrecedence,
 	ValuedEvents,
-	TypeAlias
-	//Add the following tests if sct unit Java and C++ generators
-	// support mock timer service generation
-	//StatemachineKeywords,
-	//TimedTransitions,
+	TypeAlias,
+	StatemachineKeywords,
+	TimedTransitions
 } 

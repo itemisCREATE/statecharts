@@ -1,7 +1,7 @@
 package org.yakindu.scr.shallowhistory;
 
-public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 
+public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean event1;
@@ -86,6 +86,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public ShallowHistoryStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -105,11 +106,43 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_mainRegion_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case mainRegion_State1:
+				mainRegion_State1_react(true);
+				break;
+			case mainRegion_State2__region0_State3:
+				mainRegion_State2__region0_State3_react(true);
+				break;
+			case mainRegion_State2__region0_State4__region0_State6:
+				mainRegion_State2__region0_State4__region0_State6_react(true);
+				break;
+			case mainRegion_State2__region0_State4__region0_State7__region0_State8:
+				mainRegion_State2__region0_State4__region0_State7__region0_State8_react(true);
+				break;
+			case mainRegion_State2__region0_State4__region0_State7__region0_State9:
+				mainRegion_State2__region0_State4__region0_State7__region0_State9_react(true);
+				break;
+			case mainRegion_State2__region0_State5:
+				mainRegion_State2__region0_State5_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_mainRegion();
 	}
@@ -488,7 +521,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 		}
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -496,7 +529,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.event1) {
 					exitSequence_mainRegion_State1();
 					enterSequence_mainRegion_State2_default();
@@ -505,8 +538,6 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -514,7 +545,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.event2) {
 					exitSequence_mainRegion_State2();
 					enterSequence_mainRegion_State1_default();
@@ -522,8 +553,6 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -541,8 +570,6 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -558,8 +585,6 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -577,8 +602,6 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -594,8 +617,6 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -613,8 +634,6 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -631,8 +650,6 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -644,40 +661,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case mainRegion_State1:
-				mainRegion_State1_react(true);
-				break;
-			case mainRegion_State2__region0_State3:
-				mainRegion_State2__region0_State3_react(true);
-				break;
-			case mainRegion_State2__region0_State4__region0_State6:
-				mainRegion_State2__region0_State4__region0_State6_react(true);
-				break;
-			case mainRegion_State2__region0_State4__region0_State7__region0_State8:
-				mainRegion_State2__region0_State4__region0_State7__region0_State8_react(true);
-				break;
-			case mainRegion_State2__region0_State4__region0_State7__region0_State9:
-				mainRegion_State2__region0_State4__region0_State7__region0_State9_react(true);
-				break;
-			case mainRegion_State2__region0_State5:
-				mainRegion_State2__region0_State5_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

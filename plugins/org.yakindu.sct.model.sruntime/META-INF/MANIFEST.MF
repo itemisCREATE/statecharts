@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.yakindu.sct.model.sruntime;singleton:=true
 Automatic-Module-Name: org.yakindu.sct.model.sruntime
-Bundle-Version: 3.4.2.qualifier
+Bundle-Version: 3.5.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin

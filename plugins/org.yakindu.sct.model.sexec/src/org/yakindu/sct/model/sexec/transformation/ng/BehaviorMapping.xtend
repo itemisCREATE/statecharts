@@ -5,10 +5,10 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
+import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgraph.Region
-import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 
 class BehaviorMapping extends org.yakindu.sct.model.sexec.transformation.BehaviorMapping {
 
@@ -29,7 +29,7 @@ class BehaviorMapping extends org.yakindu.sct.model.sexec.transformation.Behavio
 				[ExecutionScope parentScope, ExecutionScope execScope | false ]
 			else
 				[ExecutionScope parentScope, ExecutionScope execScope | 
-					parentScope === execScope || parentScope.stateVector.last == execScope.impactVector.last
+					parentScope === execScope || parentScope.impactVector.last == execScope.impactVector.last
 				]
 		
 		val parent = if (region.parentStates.head !== null) {
@@ -40,7 +40,7 @@ class BehaviorMapping extends org.yakindu.sct.model.sexec.transformation.Behavio
 
 
 		if (shouldExecuteParent.apply(parent, execRegion)) {
-			_call(parent.reactMethod)._with(_false)._statement
+			parent.callReact(_false)._statement
 		}
 	}
 	

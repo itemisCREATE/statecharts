@@ -3,7 +3,6 @@
 package org.yakindu.sct.model.sexec;
 
 import org.eclipse.emf.ecore.EObject;
-
 import org.yakindu.base.types.Property;
 
 /**

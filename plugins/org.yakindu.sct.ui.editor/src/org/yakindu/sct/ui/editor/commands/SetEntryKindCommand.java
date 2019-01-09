@@ -62,8 +62,10 @@ public abstract class SetEntryKindCommand extends AbstractHandler {
 	 * @return
 	 */
 	public Entry unwrap(ISelection selection) {
-		IStructuredSelection structuredSelection = (IStructuredSelection) selection;
-		Object firstElement = structuredSelection.getFirstElement();
+		if (!(selection instanceof IStructuredSelection)) 
+			return null;
+		
+		Object firstElement = ((IStructuredSelection) selection).getFirstElement();
 		if (firstElement == null)
 			return null;
 		return ((EntryEditPart) firstElement).resolveSemanticElement();

@@ -615,13 +615,22 @@ public interface SGraphPackage extends EPackage {
 	int STATECHART__ANNOTATIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATECHART__ANNOTATION_INFO = SPECIFICATION_ELEMENT_FEATURE_COUNT + 8;
+
+	/**
 	 * The number of structural features of the '<em>Statechart</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 8;
+	int STATECHART_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.EntryImpl <em>Entry</em>}' class.
@@ -1230,6 +1239,24 @@ public interface SGraphPackage extends EPackage {
 	int IMPORT_DECLARATION__NAME = TypesPackage.DECLARATION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_DECLARATION__ANNOTATIONS = TypesPackage.DECLARATION__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_DECLARATION__ANNOTATION_INFO = TypesPackage.DECLARATION__ANNOTATION_INFO;
+
+	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1239,13 +1266,13 @@ public interface SGraphPackage extends EPackage {
 	int IMPORT_DECLARATION__ID = TypesPackage.DECLARATION__ID;
 
 	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPORT_DECLARATION__ANNOTATIONS = TypesPackage.DECLARATION__ANNOTATIONS;
+	int IMPORT_DECLARATION__STATIC = TypesPackage.DECLARATION__STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Declaration</b></em>' reference.
@@ -1579,17 +1606,6 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getStatechart();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sgraph.Statechart#getAnnotations <em>Annotations</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Annotations</em>'.
-	 * @see org.yakindu.sct.model.sgraph.Statechart#getAnnotations()
-	 * @see #getStatechart()
-	 * @generated
-	 */
-	EReference getStatechart_Annotations();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Entry <em>Entry</em>}'.
@@ -2117,14 +2133,6 @@ public interface SGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EClass STATECHART = eINSTANCE.getStatechart();
-
-		/**
-		 * The meta object literal for the '<em><b>Annotations</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference STATECHART__ANNOTATIONS = eINSTANCE.getStatechart_Annotations();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.EntryImpl <em>Entry</em>}' class.

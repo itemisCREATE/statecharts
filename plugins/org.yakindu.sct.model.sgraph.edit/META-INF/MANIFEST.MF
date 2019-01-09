@@ -1,11 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: YAKINDU SGraph Edit
+Bundle-Name: %pluginName
 Bundle-SymbolicName: org.yakindu.sct.model.sgraph.edit;singleton:=true
-Bundle-Version: 3.4.2.qualifier
+Automatic-Module-Name: org.yakindu.sct.model.sgraph.edit
+Bundle-Version: 3.5.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.yakindu.sct.model.sgraph.provider.SGraphEditPlugin$Implementation
-Bundle-Vendor: statecharts.org
+Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.yakindu.sct.model.sgraph.provider

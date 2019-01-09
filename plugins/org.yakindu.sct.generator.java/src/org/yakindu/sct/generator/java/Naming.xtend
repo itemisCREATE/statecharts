@@ -56,6 +56,10 @@ class Naming {
 	def java(String it) {
 		it + ".java"
 	}
+	
+	def dot(String a, String b) {
+		a + "." + b
+	}
 
 	def asPrivate(String it) {
 		"private " + it
@@ -67,6 +71,30 @@ class Naming {
 
 	def String getInternalOperationCallbackName(InternalScope it) {
 		"InternalOperationCallback"
+	}
+	
+	def traceInterface() {
+		"ITracingListener"
+	}
+	
+	def traceAccessorFunctionID() {
+		"traceObserver"
+	}
+	
+	def traceSingleInstance() {
+		"ifaceTraceObserver"
+	}
+	
+	def traceInstances() {
+		"ifaceTraceObservers"
+	}
+	
+	def stateEnteredTraceFunctionID() {
+		"onStateEntered"
+	}
+	
+	def stateExitedTraceFunctionID() {
+		"onStateExited"
 	}
 
 	def dispatch String statemachineName(String name) {

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Generator Core
 Bundle-SymbolicName: org.yakindu.sct.generator.core;singleton:=true
-Bundle-Version: 3.4.2.qualifier
+Bundle-Version: 3.5.0.qualifier
 Bundle-Activator: org.yakindu.sct.generator.core.GeneratorActivator
 Bundle-Vendor: statecharts.org
 Require-Bundle: org.yakindu.sct.model.sexec;visibility:=reexport,
@@ -59,5 +59,7 @@ Export-Package: org.yakindu.sct.generator.core;
    org.eclipse.core.runtime,
    org.yakindu.sct.model.sgen,
    org.yakindu.sct.generator.core.library",
+ org.yakindu.sct.generator.core.submodules.lifecycle,
  org.yakindu.sct.generator.core.templates;uses:="org.eclipse.emf.ecore,org.yakindu.base.expressions.expressions",
  org.yakindu.sct.generator.core.types;uses:="org.yakindu.base.types"
+Automatic-Module-Name: org.yakindu.sct.generator.core

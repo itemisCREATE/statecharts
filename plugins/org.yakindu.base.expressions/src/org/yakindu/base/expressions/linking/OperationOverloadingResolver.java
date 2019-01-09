@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.yakindu.base.expressions.expressions.ArgumentExpression;
-import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.util.ArgumentSorter;
+import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Type;
@@ -101,7 +101,8 @@ public class OperationOverloadingResolver {
 		for (int i = 0; i < argumentTypes.size(); i++) {
 			Type type1 = argumentTypes.get(i);
 			Type type2 = parameterTypes.get(i);
-			if (!typeSystem.isSuperType(type2, type1))
+			
+			if (!typeSystem.isConvertableTo(type1, type2) && !typeSystem.isSuperType(type2, type1))
 				return false;
 		}
 		return true;

@@ -1,10 +1,10 @@
 package org.yakindu.scr.statechartkeywords;
+
 import java.util.LinkedList;
 import java.util.List;
 import org.yakindu.scr.ITimer;
 
 public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatemachine {
-
 	protected class SCIIfImpl implements SCIIf {
 	
 		private List<SCIIfListener> listeners = new LinkedList<SCIIfListener>();
@@ -116,6 +116,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	private ITimer timer;
 	
@@ -232,18 +233,36 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
-		entryAction();
+		timer.setTimer(this, 0, (1 * 1000), true);
+		
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_Timer:
+				main_region_Timer_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
-		exitAction();
+		timer.unsetTimer(this, 0);
 	}
 	
 	/**
@@ -295,7 +314,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	
 	/**
 	* Set the {@link ITimer} for the state machine. It must be set
-	* externally on a timed state machine before a run cycle can be correct
+	* externally on a timed state machine before a run cycle can be correctly
 	* executed.
 	* 
 	* @param timer
@@ -315,6 +334,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	
 	public void timeElapsed(int eventID) {
 		timeEvents[eventID] = true;
+		runCycle();
 	}
 	
 	public SCIIf getSCIIf() {
@@ -334,16 +354,6 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	public void setInternalOperationCallback(
 			InternalOperationCallback operationCallback) {
 		this.operationCallback = operationCallback;
-	}
-	
-	/* Entry action for statechart 'StatechartKeywords'. */
-	private void entryAction() {
-		timer.setTimer(this, 0, 1 * 1000, true);
-	}
-	
-	/* Exit action for state 'StatechartKeywords'. */
-	private void exitAction() {
-		timer.unsetTimer(this, 0);
 	}
 	
 	/* 'default' enter sequence for state Timer */
@@ -379,7 +389,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		enterSequence_main_region_Timer_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		if (timeEvents[0]) {
 			setTimerVariable(getTimerVariable() + 1);
 		}
@@ -390,29 +400,11 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_Timer:
-				main_region_Timer_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

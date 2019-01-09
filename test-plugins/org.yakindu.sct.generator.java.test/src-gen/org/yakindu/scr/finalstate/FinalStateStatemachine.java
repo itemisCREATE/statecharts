@@ -1,7 +1,7 @@
 package org.yakindu.scr.finalstate;
 
-public class FinalStateStatemachine implements IFinalStateStatemachine {
 
+public class FinalStateStatemachine implements IFinalStateStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {
@@ -13,6 +13,7 @@ public class FinalStateStatemachine implements IFinalStateStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	public FinalStateStatemachine() {
 	}
@@ -29,11 +30,31 @@ public class FinalStateStatemachine implements IFinalStateStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_myState:
+				main_region_myState_react(true);
+				break;
+			case main_region__final_:
+				main_region__final__react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -126,7 +147,7 @@ public class FinalStateStatemachine implements IFinalStateStatemachine {
 		enterSequence_main_region_myState_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -134,12 +155,10 @@ public class FinalStateStatemachine implements IFinalStateStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_myState();
 				enterSequence_main_region__final__default();
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -148,32 +167,11 @@ public class FinalStateStatemachine implements IFinalStateStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_myState:
-				main_region_myState_react(true);
-				break;
-			case main_region__final_:
-				main_region__final__react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

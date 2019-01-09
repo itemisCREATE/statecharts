@@ -93,15 +93,35 @@ class CppNaming extends Naming {
 		TIME_EVENTS
 	}
 	
+	override enterStateTracingFctID(ExecutionFlow it) {
+		STATE_ENTERED
+	}
+	
+	override exitStateTracingFctID(ExecutionFlow it) {
+		STATE_EXITED
+	}
+	
+	def traceObserverModule() {
+		TRACE_OBSERVER
+	}
+	
+	def scTracing() {
+		SM_TRACING
+	}
+	
+	def YSCNamespace() {
+		YSC_NAMESPACE
+	}
+	
 	override dispatch scopeTypeDeclMember(VariableDefinition it) '''
 		«IF type.name != 'void'»«IF const»static const «ENDIF»«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
 	'''
 
-	def protected signature(OperationDefinition it) '''
+	def public signature(OperationDefinition it) '''
 	«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»(«FOR parameter : parameters SEPARATOR ', '»«IF parameter.isVarArgs»...«ELSE»«parameter.typeSpecifier.
 		targetLanguageName» «parameter.identifier»«ENDIF»«ENDFOR»)'''
 
-	def protected OCB_InterfaceSetterDeclaration(StatechartScope scope, boolean fqn) '''
+	def public OCB_InterfaceSetterDeclaration(StatechartScope scope, boolean fqn) '''
 	void «IF fqn»«scope.flow.module»::«ENDIF»set«scope.interfaceOCBName»(«scope.interfaceOCBName»* operationCallback)'''
 
 	def protected identifier(Parameter parameter) {
@@ -118,6 +138,10 @@ class CppNaming extends Naming {
 
 	def OCB_Instance(Scope it) {
 		it.instance + "_OCB"
+	}
+	
+	def tracingInstance(ExecutionFlow it) {
+		"iface" + traceObserverModule
 	}
 
 	def dispatch String getInterfaceName(Scope it) '''
@@ -206,6 +230,10 @@ class CppNaming extends Naming {
 	
 	override isFinalFctID(ExecutionFlow it) {
 		IS_FINAL
+	}
+	
+	def numTimeEventsFctID(ExecutionFlow it) {
+		"getNumberOfParallelTimeEvents"
 	}
 
 	override dispatch access(OperationDefinition it) {

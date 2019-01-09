@@ -3,7 +3,7 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.yakindu.sct.model.stext/emf-gen" editDirectory="/org.yakindu.sct.model.stext.edit/src"
     editorDirectory="/org.yakindu.sct.model.stext.editor/src" modelPluginID="org.yakindu.sct.model.stext"
     forceOverwrite="true" modelName="SText" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
     editPluginID="org.yakindu.sct.model.stext.edit" editorPluginID="org.yakindu.sct.model.stext.editor"
     runtimeVersion="2.8" usedGenPackages="../../org.yakindu.base.expressions/model/Expressions.genmodel#//expressions ../../org.yakindu.base.types/model/base.genmodel#//base ../../org.yakindu.base.types/model/types.genmodel#//types ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.genmodel#//sgraph">
   <foreignModel>SText.ecore</foreignModel>
@@ -32,9 +32,7 @@
     <genClasses ecoreClass="SText.ecore#//TransitionRoot">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//TransitionRoot/def"/>
     </genClasses>
-    <genClasses ecoreClass="SText.ecore#//StatechartSpecification">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//StatechartSpecification/annotations"/>
-    </genClasses>
+    <genClasses ecoreClass="SText.ecore#//StatechartSpecification"/>
     <genClasses ecoreClass="SText.ecore#//StateSpecification">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//StateSpecification/scope"/>
     </genClasses>
@@ -48,9 +46,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute SText.ecore#//ImportScope/imports"/>
     </genClasses>
     <genClasses ecoreClass="SText.ecore#//EventDefinition"/>
-    <genClasses ecoreClass="SText.ecore#//VariableDefinition">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//VariableDefinition/initialValue"/>
-    </genClasses>
+    <genClasses ecoreClass="SText.ecore#//VariableDefinition"/>
     <genClasses ecoreClass="SText.ecore#//OperationDefinition"/>
     <genClasses ecoreClass="SText.ecore#//TypeAliasDefinition"/>
     <genClasses ecoreClass="SText.ecore#//LocalReaction"/>
@@ -96,6 +92,5 @@
     <genClasses ecoreClass="SText.ecore#//ActiveStateReferenceExpression">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SText.ecore#//ActiveStateReferenceExpression/value"/>
     </genClasses>
-    <genClasses ecoreClass="SText.ecore#//ArgumentedAnnotation"/>
   </genPackages>
 </genmodel:GenModel>

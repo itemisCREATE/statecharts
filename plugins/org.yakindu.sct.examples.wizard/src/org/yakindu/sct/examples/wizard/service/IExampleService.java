@@ -22,13 +22,18 @@ import org.yakindu.sct.examples.wizard.service.data.ExampleData;
  * 
  */
 public interface IExampleService {
-	
+
 	public boolean exists();
-	
-	public boolean isUpToDate(IProgressMonitor monitor);
-	
+
+	public UpdateResult fetchNewUpdates(IProgressMonitor monitor);
+
 	public IStatus fetchAllExamples(IProgressMonitor monitor);
 
 	public List<ExampleData> getExamples(IProgressMonitor monitor);
 
+	enum UpdateResult {
+		UPDATE_AVAILABLE, NO_UPDATES, 
+		
+		REMOTE_BRANCH_NOT_FOUND, INVALID_CONFIGURATION, REPO_CONTAINS_CONFLICTS;
+	}
 }

@@ -17,7 +17,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.yakindu.base.types.Type#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.yakindu.base.types.Type#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.yakindu.base.types.Type#isVisible <em>Visible</em>}</li>
  *   <li>{@link org.yakindu.base.types.Type#getSuperTypes <em>Super Types</em>}</li>
@@ -28,22 +27,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface Type extends PackageMember {
-
-	/**
-	 * Returns the value of the '<em><b>Constraint</b></em>' containment reference list.
-	 * The list contents are of type {@link org.yakindu.base.types.TypeConstraint}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Constraint</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Constraint</em>' containment reference list.
-	 * @see org.yakindu.base.types.TypesPackage#getType_Constraint()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<TypeConstraint> getConstraint();
 
 	/**
 	 * Returns the value of the '<em><b>Abstract</b></em>' attribute.

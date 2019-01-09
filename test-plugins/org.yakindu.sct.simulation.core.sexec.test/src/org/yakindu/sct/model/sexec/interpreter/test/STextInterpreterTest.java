@@ -18,8 +18,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.interpreter.IExpressionInterpreter;
+import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sexec.interpreter.test.util.SimulationInjectorProvider;
@@ -556,6 +556,16 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		execute("internal: alias MyComplexType : ComplexType var cpVar : MyComplexType", "cpVar.x = 42");
 		assertEquals(42L, context.getVariable("cpVar.x").getValue());
 	}
+	
+	@Test
+	public void testInnerComplexTypeAssignment() {
+		execute("internal: var cpVar : ComplexType var intVar : integer", "cpVar.y.x = 42");
+		assertEquals(42L, context.getVariable("cpVar.y.x").getValue());
+		assertEquals(0, context.getVariable("intVar").getValue());
+		
+		execute("internal: var cpVar : ComplexType var intVar : integer", "intVar = cpVar.y.x");
+		assertEquals(42L, context.getVariable("intVar").getValue());
+	}
 
 	// Convenience...
 
@@ -611,12 +621,26 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		cpVar.setName("cpVar");
 		cpVar.setFqName("cpVar");
 		
-		ExecutionVariable featureVar = new ExecutionVariableImpl();
-		featureVar.setName("x");
-		featureVar.setFqName("cpVar.x");
-		featureVar.setType(typeSystem.getType(GenericTypeSystem.INTEGER));
-		featureVar.setValue(0);
-		cpVar.getSlots().add(featureVar);
+		ExecutionVariable featureX = new ExecutionVariableImpl();
+		featureX.setName("x");
+		featureX.setFqName("cpVar.x");
+		featureX.setType(typeSystem.getType(GenericTypeSystem.INTEGER));
+		featureX.setValue(0);
+		
+		CompositeSlot featureY = new CompositeSlotImpl();
+		featureY.setName("y");
+		featureY.setFqName("cpVar.y");
+		
+		ExecutionVariable featureYA = new ExecutionVariableImpl();
+		featureYA.setName("x");
+		featureYA.setFqName("cpVar.y.x");
+		featureYA.setType(typeSystem.getType(GenericTypeSystem.INTEGER));
+		featureYA.setValue(0);
+		featureY.getSlots().add(featureYA);
+		
+		cpVar.getSlots().add(featureX);
+		cpVar.getSlots().add(featureY);
+		
 		context.getSlots().add(cpVar);
 	}
 

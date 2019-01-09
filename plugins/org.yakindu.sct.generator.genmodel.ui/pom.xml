@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.yakindu.sct</groupId>
 		<artifactId>org.yakindu.sct.releng</artifactId>
-		<version>3.4.2-SNAPSHOT</version>
+		<version>3.5.0-SNAPSHOT</version>
 		<relativePath>../../releng/org.yakindu.sct.releng/pom.xml</relativePath>
 	</parent>
 	<artifactId>org.yakindu.sct.generator.genmodel.ui</artifactId>
@@ -48,7 +48,6 @@
 								<include>**</include>
 							</includes>
 							<excludes>
-								<exclude>.svn/</exclude>
 								<exclude>.gitignore</exclude>
 							</excludes>
 						</fileset>

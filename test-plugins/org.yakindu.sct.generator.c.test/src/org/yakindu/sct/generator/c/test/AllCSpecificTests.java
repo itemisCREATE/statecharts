@@ -26,8 +26,9 @@ import org.junit.runners.Suite.SuiteClasses;
 	OperationsWithoutBracesCustom.class,
 	InternalEventLifeCycleTest_Naming.class,
 	PedanticNoLocalEventsTest.class,
-		VariadicOperations.class,
-		StateNumTest.class
+	VariadicOperations.class,
+	StateNumTest.class,
+	TracingTest.class
 })
 public class AllCSpecificTests {
 }

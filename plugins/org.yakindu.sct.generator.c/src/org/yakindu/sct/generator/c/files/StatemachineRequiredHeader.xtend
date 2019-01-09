@@ -12,7 +12,6 @@ package org.yakindu.sct.generator.c.files
 
 import com.google.inject.Inject
 import org.yakindu.base.types.Declaration
-import org.yakindu.sct.generator.c.CGeneratorConstants
 import org.yakindu.sct.generator.c.IContentTemplate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.extensions.GenmodelEntries
@@ -42,7 +41,7 @@ class StatemachineRequiredHeader implements IContentTemplate {
 		#define «module.client.define»_H_
 
 		#include "«(typesModule.h).relativeTo(module.client.h)»"
-		«IF timed || operations.size > 0 || entry.tracingEnterState || entry.tracingExitState»
+		«IF timed || operations.size > 0 || entry.tracingUsed»
 		#include "«(module.h).relativeTo(module.client.h)»"
 		«ENDIF»
 
@@ -101,7 +100,7 @@ class StatemachineRequiredHeader implements IContentTemplate {
 		«ENDIF»
 		
 		
-		«IF entry.tracingEnterState || entry.tracingExitState»
+		«IF entry.tracingUsed»
 		/*!
 		 * Tracing callback functions
 		 */

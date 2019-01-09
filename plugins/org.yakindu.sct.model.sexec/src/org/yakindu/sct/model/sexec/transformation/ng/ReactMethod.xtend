@@ -13,10 +13,10 @@ package org.yakindu.sct.model.sexec.transformation.ng
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
-import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.RelationalOperator
+import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.Property
@@ -32,7 +32,6 @@ import org.yakindu.sct.model.sexec.LocalVariableDefinition
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Return
 import org.yakindu.sct.model.sexec.Sequence
-import org.yakindu.sct.model.sexec.StateVector
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions
@@ -69,7 +68,7 @@ class ReactMethod {
 	 */	
 	def defineReactMethods(ExecutionFlow it) {
 
-		flow.defineReactMethod
+		if (flow.reactMethod !== null) flow.defineReactMethod
 		states.forEach[s | s.defineReactMethod ]
 		
 	}
@@ -93,6 +92,15 @@ class ReactMethod {
 		]
 	}
 
+	def dispatch ExecutionNode declareReactMethod(ExecutionFlow node) {
+		node => [
+			features.add( sexecFactory.createMethod => [ m |
+				m.name = "react"
+				m._type(_bool)
+			])
+		]
+	}
+
 	
 	def defineReactMethod(ExecutionFlow it) {
 		reactMethod => [ body = 
@@ -112,8 +120,8 @@ class ReactMethod {
 		val childFirst = state.statechart.isChildFirstExecution
 				
 		val parentNode = if (state.parentState !== null) state.parentState.create else execState.flow
-		val processParent = 	   parentNode !== null 
-							&& (	    ( childFirst && parentNode.stateVector.last == execState.impactVector.last)
+		val processParent = 	   parentNode !== null
+							&& (	    ( childFirst && parentNode.impactVector.last == execState.impactVector.last)
 							     || (!childFirst && parentNode.stateVector.offset == execState.stateVector.offset)
 							   )
 				 				
@@ -130,7 +138,7 @@ class ReactMethod {
 					_if(tryTransitionParam._ref)
 						._then (
 							if (processParent && !childFirst) 
-								_if(_call(parentNode.reactMethod)._with(tryTransitionParam._ref)._equals(_false))
+								_if(parentNode.callReact(_ref(tryTransitionParam))._equals(_false))
 									._then ( 
 										execState.createReactionSequence(
 											didTransitionVariable._assign(_false)) 
@@ -140,14 +148,16 @@ class ReactMethod {
 									didTransitionVariable._assign(_false))
 						),
 								
-					_if(didTransitionVariable._ref._equals(_false))
-						._then(
-							_sequence(
-								execState.createLocalReactionSequence => [
-									if (processParent && childFirst) 
-										_step(didTransitionVariable._assign(_call(parentNode.reactMethod)._with(_ref(tryTransitionParam))))	
-								])		
-						),
+					if ( execState.localReactions.size > 0 || (processParent && childFirst ))
+						_if(didTransitionVariable._ref._equals(_false))
+							._then(
+								_sequence(
+									execState.createLocalReactionSequence => [
+										if (processParent && childFirst) 
+											_step(didTransitionVariable._assign(parentNode.callReact(_ref(tryTransitionParam))))	
+									])		
+							)
+					else _sequence(), // empty sequence ...
 						
 					_return(didTransitionVariable._ref)
 				)
@@ -165,6 +175,13 @@ class ReactMethod {
 	} 
 	
 
+
+	def dispatch callReact(ExecutionState state, Expression p)  { _call(state.reactMethod)._with(p) }
+
+	def dispatch callReact(ExecutionFlow flow, Expression p)  { _call(flow.reactMethod) }
+	
+	
+	
 	def _step(Sequence it, Step step) {
 		steps.add(step)
 		return steps
@@ -349,5 +366,9 @@ class ReactMethod {
 		return cycle
 	}
 	
+	
+	def localReactions(ExecutionNode it) {
+		reactions.filter[ r | ! r.transition ].toList	
+	}
 	
 }

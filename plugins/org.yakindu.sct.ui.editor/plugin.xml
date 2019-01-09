@@ -271,10 +271,11 @@
             icon="icons/obj16/logo-16.png"
             id="org.yakindu.sct.ui.editor.StatechartDiagramWizard"
             name="Statechart Model"
+            preferredPerspectives="org.yakindu.sct.ui.ModelingPerspective,org.eclipse.cdt.ui.CPerspective,org.yakindu.sct.ui.SimulationPerspective">
             project="false">
       </wizard>
    </extension>
-   
+  
 <!-- Palette Provider -->
 <extension
      point="org.eclipse.gmf.runtime.diagram.ui.paletteProviders">
@@ -948,5 +949,59 @@
           schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
           sequence="M3+M1+H">
     </key>
+ </extension>
+ <extension
+       point="org.eclipse.ui.perspectiveExtensions">
+    <perspectiveExtension
+          targetID="*">
+       <newWizardShortcut
+             id="org.yakindu.sct.ui.editor.StatechartDiagramWizard">
+       </newWizardShortcut>
+       <newWizardShortcut
+             id="org.yakindu.sct.generator.genmodel.ui.SGenNewFileWizard">
+       </newWizardShortcut>
+    </perspectiveExtension>
+ </extension>
+ <extension
+       point="org.eclipse.ui.navigator.navigatorContent">
+    <commonWizard
+          menuGroupId="org.yakindu.statecharttools"
+          type="new"
+          wizardId="org.yakindu.sct.generator.genmodel.ui.SGenNewFileWizard">
+       <enablement>
+          <or>
+             <adapt
+                   type="org.eclipse.core.resources.IFile">
+             </adapt>
+             <adapt
+                   type="org.eclipse.core.resources.IFolder">
+             </adapt>
+             <adapt
+                   type="org.eclipse.core.resources.IProject">
+             </adapt>
+          </or>
+       </enablement>
+    </commonWizard>
+ </extension>
+ <extension
+       point="org.eclipse.ui.navigator.navigatorContent">
+    <commonWizard
+          menuGroupId="org.yakindu.statecharttools"
+          type="new"
+          wizardId="org.yakindu.sct.ui.editor.StatechartDiagramWizard">
+       <enablement>
+          <or>
+             <adapt
+                   type="org.eclipse.core.resources.IFile">
+             </adapt>
+             <adapt
+                   type="org.eclipse.core.resources.IFolder">
+             </adapt>
+             <adapt
+                   type="org.eclipse.core.resources.IProject">
+             </adapt>
+          </or>
+       </enablement>
+    </commonWizard>
  </extension>
 </plugin>

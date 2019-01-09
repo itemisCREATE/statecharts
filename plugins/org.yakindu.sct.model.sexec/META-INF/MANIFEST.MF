@@ -1,10 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: YAKINDU Execution Model
+Bundle-Name: %pluginName
 Bundle-SymbolicName: org.yakindu.sct.model.sexec;singleton:=true
-Bundle-Version: 3.4.2.qualifier
+Automatic-Module-Name: org.yakindu.sct.model.sexec
+Bundle-Version: 3.5.0.qualifier
 Bundle-ClassPath: .
-Bundle-Vendor: statecharts.org
+Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.yakindu.sct.model.sexec,

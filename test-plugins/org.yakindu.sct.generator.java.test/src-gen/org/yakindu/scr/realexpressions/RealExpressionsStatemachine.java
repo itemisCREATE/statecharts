@@ -1,7 +1,7 @@
 package org.yakindu.scr.realexpressions;
 
-public class RealExpressionsStatemachine implements IRealExpressionsStatemachine {
 
+public class RealExpressionsStatemachine implements IRealExpressionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e1;
@@ -293,6 +293,7 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 	
 	private int nextStateIndex;
 	
+	
 	public RealExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -360,11 +361,31 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_StateA:
+				main_region_StateA_react(true);
+				break;
+			case main_region_StateB:
+				main_region_StateB_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -653,15 +674,15 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		
 		sCInterface.setNotEqual(sCInterface.myReal1!=sCInterface.myReal2);
 		
-		sCInterface.setPlus((15.89<=(sCInterface.myReal1 + sCInterface.myReal2) && (sCInterface.myReal1 + sCInterface.myReal2)<=16.91));
+		sCInterface.setPlus(((15.89<=((sCInterface.myReal1 + sCInterface.myReal2)) && ((sCInterface.myReal1 + sCInterface.myReal2))<=16.91)));
 		
-		sCInterface.setMinus((5.29<=(sCInterface.myReal2 - sCInterface.myReal1) && (sCInterface.myReal1 - sCInterface.myReal2)<=5.31));
+		sCInterface.setMinus(((5.29<=((sCInterface.myReal2 - sCInterface.myReal1)) && ((sCInterface.myReal1 - sCInterface.myReal2))<=5.31)));
 		
-		sCInterface.setMultiply((56.17<=(sCInterface.myReal1 * sCInterface.myReal2) && (sCInterface.myReal1 * sCInterface.myReal2)<=56.19));
+		sCInterface.setMultiply(((56.17<=((sCInterface.myReal1 * sCInterface.myReal2)) && ((sCInterface.myReal1 * sCInterface.myReal2))<=56.19)));
 		
-		sCInterface.setDivision((1.9<=(sCInterface.myReal2 / sCInterface.myReal1) && (sCInterface.myReal1 / sCInterface.myReal2)<=2.1));
+		sCInterface.setDivision(((1.9<=((sCInterface.myReal2 / sCInterface.myReal1)) && ((sCInterface.myReal1 / sCInterface.myReal2))<=2.1)));
 		
-		sCInterface.setModulo((-0.1<=(sCInterface.myReal2 % sCInterface.myReal1) && (sCInterface.myReal1 % sCInterface.myReal2)<=0.1));
+		sCInterface.setModulo(((-0.1<=((sCInterface.myReal2 % sCInterface.myReal1)) && ((sCInterface.myReal1 % sCInterface.myReal2))<=0.1)));
 		
 		sCInterface.setNegat(-sCInterface.myReal1);
 		
@@ -730,7 +751,7 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		enterSequence_main_region_StateA_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -738,7 +759,7 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e1) {
 					exitSequence_main_region_StateA();
 					enterSequence_main_region_StateB_default();
@@ -747,8 +768,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -756,32 +775,11 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_StateA:
-				main_region_StateA_react(true);
-				break;
-			case main_region_StateB:
-				main_region_StateB_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

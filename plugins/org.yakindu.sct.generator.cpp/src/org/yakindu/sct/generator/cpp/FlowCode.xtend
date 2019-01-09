@@ -11,6 +11,7 @@
 package org.yakindu.sct.generator.cpp
 
 import com.google.inject.Inject
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.CheckRef
@@ -26,11 +27,14 @@ import org.yakindu.sct.model.sexec.ScheduleTimeEvent
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.Statement
+import org.yakindu.sct.model.sexec.TraceStateEntered
+import org.yakindu.sct.model.sexec.TraceStateExited
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.sct.model.sgen.GeneratorEntry
 
 class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	
@@ -38,6 +42,9 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	@Inject extension CppExpressionsGenerator expressions
 	@Inject extension SExecExtensions
 	@Inject extension INamingService
+	@Inject extension GenmodelEntries
+	
+	@Inject GeneratorEntry entry
 	
 	override dispatch CharSequence code(SaveHistory it) '''
 		«stepComment»
@@ -73,6 +80,18 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 			«ENDFOR»
 			default: break;
 		}
+	'''
+	
+	override dispatch CharSequence code(TraceStateEntered it) '''
+		«IF entry.tracingEnterState»
+		«flow.tracingInstance»->«flow.enterStateTracingFctID»(«flow.module»::«it.state.stateName»);
+		«ENDIF»
+	'''
+	
+	override dispatch CharSequence code(TraceStateExited it) '''
+		«IF entry.tracingExitState»
+		«flow.tracingInstance»->«flow.exitStateTracingFctID»(«flow.module»::«it.state.stateName»);
+		«ENDIF»
 	'''
 
 	override dispatch CharSequence code(ScheduleTimeEvent it) '''

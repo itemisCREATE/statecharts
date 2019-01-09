@@ -28,6 +28,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.yakindu.base.types.TypesFactory;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgen.SGenFactory;
 import org.yakindu.sct.model.sgen.SGenPackage;
@@ -192,7 +193,7 @@ public class GeneratorModelItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SGenPackage.Literals.GENERATOR_MODEL__PROPERTIES,
-				 SGenFactory.eINSTANCE.createPropertyDefinition()));
+				 TypesFactory.eINSTANCE.createProperty()));
 	}
 
 	/**

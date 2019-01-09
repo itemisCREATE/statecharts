@@ -18,15 +18,17 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.INTPTR_TYPE
 import static org.yakindu.sct.generator.c.CGeneratorConstants.BOOL_TYPE
-import static org.yakindu.sct.generator.c.CGeneratorConstants.TRUE
+import org.yakindu.sct.generator.c.types.CLiterals
 
 /**
  * @author rbeckmann
+ * @author axel terfloth
  *
  */
 @Singleton // Guice
 class EventDrivenAPIGenerator extends APIGenerator {
 	@Inject protected extension EventNaming
+	@Inject protected extension CLiterals
 	
 	override protected initFunctionBody(ExecutionFlow it) {
 		'''
@@ -64,9 +66,9 @@ class EventDrivenAPIGenerator extends APIGenerator {
 			«raiseTimeEventSignature»
 			{
 				if ( ((«INTPTR_TYPE»)evid) >= ((«INTPTR_TYPE»)&(«scHandle»->timeEvents))
-					&&  ((«INTPTR_TYPE»)evid) < ((«INTPTR_TYPE»)&(«scHandle»->timeEvents)) + sizeof(«timeEventScope.type»))
+					&&  ((«INTPTR_TYPE»)evid) < ((«INTPTR_TYPE»)&(«scHandle»->timeEvents)) + (unsigned)sizeof(«timeEventScope.type»))
 				{
-					*(«BOOL_TYPE»*)evid = «TRUE»;
+					*(«BOOL_TYPE»*)evid = «TRUE_LITERAL»;
 					
 					«runCycleFctID»(«scHandle»);
 				}

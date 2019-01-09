@@ -13,7 +13,6 @@ package org.yakindu.sct.model.stext.ui.hyperlink;
 import java.util.Optional;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
@@ -26,6 +25,7 @@ import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper;
 import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.stext.ImportScope;
+import org.eclipse.jface.text.hyperlink.IHyperlink;
 
 import com.google.inject.Inject;
 
@@ -55,17 +55,18 @@ public class PackageImportHyperlinkHelper extends HyperlinkHelper {
 			for (String pkgImport : imports) {
 				Optional<PackageImport> mappedImport = mapper.findPackageImport(resource, pkgImport);
 				if (mappedImport.isPresent()) {
-					final URI targetURI = mappedImport.get().getUri();
-					XtextHyperlink result = getHyperlinkProvider().get();
-					result.setURI(targetURI);
-					Region region = new Region(node.getOffset(), node.getLength());
-					result.setHyperlinkRegion(region);
-					result.setHyperlinkText(targetURI.toString());
-					acceptor.accept(result);
+					acceptor.accept(createHyperlink(node, mappedImport.get()));
 				}
 			}
-
 		}
+	}
 
+	protected IHyperlink createHyperlink(INode node, final PackageImport pkgImport) {
+		XtextHyperlink result = getHyperlinkProvider().get();
+		result.setURI(pkgImport.getUri());
+		Region region = new Region(node.getOffset(), node.getLength());
+		result.setHyperlinkRegion(region);
+		result.setHyperlinkText(pkgImport.getUri().toString());
+		return result;
 	}
 }

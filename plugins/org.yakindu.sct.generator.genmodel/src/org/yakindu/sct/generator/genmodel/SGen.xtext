@@ -23,8 +23,8 @@ GeneratorModel returns GeneratorModel:
 	(entries+=GeneratorEntry)*
 	'}';
 
-PropertyDefinition returns PropertyDefinition:
-	{PropertyDefinition} ('var') name=ID ':' typeSpecifier=TypeSpecifier
+PropertyDefinition returns types::Property:
+	('var') name=ID ':' typeSpecifier=TypeSpecifier
 	'=' initialValue=Expression;
 
 GeneratorEntry returns GeneratorEntry:

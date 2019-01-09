@@ -1,7 +1,7 @@
 package org.yakindu.scr.alwaysoncycle;
 
-public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 
+public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private long value;
@@ -40,6 +40,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public AlwaysOncycleStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -59,11 +60,31 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_StateA:
+				main_region_StateA_react(true);
+				break;
+			case main_region_StateB:
+				main_region_StateB_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -191,7 +212,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		enterSequence_main_region_StateA_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -199,7 +220,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.getValue()==5) {
 					exitSequence_main_region_StateA();
 					enterSequence_main_region_StateB_default();
@@ -218,7 +239,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.getValue()==5) {
 					exitSequence_main_region_StateB();
 					enterSequence_main_region_StateA_default();
@@ -233,23 +254,4 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_StateA:
-				main_region_StateA_react(true);
-				break;
-			case main_region_StateB:
-				main_region_StateB_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

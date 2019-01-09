@@ -79,9 +79,11 @@ public class ExampleModelOpener {
 	}
 
 	protected void addExampleDesc(IProject project, List<IFile> filesToOpen) {
-		IResource indexFile = project.findMember(ExampleData.DESC_FILE);
-		if (indexFile != null) {
-			filesToOpen.add((IFile) indexFile);
+		if (ExampleData.DESC_FILE != null) {
+			IResource indexFile = project.findMember(ExampleData.DESC_FILE);
+			if (indexFile != null) {
+				filesToOpen.add((IFile) indexFile);
+			}
 		}
 	}
 

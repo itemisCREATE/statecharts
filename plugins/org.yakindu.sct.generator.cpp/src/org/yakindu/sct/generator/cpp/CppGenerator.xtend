@@ -14,8 +14,16 @@ import com.google.inject.Inject
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations.GenArtifactConfiguration
+import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
+import org.yakindu.sct.generator.cpp.files.StatemachineHeader
+import org.yakindu.sct.generator.cpp.files.StatemachineImplementation
+import org.yakindu.sct.generator.cpp.files.StatemachineInterface
+import org.yakindu.sct.generator.cpp.files.TimedStatemachineInterface
+import org.yakindu.sct.generator.cpp.files.TimerInterface
+import org.yakindu.sct.generator.cpp.files.Tracing
+import org.yakindu.sct.generator.cpp.files.Types
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
@@ -37,9 +45,11 @@ class CppGenerator implements IExecutionFlowGenerator {
 	@Inject extension StatemachineInterface statemachineInterfaceContent
 	@Inject extension StatemachineHeader statemachineHeaderContent
 	@Inject extension StatemachineImplementation statemachineSourceContent
+	@Inject extension Tracing tracingContent
 	@Inject extension SExecExtensions
 	@Inject extension CppNaming
 	@Inject extension ICoreLibraryHelper
+	@Inject extension GenmodelEntries
 
 	@Inject
 	IGenArtifactConfigurations locations
@@ -71,6 +81,10 @@ class CppGenerator implements IExecutionFlowGenerator {
 
 		locations.configure(flow.module.h, entry.headerOutput, statemachineHeaderContent)
 		locations.configure(flow.module.cpp, entry.sourceOutput, statemachineSourceContent)
+		
+		if (entry.tracingUsed) {
+			locations.configure(scTracing.h, entry.libraryOutput, tracingContent);
+		}
 	}
 
 	def isEventDriven(ExecutionFlow it) {

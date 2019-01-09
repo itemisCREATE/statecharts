@@ -18,10 +18,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="def" eType="#//TransitionSpecification"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StatechartSpecification" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//ScopedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
-        eType="#//ArgumentedAnnotation" containment="true"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StatechartSpecification" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//ScopedElement ../../org.yakindu.base.types/model/types.ecore#//AnnotatableElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="StateSpecification">
     <eStructuralFeatures xsi:type="ecore:EReference" name="scope" eType="ecore:EClass ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Scope"
         containment="true"/>
@@ -34,20 +31,17 @@
   <eClassifiers xsi:type="ecore:EClass" name="InterfaceScope" eSuperTypes="#//StatechartScope ../../org.yakindu.base.types/model/base.ecore#//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="InternalScope" eSuperTypes="#//StatechartScope"/>
   <eClassifiers xsi:type="ecore:EClass" name="ImportScope" eSuperTypes="#//StatechartScope">
-  	<eStructuralFeatures xsi:type="ecore:EAttribute" name="imports" upperBound="-1"
-		eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="imports" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EventDefinition" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Event"/>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableDefinition" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Property">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="initialValue" eType="ecore:EClass ../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression"
-        containment="true"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableDefinition" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Property"/>
   <eClassifiers xsi:type="ecore:EClass" name="OperationDefinition" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Operation"/>
   <eClassifiers xsi:type="ecore:EClass" name="TypeAliasDefinition" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//TypeAlias ../../org.yakindu.base.types/model/types.ecore#//Declaration"/>
   <eClassifiers xsi:type="ecore:EClass" name="LocalReaction" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Reaction"/>
   <eClassifiers xsi:type="ecore:EClass" name="TransitionReaction" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Reaction"/>
   <eClassifiers xsi:type="ecore:EClass" name="Guard">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EntryPointSpec" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//ReactionProperty">
@@ -58,12 +52,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EventSpec"/>
   <eClassifiers xsi:type="ecore:EClass" name="RegularEventSpec" eSuperTypes="#//EventSpec">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="ecore:EClass ../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TimeEventSpec" eSuperTypes="#//EventSpec">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//TimeEventType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="#//TimeUnit"/>
   </eClassifiers>
@@ -91,21 +85,20 @@
   <eClassifiers xsi:type="ecore:EClass" name="DefaultTrigger" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Trigger"/>
   <eClassifiers xsi:type="ecore:EClass" name="ReactionEffect" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Effect">
     <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
-        eType="ecore:EClass ../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression"
+        eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EventRaisingExpression" eSuperTypes="../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="ecore:EClass ../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression"
+  <eClassifiers xsi:type="ecore:EClass" name="EventRaisingExpression" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EventValueReferenceExpression" eSuperTypes="../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ActiveStateReferenceExpression" eSuperTypes="../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="EventValueReferenceExpression" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActiveStateReferenceExpression" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//State"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ArgumentedAnnotation" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Annotation ../../org.yakindu.base.expressions/model/Expressions.ecore#//ArgumentExpression"/>
 </ecore:EPackage>

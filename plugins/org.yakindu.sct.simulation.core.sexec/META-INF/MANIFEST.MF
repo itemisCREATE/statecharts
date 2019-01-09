@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Simulation Execution
 Bundle-SymbolicName: org.yakindu.sct.simulation.core.sexec;singleton:=true
-Bundle-Version: 3.4.2.qualifier
+Bundle-Version: 3.5.0.qualifier
 Bundle-Activator: org.yakindu.sct.simulation.core.sexec.SExecCoreActivator
 Require-Bundle: org.yakindu.sct.simulation.core,
  org.eclipse.core.runtime,
@@ -25,4 +25,5 @@ Export-Package: org.yakindu.sct.simulation.core.sexec,
  org.yakindu.sct.simulation.core.sexec.interpreter,
  org.yakindu.sct.simulation.core.sexec.launch
 Bundle-Vendor: statecharts.org
+Automatic-Module-Name: org.yakindu.sct.simulation.core.sexec
 

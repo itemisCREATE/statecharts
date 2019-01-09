@@ -25,7 +25,7 @@ import static org.yakindu.base.types.typesystem.ITypeSystem.*
 class OldJavaTypeSystemAccess implements ICodegenTypeSystemAccess {
 
 	@Inject
-	private extension ITypeSystem ts
+	extension ITypeSystem ts
 
 	override String getTargetLanguageName(Type type) {
 		switch (type) {

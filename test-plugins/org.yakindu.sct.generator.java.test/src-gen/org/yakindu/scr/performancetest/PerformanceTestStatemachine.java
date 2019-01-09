@@ -1,8 +1,8 @@
 package org.yakindu.scr.performancetest;
+
 import org.yakindu.scr.ITimer;
 
 public class PerformanceTestStatemachine implements IPerformanceTestStatemachine {
-
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e1;
@@ -88,6 +88,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	
 	private int nextStateIndex;
 	
+	
 	private ITimer timer;
 	
 	private final boolean[] timeEvents = new boolean[2];
@@ -118,18 +119,79 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
-		entryAction();
+		timer.setTimer(this, 0, 2000, true);
+		
+		timer.setTimer(this, 1, 6200, true);
+		
 		enterSequence_mr_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case mr_A:
+				mr_A_react(true);
+				break;
+			case mr_B_r1_X:
+				mr_B_r1_X_react(true);
+				break;
+			case mr_B_r1_Y:
+				mr_B_r1_Y_react(true);
+				break;
+			case mr_B_r1_Z:
+				mr_B_r1_Z_react(true);
+				break;
+			case mr_B_r1_V:
+				mr_B_r1_V_react(true);
+				break;
+			case mr_B_r1_W:
+				mr_B_r1_W_react(true);
+				break;
+			case mr_B_r1_S:
+				mr_B_r1_S_react(true);
+				break;
+			case mr_B_r1_T:
+				mr_B_r1_T_react(true);
+				break;
+			case mr_B_r1_U:
+				mr_B_r1_U_react(true);
+				break;
+			case mr_B_r2_S:
+				mr_B_r2_S_react(true);
+				break;
+			case mr_B_r2_T:
+				mr_B_r2_T_react(true);
+				break;
+			case mr_B_r2_U:
+				mr_B_r2_U_react(true);
+				break;
+			case mr_B_r2_V:
+				mr_B_r2_V_react(true);
+				break;
+			case mr_B_r2_W:
+				mr_B_r2_W_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_mr();
-		exitAction();
+		timer.unsetTimer(this, 0);
+		
+		timer.unsetTimer(this, 1);
 	}
 	
 	/**
@@ -207,7 +269,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	
 	/**
 	* Set the {@link ITimer} for the state machine. It must be set
-	* externally on a timed state machine before a run cycle can be correct
+	* externally on a timed state machine before a run cycle can be correctly
 	* executed.
 	* 
 	* @param timer
@@ -227,6 +289,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	
 	public void timeElapsed(int eventID) {
 		timeEvents[eventID] = true;
+		runCycle();
 	}
 	
 	public SCInterface getSCInterface() {
@@ -337,23 +400,9 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		enterSequence_mr_B_r1_S_default();
 	}
 	
-	/* Entry action for statechart 'PerformanceTest'. */
-	private void entryAction() {
-		timer.setTimer(this, 0, 2000, true);
-		
-		timer.setTimer(this, 1, 6200, true);
-	}
-	
 	/* Entry action for state 'A'. */
 	private void entryAction_mr_A() {
 		sCInterface.setA(sCInterface.getA() + 1);
-	}
-	
-	/* Exit action for state 'PerformanceTest'. */
-	private void exitAction() {
-		timer.unsetTimer(this, 0);
-		
-		timer.unsetTimer(this, 1);
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -773,7 +822,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		enterSequence_mr_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		sCInterface.setC(sCInterface.getC() + 1);
 		
 		if (timeEvents[0]) {
@@ -791,7 +840,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e1) {
 					exitSequence_mr_A();
 					enterSequence_mr_B_default();
@@ -800,8 +849,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -809,11 +856,9 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -831,8 +876,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -848,8 +891,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -867,8 +908,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -884,8 +923,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -903,8 +940,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -917,7 +952,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 					exitSequence_mr_B_r1_S();
 					react_mr_B_r1__choice_0();
 				} else {
-					if (true && isStateActive(State.mr_B_r2_W) && sCInterface.e3) {
+					if (((true && isStateActive(State.mr_B_r2_W)) && sCInterface.e3)) {
 						exitSequence_mr_B();
 						react_mr__sync0();
 					} else {
@@ -925,8 +960,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 					}
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -944,8 +977,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -962,8 +993,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -978,8 +1007,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -993,8 +1020,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 			} else {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -1015,8 +1040,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -1036,8 +1059,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -1045,71 +1066,14 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.e3 && isStateActive(State.mr_B_r1_S) && true) {
+			if (((sCInterface.e3 && isStateActive(State.mr_B_r1_S)) && true)) {
 				exitSequence_mr_B();
 				react_mr__sync0();
 			} else {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case mr_A:
-				mr_A_react(true);
-				break;
-			case mr_B_r1_X:
-				mr_B_r1_X_react(true);
-				break;
-			case mr_B_r1_Y:
-				mr_B_r1_Y_react(true);
-				break;
-			case mr_B_r1_Z:
-				mr_B_r1_Z_react(true);
-				break;
-			case mr_B_r1_V:
-				mr_B_r1_V_react(true);
-				break;
-			case mr_B_r1_W:
-				mr_B_r1_W_react(true);
-				break;
-			case mr_B_r1_S:
-				mr_B_r1_S_react(true);
-				break;
-			case mr_B_r1_T:
-				mr_B_r1_T_react(true);
-				break;
-			case mr_B_r1_U:
-				mr_B_r1_U_react(true);
-				break;
-			case mr_B_r2_S:
-				mr_B_r2_S_react(true);
-				break;
-			case mr_B_r2_T:
-				mr_B_r2_T_react(true);
-				break;
-			case mr_B_r2_U:
-				mr_B_r2_U_react(true);
-				break;
-			case mr_B_r2_V:
-				mr_B_r2_V_react(true);
-				break;
-			case mr_B_r2_W:
-				mr_B_r2_W_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

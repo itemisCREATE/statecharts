@@ -9,7 +9,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
-import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult;

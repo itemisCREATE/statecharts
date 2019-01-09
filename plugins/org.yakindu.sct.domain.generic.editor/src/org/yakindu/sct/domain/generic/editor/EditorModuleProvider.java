@@ -17,12 +17,13 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.STextRuntimeModule;
+import org.yakindu.sct.model.stext.ide.STextIdeModule;
 import org.yakindu.sct.model.stext.stext.Guard;
 import org.yakindu.sct.model.stext.stext.StateSpecification;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.ui.STextUiModule;
-import org.yakindu.sct.model.stext.ui.internal.STextActivator;
+import org.yakindu.sct.model.stext.ui.internal.StextActivator;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.inject.Module;
@@ -58,13 +59,12 @@ public class EditorModuleProvider implements IModuleProvider {
 	}
 
 	protected Module getLanguageModule() {
-		Module languageModule = Modules.override(getLanguageRuntimeModule())
-				.with(getLanguageUiModule());
+		Module languageModule = Modules.override(getLanguageRuntimeModule()).with(getLanguageUiModule());
 		return Modules.override(languageModule).with(new SharedStateModule());
 	}
 
 	protected Module getLanguageUiModule() {
-		return new STextUiModule(STextActivator.getInstance());
+		return new STextUiModule(StextActivator.getInstance());
 	}
 
 	protected Module getLanguageRuntimeModule() {

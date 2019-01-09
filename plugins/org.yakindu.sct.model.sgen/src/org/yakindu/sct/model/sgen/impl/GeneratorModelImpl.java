@@ -21,9 +21,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.yakindu.base.types.Property;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
-import org.yakindu.sct.model.sgen.PropertyDefinition;
 import org.yakindu.sct.model.sgen.SGenPackage;
 
 /**
@@ -79,7 +79,7 @@ public class GeneratorModelImpl extends EObjectImpl implements GeneratorModel {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<PropertyDefinition> properties;
+	protected EList<Property> properties;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -138,9 +138,9 @@ public class GeneratorModelImpl extends EObjectImpl implements GeneratorModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<PropertyDefinition> getProperties() {
+	public EList<Property> getProperties() {
 		if (properties == null) {
-			properties = new EObjectContainmentEList<PropertyDefinition>(PropertyDefinition.class, this, SGenPackage.GENERATOR_MODEL__PROPERTIES);
+			properties = new EObjectContainmentEList<Property>(Property.class, this, SGenPackage.GENERATOR_MODEL__PROPERTIES);
 		}
 		return properties;
 	}
@@ -197,7 +197,7 @@ public class GeneratorModelImpl extends EObjectImpl implements GeneratorModel {
 				return;
 			case SGenPackage.GENERATOR_MODEL__PROPERTIES:
 				getProperties().clear();
-				getProperties().addAll((Collection<? extends PropertyDefinition>)newValue);
+				getProperties().addAll((Collection<? extends Property>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

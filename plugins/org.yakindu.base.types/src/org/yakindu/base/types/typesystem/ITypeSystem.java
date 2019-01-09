@@ -37,7 +37,7 @@ public interface ITypeSystem {
 	public Collection<Type> getTypes();
 
 	public Collection<Type> getConcreteTypes();
-
+	
 	public Type getType(String name);
 
 	public boolean isSame(Type type1, Type type2);
@@ -63,5 +63,7 @@ public interface ITypeSystem {
 	public boolean isExtensionOperation(Operation op);
 
 	public boolean isExtensionProperty(Property prop);
+
+	boolean isConvertableTo(Type type1, Type type2);
 
 }

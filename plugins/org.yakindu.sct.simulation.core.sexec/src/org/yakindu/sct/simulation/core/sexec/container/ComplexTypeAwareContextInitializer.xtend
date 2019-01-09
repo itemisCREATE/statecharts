@@ -62,7 +62,7 @@ class ComplexTypeAwareContextInitializer extends DefaultExecutionContextInitiali
 		slot
 	}
 
-	def public ExecutionSlot createExecutionSlotFor(TypedElement element) {
+	def ExecutionSlot createExecutionSlotFor(TypedElement element) {
 		val inferenceResult = element.infer
 		val varType = inferenceResult.type
 

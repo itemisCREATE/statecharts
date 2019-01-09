@@ -1,0 +1,21 @@
+testclass StatechartEntryExitActions for statechart statechartactions.StatechartEntryAndExitActions {
+	
+	@Test operation entryActionsAreExecutedOnEnteringStatechart() {
+		
+		assert x == 0
+		assert y == 0
+		b = true
+		
+		enter
+		assert x == 5
+		assert y == 3 		
+	}
+
+	@Test operation exitActionsAreExecutedOnEnteringStatechart() {
+
+		enter		
+		exit
+		assert x == 6
+		assert y == 2 		
+	}
+}

@@ -10,14 +10,14 @@
  */
 package org.yakindu.sct.ui.wizards;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
@@ -38,16 +38,22 @@ public class WorkspaceTreeContentProvider implements ITreeContentProvider {
 		this.fileExtension = fileExtension;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public Object[] getElements(Object inputElement) {
-		if (inputElement instanceof IContainer) {
-			IContainer container = (IContainer) inputElement;
-			try {
-				return filterForContent(container.members());
-			} catch (CoreException e) {
-				e.printStackTrace();
+		try {
+			if (inputElement instanceof IContainer) {
+				return filterForContent(((IContainer) inputElement).members());
 			}
+			if (inputElement instanceof Object[]) {
+				return filterForContent((Object[]) inputElement);
+			}
+			if (inputElement instanceof Collection) {
+				return filterForContent(((Collection) inputElement).toArray());
+			}
+		} catch (CoreException e) {
+			e.printStackTrace();
 		}
-		return new Object[] {};
+		return new Object[0];
 	}
 
 	public boolean hasChildren(Object element) {
@@ -55,57 +61,34 @@ public class WorkspaceTreeContentProvider implements ITreeContentProvider {
 	}
 
 	public Object[] getChildren(Object parentElement) {
-		Object[] result = getElements(parentElement);
+		return getElements(parentElement);
+	}
+
+	public Object[] filterForContent(Object[] inputElements) {
+		List<Object> list = Arrays.asList(inputElements);
+		List<Object> result = list.stream().filter((m) -> isRelevant(m)).collect(Collectors.toList());
+		return result.toArray(new IResource[result.size()]);
+	}
+
+	public boolean containsFile(IContainer folder) {
 		try {
-			return filterForContent(result);
+			List<IResource> list = Arrays.asList(folder.members());
+			return list.stream().anyMatch((m) -> isRelevant(m));
 		} catch (CoreException e) {
 			e.printStackTrace();
-			return new Object[0];
+			return false;
 		}
 	}
 
-	public boolean containsFile(IFolder folder) throws CoreException {
-		if (folder.members() != null) {
-			for (Object member : folder.members()) {
-
-				// No file extension check
-				if (member instanceof IFile && hasFileExtension((IFile) member)) {
-					return false;
-				}
-				// check if file extension is proper
-				else if (member instanceof IFile && ((IFile) member).getFileExtension().equals(fileExtension)) {
-					return true;
-				} else if (member instanceof IFolder) {
-					return containsFile((IFolder) member);
-
-				}
+	private boolean isRelevant(Object member) {
+		if (member instanceof IFile && hasFileExtension((IFile) member)) {
+			return true;
+		} else if (member instanceof IContainer) {
+			if (containsFile((IContainer) member)) {
+				return true;
 			}
 		}
 		return false;
-	}
-
-	public Object[] filterForContent(Object[] inputElements) throws CoreException {
-		final Set<Object> result = new LinkedHashSet<Object>();
-		for (final Object obj : inputElements) {
-			((IResource) obj).accept(new IResourceVisitor() {
-				public boolean visit(IResource resource) throws CoreException {
-					// no file extension check
-					if (resource instanceof IFile && hasFileExtension((IFile) resource)) {
-						return false;
-					}
-					// check if file extension is proper
-					else if (resource instanceof IFile && resource.getFileExtension().equals(fileExtension)) {
-						result.add(obj);
-						return true;
-					} else if (resource instanceof IFolder && containsFile((IFolder) resource)) {
-						result.add(obj);
-						return true;
-					}
-					return false;
-				}
-			});
-		}
-		return result.toArray(new IResource[0]);
 	}
 
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
@@ -129,6 +112,6 @@ public class WorkspaceTreeContentProvider implements ITreeContentProvider {
 	}
 
 	public boolean hasFileExtension(IFile res) {
-		return (res.getFileExtension() == null);
+		return fileExtension.equals(res.getFileExtension());
 	}
 }

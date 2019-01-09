@@ -1,7 +1,7 @@
 package org.yakindu.scr.historywithexitpoint;
 
-public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointStatemachine {
 
+public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean push;
@@ -46,6 +46,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	
 	private int nextStateIndex;
 	
+	
 	public HistoryWithExitPointStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -65,11 +66,34 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_mr_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case mr_A_r_X1:
+				mr_A_r_X1_react(true);
+				break;
+			case mr_A_r_X2:
+				mr_A_r_X2_react(true);
+				break;
+			case mr_B:
+				mr_B_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_mr();
 	}
@@ -268,7 +292,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		effect_mr_A_tr0();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -276,11 +300,9 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -303,8 +325,6 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -326,8 +346,6 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -335,7 +353,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.back) {
 					exitSequence_mr_B();
 					enterSequence_mr_A_default();
@@ -344,31 +362,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case mr_A_r_X1:
-				mr_A_r_X1_react(true);
-				break;
-			case mr_A_r_X2:
-				mr_A_r_X2_react(true);
-				break;
-			case mr_B:
-				mr_B_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

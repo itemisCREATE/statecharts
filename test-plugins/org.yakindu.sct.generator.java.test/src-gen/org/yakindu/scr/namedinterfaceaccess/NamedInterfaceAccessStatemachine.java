@@ -1,7 +1,7 @@
 package org.yakindu.scr.namedinterfaceaccess;
 
-public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessStatemachine {
 
+public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessStatemachine {
 	protected class SCISafeImpl implements SCISafe {
 	
 		private boolean open;
@@ -83,6 +83,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	
 	private int nextStateIndex;
 	
+	
 	private long number1;
 	
 	protected void setNumber1(long value) {
@@ -135,12 +136,44 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_region_1_default();
 		enterSequence__region1_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case region_1_Idle:
+				region_1_Idle_react(true);
+				break;
+			case region_1_Number1Pressed:
+				region_1_Number1Pressed_react(true);
+				break;
+			case region_1_Number2Pressed:
+				region_1_Number2Pressed_react(true);
+				break;
+			case region_1_Number3Pressed:
+				region_1_Number3Pressed_react(true);
+				break;
+			case _region1_Closed:
+				_region1_Closed_react(true);
+				break;
+			case _region1_Open:
+				_region1_Open_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_region_1();
 		exitSequence__region1();
@@ -345,7 +378,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		enterSequence__region1_Closed_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -353,16 +386,14 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
-				if ((sCIUser.numberPressed) && (sCIUser.getNumberPressedValue()==getNumber1())) {
+			if (react()==false) {
+				if (((sCIUser.numberPressed) && (sCIUser.getNumberPressedValue()==getNumber1()))) {
 					exitSequence_region_1_Idle();
 					enterSequence_region_1_Number1Pressed_default();
 				} else {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -371,8 +402,8 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
-				if ((sCIUser.numberPressed) && (sCIUser.getNumberPressedValue()==getNumber2())) {
+			if (react()==false) {
+				if (((sCIUser.numberPressed) && (sCIUser.getNumberPressedValue()==getNumber2()))) {
 					exitSequence_region_1_Number1Pressed();
 					enterSequence_region_1_Number2Pressed_default();
 				} else {
@@ -385,8 +416,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -394,8 +423,8 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
-				if ((sCIUser.numberPressed) && (sCIUser.getNumberPressedValue()==getNumber3())) {
+			if (react()==false) {
+				if (((sCIUser.numberPressed) && (sCIUser.getNumberPressedValue()==getNumber3()))) {
 					exitSequence_region_1_Number2Pressed();
 					enterSequence_region_1_Number3Pressed_default();
 				} else {
@@ -408,8 +437,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -417,7 +444,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCIUser.numberPressed) {
 					exitSequence_region_1_Number3Pressed();
 					enterSequence_region_1_Idle_default();
@@ -425,8 +452,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -442,8 +467,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -458,40 +481,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case region_1_Idle:
-				region_1_Idle_react(true);
-				break;
-			case region_1_Number1Pressed:
-				region_1_Number1Pressed_react(true);
-				break;
-			case region_1_Number2Pressed:
-				region_1_Number2Pressed_react(true);
-				break;
-			case region_1_Number3Pressed:
-				region_1_Number3Pressed_react(true);
-				break;
-			case _region1_Closed:
-				_region1_Closed_react(true);
-				break;
-			case _region1_Open:
-				_region1_Open_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

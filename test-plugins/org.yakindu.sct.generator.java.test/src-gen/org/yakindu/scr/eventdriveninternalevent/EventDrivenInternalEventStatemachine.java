@@ -1,9 +1,9 @@
 package org.yakindu.scr.eventdriveninternalevent;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class EventDrivenInternalEventStatemachine implements IEventDrivenInternalEventStatemachine {
-
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean start;
@@ -98,6 +98,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	
 	private int nextStateIndex;
 	
+	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
 	
 	private boolean i1;
@@ -124,13 +125,56 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_EventDrivenInternalEvent_r1_default();
 		enterSequence_EventDrivenInternalEvent_r2_default();
 		enterSequence_EventDrivenInternalEvent_check_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+	
+		clearOutEvents();
+		singleCycle();
+		clearEvents();
+		
+		// process queued events
+		while (internalEventQueue.size() > 0) {
+			internalEventQueue.poll().run();
+			clearEvents();
+		}
+	}
+	
+	protected void singleCycle() {
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case eventDrivenInternalEvent_r1_A:
+				eventDrivenInternalEvent_r1_A_react(true);
+				break;
+			case eventDrivenInternalEvent_r1_B:
+				eventDrivenInternalEvent_r1_B_react(true);
+				break;
+			case eventDrivenInternalEvent_r2_C:
+				eventDrivenInternalEvent_r2_C_react(true);
+				break;
+			case eventDrivenInternalEvent_r2_D:
+				eventDrivenInternalEvent_r2_D_react(true);
+				break;
+			case eventDrivenInternalEvent_check_VALID:
+				eventDrivenInternalEvent_check_VALID_react(true);
+				break;
+			case eventDrivenInternalEvent_check_MULTIPLEEVENTS:
+				eventDrivenInternalEvent_check_MULTIPLEEVENTS_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+	}
 	public void exit() {
 		exitSequence_EventDrivenInternalEvent_r1();
 		exitSequence_EventDrivenInternalEvent_r2();
@@ -401,7 +445,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		enterSequence_EventDrivenInternalEvent_check_VALID_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		sCInterface.setX(sCInterface.getX() + 1);
 		
 		return false;
@@ -411,7 +455,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (i2) {
 					exitSequence_EventDrivenInternalEvent_r1_A();
 					sCInterface.setI2_sequence(sCInterface.x);
@@ -434,7 +478,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.reset) {
 					exitSequence_EventDrivenInternalEvent_r1_B();
 					enterSequence_EventDrivenInternalEvent_r1_A_default();
@@ -444,7 +488,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			}
 		}
 		if (did_transition==false) {
-			if ((i2) && (sCInterface.getI2_sequence()<10)) {
+			if (((i2) && (sCInterface.getI2_sequence()<10))) {
 				sCInterface.setI2_sequence(sCInterface.getI2_sequence() + 1);
 			}
 		}
@@ -466,8 +510,6 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -483,7 +525,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			}
 		}
 		if (did_transition==false) {
-			if ((i1) && (sCInterface.getI1_sequence()<10)) {
+			if (((i1) && (sCInterface.getI1_sequence()<10))) {
 				sCInterface.setI1_sequence(sCInterface.getI1_sequence() + 1);
 			}
 		}
@@ -494,14 +536,12 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if ((sCInterface.start && i1) || (sCInterface.start && i2) || (i1 && i2)) {
+			if (((((sCInterface.start && i1)) || ((sCInterface.start && i2))) || ((i1 && i2)))) {
 				exitSequence_EventDrivenInternalEvent_check_VALID();
 				enterSequence_EventDrivenInternalEvent_check_MULTIPLEEVENTS_default();
 			} else {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -517,51 +557,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-	
-		clearOutEvents();
-		singleCycle();
-		clearEvents();
-		
-		// process queued events
-		while (internalEventQueue.size() > 0) {
-			internalEventQueue.poll().run();
-			clearEvents();
-		}
-	}
-	
-	protected void singleCycle() {
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case eventDrivenInternalEvent_r1_A:
-				eventDrivenInternalEvent_r1_A_react(true);
-				break;
-			case eventDrivenInternalEvent_r1_B:
-				eventDrivenInternalEvent_r1_B_react(true);
-				break;
-			case eventDrivenInternalEvent_r2_C:
-				eventDrivenInternalEvent_r2_C_react(true);
-				break;
-			case eventDrivenInternalEvent_r2_D:
-				eventDrivenInternalEvent_r2_D_react(true);
-				break;
-			case eventDrivenInternalEvent_check_VALID:
-				eventDrivenInternalEvent_check_VALID_react(true);
-				break;
-			case eventDrivenInternalEvent_check_MULTIPLEEVENTS:
-				eventDrivenInternalEvent_check_MULTIPLEEVENTS_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-	}
 }

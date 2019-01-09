@@ -1,7 +1,7 @@
 package org.yakindu.scr.castexpressions;
 
-public class CastExpressionsStatemachine implements ICastExpressionsStatemachine {
 
+public class CastExpressionsStatemachine implements ICastExpressionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private double realValue;
@@ -41,6 +41,7 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 	
 	private int nextStateIndex;
 	
+	
 	public CastExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -60,11 +61,34 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_A:
+				main_region_A_react(true);
+				break;
+			case main_region_B:
+				main_region_B_react(true);
+				break;
+			case main_region_C:
+				main_region_C_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -135,12 +159,12 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 	
 	/* Entry action for state 'B'. */
 	private void entryAction_main_region_B() {
-		sCInterface.setRealValue(3 * ((long) 5.5));
+		sCInterface.setRealValue((3 * ((long) 5.5)));
 	}
 	
 	/* Entry action for state 'C'. */
 	private void entryAction_main_region_C() {
-		sCInterface.setRealValue(((long) (sCInterface.realValue * sCInterface.intValue * 10.1)));
+		sCInterface.setRealValue(((long) (((sCInterface.realValue * sCInterface.intValue) * 10.1))));
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -208,7 +232,7 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 		enterSequence_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -216,12 +240,10 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_A();
 				enterSequence_main_region_B_default();
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -230,16 +252,14 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
-				if ((true) && (((double) (sCInterface.getRealValue() * 0.1))>((long) 1.4) && ((long) (sCInterface.getRealValue() * sCInterface.getIntValue()))<((double) 100))) {
+			if (react()==false) {
+				if (((true) && ((((double) ((sCInterface.getRealValue() * 0.1)))>((long) 1.4) && ((long) ((sCInterface.getRealValue() * sCInterface.getIntValue())))<((double) 100))))) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_C_default();
 				} else {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -248,35 +268,11 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
-				main_region_A_react(true);
-				break;
-			case main_region_B:
-				main_region_B_react(true);
-				break;
-			case main_region_C:
-				main_region_C_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

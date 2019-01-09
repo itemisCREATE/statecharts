@@ -50,29 +50,29 @@ import com.google.inject.Injector;
 
 /**
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 @RunWith(XtextRunner.class)
 @InjectWith(SGenInjectorProvider.class)
 public class SGenJavaValidatorTest extends AbstractSGenTest {
-
+	
 	@Inject
 	private SGenJavaValidator validator;
 	@Inject
 	private Injector injector;
-
+	
 	private ValidatorTester<SGenJavaValidator> tester;
-
+	
 	@Before
 	public void setup() {
-		tester = new ValidatorTester<SGenJavaValidator>(validator, injector);
+		tester = new ValidatorTester<>(validator, injector);
 	}
-
+	
 	@After
 	public void teardown() {
 		tester = null;
 	}
-
+	
 	/**
 	 * @see SGenJavaValidator#checkDomainCompatibility(GeneratorModel)
 	 */
@@ -82,9 +82,9 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 				GeneratorModel.class.getSimpleName());
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertAny(new MsgPredicate(
-				"This generator can not be used for domain does.not.exist. Valid domains are [org.yakindu.domain.default]"));
+				"This generator can not be used for domain does.not.exist. Valid domains are [com.yakindu.domain.java, org.yakindu.domain.default]"));
 	}
-
+	
 	/**
 	 * @see SGenJavaValidator#checkContentType(org.yakindu.sct.model.sgen.GeneratorEntry)
 	 */
@@ -95,7 +95,7 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertAny(new MsgPredicate(UNKNOWN_CONTENT_TYPE));
 	}
-
+	
 	@Test
 	public void checkInitialValue() {
 		EObject model = parseExpression("GeneratorModel for yakindu::java { var x : boolean = 5 }",
@@ -103,10 +103,10 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertAny(new MsgPredicate("Incompatible types boolean and integer."));
 	}
-
+	
 	/**
 	 * @see SGenJavaValidator#checkParameterValueType(org.yakindu.sct.model.sgen.FeatureParameterValue)
-	 * 
+	 *
 	 */
 	@Test
 	public void checkParameterValueType() {
@@ -116,7 +116,7 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertAny(new MsgPredicate("Incompatible types string and boolean."));
 	}
-
+	
 	/**
 	 * @see SGenJavaValidator#checkParameterValue(org.yakindu.sct.model.sgen.FeatureParameterValue)
 	 */
@@ -124,7 +124,7 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 	public void checkParameterValue() {
 		// Nothing to test
 	}
-	
+
 	/**
 	 * @see SGenJavaValidator#checkDuplicateElementRef(GeneratorEntry)
 	 */
@@ -132,7 +132,7 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 	public void checkDuplicateElementRef() {
 		// Tested by manual tests
 	}
-
+	
 	/**
 	 * @see SGenJavaValidator#checkGeneratorExists(GeneratorModel)
 	 */
@@ -142,7 +142,7 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertAny(new MsgPredicate(UNKOWN_GENERATOR));
 	}
-
+	
 	/**
 	 * @see SGenJavaValidator#checkDuplicateGeneratorEntryFeature(FeatureConfiguration)
 	 */
@@ -154,7 +154,7 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertAny(new MsgPredicate(DUPLICATE_FEATURE));
 	}
-
+	
 	/**
 	 * @see SGenJavaValidator#checkDuplicateFeatureParameter(org.yakindu.sct.model.sgen.FeatureParameterValue)
 	 */
@@ -166,7 +166,7 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertAny(new MsgPredicate(DUPLICATE_PARAMETER));
 	}
-
+	
 	/**
 	 * @see SGenJavaValidator#checkRequiredFeatures(org.yakindu.sct.model.sgen.GeneratorEntry)
 	 */
@@ -177,7 +177,7 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertAny(new MsgPredicate(MISSING_REQUIRED_FEATURE));
 	}
-
+	
 	/**
 	 * @see SGenJavaValidator#checkRequiredParameters(FeatureConfiguration)
 	 */
@@ -188,7 +188,7 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertAny(new MsgPredicate(MISSING_REQUIRED_PARAMETER));
 	}
-
+	
 	/**
 	 * @see SGenJavaValidator#checkDeprecatedFeatures(GeneratorEntry)
 	 */
@@ -207,7 +207,7 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 			result.assertAny(new MsgPredicate(String.format(DEPRECATED, type.getName())));
 		}
 	}
-
+	
 	/**
 	 * @see SGenJavaValidator#checkDeprecatedParameters(GeneratorEntry)
 	 */
@@ -226,7 +226,7 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 			result.assertAny(new MsgPredicate(String.format(DEPRECATED, featureParameter.getName())));
 		}
 	}
-
+	
 	/**
 	 * @see SGenJavaValidator#checkDeprecatedParameters(GeneratorEntry)
 	 */
@@ -241,7 +241,7 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 			result.assertAny(new MsgPredicate(EMPTY_SGEN));
 		}
 	}
-
+	
 	/**
 	 * checks that each @Check method of {@link STextJavaValidator} has a @Test
 	 * method in this class with the same name
@@ -250,6 +250,7 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 	public void testAllChecksHaveTests() throws Exception {
 		Iterable<Method> methods = Lists.newArrayList(SGenJavaValidator.class.getDeclaredMethods());
 		methods = Iterables.filter(methods, new Predicate<Method>() {
+			@Override
 			public boolean apply(Method input) {
 				return input.getAnnotation(Check.class) != null;
 			}
@@ -262,18 +263,19 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 			}
 		}
 	}
-
+	
 	public static final class MsgPredicate implements AssertableDiagnostics.DiagnosticPredicate {
-
+		
 		private final String msg;
-
+		
 		public MsgPredicate(String msg) {
 			this.msg = msg;
 		}
-
+		
+		@Override
 		public boolean apply(Diagnostic input) {
 			return input.getMessage().contains(msg);
 		}
-
+		
 	}
 }

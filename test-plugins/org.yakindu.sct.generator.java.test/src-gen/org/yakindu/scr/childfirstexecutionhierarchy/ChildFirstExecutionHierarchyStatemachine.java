@@ -1,7 +1,7 @@
 package org.yakindu.scr.childfirstexecutionhierarchy;
 
-public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExecutionHierarchyStatemachine {
 
+public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExecutionHierarchyStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;
@@ -121,6 +121,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 	
 	private int nextStateIndex;
 	
+	
 	public ChildFirstExecutionHierarchyStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -154,11 +155,31 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_ChildFirstExecutionHierarchy_r_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case childFirstExecutionHierarchy_r_A_r_AA_r_AAA:
+				childFirstExecutionHierarchy_r_A_r_AA_r_AAA_react(true);
+				break;
+			case childFirstExecutionHierarchy_r_B:
+				childFirstExecutionHierarchy_r_B_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_ChildFirstExecutionHierarchy_r();
 	}
@@ -419,7 +440,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		enterSequence_ChildFirstExecutionHierarchy_r_A_r_AA_r_AAA_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -427,12 +448,12 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if ((sCInterface.e) && (!sCInterface.getDisable_a())) {
+			if (((sCInterface.e) && (!sCInterface.getDisable_a()))) {
 				exitSequence_ChildFirstExecutionHierarchy_r_A();
 				sCInterface.setA_reacted(true);
 				
 				enterSequence_ChildFirstExecutionHierarchy_r_B_default();
-				react(false);
+				react();
 			} else {
 				did_transition = false;
 			}
@@ -440,7 +461,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		if (did_transition==false) {
 			sCInterface.setA_local(true);
 			
-			did_transition = react(try_transition);
+			did_transition = react();
 		}
 		return did_transition;
 	}
@@ -449,12 +470,12 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if ((sCInterface.e) && (!sCInterface.getDisable_aa())) {
+			if (((sCInterface.e) && (!sCInterface.getDisable_aa()))) {
 				exitSequence_ChildFirstExecutionHierarchy_r_A();
 				sCInterface.setAa_reacted(true);
 				
 				enterSequence_ChildFirstExecutionHierarchy_r_B_default();
-				react(false);
+				react();
 			} else {
 				did_transition = false;
 			}
@@ -471,12 +492,12 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if ((sCInterface.e) && (!sCInterface.getDisable_aaa())) {
+			if (((sCInterface.e) && (!sCInterface.getDisable_aaa()))) {
 				exitSequence_ChildFirstExecutionHierarchy_r_A();
 				sCInterface.setAaa_reacted(true);
 				
 				enterSequence_ChildFirstExecutionHierarchy_r_B_default();
-				react(false);
+				react();
 			} else {
 				did_transition = false;
 			}
@@ -496,34 +517,15 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 			if (sCInterface.e) {
 				exitSequence_ChildFirstExecutionHierarchy_r_B();
 				enterSequence_ChildFirstExecutionHierarchy_r_A_default();
-				react(false);
+				react();
 			} else {
 				did_transition = false;
 			}
 		}
 		if (did_transition==false) {
-			did_transition = react(try_transition);
+			did_transition = react();
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case childFirstExecutionHierarchy_r_A_r_AA_r_AAA:
-				childFirstExecutionHierarchy_r_A_r_AA_r_AAA_react(true);
-				break;
-			case childFirstExecutionHierarchy_r_B:
-				childFirstExecutionHierarchy_r_B_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }
