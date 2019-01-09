@@ -18,6 +18,7 @@
 			<unit id="org.eclipse.platform.sdk" version="4.10.0.I20181206-0815"/>
 			<repository location="http://download.eclipse.org/eclipse/updates/4.10"/>
 			<unit id="org.eclipse.equinox.sdk.feature.group" version="3.16.0.v20181130-2106"/>
+			<unit id="org.eclipse.equinox.p2.sdk.feature.group" version="3.11.200.v20181123-1405"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 			<unit id="org.eclipse.jgit.feature.group" version="4.11.0.201803080745-r"/>
