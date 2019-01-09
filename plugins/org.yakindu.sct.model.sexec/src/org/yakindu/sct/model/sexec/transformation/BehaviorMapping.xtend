@@ -502,7 +502,7 @@ class BehaviorMapping {
 			val state = region.parentStates.head
 			val execState = state.create
 									
-			val parents = state.parentStates.map(p|p.create as ExecutionState).filter(p| shouldExecuteParent.apply(p, execState) )
+			val parents = state.parentStates.map(p|p.create as ExecutionState).filter(p| shouldExecuteParent.apply(p, execRegion) )
 			
 			parentNodes.addAll(parents.map(p|p as ExecutionNode))			
 			if ( shouldExecuteParent.apply( flow, execState) )
