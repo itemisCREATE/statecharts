@@ -57,6 +57,8 @@ public class AlwaysOncycle {
 			count++;
 		}
 		assertTrue((statemachine.getValue() == 5l));
+		assertTrue((statemachine.getX() == 5l));
+		assertTrue((statemachine.getY() == 5l));
 		timer.cycleLeap(1);
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		assertTrue(statemachine.getValue() == 0l);
