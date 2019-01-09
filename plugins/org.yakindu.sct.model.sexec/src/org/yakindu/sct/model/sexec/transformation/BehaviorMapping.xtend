@@ -63,6 +63,8 @@ class BehaviorMapping {
 	@Inject extension SgraphExtensions sgraph
 	@Inject extension TraceExtensions trace
 	@Inject extension SequenceBuilder sb
+	
+	@Inject protected extension ExpressionBuilder exprBuilder
 
 
 	def ExecutionFlow mapEntryActions(Statechart statechart, ExecutionFlow r){
@@ -790,22 +792,31 @@ class BehaviorMapping {
 	 }
 	
 	def dispatch Expression buildCondition (ReactionTrigger t) {
-		val triggerCheck = if (! t.triggers.empty) t.triggers.reverseView.fold(null as Expression,
+		
+		val hasTriggers = ! t.triggers.empty
+		val triggersAreAlwaysTrue = t.triggers.filter(AlwaysEvent).size > 0 
+		val triggerCheck = if (hasTriggers && !triggersAreAlwaysTrue) t.toTriggerCheck else null;
+		
+		val guard = t.buildGuard
+		
+		if ( triggerCheck !== null && guard !== null )  stext.and(stext.parenthesis(triggerCheck), stext.parenthesis(guard))
+		else if ( triggerCheck !== null )  triggerCheck
+		else if ( guard !== null ) guard
+		else if ( triggersAreAlwaysTrue ) _true
+	}
+	
+	
+	def toTriggerCheck(ReactionTrigger t) {
+		t.triggers.reverseView.fold(null as Expression,
 			[s,e | {
 				val Expression raised = e.raised()
 				
 				if (raised === null) s
 				else if (s===null) raised  
 				else raised.or(s)
-			}]
-		) else null;
-		
-		val guard = t.buildGuard
-		
-		if ( triggerCheck !== null && guard !== null )  stext.and(stext.parenthesis(triggerCheck), stext.parenthesis(guard))
-		else if ( triggerCheck !== null )  triggerCheck
-		else guard
+			}])		
 	}
+	
 	
 	def dispatch Expression buildGuard( Trigger t) {null}
 	
