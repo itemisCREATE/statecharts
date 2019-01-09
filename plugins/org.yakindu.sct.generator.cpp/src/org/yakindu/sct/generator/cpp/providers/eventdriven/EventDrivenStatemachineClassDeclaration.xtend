@@ -4,11 +4,14 @@ import com.google.inject.Inject
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenPredicate
 import org.yakindu.sct.generator.cpp.eventdriven.EventNaming
+import org.yakindu.sct.generator.cpp.files.StatemachineHeader
+import org.yakindu.sct.generator.cpp.providers.GeneratorContribution
 import org.yakindu.sct.generator.cpp.providers.StatemachineClassDeclaration
 import org.yakindu.sct.model.sexec.ExecutionFlow
 
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
 
+@GeneratorContribution(StatemachineHeader.HEADER_TARGET)
 class EventDrivenStatemachineClassDeclaration extends StatemachineClassDeclaration {
 	@Inject extension EventNaming
 	@Inject extension EventDrivenPredicate
@@ -23,6 +26,14 @@ class EventDrivenStatemachineClassDeclaration extends StatemachineClassDeclarati
 		if(needsDispatchEventFunction) 
 			classDecl.privateMember('''void «dispatchEventFctID»(«eventNamespaceName»::«SCT_EVENT» * event);''')
 		classDecl
+	}
+	
+	override isNeeded(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
+		isEventDriven
+	}
+	
+	override replaces(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
+		StatemachineClassDeclaration
 	}
 	
 }

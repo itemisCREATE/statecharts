@@ -11,8 +11,6 @@
 package org.yakindu.sct.generator.cpp.files
 
 import com.google.inject.Inject
-import com.google.inject.name.Named
-import java.util.Set
 import org.yakindu.sct.generator.c.IContentTemplate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
@@ -24,12 +22,13 @@ import org.yakindu.sct.generator.core.submodules.lifecycle.IsFinal
 import org.yakindu.sct.generator.core.submodules.lifecycle.IsStateActive
 import org.yakindu.sct.generator.core.submodules.lifecycle.RunCycle
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.cpp.CodeGeneratorFragmentProvider
 import org.yakindu.sct.generator.cpp.CppExpressionsGenerator
 import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.EventCode
 import org.yakindu.sct.generator.cpp.FlowCode
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
-import org.yakindu.sct.generator.cpp.providers.ISourceProvider
+import org.yakindu.sct.generator.cpp.providers.ISourceFragment
 import org.yakindu.sct.generator.cpp.submodules.InterfaceFunctions
 import org.yakindu.sct.generator.cpp.submodules.InternalFunctions
 import org.yakindu.sct.generator.cpp.submodules.TimingFunctions
@@ -45,7 +44,7 @@ import static org.eclipse.xtext.util.Strings.*
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 
 class StatemachineImplementation implements IContentTemplate {
-	@Inject @Named("Impl") protected Set<ISourceProvider> sourceProviders
+	@Inject protected CodeGeneratorFragmentProvider provider;
 	
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
@@ -73,6 +72,8 @@ class StatemachineImplementation implements IContentTemplate {
 	
 	protected GeneratorEntry entry
 	
+	public static final String SOURCE_TARGET = "Source"
+	
 	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
 		this.entry = entry
 		val namespace = statechartNamespace
@@ -94,7 +95,7 @@ class StatemachineImplementation implements IContentTemplate {
 		«ENDFOR»
 		«ENDIF»
 		
-		«FOR sourceProvider : sourceProviders»
+		«FOR sourceProvider : provider.get(SOURCE_TARGET, it, artifactConfigs)»
 		«sourceProvider.get(it, artifactConfigs)»
 		
 		«ENDFOR»

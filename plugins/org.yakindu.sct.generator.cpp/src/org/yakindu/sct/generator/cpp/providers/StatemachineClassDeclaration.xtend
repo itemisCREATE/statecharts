@@ -6,6 +6,11 @@ import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
+import org.yakindu.sct.generator.cpp.files.StatemachineHeader
+import org.yakindu.sct.generator.cpp.submodules.InterfaceFunctions
+import org.yakindu.sct.generator.cpp.submodules.InternalFunctions
+import org.yakindu.sct.generator.cpp.submodules.TimingFunctions
+import org.yakindu.sct.generator.cpp.submodules.TracingFunctions
 import org.yakindu.sct.generator.cpp.submodules.lifecycle.LifecycleFunctions
 import org.yakindu.sct.generator.cpp.templates.ClassDeclaration
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -19,22 +24,19 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 
-class StatemachineClassDeclaration implements ISourceProvider {
+@GeneratorContribution(StatemachineHeader.HEADER_TARGET)
+class StatemachineClassDeclaration implements ISourceFragment {
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
-	@Inject protected extension SgraphExtensions
-	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension GenmodelEntriesExtension
-	@Inject protected extension INamingService
 	@Inject protected extension StatechartExtensions
-	@Inject protected extension ExpressionsChecker
 	
 	@Inject protected GeneratorEntry entry
 	
-	@Inject protected extension org.yakindu.sct.generator.cpp.submodules.InternalFunctions
-	@Inject protected extension org.yakindu.sct.generator.cpp.submodules.InterfaceFunctions
-	@Inject protected extension org.yakindu.sct.generator.cpp.submodules.TimingFunctions
-	@Inject protected extension org.yakindu.sct.generator.cpp.submodules.TracingFunctions
+	@Inject protected extension InternalFunctions
+	@Inject protected extension InterfaceFunctions
+	@Inject protected extension TimingFunctions
+	@Inject protected extension TracingFunctions
 	@Inject protected extension LifecycleFunctions
 	
 	override get(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {

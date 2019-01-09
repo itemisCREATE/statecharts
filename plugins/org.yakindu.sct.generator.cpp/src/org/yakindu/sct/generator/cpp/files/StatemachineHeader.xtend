@@ -19,7 +19,6 @@ import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
-import org.yakindu.sct.generator.cpp.providers.ISourceProvider
 import org.yakindu.sct.generator.cpp.submodules.InterfaceFunctions
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
@@ -27,11 +26,13 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.cpp.providers.ISourceFragment
+import org.yakindu.sct.generator.cpp.CodeGeneratorFragmentProvider
 
 class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineHeader {
 
 	@Inject protected Set<IncludeProvider> includeProviders
-	@Inject @Named("Header") protected Set<ISourceProvider> declarationProviders
+	@Inject protected CodeGeneratorFragmentProvider fragmentProvider
 
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
@@ -45,6 +46,8 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 	@Inject protected extension InterfaceFunctions
 
 	protected GeneratorEntry entry
+	
+	public static final String HEADER_TARGET = "Header"
 	
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		this.entry = entry
@@ -67,7 +70,10 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 				«ENDFOR»
 			«ENDIF»
 			
-			«declarations(flow, artifactConfigs)»
+			«FOR sourceProvider : fragmentProvider.get(HEADER_TARGET, it, artifactConfigs)»
+			«sourceProvider.get(it, artifactConfigs)»
+			
+			«ENDFOR»
 			
 			«IF !namespace.nullOrEmpty»
 				«FOR ns : namespace»
@@ -76,14 +82,6 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 			«ENDIF»
 			
 			#endif /* «module().define»_H_ */
-		'''
-	}
-	
-	def declarations(ExecutionFlow flow, IGenArtifactConfigurations config) {
-		'''
-		«FOR decl : declarationProviders»
-		«decl.get(flow, config)»
-		«ENDFOR»
 		'''
 	}
 	

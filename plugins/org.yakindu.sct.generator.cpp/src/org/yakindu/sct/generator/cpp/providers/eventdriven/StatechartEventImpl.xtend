@@ -12,7 +12,9 @@ import org.yakindu.sct.generator.cpp.FlowCode
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenPredicate
 import org.yakindu.sct.generator.cpp.eventdriven.EventNaming
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
-import org.yakindu.sct.generator.cpp.providers.ISourceProvider
+import org.yakindu.sct.generator.cpp.files.StatemachineImplementation
+import org.yakindu.sct.generator.cpp.providers.GeneratorContribution
+import org.yakindu.sct.generator.cpp.providers.ISourceFragment
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
@@ -25,20 +27,12 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
 
-class StatechartEventImpl implements ISourceProvider {
+@GeneratorContribution(StatemachineImplementation.SOURCE_TARGET)
+class StatechartEventImpl implements ISourceFragment {
 	@Inject protected extension EventDrivenPredicate
 	
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
-	@Inject protected extension SgraphExtensions
-	@Inject protected extension FlowCode
-	@Inject protected extension GenmodelEntriesExtension
-	@Inject protected extension ICodegenTypeSystemAccess
-	@Inject protected extension INamingService
-	@Inject protected extension CppExpressionsGenerator
-	@Inject protected extension StateVectorExtensions
-	@Inject protected extension EventCode
-	@Inject protected extension ExpressionsChecker
 	@Inject extension EventNaming eventNaming
 	
 	override get(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
@@ -53,6 +47,10 @@ class StatechartEventImpl implements ISourceProvider {
 		«generateInterfaceDispatchFunctions»
 		«ENDIF»
 		'''
+	}
+	
+	override isNeeded(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
+		isEventDriven
 	}
 	
 	def getNextEventFunction(ExecutionFlow it) {

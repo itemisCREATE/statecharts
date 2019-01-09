@@ -17,6 +17,9 @@ import static org.yakindu.sct.generator.cpp.features.CPPFeatureConstants.FEATURE
 import static org.yakindu.sct.generator.cpp.features.CPPFeatureConstants.PARAMETER_INCLUDES_USE_RELATIVE_PATHS;
 import static org.yakindu.sct.model.sexec.transformation.IModelSequencer.ADD_TRACES;
 
+import java.util.List;
+import java.util.Map;
+
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.sct.generator.c.DefaultGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations;
@@ -40,18 +43,7 @@ import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.generator.cpp.eventdriven.CppEventDrivenIncludeProvider;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenEventCode;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenExpressionCode;
-import org.yakindu.sct.generator.cpp.providers.ConstantsProvider;
-import org.yakindu.sct.generator.cpp.providers.ConstructorProvider;
-import org.yakindu.sct.generator.cpp.providers.DefaultFunctionProvider;
-import org.yakindu.sct.generator.cpp.providers.ISourceProvider;
-import org.yakindu.sct.generator.cpp.providers.OCBDestructorProvider;
-import org.yakindu.sct.generator.cpp.providers.StatemachineClassDeclaration;
-import org.yakindu.sct.generator.cpp.providers.StatevectorDefineProvider;
-import org.yakindu.sct.generator.cpp.providers.eventdriven.EventDrivenConstructorProvider;
-import org.yakindu.sct.generator.cpp.providers.eventdriven.EventDrivenStatemachineClassDeclaration;
-import org.yakindu.sct.generator.cpp.providers.eventdriven.StatechartEventImpl;
-import org.yakindu.sct.generator.cpp.providers.eventdriven.StatechartEvents;
-import org.yakindu.sct.generator.cpp.providers.eventdriven.UsingNamespaceProvider;
+import org.yakindu.sct.generator.cpp.providers.ISourceFragment;
 import org.yakindu.sct.generator.cpp.submodules.InterfaceFunctions;
 import org.yakindu.sct.generator.cpp.submodules.TimingFunctions;
 import org.yakindu.sct.generator.cpp.submodules.eventdriven.EventDrivenInterfaceFunctions;
@@ -67,6 +59,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 
 import com.google.inject.Binder;
+import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.Multibinder;
 import com.google.inject.name.Names;
 
@@ -76,18 +69,19 @@ import com.google.inject.name.Names;
  *
  */
 public class CppCodeGeneratorModule implements IGeneratorModule {
-	
 	protected AnnotationExtensions annotations = new AnnotationExtensions();
 	protected Multibinder<IncludeProvider> includeBinder;
-	protected Multibinder<ISourceProvider> headerSourceProviderBinder;
-	protected Multibinder<ISourceProvider> implSourceProviderBinder;
-	
+	protected Multibinder<ISourceFragment> headerSourceProviderBinder;
+	protected Multibinder<ISourceFragment> implSourceProviderBinder;
+
 	@Override
 	public void configure(GeneratorEntry entry, Binder binder) {
 		includeBinder = Multibinder.newSetBinder(binder, IncludeProvider.class);
-		headerSourceProviderBinder = Multibinder.newSetBinder(binder, ISourceProvider.class, Names.named("Header"));
-		implSourceProviderBinder = Multibinder.newSetBinder(binder, ISourceProvider.class, Names.named("Impl"));
-
+		headerSourceProviderBinder = Multibinder.newSetBinder(binder, ISourceFragment.class, Names.named("Header"));
+		implSourceProviderBinder = Multibinder.newSetBinder(binder, ISourceFragment.class, Names.named("Impl"));
+		
+		bindGeneratorContributions(binder);
+		
 		binder.bind(IModelSequencer.class).to(ModelSequencer.class);
 		binder.bind(BehaviorMapping.class).to(org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping.class);
 		binder.bind(GeneratorEntry.class).toInstance(entry);
@@ -108,7 +102,7 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		addIncludeProvider(ScTypesIncludeProvider.class);
 		addIncludeProvider(CppInterfaceIncludeProvider.class);
 	}
-
+	
 	protected void bindTracingProperty(GeneratorEntry entry, Binder binder) {
 		FeatureParameterValue traceEnterFeature = entry.getFeatureParameterValue(FEATURE_TRACING,
 				PARAMETER_TRACING_ENTER_STATE);
@@ -118,19 +112,11 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		boolean traceExit = traceExitFeature != null ? traceEnterFeature.getBooleanValue() : false;
 		binder.bind(Boolean.class).annotatedWith(Names.named(ADD_TRACES)).toInstance(traceEnter || traceExit);
 	}
-	
+
 	protected void addIncludeProvider(Class<? extends IncludeProvider> provider) {
 		includeBinder.addBinding().to(provider);
 	}
-	
-	protected void addHeaderSourceProvider(Class<? extends ISourceProvider> provider) {
-		headerSourceProviderBinder.addBinding().to(provider);
-	}
 
-	protected void addImplSourceProvider(Class<? extends ISourceProvider> provider) {
-		implSourceProviderBinder.addBinding().to(provider);
-	}
-	
 	protected void bindIGenArtifactConfigurations(GeneratorEntry entry, Binder binder) {
 		FeatureParameterValue useRelativePathParam = entry.getFeatureParameterValue(FEATURE_INCLUDES,
 				PARAMETER_INCLUDES_USE_RELATIVE_PATHS);
@@ -141,31 +127,24 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 			binder.bind(IGenArtifactConfigurations.class).to(SimpleGenArtifactConfigurations.class);
 		}
 	}
-	
+
 	/** Only for event driven case */
 	protected void bindEventDrivenClasses(Binder binder) {
 		binder.bind(CppExpressionsGenerator.class).to(EventDrivenExpressionCode.class);
 		binder.bind(EventCode.class).to(EventDrivenEventCode.class);
-		binder.bind(StatemachineClassDeclaration.class).to(EventDrivenStatemachineClassDeclaration.class);
-
+		
 		binder.bind(RunCycle.class).to(EventDrivenRunCycle.class);
 		binder.bind(InterfaceFunctions.class).to(EventDrivenInterfaceFunctions.class);
 		binder.bind(TimingFunctions.class).to(EventDrivenTimingFunctions.class);
-		binder.bind(ConstructorProvider.class).to(EventDrivenConstructorProvider.class);
-
-		addIncludeProvider(CppEventDrivenIncludeProvider.class);
-
-		addHeaderSourceProvider(StatechartEvents.class);
 		
-		addImplSourceProvider(UsingNamespaceProvider.class);
-		addImplSourceProvider(StatechartEventImpl.class);
+		addIncludeProvider(CppEventDrivenIncludeProvider.class);
 	}
-	
+
 	/** Only for cycle based case */
 	protected void bindCycleBasedClasses(Binder binder) {
 		binder.bind(RunCycle.class).to(LifecycleFunctions.class);
 	}
-
+	
 	/** Needed for cycle based AND event driven */
 	protected void bindDefaultClasses(Binder binder) {
 		binder.bind(Init.class).to(LifecycleFunctions.class);
@@ -174,16 +153,8 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		binder.bind(IsActive.class).to(LifecycleFunctions.class);
 		binder.bind(IsFinal.class).to(LifecycleFunctions.class);
 		binder.bind(IsStateActive.class).to(LifecycleFunctions.class);
-		
-		addHeaderSourceProvider(StatevectorDefineProvider.class);
-		addHeaderSourceProvider(StatemachineClassDeclaration.class);
-		addHeaderSourceProvider(OCBDestructorProvider.class);
-		
-		addImplSourceProvider(ConstructorProvider.class);
-		addImplSourceProvider(ConstantsProvider.class);
-		addImplSourceProvider(DefaultFunctionProvider.class);
 	}
-	
+
 	protected String getSeparator(GeneratorEntry entry) {
 		GenmodelEntries entries = new GenmodelEntries();
 		String separator = entries.getSeparator(entry);
@@ -194,4 +165,10 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		}
 	}
 	
+	protected void bindGeneratorContributions(Binder binder) {
+		Map<String, List<Class<?>>> generatorContributions = CodeGeneratorFragmentProvider
+				.getGeneratorContributions(getClass().getPackage().getName());
+		binder.bind(new TypeLiteral<Map<String, List<Class<?>>>>() {
+		}).toInstance(generatorContributions);
+	}
 }

@@ -5,13 +5,15 @@ import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.CppExpressionsGenerator
 import org.yakindu.sct.generator.cpp.CppNaming
+import org.yakindu.sct.generator.cpp.files.StatemachineImplementation
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
 
-class ConstantsProvider implements ISourceProvider {
+@GeneratorContribution(StatemachineImplementation.SOURCE_TARGET)
+class ConstantsProvider implements ISourceFragment {
 	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension CppNaming
@@ -24,5 +26,9 @@ class ConstantsProvider implements ISourceProvider {
 			«ENDFOR»
 		«ENDFOR»
 	'''
+	
+	override orderPriority(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
+		return -2;
+	}
 	
 }

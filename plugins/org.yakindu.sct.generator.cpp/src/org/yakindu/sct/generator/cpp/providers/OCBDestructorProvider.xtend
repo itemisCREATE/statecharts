@@ -13,16 +13,13 @@ import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.StatechartScope
+import org.yakindu.sct.generator.cpp.files.StatemachineHeader
 
-class OCBDestructorProvider implements ISourceProvider {
+@GeneratorContribution(StatemachineHeader.HEADER_TARGET)
+class OCBDestructorProvider implements ISourceFragment {
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
-	@Inject protected extension SgraphExtensions
-	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension GenmodelEntriesExtension
-	@Inject protected extension INamingService
-	@Inject protected extension StatechartExtensions
-	@Inject protected extension ExpressionsChecker
 	
 	@Inject protected GeneratorEntry entry
 	
@@ -39,6 +36,10 @@ class OCBDestructorProvider implements ISourceProvider {
 			return '''inline «flow.module»::«interfaceOCBName»::~«interfaceOCBName»() {}'''
 		}
 		return ""
+	}
+	
+	override orderPriority(ExecutionFlow flow, IGenArtifactConfigurations config) {
+		5
 	}
 	
 }

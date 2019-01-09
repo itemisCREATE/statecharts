@@ -7,12 +7,14 @@ import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenPredicate
 import org.yakindu.sct.generator.cpp.eventdriven.EventNaming
 import org.yakindu.sct.generator.cpp.submodules.InterfaceFunctions
 import org.yakindu.sct.generator.cpp.templates.ClassDeclaration
+import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
 
 class EventDrivenInterfaceFunctions extends InterfaceFunctions {
+	@Inject protected extension INamingService
 	@Inject protected extension EventDrivenPredicate
 	@Inject protected extension EventNaming
 	

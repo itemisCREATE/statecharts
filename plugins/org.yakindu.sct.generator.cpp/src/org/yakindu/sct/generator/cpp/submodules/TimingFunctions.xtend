@@ -21,15 +21,6 @@ import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
 class TimingFunctions {
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
-	@Inject protected extension SgraphExtensions
-	@Inject protected extension FlowCode
-	@Inject protected extension GenmodelEntriesExtension
-	@Inject protected extension ICodegenTypeSystemAccess
-	@Inject protected extension INamingService
-	@Inject protected extension CppExpressionsGenerator
-	@Inject protected extension StateVectorExtensions
-	@Inject protected extension EventCode
-	@Inject protected extension ExpressionsChecker
 	
 	def timedStatemachineFunctions(ExecutionFlow it) '''
 		«IF timed»

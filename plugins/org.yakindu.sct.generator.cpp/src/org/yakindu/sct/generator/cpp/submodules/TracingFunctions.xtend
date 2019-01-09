@@ -16,16 +16,6 @@ import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 
 class TracingFunctions {
 	@Inject protected extension CppNaming
-	@Inject protected extension SExecExtensions
-	@Inject protected extension SgraphExtensions
-	@Inject protected extension FlowCode
-	@Inject protected extension GenmodelEntriesExtension
-	@Inject protected extension ICodegenTypeSystemAccess
-	@Inject protected extension INamingService
-	@Inject protected extension CppExpressionsGenerator
-	@Inject protected extension StateVectorExtensions
-	@Inject protected extension EventCode
-	@Inject protected extension ExpressionsChecker
 	
 	def tracedStatemachineFunctions(ExecutionFlow it)
 		'''
