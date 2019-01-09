@@ -346,7 +346,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link StextPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -360,7 +360,8 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		if (isInited) return (StextPackage)EPackage.Registry.INSTANCE.getEPackage(StextPackage.eNS_URI);
 
 		// Obtain or create and register package
-		StextPackageImpl theStextPackage = (StextPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof StextPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new StextPackageImpl());
+		Object registeredStextPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		StextPackageImpl theStextPackage = registeredStextPackage instanceof StextPackageImpl ? (StextPackageImpl)registeredStextPackage : new StextPackageImpl();
 
 		isInited = true;
 
@@ -379,7 +380,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		// Mark meta-data to indicate it can't be changed
 		theStextPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(StextPackage.eNS_URI, theStextPackage);
 		return theStextPackage;

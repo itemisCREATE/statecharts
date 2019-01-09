@@ -639,6 +639,15 @@ public interface StextPackage extends EPackage {
 	int EVENT_DEFINITION__ID = TypesPackage.EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_DEFINITION__META_FEATURES = TypesPackage.EVENT__META_FEATURES;
+
+	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -728,6 +737,15 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_DEFINITION__ID = TypesPackage.PROPERTY__ID;
+
+	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DEFINITION__META_FEATURES = TypesPackage.PROPERTY__META_FEATURES;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -837,6 +855,15 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION_DEFINITION__ID = TypesPackage.OPERATION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_DEFINITION__META_FEATURES = TypesPackage.OPERATION__META_FEATURES;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -975,13 +1002,22 @@ public interface StextPackage extends EPackage {
 	int TYPE_ALIAS_DEFINITION__SUPER_TYPES = TypesPackage.TYPE_ALIAS__SUPER_TYPES;
 
 	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS_DEFINITION__META_FEATURES = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS_DEFINITION__STATIC = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 0;
+	int TYPE_ALIAS_DEFINITION__STATIC = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Type Alias Definition</em>' class.
@@ -990,7 +1026,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS_DEFINITION_FEATURE_COUNT = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 1;
+	int TYPE_ALIAS_DEFINITION_FEATURE_COUNT = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.LocalReactionImpl <em>Local Reaction</em>}' class.

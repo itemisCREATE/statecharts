@@ -27,6 +27,7 @@ import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.GenericElement;
+import org.yakindu.base.types.MetaComposite;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Parameter;
@@ -197,6 +198,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	private EClass expressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass metaCompositeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -772,6 +780,24 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getMetaComposite() {
+		return metaCompositeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMetaComposite_MetaFeatures() {
+		return (EReference)metaCompositeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getDirection() {
 		return directionEEnum;
 	}
@@ -882,6 +908,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		expressionEClass = createEClass(EXPRESSION);
 
+		metaCompositeEClass = createEClass(META_COMPOSITE);
+		createEReference(metaCompositeEClass, META_COMPOSITE__META_FEATURES);
+
 		// Create enums
 		directionEEnum = createEEnum(DIRECTION);
 	}
@@ -922,6 +951,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		declarationEClass.getESuperTypes().add(this.getTypedElement());
 		declarationEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		declarationEClass.getESuperTypes().add(this.getPackageMember());
+		declarationEClass.getESuperTypes().add(this.getMetaComposite());
 		operationEClass.getESuperTypes().add(this.getDeclaration());
 		operationEClass.getESuperTypes().add(this.getGenericElement());
 		propertyEClass.getESuperTypes().add(this.getDeclaration());
@@ -1034,6 +1064,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEReference(getAnnotationType_Targets(), ecorePackage.getEObject(), null, "targets", null, 0, -1, AnnotationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(expressionEClass, Expression.class, "Expression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(metaCompositeEClass, MetaComposite.class, "MetaComposite", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMetaComposite_MetaFeatures(), this.getDeclaration(), null, "metaFeatures", null, 0, -1, MetaComposite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(directionEEnum, Direction.class, "Direction");

@@ -23,6 +23,7 @@ import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.GenericElement;
+import org.yakindu.base.types.MetaComposite;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Parameter;
@@ -99,6 +100,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.ANNOTATABLE_ELEMENT: return createAnnotatableElement();
 			case TypesPackage.ARRAY_TYPE_SPECIFIER: return createArrayTypeSpecifier();
 			case TypesPackage.ANNOTATION_TYPE: return createAnnotationType();
+			case TypesPackage.META_COMPOSITE: return createMetaComposite();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -332,6 +334,16 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	public AnnotationType createAnnotationType() {
 		AnnotationTypeImpl annotationType = new AnnotationTypeImpl();
 		return annotationType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MetaComposite createMetaComposite() {
+		MetaCompositeImpl metaComposite = new MetaCompositeImpl();
+		return metaComposite;
 	}
 
 	/**

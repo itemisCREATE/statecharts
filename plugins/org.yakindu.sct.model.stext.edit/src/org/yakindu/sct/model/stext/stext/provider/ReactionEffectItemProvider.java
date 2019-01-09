@@ -248,6 +248,11 @@ public class ReactionEffectItemProvider extends EffectItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.REACTION_EFFECT__ACTIONS,
+				 ExpressionsFactory.eINSTANCE.createMetaCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.REACTION_EFFECT__ACTIONS,
 				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
 
 		newChildDescriptors.add

@@ -117,6 +117,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 			case ExpressionsPackage.POST_FIX_UNARY_EXPRESSION: return createPostFixUnaryExpression();
 			case ExpressionsPackage.PRIMITIVE_VALUE_EXPRESSION: return createPrimitiveValueExpression();
 			case ExpressionsPackage.FEATURE_CALL: return createFeatureCall();
+			case ExpressionsPackage.META_CALL: return createMetaCall();
 			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION: return createElementReferenceExpression();
 			case ExpressionsPackage.PARENTHESIZED_EXPRESSION: return createParenthesizedExpression();
 			case ExpressionsPackage.TYPE_CAST_EXPRESSION: return createTypeCastExpression();
@@ -416,6 +417,16 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	public FeatureCall createFeatureCall() {
 		FeatureCallImpl featureCall = new FeatureCallImpl();
 		return featureCall;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MetaCall createMetaCall() {
+		MetaCallImpl metaCall = new MetaCallImpl();
+		return metaCall;
 	}
 
 	/**

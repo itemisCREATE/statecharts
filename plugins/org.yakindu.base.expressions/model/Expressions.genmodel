@@ -140,6 +140,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//FeatureCall/arraySelector"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//FeatureCall/arrayAccess"/>
     </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//MetaCall"/>
     <genClasses ecoreClass="Expressions.ecore#//ElementReferenceExpression">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Expressions.ecore#//ElementReferenceExpression/reference"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//ElementReferenceExpression/operationCall"/>
