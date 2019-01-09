@@ -218,7 +218,7 @@
       <children xsi:type="notation:Shape" xmi:id="_WbeBZVgXEeeNwJt_ornpOA" type="StatechartTextExpression" fontName="Verdana" lineColor="4210752">
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_WbeBZlgXEeeNwJt_ornpOA"/>
       </children>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_WbeocFgXEeeNwJt_ornpOA" x="10" y="10" width="200" height="575"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_WbeocFgXEeeNwJt_ornpOA" x="10" y="10" width="200" height="423"/>
     </children>
     <children xmi:id="_nMd10FyrEeexYulqhdY-Pw" type="Region" element="_nMaygFyrEeexYulqhdY-Pw">
       <children xsi:type="notation:DecorationNode" xmi:id="_nMzNAFyrEeexYulqhdY-Pw" type="RegionName">

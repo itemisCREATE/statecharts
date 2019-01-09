@@ -1,10 +1,8 @@
 testclass ChildFirstTransitionsinSubchart for statechart executionorder.ChildFirstTransitionsInSubchart {
 
-	var counter : integer = 0
-	const checkFail : integer = -1
 	
 	operation set_up() {
-		counter = 0
+		cnt = 0
 	}
 		
 	
@@ -85,7 +83,7 @@ testclass ChildFirstTransitionsinSubchart for statechart executionorder.ChildFir
 	}
 
 
-	@Test operation executionOrderWithTransitionInOneSubRegion() {
+	@Test operation executionOrderWithTransitionInFirstSubRegion() {
 	
 		set_up
 			
@@ -103,10 +101,40 @@ testclass ChildFirstTransitionsinSubchart for statechart executionorder.ChildFir
 		assert aa_check == 1
 		assert aa_local == 0
 
-		assert a_local == 4
-
 		assert ac_check == 2
 		assert ac_local == 3
+
+		assert a_check == 4
+		assert a_local == 5
+
+		assert c_check == 6	
+		assert c_local == 7
+		
+		assert sm_local == 8
+	}
+
+
+	@Test operation executionOrderWithTransitionInLastSubRegion() {
+	
+		set_up
+			
+		mock check("A")		returns ( checkA(false) )
+		mock check("AA")		returns ( checkAA(false) )
+		mock check("AB")		returns ( checkAB(no) )
+		mock check("AC")		returns ( checkAC(yes) )
+		mock check("AD")		returns ( checkAD(false) )
+		mock check("C")		returns ( checkC(false) )
+		mock next()			returns ( nextCounter() )
+		
+		enter
+		proceed 1 cycle
+		
+		assert aa_check == 1
+		assert aa_local == 2
+
+
+		assert ac_check == 3
+		assert ac_local == 0
 
 		assert a_check == 0
 		assert a_local == 4
