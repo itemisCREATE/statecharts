@@ -23,6 +23,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	ChildFirstExecutionHierarchy.class,
 	ChildFirstLocalReactions.class,
 //	ChildFirstOrthogonalReactions.class,
+//	ChildFirstTransitionsinSubchart.class,
 	ChildFirstTransitionTaking.class,
 	Declarations.class,
 	DeepEntry.class,
@@ -83,7 +84,9 @@ import org.junit.runners.Suite.SuiteClasses;
 	TriggerGuardExpressions.class,
 	TriggerExpressionPrecedence.class,
 	ValuedEvents.class,
-	TypeAlias.class
+	TypeAlias.class,
+	StatemachineKeywords.class,
+	TimedTransitions.class
 	})
 public class AllTests {
 }
