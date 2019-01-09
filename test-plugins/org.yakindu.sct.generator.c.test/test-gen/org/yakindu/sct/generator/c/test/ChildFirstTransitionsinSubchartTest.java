@@ -8,20 +8,20 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
 @GTest(
 	statechartBundle = "org.yakindu.sct.test.models",
-	sourceFile = "gtests/ChildFirstTransitionTaking/ChildFirstTransitionTakingTest.cc",
-	program = "gtests/ChildFirstTransitionTaking/ChildFirstTransitionTaking",
-	model = "testmodels/SCTUnit/executionorder/ChildFirstTransitionTaking.sct",
+	sourceFile = "gtests/ChildFirstTransitionsinSubchart/ChildFirstTransitionsinSubchartTest.cc",
+	program = "gtests/ChildFirstTransitionsinSubchart/ChildFirstTransitionsInSubchart",
+	model = "testmodels/SCTUnit/executionorder/ChildFirstTransitionsInSubchart.sct",
 	additionalFilesToCopy = {
 		"libraryTarget/sc_timer_service.c",
 		"libraryTarget/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
-		"ChildFirstTransitionTaking.c",
+		"ChildFirstTransitionsInSubchart.c",
 		"sc_timer_service.c"
 	}
 )
 @RunWith(GTestRunner.class)
-public class ChildFirstTransitionTakingTest {
+public class ChildFirstTransitionsinSubchartTest {
 
 	protected final GTestHelper helper = new GTestHelper(this);
 
