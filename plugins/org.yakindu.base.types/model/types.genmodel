@@ -94,8 +94,5 @@
     </genClasses>
     <genClasses image="false" ecoreClass="types.ecore#//Expression"/>
     <genClasses ecoreClass="types.ecore#//TypedDeclaration"/>
-    <genClasses ecoreClass="types.ecore#//MetaComposite">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//MetaComposite/metaFeatures"/>
-    </genClasses>
   </genPackages>
 </genmodel:GenModel>

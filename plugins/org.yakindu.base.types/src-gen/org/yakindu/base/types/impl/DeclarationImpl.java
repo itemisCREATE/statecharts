@@ -30,7 +30,6 @@ import org.yakindu.base.types.TypesUtil;
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getAnnotationInfo <em>Annotation Info</em>}</li>
- *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getMetaFeatures <em>Meta Features</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getId <em>Id</em>}</li>
  * </ul>
@@ -57,16 +56,6 @@ public abstract class DeclarationImpl extends NamedElementImpl implements Declar
 	 * @ordered
 	 */
 	protected AnnotatableElement annotationInfo;
-
-	/**
-	 * The cached value of the '{@link #getMetaFeatures() <em>Meta Features</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMetaFeatures()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Declaration> metaFeatures;
 
 	/**
 	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
@@ -177,18 +166,6 @@ public abstract class DeclarationImpl extends NamedElementImpl implements Declar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Declaration> getMetaFeatures() {
-		if (metaFeatures == null) {
-			metaFeatures = new EObjectContainmentEList<Declaration>(Declaration.class, this, TypesPackage.DECLARATION__META_FEATURES);
-		}
-		return metaFeatures;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public boolean isStatic() {
 		return static_;
@@ -236,8 +213,6 @@ public abstract class DeclarationImpl extends NamedElementImpl implements Declar
 				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
 			case TypesPackage.DECLARATION__ANNOTATION_INFO:
 				return basicSetAnnotationInfo(null, msgs);
-			case TypesPackage.DECLARATION__META_FEATURES:
-				return ((InternalEList<?>)getMetaFeatures()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -254,8 +229,6 @@ public abstract class DeclarationImpl extends NamedElementImpl implements Declar
 				return getAnnotations();
 			case TypesPackage.DECLARATION__ANNOTATION_INFO:
 				return getAnnotationInfo();
-			case TypesPackage.DECLARATION__META_FEATURES:
-				return getMetaFeatures();
 			case TypesPackage.DECLARATION__STATIC:
 				return isStatic();
 			case TypesPackage.DECLARATION__ID:
@@ -280,10 +253,6 @@ public abstract class DeclarationImpl extends NamedElementImpl implements Declar
 			case TypesPackage.DECLARATION__ANNOTATION_INFO:
 				setAnnotationInfo((AnnotatableElement)newValue);
 				return;
-			case TypesPackage.DECLARATION__META_FEATURES:
-				getMetaFeatures().clear();
-				getMetaFeatures().addAll((Collection<? extends Declaration>)newValue);
-				return;
 			case TypesPackage.DECLARATION__STATIC:
 				setStatic((Boolean)newValue);
 				return;
@@ -305,9 +274,6 @@ public abstract class DeclarationImpl extends NamedElementImpl implements Declar
 			case TypesPackage.DECLARATION__ANNOTATION_INFO:
 				setAnnotationInfo((AnnotatableElement)null);
 				return;
-			case TypesPackage.DECLARATION__META_FEATURES:
-				getMetaFeatures().clear();
-				return;
 			case TypesPackage.DECLARATION__STATIC:
 				setStatic(STATIC_EDEFAULT);
 				return;
@@ -327,8 +293,6 @@ public abstract class DeclarationImpl extends NamedElementImpl implements Declar
 				return annotations != null && !annotations.isEmpty();
 			case TypesPackage.DECLARATION__ANNOTATION_INFO:
 				return annotationInfo != null;
-			case TypesPackage.DECLARATION__META_FEATURES:
-				return metaFeatures != null && !metaFeatures.isEmpty();
 			case TypesPackage.DECLARATION__STATIC:
 				return static_ != STATIC_EDEFAULT;
 			case TypesPackage.DECLARATION__ID:
@@ -351,12 +315,6 @@ public abstract class DeclarationImpl extends NamedElementImpl implements Declar
 				default: return -1;
 			}
 		}
-		if (baseClass == MetaComposite.class) {
-			switch (derivedFeatureID) {
-				case TypesPackage.DECLARATION__META_FEATURES: return TypesPackage.META_COMPOSITE__META_FEATURES;
-				default: return -1;
-			}
-		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -371,12 +329,6 @@ public abstract class DeclarationImpl extends NamedElementImpl implements Declar
 			switch (baseFeatureID) {
 				case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS: return TypesPackage.DECLARATION__ANNOTATIONS;
 				case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO: return TypesPackage.DECLARATION__ANNOTATION_INFO;
-				default: return -1;
-			}
-		}
-		if (baseClass == MetaComposite.class) {
-			switch (baseFeatureID) {
-				case TypesPackage.META_COMPOSITE__META_FEATURES: return TypesPackage.DECLARATION__META_FEATURES;
 				default: return -1;
 			}
 		}

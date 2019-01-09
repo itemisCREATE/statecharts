@@ -21,7 +21,7 @@ import org.yakindu.base.base.NamedElement;
  * @model abstract="true"
  * @generated
  */
-public interface Declaration extends NamedElement, AnnotatableElement, MetaComposite {
+public interface Declaration extends NamedElement, AnnotatableElement {
 
 	/**
 	 * Returns the value of the '<em><b>Static</b></em>' attribute.
