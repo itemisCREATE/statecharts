@@ -2,7 +2,7 @@ GeneratorModel for yakindu::c {
 	statechart executionorder.ChildFirstTransitionTaking {
 		feature Outlet {
 			targetProject = "gtests"
-			targetFolder = "ChildFirstOrthogonalReactions"
+			targetFolder = "ChildFirstTransitionTaking"
 		}
 		feature FunctionInlining {
 			inlineReactions = false
