@@ -28,7 +28,6 @@ import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.EventCode
 import org.yakindu.sct.generator.cpp.FlowCode
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
-import org.yakindu.sct.generator.cpp.providers.ISourceFragment
 import org.yakindu.sct.generator.cpp.submodules.InterfaceFunctions
 import org.yakindu.sct.generator.cpp.submodules.InternalFunctions
 import org.yakindu.sct.generator.cpp.submodules.TimingFunctions
