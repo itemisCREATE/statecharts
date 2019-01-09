@@ -504,8 +504,8 @@
 							<includePackedArtifacts>true</includePackedArtifacts>
 							<target>
 								<artifact>
-									<groupId>com.yakindu.sctpro</groupId>
-									<artifactId>com.yakindu.sctpro.target</artifactId>
+									<groupId>org.yakindu.base</groupId>
+									<artifactId>org.yakindu.base.target</artifactId>
 									<version>3.5.0-SNAPSHOT</version>
 									<classifier>Latest</classifier>
 								</artifact>
