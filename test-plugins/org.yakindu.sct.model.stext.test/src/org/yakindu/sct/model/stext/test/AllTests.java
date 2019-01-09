@@ -13,7 +13,7 @@ package org.yakindu.sct.model.stext.test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-import org.yakindu.sct.model.stext.test.validation.STextJavaValidatorTest;
+import org.yakindu.sct.model.stext.test.validation.STextValidatorTest;
 import org.yakindu.sct.model.stext.test.validation.TransitionsWithNoTriggerTest;
 
 /**
@@ -23,7 +23,7 @@ import org.yakindu.sct.model.stext.test.validation.TransitionsWithNoTriggerTest;
  */
 @RunWith(value = Suite.class)
 @SuiteClasses(value = { TypeInferrerTest.class, StextParserRuleTest.class, TestModelsContainErrorsTest.class,
-		SCTUnitClassifierTest.class, STextJavaValidatorTest.class, TransitionsWithNoTriggerTest.class,
+		SCTUnitClassifierTest.class, STextValidatorTest.class, TransitionsWithNoTriggerTest.class,
 		STextScopeProviderTest.class })
 
 public class AllTests {

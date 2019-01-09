@@ -148,22 +148,22 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 
 	@Check(CheckType.FAST)
 	def void checkNoAssignmentInGuard(Guard guard) {
-		if(!guard.eAllContents.filter(AssignmentExpression).empty){
+		if(!guard.eAllContents.filter(AssignmentExpression).empty || !guard.eAllContents.filter(PostFixUnaryExpression).empty){
 			error(GUARD_CONTAINS_ASSIGNMENT, guard, null) 
 		}
 	}
 
 	@Check(CheckType.FAST)
 	def void transitionsWithNoTrigger(Transition trans) {
-		if (trans.getSource() instanceof Entry || trans.getSource() instanceof Choice || trans.getSource() instanceof Synchronization || 
-			(trans.getTarget() instanceof Synchronization && (trans.getTarget().getIncomingTransitions().size() > 1))) {
+		if (trans.source instanceof Entry || trans.source instanceof Choice || trans.source instanceof Synchronization || 
+			(trans.target instanceof Synchronization && (trans.target.incomingTransitions.size() > 1))) {
 			return;
 		}
-		if (trans.getSource() instanceof org.yakindu.sct.model.sgraph.State) {
-			var org.yakindu.sct.model.sgraph.State state=(trans.getSource() as org.yakindu.sct.model.sgraph.State) 
+		if (trans.source instanceof org.yakindu.sct.model.sgraph.State) {
+			var org.yakindu.sct.model.sgraph.State state=(trans.source as org.yakindu.sct.model.sgraph.State) 
 			if (state.isComposite()) {
-				for (Region r : state.getRegions()) {
-					for (Vertex v : r.getVertices()) {
+				for (Region r : state.regions) {
+					for (Vertex v : r.vertices) {
 						if (v instanceof Exit) {
 							return;
 						}
@@ -174,17 +174,17 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 		if (!STextValidationModelUtils.getExitPointSpecs(trans.getProperties()).isEmpty()) {
 			return;
 		}
-		if (trans.getTrigger() === null) {
+		if (trans.trigger === null) {
 			warning(ISSUE_TRANSITION_WITHOUT_TRIGGER, trans, null, -1) 
 		}
 	}
 	@Check(CheckType.FAST)
 	def void checkAlwaysTransitionHasLowestPriority(RegularState state) {
-		var Iterator<Transition> iterator=state.getOutgoingTransitions().iterator() 
+		var Iterator<Transition> iterator=state.outgoingTransitions.iterator() 
 		var Transition deadTransition=null 
 		while (iterator.hasNext()) {
 			var Transition transition=iterator.next() 
-			var Trigger trigger=transition.getTrigger() 
+			var Trigger trigger=transition.trigger 
 			if (deadTransition !== null) {
 				warning(String.format(DEAD_TRANSITION, getTransitionDeclaration(deadTransition)), transition, null, -1) 
 			}
@@ -197,8 +197,8 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 			} else // check always/oncycle trigger
 			if (trigger instanceof ReactionTrigger) {
 				var ReactionTrigger reactTrigger=(trigger as ReactionTrigger) 
-				var EList<EventSpec> triggers=reactTrigger.getTriggers() 
-				if (triggers.size() === 1 && reactTrigger.getGuard() === null) {
+				var EList<EventSpec> triggers=reactTrigger.triggers
+				if (triggers.size() === 1 && reactTrigger.guard === null) {
 					var EventSpec eventSpec=triggers.get(0) 
 					if (eventSpec instanceof AlwaysEvent && iterator.hasNext()) {
 						warning(String.format(ALWAYS_TRUE_TRANSITION_USED, getTransitionDeclaration(transition)), transition, null, -1) 
@@ -212,9 +212,9 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 	}
 	@Check(CheckType.FAST)
 	def void checkDefaultAndElseIsNotUsedOnRegularState(RegularState state) {
-		var EList<Transition> outgoingTransitions=state.getOutgoingTransitions() 
+		var EList<Transition> outgoingTransitions=state.outgoingTransitions 
 		for (Transition transition : outgoingTransitions) {
-			var Trigger trigger=transition.getTrigger() 
+			var Trigger trigger=transition.trigger 
 			if (trigger instanceof DefaultTrigger) {
 				warning(DEFAULT_AND_ELSE_TRANSITION_ON_REGULAR_STATE, transition, null, -1) 
 			}
@@ -232,7 +232,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 	@Check(CheckType.FAST)
 	def void checkAlwaysAndDefaultTransitionInChoices(Choice choice) {
 		var Transition deadTransition=null 
-		var EList<Transition> outgoingTransitions=choice.getOutgoingTransitions() 
+		var EList<Transition> outgoingTransitions=choice.outgoingTransitions 
 		var int size=outgoingTransitions.size() 
 		var int deadTransitionIndex=0 
 		for (var int i=0; i < size; i++) {
@@ -240,11 +240,11 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 			if (deadTransition !== null) {
 				warning(String.format(DEAD_TRANSITION, getTransitionDeclaration(deadTransition)), transition, null, -1) 
 			}
-			var Trigger trigger=transition.getTrigger() 
+			var Trigger trigger=transition.trigger 
 			if (trigger instanceof ReactionTrigger) {
 				var ReactionTrigger reactTrigger=(trigger as ReactionTrigger) 
-				var EList<EventSpec> triggers=reactTrigger.getTriggers() 
-				if (triggers.size() === 1 && reactTrigger.getGuard() === null) {
+				var EList<EventSpec> triggers=reactTrigger.triggers
+				if (triggers.size() === 1 && reactTrigger.guard === null) {
 					if (triggers.get(0) instanceof AlwaysEvent) {
 						if (i !== size - 1) {
 							warning(String.format(ALWAYS_TRUE_TRANSITION_USED, transition.getSpecification()), transition, null, -1) 
@@ -261,7 +261,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 		if (deadTransition !== null) {
 			for (var int i=0; i < deadTransitionIndex; i++) {
 				var Transition transition=outgoingTransitions.get(i) 
-				var Trigger trigger=transition.getTrigger() 
+				var Trigger trigger=transition.trigger 
 				if (trigger instanceof DefaultTrigger || trigger === null) {
 					warning(String.format(DEAD_TRANSITION, getTransitionDeclaration(deadTransition)), transition, null, -1) 
 				}
@@ -270,11 +270,11 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 	}
 	@Check(CheckType.FAST)
 	def void checkOnlyOneDefaultTransitionUsed(Choice choice) {
-		var Iterator<Transition> iterator=choice.getOutgoingTransitions().iterator() 
+		var Iterator<Transition> iterator=choice.outgoingTransitions.iterator() 
 		var List<Transition> defaultTransitions=new ArrayList<Transition>() 
 		while (iterator.hasNext()) {
 			var Transition transition=iterator.next() 
-			var Trigger trigger=transition.getTrigger() 
+			var Trigger trigger=transition.trigger 
 			if (trigger instanceof DefaultTrigger || trigger === null) {
 				defaultTransitions.add(transition) 
 			}
@@ -289,11 +289,11 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 	}
 	@Check(CheckType.FAST)
 	def void checkUnusedEntry(Entry entry) {
-		if (entry.getParentRegion().getComposite() instanceof org.yakindu.sct.model.sgraph.State && entry.getIncomingTransitions().isEmpty()) {
+		if (entry.getParentRegion().getComposite() instanceof org.yakindu.sct.model.sgraph.State && entry.incomingTransitions.isEmpty()) {
 			var org.yakindu.sct.model.sgraph.State state=(entry.getParentRegion().getComposite() as org.yakindu.sct.model.sgraph.State) 
 			if (!entry.isDefault()) {
 				var boolean hasIncomingTransition=false 
-				var Iterator<Transition> transitionIt=state.getIncomingTransitions().iterator() 
+				var Iterator<Transition> transitionIt=state.incomingTransitions.iterator() 
 				while (transitionIt.hasNext() && !hasIncomingTransition) {
 					var Iterator<ReactionProperty> propertyIt=transitionIt.next().getProperties().iterator() 
 					while (propertyIt.hasNext() && !hasIncomingTransition) {
@@ -408,12 +408,12 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 	}
 	@Check(CheckType.NORMAL)
 	def void checkUnusedExit(Exit exit) {
-		if (exit.getParentRegion().getComposite() instanceof org.yakindu.sct.model.sgraph.State && exit.getOutgoingTransitions().isEmpty()) {
+		if (exit.getParentRegion().getComposite() instanceof org.yakindu.sct.model.sgraph.State && exit.outgoingTransitions.isEmpty()) {
 			var org.yakindu.sct.model.sgraph.State state=(exit.getParentRegion().getComposite() as org.yakindu.sct.model.sgraph.State) 
 			if (!exit.isDefault()) {
 				var boolean hasOutgoingTransition=false 
 				var boolean equalsOutgoingTransition=false 
-				var Iterator<Transition> transitionIt=state.getOutgoingTransitions().iterator() 
+				var Iterator<Transition> transitionIt=state.outgoingTransitions.iterator() 
 				while (transitionIt.hasNext() && !hasOutgoingTransition) {
 					var Transition transition=transitionIt.next() 
 					hasOutgoingTransition=STextValidationModelUtils.isDefaultExitTransition(transition) || STextValidationModelUtils.isNamedExitTransition(transition, exit.getName()) 
@@ -421,7 +421,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 				if (!hasOutgoingTransition) {
 					error(EXIT_UNUSED, exit, null, -1) 
 				}
-				for (Transition transition : state.getOutgoingTransitions()) {
+				for (Transition transition : state.outgoingTransitions) {
 					for (ReactionProperty property : transition.getProperties()) {
 						if (property instanceof ExitPointSpec) {
 							var String exitpoint=((property as ExitPointSpec)).getExitpoint() 
@@ -436,7 +436,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 				}
 			} else {
 				var boolean hasOutgoingTransition=false 
-				var Iterator<Transition> transitionIt=state.getOutgoingTransitions().iterator() 
+				var Iterator<Transition> transitionIt=state.outgoingTransitions.iterator() 
 				while (transitionIt.hasNext() && !hasOutgoingTransition) {
 					hasOutgoingTransition=STextValidationModelUtils.isDefaultExitTransition(transitionIt.next()) 
 				}
@@ -450,22 +450,22 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 	def void checkTransitionPropertySpec(Transition transition) {
 		for (ReactionProperty property : transition.getProperties()) {
 			if (property instanceof EntryPointSpec) {
-				if (transition.getTarget() instanceof org.yakindu.sct.model.sgraph.State) {
-					var org.yakindu.sct.model.sgraph.State state=(transition.getTarget() as org.yakindu.sct.model.sgraph.State) 
+				if (transition.target instanceof org.yakindu.sct.model.sgraph.State) {
+					var org.yakindu.sct.model.sgraph.State state=(transition.target as org.yakindu.sct.model.sgraph.State) 
 					if (!state.isComposite()) {
 						warning(TRANSITION_ENTRY_SPEC_NOT_COMPOSITE, transition, null, -1) 
 					}
 				}
 			} else if (property instanceof ExitPointSpec) {
 				val ExitPointSpec exitPointSpec=(property as ExitPointSpec) 
-				if (transition.getSource() instanceof org.yakindu.sct.model.sgraph.State) {
-					var org.yakindu.sct.model.sgraph.State state=(transition.getSource() as org.yakindu.sct.model.sgraph.State) 
+				if (transition.source instanceof org.yakindu.sct.model.sgraph.State) {
+					var org.yakindu.sct.model.sgraph.State state=(transition.source as org.yakindu.sct.model.sgraph.State) 
 					if (!state.isComposite()) {
 						warning(TRANSITION_EXIT_SPEC_NOT_COMPOSITE, transition, null, -1) 
 					} else {
 						// Validate an exit point is continued on one transition
 						// only.
-						for (Transition t : state.getOutgoingTransitions()) {
+						for (Transition t : state.outgoingTransitions) {
 							if (transition !== t && STextValidationModelUtils.isNamedExitTransition(t, exitPointSpec.getExitpoint())) {
 								warning(TRANSITION_EXIT_SPEC_ON_MULTIPLE_SIBLINGS, transition, null, -1) 
 							}
@@ -473,7 +473,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 						// Validate the state has minimally one named exit
 						// region
 						var boolean hasExit=false 
-						var Iterator<Region> regionIter=state.getRegions().iterator() 
+						var Iterator<Region> regionIter=state.regions.iterator() 
 						while (regionIter.hasNext() && !hasExit) {
 							var Iterator<Exit> exitIter=STextValidationModelUtils.getExits(regionIter.next().eContents()).iterator() 
 							while (exitIter.hasNext() && !hasExit) {
@@ -507,11 +507,11 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 	@Check(CheckType.NORMAL)
 	def void checkUnboundEntryPoints(org.yakindu.sct.model.sgraph.State state) {
 		if (state.isComposite()) {
-			val List<Transition>[] transitions=STextValidationModelUtils.getEntrySpecSortedTransitions(state.getIncomingTransitions()) 
+			val List<Transition>[] transitions=STextValidationModelUtils.getEntrySpecSortedTransitions(state.incomingTransitions) 
 			var Map<Region, List<Entry>> regions=null 
 			// first list contains Transitions without entry spec
 			if (!transitions.get(0).isEmpty()) {
-				regions=STextValidationModelUtils.getRegionsWithoutDefaultEntry(state.getRegions()) 
+				regions=STextValidationModelUtils.getRegionsWithoutDefaultEntry(state.regions) 
 				if (!regions.isEmpty()) {
 					for (Transition transition : transitions.get(0)) {
 						error(TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT, transition, null, -1) 
@@ -524,7 +524,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 			// second list contains Transitions with entry spec
 			if (!transitions.get(1).isEmpty()) {
 				if (regions === null) {
-					regions=STextValidationModelUtils.getRegionsWithoutDefaultEntry(state.getRegions()) 
+					regions=STextValidationModelUtils.getRegionsWithoutDefaultEntry(state.regions) 
 				}
 				for (Transition transition : transitions.get(1)) {
 					var boolean hasTargetEntry=true 
@@ -549,8 +549,8 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 								error(TRANSITION_UNBOUND_NAMED_ENTRY_POINT + specName, transition, null, -1) 
 							}
 							var boolean usingEntry=false 
-							for (Region region : state.getRegions()) {
-								var EList<Vertex> vertices=region.getVertices() 
+							for (Region region : state.regions) {
+								var EList<Vertex> vertices=region.vertices 
 								for (Vertex vertice : vertices) {
 									if (vertice instanceof Entry) {
 										if (spec.getEntrypoint().equals(vertice.getName())) {
@@ -666,9 +666,9 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 	}
 	@Check(CheckType.FAST)
 	def void checkSyncNoTriggersOnOutgoingTransition(Synchronization synchronization) {
-		var List<Transition> outgoing=synchronization.getOutgoingTransitions() 
+		var List<Transition> outgoing=synchronization.outgoingTransitions 
 		for (Transition transition : outgoing) {
-			if (transition.getTrigger() !== null) {
+			if (transition.trigger !== null) {
 				warning(SYNC_OUTGOING_TRIGGER, transition, null) 
 			}
 		}
@@ -724,7 +724,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 	}
 	@Check(CheckType.FAST)
 	def void checkExitPointSpecWithTrigger(Transition t) {
-		if (!STextValidationModelUtils.getExitPointSpecs(t.getProperties()).isEmpty() && t.getTrigger() !== null && t.getSource() instanceof org.yakindu.sct.model.sgraph.State) {
+		if (!STextValidationModelUtils.getExitPointSpecs(t.getProperties()).isEmpty() && t.trigger !== null && t.source instanceof org.yakindu.sct.model.sgraph.State) {
 			error(EXITPOINTSPEC_WITH_TRIGGER, t, null, -1) 
 		}
 	}
@@ -745,8 +745,8 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 	@Check(CheckType.FAST)
 	def void checkChoiceWithoutDefaultTransition(Choice choice) {
 		var boolean found=false 
-		for (Transition transition : choice.getOutgoingTransitions()) {
-			var Trigger trigger=transition.getTrigger() 
+		for (Transition transition : choice.outgoingTransitions) {
+			var Trigger trigger=transition.trigger 
 			if (isDefault(trigger)) {
 				found=true 
 			}
@@ -797,7 +797,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 		}
 	}
 	def protected boolean isDefault(Trigger trigger) {
-		return trigger === null || trigger instanceof DefaultTrigger || ((trigger instanceof ReactionTrigger) && ((trigger as ReactionTrigger)).getTriggers().size() === 0 && ((trigger as ReactionTrigger)).getGuard() === null) 
+		return trigger === null || trigger instanceof DefaultTrigger || ((trigger instanceof ReactionTrigger) && ((trigger as ReactionTrigger)).getTriggers().size() === 0 && ((trigger as ReactionTrigger)).guard === null) 
 	}
 	override protected String getCurrentLanguage(Map<Object, Object> context, EObject eObject) {
 		var Resource eResource=eObject.eResource() 

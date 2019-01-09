@@ -77,7 +77,7 @@ import com.google.inject.Inject;
  */
 @RunWith(XtextRunner.class)
 @InjectWith(STextInjectorProvider.class)
-public class STextJavaValidatorTest extends AbstractSTextValidationTest implements STextValidationMessages {
+public class STextValidatorTest extends AbstractSTextValidationTest implements STextValidationMessages {
 
 	@Inject
 	TestCompletenessAssertions checkAvailable;
@@ -391,7 +391,9 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 				assertEquals(STextValidator.GUARD_CONTAINS_ASSIGNMENT, d.getMessage());
 			}
 		}
-
+		expression = super.parseExpression("[myInt++ > 10]", ReactionTrigger.class.getSimpleName(), scope);
+		validationResult = tester.validate(expression);
+		validationResult.assertErrorContains(STextValidator.GUARD_CONTAINS_ASSIGNMENT);
 	}
 
 	/**
