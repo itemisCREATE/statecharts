@@ -131,7 +131,9 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 
 	def dispatch Object execute(PostFixUnaryExpression it) {
 		var result = operand.execute
-		context.resolve(operand).value = evaluate(operator.getName(), result)
+		val slot = context.resolve(operand)
+		if (slot.isPresent)
+			slot.get.value = evaluate(operator.getName(), result)
 		result
 	}
 
@@ -226,8 +228,11 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 
 	def Object executeAssignment(AssignmentExpression assignment) {
 		var scopeVariable = context.resolve(assignment.varRef)
+			.orElseThrow(SlotResolutionExceptionSupplier.forContext(assignment.varRef))
+		
 		var result = assignment.expression.execute
-		if(result instanceof Enumerator) result = result.literalValue
+		if (result instanceof Enumerator) 
+			result = result.literalValue
 
 		if (assignment.operator == AssignmentOperator::ASSIGN) {
 			// Strong typing, use the type of the scopeVariable instead of using new runtime type
@@ -235,7 +240,7 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 		} else {
 			var operator = assignFunctionMap.get(assignment.operator.getName())
 			scopeVariable.value = if (result !== null)
-				cast(evaluate(operator, scopeVariable.getValue, result), scopeVariable.type)
+				cast(evaluate(operator, scopeVariable.value, result), scopeVariable.type)
 			else
 				null
 		}
@@ -279,8 +284,8 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	}
 
 	def executeElementReferenceExpression(ElementReferenceExpression expression) {
-		val executionSlot = context.resolve(expression)
-		return doExecute(expression.reference, executionSlot, expression)
+		val slot = context.resolve(expression)
+		return doExecute(expression.reference, slot.orElse(null), expression)
 	}
 
 	def dispatch Object execute(FeatureCall call) {
@@ -288,11 +293,10 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	}
 
 	def executeFeatureCall(FeatureCall call) {
-		var result = null as Object
-		var slot = null as ExecutionSlot
+		var Object result
 		for (ArgumentExpression exp : call.toCallStack) {
-			slot = context.resolve(exp)
-			result = doExecute(exp.featureOrReference, slot, exp)
+			val slot = context.resolve(exp)
+			result = doExecute(exp.featureOrReference, slot.orElse(null), exp)
 		}
 		return result
 	}
@@ -317,6 +321,13 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	
 	def dispatch doExecute(Operation feature, ExecutionEvent slot, ArgumentExpression exp) {
 		slot.raised = true
+	}
+	
+	def dispatch doExecute(Operation feature, Void slot, ArgumentExpression exp) {
+		val executor = operationExecutors.findFirst[canExecute(exp)]
+		if (executor !== null) {
+			return executor.executeOperation(exp)
+		}
 	}
 	
 	def dispatch doExecute(Operation feature, ExecutionSlot slot, ArgumentExpression exp) {
