@@ -58,6 +58,8 @@ void AlwaysOncycleTest::alwaysOnCycleTest()
 		count++;
 	}
 	EXPECT_TRUE((alwaysOncycleIface_get_value(&statechart)== 5));
+	EXPECT_TRUE((alwaysOncycleIface_get_x(&statechart)== 5));
+	EXPECT_TRUE((alwaysOncycleIface_get_y(&statechart)== 5));
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(alwaysOncycle_isStateActive(&statechart, AlwaysOncycle_main_region_StateA));
 	EXPECT_TRUE(alwaysOncycleIface_get_value(&statechart)== 0);
