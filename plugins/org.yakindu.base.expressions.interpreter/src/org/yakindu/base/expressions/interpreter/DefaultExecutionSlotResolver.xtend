@@ -11,7 +11,7 @@
 package org.yakindu.base.expressions.interpreter
 
 import com.google.inject.Inject
-import java.beans.Expression
+import java.util.Optional
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.util.SimpleAttributeResolver
@@ -36,61 +36,47 @@ import org.yakindu.sct.model.sruntime.ExecutionSlot
 class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 
 	@Inject
-	protected extension IQualifiedNameProvider nameProvider
+	protected extension IQualifiedNameProvider
 	
 	@Inject
 	protected extension ExpressionExtensions
 
-	def dispatch ExecutionSlot resolve(ExecutionContext context, FeatureCall e) {
-		return resolveByFeature(context, e, e.feature)
+	def dispatch Optional<ExecutionSlot> resolve(ExecutionContext context, FeatureCall e) {
+		return Optional.ofNullable(resolveByFeature(context, e, e.feature))
 	}
 
-	def dispatch ExecutionSlot resolve(ExecutionContext context, ElementReferenceExpression e) {
-		packageNamespaceAwareResolve(context, e.reference)
+	def dispatch Optional<ExecutionSlot> resolve(ExecutionContext context, ElementReferenceExpression e) {
+		return Optional.ofNullable(packageNamespaceAwareResolve(context, e.reference))
 	}
 
-	def dispatch ExecutionSlot resolve(ExecutionContext context, AssignmentExpression e) {
+	def dispatch Optional<ExecutionSlot> resolve(ExecutionContext context, AssignmentExpression e) {
 		return context.resolve(e.varRef)
 	}
 
-	def dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, EObject feature) {
+	def protected dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, EObject feature) {
 		return context.getVariable(e.feature.fullyQualifiedName.toString)
 	}
 
-	def dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, Operation feature) {
+	def protected dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, Operation feature) {
 		return resolveCompositeSlot(context, e)
 	}
 
-	def dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, Event feature) {
+	def protected dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, Event feature) {
 		return resolveCompositeSlot(context, e)
 	}
 
-	def dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, Property feature) {
+	def protected dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, Property feature) {
 		return resolveCompositeSlot(context, e)
 	}
 
-	def ExecutionSlot resolveCompositeSlot(ExecutionContext context, FeatureCall e) {
-		var ExecutionSlot featureSlot = resolve(context, e.owner)
-		if (featureSlot === null) {
-			throw new IllegalStateException(
-				"Value of '" + e.feature.name  + "' in expression '" + getExpressionText(e) +
-					"' has not been set.") // could not find starting slot for feature call
+	def protected ExecutionSlot resolveCompositeSlot(ExecutionContext context, FeatureCall e) {
+		var featureSlot = resolve(context, e.owner)
+		if (!featureSlot.isPresent) {
+			return null
 		}
-		return resolveFromSlot(featureSlot, e)
+		return resolveFromSlot(featureSlot.get, e)
 	}
 	
-	def dispatch String getExpressionText(FeatureCall call) {
-		getExpressionText(call.owner) + "." + call.feature.name
-	}
-	
-	def dispatch String getExpressionText(ElementReferenceExpression exp) {
-		exp.reference.fullyQualifiedName.toString
-	}
-	
-	def dispatch String getExpressionText(Expression exp) {
-		// fallback
-	}
-
 	def protected dispatch ExecutionSlot resolveFromSlot(ExecutionSlot slot, FeatureCall call) {
 		slot // fallback
 	}

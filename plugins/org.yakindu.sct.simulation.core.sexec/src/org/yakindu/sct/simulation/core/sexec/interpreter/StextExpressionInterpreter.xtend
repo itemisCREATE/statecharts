@@ -23,6 +23,7 @@ import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
+import org.yakindu.base.expressions.interpreter.SlotResolutionExceptionSupplier
 
 /**
  * 
@@ -39,20 +40,22 @@ class StextExpressionInterpreter extends DefaultExpressionInterpreter {
 	@Inject protected extension ExecutionContextExtensions
 
 	def dispatch Object execute(EventRaisingExpression eventRaising) {
-		var event = context.resolve(eventRaising.event)
+		val event = context.resolve(eventRaising.event)
+			.orElseThrow(SlotResolutionExceptionSupplier.forContext(eventRaising.event))
 		if (event instanceof ExecutionEvent) {
 			val value = eventRaising.value?.execute
-			if(eventRaiser !== null) event.raise(value)
+			if (eventRaiser !== null) event.raise(value)
 		}
 		null
 	}
 
 	def dispatch Object execute(EventValueReferenceExpression expression) {
 		for (event : context.raisedEvents) {
-			val executionSlot = context.resolve(expression.value)
-			if (executionSlot instanceof ExecutionEvent && executionSlot.fqName == event.fqName) {
+			val slot = context.resolve(expression.value)
+				.orElseThrow(SlotResolutionExceptionSupplier.forContext(expression.value))
+			if (slot instanceof ExecutionEvent && slot.fqName == event.fqName) {
 				return event.getValue;
-			};
+			}
 		}
 		throw new UndefinedValueException("Undefined value of event '" + expression.value.eventName + "'\n" +
 			"Event values only exist in the same cycle in which the event was raised.")
