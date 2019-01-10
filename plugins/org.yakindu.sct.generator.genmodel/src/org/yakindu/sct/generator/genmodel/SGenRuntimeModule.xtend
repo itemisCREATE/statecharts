@@ -17,6 +17,7 @@ import org.eclipse.xtext.scoping.IGlobalScopeProvider
 import org.eclipse.xtext.serializer.tokens.ICrossReferenceSerializer
 import org.yakindu.base.expressions.linking.LinkingDiagnosticMessageProvider
 import org.yakindu.base.expressions.parser.SyntaxErrorMessageProvider
+import org.yakindu.base.expressions.terminals.ExpressionsValueConverterService
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
@@ -25,7 +26,6 @@ import org.yakindu.sct.generator.genmodel.naming.GenModelQualifiedNameProvider
 import org.yakindu.sct.generator.genmodel.scoping.SGenGlobalScopeProvider
 import org.yakindu.sct.generator.genmodel.serializer.SGenCrossReferenceSerializer
 import org.yakindu.sct.generator.genmodel.typesystem.SGenTypeInferrer
-import org.yakindu.sct.generator.genmodel.valueconverter.SGenValueConverter
 
 class SGenRuntimeModule extends AbstractSGenRuntimeModule {
 
@@ -58,7 +58,7 @@ class SGenRuntimeModule extends AbstractSGenRuntimeModule {
 	}
 	
 	override bindIValueConverterService() {
-		SGenValueConverter
+		ExpressionsValueConverterService
 	}
 	
 	override bindIFormatter() {
