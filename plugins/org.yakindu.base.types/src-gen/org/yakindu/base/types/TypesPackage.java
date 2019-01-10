@@ -168,6 +168,16 @@ public interface TypesPackage extends EPackage {
 	int DECLARATION__META_FEATURES = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.types.impl.TypedDeclarationImpl <em>Typed Declaration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.types.impl.TypedDeclarationImpl
+	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getTypedDeclaration()
+	 * @generated
+	 */
+	int TYPED_DECLARATION = 22;
+
+	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -375,16 +385,6 @@ public interface TypesPackage extends EPackage {
 	int TYPE_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.base.types.impl.TypedDeclarationImpl <em>Typed Declaration</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.types.impl.TypedDeclarationImpl
-	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getTypedDeclaration()
-	 * @generated
-	 */
-	int TYPED_DECLARATION = 22;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -419,15 +419,6 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPED_DECLARATION__META_FEATURES = DECLARATION__META_FEATURES;
-
-	/**
-	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DECLARATION__META_FEATURES = TYPED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -509,15 +500,6 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION__META_FEATURES = TYPED_DECLARATION__META_FEATURES;
-
-	/**
-	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__META_FEATURES = DECLARATION__META_FEATURES;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.

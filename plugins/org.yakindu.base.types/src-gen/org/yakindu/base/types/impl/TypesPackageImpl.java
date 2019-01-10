@@ -907,6 +907,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		expressionEClass = createEClass(EXPRESSION);
 
 		typedDeclarationEClass = createEClass(TYPED_DECLARATION);
+
 		metaCompositeEClass = createEClass(META_COMPOSITE);
 		createEReference(metaCompositeEClass, META_COMPOSITE__META_FEATURES);
 

@@ -69,16 +69,6 @@ public abstract class DeclarationImpl extends NamedElementImpl implements Declar
 	protected EList<Declaration> metaFeatures;
 
 	/**
-	 * The cached value of the '{@link #getMetaFeatures() <em>Meta Features</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMetaFeatures()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Declaration> metaFeatures;
-
-	/**
 	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -367,12 +357,6 @@ public abstract class DeclarationImpl extends NamedElementImpl implements Declar
 				default: return -1;
 			}
 		}
-		if (baseClass == MetaComposite.class) {
-			switch (derivedFeatureID) {
-				case TypesPackage.DECLARATION__META_FEATURES: return TypesPackage.META_COMPOSITE__META_FEATURES;
-				default: return -1;
-			}
-		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -387,12 +371,6 @@ public abstract class DeclarationImpl extends NamedElementImpl implements Declar
 			switch (baseFeatureID) {
 				case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS: return TypesPackage.DECLARATION__ANNOTATIONS;
 				case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO: return TypesPackage.DECLARATION__ANNOTATION_INFO;
-				default: return -1;
-			}
-		}
-		if (baseClass == MetaComposite.class) {
-			switch (baseFeatureID) {
-				case TypesPackage.META_COMPOSITE__META_FEATURES: return TypesPackage.DECLARATION__META_FEATURES;
 				default: return -1;
 			}
 		}

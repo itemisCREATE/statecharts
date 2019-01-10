@@ -1744,12 +1744,7 @@ public interface StextPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>State Specification</em>'.
-	 * @see org.yakindu.sct.model.stext@@ -232,3 +232,5 @@ _UI_Annotation_arguments_feature = Arguments
-_UI_AnnotatableElement_annotationInfo_feature = Annotation Info
-_UI_Declaration_id_feature = Id
-_UI_TypedDeclaration_type = Typed Declaration
-_UI_MetaComposite_type = Meta Composite
-_UI_MetaComposite_metaFeatures_feature = Meta Features.stext.StateSpecification
+	 * @see org.yakindu.sct.model.stext.stext.StateSpecification
 	 * @generated
 	 */
 	EClass getStateSpecification();
