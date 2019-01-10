@@ -271,6 +271,7 @@ public class PackageItemProvider
 
 		boolean qualify =
 			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
+			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES ||
 			childFeature == TypesPackage.Literals.PACKAGE__MEMBER;
 
 		if (qualify) {

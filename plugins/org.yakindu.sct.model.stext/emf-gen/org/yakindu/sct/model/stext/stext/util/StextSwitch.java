@@ -11,6 +11,7 @@ import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.GenericElement;
+import org.yakindu.base.types.MetaComposite;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
@@ -212,6 +213,7 @@ public class StextSwitch<T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(eventDefinition);
 				if (result == null) result = caseNamedElement(eventDefinition);
 				if (result == null) result = caseAnnotatableElement(eventDefinition);
+				if (result == null) result = caseMetaComposite(eventDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -224,6 +226,7 @@ public class StextSwitch<T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(variableDefinition);
 				if (result == null) result = caseNamedElement(variableDefinition);
 				if (result == null) result = caseAnnotatableElement(variableDefinition);
+				if (result == null) result = caseMetaComposite(variableDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -237,6 +240,7 @@ public class StextSwitch<T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(operationDefinition);
 				if (result == null) result = caseNamedElement(operationDefinition);
 				if (result == null) result = caseAnnotatableElement(operationDefinition);
+				if (result == null) result = caseMetaComposite(operationDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -250,6 +254,7 @@ public class StextSwitch<T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(typeAliasDefinition);
 				if (result == null) result = caseNamedElement(typeAliasDefinition);
 				if (result == null) result = caseAnnotatableElement(typeAliasDefinition);
+				if (result == null) result = caseMetaComposite(typeAliasDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -958,6 +963,21 @@ public class StextSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNamedElement(NamedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Meta Composite</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Meta Composite</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMetaComposite(MetaComposite object) {
 		return null;
 	}
 

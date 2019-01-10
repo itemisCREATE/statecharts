@@ -612,6 +612,15 @@ public interface StextPackage extends EPackage {
 	int EVENT_DEFINITION__ANNOTATION_INFO = TypesPackage.EVENT__ANNOTATION_INFO;
 
 	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_DEFINITION__META_FEATURES = TypesPackage.EVENT__META_FEATURES;
+
+	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -701,6 +710,15 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_DEFINITION__ANNOTATION_INFO = TypesPackage.PROPERTY__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DEFINITION__META_FEATURES = TypesPackage.PROPERTY__META_FEATURES;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -812,6 +830,15 @@ public interface StextPackage extends EPackage {
 	int OPERATION_DEFINITION__ANNOTATION_INFO = TypesPackage.OPERATION__ANNOTATION_INFO;
 
 	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_DEFINITION__META_FEATURES = TypesPackage.OPERATION__META_FEATURES;
+
+	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -919,6 +946,15 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_ALIAS_DEFINITION__ANNOTATION_INFO = TypesPackage.TYPE_ALIAS__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS_DEFINITION__META_FEATURES = TypesPackage.TYPE_ALIAS__META_FEATURES;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.

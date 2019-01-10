@@ -460,6 +460,11 @@ public class ScopeItemProvider
 			(createChildParameter
 				(SGraphPackage.Literals.SCOPE__MEMBERS,
 				 TypesFactory.eINSTANCE.createAnnotationType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createMetaComposite()));
 	}
 
 	/**

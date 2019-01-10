@@ -289,6 +289,7 @@ public class ExecutionFlowItemProvider
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__INIT_SEQUENCE);
 			childrenFeatures.add(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS);
 			childrenFeatures.add(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO);
+			childrenFeatures.add(TypesPackage.Literals.META_COMPOSITE__META_FEATURES);
 			childrenFeatures.add(TypesPackage.Literals.TYPE__SUPER_TYPES);
 			childrenFeatures.add(TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS);
 			childrenFeatures.add(TypesPackage.Literals.COMPLEX_TYPE__FEATURES);
@@ -370,6 +371,7 @@ public class ExecutionFlowItemProvider
 			case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE:
 			case SexecPackage.EXECUTION_FLOW__ANNOTATIONS:
 			case SexecPackage.EXECUTION_FLOW__ANNOTATION_INFO:
+			case SexecPackage.EXECUTION_FLOW__META_FEATURES:
 			case SexecPackage.EXECUTION_FLOW__SUPER_TYPES:
 			case SexecPackage.EXECUTION_FLOW__TYPE_PARAMETERS:
 			case SexecPackage.EXECUTION_FLOW__FEATURES:
@@ -553,6 +555,121 @@ public class ExecutionFlowItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createAnnotationType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionFlow()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionNode()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionState()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionEntry()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionExit()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionChoice()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionSynchronization()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SexecFactory.eINSTANCE.createMethod()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SexecFactory.eINSTANCE.createTimeEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SGraphFactory.eINSTANCE.createImportDeclaration()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createPackage()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createTypedDeclaration()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createOperation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createProperty()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createComplexType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createEnumerationType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createPrimitiveType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createEnumerator()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createTypeParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createTypeAlias()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 TypesFactory.eINSTANCE.createAnnotationType()));
 
 		newChildDescriptors.add
@@ -1009,6 +1126,7 @@ public class ExecutionFlowItemProvider
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION ||
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__STATIC_INIT_SEQUENCE ||
 			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
+			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES ||
 			childFeature == TypesPackage.Literals.COMPLEX_TYPE__FEATURES ||
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__NODES ||
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__STATES ||

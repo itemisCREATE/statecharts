@@ -96,6 +96,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseDomainElement(package_);
 				if (result == null) result = caseNamedElement(package_);
 				if (result == null) result = caseAnnotatableElement(package_);
+				if (result == null) result = caseMetaComposite(package_);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -105,6 +106,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseDeclaration(type);
 				if (result == null) result = caseNamedElement(type);
 				if (result == null) result = caseAnnotatableElement(type);
+				if (result == null) result = caseMetaComposite(type);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -113,6 +115,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				T result = caseDeclaration(declaration);
 				if (result == null) result = caseNamedElement(declaration);
 				if (result == null) result = caseAnnotatableElement(declaration);
+				if (result == null) result = caseMetaComposite(declaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -125,6 +128,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(operation);
 				if (result == null) result = caseNamedElement(operation);
 				if (result == null) result = caseAnnotatableElement(operation);
+				if (result == null) result = caseMetaComposite(operation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -136,6 +140,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(property);
 				if (result == null) result = caseNamedElement(property);
 				if (result == null) result = caseAnnotatableElement(property);
+				if (result == null) result = caseMetaComposite(property);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -168,6 +173,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(event);
 				if (result == null) result = caseNamedElement(event);
 				if (result == null) result = caseAnnotatableElement(event);
+				if (result == null) result = caseMetaComposite(event);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -180,6 +186,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseDeclaration(enumerationType);
 				if (result == null) result = caseNamedElement(enumerationType);
 				if (result == null) result = caseAnnotatableElement(enumerationType);
+				if (result == null) result = caseMetaComposite(enumerationType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -190,6 +197,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseDeclaration(primitiveType);
 				if (result == null) result = caseNamedElement(primitiveType);
 				if (result == null) result = caseAnnotatableElement(primitiveType);
+				if (result == null) result = caseMetaComposite(primitiveType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -201,6 +209,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseDeclaration(complexType);
 				if (result == null) result = caseNamedElement(complexType);
 				if (result == null) result = caseAnnotatableElement(complexType);
+				if (result == null) result = caseMetaComposite(complexType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -212,6 +221,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(enumerator);
 				if (result == null) result = caseNamedElement(enumerator);
 				if (result == null) result = caseAnnotatableElement(enumerator);
+				if (result == null) result = caseMetaComposite(enumerator);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -222,6 +232,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseDeclaration(typeParameter);
 				if (result == null) result = caseNamedElement(typeParameter);
 				if (result == null) result = caseAnnotatableElement(typeParameter);
+				if (result == null) result = caseMetaComposite(typeParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -247,6 +258,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(typeAlias);
 				if (result == null) result = caseNamedElement(typeAlias);
 				if (result == null) result = caseAnnotatableElement(typeAlias);
+				if (result == null) result = caseMetaComposite(typeAlias);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -276,6 +288,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseDeclaration(annotationType);
 				if (result == null) result = caseNamedElement(annotationType);
 				if (result == null) result = caseAnnotatableElement(annotationType);
+				if (result == null) result = caseMetaComposite(annotationType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -292,6 +305,13 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(typedDeclaration);
 				if (result == null) result = caseNamedElement(typedDeclaration);
 				if (result == null) result = caseAnnotatableElement(typedDeclaration);
+				if (result == null) result = caseMetaComposite(typedDeclaration);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.META_COMPOSITE: {
+				MetaComposite metaComposite = (MetaComposite)theEObject;
+				T result = caseMetaComposite(metaComposite);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -663,6 +683,21 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypedDeclaration(TypedDeclaration object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Meta Composite</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Meta Composite</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMetaComposite(MetaComposite object) {
 		return null;
 	}
 

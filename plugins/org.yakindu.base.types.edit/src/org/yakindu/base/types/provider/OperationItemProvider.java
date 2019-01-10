@@ -226,6 +226,7 @@ public class OperationItemProvider extends TypedDeclarationItemProvider {
 
 		boolean qualify =
 			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
+			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES ||
 			childFeature == TypesPackage.Literals.OPERATION__PARAMETERS ||
 			childFeature == TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS;
 

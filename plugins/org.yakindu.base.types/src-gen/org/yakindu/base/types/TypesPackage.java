@@ -159,13 +159,22 @@ public interface TypesPackage extends EPackage {
 	int DECLARATION__ANNOTATION_INFO = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARATION__META_FEATURES = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARATION__STATIC = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int DECLARATION__STATIC = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -174,7 +183,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARATION__ID = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int DECLARATION__ID = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Declaration</em>' class.
@@ -183,7 +192,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARATION_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int DECLARATION_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -211,6 +220,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int PACKAGE__ANNOTATION_INFO = DECLARATION__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__META_FEATURES = DECLARATION__META_FEATURES;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -292,6 +310,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE__ANNOTATION_INFO = DECLARATION__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE__META_FEATURES = DECLARATION__META_FEATURES;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -385,6 +412,15 @@ public interface TypesPackage extends EPackage {
 	int TYPED_DECLARATION__ANNOTATION_INFO = DECLARATION__ANNOTATION_INFO;
 
 	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_DECLARATION__META_FEATURES = DECLARATION__META_FEATURES;
+
+	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -455,6 +491,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION__ANNOTATION_INFO = TYPED_DECLARATION__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__META_FEATURES = TYPED_DECLARATION__META_FEATURES;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -554,6 +599,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY__ANNOTATION_INFO = TYPED_DECLARATION__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__META_FEATURES = TYPED_DECLARATION__META_FEATURES;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -811,6 +865,15 @@ public interface TypesPackage extends EPackage {
 	int EVENT__ANNOTATION_INFO = TYPED_DECLARATION__ANNOTATION_INFO;
 
 	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT__META_FEATURES = TYPED_DECLARATION__META_FEATURES;
+
+	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -933,6 +996,15 @@ public interface TypesPackage extends EPackage {
 	int COMPLEX_TYPE__ANNOTATION_INFO = TYPE__ANNOTATION_INFO;
 
 	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_TYPE__META_FEATURES = TYPE__META_FEATURES;
+
+	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1030,6 +1102,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATION_TYPE__ANNOTATION_INFO = COMPLEX_TYPE__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION_TYPE__META_FEATURES = COMPLEX_TYPE__META_FEATURES;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -1140,6 +1221,15 @@ public interface TypesPackage extends EPackage {
 	int PRIMITIVE_TYPE__ANNOTATION_INFO = TYPE__ANNOTATION_INFO;
 
 	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE__META_FEATURES = TYPE__META_FEATURES;
+
+	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1229,6 +1319,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATOR__ANNOTATION_INFO = TYPED_DECLARATION__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATOR__META_FEATURES = TYPED_DECLARATION__META_FEATURES;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -1330,6 +1429,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_PARAMETER__ANNOTATION_INFO = TYPE__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_PARAMETER__META_FEATURES = TYPE__META_FEATURES;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -1485,6 +1593,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_ALIAS__ANNOTATION_INFO = TYPED_DECLARATION__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS__META_FEATURES = TYPED_DECLARATION__META_FEATURES;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -1716,6 +1833,15 @@ public interface TypesPackage extends EPackage {
 	int ANNOTATION_TYPE__ANNOTATION_INFO = TYPE__ANNOTATION_INFO;
 
 	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_TYPE__META_FEATURES = TYPE__META_FEATURES;
+
+	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1807,6 +1933,34 @@ public interface TypesPackage extends EPackage {
 	int EXPRESSION_FEATURE_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.types.impl.MetaCompositeImpl <em>Meta Composite</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.types.impl.MetaCompositeImpl
+	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getMetaComposite()
+	 * @generated
+	 */
+	int META_COMPOSITE = 23;
+
+	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_COMPOSITE__META_FEATURES = 0;
+
+	/**
+	 * The number of structural features of the '<em>Meta Composite</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_COMPOSITE_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.Direction <em>Direction</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1814,7 +1968,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getDirection()
 	 * @generated
 	 */
-	int DIRECTION = 23;
+	int DIRECTION = 24;
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Package <em>Package</em>}'.
@@ -2421,6 +2575,27 @@ public interface TypesPackage extends EPackage {
 	EClass getTypedDeclaration();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.types.MetaComposite <em>Meta Composite</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Meta Composite</em>'.
+	 * @see org.yakindu.base.types.MetaComposite
+	 * @generated
+	 */
+	EClass getMetaComposite();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.types.MetaComposite#getMetaFeatures <em>Meta Features</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Meta Features</em>'.
+	 * @see org.yakindu.base.types.MetaComposite#getMetaFeatures()
+	 * @see #getMetaComposite()
+	 * @generated
+	 */
+	EReference getMetaComposite_MetaFeatures();
+
+	/**
 	 * Returns the meta object for enum '{@link org.yakindu.base.types.Direction <em>Direction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2953,6 +3128,24 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TYPED_DECLARATION = eINSTANCE.getTypedDeclaration();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.types.impl.MetaCompositeImpl <em>Meta Composite</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.types.impl.MetaCompositeImpl
+		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getMetaComposite()
+		 * @generated
+		 */
+		EClass META_COMPOSITE = eINSTANCE.getMetaComposite();
+
+		/**
+		 * The meta object literal for the '<em><b>Meta Features</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference META_COMPOSITE__META_FEATURES = eINSTANCE.getMetaComposite_MetaFeatures();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.Direction <em>Direction</em>}' enum.

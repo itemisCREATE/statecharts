@@ -18,6 +18,7 @@ import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Declaration;
+import org.yakindu.base.types.MetaComposite;
 import org.yakindu.sct.model.sgraph.*;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.CompositeElement;
@@ -280,6 +281,7 @@ public class SGraphSwitch<T> extends Switch<T> {
 				if (result == null) result = caseDeclaration(importDeclaration);
 				if (result == null) result = caseNamedElement(importDeclaration);
 				if (result == null) result = caseAnnotatableElement(importDeclaration);
+				if (result == null) result = caseMetaComposite(importDeclaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -380,6 +382,21 @@ public class SGraphSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAnnotatableElement(AnnotatableElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Meta Composite</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Meta Composite</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMetaComposite(MetaComposite object) {
 		return null;
 	}
 

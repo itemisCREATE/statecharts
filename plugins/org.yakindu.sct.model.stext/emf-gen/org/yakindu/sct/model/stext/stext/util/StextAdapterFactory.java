@@ -12,6 +12,7 @@ import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.GenericElement;
+import org.yakindu.base.types.MetaComposite;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
@@ -273,6 +274,10 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseNamedElement(NamedElement object) {
 				return createNamedElementAdapter();
+			}
+			@Override
+			public Adapter caseMetaComposite(MetaComposite object) {
+				return createMetaCompositeAdapter();
 			}
 			@Override
 			public Adapter caseDeclaration(Declaration object) {
@@ -879,6 +884,20 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNamedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.MetaComposite <em>Meta Composite</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.types.MetaComposite
+	 * @generated
+	 */
+	public Adapter createMetaCompositeAdapter() {
 		return null;
 	}
 

@@ -27,6 +27,7 @@ import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.GenericElement;
+import org.yakindu.base.types.MetaComposite;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
@@ -47,6 +48,7 @@ import org.yakindu.sct.model.sexec.SexecPackage;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getAnnotationInfo <em>Annotation Info</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getMetaFeatures <em>Meta Features</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#isAbstract <em>Abstract</em>}</li>
@@ -102,6 +104,16 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * @ordered
 	 */
 	protected AnnotatableElement annotationInfo;
+
+	/**
+	 * The cached value of the '{@link #getMetaFeatures() <em>Meta Features</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMetaFeatures()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Declaration> metaFeatures;
 
 	/**
 	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
@@ -346,6 +358,18 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_NODE__ANNOTATION_INFO, newAnnotationInfo, newAnnotationInfo));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Declaration> getMetaFeatures() {
+		if (metaFeatures == null) {
+			metaFeatures = new EObjectContainmentEList<Declaration>(Declaration.class, this, SexecPackage.EXECUTION_NODE__META_FEATURES);
+		}
+		return metaFeatures;
 	}
 
 	/**
@@ -620,6 +644,8 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_NODE__ANNOTATION_INFO:
 				return basicSetAnnotationInfo(null, msgs);
+			case SexecPackage.EXECUTION_NODE__META_FEATURES:
+				return ((InternalEList<?>)getMetaFeatures()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_NODE__SUPER_TYPES:
 				return ((InternalEList<?>)getSuperTypes()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_NODE__TYPE_PARAMETERS:
@@ -650,6 +676,8 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 				return getAnnotations();
 			case SexecPackage.EXECUTION_NODE__ANNOTATION_INFO:
 				return getAnnotationInfo();
+			case SexecPackage.EXECUTION_NODE__META_FEATURES:
+				return getMetaFeatures();
 			case SexecPackage.EXECUTION_NODE__STATIC:
 				return isStatic();
 			case SexecPackage.EXECUTION_NODE__ID:
@@ -694,6 +722,10 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 				return;
 			case SexecPackage.EXECUTION_NODE__ANNOTATION_INFO:
 				setAnnotationInfo((AnnotatableElement)newValue);
+				return;
+			case SexecPackage.EXECUTION_NODE__META_FEATURES:
+				getMetaFeatures().clear();
+				getMetaFeatures().addAll((Collection<? extends Declaration>)newValue);
 				return;
 			case SexecPackage.EXECUTION_NODE__STATIC:
 				setStatic((Boolean)newValue);
@@ -750,6 +782,9 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 			case SexecPackage.EXECUTION_NODE__ANNOTATION_INFO:
 				setAnnotationInfo((AnnotatableElement)null);
 				return;
+			case SexecPackage.EXECUTION_NODE__META_FEATURES:
+				getMetaFeatures().clear();
+				return;
 			case SexecPackage.EXECUTION_NODE__STATIC:
 				setStatic(STATIC_EDEFAULT);
 				return;
@@ -798,6 +833,8 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 				return annotations != null && !annotations.isEmpty();
 			case SexecPackage.EXECUTION_NODE__ANNOTATION_INFO:
 				return annotationInfo != null;
+			case SexecPackage.EXECUTION_NODE__META_FEATURES:
+				return metaFeatures != null && !metaFeatures.isEmpty();
 			case SexecPackage.EXECUTION_NODE__STATIC:
 				return static_ != STATIC_EDEFAULT;
 			case SexecPackage.EXECUTION_NODE__ID:
@@ -841,6 +878,12 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 			switch (derivedFeatureID) {
 				case SexecPackage.EXECUTION_NODE__ANNOTATIONS: return TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS;
 				case SexecPackage.EXECUTION_NODE__ANNOTATION_INFO: return TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO;
+				default: return -1;
+			}
+		}
+		if (baseClass == MetaComposite.class) {
+			switch (derivedFeatureID) {
+				case SexecPackage.EXECUTION_NODE__META_FEATURES: return TypesPackage.META_COMPOSITE__META_FEATURES;
 				default: return -1;
 			}
 		}
@@ -891,6 +934,12 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 			switch (baseFeatureID) {
 				case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS: return SexecPackage.EXECUTION_NODE__ANNOTATIONS;
 				case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO: return SexecPackage.EXECUTION_NODE__ANNOTATION_INFO;
+				default: return -1;
+			}
+		}
+		if (baseClass == MetaComposite.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.META_COMPOSITE__META_FEATURES: return SexecPackage.EXECUTION_NODE__META_FEATURES;
 				default: return -1;
 			}
 		}

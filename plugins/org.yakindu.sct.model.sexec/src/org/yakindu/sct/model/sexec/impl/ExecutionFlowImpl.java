@@ -29,6 +29,7 @@ import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.GenericElement;
+import org.yakindu.base.types.MetaComposite;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
@@ -64,6 +65,7 @@ import org.yakindu.sct.model.sgraph.impl.ScopedElementImpl;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getInitSequence <em>Init Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getAnnotationInfo <em>Annotation Info</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getMetaFeatures <em>Meta Features</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#isAbstract <em>Abstract</em>}</li>
@@ -196,6 +198,16 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * @ordered
 	 */
 	protected AnnotatableElement annotationInfo;
+
+	/**
+	 * The cached value of the '{@link #getMetaFeatures() <em>Meta Features</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMetaFeatures()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Declaration> metaFeatures;
 
 	/**
 	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
@@ -777,6 +789,18 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Declaration> getMetaFeatures() {
+		if (metaFeatures == null) {
+			metaFeatures = new EObjectContainmentEList<Declaration>(Declaration.class, this, SexecPackage.EXECUTION_FLOW__META_FEATURES);
+		}
+		return metaFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
 	 * The id is the name of the execution flow.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
@@ -1276,6 +1300,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_FLOW__ANNOTATION_INFO:
 				return basicSetAnnotationInfo(null, msgs);
+			case SexecPackage.EXECUTION_FLOW__META_FEATURES:
+				return ((InternalEList<?>)getMetaFeatures()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_FLOW__SUPER_TYPES:
 				return ((InternalEList<?>)getSuperTypes()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_FLOW__TYPE_PARAMETERS:
@@ -1336,6 +1362,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return getAnnotations();
 			case SexecPackage.EXECUTION_FLOW__ANNOTATION_INFO:
 				return getAnnotationInfo();
+			case SexecPackage.EXECUTION_FLOW__META_FEATURES:
+				return getMetaFeatures();
 			case SexecPackage.EXECUTION_FLOW__STATIC:
 				return isStatic();
 			case SexecPackage.EXECUTION_FLOW__ID:
@@ -1417,6 +1445,10 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return;
 			case SexecPackage.EXECUTION_FLOW__ANNOTATION_INFO:
 				setAnnotationInfo((AnnotatableElement)newValue);
+				return;
+			case SexecPackage.EXECUTION_FLOW__META_FEATURES:
+				getMetaFeatures().clear();
+				getMetaFeatures().addAll((Collection<? extends Declaration>)newValue);
 				return;
 			case SexecPackage.EXECUTION_FLOW__STATIC:
 				setStatic((Boolean)newValue);
@@ -1518,6 +1550,9 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__ANNOTATION_INFO:
 				setAnnotationInfo((AnnotatableElement)null);
 				return;
+			case SexecPackage.EXECUTION_FLOW__META_FEATURES:
+				getMetaFeatures().clear();
+				return;
 			case SexecPackage.EXECUTION_FLOW__STATIC:
 				setStatic(STATIC_EDEFAULT);
 				return;
@@ -1601,6 +1636,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return annotations != null && !annotations.isEmpty();
 			case SexecPackage.EXECUTION_FLOW__ANNOTATION_INFO:
 				return annotationInfo != null;
+			case SexecPackage.EXECUTION_FLOW__META_FEATURES:
+				return metaFeatures != null && !metaFeatures.isEmpty();
 			case SexecPackage.EXECUTION_FLOW__STATIC:
 				return static_ != STATIC_EDEFAULT;
 			case SexecPackage.EXECUTION_FLOW__ID:
@@ -1678,6 +1715,12 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				default: return -1;
 			}
 		}
+		if (baseClass == MetaComposite.class) {
+			switch (derivedFeatureID) {
+				case SexecPackage.EXECUTION_FLOW__META_FEATURES: return TypesPackage.META_COMPOSITE__META_FEATURES;
+				default: return -1;
+			}
+		}
 		if (baseClass == Declaration.class) {
 			switch (derivedFeatureID) {
 				case SexecPackage.EXECUTION_FLOW__STATIC: return TypesPackage.DECLARATION__STATIC;
@@ -1751,6 +1794,12 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			switch (baseFeatureID) {
 				case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS: return SexecPackage.EXECUTION_FLOW__ANNOTATIONS;
 				case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO: return SexecPackage.EXECUTION_FLOW__ANNOTATION_INFO;
+				default: return -1;
+			}
+		}
+		if (baseClass == MetaComposite.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.META_COMPOSITE__META_FEATURES: return SexecPackage.EXECUTION_FLOW__META_FEATURES;
 				default: return -1;
 			}
 		}

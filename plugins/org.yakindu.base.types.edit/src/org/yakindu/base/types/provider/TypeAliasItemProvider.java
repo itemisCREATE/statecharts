@@ -229,6 +229,8 @@ public class TypeAliasItemProvider
 		Object childObject = child;
 
 		boolean qualify =
+			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
+			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES ||
 			childFeature == TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER ||
 			childFeature == TypesPackage.Literals.TYPE__SUPER_TYPES;
 

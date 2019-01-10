@@ -1,13 +1,5 @@
-/** 
- * Copyright (c) 2015 committers of YAKINDU and others. 
- * All rights reserved. This program and the accompanying materials 
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at 
- * http://www.eclipse.org/legal/epl-v10.html 
- * Contributors:
- * committers of YAKINDU - initial API and implementation
- *
-*/
+/**
+ */
 package org.yakindu.base.types.provider;
 
 
@@ -16,28 +8,45 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
+
+import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
+import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.IItemPropertySource;
+import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
+import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.yakindu.base.types.ComplexType;
+
+import org.yakindu.base.types.MetaComposite;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.base.types.ComplexType} object.
+ * This is the item provider adapter for a {@link org.yakindu.base.types.MetaComposite} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ComplexTypeItemProvider
-	extends TypeItemProvider {
+public class MetaCompositeItemProvider 
+	extends ItemProviderAdapter
+	implements
+		IEditingDomainItemProvider,
+		IStructuredItemContentProvider,
+		ITreeItemContentProvider,
+		IItemLabelProvider,
+		IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComplexTypeItemProvider(AdapterFactory adapterFactory) {
+	public MetaCompositeItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -68,8 +77,7 @@ public class ComplexTypeItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS);
-			childrenFeatures.add(TypesPackage.Literals.COMPLEX_TYPE__FEATURES);
+			childrenFeatures.add(TypesPackage.Literals.META_COMPOSITE__META_FEATURES);
 		}
 		return childrenFeatures;
 	}
@@ -88,14 +96,14 @@ public class ComplexTypeItemProvider
 	}
 
 	/**
-	 * This returns ComplexType.gif.
+	 * This returns MetaComposite.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ComplexType"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/MetaComposite"));
 	}
 
 	/**
@@ -106,11 +114,9 @@ public class ComplexTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ComplexType)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_ComplexType_type") :
-			getString("_UI_ComplexType_type") + " " + label;
+		return getString("_UI_MetaComposite_type");
 	}
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -123,9 +129,8 @@ public class ComplexTypeItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ComplexType.class)) {
-			case TypesPackage.COMPLEX_TYPE__TYPE_PARAMETERS:
-			case TypesPackage.COMPLEX_TYPE__FEATURES:
+		switch (notification.getFeatureID(MetaComposite.class)) {
+			case TypesPackage.META_COMPOSITE__META_FEATURES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -145,98 +150,79 @@ public class ComplexTypeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS,
-				 TypesFactory.eINSTANCE.createTypeParameter()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 TypesFactory.eINSTANCE.createPackage()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 TypesFactory.eINSTANCE.createType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 TypesFactory.eINSTANCE.createTypedDeclaration()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 TypesFactory.eINSTANCE.createOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 TypesFactory.eINSTANCE.createProperty()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 TypesFactory.eINSTANCE.createEvent()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 TypesFactory.eINSTANCE.createComplexType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 TypesFactory.eINSTANCE.createEnumerationType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 TypesFactory.eINSTANCE.createPrimitiveType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 TypesFactory.eINSTANCE.createEnumerator()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 TypesFactory.eINSTANCE.createTypeParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 TypesFactory.eINSTANCE.createTypeAlias()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 TypesFactory.eINSTANCE.createAnnotationType()));
 	}
 
 	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * Return the resource locator for this item provider's resources.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
-			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES ||
-			childFeature == TypesPackage.Literals.COMPLEX_TYPE__FEATURES ||
-			childFeature == TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS;
-
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
+	public ResourceLocator getResourceLocator() {
+		return TypesEditPlugin.INSTANCE;
 	}
 
 }

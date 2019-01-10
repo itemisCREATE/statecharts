@@ -156,6 +156,31 @@ public class TypeAliasDefinitionItemProvider extends TypeAliasItemProvider {
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 SGraphFactory.eINSTANCE.createImportDeclaration()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 StextFactory.eINSTANCE.createEventDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 StextFactory.eINSTANCE.createVariableDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 StextFactory.eINSTANCE.createOperationDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 StextFactory.eINSTANCE.createTypeAliasDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SGraphFactory.eINSTANCE.createImportDeclaration()));
 	}
 
 	/**
@@ -170,6 +195,8 @@ public class TypeAliasDefinitionItemProvider extends TypeAliasItemProvider {
 		Object childObject = child;
 
 		boolean qualify =
+			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
+			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES ||
 			childFeature == TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER ||
 			childFeature == TypesPackage.Literals.TYPE__SUPER_TYPES;
 

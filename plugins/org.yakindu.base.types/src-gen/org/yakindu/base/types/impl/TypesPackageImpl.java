@@ -204,6 +204,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass metaCompositeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum directionEEnum = null;
 
 	/**
@@ -773,6 +780,24 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getMetaComposite() {
+		return metaCompositeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMetaComposite_MetaFeatures() {
+		return (EReference)metaCompositeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getDirection() {
 		return directionEEnum;
 	}
@@ -883,6 +908,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		typedDeclarationEClass = createEClass(TYPED_DECLARATION);
 
+		metaCompositeEClass = createEClass(META_COMPOSITE);
+		createEReference(metaCompositeEClass, META_COMPOSITE__META_FEATURES);
+
 		// Create enums
 		directionEEnum = createEEnum(DIRECTION);
 	}
@@ -922,6 +950,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		typeEClass.getESuperTypes().add(this.getDeclaration());
 		declarationEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		declarationEClass.getESuperTypes().add(this.getAnnotatableElement());
+		declarationEClass.getESuperTypes().add(this.getMetaComposite());
 		operationEClass.getESuperTypes().add(this.getTypedDeclaration());
 		operationEClass.getESuperTypes().add(this.getGenericElement());
 		propertyEClass.getESuperTypes().add(this.getTypedDeclaration());
@@ -1034,6 +1063,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEClass(expressionEClass, Expression.class, "Expression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(typedDeclarationEClass, TypedDeclaration.class, "TypedDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(metaCompositeEClass, MetaComposite.class, "MetaComposite", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMetaComposite_MetaFeatures(), this.getDeclaration(), null, "metaFeatures", null, 0, -1, MetaComposite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(directionEEnum, Direction.class, "Direction");

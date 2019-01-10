@@ -1239,6 +1239,15 @@ public interface SGraphPackage extends EPackage {
 	int IMPORT_DECLARATION__ANNOTATION_INFO = TypesPackage.DECLARATION__ANNOTATION_INFO;
 
 	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_DECLARATION__META_FEATURES = TypesPackage.DECLARATION__META_FEATURES;
+
+	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
