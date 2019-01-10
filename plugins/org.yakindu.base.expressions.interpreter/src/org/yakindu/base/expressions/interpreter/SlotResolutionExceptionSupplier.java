@@ -10,10 +10,11 @@
  */
 package org.yakindu.base.expressions.interpreter;
 
+import java.util.function.Supplier;
+
 import org.yakindu.base.expressions.util.ExpressionExtensions;
 import org.yakindu.base.types.Expression;
 
-import com.google.common.base.Supplier;
 import com.google.inject.Inject;
 
 /**

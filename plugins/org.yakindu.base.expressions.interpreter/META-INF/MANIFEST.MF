@@ -7,7 +7,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: statecharts.org
 Require-Bundle: org.yakindu.base.types;visibility:=reexport,
  org.eclipse.xtext.xbase.lib,
- com.google.guava,
  org.yakindu.base.expressions,
  org.yakindu.sct.model.sruntime;visibility:=reexport
 Export-Package: org.yakindu.base.expressions.interpreter
