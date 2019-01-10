@@ -225,6 +225,11 @@ public class LocalVariableDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.LOCAL_VARIABLE_DEFINITION__INITIAL_VALUE,
+				 ExpressionsFactory.eINSTANCE.createMetaCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.LOCAL_VARIABLE_DEFINITION__INITIAL_VALUE,
 				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
 
 		newChildDescriptors.add

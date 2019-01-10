@@ -31,7 +31,7 @@ import org.yakindu.base.types.TypesPackage;
  * @generated
  */
 public class PropertyItemProvider
-	extends DeclarationItemProvider {
+	extends TypedDeclarationItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

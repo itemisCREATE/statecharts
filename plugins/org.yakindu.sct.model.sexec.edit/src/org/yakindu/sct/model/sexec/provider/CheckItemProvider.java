@@ -248,6 +248,11 @@ public class CheckItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.CHECK__CONDITION,
+				 ExpressionsFactory.eINSTANCE.createMetaCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.CHECK__CONDITION,
 				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
 
 		newChildDescriptors.add

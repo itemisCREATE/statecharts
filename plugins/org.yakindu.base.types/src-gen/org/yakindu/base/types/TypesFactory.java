@@ -143,15 +143,6 @@ public interface TypesFactory extends EFactory {
 	GenericElement createGenericElement();
 
 	/**
-	 * Returns a new object of class '<em>Package Member</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Package Member</em>'.
-	 * @generated
-	 */
-	PackageMember createPackageMember();
-
-	/**
 	 * Returns a new object of class '<em>Domain</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -204,6 +195,15 @@ public interface TypesFactory extends EFactory {
 	 * @generated
 	 */
 	AnnotationType createAnnotationType();
+
+	/**
+	 * Returns a new object of class '<em>Typed Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Typed Declaration</em>'.
+	 * @generated
+	 */
+	TypedDeclaration createTypedDeclaration();
 
 	/**
 	 * Returns a new object of class '<em>Meta Composite</em>'.

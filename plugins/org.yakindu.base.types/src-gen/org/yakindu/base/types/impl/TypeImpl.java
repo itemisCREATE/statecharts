@@ -35,7 +35,7 @@ import org.yakindu.base.types.TypesPackage;
  *
  * @generated
  */
-public class TypeImpl extends PackageMemberImpl implements Type {
+public class TypeImpl extends DeclarationImpl implements Type {
 	/**
 	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->

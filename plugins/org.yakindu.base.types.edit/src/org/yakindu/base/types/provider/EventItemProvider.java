@@ -30,7 +30,7 @@ import org.yakindu.base.types.TypesPackage;
  * @generated
  */
 public class EventItemProvider
-	extends DeclarationItemProvider {
+	extends TypedDeclarationItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

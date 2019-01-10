@@ -37,7 +37,7 @@ import org.yakindu.base.types.TypesPackage;
  * end-user-doc -->
  * @generated
  */
-public class OperationItemProvider extends DeclarationItemProvider {
+public class OperationItemProvider extends TypedDeclarationItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->

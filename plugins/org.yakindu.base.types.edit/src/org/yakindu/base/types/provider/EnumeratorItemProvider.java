@@ -30,7 +30,7 @@ import org.yakindu.base.types.TypesPackage;
  * @generated
  */
 public class EnumeratorItemProvider
-	extends DeclarationItemProvider {
+	extends TypedDeclarationItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

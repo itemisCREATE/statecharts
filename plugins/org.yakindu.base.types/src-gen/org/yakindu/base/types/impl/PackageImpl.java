@@ -15,8 +15,9 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.DomainElement;
-import org.yakindu.base.types.PackageMember;
+import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.base.types.TypesUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,7 +34,7 @@ import org.yakindu.base.types.TypesPackage;
  *
  * @generated
  */
-public class PackageImpl extends PackageMemberImpl implements org.yakindu.base.types.Package {
+public class PackageImpl extends DeclarationImpl implements org.yakindu.base.types.Package {
 	/**
 	 * The default value of the '{@link #getDomainID() <em>Domain ID</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -60,7 +61,7 @@ public class PackageImpl extends PackageMemberImpl implements org.yakindu.base.t
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<PackageMember> member;
+	protected EList<Declaration> member;
 	/**
 	 * The cached value of the '{@link #getImport() <em>Import</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -113,11 +114,21 @@ public class PackageImpl extends PackageMemberImpl implements org.yakindu.base.t
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public String getId() {
+		return TypesUtil.computeQID(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<PackageMember> getMember() {
+	public EList<Declaration> getMember() {
 		if (member == null) {
-			member = new EObjectContainmentEList<PackageMember>(PackageMember.class, this, TypesPackage.PACKAGE__MEMBER);
+			member = new EObjectContainmentEList<Declaration>(Declaration.class, this, TypesPackage.PACKAGE__MEMBER);
 		}
 		return member;
 	}
@@ -180,7 +191,7 @@ public class PackageImpl extends PackageMemberImpl implements org.yakindu.base.t
 				return;
 			case TypesPackage.PACKAGE__MEMBER:
 				getMember().clear();
-				getMember().addAll((Collection<? extends PackageMember>)newValue);
+				getMember().addAll((Collection<? extends Declaration>)newValue);
 				return;
 			case TypesPackage.PACKAGE__IMPORT:
 				getImport().clear();
@@ -270,7 +281,7 @@ public class PackageImpl extends PackageMemberImpl implements org.yakindu.base.t
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (domainID: ");
 		result.append(domainID);
 		result.append(')');
