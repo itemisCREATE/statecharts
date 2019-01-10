@@ -132,8 +132,9 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	def dispatch Object execute(PostFixUnaryExpression it) {
 		var result = operand.execute
 		val slot = context.resolve(operand)
-		if (slot.isPresent)
-			slot.get.value = evaluate(operator.getName(), result)
+			.orElseThrow(SlotResolutionExceptionSupplier.forContext(operand))
+		
+		slot.value = evaluate(operator.getName(), result)
 		result
 	}
 
