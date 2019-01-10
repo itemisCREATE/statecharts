@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018 committers of YAKINDU and others.
+ * Copyright (c) 2019 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -106,6 +106,7 @@ public class CodeGeneratorFragmentProvider {
 				Object o = injector.getInstance(cls);
 				if (o instanceof ISourceFragment) {
 					ISourceFragment iSourceFragment = (ISourceFragment) o;
+					@SuppressWarnings("unchecked")
 					Class<? extends ISourceFragment> isfCls = (Class<? extends ISourceFragment>) cls;
 					objects.put(isfCls, iSourceFragment);
 				}
