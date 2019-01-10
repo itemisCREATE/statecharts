@@ -142,7 +142,8 @@ public class OperationItemProvider extends TypedDeclarationItemProvider {
 			builder.append(sep);
 			builder.append(parameter.getName());
 			builder.append(" : ");
-			String typeName = parameter.getType().getName();
+			Type paramType = parameter.getType();
+			String typeName = (paramType != null) ? paramType.getName() : "<some type>";
 			builder.append(typeName);
 			sep = ", ";
 		}

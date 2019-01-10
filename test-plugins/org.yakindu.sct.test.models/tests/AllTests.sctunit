@@ -15,6 +15,7 @@ testsuite AllTests {
 	ChildFirstExecutionHierarchy,
 	ChildFirstLocalReactions,
 	ChildFirstOrthogonalReactions,
+	ChildFirstTransitionsinSubchart,
 	ChildFirstTransitionTaking ,
 	Declarations,
 	DeepEntry, 

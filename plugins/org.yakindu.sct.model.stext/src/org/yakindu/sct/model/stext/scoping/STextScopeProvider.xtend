@@ -49,6 +49,8 @@ import org.yakindu.sct.model.stext.stext.StatechartSpecification
 import com.google.common.base.Predicate
 import com.google.common.collect.Lists
 import com.google.inject.Inject
+import org.yakindu.base.types.MetaComposite
+import org.yakindu.base.expressions.expressions.MetaCall
 
 /** 
  * @author andreas muelder
@@ -139,6 +141,37 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 		}
 		return scope
 	}
+	
+	
+	
+	def IScope scope_FeatureCall_feature(MetaCall context, EReference reference) {
+
+		var Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference);
+		var Expression owner = context.getOwner();
+		var EObject element = null;
+		
+		if (owner instanceof ElementReferenceExpression) {
+			element = (owner as ElementReferenceExpression).getReference();
+		} else if (owner instanceof FeatureCall) {
+			element = (owner as FeatureCall).getFeature();
+		} else {
+			return getDelegate().getScope(context, reference);
+		}
+
+		var IScope scope = IScope.NULLSCOPE;
+
+		if (element instanceof MetaComposite ) {
+			var MetaComposite feature = element as MetaComposite;
+
+			if (feature.getMetaFeatures().size() > 0) {
+				scope = Scopes.scopeFor(feature.getMetaFeatures(), scope);
+				scope = new FilteringScope(scope, predicate);
+			}
+		}
+
+		return scope;
+	}
+	
 
 	def protected IScope addScopeForEnumType(EnumerationType element, IScope scope_finalParam_,
 		Predicate<IEObjectDescription> predicate) {

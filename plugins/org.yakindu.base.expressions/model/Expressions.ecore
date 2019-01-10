@@ -146,6 +146,7 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="arrayAccess" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MetaCall" eSuperTypes="#//FeatureCall"/>
   <eClassifiers xsi:type="ecore:EClass" name="ElementReferenceExpression" eSuperTypes="#//ArgumentExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationCall" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>

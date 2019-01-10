@@ -16,12 +16,14 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.types.TypeAlias;
+import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.provider.TypeAliasItemProvider;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
@@ -198,7 +200,9 @@ public class TypeAliasDefinitionItemProvider extends TypeAliasItemProvider {
 			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
 			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES ||
 			childFeature == TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER ||
-			childFeature == TypesPackage.Literals.TYPE__SUPER_TYPES;
+			childFeature == TypesPackage.Literals.TYPE__SUPER_TYPES ||
+			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
+			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES;
 
 		if (qualify) {
 			return getString

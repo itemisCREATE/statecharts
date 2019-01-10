@@ -117,5 +117,4 @@
   <eStructuralFeatures xsi:type="ecore:EReference" name="metaFeatures" upperBound="-1"
   eType="#//Declaration" containment="true"/>
   </eClassifiers>
-
 </ecore:EPackage>
