@@ -8,92 +8,52 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.generator.cpp.eventdriven
+package org.yakindu.sct.generator.cpp.providers.eventdriven
 
 import com.google.inject.Inject
 import org.yakindu.base.types.Direction
+import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.generator.cpp.CppNaming
+import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenPredicate
+import org.yakindu.sct.generator.cpp.eventdriven.EventNaming
 import org.yakindu.sct.generator.cpp.files.StatemachineImplementation
+import org.yakindu.sct.generator.cpp.providers.GeneratorContribution
+import org.yakindu.sct.generator.cpp.providers.ISourceFragment
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 
-import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
 import org.yakindu.sct.generator.c.types.CLiterals
 
-/**
- * @author René Beckmann - Initial contribution and API
- * @author axel terfloth
- */
-class EventDrivenStatemachineImplementation extends StatemachineImplementation {
+@GeneratorContribution(StatemachineImplementation.SOURCE_TARGET)
+class StatechartEventImpl implements ISourceFragment {
+	@Inject protected extension EventDrivenPredicate
+	
+	@Inject protected extension CppNaming
+	@Inject protected extension SExecExtensions
 	@Inject extension EventNaming eventNaming
 	@Inject extension CLiterals
 	
-	override additionalFunctions(ExecutionFlow it) {
-		if(!hasLocalEvents) return ''''''
+	override get(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
 		'''
+		«IF needsNextEventFunction»
 		«nextEventFunction»
 		
+		«ENDIF»
+		«IF needsDispatchEventFunction»
 		«generateInternalDispatchEventFunction»
 		
 		«generateInterfaceDispatchFunctions»
+		«ENDIF»
 		'''
 	}
 	
-	override protected usingNamespaces(ExecutionFlow it) {
-		if(!hasLocalEvents) return ''''''
-		'''using namespace «eventNamespaceName»;'''
-	}
-	
-	override protected initialisationList(ExecutionFlow it) {
-		'''
-			«IF timed»«timerInstance»(«NULL_LITERAL»),«ENDIF»
-			«IF entry.tracingUsed»«tracingInstance»(0),«ENDIF»
-			«STATEVECTOR_POS»(0)«FOR s : getInterfaces»,
-			«s.instance»(this)«IF s.hasOperations && !entry.useStaticOPC»,
-			«s.OCB_Instance»(«NULL_LITERAL»)«ENDIF»«ENDFOR»
-		'''
-	}
-	
-	
-	override raiseTimeEventFunction(ExecutionFlow it) '''
-		void «module»::«raiseTimeEventFctID»(«EVENT_TYPE» evid)
-		{
-			if ((evid >= («EVENT_TYPE»)«timeEventsInstance») && (evid < («EVENT_TYPE»)(&«timeEventsInstance»[«timeEventsCountConst»])))
-			{
-				*(«BOOL_TYPE»*)evid = true;
-				«runCycleFctID»();
-			}
-		}
-	'''
-	
-	override runCycleFunction(ExecutionFlow it) {
-		val cE = "currentEvent"
-		if(!hasLocalEvents) {
-			return super.runCycleFunction(it)
-		}
-		'''
-			void «module»::«runCycleFctID»()
-			{
-				«clearOutEventsFctID»();
-				
-				«SCT_EVENT» * «cE» = «nextEventFctID»();
-				
-				do
-				{
-					/* Set event flags as usual */
-					«dispatchEventFctID»(«cE»);
-					
-					«runCycleFunctionForLoop»
-					
-					/* Delete event from memory */
-					delete «cE»;
-					«clearInEventsFctID»();
-				} while((«cE» = «nextEventFctID»()));
-			}
-		'''
+	override isNeeded(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
+		isEventDriven
 	}
 	
 	def getNextEventFunction(ExecutionFlow it) {
@@ -181,4 +141,5 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 			}
 		'''
 	}
+	
 }

@@ -189,6 +189,10 @@ class SExecExtensions {
 		!incomingEvents.empty
 	}
 	
+	def hasInEvents(ExecutionFlow it) {
+		!getIncomingEvents.empty
+	}
+	
 	def hasIncomingEventsWithValue(Scope it) {
 		!incomingEvents.filter[hasValue].empty
 	}

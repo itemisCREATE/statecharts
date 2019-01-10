@@ -18,6 +18,8 @@
 		<testFailureIgnore>false</testFailureIgnore>
 		<jarSignerUrl>https://macbuilds2.itemis.de/jarsigner</jarSignerUrl>
 		<signerVersion>1.1.5</signerVersion>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8 </maven.compiler.target>
 	</properties>
 	<build>
 		<plugins>
