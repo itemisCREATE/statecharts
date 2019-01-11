@@ -514,6 +514,23 @@
 							</target>
 						</configuration>
 					</plugin>
+					<plugin>
+						<artifactId>org.eclipse.emf.ecore.xcore</artifactId>
+						<groupId>org.eclipse.emf</groupId>
+						<version>${ecore-xcore-version}</version>
+						<dependencies>
+							<dependency>
+								<groupId>org.eclipse.jdt</groupId>
+								<artifactId>org.eclipse.jdt.core</artifactId>
+								<version>3.16.0</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.jdt</groupId>
+								<artifactId>org.eclipse.jdt.compiler.apt</artifactId>
+								<version>1.3.400</version>
+							</dependency>
+						</dependencies>
+					</plugin>
 				</plugins>
 			</build>
 		</profile>
