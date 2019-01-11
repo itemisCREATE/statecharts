@@ -19,7 +19,6 @@ import org.yakindu.base.base.NamedElement
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
-import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
@@ -38,9 +37,6 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 	@Inject
 	protected extension IQualifiedNameProvider
 	
-	@Inject
-	protected extension ExpressionExtensions
-
 	def dispatch Optional<ExecutionSlot> resolve(ExecutionContext context, FeatureCall e) {
 		return Optional.ofNullable(resolveByFeature(context, e, e.feature))
 	}
