@@ -31,7 +31,6 @@ env:
   - TARGET=Neon.target
   - TARGET=Oxygen.target
   - TARGET=Photon.target
-  - TARGET=2018-09.target
 before_script:
  - wget https://github.com/google/googletest/archive/release-1.8.0.zip
  - unzip release-1.8.0.zip
