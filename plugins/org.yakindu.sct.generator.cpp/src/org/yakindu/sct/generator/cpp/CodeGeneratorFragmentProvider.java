@@ -60,7 +60,7 @@ public class CodeGeneratorFragmentProvider {
 	 * with <code>GeneratorContribution</code>, grouped and mapped by their
 	 * target.
 	 */
-	public Map<String, List<Class<?>>> getGeneratorContributions(String packageName) {
+	public static Map<String, List<Class<?>>> getGeneratorContributions(String packageName) {
 		Collection<String> packageClasses = getPackageClasses(packageName);
 		ClassLoader classLoader = CodeGeneratorFragmentProvider.class.getClassLoader();
 		try {
@@ -117,7 +117,7 @@ public class CodeGeneratorFragmentProvider {
 		return result;
 	}
 
-	protected Class<?> loadClass(ClassLoader loader, String name) {
+	protected static Class<?> loadClass(ClassLoader loader, String name) {
 		try {
 			return loader.loadClass(name);
 		} catch (ClassNotFoundException e) {
@@ -126,12 +126,12 @@ public class CodeGeneratorFragmentProvider {
 		}
 	}
 	
-	protected String getContributionTarget(Class<?> cls) {
+	protected static String getContributionTarget(Class<?> cls) {
 		GeneratorContribution contribution = cls.getAnnotation(GeneratorContribution.class);
 		return contribution.value();
 	}
 
-	protected Collection<String> getPackageClasses(String packageName) {
+	protected static Collection<String> getPackageClasses(String packageName) {
 		String path = "/" + packageName.replace(".", "/");
 		
 		Bundle bundle = Platform.getBundle(packageName);
