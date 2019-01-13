@@ -253,7 +253,7 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (((true) && ((((double) ((sCInterface.getRealValue() * 0.1)))>((long) 1.4) && ((long) ((sCInterface.getRealValue() * sCInterface.getIntValue())))<((double) 100))))) {
+				if ((((double) ((sCInterface.getRealValue() * 0.1)))>((long) 1.4) && ((long) ((sCInterface.getRealValue() * sCInterface.getIntValue())))<((double) 100))) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_C_default();
 				} else {

@@ -21,6 +21,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	ChildFirstExecutionHierarchyTest.class,
 	ChildFirstLocalReactionsTest.class,
 	ChildFirstOrthogonalReactionsTest.class,
+	ChildFirstTransitionsinSubchartTest.class,
 	ChildFirstTransitionTakingTest.class,
 	DeclarationsTest.class,
 	DeepEntryTest.class,

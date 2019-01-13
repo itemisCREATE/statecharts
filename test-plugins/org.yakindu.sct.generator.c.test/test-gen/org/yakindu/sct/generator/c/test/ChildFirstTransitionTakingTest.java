@@ -8,8 +8,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
 @GTest(
 	statechartBundle = "org.yakindu.sct.test.models",
-	sourceFile = "gtests/ChildFirstOrthogonalReactions/ChildFirstTransitionTakingTest.cc",
-	program = "gtests/ChildFirstOrthogonalReactions/ChildFirstTransitionTaking",
+	sourceFile = "gtests/ChildFirstTransitionTaking/ChildFirstTransitionTakingTest.cc",
+	program = "gtests/ChildFirstTransitionTaking/ChildFirstTransitionTaking",
 	model = "testmodels/SCTUnit/executionorder/ChildFirstTransitionTaking.sct",
 	additionalFilesToCopy = {
 		"libraryTarget/sc_timer_service.c",

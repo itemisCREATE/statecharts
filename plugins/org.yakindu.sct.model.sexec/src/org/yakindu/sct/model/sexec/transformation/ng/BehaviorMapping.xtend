@@ -9,6 +9,7 @@ import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgraph.Region
+import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 
 class BehaviorMapping extends org.yakindu.sct.model.sexec.transformation.BehaviorMapping {
 
@@ -17,6 +18,9 @@ class BehaviorMapping extends org.yakindu.sct.model.sexec.transformation.Behavio
 	@Inject extension SgraphExtensions sgraph
 	@Inject extension SexecExtensions sexec
 	@Inject extension ReactMethod rm
+	
+	@Inject extension ExpressionBuilder exprBuilder
+	
 
 	protected override Step lcaDoSequence(Region region, ExecutionFlow flow) {
 		

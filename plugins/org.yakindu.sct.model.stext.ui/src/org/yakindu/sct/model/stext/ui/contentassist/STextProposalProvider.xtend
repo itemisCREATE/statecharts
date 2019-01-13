@@ -67,6 +67,8 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.ui.internal.StextActivator
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover
 import com.google.common.collect.ImmutableList
+import org.yakindu.base.types.MetaComposite
+import org.yakindu.sct.model.stext.stext.RegularEventSpec
 
 /** 
  * Several filters to make proposals more useful.
@@ -128,6 +130,11 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 		if (currentModel instanceof InternalScope) {
 			suppressKeywords(suppressKeywords, (currentModel as InternalScope))
 		}
+		if (currentModel instanceof RegularEventSpec) {
+			suppressMetaCallIfNotApplicable(suppressKeywords, currentModel);
+		}
+		
+		
 		if (!suppressKeywords.contains(keyword)) {
 			super.completeKeyword(keyword, contentAssistContext, new AcceptorDelegate(acceptor, hover))
 		}
@@ -161,8 +168,10 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 	def protected void suppressKeywords(List<Keyword> suppressKeywords, FeatureCall featureCall) {
 		if (!(featureCall.getFeature() instanceof Operation)) {
 			suppressKeywords.add(
-				grammarAccess.getFeatureCallAccess().getOperationCallLeftParenthesisKeyword_1_3_0_0_0())
+				grammarAccess.getFeatureCallAccess().getOperationCallLeftParenthesisKeyword_1_2_0_0_0())
 		}
+		
+		suppressMetaCallIfNotApplicable(suppressKeywords, featureCall.feature)
 	}
 
 	def protected void suppressKeywords(List<Keyword> suppressKeywords,
@@ -171,7 +180,20 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 			suppressKeywords.add(
 				grammarAccess.getElementReferenceExpressionAccess().getOperationCallLeftParenthesisKeyword_2_0_0_0())
 		}
+
+		suppressMetaCallIfNotApplicable(suppressKeywords, referenceExpression.reference)
 	}
+
+
+	def protected void suppressMetaCallIfNotApplicable(List<Keyword> suppressKeywords, EObject obj) {
+		
+		if ( !(obj instanceof MetaComposite)
+			|| (obj as MetaComposite).metaFeatures.empty ) {
+			suppressKeywords.add(grammarAccess.featureCallAccess.getFullStopCommercialAtKeyword_1_0_1_1())
+			suppressKeywords.add(grammarAccess.simpleFeatureCallAccess.getFullStopCommercialAtKeyword_1_0_1_1())
+		}
+	}
+
 
 	def protected void suppressKeywords(List<Keyword> suppressKeywords, InternalScope model) {
 		suppressKeywords.add(grammarAccess.getDirectionAccess().getINInKeyword_0_0())

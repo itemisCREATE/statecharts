@@ -22,6 +22,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	ChildFirstExecutionHierarchy.class,
 	ChildFirstLocalReactions.class,
 	ChildFirstOrthogonalReactions.class,
+	ChildFirstTransitionsinSubchart.class,
 	ChildFirstTransitionTaking.class,
 	Declarations.class,
 	DeepEntry.class,

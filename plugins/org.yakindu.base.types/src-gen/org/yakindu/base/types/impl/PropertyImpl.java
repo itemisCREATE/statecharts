@@ -30,7 +30,7 @@ import org.yakindu.base.types.TypesPackage;
  *
  * @generated
  */
-public class PropertyImpl extends DeclarationImpl implements Property {
+public class PropertyImpl extends TypedDeclarationImpl implements Property {
 	/**
 	 * The default value of the '{@link #isConst() <em>Const</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -217,6 +217,7 @@ public class PropertyImpl extends DeclarationImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {

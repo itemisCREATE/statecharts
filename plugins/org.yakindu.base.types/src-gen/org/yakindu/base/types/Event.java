@@ -23,7 +23,7 @@ package org.yakindu.base.types;
  * @model
  * @generated
  */
-public interface Event extends Declaration {
+public interface Event extends TypedDeclaration {
 
 	/**
 	 * Returns the value of the '<em><b>Direction</b></em>' attribute.
