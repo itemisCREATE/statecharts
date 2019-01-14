@@ -1,7 +1,7 @@
 package org.yakindu.scr.historywithoutinitialstep;
 
-public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutInitialStepStatemachine {
 
+public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutInitialStepStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean toA;
@@ -55,6 +55,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	
 	private int nextStateIndex;
 	
+	
 	public HistoryWithoutInitialStepStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -74,11 +75,37 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_A:
+				main_region_A_react(true);
+				break;
+			case main_region_B_r1_C:
+				main_region_B_r1_C_react(true);
+				break;
+			case main_region_B_r1_D:
+				main_region_B_r1_D_react(true);
+				break;
+			case main_region_B_r1_E__region0_F:
+				main_region_B_r1_E__region0_F_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -334,7 +361,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		enterSequence_main_region_B_r1_E__region0_F_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -342,7 +369,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.toB) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
@@ -356,8 +383,6 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -365,7 +390,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.toA) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_A_default();
@@ -373,8 +398,6 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -392,8 +415,6 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -409,8 +430,6 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -428,8 +447,6 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -441,34 +458,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
-				main_region_A_react(true);
-				break;
-			case main_region_B_r1_C:
-				main_region_B_r1_C_react(true);
-				break;
-			case main_region_B_r1_D:
-				main_region_B_r1_D_react(true);
-				break;
-			case main_region_B_r1_E__region0_F:
-				main_region_B_r1_E__region0_F_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

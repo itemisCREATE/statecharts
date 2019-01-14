@@ -13,11 +13,11 @@ package org.yakindu.base.expressions.interpreter
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.emf.ecore.EObject
-import org.yakindu.base.base.NamedElement
 import org.yakindu.base.expressions.expressions.Argument
-import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.util.ArgumentSorter
+import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.Operation
 import org.yakindu.sct.model.sruntime.ExecutionContext
 
@@ -28,28 +28,21 @@ import org.yakindu.sct.model.sruntime.ExecutionContext
 abstract class AbstractOperationExecutor implements IOperationExecutor {
 
 	@Inject extension protected IExpressionInterpreter interpreter
+	
+	@Inject extension ExpressionExtensions
 
-	def dispatch getOperation(ElementReferenceExpression it) {
-		reference as Operation
+	def getOperation(ArgumentExpression it) {
+		it.featureOrReference as Operation
 	}
 
-	def dispatch getOperation(FeatureCall it) {
-		feature as Operation
+	def dispatch EObject getOwner(FeatureCall it) {
+		val owner = it.owner
+		if (owner instanceof ArgumentExpression) {
+			return owner.featureOrReference
+		}
 	}
 
-	def dispatch NamedElement getOwner(FeatureCall it) {
-		val owner = owner
-		if (owner instanceof ElementReferenceExpression) {
-			return owner.reference as NamedElement
-		} else
-			owner.owner
-	}
-
-	def dispatch NamedElement getOwner(ElementReferenceExpression it) {
-		null
-	}
-
-	def dispatch NamedElement getOwner(EObject it) {}
+	def dispatch EObject getOwner(ArgumentExpression it) {}
 
 	def executeArguments(List<Argument> arguments, ExecutionContext context, Operation operation) {
 		val orderedExpressions = ArgumentSorter.getOrderedExpressions(arguments, operation)

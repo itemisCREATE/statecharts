@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 committers of YAKINDU and others.
+ * Copyright (c) 2012-2018 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -39,7 +39,11 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.sct.generator.c.types.CLiterals
 
+/**
+ * @author axel terfloth
+ */
 class FlowCode {
 	
 	@Inject extension Naming
@@ -48,6 +52,8 @@ class FlowCode {
 	@Inject extension INamingService
 	@Inject extension GenmodelEntries
 	@Inject protected extension ICodegenTypeSystemAccess
+	
+	@Inject protected extension CLiterals
 	
  
  	@Inject GeneratorEntry entry
@@ -137,10 +143,10 @@ class FlowCode {
 	'''	
 
 	def dispatch CharSequence code(Check it)
-		'''«IF condition !== null»«condition.sc_boolean_code»«ELSE»«CGeneratorConstants.TRUE»«ENDIF»'''
+		'''«IF condition !== null»«condition.sc_boolean_code»«ELSE»«TRUE_LITERAL»«ENDIF»'''
 	
 	def dispatch CharSequence code(CheckRef it)
-		'''«IF check !== null»«check.shortName»(«scHandle») == «CGeneratorConstants.TRUE»«ELSE»«CGeneratorConstants.TRUE»«ENDIF»'''
+		'''«IF check !== null»«check.shortName»(«scHandle») == «TRUE_LITERAL»«ELSE»«TRUE_LITERAL»«ENDIF»'''
 
 	def dispatch CharSequence code(If it) '''
 		«stepComment»

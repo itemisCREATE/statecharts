@@ -187,8 +187,8 @@ public class GTestHelper {
 		getSourceFiles(sourceFiles);
 
 		File targetPath = ResourcesPlugin.getWorkspace().getRoot().findMember(getTargetPath()).getLocation().toFile();
-		
-		return new CompileGTestCommand()
+
+		 CompileGTestCommand gTestCommand = new CompileGTestCommand()
 				.compiler(getCompilerCommand())
 				.program(getFileName(getTestProgram()))
 				.includes(includes)
@@ -196,7 +196,16 @@ public class GTestHelper {
 				.directory(gTestDirectory)
 				//.makefileDir(targetPath.toString())
 				.mainLib(getMainLib())
-				.build();
+				//.wPedantic()
+			 	.wAll()				
+			 	.wExtra()
+			 	.wError()
+			 	.wConversion();
+		 if(compiler == Compiler.GCC) {
+			 gTestCommand.wnoUnusedParameter(); // ignore unused parameter flag
+			 gTestCommand.wnoUnusedFunction(); // ignore unused functions flag
+		 }
+		return gTestCommand.build();
 	}
 	
 	/**

@@ -229,6 +229,15 @@ public interface ExpressionsFactory extends EFactory {
 	FeatureCall createFeatureCall();
 
 	/**
+	 * Returns a new object of class '<em>Meta Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Meta Call</em>'.
+	 * @generated
+	 */
+	MetaCall createMetaCall();
+
+	/**
 	 * Returns a new object of class '<em>Element Reference Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -176,6 +176,7 @@ public class AnnotationTypeItemProvider extends TypeItemProvider {
 
 		boolean qualify =
 			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
+			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES ||
 			childFeature == TypesPackage.Literals.ANNOTATION_TYPE__PROPERTIES;
 
 		if (qualify) {

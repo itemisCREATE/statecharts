@@ -22,10 +22,10 @@ import org.yakindu.base.base.DomainElement;
  * @model
  * @generated
  */
-public interface Package extends PackageMember, DomainElement {
+public interface Package extends Declaration, DomainElement {
 	/**
 	 * Returns the value of the '<em><b>Member</b></em>' containment reference list.
-	 * The list contents are of type {@link org.yakindu.base.types.PackageMember}.
+	 * The list contents are of type {@link org.yakindu.base.types.Declaration}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Member</em>' containment reference list isn't clear,
@@ -37,7 +37,7 @@ public interface Package extends PackageMember, DomainElement {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<PackageMember> getMember();
+	EList<Declaration> getMember();
 
 	/**
 	 * Returns the value of the '<em><b>Import</b></em>' reference list.

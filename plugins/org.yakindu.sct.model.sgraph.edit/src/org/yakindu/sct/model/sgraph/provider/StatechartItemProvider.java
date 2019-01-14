@@ -292,17 +292,17 @@ public class StatechartItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 TypesFactory.eINSTANCE.createPackageMember()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 TypesFactory.eINSTANCE.createPackage()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 TypesFactory.eINSTANCE.createType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createTypedDeclaration()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -353,6 +353,11 @@ public class StatechartItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 TypesFactory.eINSTANCE.createTypeAlias()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createAnnotatableElement()));
 
 		newChildDescriptors.add
 			(createChildParameter

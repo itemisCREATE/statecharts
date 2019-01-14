@@ -3,7 +3,6 @@ package org.yakindu.scr.javakeywords;
 import org.yakindu.scr.IStatemachine;
 
 public interface IJavaKeywordsStatemachine extends IStatemachine {
-
 	public interface SCInterface {
 	
 		public void raiseWhile();

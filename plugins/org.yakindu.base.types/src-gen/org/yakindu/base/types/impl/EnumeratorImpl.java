@@ -27,7 +27,7 @@ import org.yakindu.base.types.TypesPackage;
  *
  * @generated
  */
-public class EnumeratorImpl extends DeclarationImpl implements Enumerator {
+public class EnumeratorImpl extends TypedDeclarationImpl implements Enumerator {
 	/**
 	 * The default value of the '{@link #getLiteralValue() <em>Literal Value</em>}' attribute.
 	 * <!-- begin-user-doc -->

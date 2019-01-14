@@ -66,7 +66,7 @@ void sc_timer_service_proceed_time(sc_unit_timer_service_t * ts, sc_integer time
 		processed_timer = false;
 	
 		// and then check if there is a timer to process
-		if( ts->tasks > 0) {
+		if( ts->tasks != 0) {
 			if(ts->tasks->timer.abs_time_ms <= stop_time_ms) {
 	
 				sc_timer_task_t * next_task = pop_task(ts);
@@ -152,16 +152,16 @@ void delete_task(sc_unit_timer_service_t * ts, sc_timer_task_t * task)
 		ts->tasks = ts->tasks->next;
 
 	} else {
-		sc_timer_task_t * this = ts->tasks->next;
+		sc_timer_task_t * current = ts->tasks->next;
 		sc_timer_task_t * last = ts->tasks;
-		while(this) {
-			if(this == task) {
-				last->next = this->next;
+		while(current) {
+			if(current == task) {
+				last->next = current->next;
 			}
 			else {
 				last = last->next;
 			}
-			this = this->next;
+			current = current->next;
 		}
 	}
 	free(task);
@@ -169,29 +169,29 @@ void delete_task(sc_unit_timer_service_t * ts, sc_timer_task_t * task)
 
 sc_timer_task_t * find_time_event(sc_unit_timer_service_t * ts, sc_eventid evid)
 {
-	sc_timer_task_t * this = ts->tasks;
-	while(this && this->timer.pt_evid != evid) {
-		this = this->next;
+	sc_timer_task_t * task = ts->tasks;
+	while(task && task->timer.pt_evid != evid) {
+		task = task->next;
 	}
-	return this;
+	return task;
 }
 
 void insert_timer(sc_unit_timer_service_t * ts, sc_timer_t te)
 {
 	sc_timer_task_t * head = ts->tasks;
-	sc_timer_task_t * new = (sc_timer_task_t *) malloc(sizeof(sc_timer_task_t));
+	sc_timer_task_t * new_task = (sc_timer_task_t *) malloc(sizeof(sc_timer_task_t));
 	te.abs_time_ms = ts->current_time_ms + te.rel_time_ms;
-	new->timer = te;
-	new->next = 0;
+	new_task->timer = te;
+	new_task->next = 0;
 	if(head == 0) {
-		ts->tasks = new;
+		ts->tasks = new_task;
 		return;
 	}
 
 	// Check if we should put it in as first element
 	if(compare(&te, &(head->timer)) < 0) {
-		new->next = head;
-		ts->tasks = new;
+		new_task->next = head;
+		ts->tasks = new_task;
 		return;
 	}
 
@@ -199,8 +199,8 @@ void insert_timer(sc_unit_timer_service_t * ts, sc_timer_t te)
 	head = head->next;
 	while(head != 0) {
 		if(compare(&te, &(head->timer)) < 0) {
-			new->next = head;
-			last->next = new;
+			new_task->next = head;
+			last->next = new_task;
 			return;
 		}
 		last = head;
@@ -208,7 +208,7 @@ void insert_timer(sc_unit_timer_service_t * ts, sc_timer_t te)
 	}
 
 	// put it in last position
-	last->next = new;
+	last->next = new_task;
 }
 
 sc_timer_task_t * pop_task(sc_unit_timer_service_t * ts) {

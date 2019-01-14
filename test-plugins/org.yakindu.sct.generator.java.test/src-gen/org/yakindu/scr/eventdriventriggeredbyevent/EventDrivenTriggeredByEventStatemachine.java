@@ -3,7 +3,6 @@ package org.yakindu.scr.eventdriventriggeredbyevent;
 import org.yakindu.scr.ITimer;
 
 public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTriggeredByEventStatemachine {
-
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;
@@ -42,6 +41,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 	
 	private int nextStateIndex;
 	
+	
 	private ITimer timer;
 	
 	private final boolean[] timeEvents = new boolean[1];
@@ -65,7 +65,8 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
@@ -73,6 +74,25 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 		enterSequence_EventDrivenTriggeredByEvent_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case eventDrivenTriggeredByEvent_main_region_A:
+				eventDrivenTriggeredByEvent_main_region_A_react(true);
+				break;
+			case eventDrivenTriggeredByEvent_main_region_B:
+				eventDrivenTriggeredByEvent_main_region_B_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_EventDrivenTriggeredByEvent_main_region();
 	}
@@ -166,7 +186,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 	
 	/* Entry action for state 'B'. */
 	private void entryAction_EventDrivenTriggeredByEvent_main_region_B() {
-		timer.setTimer(this, 0, 100000 * 1000, false);
+		timer.setTimer(this, 0, (100000 * 1000), false);
 	}
 	
 	/* Exit action for state 'B'. */
@@ -225,7 +245,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 		enterSequence_EventDrivenTriggeredByEvent_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -233,7 +253,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_EventDrivenTriggeredByEvent_main_region_A();
 					enterSequence_EventDrivenTriggeredByEvent_main_region_B_default();
@@ -252,7 +272,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_EventDrivenTriggeredByEvent_main_region_B();
 					enterSequence_EventDrivenTriggeredByEvent_main_region_A_default();
@@ -271,23 +291,4 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case eventDrivenTriggeredByEvent_main_region_A:
-				eventDrivenTriggeredByEvent_main_region_A_react(true);
-				break;
-			case eventDrivenTriggeredByEvent_main_region_B:
-				eventDrivenTriggeredByEvent_main_region_B_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

@@ -1,7 +1,7 @@
 package org.yakindu.scr.priorityvalues;
 
-public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 
+public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean event1;
@@ -41,6 +41,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public PriorityValuesStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -57,12 +58,47 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_someRegion_default();
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case someRegion_A:
+				someRegion_A_react(true);
+				break;
+			case someRegion_B:
+				someRegion_B_react(true);
+				break;
+			case main_region_A:
+				main_region_A_react(true);
+				break;
+			case main_region_B:
+				main_region_B_react(true);
+				break;
+			case main_region_C:
+				main_region_C_react(true);
+				break;
+			case main_region_D:
+				main_region_D_react(true);
+				break;
+			case main_region_E:
+				main_region_E_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_someRegion();
 		exitSequence_main_region();
@@ -274,7 +310,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		enterSequence_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -282,7 +318,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.event2) {
 					exitSequence_someRegion_A();
 					enterSequence_someRegion_B_default();
@@ -291,8 +327,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -300,11 +334,9 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -325,7 +357,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 						exitSequence_main_region_A();
 						enterSequence_main_region_D_default();
 					} else {
-						if ((sCInterface.event2) && (!isStateActive(State.someRegion_B))) {
+						if (((sCInterface.event2) && (!isStateActive(State.someRegion_B)))) {
 							exitSequence_main_region_A();
 							enterSequence_main_region_E_default();
 						} else {
@@ -334,8 +366,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 					}
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -346,8 +376,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		if (try_transition) {
 			did_transition = false;
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -356,8 +384,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		
 		if (try_transition) {
 			did_transition = false;
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -368,8 +394,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		if (try_transition) {
 			did_transition = false;
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -379,43 +403,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		if (try_transition) {
 			did_transition = false;
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case someRegion_A:
-				someRegion_A_react(true);
-				break;
-			case someRegion_B:
-				someRegion_B_react(true);
-				break;
-			case main_region_A:
-				main_region_A_react(true);
-				break;
-			case main_region_B:
-				main_region_B_react(true);
-				break;
-			case main_region_C:
-				main_region_C_react(true);
-				break;
-			case main_region_D:
-				main_region_D_react(true);
-				break;
-			case main_region_E:
-				main_region_E_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

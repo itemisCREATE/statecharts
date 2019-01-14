@@ -36,7 +36,7 @@ import org.yakindu.base.types.TypesPackage;
  *
  * @generated
  */
-public class OperationImpl extends DeclarationImpl implements Operation {
+public class OperationImpl extends TypedDeclarationImpl implements Operation {
 	/**
 	 * The cached value of the '{@link #getTypeParameters() <em>Type Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

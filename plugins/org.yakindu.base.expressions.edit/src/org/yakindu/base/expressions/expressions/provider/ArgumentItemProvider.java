@@ -251,6 +251,11 @@ public class ArgumentItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.ARGUMENT__VALUE,
+				 ExpressionsFactory.eINSTANCE.createMetaCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.ARGUMENT__VALUE,
 				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
 
 		newChildDescriptors.add

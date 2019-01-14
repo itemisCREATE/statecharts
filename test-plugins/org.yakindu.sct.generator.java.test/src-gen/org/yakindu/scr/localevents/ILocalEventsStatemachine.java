@@ -1,9 +1,10 @@
 package org.yakindu.scr.localevents;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import org.yakindu.scr.IStatemachine;
 
 public interface ILocalEventsStatemachine extends IStatemachine {
-
 	public interface SCInterface {
 	
 		public void raiseE();

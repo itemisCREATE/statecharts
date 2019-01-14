@@ -220,6 +220,11 @@ public class StatementItemProvider extends StepItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.STATEMENT__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createMetaCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.STATEMENT__EXPRESSION,
 				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
 
 		newChildDescriptors.add

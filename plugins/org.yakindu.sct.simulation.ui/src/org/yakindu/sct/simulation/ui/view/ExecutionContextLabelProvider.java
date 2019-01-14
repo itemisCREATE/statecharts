@@ -34,6 +34,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TreeItem;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.PrimitiveType;
+import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sruntime.CompositeSlot;
 import org.yakindu.sct.model.sruntime.ExecutionEvent;
 import org.yakindu.sct.model.sruntime.ExecutionOperation;
@@ -126,7 +127,11 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 	}
 
 	protected boolean isEnumType(Object element) {
-		return ((ExecutionSlot) element).getType().getOriginType() instanceof EnumerationType;
+		Type type = ((ExecutionSlot) element).getType();
+		if (type == null) {
+			return false;
+		}
+		return type.getOriginType() instanceof EnumerationType;
 	}
 
 	private void updateNameCell(ViewerCell cell) {

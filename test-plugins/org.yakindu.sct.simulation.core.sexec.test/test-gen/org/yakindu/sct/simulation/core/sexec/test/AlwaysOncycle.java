@@ -46,6 +46,8 @@ public class AlwaysOncycle extends AbstractExecutionFlowTest {
 			count++;
 		}
 		assertTrue((getInteger("value") == 5l));
+		assertTrue((getInteger("x") == 5l));
+		assertTrue((getInteger("y") == 5l));
 		timer.timeLeap(getCyclePeriod());
 		assertTrue(isStateActive("StateA"));
 		assertTrue(getInteger("value") == 0l);

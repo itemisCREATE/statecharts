@@ -320,7 +320,7 @@ GeneratorModel for sctunit::cpp {
 		feature SGenModel {
 			GenerateSGen =  true
 		}
-	}
+	} 
 	
 	test ConstOnlyInternalScope{
 		

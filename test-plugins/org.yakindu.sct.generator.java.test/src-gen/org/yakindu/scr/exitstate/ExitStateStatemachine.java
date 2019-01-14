@@ -1,7 +1,7 @@
 package org.yakindu.scr.exitstate;
 
-public class ExitStateStatemachine implements IExitStateStatemachine {
 
+public class ExitStateStatemachine implements IExitStateStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;
@@ -45,6 +45,7 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public ExitStateStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -61,11 +62,34 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_r_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case r_A_r_B:
+				r_A_r_B_react(true);
+				break;
+			case r_E:
+				r_E_react(true);
+				break;
+			case r_F:
+				r_F_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_r();
 	}
@@ -253,7 +277,7 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		effect_r_A_tr0();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -261,11 +285,9 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -293,8 +315,6 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -302,11 +322,9 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -315,35 +333,11 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case r_A_r_B:
-				r_A_r_B_react(true);
-				break;
-			case r_E:
-				r_E_react(true);
-				break;
-			case r_F:
-				r_F_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

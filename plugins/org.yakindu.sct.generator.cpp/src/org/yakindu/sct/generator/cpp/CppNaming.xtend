@@ -231,6 +231,10 @@ class CppNaming extends Naming {
 	override isFinalFctID(ExecutionFlow it) {
 		IS_FINAL
 	}
+	
+	def numTimeEventsFctID(ExecutionFlow it) {
+		"getNumberOfParallelTimeEvents"
+	}
 
 	override dispatch access(OperationDefinition it) {
 		if (entry.useStaticOPC) {

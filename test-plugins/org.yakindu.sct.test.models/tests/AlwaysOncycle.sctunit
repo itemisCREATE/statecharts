@@ -25,6 +25,8 @@ testclass AlwaysOncycle for statechart AlwaysOncycle {
 			count++
 		}
 		assert (value == 5)
+		assert (x == 5)
+		assert (y == 5)
 
 		proceed 1 cycle
 		assert active (AlwaysOncycle.main_region.StateA)  

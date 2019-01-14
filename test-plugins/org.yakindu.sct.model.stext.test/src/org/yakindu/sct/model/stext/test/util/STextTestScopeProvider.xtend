@@ -101,6 +101,11 @@ class STextTestScopeProvider extends STextScopeProvider {
 		
 		addToIndex(descriptions, createComplexTypeWithOverloadedOperations)
 		
+		val subSubTypeOfGenericType = createSubSubTypeOfGenericType
+		addToIndex(descriptions, subSubTypeOfGenericType.superTypes.get(0).type.superTypes.get(0).type)
+		addToIndex(descriptions, subSubTypeOfGenericType.superTypes.get(0).type)
+		addToIndex(descriptions, subSubTypeOfGenericType)
+		
 		return new SimpleScope(descriptions)
 	}
 	
@@ -173,6 +178,7 @@ class STextTestScopeProvider extends STextScopeProvider {
 		val complexType = factory.createComplexType => [
 			name = "ComplexType"
 			features += createProperty("x", INTEGER)
+			features += createProperty("y", it)
 		]
 		complexType.addToResource
 		complexType
@@ -476,6 +482,55 @@ class STextTestScopeProvider extends STextScopeProvider {
 				op.typeSpecifier = op.typeParameters.head.toTypeSpecifier
 			]
 		]
+	}
+	
+	/**
+	 * GenericType<E> {
+	 *   E get();
+	 *   void add(p:E)
+	 * }
+	 * 
+	 * SubTypeOfGenericType<E> extends GenericType<E> { }
+	 * 
+	 * SubSubTypeOfGenericType extends SubTypeOfGenericType<boolean> { }
+	 * 
+	 */
+	def protected ComplexType createSubSubTypeOfGenericType() {
+		val genericType = createComplexType => [ct |
+			ct.name = "GenericType"
+			ct.typeParameters += createTypeParameter("E")
+			ct.features += createProperty("prop1", ct.typeParameters.get(0))
+			ct.features += createOperation => [op |
+				op.name = "add"
+				op.parameters += createParameter("p", ct.typeParameters.get(0).toTypeSpecifier)
+				op.typeSpecifier = ts.getType(VOID).toTypeSpecifier
+			]
+			ct.features += createOperation => [op |
+				op.name = "get"
+				op.typeSpecifier = ct.typeParameters.get(0).toTypeSpecifier
+			]
+		]
+		genericType.addToResource
+		
+		val subType = createComplexType => [st |
+			st.name = "SubTypeOfGenericType"
+			st.typeParameters += createTypeParameter("E")
+			st.superTypes += createTypeSpecifier => [
+				type = genericType
+				typeArguments += st.typeParameters.get(0).toTypeSpecifier
+			]
+		]
+		subType.addToResource
+		
+		val subSubType = createComplexType => [st |
+			st.name = "SubSubTypeOfGenericType"
+			st.superTypes += createTypeSpecifier => [
+				type = subType
+				typeArguments += ts.getType(BOOLEAN).toTypeSpecifier
+			]
+		]
+		subSubType.addToResource
+		subSubType
 	}
 	
 }

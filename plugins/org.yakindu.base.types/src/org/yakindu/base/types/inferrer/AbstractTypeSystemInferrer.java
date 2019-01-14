@@ -69,7 +69,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	}
 
 	protected InferenceResult getCommonType(InferenceResult result1, InferenceResult result2) {
-		return InferenceResult.from(registry.getCommonType(result1.getType(), result2.getType()));
+		return InferenceResult.from(registry.getCommonTypeWithConversion(result1.getType(), result2.getType()));
 	}
 
 	@Override

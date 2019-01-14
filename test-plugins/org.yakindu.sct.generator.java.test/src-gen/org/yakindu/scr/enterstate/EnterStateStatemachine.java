@@ -1,7 +1,7 @@
 package org.yakindu.scr.enterstate;
 
-public class EnterStateStatemachine implements IEnterStateStatemachine {
 
+public class EnterStateStatemachine implements IEnterStateStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;
@@ -45,6 +45,7 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public EnterStateStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -61,11 +62,34 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_r_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case r_A:
+				r_A_react(true);
+				break;
+			case r_B_r_E:
+				r_B_r_E_react(true);
+				break;
+			case r_B_r_F:
+				r_B_r_F_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_r();
 	}
@@ -246,7 +270,7 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 		enterSequence_r_B_r_F_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -254,7 +278,7 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_r_A();
 					enterSequence_r_B_default();
@@ -273,8 +297,6 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -282,11 +304,9 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -299,8 +319,6 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -312,31 +330,7 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case r_A:
-				r_A_react(true);
-				break;
-			case r_B_r_E:
-				r_B_r_E_react(true);
-				break;
-			case r_B_r_F:
-				r_B_r_F_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

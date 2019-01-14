@@ -1,7 +1,7 @@
 package org.yakindu.scr.ckeywords;
 
-public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 
+public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean auto;
@@ -299,6 +299,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public CKeywordsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -369,11 +370,31 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_auto_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case auto_char:
+				auto_char_react(true);
+				break;
+			case auto_loop_switch_case_enum_asm:
+				auto_loop_switch_case_enum_asm_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_auto();
 	}
@@ -894,7 +915,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -902,8 +923,8 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
-				if ((sCInterface.auto) && (sCInterface.getCase())) {
+			if (react()==false) {
+				if (((sCInterface.auto) && (sCInterface.getCase()))) {
 					exitSequence_auto_char();
 					sCInterface.setDo(sCInterface.getDo() + 1);
 					
@@ -913,8 +934,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -922,11 +941,9 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -939,8 +956,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -952,28 +967,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case auto_char:
-				auto_char_react(true);
-				break;
-			case auto_loop_switch_case_enum_asm:
-				auto_loop_switch_case_enum_asm_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

@@ -46,7 +46,7 @@ class ExpressionsGenerator {
 
 	/* Expressions */
 	def dispatch CharSequence code(BinaryExpression it) {
-		leftOperand.code.toString.trim + " " + operator.literal.toString.trim + " " + rightOperand.code
+		'''(«leftOperand.code.toString.trim» «operator.literal.toString.trim» «rightOperand.code»)'''
 	}
 
 	def dispatch CharSequence code(UnaryExpression it) {

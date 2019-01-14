@@ -1,7 +1,7 @@
 package org.yakindu.scr.entryexitselftransition;
 
-public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransitionStatemachine {
 
+public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransitionStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;
@@ -57,6 +57,7 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 	
 	private int nextStateIndex;
 	
+	
 	public EntryExitSelfTransitionStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -76,11 +77,31 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_A__region0_B:
+				main_region_A__region0_B_react(true);
+				break;
+			case main_region_A__region0_C:
+				main_region_A__region0_C_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -255,7 +276,7 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 		enterSequence_main_region_A__region0_B_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -263,7 +284,7 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_main_region_A();
 					entryAction_main_region_A();
@@ -272,8 +293,6 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -291,8 +310,6 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -309,28 +326,7 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_A__region0_B:
-				main_region_A__region0_B_react(true);
-				break;
-			case main_region_A__region0_C:
-				main_region_A__region0_C_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

@@ -1,7 +1,7 @@
 package org.yakindu.scr.syncfork;
 
-public class SyncForkStatemachine implements ISyncForkStatemachine {
 
+public class SyncForkStatemachine implements ISyncForkStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;
@@ -40,6 +40,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public SyncForkStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -56,11 +57,40 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_A:
+				main_region_A_react(true);
+				break;
+			case main_region_B_r1_C1:
+				main_region_B_r1_C1_react(true);
+				break;
+			case main_region_B_r1_C2:
+				main_region_B_r1_C2_react(true);
+				break;
+			case main_region_B_r2_D1:
+				main_region_B_r2_D1_react(true);
+				break;
+			case main_region_B_r2_D2:
+				main_region_B_r2_D2_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -293,7 +323,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		enterSequence_main_region_B_r2_D2_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -301,7 +331,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_main_region_A();
 					react_main_region__sync0();
@@ -315,8 +345,6 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -324,7 +352,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_A_default();
@@ -332,8 +360,6 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -351,8 +377,6 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -363,8 +387,6 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 			if (main_region_B_react(try_transition)==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -380,8 +402,6 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -391,37 +411,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		if (try_transition) {
 			did_transition = false;
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
-				main_region_A_react(true);
-				break;
-			case main_region_B_r1_C1:
-				main_region_B_r1_C1_react(true);
-				break;
-			case main_region_B_r1_C2:
-				main_region_B_r1_C2_react(true);
-				break;
-			case main_region_B_r2_D1:
-				main_region_B_r2_D1_react(true);
-				break;
-			case main_region_B_r2_D2:
-				main_region_B_r2_D2_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

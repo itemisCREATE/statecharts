@@ -6,18 +6,13 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.TypesPackage;
@@ -134,12 +129,18 @@ public class AnnotatableElementImpl extends EObjectImpl implements AnnotatableEl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 *
+	 * @generated NOT
 	 */
-	public Annotation getAnnotationOfType(String typeName) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	@Override
+	public Annotation getAnnotationOfType(final String typeName) {
+		EList<Annotation> annotations = getAnnotationInfo().getAnnotations();
+		for (Annotation annotation : annotations) {
+			if (typeName.equals(annotation.getType().getName())) {
+				return annotation;
+			}
+		}
+		return null;
 	}
 
 	/**

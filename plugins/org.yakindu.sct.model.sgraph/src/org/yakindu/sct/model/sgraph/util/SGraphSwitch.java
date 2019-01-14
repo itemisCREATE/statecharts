@@ -18,8 +18,7 @@ import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Declaration;
-import org.yakindu.base.types.PackageMember;
-import org.yakindu.base.types.TypedElement;
+import org.yakindu.base.types.MetaComposite;
 import org.yakindu.sct.model.sgraph.*;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.CompositeElement;
@@ -36,6 +35,7 @@ import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
+import org.yakindu.sct.model.sgraph.ScopeMember;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.State;
@@ -279,10 +279,9 @@ public class SGraphSwitch<T> extends Switch<T> {
 				ImportDeclaration importDeclaration = (ImportDeclaration)theEObject;
 				T result = caseImportDeclaration(importDeclaration);
 				if (result == null) result = caseDeclaration(importDeclaration);
-				if (result == null) result = caseTypedElement(importDeclaration);
-				if (result == null) result = casePackageMember(importDeclaration);
 				if (result == null) result = caseNamedElement(importDeclaration);
 				if (result == null) result = caseAnnotatableElement(importDeclaration);
+				if (result == null) result = caseMetaComposite(importDeclaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -387,32 +386,17 @@ public class SGraphSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Typed Element</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Meta Composite</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Typed Element</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Meta Composite</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTypedElement(TypedElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Package Member</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Package Member</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePackageMember(PackageMember object) {
+	public T caseMetaComposite(MetaComposite object) {
 		return null;
 	}
 

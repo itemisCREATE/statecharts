@@ -3,7 +3,6 @@ package org.yakindu.scr.parentfirstexecutionhierarchy;
 import org.yakindu.scr.IStatemachine;
 
 public interface IParentFirstExecutionHierarchyStatemachine extends IStatemachine {
-
 	public interface SCInterface {
 	
 		public void raiseE();

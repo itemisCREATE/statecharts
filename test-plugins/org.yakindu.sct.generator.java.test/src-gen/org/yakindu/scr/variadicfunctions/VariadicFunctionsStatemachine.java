@@ -1,7 +1,7 @@
 package org.yakindu.scr.variadicfunctions;
 
-public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemachine {
 
+public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private SCInterfaceOperationCallback operationCallback;
@@ -38,6 +38,7 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 	
 	private int nextStateIndex;
 	
+	
 	private InternalOperationCallback operationCallback;
 	public VariadicFunctionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
@@ -67,11 +68,31 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_StateA:
+				main_region_StateA_react(true);
+				break;
+			case main_region_StateB:
+				main_region_StateB_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -199,7 +220,7 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 		enterSequence_main_region_StateA_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -207,14 +228,12 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_StateA();
 				operationCallback.myInternalVarOperation(0.0, 0.2);
 				
 				enterSequence_main_region_StateB_default();
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -223,32 +242,11 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_StateA:
-				main_region_StateA_react(true);
-				break;
-			case main_region_StateB:
-				main_region_StateB_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }
