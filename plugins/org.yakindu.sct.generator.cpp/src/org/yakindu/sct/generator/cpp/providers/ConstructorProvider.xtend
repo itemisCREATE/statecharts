@@ -56,6 +56,7 @@ class ConstructorProvider implements ISourceFragment {
 	def protected initialisationList(ExecutionFlow it) {
 		val List<Pair<String, String>> toInit = newArrayList
 		if(timed) toInit.add(timerInstance, NULL_LITERAL)
+		if(entry.tracingUsed) toInit.add(tracingInstance, "0")
 		toInit.add(STATEVECTOR_POS, "0")
 		interfaces.forEach[
 			toInit.add(instance, "")
@@ -63,7 +64,6 @@ class ConstructorProvider implements ISourceFragment {
 				toInit.add(OCB_Instance, NULL_LITERAL)
 			}
 		]
-		if(entry.tracingUsed) toInit.add(tracingInstance, "0")
 		toInit
 	}
 	
