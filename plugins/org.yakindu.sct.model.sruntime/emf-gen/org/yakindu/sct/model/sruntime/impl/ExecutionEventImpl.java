@@ -100,6 +100,7 @@ public class ExecutionEventImpl extends ExecutionSlotImpl implements ExecutionEv
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isRaised() {
 		return raised;
 	}
@@ -109,6 +110,7 @@ public class ExecutionEventImpl extends ExecutionSlotImpl implements ExecutionEv
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRaised(boolean newRaised) {
 		boolean oldRaised = raised;
 		raised = newRaised;
@@ -121,6 +123,7 @@ public class ExecutionEventImpl extends ExecutionSlotImpl implements ExecutionEv
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Direction getDirection() {
 		return direction;
 	}
@@ -130,6 +133,7 @@ public class ExecutionEventImpl extends ExecutionSlotImpl implements ExecutionEv
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDirection(Direction newDirection) {
 		Direction oldDirection = direction;
 		direction = newDirection == null ? DIRECTION_EDEFAULT : newDirection;

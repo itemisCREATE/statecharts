@@ -229,6 +229,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object getValue() {
 		return value;
 	}
@@ -238,6 +239,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(Object newValue) {
 		Object oldValue = value;
 		value = newValue;
@@ -250,6 +252,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getFqName() {
 		return fqName;
 	}
@@ -259,6 +262,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFqName(String newFqName) {
 		String oldFqName = fqName;
 		fqName = newFqName;
@@ -271,6 +275,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isWritable() {
 		return writable;
 	}
@@ -280,6 +285,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWritable(boolean newWritable) {
 		boolean oldWritable = writable;
 		writable = newWritable;
@@ -292,6 +298,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Type getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
@@ -318,6 +325,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(Type newType) {
 		Type oldType = type;
 		type = newType;
@@ -330,6 +338,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<ExecutionSlot> getSlots() {
 		if (slots == null) {
 			slots = new EObjectContainmentEList<ExecutionSlot>(ExecutionSlot.class, this, SRuntimePackage.EXECUTION_CONTEXT__SLOTS);
@@ -342,6 +351,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<EObject> getActiveStates() {
 		if (activeStates == null) {
 			activeStates = new EObjectResolvingEList<EObject>(EObject.class, this, SRuntimePackage.EXECUTION_CONTEXT__ACTIVE_STATES);
@@ -354,6 +364,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<EObject> getExecutedElements() {
 		if (executedElements == null) {
 			executedElements = new EObjectResolvingEList<EObject>(EObject.class, this, SRuntimePackage.EXECUTION_CONTEXT__EXECUTED_ELEMENTS);
@@ -366,6 +377,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<EObject> getSuspendedElements() {
 		if (suspendedElements == null) {
 			suspendedElements = new EObjectResolvingEList<EObject>(EObject.class, this, SRuntimePackage.EXECUTION_CONTEXT__SUSPENDED_ELEMENTS);
@@ -378,6 +390,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isSnapshot() {
 		return snapshot;
 	}
@@ -387,6 +400,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSnapshot(boolean newSnapshot) {
 		boolean oldSnapshot = snapshot;
 		snapshot = newSnapshot;
@@ -399,6 +413,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<ExecutionEvent> getRaisedEvents() {
 		final Function1<ExecutionEvent, Boolean> _function = new Function1<ExecutionEvent, Boolean>() {
 			public Boolean apply(final ExecutionEvent it) {
@@ -413,8 +428,10 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ExecutionVariable getVariable(final String qualifiedName) {
-		ExecutionVariable _xblockexpression = null; {
+		ExecutionVariable _xblockexpression = null;
+		{
 			Assert.isNotNull(qualifiedName);
 			final Function1<ExecutionVariable, Boolean> _function = new Function1<ExecutionVariable, Boolean>() {
 				public Boolean apply(final ExecutionVariable it) {
@@ -432,8 +449,10 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ExecutionEvent getEvent(final String qualifiedName) {
-		ExecutionEvent _xblockexpression = null; {
+		ExecutionEvent _xblockexpression = null;
+		{
 			Assert.isNotNull(qualifiedName);
 			final Function1<ExecutionEvent, Boolean> _function = new Function1<ExecutionEvent, Boolean>() {
 				public Boolean apply(final ExecutionEvent it) {
@@ -451,8 +470,10 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ExecutionSlot getSlot(final String qualifiedName) {
-		ExecutionSlot _xblockexpression = null; {
+		ExecutionSlot _xblockexpression = null;
+		{
 			Assert.isNotNull(qualifiedName);
 			final Function1<ExecutionSlot, Boolean> _function = new Function1<ExecutionSlot, Boolean>() {
 				public Boolean apply(final ExecutionSlot it) {
@@ -470,6 +491,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<ExecutionEvent> getAllEvents() {
 		return IterableExtensions.<ExecutionEvent>toList(Iterables.<ExecutionEvent>filter(this.getAllSlots(), ExecutionEvent.class));
 	}
@@ -479,6 +501,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<ExecutionVariable> getAllVariables() {
 		return IterableExtensions.<ExecutionVariable>toList(Iterables.<ExecutionVariable>filter(this.getAllSlots(), ExecutionVariable.class));
 	}
@@ -488,8 +511,10 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<ExecutionSlot> getAllSlots() {
-		BasicEList<ExecutionSlot> _xblockexpression = null; {
+		BasicEList<ExecutionSlot> _xblockexpression = null;
+		{
 			BasicEList<ExecutionSlot> result = new BasicEList<ExecutionSlot>();
 			this.addSlots(result, this.getSlots(), Lists.<ExecutionSlot>newArrayList());
 			_xblockexpression = result;
@@ -502,6 +527,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void addSlots(final List<ExecutionSlot> result, final List<ExecutionSlot> slots, final List<ExecutionSlot> visited) {
 		final Consumer<ExecutionSlot> _function = new Consumer<ExecutionSlot>() {
 			public void accept(final ExecutionSlot it) {
@@ -509,12 +535,22 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 				if (_add) {
 					result.add(it);
 					if ((it instanceof CompositeSlot)) {
-						ExecutionContextImpl.this.addSlots(result, ((CompositeSlot)it).getSlots(), visited);
+						ExecutionContextImpl.this.addSlots(result, ((CompositeSlot)it).getSlots(false), visited);
 					}
 				}
 			}
 		};
 		slots.forEach(_function);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public List<ExecutionSlot> getSlots(final boolean doResolve) {
+		return this.getSlots();
 	}
 
 	/**

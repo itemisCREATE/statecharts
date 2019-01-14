@@ -45,4 +45,12 @@ public interface CompositeSlot extends ExecutionSlot {
 	 */
 	List<ExecutionSlot> getSlots();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model unique="false" doResolveUnique="false"
+	 * @generated
+	 */
+	List<ExecutionSlot> getSlots(boolean doResolve);
+
 } // CompositeSlot
