@@ -1,4 +1,4 @@
-GeneratorModel for yakindu::cpp {
+GeneratorModel for yakindu::c {
 	statechart ConstantsVariation {
 		feature Outlet {
 			targetProject = "gtests"
