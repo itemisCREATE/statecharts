@@ -316,6 +316,34 @@ GeneratorModel for sctunit::c {
 		}
 	}
 	
+	test ConstantsVariationTests{
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "gtests/ConstantsVariationTest"
+			libraryTargetFolder = "libraryTarget"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = true
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}	
+	}
+	
 	test  ConstOnlyInternalScope {
 
 		feature Outlet {
