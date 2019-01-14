@@ -205,7 +205,7 @@ Statechart {
 	 * @generated NOT
 	 */
 	public EList<Reaction> getReactions() {
-		EList<Reaction> result = new BasicInternalEList<>(
+		EList<Reaction> result = new BasicInternalEList<Reaction>(
 				Reaction.class);
 		result.addAll(getLocalReactions());
 		return result;
@@ -218,12 +218,12 @@ Statechart {
 	 */
 	@Override
 	public EList<Reaction> getLocalReactions() {
-		EList<Reaction> result = new BasicEList<>();
+		EList<Reaction> result = new BasicEList<Reaction>();
 		EList<Scope> scopes = getScopes();
 		for (Scope scope : scopes) {
 			result.addAll(scope.getReactions());
 		}
-		return new EcoreEList.UnmodifiableEList<>(this,
+		return new EcoreEList.UnmodifiableEList<Reaction>(this,
 				SGraphPackage.Literals.REACTIVE_ELEMENT__LOCAL_REACTIONS, result.size(), result.toArray());
 	}
 	
@@ -234,7 +234,7 @@ Statechart {
 	@Override
 	public EList<Scope> getScopes() {
 		if (scopes == null) {
-			scopes = new EObjectContainmentEList.Resolving<>(Scope.class, this, SGraphPackage.STATECHART__SCOPES);
+			scopes = new EObjectContainmentEList.Resolving<Scope>(Scope.class, this, SGraphPackage.STATECHART__SCOPES);
 		}
 		return scopes;
 	}
@@ -267,7 +267,7 @@ Statechart {
 	@Override
 	public EList<Region> getRegions() {
 		if (regions == null) {
-			regions = new EObjectContainmentWithInverseEList.Resolving<>(Region.class, this, SGraphPackage.STATECHART__REGIONS, SGraphPackage.REGION__COMPOSITE);
+			regions = new EObjectContainmentWithInverseEList.Resolving<Region>(Region.class, this, SGraphPackage.STATECHART__REGIONS, SGraphPackage.REGION__COMPOSITE);
 		}
 		return regions;
 	}
@@ -345,7 +345,7 @@ Statechart {
 	@Override
 	public EList<Annotation> getAnnotations() {
 		if (annotations == null) {
-			annotations = new EObjectContainmentEList<>(Annotation.class, this, SGraphPackage.STATECHART__ANNOTATIONS);
+			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, SGraphPackage.STATECHART__ANNOTATIONS);
 		}
 		return annotations;
 	}
@@ -692,7 +692,7 @@ Statechart {
 	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
-		
+
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (namespace: ");
 		result.append(namespace);

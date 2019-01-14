@@ -38,6 +38,7 @@ import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.sexec.Reaction
 import org.yakindu.sct.model.sexec.Method
+import org.yakindu.sct.model.sexec.ExecutionEntry
 
 class StepDepthComparator implements Comparator<Step> {
 	@Inject
@@ -382,6 +383,10 @@ class DefaultNamingService implements INamingService {
 
 	def protected dispatch String elementName(ExecutionNode it) {
 		return provider.getFullyQualifiedName(it).skipFirst(2).toString(separator.toString)
+	}
+	
+	def protected dispatch String elementName(ExecutionEntry it) {
+		return provider.getFullyQualifiedName(it).skipFirst(1).toString(separator.toString)
 	}
 
 	// TODO: we should merge the region/vertex case into this base implementation; we should check whether it is used in any case at all (otherwise it could be replaced with the body of vertexOrRegionName)

@@ -377,29 +377,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.PackageMember} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected PackageMemberItemProvider packageMemberItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.base.types.PackageMember}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createPackageMemberAdapter() {
-		if (packageMemberItemProvider == null) {
-			packageMemberItemProvider = new PackageMemberItemProvider(this);
-		}
-
-		return packageMemberItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.Domain} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -538,6 +515,52 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.TypedDeclaration} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TypedDeclarationItemProvider typedDeclarationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.TypedDeclaration}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTypedDeclarationAdapter() {
+		if (typedDeclarationItemProvider == null) {
+			typedDeclarationItemProvider = new TypedDeclarationItemProvider(this);
+		}
+
+		return typedDeclarationItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.MetaComposite} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MetaCompositeItemProvider metaCompositeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.MetaComposite}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createMetaCompositeAdapter() {
+		if (metaCompositeItemProvider == null) {
+			metaCompositeItemProvider = new MetaCompositeItemProvider(this);
+		}
+
+		return metaCompositeItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -649,13 +672,14 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		if (enumeratorItemProvider != null) enumeratorItemProvider.dispose();
 		if (typeParameterItemProvider != null) typeParameterItemProvider.dispose();
 		if (genericElementItemProvider != null) genericElementItemProvider.dispose();
-		if (packageMemberItemProvider != null) packageMemberItemProvider.dispose();
 		if (domainItemProvider != null) domainItemProvider.dispose();
 		if (typeAliasItemProvider != null) typeAliasItemProvider.dispose();
 		if (annotationItemProvider != null) annotationItemProvider.dispose();
 		if (annotatableElementItemProvider != null) annotatableElementItemProvider.dispose();
 		if (arrayTypeSpecifierItemProvider != null) arrayTypeSpecifierItemProvider.dispose();
 		if (annotationTypeItemProvider != null) annotationTypeItemProvider.dispose();
+		if (typedDeclarationItemProvider != null) typedDeclarationItemProvider.dispose();
+		if (metaCompositeItemProvider != null) metaCompositeItemProvider.dispose();
 	}
 
 }

@@ -29,12 +29,10 @@ public class StateNamesAreUniqueValidationHelper extends STextNamesAreUniqueVali
 	}
 
 	@Override
-	protected void validateEqualSimpleName(IEObjectDescription description, IEObjectDescription doublet,
+	protected void duplicateLastElement(IEObjectDescription description, IEObjectDescription doublet,
 			ValidationMessageAcceptor acceptor) {
-		if (inSameResource(doublet, description)
-				&& description.getEClass() == SGraphPackage.Literals.STATE
-				&& doublet.getEClass() == SGraphPackage.Literals.STATE
-				&& shouldValidate(description)) {
+		if (inSameResource(doublet, description) && description.getEClass() == SGraphPackage.Literals.STATE
+				&& doublet.getEClass() == SGraphPackage.Literals.STATE && shouldValidate(description)) {
 			createDuplicateStateNameError(description, acceptor);
 			createDuplicateStateNameError(doublet, acceptor);
 		}

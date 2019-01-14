@@ -211,6 +211,10 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 				return createFeatureCallAdapter();
 			}
 			@Override
+			public Adapter caseMetaCall(MetaCall object) {
+				return createMetaCallAdapter();
+			}
+			@Override
 			public Adapter caseElementReferenceExpression(ElementReferenceExpression object) {
 				return createElementReferenceExpressionAdapter();
 			}
@@ -597,6 +601,20 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFeatureCallAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.expressions.expressions.MetaCall <em>Meta Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.expressions.expressions.MetaCall
+	 * @generated
+	 */
+	public Adapter createMetaCallAdapter() {
 		return null;
 	}
 

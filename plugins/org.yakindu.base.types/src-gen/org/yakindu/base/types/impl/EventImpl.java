@@ -26,7 +26,7 @@ import org.yakindu.base.types.TypesPackage;
  *
  * @generated
  */
-public class EventImpl extends DeclarationImpl implements Event {
+public class EventImpl extends TypedDeclarationImpl implements Event {
 	/**
 	 * The default value of the '{@link #getDirection() <em>Direction</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -153,7 +153,7 @@ public class EventImpl extends DeclarationImpl implements Event {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (direction: ");
 		result.append(direction);
 		result.append(')');

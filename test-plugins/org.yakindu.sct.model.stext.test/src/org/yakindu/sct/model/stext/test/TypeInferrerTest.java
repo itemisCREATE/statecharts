@@ -1093,4 +1093,26 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		expectNoErrors("b = owner.overloaded(true)", scopes);
 		assertTrue(isBooleanType(inferTypeResultForExpression("b = owner.overloaded(true)", scopes).getType()));
 	}
+	
+	@Test
+	public void testSubTypeOfGenericType() {
+		String scope = ""
+				+ "internal "
+				+ "var i : integer "
+				+ "var b : boolean "
+				+ "var st : SubTypeOfGenericType<integer> "
+				+ "var sst : SubSubTypeOfGenericType ";
+		
+		expectNoErrors("i = st.get()", scope);
+		assertTrue(isIntegerType(inferTypeResultForExpression("st.get()", scope).getType()));
+		
+		expectNoErrors("st.add(i)", scope);
+		assertTrue(isVoidType(inferTypeResultForExpression("st.add(i)", scope).getType()));
+		
+		expectNoErrors("b = sst.get()", scope);
+		assertTrue(isBooleanType(inferTypeResultForExpression("sst.get()", scope).getType()));
+		
+		expectNoErrors("sst.add(b)", scope);
+		assertTrue(isVoidType(inferTypeResultForExpression("sst.add(b)", scope).getType()));
+	}
 }

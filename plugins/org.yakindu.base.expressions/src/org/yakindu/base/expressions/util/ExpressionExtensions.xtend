@@ -12,18 +12,24 @@
 package org.yakindu.base.expressions.util
 
 import com.google.common.collect.Lists
+import com.google.inject.Inject
 import java.util.Collections
 import java.util.List
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.Expression
-import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 
 /**
  * Thomas Kutz - Initial API and contribution
  */
 class ExpressionExtensions {
+
+	@Inject
+	protected extension IQualifiedNameProvider
 
 	/**
 	 * Transforms a feature call to its call stack by traversing through the owner hierarchy
@@ -58,5 +64,21 @@ class ExpressionExtensions {
 	
 	def dispatch EObject featureOrReference(ElementReferenceExpression it) {
 		reference
+	}
+	
+	/**
+	 * Converts a feature call to a qualified text representation, e.g. for x.y and x comes from a package a.b, this will return a.b.x.y.
+	 */
+	def dispatch String toText(FeatureCall call) {
+		call.owner.toText + "." + call.feature.name
+	}
+	
+	def dispatch String toText(ElementReferenceExpression exp) {
+		exp.reference.fullyQualifiedName.toString
+	}
+	
+	def dispatch String toText(Expression exp) {
+		val node = NodeModelUtils.getNode(exp)
+		return if(node !== null) node.text.trim else exp.toString
 	}
 }

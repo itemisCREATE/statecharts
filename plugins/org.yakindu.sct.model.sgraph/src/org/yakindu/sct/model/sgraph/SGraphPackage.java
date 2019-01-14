@@ -1212,24 +1212,6 @@ public interface SGraphPackage extends EPackage {
 	int IMPORT_DECLARATION = 21;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPORT_DECLARATION__TYPE = TypesPackage.DECLARATION__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPORT_DECLARATION__TYPE_SPECIFIER = TypesPackage.DECLARATION__TYPE_SPECIFIER;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1257,13 +1239,13 @@ public interface SGraphPackage extends EPackage {
 	int IMPORT_DECLARATION__ANNOTATION_INFO = TypesPackage.DECLARATION__ANNOTATION_INFO;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPORT_DECLARATION__ID = TypesPackage.DECLARATION__ID;
+	int IMPORT_DECLARATION__META_FEATURES = TypesPackage.DECLARATION__META_FEATURES;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -1273,6 +1255,15 @@ public interface SGraphPackage extends EPackage {
 	 * @ordered
 	 */
 	int IMPORT_DECLARATION__STATIC = TypesPackage.DECLARATION__STATIC;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_DECLARATION__ID = TypesPackage.DECLARATION__ID;
 
 	/**
 	 * The feature id for the '<em><b>Declaration</b></em>' reference.

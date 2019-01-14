@@ -14,19 +14,19 @@ package org.yakindu.sct.simulation.core.sexec.container
 import java.util.Stack
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.GenericElement
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.TypeParameter
-import org.yakindu.base.types.TypedElement
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult
 import org.yakindu.sct.model.sruntime.ExecutionSlot
 import org.yakindu.sct.model.sruntime.SRuntimeFactory
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.yakindu.base.types.typesystem.ITypeSystem.ANY
-import org.yakindu.base.types.EnumerationType
 
 /**
  * Execution context initializer which recursively builds composite slots for variables with complex types.
@@ -62,14 +62,14 @@ class ComplexTypeAwareContextInitializer extends DefaultExecutionContextInitiali
 		slot
 	}
 
-	def ExecutionSlot createExecutionSlotFor(TypedElement element) {
+	def ExecutionSlot createExecutionSlotFor(Declaration element) {
 		val inferenceResult = element.infer
 		val varType = inferenceResult.type
 
 		transformByType(varType, element, inferenceResult)
 	}
 
-	def protected dispatch ExecutionSlot transformByType(ComplexType type, TypedElement element,
+	def protected dispatch ExecutionSlot transformByType(ComplexType type, Declaration element,
 		InferenceResult inferenceResult) {
 		createCompositeSlot => [
 			it.type = type
@@ -87,7 +87,7 @@ class ComplexTypeAwareContextInitializer extends DefaultExecutionContextInitiali
 		]
 	}
 
-	def protected dispatch ExecutionSlot transformByType(TypeParameter type, TypedElement element,
+	def protected dispatch ExecutionSlot transformByType(TypeParameter type, Declaration element,
 		InferenceResult inferenceResult) {
 		val typeParameterInferenceResult = inferTypeParameter(type, inferenceResult)
 		val inferred = typeParameterInferenceResult.type
@@ -103,7 +103,7 @@ class ComplexTypeAwareContextInitializer extends DefaultExecutionContextInitiali
 		}
 	}
 	
-	def protected dispatch ExecutionSlot transformByType(EnumerationType type, TypedElement element,
+	def protected dispatch ExecutionSlot transformByType(EnumerationType type, Declaration element,
 		InferenceResult inferenceResult) {
 		createExecutionVariable => [
 			it.type = type
@@ -111,7 +111,7 @@ class ComplexTypeAwareContextInitializer extends DefaultExecutionContextInitiali
 		]
 	}
 
-	def protected dispatch ExecutionSlot transformByType(Type type, TypedElement element,
+	def protected dispatch ExecutionSlot transformByType(Type type, Declaration element,
 		InferenceResult inferenceResult) {
 		createExecutionVariable => [
 			it.type = type
@@ -129,13 +129,13 @@ class ComplexTypeAwareContextInitializer extends DefaultExecutionContextInitiali
 		}
 	}
 
-	def protected init(ExecutionSlot it, TypedElement variable) {
+	def protected init(ExecutionSlot it, Declaration variable) {
 		name = variable.fullyQualifiedName.lastSegment
 		fqName = variable.fullyQualifiedName.toString
 		value = initialValue(type, variable)
 	}
 
-	def protected initialValue(Type slotType, TypedElement variable) {
+	def protected initialValue(Type slotType, Declaration variable) {
 		val PropertyInitialValueAdapter adapter = EcoreUtil.getExistingAdapter(variable,
 			PropertyInitialValueAdapter) as PropertyInitialValueAdapter
 		return adapter?.initialValue?.value ?: slotType?.defaultValue

@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.yakindu.base.expressions.ExpressionsRuntimeModule;
 import org.yakindu.base.expressions.interpreter.IExpressionInterpreter;
+import org.yakindu.sct.model.sgen.*;
 import org.yakindu.sct.model.sgen.DeprecatableElement;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
