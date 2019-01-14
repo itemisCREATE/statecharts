@@ -17,9 +17,6 @@ import static org.yakindu.sct.generator.cpp.features.CPPFeatureConstants.FEATURE
 import static org.yakindu.sct.generator.cpp.features.CPPFeatureConstants.PARAMETER_INCLUDES_USE_RELATIVE_PATHS;
 import static org.yakindu.sct.model.sexec.transformation.IModelSequencer.ADD_TRACES;
 
-import java.util.List;
-import java.util.Map;
-
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.sct.generator.c.DefaultGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations;
@@ -60,7 +57,6 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 
 import com.google.inject.Binder;
-import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.Multibinder;
 import com.google.inject.name.Names;
 
@@ -80,8 +76,6 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		includeBinder = Multibinder.newSetBinder(binder, IncludeProvider.class);
 		headerSourceProviderBinder = Multibinder.newSetBinder(binder, ISourceFragment.class, Names.named("Header"));
 		implSourceProviderBinder = Multibinder.newSetBinder(binder, ISourceFragment.class, Names.named("Impl"));
-
-		bindGeneratorContributions(binder);
 
 		binder.bind(IModelSequencer.class).to(ModelSequencer.class);
 		binder.bind(BehaviorMapping.class).to(org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping.class);
@@ -164,12 +158,5 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		} else {
 			return separator;
 		}
-	}
-
-	protected void bindGeneratorContributions(Binder binder) {
-		Map<String, List<Class<?>>> generatorContributions = CodeGeneratorFragmentProvider
-				.getGeneratorContributions(getClass().getPackage().getName());
-		binder.bind(new TypeLiteral<Map<String, List<Class<?>>>>() {
-		}).toInstance(generatorContributions);
 	}
 }
