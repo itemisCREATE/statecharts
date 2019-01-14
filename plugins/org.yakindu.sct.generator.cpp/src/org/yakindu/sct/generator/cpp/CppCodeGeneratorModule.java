@@ -37,6 +37,7 @@ import org.yakindu.sct.generator.core.submodules.lifecycle.IsFinal;
 import org.yakindu.sct.generator.core.submodules.lifecycle.IsStateActive;
 import org.yakindu.sct.generator.core.submodules.lifecycle.RunCycle;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
+import org.yakindu.sct.generator.cpp.CodeGeneratorFragmentProvider.ClassLoadingContext;
 import org.yakindu.sct.generator.cpp.eventdriven.CppEventDrivenIncludeProvider;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenExpressionCode;
 import org.yakindu.sct.generator.cpp.providers.ISourceFragment;
@@ -72,13 +73,16 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 	protected Multibinder<IncludeProvider> includeBinder;
 	protected Multibinder<ISourceFragment> headerSourceProviderBinder;
 	protected Multibinder<ISourceFragment> implSourceProviderBinder;
-	protected Multibinder<String> packageNames;
+	protected Multibinder<CodeGeneratorFragmentProvider.ClassLoadingContext> packages;
 
 	@Override
 	public void configure(GeneratorEntry entry, Binder binder) {
 		includeBinder = Multibinder.newSetBinder(binder, IncludeProvider.class);
-		packageNames = Multibinder.newSetBinder(binder, String.class, Names.named(NAMED_PACKAGES));
-		packageNames.addBinding().toInstance("org.yakindu.sct.generator.cpp");
+		packages = Multibinder.newSetBinder(binder, ClassLoadingContext.class,
+				Names.named(NAMED_PACKAGES));
+		
+		packages.addBinding()
+				.toInstance(new ClassLoadingContext(getClass().getClassLoader(), "org.yakindu.sct.generator.cpp"));
 		
 		binder.bind(IModelSequencer.class).to(ModelSequencer.class);
 		binder.bind(BehaviorMapping.class).to(org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping.class);

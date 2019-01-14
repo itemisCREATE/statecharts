@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.generator.cpp;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -40,18 +41,19 @@ import com.google.inject.name.Named;
 public class CodeGeneratorFragmentProvider {
 	@Inject
 	Injector injector;
-
+	
 	@Inject
 	@Named(CppCodeGeneratorModule.NAMED_PACKAGES)
-	protected Set<String> packageNames;
-
+	protected Set<ClassLoadingContext> packages;
+	
 	/**
 	 * Returns a set of objects produced of classes annotated with
 	 * <code>GeneratorContribution</code> and the given <code>target</code>.
 	 */
 	public Set<ISourceFragment> get(String target, ExecutionFlow flow, IGenArtifactConfigurations config) {
 		Map<String, Map<Class<? extends ISourceFragment>, ISourceFragment>> contributionObjects = getContributionObjects();
-		Map<Class<? extends ISourceFragment>, ISourceFragment> result = contributionObjects.get(target);
+		Map<Class<? extends ISourceFragment>, ISourceFragment> result = contributionObjects.getOrDefault(target,
+				new HashMap<>());
 		replaceAndFilterObjects(result, flow, config);
 		TreeSet<ISourceFragment> set = new TreeSet<>(
 				Comparator.comparingInt(it -> ((ISourceFragment) it).orderPriority(flow, config))
@@ -59,15 +61,14 @@ public class CodeGeneratorFragmentProvider {
 		set.addAll(result.values());
 		return set;
 	}
-
+	
 	/**
 	 * Produces a list of all classes in the given package that are annotated
 	 * with <code>GeneratorContribution</code>, grouped and mapped by their
 	 * target.
 	 */
-	public Map<String, List<Class<?>>> getGeneratorContributions(String packageName) {
+	public Map<String, List<Class<?>>> getGeneratorContributions(String packageName, ClassLoader classLoader) {
 		Collection<String> packageClasses = getPackageClasses(packageName);
-		ClassLoader classLoader = CodeGeneratorFragmentProvider.class.getClassLoader();
 		try {
 			Map<String, List<Class<?>>> annotatedClasses = packageClasses.stream()
 					.map(name -> loadClass(classLoader, name)).filter(Objects::nonNull)
@@ -79,33 +80,33 @@ public class CodeGeneratorFragmentProvider {
 			return Collections.emptyMap();
 		}
 	}
-	
+
 	protected void replaceAndFilterObjects(
 			Map<Class<? extends ISourceFragment>, ISourceFragment> objects,
 			ExecutionFlow flow, IGenArtifactConfigurations config) {
-		
+
 		Map<Class<? extends ISourceFragment>, Pair> pairs = objects.entrySet().stream()
 				.map(e -> new Pair(e.getKey(), e.getValue()))
 				.collect(Collectors.toMap((p -> p.key), (p -> p)));
-
+		
 		for(Pair p : pairs.values()) {
 			Class<? extends ISourceFragment> replaces = p.replaces(flow, config);
 			if (pairs.containsKey(replaces)) {
 				pairs.get(replaces).isReplaced = true;
 			}
 		}
-
+		
 		for (Pair p : pairs.values()) {
 			if (p.isReplaced || !p.object.isNeeded(flow, config)) {
 				objects.remove(p.key);
 			}
 		}
 	}
-
+	
 	protected Map<String, Map<Class<? extends ISourceFragment>, ISourceFragment>> getContributionObjects() {
 		Map<String, List<Class<?>>> classes = new HashMap<>();
-		for (String packageName : packageNames) {
-			classes.putAll(getGeneratorContributions(packageName));
+		for (ClassLoadingContext context : packages) {
+			mergeMaps(classes, getGeneratorContributions(context.packageName, context.loader));
 		}
 		Map<String, Map<Class<? extends ISourceFragment>, ISourceFragment>> result = new HashMap<>();
 		for (Entry<String, List<Class<?>>> category : classes.entrySet()) {
@@ -121,10 +122,10 @@ public class CodeGeneratorFragmentProvider {
 			}
 			result.put(category.getKey(), objects);
 		}
-		
+
 		return result;
 	}
-
+	
 	protected Class<?> loadClass(ClassLoader loader, String name) {
 		try {
 			return loader.loadClass(name);
@@ -133,35 +134,41 @@ public class CodeGeneratorFragmentProvider {
 			return null;
 		}
 	}
-	
+
 	protected String getContributionTarget(Class<?> cls) {
 		GeneratorContribution contribution = cls.getAnnotation(GeneratorContribution.class);
 		return contribution.value();
 	}
-
+	
 	protected Collection<String> getPackageClasses(String packageName) {
 		String path = "/" + packageName.replace(".", "/");
-		
+
 		Bundle bundle = Platform.getBundle(packageName);
 		BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
-
+		
 		Collection<String> listResources = bundleWiring.listResources(path, "*.class",
 				BundleWiring.LISTRESOURCES_RECURSE);
 		List<String> classNames = listResources.stream().map(s -> s.replace(".class", "").replace("/", "."))
 				.collect(Collectors.toList());
 		return classNames;
 	}
-	
+
+	protected void mergeMaps(Map<String, List<Class<?>>> a, Map<String, List<Class<?>>> b) {
+		for (Entry<String, List<Class<?>>> entry : b.entrySet()) {
+			a.computeIfAbsent(entry.getKey(), k -> new ArrayList<>()).addAll(entry.getValue());
+		}
+	}
+
 	public static class Pair {
 		protected Class<? extends ISourceFragment> key;
 		protected ISourceFragment object;
 		protected boolean isReplaced = false;
-		
+
 		public Pair(Class<? extends ISourceFragment> key, ISourceFragment object) {
 			this.key = key;
 			this.object = object;
 		}
-
+		
 		public Class<? extends ISourceFragment> replaces(ExecutionFlow flow,
 				IGenArtifactConfigurations config) {
 			if (object.isNeeded(flow, config)) {
@@ -170,5 +177,21 @@ public class CodeGeneratorFragmentProvider {
 				return null;
 			}
 		}
+	}
+	
+	public static class ClassLoadingContext {
+		protected ClassLoader loader;
+		protected String packageName;
+		
+		public ClassLoadingContext(ClassLoader loader, String packageName) {
+			this.loader = loader;
+			this.packageName = packageName;
+		}
+		
+		@Override
+		public String toString() {
+			return packageName;
+		}
+		
 	}
 }

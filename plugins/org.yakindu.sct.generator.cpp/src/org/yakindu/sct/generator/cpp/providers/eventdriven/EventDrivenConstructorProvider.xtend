@@ -37,7 +37,7 @@ class EventDrivenConstructorProvider extends ConstructorProvider {
 			}
 		]
 		if(needsRunCycleGuard) {
-			toInit.add(runCycleGuard, FALSE_LITERAL)
+			toInit.add(runCycleGuard, "false")
 		}
 		toInit
 	}

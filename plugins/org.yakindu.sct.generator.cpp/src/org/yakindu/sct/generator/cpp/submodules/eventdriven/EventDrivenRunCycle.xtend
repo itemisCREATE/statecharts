@@ -31,12 +31,12 @@ class EventDrivenRunCycle extends LifecycleFunctions implements RunCycle {
 			void «module»::«runCycleFctID»()
 			{
 				«IF needsRunCycleGuard»
-				if («runCycleGuard» == «FALSE_LITERAL»)
+				if («runCycleGuard» == false)
 				{
-					«runCycleGuard» = «TRUE_LITERAL»;
+					«runCycleGuard» = true;
 					«runCycleContent»
 					
-					«runCycleGuard» = «FALSE_LITERAL»;
+					«runCycleGuard» = false;
 				}
 				«ELSE»
 				«runCycleContent»

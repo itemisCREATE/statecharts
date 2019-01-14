@@ -61,9 +61,6 @@ class GenmodelEntriesExtension extends GenmodelEntries {
 	}
 	
 	def inEventQueue(GeneratorEntry it) {
-		if(inEventQueueParameter !== null) {
-			inEventQueueParameter.booleanValue
-		}
-		false
+		inEventQueueParameter?.booleanValue
 	}
 }

@@ -12,6 +12,7 @@ package org.yakindu.sct.generator.cpp.providers
 
 import com.google.inject.Inject
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.generator.cpp.CodeGeneratorFragmentProvider
 import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.generator.cpp.files.StatemachineHeader
@@ -25,10 +26,6 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.stext.stext.InternalScope
-
-import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 
 @GeneratorContribution(StatemachineHeader.HEADER_TARGET)
 class StatemachineClassDeclaration implements ISourceFragment {
@@ -45,17 +42,46 @@ class StatemachineClassDeclaration implements ISourceFragment {
 	@Inject protected extension TracingFunctions
 	@Inject protected extension LifecycleFunctions
 	
+	@Inject protected CodeGeneratorFragmentProvider fragmentProvider
+	
+	public static final String CLASS_PUBLIC_TARGET = StatemachineHeader.HEADER_TARGET + ".Class.Public"
+	public static final String CLASS_PROTECTED_TARGET = StatemachineHeader.HEADER_TARGET + ".Class.Protected"
+	public static final String CLASS_PRIVATE_TARGET = StatemachineHeader.HEADER_TARGET + ".Class.Private"
+	public static final String CLASS_INNER_TARGET = StatemachineHeader.HEADER_TARGET + ".Class.InnerClasses"
+	
 	override get(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
-		generateClass(it, artifactConfigs).generate
+		generateClass(it, artifactConfigs, new ClassDeclaration).generate
 	}
 	
-	def generateClass(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
-		val classDecl = new ClassDeclaration
+	def generateClass(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs, ClassDeclaration classDecl) {
 		classDecl.name(module)
+			.constructorDeclaration()
+			.destructorDeclaration()
 		interfaceExtensions.forEach[classDecl.superType(it)]
-		generatePublicClassmembers(it, classDecl)
-		classDecl.member(entry.innerClassVisibility, generateInnerClasses)
+		
+		fragmentProvider.get(CLASS_PUBLIC_TARGET, it, artifactConfigs).forEach[ fragment | 
+			classDecl.publicMember(fragment.get(it, artifactConfigs))
+		]
+		
+		fragmentProvider.get(CLASS_PROTECTED_TARGET, it, artifactConfigs).forEach[ fragment | 
+			classDecl.protectedMember(fragment.get(it, artifactConfigs))
+		]
+		
+		fragmentProvider.get(CLASS_PRIVATE_TARGET, it, artifactConfigs).forEach[ fragment | 
+			classDecl.privateMember(fragment.get(it, artifactConfigs))
+		]
+		
+		fragmentProvider.get(CLASS_INNER_TARGET, it, artifactConfigs).forEach[ fragment | 
+			classDecl.member(entry.innerClassVisibility, fragment.get(it, artifactConfigs))
+		]
+					
 		classDecl
+	}
+	
+	def protected constructors(ClassDeclaration classDecl) {
+		classDecl
+			.constructorDeclaration()
+			.destructorDeclaration()
 	}
 	
 	def protected getInterfaceExtensions(ExecutionFlow flow) {
@@ -70,108 +96,4 @@ class StatemachineClassDeclaration implements ISourceFragment {
 
 		return interfaces;
 	}
-	
-	def protected generatePublicClassmembers(ExecutionFlow it, ClassDeclaration classDecl) {
-		classDecl
-			.constructorDeclaration()
-			.destructorDeclaration()
-			.publicMember('''
-			«statesEnumDecl»
-			
-			static const «INT_TYPE» «statesCountConst» = «states.size»;
-			
-			«FOR s : it.scopes»«s.createPublicScope»«ENDFOR»
-			
-			«publicFunctionPrototypes»
-			
-			/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
-			«BOOL_TYPE» «stateActiveFctID»(«statesEnumType» state) const;
-			
-			«IF timed»
-				//! number of time events used by the state machine.
-				static const «INT_TYPE» «timeEventsCountConst» = «timeEvents.size»;
-				
-				//! number of time events that can be active at once.
-				static const «INT_TYPE» «timeEventsCountparallelConst» = «(it.sourceElement as Statechart).maxNumberOfParallelTimeEvents»;
-			«ENDIF»
-		''')
-		
-	}
-	
-	def statesEnumDecl(ExecutionFlow it) '''
-		/*! Enumeration of all states */ 
-		typedef enum
-		{
-			«null_state»,
-			«FOR state : states SEPARATOR ","»
-				«state.stateName»
-			«ENDFOR»
-		} «statesEnumType»;
-	'''
-	
-	def protected generateInnerClasses(ExecutionFlow it) {
-		// TODO: Why is anything except the scopes generated in here? 
-		'''
-			«IF (timed || hasOperationCallbacks)»
-				«copyConstructorDecl»
-				«assignmentOperatorDecl»
-			«ENDIF»
-			
-			«FOR s : scopes.filter(InternalScope)»«s.createInterface(new ClassDeclaration).generate»«ENDFOR»
-			
-			«statemachineFields»
-			
-			«prototypes»
-		'''
-	}
-	
-	def protected copyConstructorDecl(ExecutionFlow it) {
-		'''
-			«module»(const «module» &rhs);
-		'''
-	}
-	
-	def protected assignmentOperatorDecl(ExecutionFlow it) {
-		'''
-			«module»& operator=(const «module»&);
-		'''
-	}
-	
-	def statemachineFields(ExecutionFlow it) '''
-		//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
-		static const «USHORT_TYPE» «orthogonalStatesConst» = «stateVector.size»;
-		«IF hasHistory»
-			//! dimension of the state configuration vector for history states
-		static const «USHORT_TYPE» «historyStatesConst» = «historyVector.size»;«ENDIF»
-		
-		«IF timed»
-			«timerInterface»* «timerInstance»;
-			«BOOL_TYPE» «timeEventsInstance»[«timeEventsCountConst»];
-		«ENDIF»
-		
-		«IF entry.tracingUsed»
-			«YSCNamespace»::«traceObserverModule»<«statesEnumType»>* «tracingInstance»;
-		«ENDIF»
-		
-		«statesEnumType» «STATEVECTOR»[«orthogonalStatesConst»];
-		
-		«IF hasHistory»«statesEnumType» «HISTORYVECTOR»[«historyStatesConst»];«ENDIF»
-		«USHORT_TYPE» «STATEVECTOR_POS»;
-		
-		«FOR s : getInterfaces»
-			«s.interfaceName» «s.instance»;
-			«IF s.hasOperations && !entry.useStaticOPC»«s.interfaceOCBName»* «s.OCB_Instance»;«ENDIF»
-		«ENDFOR»
-	'''
-	
-	def protected publicFunctionPrototypes(ExecutionFlow it) '''
-		«IStatemachineFunctions»
-		
-		«IF timed»
-			«timedStatemachineFunctionPrototypes»
-		«ENDIF»
-		«IF entry.tracingUsed»
-			«tracedStatemachineFunctions»
-		«ENDIF»
-	'''
 }
