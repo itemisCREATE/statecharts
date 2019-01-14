@@ -103,7 +103,7 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_r_default() {
-		react_r__entry_Default();
+		react_StatechartActive_r__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -124,7 +124,7 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_r__entry_Default() {
+	private void react_StatechartActive_r__entry_Default() {
 		enterSequence_r_A_default();
 	}
 	

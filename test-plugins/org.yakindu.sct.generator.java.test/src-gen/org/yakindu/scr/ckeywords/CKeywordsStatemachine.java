@@ -807,12 +807,12 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	
 	/* 'default' enter sequence for region auto */
 	private void enterSequence_auto_default() {
-		react_auto__entry_Default();
+		react_CKeywords_auto__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region switch */
 	private void enterSequence_auto_loop_switch_default() {
-		react_auto_loop_switch__entry_Default();
+		react_CKeywords_auto_loop_switch__entry_Default();
 	}
 	
 	/* shallow enterSequence with history in child switch */
@@ -828,7 +828,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	
 	/* 'default' enter sequence for region enum */
 	private void enterSequence_auto_loop_switch_case_enum_default() {
-		react_auto_loop_switch_case_enum__entry_Default();
+		react_CKeywords_auto_loop_switch_case_enum__entry_Default();
 	}
 	
 	/* deep enterSequence with history in child enum */
@@ -891,12 +891,12 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_auto__entry_Default() {
+	private void react_CKeywords_auto__entry_Default() {
 		enterSequence_auto_char_default();
 	}
 	
 	/* Default react sequence for shallow history entry  */
-	private void react_auto_loop_switch__entry_Default() {
+	private void react_CKeywords_auto_loop_switch__entry_Default() {
 		/* Enter the region with shallow history */
 		if (historyVector[0] != State.$NullState$) {
 			shallowEnterSequence_auto_loop_switch();
@@ -906,7 +906,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	}
 	
 	/* Default react sequence for deep history entry  */
-	private void react_auto_loop_switch_case_enum__entry_Default() {
+	private void react_CKeywords_auto_loop_switch_case_enum__entry_Default() {
 		/* Enter the region with deep history */
 		if (historyVector[1] != State.$NullState$) {
 			deepEnterSequence_auto_loop_switch_case_enum();

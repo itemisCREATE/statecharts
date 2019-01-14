@@ -225,7 +225,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_EventDrivenTriggeredByTimeEvent_r_default() {
-		react_EventDrivenTriggeredByTimeEvent_r__entry_Default();
+		react_eventdriven_EventDrivenTriggeredByTimeEvent_r__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -259,7 +259,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_EventDrivenTriggeredByTimeEvent_r__entry_Default() {
+	private void react_eventdriven_EventDrivenTriggeredByTimeEvent_r__entry_Default() {
 		enterSequence_EventDrivenTriggeredByTimeEvent_r_A_default();
 	}
 	

@@ -218,7 +218,7 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_TriggerExpressionPrecedence_main_region_default() {
-		react_TriggerExpressionPrecedence_main_region__entry_Default();
+		react_expressions_TriggerExpressionPrecedence_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -239,7 +239,7 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_TriggerExpressionPrecedence_main_region__entry_Default() {
+	private void react_expressions_TriggerExpressionPrecedence_main_region__entry_Default() {
 		enterSequence_TriggerExpressionPrecedence_main_region_A_default();
 	}
 	

@@ -359,12 +359,12 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	
 	/* 'default' enter sequence for region r1 */
 	private void enterSequence_localEvents_r1_default() {
-		react_localEvents_r1__entry_Default();
+		react_eventdriven_localEvents_r1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r2 */
 	private void enterSequence_localEvents_r2_default() {
-		react_localEvents_r2__entry_Default();
+		react_eventdriven_localEvents_r2__entry_Default();
 	}
 	
 	/* Default exit sequence for state A1 */
@@ -484,12 +484,12 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_localEvents_r1__entry_Default() {
+	private void react_eventdriven_localEvents_r1__entry_Default() {
 		enterSequence_localEvents_r1_Comp1_r_A1_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_localEvents_r2__entry_Default() {
+	private void react_eventdriven_localEvents_r2__entry_Default() {
 		enterSequence_localEvents_r2_Comp2_r_A2_default();
 	}
 	

@@ -514,12 +514,12 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	
 	/* 'default' enter sequence for region mr */
 	private void enterSequence_mr_default() {
-		react_mr__entry_Default();
+		react_PerformanceTest_mr__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r1 */
 	private void enterSequence_mr_B_r1_default() {
-		react_mr_B_r1__entry_Default();
+		react_PerformanceTest_mr_B_r1__entry_Default();
 	}
 	
 	/* shallow enterSequence with history in child r1 */
@@ -556,7 +556,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	
 	/* 'default' enter sequence for region r2 */
 	private void enterSequence_mr_B_r2_default() {
-		react_mr_B_r2__entry_Default();
+		react_PerformanceTest_mr_B_r2__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -798,12 +798,12 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_mr__entry_Default() {
+	private void react_PerformanceTest_mr__entry_Default() {
 		enterSequence_mr_A_default();
 	}
 	
 	/* Default react sequence for shallow history entry  */
-	private void react_mr_B_r1__entry_Default() {
+	private void react_PerformanceTest_mr_B_r1__entry_Default() {
 		/* Enter the region with shallow history */
 		if (historyVector[0] != State.$NullState$) {
 			shallowEnterSequence_mr_B_r1();
@@ -813,7 +813,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_mr_B_r2__entry_Default() {
+	private void react_PerformanceTest_mr_B_r2__entry_Default() {
 		enterSequence_mr_B_r2_S_default();
 	}
 	

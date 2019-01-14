@@ -440,27 +440,27 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	
 	/* 'default' enter sequence for region main region1 */
 	private void enterSequence_main_region1_default() {
-		react_main_region1__entry_Default();
+		react_ValuedEvents_main_region1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region integer_region */
 	private void enterSequence_integer_region_default() {
-		react_integer_region__entry_Default();
+		react_ValuedEvents_integer_region__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region boolean_region */
 	private void enterSequence_boolean_region_default() {
-		react_boolean_region__entry_Default();
+		react_ValuedEvents_boolean_region__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region real_region */
 	private void enterSequence_real_region_default() {
-		react_real_region__entry_Default();
+		react_ValuedEvents_real_region__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region string_region */
 	private void enterSequence_string_region_default() {
-		react_string_region__entry_Default();
+		react_ValuedEvents_string_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -621,27 +621,27 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region1__entry_Default() {
+	private void react_ValuedEvents_main_region1__entry_Default() {
 		enterSequence_main_region1_A_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_integer_region__entry_Default() {
+	private void react_ValuedEvents_integer_region__entry_Default() {
 		enterSequence_integer_region_B_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_boolean_region__entry_Default() {
+	private void react_ValuedEvents_boolean_region__entry_Default() {
 		enterSequence_boolean_region_B_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_real_region__entry_Default() {
+	private void react_ValuedEvents_real_region__entry_Default() {
 		enterSequence_real_region_B_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_string_region__entry_Default() {
+	private void react_ValuedEvents_string_region__entry_Default() {
 		enterSequence_string_region_B_default();
 	}
 	

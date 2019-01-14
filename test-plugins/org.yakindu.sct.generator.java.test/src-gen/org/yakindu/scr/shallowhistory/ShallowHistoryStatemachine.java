@@ -305,12 +305,12 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	
 	/* 'default' enter sequence for region mainRegion */
 	private void enterSequence_mainRegion_default() {
-		react_mainRegion__entry_Default();
+		react_ShallowHistory_mainRegion__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region null */
 	private void enterSequence_mainRegion_State2__region0_default() {
-		react_mainRegion_State2__region0__entry_Default();
+		react_ShallowHistory_mainRegion_State2__region0__entry_Default();
 	}
 	
 	/* shallow enterSequence with history in child null */
@@ -338,12 +338,12 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	
 	/* 'default' enter sequence for region null */
 	private void enterSequence_mainRegion_State2__region0_State4__region0_default() {
-		react_mainRegion_State2__region0_State4__region0__entry_Default();
+		react_ShallowHistory_mainRegion_State2__region0_State4__region0__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region null */
 	private void enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_default() {
-		react_mainRegion_State2__region0_State4__region0_State7__region0__entry_Default();
+		react_ShallowHistory_mainRegion_State2__region0_State4__region0_State7__region0__entry_Default();
 	}
 	
 	/* shallow enterSequence with history in child null */
@@ -492,12 +492,12 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_mainRegion__entry_Default() {
+	private void react_ShallowHistory_mainRegion__entry_Default() {
 		enterSequence_mainRegion_State1_default();
 	}
 	
 	/* Default react sequence for shallow history entry  */
-	private void react_mainRegion_State2__region0__entry_Default() {
+	private void react_ShallowHistory_mainRegion_State2__region0__entry_Default() {
 		/* Enter the region with shallow history */
 		if (historyVector[0] != State.$NullState$) {
 			shallowEnterSequence_mainRegion_State2__region0();
@@ -507,12 +507,12 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_mainRegion_State2__region0_State4__region0__entry_Default() {
+	private void react_ShallowHistory_mainRegion_State2__region0_State4__region0__entry_Default() {
 		enterSequence_mainRegion_State2__region0_State4__region0_State6_default();
 	}
 	
 	/* Default react sequence for shallow history entry  */
-	private void react_mainRegion_State2__region0_State4__region0_State7__region0__entry_Default() {
+	private void react_ShallowHistory_mainRegion_State2__region0_State4__region0_State7__region0__entry_Default() {
 		/* Enter the region with shallow history */
 		if (historyVector[1] != State.$NullState$) {
 			shallowEnterSequence_mainRegion_State2__region0_State4__region0_State7__region0();

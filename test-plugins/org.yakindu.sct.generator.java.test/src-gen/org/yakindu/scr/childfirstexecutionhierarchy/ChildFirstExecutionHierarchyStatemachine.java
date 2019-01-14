@@ -359,17 +359,17 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_ChildFirstExecutionHierarchy_r_default() {
-		react_ChildFirstExecutionHierarchy_r__entry_Default();
+		react_executionorder_ChildFirstExecutionHierarchy_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_ChildFirstExecutionHierarchy_r_A_r_default() {
-		react_ChildFirstExecutionHierarchy_r_A_r__entry_Default();
+		react_executionorder_ChildFirstExecutionHierarchy_r_A_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_ChildFirstExecutionHierarchy_r_A_r_AA_r_default() {
-		react_ChildFirstExecutionHierarchy_r_A_r_AA_r__entry_Default();
+		react_executionorder_ChildFirstExecutionHierarchy_r_A_r_AA_r__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -426,17 +426,17 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstExecutionHierarchy_r__entry_Default() {
+	private void react_executionorder_ChildFirstExecutionHierarchy_r__entry_Default() {
 		enterSequence_ChildFirstExecutionHierarchy_r_A_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstExecutionHierarchy_r_A_r__entry_Default() {
+	private void react_executionorder_ChildFirstExecutionHierarchy_r_A_r__entry_Default() {
 		enterSequence_ChildFirstExecutionHierarchy_r_A_r_AA_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstExecutionHierarchy_r_A_r_AA_r__entry_Default() {
+	private void react_executionorder_ChildFirstExecutionHierarchy_r_A_r_AA_r__entry_Default() {
 		enterSequence_ChildFirstExecutionHierarchy_r_A_r_AA_r_AAA_default();
 	}
 	

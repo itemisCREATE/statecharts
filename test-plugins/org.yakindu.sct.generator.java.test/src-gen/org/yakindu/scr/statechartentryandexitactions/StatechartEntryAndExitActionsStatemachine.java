@@ -184,7 +184,7 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_StatechartEntryAndExitActions_main_region_default() {
-		react_StatechartEntryAndExitActions_main_region__entry_Default();
+		react_statechartactions_StatechartEntryAndExitActions_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -205,7 +205,7 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_StatechartEntryAndExitActions_main_region__entry_Default() {
+	private void react_statechartactions_StatechartEntryAndExitActions_main_region__entry_Default() {
 		enterSequence_StatechartEntryAndExitActions_main_region_A_default();
 	}
 	

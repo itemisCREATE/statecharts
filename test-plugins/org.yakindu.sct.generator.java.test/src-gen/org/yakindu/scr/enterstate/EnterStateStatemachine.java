@@ -193,17 +193,17 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_r_default() {
-		react_r__entry_Default();
+		react_EnterState_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_r_B_r_default() {
-		react_r_B_r__entry_Default();
+		react_EnterState_r_B_r__entry_Default();
 	}
 	
 	/* 'f' enter sequence for region r */
 	private void enterSequence_r_B_r_f() {
-		react_r_B_r_f();
+		react_EnterState_r_B_r_f();
 	}
 	
 	/* Default exit sequence for state A */
@@ -256,17 +256,17 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_r__entry_Default() {
+	private void react_EnterState_r__entry_Default() {
 		enterSequence_r_A_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_r_B_r__entry_Default() {
+	private void react_EnterState_r_B_r__entry_Default() {
 		enterSequence_r_B_r_E_default();
 	}
 	
 	/* Default react sequence for initial entry f */
-	private void react_r_B_r_f() {
+	private void react_EnterState_r_B_r_f() {
 		enterSequence_r_B_r_F_default();
 	}
 	

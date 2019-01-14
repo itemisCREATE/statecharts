@@ -210,12 +210,12 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_OperationsWithoutBraces_main_region__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region another region */
 	private void enterSequence_another_region_default() {
-		react_another_region__entry_Default();
+		react_OperationsWithoutBraces_another_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -307,12 +307,12 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_OperationsWithoutBraces_main_region__entry_Default() {
 		enterSequence_main_region_A_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_another_region__entry_Default() {
+	private void react_OperationsWithoutBraces_another_region__entry_Default() {
 		enterSequence_another_region_A_default();
 	}
 	

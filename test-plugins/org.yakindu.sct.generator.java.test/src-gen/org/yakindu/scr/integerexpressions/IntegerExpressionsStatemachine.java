@@ -669,7 +669,7 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_IntegerExpressions_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state StateA */
@@ -699,7 +699,7 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_IntegerExpressions_main_region__entry_Default() {
 		enterSequence_main_region_StateA_default();
 	}
 	

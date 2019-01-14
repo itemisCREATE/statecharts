@@ -1274,17 +1274,17 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	
 	/* 'default' enter sequence for region goto */
 	private void enterSequence_goto_default() {
-		react_goto__entry_Default();
+		react_JavaKeywords_goto__entry_Default();
 	}
 	
 	/* 'try' enter sequence for region volatile */
 	private void enterSequence_goto_void_volatile_try() {
-		react_goto_void_volatile_try();
+		react_JavaKeywords_goto_void_volatile_try();
 	}
 	
 	/* 'default' enter sequence for region volatile */
 	private void enterSequence_goto_void_volatile_default() {
-		react_goto_void_volatile__entry_Default();
+		react_JavaKeywords_goto_void_volatile__entry_Default();
 	}
 	
 	/* shallow enterSequence with history in child volatile */
@@ -1303,12 +1303,12 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	
 	/* 'this' enter sequence for region throw */
 	private void enterSequence_goto_void_volatile_transient_throw_this() {
-		react_goto_void_volatile_transient_throw_this();
+		react_JavaKeywords_goto_void_volatile_transient_throw_this();
 	}
 	
 	/* 'default' enter sequence for region throw */
 	private void enterSequence_goto_void_volatile_transient_throw_default() {
-		react_goto_void_volatile_transient_throw__entry_Default();
+		react_JavaKeywords_goto_void_volatile_transient_throw__entry_Default();
 	}
 	
 	/* deep enterSequence with history in child throw */
@@ -1392,12 +1392,12 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_goto__entry_Default() {
+	private void react_JavaKeywords_goto__entry_Default() {
 		enterSequence_goto_abstract_default();
 	}
 	
 	/* Default react sequence for shallow history entry try */
-	private void react_goto_void_volatile_try() {
+	private void react_JavaKeywords_goto_void_volatile_try() {
 		/* Enter the region with shallow history */
 		if (historyVector[0] != State.$NullState$) {
 			shallowEnterSequence_goto_void_volatile();
@@ -1407,7 +1407,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	}
 	
 	/* Default react sequence for deep history entry this */
-	private void react_goto_void_volatile_transient_throw_this() {
+	private void react_JavaKeywords_goto_void_volatile_transient_throw_this() {
 		/* Enter the region with deep history */
 		if (historyVector[1] != State.$NullState$) {
 			deepEnterSequence_goto_void_volatile_transient_throw();
@@ -1417,12 +1417,12 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_goto_void_volatile_transient_throw__entry_Default() {
+	private void react_JavaKeywords_goto_void_volatile_transient_throw__entry_Default() {
 		enterSequence_goto_void_volatile_transient_throw_false_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_goto_void_volatile__entry_Default() {
+	private void react_JavaKeywords_goto_void_volatile__entry_Default() {
 		enterSequence_goto_void_volatile_transient_default();
 	}
 	

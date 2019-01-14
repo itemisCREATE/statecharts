@@ -339,17 +339,17 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	
 	/* 'default' enter sequence for region r1 */
 	private void enterSequence_EventDrivenInternalEvent_r1_default() {
-		react_EventDrivenInternalEvent_r1__entry_Default();
+		react_eventdriven_EventDrivenInternalEvent_r1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r2 */
 	private void enterSequence_EventDrivenInternalEvent_r2_default() {
-		react_EventDrivenInternalEvent_r2__entry_Default();
+		react_eventdriven_EventDrivenInternalEvent_r2__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region check */
 	private void enterSequence_EventDrivenInternalEvent_check_default() {
-		react_EventDrivenInternalEvent_check__entry_Default();
+		react_eventdriven_EventDrivenInternalEvent_check__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -431,17 +431,17 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_EventDrivenInternalEvent_r1__entry_Default() {
+	private void react_eventdriven_EventDrivenInternalEvent_r1__entry_Default() {
 		enterSequence_EventDrivenInternalEvent_r1_A_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_EventDrivenInternalEvent_r2__entry_Default() {
+	private void react_eventdriven_EventDrivenInternalEvent_r2__entry_Default() {
 		enterSequence_EventDrivenInternalEvent_r2_C_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_EventDrivenInternalEvent_check__entry_Default() {
+	private void react_eventdriven_EventDrivenInternalEvent_check__entry_Default() {
 		enterSequence_EventDrivenInternalEvent_check_VALID_default();
 	}
 	

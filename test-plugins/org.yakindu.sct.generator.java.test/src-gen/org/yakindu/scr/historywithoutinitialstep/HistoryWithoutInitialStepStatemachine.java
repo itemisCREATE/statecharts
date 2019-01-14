@@ -224,12 +224,12 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_HistoryWithoutInitialStep_main_region__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r1 */
 	private void enterSequence_main_region_B_r1_default() {
-		react_main_region_B_r1__entry_Default();
+		react_HistoryWithoutInitialStep_main_region_B_r1__entry_Default();
 	}
 	
 	/* shallow enterSequence with history in child r1 */
@@ -251,7 +251,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	
 	/* 'default' enter sequence for region null */
 	private void enterSequence_main_region_B_r1_E__region0_default() {
-		react_main_region_B_r1_E__region0__entry_Default();
+		react_HistoryWithoutInitialStep_main_region_B_r1_E__region0__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -337,17 +337,17 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_HistoryWithoutInitialStep_main_region__entry_Default() {
 		enterSequence_main_region_A_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region_B_r1__entry_Default() {
+	private void react_HistoryWithoutInitialStep_main_region_B_r1__entry_Default() {
 		enterSequence_main_region_B_r1_C_default();
 	}
 	
 	/* Default react sequence for shallow history entry he */
-	private void react_main_region_B_r1_he() {
+	private void react_HistoryWithoutInitialStep_main_region_B_r1_he() {
 		/* Enter the region with shallow history */
 		if (historyVector[0] != State.$NullState$) {
 			shallowEnterSequence_main_region_B_r1();
@@ -357,7 +357,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region_B_r1_E__region0__entry_Default() {
+	private void react_HistoryWithoutInitialStep_main_region_B_r1_E__region0__entry_Default() {
 		enterSequence_main_region_B_r1_E__region0_F_default();
 	}
 	
@@ -376,7 +376,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 				} else {
 					if (sCInterface.toHistory) {
 						exitSequence_main_region_A();
-						react_main_region_B_r1_he();
+						react_HistoryWithoutInitialStep_main_region_B_r1_he();
 					} else {
 						did_transition = false;
 					}

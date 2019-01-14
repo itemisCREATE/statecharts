@@ -159,12 +159,12 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_StatechartLocalReactions_main_region__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region region2 */
 	private void enterSequence_region2_default() {
-		react_region2__entry_Default();
+		react_StatechartLocalReactions_region2__entry_Default();
 	}
 	
 	/* Default exit sequence for state S1 */
@@ -211,12 +211,12 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_StatechartLocalReactions_main_region__entry_Default() {
 		enterSequence_main_region_S1_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_region2__entry_Default() {
+	private void react_StatechartLocalReactions_region2__entry_Default() {
 		enterSequence_region2_a_default();
 	}
 	

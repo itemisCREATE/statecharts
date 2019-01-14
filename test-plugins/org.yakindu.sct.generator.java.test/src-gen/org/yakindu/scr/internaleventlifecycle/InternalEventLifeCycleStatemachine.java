@@ -193,12 +193,12 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 	
 	/* 'default' enter sequence for region r1 */
 	private void enterSequence_r1_default() {
-		react_r1__entry_Default();
+		react_InternalEventLifeCycle_r1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r2 */
 	private void enterSequence_r2_default() {
-		react_r2__entry_Default();
+		react_InternalEventLifeCycle_r2__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -254,12 +254,12 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_r1__entry_Default() {
+	private void react_InternalEventLifeCycle_r1__entry_Default() {
 		enterSequence_r1_A_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_r2__entry_Default() {
+	private void react_InternalEventLifeCycle_r2__entry_Default() {
 		enterSequence_r2_C_default();
 	}
 	

@@ -310,17 +310,17 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_r_default() {
-		react_r__entry_Default();
+		react_DeepEntry_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r2 */
 	private void enterSequence_r2_default() {
-		react_r2__entry_Default();
+		react_DeepEntry_r2__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_r2_B_r_default() {
-		react_r2_B_r__entry_Default();
+		react_DeepEntry_r2_B_r__entry_Default();
 	}
 	
 	/* shallow enterSequence with history in child r */
@@ -339,12 +339,12 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_r2_B_r_BA_r_default() {
-		react_r2_B_r_BA_r__entry_Default();
+		react_DeepEntry_r2_B_r_BA_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r3 */
 	private void enterSequence_r3_default() {
-		react_r3__entry_Default();
+		react_DeepEntry_r3__entry_Default();
 	}
 	
 	/* deep enterSequence with history in child r3 */
@@ -520,13 +520,13 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_r__entry_Default() {
+	private void react_DeepEntry_r__entry_Default() {
 		entryAction_r_A();
 		enterSequence_r_A_r_B_default();
 	}
 	
 	/* Default react sequence for shallow history entry  */
-	private void react_r2_B_r__entry_Default() {
+	private void react_DeepEntry_r2_B_r__entry_Default() {
 		/* Enter the region with shallow history */
 		if (historyVector[0] != State.$NullState$) {
 			shallowEnterSequence_r2_B_r();
@@ -538,17 +538,17 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_r2_B_r_BA_r__entry_Default() {
+	private void react_DeepEntry_r2_B_r_BA_r__entry_Default() {
 		enterSequence_r2_B_r_BA_r_BAA_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_r2__entry_Default() {
+	private void react_DeepEntry_r2__entry_Default() {
 		enterSequence_r2_B_default();
 	}
 	
 	/* Default react sequence for deep history entry  */
-	private void react_r3__entry_Default() {
+	private void react_DeepEntry_r3__entry_Default() {
 		/* Enter the region with deep history */
 		if (historyVector[1] != State.$NullState$) {
 			deepEnterSequence_r3();
