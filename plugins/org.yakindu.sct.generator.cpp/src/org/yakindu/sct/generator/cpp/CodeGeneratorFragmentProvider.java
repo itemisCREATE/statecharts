@@ -32,6 +32,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.name.Named;
 
 /**
  * @author rbeckmann
@@ -39,7 +40,11 @@ import com.google.inject.Injector;
 public class CodeGeneratorFragmentProvider {
 	@Inject
 	Injector injector;
-	
+
+	@Inject
+	@Named(CppCodeGeneratorModule.NAMED_PACKAGES)
+	protected Set<String> packageNames;
+
 	/**
 	 * Returns a set of objects produced of classes annotated with
 	 * <code>GeneratorContribution</code> and the given <code>target</code>.
@@ -54,7 +59,7 @@ public class CodeGeneratorFragmentProvider {
 		set.addAll(result.values());
 		return set;
 	}
-	
+
 	/**
 	 * Produces a list of all classes in the given package that are annotated
 	 * with <code>GeneratorContribution</code>, grouped and mapped by their
@@ -74,31 +79,34 @@ public class CodeGeneratorFragmentProvider {
 			return Collections.emptyMap();
 		}
 	}
-
+	
 	protected void replaceAndFilterObjects(
 			Map<Class<? extends ISourceFragment>, ISourceFragment> objects,
 			ExecutionFlow flow, IGenArtifactConfigurations config) {
-
+		
 		Map<Class<? extends ISourceFragment>, Pair> pairs = objects.entrySet().stream()
 				.map(e -> new Pair(e.getKey(), e.getValue()))
 				.collect(Collectors.toMap((p -> p.key), (p -> p)));
-		
+
 		for(Pair p : pairs.values()) {
 			Class<? extends ISourceFragment> replaces = p.replaces(flow, config);
 			if (pairs.containsKey(replaces)) {
 				pairs.get(replaces).isReplaced = true;
 			}
 		}
-		
+
 		for (Pair p : pairs.values()) {
 			if (p.isReplaced || !p.object.isNeeded(flow, config)) {
 				objects.remove(p.key);
 			}
 		}
 	}
-	
+
 	protected Map<String, Map<Class<? extends ISourceFragment>, ISourceFragment>> getContributionObjects() {
-		Map<String, List<Class<?>>> classes = getGeneratorContributions(getClass().getPackage().getName());
+		Map<String, List<Class<?>>> classes = new HashMap<>();
+		for (String packageName : packageNames) {
+			classes.putAll(getGeneratorContributions(packageName));
+		}
 		Map<String, Map<Class<? extends ISourceFragment>, ISourceFragment>> result = new HashMap<>();
 		for (Entry<String, List<Class<?>>> category : classes.entrySet()) {
 			Map<Class<? extends ISourceFragment>, ISourceFragment> objects = new HashMap<>();
@@ -113,10 +121,10 @@ public class CodeGeneratorFragmentProvider {
 			}
 			result.put(category.getKey(), objects);
 		}
-
+		
 		return result;
 	}
-	
+
 	protected Class<?> loadClass(ClassLoader loader, String name) {
 		try {
 			return loader.loadClass(name);
@@ -125,35 +133,35 @@ public class CodeGeneratorFragmentProvider {
 			return null;
 		}
 	}
-
+	
 	protected String getContributionTarget(Class<?> cls) {
 		GeneratorContribution contribution = cls.getAnnotation(GeneratorContribution.class);
 		return contribution.value();
 	}
-	
+
 	protected Collection<String> getPackageClasses(String packageName) {
 		String path = "/" + packageName.replace(".", "/");
-
+		
 		Bundle bundle = Platform.getBundle(packageName);
 		BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
-		
+
 		Collection<String> listResources = bundleWiring.listResources(path, "*.class",
 				BundleWiring.LISTRESOURCES_RECURSE);
 		List<String> classNames = listResources.stream().map(s -> s.replace(".class", "").replace("/", "."))
 				.collect(Collectors.toList());
 		return classNames;
 	}
-
+	
 	public static class Pair {
 		protected Class<? extends ISourceFragment> key;
 		protected ISourceFragment object;
 		protected boolean isReplaced = false;
-
+		
 		public Pair(Class<? extends ISourceFragment> key, ISourceFragment object) {
 			this.key = key;
 			this.object = object;
 		}
-		
+
 		public Class<? extends ISourceFragment> replaces(ExecutionFlow flow,
 				IGenArtifactConfigurations config) {
 			if (object.isNeeded(flow, config)) {
