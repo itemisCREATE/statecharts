@@ -37,7 +37,6 @@ class StatechartEventImpl implements ISourceFragment {
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
 	@Inject extension EventNaming eventNaming
-	@Inject extension CLiterals
 	
 	override get(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
 		'''
