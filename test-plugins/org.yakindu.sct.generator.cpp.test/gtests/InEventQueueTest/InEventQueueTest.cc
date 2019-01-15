@@ -17,7 +17,7 @@
 using namespace ineventqueue;
 
 
-InEventQueue* machine = nullptr;
+InEventQueue* machine = sc_null;
 char nextEvent;
 
 
