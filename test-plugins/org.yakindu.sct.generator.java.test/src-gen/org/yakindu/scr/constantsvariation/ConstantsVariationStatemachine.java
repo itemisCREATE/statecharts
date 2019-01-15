@@ -1,67 +1,56 @@
-package org.yakindu.scr.alwaysoncycle;
+package org.yakindu.scr.constantsvariation;
 
 
-public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
+public class ConstantsVariationStatemachine implements IConstantsVariationStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
-		private boolean e;
-		
-		public void raiseE() {
-			e = true;
+		public boolean getB2() {
+			return b2;
 		}
 		
-		private long value;
-		
-		public long getValue() {
-			return value;
+		public String getStr2() {
+			return str2;
 		}
 		
-		public void setValue(long value) {
-			this.value = value;
+		public double getR2() {
+			return r2;
 		}
 		
-		private boolean v2;
-		
-		public boolean getV2() {
-			return v2;
+		public long getI2() {
+			return i2;
 		}
 		
-		public void setV2(boolean value) {
-			this.v2 = value;
-		}
-		
-		private long x;
-		
-		public long getX() {
-			return x;
-		}
-		
-		public void setX(long value) {
-			this.x = value;
-		}
-		
-		private long y;
-		
-		public long getY() {
-			return y;
-		}
-		
-		public void setY(long value) {
-			this.y = value;
-		}
-		
-		protected void clearEvents() {
-			e = false;
-		}
 	}
 	
 	protected SCInterfaceImpl sCInterface;
+	
+	protected class SCINamedImpl implements SCINamed {
+	
+		public boolean getB() {
+			return b;
+		}
+		
+		public String getStr() {
+			return str;
+		}
+		
+		public double getR() {
+			return r;
+		}
+		
+		public long getI() {
+			return i;
+		}
+		
+	}
+	
+	protected SCINamedImpl sCINamed;
 	
 	private boolean initialized = false;
 	
 	public enum State {
 		main_region_StateA,
-		main_region_StateB,
+		main_region__final_,
 		$NullState$
 	};
 	
@@ -70,8 +59,25 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 	private int nextStateIndex;
 	
 	
-	public AlwaysOncycleStatemachine() {
+	protected boolean getB() {
+		return b;
+	}
+	
+	protected String getStr() {
+		return str;
+	}
+	
+	protected double getR() {
+		return r;
+	}
+	
+	protected long getI() {
+		return i;
+	}
+	
+	public ConstantsVariationStatemachine() {
 		sCInterface = new SCInterfaceImpl();
+		sCINamed = new SCINamedImpl();
 	}
 	
 	public void init() {
@@ -81,13 +87,6 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		}
 		clearEvents();
 		clearOutEvents();
-		sCInterface.setValue(0);
-		
-		sCInterface.setV2(false);
-		
-		sCInterface.setX(0);
-		
-		sCInterface.setY(0);
 	}
 	
 	public void enter() {
@@ -109,8 +108,8 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 			case main_region_StateA:
 				main_region_StateA_react(true);
 				break;
-			case main_region_StateB:
-				main_region_StateB_react(true);
+			case main_region__final_:
+				main_region__final__react(true);
 				break;
 			default:
 				// $NullState$
@@ -130,18 +129,15 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 	}
 	
 	/** 
-	* Always returns 'false' since this state machine can never become final.
-	*
 	* @see IStatemachine#isFinal()
 	*/
 	public boolean isFinal() {
-		return false;
+		return (stateVector[0] == State.main_region__final_);
 	}
 	/**
 	* This method resets the incoming events (time events included).
 	*/
 	protected void clearEvents() {
-		sCInterface.clearEvents();
 	}
 	
 	/**
@@ -158,8 +154,8 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		switch (state) {
 		case main_region_StateA:
 			return stateVector[0] == State.main_region_StateA;
-		case main_region_StateB:
-			return stateVector[0] == State.main_region_StateB;
+		case main_region__final_:
+			return stateVector[0] == State.main_region__final_;
 		default:
 			return false;
 		}
@@ -169,80 +165,51 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		return sCInterface;
 	}
 	
-	public void raiseE() {
-		sCInterface.raiseE();
+	public SCINamed getSCINamed() {
+		return sCINamed;
 	}
 	
-	public long getValue() {
-		return sCInterface.getValue();
+	public boolean getB2() {
+		return sCInterface.getB2();
 	}
 	
-	public void setValue(long value) {
-		sCInterface.setValue(value);
+	public String getStr2() {
+		return sCInterface.getStr2();
 	}
 	
-	public boolean getV2() {
-		return sCInterface.getV2();
+	public double getR2() {
+		return sCInterface.getR2();
 	}
 	
-	public void setV2(boolean value) {
-		sCInterface.setV2(value);
-	}
-	
-	public long getX() {
-		return sCInterface.getX();
-	}
-	
-	public void setX(long value) {
-		sCInterface.setX(value);
-	}
-	
-	public long getY() {
-		return sCInterface.getY();
-	}
-	
-	public void setY(long value) {
-		sCInterface.setY(value);
-	}
-	
-	/* Entry action for state 'StateA'. */
-	private void entryAction_main_region_StateA() {
-		sCInterface.setValue(0);
-	}
-	
-	/* Exit action for state 'StateA'. */
-	private void exitAction_main_region_StateA() {
-		sCInterface.setValue(0);
+	public long getI2() {
+		return sCInterface.getI2();
 	}
 	
 	/* 'default' enter sequence for state StateA */
 	private void enterSequence_main_region_StateA_default() {
-		entryAction_main_region_StateA();
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_StateA;
 	}
 	
-	/* 'default' enter sequence for state StateB */
-	private void enterSequence_main_region_StateB_default() {
+	/* Default enter sequence for state null */
+	private void enterSequence_main_region__final__default() {
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateB;
+		stateVector[0] = State.main_region__final_;
 	}
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_AlwaysOncycle_main_region__entry_Default();
+		react_ConstantsVariation_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state StateA */
 	private void exitSequence_main_region_StateA() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
-		
-		exitAction_main_region_StateA();
 	}
 	
-	/* Default exit sequence for state StateB */
-	private void exitSequence_main_region_StateB() {
+	/* Default exit sequence for final state. */
+	private void exitSequence_main_region__final_() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
@@ -253,8 +220,8 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		case main_region_StateA:
 			exitSequence_main_region_StateA();
 			break;
-		case main_region_StateB:
-			exitSequence_main_region_StateB();
+		case main_region__final_:
+			exitSequence_main_region__final_();
 			break;
 		default:
 			break;
@@ -262,7 +229,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_AlwaysOncycle_main_region__entry_Default() {
+	private void react_ConstantsVariation_main_region__entry_Default() {
 		enterSequence_main_region_StateA_default();
 	}
 	
@@ -275,39 +242,24 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.getValue()==5) {
+				if ((((((((((((getB()==true && (getStr()== null?"String" ==null :getStr().equals("String"))) && getR()==5) && getI()==5) && sCInterface.getB2()==true) && (sCInterface.getStr2()== null?"String" ==null :sCInterface.getStr2().equals("String"))) && sCInterface.getR2()==5) && sCInterface.getI2()==5) && sCINamed.getB()==true) && (sCINamed.getStr()== null?"String" ==null :sCINamed.getStr().equals("String"))) && sCINamed.getR()==5) && sCINamed.getI()==5)) {
 					exitSequence_main_region_StateA();
-					enterSequence_main_region_StateB_default();
+					enterSequence_main_region__final__default();
 				} else {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
-			sCInterface.setValue(sCInterface.getValue() + 1);
 		}
 		return did_transition;
 	}
 	
-	private boolean main_region_StateB_react(boolean try_transition) {
+	private boolean main_region__final__react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.getValue()==5) {
-					exitSequence_main_region_StateB();
-					enterSequence_main_region_StateA_default();
-				} else {
-					did_transition = false;
-				}
+				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
-			sCInterface.setValue(sCInterface.getValue() + 1);
-			
-			sCInterface.setX(sCInterface.getX() + 1);
-			
-			sCInterface.setY(sCInterface.getY() + 1);
 		}
 		return did_transition;
 	}

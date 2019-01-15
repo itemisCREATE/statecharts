@@ -157,7 +157,7 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_LogicalOr_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -178,7 +178,7 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_LogicalOr_main_region__entry_Default() {
 		enterSequence_main_region_A_default();
 	}
 	

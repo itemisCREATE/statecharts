@@ -371,12 +371,12 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_RunnableTest_main_region__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region inner region */
 	private void enterSequence_main_region_Composite_s1_s2_inner_region_default() {
-		react_main_region_Composite_s1_s2_inner_region__entry_Default();
+		react_RunnableTest_main_region_Composite_s1_s2_inner_region__entry_Default();
 	}
 	
 	/* Default exit sequence for final state. */
@@ -439,12 +439,12 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_RunnableTest_main_region__entry_Default() {
 		enterSequence_main_region_Composite_s1_s2_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region_Composite_s1_s2_inner_region__entry_Default() {
+	private void react_RunnableTest_main_region_Composite_s1_s2_inner_region__entry_Default() {
 		enterSequence_main_region_Composite_s1_s2_inner_region_s1_default();
 	}
 	

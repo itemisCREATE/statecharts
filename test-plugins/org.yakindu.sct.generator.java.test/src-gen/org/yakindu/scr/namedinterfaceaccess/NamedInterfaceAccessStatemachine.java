@@ -290,12 +290,12 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	
 	/* 'default' enter sequence for region region 1 */
 	private void enterSequence_region_1_default() {
-		react_region_1__entry_Default();
+		react_NamedInterfaceAccess_region_1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region null */
 	private void enterSequence__region1_default() {
-		react__region1__entry_Default();
+		react_NamedInterfaceAccess__region1__entry_Default();
 	}
 	
 	/* Default exit sequence for state Idle */
@@ -369,12 +369,12 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_region_1__entry_Default() {
+	private void react_NamedInterfaceAccess_region_1__entry_Default() {
 		enterSequence_region_1_Idle_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react__region1__entry_Default() {
+	private void react_NamedInterfaceAccess__region1__entry_Default() {
 		enterSequence__region1_Closed_default();
 	}
 	

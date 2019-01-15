@@ -9,6 +9,7 @@ testsuite AllTests {
 	CKeywords, 
 	ConditionalExpression,
 	ConstantsTests,
+	ConstantsVariationTests,
 	ConstOnlyDefaultScope,
 	ConstOnlyInternalScope,
 	ConstOnlyNamedScope,

@@ -15,6 +15,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	CKeywordsTest.class,
 	ConditionalExpression.class,
 	ConstantsTests.class,
+	ConstantsVariationTests.class,
 	ConstOnlyDefaultScopeTest.class,
 	ConstOnlyInternalScopeTest.class,
 	ConstOnlyNamedScopeTest.class,

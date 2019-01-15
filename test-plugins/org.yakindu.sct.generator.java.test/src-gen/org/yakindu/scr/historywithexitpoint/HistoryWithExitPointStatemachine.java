@@ -196,12 +196,12 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	
 	/* 'default' enter sequence for region mr */
 	private void enterSequence_mr_default() {
-		react_mr__entry_Default();
+		react_HistoryWithExitPoint_mr__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_mr_A_r_default() {
-		react_mr_A_r__entry_Default();
+		react_HistoryWithExitPoint_mr_A_r__entry_Default();
 	}
 	
 	/* shallow enterSequence with history in child r */
@@ -273,12 +273,12 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_mr__entry_Default() {
+	private void react_HistoryWithExitPoint_mr__entry_Default() {
 		enterSequence_mr_A_default();
 	}
 	
 	/* Default react sequence for shallow history entry  */
-	private void react_mr_A_r__entry_Default() {
+	private void react_HistoryWithExitPoint_mr_A_r__entry_Default() {
 		/* Enter the region with shallow history */
 		if (historyVector[0] != State.$NullState$) {
 			shallowEnterSequence_mr_A_r();
@@ -288,7 +288,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	}
 	
 	/* The reactions of exit exit_to_B. */
-	private void react_mr_A_r_exit_to_B() {
+	private void react_HistoryWithExitPoint_mr_A_r_exit_to_B() {
 		effect_mr_A_tr0();
 	}
 	
@@ -318,7 +318,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 				} else {
 					if (sCInterface.push) {
 						exitSequence_mr_A_r_X1();
-						react_mr_A_r_exit_to_B();
+						react_HistoryWithExitPoint_mr_A_r_exit_to_B();
 					} else {
 						did_transition = false;
 					}
@@ -339,7 +339,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 				} else {
 					if (sCInterface.push) {
 						exitSequence_mr_A_r_X2();
-						react_mr_A_r_exit_to_B();
+						react_HistoryWithExitPoint_mr_A_r_exit_to_B();
 					} else {
 						did_transition = false;
 					}

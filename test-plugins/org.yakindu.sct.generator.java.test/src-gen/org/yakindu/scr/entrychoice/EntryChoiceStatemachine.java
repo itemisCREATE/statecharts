@@ -107,7 +107,7 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_EntryChoice_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -133,7 +133,7 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_EntryChoice_main_region__entry_Default() {
 		react_main_region__choice_0();
 	}
 	

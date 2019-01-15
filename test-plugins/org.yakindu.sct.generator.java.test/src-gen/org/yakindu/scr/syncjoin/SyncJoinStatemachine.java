@@ -244,17 +244,17 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_SyncJoin_main_region__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r1 */
 	private void enterSequence_main_region_B_r1_default() {
-		react_main_region_B_r1__entry_Default();
+		react_SyncJoin_main_region_B_r1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r2 */
 	private void enterSequence_main_region_B_r2_default() {
-		react_main_region_B_r2__entry_Default();
+		react_SyncJoin_main_region_B_r2__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -350,17 +350,17 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_SyncJoin_main_region__entry_Default() {
 		enterSequence_main_region_B_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region_B_r1__entry_Default() {
+	private void react_SyncJoin_main_region_B_r1__entry_Default() {
 		enterSequence_main_region_B_r1_C1_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region_B_r2__entry_Default() {
+	private void react_SyncJoin_main_region_B_r2__entry_Default() {
 		enterSequence_main_region_B_r2_D1_default();
 	}
 	

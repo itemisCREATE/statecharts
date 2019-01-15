@@ -555,7 +555,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_StringExpressions_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state AssignmentChecked */
@@ -744,7 +744,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_StringExpressions_main_region__entry_Default() {
 		enterSequence_main_region_AssignmentChecked_default();
 	}
 	

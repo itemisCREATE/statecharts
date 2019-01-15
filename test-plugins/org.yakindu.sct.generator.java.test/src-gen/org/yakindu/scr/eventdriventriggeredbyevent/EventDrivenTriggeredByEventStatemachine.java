@@ -209,7 +209,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_EventDrivenTriggeredByEvent_main_region_default() {
-		react_EventDrivenTriggeredByEvent_main_region__entry_Default();
+		react_eventdriven_EventDrivenTriggeredByEvent_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -241,7 +241,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_EventDrivenTriggeredByEvent_main_region__entry_Default() {
+	private void react_eventdriven_EventDrivenTriggeredByEvent_main_region__entry_Default() {
 		enterSequence_EventDrivenTriggeredByEvent_main_region_A_default();
 	}
 	

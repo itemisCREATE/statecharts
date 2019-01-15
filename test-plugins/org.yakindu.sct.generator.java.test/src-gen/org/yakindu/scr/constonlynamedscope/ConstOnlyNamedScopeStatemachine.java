@@ -180,7 +180,7 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_ConstOnlyNamedScope_main_region_default() {
-		react_ConstOnlyNamedScope_main_region__entry_Default();
+		react_declarations_ConstOnlyNamedScope_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -219,7 +219,7 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ConstOnlyNamedScope_main_region__entry_Default() {
+	private void react_declarations_ConstOnlyNamedScope_main_region__entry_Default() {
 		enterSequence_ConstOnlyNamedScope_main_region_A_default();
 	}
 	

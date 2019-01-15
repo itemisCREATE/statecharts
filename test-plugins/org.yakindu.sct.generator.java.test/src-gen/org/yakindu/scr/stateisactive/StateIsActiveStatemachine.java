@@ -166,12 +166,12 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	
 	/* 'default' enter sequence for region R1 */
 	private void enterSequence_R1_default() {
-		react_R1__entry_Default();
+		react_StateIsActive_R1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region R2 */
 	private void enterSequence_R2_default() {
-		react_R2__entry_Default();
+		react_StateIsActive_R2__entry_Default();
 	}
 	
 	/* Default exit sequence for state R1A */
@@ -227,12 +227,12 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_R1__entry_Default() {
+	private void react_StateIsActive_R1__entry_Default() {
 		enterSequence_R1_R1A_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_R2__entry_Default() {
+	private void react_StateIsActive_R2__entry_Default() {
 		enterSequence_R2_R2A_default();
 	}
 	

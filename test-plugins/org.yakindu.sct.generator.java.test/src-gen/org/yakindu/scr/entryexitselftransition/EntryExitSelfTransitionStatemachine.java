@@ -210,12 +210,12 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_EntryExitSelfTransition_main_region__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region  */
 	private void enterSequence_main_region_A__region0_default() {
-		react_main_region_A__region0__entry_Default();
+		react_EntryExitSelfTransition_main_region_A__region0__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -267,12 +267,12 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_EntryExitSelfTransition_main_region__entry_Default() {
 		enterSequence_main_region_A_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region_A__region0__entry_Default() {
+	private void react_EntryExitSelfTransition_main_region_A__region0__entry_Default() {
 		enterSequence_main_region_A__region0_B_default();
 	}
 	
