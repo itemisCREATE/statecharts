@@ -10,6 +10,15 @@ Require-Bundle: org.yakindu.sct.model.stext,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.yakindu.sct.generator.cpp,
  org.yakindu.sct.generator.cpp.eventdriven,
- org.yakindu.sct.generator.cpp.files
+ org.yakindu.sct.generator.cpp.features,
+ org.yakindu.sct.generator.cpp.files,
+ org.yakindu.sct.generator.cpp.providers,
+ org.yakindu.sct.generator.cpp.providers.classdecl,
+ org.yakindu.sct.generator.cpp.providers.eventdriven,
+ org.yakindu.sct.generator.cpp.providers.eventdriven.classdecl,
+ org.yakindu.sct.generator.cpp.submodules,
+ org.yakindu.sct.generator.cpp.submodules.eventdriven,
+ org.yakindu.sct.generator.cpp.submodules.lifecycle,
+ org.yakindu.sct.generator.cpp.templates
 Bundle-Vendor: statecharts.org
 Automatic-Module-Name: org.yakindu.sct.generator.cpp

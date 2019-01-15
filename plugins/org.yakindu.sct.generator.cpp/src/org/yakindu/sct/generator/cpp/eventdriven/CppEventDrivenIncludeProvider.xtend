@@ -24,11 +24,11 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
  */
 class CppEventDrivenIncludeProvider implements IncludeProvider {
 	
-	@Inject protected extension SExecExtensions
+	@Inject protected extension EventDrivenPredicate
 	
 	override getIncludes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
 		val List<CharSequence> includes = newArrayList
-		if (hasLocalEvents) {
+		if (needsQueues) {
 			includes += "#include <deque>"
 		}
 		includes

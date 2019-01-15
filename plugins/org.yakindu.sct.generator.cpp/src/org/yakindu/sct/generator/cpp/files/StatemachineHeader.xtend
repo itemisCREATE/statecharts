@@ -45,8 +45,6 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 
 	protected GeneratorEntry entry
 	
-	public static final String HEADER_TARGET = "Header"
-	
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		this.entry = entry
 		val namespace = statechartNamespace
@@ -68,10 +66,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.files.StatemachineH
 				«ENDFOR»
 			«ENDIF»
 			
-			«FOR sourceProvider : fragmentProvider.get(HEADER_TARGET, it, artifactConfigs)»
-			«sourceProvider.get(it, artifactConfigs)»
-			
-			«ENDFOR»
+			«fragmentProvider.get(StatemachineHeader.simpleName, it, artifactConfigs)»
 			
 			«IF !namespace.nullOrEmpty»
 				«FOR ns : namespace»

@@ -34,6 +34,7 @@ import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sgraph.Scope
+import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.InterfaceScope
@@ -56,6 +57,10 @@ class SExecExtensions {
 	
 	def ExecutionFlow flow(EObject it){
 		eContainerOfType(ExecutionFlow)
+	}
+	
+	def Statechart statechart(ExecutionFlow it) {
+		sourceElement as Statechart
 	}
 	
 	def Scope scope(Declaration it) {

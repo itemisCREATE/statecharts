@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.generator.cpp.features;
 
@@ -26,25 +26,26 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 public class CPPDefaultFeatureValueProvider extends AbstractDefaultFeatureValueProvider {
-
+	
 	private static final String INVALID_IDENTIFIER_REGEX = "[^a-z&&[^A-Z&&[^0-9]]]";
 	private static final String VALID_IDENTIFIER_REGEX = "[_a-zA-Z][_a-zA-Z0-9]*";
-
+	
+	@Override
 	public boolean isProviderFor(FeatureTypeLibrary library) {
 		return CPPFeatureConstants.LIBRARY_NAME.equals(library.getName());
 	}
-
+	
 	@Override
 	protected void setDefaultValue(FeatureType featureType, FeatureParameterValue parameterValue,
 			EObject contextElement) {
 		GeneratorEntry entry = (GeneratorEntry) contextElement;
 		Statechart statechart = (Statechart) entry.getElementRef();
-
+		
 		if (parameterValue.getParameter().getName().equals(ICFeatureConstants.PARAMETER_NAMING_MODULE_NAME)) {
 			parameterValue.setValue(asIdentifier(statechart.getName(), "_"));
 		} else if (parameterValue.getParameter().getName()
@@ -64,9 +65,12 @@ public class CPPDefaultFeatureValueProvider extends AbstractDefaultFeatureValueP
 			parameterValue.setValue(true);
 		} else if (parameterValue.getParameter().getName().equals(CPPFeatureConstants.PARAMETER_API_CHECK_UNIMPLEMENTED_OCBS)) {
 			parameterValue.setValue(true);
-		} 
+		} else if (parameterValue.getParameter().getName().equals(CPPFeatureConstants.PARAMETER_IN_EVENT_QUEUE)) {
+			parameterValue.setValue(false);
+		}
 	}
-
+	
+	@Override
 	public IStatus validateParameterValue(FeatureParameterValue parameter) {
 		String parameterName = parameter.getParameter().getName();
 		if (ICFeatureConstants.PARAMETER_NAMING_MODULE_NAME.equals(parameterName)) {
@@ -99,7 +103,7 @@ public class CPPDefaultFeatureValueProvider extends AbstractDefaultFeatureValueP
 		}
 		return Status.OK_STATUS;
 	}
-
+	
 	private String asIdentifier(String it, String separator) {
 		return it.replaceAll(INVALID_IDENTIFIER_REGEX, separator);
 	}

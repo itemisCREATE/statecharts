@@ -17,34 +17,52 @@ import org.yakindu.sct.generator.cpp.submodules.lifecycle.LifecycleFunctions
 import org.yakindu.sct.model.sexec.ExecutionFlow
 
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
+import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenPredicate
 
 class EventDrivenRunCycle extends LifecycleFunctions implements RunCycle {
 	@Inject extension EventNaming eventNaming
+	@Inject protected extension EventDrivenPredicate
 	
 	override runCycle(ExecutionFlow it) {
-		val cE = "currentEvent"
-		if(!hasLocalEvents) {
+		if(!needsQueues) {
 			return super.runCycle(it)
 		}
 		'''
 			void «module»::«runCycleFctID»()
 			{
-				«clearOutEventsFctID»();
-				
-				«SCT_EVENT» * «cE» = «nextEventFctID»();
-				
-				do
+				«IF needsRunCycleGuard»
+				if («runCycleGuard» == false)
 				{
-					/* Set event flags as usual */
-					«dispatchEventFctID»(«cE»);
+					«runCycleGuard» = true;
+					«runCycleContent»
 					
-					«runCycleFunctionForLoop»
-					
-					/* Delete event from memory */
-					delete «cE»;
-					«clearInEventsFctID»();
-				} while((«cE» = «nextEventFctID»()));
+					«runCycleGuard» = false;
+				}
+				«ELSE»
+				«runCycleContent»
+				«ENDIF»
 			}
+		'''
+	}
+	
+	def protected runCycleContent(ExecutionFlow it) {
+		val cE = "currentEvent"
+		'''
+		«clearOutEventsFctID»();
+						
+		«SCT_EVENT» * «cE» = «nextEventFctID»();
+		
+		do
+		{
+			/* Set event flags as usual */
+			«dispatchEventFctID»(«cE»);
+			
+			«runCycleFunctionForLoop»
+			
+			/* Delete event from memory */
+			delete «cE»;
+			«clearInEventsFctID»();
+		} while((«cE» = «nextEventFctID»()));
 		'''
 	}
 }

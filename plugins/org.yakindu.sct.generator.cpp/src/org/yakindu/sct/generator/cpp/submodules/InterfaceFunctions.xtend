@@ -16,7 +16,6 @@ import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.CppNaming
-import org.yakindu.sct.generator.cpp.EventCode
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.generator.cpp.templates.ClassDeclaration
 import org.yakindu.sct.model.sexec.ExecutionFlow

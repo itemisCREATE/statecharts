@@ -61,7 +61,7 @@ class EventDrivenInterfaceFunctions extends InterfaceFunctions {
 	
 	override dispatch privateFunctionPrototypes(EventDefinition it) {
 		'''
-		«IF direction == Direction::LOCAL»
+		«IF it.isQueued»
 			/*! Raises the in event '«name»' that is defined in the «scope.scopeDescription». */
 			void internal_«asRaiser»(«valueParams»);
 		«ENDIF»
