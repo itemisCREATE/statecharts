@@ -171,8 +171,8 @@ public class SelectExamplePage extends WizardPage
 
 	private void init(final IProgressMonitor monitor) {
 		Runnable runnable = () -> {
-			explicitLayoutingForUnixSystems();
 			messageArea.showNoExamplesFound();
+			explicitLayoutingForUnixSystems();
 		};
 		
 		if (exampleService.exists()) {
