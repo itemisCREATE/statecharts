@@ -44,10 +44,12 @@ class StatemachineClassDeclaration implements ISourceFragment {
 	
 	@Inject protected CodeGeneratorFragmentProvider fragmentProvider
 	
-	public static final String CLASS_PUBLIC_TARGET = StatemachineHeader.HEADER_TARGET + ".Class.Public"
-	public static final String CLASS_PROTECTED_TARGET = StatemachineHeader.HEADER_TARGET + ".Class.Protected"
-	public static final String CLASS_PRIVATE_TARGET = StatemachineHeader.HEADER_TARGET + ".Class.Private"
-	public static final String CLASS_INNER_TARGET = StatemachineHeader.HEADER_TARGET + ".Class.InnerClasses"
+	public static final String HEADER_TARGET = StatemachineHeader.HEADER_TARGET
+	
+	public static final String CLASS_PUBLIC_TARGET = HEADER_TARGET + ".Class.Public"
+	public static final String CLASS_PROTECTED_TARGET = HEADER_TARGET + ".Class.Protected"
+	public static final String CLASS_PRIVATE_TARGET = HEADER_TARGET + ".Class.Private"
+	public static final String CLASS_INNER_TARGET = HEADER_TARGET + ".Class.InnerClasses"
 	
 	override get(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
 		generateClass(it, artifactConfigs, new ClassDeclaration).generate
