@@ -57,21 +57,21 @@ TEST(InEventQueue, InEventQueue) {
 	machine->init();
 	machine->enter();
 	
-	EXPECT_TRUE( machine->isStateActive(InEventQueue::InEventQueueStates::InEventQueue_main_region_A) );
+	EXPECT_TRUE( machine->isStateActive(InEventQueue::InEventQueue_main_region_A) );
 
 
 	nextEvent = 'f';
 	machine->getDefaultSCI()->raise_e();
-	EXPECT_TRUE( machine->isStateActive(InEventQueue::InEventQueueStates::InEventQueue_main_region_B) );
+	EXPECT_TRUE( machine->isStateActive(InEventQueue::InEventQueue_main_region_B) );
 
 
 	nextEvent = 'g';
 	machine->getDefaultSCI()->raise_e();
-	EXPECT_TRUE( machine->isStateActive(InEventQueue::InEventQueueStates::InEventQueue_main_region_C) );
+	EXPECT_TRUE( machine->isStateActive(InEventQueue::InEventQueue_main_region_C) );
 
 
 	nextEvent = 'e';
 	machine->getDefaultSCI()->raise_f(43);
-	EXPECT_TRUE( machine->isStateActive(InEventQueue::InEventQueueStates::InEventQueue_main_region_A) );
+	EXPECT_TRUE( machine->isStateActive(InEventQueue::InEventQueue_main_region_A) );
 
 	}
