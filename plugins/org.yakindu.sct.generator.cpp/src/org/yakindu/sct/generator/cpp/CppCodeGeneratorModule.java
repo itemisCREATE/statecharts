@@ -133,9 +133,9 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 			bindFragment(binder, StatechartEvents.class, STATEMACHINE_HEADER_TARGET);
 		}
 		bindFragment(binder, DefaultFunctionProvider.class, STATEMACHINE_IMPL_TARGET);
-		bindFragment(binder, OCBDestructorProvider.class, STATEMACHINE_IMPL_TARGET);
 		bindFragment(binder, StatevectorDefineProvider.class, STATEMACHINE_HEADER_TARGET);
 		bindFragment(binder, StatemachineClassDeclaration.class, STATEMACHINE_HEADER_TARGET);
+		bindFragment(binder, OCBDestructorProvider.class, STATEMACHINE_HEADER_TARGET);
 		bindFragment(binder, InnerClassesProvider.class, CLASS_INNER_TARGET);
 		bindFragment(binder, PublicClassMemberProvider.class, CLASS_PUBLIC_TARGET);
 
