@@ -135,6 +135,7 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object getValue() {
 		return value;
 	}
@@ -144,6 +145,7 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(Object newValue) {
 		Object oldValue = value;
 		value = newValue;
@@ -156,6 +158,7 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getFqName() {
 		return fqName;
 	}
@@ -165,6 +168,7 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFqName(String newFqName) {
 		String oldFqName = fqName;
 		fqName = newFqName;
@@ -177,6 +181,7 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isWritable() {
 		return writable;
 	}
@@ -186,6 +191,7 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWritable(boolean newWritable) {
 		boolean oldWritable = writable;
 		writable = newWritable;
@@ -198,6 +204,7 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Type getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
@@ -224,6 +231,7 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(Type newType) {
 		Type oldType = type;
 		type = newType;

@@ -69,6 +69,7 @@ public class ReferenceSlotImpl extends CompositeSlotImpl implements ReferenceSlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ExecutionSlot getReference() {
 		if (reference != null && reference.eIsProxy()) {
 			InternalEObject oldReference = (InternalEObject)reference;
@@ -95,6 +96,7 @@ public class ReferenceSlotImpl extends CompositeSlotImpl implements ReferenceSlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReference(ExecutionSlot newReference) {
 		ExecutionSlot oldReference = reference;
 		reference = newReference;

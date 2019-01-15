@@ -168,6 +168,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExecutionContext() {
 		return executionContextEClass;
 	}
@@ -177,6 +178,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionContext_ActiveStates() {
 		return (EReference)executionContextEClass.getEStructuralFeatures().get(0);
 	}
@@ -186,6 +188,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionContext_ExecutedElements() {
 		return (EReference)executionContextEClass.getEStructuralFeatures().get(1);
 	}
@@ -195,6 +198,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionContext_SuspendedElements() {
 		return (EReference)executionContextEClass.getEStructuralFeatures().get(2);
 	}
@@ -204,6 +208,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getExecutionContext_Snapshot() {
 		return (EAttribute)executionContextEClass.getEStructuralFeatures().get(3);
 	}
@@ -213,6 +218,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExecutionEvent() {
 		return executionEventEClass;
 	}
@@ -222,6 +228,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getExecutionEvent_Raised() {
 		return (EAttribute)executionEventEClass.getEStructuralFeatures().get(0);
 	}
@@ -231,6 +238,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getExecutionEvent_Direction() {
 		return (EAttribute)executionEventEClass.getEStructuralFeatures().get(1);
 	}
@@ -240,6 +248,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExecutionSlot() {
 		return executionSlotEClass;
 	}
@@ -249,6 +258,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getExecutionSlot_Value() {
 		return (EAttribute)executionSlotEClass.getEStructuralFeatures().get(0);
 	}
@@ -258,6 +268,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getExecutionSlot_FqName() {
 		return (EAttribute)executionSlotEClass.getEStructuralFeatures().get(1);
 	}
@@ -267,6 +278,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getExecutionSlot_Writable() {
 		return (EAttribute)executionSlotEClass.getEStructuralFeatures().get(2);
 	}
@@ -276,6 +288,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionSlot_Type() {
 		return (EReference)executionSlotEClass.getEStructuralFeatures().get(3);
 	}
@@ -285,6 +298,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExecutionVariable() {
 		return executionVariableEClass;
 	}
@@ -294,6 +308,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCompositeSlot() {
 		return compositeSlotEClass;
 	}
@@ -303,6 +318,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCompositeSlot_Slots() {
 		return (EReference)compositeSlotEClass.getEStructuralFeatures().get(0);
 	}
@@ -312,6 +328,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getReferenceSlot() {
 		return referenceSlotEClass;
 	}
@@ -321,6 +338,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getReferenceSlot_Reference() {
 		return (EReference)referenceSlotEClass.getEStructuralFeatures().get(0);
 	}
@@ -330,6 +348,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExecutionOperation() {
 		return executionOperationEClass;
 	}
@@ -339,6 +358,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getJavaObject() {
 		return javaObjectEDataType;
 	}
@@ -348,6 +368,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SRuntimeFactory getSRuntimeFactory() {
 		return (SRuntimeFactory)getEFactoryInstance();
 	}
@@ -486,6 +507,9 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 
 		initEClass(compositeSlotEClass, CompositeSlot.class, "CompositeSlot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCompositeSlot_Slots(), this.getExecutionSlot(), null, "slots", null, 0, -1, CompositeSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(compositeSlotEClass, this.getExecutionSlot(), "getSlots", 0, -1, !IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage.getEBoolean(), "doResolve", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(referenceSlotEClass, ReferenceSlot.class, "ReferenceSlot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getReferenceSlot_Reference(), this.getExecutionSlot(), null, "reference", null, 0, 1, ReferenceSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

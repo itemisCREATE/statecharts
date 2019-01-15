@@ -75,11 +75,22 @@ public class CompositeSlotImpl extends ExecutionSlotImpl implements CompositeSlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<ExecutionSlot> getSlots() {
 		if (slots == null) {
 			slots = new EObjectContainmentEList<ExecutionSlot>(ExecutionSlot.class, this, SRuntimePackage.COMPOSITE_SLOT__SLOTS);
 		}
 		return slots;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public List<ExecutionSlot> getSlots(final boolean doResolve) {
+		return this.getSlots();
 	}
 
 	/**
