@@ -101,6 +101,7 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.ReactionEffect
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.RegularEventSpec
+import org.yakindu.sct.model.stext.stext.StatechartSpecification
 import org.yakindu.sct.model.stext.stext.StextPackage
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.VariableDefinition
@@ -490,7 +491,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 		}
 	}
 	@Check(CheckType.FAST)
-	def void checkAnnotations(Statechart statechart) {
+	def void checkAnnotations(StatechartSpecification statechart) {
 		var Annotation eventDriven=statechart.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION) 
 		var Annotation cycleBased=statechart.getAnnotationOfType(CYCLE_BASED_ANNOTATION) 
 		if (eventDriven !== null && cycleBased !== null) {
