@@ -132,7 +132,6 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 	
 	/** Only for event driven case */
 	protected void bindEventDrivenClasses(Binder binder) {
-		binder.bind(EventRaisingCode.class).to(EventDrivenEventRaisingCode.class);
 		binder.bind(EventCode.class).to(EventDrivenEventCode.class);
 
 		binder.bind(RunCycle.class).to(EventDrivenRunCycle.class);
@@ -140,6 +139,11 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		binder.bind(TimingFunctions.class).to(EventDrivenTimingFunctions.class);
 
 		addIncludeProvider(CppEventDrivenIncludeProvider.class);
+	}
+	
+	protected void bindEventRaisingCode(Binder binder) {
+		// TODO: This is ugly and only needed for inheritance reasons.
+		binder.bind(EventRaisingCode.class).to(EventDrivenEventRaisingCode.class);
 	}
 	
 	/** Only for cycle based case */
