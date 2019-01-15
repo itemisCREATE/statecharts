@@ -22,10 +22,5 @@ GeneratorModel for yakindu::cpp {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 		}
-		
-		feature Tracing {
-			enterState = true
-			exitState = true
-		}
 	}
 }
