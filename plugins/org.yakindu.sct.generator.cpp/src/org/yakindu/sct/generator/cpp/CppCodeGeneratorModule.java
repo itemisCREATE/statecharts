@@ -132,8 +132,8 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 	
 	/** Only for event driven case */
 	protected void bindEventDrivenClasses(Binder binder) {
+		bindEventRaisingCode(binder);
 		binder.bind(EventCode.class).to(EventDrivenEventCode.class);
-
 		binder.bind(RunCycle.class).to(EventDrivenRunCycle.class);
 		binder.bind(InterfaceFunctions.class).to(EventDrivenInterfaceFunctions.class);
 		binder.bind(TimingFunctions.class).to(EventDrivenTimingFunctions.class);
