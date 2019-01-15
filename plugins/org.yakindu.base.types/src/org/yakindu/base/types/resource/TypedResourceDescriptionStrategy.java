@@ -22,6 +22,7 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.util.IAcceptor;
+import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Package;
@@ -79,7 +80,7 @@ public class TypedResourceDescriptionStrategy extends DefaultResourceDescription
 		} catch (Exception exc) {
 			exc.printStackTrace();
 		}
-		return eObject instanceof Package;
+		return eObject instanceof Package || eObject instanceof ComplexType;
 	}
 
 	protected void defineUserData(EObject eObject, Map<String, String> userData) {
