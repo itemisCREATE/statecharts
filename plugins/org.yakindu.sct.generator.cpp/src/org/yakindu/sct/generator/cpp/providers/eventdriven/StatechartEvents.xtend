@@ -11,14 +11,11 @@
 package org.yakindu.sct.generator.cpp.providers.eventdriven
 
 import com.google.inject.Inject
-import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenPredicate
 import org.yakindu.sct.generator.cpp.eventdriven.EventNaming
-import org.yakindu.sct.generator.cpp.files.StatemachineHeader
-import org.yakindu.sct.generator.cpp.providers.GeneratorContribution
 import org.yakindu.sct.generator.cpp.providers.ISourceFragment
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
@@ -30,7 +27,6 @@ import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
 /**
  * @author René Beckmann - Initial contribution and API
  */
- @GeneratorContribution(StatemachineHeader.HEADER_TARGET)
 class StatechartEvents implements ISourceFragment {
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
@@ -44,14 +40,6 @@ class StatechartEvents implements ISourceFragment {
 	
 	override get(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
 		content
-	}
-	
-	override isNeeded(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
-		needsEventClasses
-	}
-	
-	override orderPriority(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
-		-2
 	}
 	
 	def content(ExecutionFlow it) {

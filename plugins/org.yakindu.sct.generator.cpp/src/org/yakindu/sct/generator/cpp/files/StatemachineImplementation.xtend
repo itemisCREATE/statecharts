@@ -24,13 +24,12 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
  * @author axel terfloth
  */
 class StatemachineImplementation implements IContentTemplate {
+	
 	@Inject protected CodeGeneratorFragmentProvider provider;
 	
 	@Inject protected extension CppNaming
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension ExpressionsChecker
-	
-	public static final String SOURCE_TARGET = "Source"
 	
 	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
 		val namespace = statechartNamespace
@@ -52,10 +51,7 @@ class StatemachineImplementation implements IContentTemplate {
 		«ENDFOR»
 		«ENDIF»
 		
-		«FOR sourceProvider : provider.get(SOURCE_TARGET, it, artifactConfigs)»
-		«sourceProvider.get(it, artifactConfigs)»
-		
-		«ENDFOR»
+		«provider.get(this.class.simpleName, it, artifactConfigs)»
 		
 		«IF !namespace.nullOrEmpty»
 		«FOR ns : namespace»

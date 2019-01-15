@@ -11,16 +11,12 @@
 package org.yakindu.sct.generator.cpp.providers.eventdriven
 
 import com.google.inject.Inject
-import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenPredicate
 import org.yakindu.sct.generator.cpp.eventdriven.EventNaming
-import org.yakindu.sct.generator.cpp.files.StatemachineImplementation
 import org.yakindu.sct.generator.cpp.providers.ConstructorProvider
-import org.yakindu.sct.generator.cpp.providers.GeneratorContribution
 import org.yakindu.sct.model.sexec.ExecutionFlow
 
-@GeneratorContribution(StatemachineImplementation.SOURCE_TARGET)
 class EventDrivenConstructorProvider extends ConstructorProvider {
 	@Inject protected extension EventDrivenPredicate
 	@Inject protected extension EventNaming
@@ -41,13 +37,4 @@ class EventDrivenConstructorProvider extends ConstructorProvider {
 		}
 		toInit
 	}
-	
-	override isNeeded(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
-		isEventDriven		
-	}
-	
-	override replaces(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
-		ConstructorProvider
-	}
-	
 }

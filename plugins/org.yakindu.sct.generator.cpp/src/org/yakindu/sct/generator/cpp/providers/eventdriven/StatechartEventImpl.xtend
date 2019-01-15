@@ -12,14 +12,10 @@ package org.yakindu.sct.generator.cpp.providers.eventdriven
 
 import com.google.inject.Inject
 import java.util.List
-import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
-import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenPredicate
 import org.yakindu.sct.generator.cpp.eventdriven.EventNaming
-import org.yakindu.sct.generator.cpp.files.StatemachineImplementation
-import org.yakindu.sct.generator.cpp.providers.GeneratorContribution
 import org.yakindu.sct.generator.cpp.providers.ISourceFragment
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
@@ -30,7 +26,6 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 
 import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
 
-@GeneratorContribution(StatemachineImplementation.SOURCE_TARGET)
 class StatechartEventImpl implements ISourceFragment {
 	@Inject protected extension EventDrivenPredicate
 	
@@ -50,10 +45,6 @@ class StatechartEventImpl implements ISourceFragment {
 		«generateInterfaceDispatchFunctions»
 		«ENDIF»
 		'''
-	}
-	
-	override isNeeded(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
-		isEventDriven
 	}
 	
 	def getNextEventFunction(ExecutionFlow it) {

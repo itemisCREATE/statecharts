@@ -16,14 +16,12 @@ import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
-import org.yakindu.sct.generator.cpp.files.StatemachineImplementation
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 
-@GeneratorContribution(StatemachineImplementation.SOURCE_TARGET)
 class ConstructorProvider implements ISourceFragment {
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
@@ -38,10 +36,6 @@ class ConstructorProvider implements ISourceFragment {
 		
 		«destructorDefinition»
 		'''
-	}
-	
-	override orderPriority(ExecutionFlow it, IGenArtifactConfigurations artifactConfigs) {
-		-1
 	}
 	
 	def constructorDefinition(ExecutionFlow it){

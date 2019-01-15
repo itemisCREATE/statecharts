@@ -28,10 +28,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.InternalScope
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.sct.generator.cpp.providers.GeneratorContribution
-import org.yakindu.sct.generator.cpp.providers.StatemachineClassDeclaration
 
-@GeneratorContribution(StatemachineClassDeclaration.CLASS_INNER_TARGET)
 class InnerClassesProvider implements ISourceFragment {
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions

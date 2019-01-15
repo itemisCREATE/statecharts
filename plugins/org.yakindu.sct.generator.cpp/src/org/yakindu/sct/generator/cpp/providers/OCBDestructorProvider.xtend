@@ -14,13 +14,11 @@ import com.google.inject.Inject
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
-import org.yakindu.sct.generator.cpp.files.StatemachineHeader
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.StatechartScope
 
-@GeneratorContribution(StatemachineHeader.HEADER_TARGET)
 class OCBDestructorProvider implements ISourceFragment {
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
@@ -42,9 +40,4 @@ class OCBDestructorProvider implements ISourceFragment {
 		}
 		return ""
 	}
-	
-	override orderPriority(ExecutionFlow flow, IGenArtifactConfigurations config) {
-		5
-	}
-	
 }

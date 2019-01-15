@@ -14,9 +14,7 @@ import com.google.inject.Inject
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.cpp.CppNaming
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
-import org.yakindu.sct.generator.cpp.providers.GeneratorContribution
 import org.yakindu.sct.generator.cpp.providers.ISourceFragment
-import org.yakindu.sct.generator.cpp.providers.StatemachineClassDeclaration
 import org.yakindu.sct.generator.cpp.submodules.InterfaceFunctions
 import org.yakindu.sct.generator.cpp.submodules.InternalFunctions
 import org.yakindu.sct.generator.cpp.submodules.TimingFunctions
@@ -29,7 +27,6 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 
-@GeneratorContribution(StatemachineClassDeclaration.CLASS_PUBLIC_TARGET)   
 class PublicClassMemberProvider implements ISourceFragment {
 	@Inject protected extension CppNaming
 	@Inject protected extension SExecExtensions
