@@ -59,6 +59,10 @@ class StatemachineClassDeclaration implements ISourceFragment {
 			.destructorDeclaration()
 		interfaceExtensions.forEach[classDecl.superType(it)]
 		
+		fragmentProvider.get(CLASS_INNER_TARGET, it, artifactConfigs).forEach[ fragment | 
+			classDecl.member(entry.innerClassVisibility, fragment.get(it, artifactConfigs))
+		]
+					
 		fragmentProvider.get(CLASS_PUBLIC_TARGET, it, artifactConfigs).forEach[ fragment | 
 			classDecl.publicMember(fragment.get(it, artifactConfigs))
 		]
@@ -71,10 +75,6 @@ class StatemachineClassDeclaration implements ISourceFragment {
 			classDecl.privateMember(fragment.get(it, artifactConfigs))
 		]
 		
-		fragmentProvider.get(CLASS_INNER_TARGET, it, artifactConfigs).forEach[ fragment | 
-			classDecl.member(entry.innerClassVisibility, fragment.get(it, artifactConfigs))
-		]
-					
 		classDecl
 	}
 	
