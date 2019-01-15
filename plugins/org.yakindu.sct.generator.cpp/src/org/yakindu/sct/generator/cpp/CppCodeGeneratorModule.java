@@ -47,6 +47,7 @@ import org.yakindu.sct.generator.cpp.providers.DefaultFunctionProvider;
 import org.yakindu.sct.generator.cpp.providers.ISourceFragment;
 import org.yakindu.sct.generator.cpp.providers.OCBDestructorProvider;
 import org.yakindu.sct.generator.cpp.providers.StatemachineClassDeclaration;
+import org.yakindu.sct.generator.cpp.providers.StatevectorDefineProvider;
 import org.yakindu.sct.generator.cpp.providers.classdecl.InnerClassesProvider;
 import org.yakindu.sct.generator.cpp.providers.classdecl.PublicClassMemberProvider;
 import org.yakindu.sct.generator.cpp.providers.eventdriven.EventDrivenConstructorProvider;
@@ -133,6 +134,7 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		}
 		bindFragment(binder, DefaultFunctionProvider.class, STATEMACHINE_IMPL_TARGET);
 		bindFragment(binder, OCBDestructorProvider.class, STATEMACHINE_IMPL_TARGET);
+		bindFragment(binder, StatevectorDefineProvider.class, STATEMACHINE_HEADER_TARGET);
 		bindFragment(binder, StatemachineClassDeclaration.class, STATEMACHINE_HEADER_TARGET);
 		bindFragment(binder, InnerClassesProvider.class, CLASS_INNER_TARGET);
 		bindFragment(binder, PublicClassMemberProvider.class, CLASS_PUBLIC_TARGET);
