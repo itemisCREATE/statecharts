@@ -214,7 +214,7 @@ public class ExecutionEventImpl extends ExecutionSlotImpl implements ExecutionEv
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (raised: ");
 		result.append(raised);
 		result.append(", direction: ");

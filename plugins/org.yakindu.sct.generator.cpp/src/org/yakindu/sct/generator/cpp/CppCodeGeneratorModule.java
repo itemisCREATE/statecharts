@@ -142,7 +142,6 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 	}
 	
 	protected void bindEventRaisingCode(Binder binder) {
-		// TODO: This is ugly and only needed for inheritance reasons.
 		binder.bind(EventRaisingCode.class).to(EventDrivenEventRaisingCode.class);
 	}
 	
