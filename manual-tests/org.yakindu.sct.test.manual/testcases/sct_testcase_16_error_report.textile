@@ -1,9 +1,0 @@
-h1. YAKINDU Statechart Tools – Testcase 16 - Error Report
-
-|_. Nr |_. Testname |_. Test Instructions |_. Postconditions |_. Status|
-| 16.1 | Triggering error | <ol><li><p>Open the _SC Modeling_ perspective.</p></li><li><p>Press @[Ctrl+Alt+L]@.</p></li></ol> | <ul><li><p>An error dialog is shown in the lower-left corner.</p></li></ul> | %{color:red}open% |
-| 16.2 | Checking error settings | <ol><li><p>In the dialog, check _enable_.</p></li><li><p>Press _Next_.</p></li></ol> | <ul><li><p>A window opens.</p></li><li><p>On the second site (???) YAKINDU should listed.</p></li><li><p>The check mark behind YAKINDU should be set.</p></li></ul> | %{color:red}open% |
-| 16.3 | Checking privacy policy | Press *configure* -> *privacy policy* | the browser should open and link you to the itemis AGB site | %{color:red}open% |
-| 16.4 | Error selected | Press *enable* -> *enable* | Dialog window appears. Problem looged in ... | %{color:red}open% |
-| 16.5 | Check the error | Press *deatils* | There should be an *Strack Trace* shown in a window | %{color:red}open% |
-| 16.6 | Error sended | Cklick on *send* | "Thank you" dialog appears | %{color:red}open% |
