@@ -17,7 +17,6 @@ import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionNode
-import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.StateVector
 import org.yakindu.sct.model.sexec.Step
