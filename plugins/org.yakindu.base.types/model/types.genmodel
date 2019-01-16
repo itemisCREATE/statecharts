@@ -79,7 +79,7 @@
     </genClasses>
     <genClasses image="false" ecoreClass="types.ecore#//AnnotatableElement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//AnnotatableElement/annotations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//AnnotatableElement/annotationInfo"/>
+      <genFeatures property="None" createChild="true" ecoreFeature="ecore:EReference types.ecore#//AnnotatableElement/annotationInfo"/>
       <genOperations ecoreOperation="types.ecore#//AnnotatableElement/getAnnotationOfType">
         <genParameters ecoreParameter="types.ecore#//AnnotatableElement/getAnnotationOfType/typeName"/>
       </genOperations>

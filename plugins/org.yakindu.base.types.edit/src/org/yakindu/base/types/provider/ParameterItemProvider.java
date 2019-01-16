@@ -178,7 +178,6 @@ public class ParameterItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER);
 			childrenFeatures.add(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS);
-			childrenFeatures.add(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO);
 		}
 		return childrenFeatures;
 	}
@@ -234,13 +233,13 @@ public class ParameterItemProvider
 
 		switch (notification.getFeatureID(Parameter.class)) {
 			case TypesPackage.PARAMETER__NAME:
+			case TypesPackage.PARAMETER__ANNOTATION_INFO:
 			case TypesPackage.PARAMETER__VAR_ARGS:
 			case TypesPackage.PARAMETER__OPTIONAL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TypesPackage.PARAMETER__TYPE_SPECIFIER:
 			case TypesPackage.PARAMETER__ANNOTATIONS:
-			case TypesPackage.PARAMETER__ANNOTATION_INFO:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}

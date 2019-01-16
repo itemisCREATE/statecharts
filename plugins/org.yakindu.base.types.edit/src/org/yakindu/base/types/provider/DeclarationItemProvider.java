@@ -117,7 +117,6 @@ public class DeclarationItemProvider extends NamedElementItemProvider {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS);
-			childrenFeatures.add(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO);
 			childrenFeatures.add(TypesPackage.Literals.META_COMPOSITE__META_FEATURES);
 		}
 		return childrenFeatures;
@@ -160,12 +159,12 @@ public class DeclarationItemProvider extends NamedElementItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Declaration.class)) {
+			case TypesPackage.DECLARATION__ANNOTATION_INFO:
 			case TypesPackage.DECLARATION__STATIC:
 			case TypesPackage.DECLARATION__ID:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TypesPackage.DECLARATION__ANNOTATIONS:
-			case TypesPackage.DECLARATION__ANNOTATION_INFO:
 			case TypesPackage.DECLARATION__META_FEATURES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
