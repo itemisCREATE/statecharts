@@ -74,7 +74,6 @@ public class AnnotatableElementItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS);
-			childrenFeatures.add(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO);
 		}
 		return childrenFeatures;
 	}
@@ -116,8 +115,10 @@ public class AnnotatableElementItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(AnnotatableElement.class)) {
-			case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS:
 			case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}

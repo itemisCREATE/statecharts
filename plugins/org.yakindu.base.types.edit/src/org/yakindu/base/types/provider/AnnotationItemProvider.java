@@ -17,6 +17,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.TypesPackage;
 
 /**
@@ -109,14 +110,14 @@ public class AnnotationItemProvider extends ItemProviderAdapter implements IEdit
 	}
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Annotation_type");
+		Annotation annotation = (Annotation)object;
+		if(annotation.getType() != null)
+			return annotation.getType().getName();
+		return "unknown";
 	}
 	
 
