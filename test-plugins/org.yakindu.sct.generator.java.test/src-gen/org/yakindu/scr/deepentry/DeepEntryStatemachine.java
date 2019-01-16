@@ -1,7 +1,7 @@
 package org.yakindu.scr.deepentry;
 
-public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 
+public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;
@@ -75,6 +75,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public DeepEntryStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -99,13 +100,42 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_r_default();
 		enterSequence_r2_default();
 		enterSequence_r3_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case r_A_r_B:
+				r_A_r_B_react(true);
+				break;
+			case r2_B_r_BA_r_BAA:
+				r2_B_r_BA_r_BAA_react(true);
+				break;
+			case r2_B_r_BB:
+				r2_B_r_BB_react(true);
+				break;
+			case r2_C:
+				r2_C_react(true);
+				break;
+			case r3_D_r_DA_r_DAA:
+				r3_D_r_DA_r_DAA_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_r();
 		exitSequence_r2();
@@ -280,17 +310,17 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_r_default() {
-		react_r__entry_Default();
+		react_DeepEntry_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r2 */
 	private void enterSequence_r2_default() {
-		react_r2__entry_Default();
+		react_DeepEntry_r2__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_r2_B_r_default() {
-		react_r2_B_r__entry_Default();
+		react_DeepEntry_r2_B_r__entry_Default();
 	}
 	
 	/* shallow enterSequence with history in child r */
@@ -309,12 +339,12 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_r2_B_r_BA_r_default() {
-		react_r2_B_r_BA_r__entry_Default();
+		react_DeepEntry_r2_B_r_BA_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r3 */
 	private void enterSequence_r3_default() {
-		react_r3__entry_Default();
+		react_DeepEntry_r3__entry_Default();
 	}
 	
 	/* deep enterSequence with history in child r3 */
@@ -490,13 +520,13 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_r__entry_Default() {
+	private void react_DeepEntry_r__entry_Default() {
 		entryAction_r_A();
 		enterSequence_r_A_r_B_default();
 	}
 	
 	/* Default react sequence for shallow history entry  */
-	private void react_r2_B_r__entry_Default() {
+	private void react_DeepEntry_r2_B_r__entry_Default() {
 		/* Enter the region with shallow history */
 		if (historyVector[0] != State.$NullState$) {
 			shallowEnterSequence_r2_B_r();
@@ -508,17 +538,17 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_r2_B_r_BA_r__entry_Default() {
+	private void react_DeepEntry_r2_B_r_BA_r__entry_Default() {
 		enterSequence_r2_B_r_BA_r_BAA_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_r2__entry_Default() {
+	private void react_DeepEntry_r2__entry_Default() {
 		enterSequence_r2_B_default();
 	}
 	
 	/* Default react sequence for deep history entry  */
-	private void react_r3__entry_Default() {
+	private void react_DeepEntry_r3__entry_Default() {
 		/* Enter the region with deep history */
 		if (historyVector[1] != State.$NullState$) {
 			deepEnterSequence_r3();
@@ -532,7 +562,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		}
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -540,11 +570,9 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -556,8 +584,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 			if (r_A_react(try_transition)==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -572,8 +598,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 			} else {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -591,8 +615,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -604,8 +626,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -616,8 +636,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 			if (r2_B_react(try_transition)==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -633,8 +651,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -643,8 +659,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		
 		if (try_transition) {
 			did_transition = false;
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -657,8 +671,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -670,37 +682,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case r_A_r_B:
-				r_A_r_B_react(true);
-				break;
-			case r2_B_r_BA_r_BAA:
-				r2_B_r_BA_r_BAA_react(true);
-				break;
-			case r2_B_r_BB:
-				r2_B_r_BB_react(true);
-				break;
-			case r2_C:
-				r2_C_react(true);
-				break;
-			case r3_D_r_DA_r_DAA:
-				r3_D_r_DA_r_DAA_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

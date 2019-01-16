@@ -75,12 +75,18 @@ public class SexecLaunchConfigurationDelegate extends AbstractSCTLaunchConfigura
 	}
 
 	protected Injector getInjector(Statechart statechart, ILaunch launch) {
+		return Guice.createInjector(getModule(statechart, launch));
+	}
+
+	protected Module getModule(Statechart statechart, ILaunch launch) {
 		Module module = DomainRegistry.getDomain(statechart).getModule(IDomain.FEATURE_SIMULATION);
-		return Guice.createInjector(Modules.combine(module, new Module() {
+		return Modules.combine(module, new Module() {
 			@Override
 			public void configure(Binder binder) {
 				binder.bind(ILaunch.class).toInstance(launch);
 			}
-		}));
+		});
 	}
+	
+	
 }

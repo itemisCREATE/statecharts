@@ -19,9 +19,10 @@ import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.GenericElement;
+import org.yakindu.base.types.MetaComposite;
 import org.yakindu.base.types.Operation;
-import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypedDeclaration;
 import org.yakindu.base.types.TypedElement;
 import org.yakindu.sct.model.sexec.*;
 import org.yakindu.sct.model.sexec.Call;
@@ -41,9 +42,12 @@ import org.yakindu.sct.model.sexec.ExecutionSynchronization;
 import org.yakindu.sct.model.sexec.ExitState;
 import org.yakindu.sct.model.sexec.HistoryEntry;
 import org.yakindu.sct.model.sexec.If;
+import org.yakindu.sct.model.sexec.LocalVariableDefinition;
 import org.yakindu.sct.model.sexec.MappedElement;
+import org.yakindu.sct.model.sexec.Method;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.ReactionFired;
+import org.yakindu.sct.model.sexec.Return;
 import org.yakindu.sct.model.sexec.SaveHistory;
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.Sequence;
@@ -51,6 +55,7 @@ import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sexec.StateCase;
 import org.yakindu.sct.model.sexec.StateSwitch;
 import org.yakindu.sct.model.sexec.StateVector;
+import org.yakindu.sct.model.sexec.Statement;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.TimeEvent;
 import org.yakindu.sct.model.sexec.Trace;
@@ -136,9 +141,10 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = caseComplexType(executionFlow);
 				if (result == null) result = caseType(executionFlow);
 				if (result == null) result = caseGenericElement(executionFlow);
-				if (result == null) result = casePackageMember(executionFlow);
+				if (result == null) result = caseDeclaration(executionFlow);
 				if (result == null) result = caseNamedElement(executionFlow);
 				if (result == null) result = caseAnnotatableElement(executionFlow);
+				if (result == null) result = caseMetaComposite(executionFlow);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -149,9 +155,10 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = caseComplexType(executionNode);
 				if (result == null) result = caseType(executionNode);
 				if (result == null) result = caseGenericElement(executionNode);
-				if (result == null) result = casePackageMember(executionNode);
+				if (result == null) result = caseDeclaration(executionNode);
 				if (result == null) result = caseNamedElement(executionNode);
 				if (result == null) result = caseAnnotatableElement(executionNode);
+				if (result == null) result = caseMetaComposite(executionNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -164,9 +171,10 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = caseComplexType(executionState);
 				if (result == null) result = caseType(executionState);
 				if (result == null) result = caseGenericElement(executionState);
-				if (result == null) result = casePackageMember(executionState);
+				if (result == null) result = caseDeclaration(executionState);
 				if (result == null) result = caseNamedElement(executionState);
 				if (result == null) result = caseAnnotatableElement(executionState);
+				if (result == null) result = caseMetaComposite(executionState);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -195,9 +203,10 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = caseComplexType(executionEntry);
 				if (result == null) result = caseType(executionEntry);
 				if (result == null) result = caseGenericElement(executionEntry);
-				if (result == null) result = casePackageMember(executionEntry);
+				if (result == null) result = caseDeclaration(executionEntry);
 				if (result == null) result = caseNamedElement(executionEntry);
 				if (result == null) result = caseAnnotatableElement(executionEntry);
+				if (result == null) result = caseMetaComposite(executionEntry);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -209,9 +218,10 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = caseComplexType(executionExit);
 				if (result == null) result = caseType(executionExit);
 				if (result == null) result = caseGenericElement(executionExit);
-				if (result == null) result = casePackageMember(executionExit);
+				if (result == null) result = caseDeclaration(executionExit);
 				if (result == null) result = caseNamedElement(executionExit);
 				if (result == null) result = caseAnnotatableElement(executionExit);
+				if (result == null) result = caseMetaComposite(executionExit);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -223,9 +233,10 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = caseComplexType(executionChoice);
 				if (result == null) result = caseType(executionChoice);
 				if (result == null) result = caseGenericElement(executionChoice);
-				if (result == null) result = casePackageMember(executionChoice);
+				if (result == null) result = caseDeclaration(executionChoice);
 				if (result == null) result = caseNamedElement(executionChoice);
 				if (result == null) result = caseAnnotatableElement(executionChoice);
+				if (result == null) result = caseMetaComposite(executionChoice);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -237,9 +248,10 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = caseComplexType(executionSynchronization);
 				if (result == null) result = caseType(executionSynchronization);
 				if (result == null) result = caseGenericElement(executionSynchronization);
-				if (result == null) result = casePackageMember(executionSynchronization);
+				if (result == null) result = caseDeclaration(executionSynchronization);
 				if (result == null) result = caseNamedElement(executionSynchronization);
 				if (result == null) result = caseAnnotatableElement(executionSynchronization);
+				if (result == null) result = caseMetaComposite(executionSynchronization);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -255,12 +267,13 @@ public class SexecSwitch<T> extends Switch<T> {
 				Method method = (Method)theEObject;
 				T result = caseMethod(method);
 				if (result == null) result = caseOperation(method);
-				if (result == null) result = caseDeclaration(method);
+				if (result == null) result = caseTypedDeclaration(method);
 				if (result == null) result = caseGenericElement(method);
+				if (result == null) result = caseDeclaration(method);
 				if (result == null) result = caseTypedElement(method);
-				if (result == null) result = casePackageMember(method);
 				if (result == null) result = caseNamedElement(method);
 				if (result == null) result = caseAnnotatableElement(method);
+				if (result == null) result = caseMetaComposite(method);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -274,11 +287,12 @@ public class SexecSwitch<T> extends Switch<T> {
 				TimeEvent timeEvent = (TimeEvent)theEObject;
 				T result = caseTimeEvent(timeEvent);
 				if (result == null) result = caseEvent(timeEvent);
+				if (result == null) result = caseTypedDeclaration(timeEvent);
 				if (result == null) result = caseDeclaration(timeEvent);
 				if (result == null) result = caseTypedElement(timeEvent);
-				if (result == null) result = casePackageMember(timeEvent);
 				if (result == null) result = caseNamedElement(timeEvent);
 				if (result == null) result = caseAnnotatableElement(timeEvent);
+				if (result == null) result = caseMetaComposite(timeEvent);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -665,21 +679,6 @@ public class SexecSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Typed Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Typed Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTypedElement(TypedElement object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Annotatable Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -695,17 +694,47 @@ public class SexecSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Package Member</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Meta Composite</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Package Member</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Meta Composite</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casePackageMember(PackageMember object) {
+	public T caseMetaComposite(MetaComposite object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Typed Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Typed Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypedElement(TypedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Typed Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Typed Declaration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypedDeclaration(TypedDeclaration object) {
 		return null;
 	}
 

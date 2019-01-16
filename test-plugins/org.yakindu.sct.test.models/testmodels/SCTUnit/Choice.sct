@@ -16,10 +16,10 @@
         <outgoingTransitions xmi:id="_ZLvSgKlkEeGmpNX2cnyk2Q" specification="[c]" target="_OoKJkKllEeGmpNX2cnyk2Q"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_W-U_wKlkEeGmpNX2cnyk2Q" specification="" name="B" incomingTransitions="_takm8JNOEeKBtrru-JWnVQ _V0axYKlkEeGmpNX2cnyk2Q _OWpsYKlxEeGcJsk19eqYVQ _j8lysKJ6EeK62NKshpou-A">
-        <outgoingTransitions xmi:id="_Bo7nIKJ4EeK62NKshpou-A" specification="default" target="_LdKpsKlkEeGmpNX2cnyk2Q"/>
+        <outgoingTransitions xmi:id="_Bo7nIKJ4EeK62NKshpou-A" specification="always" target="_LdKpsKlkEeGmpNX2cnyk2Q"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_OoKJkKllEeGmpNX2cnyk2Q" specification="" name="C" incomingTransitions="_vcYGoJNOEeKBtrru-JWnVQ _ZLvSgKlkEeGmpNX2cnyk2Q _gnWqUKl2EeGcJsk19eqYVQ _0ovm8KJ6EeK62NKshpou-A">
-        <outgoingTransitions xmi:id="_JClVQKJ4EeK62NKshpou-A" specification="default" target="_LdKpsKlkEeGmpNX2cnyk2Q"/>
+        <outgoingTransitions xmi:id="_JClVQKJ4EeK62NKshpou-A" specification="always" target="_LdKpsKlkEeGmpNX2cnyk2Q"/>
       </vertices>
       <vertices xsi:type="sgraph:Choice" xmi:id="_zaksAKlmEeGmpNX2cnyk2Q" incomingTransitions="_lmJvUKllEeGmpNX2cnyk2Q">
         <outgoingTransitions xmi:id="_gnWqUKl2EeGcJsk19eqYVQ" specification="[c]" target="_OoKJkKllEeGmpNX2cnyk2Q"/>

@@ -15,6 +15,7 @@ The *GeneratorOptions* feature allows to change the behavior of the C++ generato
 
 * _innerFunctionVisibility_ (String, optional): This parameter is used to change the visibility of inner functions and variables. By default @private@ visibility is used. It can be changed to @protected@ to allow function overriding for a class which inherits from the generated state machine base class.
 * _staticOperationCallback_ (Boolean, optional): If this parameter is set to _true_, the callback function declaration for statechart operations is static and the functions are called statically by the state machine code.
+* _inEventQueue_ (Boolean, optional): If set to _true_, this activates a queue for in events (only for event driven statecharts). This is useful for multi-threaded environments, because you can raise another in event while a run cycle is running without interfering with the current run cycle.
 
 ==<div class="example">==
 
@@ -550,3 +551,42 @@ int main(int argc, char *argv[]) {
 
 p. 
 
+h4(#codegen_cpp_trace-observed_state_machine). Trace-observed state machine
+
+p. By using the tracing feature the execution of the state machine can be observed. In detail, entered and exited states can be traced. Therefore, additional operation callbacks _onStateEntered_ and _onStateExited_ are generated in the _sCTracingObserver.h_ file. 
+
+p. The _TraceObserver_ class can be implemented as following: 
+
+bc.. 
+class TraceObserverImpl : public ysc::TraceObserver<SomeStatemachine::SomeStatemachineStates>{
+public:
+	TraceObserverImpl();
+	virtual ~TraceObserverImpl();
+	void stateEntered(SomeStatemachine::SomeStatemachineStates state);
+	void stateExited(SomeStatemachine::SomeStatemachineStates state);
+};
+TraceObserverImpl::TraceObserverImpl() {}
+TraceObserverImpl::~TraceObserverImpl() {}
+
+void TraceObserverImpl::stateEntered(SomeStatemachine::SomeStatemachineStates state) {
+	// observe any entered state
+}
+void TraceObserverImpl::stateExited(SomeStatemachine::SomeStatemachineStates state) {
+	// observe any exited state
+}
+
+p. 
+Finally, the state observer has to be added to the state machine. This is shown in a simple example for some undefined state machine:
+
+bc.. 
+int main() {
+	SomeStatemachine* sm = new SomeStatemachine();
+	TraceObserverImpl* observer = new TraceObserverImpl(); 
+	
+	sm->setTraceObserver(observer);
+	
+	sm->init();
+	sm->enter();
+	
+	sm->runCycle();
+}

@@ -64,7 +64,7 @@ import com.google.inject.Injector;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SGenJavaValidator extends AbstractSGenJavaValidator {
+public class SGenJavaValidator extends AbstractSGenValidator {
 
 	public static final String MISSING_REQUIRED_PARAMETER = "Missing required parameter.";
 	public static final String MISSING_REQUIRED_FEATURE = "Missing required feature.";
@@ -78,6 +78,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	public static final String DUPLICATE_ELEMENT = "The %s '%s' exists multiple times. Please rename or remove duplicates.";
 
 	public static final String CODE_REQUIRED_FEATURE = "code_req_feature.";
+	public static final String CODE_REQUIRED_DOMAIN = "code_req_domain";
 
 	@Inject
 	private Injector injector;
@@ -92,26 +93,6 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	@Inject
 	protected IQualifiedNameProvider nameProvider;
 
-	@Check
-	public void checkDomainCompatibility(GeneratorModel model) {
-		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions
-				.getGeneratorDescriptor(model.getGeneratorId());
-		if (!generatorDescriptor.isPresent()) {
-			return;
-		}
-		Set<String> validDomains = generatorDescriptor.get().getValidDomains();
-		EList<GeneratorEntry> entries = model.getEntries();
-		for (GeneratorEntry generatorEntry : entries) {
-			EObject reference = generatorEntry.getElementRef();
-			if (reference instanceof DomainElement) {
-				String domainID = ((DomainElement) reference).getDomainID();
-				if (!validDomains.isEmpty() && !validDomains.contains(domainID)) {
-					error(String.format(INVALID_DOMAIN_ID, domainID, Arrays.toString(validDomains.toArray())),
-							generatorEntry, SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF);
-				}
-			}
-		}
-	}
 	@Check
 	public void checkInitialValue(Property property) {
 		if (property.getType() == null || property.getType().eIsProxy())
@@ -275,6 +256,30 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 				error(String.format(MISSING_REQUIRED_FEATURE + " %s", featureType.getName()),
 						SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF, CODE_REQUIRED_FEATURE,
 						featureType.getName());
+		}
+	}
+	
+
+	@Check
+	public void checkDomainCompatibility(GeneratorModel model) {
+		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions
+				.getGeneratorDescriptor(model.getGeneratorId());
+		if (!generatorDescriptor.isPresent()) {
+			return;
+		}
+		// DIFFERENT_DOMAIN_REQUIRED
+		Set<String> validDomains = generatorDescriptor.get().getValidDomains();
+		EList<GeneratorEntry> entries = model.getEntries();
+		for (GeneratorEntry generatorEntry : entries) {
+			EObject reference = generatorEntry.getElementRef();
+			if (reference instanceof DomainElement) {
+				String domainID = ((DomainElement) reference).getDomainID();
+				if (!validDomains.isEmpty() && !validDomains.contains(domainID)) {
+					error(String.format(INVALID_DOMAIN_ID, domainID, Arrays.toString(validDomains.toArray())),
+							generatorEntry, SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF, CODE_REQUIRED_DOMAIN,
+							String.join(",", validDomains));
+				}
+			}
 		}
 	}
 

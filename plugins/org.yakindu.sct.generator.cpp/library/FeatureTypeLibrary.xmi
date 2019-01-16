@@ -32,6 +32,10 @@
         name="staticOperationCallback"
         optional="true"
         parameterType="BOOLEAN"/>
+    <parameters
+        name="inEventQueue"
+        optional="true"
+        parameterType="BOOLEAN"/>
   </types>
   <types name="Includes"
       optional="true">
@@ -62,5 +66,5 @@
         comment="Whether to generate a callback that is used when a state is entered."
         optional="true"
         parameterType="BOOLEAN"/>
-  </types>  
+  </types>
 </sgen:FeatureTypeLibrary>

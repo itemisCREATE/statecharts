@@ -1,7 +1,7 @@
 package org.yakindu.scr.logicaland;
 
-public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 
+public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private long x;
@@ -43,6 +43,7 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public LogicalAndStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -62,11 +63,28 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_A:
+				main_region_A_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -139,7 +157,7 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_LogicalAnd_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -160,11 +178,11 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_LogicalAnd_main_region__entry_Default() {
 		enterSequence_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -172,10 +190,10 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.getX()==1) {
 					exitSequence_main_region_A();
-					sCInterface.setB(((sCInterface.assignX(sCInterface.getX() + 1))==2 && (sCInterface.assignX(sCInterface.getX() * 2))==4));
+					sCInterface.setB((((sCInterface.assignX(sCInterface.getX() + 1))==2 && (sCInterface.assignX(sCInterface.getX() * 2))==4)));
 					
 					enterSequence_main_region_A_default();
 				} else {
@@ -183,25 +201,7 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
-				main_region_A_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

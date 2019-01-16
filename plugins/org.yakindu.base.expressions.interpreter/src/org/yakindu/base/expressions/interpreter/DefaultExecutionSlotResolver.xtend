@@ -11,8 +11,7 @@
 package org.yakindu.base.expressions.interpreter
 
 import com.google.inject.Inject
-import java.beans.Expression
-import java.util.Stack
+import java.util.Optional
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.util.SimpleAttributeResolver
@@ -36,72 +35,44 @@ import org.yakindu.sct.model.sruntime.ExecutionSlot
 class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 
 	@Inject
-	protected extension IQualifiedNameProvider nameProvider
-
-	def dispatch ExecutionSlot resolve(ExecutionContext context, FeatureCall e) {
-		return resolveByFeature(context, e, e.feature)
+	protected extension IQualifiedNameProvider
+	
+	def dispatch Optional<ExecutionSlot> resolve(ExecutionContext context, FeatureCall e) {
+		return Optional.ofNullable(resolveByFeature(context, e, e.feature))
 	}
 
-	def dispatch ExecutionSlot resolve(ExecutionContext context, ElementReferenceExpression e) {
-		packageNamespaceAwareResolve(context, e.reference)
+	def dispatch Optional<ExecutionSlot> resolve(ExecutionContext context, ElementReferenceExpression e) {
+		return Optional.ofNullable(packageNamespaceAwareResolve(context, e.reference))
 	}
 
-	def dispatch ExecutionSlot resolve(ExecutionContext context, AssignmentExpression e) {
+	def dispatch Optional<ExecutionSlot> resolve(ExecutionContext context, AssignmentExpression e) {
 		return context.resolve(e.varRef)
 	}
 
-	def dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, EObject feature) {
+	def protected dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, EObject feature) {
 		return context.getVariable(e.feature.fullyQualifiedName.toString)
 	}
 
-	def dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, Operation feature) {
+	def protected dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, Operation feature) {
 		return resolveCompositeSlot(context, e)
 	}
 
-	def dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, Event feature) {
+	def protected dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, Event feature) {
 		return resolveCompositeSlot(context, e)
 	}
 
-	def dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, Property feature) {
+	def protected dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, Property feature) {
 		return resolveCompositeSlot(context, e)
 	}
 
-	def ExecutionSlot resolveCompositeSlot(ExecutionContext context, FeatureCall e) {
-		var current = e
-		val Stack<FeatureCall> callStack = new Stack
-		callStack.add(0, e)
-		while (!(current.owner instanceof ElementReferenceExpression)) {
-			current = current.owner as FeatureCall
-			callStack.add(0, current)
+	def protected ExecutionSlot resolveCompositeSlot(ExecutionContext context, FeatureCall e) {
+		var featureSlot = resolve(context, e.owner)
+		if (!featureSlot.isPresent) {
+			return null
 		}
-		// first: get the root slot where to start the search
-		var ExecutionSlot featureSlot = resolve(context, current.owner)
-
-		
-		// second: go through all calls and traverse execution context hierarchy accordingly
-		for (FeatureCall call : callStack) {
-			if (featureSlot === null) {
-				throw new IllegalStateException(
-					"Value of '" + current.feature.name  + "' in expression '" + getExpressionText(e) +
-						"' has not been set.") // could not find starting slot for feature call
-			}
-			featureSlot = resolveFromSlot(featureSlot, call)
-		}
-		return featureSlot
+		return resolveFromSlot(featureSlot.get, e)
 	}
 	
-	def dispatch String getExpressionText(FeatureCall call) {
-		getExpressionText(call.owner) + "." + call.feature.name
-	}
-	
-	def dispatch String getExpressionText(ElementReferenceExpression exp) {
-		exp.reference.fullyQualifiedName.toString
-	}
-	
-	def dispatch String getExpressionText(Expression exp) {
-		// fallback
-	}
-
 	def protected dispatch ExecutionSlot resolveFromSlot(ExecutionSlot slot, FeatureCall call) {
 		slot // fallback
 	}

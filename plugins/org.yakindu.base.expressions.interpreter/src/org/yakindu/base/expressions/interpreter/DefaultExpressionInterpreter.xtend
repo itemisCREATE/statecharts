@@ -14,6 +14,7 @@ import com.google.common.collect.Sets
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.Set
+import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.AssignmentOperator
@@ -41,6 +42,7 @@ import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.ShiftExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
+import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Expression
@@ -51,6 +53,7 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sruntime.CompositeSlot
 import org.yakindu.sct.model.sruntime.ExecutionContext
 import org.yakindu.sct.model.sruntime.ExecutionEvent
+import org.yakindu.sct.model.sruntime.ExecutionSlot
 import org.yakindu.sct.model.sruntime.ExecutionVariable
 import org.yakindu.sct.model.sruntime.ReferenceSlot
 
@@ -73,6 +76,9 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 
 	@Inject(optional=true)
 	protected ExecutionContext context
+	
+	@Inject
+	protected extension ExpressionExtensions
 
 	override evaluate(Expression statement, ExecutionContext context) {
 		this.context = context
@@ -125,7 +131,10 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 
 	def dispatch Object execute(PostFixUnaryExpression it) {
 		var result = operand.execute
-		context.resolve(operand).value = evaluate(operator.getName(), result)
+		val slot = context.resolve(operand)
+			.orElseThrow(SlotResolutionExceptionSupplier.forContext(operand))
+		
+		slot.value = evaluate(operator.getName(), result)
 		result
 	}
 
@@ -172,7 +181,11 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	}
 
 	def Object cast(Object value, Type type) {
-		typeCast(value, type.originType)
+		if (type !== null) {
+			typeCast(value, type.originType)
+ 		} else {
+	 		value
+ 		}
 	}
 
 	def protected dispatch Object typeCast(Long value, Type type) {
@@ -216,8 +229,11 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 
 	def Object executeAssignment(AssignmentExpression assignment) {
 		var scopeVariable = context.resolve(assignment.varRef)
+			.orElseThrow(SlotResolutionExceptionSupplier.forContext(assignment.varRef))
+		
 		var result = assignment.expression.execute
-		if(result instanceof Enumerator) result = result.literalValue
+		if (result instanceof Enumerator) 
+			result = result.literalValue
 
 		if (assignment.operator == AssignmentOperator::ASSIGN) {
 			// Strong typing, use the type of the scopeVariable instead of using new runtime type
@@ -225,7 +241,7 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 		} else {
 			var operator = assignFunctionMap.get(assignment.operator.getName())
 			scopeVariable.value = if (result !== null)
-				cast(evaluate(operator, scopeVariable.getValue, result), scopeVariable.type)
+				cast(evaluate(operator, scopeVariable.value, result), scopeVariable.type)
 			else
 				null
 		}
@@ -269,28 +285,8 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	}
 
 	def executeElementReferenceExpression(ElementReferenceExpression expression) {
-		if (expression.reference instanceof Operation) {
-			val executor = operationExecutors.findFirst[it.canExecute(expression)]
-			if (executor !== null)
-				return executor.executeOperation(expression)
-		}
-		// for enumeration types return the literal value
-		if (expression.reference instanceof Enumerator) {
-			return new Long((expression.reference as Enumerator).literalValue)
-		}
-
-		val executionSlot = context.resolve(expression)
-		if (executionSlot instanceof ExecutionVariable)
-			return executionSlot.getValue
-		if (executionSlot instanceof ExecutionEvent)
-			return (executionSlot as ExecutionEvent).raised
-
-		// reference to an element with complex type is not reflected in an execution variable but in a composite slot
-		// TODO hide reference mechanism in resolver
-		if (executionSlot instanceof CompositeSlot)
-			return executionSlot
-
-		return null
+		val slot = context.resolve(expression)
+		return doExecute(expression.reference, slot.orElse(null), expression)
 	}
 
 	def dispatch Object execute(FeatureCall call) {
@@ -298,32 +294,57 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	}
 
 	def executeFeatureCall(FeatureCall call) {
-		if (call.operationCall || call.feature instanceof Operation) {
-			if (call.feature instanceof Operation) {
-				val executor = operationExecutors.findFirst[it.canExecute(call)]
-				if (executor !== null) {
-					return executor.executeOperation(call)
-				}
-			}
-		} else if (call.feature instanceof Enumerator) {
-			return new Long((call.feature as Enumerator).literalValue)
+		var Object result
+		for (ArgumentExpression exp : call.toCallStack) {
+			val slot = context.resolve(exp)
+			result = doExecute(exp.featureOrReference, slot.orElse(null), exp)
 		}
-		var slot = context.resolve(call)
-		if (slot instanceof ExecutionVariable) {
-			return slot.getValue
+		return result
+	}
+	
+	def dispatch doExecute(EObject feature, Void slot, ArgumentExpression exp) {
+		// fall-back
+		println("No implementation found for " + exp + " -> returning null")
+		null
+	}
+	
+	def dispatch doExecute(EObject feature, ExecutionVariable slot, ArgumentExpression exp) {
+		slot.value
+	}
+	
+	def dispatch doExecute(EObject feature, CompositeSlot slot, ArgumentExpression exp) {
+		slot
+	}
+	
+	def dispatch doExecute(EObject feature, ExecutionEvent slot, ArgumentExpression exp) {
+		slot.raised
+	}
+	
+	def dispatch doExecute(Operation feature, ExecutionEvent slot, ArgumentExpression exp) {
+		slot.raised = true
+	}
+	
+	def dispatch doExecute(Operation feature, Void slot, ArgumentExpression exp) {
+		val executor = operationExecutors.findFirst[canExecute(exp)]
+		if (executor !== null) {
+			return executor.executeOperation(exp)
 		}
-		if (slot instanceof CompositeSlot) {
-			return slot
+	}
+	
+	def dispatch doExecute(Operation feature, ExecutionSlot slot, ArgumentExpression exp) {
+		val executor = operationExecutors.findFirst[canExecute(exp)]
+		if (executor !== null) {
+			slot.value = executor.executeOperation(exp)
 		}
-		if (slot instanceof ExecutionEvent) {
-			if (call.feature instanceof Operation) {
-				(slot as ExecutionEvent).raised = true
-			}
-			return (slot as ExecutionEvent).raised
-		}
-
-		println("No feature found for " + call.feature + " -> returning null")
-		return null;
+		return slot.value
+	}
+	
+	def dispatch doExecute(Enumerator feature, Void slot, ArgumentExpression exp) {
+		new Long(feature.literalValue)
+	}
+	
+	def dispatch doExecute(Type feature, Void slot, ArgumentExpression exp) {
+		null
 	}
 
 	def executeUnaryCoreFunction(Expression statement, String operator) {

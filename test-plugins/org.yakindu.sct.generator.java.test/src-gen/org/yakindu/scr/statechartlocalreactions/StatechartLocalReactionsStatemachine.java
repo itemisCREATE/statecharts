@@ -1,7 +1,7 @@
 package org.yakindu.scr.statechartlocalreactions;
 
-public class StatechartLocalReactionsStatemachine implements IStatechartLocalReactionsStatemachine {
 
+public class StatechartLocalReactionsStatemachine implements IStatechartLocalReactionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private long myInt;
@@ -31,6 +31,7 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	
 	private int nextStateIndex;
 	
+	
 	public StatechartLocalReactionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -48,12 +49,35 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 		enterSequence_region2_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_S1:
+				main_region_S1_react(true);
+				break;
+			case main_region_S2:
+				main_region_S2_react(true);
+				break;
+			case region2_a:
+				region2_a_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 		exitSequence_region2();
@@ -135,12 +159,12 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_StatechartLocalReactions_main_region__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region region2 */
 	private void enterSequence_region2_default() {
-		react_region2__entry_Default();
+		react_StatechartLocalReactions_region2__entry_Default();
 	}
 	
 	/* Default exit sequence for state S1 */
@@ -187,16 +211,16 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_StatechartLocalReactions_main_region__entry_Default() {
 		enterSequence_main_region_S1_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_region2__entry_Default() {
+	private void react_StatechartLocalReactions_region2__entry_Default() {
 		enterSequence_region2_a_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		sCInterface.setMyInt(sCInterface.getMyInt() + 1);
 		
 		if (sCInterface.getMyInt()==100) {
@@ -209,12 +233,10 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_S1();
 				enterSequence_main_region_S2_default();
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -223,12 +245,10 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_S2();
 				enterSequence_main_region_S1_default();
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -239,31 +259,7 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 		if (try_transition) {
 			did_transition = false;
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_S1:
-				main_region_S1_react(true);
-				break;
-			case main_region_S2:
-				main_region_S2_react(true);
-				break;
-			case region2_a:
-				region2_a_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

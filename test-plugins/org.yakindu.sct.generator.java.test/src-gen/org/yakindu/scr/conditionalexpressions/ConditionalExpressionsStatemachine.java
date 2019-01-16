@@ -1,7 +1,7 @@
 package org.yakindu.scr.conditionalexpressions;
 
-public class ConditionalExpressionsStatemachine implements IConditionalExpressionsStatemachine {
 
+public class ConditionalExpressionsStatemachine implements IConditionalExpressionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;
@@ -69,6 +69,7 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 	
 	private int nextStateIndex;
 	
+	
 	public ConditionalExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -92,11 +93,31 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_A:
+				main_region_A_react(true);
+				break;
+			case main_region_B:
+				main_region_B_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -212,7 +233,7 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_ConditionalExpressions_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -242,11 +263,11 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_ConditionalExpressions_main_region__entry_Default() {
 		enterSequence_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -254,16 +275,14 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
-				if ((sCInterface.e) && (1==(sCInterface.getBoolVar() ? 1 : 0))) {
+			if (react()==false) {
+				if (((sCInterface.e) && (1==(sCInterface.getBoolVar() ? 1 : 0)))) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -272,32 +291,11 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
-				main_region_A_react(true);
-				break;
-			case main_region_B:
-				main_region_B_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

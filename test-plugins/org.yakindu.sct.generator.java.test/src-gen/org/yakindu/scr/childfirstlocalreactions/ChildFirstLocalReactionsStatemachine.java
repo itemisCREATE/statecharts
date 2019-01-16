@@ -1,7 +1,7 @@
 package org.yakindu.scr.childfirstlocalreactions;
 
-public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalReactionsStatemachine {
 
+public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalReactionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;
@@ -117,6 +117,7 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 	
 	private int nextStateIndex;
 	
+	
 	public ChildFirstLocalReactionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -148,11 +149,37 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_ChildFirstLocalReactions_r_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case childFirstLocalReactions_r_A_r_AA_r_AAA:
+				childFirstLocalReactions_r_A_r_AA_r_AAA_react(true);
+				break;
+			case childFirstLocalReactions_r_A_r_AA_r_AAB:
+				childFirstLocalReactions_r_A_r_AA_r_AAB_react(true);
+				break;
+			case childFirstLocalReactions_r_A_r_AB:
+				childFirstLocalReactions_r_A_r_AB_react(true);
+				break;
+			case childFirstLocalReactions_r_B:
+				childFirstLocalReactions_r_B_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_ChildFirstLocalReactions_r();
 	}
@@ -328,17 +355,17 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_ChildFirstLocalReactions_r_default() {
-		react_ChildFirstLocalReactions_r__entry_Default();
+		react_executionorder_ChildFirstLocalReactions_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_ChildFirstLocalReactions_r_A_r_default() {
-		react_ChildFirstLocalReactions_r_A_r__entry_Default();
+		react_executionorder_ChildFirstLocalReactions_r_A_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_ChildFirstLocalReactions_r_A_r_AA_r_default() {
-		react_ChildFirstLocalReactions_r_A_r_AA_r__entry_Default();
+		react_executionorder_ChildFirstLocalReactions_r_A_r_AA_r__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -427,21 +454,21 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstLocalReactions_r__entry_Default() {
+	private void react_executionorder_ChildFirstLocalReactions_r__entry_Default() {
 		enterSequence_ChildFirstLocalReactions_r_A_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstLocalReactions_r_A_r__entry_Default() {
+	private void react_executionorder_ChildFirstLocalReactions_r_A_r__entry_Default() {
 		enterSequence_ChildFirstLocalReactions_r_A_r_AA_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstLocalReactions_r_A_r_AA_r__entry_Default() {
+	private void react_executionorder_ChildFirstLocalReactions_r_A_r_AA_r__entry_Default() {
 		enterSequence_ChildFirstLocalReactions_r_A_r_AA_r_AAA_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		sCInterface.setSm_local((sCInterface.assignCnt(sCInterface.getCnt() + 1)));
 		
 		return false;
@@ -451,10 +478,10 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if ((sCInterface.e) && (!sCInterface.getDisable_a())) {
+			if (((sCInterface.e) && (!sCInterface.getDisable_a()))) {
 				exitSequence_ChildFirstLocalReactions_r_A();
 				enterSequence_ChildFirstLocalReactions_r_B_default();
-				react(false);
+				react();
 			} else {
 				did_transition = false;
 			}
@@ -462,7 +489,7 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		if (did_transition==false) {
 			sCInterface.setA_local((sCInterface.assignCnt(sCInterface.getCnt() + 1)));
 			
-			did_transition = react(try_transition);
+			did_transition = react();
 		}
 		return did_transition;
 	}
@@ -471,7 +498,7 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if ((sCInterface.e) && (!sCInterface.getDisable_aa())) {
+			if (((sCInterface.e) && (!sCInterface.getDisable_aa()))) {
 				exitSequence_ChildFirstLocalReactions_r_A_r_AA();
 				enterSequence_ChildFirstLocalReactions_r_A_r_AB_default();
 				childFirstLocalReactions_r_A_react(false);
@@ -491,7 +518,7 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if ((sCInterface.e) && (!sCInterface.getDisable_aaa())) {
+			if (((sCInterface.e) && (!sCInterface.getDisable_aaa()))) {
 				exitSequence_ChildFirstLocalReactions_r_A_r_AA_r_AAA();
 				enterSequence_ChildFirstLocalReactions_r_A_r_AA_r_AAB_default();
 				childFirstLocalReactions_r_A_r_AA_react(false);
@@ -538,34 +565,9 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 			did_transition = false;
 		}
 		if (did_transition==false) {
-			did_transition = react(try_transition);
+			did_transition = react();
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case childFirstLocalReactions_r_A_r_AA_r_AAA:
-				childFirstLocalReactions_r_A_r_AA_r_AAA_react(true);
-				break;
-			case childFirstLocalReactions_r_A_r_AA_r_AAB:
-				childFirstLocalReactions_r_A_r_AA_r_AAB_react(true);
-				break;
-			case childFirstLocalReactions_r_A_r_AB:
-				childFirstLocalReactions_r_A_r_AB_react(true);
-				break;
-			case childFirstLocalReactions_r_B:
-				childFirstLocalReactions_r_B_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

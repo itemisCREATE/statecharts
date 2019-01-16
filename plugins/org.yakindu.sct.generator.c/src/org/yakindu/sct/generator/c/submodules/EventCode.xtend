@@ -20,9 +20,11 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
+import org.yakindu.sct.generator.c.types.CLiterals
 
 /**
  * @author rbeckmann
+ * @author axel terfloth
  *
  */
 @Singleton // Guice
@@ -30,6 +32,7 @@ class EventCode {
 	@Inject protected extension SExecExtensions
 	@Inject protected extension Naming
 	@Inject protected extension ICodegenTypeSystemAccess
+	@Inject protected extension CLiterals
 	
 	def interfaceIncomingEventRaiser(ExecutionFlow it, EventDefinition event) '''
 		«eventRaiserSignature(event)»
@@ -42,7 +45,7 @@ class EventCode {
 		«IF event.hasValue»
 		«event.valueAccess» = value;
 		«ENDIF»
-		«event.access» = «CGeneratorConstants.TRUE»;
+		«event.access» = «TRUE_LITERAL»;
 	'''
 	
 	def interfaceOutgoingEventGetter(ExecutionFlow it, EventDefinition event) '''
@@ -63,7 +66,7 @@ class EventCode {
 		«IF value !== null»
 			«event.definition.event.valueAccess» = «exp.code(value)»;
 		«ENDIF»
-		«event.definition.event.access» = «CGeneratorConstants.TRUE»'''
+		«event.definition.event.access» = «TRUE_LITERAL»'''
 		
 	def eventRaiserSignature(ExecutionFlow it, EventDefinition event) '''void «event.asRaiser»(«scHandleDecl»«event.valueParams»)'''
 	

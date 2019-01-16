@@ -1,7 +1,7 @@
 package org.yakindu.scr.transitionwithoutcondition;
 
-public class TransitionWithoutConditionStatemachine implements ITransitionWithoutConditionStatemachine {
 
+public class TransitionWithoutConditionStatemachine implements ITransitionWithoutConditionStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {
@@ -13,6 +13,7 @@ public class TransitionWithoutConditionStatemachine implements ITransitionWithou
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	public TransitionWithoutConditionStatemachine() {
 	}
@@ -29,11 +30,31 @@ public class TransitionWithoutConditionStatemachine implements ITransitionWithou
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_A:
+				main_region_A_react(true);
+				break;
+			case main_region_B:
+				main_region_B_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -94,7 +115,7 @@ public class TransitionWithoutConditionStatemachine implements ITransitionWithou
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_TransitionWithoutCondition_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -124,11 +145,11 @@ public class TransitionWithoutConditionStatemachine implements ITransitionWithou
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_TransitionWithoutCondition_main_region__entry_Default() {
 		enterSequence_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -136,12 +157,10 @@ public class TransitionWithoutConditionStatemachine implements ITransitionWithou
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_A();
 				enterSequence_main_region_B_default();
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -150,32 +169,11 @@ public class TransitionWithoutConditionStatemachine implements ITransitionWithou
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
-				main_region_A_react(true);
-				break;
-			case main_region_B:
-				main_region_B_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

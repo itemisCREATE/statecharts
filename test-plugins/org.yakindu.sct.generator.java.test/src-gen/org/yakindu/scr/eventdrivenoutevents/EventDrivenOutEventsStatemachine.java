@@ -1,7 +1,7 @@
 package org.yakindu.scr.eventdrivenoutevents;
 
-public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsStatemachine {
 
+public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e1;
@@ -47,6 +47,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	
 	private int nextStateIndex;
 	
+	
 	public EventDrivenOutEventsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -63,12 +64,38 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 		enterSequence_second_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_StateA:
+				main_region_StateA_react(true);
+				break;
+			case main_region_StateB:
+				main_region_StateB_react(true);
+				break;
+			case second_region_StateC:
+				second_region_StateC_react(true);
+				break;
+			case second_region_StateD:
+				second_region_StateD_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 		exitSequence_second_region();
@@ -166,12 +193,12 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_EventDrivenOutEvents_main_region__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region second region */
 	private void enterSequence_second_region_default() {
-		react_second_region__entry_Default();
+		react_EventDrivenOutEvents_second_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state StateA */
@@ -227,16 +254,16 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_EventDrivenOutEvents_main_region__entry_Default() {
 		enterSequence_main_region_StateA_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_second_region__entry_Default() {
+	private void react_EventDrivenOutEvents_second_region__entry_Default() {
 		enterSequence_second_region_StateC_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -244,7 +271,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e1) {
 					exitSequence_main_region_StateA();
 					enterSequence_main_region_StateB_default();
@@ -253,8 +280,6 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -262,11 +287,9 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -282,8 +305,6 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -293,34 +314,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		if (try_transition) {
 			did_transition = false;
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_StateA:
-				main_region_StateA_react(true);
-				break;
-			case main_region_StateB:
-				main_region_StateB_react(true);
-				break;
-			case second_region_StateC:
-				second_region_StateC_react(true);
-				break;
-			case second_region_StateD:
-				second_region_StateD_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

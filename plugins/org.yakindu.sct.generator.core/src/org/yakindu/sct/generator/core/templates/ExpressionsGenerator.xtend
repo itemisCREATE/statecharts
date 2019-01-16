@@ -12,7 +12,6 @@
 package org.yakindu.sct.generator.core.templates
 
 import com.google.inject.Inject
-import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.BinaryExpression
 import org.yakindu.base.expressions.expressions.BinaryLiteral
@@ -25,12 +24,13 @@ import org.yakindu.base.expressions.expressions.IntLiteral
 import org.yakindu.base.expressions.expressions.Literal
 import org.yakindu.base.expressions.expressions.NullLiteral
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression
+import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.expressions.expressions.UnaryExpression
+import org.yakindu.base.types.Expression
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
-import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
 
 /**
  * 
@@ -39,14 +39,17 @@ import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
 class ExpressionsGenerator {
 
 	@Inject protected extension ICodegenTypeSystemAccess
-
-	def dispatch CharSequence code(EObject it) {
+	
+	def dispatch CharSequence code(Expression it) {
+		
+	}
+	def dispatch CharSequence code(Literal it) {
 		throw new IllegalStateException("No dispatch function for " + getClass().name)
 	}
 
 	/* Expressions */
 	def dispatch CharSequence code(BinaryExpression it) {
-		leftOperand.code.toString.trim + " " + operator.literal.toString.trim + " " + rightOperand.code
+		'''(«leftOperand.code.toString.trim» «operator.literal.toString.trim» «rightOperand.code»)'''
 	}
 
 	def dispatch CharSequence code(UnaryExpression it) {
@@ -66,11 +69,6 @@ class ExpressionsGenerator {
 	def dispatch CharSequence code(ParenthesizedExpression it) '''(«expression.code»)'''
 
 	def dispatch CharSequence code(TypeCastExpression it) '''((«type.getTargetLanguageName») «operand.code»)'''
-
-	/* Literals */
-	def dispatch CharSequence code(Literal it){
-		throw new IllegalStateException("No dispatch function for " + getClass().name)
-	}
 
 	def dispatch CharSequence code(StringLiteral it) '''"«value.escaped»"'''
 

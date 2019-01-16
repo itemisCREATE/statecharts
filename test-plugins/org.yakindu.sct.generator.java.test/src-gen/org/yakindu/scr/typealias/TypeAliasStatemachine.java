@@ -1,7 +1,7 @@
 package org.yakindu.scr.typealias;
 
-public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 
+public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean myEvent;
@@ -51,6 +51,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public TypeAliasStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -70,11 +71,37 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_Start:
+				main_region_Start_react(true);
+				break;
+			case main_region_Mid:
+				main_region_Mid_react(true);
+				break;
+			case main_region_Mid2:
+				main_region_Mid2_react(true);
+				break;
+			case main_region_End:
+				main_region_End_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -188,7 +215,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_TypeAlias_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state Start */
@@ -236,11 +263,11 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_TypeAlias_main_region__entry_Default() {
 		enterSequence_main_region_Start_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -248,7 +275,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.getMyVar()==1) {
 					exitSequence_main_region_Start();
 					enterSequence_main_region_Mid_default();
@@ -257,8 +284,6 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -266,7 +291,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if ((sCInterface.getMyString()== null?"TypeSystem" ==null :sCInterface.getMyString().equals("TypeSystem"))) {
 					exitSequence_main_region_Mid();
 					enterSequence_main_region_Mid2_default();
@@ -275,8 +300,6 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -284,7 +307,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.myEvent) {
 					exitSequence_main_region_Mid2();
 					enterSequence_main_region_End_default();
@@ -293,8 +316,6 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -302,38 +323,11 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_Start:
-				main_region_Start_react(true);
-				break;
-			case main_region_Mid:
-				main_region_Mid_react(true);
-				break;
-			case main_region_Mid2:
-				main_region_Mid2_react(true);
-				break;
-			case main_region_End:
-				main_region_End_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

@@ -22,7 +22,7 @@ import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.resource.StextResource;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
-import org.yakindu.sct.model.stext.validation.STextJavaValidator;
+import org.yakindu.sct.model.stext.validation.STextValidator;
 import org.yakindu.sct.test.models.AbstractTestModelsUtil;
 
 import com.google.inject.Inject;
@@ -31,7 +31,7 @@ import com.google.inject.Injector;
 public abstract class AbstractSTextValidationTest extends AbstractSTextTest {
 
 	@Inject
-	public STextJavaValidator validator;
+	public STextValidator validator;
 	@Inject
 	public Injector injector;
 
@@ -50,7 +50,7 @@ public abstract class AbstractSTextValidationTest extends AbstractSTextTest {
 		resource.getContents().add(statechart);
 	
 		diagnostics = new BasicDiagnostic();
-		tester = new ValidatorTester<STextJavaValidator>(validator, injector);
+		tester = new ValidatorTester<STextValidator>(validator, injector);
 	}
 
 	@After public void teardown() {

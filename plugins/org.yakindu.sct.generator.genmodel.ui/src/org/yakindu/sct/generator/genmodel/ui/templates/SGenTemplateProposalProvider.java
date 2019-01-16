@@ -31,7 +31,7 @@ import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.generator.core.extensions.ILibraryDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
 import org.yakindu.sct.generator.genmodel.services.SGenGrammarAccess;
-import org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator;
+import org.yakindu.sct.generator.genmodel.ui.internal.GenmodelActivator;
 import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 import org.yakindu.sct.model.sgen.GeneratorModel;
@@ -74,8 +74,9 @@ public class SGenTemplateProposalProvider extends DefaultTemplateProposalProvide
 			ITemplateAcceptor acceptor) {
 		GeneratorModel model = (GeneratorModel) EcoreUtil2.getRootContainer(context.getCurrentModel());
 
-		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
-		if(!generatorDescriptor.isPresent()) {
+		Optional<IGeneratorDescriptor> generatorDescriptor = GeneratorExtensions
+				.getGeneratorDescriptor(model.getGeneratorId());
+		if (!generatorDescriptor.isPresent()) {
 			return;
 		}
 		Iterable<ILibraryDescriptor> libraryDescriptor = LibraryExtensions
@@ -91,8 +92,8 @@ public class SGenTemplateProposalProvider extends DefaultTemplateProposalProvide
 				Template template = new Template(featureType.getName() + " feature",
 						"Creates feature " + featureType.getName(), featureType.getName(),
 						creator.createProposal(featureType,
-								desc.createFeatureValueProvider(SGenActivator.getInstance()
-										.getInjector(SGenActivator.ORG_YAKINDU_SCT_GENERATOR_GENMODEL_SGEN)),
+								desc.createFeatureValueProvider(GenmodelActivator.getInstance()
+										.getInjector(GenmodelActivator.ORG_YAKINDU_SCT_GENERATOR_GENMODEL_SGEN)),
 								context.getCurrentModel()),
 						false);
 				TemplateProposal proposal = createProposal(template, templateContext, context, getImage(template),

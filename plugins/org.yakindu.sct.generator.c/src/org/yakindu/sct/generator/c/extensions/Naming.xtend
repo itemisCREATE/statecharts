@@ -76,14 +76,6 @@ class Naming {
 		return entry.moduleName.toFirstUpper
 	}
 
-	def filterNullOrEmptyAndJoin(Iterable<CharSequence> it) {
-		filter[!it?.toString.nullOrEmpty].join('\n')
-	}
-
-	def filterNullOrEmptyAndJoin(List<String> it) {
-		filter[!it?.toString.nullOrEmpty].join('\n')
-	}
-
 	def client(String it) {
 		it + "Required"
 	}

@@ -1,7 +1,7 @@
 package org.yakindu.scr.childfirstorthogonalreactions;
 
-public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrthogonalReactionsStatemachine {
 
+public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrthogonalReactionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private SCInterfaceOperationCallback operationCallback;
@@ -172,6 +172,7 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 	
 	private int nextStateIndex;
 	
+	
 	public ChildFirstOrthogonalReactionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -219,12 +220,44 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_ChildFirstOrthogonalReactions_r_default();
 		enterSequence_ChildFirstOrthogonalReactions_r2_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case childFirstOrthogonalReactions_r_A_r_AA_r_AAA:
+				childFirstOrthogonalReactions_r_A_r_AA_r_AAA_react(true);
+				break;
+			case childFirstOrthogonalReactions_r_A_r_AA__region1_AAC:
+				childFirstOrthogonalReactions_r_A_r_AA__region1_AAC_react(true);
+				break;
+			case childFirstOrthogonalReactions_r_A_r2_AC:
+				childFirstOrthogonalReactions_r_A_r2_AC_react(true);
+				break;
+			case childFirstOrthogonalReactions_r_B:
+				childFirstOrthogonalReactions_r_B_react(true);
+				break;
+			case childFirstOrthogonalReactions_r2_C:
+				childFirstOrthogonalReactions_r2_C_react(true);
+				break;
+			case childFirstOrthogonalReactions_r2_D:
+				childFirstOrthogonalReactions_r2_D_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_ChildFirstOrthogonalReactions_r();
 		exitSequence_ChildFirstOrthogonalReactions_r2();
@@ -452,32 +485,32 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_ChildFirstOrthogonalReactions_r_default() {
-		react_ChildFirstOrthogonalReactions_r__entry_Default();
+		react_executionorder_ChildFirstOrthogonalReactions_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_ChildFirstOrthogonalReactions_r_A_r_default() {
-		react_ChildFirstOrthogonalReactions_r_A_r__entry_Default();
+		react_executionorder_ChildFirstOrthogonalReactions_r_A_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_ChildFirstOrthogonalReactions_r_A_r_AA_r_default() {
-		react_ChildFirstOrthogonalReactions_r_A_r_AA_r__entry_Default();
+		react_executionorder_ChildFirstOrthogonalReactions_r_A_r_AA_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region  */
 	private void enterSequence_ChildFirstOrthogonalReactions_r_A_r_AA__region1_default() {
-		react_ChildFirstOrthogonalReactions_r_A_r_AA__region1__entry_Default();
+		react_executionorder_ChildFirstOrthogonalReactions_r_A_r_AA__region1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r2 */
 	private void enterSequence_ChildFirstOrthogonalReactions_r_A_r2_default() {
-		react_ChildFirstOrthogonalReactions_r_A_r2__entry_Default();
+		react_executionorder_ChildFirstOrthogonalReactions_r_A_r2__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r2 */
 	private void enterSequence_ChildFirstOrthogonalReactions_r2_default() {
-		react_ChildFirstOrthogonalReactions_r2__entry_Default();
+		react_executionorder_ChildFirstOrthogonalReactions_r2__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -619,36 +652,36 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstOrthogonalReactions_r__entry_Default() {
+	private void react_executionorder_ChildFirstOrthogonalReactions_r__entry_Default() {
 		enterSequence_ChildFirstOrthogonalReactions_r_A_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstOrthogonalReactions_r_A_r__entry_Default() {
+	private void react_executionorder_ChildFirstOrthogonalReactions_r_A_r__entry_Default() {
 		enterSequence_ChildFirstOrthogonalReactions_r_A_r_AA_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstOrthogonalReactions_r_A_r_AA_r__entry_Default() {
+	private void react_executionorder_ChildFirstOrthogonalReactions_r_A_r_AA_r__entry_Default() {
 		enterSequence_ChildFirstOrthogonalReactions_r_A_r_AA_r_AAA_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstOrthogonalReactions_r_A_r_AA__region1__entry_Default() {
+	private void react_executionorder_ChildFirstOrthogonalReactions_r_A_r_AA__region1__entry_Default() {
 		enterSequence_ChildFirstOrthogonalReactions_r_A_r_AA__region1_AAC_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstOrthogonalReactions_r_A_r2__entry_Default() {
+	private void react_executionorder_ChildFirstOrthogonalReactions_r_A_r2__entry_Default() {
 		enterSequence_ChildFirstOrthogonalReactions_r_A_r2_AC_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ChildFirstOrthogonalReactions_r2__entry_Default() {
+	private void react_executionorder_ChildFirstOrthogonalReactions_r2__entry_Default() {
 		enterSequence_ChildFirstOrthogonalReactions_r2_C_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		sCInterface.setSm_local(sCInterface.operationCallback.next());
 		
 		return false;
@@ -749,8 +782,6 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		if (try_transition) {
 			did_transition = false;
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -761,7 +792,7 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 			if (sCInterface.operationCallback.check("C")) {
 				exitSequence_ChildFirstOrthogonalReactions_r2_C();
 				enterSequence_ChildFirstOrthogonalReactions_r2_D_default();
-				react(false);
+				react();
 			} else {
 				did_transition = false;
 			}
@@ -769,7 +800,7 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		if (did_transition==false) {
 			sCInterface.setC_local(sCInterface.operationCallback.next());
 			
-			did_transition = react(try_transition);
+			did_transition = react();
 		}
 		return did_transition;
 	}
@@ -781,40 +812,9 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 			did_transition = false;
 		}
 		if (did_transition==false) {
-			did_transition = react(try_transition);
+			did_transition = react();
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case childFirstOrthogonalReactions_r_A_r_AA_r_AAA:
-				childFirstOrthogonalReactions_r_A_r_AA_r_AAA_react(true);
-				break;
-			case childFirstOrthogonalReactions_r_A_r_AA__region1_AAC:
-				childFirstOrthogonalReactions_r_A_r_AA__region1_AAC_react(true);
-				break;
-			case childFirstOrthogonalReactions_r_A_r2_AC:
-				childFirstOrthogonalReactions_r_A_r2_AC_react(true);
-				break;
-			case childFirstOrthogonalReactions_r_B:
-				childFirstOrthogonalReactions_r_B_react(true);
-				break;
-			case childFirstOrthogonalReactions_r2_C:
-				childFirstOrthogonalReactions_r2_C_react(true);
-				break;
-			case childFirstOrthogonalReactions_r2_D:
-				childFirstOrthogonalReactions_r2_D_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

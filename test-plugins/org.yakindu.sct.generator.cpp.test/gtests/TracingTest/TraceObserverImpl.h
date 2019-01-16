@@ -37,7 +37,15 @@ TraceObserverImpl::TraceObserverImpl() {
 
 TraceObserverImpl::~TraceObserverImpl() {}
 
-void TraceObserverImpl::stateEntered(Tracing::TracingStates state) {entered = true;}
-void TraceObserverImpl::stateExited(Tracing::TracingStates state) {exited = true;}
+void TraceObserverImpl::stateEntered(Tracing::TracingStates state) {
+	if (state != 0) {
+		entered = true;
+	}
+}
+void TraceObserverImpl::stateExited(Tracing::TracingStates state) {
+	if (state != 0) {
+		exited = true;
+	}
+}
 
 #endif /* TRACEOBSERVERIMPL_H_ */

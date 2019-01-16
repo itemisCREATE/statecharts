@@ -55,4 +55,12 @@ class GenmodelEntriesExtension extends GenmodelEntries {
 			return checkUnimplementedParamter.booleanValue
 		}
 	}
+	
+	def private getInEventQueueParameter(GeneratorEntry it) {
+		generatorOptionsFeature?.getParameterValue(CPPFeatureConstants.PARAMETER_IN_EVENT_QUEUE)
+	}
+	
+	def inEventQueue(GeneratorEntry it) {
+		inEventQueueParameter?.booleanValue
+	}
 }

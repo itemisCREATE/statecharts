@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.sct.model.sgraph.impl;
 
@@ -61,13 +61,13 @@ import org.yakindu.sct.model.sgraph.Statechart;
  * @generated
  */
 public class StatechartImpl extends SpecificationElementImpl implements
-		Statechart {
+Statechart {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (c) 2011 committers of YAKINDU and others.\r\nAll rights reserved. This program and the accompanying materials\r\nare made available under the terms of the Eclipse Public License v1.0\r\nwhich accompanies this distribution, and is available at\r\nhttp://www.eclipse.org/legal/epl-v10.html\r\nContributors:\r\ncommitters of YAKINDU - initial API and implementation\r\n";
-
+	
 	/**
 	 * The cached value of the '{@link #getScopes() <em>Scopes</em>}' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -76,7 +76,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	 * @ordered
 	 */
 	protected EList<Scope> scopes;
-
+	
 	/**
 	 * The default value of the '{@link #getNamespace() <em>Namespace</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -85,7 +85,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	 * @ordered
 	 */
 	protected static final String NAMESPACE_EDEFAULT = null;
-
+	
 	/**
 	 * The cached value of the '{@link #getNamespace() <em>Namespace</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -94,7 +94,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	 * @ordered
 	 */
 	protected String namespace = NAMESPACE_EDEFAULT;
-
+	
 	/**
 	 * The cached value of the '{@link #getRegions() <em>Regions</em>}' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -103,7 +103,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	 * @ordered
 	 */
 	protected EList<Region> regions;
-
+	
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -112,7 +112,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	 * @ordered
 	 */
 	protected static final String NAME_EDEFAULT = null;
-
+	
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -121,7 +121,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
+	
 	/**
 	 * The default value of the '{@link #getDocumentation() <em>Documentation</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
@@ -131,7 +131,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	 * @ordered
 	 */
 	protected static final String DOCUMENTATION_EDEFAULT = "";
-
+	
 	/**
 	 * The cached value of the '{@link #getDocumentation() <em>Documentation</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
@@ -141,7 +141,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	 * @ordered
 	 */
 	protected String documentation = DOCUMENTATION_EDEFAULT;
-
+	
 	/**
 	 * The default value of the '{@link #getDomainID() <em>Domain ID</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -151,7 +151,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	 * @ordered
 	 */
 	protected static final String DOMAIN_ID_EDEFAULT = "org.yakindu.domain.default";
-
+	
 	/**
 	 * The cached value of the '{@link #getDomainID() <em>Domain ID</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -161,7 +161,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	 * @ordered
 	 */
 	protected String domainID = DOMAIN_ID_EDEFAULT;
-
+	
 	/**
 	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -171,7 +171,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	 * @ordered
 	 */
 	protected EList<Annotation> annotations;
-
+	
 	/**
 	 * The cached value of the '{@link #getAnnotationInfo() <em>Annotation Info</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -181,7 +181,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	 * @ordered
 	 */
 	protected AnnotatableElement annotationInfo;
-
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -189,7 +189,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	protected StatechartImpl() {
 		super();
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -198,10 +198,10 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	protected EClass eStaticClass() {
 		return SGraphPackage.Literals.STATECHART;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated NOT
 	 */
 	public EList<Reaction> getReactions() {
@@ -210,143 +210,156 @@ public class StatechartImpl extends SpecificationElementImpl implements
 		result.addAll(getLocalReactions());
 		return result;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated NOT
 	 */
+	@Override
 	public EList<Reaction> getLocalReactions() {
 		EList<Reaction> result = new BasicEList<Reaction>();
 		EList<Scope> scopes = getScopes();
 		for (Scope scope : scopes) {
-				result.addAll(scope.getReactions());
+			result.addAll(scope.getReactions());
 		}
 		return new EcoreEList.UnmodifiableEList<Reaction>(this,
 				SGraphPackage.Literals.REACTIVE_ELEMENT__LOCAL_REACTIONS, result.size(), result.toArray());
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Scope> getScopes() {
 		if (scopes == null) {
 			scopes = new EObjectContainmentEList.Resolving<Scope>(Scope.class, this, SGraphPackage.STATECHART__SCOPES);
 		}
 		return scopes;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getNamespace() {
 		return namespace;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNamespace(String newNamespace) {
 		String oldNamespace = namespace;
 		namespace = newNamespace;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.STATECHART__NAMESPACE, oldNamespace, namespace));
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Region> getRegions() {
 		if (regions == null) {
 			regions = new EObjectContainmentWithInverseEList.Resolving<Region>(Region.class, this, SGraphPackage.STATECHART__REGIONS, SGraphPackage.REGION__COMPOSITE);
 		}
 		return regions;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.STATECHART__NAME, oldName, name));
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDocumentation() {
 		return documentation;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDocumentation(String newDocumentation) {
 		String oldDocumentation = documentation;
 		documentation = newDocumentation;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.STATECHART__DOCUMENTATION, oldDocumentation, documentation));
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDomainID() {
 		return domainID;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDomainID(String newDomainID) {
 		String oldDomainID = domainID;
 		domainID = newDomainID;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.STATECHART__DOMAIN_ID, oldDomainID, domainID));
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Annotation> getAnnotations() {
 		if (annotations == null) {
 			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, SGraphPackage.STATECHART__ANNOTATIONS);
 		}
 		return annotations;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AnnotatableElement getAnnotationInfo() {
 		return annotationInfo;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -361,12 +374,13 @@ public class StatechartImpl extends SpecificationElementImpl implements
 		}
 		return msgs;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAnnotationInfo(AnnotatableElement newAnnotationInfo) {
 		if (newAnnotationInfo != annotationInfo) {
 			NotificationChain msgs = null;
@@ -380,13 +394,14 @@ public class StatechartImpl extends SpecificationElementImpl implements
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.STATECHART__ANNOTATION_INFO, newAnnotationInfo, newAnnotationInfo));
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc --> 
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated NOT
 	 */
+	@Override
 	public Annotation getAnnotationOfType(final String typeName) {
 		EList<Annotation> annotations = getAnnotations();
 		for (Annotation annotation : annotations) {
@@ -396,7 +411,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 		}
 		return null;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -411,7 +426,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -431,7 +446,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -460,7 +475,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -499,7 +514,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 		}
 		super.eSet(featureID, newValue);
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -534,7 +549,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 		}
 		super.eUnset(featureID);
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -563,7 +578,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 		}
 		return super.eIsSet(featureID);
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -616,7 +631,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -669,7 +684,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -690,5 +705,5 @@ public class StatechartImpl extends SpecificationElementImpl implements
 		result.append(')');
 		return result.toString();
 	}
-
+	
 } // StatechartImpl

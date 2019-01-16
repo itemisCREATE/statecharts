@@ -55,4 +55,18 @@
         name="nameSuffix"
         optional="true"/>
   </types>
+  <types name="Tracing"
+      comment="Enables generation of tracing callbacks."
+      optional="true">
+    <parameters
+        name="enterState"
+        comment="Whether to generate a callback that is used when a state is entered."
+        optional="true"
+        parameterType="BOOLEAN"/>
+    <parameters
+        name="exitState"
+        comment="Whether to generate a callback that is used when a state is entered."
+        optional="true"
+        parameterType="BOOLEAN"/>
+  </types>
 </sgen:FeatureTypeLibrary>

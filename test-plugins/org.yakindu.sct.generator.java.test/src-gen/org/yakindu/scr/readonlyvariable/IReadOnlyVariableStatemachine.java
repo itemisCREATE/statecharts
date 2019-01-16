@@ -3,7 +3,6 @@ package org.yakindu.scr.readonlyvariable;
 import org.yakindu.scr.IStatemachine;
 
 public interface IReadOnlyVariableStatemachine extends IStatemachine {
-
 	public interface SCInterface {
 	
 		public long getMyInt();

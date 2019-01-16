@@ -1,7 +1,7 @@
 package org.yakindu.scr.constants;
 
-public class ConstantsStatemachine implements IConstantsStatemachine {
 
+public class ConstantsStatemachine implements IConstantsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;
@@ -78,6 +78,7 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	protected long getInternalConstant() {
 		return internalConstant;
 	}
@@ -100,11 +101,34 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_A:
+				main_region_A_react(true);
+				break;
+			case main_region_B:
+				main_region_B_react(true);
+				break;
+			case main_region_C:
+				main_region_C_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -188,12 +212,12 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 	
 	/* Entry action for state 'B'. */
 	private void entryAction_main_region_B() {
-		sCInterface.setResult(SCINamed.two * SCInterface.x);
+		sCInterface.setResult((SCINamed.two * SCInterface.x));
 	}
 	
 	/* Entry action for state 'C'. */
 	private void entryAction_main_region_C() {
-		sCInterface.setResult(sCInterface.result * IConstantsStatemachine.internalConstant);
+		sCInterface.setResult((sCInterface.result * IConstantsStatemachine.internalConstant));
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -218,7 +242,7 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_Constants_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -257,11 +281,11 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_Constants_main_region__entry_Default() {
 		enterSequence_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -269,7 +293,7 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
@@ -278,8 +302,6 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -287,7 +309,7 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_C_default();
@@ -296,8 +318,6 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -305,10 +325,10 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e2) {
 					exitSequence_main_region_C();
-					sCInterface.setResult(sCInterface.getE2Value() * SCInterface.x * SCINamed.two * IConstantsStatemachine.internalConstant);
+					sCInterface.setResult((((sCInterface.getE2Value() * SCInterface.x) * SCINamed.two) * IConstantsStatemachine.internalConstant));
 					
 					enterSequence_main_region_A_default();
 				} else {
@@ -316,31 +336,7 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
-				main_region_A_react(true);
-				break;
-			case main_region_B:
-				main_region_B_react(true);
-				break;
-			case main_region_C:
-				main_region_C_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

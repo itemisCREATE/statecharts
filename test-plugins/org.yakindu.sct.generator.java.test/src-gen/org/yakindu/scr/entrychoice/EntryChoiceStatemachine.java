@@ -1,7 +1,7 @@
 package org.yakindu.scr.entrychoice;
 
-public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 
+public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {
@@ -12,6 +12,7 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	public EntryChoiceStatemachine() {
 	}
@@ -28,11 +29,28 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_A:
+				main_region_A_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -89,7 +107,7 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_EntryChoice_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -115,11 +133,11 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_EntryChoice_main_region__entry_Default() {
 		react_main_region__choice_0();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -127,29 +145,11 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
-				main_region_A_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

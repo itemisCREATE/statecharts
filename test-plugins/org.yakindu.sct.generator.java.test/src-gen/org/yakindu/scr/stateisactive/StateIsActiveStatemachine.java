@@ -1,7 +1,7 @@
 package org.yakindu.scr.stateisactive;
 
-public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 
+public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean event1;
@@ -31,6 +31,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public StateIsActiveStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -47,12 +48,38 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_R1_default();
 		enterSequence_R2_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case r1_R1A:
+				r1_R1A_react(true);
+				break;
+			case r1_R1B:
+				r1_R1B_react(true);
+				break;
+			case r2_R2A:
+				r2_R2A_react(true);
+				break;
+			case r2_R2B:
+				r2_R2B_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_R1();
 		exitSequence_R2();
@@ -139,12 +166,12 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	
 	/* 'default' enter sequence for region R1 */
 	private void enterSequence_R1_default() {
-		react_R1__entry_Default();
+		react_StateIsActive_R1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region R2 */
 	private void enterSequence_R2_default() {
-		react_R2__entry_Default();
+		react_StateIsActive_R2__entry_Default();
 	}
 	
 	/* Default exit sequence for state R1A */
@@ -200,16 +227,16 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_R1__entry_Default() {
+	private void react_StateIsActive_R1__entry_Default() {
 		enterSequence_R1_R1A_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_R2__entry_Default() {
+	private void react_StateIsActive_R2__entry_Default() {
 		enterSequence_R2_R2A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -217,7 +244,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (isStateActive(State.r2_R2B)) {
 					exitSequence_R1_R1A();
 					enterSequence_R1_R1B_default();
@@ -226,8 +253,6 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -235,11 +260,9 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -255,8 +278,6 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -266,34 +287,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		if (try_transition) {
 			did_transition = false;
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case r1_R1A:
-				r1_R1A_react(true);
-				break;
-			case r1_R1B:
-				r1_R1B_react(true);
-				break;
-			case r2_R2A:
-				r2_R2A_react(true);
-				break;
-			case r2_R2B:
-				r2_R2B_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

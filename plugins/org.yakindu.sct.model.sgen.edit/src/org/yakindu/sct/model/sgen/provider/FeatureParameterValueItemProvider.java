@@ -254,6 +254,11 @@ public class FeatureParameterValueItemProvider extends ItemProviderAdapter
 		newChildDescriptors.add
 			(createChildParameter
 				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createMetaCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
 				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
 
 		newChildDescriptors.add

@@ -3,7 +3,6 @@ package org.yakindu.scr.eventdriventriggeredbytimeevent;
 import org.yakindu.scr.ITimer;
 
 public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDrivenTriggeredByTimeEventStatemachine {
-
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private long x;
@@ -42,6 +41,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	
 	private int nextStateIndex;
 	
+	
 	private ITimer timer;
 	
 	private final boolean[] timeEvents = new boolean[2];
@@ -67,7 +67,8 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
@@ -75,6 +76,25 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		enterSequence_EventDrivenTriggeredByTimeEvent_r_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case eventDrivenTriggeredByTimeEvent_r_A:
+				eventDrivenTriggeredByTimeEvent_r_A_react(true);
+				break;
+			case eventDrivenTriggeredByTimeEvent_r_B:
+				eventDrivenTriggeredByTimeEvent_r_B_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_EventDrivenTriggeredByTimeEvent_r();
 	}
@@ -171,12 +191,12 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	
 	/* Entry action for state 'A'. */
 	private void entryAction_EventDrivenTriggeredByTimeEvent_r_A() {
-		timer.setTimer(this, 0, 1 * 1000, false);
+		timer.setTimer(this, 0, (1 * 1000), false);
 	}
 	
 	/* Entry action for state 'B'. */
 	private void entryAction_EventDrivenTriggeredByTimeEvent_r_B() {
-		timer.setTimer(this, 1, 1 * 1000, false);
+		timer.setTimer(this, 1, (1 * 1000), false);
 	}
 	
 	/* Exit action for state 'A'. */
@@ -205,7 +225,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_EventDrivenTriggeredByTimeEvent_r_default() {
-		react_EventDrivenTriggeredByTimeEvent_r__entry_Default();
+		react_eventdriven_EventDrivenTriggeredByTimeEvent_r__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -239,11 +259,11 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_EventDrivenTriggeredByTimeEvent_r__entry_Default() {
+	private void react_eventdriven_EventDrivenTriggeredByTimeEvent_r__entry_Default() {
 		enterSequence_EventDrivenTriggeredByTimeEvent_r_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -251,7 +271,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (timeEvents[0]) {
 					exitSequence_EventDrivenTriggeredByTimeEvent_r_A();
 					sCInterface.setTransition_count(sCInterface.getTransition_count() + 1);
@@ -272,7 +292,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (timeEvents[1]) {
 					exitSequence_EventDrivenTriggeredByTimeEvent_r_B();
 					sCInterface.setTransition_count(sCInterface.getTransition_count() + 1);
@@ -289,23 +309,4 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case eventDrivenTriggeredByTimeEvent_r_A:
-				eventDrivenTriggeredByTimeEvent_r_A_react(true);
-				break;
-			case eventDrivenTriggeredByTimeEvent_r_B:
-				eventDrivenTriggeredByTimeEvent_r_B_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

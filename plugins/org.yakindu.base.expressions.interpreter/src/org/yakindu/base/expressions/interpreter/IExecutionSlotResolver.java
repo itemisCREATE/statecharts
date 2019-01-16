@@ -10,6 +10,8 @@
  */
 package org.yakindu.base.expressions.interpreter;
 
+import java.util.Optional;
+
 import org.yakindu.base.types.Expression;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.model.sruntime.ExecutionSlot;
@@ -32,6 +34,6 @@ public interface IExecutionSlotResolver {
 	 * @param expression
 	 * @return
 	 */
-	ExecutionSlot resolve(ExecutionContext context, Expression expression);
+	Optional<ExecutionSlot> resolve(ExecutionContext context, Expression expression);
 
 }

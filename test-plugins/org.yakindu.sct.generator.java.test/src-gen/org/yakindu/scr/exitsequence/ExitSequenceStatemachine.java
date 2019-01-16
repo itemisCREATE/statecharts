@@ -1,7 +1,7 @@
 package org.yakindu.scr.exitsequence;
 
-public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 
+public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;
@@ -178,6 +178,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public ExitSequenceStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -219,11 +220,46 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_A_r_AA:
+				main_region_A_r_AA_react(true);
+				break;
+			case main_region_A_r_AB_r1_ABA:
+				main_region_A_r_AB_r1_ABA_react(true);
+				break;
+			case main_region_A_r_AB_r2_ABB:
+				main_region_A_r_AB_r2_ABB_react(true);
+				break;
+			case main_region_A_r_AC_r_ACA_r_ACAA:
+				main_region_A_r_AC_r_ACA_r_ACAA_react(true);
+				break;
+			case main_region_A_r_AD_r1_ADA:
+				main_region_A_r_AD_r1_ADA_react(true);
+				break;
+			case main_region_A_r_AD_r2_ADB:
+				main_region_A_r_AD_r2_ADB_react(true);
+				break;
+			case main_region_A_r_AD_r3_ADC:
+				main_region_A_r_AD_r3_ADC_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -544,47 +580,47 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_ExitSequence_main_region__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_main_region_A_r_default() {
-		react_main_region_A_r__entry_Default();
+		react_ExitSequence_main_region_A_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r1 */
 	private void enterSequence_main_region_A_r_AB_r1_default() {
-		react_main_region_A_r_AB_r1__entry_Default();
+		react_ExitSequence_main_region_A_r_AB_r1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r2 */
 	private void enterSequence_main_region_A_r_AB_r2_default() {
-		react_main_region_A_r_AB_r2__entry_Default();
+		react_ExitSequence_main_region_A_r_AB_r2__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_main_region_A_r_AC_r_default() {
-		react_main_region_A_r_AC_r__entry_Default();
+		react_ExitSequence_main_region_A_r_AC_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_main_region_A_r_AC_r_ACA_r_default() {
-		react_main_region_A_r_AC_r_ACA_r__entry_Default();
+		react_ExitSequence_main_region_A_r_AC_r_ACA_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r1 */
 	private void enterSequence_main_region_A_r_AD_r1_default() {
-		react_main_region_A_r_AD_r1__entry_Default();
+		react_ExitSequence_main_region_A_r_AD_r1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r2 */
 	private void enterSequence_main_region_A_r_AD_r2_default() {
-		react_main_region_A_r_AD_r2__entry_Default();
+		react_ExitSequence_main_region_A_r_AD_r2__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r3 */
 	private void enterSequence_main_region_A_r_AD_r3_default() {
-		react_main_region_A_r_AD_r3__entry_Default();
+		react_ExitSequence_main_region_A_r_AD_r3__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -839,51 +875,51 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_ExitSequence_main_region__entry_Default() {
 		enterSequence_main_region_A_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region_A_r__entry_Default() {
+	private void react_ExitSequence_main_region_A_r__entry_Default() {
 		enterSequence_main_region_A_r_AA_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region_A_r_AB_r1__entry_Default() {
+	private void react_ExitSequence_main_region_A_r_AB_r1__entry_Default() {
 		enterSequence_main_region_A_r_AB_r1_ABA_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region_A_r_AB_r2__entry_Default() {
+	private void react_ExitSequence_main_region_A_r_AB_r2__entry_Default() {
 		enterSequence_main_region_A_r_AB_r2_ABB_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region_A_r_AC_r__entry_Default() {
+	private void react_ExitSequence_main_region_A_r_AC_r__entry_Default() {
 		enterSequence_main_region_A_r_AC_r_ACA_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region_A_r_AC_r_ACA_r__entry_Default() {
+	private void react_ExitSequence_main_region_A_r_AC_r_ACA_r__entry_Default() {
 		enterSequence_main_region_A_r_AC_r_ACA_r_ACAA_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region_A_r_AD_r1__entry_Default() {
+	private void react_ExitSequence_main_region_A_r_AD_r1__entry_Default() {
 		enterSequence_main_region_A_r_AD_r1_ADA_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region_A_r_AD_r2__entry_Default() {
+	private void react_ExitSequence_main_region_A_r_AD_r2__entry_Default() {
 		enterSequence_main_region_A_r_AD_r2_ADB_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region_A_r_AD_r3__entry_Default() {
+	private void react_ExitSequence_main_region_A_r_AD_r3__entry_Default() {
 		enterSequence_main_region_A_r_AD_r3_ADC_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -899,7 +935,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 			}
 		}
 		if (did_transition==false) {
-			did_transition = react(try_transition);
+			did_transition = react();
 		}
 		return did_transition;
 	}
@@ -945,8 +981,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		
 		if (try_transition) {
 			did_transition = false;
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -1029,8 +1063,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		if (try_transition) {
 			did_transition = false;
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -1039,8 +1071,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		
 		if (try_transition) {
 			did_transition = false;
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -1057,38 +1087,4 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_A_r_AA:
-				main_region_A_r_AA_react(true);
-				break;
-			case main_region_A_r_AB_r1_ABA:
-				main_region_A_r_AB_r1_ABA_react(true);
-				break;
-			case main_region_A_r_AB_r2_ABB:
-				main_region_A_r_AB_r2_ABB_react(true);
-				break;
-			case main_region_A_r_AC_r_ACA_r_ACAA:
-				main_region_A_r_AC_r_ACA_r_ACAA_react(true);
-				break;
-			case main_region_A_r_AD_r1_ADA:
-				main_region_A_r_AD_r1_ADA_react(true);
-				break;
-			case main_region_A_r_AD_r2_ADB:
-				main_region_A_r_AD_r2_ADB_react(true);
-				break;
-			case main_region_A_r_AD_r3_ADC:
-				main_region_A_r_AD_r3_ADC_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

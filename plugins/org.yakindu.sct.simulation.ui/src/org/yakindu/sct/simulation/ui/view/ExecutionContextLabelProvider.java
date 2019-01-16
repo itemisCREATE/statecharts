@@ -34,6 +34,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TreeItem;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.PrimitiveType;
+import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sruntime.CompositeSlot;
 import org.yakindu.sct.model.sruntime.ExecutionEvent;
 import org.yakindu.sct.model.sruntime.ExecutionOperation;
@@ -84,24 +85,27 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 			}
 			cell.setText(label);
 		} else if (element instanceof ExecutionSlot) {
-			Object value = ((ExecutionSlot) element).getValue();
+			ExecutionSlot slot = (ExecutionSlot) element;
+			Object value = slot.getValue();
 			if (value != null) {
-				if (!((ExecutionSlot) element).isWritable() || isReadOnly) {
-					cell.setText(getCellTextValue(element, value));
-				} else if (isPrimitiveType(element)) {
-					PrimitiveType primitiveType = (PrimitiveType) ((ExecutionSlot) element).getType().getOriginType();
-					if (isBooleanType(value, primitiveType)) {
-						TreeItem currentItem = (TreeItem) cell.getItem();
-						NativeCellWidgetUtil.addNativeCheckbox(cell, element, value,
-								new TreeEditorDisposeListener(currentItem));
-					} else {
-						cell.setText(getCellTextValue(element, value));
-					}
+				if (needsCheckbox(slot)) {
+					TreeItem currentItem = (TreeItem) cell.getItem();
+					NativeCellWidgetUtil.addNativeCheckbox(cell, slot, value,
+							new TreeEditorDisposeListener(currentItem));
+				} else {
+					cell.setText(getCellTextValue(slot, value));
 				}
 			} else {
 				cell.setText("");
 			}
 		}
+	}
+	
+	protected boolean needsCheckbox(ExecutionSlot slot) {
+		if (slot.isWritable() && !isReadOnly && isPrimitiveType(slot)) {
+			return isBooleanType(slot.getValue(), (PrimitiveType) slot.getType().getOriginType());
+		}
+		return false;
 	}
 
 	protected String getCellTextValue(Object element, Object value) {
@@ -116,7 +120,8 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 	}
 
 	protected boolean isPrimitiveType(Object element) {
-		return ((ExecutionSlot) element).getType().getOriginType() instanceof PrimitiveType;
+		Type type = ((ExecutionSlot) element).getType();
+		return type != null && type.getOriginType() instanceof PrimitiveType;
 	}
 
 	protected String getEnumName(Object element, Object value) {
@@ -126,7 +131,8 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 	}
 
 	protected boolean isEnumType(Object element) {
-		return ((ExecutionSlot) element).getType().getOriginType() instanceof EnumerationType;
+		Type type = ((ExecutionSlot) element).getType();
+		return type != null && type.getOriginType() instanceof EnumerationType;
 	}
 
 	private void updateNameCell(ViewerCell cell) {

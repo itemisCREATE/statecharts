@@ -36,16 +36,16 @@ class CppExpressionsGenerator extends CExpressionsGenerator {
 	@Inject protected extension SExecExtensions
 	@Inject protected extension ITypeSystem
 	@Inject protected extension INamingService
+	
+	@Inject protected extension EventRaisingCode
 
 	override dispatch CharSequence code(ElementReferenceExpression it,
 		OperationDefinition target) '''«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
 
-	override dispatch CharSequence code(EventRaisingExpression it) '''
-	«IF value !== null»
-		«event.definition.event.valueAccess» = «value.code»;
-	«ENDIF»
-	«event.definition.event.access» = true'''
+	override dispatch CharSequence code(EventRaisingExpression it) {
+		raiseEvent(it, value?.code)
+	}
 
 	override dispatch CharSequence code(
 		ActiveStateReferenceExpression it) '''«flow.stateActiveFctID»(«value.shortName»)'''

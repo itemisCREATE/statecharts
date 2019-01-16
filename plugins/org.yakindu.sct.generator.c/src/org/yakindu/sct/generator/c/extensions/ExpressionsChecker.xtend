@@ -11,15 +11,23 @@
 package org.yakindu.sct.generator.c.extensions
 
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.AssignmentOperator
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
 import org.yakindu.base.expressions.expressions.MultiplicativeOperator
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
+import org.yakindu.base.types.Expression
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.c.CExpressionsGenerator
+import org.yakindu.sct.model.sexec.Execution
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.generator.c.CGeneratorConstants
+import org.yakindu.sct.generator.c.types.CTypeSystemAccess
+import org.yakindu.base.expressions.expressions.FeatureCall
 
 class ExpressionsChecker {
 
@@ -27,6 +35,7 @@ class ExpressionsChecker {
 	
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ITypeSystemInferrer
+	@Inject protected extension CTypeSystemAccess
 
 	def modOnReal(ExecutionFlow it) {
 		!eAllContents.filter(NumericalMultiplyDivideExpression).filter[operator == MultiplicativeOperator.MOD].filter [
@@ -43,5 +52,45 @@ class ExpressionsChecker {
 	def protected comparesString(LogicalRelationExpression it) {
 		isSame(infer(it.leftOperand).type, getType(ITypeSystem.STRING)) || 
 			isSame(infer(it.rightOperand).type, getType(ITypeSystem.STRING))
+	}
+	
+	def isConstString(VariableDefinition it) {
+		const && isStringType
+	}
+	
+	def protected isStringType(VariableDefinition it) {
+		isSame(typeSpecifier.type ,getType(ITypeSystem.STRING))
+	}
+	
+	
+	def boolean haveCommonTypeReal(Expression expression) {
+		if(isSame(getCommonType((infer(expression).getType), getType(ITypeSystem.INTEGER)),
+			getType(ITypeSystem.INTEGER))) return false
+		return true
+	}
+	
+		
+	def dispatch CharSequence castToReciever(ElementReferenceExpression it) {
+		if (reference instanceof VariableDefinition) {
+			val originalType = infer(reference)
+			return '''(«getTargetLanguageName(originalType.type)»)'''
+		}
+	}
+	
+	def dispatch CharSequence castToReciever(FeatureCall it) {
+		if(feature instanceof VariableDefinition) {
+			val originalType = infer(feature)
+			return '''(«getTargetLanguageName(originalType.type)»)'''			
+		}
+	}
+	
+	def dispatch CharSequence castToReciever(EObject obj) {
+		val eContainer = obj.eContainer
+		if (eContainer instanceof Execution) {
+			val statement = eContainer.statement
+			if(statement instanceof AssignmentExpression) {
+				castToReciever(statement.varRef)
+			}
+		}
 	}
 }

@@ -25,6 +25,15 @@ GeneratorModel for sctunit::interpreter {
 	}
 	
 	
+	test ChildFirstTransitionsinSubchart {
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
+		}			
+	}
+	
+	
 	test ChildFirstTransitionTaking {
 		
 		feature Outlet{ 

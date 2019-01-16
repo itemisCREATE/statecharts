@@ -292,22 +292,6 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 		return r
 	}
 
-//	def dispatch Expression raised(OnCycleEvent e) {
-//		val r = stext.factory.createPrimitiveValueExpression
-//		val BoolLiteral boolLit = stext.factory.createBoolLiteral
-//		boolLit.value = true		
-//		r.value = boolLit
-//		return r
-//	}
-	
-	def dispatch Expression raised(AlwaysEvent e) {
-		val r = factory.createPrimitiveValueExpression
-		val BoolLiteral boolLit = factory.createBoolLiteral
-		boolLit.value = true		
-		r.value = boolLit
-		return r
-	}
-
 
 	def dispatch ExecutionNode mapped(State s) { s.create }
 	def dispatch ExecutionNode mapped(FinalState s) { s.create }

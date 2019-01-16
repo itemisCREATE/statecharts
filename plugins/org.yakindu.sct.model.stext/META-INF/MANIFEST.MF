@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU SText Model
 Bundle-Vendor: statecharts.org
-Bundle-Version: 3.4.3.qualifier
+Bundle-Version: 3.5.0.qualifier
 Bundle-SymbolicName: org.yakindu.sct.model.stext;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
@@ -22,7 +22,9 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.emf.workspace,
  org.yakindu.sct.model.stext.lib,
  org.eclipse.gmf.runtime.diagram.core,
- org.yakindu.sct.commons
+ org.yakindu.sct.commons,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib
 Import-Package: org.apache.commons.logging,
  org.apache.log4j;visibility:=reexport,
  org.eclipse.xtext.xbase.lib
@@ -34,10 +36,10 @@ Export-Package: org.yakindu.sct.model.stext,
  org.yakindu.sct.model.stext.inferrer,
  org.yakindu.sct.model.stext.naming,
  org.yakindu.sct.model.stext.parser,
- org.yakindu.sct.model.stext.parser.antlr,
  org.yakindu.sct.model.stext.parser.antlr.internal,
  org.yakindu.sct.model.stext.resource,
  org.yakindu.sct.model.stext.scoping,
+ org.yakindu.sct.model.stext.serializer,
  org.yakindu.sct.model.stext.services,
  org.yakindu.sct.model.stext.stext,
  org.yakindu.sct.model.stext.stext.impl,
@@ -45,6 +47,6 @@ Export-Package: org.yakindu.sct.model.stext,
  org.yakindu.sct.model.stext.tasks,
  org.yakindu.sct.model.stext.terminals,
  org.yakindu.sct.model.stext.validation,
- org.yakindu.sct.model.stext.serializer
+ org.yakindu.sct.model.stext.parser.antlr
 Bundle-ClassPath: .
 Automatic-Module-Name: org.yakindu.sct.model.stext

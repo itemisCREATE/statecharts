@@ -30,6 +30,7 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.generator.c.IHeaderFragment
 import java.util.Set
+import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 
 /**
  * @author rbeckmann
@@ -45,6 +46,7 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 	@Inject protected extension GenmodelEntries
 	@Inject protected extension INamingService
 	@Inject protected extension StatechartExtensions
+	@Inject protected extension ExpressionsChecker
 	
 	@Inject protected extension APIGenerator
 	@Inject protected extension StatechartTypes
@@ -193,7 +195,7 @@ class StatemachineHeaderFragment implements IHeaderFragment {
 
 	def dispatch functionPrototypes(VariableDefinition it) '''
 		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
-		extern «IF const»const «ENDIF»«typeSpecifier.targetLanguageName» «asGetter»(const «scHandleDecl»);
+		extern «IF isConstString»const «ENDIF»«typeSpecifier.targetLanguageName» «asGetter»(const «scHandleDecl»);
 		«IF !readonly && !const»
 			/*! Sets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
 			extern void «asSetter»(«scHandleDecl», «typeSpecifier.targetLanguageName» value);

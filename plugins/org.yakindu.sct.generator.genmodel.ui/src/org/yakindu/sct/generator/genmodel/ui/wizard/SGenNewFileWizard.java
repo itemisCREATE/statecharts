@@ -39,7 +39,7 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.yakindu.sct.generator.builder.action.ToggleSCTNatureAction;
 import org.yakindu.sct.generator.builder.nature.SCTNature;
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
-import org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator;
+import org.yakindu.sct.generator.genmodel.ui.internal.GenmodelActivator;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.ui.wizards.ModelCreationWizardPage;
 
@@ -110,7 +110,7 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 		IResource workspaceResource = ResourcesPlugin.getWorkspace().getRoot().findMember(new Path(path));
 		if (workspaceResource instanceof IFile) {
 			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-			return null != page.openEditor(new FileEditorInput((IFile) workspaceResource), SGenActivator.ORG_YAKINDU_SCT_GENERATOR_GENMODEL_SGEN);
+			return null != page.openEditor(new FileEditorInput((IFile) workspaceResource), GenmodelActivator.ORG_YAKINDU_SCT_GENERATOR_GENMODEL_SGEN);
 		}
 		return false;
 	}

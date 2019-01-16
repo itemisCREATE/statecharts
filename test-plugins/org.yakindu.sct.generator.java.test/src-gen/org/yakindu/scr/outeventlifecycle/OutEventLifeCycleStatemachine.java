@@ -1,7 +1,7 @@
 package org.yakindu.scr.outeventlifecycle;
 
-public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemachine {
 
+public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;
@@ -65,6 +65,7 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 	
 	private int nextStateIndex;
 	
+	
 	public OutEventLifeCycleStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -84,12 +85,35 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_r1_default();
 		enterSequence_r2_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case r1_A:
+				r1_A_react(true);
+				break;
+			case r1_B:
+				r1_B_react(true);
+				break;
+			case r2_B:
+				r2_B_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_r1();
 		exitSequence_r2();
@@ -189,12 +213,12 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 	
 	/* 'default' enter sequence for region r1 */
 	private void enterSequence_r1_default() {
-		react_r1__entry_Default();
+		react_OutEventLifeCycle_r1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r2 */
 	private void enterSequence_r2_default() {
-		react_r2__entry_Default();
+		react_OutEventLifeCycle_r2__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -241,16 +265,16 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_r1__entry_Default() {
+	private void react_OutEventLifeCycle_r1__entry_Default() {
 		enterSequence_r1_A_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_r2__entry_Default() {
+	private void react_OutEventLifeCycle_r2__entry_Default() {
 		enterSequence_r2_B_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -258,7 +282,7 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_r1_A();
 					sCInterface.raiseF();
@@ -269,8 +293,6 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -278,7 +300,7 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
 		}
@@ -304,26 +326,4 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case r1_A:
-				r1_A_react(true);
-				break;
-			case r1_B:
-				r1_B_react(true);
-				break;
-			case r2_B:
-				r2_B_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

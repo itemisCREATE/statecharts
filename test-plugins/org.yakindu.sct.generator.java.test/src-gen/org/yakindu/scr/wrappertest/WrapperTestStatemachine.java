@@ -5,7 +5,6 @@ import java.util.List;
 import org.yakindu.scr.ITimer;
 
 public class WrapperTestStatemachine implements IWrapperTestStatemachine {
-
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private List<SCInterfaceListener> listeners = new LinkedList<SCInterfaceListener>();
@@ -93,6 +92,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	private ITimer timer;
 	
 	private final boolean[] timeEvents = new boolean[2];
@@ -124,18 +124,42 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
-		entryAction();
+		timer.setTimer(this, 1, (1 * 1000), true);
+		
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_s1:
+				main_region_s1_react(true);
+				break;
+			case main_region_s2:
+				main_region_s2_react(true);
+				break;
+			case main_region__final_:
+				main_region__final__react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
-		exitAction();
+		timer.unsetTimer(this, 1);
 	}
 	
 	/**
@@ -187,7 +211,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	
 	/**
 	* Set the {@link ITimer} for the state machine. It must be set
-	* externally on a timed state machine before a run cycle can be correct
+	* externally on a timed state machine before a run cycle can be correctly
 	* executed.
 	* 
 	* @param timer
@@ -207,6 +231,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	
 	public void timeElapsed(int eventID) {
 		timeEvents[eventID] = true;
+		runCycle();
 	}
 	
 	public SCInterface getSCInterface() {
@@ -245,11 +270,6 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		sCInterface.setS2_entered(value);
 	}
 	
-	/* Entry action for statechart 'WrapperTest'. */
-	private void entryAction() {
-		timer.setTimer(this, 1, 1 * 1000, true);
-	}
-	
 	/* Entry action for state 's1'. */
 	private void entryAction_main_region_s1() {
 		timer.setTimer(this, 0, 500, false);
@@ -260,11 +280,6 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	/* Entry action for state 's2'. */
 	private void entryAction_main_region_s2() {
 		sCInterface.setS2_entered(sCInterface.getS2_entered() + 1);
-	}
-	
-	/* Exit action for state 'WrapperTest'. */
-	private void exitAction() {
-		timer.unsetTimer(this, 1);
 	}
 	
 	/* Exit action for state 's1'. */
@@ -294,7 +309,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_WrapperTest_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state s1 */
@@ -335,11 +350,11 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_WrapperTest_main_region__entry_Default() {
 		enterSequence_main_region_s1_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		if (timeEvents[1]) {
 			sCInterface.operationCallback.displayTime();
 		}
@@ -352,7 +367,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.getCycles()==40) {
 					exitSequence_main_region_s1();
 					enterSequence_main_region__final__default();
@@ -373,8 +388,6 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -382,7 +395,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.ev_in) {
 					exitSequence_main_region_s2();
 					enterSequence_main_region_s1_default();
@@ -391,8 +404,6 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -400,35 +411,11 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_s1:
-				main_region_s1_react(true);
-				break;
-			case main_region_s2:
-				main_region_s2_react(true);
-				break;
-			case main_region__final_:
-				main_region__final__react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

@@ -160,6 +160,7 @@ public class EnumerationTypeItemProvider
 
 		boolean qualify =
 			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
+			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES ||
 			childFeature == TypesPackage.Literals.COMPLEX_TYPE__FEATURES ||
 			childFeature == TypesPackage.Literals.ENUMERATION_TYPE__ENUMERATOR ||
 			childFeature == TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS;

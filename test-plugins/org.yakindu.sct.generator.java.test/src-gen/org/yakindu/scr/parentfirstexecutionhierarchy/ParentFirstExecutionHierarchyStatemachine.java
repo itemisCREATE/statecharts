@@ -1,7 +1,7 @@
 package org.yakindu.scr.parentfirstexecutionhierarchy;
 
-public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstExecutionHierarchyStatemachine {
 
+public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstExecutionHierarchyStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;
@@ -121,6 +121,7 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 	
 	private int nextStateIndex;
 	
+	
 	public ParentFirstExecutionHierarchyStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -154,11 +155,31 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_ParentFirstExecutionHierarchy_r_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case parentFirstExecutionHierarchy_r_A_r_AA_r_AAA:
+				parentFirstExecutionHierarchy_r_A_r_AA_r_AAA_react(true);
+				break;
+			case parentFirstExecutionHierarchy_r_B:
+				parentFirstExecutionHierarchy_r_B_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_ParentFirstExecutionHierarchy_r();
 	}
@@ -338,17 +359,17 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_ParentFirstExecutionHierarchy_r_default() {
-		react_ParentFirstExecutionHierarchy_r__entry_Default();
+		react_executionorder_ParentFirstExecutionHierarchy_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_ParentFirstExecutionHierarchy_r_A_r_default() {
-		react_ParentFirstExecutionHierarchy_r_A_r__entry_Default();
+		react_executionorder_ParentFirstExecutionHierarchy_r_A_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_ParentFirstExecutionHierarchy_r_A_r_AA_r_default() {
-		react_ParentFirstExecutionHierarchy_r_A_r_AA_r__entry_Default();
+		react_executionorder_ParentFirstExecutionHierarchy_r_A_r_AA_r__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -405,21 +426,21 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ParentFirstExecutionHierarchy_r__entry_Default() {
+	private void react_executionorder_ParentFirstExecutionHierarchy_r__entry_Default() {
 		enterSequence_ParentFirstExecutionHierarchy_r_A_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ParentFirstExecutionHierarchy_r_A_r__entry_Default() {
+	private void react_executionorder_ParentFirstExecutionHierarchy_r_A_r__entry_Default() {
 		enterSequence_ParentFirstExecutionHierarchy_r_A_r_AA_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_ParentFirstExecutionHierarchy_r_A_r_AA_r__entry_Default() {
+	private void react_executionorder_ParentFirstExecutionHierarchy_r_A_r_AA_r__entry_Default() {
 		enterSequence_ParentFirstExecutionHierarchy_r_A_r_AA_r_AAA_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -427,8 +448,8 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
-				if ((sCInterface.e) && (!sCInterface.getDisable_a())) {
+			if (react()==false) {
+				if (((sCInterface.e) && (!sCInterface.getDisable_a()))) {
 					exitSequence_ParentFirstExecutionHierarchy_r_A();
 					sCInterface.setA_reacted(true);
 					
@@ -449,7 +470,7 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 		
 		if (try_transition) {
 			if (parentFirstExecutionHierarchy_r_A_react(try_transition)==false) {
-				if ((sCInterface.e) && (!sCInterface.getDisable_aa())) {
+				if (((sCInterface.e) && (!sCInterface.getDisable_aa()))) {
 					exitSequence_ParentFirstExecutionHierarchy_r_A();
 					sCInterface.setAa_reacted(true);
 					
@@ -470,7 +491,7 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 		
 		if (try_transition) {
 			if (parentFirstExecutionHierarchy_r_A_r_AA_react(try_transition)==false) {
-				if ((sCInterface.e) && (!sCInterface.getDisable_aaa())) {
+				if (((sCInterface.e) && (!sCInterface.getDisable_aaa()))) {
 					exitSequence_ParentFirstExecutionHierarchy_r_A();
 					sCInterface.setAaa_reacted(true);
 					
@@ -490,7 +511,7 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e) {
 					exitSequence_ParentFirstExecutionHierarchy_r_B();
 					enterSequence_ParentFirstExecutionHierarchy_r_A_default();
@@ -499,28 +520,7 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case parentFirstExecutionHierarchy_r_A_r_AA_r_AAA:
-				parentFirstExecutionHierarchy_r_A_r_AA_r_AAA_react(true);
-				break;
-			case parentFirstExecutionHierarchy_r_B:
-				parentFirstExecutionHierarchy_r_B_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

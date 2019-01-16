@@ -9,12 +9,14 @@ testsuite AllTests {
 	CKeywords, 
 	ConditionalExpression,
 	ConstantsTests,
+	ConstantsVariationTests,
 	ConstOnlyDefaultScope,
 	ConstOnlyInternalScope,
 	ConstOnlyNamedScope,
 	ChildFirstExecutionHierarchy,
 	ChildFirstLocalReactions,
 	ChildFirstOrthogonalReactions,
+	ChildFirstTransitionsinSubchart,
 	ChildFirstTransitionTaking ,
 	Declarations,
 	DeepEntry, 
@@ -76,9 +78,7 @@ testsuite AllTests {
 	TriggerGuardExpressions,
 	TriggerExpressionPrecedence,
 	ValuedEvents,
-	TypeAlias
-	//Add the following tests if sct unit Java and C++ generators
-	// support mock timer service generation
-	//StatemachineKeywords,
-	//TimedTransitions,
+	TypeAlias,
+	StatemachineKeywords,
+	TimedTransitions
 } 

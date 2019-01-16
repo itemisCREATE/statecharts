@@ -1,7 +1,7 @@
 package org.yakindu.scr.guard;
 
-public class GuardStatemachine implements IGuardStatemachine {
 
+public class GuardStatemachine implements IGuardStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean event1;
@@ -53,6 +53,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public GuardStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -70,11 +71,31 @@ public class GuardStatemachine implements IGuardStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_A:
+				main_region_A_react(true);
+				break;
+			case main_region_B:
+				main_region_B_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -166,7 +187,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_Guard_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -196,11 +217,11 @@ public class GuardStatemachine implements IGuardStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_Guard_main_region__entry_Default() {
 		enterSequence_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -208,8 +229,8 @@ public class GuardStatemachine implements IGuardStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
-				if ((sCInterface.event1) && (sCInterface.getMyVar()==10)) {
+			if (react()==false) {
+				if (((sCInterface.event1) && (sCInterface.getMyVar()==10))) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {
@@ -222,8 +243,6 @@ public class GuardStatemachine implements IGuardStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -231,7 +250,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.returnEvent) {
 					exitSequence_main_region_B();
 					enterSequence_main_region_A_default();
@@ -240,28 +259,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
-				main_region_A_react(true);
-				break;
-			case main_region_B:
-				main_region_B_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

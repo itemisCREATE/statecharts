@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 committers of YAKINDU and others.
+ * Copyright (c) 2012-2018 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -18,11 +18,16 @@ import org.yakindu.sct.generator.c.extensions.GenmodelEntries
 import org.yakindu.sct.generator.c.extensions.Naming
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.c.types.CLiterals
 
+/**
+ * @author axel terfloth
+ */
 class Types implements IContentTemplate {
 
 	@Inject extension Naming
 	@Inject extension GenmodelEntries
+	@Inject extension CLiterals
 
 	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations locations) '''
 		«entry.licenseText»
@@ -56,16 +61,20 @@ class Types implements IContentTemplate {
 		}
 		#endif
 		
-		#ifndef «CGeneratorConstants::NULL_STRING»
+		#ifndef «NULL_LITERAL»
 			#ifdef __cplusplus
-				#define «CGeneratorConstants::NULL_STRING» 0
+				#if __cplusplus >= 201103L || (defined(_MSC_VER) && _MSC_VER >= 1900)
+			  		#define «NULL_LITERAL» nullptr
+				#else
+					#define «NULL_LITERAL» 0
+				#endif
 			#else
-				#define «CGeneratorConstants::NULL_STRING» ((void *)0)
+				#define «NULL_LITERAL» ((void *)0)
 			#endif
 		#endif
 		
-		#define «CGeneratorConstants.TRUE» true
-		#define «CGeneratorConstants.FALSE» false
+		#define «TRUE_LITERAL» true
+		#define «FALSE_LITERAL» false
 		
 		#endif /* «typesModule.define»_H_ */
 	'''

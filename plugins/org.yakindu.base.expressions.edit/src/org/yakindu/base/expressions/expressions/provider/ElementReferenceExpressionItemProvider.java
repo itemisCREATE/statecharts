@@ -297,6 +297,11 @@ public class ElementReferenceExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createMetaCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
 
 		newChildDescriptors.add

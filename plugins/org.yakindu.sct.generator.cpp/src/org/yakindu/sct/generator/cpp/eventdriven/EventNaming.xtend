@@ -63,6 +63,14 @@ class EventNaming extends org.yakindu.sct.generator.c.extensions.EventNaming {
 		"dispatch_event"
 	}
 	
+	def inEventQueue() {
+		"inEventQueue"
+	}
+	
+	def runCycleGuard() {
+		"isRunningCycle"
+	}
+	
 	override addToQueueFctID(ExecutionFlow it) {
 		super.addToQueueFctID(it)
 	}

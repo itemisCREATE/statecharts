@@ -1,7 +1,7 @@
 package org.yakindu.scr.statechartactive;
 
-public class StatechartActiveStatemachine implements IStatechartActiveStatemachine {
 
+public class StatechartActiveStatemachine implements IStatechartActiveStatemachine {
 	private boolean initialized = false;
 	
 	public enum State {
@@ -12,6 +12,7 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	public StatechartActiveStatemachine() {
 	}
@@ -28,11 +29,28 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_r_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case r_A:
+				r_A_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_r();
 	}
@@ -85,7 +103,7 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_r_default() {
-		react_r__entry_Default();
+		react_StatechartActive_r__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -106,11 +124,11 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_r__entry_Default() {
+	private void react_StatechartActive_r__entry_Default() {
 		enterSequence_r_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -118,29 +136,11 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case r_A:
-				r_A_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

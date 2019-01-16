@@ -1,7 +1,7 @@
 package org.yakindu.scr.syncjoin;
 
-public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 
+public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;
@@ -64,6 +64,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public SyncJoinStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -81,11 +82,40 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_A:
+				main_region_A_react(true);
+				break;
+			case main_region_B_r1_C1:
+				main_region_B_r1_C1_react(true);
+				break;
+			case main_region_B_r1_C2:
+				main_region_B_r1_C2_react(true);
+				break;
+			case main_region_B_r2_D1:
+				main_region_B_r2_D1_react(true);
+				break;
+			case main_region_B_r2_D2:
+				main_region_B_r2_D2_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -214,17 +244,17 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_SyncJoin_main_region__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r1 */
 	private void enterSequence_main_region_B_r1_default() {
-		react_main_region_B_r1__entry_Default();
+		react_SyncJoin_main_region_B_r1__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r2 */
 	private void enterSequence_main_region_B_r2_default() {
-		react_main_region_B_r2__entry_Default();
+		react_SyncJoin_main_region_B_r2__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -320,17 +350,17 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_SyncJoin_main_region__entry_Default() {
 		enterSequence_main_region_B_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region_B_r1__entry_Default() {
+	private void react_SyncJoin_main_region_B_r1__entry_Default() {
 		enterSequence_main_region_B_r1_C1_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region_B_r2__entry_Default() {
+	private void react_SyncJoin_main_region_B_r2__entry_Default() {
 		enterSequence_main_region_B_r2_D1_default();
 	}
 	
@@ -339,7 +369,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		enterSequence_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -347,16 +377,14 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
-				if (sCInterface.e || sCInterface.f) {
+			if (react()==false) {
+				if ((sCInterface.e || sCInterface.f)) {
 					exitSequence_main_region_A();
 					enterSequence_main_region_B_default();
 				} else {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -365,11 +393,9 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -387,8 +413,6 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -397,15 +421,13 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		
 		if (try_transition) {
 			if (main_region_B_react(try_transition)==false) {
-				if (sCInterface.jc && isStateActive(State.main_region_B_r2_D2) && sCInterface.jd) {
+				if (((sCInterface.jc && isStateActive(State.main_region_B_r2_D2)) && sCInterface.jd)) {
 					exitSequence_main_region_B();
 					react_main_region__sync0();
 				} else {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -421,8 +443,6 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -430,44 +450,14 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.jd && isStateActive(State.main_region_B_r1_C2) && sCInterface.jc) {
+			if (((sCInterface.jd && isStateActive(State.main_region_B_r1_C2)) && sCInterface.jc)) {
 				exitSequence_main_region_B();
 				react_main_region__sync0();
 			} else {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_A:
-				main_region_A_react(true);
-				break;
-			case main_region_B_r1_C1:
-				main_region_B_r1_C1_react(true);
-				break;
-			case main_region_B_r1_C2:
-				main_region_B_r1_C2_react(true);
-				break;
-			case main_region_B_r2_D1:
-				main_region_B_r2_D1_react(true);
-				break;
-			case main_region_B_r2_D2:
-				main_region_B_r2_D2_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

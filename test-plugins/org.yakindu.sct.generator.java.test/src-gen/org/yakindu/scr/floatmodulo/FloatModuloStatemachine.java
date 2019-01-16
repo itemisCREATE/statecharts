@@ -1,7 +1,7 @@
 package org.yakindu.scr.floatmodulo;
 
-public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 
+public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private double r;
@@ -28,6 +28,32 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 	
 	protected SCInterfaceImpl sCInterface;
 	
+	protected class SCIAImpl implements SCIA {
+	
+		private double r;
+		
+		public double getR() {
+			return r;
+		}
+		
+		public void setR(double value) {
+			this.r = value;
+		}
+		
+		private long i;
+		
+		public long getI() {
+			return i;
+		}
+		
+		public void setI(long value) {
+			this.i = value;
+		}
+		
+	}
+	
+	protected SCIAImpl sCIA;
+	
 	private boolean initialized = false;
 	
 	public enum State {
@@ -40,8 +66,10 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public FloatModuloStatemachine() {
 		sCInterface = new SCInterfaceImpl();
+		sCIA = new SCIAImpl();
 	}
 	
 	public void init() {
@@ -54,16 +82,40 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		sCInterface.setR(3.4);
 		
 		sCInterface.setI(2);
+		
+		sCIA.setR(3.4);
+		
+		sCIA.setI(2);
 	}
 	
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_StateA:
+				main_region_StateA_react(true);
+				break;
+			case main_region__final_:
+				main_region__final__react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -112,6 +164,10 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		return sCInterface;
 	}
 	
+	public SCIA getSCIA() {
+		return sCIA;
+	}
+	
 	public double getR() {
 		return sCInterface.getR();
 	}
@@ -136,13 +192,13 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		
 		sCInterface.setI(2);
 		
-		sCInterface.setR(sCInterface.r % sCInterface.r);
+		sCInterface.setR((sCInterface.r % sCInterface.r));
 		
 		sCInterface.setR(3.4);
 		
 		sCInterface.setI(2);
 		
-		sCInterface.setI(sCInterface.i % sCInterface.i);
+		sCInterface.setI((sCInterface.i % sCInterface.i));
 		
 		sCInterface.setR(3.4);
 		
@@ -154,7 +210,7 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		
 		sCInterface.setI(2);
 		
-		sCInterface.setR(sCInterface.r % sCInterface.i);
+		sCInterface.setR((sCInterface.r % sCInterface.i));
 		
 		sCInterface.setR(3.4);
 		
@@ -166,13 +222,57 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		
 		sCInterface.setI(2);
 		
-		sCInterface.setR(sCInterface.i % sCInterface.r);
+		sCInterface.setR((sCInterface.i % sCInterface.r));
 		
 		sCInterface.setR(3.4);
 		
 		sCInterface.setI(2);
 		
-		sCInterface.setR(sCInterface.i % sCInterface.i);
+		sCInterface.setR((sCInterface.i % sCInterface.i));
+		
+		sCIA.setR(sCIA.getR() % (sCIA.r));
+		
+		sCIA.setR(3.4);
+		
+		sCIA.setI(2);
+		
+		sCIA.setR((sCIA.r % sCIA.r));
+		
+		sCIA.setR(3.4);
+		
+		sCIA.setI(2);
+		
+		sCIA.setI((sCIA.i % sCIA.i));
+		
+		sCIA.setR(3.4);
+		
+		sCIA.setI(2);
+		
+		sCIA.setI(sCIA.getI() % (sCIA.i));
+		
+		sCIA.setR(3.4);
+		
+		sCIA.setI(2);
+		
+		sCIA.setR((sCIA.r % sCIA.i));
+		
+		sCIA.setR(3.4);
+		
+		sCIA.setI(2);
+		
+		sCIA.setR(sCIA.getR() % (sCIA.i));
+		
+		sCIA.setR(3.4);
+		
+		sCIA.setI(2);
+		
+		sCIA.setR((sCIA.i % sCIA.r));
+		
+		sCIA.setR(3.4);
+		
+		sCIA.setI(2);
+		
+		sCIA.setR((sCIA.i % sCIA.i));
 	}
 	
 	/* 'default' enter sequence for state StateA */
@@ -190,7 +290,7 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_FloatModulo_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state StateA */
@@ -220,11 +320,11 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_FloatModulo_main_region__entry_Default() {
 		enterSequence_main_region_StateA_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -232,12 +332,10 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				exitSequence_main_region_StateA();
 				enterSequence_main_region__final__default();
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -246,32 +344,11 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_StateA:
-				main_region_StateA_react(true);
-				break;
-			case main_region__final_:
-				main_region__final__react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

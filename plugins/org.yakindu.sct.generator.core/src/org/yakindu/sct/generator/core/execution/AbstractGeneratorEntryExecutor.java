@@ -64,7 +64,7 @@ public abstract class AbstractGeneratorEntryExecutor implements IGeneratorEntryE
 				execute(factory.create(entry), entry);
 			} catch (Exception ex) {
 				logger.logError(ex);
-				status = new Status(IStatus.ERROR, PLUGIN_ID, ex.getMessage());
+				status = new Status(IStatus.ERROR, PLUGIN_ID, ex.toString());
 			}
 		} else {
 			status = new Status(IStatus.ERROR, PLUGIN_ID,

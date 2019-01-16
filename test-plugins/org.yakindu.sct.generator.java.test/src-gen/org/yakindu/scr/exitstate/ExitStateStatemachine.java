@@ -1,7 +1,7 @@
 package org.yakindu.scr.exitstate;
 
-public class ExitStateStatemachine implements IExitStateStatemachine {
 
+public class ExitStateStatemachine implements IExitStateStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e;
@@ -45,6 +45,7 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public ExitStateStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -61,11 +62,34 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_r_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case r_A_r_B:
+				r_A_r_B_react(true);
+				break;
+			case r_E:
+				r_E_react(true);
+				break;
+			case r_F:
+				r_F_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_r();
 	}
@@ -169,12 +193,12 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_r_default() {
-		react_r__entry_Default();
+		react_ExitState_r__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_r_A_r_default() {
-		react_r_A_r__entry_Default();
+		react_ExitState_r_A_r__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -229,31 +253,31 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_r__entry_Default() {
+	private void react_ExitState_r__entry_Default() {
 		enterSequence_r_A_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_r_A_r__entry_Default() {
+	private void react_ExitState_r_A_r__entry_Default() {
 		enterSequence_r_A_r_B_default();
 	}
 	
 	/* The reactions of exit default. */
-	private void react_r_A_r__exit_Default() {
+	private void react_ExitState_r_A_r__exit_Default() {
 		effect_r_A_tr0();
 	}
 	
 	/* The reactions of exit f. */
-	private void react_r_A_r_f() {
+	private void react_ExitState_r_A_r_f() {
 		effect_r_A_tr1();
 	}
 	
 	/* The reactions of exit g. */
-	private void react_r_A_r_g() {
+	private void react_ExitState_r_A_r_g() {
 		effect_r_A_tr0();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -261,11 +285,9 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -277,23 +299,21 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 			if (r_A_react(try_transition)==false) {
 				if (sCInterface.g) {
 					exitSequence_r_A_r_B();
-					react_r_A_r_g();
+					react_ExitState_r_A_r_g();
 				} else {
 					if (sCInterface.f) {
 						exitSequence_r_A_r_B();
-						react_r_A_r_f();
+						react_ExitState_r_A_r_f();
 					} else {
 						if (sCInterface.e) {
 							exitSequence_r_A_r_B();
-							react_r_A_r__exit_Default();
+							react_ExitState_r_A_r__exit_Default();
 						} else {
 							did_transition = false;
 						}
 					}
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -302,11 +322,9 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -315,35 +333,11 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case r_A_r_B:
-				r_A_r_B_react(true);
-				break;
-			case r_E:
-				r_E_react(true);
-				break;
-			case r_F:
-				r_F_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

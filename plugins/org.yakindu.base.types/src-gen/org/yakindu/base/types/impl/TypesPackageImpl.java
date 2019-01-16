@@ -27,8 +27,8 @@ import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.GenericElement;
+import org.yakindu.base.types.MetaComposite;
 import org.yakindu.base.types.Operation;
-import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
@@ -36,6 +36,7 @@ import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
+import org.yakindu.base.types.TypedDeclaration;
 import org.yakindu.base.types.TypedElement;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
@@ -147,13 +148,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass packageMemberEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass domainEClass = null;
 
 	/**
@@ -197,6 +191,20 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	private EClass expressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass typedDeclarationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass metaCompositeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -347,6 +355,15 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 */
 	public EAttribute getDeclaration_Static() {
 		return (EAttribute)declarationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDeclaration_Id() {
+		return (EAttribute)declarationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -619,24 +636,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getPackageMember() {
-		return packageMemberEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPackageMember_Id() {
-		return (EAttribute)packageMemberEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getDomain() {
 		return domainEClass;
 	}
@@ -772,6 +771,33 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTypedDeclaration() {
+		return typedDeclarationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMetaComposite() {
+		return metaCompositeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMetaComposite_MetaFeatures() {
+		return (EReference)metaCompositeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getDirection() {
 		return directionEEnum;
 	}
@@ -813,6 +839,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		declarationEClass = createEClass(DECLARATION);
 		createEAttribute(declarationEClass, DECLARATION__STATIC);
+		createEAttribute(declarationEClass, DECLARATION__ID);
 
 		operationEClass = createEClass(OPERATION);
 		createEReference(operationEClass, OPERATION__PARAMETERS);
@@ -857,9 +884,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		genericElementEClass = createEClass(GENERIC_ELEMENT);
 		createEReference(genericElementEClass, GENERIC_ELEMENT__TYPE_PARAMETERS);
 
-		packageMemberEClass = createEClass(PACKAGE_MEMBER);
-		createEAttribute(packageMemberEClass, PACKAGE_MEMBER__ID);
-
 		domainEClass = createEClass(DOMAIN);
 		createEAttribute(domainEClass, DOMAIN__DOMAIN_ID);
 
@@ -881,6 +905,11 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		createEReference(annotationTypeEClass, ANNOTATION_TYPE__TARGETS);
 
 		expressionEClass = createEClass(EXPRESSION);
+
+		typedDeclarationEClass = createEClass(TYPED_DECLARATION);
+
+		metaCompositeEClass = createEClass(META_COMPOSITE);
+		createEReference(metaCompositeEClass, META_COMPOSITE__META_FEATURES);
 
 		// Create enums
 		directionEEnum = createEEnum(DIRECTION);
@@ -916,36 +945,36 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		packageEClass.getESuperTypes().add(this.getPackageMember());
+		packageEClass.getESuperTypes().add(this.getDeclaration());
 		packageEClass.getESuperTypes().add(theBasePackage.getDomainElement());
-		typeEClass.getESuperTypes().add(this.getPackageMember());
-		declarationEClass.getESuperTypes().add(this.getTypedElement());
+		typeEClass.getESuperTypes().add(this.getDeclaration());
 		declarationEClass.getESuperTypes().add(theBasePackage.getNamedElement());
-		declarationEClass.getESuperTypes().add(this.getPackageMember());
-		operationEClass.getESuperTypes().add(this.getDeclaration());
+		declarationEClass.getESuperTypes().add(this.getAnnotatableElement());
+		declarationEClass.getESuperTypes().add(this.getMetaComposite());
+		operationEClass.getESuperTypes().add(this.getTypedDeclaration());
 		operationEClass.getESuperTypes().add(this.getGenericElement());
-		propertyEClass.getESuperTypes().add(this.getDeclaration());
+		propertyEClass.getESuperTypes().add(this.getTypedDeclaration());
 		parameterEClass.getESuperTypes().add(this.getTypedElement());
 		parameterEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		parameterEClass.getESuperTypes().add(this.getAnnotatableElement());
-		eventEClass.getESuperTypes().add(this.getDeclaration());
+		eventEClass.getESuperTypes().add(this.getTypedDeclaration());
 		enumerationTypeEClass.getESuperTypes().add(this.getComplexType());
 		primitiveTypeEClass.getESuperTypes().add(this.getType());
 		complexTypeEClass.getESuperTypes().add(this.getType());
 		complexTypeEClass.getESuperTypes().add(this.getGenericElement());
-		enumeratorEClass.getESuperTypes().add(this.getDeclaration());
+		enumeratorEClass.getESuperTypes().add(this.getTypedDeclaration());
 		typeParameterEClass.getESuperTypes().add(this.getType());
 		genericElementEClass.getESuperTypes().add(theBasePackage.getNamedElement());
-		packageMemberEClass.getESuperTypes().add(theBasePackage.getNamedElement());
-		packageMemberEClass.getESuperTypes().add(this.getAnnotatableElement());
-		typeAliasEClass.getESuperTypes().add(this.getTypedElement());
+		typeAliasEClass.getESuperTypes().add(this.getTypedDeclaration());
 		typeAliasEClass.getESuperTypes().add(this.getType());
 		arrayTypeSpecifierEClass.getESuperTypes().add(this.getTypeSpecifier());
 		annotationTypeEClass.getESuperTypes().add(this.getType());
+		typedDeclarationEClass.getESuperTypes().add(this.getDeclaration());
+		typedDeclarationEClass.getESuperTypes().add(this.getTypedElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(packageEClass, org.yakindu.base.types.Package.class, "Package", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPackage_Member(), this.getPackageMember(), null, "member", null, 0, -1, org.yakindu.base.types.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPackage_Member(), this.getDeclaration(), null, "member", null, 0, -1, org.yakindu.base.types.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPackage_Import(), this.getPackage(), null, "import", null, 0, -1, org.yakindu.base.types.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -957,6 +986,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		initEClass(declarationEClass, Declaration.class, "Declaration", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDeclaration_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, Declaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDeclaration_Id(), ecorePackage.getEString(), "id", null, 0, 1, Declaration.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOperation_Parameters(), this.getParameter(), this.getParameter_OwningOperation(), "parameters", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1005,9 +1035,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEClass(genericElementEClass, GenericElement.class, "GenericElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGenericElement_TypeParameters(), this.getTypeParameter(), null, "typeParameters", null, 0, -1, GenericElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(packageMemberEClass, PackageMember.class, "PackageMember", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPackageMember_Id(), ecorePackage.getEString(), "id", null, 0, 1, PackageMember.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-
 		initEClass(domainEClass, Domain.class, "Domain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDomain_DomainID(), ecorePackage.getEString(), "domainID", null, 0, 1, Domain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1018,7 +1045,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEReference(getAnnotation_Arguments(), this.getExpression(), null, "arguments", null, 0, -1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(annotatableElementEClass, AnnotatableElement.class, "AnnotatableElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAnnotatableElement_Annotations(), this.getAnnotation(), null, "annotations", null, 0, -1, AnnotatableElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAnnotatableElement_Annotations(), this.getAnnotation(), null, "annotations", null, 0, -1, AnnotatableElement.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAnnotatableElement_AnnotationInfo(), this.getAnnotatableElement(), null, "annotationInfo", null, 0, 1, AnnotatableElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(annotatableElementEClass, this.getAnnotation(), "getAnnotationOfType", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1034,6 +1061,11 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEReference(getAnnotationType_Targets(), ecorePackage.getEObject(), null, "targets", null, 0, -1, AnnotationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(expressionEClass, Expression.class, "Expression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(typedDeclarationEClass, TypedDeclaration.class, "TypedDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(metaCompositeEClass, MetaComposite.class, "MetaComposite", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMetaComposite_MetaFeatures(), this.getDeclaration(), null, "metaFeatures", null, 0, -1, MetaComposite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(directionEEnum, Direction.class, "Direction");

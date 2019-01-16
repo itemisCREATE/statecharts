@@ -1,7 +1,7 @@
 package org.yakindu.scr.integerexpressions;
 
-public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatemachine {
 
+public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e1;
@@ -269,6 +269,7 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 	
 	private int nextStateIndex;
 	
+	
 	public IntegerExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -332,11 +333,31 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case main_region_StateA:
+				main_region_StateA_react(true);
+				break;
+			case main_region_StateB:
+				main_region_StateB_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_main_region();
 	}
@@ -605,15 +626,15 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		
 		sCInterface.setNotEqual((sCInterface.myInt1!=sCInterface.myInt2));
 		
-		sCInterface.setPlus(sCInterface.myInt1 + sCInterface.myInt2);
+		sCInterface.setPlus((sCInterface.myInt1 + sCInterface.myInt2));
 		
-		sCInterface.setMinus(sCInterface.myInt1 - sCInterface.myInt2);
+		sCInterface.setMinus((sCInterface.myInt1 - sCInterface.myInt2));
 		
-		sCInterface.setMultiply(sCInterface.myInt1 * sCInterface.myInt2);
+		sCInterface.setMultiply((sCInterface.myInt1 * sCInterface.myInt2));
 		
-		sCInterface.setDivision(sCInterface.myInt1 / sCInterface.myInt2);
+		sCInterface.setDivision((sCInterface.myInt1 / sCInterface.myInt2));
 		
-		sCInterface.setModulo(sCInterface.myInt1 % sCInterface.myInt2);
+		sCInterface.setModulo((sCInterface.myInt1 % sCInterface.myInt2));
 		
 		sCInterface.setNegat(-sCInterface.myInt1);
 		
@@ -648,7 +669,7 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
-		react_main_region__entry_Default();
+		react_IntegerExpressions_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state StateA */
@@ -678,11 +699,11 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_main_region__entry_Default() {
+	private void react_IntegerExpressions_main_region__entry_Default() {
 		enterSequence_main_region_StateA_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -690,7 +711,7 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.e1) {
 					exitSequence_main_region_StateA();
 					enterSequence_main_region_StateB_default();
@@ -699,8 +720,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -708,32 +727,11 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				did_transition = false;
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case main_region_StateA:
-				main_region_StateA_react(true);
-				break;
-			case main_region_StateB:
-				main_region_StateB_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

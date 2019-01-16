@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- *
+ * 
  */
 
 package org.yakindu.sct.model.sgraph.resource;
@@ -69,9 +69,9 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 /**
- *
+ * 
  * @author andreas muelder - Initial contribution and API
- *
+ * 
  */
 public abstract class AbstractSCTResource extends XMIResourceImpl {
 
@@ -468,8 +468,8 @@ public abstract class AbstractSCTResource extends XMIResourceImpl {
 	}
 
 	// copied from xtext LazyLinkingResource
-	protected static class DiagnosticMessageContext
-	implements ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext {
+	public static class DiagnosticMessageContext
+			implements ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext {
 
 		private final Triple<EObject, EReference, INode> triple;
 		private final LinkingHelper linkingHelper;
@@ -479,17 +479,14 @@ public abstract class AbstractSCTResource extends XMIResourceImpl {
 			this.linkingHelper = helper;
 		}
 
-		@Override
 		public EObject getContext() {
 			return triple.getFirst();
 		}
 
-		@Override
 		public EReference getReference() {
 			return triple.getSecond();
 		}
 
-		@Override
 		public String getLinkText() {
 			return linkingHelper.getCrossRefNodeAsString(triple.getThird(), true);
 		}

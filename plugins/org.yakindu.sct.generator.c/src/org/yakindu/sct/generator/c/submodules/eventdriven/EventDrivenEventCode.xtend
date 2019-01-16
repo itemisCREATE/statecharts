@@ -19,15 +19,17 @@ import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
-import static org.yakindu.sct.generator.c.CGeneratorConstants.TRUE
+import org.yakindu.sct.generator.c.types.CLiterals
 
 /**
  * @author rbeckmann
+ * @author axel terfloth
  *
  */
 @Singleton // Guice
 class EventDrivenEventCode extends EventCode {
 	@Inject extension EventNaming
+	@Inject protected extension CLiterals
 	
 	protected static int valueVarIndex = 0
 	
@@ -38,7 +40,7 @@ class EventDrivenEventCode extends EventCode {
 			«IF value !== null»
 				«event.definition.event.valueAccess» = «exp.code(value)»;
 			«ENDIF»
-			«event.definition.event.access» = «TRUE»«ELSE»
+			«event.definition.event.access» = «TRUE_LITERAL»«ELSE»
 			«IF value !== null»
 			«event.definition.event.typeSpecifier.targetLanguageName» «valueVarName» = «exp.code(value)»;
 			«flow.addToQueueValueFctID»(«scHandle», «event.definition.event.eventEnumMemberName», &«valueVarName»)
@@ -50,7 +52,7 @@ class EventDrivenEventCode extends EventCode {
 			«IF event.hasValue»
 			«event.valueAccess» = value;
 			«ENDIF»
-			«event.access» = «TRUE»;
+			«event.access» = «TRUE_LITERAL»;
 			
 			«runCycleFctID»(«scHandle»);
 	'''

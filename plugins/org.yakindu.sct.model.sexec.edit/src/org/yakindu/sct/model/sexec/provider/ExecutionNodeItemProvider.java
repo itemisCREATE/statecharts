@@ -59,6 +59,7 @@ public class ExecutionNodeItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
+			addStaticPropertyDescriptor(object);
 			addIdPropertyDescriptor(object);
 			addAbstractPropertyDescriptor(object);
 			addVisiblePropertyDescriptor(object);
@@ -82,28 +83,6 @@ public class ExecutionNodeItemProvider
 				 getString("_UI_PropertyDescriptor_description", "_UI_NamedElement_name_feature", "_UI_NamedElement_type"),
 				 BasePackage.Literals.NAMED_ELEMENT__NAME,
 				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Id feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addIdPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_PackageMember_id_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_PackageMember_id_feature", "_UI_PackageMember_type"),
-				 TypesPackage.Literals.PACKAGE_MEMBER__ID,
-				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
@@ -156,6 +135,50 @@ public class ExecutionNodeItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Static feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addStaticPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Declaration_static_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Declaration_static_feature", "_UI_Declaration_type"),
+				 TypesPackage.Literals.DECLARATION__STATIC,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Id feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIdPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Declaration_id_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Declaration_id_feature", "_UI_Declaration_type"),
+				 TypesPackage.Literals.DECLARATION__ID,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Simple Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -191,6 +214,7 @@ public class ExecutionNodeItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS);
 			childrenFeatures.add(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO);
+			childrenFeatures.add(TypesPackage.Literals.META_COMPOSITE__META_FEATURES);
 			childrenFeatures.add(TypesPackage.Literals.TYPE__SUPER_TYPES);
 			childrenFeatures.add(TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS);
 			childrenFeatures.add(TypesPackage.Literals.COMPLEX_TYPE__FEATURES);
@@ -252,6 +276,7 @@ public class ExecutionNodeItemProvider
 
 		switch (notification.getFeatureID(ExecutionNode.class)) {
 			case SexecPackage.EXECUTION_NODE__NAME:
+			case SexecPackage.EXECUTION_NODE__STATIC:
 			case SexecPackage.EXECUTION_NODE__ID:
 			case SexecPackage.EXECUTION_NODE__ABSTRACT:
 			case SexecPackage.EXECUTION_NODE__VISIBLE:
@@ -260,6 +285,7 @@ public class ExecutionNodeItemProvider
 				return;
 			case SexecPackage.EXECUTION_NODE__ANNOTATIONS:
 			case SexecPackage.EXECUTION_NODE__ANNOTATION_INFO:
+			case SexecPackage.EXECUTION_NODE__META_FEATURES:
 			case SexecPackage.EXECUTION_NODE__SUPER_TYPES:
 			case SexecPackage.EXECUTION_NODE__TYPE_PARAMETERS:
 			case SexecPackage.EXECUTION_NODE__FEATURES:
@@ -346,17 +372,17 @@ public class ExecutionNodeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 TypesFactory.eINSTANCE.createPackageMember()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 TypesFactory.eINSTANCE.createPackage()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 TypesFactory.eINSTANCE.createType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createTypedDeclaration()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -411,6 +437,126 @@ public class ExecutionNodeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createAnnotatableElement()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createAnnotationType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionFlow()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionNode()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionState()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionEntry()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionExit()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionChoice()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionSynchronization()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SexecFactory.eINSTANCE.createMethod()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SexecFactory.eINSTANCE.createTimeEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SGraphFactory.eINSTANCE.createImportDeclaration()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createPackage()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createTypedDeclaration()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createOperation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createProperty()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createComplexType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createEnumerationType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createPrimitiveType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createEnumerator()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createTypeParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createTypeAlias()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 TypesFactory.eINSTANCE.createAnnotationType()));
 
 		newChildDescriptors.add
@@ -431,6 +577,41 @@ public class ExecutionNodeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionFlow()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionNode()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionState()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionEntry()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionExit()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionChoice()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionSynchronization()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
 				 SexecFactory.eINSTANCE.createMethod()));
 
 		newChildDescriptors.add
@@ -442,6 +623,21 @@ public class ExecutionNodeItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
 				 SGraphFactory.eINSTANCE.createImportDeclaration()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createPackage()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createTypedDeclaration()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -461,7 +657,37 @@ public class ExecutionNodeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createComplexType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createEnumerationType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createPrimitiveType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
 				 TypesFactory.eINSTANCE.createEnumerator()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createTypeParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createTypeAlias()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createAnnotationType()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -492,6 +718,7 @@ public class ExecutionNodeItemProvider
 
 		boolean qualify =
 			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
+			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES ||
 			childFeature == TypesPackage.Literals.COMPLEX_TYPE__FEATURES ||
 			childFeature == TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS ||
 			childFeature == SexecPackage.Literals.EXECUTION_NODE__REACT_SEQUENCE ||

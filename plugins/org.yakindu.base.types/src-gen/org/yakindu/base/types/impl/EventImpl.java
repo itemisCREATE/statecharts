@@ -26,7 +26,7 @@ import org.yakindu.base.types.TypesPackage;
  *
  * @generated
  */
-public class EventImpl extends DeclarationImpl implements Event {
+public class EventImpl extends TypedDeclarationImpl implements Event {
 	/**
 	 * The default value of the '{@link #getDirection() <em>Direction</em>}' attribute.
 	 * <!-- begin-user-doc -->

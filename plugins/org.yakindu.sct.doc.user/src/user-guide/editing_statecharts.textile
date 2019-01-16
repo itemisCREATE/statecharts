@@ -737,7 +737,7 @@ In the subsequent sections we will quickly walk through the preferences.
 h3(#edit_diagram_appearance). Diagram appearance
 
 p(#edit_fig_preferences_diagram_appearance). 
-!images/docu_preferences_010_diagram_appearance_01.png(Preferences: Diagram appearance)!
+!images/docu_preferences_010_diagram_appearance_01.png(Preferences: Diagram appearance)! 
 
 p=. Preferences: Diagram appearance
 
@@ -751,6 +751,9 @@ The "diagram appearance":#edit_fig_preferences_diagram_appearance preferences de
 
 Please keep in mind that these settings will apply to _new_ elements only. Existing regions, states, etc. will remain as they are. However, you can modify the properties of an existing element anytime, using its properties view.
 
+h4(#font-scaling). Font scaling
+
+This option is only available on Microsoft Windows. By default, font scaling is deactivated in YAKINDU Statechart Tools. If you are working on different machines with different Windows font scaling, this option can be enabled to have the same font and box sizes on all machines. 
 
 h4(#syntax-coloring). Syntax coloring
 

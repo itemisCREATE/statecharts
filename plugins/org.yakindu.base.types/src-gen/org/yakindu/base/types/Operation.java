@@ -25,7 +25,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Operation extends Declaration, GenericElement {
+public interface Operation extends TypedDeclaration, GenericElement {
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link org.yakindu.base.types.Parameter}.

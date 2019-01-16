@@ -110,11 +110,6 @@ implements INamesAreUniqueValidationHelper {
 		}
 	}
 
-	protected void validateEqualSimpleName(IEObjectDescription description, IEObjectDescription doublet,
-			ValidationMessageAcceptor acceptor) {
-
-	}
-
 	protected void duplicateLastElement(IEObjectDescription description, IEObjectDescription put,
 			ValidationMessageAcceptor acceptor) {
 	}

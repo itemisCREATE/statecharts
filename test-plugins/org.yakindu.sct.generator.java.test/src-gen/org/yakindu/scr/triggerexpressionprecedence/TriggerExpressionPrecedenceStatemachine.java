@@ -1,7 +1,7 @@
 package org.yakindu.scr.triggerexpressionprecedence;
 
-public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressionPrecedenceStatemachine {
 
+public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressionPrecedenceStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean e1;
@@ -75,6 +75,7 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 	
 	private int nextStateIndex;
 	
+	
 	public TriggerExpressionPrecedenceStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -98,11 +99,28 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_TriggerExpressionPrecedence_main_region_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case triggerExpressionPrecedence_main_region_A:
+				triggerExpressionPrecedence_main_region_A_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_TriggerExpressionPrecedence_main_region();
 	}
@@ -200,7 +218,7 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 	
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_TriggerExpressionPrecedence_main_region_default() {
-		react_TriggerExpressionPrecedence_main_region__entry_Default();
+		react_expressions_TriggerExpressionPrecedence_main_region__entry_Default();
 	}
 	
 	/* Default exit sequence for state A */
@@ -221,11 +239,11 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_TriggerExpressionPrecedence_main_region__entry_Default() {
+	private void react_expressions_TriggerExpressionPrecedence_main_region__entry_Default() {
 		enterSequence_TriggerExpressionPrecedence_main_region_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -233,8 +251,8 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
-				if ((sCInterface.e1) && (sCInterface.getC1() || sCInterface.getC2())) {
+			if (react()==false) {
+				if (((sCInterface.e1) && ((sCInterface.getC1() || sCInterface.getC2())))) {
 					exitSequence_TriggerExpressionPrecedence_main_region_A();
 					sCInterface.setE1_transition(true);
 					
@@ -251,25 +269,7 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case triggerExpressionPrecedence_main_region_A:
-				triggerExpressionPrecedence_main_region_A_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

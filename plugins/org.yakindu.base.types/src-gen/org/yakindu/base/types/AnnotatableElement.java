@@ -34,7 +34,7 @@ public interface AnnotatableElement extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Annotations</em>' containment reference list.
 	 * @see org.yakindu.base.types.TypesPackage#getAnnotatableElement_Annotations()
-	 * @model containment="true"
+	 * @model containment="true" transient="true"
 	 * @generated
 	 */
 	EList<Annotation> getAnnotations();

@@ -29,11 +29,11 @@ import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.BOOL_TYPE
-import static org.yakindu.sct.generator.c.CGeneratorConstants.FALSE
+import org.yakindu.sct.generator.c.types.CLiterals
 
 /**
  * @author rbeckmann
- *
+ * @author axel terfloth
  */
 @Singleton // Guice
 class InternalFunctionsGenerator {
@@ -46,23 +46,24 @@ class InternalFunctionsGenerator {
 	@Inject protected extension ConstantInitializationResolver
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension ExpressionsChecker
+	@Inject protected extension CLiterals
 	
 	def clearInEventsFunction(ExecutionFlow it) '''
 		static void «clearInEventsFctID»(«scHandleDecl»)
 		{
 			«FOR scope : it.scopes»
 				«FOR event : scope.incomingEvents»
-				«event.access» = «FALSE»;
+				«event.access» = «FALSE_LITERAL»;
 				«ENDFOR»
 			«ENDFOR»
 			«IF hasInternalScope»
 				«FOR event : internalScope.events»
-				«event.access» = «FALSE»;
+				«event.access» = «FALSE_LITERAL»;
 				«ENDFOR»
 			«ENDIF»
 			«IF timed»
 				«FOR event : timeEventScope.events»
-				«event.access» = «FALSE»;
+				«event.access» = «FALSE_LITERAL»;
 				«ENDFOR»
 			«ENDIF»
 		}
@@ -73,7 +74,7 @@ class InternalFunctionsGenerator {
 		{
 			«FOR scope : it.scopes»
 				«FOR event : scope.outgoingEvents»
-				«event.access» = «FALSE»;
+				«event.access» = «FALSE_LITERAL»;
 				«ENDFOR»
 			«ENDFOR»
 		}

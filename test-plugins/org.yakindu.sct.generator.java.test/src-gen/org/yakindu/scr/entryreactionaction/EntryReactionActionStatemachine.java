@@ -1,7 +1,7 @@
 package org.yakindu.scr.entryreactionaction;
 
-public class EntryReactionActionStatemachine implements IEntryReactionActionStatemachine {
 
+public class EntryReactionActionStatemachine implements IEntryReactionActionStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean b;
@@ -80,6 +80,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	
 	private int nextStateIndex;
 	
+	
 	public EntryReactionActionStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -106,12 +107,38 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_EntryReactionAction_r2_default();
 		enterSequence_EntryReactionAction_r1_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case entryReactionAction_r2_B_r_BA:
+				entryReactionAction_r2_B_r_BA_react(true);
+				break;
+			case entryReactionAction_r2_B_r_BB:
+				entryReactionAction_r2_B_r_BB_react(true);
+				break;
+			case entryReactionAction_r2_D:
+				entryReactionAction_r2_D_react(true);
+				break;
+			case entryReactionAction_r1_A:
+				entryReactionAction_r1_A_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_EntryReactionAction_r2();
 		exitSequence_EntryReactionAction_r1();
@@ -251,17 +278,17 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	
 	/* 'default' enter sequence for region r2 */
 	private void enterSequence_EntryReactionAction_r2_default() {
-		react_EntryReactionAction_r2_default();
+		react_entries_EntryReactionAction_r2_default();
 	}
 	
 	/* 'default' enter sequence for region r */
 	private void enterSequence_EntryReactionAction_r2_B_r_default() {
-		react_EntryReactionAction_r2_B_r_default();
+		react_entries_EntryReactionAction_r2_B_r_default();
 	}
 	
 	/* 'other' enter sequence for region r */
 	private void enterSequence_EntryReactionAction_r2_B_r_other() {
-		react_EntryReactionAction_r2_B_r_other();
+		react_entries_EntryReactionAction_r2_B_r_other();
 	}
 	
 	/* shallow enterSequence with history in child r */
@@ -280,7 +307,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	
 	/* 'default' enter sequence for region r1 */
 	private void enterSequence_EntryReactionAction_r1_default() {
-		react_EntryReactionAction_r1__entry_Default();
+		react_entries_EntryReactionAction_r1__entry_Default();
 	}
 	
 	/* Default exit sequence for state B */
@@ -355,14 +382,14 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	}
 	
 	/* Default react sequence for initial entry default */
-	private void react_EntryReactionAction_r2_default() {
+	private void react_entries_EntryReactionAction_r2_default() {
 		sCInterface.setEnteredR2(true);
 		
 		enterSequence_EntryReactionAction_r2_B_default();
 	}
 	
 	/* Default react sequence for shallow history entry default */
-	private void react_EntryReactionAction_r2_B_r_default() {
+	private void react_entries_EntryReactionAction_r2_B_r_default() {
 		/* Enter the region with shallow history */
 		if (historyVector[0] != State.$NullState$) {
 			shallowEnterSequence_EntryReactionAction_r2_B_r();
@@ -374,20 +401,20 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	}
 	
 	/* Default react sequence for initial entry other */
-	private void react_EntryReactionAction_r2_B_r_other() {
+	private void react_entries_EntryReactionAction_r2_B_r_other() {
 		sCInterface.setEnteredBother(true);
 		
 		enterSequence_EntryReactionAction_r2_B_r_BB_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_EntryReactionAction_r1__entry_Default() {
+	private void react_entries_EntryReactionAction_r1__entry_Default() {
 		sCInterface.setEnteredR1(true);
 		
 		enterSequence_EntryReactionAction_r1_A_default();
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -395,7 +422,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.d) {
 					exitSequence_EntryReactionAction_r2_B();
 					enterSequence_EntryReactionAction_r2_D_default();
@@ -403,8 +430,6 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -422,8 +447,6 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -440,8 +463,6 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -449,7 +470,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.b) {
 					exitSequence_EntryReactionAction_r2_D();
 					enterSequence_EntryReactionAction_r2_B_other();
@@ -463,8 +484,6 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -474,34 +493,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		if (try_transition) {
 			did_transition = false;
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case entryReactionAction_r2_B_r_BA:
-				entryReactionAction_r2_B_r_BA_react(true);
-				break;
-			case entryReactionAction_r2_B_r_BB:
-				entryReactionAction_r2_B_r_BB_react(true);
-				break;
-			case entryReactionAction_r2_D:
-				entryReactionAction_r2_D_react(true);
-				break;
-			case entryReactionAction_r1_A:
-				entryReactionAction_r1_A_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }

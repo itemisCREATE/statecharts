@@ -1,7 +1,7 @@
 package org.yakindu.scr.deephistory;
 
-public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 
+public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	protected class SCInterfaceImpl implements SCInterface {
 	
 		private boolean event1;
@@ -93,6 +93,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	
 	private int nextStateIndex;
 	
+	
 	public DeepHistoryStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -112,11 +113,43 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	public void enter() {
 		if (!initialized) {
 			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
+				"The state machine needs to be initialized first by calling the init() function."
+			);
 		}
 		enterSequence_mainRegion_default();
 	}
 	
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+		clearOutEvents();
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+			switch (stateVector[nextStateIndex]) {
+			case mainRegion_State1:
+				mainRegion_State1_react(true);
+				break;
+			case mainRegion_State2__region0_a:
+				mainRegion_State2__region0_a_react(true);
+				break;
+			case mainRegion_State2__region0_State4__region0_State6:
+				mainRegion_State2__region0_State4__region0_State6_react(true);
+				break;
+			case mainRegion_State2__region0_State4__region0_State7__region0_State8:
+				mainRegion_State2__region0_State4__region0_State7__region0_State8_react(true);
+				break;
+			case mainRegion_State2__region0_State4__region0_State7__region0_State9:
+				mainRegion_State2__region0_State4__region0_State7__region0_State9_react(true);
+				break;
+			case mainRegion_State2__region0_State5:
+				mainRegion_State2__region0_State5_react(true);
+				break;
+			default:
+				// $NullState$
+			}
+		}
+		clearEvents();
+	}
 	public void exit() {
 		exitSequence_mainRegion();
 	}
@@ -286,12 +319,12 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	
 	/* 'default' enter sequence for region mainRegion */
 	private void enterSequence_mainRegion_default() {
-		react_mainRegion__entry_Default();
+		react_DeepHistory_mainRegion__entry_Default();
 	}
 	
 	/* 'default' enter sequence for region null */
 	private void enterSequence_mainRegion_State2__region0_default() {
-		react_mainRegion_State2__region0__entry_Default();
+		react_DeepHistory_mainRegion_State2__region0__entry_Default();
 	}
 	
 	/* deep enterSequence with history in child null */
@@ -319,7 +352,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	
 	/* 'default' enter sequence for region null */
 	private void enterSequence_mainRegion_State2__region0_State4__region0_default() {
-		react_mainRegion_State2__region0_State4__region0__entry_Default();
+		react_DeepHistory_mainRegion_State2__region0_State4__region0__entry_Default();
 	}
 	
 	/* deep enterSequence with history in child null */
@@ -341,7 +374,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	
 	/* 'default' enter sequence for region null */
 	private void enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_default() {
-		react_mainRegion_State2__region0_State4__region0_State7__region0__entry_Default();
+		react_DeepHistory_mainRegion_State2__region0_State4__region0_State7__region0__entry_Default();
 	}
 	
 	/* deep enterSequence with history in child null */
@@ -490,22 +523,22 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_mainRegion__entry_Default() {
+	private void react_DeepHistory_mainRegion__entry_Default() {
 		enterSequence_mainRegion_State1_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_mainRegion_State2__region0_State4__region0__entry_Default() {
+	private void react_DeepHistory_mainRegion_State2__region0_State4__region0__entry_Default() {
 		enterSequence_mainRegion_State2__region0_State4__region0_State6_default();
 	}
 	
 	/* Default react sequence for initial entry  */
-	private void react_mainRegion_State2__region0_State4__region0_State7__region0__entry_Default() {
+	private void react_DeepHistory_mainRegion_State2__region0_State4__region0_State7__region0__entry_Default() {
 		enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8_default();
 	}
 	
 	/* Default react sequence for deep history entry  */
-	private void react_mainRegion_State2__region0__entry_Default() {
+	private void react_DeepHistory_mainRegion_State2__region0__entry_Default() {
 		/* Enter the region with deep history */
 		if (historyVector[0] != State.$NullState$) {
 			deepEnterSequence_mainRegion_State2__region0();
@@ -514,7 +547,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		}
 	}
 	
-	private boolean react(boolean try_transition) {
+	private boolean react() {
 		return false;
 	}
 	
@@ -522,7 +555,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.event1) {
 					exitSequence_mainRegion_State1();
 					enterSequence_mainRegion_State2_default();
@@ -531,8 +564,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -540,7 +571,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (react(try_transition)==false) {
+			if (react()==false) {
 				if (sCInterface.event2) {
 					exitSequence_mainRegion_State2();
 					enterSequence_mainRegion_State1_default();
@@ -548,8 +579,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -567,8 +596,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -584,8 +611,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -603,8 +628,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -620,8 +643,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 					did_transition = false;
 				}
 			}
-		}
-		if (did_transition==false) {
 		}
 		return did_transition;
 	}
@@ -639,8 +660,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -657,8 +676,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 				}
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
@@ -670,40 +687,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 				did_transition = false;
 			}
 		}
-		if (did_transition==false) {
-		}
 		return did_transition;
 	}
 	
-	public void runCycle() {
-		if (!initialized)
-			throw new IllegalStateException(
-					"The state machine needs to be initialized first by calling the init() function.");
-		clearOutEvents();
-		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-			switch (stateVector[nextStateIndex]) {
-			case mainRegion_State1:
-				mainRegion_State1_react(true);
-				break;
-			case mainRegion_State2__region0_a:
-				mainRegion_State2__region0_a_react(true);
-				break;
-			case mainRegion_State2__region0_State4__region0_State6:
-				mainRegion_State2__region0_State4__region0_State6_react(true);
-				break;
-			case mainRegion_State2__region0_State4__region0_State7__region0_State8:
-				mainRegion_State2__region0_State4__region0_State7__region0_State8_react(true);
-				break;
-			case mainRegion_State2__region0_State4__region0_State7__region0_State9:
-				mainRegion_State2__region0_State4__region0_State7__region0_State9_react(true);
-				break;
-			case mainRegion_State2__region0_State5:
-				mainRegion_State2__region0_State5_react(true);
-				break;
-			default:
-				// $NullState$
-			}
-		}
-		clearEvents();
-	}
 }
