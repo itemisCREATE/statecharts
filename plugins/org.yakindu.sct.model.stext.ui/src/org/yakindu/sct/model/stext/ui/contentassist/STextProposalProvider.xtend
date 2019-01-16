@@ -454,7 +454,8 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 		override void accept(ICompletionProposal proposal) {
 			if (proposal instanceof ConfigurableCompletionProposal) {
 				var Keyword keyword = XtextFactory.eINSTANCE.createKeyword()
-				keyword.setValue(proposal.getDisplayString())proposal.setAdditionalProposalInfo(keyword)
+				keyword.setValue(proposal.getDisplayString())
+				proposal.setAdditionalProposalInfo(keyword)
 				proposal.setHover(hover)
 			}
 			delegate.accept(proposal)
