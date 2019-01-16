@@ -255,7 +255,7 @@ class SExecExtensions {
 		if (reference instanceof Declaration) reference as Declaration
 	}
 	def dispatch definition(FeatureCall it) {
-		if (feature instanceof Declaration) feature as Declaration
+		feature
 	}
 	def dispatch definition(Expression it) {
 		null
@@ -270,7 +270,7 @@ class SExecExtensions {
 	}
 	
 	def Event event(Declaration it) {
-		if (it instanceof Event) it as Event else null 	
+		if (it instanceof Event) it else null 	
 	}
 
 	def dispatch List<ExecutionState> subStates(ExecutionState it) {

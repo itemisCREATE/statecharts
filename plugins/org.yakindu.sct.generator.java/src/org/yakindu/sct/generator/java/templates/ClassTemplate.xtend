@@ -27,11 +27,11 @@ public class ClassTemplate {
 	protected new() {
 	}
 	
-	def public static ClassTemplate create() {
+	def static ClassTemplate create() {
 		return new ClassTemplate
 	}
 	
-	def public CharSequence generate() {
+	def CharSequence generate() {
 		'''
 		«classComment»
 		«generateVisibility»«classType» «className» «extend»«implement»{
@@ -40,52 +40,52 @@ public class ClassTemplate {
 		'''
 	}
 	
-	def public ClassTemplate classComment(CharSequence comment) {
+	def ClassTemplate classComment(CharSequence comment) {
 		this.classComment = comment
 		this
 	}
 	
-	def public ClassTemplate visibility(CharSequence visibility) {
+	def ClassTemplate visibility(CharSequence visibility) {
 		this.visibility = visibility
 		this
 	}
 	
-	def public ClassTemplate classType(CharSequence classType) {
+	def ClassTemplate classType(CharSequence classType) {
 		this.classType = classType
 		this
 	}
 
-	def public ClassTemplate className(CharSequence className) {
+	def ClassTemplate className(CharSequence className) {
 		this.className = className
 		this
 	}
 	
-	def public ClassTemplate superClass(CharSequence superClass) {
+	def ClassTemplate superClass(CharSequence superClass) {
 		this.superClass = superClass
 		this
 	}
 	
-	def public ClassTemplate classContent(CharSequence classContent) {
+	def ClassTemplate classContent(CharSequence classContent) {
 		this.classContent = classContent
 		this
 	}
 	
-	def public ClassTemplate isStatic(boolean isStatic) {
+	def ClassTemplate isStatic(boolean isStatic) {
 		this.isStatic = isStatic
 		this
 	}
 	
-	def public ClassTemplate isAbstract(boolean isAbstract) {
+	def ClassTemplate isAbstract(boolean isAbstract) {
 		this.isAbstract = isAbstract
 		this
 	}
 	
-	def public ClassTemplate addInterfaces(Iterable<CharSequence> interfaces) {
+	def ClassTemplate addInterfaces(Iterable<CharSequence> interfaces) {
 		this.interfaces += interfaces
 		this
 	}
 	
-	def public ClassTemplate addInterface(CharSequence iFace) {
+	def ClassTemplate addInterface(CharSequence iFace) {
 		this.interfaces += iFace
 		this
 	}

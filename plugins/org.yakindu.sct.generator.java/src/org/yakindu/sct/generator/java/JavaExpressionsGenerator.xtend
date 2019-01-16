@@ -136,7 +136,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def protected dispatch String code(FeatureCall it) {
-		(it.feature as Declaration).codeDeclaration(it).toString
+		it.feature.codeDeclaration(it).toString
 	}
 
 	def protected codeDeclaration(Declaration it, ArgumentExpression exp) {

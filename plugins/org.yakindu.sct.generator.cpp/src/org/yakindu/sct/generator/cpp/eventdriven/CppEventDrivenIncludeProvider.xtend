@@ -15,7 +15,6 @@ import java.util.List
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.IncludeProvider
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 
 /**
  * @author robert rudi

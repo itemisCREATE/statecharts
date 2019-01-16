@@ -17,7 +17,6 @@ import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.util.Strings
 import org.yakindu.base.base.NamedElement
-import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import org.yakindu.base.expressions.expressions.FeatureCall
@@ -53,7 +52,6 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.sgraph.Trigger
-import org.yakindu.sct.model.stext.stext.AlwaysEvent
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventSpec
 import org.yakindu.sct.model.stext.stext.ImportScope

@@ -41,7 +41,7 @@ class ExpressionsGenerator {
 	@Inject protected extension ICodegenTypeSystemAccess
 	
 	def dispatch CharSequence code(Expression it) {
-		
+		throw new IllegalStateException("No dispatch function for " + getClass().name)
 	}
 	def dispatch CharSequence code(Literal it) {
 		throw new IllegalStateException("No dispatch function for " + getClass().name)

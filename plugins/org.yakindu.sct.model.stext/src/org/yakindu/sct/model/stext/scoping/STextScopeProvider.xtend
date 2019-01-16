@@ -117,9 +117,9 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 		var Expression owner = context.getOwner()
 		var EObject element = null
 		if (owner instanceof ElementReferenceExpression) {
-			element = ((owner as ElementReferenceExpression)).getReference()
+			element = owner.getReference()
 		} else if (owner instanceof FeatureCall) {
-			element = ((owner as FeatureCall)).getFeature()
+			element =owner.getFeature()
 		} else {
 			return getDelegate().getScope(context, reference)
 		}
@@ -127,17 +127,17 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 		var InferenceResult result = typeInferrer.infer(owner)
 		var Type ownerType = if(result !== null) result.getType() else null
 		if (element instanceof Scope) {
-			scope = Scopes.scopeFor(((element as Scope)).getDeclarations())
+			scope = Scopes.scopeFor(element.getDeclarations())
 			return new FilteringScope(scope, predicate)
 		} else if (ownerType !== null) {
 			scope = Scopes.scopeFor(typeSystem.getPropertyExtensions(ownerType))
 			scope = Scopes.scopeFor(typeSystem.getOperationExtensions(ownerType), scope)
 		}
 		if (ownerType instanceof EnumerationType) {
-			return addScopeForEnumType((ownerType as EnumerationType), scope, predicate)
+			return addScopeForEnumType(ownerType, scope, predicate)
 		}
 		if (ownerType instanceof ComplexType) {
-			return addScopeForComplexType((ownerType as ComplexType), scope, predicate)
+			return addScopeForComplexType(ownerType, scope, predicate)
 		}
 		return scope
 	}
@@ -151,9 +151,9 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 		var EObject element = null;
 		
 		if (owner instanceof ElementReferenceExpression) {
-			element = (owner as ElementReferenceExpression).getReference();
+			element = owner.getReference();
 		} else if (owner instanceof FeatureCall) {
-			element = (owner as FeatureCall).getFeature();
+			element = owner.getFeature();
 		} else {
 			return getDelegate().getScope(context, reference);
 		}
@@ -161,10 +161,8 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 		var IScope scope = IScope.NULLSCOPE;
 
 		if (element instanceof MetaComposite ) {
-			var MetaComposite feature = element as MetaComposite;
-
-			if (feature.getMetaFeatures().size() > 0) {
-				scope = Scopes.scopeFor(feature.getMetaFeatures(), scope);
+			if (element.getMetaFeatures().size() > 0) {
+				scope = Scopes.scopeFor(element.getMetaFeatures(), scope);
 				scope = new FilteringScope(scope, predicate);
 			}
 		}
@@ -215,7 +213,7 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 		var EList<Scope> scopes = scopedElement.getScopes()
 		for (Scope scope : scopes) {
 			if (scope instanceof InterfaceScope) {
-				var String name = ((scope as InterfaceScope)).getName()
+				var String name = scope.getName()
 				if (name !== null && name.trim().length() > 0) {
 					scopeCandidates.add(scope)
 				}
@@ -234,7 +232,7 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 		var EList<Scope> scopes = scopedElement.getScopes()
 		for (Scope scope : scopes) {
 			if (scope instanceof InterfaceScope) {
-				var String name = ((scope as InterfaceScope)).getName()
+				var String name = scope.getName()
 				if (name === null || name.trim().length() === 0) {
 					scopeCandidates.addAll(scope.getDeclarations())
 				}
