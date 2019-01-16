@@ -176,7 +176,6 @@ public class ParameterItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER);
 			childrenFeatures.add(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS);
 		}
 		return childrenFeatures;
@@ -232,13 +231,13 @@ public class ParameterItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Parameter.class)) {
+			case TypesPackage.PARAMETER__TYPE_SPECIFIER:
 			case TypesPackage.PARAMETER__NAME:
 			case TypesPackage.PARAMETER__ANNOTATION_INFO:
 			case TypesPackage.PARAMETER__VAR_ARGS:
 			case TypesPackage.PARAMETER__OPTIONAL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case TypesPackage.PARAMETER__TYPE_SPECIFIER:
 			case TypesPackage.PARAMETER__ANNOTATIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
