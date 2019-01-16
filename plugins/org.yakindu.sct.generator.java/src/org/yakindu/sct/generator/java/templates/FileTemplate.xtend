@@ -64,7 +64,7 @@ class FileTemplate {
 		this
 	}
 	
-	def FileTemplate classTemplate(ClassTemplate template) {
+	def	 FileTemplate classTemplate(ClassTemplate template) {
 		this.classTemplate = template
 		this
 	}
