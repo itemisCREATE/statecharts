@@ -1,49 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <templates>
 	<template autoinsert="true"
-		context="org.yakindu.sct.model.stext.SText.EventDefinition" deleted="false"
-		description="Creates a new in event" enabled="true" name="New In Event" id="stxt001">in event
-		${name}</template>
+		context="org.yakindu.sct.model.stext.SText.ScopeDeclaration" deleted="false"
+		description="Creates a new in event" enabled="true" name="New in event" id="stxt001">in event ${name}</template>
 	<template autoinsert="true"
-		context="org.yakindu.sct.model.stext.SText.InterfaceScopeDeclaration"
+		context="org.yakindu.sct.model.stext.SText.StatechartScope"
 		deleted="false"
-		description="Creates a new interface with a variable, an event and an operation"
-		enabled="true" name="Interface" id="stxt002">interface {name}:&#13;
-		in event {eventName}t &#13;
-		in event {eventName2}&#13;
-		operation {operationName}() : void
-	</template>
+		description="Creates a new interface with a variable, a constant, an in and out event and an operation"
+		enabled="true" name="New interface" id="stxt002">interface ${name}:&#13;
+	var ${varName} : ${real}&#13;
+	const ${constName} : ${integer} = ${0}&#13;
+	in event ${inEventName}&#13;
+	out event ${outEventName}&#13;
+	operation ${opName}(${param}: ${boolean}) : ${void}</template>
 	<template autoinsert="true"
-		context="org.yakindu.sct.model.stext.SText.VariableDefinition"
-		deleted="false" description="Creates a new integer variable" enabled="true"
-		name="New int variable" id="stxt003">var ${name}: integer = ${value}</template>
+		context="org.yakindu.sct.model.stext.SText.ScopeDeclaration"
+		deleted="false" description="Creates a new variable" enabled="true"
+		name="New variable" id="stxt003">var ${name}: ${integer} = ${0}</template>
 	<template autoinsert="true"
-		context="org.yakindu.sct.model.stext.SText.VariableDefinition"
-		deleted="false" description="Creates a string constant" enabled="true"
-		name="New constant" id="stxt004">const ${name} : string</template>
+		context="org.yakindu.sct.model.stext.SText.ScopeDeclaration"
+		deleted="false" description="Creates a new constant" enabled="true"
+		name="New constant" id="stxt004">const ${name} : ${integer} = ${0}</template>
 	<template autoinsert="true"
-		context="org.yakindu.sct.model.stext.SText.OperationDefinition"
+		context="org.yakindu.sct.model.stext.SText.ScopeDeclaration"
 		deleted="false" description="Creates an operation with two parameters"
-		enabled="true" name="New operation" id="stxt005">operation ${name} (${param1}: integer, ${param2}:
-		integer): integer</template>
+		enabled="true" name="New operation" id="stxt005">operation ${name} (${param1}: ${integer}): ${void}</template>
 	<template autoinsert="true"
-		context="org.yakindu.sct.model.stext.SText.EventDefinition" deleted="false"
-		description="Creates a new out event" enabled="true" name="Out Event" id="stxt006">out event
-		${name}</template>
+		context="org.yakindu.sct.model.stext.SText.ScopeDeclaration" deleted="false"
+		description="Creates a new out event" enabled="true" name="New out event" id="stxt006">out event ${name}</template>
 	<template autoinsert="true"
-		context="org.yakindu.sct.model.stext.SText.StateSpecification"
+		context="org.yakindu.sct.model.stext.SText.StateScope"
 		deleted="false" description="Creates an example behavior of a state"
-		enabled="true" name="State behavior" id="stxt007">every {100} ms / raise {eventName}</template>
+		enabled="true" name="State behavior" id="stxt007">entry / ${entryAction}&#13;every ${200} ms / ${stateAction}&#13;exit / ${exitAction}</template>
 	<template autoinsert="true"
 		context="org.yakindu.sct.model.stext.SText.StextTrigger" deleted="false"
-		description="After some miliseconds trigger" enabled="true" name="Time trigger" id="stxt008">after
-		${number} ms</template>
+		description="After some miliseconds trigger" enabled="true" name="Time trigger" id="stxt008">after ${200} ms</template>
 	<template autoinsert="true"
 		context="org.yakindu.sct.model.stext.SText.StextTrigger" deleted="false"
-		description="Trigger with simple guard" enabled="true" name="Trigger" id="stxt009">[counter
-		== 1]</template>
+		description="Event trigger with guard" enabled="true" name="Event trigger with guard" id="stxt009">${eventName} [${condition}]</template>
 	<template autoinsert="true"
 		context="org.yakindu.sct.model.stext.SText.StextTrigger" deleted="false"
-		description="Timed Trigger with guard and effect" enabled="true"
-		name="Trigger with guard and event" id="stxt010">after ${number} ms [${true}] / raise ${someEvent}</template>
+		description="Time trigger with guard and effect" enabled="true"
+		name="Time trigger with guard and effect" id="stxt010">after ${200} ms [${condition}] / ${effect}</template>
 </templates>
