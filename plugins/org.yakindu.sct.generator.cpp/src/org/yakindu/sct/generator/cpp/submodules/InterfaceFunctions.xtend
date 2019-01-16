@@ -130,7 +130,7 @@ class InterfaceFunctions {
 	def createInterface(StatechartScope scope, ClassDeclaration scopeDecl) {
 		scopeDecl
 			.name(scope.interfaceName)
-			.comment("//! Inner class for «scope.simpleName» interface scope.")
+			.comment('''//! Inner class for «scope.simpleName» interface scope.''')
 		
 		scope.declarations.map[functionPrototypes].forEach[scopeDecl.publicMember(it)]
 		scopeDecl.member(entry.innerClassVisibility, protectedInnerClassMembers(scope))
