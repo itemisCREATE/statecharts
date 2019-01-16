@@ -12,7 +12,6 @@ package org.yakindu.sct.generator.cpp.submodules.eventdriven
 
 import com.google.inject.Inject
 import java.util.List
-import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenPredicate
 import org.yakindu.sct.generator.cpp.eventdriven.EventNaming
 import org.yakindu.sct.generator.cpp.submodules.InterfaceFunctions

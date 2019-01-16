@@ -55,7 +55,7 @@ class SGenProposalProvider extends AbstractSGenProposalProvider {
 				new StyledString(if((desc.getName() !== null)) desc.getName() else "null"),
 				PathToImageResolver.toImage(desc.getImagePath()), context)
 			if (proposal instanceof ConfigurableCompletionProposal) {
-				var ConfigurableCompletionProposal configurable = (proposal as ConfigurableCompletionProposal)
+				var ConfigurableCompletionProposal configurable = proposal
 				configurable.setAdditionalProposalInfo(desc.getDescription())
 			}
 			acceptor.accept(proposal)
@@ -64,7 +64,7 @@ class SGenProposalProvider extends AbstractSGenProposalProvider {
 
 	override protected StyledString getStyledDisplayString(EObject element, String qualifiedName, String shortName) {
 		if (element instanceof Statechart) {
-			return computeStyledString((element as Statechart), qualifiedName, shortName)
+			return computeStyledString(element, qualifiedName, shortName)
 		}
 		return super.getStyledDisplayString(element, qualifiedName, shortName)
 	}

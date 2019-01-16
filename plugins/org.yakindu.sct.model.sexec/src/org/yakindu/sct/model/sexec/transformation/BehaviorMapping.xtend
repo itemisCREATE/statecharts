@@ -327,7 +327,7 @@ class BehaviorMapping {
 	}
 	
 	def Expression conjunct(Expression c1, Expression c2) {
-		if (c1 !== null && c2 !== null ) stext.and(c1 as Expression, c2 as Expression)
+		if (c1 !== null && c2 !== null ) stext.and(c1, c2)
 		else if (c1 !== null) c1
 		else c2
 	}
@@ -355,8 +355,8 @@ class BehaviorMapping {
 		)
 		
 		var content = statechart.eAllContents
-		val allStates = content.filter(typeof(State))
-		allStates.forEach( s | (s as State).mapStateLocalReactions);
+		val allStates = content.filter(State)
+		allStates.forEach( s |s.mapStateLocalReactions);
 		return r
 	}
 
@@ -504,7 +504,7 @@ class BehaviorMapping {
 			val state = region.parentStates.head
 			val execState = state.create
 									
-			val parents = state.parentStates.map(p|p.create as ExecutionState).filter(p| shouldExecuteParent.apply(p, execRegion) )
+			val parents = state.parentStates.map(p|p.create).filter(p| shouldExecuteParent.apply(p, execRegion) )
 			
 			parentNodes.addAll(parents.map(p|p as ExecutionNode))			
 			if ( shouldExecuteParent.apply( flow, execState) )
@@ -697,9 +697,9 @@ class BehaviorMapping {
 
 		// and map the elements to scopes...
 		targetPath.map( c | 
-			if ( c instanceof RegularState ) (c as RegularState).create as ExecutionScope
-			else if ( c instanceof Region ) (c as Region).create as ExecutionScope
-			else if ( c instanceof Statechart ) (c as Statechart).create as ExecutionScope
+			if ( c instanceof RegularState ) c.create as ExecutionScope
+			else if ( c instanceof Region ) c.create as ExecutionScope
+			else if ( c instanceof Statechart ) c.create as ExecutionScope
 		).toList
 	}
 	

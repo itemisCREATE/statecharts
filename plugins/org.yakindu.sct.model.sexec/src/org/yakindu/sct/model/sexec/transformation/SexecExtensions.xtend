@@ -151,7 +151,7 @@ class SexecExtensions {
 	def List<ExecutionState> collectLeafScopes(ExecutionScope scope, List<ExecutionState> leafs) {
 		if (scope.subScopes.empty) {
 			if (scope instanceof ExecutionState) {
-				leafs.add(scope as ExecutionState)
+				leafs.add(scope)
 			}
 		} else {
 			for (s:scope.subScopes) {
@@ -181,7 +181,7 @@ class SexecExtensions {
 	def ExecutionFlow getFlow(EObject it) {
 		val root = EcoreUtil2::getRootContainer(it)
 		
-		return if ( root instanceof ExecutionFlow) root as ExecutionFlow else null
+		return if ( root instanceof ExecutionFlow) root else null
 	}
 	
 	 

@@ -197,10 +197,9 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 				}
 			} else // check always/oncycle trigger
 			if (trigger instanceof ReactionTrigger) {
-				var ReactionTrigger reactTrigger=(trigger as ReactionTrigger) 
-				var EList<EventSpec> triggers=reactTrigger.triggers
-				if (triggers.size() === 1 && reactTrigger.guard === null) {
-					var EventSpec eventSpec=triggers.get(0) 
+				var EList<EventSpec> triggers = trigger.triggers
+				if (triggers.size() === 1 && trigger.guard === null) {
+					var EventSpec eventSpec = triggers.get(0) 
 					if (eventSpec instanceof AlwaysEvent && iterator.hasNext()) {
 						warning(String.format(ALWAYS_TRUE_TRANSITION_USED, getTransitionDeclaration(transition)), transition, null, -1) 
 						if (deadTransition === null) {
@@ -243,9 +242,8 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 			}
 			var Trigger trigger=transition.trigger 
 			if (trigger instanceof ReactionTrigger) {
-				var ReactionTrigger reactTrigger=(trigger as ReactionTrigger) 
-				var EList<EventSpec> triggers=reactTrigger.triggers
-				if (triggers.size() === 1 && reactTrigger.guard === null) {
+				var EList<EventSpec> triggers= trigger.triggers
+				if (triggers.size() === 1 && trigger.guard === null) {
 					if (triggers.get(0) instanceof AlwaysEvent) {
 						if (i !== size - 1) {
 							warning(String.format(ALWAYS_TRUE_TRANSITION_USED, transition.getSpecification()), transition, null, -1) 
@@ -300,7 +298,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 					while (propertyIt.hasNext() && !hasIncomingTransition) {
 						var ReactionProperty property=propertyIt.next() 
 						if (property instanceof EntryPointSpec) {
-							hasIncomingTransition=entry.getName().equals(((property as EntryPointSpec)).getEntrypoint()) 
+							hasIncomingTransition=entry.getName().equals(property.getEntrypoint()) 
 						}
 					}
 				}
@@ -369,14 +367,14 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 		var Expression eventExpr=exp.getValue() 
 		var EObject element=null 
 		if (eventExpr instanceof ElementReferenceExpression) {
-			element=((eventExpr as ElementReferenceExpression)).getReference() 
+			element = eventExpr.getReference() 
 		} else if (eventExpr instanceof FeatureCall) {
-			element=((eventExpr as FeatureCall)).getFeature() 
+			element = eventExpr.getFeature() 
 		}
 		if (element !== null && (!(element instanceof Event))) {
 			var String msg="Could not find event declaration." 
 			if (element instanceof NamedElement) {
-				msg=''''«»«((element as NamedElement)).getName()»' is no event.''' 
+				msg=''''«»«element.getName()»' is no event.''' 
 			}
 			error(msg, StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE, 0, VALUE_OF_REQUIRES_EVENT) 
 		}
@@ -387,18 +385,18 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 		var Set<QualifiedName> defined=Sets.newHashSet() 
 		for (Declaration declaration : declarations) {
 			if (declaration instanceof VariableDefinition) {
-				var VariableDefinition definition=(declaration as VariableDefinition) 
+				var VariableDefinition definition = declaration 
 				if (!definition.isConst()) return;
 				var Expression initialValue=definition.getInitialValue() 
 				var List<Expression> toCheck=Lists.newArrayList(initialValue) 
 				var TreeIterator<EObject> eAllContents=initialValue.eAllContents() 
 				while (eAllContents.hasNext()) {
 					var EObject next=eAllContents.next() 
-					if (next instanceof Expression) toCheck.add((next as Expression)) 
+					if (next instanceof Expression) toCheck.add(next) 
 				}
 				for (Expression expression : toCheck) {
 					var EObject referencedObject=null 
-					if (expression instanceof FeatureCall) referencedObject=((expression as FeatureCall)).getFeature()  else if (expression instanceof ElementReferenceExpression) referencedObject=((expression as ElementReferenceExpression)).getReference() 
+					if (expression instanceof FeatureCall) referencedObject = expression.getFeature()  else if (expression instanceof ElementReferenceExpression) referencedObject = expression.getReference() 
 					if (referencedObject instanceof VariableDefinition) {
 						if (!defined.contains(nameProvider.getFullyQualifiedName(referencedObject))) error(REFERENCE_CONSTANT_BEFORE_DEFINED, definition, TypesPackage.Literals.PROPERTY__INITIAL_VALUE) 
 					}
@@ -425,7 +423,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 				for (Transition transition : state.outgoingTransitions) {
 					for (ReactionProperty property : transition.getProperties()) {
 						if (property instanceof ExitPointSpec) {
-							var String exitpoint=((property as ExitPointSpec)).getExitpoint() 
+							var String exitpoint = property.getExitpoint() 
 							if (exitpoint.equals(exit.getName())) {
 								equalsOutgoingTransition=true 
 							}
@@ -458,7 +456,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 					}
 				}
 			} else if (property instanceof ExitPointSpec) {
-				val ExitPointSpec exitPointSpec=(property as ExitPointSpec) 
+				val ExitPointSpec exitPointSpec = property 
 				if (transition.source instanceof org.yakindu.sct.model.sgraph.State) {
 					var org.yakindu.sct.model.sgraph.State state=(transition.source as org.yakindu.sct.model.sgraph.State) 
 					if (!state.isComposite()) {
@@ -531,7 +529,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 					var boolean hasTargetEntry=true 
 					for (ReactionProperty property : transition.getProperties()) {
 						if (property instanceof EntryPointSpec) {
-							var EntryPointSpec spec=(property as EntryPointSpec) 
+							var EntryPointSpec spec = property 
 							var String specName=''''«»«spec.getEntrypoint()»'«»''' 
 							for (Region region : regions.keySet()) {
 								var boolean hasEntry=false 
@@ -634,11 +632,11 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 		for (var int i=0; i < reactionTrigger.getTriggers().size(); i++) {
 			var EventSpec eventSpec=reactionTrigger.getTriggers().get(i) 
 			if (eventSpec instanceof RegularEventSpec) {
-				var EObject element=unwrap(((eventSpec as RegularEventSpec)).getEvent()) 
+				var EObject element=unwrap(eventSpec.getEvent()) 
 				if (element !== null && (!(element instanceof Event))) {
 					var String elementName="" 
 					if (element instanceof NamedElement) {
-						elementName=''''«»«((element as NamedElement)).getName()»' ''' 
+						elementName=''''«»«element.getName()»' ''' 
 					}
 					error('''Trigger «elementName»is no event.''', StextPackage.Literals.REACTION_TRIGGER__TRIGGERS, i, TRIGGER_IS_NO_EVENT) 
 				}
@@ -651,7 +649,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 		if (element !== null && (!(element instanceof Event))) {
 			var String elementName="" 
 			if (element instanceof NamedElement) {
-				elementName=((element as NamedElement)).getName() 
+				elementName = element.getName() 
 			}
 			error(String.format("'%s' is not an event.", elementName), StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT, -1) 
 		}
@@ -659,9 +657,9 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 	def protected EObject unwrap(Expression eventExpression) {
 		var EObject element=null 
 		if (eventExpression instanceof ElementReferenceExpression) {
-			element=((eventExpression as ElementReferenceExpression)).getReference() 
+			element = eventExpression.getReference() 
 		} else if (eventExpression instanceof FeatureCall) {
-			element=((eventExpression as FeatureCall)).getFeature() 
+			element = eventExpression.getFeature() 
 		}
 		return element 
 	}
@@ -683,9 +681,9 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 		for (Expression exp : effect.getActions()) {
 			if (!(exp instanceof AssignmentExpression) && !(exp instanceof EventRaisingExpression) && !(exp instanceof PostFixUnaryExpression)) {
 				if (exp instanceof FeatureCall) {
-					checkFeatureCallEffect((exp as FeatureCall)) 
+					checkFeatureCallEffect(exp) 
 				} else if (exp instanceof ElementReferenceExpression) {
-					checkElementReferenceEffect((exp as ElementReferenceExpression)) 
+					checkElementReferenceEffect(exp) 
 				} else {
 					error("Action has no effect.", StextPackage.Literals.REACTION_EFFECT__ACTIONS, effect.getActions().indexOf(exp), FEATURE_CALL_HAS_NO_EFFECT) 
 				}
@@ -693,7 +691,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 		}
 	}
 	def protected void checkFeatureCallEffect(FeatureCall call) {
-		if (call.getFeature() !== null && call.getFeature() instanceof Declaration && !(call.getFeature() instanceof Operation)) {
+		if (call.getFeature() !== null && !(call.getFeature() instanceof Operation)) {
 			if (call.getFeature() instanceof Property) {
 				error('''Access to property '«»«nameProvider.getFullyQualifiedName(call.getFeature())»' has no effect.''', call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE, INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT) 
 			} else if (call.getFeature() instanceof Event) {
@@ -805,7 +803,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 		if (eResource instanceof XtextResource) {
 			return super.getCurrentLanguage(context, eObject) 
 		} else if (eResource instanceof AbstractSCTResource) {
-			return ((eResource as AbstractSCTResource)).getLanguageName() 
+			return eResource.getLanguageName() 
 		}
 		return "" 
 	}
@@ -844,7 +842,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 			}
 		}
 		if (root instanceof ICompositeNode) {
-			var ICompositeNode node=(root as ICompositeNode) 
+			var ICompositeNode node = root 
 			for (INode child : node.getChildren()) {
 				var INode result=findNode(source, sourceFound, child, keyword, index) 
 				if (result !== null) {

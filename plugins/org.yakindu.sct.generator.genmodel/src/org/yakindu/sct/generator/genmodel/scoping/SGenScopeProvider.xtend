@@ -8,6 +8,11 @@
  * committers of YAKINDU - initial API and implementation
  */
 package org.yakindu.sct.generator.genmodel.scoping
+
+import com.google.common.collect.Iterables
+import com.google.common.collect.Lists
+import com.google.inject.Inject
+import com.google.inject.Injector
 import java.util.List
 import java.util.Optional
 import org.eclipse.core.runtime.Assert
@@ -38,11 +43,7 @@ import org.yakindu.sct.generator.genmodel.typesystem.BuiltinDeclarations
 import org.yakindu.sct.model.sgen.FeatureConfiguration
 import org.yakindu.sct.model.sgen.GeneratorModel
 import org.yakindu.sct.model.sgen.SGenPackage
-import com.google.common.base.Predicate
-import com.google.common.collect.Iterables
-import com.google.common.collect.Lists
-import com.google.inject.Inject
-import com.google.inject.Injector
+
 /** 
  * @author andreas muelder - Initial contribution and API
  */

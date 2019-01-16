@@ -114,11 +114,11 @@ class ExpressionsValidator extends AbstractExpressionsValidator implements IVali
 		var Expression varRef = exp.getVarRef()
 		var EObject referencedObject = null
 		if (varRef instanceof FeatureCall)
-			referencedObject = ((varRef as FeatureCall)).getFeature()
+			referencedObject = varRef.getFeature()
 		else if (varRef instanceof ElementReferenceExpression)
-			referencedObject = ((varRef as ElementReferenceExpression)).getReference()
+			referencedObject = varRef.getReference()
 		if (referencedObject instanceof Property) {
-			if (((referencedObject as Property)).isConst()) {
+			if (referencedObject.isConst()) {
 				error(ERROR_ASSIGNMENT_TO_CONST_MSG, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF,
 					ERROR_ASSIGNMENT_TO_CONST_CODE)
 			}
@@ -132,7 +132,7 @@ class ExpressionsValidator extends AbstractExpressionsValidator implements IVali
 	def void checkPostFixUnaryExpressionToFinalVariable(PostFixUnaryExpression exp) {
 		var Expression operand = exp.getOperand()
 		if (operand instanceof ElementReferenceExpression) {
-			var EObject reference = ((operand as ElementReferenceExpression)).getReference()
+			var EObject reference = operand.getReference()
 			if (reference instanceof Property && ((reference as Property)).isConst()) {
 				error(ERROR_POST_FIX_TO_CONST_MSG, exp, null, ERROR_POST_FIX_TO_CONST_CODE)
 			}
@@ -146,13 +146,13 @@ class ExpressionsValidator extends AbstractExpressionsValidator implements IVali
 	def void checkLeftHandAssignment(AssignmentExpression expression) {
 		var Expression varRef = expression.getVarRef()
 		if (varRef instanceof FeatureCall) {
-			var EObject referencedObject = ((varRef as FeatureCall)).getFeature()
+			var EObject referencedObject = varRef.getFeature()
 			if (!(referencedObject instanceof Property)) {
 				error(ERROR_LEFT_HAND_ASSIGNMENT_MSG, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF,
 					ERROR_LEFT_HAND_ASSIGNMENT_CODE)
 			}
 		} else if (varRef instanceof ElementReferenceExpression) {
-			var EObject referencedObject = ((varRef as ElementReferenceExpression)).getReference()
+			var EObject referencedObject = varRef.getReference()
 			if (!(referencedObject instanceof Property) && !(referencedObject instanceof Parameter)) {
 				error(ERROR_LEFT_HAND_ASSIGNMENT_MSG, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF,
 					ERROR_LEFT_HAND_ASSIGNMENT_CODE)
@@ -240,16 +240,16 @@ class ExpressionsValidator extends AbstractExpressionsValidator implements IVali
 		var TreeIterator<EObject> eAllContents = initialValue.eAllContents()
 		while (eAllContents.hasNext()) {
 			var EObject next = eAllContents.next()
-			if(next instanceof Expression) toCheck.add((next as Expression))
+			if(next instanceof Expression) toCheck.add(next)
 		}
 		for (Expression expression : toCheck) {
 			var EObject referencedObject = null
 			if (expression instanceof FeatureCall)
-				referencedObject = ((expression as FeatureCall)).getFeature()
+				referencedObject = expression.getFeature()
 			else if (expression instanceof ElementReferenceExpression)
-				referencedObject = ((expression as ElementReferenceExpression)).getReference()
+				referencedObject = expression.getReference()
 			if (referencedObject instanceof Property) {
-				if (!((referencedObject as Property)).isConst()) {
+				if (!referencedObject.isConst()) {
 					error(REFERENCE_TO_VARIABLE, TypesPackage.Literals.PROPERTY__INITIAL_VALUE)
 				}
 			}

@@ -101,7 +101,7 @@ class SgraphExtensions {
 	 */
 	def State target(Entry entry) {
 		val obj = entry.transition?.target
-		if (obj instanceof State ) return obj as State		
+		if (obj instanceof State ) return obj		
 		
 		return null
 	}
@@ -121,10 +121,10 @@ class SgraphExtensions {
 		if ( state.isLeaf ) 
 			leafStates += state
 		else if ( state instanceof State ) {
-			val State s = state as State		
+			val State s = state		
 			for ( r : s.regions ) {
 				for ( v : r.vertices ) {
-					if (v instanceof RegularState) collectLeafStates(v as RegularState, leafStates)
+					if (v instanceof RegularState) collectLeafStates(v, leafStates)
 				}
 			}
 		}
@@ -135,7 +135,7 @@ class SgraphExtensions {
 		
 	def List<RegularState> collectLeafStates(Region region, List<RegularState> leafStates) {
 		for ( v : region.vertices ) {
-			if (v instanceof RegularState) collectLeafStates(v as RegularState, leafStates)
+			if (v instanceof RegularState) collectLeafStates(v, leafStates)
 		}
 
 		return leafStates	

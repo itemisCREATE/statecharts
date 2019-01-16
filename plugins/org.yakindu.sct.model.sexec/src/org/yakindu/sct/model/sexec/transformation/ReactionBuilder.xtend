@@ -17,7 +17,6 @@ import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionNode
-import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.StateVector
 import org.yakindu.sct.model.sexec.Step
@@ -170,7 +169,7 @@ class ReactionBuilder {
 							else
 								[StateVector sv | sv.last == execState.impactVector.last]
 								
-		val parents = state.parentStates.map(p|p.create as ExecutionState).filter(p| p == execState || shouldExecuteParent.apply(p.impactVector) ) 
+		val parents = state.parentStates.map(p|p.create).filter(p| p == execState || shouldExecuteParent.apply(p.impactVector) ) 
 		
 		var parentNodes = parents.map(p|p as ExecutionNode).toList
 		

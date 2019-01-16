@@ -111,24 +111,24 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 		var List<Keyword> suppressKeywords = new ArrayList()
 		var EObject rootModel = contentAssistContext.getRootModel()
 		if (rootModel instanceof TransitionSpecification) {
-			suppressKeywords(suppressKeywords, (rootModel as TransitionSpecification))
+			suppressKeywords(suppressKeywords, rootModel)
 		} else if (rootModel instanceof SimpleScope) {
-			suppressKeywords(suppressKeywords, (rootModel as SimpleScope))
+			suppressKeywords(suppressKeywords, rootModel)
 		} else if (rootModel instanceof StatechartSpecification) {
-			suppressKeywords(suppressKeywords, (rootModel as StatechartSpecification))
+			suppressKeywords(suppressKeywords, rootModel)
 		}
 		var EObject currentModel = contentAssistContext.getCurrentModel()
 		if (currentModel instanceof InterfaceScope) {
-			suppressKeywords(suppressKeywords, (currentModel as InterfaceScope))
+			suppressKeywords(suppressKeywords, currentModel)
 		}
 		if (currentModel instanceof FeatureCall) {
-			suppressKeywords(suppressKeywords, (currentModel as FeatureCall))
+			suppressKeywords(suppressKeywords, currentModel)
 		}
 		if (currentModel instanceof ElementReferenceExpression) {
-			suppressKeywords(suppressKeywords, (currentModel as ElementReferenceExpression))
+			suppressKeywords(suppressKeywords, currentModel)
 		}
 		if (currentModel instanceof InternalScope) {
-			suppressKeywords(suppressKeywords, (currentModel as InternalScope))
+			suppressKeywords(suppressKeywords, currentModel)
 		}
 		if (currentModel instanceof RegularEventSpec) {
 			suppressMetaCallIfNotApplicable(suppressKeywords, currentModel);
@@ -173,7 +173,7 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 		
 		suppressMetaCallIfNotApplicable(suppressKeywords, featureCall.feature)
 	}
-
+ 
 	def protected void suppressKeywords(List<Keyword> suppressKeywords,
 		ElementReferenceExpression referenceExpression) {
 		if (!(referenceExpression.getReference() instanceof Operation)) {
@@ -204,9 +204,9 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 		val List<Keyword> keywords = new ArrayList()
 		for (EObject eObject : list) {
 			if (eObject instanceof Keyword) {
-				keywords.add((eObject as Keyword))
+				keywords.add(eObject)
 			} else if (eObject instanceof EnumLiteralDeclaration) {
-				keywords.add(((eObject as EnumLiteralDeclaration)).getLiteral())
+				keywords.add(eObject.getLiteral())
 			}
 		}
 		return keywords
@@ -222,7 +222,7 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 					return proposal
 				}
 				if (eObjectOrProxy instanceof Operation) {
-					var Operation operation = (eObjectOrProxy as Operation)
+					var Operation operation = eObjectOrProxy
 					if (operation.getParameters().size() > 0 && (proposal instanceof ConfigurableCompletionProposal)) {
 						var ConfigurableCompletionProposal configurableProposal = (proposal as ConfigurableCompletionProposal)
 						configurableProposal.setReplacementString('''«configurableProposal.getReplacementString()»()''')
@@ -298,7 +298,7 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 		ICompletionProposalAcceptor acceptor) {
 		var ICompletionProposalAcceptor priorityOptimizer = acceptor
 		if (model instanceof VariableDefinition) {
-			var VariableDefinition vd = (model as VariableDefinition)
+			var VariableDefinition vd = model
 			if (vd.getType() !== null && typeName.equalsIgnoreCase(vd.getType().getName())) {
 				priorityOptimizer = new ICompletionProposalAcceptor.Delegate(acceptor) {
 					override void accept(ICompletionProposal proposal) {
@@ -355,7 +355,7 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 		var ICompletionProposal proposal = createCompletionProposal(
 			proposalText, '''«proposalText» - «ruleCall.getRule().getName()»''', null, context)
 		if (proposal instanceof ConfigurableCompletionProposal) {
-			var ConfigurableCompletionProposal configurable = (proposal as ConfigurableCompletionProposal)
+			var ConfigurableCompletionProposal configurable = proposal
 			configurable.setSelectionStart(configurable.getReplacementOffset() + 2)
 			configurable.setSelectionLength(proposalText.length() - 2)
 			configurable.setAutoInsertable(false)
@@ -379,12 +379,12 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 		if (model instanceof TransitionReaction) {
 			var SpecificationElement contextElement = utils.getContextElement(model)
 			if (contextElement instanceof Transition) {
-				var Transition transition = (contextElement as Transition)
+				var Transition transition = contextElement
 				var EObject eContainer = ruleCall.eContainer()
 				var Vertex state = null
 				var boolean entry = false
 				if (eContainer instanceof Assignment) {
-					var String feature = ((eContainer as Assignment)).getFeature()
+					var String feature = eContainer.getFeature()
 					if (StextPackage.Literals.ENTRY_POINT_SPEC__ENTRYPOINT.getName().equals(feature)) {
 						state = transition.getTarget()
 						entry = true
@@ -396,7 +396,7 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 					}
 				}
 				if (state instanceof State) {
-					createContentAssistForEntryAndExit((state as State), entry, context, acceptor)
+					createContentAssistForEntryAndExit(state, entry, context, acceptor)
 				}
 			}
 		}
@@ -455,8 +455,8 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 			if (proposal instanceof ConfigurableCompletionProposal) {
 				var Keyword keyword = XtextFactory.eINSTANCE.createKeyword()
 				keyword.setValue(proposal.getDisplayString())
-				((proposal as ConfigurableCompletionProposal)).setAdditionalProposalInfo(keyword)
-				((proposal as ConfigurableCompletionProposal)).setHover(hover)
+				proposal.setAdditionalProposalInfo(keyword)
+				proposal.setHover(hover)
 			}
 			delegate.accept(proposal)
 		}

@@ -64,10 +64,10 @@ class SGenQuickfixProvider extends DefaultQuickfixProvider {
 	}
 	def private void addAcceptor(Issue issue, IssueResolutionAcceptor acceptor, String validDomain) {
 		acceptor.accept(issue, validDomain, null, null, ([EObject element, IModificationContext context|if (element instanceof GeneratorEntry) {
-			var EObject referencedStatechart=((element as GeneratorEntry)).getElementRef() 
+			var EObject referencedStatechart = element.getElementRef() 
 			if (referencedStatechart instanceof Statechart) {
 				var TransactionalEditingDomain sharedDomain=DiagramPartitioningUtil::getSharedDomain() 
-				var DomainChangeCommand refactoringCommand=new DomainChangeCommand(sharedDomain,CHANGE_DOMAIN_COMMAND,Collections::EMPTY_LIST,validDomain,(referencedStatechart as Statechart)) 
+				var DomainChangeCommand refactoringCommand=new DomainChangeCommand(sharedDomain,CHANGE_DOMAIN_COMMAND,Collections::EMPTY_LIST,validDomain,referencedStatechart) 
 				try {
 					refactoringCommand.execute(new NullProgressMonitor(), null) 
 				} catch (Exception ex) {

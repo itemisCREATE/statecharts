@@ -22,6 +22,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
@@ -30,9 +31,9 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
-import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
+
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import static org.yakindu.sct.generator.cpp.CppGeneratorConstants.*
 
 /**
  * @author Markus Mühlbrands - Initial contribution and API
@@ -117,11 +118,11 @@ class CppNaming extends Naming {
 		«IF type.name != 'void'»«IF const»static const «ENDIF»«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
 	'''
 
-	def public signature(OperationDefinition it) '''
+	def signature(OperationDefinition it) '''
 	«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»(«FOR parameter : parameters SEPARATOR ', '»«IF parameter.isVarArgs»...«ELSE»«parameter.typeSpecifier.
 		targetLanguageName» «parameter.identifier»«ENDIF»«ENDFOR»)'''
 
-	def public OCB_InterfaceSetterDeclaration(StatechartScope scope, boolean fqn) '''
+	def OCB_InterfaceSetterDeclaration(StatechartScope scope, boolean fqn) '''
 	void «IF fqn»«scope.flow.module»::«ENDIF»set«scope.interfaceOCBName»(«scope.interfaceOCBName»* operationCallback)'''
 
 	def protected identifier(Parameter parameter) {

@@ -20,11 +20,11 @@ class FileTemplate {
 	
 	protected Set<CharSequence> imports = new TreeSet
 	
-	def static public FileTemplate create() {
+	def static FileTemplate create() {
 		return new FileTemplate()
 	}
 	
-	def public CharSequence generate() {
+	def CharSequence generate() {
 		'''
 		«fileComment»
 		«packageDeclaration»
@@ -37,34 +37,34 @@ class FileTemplate {
 	
 	protected new() {}
 	
-	def public FileTemplate fileComment(CharSequence fileComment) {
+	def FileTemplate fileComment(CharSequence fileComment) {
 		this.fileComment = fileComment
 		this
 	}
 	
-	def public FileTemplate packageName(CharSequence packageName) {
+	def FileTemplate packageName(CharSequence packageName) {
 		this.packageName = packageName
 		this
 	}
 	
-	def public FileTemplate addImports(Iterable<CharSequence> imports) {
+	def FileTemplate addImports(Iterable<CharSequence> imports) {
 		this.imports += imports
 		this
 	}
 	
-	def public FileTemplate addImport(CharSequence imp) {
+	def FileTemplate addImport(CharSequence imp) {
 		this.imports += imp 
 		this
 	}
 	
-	def public FileTemplate addImport(CharSequence imp, boolean condition) {
+	def FileTemplate addImport(CharSequence imp, boolean condition) {
 		if(condition) {
 			addImport(imp)
 		}
 		this
 	}
 	
-	def public FileTemplate classTemplate(ClassTemplate template) {
+	def	 FileTemplate classTemplate(ClassTemplate template) {
 		this.classTemplate = template
 		this
 	}
