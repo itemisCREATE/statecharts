@@ -11,6 +11,8 @@
 package org.yakindu.sct.generator.builder;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.ICoreRunnable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -34,19 +36,26 @@ public class EclipseContextGeneratorExecutorLookup extends GeneratorExecutorLook
 		return Modules.combine(new EclipseContextModule(), new SharedStateModule());
 	}
 
-	public void executeGenerator(IFile file) {
+	public ICoreRunnable getGeneratorRunnable(IFile file) {
 		final GeneratorModel model = GenModelLoader.load(file);
-		Job generatorJob = new Job("Execute SCT Genmodel " + file.getName()) {
+		ICoreRunnable runnable = new ICoreRunnable() {
 			@Override
-			protected IStatus run(IProgressMonitor monitor) {
+			public void run(IProgressMonitor monitor) throws CoreException {
 				try {
 					execute(model);
 				} catch (Exception ex) {
-					return new Status(IStatus.ERROR, BuilderActivator.PLUGIN_ID, "An error occurred during code generation.", ex);
+					Status st = new Status(IStatus.ERROR, BuilderActivator.PLUGIN_ID,
+							"An error occurred during code generation.", ex);
+					throw new CoreException(st);
 				}
-				return Status.OK_STATUS;
 			}
 		};
+		return runnable;
+	}
+
+	public void executeGenerator(IFile file) {
+		ICoreRunnable generatorRunnable = getGeneratorRunnable(file);
+		Job generatorJob = Job.create("Execute SCT Genmodel " + file.getName(), generatorRunnable);
 		generatorJob.setRule(file.getProject().getWorkspace().getRoot());
 		generatorJob.schedule();
 	}

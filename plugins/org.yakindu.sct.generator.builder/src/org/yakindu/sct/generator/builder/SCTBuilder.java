@@ -69,6 +69,7 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 			}
 		}
 
+		@Override
 		public boolean apply(GeneratorEntry input) {
 			return uri != null && input.getElementRef() != null && !input.getElementRef().eIsProxy()
 					&& uri.equals(EcoreUtil.getURI(input.getElementRef()));
@@ -78,20 +79,27 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 	class DeltaVisitor implements IResourceDeltaVisitor {
 		private Set<IResource> buildSgens = Sets.newHashSet();
 
+		protected IProgressMonitor monitor;
+
+		public DeltaVisitor(IProgressMonitor monitor) {
+			this.monitor = monitor;
+		}
+
+		@Override
 		public boolean visit(IResourceDelta delta) throws CoreException {
 			IResource resource = delta.getResource();
 			switch (delta.getKind()) {
-			case IResourceDelta.ADDED:
-				// handle added resource
-				doIt(resource, buildSgens);
-				break;
-			case IResourceDelta.REMOVED:
-				// handle removed resource
-				break;
-			case IResourceDelta.CHANGED:
-				// handle changed resource
-				doIt(resource, buildSgens);
-				break;
+				case IResourceDelta.ADDED :
+					// handle added resource
+					doIt(resource, buildSgens, monitor);
+					break;
+				case IResourceDelta.REMOVED :
+					// handle removed resource
+					break;
+				case IResourceDelta.CHANGED :
+					// handle changed resource
+					doIt(resource, buildSgens, monitor);
+					break;
 			}
 			// return true to continue visiting children.
 			return true;
@@ -101,8 +109,15 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 	class SimpleResourceVisitor implements IResourceVisitor {
 		private Set<IResource> buildSgens = Sets.newHashSet();
 
-		public boolean visit(IResource resource) {
-			doIt(resource, buildSgens);
+		protected IProgressMonitor monitor;
+
+		public SimpleResourceVisitor(IProgressMonitor monitor) {
+			this.monitor = monitor;
+		}
+
+		@Override
+		public boolean visit(IResource resource) throws CoreException {
+			doIt(resource, buildSgens, monitor);
 			// return true to continue visiting children.
 			return true;
 		}
@@ -133,26 +148,28 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 
 	protected void fullBuild(final IProgressMonitor monitor) throws CoreException {
 		try {
-			getProject().accept(new SimpleResourceVisitor());
+			getProject().accept(new SimpleResourceVisitor(monitor));
 		} catch (CoreException e) {
 		}
 	}
 
 	protected void incrementalBuild(IResourceDelta delta, IProgressMonitor monitor) throws CoreException {
-		delta.accept(new DeltaVisitor());
+		delta.accept(new DeltaVisitor(monitor));
 	}
 
 	/**
-	 * Build the Statecharts inside this sgen-file or find all sgen-files for
-	 * the statechart in the resource and build them.
+	 * Build the Statecharts inside this sgen-file or find all sgen-files for the
+	 * statechart in the resource and build them.
 	 * 
 	 * @param changedResource
 	 *            Resource to check, if it can be build.
 	 * @param buildSgens
-	 *            Contains a set of already build sgen files. Accepted
-	 *            sgen-files are added inside this method.
+	 *            Contains a set of already build sgen files. Accepted sgen-files
+	 *            are added inside this method.
+	 * @throws CoreException
 	 */
-	public void doIt(final IResource changedResource, final Set<IResource> buildSgens) {
+	public void doIt(final IResource changedResource, final Set<IResource> buildSgens, IProgressMonitor monitor)
+			throws CoreException {
 		if (changedResource.getType() != IResource.FILE) {
 			return;
 		}
@@ -161,7 +178,7 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 				logGenmodelError(changedResource.getFullPath().toString());
 			} else {
 				buildSgens.add(changedResource);
-				executeGenmodelGenerator(changedResource);
+				executeGenmodelGenerator(changedResource, monitor);
 			}
 		} else if (SCT_FILE_EXTENSION.equals(changedResource.getFileExtension())) {
 			// TODO rely on indexed genmodel and referenced objects uri
@@ -171,6 +188,7 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 			try {
 				changedResource.getProject().accept(new IResourceVisitor() {
 
+					@Override
 					public boolean visit(IResource resource) throws CoreException {
 						if (IResource.FILE == resource.getType()
 								&& SGEN_FILE_EXTENSION.equals(resource.getFileExtension())
@@ -185,7 +203,7 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 									logGenmodelError(resource.getFullPath().toString());
 								} else {
 									buildSgens.add(resource);
-									executeGenmodelGenerator(resource);
+									executeGenmodelGenerator(resource, monitor);
 								}
 							}
 						}
@@ -194,6 +212,7 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 				});
 			} catch (CoreException e) {
 				e.printStackTrace();
+				throw (e);
 			}
 
 		}
@@ -215,20 +234,26 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 		return false;
 	}
 
-	protected void executeGenmodelGenerator(IResource resource) {
+	protected void executeGenmodelGenerator(IResource resource, IProgressMonitor monitor) {
 		if (sgenBlackList.violates(resource, resource.getProject())) {
 			logGenmodelInfo(resource);
 			return;
 		}
-		new EclipseContextGeneratorExecutorLookup()
-				.executeGenerator(resource.getProject().getFile(resource.getProjectRelativePath()));
+		try {
+			monitor.beginTask("Generating", 100);
+			new EclipseContextGeneratorExecutorLookup()
+					.getGeneratorRunnable(resource.getProject().getFile(resource.getProjectRelativePath()))
+					.run(monitor);
+			monitor.worked(100);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
 	}
 
 	protected void logGenmodelInfo(IResource resource) {
-		Status status = new Status(Status.INFO, BUILDER_ID,
-				String.format(
-						"Cannot execute Genmodel %s. The file is excluded from build. (see project properties > YAKINDU SCT > SGen Filter)",
-						resource));
+		Status status = new Status(Status.INFO, BUILDER_ID, String.format(
+				"Cannot execute Genmodel %s. The file is excluded from build. (see project properties > YAKINDU SCT > SGen Filter)",
+				resource));
 		Platform.getLog(BuilderActivator.getDefault().getBundle()).log(status);
 	}
 
