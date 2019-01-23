@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/Yakindu/statecharts.svg?branch=master)](https://travis-ci.org/Yakindu/statecharts)
-[![Coverity Scan Build Status](https://scan.coverity.com/projects/6091/badge.svg)](https://scan.coverity.com/projects/yakindu-statecharts)
 
 # YAKINDU Statechart Tools 
 # (http://www.statecharts.org/)
