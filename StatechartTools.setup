@@ -39,7 +39,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      defaultValue="Neon"
+      defaultValue="2018-09"
       storageURI="scope://Workspace">
     <description>xx</description>
   </setupTask>
@@ -97,7 +97,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="target_definition"
-      value="Neon (SCT)"
+      value="2018-09 (SCT)"
       label="Target definition">
     <description>Target definition id</description>
   </setupTask>
