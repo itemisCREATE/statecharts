@@ -6,12 +6,6 @@ jdk:
 addons:
  apt:
   packages:
- coverity_scan:
-   project:
-     name: Yakindu/statecharts
-   notification_email: a.muelder@googlemail.com
-   build_command: mvn -f ${TRAVIS_BUILD_DIR}/releng/org.yakindu.sct.releng/pom.xml clean verify
-   branch_pattern: coverity_scan
 cache:
   directories:
   - $HOME/.m2
@@ -24,10 +18,7 @@ env:
   - LIBRARY_PATH=${TRAVIS_BUILD_DIR}/googletest-release-1.8.0/googletest/build:${TRAVIS_BUILD_DIR}/googletest-release-1.8.0/googlemock/build:$LIBRARY_PATH
   - CPATH=${TRAVIS_BUILD_DIR}/googletest-release-1.8.0/googletest/include:${TRAVIS_BUILD_DIR}/googletest-release-1.8.0/googlemock/include:$CPATH
   - GMOCK_HOME
-  # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-  # via the "travis encrypt" command using the project repo's public key
-  - secure: "e6AtFe0HJAHRdmzp4uXx4b+xZaEUUd2jeYiLdIkYuRa84op9iSzCmPj5uT3Vkvqps5snBrDx47Wl1EO9rl+Z91WYp1JgTT5Ek37SKj/ikhJ0HfAYBycU/MRTMO5wXEfwL29G0gjygzFxlUe7t/Y92M/VsvlEQ9nHrtqJ4hQA968="
-  matrix:
+   matrix:
   - TARGET=Neon.target
   - TARGET=Oxygen.target
   - TARGET=Photon.target
