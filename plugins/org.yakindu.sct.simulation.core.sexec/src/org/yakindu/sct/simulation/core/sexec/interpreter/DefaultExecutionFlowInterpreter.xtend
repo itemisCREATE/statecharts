@@ -80,12 +80,10 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	@Inject(optional=true)
 	ITraceStepInterpreter traceInterpreter
 	@Inject protected extension ExecutionContextExtensions
-	@Inject
+	@Inject 
 	protected StateVectorExtensions stateVectorExtensions;
 	@Inject
 	protected extension StatechartAnnotations
-	@Inject
-	extension ITypeValueProvider
 
 	protected ExecutionFlow flow
 	protected ExecutionContext executionContext
@@ -190,15 +188,6 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			activeStateIndex = activeStateIndex + 1
 		}
 		executionContext.clearLocalAndInEvents
-	}
-
-	def protected clearLocalAndInEvents(ExecutionContext executionContext) {
-		executionContext.allEvents.filter[direction == Direction.IN || direction == Direction.LOCAL].forEach [
-			if (raised) {
-				raised = false;
-				value = if(type !== null) type.defaultValue else null
-			}
-		]
 	}
 
 	override exit() {
