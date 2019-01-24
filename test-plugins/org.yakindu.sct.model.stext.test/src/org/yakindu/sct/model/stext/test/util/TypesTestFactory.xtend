@@ -80,13 +80,22 @@ class TypesTestFactory {
 	}
 
 	def createOperation(String name, String returnType) {
-		createOperation(name, ts.getType(returnType))
+		createOperation(name, ts.getType(returnType), false)
+	}
+	
+	def createOperation(String name, String returnType, boolean isStatic) {
+		createOperation(name, ts.getType(returnType), isStatic)
 	}
 
 	def createOperation(String name, Type returnType) {
+		createOperation(name, returnType, false)
+	}
+
+	def createOperation(String name, Type returnType, boolean isStatic) {
 		factory.createOperation => [
 			it.name = name
 			it.typeSpecifier = returnType.toTypeSpecifier
+			it.static = isStatic
 		]
 	}
 
