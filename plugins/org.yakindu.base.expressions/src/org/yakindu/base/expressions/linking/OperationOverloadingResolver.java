@@ -92,8 +92,14 @@ public class OperationOverloadingResolver {
 	protected boolean isCallable(Operation operation, ArgumentExpression expression) {
 		EList<Expression> orderedExpressions = ArgumentSorter.getOrderedExpressions(expression.getArguments(),
 				operation);
-		List<Type> argumentTypes = orderedExpressions.stream().map(it -> inferrer.infer(it).getType())
-				.filter(t -> t != null).collect(Collectors.toList());
+		
+		List<Type> argumentTypes = orderedExpressions.stream()
+				.map(it -> inferrer.infer(it))
+				.filter(t -> t != null)
+				.map(t -> t.getType())
+				.filter(t -> t != null)
+				.collect(Collectors.toList());
+		
 		List<Type> parameterTypes = operation.getParameters().stream().map(it -> it.getType())
 				.collect(Collectors.toList());
 		if (argumentTypes.size() != parameterTypes.size())
