@@ -74,10 +74,12 @@ public interface ITimeTaskScheduler {
 			this.priority = priority;
 		}
 
+		@Override
 		public void run() {
 			callBack.run();
 		}
 
+		@Override
 		public int compareTo(TimeTask other) {
 			if (nextExecutionTime != other.nextExecutionTime) {
 				return (int) (nextExecutionTime - other.nextExecutionTime);
@@ -103,6 +105,14 @@ public interface ITimeTaskScheduler {
 
 		public void setNextExecutionTime(long nextExecutionTime) {
 			this.nextExecutionTime = nextExecutionTime;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setPeriod(long period) {
+			this.period = period;
 		}
 	}
 }
