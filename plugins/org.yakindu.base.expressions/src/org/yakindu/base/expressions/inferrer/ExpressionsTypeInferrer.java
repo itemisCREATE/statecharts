@@ -23,7 +23,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
+import org.yakindu.base.expressions.expressions.Argument;
 import org.yakindu.base.expressions.expressions.ArgumentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression;
@@ -52,6 +54,7 @@ import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
+import org.yakindu.base.expressions.util.ExpressionExtensions;
 import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.AnnotationType;
 import org.yakindu.base.types.EnumerationType;
@@ -78,6 +81,9 @@ import com.google.inject.Inject;
 public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implements ExpressionsTypeInferrerMessages {
 	@Inject
 	protected TypeParameterInferrer typeParameterInferrer;
+	
+	@Inject
+	protected ExpressionExtensions utils;
 
 	public InferenceResult doInfer(AssignmentExpression e) {
 		InferenceResult result1 = inferTypeDispatch(e.getVarRef());
@@ -273,8 +279,48 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 
 		typeParameterInferrer.inferTypeParametersFromOperationArguments(parametersToInfer, argumentsToInfer,
 				typeParameterMapping, acceptor);
+		
+		// get target type
+		InferenceResult targetType = getTargetType(e);
+		if (targetType != null) {
+			typeParameterInferrer.inferTypeParametersFromTargetType(targetType, op, typeParameterMapping, acceptor);
+		}
+		
 		validateParameters(typeParameterMapping, op, getOperationArguments(e), acceptor);
 		return inferReturnType(op, typeParameterMapping);
+	}
+
+	protected InferenceResult getTargetType(ArgumentExpression exp) {
+		EObject container = exp.eContainer();
+
+		// Assignment
+		if (container instanceof AssignmentExpression) {
+			AssignmentExpression assignment = (AssignmentExpression) container;
+			if (assignment.getExpression() == exp) {
+				Expression varRef = ((AssignmentExpression) container).getVarRef();
+				return inferTypeDispatch(varRef);
+			}
+		}
+		// Variable Initialization
+		if (container instanceof Property) {
+			Property property = (Property) container;
+			if (property.getInitialValue() == exp) {
+				return inferTypeDispatch(property.getTypeSpecifier());
+			}
+		}
+		// Operation Argument
+		if (container instanceof Argument) {
+			Argument argument = (Argument) container;
+			if (argument.getValue() == exp) {
+				ArgumentExpression argumentExpression = (ArgumentExpression) argument.eContainer();
+				int index = getOperationArguments(argumentExpression).indexOf(argument.getValue());
+				Operation op = (Operation) utils.featureOrReference(argumentExpression);
+				Parameter param = op.getParameters().get(index);
+				return inferTypeDispatch(param);
+			}
+
+		}
+		return null;
 	}
 
 	/**
