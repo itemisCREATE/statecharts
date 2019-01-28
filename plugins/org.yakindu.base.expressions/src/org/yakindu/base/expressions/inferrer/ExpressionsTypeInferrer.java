@@ -260,6 +260,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 
 	protected InferenceResult inferOperation(ArgumentExpression e, Operation op,
 			Map<TypeParameter, InferenceResult> typeParameterMapping) {
+		
 		// resolve type parameter from operation call
 		List<InferenceResult> argumentTypes = getArgumentTypes(getOperationArguments(e));
 		List<Parameter> parameters = op.getParameters();
@@ -279,15 +280,9 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 
 		typeParameterInferrer.inferTypeParametersFromOperationArguments(parametersToInfer, argumentsToInfer,
 				typeParameterMapping, acceptor);
-		
-		// get target type
-		InferenceResult targetType = getTargetType(e);
-		if (targetType != null) {
-			typeParameterInferrer.inferTypeParametersFromTargetType(targetType, op, typeParameterMapping, acceptor);
-		}
-		
 		validateParameters(typeParameterMapping, op, getOperationArguments(e), acceptor);
-		return inferReturnType(op, typeParameterMapping);
+		
+		return inferReturnType(e, op, typeParameterMapping);
 	}
 
 	protected InferenceResult getTargetType(ArgumentExpression exp) {
@@ -318,7 +313,6 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 				Parameter param = op.getParameters().get(index);
 				return inferTypeDispatch(param);
 			}
-
 		}
 		return null;
 	}
@@ -339,14 +333,34 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		return argumentTypes;
 	}
 
-	protected InferenceResult inferReturnType(Operation operation,
+	protected InferenceResult inferReturnType(ArgumentExpression e, Operation operation,
 			Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) {
 		InferenceResult returnType = inferTypeDispatch(operation);
+		
+		// if return type is not generic nor type parameter, we can return it immediately
+		if (returnType != null) {
+			Type type = returnType.getType();
+			if (!(type instanceof TypeParameter) && (!(type instanceof GenericElement) || ((GenericElement)type).getTypeParameters().isEmpty())) {
+				return returnType;
+			}
+		}
+		
+		inferByTargetType(e, operation, inferredTypeParameterTypes);
+
 		returnType = typeParameterInferrer.buildInferenceResult(returnType, inferredTypeParameterTypes, acceptor);
 		if (returnType == null) {
 			return getAnyType();
 		}
 		return returnType;
+	}
+
+	private void inferByTargetType(ArgumentExpression e, Operation operation,
+			Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) {
+		// use target type inference
+		InferenceResult targetType = getTargetType(e);
+		if (targetType != null) {
+			typeParameterInferrer.inferTypeParametersFromTargetType(targetType, operation, inferredTypeParameterTypes, acceptor);
+		}
 	}
 
 	private InferenceResult getAnyType() {

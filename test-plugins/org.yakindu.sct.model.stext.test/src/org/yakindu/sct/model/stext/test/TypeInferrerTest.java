@@ -1030,7 +1030,7 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		expectError("myB = templateOp(3+5, boolean)", scopes, ITypeSystemInferrer.NOT_INFERRABLE_TYPE_PARAMETER_CODE);
 		
 		expectErrors("myCPT2 = templateOp(myCPT, myCPT)", scopes, ITypeSystemInferrer.NOT_SAME_CODE, 2);
-		expectErrors("myCPT = templateOp(myCPT, myCPT2)", scopes, ITypeSystemInferrer.NOT_SAME_CODE, 4);
+		expectErrors("myCPT = templateOp(myCPT, myCPT2)", scopes, ITypeSystemInferrer.NOT_SAME_CODE, 2);
 	}
 	
 	@Test
