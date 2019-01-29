@@ -32,6 +32,7 @@ import org.yakindu.base.types.validation.TypeValidator
 import static org.yakindu.base.expressions.inferrer.ExpressionsTypeInferrerMessages.*
 import static org.yakindu.base.types.inferrer.ITypeSystemInferrer.NOT_COMPATIBLE_CODE
 import static org.yakindu.base.types.inferrer.ITypeSystemInferrer.NOT_INFERRABLE_TYPE_PARAMETER_CODE
+import org.yakindu.base.types.Operation
 
 /**
  * Infers the actual type for a type parameter used in generic elements like operations or complex types.
@@ -136,7 +137,7 @@ class TypeParameterInferrer {
 		Map<TypeParameter, InferenceResult> inferredTypeParameterTypes, IValidationIssueAcceptor acceptor) {
 
 		val newMappedType = argumentType.type;
-		val typeInMap = inferredTypeParameterTypes.get(typeParameter);
+		val typeInMap = resolveType(inferredTypeParameterTypes, typeParameter);
 		if (typeInMap === null) {
 			inferredTypeParameterTypes.put(typeParameter,
 				InferenceResult.from(newMappedType, argumentType.bindings));
@@ -275,8 +276,12 @@ class TypeParameterInferrer {
 			acceptor.error(
 				String.format(INCOMPATIBLE_TYPES, argumentResult, InferenceResult.from(parameter.type, bindings)),
 				NOT_COMPATIBLE_CODE)
-			}
 		}
+	}
+		
+	def void inferTypeParametersFromTargetType(InferenceResult operationTargetResult, Operation op, Map<TypeParameter, InferenceResult> inferredTypeParameterTypes, IValidationIssueAcceptor acceptor) {
+		inferTypeParameterFromOperationArgument(op.typeSpecifier, operationTargetResult, inferredTypeParameterTypes, acceptor);
+	}
 		
 	def protected ListBasedValidationIssueAcceptor createIssueAcceptor() {
 		new IValidationIssueAcceptor.ListBasedValidationIssueAcceptor()

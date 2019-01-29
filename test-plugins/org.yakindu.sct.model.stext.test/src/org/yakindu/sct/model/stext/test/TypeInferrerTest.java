@@ -1026,7 +1026,7 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		
 		expectNoErrors("myCPT = templateOp(myCPT, myCPT)", scopes);
 		
-		expectError("myB = templateOp(myI, myI)", scopes, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
+		expectError("myB = templateOp(myI, myI)", scopes, ITypeSystemInferrer.NOT_INFERRABLE_TYPE_PARAMETER_CODE);
 		expectError("myB = templateOp(3+5, boolean)", scopes, ITypeSystemInferrer.NOT_INFERRABLE_TYPE_PARAMETER_CODE);
 		
 		expectErrors("myCPT2 = templateOp(myCPT, myCPT)", scopes, ITypeSystemInferrer.NOT_SAME_CODE, 2);
@@ -1044,7 +1044,7 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		
 		expectError("myI = nestedOp(3)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
 		expectNoErrors("myI = nestedOp(nestedCPT)", scope);
-		expectError("myB = nestedOp(nestedCPT)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
+		expectError("myB = nestedOp(nestedCPT)", scope, ITypeSystemInferrer.NOT_INFERRABLE_TYPE_PARAMETER_CODE);
 	}
 	
 	@Test
@@ -1057,7 +1057,7 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 				+ "var b: boolean ";
 		
 		expectNoErrors("myS = nestedNestedOp(nestedCPT)", scope);
-		expectError("b = nestedNestedOp(nestedCPT)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
+		expectError("b = nestedNestedOp(nestedCPT)", scope, ITypeSystemInferrer.NOT_INFERRABLE_TYPE_PARAMETER_CODE);
 	}
 	
 	@Test
@@ -1075,8 +1075,8 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		expectNoErrors("b = cmo.genericOp(true, 2)", scope);
 		expectNoErrors("b = cmo.genericOp(true, 2)", scope);
 		expectError("i = cmo.genericOp(1.3, 2)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
-		expectError("r = cmo.genericOp(false, 2)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
-		expectError("b = cmo.genericOp(1.3, 2)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
+		expectError("r = cmo.genericOp(false, 2)", scope, ITypeSystemInferrer.NOT_INFERRABLE_TYPE_PARAMETER_CODE);
+		expectError("b = cmo.genericOp(1.3, 2)", scope, ITypeSystemInferrer.NOT_INFERRABLE_TYPE_PARAMETER_CODE);
 	}
 	
 	@Test
@@ -1114,5 +1114,28 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		
 		expectNoErrors("sst.add(b)", scope);
 		assertTrue(isVoidType(inferTypeResultForExpression("sst.add(b)", scope).getType()));
+	}
+	
+	@Test
+	public void testTargetTypeInferrence() {
+		String scope = ""
+				+ "internal: "
+				+ "var cmo: ParameterizedMethodOwner "
+				+ "var i: integer "
+				+ "var b: boolean = cmo.genericOpWoParams() "
+				+ "var nestedCPT: ComplexParameterizedType<ComplexParameterizedType<boolean, string>, integer> = cmo.genericOpWoParams()";
+		
+		// target type from assignment
+		expectOk("i = cmo.genericOpWoParams()", scope);
+		assertTrue(isIntegerType(inferTypeResultForExpression("i = cmo.genericOpWoParams()", scope).getType()));
+		
+		// target type from variable initialization
+		assertTrue(isBooleanType(inferTypeResultForExpression("b", scope).getType()));
+		assertTrue(isBooleanType(inferTypeResultForExpression("nestedCPT.prop1.prop1", scope).getType()));
+		assertTrue(isStringType(inferTypeResultForExpression("nestedCPT.prop1.prop2", scope).getType()));
+		assertTrue(isIntegerType(inferTypeResultForExpression("nestedCPT.prop2", scope).getType()));
+		
+		// target type from operation parameter
+		expectOk("cmo.concreteOp(cmo.genericOpWoParams())", scope);
 	}
 }

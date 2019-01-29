@@ -266,6 +266,8 @@ class STextTestScopeProvider extends STextScopeProvider {
 	/**
 	 * ParameterizedMethodOwner {
 	 * 	T1 genericOp<T1, T2>(T1 p1, T2 p1);
+	 * 	T genericOpWoParams<T>();
+	 * 	boolean concreteOp(boolean p1);
 	 * }
 	 */
 	def protected ComplexType createParameterizedMethodOwner() {
@@ -278,6 +280,16 @@ class STextTestScopeProvider extends STextScopeProvider {
 	 			op.typeSpecifier = op.typeParameters.get(0).toTypeSpecifier
 	 			op.parameters += createParameter("p1", op.typeParameters.get(0).toTypeSpecifier)
 	 			op.parameters += createParameter("p2", op.typeParameters.get(1).toTypeSpecifier)
+	 		]
+	 		ct.features += createOperation => [op |
+	 			op.name = "genericOpWoParams"
+	 			op.typeParameters += createTypeParameter("T")
+	 			op.typeSpecifier = op.typeParameters.get(0).toTypeSpecifier
+	 		]
+	 		ct.features += createOperation => [op |
+	 			op.name = "concreteOp"
+	 			op.typeSpecifier = ts.getType(BOOLEAN).toTypeSpecifier
+	 			op.parameters += createParameter("p1", ts.getType(BOOLEAN).toTypeSpecifier)
 	 		]
 	 	]
 		complexType

@@ -117,6 +117,11 @@ public abstract class AbstractTypeInferrerTest extends AbstractSTextTest {
 		assertNoErrors(diagnostics);
 	}
 	
+	protected void expectOk(String expression, String scope) {
+		ListBasedValidationIssueAcceptor diagnostics = validate(expression, scope);
+		assertEquals(diagnostics.toString(), 0, diagnostics.getTraces().size());
+	}
+	
 	protected void assertNoErrors(ListBasedValidationIssueAcceptor diagnostics) {
 		List<ValidationIssue> errors = diagnostics.getTraces(Severity.ERROR);
 		assertEquals(errors.toString(), 0, errors.size());
