@@ -38,12 +38,16 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ImageHyperlink;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
+import org.eclipse.xtext.EcoreUtil2;
+import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.xtext.utils.jface.fieldassist.CompletionProposalAdapter;
 import org.yakindu.base.xtext.utils.jface.viewers.FilteringMenuManager;
 import org.yakindu.base.xtext.utils.jface.viewers.StyledTextXtextAdapter;
 import org.yakindu.base.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 import org.yakindu.sct.domain.extension.DomainRegistry;
+import org.yakindu.sct.domain.extension.DomainStatus;
 import org.yakindu.sct.domain.extension.IDomain;
+import org.yakindu.sct.domain.extension.DomainStatus.Severity;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 
@@ -92,7 +96,7 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 			inputChanged();
 		}
 	}
-	
+
 	protected void inputChanged() {
 		if (bindingContext != null)
 			bindingContext.dispose();
@@ -132,6 +136,8 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 
 		completionProposalAdapter = new CompletionProposalAdapter(styledText, xtextAdapter.getContentAssistant(),
 				KeyStroke.getInstance(SWT.CTRL, SWT.SPACE), null);
+		
+		form.getBody().setEnabled(isEditable());
 	}
 
 	protected void initContextMenu(Control control) {
@@ -181,6 +187,24 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 	protected void setHelpContext(Control control, String helpId) {
 		IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench().getHelpSystem();
 		helpSystem.setHelp(control, helpId);
+	}
+
+	public boolean isEditable() {
+		DomainStatus domainStatus = getDomainStatus();
+		if (domainStatus == null || domainStatus.getSeverity() == Severity.ERROR) {
+			return false;
+		}
+		return true;
+	}
+
+	protected DomainStatus getDomainStatus() {
+		EObject element = getEObject();
+		DomainElement domainElement = EcoreUtil2.getContainerOfType(element, DomainElement.class);
+		if (domainElement != null) {
+			DomainStatus domainStatus = DomainRegistry.getDomainStatus(domainElement.getDomainID());
+			return domainStatus;
+		}
+		return null;
 	}
 
 }
