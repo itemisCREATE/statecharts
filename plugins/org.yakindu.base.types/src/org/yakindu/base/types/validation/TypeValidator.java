@@ -30,6 +30,8 @@ import com.google.inject.Inject;
 
 public class TypeValidator {
 
+	public static final String TYPE_BINDINGS_NOT_SAME = "Type safety: The expression of type %s needs unchecked conversion to conform to %s";
+	
 	@Inject
 	protected ITypeSystem registry;
 
@@ -104,9 +106,9 @@ public class TypeValidator {
 			IValidationIssueAcceptor acceptor) {
 		List<InferenceResult> bindings1 = result1.getBindings();
 		List<InferenceResult> bindings2 = result2.getBindings();
-		msg = msg != null ? msg : String.format(ASSERT_COMPATIBLE, result1, result2);
+		msg = String.format(TYPE_BINDINGS_NOT_SAME, result2, result1);
 		if (bindings1.size() != bindings2.size()) {
-			acceptor.accept(new ValidationIssue(Severity.ERROR, msg, NOT_COMPATIBLE_CODE));
+			acceptor.accept(new ValidationIssue(Severity.WARNING, msg, NOT_SAME_CODE));
 			return;
 		}
 		for (int i = 0; i < bindings1.size(); i++) {

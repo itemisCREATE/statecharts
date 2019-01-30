@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
+import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor;
 
@@ -69,13 +70,13 @@ public interface ITypeSystemInferrer {
 		public String toString() {
 			StringBuilder builder = new StringBuilder();
 			builder.append(type.toString());
-			if (bindings.size() > 0) {
+			if (type instanceof GenericElement && !((GenericElement) type).getTypeParameters().isEmpty()) {
 				builder.append("<");
 				String sep = "";
 				for (InferenceResult type : bindings) {
 					builder.append(sep);
 					builder.append(type.toString());
-					sep = ",";
+					sep = ", ";
 				}
 				builder.append(">");
 			}
