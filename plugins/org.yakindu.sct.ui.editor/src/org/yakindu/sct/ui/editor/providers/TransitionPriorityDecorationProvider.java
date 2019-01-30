@@ -13,6 +13,8 @@ package org.yakindu.sct.ui.editor.providers;
 import org.eclipse.draw2d.Connection;
 import org.eclipse.draw2d.ConnectionLocator;
 import org.eclipse.draw2d.Label;
+import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.editparts.AbstractConnectionEditPart;
@@ -21,6 +23,8 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditDomain;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecorator;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecoratorTarget;
+import org.eclipse.gmf.runtime.draw2d.ui.geometry.LineSeg.KeyPoint;
+import org.eclipse.gmf.runtime.draw2d.ui.geometry.PointListUtilities;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.MapModeUtil;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Transition;
@@ -32,6 +36,8 @@ import org.yakindu.sct.ui.editor.editparts.TransitionEditPart;
  * @author andreas muelder - Initial contribution and API
  */
 public class TransitionPriorityDecorationProvider extends AbstractPriorityDecorationProvider {
+
+	public static final int DISTANCE_TO_SOURCE = 6;
 
 	@Override
 	public void createDecorators(IDecoratorTarget decoratorTarget) {
@@ -91,8 +97,14 @@ public class TransitionPriorityDecorationProvider extends AbstractPriorityDecora
 			PriorityFigure figure = new PriorityFigure(MapModeUtil.getMapMode(), getPriority(editPart));
 			figure.setSize(12, 13);
 			setDecoration(getDecoratorTarget().addDecoration(figure,
-					new ConnectionLocator((Connection) editPart.getFigure(), ConnectionLocator.SOURCE), false));
-			
+					new ConnectionLocator((Connection) editPart.getFigure(), ConnectionLocator.TARGET) {
+						protected Point getLocation(PointList points) {
+							Point p = PointListUtilities.pointOn(PointListUtilities.copyPoints(points),
+									DISTANCE_TO_SOURCE, KeyPoint.ORIGIN, new Point());
+							return p;
+						}
+					}, false));
+
 			figure.setToolTip(new Label("Transition Priority " + getPriority(editPart)));
 		}
 
