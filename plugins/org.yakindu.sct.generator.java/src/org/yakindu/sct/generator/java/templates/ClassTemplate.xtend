@@ -31,6 +31,10 @@ class ClassTemplate {
 		return new ClassTemplate
 	}
 	
+	def static ClassTemplate createInterface() {
+		return new ClassTemplate().classType("interface")
+	}
+	
 	def CharSequence generate() {
 		'''
 		«classComment»

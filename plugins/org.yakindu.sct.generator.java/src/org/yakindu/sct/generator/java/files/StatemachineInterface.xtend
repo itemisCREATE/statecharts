@@ -47,7 +47,7 @@ class StatemachineInterface {
 	@Inject extension JavaExpressionsGenerator
 
 	@Inject ICoreLibraryHelper outletFeatureHelper
-	
+
 	protected ExecutionFlow flow
 	protected GeneratorEntry entry
 
@@ -64,8 +64,7 @@ class StatemachineInterface {
 	}
 
 	def protected content() {
-		FileTemplate
-			.create
+		FileTemplate.create
 			.fileComment(entry.licenseText)
 			.packageName(flow.getImplementationPackageName(entry))
 			.addImport("java.util.List", entry.createInterfaceObserver && flow.hasOutgoingEvents)
@@ -73,28 +72,26 @@ class StatemachineInterface {
 			.addImport(entry.basePackageName.dot(iStatemachine))
 			.addImports(includeProviders.map[getImports(flow)].flatten)
 			.classTemplate(
-				ClassTemplate
-					.create
+				ClassTemplate.create
 					.classType("interface")
 					.className(flow.statemachineInterfaceName)
 					.superClass(flow.statemachineInterfaceExtensions)
 					.classContent(
 						'''
-						«IF flow.hasInternalScope»
-							«FOR constant : flow.internalScope.declarations.filter(VariableDefinition).filter[const]»
-								«constant.constantFieldDeclaration()»
+							«IF flow.hasInternalScope»
+								«FOR constant : flow.internalScope.declarations.filter(VariableDefinition).filter[const]»
+									«constant.constantFieldDeclaration()»
+								«ENDFOR»
+							«ENDIF»
+							«FOR scope : flow.scopes»
+								«scope.createScope(entry)»
 							«ENDFOR»
-						«ENDIF»
-						«FOR scope : flow.scopes»
-							«scope.createScope(entry)»
-						«ENDFOR»
 						'''
-					) 
+					)
 			).generate
 	}
 
-	def protected constantFieldDeclaration(
-		VariableDefinition variable) {
+	def protected constantFieldDeclaration(VariableDefinition variable) {
 		'''public static final «variable.typeSpecifier.targetLanguageName» «variable.identifier» = «variable.initialValue.code»;
 
 		'''
@@ -119,74 +116,65 @@ class StatemachineInterface {
 	}
 
 	def protected createScope(InternalScope scope) {
-		'''
-			«IF scope.hasOperations()»
-				public interface «scope.internalOperationCallbackName» {
-				
+		if (scope.hasOperations) {
+			val s = ClassTemplate.createInterface.className(scope.internalOperationCallbackName).
+				classContent('''
 					«FOR operation : scope.operations»
 						«operation.operationSignature»
 					«ENDFOR»
-				}
+				''')
+			'''
+				«s.generate»
 				
 				public void set«scope.internalOperationCallbackName»(«scope.internalOperationCallbackName» operationCallback);
-				
-			«ENDIF»
-		'''
+			'''
+
+		} else
+			""
 	}
 
 	def protected createInterface(InterfaceScope scope, GeneratorEntry entry) {
-		'''
-			public interface «scope.interfaceName» {
-			
+		ClassTemplate.createInterface.className(scope.interfaceName).classContent('''
 			«var constants = scope.declarations.filter(VariableDefinition).filter[const]»
 			«FOR constant : constants»
 				«constant.constantFieldDeclaration()»
 			«ENDFOR»
-				«scope.eventAccessors»
-				«scope.variableAccessors»
+			«scope.eventAccessors»
+			«scope.variableAccessors»
 			«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
 				public List<«scope.getInterfaceListenerName()»> getListeners();
 			«ENDIF»
-				«IF scope.hasOperations()»
-					public void set«scope.getInterfaceOperationCallbackName()»(«scope.getInterfaceOperationCallbackName()» operationCallback);
-
-				«ENDIF»
-			}
-		'''
+			«IF scope.hasOperations()»
+				public void set«scope.getInterfaceOperationCallbackName()»(«scope.getInterfaceOperationCallbackName()» operationCallback);
+			
+			«ENDIF»
+		''').generate
 	}
 
 	def protected createListenerInterface(InterfaceScope scope, GeneratorEntry entry) {
-		'''
-			«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
-				
-				public interface «scope.getInterfaceListenerName()» {
-				
-					«FOR event : scope.eventDefinitions»
-						«IF event.direction == Direction::OUT»
-							«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-								public void on«event.name.toFirstUpper()»Raised(«event.typeSpecifier.targetLanguageName» value);
-							«ELSE»
-								public void on«event.name.toFirstUpper()»Raised();
-							«ENDIF»	
-						«ENDIF»
-					«ENDFOR»
-					}
-			«ENDIF»
-		'''
+		if(entry.createInterfaceObserver && scope.hasOutgoingEvents) {
+			ClassTemplate.createInterface.className(scope.interfaceListenerName).classContent('''
+				«FOR event : scope.eventDefinitions»
+					«IF event.direction == Direction::OUT»
+						«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+							public void on«event.name.toFirstUpper()»Raised(«event.typeSpecifier.targetLanguageName» value);
+						«ELSE»
+							public void on«event.name.toFirstUpper()»Raised();
+						«ENDIF»	
+					«ENDIF»
+				«ENDFOR»
+			''').generate
+		} else ""
 	}
 
 	def protected createOperationCallbackInterface(InterfaceScope scope) {
-		'''
-			«IF scope.hasOperations»
-				
-				public interface «scope.getInterfaceOperationCallbackName()» {
-				
-					«FOR operation : scope.operations »
-						«operation.operationSignature»
-					«ENDFOR»
-				}
-			«ENDIF»
-		'''
+		if(scope.hasOperations) {
+			ClassTemplate.createInterface.className(scope.interfaceOperationCallbackName).classContent('''
+			«FOR operation : scope.operations »
+				«operation.operationSignature»
+			«ENDFOR»
+			''').generate
+		} else ""
 	}
 
 	def protected eventAccessors(InterfaceScope scope) {
