@@ -113,10 +113,6 @@ class STextUiModule extends AbstractSTextUiModule {
 		}
 	}
 
-	override Class<? extends ITextHover> bindITextHover() {
-		return ProblemAnnotationHover
-	}
-
 	def Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
 		return SCTHighlightingConfiguration
 	}
