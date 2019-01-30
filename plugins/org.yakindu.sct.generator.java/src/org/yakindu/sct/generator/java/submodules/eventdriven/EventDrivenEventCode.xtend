@@ -19,7 +19,7 @@ class EventDrivenEventCode extends EventCode {
 			public void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
 				«event.identifier» = true;
 				«event.valueIdentifier» = value;
-				runCycle();
+				parent.runCycle();
 			}
 			
 			protected «event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
@@ -29,7 +29,7 @@ class EventDrivenEventCode extends EventCode {
 		«ELSE»
 			public void raise«event.name.asName»() {
 				«event.identifier» = true;
-				runCycle();
+				parent.runCycle();
 			}
 		«ENDIF»
 

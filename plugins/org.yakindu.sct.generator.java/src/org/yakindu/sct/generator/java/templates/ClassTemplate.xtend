@@ -34,7 +34,7 @@ class ClassTemplate {
 	def CharSequence generate() {
 		'''
 		«classComment»
-		«generateVisibility»«classType» «className» «extend»«implement»{
+		«generateModifiers»«classType» «className» «extend»«implement»{
 			«classContent»
 		}
 		'''
@@ -90,7 +90,7 @@ class ClassTemplate {
 		this
 	}
 	
-	def protected final CharSequence generateVisibility() {
+	def protected final CharSequence generateModifiers() {
 		var vis = ""
 		if(visibility != "") {
 			vis += visibility + " "

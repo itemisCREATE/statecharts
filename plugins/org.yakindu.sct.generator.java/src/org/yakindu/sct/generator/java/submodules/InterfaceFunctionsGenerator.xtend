@@ -16,6 +16,7 @@ import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.java.GenmodelEntries
 import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
+import org.yakindu.sct.generator.java.templates.ClassTemplate
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
@@ -34,31 +35,42 @@ class InterfaceFunctionsGenerator {
 	@Inject protected extension FieldDeclarationGenerator
 	@Inject protected extension EventCode
 	
-	def toImplementation(InterfaceScope scope, GeneratorEntry entry) '''
-		protected class «scope.getInterfaceImplName» implements «scope.getInterfaceName» {
-
-			«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
-			«scope.generateListenerSupport»
-			«ENDIF»
-			«IF scope.hasOperations»
-			«scope.generateOperationCallback»
-			«ENDIF»
-			«FOR event : scope.eventDefinitions»
-			«generateEventDefinition(event, entry, scope)»
-			«ENDFOR»
-			«FOR variable : scope.variableDefinitions»
-			«generateVariableDefinition(variable)»
-			«ENDFOR»
-			«IF scope.hasEvents»
-			«scope.generateClearEvents»
-			«ENDIF»
-			«IF scope.hasOutgoingEvents()»
-			«generateClearOutEvents(scope)»
-			«ENDIF»
-		}
-
-		'''
+	def toImplementation(InterfaceScope scope, GeneratorEntry entry) {
+		interfaceScopeTemplate(scope, entry).generate
+	}
+	
+	protected def interfaceScopeTemplate(InterfaceScope scope, GeneratorEntry entry) {
+		ClassTemplate.create
+			.className(scope.getInterfaceImplName)
+			.addInterface(scope.getInterfaceName)
+			.visibility("protected")
+			.isStatic(true)
+			.classContent(interfaceScopeContent(scope, entry))
+	}
 		
+	protected def interfaceScopeContent(InterfaceScope scope, GeneratorEntry entry) {
+		'''
+		«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
+		«scope.generateListenerSupport»
+		«ENDIF»
+		«IF scope.hasOperations»
+		«scope.generateOperationCallback»
+		«ENDIF»
+		«FOR event : scope.eventDefinitions»
+		«generateEventDefinition(event, entry, scope)»
+		«ENDFOR»
+		«FOR variable : scope.variableDefinitions»
+		«generateVariableDefinition(variable)»
+		«ENDFOR»
+		«IF scope.hasEvents»
+		«scope.generateClearEvents»
+		«ENDIF»
+		«IF scope.hasOutgoingEvents()»
+		«generateClearOutEvents(scope)»
+		«ENDIF»
+		'''
+	}
+			
 	protected def generateOperationCallback(InterfaceScope scope) '''
 		private «scope.getInterfaceOperationCallbackName()» operationCallback;
 		
