@@ -214,16 +214,14 @@ public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider 
 	public QualifiedName qualifiedName(Declaration ele) {
 		QualifiedName name = null;
 		QualifiedName namespace = getNamespace(ele);
-		if (ele instanceof ComplexType && namespace == null) {
-			if (ele.eContainer() instanceof ComplexType) {
-				namespace = qualifiedName((ComplexType) ele.eContainer());
-			}
-		}
 		if (!Strings.isEmpty(ele.getName())) {
 			name = nameConverter.toQualifiedName(ele.getName());
 		}
 		if (namespace != null && name != null) {
-			name = namespace.append(name);
+			return namespace.append(name);
+		}
+		if (namespace == null && name != null && ele instanceof ComplexType) {
+			return getParentQualifiedName(ele, name);
 		}
 		return name;
 	}
