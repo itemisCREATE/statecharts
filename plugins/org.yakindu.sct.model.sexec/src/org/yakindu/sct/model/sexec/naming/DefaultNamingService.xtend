@@ -386,7 +386,7 @@ class DefaultNamingService implements INamingService {
 	}
 	
 	def protected dispatch String elementName(ExecutionEntry it) {
-		return provider.getFullyQualifiedName(it).skipFirst(1).toString(separator.toString)
+		return provider.getFullyQualifiedName(it).skipFirst(2).toString(separator.toString)
 	}
 
 	// TODO: we should merge the region/vertex case into this base implementation; we should check whether it is used in any case at all (otherwise it could be replaced with the body of vertexOrRegionName)
