@@ -6,7 +6,6 @@ import org.yakindu.scr.ITimerCallback;
 
 public interface IWrapperTestStatemachine extends ITimerCallback,IStatemachine {
 	public interface SCInterface {
-	
 		public boolean isRaisedEv_out();
 		
 		public void raiseEv_in();
@@ -23,18 +22,14 @@ public interface IWrapperTestStatemachine extends ITimerCallback,IStatemachine {
 		
 		public void setS2_entered(long value);
 		
-	public List<SCInterfaceListener> getListeners();
+		public List<SCInterfaceListener> getListeners();
 		public void setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback);
-	
+					
 	}
-	
 	public interface SCInterfaceListener {
-	
 		public void onEv_outRaised();
-		}
-	
+	}
 	public interface SCInterfaceOperationCallback {
-	
 		public void displayTime();
 		
 	}

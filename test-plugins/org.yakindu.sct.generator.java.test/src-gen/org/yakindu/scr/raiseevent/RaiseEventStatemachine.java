@@ -2,8 +2,7 @@ package org.yakindu.scr.raiseevent;
 
 
 public class RaiseEventStatemachine implements IRaiseEventStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean e1;
 		
 		public boolean isRaisedE1() {
@@ -29,7 +28,6 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		}
 		
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

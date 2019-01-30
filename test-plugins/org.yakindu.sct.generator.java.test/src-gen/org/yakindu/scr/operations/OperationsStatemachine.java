@@ -2,8 +2,7 @@ package org.yakindu.scr.operations;
 
 
 public class OperationsStatemachine implements IOperationsStatemachine {
-	protected class SCIInterface1Impl implements SCIInterface1 {
-	
+	protected static class SCIInterface1Impl implements SCIInterface1 {
 		private SCIInterface1OperationCallback operationCallback;
 		
 		public void setSCIInterface1OperationCallback(
@@ -11,11 +10,9 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 			this.operationCallback = operationCallback;
 		}
 	}
-	
 	protected SCIInterface1Impl sCIInterface1;
 	
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private SCInterfaceOperationCallback operationCallback;
 		
 		public void setSCInterfaceOperationCallback(
@@ -32,7 +29,6 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 			ev = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

@@ -2,8 +2,7 @@ package org.yakindu.scr.parentfirstorthogonalreactions;
 
 
 public class ParentFirstOrthogonalReactionsStatemachine implements IParentFirstOrthogonalReactionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private SCInterfaceOperationCallback operationCallback;
 		
 		public void setSCInterfaceOperationCallback(
@@ -151,7 +150,6 @@ public class ParentFirstOrthogonalReactionsStatemachine implements IParentFirstO
 		}
 		
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

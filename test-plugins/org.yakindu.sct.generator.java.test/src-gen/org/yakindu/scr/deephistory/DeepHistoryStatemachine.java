@@ -2,8 +2,7 @@ package org.yakindu.scr.deephistory;
 
 
 public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean event1;
 		
 		public void raiseEvent1() {
@@ -70,7 +69,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 			event9 = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

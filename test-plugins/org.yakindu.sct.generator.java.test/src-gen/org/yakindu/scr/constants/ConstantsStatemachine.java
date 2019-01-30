@@ -2,8 +2,7 @@ package org.yakindu.scr.constants;
 
 
 public class ConstantsStatemachine implements IConstantsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean e;
 		
 		public void raiseE() {
@@ -48,11 +47,9 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 			e2 = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
-	protected class SCINamedImpl implements SCINamed {
-	
+	protected static class SCINamedImpl implements SCINamed {
 		public String getY() {
 			return y;
 		}
@@ -62,7 +59,6 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		}
 		
 	}
-	
 	protected SCINamedImpl sCINamed;
 	
 	private boolean initialized = false;

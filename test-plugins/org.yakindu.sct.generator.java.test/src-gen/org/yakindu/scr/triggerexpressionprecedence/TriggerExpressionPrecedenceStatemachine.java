@@ -2,8 +2,7 @@ package org.yakindu.scr.triggerexpressionprecedence;
 
 
 public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressionPrecedenceStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean e1;
 		
 		public void raiseE1() {
@@ -61,7 +60,6 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 			e2 = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

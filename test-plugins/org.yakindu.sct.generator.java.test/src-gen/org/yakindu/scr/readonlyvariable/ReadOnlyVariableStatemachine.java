@@ -2,8 +2,7 @@ package org.yakindu.scr.readonlyvariable;
 
 
 public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private long myInt;
 		
 		public long getMyInt() {
@@ -45,11 +44,9 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 		}
 		
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
-	protected class SCIAImpl implements SCIA {
-	
+	protected static class SCIAImpl implements SCIA {
 		private long myInt;
 		
 		public long getMyInt() {
@@ -91,7 +88,6 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 		}
 		
 	}
-	
 	protected SCIAImpl sCIA;
 	
 	private boolean initialized = false;

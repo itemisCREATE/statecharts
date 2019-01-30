@@ -2,8 +2,7 @@ package org.yakindu.scr.castexpressions;
 
 
 public class CastExpressionsStatemachine implements ICastExpressionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private double realValue;
 		
 		public double getRealValue() {
@@ -25,7 +24,6 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 		}
 		
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

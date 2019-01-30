@@ -2,8 +2,7 @@ package org.yakindu.scr.syncjoin;
 
 
 public class SyncJoinStatemachine implements ISyncJoinStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean e;
 		
 		public void raiseE() {
@@ -45,7 +44,6 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 			jd = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

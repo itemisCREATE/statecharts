@@ -6,7 +6,6 @@ import org.yakindu.scr.IStatemachine;
 
 public interface ILocalEventsStatemachine extends IStatemachine {
 	public interface SCInterface {
-	
 		public void raiseE();
 		
 		public long getCycleCountSm();

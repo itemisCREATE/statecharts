@@ -2,8 +2,7 @@ package org.yakindu.scr.constantsvariation;
 
 
 public class ConstantsVariationStatemachine implements IConstantsVariationStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		public boolean getB2() {
 			return b2;
 		}
@@ -21,11 +20,9 @@ public class ConstantsVariationStatemachine implements IConstantsVariationStatem
 		}
 		
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
-	protected class SCINamedImpl implements SCINamed {
-	
+	protected static class SCINamedImpl implements SCINamed {
 		public boolean getB() {
 			return b;
 		}
@@ -43,7 +40,6 @@ public class ConstantsVariationStatemachine implements IConstantsVariationStatem
 		}
 		
 	}
-	
 	protected SCINamedImpl sCINamed;
 	
 	private boolean initialized = false;

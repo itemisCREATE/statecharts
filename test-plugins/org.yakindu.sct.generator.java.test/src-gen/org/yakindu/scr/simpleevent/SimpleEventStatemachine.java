@@ -2,8 +2,7 @@ package org.yakindu.scr.simpleevent;
 
 
 public class SimpleEventStatemachine implements ISimpleEventStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean event1;
 		
 		public void raiseEvent1() {
@@ -14,7 +13,6 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 			event1 = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

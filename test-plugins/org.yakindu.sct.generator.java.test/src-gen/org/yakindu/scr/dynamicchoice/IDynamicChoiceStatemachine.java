@@ -4,7 +4,6 @@ import org.yakindu.scr.IStatemachine;
 
 public interface IDynamicChoiceStatemachine extends IStatemachine {
 	public interface SCInterface {
-	
 		public void raiseReset();
 		
 		public long getNumber();

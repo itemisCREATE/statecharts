@@ -4,13 +4,18 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class LocalEventsStatemachine implements ILocalEventsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
+		protected ILocalEventsStatemachine parent;
+		
+		public SCInterfaceImpl(ILocalEventsStatemachine parent) {
+			this.parent = parent;
+		}
+		
 		private boolean e;
 		
 		public void raiseE() {
 			e = true;
-			runCycle();
+			parent.runCycle();
 		}
 		
 		private long cycleCountSm;
@@ -57,7 +62,6 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 			e = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -89,7 +93,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	private boolean activate_d;
 	private long activate_dValue;
 	public LocalEventsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		sCInterface = new SCInterfaceImpl(this);
 	}
 	
 	public void init() {
@@ -237,7 +241,8 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	private void raiseActivate_b() {
 	
 		internalEventQueue.add( new Runnable() {
-			@Override public void run() {
+			@Override
+			public void run() {
 				activate_b = true;					
 				singleCycle();
 			}
@@ -248,7 +253,8 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	private void raiseActivate_c() {
 	
 		internalEventQueue.add( new Runnable() {
-			@Override public void run() {
+			@Override
+			public void run() {
 				activate_c = true;					
 				singleCycle();
 			}
@@ -259,7 +265,8 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	private void raiseActivate_d(final long value) {
 	
 		internalEventQueue.add( new Runnable() {
-			@Override public void run() {
+			@Override
+			public void run() {
 				activate_dValue = value;
 				activate_d = true;					
 				singleCycle();

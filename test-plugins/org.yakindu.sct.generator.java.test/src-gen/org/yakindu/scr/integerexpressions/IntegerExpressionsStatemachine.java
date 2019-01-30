@@ -2,8 +2,7 @@ package org.yakindu.scr.integerexpressions;
 
 
 public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean e1;
 		
 		public void raiseE1() {
@@ -254,7 +253,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 			e1 = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

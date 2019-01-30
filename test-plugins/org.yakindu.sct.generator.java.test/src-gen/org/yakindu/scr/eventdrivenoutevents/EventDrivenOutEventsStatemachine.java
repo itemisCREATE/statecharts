@@ -2,13 +2,18 @@ package org.yakindu.scr.eventdrivenoutevents;
 
 
 public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
+		protected IEventDrivenOutEventsStatemachine parent;
+		
+		public SCInterfaceImpl(IEventDrivenOutEventsStatemachine parent) {
+			this.parent = parent;
+		}
+		
 		private boolean e1;
 		
 		public void raiseE1() {
 			e1 = true;
-			runCycle();
+			parent.runCycle();
 		}
 		
 		private boolean e2;
@@ -30,7 +35,6 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		}
 		
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -49,7 +53,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	
 	
 	public EventDrivenOutEventsStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		sCInterface = new SCInterfaceImpl(this);
 	}
 	
 	public void init() {

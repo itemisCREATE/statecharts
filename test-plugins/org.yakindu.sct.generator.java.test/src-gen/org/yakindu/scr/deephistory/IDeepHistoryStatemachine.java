@@ -4,7 +4,6 @@ import org.yakindu.scr.IStatemachine;
 
 public interface IDeepHistoryStatemachine extends IStatemachine {
 	public interface SCInterface {
-	
 		public void raiseEvent1();
 		
 		public void raiseEvent2();

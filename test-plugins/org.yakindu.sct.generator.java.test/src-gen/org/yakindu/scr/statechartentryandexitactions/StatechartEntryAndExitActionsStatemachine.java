@@ -2,8 +2,7 @@ package org.yakindu.scr.statechartentryandexitactions;
 
 
 public class StatechartEntryAndExitActionsStatemachine implements IStatechartEntryAndExitActionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private long x;
 		
 		public long getX() {
@@ -35,7 +34,6 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 		}
 		
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

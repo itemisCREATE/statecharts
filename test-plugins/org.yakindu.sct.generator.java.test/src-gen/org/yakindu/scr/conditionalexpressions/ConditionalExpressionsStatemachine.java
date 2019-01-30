@@ -2,8 +2,7 @@ package org.yakindu.scr.conditionalexpressions;
 
 
 public class ConditionalExpressionsStatemachine implements IConditionalExpressionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean e;
 		
 		public void raiseE() {
@@ -54,7 +53,6 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 			e = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

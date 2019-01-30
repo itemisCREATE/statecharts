@@ -4,7 +4,6 @@ import org.yakindu.scr.IStatemachine;
 
 public interface IDeclarationsStatemachine extends IStatemachine {
 	public interface SCInterface {
-	
 		public void raiseEvA();
 		
 		public boolean isRaisedEvB();
@@ -46,7 +45,6 @@ public interface IDeclarationsStatemachine extends IStatemachine {
 	public SCInterface getSCInterface();
 	
 	public interface SCIIfA {
-	
 		public void raiseEvA();
 		
 		public boolean isRaisedEvB();

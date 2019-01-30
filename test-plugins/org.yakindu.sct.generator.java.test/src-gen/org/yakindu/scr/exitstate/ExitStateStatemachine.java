@@ -2,8 +2,7 @@ package org.yakindu.scr.exitstate;
 
 
 public class ExitStateStatemachine implements IExitStateStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean e;
 		
 		public void raiseE() {
@@ -28,7 +27,6 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 			g = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

@@ -2,8 +2,7 @@ package org.yakindu.scr.priorityvalues;
 
 
 public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean event1;
 		
 		public void raiseEvent1() {
@@ -21,7 +20,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 			event2 = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

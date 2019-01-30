@@ -2,8 +2,7 @@ package org.yakindu.scr.parentfirstexecutionhierarchy;
 
 
 public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstExecutionHierarchyStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean e;
 		
 		public void raiseE() {
@@ -104,7 +103,6 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 			e = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

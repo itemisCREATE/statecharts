@@ -2,8 +2,7 @@ package org.yakindu.scr.choice;
 
 
 public class ChoiceStatemachine implements IChoiceStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean e;
 		
 		public void raiseE() {
@@ -45,7 +44,6 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 			h = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

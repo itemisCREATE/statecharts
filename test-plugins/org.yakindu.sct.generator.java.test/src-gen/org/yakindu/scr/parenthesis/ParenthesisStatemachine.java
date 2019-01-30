@@ -2,8 +2,7 @@ package org.yakindu.scr.parenthesis;
 
 
 public class ParenthesisStatemachine implements IParenthesisStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private long erg;
 		
 		public long getErg() {
@@ -15,7 +14,6 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		}
 		
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

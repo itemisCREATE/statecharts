@@ -2,8 +2,7 @@ package org.yakindu.scr.entryreactionaction;
 
 
 public class EntryReactionActionStatemachine implements IEntryReactionActionStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean b;
 		
 		public void raiseB() {
@@ -61,7 +60,6 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 			d = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

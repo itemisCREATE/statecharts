@@ -3,8 +3,7 @@ package org.yakindu.scr.performancetest;
 import org.yakindu.scr.ITimer;
 
 public class PerformanceTestStatemachine implements IPerformanceTestStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean e1;
 		
 		public void raiseE1() {
@@ -59,7 +58,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 			e3 = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

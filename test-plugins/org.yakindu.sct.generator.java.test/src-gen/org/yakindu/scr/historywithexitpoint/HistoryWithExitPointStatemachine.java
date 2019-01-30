@@ -2,8 +2,7 @@ package org.yakindu.scr.historywithexitpoint;
 
 
 public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean push;
 		
 		public void raisePush() {
@@ -28,7 +27,6 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 			next = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

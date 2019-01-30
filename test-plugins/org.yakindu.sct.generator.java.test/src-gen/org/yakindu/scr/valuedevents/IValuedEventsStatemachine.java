@@ -4,7 +4,6 @@ import org.yakindu.scr.IStatemachine;
 
 public interface IValuedEventsStatemachine extends IStatemachine {
 	public interface SCInterface {
-	
 		public void raiseIntegerEvent(long value);
 		
 		public void raiseBooleanEvent(boolean value);

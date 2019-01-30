@@ -2,8 +2,7 @@ package org.yakindu.scr.guardedexit;
 
 
 public class GuardedExitStatemachine implements IGuardedExitStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean e;
 		
 		public void raiseE() {
@@ -34,7 +33,6 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 			e = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

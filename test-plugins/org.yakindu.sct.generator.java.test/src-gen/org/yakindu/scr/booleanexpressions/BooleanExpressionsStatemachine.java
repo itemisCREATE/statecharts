@@ -2,8 +2,7 @@ package org.yakindu.scr.booleanexpressions;
 
 
 public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean e1;
 		
 		public void raiseE1() {
@@ -84,7 +83,6 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 			e1 = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

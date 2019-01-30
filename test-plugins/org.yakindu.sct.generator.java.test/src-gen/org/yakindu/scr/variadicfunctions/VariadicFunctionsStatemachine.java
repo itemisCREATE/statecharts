@@ -2,8 +2,7 @@ package org.yakindu.scr.variadicfunctions;
 
 
 public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private SCInterfaceOperationCallback operationCallback;
 		
 		public void setSCInterfaceOperationCallback(
@@ -11,11 +10,9 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 			this.operationCallback = operationCallback;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
-	protected class SCIIF2Impl implements SCIIF2 {
-	
+	protected static class SCIIF2Impl implements SCIIF2 {
 		private SCIIF2OperationCallback operationCallback;
 		
 		public void setSCIIF2OperationCallback(
@@ -23,7 +20,6 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 			this.operationCallback = operationCallback;
 		}
 	}
-	
 	protected SCIIF2Impl sCIIF2;
 	
 	private boolean initialized = false;

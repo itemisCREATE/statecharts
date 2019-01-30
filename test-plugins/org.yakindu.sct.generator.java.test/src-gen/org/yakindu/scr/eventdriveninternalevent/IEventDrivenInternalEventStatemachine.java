@@ -6,7 +6,6 @@ import org.yakindu.scr.IStatemachine;
 
 public interface IEventDrivenInternalEventStatemachine extends IStatemachine {
 	public interface SCInterface {
-	
 		public void raiseStart();
 		
 		public void raiseReset();

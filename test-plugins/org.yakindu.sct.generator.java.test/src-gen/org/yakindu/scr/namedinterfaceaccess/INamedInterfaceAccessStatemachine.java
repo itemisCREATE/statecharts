@@ -4,7 +4,6 @@ import org.yakindu.scr.IStatemachine;
 
 public interface INamedInterfaceAccessStatemachine extends IStatemachine {
 	public interface SCISafe {
-	
 		public boolean isRaisedOpen();
 		
 		public boolean isRaisedClose();
@@ -14,7 +13,6 @@ public interface INamedInterfaceAccessStatemachine extends IStatemachine {
 	public SCISafe getSCISafe();
 	
 	public interface SCIUser {
-	
 		public void raiseNumberPressed(long value);
 		
 		public void raiseReset();

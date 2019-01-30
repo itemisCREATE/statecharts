@@ -3,8 +3,13 @@ package org.yakindu.scr.eventdriventriggeredbytimeevent;
 import org.yakindu.scr.ITimer;
 
 public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDrivenTriggeredByTimeEventStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
+		protected IEventDrivenTriggeredByTimeEventStatemachine parent;
+		
+		public SCInterfaceImpl(IEventDrivenTriggeredByTimeEventStatemachine parent) {
+			this.parent = parent;
+		}
+		
 		private long x;
 		
 		public long getX() {
@@ -26,7 +31,6 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		}
 		
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -46,7 +50,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 	
 	private final boolean[] timeEvents = new boolean[2];
 	public EventDrivenTriggeredByTimeEventStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		sCInterface = new SCInterfaceImpl(this);
 	}
 	
 	public void init() {

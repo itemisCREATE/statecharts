@@ -2,8 +2,7 @@ package org.yakindu.scr.assignmentasexpression;
 
 
 public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressionStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private long a;
 		
 		public long getA() {
@@ -275,7 +274,6 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		}
 		
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

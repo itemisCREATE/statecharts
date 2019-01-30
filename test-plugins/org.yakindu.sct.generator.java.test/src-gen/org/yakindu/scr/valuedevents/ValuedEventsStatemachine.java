@@ -2,8 +2,7 @@ package org.yakindu.scr.valuedevents;
 
 
 public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean integerEvent;
 		
 		private long integerEventValue;
@@ -111,7 +110,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 			stringEvent = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

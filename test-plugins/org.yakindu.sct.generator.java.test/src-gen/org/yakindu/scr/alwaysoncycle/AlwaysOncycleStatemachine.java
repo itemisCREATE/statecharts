@@ -2,8 +2,7 @@ package org.yakindu.scr.alwaysoncycle;
 
 
 public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean e;
 		
 		public void raiseE() {
@@ -54,7 +53,6 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 			e = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

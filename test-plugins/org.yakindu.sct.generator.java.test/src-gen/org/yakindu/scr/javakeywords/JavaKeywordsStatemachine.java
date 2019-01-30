@@ -2,8 +2,7 @@ package org.yakindu.scr.javakeywords;
 
 
 public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean whileEvent;
 		
 		public void raiseWhile() {
@@ -461,7 +460,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			ev = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

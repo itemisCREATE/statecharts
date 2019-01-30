@@ -2,20 +2,25 @@ package org.yakindu.scr.exitsequence;
 
 
 public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
+		protected IExitSequenceStatemachine parent;
+		
+		public SCInterfaceImpl(IExitSequenceStatemachine parent) {
+			this.parent = parent;
+		}
+		
 		private boolean e;
 		
 		public void raiseE() {
 			e = true;
-			runCycle();
+			parent.runCycle();
 		}
 		
 		private boolean f;
 		
 		public void raiseF() {
 			f = true;
-			runCycle();
+			parent.runCycle();
 		}
 		
 		private long a_exit;
@@ -153,7 +158,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 			f = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -180,7 +184,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	
 	
 	public ExitSequenceStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		sCInterface = new SCInterfaceImpl(this);
 	}
 	
 	public void init() {

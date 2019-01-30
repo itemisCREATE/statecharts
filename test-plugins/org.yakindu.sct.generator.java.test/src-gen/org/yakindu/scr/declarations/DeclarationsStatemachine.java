@@ -2,8 +2,7 @@ package org.yakindu.scr.declarations;
 
 
 public class DeclarationsStatemachine implements IDeclarationsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean evA;
 		
 		public void raiseEvA() {
@@ -151,11 +150,9 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		}
 		
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
-	protected class SCIIfAImpl implements SCIIfA {
-	
+	protected static class SCIIfAImpl implements SCIIfA {
 		private boolean evA;
 		
 		public void raiseEvA() {
@@ -303,7 +300,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		}
 		
 	}
-	
 	protected SCIIfAImpl sCIIfA;
 	
 	private boolean initialized = false;

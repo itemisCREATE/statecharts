@@ -4,7 +4,6 @@ import org.yakindu.scr.IStatemachine;
 
 public interface IChildFirstExecutionHierarchyStatemachine extends IStatemachine {
 	public interface SCInterface {
-	
 		public void raiseE();
 		
 		public boolean getDisable_a();

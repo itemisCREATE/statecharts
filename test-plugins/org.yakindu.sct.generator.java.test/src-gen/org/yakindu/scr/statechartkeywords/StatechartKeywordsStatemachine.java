@@ -5,8 +5,7 @@ import java.util.List;
 import org.yakindu.scr.ITimer;
 
 public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatemachine {
-	protected class SCIIfImpl implements SCIIf {
-	
+	protected static class SCIIfImpl implements SCIIf {
 		private List<SCIIfListener> listeners = new LinkedList<SCIIfListener>();
 		
 		public List<SCIIfListener> getListeners() {
@@ -103,7 +102,6 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		}
 		
 	}
-	
 	protected SCIIfImpl sCIIf;
 	
 	private boolean initialized = false;

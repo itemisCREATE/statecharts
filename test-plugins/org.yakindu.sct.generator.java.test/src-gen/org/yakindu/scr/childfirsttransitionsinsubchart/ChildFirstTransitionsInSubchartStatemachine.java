@@ -2,8 +2,7 @@ package org.yakindu.scr.childfirsttransitionsinsubchart;
 
 
 public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstTransitionsInSubchartStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private SCInterfaceOperationCallback operationCallback;
 		
 		public void setSCInterfaceOperationCallback(
@@ -181,7 +180,6 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		}
 		
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

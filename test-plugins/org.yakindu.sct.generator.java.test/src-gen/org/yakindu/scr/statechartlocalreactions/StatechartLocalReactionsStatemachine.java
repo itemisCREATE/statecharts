@@ -2,8 +2,7 @@ package org.yakindu.scr.statechartlocalreactions;
 
 
 public class StatechartLocalReactionsStatemachine implements IStatechartLocalReactionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private long myInt;
 		
 		public long getMyInt() {
@@ -15,7 +14,6 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 		}
 		
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

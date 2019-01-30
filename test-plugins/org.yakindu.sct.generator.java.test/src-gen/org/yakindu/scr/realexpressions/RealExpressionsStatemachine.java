@@ -2,8 +2,7 @@ package org.yakindu.scr.realexpressions;
 
 
 public class RealExpressionsStatemachine implements IRealExpressionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean e1;
 		
 		public void raiseE1() {
@@ -278,7 +277,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 			e1 = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

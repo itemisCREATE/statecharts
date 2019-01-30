@@ -2,8 +2,7 @@ package org.yakindu.scr.constonlynamedscope;
 
 
 public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean e;
 		
 		private long eValue;
@@ -23,11 +22,9 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 			e = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
-	protected class SCIAImpl implements SCIA {
-	
+	protected static class SCIAImpl implements SCIA {
 		public long getB() {
 			return b;
 		}
@@ -37,7 +34,6 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 		}
 		
 	}
-	
 	protected SCIAImpl sCIA;
 	
 	private boolean initialized = false;

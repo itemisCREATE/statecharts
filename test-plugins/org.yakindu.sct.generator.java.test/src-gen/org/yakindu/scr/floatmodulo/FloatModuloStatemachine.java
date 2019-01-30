@@ -2,8 +2,7 @@ package org.yakindu.scr.floatmodulo;
 
 
 public class FloatModuloStatemachine implements IFloatModuloStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private double r;
 		
 		public double getR() {
@@ -25,11 +24,9 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		}
 		
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
-	protected class SCIAImpl implements SCIA {
-	
+	protected static class SCIAImpl implements SCIA {
 		private double r;
 		
 		public double getR() {
@@ -51,7 +48,6 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		}
 		
 	}
-	
 	protected SCIAImpl sCIA;
 	
 	private boolean initialized = false;

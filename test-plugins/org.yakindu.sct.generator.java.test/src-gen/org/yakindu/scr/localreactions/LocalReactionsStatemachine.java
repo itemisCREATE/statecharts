@@ -2,8 +2,7 @@ package org.yakindu.scr.localreactions;
 
 
 public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private long x;
 		
 		public long getX() {
@@ -15,7 +14,6 @@ public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 		}
 		
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

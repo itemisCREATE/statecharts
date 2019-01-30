@@ -2,8 +2,7 @@ package org.yakindu.scr.namedinterfaceaccess;
 
 
 public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessStatemachine {
-	protected class SCISafeImpl implements SCISafe {
-	
+	protected static class SCISafeImpl implements SCISafe {
 		private boolean open;
 		
 		public boolean isRaisedOpen() {
@@ -33,11 +32,9 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		}
 		
 	}
-	
 	protected SCISafeImpl sCISafe;
 	
-	protected class SCIUserImpl implements SCIUser {
-	
+	protected static class SCIUserImpl implements SCIUser {
 		private boolean numberPressed;
 		
 		private long numberPressedValue;
@@ -64,7 +61,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 			reset = false;
 		}
 	}
-	
 	protected SCIUserImpl sCIUser;
 	
 	private boolean initialized = false;

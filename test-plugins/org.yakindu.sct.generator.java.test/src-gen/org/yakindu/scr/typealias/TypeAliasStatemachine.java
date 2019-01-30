@@ -2,8 +2,7 @@ package org.yakindu.scr.typealias;
 
 
 public class TypeAliasStatemachine implements ITypeAliasStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean myEvent;
 		
 		public void raiseMyEvent() {
@@ -34,7 +33,6 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 			myEvent = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

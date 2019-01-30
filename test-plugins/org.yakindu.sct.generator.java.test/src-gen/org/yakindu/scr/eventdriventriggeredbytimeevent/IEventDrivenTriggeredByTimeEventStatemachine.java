@@ -5,7 +5,6 @@ import org.yakindu.scr.ITimerCallback;
 
 public interface IEventDrivenTriggeredByTimeEventStatemachine extends ITimerCallback,IStatemachine {
 	public interface SCInterface {
-	
 		public long getX();
 		
 		public void setX(long value);

@@ -2,8 +2,7 @@ package org.yakindu.scr.syncfork;
 
 
 public class SyncForkStatemachine implements ISyncForkStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean e;
 		
 		public void raiseE() {
@@ -21,7 +20,6 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 			f = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

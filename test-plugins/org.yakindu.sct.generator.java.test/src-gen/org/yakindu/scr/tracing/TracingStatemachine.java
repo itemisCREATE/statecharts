@@ -5,10 +5,14 @@ import java.util.List;
 import org.yakindu.scr.ITracingListener;
 
 public class TracingStatemachine implements ITracingStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
+		protected ITracingStatemachine parent;
+		
+		public SCInterfaceImpl(ITracingStatemachine parent) {
+			this.parent = parent;
+		}
+		
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -27,7 +31,7 @@ public class TracingStatemachine implements ITracingStatemachine {
 	
 	
 	public TracingStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		sCInterface = new SCInterfaceImpl(this);
 	}
 	
 	public void init() {

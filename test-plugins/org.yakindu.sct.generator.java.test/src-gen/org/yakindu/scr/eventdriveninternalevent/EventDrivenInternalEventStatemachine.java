@@ -4,20 +4,25 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class EventDrivenInternalEventStatemachine implements IEventDrivenInternalEventStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
+		protected IEventDrivenInternalEventStatemachine parent;
+		
+		public SCInterfaceImpl(IEventDrivenInternalEventStatemachine parent) {
+			this.parent = parent;
+		}
+		
 		private boolean start;
 		
 		public void raiseStart() {
 			start = true;
-			runCycle();
+			parent.runCycle();
 		}
 		
 		private boolean reset;
 		
 		public void raiseReset() {
 			reset = true;
-			runCycle();
+			parent.runCycle();
 		}
 		
 		private boolean e;
@@ -79,7 +84,6 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		}
 		
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -105,7 +109,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	
 	private boolean i2;
 	public EventDrivenInternalEventStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		sCInterface = new SCInterfaceImpl(this);
 	}
 	
 	public void init() {
@@ -242,7 +246,8 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	private void raiseI1() {
 	
 		internalEventQueue.add( new Runnable() {
-			@Override public void run() {
+			@Override
+			public void run() {
 				i1 = true;					
 				singleCycle();
 			}
@@ -253,7 +258,8 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	private void raiseI2() {
 	
 		internalEventQueue.add( new Runnable() {
-			@Override public void run() {
+			@Override
+			public void run() {
 				i2 = true;					
 				singleCycle();
 			}

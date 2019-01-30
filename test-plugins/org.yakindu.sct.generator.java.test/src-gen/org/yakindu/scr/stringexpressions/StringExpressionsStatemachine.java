@@ -2,8 +2,7 @@ package org.yakindu.scr.stringexpressions;
 
 
 public class StringExpressionsStatemachine implements IStringExpressionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean e;
 		
 		public void raiseE() {
@@ -104,7 +103,6 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 			e = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

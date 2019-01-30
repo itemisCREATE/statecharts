@@ -2,8 +2,7 @@ package org.yakindu.scr.ineventlifecycle;
 
 
 public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean e;
 		
 		public void raiseE() {
@@ -24,7 +23,6 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 			e = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

@@ -2,8 +2,7 @@ package org.yakindu.scr.operationswithoutbraces;
 
 
 public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBracesStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private SCInterfaceOperationCallback operationCallback;
 		
 		public void setSCInterfaceOperationCallback(
@@ -11,7 +10,6 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 			this.operationCallback = operationCallback;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

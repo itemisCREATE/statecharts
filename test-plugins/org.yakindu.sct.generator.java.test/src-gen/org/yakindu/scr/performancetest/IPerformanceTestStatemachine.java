@@ -5,7 +5,6 @@ import org.yakindu.scr.ITimerCallback;
 
 public interface IPerformanceTestStatemachine extends ITimerCallback,IStatemachine {
 	public interface SCInterface {
-	
 		public void raiseE1();
 		
 		public void raiseE2();

@@ -2,8 +2,7 @@ package org.yakindu.scr.guard;
 
 
 public class GuardStatemachine implements IGuardStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean event1;
 		
 		public void raiseEvent1() {
@@ -38,7 +37,6 @@ public class GuardStatemachine implements IGuardStatemachine {
 			returnEvent = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

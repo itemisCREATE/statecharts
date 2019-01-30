@@ -4,7 +4,6 @@ import org.yakindu.scr.IStatemachine;
 
 public interface IAssignmentAsExpressionStatemachine extends IStatemachine {
 	public interface SCInterface {
-	
 		public long getA();
 		
 		public void setA(long value);

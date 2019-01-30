@@ -4,7 +4,6 @@ import org.yakindu.scr.IStatemachine;
 
 public interface IReadOnlyVariableStatemachine extends IStatemachine {
 	public interface SCInterface {
-	
 		public long getMyInt();
 		
 		public String getMyString();
@@ -18,7 +17,6 @@ public interface IReadOnlyVariableStatemachine extends IStatemachine {
 	public SCInterface getSCInterface();
 	
 	public interface SCIA {
-	
 		public long getMyInt();
 		
 		public String getMyString();

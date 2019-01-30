@@ -2,8 +2,7 @@ package org.yakindu.scr.triggerguardexpressions;
 
 
 public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpressionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean e1;
 		
 		public void raiseE1() {
@@ -31,7 +30,6 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 			e2 = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

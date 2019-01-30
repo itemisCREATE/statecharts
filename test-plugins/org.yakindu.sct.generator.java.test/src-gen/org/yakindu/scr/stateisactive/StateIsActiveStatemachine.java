@@ -2,8 +2,7 @@ package org.yakindu.scr.stateisactive;
 
 
 public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean event1;
 		
 		public void raiseEvent1() {
@@ -14,7 +13,6 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 			event1 = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

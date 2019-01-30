@@ -2,8 +2,7 @@ package org.yakindu.scr.staticchoice;
 
 
 public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean reset;
 		
 		public void raiseReset() {
@@ -24,7 +23,6 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 			reset = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

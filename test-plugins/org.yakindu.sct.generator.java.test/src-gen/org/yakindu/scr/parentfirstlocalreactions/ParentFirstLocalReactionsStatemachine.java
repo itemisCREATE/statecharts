@@ -2,8 +2,7 @@ package org.yakindu.scr.parentfirstlocalreactions;
 
 
 public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalReactionsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean e;
 		
 		public void raiseE() {
@@ -98,7 +97,6 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 			e = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

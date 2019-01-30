@@ -2,8 +2,7 @@ package org.yakindu.scr.logicalor;
 
 
 public class LogicalOrStatemachine implements ILogicalOrStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private long x;
 		
 		public long getX() {
@@ -29,7 +28,6 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 		}
 		
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

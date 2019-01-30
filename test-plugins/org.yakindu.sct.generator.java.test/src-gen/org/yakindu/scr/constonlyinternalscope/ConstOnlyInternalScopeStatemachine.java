@@ -2,8 +2,7 @@ package org.yakindu.scr.constonlyinternalscope;
 
 
 public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalScopeStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean e;
 		
 		private long eValue;
@@ -23,7 +22,6 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 			e = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

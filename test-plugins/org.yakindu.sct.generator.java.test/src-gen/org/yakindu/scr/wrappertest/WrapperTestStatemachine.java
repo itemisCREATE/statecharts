@@ -5,8 +5,7 @@ import java.util.List;
 import org.yakindu.scr.ITimer;
 
 public class WrapperTestStatemachine implements IWrapperTestStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private List<SCInterfaceListener> listeners = new LinkedList<SCInterfaceListener>();
 		
 		public List<SCInterfaceListener> getListeners() {
@@ -76,7 +75,6 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		}
 		
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

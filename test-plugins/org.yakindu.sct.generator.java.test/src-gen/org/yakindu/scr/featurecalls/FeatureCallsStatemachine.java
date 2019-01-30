@@ -2,8 +2,7 @@ package org.yakindu.scr.featurecalls;
 
 
 public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
-	protected class SCIMyInterfaceImpl implements SCIMyInterface {
-	
+	protected static class SCIMyInterfaceImpl implements SCIMyInterface {
 		private boolean event1;
 		
 		public void raiseEvent1() {
@@ -24,7 +23,6 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 			event1 = false;
 		}
 	}
-	
 	protected SCIMyInterfaceImpl sCIMyInterface;
 	
 	private boolean initialized = false;

@@ -2,8 +2,7 @@ package org.yakindu.scr.constonlydefaultscope;
 
 
 public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScopeStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		public long getB() {
 			return b;
 		}
@@ -13,11 +12,9 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		}
 		
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
-	protected class SCIAImpl implements SCIA {
-	
+	protected static class SCIAImpl implements SCIA {
 		private boolean e;
 		
 		private long eValue;
@@ -37,7 +34,6 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 			e = false;
 		}
 	}
-	
 	protected SCIAImpl sCIA;
 	
 	private boolean initialized = false;

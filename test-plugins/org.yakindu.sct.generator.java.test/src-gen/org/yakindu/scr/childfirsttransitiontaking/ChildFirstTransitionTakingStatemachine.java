@@ -2,20 +2,25 @@ package org.yakindu.scr.childfirsttransitiontaking;
 
 
 public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransitionTakingStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
+		protected IChildFirstTransitionTakingStatemachine parent;
+		
+		public SCInterfaceImpl(IChildFirstTransitionTakingStatemachine parent) {
+			this.parent = parent;
+		}
+		
 		private boolean e;
 		
 		public void raiseE() {
 			e = true;
-			runCycle();
+			parent.runCycle();
 		}
 		
 		private boolean go;
 		
 		public void raiseGo() {
 			go = true;
-			runCycle();
+			parent.runCycle();
 		}
 		
 		private long cLocalReaction;
@@ -43,7 +48,6 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 			go = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -74,7 +78,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	
 	
 	public ChildFirstTransitionTakingStatemachine() {
-		sCInterface = new SCInterfaceImpl();
+		sCInterface = new SCInterfaceImpl(this);
 	}
 	
 	public void init() {

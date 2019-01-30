@@ -2,8 +2,7 @@ package org.yakindu.scr.shallowhistorywithdeepentry;
 
 
 public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryWithDeepEntryStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean toZ;
 		
 		public void raiseToZ() {
@@ -35,7 +34,6 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 			toA = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

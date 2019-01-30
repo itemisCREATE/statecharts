@@ -2,8 +2,7 @@ package org.yakindu.scr.ckeywords;
 
 
 public class CKeywordsStatemachine implements ICKeywordsStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean auto;
 		
 		public void raiseAuto() {
@@ -281,7 +280,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			breakEvent = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;

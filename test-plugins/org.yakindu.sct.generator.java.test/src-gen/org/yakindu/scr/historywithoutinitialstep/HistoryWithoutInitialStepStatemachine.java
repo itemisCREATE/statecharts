@@ -2,8 +2,7 @@ package org.yakindu.scr.historywithoutinitialstep;
 
 
 public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutInitialStepStatemachine {
-	protected class SCInterfaceImpl implements SCInterface {
-	
+	protected static class SCInterfaceImpl implements SCInterface {
 		private boolean toA;
 		
 		public void raiseToA() {
@@ -35,7 +34,6 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 			next = false;
 		}
 	}
-	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
