@@ -269,6 +269,7 @@ public class StatechartDefinitionSection extends Composite implements IPersistab
 		initXtextSelectionProvider(text);
 		initContextMenu(text);
 		text.addModifyListener((event) -> editorPart.firePropertyChange(IEditorPart.PROP_DIRTY));
+		text.setEnabled(editorPart.isEditable());
 		return embeddedEditor;
 	}
 
