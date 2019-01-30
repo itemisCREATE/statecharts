@@ -171,18 +171,18 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 	}
 	
 
-	def protected IScope addScopeForEnumType(EnumerationType element, IScope scope_finalParam_,
+	def protected IScope addScopeForEnumType(EnumerationType element, IScope parentScope,
 		Predicate<IEObjectDescription> predicate) {
-		var scope = scope_finalParam_
+		var scope = parentScope
 		scope = Scopes.scopeFor((element).getEnumerator(), scope)
 		scope = new FilteringScope(scope, predicate)
 		return scope
 	}
 
-	def protected IScope addScopeForComplexType(ComplexType type, IScope scope_finalParam_,
+	def protected IScope addScopeForComplexType(ComplexType type, IScope parentScope,
 		Predicate<IEObjectDescription> predicate) {
-		var scope = scope_finalParam_
-		scope = Scopes.scopeFor(type.getAllFeatures(), scope)
+		var scope = parentScope
+		scope = Scopes.scopeFor(type.getAllFeatures().filter[!isStatic], scope)
 		scope = new FilteringScope(scope, predicate)
 		return scope
 	}
