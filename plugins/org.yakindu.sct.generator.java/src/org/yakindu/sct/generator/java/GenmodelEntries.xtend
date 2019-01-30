@@ -68,6 +68,10 @@ class GenmodelEntries {
 	def private FeatureParameterValue getUseJavaIntForInteger(GeneratorEntry it) {
 		generalFeatures?.getParameterValue(IJavaFeatureConstants::USE_JAVA_INT_FOR_INTEGER)
 	}
+	
+	def private FeatureParameterValue getInEventQueueParameter(GeneratorEntry it) {
+		generalFeatures?.getParameterValue(IJavaFeatureConstants::IN_EVENT_QUEUE)
+	}
 
 	def getLicenseText(GeneratorEntry it) {
 		if (licenseTextParameter !== null) {
@@ -154,5 +158,13 @@ class GenmodelEntries {
 	
 	def tracingUsed(GeneratorEntry it) {
 		return (tracingEnterState || tracingExitState)
+	}
+	
+	def inEventQueue(GeneratorEntry it) {
+		if(inEventQueueParameter !== null) {
+			inEventQueueParameter.booleanValue
+		} else {
+			false
+		}
 	}
 }

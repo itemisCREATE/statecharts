@@ -25,54 +25,53 @@ public interface IJavaFeatureConstants {
 	public static final String BASE_PACKAGE = "basePackage";
 
 	public static final String IMPLEMENTATION_SUFFIX = "implementationSuffix";
-	
+
 	public static final String GENERAL_FEATURES = "GeneralFeatures";
-	
+
 	public static final String CREATE_EVENTBASEDSTATEMACHINE = "EventBasedStatemachine";
-	
+
 	public static final String RUNTIME_SERVICE = "RuntimeService";
-	
+
 	public static final String TIMER_SERVICE = "TimerService";
-	
+
 	public static final String INTERFACE_OBSERVER_SUPPORT = "InterfaceObserverSupport";
-	
+
 	public static final String GENERIC_INTERFACE_SUPPORT = "GenericInterfaceSupport";
-	
+
 	public static final String STATEMACHINE_FACTORY_SUPPORT = "StatemachineFactorySupport";
-	
+
 	public static final String USE_JAVA_INT_FOR_INTEGER = "UseJavaIntForInteger";
-	
+
+	public static final String IN_EVENT_QUEUE = "InEventQueue";
+
 	public static final String FEATURE_TRACING = "Tracing";
 
 	public static final String PARAMETER_TRACING_ENTER_STATE = "enterState";
-	
+
 	public static final String PARAMETER_TRACING_EXIT_STATE = "exitState";
-	
+
 	/* Constants related to the RunnableWrapper feature */
-	
+
 	public static final String FEATURE_RUNNABLE_WRAPPER = "RunnableWrapper";
-	
+
 	public static final String RUNNABLE_WRAPPER_NAME_PREFIX_DEFAULT = "";
-	
+
 	public static final String RUNNABLE_WRAPPER_NAME_SUFFIX_DEFAULT = "Runnable";
-	
+
 	public static final String FEATURE_SYCHRONIZED_WRAPPER = "SynchronizedWrapper";
-	
+
 	public static final String SYCHRONIZED_WRAPPER_NAME_PREFIX_DEFAULT = "Synchronized";
-	
+
 	public static final String SYCHRONIZED_WRAPPER_NAME_SUFFIX_DEFAULT = "";
-	
+
 	public static final String VALUE_NAME_PREFIX = "namePrefix";
-	
+
 	public static final String VALUE_NAME_SUFFIX = "nameSuffix";
-	
-	public static final String[] JAVA_KEYWORDS = { "abstract", "assert",
-		"boolean", "break", "byte", "case", "catch", "char", "class",
-		"const", "continue", "default", "do", "double", "else", "enum",
-		"extends", "false", "final", "finally", "float", "for", "goto", "if",
-		"implements", "import", "instanceof", "int", "interface", "long",
-		"native", "new", "null", "package", "private", "protected", "public",
-		"return", "short", "static", "strictfp", "super", "switch",
-		"synchronized", "this", "throw", "throws", "transient", "true" , "try",
-		"void", "volatile", "while" };
+
+	public static final String[] JAVA_KEYWORDS = {"abstract", "assert", "boolean", "break", "byte", "case", "catch",
+			"char", "class", "const", "continue", "default", "do", "double", "else", "enum", "extends", "false",
+			"final", "finally", "float", "for", "goto", "if", "implements", "import", "instanceof", "int", "interface",
+			"long", "native", "new", "null", "package", "private", "protected", "public", "return", "short", "static",
+			"strictfp", "super", "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try",
+			"void", "volatile", "while"};
 }
