@@ -34,7 +34,7 @@ public class TypeValidator {
 	
 	@Inject
 	protected ITypeSystem registry;
-
+	
 	public void assertNotType(InferenceResult currentResult, String msg, IValidationIssueAcceptor acceptor,
 			InferenceResult... candidates) {
 		if (currentResult == null)
@@ -106,11 +106,12 @@ public class TypeValidator {
 			IValidationIssueAcceptor acceptor) {
 		List<InferenceResult> bindings1 = result1.getBindings();
 		List<InferenceResult> bindings2 = result2.getBindings();
-		msg = String.format(TYPE_BINDINGS_NOT_SAME, result2, result1);
 		if (bindings1.size() != bindings2.size()) {
+			msg = String.format(TYPE_BINDINGS_NOT_SAME, result2, result1);
 			acceptor.accept(new ValidationIssue(Severity.WARNING, msg, NOT_SAME_CODE));
 			return;
 		}
+		msg = msg != null ? msg : String.format(ASSERT_COMPATIBLE, result1, result2);
 		for (int i = 0; i < bindings1.size(); i++) {
 			assertSame(bindings1.get(i), bindings2.get(i), msg, acceptor);
 		}
