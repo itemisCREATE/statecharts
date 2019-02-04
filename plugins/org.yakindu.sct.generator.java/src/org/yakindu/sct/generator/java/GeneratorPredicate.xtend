@@ -9,6 +9,14 @@
 */
 package org.yakindu.sct.generator.java
 
+import com.google.inject.Inject
+import org.yakindu.sct.generator.core.extensions.AnnotationExtensions
+import org.yakindu.sct.model.sgen.GeneratorEntry
+
 class GeneratorPredicate {
+	@Inject protected AnnotationExtensions annotations
 	
+	def isEventDriven(GeneratorEntry entry) {
+		annotations.isEventDriven(entry)
+	}
 }
