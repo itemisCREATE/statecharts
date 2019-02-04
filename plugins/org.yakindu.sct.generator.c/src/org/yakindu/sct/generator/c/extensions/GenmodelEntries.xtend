@@ -29,7 +29,7 @@ class GenmodelEntries {
 		if (licenseTextParameter !== null) {
 			return "/* " + licenseTextParameter.stringValue.trim + " */"
 		}
-		return null
+		return LICENSE_STANDARD_TEXT
 	}
 	
 	def private getIdentifierSettingsFeature(GeneratorEntry it) {
