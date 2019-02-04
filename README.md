@@ -65,9 +65,9 @@ Select 'Import projects' on the 'working directory' subfolder
 4. Set the target platform to org.yakindu.base.target/oxygen.target
 Open the target file and click on the link for setting the target platform (takes some minutes the first time)
 5. Build relevant Xtext grammars
-Rightclick on org.yakindu.base.expressions/Expressions.xtext => Run As.. => Generate Xtext Artifacts
-Rightclick on org.yakindu.sct.stext/SText.xtext => Run As.. => Generate Xtext Artifacts
-Rightclick org.yakindu.sct.generator.genmodel/SGen.xtext => Run As.. => Generate Xtext Artifacts
+    1. Rightclick on org.yakindu.base.expressions/Expressions.xtext => Run As... => Generate Xtext Artifacts
+    1. Rightclick on org.yakindu.sct.stext/SText.xtext => Run As... => Generate Xtext Artifacts
+    1. Rightclick org.yakindu.sct.generator.genmodel/SGen.xtext => Run As... => Generate Xtext Artifacts
 6. Execute "Clean project" on the `org.yakindu.sct.model.sruntime` project
 
 
