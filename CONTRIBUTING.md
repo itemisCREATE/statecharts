@@ -1,8 +1,8 @@
-## Build everything from source
+# Build everything from source
 
 If you are familiar with Eclipse plugin development then you may want to checkout the source, setup the development environment, and start working with it. In this case you have the options described below.
 
-### Setting up the development environment using Oomph (recommended)
+## Setting up the development environment using Oomph (recommended)
 
 1. Download the <a href="https://wiki.eclipse.org/Eclipse_Oomph_Installer" target="_blank">Oomph Eclipse Installer</a> for your platform and install it.
 2. Start Oomph by executing *eclipse-installer/eclipse-inst*.
@@ -23,19 +23,19 @@ If you are familiar with Eclipse plugin development then you may want to checkou
 17. Click on *Finish*.
 18. Click *Proceed* three times in order to confirm the execution of each launch despite any existing errors.
 
-### How to setup your developer workspace without Oomph
+## How to setup your developer workspace without Oomph
 1. Download latest Eclipse from https://www.eclipse.org/downloads/
 2. Install the latest Xtext release -> Help / Install new Software / select '2018-09 - http://download.eclipse.org/releases/2018-09'
-2.1 Select Modeling / Xtext Complete SDK 
+    * Select *Modeling / Xtext Complete SDK*
 3. Select the Git perspective and clone the following Git Repository:
 https://github.com/Yakindu/statecharts.git
 Select 'Import projects' on the 'working directory' subfolder
-4. Set the target platform to org.yakindu.base.target/2018-09.target
+4. Set the target platform to `org.yakindu.base.target/2018-09.target`
 Open the target file and click on the link for setting the target platform (takes some minutes the first time)
-5. Build relevant Xtext grammars
-    1. Rightclick on org.yakindu.base.expressions/Expressions.xtext => Run As... => Generate Xtext Artifacts
-    1. Rightclick on org.yakindu.sct.stext/SText.xtext => Run As... => Generate Xtext Artifacts
-    1. Rightclick org.yakindu.sct.generator.genmodel/SGen.xtext => Run As... => Generate Xtext Artifacts
+5. Build the needed Xtext grammars by right-clicking the following files and choosing *Run As... => Generate Xtext Artifacts*:
+    1. `org.yakindu.base.expressions/Expressions.xtext`
+    1. `org.yakindu.sct.stext/SText.xtext`
+    1. `org.yakindu.sct.generator.genmodel/SGen.xtext`
 
 
 After these steps, all projects should compile without errors. To launch a runtime instance which has these projects as installed plugins, just right-click on a project => Run As => Eclipse Application
