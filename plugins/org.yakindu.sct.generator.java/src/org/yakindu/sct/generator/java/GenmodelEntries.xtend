@@ -73,7 +73,7 @@ class GenmodelEntries {
 		if (licenseTextParameter !== null) {
 			return "/** " + licenseTextParameter.stringValue.trim + " */"
 		}
-		return null
+		LICENSE_STANDARD_TEXT
 	}
 
 	def getBasePackageName(GeneratorEntry it) {

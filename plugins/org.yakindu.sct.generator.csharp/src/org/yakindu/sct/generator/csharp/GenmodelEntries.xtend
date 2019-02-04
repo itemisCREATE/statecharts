@@ -65,7 +65,7 @@ class GenmodelEntries {
 		if (licenseTextParameter !== null) {
 			return "/**" + licenseTextParameter.stringValue + "*/"
 		}
-		return null
+		return LICENSE_STANDARD_TEXT
 	}
 
 	def getNamespaceName(GeneratorEntry it) {
