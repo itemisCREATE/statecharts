@@ -7,6 +7,16 @@ The free to use, open source toolkit YAKINDU Statechart Tools (SCT) provides an 
 
 ## Professional Support
 Need professional support for YAKINDU Statechart Tools? Contact us: statecharts@itemis.com
+
+## Documentation & Usage
+The documentation can be found via the following links:
+* [The user guide](https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide)
+* [Tutorials](https://www.itemis.com/en/yakindu/state-machine/documentation/tutorials)
+* [Example projects](https://www.itemis.com/en/yakindu/state-machine/documentation/examples/)
+    * [How to use the example projects](https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide/edit_using_the_example_wizard)
+    * [Example repository on GitHub](https://github.com/Yakindu/examples)
+* [Technical FAQ](https://www.itemis.com/en/yakindu/state-machine/documentation/technical-faq/)
+
 ## License
 
 The source code of YAKINDU Statechart Tools is provided under the <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>. 
