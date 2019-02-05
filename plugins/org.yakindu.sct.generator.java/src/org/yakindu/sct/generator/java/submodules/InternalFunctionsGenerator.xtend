@@ -23,10 +23,7 @@ import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
-import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
-
-import static org.eclipse.xtext.util.Strings.*
 
 @Singleton
 class InternalFunctionsGenerator {
@@ -39,6 +36,7 @@ class InternalFunctionsGenerator {
 	
 	@Inject protected extension FieldDeclarationGenerator
 	@Inject protected extension InterfaceFunctionsGenerator
+	@Inject protected extension EventCode
 	
 	def clearInEvents(ExecutionFlow flow) '''
 		/**
@@ -75,6 +73,33 @@ class InternalFunctionsGenerator {
 			«ENDFOR»
 		}
 
+	'''
+
+	def internalEventValueAccess(EventDefinition it) '''
+		«IF hasValue»
+			private «typeSpecifier.targetLanguageName» get«name.asEscapedName»Value() {
+				«getIllegalAccessValidation()»
+				return «valueIdentifier»;
+			}
+		«ENDIF»
+	'''
+	
+	def internalScopeFunctions (ExecutionFlow flow) '''
+		«FOR event : flow.internalScopeEvents»
+			«event.internalEventRaiser»
+
+			«event.eventValueGetter»
+
+		«ENDFOR»
+		«FOR internal : flow.internalScopes»
+			«IF internal.hasOperations»
+				public void set«internal.internalOperationCallbackName»(
+						«internal.internalOperationCallbackName» operationCallback) {
+					this.operationCallback = operationCallback;
+				}
+
+			«ENDIF»
+		«ENDFOR»
 	'''
 	
 	def functionImplementations(ExecutionFlow it) '''
@@ -121,5 +146,10 @@ class InternalFunctionsGenerator {
 			«code.toString.trim»
 		}
 
+	'''
+	
+	def getIllegalAccessValidation(EventDefinition it) '''
+		if (! «name.asEscapedIdentifier» ) 
+			throw new IllegalStateException("Illegal event value access. Event «name.asEscapedName» is not raised!");
 	'''
 }

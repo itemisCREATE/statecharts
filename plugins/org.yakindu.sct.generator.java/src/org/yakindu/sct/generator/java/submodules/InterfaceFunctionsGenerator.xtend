@@ -21,7 +21,6 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 @Singleton
 class InterfaceFunctionsGenerator {
@@ -83,40 +82,6 @@ class InterfaceFunctionsGenerator {
 		public List<«scope.getInterfaceListenerName»> getListeners() {
 			return listeners;
 		}
-	'''
-	
-	def internalEventRaiser(EventDefinition it) '''
-		private void raise«name.asEscapedName»(«IF hasValue»«typeSpecifier.targetLanguageName» value«ENDIF») {
-			«IF hasValue»«valueIdentifier» = value;«ENDIF»
-			«identifier» = true;
-		}
-	'''
-
-	def internalEventValueAccess(EventDefinition it) '''
-		«IF hasValue»
-			private «typeSpecifier.targetLanguageName» get«name.asEscapedName»Value() {
-				«getIllegalAccessValidation()»
-				return «valueIdentifier»;
-			}
-		«ENDIF»
-	'''
-	
-	def internalScopeFunctions (ExecutionFlow flow) '''
-		«FOR event : flow.internalScopeEvents»
-			«event.internalEventRaiser»
-
-			«event.internalEventValueAccess»
-
-		«ENDFOR»
-		«FOR internal : flow.internalScopes»
-			«IF internal.hasOperations»
-				public void set«internal.internalOperationCallbackName»(
-						«internal.internalOperationCallbackName» operationCallback) {
-					this.operationCallback = operationCallback;
-				}
-
-			«ENDIF»
-		«ENDFOR»
 	'''
 	
 	protected def generateClearOutEvents(InterfaceScope scope) '''

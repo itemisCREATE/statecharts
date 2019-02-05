@@ -19,6 +19,7 @@ import org.yakindu.sct.generator.java.submodules.lifecycle.RunCycle
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
+import org.yakindu.sct.generator.java.GeneratorPredicate
 
 class EventDrivenRunCycle extends RunCycle {
 	@Inject protected extension Naming
@@ -27,6 +28,7 @@ class EventDrivenRunCycle extends RunCycle {
 	@Inject protected extension FlowCode
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension GenmodelEntries
+	@Inject protected extension GeneratorPredicate
 	
 	override runCycle(ExecutionFlow it) {
 		if(!hasLocalEvents) {
@@ -37,7 +39,13 @@ class EventDrivenRunCycle extends RunCycle {
 				if (!initialized)
 					throw new IllegalStateException(
 							"The state machine needs to be initialized first by calling the init() function.");
-			
+				«IF needsRunCycleGuard»
+				if(«runCycleGuard») {
+					return;
+				}
+				«runCycleGuard» = true;
+				«ENDIF»
+				
 				clearOutEvents();
 				singleCycle();
 				clearEvents();
@@ -47,6 +55,10 @@ class EventDrivenRunCycle extends RunCycle {
 					internalEventQueue.poll().run();
 					clearEvents();
 				}
+				
+				«IF needsRunCycleGuard»
+				«runCycleGuard» = false;
+				«ENDIF»
 			}
 			
 			«it.singleCycle»

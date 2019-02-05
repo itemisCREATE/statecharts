@@ -13,7 +13,6 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.Set
 import org.yakindu.base.types.Direction
-import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.java.GenmodelEntries
@@ -38,12 +37,7 @@ class EventCode {
 	@Inject protected extension FieldDeclarationGenerator
 	
 	def generateEventDefinition(EventDefinition event, GeneratorEntry entry, InterfaceScope scope) '''
-		private boolean «event.identifier»;
-
-		«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-			private «event.typeSpecifier.targetLanguageName» «event.valueIdentifier»;
-
-		«ENDIF»
+		«event.fieldDeclaration»
 		«IF event.direction == Direction::IN»
 			«event.generateInEventDefinition»
 		«ENDIF»
@@ -51,59 +45,95 @@ class EventCode {
 			«event.generateOutEventDefinition(entry, scope)»
 		«ENDIF»
 	'''
+	
+	def fieldDeclaration(EventDefinition event) {
+		'''
+		private boolean «event.identifier»;
+		
+		«IF event.hasValue»
+			private «event.typeSpecifier.targetLanguageName» «event.valueIdentifier»;
+			
+		«ENDIF»
+		'''
+	}
 			
 	def generateOutEventDefinition(EventDefinition event, GeneratorEntry entry, InterfaceScope scope) '''
 		public boolean isRaised«event.name.asName»() {
 			return «event.identifier»;
 		}
 		
-		«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-			protected void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
-				«event.identifier» = true;
-				«event.valueIdentifier» = value;
-				«IF entry.createInterfaceObserver»
-				for («scope.interfaceListenerName» listener : listeners) {
-					listener.on«event.name.asEscapedName»Raised(value);
-				}
-				«ENDIF»
-			}
-			
-			public «event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
-				«event.getIllegalAccessValidation()»
-				return «event.valueIdentifier»;
-			}
-
-		«ELSE»
-			protected void raise«event.name.asName»() {
-				«event.identifier» = true;
-				«IF entry.createInterfaceObserver»
-					for («scope.interfaceListenerName» listener : listeners) {
-						listener.on«event.name.asEscapedName»Raised();
-					}
-				«ENDIF»
-			}
-
+		«outEventRaiser(event, entry, scope)»
+		
+		«IF event.hasValue»
+			«eventValueGetter(event)»
 		«ENDIF»
 	'''
 
 	def generateInEventDefinition(EventDefinition event) '''
-		«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-			public void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
-				«event.identifier» = true;
-				«event.valueIdentifier» = value;
-			}
-			
-			protected «event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
-				«event.getIllegalAccessValidation()»
-				return «event.valueIdentifier»;
-			}
-		«ELSE»
-			public void raise«event.name.asName»() {
-				«event.identifier» = true;
-			}
+		«inEventRaiser(event)»
+		«IF event.hasValue»
+			«eventValueGetter(event)»
 		«ENDIF»
 
 	'''
+	
+	def eventValueGetter(EventDefinition it) {
+		'''
+		«eventValueGetterVisibility» «typeSpecifier.targetLanguageName» get«name.asName»Value() {
+			«getIllegalAccessValidation»
+			return «valueIdentifier»;
+		}
+		'''
+	}
+	
+	def protected eventValueGetterVisibility(EventDefinition it) {
+		switch(event.direction) {
+			case IN: {
+				"protected"
+			}
+			case LOCAL: {
+				"private"
+			}
+			case OUT: {
+				"public"
+			}
+			
+		}
+	}
+	
+	def internalEventRaiser(EventDefinition it) {
+		eventRaiser("private", null)
+	}
+	
+	def inEventRaiser(EventDefinition it) {
+		eventRaiser("public", null)
+	}
+	
+	def outEventRaiser(EventDefinition it, GeneratorEntry entry, InterfaceScope scope) {
+		if(entry.createInterfaceObserver) {
+			eventRaiser("protected", scope.interfaceListenerName)
+		} else {
+			eventRaiser("protected", null)
+		}
+	}
+	
+	def protected eventRaiser(EventDefinition it, String visibility, String interfaceListenerName) {
+		'''
+			«IF hasValue»
+			«visibility» void raise«name.asName»(«typeSpecifier.targetLanguageName» value) {
+				«valueIdentifier» = value;
+			«ELSE»
+				«visibility» void raise«name.asName»() {
+			«ENDIF»
+				«identifier» = true;
+				«IF !interfaceListenerName.nullOrEmpty»
+					for («interfaceListenerName» listener : listeners) {
+						listener.on«event.name.asEscapedName»Raised();
+					}
+				«ENDIF»
+			}
+		'''	
+	}
 	
 	def getIllegalAccessValidation(EventDefinition it) '''
 		if (! «name.asEscapedIdentifier» ) 

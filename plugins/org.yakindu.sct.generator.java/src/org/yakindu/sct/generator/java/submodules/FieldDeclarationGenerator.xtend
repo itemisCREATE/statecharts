@@ -19,7 +19,6 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
 
@@ -31,23 +30,12 @@ class FieldDeclarationGenerator {
 	@Inject protected extension SExecExtensions
 	@Inject protected extension GenmodelEntries
 	@Inject protected extension VariableCode
+	@Inject protected extension EventCode
 	
 	def internalEventFields(ExecutionFlow flow) '''
 		«FOR event : flow.internalScopeEvents»
-
-			«event.internalEventField»
-			«event.internalEventValueField»
+		«event.fieldDeclaration»
 		«ENDFOR»
-	'''
-	
-	def internalEventField(EventDefinition it) '''
-			private boolean «event.identifier»;
-	'''
-	
-	def internalEventValueField(EventDefinition it) '''
-		«IF hasValue»
-			private «typeSpecifier.targetLanguageName» «valueIdentifier»;
-		«ENDIF»
 	'''
 	
 	def createFieldDeclarations(ExecutionFlow flow, GeneratorEntry entry) '''

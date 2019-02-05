@@ -9,10 +9,14 @@
 */
 package org.yakindu.sct.generator.java.submodules.eventdriven
 
+import com.google.inject.Inject
+import org.yakindu.sct.generator.java.GeneratorPredicate
 import org.yakindu.sct.generator.java.submodules.EventCode
 import org.yakindu.sct.model.stext.stext.EventDefinition
 
 class EventDrivenEventCode extends EventCode {
+	@Inject protected extension GeneratorPredicate
+	
 	override generateInEventDefinition(EventDefinition event) '''
 		«IF event.hasValue»
 			public void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
@@ -33,4 +37,59 @@ class EventDrivenEventCode extends EventCode {
 		«ENDIF»
 
 	'''
+	
+	override internalEventRaiser(EventDefinition it) '''
+		private void raise«name.asEscapedName»(«IF hasValue»final «typeSpecifier.targetLanguageName» value«ENDIF») {
+
+			internalEventQueue.add( new Runnable() {
+				@Override public void run() {
+					«IF hasValue»«valueIdentifier» = value;«ENDIF»
+					«identifier» = true;					
+					singleCycle();
+				}
+			});
+		}
+	'''
+	
+	override inEventRaiser(EventDefinition it) {
+		if(needsInEventQueue(flow)) {
+			'''
+			public void raise«name.asEscapedName»(«IF hasValue»final «typeSpecifier.targetLanguageName» value«ENDIF») {
+				
+				inEventQueue.add( new Runnable() {
+					@Override public void run() {
+						«IF hasValue»«valueIdentifier» = value;«ENDIF»
+						«identifier» = true;					
+						singleCycle();
+					}
+				});
+			}
+			'''
+		} else {
+			'''
+			public void raise«name.asEscapedName»(«IF hasValue»final «typeSpecifier.targetLanguageName» value«ENDIF») {
+				«IF hasValue»«valueIdentifier» = value;«ENDIF»
+				«identifier» = true;					
+				runCycle();
+			}
+			'''
+		}
+	}
+	
+	def protected inEventQueueRaiser(EventDefinition it) {
+		'''
+		public void raise«name.asEscapedName»(«IF hasValue»final «typeSpecifier.targetLanguageName» value«ENDIF») {
+			
+			inEventQueue.add( new Runnable() {
+				@Override public void run() {
+					«IF hasValue»«valueIdentifier» = value;«ENDIF»
+					«identifier» = true;					
+					singleCycle();
+				}
+			});
+		}
+		'''
+	}
+	
+	
 }
