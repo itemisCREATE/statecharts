@@ -31,6 +31,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -46,6 +47,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	private final State[] stateVector = new State[2];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public RaiseEventStatemachine() {

@@ -23,6 +23,7 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -38,6 +39,7 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 	private final State[] stateVector = new State[2];
 	
 	private int nextStateIndex;
+	
 	
 	
 	

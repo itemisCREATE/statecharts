@@ -15,7 +15,6 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
 	
 	protected class SCIAImpl implements SCIA {
 	
@@ -39,6 +38,9 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		}
 	}
 	
+	
+	protected SCInterfaceImpl sCInterface;
+	
 	protected SCIAImpl sCIA;
 	
 	private boolean initialized = false;
@@ -53,6 +55,7 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public ConstOnlyDefaultScopeStatemachine() {

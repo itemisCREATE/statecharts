@@ -86,6 +86,7 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -99,6 +100,7 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public BooleanExpressionsStatemachine() {

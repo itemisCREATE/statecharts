@@ -106,6 +106,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -123,6 +124,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public StringExpressionsStatemachine() {

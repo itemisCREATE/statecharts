@@ -61,6 +61,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -93,6 +94,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	private ITimer timer;
 	
 	private final boolean[] timeEvents = new boolean[2];
+	
 	public PerformanceTestStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}

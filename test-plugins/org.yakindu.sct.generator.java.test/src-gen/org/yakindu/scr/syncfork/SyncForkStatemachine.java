@@ -23,6 +23,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -40,6 +41,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 	private final State[] stateVector = new State[2];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public SyncForkStatemachine() {

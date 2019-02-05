@@ -30,6 +30,7 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -45,6 +46,7 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public EnterStateStatemachine() {

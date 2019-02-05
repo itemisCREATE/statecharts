@@ -32,6 +32,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -47,6 +48,7 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	private final State[] stateVector = new State[2];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public EventDrivenOutEventsStatemachine() {

@@ -16,6 +16,7 @@ public class NullCheckStatemachine implements INullCheckStatemachine {
 	private int nextStateIndex;
 	
 	
+	
 	public NullCheckStatemachine() {
 	}
 	

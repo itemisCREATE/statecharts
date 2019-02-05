@@ -106,6 +106,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -126,6 +127,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	private ITimer timer;
 	
 	private final boolean[] timeEvents = new boolean[3];
+	
 	public RunnableTestStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}

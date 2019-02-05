@@ -25,6 +25,7 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -41,13 +42,16 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 	private int nextStateIndex;
 	
 	
+	
 	protected long getB() {
 		return b;
 	}
 	
+	
 	protected long getC() {
 		return c;
 	}
+	
 	
 	public ConstOnlyInternalScopeStatemachine() {
 		sCInterface = new SCInterfaceImpl();

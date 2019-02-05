@@ -10,6 +10,7 @@ public class TracingStatemachine implements ITracingStatemachine {
 	
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -25,6 +26,7 @@ public class TracingStatemachine implements ITracingStatemachine {
 	private int nextStateIndex;
 	
 	private List <ITracingListener<State>> ifaceTraceObservers = new LinkedList <ITracingListener<State>>();
+	
 	
 	
 	public TracingStatemachine() {

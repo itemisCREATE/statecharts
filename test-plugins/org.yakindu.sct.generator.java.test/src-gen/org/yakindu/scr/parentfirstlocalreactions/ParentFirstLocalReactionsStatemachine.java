@@ -100,6 +100,7 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -117,6 +118,7 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public ParentFirstLocalReactionsStatemachine() {

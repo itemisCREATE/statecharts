@@ -105,6 +105,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		
 	}
 	
+	
 	protected SCIIfImpl sCIIf;
 	
 	private boolean initialized = false;
@@ -123,68 +124,75 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	
 	private final boolean[] timeEvents = new boolean[1];
 	
+	
 	private boolean operationCallbackEvent;
 	
 	private boolean listeners;
 	private long timerVariable;
 	
-	protected void setTimerVariable(long value) {
-		timerVariable = value;
-	}
-	
 	protected long getTimerVariable() {
 		return timerVariable;
 	}
 	
-	private long isActive;
-	
-	protected void setIsActive(long value) {
-		isActive = value;
+	protected void setTimerVariable(long value) {
+		this.timerVariable = value;
 	}
+	
+	
+	private long isActive;
 	
 	protected long getIsActive() {
 		return isActive;
 	}
 	
-	private long init;
-	
-	protected void setInit(long value) {
-		init = value;
+	protected void setIsActive(long value) {
+		this.isActive = value;
 	}
+	
+	
+	private long init;
 	
 	protected long getInit() {
 		return init;
 	}
 	
-	private long enter;
-	
-	protected void setEnter(long value) {
-		enter = value;
+	protected void setInit(long value) {
+		this.init = value;
 	}
+	
+	
+	private long enter;
 	
 	protected long getEnter() {
 		return enter;
 	}
 	
-	private long runCycle;
-	
-	protected void setRunCycle(long value) {
-		runCycle = value;
+	protected void setEnter(long value) {
+		this.enter = value;
 	}
+	
+	
+	private long runCycle;
 	
 	protected long getRunCycle() {
 		return runCycle;
 	}
 	
-	private long sCIIfVariable;
-	
-	protected void setSCIIfVariable(long value) {
-		sCIIfVariable = value;
+	protected void setRunCycle(long value) {
+		this.runCycle = value;
 	}
+	
+	
+	private long sCIIfVariable;
 	
 	protected long getSCIIfVariable() {
 		return sCIIfVariable;
 	}
+	
+	protected void setSCIIfVariable(long value) {
+		this.sCIIfVariable = value;
+	}
+	
 	
 	private InternalOperationCallback operationCallback;
 	public StatechartKeywordsStatemachine() {

@@ -51,6 +51,7 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 		
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -65,6 +66,7 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 	private final State[] stateVector = new State[2];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public OutEventLifeCycleStatemachine() {

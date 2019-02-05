@@ -47,6 +47,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -61,6 +62,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public ChoiceStatemachine() {

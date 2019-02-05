@@ -40,6 +40,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -53,6 +54,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public GuardStatemachine() {

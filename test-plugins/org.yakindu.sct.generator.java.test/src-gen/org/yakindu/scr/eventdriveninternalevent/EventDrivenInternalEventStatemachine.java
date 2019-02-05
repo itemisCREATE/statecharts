@@ -81,6 +81,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -98,6 +99,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	private final State[] stateVector = new State[3];
 	
 	private int nextStateIndex;
+	
 	
 	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();

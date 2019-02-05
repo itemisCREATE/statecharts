@@ -47,6 +47,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -64,6 +65,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	private final State[] stateVector = new State[2];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public SyncJoinStatemachine() {

@@ -106,6 +106,7 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -121,6 +122,7 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public ParentFirstExecutionHierarchyStatemachine() {

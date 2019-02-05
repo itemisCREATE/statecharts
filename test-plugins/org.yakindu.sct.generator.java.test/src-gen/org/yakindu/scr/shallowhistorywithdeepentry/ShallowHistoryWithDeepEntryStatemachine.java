@@ -37,6 +37,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -54,6 +55,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public ShallowHistoryWithDeepEntryStatemachine() {

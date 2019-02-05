@@ -59,6 +59,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -79,6 +80,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	private final State[] stateVector = new State[2];
 	
 	private int nextStateIndex;
+	
 	
 	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();

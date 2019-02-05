@@ -43,6 +43,7 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -56,6 +57,7 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public ExitOnSelfTransitionStatemachine() {

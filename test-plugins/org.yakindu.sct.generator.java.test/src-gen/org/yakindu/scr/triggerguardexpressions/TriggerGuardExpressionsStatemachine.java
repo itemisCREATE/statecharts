@@ -33,6 +33,7 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -46,6 +47,7 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public TriggerGuardExpressionsStatemachine() {

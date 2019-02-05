@@ -50,7 +50,6 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		}
 	}
 	
-	protected SCInterfaceImpl sCInterface;
 	
 	protected class SCINamedImpl implements SCINamed {
 	
@@ -63,6 +62,9 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		}
 		
 	}
+	
+	
+	protected SCInterfaceImpl sCInterface;
 	
 	protected SCINamedImpl sCINamed;
 	
@@ -80,9 +82,11 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 	private int nextStateIndex;
 	
 	
+	
 	protected long getInternalConstant() {
 		return internalConstant;
 	}
+	
 	
 	public ConstantsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

@@ -36,6 +36,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -51,6 +52,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public TypeAliasStatemachine() {

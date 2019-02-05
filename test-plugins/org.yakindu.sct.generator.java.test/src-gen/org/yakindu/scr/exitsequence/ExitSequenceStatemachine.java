@@ -155,6 +155,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -178,6 +179,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	private final State[] stateVector = new State[3];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public ExitSequenceStatemachine() {

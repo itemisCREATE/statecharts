@@ -20,25 +20,28 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	private ITimer timer;
 	
 	private final boolean[] timeEvents = new boolean[2];
-	private long x;
 	
-	protected void setX(long value) {
-		x = value;
-	}
+	private long x;
 	
 	protected long getX() {
 		return x;
 	}
 	
-	private long y;
-	
-	protected void setY(long value) {
-		y = value;
+	protected void setX(long value) {
+		this.x = value;
 	}
+	
+	
+	private long y;
 	
 	protected long getY() {
 		return y;
 	}
+	
+	protected void setY(long value) {
+		this.y = value;
+	}
+	
 	
 	public TimedTransitionsStatemachine() {
 	}

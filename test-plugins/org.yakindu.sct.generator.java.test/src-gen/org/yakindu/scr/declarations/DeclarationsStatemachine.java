@@ -153,7 +153,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
 	
 	protected class SCIIfAImpl implements SCIIfA {
 	
@@ -305,6 +304,9 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 	}
 	
+	
+	protected SCInterfaceImpl sCInterface;
+	
 	protected SCIIfAImpl sCIIfA;
 	
 	private boolean initialized = false;
@@ -318,6 +320,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	
 	
@@ -338,53 +341,58 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	private String evInFValue;
 	private boolean varInA;
 	
-	protected void setVarInA(boolean value) {
-		varInA = value;
-	}
-	
 	protected boolean getVarInA() {
 		return varInA;
 	}
 	
-	private long varInB;
-	
-	protected void setVarInB(long value) {
-		varInB = value;
+	protected void setVarInA(boolean value) {
+		this.varInA = value;
 	}
+	
+	
+	private long varInB;
 	
 	protected long getVarInB() {
 		return varInB;
 	}
 	
-	private double varInC;
-	
-	protected void setVarInC(double value) {
-		varInC = value;
+	protected void setVarInB(long value) {
+		this.varInB = value;
 	}
+	
+	
+	private double varInC;
 	
 	protected double getVarInC() {
 		return varInC;
 	}
 	
-	private String varInD;
-	
-	protected void setVarInD(String value) {
-		varInD = value;
+	protected void setVarInC(double value) {
+		this.varInC = value;
 	}
+	
+	
+	private String varInD;
 	
 	protected String getVarInD() {
 		return varInD;
 	}
 	
-	private long varInE;
-	
-	protected void setVarInE(long value) {
-		varInE = value;
+	protected void setVarInD(String value) {
+		this.varInD = value;
 	}
+	
+	
+	private long varInE;
 	
 	protected long getVarInE() {
 		return varInE;
 	}
+	
+	protected void setVarInE(long value) {
+		this.varInE = value;
+	}
+	
 	
 	public DeclarationsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

@@ -27,7 +27,6 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
 	
 	protected class SCIAImpl implements SCIA {
 	
@@ -53,6 +52,9 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		
 	}
 	
+	
+	protected SCInterfaceImpl sCInterface;
+	
 	protected SCIAImpl sCIA;
 	
 	private boolean initialized = false;
@@ -66,6 +68,7 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public FloatModuloStatemachine() {

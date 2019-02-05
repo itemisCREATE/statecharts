@@ -16,6 +16,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -31,6 +32,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	private final State[] stateVector = new State[2];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public StateIsActiveStatemachine() {

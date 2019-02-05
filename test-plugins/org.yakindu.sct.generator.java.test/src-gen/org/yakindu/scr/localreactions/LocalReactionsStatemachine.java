@@ -17,6 +17,7 @@ public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 		
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -29,6 +30,7 @@ public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public LocalReactionsStatemachine() {

@@ -36,6 +36,7 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -49,6 +50,7 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public GuardedEntryStatemachine() {

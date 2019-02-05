@@ -78,6 +78,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -97,6 +98,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	private ITimer timer;
 	
 	private final boolean[] timeEvents = new boolean[2];
+	
 	public WrapperTestStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}

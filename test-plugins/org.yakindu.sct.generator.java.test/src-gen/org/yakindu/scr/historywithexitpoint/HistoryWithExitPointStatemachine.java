@@ -30,6 +30,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -46,6 +47,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public HistoryWithExitPointStatemachine() {

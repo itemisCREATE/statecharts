@@ -96,6 +96,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -109,6 +110,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public BitExpressionsStatemachine() {

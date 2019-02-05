@@ -65,6 +65,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -86,6 +87,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public ShallowHistoryStatemachine() {

@@ -37,6 +37,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -55,6 +56,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
+	
 	
 	
 	public HistoryWithoutInitialStepStatemachine() {

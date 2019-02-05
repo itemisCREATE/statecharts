@@ -35,7 +35,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		
 	}
 	
-	protected SCISafeImpl sCISafe;
 	
 	protected class SCIUserImpl implements SCIUser {
 	
@@ -66,6 +65,9 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		}
 	}
 	
+	
+	protected SCISafeImpl sCISafe;
+	
 	protected SCIUserImpl sCIUser;
 	
 	private boolean initialized = false;
@@ -85,35 +87,39 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	private int nextStateIndex;
 	
 	
-	private long number1;
 	
-	protected void setNumber1(long value) {
-		number1 = value;
-	}
+	private long number1;
 	
 	protected long getNumber1() {
 		return number1;
 	}
 	
-	private long number2;
-	
-	protected void setNumber2(long value) {
-		number2 = value;
+	protected void setNumber1(long value) {
+		this.number1 = value;
 	}
+	
+	
+	private long number2;
 	
 	protected long getNumber2() {
 		return number2;
 	}
 	
-	private long number3;
-	
-	protected void setNumber3(long value) {
-		number3 = value;
+	protected void setNumber2(long value) {
+		this.number2 = value;
 	}
+	
+	
+	private long number3;
 	
 	protected long getNumber3() {
 		return number3;
 	}
+	
+	protected void setNumber3(long value) {
+		this.number3 = value;
+	}
+	
 	
 	public NamedInterfaceAccessStatemachine() {
 		sCISafe = new SCISafeImpl();
