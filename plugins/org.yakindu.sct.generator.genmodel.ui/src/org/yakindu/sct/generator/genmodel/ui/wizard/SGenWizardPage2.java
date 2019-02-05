@@ -166,7 +166,7 @@ public class SGenWizardPage2 extends WizardPage {
 		}
 		generatorCombo.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent event) {
-				Object element = event.getStructuredSelection().getFirstElement();
+				Object element = ((IStructuredSelection) event.getSelection()).getFirstElement();
 				if (element instanceof InstallMoreGeneratorsItem) {
 					((InstallMoreGeneratorsItem) element).openInstallWizard();
 					generatorCombo.getCombo().select(0);
