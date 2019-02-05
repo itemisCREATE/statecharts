@@ -6,7 +6,7 @@ The free to use, open source toolkit YAKINDU Statechart Tools (SCT) provides an 
 
 ## Download & Installation
 
-In addition to the source code provided here on GitHub we also provide ready-tu-use builds for Windows, Linux and macOS along with an Eclipse update site. If you just want to use YAKINDU Statechart Tools we strongly recommend to go this way. 
+In addition to the source code provided here on GitHub we also provide ready-to-use builds for Windows, Linux and macOS along with an Eclipse update site. If you just want to use YAKINDU Statechart Tools we strongly recommend to go this way. 
 
 1. Download a package from our <a href="http://www.statecharts.org/download.html" target="_blank">download page</a>.
 2. Follow the <a href="https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide/inst_installing_yakindu_statechart_tools" target="_blank">installation instructions</a>.
@@ -22,7 +22,7 @@ The documentation can be found via the following links:
 
 ## Support
 ### Bugs
-Please report bugs and request features in our issue tracker. 
+Please report bugs and request features in our [issue tracker](https://github.com/Yakindu/statecharts/issues). 
 
 ### Professional Support
 Need professional support for YAKINDU Statechart Tools? Contact us: statecharts@itemis.com
