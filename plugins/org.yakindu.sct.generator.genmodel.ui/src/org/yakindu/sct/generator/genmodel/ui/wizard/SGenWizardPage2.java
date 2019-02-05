@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
-import java.util.Set;
 import java.util.TreeMap;
 
 import org.eclipse.core.resources.IFile;
@@ -26,7 +25,6 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -34,16 +32,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.equinox.p2.core.IProvisioningAgent;
-import org.eclipse.equinox.p2.core.IProvisioningAgentProvider;
-import org.eclipse.equinox.p2.core.ProvisionException;
-import org.eclipse.equinox.p2.metadata.IInstallableUnit;
-import org.eclipse.equinox.p2.operations.InstallOperation;
-import org.eclipse.equinox.p2.operations.OperationFactory;
-import org.eclipse.equinox.p2.query.QueryUtil;
-import org.eclipse.equinox.p2.repository.metadata.IMetadataRepository;
-import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
-import org.eclipse.equinox.p2.ui.ProvisioningUI;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -64,12 +52,11 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-import org.osgi.framework.ServiceReference;
 import org.yakindu.sct.generator.core.extensions.FileExtensions;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.generator.genmodel.ui.PathToImageResolver;
-import org.yakindu.sct.generator.genmodel.ui.internal.GenmodelActivator;
+import org.yakindu.sct.ui.install.InstallWizardOpener;
 import org.yakindu.sct.ui.wizards.AbstractWorkspaceLabelProvider;
 import org.yakindu.sct.ui.wizards.ModelCreationWizardPage;
 import org.yakindu.sct.ui.wizards.WorkspaceTreeContentProvider;
@@ -317,39 +304,14 @@ public class SGenWizardPage2 extends WizardPage {
 	
 	protected static class InstallMoreGeneratorsItem {
 		
-		private static final java.net.URI LABS_REPO_URI = java.net.URI.create("http://updates.yakindu.com/statecharts/labs");
+		private static final String LABS_REPO_URI = "http://updates.yakindu.com/statecharts/labs";
 
 		public String getText() {
 			return "Install more...";
 		}
 		
 		public void openInstallWizard() {
-			try {
-				IProvisioningAgent agent = getProvisioningAgent();
-				IMetadataRepositoryManager manager = (IMetadataRepositoryManager) agent.getService(IMetadataRepositoryManager.SERVICE_NAME);
-				IMetadataRepository repo = manager.loadRepository(LABS_REPO_URI, new NullProgressMonitor());
-				Set<IInstallableUnit> allIUs = repo.query(QueryUtil.createIUGroupQuery(), new NullProgressMonitor()).toUnmodifiableSet();
-				
-				InstallOperation op = new OperationFactory().createInstallOperation(Collections.emptyList(),
-						Collections.singletonList(LABS_REPO_URI),
-						new NullProgressMonitor());
-				
-				ProvisioningUI.getDefaultUI().openInstallWizard(allIUs, op, null);
-			} catch (ProvisionException e) {
-				e.printStackTrace();
-			}
-		}
-
-		@SuppressWarnings({ "rawtypes", "unchecked" })
-		private IProvisioningAgent getProvisioningAgent() throws ProvisionException {
-			ServiceReference sr = GenmodelActivator.getInstance().getBundle().getBundleContext()
-					.getServiceReference(IProvisioningAgentProvider.SERVICE_NAME);
-			if (sr == null)
-				throw new ProvisionException("Could not create IProvisioningAgentProvider");
-			IProvisioningAgentProvider agentProvider = (IProvisioningAgentProvider) GenmodelActivator.getInstance().getBundle().getBundleContext()
-					.getService(sr);
-			IProvisioningAgent agent = agentProvider.createAgent(null);
-			return agent;
+			new InstallWizardOpener().openInstallWizard(LABS_REPO_URI);
 		}
 	}
 
