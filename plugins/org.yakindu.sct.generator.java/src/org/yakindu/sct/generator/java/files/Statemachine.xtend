@@ -39,6 +39,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.java.submodules.FieldDeclarationGenerator
 
 class Statemachine {
 	@Inject protected Set<JavaIncludeProvider> includeProviders
@@ -56,6 +57,7 @@ class Statemachine {
 	@Inject protected extension InternalFunctionsGenerator
 	@Inject protected extension StatemachineFunctionsGenerator
 	@Inject protected extension EventDrivenTimingFunctions
+	@Inject protected extension FieldDeclarationGenerator
 	
 	@Inject protected extension Init
 	@Inject protected extension Enter
@@ -96,6 +98,7 @@ class Statemachine {
 	
 	def protected classContent() {
 		'''
+		«flow.interfaceClasses(entry)»
 		«flow.createFieldDeclarations(entry)»
 		«flow.createConstructor»
 		«flow.init»

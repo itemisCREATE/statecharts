@@ -19,12 +19,12 @@ import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.generator.java.eventdriven.JavaEventDrivenIncludeProvider;
 import org.yakindu.sct.generator.java.features.IJavaFeatureConstants;
 import org.yakindu.sct.generator.java.submodules.EventCode;
+import org.yakindu.sct.generator.java.submodules.FieldDeclarationGenerator;
 import org.yakindu.sct.generator.java.submodules.InterfaceFunctionsGenerator;
-import org.yakindu.sct.generator.java.submodules.InternalFunctionsGenerator;
 import org.yakindu.sct.generator.java.submodules.TimingFunctions;
 import org.yakindu.sct.generator.java.submodules.eventdriven.EventDrivenEventCode;
+import org.yakindu.sct.generator.java.submodules.eventdriven.EventDrivenFieldDeclarationGenerator;
 import org.yakindu.sct.generator.java.submodules.eventdriven.EventDrivenInterfaceFunctionsGenerator;
-import org.yakindu.sct.generator.java.submodules.eventdriven.EventDrivenInternalFunctionsGenerator;
 import org.yakindu.sct.generator.java.submodules.eventdriven.EventDrivenTimingFunctions;
 import org.yakindu.sct.generator.java.submodules.eventdriven.lifecycle.EventDrivenRunCycle;
 import org.yakindu.sct.generator.java.submodules.lifecycle.RunCycle;
@@ -51,7 +51,7 @@ import com.google.inject.name.Names;
 public class JavaGeneratorModule implements IGeneratorModule {
 
 	protected Multibinder<JavaIncludeProvider> includeProviderBinder;
-	
+
 	@Override
 	public void configure(GeneratorEntry entry, Binder binder) {
 		includeProviderBinder = Multibinder.newSetBinder(binder, JavaIncludeProvider.class);
@@ -60,7 +60,6 @@ public class JavaGeneratorModule implements IGeneratorModule {
 		configureServices(entry, binder);
 		bindTracingProperty(entry, binder);
 	}
-
 
 	public void configureGeneratorRoot(GeneratorEntry entry, Binder binder) {
 		binder.bind(IModelSequencer.class).to(ModelSequencer.class);
@@ -75,7 +74,7 @@ public class JavaGeneratorModule implements IGeneratorModule {
 			binder.bind(TimingFunctions.class).to(EventDrivenTimingFunctions.class);
 			binder.bind(EventCode.class).to(EventDrivenEventCode.class);
 			binder.bind(InterfaceFunctionsGenerator.class).to(EventDrivenInterfaceFunctionsGenerator.class);
-			binder.bind(InternalFunctionsGenerator.class).to(EventDrivenInternalFunctionsGenerator.class);
+			binder.bind(FieldDeclarationGenerator.class).to(EventDrivenFieldDeclarationGenerator.class);
 			binder.bind(RunCycle.class).to(EventDrivenRunCycle.class);
 		}
 	}

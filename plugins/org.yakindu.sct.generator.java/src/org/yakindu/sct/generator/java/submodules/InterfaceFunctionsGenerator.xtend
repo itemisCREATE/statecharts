@@ -33,6 +33,14 @@ class InterfaceFunctionsGenerator {
 	
 	@Inject protected extension FieldDeclarationGenerator
 	@Inject protected extension EventCode
+	@Inject protected extension VariableCode
+	
+	def interfaceClasses(ExecutionFlow it, GeneratorEntry entry) '''
+		«FOR scope : flow.interfaceScopes»
+			«scope.toImplementation(entry)»
+			
+		«ENDFOR»
+	'''
 	
 	def toImplementation(InterfaceScope scope, GeneratorEntry entry) '''
 		protected class «scope.getInterfaceImplName» implements «scope.getInterfaceName» {
@@ -76,28 +84,6 @@ class InterfaceFunctionsGenerator {
 			return listeners;
 		}
 	'''
-	
-	protected def generateVariableDefinition(VariableDefinition variable) '''
-			«IF !variable.const»
-				«variable.fieldDeclaration»
-			«ENDIF»
-			public «variable.typeSpecifier.targetLanguageName» «variable.getter» {
-				return «variable.identifier»;
-			}
-
-			«IF !variable.const»
-			«IF variable.readonly»protected«ELSE»public«ENDIF» void «variable.setter»(«variable.typeSpecifier.targetLanguageName» value) {
-				this.«variable.identifier» = value;
-			}
-
-			«ENDIF»
-			«IF variable.needsAssignMethod»
-			protected «variable.typeSpecifier.targetLanguageName» «variable.assign»(«variable.typeSpecifier.targetLanguageName» value) {
-				return this.«variable.identifier» = value;
-			}
-
-			«ENDIF»
-		'''
 	
 	def internalEventRaiser(EventDefinition it) '''
 		private void raise«name.asEscapedName»(«IF hasValue»«typeSpecifier.targetLanguageName» value«ENDIF») {

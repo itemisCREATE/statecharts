@@ -27,7 +27,7 @@ class Naming {
 
 	@Inject extension JavaNamingService namingService;
 	@Inject StextNameProvider provider;
-
+	
 	def iStatemachine() {
 		"IStatemachine"
 	}

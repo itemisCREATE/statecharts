@@ -10,13 +10,12 @@
 package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
-import org.yakindu.sct.generator.core.extensions.AnnotationExtensions
-import org.yakindu.sct.model.sgen.GeneratorEntry
 
-class GeneratorPredicate {
-	@Inject protected AnnotationExtensions annotations
+class GeneratorPredicate extends org.yakindu.sct.generator.core.extensions.GeneratorPredicate {
+	@Inject protected extension GenmodelEntries
 	
-	def isEventDriven(GeneratorEntry entry) {
-		annotations.isEventDriven(entry)
+	override useInEventQueue() {
+		entry.inEventQueue
 	}
+
 }

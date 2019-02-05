@@ -9,13 +9,20 @@
 */
 package org.yakindu.sct.generator.java.submodules.eventdriven
 
-import org.yakindu.sct.generator.java.submodules.InternalFunctionsGenerator
+import com.google.inject.Inject
+import org.yakindu.sct.generator.java.GeneratorPredicate
+import org.yakindu.sct.generator.java.submodules.FieldDeclarationGenerator
 import org.yakindu.sct.model.sexec.ExecutionFlow
 
-class EventDrivenInternalFunctionsGenerator extends InternalFunctionsGenerator {
+class EventDrivenFieldDeclarationGenerator extends FieldDeclarationGenerator {
+	@Inject protected extension GeneratorPredicate
+	
 	override internalEventFields(ExecutionFlow it) '''
-		«IF hasLocalEvents»
+		«IF needsInternalEventQueue»
 			private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
+		«ENDIF»
+		«IF needsInEventQueue»
+			private Queue<Runnable> inEventQueue = new LinkedList<Runnable>();
 		«ENDIF»
 		«super.internalEventFields(it)»
 	'''
