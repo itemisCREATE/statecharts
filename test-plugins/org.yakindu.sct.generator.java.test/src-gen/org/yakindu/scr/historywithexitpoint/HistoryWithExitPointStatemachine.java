@@ -7,21 +7,27 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	
 		private boolean push;
 		
+		
 		public void raisePush() {
 			push = true;
 		}
 		
+		
 		private boolean back;
+		
 		
 		public void raiseBack() {
 			back = true;
 		}
 		
+		
 		private boolean next;
+		
 		
 		public void raiseNext() {
 			next = true;
 		}
+		
 		
 		protected void clearEvents() {
 			push = false;

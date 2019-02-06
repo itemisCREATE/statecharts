@@ -7,9 +7,11 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 	
 		private boolean e1;
 		
+		
 		public void raiseE1() {
 			e1 = true;
 		}
+		
 		
 		protected void clearEvents() {
 			e1 = false;

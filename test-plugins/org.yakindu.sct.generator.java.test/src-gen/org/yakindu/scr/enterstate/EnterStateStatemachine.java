@@ -7,21 +7,27 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
 		
+		
 		private boolean f;
+		
 		
 		public void raiseF() {
 			f = true;
 		}
 		
+		
 		private boolean g;
+		
 		
 		public void raiseG() {
 			g = true;
 		}
+		
 		
 		protected void clearEvents() {
 			e = false;

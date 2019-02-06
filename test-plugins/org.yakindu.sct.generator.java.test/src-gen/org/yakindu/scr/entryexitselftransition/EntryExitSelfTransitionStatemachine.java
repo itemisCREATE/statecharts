@@ -7,15 +7,19 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
 		
+		
 		private boolean e1;
+		
 		
 		public void raiseE1() {
 			e1 = true;
 		}
+		
 		
 		private long exits;
 		
@@ -27,6 +31,7 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 			this.exits = value;
 		}
 		
+		
 		private long entries;
 		
 		public long getEntries() {
@@ -36,6 +41,7 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 		public void setEntries(long value) {
 			this.entries = value;
 		}
+		
 		
 		protected void clearEvents() {
 			e = false;

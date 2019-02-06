@@ -7,11 +7,14 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
 		
+		
 		private boolean f;
+		
 		
 		public boolean isRaisedF() {
 			return f;
@@ -31,6 +34,7 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 			this.f_available_in_cycle = value;
 		}
 		
+		
 		private boolean f_available_in_next_cycle;
 		
 		public boolean getF_available_in_next_cycle() {
@@ -40,6 +44,7 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 		public void setF_available_in_next_cycle(boolean value) {
 			this.f_available_in_next_cycle = value;
 		}
+		
 		
 		protected void clearEvents() {
 			e = false;

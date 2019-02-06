@@ -7,13 +7,15 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
 		
+		
 		private boolean e2;
 		
-		private long e2Value;
+		private long e2Value;	
 		
 		public void raiseE2(long value) {
 			e2Value = value;
@@ -25,13 +27,16 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 			return e2Value;
 		}
 		
+		
 		public long getX() {
 			return x;
 		}
 		
+		
 		public long getY() {
 			return y;
 		}
+		
 		
 		private long result;
 		
@@ -42,6 +47,7 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		public void setResult(long value) {
 			this.result = value;
 		}
+		
 		
 		protected void clearEvents() {
 			e = false;
@@ -56,9 +62,11 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 			return y;
 		}
 		
+		
 		public long getTwo() {
 			return two;
 		}
+		
 		
 	}
 	

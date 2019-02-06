@@ -15,6 +15,7 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 			this.myInt = value;
 		}
 		
+		
 	}
 	
 	

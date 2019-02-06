@@ -15,6 +15,7 @@ public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 			this.x = value;
 		}
 		
+		
 	}
 	
 	

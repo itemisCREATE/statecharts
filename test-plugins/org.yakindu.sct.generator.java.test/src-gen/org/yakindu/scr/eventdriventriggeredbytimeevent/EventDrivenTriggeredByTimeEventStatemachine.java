@@ -16,6 +16,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 			this.x = value;
 		}
 		
+		
 		private long transition_count;
 		
 		public long getTransition_count() {
@@ -25,6 +26,7 @@ public class EventDrivenTriggeredByTimeEventStatemachine implements IEventDriven
 		public void setTransition_count(long value) {
 			this.transition_count = value;
 		}
+		
 		
 	}
 	

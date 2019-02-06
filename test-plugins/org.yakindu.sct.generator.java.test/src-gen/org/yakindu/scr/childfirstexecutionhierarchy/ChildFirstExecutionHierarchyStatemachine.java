@@ -7,9 +7,11 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
+		
 		
 		private boolean disable_a;
 		
@@ -21,6 +23,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 			this.disable_a = value;
 		}
 		
+		
 		private boolean disable_aa;
 		
 		public boolean getDisable_aa() {
@@ -30,6 +33,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		public void setDisable_aa(boolean value) {
 			this.disable_aa = value;
 		}
+		
 		
 		private boolean disable_aaa;
 		
@@ -41,6 +45,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 			this.disable_aaa = value;
 		}
 		
+		
 		private boolean a_reacted;
 		
 		public boolean getA_reacted() {
@@ -50,6 +55,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		public void setA_reacted(boolean value) {
 			this.a_reacted = value;
 		}
+		
 		
 		private boolean aa_reacted;
 		
@@ -61,6 +67,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 			this.aa_reacted = value;
 		}
 		
+		
 		private boolean aaa_reacted;
 		
 		public boolean getAaa_reacted() {
@@ -70,6 +77,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		public void setAaa_reacted(boolean value) {
 			this.aaa_reacted = value;
 		}
+		
 		
 		private boolean a_local;
 		
@@ -81,6 +89,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 			this.a_local = value;
 		}
 		
+		
 		private boolean aa_local;
 		
 		public boolean getAa_local() {
@@ -91,6 +100,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 			this.aa_local = value;
 		}
 		
+		
 		private boolean aaa_local;
 		
 		public boolean getAaa_local() {
@@ -100,6 +110,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		public void setAaa_local(boolean value) {
 			this.aaa_local = value;
 		}
+		
 		
 		protected void clearEvents() {
 			e = false;

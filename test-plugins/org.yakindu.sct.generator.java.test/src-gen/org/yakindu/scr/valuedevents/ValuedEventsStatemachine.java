@@ -7,7 +7,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	
 		private boolean integerEvent;
 		
-		private long integerEventValue;
+		private long integerEventValue;	
 		
 		public void raiseIntegerEvent(long value) {
 			integerEventValue = value;
@@ -19,9 +19,10 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 			return integerEventValue;
 		}
 		
+		
 		private boolean booleanEvent;
 		
-		private boolean booleanEventValue;
+		private boolean booleanEventValue;	
 		
 		public void raiseBooleanEvent(boolean value) {
 			booleanEventValue = value;
@@ -33,9 +34,10 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 			return booleanEventValue;
 		}
 		
+		
 		private boolean realEvent;
 		
-		private double realEventValue;
+		private double realEventValue;	
 		
 		public void raiseRealEvent(double value) {
 			realEventValue = value;
@@ -47,9 +49,10 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 			return realEventValue;
 		}
 		
+		
 		private boolean stringEvent;
 		
-		private String stringEventValue;
+		private String stringEventValue;	
 		
 		public void raiseStringEvent(String value) {
 			stringEventValue = value;
@@ -61,6 +64,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 			return stringEventValue;
 		}
 		
+		
 		private long myInt;
 		
 		public long getMyInt() {
@@ -70,6 +74,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		public void setMyInt(long value) {
 			this.myInt = value;
 		}
+		
 		
 		private boolean myBool;
 		
@@ -81,6 +86,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 			this.myBool = value;
 		}
 		
+		
 		private double myReal;
 		
 		public double getMyReal() {
@@ -91,6 +97,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 			this.myReal = value;
 		}
 		
+		
 		private String myString;
 		
 		public String getMyString() {
@@ -100,6 +107,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		public void setMyString(String value) {
 			this.myString = value;
 		}
+		
 		
 		protected void clearEvents() {
 			integerEvent = false;

@@ -7,15 +7,19 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
 		
+		
 		private boolean f;
+		
 		
 		public void raiseF() {
 			f = true;
 		}
+		
 		
 		private long x;
 		
@@ -27,6 +31,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 			this.x = value;
 		}
 		
+		
 		private long y;
 		
 		public long getY() {
@@ -37,6 +42,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 			this.y = value;
 		}
 		
+		
 		private long z;
 		
 		public long getZ() {
@@ -46,6 +52,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		public void setZ(long value) {
 			this.z = value;
 		}
+		
 		
 		protected void clearEvents() {
 			e = false;

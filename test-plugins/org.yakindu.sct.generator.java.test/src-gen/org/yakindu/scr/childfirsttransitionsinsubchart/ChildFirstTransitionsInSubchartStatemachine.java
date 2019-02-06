@@ -21,6 +21,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 			this.a_local = value;
 		}
 		
+		
 		private long c_local;
 		
 		public long getC_local() {
@@ -30,6 +31,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		public void setC_local(long value) {
 			this.c_local = value;
 		}
+		
 		
 		private long aa_local;
 		
@@ -41,6 +43,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 			this.aa_local = value;
 		}
 		
+		
 		private long ab_local;
 		
 		public long getAb_local() {
@@ -50,6 +53,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		public void setAb_local(long value) {
 			this.ab_local = value;
 		}
+		
 		
 		private long ac_local;
 		
@@ -61,6 +65,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 			this.ac_local = value;
 		}
 		
+		
 		private long ad_local;
 		
 		public long getAd_local() {
@@ -70,6 +75,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		public void setAd_local(long value) {
 			this.ad_local = value;
 		}
+		
 		
 		private long aaa_local;
 		
@@ -81,6 +87,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 			this.aaa_local = value;
 		}
 		
+		
 		private long aac_local;
 		
 		public long getAac_local() {
@@ -90,6 +97,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		public void setAac_local(long value) {
 			this.aac_local = value;
 		}
+		
 		
 		private long a_check;
 		
@@ -101,6 +109,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 			this.a_check = value;
 		}
 		
+		
 		private long aa_check;
 		
 		public long getAa_check() {
@@ -110,6 +119,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		public void setAa_check(long value) {
 			this.aa_check = value;
 		}
+		
 		
 		private long ab_check;
 		
@@ -121,6 +131,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 			this.ab_check = value;
 		}
 		
+		
 		private long aac_check;
 		
 		public long getAac_check() {
@@ -130,6 +141,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		public void setAac_check(long value) {
 			this.aac_check = value;
 		}
+		
 		
 		private long ac_check;
 		
@@ -141,6 +153,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 			this.ac_check = value;
 		}
 		
+		
 		private long ad_check;
 		
 		public long getAd_check() {
@@ -150,6 +163,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		public void setAd_check(long value) {
 			this.ad_check = value;
 		}
+		
 		
 		private long c_check;
 		
@@ -161,6 +175,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 			this.c_check = value;
 		}
 		
+		
 		private long sm_local;
 		
 		public long getSm_local() {
@@ -171,6 +186,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 			this.sm_local = value;
 		}
 		
+		
 		private long cnt;
 		
 		public long getCnt() {
@@ -180,6 +196,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		public void setCnt(long value) {
 			this.cnt = value;
 		}
+		
 		
 	}
 	

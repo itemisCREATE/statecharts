@@ -7,9 +7,11 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 	
 		private boolean event1;
 		
+		
 		public void raiseEvent1() {
 			event1 = true;
 		}
+		
 		
 		protected void clearEvents() {
 			event1 = false;

@@ -7,27 +7,35 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
 		
+		
 		private boolean f;
+		
 		
 		public void raiseF() {
 			f = true;
 		}
 		
+		
 		private boolean jc;
+		
 		
 		public void raiseJc() {
 			jc = true;
 		}
 		
+		
 		private boolean jd;
+		
 		
 		public void raiseJd() {
 			jd = true;
 		}
+		
 		
 		private long x;
 		
@@ -38,6 +46,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		public void setX(long value) {
 			this.x = value;
 		}
+		
 		
 		protected void clearEvents() {
 			e = false;

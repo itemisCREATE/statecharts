@@ -7,15 +7,19 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
 		
+		
 		private boolean f;
+		
 		
 		public void raiseF() {
 			f = true;
 		}
+		
 		
 		private long entryCount;
 		
@@ -27,6 +31,7 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 			this.entryCount = value;
 		}
 		
+		
 		private long exitCount;
 		
 		public long getExitCount() {
@@ -36,6 +41,7 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 		public void setExitCount(long value) {
 			this.exitCount = value;
 		}
+		
 		
 		protected void clearEvents() {
 			e = false;

@@ -21,6 +21,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		}
 		private boolean operationCallbackEvent;
 		
+		
 		public boolean isRaisedOperationCallback() {
 			return operationCallbackEvent;
 		}
@@ -33,6 +34,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		}
 		
 		private boolean listenersEvent;
+		
 		
 		public boolean isRaisedListeners() {
 			return listenersEvent;
@@ -55,6 +57,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 			this.timer = value;
 		}
 		
+		
 		private long isActive;
 		
 		public long getIsActive() {
@@ -64,6 +67,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		public void setIsActive(long value) {
 			this.isActive = value;
 		}
+		
 		
 		private long init;
 		
@@ -75,6 +79,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 			this.init = value;
 		}
 		
+		
 		private long enter;
 		
 		public long getEnter() {
@@ -85,6 +90,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 			this.enter = value;
 		}
 		
+		
 		private long runCycle;
 		
 		public long getRunCycle() {
@@ -94,6 +100,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		public void setRunCycle(long value) {
 			this.runCycle = value;
 		}
+		
 		
 		protected void clearEvents() {
 		}

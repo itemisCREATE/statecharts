@@ -29,6 +29,7 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 			this.b = value;
 		}
 		
+		
 	}
 	
 	

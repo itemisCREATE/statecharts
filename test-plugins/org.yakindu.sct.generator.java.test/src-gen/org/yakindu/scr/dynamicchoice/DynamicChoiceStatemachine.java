@@ -7,9 +7,11 @@ public class DynamicChoiceStatemachine implements IDynamicChoiceStatemachine {
 	
 		private boolean reset;
 		
+		
 		public void raiseReset() {
 			reset = true;
 		}
+		
 		
 		private long number;
 		
@@ -20,6 +22,7 @@ public class DynamicChoiceStatemachine implements IDynamicChoiceStatemachine {
 		public void setNumber(long value) {
 			this.number = value;
 		}
+		
 		
 		protected void clearEvents() {
 			reset = false;

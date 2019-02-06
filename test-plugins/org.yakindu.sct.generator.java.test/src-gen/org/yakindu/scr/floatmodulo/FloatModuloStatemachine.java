@@ -15,6 +15,7 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 			this.r = value;
 		}
 		
+		
 		private long i;
 		
 		public long getI() {
@@ -24,6 +25,7 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		public void setI(long value) {
 			this.i = value;
 		}
+		
 		
 	}
 	
@@ -40,6 +42,7 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 			this.r = value;
 		}
 		
+		
 		private long i;
 		
 		public long getI() {
@@ -49,6 +52,7 @@ public class FloatModuloStatemachine implements IFloatModuloStatemachine {
 		public void setI(long value) {
 			this.i = value;
 		}
+		
 		
 	}
 	

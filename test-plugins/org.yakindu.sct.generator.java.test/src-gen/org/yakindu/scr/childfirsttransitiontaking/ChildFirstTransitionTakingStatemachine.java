@@ -7,17 +7,21 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 			runCycle();
 		}
 		
+		
 		private boolean go;
+		
 		
 		public void raiseGo() {
 			go = true;
 			runCycle();
 		}
+		
 		
 		private long cLocalReaction;
 		
@@ -29,6 +33,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 			this.cLocalReaction = value;
 		}
 		
+		
 		private long caLocalReaction;
 		
 		public long getCaLocalReaction() {
@@ -38,6 +43,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		public void setCaLocalReaction(long value) {
 			this.caLocalReaction = value;
 		}
+		
 		
 		protected void clearEvents() {
 			e = false;

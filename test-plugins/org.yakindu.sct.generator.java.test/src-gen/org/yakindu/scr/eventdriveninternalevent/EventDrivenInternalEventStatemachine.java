@@ -9,21 +9,25 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	
 		private boolean start;
 		
+		
 		public void raiseStart() {
 			start = true;
 			runCycle();
 		}
 		
+		
 		private boolean reset;
+		
 		
 		public void raiseReset() {
 			reset = true;
 			runCycle();
 		}
 		
+		
 		private boolean e;
 		
-		private long eValue;
+		private long eValue;	
 		
 		public boolean isRaisedE() {
 			return e;
@@ -39,6 +43,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 				throw new IllegalStateException("Illegal event value access. Event E is not raised!");
 			return eValue;
 		}
+		
 		private long x;
 		
 		public long getX() {
@@ -48,6 +53,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		public void setX(long value) {
 			this.x = value;
 		}
+		
 		
 		private long i1_sequence;
 		
@@ -59,6 +65,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			this.i1_sequence = value;
 		}
 		
+		
 		private long i2_sequence;
 		
 		public long getI2_sequence() {
@@ -68,6 +75,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		public void setI2_sequence(long value) {
 			this.i2_sequence = value;
 		}
+		
 		
 		protected void clearEvents() {
 			start = false;

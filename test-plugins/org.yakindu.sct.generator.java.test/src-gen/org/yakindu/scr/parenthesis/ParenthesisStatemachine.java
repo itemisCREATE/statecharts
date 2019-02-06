@@ -15,6 +15,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 			this.erg = value;
 		}
 		
+		
 	}
 	
 	

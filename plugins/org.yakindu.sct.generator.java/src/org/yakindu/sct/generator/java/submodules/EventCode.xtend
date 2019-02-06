@@ -40,11 +40,11 @@ class EventCode {
 		«event.fieldDeclaration»
 		«IF event.direction == Direction::IN»
 		
-			«event.generateInEventDefinition»
+		«event.generateInEventDefinition»
 		«ENDIF»
 		«IF event.direction == Direction::OUT»
 		
-			«event.generateOutEventDefinition(entry, scope)»
+		«event.generateOutEventDefinition(entry, scope)»
 		«ENDIF»
 	'''
 	

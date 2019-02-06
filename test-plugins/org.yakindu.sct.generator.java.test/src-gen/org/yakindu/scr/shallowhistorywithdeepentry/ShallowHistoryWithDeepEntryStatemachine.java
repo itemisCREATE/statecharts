@@ -7,27 +7,35 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 	
 		private boolean toZ;
 		
+		
 		public void raiseToZ() {
 			toZ = true;
 		}
 		
+		
 		private boolean toY;
+		
 		
 		public void raiseToY() {
 			toY = true;
 		}
 		
+		
 		private boolean toC;
+		
 		
 		public void raiseToC() {
 			toC = true;
 		}
 		
+		
 		private boolean toA;
+		
 		
 		public void raiseToA() {
 			toA = true;
 		}
+		
 		
 		protected void clearEvents() {
 			toZ = false;

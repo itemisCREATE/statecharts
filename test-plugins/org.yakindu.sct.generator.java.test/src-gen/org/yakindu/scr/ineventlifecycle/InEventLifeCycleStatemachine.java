@@ -7,9 +7,11 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
+		
 		
 		private long i;
 		
@@ -20,6 +22,7 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 		public void setI(long value) {
 			this.i = value;
 		}
+		
 		
 		protected void clearEvents() {
 			e = false;

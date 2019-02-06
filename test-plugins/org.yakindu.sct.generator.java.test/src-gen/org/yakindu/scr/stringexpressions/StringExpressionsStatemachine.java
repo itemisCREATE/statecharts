@@ -7,9 +7,11 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
+		
 		
 		private String stringA;
 		
@@ -21,6 +23,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 			this.stringA = value;
 		}
 		
+		
 		private String stringA2;
 		
 		public String getStringA2() {
@@ -30,6 +33,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		public void setStringA2(String value) {
 			this.stringA2 = value;
 		}
+		
 		
 		private String stringB;
 		
@@ -41,6 +45,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 			this.stringB = value;
 		}
 		
+		
 		private String quotedStringX;
 		
 		public String getQuotedStringX() {
@@ -50,6 +55,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		public void setQuotedStringX(String value) {
 			this.quotedStringX = value;
 		}
+		
 		
 		private String quotedStringY;
 		
@@ -61,6 +67,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 			this.quotedStringY = value;
 		}
 		
+		
 		private boolean stringVarEqual;
 		
 		public boolean getStringVarEqual() {
@@ -70,6 +77,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		public void setStringVarEqual(boolean value) {
 			this.stringVarEqual = value;
 		}
+		
 		
 		private boolean stringVarNotEqual;
 		
@@ -81,6 +89,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 			this.stringVarNotEqual = value;
 		}
 		
+		
 		private boolean guardStringNotEqual;
 		
 		public boolean getGuardStringNotEqual() {
@@ -91,6 +100,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 			this.guardStringNotEqual = value;
 		}
 		
+		
 		private boolean guardStringEqual;
 		
 		public boolean getGuardStringEqual() {
@@ -100,6 +110,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 		public void setGuardStringEqual(boolean value) {
 			this.guardStringEqual = value;
 		}
+		
 		
 		protected void clearEvents() {
 			e = false;

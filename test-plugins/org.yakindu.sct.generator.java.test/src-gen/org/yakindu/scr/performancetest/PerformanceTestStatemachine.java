@@ -8,21 +8,27 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	
 		private boolean e1;
 		
+		
 		public void raiseE1() {
 			e1 = true;
 		}
 		
+		
 		private boolean e2;
+		
 		
 		public void raiseE2() {
 			e2 = true;
 		}
 		
+		
 		private boolean e3;
+		
 		
 		public void raiseE3() {
 			e3 = true;
 		}
+		
 		
 		private long x;
 		
@@ -34,6 +40,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 			this.x = value;
 		}
 		
+		
 		private long a;
 		
 		public long getA() {
@@ -44,6 +51,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 			this.a = value;
 		}
 		
+		
 		private long c;
 		
 		public long getC() {
@@ -53,6 +61,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		public void setC(long value) {
 			this.c = value;
 		}
+		
 		
 		protected void clearEvents() {
 			e1 = false;

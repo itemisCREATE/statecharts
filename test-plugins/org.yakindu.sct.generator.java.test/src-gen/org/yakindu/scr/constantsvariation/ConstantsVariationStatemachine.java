@@ -9,17 +9,21 @@ public class ConstantsVariationStatemachine implements IConstantsVariationStatem
 			return b2;
 		}
 		
+		
 		public String getStr2() {
 			return str2;
 		}
+		
 		
 		public double getR2() {
 			return r2;
 		}
 		
+		
 		public long getI2() {
 			return i2;
 		}
+		
 		
 	}
 	
@@ -30,17 +34,21 @@ public class ConstantsVariationStatemachine implements IConstantsVariationStatem
 			return b;
 		}
 		
+		
 		public String getStr() {
 			return str;
 		}
+		
 		
 		public double getR() {
 			return r;
 		}
 		
+		
 		public long getI() {
 			return i;
 		}
+		
 		
 	}
 	

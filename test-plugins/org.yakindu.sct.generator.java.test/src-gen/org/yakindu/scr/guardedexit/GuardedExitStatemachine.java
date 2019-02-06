@@ -7,9 +7,11 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
+		
 		
 		private boolean guard;
 		
@@ -21,6 +23,7 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 			this.guard = value;
 		}
 		
+		
 		private boolean done;
 		
 		public boolean getDone() {
@@ -30,6 +33,7 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 		public void setDone(boolean value) {
 			this.done = value;
 		}
+		
 		
 		protected void clearEvents() {
 			e = false;

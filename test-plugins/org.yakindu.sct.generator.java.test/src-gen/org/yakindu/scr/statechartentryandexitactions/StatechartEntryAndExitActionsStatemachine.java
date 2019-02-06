@@ -15,6 +15,7 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 			this.x = value;
 		}
 		
+		
 		private long y;
 		
 		public long getY() {
@@ -25,6 +26,7 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 			this.y = value;
 		}
 		
+		
 		private boolean b;
 		
 		public boolean getB() {
@@ -34,6 +36,7 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 		public void setB(boolean value) {
 			this.b = value;
 		}
+		
 		
 	}
 	

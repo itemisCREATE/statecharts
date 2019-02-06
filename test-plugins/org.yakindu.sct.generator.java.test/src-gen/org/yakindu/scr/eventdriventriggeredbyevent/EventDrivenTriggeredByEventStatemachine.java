@@ -8,10 +8,12 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 			runCycle();
 		}
+		
 		
 		private long x;
 		
@@ -22,6 +24,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 		public void setX(long value) {
 			this.x = value;
 		}
+		
 		
 		protected void clearEvents() {
 			e = false;

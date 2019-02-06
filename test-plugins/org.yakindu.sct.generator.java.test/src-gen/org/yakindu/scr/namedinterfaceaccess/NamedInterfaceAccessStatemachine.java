@@ -7,6 +7,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	
 		private boolean open;
 		
+		
 		public boolean isRaisedOpen() {
 			return open;
 		}
@@ -16,6 +17,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		}
 		
 		private boolean close;
+		
 		
 		public boolean isRaisedClose() {
 			return close;
@@ -40,7 +42,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	
 		private boolean numberPressed;
 		
-		private long numberPressedValue;
+		private long numberPressedValue;	
 		
 		public void raiseNumberPressed(long value) {
 			numberPressedValue = value;
@@ -52,11 +54,14 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 			return numberPressedValue;
 		}
 		
+		
 		private boolean reset;
+		
 		
 		public void raiseReset() {
 			reset = true;
 		}
+		
 		
 		protected void clearEvents() {
 			numberPressed = false;

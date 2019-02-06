@@ -9,9 +9,11 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 			return b;
 		}
 		
+		
 		public long getC() {
 			return c;
 		}
+		
 		
 	}
 	
@@ -20,7 +22,7 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 	
 		private boolean e;
 		
-		private long eValue;
+		private long eValue;	
 		
 		public void raiseE(long value) {
 			eValue = value;
@@ -31,6 +33,7 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 				throw new IllegalStateException("Illegal event value access. Event E is not raised!");
 			return eValue;
 		}
+		
 		
 		protected void clearEvents() {
 			e = false;
