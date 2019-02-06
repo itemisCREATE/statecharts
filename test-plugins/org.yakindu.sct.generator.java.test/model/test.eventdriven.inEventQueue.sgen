@@ -1,0 +1,87 @@
+GeneratorModel for sctunit::java {
+	
+	
+	test EventDrivenInternalEvent {
+		feature Naming {
+			basePackage = "org.yakindu.sct.generator.java.test.ieq"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr.ieq"
+			libraryTargetFolder = "src-gen"
+		}
+	}
+
+
+	test EventDrivenTriggeredByEvent {
+		feature Naming {
+			basePackage = "org.yakindu.sct.generator.java.test.ieq"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr.ieq"
+			libraryTargetFolder = "src-gen"
+		}
+	}
+
+
+	test EventDrivenTriggeredByTimeEvent {
+		feature Naming {
+			basePackage = "org.yakindu.sct.generator.java.test.ieq"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr.ieq"
+			libraryTargetFolder = "src-gen"
+		}
+	}
+	
+	test LocalEvents {
+		feature Naming {
+			basePackage = "org.yakindu.sct.generator.java.test.ieq"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr.ieq"
+			libraryTargetFolder = "src-gen"
+		}
+	}
+	
+	test EventDrivenOutEvents {
+		feature Naming {
+			basePackage = "org.yakindu.sct.generator.java.test.ieq"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr.ieq"
+			libraryTargetFolder = "src-gen"
+		}
+	}
+	
+	
+}
