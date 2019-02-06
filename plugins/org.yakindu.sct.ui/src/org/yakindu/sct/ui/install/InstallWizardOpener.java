@@ -17,92 +17,82 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.equinox.p2.core.IProvisioningAgent;
-import org.eclipse.equinox.p2.core.IProvisioningAgentProvider;
 import org.eclipse.equinox.p2.core.ProvisionException;
 import org.eclipse.equinox.p2.metadata.IInstallableUnit;
 import org.eclipse.equinox.p2.operations.InstallOperation;
 import org.eclipse.equinox.p2.operations.OperationFactory;
 import org.eclipse.equinox.p2.query.QueryUtil;
 import org.eclipse.equinox.p2.repository.IRepositoryManager;
+import org.eclipse.equinox.p2.repository.metadata.IMetadataRepository;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
 import org.eclipse.equinox.p2.ui.ProvisioningUI;
 import org.eclipse.swt.widgets.Display;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceReference;
-import org.yakindu.sct.ui.UIPluginActivator;
 
 import com.google.common.collect.Sets;
 
 /**
  * 
- * Convenience class to open the "Install New Software.." wizard with preselected features to be installed.
+ * Convenience class to open the "Install New Software.." wizard with
+ * preselected features to be installed.
  * 
  * @author Thomas Kutz - Initial API and contribution
  *
  */
 public class InstallWizardOpener {
-	
+
+	private ProvisioningAgentProvider agentProvider = new ProvisioningAgentProvider();
+
 	public void open(Map<String, Set<String>> features, IProgressMonitor monitor) {
 		try {
-			IMetadataRepositoryManager manager = getRepoManager();
-			
+			IProvisioningAgent agent = agentProvider.get();
+			IMetadataRepositoryManager manager = (IMetadataRepositoryManager) agent
+					.getService(IMetadataRepositoryManager.SERVICE_NAME);
+
 			Set<IInstallableUnit> units = collectIUs(features, manager, monitor);
-			if (monitor.isCanceled()) return;
-			
+			if (monitor.isCanceled())
+				return;
+
 			List<URI> knownRepos = Arrays.asList(manager.getKnownRepositories(IRepositoryManager.REPOSITORIES_ALL));
 			InstallOperation op = new OperationFactory().createInstallOperation(units, knownRepos, monitor);
-			
+			agent.stop();
+
 			open(units, op);
-			
 		} catch (ProvisionException e) {
 			e.printStackTrace();
 		}
 	}
 
-	protected Set<IInstallableUnit> collectIUs(Map<String, Set<String>> features,
-			IMetadataRepositoryManager manager, IProgressMonitor monitor) {
-		
+	protected Set<IInstallableUnit> collectIUs(Map<String, Set<String>> features, IMetadataRepositoryManager manager,
+			IProgressMonitor monitor) {
+
 		Set<IInstallableUnit> units = Sets.newHashSet();
 		for (Map.Entry<String, Set<String>> entry : features.entrySet()) {
-			if (monitor.isCanceled()) {
-				return units;
-			}
-			manager.addRepository(URI.create(entry.getKey()));
-			
-			for (String featureId : entry.getValue()) {
-				units.addAll(
-						manager.query(QueryUtil.createLatestQuery(QueryUtil.createIUQuery(featureId)), monitor).toUnmodifiableSet());
-			}
-			if (entry.getValue().isEmpty()) {
-				units.addAll(
-						manager.query(QueryUtil.createIUGroupQuery(), monitor).toUnmodifiableSet());
+			try {
+				if (monitor.isCanceled()) {
+					return units;
+				}
+				IMetadataRepository repo = manager.loadRepository(URI.create(entry.getKey()), monitor);
+
+				for (String featureId : entry.getValue()) {
+					units.addAll(repo.query(QueryUtil.createLatestQuery(QueryUtil.createIUQuery(featureId)), monitor)
+							.toUnmodifiableSet());
+				}
+				if (entry.getValue().isEmpty()) {
+					units.addAll(repo.query(QueryUtil.createIUGroupQuery(), monitor).toUnmodifiableSet());
+				}
+			} catch (ProvisionException | OperationCanceledException e) {
+				e.printStackTrace();
+				continue;
 			}
 		}
 		return units;
-	}
-
-	protected IMetadataRepositoryManager getRepoManager() throws ProvisionException {
-		return (IMetadataRepositoryManager) getProvisioningAgent().getService(IMetadataRepositoryManager.SERVICE_NAME);
 	}
 
 	protected void open(Set<IInstallableUnit> units, InstallOperation op) {
 		Display.getDefault().asyncExec(() -> {
 			ProvisioningUI.getDefaultUI().openInstallWizard(units, op, null);
 		});
-	}
-
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	protected IProvisioningAgent getProvisioningAgent() throws ProvisionException {
-		ServiceReference sr = getContext().getServiceReference(IProvisioningAgentProvider.SERVICE_NAME);
-		if (sr == null) {
-			throw new ProvisionException("No service reference found for " + IProvisioningAgentProvider.SERVICE_NAME);
-		}
-		IProvisioningAgentProvider agentProvider = (IProvisioningAgentProvider) getContext().getService(sr);
-		return agentProvider.createAgent(null);
-	}
-
-	protected BundleContext getContext() {
-		return UIPluginActivator.getDefault().getBundle().getBundleContext();
 	}
 }
