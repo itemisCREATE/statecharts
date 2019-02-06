@@ -74,21 +74,13 @@ class InternalFunctionsGenerator {
 		}
 
 	'''
-
-	def internalEventValueAccess(EventDefinition it) '''
-		«IF hasValue»
-			private «typeSpecifier.targetLanguageName» get«name.asEscapedName»Value() {
-				«getIllegalAccessValidation()»
-				return «valueIdentifier»;
-			}
-		«ENDIF»
-	'''
 	
 	def internalScopeFunctions (ExecutionFlow flow) '''
 		«FOR event : flow.internalScopeEvents»
 			«event.internalEventRaiser»
-
-			«event.eventValueGetter»
+			«IF event.hasValue»
+				«event.eventValueGetter»
+			«ENDIF»
 
 		«ENDFOR»
 		«FOR internal : flow.internalScopes»

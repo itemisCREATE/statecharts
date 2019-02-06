@@ -52,7 +52,10 @@ class EventDrivenRunCycle extends RunCycle {
 				
 				// process queued events
 				while (internalEventQueue.size() > 0) {
-					internalEventQueue.poll().run();
+					Runnable task = getNextEvent();
+					if(task != null) {
+						task.run();
+					}
 					clearEvents();
 				}
 				
@@ -62,6 +65,11 @@ class EventDrivenRunCycle extends RunCycle {
 			}
 			
 			«it.singleCycle»
+			
+			«IF needsNextEventFunction»
+			«nextEvent»
+			
+			«ENDIF»
 		'''
 	}
 	
@@ -80,6 +88,22 @@ class EventDrivenRunCycle extends RunCycle {
 					// «getNullStateName()»
 				}
 			}
+		}
+	'''
+	
+	def protected getNextEvent(ExecutionFlow it) '''
+		protected Runnable getNextEvent() {
+			«IF needsInternalEventQueue»
+			if(!internalEventQueue.isEmpty()) {
+				return internalEventQueue.poll();
+			}
+			«ENDIF»
+			«IF needsInEventQueue»
+			if(!inEventQueue.isEmpty()) {
+				return inEventQueue.poll();
+			}
+			«ENDIF»
+			return null;
 		}
 	'''
 	

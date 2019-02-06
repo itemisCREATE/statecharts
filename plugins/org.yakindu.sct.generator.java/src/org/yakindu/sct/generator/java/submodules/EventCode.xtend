@@ -128,7 +128,7 @@ class EventCode {
 				«identifier» = true;
 				«IF !interfaceListenerName.nullOrEmpty»
 					for («interfaceListenerName» listener : listeners) {
-						listener.on«event.name.asEscapedName»Raised();
+						listener.on«event.name.asEscapedName»Raised(«IF hasValue»value«ENDIF»);
 					}
 				«ENDIF»
 			}
