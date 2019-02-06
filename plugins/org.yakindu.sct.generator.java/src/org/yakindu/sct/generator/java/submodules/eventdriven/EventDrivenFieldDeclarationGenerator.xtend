@@ -21,8 +21,11 @@ class EventDrivenFieldDeclarationGenerator extends FieldDeclarationGenerator {
 		«IF needsInternalEventQueue»
 			private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
 		«ENDIF»
-		«IF needsInEventQueue»
+		«IF needsInEventQueue && !needsSynchronized»
 			private Queue<Runnable> inEventQueue = new LinkedList<Runnable>();
+		«ENDIF»
+		«IF needsInEventQueue && needsSynchronized»
+			private BlockingQueue<Runnable> inEventQueue = new LinkedBlockingQueue<Runnable>();
 		«ENDIF»
 		«IF needsRunCycleGuard»
 			private boolean «runCycleGuard» = false;

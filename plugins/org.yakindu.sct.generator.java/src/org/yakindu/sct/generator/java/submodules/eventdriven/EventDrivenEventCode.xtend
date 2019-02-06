@@ -11,15 +11,17 @@ package org.yakindu.sct.generator.java.submodules.eventdriven
 
 import com.google.inject.Inject
 import org.yakindu.sct.generator.java.GeneratorPredicate
+import org.yakindu.sct.generator.java.features.Synchronized
 import org.yakindu.sct.generator.java.submodules.EventCode
 import org.yakindu.sct.model.stext.stext.EventDefinition
 
 class EventDrivenEventCode extends EventCode {
 	@Inject protected extension GeneratorPredicate
+	@Inject protected extension Synchronized
 	
 	override generateInEventDefinition(EventDefinition event) '''
 		«IF event.hasValue»
-			public void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
+			public «sync»void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
 				«event.identifier» = true;
 				«event.valueIdentifier» = value;
 				runCycle();
@@ -30,7 +32,7 @@ class EventDrivenEventCode extends EventCode {
 				return «event.valueIdentifier»;
 			}
 		«ELSE»
-			public void raise«event.name.asName»() {
+			public «sync»void raise«event.name.asName»() {
 				«event.identifier» = true;
 				runCycle();
 			}
@@ -54,7 +56,7 @@ class EventDrivenEventCode extends EventCode {
 	override inEventRaiser(EventDefinition it) {
 		if(needsInEventQueue(flow)) {
 			'''
-			public void raise«name.asEscapedName»(«IF hasValue»final «typeSpecifier.targetLanguageName» value«ENDIF») {
+			public «sync»void raise«name.asEscapedName»(«IF hasValue»final «typeSpecifier.targetLanguageName» value«ENDIF») {
 				
 				inEventQueue.add( new Runnable() {
 					@Override public void run() {
@@ -67,28 +69,13 @@ class EventDrivenEventCode extends EventCode {
 			'''
 		} else {
 			'''
-			public void raise«name.asEscapedName»(«IF hasValue»final «typeSpecifier.targetLanguageName» value«ENDIF») {
+			public «sync»void raise«name.asEscapedName»(«IF hasValue»final «typeSpecifier.targetLanguageName» value«ENDIF») {
 				«IF hasValue»«valueIdentifier» = value;«ENDIF»
 				«identifier» = true;					
 				runCycle();
 			}
 			'''
 		}
-	}
-	
-	def protected inEventQueueRaiser(EventDefinition it) {
-		'''
-		public void raise«name.asEscapedName»(«IF hasValue»final «typeSpecifier.targetLanguageName» value«ENDIF») {
-			
-			inEventQueue.add( new Runnable() {
-				@Override public void run() {
-					«IF hasValue»«valueIdentifier» = value;«ENDIF»
-					«identifier» = true;					
-					singleCycle();
-				}
-			});
-		}
-		'''
 	}
 	
 	

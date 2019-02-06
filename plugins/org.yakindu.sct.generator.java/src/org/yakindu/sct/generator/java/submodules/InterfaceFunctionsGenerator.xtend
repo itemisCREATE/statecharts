@@ -16,10 +16,10 @@ import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.java.GenmodelEntries
 import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
+import org.yakindu.sct.generator.java.features.Synchronized
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 
 @Singleton
@@ -33,6 +33,7 @@ class InterfaceFunctionsGenerator {
 	@Inject protected extension FieldDeclarationGenerator
 	@Inject protected extension EventCode
 	@Inject protected extension VariableCode
+	@Inject protected extension Synchronized
 	
 	def interfaceClasses(ExecutionFlow it, GeneratorEntry entry) '''
 		«FOR scope : flow.interfaceScopes»
@@ -71,7 +72,7 @@ class InterfaceFunctionsGenerator {
 	protected def generateOperationCallback(InterfaceScope scope) '''
 		private «scope.getInterfaceOperationCallbackName()» operationCallback;
 		
-		public void set«scope.getInterfaceOperationCallbackName»(
+		public «sync»void set«scope.getInterfaceOperationCallbackName»(
 				«scope.getInterfaceOperationCallbackName» operationCallback) {
 			this.operationCallback = operationCallback;
 		}

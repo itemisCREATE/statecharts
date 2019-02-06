@@ -1,7 +1,7 @@
 package org.yakindu.sct.generator.java.eventdriven;
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.yakindu.sct.generator.java.GeneratorPredicate;
 import org.yakindu.sct.generator.java.JavaIncludeProvider;
@@ -15,10 +15,15 @@ public class JavaEventDrivenIncludeProvider extends JavaIncludeProvider {
 
 	@Override
 	public Iterable<String> getImports(ExecutionFlow it) {
+		List<String> includes = new ArrayList<>();
 		if (extensions.needsQueues(it)) {
-			return Arrays.asList("java.util.Queue", "java.util.LinkedList");
-		} else {
-			return Collections.emptyList();
+			includes.add("java.util.Queue");
+			includes.add("java.util.LinkedList");
 		}
+		if (extensions.needsSynchronized()) {
+			includes.add("java.util.concurrent.BlockingQueue");
+			includes.add("java.util.concurrent.LinkedBlockingQueue");
+		}
+		return includes;
 	}
 }

@@ -4,44 +4,22 @@ import com.google.inject.Inject
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
+import org.yakindu.sct.generator.java.features.Synchronized
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
-import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.stext.InternalScope
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class VariableCode {
 	@Inject protected extension Naming
 	@Inject protected extension JavaNamingService
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension SExecExtensions
+	@Inject protected extension Synchronized
 	
 	def fieldDeclaration(VariableDefinition variable) '''
 		private «variable.typeSpecifier.targetLanguageName» «variable.identifier»;
 		'''
-	
-	def variableSetter(VariableDefinition it) {
-		'''
-		protected void «setter»(«typeSpecifier.targetLanguageName» value) {
-			«identifier» = value;
-		}
-		'''
-	}
-	
-	def variableGetter(VariableDefinition it) {
-		'''
-		«getterVisibility» «typeSpecifier.targetLanguageName» «getter» {
-			return «identifier»;
-		}
-		'''
-	}
-	
-	def variableAssign(VariableDefinition it) {
-		'''
-		protected «typeSpecifier.targetLanguageName» «assign»(«typeSpecifier.targetLanguageName» value) {
-			return this.«identifier» = value;
-		}
-		'''
-	}
 	
 	protected def generateVariableDefinition(VariableDefinition it) '''
 		«IF !const»
@@ -59,7 +37,7 @@ class VariableCode {
 		«ENDIF»
 		«IF needsAssignMethod»
 		
-		protected «typeSpecifier.targetLanguageName» «assign»(«typeSpecifier.targetLanguageName» value) {
+		protected «sync»«typeSpecifier.targetLanguageName» «assign»(«typeSpecifier.targetLanguageName» value) {
 			return this.«identifier» = value;
 		}
 		«ENDIF»
@@ -74,7 +52,7 @@ class VariableCode {
 	}
 	
 	protected def getterVisibility(VariableDefinition it) {
-		if(needsPublicGetter) "public" else "protected"
+		if(needsPublicGetter) '''public «sync.trim»''' else "protected"
 	}
 	
 	protected def needsPublicSetter(VariableDefinition it) {
@@ -91,6 +69,6 @@ class VariableCode {
 	}
 	
 	protected def setterVisibility(VariableDefinition it) {
-		if(needsPublicSetter) "public" else "protected"
+		if(needsPublicSetter) '''public «sync.trim»''' else "protected"
 	}
 }

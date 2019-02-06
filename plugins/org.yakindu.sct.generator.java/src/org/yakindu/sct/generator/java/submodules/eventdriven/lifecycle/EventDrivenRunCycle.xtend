@@ -35,7 +35,7 @@ class EventDrivenRunCycle extends RunCycle {
 			return super.runCycle(it)
 		}
 		'''
-			public void runCycle() {
+			public «sync»void runCycle() {
 				if (!initialized)
 					throw new IllegalStateException(
 							"The state machine needs to be initialized first by calling the init() function.");
@@ -77,7 +77,7 @@ class EventDrivenRunCycle extends RunCycle {
 	}
 	
 	def protected singleCycle(ExecutionFlow it) '''
-		protected void singleCycle() {
+		protected «sync»void singleCycle() {
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 				switch (stateVector[nextStateIndex]) {
 					«FOR state : flow.states.filter[isLeaf]»

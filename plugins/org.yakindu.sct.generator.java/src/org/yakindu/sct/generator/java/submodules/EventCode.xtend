@@ -19,6 +19,7 @@ import org.yakindu.sct.generator.java.GenmodelEntries
 import org.yakindu.sct.generator.java.JavaIncludeProvider
 import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
+import org.yakindu.sct.generator.java.features.Synchronized
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
@@ -33,6 +34,7 @@ class EventCode {
 	@Inject protected extension SExecExtensions
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension ITypeSystem
+	@Inject protected extension Synchronized
 	
 	@Inject protected extension FieldDeclarationGenerator
 	
@@ -59,7 +61,7 @@ class EventCode {
 	}
 			
 	def generateOutEventDefinition(EventDefinition event, GeneratorEntry entry, InterfaceScope scope) '''
-		public boolean isRaised«event.name.asName»() {
+		public «sync»boolean isRaised«event.name.asName»() {
 			return «event.identifier»;
 		}
 		
@@ -79,7 +81,7 @@ class EventCode {
 	
 	def eventValueGetter(EventDefinition it) {
 		'''
-		«eventValueGetterVisibility» «typeSpecifier.targetLanguageName» get«name.asName»Value() {
+		«eventValueGetterVisibility» «sync»«typeSpecifier.targetLanguageName» get«name.asName»Value() {
 			«getIllegalAccessValidation»
 			return «valueIdentifier»;
 		}
@@ -120,7 +122,7 @@ class EventCode {
 	def protected eventRaiser(EventDefinition it, String visibility, String interfaceListenerName) {
 		'''
 			«IF hasValue»
-			«visibility» void raise«name.asName»(«typeSpecifier.targetLanguageName» value) {
+			«visibility» «sync»void raise«name.asName»(«typeSpecifier.targetLanguageName» value) {
 				«valueIdentifier» = value;
 			«ELSE»
 				«visibility» void raise«name.asName»() {

@@ -15,7 +15,15 @@ class GeneratorPredicate extends org.yakindu.sct.generator.core.extensions.Gener
 	@Inject protected extension GenmodelEntries
 	
 	override useInEventQueue() {
-		entry.inEventQueue
+		entry.inEventQueue || needsRunnable
+	}
+	
+	def needsSynchronized() {
+		entry.synchronized || needsRunnable
+	}
+	
+	def needsRunnable() {
+		entry.runnable && isEventDriven
 	}
 
 }
