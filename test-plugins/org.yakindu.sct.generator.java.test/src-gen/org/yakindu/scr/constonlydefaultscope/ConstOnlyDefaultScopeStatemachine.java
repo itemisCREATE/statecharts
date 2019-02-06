@@ -23,10 +23,9 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		private long eValue;
 		
 		public void raiseE(long value) {
-			e = true;
 			eValue = value;
+			e = true;
 		}
-		
 		protected long getEValue() {
 			if (! e ) 
 				throw new IllegalStateException("Illegal event value access. Event E is not raised!");

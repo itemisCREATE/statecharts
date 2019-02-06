@@ -42,10 +42,10 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 	
 	
 	
-	
 	private boolean i1;
 	
 	private boolean i2;
+	
 	public InternalEventLifeCycleStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -156,11 +156,9 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		i1 = true;
 	}
 	
-	
 	private void raiseI2() {
 		i2 = true;
 	}
-	
 	
 	public void raiseE() {
 		sCInterface.raiseE();

@@ -26,10 +26,9 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		private boolean evCValue;
 		
 		public void raiseEvC(boolean value) {
-			evC = true;
 			evCValue = value;
+			evC = true;
 		}
-		
 		protected boolean getEvCValue() {
 			if (! evC ) 
 				throw new IllegalStateException("Illegal event value access. Event EvC is not raised!");
@@ -45,8 +44,8 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		}
 		
 		protected void raiseEvD(long value) {
-			evD = true;
 			evDValue = value;
+			evD = true;
 		}
 		
 		public long getEvDValue() {
@@ -54,16 +53,14 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 				throw new IllegalStateException("Illegal event value access. Event EvD is not raised!");
 			return evDValue;
 		}
-		
 		private boolean evE;
 		
 		private double evEValue;
 		
 		public void raiseEvE(double value) {
-			evE = true;
 			evEValue = value;
+			evE = true;
 		}
-		
 		protected double getEvEValue() {
 			if (! evE ) 
 				throw new IllegalStateException("Illegal event value access. Event EvE is not raised!");
@@ -79,8 +76,8 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		}
 		
 		protected void raiseEvF(String value) {
-			evF = true;
 			evFValue = value;
+			evF = true;
 		}
 		
 		public String getEvFValue() {
@@ -88,7 +85,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 				throw new IllegalStateException("Illegal event value access. Event EvF is not raised!");
 			return evFValue;
 		}
-		
 		private boolean varA;
 		
 		public boolean getVarA() {
@@ -177,10 +173,9 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		private boolean evCValue;
 		
 		public void raiseEvC(boolean value) {
-			evC = true;
 			evCValue = value;
+			evC = true;
 		}
-		
 		protected boolean getEvCValue() {
 			if (! evC ) 
 				throw new IllegalStateException("Illegal event value access. Event EvC is not raised!");
@@ -196,8 +191,8 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		}
 		
 		protected void raiseEvD(long value) {
-			evD = true;
 			evDValue = value;
+			evD = true;
 		}
 		
 		public long getEvDValue() {
@@ -205,16 +200,14 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 				throw new IllegalStateException("Illegal event value access. Event EvD is not raised!");
 			return evDValue;
 		}
-		
 		private boolean evE;
 		
 		private double evEValue;
 		
 		public void raiseEvE(double value) {
-			evE = true;
 			evEValue = value;
+			evE = true;
 		}
-		
 		protected double getEvEValue() {
 			if (! evE ) 
 				throw new IllegalStateException("Illegal event value access. Event EvE is not raised!");
@@ -230,8 +223,8 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		}
 		
 		protected void raiseEvF(String value) {
-			evF = true;
 			evFValue = value;
+			evF = true;
 		}
 		
 		public String getEvFValue() {
@@ -239,7 +232,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 				throw new IllegalStateException("Illegal event value access. Event EvF is not raised!");
 			return evFValue;
 		}
-		
 		private boolean varA;
 		
 		public boolean getVarA() {
@@ -323,22 +315,26 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	
 	
 	
-	
 	private boolean evInA;
 	
 	private boolean evInB;
 	
 	private boolean evInC;
+	
 	private boolean evInCValue;
 	
 	private boolean evInD;
+	
 	private long evInDValue;
 	
 	private boolean evInE;
+	
 	private double evInEValue;
 	
 	private boolean evInF;
+	
 	private String evInFValue;
+	
 	private boolean varInA;
 	
 	protected boolean getVarInA() {
@@ -533,17 +529,14 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		evInA = true;
 	}
 	
-	
 	private void raiseEvInB() {
 		evInB = true;
 	}
-	
 	
 	private void raiseEvInC(boolean value) {
 		evInCValue = value;
 		evInC = true;
 	}
-	
 	private boolean getEvInCValue() {
 		if (! evInC ) 
 			throw new IllegalStateException("Illegal event value access. Event EvInC is not raised!");
@@ -554,7 +547,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		evInDValue = value;
 		evInD = true;
 	}
-	
 	private long getEvInDValue() {
 		if (! evInD ) 
 			throw new IllegalStateException("Illegal event value access. Event EvInD is not raised!");
@@ -565,7 +557,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		evInEValue = value;
 		evInE = true;
 	}
-	
 	private double getEvInEValue() {
 		if (! evInE ) 
 			throw new IllegalStateException("Illegal event value access. Event EvInE is not raised!");
@@ -576,7 +567,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		evInFValue = value;
 		evInF = true;
 	}
-	
 	private String getEvInFValue() {
 		if (! evInF ) 
 			throw new IllegalStateException("Illegal event value access. Event EvInF is not raised!");

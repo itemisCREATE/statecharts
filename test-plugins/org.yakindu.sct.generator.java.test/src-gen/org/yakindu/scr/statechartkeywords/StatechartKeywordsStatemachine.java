@@ -124,10 +124,10 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	
 	private final boolean[] timeEvents = new boolean[1];
 	
-	
 	private boolean operationCallbackEvent;
 	
 	private boolean listeners;
+	
 	private long timerVariable;
 	
 	protected long getTimerVariable() {
@@ -354,11 +354,9 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		operationCallbackEvent = true;
 	}
 	
-	
 	private void raiseListeners() {
 		listeners = true;
 	}
-	
 	
 	public void setInternalOperationCallback(
 			InternalOperationCallback operationCallback) {

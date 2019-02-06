@@ -84,13 +84,14 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	
 	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
-	
 	private boolean activate_b;
 	
 	private boolean activate_c;
 	
 	private boolean activate_d;
+	
 	private long activate_dValue;
+	
 	public LocalEventsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -125,16 +126,20 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		if (!initialized)
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
-	
+		
 		clearOutEvents();
 		singleCycle();
 		clearEvents();
 		
 		// process queued events
 		while (internalEventQueue.size() > 0) {
-			internalEventQueue.poll().run();
+			Runnable task = getNextEvent();
+			if(task != null) {
+				task.run();
+			}
 			clearEvents();
 		}
+		
 	}
 	
 	protected void singleCycle() {
@@ -166,6 +171,14 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 			}
 		}
 	}
+	
+	protected Runnable getNextEvent() {
+		if(!internalEventQueue.isEmpty()) {
+			return internalEventQueue.poll();
+		}
+		return null;
+	}
+	
 	public void exit() {
 		exitSequence_localEvents_r1();
 		exitSequence_localEvents_r2();
@@ -247,7 +260,6 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		});
 	}
 	
-	
 	private void raiseActivate_c() {
 	
 		internalEventQueue.add( new Runnable() {
@@ -257,7 +269,6 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 			}
 		});
 	}
-	
 	
 	private void raiseActivate_d(final long value) {
 	
@@ -269,7 +280,6 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 			}
 		});
 	}
-	
 	private long getActivate_dValue() {
 		if (! activate_d ) 
 			throw new IllegalStateException("Illegal event value access. Event Activate_d is not raised!");

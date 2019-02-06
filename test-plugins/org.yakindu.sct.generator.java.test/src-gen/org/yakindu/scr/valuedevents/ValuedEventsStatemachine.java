@@ -10,10 +10,9 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		private long integerEventValue;
 		
 		public void raiseIntegerEvent(long value) {
-			integerEvent = true;
 			integerEventValue = value;
+			integerEvent = true;
 		}
-		
 		protected long getIntegerEventValue() {
 			if (! integerEvent ) 
 				throw new IllegalStateException("Illegal event value access. Event IntegerEvent is not raised!");
@@ -25,10 +24,9 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		private boolean booleanEventValue;
 		
 		public void raiseBooleanEvent(boolean value) {
-			booleanEvent = true;
 			booleanEventValue = value;
+			booleanEvent = true;
 		}
-		
 		protected boolean getBooleanEventValue() {
 			if (! booleanEvent ) 
 				throw new IllegalStateException("Illegal event value access. Event BooleanEvent is not raised!");
@@ -40,10 +38,9 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		private double realEventValue;
 		
 		public void raiseRealEvent(double value) {
-			realEvent = true;
 			realEventValue = value;
+			realEvent = true;
 		}
-		
 		protected double getRealEventValue() {
 			if (! realEvent ) 
 				throw new IllegalStateException("Illegal event value access. Event RealEvent is not raised!");
@@ -55,10 +52,9 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		private String stringEventValue;
 		
 		public void raiseStringEvent(String value) {
-			stringEvent = true;
 			stringEventValue = value;
+			stringEvent = true;
 		}
-		
 		protected String getStringEventValue() {
 			if (! stringEvent ) 
 				throw new IllegalStateException("Illegal event value access. Event StringEvent is not raised!");

@@ -28,8 +28,8 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		}
 		
 		protected void raiseEv_out(long value) {
-			ev_out = true;
 			ev_outValue = value;
+			ev_out = true;
 			for (SCInterfaceListener listener : listeners) {
 				listener.onEv_outRaised(value);
 			}
@@ -40,16 +40,14 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 				throw new IllegalStateException("Illegal event value access. Event Ev_out is not raised!");
 			return ev_outValue;
 		}
-		
 		private boolean ev_in;
 		
 		private long ev_inValue;
 		
 		public void raiseEv_in(long value) {
-			ev_in = true;
 			ev_inValue = value;
+			ev_in = true;
 		}
-		
 		protected long getEv_inValue() {
 			if (! ev_in ) 
 				throw new IllegalStateException("Illegal event value access. Event Ev_in is not raised!");

@@ -16,10 +16,9 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		private long e2Value;
 		
 		public void raiseE2(long value) {
-			e2 = true;
 			e2Value = value;
+			e2 = true;
 		}
-		
 		protected long getE2Value() {
 			if (! e2 ) 
 				throw new IllegalStateException("Illegal event value access. Event E2 is not raised!");

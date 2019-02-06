@@ -30,8 +30,8 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		}
 		
 		protected void raiseE(long value) {
-			e = true;
 			eValue = value;
+			e = true;
 		}
 		
 		public long getEValue() {
@@ -39,7 +39,6 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 				throw new IllegalStateException("Illegal event value access. Event E is not raised!");
 			return eValue;
 		}
-		
 		private long x;
 		
 		public long getX() {
@@ -103,10 +102,10 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	
 	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
-	
 	private boolean i1;
 	
 	private boolean i2;
+	
 	public EventDrivenInternalEventStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -140,16 +139,20 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		if (!initialized)
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
-	
+		
 		clearOutEvents();
 		singleCycle();
 		clearEvents();
 		
 		// process queued events
 		while (internalEventQueue.size() > 0) {
-			internalEventQueue.poll().run();
+			Runnable task = getNextEvent();
+			if(task != null) {
+				task.run();
+			}
 			clearEvents();
 		}
+		
 	}
 	
 	protected void singleCycle() {
@@ -178,6 +181,14 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			}
 		}
 	}
+	
+	protected Runnable getNextEvent() {
+		if(!internalEventQueue.isEmpty()) {
+			return internalEventQueue.poll();
+		}
+		return null;
+	}
+	
 	public void exit() {
 		exitSequence_EventDrivenInternalEvent_r1();
 		exitSequence_EventDrivenInternalEvent_r2();
@@ -252,7 +263,6 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		});
 	}
 	
-	
 	private void raiseI2() {
 	
 		internalEventQueue.add( new Runnable() {
@@ -262,7 +272,6 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			}
 		});
 	}
-	
 	
 	public void raiseStart() {
 		sCInterface.raiseStart();
