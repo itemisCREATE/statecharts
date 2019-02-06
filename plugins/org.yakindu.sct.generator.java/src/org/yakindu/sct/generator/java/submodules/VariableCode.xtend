@@ -15,11 +15,9 @@ class VariableCode {
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension SExecExtensions
 	
-	def fieldDeclaration(VariableDefinition variable) {
-		'''private «variable.typeSpecifier.targetLanguageName» «variable.identifier»;
-
+	def fieldDeclaration(VariableDefinition variable) '''
+		private «variable.typeSpecifier.targetLanguageName» «variable.identifier»;
 		'''
-	}
 	
 	def variableSetter(VariableDefinition it) {
 		'''
@@ -48,6 +46,7 @@ class VariableCode {
 	protected def generateVariableDefinition(VariableDefinition it) '''
 		«IF !const»
 			«fieldDeclaration»
+			
 		«ENDIF»
 		«getterVisibility» «typeSpecifier.targetLanguageName» «getter» {
 			return «identifier»;
@@ -63,7 +62,6 @@ class VariableCode {
 		protected «typeSpecifier.targetLanguageName» «assign»(«typeSpecifier.targetLanguageName» value) {
 			return this.«identifier» = value;
 		}
-
 		«ENDIF»
 	'''
 	

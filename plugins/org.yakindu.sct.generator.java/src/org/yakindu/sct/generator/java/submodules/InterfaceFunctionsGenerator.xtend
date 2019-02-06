@@ -52,9 +52,11 @@ class InterfaceFunctionsGenerator {
 			«ENDIF»
 			«FOR event : scope.eventDefinitions»
 			«generateEventDefinition(event, entry, scope)»
+			
 			«ENDFOR»
 			«FOR variable : scope.variableDefinitions»
 			«generateVariableDefinition(variable)»
+			
 			«ENDFOR»
 			«IF scope.hasEvents»
 			«scope.generateClearEvents»

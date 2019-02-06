@@ -39,9 +39,11 @@ class EventCode {
 	def generateEventDefinition(EventDefinition event, GeneratorEntry entry, InterfaceScope scope) '''
 		«event.fieldDeclaration»
 		«IF event.direction == Direction::IN»
+		
 			«event.generateInEventDefinition»
 		«ENDIF»
 		«IF event.direction == Direction::OUT»
+		
 			«event.generateOutEventDefinition(entry, scope)»
 		«ENDIF»
 	'''
@@ -51,8 +53,7 @@ class EventCode {
 		private boolean «event.identifier»;
 		
 		«IF event.hasValue»
-			private «event.typeSpecifier.targetLanguageName» «event.valueIdentifier»;
-			
+			private «event.typeSpecifier.targetLanguageName» «event.valueIdentifier»;	
 		«ENDIF»
 		'''
 	}
@@ -63,9 +64,9 @@ class EventCode {
 		}
 		
 		«outEventRaiser(event, entry, scope)»
-		
 		«IF event.hasValue»
-			«eventValueGetter(event)»
+		
+		«eventValueGetter(event)»
 		«ENDIF»
 	'''
 
