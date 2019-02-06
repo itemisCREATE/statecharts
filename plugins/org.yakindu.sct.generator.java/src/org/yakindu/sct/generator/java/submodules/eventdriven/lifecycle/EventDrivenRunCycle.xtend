@@ -31,7 +31,7 @@ class EventDrivenRunCycle extends RunCycle {
 	@Inject protected extension GeneratorPredicate
 	
 	override runCycle(ExecutionFlow it) {
-		if(!hasLocalEvents) {
+		if(!needsQueues) {
 			return super.runCycle(it)
 		}
 		'''
@@ -40,23 +40,24 @@ class EventDrivenRunCycle extends RunCycle {
 					throw new IllegalStateException(
 							"The state machine needs to be initialized first by calling the init() function.");
 				«IF needsRunCycleGuard»
-				if(«runCycleGuard») {
+				
+				if («runCycleGuard») {
 					return;
 				}
 				«runCycleGuard» = true;
 				«ENDIF»
 				
 				clearOutEvents();
-				singleCycle();
-				clearEvents();
+
+				Runnable task = getNextEvent();
+				if (task == null) {
+					task = getDefaultEvent();
+				}
 				
-				// process queued events
-				while (internalEventQueue.size() > 0) {
-					Runnable task = getNextEvent();
-					if(task != null) {
-						task.run();
-					}
+				while (task != null) {
+					task.run();
 					clearEvents();
+					task = getNextEvent();
 				}
 				
 				«IF needsRunCycleGuard»
@@ -69,6 +70,8 @@ class EventDrivenRunCycle extends RunCycle {
 			«IF needsNextEventFunction»
 			«nextEvent»
 			
+			«defaultEvent»
+			
 			«ENDIF»
 		'''
 	}
@@ -77,7 +80,7 @@ class EventDrivenRunCycle extends RunCycle {
 		protected void singleCycle() {
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 				switch (stateVector[nextStateIndex]) {
-				«FOR state : flow.states.filter[isLeaf]»
+					«FOR state : flow.states.filter[isLeaf]»
 					«IF state.reactMethod !== null»
 						case «state.stateName.asEscapedIdentifier»:
 							«state.reactMethod.shortName»(true);
@@ -104,6 +107,17 @@ class EventDrivenRunCycle extends RunCycle {
 			}
 			«ENDIF»
 			return null;
+		}
+	'''
+	
+	def protected getDefaultEvent(ExecutionFlow it) '''
+		protected Runnable getDefaultEvent() {
+			return new Runnable() {
+				@Override
+				public void run() {
+					singleCycle();
+				}
+			};
 		}
 	'''
 	
