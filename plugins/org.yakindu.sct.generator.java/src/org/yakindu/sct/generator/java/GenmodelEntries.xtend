@@ -72,6 +72,14 @@ class GenmodelEntries {
 	def private FeatureParameterValue getInEventQueueParameter(GeneratorEntry it) {
 		generalFeatures?.getParameterValue(IJavaFeatureConstants::IN_EVENT_QUEUE)
 	}
+	
+	def private FeatureParameterValue getSynchronizedParameter(GeneratorEntry it) {
+		generalFeatures?.getParameterValue(IJavaFeatureConstants::SYNCHRONIZED)
+	}
+	
+	def private FeatureParameterValue getRunnableParameter(GeneratorEntry it) {
+		generalFeatures?.getParameterValue(IJavaFeatureConstants::RUNNABLE)
+	}
 
 	def getLicenseText(GeneratorEntry it) {
 		if (licenseTextParameter !== null) {
@@ -163,6 +171,22 @@ class GenmodelEntries {
 	def inEventQueue(GeneratorEntry it) {
 		if(inEventQueueParameter !== null) {
 			inEventQueueParameter.booleanValue
+		} else {
+			false
+		}
+	}
+	
+	def isSynchronized(GeneratorEntry it) {
+		if(synchronizedParameter !== null) {
+			synchronizedParameter.booleanValue
+		} else {
+			false
+		}
+	}
+	
+	def isRunnable(GeneratorEntry it) {
+		if(runnableParameter !== null) {
+			runnableParameter.booleanValue
 		} else {
 			false
 		}

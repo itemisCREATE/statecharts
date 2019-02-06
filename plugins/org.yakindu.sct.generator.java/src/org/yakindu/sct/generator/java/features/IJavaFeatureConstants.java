@@ -44,6 +44,10 @@ public interface IJavaFeatureConstants {
 
 	public static final String IN_EVENT_QUEUE = "InEventQueue";
 
+	public static final String SYNCHRONIZED = "synchronized";
+
+	public static final String RUNNABLE = "Runnable";
+
 	public static final String FEATURE_TRACING = "Tracing";
 
 	public static final String PARAMETER_TRACING_ENTER_STATE = "enterState";

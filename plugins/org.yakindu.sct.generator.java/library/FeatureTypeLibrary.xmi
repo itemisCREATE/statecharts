@@ -37,6 +37,14 @@
         name="InEventQueue"
         optional="true"
         parameterType="BOOLEAN"/>
+    <parameters
+        name="synchronized"
+        optional="true"
+        parameterType="BOOLEAN"/>
+    <parameters
+        name="Runnable"
+        optional="true"
+        parameterType="BOOLEAN"/>
   </types>
   <types name="RunnableWrapper"
       comment="Generates a runnable wrapper for the state machine"
