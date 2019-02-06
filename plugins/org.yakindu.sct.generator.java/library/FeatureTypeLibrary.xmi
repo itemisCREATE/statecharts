@@ -47,6 +47,7 @@
         parameterType="BOOLEAN"/>
   </types>
   <types name="RunnableWrapper"
+      deprecated="true"
       comment="Generates a runnable wrapper for the state machine"
       optional="true">
     <parameters
@@ -59,6 +60,7 @@
         optional="true"/>
   </types>
   <types name="SynchronizedWrapper"
+      deprecated="true"
       optional="true">
     <parameters
         name="namePrefix"

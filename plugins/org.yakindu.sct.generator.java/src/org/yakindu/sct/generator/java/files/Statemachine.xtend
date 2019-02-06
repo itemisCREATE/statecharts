@@ -17,11 +17,13 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.java.FlowCode
+import org.yakindu.sct.generator.java.GeneratorPredicate
 import org.yakindu.sct.generator.java.GenmodelEntries
 import org.yakindu.sct.generator.java.JavaIncludeProvider
 import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
 import org.yakindu.sct.generator.java.submodules.EventCode
+import org.yakindu.sct.generator.java.submodules.FieldDeclarationGenerator
 import org.yakindu.sct.generator.java.submodules.InterfaceFunctionsGenerator
 import org.yakindu.sct.generator.java.submodules.InternalFunctionsGenerator
 import org.yakindu.sct.generator.java.submodules.StatemachineFunctionsGenerator
@@ -39,7 +41,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.generator.java.submodules.FieldDeclarationGenerator
+import org.yakindu.sct.generator.java.submodules.eventdriven.RunnableExtension
 
 class Statemachine {
 	@Inject protected Set<JavaIncludeProvider> includeProviders
@@ -66,6 +68,9 @@ class Statemachine {
 	@Inject protected extension IsActive
 	@Inject protected extension IsStateActive
 	@Inject protected extension IsFinal
+	@Inject protected extension RunnableExtension
+	
+	@Inject protected extension GeneratorPredicate
 	
 	protected ExecutionFlow flow
 	protected GeneratorEntry entry
@@ -85,19 +90,32 @@ class Statemachine {
 			.addImports(imports)
 			.addImports(includeProviders.map[getImports(flow)].flatten)
 			.classTemplate(
-				ClassTemplate
-					.create
-					.className(flow.statemachineClassName)
-					.addInterface(flow.statemachineInterfaceName)
-					.classContent(
-						classContent
-					)
+				classTemplate
 			)
 			.generate
 	}
 	
+	def protected ClassTemplate classTemplate() {
+		val cT = ClassTemplate
+			.create
+			.className(flow.statemachineClassName)
+			.addInterface(flow.statemachineInterfaceName)
+			.classContent(
+				classContent
+			)
+		if(needsRunnable) {
+			cT.addInterface("Runnable")
+		}
+		cT
+	}
+	
 	def protected classContent() {
 		'''
+		«IF needsRunnable»
+		
+		«runnable»
+		
+		«ENDIF»
 		«flow.interfaceClasses(entry)»
 		«flow.createFieldDeclarations(entry)»
 		«flow.createConstructor»
