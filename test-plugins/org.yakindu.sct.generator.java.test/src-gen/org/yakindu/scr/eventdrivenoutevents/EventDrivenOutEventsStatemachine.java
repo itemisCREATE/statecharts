@@ -7,7 +7,6 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	
 		private boolean e1;
 		
-		
 		public void raiseE1() {
 			e1 = true;
 			runCycle();
@@ -15,7 +14,6 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 		
 		
 		private boolean e2;
-		
 		
 		public boolean isRaisedE2() {
 			return e2;
@@ -51,8 +49,6 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	private final State[] stateVector = new State[2];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public EventDrivenOutEventsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

@@ -7,7 +7,7 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 	
 		private boolean e;
 		
-		private long eValue;	
+		private long eValue;
 		
 		public void raiseE(long value) {
 			eValue = value;
@@ -18,7 +18,6 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 				throw new IllegalStateException("Illegal event value access. Event E is not raised!");
 			return eValue;
 		}
-		
 		
 		protected void clearEvents() {
 			e = false;
@@ -40,8 +39,6 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
-	
 	
 	protected long getB() {
 		return b;

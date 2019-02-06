@@ -7,11 +7,9 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 	
 		private boolean reset;
 		
-		
 		public void raiseReset() {
 			reset = true;
 		}
-		
 		
 		private long number;
 		
@@ -22,7 +20,6 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 		public void setNumber(long value) {
 			this.number = value;
 		}
-		
 		
 		protected void clearEvents() {
 			reset = false;
@@ -44,8 +41,6 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public StaticChoiceStatemachine() {
 		sCInterface = new SCInterfaceImpl();

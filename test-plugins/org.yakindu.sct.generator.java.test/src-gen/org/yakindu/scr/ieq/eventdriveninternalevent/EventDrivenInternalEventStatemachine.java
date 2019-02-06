@@ -9,7 +9,6 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	
 		private boolean start;
 		
-		
 		public void raiseStart() {
 			start = true;
 			runCycle();
@@ -17,7 +16,6 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		
 		
 		private boolean reset;
-		
 		
 		public void raiseReset() {
 			reset = true;
@@ -27,7 +25,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		
 		private boolean e;
 		
-		private long eValue;	
+		private long eValue;
 		
 		public boolean isRaisedE() {
 			return e;
@@ -54,7 +52,6 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			this.x = value;
 		}
 		
-		
 		private long i1_sequence;
 		
 		public long getI1_sequence() {
@@ -65,7 +62,6 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			this.i1_sequence = value;
 		}
 		
-		
 		private long i2_sequence;
 		
 		public long getI2_sequence() {
@@ -75,7 +71,6 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		public void setI2_sequence(long value) {
 			this.i2_sequence = value;
 		}
-		
 		
 		protected void clearEvents() {
 			start = false;
@@ -107,15 +102,11 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	
 	private int nextStateIndex;
 	
-	
-	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
 	private Queue<Runnable> inEventQueue = new LinkedList<Runnable>();
 	private boolean isRunningCycle = false;
 	private boolean i1;
-	
 	private boolean i2;
-	
 	public EventDrivenInternalEventStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}

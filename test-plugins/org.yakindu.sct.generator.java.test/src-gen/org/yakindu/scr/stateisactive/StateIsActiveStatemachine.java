@@ -7,11 +7,9 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	
 		private boolean event1;
 		
-		
 		public void raiseEvent1() {
 			event1 = true;
 		}
-		
 		
 		protected void clearEvents() {
 			event1 = false;
@@ -34,8 +32,6 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	private final State[] stateVector = new State[2];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public StateIsActiveStatemachine() {
 		sCInterface = new SCInterfaceImpl();

@@ -7,35 +7,27 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	
 		private boolean toA;
 		
-		
 		public void raiseToA() {
 			toA = true;
 		}
 		
-		
 		private boolean toB;
-		
 		
 		public void raiseToB() {
 			toB = true;
 		}
 		
-		
 		private boolean toHistory;
-		
 		
 		public void raiseToHistory() {
 			toHistory = true;
 		}
 		
-		
 		private boolean next;
-		
 		
 		public void raiseNext() {
 			next = true;
 		}
-		
 		
 		protected void clearEvents() {
 			toA = false;
@@ -64,8 +56,6 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public HistoryWithoutInitialStepStatemachine() {
 		sCInterface = new SCInterfaceImpl();

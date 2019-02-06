@@ -16,7 +16,6 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	
 	private int nextStateIndex;
 	
-	
 	private ITimer timer;
 	
 	private final boolean[] timeEvents = new boolean[2];

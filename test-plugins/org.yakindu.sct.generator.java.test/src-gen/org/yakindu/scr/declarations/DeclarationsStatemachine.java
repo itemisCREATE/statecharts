@@ -7,14 +7,11 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	
 		private boolean evA;
 		
-		
 		public void raiseEvA() {
 			evA = true;
 		}
 		
-		
 		private boolean evB;
-		
 		
 		public boolean isRaisedEvB() {
 			return evB;
@@ -26,7 +23,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 		private boolean evC;
 		
-		private boolean evCValue;	
+		private boolean evCValue;
 		
 		public void raiseEvC(boolean value) {
 			evCValue = value;
@@ -38,10 +35,9 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			return evCValue;
 		}
 		
-		
 		private boolean evD;
 		
-		private long evDValue;	
+		private long evDValue;
 		
 		public boolean isRaisedEvD() {
 			return evD;
@@ -60,7 +56,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 		private boolean evE;
 		
-		private double evEValue;	
+		private double evEValue;
 		
 		public void raiseEvE(double value) {
 			evEValue = value;
@@ -72,10 +68,9 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			return evEValue;
 		}
 		
-		
 		private boolean evF;
 		
-		private String evFValue;	
+		private String evFValue;
 		
 		public boolean isRaisedEvF() {
 			return evF;
@@ -102,7 +97,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			this.varA = value;
 		}
 		
-		
 		private long varB;
 		
 		public long getVarB() {
@@ -112,7 +106,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		public void setVarB(long value) {
 			this.varB = value;
 		}
-		
 		
 		private double varC;
 		
@@ -124,7 +117,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			this.varC = value;
 		}
 		
-		
 		private String varD;
 		
 		public String getVarD() {
@@ -135,7 +127,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			this.varD = value;
 		}
 		
-		
 		private long varE;
 		
 		public long getVarE() {
@@ -145,7 +136,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		public void setVarE(long value) {
 			this.varE = value;
 		}
-		
 		
 		protected void clearEvents() {
 			evA = false;
@@ -166,14 +156,11 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	
 		private boolean evA;
 		
-		
 		public void raiseEvA() {
 			evA = true;
 		}
 		
-		
 		private boolean evB;
-		
 		
 		public boolean isRaisedEvB() {
 			return evB;
@@ -185,7 +172,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 		private boolean evC;
 		
-		private boolean evCValue;	
+		private boolean evCValue;
 		
 		public void raiseEvC(boolean value) {
 			evCValue = value;
@@ -197,10 +184,9 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			return evCValue;
 		}
 		
-		
 		private boolean evD;
 		
-		private long evDValue;	
+		private long evDValue;
 		
 		public boolean isRaisedEvD() {
 			return evD;
@@ -219,7 +205,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 		private boolean evE;
 		
-		private double evEValue;	
+		private double evEValue;
 		
 		public void raiseEvE(double value) {
 			evEValue = value;
@@ -231,10 +217,9 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			return evEValue;
 		}
 		
-		
 		private boolean evF;
 		
-		private String evFValue;	
+		private String evFValue;
 		
 		public boolean isRaisedEvF() {
 			return evF;
@@ -261,7 +246,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			this.varA = value;
 		}
 		
-		
 		private long varB;
 		
 		public long getVarB() {
@@ -271,7 +255,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		public void setVarB(long value) {
 			this.varB = value;
 		}
-		
 		
 		private double varC;
 		
@@ -283,7 +266,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			this.varC = value;
 		}
 		
-		
 		private String varD;
 		
 		public String getVarD() {
@@ -294,7 +276,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			this.varD = value;
 		}
 		
-		
 		private long varE;
 		
 		public long getVarE() {
@@ -304,7 +285,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		public void setVarE(long value) {
 			this.varE = value;
 		}
-		
 		
 		protected void clearEvents() {
 			evA = false;
@@ -337,24 +317,20 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	
 	private int nextStateIndex;
 	
-	
-	
 	private boolean evInA;
-	
 	private boolean evInB;
-	
 	private boolean evInC;
 	
-	private boolean evInCValue;	
+	private boolean evInCValue;
 	private boolean evInD;
 	
-	private long evInDValue;	
+	private long evInDValue;
 	private boolean evInE;
 	
-	private double evInEValue;	
+	private double evInEValue;
 	private boolean evInF;
 	
-	private String evInFValue;	
+	private String evInFValue;
 	private boolean varInA;
 	
 	protected boolean getVarInA() {

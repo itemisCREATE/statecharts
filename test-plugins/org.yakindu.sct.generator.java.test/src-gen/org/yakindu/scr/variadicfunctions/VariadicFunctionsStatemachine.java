@@ -41,8 +41,6 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 	
 	private int nextStateIndex;
 	
-	
-	
 	private InternalOperationCallback operationCallback;
 	public VariadicFunctionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

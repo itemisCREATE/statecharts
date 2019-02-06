@@ -29,7 +29,6 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 			this.b = value;
 		}
 		
-		
 	}
 	
 	
@@ -45,8 +44,6 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public LogicalAndStatemachine() {
 		sCInterface = new SCInterfaceImpl();

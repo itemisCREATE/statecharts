@@ -9,7 +9,6 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	
 		private boolean e;
 		
-		
 		public void raiseE() {
 			e = true;
 			runCycle();
@@ -26,7 +25,6 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 			this.cycleCountSm = value;
 		}
 		
-		
 		private long cycleCount1;
 		
 		public long getCycleCount1() {
@@ -36,7 +34,6 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		public void setCycleCount1(long value) {
 			this.cycleCount1 = value;
 		}
-		
 		
 		private long cycleCount2;
 		
@@ -48,7 +45,6 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 			this.cycleCount2 = value;
 		}
 		
-		
 		private long checksum;
 		
 		public long getChecksum() {
@@ -58,7 +54,6 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		public void setChecksum(long value) {
 			this.checksum = value;
 		}
-		
 		
 		protected void clearEvents() {
 			e = false;
@@ -87,16 +82,12 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	
 	private int nextStateIndex;
 	
-	
-	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
 	private boolean activate_b;
-	
 	private boolean activate_c;
-	
 	private boolean activate_d;
 	
-	private long activate_dValue;	
+	private long activate_dValue;
 	public LocalEventsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}

@@ -7,7 +7,6 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	
 		private boolean e;
 		
-		
 		public void raiseE() {
 			e = true;
 			runCycle();
@@ -15,7 +14,6 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		
 		
 		private boolean go;
-		
 		
 		public void raiseGo() {
 			go = true;
@@ -33,7 +31,6 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 			this.cLocalReaction = value;
 		}
 		
-		
 		private long caLocalReaction;
 		
 		public long getCaLocalReaction() {
@@ -43,7 +40,6 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		public void setCaLocalReaction(long value) {
 			this.caLocalReaction = value;
 		}
-		
 		
 		protected void clearEvents() {
 			e = false;
@@ -79,8 +75,6 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	private final State[] stateVector = new State[5];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public ChildFirstTransitionTakingStatemachine() {
 		sCInterface = new SCInterfaceImpl();

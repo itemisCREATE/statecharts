@@ -21,7 +21,6 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 			this.a_local = value;
 		}
 		
-		
 		private long c_local;
 		
 		public long getC_local() {
@@ -31,7 +30,6 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		public void setC_local(long value) {
 			this.c_local = value;
 		}
-		
 		
 		private long aa_local;
 		
@@ -43,7 +41,6 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 			this.aa_local = value;
 		}
 		
-		
 		private long ac_local;
 		
 		public long getAc_local() {
@@ -53,7 +50,6 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		public void setAc_local(long value) {
 			this.ac_local = value;
 		}
-		
 		
 		private long aaa_local;
 		
@@ -65,7 +61,6 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 			this.aaa_local = value;
 		}
 		
-		
 		private long aac_local;
 		
 		public long getAac_local() {
@@ -75,7 +70,6 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		public void setAac_local(long value) {
 			this.aac_local = value;
 		}
-		
 		
 		private long a_check;
 		
@@ -87,7 +81,6 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 			this.a_check = value;
 		}
 		
-		
 		private long aa_check;
 		
 		public long getAa_check() {
@@ -97,7 +90,6 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		public void setAa_check(long value) {
 			this.aa_check = value;
 		}
-		
 		
 		private long aaa_check;
 		
@@ -109,7 +101,6 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 			this.aaa_check = value;
 		}
 		
-		
 		private long aac_check;
 		
 		public long getAac_check() {
@@ -119,7 +110,6 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		public void setAac_check(long value) {
 			this.aac_check = value;
 		}
-		
 		
 		private long ac_check;
 		
@@ -131,7 +121,6 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 			this.ac_check = value;
 		}
 		
-		
 		private long c_check;
 		
 		public long getC_check() {
@@ -141,7 +130,6 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		public void setC_check(long value) {
 			this.c_check = value;
 		}
-		
 		
 		private long sm_local;
 		
@@ -153,7 +141,6 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 			this.sm_local = value;
 		}
 		
-		
 		private long cnt;
 		
 		public long getCnt() {
@@ -163,7 +150,6 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		public void setCnt(long value) {
 			this.cnt = value;
 		}
-		
 		
 	}
 	
@@ -187,8 +173,6 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 	private final State[] stateVector = new State[4];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public ChildFirstOrthogonalReactionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

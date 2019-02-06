@@ -7,11 +7,9 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 	
 		private boolean e1;
 		
-		
 		public void raiseE1() {
 			e1 = true;
 		}
-		
 		
 		private double myReal1;
 		
@@ -37,7 +35,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 			this.myReal2 = value;
 		}
 		
-		
 		private double myFloat;
 		
 		public double getMyFloat() {
@@ -47,7 +44,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		public void setMyFloat(double value) {
 			this.myFloat = value;
 		}
-		
 		
 		private double myDouble;
 		
@@ -59,7 +55,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 			this.myDouble = value;
 		}
 		
-		
 		private boolean less;
 		
 		public boolean getLess() {
@@ -69,7 +64,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		public void setLess(boolean value) {
 			this.less = value;
 		}
-		
 		
 		private boolean greater;
 		
@@ -81,7 +75,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 			this.greater = value;
 		}
 		
-		
 		private boolean equalOrLess;
 		
 		public boolean getEqualOrLess() {
@@ -91,7 +84,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		public void setEqualOrLess(boolean value) {
 			this.equalOrLess = value;
 		}
-		
 		
 		private boolean equalOrGreater;
 		
@@ -103,7 +95,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 			this.equalOrGreater = value;
 		}
 		
-		
 		private boolean equal;
 		
 		public boolean getEqual() {
@@ -113,7 +104,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		public void setEqual(boolean value) {
 			this.equal = value;
 		}
-		
 		
 		private boolean notEqual;
 		
@@ -125,7 +115,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 			this.notEqual = value;
 		}
 		
-		
 		private boolean plus;
 		
 		public boolean getPlus() {
@@ -135,7 +124,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		public void setPlus(boolean value) {
 			this.plus = value;
 		}
-		
 		
 		private boolean minus;
 		
@@ -147,7 +135,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 			this.minus = value;
 		}
 		
-		
 		private boolean multiply;
 		
 		public boolean getMultiply() {
@@ -157,7 +144,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		public void setMultiply(boolean value) {
 			this.multiply = value;
 		}
-		
 		
 		private boolean division;
 		
@@ -169,7 +155,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 			this.division = value;
 		}
 		
-		
 		private boolean modulo;
 		
 		public boolean getModulo() {
@@ -179,7 +164,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		public void setModulo(boolean value) {
 			this.modulo = value;
 		}
-		
 		
 		private double negat;
 		
@@ -191,7 +175,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 			this.negat = value;
 		}
 		
-		
 		private boolean complement;
 		
 		public boolean getComplement() {
@@ -201,7 +184,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		public void setComplement(boolean value) {
 			this.complement = value;
 		}
-		
 		
 		private double multiAssign;
 		
@@ -213,7 +195,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 			this.multiAssign = value;
 		}
 		
-		
 		private double divAssign;
 		
 		public double getDivAssign() {
@@ -223,7 +204,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		public void setDivAssign(double value) {
 			this.divAssign = value;
 		}
-		
 		
 		private double plusAssign;
 		
@@ -235,7 +215,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 			this.plusAssign = value;
 		}
 		
-		
 		private double minusAssign;
 		
 		public double getMinusAssign() {
@@ -245,7 +224,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		public void setMinusAssign(double value) {
 			this.minusAssign = value;
 		}
-		
 		
 		private boolean moduloAssign;
 		
@@ -257,7 +235,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 			this.moduloAssign = value;
 		}
 		
-		
 		private double increment;
 		
 		public double getIncrement() {
@@ -267,7 +244,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		public void setIncrement(double value) {
 			this.increment = value;
 		}
-		
 		
 		private double incrementAssign;
 		
@@ -279,7 +255,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 			this.incrementAssign = value;
 		}
 		
-		
 		private double decrement;
 		
 		public double getDecrement() {
@@ -290,7 +265,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 			this.decrement = value;
 		}
 		
-		
 		private double decrementAssign;
 		
 		public double getDecrementAssign() {
@@ -300,7 +274,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		public void setDecrementAssign(double value) {
 			this.decrementAssign = value;
 		}
-		
 		
 		protected void clearEvents() {
 			e1 = false;
@@ -321,8 +294,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public RealExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

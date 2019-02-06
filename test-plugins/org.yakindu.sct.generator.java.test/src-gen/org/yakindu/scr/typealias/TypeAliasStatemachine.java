@@ -7,11 +7,9 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 	
 		private boolean myEvent;
 		
-		
 		public void raiseMyEvent() {
 			myEvent = true;
 		}
-		
 		
 		private long myVar;
 		
@@ -23,7 +21,6 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 			this.myVar = value;
 		}
 		
-		
 		private String myString;
 		
 		public String getMyString() {
@@ -33,7 +30,6 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 		public void setMyString(String value) {
 			this.myString = value;
 		}
-		
 		
 		protected void clearEvents() {
 			myEvent = false;
@@ -56,8 +52,6 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public TypeAliasStatemachine() {
 		sCInterface = new SCInterfaceImpl();

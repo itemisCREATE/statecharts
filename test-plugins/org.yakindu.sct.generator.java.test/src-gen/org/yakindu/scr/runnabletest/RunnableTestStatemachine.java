@@ -21,7 +21,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		}
 		private boolean ev_out;
 		
-		private long ev_outValue;	
+		private long ev_outValue;
 		
 		public boolean isRaisedEv_out() {
 			return ev_out;
@@ -43,7 +43,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		
 		private boolean ev_in;
 		
-		private long ev_inValue;	
+		private long ev_inValue;
 		
 		public void raiseEv_in(long value) {
 			ev_inValue = value;
@@ -55,7 +55,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 			return ev_inValue;
 		}
 		
-		
 		private long myVar;
 		
 		public long getMyVar() {
@@ -65,7 +64,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		public void setMyVar(long value) {
 			this.myVar = value;
 		}
-		
 		
 		private long afterCalls;
 		
@@ -77,7 +75,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 			this.afterCalls = value;
 		}
 		
-		
 		private long cycles;
 		
 		public long getCycles() {
@@ -88,7 +85,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 			this.cycles = value;
 		}
 		
-		
 		private long s2_entered;
 		
 		public long getS2_entered() {
@@ -98,7 +94,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		public void setS2_entered(long value) {
 			this.s2_entered = value;
 		}
-		
 		
 		protected void clearEvents() {
 			ev_in = false;
@@ -126,7 +121,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	private ITimer timer;
 	

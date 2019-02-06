@@ -7,11 +7,9 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 	
 		private boolean event1;
 		
-		
 		public void raiseEvent1() {
 			event1 = true;
 		}
-		
 		
 		protected void clearEvents() {
 			event1 = false;
@@ -33,8 +31,6 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public SimpleHierachyStatemachine() {
 		sCInterface = new SCInterfaceImpl();

@@ -21,7 +21,6 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		}
 		private boolean ev_out;
 		
-		
 		public boolean isRaisedEv_out() {
 			return ev_out;
 		}
@@ -35,11 +34,9 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		
 		private boolean ev_in;
 		
-		
 		public void raiseEv_in() {
 			ev_in = true;
 		}
-		
 		
 		private long afterCalls;
 		
@@ -51,7 +48,6 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 			this.afterCalls = value;
 		}
 		
-		
 		private long cycles;
 		
 		public long getCycles() {
@@ -62,7 +58,6 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 			this.cycles = value;
 		}
 		
-		
 		private long s2_entered;
 		
 		public long getS2_entered() {
@@ -72,7 +67,6 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		public void setS2_entered(long value) {
 			this.s2_entered = value;
 		}
-		
 		
 		protected void clearEvents() {
 			ev_in = false;
@@ -99,7 +93,6 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	private ITimer timer;
 	

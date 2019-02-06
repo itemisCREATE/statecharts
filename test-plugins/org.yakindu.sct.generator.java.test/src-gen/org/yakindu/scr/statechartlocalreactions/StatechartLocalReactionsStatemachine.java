@@ -15,7 +15,6 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 			this.myInt = value;
 		}
 		
-		
 	}
 	
 	
@@ -33,8 +32,6 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	private final State[] stateVector = new State[2];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public StatechartLocalReactionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

@@ -7,11 +7,9 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	
 		private boolean e1;
 		
-		
 		public void raiseE1() {
 			e1 = true;
 		}
-		
 		
 		private long myBit1;
 		
@@ -23,7 +21,6 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 			this.myBit1 = value;
 		}
 		
-		
 		private long myBit2;
 		
 		public long getMyBit2() {
@@ -33,7 +30,6 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		public void setMyBit2(long value) {
 			this.myBit2 = value;
 		}
-		
 		
 		private long leftBitshift;
 		
@@ -45,7 +41,6 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 			this.leftBitshift = value;
 		}
 		
-		
 		private long rightBitshift;
 		
 		public long getRightBitshift() {
@@ -55,7 +50,6 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		public void setRightBitshift(long value) {
 			this.rightBitshift = value;
 		}
-		
 		
 		private long complementBitshift;
 		
@@ -67,7 +61,6 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 			this.complementBitshift = value;
 		}
 		
-		
 		private long bitwiseAnd;
 		
 		public long getBitwiseAnd() {
@@ -77,7 +70,6 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		public void setBitwiseAnd(long value) {
 			this.bitwiseAnd = value;
 		}
-		
 		
 		private long bitwiseOr;
 		
@@ -89,7 +81,6 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 			this.bitwiseOr = value;
 		}
 		
-		
 		private long bitwiseXor;
 		
 		public long getBitwiseXor() {
@@ -99,7 +90,6 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		public void setBitwiseXor(long value) {
 			this.bitwiseXor = value;
 		}
-		
 		
 		protected void clearEvents() {
 			e1 = false;
@@ -120,8 +110,6 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public BitExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

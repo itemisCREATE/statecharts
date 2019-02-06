@@ -7,11 +7,9 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 	
 		private boolean e;
 		
-		
 		public void raiseE() {
 			e = true;
 		}
-		
 		
 		private long cnt;
 		
@@ -37,7 +35,6 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 			this.disable_a = value;
 		}
 		
-		
 		private boolean disable_aa;
 		
 		public boolean getDisable_aa() {
@@ -47,7 +44,6 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		public void setDisable_aa(boolean value) {
 			this.disable_aa = value;
 		}
-		
 		
 		private boolean disable_aaa;
 		
@@ -59,7 +55,6 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 			this.disable_aaa = value;
 		}
 		
-		
 		private long a_local;
 		
 		public long getA_local() {
@@ -69,7 +64,6 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		public void setA_local(long value) {
 			this.a_local = value;
 		}
-		
 		
 		private long aa_local;
 		
@@ -81,7 +75,6 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 			this.aa_local = value;
 		}
 		
-		
 		private long aaa_local;
 		
 		public long getAaa_local() {
@@ -92,7 +85,6 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 			this.aaa_local = value;
 		}
 		
-		
 		private long sm_local;
 		
 		public long getSm_local() {
@@ -102,7 +94,6 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 		public void setSm_local(long value) {
 			this.sm_local = value;
 		}
-		
 		
 		protected void clearEvents() {
 			e = false;
@@ -127,8 +118,6 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public ParentFirstLocalReactionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

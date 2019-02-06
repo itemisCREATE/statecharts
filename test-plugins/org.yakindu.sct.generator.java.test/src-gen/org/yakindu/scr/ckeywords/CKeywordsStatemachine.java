@@ -7,19 +7,15 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	
 		private boolean auto;
 		
-		
 		public void raiseAuto() {
 			auto = true;
 		}
 		
-		
 		private boolean breakEvent;
-		
 		
 		public void raiseBreak() {
 			breakEvent = true;
 		}
-		
 		
 		private boolean caseVariable;
 		
@@ -31,7 +27,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.caseVariable = value;
 		}
 		
-		
 		private long doVariable;
 		
 		public long getDo() {
@@ -41,7 +36,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		public void setDo(long value) {
 			this.doVariable = value;
 		}
-		
 		
 		private boolean continueVariable;
 		
@@ -53,7 +47,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.continueVariable = value;
 		}
 		
-		
 		private boolean doubleVariable;
 		
 		public boolean getDouble() {
@@ -63,7 +56,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		public void setDouble(boolean value) {
 			this.doubleVariable = value;
 		}
-		
 		
 		private boolean enumVariable;
 		
@@ -75,7 +67,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.enumVariable = value;
 		}
 		
-		
 		private boolean extern;
 		
 		public boolean getExtern() {
@@ -85,7 +76,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		public void setExtern(boolean value) {
 			this.extern = value;
 		}
-		
 		
 		private boolean floatVariable;
 		
@@ -97,7 +87,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.floatVariable = value;
 		}
 		
-		
 		private boolean forVariable;
 		
 		public boolean getFor() {
@@ -107,7 +96,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		public void setFor(boolean value) {
 			this.forVariable = value;
 		}
-		
 		
 		private boolean gotoVariable;
 		
@@ -119,7 +107,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.gotoVariable = value;
 		}
 		
-		
 		private boolean ifVariable;
 		
 		public boolean getIf() {
@@ -129,7 +116,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		public void setIf(boolean value) {
 			this.ifVariable = value;
 		}
-		
 		
 		private boolean intVariable;
 		
@@ -141,7 +127,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.intVariable = value;
 		}
 		
-		
 		private boolean longVariable;
 		
 		public boolean getLong() {
@@ -151,7 +136,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		public void setLong(boolean value) {
 			this.longVariable = value;
 		}
-		
 		
 		private boolean register;
 		
@@ -163,7 +147,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.register = value;
 		}
 		
-		
 		private boolean returnVariable;
 		
 		public boolean getReturn() {
@@ -173,7 +156,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		public void setReturn(boolean value) {
 			this.returnVariable = value;
 		}
-		
 		
 		private boolean shortVariable;
 		
@@ -185,7 +167,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.shortVariable = value;
 		}
 		
-		
 		private boolean signed;
 		
 		public boolean getSigned() {
@@ -195,7 +176,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		public void setSigned(boolean value) {
 			this.signed = value;
 		}
-		
 		
 		private boolean sizeof;
 		
@@ -207,7 +187,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.sizeof = value;
 		}
 		
-		
 		private boolean staticVariable;
 		
 		public boolean getStatic() {
@@ -217,7 +196,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		public void setStatic(boolean value) {
 			this.staticVariable = value;
 		}
-		
 		
 		private boolean struct;
 		
@@ -229,7 +207,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.struct = value;
 		}
 		
-		
 		private boolean switchVariable;
 		
 		public boolean getSwitch() {
@@ -239,7 +216,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		public void setSwitch(boolean value) {
 			this.switchVariable = value;
 		}
-		
 		
 		private boolean typedef;
 		
@@ -251,7 +227,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.typedef = value;
 		}
 		
-		
 		private boolean union;
 		
 		public boolean getUnion() {
@@ -261,7 +236,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		public void setUnion(boolean value) {
 			this.union = value;
 		}
-		
 		
 		private boolean unsigned;
 		
@@ -273,7 +247,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.unsigned = value;
 		}
 		
-		
 		private boolean voidVariable;
 		
 		public boolean getVoid() {
@@ -283,7 +256,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		public void setVoid(boolean value) {
 			this.voidVariable = value;
 		}
-		
 		
 		private boolean volatileVariable;
 		
@@ -295,7 +267,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.volatileVariable = value;
 		}
 		
-		
 		private boolean whileVariable;
 		
 		public boolean getWhile() {
@@ -305,7 +276,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		public void setWhile(boolean value) {
 			this.whileVariable = value;
 		}
-		
 		
 		protected void clearEvents() {
 			auto = false;
@@ -330,8 +300,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public CKeywordsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

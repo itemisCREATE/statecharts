@@ -15,8 +15,6 @@ public class EmptyTransitionStatemachine implements IEmptyTransitionStatemachine
 	
 	private int nextStateIndex;
 	
-	
-	
 	public EmptyTransitionStatemachine() {
 	}
 	

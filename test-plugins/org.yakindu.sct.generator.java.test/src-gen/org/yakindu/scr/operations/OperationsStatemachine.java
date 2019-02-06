@@ -24,11 +24,9 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		}
 		private boolean ev;
 		
-		
 		public void raiseEv() {
 			ev = true;
 		}
-		
 		
 		protected void clearEvents() {
 			ev = false;
@@ -53,8 +51,6 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
-	
 	
 	private boolean myBool;
 	

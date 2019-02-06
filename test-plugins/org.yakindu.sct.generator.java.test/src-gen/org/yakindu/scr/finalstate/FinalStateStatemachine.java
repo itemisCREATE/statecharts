@@ -15,8 +15,6 @@ public class FinalStateStatemachine implements IFinalStateStatemachine {
 	
 	private int nextStateIndex;
 	
-	
-	
 	public FinalStateStatemachine() {
 	}
 	

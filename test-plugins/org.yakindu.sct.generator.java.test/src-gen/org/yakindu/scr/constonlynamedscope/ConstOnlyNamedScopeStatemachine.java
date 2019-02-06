@@ -7,7 +7,7 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 	
 		private boolean e;
 		
-		private long eValue;	
+		private long eValue;
 		
 		public void raiseE(long value) {
 			eValue = value;
@@ -18,7 +18,6 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 				throw new IllegalStateException("Illegal event value access. Event E is not raised!");
 			return eValue;
 		}
-		
 		
 		protected void clearEvents() {
 			e = false;
@@ -32,11 +31,9 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 			return b;
 		}
 		
-		
 		public long getC() {
 			return c;
 		}
-		
 		
 	}
 	
@@ -57,8 +54,6 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public ConstOnlyNamedScopeStatemachine() {
 		sCInterface = new SCInterfaceImpl();

@@ -51,9 +51,9 @@ class EventCode {
 	def fieldDeclaration(EventDefinition event) {
 		'''
 		private boolean «event.identifier»;
-		
 		«IF event.hasValue»
-			private «event.typeSpecifier.targetLanguageName» «event.valueIdentifier»;	
+		
+		private «event.typeSpecifier.targetLanguageName» «event.valueIdentifier»;
 		«ENDIF»
 		'''
 	}
@@ -75,7 +75,6 @@ class EventCode {
 		«IF event.hasValue»
 			«eventValueGetter(event)»
 		«ENDIF»
-
 	'''
 	
 	def eventValueGetter(EventDefinition it) {

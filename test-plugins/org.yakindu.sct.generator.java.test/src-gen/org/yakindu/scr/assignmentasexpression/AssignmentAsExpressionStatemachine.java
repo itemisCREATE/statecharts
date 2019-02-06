@@ -15,7 +15,6 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 			this.a = value;
 		}
 		
-		
 		private long b;
 		
 		public long getB() {
@@ -54,7 +53,6 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 			this.d = value;
 		}
 		
-		
 		private long e;
 		
 		public long getE() {
@@ -64,7 +62,6 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		public void setE(long value) {
 			this.e = value;
 		}
-		
 		
 		private long f;
 		
@@ -90,7 +87,6 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 			this.g = value;
 		}
 		
-		
 		private long h;
 		
 		public long getH() {
@@ -114,7 +110,6 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		public void setI(long value) {
 			this.i = value;
 		}
-		
 		
 		private long i1;
 		
@@ -140,7 +135,6 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 			this.j = value;
 		}
 		
-		
 		private long j1;
 		
 		public long getJ1() {
@@ -164,7 +158,6 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		public void setK(long value) {
 			this.k = value;
 		}
-		
 		
 		private long k1;
 		
@@ -190,7 +183,6 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 			this.l = value;
 		}
 		
-		
 		private long m;
 		
 		public long getM() {
@@ -200,7 +192,6 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		public void setM(long value) {
 			this.m = value;
 		}
-		
 		
 		private long n;
 		
@@ -226,7 +217,6 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 			this.p = value;
 		}
 		
-		
 		private long r;
 		
 		public long getR() {
@@ -251,7 +241,6 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 			this.t = value;
 		}
 		
-		
 		private long u;
 		
 		public long getU() {
@@ -261,7 +250,6 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		public void setU(long value) {
 			this.u = value;
 		}
-		
 		
 		private long v;
 		
@@ -287,7 +275,6 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 			this.w = value;
 		}
 		
-		
 	}
 	
 	
@@ -311,8 +298,6 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public AssignmentAsExpressionStatemachine() {
 		sCInterface = new SCInterfaceImpl();

@@ -15,7 +15,6 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 			this.myInt = value;
 		}
 		
-		
 		private String myString;
 		
 		public String getMyString() {
@@ -25,7 +24,6 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 		protected void setMyString(String value) {
 			this.myString = value;
 		}
-		
 		
 		private boolean myBool;
 		
@@ -37,7 +35,6 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 			this.myBool = value;
 		}
 		
-		
 		private double myReal;
 		
 		public double getMyReal() {
@@ -47,7 +44,6 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 		protected void setMyReal(double value) {
 			this.myReal = value;
 		}
-		
 		
 	}
 	
@@ -64,7 +60,6 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 			this.myInt = value;
 		}
 		
-		
 		private String myString;
 		
 		public String getMyString() {
@@ -74,7 +69,6 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 		protected void setMyString(String value) {
 			this.myString = value;
 		}
-		
 		
 		private boolean myBool;
 		
@@ -86,7 +80,6 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 			this.myBool = value;
 		}
 		
-		
 		private double myReal;
 		
 		public double getMyReal() {
@@ -96,7 +89,6 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 		protected void setMyReal(double value) {
 			this.myReal = value;
 		}
-		
 		
 	}
 	
@@ -116,8 +108,6 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public ReadOnlyVariableStatemachine() {
 		sCInterface = new SCInterfaceImpl();

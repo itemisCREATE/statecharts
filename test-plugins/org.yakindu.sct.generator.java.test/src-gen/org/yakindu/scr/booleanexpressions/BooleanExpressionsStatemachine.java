@@ -7,11 +7,9 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 	
 		private boolean e1;
 		
-		
 		public void raiseE1() {
 			e1 = true;
 		}
-		
 		
 		private boolean myBool1;
 		
@@ -23,7 +21,6 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 			this.myBool1 = value;
 		}
 		
-		
 		private boolean myBool2;
 		
 		public boolean getMyBool2() {
@@ -33,7 +30,6 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 		public void setMyBool2(boolean value) {
 			this.myBool2 = value;
 		}
-		
 		
 		private boolean and;
 		
@@ -45,7 +41,6 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 			this.and = value;
 		}
 		
-		
 		private boolean or;
 		
 		public boolean getOr() {
@@ -55,7 +50,6 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 		public void setOr(boolean value) {
 			this.or = value;
 		}
-		
 		
 		private boolean not;
 		
@@ -67,7 +61,6 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 			this.not = value;
 		}
 		
-		
 		private boolean equal;
 		
 		public boolean getEqual() {
@@ -78,7 +71,6 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 			this.equal = value;
 		}
 		
-		
 		private boolean notequal;
 		
 		public boolean getNotequal() {
@@ -88,7 +80,6 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 		public void setNotequal(boolean value) {
 			this.notequal = value;
 		}
-		
 		
 		protected void clearEvents() {
 			e1 = false;
@@ -109,8 +100,6 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public BooleanExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

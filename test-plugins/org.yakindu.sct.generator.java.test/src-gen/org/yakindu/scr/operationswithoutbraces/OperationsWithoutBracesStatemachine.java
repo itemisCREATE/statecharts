@@ -34,8 +34,6 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 	
 	private int nextStateIndex;
 	
-	
-	
 	public OperationsWithoutBracesStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}

@@ -51,14 +51,14 @@ class VariableCode {
 		«getterVisibility» «typeSpecifier.targetLanguageName» «getter» {
 			return «identifier»;
 		}
-
 		«IF needsSetter»
+		
 		«setterVisibility» void «setter»(«typeSpecifier.targetLanguageName» value) {
 			this.«identifier» = value;
 		}
-
 		«ENDIF»
 		«IF needsAssignMethod»
+		
 		protected «typeSpecifier.targetLanguageName» «assign»(«typeSpecifier.targetLanguageName» value) {
 			return this.«identifier» = value;
 		}

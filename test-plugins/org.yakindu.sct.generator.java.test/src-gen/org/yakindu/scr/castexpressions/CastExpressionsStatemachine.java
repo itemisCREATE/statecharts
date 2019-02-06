@@ -15,7 +15,6 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 			this.realValue = value;
 		}
 		
-		
 		private long intValue;
 		
 		public long getIntValue() {
@@ -25,7 +24,6 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 		public void setIntValue(long value) {
 			this.intValue = value;
 		}
-		
 		
 	}
 	
@@ -44,8 +42,6 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public CastExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

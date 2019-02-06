@@ -7,11 +7,9 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 	
 		private boolean e1;
 		
-		
 		public void raiseE1() {
 			e1 = true;
 		}
-		
 		
 		private long myInt1;
 		
@@ -23,7 +21,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 			this.myInt1 = value;
 		}
 		
-		
 		private long myInt2;
 		
 		public long getMyInt2() {
@@ -33,7 +30,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		public void setMyInt2(long value) {
 			this.myInt2 = value;
 		}
-		
 		
 		private boolean less;
 		
@@ -45,7 +41,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 			this.less = value;
 		}
 		
-		
 		private boolean greater;
 		
 		public boolean getGreater() {
@@ -55,7 +50,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		public void setGreater(boolean value) {
 			this.greater = value;
 		}
-		
 		
 		private boolean equalOrLess;
 		
@@ -67,7 +61,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 			this.equalOrLess = value;
 		}
 		
-		
 		private boolean equalOrGreater;
 		
 		public boolean getEqualOrGreater() {
@@ -77,7 +70,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		public void setEqualOrGreater(boolean value) {
 			this.equalOrGreater = value;
 		}
-		
 		
 		private boolean equal;
 		
@@ -89,7 +81,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 			this.equal = value;
 		}
 		
-		
 		private boolean notEqual;
 		
 		public boolean getNotEqual() {
@@ -99,7 +90,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		public void setNotEqual(boolean value) {
 			this.notEqual = value;
 		}
-		
 		
 		private long plus;
 		
@@ -111,7 +101,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 			this.plus = value;
 		}
 		
-		
 		private long minus;
 		
 		public long getMinus() {
@@ -121,7 +110,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		public void setMinus(long value) {
 			this.minus = value;
 		}
-		
 		
 		private long multiply;
 		
@@ -133,7 +121,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 			this.multiply = value;
 		}
 		
-		
 		private long division;
 		
 		public long getDivision() {
@@ -143,7 +130,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		public void setDivision(long value) {
 			this.division = value;
 		}
-		
 		
 		private long modulo;
 		
@@ -155,7 +141,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 			this.modulo = value;
 		}
 		
-		
 		private long negat;
 		
 		public long getNegat() {
@@ -165,7 +150,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		public void setNegat(long value) {
 			this.negat = value;
 		}
-		
 		
 		private boolean complement;
 		
@@ -177,7 +161,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 			this.complement = value;
 		}
 		
-		
 		private long multiAssign;
 		
 		public long getMultiAssign() {
@@ -187,7 +170,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		public void setMultiAssign(long value) {
 			this.multiAssign = value;
 		}
-		
 		
 		private long divAssign;
 		
@@ -199,7 +181,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 			this.divAssign = value;
 		}
 		
-		
 		private long plusAssign;
 		
 		public long getPlusAssign() {
@@ -209,7 +190,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		public void setPlusAssign(long value) {
 			this.plusAssign = value;
 		}
-		
 		
 		private long minusAssign;
 		
@@ -221,7 +201,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 			this.minusAssign = value;
 		}
 		
-		
 		private long moduloAssign;
 		
 		public long getModuloAssign() {
@@ -231,7 +210,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		public void setModuloAssign(long value) {
 			this.moduloAssign = value;
 		}
-		
 		
 		private long increment;
 		
@@ -243,7 +221,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 			this.increment = value;
 		}
 		
-		
 		private long incrementAssign;
 		
 		public long getIncrementAssign() {
@@ -253,7 +230,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		public void setIncrementAssign(long value) {
 			this.incrementAssign = value;
 		}
-		
 		
 		private long decrement;
 		
@@ -265,7 +241,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 			this.decrement = value;
 		}
 		
-		
 		private long decrementAssign;
 		
 		public long getDecrementAssign() {
@@ -275,7 +250,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		public void setDecrementAssign(long value) {
 			this.decrementAssign = value;
 		}
-		
 		
 		protected void clearEvents() {
 			e1 = false;
@@ -296,8 +270,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public IntegerExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

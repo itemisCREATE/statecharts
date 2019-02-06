@@ -27,8 +27,6 @@ public class TracingStatemachine implements ITracingStatemachine {
 	
 	private List <ITracingListener<State>> ifaceTraceObservers = new LinkedList <ITracingListener<State>>();
 	
-	
-	
 	public TracingStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}

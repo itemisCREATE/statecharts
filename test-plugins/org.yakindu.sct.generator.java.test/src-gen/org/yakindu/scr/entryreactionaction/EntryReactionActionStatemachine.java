@@ -7,19 +7,15 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	
 		private boolean b;
 		
-		
 		public void raiseB() {
 			b = true;
 		}
 		
-		
 		private boolean d;
-		
 		
 		public void raiseD() {
 			d = true;
 		}
-		
 		
 		private boolean enteredR1;
 		
@@ -31,7 +27,6 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 			this.enteredR1 = value;
 		}
 		
-		
 		private boolean enteredR2;
 		
 		public boolean getEnteredR2() {
@@ -41,7 +36,6 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		public void setEnteredR2(boolean value) {
 			this.enteredR2 = value;
 		}
-		
 		
 		private boolean enteredBdefault;
 		
@@ -53,7 +47,6 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 			this.enteredBdefault = value;
 		}
 		
-		
 		private boolean enteredBother;
 		
 		public boolean getEnteredBother() {
@@ -63,7 +56,6 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		public void setEnteredBother(boolean value) {
 			this.enteredBother = value;
 		}
-		
 		
 		protected void clearEvents() {
 			b = false;
@@ -89,8 +81,6 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	private final State[] stateVector = new State[2];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public EntryReactionActionStatemachine() {
 		sCInterface = new SCInterfaceImpl();

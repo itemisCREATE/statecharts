@@ -7,19 +7,15 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	
 		private boolean whileEvent;
 		
-		
 		public void raiseWhile() {
 			whileEvent = true;
 		}
 		
-		
 		private boolean ev;
-		
 		
 		public void raiseEv() {
 			ev = true;
 		}
-		
 		
 		private boolean abstractVariable;
 		
@@ -31,7 +27,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.abstractVariable = value;
 		}
 		
-		
 		private boolean assertVariable;
 		
 		public boolean getAssert() {
@@ -41,7 +36,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		public void setAssert(boolean value) {
 			this.assertVariable = value;
 		}
-		
 		
 		private boolean booleanVariable;
 		
@@ -53,7 +47,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.booleanVariable = value;
 		}
 		
-		
 		private boolean breakVariable;
 		
 		public boolean getBreak() {
@@ -63,7 +56,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		public void setBreak(boolean value) {
 			this.breakVariable = value;
 		}
-		
 		
 		private boolean byteVariable;
 		
@@ -75,7 +67,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.byteVariable = value;
 		}
 		
-		
 		private boolean caseVariable;
 		
 		public boolean getCase() {
@@ -85,7 +76,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		public void setCase(boolean value) {
 			this.caseVariable = value;
 		}
-		
 		
 		private boolean catchVariable;
 		
@@ -97,7 +87,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.catchVariable = value;
 		}
 		
-		
 		private boolean charVariable;
 		
 		public boolean getChar() {
@@ -107,7 +96,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		public void setChar(boolean value) {
 			this.charVariable = value;
 		}
-		
 		
 		private boolean classVariable;
 		
@@ -119,7 +107,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.classVariable = value;
 		}
 		
-		
 		private boolean continueVariable;
 		
 		public boolean getContinue() {
@@ -129,7 +116,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		public void setContinue(boolean value) {
 			this.continueVariable = value;
 		}
-		
 		
 		private boolean doVariable;
 		
@@ -141,7 +127,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.doVariable = value;
 		}
 		
-		
 		private boolean doubleVariable;
 		
 		public boolean getDouble() {
@@ -151,7 +136,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		public void setDouble(boolean value) {
 			this.doubleVariable = value;
 		}
-		
 		
 		private boolean enumVariable;
 		
@@ -163,7 +147,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.enumVariable = value;
 		}
 		
-		
 		private boolean extendsVariable;
 		
 		public boolean getExtends() {
@@ -173,7 +156,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		public void setExtends(boolean value) {
 			this.extendsVariable = value;
 		}
-		
 		
 		private boolean finalVariable;
 		
@@ -185,7 +167,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.finalVariable = value;
 		}
 		
-		
 		private boolean finallyVariable;
 		
 		public boolean getFinally() {
@@ -195,7 +176,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		public void setFinally(boolean value) {
 			this.finallyVariable = value;
 		}
-		
 		
 		private boolean floatVariable;
 		
@@ -207,7 +187,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.floatVariable = value;
 		}
 		
-		
 		private boolean forVariable;
 		
 		public boolean getFor() {
@@ -217,7 +196,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		public void setFor(boolean value) {
 			this.forVariable = value;
 		}
-		
 		
 		private boolean gotoVariable;
 		
@@ -229,7 +207,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.gotoVariable = value;
 		}
 		
-		
 		private boolean ifVariable;
 		
 		public boolean getIf() {
@@ -239,7 +216,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		public void setIf(boolean value) {
 			this.ifVariable = value;
 		}
-		
 		
 		private boolean implementsVariable;
 		
@@ -251,7 +227,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.implementsVariable = value;
 		}
 		
-		
 		private boolean instanceofVariable;
 		
 		public boolean getInstanceof() {
@@ -261,7 +236,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		public void setInstanceof(boolean value) {
 			this.instanceofVariable = value;
 		}
-		
 		
 		private boolean intVariable;
 		
@@ -273,7 +247,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.intVariable = value;
 		}
 		
-		
 		private boolean longVariable;
 		
 		public boolean getLong() {
@@ -283,7 +256,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		public void setLong(boolean value) {
 			this.longVariable = value;
 		}
-		
 		
 		private boolean nativeVariable;
 		
@@ -295,7 +267,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.nativeVariable = value;
 		}
 		
-		
 		private boolean newVariable;
 		
 		public boolean getNew() {
@@ -305,7 +276,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		public void setNew(boolean value) {
 			this.newVariable = value;
 		}
-		
 		
 		private boolean packageVariable;
 		
@@ -317,7 +287,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.packageVariable = value;
 		}
 		
-		
 		private boolean privateVariable;
 		
 		public boolean getPrivate() {
@@ -327,7 +296,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		public void setPrivate(boolean value) {
 			this.privateVariable = value;
 		}
-		
 		
 		private boolean protectedVariable;
 		
@@ -339,7 +307,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.protectedVariable = value;
 		}
 		
-		
 		private boolean publicVariable;
 		
 		public boolean getPublic() {
@@ -349,7 +316,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		public void setPublic(boolean value) {
 			this.publicVariable = value;
 		}
-		
 		
 		private boolean returnVariable;
 		
@@ -361,7 +327,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.returnVariable = value;
 		}
 		
-		
 		private boolean shortVariable;
 		
 		public boolean getShort() {
@@ -371,7 +336,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		public void setShort(boolean value) {
 			this.shortVariable = value;
 		}
-		
 		
 		private boolean staticVariable;
 		
@@ -383,7 +347,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.staticVariable = value;
 		}
 		
-		
 		private boolean strictfpVariable;
 		
 		public boolean getStrictfp() {
@@ -393,7 +356,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		public void setStrictfp(boolean value) {
 			this.strictfpVariable = value;
 		}
-		
 		
 		private boolean superVariable;
 		
@@ -405,7 +367,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.superVariable = value;
 		}
 		
-		
 		private boolean switchVariable;
 		
 		public boolean getSwitch() {
@@ -415,7 +376,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		public void setSwitch(boolean value) {
 			this.switchVariable = value;
 		}
-		
 		
 		private boolean synchronizedVariable;
 		
@@ -427,7 +387,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.synchronizedVariable = value;
 		}
 		
-		
 		private boolean thisVariable;
 		
 		public boolean getThis() {
@@ -437,7 +396,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		public void setThis(boolean value) {
 			this.thisVariable = value;
 		}
-		
 		
 		private boolean throwVariable;
 		
@@ -449,7 +407,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.throwVariable = value;
 		}
 		
-		
 		private boolean throwsVariable;
 		
 		public boolean getThrows() {
@@ -459,7 +416,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		public void setThrows(boolean value) {
 			this.throwsVariable = value;
 		}
-		
 		
 		private boolean transientVariable;
 		
@@ -471,7 +427,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.transientVariable = value;
 		}
 		
-		
 		private boolean tryVariable;
 		
 		public boolean getTry() {
@@ -481,7 +436,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		public void setTry(boolean value) {
 			this.tryVariable = value;
 		}
-		
 		
 		private boolean voidVariable;
 		
@@ -493,7 +447,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.voidVariable = value;
 		}
 		
-		
 		private boolean volatileVariable;
 		
 		public boolean getVolatile() {
@@ -503,7 +456,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		public void setVolatile(boolean value) {
 			this.volatileVariable = value;
 		}
-		
 		
 		protected void clearEvents() {
 			whileEvent = false;
@@ -530,8 +482,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public JavaKeywordsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

@@ -7,19 +7,15 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 	
 		private boolean e1;
 		
-		
 		public void raiseE1() {
 			e1 = true;
 		}
 		
-		
 		private boolean e2;
-		
 		
 		public void raiseE2() {
 			e2 = true;
 		}
-		
 		
 		private boolean c1;
 		
@@ -31,7 +27,6 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 			this.c1 = value;
 		}
 		
-		
 		private boolean c2;
 		
 		public boolean getC2() {
@@ -41,7 +36,6 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 		public void setC2(boolean value) {
 			this.c2 = value;
 		}
-		
 		
 		private boolean e1_transition;
 		
@@ -53,7 +47,6 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 			this.e1_transition = value;
 		}
 		
-		
 		private boolean e2_transition;
 		
 		public boolean getE2_transition() {
@@ -63,7 +56,6 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 		public void setE2_transition(boolean value) {
 			this.e2_transition = value;
 		}
-		
 		
 		protected void clearEvents() {
 			e1 = false;
@@ -84,8 +76,6 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public TriggerExpressionPrecedenceStatemachine() {
 		sCInterface = new SCInterfaceImpl();

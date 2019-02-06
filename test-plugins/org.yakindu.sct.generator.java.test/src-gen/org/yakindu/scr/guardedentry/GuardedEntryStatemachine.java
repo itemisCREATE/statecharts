@@ -7,11 +7,9 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 	
 		private boolean e;
 		
-		
 		public void raiseE() {
 			e = true;
 		}
-		
 		
 		private boolean guard;
 		
@@ -23,7 +21,6 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 			this.guard = value;
 		}
 		
-		
 		private boolean done;
 		
 		public boolean getDone() {
@@ -33,7 +30,6 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 		public void setDone(boolean value) {
 			this.done = value;
 		}
-		
 		
 		protected void clearEvents() {
 			e = false;
@@ -54,8 +50,6 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public GuardedEntryStatemachine() {
 		sCInterface = new SCInterfaceImpl();

@@ -51,13 +51,18 @@ class FieldDeclarationGenerator {
 		
 		private int nextStateIndex;
 		
+		«IF entry.tracingUsed»
 		«entry.tracingFields»
 		
+		«ENDIF»
+		«IF flow.timed»
 		«flow.timingFields»
 		
+		«ENDIF»
 		«flow.internalEventFields»
 		«FOR variable : flow.internalScopeVariables SEPARATOR newLine AFTER newLine»
 			«generateVariableDefinition(variable)»
+			
 		«ENDFOR»
 		«FOR internal : flow.internalScopes»
 			«IF internal.hasOperations()»
@@ -83,17 +88,12 @@ class FieldDeclarationGenerator {
 	'''
 	
 	protected def timingFields(ExecutionFlow it) '''
-		«IF flow.timed»
-			private ITimer timer;
-			
-			private final boolean[] timeEvents = new boolean[«flow.timeEvents.size»];
-		«ENDIF»
+		private ITimer timer;
+		
+		private final boolean[] timeEvents = new boolean[«flow.timeEvents.size»];
 	'''
 	
 	protected def tracingFields(GeneratorEntry it) '''
-		«IF tracingUsed»
-			private List <«traceInterface»<State>> «traceInstances» = new LinkedList <«traceInterface»<State>>();
-			
-		«ENDIF»
+		private List <«traceInterface»<State>> «traceInstances» = new LinkedList <«traceInterface»<State>>();
 	'''
 }

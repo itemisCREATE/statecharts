@@ -7,27 +7,21 @@ public class GuardStatemachine implements IGuardStatemachine {
 	
 		private boolean event1;
 		
-		
 		public void raiseEvent1() {
 			event1 = true;
 		}
 		
-		
 		private boolean event2;
-		
 		
 		public void raiseEvent2() {
 			event2 = true;
 		}
 		
-		
 		private boolean returnEvent;
-		
 		
 		public void raiseReturn() {
 			returnEvent = true;
 		}
-		
 		
 		private long myVar;
 		
@@ -38,7 +32,6 @@ public class GuardStatemachine implements IGuardStatemachine {
 		public void setMyVar(long value) {
 			this.myVar = value;
 		}
-		
 		
 		protected void clearEvents() {
 			event1 = false;
@@ -61,8 +54,6 @@ public class GuardStatemachine implements IGuardStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public GuardStatemachine() {
 		sCInterface = new SCInterfaceImpl();

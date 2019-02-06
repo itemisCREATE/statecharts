@@ -7,7 +7,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	
 		private boolean e;
 		
-		
 		public void raiseE() {
 			e = true;
 			runCycle();
@@ -15,7 +14,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		
 		
 		private boolean f;
-		
 		
 		public void raiseF() {
 			f = true;
@@ -33,7 +31,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 			this.a_exit = value;
 		}
 		
-		
 		private long aa_exit;
 		
 		public long getAa_exit() {
@@ -43,7 +40,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		public void setAa_exit(long value) {
 			this.aa_exit = value;
 		}
-		
 		
 		private long ab_exit;
 		
@@ -55,7 +51,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 			this.ab_exit = value;
 		}
 		
-		
 		private long aba_exit;
 		
 		public long getAba_exit() {
@@ -65,7 +60,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		public void setAba_exit(long value) {
 			this.aba_exit = value;
 		}
-		
 		
 		private long abb_exit;
 		
@@ -77,7 +71,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 			this.abb_exit = value;
 		}
 		
-		
 		private long ac_exit;
 		
 		public long getAc_exit() {
@@ -87,7 +80,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		public void setAc_exit(long value) {
 			this.ac_exit = value;
 		}
-		
 		
 		private long aca_exit;
 		
@@ -99,7 +91,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 			this.aca_exit = value;
 		}
 		
-		
 		private long acaa_exit;
 		
 		public long getAcaa_exit() {
@@ -109,7 +100,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		public void setAcaa_exit(long value) {
 			this.acaa_exit = value;
 		}
-		
 		
 		private long ad_exit;
 		
@@ -121,7 +111,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 			this.ad_exit = value;
 		}
 		
-		
 		private long ada_exit;
 		
 		public long getAda_exit() {
@@ -131,7 +120,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		public void setAda_exit(long value) {
 			this.ada_exit = value;
 		}
-		
 		
 		private long adb_exit;
 		
@@ -143,7 +131,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 			this.adb_exit = value;
 		}
 		
-		
 		private long adc_exit;
 		
 		public long getAdc_exit() {
@@ -154,7 +141,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 			this.adc_exit = value;
 		}
 		
-		
 		private long c;
 		
 		public long getC() {
@@ -164,7 +150,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		public void setC(long value) {
 			this.c = value;
 		}
-		
 		
 		protected void clearEvents() {
 			e = false;
@@ -196,8 +181,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	private final State[] stateVector = new State[3];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public ExitSequenceStatemachine() {
 		sCInterface = new SCInterfaceImpl();

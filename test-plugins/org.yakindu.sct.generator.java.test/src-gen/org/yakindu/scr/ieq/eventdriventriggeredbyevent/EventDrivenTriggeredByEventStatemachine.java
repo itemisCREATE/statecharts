@@ -10,7 +10,6 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 	
 		private boolean e;
 		
-		
 		public void raiseE() {
 			e = true;
 			runCycle();
@@ -26,7 +25,6 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 		public void setX(long value) {
 			this.x = value;
 		}
-		
 		
 		protected void clearEvents() {
 			e = false;
@@ -47,7 +45,6 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	private ITimer timer;
 	

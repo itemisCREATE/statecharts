@@ -7,11 +7,9 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 	
 		private boolean e;
 		
-		
 		public void raiseE() {
 			e = true;
 		}
-		
 		
 		private long condition;
 		
@@ -23,7 +21,6 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 			this.condition = value;
 		}
 		
-		
 		private boolean boolVar;
 		
 		public boolean getBoolVar() {
@@ -33,7 +30,6 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 		public void setBoolVar(boolean value) {
 			this.boolVar = value;
 		}
-		
 		
 		private String stringVar;
 		
@@ -45,7 +41,6 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 			this.stringVar = value;
 		}
 		
-		
 		private String stringCondition;
 		
 		public String getStringCondition() {
@@ -55,7 +50,6 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 		public void setStringCondition(String value) {
 			this.stringCondition = value;
 		}
-		
 		
 		protected void clearEvents() {
 			e = false;
@@ -76,8 +70,6 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
-	
 	
 	public ConditionalExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
