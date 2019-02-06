@@ -52,7 +52,7 @@ class VariableCode {
 	}
 	
 	protected def getterVisibility(VariableDefinition it) {
-		if(needsPublicGetter) '''public «sync.trim»''' else "protected"
+		if(needsPublicGetter) '''public «sync»'''.toString.trim else "protected"
 	}
 	
 	protected def needsPublicSetter(VariableDefinition it) {
@@ -69,6 +69,6 @@ class VariableCode {
 	}
 	
 	protected def setterVisibility(VariableDefinition it) {
-		if(needsPublicSetter) '''public «sync.trim»''' else "protected"
+		if(needsPublicSetter) '''public «sync»'''.toString.trim else "protected"
 	}
 }
