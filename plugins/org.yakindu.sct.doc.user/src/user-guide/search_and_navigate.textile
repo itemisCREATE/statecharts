@@ -1,7 +1,9 @@
 
 h1(#search_and_nav_searching_and_navigating_in_statecharts). Searching and navigating in statecharts
 
-The larger the model, the greater the need to quickly search for elements, for example, all states with a given name or name pattern, all occurrences of a certain variable, etc. This section explains how YAKINDU Statechart Tools supports you in finding model elements and quickly navigating to them.
+YAKINDU Statechart Tools support you in quickly finding model elements and navigating to them.
+
+The larger the model, the greater the need to quickly search for certain elements, e.g., for all states with a given name or name pattern, all occurrences of a certain variable, etc. YAKINDU Statechart Tools' searching functionality helps you master even large statecharts.
 
 ###. FIXME (RKL): Describe how to find transitions!
 

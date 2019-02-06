@@ -1,7 +1,9 @@
 
 h1(#codegen_generating_state_machine_code). Generating state machine code
 
-Ultimately, you will need your state machine not only as a nice graphical statechart model, but rather in the form of executable code that you can integrate with your software project as a component. You will want to send events to the state machine, receive events from it, retrieve information regarding the currently active state (or states), set and get state machine variables, and have the state machine invoke specific behaviour that is external to it.
+Ultimately, you will need your state machine not only as a nice graphical statechart model. This chapter explains how to generate it as executable code.
+
+You can integrate the generated code with your software project as a component. You can to send events to the state machine, receive events from it, retrieve information regarding the currently active state (or states), set and get state machine variables, and have the state machine invoke specific behavior that is external to it.
 
 YAKINDU Statechart Tools comes with a couple of code generators that save you from the time-consuming and error-prone task of coding your state machine manually. The YAKINDU code generators transform your statechart into source code of a target programming language in an instant. The generated code is always correct, at least in the sense that it is a true one-to-one mapping of your statechart – and at least unless a code generator is buggy itself.
 
