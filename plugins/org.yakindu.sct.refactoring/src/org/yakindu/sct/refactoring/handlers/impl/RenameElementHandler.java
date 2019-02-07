@@ -15,8 +15,6 @@ import java.util.stream.Stream;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.dialogs.Dialog;
@@ -50,10 +48,9 @@ import org.eclipse.xtext.validation.Issue;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
-import org.yakindu.base.types.Declaration;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
+import org.yakindu.sct.model.stext.extensions.STextExtensions;
 import org.yakindu.sct.refactoring.handlers.AbstractRefactoringHandler;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 import org.yakindu.sct.refactoring.refactor.impl.RenameRefactoring;
@@ -73,6 +70,9 @@ public class RenameElementHandler extends AbstractRefactoringHandler<NamedElemen
 	@Inject
 	private IResourceValidator validator;
 
+	@Inject
+	protected STextExtensions utils;
+	
 	public RenameElementHandler() {
 		Guice.createInjector().injectMembers(this);
 	}
@@ -102,71 +102,36 @@ public class RenameElementHandler extends AbstractRefactoringHandler<NamedElemen
 		return null;
 	}
 
-	/**
-	 * Unwraps the given selection into a state sgraph element
-	 * 
-	 * @param selection the current selection
-	 * @return the state sgraph element for the given selection
-	 */
 	public NamedElement unwrap(ISelection selection) {
 		IStructuredSelection structuredSelection = (IStructuredSelection) selection;
 		EObject selectedElement = (EObject) structuredSelection.getFirstElement();
 
-		// The provided element is the one from the fake resource of styled text
-		// adapter.
-		// We need to find the actual element in our statechart for this fake element
+		// The provided element is the one from the fake resource of styled text adapter.
+		// We need to find the actual element in our statechart for this fake element.
 		if (selectedElement instanceof FeatureCall) {
-			return findElementForFakeInStatechart((NamedElement) ((FeatureCall) selectedElement).getFeature());
-		} else if (selectedElement instanceof ElementReferenceExpression) {
-			return findElementForFakeInStatechart(
-					(NamedElement) ((ElementReferenceExpression) selectedElement).getReference());
+			return findInStatechart(((FeatureCall) selectedElement).getFeature());
 		}
-		if (selectedElement instanceof NamedElement)
-			return findElementForFakeInStatechart((NamedElement) selectedElement);
+		if (selectedElement instanceof ElementReferenceExpression) {
+			return findInStatechart((NamedElement) ((ElementReferenceExpression) selectedElement).getReference());
+		}
+		if (selectedElement instanceof NamedElement) {
+			return findInStatechart((NamedElement) selectedElement);
+		}
 
 		return null;
 	}
 
-	private NamedElement findElementForFakeInStatechart(NamedElement fakeElement) {
+	private NamedElement findInStatechart(NamedElement fakeElement) {
 		Resource resource = fakeElement.eResource();
 		// only do something if element is really from fake resource
 		if (resource instanceof LazyLinkingResource) {
-			Statechart sct = getStatechartFromFakeResource((LazyLinkingResource) resource);
-
-			EList<Scope> scopes = sct.getScopes();
-			for (Scope scope : scopes) {
-				// check all declarations
-				EList<Declaration> declarations = scope.getDeclarations();
-				for (Declaration decl : declarations) {
-					if (decl.eClass().getName().equals(fakeElement.eClass().getName())
-							&& decl.getName().equals(fakeElement.getName())) {
-						return decl;
-					}
-				}
-				// check scope itself it is a named one
-				if (scope instanceof NamedElement) {
-					NamedElement namedScope = (NamedElement) scope;
-					if (namedScope.eClass().getName().equals(fakeElement.eClass().getName())
-							&& namedScope.getName().equals(fakeElement.getName())) {
-						return namedScope;
-					}
-				}
-
+			Statechart sct = utils.getStatechart((LazyLinkingResource) resource);
+			EObject elem = utils.findElement(fakeElement, sct);
+			if (elem instanceof NamedElement) {
+				return (NamedElement) elem; 
 			}
 		}
 		return fakeElement;
-	}
-
-	protected Statechart getStatechartFromFakeResource(LazyLinkingResource resource) {
-		for (Adapter adapter : resource.eAdapters()) {
-			if (adapter instanceof ContextElementAdapter) {
-				EObject elem = ((ContextElementAdapter) adapter).getElement();
-				if (elem instanceof Statechart) {
-					return (Statechart) elem;
-				}
-			}
-		}
-		return null;
 	}
 
 	@Override
