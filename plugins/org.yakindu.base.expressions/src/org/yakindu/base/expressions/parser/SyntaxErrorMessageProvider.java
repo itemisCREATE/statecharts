@@ -13,6 +13,7 @@ package org.yakindu.base.expressions.parser;
 import static org.eclipse.xtext.diagnostics.Diagnostic.SYNTAX_DIAGNOSTIC;
 
 import org.antlr.runtime.RecognitionException;
+import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 
 public class SyntaxErrorMessageProvider extends org.eclipse.xtext.parser.antlr.SyntaxErrorMessageProvider {
@@ -23,14 +24,23 @@ public class SyntaxErrorMessageProvider extends org.eclipse.xtext.parser.antlr.S
 		if (!defaultMessage.contains(SyntaxErrorMessages.MISSING_EOF)) {
 			return new SyntaxErrorMessage(defaultMessage, SYNTAX_DIAGNOSTIC);
 		}
-		
+
 		RecognitionException recognitionException = context.getRecognitionException();
 		String message = "Failed to parse Expression.";
 		boolean lexicalAnalysisFailed = recognitionException == null;
-		
+
 		if (!lexicalAnalysisFailed) {
 			message = "Failed to parse Expression '" + recognitionException.token.getText() + "'.";
 		}
 		return new SyntaxErrorMessage(message, SYNTAX_DIAGNOSTIC);
+	}
+
+	@Override
+	public SyntaxErrorMessage getSyntaxErrorMessage(IValueConverterErrorContext context) {
+		ValueConverterException cause = context.getValueConverterException();
+		if (cause instanceof ValueConverterException) {
+			return new SyntaxErrorMessage(cause.getMessage(), SYNTAX_DIAGNOSTIC);
+		}
+		return super.getSyntaxErrorMessage(context);
 	}
 }
