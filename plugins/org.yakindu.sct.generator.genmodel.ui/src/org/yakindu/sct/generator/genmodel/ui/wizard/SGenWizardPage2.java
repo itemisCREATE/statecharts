@@ -10,12 +10,14 @@
  */
 package org.yakindu.sct.generator.genmodel.ui.wizard;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.eclipse.core.resources.IFile;
@@ -25,6 +27,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -56,11 +59,13 @@ import org.yakindu.sct.generator.core.extensions.FileExtensions;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.generator.genmodel.ui.PathToImageResolver;
+import org.yakindu.sct.ui.install.InstallWizardOpener;
 import org.yakindu.sct.ui.wizards.AbstractWorkspaceLabelProvider;
 import org.yakindu.sct.ui.wizards.ModelCreationWizardPage;
 import org.yakindu.sct.ui.wizards.WorkspaceTreeContentProvider;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * 
@@ -165,9 +170,23 @@ public class SGenWizardPage2 extends WizardPage {
 		}
 		generatorCombo.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent event) {
-				refreshInput();
+				Object element = ((IStructuredSelection) event.getSelection()).getFirstElement();
+				if (element instanceof InstallMoreGeneratorsItem) {
+					try {
+						getContainer().run(true, true, (monitor) -> {
+							((InstallMoreGeneratorsItem) element).openInstallWizard(monitor);
+						});
+					} catch (InvocationTargetException | InterruptedException e) {
+						e.printStackTrace();
+					}
+					generatorCombo.getCombo().select(0);
+				} else {
+					refreshInput();
+				}
 			}
+
 		});
+		generatorCombo.add(new InstallMoreGeneratorsItem());
 	}
 
 	private Optional<CoreGenerator> getGeneratorForNature(IProject project) {
@@ -259,10 +278,14 @@ public class SGenWizardPage2 extends WizardPage {
 
 	private static class GeneratorDescriptorLabelProvider extends LabelProvider {
 
+		
 		@Override
 		public String getText(Object element) {
 			if (element instanceof IGeneratorDescriptor) {
 				return ((IGeneratorDescriptor) element).getName();
+			}
+			if (element instanceof InstallMoreGeneratorsItem) {
+				return ((InstallMoreGeneratorsItem) element).getText();
 			}
 			return super.getText(element);
 		}
@@ -288,4 +311,21 @@ public class SGenWizardPage2 extends WizardPage {
 		}
 
 	}
+	
+	protected static class InstallMoreGeneratorsItem {
+		
+		private static final String LABS_REPO_URI = "http://updates.yakindu.com/statecharts/labs";
+
+		public String getText() {
+			return "Install more...";
+		}
+		
+		public void openInstallWizard(IProgressMonitor monitor) {
+			Map<String, Set<String>> deps = Maps.newHashMap();
+			deps.put(LABS_REPO_URI, Collections.emptySet());
+			new InstallWizardOpener().open(deps, monitor);
+		}
+	}
+
+	
 }
