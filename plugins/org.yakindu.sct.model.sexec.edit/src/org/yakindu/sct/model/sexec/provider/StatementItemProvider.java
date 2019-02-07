@@ -236,6 +236,46 @@ public class StatementItemProvider extends StepItemProvider {
 			(createChildParameter
 				(SexecPackage.Literals.STATEMENT__EXPRESSION,
 				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.STATEMENT__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createIfExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.STATEMENT__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createBlockExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.STATEMENT__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createWhileExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.STATEMENT__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createReturnExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.STATEMENT__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createSwitchExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.STATEMENT__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.STATEMENT__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.STATEMENT__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
 	}
 
 }

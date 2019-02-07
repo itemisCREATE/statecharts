@@ -21,9 +21,9 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkAcceptor;
 import org.eclipse.xtext.ui.editor.hyperlinking.XtextHyperlink;
+import org.yakindu.base.expressions.scoping.IPackageImport2URIMapper;
+import org.yakindu.base.expressions.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.base.types.TypesPackage;
-import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper;
-import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 
@@ -49,7 +49,7 @@ public class PackageImportHyperlinkHelper extends HyperlinkHelper {
 		INode node = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
 		if (node != null && node.getGrammarElement() instanceof RuleCall
 				&& node.getSemanticElement() instanceof ImportScope) {
-			NodeModelUtils.findNodesForFeature(node.getSemanticElement(), TypesPackage.Literals.PACKAGE__IMPORT);
+			NodeModelUtils.findNodesForFeature(node.getSemanticElement(), TypesPackage.Literals.PACKAGE__IMPORTS);
 			ImportScope importScope = (ImportScope) node.getSemanticElement();
 			EList<String> imports = importScope.getImports();
 			for (String pkgImport : imports) {

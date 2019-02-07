@@ -8,13 +8,16 @@ package org.yakindu.base.types.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
@@ -32,6 +35,7 @@ import org.yakindu.base.types.TypesPackage;
  *   <li>{@link org.yakindu.base.types.impl.OperationImpl#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.OperationImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.OperationImpl#isVariadic <em>Variadic</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.OperationImpl#getBody <em>Body</em>}</li>
  * </ul>
  *
  * @generated
@@ -66,6 +70,16 @@ public class OperationImpl extends TypedDeclarationImpl implements Operation {
 	 * @ordered
 	 */
 	protected static final boolean VARIADIC_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBody()
+	 * @generated
+	 * @ordered
+	 */
+	protected Expression body;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -122,6 +136,49 @@ public class OperationImpl extends TypedDeclarationImpl implements Operation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Expression getBody() {
+		return body;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetBody(Expression newBody, NotificationChain msgs) {
+		Expression oldBody = body;
+		body = newBody;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.OPERATION__BODY, oldBody, newBody);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBody(Expression newBody) {
+		if (newBody != body) {
+			NotificationChain msgs = null;
+			if (body != null)
+				msgs = ((InternalEObject)body).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.OPERATION__BODY, null, msgs);
+			if (newBody != null)
+				msgs = ((InternalEObject)newBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.OPERATION__BODY, null, msgs);
+			msgs = basicSetBody(newBody, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.OPERATION__BODY, newBody, newBody));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public int getVarArgIndex() {
@@ -159,6 +216,8 @@ public class OperationImpl extends TypedDeclarationImpl implements Operation {
 				return ((InternalEList<?>)getTypeParameters()).basicRemove(otherEnd, msgs);
 			case TypesPackage.OPERATION__PARAMETERS:
 				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+			case TypesPackage.OPERATION__BODY:
+				return basicSetBody(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -177,6 +236,8 @@ public class OperationImpl extends TypedDeclarationImpl implements Operation {
 				return getParameters();
 			case TypesPackage.OPERATION__VARIADIC:
 				return isVariadic();
+			case TypesPackage.OPERATION__BODY:
+				return getBody();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -198,6 +259,9 @@ public class OperationImpl extends TypedDeclarationImpl implements Operation {
 				getParameters().clear();
 				getParameters().addAll((Collection<? extends Parameter>)newValue);
 				return;
+			case TypesPackage.OPERATION__BODY:
+				setBody((Expression)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -215,6 +279,9 @@ public class OperationImpl extends TypedDeclarationImpl implements Operation {
 				return;
 			case TypesPackage.OPERATION__PARAMETERS:
 				getParameters().clear();
+				return;
+			case TypesPackage.OPERATION__BODY:
+				setBody((Expression)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -234,6 +301,8 @@ public class OperationImpl extends TypedDeclarationImpl implements Operation {
 				return parameters != null && !parameters.isEmpty();
 			case TypesPackage.OPERATION__VARIADIC:
 				return isVariadic() != VARIADIC_EDEFAULT;
+			case TypesPackage.OPERATION__BODY:
+				return body != null;
 		}
 		return super.eIsSet(featureID);
 	}

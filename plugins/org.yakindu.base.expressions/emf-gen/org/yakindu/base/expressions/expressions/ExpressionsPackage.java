@@ -1288,6 +1288,293 @@ public interface ExpressionsPackage extends EPackage {
 	int ARGUMENT_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.IfExpressionImpl <em>If Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.IfExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getIfExpression()
+	 * @generated
+	 */
+	int IF_EXPRESSION = 33;
+
+	/**
+	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IF_EXPRESSION__CONDITION = TypesPackage.EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Then</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IF_EXPRESSION__THEN = TypesPackage.EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Else</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IF_EXPRESSION__ELSE = TypesPackage.EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>If Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IF_EXPRESSION_FEATURE_COUNT = TypesPackage.EXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.BlockExpressionImpl <em>Block Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.BlockExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBlockExpression()
+	 * @generated
+	 */
+	int BLOCK_EXPRESSION = 34;
+
+	/**
+	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLOCK_EXPRESSION__EXPRESSIONS = TypesPackage.EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Block Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLOCK_EXPRESSION_FEATURE_COUNT = TypesPackage.EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.WhileExpressionImpl <em>While Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.WhileExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getWhileExpression()
+	 * @generated
+	 */
+	int WHILE_EXPRESSION = 35;
+
+	/**
+	 * The feature id for the '<em><b>Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHILE_EXPRESSION__BODY = TypesPackage.EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHILE_EXPRESSION__CONDITION = TypesPackage.EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>While Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHILE_EXPRESSION_FEATURE_COUNT = TypesPackage.EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.ReturnExpressionImpl <em>Return Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.ReturnExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getReturnExpression()
+	 * @generated
+	 */
+	int RETURN_EXPRESSION = 36;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RETURN_EXPRESSION__EXPRESSION = TypesPackage.EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Return Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RETURN_EXPRESSION_FEATURE_COUNT = TypesPackage.EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.SwitchExpressionImpl <em>Switch Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.SwitchExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getSwitchExpression()
+	 * @generated
+	 */
+	int SWITCH_EXPRESSION = 37;
+
+	/**
+	 * The feature id for the '<em><b>Switch</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWITCH_EXPRESSION__SWITCH = TypesPackage.EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Cases</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWITCH_EXPRESSION__CASES = TypesPackage.EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Default</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWITCH_EXPRESSION__DEFAULT = TypesPackage.EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Switch Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWITCH_EXPRESSION_FEATURE_COUNT = TypesPackage.EXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.SwitchCaseImpl <em>Switch Case</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.SwitchCaseImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getSwitchCase()
+	 * @generated
+	 */
+	int SWITCH_CASE = 38;
+
+	/**
+	 * The feature id for the '<em><b>Case</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWITCH_CASE__CASE = TypesPackage.EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Then</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWITCH_CASE__THEN = TypesPackage.EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Switch Case</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWITCH_CASE_FEATURE_COUNT = TypesPackage.EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.EventRaisingExpressionImpl <em>Event Raising Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.EventRaisingExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getEventRaisingExpression()
+	 * @generated
+	 */
+	int EVENT_RAISING_EXPRESSION = 39;
+
+	/**
+	 * The feature id for the '<em><b>Event</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_RAISING_EXPRESSION__EVENT = TypesPackage.EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_RAISING_EXPRESSION__VALUE = TypesPackage.EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Event Raising Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_RAISING_EXPRESSION_FEATURE_COUNT = TypesPackage.EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.EventValueReferenceExpressionImpl <em>Event Value Reference Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.EventValueReferenceExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getEventValueReferenceExpression()
+	 * @generated
+	 */
+	int EVENT_VALUE_REFERENCE_EXPRESSION = 40;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_VALUE_REFERENCE_EXPRESSION__VALUE = TypesPackage.EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Event Value Reference Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_VALUE_REFERENCE_EXPRESSION_FEATURE_COUNT = TypesPackage.EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.AssignmentOperator <em>Assignment Operator</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1295,7 +1582,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getAssignmentOperator()
 	 * @generated
 	 */
-	int ASSIGNMENT_OPERATOR = 33;
+	int ASSIGNMENT_OPERATOR = 41;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.ShiftOperator <em>Shift Operator</em>}' enum.
@@ -1305,7 +1592,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getShiftOperator()
 	 * @generated
 	 */
-	int SHIFT_OPERATOR = 34;
+	int SHIFT_OPERATOR = 42;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.AdditiveOperator <em>Additive Operator</em>}' enum.
@@ -1315,7 +1602,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getAdditiveOperator()
 	 * @generated
 	 */
-	int ADDITIVE_OPERATOR = 35;
+	int ADDITIVE_OPERATOR = 43;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.MultiplicativeOperator <em>Multiplicative Operator</em>}' enum.
@@ -1325,7 +1612,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getMultiplicativeOperator()
 	 * @generated
 	 */
-	int MULTIPLICATIVE_OPERATOR = 36;
+	int MULTIPLICATIVE_OPERATOR = 44;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.UnaryOperator <em>Unary Operator</em>}' enum.
@@ -1335,7 +1622,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getUnaryOperator()
 	 * @generated
 	 */
-	int UNARY_OPERATOR = 37;
+	int UNARY_OPERATOR = 45;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.RelationalOperator <em>Relational Operator</em>}' enum.
@@ -1345,7 +1632,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getRelationalOperator()
 	 * @generated
 	 */
-	int RELATIONAL_OPERATOR = 38;
+	int RELATIONAL_OPERATOR = 46;
 
 
 	/**
@@ -1356,7 +1643,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalOperator()
 	 * @generated
 	 */
-	int LOGICAL_OPERATOR = 39;
+	int LOGICAL_OPERATOR = 47;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.BitwiseOperator <em>Bitwise Operator</em>}' enum.
@@ -1366,7 +1653,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBitwiseOperator()
 	 * @generated
 	 */
-	int BITWISE_OPERATOR = 40;
+	int BITWISE_OPERATOR = 48;
 
 
 	/**
@@ -1377,7 +1664,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getPostFixOperator()
 	 * @generated
 	 */
-	int POST_FIX_OPERATOR = 41;
+	int POST_FIX_OPERATOR = 49;
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.Literal <em>Literal</em>}'.
@@ -2009,6 +2296,251 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getArgument_Value();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.IfExpression <em>If Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>If Expression</em>'.
+	 * @see org.yakindu.base.expressions.expressions.IfExpression
+	 * @generated
+	 */
+	EClass getIfExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.IfExpression#getCondition <em>Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Condition</em>'.
+	 * @see org.yakindu.base.expressions.expressions.IfExpression#getCondition()
+	 * @see #getIfExpression()
+	 * @generated
+	 */
+	EReference getIfExpression_Condition();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.IfExpression#getThen <em>Then</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Then</em>'.
+	 * @see org.yakindu.base.expressions.expressions.IfExpression#getThen()
+	 * @see #getIfExpression()
+	 * @generated
+	 */
+	EReference getIfExpression_Then();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.IfExpression#getElse <em>Else</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Else</em>'.
+	 * @see org.yakindu.base.expressions.expressions.IfExpression#getElse()
+	 * @see #getIfExpression()
+	 * @generated
+	 */
+	EReference getIfExpression_Else();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.BlockExpression <em>Block Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Block Expression</em>'.
+	 * @see org.yakindu.base.expressions.expressions.BlockExpression
+	 * @generated
+	 */
+	EClass getBlockExpression();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.expressions.expressions.BlockExpression#getExpressions <em>Expressions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Expressions</em>'.
+	 * @see org.yakindu.base.expressions.expressions.BlockExpression#getExpressions()
+	 * @see #getBlockExpression()
+	 * @generated
+	 */
+	EReference getBlockExpression_Expressions();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.WhileExpression <em>While Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>While Expression</em>'.
+	 * @see org.yakindu.base.expressions.expressions.WhileExpression
+	 * @generated
+	 */
+	EClass getWhileExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.WhileExpression#getBody <em>Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Body</em>'.
+	 * @see org.yakindu.base.expressions.expressions.WhileExpression#getBody()
+	 * @see #getWhileExpression()
+	 * @generated
+	 */
+	EReference getWhileExpression_Body();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.WhileExpression#getCondition <em>Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Condition</em>'.
+	 * @see org.yakindu.base.expressions.expressions.WhileExpression#getCondition()
+	 * @see #getWhileExpression()
+	 * @generated
+	 */
+	EReference getWhileExpression_Condition();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.ReturnExpression <em>Return Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Return Expression</em>'.
+	 * @see org.yakindu.base.expressions.expressions.ReturnExpression
+	 * @generated
+	 */
+	EClass getReturnExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.ReturnExpression#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.yakindu.base.expressions.expressions.ReturnExpression#getExpression()
+	 * @see #getReturnExpression()
+	 * @generated
+	 */
+	EReference getReturnExpression_Expression();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.SwitchExpression <em>Switch Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Switch Expression</em>'.
+	 * @see org.yakindu.base.expressions.expressions.SwitchExpression
+	 * @generated
+	 */
+	EClass getSwitchExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.SwitchExpression#getSwitch <em>Switch</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Switch</em>'.
+	 * @see org.yakindu.base.expressions.expressions.SwitchExpression#getSwitch()
+	 * @see #getSwitchExpression()
+	 * @generated
+	 */
+	EReference getSwitchExpression_Switch();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.expressions.expressions.SwitchExpression#getCases <em>Cases</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Cases</em>'.
+	 * @see org.yakindu.base.expressions.expressions.SwitchExpression#getCases()
+	 * @see #getSwitchExpression()
+	 * @generated
+	 */
+	EReference getSwitchExpression_Cases();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.SwitchExpression#getDefault <em>Default</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Default</em>'.
+	 * @see org.yakindu.base.expressions.expressions.SwitchExpression#getDefault()
+	 * @see #getSwitchExpression()
+	 * @generated
+	 */
+	EReference getSwitchExpression_Default();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.SwitchCase <em>Switch Case</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Switch Case</em>'.
+	 * @see org.yakindu.base.expressions.expressions.SwitchCase
+	 * @generated
+	 */
+	EClass getSwitchCase();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.SwitchCase#getCase <em>Case</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Case</em>'.
+	 * @see org.yakindu.base.expressions.expressions.SwitchCase#getCase()
+	 * @see #getSwitchCase()
+	 * @generated
+	 */
+	EReference getSwitchCase_Case();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.SwitchCase#getThen <em>Then</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Then</em>'.
+	 * @see org.yakindu.base.expressions.expressions.SwitchCase#getThen()
+	 * @see #getSwitchCase()
+	 * @generated
+	 */
+	EReference getSwitchCase_Then();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.EventRaisingExpression <em>Event Raising Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Event Raising Expression</em>'.
+	 * @see org.yakindu.base.expressions.expressions.EventRaisingExpression
+	 * @generated
+	 */
+	EClass getEventRaisingExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.EventRaisingExpression#getEvent <em>Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Event</em>'.
+	 * @see org.yakindu.base.expressions.expressions.EventRaisingExpression#getEvent()
+	 * @see #getEventRaisingExpression()
+	 * @generated
+	 */
+	EReference getEventRaisingExpression_Event();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.EventRaisingExpression#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @see org.yakindu.base.expressions.expressions.EventRaisingExpression#getValue()
+	 * @see #getEventRaisingExpression()
+	 * @generated
+	 */
+	EReference getEventRaisingExpression_Value();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.EventValueReferenceExpression <em>Event Value Reference Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Event Value Reference Expression</em>'.
+	 * @see org.yakindu.base.expressions.expressions.EventValueReferenceExpression
+	 * @generated
+	 */
+	EClass getEventValueReferenceExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.EventValueReferenceExpression#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @see org.yakindu.base.expressions.expressions.EventValueReferenceExpression#getValue()
+	 * @see #getEventValueReferenceExpression()
+	 * @generated
+	 */
+	EReference getEventValueReferenceExpression_Value();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.PostFixUnaryExpression <em>Post Fix Unary Expression</em>}'.
@@ -2754,6 +3286,206 @@ public interface ExpressionsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ARGUMENT__VALUE = eINSTANCE.getArgument_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.IfExpressionImpl <em>If Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.expressions.expressions.impl.IfExpressionImpl
+		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getIfExpression()
+		 * @generated
+		 */
+		EClass IF_EXPRESSION = eINSTANCE.getIfExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IF_EXPRESSION__CONDITION = eINSTANCE.getIfExpression_Condition();
+
+		/**
+		 * The meta object literal for the '<em><b>Then</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IF_EXPRESSION__THEN = eINSTANCE.getIfExpression_Then();
+
+		/**
+		 * The meta object literal for the '<em><b>Else</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IF_EXPRESSION__ELSE = eINSTANCE.getIfExpression_Else();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.BlockExpressionImpl <em>Block Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.expressions.expressions.impl.BlockExpressionImpl
+		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBlockExpression()
+		 * @generated
+		 */
+		EClass BLOCK_EXPRESSION = eINSTANCE.getBlockExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Expressions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BLOCK_EXPRESSION__EXPRESSIONS = eINSTANCE.getBlockExpression_Expressions();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.WhileExpressionImpl <em>While Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.expressions.expressions.impl.WhileExpressionImpl
+		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getWhileExpression()
+		 * @generated
+		 */
+		EClass WHILE_EXPRESSION = eINSTANCE.getWhileExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference WHILE_EXPRESSION__BODY = eINSTANCE.getWhileExpression_Body();
+
+		/**
+		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference WHILE_EXPRESSION__CONDITION = eINSTANCE.getWhileExpression_Condition();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.ReturnExpressionImpl <em>Return Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.expressions.expressions.impl.ReturnExpressionImpl
+		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getReturnExpression()
+		 * @generated
+		 */
+		EClass RETURN_EXPRESSION = eINSTANCE.getReturnExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RETURN_EXPRESSION__EXPRESSION = eINSTANCE.getReturnExpression_Expression();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.SwitchExpressionImpl <em>Switch Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.expressions.expressions.impl.SwitchExpressionImpl
+		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getSwitchExpression()
+		 * @generated
+		 */
+		EClass SWITCH_EXPRESSION = eINSTANCE.getSwitchExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Switch</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SWITCH_EXPRESSION__SWITCH = eINSTANCE.getSwitchExpression_Switch();
+
+		/**
+		 * The meta object literal for the '<em><b>Cases</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SWITCH_EXPRESSION__CASES = eINSTANCE.getSwitchExpression_Cases();
+
+		/**
+		 * The meta object literal for the '<em><b>Default</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SWITCH_EXPRESSION__DEFAULT = eINSTANCE.getSwitchExpression_Default();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.SwitchCaseImpl <em>Switch Case</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.expressions.expressions.impl.SwitchCaseImpl
+		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getSwitchCase()
+		 * @generated
+		 */
+		EClass SWITCH_CASE = eINSTANCE.getSwitchCase();
+
+		/**
+		 * The meta object literal for the '<em><b>Case</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SWITCH_CASE__CASE = eINSTANCE.getSwitchCase_Case();
+
+		/**
+		 * The meta object literal for the '<em><b>Then</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SWITCH_CASE__THEN = eINSTANCE.getSwitchCase_Then();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.EventRaisingExpressionImpl <em>Event Raising Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.expressions.expressions.impl.EventRaisingExpressionImpl
+		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getEventRaisingExpression()
+		 * @generated
+		 */
+		EClass EVENT_RAISING_EXPRESSION = eINSTANCE.getEventRaisingExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Event</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EVENT_RAISING_EXPRESSION__EVENT = eINSTANCE.getEventRaisingExpression_Event();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EVENT_RAISING_EXPRESSION__VALUE = eINSTANCE.getEventRaisingExpression_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.EventValueReferenceExpressionImpl <em>Event Value Reference Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.expressions.expressions.impl.EventValueReferenceExpressionImpl
+		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getEventValueReferenceExpression()
+		 * @generated
+		 */
+		EClass EVENT_VALUE_REFERENCE_EXPRESSION = eINSTANCE.getEventValueReferenceExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EVENT_VALUE_REFERENCE_EXPRESSION__VALUE = eINSTANCE.getEventValueReferenceExpression_Value();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.PostFixUnaryExpressionImpl <em>Post Fix Unary Expression</em>}' class.

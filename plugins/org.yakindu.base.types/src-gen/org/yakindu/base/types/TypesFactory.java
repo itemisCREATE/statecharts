@@ -44,6 +44,15 @@ public interface TypesFactory extends EFactory {
 	Type createType();
 
 	/**
+	 * Returns a new object of class '<em>Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Declaration</em>'.
+	 * @generated
+	 */
+	Declaration createDeclaration();
+
+	/**
 	 * Returns a new object of class '<em>Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

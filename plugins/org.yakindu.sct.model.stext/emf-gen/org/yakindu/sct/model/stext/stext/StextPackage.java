@@ -902,6 +902,15 @@ public interface StextPackage extends EPackage {
 	int OPERATION_DEFINITION__VARIADIC = TypesPackage.OPERATION__VARIADIC;
 
 	/**
+	 * The feature id for the '<em><b>Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_DEFINITION__BODY = TypesPackage.OPERATION__BODY;
+
+	/**
 	 * The number of structural features of the '<em>Operation Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

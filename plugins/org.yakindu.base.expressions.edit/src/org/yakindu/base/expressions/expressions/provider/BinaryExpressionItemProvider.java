@@ -225,6 +225,36 @@ public class BinaryExpressionItemProvider extends ExpressionItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
+				(ExpressionsPackage.Literals.BINARY_EXPRESSION__LEFT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createIfExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.BINARY_EXPRESSION__LEFT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createBlockExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.BINARY_EXPRESSION__LEFT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createWhileExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.BINARY_EXPRESSION__LEFT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createReturnExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.BINARY_EXPRESSION__LEFT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createSwitchExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.BINARY_EXPRESSION__LEFT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(ExpressionsPackage.Literals.BINARY_EXPRESSION__RIGHT_OPERAND,
 				 ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
 
@@ -322,6 +352,36 @@ public class BinaryExpressionItemProvider extends ExpressionItemProvider {
 			(createChildParameter
 				(ExpressionsPackage.Literals.BINARY_EXPRESSION__RIGHT_OPERAND,
 				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.BINARY_EXPRESSION__RIGHT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createIfExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.BINARY_EXPRESSION__RIGHT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createBlockExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.BINARY_EXPRESSION__RIGHT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createWhileExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.BINARY_EXPRESSION__RIGHT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createReturnExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.BINARY_EXPRESSION__RIGHT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createSwitchExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.BINARY_EXPRESSION__RIGHT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
 	}
 
 	/**

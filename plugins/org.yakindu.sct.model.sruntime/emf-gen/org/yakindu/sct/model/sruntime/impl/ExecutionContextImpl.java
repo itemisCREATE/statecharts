@@ -430,8 +430,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 */
 	@Override
 	public ExecutionVariable getVariable(final String qualifiedName) {
-		ExecutionVariable _xblockexpression = null;
-		{
+		ExecutionVariable _xblockexpression = null; {
 			Assert.isNotNull(qualifiedName);
 			final Function1<ExecutionVariable, Boolean> _function = new Function1<ExecutionVariable, Boolean>() {
 				public Boolean apply(final ExecutionVariable it) {
@@ -451,8 +450,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 */
 	@Override
 	public ExecutionEvent getEvent(final String qualifiedName) {
-		ExecutionEvent _xblockexpression = null;
-		{
+		ExecutionEvent _xblockexpression = null; {
 			Assert.isNotNull(qualifiedName);
 			final Function1<ExecutionEvent, Boolean> _function = new Function1<ExecutionEvent, Boolean>() {
 				public Boolean apply(final ExecutionEvent it) {
@@ -472,8 +470,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 */
 	@Override
 	public ExecutionSlot getSlot(final String qualifiedName) {
-		ExecutionSlot _xblockexpression = null;
-		{
+		ExecutionSlot _xblockexpression = null; {
 			Assert.isNotNull(qualifiedName);
 			final Function1<ExecutionSlot, Boolean> _function = new Function1<ExecutionSlot, Boolean>() {
 				public Boolean apply(final ExecutionSlot it) {
@@ -513,8 +510,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 */
 	@Override
 	public List<ExecutionSlot> getAllSlots() {
-		BasicEList<ExecutionSlot> _xblockexpression = null;
-		{
+		BasicEList<ExecutionSlot> _xblockexpression = null; {
 			BasicEList<ExecutionSlot> result = new BasicEList<ExecutionSlot>();
 			this.addSlots(result, this.getSlots(), Lists.<ExecutionSlot>newArrayList());
 			_xblockexpression = result;

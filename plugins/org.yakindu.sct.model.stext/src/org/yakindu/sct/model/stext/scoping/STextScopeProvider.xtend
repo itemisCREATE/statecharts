@@ -10,6 +10,9 @@
  */
 package org.yakindu.sct.model.stext.scoping
 
+import com.google.common.base.Predicate
+import com.google.common.collect.Lists
+import com.google.inject.Inject
 import java.util.List
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.ecore.EObject
@@ -28,12 +31,13 @@ import org.eclipse.xtext.scoping.impl.ImportScope
 import org.eclipse.xtext.scoping.impl.SimpleScope
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.expressions.MetaCall
 import org.yakindu.base.expressions.scoping.ExpressionsScopeProvider
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Expression
+import org.yakindu.base.types.MetaComposite
 import org.yakindu.base.types.Type
-import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sgraph.Region
@@ -46,11 +50,6 @@ import org.yakindu.sct.model.stext.extensions.STextExtensions
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.StatechartSpecification
-import com.google.common.base.Predicate
-import com.google.common.collect.Lists
-import com.google.inject.Inject
-import org.yakindu.base.types.MetaComposite
-import org.yakindu.base.expressions.expressions.MetaCall
 
 /** 
  * @author andreas muelder
@@ -59,8 +58,6 @@ import org.yakindu.base.expressions.expressions.MetaCall
  */
 class STextScopeProvider extends ExpressionsScopeProvider {
 
-	@Inject 
-	ITypeSystemInferrer typeInferrer
 	@Inject 
 	ITypeSystem typeSystem
 	@Inject 
@@ -112,7 +109,7 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 		return new SimpleScope(unnamedScope, namedScope.getAllElements())
 	}
 
-	def IScope scope_FeatureCall_feature(FeatureCall context, EReference reference) {
+	override IScope scope_FeatureCall_feature(FeatureCall context, EReference reference) {
 		var Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference)
 		var Expression owner = context.getOwner()
 		var EObject element = null
@@ -170,23 +167,6 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 		return scope;
 	}
 	
-
-	def protected IScope addScopeForEnumType(EnumerationType element, IScope parentScope,
-		Predicate<IEObjectDescription> predicate) {
-		var scope = parentScope
-		scope = Scopes.scopeFor((element).getEnumerator(), scope)
-		scope = new FilteringScope(scope, predicate)
-		return scope
-	}
-
-	def protected IScope addScopeForComplexType(ComplexType type, IScope parentScope,
-		Predicate<IEObjectDescription> predicate) {
-		var scope = parentScope
-		scope = Scopes.scopeFor(type.getAllFeatures().filter[!isStatic], scope)
-		scope = new FilteringScope(scope, predicate)
-		return scope
-	}
-
 	def private Predicate<IEObjectDescription> calculateFilterPredicate(EObject context, EReference reference) {
 		var Predicate<IEObjectDescription> predicate = null
 		var EObject container = context

@@ -55,7 +55,7 @@ class InternalFunctions {
 	 
 	 def implementation(Method it) '''
 	 	«typeSpecifier.targetLanguageName» «execution_flow.module»::«shortName»(«FOR p : parameters SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR») {
-	 		«body.code»
+	 		«bodySequence.code»
 	 	}
 	 '''
 	 

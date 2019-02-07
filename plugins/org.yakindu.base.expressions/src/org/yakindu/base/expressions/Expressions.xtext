@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010 - 2018 committers of YAKINDU and others.
+ * Copyright (c) 2010 - 2019 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -60,13 +60,13 @@ ShiftExpression returns types::Expression:
 
 NumericalAddSubtractExpression returns types::Expression:
 	NumericalMultiplyDivideExpression
-	=>({NumericalAddSubtractExpression.leftOperand=current}
+	=> ({NumericalAddSubtractExpression.leftOperand=current}
 	operator=AdditiveOperator
 	rightOperand=NumericalMultiplyDivideExpression)*;
 
 NumericalMultiplyDivideExpression returns types::Expression:
 	NumericalUnaryExpression
-	=>({NumericalMultiplyDivideExpression.leftOperand=current}
+	=> ({NumericalMultiplyDivideExpression.leftOperand=current}
 	operator=MultiplicativeOperator
 	rightOperand=NumericalUnaryExpression)*;
 
@@ -82,36 +82,65 @@ TypeCastExpression returns types::Expression:
 PrimaryExpression returns types::Expression:
 	PrimitiveValueExpression
 	| FeatureCall
+	| IfExpression
+	| SwitchExpression
+	| WhileExpression
+	| BlockExpression
+	| ReturnExpression
 	| ParenthesizedExpression;
 
 PrimitiveValueExpression returns types::Expression:
 	{PrimitiveValueExpression} value=Literal;
 
+BlockExpression returns types::Expression:
+	{BlockExpression} '{' (expressions+=Expression)* '}';
 
+IfExpression returns types::Expression:
+	{IfExpression}
+	'if' '(' condition=Expression ')'
+	then=BlockExpression
+	(=> 'else' else=BlockExpression)?;
+
+SwitchExpression returns types::Expression:
+	{SwitchExpression}
+	'switch' '(' switch=Expression ')' '{' 
+		(cases+=SwitchCase)*
+	('default' ':' default=Expression )?
+	'}'
+;
+SwitchCase :
+	'case'  case=Expression  (':' then=Expression)
+;
+EventRaisingExpression returns types::Expression:
+	{EventRaisingExpression} 'raise' event=FeatureCall (':' value=ConditionalExpression)?;
+
+WhileExpression returns types::Expression:
+	{WhileExpression} 'while' '(' condition=Expression ')' body=BlockExpression;
+	
+ReturnExpression returns types::Expression :
+	{ReturnExpression} 'return' (=>expression=ConditionalExpression)';';  
 
 FeatureCall returns types::Expression:
-	ElementReferenceExpression ((({FeatureCall.owner=current} '.') | ({MetaCall.owner=current} '.@')) feature=[types::Declaration]
-	(=> operationCall?= '('(arguments+=Argument (',' arguments+=Argument)*)?')'
-		|
-	=> (arrayAccess ?= '[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression ']')* 
-	)?)*;
+	ElementReferenceExpression ((({FeatureCall.owner=current} '.') | ({MetaCall.owner=current} '.@'))
+	feature=[types::Declaration]
+	(=> operationCall?='(' (arguments+=Argument (',' arguments+=Argument)*)? ')'
+	|
+	=> (arrayAccess?='[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression ']')*)?)*;
 
 ElementReferenceExpression returns types::Expression:
 	{ElementReferenceExpression} reference=[ecore::EObject|ID]
-	(=> operationCall?='('	(arguments+=Argument (',' arguments+=Argument)*)?	')' 
-		|
-	=> (arrayAccess ?= '[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression ']')*
-	)?;
+	(=> operationCall?='(' (arguments+=Argument (',' arguments+=Argument)*)? ')'
+	|
+	=> (arrayAccess?='[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression ']')*)?;
 
 Argument:
-	(parameter=[types::Parameter] '=')?  value=ConditionalExpression
-;
+	(parameter=[types::Parameter] '=')? value=ConditionalExpression;
 
 ParenthesizedExpression returns types::Expression:
 	{ParenthesizedExpression} '(' expression=Expression ')';
 
 TypeSpecifier returns types::TypeSpecifier:
-	type=[types::Type|QID] ('<' (typeArguments+=TypeSpecifier (',' typeArguments+=TypeSpecifier)*'>'))?;
+	type=[types::Type|QID] ('<' (typeArguments+=TypeSpecifier (',' typeArguments+=TypeSpecifier)* '>'))?;
 
 Literal:
 	BoolLiteral | IntLiteral | HexLiteral | BinaryLiteral | DoubleLiteral | FloatLiteral | StringLiteral | NullLiteral;
@@ -197,9 +226,9 @@ terminal BOOL returns ecore::EBoolean:
 terminal HEX returns ecore::EInt:
 	('0') ('x' | 'X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
 
-terminal BINARY returns ecore::EInt: 
-	('0')('b' | 'B') ('0'|'1')+
-;
+terminal BINARY returns ecore::EInt:
+	('0') ('b' | 'B') ('0' | '1')+;
+
 terminal DOUBLE returns ecore::EDouble:
 	(INT '.' INT) ('e' ('-' | '+') INT)? ('d' | 'D')?;
 

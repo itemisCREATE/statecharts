@@ -158,5 +158,36 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Expressions.ecore#//Argument/parameter"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//Argument/value"/>
     </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//IfExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//IfExpression/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//IfExpression/then"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//IfExpression/else"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//BlockExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//BlockExpression/expressions"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//WhileExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//WhileExpression/body"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//WhileExpression/condition"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//ReturnExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ReturnExpression/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//SwitchExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//SwitchExpression/switch"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//SwitchExpression/cases"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//SwitchExpression/default"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//SwitchCase">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//SwitchCase/case"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//SwitchCase/then"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//EventRaisingExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//EventRaisingExpression/event"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//EventRaisingExpression/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//EventValueReferenceExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//EventValueReferenceExpression/value"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

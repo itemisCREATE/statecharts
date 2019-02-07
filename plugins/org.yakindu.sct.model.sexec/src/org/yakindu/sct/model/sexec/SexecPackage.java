@@ -2089,7 +2089,16 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int METHOD__BODY = TypesPackage.OPERATION_FEATURE_COUNT + 0;
+	int METHOD__BODY = TypesPackage.OPERATION__BODY;
+
+	/**
+	 * The feature id for the '<em><b>Body Sequence</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD__BODY_SEQUENCE = TypesPackage.OPERATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Method</em>' class.
@@ -3898,15 +3907,15 @@ public interface SexecPackage extends EPackage {
 	EClass getMethod();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.Method#getBody <em>Body</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.Method#getBodySequence <em>Body Sequence</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Body</em>'.
-	 * @see org.yakindu.sct.model.sexec.Method#getBody()
+	 * @return the meta object for the containment reference '<em>Body Sequence</em>'.
+	 * @see org.yakindu.sct.model.sexec.Method#getBodySequence()
 	 * @see #getMethod()
 	 * @generated
 	 */
-	EReference getMethod_Body();
+	EReference getMethod_BodySequence();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.MappedElement <em>Mapped Element</em>}'.
@@ -4987,12 +4996,12 @@ public interface SexecPackage extends EPackage {
 		EClass METHOD = eINSTANCE.getMethod();
 
 		/**
-		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Body Sequence</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference METHOD__BODY = eINSTANCE.getMethod_Body();
+		EReference METHOD__BODY_SEQUENCE = eINSTANCE.getMethod_BodySequence();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.MappedElementImpl <em>Mapped Element</em>}' class.

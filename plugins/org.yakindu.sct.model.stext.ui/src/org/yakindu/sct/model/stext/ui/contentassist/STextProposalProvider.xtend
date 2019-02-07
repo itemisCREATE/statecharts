@@ -10,6 +10,7 @@
 package org.yakindu.sct.model.stext.ui.contentassist
 
 import com.google.common.base.Function
+import com.google.common.collect.ImmutableList
 import com.google.inject.Inject
 import java.util.ArrayList
 import java.util.List
@@ -41,8 +42,12 @@ import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
+import org.eclipse.xtext.ui.editor.hover.IEObjectHover
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.scoping.IPackageImport2URIMapper
+import org.yakindu.base.expressions.scoping.IPackageImport2URIMapper.PackageImport
+import org.yakindu.base.types.MetaComposite
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Type
 import org.yakindu.sct.model.sgraph.Entry
@@ -53,11 +58,10 @@ import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.extensions.STextExtensions
-import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper
-import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport
 import org.yakindu.sct.model.stext.services.STextGrammarAccess
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
+import org.yakindu.sct.model.stext.stext.RegularEventSpec
 import org.yakindu.sct.model.stext.stext.SimpleScope
 import org.yakindu.sct.model.stext.stext.StatechartSpecification
 import org.yakindu.sct.model.stext.stext.StextPackage
@@ -65,10 +69,6 @@ import org.yakindu.sct.model.stext.stext.TransitionReaction
 import org.yakindu.sct.model.stext.stext.TransitionSpecification
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.ui.internal.StextActivator
-import org.eclipse.xtext.ui.editor.hover.IEObjectHover
-import com.google.common.collect.ImmutableList
-import org.yakindu.base.types.MetaComposite
-import org.yakindu.sct.model.stext.stext.RegularEventSpec
 
 /** 
  * Several filters to make proposals more useful.

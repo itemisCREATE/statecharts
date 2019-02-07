@@ -8,7 +8,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.yakindu.base.expressions.expressions.*;
 import org.yakindu.base.expressions.expressions.AdditiveOperator;
 import org.yakindu.base.expressions.expressions.Argument;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
@@ -18,21 +17,26 @@ import org.yakindu.base.expressions.expressions.BitwiseAndExpression;
 import org.yakindu.base.expressions.expressions.BitwiseOperator;
 import org.yakindu.base.expressions.expressions.BitwiseOrExpression;
 import org.yakindu.base.expressions.expressions.BitwiseXorExpression;
+import org.yakindu.base.expressions.expressions.BlockExpression;
 import org.yakindu.base.expressions.expressions.BoolLiteral;
 import org.yakindu.base.expressions.expressions.ConditionalExpression;
 import org.yakindu.base.expressions.expressions.DoubleLiteral;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
+import org.yakindu.base.expressions.expressions.EventRaisingExpression;
+import org.yakindu.base.expressions.expressions.EventValueReferenceExpression;
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.expressions.FloatLiteral;
 import org.yakindu.base.expressions.expressions.HexLiteral;
+import org.yakindu.base.expressions.expressions.IfExpression;
 import org.yakindu.base.expressions.expressions.IntLiteral;
 import org.yakindu.base.expressions.expressions.LogicalAndExpression;
 import org.yakindu.base.expressions.expressions.LogicalNotExpression;
 import org.yakindu.base.expressions.expressions.LogicalOperator;
 import org.yakindu.base.expressions.expressions.LogicalOrExpression;
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression;
+import org.yakindu.base.expressions.expressions.MetaCall;
 import org.yakindu.base.expressions.expressions.MultiplicativeOperator;
 import org.yakindu.base.expressions.expressions.NullLiteral;
 import org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression;
@@ -43,11 +47,15 @@ import org.yakindu.base.expressions.expressions.PostFixOperator;
 import org.yakindu.base.expressions.expressions.PostFixUnaryExpression;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
 import org.yakindu.base.expressions.expressions.RelationalOperator;
+import org.yakindu.base.expressions.expressions.ReturnExpression;
 import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.ShiftOperator;
 import org.yakindu.base.expressions.expressions.StringLiteral;
+import org.yakindu.base.expressions.expressions.SwitchCase;
+import org.yakindu.base.expressions.expressions.SwitchExpression;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
+import org.yakindu.base.expressions.expressions.WhileExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -122,6 +130,14 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 			case ExpressionsPackage.PARENTHESIZED_EXPRESSION: return createParenthesizedExpression();
 			case ExpressionsPackage.TYPE_CAST_EXPRESSION: return createTypeCastExpression();
 			case ExpressionsPackage.ARGUMENT: return createArgument();
+			case ExpressionsPackage.IF_EXPRESSION: return createIfExpression();
+			case ExpressionsPackage.BLOCK_EXPRESSION: return createBlockExpression();
+			case ExpressionsPackage.WHILE_EXPRESSION: return createWhileExpression();
+			case ExpressionsPackage.RETURN_EXPRESSION: return createReturnExpression();
+			case ExpressionsPackage.SWITCH_EXPRESSION: return createSwitchExpression();
+			case ExpressionsPackage.SWITCH_CASE: return createSwitchCase();
+			case ExpressionsPackage.EVENT_RAISING_EXPRESSION: return createEventRaisingExpression();
+			case ExpressionsPackage.EVENT_VALUE_REFERENCE_EXPRESSION: return createEventValueReferenceExpression();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -467,6 +483,86 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	public Argument createArgument() {
 		ArgumentImpl argument = new ArgumentImpl();
 		return argument;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IfExpression createIfExpression() {
+		IfExpressionImpl ifExpression = new IfExpressionImpl();
+		return ifExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BlockExpression createBlockExpression() {
+		BlockExpressionImpl blockExpression = new BlockExpressionImpl();
+		return blockExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public WhileExpression createWhileExpression() {
+		WhileExpressionImpl whileExpression = new WhileExpressionImpl();
+		return whileExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ReturnExpression createReturnExpression() {
+		ReturnExpressionImpl returnExpression = new ReturnExpressionImpl();
+		return returnExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SwitchExpression createSwitchExpression() {
+		SwitchExpressionImpl switchExpression = new SwitchExpressionImpl();
+		return switchExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SwitchCase createSwitchCase() {
+		SwitchCaseImpl switchCase = new SwitchCaseImpl();
+		return switchCase;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EventRaisingExpression createEventRaisingExpression() {
+		EventRaisingExpressionImpl eventRaisingExpression = new EventRaisingExpressionImpl();
+		return eventRaisingExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EventValueReferenceExpression createEventValueReferenceExpression() {
+		EventValueReferenceExpressionImpl eventValueReferenceExpression = new EventValueReferenceExpressionImpl();
+		return eventValueReferenceExpression;
 	}
 
 	/**

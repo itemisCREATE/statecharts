@@ -277,6 +277,36 @@ public class AssignmentExpressionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF,
+				 ExpressionsFactory.eINSTANCE.createIfExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF,
+				 ExpressionsFactory.eINSTANCE.createBlockExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF,
+				 ExpressionsFactory.eINSTANCE.createWhileExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF,
+				 ExpressionsFactory.eINSTANCE.createReturnExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF,
+				 ExpressionsFactory.eINSTANCE.createSwitchExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF,
+				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__EXPRESSION,
 				 ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
 
@@ -374,6 +404,36 @@ public class AssignmentExpressionItemProvider
 			(createChildParameter
 				(ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__EXPRESSION,
 				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createIfExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createBlockExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createWhileExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createReturnExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createSwitchExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
 	}
 
 	/**

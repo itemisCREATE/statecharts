@@ -13,7 +13,7 @@
     </genEnums>
     <genClasses ecoreClass="types.ecore#//Package">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//Package/member"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference types.ecore#//Package/import"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Package/imports"/>
     </genClasses>
     <genClasses ecoreClass="types.ecore#//Type">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Type/abstract"/>
@@ -28,6 +28,7 @@
     <genClasses ecoreClass="types.ecore#//Operation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//Operation/parameters"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Operation/variadic"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//Operation/body"/>
       <genOperations ecoreOperation="types.ecore#//Operation/getVarArgIndex"/>
     </genClasses>
     <genClasses ecoreClass="types.ecore#//Property">

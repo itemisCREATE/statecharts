@@ -169,4 +169,51 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IfExpression" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="then" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="else" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BlockExpression" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
+        eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WhileExpression" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReturnExpression" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SwitchExpression" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="switch" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cases" upperBound="-1"
+        eType="#//SwitchCase" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="default" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SwitchCase" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="case" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="then" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventRaisingExpression" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventValueReferenceExpression" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
 </ecore:EPackage>

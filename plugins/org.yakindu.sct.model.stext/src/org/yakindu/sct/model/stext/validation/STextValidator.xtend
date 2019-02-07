@@ -50,6 +50,8 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.ExpressionsPackage
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
+import org.yakindu.base.expressions.scoping.IPackageImport2URIMapper
+import org.yakindu.base.expressions.scoping.IPackageImport2URIMapper.PackageImport
 import org.yakindu.base.expressions.validation.ExpressionsValidator
 import org.yakindu.base.types.Annotation
 import org.yakindu.base.types.Declaration
@@ -79,8 +81,6 @@ import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator
 import org.yakindu.sct.model.stext.extensions.STextExtensions
-import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper
-import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport
 import org.yakindu.sct.model.stext.services.STextGrammarAccess
 import org.yakindu.sct.model.stext.stext.AlwaysEvent
 import org.yakindu.sct.model.stext.stext.DefaultTrigger

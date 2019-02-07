@@ -31,13 +31,16 @@ import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression;
 import org.yakindu.base.expressions.expressions.BitwiseOrExpression;
 import org.yakindu.base.expressions.expressions.BitwiseXorExpression;
+import org.yakindu.base.expressions.expressions.BlockExpression;
 import org.yakindu.base.expressions.expressions.BoolLiteral;
 import org.yakindu.base.expressions.expressions.ConditionalExpression;
 import org.yakindu.base.expressions.expressions.DoubleLiteral;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
+import org.yakindu.base.expressions.expressions.EventRaisingExpression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.expressions.FloatLiteral;
 import org.yakindu.base.expressions.expressions.HexLiteral;
+import org.yakindu.base.expressions.expressions.IfExpression;
 import org.yakindu.base.expressions.expressions.IntLiteral;
 import org.yakindu.base.expressions.expressions.LogicalAndExpression;
 import org.yakindu.base.expressions.expressions.LogicalNotExpression;
@@ -50,15 +53,19 @@ import org.yakindu.base.expressions.expressions.NumericalUnaryExpression;
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression;
 import org.yakindu.base.expressions.expressions.PostFixUnaryExpression;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
+import org.yakindu.base.expressions.expressions.ReturnExpression;
 import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
+import org.yakindu.base.expressions.expressions.SwitchExpression;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
+import org.yakindu.base.expressions.expressions.WhileExpression;
 import org.yakindu.base.expressions.util.ExpressionExtensions;
 import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.AnnotationType;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
+import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Operation;
@@ -79,9 +86,10 @@ import com.google.inject.Inject;
  * 
  */
 public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implements ExpressionsTypeInferrerMessages {
+	
 	@Inject
 	protected TypeParameterInferrer typeParameterInferrer;
-	
+
 	@Inject
 	protected ExpressionExtensions utils;
 
@@ -166,7 +174,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	public InferenceResult doInfer(NumericalAddSubtractExpression e) {
 		InferenceResult result1 = inferTypeDispatch(e.getLeftOperand());
 		InferenceResult result2 = inferTypeDispatch(e.getRightOperand());
- 		assertCompatible(result1, result2, String.format(ARITHMETIC_OPERATORS, e.getOperator(), result1, result2));
+		assertCompatible(result1, result2, String.format(ARITHMETIC_OPERATORS, e.getOperator(), result1, result2));
 		assertIsSubType(result1, getResultFor(REAL),
 				String.format(ARITHMETIC_OPERATORS, e.getOperator(), result1, result2));
 		return getCommonType(result1, result2);
@@ -202,6 +210,58 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		InferenceResult result2 = inferTypeDispatch(e.getType());
 		assertCompatible(result1, result2, String.format(CAST_OPERATORS, result1, result2));
 		return inferTypeDispatch(e.getType());
+	}
+
+	public InferenceResult doInfer(WhileExpression e) {
+		assertIsSubType(inferTypeDispatch(e.getCondition()), getResultFor(BOOLEAN), CONDITIONAL_BOOLEAN);
+		return getResultFor(VOID);
+	}
+	
+	public InferenceResult doInfer(ReturnExpression exp) {
+		if(exp.getExpression() == null)
+			return getResultFor(VOID);
+		return inferTypeDispatch(exp.getExpression());
+	}
+
+	public InferenceResult doInfer(IfExpression it) {
+		InferenceResult condition = inferTypeDispatch(it.getCondition());
+		assertIsSubType(condition, getResultFor(BOOLEAN), CONDITIONAL_BOOLEAN);
+		if(it.getElse() != null) {
+			InferenceResult thenResult = inferTypeDispatch(it.getThen());
+			InferenceResult elseResult = inferTypeDispatch(it.getElse());
+			return getCommonType(thenResult, elseResult);
+		}
+		return getResultFor(VOID);
+	}
+
+	public InferenceResult doInfer(SwitchExpression it) {
+		//TODO
+		return getResultFor(VOID);
+	}
+	
+	public InferenceResult doInfer(BlockExpression it) {
+		InferenceResult result = getResultFor(VOID);
+		EList<Expression> expressions = it.getExpressions();
+		for (Expression expression : expressions) {
+			result = inferTypeDispatch(expression);
+		}
+		return result;
+	}
+	
+	public InferenceResult doInfer(EventRaisingExpression e) {
+		Event event = (Event) utils.featureOrReference(e.getEvent());
+		InferenceResult eventType = null;
+		if (event != null)
+			eventType = inferTypeDispatch(event.getTypeSpecifier());
+		eventType = eventType != null ? eventType : getResultFor(VOID);
+		if (e.getValue() == null) {
+			assertSame(eventType, getResultFor(VOID), String.format(MISSING_VALUE, eventType));
+			return getResultFor(VOID);
+		}
+		InferenceResult valueType = inferTypeDispatch(e.getValue());
+		assertAssignable(eventType, valueType, String.format(EVENT_DEFINITION, valueType, eventType));
+		return valueType;
+
 	}
 
 	public InferenceResult doInfer(EnumerationType enumType) {
@@ -260,7 +320,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 
 	protected InferenceResult inferOperation(ArgumentExpression e, Operation op,
 			Map<TypeParameter, InferenceResult> typeParameterMapping) {
-		
+
 		// resolve type parameter from operation call
 		List<InferenceResult> argumentTypes = getArgumentTypes(getOperationArguments(e));
 		List<Parameter> parameters = op.getParameters();
@@ -281,7 +341,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		typeParameterInferrer.inferTypeParametersFromOperationArguments(parametersToInfer, argumentsToInfer,
 				typeParameterMapping, acceptor);
 		validateParameters(typeParameterMapping, op, getOperationArguments(e), acceptor);
-		
+
 		return inferReturnType(e, op, typeParameterMapping);
 	}
 
@@ -336,15 +396,17 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	protected InferenceResult inferReturnType(ArgumentExpression e, Operation operation,
 			Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) {
 		InferenceResult returnType = inferTypeDispatch(operation);
-		
-		// if return type is not generic nor type parameter, we can return it immediately
+
+		// if return type is not generic nor type parameter, we can return it
+		// immediately
 		if (returnType != null) {
 			Type type = returnType.getType();
-			if (!(type instanceof TypeParameter) && (!(type instanceof GenericElement) || ((GenericElement)type).getTypeParameters().isEmpty())) {
+			if (!(type instanceof TypeParameter)
+					&& (!(type instanceof GenericElement) || ((GenericElement) type).getTypeParameters().isEmpty())) {
 				return returnType;
 			}
 		}
-		
+
 		inferByTargetType(e, operation, inferredTypeParameterTypes);
 
 		returnType = typeParameterInferrer.buildInferenceResult(returnType, inferredTypeParameterTypes, acceptor);
@@ -359,7 +421,8 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		// use target type inference
 		InferenceResult targetType = getTargetType(e);
 		if (targetType != null) {
-			typeParameterInferrer.inferTypeParametersFromTargetType(targetType, operation, inferredTypeParameterTypes, acceptor);
+			typeParameterInferrer.inferTypeParametersFromTargetType(targetType, operation, inferredTypeParameterTypes,
+					acceptor);
 		}
 	}
 
@@ -450,6 +513,12 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		InferenceResult result2 = inferTypeDispatch(e.getInitialValue());
 		assertAssignable(result, result2, String.format(PROPERTY_INITIAL_VALUE, result2, result));
 		return result;
+	}
+	
+	public InferenceResult doInfer(Event e) {
+		// if an event is used within an expression, the type is boolean and the
+		// value indicates if the event is raised or not
+		return getResultFor(BOOLEAN);
 	}
 
 	public InferenceResult doInfer(Operation e) {

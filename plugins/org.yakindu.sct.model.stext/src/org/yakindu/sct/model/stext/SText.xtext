@@ -145,9 +145,6 @@ ExitEvent:
 AlwaysEvent:
 	{AlwaysEvent} ('always' | 'oncycle');
 
-EventRaisingExpression returns types::Expression:
-	{EventRaisingExpression} 'raise' event=FeatureCall (':' value=Expression)?;
-
 EventValueReferenceExpression returns types::Expression:
 	{EventValueReferenceExpression} 'valueof' '(' value=FeatureCall ')';
 

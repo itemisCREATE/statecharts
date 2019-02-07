@@ -239,6 +239,36 @@ public class ParenthesizedExpressionItemProvider
 			(createChildParameter
 				(ExpressionsPackage.Literals.PARENTHESIZED_EXPRESSION__EXPRESSION,
 				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.PARENTHESIZED_EXPRESSION__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createIfExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.PARENTHESIZED_EXPRESSION__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createBlockExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.PARENTHESIZED_EXPRESSION__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createWhileExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.PARENTHESIZED_EXPRESSION__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createReturnExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.PARENTHESIZED_EXPRESSION__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createSwitchExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.PARENTHESIZED_EXPRESSION__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
 	}
 
 	/**

@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.provider.OperationItemProvider;
 
@@ -68,7 +69,7 @@ public class MethodItemProvider extends OperationItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(SexecPackage.Literals.METHOD__BODY);
+			childrenFeatures.add(SexecPackage.Literals.METHOD__BODY_SEQUENCE);
 		}
 		return childrenFeatures;
 	}
@@ -124,7 +125,7 @@ public class MethodItemProvider extends OperationItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Method.class)) {
-			case SexecPackage.METHOD__BODY:
+			case SexecPackage.METHOD__BODY_SEQUENCE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -249,7 +250,147 @@ public class MethodItemProvider extends OperationItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.METHOD__BODY,
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createConditionalExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createLogicalOrExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createLogicalAndExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createLogicalNotExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createBitwiseXorExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createBitwiseOrExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createBitwiseAndExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createLogicalRelationExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createNumericalAddSubtractExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createNumericalUnaryExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createPostFixUnaryExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createFeatureCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createMetaCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createIfExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createBlockExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createWhileExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createReturnExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createSwitchExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.METHOD__BODY_SEQUENCE,
 				 SexecFactory.eINSTANCE.createSequence()));
 	}
 

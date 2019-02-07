@@ -73,7 +73,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="transition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Method" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Operation">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//Sequence"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bodySequence" eType="#//Sequence"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StateVector">

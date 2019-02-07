@@ -15,7 +15,7 @@ import org.yakindu.base.base.DomainElement;
  * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.Package#getMember <em>Member</em>}</li>
- *   <li>{@link org.yakindu.base.types.Package#getImport <em>Import</em>}</li>
+ *   <li>{@link org.yakindu.base.types.Package#getImports <em>Imports</em>}</li>
  * </ul>
  *
  * @see org.yakindu.base.types.TypesPackage#getPackage()
@@ -40,19 +40,19 @@ public interface Package extends Declaration, DomainElement {
 	EList<Declaration> getMember();
 
 	/**
-	 * Returns the value of the '<em><b>Import</b></em>' reference list.
-	 * The list contents are of type {@link org.yakindu.base.types.Package}.
+	 * Returns the value of the '<em><b>Imports</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Import</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Imports</em>' attribute list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Import</em>' reference list.
-	 * @see org.yakindu.base.types.TypesPackage#getPackage_Import()
+	 * @return the value of the '<em>Imports</em>' attribute list.
+	 * @see org.yakindu.base.types.TypesPackage#getPackage_Imports()
 	 * @model
 	 * @generated
 	 */
-	EList<Package> getImport();
+	EList<String> getImports();
 
 } // Package

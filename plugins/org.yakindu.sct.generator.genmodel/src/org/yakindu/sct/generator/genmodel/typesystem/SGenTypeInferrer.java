@@ -26,5 +26,4 @@ public class SGenTypeInferrer extends ExpressionsTypeInferrer {
 		assertCompatible(result1, result2, String.format(ARITHMETIC_OPERATORS, e.getOperator(), result1, result2));
 		return getCommonType(inferTypeDispatch(e.getLeftOperand()), inferTypeDispatch(e.getRightOperand()));
 	}
-
 }

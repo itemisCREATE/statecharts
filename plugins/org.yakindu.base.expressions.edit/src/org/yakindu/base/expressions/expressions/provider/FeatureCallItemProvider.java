@@ -318,6 +318,36 @@ public class FeatureCallItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__OWNER,
+				 ExpressionsFactory.eINSTANCE.createIfExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__OWNER,
+				 ExpressionsFactory.eINSTANCE.createBlockExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__OWNER,
+				 ExpressionsFactory.eINSTANCE.createWhileExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__OWNER,
+				 ExpressionsFactory.eINSTANCE.createReturnExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__OWNER,
+				 ExpressionsFactory.eINSTANCE.createSwitchExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__OWNER,
+				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
 
@@ -415,6 +445,36 @@ public class FeatureCallItemProvider
 			(createChildParameter
 				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createIfExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createBlockExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createWhileExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createReturnExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createSwitchExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
 	}
 
 	/**
