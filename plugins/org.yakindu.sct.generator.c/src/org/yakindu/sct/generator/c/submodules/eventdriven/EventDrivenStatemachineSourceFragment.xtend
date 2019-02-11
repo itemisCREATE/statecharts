@@ -63,20 +63,20 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 	override declarations(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
 		'''
 		«IF needsQueues»
-		static void «eventQueueInitFunction»(«eventQueueTypeName» * eq);
-		static «CGeneratorConstants.INT_TYPE» «eventQueueSizeFunction»(«eventQueueTypeName» * eq);
-		static «internalEventStructTypeName» «eventQueuePopFunction»(«eventQueueTypeName» * eq);
-		static «CGeneratorConstants.BOOL_TYPE» «eventQueuePushFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» ev);
-		static void «eventInitFunction»(«internalEventStructTypeName» * ev, «eventEnumName» name);
-		static void «addToQueueFctID»(«eventQueueTypeName» * eq, «eventEnumName» name);
+			static void «eventQueueInitFunction»(«eventQueueTypeName» * eq);
+			static «CGeneratorConstants.INT_TYPE» «eventQueueSizeFunction»(«eventQueueTypeName» * eq);
+			static «internalEventStructTypeName» «eventQueuePopFunction»(«eventQueueTypeName» * eq);
+			static «CGeneratorConstants.BOOL_TYPE» «eventQueuePushFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» ev);
+			static void «eventInitFunction»(«internalEventStructTypeName» * ev, «eventEnumName» name);
+			static void «addToQueueFctID»(«eventQueueTypeName» * eq, «eventEnumName» name);
 		«ENDIF»
 		«IF needsDispatchEventFunction»
-		static void «dispatchEventFctID»(«scHandleDecl», const «internalEventStructTypeName» * event);
+			static void «dispatchEventFctID»(«scHandleDecl», const «internalEventStructTypeName» * event);
 		«ENDIF»
-	
+		
 		«IF hasQueuedEventsWithValue»
-		static void «valueEventInitFunction»(«internalEventStructTypeName» * ev, «eventEnumName» name, void * value);
-		static void «addToQueueValueFctID»(«eventQueueTypeName» * eq, «eventEnumName» name, void * value);
+			static void «valueEventInitFunction»(«internalEventStructTypeName» * ev, «eventEnumName» name, void * value);
+			static void «addToQueueValueFctID»(«eventQueueTypeName» * eq, «eventEnumName» name, void * value);
 		«ENDIF»
 		'''
 	}
@@ -143,7 +143,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 			
 			switch(name)
 			{
-				«FOR e : queuedEvents»
+				«FOR e : queuedEventsWithValue»
 					case «e.eventEnumMemberName»:
 						ev->value.«e.eventEnumMemberName»_value = *((«e.typeSpecifier.targetLanguageName»*)value);
 						break;
