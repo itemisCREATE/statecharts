@@ -100,4 +100,17 @@ class GenmodelEntries {
 	def tracingUsed(GeneratorEntry it) {
 		return (tracingEnterState || tracingExitState)
 	}
+	
+	def private getGeneratorOptionsFeature(GeneratorEntry it) {
+		getFeatureConfiguration(ICFeatureConstants::FEATURE_GENERATOR_OPTIONS)
+	}
+	
+	def getInEventQueueUsed(GeneratorEntry it) {
+		val parameter = generatorOptionsFeature?.getParameterValue(ICFeatureConstants::PARAMETER_IN_EVENT_QUEUE)
+		if(parameter !== null) {
+			parameter.booleanValue
+		} else {
+			false
+		}
+	}
 }
