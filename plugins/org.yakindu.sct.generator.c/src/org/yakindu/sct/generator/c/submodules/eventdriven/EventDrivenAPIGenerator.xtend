@@ -19,6 +19,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import static org.yakindu.sct.generator.c.CGeneratorConstants.INTPTR_TYPE
 import static org.yakindu.sct.generator.c.CGeneratorConstants.BOOL_TYPE
 import org.yakindu.sct.generator.c.types.CLiterals
+import org.yakindu.sct.generator.c.GeneratorPredicate
 
 /**
  * @author rbeckmann
@@ -29,23 +30,36 @@ import org.yakindu.sct.generator.c.types.CLiterals
 class EventDrivenAPIGenerator extends APIGenerator {
 	@Inject protected extension EventNaming
 	@Inject protected extension CLiterals
+	@Inject protected extension GeneratorPredicate
 	
 	override protected initFunctionBody(ExecutionFlow it) {
 		'''
 		«super.initFunctionBody(it)»
-		«IF hasLocalEvents»
+		«IF needsInternalEventQueue»
 		«eventQueueInitFunction»(&(«scHandle»->«internalQueue»));
+		«ENDIF»
+		«IF needsInEventQueue»
+		«eventQueueInitFunction»(&(«scHandle»->«inEventQueue»));
+		«ENDIF»
+		«IF needsRunCycleGuard»
+		is_running_cycle = «FALSE_LITERAL»;
 		«ENDIF»
 		'''
 	}
 	
 	override runCycle(ExecutionFlow it)  {
-		if(!hasLocalEvents) {
+		if(!needsQueues) {
 			return super.runCycle(it)
 		} else {
 			'''
 				«runCycleSignature»
 				{
+					«IF needsRunCycleGuard»
+					if(is_running_cycle == «TRUE_LITERAL») {
+						return;
+					}
+					is_running_cycle = «TRUE_LITERAL»;
+					«ENDIF»
 					«clearOutEventsFctID»(«scHandle»);
 					
 					«internalEventStructTypeName» currentEvent = «eventQueuePopFunction»(&(«scHandle»->internal_event_queue));
@@ -56,6 +70,9 @@ class EventDrivenAPIGenerator extends APIGenerator {
 						«clearInEventsFctID»(«scHandle»);
 					} while((currentEvent = «eventQueuePopFunction»(&(«scHandle»->«internalQueue»))).name != «invalidEventEnumName»);
 					
+					«IF needsRunCycleGuard»
+					is_running_cycle = «FALSE_LITERAL»;
+					«ENDIF»
 				}
 			'''
 		}

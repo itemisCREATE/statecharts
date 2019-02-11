@@ -38,6 +38,9 @@ class EventDrivenStatechartTypes extends StatechartTypes {
 		«IF needsInEventQueue»
 		«eventQueueTypeName» «inEventQueue»;
 		«ENDIF»
+		«IF needsRunCycleGuard»
+		«BOOL_TYPE» is_running_cycle;
+		«ENDIF»
 		'''
 	}
 	
