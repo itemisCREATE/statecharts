@@ -21,6 +21,7 @@ env:
 matrix:
   include:
   - env: TARGET=Neon.target
+    if: branch = master
   - env: TARGET=Oxygen.target
   - env: TARGET=Photon.target
   - env: TARGET=2018-09.target
