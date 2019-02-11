@@ -64,4 +64,20 @@ abstract class GeneratorPredicate {
 	}
 	
 	def boolean useInEventQueue();
+	
+	def getQueuedEvents(ExecutionFlow it) {
+		it.allEvents.filter[isQueued]
+	}
+	
+	def boolean hasQueuedEvents(ExecutionFlow it) {
+		!queuedEvents.empty
+	}
+	
+	def hasQueuedEventsWithValue(ExecutionFlow it) {
+		!queuedEventsWithValue.empty
+	}
+	
+	def getQueuedEventsWithValue(ExecutionFlow it) {
+		queuedEvents.filter[hasValue]
+	}
 }

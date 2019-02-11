@@ -12,13 +12,13 @@ package org.yakindu.sct.generator.c.submodules.eventdriven
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.sct.generator.c.extensions.EventNaming
 import org.yakindu.sct.generator.c.submodules.StatechartTypes
 import org.yakindu.sct.model.sexec.ExecutionFlow
 
-import static org.yakindu.sct.generator.c.CGeneratorConstants.INT_TYPE
 import static org.yakindu.sct.generator.c.CGeneratorConstants.BOOL_TYPE
-
+import static org.yakindu.sct.generator.c.CGeneratorConstants.INT_TYPE
 
 /**
  * @author rbeckmann
@@ -27,25 +27,29 @@ import static org.yakindu.sct.generator.c.CGeneratorConstants.BOOL_TYPE
 @Singleton // Guice
 class EventDrivenStatechartTypes extends StatechartTypes {
 	@Inject protected extension EventNaming
+	@Inject protected extension GeneratorPredicate
 	
 	override statemachineStructContent(ExecutionFlow it) {
 		'''
 		«super.statemachineStructContent(it)»
-		«IF hasLocalEvents»
+		«IF needsInternalEventQueue»
 		«eventQueueTypeName» «internalQueue»;
+		«ENDIF»
+		«IF needsInEventQueue»
+		«eventQueueTypeName» «inEventQueue»;
 		«ENDIF»
 		'''
 	}
 	
 	def generateEventsEnum(ExecutionFlow it) {
-		if(!hasLocalEvents) return ''''''
+		if(!needsQueues) return ''''''
 		'''
 		/*
 		 * Enum of event names in the statechart.
 		 */
 		typedef enum  {
 			«invalidEventEnumName(it)» = «invalidEvent»,
-			«FOR e : internalScope.getLocalEvents SEPARATOR ","»
+			«FOR e : queuedEvents SEPARATOR ","»
 				«eventEnumMemberName(e)»
 			«ENDFOR»
 		} «eventEnumName»;
@@ -53,21 +57,17 @@ class EventDrivenStatechartTypes extends StatechartTypes {
 	}
 	
 	def generateEventValueUnion(ExecutionFlow it) {
-		if(!isEventValueUnionNeeded) return ''''''
+		if(!needsValueUnion) return ''''''
 		'''
 		/*
 		 * Union of all possible event value types.
 		 */
 		typedef union {
-			«FOR e : valueUnionEvents»
+			«FOR e : queuedEventsWithValue»
 			«e.typeSpecifier.targetLanguageName» «eventValueUnionMemberName(e)»;
 			«ENDFOR»
 		} «eventValueUnionName»;
 		'''
-	}
-	
-	def isEventValueUnionNeeded(ExecutionFlow it) {
-		!valueUnionEvents.empty
 	}
 	
 	def generateEventStruct(ExecutionFlow it) {
@@ -77,7 +77,7 @@ class EventDrivenStatechartTypes extends StatechartTypes {
 		 */
 		typedef struct {
 			«eventEnumName» name;
-			«IF hasLocalEventsWithValue»
+			«IF needsValueUnion»
 			«BOOL_TYPE» has_value;
 			«eventValueUnionName» value;
 			«ENDIF»
@@ -97,9 +97,5 @@ class EventDrivenStatechartTypes extends StatechartTypes {
 			«INT_TYPE» size;
 		} «eventQueueTypeName»;
 		'''
-	}
-	
-	def valueUnionEvents(ExecutionFlow it) {
-		localEvents.filter[hasValue]
 	}
 }

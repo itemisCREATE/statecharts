@@ -94,6 +94,10 @@ class EventNaming {
 		"internal_event_queue"
 	}
 	
+	def inEventQueue() {
+		"in_event_queue"
+	}
+	
 	def dispatchEventFctID(ExecutionFlow it) {
 		'''«functionPrefix»dispatch_event'''
 	}
