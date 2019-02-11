@@ -964,6 +964,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		operationEClass.getESuperTypes().add(this.getTypedDeclaration());
 		operationEClass.getESuperTypes().add(this.getGenericElement());
 		propertyEClass.getESuperTypes().add(this.getTypedDeclaration());
+		propertyEClass.getESuperTypes().add(this.getExpression());
 		parameterEClass.getESuperTypes().add(this.getTypedElement());
 		parameterEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		parameterEClass.getESuperTypes().add(this.getAnnotatableElement());

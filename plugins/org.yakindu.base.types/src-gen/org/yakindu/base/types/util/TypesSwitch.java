@@ -136,6 +136,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				Property property = (Property)theEObject;
 				T result = caseProperty(property);
 				if (result == null) result = caseTypedDeclaration(property);
+				if (result == null) result = caseExpression(property);
 				if (result == null) result = caseDeclaration(property);
 				if (result == null) result = caseTypedElement(property);
 				if (result == null) result = caseNamedElement(property);

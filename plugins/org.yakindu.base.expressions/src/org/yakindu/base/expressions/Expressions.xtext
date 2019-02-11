@@ -118,6 +118,7 @@ WhileExpression returns types::Expression:
 	{WhileExpression} 'while' '(' condition=Expression ')' body=BlockExpression;
 	
 ReturnExpression returns types::Expression :
+	//TODO remove ';'
 	{ReturnExpression} 'return' (=>expression=ConditionalExpression)';';  
 
 FeatureCall returns types::Expression:

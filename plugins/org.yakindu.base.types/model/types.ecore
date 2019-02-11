@@ -29,7 +29,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//TypedDeclaration">
+  <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//TypedDeclaration #//Expression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="const" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="readonly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initialValue" eType="#//Expression"
