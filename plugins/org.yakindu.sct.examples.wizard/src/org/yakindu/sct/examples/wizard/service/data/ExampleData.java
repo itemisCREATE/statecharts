@@ -35,15 +35,39 @@ public class ExampleData implements Comparable<ExampleData>, IExampleData {
 	private String description;
 	private String[] images;
 	private File projectDir;
+	private Dependency[] dependencies;
 
-	public ExampleData(String category[], String id, String title, String description, String[] images) {
+	public static class Dependency {
+		private String updateSite;
+		private String[] features;
+
+		public Dependency(String updateSite, String[] features) {
+			this.updateSite = updateSite;
+			this.features = features;
+		}
+		
+		public String getUpdateSite() {
+			return updateSite;
+		}
+		
+		public String[] getFeatures() {
+			return features;
+		}
+	}
+	
+	public ExampleData(String category[], String id, String title, String description, String[] images, Dependency[] dependencies) {
 		this.category = category;
 		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.images = images;
+		this.dependencies = dependencies;
 	}
-
+	
+	public Dependency[] getDependencies() {
+		return dependencies;
+	}
+	
 	public String getId() {
 		return id;
 	}

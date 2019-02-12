@@ -13,14 +13,13 @@ package org.yakindu.sct.examples.wizard.pages;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.jface.preference.PreferenceDialog;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
@@ -40,22 +39,25 @@ import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.program.Program;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.dialogs.PreferencesUtil;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
 import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
 import org.yakindu.sct.examples.wizard.service.ExampleWizardConstants;
 import org.yakindu.sct.examples.wizard.service.IExampleService;
 import org.yakindu.sct.examples.wizard.service.data.ExampleCategory;
 import org.yakindu.sct.examples.wizard.service.data.ExampleData;
+import org.yakindu.sct.examples.wizard.service.data.ExampleData.Dependency;
 import org.yakindu.sct.examples.wizard.service.data.IExampleData;
+import org.yakindu.sct.ui.install.InstallWizardOpener;
+import org.yakindu.sct.ui.install.InstallationChecker;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -67,9 +69,6 @@ import com.google.inject.Inject;
 
 public class SelectExamplePage extends WizardPage
 		implements ExampleWizardConstants, ISelectionChangedListener, SelectionListener, IPropertyChangeListener {
-
-	private static final String PRO_BUNDLE = "com.yakindu.sct.domain.c";
-	private static final String PRO_UPDATE_SITE = "https://info.itemis.com/yakindu/statecharts/pro/";
 
 	private static final int WIZARD_SIZE_SCALE_FACOTR = 2;
 	private static final int WIZARD_SIZE_OFFSET = 300;
@@ -266,8 +265,8 @@ public class SelectExamplePage extends WizardPage
 	}
 
 	private void checkInstalledPlugins(IExampleData data) {
-		if (isProRequiredAndMissing(data)) {
-			messageArea.showProRequired();
+		if (isDependenciesMissing(data)) {
+			messageArea.showDependenciesMissing();
 		} else {
 			messageArea.hide();
 		}
@@ -275,8 +274,21 @@ public class SelectExamplePage extends WizardPage
 		this.getControl().update();
 	}
 
-	protected boolean isProRequiredAndMissing(IExampleData data) {
-		return data.isProfessional() && Platform.getBundle(PRO_BUNDLE) == null;
+	protected boolean isDependenciesMissing(IExampleData data) {
+		InstallationChecker checker = new InstallationChecker();
+		if (data instanceof ExampleData) {
+			Dependency[] dependencies = ((ExampleData) data).getDependencies();
+			if (dependencies != null) {
+				for (Dependency dependency : dependencies) {
+					for (String featureId : dependency.getFeatures()) {
+						if (!checker.isFeatureInstalled(featureId)) {
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	protected void setDetailPaneContent(IExampleData data) {
@@ -318,10 +330,26 @@ public class SelectExamplePage extends WizardPage
 			revealExamples();
 			break;
 		case INSTALL:
-			Program.launch(PRO_UPDATE_SITE);
+			installDependencies();
 			break;
 		default:
 			break;
+		}
+	}
+
+	protected void installDependencies() {
+		if (selection != null) {
+			Dependency[] dependencies = selection.getDependencies();
+			
+			Map<String, Set<String>> dependencyMap = Maps.newHashMap();
+			for (Dependency dependency : dependencies) {
+				dependencyMap.put(dependency.getUpdateSite(), Sets.newHashSet(dependency.getFeatures()));
+			}
+			try {
+				getWizard().getContainer().run(true, true, (final IProgressMonitor monitor) -> new InstallWizardOpener().open(dependencyMap, monitor));
+			} catch (InvocationTargetException | InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

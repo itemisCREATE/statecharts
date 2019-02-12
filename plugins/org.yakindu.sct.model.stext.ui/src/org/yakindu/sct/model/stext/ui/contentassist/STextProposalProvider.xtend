@@ -266,7 +266,7 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 		for (PackageImport pkgImport : allImports) {
 			var ICompletionProposal doCreateProposal = createCompletionProposal('''"«pkgImport.getName()»"''',
 				computePackageStyledString(pkgImport), getIncludeImage(pkgImport),
-				if(pkgImport.getUri().isFile()) 1 else -1, context.getPrefix(), context)
+				if(pkgImport.getUri().isPlatformResource()) 1 else -1, context.getPrefix(), context)
 			stringProposalDelegate.accept(doCreateProposal)
 		}
 	}
@@ -293,7 +293,7 @@ class STextProposalProvider extends AbstractSTextProposalProvider {
 		var StyledString secondPart = new StyledString(''' - «filePath»''', new GreyoutStyler())
 		return secondPart
 	}
-//
+
 	def protected ICompletionProposalAcceptor getCustomAcceptor(EObject model, String typeName,
 		ICompletionProposalAcceptor acceptor) {
 		var ICompletionProposalAcceptor priorityOptimizer = acceptor
