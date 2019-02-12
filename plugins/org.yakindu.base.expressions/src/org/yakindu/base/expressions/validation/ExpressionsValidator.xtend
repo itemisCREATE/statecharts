@@ -207,6 +207,9 @@ class ExpressionsValidator extends AbstractExpressionsValidator implements IVali
 
 	@Check(CheckType.FAST)
 	def void checkAnnotationTarget(AnnotatableElement element) {
+		//Guard for AnnotableElement#getAnnotationInfo container
+		if(element.eClass == TypesPackage.Literals.ANNOTATABLE_ELEMENT)
+			return
 		var EList<Annotation> annotations = element.getAnnotations()
 		for (Annotation annotation : annotations) {
 			var EList<EObject> targets = annotation.getType().getTargets()
