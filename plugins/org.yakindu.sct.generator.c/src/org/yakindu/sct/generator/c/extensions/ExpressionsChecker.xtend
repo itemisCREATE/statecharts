@@ -49,8 +49,7 @@ class ExpressionsChecker {
 	}
 	
 	def protected comparesString(LogicalRelationExpression it) {
-		isSame(infer(it.leftOperand).type, getType(ITypeSystem.STRING)) || 
-			isSame(infer(it.rightOperand).type, getType(ITypeSystem.STRING))
+		leftOperand.infer.type.isString || rightOperand.infer.type.isString
 	}
 	
 	def isConstString(VariableDefinition it) {
@@ -58,14 +57,14 @@ class ExpressionsChecker {
 	}
 	
 	def protected isStringType(VariableDefinition it) {
-		isSame(typeSpecifier.type ,getType(ITypeSystem.STRING))
+		isString(typeSpecifier.type)
 	}
 	
 	
 	def boolean haveCommonTypeReal(Expression expression) {
-		if(isSame(getCommonType((infer(expression).getType), getType(ITypeSystem.INTEGER)),
-			getType(ITypeSystem.INTEGER))) return false
-		return true
+		!getCommonType(
+				infer(expression).getType, getType(ITypeSystem.INTEGER)
+			).isInteger
 	}
 	
 		

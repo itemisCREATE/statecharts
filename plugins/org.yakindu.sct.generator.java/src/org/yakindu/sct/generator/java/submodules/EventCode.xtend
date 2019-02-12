@@ -40,7 +40,7 @@ class EventCode {
 	def generateEventDefinition(EventDefinition event, GeneratorEntry entry, InterfaceScope scope) '''
 		private boolean «event.identifier»;
 
-		«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+		«IF event.type !== null && !isVoid(event.type)»
 			private «event.typeSpecifier.targetLanguageName» «event.valueIdentifier»;
 
 		«ENDIF»
@@ -57,7 +57,7 @@ class EventCode {
 			return «event.identifier»;
 		}
 		
-		«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+		«IF event.type !== null && !isVoid(event.type)»
 			protected void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
 				«event.identifier» = true;
 				«event.valueIdentifier» = value;
@@ -87,7 +87,7 @@ class EventCode {
 	'''
 
 	def generateInEventDefinition(EventDefinition event) '''
-		«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+		«IF event.type !== null && !isVoid(event.type)»
 			public void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
 				«event.identifier» = true;
 				«event.valueIdentifier» = value;

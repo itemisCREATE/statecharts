@@ -46,7 +46,7 @@ class StatemachineFunctionsGenerator {
 			«var InterfaceScope scope = flow.defaultScope»
 			«FOR event : scope.eventDefinitions»
 				«IF event.direction == Direction::IN»
-					«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+					«IF event.type !== null && !isVoid(event.type)»
 						public void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
 							«scope.interfaceName.asEscapedIdentifier».raise«event.name.asName»(value);
 						}
@@ -62,7 +62,7 @@ class StatemachineFunctionsGenerator {
 						return «scope.interfaceName.asEscapedIdentifier».isRaised«event.name.asName»();
 					}
 
-					«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+					«IF event.type !== null && !isVoid(event.type)»
 						public «event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
 							return «scope.interfaceName.asEscapedIdentifier».get«event.name.asName»Value();
 						}
