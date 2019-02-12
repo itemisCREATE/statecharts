@@ -203,7 +203,7 @@ class ExpressionsValidator extends AbstractExpressionsValidator implements IVali
 	}
 
 	public static final String ERROR_WRONG_ANNOTATION_TARGET_CODE = "WrongAnnotationTarget"
-	public static final String ERROR_WRONG_ANNOTATION_TARGET_MSG = "Annotation '%s' can not be applied on %s ."
+	public static final String ERROR_WRONG_ANNOTATION_TARGET_MSG = "Annotation '%s' can not be applied on '%s' ."
 
 	@Check(CheckType.FAST)
 	def void checkAnnotationTarget(AnnotatableElement element) {
@@ -216,7 +216,7 @@ class ExpressionsValidator extends AbstractExpressionsValidator implements IVali
 				if (!found) {
 					error(
 						String.format(ERROR_WRONG_ANNOTATION_TARGET_MSG, annotation.getType().getName(),
-							element.eClass()), null, element.getAnnotations().indexOf(annotation),
+							element.eClass().name), null, element.getAnnotations().indexOf(annotation),
 						ERROR_WRONG_ANNOTATION_TARGET_CODE)
 				}
 			}
