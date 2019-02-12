@@ -52,6 +52,10 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 		
 		«dispatchEventFunction»
 		«ENDIF»
+		«IF needsNextEventFunction»
+		
+		«nextEventFunction»
+		«ENDIF»
 		«IF hasQueuedEventsWithValue»
 		
 		«valueEventInit»
@@ -73,6 +77,9 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 		«IF needsDispatchEventFunction»
 			static void «dispatchEventFctID»(«scHandleDecl», const «internalEventStructTypeName» * event);
 		«ENDIF»
+		«IF needsNextEventFunction»
+			static «internalEventStructTypeName» «nextEventFctID»(«scHandleDecl»);
+		«ENDIF»
 		
 		«IF hasQueuedEventsWithValue»
 			static void «valueEventInitFunction»(«internalEventStructTypeName» * ev, «eventEnumName» name, void * value);
@@ -84,8 +91,7 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 	def dispatchEventFunction(ExecutionFlow it) '''
 		static void «dispatchEventFctID»(«scHandleDecl», const «internalEventStructTypeName» * event) {
 			switch(event->name) {
-				«FOR s : scopes.filter(StatechartScope)»
-					«FOR e : s.declarations.filter(EventDefinition).filter[direction == Direction::LOCAL]»
+				«FOR e : queuedEvents»
 					case «e.eventEnumMemberName»:
 					{
 						«e.access» = «TRUE_LITERAL»;
@@ -94,7 +100,6 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 						«ENDIF»
 						break;
 					}
-					«ENDFOR»
 				«ENDFOR»
 				default:
 					break;
@@ -103,23 +108,21 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 	'''
 	
 	def addToEventQueueFunction(ExecutionFlow it) '''
-	static void «addToQueueFctID»(«eventQueueTypeName» * eq, «eventEnumName» name)
-	{
-		«internalEventStructTypeName» event;
-		«eventInitFunction»(&event, name);
-		«eventQueuePushFunction»(eq, event);
-	}
+		static void «addToQueueFctID»(«eventQueueTypeName» * eq, «eventEnumName» name)
+		{
+			«internalEventStructTypeName» event;
+			«eventInitFunction»(&event, name);
+			«eventQueuePushFunction»(eq, event);
+		}
 	'''
 	
 	def addToEventQueueValueFunction(ExecutionFlow it) '''
-	«IF hasLocalEventsWithValue»
-	static void «addToQueueValueFctID»(«eventQueueTypeName» * eq, «eventEnumName» name, void * value)
-	{
-		«internalEventStructTypeName» event;
-		«valueEventInitFunction»(&event, name, value);
-		«eventQueuePushFunction»(eq, event);
-	}
-	«ENDIF»
+		static void «addToQueueValueFctID»(«eventQueueTypeName» * eq, «eventEnumName» name, void * value)
+		{
+			«internalEventStructTypeName» event;
+			«valueEventInitFunction»(&event, name, value);
+			«eventQueuePushFunction»(eq, event);
+		}
 	'''
 	
 	def eventInit(ExecutionFlow it) {
@@ -208,6 +211,27 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 					return «TRUE_LITERAL»;
 				}
 			}
+		'''
+	}
+	
+	def nextEventFunction(ExecutionFlow it) {
+		'''
+		static «internalEventStructTypeName» «nextEventFctID»(«scHandleDecl»)
+		{
+			«internalEventStructTypeName» next_event;
+			«eventInitFunction»(&next_event, «invalidEventEnumName(it)»);
+			«IF needsInternalEventQueue»
+			if(«eventQueueSizeFunction»(&(«scHandle»->«internalQueue»)) > 0) {
+				next_event = «eventQueuePopFunction»(&(«scHandle»->«internalQueue»));
+			}
+			«ENDIF»
+			«IF needsInEventQueue»
+			«IF needsInternalEventQueue»else «ENDIF»if(«eventQueueSizeFunction»(&(«scHandle»->«inEventQueue»)) > 0) {
+				next_event = «eventQueuePopFunction»(&(«scHandle»->«inEventQueue»));
+			}
+			«ENDIF»
+			return next_event;
+		}
 		'''
 	}
 	

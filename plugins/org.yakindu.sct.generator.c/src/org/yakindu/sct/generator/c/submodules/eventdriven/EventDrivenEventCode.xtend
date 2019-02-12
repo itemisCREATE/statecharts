@@ -54,8 +54,8 @@ class EventDrivenEventCode extends EventCode {
 			«flow.addToQueueValueFctID»(&(«scHandle»->«inEventQueue»), «event.eventEnumMemberName», &event_value);
 			«ELSE»
 			«flow.addToQueueFctID»(&(«scHandle»->«inEventQueue»), «event.eventEnumMemberName»);
-			«runCycleFctID»(«scHandle»);
 			«ENDIF»
+			«runCycleFctID»(«scHandle»);
 			'''
 		} else {
 			'''

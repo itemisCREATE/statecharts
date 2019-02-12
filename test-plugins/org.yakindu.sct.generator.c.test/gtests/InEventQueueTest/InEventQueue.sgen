@@ -1,9 +1,16 @@
-GeneratorModel for yakindu::cpp {
-	statechart ConstantsVariation {
+GeneratorModel for yakindu::c {
+
+	statechart ineventqueue.InEventQueue {
+
 		feature Outlet {
 			targetProject = "gtests"
-			targetFolder = "ConstantsVariationTest"
+			targetFolder = "InEventQueueTest"
 		}
+		
+		feature GeneratorOptions {
+			inEventQueue = true	
+		}
+		
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false

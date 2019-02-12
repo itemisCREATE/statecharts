@@ -42,7 +42,7 @@ class EventDrivenAPIGenerator extends APIGenerator {
 		«eventQueueInitFunction»(&(«scHandle»->«inEventQueue»));
 		«ENDIF»
 		«IF needsRunCycleGuard»
-		is_running_cycle = «FALSE_LITERAL»;
+		«scHandle»->is_running_cycle = «FALSE_LITERAL»;
 		«ENDIF»
 		'''
 	}
@@ -55,23 +55,23 @@ class EventDrivenAPIGenerator extends APIGenerator {
 				«runCycleSignature»
 				{
 					«IF needsRunCycleGuard»
-					if(is_running_cycle == «TRUE_LITERAL») {
+					if(«scHandle»->is_running_cycle == «TRUE_LITERAL») {
 						return;
 					}
-					is_running_cycle = «TRUE_LITERAL»;
+					«scHandle»->is_running_cycle = «TRUE_LITERAL»;
 					«ENDIF»
 					«clearOutEventsFctID»(«scHandle»);
 					
-					«internalEventStructTypeName» currentEvent = «eventQueuePopFunction»(&(«scHandle»->internal_event_queue));
+					«internalEventStructTypeName» currentEvent = «nextEventFctID»(«scHandle»);
 					
 					do {
 						«dispatchEventFctID»(«scHandle», &currentEvent);
 						«runCycleForLoop»
 						«clearInEventsFctID»(«scHandle»);
-					} while((currentEvent = «eventQueuePopFunction»(&(«scHandle»->«internalQueue»))).name != «invalidEventEnumName»);
+					} while((currentEvent = «nextEventFctID»(«scHandle»)).name != «invalidEventEnumName»);
 					
 					«IF needsRunCycleGuard»
-					is_running_cycle = «FALSE_LITERAL»;
+					«scHandle»->is_running_cycle = «FALSE_LITERAL»;
 					«ENDIF»
 				}
 			'''
