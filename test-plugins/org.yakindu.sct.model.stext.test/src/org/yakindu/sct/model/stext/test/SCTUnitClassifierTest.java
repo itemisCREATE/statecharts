@@ -61,7 +61,8 @@ public class SCTUnitClassifierTest {
 			ExpressionsPackage.Literals.BINARY_LITERAL, ExpressionsPackage.Literals.META_CALL,
 			ExpressionsPackage.Literals.WHILE_EXPRESSION, ExpressionsPackage.Literals.IF_EXPRESSION,
 			ExpressionsPackage.Literals.SWITCH_EXPRESSION, ExpressionsPackage.Literals.SWITCH_CASE,
-			ExpressionsPackage.Literals.RETURN_EXPRESSION, ExpressionsPackage.Literals.BLOCK_EXPRESSION);
+			ExpressionsPackage.Literals.RETURN_EXPRESSION, ExpressionsPackage.Literals.BLOCK_EXPRESSION,
+			ExpressionsPackage.Literals.FOR_EXPRESSION, ExpressionsPackage.Literals.FOR_VAR_DECL);
 
 	@Test
 	public void checkEClassesCoveredByTestModels() throws Exception {
