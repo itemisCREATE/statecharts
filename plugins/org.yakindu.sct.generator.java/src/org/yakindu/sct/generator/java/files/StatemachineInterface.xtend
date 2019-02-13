@@ -163,7 +163,7 @@ class StatemachineInterface {
 				
 					«FOR event : scope.eventDefinitions»
 						«IF event.direction == Direction::OUT»
-							«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+							«IF event.type !== null && !isVoid(event.type)»
 								public void on«event.name.toFirstUpper()»Raised(«event.typeSpecifier.targetLanguageName» value);
 							«ELSE»
 								public void on«event.name.toFirstUpper()»Raised();
@@ -193,7 +193,7 @@ class StatemachineInterface {
 		'''
 			«FOR event : scope.eventDefinitions»
 				«IF event.direction == Direction::IN»
-					«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+					«IF event.type !== null && !isVoid(event.type)»
 						public void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value);
 						
 					«ELSE»
@@ -204,7 +204,7 @@ class StatemachineInterface {
 					public boolean isRaised«event.name.asName»();
 					
 					««« IMPORTANT: An event not specifying a type is regarded to have a void type
-				«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+				«IF event.type !== null && !isVoid(event.type)»
 						public «event.typeSpecifier.targetLanguageName» «event.getter»;
 						
 					«ENDIF»	

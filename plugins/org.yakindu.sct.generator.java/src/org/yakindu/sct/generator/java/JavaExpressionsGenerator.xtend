@@ -94,7 +94,7 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def dispatch String code(LogicalRelationExpression expression) {
-		if (isSame(expression.leftOperand.infer.type, getType(GenericTypeSystem.STRING))) {
+		if (expression.leftOperand.infer.type.isString) {
 			expression.logicalString
 		} else
 			expression.leftOperand.code + expression.operator.literal + expression.rightOperand.code;

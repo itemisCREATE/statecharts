@@ -6,16 +6,16 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
- * 
+ *
  */
 package org.yakindu.base.types.typesystem;
 
 import com.google.inject.Singleton;
 
 /**
- * 
+ *
  * @author andreas muelder - Initial contribution and API
- * 
+ *
  */
 @Singleton
 public class GenericTypeSystem extends AbstractTypeSystem {

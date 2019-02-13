@@ -122,7 +122,7 @@ class EventBasedRunnableWrapper {
 	def protected toImplementation(InterfaceScope scope, GeneratorEntry entry) '''				
 		«FOR event : scope.eventDefinitions»
 			«IF event.direction == Direction::IN»
-				«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+				«IF event.type !== null && !isVoid(event.type)»
 					public void raise«event.name.asName»(final «event.typeSpecifier.targetLanguageName» value) {
 						
 						eventQueue.add( new Runnable() {
