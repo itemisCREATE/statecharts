@@ -4,11 +4,15 @@ package org.yakindu.sct.model.stext.stext.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.yakindu.sct.model.sgraph.Scope;
+
 import org.yakindu.sct.model.stext.stext.StateSpecification;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
@@ -60,6 +64,7 @@ public class StateSpecificationImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Scope getScope() {
 		return scope;
 	}
@@ -84,6 +89,7 @@ public class StateSpecificationImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setScope(Scope newScope) {
 		if (newScope != scope) {
 			NotificationChain msgs = null;

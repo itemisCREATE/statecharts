@@ -292,11 +292,6 @@ public class SimpleScopeItemProvider extends ScopeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SGraphPackage.Literals.SCOPE__MEMBERS,
-				 StextFactory.eINSTANCE.createEventRaisingExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGraphPackage.Literals.SCOPE__MEMBERS,
 				 StextFactory.eINSTANCE.createEventValueReferenceExpression()));
 
 		newChildDescriptors.add
@@ -448,6 +443,46 @@ public class SimpleScopeItemProvider extends ScopeItemProvider
 			(createChildParameter
 				(SGraphPackage.Literals.SCOPE__MEMBERS,
 				 ExpressionsFactory.eINSTANCE.createArgument()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 ExpressionsFactory.eINSTANCE.createIfExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 ExpressionsFactory.eINSTANCE.createBlockExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 ExpressionsFactory.eINSTANCE.createWhileExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 ExpressionsFactory.eINSTANCE.createReturnExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 ExpressionsFactory.eINSTANCE.createSwitchExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
 	}
 
   /**

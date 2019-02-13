@@ -3,7 +3,9 @@
 package org.yakindu.sct.model.stext.stext;
 
 import org.eclipse.emf.common.util.EList;
+
 import org.yakindu.base.types.Expression;
+
 import org.yakindu.sct.model.sgraph.Effect;
 
 /**

@@ -173,7 +173,7 @@ public class VariableDefinitionItemProvider extends PropertyItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.PROPERTY__INITIAL_VALUE,
-				 StextFactory.eINSTANCE.createEventRaisingExpression()));
+				 StextFactory.eINSTANCE.createVariableDefinition()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -284,6 +284,46 @@ public class VariableDefinitionItemProvider extends PropertyItemProvider {
 			(createChildParameter
 				(TypesPackage.Literals.PROPERTY__INITIAL_VALUE,
 				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PROPERTY__INITIAL_VALUE,
+				 ExpressionsFactory.eINSTANCE.createIfExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PROPERTY__INITIAL_VALUE,
+				 ExpressionsFactory.eINSTANCE.createBlockExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PROPERTY__INITIAL_VALUE,
+				 ExpressionsFactory.eINSTANCE.createWhileExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PROPERTY__INITIAL_VALUE,
+				 ExpressionsFactory.eINSTANCE.createReturnExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PROPERTY__INITIAL_VALUE,
+				 ExpressionsFactory.eINSTANCE.createSwitchExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PROPERTY__INITIAL_VALUE,
+				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PROPERTY__INITIAL_VALUE,
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PROPERTY__INITIAL_VALUE,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
 	}
 
 	/**
@@ -299,7 +339,8 @@ public class VariableDefinitionItemProvider extends PropertyItemProvider {
 
 		boolean qualify =
 			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
-			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES;
+			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES ||
+			childFeature == TypesPackage.Literals.PROPERTY__INITIAL_VALUE;
 
 		if (qualify) {
 			return getString

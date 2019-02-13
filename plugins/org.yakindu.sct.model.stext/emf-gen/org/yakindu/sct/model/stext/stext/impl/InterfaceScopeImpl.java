@@ -3,16 +3,14 @@
 package org.yakindu.sct.model.stext.stext.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
-import org.yakindu.base.types.Type;
-import org.yakindu.base.types.TypeSpecifier;
-import org.yakindu.base.types.TypedElement;
-import org.yakindu.base.types.TypesPackage;
+
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
@@ -74,6 +72,7 @@ public class InterfaceScopeImpl extends StatechartScopeImpl implements Interface
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -83,6 +82,7 @@ public class InterfaceScopeImpl extends StatechartScopeImpl implements Interface
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;

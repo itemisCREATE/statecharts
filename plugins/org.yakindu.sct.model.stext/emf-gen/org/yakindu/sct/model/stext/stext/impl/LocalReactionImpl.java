@@ -3,7 +3,9 @@
 package org.yakindu.sct.model.stext.stext.impl;
 
 import org.eclipse.emf.ecore.EClass;
+
 import org.yakindu.sct.model.sgraph.impl.ReactionImpl;
+
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 

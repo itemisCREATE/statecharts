@@ -77,7 +77,6 @@ public class StatechartSpecificationItemProvider extends ScopedElementItemProvid
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS);
-			childrenFeatures.add(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO);
 		}
 		return childrenFeatures;
 	}
@@ -136,8 +135,10 @@ public class StatechartSpecificationItemProvider extends ScopedElementItemProvid
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(StatechartSpecification.class)) {
-			case StextPackage.STATECHART_SPECIFICATION__ANNOTATIONS:
 			case StextPackage.STATECHART_SPECIFICATION__ANNOTATION_INFO:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case StextPackage.STATECHART_SPECIFICATION__ANNOTATIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -210,6 +211,11 @@ public class StatechartSpecificationItemProvider extends ScopedElementItemProvid
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 StextFactory.eINSTANCE.createTypeAliasDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createDeclaration()));
 
 		newChildDescriptors.add
 			(createChildParameter

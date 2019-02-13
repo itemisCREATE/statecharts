@@ -87,7 +87,6 @@ import org.yakindu.sct.model.stext.stext.DefaultTrigger
 import org.yakindu.sct.model.stext.stext.EntryEvent
 import org.yakindu.sct.model.stext.stext.EntryPointSpec
 import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventSpec
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.ExitEvent
@@ -110,6 +109,7 @@ import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CHILD_FIRST_
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_ANNOTATION
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.PARENT_FIRST_ANNOTATION
+import org.yakindu.base.expressions.expressions.EventRaisingExpression
 
 /** 
  * Several validations for nonsensical expressions.
@@ -651,7 +651,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 			if (element instanceof NamedElement) {
 				elementName = element.getName() 
 			}
-			error(String.format("'%s' is not an event.", elementName), StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT, -1) 
+			error(String.format("'%s' is not an event.", elementName), ExpressionsPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT, -1) 
 		}
 	}
 	def protected EObject unwrap(Expression eventExpression) {

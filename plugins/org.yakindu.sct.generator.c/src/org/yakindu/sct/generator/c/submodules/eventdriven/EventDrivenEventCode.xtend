@@ -12,14 +12,14 @@ package org.yakindu.sct.generator.c.submodules.eventdriven
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import org.yakindu.base.expressions.expressions.EventRaisingExpression
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.extensions.EventNaming
 import org.yakindu.sct.generator.c.submodules.EventCode
+import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.sct.model.stext.stext.EventRaisingExpression
-import org.yakindu.sct.generator.c.types.CLiterals
 
 /**
  * @author rbeckmann

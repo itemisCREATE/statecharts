@@ -1,9 +1,9 @@
 package org.yakindu.sct.generator.cpp.eventdriven
 
 import com.google.inject.Inject
+import org.yakindu.base.expressions.expressions.EventRaisingExpression
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.cpp.EventRaisingCode
-import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 
 class EventDrivenEventRaisingCode extends EventRaisingCode {
 	@Inject protected extension EventNaming

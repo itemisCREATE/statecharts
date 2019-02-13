@@ -3,11 +3,16 @@
 package org.yakindu.sct.model.stext.stext.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.yakindu.base.types.impl.ExpressionImpl;
+
 import org.yakindu.sct.model.sgraph.State;
+
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
@@ -59,6 +64,7 @@ public class ActiveStateReferenceExpressionImpl extends ExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public State getValue() {
 		if (value != null && value.eIsProxy()) {
 			InternalEObject oldValue = (InternalEObject)value;
@@ -85,6 +91,7 @@ public class ActiveStateReferenceExpressionImpl extends ExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(State newValue) {
 		State oldValue = value;
 		value = newValue;

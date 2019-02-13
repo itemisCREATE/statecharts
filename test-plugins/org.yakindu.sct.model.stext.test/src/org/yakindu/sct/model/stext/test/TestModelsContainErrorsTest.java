@@ -75,7 +75,7 @@ public class TestModelsContainErrorsTest {
 	private int getAllowedDiagnostics (String name) {
 		if("EnterState".equals(name)) // EnterState should contain 1 warning marker for unknown entry point 'g'
 			return 1;
-		if("ExitState".equals(name)) // ExitState should contain 1 warning marker for unusd exit point 'g'
+		if("ExitState".equals(name)) // ExitState should contain 1 warning marker for unused exit point 'g'
 			return 1;
 		return 0;
 	}

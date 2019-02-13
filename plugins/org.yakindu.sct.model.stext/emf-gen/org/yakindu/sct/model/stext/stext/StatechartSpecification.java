@@ -3,6 +3,7 @@
 package org.yakindu.sct.model.stext.stext;
 
 import org.yakindu.base.types.AnnotatableElement;
+
 import org.yakindu.sct.model.sgraph.ScopedElement;
 
 /**

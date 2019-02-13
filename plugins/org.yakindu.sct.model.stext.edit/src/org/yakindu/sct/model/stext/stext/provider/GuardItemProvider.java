@@ -27,6 +27,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
+import org.yakindu.base.types.TypesFactory;
 import org.yakindu.sct.model.stext.stext.Guard;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.StextPackage;
@@ -165,7 +166,7 @@ public class GuardItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.GUARD__EXPRESSION,
-				 StextFactory.eINSTANCE.createEventRaisingExpression()));
+				 StextFactory.eINSTANCE.createVariableDefinition()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -276,6 +277,51 @@ public class GuardItemProvider
 			(createChildParameter
 				(StextPackage.Literals.GUARD__EXPRESSION,
 				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.GUARD__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createIfExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.GUARD__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createBlockExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.GUARD__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createWhileExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.GUARD__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createReturnExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.GUARD__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createSwitchExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.GUARD__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.GUARD__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.GUARD__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.GUARD__EXPRESSION,
+				 TypesFactory.eINSTANCE.createProperty()));
 	}
 
   /**

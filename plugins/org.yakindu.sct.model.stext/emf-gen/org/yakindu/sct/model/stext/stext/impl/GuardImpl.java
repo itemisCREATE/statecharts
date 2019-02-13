@@ -4,11 +4,15 @@ package org.yakindu.sct.model.stext.stext.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.yakindu.base.types.Expression;
+
 import org.yakindu.sct.model.stext.stext.Guard;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
@@ -60,6 +64,7 @@ public class GuardImpl extends MinimalEObjectImpl.Container implements Guard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Expression getExpression() {
 		return expression;
 	}
@@ -84,6 +89,7 @@ public class GuardImpl extends MinimalEObjectImpl.Container implements Guard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExpression(Expression newExpression) {
 		if (newExpression != expression) {
 			NotificationChain msgs = null;

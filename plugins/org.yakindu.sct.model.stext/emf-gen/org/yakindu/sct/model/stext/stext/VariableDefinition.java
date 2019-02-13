@@ -15,5 +15,4 @@ import org.yakindu.base.types.Property;
  * @generated
  */
 public interface VariableDefinition extends Property {
-
 } // VariableDefinition

@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
+import org.yakindu.base.types.TypesFactory;
 import org.yakindu.sct.model.sgraph.provider.EffectItemProvider;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.StextFactory;
@@ -153,7 +154,7 @@ public class ReactionEffectItemProvider extends EffectItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.REACTION_EFFECT__ACTIONS,
-				 StextFactory.eINSTANCE.createEventRaisingExpression()));
+				 StextFactory.eINSTANCE.createVariableDefinition()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -264,6 +265,51 @@ public class ReactionEffectItemProvider extends EffectItemProvider
 			(createChildParameter
 				(StextPackage.Literals.REACTION_EFFECT__ACTIONS,
 				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.REACTION_EFFECT__ACTIONS,
+				 ExpressionsFactory.eINSTANCE.createIfExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.REACTION_EFFECT__ACTIONS,
+				 ExpressionsFactory.eINSTANCE.createBlockExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.REACTION_EFFECT__ACTIONS,
+				 ExpressionsFactory.eINSTANCE.createWhileExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.REACTION_EFFECT__ACTIONS,
+				 ExpressionsFactory.eINSTANCE.createReturnExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.REACTION_EFFECT__ACTIONS,
+				 ExpressionsFactory.eINSTANCE.createSwitchExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.REACTION_EFFECT__ACTIONS,
+				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.REACTION_EFFECT__ACTIONS,
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.REACTION_EFFECT__ACTIONS,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.REACTION_EFFECT__ACTIONS,
+				 TypesFactory.eINSTANCE.createProperty()));
 	}
 
   /**
