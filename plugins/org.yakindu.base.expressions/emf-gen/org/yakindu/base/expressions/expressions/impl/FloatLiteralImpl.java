@@ -66,6 +66,7 @@ public class FloatLiteralImpl extends LiteralImpl implements FloatLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public float getValue() {
 		return value;
 	}
@@ -75,6 +76,7 @@ public class FloatLiteralImpl extends LiteralImpl implements FloatLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(float newValue) {
 		float oldValue = value;
 		value = newValue;

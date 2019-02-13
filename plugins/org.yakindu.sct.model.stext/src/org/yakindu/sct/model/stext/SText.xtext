@@ -52,7 +52,7 @@ ScopeDeclaration returns types::AnnotatableElement:
 	(
 		{VariableDefinition.annotationInfo=current} 
 		(const?='const' | 'var') ((readonly?='readonly')?) name=IDWithKeywords
-		':'	typeSpecifier=TypeSpecifier ('=' initialValue=Expression)?
+		=>':' typeSpecifier=TypeSpecifier ('=' initialValue=Expression)?
 	|
 		{EventDefinition.annotationInfo=current}
 		(direction=Direction)? 'event' name=(ID | Keywords) (':' typeSpecifier=TypeSpecifier)?
@@ -146,7 +146,7 @@ AlwaysEvent:
 	{AlwaysEvent} ('always' | 'oncycle');
 
 EventValueReferenceExpression returns types::Expression:
-	{EventValueReferenceExpression} 'valueof' '(' value=FeatureCall ')';
+	{exp::EventValueReferenceExpression} 'valueof' '(' value=FeatureCall ')';
 
 ActiveStateReferenceExpression returns types::Expression:
 	{ActiveStateReferenceExpression} 'active' '(' value=[sgraph::State|FQN] ')';
@@ -163,7 +163,7 @@ IDWithKeywords:
 
 Keywords:
 	'namespace' | 'interface' | 'internal' | 'import' | 'event' | 'local' | 'in' | 'out' | 'const' | 'var' | 'readonly'
-	| 'operation' | 'default' | 'else' | 'raise' | 'valueof' | 'active' | 's' | 'ms' | 'us' | 'ns' | 'switch' | 'case';
+	| 'operation' | 'default' | 'else' | 'raise' | 'valueof' | 'active' | 's' | 'ms' | 'us' | 'ns' ;
 
 TriggerKeywords:
 	'every' | 'always' | 'oncycle' | 'after' | 'exit' | 'entry';

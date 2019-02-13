@@ -178,11 +178,6 @@ public class VariableDefinitionItemProvider extends PropertyItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.PROPERTY__INITIAL_VALUE,
-				 StextFactory.eINSTANCE.createEventValueReferenceExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.PROPERTY__INITIAL_VALUE,
 				 StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
 
 		newChildDescriptors.add

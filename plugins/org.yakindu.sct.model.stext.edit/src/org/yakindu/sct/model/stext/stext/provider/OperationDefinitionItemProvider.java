@@ -177,11 +177,6 @@ public class OperationDefinitionItemProvider extends OperationItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.OPERATION__BODY,
-				 StextFactory.eINSTANCE.createEventValueReferenceExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.OPERATION__BODY,
 				 StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
 
 		newChildDescriptors.add

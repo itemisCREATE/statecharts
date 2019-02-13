@@ -139,15 +139,19 @@ public class StatechartSpecificationImpl extends ScopedElementImpl implements St
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated NOT
 	 */
 	@Override
 	public Annotation getAnnotationOfType(String typeName) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		EList<Annotation> annotations = getAnnotations();
+		for (Annotation annotation : annotations) {
+			if (typeName.equals(annotation.getType().getName())) {
+				return annotation;
+			}
+		}
+		return null;
 	}
 
 	/**

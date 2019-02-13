@@ -157,11 +157,6 @@ public class RegularEventSpecItemProvider extends EventSpecItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.REGULAR_EVENT_SPEC__EVENT,
-				 StextFactory.eINSTANCE.createEventValueReferenceExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.REGULAR_EVENT_SPEC__EVENT,
 				 StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
 
 		newChildDescriptors.add

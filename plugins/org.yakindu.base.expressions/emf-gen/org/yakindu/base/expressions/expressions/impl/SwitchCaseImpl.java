@@ -7,6 +7,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.SwitchCase;
 import org.yakindu.base.types.Expression;
@@ -71,6 +72,7 @@ public class SwitchCaseImpl extends ExpressionImpl implements SwitchCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Expression getCase() {
 		return case_;
 	}
@@ -95,6 +97,7 @@ public class SwitchCaseImpl extends ExpressionImpl implements SwitchCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCase(Expression newCase) {
 		if (newCase != case_) {
 			NotificationChain msgs = null;
@@ -114,6 +117,7 @@ public class SwitchCaseImpl extends ExpressionImpl implements SwitchCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Expression getThen() {
 		return then;
 	}
@@ -138,6 +142,7 @@ public class SwitchCaseImpl extends ExpressionImpl implements SwitchCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setThen(Expression newThen) {
 		if (newThen != then) {
 			NotificationChain msgs = null;

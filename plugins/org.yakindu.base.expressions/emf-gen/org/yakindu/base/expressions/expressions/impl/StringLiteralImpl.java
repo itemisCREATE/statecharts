@@ -66,6 +66,7 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getValue() {
 		return value;
 	}
@@ -75,6 +76,7 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(String newValue) {
 		String oldValue = value;
 		value = newValue;

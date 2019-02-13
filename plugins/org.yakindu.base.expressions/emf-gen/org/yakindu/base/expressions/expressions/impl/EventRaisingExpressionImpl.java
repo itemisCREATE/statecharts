@@ -71,6 +71,7 @@ public class EventRaisingExpressionImpl extends ExpressionImpl implements EventR
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Expression getEvent() {
 		return event;
 	}
@@ -95,6 +96,7 @@ public class EventRaisingExpressionImpl extends ExpressionImpl implements EventR
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEvent(Expression newEvent) {
 		if (newEvent != event) {
 			NotificationChain msgs = null;
@@ -114,6 +116,7 @@ public class EventRaisingExpressionImpl extends ExpressionImpl implements EventR
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Expression getValue() {
 		return value;
 	}
@@ -138,6 +141,7 @@ public class EventRaisingExpressionImpl extends ExpressionImpl implements EventR
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(Expression newValue) {
 		if (newValue != value) {
 			NotificationChain msgs = null;

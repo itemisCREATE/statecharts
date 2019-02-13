@@ -89,7 +89,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 			case StextPackage.REACTION_TRIGGER: return createReactionTrigger();
 			case StextPackage.DEFAULT_TRIGGER: return createDefaultTrigger();
 			case StextPackage.REACTION_EFFECT: return createReactionEffect();
-			case StextPackage.EVENT_VALUE_REFERENCE_EXPRESSION: return createEventValueReferenceExpression();
 			case StextPackage.ACTIVE_STATE_REFERENCE_EXPRESSION: return createActiveStateReferenceExpression();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -480,17 +479,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	public ReactionEffect createReactionEffect() {
 		ReactionEffectImpl reactionEffect = new ReactionEffectImpl();
 		return reactionEffect;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EventValueReferenceExpression createEventValueReferenceExpression() {
-		EventValueReferenceExpressionImpl eventValueReferenceExpression = new EventValueReferenceExpressionImpl();
-		return eventValueReferenceExpression;
 	}
 
 	/**

@@ -847,30 +847,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
 	}
 
   /**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EventValueReferenceExpression} instances.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  protected EventValueReferenceExpressionItemProvider eventValueReferenceExpressionItemProvider;
-
-  /**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.EventValueReferenceExpression}.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  @Override
-  public Adapter createEventValueReferenceExpressionAdapter()
-  {
-		if (eventValueReferenceExpressionItemProvider == null) {
-			eventValueReferenceExpressionItemProvider = new EventValueReferenceExpressionItemProvider(this);
-		}
-
-		return eventValueReferenceExpressionItemProvider;
-	}
-
-  /**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression} instances.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1040,7 +1016,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
 		if (reactionTriggerItemProvider != null) reactionTriggerItemProvider.dispose();
 		if (defaultTriggerItemProvider != null) defaultTriggerItemProvider.dispose();
 		if (reactionEffectItemProvider != null) reactionEffectItemProvider.dispose();
-		if (eventValueReferenceExpressionItemProvider != null) eventValueReferenceExpressionItemProvider.dispose();
 		if (activeStateReferenceExpressionItemProvider != null) activeStateReferenceExpressionItemProvider.dispose();
 	}
 

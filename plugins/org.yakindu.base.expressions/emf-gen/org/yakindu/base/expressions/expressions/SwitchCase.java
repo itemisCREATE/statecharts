@@ -2,6 +2,7 @@
  */
 package org.yakindu.base.expressions.expressions;
 
+import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.types.Expression;
 
 /**

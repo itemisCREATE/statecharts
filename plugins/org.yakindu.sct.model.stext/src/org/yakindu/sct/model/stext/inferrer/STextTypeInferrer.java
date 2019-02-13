@@ -15,10 +15,8 @@ import static org.yakindu.base.types.typesystem.ITypeSystem.INTEGER;
 import static org.yakindu.base.types.typesystem.ITypeSystem.VOID;
 
 import org.yakindu.base.expressions.inferrer.ExpressionsTypeInferrer;
-import org.yakindu.base.types.Event;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
-import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Guard;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 
@@ -45,14 +43,6 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 
 	public InferenceResult doInfer(Scope scope) {
 		return getResultFor(VOID);
-	}
-
-	public InferenceResult doInfer(EventValueReferenceExpression e) {
-		Event definition = (Event) utils.featureOrReference(e.getValue());
-		if (definition != null)
-			return definition.getTypeSpecifier() == null ? getResultFor(VOID)
-					: inferTypeDispatch(definition.getTypeSpecifier());
-		return inferTypeDispatch(e.getValue());
 	}
 
 	public InferenceResult doInfer(ActiveStateReferenceExpression e) {

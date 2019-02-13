@@ -310,15 +310,6 @@ public interface StextFactory extends EFactory {
 	ReactionEffect createReactionEffect();
 
 	/**
-	 * Returns a new object of class '<em>Event Value Reference Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Event Value Reference Expression</em>'.
-	 * @generated
-	 */
-	EventValueReferenceExpression createEventValueReferenceExpression();
-
-	/**
 	 * Returns a new object of class '<em>Active State Reference Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

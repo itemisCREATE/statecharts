@@ -63,6 +63,7 @@ public class BlockExpressionImpl extends ExpressionImpl implements BlockExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Expression> getExpressions() {
 		if (expressions == null) {
 			expressions = new EObjectContainmentEList<Expression>(Expression.class, this, ExpressionsPackage.BLOCK_EXPRESSION__EXPRESSIONS);

@@ -27,7 +27,6 @@ import org.yakindu.sct.model.stext.stext.EntryEvent;
 import org.yakindu.sct.model.stext.stext.EntryPointSpec;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventSpec;
-import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.ExitEvent;
 import org.yakindu.sct.model.stext.stext.ExitPointSpec;
 import org.yakindu.sct.model.stext.stext.Guard;
@@ -287,13 +286,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * @generated
 	 */
 	private EClass reactionEffectEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass eventValueReferenceExpressionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -879,26 +871,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getEventValueReferenceExpression() {
-		return eventValueReferenceExpressionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getEventValueReferenceExpression_Value() {
-		return (EReference)eventValueReferenceExpressionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getActiveStateReferenceExpression() {
 		return activeStateReferenceExpressionEClass;
 	}
@@ -1043,9 +1015,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		reactionEffectEClass = createEClass(REACTION_EFFECT);
 		createEReference(reactionEffectEClass, REACTION_EFFECT__ACTIONS);
 
-		eventValueReferenceExpressionEClass = createEClass(EVENT_VALUE_REFERENCE_EXPRESSION);
-		createEReference(eventValueReferenceExpressionEClass, EVENT_VALUE_REFERENCE_EXPRESSION__VALUE);
-
 		activeStateReferenceExpressionEClass = createEClass(ACTIVE_STATE_REFERENCE_EXPRESSION);
 		createEReference(activeStateReferenceExpressionEClass, ACTIVE_STATE_REFERENCE_EXPRESSION__VALUE);
 
@@ -1116,7 +1085,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		reactionTriggerEClass.getESuperTypes().add(theSGraphPackage.getTrigger());
 		defaultTriggerEClass.getESuperTypes().add(theSGraphPackage.getTrigger());
 		reactionEffectEClass.getESuperTypes().add(theSGraphPackage.getEffect());
-		eventValueReferenceExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 		activeStateReferenceExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 
 		// Initialize classes and features; add operations and parameters
@@ -1200,9 +1168,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 
 		initEClass(reactionEffectEClass, ReactionEffect.class, "ReactionEffect", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getReactionEffect_Actions(), theTypesPackage.getExpression(), null, "actions", null, 0, -1, ReactionEffect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(eventValueReferenceExpressionEClass, EventValueReferenceExpression.class, "EventValueReferenceExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEventValueReferenceExpression_Value(), theTypesPackage.getExpression(), null, "value", null, 0, 1, EventValueReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(activeStateReferenceExpressionEClass, ActiveStateReferenceExpression.class, "ActiveStateReferenceExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getActiveStateReferenceExpression_Value(), theSGraphPackage.getState(), null, "value", null, 0, 1, ActiveStateReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

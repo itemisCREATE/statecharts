@@ -37,6 +37,7 @@ import org.yakindu.base.expressions.expressions.ConditionalExpression;
 import org.yakindu.base.expressions.expressions.DoubleLiteral;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.EventRaisingExpression;
+import org.yakindu.base.expressions.expressions.EventValueReferenceExpression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.expressions.FloatLiteral;
 import org.yakindu.base.expressions.expressions.HexLiteral;
@@ -249,7 +250,11 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 	
 	public InferenceResult doInfer(EventRaisingExpression e) {
-		Event event = (Event) utils.featureOrReference(e.getEvent());
+		Event event = null;
+		EObject element = utils.featureOrReference(e.getEvent());
+		if (element instanceof Event) {
+			event = (Event) element;
+		}
 		InferenceResult eventType = null;
 		if (event != null)
 			eventType = inferTypeDispatch(event.getTypeSpecifier());
@@ -262,6 +267,18 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		assertAssignable(eventType, valueType, String.format(EVENT_DEFINITION, valueType, eventType));
 		return valueType;
 
+	}
+
+	public InferenceResult doInfer(EventValueReferenceExpression e) {
+		Event definition = null;
+		EObject element = utils.featureOrReference(e.getValue());
+		if (element instanceof Event) {
+			definition = (Event) element;
+		}
+		if (definition != null)
+			return definition.getTypeSpecifier() == null ? getResultFor(VOID)
+					: inferTypeDispatch(definition.getTypeSpecifier());
+		return inferTypeDispatch(e.getValue());
 	}
 
 	public InferenceResult doInfer(EnumerationType enumType) {

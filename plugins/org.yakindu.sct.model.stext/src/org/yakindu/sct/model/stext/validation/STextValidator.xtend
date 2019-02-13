@@ -47,6 +47,8 @@ import org.yakindu.base.base.BasePackage
 import org.yakindu.base.base.NamedElement
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.EventRaisingExpression
+import org.yakindu.base.expressions.expressions.EventValueReferenceExpression
 import org.yakindu.base.expressions.expressions.ExpressionsPackage
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
@@ -88,7 +90,6 @@ import org.yakindu.sct.model.stext.stext.EntryEvent
 import org.yakindu.sct.model.stext.stext.EntryPointSpec
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventSpec
-import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.ExitEvent
 import org.yakindu.sct.model.stext.stext.ExitPointSpec
 import org.yakindu.sct.model.stext.stext.Guard
@@ -109,7 +110,6 @@ import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CHILD_FIRST_
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_ANNOTATION
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.PARENT_FIRST_ANNOTATION
-import org.yakindu.base.expressions.expressions.EventRaisingExpression
 
 /** 
  * Several validations for nonsensical expressions.
@@ -376,7 +376,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 			if (element instanceof NamedElement) {
 				msg=''''«»«element.getName()»' is no event.''' 
 			}
-			error(msg, StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE, 0, VALUE_OF_REQUIRES_EVENT) 
+			error(msg, ExpressionsPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE, 0, VALUE_OF_REQUIRES_EVENT) 
 		}
 	}
 	@Check(CheckType.NORMAL)
@@ -641,17 +641,6 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 					error('''Trigger «elementName»is no event.''', StextPackage.Literals.REACTION_TRIGGER__TRIGGERS, i, TRIGGER_IS_NO_EVENT) 
 				}
 			}
-		}
-	}
-	@Check(CheckType.FAST)
-	def void checkRaisingExpressionEvent(EventRaisingExpression expression) {
-		var EObject element=unwrap(expression.getEvent()) 
-		if (element !== null && (!(element instanceof Event))) {
-			var String elementName="" 
-			if (element instanceof NamedElement) {
-				elementName = element.getName() 
-			}
-			error(String.format("'%s' is not an event.", elementName), ExpressionsPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT, -1) 
 		}
 	}
 	def protected EObject unwrap(Expression eventExpression) {

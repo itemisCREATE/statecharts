@@ -71,6 +71,7 @@ public class WhileExpressionImpl extends ExpressionImpl implements WhileExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Expression getBody() {
 		return body;
 	}
@@ -95,6 +96,7 @@ public class WhileExpressionImpl extends ExpressionImpl implements WhileExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBody(Expression newBody) {
 		if (newBody != body) {
 			NotificationChain msgs = null;
@@ -114,6 +116,7 @@ public class WhileExpressionImpl extends ExpressionImpl implements WhileExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Expression getCondition() {
 		return condition;
 	}
@@ -138,6 +141,7 @@ public class WhileExpressionImpl extends ExpressionImpl implements WhileExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCondition(Expression newCondition) {
 		if (newCondition != condition) {
 			NotificationChain msgs = null;
