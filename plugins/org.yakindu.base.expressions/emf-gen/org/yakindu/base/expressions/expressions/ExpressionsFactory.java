@@ -346,6 +346,24 @@ public interface ExpressionsFactory extends EFactory {
 	EventValueReferenceExpression createEventValueReferenceExpression();
 
 	/**
+	 * Returns a new object of class '<em>For Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>For Expression</em>'.
+	 * @generated
+	 */
+	ForExpression createForExpression();
+
+	/**
+	 * Returns a new object of class '<em>For Var Decl</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>For Var Decl</em>'.
+	 * @generated
+	 */
+	ForVarDecl createForVarDecl();
+
+	/**
 	 * Returns a new object of class '<em>Post Fix Unary Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

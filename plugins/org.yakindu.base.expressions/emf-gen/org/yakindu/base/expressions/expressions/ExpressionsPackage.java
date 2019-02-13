@@ -1575,6 +1575,179 @@ public interface ExpressionsPackage extends EPackage {
 	int EVENT_VALUE_REFERENCE_EXPRESSION_FEATURE_COUNT = TypesPackage.EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.ForExpressionImpl <em>For Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.ForExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getForExpression()
+	 * @generated
+	 */
+	int FOR_EXPRESSION = 41;
+
+	/**
+	 * The feature id for the '<em><b>Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_EXPRESSION__BODY = TypesPackage.EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_EXPRESSION__CONDITION = TypesPackage.EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Var Decls</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_EXPRESSION__VAR_DECLS = TypesPackage.EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Var Updates</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_EXPRESSION__VAR_UPDATES = TypesPackage.EXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>For Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_EXPRESSION_FEATURE_COUNT = TypesPackage.EXPRESSION_FEATURE_COUNT + 4;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.ForVarDeclImpl <em>For Var Decl</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.ForVarDeclImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getForVarDecl()
+	 * @generated
+	 */
+	int FOR_VAR_DECL = 42;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_VAR_DECL__NAME = TypesPackage.PROPERTY__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_VAR_DECL__ANNOTATIONS = TypesPackage.PROPERTY__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_VAR_DECL__ANNOTATION_INFO = TypesPackage.PROPERTY__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_VAR_DECL__META_FEATURES = TypesPackage.PROPERTY__META_FEATURES;
+
+	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_VAR_DECL__STATIC = TypesPackage.PROPERTY__STATIC;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_VAR_DECL__ID = TypesPackage.PROPERTY__ID;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_VAR_DECL__TYPE = TypesPackage.PROPERTY__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_VAR_DECL__TYPE_SPECIFIER = TypesPackage.PROPERTY__TYPE_SPECIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Const</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_VAR_DECL__CONST = TypesPackage.PROPERTY__CONST;
+
+	/**
+	 * The feature id for the '<em><b>Readonly</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_VAR_DECL__READONLY = TypesPackage.PROPERTY__READONLY;
+
+	/**
+	 * The feature id for the '<em><b>Initial Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_VAR_DECL__INITIAL_VALUE = TypesPackage.PROPERTY__INITIAL_VALUE;
+
+	/**
+	 * The number of structural features of the '<em>For Var Decl</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_VAR_DECL_FEATURE_COUNT = TypesPackage.PROPERTY_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.AssignmentOperator <em>Assignment Operator</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1582,7 +1755,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getAssignmentOperator()
 	 * @generated
 	 */
-	int ASSIGNMENT_OPERATOR = 41;
+	int ASSIGNMENT_OPERATOR = 43;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.ShiftOperator <em>Shift Operator</em>}' enum.
@@ -1592,7 +1765,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getShiftOperator()
 	 * @generated
 	 */
-	int SHIFT_OPERATOR = 42;
+	int SHIFT_OPERATOR = 44;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.AdditiveOperator <em>Additive Operator</em>}' enum.
@@ -1602,7 +1775,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getAdditiveOperator()
 	 * @generated
 	 */
-	int ADDITIVE_OPERATOR = 43;
+	int ADDITIVE_OPERATOR = 45;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.MultiplicativeOperator <em>Multiplicative Operator</em>}' enum.
@@ -1612,7 +1785,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getMultiplicativeOperator()
 	 * @generated
 	 */
-	int MULTIPLICATIVE_OPERATOR = 44;
+	int MULTIPLICATIVE_OPERATOR = 46;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.UnaryOperator <em>Unary Operator</em>}' enum.
@@ -1622,7 +1795,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getUnaryOperator()
 	 * @generated
 	 */
-	int UNARY_OPERATOR = 45;
+	int UNARY_OPERATOR = 47;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.RelationalOperator <em>Relational Operator</em>}' enum.
@@ -1632,7 +1805,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getRelationalOperator()
 	 * @generated
 	 */
-	int RELATIONAL_OPERATOR = 46;
+	int RELATIONAL_OPERATOR = 48;
 
 
 	/**
@@ -1643,7 +1816,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalOperator()
 	 * @generated
 	 */
-	int LOGICAL_OPERATOR = 47;
+	int LOGICAL_OPERATOR = 49;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.BitwiseOperator <em>Bitwise Operator</em>}' enum.
@@ -1653,7 +1826,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBitwiseOperator()
 	 * @generated
 	 */
-	int BITWISE_OPERATOR = 48;
+	int BITWISE_OPERATOR = 50;
 
 
 	/**
@@ -1664,7 +1837,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getPostFixOperator()
 	 * @generated
 	 */
-	int POST_FIX_OPERATOR = 49;
+	int POST_FIX_OPERATOR = 51;
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.Literal <em>Literal</em>}'.
@@ -2541,6 +2714,70 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEventValueReferenceExpression_Value();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.ForExpression <em>For Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>For Expression</em>'.
+	 * @see org.yakindu.base.expressions.expressions.ForExpression
+	 * @generated
+	 */
+	EClass getForExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.ForExpression#getBody <em>Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Body</em>'.
+	 * @see org.yakindu.base.expressions.expressions.ForExpression#getBody()
+	 * @see #getForExpression()
+	 * @generated
+	 */
+	EReference getForExpression_Body();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.ForExpression#getCondition <em>Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Condition</em>'.
+	 * @see org.yakindu.base.expressions.expressions.ForExpression#getCondition()
+	 * @see #getForExpression()
+	 * @generated
+	 */
+	EReference getForExpression_Condition();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.expressions.expressions.ForExpression#getVarDecls <em>Var Decls</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Var Decls</em>'.
+	 * @see org.yakindu.base.expressions.expressions.ForExpression#getVarDecls()
+	 * @see #getForExpression()
+	 * @generated
+	 */
+	EReference getForExpression_VarDecls();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.expressions.expressions.ForExpression#getVarUpdates <em>Var Updates</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Var Updates</em>'.
+	 * @see org.yakindu.base.expressions.expressions.ForExpression#getVarUpdates()
+	 * @see #getForExpression()
+	 * @generated
+	 */
+	EReference getForExpression_VarUpdates();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.ForVarDecl <em>For Var Decl</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>For Var Decl</em>'.
+	 * @see org.yakindu.base.expressions.expressions.ForVarDecl
+	 * @generated
+	 */
+	EClass getForVarDecl();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.PostFixUnaryExpression <em>Post Fix Unary Expression</em>}'.
@@ -3486,6 +3723,58 @@ public interface ExpressionsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EVENT_VALUE_REFERENCE_EXPRESSION__VALUE = eINSTANCE.getEventValueReferenceExpression_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.ForExpressionImpl <em>For Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.expressions.expressions.impl.ForExpressionImpl
+		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getForExpression()
+		 * @generated
+		 */
+		EClass FOR_EXPRESSION = eINSTANCE.getForExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FOR_EXPRESSION__BODY = eINSTANCE.getForExpression_Body();
+
+		/**
+		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FOR_EXPRESSION__CONDITION = eINSTANCE.getForExpression_Condition();
+
+		/**
+		 * The meta object literal for the '<em><b>Var Decls</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FOR_EXPRESSION__VAR_DECLS = eINSTANCE.getForExpression_VarDecls();
+
+		/**
+		 * The meta object literal for the '<em><b>Var Updates</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FOR_EXPRESSION__VAR_UPDATES = eINSTANCE.getForExpression_VarUpdates();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.ForVarDeclImpl <em>For Var Decl</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.expressions.expressions.impl.ForVarDeclImpl
+		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getForVarDecl()
+		 * @generated
+		 */
+		EClass FOR_VAR_DECL = eINSTANCE.getForVarDecl();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.PostFixUnaryExpressionImpl <em>Post Fix Unary Expression</em>}' class.

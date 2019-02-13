@@ -40,6 +40,7 @@ import org.yakindu.base.expressions.expressions.EventRaisingExpression;
 import org.yakindu.base.expressions.expressions.EventValueReferenceExpression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.expressions.FloatLiteral;
+import org.yakindu.base.expressions.expressions.ForExpression;
 import org.yakindu.base.expressions.expressions.HexLiteral;
 import org.yakindu.base.expressions.expressions.IfExpression;
 import org.yakindu.base.expressions.expressions.IntLiteral;
@@ -214,6 +215,11 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 
 	public InferenceResult doInfer(WhileExpression e) {
+		assertIsSubType(inferTypeDispatch(e.getCondition()), getResultFor(BOOLEAN), CONDITIONAL_BOOLEAN);
+		return getResultFor(VOID);
+	}
+	
+	public InferenceResult doInfer(ForExpression e) {
 		assertIsSubType(inferTypeDispatch(e.getCondition()), getResultFor(BOOLEAN), CONDITIONAL_BOOLEAN);
 		return getResultFor(VOID);
 	}

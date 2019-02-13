@@ -52,7 +52,7 @@ ScopeDeclaration returns types::AnnotatableElement:
 	(
 		{VariableDefinition.annotationInfo=current} 
 		(const?='const' | 'var') ((readonly?='readonly')?) name=IDWithKeywords
-		=>':' typeSpecifier=TypeSpecifier ('=' initialValue=Expression)?
+		':' typeSpecifier=TypeSpecifier ('=' initialValue=Expression)?
 	|
 		{EventDefinition.annotationInfo=current}
 		(direction=Direction)? 'event' name=(ID | Keywords) (':' typeSpecifier=TypeSpecifier)?

@@ -189,5 +189,12 @@
     <genClasses ecoreClass="Expressions.ecore#//EventValueReferenceExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//EventValueReferenceExpression/value"/>
     </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//ForExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ForExpression/body"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ForExpression/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ForExpression/varDecls"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ForExpression/varUpdates"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//ForVarDecl"/>
   </genPackages>
 </genmodel:GenModel>

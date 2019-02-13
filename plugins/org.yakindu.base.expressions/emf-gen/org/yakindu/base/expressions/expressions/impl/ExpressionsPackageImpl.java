@@ -31,6 +31,8 @@ import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.expressions.FloatLiteral;
+import org.yakindu.base.expressions.expressions.ForExpression;
+import org.yakindu.base.expressions.expressions.ForVarDecl;
 import org.yakindu.base.expressions.expressions.HexLiteral;
 import org.yakindu.base.expressions.expressions.IfExpression;
 import org.yakindu.base.expressions.expressions.IntLiteral;
@@ -328,6 +330,20 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	private EClass eventValueReferenceExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass forExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass forVarDeclEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1321,6 +1337,66 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	@Override
+	public EClass getForExpression() {
+		return forExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getForExpression_Body() {
+		return (EReference)forExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getForExpression_Condition() {
+		return (EReference)forExpressionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getForExpression_VarDecls() {
+		return (EReference)forExpressionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getForExpression_VarUpdates() {
+		return (EReference)forExpressionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getForVarDecl() {
+		return forVarDeclEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getPostFixUnaryExpression() {
 		return postFixUnaryExpressionEClass;
 	}
@@ -1657,6 +1733,14 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		eventValueReferenceExpressionEClass = createEClass(EVENT_VALUE_REFERENCE_EXPRESSION);
 		createEReference(eventValueReferenceExpressionEClass, EVENT_VALUE_REFERENCE_EXPRESSION__VALUE);
 
+		forExpressionEClass = createEClass(FOR_EXPRESSION);
+		createEReference(forExpressionEClass, FOR_EXPRESSION__BODY);
+		createEReference(forExpressionEClass, FOR_EXPRESSION__CONDITION);
+		createEReference(forExpressionEClass, FOR_EXPRESSION__VAR_DECLS);
+		createEReference(forExpressionEClass, FOR_EXPRESSION__VAR_UPDATES);
+
+		forVarDeclEClass = createEClass(FOR_VAR_DECL);
+
 		// Create enums
 		assignmentOperatorEEnum = createEEnum(ASSIGNMENT_OPERATOR);
 		shiftOperatorEEnum = createEEnum(SHIFT_OPERATOR);
@@ -1739,6 +1823,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		switchCaseEClass.getESuperTypes().add(theTypesPackage.getExpression());
 		eventRaisingExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 		eventValueReferenceExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
+		forExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
+		forVarDeclEClass.getESuperTypes().add(theTypesPackage.getProperty());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(binaryExpressionEClass, BinaryExpression.class, "BinaryExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1881,6 +1967,14 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
 		initEClass(eventValueReferenceExpressionEClass, EventValueReferenceExpression.class, "EventValueReferenceExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEventValueReferenceExpression_Value(), theTypesPackage.getExpression(), null, "value", null, 0, 1, EventValueReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(forExpressionEClass, ForExpression.class, "ForExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getForExpression_Body(), theTypesPackage.getExpression(), null, "body", null, 0, 1, ForExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getForExpression_Condition(), theTypesPackage.getExpression(), null, "condition", null, 0, 1, ForExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getForExpression_VarDecls(), theTypesPackage.getProperty(), null, "varDecls", null, 0, -1, ForExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getForExpression_VarUpdates(), theTypesPackage.getExpression(), null, "varUpdates", null, 0, -1, ForExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(forVarDeclEClass, ForVarDecl.class, "ForVarDecl", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(assignmentOperatorEEnum, AssignmentOperator.class, "AssignmentOperator");

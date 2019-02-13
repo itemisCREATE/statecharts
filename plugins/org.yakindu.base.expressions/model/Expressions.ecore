@@ -216,4 +216,17 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ForExpression" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="varDecls" upperBound="-1"
+        eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Property"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="varUpdates" upperBound="-1"
+        eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ForVarDecl" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Property"/>
 </ecore:EPackage>

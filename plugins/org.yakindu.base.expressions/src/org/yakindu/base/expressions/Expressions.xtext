@@ -85,6 +85,7 @@ PrimaryExpression returns types::Expression:
 	| IfExpression
 	| SwitchExpression
 	| WhileExpression
+	| ForExpression
 	| BlockExpression
 	| ReturnExpression
 	| ParenthesizedExpression;
@@ -116,6 +117,20 @@ EventRaisingExpression returns types::Expression:
 
 WhileExpression returns types::Expression:
 	{WhileExpression} 'while' '(' condition=Expression ')' body=BlockExpression;
+	
+ForExpression returns types::Expression:
+	{ForExpression} 'for' 
+	'(' 
+		(varDecls+=ForVarDecl (',' varDecls+=ForVarDecl)*)? ';'
+		(condition=Expression)? ';'
+		(varUpdates+=Expression (',' varUpdates+=Expression)*)?
+	')' 
+	body=BlockExpression
+;
+
+ForVarDecl returns types::Property:
+	'var' name=ID ':' typeSpecifier=TypeSpecifier ('=' initialValue=Expression)?
+;
 	
 ReturnExpression returns types::Expression :
 	//TODO remove ';'
