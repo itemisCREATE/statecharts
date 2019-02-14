@@ -608,4 +608,12 @@ You can execute the client code via _Run As → Java Application_ from the class
 
 h2(#tutorial_closing-remarks). Closing remarks
 
-At this point you have mastered the comprehensive tutorial and got to know the most important YAKINDU Statechart Tools features up to a certain degree. The subsequent sections will explain statechart language, statechart editor, simulation, and code generation in detail.
+At this point you have mastered the comprehensive tutorial and got to know the most important YAKINDU Statechart Tools features up to a certain degree. The "YAKINDU Statechart User Guide":../user-guide/ will explain statechart language, statechart editor, simulation, testing, programming language support, and code generation in detail.
+
+
+
+
+
+h1(#video-tutorials). Video tutorials
+
+You can find some "video tutorials":https://www.itemis.com/en/yakindu/state-machine/documentation/tutorials/video-tutorials/ on the itemis website.

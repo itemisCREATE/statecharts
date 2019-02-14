@@ -107,7 +107,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		ActiveStateReferenceExpression it) '''«flow.stateActiveFctID»(«scHandle», «value.shortName»)'''
 
 	def dispatch CharSequence code(LogicalRelationExpression it) '''
-	«IF isSame(leftOperand.infer.type, getType(GenericTypeSystem.STRING))»
+	«IF leftOperand.infer.type.isString»
 		(strcmp(«leftOperand.code», «rightOperand.code») «operator.literal» 0)
 	«ELSE»(«leftOperand.code») «operator.literal» («rightOperand.code»)«ENDIF»'''
 

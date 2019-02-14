@@ -30,10 +30,10 @@ class OldJavaTypeSystemAccess implements ICodegenTypeSystemAccess {
 	override String getTargetLanguageName(Type type) {
 		switch (type) {
 			case type === null || ts.isSame(type, getType(VOID)) : 'void'
-			case ts.isSame(type, getType(REAL)): "double"
-			case ts.isSame(type, getType(INTEGER)): "int"
-			case ts.isSame(type, getType(BOOLEAN)): "boolean"
-			case ts.isSame(type, getType(STRING)): "String"
+			case ts.isReal(type): "double"
+			case ts.isInteger(type): "int"
+			case ts.isBoolean(type): "boolean"
+			case ts.isString(type): "String"
 			default: "//" + this
 		};
 	}

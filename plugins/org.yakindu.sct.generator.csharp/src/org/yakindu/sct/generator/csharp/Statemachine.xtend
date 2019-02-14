@@ -87,7 +87,7 @@ class Statemachine {
 		«FOR event : flow.internalScopeEvents»
 		private bool «event.symbol»;
 
-		«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+		«IF event.type !== null && !isVoid(event.type)»
 			private «event.typeSpecifier.targetLanguageName» «event.valueIdentifier»;
 
 		«ENDIF»
@@ -364,7 +364,7 @@ class Statemachine {
 	
 	protected def generateEventDefinition(EventDefinition event, GeneratorEntry entry, InterfaceScope scope) '''
 			public bool «event.symbol»;
-			«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+			«IF event.type !== null && !isVoid(event.type)»
 
 			public «event.typeSpecifier.targetLanguageName» «event.valueIdentifier»;
 		«ENDIF»
@@ -382,7 +382,7 @@ class Statemachine {
 				return «event.symbol»;
 			}
 		
-		«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+		«IF event.type !== null && !isVoid(event.type)»
 				private void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
 					«event.symbol» = true;
 					«event.valueIdentifier» = value;
@@ -409,7 +409,7 @@ class Statemachine {
 	'''
 
 	protected def generateInEventDefinition(EventDefinition event) '''
-		«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+		«IF event.type !== null && !isVoid(event.type)»
 
 			public void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
 				«event.symbol» = true;
@@ -454,7 +454,7 @@ class Statemachine {
 	
 	def protected internalScopeFunctions (ExecutionFlow flow) '''
 		«FOR event : flow.internalScopeEvents»
-			«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+			«IF event.type !== null && !isVoid(event.type)»
 				private void raise«event.name.asEscapedName»(«event.typeSpecifier.targetLanguageName» value) {
 					«event.valueIdentifier» = value;
 					«event.symbol» = true;
@@ -486,7 +486,7 @@ class Statemachine {
 			«var InterfaceScope scope = flow.defaultScope»
 			«FOR event : scope.eventDefinitions»
 				«IF event.direction == Direction::IN»
-					«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+					«IF event.type !== null && !isVoid(event.type)»
 
 					public void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
 						«scope.interfaceName.asEscapedIdentifier».raise«event.name.asName»(value);
@@ -502,7 +502,7 @@ class Statemachine {
 					public bool isRaised«event.name.asName»() {
 						return «scope.interfaceName.asEscapedIdentifier».isRaised«event.name.asName»();
 					}
-					«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+					«IF event.type !== null && !isVoid(event.type)»
 						public «event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
 							return «scope.interfaceName.asEscapedIdentifier».get«event.name.asName»Value();
 						}
