@@ -56,19 +56,6 @@ class ExpressionsValidator extends AbstractExpressionsValidator implements IVali
 	@Inject ITypeSystemInferrer typeInferrer
 	@Inject extension ExpressionExtensions
 
-	@Check
-	def void checkExpression(Expression expression) {
-		// Only infer root expressions since inferType infers the expression
-		// containment hierarchy
-		if(!(expression.eContainer() instanceof Expression)) typeInferrer.infer(expression, this)
-	}
-
-	@Check(CheckType.FAST)
-	def void checkExpression(Property expression) {
-		if(expression.getType() === null || expression.getType().eIsProxy()) return;
-		typeInferrer.infer(expression, this)
-	}
-
 	override void accept(ValidationIssue issue) {
 		switch (issue.getSeverity()) {
 			case ERROR: {
@@ -80,6 +67,13 @@ class ExpressionsValidator extends AbstractExpressionsValidator implements IVali
 			case INFO: {
 			}
 		}
+	}
+
+	@Check
+	def void checkExpression(Expression expression) {
+		// Only infer root expressions since inferType infers the expression
+		// containment hierarchy
+		if(!(expression.eContainer() instanceof Expression)) typeInferrer.infer(expression, this)
 	}
 
 	public static final String POSTFIX_ONLY_ON_VARIABLES_CODE = "PostfixOnlyOnVariables"
