@@ -59,6 +59,7 @@ import org.yakindu.base.expressions.expressions.ShiftOperator;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.SwitchCase;
 import org.yakindu.base.expressions.expressions.SwitchExpression;
+import org.yakindu.base.expressions.expressions.ThrowExpression;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
@@ -344,6 +345,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	private EClass forVarDeclEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass throwExpressionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1397,6 +1405,26 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	@Override
+	public EClass getThrowExpression() {
+		return throwExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getThrowExpression_Expression() {
+		return (EReference)throwExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getPostFixUnaryExpression() {
 		return postFixUnaryExpressionEClass;
 	}
@@ -1741,6 +1769,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
 		forVarDeclEClass = createEClass(FOR_VAR_DECL);
 
+		throwExpressionEClass = createEClass(THROW_EXPRESSION);
+		createEReference(throwExpressionEClass, THROW_EXPRESSION__EXPRESSION);
+
 		// Create enums
 		assignmentOperatorEEnum = createEEnum(ASSIGNMENT_OPERATOR);
 		shiftOperatorEEnum = createEEnum(SHIFT_OPERATOR);
@@ -1824,6 +1855,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		eventValueReferenceExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 		forExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 		forVarDeclEClass.getESuperTypes().add(theTypesPackage.getProperty());
+		throwExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(binaryExpressionEClass, BinaryExpression.class, "BinaryExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1974,6 +2006,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		initEReference(getForExpression_VarUpdates(), theTypesPackage.getExpression(), null, "varUpdates", null, 0, -1, ForExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(forVarDeclEClass, ForVarDecl.class, "ForVarDecl", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(throwExpressionEClass, ThrowExpression.class, "ThrowExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getThrowExpression_Expression(), theTypesPackage.getExpression(), null, "expression", null, 0, 1, ThrowExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(assignmentOperatorEEnum, AssignmentOperator.class, "AssignmentOperator");

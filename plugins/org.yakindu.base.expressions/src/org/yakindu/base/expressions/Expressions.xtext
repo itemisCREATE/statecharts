@@ -88,6 +88,7 @@ PrimaryExpression returns types::Expression:
 	| ForExpression
 	| BlockExpression
 	| ReturnExpression
+	| ThrowExpression
 	| ParenthesizedExpression;
 
 PrimitiveValueExpression returns types::Expression:
@@ -135,6 +136,9 @@ ForVarDecl returns types::Property:
 ReturnExpression returns types::Expression :
 	//TODO remove ';'
 	{ReturnExpression} 'return' (=>expression=ConditionalExpression)';';  
+
+ThrowExpression returns types::Expression:
+	{ThrowExpression} 'throw' expression=ConditionalExpression';';
 
 FeatureCall returns types::Expression:
 	ElementReferenceExpression ((({FeatureCall.owner=current} '.') | ({MetaCall.owner=current} '.@'))

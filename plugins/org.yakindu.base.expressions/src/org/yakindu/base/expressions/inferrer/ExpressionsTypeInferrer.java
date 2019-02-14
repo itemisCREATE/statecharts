@@ -59,6 +59,7 @@ import org.yakindu.base.expressions.expressions.ReturnExpression;
 import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.SwitchExpression;
+import org.yakindu.base.expressions.expressions.ThrowExpression;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
 import org.yakindu.base.expressions.expressions.WhileExpression;
@@ -225,7 +226,13 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 	
 	public InferenceResult doInfer(ReturnExpression exp) {
-		if(exp.getExpression() == null)
+		if (exp.getExpression() == null)
+			return getResultFor(VOID);
+		return inferTypeDispatch(exp.getExpression());
+	}
+
+	public InferenceResult doInfer(ThrowExpression exp) {
+		if (exp.getExpression() == null)
 			return getResultFor(VOID);
 		return inferTypeDispatch(exp.getExpression());
 	}

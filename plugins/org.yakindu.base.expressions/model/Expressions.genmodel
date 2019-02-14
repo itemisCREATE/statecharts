@@ -196,5 +196,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ForExpression/varUpdates"/>
     </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//ForVarDecl"/>
+    <genClasses ecoreClass="Expressions.ecore#//ThrowExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ThrowExpression/expression"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>
