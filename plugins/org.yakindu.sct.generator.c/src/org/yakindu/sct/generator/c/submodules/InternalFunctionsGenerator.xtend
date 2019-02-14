@@ -145,7 +145,7 @@ class InternalFunctionsGenerator {
 
 	 def implementation(Method it) '''
 	 	static «typeSpecifier.targetLanguageName» «shortName»(«scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR») {
-	 		«body.code»
+	 		«bodySequence.code»
 	 	}
 	 '''
 	 
