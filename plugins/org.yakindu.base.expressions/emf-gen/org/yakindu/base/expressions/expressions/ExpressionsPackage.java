@@ -1489,7 +1489,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH_CASE__CASE = TypesPackage.EXPRESSION_FEATURE_COUNT + 0;
+	int SWITCH_CASE__CASE = 0;
 
 	/**
 	 * The feature id for the '<em><b>Then</b></em>' containment reference.
@@ -1498,7 +1498,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH_CASE__THEN = TypesPackage.EXPRESSION_FEATURE_COUNT + 1;
+	int SWITCH_CASE__THEN = 1;
 
 	/**
 	 * The number of structural features of the '<em>Switch Case</em>' class.
@@ -1507,7 +1507,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH_CASE_FEATURE_COUNT = TypesPackage.EXPRESSION_FEATURE_COUNT + 2;
+	int SWITCH_CASE_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.EventRaisingExpressionImpl <em>Event Raising Expression</em>}' class.

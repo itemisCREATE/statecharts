@@ -22,7 +22,7 @@ import org.yakindu.base.types.Expression;
  * @model
  * @generated
  */
-public interface SwitchCase extends Expression {
+public interface SwitchCase extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Case</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

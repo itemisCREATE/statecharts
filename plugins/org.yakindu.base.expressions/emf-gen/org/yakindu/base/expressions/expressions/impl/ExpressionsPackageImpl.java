@@ -1820,7 +1820,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		whileExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 		returnExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 		switchExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
-		switchCaseEClass.getESuperTypes().add(theTypesPackage.getExpression());
 		eventRaisingExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 		eventValueReferenceExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 		forExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());

@@ -27,7 +27,7 @@ import org.yakindu.base.types.impl.ExpressionImpl;
  *
  * @generated
  */
-public class SwitchCaseImpl extends ExpressionImpl implements SwitchCase {
+public class SwitchCaseImpl extends MinimalEObjectImpl.Container implements SwitchCase {
 	/**
 	 * The cached value of the '{@link #getCase() <em>Case</em>}' containment reference.
 	 * <!-- begin-user-doc -->

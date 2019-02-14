@@ -400,7 +400,6 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.SWITCH_CASE: {
 				SwitchCase switchCase = (SwitchCase)theEObject;
 				T result = caseSwitchCase(switchCase);
-				if (result == null) result = caseExpression(switchCase);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
