@@ -80,7 +80,7 @@ class ExpressionsGenerator {
 
 	def dispatch CharSequence code(DoubleLiteral it) '''«value.toString»'''
 
-	def dispatch CharSequence code(FloatLiteral it) '''«value.toString»'''
+	def dispatch CharSequence code(FloatLiteral it) '''«value.toString»f'''
 
 	def dispatch CharSequence code(HexLiteral it) '''0x«Integer::toHexString(value)»'''
 
