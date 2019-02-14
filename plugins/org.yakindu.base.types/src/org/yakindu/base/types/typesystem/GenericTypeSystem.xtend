@@ -44,6 +44,7 @@ class GenericTypeSystem extends AbstractTypeSystem {
 		declareSuperType(getType(ANY), getType(BOOLEAN))
 		declareSuperType(getType(ANY), getType(INTEGER))
 		declareSuperType(getType(INTEGER), getType(REAL))
+		declareArrayType
 	}
 
 	protected def declareArrayType() {
