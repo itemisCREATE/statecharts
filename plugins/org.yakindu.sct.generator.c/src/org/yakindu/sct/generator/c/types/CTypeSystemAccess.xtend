@@ -20,7 +20,6 @@ import org.yakindu.base.types.TypeSpecifier
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 
-import static org.yakindu.base.types.typesystem.ITypeSystem.*
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
 
 /**

@@ -72,7 +72,7 @@ class ExpressionsGenerator {
 
 	def dispatch CharSequence code(ParenthesizedExpression it) '''(«expression.code»)'''
 
-	def dispatch CharSequence code(TypeCastExpression it) '''((«type.name») «operand.code»)'''
+	def dispatch CharSequence code(TypeCastExpression it) '''((«type.getTargetLanguageName») «operand.code»)'''
 	
 	def dispatch CharSequence code(BlockExpression it) 
 	'''
