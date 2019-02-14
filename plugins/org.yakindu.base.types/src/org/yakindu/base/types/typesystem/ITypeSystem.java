@@ -33,6 +33,7 @@ public interface ITypeSystem {
 	public static final String VOID = "void";
 	public static final String NULL = "null";
 	public static final String ANY = "any";
+	public static final String ARRAY = "array";
 	
 	public Collection<Type> getTypes();
 	
