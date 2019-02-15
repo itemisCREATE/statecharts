@@ -163,7 +163,7 @@ IDWithKeywords:
 
 Keywords:
 	'namespace' | 'interface' | 'internal' | 'import' | 'event' | 'local' | 'in' | 'out' | 'const' | 'var' | 'readonly'
-	| 'operation' | 'default' | 'else' | 'raise' | 'valueof' | 'active' | 's' | 'ms' | 'us' | 'ns' | 'case' ;
+	| 'operation' | 'default' | 'else' | 'raise' | 'valueof' | 'active' | 's' | 'ms' | 'us' | 'ns' ;
 
 TriggerKeywords:
 	'every' | 'always' | 'oncycle' | 'after' | 'exit' | 'entry';

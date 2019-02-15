@@ -131,15 +131,15 @@ public class STextValidatorTest extends AbstractSTextValidationTest implements S
 		validationResult.assertErrorContains(ERROR_LEFT_HAND_ASSIGNMENT_MSG);
 		
 		// Check for referenced elements in interface
-		model = super.parseExpression("^if.myOperation() = true", Expression.class.getSimpleName(), scope);
+		model = super.parseExpression("if.myOperation() = true", Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
 		validationResult.assertErrorContains(ERROR_LEFT_HAND_ASSIGNMENT_MSG);
 		
-		model = super.parseExpression("^if.Event1 = true", Expression.class.getSimpleName(), scope);
+		model = super.parseExpression("if.Event1 = true", Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
 		validationResult.assertErrorContains(ERROR_LEFT_HAND_ASSIGNMENT_MSG);
 		
-		model = super.parseExpression("^if.myVar = true", Expression.class.getSimpleName(), scope);
+		model = super.parseExpression("if.myVar = true", Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
 		validationResult.assertOK();
 		
@@ -166,7 +166,7 @@ public class STextValidatorTest extends AbstractSTextValidationTest implements S
 	@Test
 	public void checkOperationArguments_FeatureCall() {
 		String scope = "interface if : operation myOperation(param1 : integer, param2: boolean";
-		EObject model = super.parseExpression("^if.myOperation(5,true)", Expression.class.getSimpleName(), scope);
+		EObject model = super.parseExpression("if.myOperation(5,true)", Expression.class.getSimpleName(), scope);
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertOK();
 	}
@@ -291,6 +291,7 @@ public class STextValidatorTest extends AbstractSTextValidationTest implements S
 		EObject model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertError(STextValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
+		;
 		
 		scope = "@EventDriven";
 		model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
@@ -386,7 +387,7 @@ public class STextValidatorTest extends AbstractSTextValidationTest implements S
 	@Test
 	public void checkFeatureCall() {
 		String scope = "interface if : in event a : integer";
-		EObject model = super.parseExpression("^if.a / raise ^if.a:1", TransitionSpecification.class.getSimpleName(),
+		EObject model = super.parseExpression("if.a / raise if.a:1", TransitionSpecification.class.getSimpleName(),
 				scope);
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertOK();
@@ -496,15 +497,15 @@ public class STextValidatorTest extends AbstractSTextValidationTest implements S
 		result = tester.validate(model);
 		result.assertOK();
 		
-		model = super.parseExpression("^if.a", ReactionEffect.class.getSimpleName(), s2);
+		model = super.parseExpression("if.a", ReactionEffect.class.getSimpleName(), s2);
 		result = tester.validate(model);
 		result.assertError(FEATURE_CALL_HAS_NO_EFFECT);
 		
-		model = super.parseExpression("valueof(^if.e)", ReactionEffect.class.getSimpleName(), s2);
+		model = super.parseExpression("valueof(if.e)", ReactionEffect.class.getSimpleName(), s2);
 		result = tester.validate(model);
 		result.assertError(FEATURE_CALL_HAS_NO_EFFECT);
 		
-		model = super.parseExpression("^if.o", ReactionEffect.class.getSimpleName(), s2);
+		model = super.parseExpression("if.o", ReactionEffect.class.getSimpleName(), s2);
 		result = tester.validate(model);
 		result.assertOK();
 		
