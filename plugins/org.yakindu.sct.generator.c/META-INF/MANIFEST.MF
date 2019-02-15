@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU C Generator
 Bundle-SymbolicName: org.yakindu.sct.generator.c;singleton:=true
-Bundle-Version: 3.5.1.qualifier
+Bundle-Version: 3.5.2.qualifier
 Require-Bundle: org.yakindu.sct.model.sexec,
  org.yakindu.sct.model.stext,
  org.yakindu.sct.generator.core,
