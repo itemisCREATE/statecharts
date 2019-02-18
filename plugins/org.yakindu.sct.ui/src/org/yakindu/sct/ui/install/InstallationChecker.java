@@ -34,6 +34,8 @@ public class InstallationChecker {
 			IProvisioningAgent agent = agentProvider.get();
 			IProfileRegistry profileRegistry = (IProfileRegistry) agent.getService(IProfileRegistry.SERVICE_NAME);
 			IProfile selfProfile = profileRegistry.getProfile(IProfileRegistry.SELF);
+			if(selfProfile == null)
+				return true;
 			Set<IInstallableUnit> installed = selfProfile
 					.available(QueryUtil.createIUQuery(featureId), new NullProgressMonitor()).toUnmodifiableSet();
 			agent.stop();
