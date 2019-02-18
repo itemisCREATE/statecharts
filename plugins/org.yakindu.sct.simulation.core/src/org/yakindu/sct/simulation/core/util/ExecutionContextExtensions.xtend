@@ -10,27 +10,23 @@
  */
 package org.yakindu.sct.simulation.core.util
 
-import com.google.inject.Inject
 import java.util.ArrayList
 import java.util.List
 import org.yakindu.base.types.Direction
-import org.yakindu.base.types.typesystem.ITypeValueProvider
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sruntime.ExecutionContext
 
 class ExecutionContextExtensions {
-	@Inject protected extension ITypeValueProvider
 
 	def clearOutEvents(ExecutionContext executionContext) {
-		executionContext.allEvents.filter[direction == Direction.OUT].forEach[if(raised) raised = false]
+		executionContext.allEvents.filter[direction == Direction.OUT].forEach[
+			if(raised) raised = false
+		]
 	}
 
 	def clearLocalAndInEvents(ExecutionContext executionContext) {
 		executionContext.allEvents.filter[direction == Direction.IN || direction == Direction.LOCAL].forEach [
-			if (raised) {
-				raised = false;
-				value = if(type !== null) type.defaultValue else null
-			}
+			if(raised) raised = false
 		]
 	}
 
