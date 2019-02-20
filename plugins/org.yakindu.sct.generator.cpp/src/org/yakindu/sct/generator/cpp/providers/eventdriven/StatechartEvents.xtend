@@ -43,7 +43,7 @@ class StatechartEvents implements ISourceFragment {
 	}
 	
 	def content(ExecutionFlow it) {
-		if(!hasLocalEvents) return ''''''
+		if(!needsEventClasses) return ''''''
 		'''
 			#ifndef «generateHeaderDefineGuard»
 			#define «generateHeaderDefineGuard»
