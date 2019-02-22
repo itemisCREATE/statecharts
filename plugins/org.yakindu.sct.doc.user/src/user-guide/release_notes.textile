@@ -203,7 +203,7 @@ YAKINDU Statechart Tools Professional Edition with its SCXML domain allows you t
 
 To see everything in action we have added an example to our example wizard. This example was taken from the "_Qt examples_":https://doc.qt.io/qt-5/qtscxml-trafficlight-widgets-dynamic-example.html and modeled with YAKINDU Statechart Tools. It contains a traffic light statechart which is on&#45;the&#45;fly transformed into an SCXML file. You can edit, simulate and test the statechart as you are used to in YAKINDU. Additionally, the example comes with some Qt code, so you can run it in your Qt environment and see the traffic light in action.
 
-!{width:602px;height:420px;}Pictures/1000020100000441000002F78F05236BAAF8073B.png!
+!{width:602px;height:420px;}images/release_notes_3.4.0_scxml_domain.png!
 
 
 
@@ -211,7 +211,7 @@ Speaking of our example wizard, we also put some effort here to provide a cleane
 
 
 
-SCTUnit for C Domain
+h3(#release_notes_3_4_0_sctunit). SCTUnit for C Domain
 
 We have adopted our testing framework SCTUnit to also work with C domain statecharts. This means, you can now write unit tests for your C statecharts in SCTUnit, execute them, and also generate GTests, for execution on a build server, for example. 
 
@@ -225,12 +225,12 @@ We have added an SCTUnit test suite to our coffee machine example which you can 
 
 
 
-!{width:602px;height:230px;}Pictures/10000201000003F400000184492BB8F325907F2A.png!
+!{width:602px;height:230px;}images/release_notes_3.4.0_sctunit.png!
 
 
 
 
-Miscellaneous
+h3(#release_notes_3_4_0_miscellaneous). Miscellaneous
 
 Apart from these new features we also worked on many smaller improvements, bug fixes and better performance:
 
