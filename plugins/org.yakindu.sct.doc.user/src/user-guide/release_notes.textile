@@ -173,13 +173,13 @@ You can now use the SCTUnit testing framework together with C domain statecharts
 
 
 
-Model Search
+h3(#release_notes_3_4_0_model_search).  Model Search
 
 The larger the model, the greater the need to quickly search for elements, for example, all states with a given name resp. name pattern, all occurrences of a certain variable, etc. This is now possible with the new model search integrated in the Eclipse search dialog:
 
 
 
-!{width:367px;height:286px;}Pictures/100000000000024C000001CA23ED6834952995C7.png!
+!{width:367px;height:286px;}images/release_notes_3.4.0_model_search.png!
 
 The model search allows you to use regular expressions and to filter for the kind of elements you want to search for. Once the search is performed, its results are listed in the search view where you can quickly navigate to the corresponding statechart elements.
 
@@ -189,9 +189,9 @@ A similar but slightly different use case is to search for all references of an 
 
 
 
-!{width:279px;height:131px;}Pictures/100002010000013D00000096E5F701A21DBDCC0A.png!
+!{width:279px;height:131px;}images/release_notes_3.4.0_find_references.png!
 
-SCXML Domain
+h3(#release_notes_3_4_0_scxml_domain). SCXML Domain
 
 This version of YAKINDU Statechart Tools comes with an SCXML domain made to facilitate generating SCXML files from YAKINDU statecharts. SCXML, short for *S*tate*c*hart *XML*, is a statechart interchange format based on XML, "_standardized by the W3C._":https://www.w3.org/TR/scxml/ All states, events, variables and so on are defined in the XML. SCXML relies on external engines to execute the statechart according to the standard, which allows a statechart defined in SCXML to be highly portable. Like other XML based formats, it is only an interchange format and hence not really suitable for direct editing. 
 
