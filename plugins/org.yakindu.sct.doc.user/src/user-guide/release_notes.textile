@@ -309,7 +309,7 @@ _SCov _is the new model coverage feature and part of YAKINDU Statechart Tools Pr
 
 
 
-!{width:578px;height:276px;}images/release_3.3.0_scov.png!
+!{width:578px;height:276px;}images/release_notes_3.3.0_scov.png!
 
 The first version supports state activation and transition coverage. Coverage of state local reactions is currently not supported. The upcoming version will also take local reactions into account.
 
