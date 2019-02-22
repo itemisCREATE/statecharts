@@ -414,8 +414,6 @@ h3(#release_notes_3_1_0_generator_models). Using properties and expressions in g
 An generator model may assign values to properties and later use these properties in expressions. The following sample generator model uses the *var* keyword to declare the properties _projectName_, _version_, _isBeta_, and _generateTimerServce_ with their respective types and default values.
 
 
- !{width:534px;height:362px;}Pictures/10000000000002160000016B09A5228A088C6B8D.png!
-
 bc.. 
 GeneratorModel for yakindu::java {
     
@@ -445,7 +443,9 @@ p.
 
 The model then uses these values in *feature* clauses by referring to the properties: The values assigned to properties are _default_ values only and can be overridden from the headless code generator like this:
 
-scc &#45;m myGenmodel.sct &#45;v version=2.0;isBeta=false
+bc.. 
+scc -m myGenmodel.sct -v version=2.0;isBeta=false
+p. 
 
 The name/value pairs specified by the &#45;v option would override the corresponding default values of the properties in the generator model.This is a very flexible way to tailor the code generator within a headless build.
 
@@ -467,12 +467,9 @@ _myOperation(yValue = 42, xValue = 27)_
 
 While an operation call with named parameters is longer than the equivalent call with positional parameters, named parameters are a great means for self&#45;documenting code (especially if the parameter names are more telling than in the example above).
 
-*Option to skip generation of library files *
+h3(#release_notes_3_1_0_skip_generation_of_library_files). Option to skip generation of library files
 
 The *Outlet* feature now has an option to skip the generation of library files. This is useful to prevent the generation of a new library file when an existing one should be used:
-
-!{width:366px;height:96px;}Pictures/100000000000016F00000061559F916BB27906FE.png!
-
 
 bc.. 
 feature Outlet {
