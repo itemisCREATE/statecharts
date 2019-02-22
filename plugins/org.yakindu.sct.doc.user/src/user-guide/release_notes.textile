@@ -345,20 +345,17 @@ We also changed the licence management for this release. After 30 days of trial 
 
 "_https://info.itemis.com/yakindu/statecharts/non&#45;commercial/order/_":https://info.itemis.com/yakindu/statecharts/non-commercial/order/
 
-!{width:602px;height:626px;}Pictures/1000022900000300000003200DB0E6C019570F91.gif!
-
 *Pinned diagram editor*
 
 By default, a statechart's definition section is positioned at the left&#45;hand side of the canvas, and it is part of the diagram. Now the definition section comes with an option to pin it to the left&#45;hand side of the view. In order to pin the definition section, you simply click on the small decorator icon in the upper&#45;left corner of the area. This feature has to be enabled first via _Window / Preferences / YAKINDU SCT / Diagram Appearance / Enable pinning of definition section._
 
-
-!{width:584px;height:401px;}Pictures/100000000000037F0000026820BB2BAE50080170.png!
+!{width:602px;height:626px;}images/release_notes_3.2.0_pinned_editor.gif!
 
 *New Simulation view*
 
 We completely reworked the _Simulation_ view to ease working with parallel simulation sessions. The _Simulation_ view now provides a drop&#45;down box that lists all running sessions. _Resume, Pause, Stop _and _Single step _actions can be accessed directly from the view. Furthermore, the current simulation time is now shown. This is especially useful when working with time triggers.
 
-!{width:343px;height:424px;}Pictures/1000000000000151000001A24ED820AE94EDDE85.png!
+!{width:343px;height:424px;}images/release_notes_3.2.0_simulation_view.png!
 
 *Built&#45;in variables for the generator model*
 
