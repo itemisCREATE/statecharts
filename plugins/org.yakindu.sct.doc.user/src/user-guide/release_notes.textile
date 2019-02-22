@@ -1,0 +1,61 @@
+
+p. 
+
+h1(#release_notes). Release Notes
+
+A list of new and noteworthy features as well as bugs we have tackled down in the particular releases.
+
+
+
+h2(#release_notes_3_5_2). YAKINDU Statechart Tools 3.5.2 (Feb 28, 2019)
+
+This release focuses on stability and performance, especially in the C/C++ domain.
+
+
+h3(#release_notes_3_5_2_c_domain). C/C++ Domain
+
+The transformation of C/C++ code does not rely on the C/C++ indexer to be finished anymore. Especially in C++ projects, the side effects were *sporadically unresolved types*. When the transformation is invoked while the C/C++ indexer is running, indexer information is discarded and header files get parsed again. This also means that SCT can be used with the C/C++ indexer being disabled, which is in some cases necessary due to performance reasons.
+
+We also improved the runtime *performance of the C/C++ transformation* dramatically which is particularly noticeable in C++ projects with the C/C++ indexer being disabled.
+
+The C/C++ code generator now prints *includes in the same order* as they are defined in the statechart model. In that way, the user can  influence the generated include order directly in the statechart model. The code generator also does not resolve symbol links on its own anymore.
+
+The *content assist* for import statements shows header files from the workspace first, before showing system headers.
+
+
+h3(#release_notes_3_5_2_gen_model_wizard). Generator Model Wizard
+
+We added an option to install more generators from within the generator model wizard. Using this option, the install wizard opens with a list of available code generators from our _Labs_ update site. 
+
+p(#release_notes_352_genmodel_wizard). 
+
+!images/release_notes_352_genmodel_wizard.png(Install more generators)!
+
+p=. Install more generators option in generator model wizard
+
+
+h3(#release_notes_3_5_2_example_wizard). Example Wizard
+
+The examples delivered with YAKINDU SCT now contain information about requirements to other features. This information is read out in the example wizard and an *Install Dependencies* button is shown if a required features are missing. Clicking on this button opens the install wizard with the required features being preselected.
+
+p(#release_notes_352_example_wizard). 
+
+!images/release_notes_352_example_wizard.png(Install Dependencies button in example wizard)!
+
+p=. _Install Dependencies_ button in example wizard
+
+
+h3(#release_notes_3_5_2_java_domain). Java Domain (Beta)
+
+It is now possible to use *inner classes* and *enumerators* in Java domain statecharts.
+
+We removed some useless entries from the content assist. The content assist for import statements shows own Java classes first, before showing JRE classes.
+
+
+h3(#release_notes_3_5_2_misc). Misc
+
+In addition, this release contains
+* a fix for a bug that caused the image generator to *not* render transition and region priorities when the model was closed
+* a fix for a bug that caused the _Snapshot View_ to not open properly
+* a fix for a bug when renaming elements from statechart interfaces
+* better error and assert messages in SCTUnit
