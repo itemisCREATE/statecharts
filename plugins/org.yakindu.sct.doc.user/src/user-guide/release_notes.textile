@@ -330,7 +330,7 @@ h3(#release_notes_3.3.0_Miscellaneous). Miscellaneous
 * bq. _SHA256_ (String): The hash of the referenced statechart file.</p>
 * bq. _SCTFILE_ (String): Path to the statechart file relative to the workspace. </p>
 
-h2(#release_notes_3.1.0). YAKINDU Statechart Tools  3.2.0 (Jan 11, 2018)
+h2(#release_notes_3.2.0). YAKINDU Statechart Tools  3.2.0 (Jan 11, 2018)
 
 
 We released YAKINDU Statechart Tools Standard and Professional Edition version 3.2.0 today! In the last three months, the YAKINDU team fixed 66 Standard Edition and 28 Professional Edition issues. Apart from several bug fixes, we added some great new features:
@@ -345,19 +345,19 @@ We also changed the licence management for this release. After 30 days of trial 
 
 "_https://info.itemis.com/yakindu/statecharts/non&#45;commercial/order/_":https://info.itemis.com/yakindu/statecharts/non-commercial/order/
 
-*Pinned diagram editor*
+h3(#release_notes_3.2.0_pinned_diagram_editor). Pinned diagram editor
 
 By default, a statechart's definition section is positioned at the left&#45;hand side of the canvas, and it is part of the diagram. Now the definition section comes with an option to pin it to the left&#45;hand side of the view. In order to pin the definition section, you simply click on the small decorator icon in the upper&#45;left corner of the area. This feature has to be enabled first via _Window / Preferences / YAKINDU SCT / Diagram Appearance / Enable pinning of definition section._
 
 !{width:602px;height:626px;}images/release_notes_3.2.0_pinned_editor.gif!
 
-*New Simulation view*
+h3(#release_notes_3.2.0_simulation_view). New Simulation view
 
 We completely reworked the _Simulation_ view to ease working with parallel simulation sessions. The _Simulation_ view now provides a drop&#45;down box that lists all running sessions. _Resume, Pause, Stop _and _Single step _actions can be accessed directly from the view. Furthermore, the current simulation time is now shown. This is especially useful when working with time triggers.
 
 !{width:343px;height:424px;}images/release_notes_3.2.0_simulation_view.png!
 
-*Built&#45;in variables for the generator model*
+h3(#release_notes_3.2.0_builtin_variables_generator_model). Built&#45;in variables for the generator model
 
 With the October release 3.1.0 we introduced &lt;link https://blogs.itemis.com/en/yakindu&#45;statechart&#45;tools&#45;october&#45;release&#45;new&#45;and&#45;noteworthy&gt; properties and expressions for the generator model. &lt;/link&gt; We extended this feature in the current version with a set of meaningful built&#45;in properties that can be used within expressions:
 
@@ -380,11 +380,11 @@ This feature produces the following output:
 
 /&#42; Generated on 11.12.2017 17:08:14 with YAKINDU SCT 3.2.0 &#42;/
 
-*C&#43;&#43; Domain (beta)*
+h3(#release_notes_3.2.0_cpp_domain). C&#43;&#43; Domain (beta)
 
 This release contains the first version of the deep C&#43;&#43; integration feature. It is now possible to import C&#43;&#43; headers and use C&#43;&#43;&#45;specific language concepts directly from within a statechart model. Detailed documentation and examples will follow soon.
 
-*Miscellaneous improvements and bug fixes*
+h3(#release_notes_3.2.0_miscellaneous). Miscellaneous improvements and bug fixes
 
 * Diagram syntax coloring can be activated via _Window / Preferences / YAKINDU SCT / Diagram Appearance / Syntax Coloring (https://github.com/Yakindu/statecharts/issues/1687)._
 * Updated documentation regarding the execution semantics of child&#45;first/parent first and reactions (https://github.com/Yakindu/statecharts/issues/1562).
@@ -505,7 +505,7 @@ Bug fixes
 * Content assist on transitions and states shows implicit variable &quot;period&quot; ("_#1586_":https://github.com/Yakindu/statecharts/issues/1586)
 * Missing validation rule for top&#45;level regions without entry ("_#1363_":https://github.com/Yakindu/statecharts/issues/1363)
 
-h2(#release_notes3.0.0). YAKINDU Statechart Tools  3.0.0 (Jul 18, 2017)
+h2(#release_notes_3.0.0). YAKINDU Statechart Tools  3.0.0 (Jul 18, 2017)
 
 Today the YAKINDU Team released _*YAKINDU Statechart Tools 3.0 Professional Edition*_. This release is the first new major release of the Professional Edition that was built on top of the new "_Standard Edition_":https://blogs.itemis.com/en/introducing-yakindu-statechart-tools-standard-edition-3.0 we released 2 weeks ago.
 
@@ -637,6 +637,6 @@ h3(#release_notes_3.0.0_sctunit).  *Bug Fixes*
 
 h3(#release_notes_3.0.0_sctunit).  YAKINDU SCT 3.0 Standard Edition
 
-With release 3.0 we introduce the Standard Edition as the little brother of the Professional Edition. &lt;Learn more about it.&gt; 
+With release 3.0 we introduce the Standard Edition as the little brother of the Professional Edition.
 
 
