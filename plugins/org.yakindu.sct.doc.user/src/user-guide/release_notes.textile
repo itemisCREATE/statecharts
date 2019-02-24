@@ -143,9 +143,9 @@ p.
 
 h3(#release_notes_3.5.0_miscellaneous).  Miscellaneous
 
-* We improved the generated code in terms of readability and removed superfluous parts (see issues "_#295_":https://github.com/Yakindu/statecharts/issues/295 and "_#227_":https://github.com/Yakindu/statecharts/issues/227).
+* We improved the generated code in terms of readability and removed superfluous parts.
 
-* For the C code generator, the definition of _sc&#95;null_ changed in _sc&#95;types.h_ since the existing definition clashes with certain C compilers.* You will have to regenerate the *_*sc&#95;types.h*_* file in your workspace to remove compile errors.* "_#2555_":https://github.com/Yakindu/statecharts/issues/2555 
+* For the C code generator, the definition of _sc&#95;null_ changed in _sc&#95;types.h_ since the existing definition clashes with certain C compilers.* You will have to regenerate the *_*sc&#95;types.h*_* file in your workspace to remove compile errors.
 * We fixed several bugs in the SCXML domain and added a detection for endless loops for invalid models that contain dead locks.
 
 
@@ -238,25 +238,25 @@ Apart from these new features we also worked on many smaller improvements, bug f
 
 Usability:
 
-* Added a new page to the statechart creation wizard that shows a description text for the selected statechart domain, so you can better understand what this domain stands for ("_#2097_":https://github.com/Yakindu/statecharts/issues/2097)
-* Improved error message when generator model refers to non&#45;existing statechart ("_#2117_":https://github.com/Yakindu/statecharts/issues/)
-* Show error message if region contains an unnamed and a 'default' named entry ("_#2051_":https://github.com/Yakindu/statecharts/issues/2051)
-* Add validations and content assist for entry/exit points ("_#2088_":https://github.com/Yakindu/statecharts/issues/2088, "_#2068_":https://github.com/Yakindu/statecharts/issues/2068)
-* New statecharts will be now annotated with &#64;EventDriven and &#64;ChildFirstExecution per default ("_#2073_":https://github.com/Yakindu/statecharts/issues/2073)
-* Added validation rule for synchronization nodes that contain outgoing triggers ("_#2071_":https://github.com/Yakindu/statecharts/issues/2071)
+* Added a new page to the statechart creation wizard that shows a description text for the selected statechart domain, so you can better understand what this domain stands for
+* Improved error message when generator model refers to non&#45;existing statechart
+* Show error message if region contains an unnamed and a 'default' named entry
+* Add validations and content assist for entry/exit points
+* New statecharts will be now annotated with &#64;EventDriven and &#64;ChildFirstExecution per default
+* Added validation rule for synchronization nodes that contain outgoing triggers
 
 
 
 Bugfixes:
 
-* Fixed strange positioning of transition arrows at exit nodes ("_#2158_":https://github.com/Yakindu/statecharts/issues/2158)
-* Fixed a bug which in certain situations made synchronization nodes being traversed while not all incoming states were active ("_#1386_":https://github.com/Yakindu/statecharts/issues/1386)
-* Fixed several problems with toggling the documentation mode ("_#1939_":https://github.com/Yakindu/statecharts/issues/1939)
-* Fixed usage of equally named Java operations from different interfaces during simulation ("_#2095_":https://github.com/Yakindu/statecharts/issues/2095)
-* Fixed “&lt;” and “&gt;” signs being replaced with 0 and 2 in C# code generation ("_#2066_":https://github.com/Yakindu/statecharts/issues/2066)
-* Removed unused functions from generated event driven Java code ("_#2020_":https://github.com/Yakindu/statecharts/issues/2020)
-* Removed unused functions from generated event driven C&#43;&#43; code ("_#2019_":https://github.com/Yakindu/statecharts/issues/2019)
-* Fixed rename refactoring via context menu for Linux ("_#2023_":https://github.com/Yakindu/statecharts/issues/2023)
+* Fixed strange positioning of transition arrows at exit nodes
+* Fixed a bug which in certain situations made synchronization nodes being traversed while not all incoming states were active
+* Fixed several problems with toggling the documentation mode
+* Fixed usage of equally named Java operations from different interfaces during simulation
+* Fixed “&lt;” and “&gt;” signs being replaced with 0 and 2 in C# code generation
+* Removed unused functions from generated event driven Java code
+* Removed unused functions from generated event driven C&#43;&#43; code
+* Fixed rename refactoring via context menu for Linux
 * Fixed several scoping issues in SCTUnit
 * Fixed problem in SCTUnit when used with cycle&#45;based statecharts
 * Several improvements for SCTUnit C&#43;&#43; generator
@@ -267,7 +267,7 @@ Bugfixes:
 
 Performance / Stabilization
 
-* Some performance improvements for pinned definition section ("_#1976_":https://github.com/Yakindu/statecharts/issues/1976, "_#2030_":https://github.com/Yakindu/statecharts/issues/2030)
+* Some performance improvements for pinned definition section
 * Fixed a problem that caused a deadlock in certain situations
 * Fixed refreshing/updating of references when files get deleted/added
 
@@ -386,13 +386,13 @@ This release contains the first version of the deep C&#43;&#43; integration feat
 
 h3(#release_notes_3.2.0_miscellaneous). Miscellaneous improvements and bug fixes
 
-* Diagram syntax coloring can be activated via _Window / Preferences / YAKINDU SCT / Diagram Appearance / Syntax Coloring (https://github.com/Yakindu/statecharts/issues/1687)._
-* Updated documentation regarding the execution semantics of child&#45;first/parent first and reactions (https://github.com/Yakindu/statecharts/issues/1562).
-* Keyboard shortcut [Ctrl&#43;0] resets the zoom factor (https://github.com/Yakindu/statecharts/issues/1528).
-* Region priorities are now shown on the canvas (https://github.com/Yakindu/statecharts/issues/475).
-* The expression language now supports postfix increment and decrement operations (https://github.com/Yakindu/statecharts/issues/1739).
-* Code generators check whether callback interfaces are set ("_https://github.com/Yakindu/statecharts/issues/1333_":https://github.com/Yakindu/statecharts/issues/1333).
-* SCT is now fully compatible with Java 9.
+* Diagram syntax coloring can be activated via _Window / Preferences / YAKINDU SCT / Diagram Appearance / Syntax Coloring 
+* Updated documentation regarding the execution semantics of child&#45;first/parent first and reactions 
+* Keyboard shortcut [Ctrl&#43;0] resets the zoom factor 
+* Region priorities are now shown on the canvas
+* The expression language now supports postfix increment and decrement operations 
+* Code generators check whether callback interfaces are set
+* SCT is now fully compatible with Java 9
 
 
 
@@ -404,9 +404,9 @@ We released YAKINDU Statechart Tools Standard and Professional Edition version 3
 
 h3(#release_notes_3.1.0_new_features). New features
 
-* Using properties and expressions in generator models ("_#325_":https://github.com/Yakindu/statecharts/issues/325)
-* Named parameter calls ("_#1623_":https://github.com/Yakindu/statecharts/issues/1623)
-* Option to skip generation of library files* * ("_#1645_":https://github.com/Yakindu/statecharts/issues/1645)
+* Using properties and expressions in generator models
+* Named parameter calls
+* Option to skip generation of library files
 * New online documentation (https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide)
 
 h3(#release_notes_3.1.0_generator_models). Using properties and expressions in generator models
@@ -487,23 +487,23 @@ h3(#release_notes_3.1.0_miscellaneous). Miscellaneous improvements and bug fixes
 
 Usability improvements
 
-* Add a checkbox &quot;save automatically&quot; to the save dialog when running a simulation ("_#1275_":https://github.com/Yakindu/statecharts/issues/1275)
-* Perspective switch for “Debug As” ("_#1646_":https://github.com/Yakindu/statecharts/issues/1646)
-* Error markers of subdiagrams are not propagated to parent diagram ("_#1288_":https://github.com/Yakindu/statecharts/pull/1288)
-* “Run As” context menu action available in diagram ("_#1626_":https://github.com/Yakindu/statecharts/issues/1626)
-* Implicit imports for active(State) statements ("_#1294_":https://github.com/Yakindu/statecharts/issues/1294)
+* Add a checkbox &quot;save automatically&quot; to the save dialog when running a simulation
+* Perspective switch for “Debug As”
+* Error markers of subdiagrams are not propagated to parent diagram
+* “Run As” context menu action available in diagram
+* Implicit imports for active(State) statements
 
 Code generation improvements
 
-* “Effective C&#43;&#43;” compliant code ("_#1633_":https://github.com/Yakindu/statecharts/issues/1633" ":https://github.com/Yakindu/statecharts/issues/1634"_#1634_":https://github.com/Yakindu/statecharts/issues/1634" ":https://github.com/Yakindu/statecharts/issues/1610"_#1610_":https://github.com/Yakindu/statecharts/issues/1610)
-* Removed unused includes for cycle based state machines ("_#1650_":https://github.com/Yakindu/statecharts/issues/1650)
-* Provide a constant that provides the maximum number of parallel time events of a state machine ("_#1600_":https://github.com/Yakindu/statecharts/issues/1600)
+* “Effective C&#43;&#43;” compliant code
+* Removed unused includes for cycle based state machines
+* Provide a constant that provides the maximum number of parallel time events of a state machine
 
 Bug fixes
 
-* [Performance] The system still slows down more and more for each successive single&#45;step ("_#1616_":https://github.com/Yakindu/statecharts/issues/1616)
-* Content assist on transitions and states shows implicit variable &quot;period&quot; ("_#1586_":https://github.com/Yakindu/statecharts/issues/1586)
-* Missing validation rule for top&#45;level regions without entry ("_#1363_":https://github.com/Yakindu/statecharts/issues/1363)
+* [Performance] The system still slows down more and more for each successive single&#45;step
+* Content assist on transitions and states shows implicit variable &quot;period&quot;
+* Missing validation rule for top&#45;level regions without entry
 
 h2(#release_notes_3.0.0). YAKINDU Statechart Tools  3.0.0 (Jul 18, 2017)
 
@@ -608,30 +608,30 @@ h3(#release_notes_3.0.0_deep_c_integration). Deep C Integration Improvements
 
 h3(#release_notes_3.0.0_usability_improvements).  *Usability Improvements*
 
-* Choice nodes can now be resized with a fix aspect ratio ("_#1241_":https://github.com/Yakindu/statecharts/issues/1241," ":https://github.com/Yakindu/statecharts/issues/432"_#432_":https://github.com/Yakindu/statecharts/issues/432)
-* Perspective switches back to modeling view when simulation terminates ("_#1279_":https://github.com/Yakindu/statecharts/issues/1279)
-* Note attachments can be deleted now ("_#335_":https://github.com/Yakindu/statecharts/issues/335)
-* In simulation view, operations have a distinctive icon now ("_#723_":https://github.com/Yakindu/statecharts/issues/723)
-* In generator model creation wizard, the order of statechart models is aligned with the one in project explorer ("_#796_":https://github.com/Yakindu/statecharts/issues/796)
-* Fading time for snap&#45;to&#45;grid support lines is reduced for better user experience ("_#804_":https://github.com/Yakindu/statecharts/issues/804)
-* Warning for sgen files that do not contain any entries ("_#1402_":https://github.com/Yakindu/statecharts/pull/1402)
-* It is now possible to use binary literals like '0b01011' as integer values ("_#1385_":https://github.com/Yakindu/statecharts/issues/1385)
-* Hint for content assist in definition section ("_#1417_":https://github.com/Yakindu/statecharts/pull/1417)
-* Double click drag tracker added for notes ("_#1421_":https://github.com/Yakindu/statecharts/pull/1421)
-* Color of active states in simulation is changed to yellow now ("_#1277_":https://github.com/Yakindu/statecharts/issues/1277)
-* Disabled auto reveal on selection ("_#1393_":https://github.com/Yakindu/statecharts/issues/1393)
+* Choice nodes can now be resized with a fix aspect ratio
+* Perspective switches back to modeling view when simulation terminates
+* Note attachments can be deleted now
+* In simulation view, operations have a distinctive icon now
+* In generator model creation wizard, the order of statechart models is aligned with the one in project explorer
+* Fading time for snap&#45;to&#45;grid support lines is reduced for better user experience
+* Warning for sgen files that do not contain any entries
+* It is now possible to use binary literals like '0b01011' as integer values
+* Hint for content assist in definition section
+* Double click drag tracker added for notes
+* Color of active states in simulation is changed to yellow now
+* Disabled auto reveal on selection
 
 h3(#release_notes_3.0.0_sctunit).  *Code Generation Improvements*
 
-* Removed magic numbers in generated C code ("_#1336_":https://github.com/Yakindu/statecharts/issues/1336)
-* Fixed isActive() method to return correct values for inactive state machines ("_#1391_":https://github.com/Yakindu/statecharts/pull/1391)
-* For C&#43;&#43; code generation, StatemachineInterface.h is placed into library target folder ("_#1406_":https://github.com/Yakindu/statecharts/issues/1406," ":https://github.com/Yakindu/statecharts/issues/1331"_#1331_":https://github.com/Yakindu/statecharts/issues/1331)
+* Removed magic numbers in generated C code
+* Fixed isActive() method to return correct values for inactive state machines
+* For C&#43;&#43; code generation, StatemachineInterface.h is placed into library target folder
 
 h3(#release_notes_3.0.0_sctunit).  *Bug Fixes*
 
-* Fix display of error markers ("_#1340_":https://github.com/Yakindu/statecharts/issues/1340," ":https://github.com/Yakindu/statecharts/issues/1339"_#1339_":https://github.com/Yakindu/statecharts/issues/1339)
-* Fix TODO and FIXME markers ("_#1429_":https://github.com/Yakindu/statecharts/issues/1429)
-* Bug in AbstractTypeSystem.remove(Type) ("_#1477_":https://github.com/Yakindu/statecharts/issues/1477)
+* Fix display of error markers 
+* Fix TODO and FIXME markers
+* Bug in AbstractTypeSystem.remove(Type)
 
 
 
