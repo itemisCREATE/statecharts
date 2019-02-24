@@ -115,7 +115,7 @@ The _enterState_ parameter specifies whether to generate a callback function tha
 
 h3(#release_notes_3.5.0_QT_cpp_code_generator).  Qt C++ code generator 
 
-With the SCXML domain (link "_https://blogs.itemis.com/en/taking&#45;scxml&#45;to&#45;the&#45;next&#45;level&#45;with&#45;yakindu&#45;statechart&#45;tools_":https://blogs.itemis.com/en/taking-scxml-to-the-next-level-with-yakindu-statechart-tools), we already have a powerful and flexible way to integrate YAKINDU Statechart Tools into Qt (link "_https://www.qt.io/_":https://www.qt.io/) applications. But there are still use cases where you can't use the Qt SCXML Interpreter. That is why we started the development of a Qt C&#43;&#43; code generator and released a first version via our YAKINDU labs update site.
+With the SCXML domain ("_https://blogs.itemis.com/en/taking&#45;scxml&#45;to&#45;the&#45;next&#45;level&#45;with&#45;yakindu&#45;statechart&#45;tools_":https://blogs.itemis.com/en/taking-scxml-to-the-next-level-with-yakindu-statechart-tools ), we already have a powerful and flexible way to integrate YAKINDU Statechart Tools into Qt ("_https://www.qt.io/_":https://www.qt.io/ ) applications. But there are still use cases where you can't use the Qt SCXML Interpreter. That is why we started the development of a Qt C&#43;&#43; code generator and released a first version via our YAKINDU labs update site.
 
 
 
