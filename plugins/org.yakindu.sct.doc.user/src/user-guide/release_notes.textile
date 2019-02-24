@@ -29,7 +29,7 @@ We added an option to install more generators from within the generator model wi
 
 p(#release_notes_3.5.2_genmodel_wizard). 
 
-!images/release_notes_3.5.2_genmodel_wizard.png(Install more generators)!
+!{width:1100;height:600px;}images/release_notes_3.5.2_genmodel_wizard.png(Install more generators)!
 
 p=. Install more generators option in generator model wizard
 
@@ -40,7 +40,7 @@ The examples delivered with YAKINDU SCT now contain information about requiremen
 
 p(#release_notes_3.5.2_example_wizard). 
 
-!images/release_notes_3.5.2_example_wizard.png(Install Dependencies button in example wizard)!
+!{width:1100;height:600px;}images/release_notes_3.5.2_example_wizard.png(Install Dependencies button in example wizard)!
 
 p=. _Install Dependencies_ button in example wizard
 
