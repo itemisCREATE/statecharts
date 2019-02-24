@@ -321,9 +321,9 @@ The C Domain now offers a further annotation: *&#64;ShortCIdentifiers* helps you
 
 h3(#release_notes_3.3.0_Miscellaneous). Miscellaneous
 
-* *Usability improvements: *We improved the usability of the graphical editor. For example, dithering connection anchors are removed (link) to have a more robust connection routing layout.
+* *Usability improvements:* We improved the usability of the graphical editor. For example, dithering connection anchors are removed (link) to have a more robust connection routing layout.
 
-!http://3.bp.blogspot.com/-OyNSESA48CI/Uo28bGOmVJI/AAAAAAAAAOU/GKkKfQlP9_4/s1600/anchors%281%29.gif!
+!width:578px;height:276px;}images/fixed_domain_anchors.gif!
 
 * New built&#45;in variables for the generator model: We added two new variables that can be used in an arbitrary generator model, for instance, to print a hash code in the generated file comment.
 
@@ -566,14 +566,14 @@ With this release, we introduce a beta version of our testing framework SCTUnit.
 Features that can be used in SCTUnit are:
 
 * Execute tests directly in your IDE
-* Code generators for C/C&#43;&#43; ("_GTest_":https://github.com/google/googletest &amp; "_GMock_":https://github.com/google/googletest) and Java ("_JUnit _":http://junit.org/junit4/&amp; "_Mockito_":http://site.mockito.org/),
+* Code generators for C/C&#43;&#43; ("_GTest_":https://github.com/google/googletest &amp; "_GMock_":https://github.com/google/googletest ) and Java ("_JUnit _":http://junit.org/junit4/&amp; "_Mockito_":http://site.mockito.org/ )
 * Mocking operation return values
 * Verifying operation calls and their parameters
 * Virtual Time &#45; easy testing of time triggers
 
 
 
- For more information, see our "_online documentation_":https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide/#sctunit_test-driven_statechart_development_with_sctunit.
+For more information, see our "_online documentation_":https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide/#sctunit_test-driven_statechart_development_with_sctunit.
 
 h3(#release_notes_3.0.0_statechart_execution_semantics). Statechart Execution Semantics
 
