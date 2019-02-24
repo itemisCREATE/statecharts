@@ -327,8 +327,8 @@ h3(#release_notes_3.3.0_Miscellaneous). Miscellaneous
 
 * New built&#45;in variables for the generator model: We added two new variables that can be used in an arbitrary generator model, for instance, to print a hash code in the generated file comment.
 
-* bq. _SHA256_ (String): The hash of the referenced statechart file.</p>
-* bq. _SCTFILE_ (String): Path to the statechart file relative to the workspace. </p>
+* bq. _SHA256_ (String): The hash of the referenced statechart file.
+* bq. _SCTFILE_ (String): Path to the statechart file relative to the workspace.
 
 h2(#release_notes_3.2.0). YAKINDU Statechart Tools  3.2.0 (Jan 11, 2018)
 
@@ -621,13 +621,13 @@ h3(#release_notes_3.0.0_usability_improvements).  *Usability Improvements*
 * Color of active states in simulation is changed to yellow now
 * Disabled auto reveal on selection
 
-h3(#release_notes_3.0.0_sctunit).  *Code Generation Improvements*
+h3(#release_notes_3.0.0_code_generation_improvements).  *Code Generation Improvements*
 
 * Removed magic numbers in generated C code
 * Fixed isActive() method to return correct values for inactive state machines
 * For C&#43;&#43; code generation, StatemachineInterface.h is placed into library target folder
 
-h3(#release_notes_3.0.0_sctunit).  *Bug Fixes*
+h3(#release_notes_3.0.0_bugfixes).  *Bug Fixes*
 
 * Fix display of error markers 
 * Fix TODO and FIXME markers
@@ -635,7 +635,7 @@ h3(#release_notes_3.0.0_sctunit).  *Bug Fixes*
 
 
 
-h3(#release_notes_3.0.0_sctunit).  YAKINDU SCT 3.0 Standard Edition
+h3(#release_notes_3.0.0_standard_edition).  YAKINDU SCT 3.0 Standard Edition
 
 With release 3.0 we introduce the Standard Edition as the little brother of the Professional Edition.
 

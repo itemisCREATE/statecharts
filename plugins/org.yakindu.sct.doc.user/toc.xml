@@ -23,7 +23,7 @@
     </topic>
     	<link toc="help/user-guide/sctunit-toc.xml"/>
     </topic>
-    <link toc="help/release-notes/release_notes-toc.xml"/>
+    <link toc="help/user-guide/release_notes-toc.xml"/>
 
     <topic label="Tutorials">
         <link toc="help/tutorials/tutorials-toc.xml"/>
