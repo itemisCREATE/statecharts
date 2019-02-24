@@ -407,7 +407,7 @@ h3(#release_notes_3.1.0_new_features). New features
 * Using properties and expressions in generator models ("_#325_":https://github.com/Yakindu/statecharts/issues/325)
 * Named parameter calls ("_#1623_":https://github.com/Yakindu/statecharts/issues/1623)
 * Option to skip generation of library files* * ("_#1645_":https://github.com/Yakindu/statecharts/issues/1645)
-* New online documentation (TBD Link)
+* New online documentation (https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide)
 
 h3(#release_notes_3.1.0_generator_models). Using properties and expressions in generator models
 
@@ -449,7 +449,7 @@ p.
 
 The name/value pairs specified by the &#45;v option would override the corresponding default values of the properties in the generator model.This is a very flexible way to tailor the code generator within a headless build.
 
-Read more about this feature in our user guide (link)
+Read more about this feature in our user guide (https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide/hdls_headless_code_generation)
 
 h3(#release_notes_3.1.0_named_paramter_calls). Named parameter calls
 
