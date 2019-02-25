@@ -110,6 +110,7 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		private Font boldFont;
 		private double zoom = 1.0;
 		private boolean highlight = true;
+		private int fromIndex = 0;
 
 		public void setHighlight(boolean highlight) {
 			this.highlight = highlight;
@@ -148,6 +149,12 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 		}
 
 		@Override
+		protected void paintFigure(Graphics g) {
+			fromIndex = 0;
+			super.paintFigure(g);
+		}
+
+		@Override
 		protected void paintText(Graphics g, String draw, int x, int y, int bidiLevel) {
 			if (!highlight) {
 				super.paintText(g, draw, x, y, bidiLevel);
@@ -161,7 +168,8 @@ public class SyntaxColoringLabel extends WrappingLabel implements MouseMotionLis
 			if (bidiLevel == -1) {
 				String originalDraw = draw;
 				int paintOffset = 0;
-				int lineOffset = getText().indexOf(originalDraw);
+				int lineOffset = getText().indexOf(originalDraw, Math.min(fromIndex, getText().length() - 1));
+				fromIndex += originalDraw.length();
 				if (lineOffset == -1) {
 					// This may happen if the string is truncated with '..'
 					originalDraw = replaceTabs(originalDraw);
