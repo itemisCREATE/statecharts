@@ -255,7 +255,7 @@ Bugfixes:
 
 
 
-Performance / Stabilization
+Performance / Stabilization:
 
 * Some performance improvements for pinned definition section
 * Fixed a problem that caused a deadlock in certain situations
@@ -313,7 +313,7 @@ h3(#release_notes_3.3.0_Miscellaneous). Miscellaneous
 
 * *Usability improvements:* We improved the usability of the graphical editor. For example, dithering connection anchors are removed (link) to have a more robust connection routing layout.
 
-!images/fixed_domain_anchors.gif!
+!images/release_notes_3.3.0_fixed_domain_anchors.gif!
 
 * New built&#45;in variables for the generator model: We added two new variables that can be used in an arbitrary generator model, for instance, to print a hash code in the generated file comment.
 
