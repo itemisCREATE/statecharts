@@ -1,0 +1,670 @@
+
+p. 
+
+h1(#release_notes). Release Notes
+
+A list of new and noteworthy features as well as bugs we have tackled down in the particular releases.
+
+
+
+h2(#release_notes_3.5.2). YAKINDU Statechart Tools  3.5.2 (Feb 28, 2019)
+
+This release focuses on stability and performance, especially in the C/C++ domain.
+
+
+h3(#release_notes_3.5.2_c_domain). C/C++ Domain
+
+The transformation of C/C++ code does not rely on the C/C++ indexer to be finished anymore. Especially in C++ projects, the side effects were *sporadically unresolved types*. When the transformation is invoked while the C/C++ indexer is running, indexer information is discarded and header files get parsed again. This also means that SCT can be used with the C/C++ indexer being disabled, which is in some cases necessary due to performance reasons.
+
+We also improved the runtime *performance of the C/C++ transformation* dramatically which is particularly noticeable in C++ projects with the C/C++ indexer being disabled.
+
+The C/C++ code generator now prints *includes in the same order* as they are defined in the statechart model. In that way, the user can  influence the generated include order directly in the statechart model. The code generator also does not resolve symbol links on its own anymore.
+
+The *content assist* for import statements shows header files from the workspace first, before showing system headers.
+
+
+h3(#release_notes_3.5.2_gen_model_wizard). Generator Model Wizard
+
+We added an option to install more generators from within the generator model wizard. Using this option, the install wizard opens with a list of available code generators from our _Labs_ update site. 
+
+p(#release_notes_3.5.2_genmodel_wizard). 
+
+!images/release_notes_3.5.2_genmodel_wizard.png(Install more generators)!
+
+
+h3(#release_notes_3.5.2_example_wizard). Example Wizard
+
+The examples delivered with YAKINDU SCT now contain information about requirements to other features. This information is read out in the example wizard and an *Install Dependencies* button is shown if a required features are missing. Clicking on this button opens the install wizard with the required features being preselected.
+
+p(#release_notes_3.5.2_example_wizard). 
+
+!images/release_notes_3.5.2_example_wizard.png(Install Dependencies button in example wizard)!
+
+
+h3(#release_notes_3.5.2_java_domain). Java Domain (Beta)
+
+It is now possible to use *inner classes* and *enumerators* in Java domain statecharts.
+
+We removed some useless entries from the content assist. The content assist for import statements shows own Java classes first, before showing JRE classes.
+
+
+h3(#release_notes_3.5.2_miscellaneous). Miscellaneous
+
+In addition, this release contains
+* a fix for a bug that caused the image generator to *not* render transition and region priorities when the model was closed
+* a fix for a bug that caused the Snapshot view to not open properly
+* a fix for a bug when renaming elements from statechart interfaces
+* better error and assert messages in SCTUnit
+
+
+<hr />
+
+
+h2(#release_notes_3.5.1). YAKINDU Statechart Tools  3.5.1 (Feb 04, 2019)
+
+This release focuses on stabilization of the SCXML and Java domains.
+
+h3(#release_notes_3.5.1_scxml_domain). SCXML Domain
+
+Statecharts with multiple choices in different composite states are now handled properly. 
+
+We also fixed a bug in the simulation of SCXML statecharts in which execution slots could not be properly resolved.
+
+
+h3(#release_notes_3.5.1_java_domain). Java Domain
+
+We added a bunch of new features to the Java domain and also improved performance and stability.
+
+We added target type inference to our type system. This means, you can now write the following:
+
+bc.. 
+var song : Optional<Song> = Optional.empty()
+p. 
+
+In this case, the type inferer will deduce that _Optional.empty()_ returns an _Optional_ of type _Song_.
+
+Java class constructors are now transformed into static _new(...)_ methods. This means, you can now create new objects like this:
+
+bc.. 
+var song : Song = Song.new("mysong.wav")
+p. 
+
+Changes in imported Java classes are now directly reflected in the statechart, so you do not need to re-load the statechart model anymore. 
+
+We also improved the performance of the Java domain significantly, so it can be finally used in larger projects.
+
+
+h3(#release_notes_3.5.1_miscellaneous). Miscellaneous
+
+In addition, this release contains
+* a better positioning of transition priority numbers. In particular, choice elements are no more occluded with transition priorities.
+* better error messages where generic types are involved.
+
+
+<hr />
+
+
+h2(#release_notes_3.5.0). YAKINDU Statechart Tools  3.5.0 (Jan 22, 2019 )
+
+This release adds a rich set of new and noteworthy features:
+
+* Deep Java integration (YAKINDU Professional Edition)
+* Tracing callbacks for C++ and Java (YAKINDU Standard Edition)
+* Qt C++ code generator (YAKINDU Labs)
+* In-event queue for C++ code generator (YAKINDU Standard Edition)
+
+h3(#release_notes_3.5.0_eclipse_platform). Eclipse platform
+
+We upgraded the underlying Eclipse platform to the new Eclipse 09-2018 release. *This will be the last release of YAKINDU Statechart Tools that supports 32-bit versions* since the Eclipse Foundation decided to drop 32-bit with the 12-2018 release ("_https://bugs.eclipse.org/bugs/show&#95;bug.cgi?id=536766_":https://bugs.eclipse.org/bugs/show_bug.cgi?id=536766 ). However, you will still be able to install YAKINDU Statechart Tools into an older 32-bit Eclipse version via our update site  -  only the bundled products won't support 32-bit in the future.
+
+
+
+h3(#release_notes_3.5.0_deep_java_integration). Deep Java integration (beta)
+
+!images/release_notes_3.5.0_deep_java.png!
+
+After more than a year of work, we are proud to present the first beta release of deep Java integration in YAKINDU Statechart Tools. It allows you to directly access Java APIs in your statechart, and it hence facilitates an incorporation of state machine modeling in your Java development process. The beta version contains the following features:
+
+
+
+* You can import Java classes, interfaces and enums in your statechart and use them for your statechart variables.
+* You can access all public and static members, like variables and methods directly from the statechart. This avoids lots of boilerplate code.
+* Java methods that are used in your statechart will be called during simulation. This avoids the cumbersome mocking of return values in the simulation view.
+
+
+
+You can read more and watch a video in the following blog post:
+
+"_https://blogs.itemis.com/en/statechart&#45;modeling&#45;for&#45;java&#45;development_":https://blogs.itemis.com/en/statechart-modeling-for-java-development.
+
+
+
+h3(#release_notes_3.5.0_callback_tracing). Tracing callbacks for C++ and Java
+
+The tracing feature enables the generation of tracing callback functions for Java and C++. We added a new feature to the generator model where you can configure the tracing events you are interested in:
+
+bc.. 
+feature Tracing {
+  enterState = true
+  exitState = true
+}
+p. 
+
+The _enterState_ parameter specifies whether to generate a callback function that is used to notify about state&#45;entering events, and the _exitState_ parameter specifies whether to generate a callback that is used to notify about state-exiting events.
+
+h3(#release_notes_3.5.0_QT_cpp_code_generator).  Qt C++ code generator 
+
+With the SCXML domain ("_https://blogs.itemis.com/en/taking&#45;scxml&#45;to&#45;the&#45;next&#45;level&#45;with&#45;yakindu&#45;statechart&#45;tools_":https://blogs.itemis.com/en/taking-scxml-to-the-next-level-with-yakindu-statechart-tools ), we already have a powerful and flexible way to integrate YAKINDU Statechart Tools into Qt ("_https://www.qt.io/_":https://www.qt.io/ ) applications. But there are still use cases where you can't use the Qt SCXML Interpreter. That is why we started the development of a Qt C&#43;&#43; code generator and released a first version via our YAKINDU labs update site.
+
+
+
+The Qt specific flavor of the C&#43;&#43; code generator makes use of Qt signals and slots. So the generated state machine can easily be integrated into Qt applications using this mechanism. The generated statemachine inherits from _QObject. _A _QTimer_&#45;based implementation of a timer service is generated, if the statechart makes use of time triggers. 
+
+An example of the Qt C&#43;&#43; code generator together with a simple QML user interface is available via our example wizard.
+
+
+
+h3(#release_notes_3.5.0_in_event_queue_cpp_code_generator). In&#45;event queue support for C&#43;&#43; code generator
+
+The C&#43;&#43; code generator now also supports an additional event queue for incoming events if the statechart is event&#45;driven. To enable it, set the _inEventQueue_ option of the _GenerationOptions_ feature to _true_. If an operation callback or function is executed by the state machine and that functions raises an event, this event will be appended to the in&#45;event queue. The state machine's API will remain unchanged. After processing of the origin event is completed, all events in the in&#45;events queue will be processed automatically in the order they were raised.
+
+
+
+To enable the in&#45;event queue, add the following generator option to your _.sgen_ file:
+
+
+bc.. 
+feature GeneratorOptions {
+  inEventQueue = true
+}
+p. 
+
+h3(#release_notes_3.5.0_miscellaneous).  Miscellaneous
+
+* We improved the generated code in terms of readability and removed superfluous parts.
+* For the C code generator, the definition of _sc&#95;null_ changed in _sc&#95;types.h_ since the existing definition clashes with certain C compilers. *You will have to regenerate the _sc&#95;types.h_* file in your workspace to remove compile errors.
+* We fixed several bugs in the SCXML domain and added a detection for endless loops for invalid models that contain dead locks.
+
+
+<hr />
+
+
+h2(#release_notes_3.4.0). YAKINDU Statechart Tools  3.4.0 (Aug 20, 2018)
+
+This release comes with a pile of new cool features:
+
+
+
+* *Model Search* (Standard and Professional Edition): You can now search for statechart elements; even better, you can search for references of events, variables and so on.
+
+
+
+* *SCXML Domain* (Professional Edition): The "_SCXML_":https://www.w3.org/TR/scxml/ domain allows to generate SCXML files from your statechart. Also, the statechart execution semantics during simulation is the same as specified in the SCXML Standard. And of course you can use SCTUnit for testing out of the box.
+
+
+
+* *SCTUnit for C Domain* (Professional Edition): You can now use the SCTUnit testing framework together with C domain statecharts, i.e. in your unit tests you can access all C elements which your statechart can access via its imported header files.
+
+
+
+h3(#release_notes_3.4.0_model_search). Model Search
+
+The larger the model, the greater the need to quickly search for elements, for example, all states with a given name resp. name pattern, all occurrences of a certain variable, etc. This is now possible with the new model search integrated in the Eclipse search dialog:
+
+
+
+!images/release_notes_3.4.0_model_search.png!
+
+The model search allows you to use regular expressions and to filter for the kind of elements you want to search for. Once the search is performed, its results are listed in the search view where you can quickly navigate to the corresponding statechart elements.
+
+
+
+A similar but slightly different use case is to search for all references of an element. You can find this option now in the context menu. The results will be listed in the same view as for the standard model search.
+
+
+
+!images/release_notes_3.4.0_find_references.png!
+
+h3(#release_notes_3.4.0_scxml_domain). SCXML Domain
+
+This version of YAKINDU Statechart Tools comes with an SCXML domain made to facilitate generating SCXML files from YAKINDU statecharts. SCXML, short for *Statechart XML*, is a statechart interchange format based on XML, "_standardized by the W3C_":https://www.w3.org/TR/scxml/ . All states, events, variables and so on are defined in the XML. SCXML relies on external engines to execute the statechart according to the standard, which allows a statechart defined in SCXML to be highly portable. Like other XML based formats, it is only an interchange format and hence not really suitable for direct editing. 
+
+
+
+YAKINDU Statechart Tools Professional Edition with its SCXML domain allows you to design and verify statecharts exactly according to the SCXML standard. The built&#45;in simulation engine of YAKINDU Statechart Tools Professional Edition was adopted to reflect the execution semantics of SCXML correctly. And of course, the SCTUnit framework takes the SCXML domain into account as well, so you can be sure that the test results reflect the behavior of the SCXML engine of your choice. 
+
+
+
+To see everything in action we have added an example to our example wizard. This example was taken from the "_Qt examples_":https://doc.qt.io/qt-5/qtscxml-trafficlight-widgets-dynamic-example.html and modeled with YAKINDU Statechart Tools. It contains a traffic light statechart which is on&#45;the&#45;fly transformed into an SCXML file. You can edit, simulate and test the statechart as you are used to in YAKINDU. Additionally, the example comes with some Qt code, so you can run it in your Qt environment and see the traffic light in action.
+
+!images/release_notes_3.4.0_scxml_domain.png!
+
+
+
+Speaking of our example wizard, we also put some effort here to provide a cleaner, more structured appearance.
+
+
+
+h3(#release_notes_3.4.0_sctunit). SCTUnit for C Domain
+
+We have adopted our testing framework SCTUnit to also work with C domain statecharts. This means, you can now write unit tests for your C statecharts in SCTUnit, execute them, and also generate GTests, for execution on a build server, for example. 
+
+
+
+In SCTUnit you can easily mock the environment your state machine is interacting with by raising events or mocking operation results and then verify corresponding state changes or outgoing events. When writing SCTUnit tests for your C statechart you can access all C elements (variables, operations, datastructures) that are also made accessible in your C statechart by the imported header files.
+
+
+
+We have added an SCTUnit test suite to our coffee machine example which you can find in our example wizard. Executing the test suite will also reveal our coverage view showing you which states and transitions have been covered by your tests.
+
+
+
+!images/release_notes_3.4.0_sctunit.png!
+
+
+
+
+h3(#release_notes_3.4.0_miscellaneous). Miscellaneous
+
+Apart from these new features we also worked on many smaller improvements, bug fixes and better performance:
+
+
+
+Usability:
+
+* Added a new page to the statechart creation wizard that shows a description text for the selected statechart domain, so you can better understand what this domain stands for
+* Improved error message when generator model refers to non&#45;existing statechart
+* Show error message if region contains an unnamed and a 'default' named entry
+* Add validations and content assist for entry/exit points
+* New statecharts will be now annotated with &#64;EventDriven and &#64;ChildFirstExecution per default
+* Added validation rule for synchronization nodes that contain outgoing triggers
+
+
+
+Bugfixes:
+
+* Fixed strange positioning of transition arrows at exit nodes
+* Fixed a bug which in certain situations made synchronization nodes being traversed while not all incoming states were active
+* Fixed several problems with toggling the documentation mode
+* Fixed usage of equally named Java operations from different interfaces during simulation
+* Fixed “&lt;” and “&gt;” signs being replaced with 0 and 2 in C# code generation
+* Removed unused functions from generated event driven Java code
+* Removed unused functions from generated event driven C&#43;&#43; code
+* Fixed rename refactoring via context menu for Linux
+* Fixed several scoping issues in SCTUnit
+* Fixed problem in SCTUnit when used with cycle&#45;based statecharts
+* Several improvements for SCTUnit C&#43;&#43; generator
+* Make C&#43;&#43; methods defined inline in class definition available in C/C&#43;&#43; domain
+* Fixed calling function pointers from structs in C/C&#43;&#43; domain
+
+
+
+Performance / Stabilization:
+
+* Some performance improvements for pinned definition section
+* Fixed a problem that caused a deadlock in certain situations
+* Fixed refreshing/updating of references when files get deleted/added
+
+
+<hr />
+
+
+h2(#release_notes_3.3.0). YAKINDU Statechart Tools  3.3.0 (Mar 26, 2018)
+
+In this release our team closed 126 issues in total. Here are the new and noteworthy changes:
+
+h3(#release_notes_3.3.0_image_generator). Statechart image generator (Standard and Professional Edition):
+
+The statechart image generator renders a statechart and all its subdiagrams, if any, as image files. The generator supports several pixel&#45;based and vector&#45;based image formats. It is configured via a generator model, just like all the other YAKINDU generators:
+
+bc.. 
+GeneratorModel for yakindu::images {
+
+  statechart CoffeeMachine {
+
+      feature Outlet {
+          targetProject = "coffeemachine"
+          targetFolder = "images"
+      }
+
+      feature Renderer {
+          format = "svg"
+      }
+  }
+}
+p. 
+
+Each time the underlying CoffeeMachine statechart is changed, this will create SVG images of the statechart in the folder “images” in project “coffeemachine”.
+
+
+h3(#release_notes_3.3.0_test_coverage_tracing). SCov  -  Test Coverage Tracing for SCTUnit (Professional Edition)
+
+_SCov_ is the new model coverage feature and part of YAKINDU Statechart Tools Professional Edititon. When a SCTUnit test is executed, _SCov_ will automatically trace all model elements that are executed during a test run. A model element that is fully executed is colored in green, elements that are not executed are colored in red and partly executed model elements are colored in yellow.
+
+
+
+!images/release_notes_3.3.0_scov.png!
+
+The first version supports state activation and transition coverage. Coverage of state local reactions is currently not supported. The upcoming version will also take local reactions into account.
+
+
+
+h3(#release_notes_3.3.0_MISRA_short_identifiers). MISRA Short Identifiers (Professional Edition)
+
+The C Domain now offers a further annotation: *&#64;ShortCIdentifiers* helps you to keep the generated code compliant to rules which require C identifiers not to be longer than 31 characters. To achieve this, instead of shortening names which are part of a statechart's API, YAKINDU Statechart Tools gives feedback about the names that will be generated and warns if any user input results in C Code that is non&#45;compliant with the 31 character rule. This puts the user in charge of the naming scheme and keeps the resulting C identifiers predictable.
+
+h3(#release_notes_3.3.0_Miscellaneous). Miscellaneous
+
+* *Usability improvements:* We improved the usability of the graphical editor. For example, dithering connection anchors are removed (link) to have a more robust connection routing layout.
+
+!images/release_notes_3.3.0_fixed_domain_anchors.gif!
+
+* New built&#45;in variables for the generator model: We added two new variables that can be used in an arbitrary generator model, for instance, to print a hash code in the generated file comment.
+
+* bq. _SHA256_ (String): The hash of the referenced statechart file.
+* bq. _SCTFILE_ (String): Path to the statechart file relative to the workspace.
+
+
+<hr />
+
+
+h2(#release_notes_3.2.0). YAKINDU Statechart Tools  3.2.0 (Jan 11, 2018)
+
+
+For this release, the YAKINDU team fixed 66 Standard Edition and 28 Professional Edition issues. Apart from several bug fixes, we added some great new features:
+
+* *Pinned diagram editor:* The editor for the statechart definition section can be pinned and collapsed now.
+* *Reworked simulation view:* Better support for working with parallel simulation sessions and time triggers.
+* *Statechart image generator:* Automatically export raster or SVG images for statechart models and subdiagrams.
+* *Built&#45;in variables for the generator model:* Built&#45;in variables like USER, SCTVERSION and TIMESTAMP can be used in the generator model.
+* *C&#43;&#43; domain (beta):* First beta release of deep C&#43;&#43; integration is available. C&#43;&#43; headers can be accessed from the statechart model now.
+
+We also changed the licence management for this release. After 30 days of trial you _need a valid licence file for non&#45;commercial_ use now. YAKINDU Statechart Tools still is and always be free of charge for non&#45;commercial and academic use. You can apply for a non commercial licence here:
+
+"_https://info.itemis.com/yakindu/statecharts/non&#45;commercial/order/_":https://info.itemis.com/yakindu/statecharts/non-commercial/order/
+
+h3(#release_notes_3.2.0_pinned_diagram_editor). Pinned diagram editor
+
+By default, a statechart's definition section is positioned at the left&#45;hand side of the canvas, and it is part of the diagram. Now the definition section comes with an option to pin it to the left&#45;hand side of the view. In order to pin the definition section, you simply click on the small decorator icon in the upper&#45;left corner of the area. This feature has to be enabled first via _Window / Preferences / YAKINDU SCT / Diagram Appearance / Enable pinning of definition section._
+
+!images/release_notes_3.2.0_pinned_editor.gif!
+
+h3(#release_notes_3.2.0_simulation_view). New Simulation view
+
+We completely reworked the _Simulation_ view to ease working with parallel simulation sessions. The _Simulation_ view now provides a drop&#45;down box that lists all running sessions. _Resume, Pause, Stop_ and _Single step_ actions can be accessed directly from the view. Furthermore, the current simulation time is now shown. This is especially useful when working with time triggers.
+
+!images/release_notes_3.2.0_simulation_view.png!
+
+h3(#release_notes_3.2.0_builtin_variables_generator_model). Built&#45;in variables for the generator model
+
+With the October release 3.1.0 we introduced "properties and expressions for the generator model":#release_notes_3.1.0_generator_models . We extended this feature in the current version with a set of meaningful built&#45;in properties that can be used within expressions:
+
+
+
+* SCTVERSION: Returns the current version of YAKINDU Statechart Tools
+* TIMESTAMP: Returns the current date and time as a localized string
+* USER: Returns the name of the current user 
+* HOSTNAME: Returns the host name of the machine 
+
+These properties can be used within generator model expressions, for example, to add timestamp, user, and version to the licence header in the generated code.
+
+bc.. 
+feature LicenseHeader {
+    licenseText = "Generated on " + TIMESTAMP + " with YAKINDU Statechart Tools " + SCTVERSION
+}
+p. 
+
+This feature produces the following output:
+
+/&#42; Generated on 11.12.2017 17:08:14 with YAKINDU SCT 3.2.0 &#42;/
+
+h3(#release_notes_3.2.0_cpp_domain). C&#43;&#43; Domain (beta)
+
+This release contains the first version of the deep C&#43;&#43; integration feature. It is now possible to import C&#43;&#43; headers and use C&#43;&#43;&#45;specific language concepts directly from within a statechart model. Detailed documentation and examples will follow soon.
+
+h3(#release_notes_3.2.0_miscellaneous). Miscellaneous improvements and bug fixes
+
+* Diagram syntax coloring can be activated via _Window / Preferences / YAKINDU SCT / Diagram Appearance / Syntax Coloring 
+* Updated documentation regarding the execution semantics of child&#45;first/parent first and reactions 
+* Keyboard shortcut [Ctrl&#43;0] resets the zoom factor 
+* Region priorities are now shown on the canvas
+* The expression language now supports postfix increment and decrement operations 
+* Code generators check whether callback interfaces are set
+* SCT is now fully compatible with Java 9
+
+
+<hr />
+
+
+h2(#release_notes_3.1.0). YAKINDU Statechart Tools  3.1.0 (Oct 4, 2017)
+
+This release comes with several bug fixes and the following main features:
+
+* Using properties and expressions in generator models
+* Named parameter calls
+* Option to skip generation of library files
+* New "online documentation":https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide
+
+h3(#release_notes_3.1.0_generator_models). Using properties and expressions in generator models
+
+An generator model may assign values to properties and later use these properties in expressions. The following sample generator model uses the *var* keyword to declare the properties _projectName_, _version_, _isBeta_, and _generateTimerServce_ with their respective types and default values.
+
+
+bc.. 
+GeneratorModel for yakindu::java {
+    
+    //Variables can be overridden from command line interface:
+    
+    var projectName : string = "light_switch_series"
+    var version : string = "1.0"
+    var isBeta : boolean = true
+    var generateTimerServce : boolean = true
+
+    statechart myStateAutomaton {
+    
+        feature Outlet {
+            targetProject = projectName
+            targetFolder = "src-gen/" + version + (isBeta ? "beta" : "")
+            libraryTargetFolder = "src"
+        }
+        
+        feature GeneralFeatures {
+            TimerService = generateTimerServce
+        }
+    }
+}
+p. 
+
+
+
+The model then uses these values in *feature* clauses by referring to the properties: The values assigned to properties are _default_ values only and can be overridden from the headless code generator like this:
+
+bc.. 
+scc -m myGenmodel.sct -v version=2.0;isBeta=false
+p. 
+
+The name/value pairs specified by the &#45;v option would override the corresponding default values of the properties in the generator model.This is a very flexible way to tailor the code generator within a headless build.
+
+Read more about this feature in our "user guide":https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide/hdls_headless_code_generation .
+
+h3(#release_notes_3.1.0_named_paramter_calls). Named parameter calls
+
+Now you can can use named parameters when calling an operation. Consider the following operation declaration:
+
+_operation myOperation(xValue : int, yValue : int) : void_
+
+This can be called with name parameters like this:
+
+_myOperation(xValue = 27, yValue = 42)_
+
+Named parameters make their order irrelevant. The following call is semantically equivalent to the one above:
+
+_myOperation(yValue = 42, xValue = 27)_
+
+While an operation call with named parameters is longer than the equivalent call with positional parameters, named parameters are a great means for self&#45;documenting code (especially if the parameter names are more telling than in the example above).
+
+h3(#release_notes_3.1.0_skip_generation_of_library_files). Option to skip generation of library files
+
+The *Outlet* feature now has an option to skip the generation of library files. This is useful to prevent the generation of a new library file when an existing one should be used:
+
+bc.. 
+feature Outlet {
+    targetProject = projectName
+    targetFolder = "src-gen/"
+    libraryTargetFolder = "src"
+    skipLibraryFiles = headless ? true : false
+}
+p. 
+
+
+_skipLibraryFiles_ (Boolean, optional): If you wish to exclude the static files from the code generation, i.e. those that are put into the _libraryTargetFolder_, you can set this value to _true_. If the value is _false_ or not specified at all, the files are generated as usual. Currently supported for the Java, C and C&#43;&#43; generators.
+
+h3(#release_notes_3.1.0_miscellaneous). Miscellaneous improvements and bug fixes
+
+Usability improvements:
+
+* Add a checkbox &quot;save automatically&quot; to the save dialog when running a simulation
+* Perspective switch for “Debug As”
+* Error markers of subdiagrams are not propagated to parent diagram
+* “Run As” context menu action available in diagram
+* Implicit imports for active(State) statements
+
+Code generation improvements:
+
+* “Effective C&#43;&#43;” compliant code
+* Removed unused includes for cycle based state machines
+* Provide a constant that provides the maximum number of parallel time events of a state machine
+
+Bug fixes:
+
+* [Performance] The system still slows down more and more for each successive single&#45;step
+* Content assist on transitions and states shows implicit variable &quot;period&quot;
+* Missing validation rule for top&#45;level regions without entry
+
+
+<hr />
+
+
+h2(#release_notes_3.0.0). YAKINDU Statechart Tools 3.0.0 (Jul 18, 2017)
+
+This release is the first major release introducing the YAKINDU Statechart Tools *Standard* and *Professional Editions*. 
+
+In the last years, YAKINDU Statechart Tools has become more and more popular. This is shown by an ever increasing number of users who use the tool for both commercial and non-commercial purposes, e.g. in academic research. This goes hand in hand with increasing demand for new features and professional support.
+
+In addition to this continuous growth, we also want to ensure sustainable support for the future. So the _Standard Edition_ complements the _Professional Edition_ and we believe that both editions better address our users demand for statechart modeling and development solutions. Both editions are intended for commercial use. For academic and non-commercial use free licences are available.
+
+The _Standard Edition_ comes with:
+* statechart unit testing support - a widely requested feature (BETA)
+* support for declarative execution semantics
+* usability improvements
+* code generator improvements
+
+The _Professional Edition_ is built on top of the _Standard Edition_. Thus, all the new features available in the Standard Edition, like our testing framework "_SCTUnit_":https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide/sctunit_test-driven_statechart_development_with_sctunit, are also available in the Professional Edition. In addition to that, the Professional Edition provides a tight "_integration of statecharts with C code_":https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide/cdom_deep_c_integration as well as the possibility to use "_breakpoints and snapshots_":https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide/advsim_debugging_with_breakpoints_and_snapshots#advsim_debugging_with_breakpoints_and_snapshots for debugging your state machine.
+
+The _Professional Edition_ and comes with the following new features and improvements:
+* possibility to import C system headers using the deep C integration
+* very large header file support (also deep C integration) 
+* statechart unit testing support &#45; a widely requested feature (BETA)
+* support for declarative execution semantics
+* usability improvements
+* code generator improvements
+
+
+!images/release_notes_3.0.0_startscreen.png!
+
+
+
+h3(#release_notes_3.0.0_system_header_imports). System Header Imports
+
+Besides fixing several smaller issues, we took our time in reworking some internals of the deep C integration, especially when it comes to handling header imports. The most notable difference for the user is the possibility to include systems headers in your statechart model.
+
+!images/release_notes_3.0.0_system_header_imports.png!
+
+
+
+As you may have noticed the import syntax slightly changed. The preferred way now is to use a string literal to import a header file. However, the old syntax is still supported, but deprecated.
+
+
+
+h3(#release_notes_3.0.0_large_header_support). Very Large Header File Support
+
+YAKINDU Statechart Tools are used in many different application domains with different project sizes. Especially in the automotive domain, when dealing with large AUTOSAR models, it is not uncommon to have thousands of source files with sizes up to several MBs with hundreds of thousand of declarations. In order to provide a very good user experience while editing statecharts and also for the code generators, we reworked our indexing infrastructure which is now remarkably faster while using less memory.
+
+
+
+h3(#release_notes_3.0.0_sctunit). SCTUnit &#45; The Testing Framework for State Machines
+
+With this release, we introduce a beta version of our testing framework SCTUnit. SCTUnit allows test&#45;driven development of YAKINDU Statechart Models. These tests can be executed directly within your IDE to check if the model behaves as expected. It also generates unit tests for Java, C and C&#43;&#43;.
+
+
+
+!images/release_notes_3.0.0_sctunit.png!
+
+
+Features that can be used in SCTUnit are:
+
+* Execute tests directly in your IDE
+* Code generators for C/C&#43;&#43; ("_GTest_":https://github.com/google/googletest &amp; "_GMock_":https://github.com/google/googletest ) and Java ("_JUnit_":http://junit.org/junit4/ &amp; "_Mockito_":http://site.mockito.org/ )
+* Mocking operation return values
+* Verifying operation calls and their parameters
+* Virtual Time &#45; easy testing of time triggers
+
+
+
+For more information, see our "_online documentation_":https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide/#sctunit_test-driven_statechart_development_with_sctunit.
+
+h3(#release_notes_3.0.0_statechart_execution_semantics). Statechart Execution Semantics
+
+Users now specify the concrete variant of execution semantics in the statechart itself. In previous versions you specified *cycle based* or *event driven* semantics using run configurations. Now this is specified using so called annotations. Annotations are also used to specify if the execution order in a hierarchical statechart chart should be *parents&#45;first* or *child&#45;first*. For more information, see our "_online documentation_":https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide/#statechart_language_annotations.
+
+!images/release_notes_3.0.0_statechart_execution_semantics.png!
+
+
+
+h3(#release_notes_3.0.0_filter_generator_models). Filter for Generator Models
+
+In some cases it might be inconvenient to execute all generator models during a project build, especially if you have different generator models for different use&#45;cases, for example, headless execution. To provide a more fine&#45;grained control of which ones should be executed, it is now possible to exclude particular generator models or entire folders from the automatic build execution in the project's properties.
+
+
+
+!images/release_notes_3.0.0_filter_generator_models.png!
+
+
+
+h3(#release_notes_3.0.0_deep_c_integration). Deep C Integration Improvements
+
+
+
+* Support for variadic functions (variable length argument lists)
+* Simulation of C statecharts only shows used elements in simulation view
+
+
+
+h3(#release_notes_3.0.0_usability_improvements). Usability Improvements
+
+* Choice nodes can now be resized with a fix aspect ratio
+* Perspective switches back to modeling view when simulation terminates
+* Note attachments can be deleted now
+* In simulation view, operations have a distinctive icon now
+* In generator model creation wizard, the order of statechart models is aligned with the one in project explorer
+* Fading time for snap&#45;to&#45;grid support lines is reduced for better user experience
+* Warning for sgen files that do not contain any entries
+* It is now possible to use binary literals like '0b01011' as integer values
+* Hint for content assist in definition section
+* Double click drag tracker added for notes
+* Color of active states in simulation is changed to yellow now
+* Disabled auto reveal on selection
+
+h3(#release_notes_3.0.0_code_generation_improvements). Code Generation Improvements
+
+* Removed magic numbers in generated C code
+* Fixed isActive() method to return correct values for inactive state machines
+* For C&#43;&#43; code generation, StatemachineInterface.h is placed into library target folder
+
+h3(#release_notes_3.0.0_bugfixes). Bug Fixes
+
+* Fix display of error markers 
+* Fix TODO and FIXME markers
+* Bug in AbstractTypeSystem.remove(Type)
+
+
