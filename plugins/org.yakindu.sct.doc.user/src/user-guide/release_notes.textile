@@ -60,6 +60,50 @@ In addition, this release contains
 <hr />
 
 
+h2(#release_notes_3.5.1). YAKINDU Statechart Tools  3.5.1 (Feb 04, 2019)
+
+This release focuses on stabilization of the SCXML and Java domains.
+
+h3(#release_notes_3.5.1_scxml_domain). SCXML Domain
+
+Statecharts with multiple choices in different composite states are now handled properly. 
+
+We also fixed a bug in the simulation of SCXML statecharts in which execution slots could not be properly resolved.
+
+
+h3(#release_notes_3.5.1_java_domain). Java Domain
+
+We added a bunch of new features to the Java domain and also improved performance and stability.
+
+We added target type inference to our type system. This means, you can now write the following:
+
+bc.. 
+var song : Optional<Song> = Optional.empty()
+p. 
+
+In this case, the type inferer will deduce that _Optional.empty()_ returns an _Optional_ of type _Song_.
+
+Java class constructors are now transformed into static _new(...)_ methods. This means, you can now create new objects like this:
+
+bc.. 
+var song : Song = Song.new("mysong.wav")
+p. 
+
+Changes in imported Java classes are now directly reflected in the statechart, so you do not need to re-load the statechart model anymore. 
+
+We also improved the performance of the Java domain significantly, so it can be finally used in larger projects.
+
+
+h3(#release_notes_3.5.1_miscellaneous). Miscellaneous
+
+In addition, this release contains
+* a better positioning of transition priority numbers. In particular, choice elements are no more occluded with transition priorities.
+* better error messages where generic types are involved.
+
+
+<hr />
+
+
 h2(#release_notes_3.5.0). YAKINDU Statechart Tools  3.5.0 (Jan 22, 2019 )
 
 This release adds a rich set of new and noteworthy features:
