@@ -125,7 +125,7 @@ public class CompileGTestCommand {
 		command.add("-g");
 		command.add("-o");
 		command.add(getFileName(program));
-		command.add("-O1");
+		command.add("-O0");
 		if(wPedantic) {
 			command.add("-pedantic");
 			command.add("-pedantic-errors");
