@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
+import org.yakindu.sct.generator.c.gtest.GTestHelper.Compiler;
 
 @GTest(
 	statechartBundle = "org.yakindu.sct.test.models",
@@ -13,22 +14,22 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/ConstantsVariationTest/ConstantsVariation",
 	model = "testmodels/SCTUnit/ConstantsVariation.sct",
 	additionalFilesToCopy = {
-		"libraryTarget/sc_timer_service.c",
-		"libraryTarget/sc_timer_service.h"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
-		"ConstantsVariation.c",
-		"sc_timer_service.c"
+		"ConstantsVariation.cpp",
+		"sc_runner.cpp"
 	}
 )
 @RunWith(GTestRunner.class)
 public class ConstantsVariationTests {
-
-	protected final GTestHelper helper = new GTestHelper(this);
+protected final GTestHelper helper = new GTestHelper(this, Compiler.GPLUSPLUS);
 
 	@Before
 	public void setUp() {
 		helper.generate();
 		helper.compile();
 	}
+
 }

@@ -48,7 +48,7 @@ TEST_F(EventDrivenTest, test) {
 	
 	EXPECT_TRUE(statechart->isStateActive(EventDriven::main_region_StateD));
 	
-	statechart->getDefaultSCI()->raise_inEventBool( true);
+	statechart->getDefaultSCI()->raise_inEventBool(true);
 	
 	EXPECT_TRUE(statechart->isStateActive(EventDriven::main_region_StateE));
 	
