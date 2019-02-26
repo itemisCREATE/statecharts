@@ -43,7 +43,7 @@ public class ValidatingEMFDatabindingContext extends EMFDataBindingContext {
 		IFile file = WorkspaceSynchronizer.getFile(context.eResource());
 		if (file == null || !file.isAccessible())
 			return new Status(IStatus.ERROR, DiagramActivator.PLUGIN_ID,
-					"File does not exist" + context.eResource().getURI());
+					"File does not exist " + context.eResource().getURI());
 		return FileModificationValidator.getInstance().validateEdit(new IFile[] { file }, shell);
 
 	}
