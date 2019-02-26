@@ -290,7 +290,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	
 	public void timeElapsed(int eventID) {
 		timeEvents[eventID] = true;
-		runCycle();
 	}
 	
 	public SCInterface getSCInterface() {

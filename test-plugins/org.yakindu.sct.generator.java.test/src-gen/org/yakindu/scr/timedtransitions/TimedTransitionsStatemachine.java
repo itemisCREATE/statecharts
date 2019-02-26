@@ -163,7 +163,6 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	
 	public void timeElapsed(int eventID) {
 		timeEvents[eventID] = true;
-		runCycle();
 	}
 	
 	/* Entry action for state 'Start'. */
