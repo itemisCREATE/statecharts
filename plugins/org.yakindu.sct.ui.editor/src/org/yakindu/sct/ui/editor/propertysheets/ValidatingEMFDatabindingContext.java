@@ -14,12 +14,14 @@ import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.databinding.EMFDataBindingContext;
 import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.common.ui.resources.FileModificationValidator;
 import org.eclipse.swt.widgets.Shell;
+import org.yakindu.sct.ui.editor.DiagramActivator;
 
 /**
  * Checks the file modification flag before updating the model.
@@ -39,6 +41,9 @@ public class ValidatingEMFDatabindingContext extends EMFDataBindingContext {
 
 	protected IStatus isWriteable() {
 		IFile file = WorkspaceSynchronizer.getFile(context.eResource());
+		if (file == null || !file.isAccessible())
+			return new Status(IStatus.ERROR, DiagramActivator.PLUGIN_ID,
+					"File does not exist" + context.eResource().getURI());
 		return FileModificationValidator.getInstance().validateEdit(new IFile[] { file }, shell);
 
 	}
