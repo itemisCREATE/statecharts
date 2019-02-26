@@ -25,7 +25,7 @@ import org.yakindu.sct.generator.java.submodules.EventCode
 import org.yakindu.sct.generator.java.submodules.InterfaceFunctionsGenerator
 import org.yakindu.sct.generator.java.submodules.InternalFunctionsGenerator
 import org.yakindu.sct.generator.java.submodules.StatemachineFunctionsGenerator
-import org.yakindu.sct.generator.java.submodules.eventdriven.EventDrivenTimingFunctions
+import org.yakindu.sct.generator.java.submodules.TimingFunctions
 import org.yakindu.sct.generator.java.submodules.lifecycle.Enter
 import org.yakindu.sct.generator.java.submodules.lifecycle.Exit
 import org.yakindu.sct.generator.java.submodules.lifecycle.Init
@@ -55,7 +55,7 @@ class Statemachine {
 	@Inject protected extension InterfaceFunctionsGenerator
 	@Inject protected extension InternalFunctionsGenerator
 	@Inject protected extension StatemachineFunctionsGenerator
-	@Inject protected extension EventDrivenTimingFunctions
+	@Inject protected extension TimingFunctions
 	
 	@Inject protected extension Init
 	@Inject protected extension Enter
