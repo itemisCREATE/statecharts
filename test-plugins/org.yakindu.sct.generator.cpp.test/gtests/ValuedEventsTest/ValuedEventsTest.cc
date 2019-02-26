@@ -40,11 +40,11 @@ TEST_F(ValuedEventsTest, valuedEventsTest) {
 	
 	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), "sct") == 0);
 	
-	statechart->getDefaultSCI()->raise_integerEvent( 23);
+	statechart->getDefaultSCI()->raise_integerEvent(23);
 	
-	statechart->getDefaultSCI()->raise_booleanEvent( false);
+	statechart->getDefaultSCI()->raise_booleanEvent(false);
 	
-	statechart->getDefaultSCI()->raise_realEvent( 20);
+	statechart->getDefaultSCI()->raise_realEvent(20);
 	
 	statechart->getDefaultSCI()->raise_stringEvent((sc_string) "tool");
 	

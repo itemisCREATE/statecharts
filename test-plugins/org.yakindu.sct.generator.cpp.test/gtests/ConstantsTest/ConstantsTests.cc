@@ -58,7 +58,7 @@ TEST_F(ConstantsTests, constantDefinition) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_result()== 100);
 	
-	statechart->getDefaultSCI()->raise_e2( statechart->getDefaultSCI()->get_x());
+	statechart->getDefaultSCI()->raise_e2(statechart->getDefaultSCI()->get_x());
 	
 	runner->proceed_cycles(1);
 	

@@ -28,7 +28,7 @@ class CheckMock{
 		const sc_string value;
 		sc_boolean (CheckMock::*behavior)();
 		inline bool operator==(const parameters& other) {
-			return (this->value == other.value);
+			return (strcmp(this->value, other.value) == 0);
 		}
 	};
 	public:
