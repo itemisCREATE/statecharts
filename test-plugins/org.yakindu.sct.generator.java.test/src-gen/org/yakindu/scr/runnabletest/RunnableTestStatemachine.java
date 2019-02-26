@@ -266,7 +266,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	
 	public void timeElapsed(int eventID) {
 		timeEvents[eventID] = true;
-		runCycle();
 	}
 	
 	public SCInterface getSCInterface() {

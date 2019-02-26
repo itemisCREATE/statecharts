@@ -232,7 +232,6 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	
 	public void timeElapsed(int eventID) {
 		timeEvents[eventID] = true;
-		runCycle();
 	}
 	
 	public SCInterface getSCInterface() {

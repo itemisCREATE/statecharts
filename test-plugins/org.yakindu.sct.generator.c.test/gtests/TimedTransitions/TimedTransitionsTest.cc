@@ -14,6 +14,9 @@ class TimedTransitionsTest : public ::testing::Test
 public:
 	/* All operations from the SCTUnit test class. */
 	void Timer01();
+	void Timer02();
+	void noAdditionalCycle();
+	void countCycles();
 	void setTimer(TimedTransitions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 	void unsetTimer(TimedTransitions* handle, const sc_eventid evid);
 protected:
@@ -47,6 +50,38 @@ void TimedTransitionsTest::Timer01()
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(timedTransitions_isStateActive(&statechart, TimedTransitions_main_region_End));
 }
+void TimedTransitionsTest::Timer02()
+{
+	timedTransitions_enter(&statechart);
+	EXPECT_TRUE(timedTransitions_isStateActive(&statechart, TimedTransitions_main_region_Start));
+	sc_timer_service_proceed_time(&timer_service, 2000);
+	EXPECT_TRUE(timedTransitions_isStateActive(&statechart, TimedTransitions_main_region_End));
+}
+void TimedTransitionsTest::noAdditionalCycle()
+{
+	timedTransitions_enter(&statechart);
+	EXPECT_TRUE(timedTransitions_isStateActive(&statechart, TimedTransitions_main_region_Start));
+	sc_timer_service_proceed_time(&timer_service, 1950);
+	EXPECT_TRUE(timedTransitions_isStateActive(&statechart, TimedTransitions_main_region_Start));
+	sc_timer_service_proceed_time(&timer_service, 100);
+	EXPECT_TRUE(timedTransitions_isStateActive(&statechart, TimedTransitions_main_region_End));
+}
+void TimedTransitionsTest::countCycles()
+{
+	timedTransitions_enter(&statechart);
+	EXPECT_TRUE(timedTransitions_isStateActive(&statechart, TimedTransitions_main_region_Start));
+	EXPECT_TRUE((timedTransitionsIface_get_cycles(&statechart)== 0));
+	EXPECT_TRUE((timedTransitionsIface_get_seconds(&statechart)== 0));
+	sc_timer_service_proceed_time(&timer_service, 100);
+	EXPECT_TRUE((timedTransitionsIface_get_cycles(&statechart)== 0));
+	EXPECT_TRUE((timedTransitionsIface_get_seconds(&statechart)== 0));
+	sc_timer_service_proceed_time(&timer_service, 100);
+	EXPECT_TRUE((timedTransitionsIface_get_cycles(&statechart)== 1));
+	EXPECT_TRUE((timedTransitionsIface_get_seconds(&statechart)== 0));
+	sc_timer_service_proceed_time(&timer_service, 800);
+	EXPECT_TRUE((timedTransitionsIface_get_cycles(&statechart)== 5));
+	EXPECT_TRUE((timedTransitionsIface_get_seconds(&statechart)== 1));
+}
 
 void TimedTransitionsTest::setTimer(TimedTransitions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){
 	sc_timer_t timer;
@@ -60,6 +95,15 @@ void TimedTransitionsTest::unsetTimer(TimedTransitions* handle, const sc_eventid
 
 TEST_F(TimedTransitionsTest, Timer01) {
 	Timer01();
+}
+TEST_F(TimedTransitionsTest, Timer02) {
+	Timer02();
+}
+TEST_F(TimedTransitionsTest, noAdditionalCycle) {
+	noAdditionalCycle();
+}
+TEST_F(TimedTransitionsTest, countCycles) {
+	countCycles();
 }
 
 void timedTransitions_setTimer(TimedTransitions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){

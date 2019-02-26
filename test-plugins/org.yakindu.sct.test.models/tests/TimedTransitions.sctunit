@@ -8,6 +8,51 @@ testclass TimedTransitions for statechart TimedTransitions{
 		proceed 1 cycle
 		
 		assert active (TimedTransitions.main_region.End)				
-	}		
+	}
+	
+	@Test
+	operation Timer02() {
+		enter
+		
+		assert active (TimedTransitions.main_region.Start)
+		
+		proceed 2s
+		assert active (TimedTransitions.main_region.End)		
+	}	
+	
+	@Test
+	operation noAdditionalCycle() {
+		enter
+		
+		assert active (TimedTransitions.main_region.Start)
+		/* 
+		 * Cycles should only be done every 200ms, so while the transition is marked
+		 * with `after 1900ms`, the time should be elapsed after 1950ms but the 
+		 * runCycle should not have been called.
+		 */
+		proceed 1950ms
+		assert active (TimedTransitions.main_region.Start)
+		proceed 100ms
+		assert active(main_region.End)
+	}
+	
+	@Test
+	operation countCycles() {
+		enter
+		assert active(main_region.Start)
+		assert (cycles == 0)
+		assert (seconds == 0)
+		
+		proceed 100 ms
+		assert (cycles == 0)
+		assert (seconds == 0)
+		proceed 100 ms
+		assert (cycles == 1)
+		assert (seconds == 0)
+		
+		proceed 800ms
+		assert (cycles == 5)
+		assert (seconds == 1)
+	}
 	
 }

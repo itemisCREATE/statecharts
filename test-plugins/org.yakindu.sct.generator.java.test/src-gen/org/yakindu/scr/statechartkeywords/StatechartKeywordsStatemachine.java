@@ -335,7 +335,6 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	
 	public void timeElapsed(int eventID) {
 		timeEvents[eventID] = true;
-		runCycle();
 	}
 	
 	public SCIIf getSCIIf() {
