@@ -310,7 +310,7 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		
 		sCInterface.setMyReal2(0.0);
 		
-		sCInterface.setMyFloat(1.0);
+		sCInterface.setMyFloat(1.0f);
 		
 		sCInterface.setMyDouble(2.0);
 		
