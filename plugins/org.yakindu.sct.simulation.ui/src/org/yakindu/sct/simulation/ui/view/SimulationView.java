@@ -441,7 +441,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 
 		@Override
 		public boolean isEnabled() {
-			return debugTarget != null && !debugTarget.isTerminated();
+			return debugTarget != null;
 		}
 	}
 
