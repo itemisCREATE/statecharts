@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.simulation.ui.view;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
 
@@ -29,6 +30,7 @@ import org.eclipse.debug.internal.ui.commands.actions.SuspendCommandAction;
 import org.eclipse.debug.internal.ui.commands.actions.TerminateAndRelaunchAction;
 import org.eclipse.debug.internal.ui.commands.actions.TerminateCommandAction;
 import org.eclipse.debug.ui.DebugUITools;
+import org.eclipse.debug.ui.actions.DebugCommandAction;
 import org.eclipse.debug.ui.contexts.DebugContextEvent;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.notation.Diagram;
@@ -324,12 +326,9 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 
 	protected void hookActions() {
 		IToolBarManager mgr = getViewSite().getActionBars().getToolBarManager();
-		Lists.newArrayList(new ResumeAction(), new SuspendAction(), new TerminateAction(), new StepOverAction(), new RestartAction(), new TerminateAndRelaunch())
-				.forEach(action -> {
-					mgr.add(action);
-				});
-		updateActions();
-		mgr.add(new Separator());
+		addActions(mgr, Lists.newArrayList(new ResumeAction(), new SuspendAction(), new StepOverAction()));
+		addActions(mgr, Lists.newArrayList(new TerminateAction(), new TerminateAndRelaunch()));
+		addActions(mgr, Lists.newArrayList(new RestartAction()));
 		IAction collapse = new CollapseAllAction(viewer);
 		mgr.add(collapse);
 		IAction expand = new ExpandAllAction(viewer);
@@ -337,6 +336,17 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		IAction hideTimeEvent = new HideTimeEventsAction(false);
 		mgr.add(hideTimeEvent);
 		getViewSite().getActionBars().getToolBarManager().update(true);
+	}
+
+	protected void addActions(IToolBarManager mgr, ArrayList<DebugCommandAction> actions) {
+		if (actions.isEmpty()) {
+			return;
+		}
+		for (DebugCommandAction action : actions) {
+			mgr.add(action);
+		}
+		updateActions();
+		mgr.add(new Separator());
 	}
 
 	/**
@@ -410,7 +420,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	public ITypeSystem getTypeSystem() {
 		return typeSystem;
 	}
-	
 
 	protected class RestartAction extends RestartCommandAction implements IAction {
 		@Override
@@ -435,8 +444,9 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 			return debugTarget != null && !debugTarget.isTerminated();
 		}
 	}
+
 	protected class TerminateAndRelaunch extends TerminateAndRelaunchAction implements IAction {
-		@Override 
+		@Override
 		public void run() {
 			Display.getDefault().asyncExec(new Runnable() {
 
