@@ -286,31 +286,31 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			registerZoomActions();
 
 			// Zoom in - Unix - Numpad plus
-			getKeyHandler().put(KeyStroke.getPressed('+', SWT.KEYPAD_ADD, SWT.MOD1),
+			keyHandler.put(KeyStroke.getPressed('+', SWT.KEYPAD_ADD, SWT.MOD1),
 					getActionRegistry().getAction(GEFActionConstants.ZOOM_IN));
 
 			// Zoom in - Unix - Numpad minus
-			getKeyHandler().put(KeyStroke.getPressed('-', SWT.KEYPAD_SUBTRACT, SWT.MOD1),
+			keyHandler.put(KeyStroke.getPressed('-', SWT.KEYPAD_SUBTRACT, SWT.MOD1),
 					getActionRegistry().getAction(GEFActionConstants.ZOOM_OUT));
 
 			// Zoom out - all OS - German and English keyboard layout
-			getKeyHandler().put(KeyStroke.getPressed('-', 0x2d, SWT.MOD1),
+			keyHandler.put(KeyStroke.getPressed('-', 0x2d, SWT.MOD1),
 					getActionRegistry().getAction(GEFActionConstants.ZOOM_OUT));
 
 			// Zoom in - all OS - English keyboard layout
-			getKeyHandler().put(KeyStroke.getPressed('=', 0x3d, SWT.MOD1),
+			keyHandler.put(KeyStroke.getPressed('=', 0x3d, SWT.MOD1),
 					getActionRegistry().getAction(GEFActionConstants.ZOOM_IN));
 
 			// Zoom in - Unix - German layout ([CTRL++] propagates char '+')
-			getKeyHandler().put(KeyStroke.getPressed('+', 0x2b, SWT.MOD1),
+			keyHandler.put(KeyStroke.getPressed('+', 0x2b, SWT.MOD1),
 					getActionRegistry().getAction(GEFActionConstants.ZOOM_IN));
 
 			// Zoom in - Windows - German layout ([CTRL++] propagates char 0x1d)
-			getKeyHandler().put(KeyStroke.getPressed((char) 0x1d, 0x2b, SWT.MOD1),
+			keyHandler.put(KeyStroke.getPressed((char) 0x1d, 0x2b, SWT.MOD1),
 					getActionRegistry().getAction(GEFActionConstants.ZOOM_IN));
 
 			// Zoom original - all OS
-			getKeyHandler().put(/* CTRL + '0' */
+			keyHandler.put(/* CTRL + '0' */
 					KeyStroke.getPressed('0', 0x30, SWT.MOD1), new Action() {
 						@Override
 						public void run() {
@@ -319,7 +319,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 					});
 
 			// Zoom original - all OS - Numpad 0
-			getKeyHandler().put(/* CTRL + '0' */
+			keyHandler.put(/* CTRL + '0' */
 					KeyStroke.getPressed('0', SWT.KEYPAD_0, SWT.MOD1), new Action() {
 						@Override
 						public void run() {
@@ -330,7 +330,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			// Test Error - for AERI testing only
 			// DOWN: stateMask=0x50000 CTRL ALT, keyCode=0x6c 'l', character=0xc
 			// ' '
-			getKeyHandler().put(KeyStroke.getPressed((char) 0xc, 0x6c, 0x50000), new Action() {
+			keyHandler.put(KeyStroke.getPressed((char) 0xc, 0x6c, 0x50000), new Action() {
 				@Override
 				public void run() {
 					DiagramActivator.getDefault().getLog()
