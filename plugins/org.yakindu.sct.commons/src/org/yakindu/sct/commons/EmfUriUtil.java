@@ -20,9 +20,9 @@ import org.eclipse.emf.common.util.URI;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public final class EmfURIUtil {
+public final class EmfUriUtil {
 	
-	private EmfURIUtil() {
+	private EmfUriUtil() {
 		// intentional
 	}
 

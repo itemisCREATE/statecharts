@@ -22,7 +22,8 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.yakindu.base.types,
  org.yakindu.base.expressions.interpreter,
  org.eclipse.xtext.xbase.lib,
- org.eclipse.xtend.lib
+ org.eclipse.xtend.lib,
+ org.yakindu.sct.commons
 Import-Package: org.apache.log4j,
  org.apache.commons.logging,
  org.eclipse.xtext.xbase.lib

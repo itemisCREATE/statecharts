@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.yakindu.sct.commons.ErrorCodeStatus;
 import org.yakindu.sct.generator.core.GeneratorActivator;
 import org.yakindu.sct.generator.core.filesystem.ISCTWorkspaceAccess;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
@@ -34,6 +35,9 @@ import com.google.inject.Inject;
 public abstract class AbstractDefaultFeatureValueProvider implements IDefaultFeatureValueProvider {
 
 	protected static final SGenFactory factory = SGenFactory.eINSTANCE;
+	
+	public static final String ERROR_CODE_PROJECT = "error_code_missing_project";
+
 	
 	@Inject
 	protected ISCTWorkspaceAccess access;
@@ -77,6 +81,9 @@ public abstract class AbstractDefaultFeatureValueProvider implements IDefaultFea
 
 	protected IStatus error(String msg) {
 		return new Status(IStatus.ERROR, GeneratorActivator.PLUGIN_ID, msg);
+	}
+	protected IStatus error(String msg, String errorCode) {
+		return new ErrorCodeStatus(IStatus.ERROR, GeneratorActivator.PLUGIN_ID, msg, errorCode);
 	}
 
 	protected IStatus warning(String msg) {
