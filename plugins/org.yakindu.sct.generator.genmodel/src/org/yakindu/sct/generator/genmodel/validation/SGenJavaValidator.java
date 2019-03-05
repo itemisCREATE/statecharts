@@ -77,7 +77,7 @@ public class SGenJavaValidator extends AbstractSGenValidator {
 	public static final String INVALID_DOMAIN_ID = "This generator can not be used for domain %s. Valid domains are %s";
 	public static final String DUPLICATE_ELEMENT = "The %s '%s' exists multiple times. Please rename or remove duplicates.";
 
-	public static final String CODE_REQUIRED_FEATURE = "code_req_feature.";
+	public static final String CODE_REQUIRED_FEATURE = "code_req_feature"; 
 	public static final String CODE_REQUIRED_DOMAIN = "code_req_domain";
 
 	@Inject
