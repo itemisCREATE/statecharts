@@ -79,7 +79,6 @@ public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalSc
 		// all imports should be treated as if they had a wild card
 		return new ImportNormalizer(importedNamespace, true, ignoreCase);
 	}
-
 	protected List<ImportNormalizer> createNamespaceResolver(Scope scope, boolean ignoreCase) {
 		List<ImportNormalizer> importedNamespaceResolvers = Lists.newArrayList();
 		ImportScope importScope = (ImportScope) scope;

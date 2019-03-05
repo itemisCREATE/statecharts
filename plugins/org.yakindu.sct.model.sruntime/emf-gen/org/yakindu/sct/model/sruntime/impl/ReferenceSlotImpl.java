@@ -10,21 +10,22 @@
  */
 package org.yakindu.sct.model.sruntime.impl;
 
+import java.util.List;
+
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
+import org.yakindu.sct.model.sruntime.CompositeSlot;
 import org.yakindu.sct.model.sruntime.ExecutionSlot;
 import org.yakindu.sct.model.sruntime.ReferenceSlot;
 import org.yakindu.sct.model.sruntime.SRuntimePackage;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Reference Slot</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object
+ * '<em><b>Reference Slot</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
@@ -37,8 +38,7 @@ import org.yakindu.sct.model.sruntime.SRuntimePackage;
 public class ReferenceSlotImpl extends CompositeSlotImpl implements ReferenceSlot {
 	/**
 	 * The cached value of the '{@link #getReference() <em>Reference</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getReference()
 	 * @generated
 	 * @ordered
@@ -46,8 +46,7 @@ public class ReferenceSlotImpl extends CompositeSlotImpl implements ReferenceSlo
 	protected ExecutionSlot reference;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public ReferenceSlotImpl() {
@@ -55,8 +54,7 @@ public class ReferenceSlotImpl extends CompositeSlotImpl implements ReferenceSlo
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -65,8 +63,7 @@ public class ReferenceSlotImpl extends CompositeSlotImpl implements ReferenceSlo
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -83,8 +80,7 @@ public class ReferenceSlotImpl extends CompositeSlotImpl implements ReferenceSlo
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public ExecutionSlot basicGetReference() {
@@ -92,8 +88,7 @@ public class ReferenceSlotImpl extends CompositeSlotImpl implements ReferenceSlo
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -105,8 +100,7 @@ public class ReferenceSlotImpl extends CompositeSlotImpl implements ReferenceSlo
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -120,8 +114,7 @@ public class ReferenceSlotImpl extends CompositeSlotImpl implements ReferenceSlo
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -135,8 +128,7 @@ public class ReferenceSlotImpl extends CompositeSlotImpl implements ReferenceSlo
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -150,8 +142,7 @@ public class ReferenceSlotImpl extends CompositeSlotImpl implements ReferenceSlo
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -163,4 +154,12 @@ public class ReferenceSlotImpl extends CompositeSlotImpl implements ReferenceSlo
 		return super.eIsSet(featureID);
 	}
 
-} //ReferenceSlotImpl
+	@Override
+	public List<ExecutionSlot> getSlots() {
+		if (reference instanceof CompositeSlot) {
+			return ((CompositeSlot) reference).getSlots();
+		}
+		return super.getSlots();
+	}
+
+} // ReferenceSlotImpl

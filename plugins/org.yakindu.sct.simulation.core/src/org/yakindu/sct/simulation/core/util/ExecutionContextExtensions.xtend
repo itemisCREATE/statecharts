@@ -19,6 +19,7 @@ import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sruntime.ExecutionContext
 
 class ExecutionContextExtensions {
+
 	@Inject protected extension ITypeValueProvider
 
 	def clearOutEvents(ExecutionContext executionContext) {

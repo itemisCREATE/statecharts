@@ -89,6 +89,7 @@ PrimaryExpression returns types::Expression:
 	| BlockExpression
 	| ReturnExpression
 	| ThrowExpression
+	| EventRaisingExpression
 	| ParenthesizedExpression;
 
 PrimitiveValueExpression returns types::Expression:
@@ -105,53 +106,49 @@ IfExpression returns types::Expression:
 
 SwitchExpression returns types::Expression:
 	{SwitchExpression}
-	'switch' '(' switch=Expression ')' '{' 
-		(cases+=SwitchCase)*
-	('default' ':' default=Expression )?
-	'}'
-;
-SwitchCase :
-	'case'  case=Expression  (':' then=Expression)
-;
+	'switch' '(' switch=Expression ')' '{'
+	(cases+=SwitchCase)*
+	('default' ':' default=Expression)?
+	'}';
+
+SwitchCase:
+	'case' case=Expression (':' then=Expression);
+
 EventRaisingExpression returns types::Expression:
-	{EventRaisingExpression} 'raise' event=FeatureCall (':' value=ConditionalExpression)?;
+	//TODO remove ';' <-- Breaking change!
+	{EventRaisingExpression} 'raise' event=FeatureCall (':' value=ConditionalExpression)? ';';
 
 WhileExpression returns types::Expression:
 	{WhileExpression} 'while' '(' condition=Expression ')' body=BlockExpression;
-	
+
 ForExpression returns types::Expression:
-	{ForExpression} 'for' 
-	'(' 
-		(varDecls+=ForVarDecl (',' varDecls+=ForVarDecl)*)? ';'
-		(condition=Expression)? ';'
-		(varUpdates+=Expression (',' varUpdates+=Expression)*)?
-	')' 
-	body=BlockExpression
-;
+	{ForExpression} 'for'
+	'('
+	(varDecls+=ForVarDecl (',' varDecls+=ForVarDecl)*)? ';'
+	(condition=Expression)? ';'
+	(varUpdates+=Expression (',' varUpdates+=Expression)*)?
+	')'
+	body=BlockExpression;
 
 ForVarDecl returns types::Property:
-	'var' name=ID ':' typeSpecifier=TypeSpecifier ('=' initialValue=Expression)?
-;
-	
-ReturnExpression returns types::Expression :
-	//TODO remove ';'
-	{ReturnExpression} 'return' (=>expression=ConditionalExpression)';';  
+	'var' name=ID ':' typeSpecifier=TypeSpecifier ('=' initialValue=Expression)?;
+
+ReturnExpression returns types::Expression:
+//TODO remove ';'
+	{ReturnExpression} 'return' (=> expression=ConditionalExpression) ';';
 
 ThrowExpression returns types::Expression:
-	{ThrowExpression} 'throw' expression=ConditionalExpression';';
+	{ThrowExpression} 'throw' expression=ConditionalExpression ';';
 
 FeatureCall returns types::Expression:
 	ElementReferenceExpression ((({FeatureCall.owner=current} '.') | ({MetaCall.owner=current} '.@'))
-	feature=[types::Declaration]
-	(=> operationCall?='(' (arguments+=Argument (',' arguments+=Argument)*)? ')'
-	|
-	=> (arrayAccess?='[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression ']')*)?)*;
+	feature=[types::Declaration] (=> operationCall?='(' (arguments+=Argument (',' arguments+=Argument)*)? ')' | =>
+	(arrayAccess?='[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression ']')*)?)*;
 
 ElementReferenceExpression returns types::Expression:
-	{ElementReferenceExpression} reference=[ecore::EObject|ID]
-	(=> operationCall?='(' (arguments+=Argument (',' arguments+=Argument)*)? ')'
-	|
-	=> (arrayAccess?='[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression ']')*)?;
+	{ElementReferenceExpression} reference=[ecore::EObject|ID] (=> operationCall?='(' (arguments+=Argument (','
+	arguments+=Argument)*)? ')' | => (arrayAccess?='[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression
+	']')*)?;
 
 Argument:
 	(parameter=[types::Parameter] '=')? value=ConditionalExpression;

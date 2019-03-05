@@ -21,6 +21,7 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
+import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.Property
 import org.yakindu.sct.model.sruntime.CompositeSlot
 import org.yakindu.sct.model.sruntime.ExecutionContext
@@ -105,8 +106,12 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 		slot.slots.findFirst[name == element.name]
 	}
 
-	def protected ExecutionSlot packageNamespaceAwareResolve(ExecutionContext context, EObject element) {
+	def protected dispatch ExecutionSlot packageNamespaceAwareResolve(ExecutionContext context, EObject element) {
 		context.getSlot(element.fullyQualifiedName.toString)
+	}
+	
+	def protected dispatch ExecutionSlot packageNamespaceAwareResolve(ExecutionContext context, Parameter parameter) {
+		(context.slots.findFirst[name == "callStack"] as CompositeSlot).slots.findFirst[name == parameter.name]
 	}
 
 	def protected name(EObject e) {
