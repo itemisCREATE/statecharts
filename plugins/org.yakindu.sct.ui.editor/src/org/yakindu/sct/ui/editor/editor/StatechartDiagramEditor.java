@@ -326,18 +326,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 							resetZoom();
 						}
 					});
-
-			// Test Error - for AERI testing only
-			// DOWN: stateMask=0x50000 CTRL ALT, keyCode=0x6c 'l', character=0xc
-			// ' '
-			keyHandler.put(KeyStroke.getPressed((char) 0xc, 0x6c, 0x50000), new Action() {
-				@Override
-				public void run() {
-					DiagramActivator.getDefault().getLog()
-							.log(new Status(IStatus.ERROR, DiagramActivator.PLUGIN_ID, "AERI Testing error"));
-				}
-			});
-
 		}
 		return keyHandler;
 	}
