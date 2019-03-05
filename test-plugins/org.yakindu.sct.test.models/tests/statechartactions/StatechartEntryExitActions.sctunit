@@ -15,7 +15,7 @@ testclass StatechartEntryExitActions for statechart statechartactions.Statechart
 
 		enter		
 		exit
-		assert x == 6
+		assert x == 8
 		assert y == 2 		
 	}
 }

@@ -52,7 +52,7 @@ void StatechartEntryExitActions::exitActionsAreExecutedOnEnteringStatechart()
 {
 	statechartEntryAndExitActions_enter(&statechart);
 	statechartEntryAndExitActions_exit(&statechart);
-	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 6);
+	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 8);
 	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_y(&statechart)== 2);
 }
 

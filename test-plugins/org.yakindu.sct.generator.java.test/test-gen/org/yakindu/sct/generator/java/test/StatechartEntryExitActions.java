@@ -51,7 +51,7 @@ public class StatechartEntryExitActions {
 	public void exitActionsAreExecutedOnEnteringStatechart() {
 		statemachine.enter();
 		statemachine.exit();
-		assertTrue(statemachine.getX() == 6l);
+		assertTrue(statemachine.getX() == 8l);
 		assertTrue(statemachine.getY() == 2l);
 	}
 }

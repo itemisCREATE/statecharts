@@ -79,8 +79,9 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 		
 		sCInterface.setY(3);
 		
-		sCInterface.setX(sCInterface.getX() + sCInterface.y);
-		
+		if (sCInterface.getB()) {
+			sCInterface.setX(sCInterface.getX() + sCInterface.y);
+		}
 		enterSequence_StatechartEntryAndExitActions_main_region_default();
 	}
 	
@@ -106,7 +107,9 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 		
 		sCInterface.setY(2);
 		
-		sCInterface.setX(sCInterface.getX() - sCInterface.y);
+		if (sCInterface.getB()) {
+			sCInterface.setX(sCInterface.getX() - sCInterface.y);
+		}
 	}
 	
 	/**

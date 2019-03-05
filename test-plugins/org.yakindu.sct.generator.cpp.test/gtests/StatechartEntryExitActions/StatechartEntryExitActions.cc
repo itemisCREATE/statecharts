@@ -54,7 +54,7 @@ TEST_F(StatechartEntryExitActions, exitActionsAreExecutedOnEnteringStatechart) {
 	
 	statechart->exit();
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 6);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 8);
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 2);
 	
