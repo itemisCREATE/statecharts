@@ -40,6 +40,7 @@ class SGenProposalProvider extends AbstractSGenProposalProvider {
 	override void completeGeneratorEntry_ContentType(EObject model, Assignment assignment, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
 		var GeneratorModel generatorModel = EcoreUtil2.getContainerOfType(model, GeneratorModel)
+		if (generatorModel === null) return;
 		var Optional<IGeneratorDescriptor> descriptor = GeneratorExtensions.getGeneratorDescriptor(
 			generatorModel.getGeneratorId())
 		if(!descriptor.isPresent()) return;
