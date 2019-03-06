@@ -7,4 +7,10 @@
             configId="org.eclipse.ui.intro.universalConfig"
             content="$nl$/yakinduExtensionContent.xml"/>  
    </extension>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="org.yakindu.sct.ui.intro.ReleaseNotes">
+      </startup>
+   </extension>
 </plugin>
