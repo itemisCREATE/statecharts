@@ -36,7 +36,7 @@ public abstract class AbstractDefaultFeatureValueProvider implements IDefaultFea
 
 	protected static final SGenFactory factory = SGenFactory.eINSTANCE;
 	
-	public static final String ERROR_CODE_PROJECT = "error_code_missing_project";
+	public static final String CODE_MISSING_PROJECT = "error_code_missing_project";
 
 	
 	@Inject

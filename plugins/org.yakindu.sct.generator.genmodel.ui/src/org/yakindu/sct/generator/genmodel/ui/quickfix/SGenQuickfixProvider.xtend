@@ -60,7 +60,7 @@ class SGenQuickfixProvider extends DefaultQuickfixProvider {
 		}] as ISemanticModification)) 
 	}
 	
-	@Fix(AbstractDefaultFeatureValueProvider::ERROR_CODE_PROJECT)
+	@Fix(AbstractDefaultFeatureValueProvider::CODE_MISSING_PROJECT)
 	def void changeTargetProject(Issue issue, IssueResolutionAcceptor acceptor) {
 		val currentProject = EmfUriUtil.toFile(issue.uriToProblem).project.name
 		val iSemanticModification = [ EObject element, IModificationContext context| 

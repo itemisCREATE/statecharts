@@ -57,7 +57,7 @@ public class CoreLibraryDefaultFeatureValueProvider extends AbstractDefaultFeatu
 	public IStatus validateParameterValue(FeatureParameterValue parameterValue) {
 		String parameterName = parameterValue.getParameter().getName();
 		if (OUTLET_FEATURE_TARGET_PROJECT.equals(parameterName) && !access.projectExists(parameterValue.getStringValue()))
-			return error(String.format("The Project %s does not exist.", parameterValue.getStringValue()), ERROR_CODE_PROJECT);
+			return error(String.format("The Project %s does not exist.", parameterValue.getStringValue()), CODE_MISSING_PROJECT);
 		if (OUTLET_FEATURE_TARGET_PROJECT.equals(parameterName) && access.projectExists(parameterValue.getStringValue())
 				&& !access.projectOpened(parameterValue.getStringValue()))
 			return error(String.format("The Project %s is not open.", parameterValue.getStringValue()));
