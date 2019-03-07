@@ -92,7 +92,7 @@ public class GCCCommandExecutor {
 		}
 	}
 
-	private String readProcessInputStream(Process process) throws IOException {
+	protected String readProcessInputStream(Process process) throws IOException {
 		Reader reader = new InputStreamReader(process.getInputStream());
 		char[] buffer = new char[4096];
 		int count;
