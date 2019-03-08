@@ -13,7 +13,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 			runCycle();
 		}
 		
-		
 		private boolean f;
 		
 		
@@ -21,7 +20,6 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 			f = true;
 			runCycle();
 		}
-		
 		
 		private long a_exit;
 		

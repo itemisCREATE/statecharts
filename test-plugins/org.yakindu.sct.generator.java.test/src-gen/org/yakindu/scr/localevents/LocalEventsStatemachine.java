@@ -9,11 +9,11 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 			runCycle();
 		}
-		
 		
 		private long cycleCountSm;
 		

@@ -7,19 +7,19 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 			runCycle();
 		}
 		
-		
 		private boolean go;
+		
 		
 		public void raiseGo() {
 			go = true;
 			runCycle();
 		}
-		
 		
 		private long cLocalReaction;
 		

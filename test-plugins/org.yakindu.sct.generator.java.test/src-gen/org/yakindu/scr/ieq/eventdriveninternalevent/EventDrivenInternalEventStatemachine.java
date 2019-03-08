@@ -9,23 +9,40 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	
 		private boolean start;
 		
+		
 		public void raiseStart() {
-			start = true;
+			inEventQueue.add(
+				new Runnable() {
+					@Override
+					public void run() {
+						start = true;
+						singleCycle();
+					}
+				}
+			);
 			runCycle();
 		}
-		
 		
 		private boolean reset;
 		
+		
 		public void raiseReset() {
-			reset = true;
+			inEventQueue.add(
+				new Runnable() {
+					@Override
+					public void run() {
+						reset = true;
+						singleCycle();
+					}
+				}
+			);
 			runCycle();
 		}
-		
 		
 		private boolean e;
 		
 		private long eValue;
+		
 		
 		public boolean isRaisedE() {
 			return e;

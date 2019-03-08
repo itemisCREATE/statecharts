@@ -9,6 +9,7 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 		
 		private long eValue;
 		
+		
 		public void raiseE(long value) {
 			eValue = value;
 			e = true;

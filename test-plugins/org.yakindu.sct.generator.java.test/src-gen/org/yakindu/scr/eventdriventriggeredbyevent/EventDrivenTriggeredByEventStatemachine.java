@@ -8,11 +8,11 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 			runCycle();
 		}
-		
 		
 		private long x;
 		

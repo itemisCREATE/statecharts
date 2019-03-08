@@ -9,6 +9,7 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 		
 		private long eValue;
 		
+		
 		public void raiseE(long value) {
 			eValue = value;
 			e = true;

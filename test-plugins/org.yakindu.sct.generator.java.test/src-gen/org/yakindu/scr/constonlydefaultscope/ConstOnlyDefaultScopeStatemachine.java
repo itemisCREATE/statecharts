@@ -22,6 +22,7 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		
 		private long eValue;
 		
+		
 		public void raiseE(long value) {
 			eValue = value;
 			e = true;

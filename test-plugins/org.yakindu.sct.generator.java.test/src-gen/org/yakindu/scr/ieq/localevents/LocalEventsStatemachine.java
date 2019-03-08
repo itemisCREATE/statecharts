@@ -9,11 +9,19 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
-			e = true;
+			inEventQueue.add(
+				new Runnable() {
+					@Override
+					public void run() {
+						e = true;
+						singleCycle();
+					}
+				}
+			);
 			runCycle();
 		}
-		
 		
 		private long cycleCountSm;
 		

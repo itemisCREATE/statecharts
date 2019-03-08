@@ -10,11 +10,19 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
-			e = true;
+			inEventQueue.add(
+				new Runnable() {
+					@Override
+					public void run() {
+						e = true;
+						singleCycle();
+					}
+				}
+			);
 			runCycle();
 		}
-		
 		
 		private long x;
 		

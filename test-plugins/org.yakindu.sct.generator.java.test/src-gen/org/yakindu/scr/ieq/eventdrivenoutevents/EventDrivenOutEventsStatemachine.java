@@ -9,13 +9,22 @@ public class EventDrivenOutEventsStatemachine implements IEventDrivenOutEventsSt
 	
 		private boolean e1;
 		
+		
 		public void raiseE1() {
-			e1 = true;
+			inEventQueue.add(
+				new Runnable() {
+					@Override
+					public void run() {
+						e1 = true;
+						singleCycle();
+					}
+				}
+			);
 			runCycle();
 		}
 		
-		
 		private boolean e2;
+		
 		
 		public boolean isRaisedE2() {
 			return e2;

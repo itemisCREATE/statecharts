@@ -7,6 +7,7 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}

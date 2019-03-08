@@ -7,6 +7,7 @@ public class ChildFirstLocalReactionsStatemachine implements IChildFirstLocalRea
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
