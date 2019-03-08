@@ -118,7 +118,7 @@ GeneratorModel for yakindu::java {
 		}
 	}
 	
-statechart EventDrivenOutEvents {
+	statechart EventDrivenOutEvents {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
@@ -144,6 +144,25 @@ statechart EventDrivenOutEvents {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+	}
+	
+	statechart ineventqueue.InEventQueue {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+		
+		
+		feature Naming {
+			basePackage =  "org.yakindu.scr.ieq"
+			
+		}
+		
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+			InEventQueue = true
 		}
 	}
 }
