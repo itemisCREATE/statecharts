@@ -41,7 +41,7 @@ class EventDrivenEventCode extends EventCode {
 						@Override
 						public void run() {
 							«IF hasValue»«valueIdentifier» = value;«ENDIF»
-							«identifier» = true;					
+							«identifier» = true;
 							singleCycle();
 						}
 					}
@@ -53,7 +53,7 @@ class EventDrivenEventCode extends EventCode {
 			'''
 			public «sync»void raise«name.asEscapedName»(«IF hasValue»final «typeSpecifier.targetLanguageName» value«ENDIF») {
 				«IF hasValue»«valueIdentifier» = value;«ENDIF»
-				«identifier» = true;					
+				«identifier» = true;
 				runCycle();
 			}
 			'''
