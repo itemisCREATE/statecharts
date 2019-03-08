@@ -42,7 +42,7 @@ public interface IJavaFeatureConstants {
 
 	public static final String USE_JAVA_INT_FOR_INTEGER = "UseJavaIntForInteger";
 
-	public static final String IN_EVENT_QUEUE = "InEventQueue";
+	public static final String IN_EVENT_QUEUE = "inEventQueue";
 
 	public static final String SYNCHRONIZED = "synchronized";
 

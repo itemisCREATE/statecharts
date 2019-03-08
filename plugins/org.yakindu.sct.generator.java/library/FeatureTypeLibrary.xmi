@@ -34,7 +34,7 @@
         optional="true"
         parameterType="BOOLEAN"/>
     <parameters
-        name="InEventQueue"
+        name="inEventQueue"
         optional="true"
         parameterType="BOOLEAN"/>
     <parameters
