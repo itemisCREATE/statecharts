@@ -42,11 +42,17 @@ class EventDrivenEventCode extends EventCode {
 						public void run() {
 							«IF hasValue»«valueIdentifier» = value;«ENDIF»
 							«identifier» = true;
+							«IF needsRunnable»
+							runCycle();
+							«ELSE»
 							singleCycle();
+							«ENDIF»
 						}
 					}
 				);
+				«IF !needsRunnable»
 				runCycle();
+				«ENDIF»
 			}
 			'''
 		} else {

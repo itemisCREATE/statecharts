@@ -24,7 +24,7 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-			InEventQueue = true
+			inEventQueue = true
 		}
 
 		feature FunctionInlining {
@@ -53,7 +53,7 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-			InEventQueue = true
+			inEventQueue = true
 		}
 
 		feature FunctionInlining {
@@ -84,7 +84,7 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-			InEventQueue = true
+			inEventQueue = true
 		}
 
 		feature FunctionInlining {
@@ -113,7 +113,7 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-			InEventQueue = true
+			inEventQueue = true
 		}
 
 		feature FunctionInlining {
@@ -142,7 +142,7 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-			InEventQueue = true
+			inEventQueue = true
 		}
 
 		feature FunctionInlining {
@@ -173,7 +173,7 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-			InEventQueue = true
+			inEventQueue = true
 		}
 	}
 }
