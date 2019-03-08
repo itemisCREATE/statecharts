@@ -120,6 +120,7 @@ public interface ExecutionContext extends NamedElement, CompositeSlot {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='final &lt;%org.eclipse.xtext.xbase.lib.Functions.Function1%&gt;&lt;&lt;%org.yakindu.sct.model.sruntime.ExecutionEvent%&gt;, &lt;%java.lang.Boolean%&gt;&gt; _function = new &lt;%org.eclipse.xtext.xbase.lib.Functions.Function1%&gt;&lt;&lt;%org.yakindu.sct.model.sruntime.ExecutionEvent%&gt;, &lt;%java.lang.Boolean%&gt;&gt;()\n{\n\tpublic &lt;%java.lang.Boolean%&gt; apply(final &lt;%org.yakindu.sct.model.sruntime.ExecutionEvent%&gt; it)\n\t{\n\t\treturn &lt;%java.lang.Boolean%&gt;.valueOf(it.isRaised());\n\t}\n};\nreturn &lt;%org.eclipse.xtext.xbase.lib.IterableExtensions%&gt;.&lt;&lt;%org.yakindu.sct.model.sruntime.ExecutionEvent%&gt;&gt;toList(&lt;%org.eclipse.xtext.xbase.lib.IterableExtensions%&gt;.&lt;&lt;%org.yakindu.sct.model.sruntime.ExecutionEvent%&gt;&gt;filter(this.getAllEvents(), _function));'"
 	 * @generated
 	 */
 	List<ExecutionEvent> getRaisedEvents();
@@ -128,6 +129,7 @@ public interface ExecutionContext extends NamedElement, CompositeSlot {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model unique="false" qualifiedNameUnique="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='&lt;%org.yakindu.sct.model.sruntime.ExecutionVariable%&gt; _xblockexpression = null;\n{\n\t&lt;%org.eclipse.core.runtime.Assert%&gt;.isNotNull(qualifiedName);\n\tfinal &lt;%org.eclipse.xtext.xbase.lib.Functions.Function1%&gt;&lt;&lt;%org.yakindu.sct.model.sruntime.ExecutionVariable%&gt;, &lt;%java.lang.Boolean%&gt;&gt; _function = new &lt;%org.eclipse.xtext.xbase.lib.Functions.Function1%&gt;&lt;&lt;%org.yakindu.sct.model.sruntime.ExecutionVariable%&gt;, &lt;%java.lang.Boolean%&gt;&gt;()\n\t{\n\t\tpublic &lt;%java.lang.Boolean%&gt; apply(final &lt;%org.yakindu.sct.model.sruntime.ExecutionVariable%&gt; it)\n\t\t{\n\t\t\t&lt;%java.lang.String%&gt; _fqName = it.getFqName();\n\t\t\treturn &lt;%java.lang.Boolean%&gt;.valueOf(&lt;%com.google.common.base.Objects%&gt;.equal(qualifiedName, _fqName));\n\t\t}\n\t};\n\t_xblockexpression = &lt;%org.eclipse.xtext.xbase.lib.IterableExtensions%&gt;.&lt;&lt;%org.yakindu.sct.model.sruntime.ExecutionVariable%&gt;&gt;findFirst(this.getAllVariables(), _function);\n}\nreturn _xblockexpression;'"
 	 * @generated
 	 */
 	ExecutionVariable getVariable(String qualifiedName);
@@ -136,6 +138,7 @@ public interface ExecutionContext extends NamedElement, CompositeSlot {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model unique="false" qualifiedNameUnique="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='&lt;%org.yakindu.sct.model.sruntime.ExecutionEvent%&gt; _xblockexpression = null;\n{\n\t&lt;%org.eclipse.core.runtime.Assert%&gt;.isNotNull(qualifiedName);\n\tfinal &lt;%org.eclipse.xtext.xbase.lib.Functions.Function1%&gt;&lt;&lt;%org.yakindu.sct.model.sruntime.ExecutionEvent%&gt;, &lt;%java.lang.Boolean%&gt;&gt; _function = new &lt;%org.eclipse.xtext.xbase.lib.Functions.Function1%&gt;&lt;&lt;%org.yakindu.sct.model.sruntime.ExecutionEvent%&gt;, &lt;%java.lang.Boolean%&gt;&gt;()\n\t{\n\t\tpublic &lt;%java.lang.Boolean%&gt; apply(final &lt;%org.yakindu.sct.model.sruntime.ExecutionEvent%&gt; it)\n\t\t{\n\t\t\t&lt;%java.lang.String%&gt; _fqName = it.getFqName();\n\t\t\treturn &lt;%java.lang.Boolean%&gt;.valueOf(&lt;%com.google.common.base.Objects%&gt;.equal(qualifiedName, _fqName));\n\t\t}\n\t};\n\t_xblockexpression = &lt;%org.eclipse.xtext.xbase.lib.IterableExtensions%&gt;.&lt;&lt;%org.yakindu.sct.model.sruntime.ExecutionEvent%&gt;&gt;findFirst(this.getAllEvents(), _function);\n}\nreturn _xblockexpression;'"
 	 * @generated
 	 */
 	ExecutionEvent getEvent(String qualifiedName);
@@ -144,6 +147,7 @@ public interface ExecutionContext extends NamedElement, CompositeSlot {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model unique="false" qualifiedNameUnique="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='&lt;%org.yakindu.sct.model.sruntime.ExecutionSlot%&gt; _xblockexpression = null;\n{\n\t&lt;%org.eclipse.core.runtime.Assert%&gt;.isNotNull(qualifiedName);\n\tfinal &lt;%org.eclipse.xtext.xbase.lib.Functions.Function1%&gt;&lt;&lt;%org.yakindu.sct.model.sruntime.ExecutionSlot%&gt;, &lt;%java.lang.Boolean%&gt;&gt; _function = new &lt;%org.eclipse.xtext.xbase.lib.Functions.Function1%&gt;&lt;&lt;%org.yakindu.sct.model.sruntime.ExecutionSlot%&gt;, &lt;%java.lang.Boolean%&gt;&gt;()\n\t{\n\t\tpublic &lt;%java.lang.Boolean%&gt; apply(final &lt;%org.yakindu.sct.model.sruntime.ExecutionSlot%&gt; it)\n\t\t{\n\t\t\t&lt;%java.lang.String%&gt; _fqName = it.getFqName();\n\t\t\treturn &lt;%java.lang.Boolean%&gt;.valueOf(&lt;%com.google.common.base.Objects%&gt;.equal(qualifiedName, _fqName));\n\t\t}\n\t};\n\t_xblockexpression = &lt;%org.eclipse.xtext.xbase.lib.IterableExtensions%&gt;.&lt;&lt;%org.yakindu.sct.model.sruntime.ExecutionSlot%&gt;&gt;findFirst(this.getAllSlots(), _function);\n}\nreturn _xblockexpression;'"
 	 * @generated
 	 */
 	ExecutionSlot getSlot(String qualifiedName);
@@ -152,6 +156,7 @@ public interface ExecutionContext extends NamedElement, CompositeSlot {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return &lt;%org.eclipse.xtext.xbase.lib.IterableExtensions%&gt;.&lt;&lt;%org.yakindu.sct.model.sruntime.ExecutionEvent%&gt;&gt;toList(&lt;%com.google.common.collect.Iterables%&gt;.&lt;&lt;%org.yakindu.sct.model.sruntime.ExecutionEvent%&gt;&gt;filter(this.getAllSlots(), &lt;%org.yakindu.sct.model.sruntime.ExecutionEvent%&gt;.class));'"
 	 * @generated
 	 */
 	List<ExecutionEvent> getAllEvents();
@@ -160,6 +165,7 @@ public interface ExecutionContext extends NamedElement, CompositeSlot {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return &lt;%org.eclipse.xtext.xbase.lib.IterableExtensions%&gt;.&lt;&lt;%org.yakindu.sct.model.sruntime.ExecutionVariable%&gt;&gt;toList(&lt;%com.google.common.collect.Iterables%&gt;.&lt;&lt;%org.yakindu.sct.model.sruntime.ExecutionVariable%&gt;&gt;filter(this.getAllSlots(), &lt;%org.yakindu.sct.model.sruntime.ExecutionVariable%&gt;.class));'"
 	 * @generated
 	 */
 	List<ExecutionVariable> getAllVariables();
@@ -168,6 +174,7 @@ public interface ExecutionContext extends NamedElement, CompositeSlot {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='&lt;%org.eclipse.emf.common.util.BasicEList%&gt;&lt;&lt;%org.yakindu.sct.model.sruntime.ExecutionSlot%&gt;&gt; _xblockexpression = null;\n{\n\t&lt;%org.eclipse.emf.common.util.BasicEList%&gt;&lt;&lt;%org.yakindu.sct.model.sruntime.ExecutionSlot%&gt;&gt; result = new &lt;%org.eclipse.emf.common.util.BasicEList%&gt;&lt;&lt;%org.yakindu.sct.model.sruntime.ExecutionSlot%&gt;&gt;();\n\tthis.addSlots(result, this.getSlots(), &lt;%com.google.common.collect.Lists%&gt;.&lt;&lt;%org.yakindu.sct.model.sruntime.ExecutionSlot%&gt;&gt;newArrayList());\n\t_xblockexpression = result;\n}\nreturn _xblockexpression;'"
 	 * @generated
 	 */
 	List<ExecutionSlot> getAllSlots();
@@ -176,6 +183,7 @@ public interface ExecutionContext extends NamedElement, CompositeSlot {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model resultUnique="false" resultMany="true" slotsUnique="false" slotsMany="true" visitedMany="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='final &lt;%java.util.function.Consumer%&gt;&lt;&lt;%org.yakindu.sct.model.sruntime.ExecutionSlot%&gt;&gt; _function = new &lt;%java.util.function.Consumer%&gt;&lt;&lt;%org.yakindu.sct.model.sruntime.ExecutionSlot%&gt;&gt;()\n{\n\tpublic void accept(final &lt;%org.yakindu.sct.model.sruntime.ExecutionSlot%&gt; it)\n\t{\n\t\tboolean _add = visited.add(it);\n\t\tif (_add)\n\t\t{\n\t\t\tresult.add(it);\n\t\t\tif ((it instanceof &lt;%org.yakindu.sct.model.sruntime.CompositeSlot%&gt;))\n\t\t\t{\n\t\t\t\t&lt;%this%&gt;.addSlots(result, ((&lt;%org.yakindu.sct.model.sruntime.CompositeSlot%&gt;)it).getSlots(false), visited);\n\t\t\t}\n\t\t}\n\t}\n};\nslots.forEach(_function);'"
 	 * @generated
 	 */
 	void addSlots(List<ExecutionSlot> result, List<ExecutionSlot> slots, List<ExecutionSlot> visited);
