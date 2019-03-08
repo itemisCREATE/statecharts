@@ -12,11 +12,9 @@ package org.yakindu.sct.generator.c;
 
 import org.yakindu.sct.generator.c.submodules.APIGenerator;
 import org.yakindu.sct.generator.c.submodules.EventCode;
-import org.yakindu.sct.generator.c.submodules.InternalFunctionsGenerator;
 import org.yakindu.sct.generator.c.submodules.StatechartTypes;
 import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenAPIGenerator;
 import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenEventCode;
-import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenInternalFunctionsGenerator;
 import org.yakindu.sct.generator.c.submodules.eventdriven.EventDrivenStatechartTypes;
 import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
@@ -28,7 +26,6 @@ public class CCodeGeneratorEventDrivenModule implements IGeneratorModule {
 	public void configure(GeneratorEntry entry, Binder binder) {
 		binder.bind(APIGenerator.class).to(EventDrivenAPIGenerator.class);
 		binder.bind(EventCode.class).to(EventDrivenEventCode.class);
-		binder.bind(InternalFunctionsGenerator.class).to(EventDrivenInternalFunctionsGenerator.class);
 		binder.bind(StatechartTypes.class).to(EventDrivenStatechartTypes.class);
 	}
 

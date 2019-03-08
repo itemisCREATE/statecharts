@@ -12,19 +12,21 @@ package org.yakindu.sct.generator.c.submodules.eventdriven
 
 import com.google.inject.Inject
 import org.yakindu.base.types.Direction
+import org.yakindu.sct.generator.c.CGeneratorConstants
+import org.yakindu.sct.generator.c.GeneratorPredicate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.generator.c.ISourceFragment
 import org.yakindu.sct.generator.c.extensions.EventNaming
 import org.yakindu.sct.generator.c.extensions.Naming
+import org.yakindu.sct.generator.c.types.CLiterals
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
-import org.yakindu.sct.generator.c.ISourceFragment
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
-import org.yakindu.sct.generator.c.types.CLiterals
 
 /**
  * @author René Beckmann
@@ -36,26 +38,60 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject extension EventNaming
 	@Inject protected extension CLiterals
+	@Inject extension GeneratorPredicate
 	
 	override implementations(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) '''
-		«IF hasLocalEvents»
-		«eventFunctions»
-		
+		«IF needsQueues»
 		«eventQueueFunctions»
 		
-		«addToEventQueueFunction»
+		«eventInit»
 		
-		«addToEventQueueValueFunction»
+		«addToEventQueueFunction»
+		«ENDIF»
+		«IF needsDispatchEventFunction»
 		
 		«dispatchEventFunction»
 		«ENDIF»
+		«IF needsNextEventFunction»
+		
+		«nextEventFunction»
+		«ENDIF»
+		«IF hasQueuedEventsWithValue»
+		
+		«valueEventInit»
+		
+		«addToEventQueueValueFunction»
+		«ENDIF»
 	'''
+	
+	override declarations(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
+		'''
+		«IF needsQueues»
+			static void «eventQueueInitFunction»(«eventQueueTypeName» * eq);
+			static «CGeneratorConstants.INT_TYPE» «eventQueueSizeFunction»(«eventQueueTypeName» * eq);
+			static «internalEventStructTypeName» «eventQueuePopFunction»(«eventQueueTypeName» * eq);
+			static «CGeneratorConstants.BOOL_TYPE» «eventQueuePushFunction»(«eventQueueTypeName» * eq, «internalEventStructTypeName» ev);
+			static void «eventInitFunction»(«internalEventStructTypeName» * ev, «eventEnumName» name);
+			static void «addToQueueFctID»(«eventQueueTypeName» * eq, «eventEnumName» name);
+		«ENDIF»
+		«IF needsDispatchEventFunction»
+			static void «dispatchEventFctID»(«scHandleDecl», const «internalEventStructTypeName» * event);
+		«ENDIF»
+		«IF needsNextEventFunction»
+			static «internalEventStructTypeName» «nextEventFctID»(«scHandleDecl»);
+		«ENDIF»
+		
+		«IF hasQueuedEventsWithValue»
+			static void «valueEventInitFunction»(«internalEventStructTypeName» * ev, «eventEnumName» name, void * value);
+			static void «addToQueueValueFctID»(«eventQueueTypeName» * eq, «eventEnumName» name, void * value);
+		«ENDIF»
+		'''
+	}
 	
 	def dispatchEventFunction(ExecutionFlow it) '''
 		static void «dispatchEventFctID»(«scHandleDecl», const «internalEventStructTypeName» * event) {
 			switch(event->name) {
-				«FOR s : scopes.filter(StatechartScope)»
-					«FOR e : s.declarations.filter(EventDefinition).filter[direction == Direction::LOCAL]»
+				«FOR e : queuedEvents»
 					case «e.eventEnumMemberName»:
 					{
 						«e.access» = «TRUE_LITERAL»;
@@ -64,7 +100,6 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 						«ENDIF»
 						break;
 					}
-					«ENDFOR»
 				«ENDFOR»
 				default:
 					break;
@@ -73,53 +108,53 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 	'''
 	
 	def addToEventQueueFunction(ExecutionFlow it) '''
-	static void «addToQueueFctID»(«scHandleDecl», «eventEnumName» name)
-	{
-		«internalEventStructTypeName» event;
-		«eventInitFunction»(&event, name);
-		«eventQueuePushFunction»(&(handle->«internalQueue»), event);
-	}
+		static void «addToQueueFctID»(«eventQueueTypeName» * eq, «eventEnumName» name)
+		{
+			«internalEventStructTypeName» event;
+			«eventInitFunction»(&event, name);
+			«eventQueuePushFunction»(eq, event);
+		}
 	'''
 	
 	def addToEventQueueValueFunction(ExecutionFlow it) '''
-	«IF hasLocalEventsWithValue»
-	static void «addToQueueValueFctID»(«scHandleDecl», «eventEnumName» name, void * value)
-	{
-		«internalEventStructTypeName» event;
-		«valueEventInitFunction»(&event, name, value);
-		«eventQueuePushFunction»(&(handle->«internalQueue»), event);
-	}
-	«ENDIF»
+		static void «addToQueueValueFctID»(«eventQueueTypeName» * eq, «eventEnumName» name, void * value)
+		{
+			«internalEventStructTypeName» event;
+			«valueEventInitFunction»(&event, name, value);
+			«eventQueuePushFunction»(eq, event);
+		}
 	'''
 	
-	def eventFunctions(ExecutionFlow it) {
+	def eventInit(ExecutionFlow it) {
 		'''
-			static void «eventInitFunction»(«internalEventStructTypeName» * ev, «eventEnumName» name)
-			{
-				ev->name = name;
-				«IF hasLocalEventsWithValue»
-					ev->has_value = «FALSE_LITERAL»;
-				«ENDIF»
-			}
-			«IF hasLocalEventsWithValue»
-				
-				static void «valueEventInitFunction»(«internalEventStructTypeName» * ev, «eventEnumName» name, void * value)
-				{
-					ev->name = name;
-					ev->has_value = «TRUE_LITERAL»;
-					
-					switch(name)
-					{
-						«FOR e : localEvents.filter[hasValue]»
-							case «e.eventEnumMemberName»:
-								ev->value.«e.eventEnumMemberName»_value = *((«e.typeSpecifier.targetLanguageName»*)value);
-								break;
-						«ENDFOR»
-						default:
-							break;
-					}
-				}
+		static void «eventInitFunction»(«internalEventStructTypeName» * ev, «eventEnumName» name)
+		{
+			ev->name = name;
+			«IF hasQueuedEventsWithValue»
+				ev->has_value = «FALSE_LITERAL»;
 			«ENDIF»
+		}
+		'''
+	}
+	
+	def valueEventInit(ExecutionFlow it) {
+		'''
+		static void «valueEventInitFunction»(«internalEventStructTypeName» * ev, «eventEnumName» name, void * value)
+		{
+			ev->name = name;
+			ev->has_value = «TRUE_LITERAL»;
+			
+			switch(name)
+			{
+				«FOR e : queuedEventsWithValue»
+					case «e.eventEnumMemberName»:
+						ev->value.«e.eventEnumMemberName»_value = *((«e.typeSpecifier.targetLanguageName»*)value);
+						break;
+				«ENDFOR»
+				default:
+					break;
+			}
+		}
 		'''
 	}
 	
@@ -179,8 +214,25 @@ class EventDrivenStatemachineSourceFragment implements ISourceFragment {
 		'''
 	}
 	
-	override declarations(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
-		''''''
+	def nextEventFunction(ExecutionFlow it) {
+		'''
+		static «internalEventStructTypeName» «nextEventFctID»(«scHandleDecl»)
+		{
+			«internalEventStructTypeName» next_event;
+			«eventInitFunction»(&next_event, «invalidEventEnumName(it)»);
+			«IF needsInternalEventQueue»
+			if(«eventQueueSizeFunction»(&(«scHandle»->«internalQueue»)) > 0) {
+				next_event = «eventQueuePopFunction»(&(«scHandle»->«internalQueue»));
+			}
+			«ENDIF»
+			«IF needsInEventQueue»
+			«IF needsInternalEventQueue»else «ENDIF»if(«eventQueueSizeFunction»(&(«scHandle»->«inEventQueue»)) > 0) {
+				next_event = «eventQueuePopFunction»(&(«scHandle»->«inEventQueue»));
+			}
+			«ENDIF»
+			return next_event;
+		}
+		'''
 	}
 	
 	override fileComment(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
