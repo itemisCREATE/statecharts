@@ -48,7 +48,7 @@
   </types>
   <types name="RunnableWrapper"
       deprecated="true"
-      comment="Generates a runnable wrapper for the state machine"
+      comment="Use parameter &quot;runnable&quot; in feature &quot;GeneralFeatures&quot; instead."
       optional="true">
     <parameters
         name="namePrefix"
@@ -61,6 +61,7 @@
   </types>
   <types name="SynchronizedWrapper"
       deprecated="true"
+      comment="Use parameter &quot;synchronized&quot; in feature &quot;GeneralFeatures&quot; instead."
       optional="true">
     <parameters
         name="namePrefix"
