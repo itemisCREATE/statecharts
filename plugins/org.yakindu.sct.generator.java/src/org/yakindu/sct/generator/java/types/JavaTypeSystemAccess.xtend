@@ -30,10 +30,10 @@ class JavaTypeSystemAccess implements ICodegenTypeSystemAccess {
 		val originalType = type?.originType
 		switch (originalType) {
 			case originalType === null || ts.isSame(originalType, getType(VOID)) : 'void'
-			case ts.isSame(originalType, getType(REAL)): "double"
-			case ts.isSame(originalType, getType(INTEGER)): "long"
-			case ts.isSame(originalType, getType(BOOLEAN)): "boolean"
-			case ts.isSame(originalType, getType(STRING)): "String"
+			case ts.isReal(originalType): "double"
+			case ts.isInteger(originalType): "long"
+			case ts.isBoolean(originalType): "boolean"
+			case ts.isString(originalType): "String"
 			default: "//" + this
 		};
 	}

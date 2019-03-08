@@ -223,7 +223,7 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 	}
 
 	def protected dispatch Object typeCast(Object value, Type type) {
-		if(ts.isSame(type, ts.getType(ITypeSystem.ANY))) return value
+		if(ts.isAny(type)) return value
 		return value
 	}
 

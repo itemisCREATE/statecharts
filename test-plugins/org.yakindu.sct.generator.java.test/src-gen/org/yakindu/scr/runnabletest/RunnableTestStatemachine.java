@@ -23,6 +23,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		
 		private long ev_outValue;
 		
+		
 		public boolean isRaisedEv_out() {
 			return ev_out;
 		}
@@ -44,6 +45,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		private boolean ev_in;
 		
 		private long ev_inValue;
+		
 		
 		public void raiseEv_in(long value) {
 			ev_inValue = value;
@@ -266,7 +268,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	
 	public void timeElapsed(int eventID) {
 		timeEvents[eventID] = true;
-		runCycle();
 	}
 	
 	public SCInterface getSCInterface() {

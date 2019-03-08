@@ -7,6 +7,7 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
@@ -14,6 +15,7 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		private boolean e2;
 		
 		private long e2Value;
+		
 		
 		public void raiseE2(long value) {
 			e2Value = value;

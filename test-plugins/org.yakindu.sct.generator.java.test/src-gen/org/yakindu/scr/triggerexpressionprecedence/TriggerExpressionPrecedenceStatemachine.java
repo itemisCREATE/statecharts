@@ -7,11 +7,13 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 	
 		private boolean e1;
 		
+		
 		public void raiseE1() {
 			e1 = true;
 		}
 		
 		private boolean e2;
+		
 		
 		public void raiseE2() {
 			e2 = true;

@@ -7,6 +7,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 	
 		private boolean myEvent;
 		
+		
 		public void raiseMyEvent() {
 			myEvent = true;
 		}

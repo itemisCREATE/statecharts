@@ -7,11 +7,13 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	
 		private boolean auto;
 		
+		
 		public void raiseAuto() {
 			auto = true;
 		}
 		
 		private boolean breakEvent;
+		
 		
 		public void raiseBreak() {
 			breakEvent = true;

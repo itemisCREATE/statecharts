@@ -39,6 +39,7 @@ import org.yakindu.sct.model.stext.serializer.SCTSerializer
 import org.yakindu.sct.model.stext.terminals.STextValueConverterService
 import org.yakindu.sct.model.stext.validation.STextNamesAreUniqueValidationHelper
 import org.yakindu.sct.model.stext.formatting.STextFormatter
+import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider
 
 /** 
  * Use this class to register components to be used at runtime / without the
@@ -65,7 +66,7 @@ class STextRuntimeModule extends AbstractSTextRuntimeModule {
 		binder.bind(ITypeSystem).toInstance(GenericTypeSystem.getInstance())
 	}
 
-	def Class<? extends SyntaxErrorMessageProvider> ISyntaxErrorMessageProvider() {
+	def Class<? extends ISyntaxErrorMessageProvider> bindISyntaxErrorMessageProvider() {
 		SyntaxErrorMessageProvider
 	}
 

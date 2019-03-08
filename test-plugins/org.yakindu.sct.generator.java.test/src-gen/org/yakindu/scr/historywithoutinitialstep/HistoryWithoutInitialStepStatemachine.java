@@ -7,11 +7,13 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	
 		private boolean toA;
 		
+		
 		public void raiseToA() {
 			toA = true;
 		}
 		
 		private boolean toB;
+		
 		
 		public void raiseToB() {
 			toB = true;
@@ -19,11 +21,13 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		
 		private boolean toHistory;
 		
+		
 		public void raiseToHistory() {
 			toHistory = true;
 		}
 		
 		private boolean next;
+		
 		
 		public void raiseNext() {
 			next = true;

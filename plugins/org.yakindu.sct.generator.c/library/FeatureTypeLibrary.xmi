@@ -46,4 +46,11 @@
         optional="true"
         parameterType="BOOLEAN"/>
   </types>
+  <types name="GeneratorOptions"
+      optional="true">
+    <parameters
+        name="inEventQueue"
+        optional="true"
+        parameterType="BOOLEAN"/>
+  </types>
 </sgen:FeatureTypeLibrary>

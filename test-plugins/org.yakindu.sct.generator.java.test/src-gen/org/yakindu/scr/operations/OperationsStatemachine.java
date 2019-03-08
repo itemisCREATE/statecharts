@@ -24,6 +24,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		}
 		private boolean ev;
 		
+		
 		public void raiseEv() {
 			ev = true;
 		}

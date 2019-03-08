@@ -7,6 +7,7 @@ public class DynamicChoiceStatemachine implements IDynamicChoiceStatemachine {
 	
 		private boolean reset;
 		
+		
 		public void raiseReset() {
 			reset = true;
 		}

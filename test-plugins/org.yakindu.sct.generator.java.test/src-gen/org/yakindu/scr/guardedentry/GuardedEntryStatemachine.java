@@ -7,6 +7,7 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}

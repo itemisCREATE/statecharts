@@ -7,6 +7,7 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 	
 		private boolean reset;
 		
+		
 		public void raiseReset() {
 			reset = true;
 		}

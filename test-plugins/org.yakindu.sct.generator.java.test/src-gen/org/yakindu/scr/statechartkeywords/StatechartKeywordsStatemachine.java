@@ -21,6 +21,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		}
 		private boolean operationCallbackEvent;
 		
+		
 		public boolean isRaisedOperationCallback() {
 			return operationCallbackEvent;
 		}
@@ -33,6 +34,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 		}
 		
 		private boolean listenersEvent;
+		
 		
 		public boolean isRaisedListeners() {
 			return listenersEvent;
@@ -340,7 +342,6 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	
 	public void timeElapsed(int eventID) {
 		timeEvents[eventID] = true;
-		runCycle();
 	}
 	
 	public SCIIf getSCIIf() {

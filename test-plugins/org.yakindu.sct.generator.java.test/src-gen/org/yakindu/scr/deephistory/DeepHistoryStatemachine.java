@@ -7,11 +7,13 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	
 		private boolean event1;
 		
+		
 		public void raiseEvent1() {
 			event1 = true;
 		}
 		
 		private boolean event2;
+		
 		
 		public void raiseEvent2() {
 			event2 = true;
@@ -19,11 +21,13 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		
 		private boolean event3;
 		
+		
 		public void raiseEvent3() {
 			event3 = true;
 		}
 		
 		private boolean event4;
+		
 		
 		public void raiseEvent4() {
 			event4 = true;
@@ -31,11 +35,13 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		
 		private boolean event5;
 		
+		
 		public void raiseEvent5() {
 			event5 = true;
 		}
 		
 		private boolean event6;
+		
 		
 		public void raiseEvent6() {
 			event6 = true;
@@ -43,17 +49,20 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		
 		private boolean event7;
 		
+		
 		public void raiseEvent7() {
 			event7 = true;
 		}
 		
 		private boolean event8;
 		
+		
 		public void raiseEvent8() {
 			event8 = true;
 		}
 		
 		private boolean event9;
+		
 		
 		public void raiseEvent9() {
 			event9 = true;

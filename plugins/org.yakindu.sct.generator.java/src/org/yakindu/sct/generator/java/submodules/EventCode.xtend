@@ -40,6 +40,7 @@ class EventCode {
 	
 	def generateEventDefinition(EventDefinition event, GeneratorEntry entry, InterfaceScope scope) '''
 		«event.fieldDeclaration»
+
 		«IF event.direction == Direction::IN»
 		
 		«event.generateInEventDefinition»

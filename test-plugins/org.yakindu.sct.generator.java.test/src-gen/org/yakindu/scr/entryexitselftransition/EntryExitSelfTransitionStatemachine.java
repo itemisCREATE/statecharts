@@ -7,11 +7,13 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
 		
 		private boolean e1;
+		
 		
 		public void raiseE1() {
 			e1 = true;

@@ -7,6 +7,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	
 		private boolean e1;
 		
+		
 		public boolean isRaisedE1() {
 			return e1;
 		}
@@ -16,6 +17,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		}
 		
 		private boolean e2;
+		
 		
 		public void raiseE2() {
 			e2 = true;

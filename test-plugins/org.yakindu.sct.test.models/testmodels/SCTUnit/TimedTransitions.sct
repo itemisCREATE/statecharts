@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_hIDusFEHEeOc8J-qhtddTg" specification="internal:&#xA;var x:integer=0&#xA;var y:integer=0&#xA;every 1s / x+=1&#xA;oncycle / y+=1" name="TimedTransitions">
+  <sgraph:Statechart xmi:id="_hIDusFEHEeOc8J-qhtddTg" specification="@CycleBased(200)&#xA;&#xA;interface:&#xA;var seconds: integer = 0&#xA;var cycles: integer = 0&#xA;&#xA;internal:&#xA;every 1s / seconds+=1&#xA;oncycle / cycles+=1" name="TimedTransitions">
     <regions xmi:id="_hIGyAlEHEeOc8J-qhtddTg" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_ntZtAFXTEeOE_N2O5IeRFg">
         <outgoingTransitions xmi:id="_oZDSEFXTEeOE_N2O5IeRFg" specification="" target="_kWy9kFXTEeOE_N2O5IeRFg"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_kWy9kFXTEeOE_N2O5IeRFg" name="Start" incomingTransitions="_oZDSEFXTEeOE_N2O5IeRFg">
-        <outgoingTransitions xmi:id="_uowVkFXTEeOE_N2O5IeRFg" specification="after 2s" target="_kopikFXTEeOE_N2O5IeRFg"/>
+        <outgoingTransitions xmi:id="_uowVkFXTEeOE_N2O5IeRFg" specification="after 1900ms" target="_kopikFXTEeOE_N2O5IeRFg"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_kopikFXTEeOE_N2O5IeRFg" specification="" name="End" incomingTransitions="_uowVkFXTEeOE_N2O5IeRFg"/>
     </regions>
@@ -78,6 +78,7 @@
       <layoutConstraint xsi:type="notation:Bounds" xmi:id="_hIfMjlEHEeOc8J-qhtddTg" x="10" y="10" width="200" height="400"/>
     </children>
     <styles xsi:type="notation:DiagramStyle" xmi:id="_hIGyAVEHEeOc8J-qhtddTg"/>
+    <styles xsi:type="notation:BooleanValueStyle" xmi:id="_ynxFgDmwEemCsbFn1a74Sg" name="inlineDefinitionSection"/>
     <edges xmi:id="_oZFuUFXTEeOE_N2O5IeRFg" type="Transition" element="_oZDSEFXTEeOE_N2O5IeRFg" source="_ntcwUFXTEeOE_N2O5IeRFg" target="_kW0ywFXTEeOE_N2O5IeRFg">
       <children xsi:type="notation:DecorationNode" xmi:id="_oZG8cFXTEeOE_N2O5IeRFg" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_oZG8cVXTEeOE_N2O5IeRFg"/>

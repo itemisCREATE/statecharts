@@ -7,11 +7,13 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	
 		private boolean b;
 		
+		
 		public void raiseB() {
 			b = true;
 		}
 		
 		private boolean d;
+		
 		
 		public void raiseD() {
 			d = true;

@@ -139,7 +139,7 @@ class StatemachineInterface {
 				public interface «scope.getInterfaceListenerName()» {
 					«FOR event : scope.eventDefinitions»
 						«IF event.direction == Direction::OUT»
-							«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+							«IF event.type !== null && !isVoid(event.type)»
 								void on«event.name.toFirstUpper()»Raised(«event.typeSpecifier.targetLanguageName» value);
 							«ELSE»
 								void on«event.name.toFirstUpper()»Raised();
@@ -168,7 +168,7 @@ class StatemachineInterface {
 		'''
 			«FOR event : scope.eventDefinitions»
 				«IF event.direction == Direction::IN»
-				«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+				«IF event.type !== null && !isVoid(event.type)»
 						void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value);
 					«ELSE»
 						void raise«event.name.asName»();
@@ -176,7 +176,7 @@ class StatemachineInterface {
 				«ELSEIF event.direction == Direction::OUT»
 					bool isRaised«event.name.asName»();
 					««« IMPORTANT: An event not specifying a type is regarded to have a void type
-				«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+				«IF event.type !== null && !isVoid(event.type)»
 						«event.typeSpecifier.targetLanguageName» get«event.name.asName»Value();
 					«ENDIF»	
 				«ENDIF»

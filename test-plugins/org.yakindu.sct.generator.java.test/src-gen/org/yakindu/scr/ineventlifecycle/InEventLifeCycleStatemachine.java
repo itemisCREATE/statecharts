@@ -7,6 +7,7 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}

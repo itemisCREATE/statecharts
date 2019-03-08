@@ -125,7 +125,7 @@ public class CompileGTestCommand {
 		command.add("-g");
 		command.add("-o");
 		command.add(getFileName(program));
-		command.add("-O1");
+		command.add("-O0");
 		if(wPedantic) {
 			command.add("-pedantic");
 			command.add("-pedantic-errors");
@@ -223,7 +223,7 @@ public class CompileGTestCommand {
 	
 	protected String compileCommand(String sourceFile, String objectFile) {
 		StringBuilder command = new StringBuilder();
-		command.append(compiler).append(" -c").append(" -o ").append(objectFile).append(" -O1 ").append(sourceFile);
+		command.append(compiler).append(" -c").append(" -o ").append(objectFile).append(" -O0 ").append(sourceFile);
 		if (dir != null)
 			command.append(" -I" + dir + "/include");
 		for (String include : includes) {

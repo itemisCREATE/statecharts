@@ -7,6 +7,7 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}

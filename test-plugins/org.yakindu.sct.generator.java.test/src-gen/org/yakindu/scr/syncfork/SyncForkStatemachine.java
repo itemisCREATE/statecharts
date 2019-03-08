@@ -7,11 +7,13 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
 		
 		private boolean f;
+		
 		
 		public void raiseF() {
 			f = true;

@@ -7,11 +7,13 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	
 		private boolean evA;
 		
+		
 		public void raiseEvA() {
 			evA = true;
 		}
 		
 		private boolean evB;
+		
 		
 		public boolean isRaisedEvB() {
 			return evB;
@@ -24,6 +26,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		private boolean evC;
 		
 		private boolean evCValue;
+		
 		
 		public void raiseEvC(boolean value) {
 			evCValue = value;
@@ -38,6 +41,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		private boolean evD;
 		
 		private long evDValue;
+		
 		
 		public boolean isRaisedEvD() {
 			return evD;
@@ -58,6 +62,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 		private double evEValue;
 		
+		
 		public void raiseEvE(double value) {
 			evEValue = value;
 			evE = true;
@@ -71,6 +76,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		private boolean evF;
 		
 		private String evFValue;
+		
 		
 		public boolean isRaisedEvF() {
 			return evF;
@@ -156,11 +162,13 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	
 		private boolean evA;
 		
+		
 		public void raiseEvA() {
 			evA = true;
 		}
 		
 		private boolean evB;
+		
 		
 		public boolean isRaisedEvB() {
 			return evB;
@@ -173,6 +181,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		private boolean evC;
 		
 		private boolean evCValue;
+		
 		
 		public void raiseEvC(boolean value) {
 			evCValue = value;
@@ -187,6 +196,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		private boolean evD;
 		
 		private long evDValue;
+		
 		
 		public boolean isRaisedEvD() {
 			return evD;
@@ -207,6 +217,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 		private double evEValue;
 		
+		
 		public void raiseEvE(double value) {
 			evEValue = value;
 			evE = true;
@@ -220,6 +231,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		private boolean evF;
 		
 		private String evFValue;
+		
 		
 		public boolean isRaisedEvF() {
 			return evF;

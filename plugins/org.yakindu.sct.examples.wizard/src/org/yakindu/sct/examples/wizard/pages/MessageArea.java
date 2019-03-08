@@ -136,12 +136,12 @@ public class MessageArea extends Composite {
 		show();
 	}
 	
-	public void showProRequired() {
+	public void showDependenciesMissing() {
 		state = State.INSTALL;
 		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_INFORMATION));
-		textLabel.setText("This example requires YAKINDU Statechart Tools Professional Edition. Do you want to download it?");
+		textLabel.setText("This example requires additional features. Do you want to install them?");
 		textLabel.pack();
-		button.setText("Download");
+		button.setText("Install Dependencies...");
 		button.setVisible(true);
 		show();
 	}

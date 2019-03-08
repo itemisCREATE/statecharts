@@ -7,6 +7,7 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}

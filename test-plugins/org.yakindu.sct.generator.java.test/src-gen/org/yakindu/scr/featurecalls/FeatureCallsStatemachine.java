@@ -7,6 +7,7 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 	
 		private boolean event1;
 		
+		
 		public void raiseEvent1() {
 			event1 = true;
 		}

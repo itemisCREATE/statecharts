@@ -9,6 +9,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		
 		private long integerEventValue;
 		
+		
 		public void raiseIntegerEvent(long value) {
 			integerEventValue = value;
 			integerEvent = true;
@@ -22,6 +23,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		private boolean booleanEvent;
 		
 		private boolean booleanEventValue;
+		
 		
 		public void raiseBooleanEvent(boolean value) {
 			booleanEventValue = value;
@@ -37,6 +39,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		
 		private double realEventValue;
 		
+		
 		public void raiseRealEvent(double value) {
 			realEventValue = value;
 			realEvent = true;
@@ -50,6 +53,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		private boolean stringEvent;
 		
 		private String stringEventValue;
+		
 		
 		public void raiseStringEvent(String value) {
 			stringEventValue = value;

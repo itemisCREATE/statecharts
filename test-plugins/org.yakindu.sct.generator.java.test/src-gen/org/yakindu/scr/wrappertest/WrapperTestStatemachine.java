@@ -21,6 +21,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		}
 		private boolean ev_out;
 		
+		
 		public boolean isRaisedEv_out() {
 			return ev_out;
 		}
@@ -33,6 +34,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		}
 		
 		private boolean ev_in;
+		
 		
 		public void raiseEv_in() {
 			ev_in = true;
@@ -233,7 +235,6 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	
 	public void timeElapsed(int eventID) {
 		timeEvents[eventID] = true;
-		runCycle();
 	}
 	
 	public SCInterface getSCInterface() {

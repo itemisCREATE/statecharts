@@ -134,10 +134,10 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 			scope = Scopes.scopeFor(typeSystem.getOperationExtensions(ownerType), scope)
 		}
 		if (ownerType instanceof EnumerationType) {
-			return addScopeForEnumType(ownerType, scope, predicate)
+			scope = addScopeForEnumType(ownerType, scope, predicate)
 		}
 		if (ownerType instanceof ComplexType) {
-			return addScopeForComplexType(ownerType, scope, predicate)
+			scope = addScopeForComplexType(ownerType, scope, predicate)
 		}
 		return scope
 	}

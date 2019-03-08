@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU UI
 Bundle-SymbolicName: org.yakindu.sct.ui;singleton:=true
-Bundle-Version: 3.5.1.qualifier
+Bundle-Version: 3.5.2.qualifier
 Bundle-Activator: org.yakindu.sct.ui.UIPluginActivator
 Bundle-Vendor: statecharts.org
 Require-Bundle: org.eclipse.ui,
@@ -10,10 +10,18 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.navigator,
  org.eclipse.core.resources,
  org.eclipse.ui.ide,
- org.eclipse.emf.ecore
+ org.eclipse.emf.ecore,
+ org.eclipse.equinox.p2.core,
+ org.eclipse.equinox.p2.metadata,
+ org.eclipse.equinox.p2.operations,
+ org.eclipse.equinox.p2.repository,
+ org.eclipse.equinox.p2.ui,
+ com.google.guava,
+ org.eclipse.equinox.p2.engine
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.ui,
+ org.yakindu.sct.ui.install,
  org.yakindu.sct.ui.perspectives,
  org.yakindu.sct.ui.wizards
 Automatic-Module-Name: org.yakindu.sct.ui

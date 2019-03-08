@@ -7,11 +7,13 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	
 		private boolean whileEvent;
 		
+		
 		public void raiseWhile() {
 			whileEvent = true;
 		}
 		
 		private boolean ev;
+		
 		
 		public void raiseEv() {
 			ev = true;

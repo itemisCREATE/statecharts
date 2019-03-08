@@ -7,6 +7,7 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 	
 		private boolean e1;
 		
+		
 		public void raiseE1() {
 			e1 = true;
 		}

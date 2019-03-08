@@ -7,6 +7,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}

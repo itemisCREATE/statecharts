@@ -36,11 +36,11 @@ class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 	override getTargetLanguageName(Type type) {
 		val originalType = type?.originType
 		switch (originalType) {
-			case originalType === null || isSame(originalType, getType(VOID)) : 'void'
-			case isSame(originalType, getType(INTEGER)): INT_TYPE
-			case isSame(originalType, getType(REAL)): REAL_TYPE
-			case isSame(originalType, getType(BOOLEAN)): BOOL_TYPE
-			case isSame(originalType, getType(STRING)): STRING_TYPE
+			case originalType === null || isVoid(originalType) : 'void'
+			case isInteger(originalType): INT_TYPE
+			case isReal(originalType): REAL_TYPE
+			case isBoolean(originalType): BOOL_TYPE
+			case isString(originalType): STRING_TYPE
 			default: type.name
 		}
 	}

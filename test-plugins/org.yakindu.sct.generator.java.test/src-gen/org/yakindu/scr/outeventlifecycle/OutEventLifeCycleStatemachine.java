@@ -7,11 +7,13 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
 		
 		private boolean f;
+		
 		
 		public boolean isRaisedF() {
 			return f;

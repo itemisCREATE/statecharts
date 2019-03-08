@@ -7,17 +7,20 @@ public class GuardStatemachine implements IGuardStatemachine {
 	
 		private boolean event1;
 		
+		
 		public void raiseEvent1() {
 			event1 = true;
 		}
 		
 		private boolean event2;
 		
+		
 		public void raiseEvent2() {
 			event2 = true;
 		}
 		
 		private boolean returnEvent;
+		
 		
 		public void raiseReturn() {
 			returnEvent = true;

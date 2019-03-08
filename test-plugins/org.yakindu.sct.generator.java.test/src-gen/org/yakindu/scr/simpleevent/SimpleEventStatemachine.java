@@ -7,6 +7,7 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 	
 		private boolean event1;
 		
+		
 		public void raiseEvent1() {
 			event1 = true;
 		}

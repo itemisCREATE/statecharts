@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.model.stext.extensions;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -18,6 +20,7 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
+import org.yakindu.sct.model.stext.stext.StatechartScope;
 
 /**
  * @author jonathan thoene - Initial contribution and API
@@ -60,5 +63,22 @@ public class STextExtensions {
 
 	protected ContextElementAdapter getContextElementAdapter(Resource context) {
 		return (ContextElementAdapter) EcoreUtil.getExistingAdapter(context, ContextElementAdapter.class);
+	}
+	
+	/**
+	 * Searches for the given surrogate element coming from an embedded fake
+	 * resource in the given statechart.
+	 */
+	public EObject findElement(EObject surrogate, Statechart statechart) {
+		boolean checkScope = surrogate.eContainer() instanceof StatechartScope;
+		List<EObject> eAllContentsAsList = EcoreUtil2.eAllContentsAsList(statechart);
+		for (EObject modelElement : eAllContentsAsList) {
+			if (EcoreUtil2.equals(modelElement, surrogate)) {
+				if (!checkScope || EcoreUtil2.equals(modelElement.eContainer(), surrogate.eContainer())) {
+					return modelElement;
+				}
+			}
+		}
+		return null;
 	}
 }

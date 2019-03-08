@@ -17,6 +17,7 @@ import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.LogicalAndExpression
 import org.yakindu.base.expressions.expressions.LogicalNotExpression
 import org.yakindu.base.expressions.expressions.LogicalOrExpression
@@ -31,7 +32,6 @@ import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
-import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.c.extensions.ExpressionsChecker
 import org.yakindu.sct.generator.c.extensions.Naming
@@ -107,7 +107,7 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 		ActiveStateReferenceExpression it) '''«flow.stateActiveFctID»(«scHandle», «value.shortName»)'''
 
 	def dispatch CharSequence code(LogicalRelationExpression it) '''
-	«IF isSame(leftOperand.infer.type, getType(GenericTypeSystem.STRING))»
+	«IF leftOperand.infer.type.isString»
 		(strcmp(«leftOperand.code», «rightOperand.code») «operator.literal» 0)
 	«ELSE»(«leftOperand.code») «operator.literal» («rightOperand.code»)«ENDIF»'''
 
@@ -170,4 +170,6 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 	
 	
 	def CharSequence ternaryGuard(Expression it) '''(«it.code») ? «TRUE_LITERAL» : «FALSE_LITERAL»'''
+	
+	override dispatch CharSequence code(FloatLiteral it) '''«value.toString»f'''
 }

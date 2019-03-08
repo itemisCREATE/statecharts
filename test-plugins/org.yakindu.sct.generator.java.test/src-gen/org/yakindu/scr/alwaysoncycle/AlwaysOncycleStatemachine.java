@@ -7,6 +7,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}

@@ -7,6 +7,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 			runCycle();
@@ -14,6 +15,7 @@ public class ExitSequenceStatemachine implements IExitSequenceStatemachine {
 		
 		
 		private boolean f;
+		
 		
 		public void raiseF() {
 			f = true;
