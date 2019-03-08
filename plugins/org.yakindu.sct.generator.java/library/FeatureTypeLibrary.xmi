@@ -42,7 +42,7 @@
         optional="true"
         parameterType="BOOLEAN"/>
     <parameters
-        name="Runnable"
+        name="runnable"
         optional="true"
         parameterType="BOOLEAN"/>
   </types>

@@ -46,7 +46,7 @@ public interface IJavaFeatureConstants {
 
 	public static final String SYNCHRONIZED = "synchronized";
 
-	public static final String RUNNABLE = "Runnable";
+	public static final String RUNNABLE = "runnable";
 
 	public static final String FEATURE_TRACING = "Tracing";
 
