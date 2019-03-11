@@ -13,7 +13,6 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 		}
 	}
 	
-	protected SCInterfaceImpl sCInterface;
 	
 	protected class SCIIF2Impl implements SCIIF2 {
 	
@@ -24,6 +23,9 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 			this.operationCallback = operationCallback;
 		}
 	}
+	
+	
+	protected SCInterfaceImpl sCInterface;
 	
 	protected SCIIF2Impl sCIIF2;
 	
@@ -38,7 +40,6 @@ public class VariadicFunctionsStatemachine implements IVariadicFunctionsStatemac
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	private InternalOperationCallback operationCallback;
 	public VariadicFunctionsStatemachine() {

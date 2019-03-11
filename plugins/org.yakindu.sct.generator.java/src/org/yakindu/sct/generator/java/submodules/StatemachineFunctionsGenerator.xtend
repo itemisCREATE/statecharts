@@ -12,12 +12,12 @@ package org.yakindu.sct.generator.java.submodules
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.yakindu.base.types.Direction
-import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.java.GenmodelEntries
 import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
+import org.yakindu.sct.generator.java.features.Synchronized
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
@@ -31,6 +31,7 @@ class StatemachineFunctionsGenerator {
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension ITypeSystem
 	@Inject protected extension GenmodelEntries
+	@Inject protected extension Synchronized
 	
 	def createConstructor(ExecutionFlow flow) '''
 		public «flow.statemachineClassName»() {
@@ -46,24 +47,24 @@ class StatemachineFunctionsGenerator {
 			«var InterfaceScope scope = flow.defaultScope»
 			«FOR event : scope.eventDefinitions»
 				«IF event.direction == Direction::IN»
-					«IF event.type !== null && !isVoid(event.type)»
-						public void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
+					«IF event.hasValue»
+						public «sync»void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
 							«scope.interfaceName.asEscapedIdentifier».raise«event.name.asName»(value);
 						}
 					«ELSE»
-						public void raise«event.name.asName»() {
+						public «sync»void raise«event.name.asName»() {
 							«scope.interfaceName.asEscapedIdentifier».raise«event.name.asName»();
 						}
 					«ENDIF»
 
 				«ENDIF»
 				«IF event.direction ==  Direction::OUT»
-					public boolean isRaised«event.name.asName»() {
+					public «sync»boolean isRaised«event.name.asName»() {
 						return «scope.interfaceName.asEscapedIdentifier».isRaised«event.name.asName»();
 					}
 
-					«IF event.type !== null && !isVoid(event.type)»
-						public «event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
+					«IF event.hasValue»
+						public «sync»«event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
 							return «scope.interfaceName.asEscapedIdentifier».get«event.name.asName»Value();
 						}
 
@@ -71,12 +72,12 @@ class StatemachineFunctionsGenerator {
 				«ENDIF»
 			«ENDFOR»
 			«FOR variable : scope.variableDefinitions»
-				public «variable.typeSpecifier.targetLanguageName» «variable.getter()» {
+				public «sync»«variable.typeSpecifier.targetLanguageName» «variable.getter()» {
 					return «scope.interfaceName.asEscapedIdentifier».«variable.getter()»;
 				}
 				
 				«IF !variable.const && !variable.readonly»
-					public void «variable.setter»(«variable.typeSpecifier.targetLanguageName» value) {
+					public «sync»void «variable.setter»(«variable.typeSpecifier.targetLanguageName» value) {
 						«scope.interfaceName.asEscapedIdentifier».«variable.setter»(value);
 					}
 
@@ -98,13 +99,13 @@ class StatemachineFunctionsGenerator {
 	'''
 	
 	def protected generateTraceAccessors(GeneratorEntry entry) '''
-		public void add«traceAccessorFunctionID.toFirstUpper»(«traceInterface»<State> «traceSingleInstance») {
+		public «sync»void add«traceAccessorFunctionID.toFirstUpper»(«traceInterface»<State> «traceSingleInstance») {
 			if(!(this.«traceInstances».contains(«traceSingleInstance»))) {
 				this.«traceInstances».add(«traceSingleInstance»);
 			}
 		}
 		
-		public void remove«traceAccessorFunctionID.toFirstUpper»(«traceInterface»<State> «traceSingleInstance») {
+		public «sync»void remove«traceAccessorFunctionID.toFirstUpper»(«traceInterface»<State> «traceSingleInstance») {
 			if(this.«traceInstances».contains(«traceSingleInstance»)) {
 				this.«traceInstances».remove(«traceSingleInstance»);
 			}

@@ -183,6 +183,7 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 		
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -202,7 +203,6 @@ public class ChildFirstTransitionsInSubchartStatemachine implements IChildFirstT
 	private final State[] stateVector = new State[3];
 	
 	private int nextStateIndex;
-	
 	
 	public ChildFirstTransitionsInSubchartStatemachine() {
 		sCInterface = new SCInterfaceImpl();

@@ -7,6 +7,7 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
@@ -26,6 +27,7 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -38,7 +40,6 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public InEventLifeCycleStatemachine() {
 		sCInterface = new SCInterfaceImpl();

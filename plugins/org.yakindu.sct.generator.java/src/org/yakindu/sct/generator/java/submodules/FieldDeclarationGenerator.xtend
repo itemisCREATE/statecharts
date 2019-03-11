@@ -12,17 +12,88 @@ package org.yakindu.sct.generator.java.submodules
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.java.GenmodelEntries
+import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
-import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.stext.stext.EventDefinition
+
+import static org.eclipse.xtext.util.Strings.*
 
 @Singleton
 class FieldDeclarationGenerator {
 	@Inject protected extension Naming
+	@Inject protected extension JavaNamingService
 	@Inject protected extension ICodegenTypeSystemAccess
+	@Inject protected extension SExecExtensions
+	@Inject protected extension GenmodelEntries
+	@Inject protected extension VariableCode
+	@Inject protected extension EventCode
 	
-	def fieldDeclaration(VariableDefinition variable) {
-		'''private «variable.typeSpecifier.targetLanguageName» «variable.identifier»;
+	def internalEventFields(ExecutionFlow flow) '''
+		«FOR event : flow.internalScopeEvents»
+		«event.fieldDeclaration»
+		«ENDFOR»
+	'''
+	
+	def createFieldDeclarations(ExecutionFlow flow, GeneratorEntry entry) '''
+		«FOR scope : flow.interfaceScopes»
+			protected «scope.interfaceImplName» «scope.interfaceName.asEscapedIdentifier»;
+			
+		«ENDFOR»
+		private boolean initialized = false;
 
-		'''
-	}
+		«statesEnum(flow)»
+
+		«stateVectors(flow)»
+		
+		private int nextStateIndex;
+		
+		«IF entry.tracingUsed»
+		«entry.tracingFields»
+		
+		«ENDIF»
+		«IF flow.timed»
+		«flow.timingFields»
+		
+		«ENDIF»
+		«flow.internalEventFields»
+		«FOR variable : flow.internalScopeVariables SEPARATOR newLine AFTER newLine»
+			«generateVariableDefinition(variable)»
+			
+		«ENDFOR»
+		«FOR internal : flow.internalScopes»
+			«IF internal.hasOperations()»
+				private «internal.getInternalOperationCallbackName()» operationCallback;
+			«ENDIF»
+		«ENDFOR»
+	'''
+	
+	protected def statesEnum(ExecutionFlow it) '''
+		public enum State {
+			«FOR state : states»
+				«state.stateName.asEscapedIdentifier»,
+			«ENDFOR»
+			«getNullStateName()»
+		};
+	'''
+	
+	protected def stateVectors(ExecutionFlow it) '''
+		«IF hasHistory»
+			private State[] historyVector = new State[«historyVector.size»];
+		«ENDIF»
+		private final State[] stateVector = new State[«stateVector.size»];
+	'''
+	
+	protected def timingFields(ExecutionFlow it) '''
+		private ITimer timer;
+		
+		private final boolean[] timeEvents = new boolean[«flow.timeEvents.size»];
+	'''
+	
+	protected def tracingFields(GeneratorEntry it) '''
+		private List <«traceInterface»<State>> «traceInstances» = new LinkedList <«traceInterface»<State>>();
+	'''
 }

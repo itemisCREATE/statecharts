@@ -7,11 +7,13 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	
 		private boolean event1;
 		
+		
 		public void raiseEvent1() {
 			event1 = true;
 		}
 		
 		private boolean event2;
+		
 		
 		public void raiseEvent2() {
 			event2 = true;
@@ -19,11 +21,13 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 		
 		private boolean event3;
 		
+		
 		public void raiseEvent3() {
 			event3 = true;
 		}
 		
 		private boolean event4;
+		
 		
 		public void raiseEvent4() {
 			event4 = true;
@@ -31,11 +35,13 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 		
 		private boolean event5;
 		
+		
 		public void raiseEvent5() {
 			event5 = true;
 		}
 		
 		private boolean event6;
+		
 		
 		public void raiseEvent6() {
 			event6 = true;
@@ -43,11 +49,13 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 		
 		private boolean event7;
 		
+		
 		public void raiseEvent7() {
 			event7 = true;
 		}
 		
 		private boolean event8;
+		
 		
 		public void raiseEvent8() {
 			event8 = true;
@@ -64,6 +72,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 			event8 = false;
 		}
 	}
+	
 	
 	protected SCInterfaceImpl sCInterface;
 	
@@ -86,7 +95,6 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public ShallowHistoryStatemachine() {
 		sCInterface = new SCInterfaceImpl();

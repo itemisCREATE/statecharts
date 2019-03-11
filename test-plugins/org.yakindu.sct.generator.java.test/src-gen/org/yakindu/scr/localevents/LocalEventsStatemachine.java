@@ -9,6 +9,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 			runCycle();
@@ -59,6 +60,7 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -80,14 +82,11 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 	
 	private int nextStateIndex;
 	
-	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
-	
 	private boolean activate_b;
-	
 	private boolean activate_c;
-	
 	private boolean activate_d;
+	
 	private long activate_dValue;
 	public LocalEventsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
@@ -123,47 +122,68 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		if (!initialized)
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
-	
-		clearOutEvents();
-		singleCycle();
-		clearEvents();
 		
-		// process queued events
-		while (internalEventQueue.size() > 0) {
-			internalEventQueue.poll().run();
-			clearEvents();
+		clearOutEvents();
+	
+		Runnable task = getNextEvent();
+		if (task == null) {
+			task = getDefaultEvent();
 		}
+		
+		while (task != null) {
+			task.run();
+			clearEvents();
+			task = getNextEvent();
+		}
+		
 	}
 	
 	protected void singleCycle() {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case localEvents_r1_Comp1_r_A1:
-				localEvents_r1_Comp1_r_A1_react(true);
-				break;
-			case localEvents_r1_Comp1_r_C1:
-				localEvents_r1_Comp1_r_C1_react(true);
-				break;
-			case localEvents_r1_Comp1_r_D1:
-				localEvents_r1_Comp1_r_D1_react(true);
-				break;
-			case localEvents_r2_Comp2_r_A2:
-				localEvents_r2_Comp2_r_A2_react(true);
-				break;
-			case localEvents_r2_Comp2_r_B2:
-				localEvents_r2_Comp2_r_B2_react(true);
-				break;
-			case localEvents_r2_Comp2_r_C2:
-				localEvents_r2_Comp2_r_C2_react(true);
-				break;
-			case localEvents_r2_Comp2_r_D2:
-				localEvents_r2_Comp2_r_D2_react(true);
-				break;
+				case localEvents_r1_Comp1_r_A1:
+					localEvents_r1_Comp1_r_A1_react(true);
+					break;
+				case localEvents_r1_Comp1_r_C1:
+					localEvents_r1_Comp1_r_C1_react(true);
+					break;
+				case localEvents_r1_Comp1_r_D1:
+					localEvents_r1_Comp1_r_D1_react(true);
+					break;
+				case localEvents_r2_Comp2_r_A2:
+					localEvents_r2_Comp2_r_A2_react(true);
+					break;
+				case localEvents_r2_Comp2_r_B2:
+					localEvents_r2_Comp2_r_B2_react(true);
+					break;
+				case localEvents_r2_Comp2_r_C2:
+					localEvents_r2_Comp2_r_C2_react(true);
+					break;
+				case localEvents_r2_Comp2_r_D2:
+					localEvents_r2_Comp2_r_D2_react(true);
+					break;
 			default:
 				// $NullState$
 			}
 		}
 	}
+	
+	protected Runnable getNextEvent() {
+		if(!internalEventQueue.isEmpty()) {
+			return internalEventQueue.poll();
+		}
+		return null;
+	}
+	
+	protected Runnable getDefaultEvent() {
+		return new Runnable() {
+			@Override
+			public void run() {
+				singleCycle();
+			}
+		};
+	}
+	
 	public void exit() {
 		exitSequence_localEvents_r1();
 		exitSequence_localEvents_r2();
@@ -245,7 +265,6 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 		});
 	}
 	
-	
 	private void raiseActivate_c() {
 	
 		internalEventQueue.add( new Runnable() {
@@ -255,7 +274,6 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 			}
 		});
 	}
-	
 	
 	private void raiseActivate_d(final long value) {
 	
@@ -267,7 +285,6 @@ public class LocalEventsStatemachine implements ILocalEventsStatemachine {
 			}
 		});
 	}
-	
 	private long getActivate_dValue() {
 		if (! activate_d ) 
 			throw new IllegalStateException("Illegal event value access. Event Activate_d is not raised!");

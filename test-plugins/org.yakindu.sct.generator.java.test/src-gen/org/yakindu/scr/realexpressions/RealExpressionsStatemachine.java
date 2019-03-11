@@ -7,6 +7,7 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 	
 		private boolean e1;
 		
+		
 		public void raiseE1() {
 			e1 = true;
 		}
@@ -280,6 +281,7 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -293,7 +295,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public RealExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

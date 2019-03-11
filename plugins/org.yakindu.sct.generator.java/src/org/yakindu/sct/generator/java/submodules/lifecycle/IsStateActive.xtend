@@ -15,6 +15,7 @@ import org.yakindu.sct.generator.java.FlowCode
 import org.yakindu.sct.generator.java.GenmodelEntries
 import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
+import org.yakindu.sct.generator.java.features.Synchronized
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
@@ -26,12 +27,13 @@ class IsStateActive implements org.yakindu.sct.generator.core.submodules.lifecyc
 	@Inject protected extension FlowCode
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension GenmodelEntries
+	@Inject protected extension Synchronized
 	
 	override isStateActive(ExecutionFlow flow) '''
 		/**
 		* Returns true if the given state is currently active otherwise false.
 		*/
-		public boolean isStateActive(State state) {
+		public «sync»boolean isStateActive(State state) {
 
 			switch (state) {
 			«FOR s : flow.states»

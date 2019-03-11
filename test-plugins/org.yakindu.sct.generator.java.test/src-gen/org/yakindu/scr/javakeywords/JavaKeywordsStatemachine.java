@@ -7,11 +7,13 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	
 		private boolean whileEvent;
 		
+		
 		public void raiseWhile() {
 			whileEvent = true;
 		}
 		
 		private boolean ev;
+		
 		
 		public void raiseEv() {
 			ev = true;
@@ -463,6 +465,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -481,7 +484,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public JavaKeywordsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

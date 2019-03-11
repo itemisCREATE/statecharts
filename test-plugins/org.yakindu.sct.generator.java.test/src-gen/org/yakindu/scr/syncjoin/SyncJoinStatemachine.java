@@ -7,11 +7,13 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
 		
 		private boolean f;
+		
 		
 		public void raiseF() {
 			f = true;
@@ -19,11 +21,13 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		
 		private boolean jc;
 		
+		
 		public void raiseJc() {
 			jc = true;
 		}
 		
 		private boolean jd;
+		
 		
 		public void raiseJd() {
 			jd = true;
@@ -47,6 +51,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -64,7 +69,6 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	private final State[] stateVector = new State[2];
 	
 	private int nextStateIndex;
-	
 	
 	public SyncJoinStatemachine() {
 		sCInterface = new SCInterfaceImpl();

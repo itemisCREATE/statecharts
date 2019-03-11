@@ -14,7 +14,6 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 	
 	private int nextStateIndex;
 	
-	
 	public StatechartActiveStatemachine() {
 	}
 	

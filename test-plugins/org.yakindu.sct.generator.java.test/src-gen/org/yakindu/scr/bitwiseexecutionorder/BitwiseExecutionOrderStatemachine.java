@@ -15,26 +15,27 @@ public class BitwiseExecutionOrderStatemachine implements IBitwiseExecutionOrder
 	
 	private int nextStateIndex;
 	
-	
 	private long y;
-	
-	protected void setY(long value) {
-		y = value;
-	}
 	
 	protected long getY() {
 		return y;
 	}
 	
-	private long x;
-	
-	protected void setX(long value) {
-		x = value;
+	protected void setY(long value) {
+		this.y = value;
 	}
+	
+	
+	private long x;
 	
 	protected long getX() {
 		return x;
 	}
+	
+	protected void setX(long value) {
+		this.x = value;
+	}
+	
 	
 	public BitwiseExecutionOrderStatemachine() {
 	}

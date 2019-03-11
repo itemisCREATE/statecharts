@@ -7,11 +7,13 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 	
 		private boolean e1;
 		
+		
 		public void raiseE1() {
 			e1 = true;
 		}
 		
 		private boolean e2;
+		
 		
 		public void raiseE2() {
 			e2 = true;
@@ -63,6 +65,7 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -75,7 +78,6 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public TriggerExpressionPrecedenceStatemachine() {
 		sCInterface = new SCInterfaceImpl();

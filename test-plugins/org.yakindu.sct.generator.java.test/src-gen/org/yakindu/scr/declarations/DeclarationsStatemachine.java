@@ -7,11 +7,13 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	
 		private boolean evA;
 		
+		
 		public void raiseEvA() {
 			evA = true;
 		}
 		
 		private boolean evB;
+		
 		
 		public boolean isRaisedEvB() {
 			return evB;
@@ -25,11 +27,11 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 		private boolean evCValue;
 		
-		public void raiseEvC(boolean value) {
-			evC = true;
-			evCValue = value;
-		}
 		
+		public void raiseEvC(boolean value) {
+			evCValue = value;
+			evC = true;
+		}
 		protected boolean getEvCValue() {
 			if (! evC ) 
 				throw new IllegalStateException("Illegal event value access. Event EvC is not raised!");
@@ -40,13 +42,14 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 		private long evDValue;
 		
+		
 		public boolean isRaisedEvD() {
 			return evD;
 		}
 		
 		protected void raiseEvD(long value) {
-			evD = true;
 			evDValue = value;
+			evD = true;
 		}
 		
 		public long getEvDValue() {
@@ -59,11 +62,11 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 		private double evEValue;
 		
-		public void raiseEvE(double value) {
-			evE = true;
-			evEValue = value;
-		}
 		
+		public void raiseEvE(double value) {
+			evEValue = value;
+			evE = true;
+		}
 		protected double getEvEValue() {
 			if (! evE ) 
 				throw new IllegalStateException("Illegal event value access. Event EvE is not raised!");
@@ -74,13 +77,14 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 		private String evFValue;
 		
+		
 		public boolean isRaisedEvF() {
 			return evF;
 		}
 		
 		protected void raiseEvF(String value) {
-			evF = true;
 			evFValue = value;
+			evF = true;
 		}
 		
 		public String getEvFValue() {
@@ -153,17 +157,18 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
 	
 	protected class SCIIfAImpl implements SCIIfA {
 	
 		private boolean evA;
 		
+		
 		public void raiseEvA() {
 			evA = true;
 		}
 		
 		private boolean evB;
+		
 		
 		public boolean isRaisedEvB() {
 			return evB;
@@ -177,11 +182,11 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 		private boolean evCValue;
 		
-		public void raiseEvC(boolean value) {
-			evC = true;
-			evCValue = value;
-		}
 		
+		public void raiseEvC(boolean value) {
+			evCValue = value;
+			evC = true;
+		}
 		protected boolean getEvCValue() {
 			if (! evC ) 
 				throw new IllegalStateException("Illegal event value access. Event EvC is not raised!");
@@ -192,13 +197,14 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 		private long evDValue;
 		
+		
 		public boolean isRaisedEvD() {
 			return evD;
 		}
 		
 		protected void raiseEvD(long value) {
-			evD = true;
 			evDValue = value;
+			evD = true;
 		}
 		
 		public long getEvDValue() {
@@ -211,11 +217,11 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 		private double evEValue;
 		
-		public void raiseEvE(double value) {
-			evE = true;
-			evEValue = value;
-		}
 		
+		public void raiseEvE(double value) {
+			evEValue = value;
+			evE = true;
+		}
 		protected double getEvEValue() {
 			if (! evE ) 
 				throw new IllegalStateException("Illegal event value access. Event EvE is not raised!");
@@ -226,13 +232,14 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		
 		private String evFValue;
 		
+		
 		public boolean isRaisedEvF() {
 			return evF;
 		}
 		
 		protected void raiseEvF(String value) {
-			evF = true;
 			evFValue = value;
+			evF = true;
 		}
 		
 		public String getEvFValue() {
@@ -304,6 +311,9 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		}
 		
 	}
+	
+	
+	protected SCInterfaceImpl sCInterface;
 	
 	protected SCIIfAImpl sCIIfA;
 	
@@ -319,72 +329,74 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	
 	private int nextStateIndex;
 	
-	
-	
 	private boolean evInA;
-	
 	private boolean evInB;
-	
 	private boolean evInC;
+	
 	private boolean evInCValue;
-	
 	private boolean evInD;
+	
 	private long evInDValue;
-	
 	private boolean evInE;
-	private double evInEValue;
 	
+	private double evInEValue;
 	private boolean evInF;
+	
 	private String evInFValue;
 	private boolean varInA;
-	
-	protected void setVarInA(boolean value) {
-		varInA = value;
-	}
 	
 	protected boolean getVarInA() {
 		return varInA;
 	}
 	
-	private long varInB;
-	
-	protected void setVarInB(long value) {
-		varInB = value;
+	protected void setVarInA(boolean value) {
+		this.varInA = value;
 	}
+	
+	
+	private long varInB;
 	
 	protected long getVarInB() {
 		return varInB;
 	}
 	
-	private double varInC;
-	
-	protected void setVarInC(double value) {
-		varInC = value;
+	protected void setVarInB(long value) {
+		this.varInB = value;
 	}
+	
+	
+	private double varInC;
 	
 	protected double getVarInC() {
 		return varInC;
 	}
 	
-	private String varInD;
-	
-	protected void setVarInD(String value) {
-		varInD = value;
+	protected void setVarInC(double value) {
+		this.varInC = value;
 	}
+	
+	
+	private String varInD;
 	
 	protected String getVarInD() {
 		return varInD;
 	}
 	
-	private long varInE;
-	
-	protected void setVarInE(long value) {
-		varInE = value;
+	protected void setVarInD(String value) {
+		this.varInD = value;
 	}
+	
+	
+	private long varInE;
 	
 	protected long getVarInE() {
 		return varInE;
 	}
+	
+	protected void setVarInE(long value) {
+		this.varInE = value;
+	}
+	
 	
 	public DeclarationsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
@@ -525,17 +537,14 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		evInA = true;
 	}
 	
-	
 	private void raiseEvInB() {
 		evInB = true;
 	}
-	
 	
 	private void raiseEvInC(boolean value) {
 		evInCValue = value;
 		evInC = true;
 	}
-	
 	private boolean getEvInCValue() {
 		if (! evInC ) 
 			throw new IllegalStateException("Illegal event value access. Event EvInC is not raised!");
@@ -546,7 +555,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		evInDValue = value;
 		evInD = true;
 	}
-	
 	private long getEvInDValue() {
 		if (! evInD ) 
 			throw new IllegalStateException("Illegal event value access. Event EvInD is not raised!");
@@ -557,7 +565,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		evInEValue = value;
 		evInE = true;
 	}
-	
 	private double getEvInEValue() {
 		if (! evInE ) 
 			throw new IllegalStateException("Illegal event value access. Event EvInE is not raised!");
@@ -568,7 +575,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		evInFValue = value;
 		evInF = true;
 	}
-	
 	private String getEvInFValue() {
 		if (! evInF ) 
 			throw new IllegalStateException("Illegal event value access. Event EvInF is not raised!");

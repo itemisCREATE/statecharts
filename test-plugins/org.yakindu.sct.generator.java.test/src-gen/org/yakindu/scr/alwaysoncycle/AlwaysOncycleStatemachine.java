@@ -7,6 +7,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
@@ -56,6 +57,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -69,7 +71,6 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public AlwaysOncycleStatemachine() {
 		sCInterface = new SCInterfaceImpl();

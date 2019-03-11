@@ -15,6 +15,7 @@ import org.yakindu.sct.generator.java.FlowCode
 import org.yakindu.sct.generator.java.GenmodelEntries
 import org.yakindu.sct.generator.java.JavaNamingService
 import org.yakindu.sct.generator.java.Naming
+import org.yakindu.sct.generator.java.features.Synchronized
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
@@ -26,6 +27,7 @@ class IsFinal implements org.yakindu.sct.generator.core.submodules.lifecycle.IsF
 	@Inject protected extension FlowCode
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension GenmodelEntries
+	@Inject protected extension Synchronized
 	
 	override isFinal(ExecutionFlow flow) {
 		val finalStateImpactVector = flow.finalStateImpactVector
@@ -38,7 +40,7 @@ class IsFinal implements org.yakindu.sct.generator.core.submodules.lifecycle.IsF
 			«ENDIF»
 			* @see IStatemachine#isFinal()
 			*/
-			public boolean isFinal() {
+			public «sync»boolean isFinal() {
 		''' +
 
 		// only if the impact vector is completely covered by final states the state machine

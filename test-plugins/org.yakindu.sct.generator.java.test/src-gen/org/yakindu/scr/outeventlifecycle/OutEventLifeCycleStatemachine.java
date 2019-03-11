@@ -7,11 +7,13 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
 		
 		private boolean f;
+		
 		
 		public boolean isRaisedF() {
 			return f;
@@ -51,6 +53,7 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 		
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -65,7 +68,6 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 	private final State[] stateVector = new State[2];
 	
 	private int nextStateIndex;
-	
 	
 	public OutEventLifeCycleStatemachine() {
 		sCInterface = new SCInterfaceImpl();

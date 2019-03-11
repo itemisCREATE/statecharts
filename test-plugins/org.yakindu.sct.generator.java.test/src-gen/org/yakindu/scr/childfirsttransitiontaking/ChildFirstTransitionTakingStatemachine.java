@@ -7,12 +7,14 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 			runCycle();
 		}
 		
 		private boolean go;
+		
 		
 		public void raiseGo() {
 			go = true;
@@ -45,6 +47,7 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -72,7 +75,6 @@ public class ChildFirstTransitionTakingStatemachine implements IChildFirstTransi
 	private final State[] stateVector = new State[5];
 	
 	private int nextStateIndex;
-	
 	
 	public ChildFirstTransitionTakingStatemachine() {
 		sCInterface = new SCInterfaceImpl();

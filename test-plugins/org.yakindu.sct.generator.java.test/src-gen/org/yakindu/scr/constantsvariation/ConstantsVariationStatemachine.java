@@ -23,7 +23,6 @@ public class ConstantsVariationStatemachine implements IConstantsVariationStatem
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
 	
 	protected class SCINamedImpl implements SCINamed {
 	
@@ -45,6 +44,9 @@ public class ConstantsVariationStatemachine implements IConstantsVariationStatem
 		
 	}
 	
+	
+	protected SCInterfaceImpl sCInterface;
+	
 	protected SCINamedImpl sCINamed;
 	
 	private boolean initialized = false;
@@ -59,22 +61,25 @@ public class ConstantsVariationStatemachine implements IConstantsVariationStatem
 	
 	private int nextStateIndex;
 	
-	
 	protected boolean getB() {
 		return b;
 	}
+	
 	
 	protected String getStr() {
 		return str;
 	}
 	
+	
 	protected double getR() {
 		return r;
 	}
 	
+	
 	protected long getI() {
 		return i;
 	}
+	
 	
 	public ConstantsVariationStatemachine() {
 		sCInterface = new SCInterfaceImpl();

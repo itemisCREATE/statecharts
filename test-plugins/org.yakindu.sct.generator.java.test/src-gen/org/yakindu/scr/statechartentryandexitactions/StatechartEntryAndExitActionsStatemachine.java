@@ -37,6 +37,7 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 		
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -49,7 +50,6 @@ public class StatechartEntryAndExitActionsStatemachine implements IStatechartEnt
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public StatechartEntryAndExitActionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

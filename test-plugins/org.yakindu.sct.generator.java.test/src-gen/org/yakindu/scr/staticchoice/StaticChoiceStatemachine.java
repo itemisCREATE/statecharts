@@ -7,6 +7,7 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 	
 		private boolean reset;
 		
+		
 		public void raiseReset() {
 			reset = true;
 		}
@@ -26,6 +27,7 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -40,7 +42,6 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public StaticChoiceStatemachine() {
 		sCInterface = new SCInterfaceImpl();

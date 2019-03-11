@@ -7,6 +7,7 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
@@ -15,11 +16,11 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		
 		private long e2Value;
 		
-		public void raiseE2(long value) {
-			e2 = true;
-			e2Value = value;
-		}
 		
+		public void raiseE2(long value) {
+			e2Value = value;
+			e2 = true;
+		}
 		protected long getE2Value() {
 			if (! e2 ) 
 				throw new IllegalStateException("Illegal event value access. Event E2 is not raised!");
@@ -50,7 +51,6 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		}
 	}
 	
-	protected SCInterfaceImpl sCInterface;
 	
 	protected class SCINamedImpl implements SCINamed {
 	
@@ -63,6 +63,9 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		}
 		
 	}
+	
+	
+	protected SCInterfaceImpl sCInterface;
 	
 	protected SCINamedImpl sCINamed;
 	
@@ -79,10 +82,10 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 	
 	private int nextStateIndex;
 	
-	
 	protected long getInternalConstant() {
 		return internalConstant;
 	}
+	
 	
 	public ConstantsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

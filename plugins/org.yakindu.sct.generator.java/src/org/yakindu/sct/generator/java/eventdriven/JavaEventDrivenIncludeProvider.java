@@ -1,24 +1,29 @@
 package org.yakindu.sct.generator.java.eventdriven;
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.yakindu.sct.generator.java.GeneratorPredicate;
 import org.yakindu.sct.generator.java.JavaIncludeProvider;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions;
 
 import com.google.inject.Inject;
 
 public class JavaEventDrivenIncludeProvider extends JavaIncludeProvider {
 	@Inject
-	protected SExecExtensions extensions;
+	protected GeneratorPredicate extensions;
 
 	@Override
 	public Iterable<String> getImports(ExecutionFlow it) {
-		if (extensions.hasLocalEvents(it)) {
-			return Arrays.asList("java.util.Queue", "java.util.LinkedList");
-		} else {
-			return Collections.emptyList();
+		List<String> includes = new ArrayList<>();
+		if (extensions.needsQueues(it)) {
+			includes.add("java.util.Queue");
+			includes.add("java.util.LinkedList");
 		}
+		if (extensions.needsSynchronized()) {
+			includes.add("java.util.concurrent.BlockingQueue");
+			includes.add("java.util.concurrent.LinkedBlockingQueue");
+		}
+		return includes;
 	}
 }

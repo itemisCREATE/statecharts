@@ -153,6 +153,7 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 		
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -172,7 +173,6 @@ public class ChildFirstOrthogonalReactionsStatemachine implements IChildFirstOrt
 	private final State[] stateVector = new State[4];
 	
 	private int nextStateIndex;
-	
 	
 	public ChildFirstOrthogonalReactionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

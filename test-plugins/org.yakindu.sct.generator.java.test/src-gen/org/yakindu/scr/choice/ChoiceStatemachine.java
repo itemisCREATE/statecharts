@@ -7,11 +7,13 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
 		
 		private boolean f;
+		
 		
 		public void raiseF() {
 			f = true;
@@ -19,11 +21,13 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		
 		private boolean g;
 		
+		
 		public void raiseG() {
 			g = true;
 		}
 		
 		private boolean h;
+		
 		
 		public void raiseH() {
 			h = true;
@@ -47,6 +51,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -61,7 +66,6 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public ChoiceStatemachine() {
 		sCInterface = new SCInterfaceImpl();

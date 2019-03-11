@@ -9,28 +9,62 @@
 */
 package org.yakindu.sct.generator.java.submodules.eventdriven
 
+import com.google.inject.Inject
+import org.yakindu.sct.generator.java.GeneratorPredicate
+import org.yakindu.sct.generator.java.features.Synchronized
 import org.yakindu.sct.generator.java.submodules.EventCode
 import org.yakindu.sct.model.stext.stext.EventDefinition
 
 class EventDrivenEventCode extends EventCode {
-	override generateInEventDefinition(EventDefinition event) '''
-		«IF event.type !== null && !isVoid(event.type)»
-			public void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
-				«event.identifier» = true;
-				«event.valueIdentifier» = value;
-				runCycle();
-			}
-			
-			protected «event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
-				«event.getIllegalAccessValidation()»
-				return «event.valueIdentifier»;
-			}
-		«ELSE»
-			public void raise«event.name.asName»() {
-				«event.identifier» = true;
-				runCycle();
-			}
-		«ENDIF»
+	@Inject protected extension GeneratorPredicate
+	@Inject protected extension Synchronized
+	
+	override internalEventRaiser(EventDefinition it) '''
+		private void raise«name.asEscapedName»(«IF hasValue»final «typeSpecifier.targetLanguageName» value«ENDIF») {
 
+			internalEventQueue.add( new Runnable() {
+				@Override public void run() {
+					«IF hasValue»«valueIdentifier» = value;«ENDIF»
+					«identifier» = true;					
+					singleCycle();
+				}
+			});
+		}
 	'''
+	
+	override inEventRaiser(EventDefinition it) {
+		if(needsInEventQueue(flow)) {
+			'''
+			public «sync»void raise«name.asEscapedName»(«IF hasValue»final «typeSpecifier.targetLanguageName» value«ENDIF») {
+				inEventQueue.add(
+					new Runnable() {
+						@Override
+						public void run() {
+							«IF hasValue»«valueIdentifier» = value;«ENDIF»
+							«identifier» = true;
+							«IF needsRunnable»
+							runCycle();
+							«ELSE»
+							singleCycle();
+							«ENDIF»
+						}
+					}
+				);
+				«IF !needsRunnable»
+				runCycle();
+				«ENDIF»
+			}
+			'''
+		} else {
+			'''
+			public «sync»void raise«name.asEscapedName»(«IF hasValue»final «typeSpecifier.targetLanguageName» value«ENDIF») {
+				«IF hasValue»«valueIdentifier» = value;«ENDIF»
+				«identifier» = true;
+				runCycle();
+			}
+			'''
+		}
+	}
+	
+	
 }

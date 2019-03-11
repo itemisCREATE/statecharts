@@ -68,6 +68,18 @@ class GenmodelEntries {
 	def private FeatureParameterValue getUseJavaIntForInteger(GeneratorEntry it) {
 		generalFeatures?.getParameterValue(IJavaFeatureConstants::USE_JAVA_INT_FOR_INTEGER)
 	}
+	
+	def private FeatureParameterValue getInEventQueueParameter(GeneratorEntry it) {
+		generalFeatures?.getParameterValue(IJavaFeatureConstants::IN_EVENT_QUEUE)
+	}
+	
+	def private FeatureParameterValue getSynchronizedParameter(GeneratorEntry it) {
+		generalFeatures?.getParameterValue(IJavaFeatureConstants::SYNCHRONIZED)
+	}
+	
+	def private FeatureParameterValue getRunnableParameter(GeneratorEntry it) {
+		generalFeatures?.getParameterValue(IJavaFeatureConstants::RUNNABLE)
+	}
 
 	def getLicenseText(GeneratorEntry it) {
 		if (licenseTextParameter !== null) {
@@ -154,5 +166,29 @@ class GenmodelEntries {
 	
 	def tracingUsed(GeneratorEntry it) {
 		return (tracingEnterState || tracingExitState)
+	}
+	
+	def inEventQueue(GeneratorEntry it) {
+		if(inEventQueueParameter !== null) {
+			inEventQueueParameter.booleanValue
+		} else {
+			false
+		}
+	}
+	
+	def isSynchronized(GeneratorEntry it) {
+		if(synchronizedParameter !== null) {
+			synchronizedParameter.booleanValue
+		} else {
+			false
+		}
+	}
+	
+	def isRunnable(GeneratorEntry it) {
+		if(runnableParameter !== null) {
+			runnableParameter.booleanValue
+		} else {
+			false
+		}
 	}
 }

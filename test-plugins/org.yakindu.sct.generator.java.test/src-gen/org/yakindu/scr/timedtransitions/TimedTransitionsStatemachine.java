@@ -28,6 +28,7 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -42,10 +43,10 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	
 	private int nextStateIndex;
 	
-	
 	private ITimer timer;
 	
 	private final boolean[] timeEvents = new boolean[2];
+	
 	public TimedTransitionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}

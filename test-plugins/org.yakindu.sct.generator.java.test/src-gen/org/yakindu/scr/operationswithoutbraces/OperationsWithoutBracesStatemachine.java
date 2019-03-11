@@ -13,6 +13,7 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -32,7 +33,6 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 	private final State[] stateVector = new State[2];
 	
 	private int nextStateIndex;
-	
 	
 	public OperationsWithoutBracesStatemachine() {
 		sCInterface = new SCInterfaceImpl();

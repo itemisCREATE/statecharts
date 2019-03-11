@@ -9,12 +9,14 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	
 		private boolean start;
 		
+		
 		public void raiseStart() {
 			start = true;
 			runCycle();
 		}
 		
 		private boolean reset;
+		
 		
 		public void raiseReset() {
 			reset = true;
@@ -25,13 +27,14 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		
 		private long eValue;
 		
+		
 		public boolean isRaisedE() {
 			return e;
 		}
 		
 		protected void raiseE(long value) {
-			e = true;
 			eValue = value;
+			e = true;
 		}
 		
 		public long getEValue() {
@@ -81,6 +84,7 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -99,11 +103,8 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 	
 	private int nextStateIndex;
 	
-	
 	private Queue<Runnable> internalEventQueue = new LinkedList<Runnable>();
-	
 	private boolean i1;
-	
 	private boolean i2;
 	public EventDrivenInternalEventStatemachine() {
 		sCInterface = new SCInterfaceImpl();
@@ -138,44 +139,65 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		if (!initialized)
 			throw new IllegalStateException(
 					"The state machine needs to be initialized first by calling the init() function.");
-	
-		clearOutEvents();
-		singleCycle();
-		clearEvents();
 		
-		// process queued events
-		while (internalEventQueue.size() > 0) {
-			internalEventQueue.poll().run();
-			clearEvents();
+		clearOutEvents();
+	
+		Runnable task = getNextEvent();
+		if (task == null) {
+			task = getDefaultEvent();
 		}
+		
+		while (task != null) {
+			task.run();
+			clearEvents();
+			task = getNextEvent();
+		}
+		
 	}
 	
 	protected void singleCycle() {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 			switch (stateVector[nextStateIndex]) {
-			case eventDrivenInternalEvent_r1_A:
-				eventDrivenInternalEvent_r1_A_react(true);
-				break;
-			case eventDrivenInternalEvent_r1_B:
-				eventDrivenInternalEvent_r1_B_react(true);
-				break;
-			case eventDrivenInternalEvent_r2_C:
-				eventDrivenInternalEvent_r2_C_react(true);
-				break;
-			case eventDrivenInternalEvent_r2_D:
-				eventDrivenInternalEvent_r2_D_react(true);
-				break;
-			case eventDrivenInternalEvent_check_VALID:
-				eventDrivenInternalEvent_check_VALID_react(true);
-				break;
-			case eventDrivenInternalEvent_check_MULTIPLEEVENTS:
-				eventDrivenInternalEvent_check_MULTIPLEEVENTS_react(true);
-				break;
+				case eventDrivenInternalEvent_r1_A:
+					eventDrivenInternalEvent_r1_A_react(true);
+					break;
+				case eventDrivenInternalEvent_r1_B:
+					eventDrivenInternalEvent_r1_B_react(true);
+					break;
+				case eventDrivenInternalEvent_r2_C:
+					eventDrivenInternalEvent_r2_C_react(true);
+					break;
+				case eventDrivenInternalEvent_r2_D:
+					eventDrivenInternalEvent_r2_D_react(true);
+					break;
+				case eventDrivenInternalEvent_check_VALID:
+					eventDrivenInternalEvent_check_VALID_react(true);
+					break;
+				case eventDrivenInternalEvent_check_MULTIPLEEVENTS:
+					eventDrivenInternalEvent_check_MULTIPLEEVENTS_react(true);
+					break;
 			default:
 				// $NullState$
 			}
 		}
 	}
+	
+	protected Runnable getNextEvent() {
+		if(!internalEventQueue.isEmpty()) {
+			return internalEventQueue.poll();
+		}
+		return null;
+	}
+	
+	protected Runnable getDefaultEvent() {
+		return new Runnable() {
+			@Override
+			public void run() {
+				singleCycle();
+			}
+		};
+	}
+	
 	public void exit() {
 		exitSequence_EventDrivenInternalEvent_r1();
 		exitSequence_EventDrivenInternalEvent_r2();
@@ -250,7 +272,6 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 		});
 	}
 	
-	
 	private void raiseI2() {
 	
 		internalEventQueue.add( new Runnable() {
@@ -260,7 +281,6 @@ public class EventDrivenInternalEventStatemachine implements IEventDrivenInterna
 			}
 		});
 	}
-	
 	
 	public void raiseStart() {
 		sCInterface.raiseStart();

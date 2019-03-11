@@ -17,6 +17,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -29,7 +30,6 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public ParenthesisStatemachine() {
 		sCInterface = new SCInterfaceImpl();

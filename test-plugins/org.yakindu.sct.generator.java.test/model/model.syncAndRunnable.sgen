@@ -1,0 +1,40 @@
+GeneratorModel for yakindu::java {
+	statechart WrapperTest {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+			
+		}
+		
+		feature Naming {
+			basePackage = "org.yakindu.scr"
+			implementationSuffix = "Sync"
+		}
+
+		feature GeneralFeatures {
+			RuntimeService = true
+			InterfaceObserverSupport = true
+			synchronized = true
+		}
+	}
+ 
+	statechart eventdriven.RunnableTest {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+		
+		feature Naming {
+			basePackage =  "org.yakindu.scr"
+			implementationSuffix = "Runnable"
+		}
+
+		feature GeneralFeatures {
+			RuntimeService = true
+			InterfaceObserverSupport = true
+			runnable = true
+		}
+	}
+}

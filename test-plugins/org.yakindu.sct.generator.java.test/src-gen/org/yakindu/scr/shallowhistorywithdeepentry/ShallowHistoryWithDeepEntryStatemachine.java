@@ -7,11 +7,13 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 	
 		private boolean toZ;
 		
+		
 		public void raiseToZ() {
 			toZ = true;
 		}
 		
 		private boolean toY;
+		
 		
 		public void raiseToY() {
 			toY = true;
@@ -19,11 +21,13 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		
 		private boolean toC;
 		
+		
 		public void raiseToC() {
 			toC = true;
 		}
 		
 		private boolean toA;
+		
 		
 		public void raiseToA() {
 			toA = true;
@@ -36,6 +40,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 			toA = false;
 		}
 	}
+	
 	
 	protected SCInterfaceImpl sCInterface;
 	
@@ -54,7 +59,6 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public ShallowHistoryWithDeepEntryStatemachine() {
 		sCInterface = new SCInterfaceImpl();

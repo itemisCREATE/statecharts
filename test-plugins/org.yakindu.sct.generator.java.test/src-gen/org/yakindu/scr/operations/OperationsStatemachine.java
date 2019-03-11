@@ -13,7 +13,6 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		}
 	}
 	
-	protected SCIInterface1Impl sCIInterface1;
 	
 	protected class SCInterfaceImpl implements SCInterface {
 	
@@ -25,6 +24,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		}
 		private boolean ev;
 		
+		
 		public void raiseEv() {
 			ev = true;
 		}
@@ -33,6 +33,9 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 			ev = false;
 		}
 	}
+	
+	
+	protected SCIInterface1Impl sCIInterface1;
 	
 	protected SCInterfaceImpl sCInterface;
 	
@@ -50,16 +53,16 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	
 	private int nextStateIndex;
 	
-	
 	private boolean myBool;
-	
-	protected void setMyBool(boolean value) {
-		myBool = value;
-	}
 	
 	protected boolean getMyBool() {
 		return myBool;
 	}
+	
+	protected void setMyBool(boolean value) {
+		this.myBool = value;
+	}
+	
 	
 	private InternalOperationCallback operationCallback;
 	public OperationsStatemachine() {
