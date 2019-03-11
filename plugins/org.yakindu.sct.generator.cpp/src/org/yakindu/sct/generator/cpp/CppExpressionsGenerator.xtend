@@ -16,7 +16,6 @@ import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.LogicalNotExpression
-import org.yakindu.base.expressions.expressions.LogicalRelationExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.typesystem.ITypeSystem
@@ -68,11 +67,4 @@ class CppExpressionsGenerator extends CExpressionsGenerator {
 	
 	/** Don't use bool_false for C++ code */
 	override dispatch CharSequence sc_boolean_code(LogicalNotExpression it) {code}
-	
-	override dispatch CharSequence code(LogicalRelationExpression it) 
-	'''((«leftOperand.code») «operator.literal» («rightOperand.code»))'''
-	
-	
-	
-
 }
