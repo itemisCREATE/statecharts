@@ -15,6 +15,8 @@ import java.util.List
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sruntime.ExecutionContext
+import org.yakindu.base.types.typesystem.ITypeValueProvider
+import com.google.inject.Inject
 
 class ExecutionContextExtensions {
 
