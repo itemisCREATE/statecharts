@@ -13,7 +13,9 @@ class StatechartEntryExitActions : public ::testing::Test
 public:
 	/* All operations from the SCTUnit test class. */
 	void entryActionsAreExecutedOnEnteringStatechart();
+	void entryActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue();
 	void exitActionsAreExecutedOnEnteringStatechart();
+	void exitActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue();
 	void setTimer(StatechartEntryAndExitActions* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 	void unsetTimer(StatechartEntryAndExitActions* handle, const sc_eventid evid);
 protected:
@@ -48,7 +50,23 @@ void StatechartEntryExitActions::entryActionsAreExecutedOnEnteringStatechart()
 	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 5);
 	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_y(&statechart)== 3);
 }
+void StatechartEntryExitActions::entryActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue()
+{
+	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 0);
+	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_y(&statechart)== 0);
+	statechartEntryAndExitActionsIface_set_b(&statechart,false);
+	statechartEntryAndExitActions_enter(&statechart);
+	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 2);
+	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_y(&statechart)== 3);
+}
 void StatechartEntryExitActions::exitActionsAreExecutedOnEnteringStatechart()
+{
+	statechartEntryAndExitActions_enter(&statechart);
+	statechartEntryAndExitActions_exit(&statechart);
+	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 8);
+	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_y(&statechart)== 2);
+}
+void StatechartEntryExitActions::exitActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue()
 {
 	statechartEntryAndExitActions_enter(&statechart);
 	statechartEntryAndExitActions_exit(&statechart);
@@ -69,8 +87,14 @@ void StatechartEntryExitActions::unsetTimer(StatechartEntryAndExitActions* handl
 TEST_F(StatechartEntryExitActions, entryActionsAreExecutedOnEnteringStatechart) {
 	entryActionsAreExecutedOnEnteringStatechart();
 }
+TEST_F(StatechartEntryExitActions, entryActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue) {
+	entryActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue();
+}
 TEST_F(StatechartEntryExitActions, exitActionsAreExecutedOnEnteringStatechart) {
 	exitActionsAreExecutedOnEnteringStatechart();
+}
+TEST_F(StatechartEntryExitActions, exitActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue) {
+	exitActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue();
 }
 
 
