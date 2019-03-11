@@ -17,6 +17,7 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 		
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -31,7 +32,6 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	private final State[] stateVector = new State[2];
 	
 	private int nextStateIndex;
-	
 	
 	public StatechartLocalReactionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

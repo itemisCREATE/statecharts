@@ -10,11 +10,13 @@
 package org.yakindu.sct.generator.java.submodules
 
 import com.google.inject.Inject
+import org.yakindu.sct.generator.java.features.Synchronized
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 
 class TimingFunctions {
 	@Inject protected extension SExecExtensions
+	@Inject protected extension Synchronized
 	
 	def timingFunctions(ExecutionFlow flow) '''
 		«IF flow.timed»
@@ -25,7 +27,7 @@ class TimingFunctions {
 			* 
 			* @param timer
 			*/
-			public void setTimer(ITimer timer) {
+			public «sync»void setTimer(ITimer timer) {
 				this.timer = timer;
 			}
 
@@ -38,7 +40,7 @@ class TimingFunctions {
 				return timer;
 			}
 			
-			public void timeElapsed(int eventID) {
+			public «sync»void timeElapsed(int eventID) {
 				timeEvents[eventID] = true;
 			}
 

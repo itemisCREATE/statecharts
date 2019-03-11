@@ -37,10 +37,12 @@ import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.base.types.validation.TypeValidator;
+import org.yakindu.sct.commons.ErrorCodeStatus;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.generator.core.extensions.ILibraryDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
+import org.yakindu.sct.generator.core.library.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.generator.core.library.IDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
@@ -77,7 +79,7 @@ public class SGenJavaValidator extends AbstractSGenValidator {
 	public static final String INVALID_DOMAIN_ID = "This generator can not be used for domain %s. Valid domains are %s";
 	public static final String DUPLICATE_ELEMENT = "The %s '%s' exists multiple times. Please rename or remove duplicates.";
 
-	public static final String CODE_REQUIRED_FEATURE = "code_req_feature.";
+	public static final String CODE_REQUIRED_FEATURE = "code_req_feature"; 
 	public static final String CODE_REQUIRED_DOMAIN = "code_req_domain";
 
 	@Inject
@@ -179,9 +181,15 @@ public class SGenJavaValidator extends AbstractSGenValidator {
 
 	private void createMarker(IStatus status) {
 		switch (status.getSeverity()) {
-		case IStatus.ERROR:
-			super.error(status.getMessage(), SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
+		case IStatus.ERROR: {
+			if (status instanceof ErrorCodeStatus) {
+				super.error(status.getMessage(), SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
+						((ErrorCodeStatus) status).getErrorCode());
+			}else {
+				super.error(status.getMessage(), SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
+			}
 			break;
+		}
 		case IStatus.WARNING:
 			super.warning(status.getMessage(), SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
 		}

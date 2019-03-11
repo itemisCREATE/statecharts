@@ -63,7 +63,7 @@ class EventNaming extends org.yakindu.sct.generator.c.extensions.EventNaming {
 		"dispatch_event"
 	}
 	
-	def inEventQueue() {
+	override inEventQueue() {
 		"inEventQueue"
 	}
 	

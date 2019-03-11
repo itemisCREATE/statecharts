@@ -18,6 +18,7 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.EventRaisingExpression
 import org.yakindu.base.expressions.expressions.EventValueReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
 import org.yakindu.base.expressions.expressions.RelationalOperator
 import org.yakindu.base.types.Declaration
@@ -26,7 +27,6 @@ import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
-import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.model.sexec.Method
@@ -161,5 +161,7 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch CharSequence getContext(EObject it) {
 		return "//ERROR: No context for " + it
 	}
+	
+	override dispatch CharSequence code(FloatLiteral it) '''«value.toString»f'''
 
 }

@@ -4,6 +4,33 @@ package org.yakindu.scr.timedtransitions;
 import org.yakindu.scr.ITimer;
 
 public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachine {
+	protected class SCInterfaceImpl implements SCInterface {
+	
+		private long seconds;
+		
+		public long getSeconds() {
+			return seconds;
+		}
+		
+		public void setSeconds(long value) {
+			this.seconds = value;
+		}
+		
+		private long cycles;
+		
+		public long getCycles() {
+			return cycles;
+		}
+		
+		public void setCycles(long value) {
+			this.cycles = value;
+		}
+		
+	}
+	
+	
+	protected SCInterfaceImpl sCInterface;
+	
 	private boolean initialized = false;
 	
 	public enum State {
@@ -16,31 +43,12 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	
 	private int nextStateIndex;
 	
-	
 	private ITimer timer;
 	
 	private final boolean[] timeEvents = new boolean[2];
-	private long x;
-	
-	protected void setX(long value) {
-		x = value;
-	}
-	
-	protected long getX() {
-		return x;
-	}
-	
-	private long y;
-	
-	protected void setY(long value) {
-		y = value;
-	}
-	
-	protected long getY() {
-		return y;
-	}
 	
 	public TimedTransitionsStatemachine() {
+		sCInterface = new SCInterfaceImpl();
 	}
 	
 	public void init() {
@@ -53,9 +61,9 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		}
 		clearEvents();
 		clearOutEvents();
-		setX(0);
+		sCInterface.setSeconds(0);
 		
-		setY(0);
+		sCInterface.setCycles(0);
 	}
 	
 	public void enter() {
@@ -163,12 +171,31 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	
 	public void timeElapsed(int eventID) {
 		timeEvents[eventID] = true;
-		runCycle();
+	}
+	
+	public SCInterface getSCInterface() {
+		return sCInterface;
+	}
+	
+	public long getSeconds() {
+		return sCInterface.getSeconds();
+	}
+	
+	public void setSeconds(long value) {
+		sCInterface.setSeconds(value);
+	}
+	
+	public long getCycles() {
+		return sCInterface.getCycles();
+	}
+	
+	public void setCycles(long value) {
+		sCInterface.setCycles(value);
 	}
 	
 	/* Entry action for state 'Start'. */
 	private void entryAction_main_region_Start() {
-		timer.setTimer(this, 0, (2 * 1000), false);
+		timer.setTimer(this, 0, 1900, false);
 	}
 	
 	/* Exit action for state 'Start'. */
@@ -229,9 +256,9 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	
 	private boolean react() {
 		if (timeEvents[1]) {
-			setX(getX() + 1);
+			sCInterface.setSeconds(sCInterface.getSeconds() + 1);
 		}
-		setY(getY() + 1);
+		sCInterface.setCycles(sCInterface.getCycles() + 1);
 		
 		return false;
 	}

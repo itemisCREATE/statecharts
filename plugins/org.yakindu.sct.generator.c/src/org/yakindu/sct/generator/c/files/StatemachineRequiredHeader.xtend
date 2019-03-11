@@ -25,6 +25,7 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 
 import static org.yakindu.sct.generator.c.CGeneratorConstants.*
+import org.yakindu.sct.generator.c.GeneratorPredicate
 
 class StatemachineRequiredHeader implements IContentTemplate {
 
@@ -33,6 +34,7 @@ class StatemachineRequiredHeader implements IContentTemplate {
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension GenmodelEntries
 	@Inject extension INamingService
+	@Inject extension GeneratorPredicate
 	
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) '''
 		«entry.licenseText»
@@ -135,7 +137,7 @@ class StatemachineRequiredHeader implements IContentTemplate {
 	def dispatch functionPrototypes(Declaration it) ''''''
 
 	def dispatch functionPrototypes(OperationDefinition it) '''
-		extern «typeSpecifier.targetLanguageName» «asFunction»(const «scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR»);
+		extern «typeSpecifier.targetLanguageName» «asFunction»(«IF !needsInEventQueue(flow)»const«ENDIF» «scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR»);
 	'''
 
 }

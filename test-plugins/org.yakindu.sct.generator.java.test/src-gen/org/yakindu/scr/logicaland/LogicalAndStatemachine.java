@@ -31,6 +31,7 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 		
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -43,7 +44,6 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public LogicalAndStatemachine() {
 		sCInterface = new SCInterfaceImpl();

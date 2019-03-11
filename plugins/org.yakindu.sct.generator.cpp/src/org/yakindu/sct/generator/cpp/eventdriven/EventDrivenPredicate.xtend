@@ -11,57 +11,14 @@
 package org.yakindu.sct.generator.cpp.eventdriven
 
 import com.google.inject.Inject
-import org.yakindu.sct.generator.core.extensions.AnnotationExtensions
+import org.yakindu.sct.generator.core.extensions.GeneratorPredicate
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
-import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.model.stext.stext.EventDefinition
 
-class EventDrivenPredicate {
-	@Inject protected extension SExecExtensions
+class EventDrivenPredicate extends GeneratorPredicate {
 	@Inject protected extension GenmodelEntriesExtension
 	
-	@Inject protected GeneratorEntry entry
-	@Inject protected extension AnnotationExtensions
-	
-	def boolean isEventDriven() {
-		entry.isEventDriven
+	override useInEventQueue() {
+		entry.inEventQueue
 	}
 	
-	def boolean needsQueues(ExecutionFlow it) {
-		needsInternalEventQueue || needsInEventQueue
-	}
-	
-	def boolean needsDispatchEventFunction(ExecutionFlow it) {
-		needsQueues
-	}
-	
-	def boolean needsNextEventFunction(ExecutionFlow it) {
-		needsQueues
-	}
-	
-	def boolean needsInternalEventQueue(ExecutionFlow it) {
-		isEventDriven && flow.hasLocalEvents
-	}
-	
-	def boolean needsInEventQueue(ExecutionFlow it) {
-		isEventDriven && entry.inEventQueue
-	}
-	
-	def boolean needsRunCycleGuard(ExecutionFlow it) {
-		needsInEventQueue
-	}
-	
-	def boolean isQueued(EventDefinition it) {
-		isEventDriven && (isLocalEvent || (isInEvent && entry.inEventQueue))
-	}
-	
-	def boolean needsEventNamespace(ExecutionFlow it) {
-		needsEventClasses
-	}
-	
-	def boolean needsEventClasses(ExecutionFlow it) {
-		isEventDriven && (flow.hasLocalEvents || (flow.hasInEvents && entry.inEventQueue))
-	}
 }

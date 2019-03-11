@@ -7,6 +7,7 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 	
 		private boolean event1;
 		
+		
 		public void raiseEvent1() {
 			event1 = true;
 		}
@@ -15,6 +16,7 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 			event1 = false;
 		}
 	}
+	
 	
 	protected SCInterfaceImpl sCInterface;
 	
@@ -30,7 +32,6 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public SimpleEventStatemachine() {
 		sCInterface = new SCInterfaceImpl();

@@ -7,6 +7,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
@@ -106,6 +107,7 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -121,7 +123,6 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public ChildFirstExecutionHierarchyStatemachine() {
 		sCInterface = new SCInterfaceImpl();

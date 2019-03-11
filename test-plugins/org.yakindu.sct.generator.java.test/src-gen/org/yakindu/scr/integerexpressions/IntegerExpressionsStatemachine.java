@@ -7,6 +7,7 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 	
 		private boolean e1;
 		
+		
 		public void raiseE1() {
 			e1 = true;
 		}
@@ -256,6 +257,7 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -269,7 +271,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public IntegerExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

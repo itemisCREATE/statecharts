@@ -23,13 +23,14 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		
 		private long ev_outValue;
 		
+		
 		public boolean isRaisedEv_out() {
 			return ev_out;
 		}
 		
 		protected void raiseEv_out(long value) {
-			ev_out = true;
 			ev_outValue = value;
+			ev_out = true;
 			for (SCInterfaceListener listener : listeners) {
 				listener.onEv_outRaised(value);
 			}
@@ -45,11 +46,11 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		
 		private long ev_inValue;
 		
-		public void raiseEv_in(long value) {
-			ev_in = true;
-			ev_inValue = value;
-		}
 		
+		public void raiseEv_in(long value) {
+			ev_inValue = value;
+			ev_in = true;
+		}
 		protected long getEv_inValue() {
 			if (! ev_in ) 
 				throw new IllegalStateException("Illegal event value access. Event Ev_in is not raised!");
@@ -106,6 +107,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -122,10 +124,10 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	
 	private int nextStateIndex;
 	
-	
 	private ITimer timer;
 	
 	private final boolean[] timeEvents = new boolean[3];
+	
 	public RunnableTestStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -266,7 +268,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	
 	public void timeElapsed(int eventID) {
 		timeEvents[eventID] = true;
-		runCycle();
 	}
 	
 	public SCInterface getSCInterface() {

@@ -7,6 +7,7 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
@@ -36,6 +37,7 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -49,7 +51,6 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public GuardedExitStatemachine() {
 		sCInterface = new SCInterfaceImpl();

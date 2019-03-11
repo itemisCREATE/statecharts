@@ -7,17 +7,20 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
 		
 		private boolean f;
 		
+		
 		public void raiseF() {
 			f = true;
 		}
 		
 		private boolean g;
+		
 		
 		public void raiseG() {
 			g = true;
@@ -29,6 +32,7 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 			g = false;
 		}
 	}
+	
 	
 	protected SCInterfaceImpl sCInterface;
 	
@@ -45,7 +49,6 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public ExitStateStatemachine() {
 		sCInterface = new SCInterfaceImpl();

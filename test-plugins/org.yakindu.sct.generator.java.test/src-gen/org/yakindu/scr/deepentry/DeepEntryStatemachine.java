@@ -7,11 +7,13 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
 		
 		private boolean f;
+		
 		
 		public void raiseF() {
 			f = true;
@@ -53,6 +55,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -75,7 +78,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	private final State[] stateVector = new State[3];
 	
 	private int nextStateIndex;
-	
 	
 	public DeepEntryStatemachine() {
 		sCInterface = new SCInterfaceImpl();

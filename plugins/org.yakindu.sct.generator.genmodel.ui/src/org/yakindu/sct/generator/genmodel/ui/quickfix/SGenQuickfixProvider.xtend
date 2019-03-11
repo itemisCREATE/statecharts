@@ -39,6 +39,9 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgen.GeneratorModel
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil
+import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
+import org.yakindu.sct.commons.EmfUriUtil
+import org.yakindu.sct.generator.core.library.AbstractDefaultFeatureValueProvider
 
 /** 
  * @author andreas muelder - Initial contribution and API
@@ -46,6 +49,7 @@ import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil
 class SGenQuickfixProvider extends DefaultQuickfixProvider {
 	
 	public static final String CHANGE_DOMAIN_COMMAND="Domain change command"
+	
 	
 	@Fix(SGenJavaValidator::CODE_REQUIRED_FEATURE)
 	def void AddRequiredFeature(Issue issue, IssueResolutionAcceptor acceptor) {
@@ -55,6 +59,16 @@ class SGenQuickfixProvider extends DefaultQuickfixProvider {
 			entry.getFeatures().add(config) 
 		}] as ISemanticModification)) 
 	}
+	
+	@Fix(AbstractDefaultFeatureValueProvider::CODE_MISSING_PROJECT)
+	def void changeTargetProject(Issue issue, IssueResolutionAcceptor acceptor) {
+		val currentProject = EmfUriUtil.toFile(issue.uriToProblem).project.name
+		val iSemanticModification = [ EObject element, IModificationContext context| 
+			context.xtextDocument.replace(issue.offset, issue.length, '"' + currentProject + '"')
+			] as ISemanticModification
+		acceptor.accept(issue, "Change targetProject to '" + currentProject + "'", "", null, iSemanticModification) 
+	}
+	
 	@Fix(SGenJavaValidator::CODE_REQUIRED_DOMAIN)
 	def void changeToValidDomain(Issue issue, IssueResolutionAcceptor acceptor) {
 		var String[] validDomains=issue.getData().get(0).split(",") 
@@ -73,7 +87,6 @@ class SGenQuickfixProvider extends DefaultQuickfixProvider {
 				} catch (Exception ex) {
 					ex.printStackTrace() 
 				}
-				
 			}
 		}] as ISemanticModification)) 
 	}

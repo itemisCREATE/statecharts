@@ -8,6 +8,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 			runCycle();
@@ -28,6 +29,7 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -42,10 +44,10 @@ public class EventDrivenTriggeredByEventStatemachine implements IEventDrivenTrig
 	
 	private int nextStateIndex;
 	
-	
 	private ITimer timer;
 	
 	private final boolean[] timeEvents = new boolean[1];
+	
 	public EventDrivenTriggeredByEventStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}

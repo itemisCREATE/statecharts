@@ -47,7 +47,6 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 		
 	}
 	
-	protected SCInterfaceImpl sCInterface;
 	
 	protected class SCIAImpl implements SCIA {
 	
@@ -93,6 +92,9 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 		
 	}
 	
+	
+	protected SCInterfaceImpl sCInterface;
+	
 	protected SCIAImpl sCIA;
 	
 	private boolean initialized = false;
@@ -106,7 +108,6 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public ReadOnlyVariableStatemachine() {
 		sCInterface = new SCInterfaceImpl();

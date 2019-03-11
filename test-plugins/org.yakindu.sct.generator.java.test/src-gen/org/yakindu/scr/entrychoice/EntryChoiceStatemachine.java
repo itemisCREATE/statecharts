@@ -14,7 +14,6 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 	
 	private int nextStateIndex;
 	
-	
 	public EntryChoiceStatemachine() {
 	}
 	

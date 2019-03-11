@@ -10,20 +10,27 @@
  */
 package org.yakindu.sct.simulation.ui.view;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.time.DurationFormatUtils;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
+import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IStep;
+import org.eclipse.debug.internal.ui.commands.actions.RestartCommandAction;
 import org.eclipse.debug.internal.ui.commands.actions.ResumeCommandAction;
 import org.eclipse.debug.internal.ui.commands.actions.StepOverCommandAction;
 import org.eclipse.debug.internal.ui.commands.actions.SuspendCommandAction;
+import org.eclipse.debug.internal.ui.commands.actions.TerminateAndRelaunchAction;
 import org.eclipse.debug.internal.ui.commands.actions.TerminateCommandAction;
+import org.eclipse.debug.ui.DebugUITools;
+import org.eclipse.debug.ui.actions.DebugCommandAction;
 import org.eclipse.debug.ui.contexts.DebugContextEvent;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.notation.Diagram;
@@ -62,6 +69,7 @@ import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sruntime.ExecutionEvent;
+import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.engine.scheduling.DefaultTimeTaskScheduler;
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler;
@@ -318,12 +326,9 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 
 	protected void hookActions() {
 		IToolBarManager mgr = getViewSite().getActionBars().getToolBarManager();
-		Lists.newArrayList(new ResumeAction(), new SuspendAction(), new TerminateAction(), new StepOverAction())
-				.forEach(action -> {
-					mgr.add(action);
-				});
-		updateActions();
-		mgr.add(new Separator());
+		addActions(mgr, Lists.newArrayList(new ResumeAction(), new SuspendAction(), new StepOverAction()));
+		addActions(mgr, Lists.newArrayList(new TerminateAction(), new TerminateAndRelaunch()));
+		addActions(mgr, Lists.newArrayList(new RestartAction()));
 		IAction collapse = new CollapseAllAction(viewer);
 		mgr.add(collapse);
 		IAction expand = new ExpandAllAction(viewer);
@@ -331,6 +336,17 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		IAction hideTimeEvent = new HideTimeEventsAction(false);
 		mgr.add(hideTimeEvent);
 		getViewSite().getActionBars().getToolBarManager().update(true);
+	}
+
+	protected void addActions(IToolBarManager mgr, ArrayList<DebugCommandAction> actions) {
+		if (actions.isEmpty()) {
+			return;
+		}
+		for (DebugCommandAction action : actions) {
+			mgr.add(action);
+		}
+		updateActions();
+		mgr.add(new Separator());
 	}
 
 	/**
@@ -403,6 +419,59 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	@Override
 	public ITypeSystem getTypeSystem() {
 		return typeSystem;
+	}
+
+	protected class RestartAction extends RestartCommandAction implements IAction {
+		@Override
+		public void run() {
+			Display.getDefault().asyncExec(new Runnable() {
+
+				@Override
+				public void run() {
+					IDebugTarget[] debugTargets = debugTarget.getLaunch().getDebugTargets();
+					for (IDebugTarget current : debugTargets) {
+						ILaunch launch = current.getLaunch();
+						SCTDebugTarget target = (SCTDebugTarget) launch.getDebugTarget();
+						ILaunchConfiguration launchConfiguration = target.getLaunch().getLaunchConfiguration();
+						DebugUITools.launch(launchConfiguration, target.getLaunch().getLaunchMode());
+					}
+				}
+			});
+		}
+
+		@Override
+		public boolean isEnabled() {
+			return debugTarget != null;
+		}
+	}
+
+	protected class TerminateAndRelaunch extends TerminateAndRelaunchAction implements IAction {
+		@Override
+		public void run() {
+			Display.getDefault().asyncExec(new Runnable() {
+
+				@Override
+				public void run() {
+					IDebugTarget[] debugTargets = debugTarget.getLaunch().getDebugTargets();
+					for (IDebugTarget current : debugTargets) {
+						ILaunch launch = current.getLaunch();
+						SCTDebugTarget target = (SCTDebugTarget) launch.getDebugTarget();
+						try {
+							target.getLaunch().terminate();
+							ILaunchConfiguration launchConfiguration = target.getLaunch().getLaunchConfiguration();
+							DebugUITools.launch(launchConfiguration, target.getLaunch().getLaunchMode());
+						} catch (CoreException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			});
+		}
+
+		@Override
+		public boolean isEnabled() {
+			return debugTarget != null && !debugTarget.isTerminated();
+		}
 	}
 
 	protected class StepOverAction extends StepOverCommandAction implements IAction {

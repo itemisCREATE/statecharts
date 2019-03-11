@@ -7,6 +7,7 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
@@ -56,6 +57,7 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -69,7 +71,6 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public ConditionalExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

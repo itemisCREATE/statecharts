@@ -15,7 +15,6 @@ public class TransitionWithoutConditionStatemachine implements ITransitionWithou
 	
 	private int nextStateIndex;
 	
-	
 	public TransitionWithoutConditionStatemachine() {
 	}
 	

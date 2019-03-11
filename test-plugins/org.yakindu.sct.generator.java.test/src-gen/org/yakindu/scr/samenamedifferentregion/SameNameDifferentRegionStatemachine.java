@@ -7,6 +7,7 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 	
 		private boolean e1;
 		
+		
 		public void raiseE1() {
 			e1 = true;
 		}
@@ -15,6 +16,7 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 			e1 = false;
 		}
 	}
+	
 	
 	protected SCInterfaceImpl sCInterface;
 	
@@ -31,7 +33,6 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public SameNameDifferentRegionStatemachine() {
 		sCInterface = new SCInterfaceImpl();

@@ -7,11 +7,13 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	
 		private boolean b;
 		
+		
 		public void raiseB() {
 			b = true;
 		}
 		
 		private boolean d;
+		
 		
 		public void raiseD() {
 			d = true;
@@ -63,6 +65,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -80,7 +83,6 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 	private final State[] stateVector = new State[2];
 	
 	private int nextStateIndex;
-	
 	
 	public EntryReactionActionStatemachine() {
 		sCInterface = new SCInterfaceImpl();

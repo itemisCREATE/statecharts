@@ -53,7 +53,7 @@ public abstract class AbstractPriorityDecorationProvider extends AbstractDecorat
 	}
 
 	protected boolean shouldInstall(IEditorPart editorPart) {
-		return (editorPart instanceof StatechartDiagramEditor);
+		return (editorPart == null) || (editorPart instanceof StatechartDiagramEditor);
 	}
 
 	@Override

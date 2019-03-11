@@ -33,9 +33,22 @@
         deprecated="true"
         optional="true"
         parameterType="BOOLEAN"/>
+    <parameters
+        name="inEventQueue"
+        optional="true"
+        parameterType="BOOLEAN"/>
+    <parameters
+        name="synchronized"
+        optional="true"
+        parameterType="BOOLEAN"/>
+    <parameters
+        name="runnable"
+        optional="true"
+        parameterType="BOOLEAN"/>
   </types>
   <types name="RunnableWrapper"
-      comment="Generates a runnable wrapper for the state machine"
+      deprecated="true"
+      comment="Use parameter &quot;runnable&quot; in feature &quot;GeneralFeatures&quot; instead."
       optional="true">
     <parameters
         name="namePrefix"
@@ -47,6 +60,8 @@
         optional="true"/>
   </types>
   <types name="SynchronizedWrapper"
+      deprecated="true"
+      comment="Use parameter &quot;synchronized&quot; in feature &quot;GeneralFeatures&quot; instead."
       optional="true">
     <parameters
         name="namePrefix"

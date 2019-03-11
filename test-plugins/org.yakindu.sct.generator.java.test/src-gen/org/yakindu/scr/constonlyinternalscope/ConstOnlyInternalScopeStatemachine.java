@@ -9,11 +9,11 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 		
 		private long eValue;
 		
-		public void raiseE(long value) {
-			e = true;
-			eValue = value;
-		}
 		
+		public void raiseE(long value) {
+			eValue = value;
+			e = true;
+		}
 		protected long getEValue() {
 			if (! e ) 
 				throw new IllegalStateException("Illegal event value access. Event E is not raised!");
@@ -24,6 +24,7 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 			e = false;
 		}
 	}
+	
 	
 	protected SCInterfaceImpl sCInterface;
 	
@@ -40,14 +41,15 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 	
 	private int nextStateIndex;
 	
-	
 	protected long getB() {
 		return b;
 	}
 	
+	
 	protected long getC() {
 		return c;
 	}
+	
 	
 	public ConstOnlyInternalScopeStatemachine() {
 		sCInterface = new SCInterfaceImpl();

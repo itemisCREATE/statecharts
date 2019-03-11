@@ -23,10 +23,7 @@ import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
-import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
-
-import static org.eclipse.xtext.util.Strings.*
 
 @Singleton
 class InternalFunctionsGenerator {
@@ -39,6 +36,7 @@ class InternalFunctionsGenerator {
 	
 	@Inject protected extension FieldDeclarationGenerator
 	@Inject protected extension InterfaceFunctionsGenerator
+	@Inject protected extension EventCode
 	
 	def clearInEvents(ExecutionFlow flow) '''
 		/**
@@ -77,80 +75,23 @@ class InternalFunctionsGenerator {
 
 	'''
 	
-	def createFieldDeclarations(ExecutionFlow flow, GeneratorEntry entry) '''
-		«FOR scope : flow.interfaceScopes»
-			«scope.toImplementation(entry)»
-			protected «scope.interfaceImplName» «scope.interfaceName.asEscapedIdentifier»;
-			
-		«ENDFOR»
-		private boolean initialized = false;
-
-		public enum State {
-			«FOR state : flow.states»
-				«state.stateName.asEscapedIdentifier»,
-			«ENDFOR»
-			«getNullStateName()»
-		};
-
-		«IF flow.hasHistory»
-			private State[] historyVector = new State[«flow.historyVector.size»];
-		«ENDIF»
-		private final State[] stateVector = new State[«flow.stateVector.size»];
-		
-		private int nextStateIndex;
-		
-		«IF tracingUsed(entry)»
-			private List <«traceInterface»<State>> «traceInstances» = new LinkedList <«traceInterface»<State>>();
-			
-		«ENDIF»
-		
-		«IF flow.timed»
-			private ITimer timer;
-			
-			private final boolean[] timeEvents = new boolean[«flow.timeEvents.size»];
-		«ENDIF»
-		«flow.internalEventFields»		
-		«FOR variable : flow.internalScopeVariables SEPARATOR newLine AFTER newLine»
-			«IF !variable.const»
-				«variable.fieldDeclaration»
-				protected void «variable.setter»(«variable.typeSpecifier.targetLanguageName» value) {
-					«variable.identifier» = value;
-				}
-
+	def internalScopeFunctions (ExecutionFlow flow) '''
+		«FOR event : flow.internalScopeEvents»
+			«event.internalEventRaiser»
+			«IF event.hasValue»
+				«event.eventValueGetter»
 			«ENDIF»
-			protected «variable.typeSpecifier.targetLanguageName» «variable.getter» {
-				return «variable.identifier»;
-			}
-			«IF variable.needsAssignMethod»
-				protected «variable.typeSpecifier.targetLanguageName» «variable.assign»(«variable.typeSpecifier.targetLanguageName» value) {
-					return this.«variable.identifier» = value;
-				}
 
-			«ENDIF»
 		«ENDFOR»
 		«FOR internal : flow.internalScopes»
-			«IF internal.hasOperations()»
-				private «internal.getInternalOperationCallbackName()» operationCallback;
+			«IF internal.hasOperations»
+				public void set«internal.internalOperationCallbackName»(
+						«internal.internalOperationCallbackName» operationCallback) {
+					this.operationCallback = operationCallback;
+				}
+
 			«ENDIF»
 		«ENDFOR»
-	'''
-	
-	def internalEventFields(ExecutionFlow flow) '''
-		«FOR event : flow.internalScopeEvents»
-
-			«event.internalEventField»	
-			«event.internalEventValueField»
-		«ENDFOR»
-	'''
-	
-	def internalEventField(EventDefinition it) '''
-			private boolean «event.identifier»;
-	'''
-	
-	def internalEventValueField(EventDefinition it) '''
-		«IF hasValue»
-			private «typeSpecifier.targetLanguageName» «valueIdentifier»;
-		«ENDIF»
 	'''
 	
 	def functionImplementations(ExecutionFlow it) '''
@@ -197,5 +138,10 @@ class InternalFunctionsGenerator {
 			«code.toString.trim»
 		}
 
+	'''
+	
+	def getIllegalAccessValidation(EventDefinition it) '''
+		if (! «name.asEscapedIdentifier» ) 
+			throw new IllegalStateException("Illegal event value access. Event «name.asEscapedName» is not raised!");
 	'''
 }

@@ -337,7 +337,7 @@ class InternalOperation5aMock{
 		const sc_string param1;
 		int callCount;
 		inline bool operator==(const parameters& other) {
-			return (this->param1 == other.param1);
+			return (strcmp(this->param1, other.param1) == 0);
 		}
 	};
 	public:
@@ -689,7 +689,7 @@ class Interface1InterfaceOperation5aMock{
 		const sc_string param1;
 		int callCount;
 		inline bool operator==(const parameters& other) {
-			return (this->param1 == other.param1);
+			return (strcmp(this->param1, other.param1) == 0);
 		}
 	};
 	public:
@@ -1041,7 +1041,7 @@ class UnnamedOperation5aMock{
 		const sc_string param1;
 		int callCount;
 		inline bool operator==(const parameters& other) {
-			return (this->param1 == other.param1);
+			return (strcmp(this->param1, other.param1) == 0);
 		}
 	};
 	public:

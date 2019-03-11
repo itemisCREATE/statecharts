@@ -9,11 +9,11 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		
 		private long integerEventValue;
 		
-		public void raiseIntegerEvent(long value) {
-			integerEvent = true;
-			integerEventValue = value;
-		}
 		
+		public void raiseIntegerEvent(long value) {
+			integerEventValue = value;
+			integerEvent = true;
+		}
 		protected long getIntegerEventValue() {
 			if (! integerEvent ) 
 				throw new IllegalStateException("Illegal event value access. Event IntegerEvent is not raised!");
@@ -24,11 +24,11 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		
 		private boolean booleanEventValue;
 		
-		public void raiseBooleanEvent(boolean value) {
-			booleanEvent = true;
-			booleanEventValue = value;
-		}
 		
+		public void raiseBooleanEvent(boolean value) {
+			booleanEventValue = value;
+			booleanEvent = true;
+		}
 		protected boolean getBooleanEventValue() {
 			if (! booleanEvent ) 
 				throw new IllegalStateException("Illegal event value access. Event BooleanEvent is not raised!");
@@ -39,11 +39,11 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		
 		private double realEventValue;
 		
-		public void raiseRealEvent(double value) {
-			realEvent = true;
-			realEventValue = value;
-		}
 		
+		public void raiseRealEvent(double value) {
+			realEventValue = value;
+			realEvent = true;
+		}
 		protected double getRealEventValue() {
 			if (! realEvent ) 
 				throw new IllegalStateException("Illegal event value access. Event RealEvent is not raised!");
@@ -54,11 +54,11 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		
 		private String stringEventValue;
 		
-		public void raiseStringEvent(String value) {
-			stringEvent = true;
-			stringEventValue = value;
-		}
 		
+		public void raiseStringEvent(String value) {
+			stringEventValue = value;
+			stringEvent = true;
+		}
 		protected String getStringEventValue() {
 			if (! stringEvent ) 
 				throw new IllegalStateException("Illegal event value access. Event StringEvent is not raised!");
@@ -113,6 +113,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -137,7 +138,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	private final State[] stateVector = new State[5];
 	
 	private int nextStateIndex;
-	
 	
 	public ValuedEventsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

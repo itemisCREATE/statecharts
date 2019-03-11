@@ -7,6 +7,7 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 	
 		private boolean event1;
 		
+		
 		public void raiseEvent1() {
 			event1 = true;
 		}
@@ -26,6 +27,7 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 		}
 	}
 	
+	
 	protected SCIMyInterfaceImpl sCIMyInterface;
 	
 	private boolean initialized = false;
@@ -39,7 +41,6 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public FeatureCallsStatemachine() {
 		sCIMyInterface = new SCIMyInterfaceImpl();

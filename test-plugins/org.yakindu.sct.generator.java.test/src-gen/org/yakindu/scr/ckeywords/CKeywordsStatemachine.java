@@ -7,11 +7,13 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	
 		private boolean auto;
 		
+		
 		public void raiseAuto() {
 			auto = true;
 		}
 		
 		private boolean breakEvent;
+		
 		
 		public void raiseBreak() {
 			breakEvent = true;
@@ -283,6 +285,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -299,7 +302,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public CKeywordsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

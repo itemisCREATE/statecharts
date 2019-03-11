@@ -7,11 +7,13 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 	
 		private boolean e1;
 		
+		
 		public void raiseE1() {
 			e1 = true;
 		}
 		
 		private boolean e2;
+		
 		
 		public void raiseE2() {
 			e2 = true;
@@ -33,6 +35,7 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 		}
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -46,7 +49,6 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public TriggerGuardExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

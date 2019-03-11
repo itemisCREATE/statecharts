@@ -27,6 +27,7 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 		
 	}
 	
+	
 	protected SCInterfaceImpl sCInterface;
 	
 	private boolean initialized = false;
@@ -41,7 +42,6 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 	private final State[] stateVector = new State[1];
 	
 	private int nextStateIndex;
-	
 	
 	public CastExpressionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

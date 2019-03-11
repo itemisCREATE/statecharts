@@ -325,7 +325,7 @@ GeneratorModel for sctunit::cpp {
 		
 	test ConstantsVariationTests{
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
+			targetProject = targetProject
 			targetFolder = "gtests/ConstantsVariationTest"
 			libraryTargetFolder = "libraryTarget"
 		}

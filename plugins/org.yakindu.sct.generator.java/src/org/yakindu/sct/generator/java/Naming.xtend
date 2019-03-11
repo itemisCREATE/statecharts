@@ -22,12 +22,13 @@ import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
+import org.yakindu.sct.model.sgraph.Scope
 
 class Naming {
 
 	@Inject extension JavaNamingService namingService;
 	@Inject StextNameProvider provider;
-
+	
 	def iStatemachine() {
 		"IStatemachine"
 	}
@@ -217,5 +218,9 @@ class Naming {
 	}
 
 	def functionName(Step it) { shortName }
+	
+	def runCycleGuard() {
+		"isRunningCycle"
+	}
 
 }

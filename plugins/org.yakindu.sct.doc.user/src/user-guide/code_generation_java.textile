@@ -35,6 +35,8 @@ bc. feature Naming {
 
 h4(#codegen_java_synchronizedwrapper_feature). SynchronizedWrapper feature
 
+This feature is deprecated. Use @GeneralFeatures { synchronized=true}@ instead.
+
 The *SynchronizedWrapper* feature generates a synchronized wrapper for the state machine. This is an additional Java class providing thread-safe access to the generated state machine implementation. As the wrapper adds thread safety any number of client threads may call the state machine.
 
 It is an _optional_ feature and has the following parameters:
@@ -61,12 +63,16 @@ bc. feature SynchronizedWrapper {
 
 h4(#codegen_java_runnablewrapper_feature). RunnableWrapper feature
 
+This feature is deprecated. Use @GeneralFeatures { Runnable=true}@ instead.
+
 The *RunnableWrapper* feature generates a runnable wrapper for the state machine. This is an additional Java class providing a thread-safe wrapper for the generated state machine implementation. In addition to the specific state machine interface it implements the _Runnable_ interface and can be executed in a thread. It implements an event queue and event-driven execution semantics. As the wrapper adds thread safety any number of client threads may call the state machine.
 
 It is an _optional_ feature and has the following parameters:
 
 * _namePrefix_ (String, optional): Name prefix for the generated wrapper class
 * _nameSuffix_ (String, optional): Name suffix for the generated wrapper class
+
+Instead of using the *RunnableWrapper*, you can also use the option "*InEventQueue*":#codegen_java_generalfeatures if the statemachine uses the eventdriven execution model.
 
 ==<div class="example">==
 
@@ -94,6 +100,9 @@ The *GeneralFeatures* feature allows to configure additional services to be gene
 * _InterfaceObserverSupport_ (Boolean, optional): Enables/disables the generation of listener interfaces for the state machine.
 * _RuntimeService_ (Boolean, optional): Enables/disables the generation of a runtime service that triggers the run cycle of a cycle-based state machine.
 * _TimerService_ (Boolean, optional): Enables/disables the generation of a timer service implementation using _java.util.Timer_.
+* _InEventQueue_ (Boolean, optional): Enables queuing of in-events in the statemachine (for event-driven execution). You can use this instead of the "*RunnableWrapper*":#codegen_java_runnablewrapper_feature.
+* _synchronized_ (Boolean, optional): Sets all methods where it is appropriate to "synchronized". This replaces the "*SynchronizedWrapper*":#codegen_java_synchronizedwrapper_feature.
+* _Runnable_ (Boolean, optional): Makes the statemachine implement _java.lang.Runnable_. Works only for event-driven statemachines. This implies _synchronized_ and _InEventQueue_. This replaces the "*RunnableWrapper*":#codegen_java_runnablewrapper_feature.
 
 ==<div class="example">==
 

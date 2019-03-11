@@ -20,6 +20,7 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.EventRaisingExpression
 import org.yakindu.base.expressions.expressions.EventValueReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.RelationalOperator
@@ -29,7 +30,6 @@ import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
-import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.model.sexec.LocalVariableDefinition
@@ -223,4 +223,6 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 		}
 		return false // default
 	}
+	
+	override dispatch CharSequence code(FloatLiteral it) '''«value.toString»f'''
 }

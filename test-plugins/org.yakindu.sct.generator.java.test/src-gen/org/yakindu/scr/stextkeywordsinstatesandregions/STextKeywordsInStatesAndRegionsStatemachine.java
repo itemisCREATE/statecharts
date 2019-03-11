@@ -7,11 +7,13 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	
 		private boolean e1;
 		
+		
 		public void raiseE1() {
 			e1 = true;
 		}
 		
 		private boolean e2;
+		
 		
 		public void raiseE2() {
 			e2 = true;
@@ -22,6 +24,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 			e2 = false;
 		}
 	}
+	
 	
 	protected SCInterfaceImpl sCInterface;
 	
@@ -73,7 +76,6 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	private final State[] stateVector = new State[20];
 	
 	private int nextStateIndex;
-	
 	
 	public STextKeywordsInStatesAndRegionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();

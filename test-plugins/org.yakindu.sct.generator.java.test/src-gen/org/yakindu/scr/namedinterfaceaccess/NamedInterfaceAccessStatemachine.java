@@ -7,6 +7,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	
 		private boolean open;
 		
+		
 		public boolean isRaisedOpen() {
 			return open;
 		}
@@ -16,6 +17,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		}
 		
 		private boolean close;
+		
 		
 		public boolean isRaisedClose() {
 			return close;
@@ -35,7 +37,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		
 	}
 	
-	protected SCISafeImpl sCISafe;
 	
 	protected class SCIUserImpl implements SCIUser {
 	
@@ -43,11 +44,11 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		
 		private long numberPressedValue;
 		
-		public void raiseNumberPressed(long value) {
-			numberPressed = true;
-			numberPressedValue = value;
-		}
 		
+		public void raiseNumberPressed(long value) {
+			numberPressedValue = value;
+			numberPressed = true;
+		}
 		protected long getNumberPressedValue() {
 			if (! numberPressed ) 
 				throw new IllegalStateException("Illegal event value access. Event NumberPressed is not raised!");
@@ -55,6 +56,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		}
 		
 		private boolean reset;
+		
 		
 		public void raiseReset() {
 			reset = true;
@@ -65,6 +67,9 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 			reset = false;
 		}
 	}
+	
+	
+	protected SCISafeImpl sCISafe;
 	
 	protected SCIUserImpl sCIUser;
 	
@@ -84,36 +89,38 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	
 	private int nextStateIndex;
 	
-	
 	private long number1;
-	
-	protected void setNumber1(long value) {
-		number1 = value;
-	}
 	
 	protected long getNumber1() {
 		return number1;
 	}
 	
-	private long number2;
-	
-	protected void setNumber2(long value) {
-		number2 = value;
+	protected void setNumber1(long value) {
+		this.number1 = value;
 	}
+	
+	
+	private long number2;
 	
 	protected long getNumber2() {
 		return number2;
 	}
 	
-	private long number3;
-	
-	protected void setNumber3(long value) {
-		number3 = value;
+	protected void setNumber2(long value) {
+		this.number2 = value;
 	}
+	
+	
+	private long number3;
 	
 	protected long getNumber3() {
 		return number3;
 	}
+	
+	protected void setNumber3(long value) {
+		this.number3 = value;
+	}
+	
 	
 	public NamedInterfaceAccessStatemachine() {
 		sCISafe = new SCISafeImpl();

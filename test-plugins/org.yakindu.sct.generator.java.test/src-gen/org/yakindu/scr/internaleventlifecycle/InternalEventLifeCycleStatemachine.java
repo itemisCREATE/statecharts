@@ -7,11 +7,13 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 	
 		private boolean e;
 		
+		
 		public void raiseE() {
 			e = true;
 		}
 		
 		private boolean f;
+		
 		
 		public void raiseF() {
 			f = true;
@@ -22,6 +24,7 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 			f = false;
 		}
 	}
+	
 	
 	protected SCInterfaceImpl sCInterface;
 	
@@ -39,10 +42,7 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 	
 	private int nextStateIndex;
 	
-	
-	
 	private boolean i1;
-	
 	private boolean i2;
 	public InternalEventLifeCycleStatemachine() {
 		sCInterface = new SCInterfaceImpl();
@@ -154,11 +154,9 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		i1 = true;
 	}
 	
-	
 	private void raiseI2() {
 		i2 = true;
 	}
-	
 	
 	public void raiseE() {
 		sCInterface.raiseE();

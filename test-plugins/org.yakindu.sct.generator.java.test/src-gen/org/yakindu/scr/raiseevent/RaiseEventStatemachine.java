@@ -7,6 +7,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	
 		private boolean e1;
 		
+		
 		public boolean isRaisedE1() {
 			return e1;
 		}
@@ -16,6 +17,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		}
 		
 		private boolean e2;
+		
 		
 		public void raiseE2() {
 			e2 = true;
@@ -30,6 +32,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		}
 		
 	}
+	
 	
 	protected SCInterfaceImpl sCInterface;
 	
@@ -46,7 +49,6 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	private final State[] stateVector = new State[2];
 	
 	private int nextStateIndex;
-	
 	
 	public RaiseEventStatemachine() {
 		sCInterface = new SCInterfaceImpl();

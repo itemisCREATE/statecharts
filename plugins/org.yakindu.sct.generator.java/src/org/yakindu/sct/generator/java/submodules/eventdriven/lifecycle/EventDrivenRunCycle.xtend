@@ -19,6 +19,7 @@ import org.yakindu.sct.generator.java.submodules.lifecycle.RunCycle
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
+import org.yakindu.sct.generator.java.GeneratorPredicate
 
 class EventDrivenRunCycle extends RunCycle {
 	@Inject protected extension Naming
@@ -27,37 +28,59 @@ class EventDrivenRunCycle extends RunCycle {
 	@Inject protected extension FlowCode
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension GenmodelEntries
+	@Inject protected extension GeneratorPredicate
 	
 	override runCycle(ExecutionFlow it) {
-		if(!hasLocalEvents) {
+		if(!needsQueues) {
 			return super.runCycle(it)
 		}
 		'''
-			public void runCycle() {
+			public «sync»void runCycle() {
 				if (!initialized)
 					throw new IllegalStateException(
 							"The state machine needs to be initialized first by calling the init() function.");
-			
-				clearOutEvents();
-				singleCycle();
-				clearEvents();
+				«IF needsRunCycleGuard»
 				
-				// process queued events
-				while (internalEventQueue.size() > 0) {
-					internalEventQueue.poll().run();
-					clearEvents();
+				if («runCycleGuard») {
+					return;
 				}
+				«runCycleGuard» = true;
+				«ENDIF»
+				
+				clearOutEvents();
+
+				Runnable task = getNextEvent();
+				if (task == null) {
+					task = getDefaultEvent();
+				}
+				
+				while (task != null) {
+					task.run();
+					clearEvents();
+					task = getNextEvent();
+				}
+				
+				«IF needsRunCycleGuard»
+				«runCycleGuard» = false;
+				«ENDIF»
 			}
 			
 			«it.singleCycle»
+			
+			«IF needsNextEventFunction»
+			«nextEvent»
+			
+			«defaultEvent»
+			
+			«ENDIF»
 		'''
 	}
 	
 	def protected singleCycle(ExecutionFlow it) '''
-		protected void singleCycle() {
+		protected «sync»void singleCycle() {
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 				switch (stateVector[nextStateIndex]) {
-				«FOR state : flow.states.filter[isLeaf]»
+					«FOR state : flow.states.filter[isLeaf]»
 					«IF state.reactMethod !== null»
 						case «state.stateName.asEscapedIdentifier»:
 							«state.reactMethod.shortName»(true);
@@ -68,6 +91,33 @@ class EventDrivenRunCycle extends RunCycle {
 					// «getNullStateName()»
 				}
 			}
+		}
+	'''
+	
+	def protected getNextEvent(ExecutionFlow it) '''
+		protected Runnable getNextEvent() {
+			«IF needsInternalEventQueue»
+			if(!internalEventQueue.isEmpty()) {
+				return internalEventQueue.poll();
+			}
+			«ENDIF»
+			«IF needsInEventQueue»
+			if(!inEventQueue.isEmpty()) {
+				return inEventQueue.poll();
+			}
+			«ENDIF»
+			return null;
+		}
+	'''
+	
+	def protected getDefaultEvent(ExecutionFlow it) '''
+		protected Runnable getDefaultEvent() {
+			return new Runnable() {
+				@Override
+				public void run() {
+					singleCycle();
+				}
+			};
 		}
 	'''
 	
