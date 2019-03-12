@@ -79,7 +79,7 @@ class BehaviorMapping {
 		}	
 		
 		statechart.entryReactions
-			.map([lr | if (lr.effect !== null) { (lr.effect as ReactionEffect).mapEffect } else null])
+			.map([lr | lr.mapLocalReaction])
 			.forEach(e | if (e !== null) { seq.steps.add(e) })
 		
 		r.entryAction = seq
@@ -105,13 +105,13 @@ class BehaviorMapping {
 		}	
 		
 		state.entryReactions
-			.map([lr | lr.mapEntryAction ])
+			.map([lr | lr.mapLocalReaction ])
 			.forEach(e | if (e !== null) { seq.steps.add(e) })
 		
 		if (seq.steps.size > 0) seq else null
 	}	
 
-	def Step mapEntryAction(LocalReaction it) {
+	def Step mapLocalReaction(LocalReaction it) {
 		if (effect !== null) { 
 			var effectSeq = (effect as ReactionEffect).mapEffect
 			var guard =  trigger.buildGuard
@@ -168,7 +168,7 @@ class BehaviorMapping {
 		}	
 		
 		statechart.exitReactions
-			.map([lr | if (lr.effect !== null) { (lr.effect as ReactionEffect).mapEffect } else null])
+			.map([lr |lr.mapLocalReaction])
 			.forEach(e | if (e !== null) { seq.steps.add(e) })
 		
 		r.exitAction = seq
