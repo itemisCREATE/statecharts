@@ -68,8 +68,9 @@ public class StatechartEntryExitActions {
 	@Test
 	public void exitActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue() {
 		statemachine.enter();
+		statemachine.getSCInterface().setB(true);
 		statemachine.exit();
-		assertTrue(statemachine.getX() == 8l);
+		assertTrue(statemachine.getX() == 6l);
 		assertTrue(statemachine.getY() == 2l);
 	}
 }

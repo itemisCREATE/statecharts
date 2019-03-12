@@ -69,8 +69,9 @@ void StatechartEntryExitActions::exitActionsAreExecutedOnEnteringStatechart()
 void StatechartEntryExitActions::exitActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue()
 {
 	statechartEntryAndExitActions_enter(&statechart);
+	statechartEntryAndExitActionsIface_set_b(&statechart,true);
 	statechartEntryAndExitActions_exit(&statechart);
-	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 8);
+	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_x(&statechart)== 6);
 	EXPECT_TRUE(statechartEntryAndExitActionsIface_get_y(&statechart)== 2);
 }
 

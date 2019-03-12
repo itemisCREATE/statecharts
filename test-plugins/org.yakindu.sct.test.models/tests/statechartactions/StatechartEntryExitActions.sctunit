@@ -36,8 +36,11 @@ testclass StatechartEntryExitActions for statechart statechartactions.Statechart
 	operation exitActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue () {
 
 		enter
+		
+		b = true
 		exit
-		assert x == 8
+		
+		assert x == 6
 		assert y == 2
 	}
 }

@@ -80,9 +80,11 @@ TEST_F(StatechartEntryExitActions, exitActionsAreExecutedOnEnteringStatechartOnl
 	
 	statechart->enter();
 	
+	statechart->getDefaultSCI()->set_b(true);
+	
 	statechart->exit();
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 8);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 6);
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 2);
 	

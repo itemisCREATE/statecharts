@@ -53,8 +53,9 @@ public class StatechartEntryExitActions extends AbstractExecutionFlowTest {
 	@Test
 	public void exitActionsAreExecutedOnEnteringStatechartOnlyIfGuardIsTrue() throws Exception {
 		interpreter.enter();
+		setBoolean("b", true);
 		interpreter.exit();
-		assertTrue(getInteger("x") == 8l);
+		assertTrue(getInteger("x") == 6l);
 		assertTrue(getInteger("y") == 2l);
 	}
 }
