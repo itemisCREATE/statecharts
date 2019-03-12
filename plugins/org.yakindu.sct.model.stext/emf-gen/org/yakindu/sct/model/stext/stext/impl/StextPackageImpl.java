@@ -7,11 +7,17 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import org.yakindu.base.base.BasePackage;
+
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
+
 import org.yakindu.base.types.TypesPackage;
+
 import org.yakindu.sct.model.sgraph.SGraphPackage;
+
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
@@ -20,9 +26,7 @@ import org.yakindu.sct.model.stext.stext.DefaultTrigger;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
 import org.yakindu.sct.model.stext.stext.EntryPointSpec;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
-import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.EventSpec;
-import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.ExitEvent;
 import org.yakindu.sct.model.stext.stext.ExitPointSpec;
 import org.yakindu.sct.model.stext.stext.Guard;
@@ -288,20 +292,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass eventRaisingExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass eventValueReferenceExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass activeStateReferenceExpressionEClass = null;
 
 	/**
@@ -390,6 +380,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRoot() {
 		return rootEClass;
 	}
@@ -399,6 +390,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRoot_Roots() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(0);
 	}
@@ -408,6 +400,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDefRoot() {
 		return defRootEClass;
 	}
@@ -417,6 +410,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStatechartRoot() {
 		return statechartRootEClass;
 	}
@@ -426,6 +420,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStatechartRoot_Def() {
 		return (EReference)statechartRootEClass.getEStructuralFeatures().get(0);
 	}
@@ -435,6 +430,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStateRoot() {
 		return stateRootEClass;
 	}
@@ -444,6 +440,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStateRoot_Def() {
 		return (EReference)stateRootEClass.getEStructuralFeatures().get(0);
 	}
@@ -453,6 +450,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTransitionRoot() {
 		return transitionRootEClass;
 	}
@@ -462,6 +460,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTransitionRoot_Def() {
 		return (EReference)transitionRootEClass.getEStructuralFeatures().get(0);
 	}
@@ -471,6 +470,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStatechartSpecification() {
 		return statechartSpecificationEClass;
 	}
@@ -480,6 +480,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStateSpecification() {
 		return stateSpecificationEClass;
 	}
@@ -489,6 +490,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStateSpecification_Scope() {
 		return (EReference)stateSpecificationEClass.getEStructuralFeatures().get(0);
 	}
@@ -498,6 +500,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTransitionSpecification() {
 		return transitionSpecificationEClass;
 	}
@@ -507,6 +510,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTransitionSpecification_Reaction() {
 		return (EReference)transitionSpecificationEClass.getEStructuralFeatures().get(0);
 	}
@@ -516,6 +520,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStatechartScope() {
 		return statechartScopeEClass;
 	}
@@ -525,6 +530,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getInterfaceScope() {
 		return interfaceScopeEClass;
 	}
@@ -534,6 +540,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getInternalScope() {
 		return internalScopeEClass;
 	}
@@ -543,6 +550,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getImportScope() {
 		return importScopeEClass;
 	}
@@ -552,6 +560,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getImportScope_Imports() {
 		return (EAttribute)importScopeEClass.getEStructuralFeatures().get(0);
 	}
@@ -561,6 +570,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEventDefinition() {
 		return eventDefinitionEClass;
 	}
@@ -570,6 +580,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getVariableDefinition() {
 		return variableDefinitionEClass;
 	}
@@ -579,6 +590,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getOperationDefinition() {
 		return operationDefinitionEClass;
 	}
@@ -588,6 +600,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTypeAliasDefinition() {
 		return typeAliasDefinitionEClass;
 	}
@@ -597,6 +610,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getLocalReaction() {
 		return localReactionEClass;
 	}
@@ -606,6 +620,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTransitionReaction() {
 		return transitionReactionEClass;
 	}
@@ -615,6 +630,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getGuard() {
 		return guardEClass;
 	}
@@ -624,6 +640,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getGuard_Expression() {
 		return (EReference)guardEClass.getEStructuralFeatures().get(0);
 	}
@@ -633,6 +650,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEntryPointSpec() {
 		return entryPointSpecEClass;
 	}
@@ -642,6 +660,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getEntryPointSpec_Entrypoint() {
 		return (EAttribute)entryPointSpecEClass.getEStructuralFeatures().get(0);
 	}
@@ -651,6 +670,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExitPointSpec() {
 		return exitPointSpecEClass;
 	}
@@ -660,6 +680,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getExitPointSpec_Exitpoint() {
 		return (EAttribute)exitPointSpecEClass.getEStructuralFeatures().get(0);
 	}
@@ -669,6 +690,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEventSpec() {
 		return eventSpecEClass;
 	}
@@ -678,6 +700,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRegularEventSpec() {
 		return regularEventSpecEClass;
 	}
@@ -687,6 +710,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRegularEventSpec_Event() {
 		return (EReference)regularEventSpecEClass.getEStructuralFeatures().get(0);
 	}
@@ -696,6 +720,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTimeEventSpec() {
 		return timeEventSpecEClass;
 	}
@@ -705,6 +730,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTimeEventSpec_Type() {
 		return (EAttribute)timeEventSpecEClass.getEStructuralFeatures().get(0);
 	}
@@ -714,6 +740,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTimeEventSpec_Value() {
 		return (EReference)timeEventSpecEClass.getEStructuralFeatures().get(1);
 	}
@@ -723,6 +750,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTimeEventSpec_Unit() {
 		return (EAttribute)timeEventSpecEClass.getEStructuralFeatures().get(2);
 	}
@@ -732,6 +760,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getBuiltinEventSpec() {
 		return builtinEventSpecEClass;
 	}
@@ -741,6 +770,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEntryEvent() {
 		return entryEventEClass;
 	}
@@ -750,6 +780,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExitEvent() {
 		return exitEventEClass;
 	}
@@ -759,6 +790,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAlwaysEvent() {
 		return alwaysEventEClass;
 	}
@@ -768,6 +800,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSimpleScope() {
 		return simpleScopeEClass;
 	}
@@ -777,6 +810,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getReactionTrigger() {
 		return reactionTriggerEClass;
 	}
@@ -786,6 +820,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getReactionTrigger_Triggers() {
 		return (EReference)reactionTriggerEClass.getEStructuralFeatures().get(0);
 	}
@@ -795,6 +830,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getReactionTrigger_Guard() {
 		return (EReference)reactionTriggerEClass.getEStructuralFeatures().get(1);
 	}
@@ -804,6 +840,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDefaultTrigger() {
 		return defaultTriggerEClass;
 	}
@@ -813,6 +850,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getReactionEffect() {
 		return reactionEffectEClass;
 	}
@@ -822,6 +860,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getReactionEffect_Actions() {
 		return (EReference)reactionEffectEClass.getEStructuralFeatures().get(0);
 	}
@@ -831,51 +870,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getEventRaisingExpression() {
-		return eventRaisingExpressionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEventRaisingExpression_Event() {
-		return (EReference)eventRaisingExpressionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEventRaisingExpression_Value() {
-		return (EReference)eventRaisingExpressionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEventValueReferenceExpression() {
-		return eventValueReferenceExpressionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEventValueReferenceExpression_Value() {
-		return (EReference)eventValueReferenceExpressionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+	@Override
 	public EClass getActiveStateReferenceExpression() {
 		return activeStateReferenceExpressionEClass;
 	}
@@ -885,6 +880,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getActiveStateReferenceExpression_Value() {
 		return (EReference)activeStateReferenceExpressionEClass.getEStructuralFeatures().get(0);
 	}
@@ -894,6 +890,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getTimeEventType() {
 		return timeEventTypeEEnum;
 	}
@@ -903,6 +900,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getTimeUnit() {
 		return timeUnitEEnum;
 	}
@@ -912,6 +910,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StextFactory getStextFactory() {
 		return (StextFactory)getEFactoryInstance();
 	}
@@ -1016,13 +1015,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		reactionEffectEClass = createEClass(REACTION_EFFECT);
 		createEReference(reactionEffectEClass, REACTION_EFFECT__ACTIONS);
 
-		eventRaisingExpressionEClass = createEClass(EVENT_RAISING_EXPRESSION);
-		createEReference(eventRaisingExpressionEClass, EVENT_RAISING_EXPRESSION__EVENT);
-		createEReference(eventRaisingExpressionEClass, EVENT_RAISING_EXPRESSION__VALUE);
-
-		eventValueReferenceExpressionEClass = createEClass(EVENT_VALUE_REFERENCE_EXPRESSION);
-		createEReference(eventValueReferenceExpressionEClass, EVENT_VALUE_REFERENCE_EXPRESSION__VALUE);
-
 		activeStateReferenceExpressionEClass = createEClass(ACTIVE_STATE_REFERENCE_EXPRESSION);
 		createEReference(activeStateReferenceExpressionEClass, ACTIVE_STATE_REFERENCE_EXPRESSION__VALUE);
 
@@ -1093,8 +1085,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		reactionTriggerEClass.getESuperTypes().add(theSGraphPackage.getTrigger());
 		defaultTriggerEClass.getESuperTypes().add(theSGraphPackage.getTrigger());
 		reactionEffectEClass.getESuperTypes().add(theSGraphPackage.getEffect());
-		eventRaisingExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
-		eventValueReferenceExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 		activeStateReferenceExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 
 		// Initialize classes and features; add operations and parameters
@@ -1178,13 +1168,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 
 		initEClass(reactionEffectEClass, ReactionEffect.class, "ReactionEffect", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getReactionEffect_Actions(), theTypesPackage.getExpression(), null, "actions", null, 0, -1, ReactionEffect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(eventRaisingExpressionEClass, EventRaisingExpression.class, "EventRaisingExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEventRaisingExpression_Event(), theTypesPackage.getExpression(), null, "event", null, 0, 1, EventRaisingExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEventRaisingExpression_Value(), theTypesPackage.getExpression(), null, "value", null, 0, 1, EventRaisingExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(eventValueReferenceExpressionEClass, EventValueReferenceExpression.class, "EventValueReferenceExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEventValueReferenceExpression_Value(), theTypesPackage.getExpression(), null, "value", null, 0, 1, EventValueReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(activeStateReferenceExpressionEClass, ActiveStateReferenceExpression.class, "ActiveStateReferenceExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getActiveStateReferenceExpression_Value(), theSGraphPackage.getState(), null, "value", null, 0, 1, ActiveStateReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

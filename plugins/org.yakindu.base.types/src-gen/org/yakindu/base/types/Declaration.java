@@ -18,7 +18,7 @@ import org.yakindu.base.base.NamedElement;
  * </ul>
  *
  * @see org.yakindu.base.types.TypesPackage#getDeclaration()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface Declaration extends NamedElement, AnnotatableElement, MetaComposite {

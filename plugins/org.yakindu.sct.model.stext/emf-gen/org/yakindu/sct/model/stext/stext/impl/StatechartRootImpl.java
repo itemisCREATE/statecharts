@@ -4,9 +4,12 @@ package org.yakindu.sct.model.stext.stext.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.yakindu.sct.model.stext.stext.StatechartRoot;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.StextPackage;
@@ -59,6 +62,7 @@ public class StatechartRootImpl extends DefRootImpl implements StatechartRoot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StatechartSpecification getDef() {
 		return def;
 	}
@@ -83,6 +87,7 @@ public class StatechartRootImpl extends DefRootImpl implements StatechartRoot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDef(StatechartSpecification newDef) {
 		if (newDef != def) {
 			NotificationChain msgs = null;

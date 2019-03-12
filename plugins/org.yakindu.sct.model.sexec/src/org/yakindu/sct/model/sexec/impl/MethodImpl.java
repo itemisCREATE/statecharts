@@ -20,22 +20,21 @@ import org.yakindu.sct.model.sexec.SexecPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.yakindu.sct.model.sexec.impl.MethodImpl#getBody <em>Body</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.MethodImpl#getBodySequence <em>Body Sequence</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class MethodImpl extends OperationImpl implements Method {
 	/**
-	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
+	 * The cached value of the '{@link #getBodySequence() <em>Body Sequence</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getBody()
+	 * @see #getBodySequence()
 	 * @generated
 	 * @ordered
 	 */
-	protected Sequence body;
-
+	protected Sequence bodySequence;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -60,8 +59,8 @@ public class MethodImpl extends OperationImpl implements Method {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Sequence getBody() {
-		return body;
+	public Sequence getBodySequence() {
+		return bodySequence;
 	}
 
 	/**
@@ -69,11 +68,11 @@ public class MethodImpl extends OperationImpl implements Method {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetBody(Sequence newBody, NotificationChain msgs) {
-		Sequence oldBody = body;
-		body = newBody;
+	public NotificationChain basicSetBodySequence(Sequence newBodySequence, NotificationChain msgs) {
+		Sequence oldBodySequence = bodySequence;
+		bodySequence = newBodySequence;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.METHOD__BODY, oldBody, newBody);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.METHOD__BODY_SEQUENCE, oldBodySequence, newBodySequence);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -84,18 +83,18 @@ public class MethodImpl extends OperationImpl implements Method {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setBody(Sequence newBody) {
-		if (newBody != body) {
+	public void setBodySequence(Sequence newBodySequence) {
+		if (newBodySequence != bodySequence) {
 			NotificationChain msgs = null;
-			if (body != null)
-				msgs = ((InternalEObject)body).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.METHOD__BODY, null, msgs);
-			if (newBody != null)
-				msgs = ((InternalEObject)newBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.METHOD__BODY, null, msgs);
-			msgs = basicSetBody(newBody, msgs);
+			if (bodySequence != null)
+				msgs = ((InternalEObject)bodySequence).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.METHOD__BODY_SEQUENCE, null, msgs);
+			if (newBodySequence != null)
+				msgs = ((InternalEObject)newBodySequence).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.METHOD__BODY_SEQUENCE, null, msgs);
+			msgs = basicSetBodySequence(newBodySequence, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.METHOD__BODY, newBody, newBody));
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.METHOD__BODY_SEQUENCE, newBodySequence, newBodySequence));
 	}
 
 	/**
@@ -106,8 +105,8 @@ public class MethodImpl extends OperationImpl implements Method {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SexecPackage.METHOD__BODY:
-				return basicSetBody(null, msgs);
+			case SexecPackage.METHOD__BODY_SEQUENCE:
+				return basicSetBodySequence(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -120,8 +119,8 @@ public class MethodImpl extends OperationImpl implements Method {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SexecPackage.METHOD__BODY:
-				return getBody();
+			case SexecPackage.METHOD__BODY_SEQUENCE:
+				return getBodySequence();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -134,8 +133,8 @@ public class MethodImpl extends OperationImpl implements Method {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SexecPackage.METHOD__BODY:
-				setBody((Sequence)newValue);
+			case SexecPackage.METHOD__BODY_SEQUENCE:
+				setBodySequence((Sequence)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -149,8 +148,8 @@ public class MethodImpl extends OperationImpl implements Method {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SexecPackage.METHOD__BODY:
-				setBody((Sequence)null);
+			case SexecPackage.METHOD__BODY_SEQUENCE:
+				setBodySequence((Sequence)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -164,8 +163,8 @@ public class MethodImpl extends OperationImpl implements Method {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SexecPackage.METHOD__BODY:
-				return body != null;
+			case SexecPackage.METHOD__BODY_SEQUENCE:
+				return bodySequence != null;
 		}
 		return super.eIsSet(featureID);
 	}

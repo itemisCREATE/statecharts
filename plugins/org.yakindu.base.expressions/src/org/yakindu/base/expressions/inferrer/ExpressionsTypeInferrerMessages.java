@@ -34,5 +34,7 @@ public interface ExpressionsTypeInferrerMessages {
 	public static final String INFER_TYPE_PARAMETER = "Could not infer type for type parameter %s.";
 	public static final String INFER_RETURN_TYPE_PARAMETER = "Could not infer type for return type parameter %s, returning ANY instead.";
 	public static final String PROPERTY_INITIAL_VALUE = "Cannot assign a value of type %s to a variable of type %s.";
+	public static final String MISSING_VALUE = "Need to assign a value to an event of type %s.";
+	public static final String EVENT_DEFINITION = "Cannot assign a value of type %s to an event of type %s.";
 
 }

@@ -754,7 +754,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMethod_Body() {
+	public EReference getMethod_BodySequence() {
 		return (EReference)methodEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1467,7 +1467,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		createEAttribute(reactionEClass, REACTION__TRANSITION);
 
 		methodEClass = createEClass(METHOD);
-		createEReference(methodEClass, METHOD__BODY);
+		createEReference(methodEClass, METHOD__BODY_SEQUENCE);
 
 		stateVectorEClass = createEClass(STATE_VECTOR);
 		createEAttribute(stateVectorEClass, STATE_VECTOR__SIZE);
@@ -1695,7 +1695,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		initEAttribute(getReaction_Transition(), ecorePackage.getEBoolean(), "transition", null, 0, 1, Reaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(methodEClass, Method.class, "Method", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMethod_Body(), this.getSequence(), null, "body", null, 0, 1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMethod_BodySequence(), this.getSequence(), null, "bodySequence", null, 0, 1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stateVectorEClass, StateVector.class, "StateVector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getStateVector_Size(), ecorePackage.getEInt(), "size", "1", 0, 1, StateVector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

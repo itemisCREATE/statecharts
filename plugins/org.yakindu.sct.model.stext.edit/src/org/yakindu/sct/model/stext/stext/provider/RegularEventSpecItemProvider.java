@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
+import org.yakindu.base.types.TypesFactory;
 import org.yakindu.sct.model.stext.stext.RegularEventSpec;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.StextPackage;
@@ -151,12 +152,7 @@ public class RegularEventSpecItemProvider extends EventSpecItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.REGULAR_EVENT_SPEC__EVENT,
-				 StextFactory.eINSTANCE.createEventRaisingExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.REGULAR_EVENT_SPEC__EVENT,
-				 StextFactory.eINSTANCE.createEventValueReferenceExpression()));
+				 StextFactory.eINSTANCE.createVariableDefinition()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -262,6 +258,51 @@ public class RegularEventSpecItemProvider extends EventSpecItemProvider
 			(createChildParameter
 				(StextPackage.Literals.REGULAR_EVENT_SPEC__EVENT,
 				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.REGULAR_EVENT_SPEC__EVENT,
+				 ExpressionsFactory.eINSTANCE.createIfExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.REGULAR_EVENT_SPEC__EVENT,
+				 ExpressionsFactory.eINSTANCE.createBlockExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.REGULAR_EVENT_SPEC__EVENT,
+				 ExpressionsFactory.eINSTANCE.createWhileExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.REGULAR_EVENT_SPEC__EVENT,
+				 ExpressionsFactory.eINSTANCE.createReturnExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.REGULAR_EVENT_SPEC__EVENT,
+				 ExpressionsFactory.eINSTANCE.createSwitchExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.REGULAR_EVENT_SPEC__EVENT,
+				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.REGULAR_EVENT_SPEC__EVENT,
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.REGULAR_EVENT_SPEC__EVENT,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.REGULAR_EVENT_SPEC__EVENT,
+				 TypesFactory.eINSTANCE.createProperty()));
 	}
 
 }

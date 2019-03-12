@@ -5,8 +5,11 @@ package org.yakindu.sct.model.stext.stext.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
@@ -58,6 +61,7 @@ public class ImportScopeImpl extends StatechartScopeImpl implements ImportScope 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getImports() {
 		if (imports == null) {
 			imports = new EDataTypeUniqueEList<String>(String.class, this, StextPackage.IMPORT_SCOPE__IMPORTS);

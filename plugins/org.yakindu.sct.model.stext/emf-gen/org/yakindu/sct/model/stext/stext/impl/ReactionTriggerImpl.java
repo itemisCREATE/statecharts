@@ -6,13 +6,19 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.yakindu.sct.model.sgraph.impl.TriggerImpl;
+
 import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.Guard;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
@@ -77,6 +83,7 @@ public class ReactionTriggerImpl extends TriggerImpl implements ReactionTrigger 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<EventSpec> getTriggers() {
 		if (triggers == null) {
 			triggers = new EObjectContainmentEList<EventSpec>(EventSpec.class, this, StextPackage.REACTION_TRIGGER__TRIGGERS);
@@ -89,6 +96,7 @@ public class ReactionTriggerImpl extends TriggerImpl implements ReactionTrigger 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Guard getGuard() {
 		return guard;
 	}
@@ -113,6 +121,7 @@ public class ReactionTriggerImpl extends TriggerImpl implements ReactionTrigger 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGuard(Guard newGuard) {
 		if (newGuard != guard) {
 			NotificationChain msgs = null;

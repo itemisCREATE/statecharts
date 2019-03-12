@@ -37,7 +37,7 @@ import org.yakindu.base.types.TypesUtil;
  *
  * @generated
  */
-public abstract class DeclarationImpl extends NamedElementImpl implements Declaration {
+public class DeclarationImpl extends NamedElementImpl implements Declaration {
 	/**
 	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

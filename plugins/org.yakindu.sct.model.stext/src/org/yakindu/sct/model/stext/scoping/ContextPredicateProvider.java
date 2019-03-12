@@ -18,6 +18,9 @@ import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Litera
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.BITWISE_XOR_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE;
+import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.EVENT_RAISING_EXPRESSION;
+import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE;
+import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.LOGICAL_AND_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.LOGICAL_NOT_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.LOGICAL_OR_EXPRESSION;
@@ -27,9 +30,6 @@ import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Litera
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.SHIFT_EXPRESSION;
 import static org.yakindu.base.types.TypesPackage.Literals.TYPE_SPECIFIER__TYPE;
-import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.EVENT_RAISING_EXPRESSION;
-import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE;
-import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.LOCAL_REACTION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.REACTION_EFFECT;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.REGULAR_EVENT_SPEC;

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010 - 2018 committers of YAKINDU and others.
+ * Copyright (c) 2010 - 2019 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -18,100 +18,142 @@ Expression returns types::Expression:
 	AssignmentExpression;
 
 AssignmentExpression returns types::Expression:
-	ConditionalExpression ({AssignmentExpression.varRef=current} operator=AssignmentOperator
-	expression=ConditionalExpression)*;
+	ConditionalExpression
+	=> ({AssignmentExpression.varRef=current} operator=AssignmentOperator expression=ConditionalExpression)*;
 
 ConditionalExpression returns types::Expression:
-	LogicalOrExpression ({ConditionalExpression.condition=current} '?' trueCase=LogicalOrExpression ':'
-	falseCase=LogicalOrExpression)?;
+	LogicalOrExpression
+	=> ({ConditionalExpression.condition=current} '?' trueCase=LogicalOrExpression ':' falseCase=LogicalOrExpression)?;
 
 LogicalOrExpression returns types::Expression:
-	LogicalAndExpression ({LogicalOrExpression.leftOperand=current} LogicalOrOperator
-	rightOperand=LogicalAndExpression)*;
+	LogicalAndExpression
+	=> ({LogicalOrExpression.leftOperand=current} LogicalOrOperator rightOperand=LogicalAndExpression)*;
 
 LogicalAndExpression returns types::Expression:
-	LogicalNotExpression ({LogicalAndExpression.leftOperand=current}
-	LogicalAndOperator rightOperand=LogicalNotExpression)*;
+	LogicalNotExpression 
+	=> ({LogicalAndExpression.leftOperand=current} LogicalAndOperator rightOperand=LogicalNotExpression)*;
 
 LogicalNotExpression returns types::Expression:
-	BitwiseOrExpression | {LogicalNotExpression} LogicalNotOperator
-	operand=BitwiseOrExpression;
+	BitwiseOrExpression | 
+	=> ({LogicalNotExpression} LogicalNotOperator operand=BitwiseOrExpression);
 
 BitwiseOrExpression returns types::Expression:
-	BitwiseXorExpression ({BitwiseOrExpression.leftOperand=current} BitwiseOrOperator
-	rightOperand=BitwiseXorExpression)*;
+	BitwiseXorExpression 
+	=> ({BitwiseOrExpression.leftOperand=current} BitwiseOrOperator rightOperand=BitwiseXorExpression)*;
 
 BitwiseXorExpression returns types::Expression:
-	BitwiseAndExpression ({BitwiseXorExpression.leftOperand=current} BitwiseXOrOperator
-	rightOperand=BitwiseAndExpression)*;
+	BitwiseAndExpression 
+	=> ({BitwiseXorExpression.leftOperand=current} BitwiseXOrOperator rightOperand=BitwiseAndExpression)*;
 
 BitwiseAndExpression returns types::Expression:
-	LogicalRelationExpression ({BitwiseAndExpression.leftOperand=current} BitwiseAndOperator
-	rightOperand=LogicalRelationExpression)*;
+	LogicalRelationExpression 
+	=> ({BitwiseAndExpression.leftOperand=current} BitwiseAndOperator rightOperand=LogicalRelationExpression)*;
 
 LogicalRelationExpression returns types::Expression:
 	ShiftExpression
-	({LogicalRelationExpression.leftOperand=current} operator=RelationalOperator
-	rightOperand=ShiftExpression)*;
+	=> ({LogicalRelationExpression.leftOperand=current} operator=RelationalOperator rightOperand=ShiftExpression)*;
 
 ShiftExpression returns types::Expression:
-	NumericalAddSubtractExpression ({ShiftExpression.leftOperand=current} operator=ShiftOperator
-	rightOperand=NumericalAddSubtractExpression)*;
+	NumericalAddSubtractExpression 
+	=> ({ShiftExpression.leftOperand=current} operator=ShiftOperator rightOperand=NumericalAddSubtractExpression)*;
 
 NumericalAddSubtractExpression returns types::Expression:
 	NumericalMultiplyDivideExpression
-	=>({NumericalAddSubtractExpression.leftOperand=current}
-	operator=AdditiveOperator
-	rightOperand=NumericalMultiplyDivideExpression)*;
+	=> ({NumericalAddSubtractExpression.leftOperand=current} operator=AdditiveOperator rightOperand=NumericalMultiplyDivideExpression)*;
 
 NumericalMultiplyDivideExpression returns types::Expression:
 	NumericalUnaryExpression
-	=>({NumericalMultiplyDivideExpression.leftOperand=current}
-	operator=MultiplicativeOperator
-	rightOperand=NumericalUnaryExpression)*;
+	=> ({NumericalMultiplyDivideExpression.leftOperand=current} operator=MultiplicativeOperator rightOperand=NumericalUnaryExpression)*;
 
 NumericalUnaryExpression returns types::Expression:
-	PostFixUnaryExpression | {NumericalUnaryExpression} operator=UnaryOperator operand=PostFixUnaryExpression;
+	PostFixUnaryExpression | 
+	=> ({NumericalUnaryExpression} operator=UnaryOperator operand=PostFixUnaryExpression);
 
 PostFixUnaryExpression returns types::Expression:
-	TypeCastExpression ({PostFixUnaryExpression.operand=current} operator=PostFixOperator)*;
+	TypeCastExpression
+	=> ({PostFixUnaryExpression.operand=current} operator=PostFixOperator)*;
 
 TypeCastExpression returns types::Expression:
-	PrimaryExpression (({TypeCastExpression.operand=current} 'as') type=[types::Type|QID])*;
+	PrimaryExpression
+	=> ({TypeCastExpression.operand=current} 'as' type=[types::Type|QID])*;
 
 PrimaryExpression returns types::Expression:
 	PrimitiveValueExpression
 	| FeatureCall
+	| IfExpression
+	| SwitchExpression
+	| WhileExpression
+	| ForExpression
+	| BlockExpression
+	| ReturnExpression
+	| ThrowExpression
+	| EventRaisingExpression
 	| ParenthesizedExpression;
 
 PrimitiveValueExpression returns types::Expression:
 	{PrimitiveValueExpression} value=Literal;
 
+BlockExpression returns types::Expression:
+	{BlockExpression} '{' (expressions+=Expression)* '}';
 
+IfExpression returns types::Expression:
+	{IfExpression}
+	'if' '(' condition=Expression ')'
+	then=BlockExpression
+	(=> 'else' else=BlockExpression)?;
+
+SwitchExpression returns types::Expression:
+	{SwitchExpression}
+	'switch' '(' switch=Expression ')' '{'
+	(cases+=SwitchCase)*
+	('default' ':' default=Expression)?
+	'}';
+
+SwitchCase:
+	'case' case=Expression (':' then=Expression);
+
+EventRaisingExpression returns types::Expression:
+	{EventRaisingExpression} 'raise' event=FeatureCall (=> ':' value=ConditionalExpression)?;
+
+WhileExpression returns types::Expression:
+	{WhileExpression} 'while' '(' condition=Expression ')' body=BlockExpression;
+
+ForExpression returns types::Expression:
+	{ForExpression} 'for'
+	'('
+	(varDecls+=ForVarDecl (',' varDecls+=ForVarDecl)*)? ';'
+	(condition=Expression)? ';'
+	(varUpdates+=Expression (',' varUpdates+=Expression)*)?
+	')'
+	body=BlockExpression;
+
+ForVarDecl returns types::Property:
+	'var' name=ID ':' typeSpecifier=TypeSpecifier ('=' initialValue=Expression)?;
+
+ReturnExpression returns types::Expression:
+	{ReturnExpression} 'return' expression=ConditionalExpression;
+
+ThrowExpression returns types::Expression:
+	{ThrowExpression} 'throw' expression=ConditionalExpression;
 
 FeatureCall returns types::Expression:
-	ElementReferenceExpression ((({FeatureCall.owner=current} '.') | ({MetaCall.owner=current} '.@')) feature=[types::Declaration]
-	(=> operationCall?= '('(arguments+=Argument (',' arguments+=Argument)*)?')'
-		|
-	=> (arrayAccess ?= '[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression ']')* 
-	)?)*;
+	ElementReferenceExpression ((({FeatureCall.owner=current} '.') | ({MetaCall.owner=current} '.@'))
+	feature=[types::Declaration] (=> operationCall?='(' (arguments+=Argument (',' arguments+=Argument)*)? ')' | =>
+	(arrayAccess?='[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression ']')*)?)*;
 
 ElementReferenceExpression returns types::Expression:
-	{ElementReferenceExpression} reference=[ecore::EObject|ID]
-	(=> operationCall?='('	(arguments+=Argument (',' arguments+=Argument)*)?	')' 
-		|
-	=> (arrayAccess ?= '[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression ']')*
-	)?;
+	{ElementReferenceExpression} reference=[ecore::EObject|ID] (=> operationCall?='(' (arguments+=Argument (','
+	arguments+=Argument)*)? ')' | => (arrayAccess?='[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression
+	']')*)?;
 
 Argument:
-	(parameter=[types::Parameter] '=')?  value=ConditionalExpression
-;
+	(parameter=[types::Parameter] '=')? value=ConditionalExpression;
 
 ParenthesizedExpression returns types::Expression:
 	{ParenthesizedExpression} '(' expression=Expression ')';
 
 TypeSpecifier returns types::TypeSpecifier:
-	type=[types::Type|QID] ('<' (typeArguments+=TypeSpecifier (',' typeArguments+=TypeSpecifier)*'>'))?;
+	type=[types::Type|QID] ('<' (typeArguments+=TypeSpecifier (',' typeArguments+=TypeSpecifier)* '>'))?;
 
 Literal:
 	BoolLiteral | IntLiteral | HexLiteral | BinaryLiteral | DoubleLiteral | FloatLiteral | StringLiteral | NullLiteral;
@@ -197,9 +239,9 @@ terminal BOOL returns ecore::EBoolean:
 terminal HEX returns ecore::EInt:
 	('0') ('x' | 'X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
 
-terminal BINARY returns ecore::EInt: 
-	('0')('b' | 'B') ('0'|'1')+
-;
+terminal BINARY returns ecore::EInt:
+	('0') ('b' | 'B') ('0' | '1')+;
+
 terminal DOUBLE returns ecore::EDouble:
 	(INT '.' INT) ('e' ('-' | '+') INT)? ('d' | 'D')?;
 

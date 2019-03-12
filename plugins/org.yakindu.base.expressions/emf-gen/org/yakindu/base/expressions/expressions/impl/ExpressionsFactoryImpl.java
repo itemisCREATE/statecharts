@@ -18,21 +18,26 @@ import org.yakindu.base.expressions.expressions.BitwiseAndExpression;
 import org.yakindu.base.expressions.expressions.BitwiseOperator;
 import org.yakindu.base.expressions.expressions.BitwiseOrExpression;
 import org.yakindu.base.expressions.expressions.BitwiseXorExpression;
+import org.yakindu.base.expressions.expressions.BlockExpression;
 import org.yakindu.base.expressions.expressions.BoolLiteral;
 import org.yakindu.base.expressions.expressions.ConditionalExpression;
 import org.yakindu.base.expressions.expressions.DoubleLiteral;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
+import org.yakindu.base.expressions.expressions.EventRaisingExpression;
+import org.yakindu.base.expressions.expressions.EventValueReferenceExpression;
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.expressions.FloatLiteral;
 import org.yakindu.base.expressions.expressions.HexLiteral;
+import org.yakindu.base.expressions.expressions.IfExpression;
 import org.yakindu.base.expressions.expressions.IntLiteral;
 import org.yakindu.base.expressions.expressions.LogicalAndExpression;
 import org.yakindu.base.expressions.expressions.LogicalNotExpression;
 import org.yakindu.base.expressions.expressions.LogicalOperator;
 import org.yakindu.base.expressions.expressions.LogicalOrExpression;
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression;
+import org.yakindu.base.expressions.expressions.MetaCall;
 import org.yakindu.base.expressions.expressions.MultiplicativeOperator;
 import org.yakindu.base.expressions.expressions.NullLiteral;
 import org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression;
@@ -43,11 +48,15 @@ import org.yakindu.base.expressions.expressions.PostFixOperator;
 import org.yakindu.base.expressions.expressions.PostFixUnaryExpression;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
 import org.yakindu.base.expressions.expressions.RelationalOperator;
+import org.yakindu.base.expressions.expressions.ReturnExpression;
 import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.ShiftOperator;
 import org.yakindu.base.expressions.expressions.StringLiteral;
+import org.yakindu.base.expressions.expressions.SwitchCase;
+import org.yakindu.base.expressions.expressions.SwitchExpression;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
+import org.yakindu.base.expressions.expressions.WhileExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -122,6 +131,17 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 			case ExpressionsPackage.PARENTHESIZED_EXPRESSION: return createParenthesizedExpression();
 			case ExpressionsPackage.TYPE_CAST_EXPRESSION: return createTypeCastExpression();
 			case ExpressionsPackage.ARGUMENT: return createArgument();
+			case ExpressionsPackage.IF_EXPRESSION: return createIfExpression();
+			case ExpressionsPackage.BLOCK_EXPRESSION: return createBlockExpression();
+			case ExpressionsPackage.WHILE_EXPRESSION: return createWhileExpression();
+			case ExpressionsPackage.RETURN_EXPRESSION: return createReturnExpression();
+			case ExpressionsPackage.SWITCH_EXPRESSION: return createSwitchExpression();
+			case ExpressionsPackage.SWITCH_CASE: return createSwitchCase();
+			case ExpressionsPackage.EVENT_RAISING_EXPRESSION: return createEventRaisingExpression();
+			case ExpressionsPackage.EVENT_VALUE_REFERENCE_EXPRESSION: return createEventValueReferenceExpression();
+			case ExpressionsPackage.FOR_EXPRESSION: return createForExpression();
+			case ExpressionsPackage.FOR_VAR_DECL: return createForVarDecl();
+			case ExpressionsPackage.THROW_EXPRESSION: return createThrowExpression();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -194,6 +214,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BoolLiteral createBoolLiteral() {
 		BoolLiteralImpl boolLiteral = new BoolLiteralImpl();
 		return boolLiteral;
@@ -204,6 +225,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public IntLiteral createIntLiteral() {
 		IntLiteralImpl intLiteral = new IntLiteralImpl();
 		return intLiteral;
@@ -214,6 +236,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DoubleLiteral createDoubleLiteral() {
 		DoubleLiteralImpl doubleLiteral = new DoubleLiteralImpl();
 		return doubleLiteral;
@@ -224,6 +247,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FloatLiteral createFloatLiteral() {
 		FloatLiteralImpl floatLiteral = new FloatLiteralImpl();
 		return floatLiteral;
@@ -234,6 +258,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public HexLiteral createHexLiteral() {
 		HexLiteralImpl hexLiteral = new HexLiteralImpl();
 		return hexLiteral;
@@ -244,6 +269,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BinaryLiteral createBinaryLiteral() {
 		BinaryLiteralImpl binaryLiteral = new BinaryLiteralImpl();
 		return binaryLiteral;
@@ -254,6 +280,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StringLiteral createStringLiteral() {
 		StringLiteralImpl stringLiteral = new StringLiteralImpl();
 		return stringLiteral;
@@ -264,6 +291,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NullLiteral createNullLiteral() {
 		NullLiteralImpl nullLiteral = new NullLiteralImpl();
 		return nullLiteral;
@@ -274,6 +302,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AssignmentExpression createAssignmentExpression() {
 		AssignmentExpressionImpl assignmentExpression = new AssignmentExpressionImpl();
 		return assignmentExpression;
@@ -284,6 +313,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ConditionalExpression createConditionalExpression() {
 		ConditionalExpressionImpl conditionalExpression = new ConditionalExpressionImpl();
 		return conditionalExpression;
@@ -294,6 +324,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LogicalOrExpression createLogicalOrExpression() {
 		LogicalOrExpressionImpl logicalOrExpression = new LogicalOrExpressionImpl();
 		return logicalOrExpression;
@@ -304,6 +335,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LogicalAndExpression createLogicalAndExpression() {
 		LogicalAndExpressionImpl logicalAndExpression = new LogicalAndExpressionImpl();
 		return logicalAndExpression;
@@ -314,6 +346,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LogicalNotExpression createLogicalNotExpression() {
 		LogicalNotExpressionImpl logicalNotExpression = new LogicalNotExpressionImpl();
 		return logicalNotExpression;
@@ -324,6 +357,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BitwiseXorExpression createBitwiseXorExpression() {
 		BitwiseXorExpressionImpl bitwiseXorExpression = new BitwiseXorExpressionImpl();
 		return bitwiseXorExpression;
@@ -334,6 +368,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BitwiseOrExpression createBitwiseOrExpression() {
 		BitwiseOrExpressionImpl bitwiseOrExpression = new BitwiseOrExpressionImpl();
 		return bitwiseOrExpression;
@@ -344,6 +379,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BitwiseAndExpression createBitwiseAndExpression() {
 		BitwiseAndExpressionImpl bitwiseAndExpression = new BitwiseAndExpressionImpl();
 		return bitwiseAndExpression;
@@ -354,6 +390,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LogicalRelationExpression createLogicalRelationExpression() {
 		LogicalRelationExpressionImpl logicalRelationExpression = new LogicalRelationExpressionImpl();
 		return logicalRelationExpression;
@@ -364,6 +401,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ShiftExpression createShiftExpression() {
 		ShiftExpressionImpl shiftExpression = new ShiftExpressionImpl();
 		return shiftExpression;
@@ -374,6 +412,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NumericalAddSubtractExpression createNumericalAddSubtractExpression() {
 		NumericalAddSubtractExpressionImpl numericalAddSubtractExpression = new NumericalAddSubtractExpressionImpl();
 		return numericalAddSubtractExpression;
@@ -384,6 +423,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NumericalMultiplyDivideExpression createNumericalMultiplyDivideExpression() {
 		NumericalMultiplyDivideExpressionImpl numericalMultiplyDivideExpression = new NumericalMultiplyDivideExpressionImpl();
 		return numericalMultiplyDivideExpression;
@@ -394,6 +434,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NumericalUnaryExpression createNumericalUnaryExpression() {
 		NumericalUnaryExpressionImpl numericalUnaryExpression = new NumericalUnaryExpressionImpl();
 		return numericalUnaryExpression;
@@ -404,6 +445,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PrimitiveValueExpression createPrimitiveValueExpression() {
 		PrimitiveValueExpressionImpl primitiveValueExpression = new PrimitiveValueExpressionImpl();
 		return primitiveValueExpression;
@@ -414,6 +456,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FeatureCall createFeatureCall() {
 		FeatureCallImpl featureCall = new FeatureCallImpl();
 		return featureCall;
@@ -424,6 +467,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MetaCall createMetaCall() {
 		MetaCallImpl metaCall = new MetaCallImpl();
 		return metaCall;
@@ -434,6 +478,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ElementReferenceExpression createElementReferenceExpression() {
 		ElementReferenceExpressionImpl elementReferenceExpression = new ElementReferenceExpressionImpl();
 		return elementReferenceExpression;
@@ -444,6 +489,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ParenthesizedExpression createParenthesizedExpression() {
 		ParenthesizedExpressionImpl parenthesizedExpression = new ParenthesizedExpressionImpl();
 		return parenthesizedExpression;
@@ -454,6 +500,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypeCastExpression createTypeCastExpression() {
 		TypeCastExpressionImpl typeCastExpression = new TypeCastExpressionImpl();
 		return typeCastExpression;
@@ -464,6 +511,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Argument createArgument() {
 		ArgumentImpl argument = new ArgumentImpl();
 		return argument;
@@ -474,6 +522,128 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public IfExpression createIfExpression() {
+		IfExpressionImpl ifExpression = new IfExpressionImpl();
+		return ifExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public BlockExpression createBlockExpression() {
+		BlockExpressionImpl blockExpression = new BlockExpressionImpl();
+		return blockExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public WhileExpression createWhileExpression() {
+		WhileExpressionImpl whileExpression = new WhileExpressionImpl();
+		return whileExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ReturnExpression createReturnExpression() {
+		ReturnExpressionImpl returnExpression = new ReturnExpressionImpl();
+		return returnExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public SwitchExpression createSwitchExpression() {
+		SwitchExpressionImpl switchExpression = new SwitchExpressionImpl();
+		return switchExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public SwitchCase createSwitchCase() {
+		SwitchCaseImpl switchCase = new SwitchCaseImpl();
+		return switchCase;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EventRaisingExpression createEventRaisingExpression() {
+		EventRaisingExpressionImpl eventRaisingExpression = new EventRaisingExpressionImpl();
+		return eventRaisingExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EventValueReferenceExpression createEventValueReferenceExpression() {
+		EventValueReferenceExpressionImpl eventValueReferenceExpression = new EventValueReferenceExpressionImpl();
+		return eventValueReferenceExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ForExpression createForExpression() {
+		ForExpressionImpl forExpression = new ForExpressionImpl();
+		return forExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ForVarDecl createForVarDecl() {
+		ForVarDeclImpl forVarDecl = new ForVarDeclImpl();
+		return forVarDecl;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ThrowExpression createThrowExpression() {
+		ThrowExpressionImpl throwExpression = new ThrowExpressionImpl();
+		return throwExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public PostFixUnaryExpression createPostFixUnaryExpression() {
 		PostFixUnaryExpressionImpl postFixUnaryExpression = new PostFixUnaryExpressionImpl();
 		return postFixUnaryExpression;
@@ -664,6 +834,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ExpressionsPackage getExpressionsPackage() {
 		return (ExpressionsPackage)getEPackage();
 	}

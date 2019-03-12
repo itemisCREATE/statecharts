@@ -67,6 +67,7 @@ public class NumericalUnaryExpressionImpl extends UnaryExpressionImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public UnaryOperator getOperator() {
 		return operator;
 	}
@@ -76,6 +77,7 @@ public class NumericalUnaryExpressionImpl extends UnaryExpressionImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOperator(UnaryOperator newOperator) {
 		UnaryOperator oldOperator = operator;
 		operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;

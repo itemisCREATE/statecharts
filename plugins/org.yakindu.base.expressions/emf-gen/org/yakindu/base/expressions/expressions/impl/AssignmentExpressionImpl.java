@@ -93,6 +93,7 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Expression getVarRef() {
 		return varRef;
 	}
@@ -117,6 +118,7 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVarRef(Expression newVarRef) {
 		if (newVarRef != varRef) {
 			NotificationChain msgs = null;
@@ -136,6 +138,7 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AssignmentOperator getOperator() {
 		return operator;
 	}
@@ -145,6 +148,7 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOperator(AssignmentOperator newOperator) {
 		AssignmentOperator oldOperator = operator;
 		operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;
@@ -157,6 +161,7 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Expression getExpression() {
 		return expression;
 	}
@@ -181,6 +186,7 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExpression(Expression newExpression) {
 		if (newExpression != expression) {
 			NotificationChain msgs = null;

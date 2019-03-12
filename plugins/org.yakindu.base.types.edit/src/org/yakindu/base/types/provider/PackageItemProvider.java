@@ -95,7 +95,7 @@ public class PackageItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Package_import_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Package_import_feature", "_UI_Package_type"),
-				 TypesPackage.Literals.PACKAGE__IMPORT,
+				 TypesPackage.Literals.PACKAGE__IMPORTS,
 				 true,
 				 false,
 				 true,

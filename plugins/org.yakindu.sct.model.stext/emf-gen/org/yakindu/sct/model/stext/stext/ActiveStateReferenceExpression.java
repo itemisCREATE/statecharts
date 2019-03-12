@@ -3,6 +3,7 @@
 package org.yakindu.sct.model.stext.stext;
 
 import org.yakindu.base.types.Expression;
+
 import org.yakindu.sct.model.sgraph.State;
 
 /**

@@ -67,6 +67,7 @@ public class NumericalMultiplyDivideExpressionImpl extends BinaryExpressionImpl 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MultiplicativeOperator getOperator() {
 		return operator;
 	}
@@ -76,6 +77,7 @@ public class NumericalMultiplyDivideExpressionImpl extends BinaryExpressionImpl 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOperator(MultiplicativeOperator newOperator) {
 		MultiplicativeOperator oldOperator = operator;
 		operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;

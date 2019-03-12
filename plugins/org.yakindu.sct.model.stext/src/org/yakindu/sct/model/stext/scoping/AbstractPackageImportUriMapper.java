@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RunnableWithResult;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
+import org.yakindu.base.expressions.scoping.IPackageImport2URIMapper;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 
 /**

@@ -42,6 +42,10 @@ import org.yakindu.base.types.TypesPackage
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.validation.IValidationIssueAcceptor
 import org.yakindu.base.types.validation.TypesJavaValidator
+import org.yakindu.base.expressions.expressions.EventRaisingExpression
+import org.yakindu.base.types.Event
+import org.yakindu.base.base.NamedElement
+import org.yakindu.base.expressions.util.ExpressionExtensions
 
 /** 
  * @author andreas muelder - Initial contribution and API
@@ -50,19 +54,7 @@ import org.yakindu.base.types.validation.TypesJavaValidator
 class ExpressionsValidator extends AbstractExpressionsValidator implements IValidationIssueAcceptor {
 
 	@Inject ITypeSystemInferrer typeInferrer
-
-	@Check
-	def void checkExpression(Expression expression) {
-		// Only infer root expressions since inferType infers the expression
-		// containment hierarchy
-		if(!(expression.eContainer() instanceof Expression)) typeInferrer.infer(expression, this)
-	}
-
-	@Check(CheckType.FAST)
-	def void checkExpression(Property expression) {
-		if(expression.getType() === null || expression.getType().eIsProxy()) return;
-		typeInferrer.infer(expression, this)
-	}
+	@Inject extension ExpressionExtensions
 
 	override void accept(ValidationIssue issue) {
 		switch (issue.getSeverity()) {
@@ -75,6 +67,13 @@ class ExpressionsValidator extends AbstractExpressionsValidator implements IVali
 			case INFO: {
 			}
 		}
+	}
+
+	@Check
+	def void checkExpression(Expression expression) {
+		// Only infer root expressions since inferType infers the expression
+		// containment hierarchy
+		if(!(expression.eContainer() instanceof Expression)) typeInferrer.infer(expression, this)
 	}
 
 	public static final String POSTFIX_ONLY_ON_VARIABLES_CODE = "PostfixOnlyOnVariables"
@@ -283,6 +282,19 @@ class ExpressionsValidator extends AbstractExpressionsValidator implements IVali
 			annotation.getArguments().size() !== annotation.getType().getProperties().size()) {
 			error(String.format(ERROR_WRONG_NUMBER_OF_ARGUMENTS_MSG, annotation.getType().getProperties()), null,
 				ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE)
+		}
+	}
+	
+	@Check(CheckType.FAST)
+	def void checkRaisingExpressionEvent(EventRaisingExpression expression) {
+		var EObject element = expression.event.featureOrReference
+		if (element !== null && (!(element instanceof Event))) {
+			var String elementName = ""
+			if (element instanceof NamedElement) {
+				elementName = element.getName()
+			}
+			error(String.format("'%s' is not an event.", elementName),
+				ExpressionsPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT, -1)
 		}
 	}
 }

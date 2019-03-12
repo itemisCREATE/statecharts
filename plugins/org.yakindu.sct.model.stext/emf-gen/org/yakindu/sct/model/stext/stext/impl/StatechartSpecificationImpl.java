@@ -6,16 +6,23 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.TypesPackage;
+
 import org.yakindu.sct.model.sgraph.impl.ScopedElementImpl;
+
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
@@ -43,6 +50,7 @@ public class StatechartSpecificationImpl extends ScopedElementImpl implements St
 	 * @ordered
 	 */
 	protected EList<Annotation> annotations;
+
 	/**
 	 * The cached value of the '{@link #getAnnotationInfo() <em>Annotation Info</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -52,6 +60,7 @@ public class StatechartSpecificationImpl extends ScopedElementImpl implements St
 	 * @ordered
 	 */
 	protected AnnotatableElement annotationInfo;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -110,7 +119,8 @@ public class StatechartSpecificationImpl extends ScopedElementImpl implements St
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override

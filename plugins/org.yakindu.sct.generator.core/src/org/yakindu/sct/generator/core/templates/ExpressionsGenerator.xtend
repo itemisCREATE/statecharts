@@ -31,6 +31,10 @@ import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.expressions.expressions.UnaryExpression
 import org.yakindu.base.types.Expression
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.base.expressions.expressions.BlockExpression
+import org.yakindu.base.expressions.expressions.IfExpression
+import org.yakindu.base.expressions.expressions.SwitchExpression
+import org.yakindu.base.expressions.expressions.ReturnExpression
 
 /**
  * 
@@ -69,6 +73,34 @@ class ExpressionsGenerator {
 	def dispatch CharSequence code(ParenthesizedExpression it) '''(«expression.code»)'''
 
 	def dispatch CharSequence code(TypeCastExpression it) '''((«type.getTargetLanguageName») «operand.code»)'''
+	
+	def dispatch CharSequence code(BlockExpression it) 
+	'''
+	{
+		«FOR exp : expressions SEPARATOR '\n' AFTER ';' »«exp.code»«ENDFOR»
+	}'''
+	
+	def dispatch CharSequence code(IfExpression it)
+	'''
+	if(«condition.code») {
+		«then.code»
+	} «IF ^else !== null»else {
+		«^else.code»
+	}
+	«ENDIF»'''
+	
+	def dispatch CharSequence code(SwitchExpression it)
+	'''
+	switch(«^switch.code») {
+		«FOR _case : cases SEPARATOR '\n'»
+			case «_case.^case.code» : «_case.then.code»
+			break;
+		«ENDFOR»
+	} 
+	'''
+	
+	def dispatch CharSequence code(ReturnExpression it) '''return «it.expression.code»'''
+	
 
 	def dispatch CharSequence code(StringLiteral it) '''"«value.escaped»"'''
 

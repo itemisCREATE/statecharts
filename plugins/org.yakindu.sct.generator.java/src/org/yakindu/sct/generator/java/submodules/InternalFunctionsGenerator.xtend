@@ -114,7 +114,7 @@ class InternalFunctionsGenerator {
 	 
 	 def implementation(Method it) '''
 	 	private «typeSpecifier.targetLanguageName» «shortName»(«FOR p : parameters SEPARATOR ', '»«IF p.varArgs»...«ELSE»«p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR») {
-	 		«body.code»
+	 		«bodySequence.code»
 	 	}
 	 '''
 	

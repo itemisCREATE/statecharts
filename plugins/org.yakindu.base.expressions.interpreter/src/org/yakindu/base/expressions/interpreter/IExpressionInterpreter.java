@@ -23,6 +23,6 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultExpressionInterpreter.class)
 public interface IExpressionInterpreter {
 	
-	public Object evaluate(Expression statement, ExecutionContext context);
+	public Object evaluate(Expression expression, ExecutionContext context);
 
 }

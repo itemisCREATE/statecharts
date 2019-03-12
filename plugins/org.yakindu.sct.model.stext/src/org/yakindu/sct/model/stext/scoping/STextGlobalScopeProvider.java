@@ -30,6 +30,7 @@ import org.eclipse.xtext.scoping.impl.MapBasedScope;
 import org.eclipse.xtext.scoping.impl.SelectableBasedScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.util.IResourceScopeCache;
+import org.yakindu.base.expressions.scoping.TypeSystemAwareScope;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.resource.TypedResourceDescriptionStrategy;
 import org.yakindu.base.types.typesystem.ITypeSystem;

@@ -10,6 +10,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -29,7 +30,7 @@ import org.yakindu.base.types.TypesUtil;
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.PackageImpl#getDomainID <em>Domain ID</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.PackageImpl#getMember <em>Member</em>}</li>
- *   <li>{@link org.yakindu.base.types.impl.PackageImpl#getImport <em>Import</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.PackageImpl#getImports <em>Imports</em>}</li>
  * </ul>
  *
  * @generated
@@ -63,14 +64,14 @@ public class PackageImpl extends DeclarationImpl implements org.yakindu.base.typ
 	 */
 	protected EList<Declaration> member;
 	/**
-	 * The cached value of the '{@link #getImport() <em>Import</em>}' reference list.
+	 * The cached value of the '{@link #getImports() <em>Imports</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getImport()
+	 * @see #getImports()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<org.yakindu.base.types.Package> import_;
+	protected EList<String> imports;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -138,11 +139,11 @@ public class PackageImpl extends DeclarationImpl implements org.yakindu.base.typ
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<org.yakindu.base.types.Package> getImport() {
-		if (import_ == null) {
-			import_ = new EObjectResolvingEList<org.yakindu.base.types.Package>(org.yakindu.base.types.Package.class, this, TypesPackage.PACKAGE__IMPORT);
+	public EList<String> getImports() {
+		if (imports == null) {
+			imports = new EDataTypeUniqueEList<String>(String.class, this, TypesPackage.PACKAGE__IMPORTS);
 		}
-		return import_;
+		return imports;
 	}
 
 	/**
@@ -171,8 +172,8 @@ public class PackageImpl extends DeclarationImpl implements org.yakindu.base.typ
 				return getDomainID();
 			case TypesPackage.PACKAGE__MEMBER:
 				return getMember();
-			case TypesPackage.PACKAGE__IMPORT:
-				return getImport();
+			case TypesPackage.PACKAGE__IMPORTS:
+				return getImports();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -193,9 +194,9 @@ public class PackageImpl extends DeclarationImpl implements org.yakindu.base.typ
 				getMember().clear();
 				getMember().addAll((Collection<? extends Declaration>)newValue);
 				return;
-			case TypesPackage.PACKAGE__IMPORT:
-				getImport().clear();
-				getImport().addAll((Collection<? extends org.yakindu.base.types.Package>)newValue);
+			case TypesPackage.PACKAGE__IMPORTS:
+				getImports().clear();
+				getImports().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -215,8 +216,8 @@ public class PackageImpl extends DeclarationImpl implements org.yakindu.base.typ
 			case TypesPackage.PACKAGE__MEMBER:
 				getMember().clear();
 				return;
-			case TypesPackage.PACKAGE__IMPORT:
-				getImport().clear();
+			case TypesPackage.PACKAGE__IMPORTS:
+				getImports().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -234,8 +235,8 @@ public class PackageImpl extends DeclarationImpl implements org.yakindu.base.typ
 				return DOMAIN_ID_EDEFAULT == null ? domainID != null : !DOMAIN_ID_EDEFAULT.equals(domainID);
 			case TypesPackage.PACKAGE__MEMBER:
 				return member != null && !member.isEmpty();
-			case TypesPackage.PACKAGE__IMPORT:
-				return import_ != null && !import_.isEmpty();
+			case TypesPackage.PACKAGE__IMPORTS:
+				return imports != null && !imports.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -284,6 +285,8 @@ public class PackageImpl extends DeclarationImpl implements org.yakindu.base.typ
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (domainID: ");
 		result.append(domainID);
+		result.append(", imports: ");
+		result.append(imports);
 		result.append(')');
 		return result.toString();
 	}

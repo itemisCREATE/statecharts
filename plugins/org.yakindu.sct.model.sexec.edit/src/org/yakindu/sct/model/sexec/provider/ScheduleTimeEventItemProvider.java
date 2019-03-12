@@ -264,6 +264,46 @@ public class ScheduleTimeEventItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
 				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createIfExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createBlockExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createWhileExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createReturnExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createSwitchExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
 	}
 
 }

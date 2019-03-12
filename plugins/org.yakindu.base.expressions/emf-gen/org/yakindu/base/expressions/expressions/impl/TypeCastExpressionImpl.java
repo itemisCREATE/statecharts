@@ -72,6 +72,7 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Expression getOperand() {
 		return operand;
 	}
@@ -96,6 +97,7 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOperand(Expression newOperand) {
 		if (newOperand != operand) {
 			NotificationChain msgs = null;
@@ -115,6 +117,7 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Type getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
@@ -141,6 +144,7 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(Type newType) {
 		Type oldType = type;
 		type = newType;

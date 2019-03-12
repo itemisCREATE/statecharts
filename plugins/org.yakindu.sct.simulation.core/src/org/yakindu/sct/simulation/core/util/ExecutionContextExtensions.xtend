@@ -15,8 +15,12 @@ import java.util.List
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sruntime.ExecutionContext
+import org.yakindu.base.types.typesystem.ITypeValueProvider
+import com.google.inject.Inject
 
 class ExecutionContextExtensions {
+
+	@Inject protected extension ITypeValueProvider
 
 	def clearOutEvents(ExecutionContext executionContext) {
 		executionContext.allEvents.filter[direction == Direction.OUT].forEach[

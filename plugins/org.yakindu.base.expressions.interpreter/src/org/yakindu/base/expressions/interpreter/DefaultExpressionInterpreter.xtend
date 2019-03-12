@@ -21,12 +21,14 @@ import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression
 import org.yakindu.base.expressions.expressions.BitwiseOrExpression
 import org.yakindu.base.expressions.expressions.BitwiseXorExpression
+import org.yakindu.base.expressions.expressions.BlockExpression
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ConditionalExpression
 import org.yakindu.base.expressions.expressions.DoubleLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.FloatLiteral
+import org.yakindu.base.expressions.expressions.IfExpression
 import org.yakindu.base.expressions.expressions.IntLiteral
 import org.yakindu.base.expressions.expressions.LogicalAndExpression
 import org.yakindu.base.expressions.expressions.LogicalNotExpression
@@ -39,9 +41,12 @@ import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression
 import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
+import org.yakindu.base.expressions.expressions.ReturnExpression
 import org.yakindu.base.expressions.expressions.ShiftExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
+import org.yakindu.base.expressions.expressions.WhileExpression
+import org.yakindu.base.expressions.expressions.util.ArgumentSorter
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Enumerator
@@ -56,6 +61,7 @@ import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.sruntime.ExecutionSlot
 import org.yakindu.sct.model.sruntime.ExecutionVariable
 import org.yakindu.sct.model.sruntime.ReferenceSlot
+import org.yakindu.sct.model.sruntime.SRuntimeFactory
 
 /**
  * 
@@ -76,20 +82,20 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 
 	@Inject(optional=true)
 	protected ExecutionContext context
-	
+
 	@Inject
 	protected extension ExpressionExtensions
 
-	override evaluate(Expression statement, ExecutionContext context) {
+	override evaluate(Expression expression, ExecutionContext context) {
 		this.context = context
-		statement.execute()
+		expression.execute()
 	}
 
-	def dispatch Object execute(Expression statement) {
+	def protected dispatch Object execute(Expression expression) {
 		null
 	}
 
-	def dispatch Object execute(ConditionalExpression expression) {
+	def protected dispatch Object execute(ConditionalExpression expression) {
 		if (expression.condition.execute as Boolean) {
 			return expression.trueCase.execute
 		} else {
@@ -97,54 +103,53 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 		}
 	}
 
-	def dispatch Object execute(BitwiseAndExpression expression) {
+	def protected dispatch Object execute(BitwiseAndExpression expression) {
 		executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, CoreFunction::BIT_AND)
 	}
 
-	def dispatch Object execute(BitwiseOrExpression expression) {
+	def protected dispatch Object execute(BitwiseOrExpression expression) {
 		executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, CoreFunction::BIT_OR)
 	}
 
-	def dispatch Object execute(BitwiseXorExpression expression) {
+	def protected dispatch Object execute(BitwiseXorExpression expression) {
 		executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, CoreFunction::BIT_XOR)
 	}
 
-	def dispatch Object execute(LogicalRelationExpression expression) {
+	def protected dispatch Object execute(LogicalRelationExpression expression) {
 		executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, expression.operator.getName())
 	}
 
-	def dispatch Object execute(NumericalAddSubtractExpression expression) {
+	def protected dispatch Object execute(NumericalAddSubtractExpression expression) {
 		executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, expression.operator.literal)
 	}
 
-	def dispatch Object execute(NumericalMultiplyDivideExpression expression) {
+	def protected dispatch Object execute(NumericalMultiplyDivideExpression expression) {
 		executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, expression.operator.getName())
 	}
 
-	def dispatch Object execute(ShiftExpression expression) {
+	def protected dispatch Object execute(ShiftExpression expression) {
 		executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, expression.operator.getName())
 	}
 
-	def dispatch Object execute(NumericalUnaryExpression expression) {
+	def protected dispatch Object execute(NumericalUnaryExpression expression) {
 		executeUnaryCoreFunction(expression.operand, expression.operator.getName())
 	}
 
-	def dispatch Object execute(PostFixUnaryExpression it) {
+	def protected dispatch Object execute(PostFixUnaryExpression it) {
 		var result = operand.execute
-		val slot = context.resolve(operand)
-			.orElseThrow(SlotResolutionExceptionSupplier.forContext(operand))
-		
+		val slot = context.resolve(operand).orElseThrow(SlotResolutionExceptionSupplier.forContext(operand))
+
 		slot.value = evaluate(operator.getName(), result)
 		result
 	}
 
-	def executeBinaryCoreFunction(Expression leftStatement, Expression rightStatement, String operator) {
-		var leftResult = leftStatement.execute().resolveReference
-		var rightResult = rightStatement.execute().resolveReference
+	def protected executeBinaryCoreFunction(Expression leftExpression, Expression rightExpression, String operator) {
+		var leftResult = leftExpression.execute().resolveReference
+		var rightResult = rightExpression.execute().resolveReference
 		return evaluate(operator, leftResult, rightResult)
 	}
 
-	def dispatch Object execute(LogicalAndExpression expression) {
+	def protected dispatch Object execute(LogicalAndExpression expression) {
 		var leftResult = execute(expression.leftOperand)
 		if (!leftResult as Boolean)
 			return false
@@ -152,7 +157,7 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 		return leftResult as Boolean && rightResult as Boolean
 	}
 
-	def dispatch Object execute(LogicalOrExpression expression) {
+	def protected dispatch Object execute(LogicalOrExpression expression) {
 		var leftResult = execute(expression.leftOperand)
 		if (leftResult as Boolean)
 			return true
@@ -160,32 +165,59 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 		return leftResult as Boolean || rightResult as Boolean
 	}
 
-	def dispatch Object execute(LogicalNotExpression expression) {
+	def protected dispatch Object execute(AssignmentExpression assignment) {
+		executeAssignment(assignment)
+	}
+
+	def protected dispatch Object execute(LogicalNotExpression expression) {
 		return ! (expression.operand.execute() as Boolean)
 	}
 
-	protected def Object resolveReference(Object element) {
+	def protected Object resolveReference(Object element) {
 		if (element instanceof ReferenceSlot) {
 			return element.reference
 		}
 		return element
 	}
 
-	def dispatch Object execute(AssignmentExpression assignment) {
-		executeAssignment(assignment)
-	}
-
-	def dispatch Object execute(TypeCastExpression expression) {
+	def protected dispatch Object execute(TypeCastExpression expression) {
 		var operand = expression.operand.execute
 		typeCast(operand, expression.type.originType)
 	}
 
-	def Object cast(Object value, Type type) {
+	def protected Object cast(Object value, Type type) {
 		if (type !== null) {
 			typeCast(value, type.originType)
- 		} else {
-	 		value
- 		}
+		} else {
+			value
+		}
+	}
+
+	def protected dispatch Object execute(WhileExpression exp) {
+		var condition = evaluate(exp.condition, context) as Boolean
+		var Object result = null
+		while (condition) {
+			result = exp.body.execute
+			condition = evaluate(exp.condition, context) as Boolean
+		}
+		return result
+	}
+
+	def protected dispatch Object execute(IfExpression exp) {
+		var condition = evaluate(exp.condition, context) as Boolean
+		return if(condition) evaluate(exp.then, context) else evaluate(exp.^else, context)
+	}
+
+	def protected dispatch Object execute(ReturnExpression it) {
+		return it.expression.execute
+	}
+
+	def protected dispatch Object execute(BlockExpression it) {
+		var Object result = null
+		for (exp : expressions) {
+			result = evaluate(exp, context)
+		}
+		result
 	}
 
 	def protected dispatch Object typeCast(Long value, Type type) {
@@ -227,12 +259,12 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 		return value
 	}
 
-	def Object executeAssignment(AssignmentExpression assignment) {
-		var scopeVariable = context.resolve(assignment.varRef)
-			.orElseThrow(SlotResolutionExceptionSupplier.forContext(assignment.varRef))
-		
+	def protected Object executeAssignment(AssignmentExpression assignment) {
+		var scopeVariable = context.resolve(assignment.varRef).orElseThrow(
+			SlotResolutionExceptionSupplier.forContext(assignment.varRef))
+
 		var result = assignment.expression.execute
-		if (result instanceof Enumerator) 
+		if (result instanceof Enumerator)
 			result = result.literalValue
 
 		if (assignment.operator == AssignmentOperator::ASSIGN) {
@@ -248,52 +280,52 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 		scopeVariable.value
 	}
 
-	def dispatch Object execute(ParenthesizedExpression e) {
+	def protected dispatch Object execute(ParenthesizedExpression e) {
 		e.expression.execute()
 	}
 
-	def dispatch Object execute(PrimitiveValueExpression expression) {
+	def protected dispatch Object execute(PrimitiveValueExpression expression) {
 		return expression.value.valueLiteral
 	}
 
-	def dispatch valueLiteral(IntLiteral literal) {
+	def protected dispatch valueLiteral(IntLiteral literal) {
 		return literal.value as long
 	}
 
-	def dispatch valueLiteral(BoolLiteral bool) {
+	def protected dispatch valueLiteral(BoolLiteral bool) {
 		return bool.value
 	}
 
-	def dispatch valueLiteral(DoubleLiteral literal) {
+	def protected dispatch valueLiteral(DoubleLiteral literal) {
 		return literal.value
 	}
 
-	def dispatch valueLiteral(FloatLiteral literal) {
+	def protected dispatch valueLiteral(FloatLiteral literal) {
 		return literal.value
 	}
 
-	def dispatch valueLiteral(StringLiteral literal) {
+	def protected dispatch valueLiteral(StringLiteral literal) {
 		return literal.value
 	}
 
-	def dispatch valueLiteral(NullLiteral literal) {
+	def protected dispatch valueLiteral(NullLiteral literal) {
 		return null
 	}
 
-	def dispatch Object execute(ElementReferenceExpression expression) {
+	def protected dispatch Object execute(ElementReferenceExpression expression) {
 		executeElementReferenceExpression(expression)
 	}
 
-	def executeElementReferenceExpression(ElementReferenceExpression expression) {
+	def protected executeElementReferenceExpression(ElementReferenceExpression expression) {
 		val slot = context.resolve(expression)
 		return doExecute(expression.reference, slot.orElse(null), expression)
 	}
 
-	def dispatch Object execute(FeatureCall call) {
+	def protected dispatch Object execute(FeatureCall call) {
 		executeFeatureCall(call)
 	}
 
-	def executeFeatureCall(FeatureCall call) {
+	def protected executeFeatureCall(FeatureCall call) {
 		var Object result
 		for (ArgumentExpression exp : call.toCallStack) {
 			val slot = context.resolve(exp)
@@ -301,58 +333,88 @@ class DefaultExpressionInterpreter extends AbstractExpressionInterpreter impleme
 		}
 		return result
 	}
-	
-	def dispatch doExecute(EObject feature, Void slot, ArgumentExpression exp) {
-		// fall-back
+
+	def protected dispatch doExecute(EObject feature, Void slot, ArgumentExpression exp) {
 		println("No implementation found for " + exp + " -> returning null")
 		null
 	}
-	
-	def dispatch doExecute(EObject feature, ExecutionVariable slot, ArgumentExpression exp) {
+
+	def protected dispatch doExecute(EObject feature, ExecutionVariable slot, ArgumentExpression exp) {
 		slot.value
 	}
-	
-	def dispatch doExecute(EObject feature, CompositeSlot slot, ArgumentExpression exp) {
+
+	def protected dispatch doExecute(EObject feature, CompositeSlot slot, ArgumentExpression exp) {
 		slot
 	}
-	
-	def dispatch doExecute(EObject feature, ExecutionEvent slot, ArgumentExpression exp) {
+
+	def protected dispatch doExecute(EObject feature, ExecutionEvent slot, ArgumentExpression exp) {
 		slot.raised
 	}
-	
-	def dispatch doExecute(Operation feature, ExecutionEvent slot, ArgumentExpression exp) {
+
+	def protected dispatch doExecute(Operation feature, ExecutionEvent slot, ArgumentExpression exp) {
 		slot.raised = true
 	}
-	
-	def dispatch doExecute(Operation feature, Void slot, ArgumentExpression exp) {
+
+	def protected dispatch doExecute(Operation operation, Void slot, ArgumentExpression exp) {
+		if (operation.body !== null) {
+			return operation.executeOperationBody(exp)
+		}
 		val executor = operationExecutors.findFirst[canExecute(exp)]
 		if (executor !== null) {
 			return executor.executeOperation(exp)
 		}
 	}
-	
-	def dispatch doExecute(Operation feature, ExecutionSlot slot, ArgumentExpression exp) {
+
+	def protected dispatch doExecute(Operation operation, ExecutionSlot slot, ArgumentExpression exp) {
+		if (operation.body !== null) {
+			return operation.executeOperationBody(exp)
+		}
 		val executor = operationExecutors.findFirst[canExecute(exp)]
 		if (executor !== null) {
 			slot.value = executor.executeOperation(exp)
 		}
 		return slot.value
 	}
-	
-	def dispatch doExecute(Enumerator feature, Void slot, ArgumentExpression exp) {
+
+	def protected executeOperationBody(Operation operation, ArgumentExpression exp) {
+		val callStack = context.slots.findFirst[name == "callStack"] as CompositeSlot
+		val argumentExpression = ArgumentSorter.getOrderedExpressions(exp.arguments, operation)
+		// TODO This wont work with different operations calling each other with same name of parameters
+		argumentExpression.forEach [ e, i | 
+			val slot = resolver.resolve(context, e)
+			if (slot.present) {
+				callStack.getSlots += SRuntimeFactory.eINSTANCE.createReferenceSlot => [
+					reference = slot.get
+					name = operation.parameters.get(i).name
+					fqName = operation.parameters.get(i).name
+				]
+			} else {
+				callStack.slots += SRuntimeFactory.eINSTANCE.createExecutionVariable => [
+					name = operation.parameters.get(argumentExpression.indexOf(e)).name
+					value = e.execute
+				]
+			}
+
+		]
+		val result =  operation.body.execute
+		callStack.slots.clear
+		return result
+	}
+
+	def protected dispatch doExecute(Enumerator feature, Void slot, ArgumentExpression exp) {
 		new Long(feature.literalValue)
 	}
-	
-	def dispatch doExecute(Type feature, Void slot, ArgumentExpression exp) {
+
+	def protected dispatch doExecute(Type feature, Void slot, ArgumentExpression exp) {
 		null
 	}
 
-	def executeUnaryCoreFunction(Expression statement, String operator) {
-		var result = statement.execute()
+	def protected executeUnaryCoreFunction(Expression expression, String operator) {
+		var result = expression.execute()
 		return evaluate(operator, result);
 	}
 
-	def executeOperation(IOperationExecutor executor, ArgumentExpression expression) {
+	def protected executeOperation(IOperationExecutor executor, ArgumentExpression expression) {
 		executor.execute(expression, context)
 	}
 

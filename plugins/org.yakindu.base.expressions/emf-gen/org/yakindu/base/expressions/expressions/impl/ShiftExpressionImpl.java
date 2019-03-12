@@ -67,6 +67,7 @@ public class ShiftExpressionImpl extends BinaryExpressionImpl implements ShiftEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ShiftOperator getOperator() {
 		return operator;
 	}
@@ -76,6 +77,7 @@ public class ShiftExpressionImpl extends BinaryExpressionImpl implements ShiftEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOperator(ShiftOperator newOperator) {
 		ShiftOperator oldOperator = operator;
 		operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;

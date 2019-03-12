@@ -58,6 +58,11 @@ Workflow {
 			generator = {
 				generateStub = false
 			}
+			parserGenerator = {
+				options = {
+					skipUnusedRules = true
+				}
+			}
 		}
 	}
 }

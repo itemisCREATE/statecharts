@@ -82,13 +82,6 @@
     <genClasses ecoreClass="SText.ecore#//ReactionEffect">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//ReactionEffect/actions"/>
     </genClasses>
-    <genClasses ecoreClass="SText.ecore#//EventRaisingExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//EventRaisingExpression/event"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//EventRaisingExpression/value"/>
-    </genClasses>
-    <genClasses ecoreClass="SText.ecore#//EventValueReferenceExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//EventValueReferenceExpression/value"/>
-    </genClasses>
     <genClasses ecoreClass="SText.ecore#//ActiveStateReferenceExpression">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SText.ecore#//ActiveStateReferenceExpression/value"/>
     </genClasses>

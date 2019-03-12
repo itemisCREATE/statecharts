@@ -19,10 +19,11 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
+import org.yakindu.base.expressions.scoping.IPackageImport2URIMapper;
+import org.yakindu.base.expressions.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.base.types.Package;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.extensions.STextExtensions;
-import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.StateSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
@@ -78,7 +79,6 @@ public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalSc
 		// all imports should be treated as if they had a wild card
 		return new ImportNormalizer(importedNamespace, true, ignoreCase);
 	}
-
 	protected List<ImportNormalizer> createNamespaceResolver(Scope scope, boolean ignoreCase) {
 		List<ImportNormalizer> importedNamespaceResolvers = Lists.newArrayList();
 		ImportScope importScope = (ImportScope) scope;

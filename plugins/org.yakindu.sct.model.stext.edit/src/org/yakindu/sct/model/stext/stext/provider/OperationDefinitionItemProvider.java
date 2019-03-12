@@ -18,6 +18,7 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.provider.OperationItemProvider;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
@@ -167,6 +168,156 @@ public class OperationDefinitionItemProvider extends OperationItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 SGraphFactory.eINSTANCE.createImportDeclaration()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 StextFactory.eINSTANCE.createVariableDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createConditionalExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createLogicalOrExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createLogicalAndExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createLogicalNotExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createBitwiseXorExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createBitwiseOrExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createBitwiseAndExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createLogicalRelationExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createNumericalAddSubtractExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createNumericalUnaryExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createPostFixUnaryExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createFeatureCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createMetaCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createIfExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createBlockExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createWhileExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createReturnExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createSwitchExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
 	}
 
   /**
@@ -183,6 +334,7 @@ public class OperationDefinitionItemProvider extends OperationItemProvider
 		boolean qualify =
 			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
 			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES ||
+			childFeature == TypesPackage.Literals.OPERATION__BODY ||
 			childFeature == TypesPackage.Literals.OPERATION__PARAMETERS ||
 			childFeature == TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS;
 

@@ -847,54 +847,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
 	}
 
   /**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EventRaisingExpression} instances.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  protected EventRaisingExpressionItemProvider eventRaisingExpressionItemProvider;
-
-  /**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.EventRaisingExpression}.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  @Override
-  public Adapter createEventRaisingExpressionAdapter()
-  {
-		if (eventRaisingExpressionItemProvider == null) {
-			eventRaisingExpressionItemProvider = new EventRaisingExpressionItemProvider(this);
-		}
-
-		return eventRaisingExpressionItemProvider;
-	}
-
-  /**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EventValueReferenceExpression} instances.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  protected EventValueReferenceExpressionItemProvider eventValueReferenceExpressionItemProvider;
-
-  /**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.EventValueReferenceExpression}.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  @Override
-  public Adapter createEventValueReferenceExpressionAdapter()
-  {
-		if (eventValueReferenceExpressionItemProvider == null) {
-			eventValueReferenceExpressionItemProvider = new EventValueReferenceExpressionItemProvider(this);
-		}
-
-		return eventValueReferenceExpressionItemProvider;
-	}
-
-  /**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression} instances.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -924,7 +876,8 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public ComposeableAdapterFactory getRootAdapterFactory()
+  @Override
+		public ComposeableAdapterFactory getRootAdapterFactory()
   {
 		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
 	}
@@ -935,7 +888,8 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory)
+  @Override
+		public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory)
   {
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
@@ -987,7 +941,8 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void addListener(INotifyChangedListener notifyChangedListener)
+  @Override
+		public void addListener(INotifyChangedListener notifyChangedListener)
   {
 		changeNotifier.addListener(notifyChangedListener);
 	}
@@ -998,7 +953,8 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void removeListener(INotifyChangedListener notifyChangedListener)
+  @Override
+		public void removeListener(INotifyChangedListener notifyChangedListener)
   {
 		changeNotifier.removeListener(notifyChangedListener);
 	}
@@ -1009,7 +965,8 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void fireNotifyChanged(Notification notification)
+  @Override
+		public void fireNotifyChanged(Notification notification)
   {
 		changeNotifier.fireNotifyChanged(notification);
 
@@ -1024,7 +981,8 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void dispose()
+  @Override
+		public void dispose()
   {
 		if (rootItemProvider != null) rootItemProvider.dispose();
 		if (defRootItemProvider != null) defRootItemProvider.dispose();
@@ -1058,8 +1016,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
 		if (reactionTriggerItemProvider != null) reactionTriggerItemProvider.dispose();
 		if (defaultTriggerItemProvider != null) defaultTriggerItemProvider.dispose();
 		if (reactionEffectItemProvider != null) reactionEffectItemProvider.dispose();
-		if (eventRaisingExpressionItemProvider != null) eventRaisingExpressionItemProvider.dispose();
-		if (eventValueReferenceExpressionItemProvider != null) eventValueReferenceExpressionItemProvider.dispose();
 		if (activeStateReferenceExpressionItemProvider != null) activeStateReferenceExpressionItemProvider.dispose();
 	}
 

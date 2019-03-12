@@ -4,10 +4,14 @@ package org.yakindu.sct.model.stext.stext.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.yakindu.base.types.Expression;
+
 import org.yakindu.sct.model.stext.stext.RegularEventSpec;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
@@ -59,6 +63,7 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Expression getEvent() {
 		return event;
 	}
@@ -83,6 +88,7 @@ public class RegularEventSpecImpl extends EventSpecImpl implements RegularEventS
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEvent(Expression newEvent) {
 		if (newEvent != event) {
 			NotificationChain msgs = null;

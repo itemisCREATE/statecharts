@@ -9,8 +9,13 @@
  */
 package org.yakindu.base.expressions.inferrer
 
-import com.google.common.collect.Maps
-import com.google.inject.Inject
+import static org.yakindu.base.types.typesystem.ITypeSystem.ANY
+import static org.yakindu.base.types.typesystem.ITypeSystem.BOOLEAN
+import static org.yakindu.base.types.typesystem.ITypeSystem.INTEGER
+import static org.yakindu.base.types.typesystem.ITypeSystem.NULL
+import static org.yakindu.base.types.typesystem.ITypeSystem.REAL
+import static org.yakindu.base.types.typesystem.ITypeSystem.STRING
+import static org.yakindu.base.types.typesystem.ITypeSystem.VOID
 import java.util.ArrayList
 import java.util.List
 import java.util.Map
@@ -23,13 +28,18 @@ import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression
 import org.yakindu.base.expressions.expressions.BitwiseOrExpression
 import org.yakindu.base.expressions.expressions.BitwiseXorExpression
+import org.yakindu.base.expressions.expressions.BlockExpression
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ConditionalExpression
 import org.yakindu.base.expressions.expressions.DoubleLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.EventRaisingExpression
+import org.yakindu.base.expressions.expressions.EventValueReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.FloatLiteral
+import org.yakindu.base.expressions.expressions.ForExpression
 import org.yakindu.base.expressions.expressions.HexLiteral
+import org.yakindu.base.expressions.expressions.IfExpression
 import org.yakindu.base.expressions.expressions.IntLiteral
 import org.yakindu.base.expressions.expressions.LogicalAndExpression
 import org.yakindu.base.expressions.expressions.LogicalNotExpression
@@ -42,15 +52,20 @@ import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression
 import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
+import org.yakindu.base.expressions.expressions.ReturnExpression
 import org.yakindu.base.expressions.expressions.ShiftExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
+import org.yakindu.base.expressions.expressions.SwitchExpression
+import org.yakindu.base.expressions.expressions.ThrowExpression
 import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.expressions.expressions.UnaryOperator
+import org.yakindu.base.expressions.expressions.WhileExpression
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.Annotation
 import org.yakindu.base.types.AnnotationType
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Enumerator
+import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.GenericElement
 import org.yakindu.base.types.Operation
@@ -61,16 +76,10 @@ import org.yakindu.base.types.TypeAlias
 import org.yakindu.base.types.TypeParameter
 import org.yakindu.base.types.TypeSpecifier
 import org.yakindu.base.types.inferrer.AbstractTypeSystemInferrer
-import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.base.types.validation.IValidationIssueAcceptor
-
-import static org.yakindu.base.types.typesystem.ITypeSystem.ANY
-import static org.yakindu.base.types.typesystem.ITypeSystem.BOOLEAN
-import static org.yakindu.base.types.typesystem.ITypeSystem.INTEGER
-import static org.yakindu.base.types.typesystem.ITypeSystem.NULL
-import static org.yakindu.base.types.typesystem.ITypeSystem.REAL
-import static org.yakindu.base.types.typesystem.ITypeSystem.STRING
-import static org.yakindu.base.types.typesystem.ITypeSystem.VOID
+import com.google.common.collect.Maps
+import com.google.inject.Inject
+import org.yakindu.base.types.typesystem.ITypeSystem
 
 /** 
  * 
@@ -199,6 +208,80 @@ class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implements Expr
 		var InferenceResult result2 = inferTypeDispatch(e.getType())
 		assertCompatible(result1, result2, String.format(CAST_OPERATORS, result1, result2))
 		return inferTypeDispatch(e.getType())
+	}
+
+	def InferenceResult doInfer(WhileExpression e) {
+		assertIsSubType(inferTypeDispatch(e.getCondition()), getResultFor(BOOLEAN), CONDITIONAL_BOOLEAN)
+		return getResultFor(VOID)
+	}
+
+	def InferenceResult doInfer(ForExpression e) {
+		assertIsSubType(inferTypeDispatch(e.getCondition()), getResultFor(BOOLEAN), CONDITIONAL_BOOLEAN)
+		return getResultFor(VOID)
+	}
+
+	def InferenceResult doInfer(ReturnExpression exp) {
+		if(exp.getExpression() === null) return getResultFor(VOID)
+		return inferTypeDispatch(exp.getExpression())
+	}
+
+	def InferenceResult doInfer(ThrowExpression exp) {
+		if(exp.getExpression() === null) return getResultFor(VOID)
+		return inferTypeDispatch(exp.getExpression())
+	}
+
+	def InferenceResult doInfer(IfExpression it) {
+		var InferenceResult condition = inferTypeDispatch(it.getCondition())
+		assertIsSubType(condition, getResultFor(BOOLEAN), CONDITIONAL_BOOLEAN)
+		if (it.getElse() !== null) {
+			var InferenceResult thenResult = inferTypeDispatch(it.getThen())
+			var InferenceResult elseResult = inferTypeDispatch(it.getElse())
+			return getCommonType(thenResult, elseResult)
+		}
+		return getResultFor(VOID)
+	}
+
+	def InferenceResult doInfer(SwitchExpression it) {
+		// TODO
+		return getResultFor(VOID)
+	}
+
+	def InferenceResult doInfer(BlockExpression it) {
+		var InferenceResult result = getResultFor(VOID)
+		var EList<Expression> expressions = it.getExpressions()
+		for (Expression expression : expressions) {
+			result = inferTypeDispatch(expression)
+		}
+		return result
+	}
+
+	def InferenceResult doInfer(EventRaisingExpression e) {
+		var Event event = null
+		var EObject element = utils.featureOrReference(e.getEvent())
+		if (element instanceof Event) {
+			event = element as Event
+		}
+		var InferenceResult eventType = null
+		if(event !== null) eventType = inferTypeDispatch(event.getTypeSpecifier())
+		eventType = if(eventType !== null) eventType else getResultFor(VOID)
+		if (e.getValue() === null) {
+			assertSame(eventType, getResultFor(VOID), String.format(MISSING_VALUE, eventType))
+			return getResultFor(VOID)
+		}
+		var InferenceResult valueType = inferTypeDispatch(e.getValue())
+		assertAssignable(eventType, valueType, String.format(EVENT_DEFINITION, valueType, eventType))
+		return valueType
+	}
+
+	def InferenceResult doInfer(EventValueReferenceExpression e) {
+		var Event definition = null
+		var EObject element = utils.featureOrReference(e.getValue())
+		if (element instanceof Event) {
+			definition = element as Event
+		}
+		if(definition !== null) return if(definition.getTypeSpecifier() === null) getResultFor(
+			VOID) else inferTypeDispatch(definition.getTypeSpecifier())
+		return inferTypeDispatch(e.getValue())
 	}
 
 	def InferenceResult doInfer(EnumerationType enumType) {
@@ -333,7 +416,8 @@ class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implements Expr
 	def protected InferenceResult inferReturnType(ArgumentExpression e, Operation operation,
 		Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) {
 		var InferenceResult returnType = inferTypeDispatch(operation)
-		// if return type is not generic nor type parameter, we can return it immediately
+		// if return type is not generic nor type parameter, we can return it
+		// immediately
 		if (returnType !== null) {
 			var Type type = returnType.getType()
 			if (!(type instanceof TypeParameter) &&
@@ -443,6 +527,12 @@ class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implements Expr
 		var InferenceResult result2 = inferTypeDispatch(e.getInitialValue())
 		assertAssignable(result, result2, String.format(PROPERTY_INITIAL_VALUE, result2, result))
 		return result
+	}
+
+	def InferenceResult doInfer(Event e) {
+		// if an event is used within an expression, the type is boolean and the
+		// value indicates if the event is raised or not
+		return getResultFor(BOOLEAN)
 	}
 
 	def InferenceResult doInfer(Operation e) {

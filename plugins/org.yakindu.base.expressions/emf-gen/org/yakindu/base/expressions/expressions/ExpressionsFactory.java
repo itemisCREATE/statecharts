@@ -274,6 +274,105 @@ public interface ExpressionsFactory extends EFactory {
 	Argument createArgument();
 
 	/**
+	 * Returns a new object of class '<em>If Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>If Expression</em>'.
+	 * @generated
+	 */
+	IfExpression createIfExpression();
+
+	/**
+	 * Returns a new object of class '<em>Block Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Block Expression</em>'.
+	 * @generated
+	 */
+	BlockExpression createBlockExpression();
+
+	/**
+	 * Returns a new object of class '<em>While Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>While Expression</em>'.
+	 * @generated
+	 */
+	WhileExpression createWhileExpression();
+
+	/**
+	 * Returns a new object of class '<em>Return Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Return Expression</em>'.
+	 * @generated
+	 */
+	ReturnExpression createReturnExpression();
+
+	/**
+	 * Returns a new object of class '<em>Switch Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Switch Expression</em>'.
+	 * @generated
+	 */
+	SwitchExpression createSwitchExpression();
+
+	/**
+	 * Returns a new object of class '<em>Switch Case</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Switch Case</em>'.
+	 * @generated
+	 */
+	SwitchCase createSwitchCase();
+
+	/**
+	 * Returns a new object of class '<em>Event Raising Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Event Raising Expression</em>'.
+	 * @generated
+	 */
+	EventRaisingExpression createEventRaisingExpression();
+
+	/**
+	 * Returns a new object of class '<em>Event Value Reference Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Event Value Reference Expression</em>'.
+	 * @generated
+	 */
+	EventValueReferenceExpression createEventValueReferenceExpression();
+
+	/**
+	 * Returns a new object of class '<em>For Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>For Expression</em>'.
+	 * @generated
+	 */
+	ForExpression createForExpression();
+
+	/**
+	 * Returns a new object of class '<em>For Var Decl</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>For Var Decl</em>'.
+	 * @generated
+	 */
+	ForVarDecl createForVarDecl();
+
+	/**
+	 * Returns a new object of class '<em>Throw Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Throw Expression</em>'.
+	 * @generated
+	 */
+	ThrowExpression createThrowExpression();
+
+	/**
 	 * Returns a new object of class '<em>Post Fix Unary Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

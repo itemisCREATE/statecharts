@@ -745,6 +745,144 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.IfExpression} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected IfExpressionItemProvider ifExpressionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.IfExpression}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createIfExpressionAdapter() {
+		if (ifExpressionItemProvider == null) {
+			ifExpressionItemProvider = new IfExpressionItemProvider(this);
+		}
+
+		return ifExpressionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.BlockExpression} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BlockExpressionItemProvider blockExpressionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.BlockExpression}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBlockExpressionAdapter() {
+		if (blockExpressionItemProvider == null) {
+			blockExpressionItemProvider = new BlockExpressionItemProvider(this);
+		}
+
+		return blockExpressionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.WhileExpression} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected WhileExpressionItemProvider whileExpressionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.WhileExpression}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createWhileExpressionAdapter() {
+		if (whileExpressionItemProvider == null) {
+			whileExpressionItemProvider = new WhileExpressionItemProvider(this);
+		}
+
+		return whileExpressionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.ReturnExpression} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ReturnExpressionItemProvider returnExpressionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.ReturnExpression}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createReturnExpressionAdapter() {
+		if (returnExpressionItemProvider == null) {
+			returnExpressionItemProvider = new ReturnExpressionItemProvider(this);
+		}
+
+		return returnExpressionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.SwitchExpression} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SwitchExpressionItemProvider switchExpressionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.SwitchExpression}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSwitchExpressionAdapter() {
+		if (switchExpressionItemProvider == null) {
+			switchExpressionItemProvider = new SwitchExpressionItemProvider(this);
+		}
+
+		return switchExpressionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.SwitchCase} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SwitchCaseItemProvider switchCaseItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.SwitchCase}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSwitchCaseAdapter() {
+		if (switchCaseItemProvider == null) {
+			switchCaseItemProvider = new SwitchCaseItemProvider(this);
+		}
+
+		return switchCaseItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -872,6 +1010,12 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 		if (parenthesizedExpressionItemProvider != null) parenthesizedExpressionItemProvider.dispose();
 		if (typeCastExpressionItemProvider != null) typeCastExpressionItemProvider.dispose();
 		if (argumentItemProvider != null) argumentItemProvider.dispose();
+		if (ifExpressionItemProvider != null) ifExpressionItemProvider.dispose();
+		if (blockExpressionItemProvider != null) blockExpressionItemProvider.dispose();
+		if (whileExpressionItemProvider != null) whileExpressionItemProvider.dispose();
+		if (returnExpressionItemProvider != null) returnExpressionItemProvider.dispose();
+		if (switchExpressionItemProvider != null) switchExpressionItemProvider.dispose();
+		if (switchCaseItemProvider != null) switchCaseItemProvider.dispose();
 	}
 
 }

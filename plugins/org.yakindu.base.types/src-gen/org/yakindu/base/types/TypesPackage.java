@@ -277,13 +277,13 @@ public interface TypesPackage extends EPackage {
 	int PACKAGE__MEMBER = DECLARATION_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Import</b></em>' reference list.
+	 * The feature id for the '<em><b>Imports</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__IMPORT = DECLARATION_FEATURE_COUNT + 2;
+	int PACKAGE__IMPORTS = DECLARATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Package</em>' class.
@@ -565,13 +565,22 @@ public interface TypesPackage extends EPackage {
 	int OPERATION__VARIADIC = TYPED_DECLARATION_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__BODY = TYPED_DECLARATION_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_FEATURE_COUNT = TYPED_DECLARATION_FEATURE_COUNT + 3;
+	int OPERATION_FEATURE_COUNT = TYPED_DECLARATION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1992,15 +2001,15 @@ public interface TypesPackage extends EPackage {
 	EReference getPackage_Member();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.yakindu.base.types.Package#getImport <em>Import</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.yakindu.base.types.Package#getImports <em>Imports</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Import</em>'.
-	 * @see org.yakindu.base.types.Package#getImport()
+	 * @return the meta object for the attribute list '<em>Imports</em>'.
+	 * @see org.yakindu.base.types.Package#getImports()
 	 * @see #getPackage()
 	 * @generated
 	 */
-	EReference getPackage_Import();
+	EAttribute getPackage_Imports();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Type <em>Type</em>}'.
@@ -2108,6 +2117,17 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getOperation_Variadic();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.types.Operation#getBody <em>Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Body</em>'.
+	 * @see org.yakindu.base.types.Operation#getBody()
+	 * @see #getOperation()
+	 * @generated
+	 */
+	EReference getOperation_Body();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Property <em>Property</em>}'.
@@ -2646,12 +2666,12 @@ public interface TypesPackage extends EPackage {
 		EReference PACKAGE__MEMBER = eINSTANCE.getPackage_Member();
 
 		/**
-		 * The meta object literal for the '<em><b>Import</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Imports</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PACKAGE__IMPORT = eINSTANCE.getPackage_Import();
+		EAttribute PACKAGE__IMPORTS = eINSTANCE.getPackage_Imports();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.TypeImpl <em>Type</em>}' class.
@@ -2738,6 +2758,14 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute OPERATION__VARIADIC = eINSTANCE.getOperation_Variadic();
+
+		/**
+		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION__BODY = eINSTANCE.getOperation_Body();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.PropertyImpl <em>Property</em>}' class.

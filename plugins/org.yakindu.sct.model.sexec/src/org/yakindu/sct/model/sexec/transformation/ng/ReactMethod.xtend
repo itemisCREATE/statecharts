@@ -105,7 +105,7 @@ class ReactMethod {
 
 	
 	def defineReactMethod(ExecutionFlow it) {
-		reactMethod => [ body = 
+		reactMethod => [ bodySequence = 
 			_sequence(
 				flow.createLocalReactionSequence,
 				_return(_false)	
@@ -164,14 +164,14 @@ class ReactMethod {
 					_return(didTransitionVariable._ref)
 				)
 								
-			reactMethod.body = stateReactions
+			reactMethod.bodySequence = stateReactions
 			
 		} else {
 			
 			throw new RuntimeException("Non interleaved local reactions not supported");
 		}
 				
-		reactMethod.body.comment = 'The reactions of state ' + state.name + '.'
+		reactMethod.bodySequence.comment = 'The reactions of state ' + state.name + '.'
 		
 		return reactMethod
 	} 

@@ -4,8 +4,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//Declaration base.ecore#//DomainElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="member" upperBound="-1"
         eType="#//Declaration" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="import" upperBound="-1"
-        eType="#//Package"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="imports" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Type" eSuperTypes="#//Declaration">
     <eOperations name="getOriginType" eType="#//Type"/>
@@ -15,7 +15,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="superTypes" upperBound="-1"
         eType="#//TypeSpecifier" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Declaration" abstract="true" eSuperTypes="base.ecore#//NamedElement #//AnnotatableElement #//MetaComposite">
+  <eClassifiers xsi:type="ecore:EClass" name="Declaration" eSuperTypes="base.ecore#//NamedElement #//AnnotatableElement #//MetaComposite">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true" derived="true" iD="true"/>
@@ -26,8 +26,10 @@
         eType="#//Parameter" containment="true" eOpposite="#//Parameter/owningOperation"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="variadic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//Expression"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//TypedDeclaration">
+  <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//TypedDeclaration #//Expression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="const" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="readonly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initialValue" eType="#//Expression"
@@ -112,9 +114,9 @@
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TypedDeclaration" eSuperTypes="#//Declaration #//TypedElement"/> 
+  <eClassifiers xsi:type="ecore:EClass" name="TypedDeclaration" eSuperTypes="#//Declaration #//TypedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="MetaComposite">
-  <eStructuralFeatures xsi:type="ecore:EReference" name="metaFeatures" upperBound="-1"
-  eType="#//Declaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metaFeatures" upperBound="-1"
+        eType="#//Declaration" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

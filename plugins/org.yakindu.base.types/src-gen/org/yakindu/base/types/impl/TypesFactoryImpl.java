@@ -17,6 +17,7 @@ import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.AnnotationType;
 import org.yakindu.base.types.ArrayTypeSpecifier;
 import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Direction;
 import org.yakindu.base.types.Domain;
 import org.yakindu.base.types.EnumerationType;
@@ -82,6 +83,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 		switch (eClass.getClassifierID()) {
 			case TypesPackage.PACKAGE: return createPackage();
 			case TypesPackage.TYPE: return createType();
+			case TypesPackage.DECLARATION: return createDeclaration();
 			case TypesPackage.OPERATION: return createOperation();
 			case TypesPackage.PROPERTY: return createProperty();
 			case TypesPackage.PARAMETER: return createParameter();
@@ -154,6 +156,16 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	public Type createType() {
 		TypeImpl type = new TypeImpl();
 		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Declaration createDeclaration() {
+		DeclarationImpl declaration = new DeclarationImpl();
+		return declaration;
 	}
 
 	/**

@@ -53,7 +53,22 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 	extension SRuntimeFactory = SRuntimeFactory.eINSTANCE
 
 	override initialize(ExecutionContext context, ExecutionFlow flow) {
-		flow.scopes.forEach[context.slots += transform]
+		context.slots += callStackSlot
+		context.slots += localVariables
+		if (flow != null)
+			flow.scopes.forEach[context.slots += transform]
+	}
+
+	def create it : createCompositeSlot callStackSlot() {
+		it => [
+			name = "callStack"
+		]
+	}
+
+	def create it : createCompositeSlot localVariables() {
+		it => [
+			name = "localVars"
+		]
 	}
 
 	def create it : createCompositeSlot importSlot(ExecutionFlow flow) {

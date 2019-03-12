@@ -53,7 +53,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sexec.ecore#//Reaction/transition"/>
     </genClasses>
     <genClasses ecoreClass="sexec.ecore#//Method">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//Method/body"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//Method/bodySequence"/>
     </genClasses>
     <genClasses ecoreClass="sexec.ecore#//StateVector">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sexec.ecore#//StateVector/size"/>
