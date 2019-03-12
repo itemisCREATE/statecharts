@@ -17,8 +17,7 @@ import static org.yakindu.base.types.TypesFactory.*
  * @author andreas muelder - Initial contribution and API
  * 
  */
-@Singleton 
-
+@Singleton
 class GenericTypeSystem extends AbstractTypeSystem {
 
 	static final GenericTypeSystem INSTANCE = new GenericTypeSystem()
@@ -49,7 +48,7 @@ class GenericTypeSystem extends AbstractTypeSystem {
 
 	protected def declareArrayType() {
 		val array = createArrayType()
-		array.abstract = true
+		array.abstract = false
 		declareType(array, array.getName())
 		getResource().contents += array
 	}
@@ -62,6 +61,33 @@ class GenericTypeSystem extends AbstractTypeSystem {
 			]
 			ar.typeParameters += eINSTANCE.createTypeParameter => [
 				name = "baseType"
+			]
+			ar.features += eINSTANCE.createProperty => [
+				name = "length"
+				typeSpecifier = eINSTANCE.createTypeSpecifier => [
+					type = getType(ITypeSystem.INTEGER)
+				]
+			]
+			ar.features += eINSTANCE.createOperation => [
+				static = true
+				name = "new"
+				parameters += eINSTANCE.createParameter => [
+					name = "size"
+					typeSpecifier = eINSTANCE.createTypeSpecifier => [
+						type = getType(ITypeSystem.INTEGER)
+					]
+				]
+				typeSpecifier = eINSTANCE.createTypeSpecifier => [
+					type = ar
+
+				]
+				ar.typeParameters.forEach [ t, i |
+					val tp = eINSTANCE.createTypeParameter => [name = "T" + i]
+					it.typeParameters += tp
+					it.typeSpecifier.typeArguments += eINSTANCE.createTypeSpecifier => [
+						type = tp
+					]
+				]
 			]
 		]
 	}
