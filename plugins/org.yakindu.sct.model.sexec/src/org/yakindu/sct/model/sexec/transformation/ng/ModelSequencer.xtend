@@ -23,6 +23,7 @@ import org.yakindu.sct.model.sexec.transformation.ReactionBuilder
 import org.yakindu.sct.model.sexec.transformation.SequenceBuilder
 import org.yakindu.sct.model.sexec.transformation.StateVectorBuilder
 import org.yakindu.sct.model.sexec.transformation.RetargetReferences
+import org.yakindu.base.types.Type
 
 class ModelSequencer implements IModelSequencer {
 	 
@@ -36,6 +37,8 @@ class ModelSequencer implements IModelSequencer {
 	
 	@Inject extension ReactMethod reactMethod
 	
+	@Inject extension Statechart2StatemachineTypeDeclaration sc2Type
+	
 	
 	/* ==========================================================================
 	 * TRANSFORMATION ROOT
@@ -44,6 +47,18 @@ class ModelSequencer implements IModelSequencer {
 		transform(sc, new ListBasedValidationIssueAcceptor)
 	}
 
+	override org.yakindu.base.types.Package transformToPackage(Statechart sc, IValidationIssueAcceptor acceptor) {
+		
+		val ef = sc.transform(acceptor)
+				
+		val scpackage = sc.toTypeDeclaration => [ name = "foo"]
+		
+//		sc.map
+		
+		return scpackage
+		
+	}
+	
 	override ExecutionFlow transform(Statechart sc, IValidationIssueAcceptor acceptor) {
 		
 		val ef = sc.create
@@ -89,6 +104,8 @@ class ModelSequencer implements IModelSequencer {
 		
 		// retarget declaration refs
 		ef.retargetDeclRefs
+		
+		
 		
 		//clear create caches to avoid memory leak with repetetive generator cycles
 		mapping.cleanup

@@ -19,6 +19,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.xtext.resource.XtextResource;
+import org.yakindu.base.types.Package;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess;
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper;
@@ -27,8 +29,10 @@ import org.yakindu.sct.model.sexec.transformation.FlowOptimizer;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
+import com.yakindu.sct.types.slang.ui.internal.SlangActivator;
 
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 /**
  * 
@@ -54,6 +58,7 @@ public class SExecGeneratorEntryExecutor extends AbstractGeneratorEntryExecutor 
 		generator.generate(flow, generatorEntry, access);
 		if (helper.serializeExecutionFlow(generatorEntry)) {
 			serializeExecutionFlow(generatorEntry, flow);
+			serializeSlang(generatorEntry, sequencer.transformToPackage((Statechart) generatorEntry.getElementRef(), null));
 		}
 	}
 
@@ -76,6 +81,37 @@ public class SExecGeneratorEntryExecutor extends AbstractGeneratorEntryExecutor 
 			resource.save(Collections.EMPTY_MAP);
 		} catch (IOException e) {
 		}
+	}
+	
+	
+	protected void serializeSlang(GeneratorEntry entry, Package pkg) {
+//		Injector injector = SlangActivator.getInstance().getInjector(SlangActivator.COM_YAKINDU_SCT_TYPES_SLANG_SLANG);
+//		
+//		XtextResource resource = injector.getInstance(XtextResource.class);
+//		resource.getContents().add(pkg);
+//				
+//		URI fileURI = entry.getElementRef().eResource().getURI().trimFileExtension()
+//				.appendFileExtension("slang");
+//		resource.setURI(fileURI);
+//		try {
+//			resource.save(Collections.EMPTY_MAP);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+		
+		
+		ResourceSet resourceSet = new ResourceSetImpl();
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
+				.put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
+		URI fileURI = entry.getElementRef().eResource().getURI().trimFileExtension()
+				.appendFileExtension("xmi");
+		Resource resource = resourceSet.createResource(fileURI);
+		resource.getContents().add(pkg);
+		try {
+			resource.save(Collections.EMPTY_MAP);
+		} catch (IOException e) {
+		}
+
 	}
 
 }

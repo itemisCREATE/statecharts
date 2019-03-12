@@ -82,8 +82,13 @@ class ModelSequencer implements IModelSequencer {
 		
 		return ef
 	}
+	
+	override transformToPackage(Statechart statechart, IValidationIssueAcceptor acceptor) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
 
 	/************** retarget declaration refs **************/
+	
 	
 		 	
 }
