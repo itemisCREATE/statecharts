@@ -196,13 +196,22 @@ public interface TypesPackage extends EPackage {
 	int DECLARATION__ID = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARATION__VISIBILITY = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Declaration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARATION_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
+	int DECLARATION_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -257,6 +266,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int PACKAGE__ID = DECLARATION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__VISIBILITY = DECLARATION__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Domain ID</b></em>' attribute.
@@ -349,6 +367,15 @@ public interface TypesPackage extends EPackage {
 	int TYPE__ID = DECLARATION__ID;
 
 	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE__VISIBILITY = DECLARATION__VISIBILITY;
+
+	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -439,6 +466,15 @@ public interface TypesPackage extends EPackage {
 	int TYPED_DECLARATION__ID = DECLARATION__ID;
 
 	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_DECLARATION__VISIBILITY = DECLARATION__VISIBILITY;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -518,6 +554,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION__ID = TYPED_DECLARATION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__VISIBILITY = TYPED_DECLARATION__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -635,6 +680,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY__ID = TYPED_DECLARATION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__VISIBILITY = TYPED_DECLARATION__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -901,6 +955,15 @@ public interface TypesPackage extends EPackage {
 	int EVENT__ID = TYPED_DECLARATION__ID;
 
 	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT__VISIBILITY = TYPED_DECLARATION__VISIBILITY;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1032,6 +1095,15 @@ public interface TypesPackage extends EPackage {
 	int COMPLEX_TYPE__ID = TYPE__ID;
 
 	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_TYPE__VISIBILITY = TYPE__VISIBILITY;
+
+	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1138,6 +1210,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATION_TYPE__ID = COMPLEX_TYPE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION_TYPE__VISIBILITY = COMPLEX_TYPE__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1257,6 +1338,15 @@ public interface TypesPackage extends EPackage {
 	int PRIMITIVE_TYPE__ID = TYPE__ID;
 
 	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE__VISIBILITY = TYPE__VISIBILITY;
+
+	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1355,6 +1445,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATOR__ID = TYPED_DECLARATION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATOR__VISIBILITY = TYPED_DECLARATION__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1465,6 +1564,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_PARAMETER__ID = TYPE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_PARAMETER__VISIBILITY = TYPE__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1629,6 +1737,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_ALIAS__ID = TYPED_DECLARATION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS__VISIBILITY = TYPED_DECLARATION__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1869,6 +1986,15 @@ public interface TypesPackage extends EPackage {
 	int ANNOTATION_TYPE__ID = TYPE__ID;
 
 	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_TYPE__VISIBILITY = TYPE__VISIBILITY;
+
+	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1980,6 +2106,16 @@ public interface TypesPackage extends EPackage {
 	int DIRECTION = 24;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.types.Visibility <em>Visibility</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.types.Visibility
+	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getVisibility()
+	 * @generated
+	 */
+	int VISIBILITY = 25;
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Package <em>Package</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2085,6 +2221,17 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDeclaration_Id();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.Declaration#getVisibility <em>Visibility</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Visibility</em>'.
+	 * @see org.yakindu.base.types.Declaration#getVisibility()
+	 * @see #getDeclaration()
+	 * @generated
+	 */
+	EAttribute getDeclaration_Visibility();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Operation <em>Operation</em>}'.
@@ -2626,6 +2773,16 @@ public interface TypesPackage extends EPackage {
 	EEnum getDirection();
 
 	/**
+	 * Returns the meta object for enum '{@link org.yakindu.base.types.Visibility <em>Visibility</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Visibility</em>'.
+	 * @see org.yakindu.base.types.Visibility
+	 * @generated
+	 */
+	EEnum getVisibility();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2732,6 +2889,14 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DECLARATION__ID = eINSTANCE.getDeclaration_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DECLARATION__VISIBILITY = eINSTANCE.getDeclaration_Visibility();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.OperationImpl <em>Operation</em>}' class.
@@ -3184,6 +3349,16 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum DIRECTION = eINSTANCE.getDirection();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.types.Visibility <em>Visibility</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.types.Visibility
+		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getVisibility()
+		 * @generated
+		 */
+		EEnum VISIBILITY = eINSTANCE.getVisibility();
 
 	}
 

@@ -56,6 +56,7 @@ public class DeclarationItemProvider extends NamedElementItemProvider {
 
 			addStaticPropertyDescriptor(object);
 			addIdPropertyDescriptor(object);
+			addVisibilityPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -97,6 +98,28 @@ public class DeclarationItemProvider extends NamedElementItemProvider {
 				 getString("_UI_PropertyDescriptor_description", "_UI_Declaration_id_feature", "_UI_Declaration_type"),
 				 TypesPackage.Literals.DECLARATION__ID,
 				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Visibility feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addVisibilityPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Declaration_visibility_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Declaration_visibility_feature", "_UI_Declaration_type"),
+				 TypesPackage.Literals.DECLARATION__VISIBILITY,
+				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
@@ -162,6 +185,7 @@ public class DeclarationItemProvider extends NamedElementItemProvider {
 			case TypesPackage.DECLARATION__ANNOTATION_INFO:
 			case TypesPackage.DECLARATION__STATIC:
 			case TypesPackage.DECLARATION__ID:
+			case TypesPackage.DECLARATION__VISIBILITY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TypesPackage.DECLARATION__ANNOTATIONS:
@@ -187,6 +211,11 @@ public class DeclarationItemProvider extends NamedElementItemProvider {
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS,
 				 TypesFactory.eINSTANCE.createAnnotation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createDeclaration()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -262,6 +291,11 @@ public class DeclarationItemProvider extends NamedElementItemProvider {
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 TypesFactory.eINSTANCE.createAnnotationType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createDeclaration()));
 
 		newChildDescriptors.add
 			(createChildParameter

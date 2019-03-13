@@ -15,6 +15,7 @@ import org.yakindu.base.base.NamedElement;
  * <ul>
  *   <li>{@link org.yakindu.base.types.Declaration#isStatic <em>Static</em>}</li>
  *   <li>{@link org.yakindu.base.types.Declaration#getId <em>Id</em>}</li>
+ *   <li>{@link org.yakindu.base.types.Declaration#getVisibility <em>Visibility</em>}</li>
  * </ul>
  *
  * @see org.yakindu.base.types.TypesPackage#getDeclaration()
@@ -63,4 +64,34 @@ public interface Declaration extends NamedElement, AnnotatableElement, MetaCompo
 	 * @generated
 	 */
 	String getId();
+
+	/**
+	 * Returns the value of the '<em><b>Visibility</b></em>' attribute.
+	 * The default value is <code>"PUBLIC"</code>.
+	 * The literals are from the enumeration {@link org.yakindu.base.types.Visibility}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Visibility</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Visibility</em>' attribute.
+	 * @see org.yakindu.base.types.Visibility
+	 * @see #setVisibility(Visibility)
+	 * @see org.yakindu.base.types.TypesPackage#getDeclaration_Visibility()
+	 * @model default="PUBLIC"
+	 * @generated
+	 */
+	Visibility getVisibility();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.base.types.Declaration#getVisibility <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Visibility</em>' attribute.
+	 * @see org.yakindu.base.types.Visibility
+	 * @see #getVisibility()
+	 * @generated
+	 */
+	void setVisibility(Visibility value);
 } // Declaration

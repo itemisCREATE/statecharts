@@ -151,6 +151,11 @@ public class ComplexTypeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createDeclaration()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
 				 TypesFactory.eINSTANCE.createPackage()));
 
 		newChildDescriptors.add

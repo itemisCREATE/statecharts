@@ -36,6 +36,7 @@ import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypedDeclaration;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.base.types.Visibility;
 
 /**
  * <!-- begin-user-doc -->
@@ -118,6 +119,8 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 		switch (eDataType.getClassifierID()) {
 			case TypesPackage.DIRECTION:
 				return createDirectionFromString(eDataType, initialValue);
+			case TypesPackage.VISIBILITY:
+				return createVisibilityFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -133,6 +136,8 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 		switch (eDataType.getClassifierID()) {
 			case TypesPackage.DIRECTION:
 				return convertDirectionToString(eDataType, instanceValue);
+			case TypesPackage.VISIBILITY:
+				return convertVisibilityToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -375,6 +380,26 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * @generated
 	 */
 	public String convertDirectionToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Visibility createVisibilityFromString(EDataType eDataType, String initialValue) {
+		Visibility result = Visibility.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertVisibilityToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
