@@ -14,6 +14,9 @@ import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 import org.yakindu.base.types.Expression
+import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sgraph.State
 
 @Singleton
 class StatemachineMethods {
@@ -29,6 +32,7 @@ class StatemachineMethods {
 	@Inject extension ExpressionBuilder
 	@Inject extension StatemachineProperties
 	@Inject extension Statechart2StatemachineTypeDeclaration
+	@Inject extension StateVectorExtensions
 	
 
 	def defineEnterMethod(ComplexType it, Statechart sc) {
@@ -89,16 +93,46 @@ class StatemachineMethods {
 	}
 	
 	protected def isActiveCheck(Statechart sc) {
-		val ef = sc.create
-		var Expression exp = notEqualsNoState(sc, 0)
-		for (i : 0..<ef.stateVector.size) {
-			exp = exp._or(notEqualsNoState(sc, i))
-		}
-		exp
+		return (0..<sc.create.stateVector.size)
+			.map[i | notEqualsNoState(sc, i) as Expression]
+			.reduce[p1, p2 | p1._or(p2)]
 	}
 	
 	protected def notEqualsNoState(Statechart sc, int index) {
 		stateVector(sc)._ref._get(index._int)._notEquals(stateVector(sc)._ref._fc(noState(sc)))
+	}
+	
+	def defineIsFinalMethod(ComplexType it, Statechart sc) {
+		it.features += createIsFinalMethod => [
+			body = createBlockExpression => [
+				expressions += _return(isFinalCheck(sc))
+			]
+		]
+	}
+	
+	protected def isFinalCheck(Statechart sc) {
+		val ef = sc.create
+		val fsv = ef.finalStateImpactVector
+		if (fsv.isCompletelyCovered) {
+			(0..<fsv.size)
+				.map[i | fsv.get(i)
+					.map[fs | equalsState(sc, fs, i) as Expression]
+					.reduce[p1, p2 | p1._or(p2)]
+					._parenthesized as Expression]
+				.reduce[p1, p2 | p1._and(p2)]
+		} else {
+			_false
+		}
+	}
+	
+	protected def equalsState(Statechart sc, ExecutionState fs, int index) {
+		stateVector(sc)._ref._get(index._int)._equals(
+			if (fs.stateVector.offset == index) {
+				stateVector(sc)._ref._fc((fs.sourceElement as State).stateEnumerator)
+			} else {
+				stateVector(sc)._ref._fc(noState(sc))
+			}
+		)
 	}
 	
 	

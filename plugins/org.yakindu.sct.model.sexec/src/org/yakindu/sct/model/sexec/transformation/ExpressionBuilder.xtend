@@ -117,11 +117,32 @@ class ExpressionBuilder {
 		]
 	}
 	
+	def _and(Expression left, Expression right) {
+		createLogicalAndExpression => [
+			it.leftOperand = left
+			it.rightOperand = right
+		]
+	}
+	
 	def _notEquals(Expression left, Expression right) {
 		createLogicalRelationExpression => [
 			operator = RelationalOperator.NOT_EQUALS
 			leftOperand = left
 			rightOperand = right
+		]
+	}
+	
+	def _equals(Expression left, Expression right) {
+		createLogicalRelationExpression => [
+			operator = RelationalOperator.EQUALS
+			leftOperand = left
+			rightOperand = right
+		]
+	}
+	
+	def _parenthesized(Expression exp) {
+		createParenthesizedExpression => [
+			expression = exp
 		]
 	}
 
