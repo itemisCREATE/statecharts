@@ -55,7 +55,7 @@ class ExpressionBuilder {
 
 	
 	def _for(Property varDecl, Expression cond, Expression varUpdate) {
-		ExpressionsFactory.eINSTANCE.createForExpression => [
+		createForExpression => [
 			varDecls += varDecl
 			condition = cond
 			varUpdates += varUpdate
@@ -63,7 +63,7 @@ class ExpressionBuilder {
 	}
 	
 	def _smaller(Expression left, Expression right) {
-		ExpressionsFactory.eINSTANCE.createLogicalRelationExpression => [
+		createLogicalRelationExpression => [
 			operator = RelationalOperator.SMALLER
 			leftOperand = left
 			rightOperand = right
@@ -71,7 +71,7 @@ class ExpressionBuilder {
 	}
 	
 	def _inc(Expression operand) {
-		ExpressionsFactory.eINSTANCE.createPostFixUnaryExpression => [
+		createPostFixUnaryExpression => [
 			it.operand = operand
 			operator = PostFixOperator.INCREMENT
 		]

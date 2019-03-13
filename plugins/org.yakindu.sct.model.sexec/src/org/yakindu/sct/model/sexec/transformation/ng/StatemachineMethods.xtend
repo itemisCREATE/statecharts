@@ -12,6 +12,7 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 
 @Singleton
 class StatemachineMethods {
@@ -22,6 +23,7 @@ class StatemachineMethods {
 	@Inject extension SexecElementMapping  
 	@Inject extension SExecExtensions  
 	@Inject extension Sequence2Method
+	@Inject extension TypeBuilder
 	@Inject extension ExpressionBuilder
 	@Inject extension StatemachineProperties
 
