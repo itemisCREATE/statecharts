@@ -6,10 +6,11 @@ import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.typesystem.ITypeSystem
-import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.base.types.Type
 
 @Singleton
 class StatemachineMethods {
@@ -22,34 +23,43 @@ class StatemachineMethods {
 	@Inject extension Sequence2Method
 
 	def defineEnterMethod(ComplexType it, Statechart sc) {
-		createEnterMethod => [
+		it.features += createEnterMethod => [
 			body = createBlockExpression => [
-				expressions += createCallToEnterSeqenceMethod(sc.create)
+				expressions += createCallToSeqenceMethod(sc.create.enterSequences.defaultSequence)
 			]
 		]
 	}
 	
-//	def defineExitMethod(ComplexType it, Statechart sc) {
-//		createExitMethod => [
-//			
-//		]
-//	}
+	def defineExitMethod(ComplexType it, Statechart sc) {
+		it.features += createExitMethod => [
+			body = createBlockExpression => [
+				expressions += createCallToSeqenceMethod(sc.create.exitSequence)
+			]
+		]
+	}
 	
-	protected def createCallToEnterSeqenceMethod(ExecutionFlow flow) {
+	protected def createCallToSeqenceMethod(Sequence seq) {
 		createElementReferenceExpression => [
 			operationCall = true
-			reference = createMethodForSequence(flow.enterSequences.defaultSequence)
+			reference = createMethodForSequence(seq)
 		]
 	}
 
-	def create createOperation createEnterMethod(ComplexType smtype) {
-		it => [
-			name = "enter"
-			typeSpecifier = createTypeSpecifier => [
-				type = ts.getType(ITypeSystem.VOID)
+	def createEnterMethod() {
+		createMethod("enter", ts.getType(ITypeSystem.VOID))
+	}
+	
+	def createExitMethod() {
+		createMethod("exit", ts.getType(ITypeSystem.VOID))
+	}
+	
+	protected def createMethod(String name, Type returnType) {
+		createOperation => [op |
+			op.name = name
+			op.typeSpecifier = createTypeSpecifier => [
+				type = returnType
 			]
 		]
-		smtype.features += it		
 	}
 	
 	

@@ -132,13 +132,13 @@ class Statechart2StatemachineTypeDeclaration {
 //				]
 //			]
 
-
-			features += createOperation => [
-				name = "exit"
-				typeSpecifier = createTypeSpecifier => [
-					type = ts.getType(ITypeSystem.VOID)
-				]
-			]
+			createExitMethod
+//			features += createOperation => [
+//				name = "exit"
+//				typeSpecifier = createTypeSpecifier => [
+//					type = ts.getType(ITypeSystem.VOID)
+//				]
+//			]
 			features += createOperation => [
 				name = "isActive"
 				typeSpecifier = createTypeSpecifier => [

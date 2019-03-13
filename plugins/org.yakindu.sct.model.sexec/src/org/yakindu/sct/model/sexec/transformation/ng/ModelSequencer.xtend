@@ -51,7 +51,6 @@ class ModelSequencer implements IModelSequencer {
 	override Package transformToPackage(Statechart sc, IValidationIssueAcceptor acceptor) {
 		
 		val ef = sc.transformToFlow(acceptor)
-		val ef2 = sc.create
 				
 		val scpackage = sc.toTypeDeclaration => [ name = "foo"]
 		val sctype = sc.declareStatemachineType
@@ -60,7 +59,7 @@ class ModelSequencer implements IModelSequencer {
 		
 		sctype.defineEnterMethod(sc)
 		
-//		sctype.defineExitMethod(sc)
+		sctype.defineExitMethod(sc)
 		
 		return scpackage
 		
