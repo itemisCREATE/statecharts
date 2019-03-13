@@ -41,6 +41,7 @@ import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.TimeUnit
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
+import org.yakindu.sct.model.sexec.transformation.ng.StateOperations
 
 class SequenceBuilder {
 
@@ -52,6 +53,7 @@ class SequenceBuilder {
 	@Inject extension ITypeValueProvider 
 	@Inject extension TypeBuilder tBuilder
 	@Inject extension ExpressionBuilder eBuilder
+	@Inject extension StateOperations stateOperations
 
 	@Inject(optional=true)
 	@Named(IModelSequencer.ADD_TRACES)
@@ -226,6 +228,18 @@ class SequenceBuilder {
 	def dispatch void defineScopeEnterSequences(State state) {
 
 		val execState = state.create
+
+		val op = _op => [
+			name = DEFAULT_SEQUENCE_NAME	
+//TODO			_comment("Default enter sequence for state " + state.name)
+			body = _block(
+				if(execState.entryAction !== null) execState.entryActionOperation._call else null,
+//TODO				if(_addTraceSteps) execState.newTraceStateEntered else null,
+				execState.newEnterStateStep
+			)
+		] 
+		execState.features += op
+
 
 		// first creates enter sequences for all contained regions
 		state.regions.forEach(r|r.defineScopeEnterSequences)

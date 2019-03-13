@@ -17,7 +17,7 @@ class ExpressionBuilder {
 	
 	def BlockExpression _block (Expression... sequenceSteps) {
 		createBlockExpression => [
-			expressions.addAll(sequenceSteps)
+			expressions.addAll(sequenceSteps.filter(step | step !== null))
 		]
 	}		
 	
