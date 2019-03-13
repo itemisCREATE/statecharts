@@ -10,6 +10,9 @@ import org.yakindu.base.expressions.expressions.RelationalOperator
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
+import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.types.Declaration
+import org.yakindu.base.expressions.expressions.AssignmentOperator
 
 class ExpressionBuilder {
 
@@ -52,7 +55,18 @@ class ExpressionBuilder {
 			operationCall = false
 		]
 	}
-
+	
+	def FeatureCall _fc(Expression owner, Declaration feature) {
+		createFeatureCall => [fc |
+			fc.owner = owner
+			fc.feature = feature
+		]
+	}
+	
+	def ElementReferenceExpression _get(ElementReferenceExpression exp, Expression index) {
+		exp.arraySelector += index
+		exp
+	}
 	
 	def _for(Property varDecl, Expression cond, Expression varUpdate) {
 		createForExpression => [
@@ -74,6 +88,14 @@ class ExpressionBuilder {
 		createPostFixUnaryExpression => [
 			it.operand = operand
 			operator = PostFixOperator.INCREMENT
+		]
+	}
+	
+	def _assign(Expression left, Expression right) {
+		createAssignmentExpression => [
+			it.varRef = left
+			it.expression = right 
+			it.operator = AssignmentOperator.ASSIGN
 		]
 	}
 

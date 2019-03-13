@@ -8,6 +8,7 @@
  */
 package org.yakindu.sct.model.sexec.transformation.ng
 
+import com.google.inject.Inject
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Package
@@ -17,7 +18,6 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope
-import com.google.inject.Inject
 
 /**
  * 
@@ -103,6 +103,12 @@ class Statechart2StatemachineTypeDeclaration {
 					name = state.name
 				]
 			]
+		]
+	}
+	
+	protected def create createEnumerator noState(Statechart sc) {
+		createEnumerator => [
+			name = "__NoState__"
 		]
 	}
 
