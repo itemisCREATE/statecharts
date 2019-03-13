@@ -33,6 +33,7 @@ import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.base.types.TypesUtil;
 import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecPackage;
@@ -409,12 +410,10 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getId() {
-		// TODO: implement this method to return the 'Id' attribute
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return TypesUtil.computeQID(this);
 	}
 
 	/**
