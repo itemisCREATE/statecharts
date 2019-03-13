@@ -13,12 +13,14 @@ import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
+import org.yakindu.base.types.Expression
 
 @Singleton
 class StatemachineMethods {
 
 	extension TypesFactory typesFactory = TypesFactory.eINSTANCE
 	extension ExpressionsFactory exprFactory = ExpressionsFactory.eINSTANCE
+	
 	@Inject extension ITypeSystem ts
 	@Inject extension SexecElementMapping  
 	@Inject extension SExecExtensions  
@@ -27,6 +29,7 @@ class StatemachineMethods {
 	@Inject extension ExpressionBuilder
 	@Inject extension StatemachineProperties
 	@Inject extension Statechart2StatemachineTypeDeclaration
+	
 
 	def defineEnterMethod(ComplexType it, Statechart sc) {
 		it.features += createEnterMethod => [
@@ -76,6 +79,28 @@ class StatemachineMethods {
 			)
 		]
 	}
+	
+	def defineIsActiveMethod(ComplexType it, Statechart sc) {
+		it.features += createIsActiveMethod => [
+			body = createBlockExpression => [
+				expressions += _return(isActiveCheck(sc))
+			]
+		]
+	}
+	
+	protected def isActiveCheck(Statechart sc) {
+		val ef = sc.create
+		var Expression exp = notEqualsNoState(sc, 0)
+		for (i : 0..<ef.stateVector.size) {
+			exp = exp._or(notEqualsNoState(sc, i))
+		}
+		exp
+	}
+	
+	protected def notEqualsNoState(Statechart sc, int index) {
+		stateVector(sc)._ref._get(index._int)._notEquals(stateVector(sc)._ref._fc(noState(sc)))
+	}
+	
 	
 	protected def createCallToSequenceMethod(Sequence seq) {
 		createElementReferenceExpression => [
