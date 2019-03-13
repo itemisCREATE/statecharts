@@ -28,7 +28,7 @@ import org.yakindu.sct.model.sexec.Step
 class SexecExtensions {
 	
 	
-	static String DEFAULT_SEQUENCE_NAME = "default" 
+	public static String DEFAULT_SEQUENCE_NAME = "default" 
 	
 	def factory() { SexecFactory::eINSTANCE }
 	

@@ -18,6 +18,7 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.sgraph.State
 
 /**
  * 
@@ -99,12 +100,16 @@ class Statechart2StatemachineTypeDeclaration {
 			name = '''«sc.name»States'''
 			annotationInfo = createAnnotatableElement
 			sc.eAllContents.filter(RegularState).forEach [ state |
-				enumerator += createEnumerator => [
-					name = state.name
-				]
+				enumerator += state.stateEnumerator
+				enumerator += noState(sc)
 			]
 		]
 	}
+	
+	def create createEnumerator stateEnumerator(RegularState state) {
+		name = state.name
+	}
+	
 	
 	protected def create createEnumerator noState(Statechart sc) {
 		createEnumerator => [

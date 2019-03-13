@@ -738,7 +738,7 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuilder result = new StringBuilder(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (leaf: ");
 		result.append(leaf);
 		result.append(')');

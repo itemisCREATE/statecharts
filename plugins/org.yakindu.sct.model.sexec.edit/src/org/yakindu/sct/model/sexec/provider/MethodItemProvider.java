@@ -161,6 +161,16 @@ public class MethodItemProvider extends OperationItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 SexecFactory.eINSTANCE.createExecutionScope()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 SexecFactory.eINSTANCE.createExecutionRegion()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 SexecFactory.eINSTANCE.createExecutionEntry()));
 
 		newChildDescriptors.add
@@ -187,6 +197,11 @@ public class MethodItemProvider extends OperationItemProvider {
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 SexecFactory.eINSTANCE.createTimeEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -216,6 +231,16 @@ public class MethodItemProvider extends OperationItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionScope()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionRegion()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 SexecFactory.eINSTANCE.createExecutionEntry()));
 
 		newChildDescriptors.add
@@ -242,6 +267,11 @@ public class MethodItemProvider extends OperationItemProvider {
 			(createChildParameter
 				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 SexecFactory.eINSTANCE.createTimeEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -376,17 +406,27 @@ public class MethodItemProvider extends OperationItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.OPERATION__BODY,
-				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.OPERATION__BODY,
 				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.OPERATION__BODY,
 				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createForExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -408,6 +448,7 @@ public class MethodItemProvider extends OperationItemProvider {
 		boolean qualify =
 			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
 			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES ||
+			childFeature == TypesPackage.Literals.OPERATION__BODY ||
 			childFeature == TypesPackage.Literals.OPERATION__PARAMETERS ||
 			childFeature == TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS;
 

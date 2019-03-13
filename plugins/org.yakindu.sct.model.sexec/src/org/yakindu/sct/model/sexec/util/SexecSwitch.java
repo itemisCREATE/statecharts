@@ -182,7 +182,13 @@ public class SexecSwitch<T> extends Switch<T> {
 				ExecutionScope executionScope = (ExecutionScope)theEObject;
 				T result = caseExecutionScope(executionScope);
 				if (result == null) result = caseMappedElement(executionScope);
+				if (result == null) result = caseComplexType(executionScope);
+				if (result == null) result = caseType(executionScope);
+				if (result == null) result = caseGenericElement(executionScope);
+				if (result == null) result = caseDeclaration(executionScope);
 				if (result == null) result = caseNamedElement(executionScope);
+				if (result == null) result = caseAnnotatableElement(executionScope);
+				if (result == null) result = caseMetaComposite(executionScope);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -191,7 +197,13 @@ public class SexecSwitch<T> extends Switch<T> {
 				T result = caseExecutionRegion(executionRegion);
 				if (result == null) result = caseExecutionScope(executionRegion);
 				if (result == null) result = caseMappedElement(executionRegion);
+				if (result == null) result = caseComplexType(executionRegion);
+				if (result == null) result = caseType(executionRegion);
+				if (result == null) result = caseGenericElement(executionRegion);
+				if (result == null) result = caseDeclaration(executionRegion);
 				if (result == null) result = caseNamedElement(executionRegion);
+				if (result == null) result = caseAnnotatableElement(executionRegion);
+				if (result == null) result = caseMetaComposite(executionRegion);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

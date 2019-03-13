@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sexec.SexecPackage;
@@ -197,6 +198,10 @@ public class ExecutionRegionItemProvider
 		Object childObject = child;
 
 		boolean qualify =
+			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
+			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES ||
+			childFeature == TypesPackage.Literals.COMPLEX_TYPE__FEATURES ||
+			childFeature == TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS ||
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__STATE_VECTOR ||
 			childFeature == SexecPackage.Literals.EXECUTION_REGION__HISTORY_VECTOR ||
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCES ||

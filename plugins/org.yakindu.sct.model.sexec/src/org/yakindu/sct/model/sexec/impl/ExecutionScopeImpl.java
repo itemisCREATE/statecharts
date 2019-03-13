@@ -23,6 +23,16 @@ import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.base.types.AnnotatableElement;
+import org.yakindu.base.types.Annotation;
+import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.Declaration;
+import org.yakindu.base.types.GenericElement;
+import org.yakindu.base.types.MetaComposite;
+import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypeParameter;
+import org.yakindu.base.types.TypeSpecifier;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecPackage;
@@ -37,6 +47,16 @@ import org.yakindu.sct.model.sexec.StateVector;
  * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getAnnotations <em>Annotations</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getAnnotationInfo <em>Annotation Info</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getMetaFeatures <em>Meta Features</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#isStatic <em>Static</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#isAbstract <em>Abstract</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#isVisible <em>Visible</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getSuperTypes <em>Super Types</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getTypeParameters <em>Type Parameters</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getFeatures <em>Features</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getStateVector <em>State Vector</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getSubScopes <em>Sub Scopes</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getSuperScope <em>Super Scope</em>}</li>
@@ -67,6 +87,136 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAnnotations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Annotation> annotations;
+
+	/**
+	 * The cached value of the '{@link #getAnnotationInfo() <em>Annotation Info</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAnnotationInfo()
+	 * @generated
+	 * @ordered
+	 */
+	protected AnnotatableElement annotationInfo;
+
+	/**
+	 * The cached value of the '{@link #getMetaFeatures() <em>Meta Features</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMetaFeatures()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Declaration> metaFeatures;
+
+	/**
+	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStatic()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean STATIC_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isStatic() <em>Static</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStatic()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean static_ = STATIC_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean ABSTRACT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean abstract_ = ABSTRACT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isVisible() <em>Visible</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVisible()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean VISIBLE_EDEFAULT = true;
+
+	/**
+	 * The cached value of the '{@link #isVisible() <em>Visible</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVisible()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean visible = VISIBLE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSuperTypes() <em>Super Types</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSuperTypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypeSpecifier> superTypes;
+
+	/**
+	 * The cached value of the '{@link #getTypeParameters() <em>Type Parameters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeParameters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypeParameter> typeParameters;
+
+	/**
+	 * The cached value of the '{@link #getFeatures() <em>Features</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFeatures()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Declaration> features;
 
 	/**
 	 * The cached value of the '{@link #getStateVector() <em>State Vector</em>}' containment reference.
@@ -166,6 +316,183 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_SCOPE__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Annotation> getAnnotations() {
+		if (annotations == null) {
+			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, SexecPackage.EXECUTION_SCOPE__ANNOTATIONS);
+		}
+		return annotations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AnnotatableElement getAnnotationInfo() {
+		return annotationInfo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetAnnotationInfo(AnnotatableElement newAnnotationInfo, NotificationChain msgs) {
+		AnnotatableElement oldAnnotationInfo = annotationInfo;
+		annotationInfo = newAnnotationInfo;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_SCOPE__ANNOTATION_INFO, oldAnnotationInfo, newAnnotationInfo);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAnnotationInfo(AnnotatableElement newAnnotationInfo) {
+		if (newAnnotationInfo != annotationInfo) {
+			NotificationChain msgs = null;
+			if (annotationInfo != null)
+				msgs = ((InternalEObject)annotationInfo).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_SCOPE__ANNOTATION_INFO, null, msgs);
+			if (newAnnotationInfo != null)
+				msgs = ((InternalEObject)newAnnotationInfo).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_SCOPE__ANNOTATION_INFO, null, msgs);
+			msgs = basicSetAnnotationInfo(newAnnotationInfo, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_SCOPE__ANNOTATION_INFO, newAnnotationInfo, newAnnotationInfo));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Declaration> getMetaFeatures() {
+		if (metaFeatures == null) {
+			metaFeatures = new EObjectContainmentEList<Declaration>(Declaration.class, this, SexecPackage.EXECUTION_SCOPE__META_FEATURES);
+		}
+		return metaFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isStatic() {
+		return static_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStatic(boolean newStatic) {
+		boolean oldStatic = static_;
+		static_ = newStatic;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_SCOPE__STATIC, oldStatic, static_));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getId() {
+		// TODO: implement this method to return the 'Id' attribute
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isAbstract() {
+		return abstract_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAbstract(boolean newAbstract) {
+		boolean oldAbstract = abstract_;
+		abstract_ = newAbstract;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_SCOPE__ABSTRACT, oldAbstract, abstract_));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isVisible() {
+		return visible;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVisible(boolean newVisible) {
+		boolean oldVisible = visible;
+		visible = newVisible;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_SCOPE__VISIBLE, oldVisible, visible));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<TypeSpecifier> getSuperTypes() {
+		if (superTypes == null) {
+			superTypes = new EObjectContainmentEList<TypeSpecifier>(TypeSpecifier.class, this, SexecPackage.EXECUTION_SCOPE__SUPER_TYPES);
+		}
+		return superTypes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<TypeParameter> getTypeParameters() {
+		if (typeParameters == null) {
+			typeParameters = new EObjectContainmentEList<TypeParameter>(TypeParameter.class, this, SexecPackage.EXECUTION_SCOPE__TYPE_PARAMETERS);
+		}
+		return typeParameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Declaration> getFeatures() {
+		if (features == null) {
+			features = new EObjectContainmentEList<Declaration>(Declaration.class, this, SexecPackage.EXECUTION_SCOPE__FEATURES);
+		}
+		return features;
 	}
 
 	/**
@@ -386,6 +713,39 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Declaration> getAllFeatures() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Type getOriginType() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Annotation getAnnotationOfType(String typeName) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -408,6 +768,18 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case SexecPackage.EXECUTION_SCOPE__ANNOTATIONS:
+				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
+			case SexecPackage.EXECUTION_SCOPE__ANNOTATION_INFO:
+				return basicSetAnnotationInfo(null, msgs);
+			case SexecPackage.EXECUTION_SCOPE__META_FEATURES:
+				return ((InternalEList<?>)getMetaFeatures()).basicRemove(otherEnd, msgs);
+			case SexecPackage.EXECUTION_SCOPE__SUPER_TYPES:
+				return ((InternalEList<?>)getSuperTypes()).basicRemove(otherEnd, msgs);
+			case SexecPackage.EXECUTION_SCOPE__TYPE_PARAMETERS:
+				return ((InternalEList<?>)getTypeParameters()).basicRemove(otherEnd, msgs);
+			case SexecPackage.EXECUTION_SCOPE__FEATURES:
+				return ((InternalEList<?>)getFeatures()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_SCOPE__STATE_VECTOR:
 				return basicSetStateVector(null, msgs);
 			case SexecPackage.EXECUTION_SCOPE__SUB_SCOPES:
@@ -434,6 +806,26 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 		switch (featureID) {
 			case SexecPackage.EXECUTION_SCOPE__NAME:
 				return getName();
+			case SexecPackage.EXECUTION_SCOPE__ANNOTATIONS:
+				return getAnnotations();
+			case SexecPackage.EXECUTION_SCOPE__ANNOTATION_INFO:
+				return getAnnotationInfo();
+			case SexecPackage.EXECUTION_SCOPE__META_FEATURES:
+				return getMetaFeatures();
+			case SexecPackage.EXECUTION_SCOPE__STATIC:
+				return isStatic();
+			case SexecPackage.EXECUTION_SCOPE__ID:
+				return getId();
+			case SexecPackage.EXECUTION_SCOPE__ABSTRACT:
+				return isAbstract();
+			case SexecPackage.EXECUTION_SCOPE__VISIBLE:
+				return isVisible();
+			case SexecPackage.EXECUTION_SCOPE__SUPER_TYPES:
+				return getSuperTypes();
+			case SexecPackage.EXECUTION_SCOPE__TYPE_PARAMETERS:
+				return getTypeParameters();
+			case SexecPackage.EXECUTION_SCOPE__FEATURES:
+				return getFeatures();
 			case SexecPackage.EXECUTION_SCOPE__STATE_VECTOR:
 				return getStateVector();
 			case SexecPackage.EXECUTION_SCOPE__SUB_SCOPES:
@@ -462,6 +854,38 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 		switch (featureID) {
 			case SexecPackage.EXECUTION_SCOPE__NAME:
 				setName((String)newValue);
+				return;
+			case SexecPackage.EXECUTION_SCOPE__ANNOTATIONS:
+				getAnnotations().clear();
+				getAnnotations().addAll((Collection<? extends Annotation>)newValue);
+				return;
+			case SexecPackage.EXECUTION_SCOPE__ANNOTATION_INFO:
+				setAnnotationInfo((AnnotatableElement)newValue);
+				return;
+			case SexecPackage.EXECUTION_SCOPE__META_FEATURES:
+				getMetaFeatures().clear();
+				getMetaFeatures().addAll((Collection<? extends Declaration>)newValue);
+				return;
+			case SexecPackage.EXECUTION_SCOPE__STATIC:
+				setStatic((Boolean)newValue);
+				return;
+			case SexecPackage.EXECUTION_SCOPE__ABSTRACT:
+				setAbstract((Boolean)newValue);
+				return;
+			case SexecPackage.EXECUTION_SCOPE__VISIBLE:
+				setVisible((Boolean)newValue);
+				return;
+			case SexecPackage.EXECUTION_SCOPE__SUPER_TYPES:
+				getSuperTypes().clear();
+				getSuperTypes().addAll((Collection<? extends TypeSpecifier>)newValue);
+				return;
+			case SexecPackage.EXECUTION_SCOPE__TYPE_PARAMETERS:
+				getTypeParameters().clear();
+				getTypeParameters().addAll((Collection<? extends TypeParameter>)newValue);
+				return;
+			case SexecPackage.EXECUTION_SCOPE__FEATURES:
+				getFeatures().clear();
+				getFeatures().addAll((Collection<? extends Declaration>)newValue);
 				return;
 			case SexecPackage.EXECUTION_SCOPE__STATE_VECTOR:
 				setStateVector((StateVector)newValue);
@@ -498,6 +922,33 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 			case SexecPackage.EXECUTION_SCOPE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case SexecPackage.EXECUTION_SCOPE__ANNOTATIONS:
+				getAnnotations().clear();
+				return;
+			case SexecPackage.EXECUTION_SCOPE__ANNOTATION_INFO:
+				setAnnotationInfo((AnnotatableElement)null);
+				return;
+			case SexecPackage.EXECUTION_SCOPE__META_FEATURES:
+				getMetaFeatures().clear();
+				return;
+			case SexecPackage.EXECUTION_SCOPE__STATIC:
+				setStatic(STATIC_EDEFAULT);
+				return;
+			case SexecPackage.EXECUTION_SCOPE__ABSTRACT:
+				setAbstract(ABSTRACT_EDEFAULT);
+				return;
+			case SexecPackage.EXECUTION_SCOPE__VISIBLE:
+				setVisible(VISIBLE_EDEFAULT);
+				return;
+			case SexecPackage.EXECUTION_SCOPE__SUPER_TYPES:
+				getSuperTypes().clear();
+				return;
+			case SexecPackage.EXECUTION_SCOPE__TYPE_PARAMETERS:
+				getTypeParameters().clear();
+				return;
+			case SexecPackage.EXECUTION_SCOPE__FEATURES:
+				getFeatures().clear();
+				return;
 			case SexecPackage.EXECUTION_SCOPE__STATE_VECTOR:
 				setStateVector((StateVector)null);
 				return;
@@ -530,6 +981,26 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 		switch (featureID) {
 			case SexecPackage.EXECUTION_SCOPE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case SexecPackage.EXECUTION_SCOPE__ANNOTATIONS:
+				return annotations != null && !annotations.isEmpty();
+			case SexecPackage.EXECUTION_SCOPE__ANNOTATION_INFO:
+				return annotationInfo != null;
+			case SexecPackage.EXECUTION_SCOPE__META_FEATURES:
+				return metaFeatures != null && !metaFeatures.isEmpty();
+			case SexecPackage.EXECUTION_SCOPE__STATIC:
+				return static_ != STATIC_EDEFAULT;
+			case SexecPackage.EXECUTION_SCOPE__ID:
+				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
+			case SexecPackage.EXECUTION_SCOPE__ABSTRACT:
+				return abstract_ != ABSTRACT_EDEFAULT;
+			case SexecPackage.EXECUTION_SCOPE__VISIBLE:
+				return visible != VISIBLE_EDEFAULT;
+			case SexecPackage.EXECUTION_SCOPE__SUPER_TYPES:
+				return superTypes != null && !superTypes.isEmpty();
+			case SexecPackage.EXECUTION_SCOPE__TYPE_PARAMETERS:
+				return typeParameters != null && !typeParameters.isEmpty();
+			case SexecPackage.EXECUTION_SCOPE__FEATURES:
+				return features != null && !features.isEmpty();
 			case SexecPackage.EXECUTION_SCOPE__STATE_VECTOR:
 				return stateVector != null;
 			case SexecPackage.EXECUTION_SCOPE__SUB_SCOPES:
@@ -559,6 +1030,46 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 				default: return -1;
 			}
 		}
+		if (baseClass == AnnotatableElement.class) {
+			switch (derivedFeatureID) {
+				case SexecPackage.EXECUTION_SCOPE__ANNOTATIONS: return TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS;
+				case SexecPackage.EXECUTION_SCOPE__ANNOTATION_INFO: return TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO;
+				default: return -1;
+			}
+		}
+		if (baseClass == MetaComposite.class) {
+			switch (derivedFeatureID) {
+				case SexecPackage.EXECUTION_SCOPE__META_FEATURES: return TypesPackage.META_COMPOSITE__META_FEATURES;
+				default: return -1;
+			}
+		}
+		if (baseClass == Declaration.class) {
+			switch (derivedFeatureID) {
+				case SexecPackage.EXECUTION_SCOPE__STATIC: return TypesPackage.DECLARATION__STATIC;
+				case SexecPackage.EXECUTION_SCOPE__ID: return TypesPackage.DECLARATION__ID;
+				default: return -1;
+			}
+		}
+		if (baseClass == Type.class) {
+			switch (derivedFeatureID) {
+				case SexecPackage.EXECUTION_SCOPE__ABSTRACT: return TypesPackage.TYPE__ABSTRACT;
+				case SexecPackage.EXECUTION_SCOPE__VISIBLE: return TypesPackage.TYPE__VISIBLE;
+				case SexecPackage.EXECUTION_SCOPE__SUPER_TYPES: return TypesPackage.TYPE__SUPER_TYPES;
+				default: return -1;
+			}
+		}
+		if (baseClass == GenericElement.class) {
+			switch (derivedFeatureID) {
+				case SexecPackage.EXECUTION_SCOPE__TYPE_PARAMETERS: return TypesPackage.GENERIC_ELEMENT__TYPE_PARAMETERS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ComplexType.class) {
+			switch (derivedFeatureID) {
+				case SexecPackage.EXECUTION_SCOPE__FEATURES: return TypesPackage.COMPLEX_TYPE__FEATURES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -575,6 +1086,46 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 				default: return -1;
 			}
 		}
+		if (baseClass == AnnotatableElement.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS: return SexecPackage.EXECUTION_SCOPE__ANNOTATIONS;
+				case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATION_INFO: return SexecPackage.EXECUTION_SCOPE__ANNOTATION_INFO;
+				default: return -1;
+			}
+		}
+		if (baseClass == MetaComposite.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.META_COMPOSITE__META_FEATURES: return SexecPackage.EXECUTION_SCOPE__META_FEATURES;
+				default: return -1;
+			}
+		}
+		if (baseClass == Declaration.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.DECLARATION__STATIC: return SexecPackage.EXECUTION_SCOPE__STATIC;
+				case TypesPackage.DECLARATION__ID: return SexecPackage.EXECUTION_SCOPE__ID;
+				default: return -1;
+			}
+		}
+		if (baseClass == Type.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.TYPE__ABSTRACT: return SexecPackage.EXECUTION_SCOPE__ABSTRACT;
+				case TypesPackage.TYPE__VISIBLE: return SexecPackage.EXECUTION_SCOPE__VISIBLE;
+				case TypesPackage.TYPE__SUPER_TYPES: return SexecPackage.EXECUTION_SCOPE__SUPER_TYPES;
+				default: return -1;
+			}
+		}
+		if (baseClass == GenericElement.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.GENERIC_ELEMENT__TYPE_PARAMETERS: return SexecPackage.EXECUTION_SCOPE__TYPE_PARAMETERS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ComplexType.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.COMPLEX_TYPE__FEATURES: return SexecPackage.EXECUTION_SCOPE__FEATURES;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -587,9 +1138,15 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuilder result = new StringBuilder(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", static: ");
+		result.append(static_);
+		result.append(", abstract: ");
+		result.append(abstract_);
+		result.append(", visible: ");
+		result.append(visible);
 		result.append(')');
 		return result.toString();
 	}

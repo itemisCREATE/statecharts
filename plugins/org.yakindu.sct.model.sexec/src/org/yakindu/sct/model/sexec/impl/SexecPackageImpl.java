@@ -377,7 +377,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 *
+	 * 
 	 * <p>This method is used to initialize {@link SexecPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -391,8 +391,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		if (isInited) return (SexecPackage)EPackage.Registry.INSTANCE.getEPackage(SexecPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object registeredSexecPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		SexecPackageImpl theSexecPackage = registeredSexecPackage instanceof SexecPackageImpl ? (SexecPackageImpl)registeredSexecPackage : new SexecPackageImpl();
+		SexecPackageImpl theSexecPackage = (SexecPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SexecPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SexecPackageImpl());
 
 		isInited = true;
 
@@ -411,6 +410,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		// Mark meta-data to indicate it can't be changed
 		theSexecPackage.freeze();
 
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(SexecPackage.eNS_URI, theSexecPackage);
 		return theSexecPackage;
@@ -1608,6 +1608,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		executionStateEClass.getESuperTypes().add(this.getExecutionScope());
 		executionScopeEClass.getESuperTypes().add(this.getMappedElement());
 		executionScopeEClass.getESuperTypes().add(theBasePackage.getNamedElement());
+		executionScopeEClass.getESuperTypes().add(theTypesPackage.getComplexType());
 		executionRegionEClass.getESuperTypes().add(this.getExecutionScope());
 		executionEntryEClass.getESuperTypes().add(this.getExecutionNode());
 		executionExitEClass.getESuperTypes().add(this.getExecutionNode());

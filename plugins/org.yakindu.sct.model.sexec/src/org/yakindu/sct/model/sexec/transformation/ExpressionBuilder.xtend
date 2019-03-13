@@ -98,5 +98,9 @@ class ExpressionBuilder {
 			it.operator = AssignmentOperator.ASSIGN
 		]
 	}
+	
+	def _comment(EObject it, String comment) {
+		// TODO: implement comment handling e.g. using adapters.
+	}
 
 }

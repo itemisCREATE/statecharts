@@ -21,6 +21,7 @@ import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.provider.EventItemProvider;
 import org.yakindu.sct.model.sexec.SexecFactory;
@@ -157,6 +158,16 @@ public class TimeEventItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 SexecFactory.eINSTANCE.createExecutionScope()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 SexecFactory.eINSTANCE.createExecutionRegion()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 SexecFactory.eINSTANCE.createExecutionEntry()));
 
 		newChildDescriptors.add
@@ -183,6 +194,11 @@ public class TimeEventItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 SexecFactory.eINSTANCE.createTimeEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -212,6 +228,16 @@ public class TimeEventItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionScope()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 SexecFactory.eINSTANCE.createExecutionRegion()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 SexecFactory.eINSTANCE.createExecutionEntry()));
 
 		newChildDescriptors.add
@@ -238,6 +264,11 @@ public class TimeEventItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 SexecFactory.eINSTANCE.createTimeEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
 
 		newChildDescriptors.add
 			(createChildParameter

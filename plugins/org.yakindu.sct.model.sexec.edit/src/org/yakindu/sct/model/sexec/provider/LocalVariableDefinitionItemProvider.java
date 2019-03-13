@@ -140,6 +140,11 @@ public class LocalVariableDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.LOCAL_VARIABLE_DEFINITION__VARIABLE,
+				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.LOCAL_VARIABLE_DEFINITION__VARIABLE,
 				 TypesFactory.eINSTANCE.createProperty()));
 
 		newChildDescriptors.add
@@ -270,17 +275,55 @@ public class LocalVariableDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.LOCAL_VARIABLE_DEFINITION__INITIAL_VALUE,
-				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.LOCAL_VARIABLE_DEFINITION__INITIAL_VALUE,
 				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.LOCAL_VARIABLE_DEFINITION__INITIAL_VALUE,
 				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.LOCAL_VARIABLE_DEFINITION__INITIAL_VALUE,
+				 ExpressionsFactory.eINSTANCE.createForExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.LOCAL_VARIABLE_DEFINITION__INITIAL_VALUE,
+				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.LOCAL_VARIABLE_DEFINITION__INITIAL_VALUE,
+				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.LOCAL_VARIABLE_DEFINITION__INITIAL_VALUE,
+				 TypesFactory.eINSTANCE.createProperty()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == SexecPackage.Literals.LOCAL_VARIABLE_DEFINITION__VARIABLE ||
+			childFeature == SexecPackage.Literals.LOCAL_VARIABLE_DEFINITION__INITIAL_VALUE;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }
