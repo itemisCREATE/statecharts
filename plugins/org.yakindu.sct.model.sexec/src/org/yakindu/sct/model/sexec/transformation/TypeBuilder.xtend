@@ -5,11 +5,21 @@ import org.yakindu.base.types.TypedElement
 import com.google.inject.Inject
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.base.types.Expression
+import org.yakindu.base.types.Type
 
 class TypeBuilder {
 
 	@Inject extension ITypeSystem typeSystem
 	extension TypesFactory tFactory = TypesFactory.eINSTANCE
+	
+	def _op(String name, Type returnType) {
+		_op => [op |
+			op.name = name
+			op.typeSpecifier = createTypeSpecifier => [
+				type = returnType
+			]
+		]
+	}
 	
 	def _op() {
 		createOperation

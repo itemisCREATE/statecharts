@@ -12,7 +12,7 @@ class StatemachineProperties {
 	
 	@Inject ITypeSystem ts
 	
-	@Inject extension Statechart2StatemachineTypeDeclaration
+	@Inject extension StatemachinePublic
 	@Inject extension SexecElementMapping
 	@Inject extension SExecExtensions  
 	
@@ -39,7 +39,7 @@ class StatemachineProperties {
 		createTypeSpecifier => [
 			type = ts.getType(ITypeSystem.ARRAY)
 			typeArguments += createTypeSpecifier => [
-				type = createStatesEnumerationType(sc)
+				type = statesEnumeration(sc)
 			]
 		]
 	}

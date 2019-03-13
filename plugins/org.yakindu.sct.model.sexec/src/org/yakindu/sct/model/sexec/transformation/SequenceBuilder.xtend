@@ -43,8 +43,8 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 import org.yakindu.sct.model.sexec.transformation.ng.StateOperations
 import org.yakindu.sct.model.sexec.transformation.ng.StatemachineProperties
-import org.yakindu.sct.model.sexec.transformation.ng.Statechart2StatemachineTypeDeclaration
 import org.yakindu.sct.model.sexec.transformation.ng.ScopeOperations
+import org.yakindu.sct.model.sexec.transformation.ng.StatemachinePublic
 
 class SequenceBuilder {
 
@@ -59,7 +59,7 @@ class SequenceBuilder {
 	@Inject extension StatemachineProperties smProperties
 	@Inject extension StateOperations stateOperations
 	@Inject extension ScopeOperations scopeOperations
-	@Inject extension Statechart2StatemachineTypeDeclaration
+	@Inject extension StatemachinePublic
 	
 	
 
@@ -217,7 +217,7 @@ class SequenceBuilder {
 //TODO				if(_addTraceSteps) execState.newTraceStateEntered else null,
 				stateVector(state.statechart)._ref
 					._get(state.create.stateVector.offset._int)
-					._assign(stateVector(state.statechart)._ref._fc(state.stateEnumerator))
+					._assign(stateVector(state.statechart)._ref._fc(state.enumerator))
 			)
 		] 
 		execState.features += op
@@ -266,7 +266,7 @@ class SequenceBuilder {
 				if (execState.leaf) 
 					block.expressions +=	stateVector(state.statechart)._ref
 						._get(state.create.stateVector.offset._int)
-						._assign(stateVector(state.statechart)._ref._fc(state.stateEnumerator))
+						._assign(stateVector(state.statechart)._ref._fc(state.enumerator))
 				else 
 					for (r : state.regions) {
 						var regionEnterSeq = r.create.resolveEnterSequenceOperation(epName)

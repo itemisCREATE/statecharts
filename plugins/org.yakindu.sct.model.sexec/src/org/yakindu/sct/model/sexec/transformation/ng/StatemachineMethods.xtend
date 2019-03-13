@@ -4,35 +4,32 @@ import com.google.inject.Singleton
 import javax.inject.Inject
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import org.yakindu.base.types.ComplexType
-import org.yakindu.base.types.Type
-import org.yakindu.base.types.TypesFactory
+import org.yakindu.base.types.Expression
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
-import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
-import org.yakindu.base.types.Expression
-import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
-import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sgraph.State
+import org.yakindu.sct.model.sgraph.Statechart
 
 @Singleton
 class StatemachineMethods {
 
-	extension TypesFactory typesFactory = TypesFactory.eINSTANCE
 	extension ExpressionsFactory exprFactory = ExpressionsFactory.eINSTANCE
 	
-	@Inject extension ITypeSystem ts
 	@Inject extension SexecElementMapping  
 	@Inject extension SExecExtensions  
 	@Inject extension Sequence2Method
 	@Inject extension TypeBuilder
 	@Inject extension ExpressionBuilder
 	@Inject extension StatemachineProperties
-	@Inject extension Statechart2StatemachineTypeDeclaration
+	@Inject extension StatemachinePublic
 	@Inject extension StateVectorExtensions
+	@Inject extension IStatemachine
 	
 
 	def defineEnterMethod(ComplexType it, Statechart sc) {
@@ -128,7 +125,7 @@ class StatemachineMethods {
 	protected def equalsState(Statechart sc, ExecutionState fs, int index) {
 		stateVector(sc)._ref._get(index._int)._equals(
 			if (fs.stateVector.offset == index) {
-				stateVector(sc)._ref._fc((fs.sourceElement as State).stateEnumerator)
+				stateVector(sc)._ref._fc((fs.sourceElement as State).enumerator)
 			} else {
 				stateVector(sc)._ref._fc(noState(sc))
 			}
@@ -143,38 +140,7 @@ class StatemachineMethods {
 		]
 	}
 	
-	def createInitMethod() {
-		createMethod("init", ts.getType(ITypeSystem.VOID))
-	}
-
-	def createEnterMethod() {
-		createMethod("enter", ts.getType(ITypeSystem.VOID))
-	}
 	
-	def createExitMethod() {
-		createMethod("exit", ts.getType(ITypeSystem.VOID))
-	}
-	
-	def createIsActiveMethod() {
-		createMethod("isActive", ts.getType(ITypeSystem.BOOLEAN))
-	}
-	
-	def createIsFinalMethod() {
-		createMethod("isFinal", ts.getType(ITypeSystem.BOOLEAN))
-	}
-	
-	def createRunCycleMethod() {
-		createMethod("runCycle", ts.getType(ITypeSystem.BOOLEAN))
-	}
-	
-	protected def createMethod(String name, Type returnType) {
-		createOperation => [op |
-			op.name = name
-			op.typeSpecifier = createTypeSpecifier => [
-				type = returnType
-			]
-		]
-	}
 	
 	
 }

@@ -18,49 +18,53 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.yakindu.sct.model.sgraph.State
 
 /**
- * 
+ * This class implements a transformation that creates the state machine type
+ * from a statechart. It covers only all publicly visible elements which are provided
+ * to users. It creates no internal declarations and no implementations.
+ *  
  * @author andreas muelder - Initial contribution and API
+ * @author thomas kutz
+ * @author axel terfloth
  * 
  */
-class Statechart2StatemachineTypeDeclaration {
+class StatemachinePublic {
 
 	extension TypesFactory factory = TypesFactory.eINSTANCE
 	extension ITypeSystem ts = GenericTypeSystem.instance
 	
-	@Inject extension StatemachineMethods methods
+	@Inject extension IStatemachine 
+	
+	def statemachinePackage(Statechart sc) {
+		statemachinePackage(sc.namespace)
+ 	}
+
+	def create createPackage statemachinePackage(String namespace) {
+ 		it => [
+ 			name = if (namespace.nullOrEmpty) "default" else namespace
+ 		]	
+ 	}
 	
 
-	def Package toTypeDeclaration(Statechart sc) {
-		createPackage => [ package |
-			package.name = if (sc.namespace.nullOrEmpty) "default" else sc.namespace
+	def create createComplexType statemachineType(Statechart sc) {
 
-			package.member += createStatemachineBaseType()
-
-			val statemachineType = declareStatemachineType(sc)
-			package.member += statemachineType
-
-			statemachineType.features += createStatesEnumerationType(sc)
+		it => [
 			
-			statemachineType.features += sc.scopes.filter(InterfaceScope).filter[!name.nullOrEmpty].map [
+			name = sc.name
+			superTypes += createTypeSpecifier => [ type = statemachineInterfaceType ]
+			sc.statemachinePackage.member += it
+
+			features += statesEnumeration(sc)
+			
+			features += sc.scopes.filter(InterfaceScope).filter[!name.nullOrEmpty].map [
 				createInterfaceType
 			]
 
-			statemachineType.declareMembers(sc)
-
+			declareMembers(sc)
 		]
 	}
 
-	public def create createComplexType declareStatemachineType(Statechart sc) {
-		it => [ scType |
-			scType.name = sc.name
-			scType.superTypes += createTypeSpecifier => [
-				type = createStatemachineBaseType()
-			]
-		]
-	}
 
 	protected def declareMembers(ComplexType scType, Statechart sc) {
 
@@ -84,7 +88,7 @@ class Statechart2StatemachineTypeDeclaration {
 			parameters += createParameter => [
 				name = "state"
 				typeSpecifier = createTypeSpecifier => [
-					type = createStatesEnumerationType(sc)
+					type = statesEnumeration(sc)
 
 				]
 			]
@@ -95,18 +99,18 @@ class Statechart2StatemachineTypeDeclaration {
 
 	}
 
-	protected def create createEnumerationType createStatesEnumerationType(Statechart sc) {
+	protected def create createEnumerationType statesEnumeration(Statechart sc) {
 		it => [
 			name = '''«sc.name»States'''
 			annotationInfo = createAnnotatableElement
 			sc.eAllContents.filter(RegularState).forEach [ state |
-				enumerator += state.stateEnumerator
-				enumerator += noState(sc)
+				enumerator += state.enumerator
+				enumerator += sc.noState
 			]
 		]
 	}
 	
-	def create createEnumerator stateEnumerator(RegularState state) {
+	def create createEnumerator enumerator(RegularState state) {
 		name = state.name
 	}
 	
@@ -121,19 +125,6 @@ class Statechart2StatemachineTypeDeclaration {
 		it => [
 			name = iface.name
 			iface.declarations.forEach[decl|features += EcoreUtil.copy(decl)]
-		]
-	}
-
-	protected def create createComplexType createStatemachineBaseType() {
-		it => [
-			name = "Statemachine"
-			// Implicit operations
-			features += createInitMethod
-			features += createEnterMethod
-			features += createExitMethod
-			features += createIsActiveMethod
-			features += createIsFinalMethod
-			features += createRunCycleMethod
 		]
 	}
 }

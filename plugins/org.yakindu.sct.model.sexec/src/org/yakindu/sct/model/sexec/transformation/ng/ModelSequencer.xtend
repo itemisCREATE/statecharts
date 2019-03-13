@@ -36,7 +36,7 @@ class ModelSequencer implements IModelSequencer {
 	
 	@Inject extension ReactMethod reactMethod
 	
-	@Inject extension Statechart2StatemachineTypeDeclaration sc2Type
+	@Inject extension StatemachinePublic sc2Type
 	@Inject extension StatemachineMethods smMethods
 	@Inject	extension Sequence2Method s2m
 	@Inject	extension StatemachineProperties smProps
@@ -53,8 +53,8 @@ class ModelSequencer implements IModelSequencer {
 		
 		val ef = sc.transformToFlow(acceptor)
 				
-		val scpackage = sc.toTypeDeclaration
-		val sctype = sc.declareStatemachineType
+		val scpackage = sc.statemachinePackage
+		val sctype = sc.statemachineType
 		
 		sctype.defineProperties(sc)
 		
