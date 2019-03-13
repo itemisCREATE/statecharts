@@ -50,6 +50,8 @@ class SequenceBuilder {
 	@Inject extension TraceExtensions trace
 
 	@Inject extension ITypeValueProvider 
+	@Inject extension TypeBuilder tBuilder
+	@Inject extension ExpressionBuilder eBuilder
 
 	@Inject(optional=true)
 	@Named(IModelSequencer.ADD_TRACES)
@@ -173,11 +175,13 @@ class SequenceBuilder {
 
 		// create an enter sequence for each contained entry
 		for (e : r.collectEntries) {
+			
 			val seq = sexec.factory.createSequence
-			seq.name = if (e.name === null || e.name.trim == "")
-				DEFAULT_SEQUENCE_NAME
-			else
-				e.name
+			seq.name = if (e.name.nullOrEmpty)
+							DEFAULT_SEQUENCE_NAME
+						else
+							e.name
+							
 			seq.comment = "'" + seq.name + "' enter sequence for region " + r.name
 
 			val entryNode = e.create
@@ -194,6 +198,20 @@ class SequenceBuilder {
 
 	def dispatch void defineScopeEnterSequences(FinalState state) {
 		val execState = state.create
+		
+		val op = _op => [
+			name = DEFAULT_SEQUENCE_NAME	
+//TODO			_comment("Default enter sequence for state " + state.name)
+			body = _block(null, null)
+//
+//			if(execState.entryAction !== null) seq.steps.add(execState.entryAction.newCall)
+//
+//			if(_addTraceSteps) seq.steps += execState.newTraceStateEntered
+//
+//			seq.steps += execState.newEnterStateStep
+		] 
+		execState.features += op
+		
 		val seq = sexec.factory.createSequence
 		seq.name = DEFAULT_SEQUENCE_NAME
 		seq.comment = "Default enter sequence for state " + state.name
