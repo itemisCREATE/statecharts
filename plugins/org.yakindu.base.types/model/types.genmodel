@@ -11,6 +11,10 @@
       <genEnumLiterals ecoreEnumLiteral="types.ecore#//Direction/IN"/>
       <genEnumLiterals ecoreEnumLiteral="types.ecore#//Direction/OUT"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="types.ecore#//Visibility">
+      <genEnumLiterals ecoreEnumLiteral="types.ecore#//Visibility/PUBLIC"/>
+      <genEnumLiterals ecoreEnumLiteral="types.ecore#//Visibility/PROTECTED"/>
+    </genEnums>
     <genClasses ecoreClass="types.ecore#//Package">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//Package/member"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Package/imports"/>
@@ -24,6 +28,7 @@
     <genClasses image="false" ecoreClass="types.ecore#//Declaration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Declaration/static"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Declaration/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Declaration/visibility"/>
     </genClasses>
     <genClasses ecoreClass="types.ecore#//Operation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//Operation/parameters"/>

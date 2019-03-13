@@ -99,6 +99,7 @@ public class OperationItemProvider extends TypedDeclarationItemProvider {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS);
 			childrenFeatures.add(TypesPackage.Literals.OPERATION__PARAMETERS);
+			childrenFeatures.add(TypesPackage.Literals.OPERATION__BODY);
 		}
 		return childrenFeatures;
 	}
@@ -186,6 +187,7 @@ public class OperationItemProvider extends TypedDeclarationItemProvider {
 				return;
 			case TypesPackage.OPERATION__TYPE_PARAMETERS:
 			case TypesPackage.OPERATION__PARAMETERS:
+			case TypesPackage.OPERATION__BODY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -212,6 +214,11 @@ public class OperationItemProvider extends TypedDeclarationItemProvider {
 			(createChildParameter
 				(TypesPackage.Literals.OPERATION__PARAMETERS,
 				 TypesFactory.eINSTANCE.createParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.OPERATION__BODY,
+				 TypesFactory.eINSTANCE.createProperty()));
 	}
 
 	/**
@@ -228,6 +235,7 @@ public class OperationItemProvider extends TypedDeclarationItemProvider {
 		boolean qualify =
 			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
 			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES ||
+			childFeature == TypesPackage.Literals.OPERATION__BODY ||
 			childFeature == TypesPackage.Literals.OPERATION__PARAMETERS ||
 			childFeature == TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS;
 

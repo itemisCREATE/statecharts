@@ -40,6 +40,7 @@ import org.yakindu.base.types.TypedDeclaration;
 import org.yakindu.base.types.TypedElement;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.base.types.Visibility;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!--
@@ -214,6 +215,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	private EEnum directionEEnum = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum visibilityEEnum = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the
 	 * package package URI value.
@@ -364,6 +372,15 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 */
 	public EAttribute getDeclaration_Id() {
 		return (EAttribute)declarationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDeclaration_Visibility() {
+		return (EAttribute)declarationEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -812,6 +829,15 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getVisibility() {
+		return visibilityEEnum;
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -849,6 +875,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		declarationEClass = createEClass(DECLARATION);
 		createEAttribute(declarationEClass, DECLARATION__STATIC);
 		createEAttribute(declarationEClass, DECLARATION__ID);
+		createEAttribute(declarationEClass, DECLARATION__VISIBILITY);
 
 		operationEClass = createEClass(OPERATION);
 		createEReference(operationEClass, OPERATION__PARAMETERS);
@@ -923,6 +950,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		// Create enums
 		directionEEnum = createEEnum(DIRECTION);
+		visibilityEEnum = createEEnum(VISIBILITY);
 	}
 
 	/**
@@ -998,6 +1026,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEClass(declarationEClass, Declaration.class, "Declaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDeclaration_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, Declaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDeclaration_Id(), ecorePackage.getEString(), "id", null, 0, 1, Declaration.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDeclaration_Visibility(), this.getVisibility(), "visibility", "PUBLIC", 0, 1, Declaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOperation_Parameters(), this.getParameter(), this.getParameter_OwningOperation(), "parameters", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1084,6 +1113,10 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		addEEnumLiteral(directionEEnum, Direction.LOCAL);
 		addEEnumLiteral(directionEEnum, Direction.IN);
 		addEEnumLiteral(directionEEnum, Direction.OUT);
+
+		initEEnum(visibilityEEnum, Visibility.class, "Visibility");
+		addEEnumLiteral(visibilityEEnum, Visibility.PUBLIC);
+		addEEnumLiteral(visibilityEEnum, Visibility.PROTECTED);
 
 		// Create resource
 		createResource(eNS_URI);
