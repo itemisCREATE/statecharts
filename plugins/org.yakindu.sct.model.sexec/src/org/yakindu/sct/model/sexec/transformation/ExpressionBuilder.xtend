@@ -13,6 +13,7 @@ import org.yakindu.base.types.Property
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.expressions.expressions.AssignmentOperator
+import java.util.function.BinaryOperator
 
 class ExpressionBuilder {
 
@@ -101,6 +102,27 @@ class ExpressionBuilder {
 	
 	def _comment(EObject it, String comment) {
 		// TODO: implement comment handling e.g. using adapters.
+	}
+
+	def _return(Expression exp) {
+		createReturnExpression => [
+			it.expression = exp
+		]
+	}
+	
+	def _or(Expression left, Expression right) {
+		createLogicalOrExpression => [
+			it.leftOperand = left
+			it.rightOperand = right
+		]
+	}
+	
+	def _notEquals(Expression left, Expression right) {
+		createLogicalRelationExpression => [
+			operator = RelationalOperator.NOT_EQUALS
+			leftOperand = left
+			rightOperand = right
+		]
 	}
 
 }
