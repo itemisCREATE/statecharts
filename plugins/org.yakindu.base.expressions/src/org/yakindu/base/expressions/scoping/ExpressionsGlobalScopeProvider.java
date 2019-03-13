@@ -19,9 +19,9 @@ import com.google.inject.Provider;
 public class ExpressionsGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 
 	@Inject
-	private ITypeSystem typeSystem;
+	protected ITypeSystem typeSystem;
 	@Inject
-	private IQualifiedNameProvider qualifiedNameProvider;
+	protected IQualifiedNameProvider qualifiedNameProvider;
 	@Inject
 	private ExpressionsImportUriProvider importUriProvider;
 	@Inject

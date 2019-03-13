@@ -34,6 +34,7 @@ import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.base.types.Visibility;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionNode;
 import org.yakindu.sct.model.sexec.ExecutionRegion;
@@ -68,6 +69,7 @@ import org.yakindu.sct.model.sgraph.impl.ScopedElementImpl;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getMetaFeatures <em>Meta Features</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#isVisible <em>Visible</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getSuperTypes <em>Super Types</em>}</li>
@@ -238,6 +240,26 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * @ordered
 	 */
 	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Visibility VISIBILITY_EDEFAULT = Visibility.PUBLIC;
+
+	/**
+	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected Visibility visibility = VISIBILITY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
@@ -815,6 +837,27 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Visibility getVisibility() {
+		return visibility;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVisibility(Visibility newVisibility) {
+		Visibility oldVisibility = visibility;
+		visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__VISIBILITY, oldVisibility, visibility));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isAbstract() {
 		return abstract_;
 	}
@@ -1368,6 +1411,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return isStatic();
 			case SexecPackage.EXECUTION_FLOW__ID:
 				return getId();
+			case SexecPackage.EXECUTION_FLOW__VISIBILITY:
+				return getVisibility();
 			case SexecPackage.EXECUTION_FLOW__ABSTRACT:
 				return isAbstract();
 			case SexecPackage.EXECUTION_FLOW__VISIBLE:
@@ -1452,6 +1497,9 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return;
 			case SexecPackage.EXECUTION_FLOW__STATIC:
 				setStatic((Boolean)newValue);
+				return;
+			case SexecPackage.EXECUTION_FLOW__VISIBILITY:
+				setVisibility((Visibility)newValue);
 				return;
 			case SexecPackage.EXECUTION_FLOW__ABSTRACT:
 				setAbstract((Boolean)newValue);
@@ -1556,6 +1604,9 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__STATIC:
 				setStatic(STATIC_EDEFAULT);
 				return;
+			case SexecPackage.EXECUTION_FLOW__VISIBILITY:
+				setVisibility(VISIBILITY_EDEFAULT);
+				return;
 			case SexecPackage.EXECUTION_FLOW__ABSTRACT:
 				setAbstract(ABSTRACT_EDEFAULT);
 				return;
@@ -1642,6 +1693,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return static_ != STATIC_EDEFAULT;
 			case SexecPackage.EXECUTION_FLOW__ID:
 				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
+			case SexecPackage.EXECUTION_FLOW__VISIBILITY:
+				return visibility != VISIBILITY_EDEFAULT;
 			case SexecPackage.EXECUTION_FLOW__ABSTRACT:
 				return abstract_ != ABSTRACT_EDEFAULT;
 			case SexecPackage.EXECUTION_FLOW__VISIBLE:
@@ -1725,6 +1778,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			switch (derivedFeatureID) {
 				case SexecPackage.EXECUTION_FLOW__STATIC: return TypesPackage.DECLARATION__STATIC;
 				case SexecPackage.EXECUTION_FLOW__ID: return TypesPackage.DECLARATION__ID;
+				case SexecPackage.EXECUTION_FLOW__VISIBILITY: return TypesPackage.DECLARATION__VISIBILITY;
 				default: return -1;
 			}
 		}
@@ -1807,6 +1861,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			switch (baseFeatureID) {
 				case TypesPackage.DECLARATION__STATIC: return SexecPackage.EXECUTION_FLOW__STATIC;
 				case TypesPackage.DECLARATION__ID: return SexecPackage.EXECUTION_FLOW__ID;
+				case TypesPackage.DECLARATION__VISIBILITY: return SexecPackage.EXECUTION_FLOW__VISIBILITY;
 				default: return -1;
 			}
 		}
@@ -1856,6 +1911,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 		result.append(name);
 		result.append(", static: ");
 		result.append(static_);
+		result.append(", visibility: ");
+		result.append(visibility);
 		result.append(", abstract: ");
 		result.append(abstract_);
 		result.append(", visible: ");
