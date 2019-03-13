@@ -13,7 +13,7 @@ import org.yakindu.base.types.Property
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.expressions.expressions.AssignmentOperator
-import java.util.function.BinaryOperator
+import org.yakindu.base.expressions.expressions.SwitchCase
 
 class ExpressionBuilder {
 
@@ -43,10 +43,11 @@ class ExpressionBuilder {
 		]
 	}
 
-	def ElementReferenceExpression _call(Operation op) {
+	def ElementReferenceExpression _call(Operation op, Expression... arguments) {
 		createElementReferenceExpression => [
 			reference = op
 			operationCall = true
+			expressions.addAll(arguments)
 		]
 	}
 
@@ -143,6 +144,20 @@ class ExpressionBuilder {
 	def _parenthesized(Expression exp) {
 		createParenthesizedExpression => [
 			expression = exp
+		]
+	}
+	
+	def _switch(Expression exp, SwitchCase... cases) {
+		createSwitchExpression => [
+			it.^switch = exp
+			it.cases.addAll(cases)
+		]
+	}
+	
+	def _case(Expression ^case, Expression then) {
+		createSwitchCase => [
+			it.^case = ^case
+			it.then = then
 		]
 	}
 
