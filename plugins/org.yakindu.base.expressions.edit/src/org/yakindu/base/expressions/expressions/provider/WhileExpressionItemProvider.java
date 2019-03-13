@@ -20,6 +20,7 @@ import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.WhileExpression;
 
+import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.provider.ExpressionItemProvider;
 
 /**
@@ -267,7 +268,32 @@ public class WhileExpressionItemProvider extends ExpressionItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.WHILE_EXPRESSION__BODY,
-				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.WHILE_EXPRESSION__BODY,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.WHILE_EXPRESSION__BODY,
+				 ExpressionsFactory.eINSTANCE.createForExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.WHILE_EXPRESSION__BODY,
+				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.WHILE_EXPRESSION__BODY,
+				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.WHILE_EXPRESSION__BODY,
+				 TypesFactory.eINSTANCE.createProperty()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -397,7 +423,32 @@ public class WhileExpressionItemProvider extends ExpressionItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.WHILE_EXPRESSION__CONDITION,
-				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.WHILE_EXPRESSION__CONDITION,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.WHILE_EXPRESSION__CONDITION,
+				 ExpressionsFactory.eINSTANCE.createForExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.WHILE_EXPRESSION__CONDITION,
+				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.WHILE_EXPRESSION__CONDITION,
+				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.WHILE_EXPRESSION__CONDITION,
+				 TypesFactory.eINSTANCE.createProperty()));
 	}
 
 	/**

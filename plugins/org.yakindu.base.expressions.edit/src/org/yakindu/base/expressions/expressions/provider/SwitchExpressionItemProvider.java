@@ -20,6 +20,7 @@ import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.SwitchExpression;
 
+import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.provider.ExpressionItemProvider;
 
 /**
@@ -269,7 +270,32 @@ public class SwitchExpressionItemProvider extends ExpressionItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.SWITCH_EXPRESSION__SWITCH,
-				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.SWITCH_EXPRESSION__SWITCH,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.SWITCH_EXPRESSION__SWITCH,
+				 ExpressionsFactory.eINSTANCE.createForExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.SWITCH_EXPRESSION__SWITCH,
+				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.SWITCH_EXPRESSION__SWITCH,
+				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.SWITCH_EXPRESSION__SWITCH,
+				 TypesFactory.eINSTANCE.createProperty()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -404,7 +430,32 @@ public class SwitchExpressionItemProvider extends ExpressionItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.SWITCH_EXPRESSION__DEFAULT,
-				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.SWITCH_EXPRESSION__DEFAULT,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.SWITCH_EXPRESSION__DEFAULT,
+				 ExpressionsFactory.eINSTANCE.createForExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.SWITCH_EXPRESSION__DEFAULT,
+				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.SWITCH_EXPRESSION__DEFAULT,
+				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.SWITCH_EXPRESSION__DEFAULT,
+				 TypesFactory.eINSTANCE.createProperty()));
 	}
 
 	/**
@@ -420,8 +471,7 @@ public class SwitchExpressionItemProvider extends ExpressionItemProvider {
 
 		boolean qualify =
 			childFeature == ExpressionsPackage.Literals.SWITCH_EXPRESSION__SWITCH ||
-			childFeature == ExpressionsPackage.Literals.SWITCH_EXPRESSION__DEFAULT ||
-			childFeature == ExpressionsPackage.Literals.SWITCH_EXPRESSION__CASES;
+			childFeature == ExpressionsPackage.Literals.SWITCH_EXPRESSION__DEFAULT;
 
 		if (qualify) {
 			return getString

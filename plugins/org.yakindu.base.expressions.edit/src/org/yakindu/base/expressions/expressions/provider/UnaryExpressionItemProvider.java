@@ -15,6 +15,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.UnaryExpression;
+import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.provider.ExpressionItemProvider;
 
 /**
@@ -249,7 +250,32 @@ public class UnaryExpressionItemProvider extends ExpressionItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.UNARY_EXPRESSION__OPERAND,
-				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.UNARY_EXPRESSION__OPERAND,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.UNARY_EXPRESSION__OPERAND,
+				 ExpressionsFactory.eINSTANCE.createForExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.UNARY_EXPRESSION__OPERAND,
+				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.UNARY_EXPRESSION__OPERAND,
+				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.UNARY_EXPRESSION__OPERAND,
+				 TypesFactory.eINSTANCE.createProperty()));
 	}
 
 	/**

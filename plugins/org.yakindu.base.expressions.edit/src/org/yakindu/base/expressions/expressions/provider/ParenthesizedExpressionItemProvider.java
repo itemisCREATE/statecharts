@@ -23,6 +23,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression;
+import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.provider.ExpressionItemProvider;
 
 /**
@@ -268,7 +269,32 @@ public class ParenthesizedExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.PARENTHESIZED_EXPRESSION__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.PARENTHESIZED_EXPRESSION__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.PARENTHESIZED_EXPRESSION__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createForExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.PARENTHESIZED_EXPRESSION__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.PARENTHESIZED_EXPRESSION__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.PARENTHESIZED_EXPRESSION__EXPRESSION,
+				 TypesFactory.eINSTANCE.createProperty()));
 	}
 
 	/**

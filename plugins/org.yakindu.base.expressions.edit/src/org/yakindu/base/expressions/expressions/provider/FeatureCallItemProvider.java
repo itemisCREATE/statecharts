@@ -24,6 +24,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
+import org.yakindu.base.types.TypesFactory;
 
 /**
  * This is the item provider adapter for a {@link org.yakindu.base.expressions.expressions.FeatureCall} object.
@@ -344,7 +345,32 @@ public class FeatureCallItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.FEATURE_CALL__OWNER,
-				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__OWNER,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__OWNER,
+				 ExpressionsFactory.eINSTANCE.createForExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__OWNER,
+				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__OWNER,
+				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__OWNER,
+				 TypesFactory.eINSTANCE.createProperty()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -474,7 +500,32 @@ public class FeatureCallItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
-				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createForExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 TypesFactory.eINSTANCE.createProperty()));
 	}
 
 	/**
