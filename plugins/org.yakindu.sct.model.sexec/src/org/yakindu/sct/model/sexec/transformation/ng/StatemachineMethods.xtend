@@ -26,6 +26,7 @@ class StatemachineMethods {
 	@Inject extension TypeBuilder
 	@Inject extension ExpressionBuilder
 	@Inject extension StatemachineProperties
+	@Inject extension Statechart2StatemachineTypeDeclaration
 
 	def defineEnterMethod(ComplexType it, Statechart sc) {
 		it.features += createEnterMethod => [
@@ -56,12 +57,11 @@ class StatemachineMethods {
 		val ef = sc.create
 		val i = _variable("i", ITypeSystem.INTEGER, 0._int)
 		_for(i, i._smaller(ef.stateVector.size._int), i._inc) => [
-//			it.body += stateVector(sc)
+			it.body = _block(
+				stateVector(sc)._ref._get(0._int)._assign(stateVector(sc)._ref._fc(noState(sc)))
+			)
 		]
-		
 	}
-	
-	
 	
 	
 	protected def createCallToSequenceMethod(Sequence seq) {

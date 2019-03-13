@@ -14,10 +14,10 @@ class StatemachineProperties {
 	extension TypesFactory typesFactory = TypesFactory.eINSTANCE
 	
 	def defineProperties(ComplexType it, Statechart sc) {
-		stateVector(sc)
+		it.features += stateVector(sc)
 	}
 	
-	def create createProperty stateVector(ComplexType scType, Statechart sc) {
+	def create createProperty stateVector(Statechart sc) {
 		name = "stateVector"
 		typeSpecifier = createArrayOfStateType(sc)
 	}
