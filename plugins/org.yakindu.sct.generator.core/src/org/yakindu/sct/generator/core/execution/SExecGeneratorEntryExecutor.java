@@ -11,14 +11,17 @@
 package org.yakindu.sct.generator.core.execution;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Package;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess;
@@ -56,7 +59,9 @@ public class SExecGeneratorEntryExecutor extends AbstractGeneratorEntryExecutor 
 		if (helper.serializeExecutionFlow(generatorEntry)) {
 			ResourceSet resourceSet = new ResourceSetImpl();
 			serializeExecutionFlow(generatorEntry, flow, resourceSet);
-			serializeSlang(generatorEntry, sequencer.transformToPackage((Statechart) generatorEntry.getElementRef(), null), resourceSet);
+			Package p2 = sequencer.transformToPackage((Statechart) generatorEntry.getElementRef(), null);
+			Package p1 = (Package) ((ComplexType) p2.getMember().get(0)).getSuperTypes().get(0).getType().eContainer();
+			serializeSlang(generatorEntry, resourceSet, p1, p2, flow);
 		}
 	}
 
@@ -81,7 +86,7 @@ public class SExecGeneratorEntryExecutor extends AbstractGeneratorEntryExecutor 
 	}
 	
 	
-	protected void serializeSlang(GeneratorEntry entry, Package pkg, ResourceSet resourceSet) {
+	protected void serializeSlang(GeneratorEntry entry, ResourceSet resourceSet, EObject... pkg) {
 //		Injector injector = SlangActivator.getInstance().getInjector(SlangActivator.COM_YAKINDU_SCT_TYPES_SLANG_SLANG);
 //		
 //		XtextResource resource = injector.getInstance(XtextResource.class);
@@ -102,7 +107,11 @@ public class SExecGeneratorEntryExecutor extends AbstractGeneratorEntryExecutor 
 		URI fileURI = entry.getElementRef().eResource().getURI().trimFileExtension()
 				.appendFileExtension("xmi");
 		Resource resource = resourceSet.createResource(fileURI);
-		resource.getContents().add(pkg);
+		for (EObject p : pkg) {
+			resource.getContents().add(p);
+
+		}
+
 		try {
 			resource.save(Collections.EMPTY_MAP);
 		} catch (IOException e) {

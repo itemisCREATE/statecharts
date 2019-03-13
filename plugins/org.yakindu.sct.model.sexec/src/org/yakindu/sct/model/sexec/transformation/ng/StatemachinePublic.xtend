@@ -4,7 +4,8 @@
  * 
  * Contributors:
  * 	andreas muelder - itemis AG
- * 
+ *  thomas kutz - itemis AG
+ *  axel terfloth - itemis AG
  */
 package org.yakindu.sct.model.sexec.transformation.ng
 
