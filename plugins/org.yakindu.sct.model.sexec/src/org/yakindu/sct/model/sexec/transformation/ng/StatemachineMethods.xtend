@@ -30,6 +30,7 @@ class StatemachineMethods {
 	@Inject extension StatemachinePublic
 	@Inject extension StateVectorExtensions
 	@Inject extension IStatemachine
+	@Inject ITypeSystem ts
 	
 
 	def defineEnterMethod(ComplexType it, Statechart sc) {
@@ -140,13 +141,12 @@ class StatemachineMethods {
 				expressions += _for(index, index._ref._smaller(stateVector(sc)._ref._fc((ts.getType(ITypeSystem.ARRAY) as ComplexType).features.findFirst[name=="length"])), index._ref._inc) {
 					_switch(stateVector(sc)._ref._get(index._ref), 
 						ef.states.filter[isLeaf].filter[reactMethod!==null]
-							.map[state | _case((state.sourceElement as State).stateEnumerator._ref, state.reactMethod._call(_true))]
+							.map[state | _case((state.sourceElement as State).enumerator._ref, state.reactMethod._call(_true))]
 					)
 				}
 			]
 		]
 	}
-	
 	
 	protected def createCallToSequenceMethod(Sequence seq) {
 		createElementReferenceExpression => [
@@ -154,8 +154,5 @@ class StatemachineMethods {
 			reference = createMethodForSequence(seq)
 		]
 	}
-	
-	
-	
 	
 }
