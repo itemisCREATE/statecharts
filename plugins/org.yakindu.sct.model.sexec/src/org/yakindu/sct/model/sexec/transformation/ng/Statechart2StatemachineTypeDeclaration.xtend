@@ -117,47 +117,12 @@ class Statechart2StatemachineTypeDeclaration {
 		it => [
 			name = "Statemachine"
 			// Implicit operations
-			features += createOperation => [
-				name = "init"
-				typeSpecifier = createTypeSpecifier => [
-					type = ts.getType(ITypeSystem.VOID)
-				]
-			]
-			
-			createEnterMethod
-//			features += createOperation => [
-//				name = "enter"
-//				typeSpecifier = createTypeSpecifier => [
-//					type = ts.getType(ITypeSystem.VOID)
-//				]
-//			]
-
-			createExitMethod
-//			features += createOperation => [
-//				name = "exit"
-//				typeSpecifier = createTypeSpecifier => [
-//					type = ts.getType(ITypeSystem.VOID)
-//				]
-//			]
-			features += createOperation => [
-				name = "isActive"
-				typeSpecifier = createTypeSpecifier => [
-					type = ts.getType(ITypeSystem.BOOLEAN)
-				]
-			]
-			features += createOperation => [
-				name = "isFinal"
-				typeSpecifier = createTypeSpecifier => [
-					type = ts.getType(ITypeSystem.BOOLEAN)
-				]
-			]
-
-			features += createOperation => [
-				name = "runCycle"
-				typeSpecifier = createTypeSpecifier => [
-					type = ts.getType(ITypeSystem.BOOLEAN)
-				]
-			]
+			features += createInitMethod
+			features += createEnterMethod
+			features += createExitMethod
+			features += createIsActiveMethod
+			features += createIsFinalMethod
+			features += createRunCycleMethod
 		]
 	}
 }

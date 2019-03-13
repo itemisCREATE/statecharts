@@ -39,6 +39,7 @@ class ModelSequencer implements IModelSequencer {
 	@Inject extension Statechart2StatemachineTypeDeclaration sc2Type
 	@Inject extension StatemachineMethods smMethods
 	@Inject	extension Sequence2Method s2m
+	@Inject	extension StatemachineProperties smProps
 	
 	
 	/* ==========================================================================
@@ -55,11 +56,15 @@ class ModelSequencer implements IModelSequencer {
 		val scpackage = sc.toTypeDeclaration
 		val sctype = sc.declareStatemachineType
 		
+		sctype.defineProperties(sc)
+		
 		sctype.declareSequenceMethods(ef)
 		
 		sctype.defineEnterMethod(sc)
 		
 		sctype.defineExitMethod(sc)
+		
+		sctype.defineInitMethod(sc)
 		
 		return scpackage
 		
