@@ -68,6 +68,10 @@ class ModelSequencer implements IModelSequencer {
 		
 		sctype.defineIsActiveMethod(sc)
 		
+		sctype.defineIsFinalMethod(sc)
+		
+		sctype.defineRunCycleMethod(sc)
+		
 		return scpackage
 		
 	}

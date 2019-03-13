@@ -24,6 +24,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
+import org.yakindu.base.types.TypesFactory;
 
 /**
  * This is the item provider adapter for a {@link org.yakindu.base.expressions.expressions.ElementReferenceExpression} object.
@@ -342,7 +343,32 @@ public class ElementReferenceExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
-				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createForExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
+				 TypesFactory.eINSTANCE.createProperty()));
 	}
 
 }
