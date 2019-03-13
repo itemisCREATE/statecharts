@@ -34,7 +34,7 @@ class Statechart2StatemachineTypeDeclaration {
 
 	def Package toTypeDeclaration(Statechart sc) {
 		createPackage => [ package |
-			package.name = sc.namespace
+			package.name = if (sc.namespace.nullOrEmpty) "default" else sc.namespace
 
 			package.member += createStatemachineBaseType()
 

@@ -53,7 +53,7 @@ class ModelSequencer implements IModelSequencer {
 		val ef = sc.transformToFlow(acceptor)
 		val ef2 = sc.create
 				
-		val scpackage = sc.toTypeDeclaration => [ name = "foo"]
+		val scpackage = sc.toTypeDeclaration
 		val sctype = sc.declareStatemachineType
 		
 		sctype.declareSequenceMethods(ef)
