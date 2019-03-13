@@ -48,6 +48,10 @@ class StatemachineMethods {
 		it.features += createInitMethod => [
 			body = createBlockExpression => [
 				expressions += stateVectorInitialization(sc)
+				if (sc.create.hasHistory) {
+					expressions += historyStateVectorInitialization(sc)
+				}
+				// TODO: transform init sequence into expressions
 //				expressions += createCallToSequenceMethod(sc.create.initSequence)
 			]
 		]
@@ -63,6 +67,15 @@ class StatemachineMethods {
 		]
 	}
 	
+	def historyStateVectorInitialization(Statechart sc) {
+		val ef = sc.create
+		val i = _variable("i", ITypeSystem.INTEGER, 0._int)
+		_for(i, i._smaller(ef.historyVector.size._int), i._inc) => [
+			it.body = _block(
+				historyStateVector(sc)._ref._get(0._int)._assign(historyStateVector(sc)._ref._fc(noState(sc)))
+			)
+		]
+	}
 	
 	protected def createCallToSequenceMethod(Sequence seq) {
 		createElementReferenceExpression => [
