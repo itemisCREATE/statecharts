@@ -11,25 +11,24 @@
 package org.yakindu.sct.model.sexec.transformation.ng
 
 import com.google.inject.Inject
+import org.yakindu.base.types.Package
 import org.yakindu.base.types.validation.IValidationIssueAcceptor
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer
-import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
-import org.yakindu.sct.model.sexec.transformation.StructureMapping
-import org.yakindu.sct.model.sexec.transformation.BehaviorMapping
 import org.yakindu.sct.model.sexec.transformation.ReactionBuilder
-import org.yakindu.sct.model.sexec.transformation.SequenceBuilder
-import org.yakindu.sct.model.sexec.transformation.StateVectorBuilder
 import org.yakindu.sct.model.sexec.transformation.RetargetReferences
-import org.yakindu.base.types.Type
+import org.yakindu.sct.model.sexec.transformation.SequenceBuilder
+import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
+import org.yakindu.sct.model.sexec.transformation.StateVectorBuilder
+import org.yakindu.sct.model.sexec.transformation.StructureMapping
+import org.yakindu.sct.model.sgraph.Statechart
 
 class ModelSequencer implements IModelSequencer {
 	 
 	@Inject extension SexecElementMapping mapping
 	@Inject extension StructureMapping structureMapping
-	@Inject extension BehaviorMapping behaviorMapping
+	@Inject extension org.yakindu.sct.model.sexec.transformation.BehaviorMapping behaviorMapping
 	@Inject extension ReactionBuilder reactBuilder
 	@Inject extension SequenceBuilder seqBuilder
 	@Inject extension StateVectorBuilder svBuilder
@@ -38,6 +37,8 @@ class ModelSequencer implements IModelSequencer {
 	@Inject extension ReactMethod reactMethod
 	
 	@Inject extension Statechart2StatemachineTypeDeclaration sc2Type
+	@Inject extension StatemachineMethods smMethods
+	@Inject	extension Sequence2Method s2m
 	
 	
 	/* ==========================================================================
@@ -47,13 +48,16 @@ class ModelSequencer implements IModelSequencer {
 		transform(sc, new ListBasedValidationIssueAcceptor)
 	}
 
-	override org.yakindu.base.types.Package transformToPackage(Statechart sc, IValidationIssueAcceptor acceptor) {
+	override Package transformToPackage(Statechart sc, IValidationIssueAcceptor acceptor) {
 		
 		val ef = sc.transform(acceptor)
 				
 		val scpackage = sc.toTypeDeclaration => [ name = "foo"]
+		val sctype = sc.declareStatemachineType
 		
-//		sc.map
+		sctype.declareEnterSequenceMethod(ef)
+		
+		sctype.defineEnterMethod(sc)
 		
 		return scpackage
 		

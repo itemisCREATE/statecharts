@@ -22,6 +22,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.types.Property;
+import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
 
 /**
@@ -198,6 +199,11 @@ public class PropertyItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PROPERTY__INITIAL_VALUE,
+				 TypesFactory.eINSTANCE.createProperty()));
 	}
 
 	/**
@@ -213,7 +219,8 @@ public class PropertyItemProvider
 
 		boolean qualify =
 			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
-			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES;
+			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES ||
+			childFeature == TypesPackage.Literals.PROPERTY__INITIAL_VALUE;
 
 		if (qualify) {
 			return getString

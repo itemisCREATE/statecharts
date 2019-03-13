@@ -124,6 +124,29 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.Declaration} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DeclarationItemProvider declarationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.Declaration}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDeclarationAdapter() {
+		if (declarationItemProvider == null) {
+			declarationItemProvider = new DeclarationItemProvider(this);
+		}
+
+		return declarationItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.Operation} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -661,6 +684,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	public void dispose() {
 		if (packageItemProvider != null) packageItemProvider.dispose();
 		if (typeItemProvider != null) typeItemProvider.dispose();
+		if (declarationItemProvider != null) declarationItemProvider.dispose();
 		if (operationItemProvider != null) operationItemProvider.dispose();
 		if (propertyItemProvider != null) propertyItemProvider.dispose();
 		if (parameterItemProvider != null) parameterItemProvider.dispose();

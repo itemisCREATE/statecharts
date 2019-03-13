@@ -151,6 +151,11 @@ public class MetaCompositeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createDeclaration()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 TypesFactory.eINSTANCE.createPackage()));
 
 		newChildDescriptors.add

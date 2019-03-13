@@ -55,7 +55,7 @@ public class PackageItemProvider
 			super.getPropertyDescriptors(object);
 
 			addDomainIDPropertyDescriptor(object);
-			addImportPropertyDescriptor(object);
+			addImportsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -83,23 +83,23 @@ public class PackageItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Import feature.
+	 * This adds a property descriptor for the Imports feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addImportPropertyDescriptor(Object object) {
+	protected void addImportsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Package_import_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Package_import_feature", "_UI_Package_type"),
+				 getString("_UI_Package_imports_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Package_imports_feature", "_UI_Package_type"),
 				 TypesPackage.Literals.PACKAGE__IMPORTS,
 				 true,
 				 false,
-				 true,
-				 null,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -172,6 +172,7 @@ public class PackageItemProvider
 
 		switch (notification.getFeatureID(org.yakindu.base.types.Package.class)) {
 			case TypesPackage.PACKAGE__DOMAIN_ID:
+			case TypesPackage.PACKAGE__IMPORTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TypesPackage.PACKAGE__MEMBER:
@@ -191,6 +192,11 @@ public class PackageItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PACKAGE__MEMBER,
+				 TypesFactory.eINSTANCE.createDeclaration()));
 
 		newChildDescriptors.add
 			(createChildParameter

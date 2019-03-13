@@ -191,6 +191,11 @@ public class DeclarationItemProvider extends NamedElementItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
+				 TypesFactory.eINSTANCE.createDeclaration()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 TypesFactory.eINSTANCE.createPackage()));
 
 		newChildDescriptors.add
@@ -262,6 +267,11 @@ public class DeclarationItemProvider extends NamedElementItemProvider {
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 TypesFactory.eINSTANCE.createAnnotationType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
+				 TypesFactory.eINSTANCE.createDeclaration()));
 
 		newChildDescriptors.add
 			(createChildParameter

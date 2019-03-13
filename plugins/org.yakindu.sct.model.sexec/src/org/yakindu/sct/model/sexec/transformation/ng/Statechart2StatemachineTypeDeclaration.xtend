@@ -17,6 +17,7 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope
+import com.google.inject.Inject
 
 /**
  * 
@@ -27,6 +28,9 @@ class Statechart2StatemachineTypeDeclaration {
 
 	extension TypesFactory factory = TypesFactory.eINSTANCE
 	extension ITypeSystem ts = GenericTypeSystem.instance
+	
+	@Inject extension StatemachineMethods methods
+	
 
 	def Package toTypeDeclaration(Statechart sc) {
 		createPackage => [ package |
@@ -48,8 +52,8 @@ class Statechart2StatemachineTypeDeclaration {
 		]
 	}
 
-	protected def declareStatemachineType(Statechart sc) {
-		createComplexType => [ scType |
+	public def create createComplexType declareStatemachineType(Statechart sc) {
+		it => [ scType |
 			scType.name = sc.name
 			scType.superTypes += createTypeSpecifier => [
 				type = createStatemachineBaseType()
@@ -119,12 +123,16 @@ class Statechart2StatemachineTypeDeclaration {
 					type = ts.getType(ITypeSystem.VOID)
 				]
 			]
-			features += createOperation => [
-				name = "enter"
-				typeSpecifier = createTypeSpecifier => [
-					type = ts.getType(ITypeSystem.VOID)
-				]
-			]
+			
+			createEnterMethod
+//			features += createOperation => [
+//				name = "enter"
+//				typeSpecifier = createTypeSpecifier => [
+//					type = ts.getType(ITypeSystem.VOID)
+//				]
+//			]
+
+
 			features += createOperation => [
 				name = "exit"
 				typeSpecifier = createTypeSpecifier => [
