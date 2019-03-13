@@ -350,7 +350,8 @@ class SExecExtensions {
 	 
 	def List<Step> enterSequenceFunctions(ExecutionFlow it) {
 		val funcs = new ArrayList<Step>()
-		funcs.addAll(enterSequences.called) 
+		funcs += enterSequences.defaultSequence
+		funcs.addAll(enterSequences.called)
 		states.forEach( s | funcs += s.enterSequences.called )
 		regions.forEach( s | {
 			funcs += s.enterSequences.called

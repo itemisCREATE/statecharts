@@ -1,15 +1,15 @@
 package org.yakindu.sct.model.sexec.transformation.ng
 
+import com.google.inject.Singleton
 import javax.inject.Inject
+import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.typesystem.ITypeSystem
-import org.yakindu.sct.model.sgraph.Statechart
-import com.google.inject.Singleton
-import org.yakindu.base.expressions.expressions.ExpressionsFactory
-import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
+import org.yakindu.sct.model.sgraph.Statechart
 
 @Singleton
 class StatemachineMethods {
@@ -22,22 +22,23 @@ class StatemachineMethods {
 	@Inject extension Sequence2Method
 
 	def defineEnterMethod(ComplexType it, Statechart sc) {
-
-		val ExecutionFlow flow = sc.create
-		
-		val enterMethod = createEnterMethod
-		
-		enterMethod.body = createBlockExpression => [
-			expressions += createCallToEnterSeqenceMethod
+		createEnterMethod => [
+			body = createBlockExpression => [
+				expressions += createCallToEnterSeqenceMethod(sc.create)
+			]
 		]
-		
-			
 	}
 	
-	def createCallToEnterSeqenceMethod() {
+//	def defineExitMethod(ComplexType it, Statechart sc) {
+//		createExitMethod => [
+//			
+//		]
+//	}
+	
+	protected def createCallToEnterSeqenceMethod(ExecutionFlow flow) {
 		createElementReferenceExpression => [
 			operationCall = true
-			reference = createDefaultEnterSequenceMethod
+			reference = createMethodForSequence(flow.enterSequences.defaultSequence)
 		]
 	}
 
@@ -48,7 +49,6 @@ class StatemachineMethods {
 				type = ts.getType(ITypeSystem.VOID)
 			]
 		]
-		
 		smtype.features += it		
 	}
 	

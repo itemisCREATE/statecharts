@@ -11,6 +11,8 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 
 import static org.yakindu.base.types.typesystem.ITypeSystem.VOID
 import com.google.inject.Singleton
+import org.yakindu.sct.model.sexec.Sequence
+import org.yakindu.sct.model.sexec.naming.INamingService
 
 @Singleton class Sequence2Method {
 
@@ -18,20 +20,21 @@ import com.google.inject.Singleton
 	@Inject ITypeSystem ts
 	extension SexecFactory sexecFactory = SexecFactory.eINSTANCE
 	extension TypesFactory typesFactory = TypesFactory.eINSTANCE
+	@Inject extension INamingService naming
+	
 
-	def declareEnterSequenceMethod(ComplexType it, ExecutionFlow flow) {
-		val body = EcoreUtil.copy(flow.enterSequences.defaultSequence)
-		val method = createDefaultEnterSequenceMethod() => [
-			bodySequence = body
+	def declareSequenceMethods(ComplexType scType, ExecutionFlow flow) {
+		flow.allFunctions.filter(Sequence).forEach [ fun |
+			scType.features += createMethodForSequence(fun)
 		]
-		it.features += method
 	}
 
-	def create createMethod createDefaultEnterSequenceMethod() {
-		name = "defaultEnterSequence"
+	def create createMethod createMethodForSequence(Sequence body) {
+		name = body.getShortName
 		typeSpecifier = createTypeSpecifier => [
 			type = ts.getType(VOID)
 		]
+		bodySequence = EcoreUtil.copy(body)
 	}
 
 }

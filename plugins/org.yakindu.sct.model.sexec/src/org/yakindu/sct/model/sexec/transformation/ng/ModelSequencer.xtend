@@ -50,20 +50,33 @@ class ModelSequencer implements IModelSequencer {
 
 	override Package transformToPackage(Statechart sc, IValidationIssueAcceptor acceptor) {
 		
-		val ef = sc.transform(acceptor)
+		val ef = sc.transformToFlow(acceptor)
+		val ef2 = sc.create
 				
 		val scpackage = sc.toTypeDeclaration => [ name = "foo"]
 		val sctype = sc.declareStatemachineType
 		
-		sctype.declareEnterSequenceMethod(ef)
+		sctype.declareSequenceMethods(ef)
 		
 		sctype.defineEnterMethod(sc)
+		
+//		sctype.defineExitMethod(sc)
 		
 		return scpackage
 		
 	}
 	
 	override ExecutionFlow transform(Statechart sc, IValidationIssueAcceptor acceptor) {
+		
+		val ef = sc.transformToFlow(acceptor)
+		
+		//clear create caches to avoid memory leak with repetetive generator cycles
+		mapping.cleanup
+		
+		return ef
+	}
+
+	protected def ExecutionFlow transformToFlow(Statechart sc, IValidationIssueAcceptor acceptor) {
 		
 		val ef = sc.create
 		
@@ -108,12 +121,7 @@ class ModelSequencer implements IModelSequencer {
 		
 		// retarget declaration refs
 		ef.retargetDeclRefs
-		
-		
-		
-		//clear create caches to avoid memory leak with repetetive generator cycles
-		mapping.cleanup
-		
+				
 		return ef
 	}
 
