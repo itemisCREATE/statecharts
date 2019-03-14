@@ -16,6 +16,7 @@ import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sexec.transformation.ArrayType
 
 @Singleton
 class StatemachineMethods {
@@ -32,10 +33,8 @@ class StatemachineMethods {
 	@Inject extension StateVectorExtensions
 	@Inject extension IStatemachine
 	@Inject extension SgraphExtensions
+	@Inject extension ArrayType
 	
-	@Inject ITypeSystem ts
-	
-
 	def defineEnterMethod(ComplexType it, Statechart sc) {
 		it.features += createEnterMethod => [
 			body = createBlockExpression => [
@@ -141,7 +140,7 @@ class StatemachineMethods {
 		it.features += createRunCycleMethod => [
 			body = createBlockExpression => [
 				expressions += 
-				_for(nextStateIndex(sc)._ref._assign(0._int), nextStateIndex(sc)._ref._smaller(stateVector(sc)._ref._fc(arrayLength)), nextStateIndex(sc)._ref._inc) => [
+				_for(nextStateIndex(sc)._ref._assign(0._int), nextStateIndex(sc)._ref._smaller(stateVector(sc)._ref._fc(_array._length)), nextStateIndex(sc)._ref._inc) => [
 					body = _block(_switch(stateVector(sc)._ref._get(nextStateIndex(sc)._ref), 
 						ef.states.filter[isLeaf].filter[reactMethod!==null].map[state | 
 							_case((state.sourceElement as RegularState).enumerator._ref, state.reactMethod._call(_true))
@@ -151,10 +150,6 @@ class StatemachineMethods {
 				]
 			]
 		]
-	}
-	
-	protected def arrayLength() {
-		(ts.getType(ITypeSystem.ARRAY) as ComplexType).features.findFirst[name=="length"]
 	}
 	
 	protected def createCallToSequenceMethod(Sequence seq) {

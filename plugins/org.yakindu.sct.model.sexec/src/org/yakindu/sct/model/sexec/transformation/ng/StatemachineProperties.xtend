@@ -4,18 +4,16 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.TypesFactory
+import org.yakindu.base.types.Visibility
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
+import org.yakindu.sct.model.sexec.transformation.StateVectorBuilder
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.base.types.Visibility
-import org.yakindu.sct.model.sexec.transformation.StateVectorBuilder
-import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
-import org.yakindu.base.types.Operation
+import org.yakindu.sct.model.sexec.transformation.ArrayType
 
 @Singleton class StatemachineProperties {
-	
-	@Inject ITypeSystem ts
 	
 	@Inject extension StatemachinePublic
 	@Inject extension SgraphExtensions
@@ -23,6 +21,7 @@ import org.yakindu.base.types.Operation
 	
 	@Inject extension TypeBuilder
 	@Inject extension ExpressionBuilder
+	@Inject extension ArrayType
 	
 	extension TypesFactory typesFactory = TypesFactory.eINSTANCE
 	
@@ -42,34 +41,19 @@ import org.yakindu.base.types.Operation
 	
 	def create createProperty stateVector(Statechart sc) {
 		name = "stateVector"
-		typeSpecifier = createArrayOfStateType(sc)
+		typeSpecifier = _array._of(sc.statesEnumeration)
 		visibility = Visibility.PROTECTED
 		
 		val size = sc.createStateVector.size
-		initialValue = arrayType._ref._fc(arrayType.ctor, size._int)
+		initialValue = _array._ref._fc(_array._new, size._int)
 	}
 	
 	def create createProperty historyStateVector(Statechart sc) {
 		name = "historyStateVector"
-		typeSpecifier = createArrayOfStateType(sc)
+		typeSpecifier = _array._of(sc.statesEnumeration)
 		visibility = Visibility.PROTECTED
-	}
-	
-	protected def createArrayOfStateType(Statechart sc) {
-		createTypeSpecifier => [
-			type = arrayType
-			typeArguments += createTypeSpecifier => [
-				type = statesEnumeration(sc)
-			]
-		]
-	}
-	
-	protected def arrayType() {
-		ts.getType(ITypeSystem.ARRAY) as ComplexType
-	}
-	
-	protected def ctor(ComplexType type) {
-		type.allFeatures.filter(Operation).findFirst[name == "new"]
+		
+		// TODO: initialize with size
 	}
 	
 }
