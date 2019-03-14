@@ -281,11 +281,6 @@ public class StatementItemProvider extends StepItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.STATEMENT__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.STATEMENT__EXPRESSION,
 				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
 
 		newChildDescriptors.add

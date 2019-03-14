@@ -62,6 +62,7 @@ public class ExecutionScopeItemProvider
 			addNamePropertyDescriptor(object);
 			addStaticPropertyDescriptor(object);
 			addIdPropertyDescriptor(object);
+			addVisibilityPropertyDescriptor(object);
 			addAbstractPropertyDescriptor(object);
 			addVisiblePropertyDescriptor(object);
 			addSubScopesPropertyDescriptor(object);
@@ -129,6 +130,28 @@ public class ExecutionScopeItemProvider
 				 getString("_UI_PropertyDescriptor_description", "_UI_Declaration_id_feature", "_UI_Declaration_type"),
 				 TypesPackage.Literals.DECLARATION__ID,
 				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Visibility feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addVisibilityPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Declaration_visibility_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Declaration_visibility_feature", "_UI_Declaration_type"),
+				 TypesPackage.Literals.DECLARATION__VISIBILITY,
+				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
@@ -303,6 +326,7 @@ public class ExecutionScopeItemProvider
 			case SexecPackage.EXECUTION_SCOPE__ANNOTATION_INFO:
 			case SexecPackage.EXECUTION_SCOPE__STATIC:
 			case SexecPackage.EXECUTION_SCOPE__ID:
+			case SexecPackage.EXECUTION_SCOPE__VISIBILITY:
 			case SexecPackage.EXECUTION_SCOPE__ABSTRACT:
 			case SexecPackage.EXECUTION_SCOPE__VISIBLE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
@@ -392,11 +416,6 @@ public class ExecutionScopeItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 SexecFactory.eINSTANCE.createTimeEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -546,11 +565,6 @@ public class ExecutionScopeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 SGraphFactory.eINSTANCE.createImportDeclaration()));
 
 		newChildDescriptors.add
@@ -692,11 +706,6 @@ public class ExecutionScopeItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
 				 SexecFactory.eINSTANCE.createTimeEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
 
 		newChildDescriptors.add
 			(createChildParameter

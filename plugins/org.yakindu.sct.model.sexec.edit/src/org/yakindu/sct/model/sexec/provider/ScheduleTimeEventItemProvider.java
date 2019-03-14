@@ -309,11 +309,6 @@ public class ScheduleTimeEventItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
 				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
 
 		newChildDescriptors.add

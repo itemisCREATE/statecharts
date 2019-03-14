@@ -140,11 +140,6 @@ public class LocalVariableDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.LOCAL_VARIABLE_DEFINITION__VARIABLE,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.LOCAL_VARIABLE_DEFINITION__VARIABLE,
 				 TypesFactory.eINSTANCE.createProperty()));
 
 		newChildDescriptors.add
@@ -286,11 +281,6 @@ public class LocalVariableDefinitionItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.LOCAL_VARIABLE_DEFINITION__INITIAL_VALUE,
 				 ExpressionsFactory.eINSTANCE.createForExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.LOCAL_VARIABLE_DEFINITION__INITIAL_VALUE,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
 
 		newChildDescriptors.add
 			(createChildParameter
