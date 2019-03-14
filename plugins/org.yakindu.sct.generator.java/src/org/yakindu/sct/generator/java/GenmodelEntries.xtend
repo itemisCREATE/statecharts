@@ -101,6 +101,13 @@ class GenmodelEntries {
 		}
 		return flow.statemachineName
 	}
+	
+	def getImplementationSuffix(GeneratorEntry it) {
+		if (implementationSuffixParameter !== null) {
+			return implementationSuffixParameter.stringValue
+		}
+		return null
+	}
 
 	def getImplementationPackageName(ExecutionFlow it, GeneratorEntry entry) {
 		entry.basePackageName + "." + entry.getImplementationSuffix(it).toLowerCase();
