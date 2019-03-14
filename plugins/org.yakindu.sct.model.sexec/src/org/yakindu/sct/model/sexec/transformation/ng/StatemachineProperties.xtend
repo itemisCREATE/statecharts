@@ -7,8 +7,9 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sgraph.Statechart
+import com.google.inject.Singleton
 
-class StatemachineProperties {
+@Singleton class StatemachineProperties {
 	
 	@Inject ITypeSystem ts
 	

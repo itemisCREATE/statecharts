@@ -10,9 +10,9 @@
 package org.yakindu.sct.model.sexec.transformation.ng
 
 import com.google.inject.Inject
+import com.google.inject.Singleton
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.types.ComplexType
-import org.yakindu.base.types.Package
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
@@ -30,7 +30,7 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
  * @author axel terfloth
  * 
  */
-class StatemachinePublic {
+@Singleton class StatemachinePublic {
 
 	extension TypesFactory factory = TypesFactory.eINSTANCE
 	extension ITypeSystem ts = GenericTypeSystem.instance
@@ -106,8 +106,9 @@ class StatemachinePublic {
 			annotationInfo = createAnnotatableElement
 			sc.eAllContents.filter(RegularState).forEach [ state |
 				enumerator += state.enumerator
-				enumerator += sc.noState
 			]
+			enumerator += sc.noState
+			
 		]
 	}
 	
@@ -117,7 +118,7 @@ class StatemachinePublic {
 	
 	
 	protected def create createEnumerator noState(Statechart sc) {
-		createEnumerator => [
+		it => [
 			name = "__NoState__"
 		]
 	}
