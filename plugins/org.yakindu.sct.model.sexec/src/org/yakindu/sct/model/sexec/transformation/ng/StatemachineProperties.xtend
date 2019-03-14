@@ -1,13 +1,14 @@
 package org.yakindu.sct.model.sexec.transformation.ng
 
 import com.google.inject.Inject
+import com.google.inject.Singleton
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
+import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 import org.yakindu.sct.model.sgraph.Statechart
-import com.google.inject.Singleton
 
 @Singleton class StatemachineProperties {
 	
@@ -15,7 +16,9 @@ import com.google.inject.Singleton
 	
 	@Inject extension StatemachinePublic
 	@Inject extension SexecElementMapping
-	@Inject extension SExecExtensions  
+	@Inject extension SExecExtensions
+	
+	@Inject extension TypeBuilder
 	
 	extension TypesFactory typesFactory = TypesFactory.eINSTANCE
 	
@@ -24,6 +27,12 @@ import com.google.inject.Singleton
 		if (sc.create.hasHistory) {
 			it.features += historyStateVector(sc)
 		}
+		it.features += nextStateIndex(sc)
+	}
+	
+	def create createProperty nextStateIndex(Statechart sc) {
+		name = "nextStateIndex"
+		_type(ITypeSystem.INTEGER)
 	}
 	
 	def create createProperty stateVector(Statechart sc) {
