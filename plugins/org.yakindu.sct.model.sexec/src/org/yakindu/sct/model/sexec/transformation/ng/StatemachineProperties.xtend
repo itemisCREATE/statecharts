@@ -8,6 +8,7 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.base.types.Visibility
 
 @Singleton class StatemachineProperties {
 	
@@ -31,16 +32,19 @@ import org.yakindu.sct.model.sgraph.Statechart
 	def create createProperty nextStateIndex(Statechart sc) {
 		name = "nextStateIndex"
 		_type(ITypeSystem.INTEGER)
+		visibility = Visibility.PROTECTED
 	}
 	
 	def create createProperty stateVector(Statechart sc) {
 		name = "stateVector"
 		typeSpecifier = createArrayOfStateType(sc)
+		visibility = Visibility.PROTECTED
 	}
 	
 	def create createProperty historyStateVector(Statechart sc) {
 		name = "historyStateVector"
 		typeSpecifier = createArrayOfStateType(sc)
+		visibility = Visibility.PROTECTED
 	}
 	
 	protected def createArrayOfStateType(Statechart sc) {

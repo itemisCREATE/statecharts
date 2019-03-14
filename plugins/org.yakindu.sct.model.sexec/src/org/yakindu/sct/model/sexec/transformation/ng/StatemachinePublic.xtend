@@ -104,11 +104,10 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 		it => [
 			name = '''«sc.name»States'''
 			annotationInfo = createAnnotatableElement
+			enumerator += sc.noState
 			sc.eAllContents.filter(RegularState).forEach [ state |
 				enumerator += state.enumerator
 			]
-			enumerator += sc.noState
-			
 		]
 	}
 	

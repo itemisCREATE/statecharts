@@ -16,6 +16,7 @@ import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
+import org.yakindu.sct.model.sgraph.RegularState
 
 @Singleton
 class StatemachineMethods {
@@ -129,7 +130,7 @@ class StatemachineMethods {
 	protected def equalsState(Statechart sc, ExecutionState fs, int index) {
 		stateVector(sc)._ref._get(index._int)._equals(
 			if (fs.stateVector.offset == index) {
-				stateVector(sc)._ref._fc((fs.sourceElement as State).enumerator)
+				stateVector(sc)._ref._fc((fs.sourceElement as RegularState).enumerator)
 			} else {
 				stateVector(sc)._ref._fc(noState(sc))
 			}
@@ -144,7 +145,7 @@ class StatemachineMethods {
 				_for(nextStateIndex(sc)._ref._assign(0._int), nextStateIndex(sc)._ref._smaller(stateVector(sc)._ref._fc(arrayLength)), nextStateIndex(sc)._ref._inc) => [
 					body = _block(_switch(stateVector(sc)._ref._get(nextStateIndex(sc)._ref), 
 						ef.states.filter[isLeaf].filter[reactMethod!==null].map[state | 
-							_case((state.sourceElement as State).enumerator._ref, state.reactMethod._call(_true))
+							_case((state.sourceElement as RegularState).enumerator._ref, state.reactMethod._call(_true))
 						]
 					))
 					
