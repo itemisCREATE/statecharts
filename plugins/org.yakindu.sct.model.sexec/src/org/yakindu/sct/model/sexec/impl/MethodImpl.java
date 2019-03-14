@@ -59,6 +59,7 @@ public class MethodImpl extends OperationImpl implements Method {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Sequence getBodySequence() {
 		return bodySequence;
 	}
@@ -83,6 +84,7 @@ public class MethodImpl extends OperationImpl implements Method {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBodySequence(Sequence newBodySequence) {
 		if (newBodySequence != bodySequence) {
 			NotificationChain msgs = null;

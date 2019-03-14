@@ -25,6 +25,7 @@ import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypedDeclaration;
 import org.yakindu.base.types.TypedElement;
+import org.yakindu.sct.model.sexec.*;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;

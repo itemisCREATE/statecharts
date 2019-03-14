@@ -144,6 +144,7 @@ public class DeclarationImpl extends NamedElementImpl implements Declaration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Annotation> getAnnotations() {
 		if (annotations == null) {
 			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, TypesPackage.DECLARATION__ANNOTATIONS);
@@ -156,6 +157,7 @@ public class DeclarationImpl extends NamedElementImpl implements Declaration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AnnotatableElement getAnnotationInfo() {
 		return annotationInfo;
 	}
@@ -180,6 +182,7 @@ public class DeclarationImpl extends NamedElementImpl implements Declaration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAnnotationInfo(AnnotatableElement newAnnotationInfo) {
 		if (newAnnotationInfo != annotationInfo) {
 			NotificationChain msgs = null;
@@ -199,6 +202,7 @@ public class DeclarationImpl extends NamedElementImpl implements Declaration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Declaration> getMetaFeatures() {
 		if (metaFeatures == null) {
 			metaFeatures = new EObjectContainmentEList<Declaration>(Declaration.class, this, TypesPackage.DECLARATION__META_FEATURES);
@@ -448,6 +452,7 @@ public class DeclarationImpl extends NamedElementImpl implements Declaration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Visibility getVisibility() {
 		return visibility;
 	}
@@ -457,6 +462,7 @@ public class DeclarationImpl extends NamedElementImpl implements Declaration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVisibility(Visibility newVisibility) {
 		Visibility oldVisibility = visibility;
 		visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;

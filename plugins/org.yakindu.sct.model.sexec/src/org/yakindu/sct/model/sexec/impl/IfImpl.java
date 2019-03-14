@@ -90,6 +90,7 @@ public class IfImpl extends StepImpl implements If {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Check getCheck() {
 		return check;
 	}
@@ -114,6 +115,7 @@ public class IfImpl extends StepImpl implements If {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCheck(Check newCheck) {
 		if (newCheck != check) {
 			NotificationChain msgs = null;
@@ -133,6 +135,7 @@ public class IfImpl extends StepImpl implements If {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Step getThenStep() {
 		return thenStep;
 	}
@@ -157,6 +160,7 @@ public class IfImpl extends StepImpl implements If {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setThenStep(Step newThenStep) {
 		if (newThenStep != thenStep) {
 			NotificationChain msgs = null;
@@ -176,6 +180,7 @@ public class IfImpl extends StepImpl implements If {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Step getElseStep() {
 		return elseStep;
 	}
@@ -200,6 +205,7 @@ public class IfImpl extends StepImpl implements If {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setElseStep(Step newElseStep) {
 		if (newElseStep != elseStep) {
 			NotificationChain msgs = null;

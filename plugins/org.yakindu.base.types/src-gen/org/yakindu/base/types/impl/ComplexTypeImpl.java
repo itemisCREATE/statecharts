@@ -81,6 +81,7 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<TypeParameter> getTypeParameters() {
 		if (typeParameters == null) {
 			typeParameters = new EObjectContainmentEList<TypeParameter>(TypeParameter.class, this, TypesPackage.COMPLEX_TYPE__TYPE_PARAMETERS);
@@ -93,6 +94,7 @@ public class ComplexTypeImpl extends TypeImpl implements ComplexType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Declaration> getFeatures() {
 		if (features == null) {
 			features = new EObjectContainmentEList<Declaration>(Declaration.class, this, TypesPackage.COMPLEX_TYPE__FEATURES);

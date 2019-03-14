@@ -71,6 +71,7 @@ public class LocalVariableDefinitionImpl extends StepImpl implements LocalVariab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Property getVariable() {
 		return variable;
 	}
@@ -95,6 +96,7 @@ public class LocalVariableDefinitionImpl extends StepImpl implements LocalVariab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVariable(Property newVariable) {
 		if (newVariable != variable) {
 			NotificationChain msgs = null;
@@ -114,6 +116,7 @@ public class LocalVariableDefinitionImpl extends StepImpl implements LocalVariab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Expression getInitialValue() {
 		return initialValue;
 	}
@@ -138,6 +141,7 @@ public class LocalVariableDefinitionImpl extends StepImpl implements LocalVariab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInitialValue(Expression newInitialValue) {
 		if (newInitialValue != initialValue) {
 			NotificationChain msgs = null;

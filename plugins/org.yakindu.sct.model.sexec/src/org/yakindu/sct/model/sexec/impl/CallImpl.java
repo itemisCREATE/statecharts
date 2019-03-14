@@ -67,6 +67,7 @@ public class CallImpl extends StepImpl implements Call {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Step getStep() {
 		if (step != null && step.eIsProxy()) {
 			InternalEObject oldStep = (InternalEObject)step;
@@ -108,6 +109,7 @@ public class CallImpl extends StepImpl implements Call {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStep(Step newStep) {
 		if (newStep != step) {
 			NotificationChain msgs = null;

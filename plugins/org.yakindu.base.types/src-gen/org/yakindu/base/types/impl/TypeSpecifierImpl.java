@@ -76,6 +76,7 @@ public class TypeSpecifierImpl extends EObjectImpl implements TypeSpecifier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Type getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
@@ -102,6 +103,7 @@ public class TypeSpecifierImpl extends EObjectImpl implements TypeSpecifier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(Type newType) {
 		Type oldType = type;
 		type = newType;
@@ -114,6 +116,7 @@ public class TypeSpecifierImpl extends EObjectImpl implements TypeSpecifier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<TypeSpecifier> getTypeArguments() {
 		if (typeArguments == null) {
 			typeArguments = new EObjectContainmentEList<TypeSpecifier>(TypeSpecifier.class, this, TypesPackage.TYPE_SPECIFIER__TYPE_ARGUMENTS);
