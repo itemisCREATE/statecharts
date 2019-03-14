@@ -32,6 +32,7 @@ import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.base.types.Visibility;
 import org.yakindu.sct.model.sexec.ExecutionNode;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.Sequence;
@@ -51,6 +52,7 @@ import org.yakindu.sct.model.sexec.SexecPackage;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getMetaFeatures <em>Meta Features</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#isVisible <em>Visible</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getSuperTypes <em>Super Types</em>}</li>
@@ -144,6 +146,26 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * @ordered
 	 */
 	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Visibility VISIBILITY_EDEFAULT = Visibility.PUBLIC;
+
+	/**
+	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected Visibility visibility = VISIBILITY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
@@ -379,6 +401,27 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 */
 	public String getId() {
 		return getName();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Visibility getVisibility() {
+		return visibility;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVisibility(Visibility newVisibility) {
+		Visibility oldVisibility = visibility;
+		visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_NODE__VISIBILITY, oldVisibility, visibility));
 	}
 
 	/**
@@ -682,6 +725,8 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 				return isStatic();
 			case SexecPackage.EXECUTION_NODE__ID:
 				return getId();
+			case SexecPackage.EXECUTION_NODE__VISIBILITY:
+				return getVisibility();
 			case SexecPackage.EXECUTION_NODE__ABSTRACT:
 				return isAbstract();
 			case SexecPackage.EXECUTION_NODE__VISIBLE:
@@ -729,6 +774,9 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 				return;
 			case SexecPackage.EXECUTION_NODE__STATIC:
 				setStatic((Boolean)newValue);
+				return;
+			case SexecPackage.EXECUTION_NODE__VISIBILITY:
+				setVisibility((Visibility)newValue);
 				return;
 			case SexecPackage.EXECUTION_NODE__ABSTRACT:
 				setAbstract((Boolean)newValue);
@@ -788,6 +836,9 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 			case SexecPackage.EXECUTION_NODE__STATIC:
 				setStatic(STATIC_EDEFAULT);
 				return;
+			case SexecPackage.EXECUTION_NODE__VISIBILITY:
+				setVisibility(VISIBILITY_EDEFAULT);
+				return;
 			case SexecPackage.EXECUTION_NODE__ABSTRACT:
 				setAbstract(ABSTRACT_EDEFAULT);
 				return;
@@ -839,6 +890,8 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 				return static_ != STATIC_EDEFAULT;
 			case SexecPackage.EXECUTION_NODE__ID:
 				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
+			case SexecPackage.EXECUTION_NODE__VISIBILITY:
+				return visibility != VISIBILITY_EDEFAULT;
 			case SexecPackage.EXECUTION_NODE__ABSTRACT:
 				return abstract_ != ABSTRACT_EDEFAULT;
 			case SexecPackage.EXECUTION_NODE__VISIBLE:
@@ -891,6 +944,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 			switch (derivedFeatureID) {
 				case SexecPackage.EXECUTION_NODE__STATIC: return TypesPackage.DECLARATION__STATIC;
 				case SexecPackage.EXECUTION_NODE__ID: return TypesPackage.DECLARATION__ID;
+				case SexecPackage.EXECUTION_NODE__VISIBILITY: return TypesPackage.DECLARATION__VISIBILITY;
 				default: return -1;
 			}
 		}
@@ -947,6 +1001,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 			switch (baseFeatureID) {
 				case TypesPackage.DECLARATION__STATIC: return SexecPackage.EXECUTION_NODE__STATIC;
 				case TypesPackage.DECLARATION__ID: return SexecPackage.EXECUTION_NODE__ID;
+				case TypesPackage.DECLARATION__VISIBILITY: return SexecPackage.EXECUTION_NODE__VISIBILITY;
 				default: return -1;
 			}
 		}
@@ -987,6 +1042,8 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 		result.append(name);
 		result.append(", static: ");
 		result.append(static_);
+		result.append(", visibility: ");
+		result.append(visibility);
 		result.append(", abstract: ");
 		result.append(abstract_);
 		result.append(", visible: ");
