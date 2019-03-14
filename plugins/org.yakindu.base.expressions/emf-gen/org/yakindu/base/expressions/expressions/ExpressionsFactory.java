@@ -355,15 +355,6 @@ public interface ExpressionsFactory extends EFactory {
 	ForExpression createForExpression();
 
 	/**
-	 * Returns a new object of class '<em>For Var Decl</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>For Var Decl</em>'.
-	 * @generated
-	 */
-	ForVarDecl createForVarDecl();
-
-	/**
 	 * Returns a new object of class '<em>Throw Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

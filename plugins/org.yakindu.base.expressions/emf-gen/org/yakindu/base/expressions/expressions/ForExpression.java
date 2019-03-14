@@ -18,7 +18,7 @@ import org.yakindu.base.types.Property;
  * <ul>
  *   <li>{@link org.yakindu.base.expressions.expressions.ForExpression#getBody <em>Body</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.ForExpression#getCondition <em>Condition</em>}</li>
- *   <li>{@link org.yakindu.base.expressions.expressions.ForExpression#getVarDecls <em>Var Decls</em>}</li>
+ *   <li>{@link org.yakindu.base.expressions.expressions.ForExpression#getVarInits <em>Var Inits</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.ForExpression#getVarUpdates <em>Var Updates</em>}</li>
  * </ul>
  *
@@ -80,20 +80,20 @@ public interface ForExpression extends Expression {
 	void setCondition(Expression value);
 
 	/**
-	 * Returns the value of the '<em><b>Var Decls</b></em>' containment reference list.
-	 * The list contents are of type {@link org.yakindu.base.types.Property}.
+	 * Returns the value of the '<em><b>Var Inits</b></em>' containment reference list.
+	 * The list contents are of type {@link org.yakindu.base.types.Expression}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Var Decls</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Var Inits</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Var Decls</em>' containment reference list.
-	 * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getForExpression_VarDecls()
+	 * @return the value of the '<em>Var Inits</em>' containment reference list.
+	 * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getForExpression_VarInits()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Property> getVarDecls();
+	EList<Expression> getVarInits();
 
 	/**
 	 * Returns the value of the '<em><b>Var Updates</b></em>' containment reference list.
