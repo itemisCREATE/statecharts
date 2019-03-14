@@ -60,9 +60,9 @@ class ExpressionBuilder {
 
 	def ElementReferenceExpression _call(Operation op, Expression... arguments) {
 		createElementReferenceExpression => [
-			reference = op
-			operationCall = true
-			expressions.addAll(arguments)
+			it.reference = op
+			it.operationCall = true
+			it.arguments.addAll(arguments.map[arg|createArgument => [value = arg]])
 		]
 	}
 
@@ -73,10 +73,12 @@ class ExpressionBuilder {
 		]
 	}
 	
-	def FeatureCall _fc(Expression owner, Declaration feature) {
+	def FeatureCall _fc(Expression owner, Declaration feature, Expression... arguments) {
 		createFeatureCall => [fc |
 			fc.owner = owner
 			fc.feature = feature
+			fc.operationCall = feature instanceof Operation
+			fc.arguments.addAll(arguments.map[arg|createArgument => [value = arg]])
 		]
 	}
 	

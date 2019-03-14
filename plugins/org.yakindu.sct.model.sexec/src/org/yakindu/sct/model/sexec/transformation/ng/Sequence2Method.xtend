@@ -13,6 +13,7 @@ import static org.yakindu.base.types.typesystem.ITypeSystem.VOID
 import com.google.inject.Singleton
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.base.types.Visibility
 
 @Singleton class Sequence2Method {
 
@@ -34,6 +35,7 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 		typeSpecifier = createTypeSpecifier => [
 			type = ts.getType(VOID)
 		]
+		visibility = Visibility.PROTECTED
 		bodySequence = EcoreUtil.copy(body)
 	}
 

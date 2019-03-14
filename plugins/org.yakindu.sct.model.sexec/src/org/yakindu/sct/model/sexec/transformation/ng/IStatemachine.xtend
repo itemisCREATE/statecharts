@@ -28,6 +28,8 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 	extension TypesFactory factory = TypesFactory.eINSTANCE
  	@Inject extension TypeBuilder tBuilder
  	@Inject extension ITypeSystem tSystem
+ 	
+ 	public static val String NAME = "IStatemachine"
  
  
  	def create createPackage scrPackage() {
@@ -36,10 +38,9 @@ import org.yakindu.base.types.typesystem.ITypeSystem
  		]	
  	}
  	
- 	 	
  	def create createComplexType statemachineInterfaceType() {
 		it => [
-			name = "IStatemachine"
+			name = NAME
 			// Implicit operations
 			features += createInitMethod
 			features += createEnterMethod
