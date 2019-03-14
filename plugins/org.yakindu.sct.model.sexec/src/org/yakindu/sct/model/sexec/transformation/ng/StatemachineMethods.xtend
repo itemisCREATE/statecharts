@@ -12,11 +12,10 @@ import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
-import org.yakindu.sct.model.sexec.transformation.TypeBuilder
-import org.yakindu.sct.model.sgraph.State
-import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
+import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.Statechart
 
 @Singleton
 class StatemachineMethods {
