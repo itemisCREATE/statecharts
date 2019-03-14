@@ -67,7 +67,7 @@ class StatemachineMethods {
 		val i = _variable("i", ITypeSystem.INTEGER, 0._int)
 		_for(i, i._smaller(ef.stateVector.size._int), i._inc) => [
 			it.body = _block(
-				stateVector(sc)._ref._get(0._int)._assign(stateVector(sc)._ref._fc(noState(sc)))
+				stateVector(sc)._ref._get(0._int)._assign(statesEnumeration(sc)._ref._fc(noState(sc)))
 			)
 		]
 	}
@@ -97,7 +97,7 @@ class StatemachineMethods {
 	}
 	
 	protected def notEqualsNoState(Statechart sc, int index) {
-		stateVector(sc)._ref._get(index._int)._notEquals(stateVector(sc)._ref._fc(noState(sc)))
+		stateVector(sc)._ref._get(index._int)._notEquals(statesEnumeration(sc)._ref._fc(noState(sc)))
 	}
 	
 	def defineIsFinalMethod(ComplexType it, Statechart sc) {
@@ -137,15 +137,22 @@ class StatemachineMethods {
 		val ef = sc.create
 		it.features += createRunCycleMethod => [
 			body = createBlockExpression => [
-				val index = _variable("index", ITypeSystem.INTEGER, 0._int)
-				expressions += _for(index, index._ref._smaller(stateVector(sc)._ref._fc((ts.getType(ITypeSystem.ARRAY) as ComplexType).features.findFirst[name=="length"])), index._ref._inc) {
-					_switch(stateVector(sc)._ref._get(index._ref), 
-						ef.states.filter[isLeaf].filter[reactMethod!==null]
-							.map[state | _case((state.sourceElement as State).enumerator._ref, state.reactMethod._call(_true))]
+				val i = _variable("index", ITypeSystem.INTEGER, 0._int)
+				expressions += 
+				_for(i, i._ref._smaller(stateVector(sc)._ref._fc(arrayLength)), i._ref._inc) => [
+					_switch(stateVector(sc)._ref._get(i._ref), 
+						ef.states.filter[isLeaf].filter[reactMethod!==null].map[state | 
+							_case((state.sourceElement as State).enumerator._ref, state.reactMethod._call(_true))
+						]
 					)
-				}
+					
+				]
 			]
 		]
+	}
+	
+	protected def arrayLength() {
+		(ts.getType(ITypeSystem.ARRAY) as ComplexType).features.findFirst[name=="length"]
 	}
 	
 	protected def createCallToSequenceMethod(Sequence seq) {
