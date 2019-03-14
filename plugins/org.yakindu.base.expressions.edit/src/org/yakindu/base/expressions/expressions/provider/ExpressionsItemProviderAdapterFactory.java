@@ -952,29 +952,6 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.ForVarDecl} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ForVarDeclItemProvider forVarDeclItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.ForVarDecl}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createForVarDeclAdapter() {
-		if (forVarDeclItemProvider == null) {
-			forVarDeclItemProvider = new ForVarDeclItemProvider(this);
-		}
-
-		return forVarDeclItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.ThrowExpression} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1140,7 +1117,6 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 		if (eventRaisingExpressionItemProvider != null) eventRaisingExpressionItemProvider.dispose();
 		if (eventValueReferenceExpressionItemProvider != null) eventValueReferenceExpressionItemProvider.dispose();
 		if (forExpressionItemProvider != null) forExpressionItemProvider.dispose();
-		if (forVarDeclItemProvider != null) forVarDeclItemProvider.dispose();
 		if (throwExpressionItemProvider != null) throwExpressionItemProvider.dispose();
 	}
 

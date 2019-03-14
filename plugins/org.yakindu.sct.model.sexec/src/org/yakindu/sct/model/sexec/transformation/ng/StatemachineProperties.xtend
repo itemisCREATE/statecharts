@@ -6,6 +6,7 @@ import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
+import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 import org.yakindu.sct.model.sgraph.Statechart
 
 @Singleton class StatemachineProperties {
@@ -15,6 +16,8 @@ import org.yakindu.sct.model.sgraph.Statechart
 	@Inject extension StatemachinePublic
 	@Inject extension SgraphExtensions  
 	
+	@Inject extension TypeBuilder
+	
 	extension TypesFactory typesFactory = TypesFactory.eINSTANCE
 	
 	def defineProperties(ComplexType it, Statechart sc) {
@@ -22,6 +25,12 @@ import org.yakindu.sct.model.sgraph.Statechart
 		if (sc.requireHistory) {
 			it.features += historyStateVector(sc)
 		}
+		it.features += nextStateIndex(sc)
+	}
+	
+	def create createProperty nextStateIndex(Statechart sc) {
+		name = "nextStateIndex"
+		_type(ITypeSystem.INTEGER)
 	}
 	
 	def create createProperty stateVector(Statechart sc) {

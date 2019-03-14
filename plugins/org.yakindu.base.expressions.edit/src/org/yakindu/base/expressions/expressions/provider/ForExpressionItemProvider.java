@@ -70,7 +70,7 @@ public class ForExpressionItemProvider extends ExpressionItemProvider {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ExpressionsPackage.Literals.FOR_EXPRESSION__BODY);
 			childrenFeatures.add(ExpressionsPackage.Literals.FOR_EXPRESSION__CONDITION);
-			childrenFeatures.add(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_DECLS);
+			childrenFeatures.add(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS);
 			childrenFeatures.add(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_UPDATES);
 		}
 		return childrenFeatures;
@@ -126,7 +126,7 @@ public class ForExpressionItemProvider extends ExpressionItemProvider {
 		switch (notification.getFeatureID(ForExpression.class)) {
 			case ExpressionsPackage.FOR_EXPRESSION__BODY:
 			case ExpressionsPackage.FOR_EXPRESSION__CONDITION:
-			case ExpressionsPackage.FOR_EXPRESSION__VAR_DECLS:
+			case ExpressionsPackage.FOR_EXPRESSION__VAR_INITS:
 			case ExpressionsPackage.FOR_EXPRESSION__VAR_UPDATES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -288,11 +288,6 @@ public class ForExpressionItemProvider extends ExpressionItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.FOR_EXPRESSION__BODY,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.FOR_EXPRESSION__BODY,
 				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
 
 		newChildDescriptors.add
@@ -443,11 +438,6 @@ public class ForExpressionItemProvider extends ExpressionItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.FOR_EXPRESSION__CONDITION,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.FOR_EXPRESSION__CONDITION,
 				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
 
 		newChildDescriptors.add
@@ -457,12 +447,152 @@ public class ForExpressionItemProvider extends ExpressionItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_DECLS,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_DECLS,
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createConditionalExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createLogicalOrExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createLogicalAndExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createLogicalNotExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createBitwiseXorExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createBitwiseOrExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createBitwiseAndExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createLogicalRelationExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createNumericalAddSubtractExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createNumericalUnaryExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createPostFixUnaryExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createFeatureCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createMetaCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createIfExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createBlockExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createWhileExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createReturnExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createSwitchExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createForExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
+				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS,
 				 TypesFactory.eINSTANCE.createProperty()));
 
 		newChildDescriptors.add
@@ -604,11 +734,6 @@ public class ForExpressionItemProvider extends ExpressionItemProvider {
 			(createChildParameter
 				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_UPDATES,
 				 ExpressionsFactory.eINSTANCE.createForExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_UPDATES,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -635,8 +760,8 @@ public class ForExpressionItemProvider extends ExpressionItemProvider {
 		boolean qualify =
 			childFeature == ExpressionsPackage.Literals.FOR_EXPRESSION__BODY ||
 			childFeature == ExpressionsPackage.Literals.FOR_EXPRESSION__CONDITION ||
-			childFeature == ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_UPDATES ||
-			childFeature == ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_DECLS;
+			childFeature == ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_INITS ||
+			childFeature == ExpressionsPackage.Literals.FOR_EXPRESSION__VAR_UPDATES;
 
 		if (qualify) {
 			return getString

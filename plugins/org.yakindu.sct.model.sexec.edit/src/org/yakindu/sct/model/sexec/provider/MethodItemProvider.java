@@ -201,11 +201,6 @@ public class MethodItemProvider extends OperationItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 SGraphFactory.eINSTANCE.createStatechart()));
 
 		newChildDescriptors.add
@@ -267,11 +262,6 @@ public class MethodItemProvider extends OperationItemProvider {
 			(createChildParameter
 				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 SexecFactory.eINSTANCE.createTimeEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -417,11 +407,6 @@ public class MethodItemProvider extends OperationItemProvider {
 			(createChildParameter
 				(TypesPackage.Literals.OPERATION__BODY,
 				 ExpressionsFactory.eINSTANCE.createForExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.OPERATION__BODY,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
 
 		newChildDescriptors.add
 			(createChildParameter

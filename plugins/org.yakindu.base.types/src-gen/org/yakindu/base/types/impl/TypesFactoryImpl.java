@@ -36,6 +36,7 @@ import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypedDeclaration;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.base.types.Visibility;
 
 /**
  * <!-- begin-user-doc -->
@@ -118,6 +119,8 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 		switch (eDataType.getClassifierID()) {
 			case TypesPackage.DIRECTION:
 				return createDirectionFromString(eDataType, initialValue);
+			case TypesPackage.VISIBILITY:
+				return createVisibilityFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -133,6 +136,8 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 		switch (eDataType.getClassifierID()) {
 			case TypesPackage.DIRECTION:
 				return convertDirectionToString(eDataType, instanceValue);
+			case TypesPackage.VISIBILITY:
+				return convertVisibilityToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -143,6 +148,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.yakindu.base.types.Package createPackage() {
 		PackageImpl package_ = new PackageImpl();
 		return package_;
@@ -153,6 +159,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Type createType() {
 		TypeImpl type = new TypeImpl();
 		return type;
@@ -163,6 +170,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Declaration createDeclaration() {
 		DeclarationImpl declaration = new DeclarationImpl();
 		return declaration;
@@ -173,6 +181,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Operation createOperation() {
 		OperationImpl operation = new OperationImpl();
 		return operation;
@@ -183,6 +192,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Property createProperty() {
 		PropertyImpl property = new PropertyImpl();
 		return property;
@@ -193,6 +203,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Parameter createParameter() {
 		ParameterImpl parameter = new ParameterImpl();
 		return parameter;
@@ -203,6 +214,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypeSpecifier createTypeSpecifier() {
 		TypeSpecifierImpl typeSpecifier = new TypeSpecifierImpl();
 		return typeSpecifier;
@@ -213,6 +225,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Event createEvent() {
 		EventImpl event = new EventImpl();
 		return event;
@@ -223,6 +236,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EnumerationType createEnumerationType() {
 		EnumerationTypeImpl enumerationType = new EnumerationTypeImpl();
 		return enumerationType;
@@ -233,6 +247,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PrimitiveType createPrimitiveType() {
 		PrimitiveTypeImpl primitiveType = new PrimitiveTypeImpl();
 		return primitiveType;
@@ -243,6 +258,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ComplexType createComplexType() {
 		ComplexTypeImpl complexType = new ComplexTypeImpl();
 		return complexType;
@@ -253,6 +269,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Enumerator createEnumerator() {
 		EnumeratorImpl enumerator = new EnumeratorImpl();
 		return enumerator;
@@ -263,6 +280,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypeParameter createTypeParameter() {
 		TypeParameterImpl typeParameter = new TypeParameterImpl();
 		return typeParameter;
@@ -273,6 +291,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public GenericElement createGenericElement() {
 		GenericElementImpl genericElement = new GenericElementImpl();
 		return genericElement;
@@ -283,6 +302,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Domain createDomain() {
 		DomainImpl domain = new DomainImpl();
 		return domain;
@@ -293,6 +313,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypeAlias createTypeAlias() {
 		TypeAliasImpl typeAlias = new TypeAliasImpl();
 		return typeAlias;
@@ -303,6 +324,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Annotation createAnnotation() {
 		AnnotationImpl annotation = new AnnotationImpl();
 		return annotation;
@@ -313,6 +335,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AnnotatableElement createAnnotatableElement() {
 		AnnotatableElementImpl annotatableElement = new AnnotatableElementImpl();
 		return annotatableElement;
@@ -323,6 +346,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ArrayTypeSpecifier createArrayTypeSpecifier() {
 		ArrayTypeSpecifierImpl arrayTypeSpecifier = new ArrayTypeSpecifierImpl();
 		return arrayTypeSpecifier;
@@ -333,6 +357,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AnnotationType createAnnotationType() {
 		AnnotationTypeImpl annotationType = new AnnotationTypeImpl();
 		return annotationType;
@@ -343,6 +368,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypedDeclaration createTypedDeclaration() {
 		TypedDeclarationImpl typedDeclaration = new TypedDeclarationImpl();
 		return typedDeclaration;
@@ -353,6 +379,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MetaComposite createMetaComposite() {
 		MetaCompositeImpl metaComposite = new MetaCompositeImpl();
 		return metaComposite;
@@ -383,6 +410,27 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Visibility createVisibilityFromString(EDataType eDataType, String initialValue) {
+		Visibility result = Visibility.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertVisibilityToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public TypesPackage getTypesPackage() {
 		return (TypesPackage)getEPackage();
 	}

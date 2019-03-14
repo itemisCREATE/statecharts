@@ -288,11 +288,6 @@ public class ConditionalExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__CONDITION,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__CONDITION,
 				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
 
 		newChildDescriptors.add
@@ -443,11 +438,6 @@ public class ConditionalExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__TRUE_CASE,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__TRUE_CASE,
 				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
 
 		newChildDescriptors.add
@@ -594,11 +584,6 @@ public class ConditionalExpressionItemProvider
 			(createChildParameter
 				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__FALSE_CASE,
 				 ExpressionsFactory.eINSTANCE.createForExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__FALSE_CASE,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -67,6 +67,7 @@ public class ExecutionImpl extends StepImpl implements Execution {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Expression getStatement() {
 		return statement;
 	}
@@ -91,6 +92,7 @@ public class ExecutionImpl extends StepImpl implements Execution {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStatement(Expression newStatement) {
 		if (newStatement != statement) {
 			NotificationChain msgs = null;

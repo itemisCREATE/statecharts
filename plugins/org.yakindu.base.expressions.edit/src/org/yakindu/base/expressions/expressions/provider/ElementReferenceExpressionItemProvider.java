@@ -358,11 +358,6 @@ public class ElementReferenceExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
 
 		newChildDescriptors.add

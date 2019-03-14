@@ -377,7 +377,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link SexecPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -391,7 +391,8 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		if (isInited) return (SexecPackage)EPackage.Registry.INSTANCE.getEPackage(SexecPackage.eNS_URI);
 
 		// Obtain or create and register package
-		SexecPackageImpl theSexecPackage = (SexecPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SexecPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SexecPackageImpl());
+		Object registeredSexecPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		SexecPackageImpl theSexecPackage = registeredSexecPackage instanceof SexecPackageImpl ? (SexecPackageImpl)registeredSexecPackage : new SexecPackageImpl();
 
 		isInited = true;
 
@@ -410,7 +411,6 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		// Mark meta-data to indicate it can't be changed
 		theSexecPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(SexecPackage.eNS_URI, theSexecPackage);
 		return theSexecPackage;
@@ -421,6 +421,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExecutionFlow() {
 		return executionFlowEClass;
 	}
@@ -430,6 +431,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionFlow_States() {
 		return (EReference)executionFlowEClass.getEStructuralFeatures().get(0);
 	}
@@ -439,6 +441,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionFlow_Nodes() {
 		return (EReference)executionFlowEClass.getEStructuralFeatures().get(1);
 	}
@@ -448,6 +451,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionFlow_Regions() {
 		return (EReference)executionFlowEClass.getEStructuralFeatures().get(2);
 	}
@@ -457,6 +461,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionFlow_HistoryVector() {
 		return (EReference)executionFlowEClass.getEStructuralFeatures().get(3);
 	}
@@ -466,6 +471,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionFlow_EntryAction() {
 		return (EReference)executionFlowEClass.getEStructuralFeatures().get(4);
 	}
@@ -475,6 +481,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionFlow_ExitAction() {
 		return (EReference)executionFlowEClass.getEStructuralFeatures().get(5);
 	}
@@ -484,6 +491,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionFlow_StaticInitSequence() {
 		return (EReference)executionFlowEClass.getEStructuralFeatures().get(6);
 	}
@@ -493,6 +501,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExecutionNode() {
 		return executionNodeEClass;
 	}
@@ -502,6 +511,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionNode_Reactions() {
 		return (EReference)executionNodeEClass.getEStructuralFeatures().get(0);
 	}
@@ -511,6 +521,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getExecutionNode_SimpleName() {
 		return (EAttribute)executionNodeEClass.getEStructuralFeatures().get(1);
 	}
@@ -520,6 +531,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionNode_ReactSequence() {
 		return (EReference)executionNodeEClass.getEStructuralFeatures().get(2);
 	}
@@ -529,6 +541,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionNode_LocalReactSequence() {
 		return (EReference)executionNodeEClass.getEStructuralFeatures().get(3);
 	}
@@ -538,6 +551,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExecutionState() {
 		return executionStateEClass;
 	}
@@ -547,6 +561,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionState_EntryAction() {
 		return (EReference)executionStateEClass.getEStructuralFeatures().get(1);
 	}
@@ -556,6 +571,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionState_ExitAction() {
 		return (EReference)executionStateEClass.getEStructuralFeatures().get(2);
 	}
@@ -565,6 +581,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExecutionScope() {
 		return executionScopeEClass;
 	}
@@ -574,6 +591,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionScope_StateVector() {
 		return (EReference)executionScopeEClass.getEStructuralFeatures().get(0);
 	}
@@ -583,6 +601,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionScope_SubScopes() {
 		return (EReference)executionScopeEClass.getEStructuralFeatures().get(1);
 	}
@@ -592,6 +611,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionScope_SuperScope() {
 		return (EReference)executionScopeEClass.getEStructuralFeatures().get(2);
 	}
@@ -601,6 +621,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionScope_EnterSequences() {
 		return (EReference)executionScopeEClass.getEStructuralFeatures().get(3);
 	}
@@ -610,6 +631,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionScope_ExitSequence() {
 		return (EReference)executionScopeEClass.getEStructuralFeatures().get(4);
 	}
@@ -619,6 +641,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionScope_InitSequence() {
 		return (EReference)executionScopeEClass.getEStructuralFeatures().get(5);
 	}
@@ -628,6 +651,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExecutionRegion() {
 		return executionRegionEClass;
 	}
@@ -637,6 +661,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionRegion_DeepEnterSequence() {
 		return (EReference)executionRegionEClass.getEStructuralFeatures().get(0);
 	}
@@ -646,6 +671,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionRegion_ShallowEnterSequence() {
 		return (EReference)executionRegionEClass.getEStructuralFeatures().get(1);
 	}
@@ -655,6 +681,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionRegion_HistoryVector() {
 		return (EReference)executionRegionEClass.getEStructuralFeatures().get(2);
 	}
@@ -664,6 +691,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecutionRegion_Nodes() {
 		return (EReference)executionRegionEClass.getEStructuralFeatures().get(3);
 	}
@@ -673,6 +701,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExecutionEntry() {
 		return executionEntryEClass;
 	}
@@ -682,6 +711,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExecutionExit() {
 		return executionExitEClass;
 	}
@@ -691,6 +721,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExecutionChoice() {
 		return executionChoiceEClass;
 	}
@@ -700,6 +731,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getExecutionState_Leaf() {
 		return (EAttribute)executionStateEClass.getEStructuralFeatures().get(0);
 	}
@@ -709,6 +741,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getReaction() {
 		return reactionEClass;
 	}
@@ -718,6 +751,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getReaction_Check() {
 		return (EReference)reactionEClass.getEStructuralFeatures().get(0);
 	}
@@ -727,6 +761,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getReaction_Effect() {
 		return (EReference)reactionEClass.getEStructuralFeatures().get(1);
 	}
@@ -736,6 +771,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getReaction_Transition() {
 		return (EAttribute)reactionEClass.getEStructuralFeatures().get(2);
 	}
@@ -745,6 +781,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMethod() {
 		return methodEClass;
 	}
@@ -754,6 +791,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMethod_BodySequence() {
 		return (EReference)methodEClass.getEStructuralFeatures().get(0);
 	}
@@ -763,6 +801,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMappedElement() {
 		return mappedElementEClass;
 	}
@@ -772,6 +811,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMappedElement_SourceElement() {
 		return (EReference)mappedElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -781,6 +821,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCheck() {
 		return checkEClass;
 	}
@@ -790,6 +831,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCheck_Condition() {
 		return (EReference)checkEClass.getEStructuralFeatures().get(0);
 	}
@@ -799,6 +841,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCheck_Refs() {
 		return (EReference)checkEClass.getEStructuralFeatures().get(1);
 	}
@@ -808,6 +851,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStep() {
 		return stepEClass;
 	}
@@ -817,6 +861,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getStep_Comment() {
 		return (EAttribute)stepEClass.getEStructuralFeatures().get(0);
 	}
@@ -826,6 +871,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStep_Caller() {
 		return (EReference)stepEClass.getEStructuralFeatures().get(1);
 	}
@@ -835,6 +881,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSequence() {
 		return sequenceEClass;
 	}
@@ -844,6 +891,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSequence_Steps() {
 		return (EReference)sequenceEClass.getEStructuralFeatures().get(0);
 	}
@@ -853,6 +901,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getIf() {
 		return ifEClass;
 	}
@@ -862,6 +911,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getIf_Check() {
 		return (EReference)ifEClass.getEStructuralFeatures().get(0);
 	}
@@ -871,6 +921,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getIf_ThenStep() {
 		return (EReference)ifEClass.getEStructuralFeatures().get(1);
 	}
@@ -880,6 +931,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getIf_ElseStep() {
 		return (EReference)ifEClass.getEStructuralFeatures().get(2);
 	}
@@ -889,6 +941,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExecution() {
 		return executionEClass;
 	}
@@ -898,6 +951,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExecution_Statement() {
 		return (EReference)executionEClass.getEStructuralFeatures().get(0);
 	}
@@ -907,6 +961,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEnterState() {
 		return enterStateEClass;
 	}
@@ -916,6 +971,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEnterState_State() {
 		return (EReference)enterStateEClass.getEStructuralFeatures().get(0);
 	}
@@ -925,6 +981,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExitState() {
 		return exitStateEClass;
 	}
@@ -934,6 +991,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExitState_State() {
 		return (EReference)exitStateEClass.getEStructuralFeatures().get(0);
 	}
@@ -943,6 +1001,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCall() {
 		return callEClass;
 	}
@@ -952,6 +1011,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCall_Step() {
 		return (EReference)callEClass.getEStructuralFeatures().get(0);
 	}
@@ -961,6 +1021,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getScheduleTimeEvent() {
 		return scheduleTimeEventEClass;
 	}
@@ -970,6 +1031,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getScheduleTimeEvent_TimeEvent() {
 		return (EReference)scheduleTimeEventEClass.getEStructuralFeatures().get(0);
 	}
@@ -979,6 +1041,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getScheduleTimeEvent_TimeValue() {
 		return (EReference)scheduleTimeEventEClass.getEStructuralFeatures().get(1);
 	}
@@ -988,6 +1051,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getUnscheduleTimeEvent() {
 		return unscheduleTimeEventEClass;
 	}
@@ -997,6 +1061,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getUnscheduleTimeEvent_TimeEvent() {
 		return (EReference)unscheduleTimeEventEClass.getEStructuralFeatures().get(0);
 	}
@@ -1006,6 +1071,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStateSwitch() {
 		return stateSwitchEClass;
 	}
@@ -1015,6 +1081,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStateSwitch_Cases() {
 		return (EReference)stateSwitchEClass.getEStructuralFeatures().get(0);
 	}
@@ -1024,6 +1091,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getStateSwitch_StateConfigurationIdx() {
 		return (EAttribute)stateSwitchEClass.getEStructuralFeatures().get(1);
 	}
@@ -1033,6 +1101,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStateSwitch_HistoryRegion() {
 		return (EReference)stateSwitchEClass.getEStructuralFeatures().get(2);
 	}
@@ -1042,6 +1111,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStateCase() {
 		return stateCaseEClass;
 	}
@@ -1051,6 +1121,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStateCase_State() {
 		return (EReference)stateCaseEClass.getEStructuralFeatures().get(0);
 	}
@@ -1060,6 +1131,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStateCase_Step() {
 		return (EReference)stateCaseEClass.getEStructuralFeatures().get(1);
 	}
@@ -1069,6 +1141,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTrace() {
 		return traceEClass;
 	}
@@ -1078,6 +1151,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTraceNodeExecuted() {
 		return traceNodeExecutedEClass;
 	}
@@ -1087,6 +1161,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTraceNodeExecuted_Node() {
 		return (EReference)traceNodeExecutedEClass.getEStructuralFeatures().get(0);
 	}
@@ -1096,6 +1171,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getReactionFired() {
 		return reactionFiredEClass;
 	}
@@ -1105,6 +1181,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getReactionFired_Reaction() {
 		return (EReference)reactionFiredEClass.getEStructuralFeatures().get(0);
 	}
@@ -1114,6 +1191,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTraceReactionWillFire() {
 		return traceReactionWillFireEClass;
 	}
@@ -1123,6 +1201,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTraceReactionWillFire_Reaction() {
 		return (EReference)traceReactionWillFireEClass.getEStructuralFeatures().get(0);
 	}
@@ -1132,6 +1211,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTraceStateEntered() {
 		return traceStateEnteredEClass;
 	}
@@ -1141,6 +1221,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTraceStateEntered_State() {
 		return (EReference)traceStateEnteredEClass.getEStructuralFeatures().get(0);
 	}
@@ -1150,6 +1231,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTraceStateExited() {
 		return traceStateExitedEClass;
 	}
@@ -1159,6 +1241,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTraceStateExited_State() {
 		return (EReference)traceStateExitedEClass.getEStructuralFeatures().get(0);
 	}
@@ -1168,6 +1251,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTraceBeginRunCycle() {
 		return traceBeginRunCycleEClass;
 	}
@@ -1177,6 +1261,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTraceEndRunCycle() {
 		return traceEndRunCycleEClass;
 	}
@@ -1186,6 +1271,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSaveHistory() {
 		return saveHistoryEClass;
 	}
@@ -1195,6 +1281,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSaveHistory_Region() {
 		return (EReference)saveHistoryEClass.getEStructuralFeatures().get(0);
 	}
@@ -1204,6 +1291,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSaveHistory_Deep() {
 		return (EAttribute)saveHistoryEClass.getEStructuralFeatures().get(1);
 	}
@@ -1213,6 +1301,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getHistoryEntry() {
 		return historyEntryEClass;
 	}
@@ -1222,6 +1311,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getHistoryEntry_InitialStep() {
 		return (EReference)historyEntryEClass.getEStructuralFeatures().get(0);
 	}
@@ -1231,6 +1321,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getHistoryEntry_Deep() {
 		return (EAttribute)historyEntryEClass.getEStructuralFeatures().get(1);
 	}
@@ -1240,6 +1331,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getHistoryEntry_Region() {
 		return (EReference)historyEntryEClass.getEStructuralFeatures().get(2);
 	}
@@ -1249,6 +1341,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getHistoryEntry_HistoryStep() {
 		return (EReference)historyEntryEClass.getEStructuralFeatures().get(3);
 	}
@@ -1258,6 +1351,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getReturn() {
 		return returnEClass;
 	}
@@ -1267,6 +1361,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getReturn_Value() {
 		return (EReference)returnEClass.getEStructuralFeatures().get(0);
 	}
@@ -1276,6 +1371,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getLocalVariableDefinition() {
 		return localVariableDefinitionEClass;
 	}
@@ -1285,6 +1381,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLocalVariableDefinition_Variable() {
 		return (EReference)localVariableDefinitionEClass.getEStructuralFeatures().get(0);
 	}
@@ -1294,6 +1391,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLocalVariableDefinition_InitialValue() {
 		return (EReference)localVariableDefinitionEClass.getEStructuralFeatures().get(1);
 	}
@@ -1303,6 +1401,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStatement() {
 		return statementEClass;
 	}
@@ -1312,6 +1411,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStatement_Expression() {
 		return (EReference)statementEClass.getEStructuralFeatures().get(0);
 	}
@@ -1321,6 +1421,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExecutionSynchronization() {
 		return executionSynchronizationEClass;
 	}
@@ -1330,6 +1431,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCheckRef() {
 		return checkRefEClass;
 	}
@@ -1339,6 +1441,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCheckRef_Check() {
 		return (EReference)checkRefEClass.getEStructuralFeatures().get(0);
 	}
@@ -1348,6 +1451,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStateVector() {
 		return stateVectorEClass;
 	}
@@ -1357,6 +1461,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getStateVector_Size() {
 		return (EAttribute)stateVectorEClass.getEStructuralFeatures().get(0);
 	}
@@ -1366,6 +1471,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getStateVector_Offset() {
 		return (EAttribute)stateVectorEClass.getEStructuralFeatures().get(1);
 	}
@@ -1375,6 +1481,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTimeEvent() {
 		return timeEventEClass;
 	}
@@ -1384,6 +1491,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTimeEvent_Periodic() {
 		return (EAttribute)timeEventEClass.getEStructuralFeatures().get(0);
 	}
@@ -1393,6 +1501,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SexecFactory getSexecFactory() {
 		return (SexecFactory)getEFactoryInstance();
 	}

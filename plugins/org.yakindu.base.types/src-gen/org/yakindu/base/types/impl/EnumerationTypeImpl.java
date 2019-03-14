@@ -62,6 +62,7 @@ public class EnumerationTypeImpl extends ComplexTypeImpl implements EnumerationT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Enumerator> getEnumerator() {
 		if (enumerator == null) {
 			enumerator = new EObjectContainmentWithInverseEList<Enumerator>(Enumerator.class, this, TypesPackage.ENUMERATION_TYPE__ENUMERATOR, TypesPackage.ENUMERATOR__OWNING_ENUMERATION);

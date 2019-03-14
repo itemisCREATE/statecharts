@@ -34,6 +34,7 @@ import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.base.types.Visibility;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionNode;
 import org.yakindu.sct.model.sexec.ExecutionRegion;
@@ -62,6 +63,7 @@ import org.yakindu.sct.model.sgraph.impl.ScopedElementImpl;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getMetaFeatures <em>Meta Features</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#isVisible <em>Visible</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getSuperTypes <em>Super Types</em>}</li>
@@ -178,6 +180,26 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * @ordered
 	 */
 	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Visibility VISIBILITY_EDEFAULT = Visibility.PUBLIC;
+
+	/**
+	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected Visibility visibility = VISIBILITY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
@@ -453,6 +475,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -462,6 +485,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -474,6 +498,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject getSourceElement() {
 		if (sourceElement != null && sourceElement.eIsProxy()) {
 			InternalEObject oldSourceElement = (InternalEObject)sourceElement;
@@ -500,6 +525,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSourceElement(EObject newSourceElement) {
 		EObject oldSourceElement = sourceElement;
 		sourceElement = newSourceElement;
@@ -512,6 +538,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ExecutionState> getStates() {
 		if (states == null) {
 			states = new EObjectContainmentEList<ExecutionState>(ExecutionState.class, this, SexecPackage.EXECUTION_FLOW__STATES);
@@ -524,6 +551,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StateVector getStateVector() {
 		return stateVector;
 	}
@@ -548,6 +576,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStateVector(StateVector newStateVector) {
 		if (newStateVector != stateVector) {
 			NotificationChain msgs = null;
@@ -567,6 +596,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ExecutionScope> getSubScopes() {
 		if (subScopes == null) {
 			subScopes = new EObjectWithInverseResolvingEList<ExecutionScope>(ExecutionScope.class, this, SexecPackage.EXECUTION_FLOW__SUB_SCOPES, SexecPackage.EXECUTION_SCOPE__SUPER_SCOPE);
@@ -579,6 +609,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ExecutionScope getSuperScope() {
 		if (superScope != null && superScope.eIsProxy()) {
 			InternalEObject oldSuperScope = (InternalEObject)superScope;
@@ -620,6 +651,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSuperScope(ExecutionScope newSuperScope) {
 		if (newSuperScope != superScope) {
 			NotificationChain msgs = null;
@@ -639,6 +671,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Sequence> getEnterSequences() {
 		if (enterSequences == null) {
 			enterSequences = new EObjectContainmentEList<Sequence>(Sequence.class, this, SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCES);
@@ -651,6 +684,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Sequence getExitSequence() {
 		return exitSequence;
 	}
@@ -675,6 +709,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExitSequence(Sequence newExitSequence) {
 		if (newExitSequence != exitSequence) {
 			NotificationChain msgs = null;
@@ -694,6 +729,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Sequence getInitSequence() {
 		return initSequence;
 	}
@@ -718,6 +754,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInitSequence(Sequence newInitSequence) {
 		if (newInitSequence != initSequence) {
 			NotificationChain msgs = null;
@@ -737,6 +774,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Annotation> getAnnotations() {
 		if (annotations == null) {
 			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, SexecPackage.EXECUTION_FLOW__ANNOTATIONS);
@@ -749,6 +787,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AnnotatableElement getAnnotationInfo() {
 		return annotationInfo;
 	}
@@ -773,6 +812,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAnnotationInfo(AnnotatableElement newAnnotationInfo) {
 		if (newAnnotationInfo != annotationInfo) {
 			NotificationChain msgs = null;
@@ -792,6 +832,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Declaration> getMetaFeatures() {
 		if (metaFeatures == null) {
 			metaFeatures = new EObjectContainmentEList<Declaration>(Declaration.class, this, SexecPackage.EXECUTION_FLOW__META_FEATURES);
@@ -815,6 +856,30 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public Visibility getVisibility() {
+		return visibility;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setVisibility(Visibility newVisibility) {
+		Visibility oldVisibility = visibility;
+		visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__VISIBILITY, oldVisibility, visibility));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public boolean isAbstract() {
 		return abstract_;
 	}
@@ -824,6 +889,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAbstract(boolean newAbstract) {
 		boolean oldAbstract = abstract_;
 		abstract_ = newAbstract;
@@ -836,6 +902,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isVisible() {
 		return visible;
 	}
@@ -845,6 +912,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVisible(boolean newVisible) {
 		boolean oldVisible = visible;
 		visible = newVisible;
@@ -857,6 +925,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<TypeSpecifier> getSuperTypes() {
 		if (superTypes == null) {
 			superTypes = new EObjectContainmentEList<TypeSpecifier>(TypeSpecifier.class, this, SexecPackage.EXECUTION_FLOW__SUPER_TYPES);
@@ -869,6 +938,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<TypeParameter> getTypeParameters() {
 		if (typeParameters == null) {
 			typeParameters = new EObjectContainmentEList<TypeParameter>(TypeParameter.class, this, SexecPackage.EXECUTION_FLOW__TYPE_PARAMETERS);
@@ -881,6 +951,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isStatic() {
 		return static_;
 	}
@@ -890,6 +961,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStatic(boolean newStatic) {
 		boolean oldStatic = static_;
 		static_ = newStatic;
@@ -902,6 +974,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Declaration> getFeatures() {
 		if (features == null) {
 			features = new EObjectContainmentEList<Declaration>(Declaration.class, this, SexecPackage.EXECUTION_FLOW__FEATURES);
@@ -914,6 +987,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ExecutionNode> getNodes() {
 		if (nodes == null) {
 			nodes = new EObjectContainmentEList<ExecutionNode>(ExecutionNode.class, this, SexecPackage.EXECUTION_FLOW__NODES);
@@ -926,6 +1000,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ExecutionRegion> getRegions() {
 		if (regions == null) {
 			regions = new EObjectContainmentEList<ExecutionRegion>(ExecutionRegion.class, this, SexecPackage.EXECUTION_FLOW__REGIONS);
@@ -938,6 +1013,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StateVector getHistoryVector() {
 		return historyVector;
 	}
@@ -962,6 +1038,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setHistoryVector(StateVector newHistoryVector) {
 		if (newHistoryVector != historyVector) {
 			NotificationChain msgs = null;
@@ -981,6 +1058,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Step getEntryAction() {
 		return entryAction;
 	}
@@ -1005,6 +1083,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEntryAction(Step newEntryAction) {
 		if (newEntryAction != entryAction) {
 			NotificationChain msgs = null;
@@ -1024,6 +1103,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Step getExitAction() {
 		return exitAction;
 	}
@@ -1048,6 +1128,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExitAction(Step newExitAction) {
 		if (newExitAction != exitAction) {
 			NotificationChain msgs = null;
@@ -1067,6 +1148,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Sequence getStaticInitSequence() {
 		return staticInitSequence;
 	}
@@ -1091,6 +1173,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStaticInitSequence(Sequence newStaticInitSequence) {
 		if (newStaticInitSequence != staticInitSequence) {
 			NotificationChain msgs = null;
@@ -1110,6 +1193,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Declaration> getAllFeatures() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -1121,6 +1205,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Type getOriginType() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -1132,6 +1217,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Annotation getAnnotationOfType(String typeName) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -1143,6 +1229,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Reaction> getReactions() {
 		if (reactions == null) {
 			reactions = new EObjectContainmentEList<Reaction>(Reaction.class, this, SexecPackage.EXECUTION_FLOW__REACTIONS);
@@ -1155,6 +1242,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getSimpleName() {
 		return simpleName;
 	}
@@ -1164,6 +1252,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSimpleName(String newSimpleName) {
 		String oldSimpleName = simpleName;
 		simpleName = newSimpleName;
@@ -1176,6 +1265,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Sequence getReactSequence() {
 		return reactSequence;
 	}
@@ -1200,6 +1290,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReactSequence(Sequence newReactSequence) {
 		if (newReactSequence != reactSequence) {
 			NotificationChain msgs = null;
@@ -1219,6 +1310,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Sequence getLocalReactSequence() {
 		return localReactSequence;
 	}
@@ -1243,6 +1335,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLocalReactSequence(Sequence newLocalReactSequence) {
 		if (newLocalReactSequence != localReactSequence) {
 			NotificationChain msgs = null;
@@ -1355,6 +1448,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return isStatic();
 			case SexecPackage.EXECUTION_FLOW__ID:
 				return getId();
+			case SexecPackage.EXECUTION_FLOW__VISIBILITY:
+				return getVisibility();
 			case SexecPackage.EXECUTION_FLOW__ABSTRACT:
 				return isAbstract();
 			case SexecPackage.EXECUTION_FLOW__VISIBLE:
@@ -1432,6 +1527,9 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return;
 			case SexecPackage.EXECUTION_FLOW__STATIC:
 				setStatic((Boolean)newValue);
+				return;
+			case SexecPackage.EXECUTION_FLOW__VISIBILITY:
+				setVisibility((Visibility)newValue);
 				return;
 			case SexecPackage.EXECUTION_FLOW__ABSTRACT:
 				setAbstract((Boolean)newValue);
@@ -1538,6 +1636,9 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__STATIC:
 				setStatic(STATIC_EDEFAULT);
 				return;
+			case SexecPackage.EXECUTION_FLOW__VISIBILITY:
+				setVisibility(VISIBILITY_EDEFAULT);
+				return;
 			case SexecPackage.EXECUTION_FLOW__ABSTRACT:
 				setAbstract(ABSTRACT_EDEFAULT);
 				return;
@@ -1630,6 +1731,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return static_ != STATIC_EDEFAULT;
 			case SexecPackage.EXECUTION_FLOW__ID:
 				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
+			case SexecPackage.EXECUTION_FLOW__VISIBILITY:
+				return visibility != VISIBILITY_EDEFAULT;
 			case SexecPackage.EXECUTION_FLOW__ABSTRACT:
 				return abstract_ != ABSTRACT_EDEFAULT;
 			case SexecPackage.EXECUTION_FLOW__VISIBLE:
@@ -1714,6 +1817,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			switch (derivedFeatureID) {
 				case SexecPackage.EXECUTION_FLOW__STATIC: return TypesPackage.DECLARATION__STATIC;
 				case SexecPackage.EXECUTION_FLOW__ID: return TypesPackage.DECLARATION__ID;
+				case SexecPackage.EXECUTION_FLOW__VISIBILITY: return TypesPackage.DECLARATION__VISIBILITY;
 				default: return -1;
 			}
 		}
@@ -1796,6 +1900,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			switch (baseFeatureID) {
 				case TypesPackage.DECLARATION__STATIC: return SexecPackage.EXECUTION_FLOW__STATIC;
 				case TypesPackage.DECLARATION__ID: return SexecPackage.EXECUTION_FLOW__ID;
+				case TypesPackage.DECLARATION__VISIBILITY: return SexecPackage.EXECUTION_FLOW__VISIBILITY;
 				default: return -1;
 			}
 		}
@@ -1851,11 +1956,13 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
 		result.append(", static: ");
 		result.append(static_);
+		result.append(", visibility: ");
+		result.append(visibility);
 		result.append(", abstract: ");
 		result.append(abstract_);
 		result.append(", visible: ");

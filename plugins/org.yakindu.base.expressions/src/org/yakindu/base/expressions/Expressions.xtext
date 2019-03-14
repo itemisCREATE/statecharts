@@ -121,14 +121,11 @@ WhileExpression returns types::Expression:
 ForExpression returns types::Expression:
 	{ForExpression} 'for'
 	'('
-	(varDecls+=ForVarDecl (',' varDecls+=ForVarDecl)*)? ';'
+	(varInits+=Expression  (',' varInits+=Expression)*)? ';'
 	(condition=Expression)? ';'
 	(varUpdates+=Expression (',' varUpdates+=Expression)*)?
 	')'
 	body=BlockExpression;
-
-ForVarDecl returns types::Property:
-	'var' name=ID ':' typeSpecifier=TypeSpecifier ('=' initialValue=Expression)?;
 
 ReturnExpression returns types::Expression:
 	{ReturnExpression} 'return' expression=ConditionalExpression;

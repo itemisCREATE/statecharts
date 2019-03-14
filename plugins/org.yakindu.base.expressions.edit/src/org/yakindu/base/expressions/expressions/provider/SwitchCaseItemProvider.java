@@ -289,11 +289,6 @@ public class SwitchCaseItemProvider extends ItemProviderAdapter implements IEdit
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.SWITCH_CASE__CASE,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.SWITCH_CASE__CASE,
 				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
 
 		newChildDescriptors.add
@@ -440,11 +435,6 @@ public class SwitchCaseItemProvider extends ItemProviderAdapter implements IEdit
 			(createChildParameter
 				(ExpressionsPackage.Literals.SWITCH_CASE__THEN,
 				 ExpressionsFactory.eINSTANCE.createForExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.SWITCH_CASE__THEN,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
 
 		newChildDescriptors.add
 			(createChildParameter

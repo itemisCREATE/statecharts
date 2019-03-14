@@ -282,11 +282,6 @@ public class EventValueReferenceExpressionItemProvider extends ExpressionItemPro
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
 				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
 
 		newChildDescriptors.add

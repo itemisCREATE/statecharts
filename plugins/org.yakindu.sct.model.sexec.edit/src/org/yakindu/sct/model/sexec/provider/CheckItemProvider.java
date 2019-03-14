@@ -309,11 +309,6 @@ public class CheckItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.CHECK__CONDITION,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.CHECK__CONDITION,
 				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
 
 		newChildDescriptors.add

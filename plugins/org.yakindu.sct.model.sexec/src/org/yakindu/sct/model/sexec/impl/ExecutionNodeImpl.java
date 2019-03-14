@@ -32,6 +32,7 @@ import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.base.types.Visibility;
 import org.yakindu.sct.model.sexec.ExecutionNode;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.Sequence;
@@ -51,6 +52,7 @@ import org.yakindu.sct.model.sexec.SexecPackage;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getMetaFeatures <em>Meta Features</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#isVisible <em>Visible</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getSuperTypes <em>Super Types</em>}</li>
@@ -144,6 +146,26 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * @ordered
 	 */
 	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Visibility VISIBILITY_EDEFAULT = Visibility.PUBLIC;
+
+	/**
+	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected Visibility visibility = VISIBILITY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
@@ -289,6 +311,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -298,6 +321,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -310,6 +334,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Annotation> getAnnotations() {
 		if (annotations == null) {
 			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, SexecPackage.EXECUTION_NODE__ANNOTATIONS);
@@ -322,6 +347,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AnnotatableElement getAnnotationInfo() {
 		return annotationInfo;
 	}
@@ -346,6 +372,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAnnotationInfo(AnnotatableElement newAnnotationInfo) {
 		if (newAnnotationInfo != annotationInfo) {
 			NotificationChain msgs = null;
@@ -365,6 +392,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Declaration> getMetaFeatures() {
 		if (metaFeatures == null) {
 			metaFeatures = new EObjectContainmentEList<Declaration>(Declaration.class, this, SexecPackage.EXECUTION_NODE__META_FEATURES);
@@ -386,6 +414,30 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public Visibility getVisibility() {
+		return visibility;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setVisibility(Visibility newVisibility) {
+		Visibility oldVisibility = visibility;
+		visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_NODE__VISIBILITY, oldVisibility, visibility));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public boolean isAbstract() {
 		return abstract_;
 	}
@@ -395,6 +447,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAbstract(boolean newAbstract) {
 		boolean oldAbstract = abstract_;
 		abstract_ = newAbstract;
@@ -407,6 +460,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isVisible() {
 		return visible;
 	}
@@ -416,6 +470,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVisible(boolean newVisible) {
 		boolean oldVisible = visible;
 		visible = newVisible;
@@ -428,6 +483,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<TypeSpecifier> getSuperTypes() {
 		if (superTypes == null) {
 			superTypes = new EObjectContainmentEList<TypeSpecifier>(TypeSpecifier.class, this, SexecPackage.EXECUTION_NODE__SUPER_TYPES);
@@ -440,6 +496,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<TypeParameter> getTypeParameters() {
 		if (typeParameters == null) {
 			typeParameters = new EObjectContainmentEList<TypeParameter>(TypeParameter.class, this, SexecPackage.EXECUTION_NODE__TYPE_PARAMETERS);
@@ -452,6 +509,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isStatic() {
 		return static_;
 	}
@@ -461,6 +519,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStatic(boolean newStatic) {
 		boolean oldStatic = static_;
 		static_ = newStatic;
@@ -473,6 +532,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Declaration> getFeatures() {
 		if (features == null) {
 			features = new EObjectContainmentEList<Declaration>(Declaration.class, this, SexecPackage.EXECUTION_NODE__FEATURES);
@@ -485,6 +545,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Reaction> getReactions() {
 		if (reactions == null) {
 			reactions = new EObjectContainmentEList<Reaction>(Reaction.class, this, SexecPackage.EXECUTION_NODE__REACTIONS);
@@ -497,6 +558,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getSimpleName() {
 		return simpleName;
 	}
@@ -506,6 +568,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSimpleName(String newSimpleName) {
 		String oldSimpleName = simpleName;
 		simpleName = newSimpleName;
@@ -518,6 +581,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Sequence getReactSequence() {
 		return reactSequence;
 	}
@@ -542,6 +606,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReactSequence(Sequence newReactSequence) {
 		if (newReactSequence != reactSequence) {
 			NotificationChain msgs = null;
@@ -561,6 +626,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Sequence getLocalReactSequence() {
 		return localReactSequence;
 	}
@@ -585,6 +651,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLocalReactSequence(Sequence newLocalReactSequence) {
 		if (newLocalReactSequence != localReactSequence) {
 			NotificationChain msgs = null;
@@ -604,6 +671,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Declaration> getAllFeatures() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -615,6 +683,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Type getOriginType() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -626,6 +695,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Annotation getAnnotationOfType(String typeName) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -682,6 +752,8 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 				return isStatic();
 			case SexecPackage.EXECUTION_NODE__ID:
 				return getId();
+			case SexecPackage.EXECUTION_NODE__VISIBILITY:
+				return getVisibility();
 			case SexecPackage.EXECUTION_NODE__ABSTRACT:
 				return isAbstract();
 			case SexecPackage.EXECUTION_NODE__VISIBLE:
@@ -729,6 +801,9 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 				return;
 			case SexecPackage.EXECUTION_NODE__STATIC:
 				setStatic((Boolean)newValue);
+				return;
+			case SexecPackage.EXECUTION_NODE__VISIBILITY:
+				setVisibility((Visibility)newValue);
 				return;
 			case SexecPackage.EXECUTION_NODE__ABSTRACT:
 				setAbstract((Boolean)newValue);
@@ -788,6 +863,9 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 			case SexecPackage.EXECUTION_NODE__STATIC:
 				setStatic(STATIC_EDEFAULT);
 				return;
+			case SexecPackage.EXECUTION_NODE__VISIBILITY:
+				setVisibility(VISIBILITY_EDEFAULT);
+				return;
 			case SexecPackage.EXECUTION_NODE__ABSTRACT:
 				setAbstract(ABSTRACT_EDEFAULT);
 				return;
@@ -839,6 +917,8 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 				return static_ != STATIC_EDEFAULT;
 			case SexecPackage.EXECUTION_NODE__ID:
 				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
+			case SexecPackage.EXECUTION_NODE__VISIBILITY:
+				return visibility != VISIBILITY_EDEFAULT;
 			case SexecPackage.EXECUTION_NODE__ABSTRACT:
 				return abstract_ != ABSTRACT_EDEFAULT;
 			case SexecPackage.EXECUTION_NODE__VISIBLE:
@@ -891,6 +971,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 			switch (derivedFeatureID) {
 				case SexecPackage.EXECUTION_NODE__STATIC: return TypesPackage.DECLARATION__STATIC;
 				case SexecPackage.EXECUTION_NODE__ID: return TypesPackage.DECLARATION__ID;
+				case SexecPackage.EXECUTION_NODE__VISIBILITY: return TypesPackage.DECLARATION__VISIBILITY;
 				default: return -1;
 			}
 		}
@@ -947,6 +1028,7 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 			switch (baseFeatureID) {
 				case TypesPackage.DECLARATION__STATIC: return SexecPackage.EXECUTION_NODE__STATIC;
 				case TypesPackage.DECLARATION__ID: return SexecPackage.EXECUTION_NODE__ID;
+				case TypesPackage.DECLARATION__VISIBILITY: return SexecPackage.EXECUTION_NODE__VISIBILITY;
 				default: return -1;
 			}
 		}
@@ -982,11 +1064,13 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
 		result.append(", static: ");
 		result.append(static_);
+		result.append(", visibility: ");
+		result.append(visibility);
 		result.append(", abstract: ");
 		result.append(abstract_);
 		result.append(", visible: ");

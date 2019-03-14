@@ -58,6 +58,7 @@ public class TypeParameterImpl extends TypeImpl implements TypeParameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Type getBound() {
 		if (bound != null && bound.eIsProxy()) {
 			InternalEObject oldBound = (InternalEObject)bound;
@@ -84,6 +85,7 @@ public class TypeParameterImpl extends TypeImpl implements TypeParameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBound(Type newBound) {
 		Type oldBound = bound;
 		bound = newBound;

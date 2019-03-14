@@ -100,6 +100,7 @@ public class PropertyImpl extends TypedDeclarationImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isConst() {
 		return const_;
 	}
@@ -109,6 +110,7 @@ public class PropertyImpl extends TypedDeclarationImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setConst(boolean newConst) {
 		boolean oldConst = const_;
 		const_ = newConst;
@@ -121,6 +123,7 @@ public class PropertyImpl extends TypedDeclarationImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isReadonly() {
 		return readonly;
 	}
@@ -130,6 +133,7 @@ public class PropertyImpl extends TypedDeclarationImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReadonly(boolean newReadonly) {
 		boolean oldReadonly = readonly;
 		readonly = newReadonly;
@@ -142,6 +146,7 @@ public class PropertyImpl extends TypedDeclarationImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Expression getInitialValue() {
 		return initialValue;
 	}
@@ -166,6 +171,7 @@ public class PropertyImpl extends TypedDeclarationImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInitialValue(Expression newInitialValue) {
 		if (newInitialValue != initialValue) {
 			NotificationChain msgs = null;

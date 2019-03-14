@@ -75,6 +75,7 @@ public class TimeEventImpl extends EventImpl implements TimeEvent {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isPeriodic() {
 		return periodic;
 	}
@@ -84,6 +85,7 @@ public class TimeEventImpl extends EventImpl implements TimeEvent {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPeriodic(boolean newPeriodic) {
 		boolean oldPeriodic = periodic;
 		periodic = newPeriodic;
@@ -158,7 +160,7 @@ public class TimeEventImpl extends EventImpl implements TimeEvent {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (periodic: ");
 		result.append(periodic);
 		result.append(')');

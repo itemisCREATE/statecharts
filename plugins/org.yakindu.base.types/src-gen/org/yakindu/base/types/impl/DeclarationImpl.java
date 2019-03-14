@@ -19,6 +19,7 @@ import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.MetaComposite;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.TypesUtil;
+import org.yakindu.base.types.Visibility;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,6 +34,7 @@ import org.yakindu.base.types.TypesUtil;
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getMetaFeatures <em>Meta Features</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getVisibility <em>Visibility</em>}</li>
  * </ul>
  *
  * @generated
@@ -99,6 +101,26 @@ public class DeclarationImpl extends NamedElementImpl implements Declaration {
 	protected static final String ID_EDEFAULT = null;
 
 	/**
+	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Visibility VISIBILITY_EDEFAULT = Visibility.PUBLIC;
+
+	/**
+	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected Visibility visibility = VISIBILITY_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -122,6 +144,7 @@ public class DeclarationImpl extends NamedElementImpl implements Declaration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Annotation> getAnnotations() {
 		if (annotations == null) {
 			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, TypesPackage.DECLARATION__ANNOTATIONS);
@@ -134,6 +157,7 @@ public class DeclarationImpl extends NamedElementImpl implements Declaration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AnnotatableElement getAnnotationInfo() {
 		return annotationInfo;
 	}
@@ -158,6 +182,7 @@ public class DeclarationImpl extends NamedElementImpl implements Declaration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAnnotationInfo(AnnotatableElement newAnnotationInfo) {
 		if (newAnnotationInfo != annotationInfo) {
 			NotificationChain msgs = null;
@@ -177,6 +202,7 @@ public class DeclarationImpl extends NamedElementImpl implements Declaration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Declaration> getMetaFeatures() {
 		if (metaFeatures == null) {
 			metaFeatures = new EObjectContainmentEList<Declaration>(Declaration.class, this, TypesPackage.DECLARATION__META_FEATURES);
@@ -260,6 +286,8 @@ public class DeclarationImpl extends NamedElementImpl implements Declaration {
 				return isStatic();
 			case TypesPackage.DECLARATION__ID:
 				return getId();
+			case TypesPackage.DECLARATION__VISIBILITY:
+				return getVisibility();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -287,6 +315,9 @@ public class DeclarationImpl extends NamedElementImpl implements Declaration {
 			case TypesPackage.DECLARATION__STATIC:
 				setStatic((Boolean)newValue);
 				return;
+			case TypesPackage.DECLARATION__VISIBILITY:
+				setVisibility((Visibility)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -311,6 +342,9 @@ public class DeclarationImpl extends NamedElementImpl implements Declaration {
 			case TypesPackage.DECLARATION__STATIC:
 				setStatic(STATIC_EDEFAULT);
 				return;
+			case TypesPackage.DECLARATION__VISIBILITY:
+				setVisibility(VISIBILITY_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -333,6 +367,8 @@ public class DeclarationImpl extends NamedElementImpl implements Declaration {
 				return static_ != STATIC_EDEFAULT;
 			case TypesPackage.DECLARATION__ID:
 				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
+			case TypesPackage.DECLARATION__VISIBILITY:
+				return visibility != VISIBILITY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -395,6 +431,8 @@ public class DeclarationImpl extends NamedElementImpl implements Declaration {
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (static: ");
 		result.append(static_);
+		result.append(", visibility: ");
+		result.append(visibility);
 		result.append(')');
 		return result.toString();
 	}
@@ -407,6 +445,29 @@ public class DeclarationImpl extends NamedElementImpl implements Declaration {
 	@Override
 	public String getId() {
 		return TypesUtil.computeQID(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Visibility getVisibility() {
+		return visibility;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setVisibility(Visibility newVisibility) {
+		Visibility oldVisibility = visibility;
+		visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.DECLARATION__VISIBILITY, oldVisibility, visibility));
 	}
 	
 } //DeclarationImpl

@@ -34,6 +34,7 @@ import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.TypesUtil;
+import org.yakindu.base.types.Visibility;
 import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecPackage;
@@ -53,6 +54,7 @@ import org.yakindu.sct.model.sexec.StateVector;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getMetaFeatures <em>Meta Features</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#isVisible <em>Visible</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getSuperTypes <em>Super Types</em>}</li>
@@ -148,6 +150,26 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * @ordered
 	 */
 	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Visibility VISIBILITY_EDEFAULT = Visibility.PUBLIC;
+
+	/**
+	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected Visibility visibility = VISIBILITY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
@@ -303,6 +325,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -312,6 +335,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -324,6 +348,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Annotation> getAnnotations() {
 		if (annotations == null) {
 			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, SexecPackage.EXECUTION_SCOPE__ANNOTATIONS);
@@ -336,6 +361,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AnnotatableElement getAnnotationInfo() {
 		return annotationInfo;
 	}
@@ -360,6 +386,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAnnotationInfo(AnnotatableElement newAnnotationInfo) {
 		if (newAnnotationInfo != annotationInfo) {
 			NotificationChain msgs = null;
@@ -379,6 +406,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Declaration> getMetaFeatures() {
 		if (metaFeatures == null) {
 			metaFeatures = new EObjectContainmentEList<Declaration>(Declaration.class, this, SexecPackage.EXECUTION_SCOPE__META_FEATURES);
@@ -391,6 +419,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isStatic() {
 		return static_;
 	}
@@ -400,6 +429,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStatic(boolean newStatic) {
 		boolean oldStatic = static_;
 		static_ = newStatic;
@@ -421,6 +451,30 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public Visibility getVisibility() {
+		return visibility;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setVisibility(Visibility newVisibility) {
+		Visibility oldVisibility = visibility;
+		visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_SCOPE__VISIBILITY, oldVisibility, visibility));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public boolean isAbstract() {
 		return abstract_;
 	}
@@ -430,6 +484,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAbstract(boolean newAbstract) {
 		boolean oldAbstract = abstract_;
 		abstract_ = newAbstract;
@@ -442,6 +497,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isVisible() {
 		return visible;
 	}
@@ -451,6 +507,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVisible(boolean newVisible) {
 		boolean oldVisible = visible;
 		visible = newVisible;
@@ -463,6 +520,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<TypeSpecifier> getSuperTypes() {
 		if (superTypes == null) {
 			superTypes = new EObjectContainmentEList<TypeSpecifier>(TypeSpecifier.class, this, SexecPackage.EXECUTION_SCOPE__SUPER_TYPES);
@@ -475,6 +533,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<TypeParameter> getTypeParameters() {
 		if (typeParameters == null) {
 			typeParameters = new EObjectContainmentEList<TypeParameter>(TypeParameter.class, this, SexecPackage.EXECUTION_SCOPE__TYPE_PARAMETERS);
@@ -487,6 +546,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Declaration> getFeatures() {
 		if (features == null) {
 			features = new EObjectContainmentEList<Declaration>(Declaration.class, this, SexecPackage.EXECUTION_SCOPE__FEATURES);
@@ -499,6 +559,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StateVector getStateVector() {
 		return stateVector;
 	}
@@ -523,6 +584,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStateVector(StateVector newStateVector) {
 		if (newStateVector != stateVector) {
 			NotificationChain msgs = null;
@@ -542,6 +604,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ExecutionScope> getSubScopes() {
 		if (subScopes == null) {
 			subScopes = new EObjectWithInverseResolvingEList<ExecutionScope>(ExecutionScope.class, this, SexecPackage.EXECUTION_SCOPE__SUB_SCOPES, SexecPackage.EXECUTION_SCOPE__SUPER_SCOPE);
@@ -554,6 +617,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ExecutionScope getSuperScope() {
 		if (superScope != null && superScope.eIsProxy()) {
 			InternalEObject oldSuperScope = (InternalEObject)superScope;
@@ -595,6 +659,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSuperScope(ExecutionScope newSuperScope) {
 		if (newSuperScope != superScope) {
 			NotificationChain msgs = null;
@@ -614,6 +679,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Sequence> getEnterSequences() {
 		if (enterSequences == null) {
 			enterSequences = new EObjectContainmentEList<Sequence>(Sequence.class, this, SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCES);
@@ -626,6 +692,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Sequence getExitSequence() {
 		return exitSequence;
 	}
@@ -650,6 +717,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExitSequence(Sequence newExitSequence) {
 		if (newExitSequence != exitSequence) {
 			NotificationChain msgs = null;
@@ -669,6 +737,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Sequence getInitSequence() {
 		return initSequence;
 	}
@@ -693,6 +762,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInitSequence(Sequence newInitSequence) {
 		if (newInitSequence != initSequence) {
 			NotificationChain msgs = null;
@@ -712,6 +782,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Declaration> getAllFeatures() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -723,6 +794,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Type getOriginType() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -734,6 +806,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Annotation getAnnotationOfType(String typeName) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -815,6 +888,8 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 				return isStatic();
 			case SexecPackage.EXECUTION_SCOPE__ID:
 				return getId();
+			case SexecPackage.EXECUTION_SCOPE__VISIBILITY:
+				return getVisibility();
 			case SexecPackage.EXECUTION_SCOPE__ABSTRACT:
 				return isAbstract();
 			case SexecPackage.EXECUTION_SCOPE__VISIBLE:
@@ -867,6 +942,9 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 				return;
 			case SexecPackage.EXECUTION_SCOPE__STATIC:
 				setStatic((Boolean)newValue);
+				return;
+			case SexecPackage.EXECUTION_SCOPE__VISIBILITY:
+				setVisibility((Visibility)newValue);
 				return;
 			case SexecPackage.EXECUTION_SCOPE__ABSTRACT:
 				setAbstract((Boolean)newValue);
@@ -933,6 +1011,9 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 			case SexecPackage.EXECUTION_SCOPE__STATIC:
 				setStatic(STATIC_EDEFAULT);
 				return;
+			case SexecPackage.EXECUTION_SCOPE__VISIBILITY:
+				setVisibility(VISIBILITY_EDEFAULT);
+				return;
 			case SexecPackage.EXECUTION_SCOPE__ABSTRACT:
 				setAbstract(ABSTRACT_EDEFAULT);
 				return;
@@ -990,6 +1071,8 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 				return static_ != STATIC_EDEFAULT;
 			case SexecPackage.EXECUTION_SCOPE__ID:
 				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
+			case SexecPackage.EXECUTION_SCOPE__VISIBILITY:
+				return visibility != VISIBILITY_EDEFAULT;
 			case SexecPackage.EXECUTION_SCOPE__ABSTRACT:
 				return abstract_ != ABSTRACT_EDEFAULT;
 			case SexecPackage.EXECUTION_SCOPE__VISIBLE:
@@ -1046,6 +1129,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 			switch (derivedFeatureID) {
 				case SexecPackage.EXECUTION_SCOPE__STATIC: return TypesPackage.DECLARATION__STATIC;
 				case SexecPackage.EXECUTION_SCOPE__ID: return TypesPackage.DECLARATION__ID;
+				case SexecPackage.EXECUTION_SCOPE__VISIBILITY: return TypesPackage.DECLARATION__VISIBILITY;
 				default: return -1;
 			}
 		}
@@ -1102,6 +1186,7 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 			switch (baseFeatureID) {
 				case TypesPackage.DECLARATION__STATIC: return SexecPackage.EXECUTION_SCOPE__STATIC;
 				case TypesPackage.DECLARATION__ID: return SexecPackage.EXECUTION_SCOPE__ID;
+				case TypesPackage.DECLARATION__VISIBILITY: return SexecPackage.EXECUTION_SCOPE__VISIBILITY;
 				default: return -1;
 			}
 		}
@@ -1137,11 +1222,13 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
 		result.append(", static: ");
 		result.append(static_);
+		result.append(", visibility: ");
+		result.append(visibility);
 		result.append(", abstract: ");
 		result.append(abstract_);
 		result.append(", visible: ");

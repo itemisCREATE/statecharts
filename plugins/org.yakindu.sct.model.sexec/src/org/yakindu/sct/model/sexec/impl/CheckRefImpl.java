@@ -68,6 +68,7 @@ public class CheckRefImpl extends CheckImpl implements CheckRef {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Check getCheck() {
 		if (check != null && check.eIsProxy()) {
 			InternalEObject oldCheck = (InternalEObject)check;
@@ -109,6 +110,7 @@ public class CheckRefImpl extends CheckImpl implements CheckRef {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCheck(Check newCheck) {
 		if (newCheck != check) {
 			NotificationChain msgs = null;

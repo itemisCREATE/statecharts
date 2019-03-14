@@ -67,6 +67,7 @@ public class ArrayTypeSpecifierImpl extends TypeSpecifierImpl implements ArrayTy
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getSize() {
 		return size;
 	}
@@ -76,6 +77,7 @@ public class ArrayTypeSpecifierImpl extends TypeSpecifierImpl implements ArrayTy
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSize(int newSize) {
 		int oldSize = size;
 		size = newSize;

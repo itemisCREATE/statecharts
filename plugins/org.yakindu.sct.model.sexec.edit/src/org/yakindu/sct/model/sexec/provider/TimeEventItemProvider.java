@@ -198,11 +198,6 @@ public class TimeEventItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 SGraphFactory.eINSTANCE.createStatechart()));
 
 		newChildDescriptors.add
@@ -264,11 +259,6 @@ public class TimeEventItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 SexecFactory.eINSTANCE.createTimeEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
-				 ExpressionsFactory.eINSTANCE.createForVarDecl()));
 
 		newChildDescriptors.add
 			(createChildParameter
