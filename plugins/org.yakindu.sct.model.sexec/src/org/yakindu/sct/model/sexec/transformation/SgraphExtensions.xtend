@@ -151,6 +151,11 @@ class SgraphExtensions {
 		r.requireDeepHistory || r.requireShallowHistory
 	}
 	
+	def requireHistory(Statechart sc) {
+		sc.eAllContents.filter(Entry).exists[ e | (e.kind == EntryKind::SHALLOW_HISTORY) || (e.kind == EntryKind::DEEP_HISTORY)]	
+	}
+	
+	
 	/**
 	 * Tries to find the parent {@link Statechart} Object of the element.
 	 * 

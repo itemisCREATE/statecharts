@@ -100,7 +100,7 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 
 	}
 
-	protected def create createEnumerationType statesEnumeration(Statechart sc) {
+	def create createEnumerationType statesEnumeration(Statechart sc) {
 		it => [
 			name = '''«sc.name»States'''
 			annotationInfo = createAnnotatableElement

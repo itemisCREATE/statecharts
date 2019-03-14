@@ -15,6 +15,7 @@ import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 
 @Singleton
 class StatemachineMethods {
@@ -30,6 +31,8 @@ class StatemachineMethods {
 	@Inject extension StatemachinePublic
 	@Inject extension StateVectorExtensions
 	@Inject extension IStatemachine
+	@Inject extension SgraphExtensions
+	
 	@Inject ITypeSystem ts
 	
 
@@ -53,7 +56,7 @@ class StatemachineMethods {
 		it.features += createInitMethod => [
 			body = createBlockExpression => [
 				expressions += stateVectorInitialization(sc)
-				if (sc.create.hasHistory) {
+				if (sc.requireHistory) {
 					expressions += historyStateVectorInitialization(sc)
 				}
 				// TODO: transform init sequence into expressions

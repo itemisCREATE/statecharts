@@ -1,27 +1,25 @@
 package org.yakindu.sct.model.sexec.transformation.ng
 
 import com.google.inject.Inject
+import com.google.inject.Singleton
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.typesystem.ITypeSystem
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
-import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
+import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sgraph.Statechart
-import com.google.inject.Singleton
 
 @Singleton class StatemachineProperties {
 	
 	@Inject ITypeSystem ts
 	
 	@Inject extension StatemachinePublic
-	@Inject extension SexecElementMapping
-	@Inject extension SExecExtensions  
+	@Inject extension SgraphExtensions  
 	
 	extension TypesFactory typesFactory = TypesFactory.eINSTANCE
 	
 	def defineProperties(ComplexType it, Statechart sc) {
 		it.features += stateVector(sc)
-		if (sc.create.hasHistory) {
+		if (sc.requireHistory) {
 			it.features += historyStateVector(sc)
 		}
 	}

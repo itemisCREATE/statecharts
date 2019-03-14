@@ -40,11 +40,8 @@ import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.TimeUnit
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
-import org.yakindu.sct.model.sexec.transformation.ng.StateOperations
-import org.yakindu.sct.model.sexec.transformation.ng.StatemachineProperties
-import org.yakindu.sct.model.sexec.transformation.ng.ScopeOperations
-import org.yakindu.sct.model.sexec.transformation.ng.StatemachinePublic
 
 class SequenceBuilder {
 
@@ -54,12 +51,6 @@ class SequenceBuilder {
 	@Inject extension TraceExtensions trace
 
 	@Inject extension ITypeValueProvider 
-	@Inject extension TypeBuilder tBuilder
-	@Inject extension ExpressionBuilder eBuilder
-	@Inject extension StatemachineProperties smProperties
-	@Inject extension StateOperations stateOperations
-	@Inject extension ScopeOperations scopeOperations
-	@Inject extension StatemachinePublic
 	
 	
 
@@ -67,7 +58,7 @@ class SequenceBuilder {
 	@Named(IModelSequencer.ADD_TRACES)
 	boolean _addTraceSteps = false
 
-	static String DEFAULT_SEQUENCE_NAME = "default"
+	public static String DEFAULT_SEQUENCE_NAME = "default"
 
 	def void defineDeepEnterSequences(ExecutionFlow flow, Statechart sc) {
 		for (r : sc.regions) {
@@ -209,19 +200,6 @@ class SequenceBuilder {
 	def dispatch void defineScopeEnterSequences(FinalState state) {
 		val execState = state.create
 		
-		val op = _op => [
-			name = DEFAULT_SEQUENCE_NAME	
-			_comment("Default enter sequence for state " + state.name)
-			body = _block(
-				execState.entryActionOperation?._call,
-//TODO				if(_addTraceSteps) execState.newTraceStateEntered else null,
-				stateVector(state.statechart)._ref
-					._get(state.create.stateVector.offset._int)
-					._assign(stateVector(state.statechart)._ref._fc(state.enumerator))
-			)
-		] 
-		execState.features += op
-		
 		val seq = sexec.factory.createSequence
 		seq.name = DEFAULT_SEQUENCE_NAME
 		seq.comment = "Default enter sequence for state " + state.name
@@ -254,35 +232,7 @@ class SequenceBuilder {
 		entryPointNames.sortInplace
 
 		// create an entry sequence for each entry point
-		for (epName : entryPointNames) {
-			val op = _op => [
-				name = epName	
-				_comment("Default enter sequence for state " + state.name)
-				val block = _block(
-					execState.entryActionOperation?._call
-					//TODO if(_addTraceSteps) execState.newTraceStateEntered else null
-				)
-				
-				if (execState.leaf) 
-					block.expressions +=	stateVector(state.statechart)._ref
-						._get(state.create.stateVector.offset._int)
-						._assign(stateVector(state.statechart)._ref._fc(state.enumerator))
-				else 
-					for (r : state.regions) {
-						var regionEnterSeq = r.create.resolveEnterSequenceOperation(epName)
-	
-						if (regionEnterSeq !== null) {
-							block.expressions += regionEnterSeq._call
-						}
-					}
-
-				
-				
-				body = block
-			] 
-			execState.features += op
-			
-			
+		for (epName : entryPointNames) {			
 			
 			val seq = sexec.factory.createSequence
 			seq.name = epName
@@ -321,6 +271,8 @@ class SequenceBuilder {
 		}
 
 	}
+
+
 
 	/**
 	 * Defines the exit sequences of all states

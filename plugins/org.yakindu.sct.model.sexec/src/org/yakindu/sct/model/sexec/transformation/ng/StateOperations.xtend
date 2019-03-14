@@ -9,7 +9,9 @@ import com.google.inject.Singleton
 	
 	@Inject extension TypeBuilder tBuilder
 	
-	def create op : _op entryActionOperation(ExecutionState it){
+	def create op : _op entryActionOperation(ExecutionState it) {
+		
+		op.name = "entryAction"
 		features += op
 	}
 	

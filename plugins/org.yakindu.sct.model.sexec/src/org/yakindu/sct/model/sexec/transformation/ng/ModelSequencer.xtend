@@ -50,13 +50,30 @@ class ModelSequencer implements IModelSequencer {
 	}
 
 	override Package transformToPackage(Statechart sc, IValidationIssueAcceptor acceptor) {
-		
-		val ef = sc.transformToFlow(acceptor)
 				
-		val scpackage = sc.statemachinePackage
-		val sctype = sc.statemachineType
+		return sc.makePackage
 		
+	}
+	
+	override ExecutionFlow transform(Statechart sc, IValidationIssueAcceptor acceptor) {
+		sc.makePackage
+		val ef = sc.makeFlow
+		
+		//clear create caches to avoid memory leak with repetetive generator cycles
+		mapping.cleanup
+		
+		return ef
+	}
+
+	protected def create pkg:sc.statemachinePackage makePackage(Statechart sc) {
+
+		val sctype = sc.statemachineType
+
 		sctype.defineProperties(sc)
+
+		val ef = sc.makeFlow
+				
+		
 		
 		sctype.declareSequenceMethods(ef)
 		
@@ -72,24 +89,10 @@ class ModelSequencer implements IModelSequencer {
 		
 		sctype.defineRunCycleMethod(sc)
 		
-		return scpackage
-		
-	}
-	
-	override ExecutionFlow transform(Statechart sc, IValidationIssueAcceptor acceptor) {
-		
-		val ef = sc.transformToFlow(acceptor)
-		
-		//clear create caches to avoid memory leak with repetetive generator cycles
-		mapping.cleanup
-		
-		return ef
 	}
 
-	protected def ExecutionFlow transformToFlow(Statechart sc, IValidationIssueAcceptor acceptor) {
-		
-		val ef = sc.create
-		
+	protected def create ef:sc.create makeFlow(Statechart sc) {
+				
 		// during mapping the basic structural elements will be mapped from the source statechart to the execution flow
 		sc.mapScopes(ef)
 		sc.mapRegularStates(ef)
@@ -132,7 +135,6 @@ class ModelSequencer implements IModelSequencer {
 		// retarget declaration refs
 		ef.retargetDeclRefs
 				
-		return ef
 	}
 
 	/************** retarget declaration refs **************/

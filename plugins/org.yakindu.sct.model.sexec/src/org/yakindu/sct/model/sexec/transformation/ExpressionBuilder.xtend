@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) 2019 itemis AG - All rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * 
+ * Contributors:
+ *  thomas kutz - itemis AG
+ *  axel terfloth - itemis AG
+ */
 package org.yakindu.sct.model.sexec.transformation
 
 import org.eclipse.emf.ecore.EObject
@@ -15,6 +23,14 @@ import org.yakindu.base.types.Declaration
 import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.SwitchCase
 
+/**
+ * Builder extension for building expressions.
+ * 
+ * TODO: move to expressions plugin
+ * 
+ * @author axel terfloth
+ * @author thomas kutz
+ */
 class ExpressionBuilder {
 
 	extension ExpressionsFactory eFactory = ExpressionsFactory.eINSTANCE
@@ -160,5 +176,6 @@ class ExpressionBuilder {
 			it.then = then
 		]
 	}
+
 
 }

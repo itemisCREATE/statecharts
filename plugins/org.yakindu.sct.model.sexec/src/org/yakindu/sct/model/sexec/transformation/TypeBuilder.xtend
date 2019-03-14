@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) 2019 itemis AG - All rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * 
+ * Contributors:
+ *  thomas kutz - itemis AG
+ *  axel terfloth - itemis AG
+ */
 package org.yakindu.sct.model.sexec.transformation
 
 import org.yakindu.base.types.TypesFactory
@@ -7,6 +15,14 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Type
 
+/**
+ * Builder extension for building types.
+ * 
+ * TODO: move to types plugin
+ * 
+ * @author axel terfloth
+ * @author thomas kutz
+ */
 class TypeBuilder {
 
 	@Inject extension ITypeSystem typeSystem
