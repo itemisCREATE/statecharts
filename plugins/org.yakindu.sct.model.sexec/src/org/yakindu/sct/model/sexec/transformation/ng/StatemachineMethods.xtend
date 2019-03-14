@@ -65,7 +65,7 @@ class StatemachineMethods {
 	def stateVectorInitialization(Statechart sc) {
 		val ef = sc.create
 		val i = _variable("i", ITypeSystem.INTEGER, 0._int)
-		_for(i, i._smaller(ef.stateVector.size._int), i._inc) => [
+		_for(i, i._ref._smaller(ef.stateVector.size._int), i._ref._inc) => [
 			it.body = _block(
 				stateVector(sc)._ref._get(0._int)._assign(statesEnumeration(sc)._ref._fc(noState(sc)))
 			)
@@ -75,7 +75,7 @@ class StatemachineMethods {
 	def historyStateVectorInitialization(Statechart sc) {
 		val ef = sc.create
 		val i = _variable("i", ITypeSystem.INTEGER, 0._int)
-		_for(i, i._smaller(ef.historyVector.size._int), i._inc) => [
+		_for(i, i._ref._smaller(ef.historyVector.size._int), i._ref._inc) => [
 			it.body = _block(
 				historyStateVector(sc)._ref._get(0._int)._assign(historyStateVector(sc)._ref._fc(noState(sc)))
 			)
@@ -140,11 +140,11 @@ class StatemachineMethods {
 				val i = _variable("index", ITypeSystem.INTEGER, 0._int)
 				expressions += 
 				_for(i, i._ref._smaller(stateVector(sc)._ref._fc(arrayLength)), i._ref._inc) => [
-					_switch(stateVector(sc)._ref._get(i._ref), 
+					body = _block(_switch(stateVector(sc)._ref._get(i._ref), 
 						ef.states.filter[isLeaf].filter[reactMethod!==null].map[state | 
 							_case((state.sourceElement as State).enumerator._ref, state.reactMethod._call(_true))
 						]
-					)
+					))
 					
 				]
 			]
