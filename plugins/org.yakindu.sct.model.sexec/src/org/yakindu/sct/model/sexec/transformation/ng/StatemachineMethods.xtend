@@ -137,10 +137,9 @@ class StatemachineMethods {
 		val ef = sc.create
 		it.features += createRunCycleMethod => [
 			body = createBlockExpression => [
-				val i = _variable("index", ITypeSystem.INTEGER, 0._int)
 				expressions += 
-				_for(i, i._ref._smaller(stateVector(sc)._ref._fc(arrayLength)), i._ref._inc) => [
-					body = _block(_switch(stateVector(sc)._ref._get(i._ref), 
+				_for(nextStateIndex(sc)._ref._assign(0._int), nextStateIndex(sc)._ref._smaller(stateVector(sc)._ref._fc(arrayLength)), nextStateIndex(sc)._ref._inc) => [
+					body = _block(_switch(stateVector(sc)._ref._get(nextStateIndex(sc)._ref), 
 						ef.states.filter[isLeaf].filter[reactMethod!==null].map[state | 
 							_case((state.sourceElement as State).enumerator._ref, state.reactMethod._call(_true))
 						]
