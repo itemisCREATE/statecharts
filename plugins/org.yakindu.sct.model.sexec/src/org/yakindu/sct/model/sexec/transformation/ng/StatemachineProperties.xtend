@@ -9,15 +9,20 @@ import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.base.types.Visibility
+import org.yakindu.sct.model.sexec.transformation.StateVectorBuilder
+import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
+import org.yakindu.base.types.Operation
 
 @Singleton class StatemachineProperties {
 	
 	@Inject ITypeSystem ts
 	
 	@Inject extension StatemachinePublic
-	@Inject extension SgraphExtensions  
+	@Inject extension SgraphExtensions
+	@Inject extension StateVectorBuilder
 	
 	@Inject extension TypeBuilder
+	@Inject extension ExpressionBuilder
 	
 	extension TypesFactory typesFactory = TypesFactory.eINSTANCE
 	
@@ -39,6 +44,9 @@ import org.yakindu.base.types.Visibility
 		name = "stateVector"
 		typeSpecifier = createArrayOfStateType(sc)
 		visibility = Visibility.PROTECTED
+		
+		val size = sc.createStateVector.size
+		initialValue = arrayType._ref._fc(arrayType.ctor, size._int)
 	}
 	
 	def create createProperty historyStateVector(Statechart sc) {
@@ -49,11 +57,19 @@ import org.yakindu.base.types.Visibility
 	
 	protected def createArrayOfStateType(Statechart sc) {
 		createTypeSpecifier => [
-			type = ts.getType(ITypeSystem.ARRAY)
+			type = arrayType
 			typeArguments += createTypeSpecifier => [
 				type = statesEnumeration(sc)
 			]
 		]
+	}
+	
+	protected def arrayType() {
+		ts.getType(ITypeSystem.ARRAY) as ComplexType
+	}
+	
+	protected def ctor(ComplexType type) {
+		type.allFeatures.filter(Operation).findFirst[name == "new"]
 	}
 	
 }

@@ -50,15 +50,16 @@ class StateVectorBuilder {
 	}
 
 	def defineStateVector(ExecutionFlow flow, Statechart sc) {
+		flow.stateVector = createStateVector(sc)
+	}
+	
+	def create sexec.factory.createStateVector createStateVector(Statechart sc) {
 		var offset = 0
 		for ( r : sc.regions ) {
 			offset = offset + defineStateVectors(r, offset)	
-		}	
-		
-		
-		flow.stateVector = sexec.factory.createStateVector
-		flow.stateVector.offset = 0;
-		flow.stateVector.size = offset			
+		}
+		it.offset = 0
+		it.size = offset
 	}
 
 	/** calculates the maximum orthogonality (maximum number of possible active leaf states) of the statechart */
