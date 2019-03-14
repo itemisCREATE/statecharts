@@ -74,6 +74,9 @@ class SgraphExtensions {
 		r.vertices.findFirst(v | v instanceof Entry && (v.name === null || "".equals(v.name) || v.name == 'default') ) as Entry
 	}
 	
+	def region(Entry e) {
+		e.eContainer as Region
+	}
 	
 	/**
 	 * Returns the name of the specified entry point or 'default' if it does not exist

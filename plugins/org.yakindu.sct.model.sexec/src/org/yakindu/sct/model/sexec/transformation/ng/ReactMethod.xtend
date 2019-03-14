@@ -38,6 +38,7 @@ import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.base.types.ComplexType
 
 /**
  * React method is an artifact concepts that is created for each state machine state and the statechart
@@ -54,7 +55,8 @@ class ReactMethod {
 	@Inject extension ITypeSystem typeSystem
 	
 	@Inject extension ExpressionBuilder exprBuilder
-	
+	@Inject extension StatemachinePublic smPublic
+	@Inject extension StateType stateType
 	
 	/**
 	 * Declares the react methods for all ExecutionNode objects. This are the ExecutionStates and the ExecutionFlow itself.
@@ -85,8 +87,12 @@ class ReactMethod {
 	}	
 
 	def dispatch ExecutionNode declareReactMethod(ExecutionNode node) {
+		node	
+	}
+
+	def dispatch ExecutionNode declareReactMethod(ExecutionState node) {
 		node => [
-			features.add( sexecFactory.createMethod => [ m |
+			(node.sourceElement as RegularState).type.features.add( sexecFactory.createMethod => [ m |
 				m.name = "react"
 				m._type(_bool)
 				m._param("try_transition", _bool)
@@ -96,7 +102,7 @@ class ReactMethod {
 
 	def dispatch ExecutionNode declareReactMethod(ExecutionFlow node) {
 		node => [
-			features.add( sexecFactory.createMethod => [ m |
+			node.statechart.statemachineType.features.add( sexecFactory.createMethod => [ m |
 				m.name = "react"
 				m._type(_bool)
 			])
@@ -223,7 +229,15 @@ class ReactMethod {
 		parameters.filter[ p | p.name == name].head
 	}
 	
-	def Method reactMethod(ExecutionNode it) {
+	def dispatch Method reactMethod(ExecutionFlow it) {
+		it.statechart.statemachineType.reactMethod
+	}
+	
+	def dispatch Method reactMethod(ExecutionState it) {
+		(it.sourceElement as RegularState).type.reactMethod
+	}
+	
+	def dispatch Method reactMethod(ComplexType it) {
 		features.filter( typeof(Method) ).filter( m | m.name == "react").head
 	}
 	

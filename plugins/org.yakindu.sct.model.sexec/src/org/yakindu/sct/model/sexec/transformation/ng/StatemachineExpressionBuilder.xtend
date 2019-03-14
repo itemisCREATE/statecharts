@@ -7,14 +7,13 @@
  */
 package org.yakindu.sct.model.sexec.transformation.ng
 
-import org.yakindu.base.types.Expression
-import org.yakindu.sct.model.sgraph.Region
 import com.google.inject.Inject
-import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
+import org.yakindu.base.types.Expression
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
-import org.yakindu.sct.model.sgraph.State
-import org.yakindu.base.expressions.expressions.ExpressionsFactory
+import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
+import org.yakindu.sct.model.sgraph.Region
+import org.yakindu.sct.model.sgraph.RegularState
 
 /**
  * High level expression builder that covers state machine specific high level 
@@ -32,7 +31,6 @@ class StatemachineExpressionBuilder {
 	@Inject extension StatemachineProperties smPropos 
 	@Inject extension SgraphExtensions sgraph
 	@Inject extension ExpressionBuilder eBuilder
-	extension ExpressionsFactory eFactory = ExpressionsFactory.eINSTANCE
 	
 	
 	def Expression _saveHistory(Region it) {
@@ -45,7 +43,7 @@ class StatemachineExpressionBuilder {
 	}
 	 
 	 
-	def Expression _enterState(State state) {
+	def Expression _enterState(RegularState state) {
 		//		«stepComment»
 		//TODO:		nextStateIndex = «state.stateVector.offset»;
 		//		stateVector[«state.stateVector.offset»] = State.«state.stateName.asEscapedIdentifier»;

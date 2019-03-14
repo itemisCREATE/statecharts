@@ -2,29 +2,29 @@ package org.yakindu.sct.model.sexec.transformation.ng
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.yakindu.sct.model.sexec.ExecutionScope
-import org.yakindu.sct.model.sexec.transformation.TypeBuilder
+import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Operation
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions
+import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 
-@Singleton class ScopeOperations {
+@Singleton class EnterSequence {
 
 	@Inject extension TypeBuilder tBuilder
 	
-	def create op : _op createEnterSequenceOperation(ExecutionScope it, String entryName){
+	def create op : _op enterSequence(ComplexType it, String entryName){
 		features += op
 		op.name = enterSequenceOperationName(entryName)
 	}
 	
-	def resolveEnterSequenceOperation(ExecutionScope it, String entryName) {
-		val op = getEnterSequenceOperation(entryName)
+	def resolveEnterSequence(ComplexType it, String entryName) {
+		val op = enterSequenceByName(entryName)
 		
 		return 
 			if (op !== null) op 
-			else getEnterSequenceOperation(SexecExtensions.DEFAULT_SEQUENCE_NAME)
+			else enterSequenceByName(SexecExtensions.DEFAULT_SEQUENCE_NAME)
 	}
 
-	def getEnterSequenceOperation(ExecutionScope it, String entryName) {
+	def enterSequenceByName(ComplexType it, String entryName) {
 		features.filter(Operation).findFirst[name == enterSequenceOperationName(entryName)]
 	}
 

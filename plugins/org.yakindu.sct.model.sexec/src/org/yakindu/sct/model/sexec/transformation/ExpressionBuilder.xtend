@@ -87,7 +87,7 @@ class ExpressionBuilder {
 	
 	def _for(Expression varDecl, Expression cond, Expression varUpdate) {
 		createForExpression => [
-			varInits += varDecl
+		 	varInits += varDecl
 			condition = cond
 			varUpdates += varUpdate
 		]

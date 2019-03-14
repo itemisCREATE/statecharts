@@ -11,17 +11,17 @@
 package org.yakindu.sct.model.sexec.transformation.ng
 
 import com.google.inject.Inject
-import com.google.inject.name.Named
 import org.yakindu.base.types.typesystem.ITypeValueProvider
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
-import org.yakindu.sct.model.sexec.transformation.IModelSequencer
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.TraceExtensions
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
+import org.yakindu.sct.model.sgraph.CompositeElement
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.Region
+import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.State
 
 class SequenceBuilder extends org.yakindu.sct.model.sexec.transformation.SequenceBuilder {
@@ -37,9 +37,11 @@ class SequenceBuilder extends org.yakindu.sct.model.sexec.transformation.Sequenc
 	@Inject extension StatemachineExpressionBuilder smeBuilder
 	@Inject extension StatemachineProperties smProperties
 	@Inject extension StateOperations stateOperations
-	@Inject extension ScopeOperations scopeOperations
+	@Inject extension EnterSequence scopeOperations
 	@Inject extension StatemachinePublic smPublic
 	@Inject extension StateType stateType
+	@Inject extension RegionType regionType
+	@Inject extension EntryNodeMethods enMethods
 
 	
 	
@@ -50,50 +52,30 @@ class SequenceBuilder extends org.yakindu.sct.model.sexec.transformation.Sequenc
 
 
 	override dispatch void defineScopeEnterSequences(Region r) {
-		val execRegion = r.create
+		super._defineScopeEnterSequences(r)
 
-		// process all vertices of a region
-		for (s : r.vertices)
-			defineScopeEnterSequences(s)
+//		// process all vertices of a region
+//		for (s : r.vertices)
+//			defineScopeEnterSequences(s)
 
 		// create an enter sequence for each contained entry
 		for (e : r.collectEntries) {
-			
-			val seq = sexec.factory.createSequence
-			seq.name = if (e.name.nullOrEmpty)
-							DEFAULT_SEQUENCE_NAME
-						else
-							e.name
-							
-			seq.comment = "'" + seq.name + "' enter sequence for region " + r.name
+			val seqName = if (e.name.nullOrEmpty) DEFAULT_SEQUENCE_NAME
+							else e.name
 
-			val entryNode = e.create
-			if (entryNode !== null && entryNode.reactSequence !== null) {
-				seq.steps.add(entryNode.reactSequence.newCall);
-			}
-
-			execRegion.enterSequences += seq
+			r.type.enterSequence(e.name) => [
+				_comment("'" + seqName + "' enter sequence for region " + r.type.name)				
+				body = _block(e.reaction._call)
+			] 
 		}
 	}
+
 
 	override dispatch void defineScopeEnterSequences(FinalState state) {
 		
 		super._defineScopeEnterSequences(state) // TODO: remove
 		
-		
-		val execState = state.create
-		val op = _op => [
-			name = DEFAULT_SEQUENCE_NAME	
-			_comment("Default enter sequence for state " + state.name)
-			body = _block(
-				execState.entryActionOperation?._call,
-//TODO				if(_addTraceSteps) execState.newTraceStateEntered else null,
-				stateVector(state.statechart)._ref
-					._get(state.create.stateVector.offset._int)
-					._assign(stateVector(state.statechart)._ref._fc(state.enumerator))
-			)
-		] 
-		state.type.features += op		
+		state.enterSequence(DEFAULT_SEQUENCE_NAME)
 	}
 
 
@@ -120,19 +102,25 @@ class SequenceBuilder extends org.yakindu.sct.model.sexec.transformation.Sequenc
 
 		// create an entry sequence for each entry point
 		for (epName : entryPointNames) {
-			val op = _op => [
-				name = epName	
+			state.enterSequence(epName)
+		}
+
+	}
+
+
+	def enterSequence(RegularState state, String epName) {
+			val op = state.type.enterSequence(epName) => [
 				_comment("Default enter sequence for state " + state.name)
 				val block = _block(
-					execState.entryActionOperation?._call
+					state.entryAction?._call
 					//TODO if(_addTraceSteps) execState.newTraceStateEntered else null
 				)
 				
-				if (execState.leaf) 
+				if (state.leaf) 
 					block.expressions +=	state._enterState
 				else 
-					for (r : state.regions) {
-						var regionEnter = r.create.resolveEnterSequenceOperation(epName)
+					for (r : (state as CompositeElement).regions) {
+						var regionEnter = r.type.resolveEnterSequence(epName)
 	
 						if (regionEnter !== null) {
 							block.expressions += regionEnter._call
@@ -148,12 +136,8 @@ class SequenceBuilder extends org.yakindu.sct.model.sexec.transformation.Sequenc
 				body = block
 			] 
 			state.type.features += op		
-		}
-
+		
 	}
-
-
-	
 	
 
 }
