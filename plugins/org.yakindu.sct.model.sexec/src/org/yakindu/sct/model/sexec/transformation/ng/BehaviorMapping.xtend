@@ -17,6 +17,10 @@ import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
+import org.yakindu.sct.model.sgraph.State
+import org.yakindu.sct.model.stext.stext.LocalReaction
+import org.yakindu.base.types.Expression
+import org.yakindu.sct.model.stext.stext.ReactionEffect
 
 /**
  * Implements the lcaDoSequence for ReactMethods.
@@ -33,6 +37,8 @@ class BehaviorMapping extends org.yakindu.sct.model.sexec.transformation.Behavio
 	@Inject extension ReactMethod rm
 	
 	@Inject extension ExpressionBuilder exprBuilder
+	@Inject extension StatemachineExpressionBuilder smeBuilder
+	@Inject extension StateOperations stateOps
 	
 
 	protected override Step lcaDoSequence(Region region, ExecutionFlow flow) {
@@ -59,6 +65,35 @@ class BehaviorMapping extends org.yakindu.sct.model.sexec.transformation.Behavio
 		if (shouldExecuteParent.apply(parent, execRegion)) {
 			parent.callReact(_false)._statement
 		}
+	}
+	
+	
+	/** 
+	 * Overrides the base implementation to additionally create a entryAction operation.
+	 * TODO: remove on cleanup
+	 */
+	override Step mapEntryAction(State state) {
+		
+		val eaSeq = super.mapEntryAction(state)
+		
+		state.defineEntryAction
+		
+		eaSeq
+	}	
+
+
+	/** Defines a states entry action.  */	
+	def void defineEntryAction(State state) {
+
+		state.entryAction.body = _block => [
+
+			for (tes : state.timeEventSpecs ) {
+				expressions += _scheduleTimeEvent(tes)
+			}	
+						
+			state.entryReactions.forEach[ lr | expressions += lr._entryReaction]
+		]
+		
 	}
 	
 }
