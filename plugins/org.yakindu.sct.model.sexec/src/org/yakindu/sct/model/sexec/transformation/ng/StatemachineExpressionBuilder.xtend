@@ -14,6 +14,13 @@ import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.stext.stext.TimeEventSpec
+
+import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
+import org.yakindu.sct.model.stext.stext.TimeUnit
+import org.yakindu.sct.model.stext.stext.LocalReaction
+import org.yakindu.sct.model.stext.stext.ReactionTrigger
+import org.yakindu.sct.model.stext.stext.ReactionEffect
 
 /**
  * High level expression builder that covers state machine specific high level 
@@ -57,7 +64,49 @@ class StatemachineExpressionBuilder {
 				._assign(state.statechart.statesEnumeration._ref._fc(state.enumerator))					
 		)
 
-		
-		
-	} 
+	}
+	
+	
+	/** TODO: schedule time events */
+	def Expression _scheduleTimeEvent(TimeEventSpec tes) {
+		_block	
+	}
+	
+	/** TODO: schedule time events */
+	def Expression _unscheduleTimeEvent(TimeEventSpec tes) {
+		_block	
+	}
+	
+	/** TODO: move to BehaviorMapping or somewhere else */
+	def Expression _entryReaction(LocalReaction it) {
+		if (effect !== null) {
+			val guard = (trigger as ReactionTrigger).guard
+			val lrEffect = effect as ReactionEffect
+			
+			val action = _block => [
+				lrEffect.actions.forEach[ a | expressions += a.copy]
+			]
+			
+			if ((trigger as ReactionTrigger).guard !== null) {
+				_if(guard.expression.copy)._then( action )	
+			} else {
+				return action
+			}
+						
+		} else null
+	}
+	
+	
+	def Expression _timeValue(TimeEventSpec tes) {
+		val pve = tes.value.copy
+
+		switch (tes.unit) {
+			case TimeUnit::MILLISECOND: pve
+			case TimeUnit::MICROSECOND: pve._divide(1000._int)
+			case TimeUnit::NANOSECOND: pve._divide(1000000._int)
+			case TimeUnit::SECOND: pve._multiply(1000._int)
+			default: pve
+		}
+	}
+	 
 }
