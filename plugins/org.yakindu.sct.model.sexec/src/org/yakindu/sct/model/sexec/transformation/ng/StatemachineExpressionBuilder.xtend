@@ -45,14 +45,16 @@ class StatemachineExpressionBuilder {
 	 
 	def Expression _enterState(RegularState state) {
 		//		«stepComment»
-		//TODO:		nextStateIndex = «state.stateVector.offset»;
+		//		nextStateIndex = «state.stateVector.offset»;
 		//		stateVector[«state.stateVector.offset»] = State.«state.stateName.asEscapedIdentifier»;
 
 		_block(
-			
+			state.statechart.nextStateIndex._ref
+				._assign(state.create.stateVector.offset._int),
+				
 			stateVector(state.statechart)._ref
-							._get(state.create.stateVector.offset._int)
-							._assign(state.statechart.statesEnumeration._ref._fc(state.enumerator))					
+				._get(state.create.stateVector.offset._int)
+				._assign(state.statechart.statesEnumeration._ref._fc(state.enumerator))					
 		)
 
 		
