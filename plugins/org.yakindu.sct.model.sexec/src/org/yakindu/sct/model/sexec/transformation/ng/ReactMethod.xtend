@@ -195,15 +195,6 @@ class ReactMethod {
 		return steps
 	}	
 
-
-	def _equals(Expression left, Expression right) {
-		ExpressionsFactory.eINSTANCE.createLogicalRelationExpression => [ eq |
-			eq.operator = RelationalOperator.EQUALS;
-			eq.leftOperand = left
-			eq.rightOperand = right
-		]
-	}	
-	
 	def _assign(Property prop, Expression value) {
 		sexecFactory.createStatement => [
 			expression = ExpressionsFactory.eINSTANCE.createAssignmentExpression => [ ae |
@@ -213,13 +204,11 @@ class ReactMethod {
 		]	
 	}
 	
-	
 	def _statement(Expression value) {
 		sexecFactory.createStatement => [
 			expression = value
 		]	
 	}
-	
 	
 	def _declare(Property prop) {
 		sexec.factory.createLocalVariableDefinition => [ variable = prop ]
@@ -271,21 +260,6 @@ class ReactMethod {
 	def If _else (If it, Step step) {
 		elseStep = step
 		it
-	}
-	
-	
-	def ElementReferenceExpression _call(Operation op) {
-		ExpressionsFactory.eINSTANCE.createElementReferenceExpression => [ 
-			reference = op 
-			operationCall=true
-		]
-	}
-	
-	def ElementReferenceExpression _ref(EObject p) {
-		ExpressionsFactory.eINSTANCE.createElementReferenceExpression => [ 
-			reference = p
-			operationCall=false
-		]
 	}
 	
 	def ElementReferenceExpression _with(ElementReferenceExpression it, Expression... params) {

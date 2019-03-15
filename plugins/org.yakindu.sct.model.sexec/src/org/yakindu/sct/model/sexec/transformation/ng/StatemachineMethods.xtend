@@ -30,17 +30,19 @@ class StatemachineMethods {
 
 	extension ExpressionsFactory exprFactory = ExpressionsFactory.eINSTANCE
 	
+	@Inject extension ReactMethod rm
 	@Inject extension SexecElementMapping  
 	@Inject extension SExecExtensions  
 	@Inject extension Sequence2Method
 	@Inject extension TypeBuilder
-	@Inject extension ExpressionBuilder
+	@Inject extension ExpressionBuilder exp
 	@Inject extension StatemachineProperties
 	@Inject extension StatemachinePublic
 	@Inject extension StateVectorExtensions
 	@Inject extension IStatemachine
 	@Inject extension SgraphExtensions
 	@Inject extension ArrayType
+	@Inject extension StateType
 	
 	def defineEnterMethod(ComplexType it, Statechart sc) {
 		it.features += createEnterMethod => [
@@ -94,7 +96,7 @@ class StatemachineMethods {
 	def defineIsActiveMethod(ComplexType it, Statechart sc) {
 		it.features += createIsActiveMethod => [
 			body = createBlockExpression => [
-				expressions += _return(isActiveCheck(sc))
+				expressions += exp._return(isActiveCheck(sc))
 			]
 		]
 	}
@@ -112,7 +114,7 @@ class StatemachineMethods {
 	def defineIsFinalMethod(ComplexType it, Statechart sc) {
 		it.features += createIsFinalMethod => [
 			body = createBlockExpression => [
-				expressions += _return(isFinalCheck(sc))
+				expressions += exp._return(isFinalCheck(sc))
 			]
 		]
 	}
@@ -145,17 +147,16 @@ class StatemachineMethods {
 	def defineRunCycleMethod(ComplexType it, Statechart sc) {
 		val ef = sc.create
 		it.features += createRunCycleMethod => [
-			body = createBlockExpression => [
-				expressions += 
+			body = _block(
 				_for(nextStateIndex(sc)._ref._assign(0._int), nextStateIndex(sc)._ref._smaller(stateVector(sc)._ref._fc(_array._length)), nextStateIndex(sc)._ref._inc) => [
-					body = _block(_switch(stateVector(sc)._ref._get(nextStateIndex(sc)._ref), 
-						ef.states.filter[isLeaf].filter[reactMethod!==null].map[state | 
-							_case((state.sourceElement as RegularState).enumerator._ref, state.reactMethod._call(_true))
+					body = _block(
+						_switch(stateVector(sc)._ref._get(nextStateIndex(sc)._ref), ef.states.filter[isLeaf].filter[es | rm.reactMethod(es)!==null].map[state | 
+							_case((state.sourceElement as RegularState).enumerator._ref, (state.sourceElement as RegularState).type._ref._fc(rm.reactMethod(state), _true))
 						]
 					))
 					
 				]
-			]
+			)
 		]
 	}
 	
