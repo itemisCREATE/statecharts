@@ -21,6 +21,10 @@ import org.yakindu.base.expressions.expressions.SwitchCase
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
+import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
+import org.yakindu.base.expressions.expressions.IntLiteral
+import org.yakindu.base.expressions.expressions.MultiplicativeOperator
+import org.yakindu.base.expressions.expressions.IfExpression
 
 /**
  * Builder extension for building expressions.
@@ -164,6 +168,23 @@ class ExpressionBuilder {
 		]
 	}
 	
+	def _if(Expression cond) {
+		createIfExpression => [
+			condition = cond
+		]	
+	} 
+	
+	def _then(IfExpression ife, Expression then) {
+		ife.then = then
+		ife
+	}
+	
+	def _else(IfExpression ife, Expression e) {
+		ife.^else = e
+		ife
+	}
+	
+	
 	def _switch(Expression exp, SwitchCase... cases) {
 		createSwitchExpression => [
 			it.^switch = exp
@@ -175,6 +196,23 @@ class ExpressionBuilder {
 		createSwitchCase => [
 			it.^case = ^case
 			it.then = then
+		]
+	}
+
+
+	def _divide(Expression left, Expression right) {
+		createNumericalMultiplyDivideExpression => [
+			operator = MultiplicativeOperator::DIV
+			leftOperand = left
+			rightOperand = right			
+		]
+	}
+
+	def _multiply(Expression left, Expression right) {
+		createNumericalMultiplyDivideExpression => [
+			operator = MultiplicativeOperator::MUL
+			leftOperand = left
+			rightOperand = right			
 		]
 	}
 
