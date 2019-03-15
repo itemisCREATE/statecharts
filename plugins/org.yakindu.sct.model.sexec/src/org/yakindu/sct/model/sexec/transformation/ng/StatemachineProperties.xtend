@@ -15,7 +15,6 @@ import org.yakindu.base.types.Visibility
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
-import org.yakindu.sct.model.sexec.transformation.StateVectorBuilder
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sexec.transformation.ArrayType
@@ -24,7 +23,8 @@ import org.yakindu.sct.model.sexec.transformation.ArrayType
 	
 	@Inject extension StatemachinePublic
 	@Inject extension SgraphExtensions
-	@Inject extension StateVectorBuilder
+	@Inject extension StateVector sv
+	@Inject extension HistoryVector hv
 	
 	@Inject extension TypeBuilder
 	@Inject extension ExpressionBuilder
@@ -35,7 +35,7 @@ import org.yakindu.sct.model.sexec.transformation.ArrayType
 	def defineProperties(ComplexType it, Statechart sc) {
 		it.features += stateVector(sc)
 		if (sc.requireHistory) {
-			it.features += historyStateVector(sc)
+			it.features += historyVector(sc)
 		}
 		it.features += nextStateIndex(sc)
 	}
@@ -51,16 +51,17 @@ import org.yakindu.sct.model.sexec.transformation.ArrayType
 		typeSpecifier = _array._of(sc.statesEnumeration)
 		visibility = Visibility.PROTECTED
 		
-		val size = sc.createStateVector.size
+		val size = sv.stateVector(sc).size
 		initialValue = _array._ref._fc(_array._new, size._int)
 	}
 	
-	def create createProperty historyStateVector(Statechart sc) {
+	def create createProperty historyVector(Statechart sc) {
 		name = "historyStateVector"
 		typeSpecifier = _array._of(sc.statesEnumeration)
 		visibility = Visibility.PROTECTED
 		
-		// TODO: initialize with size
+		val size = hv.historyVector(sc).size
+		initialValue = _array._ref._fc(_array._new, size._int)
 	}
 	
 }

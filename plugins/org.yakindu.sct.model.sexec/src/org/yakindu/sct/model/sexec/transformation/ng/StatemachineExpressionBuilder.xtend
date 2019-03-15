@@ -44,7 +44,7 @@ class StatemachineExpressionBuilder {
 		
 		// from code henerator: historyVector[«region.historyVector.offset»] = stateVector[«region.stateVector.offset»];
 
-		it.statechart.historyStateVector._ref
+		it.statechart.historyVector._ref
 						._get(it.create.historyVector.offset._int)
 						._assign(it.statechart.stateVector._ref._get(it.create.stateVector.offset._int))			
 	}

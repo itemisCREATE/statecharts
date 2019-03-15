@@ -88,7 +88,7 @@ class StatemachineMethods {
 		val i = _variable("i", ITypeSystem.INTEGER, 0._int)
 		_for(i, i._ref._smaller(ef.historyVector.size._int), i._ref._inc) => [
 			it.body = _block(
-				historyStateVector(sc)._ref._get(0._int)._assign(historyStateVector(sc)._ref._fc(noState(sc)))
+				historyVector(sc)._ref._get(0._int)._assign(statesEnumeration(sc)._ref._fc(noState(sc)))
 			)
 		]
 	}
