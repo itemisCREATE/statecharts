@@ -110,10 +110,10 @@ class ReactMethod {
 	}
 
 	
-	def defineReactMethod(ExecutionFlow it) {
-		reactMethod => [ bodySequence = 
+	def defineReactMethod(ExecutionFlow ef) {
+		ef.reactMethod => [ bodySequence = 
 			_sequence(
-				flow.createLocalReactionSequence,
+				ef.createLocalReactionSequence,
 				_return(_false)	
 			) => [ comment = "State machine reactions."]	
 		]		
