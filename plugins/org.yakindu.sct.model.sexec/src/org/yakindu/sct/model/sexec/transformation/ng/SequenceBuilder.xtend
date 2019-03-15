@@ -75,7 +75,7 @@ class SequenceBuilder extends org.yakindu.sct.model.sexec.transformation.Sequenc
 		
 		super._defineScopeEnterSequences(state) // TODO: remove
 		
-		state.enterSequence(DEFAULT_SEQUENCE_NAME)
+		state.defineEnterSequence(DEFAULT_SEQUENCE_NAME)
 	}
 
 
@@ -102,13 +102,13 @@ class SequenceBuilder extends org.yakindu.sct.model.sexec.transformation.Sequenc
 
 		// create an entry sequence for each entry point
 		for (epName : entryPointNames) {
-			state.enterSequence(epName)
+			state.defineEnterSequence(epName)
 		}
 
 	}
 
 
-	def enterSequence(RegularState state, String epName) {
+	def defineEnterSequence(RegularState state, String epName) {
 			val op = state.type.enterSequence(epName) => [
 				_comment("Default enter sequence for state " + state.name)
 				val block = _block(

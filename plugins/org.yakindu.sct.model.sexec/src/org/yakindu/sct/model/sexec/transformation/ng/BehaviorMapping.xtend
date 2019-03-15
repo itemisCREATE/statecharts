@@ -19,7 +19,7 @@ import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 
 /**
- * implements the lcaDoSequence for ReactMethods.
+ * Implements the lcaDoSequence for ReactMethods.
  *  
  * @author axel terfloth
  * 
