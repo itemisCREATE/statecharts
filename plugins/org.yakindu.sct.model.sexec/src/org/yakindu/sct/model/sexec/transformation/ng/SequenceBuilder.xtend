@@ -6,8 +6,8 @@
  * http://www.eclipse.org/legal/epl-v10.html 
  * Contributors:
  * committers of YAKINDU - initial API and implementation
- *
-*/
+ * 
+ */
 package org.yakindu.sct.model.sexec.transformation.ng
 
 import com.google.inject.Inject
@@ -43,47 +43,35 @@ class SequenceBuilder extends org.yakindu.sct.model.sexec.transformation.Sequenc
 	@Inject extension RegionType regionType
 	@Inject extension EntryNodeMethods enMethods
 
-	
-	
-
 //	@Inject(optional=true)
 //	@Named(IModelSequencer.ADD_TRACES)
 //	boolean _addTraceSteps = false
-
-
 	override dispatch void defineScopeEnterSequences(Region r) {
 		super._defineScopeEnterSequences(r)
 
 //		// process all vertices of a region
 //		for (s : r.vertices)
 //			defineScopeEnterSequences(s)
-
 		// create an enter sequence for each contained entry
 		for (e : r.collectEntries) {
-			val seqName = if (e.name.nullOrEmpty) DEFAULT_SEQUENCE_NAME
-							else e.name
+			val seqName = if(e.name.nullOrEmpty) DEFAULT_SEQUENCE_NAME else e.name
 
 			r.type.enterSequence(e.name) => [
-				_comment("'" + seqName + "' enter sequence for region " + r.type.name)				
+				_comment("'" + seqName + "' enter sequence for region " + r.type.name)
 				body = _block(e.reaction._call)
-			] 
+			]
 		}
 	}
 
-
 	override dispatch void defineScopeEnterSequences(FinalState state) {
-		
+
 		super._defineScopeEnterSequences(state) // TODO: remove
-		
 		state.defineEnterSequence(DEFAULT_SEQUENCE_NAME)
 	}
-
-
 
 	override dispatch void defineScopeEnterSequences(State state) {
 
 		super._defineScopeEnterSequences(state) // TODO: remove
-		
 		val execState = state.create
 
 		// first creates enter sequences for all contained regions
@@ -107,37 +95,35 @@ class SequenceBuilder extends org.yakindu.sct.model.sexec.transformation.Sequenc
 
 	}
 
-
 	def defineEnterSequence(RegularState state, String epName) {
-			val op = state.type.enterSequence(epName) => [
-				_comment("Default enter sequence for state " + state.name)
-				val block = _block(
-					state.entryAction?._call
-					//TODO if(_addTraceSteps) execState.newTraceStateEntered else null
-				)
-				
-				if (state.leaf) 
-					block.expressions +=	state._enterState
-				else 
-					for (r : (state as CompositeElement).regions) {
-						var regionEnter = r.type.resolveEnterSequence(epName)
-	
-						if (regionEnter !== null) {
-							block.expressions += regionEnter._call
-						}
-					}
+		val op = state.type.enterSequence(epName) => [
+			_comment("Default enter sequence for state " + state.name)
+			val block = _block(
+				state.entryAction?._call
+			// TODO if(_addTraceSteps) execState.newTraceStateEntered else null
+			)
 
-				// save the history on entering a state 
-				val execRegion = state.parentRegion.create
-				if (execRegion.historyVector !== null) {
-					block.expressions += _saveHistory(state.parentRegion)
-				}				
-				
-				body = block
-			] 
-			state.type.features += op		
-		
+			if (state.leaf)
+				block.expressions += state._enterState
+			else
+				for (r : (state as CompositeElement).regions) {
+					var regionEnter = r.type.resolveEnterSequence(epName)
+
+					if (regionEnter !== null) {
+						block.expressions += regionEnter._call
+					}
+				}
+
+			// save the history on entering a state 
+			val execRegion = state.parentRegion.create
+			if (execRegion.historyVector !== null) {
+				block.expressions += _saveHistory(state.parentRegion)
+			}
+
+			body = block
+		]
+		state.type.features += op
+
 	}
-	
 
 }
