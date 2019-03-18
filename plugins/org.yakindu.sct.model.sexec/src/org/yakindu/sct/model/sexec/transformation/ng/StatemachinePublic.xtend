@@ -19,6 +19,8 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.base.types.Declaration
+import org.yakindu.sct.model.stext.stext.InternalScope
 
 /**
  * This class implements a transformation that creates the state machine type
@@ -69,19 +71,21 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 
 	protected def declareMembers(ComplexType scType, Statechart sc) {
 
-		// Named Interfaces
+		// Named interfaces
 		sc.scopes.filter(InterfaceScope).filter[name !== null].forEach [ iface |
-			scType.features += createProperty => [ prop |
-				prop.name = iface.name
-				prop.typeSpecifier = createTypeSpecifier => [
-					type = createInterfaceType(iface)
-				]
-			]
+			scType.features += iface.property
 		]
-		// Unnamed interfaces
+		
+		// Unnamed interface
 		sc.scopes.filter(InterfaceScope).filter[name === null].forEach [ iface |
-			iface.declarations.forEach[decl|scType.features += EcoreUtil.copy(decl)]
+			scType.features += iface.property
 		]
+		
+		// Internal variables
+		sc.scopes.filter(InternalScope).forEach [ internal |
+			internal.declarations.forEach[decl|scType.features += decl.feature]
+		]
+		
 		// State enumerations
 		// isStateActive Operation
 		scType.features += createOperation => [
@@ -98,6 +102,13 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 			]
 		]
 
+	}
+	
+	def create createProperty property(InterfaceScope iface) {
+		it.typeSpecifier = createTypeSpecifier => [
+			type = createInterfaceType(iface)
+		]
+		it.name = type.name.toFirstLower
 	}
 
 	def create createEnumerationType statesEnumeration(Statechart sc) {
@@ -117,15 +128,13 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 	
 	
 	protected def create createEnumerator noState(Statechart sc) {
-		it => [
-			name = "__NoState__"
-		]
+		it.name = "__NoState__"
 	}
 
 	protected def create createComplexType createInterfaceType(InterfaceScope iface) {
-		it => [
-			name = iface.name
-			iface.declarations.forEach[decl|features += EcoreUtil.copy(decl)]
-		]
+		it.name = if (iface.name.nullOrEmpty) "SCInterface" else iface.name
+		iface.declarations.forEach[decl|features += decl.feature]
 	}
+	
+	protected def create EcoreUtil.copy(decl) feature(Declaration decl) {}
 }

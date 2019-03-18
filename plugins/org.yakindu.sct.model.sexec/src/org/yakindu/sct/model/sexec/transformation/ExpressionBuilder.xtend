@@ -25,6 +25,7 @@ import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpressio
 import org.yakindu.base.expressions.expressions.IntLiteral
 import org.yakindu.base.expressions.expressions.MultiplicativeOperator
 import org.yakindu.base.expressions.expressions.IfExpression
+import org.yakindu.base.expressions.expressions.ArgumentExpression
 
 /**
  * Builder extension for building expressions.
@@ -84,6 +85,13 @@ class ExpressionBuilder {
 			fc.operationCall = feature instanceof Operation
 			fc.arguments.addAll(arguments.map[arg|createArgument => [value = arg]])
 		]
+	}
+	
+	def ArgumentExpression _qref(Declaration... parts) {
+		return parts.fold(
+			null as ArgumentExpression,
+			[o, p|if(o === null) p._ref else o._fc(p)]
+		)
 	}
 	
 	def ElementReferenceExpression _get(ElementReferenceExpression exp, Expression index) {

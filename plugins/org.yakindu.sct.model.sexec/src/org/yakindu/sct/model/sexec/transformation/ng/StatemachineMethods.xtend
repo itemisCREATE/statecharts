@@ -24,6 +24,11 @@ import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sexec.transformation.ArrayType
+import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sgraph.ImportDeclaration
+import java.util.List
+import org.yakindu.base.types.Declaration
+import org.yakindu.sct.model.stext.stext.InterfaceScope
 
 @Singleton
 class StatemachineMethods {
@@ -43,6 +48,7 @@ class StatemachineMethods {
 	@Inject extension SgraphExtensions
 	@Inject extension ArrayType
 	@Inject extension StateType
+	@Inject extension SequenceBuilder
 	
 	def defineEnterMethod(ComplexType it, Statechart sc) {
 		it.features += createEnterMethod => [
@@ -67,10 +73,37 @@ class StatemachineMethods {
 				if (sc.requireHistory) {
 					expressions += historyStateVectorInitialization(sc)
 				}
-				// TODO: transform init sequence into expressions
-//				expressions += createCallToSequenceMethod(sc.create.initSequence)
+				expressions += sc.variableInits.filterNull.toList
 			]
 		]
+	}
+	
+	protected def variableInits(Statechart sc) {
+		var List<Expression> inits = newArrayList
+		for (VariableDefinition vd : sc.variablesForInitSequence) {
+			inits += vd.initialization
+		}
+		inits
+	}
+	
+	protected def variablesForInitSequence(Statechart sc) {
+		val flow = sc.create
+		val statechartVariables = flow.scopes.map(s|s.variables).flatten.filter(typeof(VariableDefinition)).filter[!const]
+		val importedVariables = flow.scopes.map(s|s.declarations).flatten.filter(typeof(ImportDeclaration)).map(
+			d|d.declaration).filter(typeof(VariableDefinition))
+		return statechartVariables + importedVariables
+	}
+	
+	protected def initialization(VariableDefinition vd) {
+		if (vd.effectiveInitialValue !== null) {
+			val owner = vd.eContainer
+			if (owner instanceof InterfaceScope) {
+				return owner.property._ref._fc(vd.feature)._assign(vd.effectiveInitialValue)
+			} else {
+				return vd.feature._ref._assign(vd.effectiveInitialValue)
+			}
+		}
+		null
 	}
 	
 	def stateVectorInitialization(Statechart sc) {
@@ -92,6 +125,8 @@ class StatemachineMethods {
 			)
 		]
 	}
+	
+	
 	
 	def defineIsActiveMethod(ComplexType it, Statechart sc) {
 		it.features += createIsActiveMethod => [
