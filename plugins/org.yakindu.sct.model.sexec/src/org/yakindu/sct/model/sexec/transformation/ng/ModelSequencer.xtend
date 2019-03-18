@@ -19,6 +19,7 @@ import org.yakindu.sct.model.sexec.transformation.IModelSequencer
 import org.yakindu.sct.model.sexec.transformation.ReactionBuilder
 import org.yakindu.sct.model.sexec.transformation.RetargetReferences
 import org.yakindu.sct.model.sexec.transformation.ng.SequenceBuilder
+import org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sexec.transformation.StateVectorBuilder
 import org.yakindu.sct.model.sexec.transformation.StructureMapping
@@ -28,7 +29,7 @@ class ModelSequencer implements IModelSequencer {
 	 
 	@Inject extension SexecElementMapping mapping
 	@Inject extension StructureMapping structureMapping
-	@Inject extension org.yakindu.sct.model.sexec.transformation.BehaviorMapping behaviorMapping
+	@Inject extension BehaviorMapping behaviorMapping
 	@Inject extension ReactionBuilder reactBuilder
 	@Inject extension SequenceBuilder seqBuilder
 	@Inject extension StateVectorBuilder svBuilder

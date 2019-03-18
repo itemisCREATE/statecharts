@@ -27,7 +27,6 @@ import org.yakindu.sct.model.sexec.transformation.ArrayType
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.sgraph.ImportDeclaration
 import java.util.List
-import org.yakindu.base.types.Declaration
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 
 @Singleton
