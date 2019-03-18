@@ -61,7 +61,13 @@ public class TestFileCopier {
 			File file = new File(FileLocator.resolve(folder).toURI());
 			if (file.exists() && file.isDirectory()) {
 				for (File f : file.listFiles()) {
-					copyFileFromBundleToFolder(bundle, new Path(sourcePath).append(f.getName()), new Path(targetPath));
+					if(f.isFile()) {
+						copyFileFromBundleToFolder(bundle, new Path(sourcePath).append(f.getName()), new Path(targetPath));
+					} else {
+						String path = f.getPath();
+						String subFolder = path.substring(path.lastIndexOf('/'));
+						copyFolderFromBundleToFolder(bundle, sourcePath + subFolder, targetPath);
+					}
 				}
 			}
 		} catch (URISyntaxException | IOException e) {
