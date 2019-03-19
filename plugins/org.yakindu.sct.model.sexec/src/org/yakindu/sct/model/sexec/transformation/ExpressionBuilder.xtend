@@ -9,11 +9,14 @@
 package org.yakindu.sct.model.sexec.transformation
 
 import org.eclipse.emf.ecore.EObject
+import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.BlockExpression
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.expressions.IfExpression
+import org.yakindu.base.expressions.expressions.MultiplicativeOperator
 import org.yakindu.base.expressions.expressions.PostFixOperator
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.RelationalOperator
@@ -21,11 +24,6 @@ import org.yakindu.base.expressions.expressions.SwitchCase
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
-import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
-import org.yakindu.base.expressions.expressions.IntLiteral
-import org.yakindu.base.expressions.expressions.MultiplicativeOperator
-import org.yakindu.base.expressions.expressions.IfExpression
-import org.yakindu.base.expressions.expressions.ArgumentExpression
 
 /**
  * Builder extension for building expressions.
@@ -101,6 +99,7 @@ class ExpressionBuilder {
 	
 	def ElementReferenceExpression _get(ElementReferenceExpression exp, Expression index) {
 		exp.arraySelector += index
+		exp.arrayAccess = true
 		exp
 	}
 	
@@ -115,6 +114,22 @@ class ExpressionBuilder {
 	def _smaller(Expression left, Expression right) {
 		createLogicalRelationExpression => [
 			operator = RelationalOperator.SMALLER
+			leftOperand = left
+			rightOperand = right
+		]
+	}
+	
+	def _smallerEqual(Expression left, Expression right) {
+		createLogicalRelationExpression => [
+			operator = RelationalOperator.SMALLER_EQUAL
+			leftOperand = left
+			rightOperand = right
+		]
+	}
+	
+	def _greaterEqual(Expression left, Expression right) {
+		createLogicalRelationExpression => [
+			operator = RelationalOperator.GREATER_EQUAL
 			leftOperand = left
 			rightOperand = right
 		]

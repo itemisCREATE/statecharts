@@ -8,6 +8,8 @@
 package org.yakindu.sct.model.sexec.transformation.ng
 
 import com.google.inject.Singleton
+import java.util.List
+import java.util.function.Function
 import javax.inject.Inject
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import org.yakindu.base.types.ComplexType
@@ -17,17 +19,16 @@ import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
+import org.yakindu.sct.model.sexec.transformation.ArrayType
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
+import org.yakindu.sct.model.sgraph.ImportDeclaration
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.sexec.transformation.ArrayType
-import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.sgraph.ImportDeclaration
-import java.util.List
 import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 @Singleton
 class StatemachineMethods {
@@ -48,6 +49,7 @@ class StatemachineMethods {
 	@Inject extension ArrayType
 	@Inject extension StateType
 	@Inject extension SequenceBuilder
+	@Inject extension ITypeSystem ts
 	
 	def defineEnterMethod(ComplexType it, Statechart sc) {
 		it.features += createEnterMethod => [
@@ -201,4 +203,35 @@ class StatemachineMethods {
 		]
 	}
 	
+	def defineIsStateActiveMethod(ComplexType it, Statechart sc) {
+		it.features += createIsStateActiveMethod(sc) => [
+			body = _block(
+				stateSwitch(parameters.head._ref, sc.create.states, [ s |
+					if(s.isLeaf) {
+						_return(stateVector(sc)._ref._get(s.getStateVector().offset._int)._equals(statesEnumeration(sc)._ref._fc(s.stateEnumerator)))
+					} else {
+						_return(stateVector(sc)._ref._get(s.getStateVector().offset._int)._greaterEqual(statesEnumeration(sc)._ref._fc(s.stateEnumerator))._and(
+							stateVector(sc)._ref._get(s.getStateVector().offset._int)._smallerEqual(statesEnumeration(sc)._ref._fc(s.subStates.last.stateEnumerator)
+						)))
+					}
+				])
+			)
+		]
+	}
+	
+	def stateSwitch(Expression switchContext, Iterable<ExecutionState> states, Function<ExecutionState, Expression> action) {
+		_switch(switchContext, states.map[s | stateCase(s, action.apply(s))])
+	}
+	
+	def stateCase(ExecutionState state, Expression e) {
+		_case(state.stateEnumerator._ref, e)
+	}
+	
+	def stateEnumerator(ExecutionState s) {
+		(s.sourceElement as RegularState).enumerator
+	}
+	
+	protected def createIsStateActiveMethod(Statechart sc) {
+		_op("isStateActive", ts.getType(ITypeSystem.BOOLEAN))._param("state", sc.statesEnumeration)
+	}	
 }

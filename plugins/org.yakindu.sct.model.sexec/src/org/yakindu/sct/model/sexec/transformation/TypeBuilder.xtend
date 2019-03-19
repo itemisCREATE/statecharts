@@ -14,6 +14,7 @@ import com.google.inject.Inject
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Type
+import org.yakindu.base.types.Operation
 
 /**
  * Builder extension for building types.
@@ -40,10 +41,26 @@ class TypeBuilder {
 	def _op() {
 		createOperation
 	}
+	
+	def _param(Operation it, String pName, String typeName) {
+		_param(pName, typeSystem.getType(typeName))
+	}
+	
+	def _param(Operation it, String pName, Type type) {
+		parameters.add(createParameter => [
+			name = pName
+			_type(type)
+		])
+		return it
+	}
 
 	def _type(TypedElement it, String typeName) {
+		_type(typeSystem.getType(typeName))
+	}
+	
+	def _type(TypedElement it, Type type) {
 		typeSpecifier = createTypeSpecifier => [
-			type = typeSystem.getType(typeName);
+			it.type = type;
 		]
 	}
 	

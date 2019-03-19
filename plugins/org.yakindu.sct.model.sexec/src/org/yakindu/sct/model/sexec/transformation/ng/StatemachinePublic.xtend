@@ -13,13 +13,13 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.yakindu.base.types.Declaration
 import org.yakindu.sct.model.stext.stext.InternalScope
 
 /**
@@ -85,23 +85,6 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 		sc.scopes.filter(InternalScope).forEach [ internal |
 			internal.declarations.forEach[decl|scType.features += decl.feature]
 		]
-		
-		// State enumerations
-		// isStateActive Operation
-		scType.features += createOperation => [
-			name = "isStateActive"
-			parameters += createParameter => [
-				name = "state"
-				typeSpecifier = createTypeSpecifier => [
-					type = statesEnumeration(sc)
-
-				]
-			]
-			typeSpecifier = createTypeSpecifier => [
-				type = ts.getType(ITypeSystem.BOOLEAN)
-			]
-		]
-
 	}
 	
 	def create createProperty property(InterfaceScope iface) {

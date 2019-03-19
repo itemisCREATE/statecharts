@@ -75,7 +75,6 @@ class ModelSequencer implements IModelSequencer {
 		val ef = sc.makeFlow
 				
 		
-		
 		sctype.declareSequenceMethods(ef)
 		
 		sctype.defineEnterMethod(sc)
@@ -89,6 +88,8 @@ class ModelSequencer implements IModelSequencer {
 		sctype.defineIsFinalMethod(sc)
 		
 		sctype.defineRunCycleMethod(sc)
+		
+		sctype.defineIsStateActiveMethod(sc)
 		
 	}
 

@@ -16,7 +16,6 @@ import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Parameter
-import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionNode
@@ -197,16 +196,6 @@ class ReactOperation {
 	
 	def _bool() {
 		return ITypeSystem::BOOLEAN
-	}
-	
-	def _param(Operation it, String pName, String typeName) {
-
-		parameters.add(TypesFactory.eINSTANCE.createParameter => [
-			name = pName
-			_type(typeName)
-		])
-
-		return it
 	}
 	
 	def BlockExpression createLocalReactionSequence(ExecutionNode state) {	
