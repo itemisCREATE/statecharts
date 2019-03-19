@@ -35,7 +35,7 @@ class ModelSequencer implements IModelSequencer {
 	@Inject extension StateVectorBuilder svBuilder
 	@Inject extension RetargetReferences retageting
 	
-	@Inject extension ReactMethod reactMethod
+	@Inject extension ReactOperation reactMethod
 	
 	@Inject extension StatemachinePublic sc2Type
 	@Inject extension StatemachineMethods smMethods

@@ -70,6 +70,11 @@ class ExpressionBuilder {
 			it.arguments.addAll(arguments.map[arg|createArgument => [value = arg]])
 		]
 	}
+	
+	def ElementReferenceExpression _with(ElementReferenceExpression it, Expression... arguments) {
+		it.arguments.addAll(arguments.map[arg|createArgument => [value = arg]])
+		return it
+	}
 
 	def ElementReferenceExpression _ref(EObject p) {
 		createElementReferenceExpression => [

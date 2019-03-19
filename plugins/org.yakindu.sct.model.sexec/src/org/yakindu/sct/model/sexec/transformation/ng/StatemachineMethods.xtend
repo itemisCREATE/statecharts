@@ -34,7 +34,7 @@ class StatemachineMethods {
 
 	extension ExpressionsFactory exprFactory = ExpressionsFactory.eINSTANCE
 	
-	@Inject extension ReactMethod rm
+	@Inject extension ReactOperation rm
 	@Inject extension SexecElementMapping  
 	@Inject extension SExecExtensions  
 	@Inject extension Sequence2Method

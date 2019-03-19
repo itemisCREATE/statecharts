@@ -34,7 +34,7 @@ class BehaviorMapping extends org.yakindu.sct.model.sexec.transformation.Behavio
 	@Inject extension StatechartExtensions sc
 	@Inject extension SgraphExtensions sgraph
 	@Inject extension SexecExtensions sexec
-	@Inject extension ReactMethod rm
+	@Inject extension ReactOperation rm
 	
 	@Inject extension ExpressionBuilder exprBuilder
 	@Inject extension StatemachineExpressionBuilder smeBuilder
