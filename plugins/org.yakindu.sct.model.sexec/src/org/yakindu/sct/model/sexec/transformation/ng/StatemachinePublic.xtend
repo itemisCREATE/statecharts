@@ -60,7 +60,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 
 			features += statesEnumeration(sc)
 			
-			features += sc.scopes.filter(InterfaceScope).filter[!name.nullOrEmpty].map [
+			features += sc.scopes.filter(InterfaceScope).map [
 				createInterfaceType
 			]
 
