@@ -214,13 +214,13 @@ class StatemachineMethods {
 							stateVector(sc)._ref._get(s.getStateVector().offset._int)._smallerEqual(statesEnumeration(sc)._ref._fc(s.subStates.last.stateEnumerator)
 						)))
 					}
-				])
+				], _return(_false))
 			)
 		]
 	}
 	
-	def stateSwitch(Expression switchContext, Iterable<ExecutionState> states, Function<ExecutionState, Expression> action) {
-		_switch(switchContext, states.map[s | stateCase(s, action.apply(s))])
+	def stateSwitch(Expression switchContext, Iterable<ExecutionState> states, Function<ExecutionState, Expression> action, Expression defaultAction) {
+		_switch(switchContext, states.map[s | stateCase(s, action.apply(s))]) => [^default = defaultAction]
 	}
 	
 	def stateCase(ExecutionState state, Expression e) {

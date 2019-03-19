@@ -35,7 +35,6 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 @Singleton class StatemachinePublic {
 
 	extension TypesFactory factory = TypesFactory.eINSTANCE
-	extension ITypeSystem ts = GenericTypeSystem.instance
 	
 	@Inject extension IStatemachine 
 	
