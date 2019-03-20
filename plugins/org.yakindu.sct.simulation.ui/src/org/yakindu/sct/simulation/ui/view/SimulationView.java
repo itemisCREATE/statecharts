@@ -618,9 +618,8 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 			timeIconLabel.setVisible(isValidTime);
 			if (isValidTime) {
 				timeLabel.setToolTipText("Simulation running since " + time);
-				timeLabel.getParent().getParent().layout(); // layout all
-															// time-relevant
-															// components
+				// layout all time-relevant components
+				timeLabel.getParent().getParent().layout();
 			}
 		}
 
