@@ -50,7 +50,7 @@ class StatemachineSourceFragment implements ISourceFragment {
 	override CharSequence fileComment(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		'''«entry.licenseText»'''
 	}
-	//entry.tracingUsed || 
+	
 	override CharSequence includes(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		'''
 		#include "«(module.h).relativeTo(module.c)»"
