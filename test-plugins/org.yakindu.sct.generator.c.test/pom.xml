@@ -20,8 +20,7 @@
 				<version>${tycho-version}</version>
 				<configuration>
 					<includes>
-						<include>**/AllTests.class</include>
-						<include>**/AllTestsTestCustom.class</include>
+						<include>**/AllCTests.class</include>
 					</includes> 
 					<useUIHarness>false</useUIHarness>
 					<useUIThread>false</useUIThread>
