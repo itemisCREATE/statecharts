@@ -15,12 +15,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.TypesFactory
-import org.yakindu.base.types.typesystem.GenericTypeSystem
-import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
+import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 
 /**
  * This class implements a transformation that creates the state machine type
@@ -37,6 +36,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 	extension TypesFactory factory = TypesFactory.eINSTANCE
 	
 	@Inject extension IStatemachine 
+	@Inject extension TypeBuilder 
 	
 	def statemachinePackage(Statechart sc) {
 		statemachinePackage(sc.namespace)
@@ -57,6 +57,8 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 			superTypes += createTypeSpecifier => [ type = statemachineInterfaceType ]
 			sc.statemachinePackage.member += it
 
+			features += interfaceAnnotationType
+
 			features += statesEnumeration(sc)
 			
 			features += sc.scopes.filter(InterfaceScope).map [
@@ -65,6 +67,10 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 
 			declareMembers(sc)
 		]
+	}
+	
+	protected def create createAnnotationType interfaceAnnotationType() {
+		name = "InterfaceGroup"
 	}
 
 
@@ -116,6 +122,8 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 	protected def create createComplexType createInterfaceType(InterfaceScope iface) {
 		it.name = if (iface.name.nullOrEmpty) "SCInterface" else iface.name
 		iface.declarations.forEach[decl|features += decl.feature]
+		
+		it._annotateWith(interfaceAnnotationType)
 	}
 	
 	protected def create EcoreUtil.copy(decl) feature(Declaration decl) {}

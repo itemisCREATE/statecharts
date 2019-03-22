@@ -15,6 +15,8 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.Operation
+import org.yakindu.base.types.AnnotatableElement
+import org.yakindu.base.types.AnnotationType
 
 /**
  * Builder extension for building types.
@@ -77,6 +79,14 @@ class TypeBuilder {
 			prop._type(typeName)
 			prop.initialValue = init
 		]	
+	}
+	
+			
+	def _annotateWith(AnnotatableElement elem, AnnotationType annotationType) {
+		if (elem.annotationInfo === null) {
+			elem.annotationInfo = createAnnotatableElement
+		}
+		elem.annotationInfo.annotations += createAnnotation => [type = annotationType]
 	}
 	
 }
