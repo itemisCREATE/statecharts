@@ -55,7 +55,7 @@ class StatemachineSourceFragment implements ISourceFragment {
 		'''
 		#include "«(module.h).relativeTo(module.c)»"
 		#include "«(typesModule.h).relativeTo(module.c)»"
-		«IF timed || !it.operations.empty»
+		«IF timed || entry.tracingUsed || !it.operations.empty»
 			#include "«(module.client.h).relativeTo(module.c)»"
 		«ENDIF»
 		
