@@ -127,8 +127,6 @@ class StatemachineMethods {
 		]
 	}
 	
-	
-	
 	def defineIsActiveMethod(ComplexType it, Statechart sc) {
 		it.features += createIsActiveMethod => [
 			body = createBlockExpression => [
@@ -186,11 +184,10 @@ class StatemachineMethods {
 			body = _block(
 				_for(nextStateIndex(sc)._ref._assign(0._int), nextStateIndex(sc)._ref._smaller(stateVector(sc)._ref._fc(_array._length)), nextStateIndex(sc)._ref._inc) => [
 					body = _block(
-						_switch(stateVector(sc)._ref._get(nextStateIndex(sc)._ref), ef.states.filter[isLeaf].filter[es | rm.reactMethod(es)!==null].map[state | 
-							_case((state.sourceElement as RegularState).enumerator._ref, (state.sourceElement as RegularState).type._ref._fc(rm.reactMethod(state), _true))
-						]
-					))
-					
+						stateSwitch(stateVector(sc)._ref._get(nextStateIndex(sc)._ref), ef.states.filter[isLeaf].filter[es | rm.reactMethod(es)!==null], [ s | 
+							s.stateType._ref._fc(rm.reactMethod(s), _true)
+						], null)
+					)
 				]
 			)
 		]
@@ -207,13 +204,15 @@ class StatemachineMethods {
 		it.features += createIsStateActiveMethod(sc) => [
 			body = _block(
 				stateSwitch(parameters.head._ref, sc.create.states, [ s |
-					if(s.isLeaf) {
-						_return(stateVector(sc)._ref._get(s.getStateVector().offset._int)._equals(statesEnumeration(sc)._ref._fc(s.stateEnumerator)))
-					} else {
-						_return(stateVector(sc)._ref._get(s.getStateVector().offset._int)._greaterEqual(statesEnumeration(sc)._ref._fc(s.stateEnumerator))._and(
-							stateVector(sc)._ref._get(s.getStateVector().offset._int)._smallerEqual(statesEnumeration(sc)._ref._fc(s.subStates.last.stateEnumerator)
-						)))
-					}
+					_return(
+						if(s.isLeaf) {
+							stateVector(sc)._ref._get(s.getStateVector().offset._int)._equals(statesEnumeration(sc)._ref._fc(s.stateEnumerator))
+						} else {
+							stateVector(sc)._ref._get(s.getStateVector().offset._int)._greaterEqual(statesEnumeration(sc)._ref._fc(s.stateEnumerator))
+							._and(
+							stateVector(sc)._ref._get(s.getStateVector().offset._int)._smallerEqual(statesEnumeration(sc)._ref._fc(s.subStates.last.stateEnumerator)))
+						}
+					)
 				], _return(_false))
 			)
 		]
@@ -227,8 +226,12 @@ class StatemachineMethods {
 		_case(state.stateEnumerator._ref, e)
 	}
 	
-	def stateEnumerator(ExecutionState s) {
+	protected def stateEnumerator(ExecutionState s) {
 		(s.sourceElement as RegularState).enumerator
+	}
+	
+	protected def stateType(ExecutionState s) {
+		(s.sourceElement as RegularState).type
 	}
 	
 	protected def createIsStateActiveMethod(Statechart sc) {
