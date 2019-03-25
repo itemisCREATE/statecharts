@@ -20,6 +20,7 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
+import org.yakindu.base.types.Visibility
 
 /**
  * This class implements a transformation that creates the state machine type
@@ -97,6 +98,7 @@ import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 			type = createInterfaceType(iface)
 		]
 		it.name = type.name.toFirstLower
+		it.visibility = Visibility.PUBLIC
 	}
 
 	def create createEnumerationType statesEnumeration(Statechart sc) {

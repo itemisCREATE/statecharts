@@ -17,6 +17,8 @@ import org.yakindu.base.types.Type
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.AnnotatableElement
 import org.yakindu.base.types.AnnotationType
+import org.yakindu.base.types.TypeSpecifier
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 /**
  * Builder extension for building types.
@@ -55,15 +57,27 @@ class TypeBuilder {
 		])
 		return it
 	}
+	
+	def _param(Operation it, String pName, TypeSpecifier typeSpec) {
+		parameters.add(createParameter => [
+			name = pName
+			_type(typeSpec)
+		])
+		return it
+	}
 
 	def _type(TypedElement it, String typeName) {
 		_type(typeSystem.getType(typeName))
 	}
 	
 	def _type(TypedElement it, Type type) {
-		typeSpecifier = createTypeSpecifier => [
-			it.type = type;
+		typeSpecifier = createTypeSpecifier => [ ts |
+			ts.type = type
 		]
+	}
+	
+	def _type(TypedElement it, TypeSpecifier typeSpec) {
+		typeSpecifier = EcoreUtil.copy(typeSpec)
 	}
 	
 	def _variable(String name, String typeName) {
