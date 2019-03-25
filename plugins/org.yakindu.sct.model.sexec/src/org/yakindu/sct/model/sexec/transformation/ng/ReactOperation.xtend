@@ -226,7 +226,7 @@ class ReactOperation {
 		parentState.type.features += op
 		
 		// TODO: effect steps need to be expressions
-		_block
+		op.body = _block
 //		val actions = (it.effect as Execution).statement
 //		op.body = if (actions !== null) {
 //			_block(actions)
