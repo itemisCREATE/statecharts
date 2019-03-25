@@ -71,7 +71,6 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sruntime.ExecutionEvent;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
-import org.yakindu.sct.simulation.core.engine.scheduling.DefaultTimeTaskScheduler;
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler;
 import org.yakindu.sct.simulation.ui.SimulationImages;
 import org.yakindu.sct.simulation.ui.model.presenter.SCTSourceDisplayDispatcher;
@@ -243,16 +242,17 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 
 	}
 
+	@Override
 	protected void handleDebugEvent(DebugEvent debugEvent) {
 		updateActions();
 		switch (debugEvent.getKind()) {
-		case DebugEvent.TERMINATE:
-			setViewerInput(null);
-			break;
-		case DebugEvent.SUSPEND:
-			break;
-		case DebugEvent.RESUME:
-			break;
+			case DebugEvent.TERMINATE :
+				setViewerInput(null);
+				break;
+			case DebugEvent.SUSPEND :
+				break;
+			case DebugEvent.RESUME :
+				break;
 		}
 		Display.getDefault().asyncExec(() -> {
 			if (debugEvent.getSource() != null) {
@@ -269,11 +269,12 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 			this.sessionDropdown.setSelection(new StructuredSelection(debugTarget));
 	}
 
+	@Override
 	protected void activeTargetChanged(final IDebugTarget debugTarget) {
 		openEditorForTarget(debugTarget);
 		updateTypeSystem(debugTarget);
-		ISimulationEngine engine = (ISimulationEngine) debugTarget.getAdapter(ISimulationEngine.class);
-		timeScheduler = (DefaultTimeTaskScheduler) engine.getTimeTaskScheduler();
+		ISimulationEngine engine = debugTarget.getAdapter(ISimulationEngine.class);
+		timeScheduler = engine.getTimeTaskScheduler();
 		setViewerInput(engine.getExecutionContext());
 		updateActions();
 		updateSessionDropdownInput(debugTarget);
@@ -320,7 +321,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	}
 
 	private void updateTypeSystem(final IDebugTarget debugTarget) {
-		IDomain domain = DomainRegistry.getDomain((EObject) debugTarget.getAdapter(EObject.class));
+		IDomain domain = DomainRegistry.getDomain(debugTarget.getAdapter(EObject.class));
 		typeSystem = domain.getInjector(IDomain.FEATURE_SIMULATION).getInstance(ITypeSystem.class);
 	}
 
@@ -377,6 +378,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		private Point mouseLocation;
 
 		MouseMoveListener moveListener = new MouseMoveListener() {
+			@Override
 			public void mouseMove(MouseEvent e) {
 				mouseLocation = new Point(e.x, e.y);
 			}
@@ -616,7 +618,8 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 			timeIconLabel.setVisible(isValidTime);
 			if (isValidTime) {
 				timeLabel.setToolTipText("Simulation running since " + time);
-				timeLabel.getParent().getParent().layout(); // layout all time-relevant components
+				// layout all time-relevant components
+				timeLabel.getParent().getParent().layout();
 			}
 		}
 
