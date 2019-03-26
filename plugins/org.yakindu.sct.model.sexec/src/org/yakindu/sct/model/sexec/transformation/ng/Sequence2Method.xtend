@@ -22,6 +22,7 @@ import com.google.inject.Singleton
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.base.types.Visibility
+import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 
 @Singleton class Sequence2Method {
 
@@ -30,6 +31,7 @@ import org.yakindu.base.types.Visibility
 	extension SexecFactory sexecFactory = SexecFactory.eINSTANCE
 	extension TypesFactory typesFactory = TypesFactory.eINSTANCE
 	@Inject extension INamingService naming
+	@Inject extension ExpressionBuilder 
 	
 
 	def declareSequenceMethods(ComplexType scType, ExecutionFlow flow) {
@@ -45,6 +47,8 @@ import org.yakindu.base.types.Visibility
 		]
 		visibility = Visibility.PROTECTED
 		bodySequence = EcoreUtil.copy(body)
+		// TODO: just an empty block for now
+		it.body = _block
 	}
 
 }

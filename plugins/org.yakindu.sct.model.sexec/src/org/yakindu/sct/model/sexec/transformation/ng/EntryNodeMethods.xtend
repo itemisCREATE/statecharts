@@ -12,16 +12,19 @@ import com.google.inject.Inject
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 import com.google.inject.Singleton
+import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 
 @Singleton class EntryNodeMethods {
 	
 	@Inject extension SgraphExtensions sgraph
 	@Inject extension RegionType rType
 	@Inject extension TypeBuilder tBuilder
+	@Inject extension ExpressionBuilder expBuilder
 
 	def create _op reaction(Entry entry) {
 		it => [ 
 			name = entry.reactionName
+			body = _block
 			entry.region.type.features += it
 		]
 	}
