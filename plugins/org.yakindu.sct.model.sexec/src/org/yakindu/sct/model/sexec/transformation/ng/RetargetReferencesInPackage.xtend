@@ -14,11 +14,16 @@ import com.google.inject.Inject
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 class RetargetReferencesInPackage {
 	
 	@Inject
 	protected extension StatemachinePublic
+	
+	@Inject
+	protected extension ExpressionBuilder
 	
 	def retargetReferences(Package p) {
 		
@@ -37,12 +42,20 @@ class RetargetReferencesInPackage {
 		return container.containedIn(toCheck)
 	}
 	
-	protected def retarget(ElementReferenceExpression ere) {
+	protected def void retarget(ElementReferenceExpression ere) {
+		val refContainer = ere.reference.eContainer
 		val newRef = ere.reference.replaced
-		if (newRef !== null) ere.reference = newRef
+		if (newRef === null) {
+			return
+		}
+		if (refContainer instanceof InterfaceScope) {
+			EcoreUtil.replace(ere, refContainer.property._ref._fc(newRef))
+		} else {
+			ere.reference = newRef
+		}
 	}
 	
-	protected def retarget(FeatureCall fc) {
+	protected def void retarget(FeatureCall fc) {
 		val newRef = fc.feature.replaced
 		if (newRef !== null) fc.feature = newRef
 	}
