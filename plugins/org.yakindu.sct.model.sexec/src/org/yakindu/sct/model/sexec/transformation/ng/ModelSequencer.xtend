@@ -18,6 +18,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer
 import org.yakindu.sct.model.sexec.transformation.ReactionBuilder
 import org.yakindu.sct.model.sexec.transformation.RetargetReferences
+import org.yakindu.sct.model.sexec.transformation.ng.RetargetReferencesInPackage
 import org.yakindu.sct.model.sexec.transformation.ng.SequenceBuilder
 import org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
@@ -34,6 +35,7 @@ class ModelSequencer implements IModelSequencer {
 	@Inject extension SequenceBuilder seqBuilder
 	@Inject extension StateVectorBuilder svBuilder
 	@Inject extension RetargetReferences retageting
+	@Inject extension RetargetReferencesInPackage retageting2
 	
 	@Inject extension ReactOperation reactMethod
 	
@@ -90,6 +92,8 @@ class ModelSequencer implements IModelSequencer {
 		sctype.defineRunCycleMethod(sc)
 		
 		sctype.defineIsStateActiveMethod(sc)
+		
+		pkg.retargetReferences
 		
 	}
 
