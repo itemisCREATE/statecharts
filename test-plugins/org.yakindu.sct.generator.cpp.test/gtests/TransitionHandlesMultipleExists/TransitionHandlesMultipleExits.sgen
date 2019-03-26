@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::cpp {
-	statechart eventdriven.NoLocalEvents {
+	statechart exits.TransitionHandlesMultipleExits {
 		feature Outlet {
 			targetProject = "gtests"
-			targetFolder = "NoLocalEvents"
+			targetFolder = "TransitionHandlesMultipleExists"
 		}
 		feature FunctionInlining {
 			inlineReactions = false
