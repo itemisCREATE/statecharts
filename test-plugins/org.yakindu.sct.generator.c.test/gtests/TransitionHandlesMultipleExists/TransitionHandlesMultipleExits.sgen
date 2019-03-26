@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
-	statechart exits.ExitState {
+	statechart exits.TransitionHandlesMultipleExits {
 		feature Outlet {
 			targetProject = "gtests"
-			targetFolder = "ExitState"
+			targetFolder = "TransitionHandlesMultipleExists"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

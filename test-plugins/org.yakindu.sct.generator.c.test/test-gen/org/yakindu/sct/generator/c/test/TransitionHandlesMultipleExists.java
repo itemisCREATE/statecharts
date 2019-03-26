@@ -9,20 +9,20 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
 @GTest(
 	statechartBundle = "org.yakindu.sct.test.models",
-	sourceFile = "gtests/ExitState/ExitStateTest.cc",
-	program = "gtests/ExitState/ExitState",
-	model = "testmodels/SCTUnit/exits/ExitState.sct",
+	sourceFile = "gtests/TransitionHandlesMultipleExists/TransitionHandlesMultipleExists.cc",
+	program = "gtests/TransitionHandlesMultipleExists/TransitionHandlesMultipleExits",
+	model = "testmodels/SCTUnit/exits/TransitionHandlesMultipleExits.sct",
 	additionalFilesToCopy = {
 		"libraryTarget/sc_timer_service.c",
 		"libraryTarget/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
-		"ExitState.c",
+		"TransitionHandlesMultipleExits.c",
 		"sc_timer_service.c"
 	}
 )
 @RunWith(GTestRunner.class)
-public class ExitStateTest {
+public class TransitionHandlesMultipleExists {
 
 	protected final GTestHelper helper = new GTestHelper(this);
 
