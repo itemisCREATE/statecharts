@@ -185,7 +185,7 @@ class StatemachineMethods {
 				_for(nextStateIndex(sc)._ref._assign(0._int), nextStateIndex(sc)._ref._smaller(stateVector(sc)._ref._fc(_array._length)), nextStateIndex(sc)._ref._inc) => [
 					body = _block(
 						stateSwitch(stateVector(sc)._ref._get(nextStateIndex(sc)._ref), ef.states.filter[isLeaf].filter[es | rm.reactMethod(es)!==null], [ s | 
-							s.stateType._ref._fc(rm.reactMethod(s), _true)
+							rm.reactMethod(s)._call(_true)
 						], null)
 					)
 				]
