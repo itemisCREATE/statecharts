@@ -13,23 +13,30 @@ import com.google.inject.Inject;
 import static org.junit.Assert.*;
 
 /**
- * Unit TestCase for EntryChoice
+ * Unit TestCase for NoLocalEvents
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
-public class EntryChoice extends AbstractExecutionFlowTest {
+public class NoLocalEvents extends AbstractExecutionFlowTest {
 	
 	@Before
 	public void setup() throws Exception{
-		ExecutionFlow flow = models.loadExecutionFlowFromResource("EntryChoice.sct");
+		ExecutionFlow flow = models.loadExecutionFlowFromResource("eventdriven/NoLocalEvents.sct");
 		initInterpreter(flow);
 	}
 	@Test
-	public void entryChoiceTest() throws Exception {
+	public void test() throws Exception {
 		interpreter.enter();
-		timer.timeLeap(getCyclePeriod());
-		timer.timeLeap(getCyclePeriod());
-		assertTrue(isStateActive("A"));
+		assertTrue(isStateActive("StateA"));
+		raiseEvent("e");
+		assertTrue(isStateActive("StateB"));
+		raiseEvent("e");
+		assertTrue(isStateActive("StateA"));
+		assertTrue((getInteger("x") == 0l));
+		raiseEvent("i", 42l);
+		assertTrue(isStateActive("StateB"));
+		assertTrue((getInteger("x") == 42l));
+		interpreter.exit();
 	}
 }
