@@ -1,4 +1,41 @@
 testsuite AllTests {
+	
+	// declarations
+	ConstOnlyDefaultScope,
+	ConstOnlyInternalScope,
+	ConstOnlyNamedScope,
+	
+	// entries
+	EntryReactionAction,
+
+	// eventdriven
+	EventDrivenInternalEvent,
+	EventDrivenTriggeredByEvent,
+	EventDrivenTriggeredByTimeEvent,
+	LocalEvents,
+	NoLocalEvents,
+		
+	// executionorder
+	ChildFirstExecutionHierarchy,
+	ChildFirstLocalReactions,
+	ChildFirstOrthogonalReactions,
+	ChildFirstTransitionsinSubchart,
+	ChildFirstTransitionTaking ,
+	ParentFirstExecutionHierarchy,
+	ParentFirstLocalReactions,
+	ParentFirstOrthogonalReactions,
+	
+	// exits
+	ExitState,
+	TransitionHandlesMultipleExists,
+	
+	// expressions
+	TriggerExpressionPrecedence,
+	
+	// statechartactions
+    StatechartEntryExitActions, 
+
+	// not grouped
 	AlwaysOncycle,
 	AssignmentAsExpression,
 	BitExpressions, 
@@ -10,14 +47,6 @@ testsuite AllTests {
 	ConditionalExpression,
 	ConstantsTests,
 	ConstantsVariationTests,
-	ConstOnlyDefaultScope,
-	ConstOnlyInternalScope,
-	ConstOnlyNamedScope,
-	ChildFirstExecutionHierarchy,
-	ChildFirstLocalReactions,
-	ChildFirstOrthogonalReactions,
-	ChildFirstTransitionsinSubchart,
-	ChildFirstTransitionTaking ,
 	Declarations,
 	DeepEntry, 
 	DeepHistory,
@@ -26,13 +55,8 @@ testsuite AllTests {
 	EnterState,
 	EntryChoice, 
 	EntryExitSelfTransition,
-	EntryReactionAction,
-	EventDrivenInternalEvent,
-	EventDrivenTriggeredByEvent,
-	EventDrivenTriggeredByTimeEvent,
 	EventDrivenOutEvents,
 	ExitOnSelfTransition, 
-	ExitState,
 	ExitSequence,
 	FeatureCalls,
 	FinalState,
@@ -48,15 +72,11 @@ testsuite AllTests {
 	LocalReactions,
 	LogicalAndTests, 
 	LogicalOrTests,
-	LocalEvents,
 	NamedInterfaceAccess, 
 	OperationsTest,
 //	OperationsWithoutBraces,
 	OutEventLifeCycle,
 	Parenthesis,
-	ParentFirstExecutionHierarchy,
-	ParentFirstLocalReactions,
-	ParentFirstOrthogonalReactions,
 	PriorityValues,
 	RaiseEvent,
 	ReadOnlyVariable,
@@ -66,7 +86,6 @@ testsuite AllTests {
 	SimpleEvent,
 	SimpleHierachy,
 	StatechartActive,
-    StatechartEntryExitActions, 
 	StatechartLocalReactions,
 	StateIsActive, 
 	StaticChoice,
@@ -76,7 +95,6 @@ testsuite AllTests {
 	SyncJoin,
 	TransitionWithoutCondition,
 	TriggerGuardExpressions,
-	TriggerExpressionPrecedence,
 	ValuedEvents,
 	TypeAlias,
 	StatemachineKeywords,

@@ -1,0 +1,60 @@
+testclass TransitionHandlesMultipleExists for statechart exits.TransitionHandlesMultipleExits {
+	
+	@Test operation testTransitionHandling2Of2Exits() {
+
+		enter
+		assert active(exits.TransitionHandlesMultipleExits.main_region.A.r.AA)
+		
+		raise e
+		assert active(exits.TransitionHandlesMultipleExits.main_region.B.r.BB)
+		assert x == 1
+		
+		exit		
+		enter
+		x = 0
+		assert active(exits.TransitionHandlesMultipleExits.main_region.A.r.AA)
+		
+		raise f
+		assert active(exits.TransitionHandlesMultipleExits.main_region.B.r.BB)
+		assert x == 2
+		
+	}
+
+	@Test operation testTransitionHandling2Of3Exits() {
+
+		enter
+		raise e
+		assert active(exits.TransitionHandlesMultipleExits.main_region.B.r.BB)
+		x = 0
+		
+		raise e 
+		assert active(exits.TransitionHandlesMultipleExits.main_region.A.r.AA)
+		assert x == 11
+		
+		raise e
+		assert active(exits.TransitionHandlesMultipleExits.main_region.B.r.BB)
+		x = 0
+		
+		raise g 
+		assert active(exits.TransitionHandlesMultipleExits.main_region.A.r.AA)
+		assert x == 10
+		exit
+		
+	}
+
+	@Test operation testTransitionHandling1Of3Exits() {
+
+		enter
+		raise e
+		assert active(exits.TransitionHandlesMultipleExits.main_region.B.r.BB)
+		x = 0
+		
+		raise f 
+		assert active(exits.TransitionHandlesMultipleExits.main_region.A.r.AA)
+		assert x == 24
+		exit
+		
+	}
+
+
+}
