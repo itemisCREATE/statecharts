@@ -131,7 +131,7 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def getConstContext(Property it) {
-		if (scope !== null) {
+		if (interfaceScope !== null) {
 			return interfaceScope.interfaceName + "."
 		} else {
 			return it.flow.statemachineInterfaceName + "."
@@ -139,14 +139,14 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def dispatch CharSequence getContext(Event it) {
-		if (scope !== null) {
+		if (interfaceScope !== null) {
 			return interfaceScope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""
 	}
 
 	def dispatch CharSequence getContext(OperationDefinition it) {
-		if (scope !== null) {
+		if (interfaceScope !== null) {
 			return interfaceScope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""
