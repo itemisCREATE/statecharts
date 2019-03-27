@@ -35,7 +35,7 @@ The transformation of Java code now also takes interface methods into account wh
 Similarly, interface constants are also transformed and can be accessed in the statechart model.
 
 
-h3(#release_notes_3.5.3_misc). Misc
+h3(#release_notes_3.5.3_misc). Miscellaneous
 
 In addition, this release contains the following fixes:
 
