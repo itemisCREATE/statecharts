@@ -94,7 +94,7 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def dispatch CharSequence code(ElementReferenceExpression it){
-		if(it.reference instanceof OperationDefinition) {
+		if(it.reference instanceof Operation) {
 			return '''«reference.code»(«FOR arg : expressions SEPARATOR ", "»«arg.code»«ENDFOR»)'''
 		} else if (it.reference instanceof Parameter) {
 			return '''«(it.reference as Parameter).name»'''
@@ -152,11 +152,7 @@ class CSharpExpressionsGenerator extends ExpressionsGenerator {
 		return ""
 	}
 	
-	def dispatch CharSequence code(Method it){
-		'''
-		«name»(«FOR params : it.parameters»«params.varArgs.booleanValue»«ENDFOR»)
-		'''
-	}
+	def dispatch CharSequence code(Method it) '''«functionName.asEscapedIdentifier»'''
 
 	def dispatch CharSequence getContext(EObject it) {
 		return "//ERROR: No context for " + it
