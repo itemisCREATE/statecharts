@@ -171,7 +171,7 @@ class ReactionBuilder {
 	 * Returns the names of all exit points specified by a transition.
 	 */
 	def exitPoints(Transition it) {
-		 properties.filter(typeof(ExitPointSpec)).map( eps | eps.exitpoint).toList
+		 properties.filter[ExitPointSpec].map[ eps | eps.exitpoint].toList
 	}
 	
 	
