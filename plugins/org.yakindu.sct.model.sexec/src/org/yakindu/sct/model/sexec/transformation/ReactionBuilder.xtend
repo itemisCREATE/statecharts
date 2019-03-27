@@ -131,9 +131,11 @@ class ReactionBuilder {
 		execExit.reactSequence.name = 'react'
 		execExit.reactSequence.comment = 'The reactions of exit ' + realName + '.'
 		
-		// find an outgoing transition that handles the exit
 		val parentState = it.parentRegion.composite as State
-		var exitTrans = 	parentState.outgoingTransitions.filter( t | t.explicitlyHandlesExit(realName)).head
+	
+		// find a transition that explicitly handles the exit 
+		var exitTrans = 	parentState.outgoingTransitions.filter[ t | t.explicitlyHandlesExit(realName)].head
+		// or choose the default exit transition
 		if (exitTrans === null) exitTrans = parentState.defaultExitTransition
 		
 		if (exitTrans !== null) {
@@ -164,14 +166,14 @@ class ReactionBuilder {
 	 * The default transition is that one that explicitly handles 'default'.
 	 */
 	def defaultExitTransition(State it) {
-		outgoingTransitions.filter( t | t.hasNoTrigger && t.explicitlyHandlesExit('default')).head
+		outgoingTransitions.filter[ t | t.hasNoTrigger && t.explicitlyHandlesExit('default')].head
 	}
 	
 	/**
 	 * Returns the names of all exit points specified by a transition.
 	 */
 	def exitPoints(Transition it) {
-		 properties.filter[ExitPointSpec].map[ eps | eps.exitpoint].toList
+		 properties.filter(ExitPointSpec).map[ eps | eps.exitpoint].toList
 	}
 	
 	
