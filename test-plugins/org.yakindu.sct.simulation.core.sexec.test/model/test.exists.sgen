@@ -1,0 +1,18 @@
+GeneratorModel for sctunit::interpreter {
+
+	test ExitState {
+
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"			
+		}			
+	}
+
+	test TransitionHandlesMultipleExists {
+
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"			
+		}			
+	}
+}

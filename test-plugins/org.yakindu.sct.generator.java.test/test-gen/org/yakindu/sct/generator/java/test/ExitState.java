@@ -40,35 +40,35 @@ public class ExitState {
 	@Test
 	public void defaultExit() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.r_A));
+		assertTrue(statemachine.isStateActive(State.exitState_r_A));
 		statemachine.getSCInterface().raiseE();
 		timer.cycleLeap(1);
-		assertTrue(statemachine.isStateActive(State.r_E));
+		assertTrue(statemachine.isStateActive(State.exitState_r_E));
 	}
 	
 	@Test
 	public void namedExitThroughNamedTransition() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.r_A));
+		assertTrue(statemachine.isStateActive(State.exitState_r_A));
 		statemachine.getSCInterface().raiseF();
 		timer.cycleLeap(1);
-		assertTrue(statemachine.isStateActive(State.r_F));
+		assertTrue(statemachine.isStateActive(State.exitState_r_F));
 	}
 	
 	@Test
 	public void namedExitThroughDefaultTransition() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.r_A));
+		assertTrue(statemachine.isStateActive(State.exitState_r_A));
 		statemachine.getSCInterface().raiseG();
 		timer.cycleLeap(1);
-		assertTrue(statemachine.isStateActive(State.r_E));
+		assertTrue(statemachine.isStateActive(State.exitState_r_E));
 	}
 	
 	@Test
 	public void remainInA() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.r_A));
+		assertTrue(statemachine.isStateActive(State.exitState_r_A));
 		timer.cycleLeap(1);
-		assertTrue(statemachine.isStateActive(State.r_A));
+		assertTrue(statemachine.isStateActive(State.exitState_r_A));
 	}
 }

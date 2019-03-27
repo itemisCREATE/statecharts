@@ -11,7 +11,7 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	statechartBundle = "org.yakindu.sct.test.models",
 	sourceFile = "gtests/ExitState/ExitStateTest.cc",
 	program = "gtests/ExitState/ExitState",
-	model = "testmodels/SCTUnit/ExitState.sct",
+	model = "testmodels/SCTUnit/exits/ExitState.sct",
 	additionalFilesToCopy = {
 		"libraryTarget/sc_timer_service.c",
 		"libraryTarget/sc_timer_service.h"

@@ -44,33 +44,33 @@ void ExitStateTest::SetUp()
 void ExitStateTest::defaultExit()
 {
 	exitState_enter(&statechart);
-	EXPECT_TRUE(exitState_isStateActive(&statechart, ExitState_r_A));
+	EXPECT_TRUE(exitState_isStateActive(&statechart, ExitState_ExitState_r_A));
 	exitStateIface_raise_e(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(exitState_isStateActive(&statechart, ExitState_r_E));
+	EXPECT_TRUE(exitState_isStateActive(&statechart, ExitState_ExitState_r_E));
 }
 void ExitStateTest::namedExitThroughNamedTransition()
 {
 	exitState_enter(&statechart);
-	EXPECT_TRUE(exitState_isStateActive(&statechart, ExitState_r_A));
+	EXPECT_TRUE(exitState_isStateActive(&statechart, ExitState_ExitState_r_A));
 	exitStateIface_raise_f(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(exitState_isStateActive(&statechart, ExitState_r_F));
+	EXPECT_TRUE(exitState_isStateActive(&statechart, ExitState_ExitState_r_F));
 }
 void ExitStateTest::namedExitThroughDefaultTransition()
 {
 	exitState_enter(&statechart);
-	EXPECT_TRUE(exitState_isStateActive(&statechart, ExitState_r_A));
+	EXPECT_TRUE(exitState_isStateActive(&statechart, ExitState_ExitState_r_A));
 	exitStateIface_raise_g(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(exitState_isStateActive(&statechart, ExitState_r_E));
+	EXPECT_TRUE(exitState_isStateActive(&statechart, ExitState_ExitState_r_E));
 }
 void ExitStateTest::remainInA()
 {
 	exitState_enter(&statechart);
-	EXPECT_TRUE(exitState_isStateActive(&statechart, ExitState_r_A));
+	EXPECT_TRUE(exitState_isStateActive(&statechart, ExitState_ExitState_r_A));
 	sc_timer_service_proceed_cycles(&timer_service, 1);
-	EXPECT_TRUE(exitState_isStateActive(&statechart, ExitState_r_A));
+	EXPECT_TRUE(exitState_isStateActive(&statechart, ExitState_ExitState_r_A));
 }
 
 void ExitStateTest::setTimer(ExitState* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){
