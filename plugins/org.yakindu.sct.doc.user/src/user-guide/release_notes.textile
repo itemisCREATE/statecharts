@@ -5,6 +5,47 @@ h1(#release_notes). Release Notes
 
 A list of new and noteworthy features as well as bugs we have tackled down in the particular releases.
 
+h2(#release_notes_3.5.3). YAKINDU Statechart Tools  3.5.3 (Mar 29, 2019)
+
+This release adds in&#45;event queue support for C and Java code generators as well as some usability improvements.
+
+h3(#release_notes_3.5.3_c_domain). In&#45;event queue support for C and Java code generator
+
+Similar to the C&#43;&#43; code generator, C and Java code generators now also support an additional event queue for incoming events if the statechart is event&#45;driven. To enable it, set the _inEventQueue_ option of the _GenerationOptions_ feature to _true_. If an operation callback or function is executed by the state machine and that functions raises an event, this event will be appended to the in&#45;event queue. The state machine's API will remain unchanged. After processing of the origin event is completed, all events in the in&#45;events queue will be processed automatically in the order they were raised.
+
+
+h3(#release_notes_3.5.3_usability). Usability
+
+We added two more buttons to the *simulation view* to easier restart simulation runs:
+
+* !(inlinemediaobject)images/symbol_terminate_relaunch.png(Symbol: Terminate and Relaunch)! (Terminate and Relaunch) : Terminates the current simulation and runs it again from the start
+* !(inlinemediaobject)images/symbol_restart.png(Symbol: Restart)! (Restart): Starts a new simulation while keeping the current one active
+
+The *generator model* now suggests a quick fix in case the specified target project does not exist:
+
+p(#release_notes_3.5.3_usability). 
+
+!images/release_notes_3.5.3_quickfix.png(Quickfix for changing project name)!
+
+
+h3(#release_notes_3.5.3_java_domain). Java Domain
+
+The transformation of Java code now also takes interface methods into account which do not have an explicit _public_ modifier. 
+
+Similarly, interface constants are also transformed and can be accessed in the statechart model.
+
+
+h3(#release_notes_3.5.3_misc). Misc
+
+In addition, this release contains the following fixes:
+
+* Fixed handling of transitions with multiple exit point specifications
+* Fixed a bug in C# code generator regarding operation calls to react methods
+* Fixed a bug in C code generator causing the RequiredHeader.h to be not included when _tracing_ is activated.
+* C&#43;&#43; code generator now uses _strcmp_ for comparing strings
+
+
+<hr />
 
 
 h2(#release_notes_3.5.2). YAKINDU Statechart Tools  3.5.2 (Feb 28, 2019)
