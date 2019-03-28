@@ -11,7 +11,7 @@ This release adds in&#45;event queue support for C and Java code generators as w
 
 h3(#release_notes_3.5.3_c_domain). In&#45;event queue support for C and Java code generator
 
-Similar to the C&#43;&#43; code generator, C and Java code generators now also support an additional event queue for incoming events if the statechart is event&#45;driven. To enable it, set the _inEventQueue_ option of the _GenerationOptions_ feature to _true_. If an operation callback or function is executed by the state machine and that functions raises an event, this event will be appended to the in&#45;event queue. The state machine's API will remain unchanged. After processing of the origin event is completed, all events in the in&#45;events queue will be processed automatically in the order they were raised.
+Similar to the C&#43;&#43; code generator, C and Java code generators now also support an additional event queue for incoming events if the statechart is event&#45;driven. To enable it, set the _inEventQueue_ option of the _GeneratorOptions_ (in Java _GeneralFeatures_) to _true_. If an operation callback or function is executed by the state machine and that function raises an event, this event will be appended to the in&#45;event queue. The state machine's API will remain unchanged. After the origin event was processed, all events in the in&#45;events queue will be processed automatically in the order they were raised.
 
 
 h3(#release_notes_3.5.3_usability). Usability
@@ -28,21 +28,15 @@ p(#release_notes_3.5.3_usability).
 !images/release_notes_3.5.3_quickfix.png(Quickfix for changing project name)!
 
 
-h3(#release_notes_3.5.3_java_domain). Java Domain
-
-The transformation of Java code now also takes interface methods into account which do not have an explicit _public_ modifier. 
-
-Similarly, interface constants are also transformed and can be accessed in the statechart model.
-
-
 h3(#release_notes_3.5.3_misc). Miscellaneous
 
-In addition, this release contains the following fixes:
+In addition, this release contains the following changes:
 
 * Fixed handling of transitions with multiple exit point specifications
 * Fixed a bug in C# code generator regarding operation calls to react methods
-* Fixed a bug in C code generator causing the RequiredHeader.h to be not included when _tracing_ is activated.
+* Fixed a bug in C code generator causing the RequiredHeader.h to be not included when _tracing_ is activated
 * C&#43;&#43; code generator now uses _strcmp_ for comparing strings
+* The Java domain now also takes interface methods without explicit _public_ modifiers into account
 
 
 <hr />
@@ -207,7 +201,7 @@ An example of the Qt C&#43;&#43; code generator together with a simple QML user 
 
 h3(#release_notes_3.5.0_in_event_queue_cpp_code_generator). In&#45;event queue support for C&#43;&#43; code generator
 
-The C&#43;&#43; code generator now also supports an additional event queue for incoming events if the statechart is event&#45;driven. To enable it, set the _inEventQueue_ option of the _GenerationOptions_ feature to _true_. If an operation callback or function is executed by the state machine and that functions raises an event, this event will be appended to the in&#45;event queue. The state machine's API will remain unchanged. After processing of the origin event is completed, all events in the in&#45;events queue will be processed automatically in the order they were raised.
+The C&#43;&#43; code generator now also supports an additional event queue for incoming events if the statechart is event&#45;driven. To enable it, set the _inEventQueue_ option of the _GeneratorOptions_ feature to _true_. If an operation callback or function is executed by the state machine and that functions raises an event, this event will be appended to the in&#45;event queue. The state machine's API will remain unchanged. After processing of the origin event is completed, all events in the in&#45;events queue will be processed automatically in the order they were raised.
 
 
 
