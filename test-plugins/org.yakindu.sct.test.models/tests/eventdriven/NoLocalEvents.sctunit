@@ -1,18 +1,18 @@
-testclass NoLocalEvents for statechart NoLocalEvents {
+testclass NoLocalEvents for statechart eventdriven.NoLocalEvents {
 	
 	@Test
 	operation test() {
 		enter
-		assert active(NoLocalEvents.main_region.StateA)
+		assert active(eventdriven.NoLocalEvents.main_region.StateA)
 		raise e
-		assert active(NoLocalEvents.main_region.StateB)
+		assert active(eventdriven.NoLocalEvents.main_region.StateB)
 		raise e
-		assert active(NoLocalEvents.main_region.StateA)
+		assert active(eventdriven.NoLocalEvents.main_region.StateA)
 		
 		assert (x == 0)
 		raise i:42
 		
-		assert active(NoLocalEvents.main_region.StateB)
+		assert active(eventdriven.NoLocalEvents.main_region.StateB)
 		assert (x == 42)
 		exit
 	}

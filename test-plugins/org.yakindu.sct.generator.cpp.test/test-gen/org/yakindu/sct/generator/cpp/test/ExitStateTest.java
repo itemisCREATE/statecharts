@@ -12,7 +12,7 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper.Compiler;
 	statechartBundle = "org.yakindu.sct.test.models",
 	sourceFile = "gtests/ExitStateTest/ExitStateTest.cc",
 	program = "gtests/ExitStateTest/ExitState",
-	model = "testmodels/SCTUnit/ExitState.sct",
+	model = "testmodels/SCTUnit/exits/ExitState.sct",
 	additionalFilesToCopy = {
 		"libraryTarget/sc_runner.h",
 		"libraryTarget/sc_runner.cpp"

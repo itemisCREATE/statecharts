@@ -13,7 +13,6 @@ import com.google.inject.Inject
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Parameter
-import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -52,18 +51,20 @@ class StatemachineInterface {
 			{
 				public interface «flow.statemachineInterfaceName» : «flow.statemachineInterfaceExtensions» {
 					«IF flow.internalScope !== null»
-					
-					«var constants = flow.internalScope.declarations.filter(VariableDefinition).filter[const]»
-					«FOR constant : constants»
-						«constant.constantFieldDeclaration()»
-					«ENDFOR»
+						«var constants = flow.internalScope.declarations.filter(VariableDefinition).filter[const]»
+						«FOR constant : constants»
+							«constant.constantFieldDeclaration()»
+						«ENDFOR»
+						«IF flow.internalScope.hasOperations»
+							void set«flow.internalScope.internalOperationCallbackName»(«flow.internalScope.internalOperationCallbackName» operationCallback);
+						«ENDIF»
 					«ENDIF»
 					«FOR scope : flow.scopes»
 						«scope.createIFaceGetter()»
 					«ENDFOR»
 				}
 				
-				«FOR scope : flow.scopes»
+				«FOR scope : flow.scopes SEPARATOR '\n'»
 					«scope.createScope(entry)»
 				«ENDFOR»
 			}
@@ -106,15 +107,13 @@ class StatemachineInterface {
 						«operation.operationSignature»
 					«ENDFOR»
 				}
-				
-				void set«scope.internalOperationCallbackName»(«scope.internalOperationCallbackName» operationCallback);
 			«ENDIF»
 		'''
 	}
 
 	def protected createInterface(InterfaceScope scope, GeneratorEntry entry) {
 		'''
-				public interface «scope.interfaceName» {
+			public interface «scope.interfaceName» {
 				«var constants = scope.declarations.filter(VariableDefinition).filter[const]»
 				«FOR constant : constants»
 					«constant.constantFieldDeclaration()»
@@ -125,10 +124,10 @@ class StatemachineInterface {
 				List<«scope.getInterfaceListenerName()»> getListeners();
 				«ENDIF»
 			
-					«IF scope.hasOperations()»
-						void set«scope.getInterfaceOperationCallbackName()»(«scope.getInterfaceOperationCallbackName()» operationCallback);
-					«ENDIF»
-				}
+				«IF scope.hasOperations()»
+					void set«scope.getInterfaceOperationCallbackName()»(«scope.getInterfaceOperationCallbackName()» operationCallback);
+				«ENDIF»
+			}
 		'''
 	}
 
@@ -156,9 +155,9 @@ class StatemachineInterface {
 			«IF scope.hasOperations»
 				
 				public interface «scope.getInterfaceOperationCallbackName()» {
-				«FOR operation : scope.operations»
-					«operation.operationSignature»
-				«ENDFOR»
+					«FOR operation : scope.operations»
+						«operation.operationSignature»
+					«ENDFOR»
 				}
 			«ENDIF»
 		'''

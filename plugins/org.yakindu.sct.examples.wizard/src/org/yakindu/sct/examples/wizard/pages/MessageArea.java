@@ -90,9 +90,10 @@ public class MessageArea extends Composite {
 		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_INFORMATION));
 		textLabel.setText(
 				"No examples found, please download the latest examples.\nYou can <a>change the storage location here.</a>");
+		textLabel.requestLayout();
 		button.setText("Download");
-		textLabel.pack();
 		button.setVisible(true);
+		button.requestLayout();
 		show();
 	}
 
@@ -101,9 +102,10 @@ public class MessageArea extends Composite {
 		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_QUESTION));
 		// FIXME: unfortunate wording; determining if new updates exist means fetching the git repo. Therefore, we don't really download anything here.
 		textLabel.setText("Updates available. Do you want to download the new examples?");
-		textLabel.pack();
+		textLabel.requestLayout();
 		button.setText("Update");
 		button.setVisible(true);
+		button.requestLayout();
 		show();
 	}
 	
@@ -111,9 +113,10 @@ public class MessageArea extends Composite {
 		state = State.INVALID_CONFIG;
 		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_ERROR));
 		textLabel.setText("Invalid configuration");
-		textLabel.pack();
+		textLabel.requestLayout();
 		button.setText("Open preference page");
 		button.setVisible(true);
+		button.requestLayout();
 		show();
 	}
 	
@@ -121,9 +124,10 @@ public class MessageArea extends Composite {
 		state = State.INVALID_CONFIG;
 		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_ERROR));
 		textLabel.setText("Remote Branch not found");
-		textLabel.pack();
+		textLabel.requestLayout();
 		button.setText("Open preference page");
 		button.setVisible(true);
+		button.requestLayout();
 		show();
 	}
 	
@@ -131,7 +135,7 @@ public class MessageArea extends Composite {
 		state = State.ERROR;
 		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_ERROR));
 		textLabel.setText("Repo contains conflicts!");
-		textLabel.pack();
+		textLabel.requestLayout();
 		button.setVisible(false);
 		show();
 	}
@@ -140,9 +144,10 @@ public class MessageArea extends Composite {
 		state = State.INSTALL;
 		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_INFORMATION));
 		textLabel.setText("This example requires additional features. Do you want to install them?");
-		textLabel.pack();
+		textLabel.requestLayout();
 		button.setText("Install Dependencies...");
 		button.setVisible(true);
+		button.requestLayout();
 		show();
 	}
 
@@ -151,7 +156,7 @@ public class MessageArea extends Composite {
 		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_ERROR));
 		textLabel.setText(
 				"Unable to download examples. You can manually download them from \n <a>http://www.statecharts.org/examples.html</a>");
-		textLabel.pack();
+		textLabel.requestLayout();
 		button.setVisible(false);
 		show();
 	}

@@ -7,7 +7,7 @@
 
 namespace  {
 
-NoLocalEvents* statechart;
+eventdriven::NoLocalEvents* statechart;
 
 
 
@@ -17,7 +17,7 @@ static SctUnitRunner * runner;
 class NoLocalEventsTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
-		statechart = new NoLocalEvents();
+		statechart = new eventdriven::NoLocalEvents();
 		statechart->init();
 		runner = new SctUnitRunner(
 			statechart,
@@ -36,21 +36,21 @@ TEST_F(NoLocalEventsTest, test) {
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(NoLocalEvents::main_region_StateA));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::NoLocalEvents::NoLocalEvents_main_region_StateA));
 	
 	statechart->getDefaultSCI()->raise_e();
 	
-	EXPECT_TRUE(statechart->isStateActive(NoLocalEvents::main_region_StateB));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::NoLocalEvents::NoLocalEvents_main_region_StateB));
 	
 	statechart->getDefaultSCI()->raise_e();
 	
-	EXPECT_TRUE(statechart->isStateActive(NoLocalEvents::main_region_StateA));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::NoLocalEvents::NoLocalEvents_main_region_StateA));
 	
 	EXPECT_TRUE((statechart->getDefaultSCI()->get_x()== 0));
 	
 	statechart->getDefaultSCI()->raise_i(42);
 	
-	EXPECT_TRUE(statechart->isStateActive(NoLocalEvents::main_region_StateB));
+	EXPECT_TRUE(statechart->isStateActive(eventdriven::NoLocalEvents::NoLocalEvents_main_region_StateB));
 	
 	EXPECT_TRUE((statechart->getDefaultSCI()->get_x()== 42));
 	

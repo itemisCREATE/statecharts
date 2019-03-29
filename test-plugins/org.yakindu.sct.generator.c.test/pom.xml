@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.yakindu.sct</groupId>
 		<artifactId>org.yakindu.sct.releng</artifactId>
-		<version>3.5.2-SNAPSHOT</version>
+		<version>3.5.3-SNAPSHOT</version>
 		<relativePath>../../releng/org.yakindu.sct.releng/pom.xml</relativePath>
 	</parent>
 	<artifactId>org.yakindu.sct.generator.c.test</artifactId>
@@ -20,8 +20,7 @@
 				<version>${tycho-version}</version>
 				<configuration>
 					<includes>
-						<include>**/AllTests.class</include>
-						<include>**/AllTestsTestCustom.class</include>
+						<include>**/AllCTests.class</include>
 					</includes> 
 					<useUIHarness>false</useUIHarness>
 					<useUIThread>false</useUIThread>

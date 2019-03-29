@@ -1,5 +1,5 @@
 GeneratorModel for yakindu::cpp {
-	statechart NoLocalEvents {
+	statechart eventdriven.NoLocalEvents {
 		feature Outlet {
 			targetProject = "gtests"
 			targetFolder = "NoLocalEvents"

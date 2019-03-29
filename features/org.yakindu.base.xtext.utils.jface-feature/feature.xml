@@ -2,7 +2,7 @@
 <feature
       id="org.yakindu.base.xtext.utils.jface"
       label="Xtext JFace Integration Feature"
-      version="3.5.2.qualifier"
+      version="3.5.3.qualifier"
       provider-name="itemis AG">
 
    <description url="http://www.example.com/description">

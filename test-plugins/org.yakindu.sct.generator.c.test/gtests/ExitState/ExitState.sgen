@@ -1,5 +1,5 @@
 GeneratorModel for yakindu::c {
-	statechart ExitState {
+	statechart exits.ExitState {
 		feature Outlet {
 			targetProject = "gtests"
 			targetFolder = "ExitState"
