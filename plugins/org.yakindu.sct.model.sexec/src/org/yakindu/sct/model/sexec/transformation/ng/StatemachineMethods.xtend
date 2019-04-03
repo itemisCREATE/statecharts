@@ -29,7 +29,7 @@ import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-
+import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 @Singleton
 class StatemachineMethods {
 
@@ -99,9 +99,9 @@ class StatemachineMethods {
 		if (vd.effectiveInitialValue !== null) {
 			val owner = vd.eContainer
 			if (owner instanceof InterfaceScope) {
-				return owner.property._ref._fc(vd.feature)._assign(vd.effectiveInitialValue)
+				return owner.property._ref._fc(vd.feature)._assign(vd.effectiveInitialValue.copy)
 			} else {
-				return vd.feature._ref._assign(vd.effectiveInitialValue)
+				return vd.feature._ref._assign(vd.effectiveInitialValue.copy)
 			}
 		}
 		null
