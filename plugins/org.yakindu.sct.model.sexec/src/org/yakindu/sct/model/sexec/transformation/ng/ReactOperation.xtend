@@ -32,6 +32,7 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Effect
 import org.yakindu.sct.model.stext.stext.ReactionEffect
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.yakindu.base.types.Declaration
 
 /**
  * React method is an artifact concepts that is created for each state machine state and the statechart
@@ -212,8 +213,7 @@ class ReactOperation {
 	def create op : _op checkOperation(Reaction it) {
 		op.name = ("check" + "_" + it.name)
 		op._type(_bool)
-		val parentState = (it.eContainer as ExecutionNode).sourceElement as State
-		parentState.type.features += op
+		(it.eContainer as ExecutionNode).sourceElement.addToType(op)
 		
 		val condition = it.check?.condition
 		op.body = if (condition !== null) {
@@ -223,10 +223,17 @@ class ReactOperation {
 		}
 	}
 	
+	def protected dispatch addToType(State it, Declaration feature) {
+		type.features += feature
+	}
+	
+	def protected dispatch addToType(Statechart it, Declaration feature) {
+		statemachineType.features += feature
+	}
+	
 	def create op : _op effectOperation(Reaction it) {
 		op.name = ("effect" + "_" + it.name)
-		val parentState = (it.eContainer as ExecutionNode).sourceElement as State
-		parentState.type.features += op
+		(it.eContainer as ExecutionNode).sourceElement.addToType(op)
 		
 		val sgraphReaction = it.sourceElement as org.yakindu.sct.model.sgraph.Reaction
 		op.body = sgraphReaction.effect.mapEffect
