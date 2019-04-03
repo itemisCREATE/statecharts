@@ -74,7 +74,7 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 	}
 	
 	def createRunCycleMethod() {
-		_op("runCycle", tSystem.getType(ITypeSystem.BOOLEAN))
+		_op("runCycle", tSystem.getType(ITypeSystem.VOID))
 	}
 	
 }
