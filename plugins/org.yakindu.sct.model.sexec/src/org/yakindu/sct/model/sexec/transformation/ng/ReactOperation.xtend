@@ -29,6 +29,9 @@ import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sgraph.Effect
+import org.yakindu.sct.model.stext.stext.ReactionEffect
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 /**
  * React method is an artifact concepts that is created for each state machine state and the statechart
@@ -225,14 +228,20 @@ class ReactOperation {
 		val parentState = (it.eContainer as ExecutionNode).sourceElement as State
 		parentState.type.features += op
 		
-		// TODO: effect steps need to be expressions
-		op.body = _block
-//		val actions = (it.effect as Execution).statement
-//		op.body = if (actions !== null) {
-//			_block(actions)
-//		} else {
-//			_block
-//		}
+		val sgraphReaction = it.sourceElement as org.yakindu.sct.model.sgraph.Reaction
+		op.body = sgraphReaction.effect.mapEffect
+	}
+	
+	def dispatch BlockExpression mapEffect(Void effect) {
+		_block
+	}
+	
+	def dispatch BlockExpression mapEffect(Effect effect) {
+		_block
+	}
+	
+	def dispatch BlockExpression mapEffect(ReactionEffect effect) {
+		_block(EcoreUtil.copyAll(effect.actions))
 	}
 
 	def BlockExpression createReactionSequence(ExecutionNode state, Expression localStep) {	
