@@ -14,13 +14,14 @@ import com.google.inject.Singleton
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Property
 import org.yakindu.base.types.TypesFactory
+import org.yakindu.base.types.Visibility
+import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.sct.model.sexec.transformation.TypeBuilder
-import org.yakindu.base.types.Visibility
 
 /**
  * This class implements a transformation that creates the state machine type
@@ -39,16 +40,13 @@ import org.yakindu.base.types.Visibility
 	@Inject extension IStatemachine 
 	@Inject extension TypeBuilder 
 	
-	def statemachinePackage(Statechart sc) {
-		statemachinePackage(sc.namespace)
- 	}
-
-	def create createPackage statemachinePackage(String namespace) {
+	@Inject protected extension ModelSequencerNaming
+	
+	def create createPackage statemachinePackage(Statechart sc) {
  		it => [
- 			name = if (namespace.nullOrEmpty) "default" else namespace
+ 			name = sc.statemachinePackageName
  		]	
  	}
-	
 
 	def create createComplexType statemachineType(Statechart sc) {
 
@@ -71,7 +69,7 @@ import org.yakindu.base.types.Visibility
 	}
 	
 	protected def create createAnnotationType interfaceAnnotationType() {
-		name = "InterfaceGroup"
+		name = interfaceTypeAnnotationName
 	}
 
 
@@ -103,7 +101,7 @@ import org.yakindu.base.types.Visibility
 
 	def create createEnumerationType statesEnumeration(Statechart sc) {
 		it => [
-			name = '''«sc.name»States'''
+			name = sc.statesEnumerationName
 			annotationInfo = createAnnotatableElement
 			enumerator += sc.noState
 			sc.eAllContents.filter(RegularState).forEach [ state |
@@ -113,17 +111,18 @@ import org.yakindu.base.types.Visibility
 	}
 	
 	def create createEnumerator enumerator(RegularState state) {
-		name = state.name
+		name = state.enumeratorName
 	}
 	
-	
 	protected def create createEnumerator noState(Statechart sc) {
-		it.name = "__NoState__"
+		it.name = noStateName
 	}
 
 	protected def create createComplexType createInterfaceType(InterfaceScope iface) {
-		it.name = if (iface.name.nullOrEmpty) "SCInterface" else iface.name
+		it.name = iface.interfaceTypeName
+		
 		iface.declarations.forEach[decl|features += decl.feature]
+		features.filter(Property).filter[!const].forEach[prop|prop.initialValue = null]
 		
 		it._annotateWith(interfaceAnnotationType)
 	}
