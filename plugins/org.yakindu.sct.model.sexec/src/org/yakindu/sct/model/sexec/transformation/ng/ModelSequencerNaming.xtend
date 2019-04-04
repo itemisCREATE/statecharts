@@ -33,4 +33,8 @@ class ModelSequencerNaming {
 	def interfaceTypeAnnotationName() {
 		"InterfaceGroup"
 	}
+	
+	def stateTypeName(RegularState state) {
+		state.fullyQualifiedName.lastSegment
+	}
 }
