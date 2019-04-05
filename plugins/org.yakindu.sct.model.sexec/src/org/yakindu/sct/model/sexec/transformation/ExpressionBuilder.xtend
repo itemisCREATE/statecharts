@@ -243,6 +243,46 @@ class ExpressionBuilder {
 			rightOperand = right			
 		]
 	}
+	
+	def dispatch value(Boolean b) {
+		createPrimitiveValueExpression => [
+			value = createBoolLiteral => [value = b.booleanValue]
+		]
+	}
+
+	def dispatch value(Integer i) {
+		createPrimitiveValueExpression => [
+			value = createIntLiteral => [value = i.intValue]
+		]
+	}
+	
+	def dispatch value(Long i) {
+		createPrimitiveValueExpression => [
+			value = createIntLiteral => [value = i.intValue]
+		]
+	}
+
+	def dispatch Expression value(Double d) {
+		createPrimitiveValueExpression => [
+			value = createDoubleLiteral => [value = d.doubleValue]
+		]
+	}
+	
+	def dispatch value(Float d) {
+		createPrimitiveValueExpression => [
+			value = createFloatLiteral => [value = d.floatValue]
+		]
+	}
+
+	def dispatch value(String i) {
+		createPrimitiveValueExpression => [
+			value = createStringLiteral => [value = i]
+		]
+	}
+	
+	def dispatch value(Object o) {
+		null
+	}
 
 
 }
