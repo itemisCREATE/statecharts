@@ -226,6 +226,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 	def Reaction create r : sexecFactory.createReaction create(LocalReaction lr){
 		r.name = lr.id()
 		r.transition = false
+		r.sourceElement = lr
 	}
 	
 	def CheckRef newRef(Check check) {

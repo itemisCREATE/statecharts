@@ -171,9 +171,9 @@ class StatemachineMethods {
 	protected def equalsState(Statechart sc, ExecutionState fs, int index) {
 		stateVector(sc)._ref._get(index._int)._equals(
 			if (fs.stateVector.offset == index) {
-				stateVector(sc)._ref._fc((fs.sourceElement as RegularState).enumerator)
+				statesEnumeration(sc)._ref._fc((fs.sourceElement as RegularState).enumerator)
 			} else {
-				stateVector(sc)._ref._fc(noState(sc))
+				statesEnumeration(sc)._ref._fc(noState(sc))
 			}
 		)
 	}

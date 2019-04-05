@@ -27,7 +27,7 @@ class StateVector {
 	
 	def dispatch create sexec.factory.createStateVector stateVector(Region r) {}
 	
-	def dispatch create sexec.factory.createStateVector stateVector(State r) {}
+	def dispatch create sexec.factory.createStateVector stateVector(RegularState r) {}
 
 	/** calculates the maximum orthogonality (maximum number of possible active leaf states) of the statechart */
 	def dispatch int defineStateVectors(Statechart sc, int offset) {
