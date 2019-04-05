@@ -30,6 +30,10 @@ class ModelSequencerNaming {
 		if(iface.name.nullOrEmpty) "SCInterface" else iface.name
 	}
 	
+	def internalTypeName() {
+		"SCInternal"
+	}
+	
 	def interfaceTypeAnnotationName() {
 		"InterfaceGroup"
 	}

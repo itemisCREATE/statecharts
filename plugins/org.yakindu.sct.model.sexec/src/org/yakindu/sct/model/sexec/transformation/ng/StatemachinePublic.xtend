@@ -63,6 +63,9 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 			features += sc.scopes.filter(InterfaceScope).map [
 				createInterfaceType
 			]
+			features += sc.scopes.filter(InternalScope).map [
+				createInternalType
+			]
 
 			declareMembers(sc)
 		]
@@ -71,34 +74,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 	protected def create createAnnotationType interfaceAnnotationType() {
 		name = interfaceTypeAnnotationName
 	}
-
-
-	protected def declareMembers(ComplexType scType, Statechart sc) {
-
-		// Named interfaces
-		sc.scopes.filter(InterfaceScope).filter[name !== null].forEach [ iface |
-			scType.features += iface.property
-		]
-		
-		// Unnamed interface
-		sc.scopes.filter(InterfaceScope).filter[name === null].forEach [ iface |
-			scType.features += iface.property
-		]
-		
-		// Internal variables
-		sc.scopes.filter(InternalScope).forEach [ internal |
-			internal.declarations.forEach[decl|scType.features += decl.feature]
-		]
-	}
 	
-	def create createProperty property(InterfaceScope iface) {
-		it.typeSpecifier = createTypeSpecifier => [
-			type = createInterfaceType(iface)
-		]
-		it.name = type.name.toFirstLower
-		it.visibility = Visibility.PUBLIC
-	}
-
 	def create createEnumerationType statesEnumeration(Statechart sc) {
 		it => [
 			name = sc.statesEnumerationName
@@ -118,6 +94,40 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 		it.name = noStateName
 	}
 
+	protected def declareMembers(ComplexType scType, Statechart sc) {
+
+		// Named interfaces
+		sc.scopes.filter(InterfaceScope).filter[name !== null].forEach [ iface |
+			scType.features += iface.property
+		]
+		
+		// Unnamed interface
+		sc.scopes.filter(InterfaceScope).filter[name === null].forEach [ iface |
+			scType.features += iface.property
+		]
+		
+		// Internal variables
+		sc.scopes.filter(InternalScope).forEach [ internal |
+			scType.features += internal.property
+		]
+	}
+	
+	def create createProperty property(InterfaceScope iface) {
+		it.typeSpecifier = createTypeSpecifier => [
+			type = createInterfaceType(iface)
+		]
+		it.name = type.name.toFirstLower
+		it.visibility = Visibility.PUBLIC
+	}
+	
+	def create createProperty property(InternalScope internal) {
+		it.typeSpecifier = createTypeSpecifier => [
+			type = createInternalType(internal)
+		]
+		it.name = type.name.toFirstLower
+		it.visibility = Visibility.PROTECTED
+	}
+
 	protected def create createComplexType createInterfaceType(InterfaceScope iface) {
 		it.name = iface.interfaceTypeName
 		
@@ -125,6 +135,16 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 		features.filter(Property).filter[!const].forEach[prop|prop.initialValue = null]
 		
 		it._annotateWith(interfaceAnnotationType)
+	}
+	
+	protected def create createComplexType createInternalType(InternalScope internal) {
+		it.name = internalTypeName
+		
+		internal.declarations.forEach[decl|features += decl.feature => [visibility = Visibility.PROTECTED]]
+		features.filter(Property).filter[!const].forEach[prop|prop.initialValue = null]
+		
+		it._annotateWith(interfaceAnnotationType)
+		it.visibility = Visibility.PROTECTED
 	}
 	
 	protected def create EcoreUtil.copy(decl) feature(Declaration decl) {}
