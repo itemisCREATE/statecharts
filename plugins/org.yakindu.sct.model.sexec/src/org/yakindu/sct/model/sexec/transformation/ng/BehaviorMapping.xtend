@@ -11,16 +11,13 @@ import com.google.inject.Inject
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgraph.Region
-import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sgraph.State
-import org.yakindu.sct.model.stext.stext.LocalReaction
-import org.yakindu.base.types.Expression
-import org.yakindu.sct.model.stext.stext.ReactionEffect
 
 /**
  * Implements the lcaDoSequence for ReactMethods.
@@ -34,7 +31,7 @@ class BehaviorMapping extends org.yakindu.sct.model.sexec.transformation.Behavio
 	@Inject extension StatechartExtensions sc
 	@Inject extension SgraphExtensions sgraph
 	@Inject extension SexecExtensions sexec
-	@Inject extension ReactOperation rm
+	@Inject extension ReactMethod rm
 	
 	@Inject extension ExpressionBuilder exprBuilder
 	@Inject extension StatemachineExpressionBuilder smeBuilder

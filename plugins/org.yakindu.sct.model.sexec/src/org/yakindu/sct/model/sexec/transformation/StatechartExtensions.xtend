@@ -69,7 +69,7 @@ class StatechartExtensions {
 	def reaction(ReactionEffect tr) { tr.eContainer as Reaction }
 
 
-	def Statechart statechart(State state) { state.parentRegion.statechart }
+	def Statechart statechart(RegularState state) { state.parentRegion.statechart }
 	
 	def Statechart statechart(Region region) { 
 		if (region.eContainer instanceof Statechart) 
@@ -150,7 +150,9 @@ class StatechartExtensions {
 		return allStates.toList
 	}
 	
-	
+	def List<State> allStates(Statechart sc) {
+		sc.eAllContents.filter(State).toList
+	}
 	
 	def List<Region> allRegions(Statechart sc) {
 		var content = EcoreUtil2::eAllContentsAsList(sc)
@@ -190,7 +192,34 @@ class StatechartExtensions {
 			.filter(r | ((r as LocalReaction).trigger as ReactionTrigger).triggers.exists( t | t instanceof ExitEvent))
 			.map(lr | lr as LocalReaction)
 			.toList	
+	}
+	
+	def dispatch List<RegularState> subStates(RegularState it) {
+		subScopes.fold(new ArrayList<RegularState>, 
+			[a, s | 
+				a.addAll(s.subStates)
+				a
+			]
+		)
 	} 
+	
+	def dispatch List<RegularState> subStates(Region it) {
+		subScopes.fold(new ArrayList<RegularState>, 
+			[a, s | 
+				a.add(s as RegularState)
+				a.addAll(s.subStates)
+				a
+			]
+		)
+	}
+	
+	def dispatch subScopes(Region it) {
+		vertices.filter(RegularState)
+	}
+	
+	def dispatch subScopes(State it) {
+		regions
+	}
 	
 	
 	//=================================================================

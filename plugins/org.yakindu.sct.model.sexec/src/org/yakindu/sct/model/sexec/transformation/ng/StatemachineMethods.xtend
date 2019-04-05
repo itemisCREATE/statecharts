@@ -23,14 +23,16 @@ import org.yakindu.sct.model.sexec.transformation.ArrayType
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
+import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 import org.yakindu.sct.model.sgraph.ImportDeclaration
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.yakindu.sct.model.stext.stext.VariableDefinition
-import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 import org.yakindu.sct.model.stext.stext.InternalScope
+import org.yakindu.sct.model.stext.stext.VariableDefinition
+
+import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 
 @Singleton
 class StatemachineMethods {
@@ -49,9 +51,10 @@ class StatemachineMethods {
 	@Inject extension IStatemachine
 	@Inject extension SgraphExtensions
 	@Inject extension ArrayType
-	@Inject extension StateType
 	@Inject extension SequenceBuilder
 	@Inject extension ITypeSystem ts
+	@Inject extension StatechartExtensions
+	@Inject extension StateVector
 	
 	def defineEnterMethod(ComplexType it, Statechart sc) {
 		it.features += createEnterMethod => [
@@ -183,13 +186,12 @@ class StatemachineMethods {
 	}
 	
 	def defineRunCycleMethod(ComplexType it, Statechart sc) {
-		val ef = sc.create
 		it.features += createRunCycleMethod => [
 			body = _block(
 				_for(nextStateIndex(sc)._ref._assign(0._int), nextStateIndex(sc)._ref._smaller(stateVector(sc)._ref._fc(_array._length)), nextStateIndex(sc)._ref._inc) => [
 					body = _block(
-						stateSwitch(stateVector(sc)._ref._get(nextStateIndex(sc)._ref), ef.states.filter[isLeaf].filter[es | rm.reactMethod(es)!==null], [ s | 
-							rm.reactMethod(s)._call(_true)
+						stateSwitch(stateVector(sc)._ref._get(nextStateIndex(sc)._ref), sc.allRegularStates.filter[isLeaf].filter[es | es.reactMethod!==null].toList, [ s | 
+							s.reactMethod._call(_true)
 						], _block)
 					)
 				]
@@ -207,14 +209,14 @@ class StatemachineMethods {
 	def defineIsStateActiveMethod(ComplexType it, Statechart sc) {
 		it.features += createIsStateActiveMethod(sc) => [
 			body = _block(
-				stateSwitch(parameters.head._ref, sc.create.states, [ s |
+				stateSwitch(parameters.head._ref, sc.allRegularStates, [ s |
 					_return(
 						if(s.isLeaf) {
-							stateVector(sc)._ref._get(s.getStateVector().offset._int)._equals(statesEnumeration(sc)._ref._fc(s.stateEnumerator))
+							stateVector(sc)._ref._get(s.stateVector.offset._int)._equals(statesEnumeration(sc)._ref._fc(s.enumerator))
 						} else {
-							stateVector(sc)._ref._get(s.getStateVector().offset._int)._greaterEqual(statesEnumeration(sc)._ref._fc(s.stateEnumerator))
+							stateVector(sc)._ref._get(s.stateVector.offset._int)._greaterEqual(statesEnumeration(sc)._ref._fc(s.enumerator))
 							._and(
-							stateVector(sc)._ref._get(s.getStateVector().offset._int)._smallerEqual(statesEnumeration(sc)._ref._fc(s.subStates.last.stateEnumerator)))
+							stateVector(sc)._ref._get(s.stateVector.offset._int)._smallerEqual(statesEnumeration(sc)._ref._fc(s.subStates.last.enumerator)))
 						}
 					)
 				], _return(_false))
@@ -222,20 +224,12 @@ class StatemachineMethods {
 		]
 	}
 	
-	def stateSwitch(Expression switchContext, Iterable<ExecutionState> states, Function<ExecutionState, Expression> action, Expression defaultAction) {
+	def stateSwitch(Expression switchContext, List<RegularState> states, Function<RegularState, Expression> action, Expression defaultAction) {
 		_switch(switchContext, states.map[s | stateCase(s, action.apply(s))]) => [^default = defaultAction]
 	}
 	
-	def stateCase(ExecutionState state, Expression e) {
-		_case(state.stateEnumerator._ref, e)
-	}
-	
-	protected def stateEnumerator(ExecutionState s) {
-		(s.sourceElement as RegularState).enumerator
-	}
-	
-	protected def stateType(ExecutionState s) {
-		(s.sourceElement as RegularState).type
+	def stateCase(RegularState state, Expression e) {
+		_case(state.enumerator._ref, e)
 	}
 	
 	protected def createIsStateActiveMethod(Statechart sc) {

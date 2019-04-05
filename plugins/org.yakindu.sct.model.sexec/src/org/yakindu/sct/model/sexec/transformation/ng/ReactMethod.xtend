@@ -38,7 +38,6 @@ import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.base.types.ComplexType
 
 /**
  * React method is an artifact concepts that is created for each state machine state and the statechart
@@ -55,8 +54,7 @@ class ReactMethod {
 	@Inject extension ITypeSystem typeSystem
 	
 	@Inject extension ExpressionBuilder exprBuilder
-	@Inject extension StatemachinePublic smPublic
-	@Inject extension StateType stateType
+	
 	
 	/**
 	 * Declares the react methods for all ExecutionNode objects. This are the ExecutionStates and the ExecutionFlow itself.
@@ -87,12 +85,8 @@ class ReactMethod {
 	}	
 
 	def dispatch ExecutionNode declareReactMethod(ExecutionNode node) {
-		node	
-	}
-
-	def dispatch ExecutionNode declareReactMethod(ExecutionState node) {
 		node => [
-			(node.sourceElement as RegularState).type.features.add( sexecFactory.createMethod => [ m |
+			features.add( sexecFactory.createMethod => [ m |
 				m.name = "react"
 				m._type(_bool)
 				m._param("try_transition", _bool)
@@ -102,7 +96,7 @@ class ReactMethod {
 
 	def dispatch ExecutionNode declareReactMethod(ExecutionFlow node) {
 		node => [
-			node.statechart.statemachineType.features.add( sexecFactory.createMethod => [ m |
+			features.add( sexecFactory.createMethod => [ m |
 				m.name = "react"
 				m._type(_bool)
 			])
@@ -110,10 +104,10 @@ class ReactMethod {
 	}
 
 	
-	def defineReactMethod(ExecutionFlow ef) {
-		ef.reactMethod => [ bodySequence = 
+	def defineReactMethod(ExecutionFlow it) {
+		reactMethod => [ bodySequence = 
 			_sequence(
-				ef.createLocalReactionSequence,
+				flow.createLocalReactionSequence,
 				_return(_false)	
 			) => [ comment = "State machine reactions."]	
 		]		
@@ -195,6 +189,15 @@ class ReactMethod {
 		return steps
 	}	
 
+
+	def _equals(Expression left, Expression right) {
+		ExpressionsFactory.eINSTANCE.createLogicalRelationExpression => [ eq |
+			eq.operator = RelationalOperator.EQUALS;
+			eq.leftOperand = left
+			eq.rightOperand = right
+		]
+	}	
+	
 	def _assign(Property prop, Expression value) {
 		sexecFactory.createStatement => [
 			expression = ExpressionsFactory.eINSTANCE.createAssignmentExpression => [ ae |
@@ -204,11 +207,13 @@ class ReactMethod {
 		]	
 	}
 	
+	
 	def _statement(Expression value) {
 		sexecFactory.createStatement => [
 			expression = value
 		]	
 	}
+	
 	
 	def _declare(Property prop) {
 		sexec.factory.createLocalVariableDefinition => [ variable = prop ]
@@ -218,15 +223,7 @@ class ReactMethod {
 		parameters.filter[ p | p.name == name].head
 	}
 	
-	def dispatch Method reactMethod(ExecutionFlow it) {
-		it.statechart.statemachineType.reactMethod
-	}
-	
-	def dispatch Method reactMethod(ExecutionState it) {
-		(it.sourceElement as RegularState).type.reactMethod
-	}
-	
-	def dispatch Method reactMethod(ComplexType it) {
+	def Method reactMethod(ExecutionNode it) {
 		features.filter( typeof(Method) ).filter( m | m.name == "react").head
 	}
 	
@@ -260,6 +257,21 @@ class ReactMethod {
 	def If _else (If it, Step step) {
 		elseStep = step
 		it
+	}
+	
+	
+	def ElementReferenceExpression _call(Operation op) {
+		ExpressionsFactory.eINSTANCE.createElementReferenceExpression => [ 
+			reference = op 
+			operationCall=true
+		]
+	}
+	
+	def ElementReferenceExpression _ref(EObject p) {
+		ExpressionsFactory.eINSTANCE.createElementReferenceExpression => [ 
+			reference = p
+			operationCall=false
+		]
 	}
 	
 	def ElementReferenceExpression _with(ElementReferenceExpression it, Expression... params) {
