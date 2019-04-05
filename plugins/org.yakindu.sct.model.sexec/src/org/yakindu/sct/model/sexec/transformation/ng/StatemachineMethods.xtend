@@ -41,7 +41,6 @@ class StatemachineMethods {
 	
 	@Inject extension ReactOperation rm
 	@Inject extension SexecElementMapping  
-	@Inject extension SExecExtensions  
 	@Inject extension Sequence2Method
 	@Inject extension TypeBuilder
 	@Inject extension ExpressionBuilder exp
@@ -55,12 +54,13 @@ class StatemachineMethods {
 	@Inject extension ITypeSystem ts
 	@Inject extension StatechartExtensions
 	@Inject extension StateVector
+	@Inject extension EnterSequence
 	
 	def defineEnterMethod(ComplexType it, Statechart sc) {
 		it.features += createEnterMethod => [
-			body = createBlockExpression => [
-				expressions += createCallToSequenceMethod(sc.create.enterSequences.defaultSequence)
-			]
+			body = _block(
+				sc.statemachineType.defaultEnterSequence._call
+			)
 		]
 	}
 	

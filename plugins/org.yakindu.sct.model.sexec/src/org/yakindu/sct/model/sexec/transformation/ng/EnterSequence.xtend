@@ -28,7 +28,11 @@ import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 		
 		return 
 			if (op !== null) op 
-			else enterSequenceByName(SexecExtensions.DEFAULT_SEQUENCE_NAME)
+			else defaultEnterSequence
+	}
+	
+	def defaultEnterSequence(ComplexType it) {
+		enterSequenceByName(SexecExtensions.DEFAULT_SEQUENCE_NAME)
 	}
 
 	def enterSequenceByName(ComplexType it, String entryName) {

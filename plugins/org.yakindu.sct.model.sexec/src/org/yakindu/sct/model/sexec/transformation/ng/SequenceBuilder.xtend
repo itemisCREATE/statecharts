@@ -23,6 +23,8 @@ import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.State
+import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sexec.ExecutionFlow
 
 class SequenceBuilder extends org.yakindu.sct.model.sexec.transformation.SequenceBuilder {
 
@@ -46,6 +48,21 @@ class SequenceBuilder extends org.yakindu.sct.model.sexec.transformation.Sequenc
 //	@Inject(optional=true)
 //	@Named(IModelSequencer.ADD_TRACES)
 //	boolean _addTraceSteps = false
+
+
+	override defineStatechartEnterSequence(ExecutionFlow flow, Statechart sc) {
+		val res =super.defineStatechartEnterSequence(flow, sc)
+		
+		//if(flow.entryAction !== null) enterSequence.steps.add(flow.entryAction.newCall)
+		val enterOperation = sc.statemachineType.enterSequence(DEFAULT_SEQUENCE_NAME)
+		enterOperation.body = _block(
+			sc.regions
+				.map[type.defaultEnterSequence].filterNull
+				.map[regionEnter | regionEnter._call]
+		)
+		res
+	}
+
 	override dispatch void defineScopeEnterSequences(Region r) {
 		super._defineScopeEnterSequences(r)
 
@@ -56,7 +73,7 @@ class SequenceBuilder extends org.yakindu.sct.model.sexec.transformation.Sequenc
 		for (e : r.collectEntries) {
 			val seqName = if(e.name.nullOrEmpty) DEFAULT_SEQUENCE_NAME else e.name
 
-			r.type.enterSequence(e.name) => [
+			r.type.enterSequence(seqName) => [
 				_comment("'" + seqName + "' enter sequence for region " + r.type.name)
 				body = _block(e.reaction._call)
 			]
