@@ -34,6 +34,7 @@ import org.yakindu.sct.model.stext.stext.ReactionEffect
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
+import org.yakindu.base.base.NamedElement
 
 class StatechartExtensions {
 	
@@ -194,6 +195,9 @@ class StatechartExtensions {
 			.toList	
 	}
 	
+	//=================================================================
+	// extensions originally coming from sexec model
+	
 	def dispatch List<RegularState> subStates(RegularState it) {
 		subScopes.fold(new ArrayList<RegularState>, 
 			[a, s | 
@@ -213,12 +217,24 @@ class StatechartExtensions {
 		)
 	}
 	
-	def dispatch subScopes(Region it) {
-		vertices.filter(RegularState)
+	def dispatch superScope(State state) {
+		state.parentRegion
 	}
 	
-	def dispatch subScopes(State it) {
-		regions
+	def dispatch superScope(Region region) {
+		region.composite as NamedElement
+	}
+	
+	def dispatch subScopes(Statechart sc) {
+		sc.regions
+	}
+	
+	def dispatch subScopes(State state) {
+		state.regions
+	}
+	
+	def dispatch subScopes(Region region) {
+		region.vertices.filter(RegularState)
 	}
 	
 	
