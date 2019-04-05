@@ -283,6 +283,10 @@ class ExpressionBuilder {
 	def dispatch value(Object o) {
 		null
 	}
+	
+	def dispatch value(Void o) {
+		null
+	}
 
 
 }
