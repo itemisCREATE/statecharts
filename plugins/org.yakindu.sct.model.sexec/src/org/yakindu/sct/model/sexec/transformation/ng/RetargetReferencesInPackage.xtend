@@ -45,7 +45,7 @@ class RetargetReferencesInPackage {
 	protected def void retarget(ElementReferenceExpression ere) {
 		val refContainer = ere.reference.eContainer
 		val newRef = ere.reference.replaced
-		if (newRef === null) {
+		if (newRef === null || newRef.eContainer === null) {
 			return
 		}
 		if (refContainer instanceof InterfaceScope) {
@@ -57,7 +57,7 @@ class RetargetReferencesInPackage {
 	
 	protected def void retarget(FeatureCall fc) {
 		val newRef = fc.feature.replaced
-		if (newRef !== null) fc.feature = newRef
+		if (newRef !== null && newRef.eContainer !== null) fc.feature = newRef
 	}
 	
 	protected def dispatch replaced(EObject e) { 
