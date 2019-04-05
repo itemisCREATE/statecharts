@@ -186,7 +186,7 @@ class StatemachineMethods {
 					body = _block(
 						stateSwitch(stateVector(sc)._ref._get(nextStateIndex(sc)._ref), ef.states.filter[isLeaf].filter[es | rm.reactMethod(es)!==null], [ s | 
 							rm.reactMethod(s)._call(_true)
-						], null)
+						], _block)
 					)
 				]
 			)
