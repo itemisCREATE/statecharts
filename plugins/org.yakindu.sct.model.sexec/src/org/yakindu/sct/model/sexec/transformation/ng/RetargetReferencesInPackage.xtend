@@ -16,6 +16,7 @@ import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.yakindu.sct.model.stext.stext.InternalScope
 
 class RetargetReferencesInPackage {
 	
@@ -50,7 +51,9 @@ class RetargetReferencesInPackage {
 		}
 		if (refContainer instanceof InterfaceScope) {
 			EcoreUtil.replace(ere, refContainer.property._ref._fc(newRef))
-		} else {
+		} else if (refContainer instanceof InternalScope) {
+			EcoreUtil.replace(ere, refContainer.property._ref._fc(newRef))
+		}else {
 			ere.reference = newRef
 		}
 	}
