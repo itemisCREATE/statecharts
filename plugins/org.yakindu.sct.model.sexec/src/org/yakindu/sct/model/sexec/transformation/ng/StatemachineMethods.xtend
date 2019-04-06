@@ -17,7 +17,6 @@ import org.yakindu.base.types.Expression
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Sequence
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.transformation.ArrayType
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
@@ -55,6 +54,7 @@ class StatemachineMethods {
 	@Inject extension StatechartExtensions
 	@Inject extension StateVector
 	@Inject extension EnterSequence
+	@Inject extension ExitSequence
 	
 	def defineEnterMethod(ComplexType it, Statechart sc) {
 		it.features += createEnterMethod => [
@@ -66,9 +66,9 @@ class StatemachineMethods {
 	
 	def defineExitMethod(ComplexType it, Statechart sc) {
 		it.features += createExitMethod => [
-			body = createBlockExpression => [
-				expressions += createCallToSequenceMethod(sc.create.exitSequence)
-			]
+			body = _block(
+				sc.statemachineType.exitSequence._call
+			)
 		]
 	}
 	

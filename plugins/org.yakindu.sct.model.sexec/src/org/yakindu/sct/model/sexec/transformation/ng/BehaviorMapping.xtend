@@ -93,4 +93,14 @@ class BehaviorMapping extends org.yakindu.sct.model.sexec.transformation.Behavio
 		
 	}
 	
+	override mapExitAction(State state) {
+		val res = super.mapExitAction(state)
+		state.defineExitAction
+		res
+	}
+	
+	def void defineExitAction(State state) {
+		state.exitAction.body = _block // TODO
+	}
+	
 }

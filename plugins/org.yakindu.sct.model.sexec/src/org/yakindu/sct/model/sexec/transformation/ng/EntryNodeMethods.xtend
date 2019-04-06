@@ -58,7 +58,7 @@ import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 	def protected enterTargets(Entry entry) {
 		// TODO: this is very simplified, see also ReactionBuilder.createEntrySequence(Entry)
 		val targetState = entry.target
-		targetState.type.defaultEnterSequence._call
+		if (targetState !== null) targetState.type.defaultEnterSequence._call
 	}
 	
 }

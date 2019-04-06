@@ -14,13 +14,13 @@ import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.stext.stext.LocalReaction
+import org.yakindu.sct.model.stext.stext.ReactionEffect
+import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
+import org.yakindu.sct.model.stext.stext.TimeUnit
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
-import org.yakindu.sct.model.stext.stext.TimeUnit
-import org.yakindu.sct.model.stext.stext.LocalReaction
-import org.yakindu.sct.model.stext.stext.ReactionTrigger
-import org.yakindu.sct.model.stext.stext.ReactionEffect
 
 /**
  * High level expression builder that covers state machine specific high level 
@@ -61,9 +61,19 @@ class StatemachineExpressionBuilder {
 				
 			stateVector(state.statechart)._ref
 				._get(state.create.stateVector.offset._int)
-				._assign(state.statechart.statesEnumeration._ref._fc(state.enumerator))					
+				._assign(state.statechart.statesEnumeration._ref._fc(state.enumerator))
 		)
 
+	}
+	
+	def Expression _exitState(RegularState state) {
+		_block(
+			state.statechart.nextStateIndex._ref._assign(0._int),
+				
+			stateVector(state.statechart)._ref
+				._get(state.create.stateVector.offset._int)
+				._assign(state.statechart.statesEnumeration._ref._fc(state.statechart.noState))
+		)
 	}
 	
 	

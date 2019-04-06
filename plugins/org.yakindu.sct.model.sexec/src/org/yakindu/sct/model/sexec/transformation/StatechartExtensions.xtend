@@ -12,7 +12,9 @@ package org.yakindu.sct.model.sexec.transformation
 
 import java.util.ArrayList
 import java.util.List
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.EcoreUtil2
+import org.yakindu.base.base.NamedElement
 import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.sgraph.Entry
 import org.yakindu.sct.model.sgraph.Exit
@@ -34,7 +36,6 @@ import org.yakindu.sct.model.stext.stext.ReactionEffect
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import org.yakindu.base.base.NamedElement
 
 class StatechartExtensions {
 	
@@ -217,6 +218,8 @@ class StatechartExtensions {
 		)
 	}
 	
+	def dispatch superScope(EObject state) {}
+	
 	def dispatch superScope(State state) {
 		state.parentRegion
 	}
@@ -235,6 +238,16 @@ class StatechartExtensions {
 	
 	def dispatch subScopes(Region region) {
 		region.vertices.filter(RegularState)
+	}
+	
+	def parentScopes(EObject scope) {
+		val parents = <EObject>newArrayList
+		var s = scope
+		while(s !== null) {
+			parents.add(s)
+			s=s.superScope
+		}
+		return parents
 	}
 	
 	

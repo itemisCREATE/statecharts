@@ -80,7 +80,7 @@ class ModelSequencer implements IModelSequencer {
 		sc.declareReactMethods
 		sc.defineReactMethods
 		
-		sctype.declareSequenceMethods(ef)
+//		sctype.declareSequenceMethods(ef)
 		
 		sctype.defineEnterMethod(sc)
 		

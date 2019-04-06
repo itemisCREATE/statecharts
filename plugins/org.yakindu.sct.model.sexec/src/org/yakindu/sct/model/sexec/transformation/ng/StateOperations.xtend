@@ -31,4 +31,15 @@ import org.yakindu.sct.model.sgraph.FinalState
 		null // final states don't have entry actions
 	}
 	
+	def dispatch create op : _op exitAction(State it) {
+		
+		op.name = "exitAction"
+		_comment = "Exit action for state '" + name + "'."
+		type.features += op
+	}
+	
+	def dispatch exitAction(FinalState it) {
+		null // final states don't have exit actions
+	}
+	
 }
