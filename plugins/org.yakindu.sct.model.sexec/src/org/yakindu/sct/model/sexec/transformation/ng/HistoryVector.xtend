@@ -26,5 +26,5 @@ class HistoryVector {
 		}
 	}
 	
-	def create sexec.factory.createStateVector historyVector(Region sc) {}
+	def create sexec.factory.createStateVector historyVector(Region r) {}
 }

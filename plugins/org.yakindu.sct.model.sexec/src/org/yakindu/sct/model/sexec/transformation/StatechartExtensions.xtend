@@ -36,6 +36,7 @@ import org.yakindu.sct.model.stext.stext.ReactionEffect
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
+import java.util.Set
 
 class StatechartExtensions {
 	
@@ -248,6 +249,24 @@ class StatechartExtensions {
 			s=s.superScope
 		}
 		return parents
+	}
+	
+	def dispatch Set<NamedElement> allSubScopes(Region r) {
+		val nodes = <NamedElement>newHashSet
+		nodes += r.vertices
+		for (s : r.subScopes) {
+			nodes.addAll(s.allSubScopes)
+		}
+		nodes
+	}
+	
+	def dispatch Set<NamedElement> allSubScopes(State r) {
+		val nodes = <NamedElement>newHashSet
+		nodes.add(r)
+		for (s : r.subScopes) {
+			nodes.addAll(s.allSubScopes)
+		}
+		nodes
 	}
 	
 	

@@ -13,10 +13,16 @@ import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Operation
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
+import org.yakindu.sct.model.sgraph.State
+import org.yakindu.sct.model.sgraph.Region
+import org.eclipse.emf.ecore.EObject
 
 @Singleton class EnterSequence {
 
 	@Inject extension TypeBuilder tBuilder
+	
+	@Inject protected extension StateType
+	@Inject protected extension RegionType
 	
 	def create op : _op enterSequence(ComplexType it, String entryName){
 		features += op
@@ -30,6 +36,14 @@ import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 			if (op !== null) op 
 			else defaultEnterSequence
 	}
+	
+	def resolveEnterSequence(TargetEntrySpec it) {
+		target.toType?.resolveEnterSequence(entryPointName)
+	}
+	
+	def dispatch toType(EObject it) { null }
+	def dispatch toType(State it) { type }
+	def dispatch toType(Region it) { type }
 	
 	def defaultEnterSequence(ComplexType it) {
 		enterSequenceByName(SexecExtensions.DEFAULT_SEQUENCE_NAME)

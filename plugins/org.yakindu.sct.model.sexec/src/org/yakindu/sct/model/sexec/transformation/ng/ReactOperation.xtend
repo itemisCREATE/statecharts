@@ -11,7 +11,6 @@
 package org.yakindu.sct.model.sexec.transformation.ng
 
 import com.google.inject.Inject
-import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.expressions.expressions.BlockExpression
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Expression
@@ -23,13 +22,10 @@ import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
-import org.yakindu.sct.model.sgraph.Effect
-import org.yakindu.sct.model.sgraph.Reaction
 import org.yakindu.sct.model.sgraph.ReactiveElement
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.stext.stext.ReactionEffect
 
 /**
  * React method is an artifact concepts that is created for each state machine state and the statechart
@@ -48,9 +44,10 @@ class ReactOperation {
 	@Inject extension StateType stateType
 	@Inject extension StatechartExtensions sct
 	
-	@Inject extension BehaviorMapping
 	@Inject extension ImpactVector
 	@Inject extension StateVector
+	
+	@Inject extension TransitionMapping
 	
 	/**
 	 * Declares the react methods for all ExecutionNode objects. This are the ExecutionStates and the ExecutionFlow itself.
@@ -195,39 +192,19 @@ class ReactOperation {
 	def BlockExpression createLocalReactionSequence(ReactiveElement state) {
 		_block(
 			state.localReactions.map[ lr | 
-				_if(lr.checkExpression)._then(_block(lr.effectExpression))
+				_if(lr.mapCheck)._then(_block(lr.mapEffect))
 			]	
 		)
 	}
 	
-	def checkExpression(Reaction it) {
-		it.trigger.buildCondition ?: _true
-	}
-	
-	def effectExpression(Reaction it) {
-		it.effect.mapEffect
-	}
-	
-	def dispatch BlockExpression mapEffect(Void effect) {
-		_block
-	}
-	
-	def dispatch BlockExpression mapEffect(Effect effect) {
-		_block
-	}
-	
-	def dispatch BlockExpression mapEffect(ReactionEffect effect) {
-		_block(EcoreUtil.copyAll(effect.actions))
-	}
-
 	def BlockExpression createReactionSequence(RegularState state, Expression localStep) {	
 		val cycle = _block
 
 		val transitionReactions = state.outgoingTransitions.filter[tr | tr.trigger !== null].toList
 		
 		val transitionStep = transitionReactions.reverseView.fold(localStep, [s, reaction | {
-				_if(reaction.checkExpression)
-				._then(_block(reaction.effectExpression))
+				_if(reaction.mapCheck)
+				._then(_block(reaction.mapEffect))
 				._else(_block(s))
 			}])
 
