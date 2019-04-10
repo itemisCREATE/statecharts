@@ -33,6 +33,10 @@ class TypeBuilder {
 	@Inject extension ITypeSystem typeSystem
 	extension TypesFactory tFactory = TypesFactory.eINSTANCE
 	
+	def _op(String name, String returnType) {
+		_op(name, typeSystem.getType(returnType))
+	} 
+	
 	def _op(String name, Type returnType) {
 		_op => [op |
 			op.name = name
