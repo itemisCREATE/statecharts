@@ -9,6 +9,7 @@
 package org.yakindu.sct.model.sexec.transformation
 
 import org.eclipse.emf.ecore.EObject
+import org.yakindu.base.expressions.expressions.AdditiveOperator
 import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.BlockExpression
@@ -24,6 +25,7 @@ import org.yakindu.base.expressions.expressions.SwitchCase
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
+import org.yakindu.base.expressions.expressions.ShiftOperator
 
 /**
  * Builder extension for building expressions.
@@ -174,6 +176,43 @@ class ExpressionBuilder {
 		]
 	}
 	
+	def _bitwiseXor(Expression left, Expression right) {
+		createBitwiseXorExpression => [
+			it.leftOperand = left
+			it.rightOperand = right
+		]
+	}
+	
+	def _bitwiseOr(Expression left, Expression right) {
+		createBitwiseOrExpression => [
+			it.leftOperand = left
+			it.rightOperand = right
+		]
+	}
+	
+	def _bitwiseAnd(Expression left, Expression right) {
+		createBitwiseAndExpression => [
+			it.leftOperand = left
+			it.rightOperand = right
+		]
+	}
+	
+	def _leftShift(Expression left, Expression right) {
+		createShiftExpression => [
+			operator = ShiftOperator.LEFT
+			it.leftOperand = left
+			it.rightOperand = right
+		]
+	}
+	
+	def _rightShift(Expression left, Expression right) {
+		createShiftExpression => [
+			operator = ShiftOperator.RIGHT
+			it.leftOperand = left
+			it.rightOperand = right
+		]
+	}
+	
 	def _notEquals(Expression left, Expression right) {
 		createLogicalRelationExpression => [
 			operator = RelationalOperator.NOT_EQUALS
@@ -232,7 +271,7 @@ class ExpressionBuilder {
 		createNumericalMultiplyDivideExpression => [
 			operator = MultiplicativeOperator::DIV
 			leftOperand = left
-			rightOperand = right			
+			rightOperand = right
 		]
 	}
 
@@ -240,7 +279,31 @@ class ExpressionBuilder {
 		createNumericalMultiplyDivideExpression => [
 			operator = MultiplicativeOperator::MUL
 			leftOperand = left
-			rightOperand = right			
+			rightOperand = right
+		]
+	}
+
+	def _mod(Expression left, Expression right) {
+		createNumericalMultiplyDivideExpression => [
+			operator = MultiplicativeOperator::MOD
+			leftOperand = left
+			rightOperand = right
+		]
+	}
+	
+	def _plus(Expression left, Expression right) {
+		createNumericalAddSubtractExpression => [
+			operator = AdditiveOperator::PLUS
+			leftOperand = left
+			rightOperand = right
+		]
+	}
+
+	def _minus(Expression left, Expression right) {
+		createNumericalAddSubtractExpression => [
+			operator = AdditiveOperator::MINUS
+			leftOperand = left
+			rightOperand = right
 		]
 	}
 	
