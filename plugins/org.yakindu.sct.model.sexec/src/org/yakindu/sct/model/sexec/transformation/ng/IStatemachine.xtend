@@ -49,7 +49,7 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 			features += createIsFinalMethod
 			features += createRunCycleMethod
 		]
-		
+		abstract = true
 		scrPackage.member += it
 	}
 
