@@ -5,22 +5,26 @@ import java.util.ArrayList
 import java.util.List
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.base.NamedElement
+import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.Expression
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
-import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.sgraph.Effect
-import org.yakindu.sct.model.sgraph.Entry
+import org.yakindu.sct.model.sgraph.Pseudostate
 import org.yakindu.sct.model.sgraph.Reaction
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.RegularState
-import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Transition
+import org.yakindu.sct.model.sgraph.Trigger
 import org.yakindu.sct.model.sgraph.Vertex
+import org.yakindu.sct.model.stext.stext.AlwaysEvent
 import org.yakindu.sct.model.stext.stext.LocalReaction
 import org.yakindu.sct.model.stext.stext.ReactionEffect
-import org.yakindu.sct.model.sgraph.Pseudostate
+import org.yakindu.sct.model.stext.stext.ReactionTrigger
+import org.yakindu.sct.model.stext.stext.RegularEventSpec
+import org.yakindu.sct.model.stext.stext.TimeEventSpec
+import org.yakindu.sct.model.stext.stext.EventSpec
 
 /**
  * Most things are copied from BehaviorMapping and rewritten to work on sgraph and expressions instead of sexec
@@ -41,9 +45,11 @@ class TransitionMapping {
 	@Inject protected extension ImpactVector
 	
 	@Inject protected extension StatemachineExpressionBuilder
+	@Inject protected extension StextToExpressionMapper
+	@Inject protected extension ExpressionExtensions
 	
 	def mapCheck(Reaction it) {
-		it.trigger.buildCondition ?: _true
+		it.trigger.toCheckExpression ?: _true
 	}
 	
 	def dispatch mapEffect(LocalReaction it) {
@@ -54,15 +60,63 @@ class TransitionMapping {
 		toEffectExpression(#[it])
 	}
 	
-	def dispatch List<Expression> toExpression(Void effect) {
-	}
+	def dispatch List<Expression> toExpression(Void effect) { null }
 	
-	def dispatch List<Expression> toExpression(Effect effect) {
-	}
+	def dispatch List<Expression> toExpression(Effect effect) { null }
 	
 	def dispatch List<Expression> toExpression(ReactionEffect effect) {
-		EcoreUtil.copyAll(effect.actions).toList
+		EcoreUtil.copyAll(effect.actions).map[mapToExpression(effect.statechart)].toList
 	}
+	
+	def dispatch Expression toCheckExpression (Void t) { _true }
+	
+	def dispatch Expression toCheckExpression (Trigger t) { _true }
+	
+	def dispatch Expression toCheckExpression (ReactionTrigger t) {
+		
+		val hasTriggers = ! t.triggers.empty
+		val triggersAreAlwaysTrue = t.triggers.filter(AlwaysEvent).size > 0 
+		val triggerCheck = if (hasTriggers && !triggersAreAlwaysTrue) t.toTriggerCheck else null;
+		
+		val guard = t.buildGuard
+		
+		if ( triggerCheck !== null && guard !== null ) _parenthesized(triggerCheck)._and(_parenthesized(guard))
+		else if ( triggerCheck !== null ) triggerCheck
+		else if ( guard !== null ) guard
+		else if ( triggersAreAlwaysTrue ) _true
+	}
+	
+	
+	def toTriggerCheck(ReactionTrigger t) {
+		t.triggers.reverseView.fold(null as Expression,
+			[s,e | {
+				val Expression raised = e.isRaised
+				
+				if (raised === null) s
+				else if (s===null) raised  
+				else raised._or(s)
+			}])		
+	}
+	
+	
+	protected def dispatch Expression buildGuard( Trigger t) {null}
+	
+	protected def dispatch Expression buildGuard( ReactionTrigger t) {
+		if ( t.guard !== null ) EcoreUtil::copy(t.guard.expression).mapToExpression(t.statechart) else null
+	}
+	
+	protected def dispatch isRaised(RegularEventSpec e) {
+		e.event
+	}
+	
+	protected def dispatch isRaised(TimeEventSpec e) {
+		null // TODO: transform time events into properties
+	}
+	
+	protected def dispatch isRaised(EventSpec e) {
+		null
+	}
+	
 	
 	/**
 	 * Creates a compound effect that can consist of multiple transitions.
@@ -220,6 +274,8 @@ class TransitionMapping {
 			parent.callReact(_false)
 		}
 	}
+	
+	
 	
 
 	

@@ -232,7 +232,9 @@ class StatemachineMethods {
 		_case(state.enumerator._ref, e)
 	}
 	
-	protected def createIsStateActiveMethod(Statechart sc) {
-		_op("isStateActive", ts.getType(ITypeSystem.BOOLEAN))._param("state", sc.statesEnumeration)
+	def create _op createIsStateActiveMethod(Statechart sc) {
+		name = "isStateActive"
+		_type(ts.getType(ITypeSystem.BOOLEAN))
+		_param("state", sc.statesEnumeration)
 	}	
 }

@@ -26,6 +26,10 @@ import org.yakindu.sct.model.sgraph.ReactiveElement
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sgraph.Trigger
+import org.yakindu.sct.model.stext.stext.EntryEvent
+import org.yakindu.sct.model.stext.stext.ExitEvent
+import org.yakindu.sct.model.stext.stext.ReactionTrigger
 
 /**
  * React method is an artifact concepts that is created for each state machine state and the statechart
@@ -131,12 +135,12 @@ class ReactOperation {
 						),
 
 					if (state instanceof State) {
-						if (state.localReactions.size > 0 || (processParent && childFirst )) {
+						if (state.localReactions.filter[!trigger.isEntry && !trigger.isExit].size > 0 || (processParent && childFirst )) {
 							_if(didTransitionVariable._ref._equals(_false))
 								._then(
 									state.createLocalReactionSequence => [
 										if (processParent && childFirst) 
-											didTransitionVariable._ref._assign(parentNode.callReact(_ref(tryTransitionParam)))	
+											expressions += didTransitionVariable._ref._assign(parentNode.callReact(_ref(tryTransitionParam)))	
 									]
 								)
 						}
@@ -155,6 +159,16 @@ class ReactOperation {
 		reactMethod._comment = 'The reactions of state ' + state.name + '.'
 		
 		return reactMethod
+	}
+	
+	protected def dispatch isEntry(Trigger t) { false }
+	protected def dispatch isEntry(ReactionTrigger t) {
+		t.triggers.forall[tr | tr instanceof EntryEvent]
+	}
+	
+	protected def dispatch isExit(Trigger t) { false }
+	protected def dispatch isExit(ReactionTrigger t) {
+		t.triggers.forall[tr | tr instanceof ExitEvent]
 	}
 	
 	
@@ -191,7 +205,7 @@ class ReactOperation {
 	
 	def BlockExpression createLocalReactionSequence(ReactiveElement state) {
 		_block(
-			state.localReactions.map[ lr | 
+			state.localReactions.filter[!trigger.isEntry && !trigger.isExit].map[ lr | 
 				_if(lr.mapCheck)._then(_block(lr.mapEffect))
 			]	
 		)
