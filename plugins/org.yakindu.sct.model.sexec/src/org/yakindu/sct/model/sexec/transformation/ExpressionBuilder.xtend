@@ -69,7 +69,7 @@ class ExpressionBuilder {
 		]
 	}
 	
-	def ElementReferenceExpression _with(ElementReferenceExpression it, Expression... arguments) {
+	def ArgumentExpression _with(ArgumentExpression it, Expression... arguments) {
 		it.arguments.addAll(arguments.map[arg|createArgument => [value = arg]])
 		return it
 	}

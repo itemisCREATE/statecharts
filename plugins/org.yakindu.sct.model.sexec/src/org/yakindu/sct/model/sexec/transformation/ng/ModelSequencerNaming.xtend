@@ -27,7 +27,11 @@ class ModelSequencerNaming {
 	}
 
 	def interfaceTypeName(InterfaceScope iface) {
-		if(iface.name.nullOrEmpty) "SCInterface" else iface.name
+		if(iface.name.nullOrEmpty) defaultInterfaceTypeName else iface.name
+	}
+	
+	def defaultInterfaceTypeName() {
+		"SCInterface"
 	}
 	
 	def internalTypeName() {
