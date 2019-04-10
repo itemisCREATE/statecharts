@@ -65,7 +65,7 @@ class TransitionMapping {
 	def dispatch List<Expression> toExpression(Effect effect) { null }
 	
 	def dispatch List<Expression> toExpression(ReactionEffect effect) {
-		EcoreUtil.copyAll(effect.actions).map[mapToExpression(effect.statechart)].toList
+		EcoreUtil.copyAll(effect.actions).map[replaceStextExpressions(effect.statechart)].toList
 	}
 	
 	def dispatch Expression toCheckExpression (Void t) { _true }
@@ -102,7 +102,7 @@ class TransitionMapping {
 	protected def dispatch Expression buildGuard( Trigger t) {null}
 	
 	protected def dispatch Expression buildGuard( ReactionTrigger t) {
-		if ( t.guard !== null ) EcoreUtil::copy(t.guard.expression).mapToExpression(t.statechart) else null
+		if ( t.guard !== null ) EcoreUtil::copy(t.guard.expression).replaceStextExpressions(t.statechart) else null
 	}
 	
 	protected def dispatch isRaised(RegularEventSpec e) {
