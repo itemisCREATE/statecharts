@@ -84,6 +84,13 @@ class TypeBuilder {
 		typeSpecifier = EcoreUtil.copy(typeSpec)
 	}
 	
+	def _variable(String name, Type type) {
+		createProperty => [ prop |
+			prop.name = name
+			prop._type(type)
+		]	
+	}
+	
 	def _variable(String name, String typeName) {
 		createProperty => [ prop |
 			prop.name = name
