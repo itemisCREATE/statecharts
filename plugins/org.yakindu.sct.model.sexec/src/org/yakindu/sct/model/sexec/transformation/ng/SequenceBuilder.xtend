@@ -182,7 +182,7 @@ class SequenceBuilder extends org.yakindu.sct.model.sexec.transformation.Sequenc
 			}
 		}
 
-//		if(execState.exitAction !== null) seq.steps.add(execState.exitAction.newCall)
+		if(s.exitAction !== null) exitExpressions.add(s.exitAction._call)
 //		if(_addTraceSteps) seq.steps += execState.newTraceStateExited
 		exitOperation.body = _block(exitExpressions)
 	}

@@ -9,13 +9,13 @@ package org.yakindu.sct.model.sexec.transformation.ng
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Operation
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
-import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Region
-import org.eclipse.emf.ecore.EObject
+import org.yakindu.sct.model.sgraph.RegularState
 
 @Singleton class EnterSequence {
 
@@ -42,7 +42,7 @@ import org.eclipse.emf.ecore.EObject
 	}
 	
 	def dispatch toType(EObject it) { null }
-	def dispatch toType(State it) { type }
+	def dispatch toType(RegularState it) { type }
 	def dispatch toType(Region it) { type }
 	
 	def defaultEnterSequence(ComplexType it) {

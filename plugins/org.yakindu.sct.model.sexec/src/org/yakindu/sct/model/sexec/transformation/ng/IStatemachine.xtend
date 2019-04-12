@@ -41,7 +41,6 @@ import org.yakindu.base.types.typesystem.ITypeSystem
  	def create createComplexType statemachineInterfaceType() {
 		it => [
 			name = NAME
-			// Implicit operations
 			features += createInitMethod
 			features += createEnterMethod
 			features += createExitMethod

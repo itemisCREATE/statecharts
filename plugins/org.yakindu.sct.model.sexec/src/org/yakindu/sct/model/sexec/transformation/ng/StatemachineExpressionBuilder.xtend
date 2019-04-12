@@ -14,6 +14,7 @@ import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.LocalReaction
 import org.yakindu.sct.model.stext.stext.ReactionEffect
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
@@ -89,6 +90,25 @@ class StatemachineExpressionBuilder {
 	
 	/** TODO: move to BehaviorMapping or somewhere else */
 	def Expression _entryReaction(LocalReaction it) {
+		if (effect !== null) {
+			val guard = (trigger as ReactionTrigger).guard
+			val lrEffect = effect as ReactionEffect
+			
+			val action = _block => [
+				lrEffect.actions.forEach[ a | expressions += a.copy]
+			]
+			
+			if ((trigger as ReactionTrigger).guard !== null) {
+				_if(guard.expression.copy)._then( action )	
+			} else {
+				return action
+			}
+						
+		} else null
+	}
+	
+	/** TODO: move to BehaviorMapping or somewhere else */
+	def Expression _exitReaction(LocalReaction it) {
 		if (effect !== null) {
 			val guard = (trigger as ReactionTrigger).guard
 			val lrEffect = effect as ReactionEffect

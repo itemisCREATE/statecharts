@@ -100,7 +100,15 @@ class BehaviorMapping extends org.yakindu.sct.model.sexec.transformation.Behavio
 	}
 	
 	def void defineExitAction(State state) {
-		state.exitAction.body = _block // TODO
+		state.exitAction.body = _block => [
+			
+			for (tes : state.timeEventSpecs ) {
+				expressions += _unscheduleTimeEvent(tes)
+			}
+			
+			state.exitReactions.forEach[ lr | expressions += lr._exitReaction]
+		]
+		
 	}
 	
 }
