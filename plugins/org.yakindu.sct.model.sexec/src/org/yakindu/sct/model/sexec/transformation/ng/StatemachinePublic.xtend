@@ -41,6 +41,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 	@Inject extension TypeBuilder 
 	
 	@Inject protected extension ModelSequencerNaming
+	@Inject protected extension StatemachineInterfaceMethods
 	
 	def create createPackage statemachinePackage(Statechart sc) {
  		it => [
@@ -133,6 +134,9 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 		
 		iface.declarations.forEach[decl|features += decl.feature]
 		features.filter(Property).filter[!const].forEach[prop|prop.initialValue = null]
+		
+		features += clearOutEvents
+		features += clearEvents
 		
 		it._annotateWith(interfaceAnnotationType)
 	}

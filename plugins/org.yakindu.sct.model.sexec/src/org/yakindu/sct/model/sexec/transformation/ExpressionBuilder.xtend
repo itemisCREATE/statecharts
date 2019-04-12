@@ -26,6 +26,7 @@ import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.expressions.expressions.ShiftOperator
+import org.yakindu.base.types.Event
 
 /**
  * Builder extension for building expressions.
@@ -349,6 +350,12 @@ class ExpressionBuilder {
 	
 	def dispatch value(Void o) {
 		null
+	}
+	
+	def _clearEvent(Event e) {
+		createEventClearingExpression => [
+			event = e._ref
+		]
 	}
 
 

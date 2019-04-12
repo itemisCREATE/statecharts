@@ -14,6 +14,7 @@ import javax.inject.Inject
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Expression
+import org.yakindu.base.types.Visibility
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Sequence
@@ -55,6 +56,7 @@ class StatemachineMethods {
 	@Inject extension StateVector
 	@Inject extension EnterSequence
 	@Inject extension ExitSequence
+	@Inject extension StatemachineInterfaceMethods
 	
 	def defineEnterMethod(ComplexType it, Statechart sc) {
 		it.features += createEnterMethod => [
@@ -119,6 +121,7 @@ class StatemachineMethods {
 		val i = _variable("i", ITypeSystem.INTEGER, 0._int)
 		_for(i, i._ref._smaller(ef.stateVector.size._int), i._ref._inc) => [
 			it.body = _block(
+				// TODO: i._ref
 				stateVector(sc)._ref._get(0._int)._assign(statesEnumeration(sc)._ref._fc(noState(sc)))
 			)
 		]
@@ -129,6 +132,7 @@ class StatemachineMethods {
 		val i = _variable("i", ITypeSystem.INTEGER, 0._int)
 		_for(i, i._ref._smaller(ef.historyVector.size._int), i._ref._inc) => [
 			it.body = _block(
+				// TODO: i._ref
 				historyVector(sc)._ref._get(0._int)._assign(statesEnumeration(sc)._ref._fc(noState(sc)))
 			)
 		]
@@ -188,13 +192,18 @@ class StatemachineMethods {
 	def defineRunCycleMethod(ComplexType it, Statechart sc) {
 		it.features += createRunCycleMethod => [
 			body = _block(
+				
+				sc.createClearOutEventsMethod._call,
+				
 				_for(nextStateIndex(sc)._ref._assign(0._int), nextStateIndex(sc)._ref._smaller(stateVector(sc)._ref._fc(_array._length)), nextStateIndex(sc)._ref._inc) => [
 					body = _block(
 						stateSwitch(stateVector(sc)._ref._get(nextStateIndex(sc)._ref), sc.allRegularStates.filter[isLeaf].filter[es | es.reactMethod!==null].toList, [ s | 
 							s.reactMethod._call(_true)
 						], _block)
 					)
-				]
+				],
+				
+				sc.createClearEventsMethod._call
 			)
 		]
 	}
@@ -236,5 +245,33 @@ class StatemachineMethods {
 		name = "isStateActive"
 		_type(ts.getType(ITypeSystem.BOOLEAN))
 		_param("state", sc.statesEnumeration)
-	}	
+	}
+	
+	def create _op createClearOutEventsMethod(Statechart sc) {
+		name = "clearOutEvents"
+		_type(ITypeSystem.VOID)
+		visibility = Visibility.PROTECTED
+	}
+	
+	def defineClearOutEventsMethod(ComplexType it, Statechart sc) {
+		it.features += createClearOutEventsMethod(sc) => [
+			body = _block(
+				sc.scopes.filter(InterfaceScope).map[iface | iface.property._ref._fc(iface.createInterfaceType.clearOutEvents)]
+			)
+		]
+	}
+	
+	def create _op createClearEventsMethod(Statechart sc) {
+		name = "clearEvents"
+		_type(ITypeSystem.VOID)
+		visibility = Visibility.PROTECTED
+	}
+	
+	def defineClearEventsMethod(ComplexType it, Statechart sc) {
+		it.features += createClearEventsMethod(sc) => [
+			body = _block(
+				sc.scopes.filter(InterfaceScope).map[iface | iface.property._ref._fc(iface.createInterfaceType.clearEvents)]
+			)
+		]
+	}
 }
