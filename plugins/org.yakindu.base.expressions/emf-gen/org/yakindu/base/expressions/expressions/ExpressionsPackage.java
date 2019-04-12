@@ -1658,6 +1658,34 @@ public interface ExpressionsPackage extends EPackage {
 	int THROW_EXPRESSION_FEATURE_COUNT = TypesPackage.EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.EventClearingExpressionImpl <em>Event Clearing Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.EventClearingExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getEventClearingExpression()
+	 * @generated
+	 */
+	int EVENT_CLEARING_EXPRESSION = 43;
+
+	/**
+	 * The feature id for the '<em><b>Event</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_CLEARING_EXPRESSION__EVENT = TypesPackage.EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Event Clearing Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_CLEARING_EXPRESSION_FEATURE_COUNT = TypesPackage.EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.AssignmentOperator <em>Assignment Operator</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1665,7 +1693,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getAssignmentOperator()
 	 * @generated
 	 */
-	int ASSIGNMENT_OPERATOR = 43;
+	int ASSIGNMENT_OPERATOR = 44;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.ShiftOperator <em>Shift Operator</em>}' enum.
@@ -1675,7 +1703,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getShiftOperator()
 	 * @generated
 	 */
-	int SHIFT_OPERATOR = 44;
+	int SHIFT_OPERATOR = 45;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.AdditiveOperator <em>Additive Operator</em>}' enum.
@@ -1685,7 +1713,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getAdditiveOperator()
 	 * @generated
 	 */
-	int ADDITIVE_OPERATOR = 45;
+	int ADDITIVE_OPERATOR = 46;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.MultiplicativeOperator <em>Multiplicative Operator</em>}' enum.
@@ -1695,7 +1723,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getMultiplicativeOperator()
 	 * @generated
 	 */
-	int MULTIPLICATIVE_OPERATOR = 46;
+	int MULTIPLICATIVE_OPERATOR = 47;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.UnaryOperator <em>Unary Operator</em>}' enum.
@@ -1705,7 +1733,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getUnaryOperator()
 	 * @generated
 	 */
-	int UNARY_OPERATOR = 47;
+	int UNARY_OPERATOR = 48;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.RelationalOperator <em>Relational Operator</em>}' enum.
@@ -1715,7 +1743,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getRelationalOperator()
 	 * @generated
 	 */
-	int RELATIONAL_OPERATOR = 48;
+	int RELATIONAL_OPERATOR = 49;
 
 
 	/**
@@ -1726,7 +1754,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalOperator()
 	 * @generated
 	 */
-	int LOGICAL_OPERATOR = 49;
+	int LOGICAL_OPERATOR = 50;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.BitwiseOperator <em>Bitwise Operator</em>}' enum.
@@ -1736,7 +1764,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBitwiseOperator()
 	 * @generated
 	 */
-	int BITWISE_OPERATOR = 50;
+	int BITWISE_OPERATOR = 51;
 
 
 	/**
@@ -1747,7 +1775,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getPostFixOperator()
 	 * @generated
 	 */
-	int POST_FIX_OPERATOR = 51;
+	int POST_FIX_OPERATOR = 52;
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.Literal <em>Literal</em>}'.
@@ -2699,6 +2727,27 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getThrowExpression_Expression();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.EventClearingExpression <em>Event Clearing Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Event Clearing Expression</em>'.
+	 * @see org.yakindu.base.expressions.expressions.EventClearingExpression
+	 * @generated
+	 */
+	EClass getEventClearingExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.EventClearingExpression#getEvent <em>Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Event</em>'.
+	 * @see org.yakindu.base.expressions.expressions.EventClearingExpression#getEvent()
+	 * @see #getEventClearingExpression()
+	 * @generated
+	 */
+	EReference getEventClearingExpression_Event();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.PostFixUnaryExpression <em>Post Fix Unary Expression</em>}'.
@@ -3704,6 +3753,24 @@ public interface ExpressionsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference THROW_EXPRESSION__EXPRESSION = eINSTANCE.getThrowExpression_Expression();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.EventClearingExpressionImpl <em>Event Clearing Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.expressions.expressions.impl.EventClearingExpressionImpl
+		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getEventClearingExpression()
+		 * @generated
+		 */
+		EClass EVENT_CLEARING_EXPRESSION = eINSTANCE.getEventClearingExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Event</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EVENT_CLEARING_EXPRESSION__EVENT = eINSTANCE.getEventClearingExpression_Event();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.PostFixUnaryExpressionImpl <em>Post Fix Unary Expression</em>}' class.

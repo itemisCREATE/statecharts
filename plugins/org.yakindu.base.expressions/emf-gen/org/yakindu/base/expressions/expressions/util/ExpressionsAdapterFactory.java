@@ -287,6 +287,10 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 				return createThrowExpressionAdapter();
 			}
 			@Override
+			public Adapter caseEventClearingExpression(EventClearingExpression object) {
+				return createEventClearingExpressionAdapter();
+			}
+			@Override
 			public Adapter caseExpression(Expression object) {
 				return createExpressionAdapter();
 			}
@@ -867,6 +871,20 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createThrowExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.expressions.expressions.EventClearingExpression <em>Event Clearing Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.expressions.expressions.EventClearingExpression
+	 * @generated
+	 */
+	public Adapter createEventClearingExpressionAdapter() {
 		return null;
 	}
 

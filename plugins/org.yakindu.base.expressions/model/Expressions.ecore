@@ -232,4 +232,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventClearingExpression" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
 </ecore:EPackage>

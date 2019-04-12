@@ -364,6 +364,15 @@ public interface ExpressionsFactory extends EFactory {
 	ThrowExpression createThrowExpression();
 
 	/**
+	 * Returns a new object of class '<em>Event Clearing Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Event Clearing Expression</em>'.
+	 * @generated
+	 */
+	EventClearingExpression createEventClearingExpression();
+
+	/**
 	 * Returns a new object of class '<em>Post Fix Unary Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

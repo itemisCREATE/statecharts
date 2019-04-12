@@ -25,6 +25,7 @@ import org.yakindu.base.expressions.expressions.BoolLiteral;
 import org.yakindu.base.expressions.expressions.ConditionalExpression;
 import org.yakindu.base.expressions.expressions.DoubleLiteral;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
+import org.yakindu.base.expressions.expressions.EventClearingExpression;
 import org.yakindu.base.expressions.expressions.EventRaisingExpression;
 import org.yakindu.base.expressions.expressions.EventValueReferenceExpression;
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
@@ -344,6 +345,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	private EClass throwExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass eventClearingExpressionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1407,6 +1415,26 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	@Override
+	public EClass getEventClearingExpression() {
+		return eventClearingExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getEventClearingExpression_Event() {
+		return (EReference)eventClearingExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getPostFixUnaryExpression() {
 		return postFixUnaryExpressionEClass;
 	}
@@ -1752,6 +1780,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		throwExpressionEClass = createEClass(THROW_EXPRESSION);
 		createEReference(throwExpressionEClass, THROW_EXPRESSION__EXPRESSION);
 
+		eventClearingExpressionEClass = createEClass(EVENT_CLEARING_EXPRESSION);
+		createEReference(eventClearingExpressionEClass, EVENT_CLEARING_EXPRESSION__EVENT);
+
 		// Create enums
 		assignmentOperatorEEnum = createEEnum(ASSIGNMENT_OPERATOR);
 		shiftOperatorEEnum = createEEnum(SHIFT_OPERATOR);
@@ -1835,6 +1866,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		eventValueReferenceExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 		forExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 		throwExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
+		eventClearingExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(binaryExpressionEClass, BinaryExpression.class, "BinaryExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1986,6 +2018,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
 		initEClass(throwExpressionEClass, ThrowExpression.class, "ThrowExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getThrowExpression_Expression(), theTypesPackage.getExpression(), null, "expression", null, 0, 1, ThrowExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(eventClearingExpressionEClass, EventClearingExpression.class, "EventClearingExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEventClearingExpression_Event(), theTypesPackage.getExpression(), null, "event", null, 0, 1, EventClearingExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(assignmentOperatorEEnum, AssignmentOperator.class, "AssignmentOperator");
