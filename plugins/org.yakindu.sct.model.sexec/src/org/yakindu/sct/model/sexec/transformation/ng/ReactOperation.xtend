@@ -163,12 +163,12 @@ class ReactOperation {
 	
 	protected def dispatch isEntry(Trigger t) { false }
 	protected def dispatch isEntry(ReactionTrigger t) {
-		t.triggers.forall[tr | tr instanceof EntryEvent]
+		!t.triggers.empty && t.triggers.forall[tr | tr instanceof EntryEvent]
 	}
 	
 	protected def dispatch isExit(Trigger t) { false }
 	protected def dispatch isExit(ReactionTrigger t) {
-		t.triggers.forall[tr | tr instanceof ExitEvent]
+		!t.triggers.empty && t.triggers.forall[tr | tr instanceof ExitEvent]
 	}
 	
 	
