@@ -121,8 +121,7 @@ class StatemachineMethods {
 		val i = _variable("i", ITypeSystem.INTEGER, 0._int)
 		_for(i, i._ref._smaller(ef.stateVector.size._int), i._ref._inc) => [
 			it.body = _block(
-				// TODO: i._ref
-				stateVector(sc)._ref._get(0._int)._assign(statesEnumeration(sc)._ref._fc(noState(sc)))
+				stateVector(sc)._ref._get(i._ref)._assign(statesEnumeration(sc)._ref._fc(noState(sc)))
 			)
 		]
 	}
@@ -132,8 +131,7 @@ class StatemachineMethods {
 		val i = _variable("i", ITypeSystem.INTEGER, 0._int)
 		_for(i, i._ref._smaller(ef.historyVector.size._int), i._ref._inc) => [
 			it.body = _block(
-				// TODO: i._ref
-				historyVector(sc)._ref._get(0._int)._assign(statesEnumeration(sc)._ref._fc(noState(sc)))
+				historyVector(sc)._ref._get(i._ref)._assign(statesEnumeration(sc)._ref._fc(noState(sc)))
 			)
 		]
 	}
