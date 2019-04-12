@@ -33,6 +33,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
+import org.yakindu.base.types.Event
 
 @Singleton
 class StatemachineMethods {
@@ -267,9 +268,15 @@ class StatemachineMethods {
 	
 	def defineClearEventsMethod(ComplexType it, Statechart sc) {
 		it.features += createClearEventsMethod(sc) => [
-			body = _block(
-				sc.scopes.filter(InterfaceScope).map[iface | iface.property._ref._fc(iface.createInterfaceType.clearEvents)]
-			)
+			body = _block => [
+				expressions += sc.scopes.filter(InterfaceScope).map[iface | iface.property._ref._fc(iface.createInterfaceType.clearEvents)]
+				// clear internal events directly
+				val internalEventClears = newArrayList
+				sc.scopes.filter(InternalScope).forEach[iface | 
+					internalEventClears += iface.members.filter(Event).map[event | _clearEvent(iface.property._ref._fc(event))]
+				]
+				expressions += internalEventClears
+			]
 		]
 	}
 }

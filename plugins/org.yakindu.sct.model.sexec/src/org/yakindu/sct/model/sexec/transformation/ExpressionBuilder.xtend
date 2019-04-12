@@ -357,6 +357,12 @@ class ExpressionBuilder {
 			event = e._ref
 		]
 	}
+	
+	def _clearEvent(Expression e) {
+		createEventClearingExpression => [
+			event = e
+		]
+	}
 
 
 }
