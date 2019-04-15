@@ -22,11 +22,15 @@ import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
+import org.yakindu.sct.model.sgraph.Choice
+import org.yakindu.sct.model.sgraph.Pseudostate
 import org.yakindu.sct.model.sgraph.ReactiveElement
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Trigger
+import org.yakindu.sct.model.sgraph.Vertex
+import org.yakindu.sct.model.stext.stext.DefaultTrigger
 import org.yakindu.sct.model.stext.stext.EntryEvent
 import org.yakindu.sct.model.stext.stext.ExitEvent
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
@@ -54,22 +58,24 @@ class ReactOperation {
 	@Inject extension TransitionMapping
 	
 	/**
-	 * Declares the react methods for all ExecutionNode objects. This are the ExecutionStates and the ExecutionFlow itself.
+	 * Declares the react methods for all ExecutionNode objects.
 	 */	
 	def declareReactMethods(Statechart sc) {
 
 		sc.declareReactMethod
-		sc.allRegularStates.forEach[s | s.declareReactMethod ]
+		sc.allRegularStates.forEach[s|s.declareReactMethod]
+		sc.allChoices.forEach[s|s.declareReactMethod]
 	}
 	
 	/**
-	 * Define the react methods for all ExecutionNode objects. This are the ExecutionStates and the ExecutionFlow itself.
+	 * Define the react methods for all ExecutionNode objects.
 	 */	
 	def defineReactMethods(Statechart sc) {
 
-		if (sc.reactMethod !== null) sc.defineReactMethod
-		sc.allRegularStates.forEach[s | s.defineReactMethod ]
-		
+		if(sc.reactMethod !== null) sc.defineReactMethod
+
+		sc.allRegularStates.forEach[s|s.defineReactMethod]
+		sc.allChoices.forEach[s|s.defineReactMethod]
 	}
 
 	def dispatch declareReactMethod(RegularState state) {
@@ -80,12 +86,14 @@ class ReactOperation {
 		])
 		state
 	}
+	
+	def dispatch declareReactMethod(Pseudostate state) {
+		state.type.features.add( _op("react", ITypeSystem.VOID))
+		state
+	}
 
 	def dispatch declareReactMethod(Statechart sc) {
-		sc.statemachineType.features.add( _op => [ m |
-			m.name = "react"
-			m._type(_bool)
-		])
+		sc.statemachineType.features.add( _op("react", ITypeSystem.BOOLEAN))
 		sc
 	}
 	
@@ -94,6 +102,14 @@ class ReactOperation {
 			_block(
 				sc.createLocalReactionSequence,
 				_return(_false)	
+			) => [ _comment = "State machine reactions."]	
+		]		
+	}
+	
+	def dispatch defineReactMethod(Choice choice) {
+		choice.reactMethod => [ body = 
+			_block(
+				choice.createReactionSequence
 			) => [ _comment = "State machine reactions."]	
 		]		
 	}
@@ -191,7 +207,7 @@ class ReactOperation {
 		sc.statemachineType.reactMethod
 	}
 	
-	def dispatch Operation reactMethod(RegularState state) {
+	def dispatch Operation reactMethod(Vertex state) {
 		state.type.reactMethod
 	}
 	
@@ -209,6 +225,32 @@ class ReactOperation {
 				_if(lr.mapCheck)._then(_block(lr.mapEffect))
 			]	
 		)
+	}
+	
+	def BlockExpression createReactionSequence(Choice choice) {
+		val cycle = _block
+
+		// move the default transition to the end of the reaction list
+		val reactions = choice.outgoingTransitions.toList
+		val defaultTransition = choice.outgoingTransitions.filter( t | t.trigger === null || t.trigger instanceof DefaultTrigger ).head
+		if (defaultTransition !== null) {
+			reactions.remove(defaultTransition)
+			reactions.add(defaultTransition)
+		}
+		// TODO: raise an error if no default exists 
+		
+		val transitionStep = reactions.reverseView.fold(null, [s, reaction | {
+				val ifExp = _if(reaction.mapCheck)._then(_block(reaction.mapEffect))
+				if (s !== null) ifExp._else(_block(s))
+				ifExp
+			}])
+
+		if (transitionStep !== null) cycle.expressions.add(transitionStep)
+
+		cycle._comment('The reactions of state ' + choice.name + '.')
+		
+//		if ( trace.addTraceSteps ) execChoice.reactSequence.steps.add(0,choice.create.newTraceNodeExecuted)
+		return cycle
 	}
 	
 	def BlockExpression createReactionSequence(RegularState state, Expression localStep) {	

@@ -10,7 +10,7 @@ package org.yakindu.sct.model.sexec.transformation.ng
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.yakindu.base.types.TypesFactory
-import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.Vertex
 
 @Singleton class StateType {
 	
@@ -18,9 +18,9 @@ import org.yakindu.sct.model.sgraph.RegularState
 	@Inject extension RegionType regionType
 	@Inject extension ModelSequencerNaming
 	
-	def create createComplexType type(RegularState state) {
+	def create createComplexType type(Vertex state) {
 		it => [
-			name = state.stateTypeName
+			name = state.typeName
 			state.parentRegion.type.features += it
 		]
 	}

@@ -1,10 +1,11 @@
 package org.yakindu.sct.model.sexec.transformation.ng
 
-import org.yakindu.sct.model.sgraph.RegularState
-import org.yakindu.sct.model.stext.naming.StextNameProvider
 import com.google.inject.Inject
-import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.sgraph.Choice
+import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.stext.naming.StextNameProvider
+import org.yakindu.sct.model.stext.stext.InterfaceScope
 
 class ModelSequencerNaming {
 
@@ -42,7 +43,11 @@ class ModelSequencerNaming {
 		"InterfaceGroup"
 	}
 	
-	def stateTypeName(RegularState state) {
+	def dispatch typeName(RegularState state) {
 		state.fullyQualifiedName.lastSegment
+	}
+	
+	def dispatch typeName(Choice choice) {
+		"choice" + choice.parentRegion.vertices.filter(Choice).toList.indexOf(choice)
 	}
 }

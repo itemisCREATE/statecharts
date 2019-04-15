@@ -25,6 +25,7 @@ import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.RegularEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.EventSpec
+import org.yakindu.sct.model.sgraph.Choice
 
 /**
  * Most things are copied from BehaviorMapping and rewritten to work on sgraph and expressions instead of sexec
@@ -204,6 +205,11 @@ class TransitionMapping {
 	
 	def dispatch void addEnterExpForTargetsToSequence(Pseudostate it, List<TargetEntrySpec> targets, List<Expression> seq) {
 //		seq += reactSequence.newCall	TODO
+	}
+	
+	def dispatch void addEnterExpForTargetsToSequence(Choice it, List<TargetEntrySpec> targets, List<Expression> seq) {
+		val reactOp = it.type.reactMethod
+		seq += reactOp._call
 	}
 	
 	def dispatch void addEnterExpForTargetsToSequence(Region it, List<TargetEntrySpec> targets, List<Expression> seq) {
