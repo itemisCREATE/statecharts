@@ -22,6 +22,7 @@ import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.TimeUnit
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
+import org.yakindu.sct.model.sgraph.State
 
 /**
  * High level expression builder that covers state machine specific high level 
@@ -37,6 +38,7 @@ class StatemachineExpressionBuilder {
 	@Inject extension SexecElementMapping mapping
 	@Inject extension StatemachinePublic smPublic 
 	@Inject extension StatemachineProperties smPropos 
+	@Inject extension StatemachineMethods 
 	@Inject extension SgraphExtensions sgraph
 	@Inject extension ExpressionBuilder eBuilder
 	
@@ -137,6 +139,10 @@ class StatemachineExpressionBuilder {
 			case TimeUnit::SECOND: pve._multiply(1000._int)
 			default: pve
 		}
+	}
+	
+	def Expression _isStateActive(Statechart sc, State state) {
+		sc.createIsStateActiveMethod._call(sc.statesEnumeration._ref._fc(state.enumerator))
 	}
 	 
 }

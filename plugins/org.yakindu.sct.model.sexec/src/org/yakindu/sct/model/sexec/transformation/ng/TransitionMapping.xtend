@@ -10,22 +10,24 @@ import org.yakindu.base.types.Expression
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
+import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.sgraph.Effect
 import org.yakindu.sct.model.sgraph.Pseudostate
 import org.yakindu.sct.model.sgraph.Reaction
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.sgraph.Trigger
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.AlwaysEvent
+import org.yakindu.sct.model.stext.stext.EventSpec
 import org.yakindu.sct.model.stext.stext.LocalReaction
 import org.yakindu.sct.model.stext.stext.ReactionEffect
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.RegularEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import org.yakindu.sct.model.stext.stext.EventSpec
-import org.yakindu.sct.model.sgraph.Choice
+import org.yakindu.sct.model.sgraph.State
 
 /**
  * Most things are copied from BehaviorMapping and rewritten to work on sgraph and expressions instead of sexec
@@ -44,6 +46,7 @@ class TransitionMapping {
 	@Inject protected extension HistoryVector
 	@Inject protected extension ReactOperation
 	@Inject protected extension ImpactVector
+	@Inject protected extension StateVector
 	
 	@Inject protected extension StatemachineExpressionBuilder
 	@Inject protected extension StextToExpressionMapper
@@ -51,6 +54,32 @@ class TransitionMapping {
 	
 	def mapCheck(Reaction it) {
 		it.trigger.toCheckExpression ?: _true
+	}
+	
+	def mapCheck(Transition it) {
+		mapTransitionCheck(it, it.source, it.target)
+	}
+	
+	def dispatch mapTransitionCheck(Transition it, Vertex source, Vertex target) {
+		it.trigger.toCheckExpression ?: _true
+	}
+	
+	def dispatch mapTransitionCheck(Transition t, State source, Synchronization target) {
+		val sc = t.statechart
+		// build the condition
+		var Expression condition = if (t.trigger !== null) t.trigger.toCheckExpression
+		
+		val joinTransitions = target.incomingTransitions
+			.filter( jt | jt.source instanceof State)
+			.sortBy( jt | (jt.source as State).stateVector.offset )
+		
+		for ( trans : joinTransitions.filter( trans | trans != t )) { 
+			if (trans.source instanceof State) { 
+				condition = condition.conjunct(sc._isStateActive(trans.source as State))
+				if (trans.trigger !== null) condition = condition.conjunct(trans.trigger.toCheckExpression)
+			}
+		}
+		return condition
 	}
 	
 	def dispatch mapEffect(LocalReaction it) {
@@ -91,7 +120,7 @@ class TransitionMapping {
 	def toTriggerCheck(ReactionTrigger t) {
 		t.triggers.reverseView.fold(null as Expression,
 			[s,e | {
-				val Expression raised = e.isRaised
+				val Expression raised = e.isRaised?._ref
 				
 				if (raised === null) s
 				else if (s===null) raised  
@@ -107,7 +136,7 @@ class TransitionMapping {
 	}
 	
 	protected def dispatch isRaised(RegularEventSpec e) {
-		e.event
+		e.event.featureOrReference
 	}
 	
 	protected def dispatch isRaised(TimeEventSpec e) {
@@ -204,12 +233,15 @@ class TransitionMapping {
 	}
 	
 	def dispatch void addEnterExpForTargetsToSequence(Pseudostate it, List<TargetEntrySpec> targets, List<Expression> seq) {
-//		seq += reactSequence.newCall	TODO
+//		seq += reactSequence.newCall	TODO: Entries
 	}
 	
 	def dispatch void addEnterExpForTargetsToSequence(Choice it, List<TargetEntrySpec> targets, List<Expression> seq) {
-		val reactOp = it.type.reactMethod
-		seq += reactOp._call
+		seq += it.type.reactMethod._call
+	}
+	
+	def dispatch void addEnterExpForTargetsToSequence(Synchronization it, List<TargetEntrySpec> targets, List<Expression> seq) {
+		seq += it.type.reactMethod._call
 	}
 	
 	def dispatch void addEnterExpForTargetsToSequence(Region it, List<TargetEntrySpec> targets, List<Expression> seq) {

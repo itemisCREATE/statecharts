@@ -13,6 +13,7 @@ class StextToExpressionMapper {
 	@Inject protected extension StatemachineMethods
 	@Inject protected extension StatemachinePublic
 	@Inject protected extension ExpressionBuilder
+	@Inject protected extension StatemachineExpressionBuilder
 	
 	def dispatch replaceStextExpressions(Expression exp, Statechart sc) { 
 		exp.eAllContents.forEach[doReplace(sc)]
@@ -20,16 +21,12 @@ class StextToExpressionMapper {
 	}
 	
 	def dispatch replaceStextExpressions(ActiveStateReferenceExpression asr, Statechart sc) { 
-		isStateActiveCall(asr, sc)
+		sc._isStateActive(asr.value)
 	}
 	
 	protected def dispatch doReplace(EObject e, Statechart sc) { }
 	
 	protected def dispatch doReplace(ActiveStateReferenceExpression asr, Statechart sc) {
-		EcoreUtil.replace(asr, isStateActiveCall(asr, sc))
-	}
-	
-	protected def isStateActiveCall(ActiveStateReferenceExpression asr, Statechart sc) {
-		sc.createIsStateActiveMethod._call(sc.statesEnumeration._ref._fc(asr.value.enumerator))
+		EcoreUtil.replace(asr, sc._isStateActive(asr.value))
 	}
 }

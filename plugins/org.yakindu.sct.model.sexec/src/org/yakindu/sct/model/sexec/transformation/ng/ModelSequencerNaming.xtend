@@ -6,6 +6,7 @@ import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.sgraph.Synchronization
 
 class ModelSequencerNaming {
 
@@ -49,5 +50,9 @@ class ModelSequencerNaming {
 	
 	def dispatch typeName(Choice choice) {
 		"choice" + choice.parentRegion.vertices.filter(Choice).toList.indexOf(choice)
+	}
+	
+	def dispatch typeName(Synchronization sync) {
+		"sync" + sync.parentRegion.vertices.filter(Synchronization).toList.indexOf(sync)
 	}
 }

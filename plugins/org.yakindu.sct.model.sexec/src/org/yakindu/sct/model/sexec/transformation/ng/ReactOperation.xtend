@@ -34,6 +34,7 @@ import org.yakindu.sct.model.stext.stext.DefaultTrigger
 import org.yakindu.sct.model.stext.stext.EntryEvent
 import org.yakindu.sct.model.stext.stext.ExitEvent
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
+import org.yakindu.sct.model.sgraph.Synchronization
 
 /**
  * React method is an artifact concepts that is created for each state machine state and the statechart
@@ -65,6 +66,7 @@ class ReactOperation {
 		sc.declareReactMethod
 		sc.allRegularStates.forEach[s|s.declareReactMethod]
 		sc.allChoices.forEach[s|s.declareReactMethod]
+		sc.allSynchronizations.forEach[s|s.declareReactMethod]
 	}
 	
 	/**
@@ -76,6 +78,7 @@ class ReactOperation {
 
 		sc.allRegularStates.forEach[s|s.defineReactMethod]
 		sc.allChoices.forEach[s|s.defineReactMethod]
+		sc.allSynchronizations.forEach[s|s.defineReactMethod]
 	}
 
 	def dispatch declareReactMethod(RegularState state) {
@@ -106,11 +109,11 @@ class ReactOperation {
 		]		
 	}
 	
-	def dispatch defineReactMethod(Choice choice) {
-		choice.reactMethod => [ body = 
+	def dispatch defineReactMethod(Pseudostate state) {
+		state.reactMethod => [ body = 
 			_block(
-				choice.createReactionSequence
-			) => [ _comment = "State machine reactions."]	
+				state.createReactionSequence
+			) => [ _comment = "Pseudo state reactions."]	
 		]		
 	}
 	
@@ -227,11 +230,28 @@ class ReactOperation {
 		)
 	}
 	
-	def BlockExpression createReactionSequence(Choice choice) {
+	def dispatch BlockExpression createReactionSequence(Pseudostate it) {
+		_block
+	}
+	
+	def dispatch BlockExpression createReactionSequence(Synchronization sync) {
+		val cycle = _block
+		
+		val reaction = sync.outgoingTransitions.head
+		cycle.expressions += reaction.mapEffect
+		cycle._comment('The reactions of state ' + sync.name + '.')
+		
+//		if ( trace.addTraceSteps ) execSync.reactSequence.steps.add(0,sync.create.newTraceNodeExecuted)
+		
+		return cycle
+	}
+	
+	def dispatch BlockExpression createReactionSequence(Choice choice) {
 		val cycle = _block
 
-		// move the default transition to the end of the reaction list
 		val reactions = choice.outgoingTransitions.toList
+		
+		// move the default transition to the end of the reaction list
 		val defaultTransition = choice.outgoingTransitions.filter( t | t.trigger === null || t.trigger instanceof DefaultTrigger ).head
 		if (defaultTransition !== null) {
 			reactions.remove(defaultTransition)
