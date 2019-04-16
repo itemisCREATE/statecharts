@@ -8,33 +8,35 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.model.sexec.transformation.ng
+package org.yakindu.sct.model.sexec.transformation.ng.reactions
 
 import com.google.inject.Inject
 import org.yakindu.base.expressions.expressions.BlockExpression
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
-import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
-import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
+import org.yakindu.sct.model.sexec.transformation.ng.ImpactVector
+import org.yakindu.sct.model.sexec.transformation.ng.StateType
+import org.yakindu.sct.model.sexec.transformation.ng.StateVector
+import org.yakindu.sct.model.sexec.transformation.ng.StatemachinePublic
 import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.sgraph.Pseudostate
 import org.yakindu.sct.model.sgraph.ReactiveElement
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Trigger
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.DefaultTrigger
 import org.yakindu.sct.model.stext.stext.EntryEvent
 import org.yakindu.sct.model.stext.stext.ExitEvent
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
-import org.yakindu.sct.model.sgraph.Synchronization
 
 /**
  * React method is an artifact concepts that is created for each state machine state and the statechart
@@ -45,18 +47,18 @@ import org.yakindu.sct.model.sgraph.Synchronization
  */
 class ReactOperation {
 	
-	@Inject extension SexecElementMapping mapping
-	@Inject extension SgraphExtensions sgraph
-	@Inject extension ExpressionBuilder exprBuilder
-	@Inject extension TypeBuilder tBuilder
-	@Inject extension StatemachinePublic smPublic
-	@Inject extension StateType stateType
+	@Inject extension SgraphExtensions
+	@Inject extension ExpressionBuilder
+	@Inject extension TypeBuilder
+	@Inject extension StatemachinePublic
+	@Inject extension StateType
 	@Inject extension StatechartExtensions sct
 	
 	@Inject extension ImpactVector
 	@Inject extension StateVector
 	
 	@Inject extension TransitionMapping
+	@Inject extension LocalReactionMapping
 	
 	/**
 	 * Declares the react methods for all ExecutionNode objects.
@@ -64,6 +66,7 @@ class ReactOperation {
 	def declareReactMethods(Statechart sc) {
 
 		sc.declareReactMethod
+		
 		sc.allRegularStates.forEach[s|s.declareReactMethod]
 		sc.allChoices.forEach[s|s.declareReactMethod]
 		sc.allSynchronizations.forEach[s|s.declareReactMethod]
@@ -84,8 +87,8 @@ class ReactOperation {
 	def dispatch declareReactMethod(RegularState state) {
 		state.type.features.add( _op => [ m |
 			m.name = "react"
-			m._type(_bool)
-			m._param("try_transition", _bool)
+			m._type(ITypeSystem.BOOLEAN)
+			m._param("try_transition", ITypeSystem.BOOLEAN)
 		])
 		state
 	}
@@ -101,19 +104,21 @@ class ReactOperation {
 	}
 	
 	def dispatch defineReactMethod(Statechart sc) {
-		sc.reactMethod => [ body = 
-			_block(
+		sc.reactMethod => [ 
+			body = _block(
 				sc.createLocalReactionSequence,
 				_return(_false)	
-			) => [ _comment = "State machine reactions."]	
+			)
+			_comment("State machine reactions.")
 		]		
 	}
 	
 	def dispatch defineReactMethod(Pseudostate state) {
-		state.reactMethod => [ body = 
-			_block(
+		state.reactMethod => [ 
+			body = _block(
 				state.createReactionSequence
-			) => [ _comment = "Pseudo state reactions."]	
+			)
+			_comment("Pseudo state reactions.")	
 		]		
 	}
 	
@@ -131,8 +136,8 @@ class ReactOperation {
 				 				
 		if (sct.statechart(state).interleaveLocalReactions) {
 			
-			val tryTransitionParam = reactMethod.param('try_transition')
-			val didTransitionVariable = _variable("did_transition", _bool, tryTransitionParam._ref)
+			val tryTransitionParam = reactMethod.parameters.findFirst[name == 'try_transition']
+			val didTransitionVariable = _variable("did_transition", ITypeSystem.BOOLEAN, tryTransitionParam._ref)
 			
 				
 			val stateReactions = 
@@ -171,7 +176,6 @@ class ReactOperation {
 			reactMethod.body = stateReactions
 			
 		} else {
-			
 			throw new RuntimeException("Non interleaved local reactions not supported");
 		}
 				
@@ -180,65 +184,38 @@ class ReactOperation {
 		return reactMethod
 	}
 	
-	protected def dispatch isEntry(Trigger t) { false }
-	protected def dispatch isEntry(ReactionTrigger t) {
+	def dispatch callReact(State state, Expression p)  { _call(state.reactMethod)._with(p) }
+	def dispatch callReact(Statechart sc, Expression p)  { _call(sc.reactMethod) }
+	
+	def dispatch Operation reactMethod(Statechart sc) { sc.statemachineType.reactMethod }
+	def dispatch Operation reactMethod(Vertex state) { state.type.reactMethod }
+	def dispatch Operation reactMethod(ComplexType it) { features.filter(Operation).findFirst[name == "react"] }
+	
+	def protected dispatch isEntry(Trigger t) { false }
+	def protected dispatch isEntry(ReactionTrigger t) {
 		!t.triggers.empty && t.triggers.forall[tr | tr instanceof EntryEvent]
 	}
 	
-	protected def dispatch isExit(Trigger t) { false }
-	protected def dispatch isExit(ReactionTrigger t) {
+	def protected dispatch isExit(Trigger t) { false }
+	def protected dispatch isExit(ReactionTrigger t) {
 		!t.triggers.empty && t.triggers.forall[tr | tr instanceof ExitEvent]
 	}
-	
-	
 
-	def dispatch callReact(State state, Expression p)  { _call(state.reactMethod)._with(p) }
-
-	def dispatch callReact(Statechart sc, Expression p)  { _call(sc.reactMethod) }
-	
-	def _statement(Expression value) {
-		sexecFactory.createStatement => [
-			expression = value
-		]	
-	}
-	
-	def Parameter param(Operation it, String name) {
-		parameters.filter[ p | p.name == name].head
-	}
-	
-	def dispatch Operation reactMethod(Statechart sc) {
-		sc.statemachineType.reactMethod
-	}
-	
-	def dispatch Operation reactMethod(Vertex state) {
-		state.type.reactMethod
-	}
-	
-	def dispatch Operation reactMethod(ComplexType it) {
-		features.filter( typeof(Operation) ).filter( m | m.name == "react").head
-	}
-	
-	def _bool() {
-		return ITypeSystem::BOOLEAN
-	}
-	
-	def BlockExpression createLocalReactionSequence(ReactiveElement state) {
+	def protected BlockExpression createLocalReactionSequence(ReactiveElement state) {
 		_block(
-			state.localReactions.filter[!trigger.isEntry && !trigger.isExit].map[ lr | 
-				_if(lr.mapCheck)._then(_block(lr.mapEffect))
-			]	
+			state.localReactions.filter[!trigger.isEntry && !trigger.isExit].map[mapLocalReaction]
 		)
 	}
 	
-	def dispatch BlockExpression createReactionSequence(Pseudostate it) {
+	def protected dispatch BlockExpression createReactionSequence(Pseudostate it) {
 		_block
 	}
 	
-	def dispatch BlockExpression createReactionSequence(Synchronization sync) {
+	def protected dispatch BlockExpression createReactionSequence(Synchronization sync) {
 		val cycle = _block
 		
 		val reaction = sync.outgoingTransitions.head
-		cycle.expressions += reaction.mapEffect
+		cycle.expressions += reaction.mapTransition
 		cycle._comment('The reactions of state ' + sync.name + '.')
 		
 //		if ( trace.addTraceSteps ) execSync.reactSequence.steps.add(0,sync.create.newTraceNodeExecuted)
@@ -246,7 +223,7 @@ class ReactOperation {
 		return cycle
 	}
 	
-	def dispatch BlockExpression createReactionSequence(Choice choice) {
+	def protected dispatch BlockExpression createReactionSequence(Choice choice) {
 		val cycle = _block
 
 		val reactions = choice.outgoingTransitions.toList
@@ -260,7 +237,7 @@ class ReactOperation {
 		// TODO: raise an error if no default exists 
 		
 		val transitionStep = reactions.reverseView.fold(null, [s, reaction | {
-				val ifExp = _if(reaction.mapCheck)._then(_block(reaction.mapEffect))
+				val ifExp = mapTransition(reaction)
 				if (s !== null) ifExp._else(_block(s))
 				ifExp
 			}])
@@ -273,15 +250,13 @@ class ReactOperation {
 		return cycle
 	}
 	
-	def BlockExpression createReactionSequence(RegularState state, Expression localStep) {	
+	def protected BlockExpression createReactionSequence(RegularState state, Expression localStep) {	
 		val cycle = _block
 
 		val transitionReactions = state.outgoingTransitions.filter[tr | tr.trigger !== null].toList
 		
-		val transitionStep = transitionReactions.reverseView.fold(localStep, [s, reaction | {
-				_if(reaction.mapCheck)
-				._then(_block(reaction.mapEffect))
-				._else(_block(s))
+		val transitionStep = transitionReactions.reverseView.fold(localStep, [s, r | {
+				mapTransition(r)._else(_block(s))
 			}])
 
 		if (transitionStep !== null) cycle.expressions.add(transitionStep)

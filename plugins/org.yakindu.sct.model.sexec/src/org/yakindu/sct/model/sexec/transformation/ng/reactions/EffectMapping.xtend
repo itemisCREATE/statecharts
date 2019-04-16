@@ -1,157 +1,63 @@
-package org.yakindu.sct.model.sexec.transformation.ng
+package org.yakindu.sct.model.sexec.transformation.ng.reactions
 
 import com.google.inject.Inject
 import java.util.ArrayList
 import java.util.List
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.base.NamedElement
-import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.Expression
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
+import org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping
+import org.yakindu.sct.model.sexec.transformation.ng.EnterSequence
+import org.yakindu.sct.model.sexec.transformation.ng.ExitSequence
+import org.yakindu.sct.model.sexec.transformation.ng.ImpactVector
+import org.yakindu.sct.model.sexec.transformation.ng.RegionType
+import org.yakindu.sct.model.sexec.transformation.ng.StateOperations
+import org.yakindu.sct.model.sexec.transformation.ng.StateType
+import org.yakindu.sct.model.sexec.transformation.ng.StatemachineExpressionBuilder
+import org.yakindu.sct.model.sexec.transformation.ng.StextToExpressionMapper
+import org.yakindu.sct.model.sexec.transformation.ng.TargetEntrySpec
 import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.sgraph.Effect
 import org.yakindu.sct.model.sgraph.Pseudostate
-import org.yakindu.sct.model.sgraph.Reaction
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Transition
-import org.yakindu.sct.model.sgraph.Trigger
 import org.yakindu.sct.model.sgraph.Vertex
-import org.yakindu.sct.model.stext.stext.AlwaysEvent
-import org.yakindu.sct.model.stext.stext.EventSpec
-import org.yakindu.sct.model.stext.stext.LocalReaction
 import org.yakindu.sct.model.stext.stext.ReactionEffect
-import org.yakindu.sct.model.stext.stext.ReactionTrigger
-import org.yakindu.sct.model.stext.stext.RegularEventSpec
-import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import org.yakindu.sct.model.sgraph.State
 
-/**
- * Most things are copied from BehaviorMapping and rewritten to work on sgraph and expressions instead of sexec
- */
-class TransitionMapping {
+class EffectMapping {
 	
-	@Inject protected extension BehaviorMapping
-	@Inject protected extension ExpressionBuilder
-	@Inject protected extension ExitSequence
-	@Inject protected extension EnterSequence
-	@Inject protected extension StateType
-	@Inject protected extension RegionType
-	@Inject protected extension SgraphExtensions
-	@Inject protected extension StatechartExtensions
-	@Inject protected extension StateOperations
-	@Inject protected extension HistoryVector
-	@Inject protected extension ReactOperation
-	@Inject protected extension ImpactVector
-	@Inject protected extension StateVector
+	@Inject extension BehaviorMapping // TODO: remove dependency
 	
-	@Inject protected extension StatemachineExpressionBuilder
-	@Inject protected extension StextToExpressionMapper
-	@Inject protected extension ExpressionExtensions
+	@Inject extension ExpressionBuilder
+	@Inject extension StextToExpressionMapper
+	@Inject extension SgraphExtensions
+	@Inject extension ExitSequence
+	@Inject extension EnterSequence
+	@Inject extension StateType
+	@Inject extension RegionType
+	@Inject extension StatechartExtensions
+	@Inject extension StateOperations
+	@Inject extension ReactOperation
+	@Inject extension ImpactVector
+	@Inject extension StatemachineExpressionBuilder
 	
-	def mapCheck(Reaction it) {
-		it.trigger.toCheckExpression ?: _true
-	}
+	def dispatch List<Expression> toEffectExpressions(Void effect) { #[] }
 	
-	def mapCheck(Transition it) {
-		mapTransitionCheck(it, it.source, it.target)
-	}
+	def dispatch List<Expression> toEffectExpressions(Effect effect) { #[] }
 	
-	def dispatch mapTransitionCheck(Transition it, Vertex source, Vertex target) {
-		it.trigger.toCheckExpression ?: _true
-	}
-	
-	def dispatch mapTransitionCheck(Transition t, State source, Synchronization target) {
-		val sc = t.statechart
-		// build the condition
-		var Expression condition = if (t.trigger !== null) t.trigger.toCheckExpression
-		
-		val joinTransitions = target.incomingTransitions
-			.filter( jt | jt.source instanceof State)
-			.sortBy( jt | (jt.source as State).stateVector.offset )
-		
-		for ( trans : joinTransitions.filter( trans | trans != t )) { 
-			if (trans.source instanceof State) { 
-				condition = condition.conjunct(sc._isStateActive(trans.source as State))
-				if (trans.trigger !== null) condition = condition.conjunct(trans.trigger.toCheckExpression)
-			}
-		}
-		return condition
-	}
-	
-	def dispatch mapEffect(LocalReaction it) {
-		it.effect.toExpression
-	}
-	
-	def dispatch mapEffect(Transition it) {
-		toEffectExpression(#[it])
-	}
-	
-	def dispatch List<Expression> toExpression(Void effect) { null }
-	
-	def dispatch List<Expression> toExpression(Effect effect) { null }
-	
-	def dispatch List<Expression> toExpression(ReactionEffect effect) {
+	def dispatch List<Expression> toEffectExpressions(ReactionEffect effect) {
 		EcoreUtil.copyAll(effect.actions).map[replaceStextExpressions(effect.statechart)].toList
 	}
-	
-	def dispatch Expression toCheckExpression (Void t) { _true }
-	
-	def dispatch Expression toCheckExpression (Trigger t) { _true }
-	
-	def dispatch Expression toCheckExpression (ReactionTrigger t) {
-		
-		val hasTriggers = ! t.triggers.empty
-		val triggersAreAlwaysTrue = t.triggers.filter(AlwaysEvent).size > 0 
-		val triggerCheck = if (hasTriggers && !triggersAreAlwaysTrue) t.toTriggerCheck else null;
-		
-		val guard = t.buildGuard
-		
-		if ( triggerCheck !== null && guard !== null ) _parenthesized(triggerCheck)._and(_parenthesized(guard))
-		else if ( triggerCheck !== null ) triggerCheck
-		else if ( guard !== null ) guard
-		else if ( triggersAreAlwaysTrue ) _true
-	}
-	
-	
-	def toTriggerCheck(ReactionTrigger t) {
-		t.triggers.reverseView.fold(null as Expression,
-			[s,e | {
-				val Expression raised = e.isRaised?._ref
-				
-				if (raised === null) s
-				else if (s===null) raised  
-				else raised._or(s)
-			}])		
-	}
-	
-	
-	protected def dispatch Expression buildGuard( Trigger t) {null}
-	
-	protected def dispatch Expression buildGuard( ReactionTrigger t) {
-		if ( t.guard !== null ) EcoreUtil::copy(t.guard.expression).replaceStextExpressions(t.statechart) else null
-	}
-	
-	protected def dispatch isRaised(RegularEventSpec e) {
-		e.event.featureOrReference
-	}
-	
-	protected def dispatch isRaised(TimeEventSpec e) {
-		null // TODO: transform time events into properties
-	}
-	
-	protected def dispatch isRaised(EventSpec e) {
-		null
-	}
-	
 	
 	/**
 	 * Creates a compound effect that can consist of multiple transitions.
 	 */
-	def List<Expression> toEffectExpression(List<Transition> transitions) {
+	def dispatch List<Expression> toEffectExpressions(List<Transition> transitions) {
 		val sequence = <Expression>newArrayList
 
 		// define exit behavior of transition
@@ -175,7 +81,7 @@ class TransitionMapping {
 		// map transition actions
 		for ( t : transitions ) {
 			if (t.effect !== null) {
-				sequence += t.effect.toExpression
+				sequence += t.effect.toEffectExpressions
 			}
 //			if (trace.addTraceSteps) { 
 //				sequence.steps += t.create.newTraceReactionFired
@@ -201,7 +107,7 @@ class TransitionMapping {
 	 * Calcuates a sequence to enter one or more states. Entering multiple states is required for fork, where parts of a state 
 	 * configuration is specified.
 	 */
-	def List<Expression> mapToStateConfigurationEnterSequence(List<Transition> transitions) {
+	def protected List<Expression> mapToStateConfigurationEnterSequence(List<Transition> transitions) {
 	
 		// precondition : common source vertex
 		// ? precondition : targets are Regular States ?
@@ -232,19 +138,19 @@ class TransitionMapping {
 		return sequence
 	}
 	
-	def dispatch void addEnterExpForTargetsToSequence(Pseudostate it, List<TargetEntrySpec> targets, List<Expression> seq) {
+	def protected dispatch void addEnterExpForTargetsToSequence(Pseudostate it, List<TargetEntrySpec> targets, List<Expression> seq) {
 //		seq += reactSequence.newCall	TODO: Entries
 	}
 	
-	def dispatch void addEnterExpForTargetsToSequence(Choice it, List<TargetEntrySpec> targets, List<Expression> seq) {
+	def protected dispatch void addEnterExpForTargetsToSequence(Choice it, List<TargetEntrySpec> targets, List<Expression> seq) {
 		seq += it.type.reactMethod._call
 	}
 	
-	def dispatch void addEnterExpForTargetsToSequence(Synchronization it, List<TargetEntrySpec> targets, List<Expression> seq) {
+	def protected dispatch void addEnterExpForTargetsToSequence(Synchronization it, List<TargetEntrySpec> targets, List<Expression> seq) {
 		seq += it.type.reactMethod._call
 	}
 	
-	def dispatch void addEnterExpForTargetsToSequence(Region it, List<TargetEntrySpec> targets, List<Expression> seq) {
+	def protected dispatch void addEnterExpForTargetsToSequence(Region it, List<TargetEntrySpec> targets, List<Expression> seq) {
 		
 		// if a target is a direct node
 		val target = targets.filter( t | it.vertices.contains(t.target)).head 
@@ -270,7 +176,7 @@ class TransitionMapping {
 		}
 	}
 	
-	def dispatch void addEnterExpForTargetsToSequence(RegularState it, List<TargetEntrySpec> targets, List<Expression> seq) {
+	def protected dispatch void addEnterExpForTargetsToSequence(RegularState it, List<TargetEntrySpec> targets, List<Expression> seq) {
 		
 		val target = targets.findFirst( t | t.target == it)
 		
@@ -294,7 +200,7 @@ class TransitionMapping {
 
 	}
 	
-	protected def Expression lcaDoSequence(Region region) {
+	def protected Expression lcaDoSequence(Region region) {
 		
 		if (region === null) return null
 		
@@ -312,5 +218,4 @@ class TransitionMapping {
 			parent.callReact(_false)
 		}
 	}
-	
 }

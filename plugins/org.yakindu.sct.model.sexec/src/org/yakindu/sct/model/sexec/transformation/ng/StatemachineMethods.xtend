@@ -34,6 +34,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 import org.yakindu.base.types.Event
+import org.yakindu.sct.model.sexec.transformation.ng.reactions.ReactOperation
 
 @Singleton
 class StatemachineMethods {

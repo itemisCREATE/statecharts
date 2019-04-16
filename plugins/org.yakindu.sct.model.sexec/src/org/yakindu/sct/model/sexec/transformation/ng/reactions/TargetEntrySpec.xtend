@@ -8,7 +8,7 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.model.sexec.transformation.ng
+package org.yakindu.sct.model.sexec.transformation.ng.reactions
 
 import org.eclipse.xtend.lib.annotations.Data
 import org.yakindu.sct.model.sgraph.Vertex

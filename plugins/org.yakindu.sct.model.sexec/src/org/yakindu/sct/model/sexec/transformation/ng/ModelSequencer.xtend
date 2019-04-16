@@ -22,6 +22,7 @@ import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sexec.transformation.StateVectorBuilder
 import org.yakindu.sct.model.sexec.transformation.StructureMapping
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sexec.transformation.ng.reactions.ReactOperation
 
 class ModelSequencer implements IModelSequencer {
 	 
