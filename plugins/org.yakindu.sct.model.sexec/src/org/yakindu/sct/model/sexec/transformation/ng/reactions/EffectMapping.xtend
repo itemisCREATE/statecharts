@@ -107,7 +107,7 @@ class EffectMapping {
 	 * Calcuates a sequence to enter one or more states. Entering multiple states is required for fork, where parts of a state 
 	 * configuration is specified.
 	 */
-	def protected List<Expression> mapToStateConfigurationEnterSequence(List<Transition> transitions) {
+	def List<Expression> mapToStateConfigurationEnterSequence(List<Transition> transitions) {
 	
 		// precondition : common source vertex
 		// ? precondition : targets are Regular States ?
