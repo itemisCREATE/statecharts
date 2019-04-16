@@ -42,29 +42,30 @@ class StatemachineExpressionBuilder {
 	@Inject extension SgraphExtensions sgraph
 	@Inject extension ExpressionBuilder eBuilder
 	
+	@Inject extension StateVector
+	@Inject extension HistoryVector
 	
 	def Expression _saveHistory(Region it) {
 		
-		// from code henerator: historyVector[«region.historyVector.offset»] = stateVector[«region.stateVector.offset»];
+		// from code generator: historyVector[«region.historyVector.offset»] = stateVector[«region.stateVector.offset»];
 
-		it.statechart.historyVector._ref
-						._get(it.create.historyVector.offset._int)
-						._assign(it.statechart.stateVector._ref._get(it.create.stateVector.offset._int))			
+		statechart.historyVectorProperty._ref
+						._get(historyVector.offset._int)
+						._assign(statechart.stateVectorProperty._ref._get(stateVector.offset._int))
 	}
-	 
-	 
-	def Expression _enterState(RegularState state) {
+
+	def Expression _enterState(RegularState it) {
 		//		«stepComment»
 		//		nextStateIndex = «state.stateVector.offset»;
 		//		stateVector[«state.stateVector.offset»] = State.«state.stateName.asEscapedIdentifier»;
 
 		_block(
-			state.statechart.nextStateIndex._ref
-				._assign(state.create.stateVector.offset._int),
+			statechart.nextStateIndex._ref
+				._assign(stateVector.offset._int),
 				
-			stateVector(state.statechart)._ref
-				._get(state.create.stateVector.offset._int)
-				._assign(state.statechart.statesEnumeration._ref._fc(state.enumerator))
+			stateVectorProperty(statechart)._ref
+				._get(stateVector.offset._int)
+				._assign(statechart.statesEnumeration._ref._fc(enumerator))
 		)
 
 	}
@@ -73,7 +74,7 @@ class StatemachineExpressionBuilder {
 		_block(
 			state.statechart.nextStateIndex._ref._assign(0._int),
 				
-			stateVector(state.statechart)._ref
+			stateVectorProperty(state.statechart)._ref
 				._get(state.create.stateVector.offset._int)
 				._assign(state.statechart.statesEnumeration._ref._fc(state.statechart.noState))
 		)

@@ -10,7 +10,6 @@ import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping
-import org.yakindu.sct.model.sexec.transformation.ng.EnterSequence
 import org.yakindu.sct.model.sexec.transformation.ng.ExitSequence
 import org.yakindu.sct.model.sexec.transformation.ng.ImpactVector
 import org.yakindu.sct.model.sexec.transformation.ng.RegionType
@@ -28,6 +27,7 @@ import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.ReactionEffect
+import org.yakindu.sct.model.sexec.transformation.ng.EnterOperation
 
 class EffectMapping {
 	
@@ -37,7 +37,7 @@ class EffectMapping {
 	@Inject extension StextToExpressionMapper
 	@Inject extension SgraphExtensions
 	@Inject extension ExitSequence
-	@Inject extension EnterSequence
+	@Inject extension EnterOperation
 	@Inject extension StateType
 	@Inject extension RegionType
 	@Inject extension StatechartExtensions

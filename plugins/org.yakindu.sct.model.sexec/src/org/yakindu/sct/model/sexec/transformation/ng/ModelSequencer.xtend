@@ -36,6 +36,10 @@ class ModelSequencer implements IModelSequencer {
 	@Inject extension RetargetReferencesInPackage retageting2
 	
 	@Inject extension ReactOperation reactMethod
+	@Inject extension EntryReactOperation
+	@Inject extension EnterOperation
+	@Inject extension EnterShallowOperation
+	
 	@Inject extension ReactMethod reactMethodOld
 	
 	@Inject extension StatemachinePublic sc2Type
@@ -73,9 +77,16 @@ class ModelSequencer implements IModelSequencer {
 
 		sctype.defineProperties(sc)
 
-		val ef = sc.makeFlow
-		
+		sc.declareEntryReactOperations
+		sc.declareEnterOperations
+		sc.declareEnterShallowOperations
 		sc.declareReactMethods
+		
+		val ef = sc.makeFlow
+
+		sc.defineEntryReactOperations
+		sc.defineEnterOperations
+		sc.defineEnterShallowOperations
 		sc.defineReactMethods
 		
 //		sctype.declareSequenceMethods(ef)

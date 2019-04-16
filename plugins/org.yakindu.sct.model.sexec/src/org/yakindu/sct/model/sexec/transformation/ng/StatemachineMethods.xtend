@@ -56,7 +56,7 @@ class StatemachineMethods {
 	@Inject extension ITypeSystem ts
 	@Inject extension StatechartExtensions
 	@Inject extension StateVector
-	@Inject extension EnterSequence
+	@Inject extension EnterOperation
 	@Inject extension ExitSequence
 	@Inject extension StatemachineInterfaceMethods
 	
@@ -123,7 +123,7 @@ class StatemachineMethods {
 		val i = _variable("i", ITypeSystem.INTEGER, 0._int)
 		_for(i, i._ref._smaller(ef.stateVector.size._int), i._ref._inc) => [
 			it.body = _block(
-				stateVector(sc)._ref._get(i._ref)._assign(statesEnumeration(sc)._ref._fc(noState(sc)))
+				stateVectorProperty(sc)._ref._get(i._ref)._assign(statesEnumeration(sc)._ref._fc(noState(sc)))
 			)
 		]
 	}
@@ -133,7 +133,7 @@ class StatemachineMethods {
 		val i = _variable("i", ITypeSystem.INTEGER, 0._int)
 		_for(i, i._ref._smaller(ef.historyVector.size._int), i._ref._inc) => [
 			it.body = _block(
-				historyVector(sc)._ref._get(i._ref)._assign(statesEnumeration(sc)._ref._fc(noState(sc)))
+				historyVectorProperty(sc)._ref._get(i._ref)._assign(statesEnumeration(sc)._ref._fc(noState(sc)))
 			)
 		]
 	}
@@ -153,7 +153,7 @@ class StatemachineMethods {
 	}
 	
 	protected def notEqualsNoState(Statechart sc, int index) {
-		stateVector(sc)._ref._get(index._int)._notEquals(statesEnumeration(sc)._ref._fc(noState(sc)))
+		stateVectorProperty(sc)._ref._get(index._int)._notEquals(statesEnumeration(sc)._ref._fc(noState(sc)))
 	}
 	
 	def defineIsFinalMethod(ComplexType it, Statechart sc) {
@@ -180,7 +180,7 @@ class StatemachineMethods {
 	}
 	
 	protected def equalsState(Statechart sc, ExecutionState fs, int index) {
-		stateVector(sc)._ref._get(index._int)._equals(
+		stateVectorProperty(sc)._ref._get(index._int)._equals(
 			if (fs.stateVector.offset == index) {
 				statesEnumeration(sc)._ref._fc((fs.sourceElement as RegularState).enumerator)
 			} else {
@@ -195,9 +195,9 @@ class StatemachineMethods {
 				
 				sc.createClearOutEventsMethod._call,
 				
-				_for(nextStateIndex(sc)._ref._assign(0._int), nextStateIndex(sc)._ref._smaller(stateVector(sc)._ref._fc(_array._length)), nextStateIndex(sc)._ref._inc) => [
+				_for(nextStateIndex(sc)._ref._assign(0._int), nextStateIndex(sc)._ref._smaller(stateVectorProperty(sc)._ref._fc(_array._length)), nextStateIndex(sc)._ref._inc) => [
 					body = _block(
-						stateSwitch(stateVector(sc)._ref._get(nextStateIndex(sc)._ref), sc.allRegularStates.filter[isLeaf].filter[es | es.reactMethod!==null].toList, [ s | 
+						stateSwitch(stateVectorProperty(sc)._ref._get(nextStateIndex(sc)._ref), sc.allRegularStates.filter[isLeaf].filter[es | es.reactMethod!==null].toList, [ s | 
 							s.reactMethod._call(_true)
 						], _block)
 					)
@@ -221,11 +221,11 @@ class StatemachineMethods {
 				stateSwitch(parameters.head._ref, sc.allRegularStates, [ s |
 					_return(
 						if(s.isLeaf) {
-							stateVector(sc)._ref._get(s.stateVector.offset._int)._equals(statesEnumeration(sc)._ref._fc(s.enumerator))
+							stateVectorProperty(sc)._ref._get(s.stateVector.offset._int)._equals(statesEnumeration(sc)._ref._fc(s.enumerator))
 						} else {
-							stateVector(sc)._ref._get(s.stateVector.offset._int)._greaterEqual(statesEnumeration(sc)._ref._fc(s.enumerator))
+							stateVectorProperty(sc)._ref._get(s.stateVector.offset._int)._greaterEqual(statesEnumeration(sc)._ref._fc(s.enumerator))
 							._and(
-							stateVector(sc)._ref._get(s.stateVector.offset._int)._smallerEqual(statesEnumeration(sc)._ref._fc(s.subStates.last.enumerator)))
+							stateVectorProperty(sc)._ref._get(s.stateVector.offset._int)._smallerEqual(statesEnumeration(sc)._ref._fc(s.subStates.last.enumerator)))
 						}
 					)
 				], _return(_false))

@@ -23,7 +23,6 @@ import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sexec.transformation.TraceExtensions
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
-import org.yakindu.sct.model.sgraph.CompositeElement
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.RegularState
@@ -42,11 +41,11 @@ class SequenceBuilder extends org.yakindu.sct.model.sexec.transformation.Sequenc
 	@Inject extension StatemachineExpressionBuilder smeBuilder
 	@Inject extension StatemachineProperties smProperties
 	@Inject extension StateOperations stateOperations
-	@Inject extension EnterSequence scopeOperations
+	@Inject extension EnterOperation scopeOperations
 	@Inject extension StatemachinePublic smPublic
 	@Inject extension StateType stateType
 	@Inject extension RegionType regionType
-	@Inject extension EntryNodeMethods enMethods
+	@Inject extension EntryReactOperation enMethods
 	@Inject extension ExitSequence
 	@Inject extension StateVector
 	@Inject extension ImpactVector
@@ -57,100 +56,6 @@ class SequenceBuilder extends org.yakindu.sct.model.sexec.transformation.Sequenc
 //	boolean _addTraceSteps = false
 
 
-	override defineStatechartEnterSequence(ExecutionFlow flow, Statechart sc) {
-		val res =super.defineStatechartEnterSequence(flow, sc)
-		
-		//if(flow.entryAction !== null) enterSequence.steps.add(flow.entryAction.newCall)
-		val enterOperation = sc.statemachineType.enterSequence(DEFAULT_SEQUENCE_NAME)
-		enterOperation._comment("Default enter sequence for statechart " + sc.name)
-		enterOperation.body = _block(
-			sc.regions
-				.map[type.defaultEnterSequence].filterNull
-				.map[regionEnter | regionEnter._call]
-		)
-		res
-	}
-
-	override dispatch void defineScopeEnterSequences(Region r) {
-		super._defineScopeEnterSequences(r)
-
-//		// process all vertices of a region
-//		for (s : r.vertices)
-//			defineScopeEnterSequences(s)
-		// create an enter sequence for each contained entry
-		for (e : r.collectEntries) {
-			val seqName = if(e.name.nullOrEmpty) DEFAULT_SEQUENCE_NAME else e.name
-
-			r.type.enterSequence(seqName) => [
-				_comment("'" + seqName + "' enter sequence for region " + r.type.name)
-				body = _block(e.reaction._call)
-			]
-		}
-	}
-
-	override dispatch void defineScopeEnterSequences(FinalState state) {
-
-		super._defineScopeEnterSequences(state) // TODO: remove
-		state.defineEnterSequence(DEFAULT_SEQUENCE_NAME)
-	}
-
-	override dispatch void defineScopeEnterSequences(State state) {
-
-		super._defineScopeEnterSequences(state) // TODO: remove
-
-		// first creates enter sequences for all contained regions
-		state.regions.forEach(r|r.defineScopeEnterSequences)
-
-		// get all entry point names used by incoming transitions
-		val entryPointNames = state.incomingTransitions.map(t|t.entryPointName).toSet.toList
-
-		// also include implicit entries by histories
-		if (state.parentRegion.requireHistory) {
-			if(!entryPointNames.contains('default')) entryPointNames.add('default')
-		}
-
-		// sort entry points by name ...
-		entryPointNames.sortInplace
-
-		// create an entry sequence for each entry point
-		for (epName : entryPointNames) {
-			state.defineEnterSequence(epName)
-		}
-
-	}
-
-	def defineEnterSequence(RegularState state, String epName) {
-		val op = state.type.enterSequence(epName) => [
-			_comment("Default enter sequence for state " + state.name)
-			val block = _block(
-				state.entryAction?._call
-			// TODO if(_addTraceSteps) execState.newTraceStateEntered else null
-			)
-
-			if (state.leaf)
-				block.expressions += state._enterState
-			else
-				for (r : (state as CompositeElement).regions) {
-					var regionEnter = r.type.resolveEnterSequence(epName)
-
-					if (regionEnter !== null) {
-						block.expressions += regionEnter._call
-					}
-				}
-
-			// save the history on entering a state 
-			val execRegion = state.parentRegion.create
-			if (execRegion.historyVector !== null) {
-				block.expressions += _saveHistory(state.parentRegion)
-			}
-
-			body = block
-		]
-		state.type.features += op
-
-	}
-	
-		
 	override defineStatechartExitSequence(ExecutionFlow flow, Statechart sc) {
 		val res =super.defineStatechartExitSequence(flow, sc)
 		
@@ -227,7 +132,7 @@ class SequenceBuilder extends org.yakindu.sct.model.sexec.transformation.Sequenc
 	
 	def SwitchExpression defineExitSwitch(Region region, Iterable<RegularState> leafStates, int pos) {
 		// create a state switch
-		var SwitchExpression sSwitch = _switch(region.statechart.stateVector._ref._get(pos._int))
+		var SwitchExpression sSwitch = _switch(region.statechart.stateVectorProperty._ref._get(pos._int))
 		sSwitch._comment("Handle exit of all possible states (of " + region.name + ") at position " + pos + "...")
 
 		val Iterable<RegularState> posStates = leafStates.filter(

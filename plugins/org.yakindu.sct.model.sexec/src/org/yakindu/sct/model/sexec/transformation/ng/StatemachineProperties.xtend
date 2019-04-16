@@ -33,9 +33,9 @@ import org.yakindu.sct.model.sexec.transformation.ArrayType
 	extension TypesFactory typesFactory = TypesFactory.eINSTANCE
 	
 	def defineProperties(ComplexType it, Statechart sc) {
-		it.features += stateVector(sc)
+		it.features += stateVectorProperty(sc)
 		if (sc.requireHistory) {
-			it.features += historyVector(sc)
+			it.features += historyVectorProperty(sc)
 		}
 		it.features += nextStateIndex(sc)
 	}
@@ -46,7 +46,7 @@ import org.yakindu.sct.model.sexec.transformation.ArrayType
 		visibility = Visibility.PROTECTED
 	}
 	
-	def create createProperty stateVector(Statechart sc) {
+	def create createProperty stateVectorProperty(Statechart sc) {
 		name = "stateVector"
 		typeSpecifier = _array._of(sc.statesEnumeration)
 		visibility = Visibility.PROTECTED
@@ -55,7 +55,7 @@ import org.yakindu.sct.model.sexec.transformation.ArrayType
 		initialValue = _array._ref._fc(_array._new, size._int)
 	}
 	
-	def create createProperty historyVector(Statechart sc) {
+	def create createProperty historyVectorProperty(Statechart sc) {
 		name = "historyStateVector"
 		typeSpecifier = _array._of(sc.statesEnumeration)
 		visibility = Visibility.PROTECTED
