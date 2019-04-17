@@ -49,10 +49,10 @@ class RetargetReferencesInPackage {
 		if (newRef === null || newRef.eContainer === null) {
 			return
 		}
-		if (refContainer instanceof InterfaceScope) {
-			EcoreUtil.replace(ere, refContainer.property._ref._fc(newRef)._with(ere.arguments.map[value]))
-		} else if (refContainer instanceof InternalScope) {
-			EcoreUtil.replace(ere, refContainer.property._ref._fc(newRef)._with(ere.arguments.map[value]))
+		if (refContainer instanceof InterfaceScope && !ere.containedIn((refContainer as InterfaceScope).property.type)) {
+			EcoreUtil.replace(ere, (refContainer as InterfaceScope).property._ref._fc(newRef)._with(ere.arguments.map[value]))
+		} else if (refContainer instanceof InternalScope && !ere.containedIn((refContainer as InternalScope).property.type)) {
+			EcoreUtil.replace(ere, (refContainer as InternalScope).property._ref._fc(newRef)._with(ere.arguments.map[value]))
 		}else {
 			ere.reference = newRef
 		}
