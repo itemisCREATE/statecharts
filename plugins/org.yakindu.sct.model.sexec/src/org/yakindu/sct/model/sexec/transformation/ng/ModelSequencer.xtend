@@ -22,6 +22,7 @@ import org.yakindu.sct.model.sexec.transformation.SequenceBuilder
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sexec.transformation.StateVectorBuilder
 import org.yakindu.sct.model.sexec.transformation.StructureMapping
+import org.yakindu.sct.model.sexec.transformation.ng.expressions.ExpressionOptimizer
 import org.yakindu.sct.model.sexec.transformation.ng.operations.EnterDeepOperation
 import org.yakindu.sct.model.sexec.transformation.ng.operations.EnterOperation
 import org.yakindu.sct.model.sexec.transformation.ng.operations.EnterShallowOperation
@@ -59,6 +60,8 @@ class ModelSequencer implements IModelSequencer {
 	@Inject extension StatemachinePublic
 	@Inject extension StatemachineMethods
 	@Inject	extension StatemachineProperties
+	
+	@Inject extension ExpressionOptimizer
 	
 	
 	/* ==========================================================================
@@ -120,6 +123,8 @@ class ModelSequencer implements IModelSequencer {
 		sctype.defineClearEventsMethod(sc)
 		
 		pkg.retargetReferences
+		
+		pkg.optimize
 	}
 
 	protected def create ef:sc.create makeFlow(Statechart sc) {
