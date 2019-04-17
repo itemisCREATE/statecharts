@@ -66,8 +66,8 @@ import org.yakindu.sct.model.sgraph.Statechart
 	def protected reactions(Entry entry) {
 		switch(entry.kind) {
 			case INITIAL: return entry.initalEntryReactions
-			case SHALLOW_HISTORY: return entry.shallowHistoryReactions
-			case DEEP_HISTORY: return entry.deepHistoryReactions
+			case SHALLOW_HISTORY: return entry.historyReactions
+			case DEEP_HISTORY: return entry.historyReactions
 		}
 	}
 	
@@ -76,30 +76,34 @@ import org.yakindu.sct.model.sgraph.Statechart
 	}
 	
 	
-	def protected List<Expression> shallowHistoryReactions(Entry entry) {
+	def protected List<Expression> historyReactions(Entry entry) {
 		val sc = entry.statechart
 		
 		val reaction = 
-		_if(props.historyVectorProperty(sc)._ref._get(entry.region.historyVector.offset._int)._notEquals(sc.statesEnumeration._ref._fc(sc.noState)))._then(
-			_block(entry.region.enterShallow._call)
+		_if(sc.historyVectorProperty._ref._get(entry.region.historyVector.offset._int)._notEquals(sc.statesEnumeration._ref._fc(sc.noState)))._then(
+			_block(entry.historyReaction)
 		)._else(
-			_block(entry.createEntrySequence)
+			_block(entry.initialReaction)
 		)
 		
 		#[reaction]
 	}
 	
-	def protected List<Expression> deepHistoryReactions(Entry entry) {
-		val sc = entry.statechart
-		
-		val reaction = 
-		_if(props.historyVectorProperty(sc)._ref._get(entry.region.historyVector.offset._int)._notEquals(sc.statesEnumeration._ref._fc(sc.noState)))._then(
-			_block(entry.region.enterDeep._call)
-		)._else(
-			_block(entry.createEntrySequence)
-		)
-		
-		#[reaction]
+	def protected historyReaction(Entry entry) {
+		switch(entry.kind) {
+			case SHALLOW_HISTORY: return entry.region.enterShallow._call
+			case DEEP_HISTORY: return entry.region.enterDeep._call
+			default: {
+			}
+		}
+	}
+
+	def protected initialReaction(Entry entry) {
+		val entryReaction = entry.createEntrySequence
+		if(!entryReaction.isEmpty) 
+			entryReaction 
+		else 
+			entry.parentRegion.entry.createEntrySequence
 	}
 	
 	def protected createEntrySequence(Entry e) {
