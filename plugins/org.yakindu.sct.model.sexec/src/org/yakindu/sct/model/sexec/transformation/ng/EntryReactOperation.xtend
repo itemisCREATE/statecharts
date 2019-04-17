@@ -30,6 +30,7 @@ import org.yakindu.sct.model.sgraph.Statechart
 	@Inject extension StatemachinePublic
 	@Inject extension EffectMapping
 	@Inject extension EnterShallowOperation
+	@Inject extension EnterDeepOperation
 
 	def declareEntryReactOperations(Statechart sc) {
 		sc.eAllContents.filter(Region).forEach[ r |
@@ -89,7 +90,16 @@ import org.yakindu.sct.model.sgraph.Statechart
 	}
 	
 	def protected List<Expression> deepHistoryReactions(Entry entry) {
-		entry.createEntrySequence // TODO
+		val sc = entry.statechart
+		
+		val reaction = 
+		_if(props.historyVectorProperty(sc)._ref._get(entry.region.historyVector.offset._int)._notEquals(sc.statesEnumeration._ref._fc(sc.noState)))._then(
+			_block(entry.region.enterDeep._call)
+		)._else(
+			_block(entry.createEntrySequence)
+		)
+		
+		#[reaction]
 	}
 	
 	def protected createEntrySequence(Entry e) {

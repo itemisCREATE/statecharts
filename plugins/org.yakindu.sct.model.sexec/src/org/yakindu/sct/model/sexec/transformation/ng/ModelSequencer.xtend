@@ -39,6 +39,7 @@ class ModelSequencer implements IModelSequencer {
 	@Inject extension EntryReactOperation
 	@Inject extension EnterOperation
 	@Inject extension EnterShallowOperation
+	@Inject extension EnterDeepOperation
 	
 	@Inject extension ReactMethod reactMethodOld
 	
@@ -80,6 +81,7 @@ class ModelSequencer implements IModelSequencer {
 		sc.declareEntryReactOperations
 		sc.declareEnterOperations
 		sc.declareEnterShallowOperations
+		sc.declareEnterDeepOperations
 		sc.declareReactMethods
 		
 		val ef = sc.makeFlow
@@ -87,6 +89,7 @@ class ModelSequencer implements IModelSequencer {
 		sc.defineEntryReactOperations
 		sc.defineEnterOperations
 		sc.defineEnterShallowOperations
+		sc.defineEnterDeepOperations
 		sc.defineReactMethods
 		
 //		sctype.declareSequenceMethods(ef)
