@@ -21,8 +21,8 @@ import org.yakindu.sct.model.sexec.transformation.RetargetReferences
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sexec.transformation.StateVectorBuilder
 import org.yakindu.sct.model.sexec.transformation.StructureMapping
-import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sexec.transformation.ng.reactions.ReactOperation
+import org.yakindu.sct.model.sgraph.Statechart
 
 class ModelSequencer implements IModelSequencer {
 	 
@@ -37,6 +37,7 @@ class ModelSequencer implements IModelSequencer {
 	
 	@Inject extension ReactOperation reactMethod
 	@Inject extension EntryReactOperation
+	@Inject extension ExitReactOperation
 	@Inject extension EnterOperation
 	@Inject extension EnterShallowOperation
 	@Inject extension EnterDeepOperation
@@ -79,6 +80,7 @@ class ModelSequencer implements IModelSequencer {
 		sctype.defineProperties(sc)
 
 		sc.declareEntryReactOperations
+		sc.declareExitReactOperations
 		sc.declareEnterOperations
 		sc.declareEnterShallowOperations
 		sc.declareEnterDeepOperations
@@ -87,6 +89,7 @@ class ModelSequencer implements IModelSequencer {
 		val ef = sc.makeFlow
 
 		sc.defineEntryReactOperations
+		sc.defineExitReactOperations
 		sc.defineEnterOperations
 		sc.defineEnterShallowOperations
 		sc.defineEnterDeepOperations

@@ -12,6 +12,7 @@ import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping
 import org.yakindu.sct.model.sexec.transformation.ng.EnterOperation
 import org.yakindu.sct.model.sexec.transformation.ng.EntryReactOperation
+import org.yakindu.sct.model.sexec.transformation.ng.ExitReactOperation
 import org.yakindu.sct.model.sexec.transformation.ng.ExitSequence
 import org.yakindu.sct.model.sexec.transformation.ng.ImpactVector
 import org.yakindu.sct.model.sexec.transformation.ng.RegionType
@@ -22,13 +23,13 @@ import org.yakindu.sct.model.sexec.transformation.ng.StextToExpressionMapper
 import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.sgraph.Effect
 import org.yakindu.sct.model.sgraph.Entry
+import org.yakindu.sct.model.sgraph.Exit
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.ReactionEffect
-import org.yakindu.sct.model.sgraph.Exit
 
 class EffectMapping {
 	
@@ -45,6 +46,7 @@ class EffectMapping {
 	@Inject extension StateOperations
 	@Inject extension ReactOperation
 	@Inject extension EntryReactOperation
+	@Inject extension ExitReactOperation
 	@Inject extension ImpactVector
 	@Inject extension StatemachineExpressionBuilder
 	
@@ -141,7 +143,7 @@ class EffectMapping {
 	}
 	
 	def protected dispatch void addEnterExpForTargetsToSequence(Exit it, List<org.yakindu.sct.model.sexec.transformation.ng.TargetEntrySpec> targets, List<Expression> seq) {
-		// TODO
+		seq += it.exitReactOperation._call
 	}
 	
 	def protected dispatch void addEnterExpForTargetsToSequence(Entry it, List<org.yakindu.sct.model.sexec.transformation.ng.TargetEntrySpec> targets, List<Expression> seq) {
