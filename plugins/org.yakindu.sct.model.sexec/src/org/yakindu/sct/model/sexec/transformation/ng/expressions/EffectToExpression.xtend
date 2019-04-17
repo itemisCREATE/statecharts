@@ -1,4 +1,4 @@
-package org.yakindu.sct.model.sexec.transformation.ng.reactions
+package org.yakindu.sct.model.sexec.transformation.ng.expressions
 
 import com.google.inject.Inject
 import java.util.ArrayList
@@ -10,16 +10,15 @@ import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping
-import org.yakindu.sct.model.sexec.transformation.ng.EnterOperation
-import org.yakindu.sct.model.sexec.transformation.ng.EntryReactOperation
-import org.yakindu.sct.model.sexec.transformation.ng.ExitReactOperation
-import org.yakindu.sct.model.sexec.transformation.ng.ExitSequence
-import org.yakindu.sct.model.sexec.transformation.ng.ImpactVector
 import org.yakindu.sct.model.sexec.transformation.ng.RegionType
-import org.yakindu.sct.model.sexec.transformation.ng.StateOperations
 import org.yakindu.sct.model.sexec.transformation.ng.StateType
-import org.yakindu.sct.model.sexec.transformation.ng.StatemachineExpressionBuilder
-import org.yakindu.sct.model.sexec.transformation.ng.StextToExpressionMapper
+import org.yakindu.sct.model.sexec.transformation.ng.operations.EnterOperation
+import org.yakindu.sct.model.sexec.transformation.ng.operations.EntryActionOperation
+import org.yakindu.sct.model.sexec.transformation.ng.operations.EntryReactOperation
+import org.yakindu.sct.model.sexec.transformation.ng.operations.ExitOperation
+import org.yakindu.sct.model.sexec.transformation.ng.operations.ExitReactOperation
+import org.yakindu.sct.model.sexec.transformation.ng.operations.ReactOperation
+import org.yakindu.sct.model.sexec.transformation.ng.vectors.ImpactVector
 import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.sgraph.Effect
 import org.yakindu.sct.model.sgraph.Entry
@@ -31,19 +30,19 @@ import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.ReactionEffect
 
-class EffectMapping {
+class EffectToExpression {
 	
 	@Inject extension BehaviorMapping // TODO: remove dependency
 	
 	@Inject extension ExpressionBuilder
 	@Inject extension StextToExpressionMapper
 	@Inject extension SgraphExtensions
-	@Inject extension ExitSequence
+	@Inject extension ExitOperation
 	@Inject extension EnterOperation
 	@Inject extension StateType
 	@Inject extension RegionType
 	@Inject extension StatechartExtensions
-	@Inject extension StateOperations
+	@Inject extension EntryActionOperation
 	@Inject extension ReactOperation
 	@Inject extension EntryReactOperation
 	@Inject extension ExitReactOperation
@@ -76,7 +75,7 @@ class EffectMapping {
 //		}
 		
 		if (topExitState !== null) {
-			val exitOperation = topExitState.type.resolveExitSequence
+			val exitOperation = topExitState.type.resolveExitOperation
 			if (exitOperation !== null) {
 				sequence += exitOperation._call
 			}
@@ -126,9 +125,9 @@ class EffectMapping {
 		val entryScope = entryScopes.head
 		
 		// determine all target vertices
-		val List<org.yakindu.sct.model.sexec.transformation.ng.TargetEntrySpec> targets = transitions
-												.map( t | new org.yakindu.sct.model.sexec.transformation.ng.TargetEntrySpec(t.target, t.entryPointName) )
-												.fold(new ArrayList<org.yakindu.sct.model.sexec.transformation.ng.TargetEntrySpec>, [ s, e | { 
+		val List<TargetEntrySpec> targets = transitions
+												.map( t | new TargetEntrySpec(t.target, t.entryPointName) )
+												.fold(new ArrayList<TargetEntrySpec>, [ s, e | { 
 														if (!s.exists(tes | e.target == tes.target)) {s.add(e)} 
 														s
 													}])
@@ -142,23 +141,23 @@ class EffectMapping {
 		return sequence
 	}
 	
-	def protected dispatch void addEnterExpForTargetsToSequence(Exit it, List<org.yakindu.sct.model.sexec.transformation.ng.TargetEntrySpec> targets, List<Expression> seq) {
+	def protected dispatch void addEnterExpForTargetsToSequence(Exit it, List<TargetEntrySpec> targets, List<Expression> seq) {
 		seq += it.exitReactOperation._call
 	}
 	
-	def protected dispatch void addEnterExpForTargetsToSequence(Entry it, List<org.yakindu.sct.model.sexec.transformation.ng.TargetEntrySpec> targets, List<Expression> seq) {
+	def protected dispatch void addEnterExpForTargetsToSequence(Entry it, List<TargetEntrySpec> targets, List<Expression> seq) {
 		seq += it.entryReactOperation._call
 	}
 	
-	def protected dispatch void addEnterExpForTargetsToSequence(Choice it, List<org.yakindu.sct.model.sexec.transformation.ng.TargetEntrySpec> targets, List<Expression> seq) {
+	def protected dispatch void addEnterExpForTargetsToSequence(Choice it, List<TargetEntrySpec> targets, List<Expression> seq) {
 		seq += it.type.reactMethod._call
 	}
 	
-	def protected dispatch void addEnterExpForTargetsToSequence(Synchronization it, List<org.yakindu.sct.model.sexec.transformation.ng.TargetEntrySpec> targets, List<Expression> seq) {
+	def protected dispatch void addEnterExpForTargetsToSequence(Synchronization it, List<TargetEntrySpec> targets, List<Expression> seq) {
 		seq += it.type.reactMethod._call
 	}
 	
-	def protected dispatch void addEnterExpForTargetsToSequence(Region it, List<org.yakindu.sct.model.sexec.transformation.ng.TargetEntrySpec> targets, List<Expression> seq) {
+	def protected dispatch void addEnterExpForTargetsToSequence(Region it, List<TargetEntrySpec> targets, List<Expression> seq) {
 		
 		// if a target is a direct node
 		val target = targets.filter( t | it.vertices.contains(t.target)).head 
@@ -184,7 +183,7 @@ class EffectMapping {
 		}
 	}
 	
-	def protected dispatch void addEnterExpForTargetsToSequence(RegularState it, List<org.yakindu.sct.model.sexec.transformation.ng.TargetEntrySpec> targets, List<Expression> seq) {
+	def protected dispatch void addEnterExpForTargetsToSequence(RegularState it, List<TargetEntrySpec> targets, List<Expression> seq) {
 		
 		val target = targets.findFirst( t | t.target == it)
 		
@@ -192,7 +191,7 @@ class EffectMapping {
 			if (target.resolveEnterSequence !== null) seq += target.resolveEnterSequence._call
 		}
 		else {
-			if ( it.entryAction !== null ) seq += it.entryAction._call
+			if ( it.entryActionOperation !== null ) seq += it.entryActionOperation._call
 //			if ( trace.addTraceSteps ) seq.steps.add(it.newTraceStateEntered)
 			
 			for (subScope : it.subScopes ) {

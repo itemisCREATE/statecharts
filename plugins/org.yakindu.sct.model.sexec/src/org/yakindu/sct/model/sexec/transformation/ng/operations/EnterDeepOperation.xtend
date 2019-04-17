@@ -1,4 +1,4 @@
-package org.yakindu.sct.model.sexec.transformation.ng
+package org.yakindu.sct.model.sexec.transformation.ng.operations
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
@@ -9,6 +9,12 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
+import org.yakindu.sct.model.sexec.transformation.ng.RegionType
+import org.yakindu.sct.model.sexec.transformation.ng.StateType
+import org.yakindu.sct.model.sexec.transformation.ng.StatemachineProperties
+import org.yakindu.sct.model.sexec.transformation.ng.StatemachinePublic
+import org.yakindu.sct.model.sexec.transformation.ng.vectors.HistoryVector
+import org.yakindu.sct.model.sexec.transformation.ng.vectors.StateVector
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
@@ -28,7 +34,7 @@ class EnterDeepOperation {
 	@Inject extension StatemachineProperties
 	@Inject extension StatemachinePublic
 	@Inject extension EnterOperation
-	@Inject extension StateOperations
+	@Inject extension EntryActionOperation
 
 	def declareEnterDeepOperations(Statechart sc) {
 		sc.eAllContents.filter(Region).filter[requireDeepHistory].forEach[enterDeep]
@@ -38,11 +44,11 @@ class EnterDeepOperation {
 		sc.eAllContents.filter(Region).filter[requireDeepHistory].forEach[defineEnterDeep]
 	}
 
-	def create _op enterDeep(Region r) {
-		name = "enter_deep"
-		_type(ITypeSystem.VOID)
-		visibility = Visibility.PROTECTED
-		r.type.features += it
+	def create op : _op enterDeep(Region r) {
+		op.name = "enter_deep"
+		op._type(ITypeSystem.VOID)
+		op.visibility = Visibility.PROTECTED
+		r.type.features += op
 	}
 
 	def protected defineEnterDeep(Region r) {
@@ -64,7 +70,7 @@ class EnterDeepOperation {
 				if (child.leaf) {
 					actions += child.type.defaultEnterSequence._call
 				} else {
-					if(child.entryAction !== null) actions += child.entryAction._call
+					if(child.entryActionOperation !== null) actions += child.entryActionOperation._call
 //					if(trace.addTraceSteps) seq.steps += execChild.newTraceStateEntered
 					for (childRegion : child.regions) {
 						actions += childRegion.enterDeep._call

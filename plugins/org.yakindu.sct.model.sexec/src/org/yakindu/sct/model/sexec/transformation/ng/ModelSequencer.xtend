@@ -18,36 +18,47 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer
 import org.yakindu.sct.model.sexec.transformation.ReactionBuilder
 import org.yakindu.sct.model.sexec.transformation.RetargetReferences
+import org.yakindu.sct.model.sexec.transformation.SequenceBuilder
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sexec.transformation.StateVectorBuilder
 import org.yakindu.sct.model.sexec.transformation.StructureMapping
-import org.yakindu.sct.model.sexec.transformation.ng.reactions.ReactOperation
+import org.yakindu.sct.model.sexec.transformation.ng.operations.EnterDeepOperation
+import org.yakindu.sct.model.sexec.transformation.ng.operations.EnterOperation
+import org.yakindu.sct.model.sexec.transformation.ng.operations.EnterShallowOperation
+import org.yakindu.sct.model.sexec.transformation.ng.operations.EntryActionOperation
+import org.yakindu.sct.model.sexec.transformation.ng.operations.EntryReactOperation
+import org.yakindu.sct.model.sexec.transformation.ng.operations.ExitActionOperation
+import org.yakindu.sct.model.sexec.transformation.ng.operations.ExitOperation
+import org.yakindu.sct.model.sexec.transformation.ng.operations.ExitReactOperation
+import org.yakindu.sct.model.sexec.transformation.ng.operations.ReactOperation
 import org.yakindu.sct.model.sgraph.Statechart
 
 class ModelSequencer implements IModelSequencer {
 	 
 	@Inject extension SexecElementMapping mapping
-	@Inject extension StructureMapping structureMapping
-	@Inject extension BehaviorMapping behaviorMapping
-	@Inject extension ReactionBuilder reactBuilder
-	@Inject extension SequenceBuilder seqBuilder
-	@Inject extension StateVectorBuilder svBuilder
-	@Inject extension RetargetReferences retageting
-	@Inject extension RetargetReferencesInPackage retageting2
+	@Inject extension StructureMapping
+	@Inject extension BehaviorMapping
+	@Inject extension ReactionBuilder
+	@Inject extension SequenceBuilder
+	@Inject extension StateVectorBuilder
+	@Inject extension RetargetReferences
+	@Inject extension RetargetReferencesInPackage
 	
-	@Inject extension ReactOperation reactMethod
+	@Inject extension ReactOperation
 	@Inject extension EntryReactOperation
 	@Inject extension ExitReactOperation
 	@Inject extension EnterOperation
 	@Inject extension EnterShallowOperation
 	@Inject extension EnterDeepOperation
+	@Inject extension ExitOperation
+	@Inject extension EntryActionOperation
+	@Inject extension ExitActionOperation
 	
-	@Inject extension ReactMethod reactMethodOld
+	@Inject extension ReactMethod
 	
-	@Inject extension StatemachinePublic sc2Type
-	@Inject extension StatemachineMethods smMethods
-	@Inject	extension Sequence2Method s2m
-	@Inject	extension StatemachineProperties smProps
+	@Inject extension StatemachinePublic
+	@Inject extension StatemachineMethods
+	@Inject	extension StatemachineProperties
 	
 	
 	/* ==========================================================================
@@ -58,9 +69,7 @@ class ModelSequencer implements IModelSequencer {
 	}
 
 	override Package transformToPackage(Statechart sc, IValidationIssueAcceptor acceptor) {
-				
 		return sc.makePackage
-		
 	}
 	
 	override ExecutionFlow transform(Statechart sc, IValidationIssueAcceptor acceptor) {
@@ -79,43 +88,38 @@ class ModelSequencer implements IModelSequencer {
 
 		sctype.defineProperties(sc)
 
+		sc.declareEntryActionOperations
+		sc.declareExitActionOperations
 		sc.declareEntryReactOperations
 		sc.declareExitReactOperations
 		sc.declareEnterOperations
 		sc.declareEnterShallowOperations
 		sc.declareEnterDeepOperations
+		sc.declareExitOperations
 		sc.declareReactMethods
 		
-		val ef = sc.makeFlow
-
+		sc.defineEntryActionOperations
+		sc.defineExitActionOperations
+		sc.defineExitReactOperations
 		sc.defineEntryReactOperations
 		sc.defineExitReactOperations
 		sc.defineEnterOperations
 		sc.defineEnterShallowOperations
 		sc.defineEnterDeepOperations
+		sc.defineExitOperations
 		sc.defineReactMethods
 		
-//		sctype.declareSequenceMethods(ef)
-		
 		sctype.defineEnterMethod(sc)
-		
 		sctype.defineExitMethod(sc)
-		
 		sctype.defineInitMethod(sc)
-		
 		sctype.defineIsActiveMethod(sc)
-		
 		sctype.defineIsFinalMethod(sc)
-		
 		sctype.defineRunCycleMethod(sc)
-		
 		sctype.defineIsStateActiveMethod(sc)
-		
 		sctype.defineClearOutEventsMethod(sc)
 		sctype.defineClearEventsMethod(sc)
 		
 		pkg.retargetReferences
-		
 	}
 
 	protected def create ef:sc.create makeFlow(Statechart sc) {

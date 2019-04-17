@@ -1,20 +1,19 @@
-package org.yakindu.sct.model.sexec.transformation.ng.reactions
+package org.yakindu.sct.model.sexec.transformation.ng.expressions
 
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.Expression
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
-import org.yakindu.sct.model.sexec.transformation.ng.StextToExpressionMapper
+import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sgraph.Trigger
 import org.yakindu.sct.model.stext.stext.AlwaysEvent
 import org.yakindu.sct.model.stext.stext.EventSpec
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.RegularEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 
-class TriggerMapping {
+class TriggerToExpression {
 	
 	@Inject extension ExpressionBuilder
 	@Inject extension StextToExpressionMapper

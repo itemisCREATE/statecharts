@@ -1,4 +1,4 @@
-package org.yakindu.sct.model.sexec.transformation.ng
+package org.yakindu.sct.model.sexec.transformation.ng.vectors
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
@@ -16,7 +16,7 @@ import org.yakindu.sct.model.sgraph.Vertex
 class StateVector {
 	
 	@Inject extension SexecExtensions sexec
-	@Inject extension StatechartExtensions sc
+	@Inject extension StatechartExtensions
 	
 	def dispatch create sexec.factory.createStateVector stateVector(Statechart sc) {
 		var offset = 0

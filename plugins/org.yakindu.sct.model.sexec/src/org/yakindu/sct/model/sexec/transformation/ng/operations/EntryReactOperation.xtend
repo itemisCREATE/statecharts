@@ -5,7 +5,7 @@
  * Contributors:
  *  axel terfloth - itemis AG
  */
-package org.yakindu.sct.model.sexec.transformation.ng
+package org.yakindu.sct.model.sexec.transformation.ng.operations
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
@@ -14,21 +14,25 @@ import org.yakindu.base.types.Expression
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
-import org.yakindu.sct.model.sexec.transformation.ng.reactions.EffectMapping
+import org.yakindu.sct.model.sexec.transformation.ng.RegionType
+import org.yakindu.sct.model.sexec.transformation.ng.StatemachineProperties
+import org.yakindu.sct.model.sexec.transformation.ng.StatemachinePublic
+import org.yakindu.sct.model.sexec.transformation.ng.expressions.EffectToExpression
+import org.yakindu.sct.model.sexec.transformation.ng.vectors.HistoryVector
 import org.yakindu.sct.model.sgraph.Entry
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.Statechart
 
 @Singleton class EntryReactOperation {
 	
-	@Inject extension SgraphExtensions sgraph
-	@Inject extension RegionType rType
-	@Inject extension TypeBuilder tBuilder
-	@Inject extension ExpressionBuilder expBuilder
-	@Inject extension StatemachineProperties props
+	@Inject extension SgraphExtensions
+	@Inject extension RegionType
+	@Inject extension TypeBuilder
+	@Inject extension ExpressionBuilder
+	@Inject extension StatemachineProperties
 	@Inject extension HistoryVector
 	@Inject extension StatemachinePublic
-	@Inject extension EffectMapping
+	@Inject extension EffectToExpression
 	@Inject extension EnterShallowOperation
 	@Inject extension EnterDeepOperation
 

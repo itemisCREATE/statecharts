@@ -221,7 +221,7 @@ class StatechartExtensions {
 	
 	def dispatch superScope(EObject state) {}
 	
-	def dispatch superScope(State state) {
+	def dispatch superScope(RegularState state) {
 		state.parentRegion
 	}
 	

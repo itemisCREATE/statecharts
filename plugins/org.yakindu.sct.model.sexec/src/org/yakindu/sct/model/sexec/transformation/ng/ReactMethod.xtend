@@ -48,9 +48,9 @@ import org.yakindu.sct.model.sgraph.Statechart
  */
 class ReactMethod {
 	
-	@Inject extension SexecElementMapping mapping
+	@Inject extension SexecElementMapping
 	@Inject extension SexecExtensions sexec
-	@Inject extension SgraphExtensions sgraph
+	@Inject extension SgraphExtensions
 	@Inject extension ITypeSystem typeSystem
 	
 	@Inject extension ExpressionBuilder exprBuilder

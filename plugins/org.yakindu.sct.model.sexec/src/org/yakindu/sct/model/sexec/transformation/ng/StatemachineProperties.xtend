@@ -13,18 +13,20 @@ import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.Visibility
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.model.sexec.transformation.ArrayType
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
+import org.yakindu.sct.model.sexec.transformation.ng.vectors.HistoryVector
+import org.yakindu.sct.model.sexec.transformation.ng.vectors.StateVector
 import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.sexec.transformation.ArrayType
 
 @Singleton class StatemachineProperties {
 	
 	@Inject extension StatemachinePublic
 	@Inject extension SgraphExtensions
-	@Inject extension StateVector sv
-	@Inject extension HistoryVector hv
+	@Inject extension StateVector
+	@Inject extension HistoryVector
 	
 	@Inject extension TypeBuilder
 	@Inject extension ExpressionBuilder
@@ -51,7 +53,7 @@ import org.yakindu.sct.model.sexec.transformation.ArrayType
 		typeSpecifier = _array._of(sc.statesEnumeration)
 		visibility = Visibility.PROTECTED
 		
-		val size = sv.stateVector(sc).size
+		val size = sc.stateVector.size
 		initialValue = _array._ref._fc(_array._new, size._int)
 	}
 	
@@ -60,7 +62,7 @@ import org.yakindu.sct.model.sexec.transformation.ArrayType
 		typeSpecifier = _array._of(sc.statesEnumeration)
 		visibility = Visibility.PROTECTED
 		
-		val size = hv.historyVector(sc).size
+		val size = sc.historyVector.size
 		initialValue = _array._ref._fc(_array._new, size._int)
 	}
 	

@@ -5,24 +5,29 @@
  * Contributors:
  *  axel terfloth - itemis AG
  */
-package org.yakindu.sct.model.sexec.transformation.ng
+package org.yakindu.sct.model.sexec.transformation.ng.operations
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Operation
+import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
+import org.yakindu.sct.model.sexec.transformation.ng.RegionType
+import org.yakindu.sct.model.sexec.transformation.ng.StateType
+import org.yakindu.sct.model.sexec.transformation.ng.StatemachinePublic
+import org.yakindu.sct.model.sexec.transformation.ng.expressions.StatemachineExpressionBuilder
+import org.yakindu.sct.model.sexec.transformation.ng.expressions.TargetEntrySpec
+import org.yakindu.sct.model.sgraph.CompositeElement
+import org.yakindu.sct.model.sgraph.Entry
+import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.RegularState
-import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.State
-import org.yakindu.sct.model.sgraph.FinalState
-import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
-import org.yakindu.sct.model.sgraph.Entry
-import org.yakindu.sct.model.sgraph.CompositeElement
+import org.yakindu.sct.model.sgraph.Statechart
 
 @Singleton class EnterOperation {
 
@@ -35,7 +40,7 @@ import org.yakindu.sct.model.sgraph.CompositeElement
 	
 	@Inject extension SgraphExtensions
 	@Inject extension EntryReactOperation
-	@Inject extension StateOperations
+	@Inject extension EntryActionOperation
 	@Inject extension StatemachineExpressionBuilder
 	
 	
@@ -108,7 +113,7 @@ import org.yakindu.sct.model.sgraph.CompositeElement
 		state.enterOperation(entryName) => [
 			_comment("Default enter sequence for state " + state.name)
 			val block = _block(
-				state.entryAction?._call
+				state.entryActionOperation?._call
 				// TODO if(_addTraceSteps) execState.newTraceStateEntered else null
 			)
 

@@ -10,14 +10,14 @@ import org.yakindu.sct.model.sgraph.Synchronization
 
 class ModelSequencerNaming {
 
-	@Inject protected extension StextNameProvider
+	@Inject extension StextNameProvider
 
 	def statemachinePackageName(Statechart sc) {
 		if (sc.namespace.nullOrEmpty) "default" else sc.namespace
 	}
 
 	def statesEnumerationName(Statechart sc) {
-		sc.name + "States"
+		"State"
 	}
 
 	def enumeratorName(RegularState state) {

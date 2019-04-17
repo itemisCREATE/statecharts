@@ -20,11 +20,8 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 
 class RetargetReferencesInPackage {
 	
-	@Inject
-	protected extension StatemachinePublic
-	
-	@Inject
-	protected extension ExpressionBuilder
+	@Inject extension StatemachinePublic
+	@Inject extension ExpressionBuilder
 	
 	def retargetReferences(Package p) {
 		

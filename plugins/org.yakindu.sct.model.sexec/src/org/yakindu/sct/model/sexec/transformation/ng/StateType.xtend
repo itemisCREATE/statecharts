@@ -15,7 +15,8 @@ import org.yakindu.sct.model.sgraph.Vertex
 @Singleton class StateType {
 	
 	extension TypesFactory tFactory = TypesFactory.eINSTANCE
-	@Inject extension RegionType regionType
+	
+	@Inject extension RegionType
 	@Inject extension ModelSequencerNaming
 	
 	def create createComplexType type(Vertex state) {

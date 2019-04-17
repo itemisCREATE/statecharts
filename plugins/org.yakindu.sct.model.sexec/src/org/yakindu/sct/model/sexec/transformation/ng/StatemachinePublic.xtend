@@ -91,7 +91,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 		name = state.enumeratorName
 	}
 	
-	protected def create createEnumerator noState(Statechart sc) {
+	def create createEnumerator noState(Statechart sc) {
 		it.name = noStateName
 	}
 

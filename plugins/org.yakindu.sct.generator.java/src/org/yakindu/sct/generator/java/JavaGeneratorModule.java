@@ -31,7 +31,6 @@ import org.yakindu.sct.generator.java.types.OldJavaTypeSystemAccess;
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sexec.transformation.BehaviorMapping;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
-import org.yakindu.sct.model.sexec.transformation.SequenceBuilder;
 import org.yakindu.sct.model.sexec.transformation.ng.ModelSequencer;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
@@ -63,7 +62,6 @@ public class JavaGeneratorModule implements IGeneratorModule {
 	public void configureGeneratorRoot(GeneratorEntry entry, Binder binder) {
 		binder.bind(IModelSequencer.class).to(ModelSequencer.class);
 		binder.bind(BehaviorMapping.class).to(org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping.class);
-		binder.bind(SequenceBuilder.class).to(org.yakindu.sct.model.sexec.transformation.ng.SequenceBuilder.class);
 		binder.bind(IExecutionFlowGenerator.class).to(JavaGenerator.class);
 		binder.bind(GeneratorEntry.class).toInstance(entry);
 	}

@@ -13,18 +13,23 @@ import java.util.function.Function
 import javax.inject.Inject
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Visibility
 import org.yakindu.base.types.typesystem.ITypeSystem
-import org.yakindu.sct.model.sexec.ExecutionState
-import org.yakindu.sct.model.sexec.Sequence
-import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.transformation.ArrayType
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
+import org.yakindu.sct.model.sexec.transformation.SequenceBuilder
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
+import org.yakindu.sct.model.sexec.transformation.ng.operations.EnterOperation
+import org.yakindu.sct.model.sexec.transformation.ng.operations.ExitOperation
+import org.yakindu.sct.model.sexec.transformation.ng.operations.ReactOperation
+import org.yakindu.sct.model.sexec.transformation.ng.vectors.FinalStateImpactVector
+import org.yakindu.sct.model.sexec.transformation.ng.vectors.HistoryVector
+import org.yakindu.sct.model.sexec.transformation.ng.vectors.StateVector
 import org.yakindu.sct.model.sgraph.ImportDeclaration
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
@@ -33,22 +38,18 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
-import org.yakindu.base.types.Event
-import org.yakindu.sct.model.sexec.transformation.ng.reactions.ReactOperation
 
 @Singleton
 class StatemachineMethods {
 
 	extension ExpressionsFactory exprFactory = ExpressionsFactory.eINSTANCE
 	
-	@Inject extension ReactOperation rm
+	@Inject extension ReactOperation
 	@Inject extension SexecElementMapping  
-	@Inject extension Sequence2Method
 	@Inject extension TypeBuilder
-	@Inject extension ExpressionBuilder exp
+	@Inject extension ExpressionBuilder
 	@Inject extension StatemachineProperties
 	@Inject extension StatemachinePublic
-	@Inject extension StateVectorExtensions
 	@Inject extension IStatemachine
 	@Inject extension SgraphExtensions
 	@Inject extension ArrayType
@@ -56,8 +57,10 @@ class StatemachineMethods {
 	@Inject extension ITypeSystem ts
 	@Inject extension StatechartExtensions
 	@Inject extension StateVector
+	@Inject extension HistoryVector
+	@Inject extension FinalStateImpactVector
 	@Inject extension EnterOperation
-	@Inject extension ExitSequence
+	@Inject extension ExitOperation
 	@Inject extension StatemachineInterfaceMethods
 	
 	def defineEnterMethod(ComplexType it, Statechart sc) {
@@ -71,7 +74,7 @@ class StatemachineMethods {
 	def defineExitMethod(ComplexType it, Statechart sc) {
 		it.features += createExitMethod => [
 			body = _block(
-				sc.statemachineType.exitSequence._call
+				sc.statemachineType.resolveExitOperation._call
 			)
 		]
 	}
@@ -119,9 +122,8 @@ class StatemachineMethods {
 	}
 	
 	def stateVectorInitialization(Statechart sc) {
-		val ef = sc.create
 		val i = _variable("i", ITypeSystem.INTEGER, 0._int)
-		_for(i, i._ref._smaller(ef.stateVector.size._int), i._ref._inc) => [
+		_for(i, i._ref._smaller(sc.stateVector.size._int), i._ref._inc) => [
 			it.body = _block(
 				stateVectorProperty(sc)._ref._get(i._ref)._assign(statesEnumeration(sc)._ref._fc(noState(sc)))
 			)
@@ -129,9 +131,8 @@ class StatemachineMethods {
 	}
 	
 	def historyStateVectorInitialization(Statechart sc) {
-		val ef = sc.create
 		val i = _variable("i", ITypeSystem.INTEGER, 0._int)
-		_for(i, i._ref._smaller(ef.historyVector.size._int), i._ref._inc) => [
+		_for(i, i._ref._smaller(sc.historyVector.size._int), i._ref._inc) => [
 			it.body = _block(
 				historyVectorProperty(sc)._ref._get(i._ref)._assign(statesEnumeration(sc)._ref._fc(noState(sc)))
 			)
@@ -141,13 +142,13 @@ class StatemachineMethods {
 	def defineIsActiveMethod(ComplexType it, Statechart sc) {
 		it.features += createIsActiveMethod => [
 			body = createBlockExpression => [
-				expressions += exp._return(isActiveCheck(sc))
+				expressions += _return(isActiveCheck(sc))
 			]
 		]
 	}
 	
 	protected def isActiveCheck(Statechart sc) {
-		return (0..<sc.create.stateVector.size)
+		return (0..<sc.stateVector.size)
 			.map[i | notEqualsNoState(sc, i) as Expression]
 			.reduce[p1, p2 | p1._or(p2)]
 	}
@@ -159,14 +160,13 @@ class StatemachineMethods {
 	def defineIsFinalMethod(ComplexType it, Statechart sc) {
 		it.features += createIsFinalMethod => [
 			body = createBlockExpression => [
-				expressions += exp._return(isFinalCheck(sc))
+				expressions += _return(isFinalCheck(sc))
 			]
 		]
 	}
 	
 	protected def isFinalCheck(Statechart sc) {
-		val ef = sc.create
-		val fsv = ef.finalStateImpactVector
+		val fsv = sc.finalStateImpactVector
 		if (fsv.isCompletelyCovered) {
 			(0..<fsv.size)
 				.map[i | fsv.get(i)
@@ -179,10 +179,10 @@ class StatemachineMethods {
 		}
 	}
 	
-	protected def equalsState(Statechart sc, ExecutionState fs, int index) {
+	protected def equalsState(Statechart sc, RegularState fs, int index) {
 		stateVectorProperty(sc)._ref._get(index._int)._equals(
 			if (fs.stateVector.offset == index) {
-				statesEnumeration(sc)._ref._fc((fs.sourceElement as RegularState).enumerator)
+				statesEnumeration(sc)._ref._fc(fs.enumerator)
 			} else {
 				statesEnumeration(sc)._ref._fc(noState(sc))
 			}
@@ -205,13 +205,6 @@ class StatemachineMethods {
 				
 				sc.createClearEventsMethod._call
 			)
-		]
-	}
-	
-	protected def createCallToSequenceMethod(Sequence seq) {
-		createElementReferenceExpression => [
-			operationCall = true
-			reference = createMethodForSequence(seq)
 		]
 	}
 	

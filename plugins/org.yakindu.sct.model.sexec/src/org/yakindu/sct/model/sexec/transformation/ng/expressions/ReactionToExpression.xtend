@@ -1,13 +1,13 @@
-package org.yakindu.sct.model.sexec.transformation.ng.reactions
+package org.yakindu.sct.model.sexec.transformation.ng.expressions
 
 import com.google.inject.Inject
 import org.yakindu.base.expressions.expressions.IfExpression
 import org.yakindu.base.types.Expression
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
-import org.yakindu.sct.model.sexec.transformation.ng.StateVector
-import org.yakindu.sct.model.sexec.transformation.ng.StatemachineExpressionBuilder
+import org.yakindu.sct.model.sexec.transformation.ng.vectors.StateVector
 import org.yakindu.sct.model.sgraph.Choice
+import org.yakindu.sct.model.sgraph.Reaction
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Transition
@@ -16,17 +16,21 @@ import org.yakindu.sct.model.sgraph.Vertex
 /**
  * Most things are copied from BehaviorMapping and rewritten to work on sgraph and expressions instead of sexec.
  * 
- * Basically this implements a mapping from sgraph transitions to corresponding if-then expressions.
+ * Basically this implements a mapping from sgraph transitions or local reactions to corresponding if-then expressions.
  */
-class TransitionMapping {
+class ReactionToExpression {
 	
 	@Inject extension ExpressionBuilder
 	@Inject extension SgraphExtensions
 	@Inject extension StateVector
 	@Inject extension StatemachineExpressionBuilder
 	
-	@Inject extension TriggerMapping
-	@Inject extension EffectMapping
+	@Inject extension TriggerToExpression
+	@Inject extension EffectToExpression
+	
+	def IfExpression mapLocalReaction(Reaction lr) {
+		_if(lr.trigger.toCheckExpression)._then(_block(lr.effect.toEffectExpressions))
+	}
 	
 	def IfExpression mapTransition(Transition t) {
 		mapTransition(t, t.source, t.target)

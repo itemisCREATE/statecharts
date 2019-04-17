@@ -1,4 +1,4 @@
-package org.yakindu.sct.model.sexec.transformation.ng
+package org.yakindu.sct.model.sexec.transformation.ng.operations
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
@@ -7,7 +7,8 @@ import org.yakindu.base.types.Expression
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
-import org.yakindu.sct.model.sexec.transformation.ng.reactions.EffectMapping
+import org.yakindu.sct.model.sexec.transformation.ng.RegionType
+import org.yakindu.sct.model.sexec.transformation.ng.expressions.EffectToExpression
 import org.yakindu.sct.model.sgraph.Exit
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.Statechart
@@ -22,7 +23,7 @@ class ExitReactOperation {
 	@Inject extension RegionType
 	@Inject extension TypeBuilder
 	@Inject extension ExpressionBuilder
-	@Inject extension EffectMapping
+	@Inject extension EffectToExpression
 
 	def declareExitReactOperations(Statechart sc) {
 		sc.eAllContents.filter(Region).forEach [ r |

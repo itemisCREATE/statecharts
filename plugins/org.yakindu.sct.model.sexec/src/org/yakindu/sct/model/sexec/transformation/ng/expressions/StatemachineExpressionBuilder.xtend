@@ -5,15 +5,20 @@
  * Contributors:
  *  axel terfloth - itemis AG
  */
-package org.yakindu.sct.model.sexec.transformation.ng
+package org.yakindu.sct.model.sexec.transformation.ng.expressions
 
 import com.google.inject.Inject
 import org.yakindu.base.types.Expression
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
-import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
+import org.yakindu.sct.model.sexec.transformation.ng.StatemachineMethods
+import org.yakindu.sct.model.sexec.transformation.ng.StatemachineProperties
+import org.yakindu.sct.model.sexec.transformation.ng.StatemachinePublic
+import org.yakindu.sct.model.sexec.transformation.ng.vectors.HistoryVector
+import org.yakindu.sct.model.sexec.transformation.ng.vectors.StateVector
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.LocalReaction
 import org.yakindu.sct.model.stext.stext.ReactionEffect
@@ -22,7 +27,6 @@ import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.TimeUnit
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
-import org.yakindu.sct.model.sgraph.State
 
 /**
  * High level expression builder that covers state machine specific high level 
@@ -35,12 +39,11 @@ import org.yakindu.sct.model.sgraph.State
  */
 class StatemachineExpressionBuilder {
 	
-	@Inject extension SexecElementMapping mapping
-	@Inject extension StatemachinePublic smPublic 
-	@Inject extension StatemachineProperties smPropos 
+	@Inject extension StatemachinePublic 
+	@Inject extension StatemachineProperties 
 	@Inject extension StatemachineMethods 
-	@Inject extension SgraphExtensions sgraph
-	@Inject extension ExpressionBuilder eBuilder
+	@Inject extension SgraphExtensions
+	@Inject extension ExpressionBuilder
 	
 	@Inject extension StateVector
 	@Inject extension HistoryVector
@@ -75,7 +78,7 @@ class StatemachineExpressionBuilder {
 			state.statechart.nextStateIndex._ref._assign(0._int),
 				
 			stateVectorProperty(state.statechart)._ref
-				._get(state.create.stateVector.offset._int)
+				._get(state.stateVector.offset._int)
 				._assign(state.statechart.statesEnumeration._ref._fc(state.statechart.noState))
 		)
 	}

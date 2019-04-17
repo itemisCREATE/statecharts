@@ -1,4 +1,4 @@
-package org.yakindu.sct.model.sexec.transformation.ng
+package org.yakindu.sct.model.sexec.transformation.ng.operations
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
@@ -7,6 +7,12 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
+import org.yakindu.sct.model.sexec.transformation.ng.RegionType
+import org.yakindu.sct.model.sexec.transformation.ng.StateType
+import org.yakindu.sct.model.sexec.transformation.ng.StatemachineProperties
+import org.yakindu.sct.model.sexec.transformation.ng.StatemachinePublic
+import org.yakindu.sct.model.sexec.transformation.ng.vectors.HistoryVector
+import org.yakindu.sct.model.sexec.transformation.ng.vectors.StateVector
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart

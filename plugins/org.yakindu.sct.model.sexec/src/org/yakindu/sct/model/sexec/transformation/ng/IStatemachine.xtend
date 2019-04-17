@@ -26,7 +26,8 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 @Singleton class IStatemachine {
 
 	extension TypesFactory factory = TypesFactory.eINSTANCE
- 	@Inject extension TypeBuilder tBuilder
+	
+ 	@Inject extension TypeBuilder
  	@Inject extension ITypeSystem tSystem
  	
  	public static val String NAME = "IStatemachine"

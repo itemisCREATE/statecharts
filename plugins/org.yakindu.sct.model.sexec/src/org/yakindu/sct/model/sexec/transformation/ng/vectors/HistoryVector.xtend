@@ -1,4 +1,4 @@
-package org.yakindu.sct.model.sexec.transformation.ng
+package org.yakindu.sct.model.sexec.transformation.ng.vectors
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
@@ -11,7 +11,7 @@ import org.yakindu.sct.model.sgraph.Statechart
 class HistoryVector {
 	
 	@Inject extension SexecExtensions sexec
-	@Inject extension SgraphExtensions sgraph
+	@Inject extension SgraphExtensions
 	
 	def create sexec.factory.createStateVector historyVector(Statechart sc) {
 		var offset = -1

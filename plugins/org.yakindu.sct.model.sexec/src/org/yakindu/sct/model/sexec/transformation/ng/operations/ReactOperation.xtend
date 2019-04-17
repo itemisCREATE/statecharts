@@ -8,7 +8,7 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.model.sexec.transformation.ng.reactions
+package org.yakindu.sct.model.sexec.transformation.ng.operations
 
 import com.google.inject.Inject
 import org.yakindu.base.expressions.expressions.BlockExpression
@@ -20,10 +20,11 @@ import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
-import org.yakindu.sct.model.sexec.transformation.ng.ImpactVector
 import org.yakindu.sct.model.sexec.transformation.ng.StateType
-import org.yakindu.sct.model.sexec.transformation.ng.StateVector
 import org.yakindu.sct.model.sexec.transformation.ng.StatemachinePublic
+import org.yakindu.sct.model.sexec.transformation.ng.expressions.ReactionToExpression
+import org.yakindu.sct.model.sexec.transformation.ng.vectors.ImpactVector
+import org.yakindu.sct.model.sexec.transformation.ng.vectors.StateVector
 import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.sgraph.Pseudostate
 import org.yakindu.sct.model.sgraph.ReactiveElement
@@ -57,8 +58,7 @@ class ReactOperation {
 	@Inject extension ImpactVector
 	@Inject extension StateVector
 	
-	@Inject extension TransitionMapping
-	@Inject extension LocalReactionMapping
+	@Inject extension ReactionToExpression
 	
 	/**
 	 * Declares the react methods for all ExecutionNode objects.

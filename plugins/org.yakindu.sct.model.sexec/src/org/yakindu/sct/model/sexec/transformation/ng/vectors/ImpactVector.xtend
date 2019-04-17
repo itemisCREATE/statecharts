@@ -1,4 +1,4 @@
-package org.yakindu.sct.model.sexec.transformation.ng
+package org.yakindu.sct.model.sexec.transformation.ng.vectors
 
 import com.google.inject.Inject
 import org.yakindu.base.base.NamedElement

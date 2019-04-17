@@ -17,9 +17,10 @@ import org.yakindu.sct.model.sgraph.Region
 @Singleton class RegionType {
 
 	extension TypesFactory tFactory = TypesFactory.eINSTANCE
-	@Inject extension StatemachinePublic smPublic
-	@Inject extension SgraphExtensions sgraph
-	@Inject extension StateType stateType
+	
+	@Inject extension StatemachinePublic
+	@Inject extension SgraphExtensions
+	@Inject extension StateType
 
 	def create createComplexType type(Region region) {
 		it => [

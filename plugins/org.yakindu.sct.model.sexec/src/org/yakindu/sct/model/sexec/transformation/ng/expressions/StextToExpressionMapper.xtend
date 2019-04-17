@@ -1,19 +1,15 @@
-package org.yakindu.sct.model.sexec.transformation.ng
+package org.yakindu.sct.model.sexec.transformation.ng.expressions
 
 import com.google.inject.Inject
-import org.yakindu.base.types.Expression
-import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
-import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.yakindu.base.types.Expression
+import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 
 class StextToExpressionMapper {
 	
-	@Inject protected extension StatemachineMethods
-	@Inject protected extension StatemachinePublic
-	@Inject protected extension ExpressionBuilder
-	@Inject protected extension StatemachineExpressionBuilder
+	@Inject extension StatemachineExpressionBuilder
 	
 	def dispatch replaceStextExpressions(Expression exp, Statechart sc) { 
 		exp.eAllContents.forEach[doReplace(sc)]
