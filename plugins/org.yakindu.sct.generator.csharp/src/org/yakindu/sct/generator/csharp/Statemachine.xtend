@@ -30,6 +30,7 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
+import org.yakindu.sct.generator.csharp.eventdriven.EventDrivenPredicate
 
 class Statemachine {
 	
@@ -40,6 +41,7 @@ class Statemachine {
 	@Inject protected extension ITypeSystem
 	@Inject protected extension FlowCode
 	@Inject protected extension StateVectorExtensions
+	@Inject protected extension EventDrivenPredicate
 	
 	def generateStatemachine(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		var filename = flow.statemachineClassName.csharp
@@ -78,12 +80,22 @@ class Statemachine {
 	
 	def protected createImports(ExecutionFlow flow, GeneratorEntry entry) '''
 		using System;
+		«IF eventDriven»
+		using System.Collections;
+		«ENDIF»
 		«IF entry.createInterfaceObserver && flow.hasOutgoingEvents»
 		using System.Collections.Generic;
+		«ENDIF»
+		«IF eventDriven»
+		using System.Runtime.CompilerServices;
 		«ENDIF»
 	'''
 	
 	def protected createFieldDeclarations(ExecutionFlow flow, GeneratorEntry entry) '''
+		«IF needsInternalEventQueue(flow)»
+		private Queue «internalEvents»;
+		«ENDIF»	
+		
 		«FOR event : flow.internalScopeEvents»
 		private bool «event.symbol»;
 
@@ -158,6 +170,8 @@ class Statemachine {
 			for (int i = 0; i < «flow.historyVector.size»; i++) {
 				historyVector[i] = State.NullState;
 			}
+			«ENDIF»
+			«IF needsInternalEventQueue(flow)»
 			«ENDIF»
 			clearEvents();
 			clearOutEvents();
