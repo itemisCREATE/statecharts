@@ -8,7 +8,9 @@ import org.yakindu.base.types.Visibility
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.TypeBuilder
+import com.google.inject.Singleton
 
+@Singleton
 class StatemachineInterfaceMethods {
 
 	@Inject extension TypeBuilder
