@@ -185,5 +185,7 @@ class Naming implements CSharpKeywords {
 	def functionName(Step it) { shortName }
 	
 	def functionName(Method it) { shortName }
+	
+	def internalEvents() {"internalEvents"}
 
 }
