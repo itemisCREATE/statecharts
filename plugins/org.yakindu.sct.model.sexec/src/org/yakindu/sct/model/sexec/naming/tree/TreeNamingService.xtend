@@ -51,19 +51,17 @@ class TreeNamingService implements INamingService {
 	@Inject extension ElementNameProvider
 
 	@Inject protected StringTreeNodeDepthComparator stringTreeNodeDepthComparator
-	
+
 	@Inject protected IStringShortener shortener
 
 	// from public class org.yakindu.sct.generator.c.features.CDefaultFeatureValueProvider extends		
 	protected static final String VALID_IDENTIFIER_REGEX = "[_a-zA-Z][_a-zA-Z0-9]*";
 
-
-
 	/*
 	 * Holds the name of each element whose name was requested.
 	 */
 	protected Map<NamedElement, String> map
-	
+
 	// if the naming service is initialized with a flow, activeStatechart is null, and vice versa.
 	protected ExecutionFlow activeFlow;
 	protected Statechart activeStatechart;
@@ -77,12 +75,12 @@ class TreeNamingService implements INamingService {
 		this.maxLength = 0
 		this.separator = '_'
 	}
-	
+
 	def protected void reset() {
 		map = newHashMap
 		activeFlow = null
 		activeStatechart = null
-		
+
 		shortener.reset()
 	}
 
@@ -90,7 +88,7 @@ class TreeNamingService implements INamingService {
 		if (activeStatechart != statechart) {
 			reset()
 			activeStatechart = statechart;
-			
+
 			collectNames(statechart)
 		}
 	}
@@ -140,8 +138,8 @@ class TreeNamingService implements INamingService {
 		for (func : flow.allFunctions) {
 			addElement(func, func.prefix, func.suffix);
 		}
-		
-		flow.reactMethods.forEach[ m | m.addElement(m.prefix, m.suffix)]
+
+		flow.reactMethods.forEach[m|m.addElement(m.prefix, m.suffix)]
 
 		// Create short name for time events of statechart
 		if (flow.sourceElement instanceof Statechart) {
@@ -172,14 +170,21 @@ class TreeNamingService implements INamingService {
 	def protected void addElement(NamedElement elem, List<String> prefix, List<String> suffix) {
 		addElement(elem, prefix, suffix, elem)
 	}
-	
+
 	def protected void addElement(NamedElement elem, List<String> prefix, List<String> suffix, Object token) {
-		val name = new ArrayList<String>(elem.elementNameSegments());
 		val segments = new ArrayList<String>();
 		segments.addAll(prefix);
-		segments.addAll(name);
+		segments.addAll(elem.elementNameSegments());
 		segments.addAll(suffix);
-		shortener.addString(addSeparator(segments), token)
+		try {
+			shortener.addString(addSeparator(segments), token)
+		} catch (IllegalArgumentException e) {
+			if (elem.eContainer instanceof NamedElement) {
+				addElement(elem.eContainer as NamedElement, newArrayList, segments, token)
+			} else {
+				throw e;
+			}
+		}
 	}
 
 	def protected asIndexPosition(ExecutionScope it) {
@@ -219,7 +224,7 @@ class TreeNamingService implements INamingService {
 		}
 
 		var name = shortener.getString(element)
-		
+
 		if (name === null) {
 			addElement(element, new ArrayList<String>(), new ArrayList<String>());
 			name = shortener.getString(element)
@@ -303,7 +308,6 @@ class TreeNamingService implements INamingService {
 		return new ArrayList<String>();
 	}
 
-
 	def protected List<String> suffix(ExecutionState it) {
 		return new ArrayList<String>();
 	}
@@ -317,7 +321,6 @@ class TreeNamingService implements INamingService {
 	def protected List<String> suffix(Method it) {
 		return new ArrayList<String>();
 	}
-
 
 	def protected List<String> suffix(TimeEventSpec it, NamedElement element) {
 		var l = new ArrayList<String>();
@@ -345,35 +348,27 @@ class TreeNamingService implements INamingService {
 	def protected List<String> suffix(Vertex it) {
 		return new ArrayList<String>();
 	}
-	
+
 	def protected List<String> addSeparator(List<String> segments) {
 		val List<String> result = newArrayList
-		for(var i = 0; i < segments.size(); i++) {
-			result.add(segments.get(i)) {
-				if(i < segments.size() - 1) {
+		for (var i = 0; i < segments.size(); i++) {
+			result.add(segments.get(i))
+			{
+				if (i < segments.size() - 1) {
 					result.add(separator.toString)
 				}
 			}
-			
+
 		}
 		result
 	}
-	
+
 	def protected List<String> toFirstUpper(List<String> segments) {
-		val result = newArrayList
-		if(segments.nullOrEmpty) {
-			return result
-		}
-		else {
-			for(var i = 0; i < segments.size(); i++) {
-				if(i == 0) {
-					result.add(segments.get(i).toFirstUpper)
-				} else {
-					result.add(segments.get(i))
-				}
-			}
+		if (segments.nullOrEmpty) {
+			return newArrayList
 		}
 		
-		return result
+		segments.set(0, segments.head.toFirstUpper)
+		return segments
 	}
 }
