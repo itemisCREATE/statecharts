@@ -5,6 +5,19 @@ h1(#release_notes). Release Notes
 
 A list of new and noteworthy features as well as bugs we have tackled down in the particular releases.
 
+h2(#release_notes_3.5.4). YAKINDU Statechart Tools  3.5.4 (May 15, 2019)
+
+This is a bugfix release, containing the following:
+
+* Fixed C code generation when _@CShortIdentifier_ setting is used. In version 3.5.3, this resulted in generation of duplicate react methods.
+* Fixed usage of enumerations within namespaces in C/C++ domain. Enumeration types can now be accessed by qualifiying them with their namespace, and enumerators can be assigned to corresponding variables.
+* Fixed a bug in headless code generation for C/C++ domain statecharts causing header files not being found in certain scenarios.
+* Fixed a bug in Python code generator causing generation errors when variables are used as arguments in operation calls.
+
+h3(#release_notes_3.5.4_c_sharp). Event-driven execution support for C# code generator
+
+The C# code generator now also supports statecharts with event-driven execution semantics. The generated code now contains corresponding run-cycle calls when events are triggered as well as event queues to store incoming events.
+
 h2(#release_notes_3.5.3). YAKINDU Statechart Tools  3.5.3 (Mar 29, 2019)
 
 This release adds in&#45;event queue support for C and Java code generators as well as some usability improvements.
