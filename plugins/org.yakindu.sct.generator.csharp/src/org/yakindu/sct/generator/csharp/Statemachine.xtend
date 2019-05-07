@@ -74,19 +74,21 @@ class Statemachine {
 				«flow.defaultInterfaceFunctions(entry)»
 				«flow.functionImplementations»
 				«flow.runCycleFunction»
+				
+				«flow.internalEventClass»
 			}
 		}
 	'''
 	
 	def protected createImports(ExecutionFlow flow, GeneratorEntry entry) '''
 		using System;
-		«IF eventDriven»
+		«IF flow.needsQueues»
 		using System.Collections;
 		«ENDIF»
 		«IF entry.createInterfaceObserver && flow.hasOutgoingEvents»
 		using System.Collections.Generic;
 		«ENDIF»
-		«IF eventDriven»
+		«IF flow.needsQueues»
 		using System.Runtime.CompilerServices;
 		«ENDIF»
 	'''
@@ -162,9 +164,14 @@ class Statemachine {
 				throw new System.InvalidOperationException("timer not set.");
 			}
 			«ENDIF»
+			
 			for (int i = 0; i < «flow.stateVector.size»; i++) {
 				stateVector[i] = State.NullState;
 			}
+			«IF flow.needsInternalEventQueue»
+			«internalEvents» = new Queue();
+			«internalEvents».Clear();
+			«ENDIF»
 			
 			«IF flow.hasHistory»
 			for (int i = 0; i < «flow.historyVector.size»; i++) {
@@ -470,19 +477,46 @@ class Statemachine {
 		«FOR event : flow.internalScopeEvents»
 			«IF event.type !== null && !isVoid(event.type)»
 				private void raise«event.name.asEscapedName»(«event.typeSpecifier.targetLanguageName» value) {
+					«IF isEventDriven»
+					StateMachineInternalEventWithValue<«event.typeSpecifier.targetLanguageName»> smie 
+						= new StateMachineInternalEventWithValue<«event.typeSpecifier.targetLanguageName»>(raiseInternal«event.name.asEscapedName», singleCycle, set«event.name.asEscapedName»Value, value);
+					«internalEvents».Enqueue(smie);
+					«ELSE»
 					«event.valueIdentifier» = value;
 					«event.symbol» = true;
+					«ENDIF»
 				}
 				
 				private «event.typeSpecifier.targetLanguageName» get«event.name.asEscapedName»Value() {
 					«event.getIllegalAccessValidation()»
 					return «event.valueIdentifier»;
 				}
-			«ELSE»
-			
-				private void raise«event.name.asEscapedName»() {
+				«IF isEventDriven»
+				
+				private void raiseInternal«event.name.asEscapedName»() {
 					«event.symbol» = true;
 				}
+				
+				private void set«event.name.asEscapedName»Value(«event.typeSpecifier.targetLanguageName» value) {
+					«event.valueIdentifier» = value;
+				}
+				«ENDIF»
+			«ELSE»
+				
+				private void raise«event.name.asEscapedName»() {
+					«IF isEventDriven»
+					StateMachineInternalEvent smie = new StateMachineInternalEvent(raiseInternal«event.name.asEscapedName», singleCycle);
+					«internalEvents».Enqueue(smie);
+					«ELSE»
+					«event.symbol» = true;
+					«ENDIF»
+				}
+				«IF isEventDriven»
+				
+				private void raiseInternal«event.name.asEscapedName»() {
+					«event.symbol» = true;
+				}
+				«ENDIF»
 			«ENDIF»
 		«ENDFOR»
 		«FOR internal : flow.internalScopes»
@@ -539,30 +573,79 @@ class Statemachine {
 		«ENDIF»
 	'''
 	
-	def protected runCycleFunction(ExecutionFlow flow) '''
-		public void runCycle() {
-			
-			clearOutEvents();
-			
-			for (nextStateIndex = 0; nextStateIndex < stateVector.Length; nextStateIndex++) {
-				
-				switch (stateVector[nextStateIndex]) {
-					«FOR state : flow.states.filter[isLeaf]»
-					«IF state.reactMethod !== null» 
-						case State.«state.stateName.asEscapedIdentifier»:
-							«state.reactMethod.functionName.asEscapedIdentifier»(true);
-							break;
-					«ENDIF»
-				«ENDFOR»
-					default:
-						// «getNullStateName()»
-						break;
+	def protected runCycleFunction(ExecutionFlow flow) {
+		if(isEventDriven) {
+			'''
+			public void runCycle()
+			{
+				clearOutEvents();
+				StateMachineInternalEvent smie;
+				singleCycle();
+				clearEvents();
+
+				while (internalEvents.Count > 0)
+				{
+					smie = (StateMachineInternalEvent)internalEvents.Dequeue();
+					smie.setFlag();
+					smie.runCycle();
+					clearEvents();
+					if(internalEvents.Count>0)
+					{
+						smie = (StateMachineInternalEvent)internalEvents.Dequeue();
+					}
+					else
+					{
+						smie = null;
+					}
 				}
+				clearEvents();
 			}
 			
-			clearEvents();
+			public void singleCycle() {
+				for (nextStateIndex = 0; nextStateIndex < stateVector.Length; nextStateIndex++) {
+					switch (stateVector[nextStateIndex]) {
+						case State.alarm_AllClear:
+							alarm_AllClear_react(true);
+							break;
+						case State.alarm_Alarm:
+							alarm_Alarm_react(true);
+							break;
+						case State.alarm_Warning:
+							alarm_Warning_react(true);
+							break;
+						default:
+							// NullState
+							break;
+					}
+				}
+			'''
+		} else {
+			'''
+				public void runCycle() {
+					
+					clearOutEvents();
+					
+					for (nextStateIndex = 0; nextStateIndex < stateVector.Length; nextStateIndex++) {
+						
+						switch (stateVector[nextStateIndex]) {
+							«FOR state : flow.states.filter[isLeaf]»
+							«IF state.reactMethod !== null» 
+								case State.«state.stateName.asEscapedIdentifier»:
+									«state.reactMethod.functionName.asEscapedIdentifier»(true);
+									break;
+							«ENDIF»
+						«ENDFOR»
+							default:
+								// «getNullStateName()»
+								break;
+						}
+					}
+					
+					clearEvents();
+				}
+			'''
 		}
-	'''
+	}
 	
 	def protected enterFunction(ExecutionFlow it) '''
 		public void enter() {
@@ -627,5 +710,49 @@ class Statemachine {
 			«code.toString.trim»
 		}
 		
+	'''
+	
+	def internalEventClass(ExecutionFlow flow) '''
+		«IF flow.needsEventClasses»
+		public class StateMachineInternalEvent
+		{
+		    public delegate void StateMachineRunCycle();
+		    public delegate void SetState();
+		
+		    public SetState flag;
+		    public StateMachineRunCycle runCycle;
+		    
+		    public StateMachineInternalEvent(SetState flag, StateMachineRunCycle run)
+		    {
+		        this.flag = flag;
+		        runCycle = run;
+		    }
+		    
+		    public virtual void setFlag() {
+		    	this.flag();
+		    }
+		}
+		«IF flow.hasLocalEventsWithValue»
+		
+		public class StateMachineInternalEventWithValue<T> : StateMachineInternalEvent
+		{
+			public delegate void SetValue(T value);
+			
+			T value;
+			SetValue setValue;
+			
+			public StateMachineInternalEventWithValue(SetState flag, StateMachineRunCycle run, SetValue setValue, T value) : base(flag, run)
+			{
+				this.setValue = setValue;
+				this.value = value;
+			}
+			
+			public virtual void setFlag() {
+				this.setValue(this.value);
+				this.flag();
+			}
+		}
+		«ENDIF»
+		«ENDIF»
 	'''
 }
