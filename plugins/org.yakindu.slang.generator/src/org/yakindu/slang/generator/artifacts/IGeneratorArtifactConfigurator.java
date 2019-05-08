@@ -16,8 +16,9 @@ import org.yakindu.base.types.Package;
 import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess;
 
 /**
- * This class transforms a {@link org.yakindu.base.types.Package} into a
- * {@link GeneratorArtifactConfiguration}.
+ * This class transforms a {@link Collection&lt;org.yakindu.base.types.Package&gt;} into a
+ * {@link GeneratorArtifactConfiguration}. This configuration can then be used in the generator to obtain a number of
+ * {@link GeneratorArtifact} instances.
  *
  */
 public interface IGeneratorArtifactConfigurator {

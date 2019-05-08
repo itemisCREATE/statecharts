@@ -18,6 +18,10 @@ import org.eclipse.emf.transaction.util.TransactionUtil
 import org.yakindu.base.types.Package
 
 /**
+ * The ModificationExecutor holds a set of {@link IModification} instances, obtained via injection
+ * (see {@link org.yakindu.slang.SlangGeneratorModule}). It can be used to execute a number of 
+ * IModification instances on a {@link Collection&lt;{@link org.yakindu.base.types.Package}&gt;.
+ * The collection can explicitly be changed during this process.
  * 
  * @author andreas muelder - Initial contribution and API
  * 
@@ -27,7 +31,10 @@ class ModificationExecutor implements IModification {
 	@Inject Set<IModification> modifications;
 
 	def protected Collection<Package> modifyInternal(Collection<Package> packages) {
-		modifications.forEach[mod | mod.modify(packages)]
+		var result = packages
+		for(modification : modifications) {
+			result = modification.modify(result)
+		}
 		packages
 	}
 

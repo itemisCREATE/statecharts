@@ -21,7 +21,8 @@ import org.yakindu.base.types.Declaration
 import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess
 
 /**
- * The main object a generator can work on. Holds the compilation units the generator should produce.
+ * The container of a {@link Set&lt;{@link GeneratorArtifact}&lt;?&gt;&gt;. Also offers certain helper methods to 
+ * obtain relative paths, URIs and so on. 
  * 
  */
 class GeneratorArtifactConfiguration {

@@ -18,11 +18,17 @@ import org.yakindu.slang.generator.artifacts.GeneratorArtifact
 import org.yakindu.slang.generator.artifacts.IGeneratorArtifactConfigurator
 import org.yakindu.slang.generator.modification.ModificationExecutor
 
+/**
+ * The base implementation of {@link ISlangGenerator}.
+ * An instance of this class should be obtained via injection (see {@link SlangGeneratorModule}), because it needs a
+ * {@link ModificationExecutor} and a {@link IGeneratorArtifactConfigurator} to adapt the model contents
+ * and to decide where the actual files should go.
+ */
 abstract class AbstractSlangGenerator implements ISlangGenerator {
 	@Inject protected ModificationExecutor modificationExecutor
 	@Inject protected IGeneratorArtifactConfigurator configurator
 	
-	override generate(Collection<Package> packages, ISCTFileSystemAccess fileSystemAccess) {
+	override final generate(Collection<Package> packages, ISCTFileSystemAccess fileSystemAccess) {
 		modificationExecutor.modify(packages)
 		val artifactConfiguration = configurator.configure(packages, fileSystemAccess)
 		artifactConfiguration.generatorArtifacts.filter[isNotEmpty].forEach[

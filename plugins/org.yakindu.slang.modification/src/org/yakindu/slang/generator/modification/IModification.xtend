@@ -14,6 +14,8 @@ import java.util.Collection
 import org.yakindu.base.types.Package
 
 /** 
+ * Model-to-Model transformation of a {@link Collection&lt;{@link org.yakindu.base.types.Package}&gt;.
+ * 
  * @author andreas muelder - Initial contribution and API
  */
 interface IModification {
