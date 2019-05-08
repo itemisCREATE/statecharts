@@ -8,8 +8,8 @@
 package org.yakindu.sct.model.sexec.transformation.ng.expressions
 
 import com.google.inject.Inject
+import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.types.Expression
-import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.ng.StatemachineMethods
 import org.yakindu.sct.model.sexec.transformation.ng.StatemachineProperties

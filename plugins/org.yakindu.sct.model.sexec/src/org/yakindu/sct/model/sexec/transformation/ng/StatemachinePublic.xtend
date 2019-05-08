@@ -15,9 +15,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Property
+import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.Visibility
-import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope

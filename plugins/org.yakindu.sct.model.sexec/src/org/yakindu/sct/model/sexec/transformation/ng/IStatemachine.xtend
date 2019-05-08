@@ -11,8 +11,8 @@ package org.yakindu.sct.model.sexec.transformation.ng
 
 import com.google.inject.Inject
 import javax.inject.Singleton
+import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.TypesFactory
-import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 import org.yakindu.base.types.typesystem.ITypeSystem
 
 /**

@@ -4,9 +4,9 @@ import com.google.inject.Inject
 import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.yakindu.sct.model.sgraph.Synchronization
 
 class ModelSequencerNaming {
 

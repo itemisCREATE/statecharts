@@ -10,12 +10,12 @@ package org.yakindu.sct.model.sexec.transformation.ng.operations
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.emf.ecore.EObject
+import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Operation
-import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
+import org.yakindu.base.types.TypeBuilder
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
-import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 import org.yakindu.sct.model.sexec.transformation.ng.RegionType
 import org.yakindu.sct.model.sexec.transformation.ng.StateType
 import org.yakindu.sct.model.sexec.transformation.ng.StatemachinePublic

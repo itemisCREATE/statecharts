@@ -5,13 +5,13 @@ import com.google.inject.Singleton
 import java.util.ArrayList
 import java.util.List
 import org.yakindu.base.expressions.expressions.SwitchExpression
+import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
-import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
+import org.yakindu.base.types.TypeBuilder
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
-import org.yakindu.sct.model.sexec.transformation.TypeBuilder
 import org.yakindu.sct.model.sexec.transformation.ng.RegionType
 import org.yakindu.sct.model.sexec.transformation.ng.StateType
 import org.yakindu.sct.model.sexec.transformation.ng.StatemachineProperties

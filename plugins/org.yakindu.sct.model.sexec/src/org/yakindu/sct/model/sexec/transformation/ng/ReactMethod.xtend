@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import org.yakindu.base.expressions.expressions.RelationalOperator
+import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Parameter
@@ -32,7 +33,6 @@ import org.yakindu.sct.model.sexec.Method
 import org.yakindu.sct.model.sexec.Return
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.Step
-import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions

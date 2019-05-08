@@ -7,15 +7,15 @@
  */
 package org.yakindu.sct.model.sexec.transformation.ng
 
-import org.eclipse.emf.ecore.EObject
-import org.yakindu.base.expressions.expressions.ElementReferenceExpression
-import org.yakindu.base.types.Package
 import com.google.inject.Inject
-import org.yakindu.base.types.Declaration
-import org.yakindu.base.expressions.expressions.FeatureCall
-import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.util.ExpressionBuilder
+import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Package
+import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 
 class RetargetReferencesInPackage {

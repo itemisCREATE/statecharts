@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
+import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.types.Expression
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.Execution

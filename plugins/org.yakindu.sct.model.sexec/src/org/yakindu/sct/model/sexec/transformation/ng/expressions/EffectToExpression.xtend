@@ -5,8 +5,8 @@ import java.util.ArrayList
 import java.util.List
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.base.NamedElement
+import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.types.Expression
-import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sexec.transformation.ng.BehaviorMapping
