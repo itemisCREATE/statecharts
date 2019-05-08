@@ -578,6 +578,8 @@
 		<module>../org.yakindu.base.repository</module>
 		<module>../org.yakindu.sct.repository</module>
 		<!-- Plugins -->
+		<module>../../plugins/org.yakindu.slang.generator</module>
+		<module>../../plugins/org.yakindu.slang.modification</module>
 		<module>../../plugins/org.yakindu.base.xtext.utils.gmf</module>
 		<module>../../plugins/org.yakindu.base.xtext.utils.jface</module>
 		<module>../../plugins/org.yakindu.base.types</module>
