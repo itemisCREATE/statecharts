@@ -16,7 +16,6 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 
-import org.yakindu.base.types.TypesFactory;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sexec.Statement;
 
@@ -266,27 +265,17 @@ public class StatementItemProvider extends StepItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.STATEMENT__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.STATEMENT__EXPRESSION,
 				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.STATEMENT__EXPRESSION,
 				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.STATEMENT__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createForExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.STATEMENT__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.STATEMENT__EXPRESSION,
-				 TypesFactory.eINSTANCE.createProperty()));
 	}
 
 }

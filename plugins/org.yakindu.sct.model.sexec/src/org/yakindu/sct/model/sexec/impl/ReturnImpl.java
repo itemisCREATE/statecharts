@@ -58,7 +58,6 @@ public class ReturnImpl extends StepImpl implements Return {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Expression getValue() {
 		if (value != null && value.eIsProxy()) {
 			InternalEObject oldValue = (InternalEObject)value;
@@ -85,7 +84,6 @@ public class ReturnImpl extends StepImpl implements Return {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setValue(Expression newValue) {
 		Expression oldValue = value;
 		value = newValue;

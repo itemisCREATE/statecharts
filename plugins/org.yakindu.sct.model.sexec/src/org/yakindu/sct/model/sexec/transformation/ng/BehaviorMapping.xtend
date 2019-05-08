@@ -1,14 +1,6 @@
-/**
- * Copyright (c) 2018 itemis AG - All rights Reserved
- * Unauthorized copying of this file, via any medium is strictly prohibited
- * 
- * Contributors:
- *  axel terfloth - itemis AG
- */
 package org.yakindu.sct.model.sexec.transformation.ng
 
 import com.google.inject.Inject
-import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.Step
@@ -17,13 +9,8 @@ import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgraph.Region
+import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 
-/**
- * Implements the lcaDoSequence for ReactMethods.
- *  
- * @author axel terfloth
- * 
- */
 class BehaviorMapping extends org.yakindu.sct.model.sexec.transformation.BehaviorMapping {
 
 	@Inject extension SexecElementMapping mapping

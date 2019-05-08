@@ -66,7 +66,6 @@ public class UnscheduleTimeEventImpl extends StepImpl implements UnscheduleTimeE
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TimeEvent getTimeEvent() {
 		if (timeEvent != null && timeEvent.eIsProxy()) {
 			InternalEObject oldTimeEvent = (InternalEObject)timeEvent;
@@ -93,7 +92,6 @@ public class UnscheduleTimeEventImpl extends StepImpl implements UnscheduleTimeE
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setTimeEvent(TimeEvent newTimeEvent) {
 		TimeEvent oldTimeEvent = timeEvent;
 		timeEvent = newTimeEvent;

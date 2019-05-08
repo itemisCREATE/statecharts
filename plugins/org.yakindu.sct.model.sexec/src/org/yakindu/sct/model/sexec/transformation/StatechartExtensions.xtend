@@ -12,9 +12,7 @@ package org.yakindu.sct.model.sexec.transformation
 
 import java.util.ArrayList
 import java.util.List
-import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.EcoreUtil2
-import org.yakindu.base.base.NamedElement
 import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.sgraph.Entry
 import org.yakindu.sct.model.sgraph.Exit
@@ -36,7 +34,6 @@ import org.yakindu.sct.model.stext.stext.ReactionEffect
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import java.util.Set
 
 class StatechartExtensions {
 	
@@ -72,7 +69,7 @@ class StatechartExtensions {
 	def reaction(ReactionEffect tr) { tr.eContainer as Reaction }
 
 
-	def Statechart statechart(RegularState state) { state.parentRegion.statechart }
+	def Statechart statechart(State state) { state.parentRegion.statechart }
 	
 	def Statechart statechart(Region region) { 
 		if (region.eContainer instanceof Statechart) 
@@ -153,9 +150,7 @@ class StatechartExtensions {
 		return allStates.toList
 	}
 	
-	def List<State> allStates(Statechart sc) {
-		sc.eAllContents.filter(State).toList
-	}
+	
 	
 	def List<Region> allRegions(Statechart sc) {
 		var content = EcoreUtil2::eAllContentsAsList(sc)
@@ -195,79 +190,7 @@ class StatechartExtensions {
 			.filter(r | ((r as LocalReaction).trigger as ReactionTrigger).triggers.exists( t | t instanceof ExitEvent))
 			.map(lr | lr as LocalReaction)
 			.toList	
-	}
-	
-	//=================================================================
-	// extensions originally coming from sexec model
-	
-	def dispatch List<RegularState> subStates(RegularState it) {
-		subScopes.fold(new ArrayList<RegularState>, 
-			[a, s | 
-				a.addAll(s.subStates)
-				a
-			]
-		)
 	} 
-	
-	def dispatch List<RegularState> subStates(Region it) {
-		subScopes.fold(new ArrayList<RegularState>, 
-			[a, s | 
-				a.add(s as RegularState)
-				a.addAll(s.subStates)
-				a
-			]
-		)
-	}
-	
-	def dispatch superScope(EObject state) {}
-	
-	def dispatch superScope(RegularState state) {
-		state.parentRegion
-	}
-	
-	def dispatch superScope(Region region) {
-		region.composite as NamedElement
-	}
-	
-	def dispatch subScopes(Statechart sc) {
-		sc.regions
-	}
-	
-	def dispatch subScopes(State state) {
-		state.regions
-	}
-	
-	def dispatch subScopes(Region region) {
-		region.vertices.filter(RegularState)
-	}
-	
-	def parentScopes(EObject scope) {
-		val parents = <EObject>newArrayList
-		var s = scope
-		while(s !== null) {
-			parents.add(s)
-			s=s.superScope
-		}
-		return parents
-	}
-	
-	def dispatch Set<NamedElement> allSubScopes(Region r) {
-		val nodes = <NamedElement>newHashSet
-		nodes += r.vertices
-		for (s : r.subScopes) {
-			nodes.addAll(s.allSubScopes)
-		}
-		nodes
-	}
-	
-	def dispatch Set<NamedElement> allSubScopes(State r) {
-		val nodes = <NamedElement>newHashSet
-		nodes.add(r)
-		for (s : r.subScopes) {
-			nodes.addAll(s.allSubScopes)
-		}
-		nodes
-	}
 	
 	
 	//=================================================================

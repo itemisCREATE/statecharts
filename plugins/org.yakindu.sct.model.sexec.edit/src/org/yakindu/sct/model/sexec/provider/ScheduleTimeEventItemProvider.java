@@ -21,7 +21,6 @@ import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
-import org.yakindu.base.types.TypesFactory;
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.SexecPackage;
 
@@ -294,27 +293,17 @@ public class ScheduleTimeEventItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
 				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
 				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
-				 ExpressionsFactory.eINSTANCE.createForExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
-				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
-				 TypesFactory.eINSTANCE.createProperty()));
 	}
 
 }

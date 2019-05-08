@@ -37,7 +37,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="exitAction" eType="#//Step"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExecutionScope" eSuperTypes="#//MappedElement ../../org.yakindu.base.types/model/base.ecore#//NamedElement ../../org.yakindu.base.types/model/types.ecore#//ComplexType">
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionScope" eSuperTypes="#//MappedElement ../../org.yakindu.base.types/model/base.ecore#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="stateVector" eType="#//StateVector"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subScopes" upperBound="-1"

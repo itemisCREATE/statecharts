@@ -11,22 +11,23 @@
 
 package org.yakindu.sct.model.sexec.naming
 
+import java.util.ArrayList
+import java.util.List
 import javax.inject.Inject
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.naming.QualifiedName
 import org.yakindu.base.base.NamedElement
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionNode
 import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Method
+import org.yakindu.sct.model.sexec.Reaction
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.naming.StextNameProvider
-import org.eclipse.xtext.naming.QualifiedName
-import org.yakindu.sct.model.sexec.Reaction
-import java.util.List
-import java.util.ArrayList
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 
 class ElementNameProvider {
 	@Inject StextNameProvider provider
@@ -88,6 +89,10 @@ class ElementNameProvider {
 
 	def protected dispatch QualifiedName elementName(Vertex it) {
 		return provider.getFullyQualifiedName(it).skipFirst(1)
+	}
+	
+	def protected dispatch QualifiedName elementName(Method it) {
+		return provider.getFullyQualifiedName(it)
 	}
 
 }

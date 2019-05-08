@@ -79,7 +79,6 @@ public class ScheduleTimeEventImpl extends StepImpl implements ScheduleTimeEvent
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TimeEvent getTimeEvent() {
 		if (timeEvent != null && timeEvent.eIsProxy()) {
 			InternalEObject oldTimeEvent = (InternalEObject)timeEvent;
@@ -106,7 +105,6 @@ public class ScheduleTimeEventImpl extends StepImpl implements ScheduleTimeEvent
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setTimeEvent(TimeEvent newTimeEvent) {
 		TimeEvent oldTimeEvent = timeEvent;
 		timeEvent = newTimeEvent;
@@ -119,7 +117,6 @@ public class ScheduleTimeEventImpl extends StepImpl implements ScheduleTimeEvent
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Expression getTimeValue() {
 		return timeValue;
 	}
@@ -144,7 +141,6 @@ public class ScheduleTimeEventImpl extends StepImpl implements ScheduleTimeEvent
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setTimeValue(Expression newTimeValue) {
 		if (newTimeValue != timeValue) {
 			NotificationChain msgs = null;

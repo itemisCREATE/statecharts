@@ -1,5 +1,5 @@
 /** 
- * Copyright (c) 2015 committers of YAKINDU and others. 
+ * Copyright (c) 2015-2019 committers of YAKINDU and others. 
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0 
  * which accompanies this distribution, and is available at 
@@ -31,8 +31,8 @@ import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Transition
-import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.DefaultTrigger
+import org.yakindu.sct.model.stext.stext.ExitPointSpec
 
 class ReactionBuilder {
 	@Inject extension SexecElementMapping mapping
@@ -131,10 +131,12 @@ class ReactionBuilder {
 		execExit.reactSequence.name = 'react'
 		execExit.reactSequence.comment = 'The reactions of exit ' + realName + '.'
 		
-		// find the transition that relates to the matching exit point
-		val outTransitions = (it.parentRegion.composite as Vertex).outgoingTransitions
-		var exitTrans = outTransitions.filter( t | t.hasNoTrigger && t.exitPointName.equals(realName)).head
-		if (exitTrans === null) exitTrans = outTransitions.filter( t | t.hasNoTrigger && t.exitPointName.equals('default')).head
+		val parentState = it.parentRegion.composite as State
+	
+		// find a transition that explicitly handles the exit 
+		var exitTrans = 	parentState.outgoingTransitions.filter[ t | t.explicitlyHandlesExit(realName)].head
+		// or choose the default exit transition
+		if (exitTrans === null) exitTrans = parentState.defaultExitTransition
 		
 		if (exitTrans !== null) {
 			val exitReaction = exitTrans.create
@@ -145,6 +147,35 @@ class ReactionBuilder {
 		
 		return execExit.reactSequence
 	}
+	
+	/**
+	 * Checks if a transition explicitly handles the specified exit. A transition is handling an exit 
+	 * if it has neither trigger nor guard and if the specified exit point is listed as a transition property or if no 
+	 * exit point is specified for the case of the exit named 'default'.
+	 */
+	def explicitlyHandlesExit(Transition it, String exitName) {
+		val exits = exitPoints
+		return 
+			   hasNoTrigger 
+			&& (('default'.equals(exitName) && exits.nullOrEmpty) 
+				|| exits.contains(exitName))
+	}
+	
+	/**
+	 * Returns the transition that handles the default exit for a state if it exists or null if not.
+	 * The default transition is that one that explicitly handles 'default'.
+	 */
+	def defaultExitTransition(State it) {
+		outgoingTransitions.filter[ t | t.hasNoTrigger && t.explicitlyHandlesExit('default')].head
+	}
+	
+	/**
+	 * Returns the names of all exit points specified by a transition.
+	 */
+	def exitPoints(Transition it) {
+		 properties.filter(ExitPointSpec).map[ eps | eps.exitpoint].toList
+	}
+	
 	
 	def protected hasNoTrigger(Transition t) {
 		return t.trigger === null && !(t.target instanceof Synchronization)

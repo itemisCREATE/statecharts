@@ -40,7 +40,6 @@ import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.TimeUnit
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 
 class SequenceBuilder {
@@ -51,14 +50,12 @@ class SequenceBuilder {
 	@Inject extension TraceExtensions trace
 
 	@Inject extension ITypeValueProvider 
-	
-	
 
 	@Inject(optional=true)
 	@Named(IModelSequencer.ADD_TRACES)
 	boolean _addTraceSteps = false
 
-	public static String DEFAULT_SEQUENCE_NAME = "default"
+	static String DEFAULT_SEQUENCE_NAME = "default"
 
 	def void defineDeepEnterSequences(ExecutionFlow flow, Statechart sc) {
 		for (r : sc.regions) {
@@ -176,13 +173,11 @@ class SequenceBuilder {
 
 		// create an enter sequence for each contained entry
 		for (e : r.collectEntries) {
-			
 			val seq = sexec.factory.createSequence
-			seq.name = if (e.name.nullOrEmpty)
-							DEFAULT_SEQUENCE_NAME
-						else
-							e.name
-							
+			seq.name = if (e.name === null || e.name.trim == "")
+				DEFAULT_SEQUENCE_NAME
+			else
+				e.name
 			seq.comment = "'" + seq.name + "' enter sequence for region " + r.name
 
 			val entryNode = e.create
@@ -199,7 +194,6 @@ class SequenceBuilder {
 
 	def dispatch void defineScopeEnterSequences(FinalState state) {
 		val execState = state.create
-		
 		val seq = sexec.factory.createSequence
 		seq.name = DEFAULT_SEQUENCE_NAME
 		seq.comment = "Default enter sequence for state " + state.name
@@ -210,8 +204,6 @@ class SequenceBuilder {
 		seq.steps += execState.newEnterStateStep
 		execState.enterSequences += seq
 	}
-
-
 
 	def dispatch void defineScopeEnterSequences(State state) {
 
@@ -232,8 +224,7 @@ class SequenceBuilder {
 		entryPointNames.sortInplace
 
 		// create an entry sequence for each entry point
-		for (epName : entryPointNames) {			
-			
+		for (epName : entryPointNames) {
 			val seq = sexec.factory.createSequence
 			seq.name = epName
 			seq.comment = "'" + epName + "' enter sequence for state " + state.name
@@ -249,7 +240,7 @@ class SequenceBuilder {
 
 				for (r : state.regions) {
 					val execRegion = r.create
-					var regionEnterSeq = r.create.enterSequences.byName(epName)
+					var regionEnterSeq = execRegion.enterSequences.byName(epName)
 
 					if (regionEnterSeq === null) {
 						regionEnterSeq = execRegion.enterSequences.defaultSequence
@@ -271,8 +262,6 @@ class SequenceBuilder {
 		}
 
 	}
-
-
 
 	/**
 	 * Defines the exit sequences of all states

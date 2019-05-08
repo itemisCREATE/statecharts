@@ -66,7 +66,6 @@ public class TraceReactionWillFireImpl extends TraceImpl implements TraceReactio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Reaction getReaction() {
 		if (reaction != null && reaction.eIsProxy()) {
 			InternalEObject oldReaction = (InternalEObject)reaction;
@@ -93,7 +92,6 @@ public class TraceReactionWillFireImpl extends TraceImpl implements TraceReactio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setReaction(Reaction newReaction) {
 		Reaction oldReaction = reaction;
 		reaction = newReaction;

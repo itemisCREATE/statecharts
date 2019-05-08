@@ -123,7 +123,6 @@ public class ReactionImpl extends MappedElementImpl implements Reaction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getName() {
 		return name;
 	}
@@ -133,7 +132,6 @@ public class ReactionImpl extends MappedElementImpl implements Reaction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -146,7 +144,6 @@ public class ReactionImpl extends MappedElementImpl implements Reaction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Check getCheck() {
 		return check;
 	}
@@ -171,7 +168,6 @@ public class ReactionImpl extends MappedElementImpl implements Reaction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setCheck(Check newCheck) {
 		if (newCheck != check) {
 			NotificationChain msgs = null;
@@ -191,7 +187,6 @@ public class ReactionImpl extends MappedElementImpl implements Reaction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Step getEffect() {
 		return effect;
 	}
@@ -216,7 +211,6 @@ public class ReactionImpl extends MappedElementImpl implements Reaction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setEffect(Step newEffect) {
 		if (newEffect != effect) {
 			NotificationChain msgs = null;
@@ -236,7 +230,6 @@ public class ReactionImpl extends MappedElementImpl implements Reaction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public boolean isTransition() {
 		return transition;
 	}
@@ -246,7 +239,6 @@ public class ReactionImpl extends MappedElementImpl implements Reaction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setTransition(boolean newTransition) {
 		boolean oldTransition = transition;
 		transition = newTransition;

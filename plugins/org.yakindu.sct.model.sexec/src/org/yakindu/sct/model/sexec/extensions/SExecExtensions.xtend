@@ -350,8 +350,7 @@ class SExecExtensions {
 	 
 	def List<Step> enterSequenceFunctions(ExecutionFlow it) {
 		val funcs = new ArrayList<Step>()
-		funcs += enterSequences.defaultSequence
-		funcs.addAll(enterSequences.called)
+		funcs.addAll(enterSequences.called) 
 		states.forEach( s | funcs += s.enterSequences.called )
 		regions.forEach( s | {
 			funcs += s.enterSequences.called
@@ -363,7 +362,7 @@ class SExecExtensions {
 	 
 	def List<Step> exitSequenceFunctions(ExecutionFlow it) {
 		val funcs = new ArrayList<Step>()
-		funcs.add(exitSequence) 
+		if (exitSequence.called) funcs.add(exitSequence) 
 		states.forEach( s | if (s.exitSequence.called) funcs += s.exitSequence )
 		regions.forEach( s | if (s.exitSequence.called) funcs += s.exitSequence )
 		return funcs
@@ -380,6 +379,7 @@ class SExecExtensions {
 	def Method reactMethod(ExecutionNode it) {
 		features.filter( typeof(Method) ).filter( m | m.name == "react").head
 	}
+	
 	
 	def List<Step> reactFunctions(ExecutionFlow it) {
 		val funcs = new ArrayList<Step>()
@@ -497,6 +497,4 @@ class SExecExtensions {
 		functions.addAll(reactFunctions)
 		return functions
 	}
-	
-
 }

@@ -22,7 +22,6 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.base.BasePackage;
-import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sexec.ExecutionNode;
@@ -62,7 +61,6 @@ public class ExecutionNodeItemProvider
 			addNamePropertyDescriptor(object);
 			addStaticPropertyDescriptor(object);
 			addIdPropertyDescriptor(object);
-			addVisibilityPropertyDescriptor(object);
 			addAbstractPropertyDescriptor(object);
 			addVisiblePropertyDescriptor(object);
 			addSimpleNamePropertyDescriptor(object);
@@ -181,28 +179,6 @@ public class ExecutionNodeItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Visibility feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addVisibilityPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Declaration_visibility_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Declaration_visibility_feature", "_UI_Declaration_type"),
-				 TypesPackage.Literals.DECLARATION__VISIBILITY,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This adds a property descriptor for the Simple Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -302,7 +278,6 @@ public class ExecutionNodeItemProvider
 			case SexecPackage.EXECUTION_NODE__ANNOTATION_INFO:
 			case SexecPackage.EXECUTION_NODE__STATIC:
 			case SexecPackage.EXECUTION_NODE__ID:
-			case SexecPackage.EXECUTION_NODE__VISIBILITY:
 			case SexecPackage.EXECUTION_NODE__ABSTRACT:
 			case SexecPackage.EXECUTION_NODE__VISIBLE:
 			case SexecPackage.EXECUTION_NODE__SIMPLE_NAME:
@@ -352,16 +327,6 @@ public class ExecutionNodeItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 SexecFactory.eINSTANCE.createExecutionState()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 SexecFactory.eINSTANCE.createExecutionScope()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 SexecFactory.eINSTANCE.createExecutionRegion()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -501,16 +466,6 @@ public class ExecutionNodeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
-				 SexecFactory.eINSTANCE.createExecutionScope()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
-				 SexecFactory.eINSTANCE.createExecutionRegion()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 SexecFactory.eINSTANCE.createExecutionEntry()));
 
 		newChildDescriptors.add
@@ -642,16 +597,6 @@ public class ExecutionNodeItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
 				 SexecFactory.eINSTANCE.createExecutionState()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
-				 SexecFactory.eINSTANCE.createExecutionScope()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
-				 SexecFactory.eINSTANCE.createExecutionRegion()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -12,7 +12,6 @@ package org.yakindu.sct.model.sexec;
 
 import org.eclipse.emf.common.util.EList;
 import org.yakindu.base.base.NamedElement;
-import org.yakindu.base.types.ComplexType;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,7 +34,7 @@ import org.yakindu.base.types.ComplexType;
  * @model
  * @generated
  */
-public interface ExecutionScope extends MappedElement, NamedElement, ComplexType {
+public interface ExecutionScope extends MappedElement, NamedElement {
 	/**
 	 * Returns the value of the '<em><b>State Vector</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

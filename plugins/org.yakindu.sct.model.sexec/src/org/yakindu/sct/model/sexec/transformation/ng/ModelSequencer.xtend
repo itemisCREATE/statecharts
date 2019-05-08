@@ -11,57 +11,30 @@
 package org.yakindu.sct.model.sexec.transformation.ng
 
 import com.google.inject.Inject
-import org.yakindu.base.types.Package
 import org.yakindu.base.types.validation.IValidationIssueAcceptor
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.transformation.IModelSequencer
-import org.yakindu.sct.model.sexec.transformation.ReactionBuilder
-import org.yakindu.sct.model.sexec.transformation.RetargetReferences
-import org.yakindu.sct.model.sexec.transformation.SequenceBuilder
-import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
-import org.yakindu.sct.model.sexec.transformation.StateVectorBuilder
-import org.yakindu.sct.model.sexec.transformation.StructureMapping
-import org.yakindu.sct.model.sexec.transformation.ng.expressions.ExpressionOptimizer
-import org.yakindu.sct.model.sexec.transformation.ng.operations.EnterDeepOperation
-import org.yakindu.sct.model.sexec.transformation.ng.operations.EnterOperation
-import org.yakindu.sct.model.sexec.transformation.ng.operations.EnterShallowOperation
-import org.yakindu.sct.model.sexec.transformation.ng.operations.EntryActionOperation
-import org.yakindu.sct.model.sexec.transformation.ng.operations.EntryReactOperation
-import org.yakindu.sct.model.sexec.transformation.ng.operations.ExitActionOperation
-import org.yakindu.sct.model.sexec.transformation.ng.operations.ExitOperation
-import org.yakindu.sct.model.sexec.transformation.ng.operations.ExitReactOperation
-import org.yakindu.sct.model.sexec.transformation.ng.operations.ReactOperation
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sexec.transformation.IModelSequencer
+import org.yakindu.sct.model.sexec.transformation.SexecElementMapping
+import org.yakindu.sct.model.sexec.transformation.StructureMapping
+import org.yakindu.sct.model.sexec.transformation.BehaviorMapping
+import org.yakindu.sct.model.sexec.transformation.ReactionBuilder
+import org.yakindu.sct.model.sexec.transformation.SequenceBuilder
+import org.yakindu.sct.model.sexec.transformation.StateVectorBuilder
+import org.yakindu.sct.model.sexec.transformation.RetargetReferences
 
 class ModelSequencer implements IModelSequencer {
 	 
 	@Inject extension SexecElementMapping mapping
-	@Inject extension StructureMapping
-	@Inject extension BehaviorMapping
-	@Inject extension ReactionBuilder
-	@Inject extension SequenceBuilder
-	@Inject extension StateVectorBuilder
-	@Inject extension RetargetReferences
-	@Inject extension RetargetReferencesInPackage
+	@Inject extension StructureMapping structureMapping
+	@Inject extension BehaviorMapping behaviorMapping
+	@Inject extension ReactionBuilder reactBuilder
+	@Inject extension SequenceBuilder seqBuilder
+	@Inject extension StateVectorBuilder svBuilder
+	@Inject extension RetargetReferences retageting
 	
-	@Inject extension ReactOperation
-	@Inject extension EntryReactOperation
-	@Inject extension ExitReactOperation
-	@Inject extension EnterOperation
-	@Inject extension EnterShallowOperation
-	@Inject extension EnterDeepOperation
-	@Inject extension ExitOperation
-	@Inject extension EntryActionOperation
-	@Inject extension ExitActionOperation
-	
-	@Inject extension ReactMethod
-	
-	@Inject extension StatemachinePublic
-	@Inject extension StatemachineMethods
-	@Inject	extension StatemachineProperties
-	
-	@Inject extension ExpressionOptimizer
+	@Inject extension ReactMethod reactMethod
 	
 	
 	/* ==========================================================================
@@ -71,64 +44,10 @@ class ModelSequencer implements IModelSequencer {
 		transform(sc, new ListBasedValidationIssueAcceptor)
 	}
 
-	override Package transformToPackage(Statechart sc, IValidationIssueAcceptor acceptor) {
-		return sc.makePackage
-	}
-	
 	override ExecutionFlow transform(Statechart sc, IValidationIssueAcceptor acceptor) {
-		sc.makePackage
-		val ef = sc.makeFlow
 		
-		//clear create caches to avoid memory leak with repetetive generator cycles
-		mapping.cleanup
+		val ef = sc.create
 		
-		return ef
-	}
-
-	protected def create pkg:sc.statemachinePackage makePackage(Statechart sc) {
-
-		val sctype = sc.statemachineType
-
-		sctype.defineProperties(sc)
-
-		sc.declareEntryActionOperations
-		sc.declareExitActionOperations
-		sc.declareEntryReactOperations
-		sc.declareExitReactOperations
-		sc.declareEnterOperations
-		sc.declareEnterShallowOperations
-		sc.declareEnterDeepOperations
-		sc.declareExitOperations
-		sc.declareReactMethods
-		
-		sc.defineEntryActionOperations
-		sc.defineExitActionOperations
-		sc.defineExitReactOperations
-		sc.defineEntryReactOperations
-		sc.defineExitReactOperations
-		sc.defineEnterOperations
-		sc.defineEnterShallowOperations
-		sc.defineEnterDeepOperations
-		sc.defineExitOperations
-		sc.defineReactMethods
-		
-		sctype.defineEnterMethod(sc)
-		sctype.defineExitMethod(sc)
-		sctype.defineInitMethod(sc)
-		sctype.defineIsActiveMethod(sc)
-		sctype.defineIsFinalMethod(sc)
-		sctype.defineRunCycleMethod(sc)
-		sctype.defineIsStateActiveMethod(sc)
-		sctype.defineClearOutEventsMethod(sc)
-		sctype.defineClearEventsMethod(sc)
-		
-		pkg.retargetReferences
-		
-		pkg.optimize
-	}
-
-	protected def create ef:sc.create makeFlow(Statechart sc) {
-				
 		// during mapping the basic structural elements will be mapped from the source statechart to the execution flow
 		sc.mapScopes(ef)
 		sc.mapRegularStates(ef)
@@ -170,7 +89,11 @@ class ModelSequencer implements IModelSequencer {
 		
 		// retarget declaration refs
 		ef.retargetDeclRefs
-				
+		
+		//clear create caches to avoid memory leak with repetetive generator cycles
+		mapping.cleanup
+		
+		return ef
 	}
 
 	/************** retarget declaration refs **************/

@@ -79,7 +79,6 @@ public class StateCaseImpl extends EObjectImpl implements StateCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public ExecutionState getState() {
 		if (state != null && state.eIsProxy()) {
 			InternalEObject oldState = (InternalEObject)state;
@@ -106,7 +105,6 @@ public class StateCaseImpl extends EObjectImpl implements StateCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setState(ExecutionState newState) {
 		ExecutionState oldState = state;
 		state = newState;
@@ -119,7 +117,6 @@ public class StateCaseImpl extends EObjectImpl implements StateCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Step getStep() {
 		return step;
 	}
@@ -144,7 +141,6 @@ public class StateCaseImpl extends EObjectImpl implements StateCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setStep(Step newStep) {
 		if (newStep != step) {
 			NotificationChain msgs = null;

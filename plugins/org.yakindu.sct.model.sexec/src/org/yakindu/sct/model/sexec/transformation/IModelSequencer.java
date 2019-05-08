@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.model.sexec.transformation;
 
-import org.yakindu.base.types.Package;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -23,7 +22,6 @@ public interface IModelSequencer {
 	public static final String ADD_TRACES = "ADD_TRACES";
 
 	public ExecutionFlow transform(Statechart statechart, IValidationIssueAcceptor acceptor);
-	public Package transformToPackage(Statechart statechart, IValidationIssueAcceptor acceptor);
 	
 	public ExecutionFlow transform(Statechart statechart);
 }

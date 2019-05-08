@@ -102,7 +102,6 @@ public class ExecutionRegionImpl extends ExecutionScopeImpl implements Execution
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Sequence getDeepEnterSequence() {
 		return deepEnterSequence;
 	}
@@ -127,7 +126,6 @@ public class ExecutionRegionImpl extends ExecutionScopeImpl implements Execution
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setDeepEnterSequence(Sequence newDeepEnterSequence) {
 		if (newDeepEnterSequence != deepEnterSequence) {
 			NotificationChain msgs = null;
@@ -147,7 +145,6 @@ public class ExecutionRegionImpl extends ExecutionScopeImpl implements Execution
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Sequence getShallowEnterSequence() {
 		return shallowEnterSequence;
 	}
@@ -172,7 +169,6 @@ public class ExecutionRegionImpl extends ExecutionScopeImpl implements Execution
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setShallowEnterSequence(Sequence newShallowEnterSequence) {
 		if (newShallowEnterSequence != shallowEnterSequence) {
 			NotificationChain msgs = null;
@@ -192,7 +188,6 @@ public class ExecutionRegionImpl extends ExecutionScopeImpl implements Execution
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public StateVector getHistoryVector() {
 		return historyVector;
 	}
@@ -217,7 +212,6 @@ public class ExecutionRegionImpl extends ExecutionScopeImpl implements Execution
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setHistoryVector(StateVector newHistoryVector) {
 		if (newHistoryVector != historyVector) {
 			NotificationChain msgs = null;
@@ -237,7 +231,6 @@ public class ExecutionRegionImpl extends ExecutionScopeImpl implements Execution
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<ExecutionNode> getNodes() {
 		if (nodes == null) {
 			nodes = new EObjectResolvingEList<ExecutionNode>(ExecutionNode.class, this, SexecPackage.EXECUTION_REGION__NODES);

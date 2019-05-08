@@ -94,7 +94,6 @@ public abstract class StepImpl extends NamedElementImpl implements Step {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getComment() {
 		return comment;
 	}
@@ -104,7 +103,6 @@ public abstract class StepImpl extends NamedElementImpl implements Step {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setComment(String newComment) {
 		String oldComment = comment;
 		comment = newComment;
@@ -117,7 +115,6 @@ public abstract class StepImpl extends NamedElementImpl implements Step {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<Call> getCaller() {
 		if (caller == null) {
 			caller = new EObjectWithInverseResolvingEList<Call>(Call.class, this, SexecPackage.STEP__CALLER, SexecPackage.CALL__STEP);

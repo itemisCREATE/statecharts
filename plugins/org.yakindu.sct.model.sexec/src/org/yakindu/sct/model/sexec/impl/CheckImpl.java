@@ -84,7 +84,6 @@ public class CheckImpl extends StepImpl implements Check {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Expression getCondition() {
 		return condition;
 	}
@@ -109,7 +108,6 @@ public class CheckImpl extends StepImpl implements Check {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setCondition(Expression newCondition) {
 		if (newCondition != condition) {
 			NotificationChain msgs = null;
@@ -129,7 +127,6 @@ public class CheckImpl extends StepImpl implements Check {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<CheckRef> getRefs() {
 		if (refs == null) {
 			refs = new EObjectWithInverseResolvingEList<CheckRef>(CheckRef.class, this, SexecPackage.CHECK__REFS, SexecPackage.CHECK_REF__CHECK);

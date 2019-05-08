@@ -74,9 +74,6 @@ class SgraphExtensions {
 		r.vertices.findFirst(v | v instanceof Entry && (v.name === null || "".equals(v.name) || v.name == 'default') ) as Entry
 	}
 	
-	def region(Entry e) {
-		e.eContainer as Region
-	}
 	
 	/**
 	 * Returns the name of the specified entry point or 'default' if it does not exist
@@ -153,11 +150,6 @@ class SgraphExtensions {
 	def requireHistory(Region r) {
 		r.requireDeepHistory || r.requireShallowHistory
 	}
-	
-	def requireHistory(Statechart sc) {
-		sc.eAllContents.filter(Entry).exists[ e | (e.kind == EntryKind::SHALLOW_HISTORY) || (e.kind == EntryKind::DEEP_HISTORY)]	
-	}
-	
 	
 	/**
 	 * Tries to find the parent {@link Statechart} Object of the element.

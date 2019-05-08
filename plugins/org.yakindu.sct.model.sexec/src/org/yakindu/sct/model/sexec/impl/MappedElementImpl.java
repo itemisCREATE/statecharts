@@ -67,7 +67,6 @@ public class MappedElementImpl extends EObjectImpl implements MappedElement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EObject getSourceElement() {
 		if (sourceElement != null && sourceElement.eIsProxy()) {
 			InternalEObject oldSourceElement = (InternalEObject)sourceElement;
@@ -94,7 +93,6 @@ public class MappedElementImpl extends EObjectImpl implements MappedElement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setSourceElement(EObject newSourceElement) {
 		EObject oldSourceElement = sourceElement;
 		sourceElement = newSourceElement;

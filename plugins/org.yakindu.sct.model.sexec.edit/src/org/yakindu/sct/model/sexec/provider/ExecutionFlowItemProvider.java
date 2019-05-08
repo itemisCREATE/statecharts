@@ -23,7 +23,6 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.base.BasePackage;
-import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -63,13 +62,12 @@ public class ExecutionFlowItemProvider
 
 			addSourceElementPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
-			addStaticPropertyDescriptor(object);
-			addIdPropertyDescriptor(object);
-			addVisibilityPropertyDescriptor(object);
-			addAbstractPropertyDescriptor(object);
-			addVisiblePropertyDescriptor(object);
 			addSubScopesPropertyDescriptor(object);
 			addSuperScopePropertyDescriptor(object);
+			addStaticPropertyDescriptor(object);
+			addIdPropertyDescriptor(object);
+			addAbstractPropertyDescriptor(object);
+			addVisiblePropertyDescriptor(object);
 			addSimpleNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -252,28 +250,6 @@ public class ExecutionFlowItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Visibility feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addVisibilityPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Declaration_visibility_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Declaration_visibility_feature", "_UI_Declaration_type"),
-				 TypesPackage.Literals.DECLARATION__VISIBILITY,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This adds a property descriptor for the Simple Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -307,15 +283,15 @@ public class ExecutionFlowItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__STATE_VECTOR);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCES);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__EXIT_SEQUENCE);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__INIT_SEQUENCE);
 			childrenFeatures.add(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS);
 			childrenFeatures.add(TypesPackage.Literals.META_COMPOSITE__META_FEATURES);
 			childrenFeatures.add(TypesPackage.Literals.TYPE__SUPER_TYPES);
 			childrenFeatures.add(TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS);
 			childrenFeatures.add(TypesPackage.Literals.COMPLEX_TYPE__FEATURES);
-			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__STATE_VECTOR);
-			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCES);
-			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__EXIT_SEQUENCE);
-			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__INIT_SEQUENCE);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_NODE__REACTIONS);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_NODE__REACT_SEQUENCE);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_NODE__LOCAL_REACT_SEQUENCE);
@@ -384,21 +360,20 @@ public class ExecutionFlowItemProvider
 			case SexecPackage.EXECUTION_FLOW__ANNOTATION_INFO:
 			case SexecPackage.EXECUTION_FLOW__STATIC:
 			case SexecPackage.EXECUTION_FLOW__ID:
-			case SexecPackage.EXECUTION_FLOW__VISIBILITY:
 			case SexecPackage.EXECUTION_FLOW__ABSTRACT:
 			case SexecPackage.EXECUTION_FLOW__VISIBLE:
 			case SexecPackage.EXECUTION_FLOW__SIMPLE_NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case SexecPackage.EXECUTION_FLOW__STATE_VECTOR:
+			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCES:
+			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
+			case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE:
 			case SexecPackage.EXECUTION_FLOW__ANNOTATIONS:
 			case SexecPackage.EXECUTION_FLOW__META_FEATURES:
 			case SexecPackage.EXECUTION_FLOW__SUPER_TYPES:
 			case SexecPackage.EXECUTION_FLOW__TYPE_PARAMETERS:
 			case SexecPackage.EXECUTION_FLOW__FEATURES:
-			case SexecPackage.EXECUTION_FLOW__STATE_VECTOR:
-			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCES:
-			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
-			case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE:
 			case SexecPackage.EXECUTION_FLOW__REACTIONS:
 			case SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE:
 			case SexecPackage.EXECUTION_FLOW__LOCAL_REACT_SEQUENCE:
@@ -428,6 +403,26 @@ public class ExecutionFlowItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_SCOPE__STATE_VECTOR,
+				 SexecFactory.eINSTANCE.createStateVector()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCES,
+				 SexecFactory.eINSTANCE.createSequence()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_SCOPE__EXIT_SEQUENCE,
+				 SexecFactory.eINSTANCE.createSequence()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_SCOPE__INIT_SEQUENCE,
+				 SexecFactory.eINSTANCE.createSequence()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS,
 				 TypesFactory.eINSTANCE.createAnnotation()));
 
@@ -445,16 +440,6 @@ public class ExecutionFlowItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
 				 SexecFactory.eINSTANCE.createExecutionState()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 SexecFactory.eINSTANCE.createExecutionScope()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO,
-				 SexecFactory.eINSTANCE.createExecutionRegion()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -594,16 +579,6 @@ public class ExecutionFlowItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
-				 SexecFactory.eINSTANCE.createExecutionScope()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
-				 SexecFactory.eINSTANCE.createExecutionRegion()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.META_COMPOSITE__META_FEATURES,
 				 SexecFactory.eINSTANCE.createExecutionEntry()));
 
 		newChildDescriptors.add
@@ -739,16 +714,6 @@ public class ExecutionFlowItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
-				 SexecFactory.eINSTANCE.createExecutionScope()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
-				 SexecFactory.eINSTANCE.createExecutionRegion()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
 				 SexecFactory.eINSTANCE.createExecutionEntry()));
 
 		newChildDescriptors.add
@@ -850,26 +815,6 @@ public class ExecutionFlowItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
 				 TypesFactory.eINSTANCE.createAnnotationType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_SCOPE__STATE_VECTOR,
-				 SexecFactory.eINSTANCE.createStateVector()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCES,
-				 SexecFactory.eINSTANCE.createSequence()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_SCOPE__EXIT_SEQUENCE,
-				 SexecFactory.eINSTANCE.createSequence()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_SCOPE__INIT_SEQUENCE,
-				 SexecFactory.eINSTANCE.createSequence()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -1184,13 +1129,6 @@ public class ExecutionFlowItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
-			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES ||
-			childFeature == TypesPackage.Literals.COMPLEX_TYPE__FEATURES ||
-			childFeature == SexecPackage.Literals.EXECUTION_FLOW__NODES ||
-			childFeature == SexecPackage.Literals.EXECUTION_FLOW__STATES ||
-			childFeature == SexecPackage.Literals.EXECUTION_FLOW__REGIONS ||
-			childFeature == TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS ||
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__STATE_VECTOR ||
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__HISTORY_VECTOR ||
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCES ||
@@ -1200,7 +1138,13 @@ public class ExecutionFlowItemProvider
 			childFeature == SexecPackage.Literals.EXECUTION_NODE__LOCAL_REACT_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION ||
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION ||
-			childFeature == SexecPackage.Literals.EXECUTION_FLOW__STATIC_INIT_SEQUENCE;
+			childFeature == SexecPackage.Literals.EXECUTION_FLOW__STATIC_INIT_SEQUENCE ||
+			childFeature == TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATION_INFO ||
+			childFeature == TypesPackage.Literals.META_COMPOSITE__META_FEATURES ||
+			childFeature == TypesPackage.Literals.COMPLEX_TYPE__FEATURES ||
+			childFeature == SexecPackage.Literals.EXECUTION_FLOW__NODES ||
+			childFeature == SexecPackage.Literals.EXECUTION_FLOW__STATES ||
+			childFeature == TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS;
 
 		if (qualify) {
 			return getString
