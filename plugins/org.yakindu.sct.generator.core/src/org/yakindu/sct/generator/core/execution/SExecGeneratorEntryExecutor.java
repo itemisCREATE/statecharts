@@ -15,14 +15,10 @@ import java.util.Collections;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.xtext.resource.XtextResource;
-import org.yakindu.base.types.ComplexType;
-import org.yakindu.base.types.Package;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess;
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper;
@@ -33,8 +29,6 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.yakindu.sct.types.slang.ui.internal.SlangActivator;
 
 /**
  * 
@@ -59,12 +53,7 @@ public class SExecGeneratorEntryExecutor extends AbstractGeneratorEntryExecutor 
 		ExecutionFlow flow = createExecutionFlow(generatorEntry);
 		generator.generate(flow, generatorEntry, access);
 		if (helper.serializeExecutionFlow(generatorEntry)) {
-			ResourceSet resourceSet = new ResourceSetImpl();
-			serializeExecutionFlow(generatorEntry, flow, resourceSet);
-			Package p2 = sequencer.transformToPackage((Statechart) generatorEntry.getElementRef(), null);
-			Package p1 = (Package) ((ComplexType) p2.getMember().get(0)).getSuperTypes().get(0).getType().eContainer();
-			serializeSlangXmi(generatorEntry, resourceSet, p1, p2, flow);
-//			serializeSlang(generatorEntry, resourceSet, p1, p2, flow);
+			serializeExecutionFlow(generatorEntry, flow);
 		}
 	}
 
@@ -75,7 +64,8 @@ public class SExecGeneratorEntryExecutor extends AbstractGeneratorEntryExecutor 
 		return optimizer.transform(flow);
 	}
 
-	protected void serializeExecutionFlow(GeneratorEntry entry, ExecutionFlow flow, ResourceSet resourceSet) {
+	protected void serializeExecutionFlow(GeneratorEntry entry, ExecutionFlow flow) {
+		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
 				.put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
 		URI fileURI = entry.getElementRef().eResource().getURI().trimFileExtension()
@@ -87,46 +77,5 @@ public class SExecGeneratorEntryExecutor extends AbstractGeneratorEntryExecutor 
 		} catch (IOException e) {
 		}
 	}
-	
-	
-	protected void serializeSlang(GeneratorEntry entry, ResourceSet resourceSet, EObject... pkg) {
-		Injector injector = SlangActivator.getInstance().getInjector(SlangActivator.COM_YAKINDU_SCT_TYPES_SLANG_SLANG);
-		
-		XtextResource resource = injector.getInstance(XtextResource.class);
-		resourceSet.getResources().add(resource);
-		for (EObject p : pkg) {
-			resource.getContents().add(p);
-		}
-				
-		URI fileURI = entry.getElementRef().eResource().getURI().trimFileExtension()
-				.appendFileExtension("slang");
-		resource.setURI(fileURI);
-		try {
-			resource.save(Collections.EMPTY_MAP);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	}
-	
-	protected void serializeSlangXmi(GeneratorEntry entry, ResourceSet resourceSet, EObject... pkg) {
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
-				.put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
-		URI fileURI = entry.getElementRef().eResource().getURI().trimFileExtension()
-				.appendFileExtension("xmi");
-		Resource resource = resourceSet.createResource(fileURI);
-		for (EObject p : pkg) {
-			resource.getContents().add(p);
-
-		}
-
-		try {
-			resource.save(Collections.EMPTY_MAP);
-		} catch (IOException e) {
-		}
-
-	}
-	
-	
 
 }
