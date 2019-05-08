@@ -13,7 +13,6 @@ package org.yakindu.slang.generator.modification
 import com.google.inject.Inject
 import java.util.Collection
 import java.util.Set
-import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.transaction.RunnableWithResult
 import org.eclipse.emf.transaction.util.TransactionUtil
 import org.yakindu.base.types.Package
@@ -27,28 +26,24 @@ class ModificationExecutor implements IModification {
 	
 	@Inject Set<IModification> modifications;
 
-	def protected Collection<Package> modifyInternal(Collection<Package> packages, Resource targetResource) {
+	def protected Collection<Package> modifyInternal(Collection<Package> packages) {
 		modifications.forEach[mod | mod.modify(packages)]
 		packages
 	}
 
-	def private Collection<Package> modify(Collection<Package> packages, Resource targetResource) {
+	override Collection<Package> modify(Collection<Package> packages) {
 		val editingDomain = packages.map[TransactionUtil.getEditingDomain(it)].head
 		if (editingDomain === null) {
-			return packages.modifyInternal(targetResource)
+			return packages.modifyInternal
 		} else {
 			val runnable = new RunnableWithResult.Impl<Collection<Package>>() {
 				override run() {
-					result = packages.modifyInternal(targetResource)
+					result = packages.modifyInternal
 				}
 			}
 			editingDomain.runExclusive(runnable);
 			return runnable.result
 		}
-	}
-
-	override Collection<Package> modify(Collection<Package> packages) {
-		modify(packages, null)
 	}
 
 }
