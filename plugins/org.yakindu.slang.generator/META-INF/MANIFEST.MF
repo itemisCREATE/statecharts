@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Slang Generator Base Library
+Bundle-SymbolicName: org.yakindu.slang.generator
+Bundle-Version: 4.0.0.qualifier
+Bundle-Vendor: statecharts.org
+Automatic-Module-Name: org.yakindu.slang.generator
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.yakindu.sct.generator.core,
+ org.eclipse.emf.transaction,
+ org.yakindu.slang.modification
