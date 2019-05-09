@@ -151,7 +151,7 @@ class Statemachine {
 	def protected createConstructor(ExecutionFlow flow) '''
 		public «flow.statemachineClassName»() {
 			«FOR scope : flow.interfaceScopes»
-			«scope.interfaceName.asEscapedIdentifier» = new «scope.getInterfaceImplName()»();
+			«scope.interfaceName.asEscapedIdentifier» = new «scope.getInterfaceImplName()»(this);
 			«ENDFOR»
 		}
 
@@ -324,6 +324,7 @@ class Statemachine {
 	
 	def protected toImplementation(InterfaceScope scope, GeneratorEntry entry) '''
 		private sealed class «scope.getInterfaceImplName» : «scope.getInterfaceName» {
+			private «(scope.eContainer() as ExecutionFlow).statemachineClassName» parent;
 			«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
 			«scope.generateListeners»
 		«ENDIF»
@@ -334,8 +335,12 @@ class Statemachine {
 		«generateEventDefinition(event, entry, scope)»
 		«ENDFOR»
 		«FOR variable : scope.variableDefinitions BEFORE newLine SEPARATOR newLine»
-		«generateVariableDefinition(variable)»
+		«generateVariableDefinition(variable)»		
 		«ENDFOR»
+			
+			internal «scope.getInterfaceImplName»(«(scope.eContainer() as ExecutionFlow).statemachineClassName» parent) { 
+				this.parent = parent;
+			}
 			«IF scope.hasEvents»
 			«scope.generateClearEvents»
 			«ENDIF»
@@ -441,10 +446,11 @@ class Statemachine {
 				«event.getIllegalAccessValidation()»
 				return «event.valueIdentifier»;
 			}
+			
 		«ELSE»
-
 			public void raise«event.name.asName»() {
 				«event.symbol» = true;
+				«IF isEventDriven»parent.runCycle();«ENDIF»
 			}
 		«ENDIF»
 	'''
