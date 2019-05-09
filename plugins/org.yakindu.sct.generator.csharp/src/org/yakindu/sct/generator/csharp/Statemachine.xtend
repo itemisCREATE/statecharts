@@ -603,21 +603,21 @@ class Statemachine {
 			
 			public void singleCycle() {
 				for (nextStateIndex = 0; nextStateIndex < stateVector.Length; nextStateIndex++) {
+					
 					switch (stateVector[nextStateIndex]) {
-						case State.alarm_AllClear:
-							alarm_AllClear_react(true);
-							break;
-						case State.alarm_Alarm:
-							alarm_Alarm_react(true);
-							break;
-						case State.alarm_Warning:
-							alarm_Warning_react(true);
-							break;
+						«FOR state : flow.states.filter[isLeaf]»
+						«IF state.reactMethod !== null» 
+							case State.«state.stateName.asEscapedIdentifier»:
+								«state.reactMethod.functionName.asEscapedIdentifier»(true);
+								break;
+						«ENDIF»
+					«ENDFOR»
 						default:
-							// NullState
+							// «getNullStateName()»
 							break;
 					}
 				}
+			}
 			'''
 		} else {
 			'''
