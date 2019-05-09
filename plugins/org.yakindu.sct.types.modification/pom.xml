@@ -9,7 +9,7 @@
 		<version>3.5.3-SNAPSHOT</version>
 		<relativePath>../../releng/org.yakindu.sct.releng/pom.xml</relativePath>
 	</parent>
-	<artifactId>org.yakindu.slang.generator</artifactId>
+	<artifactId>org.yakindu.sct.types.modification</artifactId>
 	<groupId>org.yakindu.sct.plugins</groupId>
 	<packaging>eclipse-plugin</packaging>
 	
