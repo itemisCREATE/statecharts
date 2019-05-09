@@ -20,6 +20,7 @@ import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.IfExpression;
 
+import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.provider.ExpressionItemProvider;
 
 /**
@@ -269,7 +270,27 @@ public class IfExpressionItemProvider extends ExpressionItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.IF_EXPRESSION__CONDITION,
-				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.IF_EXPRESSION__CONDITION,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.IF_EXPRESSION__CONDITION,
+				 ExpressionsFactory.eINSTANCE.createForExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.IF_EXPRESSION__CONDITION,
+				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.IF_EXPRESSION__CONDITION,
+				 TypesFactory.eINSTANCE.createProperty()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -399,7 +420,27 @@ public class IfExpressionItemProvider extends ExpressionItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.IF_EXPRESSION__THEN,
-				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.IF_EXPRESSION__THEN,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.IF_EXPRESSION__THEN,
+				 ExpressionsFactory.eINSTANCE.createForExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.IF_EXPRESSION__THEN,
+				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.IF_EXPRESSION__THEN,
+				 TypesFactory.eINSTANCE.createProperty()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -529,7 +570,27 @@ public class IfExpressionItemProvider extends ExpressionItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.IF_EXPRESSION__ELSE,
-				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.IF_EXPRESSION__ELSE,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.IF_EXPRESSION__ELSE,
+				 ExpressionsFactory.eINSTANCE.createForExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.IF_EXPRESSION__ELSE,
+				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.IF_EXPRESSION__ELSE,
+				 TypesFactory.eINSTANCE.createProperty()));
 	}
 
 	/**

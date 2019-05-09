@@ -581,7 +581,6 @@ class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implements Expr
 		if (i == 1) {
 			return result.bindings.head
 		}
-		val j = i - 1;
-		return getResult(result.bindings.head, j)
+		return getResult(result.bindings.head, i - 1)
 	}
 }

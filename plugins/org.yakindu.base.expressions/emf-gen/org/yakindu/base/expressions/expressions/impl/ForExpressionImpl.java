@@ -6,23 +6,15 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.ForExpression;
-
 import org.yakindu.base.types.Expression;
-import org.yakindu.base.types.Property;
-
 import org.yakindu.base.types.impl.ExpressionImpl;
 
 /**
@@ -35,7 +27,7 @@ import org.yakindu.base.types.impl.ExpressionImpl;
  * <ul>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.ForExpressionImpl#getBody <em>Body</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.ForExpressionImpl#getCondition <em>Condition</em>}</li>
- *   <li>{@link org.yakindu.base.expressions.expressions.impl.ForExpressionImpl#getVarDecls <em>Var Decls</em>}</li>
+ *   <li>{@link org.yakindu.base.expressions.expressions.impl.ForExpressionImpl#getVarInits <em>Var Inits</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.ForExpressionImpl#getVarUpdates <em>Var Updates</em>}</li>
  * </ul>
  *
@@ -63,14 +55,14 @@ public class ForExpressionImpl extends ExpressionImpl implements ForExpression {
 	protected Expression condition;
 
 	/**
-	 * The cached value of the '{@link #getVarDecls() <em>Var Decls</em>}' containment reference list.
+	 * The cached value of the '{@link #getVarInits() <em>Var Inits</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getVarDecls()
+	 * @see #getVarInits()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Property> varDecls;
+	protected EList<Expression> varInits;
 
 	/**
 	 * The cached value of the '{@link #getVarUpdates() <em>Var Updates</em>}' containment reference list.
@@ -197,11 +189,11 @@ public class ForExpressionImpl extends ExpressionImpl implements ForExpression {
 	 * @generated
 	 */
 	@Override
-	public EList<Property> getVarDecls() {
-		if (varDecls == null) {
-			varDecls = new EObjectContainmentEList<Property>(Property.class, this, ExpressionsPackage.FOR_EXPRESSION__VAR_DECLS);
+	public EList<Expression> getVarInits() {
+		if (varInits == null) {
+			varInits = new EObjectContainmentEList<Expression>(Expression.class, this, ExpressionsPackage.FOR_EXPRESSION__VAR_INITS);
 		}
-		return varDecls;
+		return varInits;
 	}
 
 	/**
@@ -229,8 +221,8 @@ public class ForExpressionImpl extends ExpressionImpl implements ForExpression {
 				return basicSetBody(null, msgs);
 			case ExpressionsPackage.FOR_EXPRESSION__CONDITION:
 				return basicSetCondition(null, msgs);
-			case ExpressionsPackage.FOR_EXPRESSION__VAR_DECLS:
-				return ((InternalEList<?>)getVarDecls()).basicRemove(otherEnd, msgs);
+			case ExpressionsPackage.FOR_EXPRESSION__VAR_INITS:
+				return ((InternalEList<?>)getVarInits()).basicRemove(otherEnd, msgs);
 			case ExpressionsPackage.FOR_EXPRESSION__VAR_UPDATES:
 				return ((InternalEList<?>)getVarUpdates()).basicRemove(otherEnd, msgs);
 		}
@@ -249,8 +241,8 @@ public class ForExpressionImpl extends ExpressionImpl implements ForExpression {
 				return getBody();
 			case ExpressionsPackage.FOR_EXPRESSION__CONDITION:
 				return getCondition();
-			case ExpressionsPackage.FOR_EXPRESSION__VAR_DECLS:
-				return getVarDecls();
+			case ExpressionsPackage.FOR_EXPRESSION__VAR_INITS:
+				return getVarInits();
 			case ExpressionsPackage.FOR_EXPRESSION__VAR_UPDATES:
 				return getVarUpdates();
 		}
@@ -272,9 +264,9 @@ public class ForExpressionImpl extends ExpressionImpl implements ForExpression {
 			case ExpressionsPackage.FOR_EXPRESSION__CONDITION:
 				setCondition((Expression)newValue);
 				return;
-			case ExpressionsPackage.FOR_EXPRESSION__VAR_DECLS:
-				getVarDecls().clear();
-				getVarDecls().addAll((Collection<? extends Property>)newValue);
+			case ExpressionsPackage.FOR_EXPRESSION__VAR_INITS:
+				getVarInits().clear();
+				getVarInits().addAll((Collection<? extends Expression>)newValue);
 				return;
 			case ExpressionsPackage.FOR_EXPRESSION__VAR_UPDATES:
 				getVarUpdates().clear();
@@ -298,8 +290,8 @@ public class ForExpressionImpl extends ExpressionImpl implements ForExpression {
 			case ExpressionsPackage.FOR_EXPRESSION__CONDITION:
 				setCondition((Expression)null);
 				return;
-			case ExpressionsPackage.FOR_EXPRESSION__VAR_DECLS:
-				getVarDecls().clear();
+			case ExpressionsPackage.FOR_EXPRESSION__VAR_INITS:
+				getVarInits().clear();
 				return;
 			case ExpressionsPackage.FOR_EXPRESSION__VAR_UPDATES:
 				getVarUpdates().clear();
@@ -320,8 +312,8 @@ public class ForExpressionImpl extends ExpressionImpl implements ForExpression {
 				return body != null;
 			case ExpressionsPackage.FOR_EXPRESSION__CONDITION:
 				return condition != null;
-			case ExpressionsPackage.FOR_EXPRESSION__VAR_DECLS:
-				return varDecls != null && !varDecls.isEmpty();
+			case ExpressionsPackage.FOR_EXPRESSION__VAR_INITS:
+				return varInits != null && !varInits.isEmpty();
 			case ExpressionsPackage.FOR_EXPRESSION__VAR_UPDATES:
 				return varUpdates != null && !varUpdates.isEmpty();
 		}

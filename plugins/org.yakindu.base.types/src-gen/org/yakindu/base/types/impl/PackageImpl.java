@@ -96,6 +96,7 @@ public class PackageImpl extends DeclarationImpl implements org.yakindu.base.typ
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDomainID() {
 		return domainID;
 	}
@@ -105,6 +106,7 @@ public class PackageImpl extends DeclarationImpl implements org.yakindu.base.typ
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDomainID(String newDomainID) {
 		String oldDomainID = domainID;
 		domainID = newDomainID;
@@ -127,6 +129,7 @@ public class PackageImpl extends DeclarationImpl implements org.yakindu.base.typ
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Declaration> getMember() {
 		if (member == null) {
 			member = new EObjectContainmentEList<Declaration>(Declaration.class, this, TypesPackage.PACKAGE__MEMBER);
@@ -139,6 +142,7 @@ public class PackageImpl extends DeclarationImpl implements org.yakindu.base.typ
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getImports() {
 		if (imports == null) {
 			imports = new EDataTypeUniqueEList<String>(String.class, this, TypesPackage.PACKAGE__IMPORTS);

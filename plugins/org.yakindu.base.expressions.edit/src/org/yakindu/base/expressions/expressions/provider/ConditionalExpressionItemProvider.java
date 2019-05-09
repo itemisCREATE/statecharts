@@ -23,6 +23,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.expressions.expressions.ConditionalExpression;
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
+import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.provider.ExpressionItemProvider;
 
 /**
@@ -272,7 +273,27 @@ public class ConditionalExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__CONDITION,
-				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__CONDITION,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__CONDITION,
+				 ExpressionsFactory.eINSTANCE.createForExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__CONDITION,
+				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__CONDITION,
+				 TypesFactory.eINSTANCE.createProperty()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -402,7 +423,27 @@ public class ConditionalExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__TRUE_CASE,
-				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__TRUE_CASE,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__TRUE_CASE,
+				 ExpressionsFactory.eINSTANCE.createForExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__TRUE_CASE,
+				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__TRUE_CASE,
+				 TypesFactory.eINSTANCE.createProperty()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -532,7 +573,27 @@ public class ConditionalExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__FALSE_CASE,
-				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__FALSE_CASE,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__FALSE_CASE,
+				 ExpressionsFactory.eINSTANCE.createForExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__FALSE_CASE,
+				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__FALSE_CASE,
+				 TypesFactory.eINSTANCE.createProperty()));
 	}
 
 	/**

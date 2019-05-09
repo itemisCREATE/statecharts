@@ -25,6 +25,7 @@ import org.yakindu.base.expressions.expressions.BoolLiteral;
 import org.yakindu.base.expressions.expressions.ConditionalExpression;
 import org.yakindu.base.expressions.expressions.DoubleLiteral;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
+import org.yakindu.base.expressions.expressions.EventClearingExpression;
 import org.yakindu.base.expressions.expressions.EventRaisingExpression;
 import org.yakindu.base.expressions.expressions.EventValueReferenceExpression;
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
@@ -32,7 +33,6 @@ import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.expressions.FloatLiteral;
 import org.yakindu.base.expressions.expressions.ForExpression;
-import org.yakindu.base.expressions.expressions.ForVarDecl;
 import org.yakindu.base.expressions.expressions.HexLiteral;
 import org.yakindu.base.expressions.expressions.IfExpression;
 import org.yakindu.base.expressions.expressions.IntLiteral;
@@ -344,14 +344,14 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass forVarDeclEClass = null;
+	private EClass throwExpressionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass throwExpressionEClass = null;
+	private EClass eventClearingExpressionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1375,7 +1375,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	@Override
-	public EReference getForExpression_VarDecls() {
+	public EReference getForExpression_VarInits() {
 		return (EReference)forExpressionEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -1387,16 +1387,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	@Override
 	public EReference getForExpression_VarUpdates() {
 		return (EReference)forExpressionEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getForVarDecl() {
-		return forVarDeclEClass;
 	}
 
 	/**
@@ -1417,6 +1407,26 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	@Override
 	public EReference getThrowExpression_Expression() {
 		return (EReference)throwExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getEventClearingExpression() {
+		return eventClearingExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getEventClearingExpression_Event() {
+		return (EReference)eventClearingExpressionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1764,13 +1774,14 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		forExpressionEClass = createEClass(FOR_EXPRESSION);
 		createEReference(forExpressionEClass, FOR_EXPRESSION__BODY);
 		createEReference(forExpressionEClass, FOR_EXPRESSION__CONDITION);
-		createEReference(forExpressionEClass, FOR_EXPRESSION__VAR_DECLS);
+		createEReference(forExpressionEClass, FOR_EXPRESSION__VAR_INITS);
 		createEReference(forExpressionEClass, FOR_EXPRESSION__VAR_UPDATES);
-
-		forVarDeclEClass = createEClass(FOR_VAR_DECL);
 
 		throwExpressionEClass = createEClass(THROW_EXPRESSION);
 		createEReference(throwExpressionEClass, THROW_EXPRESSION__EXPRESSION);
+
+		eventClearingExpressionEClass = createEClass(EVENT_CLEARING_EXPRESSION);
+		createEReference(eventClearingExpressionEClass, EVENT_CLEARING_EXPRESSION__EVENT);
 
 		// Create enums
 		assignmentOperatorEEnum = createEEnum(ASSIGNMENT_OPERATOR);
@@ -1854,8 +1865,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		eventRaisingExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 		eventValueReferenceExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 		forExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
-		forVarDeclEClass.getESuperTypes().add(theTypesPackage.getProperty());
 		throwExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
+		eventClearingExpressionEClass.getESuperTypes().add(theTypesPackage.getExpression());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(binaryExpressionEClass, BinaryExpression.class, "BinaryExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2002,13 +2013,14 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		initEClass(forExpressionEClass, ForExpression.class, "ForExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getForExpression_Body(), theTypesPackage.getExpression(), null, "body", null, 0, 1, ForExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getForExpression_Condition(), theTypesPackage.getExpression(), null, "condition", null, 0, 1, ForExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getForExpression_VarDecls(), theTypesPackage.getProperty(), null, "varDecls", null, 0, -1, ForExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getForExpression_VarInits(), theTypesPackage.getExpression(), null, "varInits", null, 0, -1, ForExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getForExpression_VarUpdates(), theTypesPackage.getExpression(), null, "varUpdates", null, 0, -1, ForExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(forVarDeclEClass, ForVarDecl.class, "ForVarDecl", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(throwExpressionEClass, ThrowExpression.class, "ThrowExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getThrowExpression_Expression(), theTypesPackage.getExpression(), null, "expression", null, 0, 1, ThrowExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(eventClearingExpressionEClass, EventClearingExpression.class, "EventClearingExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEventClearingExpression_Event(), theTypesPackage.getExpression(), null, "event", null, 0, 1, EventClearingExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(assignmentOperatorEEnum, AssignmentOperator.class, "AssignmentOperator");

@@ -290,6 +290,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPackage() {
 		return packageEClass;
 	}
@@ -299,6 +300,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPackage_Member() {
 		return (EReference)packageEClass.getEStructuralFeatures().get(0);
 	}
@@ -308,6 +310,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPackage_Imports() {
 		return (EAttribute)packageEClass.getEStructuralFeatures().get(1);
 	}
@@ -316,6 +319,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getType() {
 		return typeEClass;
 	}
@@ -325,6 +329,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getType_Abstract() {
 		return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
 	}
@@ -334,6 +339,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getType_Visible() {
 		return (EAttribute)typeEClass.getEStructuralFeatures().get(1);
 	}
@@ -343,6 +349,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getType_SuperTypes() {
 		return (EReference)typeEClass.getEStructuralFeatures().get(2);
 	}
@@ -352,6 +359,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDeclaration() {
 		return declarationEClass;
 	}
@@ -361,6 +369,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDeclaration_Static() {
 		return (EAttribute)declarationEClass.getEStructuralFeatures().get(0);
 	}
@@ -370,6 +379,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDeclaration_Id() {
 		return (EAttribute)declarationEClass.getEStructuralFeatures().get(1);
 	}
@@ -379,6 +389,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDeclaration_Visibility() {
 		return (EAttribute)declarationEClass.getEStructuralFeatures().get(2);
 	}
@@ -387,6 +398,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getOperation() {
 		return operationEClass;
 	}
@@ -395,6 +407,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getOperation_Parameters() {
 		return (EReference)operationEClass.getEStructuralFeatures().get(0);
 	}
@@ -404,6 +417,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOperation_Variadic() {
 		return (EAttribute)operationEClass.getEStructuralFeatures().get(1);
 	}
@@ -413,6 +427,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getOperation_Body() {
 		return (EReference)operationEClass.getEStructuralFeatures().get(2);
 	}
@@ -421,6 +436,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getProperty() {
 		return propertyEClass;
 	}
@@ -430,6 +446,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getProperty_Const() {
 		return (EAttribute)propertyEClass.getEStructuralFeatures().get(0);
 	}
@@ -439,6 +456,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getProperty_Readonly() {
 		return (EAttribute)propertyEClass.getEStructuralFeatures().get(1);
 	}
@@ -448,6 +466,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getProperty_InitialValue() {
 		return (EReference)propertyEClass.getEStructuralFeatures().get(2);
 	}
@@ -456,6 +475,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getParameter() {
 		return parameterEClass;
 	}
@@ -464,6 +484,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getParameter_OwningOperation() {
 		return (EReference)parameterEClass.getEStructuralFeatures().get(0);
 	}
@@ -473,6 +494,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getParameter_VarArgs() {
 		return (EAttribute)parameterEClass.getEStructuralFeatures().get(1);
 	}
@@ -482,6 +504,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getParameter_Optional() {
 		return (EAttribute)parameterEClass.getEStructuralFeatures().get(2);
 	}
@@ -490,6 +513,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTypedElement() {
 		return typedElementEClass;
 	}
@@ -498,6 +522,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTypedElement_Type() {
 		return (EReference)typedElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -507,6 +532,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTypedElement_TypeSpecifier() {
 		return (EReference)typedElementEClass.getEStructuralFeatures().get(1);
 	}
@@ -516,6 +542,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTypeSpecifier() {
 		return typeSpecifierEClass;
 	}
@@ -525,6 +552,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTypeSpecifier_Type() {
 		return (EReference)typeSpecifierEClass.getEStructuralFeatures().get(0);
 	}
@@ -534,6 +562,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTypeSpecifier_TypeArguments() {
 		return (EReference)typeSpecifierEClass.getEStructuralFeatures().get(1);
 	}
@@ -542,6 +571,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEvent() {
 		return eventEClass;
 	}
@@ -551,6 +581,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getEvent_Direction() {
 		return (EAttribute)eventEClass.getEStructuralFeatures().get(0);
 	}
@@ -559,6 +590,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEnumerationType() {
 		return enumerationTypeEClass;
 	}
@@ -567,6 +599,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEnumerationType_Enumerator() {
 		return (EReference)enumerationTypeEClass.getEStructuralFeatures().get(0);
 	}
@@ -575,6 +608,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPrimitiveType() {
 		return primitiveTypeEClass;
 	}
@@ -584,6 +618,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getComplexType() {
 		return complexTypeEClass;
 	}
@@ -593,6 +628,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getComplexType_Features() {
 		return (EReference)complexTypeEClass.getEStructuralFeatures().get(0);
 	}
@@ -601,6 +637,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEnumerator() {
 		return enumeratorEClass;
 	}
@@ -609,6 +646,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEnumerator_OwningEnumeration() {
 		return (EReference)enumeratorEClass.getEStructuralFeatures().get(0);
 	}
@@ -617,6 +655,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getEnumerator_LiteralValue() {
 		return (EAttribute)enumeratorEClass.getEStructuralFeatures().get(1);
 	}
@@ -626,6 +665,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTypeParameter() {
 		return typeParameterEClass;
 	}
@@ -635,6 +675,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTypeParameter_Bound() {
 		return (EReference)typeParameterEClass.getEStructuralFeatures().get(0);
 	}
@@ -644,6 +685,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getGenericElement() {
 		return genericElementEClass;
 	}
@@ -653,6 +695,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getGenericElement_TypeParameters() {
 		return (EReference)genericElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -662,6 +705,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDomain() {
 		return domainEClass;
 	}
@@ -671,6 +715,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDomain_DomainID() {
 		return (EAttribute)domainEClass.getEStructuralFeatures().get(0);
 	}
@@ -680,6 +725,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTypeAlias() {
 		return typeAliasEClass;
 	}
@@ -689,6 +735,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAnnotation() {
 		return annotationEClass;
 	}
@@ -698,6 +745,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAnnotation_Type() {
 		return (EReference)annotationEClass.getEStructuralFeatures().get(0);
 	}
@@ -707,6 +755,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAnnotation_Arguments() {
 		return (EReference)annotationEClass.getEStructuralFeatures().get(1);
 	}
@@ -716,6 +765,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAnnotatableElement() {
 		return annotatableElementEClass;
 	}
@@ -725,6 +775,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAnnotatableElement_Annotations() {
 		return (EReference)annotatableElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -734,6 +785,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAnnotatableElement_AnnotationInfo() {
 		return (EReference)annotatableElementEClass.getEStructuralFeatures().get(1);
 	}
@@ -743,6 +795,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getArrayTypeSpecifier() {
 		return arrayTypeSpecifierEClass;
 	}
@@ -752,6 +805,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getArrayTypeSpecifier_Size() {
 		return (EAttribute)arrayTypeSpecifierEClass.getEStructuralFeatures().get(0);
 	}
@@ -761,6 +815,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAnnotationType() {
 		return annotationTypeEClass;
 	}
@@ -770,6 +825,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAnnotationType_Properties() {
 		return (EReference)annotationTypeEClass.getEStructuralFeatures().get(0);
 	}
@@ -779,6 +835,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAnnotationType_Targets() {
 		return (EReference)annotationTypeEClass.getEStructuralFeatures().get(1);
 	}
@@ -788,6 +845,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExpression() {
 		return expressionEClass;
 	}
@@ -797,6 +855,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTypedDeclaration() {
 		return typedDeclarationEClass;
 	}
@@ -806,6 +865,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMetaComposite() {
 		return metaCompositeEClass;
 	}
@@ -815,6 +875,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMetaComposite_MetaFeatures() {
 		return (EReference)metaCompositeEClass.getEStructuralFeatures().get(0);
 	}
@@ -824,6 +885,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getDirection() {
 		return directionEEnum;
 	}
@@ -833,6 +895,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getVisibility() {
 		return visibilityEEnum;
 	}
@@ -841,6 +904,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypesFactory getTypesFactory() {
 		return (TypesFactory)getEFactoryInstance();
 	}

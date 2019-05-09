@@ -68,6 +68,7 @@ public class MetaCompositeImpl extends EObjectImpl implements MetaComposite {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Declaration> getMetaFeatures() {
 		if (metaFeatures == null) {
 			metaFeatures = new EObjectContainmentEList<Declaration>(Declaration.class, this, TypesPackage.META_COMPOSITE__META_FEATURES);

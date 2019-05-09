@@ -67,6 +67,7 @@ public class DomainImpl extends EObjectImpl implements Domain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDomainID() {
 		return domainID;
 	}
@@ -76,6 +77,7 @@ public class DomainImpl extends EObjectImpl implements Domain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDomainID(String newDomainID) {
 		String oldDomainID = domainID;
 		domainID = newDomainID;

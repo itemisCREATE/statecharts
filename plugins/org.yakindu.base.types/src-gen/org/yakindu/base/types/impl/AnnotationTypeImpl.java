@@ -75,6 +75,7 @@ public class AnnotationTypeImpl extends TypeImpl implements AnnotationType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Property> getProperties() {
 		if (properties == null) {
 			properties = new EObjectContainmentEList<Property>(Property.class, this, TypesPackage.ANNOTATION_TYPE__PROPERTIES);
@@ -87,6 +88,7 @@ public class AnnotationTypeImpl extends TypeImpl implements AnnotationType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<EObject> getTargets() {
 		if (targets == null) {
 			targets = new EObjectResolvingEList<EObject>(EObject.class, this, TypesPackage.ANNOTATION_TYPE__TARGETS);

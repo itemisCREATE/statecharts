@@ -24,6 +24,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
+import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.provider.ExpressionItemProvider;
 
 /**
@@ -292,7 +293,27 @@ public class TypeCastExpressionItemProvider extends ExpressionItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.TYPE_CAST_EXPRESSION__OPERAND,
-				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
+				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.TYPE_CAST_EXPRESSION__OPERAND,
+				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.TYPE_CAST_EXPRESSION__OPERAND,
+				 ExpressionsFactory.eINSTANCE.createForExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.TYPE_CAST_EXPRESSION__OPERAND,
+				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.TYPE_CAST_EXPRESSION__OPERAND,
+				 TypesFactory.eINSTANCE.createProperty()));
 	}
 
 	/**

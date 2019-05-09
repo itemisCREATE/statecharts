@@ -30,23 +30,23 @@ LogicalOrExpression returns types::Expression:
 	=> ({LogicalOrExpression.leftOperand=current} LogicalOrOperator rightOperand=LogicalAndExpression)*;
 
 LogicalAndExpression returns types::Expression:
-	LogicalNotExpression 
+	LogicalNotExpression
 	=> ({LogicalAndExpression.leftOperand=current} LogicalAndOperator rightOperand=LogicalNotExpression)*;
 
 LogicalNotExpression returns types::Expression:
-	BitwiseOrExpression | 
+	BitwiseOrExpression |
 	=> ({LogicalNotExpression} LogicalNotOperator operand=BitwiseOrExpression);
 
 BitwiseOrExpression returns types::Expression:
-	BitwiseXorExpression 
+	BitwiseXorExpression
 	=> ({BitwiseOrExpression.leftOperand=current} BitwiseOrOperator rightOperand=BitwiseXorExpression)*;
 
 BitwiseXorExpression returns types::Expression:
-	BitwiseAndExpression 
+	BitwiseAndExpression
 	=> ({BitwiseXorExpression.leftOperand=current} BitwiseXOrOperator rightOperand=BitwiseAndExpression)*;
 
 BitwiseAndExpression returns types::Expression:
-	LogicalRelationExpression 
+	LogicalRelationExpression
 	=> ({BitwiseAndExpression.leftOperand=current} BitwiseAndOperator rightOperand=LogicalRelationExpression)*;
 
 LogicalRelationExpression returns types::Expression:
@@ -54,19 +54,21 @@ LogicalRelationExpression returns types::Expression:
 	=> ({LogicalRelationExpression.leftOperand=current} operator=RelationalOperator rightOperand=ShiftExpression)*;
 
 ShiftExpression returns types::Expression:
-	NumericalAddSubtractExpression 
+	NumericalAddSubtractExpression
 	=> ({ShiftExpression.leftOperand=current} operator=ShiftOperator rightOperand=NumericalAddSubtractExpression)*;
 
 NumericalAddSubtractExpression returns types::Expression:
 	NumericalMultiplyDivideExpression
-	=> ({NumericalAddSubtractExpression.leftOperand=current} operator=AdditiveOperator rightOperand=NumericalMultiplyDivideExpression)*;
+	=> ({NumericalAddSubtractExpression.leftOperand=current} operator=AdditiveOperator
+	rightOperand=NumericalMultiplyDivideExpression)*;
 
 NumericalMultiplyDivideExpression returns types::Expression:
 	NumericalUnaryExpression
-	=> ({NumericalMultiplyDivideExpression.leftOperand=current} operator=MultiplicativeOperator rightOperand=NumericalUnaryExpression)*;
+	=> ({NumericalMultiplyDivideExpression.leftOperand=current} operator=MultiplicativeOperator
+	rightOperand=NumericalUnaryExpression)*;
 
 NumericalUnaryExpression returns types::Expression:
-	PostFixUnaryExpression | 
+	PostFixUnaryExpression |
 	=> ({NumericalUnaryExpression} operator=UnaryOperator operand=PostFixUnaryExpression);
 
 PostFixUnaryExpression returns types::Expression:
@@ -94,7 +96,7 @@ PrimitiveValueExpression returns types::Expression:
 	{PrimitiveValueExpression} value=Literal;
 
 BlockExpression returns types::Expression:
-	{BlockExpression} '{' (expressions+=Expression)* '}';
+	{BlockExpression} '{' (expressions+=ExpressionOrProperty)* '}';
 
 IfExpression returns types::Expression:
 	{IfExpression}
@@ -121,20 +123,24 @@ WhileExpression returns types::Expression:
 ForExpression returns types::Expression:
 	{ForExpression} 'for'
 	'('
-	(varDecls+=ForVarDecl (',' varDecls+=ForVarDecl)*)? ';'
+	(varInits+=ExpressionOrProperty (',' varInits+=Expression)*)? ';'
 	(condition=Expression)? ';'
 	(varUpdates+=Expression (',' varUpdates+=Expression)*)?
 	')'
 	body=BlockExpression;
-
-ForVarDecl returns types::Property:
-	'var' name=ID ':' typeSpecifier=TypeSpecifier ('=' initialValue=Expression)?;
 
 ReturnExpression returns types::Expression:
 	{ReturnExpression} 'return' expression=ConditionalExpression;
 
 ThrowExpression returns types::Expression:
 	{ThrowExpression} 'throw' expression=ConditionalExpression;
+
+ExpressionOrProperty returns types::Expression:
+	Expression | Property;
+
+Property returns types::Property:
+	(const?='const' | 'var') name=ID
+	':' typeSpecifier=TypeSpecifier ('=' initialValue=Expression)?;
 
 FeatureCall returns types::Expression:
 	ElementReferenceExpression ((({FeatureCall.owner=current} '.') | ({MetaCall.owner=current} '.@'))

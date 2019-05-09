@@ -140,8 +140,8 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 			case ExpressionsPackage.EVENT_RAISING_EXPRESSION: return createEventRaisingExpression();
 			case ExpressionsPackage.EVENT_VALUE_REFERENCE_EXPRESSION: return createEventValueReferenceExpression();
 			case ExpressionsPackage.FOR_EXPRESSION: return createForExpression();
-			case ExpressionsPackage.FOR_VAR_DECL: return createForVarDecl();
 			case ExpressionsPackage.THROW_EXPRESSION: return createThrowExpression();
+			case ExpressionsPackage.EVENT_CLEARING_EXPRESSION: return createEventClearingExpression();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -622,9 +622,9 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * @generated
 	 */
 	@Override
-	public ForVarDecl createForVarDecl() {
-		ForVarDeclImpl forVarDecl = new ForVarDeclImpl();
-		return forVarDecl;
+	public ThrowExpression createThrowExpression() {
+		ThrowExpressionImpl throwExpression = new ThrowExpressionImpl();
+		return throwExpression;
 	}
 
 	/**
@@ -633,9 +633,9 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * @generated
 	 */
 	@Override
-	public ThrowExpression createThrowExpression() {
-		ThrowExpressionImpl throwExpression = new ThrowExpressionImpl();
-		return throwExpression;
+	public EventClearingExpression createEventClearingExpression() {
+		EventClearingExpressionImpl eventClearingExpression = new EventClearingExpressionImpl();
+		return eventClearingExpression;
 	}
 
 	/**

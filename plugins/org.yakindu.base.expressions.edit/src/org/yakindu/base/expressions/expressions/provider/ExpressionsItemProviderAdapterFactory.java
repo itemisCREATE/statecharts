@@ -883,11 +883,104 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.EventRaisingExpression} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EventRaisingExpressionItemProvider eventRaisingExpressionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.EventRaisingExpression}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createEventRaisingExpressionAdapter() {
+		if (eventRaisingExpressionItemProvider == null) {
+			eventRaisingExpressionItemProvider = new EventRaisingExpressionItemProvider(this);
+		}
+
+		return eventRaisingExpressionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.EventValueReferenceExpression} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EventValueReferenceExpressionItemProvider eventValueReferenceExpressionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.EventValueReferenceExpression}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createEventValueReferenceExpressionAdapter() {
+		if (eventValueReferenceExpressionItemProvider == null) {
+			eventValueReferenceExpressionItemProvider = new EventValueReferenceExpressionItemProvider(this);
+		}
+
+		return eventValueReferenceExpressionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.ForExpression} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ForExpressionItemProvider forExpressionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.ForExpression}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createForExpressionAdapter() {
+		if (forExpressionItemProvider == null) {
+			forExpressionItemProvider = new ForExpressionItemProvider(this);
+		}
+
+		return forExpressionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.ThrowExpression} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ThrowExpressionItemProvider throwExpressionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.ThrowExpression}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createThrowExpressionAdapter() {
+		if (throwExpressionItemProvider == null) {
+			throwExpressionItemProvider = new ThrowExpressionItemProvider(this);
+		}
+
+		return throwExpressionItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ComposeableAdapterFactory getRootAdapterFactory() {
 		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
 	}
@@ -898,6 +991,7 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
@@ -946,6 +1040,7 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void addListener(INotifyChangedListener notifyChangedListener) {
 		changeNotifier.addListener(notifyChangedListener);
 	}
@@ -956,6 +1051,7 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void removeListener(INotifyChangedListener notifyChangedListener) {
 		changeNotifier.removeListener(notifyChangedListener);
 	}
@@ -966,6 +1062,7 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void fireNotifyChanged(Notification notification) {
 		changeNotifier.fireNotifyChanged(notification);
 
@@ -980,6 +1077,7 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void dispose() {
 		if (boolLiteralItemProvider != null) boolLiteralItemProvider.dispose();
 		if (intLiteralItemProvider != null) intLiteralItemProvider.dispose();
@@ -1016,6 +1114,10 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 		if (returnExpressionItemProvider != null) returnExpressionItemProvider.dispose();
 		if (switchExpressionItemProvider != null) switchExpressionItemProvider.dispose();
 		if (switchCaseItemProvider != null) switchCaseItemProvider.dispose();
+		if (eventRaisingExpressionItemProvider != null) eventRaisingExpressionItemProvider.dispose();
+		if (eventValueReferenceExpressionItemProvider != null) eventValueReferenceExpressionItemProvider.dispose();
+		if (forExpressionItemProvider != null) forExpressionItemProvider.dispose();
+		if (throwExpressionItemProvider != null) throwExpressionItemProvider.dispose();
 	}
 
 }

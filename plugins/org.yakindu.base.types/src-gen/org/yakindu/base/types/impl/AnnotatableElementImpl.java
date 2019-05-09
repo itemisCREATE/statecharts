@@ -76,6 +76,7 @@ public class AnnotatableElementImpl extends EObjectImpl implements AnnotatableEl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Annotation> getAnnotations() {
 		if (annotations == null) {
 			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS);
@@ -88,6 +89,7 @@ public class AnnotatableElementImpl extends EObjectImpl implements AnnotatableEl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AnnotatableElement getAnnotationInfo() {
 		return annotationInfo;
 	}
@@ -112,6 +114,7 @@ public class AnnotatableElementImpl extends EObjectImpl implements AnnotatableEl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAnnotationInfo(AnnotatableElement newAnnotationInfo) {
 		if (newAnnotationInfo != annotationInfo) {
 			NotificationChain msgs = null;
@@ -134,6 +137,9 @@ public class AnnotatableElementImpl extends EObjectImpl implements AnnotatableEl
 	 */
 	@Override
 	public Annotation getAnnotationOfType(final String typeName) {
+		if (getAnnotationInfo() == null) {
+			return null;
+		}
 		EList<Annotation> annotations = getAnnotationInfo().getAnnotations();
 		for (Annotation annotation : annotations) {
 			if (typeName.equals(annotation.getType().getName())) {

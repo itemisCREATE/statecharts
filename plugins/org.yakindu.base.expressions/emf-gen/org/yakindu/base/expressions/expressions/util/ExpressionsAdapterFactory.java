@@ -283,44 +283,16 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 				return createForExpressionAdapter();
 			}
 			@Override
-			public Adapter caseForVarDecl(ForVarDecl object) {
-				return createForVarDeclAdapter();
-			}
-			@Override
 			public Adapter caseThrowExpression(ThrowExpression object) {
 				return createThrowExpressionAdapter();
 			}
 			@Override
+			public Adapter caseEventClearingExpression(EventClearingExpression object) {
+				return createEventClearingExpressionAdapter();
+			}
+			@Override
 			public Adapter caseExpression(Expression object) {
 				return createExpressionAdapter();
-			}
-			@Override
-			public Adapter caseNamedElement(NamedElement object) {
-				return createNamedElementAdapter();
-			}
-			@Override
-			public Adapter caseAnnotatableElement(AnnotatableElement object) {
-				return createAnnotatableElementAdapter();
-			}
-			@Override
-			public Adapter caseMetaComposite(MetaComposite object) {
-				return createMetaCompositeAdapter();
-			}
-			@Override
-			public Adapter caseDeclaration(Declaration object) {
-				return createDeclarationAdapter();
-			}
-			@Override
-			public Adapter caseTypedElement(TypedElement object) {
-				return createTypedElementAdapter();
-			}
-			@Override
-			public Adapter caseTypedDeclaration(TypedDeclaration object) {
-				return createTypedDeclarationAdapter();
-			}
-			@Override
-			public Adapter caseProperty(Property object) {
-				return createPropertyAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -353,104 +325,6 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExpressionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.base.base.NamedElement <em>Named Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.base.base.NamedElement
-	 * @generated
-	 */
-	public Adapter createNamedElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.AnnotatableElement <em>Annotatable Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.base.types.AnnotatableElement
-	 * @generated
-	 */
-	public Adapter createAnnotatableElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.MetaComposite <em>Meta Composite</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.base.types.MetaComposite
-	 * @generated
-	 */
-	public Adapter createMetaCompositeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.Declaration <em>Declaration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.base.types.Declaration
-	 * @generated
-	 */
-	public Adapter createDeclarationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.TypedElement <em>Typed Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.base.types.TypedElement
-	 * @generated
-	 */
-	public Adapter createTypedElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.TypedDeclaration <em>Typed Declaration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.base.types.TypedDeclaration
-	 * @generated
-	 */
-	public Adapter createTypedDeclarationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.Property <em>Property</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.base.types.Property
-	 * @generated
-	 */
-	public Adapter createPropertyAdapter() {
 		return null;
 	}
 
@@ -987,20 +861,6 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.base.expressions.expressions.ForVarDecl <em>For Var Decl</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.base.expressions.expressions.ForVarDecl
-	 * @generated
-	 */
-	public Adapter createForVarDeclAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.yakindu.base.expressions.expressions.ThrowExpression <em>Throw Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1011,6 +871,20 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createThrowExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.expressions.expressions.EventClearingExpression <em>Event Clearing Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.expressions.expressions.EventClearingExpression
+	 * @generated
+	 */
+	public Adapter createEventClearingExpressionAdapter() {
 		return null;
 	}
 
