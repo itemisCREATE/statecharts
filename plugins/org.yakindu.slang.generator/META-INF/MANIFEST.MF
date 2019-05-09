@@ -8,4 +8,8 @@ Automatic-Module-Name: org.yakindu.slang.generator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.yakindu.slang.modification,
  org.yakindu.sct.generator.core,
- org.eclipse.emf.transaction
+ org.eclipse.emf.transaction,
+ org.yakindu.sct.domain
+Export-Package: org.yakindu.slang.generator,
+ org.yakindu.slang.generator.artifacts,
+ org.yakindu.slang.generator.typesystem
