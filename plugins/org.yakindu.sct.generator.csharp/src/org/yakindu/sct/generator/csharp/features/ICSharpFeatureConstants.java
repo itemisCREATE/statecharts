@@ -50,7 +50,13 @@ public interface ICSharpFeatureConstants {
 	
 	public static final String NAME_SUFFIX = "nameSuffix";
 	
-	
+	public static final String BASE_PACKAGE = "basePackage";
+
+	public static final String IN_EVENT_QUEUE = "inEventQueue";
+
+	public static final String SYNCHRONIZED = "synchronized";
+
+	public static final String RUNNABLE = "runnable";
 	
 	
 	public static final String[] CSHARP_KEYWORDS = { 
