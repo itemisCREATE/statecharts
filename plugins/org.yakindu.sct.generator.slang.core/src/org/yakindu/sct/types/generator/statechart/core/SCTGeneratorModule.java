@@ -12,7 +12,10 @@ package org.yakindu.sct.types.generator.statechart.core;
 
 import java.util.List;
 
+import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.model.sexec.naming.INamingService;
+import org.yakindu.sct.model.sgen.GeneratorEntry;
+import org.yakindu.sct.types.generator.ITypesGenerator;
 import org.yakindu.sct.types.generator.artifacts.IGeneratorArtifactConfigurator;
 import org.yakindu.sct.types.generator.statechart.core.naming.IEventNaming;
 import org.yakindu.sct.types.generator.statechart.core.naming.IPropertyAccessNaming;
@@ -22,8 +25,10 @@ import org.yakindu.sct.types.modification.ModificationExecutor;
 import com.google.inject.Binder;
 import com.google.inject.multibindings.Multibinder;
 
-public abstract class SCTGeneratorModule {
-	public void configure(Binder binder) {
+public abstract class SCTGeneratorModule implements IGeneratorModule {
+	
+	@Override
+	public void configure(GeneratorEntry entry, Binder binder) {
 		configureSlangClasses(binder);
 		bindModifications(binder);
 	}
@@ -60,4 +65,6 @@ public abstract class SCTGeneratorModule {
 	public abstract Class<? extends IGeneratorArtifactConfigurator> bindOutputConfigurator();
 
 	public abstract Class<? extends INamingService> bindNamingService();
+	
+	public abstract Class<? extends ITypesGenerator> bindGenerator();
 }

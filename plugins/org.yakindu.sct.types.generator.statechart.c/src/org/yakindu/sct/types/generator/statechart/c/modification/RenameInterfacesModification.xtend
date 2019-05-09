@@ -6,7 +6,7 @@
 * 	itemis AG
 *
 */
-package org.yakindu.sct.types.generator.c.modifications
+package org.yakindu.sct.types.generator.statechart.c.modification
 
 import java.util.Collection
 import org.yakindu.base.types.ComplexType

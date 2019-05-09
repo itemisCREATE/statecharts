@@ -1,4 +1,4 @@
-package org.yakindu.sct.types.generator.c.naming
+package org.yakindu.sct.types.generator.statechart.c.naming
 
 import org.yakindu.sct.types.generator.statechart.core.naming.IEventNaming
 

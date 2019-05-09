@@ -6,7 +6,7 @@
 * 	itemis AG
 *
 */
-package org.yakindu.sct.types.generator.c.naming
+package org.yakindu.sct.types.generator.statechart.c.naming
 
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.base.NamedElement
@@ -34,5 +34,4 @@ class CPropertyAccessNaming implements IPropertyAccessNaming {
 	def dispatch getName(NamedElement it) {
 		name + "_"
 	}
-	
 }

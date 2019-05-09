@@ -17,3 +17,7 @@ Require-Bundle: org.yakindu.base.types,
  org.eclipse.xtend.lib.macro,
  org.yakindu.sct.model.stext,
  org.yakindu.sct.generator.core
+Export-Package: org.yakindu.sct.types.generator.c,
+ org.yakindu.sct.types.generator.c.artifacts,
+ org.yakindu.sct.types.generator.c.files,
+ org.yakindu.sct.types.generator.c.typesystem
