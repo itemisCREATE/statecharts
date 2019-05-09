@@ -9,6 +9,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.yakindu.sct.types.modification,
  org.yakindu.sct.generator.core,
  org.eclipse.emf.transaction,
+ com.google.inject,
  org.yakindu.sct.domain
 Export-Package: org.yakindu.slang.generator,
  org.yakindu.slang.generator.artifacts,
