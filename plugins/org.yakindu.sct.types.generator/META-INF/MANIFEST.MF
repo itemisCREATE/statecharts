@@ -14,3 +14,4 @@ Require-Bundle: org.yakindu.sct.types.modification,
 Export-Package: org.yakindu.slang.generator,
  org.yakindu.slang.generator.artifacts,
  org.yakindu.slang.generator.typesystem
+Import-Package: com.google.inject.multibindings;version="1.3.0"
