@@ -8,4 +8,4 @@ Automatic-Module-Name: org.yakindu.slang.modification
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.yakindu.sct.generator.core,
  org.eclipse.emf.transaction
-Export-Package: org.yakindu.slang.modification
+Export-Package: org.yakindu.sct.types.modification

@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Statechart C-Code Generator
+Bundle-SymbolicName: org.yakindu.sct.types.generator.statechart.c
+Bundle-Version: 3.5.3.qualifier
+Bundle-Vendor: statecharts.org
+Automatic-Module-Name: org.yakindu.sct.generator.slang.c
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8

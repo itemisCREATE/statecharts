@@ -11,7 +11,7 @@ Require-Bundle: org.yakindu.sct.types.modification,
  org.eclipse.emf.transaction,
  com.google.inject,
  org.yakindu.sct.domain
-Export-Package: org.yakindu.slang.generator,
- org.yakindu.slang.generator.artifacts,
- org.yakindu.slang.generator.typesystem
+Export-Package: org.yakindu.sct.types.generator,
+ org.yakindu.sct.types.generator.artifacts,
+ org.yakindu.sct.types.generator.typesystem
 Import-Package: com.google.inject.multibindings;version="1.3.0"
