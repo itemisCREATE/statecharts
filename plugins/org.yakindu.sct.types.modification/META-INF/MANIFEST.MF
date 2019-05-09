@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Slang Modifications
+Bundle-SymbolicName: org.yakindu.sct.types.modification
+Bundle-Version: 3.5.3.qualifier
+Bundle-Vendor: statecharts.org
+Automatic-Module-Name: org.yakindu.slang.modification
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.yakindu.sct.generator.core,
+ org.eclipse.emf.transaction
+Export-Package: org.yakindu.slang.modification
