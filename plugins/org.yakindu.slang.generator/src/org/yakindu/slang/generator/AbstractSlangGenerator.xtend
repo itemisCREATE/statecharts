@@ -16,7 +16,7 @@ import org.yakindu.base.types.Package
 import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess
 import org.yakindu.slang.generator.artifacts.GeneratorArtifact
 import org.yakindu.slang.generator.artifacts.IGeneratorArtifactConfigurator
-import org.yakindu.slang.generator.modification.ModificationExecutor
+import org.yakindu.slang.modification.ModificationExecutor
 
 /**
  * The base implementation of {@link ISlangGenerator}.

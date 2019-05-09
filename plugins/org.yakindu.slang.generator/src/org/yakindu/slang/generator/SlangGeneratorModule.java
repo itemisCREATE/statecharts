@@ -13,8 +13,8 @@ package org.yakindu.slang.generator;
 import java.util.List;
 
 import org.yakindu.slang.generator.artifacts.IGeneratorArtifactConfigurator;
-import org.yakindu.slang.generator.modification.IModification;
-import org.yakindu.slang.generator.modification.ModificationExecutor;
+import org.yakindu.slang.modification.IModification;
+import org.yakindu.slang.modification.ModificationExecutor;
 
 import com.google.inject.Binder;
 import com.google.inject.multibindings.Multibinder;

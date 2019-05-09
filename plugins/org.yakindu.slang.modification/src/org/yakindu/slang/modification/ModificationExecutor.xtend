@@ -8,7 +8,7 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.slang.generator.modification
+package org.yakindu.slang.modification
 
 import com.google.inject.Inject
 import java.util.Collection
