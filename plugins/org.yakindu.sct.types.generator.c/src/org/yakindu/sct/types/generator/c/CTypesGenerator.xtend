@@ -134,7 +134,7 @@ class CTypesGenerator extends AbstractTypesGenerator implements ITypesGenerator 
 		«IF isStatic»static «ENDIF»«IF type === null»void«ELSE»«typeSpecifier.code»«ENDIF» «name»(«FOR p : parameters SEPARATOR ', '»«p.typeSpecifier.code» «p.name»«ENDFOR»)«IF body !== null»«body.code»«ELSE»;«ENDIF» 
 	'''
 
-	def dispatch doGenerate(Object o) {
+	def dispatch String doGenerate(Object o) {
 		'''//Unknown object «o»'''
 
 	}

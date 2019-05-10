@@ -32,10 +32,10 @@ abstract class AbstractTypesGenerator implements ITypesGenerator {
 		modificationExecutor.modify(packages)
 		val artifactConfiguration = configurator.configure(packages, fileSystemAccess)
 		artifactConfiguration.generatorArtifacts.filter[isNotEmpty].forEach[
-			generate
+			artifactConfiguration.generateFile(it, generate)
 		]
 	}
 	
-	def protected void generate(GeneratorArtifact<?> artifact);
+	def protected String generate(GeneratorArtifact<?> artifact);
 	
 }
