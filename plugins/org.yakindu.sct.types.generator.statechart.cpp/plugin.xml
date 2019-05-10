@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.yakindu.sct.generator.core.generator">
+      <SCTGenerator
+            bindings="org.yakindu.sct.types.generator.statechart.cpp.CppSCTGeneratorModule"
+            contentType="statechart"
+            elementRefType="org.yakindu.sct.model.sgraph.Statechart"
+            executor="com.yakindu.sct.types.slang.generator.core.SlangGeneratorEntryExecutor"
+            id="yakindu::cpp::ng"
+            name="Types SCT C++ Generator">
+      </SCTGenerator>
+   </extension>
+
+</plugin>
