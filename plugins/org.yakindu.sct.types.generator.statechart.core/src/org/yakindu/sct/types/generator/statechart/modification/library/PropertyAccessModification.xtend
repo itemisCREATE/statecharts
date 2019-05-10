@@ -8,7 +8,7 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.types.generator.statechart.core.modification.library
+package org.yakindu.sct.types.generator.statechart.modification.library
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
@@ -25,7 +25,7 @@ import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.Visibility
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.types.generator.modification.library.ComplexTypeNavigationExtensions
-import org.yakindu.sct.types.generator.statechart.core.naming.IPropertyAccessNaming
+import org.yakindu.sct.types.generator.statechart.naming.IPropertyAccessNaming
 import org.yakindu.sct.types.modification.IModification
 
 /**
