@@ -16,7 +16,7 @@ This is a bugfix release, containing the following:
 
 h3(#release_notes_3.5.4_c_sharp). Event-driven execution support for C# code generator
 
-The C# code generator now also supports statecharts with event-driven execution semantics. The generated code now contains corresponding run-cycle calls when events are triggered as well as event queues to store incoming events.
+The C# code generator now also supports statecharts with event-driven execution semantics. The generated code now contains corresponding run-cycle calls when events are triggered as well as a queue for internal events.
 
 h2(#release_notes_3.5.3). YAKINDU Statechart Tools  3.5.3 (Mar 29, 2019)
 
