@@ -7,7 +7,6 @@ Bundle-Vendor: statecharts.org
 Automatic-Module-Name: org.yakindu.sct.types.generator.cpp
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.yakindu.sct.types.generator,
- com.yakindu.sct.types.slang,
  org.yakindu.sct.generator.genmodel,
  org.yakindu.sct.model.stext,
  org.yakindu.sct.types.generator.c,

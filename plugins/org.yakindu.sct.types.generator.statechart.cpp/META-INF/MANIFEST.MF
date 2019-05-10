@@ -5,7 +5,8 @@ Bundle-SymbolicName: org.yakindu.sct.types.generator.statechart.cpp;singleton:=t
 Bundle-Version: 3.5.3.qualifier
 Automatic-Module-Name: org.yakindu.sct.types.generator.statechart.cpp
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Require-Bundle: org.yakindu.sct.types.generator.c,
+Require-Bundle: org.yakindu.sct.generator.core,
+ org.yakindu.sct.types.generator.c,
  org.yakindu.sct.types.generator.cpp,
  com.google.guava,
  org.eclipse.xtext.xbase.lib,
