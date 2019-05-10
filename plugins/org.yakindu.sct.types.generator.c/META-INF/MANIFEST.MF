@@ -9,7 +9,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.yakindu.base.types,
  org.yakindu.base.expressions,
  org.yakindu.sct.types.generator,
- org.yakindu.sct.types.generator.statechart.core,
+ org.yakindu.sct.types.generator.statechart,
  org.yakindu.sct.types.modification,
  com.google.guava,
  org.eclipse.xtext.xbase.lib,
