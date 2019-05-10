@@ -6,9 +6,11 @@
 * 	itemis AG
 *
 */
-package org.yakindu.sct.types.generator.statechart.c
+package org.yakindu.sct.types.generator.statechart.core
 
 import com.google.inject.Inject
+import java.util.Collection
+import org.yakindu.base.types.Package
 import org.yakindu.sct.generator.core.execution.AbstractGeneratorEntryExecutor
 import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess
 import org.yakindu.sct.model.sequencer.ModelSequencer
@@ -22,14 +24,13 @@ class PackageGeneratorEntryExecutor extends AbstractGeneratorEntryExecutor {
 	@Inject protected ITypesGenerator generator
 	
 	override protected execute(ISCTFileSystemAccess access, GeneratorEntry generatorEntry) {
-		val pack = createPackage(generatorEntry)
-		generator.generate(#[pack], access) 
+		generator.generate(createPackages(generatorEntry), access) 
 	}
 	
-	def protected createPackage(GeneratorEntry entry) {
+	def protected Collection<Package> createPackages(GeneratorEntry entry) {
 		val elementRef = entry.elementRef
 		if(elementRef instanceof Statechart) {
-			sequencer.transform(elementRef, null)	
+			#[sequencer.transform(elementRef, null)]	
 		} else {
 			null
 		}

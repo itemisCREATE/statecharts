@@ -10,7 +10,8 @@ Require-Bundle: org.yakindu.sct.types.modification,
  org.yakindu.sct.generator.core,
  org.eclipse.emf.transaction,
  com.google.inject,
- org.yakindu.sct.domain
+ org.yakindu.sct.domain,
+ org.yakindu.sct.model.sgen
 Export-Package: org.yakindu.sct.types.generator,
  org.yakindu.sct.types.generator.artifacts,
  org.yakindu.sct.types.generator.typesystem
