@@ -11,13 +11,8 @@
 package org.yakindu.sct.types.generator.java
 
 import org.yakindu.sct.types.generator.java.artifacts.DefaultJavaGeneratorArtifactConfigurator
-import org.yakindu.sct.types.generator.java.modifications.DefaultInterfacePropertyAccessModification
-import org.yakindu.sct.types.generator.java.modifications.InitializeInterfacePropertiesModification
-import org.yakindu.sct.types.generator.java.modifications.InterfaceLiftingModification
 import org.yakindu.sct.types.generator.java.modifications.NamingConventionModification
-import org.yakindu.sct.types.generator.java.modifications.OperationCallbackModification
 import org.yakindu.sct.types.generator.java.modifications.ReplaceIntegerWithLongModification
-import org.yakindu.sct.types.generator.java.modifications.UnwrapInternalInterfaceModification
 import org.yakindu.sct.types.generator.modification.library.AliasReplacementModification
 import org.yakindu.sct.types.generator.modification.library.FlattenInnerTypesModification
 import org.yakindu.sct.types.generator.modification.library.IdentifierModification
@@ -41,14 +36,8 @@ class JavaTypesGeneratorModule extends TypesGeneratorModule {
 			IdentifierModification,
 			
 			ReplaceIntegerWithLongModification, // restores API compatibility
-			UnwrapInternalInterfaceModification,
-			DefaultInterfacePropertyAccessModification,
-			InitializeInterfacePropertiesModification,
 			FlattenInnerTypesModification,
-			InterfaceLiftingModification,
-			OperationCallbackModification,
 			AliasReplacementModification,
-		
 			
 			/**
 			 * after ReplaceIntegerWithLongModification to ensure interface properties/operations use long type instead of int

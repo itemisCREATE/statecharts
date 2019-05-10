@@ -1,11 +1,13 @@
-/**
- * Copyright (c) 2019 itemis AG - All rights Reserved
- * Unauthorized copying of this file, via any medium is strictly prohibited
- * 
+/** 
+ * Copyright (c) 2019 committers of YAKINDU and others. 
+ * All rights reserved. This program and the accompanying materials 
+ * are made available under the terms of the Eclipse Public License v1.0 
+ * which accompanies this distribution, and is available at 
+ * http://www.eclipse.org/legal/epl-v10.html 
  * Contributors:
- * 	itemis AG
- * 
- */
+ * committers of YAKINDU - initial API and implementation
+ *
+*/
 package org.yakindu.sct.types.generator.java
 
 import com.google.inject.Inject
@@ -21,6 +23,7 @@ import org.yakindu.base.types.Property
 import org.yakindu.base.types.TypeSpecifier
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.types.generator.Expressions
+import org.yakindu.sct.types.generator.java.modifications.ConstructorBuilder
 import org.yakindu.sct.types.generator.modification.library.ContainmentExtensions
 
 class JavaExpressions extends Expressions {

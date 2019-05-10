@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<extension
+         point="org.yakindu.sct.generator.core.generator">
+      <SCTGenerator
+            bindings="org.yakindu.sct.types.generator.statechart.java.JavaSCTGeneratorModule"
+            contentType="statechart"
+            elementRefType="org.yakindu.sct.model.sgraph.Statechart"
+            executor="org.yakindu.sct.types.generator.statechart.PackageGeneratorEntryExecutor"
+            id="yakindu::java::ng"
+            name="Types SCT Java Generator">
+           <FeatureLibrary
+               library_id="org.yakindu.generator.core.features">
+	         </FeatureLibrary>
+	         <FeatureLibrary
+                library_id="org.yakindu.sct.generator.feature.java">
+          </FeatureLibrary>
+      </SCTGenerator>
+   </extension>
+</plugin>

@@ -1,12 +1,14 @@
-/**
-* Copyright (c) 2019 itemis AG - All rights Reserved
-* Unauthorized copying of this file, via any medium is strictly prohibited
-* 
-* Contributors:
-* 	itemis AG
-*
+/** 
+ * Copyright (c) 2019 committers of YAKINDU and others. 
+ * All rights reserved. This program and the accompanying materials 
+ * are made available under the terms of the Eclipse Public License v1.0 
+ * which accompanies this distribution, and is available at 
+ * http://www.eclipse.org/legal/epl-v10.html 
+ * Contributors:
+ * committers of YAKINDU - initial API and implementation
+ *
 */
-package com.yakindu.sct.types.slang.generator.java
+package org.yakindu.sct.types.generator.java
 
 import com.google.inject.Inject
 import org.eclipse.xtext.EcoreUtil2
@@ -25,42 +27,22 @@ import org.yakindu.sct.types.generator.ITypesGenerator
 import org.yakindu.sct.types.generator.artifacts.Dependency.ArtifactDependency
 import org.yakindu.sct.types.generator.artifacts.Dependency.StaticDependency
 import org.yakindu.sct.types.generator.artifacts.GeneratorArtifact
-import org.yakindu.sct.types.generator.artifacts.GeneratorArtifactConfiguration
+import org.yakindu.sct.types.generator.java.modifications.ConstructorBuilder
 
 import static org.eclipse.xtext.util.Strings.newLine
 
-class JavaSlangGenerator extends AbstractTypesGenerator implements ITypesGenerator {
+class JavaTypesGenerator extends AbstractTypesGenerator implements ITypesGenerator {
 
 	@Inject extension Expressions
 	@Inject protected extension PackageNavigationExtensions
 	@Inject protected extension ConstructorBuilder
 	
-	override protected generate(GeneratorArtifact<?> artifact) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-
-	def dispatch String doGenerate(GeneratorArtifact<?> it) {
+	override protected generate(GeneratorArtifact<?> it) {
 		'''
-		«content.doGenerateRoot(it)»
-		'''
+			«content.doGenerateRoot(it)»
+		'''	
 	}
 	
-	def dispatch String doGenerate(StaticDependency it) {
-		'''import «dependency»;'''
-	}
-	
-	def dispatch String doGenerate(ArtifactDependency it) {
-		'''import «dependency.content.asImportString»;'''
-	}
-	
-	def dispatch String asImportString(Object it) {
-		'''Cannot convert to import string: «it»'''
-	}
-	
-	def dispatch String asImportString(ComplexType it) {
-		'''«containingPackage.name».«name»'''
-	}
-
 	def dispatch String doGenerateRoot(ComplexType it, GeneratorArtifact<?> artifact) '''
 		«packageDefinition»
 		
@@ -76,13 +58,13 @@ class JavaSlangGenerator extends AbstractTypesGenerator implements ITypesGenerat
 		«it»
 	'''
 	
-	def packageDefinition(ComplexType it) '''package «containingPackage.name»;'''
+	def dispatch String doGenerate(StaticDependency it) {
+		'''import «dependency»;'''
+	}
 	
-	def imports(GeneratorArtifact<?> it) '''
-		«FOR dep : dependencies»
-			«dep.doGenerate»
-		«ENDFOR»
-	'''
+	def dispatch String doGenerate(ArtifactDependency it) {
+		'''import «dependency.content.asImportString»;'''
+	}
 	
 	def dispatch String doGenerate(ComplexType it) '''
 		«annotations(it)»
@@ -95,12 +77,6 @@ class JavaSlangGenerator extends AbstractTypesGenerator implements ITypesGenerat
 		}
 	'''
 	
-	def inheritance(ComplexType it)
-		'''«FOR i : superTypes BEFORE (if (abstract) ' extends ' else ' implements ') SEPARATOR ', '»«i.code»«ENDFOR»'''
-	
-	def annotations(AnnotatableElement it) '''
-		«IF annotationInfo !== null»«FOR annotation : it.annotationInfo.annotations SEPARATOR newLine»@«annotation.type.name»«ENDFOR»«ENDIF»
-	'''
 
 	def dispatch String doGenerate(EnumerationType it) '''
 		«annotations(it)»
@@ -131,6 +107,28 @@ class JavaSlangGenerator extends AbstractTypesGenerator implements ITypesGenerat
 	
 	def dispatch String doGenerate(Object o) '''//Unknown object «o»'''
 
+	def dispatch String asImportString(Object it) {
+		'''Cannot convert to import string: «it»'''
+	}
+	
+	def dispatch String asImportString(ComplexType it) {
+		'''«containingPackage.name».«name»'''
+	}
+
+	def packageDefinition(ComplexType it) '''package «containingPackage.name»;'''
+	
+	def imports(GeneratorArtifact<?> it) '''
+		«FOR dep : dependencies»
+			«dep.doGenerate»
+		«ENDFOR»
+	'''
+	
+	def inheritance(ComplexType it)
+		'''«FOR i : superTypes BEFORE (if (abstract) ' extends ' else ' implements ') SEPARATOR ', '»«i.code»«ENDFOR»'''
+	
+	def annotations(AnnotatableElement it) '''
+		«IF annotationInfo !== null»«FOR annotation : it.annotationInfo.annotations SEPARATOR newLine»@«annotation.type.name»«ENDFOR»«ENDIF»
+	'''
 	def protected visibilityMod(Declaration it) '''«visibility.getName().toLowerCase» '''
 	
 	def protected staticMod(ComplexType it) '''«IF it.eContainer instanceof ComplexType»static «ENDIF»'''
