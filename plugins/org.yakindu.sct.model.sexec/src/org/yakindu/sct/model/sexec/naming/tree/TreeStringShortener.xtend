@@ -40,6 +40,9 @@ class TreeStringShortener implements IStringShortener {
 	}
 
 	override addString(List<String> s, Object token) {
+		if(originalStrings.keySet.filter[it != token].map[originalStrings.get(it).join("")].exists[it == s.join("")]) {
+			throw new IllegalArgumentException("String is duplicate: " + s.join("."))
+		}
 		validState = false
 		originalStrings.put(token, s)
 	}
