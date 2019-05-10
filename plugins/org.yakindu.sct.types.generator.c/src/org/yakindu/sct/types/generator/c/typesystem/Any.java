@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.model.sruntime;
+package org.yakindu.sct.types.generator.c.typesystem;
 
 /**
  * 
