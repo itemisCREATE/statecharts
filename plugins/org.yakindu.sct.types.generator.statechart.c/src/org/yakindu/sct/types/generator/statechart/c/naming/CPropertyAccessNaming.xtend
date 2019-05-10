@@ -13,7 +13,7 @@ package org.yakindu.sct.types.generator.statechart.c.naming
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.base.NamedElement
 import org.yakindu.base.types.Property
-import org.yakindu.sct.types.generator.statechart.core.naming.IPropertyAccessNaming
+import org.yakindu.sct.types.generator.statechart.naming.IPropertyAccessNaming
 
 class CPropertyAccessNaming implements IPropertyAccessNaming {
 	

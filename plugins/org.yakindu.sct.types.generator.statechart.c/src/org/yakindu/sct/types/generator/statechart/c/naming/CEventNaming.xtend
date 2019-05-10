@@ -10,7 +10,7 @@
 */
 package org.yakindu.sct.types.generator.statechart.c.naming
 
-import org.yakindu.sct.types.generator.statechart.core.naming.IEventNaming
+import org.yakindu.sct.types.generator.statechart.naming.IEventNaming
 
 class CEventNaming implements IEventNaming {
 	override String nameEventRaiser(CharSequence s) {
