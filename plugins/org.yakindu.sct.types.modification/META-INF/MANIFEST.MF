@@ -7,5 +7,6 @@ Bundle-Vendor: statecharts.org
 Automatic-Module-Name: org.yakindu.slang.modification
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.yakindu.sct.generator.core,
- org.eclipse.emf.transaction
+ org.eclipse.emf.transaction,
+ org.yakindu.sct.model.stext
 Export-Package: org.yakindu.sct.types.modification
