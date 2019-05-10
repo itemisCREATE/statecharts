@@ -1,11 +1,11 @@
 package org.yakindu.sct.types.generator.statechart.c
 
-import org.yakindu.sct.types.generator.c.CTypesGenerator
 import org.yakindu.sct.types.generator.statechart.c.artifacts.CGeneratorArtifactConfigurator
 import org.yakindu.sct.types.generator.statechart.c.naming.CEventNaming
 import org.yakindu.sct.types.generator.statechart.c.naming.CNamingService
 import org.yakindu.sct.types.generator.statechart.c.naming.CPropertyAccessNaming
 import org.yakindu.sct.types.generator.statechart.core.SCTGeneratorModule
+import org.yakindu.sct.types.generator.c.CTypesGeneratorModule
 
 class CSCTGeneratorModule extends SCTGeneratorModule {
 	
@@ -29,10 +29,8 @@ class CSCTGeneratorModule extends SCTGeneratorModule {
 		CNamingService
 	}
 	
-	override bindGenerator() {
-		CTypesGenerator
+	override getCoreGeneratorModule() {
+		new CTypesGeneratorModule
 	}
-	
-	
 	
 }

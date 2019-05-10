@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Slang C-Code Generator
-Bundle-SymbolicName: org.yakindu.sct.types.generator.c
+Bundle-SymbolicName: org.yakindu.sct.types.generator.c;singleton:=true
 Bundle-Version: 3.5.3.qualifier
 Bundle-Vendor: statecharts.org
 Automatic-Module-Name: org.yakindu.slang.generator.c

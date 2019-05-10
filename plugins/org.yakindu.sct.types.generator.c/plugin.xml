@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+<extension
+         point="org.yakindu.sct.generator.core.generator">
+      <SCTGenerator
+            bindings="com.yakindu.sct.types.slang.generator.c.CSlangGeneratorModule"
+            contentType="slang"
+            elementRefType="org.yakindu.base.types.Package"
+            executor="com.yakindu.sct.types.slang.generator.core.SlangGeneratorEntryExecutor"
+            id="slang::c"
+            name="SLANG C">
+               <FeatureLibrary
+               library_id="org.yakindu.generator.core.features">
+         </FeatureLibrary>
+      </SCTGenerator>
+   </extension>
+</plugin>

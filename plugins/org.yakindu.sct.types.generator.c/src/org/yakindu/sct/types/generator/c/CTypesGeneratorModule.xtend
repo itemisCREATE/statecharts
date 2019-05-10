@@ -10,19 +10,19 @@
  */
 package org.yakindu.sct.types.generator.c
 
-import org.yakindu.sct.types.generator.TypesGeneratorModule
 import org.yakindu.sct.types.generator.c.artifacts.DefaultCGeneratorArtifactConfigurator
+import org.yakindu.sct.types.generator.module.TypesGeneratorModule
 
 class CTypesGeneratorModule extends TypesGeneratorModule {
 
-	override bindISlangGenerator() {
+	override bindITypesGenerator() {
 		CTypesGenerator
 	}
 	
 	override getModifications() {
 		return #[
 //			// base modifications
-//			PropertyAccessModification,
+//			PropertyAccessModification, 
 //			InEventModification,
 //			OutEventModification,
 //			LocalEventModification,

@@ -8,10 +8,15 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.types.generator;
+package org.yakindu.sct.types.generator.module;
 
 import java.util.List;
 
+import org.yakindu.sct.generator.core.IGeneratorModule;
+import org.yakindu.sct.model.sgen.GeneratorEntry;
+import org.yakindu.sct.types.generator.Expressions;
+import org.yakindu.sct.types.generator.ITargetPlatform;
+import org.yakindu.sct.types.generator.ITypesGenerator;
 import org.yakindu.sct.types.generator.artifacts.IGeneratorArtifactConfigurator;
 import org.yakindu.sct.types.modification.IModification;
 import org.yakindu.sct.types.modification.ModificationExecutor;
@@ -19,14 +24,15 @@ import org.yakindu.sct.types.modification.ModificationExecutor;
 import com.google.inject.Binder;
 import com.google.inject.multibindings.Multibinder;
 
-public abstract class TypesGeneratorModule {
-	public void configure(Binder binder) {
+public abstract class TypesGeneratorModule implements IGeneratorModule {
+	
+	public void configure(GeneratorEntry entry, Binder binder) {
 		configureSlangClasses(binder);
 		bindModifications(binder);
 	}
 
 	private void configureSlangClasses(Binder binder) {
-		binder.bind(ITypesGenerator.class).to(bindISlangGenerator());
+		binder.bind(ITypesGenerator.class).to(bindITypesGenerator());
 		binder.bind(Expressions.class).to(bindExpressions());
 		binder.bind(ITargetPlatform.class).to(bindTargetPlatform());
 		binder.bind(IGeneratorArtifactConfigurator.class).to(bindOutputConfigurator());
@@ -53,7 +59,7 @@ public abstract class TypesGeneratorModule {
 	 */
 	public abstract List<Class<? extends IModification>> getModifications();
 
-	public abstract Class<? extends ITypesGenerator> bindISlangGenerator();
+	public abstract Class<? extends ITypesGenerator> bindITypesGenerator();
 
 	public abstract Class<? extends Expressions> bindExpressions();
 
