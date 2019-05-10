@@ -34,15 +34,10 @@ class CTypesGeneratorModule extends TypesGeneratorModule {
 	override getModifications() {
 		return #[
 			// base modifications
-			PropertyAccessModification, 
-			InEventModification,
-			OutEventModification,
-			LocalEventModification,
 			IdentifierModification,
 			
 			// c specific modifcations
 			FlattenComplexTypesModification,
-			RenameInterfacesModification,
 			ExtractOperationsModification,
 			RemoveAnnotationTypeModification,
 			RemoveUnusedTypesModification,

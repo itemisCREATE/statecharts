@@ -1,4 +1,4 @@
-package com.yakindu.sct.types.slang.generator.core.modifications.events
+package org.yakindu.sct.types.generator.statechart.modification.library.event
 
 import com.google.inject.Inject
 import java.util.List
@@ -7,11 +7,11 @@ import org.eclipse.xtext.EcoreUtil2
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.EventClearingExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Property
-import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 
 class ClearEventModification {
 

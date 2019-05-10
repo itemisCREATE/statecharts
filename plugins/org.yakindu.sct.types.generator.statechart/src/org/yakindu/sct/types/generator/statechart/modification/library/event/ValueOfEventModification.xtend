@@ -1,4 +1,4 @@
-package com.yakindu.sct.types.slang.generator.core.modifications.events
+package org.yakindu.sct.types.generator.statechart.modification.library.event
 
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.util.EcoreUtil

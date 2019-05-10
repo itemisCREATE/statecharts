@@ -9,6 +9,7 @@
 package org.yakindu.sct.types.generator.statechart.modification.library.event
 
 import com.google.inject.Inject
+import java.util.Collection
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import org.yakindu.base.expressions.util.ExpressionsHelper
 import org.yakindu.base.types.Direction
@@ -31,7 +32,13 @@ abstract class BaseEventModification implements IModification {
 
 	protected TypesFactory typesFactory = TypesFactory.eINSTANCE
 	protected ExpressionsFactory expFactory = ExpressionsFactory.eINSTANCE
-	override modify(Package p) {
+	
+	override modify(Collection<Package> packages) {
+		packages.forEach[modify]
+		packages
+	}
+
+	def modify(Package p) {
 		p.eAllContents.filter(Event).toList.forEach [ e |
 			switch (e.direction) {
 				case Direction.IN: {

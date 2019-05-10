@@ -6,21 +6,21 @@
 * 	itemis AG
 *
 */
-package com.yakindu.sct.types.slang.generator.core.modifications.events
+package org.yakindu.sct.types.generator.statechart.modification.library.event
 
 import com.google.inject.Inject
-import com.yakindu.sct.types.slang.generator.core.modifications.ContainmentExtensions
 import java.util.List
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.EcoreUtil2
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.EventRaisingExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Property
-import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
+import org.yakindu.sct.types.generator.modification.library.ContainmentExtensions
 
 /**
  * Transforms <code>raise e</code> into <code>e_prop = true</code> where <code>e_prop</code> is the event property
