@@ -11,6 +11,18 @@
 package org.yakindu.sct.types.generator.c
 
 import org.yakindu.sct.types.generator.c.artifacts.DefaultCGeneratorArtifactConfigurator
+import org.yakindu.sct.types.generator.c.modifications.ExtractOperationsModification
+import org.yakindu.sct.types.generator.c.modifications.FlattenComplexTypesModification
+import org.yakindu.sct.types.generator.c.modifications.RemoveUnusedTypesModification
+import org.yakindu.sct.types.generator.c.modifications.RenameComplexTypes
+import org.yakindu.sct.types.generator.c.modifications.RenameOperationsModification
+import org.yakindu.sct.types.generator.c.modifications.RenamePackageModification
+import org.yakindu.sct.types.generator.c.modifications.RenameStateEnumModification
+import org.yakindu.sct.types.generator.c.modifications.ReorderComplexTypesModification
+import org.yakindu.sct.types.generator.modification.library.IdentifierModification
+import org.yakindu.sct.types.generator.modification.library.NextStateIndexModification
+import org.yakindu.sct.types.generator.modification.library.RemoveAnnotationTypeModification
+import org.yakindu.sct.types.generator.modification.library.TypesReplacementModification
 import org.yakindu.sct.types.generator.module.TypesGeneratorModule
 
 class CTypesGeneratorModule extends TypesGeneratorModule {
@@ -21,28 +33,28 @@ class CTypesGeneratorModule extends TypesGeneratorModule {
 	
 	override getModifications() {
 		return #[
-//			// base modifications
-//			PropertyAccessModification, 
-//			InEventModification,
-//			OutEventModification,
-//			LocalEventModification,
-//			IdentifierModification,
-//			
-//			// c specific modifcations
-//			FlattenComplexTypesModification,
-//			RenameInterfacesModification,
-//			ExtractOperationsModification,
-//			RemoveAnnotationTypeModification,
-//			RemoveUnusedTypesModification,
-//			NextStateIndexModification,
-//			RenamePackageModification,
-//			RenameOperationsModification,
-//			ReorderComplexTypesModification,
-//			RenameComplexTypes,
-//			RenameStateEnumModification,
-//			
-//			// base modification
-//			TypesReplacementModification
+			// base modifications
+			PropertyAccessModification, 
+			InEventModification,
+			OutEventModification,
+			LocalEventModification,
+			IdentifierModification,
+			
+			// c specific modifcations
+			FlattenComplexTypesModification,
+			RenameInterfacesModification,
+			ExtractOperationsModification,
+			RemoveAnnotationTypeModification,
+			RemoveUnusedTypesModification,
+			NextStateIndexModification,
+			RenamePackageModification,
+			RenameOperationsModification,
+			ReorderComplexTypesModification,
+			RenameComplexTypes,
+			RenameStateEnumModification,
+			
+			// base modification
+			TypesReplacementModification
 			
 		]
 	}
