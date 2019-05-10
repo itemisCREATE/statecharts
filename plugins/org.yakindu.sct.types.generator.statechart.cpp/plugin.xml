@@ -7,10 +7,16 @@
             bindings="org.yakindu.sct.types.generator.statechart.cpp.CppSCTGeneratorModule"
             contentType="statechart"
             elementRefType="org.yakindu.sct.model.sgraph.Statechart"
-            executor="com.yakindu.sct.types.slang.generator.core.SlangGeneratorEntryExecutor"
+            executor="org.yakindu.sct.types.generator.statechart.PackageGeneratorEntryExecutor"
             id="yakindu::cpp::ng"
             name="Types SCT C++ Generator">
+         <FeatureLibrary
+               library_id="org.yakindu.generator.core.features">
+         </FeatureLibrary>
+         <FeatureLibrary
+               library_id="org.yakindu.sct.generator.feature.cpp">
+         </FeatureLibrary>
       </SCTGenerator>
    </extension>
-
+   
 </plugin>

@@ -40,7 +40,7 @@ class CppGeneratorArtifactConfigurator extends DefaultCppGeneratorArtifactConfig
 	@Inject protected extension GeneratorArtifactConfigurationExtensions
 	@Inject protected extension CppConstructorGenerator
 	protected GeneratorArtifactConfiguration config
-	protected GeneratorEntry entry
+	@Inject protected GeneratorEntry entry
 
 	override configure(Collection<Package> packages, ISCTFileSystemAccess fileSystemAccess) {
 		config = new GeneratorArtifactConfiguration(fileSystemAccess)
