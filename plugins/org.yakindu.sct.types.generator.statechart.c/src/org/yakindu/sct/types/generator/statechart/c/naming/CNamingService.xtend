@@ -24,6 +24,9 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.types.generator.statechart.c.GenmodelEntries
+import org.yakindu.sct.model.stext.stext.TimeEventSpec
+
+import static org.yakindu.sct.types.generator.c.CKeywords.C_KEYWORDS
 
 class CNamingService extends DefaultNamingService {
 	
