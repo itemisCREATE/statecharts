@@ -10,6 +10,7 @@
 */
 package org.yakindu.sct.types.generator.statechart;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import org.yakindu.sct.generator.core.IGeneratorModule;
@@ -33,7 +34,12 @@ public abstract class SCTGeneratorModule implements IGeneratorModule {
 
 	@Override
 	public void configure(GeneratorEntry entry, Binder binder) {
-		coreModule = getCoreGeneratorModule();
+		try {
+			coreModule = getCoreGeneratorModule().getConstructor().newInstance();
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+		}
 		configureSlangClasses(binder);
 		bindModifications(binder);
 		binder.bind(GeneratorEntry.class).toInstance(entry);
@@ -80,5 +86,5 @@ public abstract class SCTGeneratorModule implements IGeneratorModule {
 
 	public abstract Class<? extends INamingService> bindNamingService();
 
-	public abstract TypesGeneratorModule getCoreGeneratorModule();
+	public abstract Class<? extends TypesGeneratorModule> getCoreGeneratorModule();
 }

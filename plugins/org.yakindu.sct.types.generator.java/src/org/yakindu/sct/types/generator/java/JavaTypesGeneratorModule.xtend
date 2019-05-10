@@ -1,15 +1,23 @@
-/**
-* Copyright (c) 2019 itemis AG - All rights Reserved
-* Unauthorized copying of this file, via any medium is strictly prohibited
-* 
-* Contributors:
-* 	itemis AG
-*
+/** 
+ * Copyright (c) 2019 committers of YAKINDU and others. 
+ * All rights reserved. This program and the accompanying materials 
+ * are made available under the terms of the Eclipse Public License v1.0 
+ * which accompanies this distribution, and is available at 
+ * http://www.eclipse.org/legal/epl-v10.html 
+ * Contributors:
+ * committers of YAKINDU - initial API and implementation
+ *
 */
 package org.yakindu.sct.types.generator.java
 
-import com.yakindu.sct.types.slang.generator.java.JavaSlangGenerator
-import com.yakindu.sct.types.slang.generator.java.JavaTargetPlatform
+import org.yakindu.sct.types.generator.java.artifacts.DefaultJavaGeneratorArtifactConfigurator
+import org.yakindu.sct.types.generator.java.modifications.DefaultInterfacePropertyAccessModification
+import org.yakindu.sct.types.generator.java.modifications.InitializeInterfacePropertiesModification
+import org.yakindu.sct.types.generator.java.modifications.InterfaceLiftingModification
+import org.yakindu.sct.types.generator.java.modifications.NamingConventionModification
+import org.yakindu.sct.types.generator.java.modifications.OperationCallbackModification
+import org.yakindu.sct.types.generator.java.modifications.ReplaceIntegerWithLongModification
+import org.yakindu.sct.types.generator.java.modifications.UnwrapInternalInterfaceModification
 import org.yakindu.sct.types.generator.modification.library.AliasReplacementModification
 import org.yakindu.sct.types.generator.modification.library.FlattenInnerTypesModification
 import org.yakindu.sct.types.generator.modification.library.IdentifierModification
@@ -19,22 +27,11 @@ import org.yakindu.sct.types.generator.module.TypesGeneratorModule
 class JavaTypesGeneratorModule extends TypesGeneratorModule {
 	
 	override bindITypesGenerator() {
-		JavaSlangGenerator
-	}
-	
-	override bindEventNaming() {
-		JavaEventNaming
+		JavaTypesGenerator
 	}
 	
 	override getModifications() {
 		#[
-			// base modifications
-			PropertyAccessModification,
-			PropertyReferenceModification,
-			InEventModification,
-			OutEventModification,
-			LocalEventModification,
-			
 			// Java modifications
 			NamingConventionModification,
 			
@@ -69,16 +66,8 @@ class JavaTypesGeneratorModule extends TypesGeneratorModule {
 		JavaTargetPlatform
 	}
 	
-	override bindNamingService() {
-		JavaNamingService
-	}
-	
-	override bindPropertyAccessNaming() {
-		JavaPropertyAccessNaming
-	}
-	
 	override bindOutputConfigurator() {
-		JavaGeneratorArtifactConfigurator
+		DefaultJavaGeneratorArtifactConfigurator
 	}
 	
 }

@@ -54,7 +54,7 @@ class CSCTGeneratorModule extends SCTGeneratorModule {
 	}
 	
 	override getCoreGeneratorModule() {
-		new CTypesGeneratorModule
+		CTypesGeneratorModule
 	}
 	
 }
