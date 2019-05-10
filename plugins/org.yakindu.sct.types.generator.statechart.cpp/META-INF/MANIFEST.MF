@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Statechart Cpp-Code Generator
+Bundle-SymbolicName: org.yakindu.sct.types.generator.statechart.cpp;singleton:=true
+Bundle-Version: 3.5.3.qualifier
+Automatic-Module-Name: org.yakindu.sct.types.generator.statechart.cpp
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.yakindu.sct.types.generator.c,
+ org.yakindu.sct.types.generator.cpp,
+ com.google.guava,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib.macro,
+ org.yakindu.sct.types.generator.statechart,
+ org.yakindu.sct.model.stext,
+ org.yakindu.sct.types.generator.statechart.c,
+ org.yakindu.sct.model.sequencer
+
