@@ -80,7 +80,6 @@ class STextTestScopeProvider extends STextScopeProvider {
 		addToIndex(descriptions, cptTemplate)
 		addToIndex(descriptions, cptTemplate.member.head)
 		
-		
 		val nestedTemplate = createPackageWithNestedComplexTypeFunction()
 		addToIndex(descriptions, nestedTemplate)
 		addToIndex(descriptions, nestedTemplate.member.head)
@@ -105,6 +104,11 @@ class STextTestScopeProvider extends STextScopeProvider {
 		addToIndex(descriptions, subSubTypeOfGenericType.superTypes.get(0).type.superTypes.get(0).type)
 		addToIndex(descriptions, subSubTypeOfGenericType.superTypes.get(0).type)
 		addToIndex(descriptions, subSubTypeOfGenericType)
+		
+		val nestedPackage = createNestedPackageWithTypes()
+		addToIndex(descriptions, nestedPackage)
+		addToIndex(descriptions, nestedPackage.member.head)
+		
 		
 		return new SimpleScope(descriptions)
 	}
@@ -543,6 +547,18 @@ class STextTestScopeProvider extends STextScopeProvider {
 		]
 		subSubType.addToResource
 		subSubType
+	}
+	
+	def protected Package createNestedPackageWithTypes() {
+		val pkg = createRootPackage("Types") => [
+			member += createEnumerationType => [
+				name = "EnumType"
+				enumerator += createEnumerator("FOO")
+				enumerator += createEnumerator("BAR")
+			]
+		]
+		pkg.addToResource
+		pkg
 	}
 	
 }
