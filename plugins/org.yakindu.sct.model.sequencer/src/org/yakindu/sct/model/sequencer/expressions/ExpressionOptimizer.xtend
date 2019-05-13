@@ -15,9 +15,9 @@ import org.yakindu.base.expressions.expressions.BlockExpression
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.IfExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
+import org.yakindu.base.expressions.util.ContainmentExtensions
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Package
-import org.yakindu.sct.model.sequencer.util.ContainmentExtensions
 
 class ExpressionOptimizer {
 	

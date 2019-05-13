@@ -6,8 +6,8 @@
  * http://www.eclipse.org/legal/epl-v10.html 
  * Contributors:
  * committers of YAKINDU - initial API and implementation
- *
-*/
+ * 
+ */
 package org.yakindu.base.expressions.util
 
 import java.util.List
@@ -19,6 +19,7 @@ import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Package
+import org.yakindu.base.types.Property
 
 class ContainmentExtensions {
 
@@ -51,7 +52,8 @@ class ContainmentExtensions {
 				list.remove(idx)
 				list.addAll(idx, replacementObjects)
 			} else {
-				throw new IllegalArgumentException("Cannot add multiple objects to single-valued containment feature " + feature)
+				throw new IllegalArgumentException("Cannot add multiple objects to single-valued containment feature " +
+					feature)
 			}
 		}
 		val resource = (eObject as InternalEObject).eDirectResource();
@@ -62,7 +64,7 @@ class ContainmentExtensions {
 			list.addAll(idx, replacementObjects)
 		}
 	}
-	
+
 	def boolean containedIn(EObject exp, EObject toCheck) {
 		var container = exp.eContainer
 		if (container === null) {
@@ -72,5 +74,25 @@ class ContainmentExtensions {
 			return true;
 		}
 		return container.containedIn(toCheck)
+	}
+
+	def List<String> getContainmentHierarchy(ComplexType it) {
+		val result = {
+			if (eContainer instanceof ComplexType) {
+				getContainmentHierarchy(eContainer as ComplexType)
+			} else {
+				newArrayList
+			}
+		}
+		result.add(name)
+		return result
+	}
+
+	def List<String> getContainmentHierarchy(Property it) {
+		if (eContainer instanceof ComplexType) {
+			return getContainmentHierarchy(eContainer as ComplexType)
+		} else {
+			#[]
+		}
 	}
 }

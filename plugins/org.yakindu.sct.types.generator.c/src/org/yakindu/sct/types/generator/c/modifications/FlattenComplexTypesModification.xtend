@@ -10,12 +10,16 @@
  */
 package org.yakindu.sct.types.generator.c.modifications
 
+import com.google.inject.Inject
 import java.util.Collection
+import org.yakindu.base.expressions.util.ContainmentExtensions
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Package
 import org.yakindu.sct.types.modification.IModification
 
 class FlattenComplexTypesModification implements IModification {
+	
+	@Inject protected extension ContainmentExtensions
 
 	override modify(Collection<Package> packages) {
 		packages.forEach[modify]
@@ -24,18 +28,10 @@ class FlattenComplexTypesModification implements IModification {
 
 	def modify(Package p) {
 		p.eAllContents.filter(ComplexType).toList.forEach [ct | 
-			ct.name = ct.getContainmentHierarchy
+			ct.name = ct.getContainmentHierarchy.join("_")
 			p.member += ct
 		]
 
 		return p
 	}
-
-	def protected String getContainmentHierarchy(ComplexType it) {
-		if (eContainer instanceof ComplexType) {
-			return getContainmentHierarchy(eContainer as ComplexType) + "_" + name
-		}
-		return name
-	}
-
 }

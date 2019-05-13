@@ -58,7 +58,7 @@ class CppGeneratorArtifactConfigurator extends DefaultCppGeneratorArtifactConfig
 		
 		val copyCT = p.eAllContents.filter(ComplexType).toList
 		copyCT.forEach[ct | sourceContents.addAll(ct.features.filter(Property).filter[const].toList)]
-		copyCT.forEach[ct | sourceContents.addAll(ct.features.filter(Operation).filter[!(it instanceof OperationDefinition)].filter[!(it.isInnerConstructor) && !(it.isOCBDestructor)].toList)]
+		copyCT.forEach[ct | sourceContents.addAll(ct.features.filter(Operation).filter[!(it instanceof OperationDefinition)].filter[!(it.innerConstructor) && !(it.ocbDestructor)].toList)]
 		classContents.addAll(EcoreUtil.copy(p).member)
 		classContents.filter(ComplexType).forEach[ cT |
 			cT.removeBodysFromOperations

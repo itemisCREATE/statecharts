@@ -9,6 +9,7 @@
 package org.yakindu.sct.types.generator.c.modifications
 
 import java.util.Collection
+import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Package
 import org.yakindu.sct.types.modification.IModification
 
@@ -20,7 +21,7 @@ class RenamePackageModification implements IModification{
 	}
 
 	def modify(Package p) {
-		p.name = p.member.head.name.toFirstUpper
+		p.name = p.member.filter(ComplexType).head.name.toFirstUpper
 		p
 	}
 	

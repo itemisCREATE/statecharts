@@ -18,6 +18,7 @@ import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
+import org.yakindu.base.types.Property
 import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.types.generator.artifacts.GeneratorArtifact
@@ -74,6 +75,7 @@ class DefaultCGeneratorArtifactConfigurator implements IGeneratorArtifactConfigu
 				}
 			]
 			// add all declarations to the beginning, in the order in which they were built.
+			headerContents.addAll(0, p.member.filter(Property).toList)
 			sourceContents.addAll(0, implOpDecls)
 			
 			reqHeader.addDependencies(header, scTypes)

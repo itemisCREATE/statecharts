@@ -23,6 +23,7 @@ import org.yakindu.sct.types.generator.modification.library.IdentifierModificati
 import org.yakindu.sct.types.generator.modification.library.RemoveAnnotationTypeModification
 import org.yakindu.sct.types.generator.modification.library.TypesReplacementModification
 import org.yakindu.sct.types.generator.module.TypesGeneratorModule
+import org.yakindu.sct.types.generator.c.modifications.ExtractConstantsModification
 
 class CTypesGeneratorModule extends TypesGeneratorModule {
 
@@ -38,6 +39,7 @@ class CTypesGeneratorModule extends TypesGeneratorModule {
 			// c specific modifcations
 			FlattenComplexTypesModification,
 			ExtractOperationsModification,
+			ExtractConstantsModification,
 			RemoveAnnotationTypeModification,
 			RemoveUnusedTypesModification,
 			RenamePackageModification,

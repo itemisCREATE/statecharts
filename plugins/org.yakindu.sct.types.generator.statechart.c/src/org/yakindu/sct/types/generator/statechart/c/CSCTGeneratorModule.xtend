@@ -22,6 +22,7 @@ import org.yakindu.sct.types.generator.statechart.modification.library.PropertyA
 import org.yakindu.sct.types.generator.statechart.modification.library.event.InEventModification
 import org.yakindu.sct.types.generator.statechart.modification.library.event.LocalEventModification
 import org.yakindu.sct.types.generator.statechart.modification.library.event.OutEventModification
+import org.yakindu.sct.types.generator.statechart.c.modification.FlattenInterfacesModification
 
 class CSCTGeneratorModule extends SCTGeneratorModule {
 	
@@ -43,6 +44,7 @@ class CSCTGeneratorModule extends SCTGeneratorModule {
 			
 			// c specific modifcations
 			RenameInterfacesModification,
+			FlattenInterfacesModification, // TODO: Remove when API can be changed!
 			
 			NextStateIndexModification	
 		]

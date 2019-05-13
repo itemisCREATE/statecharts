@@ -46,7 +46,6 @@ class NextStateIndexModification implements IModification {
 
 	def modify(Package p) {
 		val stateVectorProp = p.eAllContents.filter(Property).findFirst[name == "stateVector"]
-		val outerClass = p.member.filter(ComplexType).head
 		val orthogonalStates = typesFactory.createProperty => [ prop |
 			prop.name = "maxOrthogonalStates"
 			prop.initialValue = EcoreUtil.copy(
@@ -56,7 +55,7 @@ class NextStateIndexModification implements IModification {
 			]
 			prop._annotateWith(defineAnnotation)
 		]
-		outerClass.features += orthogonalStates
+		p.member += orthogonalStates
 
 		stateVectorProp.references.forEach [ ref |
 			val fc = ref.eContainer
@@ -66,7 +65,7 @@ class NextStateIndexModification implements IModification {
 				}
 			}
 		]
-		p
+		return p
 	}
 
 }
