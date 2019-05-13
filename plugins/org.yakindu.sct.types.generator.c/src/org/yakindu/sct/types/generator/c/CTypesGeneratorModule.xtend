@@ -20,7 +20,6 @@ import org.yakindu.sct.types.generator.c.modifications.RenamePackageModification
 import org.yakindu.sct.types.generator.c.modifications.RenameStateEnumModification
 import org.yakindu.sct.types.generator.c.modifications.ReorderComplexTypesModification
 import org.yakindu.sct.types.generator.modification.library.IdentifierModification
-import org.yakindu.sct.types.generator.modification.library.NextStateIndexModification
 import org.yakindu.sct.types.generator.modification.library.RemoveAnnotationTypeModification
 import org.yakindu.sct.types.generator.modification.library.TypesReplacementModification
 import org.yakindu.sct.types.generator.module.TypesGeneratorModule
@@ -41,7 +40,6 @@ class CTypesGeneratorModule extends TypesGeneratorModule {
 			ExtractOperationsModification,
 			RemoveAnnotationTypeModification,
 			RemoveUnusedTypesModification,
-			NextStateIndexModification,
 			RenamePackageModification,
 			RenameOperationsModification,
 			ReorderComplexTypesModification,

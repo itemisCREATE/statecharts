@@ -21,6 +21,7 @@ import org.yakindu.sct.types.generator.statechart.modification.library.PropertyA
 import org.yakindu.sct.types.generator.statechart.modification.library.event.InEventModification
 import org.yakindu.sct.types.generator.statechart.modification.library.event.LocalEventModification
 import org.yakindu.sct.types.generator.statechart.modification.library.event.OutEventModification
+import org.yakindu.sct.types.generator.statechart.modification.library.NextStateIndexModification
 
 class CSCTGeneratorModule extends SCTGeneratorModule {
 	
@@ -41,7 +42,9 @@ class CSCTGeneratorModule extends SCTGeneratorModule {
 			LocalEventModification,
 			
 			// c specific modifcations
-			RenameInterfacesModification		
+			RenameInterfacesModification,
+			
+			NextStateIndexModification	
 		]
 	}
 	
