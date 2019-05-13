@@ -21,6 +21,7 @@ import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Package
 import org.yakindu.sct.types.modification.IModification
+import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 
 /**
  * Moves all declarations of inner types to their outer type while qualifying their names. Empty inner types are removed.
@@ -33,6 +34,9 @@ class FlattenInnerTypesModification implements IModification {
 	
 	@Inject 
 	protected extension PackageNavigationExtensions
+	
+	@Inject
+	protected extension SCTGeneratorAnnotationLibrary
 	
 	override modify(Collection<Package> packages) {
 		packages.forEach[modify]
@@ -56,15 +60,11 @@ class FlattenInnerTypesModification implements IModification {
 	}
 	
 	protected def innerTypes(ComplexType rootType) {
-		rootType.eAllContents.filter(ComplexType).filter[!isInterfaceGroupType].filter[!isEnumerationType].toList
+		rootType.eAllContents.filter(ComplexType).filter[!isInterfaceGroup].filter[!isEnumerationType].toList
 	}
 	
 	protected def boolean isLeaf(ComplexType ct) {
 		ct.features.filter(ComplexType).isNullOrEmpty
-	}
-	
-	protected def boolean isInterfaceGroupType(ComplexType ct) {
-		ct.getAnnotationOfType("InterfaceGroup") !== null
 	}
 	
 	protected def boolean isEnumerationType(ComplexType ct) {
