@@ -27,6 +27,7 @@ import org.yakindu.sct.model.sequencer.types.IStatemachine
 import org.yakindu.sct.types.generator.modification.library.ComplexTypeNavigationExtensions
 import org.yakindu.sct.types.generator.modification.library.ModificationHelper
 import org.yakindu.sct.types.modification.IModification
+import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 
 /**
  * Extract a statechart interface which contains inner interfaces for all types annotated with "InterfaceGroup" as well as getters for them.
@@ -40,6 +41,7 @@ class InterfaceLiftingModification implements IModification {
 	@Inject protected extension ExpressionBuilder
 	@Inject protected extension ModelSequencerNaming
 	@Inject protected extension ModificationHelper
+	@Inject protected extension SCTGeneratorAnnotationLibrary
 	
 	extension TypesFactory factory = TypesFactory.eINSTANCE
 	
@@ -77,7 +79,7 @@ class InterfaceLiftingModification implements IModification {
 	}
 	
 	def getInterfaceGroupTypes(ComplexType ct) {
-		ct.allComplexTypes.filter[visibility == Visibility.PUBLIC].filter[getAnnotationOfType("InterfaceGroup") !== null]
+		ct.allComplexTypes.filter[visibility == Visibility.PUBLIC].filter[isInterfaceGroup]
 	}
 
 	protected def getterName(ComplexType type) {

@@ -29,6 +29,7 @@ import org.yakindu.sct.types.generator.modification.library.ContainmentExtension
 import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
 import org.yakindu.sct.types.generator.statechart.java.naming.JavaOCBNaming
 import org.yakindu.sct.types.modification.IModification
+import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 
 /**
  * Creates callback interfaces for operation declarations, corresponding setters, and qualifies operation calls.
@@ -49,6 +50,7 @@ class OperationCallbackModification implements IModification {
 	@Inject protected extension JavaOCBNaming
 	
 	@Inject protected extension InterfaceLiftingModification
+	@Inject protected extension SCTGeneratorAnnotationLibrary
 	
 	
 	
@@ -147,7 +149,7 @@ class OperationCallbackModification implements IModification {
 	}
 	
 	protected def getInternalGroupType(ComplexType ct) {
-		ct.allComplexTypes.filter[visibility == Visibility.PROTECTED].filter[getAnnotationOfType("InterfaceGroup") !== null].head
+		ct.allComplexTypes.filter[visibility == Visibility.PROTECTED].filter[isInterfaceGroup].head
 	}
 
 }

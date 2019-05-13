@@ -22,6 +22,7 @@ import org.yakindu.base.types.TypeBuilder
 import org.yakindu.sct.types.generator.java.modifications.ConstructorBuilder
 import org.yakindu.sct.types.generator.modification.library.ComplexTypeNavigationExtensions
 import org.yakindu.sct.types.modification.IModification
+import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 
 /**
  * Creates a default constructor for the state machine which initializes all interface properties
@@ -33,6 +34,7 @@ class InitializeInterfacePropertiesModification implements IModification {
 	@Inject protected extension ExpressionBuilder
 	@Inject protected extension TypeBuilder
 	@Inject protected extension ConstructorBuilder
+	@Inject protected extension SCTGeneratorAnnotationLibrary
 	
 	override modify(Collection<Package> packages) {
 		packages.forEach[modify]
@@ -53,11 +55,7 @@ class InitializeInterfacePropertiesModification implements IModification {
 	}
 	
 	protected def getInterfaceProperties(ComplexType ct) {
-		ct.features.filter(Property).filter[type.isInterfaceType].toList
-	}
-	
-	protected def isInterfaceType(Type t) {
-		t.getAnnotationOfType("InterfaceGroup") !== null
+		ct.features.filter(Property).filter[type.isInterfaceGroup].toList
 	}
 	
 	protected def initialize(Property p) {

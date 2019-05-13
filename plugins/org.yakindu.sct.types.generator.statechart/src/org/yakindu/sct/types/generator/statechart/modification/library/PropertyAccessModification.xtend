@@ -27,6 +27,7 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.types.generator.modification.library.ComplexTypeNavigationExtensions
 import org.yakindu.sct.types.generator.statechart.naming.IPropertyAccessNaming
 import org.yakindu.sct.types.modification.IModification
+import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 
 /**
  * Creates getter and setter operations for all properties in interface types
@@ -51,6 +52,8 @@ class PropertyAccessModification implements IModification {
 
 	@Inject
 	protected extension ExpressionExtensions
+	
+	@Inject protected extension SCTGeneratorAnnotationLibrary
 
 	@Inject
 	protected ITypeSystem ts
@@ -61,7 +64,7 @@ class PropertyAccessModification implements IModification {
 	}
 
 	def modify(Package p) {
-		val interfaceTypes = p.allComplexTypes.filter[getAnnotationOfType("InterfaceGroup") !== null]
+		val interfaceTypes = p.allComplexTypes.filter[isInterfaceGroup]
 		interfaceTypes.forEach[ iface |
 			iface.eAllContents.filter(Property).forEach [ prop |
 				if(!prop.const) {
