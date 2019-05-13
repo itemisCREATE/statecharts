@@ -10,9 +10,9 @@ package org.yakindu.sct.types.generator.statechart.cpp
 
 import org.yakindu.sct.types.generator.cpp.CppTypesGeneratorModule
 import org.yakindu.sct.types.generator.statechart.SCTGeneratorModule
-import org.yakindu.sct.types.generator.statechart.c.modification.NextStateIndexModification
 import org.yakindu.sct.types.generator.statechart.c.naming.CNamingService
 import org.yakindu.sct.types.generator.statechart.cpp.artifacts.CppGeneratorArtifactConfigurator
+import org.yakindu.sct.types.generator.statechart.cpp.modifications.CppNextStateIndexModification
 import org.yakindu.sct.types.generator.statechart.cpp.modifications.CppPropertyAccessModification
 import org.yakindu.sct.types.generator.statechart.cpp.modifications.InterfaceRenamingModification
 import org.yakindu.sct.types.generator.statechart.cpp.modifications.OCBModification
@@ -40,7 +40,7 @@ class CppSCTGeneratorModule extends SCTGeneratorModule {
 			RenameSCTInterfacesModification,
 			FlattenInnerTypesModification,
 			OCBModification,
-			NextStateIndexModification,
+			CppNextStateIndexModification,
 			CppPropertyAccessModification
 		]
 	}

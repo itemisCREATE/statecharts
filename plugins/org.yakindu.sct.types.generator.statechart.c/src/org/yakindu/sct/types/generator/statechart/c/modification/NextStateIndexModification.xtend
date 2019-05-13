@@ -6,8 +6,8 @@
  * http://www.eclipse.org/legal/epl-v10.html 
  * Contributors:
  * committers of YAKINDU - initial API and implementation
- *
-*/
+ * 
+ */
 package org.yakindu.sct.types.generator.statechart.c.modification
 
 import com.google.inject.Inject
@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.expressions.expressions.Argument
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.util.ExpressionBuilder
-import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.TypeBuilder
@@ -27,6 +26,7 @@ import org.yakindu.sct.model.sexec.transformation.ArrayType
 import org.yakindu.sct.types.generator.c.annotation.CoreCGeneratorAnnotationLibrary
 import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
 import org.yakindu.sct.types.modification.IModification
+import org.yakindu.base.types.Visibility
 
 class NextStateIndexModification implements IModification {
 
@@ -53,9 +53,13 @@ class NextStateIndexModification implements IModification {
 			prop.typeSpecifier = typesFactory.createTypeSpecifier => [ ts |
 				ts.type = tys.getType(ITypeSystem.INTEGER)
 			]
+			prop.visibility = Visibility.PROTECTED
+			prop.const = true
+			prop.static = true
+
 			prop._annotateWith(defineAnnotation)
 		]
-		p.member += orthogonalStates
+		addConstant(p, orthogonalStates)
 
 		stateVectorProp.references.forEach [ ref |
 			val fc = ref.eContainer
@@ -65,7 +69,12 @@ class NextStateIndexModification implements IModification {
 				}
 			}
 		]
+
 		return p
+	}
+
+	protected def boolean addConstant(Package p, Property orthogonalStates) {
+		p.member += orthogonalStates
 	}
 
 }
