@@ -45,6 +45,7 @@ class RenameSCTInterfacesModification implements IModification {
 					prop.name = ifaceVariable + cT.name
 					prop.visibility = Visibility.PROTECTED
 				]
+				// TODO: Could be removed with 4.0. Used to keep API. For example: Interface named: .. and Interface Named: will currently not work, but could without 'toFirstUpper'
 				cT.name = SCIPrefix + cT.name.toFirstUpper
 			}
 		]
