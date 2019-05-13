@@ -46,6 +46,7 @@ import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
+import org.yakindu.base.types.Package
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.TypeSpecifier
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
@@ -220,7 +221,9 @@ class Expressions {
 		if ((eContainer instanceof BlockExpression) || 
 			(eContainer instanceof ComplexType) ||
 			(eContainer instanceof SwitchCase) ||
-			(eContainer instanceof SwitchExpression)) 
+			(eContainer instanceof SwitchExpression) || 
+			(eContainer instanceof Package)
+			)
 			''';''' 
 		else 
 			''''''

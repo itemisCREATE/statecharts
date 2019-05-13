@@ -39,7 +39,7 @@ class CExpressions extends Expressions {
 		} else if(isDefine) {
 			'''#define «name» «initialValue.code»'''
 		} else
-			super._code(it).toString
+			'''«IF static»static «ENDIF»«IF const»const «ENDIF»«typeSpecifier.code» «name»«IF initialValue !== null»= «initialValue.code»«ENDIF»«terminator»'''
 	}
 
 	def array(Property it) {

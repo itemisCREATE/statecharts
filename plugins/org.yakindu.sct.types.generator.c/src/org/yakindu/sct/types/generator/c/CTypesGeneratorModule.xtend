@@ -11,9 +11,9 @@
 package org.yakindu.sct.types.generator.c
 
 import org.yakindu.sct.types.generator.c.artifacts.DefaultCGeneratorArtifactConfigurator
+import org.yakindu.sct.types.generator.c.modifications.ExtractConstantsModification
 import org.yakindu.sct.types.generator.c.modifications.ExtractOperationsModification
 import org.yakindu.sct.types.generator.c.modifications.FlattenComplexTypesModification
-import org.yakindu.sct.types.generator.c.modifications.RemoveUnusedTypesModification
 import org.yakindu.sct.types.generator.c.modifications.RenameComplexTypes
 import org.yakindu.sct.types.generator.c.modifications.RenameOperationsModification
 import org.yakindu.sct.types.generator.c.modifications.RenamePackageModification
@@ -21,9 +21,9 @@ import org.yakindu.sct.types.generator.c.modifications.RenameStateEnumModificati
 import org.yakindu.sct.types.generator.c.modifications.ReorderComplexTypesModification
 import org.yakindu.sct.types.generator.modification.library.IdentifierModification
 import org.yakindu.sct.types.generator.modification.library.RemoveAnnotationTypeModification
-import org.yakindu.sct.types.generator.modification.library.TypesReplacementModification
+import org.yakindu.sct.types.generator.modification.library.RemoveUnusedTypesModification
 import org.yakindu.sct.types.generator.module.TypesGeneratorModule
-import org.yakindu.sct.types.generator.c.modifications.ExtractConstantsModification
+import org.yakindu.sct.types.generator.modification.library.TypesReplacementModification
 
 class CTypesGeneratorModule extends TypesGeneratorModule {
 
@@ -41,12 +41,12 @@ class CTypesGeneratorModule extends TypesGeneratorModule {
 			ExtractOperationsModification,
 			ExtractConstantsModification,
 			RemoveAnnotationTypeModification,
-			RemoveUnusedTypesModification,
 			RenamePackageModification,
 			RenameOperationsModification,
 			ReorderComplexTypesModification,
 			RenameComplexTypes,
 			RenameStateEnumModification,
+			RemoveUnusedTypesModification,
 			
 			// base modification
 			TypesReplacementModification
