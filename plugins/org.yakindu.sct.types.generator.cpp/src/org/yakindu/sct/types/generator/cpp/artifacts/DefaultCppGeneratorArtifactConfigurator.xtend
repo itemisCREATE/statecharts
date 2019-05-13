@@ -32,12 +32,14 @@ import org.yakindu.sct.types.generator.cpp.CppTargetPlatform
 import org.yakindu.sct.types.generator.cpp.files.CppTypes
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
+import org.yakindu.sct.types.generator.cpp.annotation.CoreCppGeneratorAnnotationLibrary
 
 class DefaultCppGeneratorArtifactConfigurator implements IGeneratorArtifactConfigurator {
 
 	@Inject extension CppTypes
 	@Inject protected extension CppConstructorGenerator
 	@Inject protected extension CExpressionsChecker
+	@Inject protected extension CoreCppGeneratorAnnotationLibrary
 	protected GeneratorArtifactConfiguration config
 	
 	override configure(Collection<Package> packages, ISCTFileSystemAccess fileSystemAccess) {

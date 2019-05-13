@@ -15,6 +15,7 @@ import com.google.inject.Singleton
 import java.util.Collection
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.BlockExpression
+import org.yakindu.base.expressions.util.ComplexTypeNavigationExtensions
 import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.expressions.util.PackageNavigationExtensions
@@ -24,10 +25,9 @@ import org.yakindu.base.types.Property
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.Visibility
 import org.yakindu.base.types.typesystem.ITypeSystem
-import org.yakindu.sct.types.generator.modification.library.ComplexTypeNavigationExtensions
+import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 import org.yakindu.sct.types.generator.statechart.naming.IPropertyAccessNaming
 import org.yakindu.sct.types.modification.IModification
-import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 
 /**
  * Creates getter and setter operations for all properties in interface types

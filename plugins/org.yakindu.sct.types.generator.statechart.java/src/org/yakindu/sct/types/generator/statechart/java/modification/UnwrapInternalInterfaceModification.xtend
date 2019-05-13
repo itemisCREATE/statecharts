@@ -13,18 +13,17 @@ package org.yakindu.sct.types.generator.statechart.java.modification
 import com.google.inject.Inject
 import java.util.Collection
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.yakindu.base.expressions.util.ComplexTypeNavigationExtensions
+import org.yakindu.base.expressions.util.ContainmentExtensions
 import org.yakindu.base.expressions.util.PackageNavigationExtensions
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.Property
-import org.yakindu.base.types.Type
 import org.yakindu.base.types.Visibility
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
-import org.yakindu.sct.types.generator.modification.library.ComplexTypeNavigationExtensions
-import org.yakindu.sct.types.generator.modification.library.ContainmentExtensions
 import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
-import org.yakindu.sct.types.modification.IModification
 import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
+import org.yakindu.sct.types.modification.IModification
 
 /**
  * The model sequence wraps internal scopes in a complex type. To not break API, we need to unwrap this type again.

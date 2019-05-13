@@ -6,10 +6,16 @@ import org.yakindu.base.types.TypesFactory
 
 @Singleton
 class CoreGeneratorAnnotationLibrary implements CoreGeneratorAnnotationConstants {
-	protected extension TypesFactory typesFactory = TypesFactory.eINSTANCE
+	TypesFactory typesFactory = TypesFactory.eINSTANCE
 	
 	protected def isAnnotatedWith(AnnotatableElement it, String annotationName) {
 		getAnnotationOfType(annotationName) !== null
+	}
+	
+	protected def annotation(String name) {
+		typesFactory.createAnnotationType => [
+			it.name = name
+		]
 	}
 	
 }

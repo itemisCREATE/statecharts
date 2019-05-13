@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
+import org.yakindu.base.expressions.util.ContainmentExtensions
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Expression
@@ -24,7 +25,6 @@ import org.yakindu.base.types.TypeSpecifier
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.types.generator.Expressions
 import org.yakindu.sct.types.generator.java.modifications.ConstructorBuilder
-import org.yakindu.sct.types.generator.modification.library.ContainmentExtensions
 
 class JavaExpressions extends Expressions {
 	

@@ -9,18 +9,6 @@
 package org.yakindu.sct.types.generator.cpp.naming
 
 class CppClassNaming {
-	def getDefaultConstructor() {
-		"DefaultConstructor"
-	}
-
-	def getDefaultDestructor() {
-		"DefaultDestructor"
-	}
-
-	def getInnerConstructor() {
-		"InnerDestructor"
-	}
-
 	def getParentParameter() {
 		"parent"
 	}

@@ -10,11 +10,11 @@ package org.yakindu.sct.types.generator.statechart.modification.library.event
 
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.yakindu.base.expressions.util.ContainmentExtensions
 import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.typesystem.ITypeSystem
-import org.yakindu.sct.types.generator.modification.library.ContainmentExtensions
 import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
 
 class InEventModification extends BaseEventModification {

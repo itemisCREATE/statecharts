@@ -5,9 +5,7 @@ import org.yakindu.sct.types.generator.annotation.CoreGeneratorAnnotationLibrary
 
 class CoreCGeneratorAnnotationLibrary extends CoreGeneratorAnnotationLibrary implements CoreCGeneratorAnnotationConstants {
 	def defineAnnotation() {
-		createAnnotationType => [
-			name = DEFINE
-		]
+		annotation(DEFINE)
 	}
 	
 	def isDefine(AnnotatableElement it) {

@@ -8,9 +8,7 @@ import org.yakindu.sct.types.generator.annotation.CoreGeneratorAnnotationLibrary
 class SCTGeneratorAnnotationLibrary extends CoreGeneratorAnnotationLibrary implements SCTGeneratorAnnotationConstants {
 	
 	def interfaceGroupAnnotation() {
-		createAnnotationType => [
-			name = INTERFACE_GROUP
-		]
+		annotation(INTERFACE_GROUP)
 	}
 	
 	def isInterfaceGroup(AnnotatableElement it) {

@@ -17,12 +17,14 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.types.generator.c.typesystem.CTypeSystem
 import org.yakindu.sct.types.generator.cpp.naming.CppClassNaming
 import org.yakindu.sct.types.generator.c.CLiterals
+import org.yakindu.sct.types.generator.cpp.annotation.CoreCppGeneratorAnnotationLibrary
 
 class CppConstructorGenerator {
 	@Inject extension CppExpressions
 	@Inject extension CppTypesGenerator
 	@Inject protected extension CppClassNaming
 	@Inject protected extension CLiterals
+	@Inject protected extension CoreCppGeneratorAnnotationLibrary
 	
 	val ts = CTypeSystem.instance
 
@@ -73,18 +75,6 @@ class CppConstructorGenerator {
 			return getThis
 		}
 		property.initialValue.code ?: getThis
-	}
-
-	def isDefaultConstructor(Operation it) {
-		getAnnotationOfType(defaultConstructor) !== null
-	}
-
-	def isDefaultDestructor(Operation it) {
-		getAnnotationOfType(defaultDestructor) !== null
-	}
-
-	def isInnerConstructor(Operation it) {
-		getAnnotationOfType(innerConstructor) !== null
 	}
 
 }

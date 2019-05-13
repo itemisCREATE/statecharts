@@ -18,15 +18,15 @@ import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
+import org.yakindu.base.expressions.util.ContainmentExtensions
 import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.expressions.util.PackageNavigationExtensions
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.Property
-import org.yakindu.sct.types.generator.modification.library.ContainmentExtensions
 import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
-import org.yakindu.sct.types.modification.IModification
 import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
+import org.yakindu.sct.types.modification.IModification
 
 /**
  * Transforms references to public properties by their respective getters or setters.

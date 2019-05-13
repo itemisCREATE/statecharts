@@ -8,7 +8,7 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.types.generator.modification.library
+package org.yakindu.base.expressions.util
 
 import java.util.List
 import org.eclipse.emf.ecore.EObject

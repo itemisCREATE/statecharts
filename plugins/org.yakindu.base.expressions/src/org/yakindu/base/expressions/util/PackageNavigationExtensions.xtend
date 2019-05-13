@@ -8,23 +8,24 @@
 */
 package org.yakindu.base.expressions.util
 
+import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.EcoreUtil2
+import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.Property
-import org.eclipse.xtext.EcoreUtil2
-import org.yakindu.base.types.Visibility
-import org.yakindu.base.expressions.expressions.FeatureCall
 
 class PackageNavigationExtensions {
+	@Inject protected extension ExpressionPredicates
 	
 	def allTopLevelComplexTypes(Package p) {
 		p.member.filter(ComplexType).toList
 	}
 	
 	def allTopLevelPublicProperties(Package p) {
-		p.member.filter(Property).filter[visibility == Visibility.PUBLIC].toList
+		p.member.filter(Property).filter[isPublic].toList
 	}
 	
 	def allComplexTypes(Package p) {

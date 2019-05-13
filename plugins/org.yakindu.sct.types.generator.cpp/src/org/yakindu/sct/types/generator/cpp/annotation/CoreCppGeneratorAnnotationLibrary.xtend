@@ -8,12 +8,43 @@ import org.yakindu.sct.types.generator.annotation.CoreGeneratorAnnotationLibrary
 class CoreCppGeneratorAnnotationLibrary extends CoreGeneratorAnnotationLibrary implements CoreCppGeneratorAnnotationConstants {
 	
 	def virtualAnnotation() {
-		createAnnotationType => [
-			name = VIRTUAL
-		]
+		annotation(VIRTUAL)
 	}
 	
 	def isVirtual(AnnotatableElement it) {
 		isAnnotatedWith(VIRTUAL)
+	}
+	
+	def defaultConstructorAnnotation() {
+		annotation(DEFAULT_CONSTRUCTOR)
+	}
+	
+	def isDefaultConstructor(AnnotatableElement it) {
+		isAnnotatedWith(DEFAULT_CONSTRUCTOR)
+	}
+	
+	
+	def defaultDestructorAnnotation() {
+		annotation(DEFAULT_DESTRUCTOR)
+	}
+	
+	def isDefaultDestructor(AnnotatableElement it) {
+		isAnnotatedWith(DEFAULT_DESTRUCTOR)
+	}
+	
+	def innerConstructorAnnotation() {
+		annotation(INNER_CONSTRUCTOR)
+	}
+	
+	def isInnerConstructor(AnnotatableElement it) {
+		isAnnotatedWith(INNER_CONSTRUCTOR)
+	}
+	
+	def ocbDestructorAnnotation() {
+		annotation(INNER_CONSTRUCTOR)
+	}
+	
+	def isOcbDestructor(AnnotatableElement it) {
+		isAnnotatedWith(INNER_CONSTRUCTOR)
 	}
 }

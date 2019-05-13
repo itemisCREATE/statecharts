@@ -30,9 +30,8 @@ import org.yakindu.sct.types.generator.c.typesystem.CTypeSystem
 import org.yakindu.sct.types.generator.cpp.annotation.CoreCppGeneratorAnnotationLibrary
 import org.yakindu.sct.types.generator.cpp.modifications.ConstructorModification
 import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
-import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationConstants
-import org.yakindu.sct.types.modification.IModification
 import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
+import org.yakindu.sct.types.modification.IModification
 
 class OCBModification implements IModification {
 	@Inject protected extension TypeBuilder
@@ -68,7 +67,7 @@ class OCBModification implements IModification {
 						operationDef.references.forEach[qualifyWithFc(prop)]
 						operationDef._annotateWith(virtualAnnotation)
 					]
-					iface.features += iface.createOperation("OCBDeconstructor", null)
+					iface.features += iface.createOperation(ocbDestructorAnnotation, null)
 					iface.features += operationDefinitions
 					ocbSetters += iface.createOCBSetter(prop)
 				]

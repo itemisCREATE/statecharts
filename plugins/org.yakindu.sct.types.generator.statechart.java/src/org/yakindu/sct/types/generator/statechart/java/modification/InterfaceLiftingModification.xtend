@@ -14,6 +14,7 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.Collection
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.yakindu.base.expressions.util.ComplexTypeNavigationExtensions
 import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.expressions.util.PackageNavigationExtensions
 import org.yakindu.base.types.ComplexType
@@ -24,10 +25,9 @@ import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.Visibility
 import org.yakindu.sct.model.sequencer.ModelSequencerNaming
 import org.yakindu.sct.model.sequencer.types.IStatemachine
-import org.yakindu.sct.types.generator.modification.library.ComplexTypeNavigationExtensions
 import org.yakindu.sct.types.generator.modification.library.ModificationHelper
-import org.yakindu.sct.types.modification.IModification
 import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
+import org.yakindu.sct.types.modification.IModification
 
 /**
  * Extract a statechart interface which contains inner interfaces for all types annotated with "InterfaceGroup" as well as getters for them.

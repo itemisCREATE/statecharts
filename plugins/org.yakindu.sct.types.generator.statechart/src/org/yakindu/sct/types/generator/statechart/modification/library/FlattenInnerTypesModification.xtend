@@ -15,13 +15,14 @@ import java.util.Collection
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.base.NamedElement
+import org.yakindu.base.expressions.util.ComplexTypeNavigationExtensions
 import org.yakindu.base.expressions.util.PackageNavigationExtensions
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Package
-import org.yakindu.sct.types.modification.IModification
 import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
+import org.yakindu.sct.types.modification.IModification
 
 /**
  * Moves all declarations of inner types to their outer type while qualifying their names. Empty inner types are removed.
@@ -30,7 +31,7 @@ import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotat
 class FlattenInnerTypesModification implements IModification {
 	
 	@Inject 
-	protected extension org.yakindu.sct.types.generator.modification.library.ComplexTypeNavigationExtensions
+	protected extension ComplexTypeNavigationExtensions
 	
 	@Inject 
 	protected extension PackageNavigationExtensions
