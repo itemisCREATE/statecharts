@@ -58,7 +58,6 @@ class DefaultCppGeneratorArtifactConfigurator implements IGeneratorArtifactConfi
 			classContents.addAll(EcoreUtil.copy(p).member)
 			classContents.filter(ComplexType).forEach[ cT |
 				cT.removeBodysFromOperations
-				cT.removeInitialValueFromConsts
 			]
 			
 			val class = config.configure(p.member.get(0).name + CppTargetPlatform.HEADER_FILE_ENDING, null, classContents, false)
@@ -77,17 +76,6 @@ class DefaultCppGeneratorArtifactConfigurator implements IGeneratorArtifactConfi
 		} else if (expressions.filter(NumericalMultiplyDivideExpression).findFirst[operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal] !== null){
 			artifact.addDependencies("math.h")
 		}
-	}
-	
-	def protected ComplexType removeInitialValueFromConsts(ComplexType cT) {
-		cT.features.filter(ComplexType).forEach [ innerCt | 
-			innerCt.removeInitialValueFromConsts
-		]
-		cT.features.filter(Property).filter[const].forEach [ prop | 
-			prop.initialValue = null
-			prop.static = true
-		]
-		cT
 	}
 	
 	def protected ComplexType removeBodysFromOperations(ComplexType cT){
