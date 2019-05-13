@@ -9,7 +9,7 @@
 		<version>3.5.3-SNAPSHOT</version>
 		<relativePath>../../releng/org.yakindu.sct.releng/pom.xml</relativePath>
 	</parent>
-	<artifactId>org.yakindu.sct.types.generator.c</artifactId>
+	<artifactId>org.yakindu.sct.types.generator.cpp</artifactId>
 	<groupId>org.yakindu.sct.plugins</groupId>
 	<packaging>eclipse-plugin</packaging>
 	
