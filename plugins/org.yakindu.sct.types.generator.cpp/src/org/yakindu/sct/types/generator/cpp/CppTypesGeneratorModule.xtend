@@ -9,6 +9,14 @@
 package org.yakindu.sct.types.generator.cpp
 
 import org.yakindu.sct.types.generator.cpp.artifacts.DefaultCppGeneratorArtifactConfigurator
+import org.yakindu.sct.types.generator.cpp.modifications.CTUpperCaseModification
+import org.yakindu.sct.types.generator.cpp.modifications.ConstructorModification
+import org.yakindu.sct.types.generator.cpp.modifications.InterfaceGetterModification
+import org.yakindu.sct.types.generator.modification.library.AliasReplacementModification
+import org.yakindu.sct.types.generator.modification.library.FlattenInnerTypesModification
+import org.yakindu.sct.types.generator.modification.library.IdentifierModification
+import org.yakindu.sct.types.generator.modification.library.RemoveAnnotationTypeModification
+import org.yakindu.sct.types.generator.modification.library.TypesReplacementModification
 import org.yakindu.sct.types.generator.module.TypesGeneratorModule
 
 class CppTypesGeneratorModule extends TypesGeneratorModule {
@@ -23,28 +31,19 @@ class CppTypesGeneratorModule extends TypesGeneratorModule {
 
 	override getModifications() {
 		return #[
-//			// base modifications
-//			PropertyAccessModification,
-//			InEventModification,
-//			OutEventModification,
-//			LocalEventModification,
-//			IdentifierModification,
-//			
-//			// C++ modifications
-//			InterfaceRenamingModification,
-//			RemoveAnnotationTypeModification,
-//			FlattenInnerTypesModification,
-//			CTUpperCaseModification,
-//			RenameSCTInterfacesModification,
-//			ConstructorModification,
-//			OCBModification,
-//			NextStateIndexModification,
-//			InterfaceGetterModification,
-//			AliasReplacementModification,
-//			CppPropertyAccessModification,			
-//			
-//			// base modifications
-//			TypesReplacementModification
+			// base modifications
+			IdentifierModification,
+			
+			// C++ modifications
+			RemoveAnnotationTypeModification,
+			FlattenInnerTypesModification,
+			CTUpperCaseModification,
+			ConstructorModification,
+			InterfaceGetterModification,
+			AliasReplacementModification,
+			
+			// base modifications
+			TypesReplacementModification
 		]
 	}
 

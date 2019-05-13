@@ -8,7 +8,7 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.types.generator.modification.library
+package org.yakindu.sct.types.generator.statechart.modification.library
 
 import com.google.inject.Inject
 import java.util.Collection
@@ -32,7 +32,7 @@ class NextStateIndexModification implements IModification {
 	@Inject protected extension ExpressionBuilder
 	@Inject protected extension ITypeSystem tys
 	@Inject protected extension ArrayType
-	@Inject protected extension ReferenceExtension
+	@Inject protected extension org.yakindu.sct.types.generator.modification.library.ReferenceExtension
 	@Inject protected extension TypeBuilder
 	extension TypesFactory typesFactory = TypesFactory.eINSTANCE
 

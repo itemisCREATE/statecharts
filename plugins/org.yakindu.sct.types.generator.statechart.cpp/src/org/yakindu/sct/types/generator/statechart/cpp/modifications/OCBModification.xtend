@@ -54,6 +54,7 @@ class OCBModification implements IModification {
 			val operationDefinitions = cT.features.filter(OperationDefinition).toList
 			if (!operationDefinitions.nullOrEmpty) {
 				ocbClasses += createComplexType => [ iface |
+					iface._annotateWith(interfaceGroupAnnotation)
 					iface.name = cT.name + "_OCB"
 					val prop = iface.createOCBVariable
 					outerClass.features += prop
@@ -76,6 +77,12 @@ class OCBModification implements IModification {
 	def protected virtualAnnotation() {
 		factory.createAnnotationType => [ at |
 			at.name = "VIRTUAL"
+		]
+	}
+	
+	def protected interfaceGroupAnnotation() {
+		factory.createAnnotationType => [ at |
+			at.name = "InterfaceGroup"
 		]
 	}
 
