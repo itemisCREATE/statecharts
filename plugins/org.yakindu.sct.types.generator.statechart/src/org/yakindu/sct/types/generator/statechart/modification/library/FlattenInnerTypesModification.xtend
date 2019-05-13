@@ -8,7 +8,7 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.types.generator.modification.library
+package org.yakindu.sct.types.generator.statechart.modification.library
 
 import com.google.inject.Inject
 import java.util.Collection
@@ -29,7 +29,7 @@ import org.yakindu.sct.types.modification.IModification
 class FlattenInnerTypesModification implements IModification {
 	
 	@Inject 
-	protected extension ComplexTypeNavigationExtensions
+	protected extension org.yakindu.sct.types.generator.modification.library.ComplexTypeNavigationExtensions
 	
 	@Inject 
 	protected extension PackageNavigationExtensions

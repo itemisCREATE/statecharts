@@ -14,7 +14,6 @@ import org.yakindu.sct.types.generator.java.artifacts.DefaultJavaGeneratorArtifa
 import org.yakindu.sct.types.generator.java.modifications.NamingConventionModification
 import org.yakindu.sct.types.generator.java.modifications.ReplaceIntegerWithLongModification
 import org.yakindu.sct.types.generator.modification.library.AliasReplacementModification
-import org.yakindu.sct.types.generator.modification.library.FlattenInnerTypesModification
 import org.yakindu.sct.types.generator.modification.library.IdentifierModification
 import org.yakindu.sct.types.generator.modification.library.TypesReplacementModification
 import org.yakindu.sct.types.generator.module.TypesGeneratorModule
@@ -36,7 +35,6 @@ class JavaTypesGeneratorModule extends TypesGeneratorModule {
 			IdentifierModification,
 			
 			ReplaceIntegerWithLongModification, // restores API compatibility
-			FlattenInnerTypesModification,
 			AliasReplacementModification,
 			
 			/**

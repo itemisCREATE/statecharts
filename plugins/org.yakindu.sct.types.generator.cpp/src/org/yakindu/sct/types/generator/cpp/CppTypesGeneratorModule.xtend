@@ -13,7 +13,6 @@ import org.yakindu.sct.types.generator.cpp.modifications.CTUpperCaseModification
 import org.yakindu.sct.types.generator.cpp.modifications.ConstructorModification
 import org.yakindu.sct.types.generator.cpp.modifications.InterfaceGetterModification
 import org.yakindu.sct.types.generator.modification.library.AliasReplacementModification
-import org.yakindu.sct.types.generator.modification.library.FlattenInnerTypesModification
 import org.yakindu.sct.types.generator.modification.library.IdentifierModification
 import org.yakindu.sct.types.generator.modification.library.RemoveAnnotationTypeModification
 import org.yakindu.sct.types.generator.modification.library.TypesReplacementModification
@@ -36,7 +35,6 @@ class CppTypesGeneratorModule extends TypesGeneratorModule {
 			
 			// C++ modifications
 			RemoveAnnotationTypeModification,
-			FlattenInnerTypesModification,
 			CTUpperCaseModification,
 			ConstructorModification,
 			InterfaceGetterModification,
