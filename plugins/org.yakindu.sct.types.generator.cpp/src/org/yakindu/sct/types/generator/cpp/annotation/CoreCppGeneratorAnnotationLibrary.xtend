@@ -41,10 +41,10 @@ class CoreCppGeneratorAnnotationLibrary extends CoreGeneratorAnnotationLibrary i
 	}
 	
 	def ocbDestructorAnnotation() {
-		annotation(INNER_CONSTRUCTOR)
+		annotation(OCB_DESTRUCTOR)
 	}
 	
 	def isOcbDestructor(AnnotatableElement it) {
-		isAnnotatedWith(INNER_CONSTRUCTOR)
+		isAnnotatedWith(OCB_DESTRUCTOR)
 	}
 }
