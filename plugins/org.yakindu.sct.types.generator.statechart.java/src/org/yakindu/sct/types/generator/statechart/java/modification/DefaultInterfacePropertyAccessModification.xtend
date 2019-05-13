@@ -26,6 +26,7 @@ import org.yakindu.sct.types.generator.modification.library.ContainmentExtension
 import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
 import org.yakindu.sct.types.modification.IModification
 import org.yakindu.sct.model.sequencer.ModelSequencerNaming
+import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 
 class DefaultInterfacePropertyAccessModification implements IModification {
 	
@@ -36,6 +37,7 @@ class DefaultInterfacePropertyAccessModification implements IModification {
 	
 	@Inject protected extension ModelSequencerNaming
 	@Inject protected extension ReferenceExtension
+	@Inject protected extension SCTGeneratorAnnotationLibrary
 	
 	override modify(Collection<Package> packages) {
 		packages.forEach[modify]
@@ -58,11 +60,7 @@ class DefaultInterfacePropertyAccessModification implements IModification {
 	}
 	
 	protected def getDefaultIfaceType(ComplexType ct) {
-		ct.complexTypes.filter[isInterfaceType].filter[name == defaultInterfaceTypeName].head
-	}
-	
-	protected def isInterfaceType(Type t) {
-		t.getAnnotationOfType("InterfaceGroup") !== null
+		ct.complexTypes.filter[isInterfaceGroup].filter[name == defaultInterfaceTypeName].head
 	}
 	
 	protected def getInterfaceProperty(ComplexType ct, ComplexType iface) {

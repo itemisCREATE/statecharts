@@ -24,6 +24,7 @@ import org.yakindu.sct.types.generator.modification.library.ComplexTypeNavigatio
 import org.yakindu.sct.types.generator.modification.library.ContainmentExtensions
 import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
 import org.yakindu.sct.types.modification.IModification
+import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 
 /**
  * The model sequence wraps internal scopes in a complex type. To not break API, we need to unwrap this type again.
@@ -35,6 +36,7 @@ class UnwrapInternalInterfaceModification implements IModification {
 	@Inject protected extension ContainmentExtensions
 	@Inject protected extension ReferenceExtension
 	@Inject protected extension ExpressionBuilder
+	@Inject protected extension SCTGeneratorAnnotationLibrary
 	
 	override modify(Collection<Package> packages) {
 		packages.forEach[modify]
@@ -57,11 +59,7 @@ class UnwrapInternalInterfaceModification implements IModification {
 	}
 	
 	protected def getInternalType(ComplexType ct) {
-		ct.complexTypes.filter[isInterfaceType].filter[visibility == Visibility.PROTECTED].head
-	}
-	
-	protected def isInterfaceType(Type t) {
-		t.getAnnotationOfType("InterfaceGroup") !== null
+		ct.complexTypes.filter[isInterfaceGroup].filter[visibility == Visibility.PROTECTED].head
 	}
 	
 	protected def getInterfaceProperty(ComplexType ct, ComplexType iface) {

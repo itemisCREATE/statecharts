@@ -26,6 +26,7 @@ import org.yakindu.base.types.Property
 import org.yakindu.sct.types.generator.modification.library.ContainmentExtensions
 import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
 import org.yakindu.sct.types.modification.IModification
+import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 
 /**
  * Transforms references to public properties by their respective getters or setters.
@@ -52,6 +53,8 @@ class PropertyReferenceModification implements IModification {
 	
 	@Inject
 	protected extension ExpressionExtensions
+	
+	@Inject protected extension SCTGeneratorAnnotationLibrary
 
 	
 	override modify(Collection<Package> packages) {
@@ -60,7 +63,7 @@ class PropertyReferenceModification implements IModification {
 	}
 
 	def modify(Package p) {
-		val interfaceTypes = p.allComplexTypes.filter[getAnnotationOfType("InterfaceGroup") !== null]
+		val interfaceTypes = p.allComplexTypes.filter[isInterfaceGroup]
 		interfaceTypes.forEach[ iface |
 			iface.eAllContents.filter(Property).filter[!const].forEach [ prop |
 				prop.references.forEach[toWriteAccess(it, prop)]
