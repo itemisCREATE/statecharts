@@ -16,7 +16,6 @@ import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
-import org.yakindu.base.types.Property
 import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 import org.yakindu.sct.model.sgen.GeneratorEntry
