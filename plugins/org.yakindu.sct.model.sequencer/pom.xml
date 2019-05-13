@@ -12,18 +12,9 @@
 	<artifactId>org.yakindu.sct.model.sequencer</artifactId>
 	<groupId>org.yakindu.sct.plugins</groupId>
 	<packaging>eclipse-plugin</packaging>
+	
 	<build>
-		<resources>
-			<resource>
-				<directory>${project.build.directory}/xtext</directory>
-			</resource>
-		</resources>
 		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-			</plugin>
-			
 			<plugin>
 				<artifactId>maven-clean-plugin</artifactId>
 				<configuration>
@@ -40,7 +31,6 @@
 					</filesets>
 				</configuration>
 			</plugin>
-			
 			<plugin>
 				<groupId>org.eclipse.xtend</groupId>
 				<artifactId>xtend-maven-plugin</artifactId>
