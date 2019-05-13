@@ -76,6 +76,7 @@ abstract class BaseEventModification implements IModification {
 			prop.name = nameEventValue(e.name)
 			prop.typeSpecifier = typesFactory.createTypeSpecifier => [
 				type = e.type
+				prop.visibility = Visibility.PROTECTED
 			]
 		]
 	}
