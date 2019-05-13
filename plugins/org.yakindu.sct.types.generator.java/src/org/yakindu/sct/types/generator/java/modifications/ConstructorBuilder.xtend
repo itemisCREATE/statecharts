@@ -27,7 +27,7 @@ class ConstructorBuilder {
 	@Inject protected extension TypeBuilder
 	@Inject protected extension ExpressionExtensions
 
-	static val CTOR_NAME = "new" 
+	static val CTOR_NAME = "__init__" 
 
 	def create ctor : _op defaultConstructor(ComplexType ct) {
 		ctor.name = CTOR_NAME

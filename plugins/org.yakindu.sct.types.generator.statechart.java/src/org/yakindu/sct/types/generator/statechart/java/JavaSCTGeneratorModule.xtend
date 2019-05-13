@@ -27,6 +27,7 @@ import org.yakindu.sct.types.generator.statechart.modification.library.PropertyR
 import org.yakindu.sct.types.generator.statechart.modification.library.event.InEventModification
 import org.yakindu.sct.types.generator.statechart.modification.library.event.LocalEventModification
 import org.yakindu.sct.types.generator.statechart.modification.library.event.OutEventModification
+import org.yakindu.sct.types.generator.statechart.java.modification.ReplaceIntegerWithLongModification
 
 class JavaSCTGeneratorModule extends SCTGeneratorModule {
 	
@@ -59,12 +60,13 @@ class JavaSCTGeneratorModule extends SCTGeneratorModule {
 			OutEventModification,
 			LocalEventModification,
 			
+			ReplaceIntegerWithLongModification,
 			UnwrapInternalInterfaceModification,
 			DefaultInterfacePropertyAccessModification,
 			InitializeInterfacePropertiesModification,
+			FlattenInnerTypesModification,
 			InterfaceLiftingModification,
-			OperationCallbackModification,
-			FlattenInnerTypesModification
+			OperationCallbackModification
 		]
 	}
 	
