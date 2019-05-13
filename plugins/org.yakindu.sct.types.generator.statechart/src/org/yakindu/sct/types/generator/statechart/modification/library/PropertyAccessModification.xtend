@@ -50,7 +50,7 @@ class PropertyAccessModification implements IModification {
 	
 	override modify(Collection<Package> packages) {
 		packages.forEach[modify]
-		packages
+		return packages
 	}
 
 	def modify(Package p) {

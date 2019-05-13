@@ -52,7 +52,7 @@ class OutEventModification extends BaseEventModification {
 		}
 		modifyClearEvent(prop, e)
 		
-		val op = operation(nameEventIsRaised(e.name), ts.getType(ITypeSystem.BOOLEAN), _fc(e.getOwnerInstance, prop).returnExpression)
+		val op = operation(nameEventIsRaised(e.name), ts.getType(ITypeSystem.BOOLEAN), _fc(e.getOwnerInstance._ref, prop).returnExpression)
 		e.eContainer.add(op)
 
 		e.references.forEach[retargetTo(prop)]

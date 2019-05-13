@@ -41,7 +41,7 @@ class RaiseEventModification {
 	
 	def modifyRaiseEvent(Property prop, Property valueProp, Event e) {
 		for (raise : e.raiseExpressions) {
-			val propAssignment = raise.event.toAssignment(_fc(e.ownerInstance, prop), _true)
+			val propAssignment = raise.event.toAssignment(_fc(e.ownerInstance._ref , prop), _true)
 			val valueAssignment = raise.event.toAssignment(valueProp, raise.value)
 			raise.replaceBy(valueAssignment, propAssignment)
 		}
