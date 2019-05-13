@@ -19,15 +19,14 @@ import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.Property
-import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.Visibility
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.types.generator.c.typesystem.CTypeSystem
 import org.yakindu.sct.types.generator.cpp.CppSlangTypeValueProvider
+import org.yakindu.sct.types.generator.cpp.annotation.CoreCppGeneratorAnnotationLibrary
 import org.yakindu.sct.types.generator.cpp.naming.CppClassNaming
 import org.yakindu.sct.types.modification.IModification
-import org.yakindu.sct.types.generator.cpp.annotation.CoreCppGeneratorAnnotationLibrary
 
 class ConstructorModification implements IModification {
 	@Inject protected extension CTypeSystem cts
@@ -38,7 +37,6 @@ class ConstructorModification implements IModification {
 	@Inject protected extension CoreCppGeneratorAnnotationLibrary
 
 	protected TypesFactory typesFactory = TypesFactory.eINSTANCE
-	@Inject protected extension TypeBuilder
 
 	override modify(Collection<Package> packages) {
 		packages.forEach[modify]
@@ -102,7 +100,7 @@ class ConstructorModification implements IModification {
 
 		typesFactory.createOperation => [ op |
 			op.name = cT.name
-			op._annotateWith(annotationType)
+			op.annotateWith(annotationType)
 			if (!op.isDefaultDestructor) {
 				op.body = _block => [
 					expressions += privateVariables

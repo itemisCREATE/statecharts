@@ -32,6 +32,7 @@ import org.yakindu.sct.types.generator.cpp.modifications.ConstructorModification
 import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
 import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 import org.yakindu.sct.types.modification.IModification
+import org.yakindu.base.expressions.util.ComplexTypeNavigationExtensions
 
 class OCBModification implements IModification {
 	@Inject protected extension TypeBuilder
@@ -44,6 +45,7 @@ class OCBModification implements IModification {
 	@Inject protected extension CoreCppGeneratorAnnotationLibrary
 	@Inject protected extension SCTGeneratorAnnotationLibrary
 	@Inject protected extension ConstructorModification
+	@Inject protected extension ComplexTypeNavigationExtensions
 
 	override modify(Collection<Package> packages) {
 		packages.forEach[modify]
@@ -54,7 +56,7 @@ class OCBModification implements IModification {
 		val outerClass = p.member.head as ComplexType
 		val ocbClasses = newArrayList
 		val ocbSetters = newArrayList
-		outerClass.features.filter(ComplexType).filter[!(it instanceof EnumerationType)].toList.forEach [ cT |
+		outerClass.complexTypes.filter[!(it instanceof EnumerationType)].toList.forEach [ cT |
 			val operationDefinitions = cT.features.filter(OperationDefinition).toList
 			if (!operationDefinitions.nullOrEmpty) {
 				ocbClasses += createComplexType => [ iface |
