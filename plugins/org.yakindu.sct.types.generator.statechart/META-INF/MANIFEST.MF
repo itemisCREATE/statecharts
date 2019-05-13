@@ -7,14 +7,9 @@ Bundle-Vendor: statecharts.org
 Automatic-Module-Name: org.yakindu.sct.generator.slang.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.yakindu.sct.types.generator;visibility:=reexport,
- org.yakindu.sct.types.modification,
- com.google.inject,
- org.yakindu.base.types,
- org.yakindu.sct.model.sexec;visibility:=reexport,
- org.yakindu.sct.generator.core,
- org.yakindu.sct.model.sgen,
  org.yakindu.sct.model.sequencer
 Export-Package: org.yakindu.sct.types.generator.statechart,
+ org.yakindu.sct.types.generator.statechart.annotation,
  org.yakindu.sct.types.generator.statechart.modification.library,
  org.yakindu.sct.types.generator.statechart.modification.library.event,
  org.yakindu.sct.types.generator.statechart.naming

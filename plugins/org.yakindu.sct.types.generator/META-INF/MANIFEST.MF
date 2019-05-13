@@ -9,12 +9,12 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.yakindu.sct.types.modification;visibility:=reexport,
  org.yakindu.sct.generator.core;visibility:=reexport,
  org.eclipse.emf.transaction,
- com.google.inject;visibility:=reexport,
  org.yakindu.sct.domain,
  org.yakindu.sct.model.sgen;visibility:=reexport,
  org.yakindu.sct.model.stext,
  org.yakindu.sct.model.sequencer
 Export-Package: org.yakindu.sct.types.generator,
+ org.yakindu.sct.types.generator.annotation,
  org.yakindu.sct.types.generator.artifacts,
  org.yakindu.sct.types.generator.modification.library,
  org.yakindu.sct.types.generator.module,

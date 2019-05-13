@@ -8,16 +8,19 @@
  */
 package org.yakindu.sct.types.generator.statechart.cpp.modifications
 
+import com.google.inject.Inject
 import java.util.Collection
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Package
+import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 import org.yakindu.sct.types.modification.IModification
 
 class CppPropertyAccessModification implements IModification {
 	extension ExpressionsFactory factory = ExpressionsFactory.eINSTANCE
+	@Inject protected extension SCTGeneratorAnnotationLibrary
 
 	override modify(Collection<Package> packages) {
 		packages.forEach[modify]
@@ -26,7 +29,7 @@ class CppPropertyAccessModification implements IModification {
 
 	def modify(Package p) {
 		(p.member.findFirst[it instanceof ComplexType] as ComplexType).features.filter(ComplexType).filter [
-			getAnnotationOfType("InterfaceGroup") !== null
+			isInterfaceGroup
 		].toList.forEach [
 			eAllContents.filter(FeatureCall).toList.forEach [
 				EcoreUtil.replace(it, createElementReferenceExpression => [ ele |

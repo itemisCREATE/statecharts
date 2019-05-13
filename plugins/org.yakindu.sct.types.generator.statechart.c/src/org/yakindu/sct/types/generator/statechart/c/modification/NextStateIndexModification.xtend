@@ -8,7 +8,7 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.types.generator.statechart.modification.library
+package org.yakindu.sct.types.generator.statechart.c.modification
 
 import com.google.inject.Inject
 import java.util.Collection
@@ -24,6 +24,8 @@ import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sequencer.types.StatemachineProperties
 import org.yakindu.sct.model.sexec.transformation.ArrayType
+import org.yakindu.sct.types.generator.c.annotation.CoreCGeneratorAnnotationLibrary
+import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
 import org.yakindu.sct.types.modification.IModification
 
 class NextStateIndexModification implements IModification {
@@ -32,8 +34,9 @@ class NextStateIndexModification implements IModification {
 	@Inject protected extension ExpressionBuilder
 	@Inject protected extension ITypeSystem tys
 	@Inject protected extension ArrayType
-	@Inject protected extension org.yakindu.sct.types.generator.modification.library.ReferenceExtension
+	@Inject protected extension ReferenceExtension
 	@Inject protected extension TypeBuilder
+	@Inject protected extension CoreCGeneratorAnnotationLibrary
 	extension TypesFactory typesFactory = TypesFactory.eINSTANCE
 
 	override modify(Collection<Package> packages) {
@@ -51,10 +54,7 @@ class NextStateIndexModification implements IModification {
 			prop.typeSpecifier = typesFactory.createTypeSpecifier => [ ts |
 				ts.type = tys.getType(ITypeSystem.INTEGER)
 			]
-			val annotationType = createAnnotationType => [ at |
-				at.name = "DEFINE"
-			]
-			prop._annotateWith(annotationType)
+			prop._annotateWith(defineAnnotation)
 		]
 		outerClass.features += orthogonalStates
 

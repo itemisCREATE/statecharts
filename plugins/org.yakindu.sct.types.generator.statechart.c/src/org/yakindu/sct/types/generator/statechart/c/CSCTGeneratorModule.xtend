@@ -13,6 +13,7 @@ package org.yakindu.sct.types.generator.statechart.c
 import org.yakindu.sct.types.generator.c.CTypesGeneratorModule
 import org.yakindu.sct.types.generator.statechart.SCTGeneratorModule
 import org.yakindu.sct.types.generator.statechart.c.artifacts.CGeneratorArtifactConfigurator
+import org.yakindu.sct.types.generator.statechart.c.modification.NextStateIndexModification
 import org.yakindu.sct.types.generator.statechart.c.modification.RenameInterfacesModification
 import org.yakindu.sct.types.generator.statechart.c.naming.CEventNaming
 import org.yakindu.sct.types.generator.statechart.c.naming.CNamingService
@@ -21,7 +22,6 @@ import org.yakindu.sct.types.generator.statechart.modification.library.PropertyA
 import org.yakindu.sct.types.generator.statechart.modification.library.event.InEventModification
 import org.yakindu.sct.types.generator.statechart.modification.library.event.LocalEventModification
 import org.yakindu.sct.types.generator.statechart.modification.library.event.OutEventModification
-import org.yakindu.sct.types.generator.statechart.modification.library.NextStateIndexModification
 
 class CSCTGeneratorModule extends SCTGeneratorModule {
 	

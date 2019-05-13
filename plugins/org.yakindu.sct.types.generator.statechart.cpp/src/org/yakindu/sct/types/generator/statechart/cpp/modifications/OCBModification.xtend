@@ -27,9 +27,12 @@ import org.yakindu.base.types.Visibility
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.types.generator.c.typesystem.CTypeSystem
+import org.yakindu.sct.types.generator.cpp.annotation.CoreCppGeneratorAnnotationLibrary
 import org.yakindu.sct.types.generator.cpp.modifications.ConstructorModification
 import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
+import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationConstants
 import org.yakindu.sct.types.modification.IModification
+import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 
 class OCBModification implements IModification {
 	@Inject protected extension TypeBuilder
@@ -39,6 +42,8 @@ class OCBModification implements IModification {
 	@Inject protected extension ExpressionBuilder
 	@Inject protected extension ReferenceExtension
 	extension TypesFactory factory = TypesFactory.eINSTANCE
+	@Inject protected extension CoreCppGeneratorAnnotationLibrary
+	@Inject protected extension SCTGeneratorAnnotationLibrary
 	@Inject protected extension ConstructorModification
 
 	override modify(Collection<Package> packages) {
@@ -72,18 +77,6 @@ class OCBModification implements IModification {
 		outerClass.features += ocbClasses
 		outerClass.features += ocbSetters
 		return p
-	}
-
-	def protected virtualAnnotation() {
-		factory.createAnnotationType => [ at |
-			at.name = "VIRTUAL"
-		]
-	}
-	
-	def protected interfaceGroupAnnotation() {
-		factory.createAnnotationType => [ at |
-			at.name = "InterfaceGroup"
-		]
 	}
 
 	def protected createOCBSetter(ComplexType cT, Property prop) {

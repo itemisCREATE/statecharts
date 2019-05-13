@@ -24,17 +24,19 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.types.generator.Expressions
 import org.yakindu.sct.types.generator.c.extensions.PointerExtensions
 import org.yakindu.sct.types.generator.c.typesystem.CTypeSystem
+import org.yakindu.sct.types.generator.c.annotation.CoreCGeneratorAnnotationLibrary
 
 class CExpressions extends Expressions {
 
 	@Inject protected extension PointerExtensions
+	@Inject protected extension CoreCGeneratorAnnotationLibrary
 
 	val ts = CTypeSystem.instance
 
 	override dispatch String code(Property it) {
 		return if (it.type !== null && ITypeSystem.ARRAY.equals(it.type.name)) {
 			array
-		} else if(getAnnotationOfType("DEFINE") !== null) {
+		} else if(isDefine) {
 			'''#define «name» «initialValue.code»'''
 		} else
 			super._code(it).toString
