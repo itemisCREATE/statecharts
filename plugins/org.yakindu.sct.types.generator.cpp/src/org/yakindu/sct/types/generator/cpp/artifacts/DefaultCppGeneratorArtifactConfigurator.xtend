@@ -27,17 +27,15 @@ import org.yakindu.sct.types.generator.artifacts.GeneratorArtifact
 import org.yakindu.sct.types.generator.artifacts.GeneratorArtifactConfiguration
 import org.yakindu.sct.types.generator.artifacts.IGeneratorArtifactConfigurator
 import org.yakindu.sct.types.generator.c.CExpressionsChecker
-import org.yakindu.sct.types.generator.cpp.CppConstructorGenerator
 import org.yakindu.sct.types.generator.cpp.CppTargetPlatform
+import org.yakindu.sct.types.generator.cpp.annotation.CoreCppGeneratorAnnotationLibrary
 import org.yakindu.sct.types.generator.cpp.files.CppTypes
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
-import org.yakindu.sct.types.generator.cpp.annotation.CoreCppGeneratorAnnotationLibrary
 
 class DefaultCppGeneratorArtifactConfigurator implements IGeneratorArtifactConfigurator {
 
 	@Inject extension CppTypes
-	@Inject protected extension CppConstructorGenerator
 	@Inject protected extension CExpressionsChecker
 	@Inject protected extension CoreCppGeneratorAnnotationLibrary
 	protected GeneratorArtifactConfiguration config
@@ -56,7 +54,7 @@ class DefaultCppGeneratorArtifactConfigurator implements IGeneratorArtifactConfi
 			
 			val copyCT = p.eAllContents.filter(ComplexType).toList
 			copyCT.forEach[ct | sourceContents.addAll(ct.features.filter(Property).filter[const].toList)]
-			copyCT.forEach[ct | sourceContents.addAll(ct.features.filter(Operation).filter[!(it instanceof OperationDefinition)].filter[!(it.isInnerConstructor) && !(it.isOCBDestructor)].toList)]
+			copyCT.forEach[ct | sourceContents.addAll(ct.features.filter(Operation).filter[!(it instanceof OperationDefinition)].filter[!(it.isInnerConstructor) && !(it.isOcbDestructor)].toList)]
 			classContents.addAll(EcoreUtil.copy(p).member)
 			classContents.filter(ComplexType).forEach[ cT |
 				cT.removeBodysFromOperations

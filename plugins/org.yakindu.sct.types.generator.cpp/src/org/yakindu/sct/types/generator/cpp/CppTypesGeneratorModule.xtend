@@ -9,7 +9,6 @@
 package org.yakindu.sct.types.generator.cpp
 
 import org.yakindu.sct.types.generator.cpp.artifacts.DefaultCppGeneratorArtifactConfigurator
-import org.yakindu.sct.types.generator.cpp.modifications.CTUpperCaseModification
 import org.yakindu.sct.types.generator.cpp.modifications.ConstructorModification
 import org.yakindu.sct.types.generator.cpp.modifications.InterfaceGetterModification
 import org.yakindu.sct.types.generator.modification.library.AliasReplacementModification
@@ -17,6 +16,7 @@ import org.yakindu.sct.types.generator.modification.library.IdentifierModificati
 import org.yakindu.sct.types.generator.modification.library.RemoveAnnotationTypeModification
 import org.yakindu.sct.types.generator.modification.library.TypesReplacementModification
 import org.yakindu.sct.types.generator.module.TypesGeneratorModule
+import org.yakindu.sct.types.generator.cpp.modifications.ComplexTypeUpperCaseModification
 
 class CppTypesGeneratorModule extends TypesGeneratorModule {
 
@@ -35,7 +35,7 @@ class CppTypesGeneratorModule extends TypesGeneratorModule {
 			
 			// C++ modifications
 			RemoveAnnotationTypeModification,
-			CTUpperCaseModification,
+			ComplexTypeUpperCaseModification,
 			ConstructorModification,
 			InterfaceGetterModification,
 			AliasReplacementModification,

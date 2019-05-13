@@ -43,17 +43,13 @@ class CppConstructorGenerator {
 			}
 		} else if (isInnerConstructor) {
 			'''«it.name»(«FOR p : parameters SEPARATOR ', '»«p.typeSpecifier.code» «p.name»«ENDFOR»)«IF body !== null» : «it.body.initializationList»«IF !(it.body.initializationList.toString.isEmpty)», «ENDIF»«parentParameter»(«parentParameter»)«ENDIF»{}'''
-		} else if (isOCBDestructor) {
+		} else if (isOcbDestructor) {
 			return '''virtual ~«it.name»(){}'''
 		}
 	}
 
-	def isOCBDestructor(Operation it) {
-		return getAnnotationOfType("OCBDeconstructor") !== null
-	}
-
 	def protected isConstructorOrDeconstructor(Operation it) {
-		return isDefaultConstructor || isDefaultDestructor || isInnerConstructor || isOCBDestructor
+		return isDefaultConstructor || isDefaultDestructor || isInnerConstructor || isOcbDestructor
 	}
 
 	def dispatch protected getInitializationList(BlockExpression it) {
