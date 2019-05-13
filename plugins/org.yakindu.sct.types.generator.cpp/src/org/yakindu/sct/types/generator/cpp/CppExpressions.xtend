@@ -56,7 +56,7 @@ class CppExpressions extends CExpressions {
 		if (it.type !== null && ITypeSystem.ARRAY.equals(it.type.name)) {
 			return super._code(it)
 		}
-		'''«IF static»static «ENDIF»«IF const»const «ENDIF»«typeSpecifier.code» «IF const && !static»«access»«ENDIF»«name»«IF initialValue !== null» = «initialValue.code»«ENDIF»«terminator»'''
+		'''«IF static»static «ENDIF»«IF const»const «ENDIF»«typeSpecifier.code» «name»«IF initialValue !== null» = «initialValue.code»«ENDIF»«terminator»'''
 	}
 
 	override dispatch String code(AssignmentExpression it) {
@@ -108,7 +108,7 @@ class CppExpressions extends CExpressions {
 	override dispatch String code(FeatureCall it) {
 		if (feature instanceof Property) {
 			val prop = feature as Property
-			if (prop.const) {
+			if (prop.static) {
 				return '''«prop.access»«prop.name»'''
 			}
 		}
