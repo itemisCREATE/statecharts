@@ -16,12 +16,14 @@ import org.yakindu.base.types.Event
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
+import org.yakindu.sct.types.generator.modification.library.ModificationHelper
 
 class OutEventModification extends BaseEventModification {
 
 	@Inject protected extension RaiseEventModification
 	@Inject protected extension ValueOfEventModification
 	@Inject protected extension ClearEventModification
+	@Inject protected extension ModificationHelper
 	
 	@Inject protected extension ContainmentExtensions
 	@Inject protected extension ReferenceExtension
@@ -49,8 +51,8 @@ class OutEventModification extends BaseEventModification {
 			modifyRaiseEvent(prop, e)
 		}
 		modifyClearEvent(prop, e)
-
-		val op = operation(nameEventIsRaised(e.name), ts.getType(ITypeSystem.BOOLEAN), prop.returnExpression)
+		
+		val op = operation(nameEventIsRaised(e.name), ts.getType(ITypeSystem.BOOLEAN), _fc(e.getOwnerInstance, prop).returnExpression)
 		e.eContainer.add(op)
 
 		e.references.forEach[retargetTo(prop)]

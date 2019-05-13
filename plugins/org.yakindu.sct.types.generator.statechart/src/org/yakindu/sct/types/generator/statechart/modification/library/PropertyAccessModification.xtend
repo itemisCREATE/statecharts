@@ -28,6 +28,7 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 import org.yakindu.sct.types.generator.statechart.naming.IPropertyAccessNaming
 import org.yakindu.sct.types.modification.IModification
+import org.yakindu.sct.types.generator.modification.library.ModificationHelper
 
 /**
  * Creates getter and setter operations for all properties in interface types
@@ -35,25 +36,14 @@ import org.yakindu.sct.types.modification.IModification
 @Singleton
 class PropertyAccessModification implements IModification {
 
-	@Inject
-	protected extension PackageNavigationExtensions
-
-	@Inject
-	protected extension ComplexTypeNavigationExtensions
-
-	@Inject
-	protected extension ExpressionBuilder
-
-	@Inject
-	protected extension TypeBuilder
-
-	@Inject
-	protected extension IPropertyAccessNaming
-
-	@Inject
-	protected extension ExpressionExtensions
-	
+	@Inject	protected extension PackageNavigationExtensions
+	@Inject	protected extension ComplexTypeNavigationExtensions
+	@Inject	protected extension ExpressionBuilder
+	@Inject protected extension TypeBuilder
+	@Inject protected extension IPropertyAccessNaming
+	@Inject protected extension ExpressionExtensions
 	@Inject protected extension SCTGeneratorAnnotationLibrary
+	@Inject protected extension ModificationHelper
 
 	@Inject
 	protected ITypeSystem ts
@@ -84,7 +74,7 @@ class PropertyAccessModification implements IModification {
 	protected def create _op readAccess(Property prop) {
 		name = prop.nameReadAccess
 		_type(prop.typeSpecifier)
-		body = _block(_return(prop._ref))
+		body = _block(_return(_fc(prop.ownerInstance._ref, prop)))
 		visibility = prop.visibility
 	}
 
@@ -92,7 +82,7 @@ class PropertyAccessModification implements IModification {
 		name = prop.nameWriteAccess
 		_type(ts.getType(ITypeSystem.VOID))
 		_param("value", prop.typeSpecifier)
-		body = _block(prop._ref._assign(parameters.head._ref))
+		body = _block(_fc(prop.ownerInstance._ref, prop)._assign(parameters.head._ref))
 		visibility = prop.visibility
 	}
 	
@@ -100,7 +90,7 @@ class PropertyAccessModification implements IModification {
 		name = prop.nameAssign
 		_type(prop.typeSpecifier)
 		_param("value", prop.typeSpecifier)
-		body = _block(_return(prop._ref._assign(parameters.head._ref)))
+		body = _block(_return(_fc(prop.ownerInstance._ref, prop)._assign(parameters.head._ref)))
 		visibility = prop.visibility
 	}
 	

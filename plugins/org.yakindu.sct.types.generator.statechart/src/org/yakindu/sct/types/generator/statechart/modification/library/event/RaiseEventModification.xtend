@@ -21,6 +21,7 @@ import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Property
+import org.yakindu.sct.types.generator.modification.library.ModificationHelper
 
 /**
  * Transforms <code>raise e</code> into <code>e_prop = true</code> where <code>e_prop</code> is the event property
@@ -30,6 +31,7 @@ class RaiseEventModification {
 	@Inject extension ExpressionBuilder
 	@Inject extension ExpressionExtensions
 	@Inject extension ContainmentExtensions
+	@Inject extension ModificationHelper
 
 	def modifyRaiseEvent(Property prop, Event e) {
 		for (raise : e.raiseExpressions) {
@@ -39,7 +41,7 @@ class RaiseEventModification {
 	
 	def modifyRaiseEvent(Property prop, Property valueProp, Event e) {
 		for (raise : e.raiseExpressions) {
-			val propAssignment = raise.event.toAssignment(prop, _true)
+			val propAssignment = raise.event.toAssignment(_fc(e.ownerInstance, prop), _true)
 			val valueAssignment = raise.event.toAssignment(valueProp, raise.value)
 			raise.replaceBy(valueAssignment, propAssignment)
 		}
@@ -64,5 +66,10 @@ class RaiseEventModification {
 	protected def dispatch toAssignment(Expression exp, Property prop, Expression value) {
 		prop._assign(value)
 	}
-	
+
+	protected def dispatch toAssignment(Expression exp, FeatureCall fc, Expression value) {
+		val newFc = EcoreUtil.copy(fc)
+		newFc._assign(value)
+	}
+
 }

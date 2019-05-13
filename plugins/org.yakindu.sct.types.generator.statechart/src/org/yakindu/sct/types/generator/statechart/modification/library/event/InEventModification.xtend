@@ -16,6 +16,7 @@ import org.yakindu.base.types.Event
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
+import org.yakindu.sct.types.generator.modification.library.ModificationHelper
 
 class InEventModification extends BaseEventModification {
 
@@ -23,6 +24,7 @@ class InEventModification extends BaseEventModification {
 	@Inject protected extension ExpressionBuilder
 	@Inject protected extension ContainmentExtensions
 	@Inject protected extension ReferenceExtension
+	@Inject protected extension ModificationHelper
 	
 	@Inject protected extension RaiseEventModification
 	@Inject protected extension ClearEventModification
@@ -33,7 +35,7 @@ class InEventModification extends BaseEventModification {
 			val prop = createEventFlag(e)
 			e.eContainer.add(prop)
 			
-			val op = operation(nameEventRaiser(e.name), assign(prop, true))
+			val op = operation(nameEventRaiser(e.name), assign(_fc(e.ownerInstance._ref, prop), true))
 			e.eContainer.add(op)
 	
 			modifyRaiseEvent(prop, e)
@@ -52,8 +54,8 @@ class InEventModification extends BaseEventModification {
 
 			val op = _op(nameEventRaiser(e.name), ITypeSystem.VOID)._param("value", e.type) => [
 				body = _block(
-					prop._ref._assign(_true),
-					valueProp._ref._assign(parameters.head._ref)
+					assign(_fc(e.ownerInstance._ref, prop), true),
+					_assign(_fc(e.ownerInstance._ref, valueProp), it.parameters.last._ref)
 				)
 			]
 			e.eContainer.add(op)
