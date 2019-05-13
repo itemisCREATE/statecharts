@@ -25,6 +25,7 @@ import org.yakindu.sct.types.generator.c.typesystem.CTypeSystem
 import org.yakindu.sct.types.generator.cpp.CppSlangTypeValueProvider
 import org.yakindu.sct.types.generator.cpp.naming.CppClassNaming
 import org.yakindu.sct.types.modification.IModification
+import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 class ConstructorModification implements IModification {
 	@Inject protected extension CTypeSystem cts
@@ -49,10 +50,12 @@ class ConstructorModification implements IModification {
 				cT.features += cT.createOperation(defaultConstructor, null)
 				cT.features += cT.createOperation(defaultDestructor, null)
 			} else {
-				// create constructor only with initialization list
-				val parameter = createParentParameter(outerClass)
-				cT.features += cT.createOperation(innerConstructor, parameter)
-				cT.features += outerClass.createParentProperty
+				// create constructor only with initialization list, if not abstract
+				if(cT.features.filter(OperationDefinition).nullOrEmpty) {
+					val parameter = createParentParameter(outerClass)
+					cT.features += cT.createOperation(innerConstructor, parameter)
+					cT.features += outerClass.createParentProperty
+				}
 
 			}
 		]

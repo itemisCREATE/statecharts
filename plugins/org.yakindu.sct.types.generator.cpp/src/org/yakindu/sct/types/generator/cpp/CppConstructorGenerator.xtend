@@ -14,12 +14,17 @@ import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.types.generator.c.typesystem.CTypeSystem
 import org.yakindu.sct.types.generator.cpp.naming.CppClassNaming
+import org.yakindu.sct.types.generator.c.CLiterals
 
 class CppConstructorGenerator {
 	@Inject extension CppExpressions
 	@Inject extension CppTypesGenerator
 	@Inject protected extension CppClassNaming
+	@Inject protected extension CLiterals
+	
+	val ts = CTypeSystem.instance
 
 	def protected generateConstructor(Operation it) {
 		if (isDefaultConstructor) {
@@ -61,6 +66,12 @@ class CppConstructorGenerator {
 	}
 
 	def protected String initialCode(Property property) {
+		if(property.initialValue === null) {
+			if (ts.isSame(property.typeSpecifier.type, ts.getType(CTypeSystem.POINTER))) {
+				return NULL_LITERAL
+			}
+			return getThis
+		}
 		property.initialValue.code ?: getThis
 	}
 
