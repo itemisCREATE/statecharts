@@ -27,7 +27,7 @@ class RenameSCTInterfacesModification implements IModification {
 	}
 
 	def modify(Package p) {
-		p.member.head.eAllContents.filter(ComplexType).forEach [ cT |
+		p.member.head.eAllContents.filter(ComplexType).toList.forEach [ cT |
 			if (cT.name == SCInterface) {
 				p.eAllContents.filter(Property).filter[name == SCIInterfaceVariable].forEach [ prop |
 					prop.name = ifaceVariable
@@ -44,9 +44,8 @@ class RenameSCTInterfacesModification implements IModification {
 				p.eAllContents.filter(Property).filter[name == cT.name.toFirstLower].forEach [ prop |
 					prop.name = ifaceVariable + cT.name
 					prop.visibility = Visibility.PROTECTED
-
 				]
-				cT.name = SCIPrefix + cT.name
+				cT.name = SCIPrefix + cT.name.toFirstUpper
 			}
 		]
 		p.eAllContents.filter(ComplexType).filter[name == SCInterface].forEach [ cT |
