@@ -7,12 +7,15 @@
             bindings="org.yakindu.sct.types.generator.statechart.c.CSCTGeneratorModule"
             contentType="statechart"
             elementRefType="org.yakindu.sct.model.sgraph.Statechart"
-            executor="org.yakindu.sct.types.generator.statechart.core.PackageGeneratorEntryExecutor"
+            executor="org.yakindu.sct.types.generator.statechart.PackageGeneratorEntryExecutor"
             id="yakindu::c::ng"
             name="Types SCT C Generator">
-               <FeatureLibrary
+           <FeatureLibrary
                library_id="org.yakindu.generator.core.features">
-         </FeatureLibrary>
+	         </FeatureLibrary>
+	         <FeatureLibrary
+	               library_id="org.yakindu.sct.generator.feature.c">
+	         </FeatureLibrary>
       </SCTGenerator>
    </extension>
 </plugin>

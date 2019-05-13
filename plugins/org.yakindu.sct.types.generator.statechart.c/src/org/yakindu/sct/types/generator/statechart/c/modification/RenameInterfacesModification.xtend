@@ -24,24 +24,19 @@ class RenameInterfacesModification implements IModification {
 
 	def modify(Package p) {
 		p.eAllContents.filter(ComplexType).filter[getAnnotationOfType("InterfaceGroup") !== null].forEach [ ct |
-			var suffix = getSuffix(ct)
-			switch (suffix) {
-				case "_SCInterface":
-					ct.name = ct.name.replace(suffix, "Iface")
+			switch (ct.name) {
+				case "SCInterface":
+					ct.name = "Iface"
 				case "_SCInternal": {
 				}
 				default: {
-					ct.name = ct.name.replace(suffix, "Iface" + suffix.replaceFirst("_", ""))
+					ct.name = "Iface" + ct.name
 				}
 			}
 		]
 
 		return p
 
-	}
-
-	def getSuffix(ComplexType type) {
-		return type.name.substring(type.name.indexOf("_"))
 	}
 
 }
