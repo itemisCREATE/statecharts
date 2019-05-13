@@ -8,7 +8,7 @@
             contentType="statechart"
             elementRefType="org.yakindu.sct.model.sgraph.Statechart"
             executor="org.yakindu.sct.types.generator.statechart.PackageGeneratorEntryExecutor"
-            id="yakindu::c::ng"
+            id="yakindu::c"
             name="Types SCT C Generator">
            <FeatureLibrary
                library_id="org.yakindu.generator.core.features">

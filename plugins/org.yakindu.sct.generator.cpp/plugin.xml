@@ -11,7 +11,7 @@
             elementRefType="org.yakindu.sct.model.sgraph.Statechart"
             executor="org.yakindu.sct.generator.core.execution.SExecGeneratorEntryExecutor"
             icon="icons/sct.png"
-            id="yakindu::cpp"
+            id="yakindu::cpp::legacy"
             name="YAKINDU SCT C++ Code Generator">
             <Domain
                   id="org.yakindu.domain.default">

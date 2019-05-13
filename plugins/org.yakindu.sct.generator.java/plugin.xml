@@ -10,7 +10,7 @@
              elementRefType="org.yakindu.sct.model.sgraph.Statechart"
              executor="org.yakindu.sct.generator.core.execution.SExecGeneratorEntryExecutor"
              icon="icons/sct.png"
-             id="yakindu::java"
+             id="yakindu::java::legacy"
              name="YAKINDU SCT Java Code Generator">
              <Domain
                    id="org.yakindu.domain.default">
