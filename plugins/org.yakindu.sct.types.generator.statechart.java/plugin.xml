@@ -19,6 +19,9 @@
           <Domain
                 id="com.yakindu.domain.java">
           </Domain>
+          <Domain
+                  id="org.yakindu.domain.default">
+        	</Domain>
       </SCTGenerator>
    </extension>
    <extension
