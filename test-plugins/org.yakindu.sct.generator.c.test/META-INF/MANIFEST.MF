@@ -19,7 +19,9 @@ Require-Bundle: org.junit,
  org.yakindu.sct.model.resource,
  org.yakindu.sct.generator.builder,
  org.eclipse.xtext.ui.shared,
- org.yakindu.sct.domain.generic.resource
+ org.yakindu.sct.domain.generic.resource,
+ org.yakindu.sct.types.generator.c,
+ org.yakindu.sct.types.generator
 Export-Package: org.yakindu.sct.generator.c.gtest,
  org.yakindu.sct.generator.c.test,
  org.yakindu.sct.generator.c.test.utils
