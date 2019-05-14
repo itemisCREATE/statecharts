@@ -34,7 +34,6 @@ import org.yakindu.base.types.TypedElement
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.sct.types.generator.c.typesystem.CTypeSystem
 import org.yakindu.sct.types.modification.IModification
-import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 class ExtractOperationsModification implements IModification {
 	@Inject protected extension PackageNavigationExtensions

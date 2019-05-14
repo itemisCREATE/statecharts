@@ -47,7 +47,7 @@ class CExpressions extends Expressions {
 	override dispatch String code(Property it) {
 		return if (it.type !== null && ITypeSystem.ARRAY.equals(it.type.name)) {
 			array
-		} else if(isDefine) {
+		} else if (isDefine) {
 			'''#define «name» «initialValue.code»'''
 		} else
 			'''«IF static»static «ENDIF»«IF const»const «ENDIF»«typeSpecifier.code» «name»«IF initialValue !== null»= «initialValue.code»«ENDIF»«terminator»'''
@@ -58,7 +58,7 @@ class CExpressions extends Expressions {
 			«IF static»static«ENDIF»«typeSpecifier.typeArguments.head.type.name» «name»[«IF initialValue !== null»«initialValue.size»«ENDIF»]«terminator»
 		'''.toString
 	}
-	
+
 	override dispatch String code(AssignmentExpression it) {
 		if (it.operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal(it)) {
 			'''«varRef.code» = «varRef.castToReciever»fmod(«varRef.code»,«expression.code»)'''
@@ -148,19 +148,17 @@ class CExpressions extends Expressions {
 	def dispatch definition(Expression it) {
 		null
 	}
-	
-	override dispatch String code(StringLiteral it) 
-		'''(sc_string)"«value.escaped»"'''
 
+	override dispatch String code(StringLiteral it) '''(sc_string)"«value.escaped»"'''
 
 	override dispatch String code(ReturnExpression it) {
 		'''return «expression.castToString»«it.expression.code»'''
 	}
-	
-		def dispatch String castToString(EObject o) {
+
+	def dispatch String castToString(EObject o) {
 		'''Cannot cast: «o»'''
 	}
-	
+
 	def dispatch String castToString(Expression expression) {
 		if (expression instanceof Property) {
 			if ((getReplacementType(getType(CTypeSystem.STRING)).equals(expression.type))) {
@@ -169,13 +167,12 @@ class CExpressions extends Expressions {
 		}
 		return ''''''
 	}
-	
+
 	def dispatch String castToString(ElementReferenceExpression expression) {
 		expression.reference.castToString
 	}
-	
-	
-	def  includeGuardStart(GeneratorArtifact<?> it, String HeaderFileEnding) {
+
+	def includeGuardStart(GeneratorArtifact<?> it, String HeaderFileEnding) {
 		if (name.endsWith(HeaderFileEnding)) {
 			return '''
 				#ifndef «getGuard(HeaderFileEnding)»
@@ -195,5 +192,5 @@ class CExpressions extends Expressions {
 	def protected getGuard(GeneratorArtifact<?> it, String HeaderFileEnding) {
 		name.replace(HeaderFileEnding, "").toUpperCase + "_H_"
 	}
-	
+
 }

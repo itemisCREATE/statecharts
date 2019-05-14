@@ -29,7 +29,7 @@ class CTargetPlatform extends AbstractTargetPlatform implements ITargetPlatform 
 		replacementTypes.put(delegatingTs.getType(ITypeSystem.REAL), createScReal)
 		replacementTypes.put(delegatingTs.getType(ITypeSystem.STRING), createScString)
 	}
-	
+
 	public static final String SOURCE_FILE_ENDING = ".c"
 	public static final String HEADER_FILE_ENDING = ".h"
 

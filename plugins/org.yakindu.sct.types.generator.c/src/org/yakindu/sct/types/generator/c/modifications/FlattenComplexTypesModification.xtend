@@ -18,7 +18,7 @@ import org.yakindu.base.types.Package
 import org.yakindu.sct.types.modification.IModification
 
 class FlattenComplexTypesModification implements IModification {
-	
+
 	@Inject protected extension ContainmentExtensions
 
 	override modify(Collection<Package> packages) {
@@ -27,7 +27,7 @@ class FlattenComplexTypesModification implements IModification {
 	}
 
 	def modify(Package p) {
-		p.eAllContents.filter(ComplexType).toList.forEach [ct | 
+		p.eAllContents.filter(ComplexType).toList.forEach [ ct |
 			ct.name = ct.getContainmentHierarchy.join("_")
 			p.member += ct
 		]

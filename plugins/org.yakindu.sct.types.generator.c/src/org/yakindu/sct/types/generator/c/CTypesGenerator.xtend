@@ -38,7 +38,7 @@ class CTypesGenerator extends AbstractTypesGenerator implements ITypesGenerator 
 	override generate(GeneratorArtifact<?> artifact) {
 		artifact.doGenerate
 	}
-	
+
 	def dispatch String doGenerate(GeneratorArtifact<?> it) {
 		'''
 			«includeGuardStart(CTargetPlatform.HEADER_FILE_ENDING)»
@@ -53,7 +53,7 @@ class CTypesGenerator extends AbstractTypesGenerator implements ITypesGenerator 
 			«includeGuardEnd(CTargetPlatform.HEADER_FILE_ENDING)»
 		'''
 	}
-	
+
 	def protected externCStart(GeneratorArtifact<?> it) {
 		if (name.endsWith(CTargetPlatform.HEADER_FILE_ENDING)) {
 			return '''
@@ -63,7 +63,7 @@ class CTypesGenerator extends AbstractTypesGenerator implements ITypesGenerator 
 			'''
 		}
 	}
-	
+
 	def protected externCEnd(GeneratorArtifact<?> it) {
 		if (name.endsWith(CTargetPlatform.HEADER_FILE_ENDING)) {
 			return '''
@@ -73,7 +73,7 @@ class CTypesGenerator extends AbstractTypesGenerator implements ITypesGenerator 
 			'''
 		}
 	}
-	
+
 	def dispatch String doGenerate(Iterable<Declaration> it) {
 		'''
 			«FOR decl : it»
@@ -82,20 +82,19 @@ class CTypesGenerator extends AbstractTypesGenerator implements ITypesGenerator 
 			«ENDFOR»
 		'''
 	}
-	
+
 	def dispatch String doGenerate(CharSequence it) {
 		toString
 	}
-	
+
 	def dispatch String doGenerate(StaticDependency it) {
 		'''#include <«dependency.toString»>'''
 	}
-	
+
 	def dispatch String doGenerate(ArtifactDependency it) {
 		val path = owner.generatorConfiguration.relativeTo(dependency, owner)
 		'''#include "«path»"'''
 	}
-	
 
 	def dispatch String doGenerate(Package it) {
 		'''
@@ -137,8 +136,8 @@ class CTypesGenerator extends AbstractTypesGenerator implements ITypesGenerator 
 	def dispatch String doGenerate(Operation it) '''
 		«IF isStatic»static «ENDIF»«IF type === null»void«ELSE»«typeSpecifier.code»«ENDIF» «name»(«FOR p : parameters SEPARATOR ', '»«p.typeSpecifier.code» «p.name»«ENDFOR»)«IF body !== null»«body.code»«ELSE»;«ENDIF» 
 	'''
-	
-	//TODO: add const flag to Parameters
+
+	// TODO: add const flag to Parameters
 	def dispatch String doGenerate(OperationDefinition it) '''
 		«IF isStatic»static «ENDIF»«IF type === null»void«ELSE»«typeSpecifier.code»«ENDIF» «name»(«FOR p : parameters SEPARATOR ', '»const «p.typeSpecifier.code» «p.name»«ENDFOR»)«IF body !== null»«body.code»«ELSE»;«ENDIF» 
 	'''
@@ -151,7 +150,7 @@ class CTypesGenerator extends AbstractTypesGenerator implements ITypesGenerator 
 	def protected isInterface(ComplexType it) {
 		!features.filter(Operation).exists[body !== null]
 	}
-	
+
 	def protected isTopLevel(EObject it) {
 		return eContainer instanceof Package
 	}

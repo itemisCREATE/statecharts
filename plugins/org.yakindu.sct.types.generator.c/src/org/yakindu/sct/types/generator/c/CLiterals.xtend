@@ -20,10 +20,11 @@ class CLiterals {
 	public static final String NULL_LITERAL_NAME = "sc_null";
 	public static final String TRUE_LITERAL_NAME = "bool_true";
 	public static final String FALSE_LITERAL_NAME = "bool_false";
-	
 
-	def NULL_LITERAL(){ NULL_LITERAL_NAME }
-	def TRUE_LITERAL(){ TRUE_LITERAL_NAME }
-	def FALSE_LITERAL(){ FALSE_LITERAL_NAME }
+	def NULL_LITERAL() { NULL_LITERAL_NAME }
+
+	def TRUE_LITERAL() { TRUE_LITERAL_NAME }
+
+	def FALSE_LITERAL() { FALSE_LITERAL_NAME }
 
 }

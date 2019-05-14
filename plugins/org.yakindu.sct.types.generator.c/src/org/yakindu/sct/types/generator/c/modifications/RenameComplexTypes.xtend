@@ -15,8 +15,8 @@ import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Package
 import org.yakindu.sct.types.modification.IModification
 
-class RenameComplexTypes implements IModification{
-	
+class RenameComplexTypes implements IModification {
+
 	override modify(Collection<Package> packages) {
 		packages.forEach[modify]
 		packages
@@ -26,5 +26,5 @@ class RenameComplexTypes implements IModification{
 		p.eAllContents.filter(ComplexType).forEach[name = name.toFirstUpper]
 		return p
 	}
-	
+
 }

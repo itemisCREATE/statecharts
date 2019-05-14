@@ -95,12 +95,16 @@ class CExpressionsChecker {
 	def dispatch CharSequence castToReciever(AssignmentExpression it) {
 		varRef.castToReciever
 	}
-	
+
 	def boolean modOnNumericalMulitplyDivide(Iterable<Expression> expressions) {
-		expressions.filter(NumericalMultiplyDivideExpression).findFirst[operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal] !== null
+		expressions.filter(NumericalMultiplyDivideExpression).findFirst [
+			operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal
+		] !== null
 	}
-	
+
 	def boolean modOnAssignment(Iterable<Expression> expressions) {
-		expressions.filter(AssignmentExpression).findFirst[operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal] !== null
+		expressions.filter(AssignmentExpression).findFirst [
+			operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal
+		] !== null
 	}
 }

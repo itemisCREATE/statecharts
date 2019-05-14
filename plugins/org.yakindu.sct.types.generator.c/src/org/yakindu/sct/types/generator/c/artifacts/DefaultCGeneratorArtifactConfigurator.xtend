@@ -34,22 +34,22 @@ import org.yakindu.sct.types.generator.c.files.CTypes
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
 
 class DefaultCGeneratorArtifactConfigurator implements IGeneratorArtifactConfigurator {
-	
+
 	@Inject protected extension CTypes
 	@Inject protected extension CExpressionsChecker
 	@Inject protected extension GeneratorArtifactConfigurationExtensions
 	@Inject protected extension CoreCGeneratorAnnotationLibrary
 	protected GeneratorArtifactConfiguration config
-	
+
 	override configure(Collection<Package> packages, ISCTFileSystemAccess fileSystemAccess) {
 		config = new GeneratorArtifactConfiguration(fileSystemAccess)
 		val scTypes = configureScTypes
 		configureSources(packages, scTypes)
 		config
 	}
-	
+
 	def protected configureSources(Collection<Package> packages, GeneratorArtifact<?> scTypes) {
-		for(p : packages) {
+		for (p : packages) {
 			val List<Declaration> headerContents = newArrayList
 			val List<Declaration> sourceContents = newArrayList
 			val List<Declaration> reqHeaderContents = newArrayList
@@ -57,15 +57,16 @@ class DefaultCGeneratorArtifactConfigurator implements IGeneratorArtifactConfigu
 			val List<Declaration> implOpDecls = newArrayList
 			val header = config.configure(p.name + CTargetPlatform.HEADER_FILE_ENDING, null, headerContents, false)
 			val source = config.configure(p.name + CTargetPlatform.SOURCE_FILE_ENDING, null, sourceContents, false)
-			val reqHeader = config.configure(p.name + "Required" + CTargetPlatform.HEADER_FILE_ENDING, null, reqHeaderContents, false)
-			
+			val reqHeader = config.configure(p.name + "Required" + CTargetPlatform.HEADER_FILE_ENDING, null,
+				reqHeaderContents, false)
+
 			p.member.filter(ComplexType).forEach [
 				headerContents.add(it)
 			]
-			p.member.filter(Operation).forEach[ op |
-				if(op instanceof OperationDefinition) {
+			p.member.filter(Operation).forEach [ op |
+				if (op instanceof OperationDefinition) {
 					reqHeaderContents.add(op)
-				} else if(op.public) {
+				} else if (op.public) {
 					val opDecl = EcoreUtil.copy(op)
 					opDecl.body = null
 					headerContents.add(opDecl)
@@ -83,29 +84,29 @@ class DefaultCGeneratorArtifactConfigurator implements IGeneratorArtifactConfigu
 			headerContents.addAll(0, p.member.filter(Property).filter[isDefine].toList)
 			sourceContents.addAll(0, p.member.filter(Property).filter[!isDefine].toList)
 			sourceContents.addAll(0, implOpDecls)
-			
+
 			reqHeader.addDependencies(header, scTypes)
 			header.addDependency(scTypes)
-			
+
 			source.addDependencies(scTypes)
 			addExpressionDependendingHeaders(source)
-			if(reqHeader.content.empty) {
+			if (reqHeader.content.empty) {
 				source.addDependency(header)
 			} else {
 				source.addDependency(reqHeader)
 			}
 		}
 	}
-	
+
 	def addExpressionDependendingHeaders(GeneratorArtifact<List<Declaration>> artifact) {
 		val expressions = artifact.content.filter(Operation).map[body].filter(BlockExpression).map[expressions].flatten
-		if(modOnAssignment(expressions)) {
+		if (modOnAssignment(expressions)) {
 			artifact.addDependencies("math.h")
-		} else if (modOnNumericalMulitplyDivide(expressions)){
+		} else if (modOnNumericalMulitplyDivide(expressions)) {
 			artifact.addDependencies("math.h")
 		}
 	}
-	
+
 	def protected configureScTypes() {
 		val filePath = "sc_types.h"
 		config.configure(filePath, LIBRARY_TARGET_FOLDER_OUTPUT, createScTypes, false)

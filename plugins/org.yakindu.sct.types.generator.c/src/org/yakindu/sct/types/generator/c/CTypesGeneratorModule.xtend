@@ -32,12 +32,11 @@ class CTypesGeneratorModule extends TypesGeneratorModule {
 	override bindITypesGenerator() {
 		CTypesGenerator
 	}
-	
+
 	override getModifications() {
 		return #[
 			// base modifications
 			IdentifierModification,
-			
 			// c specific modifcations
 			FlattenComplexTypesModification,
 			ExtractOperationsModification,
@@ -50,24 +49,22 @@ class CTypesGeneratorModule extends TypesGeneratorModule {
 			RenameStateEnumModification,
 			RemoveUnusedTypesModification,
 			AliasReplacementModification,
-			
 			// base modification
 			TypesReplacementModification,
 			ExtractForLoopInitializers
-			
 		]
 	}
-	
+
 	override bindExpressions() {
 		CExpressions
 	}
-	
+
 	override bindTargetPlatform() {
 		CTargetPlatform
 	}
-	
+
 	override bindOutputConfigurator() {
 		DefaultCGeneratorArtifactConfigurator
 	}
-	
+
 }

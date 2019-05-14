@@ -17,21 +17,21 @@ import org.yakindu.sct.types.generator.c.typesystem.CTypeSystem
 
 class PointerExtensions {
 	protected CTypeSystem cts = CTypeSystem.instance
-	
+
 	def isPointer(TypedElement element) {
 		element.type.isPointerType
 	}
-	
+
 	def isPointerType(Type type) {
 		cts.isSame(type, getPointerType)
 	}
-	
+
 	def getPointerType() {
 		cts.getType(CTypeSystem.POINTER)
 	}
-	
+
 	def TypeSpecifier pointerTarget(TypedElement it) {
-		if(!isPointer) {
+		if (!isPointer) {
 			return null
 		}
 		typeSpecifier.typeArguments.head
