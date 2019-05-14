@@ -15,18 +15,11 @@ import org.yakindu.sct.types.generator.c.CGeneratorConstants
 import org.yakindu.sct.types.generator.c.CLiterals
 
 class CTypes {
-		@Inject extension CLiterals
+	@Inject extension CLiterals
+
 	def createScTypes() '''
 		
-		//#ifndef TODO Types module define_H_
-		//#define TODO Types module define_H_
-		
 		// TODO licence header
-		
-		#ifdef __cplusplus
-		extern "C"
-		{
-		#endif 
 		
 		#include <stdint.h>
 		#include <stdbool.h>
@@ -64,6 +57,5 @@ class CTypes {
 		#define «TRUE_LITERAL» true
 		#define «FALSE_LITERAL» false
 		
-		//#endif /* TODO Types module define_H_ */
 	'''
 }
