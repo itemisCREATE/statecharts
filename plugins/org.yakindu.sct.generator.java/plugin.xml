@@ -10,7 +10,7 @@
              elementRefType="org.yakindu.sct.model.sgraph.Statechart"
              executor="org.yakindu.sct.generator.core.execution.SExecGeneratorEntryExecutor"
              icon="icons/sct.png"
-             id="yakindu::java::legacy"
+             id="yakindu::java"
              name="YAKINDU SCT Java Code Generator">
              <Domain
                    id="org.yakindu.domain.default">
@@ -19,7 +19,7 @@
                 library_id="org.yakindu.generator.core.features">
           </FeatureLibrary>
           <FeatureLibrary
-                library_id="org.yakindu.sct.generator.feature.java.legacy">
+                library_id="org.yakindu.sct.generator.feature.java">
           </FeatureLibrary>
           <Domain
                 id="com.yakindu.domain.java">
@@ -30,7 +30,7 @@
          point="org.yakindu.sct.generator.core.featuretypes">
       <FeatureLibrary
             defaultProvider="org.yakindu.sct.generator.java.features.JavaFeatureValueProvider"
-            library_id="org.yakindu.sct.generator.feature.java.legacy"
+            library_id="org.yakindu.sct.generator.feature.java"
             uri="platform:/plugin/org.yakindu.sct.generator.java/library/FeatureTypeLibrary.xmi">
       </FeatureLibrary>
    </extension>
@@ -38,7 +38,7 @@
          point="org.yakindu.sct.generator.core.extensions">
       <ExtensionGeneratorMapping
             fileExtension="sct"
-            generatorId="yakindu::java::legacy">
+            generatorId="yakindu::java">
       </ExtensionGeneratorMapping>
    </extension>
 

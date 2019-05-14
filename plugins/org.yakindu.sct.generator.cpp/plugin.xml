@@ -11,7 +11,7 @@
             elementRefType="org.yakindu.sct.model.sgraph.Statechart"
             executor="org.yakindu.sct.generator.core.execution.SExecGeneratorEntryExecutor"
             icon="icons/sct.png"
-            id="yakindu::cpp::legacy"
+            id="yakindu::cpp"
             name="YAKINDU SCT C++ Code Generator">
             <Domain
                   id="org.yakindu.domain.default">
@@ -23,7 +23,7 @@
                library_id="org.yakindu.generator.core.features">
          </FeatureLibrary>
          <FeatureLibrary
-               library_id="org.yakindu.sct.generator.feature.cpp.legacy">
+               library_id="org.yakindu.sct.generator.feature.cpp">
          </FeatureLibrary>
       </SCTGenerator>
    </extension>
@@ -31,14 +31,14 @@
          point="org.yakindu.sct.generator.core.extensions">
       <ExtensionGeneratorMapping
             fileExtension="sct"
-            generatorId="yakindu::cpp::legacy">
+            generatorId="yakindu::cpp">
       </ExtensionGeneratorMapping>
    </extension>
    <extension
          point="org.yakindu.sct.generator.core.featuretypes">
       <FeatureLibrary
             defaultProvider="org.yakindu.sct.generator.cpp.features.CPPDefaultFeatureValueProvider"
-            library_id="org.yakindu.sct.generator.feature.cpp.legacy"
+            library_id="org.yakindu.sct.generator.feature.cpp"
             uri="platform:/plugin/org.yakindu.sct.generator.cpp/library/FeatureTypeLibrary.xmi">
       </FeatureLibrary>
    </extension>
