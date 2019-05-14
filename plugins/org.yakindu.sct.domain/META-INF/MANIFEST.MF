@@ -8,8 +8,9 @@ Bundle-Vendor: statecharts.org
 Require-Bundle: org.eclipse.core.runtime,
  com.google.guava,
  com.google.inject,
+ org.yakindu.base.types,
  org.eclipse.xtext,
- org.yakindu.base.types
+ org.yakindu.sct.model.sgraph
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.domain,
