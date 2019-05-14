@@ -172,25 +172,4 @@ class CExpressions extends Expressions {
 		expression.reference.castToString
 	}
 
-	def includeGuardStart(GeneratorArtifact<?> it, String HeaderFileEnding) {
-		if (name.endsWith(HeaderFileEnding)) {
-			return '''
-				#ifndef «getGuard(HeaderFileEnding)»
-				#define «getGuard(HeaderFileEnding)»
-			'''
-		}
-	}
-
-	def includeGuardEnd(GeneratorArtifact<?> it, String HeaderFileEnding) {
-		if (name.endsWith(HeaderFileEnding)) {
-			return '''
-				#endif /* «getGuard(HeaderFileEnding)» */
-			'''
-		}
-	}
-
-	def protected getGuard(GeneratorArtifact<?> it, String HeaderFileEnding) {
-		name.replace(HeaderFileEnding, "").toUpperCase + "_H_"
-	}
-
 }

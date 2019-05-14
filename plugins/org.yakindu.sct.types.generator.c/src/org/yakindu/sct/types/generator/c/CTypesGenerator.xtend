@@ -11,13 +11,13 @@
 package org.yakindu.sct.types.generator.c
 
 import com.google.inject.Inject
-import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.Property
+import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.types.generator.AbstractTypesGenerator
 import org.yakindu.sct.types.generator.ITargetPlatform
 import org.yakindu.sct.types.generator.ITypesGenerator
@@ -27,13 +27,13 @@ import org.yakindu.sct.types.generator.artifacts.GeneratorArtifact
 import org.yakindu.sct.types.generator.c.files.CTypes
 
 import static org.eclipse.xtext.util.Strings.*
-import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 class CTypesGenerator extends AbstractTypesGenerator implements ITypesGenerator {
 
-	@Inject extension CExpressions
-	@Inject protected ITargetPlatform platform
+	@Inject protected extension CExpressions
+	@Inject protected extension CTypesGeneratorExtensions
 	@Inject protected extension CTypes
+	@Inject protected ITargetPlatform platform
 
 	override generate(GeneratorArtifact<?> artifact) {
 		artifact.doGenerate
@@ -52,26 +52,6 @@ class CTypesGenerator extends AbstractTypesGenerator implements ITypesGenerator 
 			
 			«includeGuardEnd(CTargetPlatform.HEADER_FILE_ENDING)»
 		'''
-	}
-
-	def protected externCStart(GeneratorArtifact<?> it) {
-		if (name.endsWith(CTargetPlatform.HEADER_FILE_ENDING)) {
-			return '''
-				#ifdef __cplusplus
-				extern "C" {
-				#endif
-			'''
-		}
-	}
-
-	def protected externCEnd(GeneratorArtifact<?> it) {
-		if (name.endsWith(CTargetPlatform.HEADER_FILE_ENDING)) {
-			return '''
-				#ifdef __cplusplus
-				}
-				#endif
-			'''
-		}
 	}
 
 	def dispatch String doGenerate(Iterable<Declaration> it) {
@@ -147,11 +127,4 @@ class CTypesGenerator extends AbstractTypesGenerator implements ITypesGenerator 
 
 	}
 
-	def protected isInterface(ComplexType it) {
-		!features.filter(Operation).exists[body !== null]
-	}
-
-	def protected isTopLevel(EObject it) {
-		return eContainer instanceof Package
-	}
 }

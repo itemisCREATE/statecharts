@@ -23,13 +23,15 @@ import org.yakindu.sct.types.generator.artifacts.Dependency.StaticDependency
 import org.yakindu.sct.types.generator.artifacts.GeneratorArtifact
 
 import static org.eclipse.xtext.util.Strings.*
+import org.yakindu.sct.types.generator.c.CTypesGeneratorExtensions
 
 class CppTypesGenerator extends AbstractTypesGenerator implements ITypesGenerator {
 
-	@Inject extension CppExpressions
+	@Inject protected extension CppExpressions
 	@Inject protected extension ITargetPlatform
 	@Inject protected extension CppConstructorGenerator
 	@Inject protected extension CppNamespaceGenerator
+	@Inject protected extension CTypesGeneratorExtensions
 
 	override generate(GeneratorArtifact<?> artifact) {
 		artifact.doGenerate

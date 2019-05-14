@@ -38,10 +38,6 @@ class CTypes {
 		
 		typedef intptr_t		sc_intptr_t;
 		
-		#ifdef __cplusplus
-		}
-		#endif
-		
 		#ifndef «NULL_LITERAL»
 			#ifdef __cplusplus
 				#if __cplusplus >= 201103L || (defined(_MSC_VER) && _MSC_VER >= 1900)
