@@ -30,7 +30,7 @@ class RenameInterfacesModification implements IModification {
 				case "_SCInternal": {
 				}
 				default: {
-					ct.name = "Iface" + ct.name
+					ct.name = "Iface" + ct.name.toFirstUpper // TODO: This renames a lower case getter from interface (named) to IfaceNamed. Could be removed with 4.0
 				}
 			}
 		]
