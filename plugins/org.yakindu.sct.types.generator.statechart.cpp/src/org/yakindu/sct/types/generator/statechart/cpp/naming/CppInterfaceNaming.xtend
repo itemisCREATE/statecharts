@@ -8,7 +8,9 @@
  */
 package org.yakindu.sct.types.generator.statechart.cpp.naming
 
-class CppInterfaceNaming {
+import org.yakindu.sct.types.generator.statechart.c.naming.CInterfaceNaming
+
+class CppInterfaceNaming extends CInterfaceNaming {
 	def getInterfaceName() {
 		"StatemachineInterface"
 	}
@@ -23,14 +25,6 @@ class CppInterfaceNaming {
 
 	def getSCIPrefix() {
 		"SCI_"
-	}
-
-	def getSCInterface() {
-		"SCInterface"
-	}
-
-	def getSCInternal() {
-		"SCInternal"
 	}
 
 	def getSCIInterfaceVariable() {

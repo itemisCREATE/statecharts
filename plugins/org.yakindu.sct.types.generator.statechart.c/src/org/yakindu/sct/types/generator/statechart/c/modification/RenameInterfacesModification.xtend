@@ -10,12 +10,16 @@
 */
 package org.yakindu.sct.types.generator.statechart.c.modification
 
+import com.google.inject.Inject
 import java.util.Collection
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Package
+import org.yakindu.sct.types.generator.statechart.c.naming.CInterfaceNaming
 import org.yakindu.sct.types.modification.IModification
 
 class RenameInterfacesModification implements IModification {
+	
+	@Inject protected extension CInterfaceNaming
 
 	override modify(Collection<Package> packages) {
 		packages.forEach[modify]
@@ -25,12 +29,13 @@ class RenameInterfacesModification implements IModification {
 	def modify(Package p) {
 		p.eAllContents.filter(ComplexType).filter[getAnnotationOfType("InterfaceGroup") !== null].forEach [ ct |
 			switch (ct.name) {
-				case "SCInterface":
-					ct.name = "Iface"
-				case "_SCInternal": {
+				case SCInterface:
+					ct.name = iface
+				case SCInternal: {
+					ct.name = internal
 				}
 				default: {
-					ct.name = "Iface" + ct.name.toFirstUpper // TODO: This renames a lower case getter from interface (named) to IfaceNamed. Could be removed with 4.0
+					ct.name = iface + ct.name.toFirstUpper // TODO: This renames a lower case getter from interface (named) to IfaceNamed. Could be removed with 4.0
 				}
 			}
 		]
