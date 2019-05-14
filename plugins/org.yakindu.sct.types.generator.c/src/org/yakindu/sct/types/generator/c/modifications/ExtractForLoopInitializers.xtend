@@ -30,7 +30,7 @@ class ExtractForLoopInitializers implements IModification {
 				val newProp = EcoreUtil.copy(prop) => [
 					initialValue = null
 				]
-				block.expressions.add(block.expressions.indexOf(it), newProp)
+				addDeclarationToBlock(block, newProp)
 				EcoreUtil.replace(prop, prop.createAssignmentFromDeclaration)
 			]
 		}
@@ -38,6 +38,13 @@ class ExtractForLoopInitializers implements IModification {
 	
 	def protected AssignmentExpression createAssignmentFromDeclaration(Property it) {
 		_assign(it._ref, EcoreUtil.copy(it.initialValue))
+	}
+	
+	def protected addDeclarationToBlock(BlockExpression block, Property it) {
+		if(block.expressions.exists[exp | EcoreUtil.equals(exp, it)]) {
+			return
+		}
+		block.expressions.add(0, it)
 	}
 	
 }
