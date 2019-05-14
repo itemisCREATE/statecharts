@@ -25,6 +25,7 @@ import org.yakindu.base.types.TypedElement
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.types.generator.Expressions
 import org.yakindu.sct.types.generator.ITargetPlatform
+import org.yakindu.sct.types.generator.artifacts.GeneratorArtifact
 import org.yakindu.sct.types.generator.c.annotation.CoreCGeneratorAnnotationLibrary
 import org.yakindu.sct.types.generator.c.extensions.PointerExtensions
 import org.yakindu.sct.types.generator.c.typesystem.CTypeSystem
@@ -151,6 +152,28 @@ class CExpressions extends Expressions {
 	
 	def dispatch String castToString(ElementReferenceExpression expression) {
 		expression.reference.castToString
+	}
+	
+	
+	def  includeGuardStart(GeneratorArtifact<?> it, String HeaderFileEnding) {
+		if (name.endsWith(HeaderFileEnding)) {
+			return '''
+				#ifndef «getGuard(HeaderFileEnding)»
+				#define «getGuard(HeaderFileEnding)»
+			'''
+		}
+	}
+
+	def includeGuardEnd(GeneratorArtifact<?> it, String HeaderFileEnding) {
+		if (name.endsWith(HeaderFileEnding)) {
+			return '''
+				#endif /* «getGuard(HeaderFileEnding)» */
+			'''
+		}
+	}
+
+	def protected getGuard(GeneratorArtifact<?> it, String HeaderFileEnding) {
+		name.replace(HeaderFileEnding, "").toUpperCase + "_H_"
 	}
 	
 }

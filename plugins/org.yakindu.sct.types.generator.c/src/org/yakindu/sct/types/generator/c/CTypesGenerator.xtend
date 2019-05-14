@@ -19,19 +19,18 @@ import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.Property
 import org.yakindu.sct.types.generator.AbstractTypesGenerator
-import org.yakindu.sct.types.generator.Expressions
 import org.yakindu.sct.types.generator.ITargetPlatform
+import org.yakindu.sct.types.generator.ITypesGenerator
 import org.yakindu.sct.types.generator.artifacts.Dependency.ArtifactDependency
 import org.yakindu.sct.types.generator.artifacts.Dependency.StaticDependency
 import org.yakindu.sct.types.generator.artifacts.GeneratorArtifact
 import org.yakindu.sct.types.generator.c.files.CTypes
 
 import static org.eclipse.xtext.util.Strings.*
-import org.yakindu.sct.types.generator.ITypesGenerator
 
 class CTypesGenerator extends AbstractTypesGenerator implements ITypesGenerator {
 
-	@Inject extension Expressions
+	@Inject extension CExpressions
 	@Inject protected ITargetPlatform platform
 	@Inject protected extension CTypes
 
@@ -41,12 +40,16 @@ class CTypesGenerator extends AbstractTypesGenerator implements ITypesGenerator 
 	
 	def dispatch String doGenerate(GeneratorArtifact<?> it) {
 		'''
+			«includeGuardStart(CTargetPlatform.HEADER_FILE_ENDING)»
+			
 			«FOR dep : dependencies AFTER newLine»
 				«dep.doGenerate»
 			«ENDFOR»
 			«externCStart»
 			«content.doGenerate»
 			«externCEnd»
+			
+			«includeGuardEnd(CTargetPlatform.HEADER_FILE_ENDING)»
 		'''
 	}
 	

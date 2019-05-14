@@ -16,6 +16,7 @@ import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.Visibility
 import org.yakindu.sct.types.generator.AbstractTypesGenerator
+import org.yakindu.sct.types.generator.ITargetPlatform
 import org.yakindu.sct.types.generator.ITypesGenerator
 import org.yakindu.sct.types.generator.artifacts.Dependency.ArtifactDependency
 import org.yakindu.sct.types.generator.artifacts.Dependency.StaticDependency
@@ -26,7 +27,7 @@ import static org.eclipse.xtext.util.Strings.*
 class CppTypesGenerator extends AbstractTypesGenerator implements ITypesGenerator {
 
 	@Inject extension CppExpressions
-	@Inject protected extension CppTargetPlatform
+	@Inject protected extension ITargetPlatform
 	@Inject protected extension CppConstructorGenerator
 	@Inject protected extension CppNamespaceGenerator
 
@@ -36,7 +37,7 @@ class CppTypesGenerator extends AbstractTypesGenerator implements ITypesGenerato
 
 	def dispatch String doGenerate(GeneratorArtifact<?> it) {
 		'''
-			«includeGuardStart»
+			«includeGuardStart(CppTargetPlatform.HEADER_FILE_ENDING)»
 			
 			«FOR dep : dependencies AFTER newLine»
 				«dep.doGenerate»
@@ -45,7 +46,7 @@ class CppTypesGenerator extends AbstractTypesGenerator implements ITypesGenerato
 			«content.doGenerate»
 			«content.namespaceEnd»
 			
-			«includeGuardEnd»
+			«includeGuardEnd(CppTargetPlatform.HEADER_FILE_ENDING)»
 		'''
 	}
 
@@ -149,27 +150,6 @@ class CppTypesGenerator extends AbstractTypesGenerator implements ITypesGenerato
 		if (eContainer instanceof ComplexType) {
 			return '''friend class «(eContainer as ComplexType).name»;'''
 		}
-	}
-
-	def protected includeGuardStart(GeneratorArtifact<?> it) {
-		if (name.endsWith(CppTargetPlatform.HEADER_FILE_ENDING)) {
-			return '''
-				#ifndef «guard»
-				#define «guard»
-			'''
-		}
-	}
-
-	def protected includeGuardEnd(GeneratorArtifact<?> it) {
-		if (name.endsWith(CppTargetPlatform.HEADER_FILE_ENDING)) {
-			return '''
-				#endif /* «guard» */
-			'''
-		}
-	}
-
-	def protected getGuard(GeneratorArtifact<?> it) {
-		name.replace(CppTargetPlatform.HEADER_FILE_ENDING, "").toUpperCase + "_H_"
 	}
 
 }
