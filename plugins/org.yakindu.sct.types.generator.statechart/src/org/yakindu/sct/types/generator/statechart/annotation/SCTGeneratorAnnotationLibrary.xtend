@@ -6,12 +6,20 @@ import org.yakindu.sct.types.generator.annotation.CoreGeneratorAnnotationLibrary
 
 @Singleton
 class SCTGeneratorAnnotationLibrary extends CoreGeneratorAnnotationLibrary implements SCTGeneratorAnnotationConstants {
-	
+
 	def interfaceGroupAnnotation() {
 		annotation(INTERFACE_GROUP)
 	}
-	
+
 	def isInterfaceGroup(AnnotatableElement it) {
+		isAnnotatedWith(INTERFACE_GROUP)
+	}
+
+	def APIAnnotation() {
+		annotation(INTERFACE_GROUP)
+	}
+
+	def isAPI(AnnotatableElement it) {
 		isAnnotatedWith(INTERFACE_GROUP)
 	}
 }

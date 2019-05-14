@@ -23,6 +23,7 @@ import org.yakindu.sct.types.generator.statechart.modification.library.event.InE
 import org.yakindu.sct.types.generator.statechart.modification.library.event.LocalEventModification
 import org.yakindu.sct.types.generator.statechart.modification.library.event.OutEventModification
 import org.yakindu.sct.types.generator.statechart.c.modification.FlattenInterfacesModification
+import org.yakindu.sct.types.generator.statechart.modification.library.APIOperationsModification
 
 class CSCTGeneratorModule extends SCTGeneratorModule {
 	
@@ -37,6 +38,7 @@ class CSCTGeneratorModule extends SCTGeneratorModule {
 	override getModifications() {
 		return #[
 			// base modifications
+			APIOperationsModification,
 			PropertyAccessModification, 
 			InEventModification,
 			OutEventModification,

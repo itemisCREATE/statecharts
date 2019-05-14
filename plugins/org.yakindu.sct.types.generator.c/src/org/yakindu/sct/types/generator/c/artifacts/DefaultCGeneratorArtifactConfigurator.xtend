@@ -69,7 +69,7 @@ class DefaultCGeneratorArtifactConfigurator implements IGeneratorArtifactConfigu
 				} else if (op.public) {
 					val opDecl = EcoreUtil.copy(op)
 					opDecl.body = null
-					headerContents.add(opDecl)
+					addOperationDeclarations(headerContents, opDecl, sourceContents, op)
 					sourceContents.add(op)
 				} else {
 					op.static = true
@@ -96,6 +96,10 @@ class DefaultCGeneratorArtifactConfigurator implements IGeneratorArtifactConfigu
 				source.addDependency(reqHeader)
 			}
 		}
+	}
+	
+	protected def addOperationDeclarations(List<Declaration> headerContents, Operation opDecl, List<Declaration> sourceContents, Operation op) {
+		headerContents.add(opDecl)
 	}
 
 	def addExpressionDependendingHeaders(GeneratorArtifact<List<Declaration>> artifact) {

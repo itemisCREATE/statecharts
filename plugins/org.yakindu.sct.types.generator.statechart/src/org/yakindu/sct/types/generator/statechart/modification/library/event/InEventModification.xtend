@@ -17,6 +17,7 @@ import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
 import org.yakindu.sct.types.generator.modification.library.ModificationHelper
+import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 
 class InEventModification extends BaseEventModification {
 
@@ -25,6 +26,7 @@ class InEventModification extends BaseEventModification {
 	@Inject protected extension ContainmentExtensions
 	@Inject protected extension ReferenceExtension
 	@Inject protected extension ModificationHelper
+	@Inject protected extension SCTGeneratorAnnotationLibrary
 	
 	@Inject protected extension RaiseEventModification
 	@Inject protected extension ClearEventModification
@@ -36,6 +38,7 @@ class InEventModification extends BaseEventModification {
 			e.eContainer.add(prop)
 			
 			val op = operation(nameEventRaiser(e.name), assign(_fc(e.ownerInstance._ref, prop), true))
+			op.annotateWith(APIAnnotation)
 			e.eContainer.add(op)
 	
 			modifyRaiseEvent(prop, e)

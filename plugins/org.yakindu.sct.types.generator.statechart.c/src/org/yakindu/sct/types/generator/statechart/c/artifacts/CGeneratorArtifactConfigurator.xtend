@@ -11,14 +11,20 @@
 package org.yakindu.sct.types.generator.statechart.c.artifacts
 
 import com.google.inject.Inject
+import java.util.List
+import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Operation
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.types.generator.artifacts.IGeneratorArtifactConfigurator
 import org.yakindu.sct.types.generator.c.artifacts.DefaultCGeneratorArtifactConfigurator
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
+import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 
 class CGeneratorArtifactConfigurator extends DefaultCGeneratorArtifactConfigurator implements IGeneratorArtifactConfigurator {
+	
+	@Inject protected extension SCTGeneratorAnnotationLibrary
 	@Inject protected GeneratorEntry entry
 	@Inject protected ICoreLibraryHelper libraryHelper
 	
@@ -37,6 +43,15 @@ class CGeneratorArtifactConfigurator extends DefaultCGeneratorArtifactConfigurat
 			// use default target folder path in case no library or API target folder is specified (the file will be overwritten there)
 			config.configure(filePath, null, createScTypes, false)
 		}
+	}
+	
+	protected override addOperationDeclarations(List<Declaration> headerContents, Operation opDecl, List<Declaration> sourceContents, Operation op) {
+		if(opDecl.isAPI) {
+			headerContents.add(opDecl)
+		} else {
+			sourceContents.add(0, opDecl)
+		}
+		return true // add(0, ..) returns void
 	}
 	
 }

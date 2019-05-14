@@ -4,4 +4,5 @@ import org.yakindu.sct.types.generator.annotation.CoreGeneratorAnnotationConstan
 
 public interface SCTGeneratorAnnotationConstants extends CoreGeneratorAnnotationConstants {
 	public static final String INTERFACE_GROUP = "InterfaceGroup";
+	public static final String API = "API";
 }
