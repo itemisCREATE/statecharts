@@ -15,8 +15,7 @@ Require-Bundle: org.yakindu.sct.test.models,
  org.eclipse.core.resources,
  org.eclipse.xtext.ui.shared,
  org.yakindu.sct.generator.builder,
- org.yakindu.sct.domain.generic.resource,
- org.yakindu.sct.types.generator.statechart.java
+ org.yakindu.sct.domain.generic.resource
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: statecharts.org
 Bundle-ClassPath: lib/mockito-all-2.0.2-beta.jar,

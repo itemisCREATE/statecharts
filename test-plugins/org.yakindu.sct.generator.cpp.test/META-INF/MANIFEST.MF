@@ -10,6 +10,5 @@ Require-Bundle: org.yakindu.sct.test.models,
  org.junit,
  org.yakindu.sct.generator.cpp,
  org.yakindu.sct.model.resource,
- org.yakindu.sct.domain.generic.resource,
- org.yakindu.sct.types.generator.statechart.cpp
+ org.yakindu.sct.domain.generic.resource
 Automatic-Module-Name: org.yakindu.sct.generator.cpp.test
