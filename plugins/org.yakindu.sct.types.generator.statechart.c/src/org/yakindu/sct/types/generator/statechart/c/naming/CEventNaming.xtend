@@ -22,7 +22,7 @@ class CEventNaming implements IEventNaming {
 	}
 
 	override String nameEventIsRaised(CharSequence s) {
-		return '''«s»isRaised'''
+		return '''israised_«s»'''
 	}
 	
 	override nameEventValue(CharSequence s) {
