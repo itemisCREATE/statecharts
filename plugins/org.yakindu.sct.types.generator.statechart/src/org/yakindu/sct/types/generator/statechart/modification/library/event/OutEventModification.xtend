@@ -41,7 +41,7 @@ class OutEventModification extends BaseEventModification {
 			
 			val valueGetter = _op(nameEventValueGetter(e.name), e.type) => [
 				body = _block(
-					_return(valueProp._ref)
+					_return( _fc(e.getOwnerInstance._ref, valueProp))
 				)
 			]
 			e.eContainer.add(valueGetter)
