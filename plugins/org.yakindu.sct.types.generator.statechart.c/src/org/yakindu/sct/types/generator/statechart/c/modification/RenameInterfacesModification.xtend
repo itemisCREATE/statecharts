@@ -16,10 +16,12 @@ import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Package
 import org.yakindu.sct.types.generator.statechart.c.naming.CInterfaceNaming
 import org.yakindu.sct.types.modification.IModification
+import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 
 class RenameInterfacesModification implements IModification {
 	
 	@Inject protected extension CInterfaceNaming
+	@Inject protected extension SCTGeneratorAnnotationLibrary
 
 	override modify(Collection<Package> packages) {
 		packages.forEach[modify]
@@ -27,7 +29,7 @@ class RenameInterfacesModification implements IModification {
 	}
 
 	def modify(Package p) {
-		p.eAllContents.filter(ComplexType).filter[getAnnotationOfType("InterfaceGroup") !== null].forEach [ ct |
+		p.eAllContents.filter(ComplexType).filter[isInterfaceGroup].forEach [ ct |
 			switch (ct.name) {
 				case SCInterface:
 					ct.name = iface
