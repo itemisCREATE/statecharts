@@ -11,6 +11,7 @@
 package org.yakindu.sct.types.generator
 
 import com.google.inject.Inject
+import java.util.Set
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.base.NamedElement
 import org.yakindu.base.expressions.expressions.ArgumentExpression
@@ -45,8 +46,8 @@ import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
-import org.yakindu.base.types.Property
 import org.yakindu.base.types.Package
+import org.yakindu.base.types.Property
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.TypeSpecifier
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
@@ -57,6 +58,7 @@ import static org.yakindu.base.expressions.expressions.util.ArgumentSorter.*
 class Expressions {
 
 	@Inject protected extension ITypeSystemInferrer
+	protected Set<Expression> terminated = newHashSet; // keeps expressions that had a terminator added before
 	
 	def dispatch String code(Void it) {
 		println("Null type")
@@ -218,6 +220,10 @@ class Expressions {
 	}
 
 	def dispatch terminator(Expression it) {
+		if(terminated.contains(it)) {
+			return ""
+		}
+		terminated.add(it)
 		if ((eContainer instanceof BlockExpression) || 
 			(eContainer instanceof ComplexType) ||
 			(eContainer instanceof SwitchCase) ||
