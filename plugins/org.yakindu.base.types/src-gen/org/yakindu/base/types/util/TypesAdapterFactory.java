@@ -17,6 +17,7 @@ import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.AnnotationType;
 import org.yakindu.base.types.ArrayTypeSpecifier;
 import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.Constructor;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Domain;
 import org.yakindu.base.types.EnumerationType;
@@ -185,6 +186,10 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseMetaComposite(MetaComposite object) {
 				return createMetaCompositeAdapter();
+			}
+			@Override
+			public Adapter caseConstructor(Constructor object) {
+				return createConstructorAdapter();
 			}
 			@Override
 			public Adapter caseNamedElement(NamedElement object) {
@@ -579,6 +584,20 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMetaCompositeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.Constructor <em>Constructor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.types.Constructor
+	 * @generated
+	 */
+	public Adapter createConstructorAdapter() {
 		return null;
 	}
 
