@@ -16,6 +16,9 @@
 	         <FeatureLibrary
                 library_id="org.yakindu.sct.generator.feature.java">
           </FeatureLibrary>
+          <Domain
+                id="com.yakindu.domain.java">
+          </Domain>
       </SCTGenerator>
    </extension>
    <extension
