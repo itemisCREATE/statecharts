@@ -23,6 +23,7 @@ import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ConditionalExpression
 import org.yakindu.base.expressions.expressions.DoubleLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.ExpressionsPackage
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.ForExpression
@@ -64,8 +65,9 @@ class Expressions {
 		println("Null type")
 	}
 
-	def dispatch String code(BinaryExpression it) 
-		'''(«leftOperand.code.toString.trim» «operator.literal.toString.trim» «rightOperand.code»)'''
+	def dispatch String code(BinaryExpression it) {
+		'''«leftOperand.code.toString.trim» «operator.literal.toString.trim» «rightOperand.code»'''.parentheses(it)
+	}
 
 	def dispatch String code(UnaryExpression it) 
 		'''«operator.literal»«operand.code»'''
@@ -240,6 +242,18 @@ class Expressions {
 	def dispatch terminator(IfExpression it) ''''''
 	def dispatch terminator(SwitchExpression it) ''''''
 	def dispatch terminator(BlockExpression it) ''''''
+	
+	def dispatch String parentheses(CharSequence content, Expression it) {content.toString}
+	
+	def dispatch String parentheses(CharSequence content, BinaryExpression it) {
+		val eC = eContainer
+		if(eC instanceof IfExpression) {
+			if(eContainingFeature.equals(ExpressionsPackage.Literals.IF_EXPRESSION__CONDITION)) {
+				return content.toString
+			}
+		}
+		'''(«content»)'''
+	}
 
 
 }
