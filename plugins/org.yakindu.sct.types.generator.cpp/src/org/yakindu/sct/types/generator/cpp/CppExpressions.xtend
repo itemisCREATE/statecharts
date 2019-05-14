@@ -14,42 +14,22 @@ import org.yakindu.base.base.NamedElement
 import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.AssignmentOperator
-import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.MultiplicativeOperator
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
-import org.yakindu.base.expressions.expressions.ReturnExpression
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Enumerator
-import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.typesystem.ITypeSystem
-import org.yakindu.sct.types.generator.ITargetPlatform
 import org.yakindu.sct.types.generator.c.CExpressions
-import org.yakindu.sct.types.generator.c.typesystem.CTypeSystem
 import org.yakindu.sct.types.generator.c.CExpressionsChecker
 
 class CppExpressions extends CExpressions {
-	@Inject protected extension ITypeSystem
 	@Inject protected extension CExpressionsChecker
-	@Inject protected extension ITargetPlatform
 
 	override dispatch String code(Void it) {
 		null
-	}
-
-	def dispatch String castToString(Expression expression) {
-		if (expression instanceof Property) {
-			if ((getReplacementType(getType(CTypeSystem.STRING)).equals(expression.type))) {
-				return "(sc_string)"
-			}
-		}
-		return ''''''
-	}
-
-	override dispatch String code(ReturnExpression it) {
-		'''return «expression.castToString»«it.expression.code»'''
 	}
 
 	override dispatch String code(Property it) {
@@ -72,14 +52,6 @@ class CppExpressions extends CExpressions {
 		} else {
 			super._code(expression);
 		}
-	}
-
-	def dispatch String castToString(EObject o) {
-		'''Cannot cast: «o»'''
-	}
-
-	def dispatch String castToString(ElementReferenceExpression expression) {
-		expression.reference.castToString
 	}
 
 	override protected argumentCall(ArgumentExpression it, EObject reference) {
