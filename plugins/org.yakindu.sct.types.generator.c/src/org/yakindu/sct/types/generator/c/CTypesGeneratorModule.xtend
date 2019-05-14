@@ -24,6 +24,7 @@ import org.yakindu.sct.types.generator.modification.library.RemoveAnnotationType
 import org.yakindu.sct.types.generator.modification.library.RemoveUnusedTypesModification
 import org.yakindu.sct.types.generator.module.TypesGeneratorModule
 import org.yakindu.sct.types.generator.modification.library.TypesReplacementModification
+import org.yakindu.sct.types.generator.c.modifications.ExtractForLoopInitializers
 
 class CTypesGeneratorModule extends TypesGeneratorModule {
 
@@ -49,7 +50,8 @@ class CTypesGeneratorModule extends TypesGeneratorModule {
 			RemoveUnusedTypesModification,
 			
 			// base modification
-			TypesReplacementModification
+			TypesReplacementModification,
+			ExtractForLoopInitializers
 			
 		]
 	}
