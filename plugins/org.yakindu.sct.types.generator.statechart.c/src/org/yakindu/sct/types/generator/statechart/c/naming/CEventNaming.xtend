@@ -14,7 +14,7 @@ import org.yakindu.sct.types.generator.statechart.naming.IEventNaming
 
 class CEventNaming implements IEventNaming {
 	override String nameEventRaiser(CharSequence s) {
-		return '''raise_«s»'''
+		return '''raise_«s.toString.toFirstLower»''' // TODO: can be removed with 4.0. Needed to keep API.
 	}
 
 	override String nameEventRaised(CharSequence s) {
