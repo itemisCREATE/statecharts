@@ -34,6 +34,7 @@ import org.yakindu.base.types.TypedElement
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.sct.types.generator.c.typesystem.CTypeSystem
 import org.yakindu.sct.types.modification.IModification
+import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 class ExtractOperationsModification implements IModification {
 	@Inject protected extension PackageNavigationExtensions
@@ -95,14 +96,21 @@ class ExtractOperationsModification implements IModification {
 				if (fc.feature === op) {
 					EcoreUtil.replace(fc, expFactory.createElementReferenceExpression => [ ele |
 						ele.reference = fc.feature
-						ele.operationCall = true
+						ele.arguments += fc.arguments
+						ele.arrayAccess = fc.arrayAccess
+						ele.arraySelector += fc.arraySelector
+						ele.operationCall = fc.operationCall
 					])
 				} else if (compare(fc.feature, op)) { // TODO: Should work with "==". Is this wrong in sequencer?
 					EcoreUtil.replace(fc, expFactory.createElementReferenceExpression => [ ele |
 						ele.reference = fc.feature as Operation
 						(ele.reference as Operation).name = container.name.toFirstLower + "_" +
 							(ele.reference as Operation).name
-							ele.operationCall = true
+						ele.reference = fc.feature
+						ele.arguments += fc.arguments
+						ele.arrayAccess = fc.arrayAccess
+						ele.arraySelector += fc.arraySelector
+						ele.operationCall = fc.operationCall
 					])
 				}
 			]
