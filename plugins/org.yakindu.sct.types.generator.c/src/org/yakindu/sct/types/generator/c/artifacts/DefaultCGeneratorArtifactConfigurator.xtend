@@ -14,6 +14,7 @@ import com.google.inject.Inject
 import java.util.Collection
 import java.util.List
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.yakindu.base.expressions.expressions.BlockExpression
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Operation
@@ -25,15 +26,17 @@ import org.yakindu.sct.types.generator.artifacts.GeneratorArtifact
 import org.yakindu.sct.types.generator.artifacts.GeneratorArtifactConfiguration
 import org.yakindu.sct.types.generator.artifacts.GeneratorArtifactConfigurationExtensions
 import org.yakindu.sct.types.generator.artifacts.IGeneratorArtifactConfigurator
+import org.yakindu.sct.types.generator.c.CExpressionsChecker
 import org.yakindu.sct.types.generator.c.CTargetPlatform
+import org.yakindu.sct.types.generator.c.annotation.CoreCGeneratorAnnotationLibrary
 import org.yakindu.sct.types.generator.c.files.CTypes
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
-import org.yakindu.sct.types.generator.c.annotation.CoreCGeneratorAnnotationLibrary
 
 class DefaultCGeneratorArtifactConfigurator implements IGeneratorArtifactConfigurator {
 	
 	@Inject protected extension CTypes
+	@Inject protected extension CExpressionsChecker
 	@Inject protected extension GeneratorArtifactConfigurationExtensions
 	@Inject protected extension CoreCGeneratorAnnotationLibrary
 	protected GeneratorArtifactConfiguration config
@@ -85,13 +88,22 @@ class DefaultCGeneratorArtifactConfigurator implements IGeneratorArtifactConfigu
 			header.addDependency(scTypes)
 			
 			source.addDependencies(scTypes)
+			addExpressionDependendingHeaders(source)
 			if(reqHeader.content.empty) {
 				source.addDependency(header)
 			} else {
 				source.addDependency(reqHeader)
 			}
 		}
-			
+	}
+	
+	def addExpressionDependendingHeaders(GeneratorArtifact<List<Declaration>> artifact) {
+		val expressions = artifact.content.filter(Operation).map[body].filter(BlockExpression).map[expressions].flatten
+		if(modOnAssignment(expressions)) {
+			artifact.addDependencies("math.h")
+		} else if (modOnNumericalMulitplyDivide(expressions)){
+			artifact.addDependencies("math.h")
+		}
 	}
 	
 	def protected configureScTypes() {

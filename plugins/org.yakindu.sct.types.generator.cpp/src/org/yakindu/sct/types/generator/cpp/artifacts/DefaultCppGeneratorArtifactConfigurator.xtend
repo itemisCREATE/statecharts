@@ -12,10 +12,7 @@ import com.google.inject.Inject
 import java.util.Collection
 import java.util.List
 import org.eclipse.emf.ecore.util.EcoreUtil
-import org.yakindu.base.expressions.expressions.AssignmentExpression
-import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.BlockExpression
-import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Operation
@@ -71,9 +68,9 @@ class DefaultCppGeneratorArtifactConfigurator implements IGeneratorArtifactConfi
 	
 	def addExpressionDependendingHeaders(GeneratorArtifact<List<Declaration>> artifact) {
 		val expressions = artifact.content.filter(Operation).map[body].filter(BlockExpression).map[expressions].flatten
-		if(expressions.filter(AssignmentExpression).findFirst[operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal] !== null) {
+		if(modOnAssignment(expressions)) {
 			artifact.addDependencies("math.h")
-		} else if (expressions.filter(NumericalMultiplyDivideExpression).findFirst[operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal] !== null){
+		} else if (modOnNumericalMulitplyDivide(expressions)){
 			artifact.addDependencies("math.h")
 		}
 	}

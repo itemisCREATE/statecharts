@@ -8,25 +8,18 @@
  */
 package org.yakindu.sct.types.generator.cpp
 
-import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.base.NamedElement
 import org.yakindu.base.expressions.expressions.ArgumentExpression
-import org.yakindu.base.expressions.expressions.AssignmentExpression
-import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.FeatureCall
-import org.yakindu.base.expressions.expressions.MultiplicativeOperator
-import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.types.generator.c.CExpressions
-import org.yakindu.sct.types.generator.c.CExpressionsChecker
 
 class CppExpressions extends CExpressions {
-	@Inject protected extension CExpressionsChecker
 
 	override dispatch String code(Void it) {
 		null
@@ -37,21 +30,6 @@ class CppExpressions extends CExpressions {
 			return super._code(it)
 		}
 		'''«IF static»static «ENDIF»«IF const»const «ENDIF»«typeSpecifier.code» «name»«IF initialValue !== null» = «initialValue.code»«ENDIF»«terminator»'''
-	}
-
-	override dispatch String code(AssignmentExpression it) {
-		if (it.operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal(it)) {
-			'''«varRef.code» = «varRef.castToReciever»fmod(«varRef.code»,«expression.code»)'''
-		} else
-			super._code(it)
-	}
-
-	def dispatch String code(NumericalMultiplyDivideExpression expression) {
-		if (expression.operator == MultiplicativeOperator.MOD && haveCommonTypeReal(expression)) {
-			'''«expression.eContainer.castToReciever»fmod(«expression.leftOperand.code.toString.trim»,«expression.rightOperand.code»)'''
-		} else {
-			super._code(expression);
-		}
 	}
 
 	override protected argumentCall(ArgumentExpression it, EObject reference) {

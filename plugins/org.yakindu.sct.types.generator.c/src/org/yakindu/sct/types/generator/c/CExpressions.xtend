@@ -12,8 +12,12 @@ package org.yakindu.sct.types.generator.c
 
 import javax.inject.Inject
 import org.eclipse.emf.ecore.EObject
+import org.yakindu.base.expressions.expressions.AssignmentExpression
+import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.expressions.MultiplicativeOperator
+import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
 import org.yakindu.base.expressions.expressions.ReturnExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.types.ComplexType
@@ -36,6 +40,7 @@ class CExpressions extends Expressions {
 	@Inject protected extension CoreCGeneratorAnnotationLibrary
 	@Inject protected extension ITargetPlatform
 	@Inject protected extension ITypeSystem
+	@Inject protected extension CExpressionsChecker
 
 	val ts = CTypeSystem.instance
 
@@ -52,6 +57,21 @@ class CExpressions extends Expressions {
 		'''
 			«IF static»static«ENDIF»«typeSpecifier.typeArguments.head.type.name» «name»[«IF initialValue !== null»«initialValue.size»«ENDIF»]«terminator»
 		'''.toString
+	}
+	
+	override dispatch String code(AssignmentExpression it) {
+		if (it.operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal(it)) {
+			'''«varRef.code» = «varRef.castToReciever»fmod(«varRef.code»,«expression.code»)'''
+		} else
+			super._code(it)
+	}
+
+	def dispatch String code(NumericalMultiplyDivideExpression expression) {
+		if (expression.operator == MultiplicativeOperator.MOD && haveCommonTypeReal(expression)) {
+			'''«expression.eContainer.castToReciever»fmod(«expression.leftOperand.code.toString.trim»,«expression.rightOperand.code»)'''
+		} else {
+			super._code(expression);
+		}
 	}
 
 	def dispatch size(Expression it) '''0'''
