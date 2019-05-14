@@ -125,4 +125,5 @@
     <eLiterals name="PUBLIC"/>
     <eLiterals name="PROTECTED" value="1"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Constructor" eSuperTypes="#//Operation"/>
 </ecore:EPackage>

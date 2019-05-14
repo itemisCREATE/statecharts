@@ -262,6 +262,11 @@ public class PackageItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.PACKAGE__MEMBER,
 				 TypesFactory.eINSTANCE.createAnnotationType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PACKAGE__MEMBER,
+				 TypesFactory.eINSTANCE.createConstructor()));
 	}
 
 	/**
