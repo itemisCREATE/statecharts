@@ -29,11 +29,13 @@ import org.yakindu.sct.types.generator.c.CTargetPlatform
 import org.yakindu.sct.types.generator.c.files.CTypes
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
+import org.yakindu.sct.types.generator.c.annotation.CoreCGeneratorAnnotationLibrary
 
 class DefaultCGeneratorArtifactConfigurator implements IGeneratorArtifactConfigurator {
 	
 	@Inject protected extension CTypes
 	@Inject protected extension GeneratorArtifactConfigurationExtensions
+	@Inject protected extension CoreCGeneratorAnnotationLibrary
 	protected GeneratorArtifactConfiguration config
 	
 	override configure(Collection<Package> packages, ISCTFileSystemAccess fileSystemAccess) {
@@ -75,7 +77,8 @@ class DefaultCGeneratorArtifactConfigurator implements IGeneratorArtifactConfigu
 				}
 			]
 			// add all declarations to the beginning, in the order in which they were built.
-			headerContents.addAll(0, p.member.filter(Property).toList)
+			headerContents.addAll(0, p.member.filter(Property).filter[isDefine].toList)
+			sourceContents.addAll(0, p.member.filter(Property).filter[!isDefine].toList)
 			sourceContents.addAll(0, implOpDecls)
 			
 			reqHeader.addDependencies(header, scTypes)
