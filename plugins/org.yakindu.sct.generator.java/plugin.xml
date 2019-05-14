@@ -19,7 +19,7 @@
                 library_id="org.yakindu.generator.core.features">
           </FeatureLibrary>
           <FeatureLibrary
-                library_id="org.yakindu.sct.generator.feature.java">
+                library_id="org.yakindu.sct.generator.feature.java.legacy">
           </FeatureLibrary>
           <Domain
                 id="com.yakindu.domain.java">
@@ -30,7 +30,7 @@
          point="org.yakindu.sct.generator.core.featuretypes">
       <FeatureLibrary
             defaultProvider="org.yakindu.sct.generator.java.features.JavaFeatureValueProvider"
-            library_id="org.yakindu.sct.generator.feature.java"
+            library_id="org.yakindu.sct.generator.feature.java.legacy"
             uri="platform:/plugin/org.yakindu.sct.generator.java/library/FeatureTypeLibrary.xmi">
       </FeatureLibrary>
    </extension>
@@ -38,7 +38,7 @@
          point="org.yakindu.sct.generator.core.extensions">
       <ExtensionGeneratorMapping
             fileExtension="sct"
-            generatorId="yakindu::java">
+            generatorId="yakindu::java::legacy">
       </ExtensionGeneratorMapping>
    </extension>
 

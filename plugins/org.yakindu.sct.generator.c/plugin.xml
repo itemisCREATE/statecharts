@@ -22,7 +22,7 @@
                library_id="org.yakindu.generator.core.features">
          </FeatureLibrary>
          <FeatureLibrary
-               library_id="org.yakindu.sct.generator.feature.c">
+               library_id="org.yakindu.sct.generator.feature.c.legacy">
          </FeatureLibrary>
       </SCTGenerator>
    </extension>
@@ -30,7 +30,7 @@
          point="org.yakindu.sct.generator.core.featuretypes">
       <FeatureLibrary
             defaultProvider="org.yakindu.sct.generator.c.features.CDefaultFeatureValueProvider"
-            library_id="org.yakindu.sct.generator.feature.c"
+            library_id="org.yakindu.sct.generator.feature.c.legacy"
             uri="platform:/plugin/org.yakindu.sct.generator.c/library/FeatureTypeLibrary.xmi">
       </FeatureLibrary>
    </extension>
@@ -38,7 +38,7 @@
          point="org.yakindu.sct.generator.core.extensions">
       <ExtensionGeneratorMapping
             fileExtension="sct"
-            generatorId="yakindu::c">
+            generatorId="yakindu::c::legacy">
       </ExtensionGeneratorMapping>
    </extension>
 </plugin>

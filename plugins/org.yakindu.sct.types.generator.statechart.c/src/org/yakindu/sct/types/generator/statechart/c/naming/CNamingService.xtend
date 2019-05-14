@@ -23,8 +23,8 @@ import org.yakindu.sct.model.sexec.naming.DefaultNamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.types.generator.statechart.c.GenmodelEntries
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
+import org.yakindu.sct.types.generator.statechart.c.features.GenmodelEntries
 
 import static org.yakindu.sct.types.generator.c.CKeywords.C_KEYWORDS
 

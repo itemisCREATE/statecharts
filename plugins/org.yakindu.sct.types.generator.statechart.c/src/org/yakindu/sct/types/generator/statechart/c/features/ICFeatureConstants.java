@@ -11,7 +11,7 @@
  *  Alexander Nyßen    - Added 'Tracing' feature and renamed constants
  * 
  */
-package org.yakindu.sct.types.generator.statechart.c;
+package org.yakindu.sct.types.generator.statechart.c.features;
 
 /**
  * Defines constants to refer to features and parameters within C code generator

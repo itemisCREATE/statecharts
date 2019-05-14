@@ -7,7 +7,7 @@
   Contributors:
   	Markus Muehlbrandt - Initial contribution and API
  */
-package org.yakindu.sct.types.generator.statechart.c
+package org.yakindu.sct.types.generator.statechart.c.features
 
 import org.yakindu.sct.model.sgen.FeatureParameterValue
 import org.yakindu.sct.model.sgen.GeneratorEntry

@@ -18,4 +18,19 @@
 	         </FeatureLibrary>
       </SCTGenerator>
    </extension>
+   <extension
+         point="org.yakindu.sct.generator.core.featuretypes">
+      <FeatureLibrary
+            defaultProvider="org.yakindu.sct.types.generator.statechart.c.features.CDefaultFeatureValueProvider"
+            library_id="org.yakindu.sct.generator.feature.c"
+            uri="platform:/plugin/org.yakindu.sct.types.generator.statechart.c/library/FeatureTypeLibrary.xmi">
+      </FeatureLibrary>
+   </extension>
+   <extension
+         point="org.yakindu.sct.generator.core.extensions">
+      <ExtensionGeneratorMapping
+            fileExtension="sct"
+            generatorId="yakindu::c">
+      </ExtensionGeneratorMapping>
+   </extension>
 </plugin>
