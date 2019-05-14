@@ -6,14 +6,14 @@ Bundle-Version: 3.5.3.qualifier
 Bundle-Vendor: statecharts.org
 Automatic-Module-Name: org.yakindu.sct.generator.slang.c
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Require-Bundle: org.yakindu.sct.types.generator,
+Require-Bundle: org.yakindu.sct.types.generator;visibility:=reexport,
+ org.yakindu.sct.generator.core;visibility:=reexport,
  com.google.guava,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend.lib,
  org.eclipse.xtend.lib.macro,
  org.yakindu.sct.types.generator.statechart,
  org.yakindu.base.types,
- org.yakindu.sct.generator.core,
  org.yakindu.sct.types.modification,
  org.yakindu.sct.types.generator.c,
  org.yakindu.sct.model.sgen,
