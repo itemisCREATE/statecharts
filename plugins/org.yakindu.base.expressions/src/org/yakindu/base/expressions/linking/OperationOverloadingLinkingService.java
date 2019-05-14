@@ -77,7 +77,7 @@ public class OperationOverloadingLinkingService extends DefaultLinkingService {
 		// Two operation with same name found here
 		List<IEObjectDescription> candidates = new ArrayList<>();
 		for (IEObjectDescription currentDescription : eObjectDescription) {
-			if (currentDescription.getEClass().isSuperTypeOf(TypesPackage.Literals.OPERATION)) {
+			if (TypesPackage.Literals.OPERATION.isSuperTypeOf(currentDescription.getEClass())) {
 				candidates.add(currentDescription);
 			}
 		}

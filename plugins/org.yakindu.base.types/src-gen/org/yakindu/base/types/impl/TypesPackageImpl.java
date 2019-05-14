@@ -19,6 +19,7 @@ import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.AnnotationType;
 import org.yakindu.base.types.ArrayTypeSpecifier;
 import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.Constructor;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Direction;
 import org.yakindu.base.types.Domain;
@@ -206,6 +207,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	private EClass metaCompositeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass constructorEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -885,6 +893,15 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getConstructor() {
+		return constructorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getDirection() {
 		return directionEEnum;
@@ -1012,6 +1029,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		metaCompositeEClass = createEClass(META_COMPOSITE);
 		createEReference(metaCompositeEClass, META_COMPOSITE__META_FEATURES);
 
+		constructorEClass = createEClass(CONSTRUCTOR);
+
 		// Create enums
 		directionEEnum = createEEnum(DIRECTION);
 		visibilityEEnum = createEEnum(VISIBILITY);
@@ -1074,6 +1093,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		annotationTypeEClass.getESuperTypes().add(this.getType());
 		typedDeclarationEClass.getESuperTypes().add(this.getDeclaration());
 		typedDeclarationEClass.getESuperTypes().add(this.getTypedElement());
+		constructorEClass.getESuperTypes().add(this.getOperation());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(packageEClass, org.yakindu.base.types.Package.class, "Package", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1171,6 +1191,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		initEClass(metaCompositeEClass, MetaComposite.class, "MetaComposite", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMetaComposite_MetaFeatures(), this.getDeclaration(), null, "metaFeatures", null, 0, -1, MetaComposite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(constructorEClass, Constructor.class, "Constructor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(directionEEnum, Direction.class, "Direction");

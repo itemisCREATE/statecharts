@@ -584,6 +584,29 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.Constructor} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ConstructorItemProvider constructorItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.Constructor}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createConstructorAdapter() {
+		if (constructorItemProvider == null) {
+			constructorItemProvider = new ConstructorItemProvider(this);
+		}
+
+		return constructorItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -704,6 +727,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		if (annotationTypeItemProvider != null) annotationTypeItemProvider.dispose();
 		if (typedDeclarationItemProvider != null) typedDeclarationItemProvider.dispose();
 		if (metaCompositeItemProvider != null) metaCompositeItemProvider.dispose();
+		if (constructorItemProvider != null) constructorItemProvider.dispose();
 	}
 
 }

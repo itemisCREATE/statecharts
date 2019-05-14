@@ -217,6 +217,11 @@ public class ComplexTypeItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
 				 TypesFactory.eINSTANCE.createAnnotationType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createConstructor()));
 	}
 
 	/**
