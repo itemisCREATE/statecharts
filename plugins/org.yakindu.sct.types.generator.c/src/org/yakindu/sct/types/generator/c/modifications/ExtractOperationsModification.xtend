@@ -85,7 +85,7 @@ class ExtractOperationsModification implements IModification {
 	def protected renameOperation(Operation op) {
 		val ct = op.eContainer
 		if (ct instanceof ComplexType) {
-			op.name = ct.name + "_" + op.name
+			op.name = ct.name + "_" + op.name.toFirstLower // TODO: Can be removed with 4.0. Needed to keep API for OperationDefinitions with Lower/Upper case
 		}
 	}
 

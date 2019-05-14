@@ -27,6 +27,7 @@ import org.yakindu.sct.types.generator.artifacts.GeneratorArtifact
 import org.yakindu.sct.types.generator.c.files.CTypes
 
 import static org.eclipse.xtext.util.Strings.*
+import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 class CTypesGenerator extends AbstractTypesGenerator implements ITypesGenerator {
 
@@ -135,6 +136,11 @@ class CTypesGenerator extends AbstractTypesGenerator implements ITypesGenerator 
 
 	def dispatch String doGenerate(Operation it) '''
 		«IF isStatic»static «ENDIF»«IF type === null»void«ELSE»«typeSpecifier.code»«ENDIF» «name»(«FOR p : parameters SEPARATOR ', '»«p.typeSpecifier.code» «p.name»«ENDFOR»)«IF body !== null»«body.code»«ELSE»;«ENDIF» 
+	'''
+	
+	//TODO: add const flag to Parameters
+	def dispatch String doGenerate(OperationDefinition it) '''
+		«IF isStatic»static «ENDIF»«IF type === null»void«ELSE»«typeSpecifier.code»«ENDIF» «name»(«FOR p : parameters SEPARATOR ', '»const «p.typeSpecifier.code» «p.name»«ENDFOR»)«IF body !== null»«body.code»«ELSE»;«ENDIF» 
 	'''
 
 	def dispatch String doGenerate(Object o) {
