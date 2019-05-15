@@ -37,6 +37,7 @@ import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.MetaComposite
+import org.yakindu.base.types.Package
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult
 import org.yakindu.base.types.typesystem.ITypeSystem
@@ -116,11 +117,15 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 		if (owner instanceof ElementReferenceExpression) {
 			element = owner.getReference()
 		} else if (owner instanceof FeatureCall) {
-			element =owner.getFeature()
+			element = owner.getFeature()
 		} else {
 			return getDelegate().getScope(context, reference)
 		}
 		var IScope scope = IScope.NULLSCOPE
+		if (element instanceof Package) {
+			return addScopeForPackage(element, scope, predicate)
+		}
+		
 		var InferenceResult result = typeInferrer.infer(owner)
 		var Type ownerType = if(result !== null) result.getType() else null
 		if (element instanceof Scope) {
@@ -136,10 +141,9 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 		if (ownerType instanceof ComplexType) {
 			scope = addScopeForComplexType(ownerType, scope, predicate)
 		}
+
 		return scope
 	}
-	
-	
 	
 	def IScope scope_FeatureCall_feature(MetaCall context, EReference reference) {
 
@@ -167,6 +171,13 @@ class STextScopeProvider extends ExpressionsScopeProvider {
 		return scope;
 	}
 	
+	def protected IScope addScopeForPackage(Package pkg, IScope parentScope, Predicate<IEObjectDescription> predicate) {
+		var scope = parentScope
+		scope = Scopes.scopeFor(pkg.member, scope)
+		scope = new FilteringScope(scope, predicate)
+		return scope
+	}
+
 	def private Predicate<IEObjectDescription> calculateFilterPredicate(EObject context, EReference reference) {
 		var Predicate<IEObjectDescription> predicate = null
 		var EObject container = context

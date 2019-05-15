@@ -10,8 +10,11 @@
 */
 package org.yakindu.sct.domain;
 
+import org.eclipse.emf.ecore.EValidator;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.yakindu.sct.domain.validation.DomainValidator;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
 
 public class DomainActivator implements BundleActivator {
 
@@ -23,6 +26,8 @@ public class DomainActivator implements BundleActivator {
 
 	public void start(BundleContext bundleContext) throws Exception {
 		DomainActivator.context = bundleContext;
+		
+		EValidator.Registry.INSTANCE.put(SGraphPackage.eINSTANCE, new DomainValidator());
 	}
 
 	public void stop(BundleContext bundleContext) throws Exception {

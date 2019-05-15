@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.yakindu.sct.model.sgen;singleton:=true
 Automatic-Module-Name: org.yakindu.sct.model.sgen
-Bundle-Version: 3.5.3.qualifier
+Bundle-Version: 3.5.4.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin

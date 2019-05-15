@@ -67,6 +67,7 @@ import org.yakindu.base.types.GenericElement
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.Property
+import org.yakindu.base.types.Package
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.TypeAlias
 import org.yakindu.base.types.TypeParameter
@@ -299,6 +300,10 @@ class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implements Expr
 
 	def InferenceResult doInfer(Type type) {
 		return InferenceResult.from(type.getOriginType())
+	}
+	
+	def InferenceResult doInfer(Package pkg) {
+		return null
 	}
 
 	/** 

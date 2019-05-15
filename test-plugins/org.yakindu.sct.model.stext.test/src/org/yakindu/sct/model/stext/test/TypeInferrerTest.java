@@ -1138,4 +1138,13 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		// target type from operation parameter
 		expectOk("cmo.concreteOp(cmo.genericOpWoParams())", scope);
 	}
+	
+	@Test
+	public void testInnerPackageTypeInferrence() {
+		String scope = ""
+			+ "internal: "
+			+ "var e : Types.EnumType = Types.EnumType.FOO";
+		
+		expectOk("e = Types.EnumType.BAR", scope);
+	}
 }
