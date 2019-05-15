@@ -25,9 +25,9 @@ import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.Visibility
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sequencer.ModelSequencerNaming
+import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 import org.yakindu.sct.types.generator.java.modifications.ConstructorBuilder
 import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
-import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 import org.yakindu.sct.types.generator.statechart.java.naming.JavaOCBNaming
 import org.yakindu.sct.types.modification.IModification
 
@@ -50,7 +50,7 @@ class OperationCallbackModification implements IModification {
 	@Inject protected extension JavaOCBNaming
 	
 	@Inject protected extension InterfaceLiftingModification
-	@Inject protected extension SCTGeneratorAnnotationLibrary
+	@Inject protected extension SequencerAnnotationLibrary
 	
 	
 	

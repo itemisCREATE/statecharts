@@ -15,9 +15,9 @@ import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.typesystem.ITypeSystem
-import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
+import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 import org.yakindu.sct.types.generator.modification.library.ModificationHelper
-import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
+import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
 
 class OutEventModification extends BaseEventModification {
 
@@ -25,7 +25,7 @@ class OutEventModification extends BaseEventModification {
 	@Inject protected extension ValueOfEventModification
 	@Inject protected extension ClearEventModification
 	@Inject protected extension ModificationHelper
-	@Inject protected extension SCTGeneratorAnnotationLibrary
+	@Inject protected extension SequencerAnnotationLibrary
 	
 	@Inject protected extension ContainmentExtensions
 	@Inject protected extension ReferenceExtension

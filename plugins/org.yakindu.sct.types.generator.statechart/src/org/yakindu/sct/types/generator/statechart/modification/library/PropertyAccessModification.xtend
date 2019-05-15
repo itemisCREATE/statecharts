@@ -27,8 +27,8 @@ import org.yakindu.base.types.Property
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.Visibility
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 import org.yakindu.sct.types.generator.modification.library.ModificationHelper
-import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 import org.yakindu.sct.types.generator.statechart.naming.IPropertyAccessNaming
 import org.yakindu.sct.types.modification.IModification
 
@@ -44,7 +44,7 @@ class PropertyAccessModification implements IModification {
 	@Inject protected extension TypeBuilder
 	@Inject protected extension IPropertyAccessNaming
 	@Inject protected extension ExpressionExtensions
-	@Inject protected extension SCTGeneratorAnnotationLibrary
+	@Inject protected extension SequencerAnnotationLibrary
 	@Inject protected extension ModificationHelper
 
 	@Inject

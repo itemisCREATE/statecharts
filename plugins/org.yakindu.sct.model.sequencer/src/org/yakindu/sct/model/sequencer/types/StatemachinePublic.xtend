@@ -16,10 +16,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Property
-import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.Visibility
 import org.yakindu.sct.model.sequencer.ModelSequencerNaming
+import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope
@@ -40,10 +40,10 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 	extension TypesFactory factory = TypesFactory.eINSTANCE
 	
 	@Inject extension IStatemachine 
-	@Inject extension TypeBuilder 
 	
 	@Inject protected extension ModelSequencerNaming
 	@Inject protected extension StatemachineInterfaceMethods
+	@Inject protected extension SequencerAnnotationLibrary
 	
 	def create createPackage statemachinePackage(Statechart sc) {
  		it => [
@@ -59,7 +59,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 			superTypes += createTypeSpecifier => [ type = statemachineInterfaceType ]
 			sc.statemachinePackage.member += it
 
-			features += interfaceAnnotationType
+			features += interfaceGroupAnnotation
 
 			features += statesEnumeration(sc)
 			
@@ -72,14 +72,6 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 
 			declareMembers(sc)
 		]
-	}
-	
-	protected def create createAnnotationType interfaceAnnotationType() {
-		name = interfaceTypeAnnotationName
-	}
-	
-	protected def create createAnnotationType internalScopeAnnotationType() {
-		name = internalScopeTypeAnnotationName
 	}
 	
 	def create createEnumerationType statesEnumeration(Statechart sc) {
@@ -144,7 +136,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 		features += clearOutEvents
 		features += clearEvents
 		
-		it._annotateWith(interfaceAnnotationType)
+		it.annotateWith(interfaceGroupAnnotation)
 	}
 	
 	protected def create createComplexType createInternalType(InternalScope internal) {
@@ -153,8 +145,8 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 		internal.declarations.forEach[decl|features += decl.feature => [visibility = Visibility.PROTECTED]]
 		features.filter(Property).filter[!const].forEach[prop|prop.initialValue = null]
 		
-		it._annotateWith(interfaceAnnotationType)
-		it._annotateWith(internalScopeAnnotationType)
+		it.annotateWith(interfaceGroupAnnotation)
+		it.annotateWith(internalScopeAnnotation)
 		it.visibility = Visibility.PROTECTED
 	}
 	

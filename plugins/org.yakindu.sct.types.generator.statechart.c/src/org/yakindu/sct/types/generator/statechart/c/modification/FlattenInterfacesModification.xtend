@@ -10,18 +10,18 @@
  */
 package org.yakindu.sct.types.generator.statechart.c.modification
 
+import com.google.inject.Inject
 import java.util.Collection
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Package
+import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 import org.yakindu.sct.types.modification.IModification
-import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
-import com.google.inject.Inject
 
 /*
  * Copy of FlattenComplexTypes to avoid underscores. Needed to keep API standard. Can probably removed/changed with 4.0
  */
 class FlattenInterfacesModification implements IModification {
-	@Inject protected extension SCTGeneratorAnnotationLibrary
+	@Inject protected extension SequencerAnnotationLibrary
 
 	override modify(Collection<Package> packages) {
 		packages.forEach[modify]

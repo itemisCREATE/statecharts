@@ -29,7 +29,6 @@ import org.yakindu.base.types.TypedElement
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.types.generator.Expressions
 import org.yakindu.sct.types.generator.ITargetPlatform
-import org.yakindu.sct.types.generator.artifacts.GeneratorArtifact
 import org.yakindu.sct.types.generator.c.annotation.CoreCGeneratorAnnotationLibrary
 import org.yakindu.sct.types.generator.c.extensions.PointerExtensions
 import org.yakindu.sct.types.generator.c.typesystem.CTypeSystem

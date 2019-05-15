@@ -22,9 +22,9 @@ import org.yakindu.base.types.Package
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.Visibility
 import org.yakindu.sct.model.sequencer.ModelSequencerNaming
+import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
 import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
-import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 import org.yakindu.sct.types.modification.IModification
 
 class DefaultInterfacePropertyAccessModification implements IModification {
@@ -36,7 +36,7 @@ class DefaultInterfacePropertyAccessModification implements IModification {
 	
 	@Inject protected extension ModelSequencerNaming
 	@Inject protected extension ReferenceExtension
-	@Inject protected extension SCTGeneratorAnnotationLibrary
+	@Inject protected extension SequencerAnnotationLibrary
 	
 	override modify(Collection<Package> packages) {
 		packages.forEach[modify]

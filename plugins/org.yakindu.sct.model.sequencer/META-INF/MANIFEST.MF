@@ -11,6 +11,8 @@ Require-Bundle: com.google.inject,
  org.yakindu.base.expressions,
  org.yakindu.base.types,
  org.yakindu.sct.model.sgraph,
- org.yakindu.sct.model.stext
+ org.yakindu.sct.model.stext,
+ org.yakindu.sct.types.common
 Export-Package: org.yakindu.sct.model.sequencer,
- org.yakindu.sct.model.sequencer.types
+ org.yakindu.sct.model.sequencer.types,
+ org.yakindu.sct.model.sequencer.util

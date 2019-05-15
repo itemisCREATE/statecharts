@@ -21,7 +21,7 @@ import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Package
-import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
+import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 import org.yakindu.sct.types.modification.IModification
 
 /**
@@ -36,8 +36,7 @@ class FlattenInnerTypesModification implements IModification {
 	@Inject 
 	protected extension PackageNavigationExtensions
 	
-	@Inject
-	protected extension SCTGeneratorAnnotationLibrary
+	@Inject protected extension SequencerAnnotationLibrary
 	
 	override modify(Collection<Package> packages) {
 		packages.forEach[modify]

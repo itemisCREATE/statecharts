@@ -19,8 +19,8 @@ import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.TypeBuilder
+import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 import org.yakindu.sct.types.generator.java.modifications.ConstructorBuilder
-import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 import org.yakindu.sct.types.modification.IModification
 
 /**
@@ -33,7 +33,7 @@ class InitializeInterfacePropertiesModification implements IModification {
 	@Inject protected extension ExpressionBuilder
 	@Inject protected extension TypeBuilder
 	@Inject protected extension ConstructorBuilder
-	@Inject protected extension SCTGeneratorAnnotationLibrary
+	@Inject protected extension SequencerAnnotationLibrary
 	
 	override modify(Collection<Package> packages) {
 		packages.forEach[modify]

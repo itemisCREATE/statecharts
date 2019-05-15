@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.util.ComplexTypeNavigationExtensions
 import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.expressions.util.ExpressionsHelper
 import org.yakindu.base.types.ComplexType
@@ -25,14 +26,13 @@ import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.Visibility
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.types.generator.c.typesystem.CTypeSystem
 import org.yakindu.sct.types.generator.cpp.annotation.CoreCppGeneratorAnnotationLibrary
 import org.yakindu.sct.types.generator.cpp.modifications.ConstructorModification
 import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
-import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 import org.yakindu.sct.types.modification.IModification
-import org.yakindu.base.expressions.util.ComplexTypeNavigationExtensions
 
 class OCBModification implements IModification {
 	@Inject protected extension TypeBuilder
@@ -43,7 +43,7 @@ class OCBModification implements IModification {
 	@Inject protected extension ReferenceExtension
 	extension TypesFactory factory = TypesFactory.eINSTANCE
 	@Inject protected extension CoreCppGeneratorAnnotationLibrary
-	@Inject protected extension SCTGeneratorAnnotationLibrary
+	@Inject protected extension SequencerAnnotationLibrary
 	@Inject protected extension ConstructorModification
 	@Inject protected extension ComplexTypeNavigationExtensions
 

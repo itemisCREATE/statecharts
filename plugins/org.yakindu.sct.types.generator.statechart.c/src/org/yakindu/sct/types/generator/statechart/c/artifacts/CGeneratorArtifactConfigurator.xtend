@@ -15,16 +15,16 @@ import java.util.List
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Operation
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
+import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.types.generator.artifacts.IGeneratorArtifactConfigurator
 import org.yakindu.sct.types.generator.c.artifacts.DefaultCGeneratorArtifactConfigurator
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
-import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 
 class CGeneratorArtifactConfigurator extends DefaultCGeneratorArtifactConfigurator implements IGeneratorArtifactConfigurator {
 	
-	@Inject protected extension SCTGeneratorAnnotationLibrary
+	@Inject protected extension SequencerAnnotationLibrary
 	@Inject protected GeneratorEntry entry
 	@Inject protected ICoreLibraryHelper libraryHelper
 	

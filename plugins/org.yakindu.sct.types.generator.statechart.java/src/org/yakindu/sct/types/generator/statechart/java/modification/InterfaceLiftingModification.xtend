@@ -25,8 +25,8 @@ import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.Visibility
 import org.yakindu.sct.model.sequencer.ModelSequencerNaming
 import org.yakindu.sct.model.sequencer.types.IStatemachine
+import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 import org.yakindu.sct.types.generator.modification.library.ModificationHelper
-import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 import org.yakindu.sct.types.modification.IModification
 
 /**
@@ -41,7 +41,7 @@ class InterfaceLiftingModification implements IModification {
 	@Inject protected extension ExpressionBuilder
 	@Inject protected extension ModelSequencerNaming
 	@Inject protected extension ModificationHelper
-	@Inject protected extension SCTGeneratorAnnotationLibrary
+	@Inject protected extension SequencerAnnotationLibrary
 	
 	extension TypesFactory factory = TypesFactory.eINSTANCE
 	
