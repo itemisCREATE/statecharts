@@ -61,6 +61,7 @@ class InEventModification extends BaseEventModification {
 					_assign(_fc(e.ownerInstance._ref, valueProp), it.parameters.last._ref)
 				)
 			]
+			op.annotateWith(APIAnnotation)
 			e.eContainer.add(op)
 			
 			modifyRaiseEvent(prop, valueProp, e)

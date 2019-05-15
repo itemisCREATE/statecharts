@@ -76,6 +76,7 @@ class PropertyAccessModification implements IModification {
 		_type(prop.typeSpecifier)
 		body = _block(_return(_fc(prop.ownerInstance._ref, prop)))
 		visibility = prop.visibility
+		annotateWith(APIAnnotation)
 	}
 
 	protected def create _op writeAccess(Property prop) {
@@ -84,6 +85,7 @@ class PropertyAccessModification implements IModification {
 		_param("value", prop.typeSpecifier)
 		body = _block(_fc(prop.ownerInstance._ref, prop)._assign(parameters.head._ref))
 		visibility = prop.visibility
+		annotateWith(APIAnnotation)
 	}
 	
 	protected def create _op assign(Property prop) {
