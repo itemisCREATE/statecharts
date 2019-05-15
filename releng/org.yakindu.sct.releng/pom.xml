@@ -578,6 +578,7 @@
 		<module>../org.yakindu.base.repository</module>
 		<module>../org.yakindu.sct.repository</module>
 		<!-- Plugins -->
+		<module>../../plugins/org.yakindu.sct.types.common</module>
 		<module>../../plugins/org.yakindu.sct.types.generator</module>
 		<module>../../plugins/org.yakindu.sct.types.generator.c</module>
 		<module>../../plugins/org.yakindu.sct.types.generator.cpp</module>
