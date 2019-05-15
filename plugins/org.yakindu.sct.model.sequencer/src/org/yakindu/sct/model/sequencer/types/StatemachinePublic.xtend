@@ -24,6 +24,7 @@ import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
+import org.yakindu.base.types.TypeBuilder
 
 /**
  * This class implements a transformation that creates the state machine type
@@ -44,6 +45,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 	@Inject protected extension ModelSequencerNaming
 	@Inject protected extension StatemachineInterfaceMethods
 	@Inject protected extension SequencerAnnotationLibrary
+	@Inject protected extension TypeBuilder
 	
 	def create createPackage statemachinePackage(Statechart sc) {
  		it => [
@@ -136,7 +138,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 		features += clearOutEvents
 		features += clearEvents
 		
-		it.annotateWith(interfaceGroupAnnotation)
+		it._annotateWith(interfaceGroupAnnotation)
 	}
 	
 	protected def create createComplexType createInternalType(InternalScope internal) {
@@ -145,8 +147,8 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 		internal.declarations.forEach[decl|features += decl.feature => [visibility = Visibility.PROTECTED]]
 		features.filter(Property).filter[!const].forEach[prop|prop.initialValue = null]
 		
-		it.annotateWith(interfaceGroupAnnotation)
-		it.annotateWith(internalScopeAnnotation)
+		it._annotateWith(interfaceGroupAnnotation)
+		it._annotateWith(internalScopeAnnotation)
 		it.visibility = Visibility.PROTECTED
 	}
 	
