@@ -38,11 +38,11 @@ class CSCTGeneratorModule extends SCTGeneratorModule {
 	override getModifications() {
 		return #[
 			// base modifications
-			APIOperationsModification,
 			PropertyAccessModification, 
 			InEventModification,
 			OutEventModification,
 			LocalEventModification,
+			APIOperationsModification,
 			
 			// c specific modifcations
 			RenameInterfacesModification,
