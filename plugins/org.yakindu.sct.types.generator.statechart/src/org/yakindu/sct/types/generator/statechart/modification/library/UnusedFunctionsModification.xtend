@@ -9,11 +9,13 @@ import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
 import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
+import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 import org.yakindu.sct.types.modification.IModification
 
 class UnusedFunctionsModification implements IModification {
 	
 	@Inject protected extension SequencerAnnotationLibrary
+	@Inject protected extension SCTGeneratorAnnotationLibrary
 
 	override modify(Collection<Package> packages) {
 		packages.forEach[modify]
@@ -30,7 +32,7 @@ class UnusedFunctionsModification implements IModification {
 	
 	def protected void removeUnusedFunctions(Package p, List<Operation> refs) {
 		val opsToRemove = newArrayList
-		 p.eAllContents.filter(Operation).filter[!isAPI].toList.forEach[ op | 
+		 p.eAllContents.filter(Operation).filter[!API].toList.forEach[ op | 
 			if(!refs.contains(op)) {
 				opsToRemove.add(EcoreUtil.copy(op))
 				EcoreUtil.remove(op)

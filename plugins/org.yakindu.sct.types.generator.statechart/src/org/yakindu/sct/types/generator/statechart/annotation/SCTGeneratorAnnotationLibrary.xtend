@@ -6,5 +6,11 @@ import org.yakindu.sct.types.generator.annotation.CoreGeneratorAnnotationLibrary
 
 @Singleton
 class SCTGeneratorAnnotationLibrary extends CoreGeneratorAnnotationLibrary implements SCTGeneratorAnnotationConstants {
+	def APIAnnotation() {
+		annotation(API_GROUP)
+	}
 
+	def isAPI(AnnotatableElement it) {
+		isAnnotatedWith(API_GROUP)
+	}
 }

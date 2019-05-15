@@ -21,14 +21,5 @@ class CoreAnnotationLibrary implements CoreAnnotationConstants {
 		typesFactory.createAnnotationType => [
 			it.name = name
 		]
-	}
-	
-	def annotateWith(AnnotatableElement it, AnnotationType annotationType) {
-		typeBuilder._annotateWith(it, annotationType)
-	}
-	
-	def annotateWith(AnnotatableElement it, String annotationName) {
-		typeBuilder._annotateWith(it, annotation(annotationName))
-	}
-	
+	}	
 }

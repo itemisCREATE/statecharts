@@ -18,6 +18,7 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 import org.yakindu.sct.types.generator.modification.library.ModificationHelper
 import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
+import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 
 class InEventModification extends BaseEventModification {
 
@@ -27,6 +28,7 @@ class InEventModification extends BaseEventModification {
 	@Inject protected extension ReferenceExtension
 	@Inject protected extension ModificationHelper
 	@Inject protected extension SequencerAnnotationLibrary
+	@Inject protected extension SCTGeneratorAnnotationLibrary
 	
 	@Inject protected extension RaiseEventModification
 	@Inject protected extension ClearEventModification
@@ -38,7 +40,7 @@ class InEventModification extends BaseEventModification {
 			e.eContainer.add(prop)
 			
 			val op = operation(nameEventRaiser(e.name), assign(_fc(e.ownerInstance._ref, prop), true))
-			op.annotateWith(APIAnnotation)
+			op._annotateWith(APIAnnotation)
 			e.eContainer.add(op)
 	
 			modifyRaiseEvent(prop, e)
@@ -61,7 +63,7 @@ class InEventModification extends BaseEventModification {
 					_assign(_fc(e.ownerInstance._ref, valueProp), it.parameters.last._ref)
 				)
 			]
-			op.annotateWith(APIAnnotation)
+			op._annotateWith(APIAnnotation)
 			e.eContainer.add(op)
 			
 			modifyRaiseEvent(prop, valueProp, e)

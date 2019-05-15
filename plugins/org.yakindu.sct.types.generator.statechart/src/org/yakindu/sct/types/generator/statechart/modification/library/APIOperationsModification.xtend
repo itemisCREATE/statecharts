@@ -4,14 +4,16 @@ import com.google.inject.Inject
 import java.util.Collection
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
+import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.Visibility
-import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 import org.yakindu.sct.types.modification.IModification
 
 class APIOperationsModification implements IModification {
 
-	@Inject protected extension SequencerAnnotationLibrary
+	@Inject protected extension SCTGeneratorAnnotationLibrary
+	@Inject protected extension TypeBuilder
 
 	val APIOperations = #[
 		"init",
@@ -33,7 +35,7 @@ class APIOperationsModification implements IModification {
 		ops.filter[APIOperations.contains(name)].forEach [
 			visibility = Visibility.PUBLIC
 			static = false
-			annotateWith(APIAnnotation)
+			_annotateWith(APIAnnotation)
 		]
 		ops.filter[!APIOperations.contains(name) && !isAPI].forEach [
 			static = true 

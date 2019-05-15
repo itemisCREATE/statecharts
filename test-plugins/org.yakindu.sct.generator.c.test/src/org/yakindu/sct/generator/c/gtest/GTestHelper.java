@@ -203,7 +203,8 @@ public class GTestHelper {
 			 	.wConversion();
 		 if(compiler == Compiler.GCC) {
 			 gTestCommand.wnoUnusedParameter(); // ignore unused parameter flag
-			 gTestCommand.wnoUnusedFunction(); // ignore unused functions flag
+			 //TODO: Can probably removed with 4.0
+//			 gTestCommand.wnoUnusedFunction(); // ignore unused functions flag
 		 }
 		return gTestCommand.build();
 	}

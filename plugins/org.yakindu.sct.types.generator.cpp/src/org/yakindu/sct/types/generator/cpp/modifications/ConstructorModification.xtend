@@ -19,6 +19,7 @@ import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.Property
+import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.Visibility
 import org.yakindu.sct.model.stext.stext.OperationDefinition
@@ -35,6 +36,7 @@ class ConstructorModification implements IModification {
 	@Inject protected extension CppSlangTypeValueProvider
 	@Inject protected extension CppClassNaming
 	@Inject protected extension CoreCppGeneratorAnnotationLibrary
+	@Inject protected extension TypeBuilder
 
 	protected TypesFactory typesFactory = TypesFactory.eINSTANCE
 
@@ -100,7 +102,7 @@ class ConstructorModification implements IModification {
 
 		typesFactory.createOperation => [ op |
 			op.name = cT.name
-			op.annotateWith(annotationType)
+			op._annotateWith(annotationType)
 			if (!op.isDefaultDestructor) {
 				op.body = _block => [
 					expressions += privateVariables

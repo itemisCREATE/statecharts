@@ -18,14 +18,6 @@ class SequencerAnnotationLibrary extends CoreAnnotationLibrary {
 		isAnnotatedWith(interfaceTypeAnnotationName)
 	}
 
-	def APIAnnotation() {
-		annotation(interfaceTypeAnnotationName)
-	}
-
-	def isAPI(AnnotatableElement it) {
-		isAnnotatedWith(interfaceTypeAnnotationName)
-	}
-	
 	def internalScopeAnnotation() {
 		annotation(internalScopeTypeAnnotationName)
 	}
