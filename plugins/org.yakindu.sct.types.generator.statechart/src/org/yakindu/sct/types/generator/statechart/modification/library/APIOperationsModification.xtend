@@ -30,8 +30,12 @@ class APIOperationsModification implements IModification {
 
 	def modify(Package p) {
 		val ops = p.eAllContents.filter(Operation).filter[!(it instanceof OperationDefinition)]
-		ops.filter[APIOperations.contains(name)].forEach [annotateWith(APIAnnotation)]
-		ops.filter[!APIOperations.contains(name)].forEach [
+		ops.filter[APIOperations.contains(name)].forEach [
+			visibility = Visibility.PUBLIC
+			static = false
+			annotateWith(APIAnnotation)
+		]
+		ops.filter[!APIOperations.contains(name) && !isAPI].forEach [
 			static = true 
 			visibility = Visibility.PROTECTED
 		]

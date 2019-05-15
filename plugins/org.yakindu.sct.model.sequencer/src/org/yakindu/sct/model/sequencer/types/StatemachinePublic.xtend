@@ -78,6 +78,10 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 		name = interfaceTypeAnnotationName
 	}
 	
+	protected def create createAnnotationType internalScopeAnnotationType() {
+		name = internalScopeTypeAnnotationName
+	}
+	
 	def create createEnumerationType statesEnumeration(Statechart sc) {
 		it => [
 			name = sc.statesEnumerationName
@@ -150,6 +154,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 		features.filter(Property).filter[!const].forEach[prop|prop.initialValue = null]
 		
 		it._annotateWith(interfaceAnnotationType)
+		it._annotateWith(internalScopeAnnotationType)
 		it.visibility = Visibility.PROTECTED
 	}
 	

@@ -19,16 +19,18 @@ import org.yakindu.base.expressions.util.ComplexTypeNavigationExtensions
 import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.expressions.util.PackageNavigationExtensions
+import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Expression
+import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.Visibility
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.types.generator.modification.library.ModificationHelper
 import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 import org.yakindu.sct.types.generator.statechart.naming.IPropertyAccessNaming
 import org.yakindu.sct.types.modification.IModification
-import org.yakindu.sct.types.generator.modification.library.ModificationHelper
 
 /**
  * Creates getter and setter operations for all properties in interface types
@@ -76,7 +78,7 @@ class PropertyAccessModification implements IModification {
 		_type(prop.typeSpecifier)
 		body = _block(_return(_fc(prop.ownerInstance._ref, prop)))
 		visibility = prop.visibility
-		annotateWith(APIAnnotation)
+		annotateWithAPI(prop)
 	}
 
 	protected def create _op writeAccess(Property prop) {
@@ -85,7 +87,7 @@ class PropertyAccessModification implements IModification {
 		_param("value", prop.typeSpecifier)
 		body = _block(_fc(prop.ownerInstance._ref, prop)._assign(parameters.head._ref))
 		visibility = prop.visibility
-		annotateWith(APIAnnotation)
+		annotateWithAPI(prop)
 	}
 	
 	protected def create _op assign(Property prop) {
@@ -105,6 +107,16 @@ class PropertyAccessModification implements IModification {
 	
 	protected def needsAssignMethod(AssignmentExpression it) {
 		eContainer instanceof Expression && !(eContainer instanceof BlockExpression)
+	}
+	
+		
+	protected def annotateWithAPI(Operation op, Property prop) {
+		val ct = prop.eContainer
+		if(ct instanceof ComplexType) {
+			if(!ct.isInternalScope){
+				op.annotateWith(APIAnnotation)
+			}
+		}
 	}
 
 }

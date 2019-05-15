@@ -54,6 +54,10 @@ class ModelSequencerNaming {
 		"InterfaceGroup"
 	}
 	
+	def internalScopeTypeAnnotationName() {
+		"InternalScope"
+	}
+	
 	def dispatch typeName(RegularState state) {
 		state.fullyQualifiedName.lastSegment
 	}

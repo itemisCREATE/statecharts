@@ -22,4 +22,12 @@ class SCTGeneratorAnnotationLibrary extends CoreGeneratorAnnotationLibrary imple
 	def isAPI(AnnotatableElement it) {
 		isAnnotatedWith(INTERFACE_GROUP)
 	}
+	
+	def InternalScopeAnnotation() {
+		annotation(INTERNAL_SCOPE_GROUP)
+	}
+	
+	def isInternalScope(AnnotatableElement it) {
+		isAnnotatedWith(INTERNAL_SCOPE_GROUP)
+	}
 }
