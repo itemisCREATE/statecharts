@@ -35,6 +35,10 @@ class TypeBuilder {
 	def _op(String name, String returnType) {
 		_op(name, typeSystem.getType(returnType))
 	}
+	
+	def _op(String name) {
+		_op(name, typeSystem.getType(ITypeSystem.VOID))
+	}
 
 	def _op(String name, Type returnType) {
 		_op => [ op |

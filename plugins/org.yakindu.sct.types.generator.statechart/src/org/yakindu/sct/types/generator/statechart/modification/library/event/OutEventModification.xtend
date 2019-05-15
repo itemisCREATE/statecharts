@@ -14,6 +14,7 @@ import org.yakindu.base.expressions.util.ContainmentExtensions
 import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.TypeBuilder
+import org.yakindu.base.types.Visibility
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 import org.yakindu.sct.types.generator.modification.library.ModificationHelper
@@ -43,6 +44,14 @@ class OutEventModification extends BaseEventModification {
 			e.eContainer.add(valueProp)
 			modifyValueOfEvent(valueProp, e)
 			
+			val op = _op(nameEventRaiser(e.name))._param("value", e.type) => [
+				body = _block(
+					assign(_fc(e.ownerInstance._ref, prop), true),
+					assign(_fc(e.ownerInstance._ref, valueProp), it.parameters.head._ref)
+				)
+				visibility = Visibility.PROTECTED
+			]
+			
 			val valueGetter = _op(nameEventValueGetter(e.name), e.type) => [
 				body = _block(
 					_return( _fc(e.getOwnerInstance._ref, valueProp))
@@ -50,9 +59,12 @@ class OutEventModification extends BaseEventModification {
 			]
 			e.eContainer.add(valueGetter)
 
-			modifyRaiseEvent(prop, valueProp, e)
+			modifyRaiseEvent(op, e)
 		} else {
-			modifyRaiseEvent(prop, e)
+			val op = operation(nameEventRaiser(e.name), assign(_fc(e.ownerInstance._ref, prop), true)) => [
+				visibility = Visibility.PROTECTED
+			]
+			modifyRaiseEvent(op, e)
 		}
 		modifyClearEvent(prop, e)
 		
