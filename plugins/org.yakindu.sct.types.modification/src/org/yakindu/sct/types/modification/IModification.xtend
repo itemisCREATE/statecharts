@@ -20,6 +20,6 @@ import org.yakindu.base.types.Package
  */
 interface IModification {
 
-	def Collection<Package> modify(Collection<Package> p)
+	def Collection<Package> modify(Collection<Package> packages)
 
 }
