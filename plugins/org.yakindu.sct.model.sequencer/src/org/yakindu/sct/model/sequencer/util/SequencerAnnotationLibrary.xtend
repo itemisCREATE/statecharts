@@ -6,13 +6,10 @@ import org.yakindu.base.types.AnnotatableElement
 import org.yakindu.sct.model.sequencer.ModelSequencerNaming
 import org.yakindu.sct.types.common.library.CoreAnnotationLibrary
 
-import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION
-import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_ANNOTATION
-
 @Singleton
-class SequencerAnnotationLibrary extends CoreAnnotationLibrary {
+class SequencerAnnotationLibrary extends CoreAnnotationLibrary implements SequencerAnnotationConstants {
 	@Inject protected extension ModelSequencerNaming
-	
+
 	def interfaceGroupAnnotation() {
 		annotation(interfaceTypeAnnotationName)
 	}
@@ -24,25 +21,40 @@ class SequencerAnnotationLibrary extends CoreAnnotationLibrary {
 	def internalScopeAnnotation() {
 		annotation(internalScopeTypeAnnotationName)
 	}
-	
+
 	def isInternalScope(AnnotatableElement it) {
 		isAnnotatedWith(internalScopeTypeAnnotationName)
 	}
-	
-	def eventDrivenAnnotation(AnnotatableElement it) {
-		annotation(EVENT_DRIVEN_ANNOTATION)
+
+	def eventDrivenAnnotation() {
+		annotation(EVENT_DRIVEN)
 	}
 
 	def isEventDriven(AnnotatableElement it) {
-		getAnnotationOfType(EVENT_DRIVEN_ANNOTATION) !== null
+		isAnnotatedWith(EVENT_DRIVEN)
 	}
 
-	def cycleBasedAnnotation(AnnotatableElement it) {
-		annotation(CYCLE_BASED_ANNOTATION)
+	def cycleBasedAnnotation() {
+		annotation(CYCLE_BASED)
 	}
 
 	def isCycleBased(AnnotatableElement it) {
-		getAnnotationOfType(CYCLE_BASED_ANNOTATION) !== null
+		isAnnotatedWith(CYCLE_BASED)
 	}
 
+	def triggerAnnotation() {
+		annotation(TRIGGER)
+	}
+
+	def isTrigger(AnnotatableElement it) {
+		isAnnotatedWith(TRIGGER)
+	}
+	
+	def queuedAnnotation() {
+		annotation(QUEUED)
+	}
+
+	def isQueued(AnnotatableElement it) {
+		isAnnotatedWith(QUEUED)
+	}
 }

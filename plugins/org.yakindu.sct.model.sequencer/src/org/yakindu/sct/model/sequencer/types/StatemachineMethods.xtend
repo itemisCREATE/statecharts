@@ -19,6 +19,7 @@ import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
+import org.yakindu.base.types.Operation
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.Visibility
 import org.yakindu.base.types.typesystem.ITypeSystem
@@ -197,11 +198,9 @@ class StatemachineMethods {
 		)
 	}
 	
-	def defineRunCycleMethod(ComplexType it, Statechart sc) {
-		it.features += createRunCycleMethod => [
+	def defineSingleStepMethod(ComplexType it, Statechart sc) {
+		it.features += createSingleStepMethod => [
 			body = _block(
-				
-				sc.createClearOutEventsMethod._call,
 				
 				_for(nextStateIndex(sc)._ref._assign(0._int), nextStateIndex(sc)._ref._smaller(stateVectorProperty(sc)._ref._fc(_array._length)), nextStateIndex(sc)._ref._inc) => [
 					body = _block(
@@ -209,11 +208,17 @@ class StatemachineMethods {
 							s.reactMethod._call(_true)
 						], _block)
 					)
-				],
-				
-				sc.createClearEventsMethod._call
+				]
 			)
 		]
+	}
+	
+	def Operation create _op("singleStep") createSingleStepMethod(ComplexType cT) {
+	
+	}
+	
+	def Operation create _op("runToCompletion") createRTCMethod(ComplexType cT) {
+		cT.features += it
 	}
 	
 	def defineIsStateActiveMethod(ComplexType it, Statechart sc) {
@@ -248,28 +253,28 @@ class StatemachineMethods {
 		_param("state", sc.statesEnumeration)
 	}
 	
-	def create _op createClearOutEventsMethod(Statechart sc) {
+	def create _op createClearOutEventsMethod(ComplexType cT) {
 		name = "clearOutEvents"
 		_type(ITypeSystem.VOID)
 		visibility = Visibility.PROTECTED
 	}
 	
 	def defineClearOutEventsMethod(ComplexType it, Statechart sc) {
-		it.features += createClearOutEventsMethod(sc) => [
+		it.features += createClearOutEventsMethod(it) => [
 			body = _block(
 				sc.scopes.filter(InterfaceScope).map[iface | iface.property._ref._fc(iface.createInterfaceType.clearOutEvents)]
 			)
 		]
 	}
 	
-	def create _op createClearEventsMethod(Statechart sc) {
+	def create _op createClearEventsMethod(ComplexType cT) {
 		name = "clearEvents"
 		_type(ITypeSystem.VOID)
 		visibility = Visibility.PROTECTED
 	}
 	
 	def defineClearEventsMethod(ComplexType it, Statechart sc) {
-		it.features += createClearEventsMethod(sc) => [
+		it.features += createClearEventsMethod(it) => [
 			body = _block => [
 				expressions += sc.scopes.filter(InterfaceScope).map[iface | iface.property._ref._fc(iface.createInterfaceType.clearEvents)]
 				// clear internal events directly
