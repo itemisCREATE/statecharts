@@ -68,6 +68,14 @@ class ExpressionsHelper {
 		]
 	}
 	
+	def assign(FeatureCall fc, Expression exp) {
+		expFactory.createAssignmentExpression => [
+			varRef = fc
+			operator = AssignmentOperator.ASSIGN
+			expression = exp
+		]
+	}
+	
 	def property(Type type, String name) {
 		typesFactory.createProperty => [
 			it.typeSpecifier = typeSpecifier(type)
