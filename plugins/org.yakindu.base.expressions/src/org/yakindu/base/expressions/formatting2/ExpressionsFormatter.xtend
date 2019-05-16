@@ -153,7 +153,7 @@ class ExpressionsFormatter extends AbstractEObjectBasedFormatter {
 			key.prepend[oneSpace]
 			value.prepend[newLine]
 		]
-		expressions.forEach[format]
+		expressions.forEach[format append[newLine]]
 	}
 
 	def dispatch void format(IfExpression it, extension IFormattableDocument document) {

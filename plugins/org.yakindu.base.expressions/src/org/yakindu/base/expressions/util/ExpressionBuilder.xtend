@@ -21,12 +21,14 @@ import org.yakindu.base.expressions.expressions.MultiplicativeOperator
 import org.yakindu.base.expressions.expressions.PostFixOperator
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.RelationalOperator
+import org.yakindu.base.expressions.expressions.ShiftOperator
 import org.yakindu.base.expressions.expressions.SwitchCase
+import org.yakindu.base.types.ComplexType
+import org.yakindu.base.types.Constructor
 import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
 import org.yakindu.base.types.Operation
-import org.yakindu.base.expressions.expressions.ShiftOperator
-import org.yakindu.base.types.Event
 
 /**
  * Builder extension for building expressions.
@@ -79,6 +81,12 @@ class ExpressionBuilder {
 		createElementReferenceExpression => [
 			reference = p
 			operationCall = false
+		]
+	}
+	
+	def ElementReferenceExpression _new(ComplexType it, Expression...arguments) {
+		features.filter(Constructor).head._call() => [
+			arguments.addAll(arguments.map[arg|createArgument => [value = arg]])
 		]
 	}
 

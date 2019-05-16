@@ -24,6 +24,8 @@ import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
+import org.yakindu.base.types.Constructor
+import org.yakindu.base.expressions.util.ExpressionBuilder
 
 /**
  * This class implements a transformation that creates the state machine type
@@ -41,6 +43,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 	
 	@Inject extension IStatemachine 
 	@Inject extension TypeBuilder 
+	@Inject extension ExpressionBuilder
 	
 	@Inject protected extension ModelSequencerNaming
 	@Inject protected extension StatemachineInterfaceMethods
@@ -116,24 +119,27 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 	}
 	
 	def create createProperty property(InterfaceScope iface) {
-		it.typeSpecifier = createTypeSpecifier => [
+		typeSpecifier = createTypeSpecifier => [
 			type = createInterfaceType(iface)
 		]
-		it.name = type.name.toFirstLower
-		it.visibility = Visibility.PUBLIC
+		name = type.name.toFirstLower
+		visibility = Visibility.PUBLIC
+		initialValue = (type as ComplexType)._new
+		
 	}
 	
 	def create createProperty property(InternalScope internal) {
 		it.typeSpecifier = createTypeSpecifier => [
 			type = createInternalType(internal)
 		]
-		it.name = type.name.toFirstLower
-		it.visibility = Visibility.PROTECTED
+		name = type.name.toFirstLower
+		visibility = Visibility.PROTECTED
+		initialValue = (type as ComplexType)._new
 	}
 
 	protected def create createComplexType createInterfaceType(InterfaceScope iface) {
 		it.name = iface.interfaceTypeName
-		
+		it.features += createConstructor
 		iface.declarations.forEach[decl|features += decl.feature]
 		features.filter(Property).filter[!const].forEach[prop|prop.initialValue = null]
 		
@@ -145,7 +151,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 	
 	protected def create createComplexType createInternalType(InternalScope internal) {
 		it.name = internalTypeName
-		
+		it.features += createConstructor
 		internal.declarations.forEach[decl|features += decl.feature => [visibility = Visibility.PROTECTED]]
 		features.filter(Property).filter[!const].forEach[prop|prop.initialValue = null]
 		
