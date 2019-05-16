@@ -36,6 +36,7 @@ import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.expressions.expressions.WhileExpression
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.TypeSpecifier
+import org.yakindu.base.expressions.expressions.EventClearingExpression
 
 class ExpressionsFormatter extends AbstractEObjectBasedFormatter {
 
@@ -47,6 +48,7 @@ class ExpressionsFormatter extends AbstractEObjectBasedFormatter {
 		]
 		expression.format
 		varRef.format
+		append[newLine]
 	}
 
 	def dispatch void format(ConditionalExpression it, extension IFormattableDocument document) {
@@ -147,7 +149,7 @@ class ExpressionsFormatter extends AbstractEObjectBasedFormatter {
 	def dispatch void format(BlockExpression it, extension IFormattableDocument document) {
 		interior[indent]
 		regionFor.keywordPairs('{', '}').forEach [
-			key.append[newLines]
+			key.append[newLine]
 			key.prepend[oneSpace]
 			value.prepend[newLine]
 		]
@@ -165,7 +167,7 @@ class ExpressionsFormatter extends AbstractEObjectBasedFormatter {
 
 	def dispatch void format(SwitchExpression it, extension IFormattableDocument document) {
 		regionFor.keywordPairs('{', '}').forEach [
-			key.append[newLines]
+			key.append[newLine]
 			key.prepend[oneSpace]
 			value.prepend[newLine]
 		]
@@ -177,7 +179,7 @@ class ExpressionsFormatter extends AbstractEObjectBasedFormatter {
 
 	def dispatch void format(SwitchCase it, extension IFormattableDocument document) {
 		regionFor.keywordPairs('{', '}').forEach [
-			key.append[newLines]
+			key.append[newLine]
 			key.prepend[oneSpace]
 			value.prepend[newLine]
 		]
@@ -187,8 +189,14 @@ class ExpressionsFormatter extends AbstractEObjectBasedFormatter {
 		
 	}
 
-	def dispatch void format(EventRaisingExpression eventRaisingExpression, extension IFormattableDocument document) {
+	def dispatch void format(EventRaisingExpression it, extension IFormattableDocument document) {
+		append[newLine]
 	}
+	
+	def dispatch void format(EventClearingExpression it, extension IFormattableDocument document) {
+		append[newLine]
+	}
+	
 
 	def dispatch void format(WhileExpression it, extension IFormattableDocument document) {
 		prepend[newLine]
