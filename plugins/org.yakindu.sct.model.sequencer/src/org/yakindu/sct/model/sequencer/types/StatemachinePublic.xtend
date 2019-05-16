@@ -57,6 +57,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 			
 			name = sc.name
 			superTypes += createTypeSpecifier => [ type = statemachineInterfaceType ]
+			sc.statemachinePackage.member += statemachineInterfaceType
 			sc.statemachinePackage.member += it
 
 			features += interfaceAnnotationType
@@ -81,7 +82,6 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 	def create createEnumerationType statesEnumeration(Statechart sc) {
 		it => [
 			name = sc.statesEnumerationName
-			annotationInfo = createAnnotatableElement
 			enumerator += sc.noState
 			sc.eAllContents.filter(RegularState).forEach [ state |
 				enumerator += state.enumerator
