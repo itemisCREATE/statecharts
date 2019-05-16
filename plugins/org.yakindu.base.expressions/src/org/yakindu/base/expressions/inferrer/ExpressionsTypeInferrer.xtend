@@ -28,6 +28,7 @@ import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ConditionalExpression
 import org.yakindu.base.expressions.expressions.DoubleLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.EventClearingExpression
 import org.yakindu.base.expressions.expressions.EventRaisingExpression
 import org.yakindu.base.expressions.expressions.EventValueReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
@@ -58,6 +59,7 @@ import org.yakindu.base.expressions.expressions.WhileExpression
 import org.yakindu.base.expressions.util.ExpressionExtensions
 import org.yakindu.base.types.Annotation
 import org.yakindu.base.types.AnnotationType
+import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Constructor
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Enumerator
@@ -82,9 +84,6 @@ import static org.yakindu.base.types.typesystem.ITypeSystem.NULL
 import static org.yakindu.base.types.typesystem.ITypeSystem.REAL
 import static org.yakindu.base.types.typesystem.ITypeSystem.STRING
 import static org.yakindu.base.types.typesystem.ITypeSystem.VOID
-import org.eclipse.emf.ecore.util.EcoreUtil
-import org.yakindu.base.types.ComplexType
-import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult
 
 /** 
  * 
@@ -276,6 +275,10 @@ class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implements Expr
 		var InferenceResult valueType = inferTypeDispatch(e.getValue())
 		assertAssignable(eventType, valueType, String.format(EVENT_DEFINITION, valueType, eventType))
 		return valueType
+	}
+	
+	def InferenceResult doInfer(EventClearingExpression e) {
+		getResultFor(VOID)
 	}
 
 	def InferenceResult doInfer(EventValueReferenceExpression e) {
