@@ -43,7 +43,7 @@ class InEventModification extends BaseEventModification {
 			op._annotateWith(APIAnnotation)
 			e.eContainer.add(op)
 	
-			modifyRaiseEvent(prop, e)
+			modifyRaiseEvent(op, e)
 			modifyClearEvent(prop, e)
 	
 			e.references.forEach[retargetTo(prop)]
@@ -66,7 +66,7 @@ class InEventModification extends BaseEventModification {
 			op._annotateWith(APIAnnotation)
 			e.eContainer.add(op)
 			
-			modifyRaiseEvent(prop, valueProp, e)
+			modifyRaiseEvent(op, e)
 			modifyClearEvent(prop, e)
 			modifyValueOfEvent(valueProp, e)
 	
