@@ -27,7 +27,7 @@ import org.yakindu.sct.model.sgraph.Region
 
 	def create createComplexType type(Region region) {
 		it => [
-			name = region.typeName
+			name = region.typeName.replaceAll(" ", "_")
 			if (region.parentState === null) region.statechart.statemachineType.features += it 
 			else region.parentState.type.features += it
 		]
