@@ -86,7 +86,7 @@ public class STextValidatorTest extends AbstractSTextValidationTest implements S
 	 * @see STextValidator#checkVariableDefinition(org.yakindu.sct.model.stext.stext.VariableDefinition)
 	 */
 	@Test
-	public void checkVariableDefinition() {
+	public void checkProperty() {
 		Scope context = (Scope) parseExpression("interface if : var i : void", InterfaceScope.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(context);
 		validationResult.assertErrorContains(STextTypeInferrer.VARIABLE_VOID_TYPE);
@@ -515,7 +515,7 @@ public class STextValidatorTest extends AbstractSTextValidationTest implements S
 	 * @see STextValidator#checkEventDefinition(org.yakindu.sct.model.stext.stext.EventDefinition)
 	 */
 	@Test
-	public void checkEventDefinition() {
+	public void checkEvent() {
 		// No local declarations in interface scope
 		EObject model = super.parseExpression("interface MyInterface: event Event1",
 				InterfaceScope.class.getSimpleName());

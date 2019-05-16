@@ -97,7 +97,6 @@ import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.LocalReaction
-import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.ReactionEffect
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.RegularEventSpec
@@ -368,8 +367,8 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 								internalDeclarationUsed=true 
 								//TODO end loop
 							}
-						} else if (elementReference.getReference() instanceof OperationDefinition) {
-							if (((elementReference.getReference() as OperationDefinition)).getName().equals(internalDeclaration.getName()) && internalDeclaration instanceof OperationDefinition) {
+						} else if (elementReference.getReference() instanceof Operation) {
+							if (((elementReference.getReference() as Operation)).getName().equals(internalDeclaration.getName()) && internalDeclaration instanceof Operation) {
 								internalDeclarationUsed=true 
 								//TODO end loop
 							}
@@ -377,7 +376,7 @@ class STextValidator extends AbstractSTextValidator implements STextValidationMe
 					}
 				}
 				if (!internalDeclarationUsed) {
-					if (internalDeclaration instanceof Property || internalDeclaration instanceof Event || internalDeclaration instanceof OperationDefinition) warning(INTERNAL_DECLARATION_UNUSED, internalDeclaration, null, -1) 
+					if (internalDeclaration instanceof Property || internalDeclaration instanceof Event || internalDeclaration instanceof Operation) warning(INTERNAL_DECLARATION_UNUSED, internalDeclaration, null, -1) 
 				}
 			}
 		}
