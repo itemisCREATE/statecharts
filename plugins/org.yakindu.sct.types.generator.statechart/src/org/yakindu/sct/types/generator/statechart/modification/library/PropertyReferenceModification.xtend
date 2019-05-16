@@ -25,8 +25,8 @@ import org.yakindu.base.expressions.util.PackageNavigationExtensions
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.Property
 import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
-import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
 import org.yakindu.sct.types.modification.IModification
+import org.yakindu.sct.types.modification.util.ReferenceExtension
 
 /**
  * Transforms references to public properties by their respective getters or setters.

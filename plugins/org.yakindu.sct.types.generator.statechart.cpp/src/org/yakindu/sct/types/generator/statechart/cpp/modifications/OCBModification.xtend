@@ -31,8 +31,8 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.types.generator.c.typesystem.CTypeSystem
 import org.yakindu.sct.types.generator.cpp.annotation.CoreCppGeneratorAnnotationLibrary
 import org.yakindu.sct.types.generator.cpp.modifications.ConstructorModification
-import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
 import org.yakindu.sct.types.modification.IModification
+import org.yakindu.sct.types.modification.util.ReferenceExtension
 
 class OCBModification implements IModification {
 	@Inject protected extension TypeBuilder

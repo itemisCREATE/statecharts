@@ -22,8 +22,8 @@ import org.yakindu.base.types.Property
 import org.yakindu.base.types.Visibility
 import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 import org.yakindu.sct.model.sexec.transformation.ExpressionBuilder
-import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
 import org.yakindu.sct.types.modification.IModification
+import org.yakindu.sct.types.modification.util.ReferenceExtension
 
 /**
  * The model sequence wraps internal scopes in a complex type. To not break API, we need to unwrap this type again.

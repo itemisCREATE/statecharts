@@ -16,7 +16,7 @@ import org.yakindu.base.types.Event
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.Visibility
 import org.yakindu.sct.types.generator.modification.library.ModificationHelper
-import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
+import org.yakindu.sct.types.modification.util.ReferenceExtension
 
 class LocalEventModification extends BaseEventModification{
 	

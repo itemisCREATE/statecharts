@@ -27,9 +27,9 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sequencer.ModelSequencerNaming
 import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 import org.yakindu.sct.types.generator.java.modifications.ConstructorBuilder
-import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
 import org.yakindu.sct.types.generator.statechart.java.naming.JavaOCBNaming
 import org.yakindu.sct.types.modification.IModification
+import org.yakindu.sct.types.modification.util.ReferenceExtension
 
 /**
  * Creates callback interfaces for operation declarations, corresponding setters, and qualifies operation calls.

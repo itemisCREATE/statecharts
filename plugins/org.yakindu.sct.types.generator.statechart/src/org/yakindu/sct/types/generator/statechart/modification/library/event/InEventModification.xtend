@@ -17,8 +17,8 @@ import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 import org.yakindu.sct.types.generator.modification.library.ModificationHelper
-import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
 import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
+import org.yakindu.sct.types.modification.util.ReferenceExtension
 
 class InEventModification extends BaseEventModification {
 

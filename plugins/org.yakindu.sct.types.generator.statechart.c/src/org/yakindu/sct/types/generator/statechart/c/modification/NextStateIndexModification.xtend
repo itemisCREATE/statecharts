@@ -20,13 +20,13 @@ import org.yakindu.base.types.Package
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.TypesFactory
+import org.yakindu.base.types.Visibility
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sequencer.types.StatemachineProperties
 import org.yakindu.sct.model.sexec.transformation.ArrayType
 import org.yakindu.sct.types.generator.c.annotation.CoreCGeneratorAnnotationLibrary
-import org.yakindu.sct.types.generator.modification.library.ReferenceExtension
 import org.yakindu.sct.types.modification.IModification
-import org.yakindu.base.types.Visibility
+import org.yakindu.sct.types.modification.util.ReferenceExtension
 
 class NextStateIndexModification implements IModification {
 
