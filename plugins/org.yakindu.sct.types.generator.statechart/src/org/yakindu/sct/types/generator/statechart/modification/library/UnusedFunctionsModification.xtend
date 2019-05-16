@@ -2,7 +2,7 @@ package org.yakindu.sct.types.generator.statechart.modification.library
 
 import com.google.inject.Inject
 import java.util.Collection
-import java.util.List
+import java.util.Set
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
@@ -23,25 +23,29 @@ class UnusedFunctionsModification implements IModification {
 	}
 
 	def modify(Package p) {
-		val featureCalls = p.eAllContents.filter(FeatureCall).map[feature].filter(Operation).toList
-		val refs = p.eAllContents.filter(ElementReferenceExpression).map[reference].filter(Operation).toList
-		refs.addAll(featureCalls)
-		p.removeUnusedFunctions(refs)
+		p.removeUnusedFunctions(p.operationCalls)
 		return p
 	}
 	
-	def protected void removeUnusedFunctions(Package p, List<Operation> refs) {
+	def protected void removeUnusedFunctions(Package p, Set<Operation> refs) {
 		val opsToRemove = newArrayList
 		 p.eAllContents.filter(Operation).filter[!API].toList.forEach[ op | 
-			if(!refs.contains(op)) {
-				opsToRemove.add(EcoreUtil.copy(op))
+		 	if(!(refs.exists[EcoreUtil.equals(it, op)])) {
+		 		opsToRemove.add(op)
 				EcoreUtil.remove(op)
-			}
+		 	}
 		]
 		if(!opsToRemove.nullOrEmpty){
-			p.removeUnusedFunctions(refs)
+			p.removeUnusedFunctions(p.operationCalls)
 		}
 		return
+	}
+	
+	def protected getOperationCalls(Package p) {
+		val featureCalls = p.eAllContents.filter(FeatureCall).map[feature].filter(Operation).toList
+		val refs = p.eAllContents.filter(ElementReferenceExpression).map[reference].filter(Operation).toSet
+		refs.addAll(featureCalls)
+		return refs
 	}
 
 }

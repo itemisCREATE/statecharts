@@ -4,44 +4,44 @@ import com.google.inject.Inject
 import java.util.Collection
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
-import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.Visibility
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 import org.yakindu.sct.types.modification.IModification
+import org.yakindu.base.types.TypeBuilder
 
 class APIOperationsModification implements IModification {
 
-	@Inject protected extension SCTGeneratorAnnotationLibrary
-	@Inject protected extension TypeBuilder
+    @Inject protected extension SCTGeneratorAnnotationLibrary
+    @Inject protected extension TypeBuilder
 
-	val APIOperations = #[
-		"init",
-		"enter",
-		"exit",
-		"runCycle",
-		"isActive",
-		"isFinal",
-		"isStateActive"
-	]
+    val APIOperations = #[
+        "init",
+        "enter",
+        "exit",
+        "runCycle",
+        "isActive",
+        "isFinal",
+        "isStateActive"
+    ]
 
-	override modify(Collection<Package> packages) {
-		packages.forEach[modify]
-		packages
-	}
+    override modify(Collection<Package> packages) {
+        packages.forEach[modify]
+        packages
+    }
 
-	def modify(Package p) {
-		val ops = p.eAllContents.filter(Operation).filter[!(it instanceof OperationDefinition)]
-		ops.filter[APIOperations.contains(name)].forEach [
-			visibility = Visibility.PUBLIC
-			static = false
-			_annotateWith(APIAnnotation)
-		]
-		ops.filter[!APIOperations.contains(name) && !isAPI].forEach [
-			static = true 
-			visibility = Visibility.PROTECTED
-		]
-		return p
-	}
+    def modify(Package p) {
+        val ops = p.eAllContents.filter(Operation).filter[!(it instanceof OperationDefinition)].toList
+        ops.filter[APIOperations.contains(name)].forEach [
+            visibility = Visibility.PUBLIC
+            static = false
+            _annotateWith(APIAnnotation)
+        ]
+        ops.filter[!APIOperations.contains(name)].filter[!isAPI].forEach [
+            static = true
+            visibility = Visibility.PROTECTED
+        ]
+        return p
+    }
 
 }
