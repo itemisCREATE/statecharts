@@ -58,12 +58,14 @@ class OutEventModification extends BaseEventModification {
 				)
 			]
 			e.eContainer.add(valueGetter)
+			e.eContainer.add(op)
 
 			modifyRaiseEvent(op, e)
 		} else {
 			val op = operation(nameEventRaiser(e.name), assign(_fc(e.ownerInstance._ref, prop), true)) => [
 				visibility = Visibility.PROTECTED
 			]
+			e.eContainer.add(op)
 			modifyRaiseEvent(op, e)
 		}
 		modifyClearEvent(prop, e)
