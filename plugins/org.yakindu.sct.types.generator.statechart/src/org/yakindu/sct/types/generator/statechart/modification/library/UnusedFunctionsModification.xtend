@@ -12,16 +12,17 @@ package org.yakindu.sct.types.generator.statechart.modification.library
 
 import com.google.inject.Inject
 import java.util.Collection
-import java.util.Set
 import org.eclipse.emf.ecore.util.EcoreUtil
-import org.yakindu.base.expressions.expressions.ElementReferenceExpression
-import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
 import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 import org.yakindu.sct.types.modification.IModification
 
+/**
+ *  Removes recursively all unused functions by searching for empty cross references
+ * 
+ */
 class UnusedFunctionsModification implements IModification {
 	
 	@Inject protected extension SequencerAnnotationLibrary
@@ -33,29 +34,21 @@ class UnusedFunctionsModification implements IModification {
 	}
 
 	def modify(Package p) {
-		p.removeUnusedFunctions(p.operationCalls)
+		p.removeUnusedFunctions
 		return p
 	}
 	
-	def protected void removeUnusedFunctions(Package p, Set<Operation> refs) {
+	def protected void removeUnusedFunctions(Package p) {
 		val opsToRemove = newArrayList
 		 p.eAllContents.filter(Operation).filter[!API].toList.forEach[ op | 
-		 	if(!(refs.exists[EcoreUtil.equals(it, op)])) {
-		 		opsToRemove.add(op)
-				EcoreUtil.remove(op)
-		 	}
+			if((EcoreUtil.UsageCrossReferencer.find(op, p).nullOrEmpty)){
+				opsToRemove.add(op)
+			}
 		]
+		EcoreUtil.removeAll(opsToRemove)
 		if(!opsToRemove.nullOrEmpty){
-			p.removeUnusedFunctions(p.operationCalls)
+			p.removeUnusedFunctions
 		}
 		return
 	}
-	
-	def protected getOperationCalls(Package p) {
-		val featureCalls = p.eAllContents.filter(FeatureCall).map[feature].filter(Operation).toList
-		val refs = p.eAllContents.filter(ElementReferenceExpression).map[reference].filter(Operation).toSet
-		refs.addAll(featureCalls)
-		return refs
-	}
-
 }
