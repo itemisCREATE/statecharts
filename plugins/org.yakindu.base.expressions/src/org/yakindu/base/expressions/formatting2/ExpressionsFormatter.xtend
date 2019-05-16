@@ -160,32 +160,52 @@ class ExpressionsFormatter extends AbstractEObjectBasedFormatter {
 		condition.format
 		then.format
 		^else.format
-		append[newLines]
+		append[newLine]
 	}
 
-	def dispatch void format(SwitchExpression switchExpression, extension IFormattableDocument document) {
+	def dispatch void format(SwitchExpression it, extension IFormattableDocument document) {
+		regionFor.keywordPairs('{', '}').forEach [
+			key.append[newLines]
+			key.prepend[oneSpace]
+			value.prepend[newLine]
+		]
+		cases.forEach[format]
+		regionFor.keyword('default').prepend[newLine]
+		regionFor.keyword(':').surround[noSpace].append[newLine]
+		^default.format
 	}
 
-	def dispatch void format(SwitchCase switchCase, extension IFormattableDocument document) {
+	def dispatch void format(SwitchCase it, extension IFormattableDocument document) {
+		regionFor.keywordPairs('{', '}').forEach [
+			key.append[newLines]
+			key.prepend[oneSpace]
+			value.prepend[newLine]
+		]
+		interior[indent]
+		regionFor.keyword(':').surround[noSpace].append[newLine]
+		regionFor.keyword('case').prepend[newLine]
+		
 	}
 
 	def dispatch void format(EventRaisingExpression eventRaisingExpression, extension IFormattableDocument document) {
 	}
 
 	def dispatch void format(WhileExpression it, extension IFormattableDocument document) {
+		prepend[newLine]
 		regionFor.keyword("while").append[oneSpace]
 		condition.format
 		body.format
-		append[newLines]
+		append[newLine]
 	}
 
 	def dispatch void format(ForExpression it, extension IFormattableDocument document) {
+		prepend[newLine]
 		regionFor.keyword("for").append[oneSpace]
 		it.varInits.forEach[prepend[noSpace]]
 		condition.format
 		varUpdates.forEach[prepend[noSpace]]
 		body.format
-		append[newLines]
+		append[newLine]
 	}
 
 	def dispatch void format(Property property, extension IFormattableDocument document) {
