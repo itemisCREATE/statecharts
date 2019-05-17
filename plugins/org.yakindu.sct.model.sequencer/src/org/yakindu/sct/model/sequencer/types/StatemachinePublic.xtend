@@ -13,6 +13,8 @@ package org.yakindu.sct.model.sequencer.types
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.yakindu.base.expressions.util.ExpressionBuilder
+import org.yakindu.base.expressions.util.PackageNavigationExtensions
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Property
@@ -20,12 +22,11 @@ import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.Visibility
 import org.yakindu.sct.model.sequencer.ModelSequencerNaming
+import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.base.types.Constructor
-import org.yakindu.base.expressions.util.ExpressionBuilder
 
 /**
  * This class implements a transformation that creates the state machine type
@@ -42,11 +43,13 @@ import org.yakindu.base.expressions.util.ExpressionBuilder
 	extension TypesFactory factory = TypesFactory.eINSTANCE
 	
 	@Inject extension IStatemachine 
-	@Inject extension TypeBuilder 
 	@Inject extension ExpressionBuilder
 	
 	@Inject protected extension ModelSequencerNaming
 	@Inject protected extension StatemachineInterfaceMethods
+	@Inject protected extension SequencerAnnotationLibrary
+	@Inject protected extension TypeBuilder
+	@Inject protected extension PackageNavigationExtensions
 	
 	def create createPackage statemachinePackage(Statechart sc) {
  		it => [
@@ -63,7 +66,7 @@ import org.yakindu.base.expressions.util.ExpressionBuilder
 			sc.statemachinePackage.member += statemachineInterfaceType
 			sc.statemachinePackage.member += it
 
-			features += interfaceAnnotationType
+			features += interfaceGroupAnnotation
 
 			features += statesEnumeration(sc)
 			
@@ -75,11 +78,15 @@ import org.yakindu.base.expressions.util.ExpressionBuilder
 			]
 
 			declareMembers(sc)
+			
+			if(sc.isEventDriven) {
+				_annotateWith(eventDrivenAnnotation)
+				containingPackage.member += eventDrivenAnnotation
+			} else {
+				_annotateWith(cycleBasedAnnotation)
+				containingPackage.member += cycleBasedAnnotation
+			}
 		]
-	}
-	
-	protected def create createAnnotationType interfaceAnnotationType() {
-		name = interfaceTypeAnnotationName
 	}
 	
 	def create createEnumerationType statesEnumeration(Statechart sc) {
@@ -146,7 +153,7 @@ import org.yakindu.base.expressions.util.ExpressionBuilder
 		features += clearOutEvents
 		features += clearEvents
 		
-		it._annotateWith(interfaceAnnotationType)
+		it._annotateWith(interfaceGroupAnnotation)
 	}
 	
 	protected def create createComplexType createInternalType(InternalScope internal) {
@@ -155,7 +162,8 @@ import org.yakindu.base.expressions.util.ExpressionBuilder
 		internal.declarations.forEach[decl|features += decl.feature => [visibility = Visibility.PROTECTED]]
 		features.filter(Property).filter[!const].forEach[prop|prop.initialValue = null]
 		
-		it._annotateWith(interfaceAnnotationType)
+		it._annotateWith(interfaceGroupAnnotation)
+		it._annotateWith(internalScopeAnnotation)
 		it.visibility = Visibility.PROTECTED
 	}
 	

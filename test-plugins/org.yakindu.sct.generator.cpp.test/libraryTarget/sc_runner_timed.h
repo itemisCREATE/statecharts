@@ -8,13 +8,13 @@
 #include <list>
 
 #include "sc_types.h"
-#include "StatemachineInterface.h"
+#include "CycleBasedStatemachineInterface.h"
 #include "TimedStatemachineInterface.h"
 #include "TimerInterface.h"
 
 class TimedSctUnitRunner : public TimerInterface {
 	public:
-		TimedSctUnitRunner(StatemachineInterface * statemachine, bool event_driven, sc_integer cycle_period);
+		TimedSctUnitRunner(CycleBasedStatemachineInterface * statemachine, bool event_driven, sc_integer cycle_period);
 		virtual ~TimedSctUnitRunner(){};
 		void proceed_time(sc_integer time_ms);
 		void proceed_cycles(sc_integer cycles);
@@ -23,7 +23,7 @@ class TimedSctUnitRunner : public TimerInterface {
 		virtual void cancel();
 	private:
 		class SctTimer;
-		StatemachineInterface * statemachine;
+		CycleBasedStatemachineInterface * statemachine;
 		
 		bool event_driven;
 		sc_integer cycle_period;

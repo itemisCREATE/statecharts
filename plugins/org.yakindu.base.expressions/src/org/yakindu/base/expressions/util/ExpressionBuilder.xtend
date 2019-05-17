@@ -119,6 +119,12 @@ class ExpressionBuilder {
 			varUpdates += varUpdate
 		]
 	}
+	
+	def _while(Expression cond) {
+		createWhileExpression => [
+			condition = cond
+		]
+	}
 
 	def _smaller(Expression left, Expression right) {
 		createLogicalRelationExpression => [
@@ -139,6 +145,14 @@ class ExpressionBuilder {
 	def _greaterEqual(Expression left, Expression right) {
 		createLogicalRelationExpression => [
 			operator = RelationalOperator.GREATER_EQUAL
+			leftOperand = left
+			rightOperand = right
+		]
+	}
+	
+	def _greater(Expression left, Expression right) {
+		createLogicalRelationExpression => [
+			operator = RelationalOperator.GREATER
 			leftOperand = left
 			rightOperand = right
 		]

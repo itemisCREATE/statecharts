@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	 <extension
+         point="org.yakindu.sct.generator.core.generator">
+      <SCTGenerator
+            bindings="org.yakindu.sct.types.generator.statechart.c.CSCTGeneratorModule"
+            contentType="statechart"
+            elementRefType="org.yakindu.sct.model.sgraph.Statechart"
+            executor="org.yakindu.sct.types.generator.statechart.PackageGeneratorEntryExecutor"
+            id="yakindu::c"
+            name="Types SCT C Generator">
+           <FeatureLibrary
+               library_id="org.yakindu.generator.core.features">
+	         </FeatureLibrary>
+	         <FeatureLibrary
+	               library_id="org.yakindu.sct.generator.feature.c">
+	         </FeatureLibrary>
+          <Domain
+                  id="org.yakindu.domain.default">
+        	</Domain>
+      </SCTGenerator>
+   </extension>
+   <extension
+         point="org.yakindu.sct.generator.core.featuretypes">
+      <FeatureLibrary
+            defaultProvider="org.yakindu.sct.types.generator.statechart.c.features.CDefaultFeatureValueProvider"
+            library_id="org.yakindu.sct.generator.feature.c"
+            uri="platform:/plugin/org.yakindu.sct.types.generator.statechart.c/library/FeatureTypeLibrary.xmi">
+      </FeatureLibrary>
+   </extension>
+   <extension
+         point="org.yakindu.sct.generator.core.extensions">
+      <ExtensionGeneratorMapping
+            fileExtension="sct"
+            generatorId="yakindu::c">
+      </ExtensionGeneratorMapping>
+   </extension>
+</plugin>

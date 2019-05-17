@@ -48,7 +48,6 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 			features += createExitMethod
 			features += createIsActiveMethod
 			features += createIsFinalMethod
-			features += createRunCycleMethod
 		]
 		abstract = true
 		scrPackage.member += it
@@ -72,10 +71,6 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 	
 	def createIsFinalMethod() {
 		_op("isFinal", tSystem.getType(ITypeSystem.BOOLEAN))
-	}
-	
-	def createRunCycleMethod() {
-		_op("runCycle", tSystem.getType(ITypeSystem.VOID))
 	}
 	
 }

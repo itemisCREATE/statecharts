@@ -35,6 +35,10 @@ class TypeBuilder {
 	def _op(String name, String returnType) {
 		_op(name, typeSystem.getType(returnType))
 	}
+	
+	def _op(String name) {
+		_op(name, typeSystem.getType(ITypeSystem.VOID))
+	}
 
 	def _op(String name, Type returnType) {
 		_op => [ op |
@@ -82,6 +86,12 @@ class TypeBuilder {
 	def _type(TypedElement it, TypeSpecifier typeSpec) {
 		typeSpecifier = EcoreUtil.copy(typeSpec)
 	}
+	
+	def _typeSpecifier(Type type) {
+		createTypeSpecifier => [ ts |
+			ts.type = type
+		]
+	}
 
 	def _variable(String name, Type type) {
 		createProperty => [ prop |
@@ -101,6 +111,14 @@ class TypeBuilder {
 		createProperty => [ prop |
 			prop.name = name
 			prop._type(typeName)
+			prop.initialValue = init
+		]
+	}
+	
+	def _variable(String name, Type type, Expression init) {
+		createProperty => [ prop |
+			prop.name = name
+			prop.typeSpecifier = type._typeSpecifier 
 			prop.initialValue = init
 		]
 	}

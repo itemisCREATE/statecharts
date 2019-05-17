@@ -19,6 +19,8 @@ import org.yakindu.base.expressions.util.ExpressionBuilder
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
+import org.yakindu.base.types.Operation
+import org.yakindu.base.types.Property
 import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.Visibility
 import org.yakindu.base.types.typesystem.ITypeSystem
@@ -36,7 +38,6 @@ import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 
@@ -93,21 +94,21 @@ class StatemachineMethods {
 	
 	protected def variableInits(Statechart sc) {
 		var List<Expression> inits = newArrayList
-		for (VariableDefinition vd : sc.variablesForInitSequence) {
+		for (Property vd : sc.variablesForInitSequence) {
 			inits += vd.initialization
 		}
 		inits
 	}
 	
 	protected def variablesForInitSequence(Statechart sc) {
-		val statechartVariables = sc.scopes.map(s|s.variables).flatten.filter(typeof(VariableDefinition)).filter[!const]
+		val statechartVariables = sc.scopes.map(s|s.variables).flatten.filter(Property).filter[!const]
 //		val flow = sc.create
 //		val importedVariables = flow.scopes.map(s|s.declarations).flatten.filter(typeof(ImportDeclaration)).map(
 //			d|d.declaration).filter(typeof(VariableDefinition))
 		return statechartVariables // + importedVariables
 	}
 	
-	protected def initialization(VariableDefinition vd) {
+	protected def initialization(Property vd) {
 		if (vd.effectiveInitialValue !== null) {
 			val owner = vd.eContainer
 			if (owner instanceof InterfaceScope) {
@@ -115,13 +116,13 @@ class StatemachineMethods {
 			} else if (owner instanceof InternalScope) {
 				return owner.property._ref._fc(vd.feature)._assign(vd.effectiveInitialValue.copy)
 			} else {
-				return vd.feature._ref._assign(vd.effectiveInitialValue.copy)
+				return vd.feature._ref._assign(vd.effectiveInitialValue.copy) 
 			}
 		}
 		null
 	}
 	
-	def effectiveInitialValue(VariableDefinition vd) {
+	def effectiveInitialValue(Property vd) {
 		if (vd.initialValue !== null) {
 			return vd.initialValue
 		} else {
@@ -197,11 +198,9 @@ class StatemachineMethods {
 		)
 	}
 	
-	def defineRunCycleMethod(ComplexType it, Statechart sc) {
-		it.features += createRunCycleMethod => [
+	def defineSingleStepMethod(ComplexType it, Statechart sc) {
+		it.features += createSingleStepMethod => [
 			body = _block(
-				
-				sc.createClearOutEventsMethod._call,
 				
 				_for(nextStateIndex(sc)._ref._assign(0._int), nextStateIndex(sc)._ref._smaller(stateVectorProperty(sc)._ref._fc(_array._length)), nextStateIndex(sc)._ref._inc) => [
 					body = _block(
@@ -209,11 +208,17 @@ class StatemachineMethods {
 							s.reactMethod._call(_true)
 						], _block)
 					)
-				],
-				
-				sc.createClearEventsMethod._call
+				]
 			)
 		]
+	}
+	
+	def Operation create _op("singleStep") createSingleStepMethod(ComplexType cT) {
+	
+	}
+	
+	def Operation create _op("runToCompletion") createRTCMethod(ComplexType cT) {
+		cT.features += it
 	}
 	
 	def defineIsStateActiveMethod(ComplexType it, Statechart sc) {
@@ -248,28 +253,28 @@ class StatemachineMethods {
 		_param("state", sc.statesEnumeration)
 	}
 	
-	def create _op createClearOutEventsMethod(Statechart sc) {
+	def create _op createClearOutEventsMethod(ComplexType cT) {
 		name = "clearOutEvents"
 		_type(ITypeSystem.VOID)
 		visibility = Visibility.PROTECTED
 	}
 	
 	def defineClearOutEventsMethod(ComplexType it, Statechart sc) {
-		it.features += createClearOutEventsMethod(sc) => [
+		it.features += createClearOutEventsMethod(it) => [
 			body = _block(
 				sc.scopes.filter(InterfaceScope).map[iface | iface.property._ref._fc(iface.createInterfaceType.clearOutEvents)]
 			)
 		]
 	}
 	
-	def create _op createClearEventsMethod(Statechart sc) {
+	def create _op createClearEventsMethod(ComplexType cT) {
 		name = "clearEvents"
 		_type(ITypeSystem.VOID)
 		visibility = Visibility.PROTECTED
 	}
 	
 	def defineClearEventsMethod(ComplexType it, Statechart sc) {
-		it.features += createClearEventsMethod(sc) => [
+		it.features += createClearEventsMethod(it) => [
 			body = _block => [
 				expressions += sc.scopes.filter(InterfaceScope).map[iface | iface.property._ref._fc(iface.createInterfaceType.clearEvents)]
 				// clear internal events directly

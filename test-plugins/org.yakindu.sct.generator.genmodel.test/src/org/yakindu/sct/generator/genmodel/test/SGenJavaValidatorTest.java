@@ -81,6 +81,11 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 		EObject model = parseExpression("GeneratorModel for yakindu::java { statechart UnknownDomainStatechart { }}",
 				GeneratorModel.class.getSimpleName());
 		AssertableDiagnostics result = tester.validate(model);
+		System.out.println("Found diagnostics:");
+		for(Diagnostic diag : result.getAllDiagnostics()) {
+			System.out.println(diag.getMessage());
+			
+		}
 		result.assertAny(new MsgPredicate(
 				"This generator can not be used for domain does.not.exist. Valid domains are [com.yakindu.domain.java, org.yakindu.domain.default]"));
 	}

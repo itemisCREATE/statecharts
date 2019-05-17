@@ -597,7 +597,15 @@
 		<module>../org.yakindu.base.repository</module>
 		<module>../org.yakindu.sct.repository</module>
 		<!-- Plugins -->
+		<module>../../plugins/org.yakindu.sct.types.common</module>
 		<module>../../plugins/org.yakindu.sct.types.generator</module>
+		<module>../../plugins/org.yakindu.sct.types.generator.c</module>
+		<module>../../plugins/org.yakindu.sct.types.generator.cpp</module>
+		<module>../../plugins/org.yakindu.sct.types.generator.java</module>
+		<module>../../plugins/org.yakindu.sct.types.generator.statechart</module>
+		<module>../../plugins/org.yakindu.sct.types.generator.statechart.c</module>
+		<module>../../plugins/org.yakindu.sct.types.generator.statechart.cpp</module>
+		<module>../../plugins/org.yakindu.sct.types.generator.statechart.java</module>
 		<module>../../plugins/org.yakindu.sct.types.modification</module>
 		<module>../../plugins/org.yakindu.base.xtext.utils.gmf</module>
 		<module>../../plugins/org.yakindu.base.xtext.utils.jface</module>
@@ -622,6 +630,7 @@
 		<module>../../plugins/org.yakindu.sct.generator.runner</module>
 		<module>../../plugins/org.yakindu.sct.generator.genmodel</module>
 		<module>../../plugins/org.yakindu.sct.generator.genmodel.ui</module>
+		<module>../../plugins/org.yakindu.sct.model.sequencer</module>
 		<module>../../plugins/org.yakindu.sct.model.sexec</module>
 		<module>../../plugins/org.yakindu.sct.model.sexec.edit</module>
 		<module>../../plugins/org.yakindu.sct.model.sgen</module>

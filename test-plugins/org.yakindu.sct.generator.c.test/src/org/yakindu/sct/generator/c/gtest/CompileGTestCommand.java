@@ -138,7 +138,7 @@ public class CompileGTestCommand {
 		}
 		if(wError) {
 			command.add("-Werror");
-			
+			command.add("-Wno-unused-private-field");
 		}
 		if(wConversion) {
 			command.add("-Wconversion");
