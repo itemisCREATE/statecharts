@@ -11,12 +11,16 @@
 package org.yakindu.sct.model.sequencer
 
 import com.google.inject.Inject
+import com.google.inject.Injector
 import java.util.Collection
 import org.yakindu.base.types.Package
+import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.validation.IValidationIssueAcceptor
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor
 import org.yakindu.sct.model.sequencer.expressions.ExpressionOptimizer
 import org.yakindu.sct.model.sequencer.expressions.RetargetReferences
+import org.yakindu.sct.model.sequencer.modification.CycleBasedModification
+import org.yakindu.sct.model.sequencer.modification.EventDrivenModification
 import org.yakindu.sct.model.sequencer.operations.EnterDeepOperation
 import org.yakindu.sct.model.sequencer.operations.EnterOperation
 import org.yakindu.sct.model.sequencer.operations.EnterShallowOperation
@@ -34,6 +38,7 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.types.modification.IModification
 
 class ModelSequencer implements IModelSequencer {
+	@Inject Injector injector
 
 	@Inject extension RetargetReferences
 
@@ -52,6 +57,7 @@ class ModelSequencer implements IModelSequencer {
 	@Inject extension StatemachineProperties
 
 	@Inject extension ExpressionOptimizer
+	@Inject extension TypeBuilder
 
 	@Inject extension SequencerAnnotationLibrary
 
@@ -63,7 +69,12 @@ class ModelSequencer implements IModelSequencer {
 	}
 
 	override Package transform(Statechart sc, IValidationIssueAcceptor acceptor) {
-		return sc.makePackage
+		val pkg = sc.makePackage
+		// Guice on the fly
+		sc.modifications.forEach[
+			injector.getInstance(it).modify(#[pkg])
+		]
+		pkg
 	}
 
 	protected def create pkg:sc.statemachinePackage makePackage(Statechart sc) {
@@ -98,24 +109,27 @@ class ModelSequencer implements IModelSequencer {
 		sctype.defineInitMethod(sc)
 		sctype.defineIsActiveMethod(sc)
 		sctype.defineIsFinalMethod(sc)
-		sctype.defineRunCycleMethod(sc)
 		sctype.defineIsStateActiveMethod(sc)
 		sctype.defineClearOutEventsMethod(sc)
 		sctype.defineClearEventsMethod(sc)
+		sctype.defineSingleStepMethod(sc)
+		
+		sctype._annotateWith(statemachineTypeAnnotation)
+		pkg.member.add(statemachineTypeAnnotation)
 
 		pkg.retargetReferences
 
 		pkg.optimize
 	}
 
-	protected def Collection<IModification> getModifications(Statechart it) {
+	protected def Collection<Class<? extends IModification>> getModifications(Statechart it) {
 		if (isEventDriven) {
 			#[
-				
+				EventDrivenModification
 			]
 		} else {
 			#[
-				
+				CycleBasedModification
 			]
 		}
 	}

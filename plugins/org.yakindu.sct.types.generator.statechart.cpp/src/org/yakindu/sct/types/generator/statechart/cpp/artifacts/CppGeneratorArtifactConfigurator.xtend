@@ -30,10 +30,12 @@ import org.yakindu.sct.types.generator.cpp.files.CppStatemachineInterface
 import org.yakindu.sct.types.generator.cpp.files.CppTypes
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
+import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 
 class CppGeneratorArtifactConfigurator extends DefaultCppGeneratorArtifactConfigurator {
 
 	@Inject protected ICoreLibraryHelper libraryHelper
+	@Inject protected extension SequencerAnnotationLibrary
 	@Inject protected extension CppTypes
 	@Inject protected extension CppStatemachineInterface
 	@Inject protected extension GeneratorArtifactConfigurationExtensions
@@ -45,29 +47,40 @@ class CppGeneratorArtifactConfigurator extends DefaultCppGeneratorArtifactConfig
 		config = new GeneratorArtifactConfiguration(fileSystemAccess)
 		this.entry = entry
 		val scTypes = configureContent("sc_types.h", createScTypes)
-		val statemachineInterface = configureContent("StatemachineInterface.h", createStatemachineInterface)
-		configureSources(packages, scTypes, statemachineInterface)
+		configureSources(packages, scTypes)
 		config
 	}
 	
-	def protected configureSources(Collection<Package> packages, GeneratorArtifact<?> scTypes, GeneratorArtifact<?> statemachineInterface) {
+	override protected configureSources(Collection<Package> packages, GeneratorArtifact<?> scTypes) {
 		for(p:packages){
-		val List<Declaration> sourceContents = newArrayList
-		val List<Declaration> classContents = newArrayList
-		
-		val copyCT = p.eAllContents.filter(ComplexType).toList
-		copyCT.forEach[ct | sourceContents.addAll(ct.features.filter(Operation).filter[!(it instanceof OperationDefinition)].filter[!(it.innerConstructor) && !(it.ocbDestructor)].toList)]
-		classContents.addAll(EcoreUtil.copy(p).member)
-		classContents.filter(ComplexType).forEach[ cT |
-			cT.removeBodysFromOperations
-		]
-		
-		val class = config.configure(p.member.get(0).name + CppTargetPlatform.HEADER_FILE_ENDING, null, classContents, false)
-		val source = config.configure(p.member.get(0).name + CppTargetPlatform.SOURCE_FILE_ENDING, null, sourceContents, false)
-		
-		source.addDependencies(class)
-		class.addDependencies(scTypes, statemachineInterface)
-		addExpressionDependendingHeaders(source)
+			p.member.filter(ComplexType).filter[isStatemachineType].forEach[
+				statemachine |
+				
+				val statemachineHeader = config.configure(statemachine.name + CppTargetPlatform.HEADER_FILE_ENDING, null, newArrayList, false)
+				val statemachineSource = config.configure(statemachine.name + CppTargetPlatform.SOURCE_FILE_ENDING, null, newArrayList, false)
+				
+				statemachineHeader.addDependency(scTypes)
+				
+				statemachineSource.content.addAll(
+					statemachine.features.filter(Operation).filter[!(it instanceof OperationDefinition)].filter[!(it.innerConstructor) && !(it.ocbDestructor)].toList
+				)
+				
+				val pkgCopy = EcoreUtil.copy(p)
+				val smCopy = pkgCopy.member.get(p.member.indexOf(statemachine)) as ComplexType
+				smCopy.removeBodysFromOperations
+				statemachineHeader.content.add(smCopy)
+				
+				statemachine.superTypes.map[type as ComplexType].forEach[ superType |
+					superType.removeBodysFromOperations
+					val superTypeHeader = config.configure(superType.name + CppTargetPlatform.HEADER_FILE_ENDING, null, newArrayList, false)
+					superTypeHeader.content.add(superType)
+					statemachineHeader.addDependency(superTypeHeader)
+				]
+				
+				statemachineSource.addDependency(statemachineHeader)
+				statemachineSource.addExpressionDependendingHeaders
+			]
+
 		}
 	}
 	

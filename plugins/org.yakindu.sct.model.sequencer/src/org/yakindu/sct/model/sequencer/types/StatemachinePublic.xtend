@@ -25,6 +25,9 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.base.types.TypeBuilder
+import org.yakindu.sct.model.sequencer.util.SequencerAnnotationConstants
+import org.yakindu.base.expressions.util.ComplexTypeNavigationExtensions
+import org.yakindu.base.expressions.util.PackageNavigationExtensions
 
 /**
  * This class implements a transformation that creates the state machine type
@@ -46,6 +49,7 @@ import org.yakindu.base.types.TypeBuilder
 	@Inject protected extension StatemachineInterfaceMethods
 	@Inject protected extension SequencerAnnotationLibrary
 	@Inject protected extension TypeBuilder
+	@Inject protected extension PackageNavigationExtensions
 	
 	def create createPackage statemachinePackage(Statechart sc) {
  		it => [
@@ -73,6 +77,14 @@ import org.yakindu.base.types.TypeBuilder
 			]
 
 			declareMembers(sc)
+			
+			if(sc.isEventDriven) {
+				_annotateWith(eventDrivenAnnotation)
+				containingPackage.member += eventDrivenAnnotation
+			} else {
+				_annotateWith(cycleBasedAnnotation)
+				containingPackage.member += cycleBasedAnnotation
+			}
 		]
 	}
 	
