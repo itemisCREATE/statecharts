@@ -15,7 +15,6 @@ import java.util.Collection
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Package
-import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 import org.yakindu.sct.types.generator.statechart.annotation.SCTGeneratorAnnotationLibrary
 import org.yakindu.sct.types.modification.IModification
 
@@ -25,7 +24,6 @@ import org.yakindu.sct.types.modification.IModification
  */
 class UnusedFunctionsModification implements IModification {
 	
-	@Inject protected extension SequencerAnnotationLibrary
 	@Inject protected extension SCTGeneratorAnnotationLibrary
 
 	override modify(Collection<Package> packages) {
