@@ -18,6 +18,7 @@ import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -33,10 +34,7 @@ import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
-import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
-import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class StructureMapping {
 	 
@@ -110,14 +108,14 @@ class StructureMapping {
 	def dispatch Declaration map(Declaration decl) {
 	}
 	
-	def dispatch Declaration map(EventDefinition e) {
+	def dispatch Declaration map(Event e) {
 		e.create
 	}
 	
-	def dispatch Declaration map(VariableDefinition v) {
+	def dispatch Declaration map(Property v) {
 		v.create
 	}
-	def dispatch Declaration map(OperationDefinition v) {
+	def dispatch Declaration map(Operation v) {
 		v.create
 	}
 	 

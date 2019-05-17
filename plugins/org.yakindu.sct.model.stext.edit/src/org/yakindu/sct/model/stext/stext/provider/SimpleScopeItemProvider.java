@@ -111,26 +111,6 @@ public class SimpleScopeItemProvider extends ScopeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGraphPackage.Literals.SCOPE__DECLARATIONS,
-				 StextFactory.eINSTANCE.createEventDefinition()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGraphPackage.Literals.SCOPE__DECLARATIONS,
-				 StextFactory.eINSTANCE.createVariableDefinition()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGraphPackage.Literals.SCOPE__DECLARATIONS,
-				 StextFactory.eINSTANCE.createOperationDefinition()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGraphPackage.Literals.SCOPE__DECLARATIONS,
-				 StextFactory.eINSTANCE.createTypeAliasDefinition()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(SGraphPackage.Literals.SCOPE__MEMBERS,
 				 StextFactory.eINSTANCE.createRoot()));
 
@@ -188,26 +168,6 @@ public class SimpleScopeItemProvider extends ScopeItemProvider
 			(createChildParameter
 				(SGraphPackage.Literals.SCOPE__MEMBERS,
 				 StextFactory.eINSTANCE.createImportScope()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGraphPackage.Literals.SCOPE__MEMBERS,
-				 StextFactory.eINSTANCE.createEventDefinition()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGraphPackage.Literals.SCOPE__MEMBERS,
-				 StextFactory.eINSTANCE.createVariableDefinition()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGraphPackage.Literals.SCOPE__MEMBERS,
-				 StextFactory.eINSTANCE.createOperationDefinition()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGraphPackage.Literals.SCOPE__MEMBERS,
-				 StextFactory.eINSTANCE.createTypeAliasDefinition()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -478,6 +438,21 @@ public class SimpleScopeItemProvider extends ScopeItemProvider
 			(createChildParameter
 				(SGraphPackage.Literals.SCOPE__MEMBERS,
 				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 ExpressionsFactory.eINSTANCE.createForExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__MEMBERS,
+				 ExpressionsFactory.eINSTANCE.createEventClearingExpression()));
 	}
 
   /**

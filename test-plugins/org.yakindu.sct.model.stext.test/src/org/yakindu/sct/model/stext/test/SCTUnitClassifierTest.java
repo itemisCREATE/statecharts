@@ -55,8 +55,6 @@ public class SCTUnitClassifierTest {
 			StextPackage.Literals.STATE_ROOT, StextPackage.Literals.STATE_ROOT, StextPackage.Literals.TRANSITION_ROOT,
 			StextPackage.Literals.BUILTIN_EVENT_SPEC, StextPackage.Literals.EVENT_SPEC,
 			StextPackage.Literals.IMPORT_SCOPE, StextPackage.Literals.STATECHART_SCOPE,
-			StextPackage.Literals.OPERATION_DEFINITION, StextPackage.Literals.TYPE_ALIAS_DEFINITION,
-			StextPackage.Literals.EVENT_DEFINITION, StextPackage.Literals.VARIABLE_DEFINITION,
 			SGraphPackage.Literals.IMPORT_DECLARATION, SGraphPackage.Literals.SCOPE,
 			SGraphPackage.Literals.SCOPE_MEMBER, StextPackage.Literals.TRANSITION_REACTION,
 			SGraphPackage.Literals.REACTION_PROPERTY, TypesPackage.Literals.ANNOTATION,

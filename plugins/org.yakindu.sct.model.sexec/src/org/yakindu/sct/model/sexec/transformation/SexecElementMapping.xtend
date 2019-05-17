@@ -22,6 +22,8 @@ import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
+import org.yakindu.base.types.Operation
+import org.yakindu.base.types.Property
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.CheckRef
@@ -52,17 +54,14 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.sgraph.Trigger
-import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventSpec
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.LocalReaction
-import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.RegularEventSpec
 import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventType
-import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 @Singleton class SexecElementMapping {
 	
@@ -110,11 +109,11 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 	}
 	
 	
-	def EventDefinition create r : EcoreUtil.copy(event) create(EventDefinition event) {}
+	def Event create r : EcoreUtil.copy(event) create(Event event) {}
 	
-	def VariableDefinition create r : EcoreUtil.copy(v) create(VariableDefinition v) {}
+	def Property create r : EcoreUtil.copy(v) create(Property v) {}
 	
-	def OperationDefinition create r : EcoreUtil.copy(v) create(OperationDefinition v) {}
+	def Operation create r : EcoreUtil.copy(v) create(Operation v) {}
 	
 	 
 	def ExecutionState create r : sexecFactory.createExecutionState create(RegularState state){

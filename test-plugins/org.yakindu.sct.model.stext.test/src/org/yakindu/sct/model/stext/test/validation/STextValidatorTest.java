@@ -55,7 +55,6 @@ import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
-import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
@@ -269,7 +268,7 @@ public class STextValidatorTest extends AbstractSTextValidationTest implements S
 	@Test
 	public void checkOptionalArgumentsAreLast() {
 		Scope scope = (Scope) super.parseExpression("internal: ", InternalScope.class.getSimpleName());
-		OperationDefinition op = StextTestFactory._createOperation("op", scope);
+		Operation op = StextTestFactory._createOperation("op", scope);
 		tester.validate(scope).assertOK();
 		
 		// optional parameter last => no error

@@ -166,11 +166,6 @@ public class GuardItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.GUARD__EXPRESSION,
-				 StextFactory.eINSTANCE.createVariableDefinition()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.GUARD__EXPRESSION,
 				 StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
 
 		newChildDescriptors.add
@@ -301,17 +296,27 @@ public class GuardItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.GUARD__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createSwitchCase()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.GUARD__EXPRESSION,
 				 ExpressionsFactory.eINSTANCE.createEventRaisingExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.GUARD__EXPRESSION,
 				 ExpressionsFactory.eINSTANCE.createEventValueReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.GUARD__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createForExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.GUARD__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createThrowExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.GUARD__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createEventClearingExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter

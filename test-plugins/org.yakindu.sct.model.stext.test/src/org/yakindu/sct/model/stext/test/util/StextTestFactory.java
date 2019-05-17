@@ -11,7 +11,6 @@
  */
 package org.yakindu.sct.model.stext.test.util;
 
-
 import java.util.Arrays;
 
 import org.yakindu.base.base.NamedElement;
@@ -24,7 +23,10 @@ import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.expressions.IntLiteral;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
+import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Expression;
+import org.yakindu.base.types.Operation;
+import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesFactory;
@@ -34,13 +36,11 @@ import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
-import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.Guard;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
-import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.RegularEventSpec;
@@ -49,42 +49,35 @@ import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.TimeEventType;
 import org.yakindu.sct.model.stext.stext.TimeUnit;
-import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.stext.impl.StextFactoryImpl;
 
 public class StextTestFactory extends StextFactoryImpl {
 	StextTestFactory eINSTANCE = new StextTestFactory();
 
-	public static EventDefinition _createEventDefinition(String name,
-			Scope scope) {
-		EventDefinition e = StextFactory.eINSTANCE.createEventDefinition();
+	public static Event _createEvent(String name, Scope scope) {
+		Event e = TypesFactory.eINSTANCE.createEvent();
 		e.setName(name);
 		if (scope != null)
 			scope.getDeclarations().add(e);
 		return e;
 	}
 
-	public static OperationDefinition _createOperation(String name, Scope scope) {
-		OperationDefinition e = StextFactory.eINSTANCE
-				.createOperationDefinition();
+	public static Operation _createOperation(String name, Scope scope) {
+		Operation e = TypesFactory.eINSTANCE.createOperation();
 		e.setName(name);
 		if (scope != null)
 			scope.getDeclarations().add(e);
 		return e;
 	}
 
-	public static VariableDefinition _createVariableDefinition(String name,
-			Type type, Scope scope, Expression initialValue) {
-		VariableDefinition definition = _createVariableDefinition(name, type,
-				scope);
+	public static Property _createProperty(String name, Type type, Scope scope, Expression initialValue) {
+		Property definition = _createProperty(name, type, scope);
 		definition.setInitialValue(initialValue);
 		return definition;
 	}
 
-	public static VariableDefinition _createVariableDefinition(String name,
-			Type type, Scope scope) {
-		VariableDefinition v = StextFactory.eINSTANCE
-				.createVariableDefinition();
+	public static Property _createProperty(String name, Type type, Scope scope) {
+		Property v = TypesFactory.eINSTANCE.createProperty();
 		v.setName(name);
 		TypeSpecifier typeSpecifier = TypesFactory.eINSTANCE.createTypeSpecifier();
 		typeSpecifier.setType(type);
@@ -93,7 +86,7 @@ public class StextTestFactory extends StextFactoryImpl {
 			scope.getDeclarations().add(v);
 		return v;
 	}
-	
+
 	public static Type _createIntegerType(String name) {
 		Type t = TypesFactory.eINSTANCE.createPrimitiveType();
 		t.setName(name);
@@ -106,37 +99,34 @@ public class StextTestFactory extends StextFactoryImpl {
 		t.setName(name);
 		return t;
 	}
-	
+
 	public static Type _createBooleanType(String name) {
 		Type t = TypesFactory.eINSTANCE.createPrimitiveType();
 		t.setName(name);
 		return t;
 	}
-	
+
 	public static Type _createStringType(String name) {
 		Type t = TypesFactory.eINSTANCE.createPrimitiveType();
 		t.setName(name);
 		return t;
 	}
-	
+
 	public static Type _createVoidType(String name) {
 		Type t = TypesFactory.eINSTANCE.createPrimitiveType();
 		t.setName(name);
 		return t;
 	}
 
-	public static RegularEventSpec _createRegularEventSpec(EventDefinition e1,
-			ReactionTrigger rt) {
-		RegularEventSpec e1Spec = StextFactory.eINSTANCE
-				.createRegularEventSpec();
+	public static RegularEventSpec _createRegularEventSpec(Event e1, ReactionTrigger rt) {
+		RegularEventSpec e1Spec = StextFactory.eINSTANCE.createRegularEventSpec();
 		e1Spec.setEvent(_createElementReferenceExpression(e1));
 		if (rt != null)
 			rt.getTriggers().add(e1Spec);
 		return e1Spec;
 	}
 
-	public static ElementReferenceExpression _createElementReferenceExpression(
-			NamedElement target) {
+	public static ElementReferenceExpression _createElementReferenceExpression(NamedElement target) {
 		ElementReferenceExpression referenceExpression = ExpressionsFactory.eINSTANCE
 				.createElementReferenceExpression();
 		referenceExpression.setReference(target);
@@ -164,8 +154,7 @@ public class StextTestFactory extends StextFactoryImpl {
 		return rt;
 	}
 
-	public static InterfaceScope _createInterfaceScope(String name,
-			ScopedElement owner) {
+	public static InterfaceScope _createInterfaceScope(String name, ScopedElement owner) {
 		InterfaceScope scope = StextFactory.eINSTANCE.createInterfaceScope();
 		scope.setName(name);
 		if (owner != null)
@@ -187,10 +176,9 @@ public class StextTestFactory extends StextFactoryImpl {
 		return effect;
 	}
 
-	public static TimeEventSpec _createTimeEventSpec(TimeEventType type,
-			Expression value, TimeUnit unit, ReactionTrigger rt) {
-		TimeEventSpec timeTrigger = StextFactory.eINSTANCE
-				.createTimeEventSpec();
+	public static TimeEventSpec _createTimeEventSpec(TimeEventType type, Expression value, TimeUnit unit,
+			ReactionTrigger rt) {
+		TimeEventSpec timeTrigger = StextFactory.eINSTANCE.createTimeEventSpec();
 		timeTrigger.setType(type);
 		timeTrigger.setValue(value);
 		timeTrigger.setUnit(unit);
@@ -201,44 +189,38 @@ public class StextTestFactory extends StextFactoryImpl {
 	}
 
 	public static LocalReaction _createEntryAction(State parent) {
-		return _createLocalReaction(parent,
-				StextFactory.eINSTANCE.createEntryEvent());
+		return _createLocalReaction(parent, StextFactory.eINSTANCE.createEntryEvent());
 	}
 
 	public static LocalReaction _createEntryAction(Statechart parent) {
-		return _createLocalReaction(parent,
-				StextFactory.eINSTANCE.createEntryEvent());
+		return _createLocalReaction(parent, StextFactory.eINSTANCE.createEntryEvent());
 	}
 
 	public static LocalReaction _createExitAction(State parent) {
-		return _createLocalReaction(parent,
-				StextFactory.eINSTANCE.createExitEvent());
+		return _createLocalReaction(parent, StextFactory.eINSTANCE.createExitEvent());
 	}
 
 	public static LocalReaction _createExitAction(Statechart parent) {
-		return _createLocalReaction(parent,
-				StextFactory.eINSTANCE.createExitEvent());
+		return _createLocalReaction(parent, StextFactory.eINSTANCE.createExitEvent());
 	}
-	
+
 	public static Guard createGuardExpression(Expression expression) {
 		Guard guard = StextFactory.eINSTANCE.createGuard();
 		guard.setExpression(expression);
 		return guard;
 	}
 
-	public static LocalReaction _createTimeTriggeredReaction(State parent,
-			TimeEventType type, Expression value, TimeUnit unit) {
+	public static LocalReaction _createTimeTriggeredReaction(State parent, TimeEventType type, Expression value,
+			TimeUnit unit) {
 		// TimeEventSpec timeTrigger =
 		// StextFactory.eINSTANCE.createTimeEventSpec();
 		// timeTrigger.setType(type);
 		// timeTrigger.setValue(value);
 		// timeTrigger.setUnit(unit);
-		return _createLocalReaction(parent,
-				_createTimeEventSpec(type, value, unit, null));
+		return _createLocalReaction(parent, _createTimeEventSpec(type, value, unit, null));
 	}
 
-	public static LocalReaction _createLocalReaction(State parent,
-			EventSpec triggerEvent) {
+	public static LocalReaction _createLocalReaction(State parent, EventSpec triggerEvent) {
 		LocalReaction reaction = _createLocalReaction(triggerEvent);
 
 		Scope scope = getOrCreateSimpleScope(parent);
@@ -248,8 +230,7 @@ public class StextTestFactory extends StextFactoryImpl {
 		return reaction;
 	}
 
-	public static LocalReaction _createLocalReaction(Statechart parent,
-			EventSpec triggerEvent) {
+	public static LocalReaction _createLocalReaction(Statechart parent, EventSpec triggerEvent) {
 		LocalReaction reaction = _createLocalReaction(triggerEvent);
 
 		Scope scope = getOrCreateInternalScope(parent);
@@ -281,8 +262,7 @@ public class StextTestFactory extends StextFactoryImpl {
 
 	public static LocalReaction _createLocalReaction(EventSpec triggerEvent) {
 		LocalReaction reaction = StextFactory.eINSTANCE.createLocalReaction();
-		ReactionTrigger trigger = StextFactory.eINSTANCE
-				.createReactionTrigger();
+		ReactionTrigger trigger = StextFactory.eINSTANCE.createReactionTrigger();
 		_createReactionEffect(reaction);
 
 		if (triggerEvent != null)
@@ -292,25 +272,21 @@ public class StextTestFactory extends StextFactoryImpl {
 		return reaction;
 	}
 
-	public static void _createExitAssignment(VariableDefinition v1, State s1,
-			int value) {
+	public static void _createExitAssignment(Property v1, State s1, int value) {
 		LocalReaction exitAction = _createExitAction(s1);
-		_createVariableAssignment(v1, AssignmentOperator.ASSIGN,
-				_createValue(value), (ReactionEffect) exitAction.getEffect());
+		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(value),
+				(ReactionEffect) exitAction.getEffect());
 	}
 
-	public static void _createEntryAssignment(VariableDefinition v1, State s1,
-			int value) {
+	public static void _createEntryAssignment(Property v1, State s1, int value) {
 		LocalReaction entryAction = _createEntryAction(s1);
-		_createVariableAssignment(v1, AssignmentOperator.ASSIGN,
-				_createValue(value), (ReactionEffect) entryAction.getEffect());
+		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(value),
+				(ReactionEffect) entryAction.getEffect());
 	}
 
-	public static AssignmentExpression _createVariableAssignment(
-			VariableDefinition v, AssignmentOperator op, Expression expression,
-			ReactionEffect e) {
-		AssignmentExpression assignment = ExpressionsFactory.eINSTANCE
-				.createAssignmentExpression();
+	public static AssignmentExpression _createVariableAssignment(Property v, AssignmentOperator op,
+			Expression expression, ReactionEffect e) {
+		AssignmentExpression assignment = ExpressionsFactory.eINSTANCE.createAssignmentExpression();
 		assignment.setVarRef(_createElementReferenceExpression(v));
 		assignment.setOperator(op);
 		assignment.setExpression(expression);
@@ -319,15 +295,15 @@ public class StextTestFactory extends StextFactoryImpl {
 		return assignment;
 	}
 
-	public static FeatureCall _createOperationCall(OperationDefinition o) {
+	public static FeatureCall _createOperationCall(Operation o) {
 		// TODO add owner as TypedElementExpression
 		FeatureCall oc = ExpressionsFactory.eINSTANCE.createFeatureCall();
 		oc.setFeature(o);
 		oc.setOperationCall(true);
 		return oc;
 	}
-	
-	public static ElementReferenceExpression _createOperationCall(OperationDefinition o, Argument... arguments) {
+
+	public static ElementReferenceExpression _createOperationCall(Operation o, Argument... arguments) {
 		ElementReferenceExpression oc = ExpressionsFactory.eINSTANCE.createElementReferenceExpression();
 		oc.setReference(o);
 		oc.setOperationCall(true);
@@ -336,8 +312,7 @@ public class StextTestFactory extends StextFactoryImpl {
 	}
 
 	public static PrimitiveValueExpression _createValue(int i) {
-		PrimitiveValueExpression assignment = ExpressionsFactory.eINSTANCE
-				.createPrimitiveValueExpression();
+		PrimitiveValueExpression assignment = ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression();
 		IntLiteral intLit = ExpressionsFactory.eINSTANCE.createIntLiteral();
 		intLit.setValue(i);
 		assignment.setValue(intLit);

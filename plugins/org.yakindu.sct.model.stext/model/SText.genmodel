@@ -45,10 +45,6 @@
     <genClasses ecoreClass="SText.ecore#//ImportScope">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute SText.ecore#//ImportScope/imports"/>
     </genClasses>
-    <genClasses ecoreClass="SText.ecore#//EventDefinition"/>
-    <genClasses ecoreClass="SText.ecore#//VariableDefinition"/>
-    <genClasses ecoreClass="SText.ecore#//OperationDefinition"/>
-    <genClasses ecoreClass="SText.ecore#//TypeAliasDefinition"/>
     <genClasses ecoreClass="SText.ecore#//LocalReaction"/>
     <genClasses ecoreClass="SText.ecore#//TransitionReaction"/>
     <genClasses ecoreClass="SText.ecore#//Guard">

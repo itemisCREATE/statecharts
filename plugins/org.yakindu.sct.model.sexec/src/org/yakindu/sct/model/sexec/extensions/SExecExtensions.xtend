@@ -21,6 +21,7 @@ import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Expression
+import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -35,13 +36,10 @@ import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
-import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class SExecExtensions {
 	def <T extends EObject> T eContainerOfType(EObject eObject, Class<T> type) {
@@ -89,7 +87,7 @@ class SExecExtensions {
 	}
 	
 	def operations(Scope it) {
-		declarations.filter(OperationDefinition);
+		declarations.filter(Operation);
 	}
 	
 	def hasOperations(Scope it) {
@@ -105,7 +103,7 @@ class SExecExtensions {
 	}
 	
 	def hasOperationCallbacks (ExecutionFlow it){
-		scopes.filter[declarations.filter(OperationDefinition).size > 0].size > 0
+		scopes.filter[declarations.filter(Operation).size > 0].size > 0
 	}
 	
 	def getTimeEvents(ExecutionFlow it) {
@@ -116,7 +114,7 @@ class SExecExtensions {
 		flow.timeEvents.findFirst[name.compareTo(timeEventName) == 0]
 	}
 	
-	def hasValue (EventDefinition it) {
+	def hasValue (Event it) {
 		type !== null && type.name != 'void'
 	}
 	
@@ -149,21 +147,21 @@ class SExecExtensions {
 	}
 	
 	def getInternalScopeEvents(ExecutionFlow flow) {
-		flow.internalScopes.map[eventDefinitions].flatten
+		flow.internalScopes.map[events].flatten
 	}
 
 	def getInternalScopeVariables(ExecutionFlow flow) {
-		val variables = new ArrayList<VariableDefinition>
-		flow.internalScopes.forEach[variables.addAll(variableDefinitions)]
+		val variables = new ArrayList<Property>
+		flow.internalScopes.forEach[variables.addAll(variables)]
 		return variables
 	}
 	
-	def getEventDefinitions(Scope scope) {
-		scope.declarations.filter(EventDefinition)
+	def getEvents(Scope scope) {
+		scope.declarations.filter(Event)
 	}
 	
 	def boolean hasEvents(Scope it) {
-		return !eventDefinitions.empty
+		return !events.empty
 	}
 	
 	def boolean hasEvents(ExecutionFlow it) {
@@ -171,7 +169,7 @@ class SExecExtensions {
 	}
 	
 	def getAllEvents(ExecutionFlow it) {
-		return scopes.map[eventDefinitions].flatten
+		return scopes.map[events].flatten
 	}
 	
 	def hasLocalEvents(ExecutionFlow it) {
@@ -183,10 +181,10 @@ class SExecExtensions {
 	}
 	
 	def getOutgoingEvents(Scope it) {
-		eventDefinitions.filter[isOutEvent]
+		events.filter[isOutEvent]
 	}
 	
-	def Iterable<EventDefinition> getOutgoingEvents(ExecutionFlow it) {
+	def Iterable<Event> getOutgoingEvents(ExecutionFlow it) {
 		scopes.map[outgoingEvents].flatten
 	}
 	
@@ -206,32 +204,32 @@ class SExecExtensions {
 		!interfaces.filter[hasIncomingEventsWithValue].empty
 	}
 		
-	def List<EventDefinition> getIncomingEvents(Scope it) {
-		declarations.filter(EventDefinition).filter[isInEvent].toList
+	def List<Event> getIncomingEvents(Scope it) {
+		declarations.filter(Event).filter[isInEvent].toList
 	}
 	
-	def List<EventDefinition> getIncomingEvents(ExecutionFlow it) {
+	def List<Event> getIncomingEvents(ExecutionFlow it) {
 		interfaces.map[incomingEvents].flatten.toList
 	}
 	
-	def List<EventDefinition> getLocalEvents(Scope it) {
+	def List<Event> getLocalEvents(Scope it) {
 		if(it === null) return emptyList
-		declarations.filter(EventDefinition).filter[isLocalEvent].toList
+		declarations.filter(Event).filter[isLocalEvent].toList
 	}
 	
-	def List<EventDefinition> getLocalEvents(ExecutionFlow it) {
+	def List<Event> getLocalEvents(ExecutionFlow it) {
 		internalScope.localEvents
 	}
 	
-	def boolean isLocalEvent(EventDefinition it) {
+	def boolean isLocalEvent(Event it) {
 		direction === Direction::LOCAL
 	}
 	
-	def boolean isOutEvent(EventDefinition it) {
+	def boolean isOutEvent(Event it) {
 		direction === Direction::OUT
 	}
 	
-	def boolean isInEvent(EventDefinition it) {
+	def boolean isInEvent(Event it) {
 		direction === Direction::IN
 	}
 	
@@ -247,8 +245,8 @@ class SExecExtensions {
 		interfaceScopes.filter[isDefaultInterface].head
 	}
 	
-	def getVariableDefinitions(Scope it) {
-		declarations.filter(VariableDefinition)
+	def getVariables(Scope it) {
+		declarations.filter(Property)
 	} 
 	
 	def dispatch definition(ElementReferenceExpression it) {
