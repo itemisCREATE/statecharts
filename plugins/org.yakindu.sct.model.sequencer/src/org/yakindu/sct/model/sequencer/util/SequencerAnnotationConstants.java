@@ -12,4 +12,6 @@ public interface SequencerAnnotationConstants {
 	
 	/** Mark events to be put into a queue on raise instead of being put to "true" etc directly */
 	public static final String QUEUED = "Queued";
+	
+	public static final String STATEMACHINE_TYPE = "StatemachineType";
 }

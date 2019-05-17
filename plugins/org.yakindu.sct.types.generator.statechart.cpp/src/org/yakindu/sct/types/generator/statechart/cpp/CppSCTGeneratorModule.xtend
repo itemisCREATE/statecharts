@@ -25,6 +25,7 @@ import org.yakindu.sct.types.generator.statechart.modification.library.event.InE
 import org.yakindu.sct.types.generator.statechart.modification.library.event.LocalEventModification
 import org.yakindu.sct.types.generator.statechart.modification.library.event.OutEventModification
 import org.yakindu.sct.types.generator.statechart.modification.library.APIOperationsModification
+import org.yakindu.sct.types.generator.statechart.cpp.modifications.RenameSidePackage
 
 class CppSCTGeneratorModule extends SCTGeneratorModule {
 
@@ -38,6 +39,7 @@ class CppSCTGeneratorModule extends SCTGeneratorModule {
 			LocalEventModification,
 			
 			// C++ modifications
+			RenameSidePackage,
 			InterfaceRenamingModification,
 			RenameSCTInterfacesModification,
 			FlattenInnerTypesModification,

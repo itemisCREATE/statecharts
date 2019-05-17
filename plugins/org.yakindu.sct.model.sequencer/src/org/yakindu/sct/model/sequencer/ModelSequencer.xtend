@@ -14,10 +14,12 @@ import com.google.inject.Inject
 import com.google.inject.Injector
 import java.util.Collection
 import org.yakindu.base.types.Package
+import org.yakindu.base.types.TypeBuilder
 import org.yakindu.base.types.validation.IValidationIssueAcceptor
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor
 import org.yakindu.sct.model.sequencer.expressions.ExpressionOptimizer
 import org.yakindu.sct.model.sequencer.expressions.RetargetReferences
+import org.yakindu.sct.model.sequencer.modification.CycleBasedModification
 import org.yakindu.sct.model.sequencer.modification.EventDrivenModification
 import org.yakindu.sct.model.sequencer.operations.EnterDeepOperation
 import org.yakindu.sct.model.sequencer.operations.EnterOperation
@@ -34,7 +36,6 @@ import org.yakindu.sct.model.sequencer.types.StatemachinePublic
 import org.yakindu.sct.model.sequencer.util.SequencerAnnotationLibrary
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.types.modification.IModification
-import org.yakindu.sct.model.sequencer.modification.CycleBasedModification
 
 class ModelSequencer implements IModelSequencer {
 	@Inject Injector injector
@@ -56,6 +57,7 @@ class ModelSequencer implements IModelSequencer {
 	@Inject extension StatemachineProperties
 
 	@Inject extension ExpressionOptimizer
+	@Inject extension TypeBuilder
 
 	@Inject extension SequencerAnnotationLibrary
 
@@ -111,6 +113,9 @@ class ModelSequencer implements IModelSequencer {
 		sctype.defineClearOutEventsMethod(sc)
 		sctype.defineClearEventsMethod(sc)
 		sctype.defineSingleStepMethod(sc)
+		
+		sctype._annotateWith(statemachineTypeAnnotation)
+		pkg.member.add(statemachineTypeAnnotation)
 
 		pkg.retargetReferences
 

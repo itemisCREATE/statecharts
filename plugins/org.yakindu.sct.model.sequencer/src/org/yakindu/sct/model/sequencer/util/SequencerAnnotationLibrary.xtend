@@ -57,4 +57,12 @@ class SequencerAnnotationLibrary extends CoreAnnotationLibrary implements Sequen
 	def isQueued(AnnotatableElement it) {
 		isAnnotatedWith(QUEUED)
 	}
+	
+	def statemachineTypeAnnotation() {
+		annotation(STATEMACHINE_TYPE)
+	}
+
+	def isStatemachineType(AnnotatableElement it) {
+		isAnnotatedWith(STATEMACHINE_TYPE)
+	}
 }
