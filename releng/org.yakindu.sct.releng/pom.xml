@@ -644,10 +644,6 @@
 		<module>../../plugins/org.yakindu.sct.ui.editor</module>
 		<module>../../plugins/org.yakindu.sct.ui.intro</module>
 		<module>../../plugins/org.yakindu.sct.ui.navigator</module>
-		<module>../../plugins/org.yakindu.sct.generator.c</module>
-		<module>../../plugins/org.yakindu.sct.generator.cpp</module>
-		<module>../../plugins/org.yakindu.sct.generator.csharp</module>
-		<module>../../plugins/org.yakindu.sct.generator.java</module>
 		<module>../../plugins/org.yakindu.sct.refactoring</module>
 		<module>../../plugins/org.yakindu.sct.branding</module>
 		<module>../../plugins/org.yakindu.sct.examples.wizard</module>
