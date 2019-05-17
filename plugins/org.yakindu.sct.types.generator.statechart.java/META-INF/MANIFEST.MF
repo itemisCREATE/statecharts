@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Java Statecharts Generator
+Bundle-Name: YAKINDU SCT Java Code Generator
 Bundle-SymbolicName: org.yakindu.sct.types.generator.statechart.java;singleton:=true
 Bundle-Version: 3.5.4.qualifier
 Bundle-Vendor: statecharts.org

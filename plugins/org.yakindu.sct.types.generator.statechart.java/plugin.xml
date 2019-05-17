@@ -9,7 +9,7 @@
             elementRefType="org.yakindu.sct.model.sgraph.Statechart"
             executor="org.yakindu.sct.types.generator.statechart.PackageGeneratorEntryExecutor"
             id="yakindu::java"
-            name="Types SCT Java Generator">
+            name="YAKINDU SCT Java Code Generator">
            <FeatureLibrary
                library_id="org.yakindu.generator.core.features">
 	         </FeatureLibrary>
